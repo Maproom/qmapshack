@@ -1,0 +1,864 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>GetOpt class Reference</title>
+<!-- <link href="doxygen.css" rel="stylesheet" type="text/css"> -->
+<style>
+H1 {
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+H2 {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+CAPTION { font-weight: bold }
+DIV.qindex {
+	width: 100%;
+	background-color: #eeeeff;
+	border: 1px solid #B0B0B0;
+	text-align: center;
+	margin: 2px;
+	padding: 2px;
+}
+A.qindex {
+       text-decoration: none;
+       font-weight: bold;
+       color: #1A419D;
+       padding: 2px;
+}
+A.qindex:visited {
+       text-decoration: none;
+       font-weight: bold;
+       color: #1A419D
+       padding: 2px;
+}
+A.qindex:hover {
+	text-decoration: none;
+	background-color: #ddddff;
+	padding: 2px;
+}
+A.qindexHL {
+	text-decoration: none;
+	font-weight: bold;
+	background-color: #6666cc;
+	color: #ffffff;
+	padding: 2 6px;
+	border: 1px double #9295C2;
+           }
+A.qindexHL:hover {
+	text-decoration: none;
+	background-color: #6666cc;
+	color: #ffffff;
+	padding: 2px 6px;
+}
+A.qindexHL:visited { text-decoration: none; background-color: #6666cc; color: #ffffff }
+A.el { text-decoration: none; font-weight: bold }
+A.elRef { font-weight: bold }
+A.code { text-decoration: none; font-weight: normal; color: #1A419D}
+A.codeRef { font-weight: normal; color: #1A419D}
+A:hover { text-decoration: none; background-color: #f2f2ff }
+DL.el { margin-left: -1cm }
+PRE.fragment {
+	border: 1px solid #CCCCCC;
+	background-color: #f5f5f5;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	margin-left: 2px;
+	margin-right: 8px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+DIV.fragment {
+	border: 1px solid #CCCCCC;
+	background-color: #f5f5f5;
+	padding: 6px;
+}
+DIV.ah { background-color: black; font-weight: bold; color: #ffffff; margin-bottom: 3px; margin-top: 3px }
+TD.md { background-color: #F4F4FB; font-weight: bold; }
+TD.mdname1 { background-color: #F4F4FB; font-weight: bold; color: #602020; }
+TD.mdname { background-color: #F4F4FB; font-weight: bold; color: #602020; width: 600px; }
+DIV.groupHeader { margin-left: 16px; margin-top: 12px; margin-bottom: 6px; font-weight: bold }
+DIV.groupText { margin-left: 16px; font-style: italic; font-size: smaller }
+BODY {
+	background: white;
+	color: black;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+TD.indexkey {
+	background-color: #eeeeff;
+	font-weight: bold;
+	padding-right  : 10px;
+	padding-top    : 2px;
+	padding-left   : 10px;
+	padding-bottom : 2px;
+	margin-left    : 0px;
+	margin-right   : 0px;
+	margin-top     : 2px;
+	margin-bottom  : 2px;
+	border: 1px solid #CCCCCC;
+}
+TD.indexvalue {
+	background-color: #eeeeff;
+	font-style: italic;
+	padding-right  : 10px;
+	padding-top    : 2px;
+	padding-left   : 10px;
+	padding-bottom : 2px;
+	margin-left    : 0px;
+	margin-right   : 0px;
+	margin-top     : 2px;
+	margin-bottom  : 2px;
+	border: 1px solid #CCCCCC;
+}
+TR.memlist {
+   background-color: #f0f0f0; 
+}
+P.formulaDsp { text-align: center; }
+IMG.formulaDsp { }
+IMG.formulaInl { vertical-align: middle; }
+SPAN.keyword       { color: #008000 }
+SPAN.keywordtype   { color: #604020 }
+SPAN.keywordflow   { color: #e08000 }
+SPAN.comment       { color: #800000 }
+SPAN.preprocessor  { color: #806020 }
+SPAN.stringliteral { color: #002080 }
+SPAN.charliteral   { color: #008080 }
+.mdTable {
+	border: 1px solid #868686;
+	background-color: #F4F4FB;
+}
+.mdRow {
+	padding: 8px 10px;
+}
+.mdescLeft {
+	font-size: smaller;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #FAFAFA;
+	padding-left: 8px;
+	border-top: 1px none #E0E0E0;
+	border-right: 1px none #E0E0E0;
+	border-bottom: 1px none #E0E0E0;
+	border-left: 1px none #E0E0E0;
+	margin: 0px;
+}
+.mdescRight {
+	font-size: smaller;
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+	background-color: #FAFAFA;
+	padding-left: 4px;
+	border-top: 1px none #E0E0E0;
+	border-right: 1px none #E0E0E0;
+	border-bottom: 1px none #E0E0E0;
+	border-left: 1px none #E0E0E0;
+	margin: 0px;
+	padding-bottom: 0px;
+	padding-right: 8px;
+}
+.memItemLeft {
+	padding: 1px 0px 0px 8px;
+	margin: 4px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-color: #E0E0E0;
+	border-right-color: #E0E0E0;
+	border-bottom-color: #E0E0E0;
+	border-left-color: #E0E0E0;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	background-color: #FAFAFA;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+.memItemRight {
+	padding: 1px 0px 0px 8px;
+	margin: 4px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-color: #E0E0E0;
+	border-right-color: #E0E0E0;
+	border-bottom-color: #E0E0E0;
+	border-left-color: #E0E0E0;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	background-color: #FAFAFA;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+}
+.search     { color: #003399;
+              font-weight: bold;
+}
+FORM.search {
+              margin-bottom: 0px;
+              margin-top: 0px;
+}
+INPUT.search { font-size: 75%;
+               color: #000080;
+               font-weight: normal;
+               background-color: #eeeeff;
+}
+TD.tiny      { font-size: 75%;
+}
+a {
+	color: #252E78;
+}
+a:visited {
+	color: #3D2185;
+}
+</style>
+</head><body>
+<!-- Generated by Doxygen 1.3.6 -->
+<h1>GetOpt Class Reference</h1>A command line option parser.  
+<a href="#_details">More...</a>
+<p>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td></td></tr>
+<tr><td colspan=2><br><h2>Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align=right valign=top>&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a0">GetOpt</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a2">GetOpt</a> (int argc, char *argv[])</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a3">GetOpt</a> (const QStringList &amp;a)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a5">addSwitch</a> (const QString &amp;lname, bool *b)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a6">addOption</a> (char s, const QString &amp;l, QString *v)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a7">addVarLengthOption</a> (const QString &amp;l, QStringList *v)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a8">addRepeatableOption</a> (char s, QStringList *v)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a9">addRepeatableOption</a> (const QString &amp;l, QStringList *v)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a10">addOptionalOption</a> (const QString &amp;l, QString *v, const QString &amp;def)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a11">addOptionalOption</a> (char s, const QString &amp;l, QString *v, const QString &amp;def)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a12">addArgument</a> (const QString &amp;name, QString *v)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>void&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a13">addOptionalArgument</a> (const QString &amp;name, QString *v)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>bool&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a15">parse</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align=right valign=top>bool&nbsp;</td><td class="memItemRight" valign=bottom><a class="el" href="classGetOpt.html#a16">isSet</a> (const QString &amp;name) const </td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Detailed Description</h2>
+A command line option parser. 
+<p>
+This class helps to overcome the repetitive, tedious and error-prone task of parsing the command line options passed to your application by the user. Specify the acceptable syntax with a minimum of statements in a readable way, check it against the actual arguments passed and find the retrieved values in variables of your program. The name <em>GetOpt</em> is based on similar utilities build into the Unix shell and other languages.<p>
+A command line that a user might have entered is:<p>
+<pre class="fragment"><div>   app -v --config=my.cnf -Wall input.dat
+</div></pre><p>
+The typical usage has three stages:<p>
+<ol>
+<li>Construct a parser specifying what arguments to parse</li><li>Set up the list of allowed and required options</li><li>Run the parser</li></ol>
+<p>
+For the first step there are three different constructors that either take arguments directly from <code>main()</code>, <code>QApplication</code> or a user specified list. Setting up the accepted syntax is done by a set of <code>add</code> functions like <a class="el" href="classGetOpt.html#a5">addSwitch()</a>. The final step of running the parser is simply done by calling <a class="el" href="classGetOpt.html#a15">parse()</a>.<p>
+A short example implementing a <code>--verbose</code> switch:<p>
+<pre class="fragment"><div>   <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)
+   {
+       <a class="code" href="classGetOpt.html">GetOpt</a> opts(argc, argv);
+       <span class="keywordtype">bool</span> verbose;
+       opts.<a class="code" href="classGetOpt.html#a5">addSwitch</a>(<span class="stringliteral">"verbose"</span>, &amp;verbose);
+       <span class="keywordflow">if</span> (!opts.<a class="code" href="classGetOpt.html#a14">parse</a>())
+           <span class="keywordflow">return</span> 1;
+       <span class="keywordflow">if</span> (verbose)
+           cout &lt;&lt; <span class="stringliteral">"VERBOSE mode on"</span> &lt;&lt; endl;
+       ...
+</div></pre><p>
+For a better understanding of the function names we'll better define some terms used in the API and its documentation:<p>
+<ul>
+<li><em>Argument</em> An argument is a plain text token like e.g. a file name one typically passes to an editor when invoking it.</li><li><em>Switch</em> A switch is an on/off kind of argument without the need of additional information. Example: <code>--debug</code>.</li><li><em>Option</em> An option is a normally optional argument with a key-value syntax like <code>--output=out</code>.txt or <code>-I/usr/include</code>.</li><li><em>Short</em> <em>Option</em> A short option is a one letter option with a preceding dash. Like <code>-v</code>.</li><li><em>Long</em> <em>Option</em> A long option has a more verbose, multi-letter name like <code>--debug</code>.</li></ul>
+<dl compact><dt><b>Author:</b></dt><dd>froglogic GbR &lt;<a href="mailto:contact@froglogic.com">contact@froglogic.com</a>&gt; </dd></dl>
+
+<p>
+<hr><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" name="a0" doxytag="GetOpt::GetOpt" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> GetOpt::GetOpt </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap>          </td>
+          <td class="md" valign="top">&nbsp;)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Constructs a command line parser from the arguments stored in a previously created QApplication instance.<p>
+Example usage: <pre class="fragment"><div>   QApplication a(argc, argv);
+
+   <a class="code" href="classGetOpt.html">GetOpt</a> opt;
+</div></pre><p>
+This constructor is probably the most convenient one to use in a regular Qt application. Note that QApplication may already have removed Qt (or X11) specific arguments. Also see QApplication::argv() and QApplication::argc().     </td>
+  </tr>
+</table>
+<a class="anchor" name="a2" doxytag="GetOpt::GetOpt" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> GetOpt::GetOpt </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">int&nbsp;</td>
+          <td class="mdname" nowrap> <em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>char *&nbsp;</td>
+          <td class="mdname" nowrap> <em>argv</em>[]</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Construct a command line parser from the array <em>argv</em> of string pointers with the size <em>argc</em>. Those parameters have the form typically found in the <code>main()</code> function. That means that you can simply pass on the arguments specified by the user of your application.<p>
+Example usage:<p>
+<pre class="fragment"><div>   <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {
+       <a class="code" href="classGetOpt.html">GetOpt</a> opt(argc, argv);
+       ...
+   }
+</div></pre>    </td>
+  </tr>
+</table>
+<a class="anchor" name="a3" doxytag="GetOpt::GetOpt" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> GetOpt::GetOpt </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QStringList &amp;&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap> <em>a</em>          </td>
+          <td class="md" valign="top">&nbsp;)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Construct a command line parser from the arguments specified in the list of arguments <em>a</em>. This constructor is convenient in those cases where you want to parse a command line assembled on-the-fly instead of relying on the <code>argc</code> and <code>arg</code> parameters passed to the <code>main()</code> function.     </td>
+  </tr>
+</table>
+<hr><h2>Member Function Documentation</h2>
+<a class="anchor" name="a12" doxytag="GetOpt::addArgument" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addArgument </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QString *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Registers a required command line argument <em>name</em>. If the argument is missing <a class="el" href="classGetOpt.html#a15">parse()</a> will return false to indicate an error and <em>*v</em> will remain with its default QString::null value. Otherwise <em>*v</em> will be set to the value of the argument.<p>
+Example:<p>
+To accept simple arguments like<p>
+<pre class="fragment"><div>   myeditor letter.txt
+</div></pre><p>
+use a call like:<p>
+<pre class="fragment"><div>   QString &amp;file;
+   opt.<a class="code" href="classGetOpt.html#a12">addArgument</a>(<span class="stringliteral">"file"</span>, &amp;file);
+</div></pre><p>
+Note: the <em>name</em> parameter has a rather descriptive meaning for now. It might be used for generating a usage or error message in the future. Right now, the only current use is in relation with the <a class="el" href="classGetOpt.html#a16">isSet()</a> function.     </td>
+  </tr>
+</table>
+<a class="anchor" name="a6" doxytag="GetOpt::addOption" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addOption </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">char&nbsp;</td>
+          <td class="mdname" nowrap> <em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QString *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Registers an option with the short name <em>s</em> and long name <em>l</em> to the parser. If this option is found during parsing the value will be stored in the string pointed to by <em>v</em>. By default <em>*v</em> will be initialized to <code>QString::null</code>.     </td>
+  </tr>
+</table>
+<a class="anchor" name="a13" doxytag="GetOpt::addOptionalArgument" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addOptionalArgument </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QString *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Registers an optional command line argument <em>name</em>. For a more detailed description see the <a class="el" href="classGetOpt.html#a12">addArgument()</a> documentation.     </td>
+  </tr>
+</table>
+<a class="anchor" name="a11" doxytag="GetOpt::addOptionalOption" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addOptionalOption </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">char&nbsp;</td>
+          <td class="mdname" nowrap> <em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QString *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>def</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Adds a short option <em>s</em> that has an optional value parameter. If the value is not specified by the user it will be set to <em>def</em>.     </td>
+  </tr>
+</table>
+<a class="anchor" name="a10" doxytag="GetOpt::addOptionalOption" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addOptionalOption </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QString *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>def</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Adds a long option <em>l</em> that has an optional value parameter. If the value is not specified by the user it will be set to <em>def</em>.<p>
+Example:<p>
+<pre class="fragment"><div>   <a class="code" href="classGetOpt.html">GetOpt</a> opt;
+   QString file;
+   opt.<a class="code" href="classGetOpt.html#a10">addOptionalOption</a>(<span class="stringliteral">"dump"</span>, &amp;file, <span class="stringliteral">"&lt;stdout&gt;"</span>);
+</div></pre><p>
+<dl compact><dt><b>See also:</b></dt><dd><a class="el" href="classGetOpt.html#a6">addOption</a> </dd></dl>
+    </td>
+  </tr>
+</table>
+<a class="anchor" name="a9" doxytag="GetOpt::addRepeatableOption" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addRepeatableOption </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QStringList *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Registers an option with the long name <em>l</em> that can be specified repeatedly in the command line.<p>
+<dl compact><dt><b>See also:</b></dt><dd><a class="el" href="classGetOpt.html#a8">addRepeatableOption( char, QStringList* )</a> </dd></dl>
+    </td>
+  </tr>
+</table>
+<a class="anchor" name="a8" doxytag="GetOpt::addRepeatableOption" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addRepeatableOption </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">char&nbsp;</td>
+          <td class="mdname" nowrap> <em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QStringList *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Registers an option with the short name <em>s</em> that can be specified repeatedly in the command line. The option values will be stored in the list pointed to by <em>v</em>. If no <em>s</em> option is found <em>*v</em> will remain at its default value of an empty QStringList instance.<p>
+Example:<p>
+To parse the <code>-I</code> options in a command line like <pre class="fragment"><div>   myapp -I/usr/include -I/usr/local/include
+</div></pre><p>
+you can use code like this:<p>
+<pre class="fragment"><div>   <a class="code" href="classGetOpt.html">GetOpt</a> opt;
+   QStringList includes;
+   opt.<a class="code" href="classGetOpt.html#a8">addRepeatableOption</a>(<span class="charliteral">'I'</span>, &amp;includes);
+   opt.<a class="code" href="classGetOpt.html#a14">parse</a>();
+</div></pre>    </td>
+  </tr>
+</table>
+<a class="anchor" name="a5" doxytag="GetOpt::addSwitch" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addSwitch </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>lname</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>bool *&nbsp;</td>
+          <td class="mdname" nowrap> <em>b</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Adds a switch with the long name <em>lname</em>. If the switch is found during parsing the bool <em>*b</em> will bet set to true. Otherwise the bool will be initialized to false.<p>
+Example:<p>
+<pre class="fragment"><div>   <a class="code" href="classGetOpt.html">GetOpt</a> opt;
+   <span class="keywordtype">bool</span> verbose;
+   opt.<a class="code" href="classGetOpt.html#a5">addSwitch</a>(<span class="stringliteral">"verbose"</span>, &amp;verbose);
+</div></pre><p>
+The boolean flag <code>verbose</code> will be set to true if <code>--verbose</code> has been specified in the command line; false otherwise.     </td>
+  </tr>
+</table>
+<a class="anchor" name="a7" doxytag="GetOpt::addVarLengthOption" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void GetOpt::addVarLengthOption </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QString &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td></td>
+          <td class="md" nowrap>QStringList *&nbsp;</td>
+          <td class="mdname" nowrap> <em>v</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Registers a long option <em>l</em> that can have a variable number of corresponding value parameters. As there currently is no way to tell the end of the value list the only sensible use of this option is at the end of the command line.<p>
+Example:<p>
+<pre class="fragment"><div>   QStringList args;
+   opt.<a class="code" href="classGetOpt.html#a7">addVarLengthOption</a>(<span class="stringliteral">"exec"</span>, &amp;args);
+</div></pre><p>
+Above code will lead to "-f" and "test.txt" being stored in <em>args</em> upon<p>
+<pre class="fragment"><div>   myapp --exec otherapp -f test.txt
+</div></pre>    </td>
+  </tr>
+</table>
+<a class="anchor" name="a16" doxytag="GetOpt::isSet" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> bool GetOpt::isSet </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const QString &amp;&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap> <em>name</em>          </td>
+          <td class="md" valign="top">&nbsp;)&nbsp;</td>
+          <td class="md" nowrap> const</td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Returns true if the (long) option or switch <em>name</em> has been found in the command line; returns false otherwise. Leading hyphens are not part of the name.<p>
+As the set/not set decision can also be made depending on the value of the variable reference used in the respective <code>add*</code>() call there's generally little use for this function.     </td>
+  </tr>
+</table>
+<a class="anchor" name="a15" doxytag="GetOpt::parse" ></a><p>
+<table class="mdTable" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> bool GetOpt::parse </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap>          </td>
+          <td class="md" valign="top">&nbsp;)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Parse the command line arguments specified in the constructor under the conditions set by the various <code>add*</code>() functions. On success, the given variable reference will be initialized with their respective values and true will be returned. Returns false otherwise.<p>
+In the future there'll be a way to retrieve an error message. In the current version the message will be printed to <code>stderr</code>.     </td>
+  </tr>
+</table>
+<hr size="1"><address style="align: right;"><small>Generated on Sun Jun 20 15:26:04 2004 by
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border=0 > 
+</a>1.3.6 </small></address>
+</body>
+</html>

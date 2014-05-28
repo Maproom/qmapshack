@@ -14,4 +14,5 @@ add_definitions(-DVER_MAJOR=${APPLICATION_VERSION_MAJOR} -DVER_MINOR=${APPLICATI
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
+add_subdirectory(3rdparty/CGetOpt)
 add_subdirectory(src)

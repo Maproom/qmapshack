@@ -11,6 +11,9 @@ find_package(Qt5Core)
 set( SRCS
     main.cpp
     CMainWindow.cpp
+    CCanvas.cpp
+    IDB.cpp
+    CMapDB.cpp
 )
 
 set( HDRS
@@ -18,6 +21,9 @@ set( HDRS
     CAppOpts.h
     CSettings.h
     CMainWindow.h
+    CCanvas.h
+    IDB.h
+    CMapDB.h
 )
 
 set( UIS

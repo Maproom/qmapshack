@@ -16,45 +16,18 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "CSettings.h"
-#include "version.h"
-#include "CMapDB.h"
+#ifndef CCANVAS_H
+#define CCANVAS_H
 
-CMainWindow::CMainWindow()
+#include <QWidget>
+
+class CCanvas : public QWidget
 {
-    qDebug() << WHAT_STR;
-    setupUi(this);
-    setWindowTitle(WHAT_STR);
+    Q_OBJECT
+    public:
+        CCanvas(QWidget * parent);
+        virtual ~CCanvas();
+};
 
-
-    new CMapDB(this);
-
-
-    SETTINGS;
-    // start ---- restore window geometry -----
-    if ( cfg.contains("MainWindow/geometry"))
-    {
-        restoreGeometry(cfg.value("MainWindow/geometry").toByteArray());
-    }
-    else
-    {
-        setGeometry(0,0,800,600);
-    }
-
-    if ( cfg.contains("MainWindow/state"))
-    {
-        restoreState(cfg.value("MainWindow/state").toByteArray());
-    }
-    // end ---- restore window geometry -----
-
-}
-
-CMainWindow::~CMainWindow()
-{
-    SETTINGS;
-    cfg.setValue("MainWindow/state", saveState());
-    cfg.setValue("MainWindow/geometry", saveGeometry());
-
-}
+#endif //CCANVAS_H
 

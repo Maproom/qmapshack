@@ -16,45 +16,16 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "CSettings.h"
-#include "version.h"
-#include "CMapDB.h"
+#include "IDB.h"
 
-CMainWindow::CMainWindow()
+IDB::IDB(QObject *parent)
+    : QThread(parent)
 {
-    qDebug() << WHAT_STR;
-    setupUi(this);
-    setWindowTitle(WHAT_STR);
-
-
-    new CMapDB(this);
-
-
-    SETTINGS;
-    // start ---- restore window geometry -----
-    if ( cfg.contains("MainWindow/geometry"))
-    {
-        restoreGeometry(cfg.value("MainWindow/geometry").toByteArray());
-    }
-    else
-    {
-        setGeometry(0,0,800,600);
-    }
-
-    if ( cfg.contains("MainWindow/state"))
-    {
-        restoreState(cfg.value("MainWindow/state").toByteArray());
-    }
-    // end ---- restore window geometry -----
 
 }
 
-CMainWindow::~CMainWindow()
+IDB::~IDB()
 {
-    SETTINGS;
-    cfg.setValue("MainWindow/state", saveState());
-    cfg.setValue("MainWindow/geometry", saveGeometry());
 
 }
 

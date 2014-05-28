@@ -16,45 +16,22 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "CSettings.h"
-#include "version.h"
-#include "CMapDB.h"
+#ifndef IDB_H
+#define IDB_H
 
-CMainWindow::CMainWindow()
+#include <QThread>
+
+class QPainter;
+
+class IDB : public QThread
 {
-    qDebug() << WHAT_STR;
-    setupUi(this);
-    setWindowTitle(WHAT_STR);
+    Q_OBJECT
+    public:
+        IDB(QObject * parent);
+        virtual ~IDB();
 
+        virtual void draw(QPainter& p, bool needsRedraw) = 0;
+};
 
-    new CMapDB(this);
-
-
-    SETTINGS;
-    // start ---- restore window geometry -----
-    if ( cfg.contains("MainWindow/geometry"))
-    {
-        restoreGeometry(cfg.value("MainWindow/geometry").toByteArray());
-    }
-    else
-    {
-        setGeometry(0,0,800,600);
-    }
-
-    if ( cfg.contains("MainWindow/state"))
-    {
-        restoreState(cfg.value("MainWindow/state").toByteArray());
-    }
-    // end ---- restore window geometry -----
-
-}
-
-CMainWindow::~CMainWindow()
-{
-    SETTINGS;
-    cfg.setValue("MainWindow/state", saveState());
-    cfg.setValue("MainWindow/geometry", saveGeometry());
-
-}
+#endif //IDB_H
 

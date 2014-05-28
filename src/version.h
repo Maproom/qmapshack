@@ -16,41 +16,16 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "CSettings.h"
-#include "version.h"
+#ifndef VERSION_H
+#define VERSION_H
 
-CMainWindow::CMainWindow()
-{
-    qDebug() << WHAT_STR;
-    setupUi(this);
-    setWindowTitle(WHAT_STR);
+#ifndef _MKSTR_1
+#define _MKSTR_1(x)    #x
+#define _MKSTR(x)      _MKSTR_1(x)
+#endif
 
+#define VER_STR       _MKSTR(VER_MAJOR)"."_MKSTR(VER_MINOR)"."_MKSTR(VER_STEP)
+#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
 
-    SETTINGS;
-    // start ---- restore window geometry -----
-    if ( cfg.contains("MainWindow/geometry"))
-    {
-        restoreGeometry(cfg.value("MainWindow/geometry").toByteArray());
-    }
-    else
-    {
-        setGeometry(0,0,800,600);
-    }
-
-    if ( cfg.contains("MainWindow/state"))
-    {
-        restoreState(cfg.value("MainWindow/state").toByteArray());
-    }
-    // end ---- restore window geometry -----
-
-}
-
-CMainWindow::~CMainWindow()
-{
-    SETTINGS;
-    cfg.setValue("MainWindow/state", saveState());
-    cfg.setValue("MainWindow/geometry", saveGeometry());
-
-}
+#endif //VERSION_H
 

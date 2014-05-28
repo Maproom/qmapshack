@@ -14,6 +14,7 @@ set( SRCS
 )
 
 set( HDRS
+    version.h
     CAppOpts.h
     CSettings.h
     CMainWindow.h
@@ -24,7 +25,7 @@ set( UIS
 )
 
 set( RCS
-    resources.rc
+    resources.qrc
 )
 
 

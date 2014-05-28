@@ -16,6 +16,7 @@ MapRoom is the future QLandkarte GT. As the data model of QLGT has it's flaws a 
         ccmake ../MapRoom
         make
 
+
 * Dependencies
 
     Next to QT5 you will need the development packages of::

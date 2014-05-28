@@ -8,16 +8,16 @@ MapRoom is the future QLandkarte GT. As the data model of QLGT has it's flaws a 
 
 * Summary of set up
 
-You need a working mercurial, g++, cmake and QT5 installation to compile MapRoom on your computer. Clone and compile the code base by:
+    You need a working mercurial, g++, cmake and QT5 installation to compile MapRoom on your computer. Clone and compile the code base by::
 
-hg clone https://bitbucket.org/maproom/maproom MapRoom
-mkdir build_MapRoom
-cd MapRoom
-ccmake ../MapRoom
-make
+    hg clone https://bitbucket.org/maproom/maproom MapRoom
+    mkdir build_MapRoom
+    cd MapRoom
+    ccmake ../MapRoom
+    make
 
 * Dependencies
-  Next to QT5 you will need the development packages of:
+  Next to QT5 you will need the development packages of::
   Proj4
   GDAL
 

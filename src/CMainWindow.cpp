@@ -18,17 +18,21 @@
 
 #include "CMainWindow.h"
 #include "CSettings.h"
+#include "CCanvas.h"
+#include "map/CMap.h"
 #include "version.h"
-#include "CMapDB.h"
+
+#include <QtGui>
+#include <QtWidgets>
+
+CMainWindow * CMainWindow::pSelf = 0;
 
 CMainWindow::CMainWindow()
 {
+    pSelf = this;
     qDebug() << WHAT_STR;
     setupUi(this);
     setWindowTitle(WHAT_STR);
-
-
-    new CMapDB(this);
 
 
     SETTINGS;
@@ -48,6 +52,11 @@ CMainWindow::CMainWindow()
     }
     // end ---- restore window geometry -----
 
+
+    connect(actionAddCanvas, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
+
+    connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
+
 }
 
 CMainWindow::~CMainWindow()
@@ -57,4 +66,41 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MainWindow/geometry", saveGeometry());
 
 }
+
+
+void CMainWindow::addMapList(QListWidget * list, const QString &name)
+{
+    tabMaps->addTab(list,name);
+}
+
+void CMainWindow::delMapList(QListWidget * list)
+{
+    for(int i = 0; i < tabMaps->count(); i++)
+    {
+        QWidget * w = tabMaps->widget(i);
+        if(w == list)
+        {
+            tabMaps->removeTab(i);
+            delete w;
+            return;
+        }
+    }
+}
+
+
+void CMainWindow::slotAddCanvas()
+{
+    CCanvas * canvas = new CCanvas(tabWidget);
+    tabWidget->addTab(canvas, canvas->objectName());
+    new CMap(canvas);
+}
+
+void CMainWindow::slotTabCloseRequest(int i)
+{
+    QWidget * w = tabWidget->widget(i);
+    tabWidget->removeTab(i);
+
+    delete w;
+}
+
 

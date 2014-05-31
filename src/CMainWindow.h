@@ -20,15 +20,30 @@
 #define CMAINWINDOW_H
 
 #include <QMainWindow>
-
 #include "ui_IMainWindow.h"
+
+class QListWidget;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
     Q_OBJECT
     public:
-        CMainWindow();
+        static CMainWindow& self(){return *pSelf;}
         virtual ~CMainWindow();
+
+
+        void addMapList(QListWidget * list, const QString& name);
+        void delMapList(QListWidget * list);
+
+    private slots:
+        void slotAddCanvas();
+        void slotTabCloseRequest(int i);
+
+    private:
+        friend int main(int argc, char ** argv);
+        CMainWindow();
+
+        static CMainWindow * pSelf;
 };
 
 #endif //CMAINWINDOW_H

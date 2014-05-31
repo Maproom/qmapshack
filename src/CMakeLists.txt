@@ -12,8 +12,7 @@ set( SRCS
     main.cpp
     CMainWindow.cpp
     CCanvas.cpp
-    IDB.cpp
-    CMapDB.cpp
+    map/CMap.cpp
 )
 
 set( HDRS
@@ -22,8 +21,7 @@ set( HDRS
     CSettings.h
     CMainWindow.h
     CCanvas.h
-    IDB.h
-    CMapDB.h
+    map/CMap.h
 )
 
 set( UIS

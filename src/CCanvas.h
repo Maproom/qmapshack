@@ -20,6 +20,7 @@
 #define CCANVAS_H
 
 #include <QWidget>
+class CMap;
 
 class CCanvas : public QWidget
 {
@@ -27,6 +28,13 @@ class CCanvas : public QWidget
     public:
         CCanvas(QWidget * parent);
         virtual ~CCanvas();
+
+
+    protected:
+        CMap * map;
+
+    private:
+        static int count;
 };
 
 #endif //CCANVAS_H

@@ -16,25 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CMAPDB_H
-#define CMAPDB_H
+#include "CMap.h"
+#include "CCanvas.h"
+#include "CMainWindow.h"
 
-#include "IDB.h"
+#include <QtGui>
+#include <QtWidgets>
 
-class CMapDB : public IDB
+CMap::CMap(CCanvas *parent)
+    : QThread(parent)
+    , canvas(parent)
 {
-    public:
-        static CMapDB& self(){return *pSelf;}
-        virtual ~CMapDB();
 
-        void draw(QPainter& p, bool needsRedraw);
+    maps = new QListWidget(canvas);
+    CMainWindow::self().addMapList(maps, canvas->objectName());
 
-    private:
-        friend class CMainWindow;
-        CMapDB(QObject * parent);
+}
 
-        static CMapDB * pSelf;
-};
+CMap::~CMap()
+{
+    CMainWindow::self().delMapList(maps);
+}
 
-#endif //CMAPDB_H
+void CMap::draw(QPainter& p, bool needsRedraw)
+{
 
+}

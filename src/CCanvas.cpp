@@ -17,10 +17,17 @@
 **********************************************************************************************/
 
 #include "CCanvas.h"
+#include "map/CMap.h"
+
+#include <QtGui>
+
+int CCanvas::count = 0;
 
 CCanvas::CCanvas(QWidget *parent)
     : QWidget(parent)
 {
+    count++;
+    setObjectName(tr("Canvas %1").arg(count));
 
 }
 

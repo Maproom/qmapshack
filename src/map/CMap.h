@@ -16,23 +16,28 @@
 
 **********************************************************************************************/
 
-#include "CMapDB.h"
+#ifndef CMAP_H
+#define CMAP_H
 
-CMapDB * CMapDB::pSelf = 0;
+#include <QThread>
 
-CMapDB::CMapDB(QObject *parent)
-    : IDB(parent)
+class QPainter;
+class CCanvas;
+class QListWidget;
+
+class CMap : public QThread
 {
-    pSelf = this;
-}
+    public:
+        CMap(CCanvas * parent);
+        virtual ~CMap();
 
-CMapDB::~CMapDB()
-{
+        void draw(QPainter& p, bool needsRedraw);
 
-}
+    protected:
+        CCanvas * canvas;
 
+        QListWidget * maps;
+};
 
-void CMapDB::draw(QPainter& p, bool needsRedraw)
-{
+#endif //CMAP_H
 
-}

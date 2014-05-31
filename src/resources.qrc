@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>icons/32x32/map.png</file>
         <file>icons/16x16/map.png</file>
+        <file>icons/16x16/addCanvas.png</file>
+        <file>icons/32x32/addCanvas.png</file>
     </qresource>
 </RCC>

@@ -16,19 +16,28 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "CCanvas.h"
 #include "map/CMap.h"
 
 #include <QtGui>
 
-int CCanvas::count = 0;
+
 
 CCanvas::CCanvas(QWidget *parent)
     : QWidget(parent)
 {
-    count++;
-    setObjectName(tr("Canvas %1").arg(count));
-
+    int count = 1;
+    while(1)
+    {
+        QString name = tr("Canvas %1").arg(count);
+        if(CMainWindow::self().findChild<CCanvas*>(name) == 0)
+        {
+            setObjectName(name);
+            return;
+        }
+        count++;
+    }
 }
 
 CCanvas::~CCanvas()

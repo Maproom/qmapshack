@@ -38,6 +38,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
     private slots:
         void slotAddCanvas();
         void slotTabCloseRequest(int i);
+        void slotCurrentTabCanvas(int i);
+        void slotCurrentTabMaps(int i);
 
     private:
         friend int main(int argc, char ** argv);

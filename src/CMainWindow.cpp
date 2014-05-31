@@ -54,8 +54,9 @@ CMainWindow::CMainWindow()
 
 
     connect(actionAddCanvas, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
-
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
+    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
+    connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
 
 }
 
@@ -101,6 +102,32 @@ void CMainWindow::slotTabCloseRequest(int i)
     tabWidget->removeTab(i);
 
     delete w;
+}
+
+void CMainWindow::slotCurrentTabCanvas(int i)
+{
+    QString name = tabWidget->tabText(i);
+    for(int n = 0; n < tabMaps->count(); n++)
+    {
+        if(tabMaps->tabText(n) == name)
+        {
+            tabMaps->setCurrentIndex(n);
+            return;
+        }
+    }
+}
+
+void CMainWindow::slotCurrentTabMaps(int i)
+{
+    QString name = tabMaps->tabText(i);
+    for(int n = 0; n < tabWidget->count(); n++)
+    {
+        if(tabWidget->tabText(n) == name)
+        {
+            tabWidget->setCurrentIndex(n);
+            return;
+        }
+    }
 }
 
 

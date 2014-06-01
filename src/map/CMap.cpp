@@ -170,6 +170,32 @@ void CMap::convertM2Rad(QPointF &p)
     pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
 }
 
+void CMap::convertPx2Rad(QPointF &p)
+{
+    mutex.lock(); // --------- start serialize with thread
+
+    QPointF f = focus;
+    convertRad2M(f);
+
+    p = f + p * scale * zoomFactor;
+
+    convertM2Rad(p);
+
+    mutex.unlock(); // --------- stop serialize with thread
+}
+
+void CMap::convertRad2Px(QPointF &p)
+{
+    mutex.lock(); // --------- start serialize with thread
+
+    QPointF f = focus;
+    convertRad2M(f);
+    convertRad2M(p);
+
+    p = (p - f) / (scale * zoomFactor);
+
+    mutex.unlock(); // --------- stop serialize with thread
+}
 
 void CMap::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r)
 {
@@ -208,8 +234,6 @@ void CMap::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r
     // context. NOTE: the draw context's coordinate system has been moved into the
     // middle of the view port.
     QPointF off = (ref - f1) / (currentBuffer.scale * currentBuffer.zoomFactor);
-
-    qDebug() << r << off;
 
     p.save();
     // scale image if current zoomfactor does not match buffer's zoomfactor

@@ -71,8 +71,6 @@ void CCanvas::paintEvent(QPaintEvent * e)
 {
     Q_UNUSED(e);
 
-//    qDebug() << qApp->activeWindow() << qApp->focusWidget();
-
     if(!isVisible())
     {
         return;
@@ -103,3 +101,20 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
 }
 
+void CCanvas::mousePressEvent(QMouseEvent * e)
+{
+
+    QWidget::mousePressEvent(e);
+}
+
+void CCanvas::mouseMoveEvent(QMouseEvent * e)
+{
+
+    QWidget::mouseMoveEvent(e);
+}
+
+void CCanvas::mouseReleaseEvent(QMouseEvent *e)
+{
+
+    QWidget::mouseReleaseEvent(e);
+}

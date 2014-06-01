@@ -36,6 +36,9 @@ class CCanvas : public QWidget
     protected:
         void resizeEvent(QResizeEvent * e);
         void paintEvent(QPaintEvent * e);
+        void mousePressEvent(QMouseEvent * e);
+        void mouseMoveEvent(QMouseEvent * e);
+        void mouseReleaseEvent(QMouseEvent *e);
 
     private:      
         /// set true to initiate a complete redraw of the screen content

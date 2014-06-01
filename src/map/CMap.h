@@ -70,6 +70,16 @@ class CMap : public QThread
            @param p             the point to convert
          */
         void convertM2Rad(QPointF &p);
+        /**
+           @brief Convert a pixel coordinate from the viewport to a geo coordinate in [rad]
+           @param p             the point to convert
+         */
+        void convertPx2Rad(QPointF& p);
+        /**
+           @brief Convert a geo coordinate in [rad] to a pixel coordinate of the viewport
+           @param p             the point to convert
+         */
+        void convertRad2Px(QPointF& p);
 
     protected:
         void run();

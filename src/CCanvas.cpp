@@ -34,14 +34,72 @@ CCanvas::CCanvas(QWidget *parent)
         if(CMainWindow::self().findChild<CCanvas*>(name) == 0)
         {
             setObjectName(name);
-            return;
+            break;
         }
         count++;
     }
+
+    map = new CMap(this);
 }
 
 CCanvas::~CCanvas()
 {
+
+}
+
+void CCanvas::saveConfig(QSettings& cfg)
+{
+    map->saveConfig(cfg);
+}
+
+void CCanvas::loadConfig(QSettings& cfg)
+{
+    map->loadConfig(cfg);
+}
+
+void CCanvas::resizeEvent(QResizeEvent * e)
+{
+    needsRedraw = true;
+
+    QSize s = e->size();
+    if(map) map->resize(s);
+
+    QWidget::resizeEvent(e);
+}
+
+void CCanvas::paintEvent(QPaintEvent * e)
+{
+    Q_UNUSED(e);
+
+//    qDebug() << qApp->activeWindow() << qApp->focusWidget();
+
+    if(!isVisible())
+    {
+        return;
+    }
+
+    const QRectF& r = e->rect();
+    QPointF posFocus(12.10, 49.01);
+
+    QPainter p;
+    p.begin(this);
+    //p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, true);
+
+    // fill the backbround with default pattern
+    p.fillRect(rect(), QBrush(Qt::darkGreen, Qt::CrossPattern));
+
+    // ----- start to draw geo-referenced content -----
+    // move coordinate system to center of the screen
+    p.translate(width() >> 1, height() >> 1);
+
+    map->draw(p, needsRedraw, posFocus, r);
+
+    // restore coordinate system to default
+    p.resetTransform();
+    // ----- start to draw static content -----
+
+    p.end();
+    needsRedraw = false;
 
 }
 

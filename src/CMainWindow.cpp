@@ -58,13 +58,45 @@ CMainWindow::CMainWindow()
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
 
+    cfg.beginGroup("Canvas");
+    int N = cfg.value("N").toInt();
+    for(int i = 0; i < N; i++)
+    {
+        CCanvas * canvas = new CCanvas(tabWidget);
+        tabWidget->addTab(canvas, canvas->objectName());
+
+        cfg.beginGroup(QString("Canvas%1").arg(i));
+        canvas->loadConfig(cfg);
+        cfg.endGroup();
+    }
+    cfg.endGroup(); // Canvas
 }
 
 CMainWindow::~CMainWindow()
 {
+    int cnt = 0;
+
     SETTINGS;
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());
+
+    cfg.beginGroup("Canvas");
+    for(int i = 0; i < tabWidget->count(); i++)
+    {
+        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+        if(canvas == 0)
+        {
+            continue;
+        }
+        cnt++;
+        cfg.beginGroup(QString("Canvas%1").arg(i));
+        canvas->saveConfig(cfg);
+        cfg.endGroup();
+    }
+
+    cfg.setValue("N", cnt);
+
+    cfg.endGroup(); // Canvas
 
 }
 
@@ -92,15 +124,13 @@ void CMainWindow::delMapList(QListWidget * list)
 void CMainWindow::slotAddCanvas()
 {
     CCanvas * canvas = new CCanvas(tabWidget);
-    tabWidget->addTab(canvas, canvas->objectName());
-    new CMap(canvas);
+    tabWidget->addTab(canvas, canvas->objectName());    
 }
 
 void CMainWindow::slotTabCloseRequest(int i)
 {
     QWidget * w = tabWidget->widget(i);
     tabWidget->removeTab(i);
-
     delete w;
 }
 

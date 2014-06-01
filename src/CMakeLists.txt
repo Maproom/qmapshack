@@ -7,12 +7,16 @@ set(CMAKE_AUTOMOC ON)
 # Find the QtWidgets library
 find_package(Qt5Widgets)
 find_package(Qt5Core)
+find_package(GDAL REQUIRED)
+find_package(PROJ REQUIRED)
 
 set( SRCS
     main.cpp
     CMainWindow.cpp
     CCanvas.cpp
+    map/IMap.cpp
     map/CMap.cpp
+    map/CMapItem.cpp
 )
 
 set( HDRS
@@ -21,7 +25,9 @@ set( HDRS
     CSettings.h
     CMainWindow.h
     CCanvas.h
+    map/IMap.h
     map/CMap.h
+    map/CMapItem.h
 )
 
 set( UIS
@@ -45,6 +51,9 @@ set(ALLINP
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/3rdparty/CGetOpt
+    ${GDAL_INCLUDE_DIRS}
+    ${PROJ_INCLUDE_DIRS}
+
 )
 
 # Tell CMake to create the helloworld executable
@@ -54,4 +63,7 @@ add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     CGetOpt
+    ${GDAL_LIBRARIES}
+    ${PROJ_LIBRARIES}
+
 )

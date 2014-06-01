@@ -21,6 +21,7 @@
 
 #include <QWidget>
 class CMap;
+class QSettings;
 
 class CCanvas : public QWidget
 {
@@ -29,12 +30,19 @@ class CCanvas : public QWidget
         CCanvas(QWidget * parent);
         virtual ~CCanvas();
 
+        void saveConfig(QSettings& cfg);
+        void loadConfig(QSettings& cfg);
 
     protected:
+        void resizeEvent(QResizeEvent * e);
+        void paintEvent(QPaintEvent * e);
+
+    private:      
+        /// set true to initiate a complete redraw of the screen content
+        bool needsRedraw;
+        /// the map object attached to this canvas
         CMap * map;
 
-    private:
-        static int count;
 };
 
 #endif //CCANVAS_H

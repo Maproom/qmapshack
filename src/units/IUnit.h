@@ -1,0 +1,57 @@
+/**********************************************************************************************
+    Copyright (C) 2008 Oliver Eichler oliver.eichler@gmx.de
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111 USA
+
+**********************************************************************************************/
+#ifndef IUNIT_H
+#define IUNIT_H
+#include <QObject>
+
+#define NOFLOAT 1e25
+
+class IUnit : public QObject
+{
+    Q_OBJECT;
+    public:
+        virtual ~IUnit();
+
+        static IUnit& self(){return *m_self;}
+        /// convert meter of elevation into a value and unit string
+        virtual void meter2elevation(qreal meter, QString& val, QString& unit) = 0;
+        /// convert meter of distance into a value and unit string
+        virtual void meter2distance(qreal meter, QString& val, QString& unit) = 0;
+        /// convert meter per second to a speed value string and unit label
+        virtual void meter2speed(qreal meter, QString& val, QString& unit);
+        virtual void seconds2time(quint32 ttime, QString& val, QString& unit);
+        virtual qreal elevation2meter(const QString& val) = 0;
+
+        enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
+        static void setUnitType(type_e t, QObject *parent);
+
+        const type_e  type;
+        const QString baseunit;
+        const qreal   basefactor;
+        const QString speedunit;
+        const qreal   speedfactor;
+
+    protected:
+        friend class CResources;
+        IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent);
+
+    private:
+        static IUnit * m_self;
+};
+#endif                           //IUNIT_H

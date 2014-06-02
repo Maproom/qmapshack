@@ -138,7 +138,7 @@ void CCanvas::wheelEvent(QWheelEvent * e)
 
 void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color)
 {
-    CCanvas::drawText(str,p,center, color, p.font());
+    CCanvas::drawText(str,p,center, color, CMainWindow::self().getMapFont());
 }
 
 
@@ -174,7 +174,7 @@ void CCanvas::drawText(const QString& str, QPainter& p, const QRect& r, const QC
 {
 
     p.setPen(Qt::white);
-    //p.setFont(CResources::self().getMapFont());
+    p.setFont(CMainWindow::self().getMapFont());
 
     p.drawText(r.adjusted(-1,-1,-1,-1),Qt::AlignCenter,str);
     p.drawText(r.adjusted( 0,-1, 0,-1),Qt::AlignCenter,str);
@@ -194,11 +194,11 @@ void CCanvas::drawText(const QString& str, QPainter& p, const QRect& r, const QC
 
 void CCanvas::drawScale(QPainter& p)
 {
-//    if(!CResources::self().showScale())
-//    {
-//        return;
-//    }
 
+    if(!CMainWindow::self().isScaleVisible())
+    {
+        return;
+    }
 
 
     // step I: get the approximate distance for 200px in the bottom right corner

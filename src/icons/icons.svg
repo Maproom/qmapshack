@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8"
-     inkscape:cx="180.72611"
-     inkscape:cy="899.43923"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="183.87948"
+     inkscape:cy="894.87766"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="true"
      inkscape:window-width="1920"
-     inkscape:window-height="996"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="1014"
+     inkscape:window-x="-1"
+     inkscape:window-y="-15"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true">
@@ -1183,5 +1183,97 @@
          id="path3161"
          inkscape:connector-curvature="0" />
     </g>
+  </g>
+  <g
+     id="g3167"
+     inkscape:export-filename="/home/oeichler/dateien/cpp/MapRoom/src/icons/32x32/scale.png"
+     inkscape:export-xdpi="80.928764"
+     inkscape:export-ydpi="80.928764">
+    <rect
+       y="131.10234"
+       x="194.8819"
+       height="35.433071"
+       width="35.433071"
+       id="rect3945"
+       style="fill:none;stroke:none" />
+    <rect
+       y="145.73215"
+       x="195.50069"
+       height="6.3502135"
+       width="34.486847"
+       id="rect3144"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000080;stroke-width:0.98537200999999996;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3914"
+       d="m 195.57229,138.18895 0,21.25985"
+       style="fill:#000080;stroke:#000080;stroke-width:0.98537200999999996px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3916"
+       d="m 229.97631,138.18895 0,21.25985"
+       style="fill:none;stroke:#000080;stroke-width:0.98537200999999996px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <rect
+       y="145.61548"
+       x="195.54489"
+       height="6.2591858"
+       width="6.9356203"
+       id="rect3918"
+       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000080;stroke-width:0.92974268999999998;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       y="145.60838"
+       x="209.22812"
+       height="6.2591858"
+       width="6.9356203"
+       id="rect3918-9"
+       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000080;stroke-width:0.92974268999999998;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       y="145.60838"
+       x="222.99318"
+       height="6.2591858"
+       width="6.9356203"
+       id="rect3918-1"
+       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000080;stroke-width:0.92974268999999998;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  </g>
+  <g
+     id="g3210"
+     inkscape:export-filename="/home/oeichler/dateien/cpp/MapRoom/src/icons/32x32/font.png"
+     inkscape:export-xdpi="81.279991"
+     inkscape:export-ydpi="81.279991">
+    <g
+       transform="translate(1.4116656,0.282174)"
+       id="g3204">
+      <text
+         xml:space="preserve"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
+         x="261.1181"
+         y="163.90549"
+         id="text3177"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan3179"
+           x="261.1181"
+           y="163.90549"
+           style="font-size:30px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000080;font-family:Utopia;-inkscape-font-specification:Utopia Bold">T</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
+         x="248.83463"
+         y="153.92792"
+         id="text3177-7"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan3179-9"
+           x="248.83463"
+           y="153.92792"
+           style="font-size:30px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Utopia;-inkscape-font-specification:Utopia Bold">T</tspan></text>
+    </g>
+    <rect
+       y="131.10234"
+       x="248.03149"
+       height="35.433071"
+       width="35.433071"
+       id="rect3202"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   </g>
 </svg>

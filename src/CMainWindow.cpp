@@ -57,6 +57,7 @@ CMainWindow::CMainWindow()
 
 
     connect(actionAddCanvas, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
+    connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
@@ -73,11 +74,16 @@ CMainWindow::CMainWindow()
         canvas->loadConfig(cfg);
         cfg.endGroup();
     }
+
+    actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
+    mapFont = cfg.value("mapFont", font()).value<QFont>();
     cfg.endGroup(); // Canvas
 
     QStatusBar * status = statusBar();
     lblPosition = new QLabel(status);
     status->addPermanentWidget(lblPosition);
+
+    menuWindow->addAction(dockMaps->toggleViewAction());
 }
 
 CMainWindow::~CMainWindow()
@@ -103,11 +109,17 @@ CMainWindow::~CMainWindow()
     }
 
     cfg.setValue("N", cnt);
+    cfg.setValue("isScaleVisible", actionShowScale->isChecked());
+    cfg.setValue("mapFont", mapFont);
 
     cfg.endGroup(); // Canvas
 
 }
 
+bool CMainWindow::isScaleVisible()
+{
+    return actionShowScale->isChecked();
+}
 
 void CMainWindow::addMapList(QListWidget * list, const QString &name)
 {
@@ -176,3 +188,13 @@ void CMainWindow::slotMousePosition(const QPointF& pos)
     lblPosition->setText(str);
 }
 
+void CMainWindow::slotSetupMapFont()
+{
+    bool ok = false;
+    QFont f = QFontDialog::getFont(&ok, mapFont, this);
+    if(ok)
+    {
+        mapFont = f;
+    }
+
+}

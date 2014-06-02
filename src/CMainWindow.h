@@ -36,13 +36,16 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void addMapList(QListWidget * list, const QString& name);
         void delMapList(QListWidget * list);
 
+        bool isScaleVisible();
+        const QFont& getMapFont(){return mapFont;}
+
     private slots:
         void slotAddCanvas();
         void slotTabCloseRequest(int i);
         void slotCurrentTabCanvas(int i);
         void slotCurrentTabMaps(int i);
-
         void slotMousePosition(const QPointF& pos);
+        void slotSetupMapFont();
 
     private:
         friend int main(int argc, char ** argv);
@@ -51,6 +54,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         static CMainWindow * pSelf;
 
         QLabel * lblPosition;
+
+        QFont mapFont;
 };
 
 #endif //CMAINWINDOW_H

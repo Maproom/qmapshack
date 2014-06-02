@@ -4,5 +4,9 @@
         <file>icons/16x16/map.png</file>
         <file>icons/16x16/addCanvas.png</file>
         <file>icons/32x32/addCanvas.png</file>
+        <file>icons/16x16/scale.png</file>
+        <file>icons/32x32/scale.png</file>
+        <file>icons/16x16/font.png</file>
+        <file>icons/32x32/font.png</file>
     </qresource>
 </RCC>

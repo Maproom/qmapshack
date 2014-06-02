@@ -23,6 +23,7 @@
 #include "ui_IMainWindow.h"
 
 class QListWidget;
+class QLabel;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -41,11 +42,15 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotCurrentTabCanvas(int i);
         void slotCurrentTabMaps(int i);
 
+        void slotMousePosition(const QPointF& pos);
+
     private:
         friend int main(int argc, char ** argv);
         CMainWindow();
 
         static CMainWindow * pSelf;
+
+        QLabel * lblPosition;
 };
 
 #endif //CMAINWINDOW_H

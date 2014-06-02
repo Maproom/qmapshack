@@ -19,7 +19,9 @@
 #include "CMainWindow.h"
 #include "CSettings.h"
 #include "CCanvas.h"
+#include "GeoMath.h"
 #include "map/CMap.h"
+#include "units/IUnit.h"
 #include "version.h"
 
 #include <QtGui>
@@ -34,6 +36,7 @@ CMainWindow::CMainWindow()
     setupUi(this);
     setWindowTitle(WHAT_STR);
 
+    IUnit::self().setUnitType(IUnit::eTypeMetric, this);
 
     SETTINGS;
     // start ---- restore window geometry -----
@@ -64,12 +67,17 @@ CMainWindow::CMainWindow()
     {
         CCanvas * canvas = new CCanvas(tabWidget);
         tabWidget->addTab(canvas, canvas->objectName());
+        connect(canvas, SIGNAL(sigMousePosition(QPointF)), this, SLOT(slotMousePosition(QPointF)));
 
         cfg.beginGroup(QString("Canvas%1").arg(i));
         canvas->loadConfig(cfg);
         cfg.endGroup();
     }
     cfg.endGroup(); // Canvas
+
+    QStatusBar * status = statusBar();
+    lblPosition = new QLabel(status);
+    status->addPermanentWidget(lblPosition);
 }
 
 CMainWindow::~CMainWindow()
@@ -124,7 +132,8 @@ void CMainWindow::delMapList(QListWidget * list)
 void CMainWindow::slotAddCanvas()
 {
     CCanvas * canvas = new CCanvas(tabWidget);
-    tabWidget->addTab(canvas, canvas->objectName());    
+    tabWidget->addTab(canvas, canvas->objectName());
+    connect(canvas, SIGNAL(sigMousePosition(QPointF)), this, SLOT(slotMousePosition(QPointF)));
 }
 
 void CMainWindow::slotTabCloseRequest(int i)
@@ -160,4 +169,10 @@ void CMainWindow::slotCurrentTabMaps(int i)
     }
 }
 
+void CMainWindow::slotMousePosition(const QPointF& pos)
+{
+    QString str;
+    GPS_Math_Deg_To_Str(pos.x(), pos.y(), str);
+    lblPosition->setText(str);
+}
 

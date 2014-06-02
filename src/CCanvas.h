@@ -22,6 +22,7 @@
 #include <QWidget>
 class CMap;
 class QSettings;
+class QPointF;
 
 class CCanvas : public QWidget
 {
@@ -33,14 +34,25 @@ class CCanvas : public QWidget
         void saveConfig(QSettings& cfg);
         void loadConfig(QSettings& cfg);
 
+        static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color);
+        static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font);
+        static void drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color);
+
+
+    signals:
+        void sigMousePosition(const QPointF& pos);
+
     protected:
         void resizeEvent(QResizeEvent * e);
         void paintEvent(QPaintEvent * e);
         void mousePressEvent(QMouseEvent * e);
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);
+        void wheelEvent(QWheelEvent * e);
 
-    private:      
+    private:
+        void drawScale(QPainter& p);
+
         /// set true to initiate a complete redraw of the screen content
         bool needsRedraw;
         /// the map object attached to this canvas

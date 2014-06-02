@@ -12,15 +12,21 @@ find_package(PROJ REQUIRED)
 
 set( SRCS
     main.cpp
+    GeoMath.cpp
     CMainWindow.cpp
     CCanvas.cpp
     map/IMap.cpp
     map/CMap.cpp
     map/CMapItem.cpp
+    units/IUnit.cpp
+    units/CUnitImperial.cpp
+    units/CUnitMetric.cpp
+    units/CUnitNautic.cpp
 )
 
 set( HDRS
     version.h
+    GeoMath.h
     CAppOpts.h
     CSettings.h
     CMainWindow.h
@@ -28,6 +34,10 @@ set( HDRS
     map/IMap.h
     map/CMap.h
     map/CMapItem.h
+    units/IUnit.h
+    units/CUnitImperial.h
+    units/CUnitMetric.h
+    units/CUnitNautic.h
 )
 
 set( UIS

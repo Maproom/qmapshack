@@ -18,7 +18,9 @@
 
 #include "CMainWindow.h"
 #include "CCanvas.h"
+#include "GeoMath.h"
 #include "map/CMap.h"
+#include "units/IUnit.h"
 
 #include <QtGui>
 
@@ -38,6 +40,8 @@ CCanvas::CCanvas(QWidget *parent)
         }
         count++;
     }
+
+    setMouseTracking(true);
 
     map = new CMap(this);
 }
@@ -81,7 +85,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
     QPainter p;
     p.begin(this);
-    //p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, true);
+    p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, true);
 
     // fill the backbround with default pattern
     p.fillRect(rect(), QBrush(Qt::darkGreen, Qt::CrossPattern));
@@ -96,6 +100,8 @@ void CCanvas::paintEvent(QPaintEvent * e)
     p.resetTransform();
     // ----- start to draw static content -----
 
+    drawScale(p);
+
     p.end();
     needsRedraw = false;
 
@@ -109,6 +115,10 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)
 {
+    QString str;
+    QPointF pos = e->pos();
+    map->convertPx2Rad(pos);
+    emit sigMousePosition(pos);
 
     QWidget::mouseMoveEvent(e);
 }
@@ -118,3 +128,133 @@ void CCanvas::mouseReleaseEvent(QMouseEvent *e)
 
     QWidget::mouseReleaseEvent(e);
 }
+
+void CCanvas::wheelEvent(QWheelEvent * e)
+{
+    map->zoom(/*CResources::self().flipMouseWheel()*/ 0 ? (e->delta() > 0) : (e->delta() < 0), needsRedraw);
+    update();
+}
+
+
+void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color)
+{
+    CCanvas::drawText(str,p,center, color, p.font());
+}
+
+
+void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font)
+{
+
+    QFontMetrics    fm(font);
+    QRect           r = fm.boundingRect(str);
+
+    r.moveCenter(center);
+
+    p.setPen(Qt::white);
+    p.setFont(font);
+
+    p.drawText(r.topLeft() - QPoint(-1,-1), str);
+    p.drawText(r.topLeft() - QPoint( 0,-1), str);
+    p.drawText(r.topLeft() - QPoint(+1,-1), str);
+
+    p.drawText(r.topLeft() - QPoint(-1, 0), str);
+    p.drawText(r.topLeft() - QPoint(+1, 0), str);
+
+    p.drawText(r.topLeft() - QPoint(-1,+1), str);
+    p.drawText(r.topLeft() - QPoint( 0,+1), str);
+    p.drawText(r.topLeft() - QPoint(+1,+1), str);
+
+    p.setPen(color);
+    p.drawText(r.topLeft(),str);
+
+}
+
+
+void CCanvas::drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color)
+{
+
+    p.setPen(Qt::white);
+    //p.setFont(CResources::self().getMapFont());
+
+    p.drawText(r.adjusted(-1,-1,-1,-1),Qt::AlignCenter,str);
+    p.drawText(r.adjusted( 0,-1, 0,-1),Qt::AlignCenter,str);
+    p.drawText(r.adjusted(+1,-1,+1,-1),Qt::AlignCenter,str);
+
+    p.drawText(r.adjusted(-1, 0,-1, 0),Qt::AlignCenter,str);
+    p.drawText(r.adjusted(+1, 0,+1, 0),Qt::AlignCenter,str);
+
+    p.drawText(r.adjusted(-1,+1,-1,+1),Qt::AlignCenter,str);
+    p.drawText(r.adjusted( 0,+1, 0,+1),Qt::AlignCenter,str);
+    p.drawText(r.adjusted(+1,+1,+1,+1),Qt::AlignCenter,str);
+
+    p.setPen(color);
+    p.drawText(r,Qt::AlignCenter,str);
+
+}
+
+void CCanvas::drawScale(QPainter& p)
+{
+//    if(!CResources::self().showScale())
+//    {
+//        return;
+//    }
+
+
+
+    // step I: get the approximate distance for 200px in the bottom right corner
+    QPointF brc(rect().bottomRight() - QPoint(50,30));
+    QPointF pt1 = brc;
+    QPointF pt2 = brc - QPoint(-200,0);
+
+    map->convertPx2Rad(pt1);
+    map->convertPx2Rad(pt2);
+
+    qreal d = GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y());
+
+    // step II: derive the actual scale length in [m]
+    qreal a = (int)log10(d);
+    qreal b = log10(d) - a;
+
+    if(0 <= b && b < log10(3.0f))
+    {
+        d = 1 * pow(10,a);
+    }
+    else if(log10(3.0f) < b && b < log10(5.0f))
+    {
+        d = 3 * pow(10,a);
+    }
+    else
+    {
+        d = 5 * pow(10,a);
+    }
+
+    // step III: convert the scale length from [m] into [px]
+    pt1 = brc;
+    map->convertPx2Rad(pt1);
+    pt2 = GPS_Math_Wpt_Projection(pt1, d, -90 * DEG_TO_RAD);
+
+    map->convertRad2Px(pt1);
+    map->convertRad2Px(pt2);
+
+    p.setPen(QPen(Qt::white, 9));
+    p.drawLine(pt1, pt2 + QPoint(9,0));
+    p.setPen(QPen(Qt::black, 7));
+    p.drawLine(pt1, pt2 + QPoint(9,0));
+    p.setPen(QPen(Qt::white, 5));
+    p.drawLine(pt1, pt2 + QPoint(9,0));
+
+    QVector<qreal> pattern;
+    pattern << 2 << 4;
+    QPen pen(Qt::black, 5, Qt::CustomDashLine);
+    pen.setDashPattern(pattern);
+    p.setPen(pen);
+    p.drawLine(pt1, pt2 + QPoint(9,0));
+
+
+    QPoint pt3(pt2.x() + (pt1.x() - pt2.x())/2, pt2.y());
+
+    QString val, unit;
+    IUnit::self().meter2distance(d,val,unit);
+    drawText(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
+}
+

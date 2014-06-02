@@ -57,6 +57,7 @@ CMainWindow::CMainWindow()
 
 
     connect(actionAddCanvas, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
+    connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotSetupScale()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
@@ -188,6 +189,15 @@ void CMainWindow::slotMousePosition(const QPointF& pos)
     lblPosition->setText(str);
 }
 
+void CMainWindow::slotSetupScale()
+{
+    QWidget * w = tabWidget->currentWidget();
+    if(w)
+    {
+        w->update();
+    }
+}
+
 void CMainWindow::slotSetupMapFont()
 {
     bool ok = false;
@@ -195,6 +205,11 @@ void CMainWindow::slotSetupMapFont()
     if(ok)
     {
         mapFont = f;
+        QWidget * w = tabWidget->currentWidget();
+        if(w)
+        {
+            w->update();
+        }
     }
 
 }

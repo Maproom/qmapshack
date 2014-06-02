@@ -118,7 +118,7 @@ void CCanvas::mouseMoveEvent(QMouseEvent * e)
     QString str;
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
-    emit sigMousePosition(pos);
+    emit sigMousePosition(pos * RAD_TO_DEG);
 
     QWidget::mouseMoveEvent(e);
 }

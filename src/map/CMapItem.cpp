@@ -16,12 +16,16 @@
 
 **********************************************************************************************/
 
-#include "CMapItem.h"
+#include "map/CMapItem.h"
+#include "map/CMapJNX.h"
+#include "map/CMapRMAP.h"
+#include <QtGui>
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
 
-CMapItem::CMapItem(QListWidget *parent)
+CMapItem::CMapItem(QListWidget *parent, CMap * map)
     : QListWidgetItem(parent)
+    , map(map)
 {
 
 }
@@ -31,3 +35,49 @@ CMapItem::~CMapItem()
 
 }
 
+bool CMapItem::activate()
+{
+    QMutexLocker lock(&mutexActiveMaps);
+
+    if(!files.isEmpty())
+    {
+        qDeleteAll(files);
+        files.clear();
+    }
+
+    foreach(const QString& filename, filenames)
+    {
+        IMap * m = 0;
+        // load map by suffix
+        QFileInfo fi(filename);
+        if(fi.suffix().toLower() == "rmap")
+        {
+            m = new CMapRMAP(filename, map);
+        }
+        else if(fi.suffix().toLower() == "jnx")
+        {
+            m = new CMapJNX(filename, map);
+        }
+
+        // if map is actived sucessfully add to the list of map files
+        // else delete all previous loaded maps and abort
+        if(m && m->activated())
+        {
+            files << m;
+        }
+        else
+        {
+            qDeleteAll(files);
+            files.clear();
+            return false;
+        }
+    }
+    // no mapfiles loaded? Bad.
+    if(files.isEmpty())
+    {
+        return false;
+    }
+    setIcon(QIcon("://icons/32x32/map-active.png"));
+//    moveToEndOfActive();
+    return true;
+}

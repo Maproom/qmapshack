@@ -23,11 +23,12 @@
 #include <QMutex>
 
 class IMap;
+class CMap;
 
 class CMapItem : public QListWidgetItem
 {
     public:
-        CMapItem(QListWidget * parent);
+        CMapItem(QListWidget * parent, CMap *map);
         virtual ~CMapItem();
 
         /**
@@ -35,8 +36,11 @@ class CMapItem : public QListWidgetItem
          */
         static QMutex mutexActiveMaps;
 
+        bool activate();
+
     private:
         friend class CMap;
+        CMap * map;
         /**
            @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
          */

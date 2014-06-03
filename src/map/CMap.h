@@ -90,10 +90,12 @@ class CMap : public QThread
     private:
         static const qreal scales[];
 
+        void zoom(int idx);
+
+        void registerListWidgetForMaps();
+
         /// the mutex to serialize access
         QMutex mutex;
-
-        void zoom(int idx);
 
         /// internal needs redraw flag
         bool intNeedsRedraw;

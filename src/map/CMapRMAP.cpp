@@ -19,13 +19,14 @@
 #include "map/CMapRMAP.h"
 #include "map/CMap.h"
 #include "units/IUnit.h"
+#include "CCanvas.h"
 
 #include <QtGui>
 #include <QtWidgets>
 
 CMapRMAP::CMapRMAP(const QString &filename, CMap *parent)
     : IMap(parent)
-    , map(map)
+    , map(parent)
     , filename(filename)
 {
     qDebug() << "try to open" << filename;
@@ -419,7 +420,7 @@ void CMapRMAP::draw(buffer_t& buf)
 
     // ----- start drawing -----
     QPainter p(&buf.image);
-    p.setRenderHints(QPainter::Antialiasing|QPainter::SmoothPixmapTransform, true);
+    USE_ANTI_ALIASING(p,true);
 
     QFile file(filename);
     file.open(QIODevice::ReadOnly);

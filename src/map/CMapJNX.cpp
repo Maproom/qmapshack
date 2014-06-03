@@ -19,6 +19,7 @@
 #include "map/CMapJNX.h"
 #include "map/CMap.h"
 #include "GeoMath.h"
+#include "CCanvas.h"
 
 
 #include <QtGui>

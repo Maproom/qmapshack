@@ -85,6 +85,8 @@ CMap::CMap(CCanvas *parent)
     resize(canvas->size());
     connect(this, SIGNAL(finished()), canvas, SLOT(update()));
 
+    registerListWidgetForMaps();
+
 }
 
 CMap::~CMap()
@@ -106,6 +108,43 @@ void CMap::loadConfig(QSettings& cfg)
 {
 
 }
+
+void CMap::registerListWidgetForMaps()
+{
+    QDir pathMaps("./");
+
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    QStringList filters;
+    filters << "*rmap" << "*jnx";
+
+    CMapItem::mutexActiveMaps.lock();
+    listWidgetMaps->clear();
+    // find available maps
+    foreach(const QString& filename, pathMaps.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
+    {
+        QFileInfo fi(filename);
+
+        CMapItem * item = new CMapItem(listWidgetMaps, this);
+
+        item->setText(fi.baseName());
+        item->setIcon(QIcon("://icons/32x32/map.png"));
+        item->filenames  << pathMaps.absoluteFilePath(filename);
+        item->setSizeHint(QSize(0,64));
+
+        QFile f(pathMaps.absoluteFilePath(filename));
+        f.open(QIODevice::ReadOnly);
+        md5.reset();
+        md5.addData(f.read(1024));
+        item->key = md5.result().toHex();
+        f.close();
+
+        item->activate();
+    }
+    CMapItem::mutexActiveMaps.unlock();
+
+//    restoreActiveMapsList();
+}
+
 
 void CMap::resize(const QSize& size)
 {

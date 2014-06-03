@@ -18,6 +18,7 @@ set( SRCS
     map/IMap.cpp
     map/CMap.cpp
     map/CMapItem.cpp
+    map/CMapList.cpp
     map/CMapRMAP.cpp
     map/CMapJNX.cpp
     map/CGrid.cpp
@@ -37,6 +38,7 @@ set( HDRS
     map/IMap.h
     map/CMap.h
     map/CMapItem.h
+    map/CMapList.h
     map/CGrid.h
     map/CMapRMAP.h
     map/CMapJNX.h
@@ -48,6 +50,7 @@ set( HDRS
 
 set( UIS
     IMainWindow.ui
+    map/IMapList.ui
 )
 
 set( RCS

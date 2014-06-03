@@ -21,6 +21,7 @@
 #include "CCanvas.h"
 #include "GeoMath.h"
 #include "map/CMap.h"
+#include "map/CMapList.h"
 #include "units/IUnit.h"
 #include "version.h"
 
@@ -122,12 +123,12 @@ bool CMainWindow::isScaleVisible()
     return actionShowScale->isChecked();
 }
 
-void CMainWindow::addMapList(QListWidget * list, const QString &name)
+void CMainWindow::addMapList(CMapList * list, const QString &name)
 {
     tabMaps->addTab(list,name);
 }
 
-void CMainWindow::delMapList(QListWidget * list)
+void CMainWindow::delMapList(CMapList * list)
 {
     for(int i = 0; i < tabMaps->count(); i++)
     {

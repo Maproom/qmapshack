@@ -46,6 +46,8 @@ CCanvas::CCanvas(QWidget *parent)
 
     map     = new CMap(this);
     grid    = new CGrid(map);
+
+    connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
 }
 
 CCanvas::~CCanvas()
@@ -90,7 +92,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     USE_ANTI_ALIASING(p,true);
 
     // fill the backbround with default pattern
-    p.fillRect(rect(), QBrush(Qt::darkGreen, Qt::CrossPattern));
+    p.fillRect(rect(), "#FFFFBF");
 
     // ----- start to draw geo-referenced content -----
     // move coordinate system to center of the screen
@@ -260,5 +262,11 @@ void CCanvas::drawScale(QPainter& p)
     QString val, unit;
     IUnit::self().meter2distance(d,val,unit);
     drawText(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
+}
+
+void CCanvas::slotTriggerCompleteUpdate()
+{
+    needsRedraw = true;
+    update();
 }
 

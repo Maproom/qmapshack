@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "map/CMap.h"
 #include "map/CMapItem.h"
 #include "map/CMapJNX.h"
 #include "map/CMapRMAP.h"
@@ -35,6 +36,37 @@ CMapItem::~CMapItem()
 
 }
 
+bool CMapItem::isActivated()
+{
+    QMutexLocker lock(&mutexActiveMaps);
+    return !files.isEmpty();
+}
+
+bool CMapItem::toggleActivate()
+{
+    QMutexLocker lock(&mutexActiveMaps);
+    if(files.isEmpty())
+    {
+        return activate();
+    }
+    else
+    {
+        deactivate();
+        return false;
+    }
+}
+
+void CMapItem::deactivate()
+{
+    QMutexLocker lock(&mutexActiveMaps);
+    qDeleteAll(files);
+    files.clear();
+
+    setIcon(QIcon("://icons/32x32/map.png"));
+    moveToEndOfActive();
+}
+
+
 bool CMapItem::activate()
 {
     QMutexLocker lock(&mutexActiveMaps);
@@ -53,10 +85,12 @@ bool CMapItem::activate()
         if(fi.suffix().toLower() == "rmap")
         {
             m = new CMapRMAP(filename, map);
+            setIcon(QIcon("://icons/32x32/rmap.png"));
         }
         else if(fi.suffix().toLower() == "jnx")
         {
             m = new CMapJNX(filename, map);
+            setIcon(QIcon("://icons/32x32/jnx.png"));
         }
 
         // if map is actived sucessfully add to the list of map files
@@ -78,6 +112,42 @@ bool CMapItem::activate()
         return false;
     }
     setIcon(QIcon("://icons/32x32/map-active.png"));
-//    moveToEndOfActive();
+    moveToEndOfActive();
     return true;
+}
+
+void CMapItem::moveToTop()
+{
+    QListWidget * w = listWidget();
+    QMutexLocker lock(&mutexActiveMaps);
+
+    w->takeItem(w->row(this));
+    w->insertItem(0, this);
+
+//    CMapDB::self().saveActiveMapsList();
+    map->emitSigCanvasUpdate();
+}
+
+void CMapItem::moveToEndOfActive()
+{
+
+    int row;
+    QListWidget * w = listWidget();
+    QMutexLocker lock(&mutexActiveMaps);
+
+    w->takeItem(w->row(this));
+    for(row = 0; row < w->count(); row++)
+    {
+        CMapItem * item = dynamic_cast<CMapItem*>(w->item(row));
+        if(item && item->files.isEmpty())
+        {
+            break;
+        }
+    }
+    w->insertItem(row, this);
+
+//    CMapDB::self().saveActiveMapsList();
+    // Changeing the order in the list will
+    // change draw order. Update canvas.
+    map->emitSigCanvasUpdate();
 }

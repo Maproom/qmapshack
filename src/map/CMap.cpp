@@ -16,8 +16,9 @@
 
 **********************************************************************************************/
 
-#include "CMap.h"
-#include "CMapItem.h"
+#include "map/CMap.h"
+#include "map/CMapItem.h"
+#include "map/CMapList.h"
 #include "CCanvas.h"
 #include "CMainWindow.h"
 
@@ -79,8 +80,8 @@ CMap::CMap(CCanvas *parent)
 
     zoom(5);
 
-    listWidgetMaps = new QListWidget(canvas);
-    CMainWindow::self().addMapList(listWidgetMaps, canvas->objectName());
+    mapList = new CMapList(canvas);
+    CMainWindow::self().addMapList(mapList, canvas->objectName());
 
     resize(canvas->size());
     connect(this, SIGNAL(finished()), canvas, SLOT(update()));
@@ -94,7 +95,12 @@ CMap::~CMap()
     pj_free(pjtar);
     pj_free(pjsrc);
 
-    CMainWindow::self().delMapList(listWidgetMaps);
+    CMainWindow::self().delMapList(mapList);
+}
+
+void CMap::emitSigCanvasUpdate()
+{
+    emit sigCanvasUpdate();
 }
 
 void CMap::saveConfig(QSettings& cfg)
@@ -118,18 +124,27 @@ void CMap::registerListWidgetForMaps()
     filters << "*rmap" << "*jnx";
 
     CMapItem::mutexActiveMaps.lock();
-    listWidgetMaps->clear();
+    mapList->clear();
     // find available maps
     foreach(const QString& filename, pathMaps.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
     {
         QFileInfo fi(filename);
 
-        CMapItem * item = new CMapItem(listWidgetMaps, this);
+        CMapItem * item = new CMapItem(*mapList, this);
 
         item->setText(fi.baseName());
-        item->setIcon(QIcon("://icons/32x32/map.png"));
         item->filenames  << pathMaps.absoluteFilePath(filename);
-        item->setSizeHint(QSize(0,64));
+        item->setSizeHint(QSize(0,48));
+
+        if(fi.suffix().toLower() == "rmap")
+        {
+            item->setIcon(QIcon("://icons/32x32/rmap.png"));
+        }
+        else if(fi.suffix().toLower() == "jnx")
+        {
+            item->setIcon(QIcon("://icons/32x32/jnx.png"));
+        }
+
 
         QFile f(pathMaps.absoluteFilePath(filename));
         f.open(QIODevice::ReadOnly);
@@ -137,8 +152,6 @@ void CMap::registerListWidgetForMaps()
         md5.addData(f.read(1024));
         item->key = md5.result().toHex();
         f.close();
-
-        item->activate();
     }
     CMapItem::mutexActiveMaps.unlock();
 
@@ -155,6 +168,7 @@ void CMap::resize(const QSize& size)
     mutex.lock(); // --------- start serialize with thread
     viewWidth   = size.width();
     viewHeight  = size.height();
+    center      = QPointF(viewWidth/2.0, viewHeight/2.0);
     int a       = sqrt(viewWidth*viewWidth + viewHeight*viewHeight);
     bufWidth    = a + 100;
     bufHeight   = a + 100;
@@ -228,7 +242,7 @@ void CMap::convertPx2Rad(QPointF &p)
     QPointF f = focus;
     convertRad2M(f);
 
-    p = f + p * scale * zoomFactor;
+    p = f + (p - center) * scale * zoomFactor;
 
     convertM2Rad(p);
 
@@ -243,7 +257,7 @@ void CMap::convertRad2Px(QPointF &p)
     convertRad2M(f);
     convertRad2M(p);
 
-    p = (p - f) / (scale * zoomFactor);
+    p = (p - f) / (scale * zoomFactor) + center;
 
     mutex.unlock(); // --------- stop serialize with thread
 }
@@ -333,11 +347,11 @@ void CMap::run()
 
         // iterate over all active maps and call the draw method
         CMapItem::mutexActiveMaps.lock();
-        if(listWidgetMaps)
+        if(mapList)
         {
-            for(int i = 0; i < listWidgetMaps->count(); i++)
+            for(int i = 0; i < mapList->count(); i++)
             {
-                CMapItem * item = dynamic_cast<CMapItem *>(listWidgetMaps->item(i));
+                CMapItem * item = mapList->item(i);
 
                 if(!item || item->files.isEmpty())
                 {

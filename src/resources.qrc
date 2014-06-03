@@ -8,5 +8,12 @@
         <file>icons/32x32/scale.png</file>
         <file>icons/16x16/font.png</file>
         <file>icons/32x32/font.png</file>
+        <file>icons/16x16/jnx.png</file>
+        <file>icons/16x16/rmap.png</file>
+        <file>icons/32x32/jnx.png</file>
+        <file>icons/32x32/rmap.png</file>
+        <file>icons/32x32/cancel.png</file>
+        <file>icons/32x32/check.png</file>
+        <file>icons/32x32/to-top.png</file>
     </qresource>
 </RCC>

@@ -58,6 +58,9 @@ class CCanvas : public QWidget
         void mouseReleaseEvent(QMouseEvent *e);
         void wheelEvent(QWheelEvent * e);
 
+    private slots:
+        void slotTriggerCompleteUpdate();
+
     private:
         void drawScale(QPainter& p);
 

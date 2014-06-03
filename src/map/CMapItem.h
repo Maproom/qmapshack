@@ -36,7 +36,34 @@ class CMapItem : public QListWidgetItem
          */
         static QMutex mutexActiveMaps;
 
+        /**
+           @brief Query if map objects are loaded
+           @return True if the internal list of map objects is not empty.
+         */
+        bool isActivated();
+        /**
+           @brief Either loads or destroys internal map objects
+           @return True if the internal list of maps is not empty after the operation.
+         */
+        bool toggleActivate();
+        /**
+         * @brief Load all internal map objects
+         * @return Return true on success.
+         */
         bool activate();
+        /**
+           @brief Delete all internal map objects
+         */
+        void deactivate();
+        /**
+           @brief Move item to top of list widget
+         */
+        void moveToTop();
+        /**
+           @brief Move item at the end of the active maps list
+         */
+        void moveToEndOfActive();
+
 
     private:
         friend class CMap;

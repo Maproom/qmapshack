@@ -16,48 +16,32 @@
 
 **********************************************************************************************/
 
-#ifndef CMAINWINDOW_H
-#define CMAINWINDOW_H
+#ifndef CMAPLIST_H
+#define CMAPLIST_H
 
-#include <QMainWindow>
-#include "ui_IMainWindow.h"
+#include <QWidget>
+#include "ui_IMapList.h"
 
-class CMapList;
-class QLabel;
+class CMapItem;
 
-class CMainWindow : public QMainWindow, private Ui::IMainWindow
+class CMapList : public QWidget, private Ui::IMapList
 {
     Q_OBJECT
     public:
-        static CMainWindow& self(){return *pSelf;}
-        virtual ~CMainWindow();
+        CMapList(QWidget * parent);
+        virtual ~CMapList();
 
-
-        void addMapList(CMapList *list, const QString& name);
-        void delMapList(CMapList *list);
-
-        bool isScaleVisible();
-        const QFont& getMapFont(){return mapFont;}
+        void clear();
+        int count();
+        CMapItem * item(int i);
+        operator QListWidget*(){return listWidget;}
 
     private slots:
-        void slotAddCanvas();
-        void slotTabCloseRequest(int i);
-        void slotCurrentTabCanvas(int i);
-        void slotCurrentTabMaps(int i);
-        void slotMousePosition(const QPointF& pos);
-        void slotSetupScale();
-        void slotSetupMapFont();
+        void slotSelectionChanged();
+        void slotActivate();
+        void slotToTop();
 
-    private:
-        friend int main(int argc, char ** argv);
-        CMainWindow();
-
-        static CMainWindow * pSelf;
-
-        QLabel * lblPosition;
-
-        QFont mapFont;
 };
 
-#endif //CMAINWINDOW_H
+#endif //CMAPLIST_H
 

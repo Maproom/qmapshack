@@ -24,11 +24,12 @@
 
 class QPainter;
 class CCanvas;
-class QListWidget;
+class CMapList;
 class QSettings;
 
 class CMap : public QThread
 {
+    Q_OBJECT
     public:
         CMap(CCanvas * parent);
         virtual ~CMap();
@@ -81,7 +82,17 @@ class CMap : public QThread
          */
         void convertRad2Px(QPointF& p);
 
+        /**
+           @brief Check if the internal needs redraw flag is set
+           @return intNeedsRedraw is returned
+         */
         bool needsRedraw();
+
+        void emitSigCanvasUpdate();
+
+    signals:
+        void sigCanvasUpdate();
+
 
     protected:
         void run();
@@ -114,6 +125,8 @@ class CMap : public QThread
         int  viewWidth;
         /// the viewports height [px]
         int  viewHeight;
+        /// the center of the viewport
+        QPointF center;
 
         /// source projection should be the same for all maps
         projPJ  pjsrc;
@@ -138,7 +151,7 @@ class CMap : public QThread
         /// bottom left corner of next buffer
         QPointF ref4;
 
-        QListWidget * listWidgetMaps;
+        CMapList * mapList;
 
 };
 

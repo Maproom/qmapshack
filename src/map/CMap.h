@@ -81,6 +81,8 @@ class CMap : public QThread
          */
         void convertRad2Px(QPointF& p);
 
+        bool needsRedraw();
+
     protected:
         void run();
 
@@ -88,10 +90,11 @@ class CMap : public QThread
     private:
         static const qreal scales[];
 
-        void zoom(int idx);
-
         /// the mutex to serialize access
         QMutex mutex;
+
+        void zoom(int idx);
+
         /// internal needs redraw flag
         bool intNeedsRedraw;
 
@@ -134,6 +137,7 @@ class CMap : public QThread
         QPointF ref4;
 
         QListWidget * listWidgetMaps;
+
 };
 
 #endif //CMAP_H

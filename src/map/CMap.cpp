@@ -89,6 +89,9 @@ CMap::CMap(CCanvas *parent)
 
 CMap::~CMap()
 {
+    pj_free(pjtar);
+    pj_free(pjsrc);
+
     CMainWindow::self().delMapList(listWidgetMaps);
 }
 
@@ -120,6 +123,15 @@ void CMap::resize(const QSize& size)
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     mutex.unlock(); // --------- stop serialize with thread
+}
+
+bool CMap::needsRedraw()
+{
+    bool res = false;
+    mutex.lock();
+    res = intNeedsRedraw;
+    mutex.unlock();
+    return res;
 }
 
 void CMap::zoom(bool in, bool &needsRedraw)

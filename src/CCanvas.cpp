@@ -20,6 +20,7 @@
 #include "CCanvas.h"
 #include "GeoMath.h"
 #include "map/CMap.h"
+#include "map/CGrid.h"
 #include "units/IUnit.h"
 
 #include <QtGui>
@@ -43,7 +44,8 @@ CCanvas::CCanvas(QWidget *parent)
 
     setMouseTracking(true);
 
-    map = new CMap(this);
+    map     = new CMap(this);
+    grid    = new CGrid(map);
 }
 
 CCanvas::~CCanvas()
@@ -81,11 +83,11 @@ void CCanvas::paintEvent(QPaintEvent * e)
     }
 
     const QRectF& r = e->rect();
-    QPointF posFocus(12.10, 49.01);
+    QPointF posFocus(12.00, 49.00);
 
     QPainter p;
     p.begin(this);
-    p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, true);
+    USE_ANTI_ALIASING(p,true);
 
     // fill the backbround with default pattern
     p.fillRect(rect(), QBrush(Qt::darkGreen, Qt::CrossPattern));
@@ -99,6 +101,8 @@ void CCanvas::paintEvent(QPaintEvent * e)
     // restore coordinate system to default
     p.resetTransform();
     // ----- start to draw static content -----
+
+    grid->draw(p, rect());
 
     drawScale(p);
 

@@ -20,9 +20,17 @@
 #define CCANVAS_H
 
 #include <QWidget>
+#include <QPainter>
 class CMap;
 class QSettings;
 class QPointF;
+class CGrid;
+
+inline  void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
+{
+    p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
+}
+
 
 class CCanvas : public QWidget
 {
@@ -57,6 +65,8 @@ class CCanvas : public QWidget
         bool needsRedraw;
         /// the map object attached to this canvas
         CMap * map;
+
+        CGrid * grid;
 
 };
 

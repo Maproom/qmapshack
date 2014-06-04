@@ -21,11 +21,14 @@ set( SRCS
     map/CMapList.cpp
     map/CMapRMAP.cpp
     map/CMapJNX.cpp
-    map/CGrid.cpp
     units/IUnit.cpp
     units/CUnitImperial.cpp
     units/CUnitMetric.cpp
     units/CUnitNautic.cpp
+    grid/CGrid.cpp
+    grid/CGridSetup.cpp
+    grid/CProjWizard.cpp
+    grid/mitab.cpp
 )
 
 set( HDRS
@@ -39,18 +42,23 @@ set( HDRS
     map/CMap.h
     map/CMapItem.h
     map/CMapList.h
-    map/CGrid.h
     map/CMapRMAP.h
     map/CMapJNX.h
     units/IUnit.h
     units/CUnitImperial.h
     units/CUnitMetric.h
     units/CUnitNautic.h
+    grid/CGrid.h
+    grid/CGridSetup.h
+    grid/CProjWizard.h
+    grid/mitab.h
 )
 
 set( UIS
     IMainWindow.ui
     map/IMapList.ui
+    grid/IGridSetup.ui
+    grid/IProjWizard.ui
 )
 
 set( RCS

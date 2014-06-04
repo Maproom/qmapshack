@@ -38,10 +38,12 @@ class CGrid : public QObject
 
         void draw(QPainter& p, const QRect &rect);
 
+        void setProjAndColor(const QString& proj, const QColor& c);
+
         void convertPos2Str(const QPointF& pos, QString& info);
 
     private:
-        void setProjAndColor(const QString& proj, const QColor& c);
+        friend class CGridSetup;
         void findGridSpace(double min, double max, double& xSpace, double& ySpace);
         bool calcIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double& x, double& y);
 

@@ -46,7 +46,9 @@ class CCanvas : public QWidget
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font);
         static void drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color);
 
-        void getPositionAsString(const QPointF& pos, QString& str);
+        void convertGridPos2Str(const QPointF& pos, QString& str);
+
+        void setupGrid();
 
     signals:
         void sigMousePosition(const QPointF& pos);
@@ -61,6 +63,7 @@ class CCanvas : public QWidget
 
     private slots:
         void slotTriggerCompleteUpdate();
+
 
     private:
         void drawScale(QPainter& p);

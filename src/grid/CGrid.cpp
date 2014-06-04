@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CGrid.h"
+#include "grid/CGrid.h"
 #include "CSettings.h"
 #include "CCanvas.h"
 #include "CMainWindow.h"
@@ -68,7 +68,8 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info)
 
 void CGrid::saveConfig(QSettings& cfg)
 {
-
+    cfg.setValue("grid/color", color.name());
+    cfg.setValue("grid/proj", projstr);
 }
 
 void CGrid::loadConfig(QSettings& cfg)

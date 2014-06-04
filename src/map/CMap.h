@@ -88,6 +88,8 @@ class CMap : public QThread
          */
         bool needsRedraw();
 
+        QString getProjection();
+
         void emitSigCanvasUpdate();
 
     signals:

@@ -20,7 +20,8 @@
 #include "CCanvas.h"
 #include "GeoMath.h"
 #include "map/CMap.h"
-#include "map/CGrid.h"
+#include "grid/CGrid.h"
+#include "grid/CGridSetup.h"
 #include "units/IUnit.h"
 
 #include <QtGui>
@@ -58,11 +59,13 @@ CCanvas::~CCanvas()
 void CCanvas::saveConfig(QSettings& cfg)
 {
     map->saveConfig(cfg);
+    grid->saveConfig(cfg);
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
 {
     map->loadConfig(cfg);
+    grid->loadConfig(cfg);
 }
 
 void CCanvas::resizeEvent(QResizeEvent * e)
@@ -270,7 +273,14 @@ void CCanvas::slotTriggerCompleteUpdate()
     update();
 }
 
-void CCanvas::getPositionAsString(const QPointF& pos, QString& str)
+void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str)
 {
     grid->convertPos2Str(pos, str);
+}
+
+void CCanvas::setupGrid()
+{
+    CGridSetup dlg(grid, map);
+    dlg.exec();
+    update();
 }

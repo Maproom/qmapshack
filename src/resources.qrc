@@ -7,6 +7,12 @@
         <file>icons/16x16/jnx.png</file>
         <file>icons/16x16/rmap.png</file>
         <file>icons/16x16/grid.png</file>
+        <file>icons/16x16/redGlow.png</file>
+        <file>icons/16x16/gridSetup.png</file>
+        <file>icons/16x16/fromMap.png</file>
+        <file>icons/16x16/wizzard.png</file>
+        <file>icons/16x16/selectColor.png</file>
+        <file>icons/16x16/reset.png</file>
         <file>icons/32x32/map.png</file>
         <file>icons/32x32/addCanvas.png</file>
         <file>icons/32x32/scale.png</file>
@@ -17,6 +23,11 @@
         <file>icons/32x32/check.png</file>
         <file>icons/32x32/to-top.png</file>
         <file>icons/32x32/grid.png</file>
-        <file>icons/16x16/redGlow.png</file>
+        <file>icons/32x32/gridSetup.png</file>
+        <file>icons/32x32/wizzard.png</file>
+        <file>icons/32x32/selectColor.png</file>
+        <file>icons/32x32/fromMap.png</file>
+        <file>icons/32x32/reset.png</file>
+        <file>icons/48x48/gridSetup.png</file>
     </qresource>
 </RCC>

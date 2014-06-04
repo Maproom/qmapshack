@@ -48,6 +48,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotMousePosition(const QPointF& pos);
         void slotUpdateCurrentWidget();
         void slotSetupMapFont();
+        void slotSetupGrid();
 
     private:
         friend int main(int argc, char ** argv);

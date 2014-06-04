@@ -103,6 +103,15 @@ void CMap::emitSigCanvasUpdate()
     emit sigCanvasUpdate();
 }
 
+QString CMap::getProjection()
+{
+    if(pjsrc == 0)
+    {
+        return QString::Null();
+    }
+    return pj_get_def(pjsrc,0);
+}
+
 void CMap::saveConfig(QSettings& cfg)
 {
     saveActiveMapsList(cfg);

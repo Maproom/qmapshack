@@ -68,7 +68,9 @@
     <addaction name="separator"/>
     <addaction name="actionShowScale"/>
     <addaction name="actionShowGrid"/>
+    <addaction name="separator"/>
     <addaction name="actionSetupMapFont"/>
+    <addaction name="actionSetupGrid"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -154,6 +156,15 @@
    </property>
    <property name="text">
     <string>Show Grid</string>
+   </property>
+  </action>
+  <action name="actionSetupGrid">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/gridSetup.png</normaloff>:/icons/32x32/gridSetup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Grid</string>
    </property>
   </action>
  </widget>

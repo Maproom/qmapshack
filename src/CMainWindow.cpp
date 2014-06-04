@@ -61,6 +61,7 @@ CMainWindow::CMainWindow()
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
+    connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
@@ -206,7 +207,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos)
         {
             QString str;
             lblPosGrid->show();
-            canvas->getPositionAsString(pos, str);
+            canvas->convertGridPos2Str(pos, str);
             lblPosGrid->setText(str);
         }
     }
@@ -240,4 +241,14 @@ void CMainWindow::slotSetupMapFont()
         }
     }
 
+}
+
+void CMainWindow::slotSetupGrid()
+{
+    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    if(canvas == 0)
+    {
+        return;
+    }
+    canvas->setupGrid();
 }

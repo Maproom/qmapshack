@@ -55,7 +55,9 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
 
         static CMainWindow * pSelf;
 
-        QLabel * lblPosition;
+        /// status bar label
+        QLabel * lblPosWGS84;
+        QLabel * lblPosGrid;
 
         QFont mapFont;
 };

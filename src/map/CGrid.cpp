@@ -21,6 +21,7 @@
 #include "CCanvas.h"
 #include "CMainWindow.h"
 #include "map/CMap.h"
+#include "GeoMath.h"
 
 #include <QtGui>
 
@@ -40,6 +41,29 @@ CGrid::CGrid(CMap *map)
 CGrid::~CGrid()
 {
 
+}
+
+void CGrid::convertPos2Str(const QPointF& pos, QString& info)
+{
+    if(pjGrid == 0)
+    {
+        return;
+    }
+
+    QPointF pt = pos * DEG_TO_RAD;
+    pj_transform(pjWGS84, pjGrid, 1, 0, &pt.rx(), &pt.ry(), 0);
+
+    if(pj_is_latlong(pjGrid))
+    {
+        QString str;
+        pt *= RAD_TO_DEG;
+        GPS_Math_Deg_To_Str(pt.x(), pt.y(), str);
+        info += tr("[Grid: %1] ").arg(str);
+    }
+    else
+    {
+        info += tr("[Grid: N %1m, E %2m] ").arg(pt.x(),0,'f',0).arg(pt.y(),0,'f',0);
+    }
 }
 
 void CGrid::saveConfig(QSettings& cfg)

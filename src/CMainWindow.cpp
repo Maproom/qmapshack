@@ -84,8 +84,10 @@ CMainWindow::CMainWindow()
     cfg.endGroup(); // Canvas
 
     QStatusBar * status = statusBar();
-    lblPosition = new QLabel(status);
-    status->addPermanentWidget(lblPosition);
+    lblPosWGS84 = new QLabel(status);
+    status->addPermanentWidget(lblPosWGS84);
+    lblPosGrid = new QLabel(status);
+    status->addPermanentWidget(lblPosGrid);
 
     menuWindow->addAction(dockMaps->toggleViewAction());
 }
@@ -195,7 +197,23 @@ void CMainWindow::slotMousePosition(const QPointF& pos)
 {
     QString str;
     GPS_Math_Deg_To_Str(pos.x(), pos.y(), str);
-    lblPosition->setText(str);
+    lblPosWGS84->setText(str);
+
+    if(actionShowGrid->isChecked())
+    {
+        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+        if(canvas)
+        {
+            QString str;
+            lblPosGrid->show();
+            canvas->getPositionAsString(pos, str);
+            lblPosGrid->setText(str);
+        }
+    }
+    else
+    {
+        lblPosGrid->hide();
+    }
 }
 
 void CMainWindow::slotUpdateCurrentWidget()

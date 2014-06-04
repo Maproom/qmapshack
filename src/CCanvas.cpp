@@ -270,3 +270,7 @@ void CCanvas::slotTriggerCompleteUpdate()
     update();
 }
 
+void CCanvas::getPositionAsString(const QPointF& pos, QString& str)
+{
+    grid->convertPos2Str(pos, str);
+}

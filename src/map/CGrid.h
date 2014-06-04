@@ -38,6 +38,8 @@ class CGrid : public QObject
 
         void draw(QPainter& p, const QRect &rect);
 
+        void convertPos2Str(const QPointF& pos, QString& info);
+
     private:
         void setProjAndColor(const QString& proj, const QColor& c);
         void findGridSpace(double min, double max, double& xSpace, double& ySpace);

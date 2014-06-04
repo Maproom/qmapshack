@@ -299,7 +299,7 @@ void CMapJNX::draw(buffer_t& buf)
 
     // ----- start drawing -----
     QPainter p(&buf.image);
-    p.setRenderHints(QPainter::Antialiasing|QPainter::SmoothPixmapTransform, true);
+    USE_ANTI_ALIASING(p,true);
 
     foreach(const file_t& mapFile, files)
     {

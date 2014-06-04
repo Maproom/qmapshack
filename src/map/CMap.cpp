@@ -115,11 +115,15 @@ QString CMap::getProjection()
 void CMap::saveConfig(QSettings& cfg)
 {
     saveActiveMapsList(cfg);
+    cfg.setValue("map/zoomIndex", zoomIndex);
+
 }
 
 void CMap::loadConfig(QSettings& cfg)
 {
     restoreActiveMapsList(cfg);
+    int idx = cfg.value("map/zoomIndex",zoomIndex).toInt();
+    zoom(idx);
 }
 
 void CMap::buildMapList()

@@ -30,6 +30,7 @@
 
 CCanvas::CCanvas(QWidget *parent)
     : QWidget(parent)
+    , posFocus(12.00, 49.00)
 {
     int count = 1;
     while(1)
@@ -60,12 +61,14 @@ void CCanvas::saveConfig(QSettings& cfg)
 {
     map->saveConfig(cfg);
     grid->saveConfig(cfg);
+    cfg.setValue("posFocus", posFocus);
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
 {
     map->loadConfig(cfg);
     grid->loadConfig(cfg);
+    posFocus = cfg.value("posFocus", posFocus).toPointF();
 }
 
 void CCanvas::resizeEvent(QResizeEvent * e)
@@ -87,8 +90,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
         return;
     }
 
-    const QRectF& r = e->rect();
-    QPointF posFocus(12.00, 49.00);
+    const QRectF& r = e->rect();    
 
     QPainter p;
     p.begin(this);
@@ -118,6 +120,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
 void CCanvas::mousePressEvent(QMouseEvent * e)
 {
+
 
     QWidget::mousePressEvent(e);
 }

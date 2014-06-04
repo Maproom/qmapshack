@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>137</height>
+    <height>157</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,6 +27,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QToolButton" name="toolRestoreDefault">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
          <property name="toolTip">
           <string>restore default</string>
          </property>
@@ -37,10 +43,22 @@
           <iconset resource="../resources.qrc">
            <normaloff>:/icons/32x32/reset.png</normaloff>:/icons/32x32/reset.png</iconset>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QToolButton" name="toolFromMap">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
          <property name="toolTip">
           <string>Get projection from current map.</string>
          </property>
@@ -51,10 +69,22 @@
           <iconset resource="../resources.qrc">
            <normaloff>:/icons/32x32/fromMap.png</normaloff>:/icons/32x32/fromMap.png</iconset>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QToolButton" name="toolProjWizzard">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
          <property name="toolTip">
           <string>projection wizzard</string>
          </property>
@@ -64,6 +94,12 @@
          <property name="icon">
           <iconset resource="../resources.qrc">
            <normaloff>:/icons/32x32/wizzard.png</normaloff>:/icons/32x32/wizzard.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -97,6 +133,12 @@
      </item>
      <item row="1" column="4">
       <widget class="QToolButton" name="toolGridColor">
+       <property name="minimumSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
        <property name="toolTip">
         <string>setup grid color</string>
        </property>
@@ -105,7 +147,13 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/16x16/selectColor.png</normaloff>:/icons/16x16/selectColor.png</iconset>
+         <normaloff>:/icons/32x32/selectColor.png</normaloff>:/icons/32x32/selectColor.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
        </property>
       </widget>
      </item>

@@ -72,8 +72,10 @@ class CCanvas : public QWidget
         bool needsRedraw;
         /// the map object attached to this canvas
         CMap * map;
-
+        /// the grid attached to this canvas
         CGrid * grid;
+
+        QPointF posFocus;
 
 };
 

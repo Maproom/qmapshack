@@ -37,6 +37,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void delMapList(CMapList *list);
 
         bool isScaleVisible();
+        bool isGridVisible();
         const QFont& getMapFont(){return mapFont;}
 
     private slots:
@@ -45,7 +46,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotCurrentTabCanvas(int i);
         void slotCurrentTabMaps(int i);
         void slotMousePosition(const QPointF& pos);
-        void slotSetupScale();
+        void slotUpdateCurrentWidget();
         void slotSetupMapFont();
 
     private:

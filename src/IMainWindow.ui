@@ -67,6 +67,7 @@
     <addaction name="actionAddCanvas"/>
     <addaction name="separator"/>
     <addaction name="actionShowScale"/>
+    <addaction name="actionShowGrid"/>
     <addaction name="actionSetupMapFont"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
@@ -141,6 +142,18 @@
    </property>
    <property name="text">
     <string>Setup Map Font</string>
+   </property>
+  </action>
+  <action name="actionShowGrid">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/grid.png</normaloff>:/icons/32x32/grid.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Grid</string>
    </property>
   </action>
  </widget>

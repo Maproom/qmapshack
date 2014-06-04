@@ -58,14 +58,15 @@ CMainWindow::CMainWindow()
 
 
     connect(actionAddCanvas, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
-    connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotSetupScale()));
+    connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
+    connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
 
     cfg.beginGroup("Canvas");
-    int N = cfg.value("N").toInt();
+    int N = cfg.value("numberOfCanvas").toInt();
     for(int i = 0; i < N; i++)
     {
         CCanvas * canvas = new CCanvas(tabWidget);
@@ -78,6 +79,7 @@ CMainWindow::CMainWindow()
     }
 
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
+    actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     cfg.endGroup(); // Canvas
 
@@ -110,8 +112,9 @@ CMainWindow::~CMainWindow()
         cfg.endGroup();
     }
 
-    cfg.setValue("N", cnt);
+    cfg.setValue("numberOfCanvas", cnt);
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
+    cfg.setValue("isGridVisible", actionShowGrid->isChecked());
     cfg.setValue("mapFont", mapFont);
 
     cfg.endGroup(); // Canvas
@@ -121,6 +124,11 @@ CMainWindow::~CMainWindow()
 bool CMainWindow::isScaleVisible()
 {
     return actionShowScale->isChecked();
+}
+
+bool CMainWindow::isGridVisible()
+{
+    return actionShowGrid->isChecked();
 }
 
 void CMainWindow::addMapList(CMapList * list, const QString &name)
@@ -190,7 +198,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos)
     lblPosition->setText(str);
 }
 
-void CMainWindow::slotSetupScale()
+void CMainWindow::slotUpdateCurrentWidget()
 {
     QWidget * w = tabWidget->currentWidget();
     if(w)
@@ -198,6 +206,7 @@ void CMainWindow::slotSetupScale()
         w->update();
     }
 }
+
 
 void CMainWindow::slotSetupMapFont()
 {

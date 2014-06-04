@@ -175,7 +175,7 @@ struct val_t
 
 void CGrid::draw(QPainter& p, const QRect& rect)
 {
-    if(pjWGS84 == 0 || pjGrid == 0 /*|| !showGrid*/) return;
+    if(pjWGS84 == 0 || pjGrid == 0 || !CMainWindow::self().isGridVisible()) return;
 
     QPointF topLeft     = rect.topLeft();
     QPointF topRight    = rect.topRight();

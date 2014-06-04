@@ -23,6 +23,7 @@
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "units/IUnit.h"
+#include "mouse/CMouseNormal.h"
 
 #include <QtGui>
 
@@ -48,6 +49,7 @@ CCanvas::CCanvas(QWidget *parent)
 
     map     = new CMap(this);
     grid    = new CGrid(map);
+    mouse   = new CMouseNormal(this);
 
     connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
 }
@@ -120,24 +122,23 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
 void CCanvas::mousePressEvent(QMouseEvent * e)
 {
-
-
+    mouse->mousePressEvent(e);
     QWidget::mousePressEvent(e);
 }
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)
 {
-    QString str;
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
     emit sigMousePosition(pos * RAD_TO_DEG);
 
+    mouse->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
 }
 
 void CCanvas::mouseReleaseEvent(QMouseEvent *e)
 {
-
+    mouse->mouseReleaseEvent(e);
     QWidget::mouseReleaseEvent(e);
 }
 

@@ -29,6 +29,8 @@ set( SRCS
     grid/CGridSetup.cpp
     grid/CProjWizard.cpp
     grid/mitab.cpp
+    mouse/IMouse.cpp
+    mouse/CMouseNormal.cpp
 )
 
 set( HDRS
@@ -52,6 +54,8 @@ set( HDRS
     grid/CGridSetup.h
     grid/CProjWizard.h
     grid/mitab.h
+    mouse/IMouse.h
+    mouse/CMouseNormal.h
 )
 
 set( UIS

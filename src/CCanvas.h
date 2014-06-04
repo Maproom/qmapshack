@@ -25,6 +25,7 @@ class CMap;
 class QSettings;
 class QPointF;
 class CGrid;
+class IMouse;
 
 inline  void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 {
@@ -76,6 +77,8 @@ class CCanvas : public QWidget
         CGrid * grid;
 
         QPointF posFocus;
+
+        IMouse * mouse;
 
 };
 

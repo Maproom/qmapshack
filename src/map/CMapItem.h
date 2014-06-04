@@ -64,6 +64,8 @@ class CMapItem : public QListWidgetItem
          */
         void moveToEndOfActive();
 
+        void updateIcon();
+
 
     private:
         friend class CMap;

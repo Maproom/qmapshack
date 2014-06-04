@@ -103,7 +103,17 @@ class CMap : public QThread
 
         void zoom(int idx);
 
-        void registerListWidgetForMaps();
+        void buildMapList();
+
+        /**
+           @brief Save list of active maps to configuration file
+         */
+        void saveActiveMapsList(QSettings& cfg);
+        /**
+           @brief Restore list of active maps from configuration file
+         */
+        void restoreActiveMapsList(QSettings& cfg);
+
 
         /// the mutex to serialize access
         QMutex mutex;

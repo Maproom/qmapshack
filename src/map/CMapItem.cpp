@@ -36,6 +36,33 @@ CMapItem::~CMapItem()
 
 }
 
+void CMapItem::updateIcon()
+{
+    if(filenames.isEmpty())
+    {
+        return;
+    }
+
+    QPixmap img("://icons/32x32/map.png");
+    QFileInfo fi(filenames.first());
+    if(fi.suffix().toLower() == "rmap")
+    {
+        img = QPixmap("://icons/32x32/rmap.png");
+    }
+    else if(fi.suffix().toLower() == "jnx")
+    {
+        img = QPixmap("://icons/32x32/jnx.png");
+    }
+
+    if(isActivated())
+    {
+        QPainter p(&img);
+        p.drawPixmap(0,0,QPixmap("://icons/16x16/redGlow.png"));
+    }
+
+    setIcon(QIcon(img));
+}
+
 bool CMapItem::isActivated()
 {
     QMutexLocker lock(&mutexActiveMaps);
@@ -62,7 +89,7 @@ void CMapItem::deactivate()
     qDeleteAll(files);
     files.clear();
 
-    setIcon(QIcon("://icons/32x32/map.png"));
+    updateIcon();
     moveToEndOfActive();
 }
 
@@ -85,12 +112,10 @@ bool CMapItem::activate()
         if(fi.suffix().toLower() == "rmap")
         {
             m = new CMapRMAP(filename, map);
-            setIcon(QIcon("://icons/32x32/rmap.png"));
         }
         else if(fi.suffix().toLower() == "jnx")
         {
             m = new CMapJNX(filename, map);
-            setIcon(QIcon("://icons/32x32/jnx.png"));
         }
 
         // if map is actived sucessfully add to the list of map files
@@ -103,6 +128,7 @@ bool CMapItem::activate()
         {
             qDeleteAll(files);
             files.clear();
+            updateIcon();
             return false;
         }
     }
@@ -111,7 +137,7 @@ bool CMapItem::activate()
     {
         return false;
     }
-    setIcon(QIcon("://icons/32x32/map-active.png"));
+    updateIcon();
     moveToEndOfActive();
     return true;
 }
@@ -147,7 +173,5 @@ void CMapItem::moveToEndOfActive()
     w->insertItem(row, this);
 
 //    CMapDB::self().saveActiveMapsList();
-    // Changeing the order in the list will
-    // change draw order. Update canvas.
     map->emitSigCanvasUpdate();
 }

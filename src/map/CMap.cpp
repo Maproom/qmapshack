@@ -86,7 +86,7 @@ CMap::CMap(CCanvas *parent)
     resize(canvas->size());
     connect(this, SIGNAL(finished()), canvas, SLOT(update()));
 
-    registerListWidgetForMaps();
+    buildMapList();
 
 }
 
@@ -105,17 +105,15 @@ void CMap::emitSigCanvasUpdate()
 
 void CMap::saveConfig(QSettings& cfg)
 {
-    QStringList keys;
-
-    cfg.setValue("map/active", keys);
+    saveActiveMapsList(cfg);
 }
 
 void CMap::loadConfig(QSettings& cfg)
 {
-
+    restoreActiveMapsList(cfg);
 }
 
-void CMap::registerListWidgetForMaps()
+void CMap::buildMapList()
 {
     QDir pathMaps("./");
 
@@ -123,7 +121,7 @@ void CMap::registerListWidgetForMaps()
     QStringList filters;
     filters << "*rmap" << "*jnx";
 
-    CMapItem::mutexActiveMaps.lock();
+    QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
     // find available maps
     foreach(const QString& filename, pathMaps.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
@@ -135,16 +133,7 @@ void CMap::registerListWidgetForMaps()
         item->setText(fi.baseName());
         item->filenames  << pathMaps.absoluteFilePath(filename);
         item->setSizeHint(QSize(0,48));
-
-        if(fi.suffix().toLower() == "rmap")
-        {
-            item->setIcon(QIcon("://icons/32x32/rmap.png"));
-        }
-        else if(fi.suffix().toLower() == "jnx")
-        {
-            item->setIcon(QIcon("://icons/32x32/jnx.png"));
-        }
-
+        item->updateIcon();
 
         QFile f(pathMaps.absoluteFilePath(filename));
         f.open(QIODevice::ReadOnly);
@@ -153,11 +142,45 @@ void CMap::registerListWidgetForMaps()
         item->key = md5.result().toHex();
         f.close();
     }
-    CMapItem::mutexActiveMaps.unlock();
-
-//    restoreActiveMapsList();
 }
 
+void CMap::saveActiveMapsList(QSettings &cfg)
+{
+    QStringList keys;
+    QMutexLocker lock(&CMapItem::mutexActiveMaps);
+
+    for(int i = 0; i < mapList->count(); i++)
+    {
+        CMapItem * item = mapList->item(i);
+        if(item && !item->files.isEmpty())
+        {
+            keys << item->key;
+        }
+    }
+
+    cfg.setValue("map/active", keys);
+
+}
+
+void CMap::restoreActiveMapsList(QSettings &cfg)
+{
+    QStringList keys = cfg.value("map/active", "").toStringList();
+    QMutexLocker lock(&CMapItem::mutexActiveMaps);
+
+    foreach(const QString& key, keys)
+    {
+        for(int i = 0; i < mapList->count(); i++)
+        {
+            CMapItem * item = mapList->item(i);
+
+            if(item && item->key == key)
+            {
+                item->activate();
+                break;
+            }
+        }
+    }
+}
 
 void CMap::resize(const QSize& size)
 {

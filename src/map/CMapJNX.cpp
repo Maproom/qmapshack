@@ -314,7 +314,7 @@ void CMapJNX::draw(buffer_t& buf)
         }
 
 
-        qint32 level = scale2level(bufferScale.x()/10, mapFile);
+        qint32 level = scale2level(bufferScale.x()/5, mapFile);
 
         if(level < 0)
         {

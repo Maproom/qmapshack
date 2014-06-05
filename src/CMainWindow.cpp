@@ -82,6 +82,7 @@ CMainWindow::CMainWindow()
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
+    tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
     cfg.endGroup(); // Canvas
 
     QStatusBar * status = statusBar();
@@ -115,6 +116,7 @@ CMainWindow::~CMainWindow()
         cfg.endGroup();
     }
 
+    cfg.setValue("visibleCanvas", tabWidget->currentIndex());
     cfg.setValue("numberOfCanvas", cnt);
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());

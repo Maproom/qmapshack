@@ -51,7 +51,8 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         QPoint delta = pos - lastPos;
         canvas->moveMap(delta);
         lastPos = pos;
-        canvas->update();
+        //canvas->update();
+        canvas->slotTriggerCompleteUpdate();
     }
 }
 

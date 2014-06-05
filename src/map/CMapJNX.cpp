@@ -308,6 +308,12 @@ void CMapJNX::draw(buffer_t& buf)
             continue;
         }
 
+        if(map->needsRedraw())
+        {
+            break;
+        }
+
+
         qint32 level = scale2level(bufferScale.x()/10, mapFile);
 
         if(level < 0)
@@ -371,6 +377,12 @@ void CMapJNX::draw(buffer_t& buf)
         const quint32 M = tiles.size();
         for(quint32 m = 0; m < M; m++)
         {
+
+            if(map->needsRedraw())
+            {
+                break;
+            }
+
             const tile_t& tile = tiles[m];
 
             if(viewport.intersects(tile.area))

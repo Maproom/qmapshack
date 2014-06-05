@@ -51,6 +51,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         QPoint delta = pos - lastPos;
         canvas->moveMap(delta);
         lastPos = pos;
+        canvas->update();
     }
 }
 
@@ -58,6 +59,10 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        moveMap = false;
+        if(moveMap)
+        {
+            moveMap = false;
+            canvas->slotTriggerCompleteUpdate();
+        }
     }
 }

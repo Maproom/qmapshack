@@ -144,7 +144,17 @@ void CCanvas::mouseReleaseEvent(QMouseEvent *e)
 
 void CCanvas::wheelEvent(QWheelEvent * e)
 {
+    QPointF pos = e->posF();
+    QPointF pt1 = pos;
+    map->convertPx2Rad(pt1);
     map->zoom(/*CResources::self().flipMouseWheel()*/ 0 ? (e->delta() > 0) : (e->delta() < 0), needsRedraw);
+    map->convertRad2Px(pt1);
+
+    map->convertRad2Px(posFocus);
+    posFocus -= (pos - pt1);
+    map->convertPx2Rad(posFocus);
+
+
     update();
 }
 
@@ -295,12 +305,11 @@ void CCanvas::slotTriggerCompleteUpdate()
     update();
 }
 
-void CCanvas::moveMap(const QPoint& delta)
+void CCanvas::moveMap(const QPointF& delta)
 {
     map->convertRad2Px(posFocus);
     posFocus -= delta;
     map->convertPx2Rad(posFocus);
-    slotTriggerCompleteUpdate();
 }
 
 void CCanvas::setupGrid()

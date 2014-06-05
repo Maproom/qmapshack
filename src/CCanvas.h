@@ -46,7 +46,7 @@ class CCanvas : public QWidget
         void setupGrid();
         void convertGridPos2Str(const QPointF& pos, QString& str);
 
-        void moveMap(const QPoint& delta);
+        void moveMap(const QPointF &delta);
 
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color);
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font);
@@ -54,6 +54,9 @@ class CCanvas : public QWidget
 
     signals:
         void sigMousePosition(const QPointF& pos);
+
+    public slots:
+        void slotTriggerCompleteUpdate();
 
     protected:
         void resizeEvent(QResizeEvent * e);
@@ -64,10 +67,6 @@ class CCanvas : public QWidget
         void wheelEvent(QWheelEvent * e);
         void enterEvent(QEvent * e);
         void leaveEvent(QEvent * e);
-
-
-    private slots:
-        void slotTriggerCompleteUpdate();
 
 
     private:

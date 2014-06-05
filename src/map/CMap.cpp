@@ -206,8 +206,10 @@ void CMap::resize(const QSize& size)
     viewHeight  = size.height();
     center      = QPointF(viewWidth/2.0, viewHeight/2.0);
     int a       = sqrt(viewWidth*viewWidth + viewHeight*viewHeight);
-    bufWidth    = a + 100;
-    bufHeight   = a + 100;
+//    bufWidth    = a + 100;
+//    bufHeight   = a + 100;
+    bufWidth    = viewWidth  + 100;
+    bufHeight   = viewHeight + 100;
 
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
@@ -303,7 +305,7 @@ void CMap::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r
     if(pjsrc == 0) return;
 
     // convert global coordinate of focus into point of map
-    focus = f * DEG_TO_RAD;
+    focus = f;
 
     QPointF f1 = focus;
     convertRad2M(f1);

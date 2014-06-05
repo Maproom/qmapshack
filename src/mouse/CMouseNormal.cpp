@@ -16,12 +16,16 @@
 
 **********************************************************************************************/
 
-#include "CMouseNormal.h"
+#include "mouse/CMouseNormal.h"
+#include "CCanvas.h"
 
-CMouseNormal::CMouseNormal(QObject *parent)
-    : IMouse(parent)
+#include <QtGui>
+
+CMouseNormal::CMouseNormal(CCanvas *canvas)
+    : IMouse(canvas)
+    , moveMap(false)
 {
-
+    cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
 }
 
 CMouseNormal::~CMouseNormal()
@@ -29,3 +33,31 @@ CMouseNormal::~CMouseNormal()
 
 }
 
+void CMouseNormal::mousePressEvent(QMouseEvent * e)
+{
+    if(e->button() == Qt::LeftButton)
+    {
+        lastPos = e->pos();
+        moveMap = true;
+    }
+}
+
+void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
+{
+    const QPoint pos = e->pos();
+
+    if(moveMap)
+    {
+        QPoint delta = pos - lastPos;
+        canvas->moveMap(delta);
+        lastPos = pos;
+    }
+}
+
+void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
+{
+    if(e->button() == Qt::LeftButton)
+    {
+        moveMap = false;
+    }
+}

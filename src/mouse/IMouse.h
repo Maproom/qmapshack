@@ -20,14 +20,16 @@
 #define IMOUSE_H
 
 #include <QObject>
+#include <QCursor>
 
 class QMouseEvent;
+class CCanvas;
 
 class IMouse : public QObject
 {
     Q_OBJECT
     public:
-        IMouse(QObject * parent);
+        IMouse(CCanvas * canvas);
         virtual ~IMouse();
 
         enum type_e
@@ -35,10 +37,22 @@ class IMouse : public QObject
             eNormal
         };
 
-        virtual void mousePressEvent(QMouseEvent * e);
-        virtual void mouseMoveEvent(QMouseEvent * e);
-        virtual void mouseReleaseEvent(QMouseEvent *e);
+        virtual void mousePressEvent(QMouseEvent * e) = 0;
+        virtual void mouseMoveEvent(QMouseEvent * e) = 0;
+        virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
+        /// the current mouse cursor
+        /**
+            Each mouse function is represented by a special cursor. The main
+            widget uses this method to query the current cursor.
+        */
+        operator const QCursor&(){return cursor;}
 
+
+    protected:
+        /// the functions mouse icon
+        QCursor cursor;
+
+        CCanvas * canvas;
 
 };
 

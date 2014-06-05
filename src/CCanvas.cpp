@@ -31,7 +31,7 @@
 
 CCanvas::CCanvas(QWidget *parent)
     : QWidget(parent)
-    , posFocus(12.00, 49.00)
+    , posFocus(12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD)
 {
     int count = 1;
     while(1)
@@ -92,7 +92,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
         return;
     }
 
-    const QRectF& r = e->rect();    
+    const QRectF& r = e->rect();
 
     QPainter p;
     p.begin(this);
@@ -146,6 +146,24 @@ void CCanvas::wheelEvent(QWheelEvent * e)
 {
     map->zoom(/*CResources::self().flipMouseWheel()*/ 0 ? (e->delta() > 0) : (e->delta() < 0), needsRedraw);
     update();
+}
+
+
+void CCanvas::enterEvent(QEvent * e)
+{
+    Q_UNUSED(e);
+    QApplication::setOverrideCursor(*mouse);
+
+    setMouseTracking(true);
+}
+
+
+void CCanvas::leaveEvent(QEvent * e)
+{
+    Q_UNUSED(e);
+    QApplication::restoreOverrideCursor();
+
+    setMouseTracking(false);
 }
 
 
@@ -277,9 +295,12 @@ void CCanvas::slotTriggerCompleteUpdate()
     update();
 }
 
-void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str)
+void CCanvas::moveMap(const QPoint& delta)
 {
-    grid->convertPos2Str(pos, str);
+    map->convertRad2Px(posFocus);
+    posFocus -= delta;
+    map->convertPx2Rad(posFocus);
+    slotTriggerCompleteUpdate();
 }
 
 void CCanvas::setupGrid()
@@ -287,4 +308,9 @@ void CCanvas::setupGrid()
     CGridSetup dlg(grid, map);
     dlg.exec();
     update();
+}
+
+void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str)
+{
+    grid->convertPos2Str(pos, str);
 }

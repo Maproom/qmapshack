@@ -16,11 +16,13 @@
 
 **********************************************************************************************/
 
-#include "IMouse.h"
+#include "mouse/IMouse.h"
+#include "CCanvas.h"
 
 
-IMouse::IMouse(QObject *parent)
-    : QObject(parent)
+IMouse::IMouse(CCanvas *canvas)
+    : QObject(canvas)
+    , canvas(canvas)
 {
 
 }
@@ -30,17 +32,3 @@ IMouse::~IMouse()
 
 }
 
-void IMouse::mousePressEvent(QMouseEvent * e)
-{
-
-}
-
-void IMouse::mouseMoveEvent(QMouseEvent * e)
-{
-
-}
-
-void IMouse::mouseReleaseEvent(QMouseEvent *e)
-{
-
-}

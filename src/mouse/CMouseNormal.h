@@ -21,12 +21,23 @@
 
 #include "IMouse.h"
 
+class CCanvas;
+
 class CMouseNormal : public IMouse
 {
-    public:       
-        CMouseNormal(QObject * parent);
+    public:
+        CMouseNormal(CCanvas *canvas);
         virtual ~CMouseNormal();
 
+        void mousePressEvent(QMouseEvent * e);
+        void mouseMoveEvent(QMouseEvent * e);
+        void mouseReleaseEvent(QMouseEvent *e);
+
+
+    protected:
+        bool moveMap;
+
+        QPoint lastPos;
 };
 
 #endif //CMOUSENORMAL_H

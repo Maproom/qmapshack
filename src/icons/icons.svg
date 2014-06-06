@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.50995"
-     inkscape:cx="289.12779"
-     inkscape:cy="854.33005"
+     inkscape:zoom="9.0199"
+     inkscape:cx="297.49011"
+     inkscape:cy="801.89672"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="true"
@@ -39,13 +39,52 @@
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:snap-global="false">
+     inkscape:snap-global="true">
     <inkscape:grid
        type="xygrid"
        id="grid2985" />
   </sodipodi:namedview>
   <defs
      id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path4041"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mstart"
+       style="overflow:visible">
+      <path
+         id="path4038"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.4) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path4289"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
     <linearGradient
        id="linearGradient3953">
       <stop
@@ -1381,10 +1420,7 @@
          sodipodi:role="line">JNX</tspan></text>
   </g>
   <g
-     id="g3253"
-     inkscape:export-filename="/home/oeichler/dateien/cpp/MapRoom/src/icons/16x16/grid.png"
-     inkscape:export-xdpi="40.639996"
-     inkscape:export-ydpi="40.639996">
+     id="g4854">
     <rect
        y="131.10234"
        x="301.1319"
@@ -1396,17 +1432,17 @@
        inkscape:connector-curvature="0"
        id="path3239"
        d="m 308.26772,134.72074 0,28.52797"
-       style="fill:none;stroke:#000080;stroke-width:1.07246232000000008px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:none;stroke:#000080;stroke-width:1.07246232px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
        id="path3241"
        d="m 318.89764,134.71589 0,28.28767"
-       style="fill:none;stroke:#000080;stroke-width:1.06793570999999998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:none;stroke:#000080;stroke-width:1.06793571px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
        id="path3243"
        d="m 329.52756,134.71589 0,28.28767"
-       style="fill:none;stroke:#000080;stroke-width:1.06793570999999998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:none;stroke:#000080;stroke-width:1.06793571px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
        id="path3247"
@@ -1911,5 +1947,62 @@
          x="234.46501"
          id="tspan3209-7"
          sodipodi:role="line">MAP</tspan></text>
+  </g>
+  <g
+     id="g4870"
+     transform="translate(-6.7628244,-3.8803091)"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/flipDirection.png"
+     inkscape:export-xdpi="39.476215"
+     inkscape:export-ydpi="39.476215">
+    <g
+       transform="translate(-2.7845774,1.5023257)"
+       id="g4865">
+      <path
+         sodipodi:type="arc"
+         style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path3254"
+         sodipodi:cx="310.203"
+         sodipodi:cy="227.74107"
+         sodipodi:rx="5.3215666"
+         sodipodi:ry="5.0998349"
+         d="m 310.23224,222.64132 c 2.93898,0.0155 5.3084,2.31125 5.29225,5.12777 -0.0162,2.81652 -2.41175,5.08722 -5.35072,5.07174 -2.93898,-0.0155 -5.3084,-2.31126 -5.29225,-5.12778 0.0161,-2.81311 2.40618,-5.08242 5.34162,-5.07177"
+         sodipodi:start="4.7178831"
+         sodipodi:end="10.999359"
+         sodipodi:open="true"
+         transform="matrix(0.86206872,0,0,0.86206879,44.583684,44.033705)" />
+      <path
+         sodipodi:type="arc"
+         style="fill:none;stroke:#000080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="path3256"
+         sodipodi:cx="312.5"
+         sodipodi:cy="234.86218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12.5"
+         d="m 312.56868,222.36237 c 6.90345,0.0379 12.46906,5.66503 12.43113,12.56849 -0.0379,6.90345 -5.66503,12.46906 -12.56849,12.43113 -6.90345,-0.0379 -12.46906,-5.66503 -12.43113,-12.56848 0.0379,-6.89512 5.65195,-12.45733 12.54712,-12.43124"
+         sodipodi:start="4.7178831"
+         sodipodi:end="10.999359"
+         sodipodi:open="true"
+         transform="matrix(0.86206872,0,0,0.86206879,42.603515,37.894819)" />
+      <path
+         sodipodi:type="arc"
+         style="fill:none;stroke:#000080;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
+         id="path4026"
+         sodipodi:cx="312.5"
+         sodipodi:cy="237.36218"
+         sodipodi:rx="17.5"
+         sodipodi:ry="20"
+         d="m 295.89878,231.03509 c 3.05756,-10.4784 12.96882,-16.14008 22.13742,-12.64573 4.99912,1.90527 8.98082,6.28368 10.83934,11.91929"
+         sodipodi:start="3.4634768"
+         sodipodi:end="5.9227552"
+         sodipodi:open="true"
+         transform="matrix(0.97396926,0,0,0.85222317,7.6345963,38.076624)" />
+    </g>
+    <rect
+       y="221.12335"
+       x="290.88278"
+       height="36.47768"
+       width="36.47768"
+       id="rect4863"
+       style="fill:none;stroke:none" />
   </g>
 </svg>

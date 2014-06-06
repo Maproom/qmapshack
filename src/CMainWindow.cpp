@@ -81,6 +81,7 @@ CMainWindow::CMainWindow()
 
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
+    actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
     cfg.endGroup(); // Canvas
@@ -120,6 +121,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("numberOfCanvas", cnt);
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
+    cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("mapFont", mapFont);
 
     cfg.endGroup(); // Canvas
@@ -134,6 +136,11 @@ bool CMainWindow::isScaleVisible()
 bool CMainWindow::isGridVisible()
 {
     return actionShowGrid->isChecked();
+}
+
+bool CMainWindow::flipMouseWheel()
+{
+    return actionFlipMouseWheel->isChecked();
 }
 
 void CMainWindow::addMapList(CMapList * list, const QString &name)

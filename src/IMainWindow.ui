@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -68,6 +68,7 @@
     <addaction name="separator"/>
     <addaction name="actionShowScale"/>
     <addaction name="actionShowGrid"/>
+    <addaction name="actionFlipMouseWheel"/>
     <addaction name="separator"/>
     <addaction name="actionSetupMapFont"/>
     <addaction name="actionSetupGrid"/>
@@ -165,6 +166,18 @@
    </property>
    <property name="text">
     <string>Setup Grid</string>
+   </property>
+  </action>
+  <action name="actionFlipMouseWheel">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/flipDirection.png</normaloff>:/icons/32x32/flipDirection.png</iconset>
+   </property>
+   <property name="text">
+    <string>Flip Mouse Wheel</string>
    </property>
   </action>
  </widget>

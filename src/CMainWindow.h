@@ -38,6 +38,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
 
         bool isScaleVisible();
         bool isGridVisible();
+        bool flipMouseWheel();
         const QFont& getMapFont(){return mapFont;}
 
     private slots:

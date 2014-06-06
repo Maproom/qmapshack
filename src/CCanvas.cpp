@@ -147,7 +147,7 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     QPointF pos = e->posF();
     QPointF pt1 = pos;
     map->convertPx2Rad(pt1);
-    map->zoom(/*CResources::self().flipMouseWheel()*/ 0 ? (e->delta() > 0) : (e->delta() < 0), needsRedraw);
+    map->zoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
     map->convertRad2Px(pt1);
 
     map->convertRad2Px(posFocus);

@@ -20,6 +20,9 @@
 #include "map/CMapItem.h"
 #include "map/CMapJNX.h"
 #include "map/CMapRMAP.h"
+#include "map/CMapIMG.h"
+#include "map/CMapVRT.h"
+#include "map/CMapMAP.h"
 #include <QtGui>
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
@@ -52,6 +55,18 @@ void CMapItem::updateIcon()
     else if(fi.suffix().toLower() == "jnx")
     {
         img = QPixmap("://icons/32x32/mime_jnx.png");
+    }
+    else if(fi.suffix().toLower() == "vrt")
+    {
+        img = QPixmap("://icons/32x32/mime_vrt.png");
+    }
+    else if(fi.suffix().toLower() == "img")
+    {
+        img = QPixmap("://icons/32x32/mime_img.png");
+    }
+    else if(fi.suffix().toLower() == "map")
+    {
+        img = QPixmap("://icons/32x32/mime_map.png");
     }
 
     if(isActivated())
@@ -117,8 +132,20 @@ bool CMapItem::activate()
         {
             m = new CMapJNX(filename, map);
         }
+        else if(fi.suffix().toLower() == "img")
+        {
+            m = new CMapIMG(filename, map);
+        }
+        else if(fi.suffix().toLower() == "vrt")
+        {
+            m = new CMapVRT(filename, map);
+        }
+        else if(fi.suffix().toLower() == "map")
+        {
+            m = new CMapMAP(filename, map);
+        }
 
-        // if map is actived sucessfully add to the list of map files
+        // if map is activated sucessfully add to the list of map files
         // else delete all previous loaded maps and abort
         if(m && m->activated())
         {

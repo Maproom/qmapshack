@@ -19,11 +19,17 @@
 #ifndef CMAPMAP_H
 #define CMAPMAP_H
 
-class CMapMAP
+#include "map/IMap.h"
+
+class CMap;
+
+class CMapMAP : public IMap
 {
     public:
-        CMapMAP();
+        CMapMAP(const QString& filename, CMap *parent);
         virtual ~CMapMAP();
+
+        void draw(buffer_t& buf);
 };
 
 #endif //CMAPMAP_H

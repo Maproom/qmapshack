@@ -16,9 +16,10 @@
 
 **********************************************************************************************/
 
-#include "CMapIMG.h"
+#include "map/CMapIMG.h"
 
-CMapIMG::CMapIMG()
+CMapIMG::CMapIMG(const QString &filename, CMap *parent)
+    : IMap(parent)
 {
 
 }
@@ -28,3 +29,7 @@ CMapIMG::~CMapIMG()
 
 }
 
+void CMapIMG::draw(buffer_t& buf)
+{
+
+}

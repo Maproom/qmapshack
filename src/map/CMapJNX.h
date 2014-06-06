@@ -19,7 +19,7 @@
 #ifndef CMAPJNX_H
 #define CMAPJNX_H
 
-#include "IMap.h"
+#include "map/IMap.h"
 
 class CMap;
 

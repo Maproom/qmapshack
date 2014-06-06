@@ -16,9 +16,11 @@
 
 **********************************************************************************************/
 
-#include "CMapVRT.h"
+#include "map/CMapVRT.h"
+#include "map/CMap.h"
 
-CMapVRT::CMapVRT()
+CMapVRT::CMapVRT(const QString &filename, CMap *parent)
+    : IMap(parent)
 {
 
 }
@@ -28,3 +30,7 @@ CMapVRT::~CMapVRT()
 
 }
 
+void CMapVRT::draw(buffer_t& buf)
+{
+
+}

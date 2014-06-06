@@ -16,9 +16,11 @@
 
 **********************************************************************************************/
 
-#include "CMapMAP.h"
+#include "map/CMapMAP.h"
+#include "map/CMap.h"
 
-CMapMAP::CMapMAP()
+CMapMAP::CMapMAP(const QString &filename, CMap *parent)
+    : IMap(parent)
 {
 
 }
@@ -28,3 +30,7 @@ CMapMAP::~CMapMAP()
 
 }
 
+void CMapMAP::draw(buffer_t& buf)
+{
+
+}

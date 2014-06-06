@@ -162,7 +162,7 @@ void CMap::buildMapList()
 
     QCryptographicHash md5(QCryptographicHash::Md5);
     QStringList filters;
-    filters << "*rmap" << "*jnx";
+    filters << "*rmap" << "*jnx" << "*img" << "*vrt" << "*map";
 
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();

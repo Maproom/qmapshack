@@ -47,11 +47,11 @@ void CMapItem::updateIcon()
     QFileInfo fi(filenames.first());
     if(fi.suffix().toLower() == "rmap")
     {
-        img = QPixmap("://icons/32x32/rmap.png");
+        img = QPixmap("://icons/32x32/mime_rmap.png");
     }
     else if(fi.suffix().toLower() == "jnx")
     {
-        img = QPixmap("://icons/32x32/jnx.png");
+        img = QPixmap("://icons/32x32/mime_jnx.png");
     }
 
     if(isActivated())
@@ -60,7 +60,7 @@ void CMapItem::updateIcon()
         p.drawPixmap(0,0,QPixmap("://icons/16x16/redGlow.png"));
     }
 
-    setIcon(QIcon(img));
+    setIcon(QIcon(img));    
 }
 
 bool CMapItem::isActivated()

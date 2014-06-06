@@ -21,6 +21,9 @@ set( SRCS
     map/CMapList.cpp
     map/CMapRMAP.cpp
     map/CMapJNX.cpp
+    map/CMapIMG.cpp
+    map/CMapMAP.cpp
+    map/CMapVRT.cpp
     units/IUnit.cpp
     units/CUnitImperial.cpp
     units/CUnitMetric.cpp
@@ -46,6 +49,9 @@ set( HDRS
     map/CMapList.h
     map/CMapRMAP.h
     map/CMapJNX.h
+    map/CMapIMG.h
+    map/CMapMAP.h
+    map/CMapVRT.h
     units/IUnit.h
     units/CUnitImperial.h
     units/CUnitMetric.h

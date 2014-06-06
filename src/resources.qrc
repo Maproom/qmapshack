@@ -4,8 +4,11 @@
         <file>icons/16x16/addCanvas.png</file>
         <file>icons/16x16/scale.png</file>
         <file>icons/16x16/font.png</file>
-        <file>icons/16x16/jnx.png</file>
-        <file>icons/16x16/rmap.png</file>
+        <file>icons/16x16/mime_jnx.png</file>
+        <file>icons/16x16/mime_rmap.png</file>
+        <file>icons/16x16/mime_img.png</file>
+        <file>icons/16x16/mime_vrt.png</file>
+        <file>icons/16x16/mime_map.png</file>
         <file>icons/16x16/grid.png</file>
         <file>icons/16x16/redGlow.png</file>
         <file>icons/16x16/gridSetup.png</file>
@@ -18,8 +21,11 @@
         <file>icons/32x32/addCanvas.png</file>
         <file>icons/32x32/scale.png</file>
         <file>icons/32x32/font.png</file>
-        <file>icons/32x32/jnx.png</file>
-        <file>icons/32x32/rmap.png</file>
+        <file>icons/32x32/mime_jnx.png</file>
+        <file>icons/32x32/mime_rmap.png</file>
+        <file>icons/32x32/mime_img.png</file>
+        <file>icons/32x32/mime_vrt.png</file>
+        <file>icons/32x32/mime_map.png</file>
         <file>icons/32x32/cancel.png</file>
         <file>icons/32x32/check.png</file>
         <file>icons/32x32/to-top.png</file>

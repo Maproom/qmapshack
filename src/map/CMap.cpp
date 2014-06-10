@@ -19,6 +19,7 @@
 #include "map/CMap.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "map/CMapPathSetup.h"
 #include "CCanvas.h"
 #include "CMainWindow.h"
 
@@ -91,7 +92,8 @@ const qreal CMap::scales[N_ZOOM_LEVELS] =
     , 70000.0
 };
 
-
+QList<CMap*> CMap::maps;
+QStringList  CMap::mapPaths;
 
 CMap::CMap(CCanvas *parent)
     : QThread(parent)
@@ -118,6 +120,8 @@ CMap::CMap(CCanvas *parent)
 
     buildMapList();
 
+    maps << this;
+
 }
 
 CMap::~CMap()
@@ -126,12 +130,43 @@ CMap::~CMap()
     pj_free(pjsrc);
 
     CMainWindow::self().delMapList(mapList);
+
+    maps.removeOne(this);
 }
 
 void CMap::emitSigCanvasUpdate()
 {
     emit sigCanvasUpdate();
 }
+
+
+void CMap::setupMapPath()
+{
+    CMapPathSetup dlg(mapPaths);
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    foreach(CMap * map, maps)
+    {
+        QStringList keys;
+        map->saveActiveMapsList(keys);
+        map->buildMapList();
+        map->restoreActiveMapsList(keys);
+    }
+}
+
+void CMap::saveMapPath(QSettings& cfg)
+{
+    cfg.setValue("mapPath", mapPaths);
+}
+
+void CMap::loadMapPath(QSettings& cfg)
+{
+    mapPaths = cfg.value("mapPath", mapPaths).toStringList();
+}
+
 
 QString CMap::getProjection()
 {
@@ -144,52 +179,59 @@ QString CMap::getProjection()
 
 void CMap::saveConfig(QSettings& cfg)
 {
-    saveActiveMapsList(cfg);
+    QStringList keys;
+    saveActiveMapsList(keys);
+    cfg.setValue("map/active", keys);
+
     cfg.setValue("map/zoomIndex", zoomIndex);
 
 }
 
 void CMap::loadConfig(QSettings& cfg)
 {
-    restoreActiveMapsList(cfg);
+    QStringList keys = cfg.value("map/active", "").toStringList();
+    restoreActiveMapsList(keys);
+
     int idx = cfg.value("map/zoomIndex",zoomIndex).toInt();
     zoom(idx);
 }
 
 void CMap::buildMapList()
 {
-    QDir pathMaps("./");
-
     QCryptographicHash md5(QCryptographicHash::Md5);
     QStringList filters;
     filters << "*rmap" << "*jnx" << "*img" << "*vrt" << "*map";
 
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
-    // find available maps
-    foreach(const QString& filename, pathMaps.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
+
+    foreach(const QString& path, mapPaths)
     {
-        QFileInfo fi(filename);
+        QDir dir(path);
+        // find available maps
+        foreach(const QString& filename, dir.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
+        {
+            QFileInfo fi(filename);
 
-        CMapItem * item = new CMapItem(*mapList, this);
+            CMapItem * item = new CMapItem(*mapList, this);
 
-        item->setText(fi.baseName());
-        item->filenames  << pathMaps.absoluteFilePath(filename);
-        item->setSizeHint(QSize(0,32));
-        item->updateIcon();
+            item->setText(fi.baseName());
+            item->filenames  << dir.absoluteFilePath(filename);
+            item->setSizeHint(QSize(0,32));
+            item->updateIcon();
 
-        QFile f(pathMaps.absoluteFilePath(filename));
-        f.open(QIODevice::ReadOnly);
-        md5.reset();
-        md5.addData(f.read(1024));
-        item->key = md5.result().toHex();
-        f.close();
+            QFile f(dir.absoluteFilePath(filename));
+            f.open(QIODevice::ReadOnly);
+            md5.reset();
+            md5.addData(f.read(1024));
+            item->key = md5.result().toHex();
+            f.close();
+        }
     }
 }
 
-void CMap::saveActiveMapsList(QSettings &cfg)
+void CMap::saveActiveMapsList(QStringList& keys)
 {
-    QStringList keys;
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
     for(int i = 0; i < mapList->count(); i++)
@@ -200,14 +242,10 @@ void CMap::saveActiveMapsList(QSettings &cfg)
             keys << item->key;
         }
     }
-
-    cfg.setValue("map/active", keys);
-
 }
 
-void CMap::restoreActiveMapsList(QSettings &cfg)
+void CMap::restoreActiveMapsList(QStringList& keys)
 {
-    QStringList keys = cfg.value("map/active", "").toStringList();
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
     foreach(const QString& key, keys)

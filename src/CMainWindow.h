@@ -50,6 +50,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotUpdateCurrentWidget();
         void slotSetupMapFont();
         void slotSetupGrid();
+        void slotSetuMapPath();
 
     private:
         friend int main(int argc, char ** argv);

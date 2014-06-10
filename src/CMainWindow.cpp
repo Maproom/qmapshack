@@ -62,11 +62,13 @@ CMainWindow::CMainWindow()
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
+    connect(actionSetupMapPathes, SIGNAL(triggered()), this, SLOT(slotSetuMapPath()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
 
     cfg.beginGroup("Canvas");
+    CMap::loadMapPath(cfg);
     int N = cfg.value("numberOfCanvas").toInt();
     for(int i = 0; i < N; i++)
     {
@@ -123,7 +125,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("mapFont", mapFont);
-
+    CMap::saveMapPath(cfg);
     cfg.endGroup(); // Canvas
 
 }
@@ -260,4 +262,9 @@ void CMainWindow::slotSetupGrid()
         return;
     }
     canvas->setupGrid();
+}
+
+void CMainWindow::slotSetuMapPath()
+{
+    CMap::setupMapPath();
 }

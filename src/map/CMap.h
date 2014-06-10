@@ -20,6 +20,7 @@
 #define CMAP_H
 
 #include <QThread>
+#include <QStringList>
 #include "IMap.h"
 
 class QPainter;
@@ -88,9 +89,17 @@ class CMap : public QThread
          */
         bool needsRedraw();
 
+        /**
+           @brief Get the projection string of this map object
+           @return A proj4 string.
+         */
         QString getProjection();
 
         void emitSigCanvasUpdate();
+
+        static void setupMapPath();
+        static void saveMapPath(QSettings &cfg);
+        static void loadMapPath(QSettings &cfg);
 
     signals:
         void sigCanvasUpdate();
@@ -110,11 +119,11 @@ class CMap : public QThread
         /**
            @brief Save list of active maps to configuration file
          */
-        void saveActiveMapsList(QSettings& cfg);
+        void saveActiveMapsList(QStringList &keys);
         /**
            @brief Restore list of active maps from configuration file
          */
-        void restoreActiveMapsList(QSettings& cfg);
+        void restoreActiveMapsList(QStringList &keys);
 
 
         /// the mutex to serialize access
@@ -164,6 +173,10 @@ class CMap : public QThread
         QPointF ref4;
 
         CMapList * mapList;
+
+        static QStringList mapPaths;
+
+        static QList<CMap*> maps;
 
 };
 

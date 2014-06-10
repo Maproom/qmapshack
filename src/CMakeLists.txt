@@ -24,6 +24,7 @@ set( SRCS
     map/CMapIMG.cpp
     map/CMapMAP.cpp
     map/CMapVRT.cpp
+    map/CMapPathSetup.cpp
     units/IUnit.cpp
     units/CUnitImperial.cpp
     units/CUnitMetric.cpp
@@ -52,6 +53,7 @@ set( HDRS
     map/CMapIMG.h
     map/CMapMAP.h
     map/CMapVRT.h
+    map/CMapPathSetup.h
     units/IUnit.h
     units/CUnitImperial.h
     units/CUnitMetric.h
@@ -67,6 +69,7 @@ set( HDRS
 set( UIS
     IMainWindow.ui
     map/IMapList.ui
+    map/IMapPathSetup.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
 )

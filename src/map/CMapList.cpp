@@ -18,11 +18,13 @@
 
 #include "map/CMapList.h"
 #include "map/CMapItem.h"
+#include "map/CMap.h"
 
 #include <QtWidgets>
 
-CMapList::CMapList(QWidget *parent)
+CMapList::CMapList(CMap * map, QWidget *parent)
     : QWidget(parent)
+    , map(map)
 {
     setupUi(this);
 
@@ -36,6 +38,11 @@ CMapList::CMapList(QWidget *parent)
 CMapList::~CMapList()
 {
 
+}
+
+void CMapList::updateList()
+{
+    map->buildMapList();
 }
 
 void CMapList::clear()

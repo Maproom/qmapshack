@@ -19,6 +19,7 @@
 #include "map/CMap.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "map/CMapPathSetup.h"
 #include "CCanvas.h"
 #include "CMainWindow.h"
 
@@ -91,7 +92,7 @@ const qreal CMap::scales[N_ZOOM_LEVELS] =
     , 70000.0
 };
 
-
+QStringList CMap::mapPaths;
 
 CMap::CMap(CCanvas *parent)
     : QThread(parent)
@@ -110,14 +111,13 @@ CMap::CMap(CCanvas *parent)
 
     zoom(5);
 
-    mapList = new CMapList(canvas);
+    mapList = new CMapList(this, canvas);
     CMainWindow::self().addMapList(mapList, canvas->objectName());
 
     resize(canvas->size());
     connect(this, SIGNAL(finished()), canvas, SLOT(update()));
 
     buildMapList();
-
 }
 
 CMap::~CMap()
@@ -156,34 +156,64 @@ void CMap::loadConfig(QSettings& cfg)
     zoom(idx);
 }
 
+void CMap::setupMapPath()
+{
+    CMapPathSetup dlg(mapPaths);
+    dlg.exec();
+}
+
+void CMap::saveMapPath(QSettings& cfg)
+{
+    cfg.setValue("mapPaths", mapPaths);
+}
+
+void CMap::loadMapPath(QSettings& cfg)
+{
+    mapPaths = cfg.value("mapPaths",mapPaths).toStringList();
+}
+
+bool CMap::isEmptyMapPath()
+{
+    return mapPaths.isEmpty();
+}
+
+void CMap::showMapPathHint()
+{
+    QMessageBox::information(0, tr("Add maps ..."), tr("To display maps you have to define one or several map pathes containing maps of the supported formats. Use 'File->Setup Map Path' to maintain the list of pathes."));
+}
+
 void CMap::buildMapList()
 {
-    QDir pathMaps("./");
-
     QCryptographicHash md5(QCryptographicHash::Md5);
     QStringList filters;
     filters << "*rmap" << "*jnx" << "*img" << "*vrt" << "*map";
 
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
-    // find available maps
-    foreach(const QString& filename, pathMaps.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
+
+    foreach(const QString& mapPath, mapPaths)
     {
-        QFileInfo fi(filename);
+        QDir dir(mapPath);
 
-        CMapItem * item = new CMapItem(*mapList, this);
+        // find available maps
+        foreach(const QString& filename, dir.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
+        {
+            QFileInfo fi(filename);
 
-        item->setText(fi.baseName());
-        item->filenames  << pathMaps.absoluteFilePath(filename);
-        item->setSizeHint(QSize(0,32));
-        item->updateIcon();
+            CMapItem * item = new CMapItem(*mapList, this);
 
-        QFile f(pathMaps.absoluteFilePath(filename));
-        f.open(QIODevice::ReadOnly);
-        md5.reset();
-        md5.addData(f.read(1024));
-        item->key = md5.result().toHex();
-        f.close();
+            item->setText(fi.baseName());
+            item->filenames  << dir.absoluteFilePath(filename);
+            item->setSizeHint(QSize(0,32));
+            item->updateIcon();
+
+            QFile f(dir.absoluteFilePath(filename));
+            f.open(QIODevice::ReadOnly);
+            md5.reset();
+            md5.addData(f.read(1024));
+            item->key = md5.result().toHex();
+            f.close();
+        }
     }
 }
 

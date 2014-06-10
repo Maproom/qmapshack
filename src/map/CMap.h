@@ -88,13 +88,27 @@ class CMap : public QThread
          */
         bool needsRedraw();
 
+        /**
+           @brief Get the map objects projection string (proj4 format)
+           @return A string object.
+         */
         QString getProjection();
+
+        /**
+           @brief Use mapPaths to build the list widget with all maps
+         */
+        void buildMapList();
+
+        static void setupMapPath();
+        static void saveMapPath(QSettings& cfg);
+        static void loadMapPath(QSettings& cfg);
+        static bool isEmptyMapPath();
+        static void showMapPathHint();
 
         void emitSigCanvasUpdate();
 
     signals:
         void sigCanvasUpdate();
-
 
     protected:
         void run();
@@ -104,8 +118,6 @@ class CMap : public QThread
         static const qreal scales[];
 
         void zoom(int idx);
-
-        void buildMapList();
 
         /**
            @brief Save list of active maps to configuration file
@@ -163,6 +175,7 @@ class CMap : public QThread
         /// bottom left corner of next buffer
         QPointF ref4;
 
+        static QStringList mapPaths;
         CMapList * mapList;
 
 };

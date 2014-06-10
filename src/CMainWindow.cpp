@@ -61,14 +61,16 @@ CMainWindow::CMainWindow()
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
+    connect(actionSetupMapPath, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
 
     cfg.beginGroup("Canvas");
-    int N = cfg.value("numberOfCanvas").toInt();
-    for(int i = 0; i < N; i++)
+    CMap::loadMapPath(cfg);
+    int numberOfCanvas = cfg.value("numberOfCanvas").toInt();
+    for(int i = 0; i < numberOfCanvas; i++)
     {
         CCanvas * canvas = new CCanvas(tabWidget);
         tabWidget->addTab(canvas, canvas->objectName());
@@ -83,7 +85,7 @@ CMainWindow::CMainWindow()
     actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
-    tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
+    tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());    
     cfg.endGroup(); // Canvas
 
     QStatusBar * status = statusBar();
@@ -93,6 +95,17 @@ CMainWindow::CMainWindow()
     status->addPermanentWidget(lblPosGrid);
 
     menuWindow->addAction(dockMaps->toggleViewAction());
+
+    if(numberOfCanvas == 0)
+    {
+        slotAddCanvas();
+    }
+
+    if(CMap::isEmptyMapPath())
+    {
+        QTimer::singleShot(1000, this, SLOT(slotShowMapHint()));
+    }
+
 }
 
 CMainWindow::~CMainWindow()
@@ -104,6 +117,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MainWindow/geometry", saveGeometry());
 
     cfg.beginGroup("Canvas");
+    CMap::saveMapPath(cfg);
     for(int i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
@@ -122,8 +136,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
-    cfg.setValue("mapFont", mapFont);
-
+    cfg.setValue("mapFont", mapFont);    
     cfg.endGroup(); // Canvas
 
 }
@@ -162,6 +175,22 @@ void CMainWindow::delMapList(CMapList * list)
     }
 }
 
+void CMainWindow::updateMapList()
+{
+    for(int i = 0; i < tabMaps->count(); i++)
+    {
+        CMapList * w = dynamic_cast<CMapList*>(tabMaps->widget(i));
+        if(w)
+        {
+            w->updateList();
+        }
+    }
+}
+
+void CMainWindow::slotShowMapHint()
+{
+    CMap::showMapPathHint();
+}
 
 void CMainWindow::slotAddCanvas()
 {
@@ -249,6 +278,13 @@ void CMainWindow::slotSetupMapFont()
             w->update();
         }
     }
+
+}
+
+void CMainWindow::slotSetupMapPath()
+{
+    CMap::setupMapPath();
+    updateMapList();
 
 }
 

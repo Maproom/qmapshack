@@ -59,6 +59,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSetupMapPath"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -178,6 +179,15 @@
    </property>
    <property name="text">
     <string>Flip Mouse Wheel</string>
+   </property>
+  </action>
+  <action name="actionSetupMapPath">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/pathMap.png</normaloff>:/icons/32x32/pathMap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Map Path</string>
    </property>
   </action>
  </widget>

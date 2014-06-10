@@ -22,13 +22,14 @@
 #include <QWidget>
 #include "ui_IMapList.h"
 
+class CMap;
 class CMapItem;
 
 class CMapList : public QWidget, private Ui::IMapList
 {
     Q_OBJECT
     public:
-        CMapList(QWidget * parent);
+        CMapList(CMap * map, QWidget * parent);
         virtual ~CMapList();
 
         void clear();
@@ -36,10 +37,18 @@ class CMapList : public QWidget, private Ui::IMapList
         CMapItem * item(int i);
         operator QListWidget*(){return listWidget;}
 
+        /**
+           @brief Tell the attached CMap object to rebuild the widget from the map path list
+         */
+        void updateList();
+
     private slots:
         void slotSelectionChanged();
         void slotActivate();
         void slotToTop();
+
+    private:
+        CMap * map;
 
 };
 

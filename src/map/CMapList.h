@@ -54,6 +54,8 @@ class CMapList : public QWidget, private Ui::IMapList
         CMapItem * item(int i);
         operator QListWidget*(){return listWidget;}
 
+        void updateHelpText();
+
     signals:
         void sigChanged();
 

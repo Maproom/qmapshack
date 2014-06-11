@@ -229,6 +229,7 @@ void CMap::buildMapList()
             f.close();
         }
     }
+
 }
 
 void CMap::saveActiveMapsList(QStringList& keys)
@@ -262,6 +263,7 @@ void CMap::restoreActiveMapsList(QStringList& keys)
             }
         }
     }
+    mapList->updateHelpText();
 }
 
 void CMap::resize(const QSize& size)

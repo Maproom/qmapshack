@@ -77,6 +77,19 @@ CMapItem * CMapList::item(int i)
     return dynamic_cast<CMapItem *>(listWidget->item(i));
 }
 
+void CMapList::updateHelpText()
+{
+    CMapItem * item = dynamic_cast<CMapItem*>(listWidget->item(0));
+    if(item && item->isActivated())
+    {
+        labelHelp->hide();
+    }
+    else
+    {
+        labelHelp->show();
+    }
+
+}
 
 void CMapList::slotActivate()
 {
@@ -89,15 +102,7 @@ void CMapList::slotActivate()
         listWidget->setCurrentItem(0);
     }
 
-    item = dynamic_cast<CMapItem*>(listWidget->item(0));
-    if(item && item->isActivated())
-    {
-        labelHelp->hide();
-    }
-    else
-    {
-        labelHelp->show();
-    }
+    updateHelpText();
 }
 
 void CMapList::slotItemSelectionChanged()

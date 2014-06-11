@@ -20,9 +20,22 @@
 #define CMAPLIST_H
 
 #include <QWidget>
-#include "ui_IMapList.h"
+#include <QListWidget>
+
 
 class CMapItem;
+class QMenu;
+
+class CMapListWidget : public QListWidget
+{
+    public:
+        CMapListWidget(QWidget * parent): QListWidget(parent){}
+
+    protected:
+        void dragMoveEvent ( QDragMoveEvent  * event );
+};
+
+#include "ui_IMapList.h"
 
 class CMapList : public QWidget, private Ui::IMapList
 {
@@ -37,10 +50,12 @@ class CMapList : public QWidget, private Ui::IMapList
         operator QListWidget*(){return listWidget;}
 
     private slots:
-        void slotSelectionChanged();
+        void slotItemSelectionChanged();
         void slotActivate();
-        void slotToTop();
+        void slotContextMenu(const QPoint &point);
 
+    private:
+        QMenu * menu;
 };
 
 #endif //CMAPLIST_H

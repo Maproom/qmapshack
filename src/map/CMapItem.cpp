@@ -105,7 +105,7 @@ void CMapItem::deactivate()
     files.clear();
 
     updateIcon();
-    moveToEndOfActive();
+    moveToBottom();
 }
 
 
@@ -165,7 +165,7 @@ bool CMapItem::activate()
         return false;
     }
     updateIcon();
-    moveToEndOfActive();
+    moveToBottom();
     return true;
 }
 
@@ -177,11 +177,11 @@ void CMapItem::moveToTop()
     w->takeItem(w->row(this));
     w->insertItem(0, this);
 
-//    CMapDB::self().saveActiveMapsList();
     map->emitSigCanvasUpdate();
 }
 
-void CMapItem::moveToEndOfActive()
+
+void CMapItem::moveToBottom()
 {
 
     int row;
@@ -199,6 +199,5 @@ void CMapItem::moveToEndOfActive()
     }
     w->insertItem(row, this);
 
-//    CMapDB::self().saveActiveMapsList();
     map->emitSigCanvasUpdate();
 }

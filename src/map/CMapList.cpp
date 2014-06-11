@@ -21,16 +21,32 @@
 
 #include <QtWidgets>
 
+void CMapListWidget::dragMoveEvent ( QDragMoveEvent  * event )
+{
+    CMapItem * item = dynamic_cast<CMapItem*>(itemAt(event->pos()));
+
+    if(item && item->isActivated())
+    {
+        event->setDropAction(Qt::MoveAction);
+        QListWidget::dragMoveEvent(event);
+    }
+    else
+    {
+        event->setDropAction(Qt::IgnoreAction);
+    }
+}
+
 CMapList::CMapList(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
 
-    frameButtons->hide();
+    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+    connect(listWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
 
-    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(pushActivate, SIGNAL(clicked()), this, SLOT(slotActivate()));
-    connect(pushToTop, SIGNAL(clicked()), this, SLOT(slotToTop()));
+    menu = new QMenu(this);
+    menu->addAction(actionActivate);
 }
 
 CMapList::~CMapList()
@@ -53,24 +69,6 @@ CMapItem * CMapList::item(int i)
     return dynamic_cast<CMapItem *>(listWidget->item(i));
 }
 
-void CMapList::slotSelectionChanged()
-{
-    CMapItem * item = dynamic_cast<CMapItem*>(listWidget->currentItem());
-
-    if(item)
-    {
-        bool activated = item->isActivated();
-        pushActivate->setChecked(activated);
-        pushToTop->setEnabled(activated);
-        frameButtons->show();
-
-    }
-    else
-    {
-        frameButtons->hide();
-    }
-
-}
 
 void CMapList::slotActivate()
 {
@@ -78,18 +76,48 @@ void CMapList::slotActivate()
     if(item == 0) return;
 
     bool activated = item->toggleActivate();
+    if(!activated)
+    {
+        listWidget->setCurrentItem(0);
+    }
 
-    pushActivate->setChecked(activated);
-    pushToTop->setEnabled(activated);
-    listWidget->setCurrentItem(0);
+    item = dynamic_cast<CMapItem*>(listWidget->item(0));
+    if(item && item->isActivated())
+    {
+        labelHelp->hide();
+    }
+    else
+    {
+        labelHelp->show();
+    }
 }
 
-void CMapList::slotToTop()
+void CMapList::slotItemSelectionChanged()
 {
     CMapItem * item = dynamic_cast<CMapItem*>(listWidget->currentItem());
-    if(item == 0) return;
+    if(item && item->isActivated())
+    {
+        listWidget->setDragDropMode(QAbstractItemView::InternalMove);
+    }
+    else
+    {
+        listWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
+    }
 
-    item->moveToTop();
-    listWidget->setCurrentItem(0);
 }
 
+void CMapList::slotContextMenu(const QPoint& point)
+{
+    CMapItem * item = dynamic_cast<CMapItem*>(listWidget->currentItem());
+
+    if(item == 0)
+    {
+        return;
+    }
+    bool activated = item->isActivated();
+    actionActivate->setChecked(activated);
+    actionActivate->setText(activated ? tr("Deactivate") : tr("Activate"));
+
+    QPoint p = listWidget->mapToGlobal(point);
+    menu->exec(p);
+}

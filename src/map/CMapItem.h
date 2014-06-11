@@ -59,10 +59,7 @@ class CMapItem : public QListWidgetItem
            @brief Move item to top of list widget
          */
         void moveToTop();
-        /**
-           @brief Move item at the end of the active maps list
-         */
-        void moveToEndOfActive();
+        void moveToBottom();
 
         void updateIcon();
 

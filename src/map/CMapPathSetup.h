@@ -35,6 +35,7 @@ class CMapPathSetup : public QDialog, private Ui::IMapPathSetup
     private slots:
         void slotAddPath();
         void slotDelPath();
+        void slotItemSelectionChanged();
 
 
     private:

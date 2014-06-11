@@ -27,6 +27,7 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
 
     connect(toolAdd, SIGNAL(clicked()), this, SLOT(slotAddPath()));
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelPath()));
+    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
 
     foreach(const QString& path, paths)
     {
@@ -38,6 +39,11 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
 CMapPathSetup::~CMapPathSetup()
 {
 
+}
+void CMapPathSetup::slotItemSelectionChanged()
+{
+    QList<QListWidgetItem*> items = listWidget->selectedItems();
+    toolDelete->setEnabled(!items.isEmpty());
 }
 
 void CMapPathSetup::slotAddPath()

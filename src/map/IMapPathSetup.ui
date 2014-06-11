@@ -26,7 +26,7 @@
       <item>
        <widget class="QListWidget" name="listWidget">
         <property name="selectionMode">
-         <enum>QAbstractItemView::MultiSelection</enum>
+         <enum>QAbstractItemView::ExtendedSelection</enum>
         </property>
        </widget>
       </item>
@@ -51,6 +51,9 @@
         </item>
         <item>
          <widget class="QToolButton" name="toolDelete">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>...</string>
           </property>

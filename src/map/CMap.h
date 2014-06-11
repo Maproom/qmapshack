@@ -95,15 +95,16 @@ class CMap : public QThread
          */
         QString getProjection();
 
-        void emitSigCanvasUpdate();
 
         static void setupMapPath();
         static void saveMapPath(QSettings &cfg);
-        static void loadMapPath(QSettings &cfg);
+        static void loadMapPath(QSettings &cfg);        
 
     signals:
         void sigCanvasUpdate();
 
+    public slots:
+        void emitSigCanvasUpdate();
 
     protected:
         void run();

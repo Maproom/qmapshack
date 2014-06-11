@@ -36,6 +36,12 @@ void CMapListWidget::dragMoveEvent ( QDragMoveEvent  * event )
     }
 }
 
+void CMapListWidget::dropEvent ( QDropEvent  * event )
+{
+    QListWidget::dropEvent(event);
+    emit sigChanged();;
+}
+
 CMapList::CMapList(QWidget *parent)
     : QWidget(parent)
 {
@@ -44,6 +50,8 @@ CMapList::CMapList(QWidget *parent)
     connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
     connect(listWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
+
+    connect(listWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);

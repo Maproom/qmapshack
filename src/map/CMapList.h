@@ -28,11 +28,16 @@ class QMenu;
 
 class CMapListWidget : public QListWidget
 {
+    Q_OBJECT
     public:
         CMapListWidget(QWidget * parent): QListWidget(parent){}
 
+    signals:
+        void sigChanged();
+
     protected:
         void dragMoveEvent ( QDragMoveEvent  * event );
+        void dropEvent ( QDropEvent  * event );
 };
 
 #include "ui_IMapList.h"
@@ -48,6 +53,9 @@ class CMapList : public QWidget, private Ui::IMapList
         int count();
         CMapItem * item(int i);
         operator QListWidget*(){return listWidget;}
+
+    signals:
+        void sigChanged();
 
     private slots:
         void slotItemSelectionChanged();

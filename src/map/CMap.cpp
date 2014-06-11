@@ -114,6 +114,7 @@ CMap::CMap(CCanvas *parent)
 
     mapList = new CMapList(canvas);
     CMainWindow::self().addMapList(mapList, canvas->objectName());
+    connect(mapList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
 
     resize(canvas->size());
     connect(this, SIGNAL(finished()), canvas, SLOT(update()));

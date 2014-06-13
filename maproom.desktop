@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=MapRoom
+Exec=maproom
+Icon=maproom
+Terminal=false
+Type=Application
+X-MultipleArgs=false
+Categories=Qt;Utility;Geography;
+GenericName=GPS device mapping utility
+Keywords=map;GPS;geocaching;waypoints;tracks;
+MimeType=application/x-gpx;

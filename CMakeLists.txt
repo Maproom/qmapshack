@@ -36,21 +36,21 @@ add_subdirectory(src)
 if (UNIX AND NOT WIN32 AND NOT APPLE)
   install(
     FILES
-      qlandkartegt.desktop
+      maproom.desktop
     DESTINATION
       ${XDG_APPS_DIR}
   )
 
   install(
     FILES
-      src/icons/qlandkartegt.png
+      src/icons/32x32/map.png
     DESTINATION
       ${DATA_INSTALL_PREFIX}/pixmaps
   )
 
   install(
     FILES
-      qlandkartegt.1
+      maproom.1
     DESTINATION
       ${MAN_INSTALL_DIR}/man1
   )

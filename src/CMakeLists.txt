@@ -118,3 +118,10 @@ target_link_libraries(${APPLICATION_NAME}
     ${PROJ_LIBRARIES}
 
 )
+
+install(
+    TARGETS
+      ${APPLICATION_NAME}
+    DESTINATION
+      ${BIN_INSTALL_DIR}
+)

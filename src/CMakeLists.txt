@@ -25,6 +25,10 @@ set( SRCS
     map/CMapMAP.cpp
     map/CMapVRT.cpp
     map/CMapPathSetup.cpp
+    map/garmin/IGarminStrTbl.cpp
+    map/garmin/CGarminStrTbl6.cpp
+    map/garmin/CGarminStrTbl8.cpp
+    map/garmin/CGarminStrTblUtf8.cpp
     units/IUnit.cpp
     units/CUnitImperial.cpp
     units/CUnitMetric.cpp
@@ -38,8 +42,9 @@ set( SRCS
 )
 
 set( HDRS
-    version.h
+    version.h    
     GeoMath.h
+    CFileExt.h
     CAppOpts.h
     CSettings.h
     CMainWindow.h
@@ -54,6 +59,11 @@ set( HDRS
     map/CMapMAP.h
     map/CMapVRT.h
     map/CMapPathSetup.h
+    map/garmin/Garmin.h
+    map/garmin/IGarminStrTbl.h
+    map/garmin/CGarminStrTbl6.h
+    map/garmin/CGarminStrTbl8.h
+    map/garmin/CGarminStrTblUtf8.h
     units/IUnit.h
     units/CUnitImperial.h
     units/CUnitMetric.h
@@ -90,6 +100,7 @@ set(ALLINP
 )
 
 include_directories(
+    ${CMAKE_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/3rdparty/CGetOpt
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}

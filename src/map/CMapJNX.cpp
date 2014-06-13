@@ -87,7 +87,8 @@ CMapJNX::CMapJNX(const QString &filename, CMap *parent)
     , lon2(-180)
     , lat2(90)
 {
-    qDebug() << "try to open" << filename;
+    qDebug() << "------------------------------";
+    qDebug() << "JNX: try to open" << filename;
 
     qint32 productId = -1;
     readFile(filename, productId);

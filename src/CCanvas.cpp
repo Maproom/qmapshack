@@ -92,7 +92,6 @@ void CCanvas::paintEvent(QPaintEvent * e)
         return;
     }
 
-    qDebug() << "rrrr" << rect();
     const QRectF& r = e->rect();
 
     QPainter p;

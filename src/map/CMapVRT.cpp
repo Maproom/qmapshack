@@ -30,6 +30,9 @@ CMapVRT::CMapVRT(const QString &filename, CMap *parent)
     , filename(filename)
     , rasterBandCount(0)
 {
+    qDebug() << "------------------------------";
+    qDebug() << "VRT: try to open" << filename;
+
     dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
 
     if(dataset == 0)
@@ -153,7 +156,7 @@ void CMapVRT::draw(buffer_t& buf)
         return;
     }
 
-    qDebug() << "---------------------";
+//    qDebug() << "---------------------";
     // convert top left buffer corner
     // into buffer's coordinate system
     QPointF pp = buf.ref1;
@@ -184,22 +187,22 @@ void CMapVRT::draw(buffer_t& buf)
     qreal dx2 = sqrt((pt2.x() - pt1.x())*(pt2.x() - pt1.x()) + (pt2.y() - pt1.y())*(pt2.y() - pt1.y()));
     qreal dy2 = sqrt((pt4.x() - pt1.x())*(pt4.x() - pt1.x()) + (pt4.y() - pt1.y())*(pt4.y() - pt1.y()));
 
-    qDebug() << dx1 << dx2 << dx1/dx2;
-    qDebug() << dy1 << dy2 << dy1/dy2;
+//    qDebug() << dx1 << dx2 << dx1/dx2;
+//    qDebug() << dy1 << dy2 << dy1/dy2;
 
     qreal u1 = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
     qreal u2 = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
     qreal v1 = pt1.y() > pt2.y() ? pt1.y() : pt2.y();
     qreal v2 = pt4.y() < pt3.y() ? pt4.y() : pt3.y();
 
-    qDebug() << pt1 << pt2 << pt3 << pt4;
-    qDebug() << u1 << v1 << u2 << v2;
+//    qDebug() << pt1 << pt2 << pt3 << pt4;
+//    qDebug() << u1 << v1 << u2 << v2;
 
     QRectF viewport(u1,v1, u2 - u1, v2 - v1);
     QRectF maparea(QPointF(xref1, yref1), QPointF(xref2, yref2));
     QRectF intersect = viewport.intersected(maparea);
 
-    qDebug() << viewport << maparea << intersect;
+//    qDebug() << viewport << maparea << intersect;
 
     if(!intersect.isValid())
     {
@@ -223,7 +226,7 @@ void CMapVRT::draw(buffer_t& buf)
     // correct pxx by truncation
     pxx         =   (qint32)(w * bufferScale.x());
 
-    qDebug() << xoff << yoff << pxx << pxy << w << h;
+//    qDebug() << xoff << yoff << pxx << pxy << w << h;
     if(w > 0 && h > 0)
     {
 
@@ -270,7 +273,7 @@ void CMapVRT::draw(buffer_t& buf)
         qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1) / bufferScale.x());
         qreal h    = ceil(-sqrt(dx2*dx2 + dy2*dy2) / bufferScale.y());
 
-        qDebug() << pp << pt1;
+//        qDebug() << pp << pt1;
         // calculate offset into buffer
         pt1 = (pt1 - pp) / (bufferScale);
         // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
@@ -279,7 +282,7 @@ void CMapVRT::draw(buffer_t& buf)
         QPainter p(&buf.image);
         USE_ANTI_ALIASING(p,true);
 
-        qDebug() << "angle" << a << "offset" << pt1;
+//        qDebug() << "angle" << a << "offset" << pt1;
         // finally scale, rotate and draw tile
         p.translate(pt1);
         p.rotate(-a);

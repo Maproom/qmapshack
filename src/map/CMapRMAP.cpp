@@ -29,7 +29,9 @@ CMapRMAP::CMapRMAP(const QString &filename, CMap *parent)
     , map(parent)
     , filename(filename)
 {
-    qDebug() << "try to open" << filename;
+    qDebug() << "------------------------------";
+    qDebug() << "RMAP: try to open" << filename;
+
 
     QFile file(filename);
     file.open(QIODevice::ReadOnly);

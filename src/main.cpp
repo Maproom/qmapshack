@@ -22,6 +22,7 @@
 #include <QApplication>
 #include <CGetOpt.h>
 #include <iostream>
+#include <gdal.h>
 
 CAppOpts *qlOpts;
 
@@ -104,6 +105,8 @@ int main(int argc, char ** argv)
 #ifndef Q_OS_WIN32
     qInstallMessageHandler(myMessageOutput);
 #endif
+
+    GDALAllRegister();
 
     QCoreApplication::setApplicationName("MapRoom");
     QCoreApplication::setOrganizationName("QLandkarte");

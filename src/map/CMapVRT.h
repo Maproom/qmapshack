@@ -21,7 +21,9 @@
 
 #include "map/IMap.h"
 
+
 class CMap;
+class GDALDataset;
 
 class CMapVRT : public IMap
 {
@@ -30,6 +32,40 @@ class CMapVRT : public IMap
         virtual ~CMapVRT();
 
         void draw(buffer_t& buf);
+
+
+
+    private:
+        CMap * map;
+        QString filename;
+        /// instance of GDAL dataset
+        GDALDataset * dataset;
+        /// number of color bands used by the *vrt
+        int rasterBandCount;
+        /// QT representation of the vrt's color table
+        QVector<QRgb> colortable;
+
+        /// width in number of px
+        quint32 xsize_px;
+        /// height in number of px
+        quint32 ysize_px;
+
+        /// scale [px/m]
+        double xscale;
+        /// scale [px/m]
+        double yscale;
+
+        /// reference point [m] (left hand side of map)
+        double xref1;
+        /// reference point [m] (top of map)
+        double yref1;
+        /// reference point [m] (right hand side of map)
+        double xref2;
+        /// reference point [m] (bottom of map)
+        double yref2;
+
+
+
 };
 
 #endif //CMAPVRT_H

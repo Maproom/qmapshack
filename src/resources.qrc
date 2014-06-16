@@ -43,6 +43,8 @@
         <file>icons/16x16/toBottom.png</file>
         <file>icons/16x16/up.png</file>
         <file>icons/16x16/down.png</file>
+        <file>icons/16x16/poiText.png</file>
+        <file>icons/16x16/nightDay.png</file>
         <file>icons/32x32/map.png</file>
         <file>icons/32x32/addCanvas.png</file>
         <file>icons/32x32/scale.png</file>
@@ -70,6 +72,8 @@
         <file>icons/32x32/toBottom.png</file>
         <file>icons/32x32/up.png</file>
         <file>icons/32x32/down.png</file>
+        <file>icons/32x32/poiText.png</file>
+        <file>icons/32x32/nightDay.png</file>
         <file>icons/48x48/gridSetup.png</file>
         <file>icons/48x48/gridWizard.png</file>
         <file>icons/48x48/pathMap.png</file>

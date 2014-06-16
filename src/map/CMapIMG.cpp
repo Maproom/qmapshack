@@ -123,8 +123,6 @@ CMapIMG::CMapIMG(const QString &filename, CMap *parent)
     : IMap(parent)
     , filename(filename)
     , transparent(false)
-    , poiLabels(true)
-    , nightView(false)
     , fm(CMainWindow::self().getMapFont())
 {
     qDebug() << "------------------------------";
@@ -1589,7 +1587,7 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
         type = polygonDrawOrder[(N-1) - n];
 
         p.setPen(polygonProperties[type].pen);
-        p.setBrush(nightView ? polygonProperties[type].brushNight : polygonProperties[type].brushDay);
+        p.setBrush(CMainWindow::self().isNight() ? polygonProperties[type].brushNight : polygonProperties[type].brushDay);
 
         polytype_t::iterator item = lines.begin();
         while (item != lines.end())
@@ -1654,7 +1652,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
         if(property.hasPixmap)
         {
-            const QImage &pixmap    = nightView ? property.imgNight : property.imgDay;
+            const QImage &pixmap    = CMainWindow::self().isNight() ? property.imgNight : property.imgDay;
             const double h          = pixmap.height();
 
             QList<quint32>::const_iterator it = dict[type].constBegin();
@@ -1749,7 +1747,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
             if(property.hasBorder)
             {
                 // draw background line 1st
-                p.setPen(nightView ? property.penBorderNight : property.penBorderDay);
+                p.setPen(CMainWindow::self().isNight() ? property.penBorderNight : property.penBorderDay);
 
                 QList<quint32>::const_iterator it = dict[type].constBegin();
                 for( ; it != dict[type].constEnd() ; ++it)
@@ -1761,7 +1759,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
             }
             else
             {
-                p.setPen(nightView ? property.penLineNight : property.penLineDay);
+                p.setPen(CMainWindow::self().isNight() ? property.penLineNight : property.penLineDay);
 
                 QList<quint32>::const_iterator it = dict[type].constBegin();
                 for( ; it != dict[type].constEnd() ; ++it)
@@ -1788,7 +1786,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
         if(property.hasBorder && !property.hasPixmap)
         {
             // draw foreground line 2nd
-            p.setPen(nightView ? property.penLineNight : property.penLineDay);
+            p.setPen(CMainWindow::self().isNight() ? property.penLineNight : property.penLineDay);
 
             QList<quint32>::const_iterator it = dict[type].constBegin();
             for( ; it != dict[type].constEnd() ; ++it)
@@ -1909,9 +1907,19 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 
         map->convertRad2Px(pt->pos);
 
-        if(isCluttered(rectPois, QRectF(pt->pos, QSizeF(16,16))))
+        const QImage&  icon = CMainWindow::self().isNight() ? pointProperties[pt->type].imgNight : pointProperties[pt->type].imgDay;
+        const QSizeF&  size = icon.size();
+
+        if(isCluttered(rectPois, QRectF(pt->pos, size)))
         {
-            p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+            if(size.width() <= 8 && size.height() <= 8)
+            {
+                p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
+            }
+            else
+            {
+                p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+            }
             ++pt;
             continue;
         }
@@ -1920,7 +1928,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 
         if(pointProperties.contains(pt->type))
         {
-            p.drawImage(pt->pos.x() - 4, pt->pos.y() - 4, nightView ? pointProperties[pt->type].imgNight : pointProperties[pt->type].imgDay);
+            p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
             showLabel = pointProperties[pt->type].labelType != CGarminTyp::eNone;
         }
         else
@@ -1928,7 +1936,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
             p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
         }
 
-//        if((!pt->labels.isEmpty() && (zoomFactor < CResources::self().getZoomLevelThresholdPoiLabels())  && poiLabels) || ((pt->type < 0x1600)  && showLabel))
+        if(CMainWindow::self().isPOIText() && showLabel)
         {
 
             // calculate bounding rectangle with a border of 2 px
@@ -2002,9 +2010,19 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
     {
         map->convertRad2Px(pt->pos);
 
-        if(isCluttered(rectPois, QRectF(pt->pos,QSizeF(16,16))))
+        const QImage&  icon = CMainWindow::self().isNight() ? pointProperties[pt->type].imgNight : pointProperties[pt->type].imgDay;
+        const QSizeF&  size = icon.size();
+
+        if(isCluttered(rectPois, QRectF(pt->pos, size)))
         {
-            p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, blueBullet);
+            if(size.width() <= 8 && size.height() <= 8)
+            {
+                p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
+            }
+            else
+            {
+                p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+            }
             ++pt;
             continue;
         }
@@ -2013,7 +2031,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
         showLabel = true;
         if(pointProperties.contains(pt->type))
         {
-            p.drawImage(pt->pos.x() - 4, pt->pos.y() - 4, nightView ? pointProperties[pt->type].imgNight : pointProperties[pt->type].imgDay);
+            p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
             labelType = pointProperties[pt->type].labelType;
             showLabel = labelType != CGarminTyp::eNone;
         }
@@ -2022,66 +2040,64 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
             p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, redBullet);
         }
 
-        if(showLabel)
+        if(CMainWindow::self().isPOIText() /*&& showLabel*/)
         {
-//            if((!pt->labels.isEmpty() && (zoomFactor < CResources::self().getZoomLevelThresholdPoiLabels()) && poiLabels) || (pt->type < 0x1600))
+
+            // calculate bounding rectangle with a border of 2 px
+            QRect rect = fm.boundingRect(pt->labels.join(" "));
+            rect.adjust(0,0,4,4);
+            rect.moveCenter(pt->pos.toPoint());
+
+            // test rectangle for intersection with existng labels
+            QVector<strlbl_t>::const_iterator label = labels.begin();
+            while(label != labels.end())
             {
+                if(label->rect.intersects(rect)) break;
+                ++label;
+            }
 
-                // calculate bounding rectangle with a border of 2 px
-                QRect rect = fm.boundingRect(pt->labels.join(" "));
-                rect.adjust(0,0,4,4);
-                rect.moveCenter(pt->pos.toPoint());
-
-                // test rectangle for intersection with existng labels
-                QVector<strlbl_t>::const_iterator label = labels.begin();
-                while(label != labels.end())
+            // if no intersection was found, add label to list
+            if(label == labels.end())
+            {
+                QString str;
+                if(!pt->labels.isEmpty())
                 {
-                    if(label->rect.intersects(rect)) break;
-                    ++label;
-                }
-
-                // if no intersection was found, add label to list
-                if(label == labels.end())
-                {
-                    QString str;
-                    if(!pt->labels.isEmpty())
+                    if((pt->type == 0x6200)||(pt->type == 0x6300))
                     {
-                        if((pt->type == 0x6200)||(pt->type == 0x6300))
+                        QString unit;
+                        QString val = pt->labels[0];
+                        IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                        str = QString("%1 %2").arg(val).arg(unit);
+                    }
+                    else if(pt->type == 0x6616) //669 DAV
+                    {
+                        if(pt->labels.size()>1)
                         {
                             QString unit;
-                            QString val = pt->labels[0];
+                            QString val = pt->labels[1];
                             IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-                            str = QString("%1 %2").arg(val).arg(unit);
-                        }
-                        else if(pt->type == 0x6616) //669 DAV
-                        {
-                            if(pt->labels.size()>1)
-                            {
-                                QString unit;
-                                QString val = pt->labels[1];
-                                IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-                                str = QString("%1 %2 %3").arg(pt->labels[0]).arg(val).arg(unit);
-                            }
-                            else
-                            {
-                                str = pt->labels[0];
-                            }
+                            str = QString("%1 %2 %3").arg(pt->labels[0]).arg(val).arg(unit);
                         }
                         else
                         {
-                            str = pt->labels.join(" ");
+                            str = pt->labels[0];
                         }
                     }
-
-                    labels.push_back(strlbl_t());
-                    strlbl_t& strlbl = labels.last();
-                    strlbl.pt   = pt->pos.toPoint();
-                    strlbl.str  = str;
-                    strlbl.rect = rect;
-                    strlbl.type = labelType;
+                    else
+                    {
+                        str = pt->labels.join(" ");
+                    }
                 }
+
+                labels.push_back(strlbl_t());
+                strlbl_t& strlbl = labels.last();
+                strlbl.pt   = pt->pos.toPoint();
+                strlbl.str  = str;
+                strlbl.rect = rect;
+                strlbl.type = labelType;
             }
         }
+
         ++pt;
     }
 }

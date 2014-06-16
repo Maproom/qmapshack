@@ -500,8 +500,6 @@ class CMapIMG : public IMap
         QMap<QString,subfile_desc_t> subfiles;
         /// relay the transparent flags from the subfiles
         bool transparent;
-        bool poiLabels;
-        bool nightView;
 
         QRectF maparea;
 

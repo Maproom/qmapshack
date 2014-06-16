@@ -38,6 +38,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
 
         bool isScaleVisible();
         bool isGridVisible();
+        bool isNight();
+        bool isPOIText();
         bool flipMouseWheel();
         const QFont& getMapFont(){return mapFont;}
 

@@ -60,6 +60,8 @@ CMainWindow::CMainWindow()
     connect(actionAddCanvas, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
+    connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
+    connect(actionNightDay, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
     connect(actionSetupMapPathes, SIGNAL(triggered()), this, SLOT(slotSetuMapPath()));
@@ -83,6 +85,8 @@ CMainWindow::CMainWindow()
 
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
+    actionPOIText->setChecked(cfg.value("POIText", true).toBool());
+    actionNightDay->setChecked(cfg.value("isNIght", false).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
@@ -123,6 +127,8 @@ CMainWindow::~CMainWindow()
     cfg.setValue("numberOfCanvas", cnt);
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
+    cfg.setValue("POIText", actionPOIText->isChecked());
+    cfg.setValue("isNIght", actionNightDay->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("mapFont", mapFont);
     CMap::saveMapPath(cfg);
@@ -139,6 +145,17 @@ bool CMainWindow::isGridVisible()
 {
     return actionShowGrid->isChecked();
 }
+
+bool CMainWindow::isNight()
+{
+    return actionNightDay->isChecked();
+}
+
+bool CMainWindow::isPOIText()
+{
+    return actionPOIText->isChecked();
+}
+
 
 bool CMainWindow::flipMouseWheel()
 {
@@ -230,11 +247,20 @@ void CMainWindow::slotMousePosition(const QPointF& pos)
 
 void CMainWindow::slotUpdateCurrentWidget()
 {
+    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate();
+        return;
+    }
+
     QWidget * w = tabWidget->currentWidget();
     if(w)
     {
         w->update();
+        return;
     }
+
 }
 
 

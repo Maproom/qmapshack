@@ -82,6 +82,7 @@ class CMap : public QThread
            @param p             the point to convert
          */
         void convertRad2Px(QPointF& p);
+        void convertRad2Px(QPolygonF& poly);
 
         /**
            @brief Check if the internal needs redraw flag is set

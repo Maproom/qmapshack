@@ -79,8 +79,7 @@ static quint32 scale2jnx(qreal scale)
 
 
 CMapJNX::CMapJNX(const QString &filename, CMap *parent)
-    : IMap(parent)
-    , map(parent)
+    : IMap(parent)   
     , filename(filename)
     , lon1(180.0)
     , lat1(-90)

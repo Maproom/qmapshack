@@ -22,12 +22,19 @@
 #include "map/IMap.h"
 #include "map/CMap.h"
 #include "map/garmin/Garmin.h"
+#include "map/garmin/CGarminPoint.h"
+#include "map/garmin/CGarminPolygon.h"
+#include "map/garmin/CGarminTyp.h"
 
 #include <QMap>
 
 class CMap;
 class CFileExt;
 class IGarminStrTbl;
+
+typedef QVector<CGarminPolygon> polytype_t;
+typedef QVector<CGarminPoint> pointtype_t;
+
 
 class CMapIMG : public IMap
 {
@@ -145,9 +152,38 @@ class CMapIMG : public IMap
             exce_e err;
             QString msg;
         };
+        struct strlbl_t
+        {
+            strlbl_t() : type(CGarminTyp::eStandard){}
 
+            QPoint  pt;
+            QRect   rect;
+            QString str;
+            CGarminTyp::label_type_e type;
+        };
+
+
+        quint8 scale2bits(const QPointF &scale);
+        void setupTyp();
         bool readBasics();
+        void readSubfileBasics(subfile_desc_t& subfile, CFileExt &file);
+        void processPrimaryMapData();
+        void readTYP(const QByteArray& typ);
         void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
+        void loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois, unsigned level, const QRectF& viewport,QPainter& p);
+        void loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStrTbl * strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois);
+        void drawPolygons(QPainter& p, polytype_t& lines);
+        void drawPolylines(QPainter& p, polytype_t& lines, const QPointF &scale);
+        void drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois);
+        void drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois);
+        void drawLabels(QPainter& p, const QVector<strlbl_t> &lbls);
+        void drawText(QPainter& p);
+
+        void drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polyline_property& property, const QFontMetricsF& metrics, const QFont& font, const QPointF& scale);
+        void drawLine(QPainter& p, const CGarminPolygon& l);
+
+        void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QFontMetricsF& metrics, qint32 lineWidth);
+
 
 #pragma pack(1)
         // Garmin IMG file header structure, to the start of the FAT blocks
@@ -430,6 +466,25 @@ class CMapIMG : public IMap
 #else
 #pragma pack(0)
 #endif
+        struct map_level_t
+        {
+            quint8 bits;
+            quint8 level;
+            bool useBaseMap;
+
+            bool operator==(const map_level_t &ml)  const
+            {
+                if (ml.bits != bits || ml.level != level || ml.useBaseMap != useBaseMap)
+                    return false;
+                else
+                    return true;
+            }
+
+            static bool GreaterThan(const map_level_t &ml1, const map_level_t &ml2)
+            {
+                return ml1.bits < ml2.bits;
+            }
+        };
 
         QString filename;
         quint8  mask;
@@ -443,8 +498,42 @@ class CMapIMG : public IMap
             own subfile parts.
         */
         QMap<QString,subfile_desc_t> subfiles;
+        /// relay the transparent flags from the subfiles
+        bool transparent;
+        bool poiLabels;
+        bool nightView;
 
+        QRectF maparea;
 
+        QFontMetrics fm;
+
+        /// combined maplevels of all tiles
+        QVector<map_level_t> maplevels;
+
+        QMap<quint32, CGarminTyp::polyline_property> polylineProperties;
+        QMap<quint32, CGarminTyp::polygon_property> polygonProperties;
+        QList<quint32> polygonDrawOrder;
+        QMap<quint32, CGarminTyp::point_property> pointProperties;
+        QMap<quint8, QString> languages;
+
+        polytype_t polygons;
+        polytype_t polylines;
+        pointtype_t points;
+        pointtype_t pois;        
+
+        QVector<strlbl_t> labels;
+
+        struct textpath_t
+        {
+            //            QPainterPath    path;
+            QPolygonF       polyline;
+            QString         text;
+            QFont           font;
+            QVector<qreal>  lengths;
+            qint32          lineWidth;
+        };
+
+        QVector<textpath_t> textpaths;
 };
 
 #endif //CMAPIMG_H

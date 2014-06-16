@@ -26,7 +26,6 @@
 
 CMapVRT::CMapVRT(const QString &filename, CMap *parent)
     : IMap(parent)
-    , map(parent)
     , filename(filename)
     , rasterBandCount(0)
 {

@@ -29,6 +29,9 @@ set( SRCS
     map/garmin/CGarminStrTbl6.cpp
     map/garmin/CGarminStrTbl8.cpp
     map/garmin/CGarminStrTblUtf8.cpp
+    map/garmin/CGarminPoint.cpp
+    map/garmin/CGarminPolygon.cpp
+    map/garmin/CGarminTyp.cpp
     units/IUnit.cpp
     units/CUnitImperial.cpp
     units/CUnitMetric.cpp
@@ -64,6 +67,9 @@ set( HDRS
     map/garmin/CGarminStrTbl6.h
     map/garmin/CGarminStrTbl8.h
     map/garmin/CGarminStrTblUtf8.h
+    map/garmin/CGarminPoint.h
+    map/garmin/CGarminPolygon.h
+    map/garmin/CGarminTyp.h
     units/IUnit.h
     units/CUnitImperial.h
     units/CUnitMetric.h

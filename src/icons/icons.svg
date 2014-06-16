@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="12.756065"
-     inkscape:cx="478.12259"
-     inkscape:cy="862.97471"
+     inkscape:zoom="9.0199001"
+     inkscape:cx="100.83218"
+     inkscape:cy="820.30594"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="true"
@@ -119,6 +119,15 @@
        r="8.8596802"
        gradientTransform="matrix(1,0,0,0.999993,0,0.00127712)"
        gradientUnits="userSpaceOnUse" />
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3282">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0097154131"
+         id="feGaussianBlur3284" />
+    </filter>
   </defs>
   <metadata
      id="metadata7">
@@ -2068,4 +2077,462 @@
      inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/32x32/down.png"
      inkscape:export-xdpi="84.696152"
      inkscape:export-ydpi="84.696152" />
+  <g
+     id="g3298"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_dark_yellow.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,24.866666,-5.3703699)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2400"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,27.333333,-2.8359783)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2402"
+       style="fill:#808000;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3286"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_black.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,-5.1333335,-5.3703699)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path3179"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,-2.6666669,-2.8359783)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2385"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3290"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_dark_red.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,4.8666665,-5.3703699)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2388"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,7.3333331,-2.8359783)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2390"
+       style="fill:#800000;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3294"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_dark_green.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,14.866667,-5.3703699)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2394"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,17.333333,-2.8359783)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2396"
+       style="fill:#008000;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3302"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_dark_blue.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,-5.1333335,4.6296301)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2406"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,-2.6666669,7.1640217)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2408"
+       style="fill:#000080;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3306"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_gray.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,4.8666665,4.6296301)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2412"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,7.3333331,7.1640217)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2414"
+       style="fill:#e0e0e0;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3310"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_dark_gray.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,14.866667,4.6296301)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2418"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,17.333333,7.1640217)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2420"
+       style="fill:#808080;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3314"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_red.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,24.866666,4.6296301)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2424"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,27.333333,7.1640217)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2426"
+       style="fill:#ff0000;fill-opacity:1;stroke:none;filter:url(#filter3282)"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3318"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_green.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,-5.1333335,14.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2430"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,-2.6666669,17.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2432"
+       style="fill:#00ff00;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3322"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_yellow.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,4.8666665,14.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2436"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,7.3333331,17.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2438"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3326"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_blue.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,14.866667,14.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2442"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,17.333333,17.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2444"
+       style="fill:#0000ff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3330"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_magenta.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,24.866666,14.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2448"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,27.333333,17.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2450"
+       style="fill:#ff00ff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3334"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_cyan.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,-5.1333338,24.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2454"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,-2.6666672,27.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2456"
+       style="fill:#00ffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3384-0"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_dark_cyan.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,4.8666665,24.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2460"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,7.3333331,27.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2462"
+       style="fill:#008080;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3342"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_white.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,14.866667,24.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2466"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,17.333333,27.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path2468"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <g
+     id="g3380"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_dark_magenta.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"
+     transform="translate(43.556261,195.29848)">
+    <path
+       transform="matrix(3.5466667,0,0,3.6592592,24.866667,24.62963)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path3376"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.5333334,0,0,2.6137565,27.333334,27.164022)"
+       d="m 3.4210526,2.424089 c 0,0.528248 -0.4418242,0.9564777 -0.9868421,0.9564777 -0.5450178,0 -0.9868421,-0.4282297 -0.9868421,-0.9564777 0,-0.5282481 0.4418243,-0.9564778 0.9868421,-0.9564778 0.5450179,0 0.9868421,0.4282297 0.9868421,0.9564778 z"
+       sodipodi:ry="0.95647776"
+       sodipodi:rx="0.9868421"
+       sodipodi:cy="2.424089"
+       sodipodi:cx="2.4342105"
+       id="path3378"
+       style="fill:#800080;fill-opacity:1;stroke:none"
+       sodipodi:type="arc" />
+  </g>
+  <path
+     sodipodi:type="arc"
+     style="fill:#ffffff;fill-opacity:1;stroke:none"
+     id="path2454-9"
+     sodipodi:cx="2.4342105"
+     sodipodi:cy="2.424089"
+     sodipodi:rx="0.9868421"
+     sodipodi:ry="0.95647776"
+     d="m 3.4210526,2.424089 a 0.9868421,0.95647776 0 1 1 -1.9736842,0 0.9868421,0.95647776 0 1 1 1.9736842,0 z"
+     transform="matrix(3.5466667,0,0,3.6592592,38.466235,228.92811)"
+     inkscape:export-filename="/home/oeichler/dateien/cpp/QLandkarteGT/src/icons/small_bullet_orange.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <path
+     sodipodi:type="arc"
+     style="fill:#ffbb00;fill-opacity:1;stroke:none"
+     id="path2456-2"
+     sodipodi:cx="2.4342105"
+     sodipodi:cy="2.424089"
+     sodipodi:rx="0.9868421"
+     sodipodi:ry="0.95647776"
+     d="m 3.4210526,2.424089 a 0.9868421,0.95647776 0 1 1 -1.9736842,0 0.9868421,0.95647776 0 1 1 1.9736842,0 z"
+     transform="matrix(2.5333334,0,0,2.6137565,40.932901,231.4625)"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/8x8/bullet_orange.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
 </svg>

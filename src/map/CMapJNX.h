@@ -31,8 +31,6 @@ public:
     void draw(buffer_t& buf);
 
 private:
-    CMap * map;
-
     QString filename;
 
 #pragma pack(1)

@@ -1,5 +1,23 @@
 <RCC>
     <qresource prefix="/">
+        <file>icons/8x8/bullet_black.png</file>
+        <file>icons/8x8/bullet_blue.png</file>
+        <file>icons/8x8/bullet_brown.png</file>
+        <file>icons/8x8/bullet_cyan.png</file>
+        <file>icons/8x8/bullet_dark_blue.png</file>
+        <file>icons/8x8/bullet_dark_cyan.png</file>
+        <file>icons/8x8/bullet_dark_gray.png</file>
+        <file>icons/8x8/bullet_dark_green.png</file>
+        <file>icons/8x8/bullet_dark_magenta.png</file>
+        <file>icons/8x8/bullet_dark_red.png</file>
+        <file>icons/8x8/bullet_dark_yellow.png</file>
+        <file>icons/8x8/bullet_gray.png</file>
+        <file>icons/8x8/bullet_green.png</file>
+        <file>icons/8x8/bullet_magenta.png</file>
+        <file>icons/8x8/bullet_orange.png</file>
+        <file>icons/8x8/bullet_red.png</file>
+        <file>icons/8x8/bullet_white.png</file>
+        <file>icons/8x8/bullet_yellow.png</file>
         <file>icons/16x16/map.png</file>
         <file>icons/16x16/addCanvas.png</file>
         <file>icons/16x16/scale.png</file>
@@ -48,7 +66,7 @@
         <file>icons/32x32/pathMap.png</file>
         <file>icons/32x32/delete.png</file>
         <file>icons/32x32/deleteAll.png</file>
-        <file>icons/32x32/add.png</file>        
+        <file>icons/32x32/add.png</file>
         <file>icons/32x32/toBottom.png</file>
         <file>icons/32x32/up.png</file>
         <file>icons/32x32/down.png</file>

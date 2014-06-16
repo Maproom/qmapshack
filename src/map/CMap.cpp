@@ -275,8 +275,9 @@ void CMap::resize(const QSize& size)
     mutex.lock(); // --------- start serialize with thread
     viewWidth   = size.width();
     viewHeight  = size.height();
+
     center      = QPointF(viewWidth/2.0, viewHeight/2.0);
-    int a       = sqrt(viewWidth*viewWidth + viewHeight*viewHeight);
+//    int a       = sqrt(viewWidth*viewWidth + viewHeight*viewHeight);
 //    bufWidth    = a + 100;
 //    bufHeight   = a + 100;
     bufWidth    = viewWidth  + 100;
@@ -367,6 +368,23 @@ void CMap::convertRad2Px(QPointF &p)
     convertRad2M(p);
 
     p = (p - f) / (scale * zoomFactor) + center;
+
+    mutex.unlock(); // --------- stop serialize with thread
+}
+
+void CMap::convertRad2Px(QPolygonF& poly)
+{
+    mutex.lock(); // --------- start serialize with thread
+
+    QPointF f = focus;
+    convertRad2M(f);
+
+    for(int i = 0; i < poly.size(); i++)
+    {
+        QPointF& p = poly[i];
+        convertRad2M(p);
+        p = (p - f) / (scale * zoomFactor) + center;
+    }
 
     mutex.unlock(); // --------- stop serialize with thread
 }

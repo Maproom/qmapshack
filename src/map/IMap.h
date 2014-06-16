@@ -25,10 +25,12 @@
 #include <QMutex>
 #include <proj_api.h>
 
+class CMap;
+
 class IMap : public QObject
 {
     public:
-        IMap(QObject * parent);
+        IMap(CMap * parent);
         virtual ~IMap();
 
         struct buffer_t
@@ -64,6 +66,8 @@ class IMap : public QObject
     protected:
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);
+
+        CMap * map;
 
         /// source projection of the current map file
         /**

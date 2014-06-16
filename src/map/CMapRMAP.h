@@ -32,8 +32,6 @@ public:
     void draw(buffer_t& buf);
 
 private:
-    CMap * map;
-
     struct level_t
     {
         level_t(): offsetLevel(0), width(0), height(0), xTiles(0), yTiles(0), xscale(0), yscale(0){}

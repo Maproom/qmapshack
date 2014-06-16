@@ -16,7 +16,9 @@
 
 **********************************************************************************************/
 
-#include "IMap.h"
+#include "map/IMap.h"
+#include "map/CMap.h"
+
 
 QPointF operator*(const QPointF& p1, const QPointF& p2)
 {
@@ -29,8 +31,9 @@ QPointF operator/(const QPointF& p1, const QPointF& p2)
 }
 
 
-IMap::IMap(QObject *parent)
+IMap::IMap(CMap *parent)
     : QObject(parent)
+    , map(parent)
     , pjsrc(0)
     , isActivated(false)
 {

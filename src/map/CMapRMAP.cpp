@@ -26,7 +26,6 @@
 
 CMapRMAP::CMapRMAP(const QString &filename, CMap *parent)
     : IMap(parent)
-    , map(parent)
     , filename(filename)
 {
     qDebug() << "------------------------------";

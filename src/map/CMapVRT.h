@@ -36,7 +36,6 @@ class CMapVRT : public IMap
 
 
     private:
-        CMap * map;
         QString filename;
         /// instance of GDAL dataset
         GDALDataset * dataset;

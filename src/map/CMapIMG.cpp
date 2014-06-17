@@ -33,7 +33,7 @@
 #undef DEBUG_SHOW_SECT_DESC
 #undef DEBUG_SHOW_TRE_DATA
 #undef DEBUG_SHOW_SUBDIV_DATA
-#undef DEBUG_SHOW_MAPLEVELS
+#define DEBUG_SHOW_MAPLEVELS
 #undef DEBUG_SHOW_SECTION_BORDERS
 #undef DEBUG_SHOW_SUBDIV_BORDERS
 
@@ -627,23 +627,17 @@ bool CMapIMG::readBasics()
     }
 #endif                       //DEBUG_SHOW_SECT_DESC
 
+    int cnt = 1;
+    PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), subfiles.count());
     maparea = QRectF();
     QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
     while(subfile != subfiles.end())
     {
-//        subfile->name = mapdesc.trimmed();
-
+        PROGRESS(cnt++, throw exce_t(errAbort,tr("User abort: ") + filename))
         if((*subfile).parts.contains("GMP")) throw exce_t(errFormat,tr("File is NT format. QLandkarte GT is unable to read map files with NT format: ") + filename);
 
         readSubfileBasics(*subfile, file);
 
-        // dem test code ----- start
-        if((*subfile).parts.contains("DEM"))
-        {
-            //            qDebug() <<   fn;
-            //            readDEM(*subfile, file);
-        }
-        // dem test code ----- end
         ++subfile;
     }
     qDebug() << "dimensions:\t" << "N" << (maparea.bottom()*RAD_TO_DEG) << "E" << (maparea.right()*RAD_TO_DEG) << "S" << (maparea.top()*RAD_TO_DEG) << "W" << (maparea.left()*RAD_TO_DEG);
@@ -1077,10 +1071,6 @@ void CMapIMG::processPrimaryMapData()
 
 }
 
-void CMapIMG::readTYP(const QByteArray& typ)
-{
-
-}
 
 quint8  CMapIMG::scale2bits(const QPointF& scale)
 {
@@ -1116,7 +1106,8 @@ void CMapIMG::draw(buffer_t& buf)
         return;
     }
 
-    QPointF bufferScale = buf.scale * buf.zoomFactor;
+    QPointF bufferScale = buf.scale * buf.zoomFactor;    
+    qDebug() << "bufferScale" << bufferScale;
 
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);

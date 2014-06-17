@@ -145,7 +145,7 @@ class CMapIMG : public IMap
         void draw(buffer_t& buf);
 
     private:
-        enum exce_e {eErrOpen, eErrAccess, errFormat, errLock};
+        enum exce_e {eErrOpen, eErrAccess, errFormat, errLock, errAbort};
         struct exce_t
         {
             exce_t(exce_e err, const QString& msg) : err(err), msg(msg){}
@@ -168,7 +168,6 @@ class CMapIMG : public IMap
         bool readBasics();
         void readSubfileBasics(subfile_desc_t& subfile, CFileExt &file);
         void processPrimaryMapData();
-        void readTYP(const QByteArray& typ);
         void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
         void loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois, unsigned level, const QRectF& viewport,QPainter& p);
         void loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStrTbl * strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois);

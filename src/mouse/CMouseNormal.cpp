@@ -23,7 +23,7 @@
 
 CMouseNormal::CMouseNormal(CCanvas *canvas)
     : IMouse(canvas)
-    , moveMap(false)
+    , mapMove(false)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
 }
@@ -38,7 +38,7 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         lastPos = e->pos();
-        moveMap = true;
+        mapMove = true;
     }
 }
 
@@ -46,12 +46,11 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint pos = e->pos();
 
-    if(moveMap)
+    if(mapMove && (pos != lastPos))
     {
         QPoint delta = pos - lastPos;
         canvas->moveMap(delta);
         lastPos = pos;
-        //canvas->update();
         canvas->slotTriggerCompleteUpdate();
     }
 }
@@ -60,10 +59,6 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        if(moveMap)
-        {
-            moveMap = false;
-            canvas->slotTriggerCompleteUpdate();
-        }
+        mapMove = false;
     }
 }

@@ -35,7 +35,7 @@ class CMouseNormal : public IMouse
 
 
     protected:
-        bool moveMap;
+        bool mapMove;
 
         QPoint lastPos;
 };

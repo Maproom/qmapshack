@@ -1235,6 +1235,10 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
             ++subfile;
             continue;
         }
+        if(map->needsRedraw())
+        {
+            break;
+        }
 
         QByteArray rgndata;
         readFile(file, subfile->parts["RGN"].offset, subfile->parts["RGN"].size, rgndata);
@@ -1251,6 +1255,10 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
             {
                 ++subdiv;
                 continue;
+            }
+            if(map->needsRedraw())
+            {
+                break;
             }
             loadSubDiv(file, *subdiv, subfile->strtbl, rgndata, fast, viewport, polylines, polygons, points, pois);
 

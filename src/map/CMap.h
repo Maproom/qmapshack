@@ -96,6 +96,8 @@ class CMap : public QThread
          */
         QString getProjection();
 
+        void getInfo(const QPoint& px, QString& str);
+        void getToolTip(const QPoint& px, QString& str);
 
         static void setupMapPath();
         static void saveMapPath(QSettings &cfg);

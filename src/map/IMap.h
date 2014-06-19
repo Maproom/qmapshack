@@ -63,6 +63,9 @@ class IMap : public QObject
 
         bool activated(){return isActivated;}
 
+        virtual void getInfo(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
+        virtual void getToolTip(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
+
     protected:
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);

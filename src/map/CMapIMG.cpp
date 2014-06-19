@@ -124,6 +124,7 @@ CMapIMG::CMapIMG(const QString &filename, CMap *parent)
     , filename(filename)
     , transparent(false)
     , fm(CMainWindow::self().getMapFont())
+    , selectedLanguage(-1)
 {
     qDebug() << "------------------------------";
     qDebug() << "IMG: try to open" << filename;
@@ -2245,5 +2246,385 @@ void CMapIMG::drawText(QPainter& p)
 
         ++textpath;
     }
+}
+
+
+void CMapIMG::getInfo(const QPoint& px, QString& str)
+{
 
 }
+
+void CMapIMG::getToolTip(const QPoint& px, QString& infotext)
+{
+
+    bool first = true;
+    QMultiMap<QString, QString> dict;
+    getInfoPoints(px, dict);
+    getInfoPois(px, dict);
+    getInfoPolylines(px, dict);
+
+    QList<QString> values = dict.values();
+
+    QString str;
+
+    foreach(const QString& value, values)
+    {
+        if(value == "-")
+        {
+            continue;
+        }
+
+        if(first)
+        {
+            first = false;
+        }
+        else
+        {
+            str += "\n";
+        }
+        str += value;
+    }
+
+    if(str.isEmpty())
+    {
+        getInfoPolygons(px, dict);
+        foreach(const QString& value, values)
+        {
+            if(value == "-")
+            {
+                continue;
+            }
+
+            if(first)
+            {
+                first = false;
+            }
+            else
+            {
+                str += "\n";
+            }
+            str += value;
+        }
+    }
+
+    infotext += str;
+}
+
+void CMapIMG::getInfoPoints(const QPoint& pt, QMultiMap<QString, QString>& dict)
+{
+    pointtype_t::const_iterator point = points.begin();
+    while(point != points.end())
+    {
+        QPoint x = pt - QPoint(point->pos.x(), point->pos.y());
+        if(x.manhattanLength() < 10)
+        {
+            if(point->labels.size())
+            {
+
+                QString str;
+                if((point->type == 0x6200)||(point->type == 0x6300))
+                {
+                    QString unit;
+                    QString val = point->labels[0];
+                    IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                    str = QString("%1 %2").arg(val).arg(unit);
+                }
+                else if(point->type == 0x6616) //669 DAV
+                {
+                    if(point->labels.size()>1)
+                    {
+                        QString unit;
+                        QString val = point->labels[1];
+                        IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                        str = QString("%1 %2 %3").arg(point->labels[0]).arg(val).arg(unit);
+                    }
+                    else
+                    {
+                        str = point->labels[0];
+                    }
+                }
+                else
+                {
+                    str = point->labels.join(", ");
+                }
+
+                dict.insert(tr("Point of Interest"),str);
+            }
+            else
+            {
+                if(pointProperties.contains(point->type))
+                {
+                    if(selectedLanguage != -1)
+                    {
+                        dict.insert(tr("Point of Interest"),pointProperties[point->type].strings[selectedLanguage]);
+                    }
+                    else
+                    {
+                        dict.insert(tr("Point of Interest"),pointProperties[point->type].strings[0]);
+                    }
+                }
+                else
+                {
+                    dict.insert(tr("Point of Interest"), QString(" (%1)").arg(point->type,2,16,QChar('0')));
+                }
+            }
+        }
+        ++point;
+    }
+
+}
+
+
+void CMapIMG::getInfoPois(const QPoint& pt, QMultiMap<QString, QString>& dict)
+{
+    pointtype_t::const_iterator point = pois.begin();
+    while(point != pois.end())
+    {
+        QPoint x = pt - QPoint(point->pos.x(), point->pos.y());
+        if(x.manhattanLength() < 10)
+        {
+            if(point->labels.size())
+            {
+                QString str;
+                if((point->type == 0x6200)||(point->type == 0x6300))
+                {
+                    QString unit;
+                    QString val = point->labels[0];
+                    IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                    str = QString("%1 %2").arg(val).arg(unit);
+                }
+                else if(point->type == 0x6616) //669 DAV
+                {
+                    if(point->labels.size()>1)
+                    {
+                        QString unit;
+                        QString val = point->labels[1];
+                        IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                        str = QString("%1 %2 %3").arg(point->labels[0]).arg(val).arg(unit);
+                    }
+                    else
+                    {
+                        str = point->labels[0];
+                    }
+                }
+                else
+                {
+                    str = point->labels.join(", ");
+                }
+
+                dict.insert(tr("Point of Interest"),str);
+            }
+            else
+            {
+                if(pointProperties.contains(point->type))
+                {
+                    if(selectedLanguage != -1)
+                    {
+                        dict.insert(tr("Point of Interest"),pointProperties[point->type].strings[selectedLanguage]);
+                    }
+                    else
+                    {
+                        dict.insert(tr("Point of Interest"),pointProperties[point->type].strings[0]);
+                    }
+                }
+                else
+                {
+                    dict.insert(tr("Point of Interest"), QString(" (%1)").arg(point->type,2,16,QChar('0')));
+                }
+            }
+        }
+        ++point;
+    }
+}
+
+void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& dict)
+{
+    int i = 0;                   // index into poly line
+    int len;                     // number of points in line
+    projXY p1, p2;               // the two points of the polyline close to pt
+    double dx,dy;                // delta x and y defined by p1 and p2
+    double d_p1_p2;              // distance between p1 and p2
+    double u;                    // ratio u the tangent point will divide d_p1_p2
+    double x,y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
+    double distance;             // the distance to the polyline
+    double shortest;             // shortest distance sofar
+
+    QPointF resPt = pt;
+    QString key, value;
+    quint32 type = 0;
+
+    shortest = 20;
+
+    bool found = false;
+
+    polytype_t::const_iterator line = polylines.begin();
+    while(line != polylines.end())
+    {
+        len = line->poly.size();
+        // need at least 2 points
+        if(len < 2)
+        {
+            ++line;
+            continue;
+        }
+
+        // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
+        for(i=1; i<len; ++i)
+        {
+            p1.u = line->poly[i-1].x();
+            p1.v = line->poly[i-1].y();
+            p2.u = line->poly[i].x();
+            p2.v = line->poly[i].y();
+
+            dx = p2.u - p1.u;
+            dy = p2.v - p1.v;
+
+            d_p1_p2 = sqrt(dx * dx + dy * dy);
+
+            u = ((pt.x() - p1.u) * dx + (pt.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
+
+            if(u < 0.0 || u > 1.0) continue;
+
+            x = p1.u + u * dx;
+            y = p1.v + u * dy;
+
+            distance = sqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
+
+            if(distance < shortest)
+            {
+                type = line->type;
+
+                if(!line->labels.isEmpty())
+                {
+                    switch(type)
+                    {
+                                 // "Minor depth contour"
+                        case 0x23:
+                                 // "Minor land contour"
+                        case 0x20:
+                                 // "Intermediate depth contour",
+                        case 0x24:
+                                 // "Intermediate land contour",
+                        case 0x21:
+                                 // "Major depth contour",
+                        case 0x25:
+                                 // "Major land contour",
+                        case 0x22:
+                        {
+                            QString unit;
+                            QString val = line->labels[0];
+                            IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                            value = QString("%1 %2").arg(val).arg(unit);
+                        }
+                        break;
+
+                        default:
+                            value = line->labels.join(" ").simplified();
+                    }
+                }
+                else
+                {
+                    value = "-";
+                }
+                resPt.setX(x);
+                resPt.setY(y);
+                shortest = distance;
+                found = true;
+            }
+
+        }
+        ++line;
+    }
+
+    if(!found)
+    {
+        return;
+    }
+
+    if(selectedLanguage != -1)
+    {
+        key =  polylineProperties[type].strings[selectedLanguage];
+    }
+
+    if(!key.isEmpty())
+    {
+        dict.insert(key + QString("(%1)").arg(type,2,16,QChar('0')),value);
+    }
+    else
+    {
+        if(polylineProperties[type].strings.isEmpty())
+        {
+            dict.insert(tr("Unknown") + QString("(%1)").arg(type,2,16,QChar('0')),value);
+        }
+        else
+        {
+            dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type,2,16,QChar('0')),value);
+        }
+    }
+
+//    pt = resPt.toPoint();
+}
+
+void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict)
+{
+    int     npol;
+    int     i = 0, j = 0 ,c = 0;
+    projXY      p1, p2;          // the two points of the polyline close to pt
+    double  x = pt.x();
+    double  y = pt.y();
+    QString value;
+
+    polytype_t::const_iterator line = polygons.begin();
+    while(line != polygons.end())
+    {
+
+        npol = line->poly.size();
+        if(npol > 2)
+        {
+            c = 0;
+            // see http://local.wasp.uwa.edu.au/~pbourke/geometry/insidepoly/
+            for (i = 0, j = npol-1; i < npol; j = i++)
+            {
+                p1.u = line->poly[j].x();
+                p1.v = line->poly[j].y();
+                p2.u = line->poly[i].x();
+                p2.v = line->poly[i].y();
+
+                if ((((p2.v <= y) && (y < p1.v))  || ((p1.v <= y) && (y < p2.v))) &&
+                    (x < (p1.u - p2.u) * (y - p2.v) / (p1.v - p2.v) + p2.u))
+                {
+                    c = !c;
+                }
+            }
+
+            if(c)
+            {
+                if(line->labels.size())
+                {
+                    dict.insert(tr("Area"), line->labels.join(" ").simplified());
+                }
+                else
+                {
+
+                    if(selectedLanguage != -1)
+                    {
+                        if(polygonProperties[line->type].strings[selectedLanguage].size())
+                        {
+                            dict.insert(tr("Area"), polygonProperties[line->type].strings[selectedLanguage]);
+                        }
+                    }
+                    else
+                    {
+                        if(polygonProperties[line->type].strings[0].size())
+                        {
+                            dict.insert(tr("Area"), polygonProperties[line->type].strings[0]);
+                        }
+                    }
+
+                }
+            }
+        }
+        ++line;
+    }
+}
+

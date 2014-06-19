@@ -26,11 +26,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.718878"
-     inkscape:cx="333.70745"
-     inkscape:cy="825.32635"
+     inkscape:zoom="6.1651778"
+     inkscape:cx="397.67001"
+     inkscape:cy="789.96489"
      inkscape:document-units="px"
-     inkscape:current-layer="svg2"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1920"
      inkscape:window-height="996"
@@ -800,9 +800,9 @@
     <g
        id="g3967"
        transform="matrix(0.94518363,0,0,1,1.3803573,0)"
-       inkscape:export-filename="/home/oeichler/dateien/android/QLandkarteM/QLandkarteM/icons/32x32/view.png"
-       inkscape:export-xdpi="82.238831"
-       inkscape:export-ydpi="82.238831">
+       inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/view.png"
+       inkscape:export-xdpi="41.119415"
+       inkscape:export-ydpi="41.119415">
       <path
          inkscape:connector-curvature="0"
          d="m 27.178667,149.21229 c 5.56846,8.63438 17.386879,11.30813 26.397169,5.97198 2.62143,-1.55248 4.81387,-3.68745 6.39167,-6.2241 m -32.542459,-0.47444 c 5.56846,-8.63438 17.386879,-11.30813 26.397169,-5.97198 2.62143,1.55248 4.81387,3.68745 6.39167,6.2241"
@@ -913,6 +913,56 @@
        inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/add.png"
        inkscape:export-xdpi="75.913841"
        inkscape:export-ydpi="75.913841" />
+    <g
+       id="g3394"
+       transform="matrix(0.88040312,0,0,1,54.806619,-5.5624777)" />
+    <g
+       id="g3364"
+       inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/toolTip.png"
+       inkscape:export-xdpi="36"
+       inkscape:export-ydpi="36">
+      <g
+         id="g3359">
+        <path
+           transform="matrix(0.67539562,0,0,0.6447077,420.01108,19.25786)"
+           inkscape:transform-center-y="-0.44074938"
+           inkscape:transform-center-x="0.5244475"
+           d="m 70,342.36218 -8.893841,-3.01599 -7.526554,5.61673 0.120027,-9.39054 -7.667654,-5.42251 L 55,327.36218 l 2.787683,-8.96802 5.422515,7.66766 9.390537,-0.12003 -5.616724,7.52655 z"
+           inkscape:randomized="0"
+           inkscape:rounded="0"
+           inkscape:flatsided="false"
+           sodipodi:arg2="1.4137167"
+           sodipodi:arg1="0.78539816"
+           sodipodi:r2="7.0710678"
+           sodipodi:r1="14.142136"
+           sodipodi:cy="332.36218"
+           sodipodi:cx="60"
+           sodipodi:sides="5"
+           id="path3356"
+           style="fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:#000000"
+           sodipodi:type="star" />
+        <text
+           sodipodi:linespacing="125%"
+           id="text3344"
+           y="235.82008"
+           x="465.51398"
+           style="font-size:22.27394676px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Bold"
+           xml:space="preserve"
+           transform="scale(0.93445097,1.0701471)"><tspan
+             style="font-size:22.27394676px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000080;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Bold"
+             y="235.82008"
+             x="465.51398"
+             id="tspan3346"
+             sodipodi:role="line">Tip</tspan></text>
+      </g>
+      <rect
+         y="220.9761"
+         x="432.55267"
+         height="40"
+         width="40"
+         id="rect3358"
+         style="fill:none;stroke:none" />
+    </g>
   </g>
   <g
      id="g6297"

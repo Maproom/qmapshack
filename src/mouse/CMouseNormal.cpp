@@ -46,12 +46,19 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint pos = e->pos();
 
-    if(mapMove && (pos != lastPos))
+    if(mapMove)
     {
-        QPoint delta = pos - lastPos;
-        canvas->moveMap(delta);
-        lastPos = pos;
-        canvas->slotTriggerCompleteUpdate();
+        if(pos != lastPos)
+        {
+            QPoint delta = pos - lastPos;
+            canvas->moveMap(delta);
+            lastPos = pos;
+            canvas->slotTriggerCompleteUpdate();
+        }
+    }
+    else
+    {
+        canvas->displayInfo(pos);
     }
 }
 

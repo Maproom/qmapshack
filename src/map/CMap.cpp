@@ -178,6 +178,68 @@ QString CMap::getProjection()
     return pj_get_def(pjsrc,0);
 }
 
+void CMap::getInfo(const QPoint& px, QString& str)
+{
+    if(isRunning())
+    {
+        return;
+    }
+    CMapItem::mutexActiveMaps.lock();
+    if(mapList)
+    {
+        for(int i = 0; i < mapList->count(); i++)
+        {
+            CMapItem * item = mapList->item(i);
+
+            if(!item || item->files.isEmpty())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break ass soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            foreach(IMap * m, item->files)
+            {
+                m->getInfo(px, str);
+            }
+        }
+    }
+    CMapItem::mutexActiveMaps.unlock();
+
+}
+
+void CMap::getToolTip(const QPoint& px, QString& str)
+{
+    if(isRunning())
+    {
+        return;
+    }
+    CMapItem::mutexActiveMaps.lock();
+    if(mapList)
+    {
+        for(int i = 0; i < mapList->count(); i++)
+        {
+            CMapItem * item = mapList->item(i);
+
+            if(!item || item->files.isEmpty())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break ass soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            foreach(IMap * m, item->files)
+            {
+                m->getToolTip(px, str);
+            }
+        }
+    }
+    CMapItem::mutexActiveMaps.unlock();
+
+}
+
 void CMap::saveConfig(QSettings& cfg)
 {
     QStringList keys;

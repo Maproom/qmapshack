@@ -144,6 +144,9 @@ class CMapIMG : public IMap
 
         void draw(buffer_t& buf);
 
+        void getInfo(const QPoint& px, QString& str);
+        void getToolTip(const QPoint& px, QString& infotext);
+
     private:
         enum exce_e {eErrOpen, eErrAccess, errFormat, errLock, errAbort};
         struct exce_t
@@ -183,6 +186,10 @@ class CMapIMG : public IMap
 
         void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QFontMetricsF& metrics, qint32 lineWidth);
 
+        void getInfoPoints(const QPoint& pt, QMultiMap<QString, QString>& dict);
+        void getInfoPois(const QPoint& pt, QMultiMap<QString, QString>& dict);
+        void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict);
+        void getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict);
 
 #pragma pack(1)
         // Garmin IMG file header structure, to the start of the FAT blocks
@@ -531,6 +538,7 @@ class CMapIMG : public IMap
         };
 
         QVector<textpath_t> textpaths;
+        qint8 selectedLanguage;
 };
 
 #endif //CMAPIMG_H

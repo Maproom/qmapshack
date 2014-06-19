@@ -26,6 +26,7 @@ class QSettings;
 class QPointF;
 class CGrid;
 class IMouse;
+class QTimer;
 
 inline  void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 {
@@ -55,6 +56,7 @@ class CCanvas : public QWidget
         void convertGridPos2Str(const QPointF& pos, QString& str);
 
         void moveMap(const QPointF &delta);
+        void displayInfo(const QPoint& px);
 
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color);
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font);
@@ -77,6 +79,9 @@ class CCanvas : public QWidget
         void leaveEvent(QEvent * e);
 
 
+    private slots:
+        void slotToolTip();
+
     private:
         void drawScale(QPainter& p);
 
@@ -90,6 +95,9 @@ class CCanvas : public QWidget
         QPointF posFocus;
 
         IMouse * mouse;
+
+        QTimer * timerToolTip;
+        QPoint posToolTip;
 
 };
 

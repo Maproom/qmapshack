@@ -25,7 +25,7 @@
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
 
-#include <QtGui>
+#include <QtWidgets>
 
 
 
@@ -52,6 +52,10 @@ CCanvas::CCanvas(QWidget *parent)
     mouse   = new CMouseNormal(this);
 
     connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
+
+    timerToolTip = new QTimer(this);
+    timerToolTip->setSingleShot(true);
+    connect(timerToolTip, SIGNAL(timeout()), this, SLOT(slotToolTip()));
 }
 
 CCanvas::~CCanvas()
@@ -305,6 +309,18 @@ void CCanvas::slotTriggerCompleteUpdate()
     update();
 }
 
+void CCanvas::slotToolTip()
+{
+    QString str;
+    map->getToolTip(posToolTip, str);
+    if(str.isEmpty())
+    {
+        return;
+    }
+    QPoint p = mapToGlobal(posToolTip + QPoint(32,0));
+    QToolTip::showText(p,str);
+}
+
 void CCanvas::moveMap(const QPointF& delta)
 {
     map->convertRad2Px(posFocus);
@@ -322,4 +338,16 @@ void CCanvas::setupGrid()
 void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str)
 {
     grid->convertPos2Str(pos, str);
+}
+
+void CCanvas::displayInfo(const QPoint& px)
+{
+    if(CMainWindow::self().isMapToolTip())
+    {
+        posToolTip = px;
+
+        timerToolTip->stop();
+        timerToolTip->start(1000);
+    }
+    QToolTip::hideText();
 }

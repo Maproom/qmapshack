@@ -61,6 +61,7 @@ CMainWindow::CMainWindow()
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
+    connect(actionMapToolTip, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionNightDay, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
@@ -86,7 +87,8 @@ CMainWindow::CMainWindow()
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
     actionPOIText->setChecked(cfg.value("POIText", true).toBool());
-    actionNightDay->setChecked(cfg.value("isNIght", false).toBool());
+    actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
+    actionNightDay->setChecked(cfg.value("isNight", false).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
@@ -128,7 +130,8 @@ CMainWindow::~CMainWindow()
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
     cfg.setValue("POIText", actionPOIText->isChecked());
-    cfg.setValue("isNIght", actionNightDay->isChecked());
+    cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
+    cfg.setValue("isNight", actionNightDay->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("mapFont", mapFont);
     CMap::saveMapPath(cfg);
@@ -156,6 +159,10 @@ bool CMainWindow::isPOIText()
     return actionPOIText->isChecked();
 }
 
+bool CMainWindow::isMapToolTip()
+{
+    return actionMapToolTip->isChecked();
+}
 
 bool CMainWindow::flipMouseWheel()
 {

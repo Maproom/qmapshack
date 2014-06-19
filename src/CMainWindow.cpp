@@ -83,6 +83,12 @@ CMainWindow::CMainWindow()
         canvas->loadConfig(cfg);
         cfg.endGroup();
     }
+    if(N == 0)
+    {
+        CCanvas * canvas = new CCanvas(tabWidget);
+        tabWidget->addTab(canvas, canvas->objectName());
+        connect(canvas, SIGNAL(sigMousePosition(QPointF)), this, SLOT(slotMousePosition(QPointF)));
+    }
 
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());

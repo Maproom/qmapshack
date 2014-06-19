@@ -79,16 +79,25 @@ CMapItem * CMapList::item(int i)
 
 void CMapList::updateHelpText()
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(listWidget->item(0));
-    if(item && item->isActivated())
+    if(listWidget->count() == 0)
     {
-        labelHelp->hide();
+        labelHelpFillMapList->show();
+        labelHelpActivateMap->hide();
     }
     else
     {
-        labelHelp->show();
-    }
+        labelHelpFillMapList->hide();
 
+        CMapItem * item = dynamic_cast<CMapItem*>(listWidget->item(0));
+        if(item && item->isActivated())
+        {
+            labelHelpActivateMap->hide();
+        }
+        else
+        {
+            labelHelpActivateMap->show();
+        }
+    }
 }
 
 void CMapList::slotActivate()

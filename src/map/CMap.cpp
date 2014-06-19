@@ -291,7 +291,7 @@ void CMap::buildMapList()
             f.close();
         }
     }
-
+    mapList->updateHelpText();
 }
 
 void CMap::saveActiveMapsList(QStringList& keys)

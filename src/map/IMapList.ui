@@ -34,7 +34,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="labelHelp">
+    <widget class="QLabel" name="labelHelpFillMapList">
+     <property name="text">
+      <string>To add maps use File-&gt;Setup Map Pathes. </string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelHelpActivateMap">
      <property name="text">
       <string>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </string>
      </property>

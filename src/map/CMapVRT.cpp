@@ -137,6 +137,9 @@ CMapVRT::CMapVRT(const QString &filename, CMap *parent)
     ref3 = trFwd.map(QPointF(xsize_px,ysize_px));
     ref4 = trFwd.map(QPointF(0,ysize_px));
 
+    qDebug() << "FF" << trFwd;
+    qDebug() << "RR" << trInv;
+
     isActivated = true;
 }
 
@@ -151,6 +154,8 @@ void CMapVRT::draw(buffer_t& buf)
     {
         return;
     }
+
+    QPointF bufferScale = buf.scale * buf.zoomFactor;
 
     // calculate bounding box;
     QPointF pt1 = ref1;
@@ -187,8 +192,104 @@ void CMapVRT::draw(buffer_t& buf)
     qDebug() << pt1 << pt2 << pt3 << pt4;
 
     QPainter p(&buf.image);
+    USE_ANTI_ALIASING(p,true);
+
+    qreal left     = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
+    qreal right    = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
+    qreal top      = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
+    qreal bottom   = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
+
+    qDebug() << left << top << right << bottom;
+
+    if(left < 0) left = 0;
+    if(top < 0) top  = 0;
+    if(right > xsize_px) right = xsize_px;
+    if(bottom > ysize_px) bottom = ysize_px;
+
+    qDebug() << left << top << right << bottom;
+
+    qreal imgw = 64;
+    qreal imgh = 64;
+    qreal dx =  imgw;
+    qreal dy =  imgh;
+
+    if(bufferScale.x() < 10)
+    {
+
+        for(qreal y = top; y < bottom; y += dy)
+        {
+            if(map->needsRedraw())
+            {
+                break;
+            }
+
+            for(qreal x = left; x < right; x += dx)
+            {
+                if(map->needsRedraw())
+                {
+                    break;
+                }
+
+                // read tile from file
+                CPLErr err = CE_Failure;
+
+                QImage img;
+                if(rasterBandCount == 1)
+                {
+                    GDALRasterBand * pBand;
+                    pBand = dataset->GetRasterBand(1);
+
+                    img = QImage(QSize(imgw,imgh),QImage::Format_Indexed8);
+                    img.setColorTable(colortable);
+
+                    err = pBand->RasterIO(GF_Read
+                        ,(int)x,(int)y
+                        ,dx,dy
+                        ,img.bits()
+                        ,imgw,imgh
+                        ,GDT_Byte,0,0);
+                }
+
+                if(err)
+                {
+                    continue;
+                }
 
 
+                QPolygonF l;
+                l << QPointF(x,y) << QPointF(x+dx,y) << QPointF(x+dx,y+dy) << QPointF(x,y+dy);
+                l = trFwd.map(l);
+
+                pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+                pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+                pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+                pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+                map->convertRad2Px(l);
+
+                {
+                    // adjust the tiles width and height to fit the buffer's scale
+                    qreal dx1   = l[0].x() - l[1].x();
+                    qreal dy1   = l[0].y() - l[1].y();
+                    qreal dx2   = l[0].x() - l[3].x();
+                    qreal dy2   = l[0].y() - l[3].y();
+                    qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1));
+                    qreal h    = ceil( sqrt(dx2*dx2 + dy2*dy2));
+
+                    // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
+                    qreal a = atan(dy1/dx1) * RAD_TO_DEG;
+
+                    // finally scale, rotate and draw tile
+                    p.translate(50,50);
+                    p.translate(l[0]);
+                    p.scale(w/imgw, h/imgh);
+                    p.rotate(a);
+                    p.drawImage(0,0,img);
+                    p.resetTransform();
+                }
+            }
+        }
+    }
     p.translate(50,50);
     p.setPen(Qt::black);
     p.setBrush(Qt::NoBrush);

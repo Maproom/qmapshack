@@ -19,16 +19,16 @@
 #ifndef CMAPITEM_H
 #define CMAPITEM_H
 
-#include <QListWidgetItem>
+#include <QTreeWidgetItem>
 #include <QMutex>
 
 class IMap;
 class CMap;
 
-class CMapItem : public QListWidgetItem
+class CMapItem : public QTreeWidgetItem
 {
     public:
-        CMapItem(QListWidget * parent, CMap *map);
+        CMapItem(QTreeWidget * parent, CMap *map);
         virtual ~CMapItem();
 
         /**

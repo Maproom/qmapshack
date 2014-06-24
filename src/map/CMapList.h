@@ -20,17 +20,17 @@
 #define CMAPLIST_H
 
 #include <QWidget>
-#include <QListWidget>
+#include <QTreeWidget>
 
 
 class CMapItem;
 class QMenu;
 
-class CMapListWidget : public QListWidget
+class CMapTreeWidget : public QTreeWidget
 {
     Q_OBJECT
     public:
-        CMapListWidget(QWidget * parent): QListWidget(parent){}
+        CMapTreeWidget(QWidget * parent): QTreeWidget(parent){}
 
     signals:
         void sigChanged();
@@ -52,7 +52,7 @@ class CMapList : public QWidget, private Ui::IMapList
         void clear();
         int count();
         CMapItem * item(int i);
-        operator QListWidget*(){return listWidget;}
+        operator QTreeWidget*(){return treeWidget;}
 
         void updateHelpText();
 

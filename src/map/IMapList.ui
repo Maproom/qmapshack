@@ -24,7 +24,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="CMapListWidget" name="listWidget">
+    <widget class="CMapTreeWidget" name="treeWidget">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -37,6 +37,14 @@
        <height>32</height>
       </size>
      </property>
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>
@@ -76,8 +84,8 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CMapListWidget</class>
-   <extends>QListWidget</extends>
+   <class>CMapTreeWidget</class>
+   <extends>QTreeWidget</extends>
    <header>map/CMapList.h</header>
   </customwidget>
  </customwidgets>

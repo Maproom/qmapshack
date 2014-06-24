@@ -278,9 +278,8 @@ void CMap::buildMapList()
 
             CMapItem * item = new CMapItem(*mapList, this);
 
-            item->setText(fi.baseName());
+            item->setText(0,fi.baseName());
             item->filenames  << dir.absoluteFilePath(filename);
-            item->setSizeHint(QSize(0,32));
             item->updateIcon();
 
             QFile f(dir.absoluteFilePath(filename));

@@ -27,11 +27,11 @@
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
 
-CMapItem::CMapItem(QListWidget *parent, CMap * map)
-    : QListWidgetItem(parent)
+CMapItem::CMapItem(QTreeWidget *parent, CMap * map)
+    : QTreeWidgetItem(parent)
     , map(map)
 {
-
+    setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 }
 
 CMapItem::~CMapItem()
@@ -75,7 +75,7 @@ void CMapItem::updateIcon()
         p.drawPixmap(0,0,QPixmap("://icons/16x16/redGlow.png"));
     }
 
-    setIcon(QIcon(img));    
+    setIcon(0,QIcon(img));
 }
 
 bool CMapItem::isActivated()
@@ -106,6 +106,8 @@ void CMapItem::deactivate()
 
     updateIcon();
     moveToBottom();
+
+    setFlags(flags() & ~Qt::ItemIsDragEnabled);
 }
 
 
@@ -166,16 +168,18 @@ bool CMapItem::activate()
     }
     updateIcon();
     moveToBottom();
+
+    setFlags(flags() | Qt::ItemIsDragEnabled);
     return true;
 }
 
 void CMapItem::moveToTop()
 {
-    QListWidget * w = listWidget();
+    QTreeWidget * w = treeWidget();
     QMutexLocker lock(&mutexActiveMaps);
 
-    w->takeItem(w->row(this));
-    w->insertItem(0, this);
+    w->takeTopLevelItem(w->indexOfTopLevelItem(this));
+    w->insertTopLevelItem(0, this);
 
     map->emitSigCanvasUpdate();
 }
@@ -185,19 +189,19 @@ void CMapItem::moveToBottom()
 {
 
     int row;
-    QListWidget * w = listWidget();
+    QTreeWidget * w = treeWidget();
     QMutexLocker lock(&mutexActiveMaps);
 
-    w->takeItem(w->row(this));
-    for(row = 0; row < w->count(); row++)
+    w->takeTopLevelItem(w->indexOfTopLevelItem(this));
+    for(row = 0; row < w->topLevelItemCount(); row++)
     {
-        CMapItem * item = dynamic_cast<CMapItem*>(w->item(row));
+        CMapItem * item = dynamic_cast<CMapItem*>(w->topLevelItem(row));
         if(item && item->files.isEmpty())
         {
             break;
         }
     }
-    w->insertItem(row, this);
+    w->insertTopLevelItem(row, this);
 
     map->emitSigCanvasUpdate();
 }

@@ -21,14 +21,14 @@
 
 #include <QtWidgets>
 
-void CMapListWidget::dragMoveEvent ( QDragMoveEvent  * event )
+void CMapTreeWidget::dragMoveEvent ( QDragMoveEvent  * event )
 {
     CMapItem * item = dynamic_cast<CMapItem*>(itemAt(event->pos()));
 
     if(item && item->isActivated())
     {
         event->setDropAction(Qt::MoveAction);
-        QListWidget::dragMoveEvent(event);
+        QTreeWidget::dragMoveEvent(event);
     }
     else
     {
@@ -36,9 +36,9 @@ void CMapListWidget::dragMoveEvent ( QDragMoveEvent  * event )
     }
 }
 
-void CMapListWidget::dropEvent ( QDropEvent  * event )
+void CMapTreeWidget::dropEvent ( QDropEvent  * event )
 {
-    QListWidget::dropEvent(event);
+    QTreeWidget::dropEvent(event);
     emit sigChanged();;
 }
 
@@ -47,11 +47,11 @@ CMapList::CMapList(QWidget *parent)
 {
     setupUi(this);
 
-    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
-    connect(listWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+    connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
 
-    connect(listWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(treeWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -64,22 +64,22 @@ CMapList::~CMapList()
 
 void CMapList::clear()
 {
-    listWidget->clear();
+    treeWidget->clear();
 }
 
 int CMapList::count()
 {
-    return listWidget->count();
+    return treeWidget->topLevelItemCount();
 }
 
 CMapItem * CMapList::item(int i)
 {
-    return dynamic_cast<CMapItem *>(listWidget->item(i));
+    return dynamic_cast<CMapItem *>(treeWidget->topLevelItem(i));
 }
 
 void CMapList::updateHelpText()
 {
-    if(listWidget->count() == 0)
+    if(treeWidget->topLevelItemCount() == 0)
     {
         labelHelpFillMapList->show();
         labelHelpActivateMap->hide();
@@ -88,7 +88,7 @@ void CMapList::updateHelpText()
     {
         labelHelpFillMapList->hide();
 
-        CMapItem * item = dynamic_cast<CMapItem*>(listWidget->item(0));
+        CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(0));
         if(item && item->isActivated())
         {
             labelHelpActivateMap->hide();
@@ -102,13 +102,13 @@ void CMapList::updateHelpText()
 
 void CMapList::slotActivate()
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(listWidget->currentItem());
+    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
     if(item == 0) return;
 
     bool activated = item->toggleActivate();
     if(!activated)
     {
-        listWidget->setCurrentItem(0);
+        treeWidget->setCurrentItem(0);
     }
 
     updateHelpText();
@@ -116,21 +116,21 @@ void CMapList::slotActivate()
 
 void CMapList::slotItemSelectionChanged()
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(listWidget->currentItem());
+    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
     if(item && item->isActivated())
     {
-        listWidget->setDragDropMode(QAbstractItemView::InternalMove);
+        treeWidget->setDragDropMode(QAbstractItemView::InternalMove);
     }
     else
     {
-        listWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
+        treeWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
     }
 
 }
 
 void CMapList::slotContextMenu(const QPoint& point)
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(listWidget->currentItem());
+    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
 
     if(item == 0)
     {
@@ -140,6 +140,6 @@ void CMapList::slotContextMenu(const QPoint& point)
     actionActivate->setChecked(activated);
     actionActivate->setText(activated ? tr("Deactivate") : tr("Activate"));
 
-    QPoint p = listWidget->mapToGlobal(point);
+    QPoint p = treeWidget->mapToGlobal(point);
     menu->exec(p);
 }

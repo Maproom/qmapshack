@@ -114,31 +114,28 @@ CMapVRT::CMapVRT(const QString &filename, CMap *parent)
     xsize_px = dataset->GetRasterXSize();
     ysize_px = dataset->GetRasterYSize();
 
+
     double adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
-    if (pj_is_latlong(pjsrc))
+    xscale = adfGeoTransform[1];
+    yscale = adfGeoTransform[5];
+
+    xrot = adfGeoTransform[4];
+    yrot = adfGeoTransform[2];
+
+    trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
+    trFwd.scale(adfGeoTransform[1],adfGeoTransform[5]);
+    if(adfGeoTransform[4] != 0.0)
     {
-        xscale  = adfGeoTransform[1] * DEG_TO_RAD;
-        yscale  = adfGeoTransform[5] * DEG_TO_RAD;
-
-        xref1   = adfGeoTransform[0] * DEG_TO_RAD;
-        yref1   = adfGeoTransform[3] * DEG_TO_RAD;
+        trFwd.rotate(atan(adfGeoTransform[2]/adfGeoTransform[4]));
     }
-    else
-    {
-        xscale  = adfGeoTransform[1];
-        yscale  = adfGeoTransform[5];
+    trInv = trFwd.inverted();
 
-        xref1   = adfGeoTransform[0];
-        yref1   = adfGeoTransform[3];
-    }
-
-    xref2   = xref1 + xsize_px * xscale;
-    yref2   = yref1 + ysize_px * yscale;
-
-    qDebug() << "xscale" << xscale << "yscale" << yscale;
-    qDebug() << xref1 << yref1 << xref2 << yref2;
+    ref1 = trFwd.map(QPointF(0,0));
+    ref2 = trFwd.map(QPointF(xsize_px,0));
+    ref3 = trFwd.map(QPointF(xsize_px,ysize_px));
+    ref4 = trFwd.map(QPointF(0,ysize_px));
 
     isActivated = true;
 }
@@ -148,6 +145,57 @@ CMapVRT::~CMapVRT()
     if(dataset) delete dataset;
 }
 
+void CMapVRT::draw(buffer_t& buf)
+{
+    if(map->needsRedraw())
+    {
+        return;
+    }
+
+    // calculate bounding box;
+    QPointF pt1 = ref1;
+    QPointF pt2 = ref2;
+    QPointF pt3 = ref3;
+    QPointF pt4 = ref4;
+
+    pj_transform(pjsrc,pjtar, 1, 0, &pt1.rx(), &pt1.ry(), 0);
+    pj_transform(pjsrc,pjtar, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+    pj_transform(pjsrc,pjtar, 1, 0, &pt3.rx(), &pt3.ry(), 0);
+    pj_transform(pjsrc,pjtar, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+
+    QPolygonF boundingBox;
+    boundingBox << pt1 << pt2 << pt3 << pt4;
+    map->convertRad2Px(boundingBox);
+
+    // calculate area to read from file
+    pt1 = buf.ref1;
+    pt2 = buf.ref2;
+    pt3 = buf.ref3;
+    pt4 = buf.ref4;
+
+    pj_transform(pjtar,pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
+    pj_transform(pjtar,pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+    pj_transform(pjtar,pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
+    pj_transform(pjtar,pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+
+    qDebug() << pt1 << pt2 << pt3 << pt4;
+    pt1 = trInv.map(pt1);
+    pt2 = trInv.map(pt2);
+    pt3 = trInv.map(pt3);
+    pt4 = trInv.map(pt4);
+
+    qDebug() << pt1 << pt2 << pt3 << pt4;
+
+    QPainter p(&buf.image);
+
+
+    p.translate(50,50);
+    p.setPen(Qt::black);
+    p.setBrush(Qt::NoBrush);
+    p.drawPolygon(boundingBox);
+}
+
+/*
 void CMapVRT::draw(buffer_t& buf)
 {
     if(map->needsRedraw())
@@ -291,3 +339,4 @@ void CMapVRT::draw(buffer_t& buf)
 
     }
 }
+*/

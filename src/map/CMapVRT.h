@@ -54,15 +54,16 @@ class CMapVRT : public IMap
         /// scale [px/m]
         double yscale;
 
-        /// reference point [m] (left hand side of map)
-        double xref1;
-        /// reference point [m] (top of map)
-        double yref1;
-        /// reference point [m] (right hand side of map)
-        double xref2;
-        /// reference point [m] (bottom of map)
-        double yref2;
+        double xrot;
+        double yrot;
 
+        QPointF ref1;
+        QPointF ref2;
+        QPointF ref3;
+        QPointF ref4;
+
+        QTransform trFwd;
+        QTransform trInv;
 
 
 };

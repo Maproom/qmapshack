@@ -155,8 +155,6 @@ void CMapVRT::draw(buffer_t& buf)
         return;
     }
 
-    QPointF bufferScale = buf.scale * buf.zoomFactor;
-
     // calculate bounding box;
     QPointF pt1 = ref1;
     QPointF pt2 = ref2;
@@ -183,37 +181,42 @@ void CMapVRT::draw(buffer_t& buf)
     pj_transform(pjtar,pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
     pj_transform(pjtar,pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
 
-    qDebug() << pt1 << pt2 << pt3 << pt4;
     pt1 = trInv.map(pt1);
     pt2 = trInv.map(pt2);
     pt3 = trInv.map(pt3);
     pt4 = trInv.map(pt4);
 
-    qDebug() << pt1 << pt2 << pt3 << pt4;
-
-    QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
-
-    qreal left     = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
-    qreal right    = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
-    qreal top      = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
-    qreal bottom   = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
-
-    qDebug() << left << top << right << bottom;
+    qreal left, right, top, bottom;
+    left     = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
+    right    = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
+    top      = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
+    bottom   = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
 
     if(left < 0) left = 0;
-    if(top < 0) top  = 0;
-    if(right > xsize_px) right = xsize_px;
-    if(bottom > ysize_px) bottom = ysize_px;
+    if(left > xsize_px) left = xsize_px;
 
-    qDebug() << left << top << right << bottom;
+    if(top < 0) top  = 0;
+    if(top > ysize_px) top  = ysize_px;
+
+    if(right > xsize_px) right = xsize_px;
+    if(right < 0) right = 0;
+
+    if(bottom > ysize_px) bottom = ysize_px;
+    if(bottom < 0) bottom = 0;
 
     qreal imgw = 64;
     qreal imgh = 64;
     qreal dx =  imgw;
     qreal dy =  imgh;
 
-    if(bufferScale.x() < 10)
+    // start to draw the map
+    QPainter p(&buf.image);
+    p.translate(50,50); // <---- fix that!
+    USE_ANTI_ALIASING(p,true);
+
+    // limit number of tiles to keep performance
+    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
+    if((nTiles > 10) && (nTiles < 30000))
     {
 
         for(qreal y = top; y < bottom; y += dy)
@@ -280,164 +283,20 @@ void CMapVRT::draw(buffer_t& buf)
                     qreal a = atan(dy1/dx1) * RAD_TO_DEG;
 
                     // finally scale, rotate and draw tile
-                    p.translate(50,50);
+                    p.save();
                     p.translate(l[0]);
                     p.scale(w/imgw, h/imgh);
                     p.rotate(a);
                     p.drawImage(0,0,img);
                     p.resetTransform();
+                    p.restore();
                 }
             }
         }
     }
-    p.translate(50,50);
+
     p.setPen(Qt::black);
     p.setBrush(Qt::NoBrush);
     p.drawPolygon(boundingBox);
 }
 
-/*
-void CMapVRT::draw(buffer_t& buf)
-{
-    if(map->needsRedraw())
-    {
-        return;
-    }
-
-//    qDebug() << "---------------------";
-    // convert top left buffer corner
-    // into buffer's coordinate system
-    QPointF pp = buf.ref1;
-    pj_transform(pjtar,buf.pjsrc,1,0,&pp.rx(),&pp.ry(),0);
-
-    QPointF p1 = buf.ref1;
-    QPointF p2 = buf.ref2;
-    QPointF p3 = buf.ref3;
-    QPointF p4 = buf.ref4;
-    pj_transform(pjtar,buf.pjsrc, 1, 0, &p1.rx(), &p1.ry(), 0);
-    pj_transform(pjtar,buf.pjsrc, 1, 0, &p2.rx(), &p2.ry(), 0);
-    pj_transform(pjtar,buf.pjsrc, 1, 0, &p3.rx(), &p3.ry(), 0);
-    pj_transform(pjtar,buf.pjsrc, 1, 0, &p4.rx(), &p4.ry(), 0);
-
-    qreal dx1 = sqrt((p2.x() - p1.x())*(p2.x() - p1.x()) + (p2.y() - p1.y())*(p2.y() - p1.y()));
-    qreal dy1 = sqrt((p4.x() - p1.x())*(p4.x() - p1.x()) + (p4.y() - p1.y())*(p4.y() - p1.y()));
-
-    QPointF pt1 = buf.ref1;
-    QPointF pt2 = buf.ref2;
-    QPointF pt3 = buf.ref3;
-    QPointF pt4 = buf.ref4;
-
-    pj_transform(pjtar,pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
-
-    qreal dx2 = sqrt((pt2.x() - pt1.x())*(pt2.x() - pt1.x()) + (pt2.y() - pt1.y())*(pt2.y() - pt1.y()));
-    qreal dy2 = sqrt((pt4.x() - pt1.x())*(pt4.x() - pt1.x()) + (pt4.y() - pt1.y())*(pt4.y() - pt1.y()));
-
-//    qDebug() << dx1 << dx2 << dx1/dx2;
-//    qDebug() << dy1 << dy2 << dy1/dy2;
-
-    qreal u1 = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
-    qreal u2 = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
-    qreal v1 = pt1.y() > pt2.y() ? pt1.y() : pt2.y();
-    qreal v2 = pt4.y() < pt3.y() ? pt4.y() : pt3.y();
-
-//    qDebug() << pt1 << pt2 << pt3 << pt4;
-//    qDebug() << u1 << v1 << u2 << v2;
-
-    QRectF viewport(u1,v1, u2 - u1, v2 - v1);
-    QRectF maparea(QPointF(xref1, yref1), QPointF(xref2, yref2));
-    QRectF intersect = viewport.intersected(maparea);
-
-//    qDebug() << viewport << maparea << intersect;
-
-    if(!intersect.isValid())
-    {
-        return;
-    }
-    QPointF bufferScale = buf.scale * buf.zoomFactor * QPointF(dx2/dx1, dy2/dy1);
-
-
-    // x/y offset [pixel] into file matrix
-    qint32 xoff = (intersect.left()   - xref1) / xscale;
-    qint32 yoff = (intersect.bottom() - yref1) / yscale;
-
-    // number of x/y pixel to read
-    qint32 pxx  =   (qint32)(intersect.width()  / xscale);
-    qint32 pxy  =  -(qint32)(intersect.height() / yscale);
-
-    // the final image width and height in pixel
-    qint32 w    =   (qint32)(pxx / bufferScale.x()) & 0xFFFFFFFC;
-    qint32 h    =  -(qint32)(pxy / bufferScale.y());
-
-    // correct pxx by truncation
-    pxx         =   (qint32)(w * bufferScale.x());
-
-//    qDebug() << xoff << yoff << pxx << pxy << w << h;
-    if(w > 0 && h > 0)
-    {
-
-        CPLErr err = CE_Failure;
-
-        QImage img;
-        if(rasterBandCount == 1)
-        {
-            GDALRasterBand * pBand;
-            pBand = dataset->GetRasterBand(1);
-
-            img = QImage(QSize(w,h),QImage::Format_Indexed8);
-            img.setColorTable(colortable);
-
-            err = pBand->RasterIO(GF_Read
-                ,(int)xoff,(int)yoff
-                ,pxx,pxy
-                ,img.bits()
-                ,w,h
-                ,GDT_Byte,0,0);
-        }
-
-        if(err)
-        {
-            return;
-        }
-
-        pt1 = intersect.bottomLeft();
-        pt2 = intersect.bottomRight();
-        pt3 = intersect.topRight();
-        pt4 = intersect.topLeft();
-
-        // transform the tile's corner coordinate from map's projection into buffer's projecton
-        pj_transform(pjsrc,buf.pjsrc,1,0,&pt1.rx(),&pt1.ry(),0);
-        pj_transform(pjsrc,buf.pjsrc,1,0,&pt2.rx(),&pt2.ry(),0);
-        pj_transform(pjsrc,buf.pjsrc,1,0,&pt3.rx(),&pt3.ry(),0);
-        pj_transform(pjsrc,buf.pjsrc,1,0,&pt4.rx(),&pt4.ry(),0);
-
-        // adjust the tiles width and height to fit the buffer's scale
-        qreal dx1   = pt1.x() - pt2.x();
-        qreal dy1   = pt1.y() - pt2.y();
-        qreal dx2   = pt1.x() - pt4.x();
-        qreal dy2   = pt1.y() - pt4.y();
-        qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1) / bufferScale.x());
-        qreal h    = ceil(-sqrt(dx2*dx2 + dy2*dy2) / bufferScale.y());
-
-//        qDebug() << pp << pt1;
-        // calculate offset into buffer
-        pt1 = (pt1 - pp) / (bufferScale);
-        // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-        qreal a = atan(dy1/dx1) * RAD_TO_DEG;
-
-        QPainter p(&buf.image);
-        USE_ANTI_ALIASING(p,true);
-
-//        qDebug() << "angle" << a << "offset" << pt1;
-        // finally scale, rotate and draw tile
-        p.translate(pt1);
-        p.rotate(-a);
-        p.drawImage(0,0,img);
-        p.resetTransform();
-
-
-    }
-}
-*/

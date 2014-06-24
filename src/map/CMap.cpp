@@ -108,6 +108,8 @@ CMap::CMap(CCanvas *parent)
 {
     // setup map parameters and connect to canvas
     pjsrc = pj_init_plus("+proj=merc +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
+//    pjsrc = pj_init_plus("+proj=lcc +lat_1=50 +lat_0=50 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs");
+//    pjsrc = pj_init_plus("+proj=lcc +lat_1=38.66667 +lat_2=33.33333 +lat_0=34 +lon_0=-105.56667 +x_0=0 +y_0=0 +datum=NAD83");
     pjtar = pj_init_plus("+proj=longlat +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
 
     zoom(5);

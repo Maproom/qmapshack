@@ -79,7 +79,7 @@ static quint32 scale2jnx(qreal scale)
 
 
 CMapJNX::CMapJNX(const QString &filename, CMap *parent)
-    : IMap(parent)   
+    : IMap(parent)
     , filename(filename)
     , lon1(180.0)
     , lat1(-90)
@@ -282,7 +282,7 @@ void CMapJNX::draw(buffer_t& buf)
     // convert top left buffer corner
     // into buffer's coordinate system
     QPointF pp = buf.ref1;
-    pj_transform(pjtar,buf.pjsrc,1,0,&pp.rx(),&pp.ry(),0);
+    map->convertRad2Px(pp);
 
     QPointF bufferScale = buf.scale * buf.zoomFactor;
 
@@ -300,6 +300,7 @@ void CMapJNX::draw(buffer_t& buf)
     // ----- start drawing -----
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
+    p.translate(-pp);
 
     foreach(const file_t& mapFile, files)
     {
@@ -320,45 +321,22 @@ void CMapJNX::draw(buffer_t& buf)
         {
             // no scalable level found, draw bounding box of map
             // derive maps corner coordinate
-            QPointF pt1;
-            pt1.rx() = mapFile.lon1 * DEG_TO_RAD;
-            pt1.ry() = mapFile.lat1 * DEG_TO_RAD;
-            QPointF pt2;
-            pt2.rx() = mapFile.lon2 * DEG_TO_RAD;
-            pt2.ry() = mapFile.lat1 * DEG_TO_RAD;
-            QPointF pt3;
-            pt3.rx() = mapFile.lon2 * DEG_TO_RAD;
-            pt3.ry() = mapFile.lat2 * DEG_TO_RAD;
-            QPointF pt4;
-            pt4.rx() = mapFile.lon1 * DEG_TO_RAD;
-            pt4.ry() = mapFile.lat2 * DEG_TO_RAD;
+            QPolygonF l(4);
+            l[0].rx() = mapFile.lon1 * DEG_TO_RAD;
+            l[0].ry() = mapFile.lat1 * DEG_TO_RAD;
+            l[1].rx() = mapFile.lon2 * DEG_TO_RAD;
+            l[1].ry() = mapFile.lat1 * DEG_TO_RAD;
+            l[2].rx() = mapFile.lon2 * DEG_TO_RAD;
+            l[2].ry() = mapFile.lat2 * DEG_TO_RAD;
+            l[3].rx() = mapFile.lon1 * DEG_TO_RAD;
+            l[3].ry() = mapFile.lat2 * DEG_TO_RAD;
 
-            // transform the tile's corner coordinate from map's projection into buffer's projecton
-            pj_transform(pjtar,buf.pjsrc,1,0,&pt1.rx(),&pt1.ry(),0);
-            pj_transform(pjtar,buf.pjsrc,1,0,&pt2.rx(),&pt2.ry(),0);
-            pj_transform(pjtar,buf.pjsrc,1,0,&pt3.rx(),&pt3.ry(),0);
-            pj_transform(pjtar,buf.pjsrc,1,0,&pt4.rx(),&pt4.ry(),0);
-
-            // adjust the tiles width and height to fit the buffer's scale
-            qreal dx1   = pt1.x() - pt2.x();
-            qreal dy1   = pt1.y() - pt2.y();
-            qreal dx2   = pt1.x() - pt4.x();
-            qreal dy2   = pt1.y() - pt4.y();
-            qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1) / bufferScale.x());
-            qreal h    = ceil(-sqrt(dx2*dx2 + dy2*dy2) / bufferScale.y());
-
-            // calculate offset into buffer
-            pt1 = (pt1 - pp) / (bufferScale);
-            // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-            qreal a = atan(dy1/dx1) * RAD_TO_DEG;
+            map->convertRad2Px(l);
 
             // finally scale, rotate and draw tile
-            p.translate(pt1);
-            p.rotate(-a);
             p.setPen(QPen(Qt::darkBlue,2));
             p.setBrush(QBrush(QColor(230,230,255,100) ));
-            p.drawRect(0,0,w,h);
-            p.resetTransform();
+            p.drawPolygon(l);
             continue;
         }
 
@@ -392,48 +370,17 @@ void CMapJNX::draw(buffer_t& buf)
                 file.read(pData, tile.size);
                 img.loadFromData(data);
 
-                qreal imgw = img.width();
-                qreal imgh = img.height();
+                QPolygonF l(4);
+                l[0].rx() = tile.area.left()     * DEG_TO_RAD;
+                l[0].ry() = tile.area.top()      * DEG_TO_RAD;
+                l[1].rx() = tile.area.right()    * DEG_TO_RAD;
+                l[1].ry() = tile.area.top()      * DEG_TO_RAD;
+                l[2].rx() = tile.area.right()    * DEG_TO_RAD;
+                l[2].ry() = tile.area.bottom()   * DEG_TO_RAD;
+                l[3].rx() = tile.area.left()     * DEG_TO_RAD;
+                l[3].ry() = tile.area.bottom()   * DEG_TO_RAD;
 
-                QPointF pt1;
-                pt1.rx() = tile.area.left()     * DEG_TO_RAD;
-                pt1.ry() = tile.area.top()      * DEG_TO_RAD;
-                QPointF pt2;
-                pt2.rx() = tile.area.right()    * DEG_TO_RAD;
-                pt2.ry() = tile.area.top()      * DEG_TO_RAD;
-                QPointF pt3;
-                pt3.rx() = tile.area.right()    * DEG_TO_RAD;
-                pt3.ry() = tile.area.bottom()   * DEG_TO_RAD;
-                QPointF pt4;
-                pt4.rx() = tile.area.left()     * DEG_TO_RAD;
-                pt4.ry() = tile.area.bottom()   * DEG_TO_RAD;
-
-                // transform the tile's corner coordinate from map's projection into buffer's projecton
-                pj_transform(pjtar,buf.pjsrc,1,0,&pt1.rx(),&pt1.ry(),0);
-                pj_transform(pjtar,buf.pjsrc,1,0,&pt2.rx(),&pt2.ry(),0);
-                pj_transform(pjtar,buf.pjsrc,1,0,&pt3.rx(),&pt3.ry(),0);
-                pj_transform(pjtar,buf.pjsrc,1,0,&pt4.rx(),&pt4.ry(),0);
-
-                // adjust the tiles width and height to fit the buffer's scale
-                qreal dx1   = pt1.x() - pt2.x();
-                qreal dy1   = pt1.y() - pt2.y();
-                qreal dx2   = pt1.x() - pt4.x();
-                qreal dy2   = pt1.y() - pt4.y();
-                qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1) / bufferScale.x());
-                qreal h    = ceil(-sqrt(dx2*dx2 + dy2*dy2) / bufferScale.y());
-
-                // calculate offset into buffer
-                pt1 = (pt1 - pp) / (bufferScale);
-                // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-                qreal a = atan(dy1/dx1) * RAD_TO_DEG;
-
-                // finally scale, rotate and draw tile
-                p.translate(pt1);
-                p.scale(w/imgw, h/imgh);
-                p.rotate(-a);
-                p.drawImage(0,0,img);
-                p.resetTransform();
-                continue;
+                drawTile(img, l, p);
             }
         }
     }

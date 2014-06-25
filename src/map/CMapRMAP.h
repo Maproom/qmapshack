@@ -78,7 +78,6 @@ private:
 
     QPointF scale;
 
-
 };
 
 #endif // CMAPRMAP_H

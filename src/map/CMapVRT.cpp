@@ -170,6 +170,10 @@ void CMapVRT::draw(buffer_t& buf)
     boundingBox << pt1 << pt2 << pt3 << pt4;
     map->convertRad2Px(boundingBox);
 
+    // get pixel offset of top left buffer corner
+    QPointF pp = buf.ref1;
+    map->convertRad2Px(pp);
+
     // calculate area to read from file
     pt1 = buf.ref1;
     pt2 = buf.ref2;
@@ -211,8 +215,8 @@ void CMapVRT::draw(buffer_t& buf)
 
     // start to draw the map
     QPainter p(&buf.image);
-    p.translate(50,50); // <---- fix that!
     USE_ANTI_ALIASING(p,true);
+    p.translate(-pp);
 
     // limit number of tiles to keep performance
     double nTiles = ((right - left) * (bottom - top) / (dx*dy));
@@ -268,29 +272,7 @@ void CMapVRT::draw(buffer_t& buf)
                 pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
                 pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
-                map->convertRad2Px(l);
-
-                {
-                    // adjust the tiles width and height to fit the buffer's scale
-                    qreal dx1   = l[0].x() - l[1].x();
-                    qreal dy1   = l[0].y() - l[1].y();
-                    qreal dx2   = l[0].x() - l[3].x();
-                    qreal dy2   = l[0].y() - l[3].y();
-                    qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1));
-                    qreal h    = ceil( sqrt(dx2*dx2 + dy2*dy2));
-
-                    // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-                    qreal a = atan(dy1/dx1) * RAD_TO_DEG;
-
-                    // finally scale, rotate and draw tile
-                    p.save();
-                    p.translate(l[0]);
-                    p.scale(w/imgw, h/imgh);
-                    p.rotate(a);
-                    p.drawImage(0,0,img);
-                    p.resetTransform();
-                    p.restore();
-                }
+                drawTile(img, l, p);
             }
         }
     }

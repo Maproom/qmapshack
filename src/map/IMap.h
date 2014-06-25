@@ -70,6 +70,8 @@ class IMap : public QObject
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);
 
+        void drawTile(QImage& img, QPolygonF& l, QPainter& p);
+
         CMap * map;
 
         /// source projection of the current map file
@@ -84,6 +86,9 @@ class IMap : public QObject
         */
         projPJ  pjtar;
 
+        /**
+           @brief True if map was loaded successfully
+         */
         bool isActivated;
 
 };

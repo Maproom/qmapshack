@@ -390,7 +390,7 @@ void CMapRMAP::draw(buffer_t& buf)
     // convert top left buffer corner
     // into buffer's coordinate system
     QPointF pp = buf.ref1;
-    pj_transform(pjtar,buf.pjsrc,1,0,&pp.rx(),&pp.ry(),0);
+    map->convertRad2Px(pp);
 
     // find best level for buffer's scale factor derived from base scale and zoom factor
     QPointF bufferScale = buf.scale * buf.zoomFactor;
@@ -422,6 +422,7 @@ void CMapRMAP::draw(buffer_t& buf)
     // ----- start drawing -----
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
+    p.translate(-pp);
 
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
@@ -459,44 +460,22 @@ void CMapRMAP::draw(buffer_t& buf)
             qreal imgh = img.height();
 
             // derive tile's corner coordinate
-            QPointF pt1;
-            pt1.rx() = xref1 + idxx * tileSizeX * level.xscale;
-            pt1.ry() = yref1 + idxy * tileSizeY * level.yscale;
-            QPointF pt2;
-            pt2.rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale;
-            pt2.ry() = yref1 +  idxy * tileSizeY * level.yscale ;
-            QPointF pt3;
-            pt3.rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale ;
-            pt3.ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale ;
-            QPointF pt4;
-            pt4.rx() = xref1 +  idxx * tileSizeX * level.xscale;
-            pt4.ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale;
+            QPolygonF l(4);
+            l[0].rx() = xref1 + idxx * tileSizeX * level.xscale;
+            l[0].ry() = yref1 + idxy * tileSizeY * level.yscale;
+            l[1].rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale;
+            l[1].ry() = yref1 +  idxy * tileSizeY * level.yscale ;
+            l[2].rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale ;
+            l[2].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale ;
+            l[3].rx() = xref1 +  idxx * tileSizeX * level.xscale;
+            l[3].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale;
 
-            // transform the tile's corner coordinate from map's projection into buffer's projecton
-            pj_transform(pjsrc,buf.pjsrc,1,0,&pt1.rx(),&pt1.ry(),0);
-            pj_transform(pjsrc,buf.pjsrc,1,0,&pt2.rx(),&pt2.ry(),0);
-            pj_transform(pjsrc,buf.pjsrc,1,0,&pt3.rx(),&pt3.ry(),0);
-            pj_transform(pjsrc,buf.pjsrc,1,0,&pt4.rx(),&pt4.ry(),0);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
-            // adjust the tiles width and height to fit the buffer's scale
-            qreal dx1   = pt1.x() - pt2.x();
-            qreal dy1   = pt1.y() - pt2.y();
-            qreal dx2   = pt1.x() - pt4.x();
-            qreal dy2   = pt1.y() - pt4.y();
-            qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1) / bufferScale.x());
-            qreal h    = ceil(-sqrt(dx2*dx2 + dy2*dy2) / bufferScale.y());
-
-            // calculate offset into buffer
-            pt1 = (pt1 - pp) / (bufferScale);
-            // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-            qreal a = atan(dy1/dx1) * RAD_TO_DEG;
-
-            // finally scale, rotate and draw tile
-            p.translate(pt1);
-            p.scale(w/imgw, h/imgh);
-            p.rotate(-a);
-            p.drawImage(0,0,img);
-            p.resetTransform();
+            drawTile(img, l, p);
         }
     }
 }

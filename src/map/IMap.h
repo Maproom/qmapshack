@@ -29,6 +29,7 @@ class CMap;
 
 class IMap : public QObject
 {
+    Q_OBJECT
     public:
         IMap(CMap * parent);
         virtual ~IMap();
@@ -66,6 +67,11 @@ class IMap : public QObject
         virtual void getInfo(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
         virtual void getToolTip(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
 
+        int getOpacity(){return qRound(opacity * 100);}
+
+    public slots:
+        void slotSetOpacity(int value){opacity = value / 100.0;}
+
     protected:
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);
@@ -90,6 +96,8 @@ class IMap : public QObject
            @brief True if map was loaded successfully
          */
         bool isActivated;
+
+        qreal opacity;
 
 };
 

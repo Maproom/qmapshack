@@ -126,10 +126,12 @@ class CMap : public QThread
         /**
            @brief Save list of active maps to configuration file
          */
+        void saveActiveMapsList(QStringList &keys, QSettings &cfg);
         void saveActiveMapsList(QStringList &keys);
         /**
            @brief Restore list of active maps from configuration file
          */
+        void restoreActiveMapsList(QStringList &keys, QSettings &cfg);
         void restoreActiveMapsList(QStringList &keys);
 
 
@@ -180,6 +182,8 @@ class CMap : public QThread
         QPointF ref4;
 
         CMapList * mapList;
+
+        QString cfgGroup;
 
         static QStringList mapPaths;
 

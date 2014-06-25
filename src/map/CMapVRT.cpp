@@ -216,6 +216,7 @@ void CMapVRT::draw(buffer_t& buf)
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
+    p.setOpacity(opacity);
     p.translate(-pp);
 
     // limit number of tiles to keep performance

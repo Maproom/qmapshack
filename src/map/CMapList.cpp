@@ -21,25 +21,45 @@
 
 #include <QtWidgets>
 
-void CMapTreeWidget::dragMoveEvent ( QDragMoveEvent  * event )
+void CMapTreeWidget::dragEnterEvent(QDragEnterEvent * e)
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(itemAt(event->pos()));
+    collapseAll();
+    QTreeWidget::dragEnterEvent(e);
+}
+
+void CMapTreeWidget::dragMoveEvent(QDragMoveEvent  * e)
+{
+    CMapItem * item = dynamic_cast<CMapItem*>(itemAt(e->pos()));
 
     if(item && item->isActivated())
     {
-        event->setDropAction(Qt::MoveAction);
-        QTreeWidget::dragMoveEvent(event);
+        e->setDropAction(Qt::MoveAction);
+        QTreeWidget::dragMoveEvent(e);
     }
     else
     {
-        event->setDropAction(Qt::IgnoreAction);
+        e->setDropAction(Qt::IgnoreAction);
     }
 }
 
-void CMapTreeWidget::dropEvent ( QDropEvent  * event )
+void CMapTreeWidget::dropEvent (QDropEvent  * e)
 {
-    QTreeWidget::dropEvent(event);
-    emit sigChanged();;
+
+    CMapItem * item = dynamic_cast<CMapItem*>(currentItem());
+    if(item)
+    {
+        item->showChildren(false);
+    }
+
+    QTreeWidget::dropEvent(e);
+
+    if(item)
+    {
+        item->showChildren(true);
+    }
+
+
+    emit sigChanged();
 }
 
 CMapList::CMapList(QWidget *parent)

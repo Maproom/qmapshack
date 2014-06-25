@@ -1111,6 +1111,10 @@ void CMapIMG::draw(buffer_t& buf)
     QPointF bufferScale = buf.scale * buf.zoomFactor;
 
     QPainter p(&buf.image);
+    if(opacity != 0)
+    {
+        p.setOpacity(opacity);
+    }
     USE_ANTI_ALIASING(p,true);
 
     QFont f = CMainWindow::self().getMapFont();
@@ -1461,7 +1465,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
     }
 
     // decode polygons
-    if(subdiv.hasPolygons)
+    if(subdiv.hasPolygons && (opacity != 0))
     {
         CGarminPolygon::cnt = 0;
         pData = pRawData + opgon;

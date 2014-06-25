@@ -21,15 +21,21 @@
 
 #include <QTreeWidgetItem>
 #include <QMutex>
+#include <QPointer>
 
 class IMap;
 class CMap;
+class QSlider;
+class QSettings;
 
 class CMapItem : public QTreeWidgetItem
 {
     public:
         CMapItem(QTreeWidget * parent, CMap *map);
         virtual ~CMapItem();
+
+        void saveConfig(QSettings& cfg);
+        void loadConfig(QSettings& cfg);
 
         /**
            @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronised.
@@ -59,10 +65,21 @@ class CMapItem : public QTreeWidgetItem
            @brief Move item to top of list widget
          */
         void moveToTop();
+        /**
+           @brief Move item to bottom of active maps list
+         */
         void moveToBottom();
 
+        /**
+           @brief Set item's icon accorting to map type and state
+         */
         void updateIcon();
 
+        /**
+           @brief Show or hide child treewidget items
+           @param yes set true to add children, false will remove all children and delete the attached widgets
+         */
+        void showChildren(bool yes);     
 
     private:
         friend class CMap;
@@ -79,6 +96,11 @@ class CMapItem : public QTreeWidgetItem
            @brief List of loaded map objects when map is activated.
          */
         QList<IMap*>    files;
+
+        /**
+           @brief Slider to setup opacity of map
+         */
+        QPointer<QSlider> slider;
 
 };
 

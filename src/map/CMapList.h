@@ -35,8 +35,9 @@ class CMapTreeWidget : public QTreeWidget
         void sigChanged();
 
     protected:
-        void dragMoveEvent ( QDragMoveEvent  * event );
-        void dropEvent ( QDropEvent  * event );
+        void dragEnterEvent(QDragEnterEvent * e);
+        void dragMoveEvent (QDragMoveEvent  * e );
+        void dropEvent ( QDropEvent  * e );
 };
 
 #include "ui_IMapList.h"

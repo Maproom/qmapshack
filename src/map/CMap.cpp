@@ -22,6 +22,7 @@
 #include "map/CMapPathSetup.h"
 #include "CCanvas.h"
 #include "CMainWindow.h"
+#include "CSettings.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -247,20 +248,25 @@ void CMap::getToolTip(const QPoint& px, QString& str)
 
 void CMap::saveConfig(QSettings& cfg)
 {
-    QStringList keys;
-    saveActiveMapsList(keys);
-    cfg.setValue("map/active", keys);
-
-    cfg.setValue("map/zoomIndex", zoomIndex);
+    cfgGroup = cfg.group();
+    QStringList keys;    
+    cfg.beginGroup("map");
+    saveActiveMapsList(keys, cfg);
+    cfg.setValue("active", keys);
+    cfg.setValue("zoomIndex", zoomIndex);
+    cfg.endGroup();
 
 }
 
 void CMap::loadConfig(QSettings& cfg)
 {
-    QStringList keys = cfg.value("map/active", "").toStringList();
-    restoreActiveMapsList(keys);
+    cfgGroup = cfg.group();
+    cfg.beginGroup("map");
+    QStringList keys = cfg.value("active", "").toStringList();
+    restoreActiveMapsList(keys, cfg);
+    int idx = cfg.value("zoomIndex",zoomIndex).toInt();
+    cfg.endGroup();
 
-    int idx = cfg.value("map/zoomIndex",zoomIndex).toInt();
     zoom(idx);
 }
 
@@ -298,6 +304,16 @@ void CMap::buildMapList()
 
 void CMap::saveActiveMapsList(QStringList& keys)
 {
+    SETTINGS;
+    cfg.beginGroup(cfgGroup);
+    cfg.beginGroup("map");
+    saveActiveMapsList(keys, cfg);
+    cfg.endGroup();
+    cfg.endGroup();
+}
+
+void CMap::saveActiveMapsList(QStringList& keys, QSettings& cfg)
+{
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
     for(int i = 0; i < mapList->count(); i++)
@@ -305,12 +321,23 @@ void CMap::saveActiveMapsList(QStringList& keys)
         CMapItem * item = mapList->item(i);
         if(item && !item->files.isEmpty())
         {
+            item->saveConfig(cfg);
             keys << item->key;
         }
     }
 }
 
 void CMap::restoreActiveMapsList(QStringList& keys)
+{
+    SETTINGS;
+    cfg.beginGroup(cfgGroup);
+    cfg.beginGroup("map");
+    restoreActiveMapsList(keys, cfg);
+    cfg.endGroup();
+    cfg.endGroup();
+}
+
+void CMap::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
@@ -323,11 +350,13 @@ void CMap::restoreActiveMapsList(QStringList& keys)
             if(item && item->key == key)
             {
                 item->activate();
+                item->loadConfig(cfg);
                 break;
             }
         }
     }
-    mapList->updateHelpText();
+
+    mapList->updateHelpText();   
 }
 
 void CMap::resize(const QSize& size)

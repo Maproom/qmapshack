@@ -37,6 +37,7 @@ IMap::IMap(CMap *parent)
     , map(parent)
     , pjsrc(0)
     , isActivated(false)
+    , opacity(1.0)
 {
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }

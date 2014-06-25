@@ -39,6 +39,61 @@ CMapItem::~CMapItem()
 
 }
 
+void CMapItem::saveConfig(QSettings& cfg)
+{
+    if(!isActivated())
+    {
+        return;
+    }
+
+    cfg.beginGroup(key);
+    cfg.setValue("opacity", slider->value());
+    cfg.endGroup();
+}
+
+void CMapItem::loadConfig(QSettings& cfg)
+{
+    if(!isActivated())
+    {
+        return;
+    }
+
+    cfg.beginGroup(key);
+    slider->setValue(cfg.value("opacity", 100).toInt());
+    cfg.endGroup();
+}
+
+
+void CMapItem::showChildren(bool yes)
+{
+
+    if(yes && !files.isEmpty())
+    {
+        QTreeWidget * tw = treeWidget();
+
+        QTreeWidgetItem * item = new QTreeWidgetItem(this);
+        slider = new QSlider(Qt::Horizontal);
+        slider->setMinimum(0);
+        slider->setMaximum(100);
+        slider->setToolTip(slider->tr("Setup map's opacity"));
+        slider->setValue(files.first()->getOpacity());
+        foreach(IMap * map, files)
+        {
+            slider->connect(slider, SIGNAL(valueChanged(int)), map, SLOT(slotSetOpacity(int)));
+        }
+        slider->connect(slider, SIGNAL(sliderReleased()), map, SLOT(emitSigCanvasUpdate()));
+
+        tw->setItemWidget(item, 0, slider);
+    }
+    else
+    {
+        QList<QTreeWidgetItem*> items = takeChildren();
+        qDeleteAll(items);
+        delete slider;
+    }
+
+}
+
 void CMapItem::updateIcon()
 {
     if(filenames.isEmpty())
@@ -69,11 +124,11 @@ void CMapItem::updateIcon()
         img = QPixmap("://icons/32x32/mime_map.png");
     }
 
-    if(isActivated())
-    {
-        QPainter p(&img);
-        p.drawPixmap(0,0,QPixmap("://icons/16x16/redGlow.png"));
-    }
+//    if(isActivated())
+//    {
+//        QPainter p(&img);
+//        p.drawPixmap(0,0,QPixmap("://icons/16x16/redGlow.png"));
+//    }
 
     setIcon(0,QIcon(img));
 }
@@ -108,6 +163,8 @@ void CMapItem::deactivate()
     moveToBottom();
 
     setFlags(flags() & ~Qt::ItemIsDragEnabled);
+
+    showChildren(false);
 }
 
 
@@ -170,6 +227,8 @@ bool CMapItem::activate()
     moveToBottom();
 
     setFlags(flags() | Qt::ItemIsDragEnabled);
+
+    showChildren(true);
     return true;
 }
 

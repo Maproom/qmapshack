@@ -115,6 +115,7 @@ CMap::CMap(CCanvas *parent)
     zoom(5);
 
     mapList = new CMapList(canvas);
+    connect(canvas, SIGNAL(destroyed()), mapList, SLOT(deleteLater()));
     CMainWindow::self().addMapList(mapList, canvas->objectName());
     connect(mapList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
 
@@ -132,8 +133,6 @@ CMap::~CMap()
 {
     pj_free(pjtar);
     pj_free(pjsrc);
-
-    CMainWindow::self().delMapList(mapList);
 
     maps.removeOne(this);
 }
@@ -534,6 +533,8 @@ void CMap::run()
         intNeedsRedraw              = false;
         mutex.unlock();
 
+
+        qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);
         // ----- reset buffer -----
         currentBuffer.image.fill(Qt::transparent);
 

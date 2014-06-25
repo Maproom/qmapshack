@@ -23,6 +23,7 @@
 #include "ui_IMainWindow.h"
 
 class CMapList;
+class CDemList;
 class QLabel;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
@@ -32,9 +33,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         static CMainWindow& self(){return *pSelf;}
         virtual ~CMainWindow();
 
-
         void addMapList(CMapList *list, const QString& name);
-        void delMapList(CMapList *list);
+        void addDemList(CDemList *list, const QString& name);
 
         bool isScaleVisible();
         bool isGridVisible();
@@ -49,7 +49,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotTabCloseRequest(int i);
         void slotCurrentTabCanvas(int i);
         void slotCurrentTabMaps(int i);
-        void slotMousePosition(const QPointF& pos);
+        void slotCurrentTabDem(int i);
+        void slotMousePosition(const QPointF& pos, qreal ele);
         void slotUpdateCurrentWidget();
         void slotSetupMapFont();
         void slotSetupGrid();
@@ -63,6 +64,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
 
         /// status bar label
         QLabel * lblPosWGS84;
+        QLabel * lblElevation;
         QLabel * lblPosGrid;
 
         QFont mapFont;

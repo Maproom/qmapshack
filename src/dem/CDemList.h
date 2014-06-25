@@ -16,20 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CMAPLIST_H
-#define CMAPLIST_H
+#ifndef CDEMLIST_H
+#define CDEMLIST_H
 
 #include <QWidget>
 #include <QTreeWidget>
 
-class CMapItem;
-class QMenu;
+class CDemItem;
 
-class CMapTreeWidget : public QTreeWidget
+class CDemTreeWidget : public QTreeWidget
 {
     Q_OBJECT
     public:
-        CMapTreeWidget(QWidget * parent): QTreeWidget(parent){}
+        CDemTreeWidget(QWidget * parent): QTreeWidget(parent){}
 
     signals:
         void sigChanged();
@@ -39,18 +38,19 @@ class CMapTreeWidget : public QTreeWidget
         void dropEvent ( QDropEvent  * event );
 };
 
-#include "ui_IMapList.h"
 
-class CMapList : public QWidget, private Ui::IMapList
+#include "ui_IDemList.h"
+
+class CDemList : public QWidget, private Ui::IDemsList
 {
     Q_OBJECT
     public:
-        CMapList(QWidget * parent);
-        virtual ~CMapList();
+        CDemList(QWidget * parent);
+        virtual ~CDemList();
 
         void clear();
         int count();
-        CMapItem * item(int i);
+        CDemItem * item(int i);
         operator QTreeWidget*(){return treeWidget;}
 
         void updateHelpText();
@@ -67,5 +67,5 @@ class CMapList : public QWidget, private Ui::IMapList
         QMenu * menu;
 };
 
-#endif //CMAPLIST_H
+#endif //CDEMLIST_H
 

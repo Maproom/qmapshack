@@ -16,42 +16,29 @@
 
 **********************************************************************************************/
 
-#include "CCanvas.h"
-#include "CMainWindow.h"
-#include "dem/CDem.h"
-#include "dem/CDemList.h"
-#include "units/IUnit.h"
+#ifndef IDEM_H
+#define IDEM_H
 
-#include <QtWidgets>
+#include <QObject>
 
-QStringList CDem::demPaths;
+class CMap;
 
-QList<CDem*> CDem::dems;
-
-
-CDem::CDem(CCanvas *canvas)
-    : QThread(canvas)
+class IDem : public QObject
 {
+    public:
+        IDem(CMap * parent);
+        virtual ~IDem();
 
-    demList = new CDemList(canvas);
-    connect(canvas, SIGNAL(destroyed()), demList, SLOT(deleteLater()));
-    CMainWindow::self().addDemList(demList, canvas->objectName());
-    connect(demList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
+        bool activated(){return isActivated;}
 
-    dems << this;
-}
+    protected:
+        CMap * map;
 
-CDem::~CDem()
-{
-    dems.removeOne(this);
-}
+        /**
+           @brief True if map was loaded successfully
+         */
+        bool isActivated;
+};
 
-void CDem::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r)
-{
+#endif //IDEM_H
 
-}
-
-qreal CDem::getElevation(const QPointF& pos)
-{
-    return NOFLOAT;
-}

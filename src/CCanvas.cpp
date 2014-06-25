@@ -24,6 +24,7 @@
 #include "grid/CGridSetup.h"
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
+#include "dem/CDem.h"
 
 #include <QtWidgets>
 
@@ -49,6 +50,7 @@ CCanvas::CCanvas(QWidget *parent)
 
     map     = new CMap(this);
     grid    = new CGrid(map);
+    dem     = new CDem(this);
     mouse   = new CMouseNormal(this);
 
     connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
@@ -124,6 +126,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     p.translate(width() >> 1, height() >> 1);
 
     map->draw(p, needsRedraw, posFocus, r);
+    dem->draw(p, needsRedraw, posFocus, r);
 
     // restore coordinate system to default
     p.resetTransform();
@@ -146,9 +149,11 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)
 {
+    qreal ele = NOFLOAT;
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
-    emit sigMousePosition(pos * RAD_TO_DEG);
+    ele = dem->getElevation(pos);
+    emit sigMousePosition(pos * RAD_TO_DEG, ele);
 
     mouse->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
@@ -361,7 +366,7 @@ void CCanvas::displayInfo(const QPoint& px)
         posToolTip = px;
 
         timerToolTip->stop();
-        timerToolTip->start(1000);
+        timerToolTip->start(500);
     }
     QToolTip::hideText();
 }

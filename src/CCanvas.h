@@ -22,9 +22,10 @@
 #include <QWidget>
 #include <QPainter>
 class CMap;
+class CGrid;
+class CDem;
 class QSettings;
 class QPointF;
-class CGrid;
 class IMouse;
 class QTimer;
 class QMovie;
@@ -65,7 +66,7 @@ class CCanvas : public QWidget
         static void drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color);
 
     signals:
-        void sigMousePosition(const QPointF& pos);
+        void sigMousePosition(const QPointF& pos, qreal ele);
 
     public slots:
         void slotTriggerCompleteUpdate();
@@ -94,6 +95,8 @@ class CCanvas : public QWidget
 
         /// the grid attached to this canvas
         CGrid * grid;
+
+        CDem * dem;
 
         /// the current point of focus (usually the canvas center)
         QPointF posFocus;

@@ -22,6 +22,7 @@
 #include "GeoMath.h"
 #include "map/CMap.h"
 #include "map/CMapList.h"
+#include "dem/CDemList.h"
 #include "units/IUnit.h"
 #include "version.h"
 
@@ -67,8 +68,10 @@ CMainWindow::CMainWindow()
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
     connect(actionSetupMapPathes, SIGNAL(triggered()), this, SLOT(slotSetuMapPath()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
+
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
+    connect(tabDem, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabDem(int)));
 
     cfg.beginGroup("Canvas");
     CMap::loadMapPath(cfg);
@@ -77,7 +80,7 @@ CMainWindow::CMainWindow()
     {
         CCanvas * canvas = new CCanvas(tabWidget);
         tabWidget->addTab(canvas, canvas->objectName());
-        connect(canvas, SIGNAL(sigMousePosition(QPointF)), this, SLOT(slotMousePosition(QPointF)));
+        connect(canvas, SIGNAL(sigMousePosition(QPointF,qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
 
         cfg.beginGroup(QString("Canvas%1").arg(i));
         canvas->loadConfig(cfg);
@@ -87,7 +90,7 @@ CMainWindow::CMainWindow()
     {
         CCanvas * canvas = new CCanvas(tabWidget);
         tabWidget->addTab(canvas, canvas->objectName());
-        connect(canvas, SIGNAL(sigMousePosition(QPointF)), this, SLOT(slotMousePosition(QPointF)));
+        connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
     }
 
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
@@ -103,10 +106,15 @@ CMainWindow::CMainWindow()
     QStatusBar * status = statusBar();
     lblPosWGS84 = new QLabel(status);
     status->addPermanentWidget(lblPosWGS84);
+
+    lblElevation = new QLabel(status);
+    status->addPermanentWidget(lblElevation);
+
     lblPosGrid = new QLabel(status);
     status->addPermanentWidget(lblPosGrid);
 
     menuWindow->addAction(dockMaps->toggleViewAction());
+    menuWindow->addAction(dockDem->toggleViewAction());
 }
 
 CMainWindow::~CMainWindow()
@@ -180,26 +188,16 @@ void CMainWindow::addMapList(CMapList * list, const QString &name)
     tabMaps->addTab(list,name);
 }
 
-void CMainWindow::delMapList(CMapList * list)
+void CMainWindow::addDemList(CDemList * list, const QString &name)
 {
-    for(int i = 0; i < tabMaps->count(); i++)
-    {
-        QWidget * w = tabMaps->widget(i);
-        if(w == list)
-        {
-            tabMaps->removeTab(i);
-            delete w;
-            return;
-        }
-    }
+    tabDem->addTab(list,name);
 }
-
 
 void CMainWindow::slotAddCanvas()
 {
     CCanvas * canvas = new CCanvas(tabWidget);
     tabWidget->addTab(canvas, canvas->objectName());
-    connect(canvas, SIGNAL(sigMousePosition(QPointF)), this, SLOT(slotMousePosition(QPointF)));
+    connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
 }
 
 void CMainWindow::slotTabCloseRequest(int i)
@@ -217,7 +215,15 @@ void CMainWindow::slotCurrentTabCanvas(int i)
         if(tabMaps->tabText(n) == name)
         {
             tabMaps->setCurrentIndex(n);
-            return;
+            break;
+        }
+    }
+    for(int n = 0; n < tabDem->count(); n++)
+    {
+        if(tabDem->tabText(n) == name)
+        {
+            tabDem->setCurrentIndex(n);
+            break;
         }
     }
 }
@@ -230,16 +236,57 @@ void CMainWindow::slotCurrentTabMaps(int i)
         if(tabWidget->tabText(n) == name)
         {
             tabWidget->setCurrentIndex(n);
-            return;
+            break;
+        }
+    }
+    for(int n = 0; n < tabDem->count(); n++)
+    {
+        if(tabDem->tabText(n) == name)
+        {
+            tabDem->setCurrentIndex(n);
+            break;
         }
     }
 }
 
-void CMainWindow::slotMousePosition(const QPointF& pos)
+void CMainWindow::slotCurrentTabDem(int i)
+{
+    QString name = tabMaps->tabText(i);
+    for(int n = 0; n < tabWidget->count(); n++)
+    {
+        if(tabWidget->tabText(n) == name)
+        {
+            tabWidget->setCurrentIndex(n);
+            break;
+        }
+    }
+    for(int n = 0; n < tabMaps->count(); n++)
+    {
+        if(tabMaps->tabText(n) == name)
+        {
+            tabMaps->setCurrentIndex(n);
+            break;
+        }
+    }
+}
+
+void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
 {
     QString str;
     GPS_Math_Deg_To_Str(pos.x(), pos.y(), str);
     lblPosWGS84->setText(str);
+
+    if(ele != NOFLOAT)
+    {
+        QString val, unit;
+        IUnit::self().meter2elevation(ele, val, unit);
+        lblElevation->setText(tr("Ele: %1%2").arg(val).arg(unit));
+        lblElevation->show();
+    }
+    else
+    {
+        lblElevation->hide();
+    }
 
     if(actionShowGrid->isChecked())
     {

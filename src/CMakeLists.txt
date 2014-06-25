@@ -15,7 +15,11 @@ set( SRCS
     GeoMath.cpp
     CMainWindow.cpp
     CCanvas.cpp
+    dem/IDem.cpp
     dem/CDem.cpp
+    dem/CDemVRT.cpp
+    dem/CDemList.cpp
+    dem/CDemItem.cpp
     map/IMap.cpp
     map/CMap.cpp
     map/CMapItem.cpp
@@ -53,7 +57,11 @@ set( HDRS
     CSettings.h
     CMainWindow.h
     CCanvas.h
+    dem/IDem.h
     dem/CDem.h
+    dem/CDemVRT.h
+    dem/CDemList.h
+    dem/CDemItem.h
     map/IMap.h
     map/CMap.h
     map/CMapItem.h
@@ -86,6 +94,7 @@ set( HDRS
 
 set( UIS
     IMainWindow.ui
+    dem/IDemList.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
     grid/IGridSetup.ui

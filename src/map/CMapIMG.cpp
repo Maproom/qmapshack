@@ -138,6 +138,7 @@ CMapIMG::CMapIMG(const QString &filename, CMap *parent)
     catch(const exce_t& e)
     {
         QMessageBox::critical(0, tr("Failed ..."), e.msg, QMessageBox::Abort);
+        return;
     }
 
 
@@ -1107,8 +1108,7 @@ void CMapIMG::draw(buffer_t& buf)
         return;
     }
 
-    QPointF bufferScale = buf.scale * buf.zoomFactor;    
-    qDebug() << "bufferScale" << bufferScale;
+    QPointF bufferScale = buf.scale * buf.zoomFactor;
 
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);

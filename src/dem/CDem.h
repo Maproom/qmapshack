@@ -19,13 +19,30 @@
 #ifndef CDEM_H
 #define CDEM_H
 
-#include <QObject>
+#include <QThread>
 
-class CDem : public QObject
+class QPainter;
+class CDemList;
+class CCanvas;
+
+class CDem : public QThread
 {
     public:
-        CDem(QObject * parent);
+        CDem(CCanvas * canvas);
         virtual ~CDem();
+
+        void draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r);
+
+        qreal getElevation(const QPointF& pos);
+
+
+    private:
+        CDemList * demList;
+
+        static QStringList demPaths;
+
+        static QList<CDem*> dems;
+
 };
 
 #endif //CDEM_H

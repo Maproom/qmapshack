@@ -58,7 +58,7 @@ CMainWindow::CMainWindow()
     // end ---- restore window geometry -----
 
 
-    connect(actionAddCanvas, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
+    connect(actionAddMapWorkspace, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));

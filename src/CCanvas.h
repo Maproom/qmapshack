@@ -80,6 +80,7 @@ class CCanvas : public QWidget
         void wheelEvent(QWheelEvent * e);
         void enterEvent(QEvent * e);
         void leaveEvent(QEvent * e);
+        void keyPressEvent(QKeyEvent * e);
 
 
     private slots:

@@ -34,10 +34,12 @@ CCanvas::CCanvas(QWidget *parent)
     : QWidget(parent)
     , posFocus(12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD)
 {
+    setFocusPolicy(Qt::WheelFocus);
+
     int count = 1;
     while(1)
     {
-        QString name = tr("Canvas %1").arg(count);
+        QString name = tr("Workspace %1").arg(count);
         if(CMainWindow::self().findChild<CCanvas*>(name) == 0)
         {
             setObjectName(name);
@@ -177,7 +179,6 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     posFocus -= (pos - pt1);
     map->convertPx2Rad(posFocus);
 
-
     update();
 }
 
@@ -197,6 +198,50 @@ void CCanvas::leaveEvent(QEvent * e)
     QApplication::restoreOverrideCursor();
 
     setMouseTracking(false);
+}
+
+void CCanvas::keyPressEvent(QKeyEvent * e)
+{
+    qDebug() << hex << e->key();
+    bool doUpdate = false;
+
+    if(e->key() == Qt::Key_Plus)
+    {
+        map->zoom(true, needsRedraw);
+        doUpdate = true;
+    }
+    else if(e->key() == Qt::Key_Minus)
+    {
+        map->zoom(false, needsRedraw);
+        doUpdate = true;
+    }
+    else if(e->key() == Qt::Key_Up)
+    {
+        moveMap(QPointF(0, height()/4));
+    }
+    else if(e->key() == Qt::Key_Down)
+    {
+        moveMap(QPointF(0, -height()/4));
+    }
+    else if(e->key() == Qt::Key_Left)
+    {
+        moveMap(QPointF(width()/4, 0));
+    }
+    else if(e->key() == Qt::Key_Right)
+    {
+        moveMap(QPointF(-width()/4, 0));
+    }
+
+
+    if(doUpdate)
+    {
+        e->accept();
+        update();
+    }
+    else
+    {
+        QWidget::keyPressEvent(e);
+    }
 }
 
 
@@ -345,6 +390,8 @@ void CCanvas::moveMap(const QPointF& delta)
     map->convertRad2Px(posFocus);
     posFocus -= delta;
     map->convertPx2Rad(posFocus);
+
+    slotTriggerCompleteUpdate();
 }
 
 void CCanvas::setupGrid()

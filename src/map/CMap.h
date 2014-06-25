@@ -102,6 +102,7 @@ class CMap : public QThread
         static void setupMapPath();
         static void saveMapPath(QSettings &cfg);
         static void loadMapPath(QSettings &cfg);
+        static const QStringList& getSupportedFormats(){return supportedFormats;}
 
     signals:
         void sigCanvasUpdate();
@@ -183,6 +184,8 @@ class CMap : public QThread
         static QStringList mapPaths;
 
         static QList<CMap*> maps;
+
+        static QStringList supportedFormats;
 
 };
 

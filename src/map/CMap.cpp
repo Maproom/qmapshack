@@ -95,6 +95,9 @@ const qreal CMap::scales[N_ZOOM_LEVELS] =
 QList<CMap*> CMap::maps;
 QStringList  CMap::mapPaths;
 
+QStringList CMap::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap").split('|');
+
+
 CMap::CMap(CCanvas *parent)
     : QThread(parent)
     , canvas(parent)
@@ -264,8 +267,6 @@ void CMap::loadConfig(QSettings& cfg)
 void CMap::buildMapList()
 {
     QCryptographicHash md5(QCryptographicHash::Md5);
-    QStringList filters;
-    filters << "*rmap" << "*jnx" << "*img" << "*vrt" << "*map";
 
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
@@ -274,7 +275,7 @@ void CMap::buildMapList()
     {
         QDir dir(path);
         // find available maps
-        foreach(const QString& filename, dir.entryList(filters, QDir::Files|QDir::Readable, QDir::Name))
+        foreach(const QString& filename, dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
         {
             QFileInfo fi(filename);
 

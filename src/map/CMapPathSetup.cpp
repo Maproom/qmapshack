@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMapPathSetup.h"
+#include "CMap.h"
 
 #include <QtWidgets>
 
@@ -34,6 +35,8 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
         QListWidgetItem * item = new QListWidgetItem(listWidget);
         item->setText(path);
     }
+
+    labelHelp->setText(tr("Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1").arg(CMap::getSupportedFormats().join(", ")));
 }
 
 CMapPathSetup::~CMapPathSetup()
@@ -48,7 +51,7 @@ void CMapPathSetup::slotItemSelectionChanged()
 
 void CMapPathSetup::slotAddPath()
 {
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select map path..."), QDir::homePath());
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select map path..."), QDir::homePath(), 0);
     if(!path.isEmpty())
     {
         QListWidgetItem * item = new QListWidgetItem(listWidget);

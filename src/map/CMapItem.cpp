@@ -81,7 +81,7 @@ void CMapItem::showChildren(bool yes)
         {
             slider->connect(slider, SIGNAL(valueChanged(int)), map, SLOT(slotSetOpacity(int)));
         }
-        slider->connect(slider, SIGNAL(sliderReleased()), map, SLOT(emitSigCanvasUpdate()));
+        slider->connect(slider, SIGNAL(valueChanged(int)), map, SLOT(emitSigCanvasUpdate()));
 
         tw->setItemWidget(item, 0, slider);
     }

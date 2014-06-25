@@ -81,6 +81,7 @@ void CMapList::updateHelpText()
 {
     if(treeWidget->topLevelItemCount() == 0)
     {
+        labelIcon->show();
         labelHelpFillMapList->show();
         labelHelpActivateMap->hide();
     }
@@ -91,10 +92,12 @@ void CMapList::updateHelpText()
         CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(0));
         if(item && item->isActivated())
         {
+            labelIcon->hide();
             labelHelpActivateMap->hide();
         }
         else
         {
+            labelIcon->show();
             labelHelpActivateMap->show();
         }
     }

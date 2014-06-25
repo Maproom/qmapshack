@@ -34,8 +34,8 @@ CDem::CDem(CCanvas *canvas)
 {
 
     demList = new CDemList(canvas);
-    connect(canvas, SIGNAL(destroyed()), demList, SLOT(deleteLater()));
     CMainWindow::self().addDemList(demList, canvas->objectName());
+    connect(canvas, SIGNAL(destroyed()), demList, SLOT(deleteLater()));
     connect(demList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
 
     dems << this;

@@ -115,8 +115,8 @@ CMap::CMap(CCanvas *parent)
     zoom(5);
 
     mapList = new CMapList(canvas);
-    connect(canvas, SIGNAL(destroyed()), mapList, SLOT(deleteLater()));
     CMainWindow::self().addMapList(mapList, canvas->objectName());
+    connect(canvas, SIGNAL(destroyed()), mapList, SLOT(deleteLater()));
     connect(mapList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
 
     resize(canvas->size());

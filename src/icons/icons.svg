@@ -26,16 +26,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.1651778"
-     inkscape:cx="397.67001"
-     inkscape:cy="789.96489"
+     inkscape:zoom="2.1797195"
+     inkscape:cx="305.10849"
+     inkscape:cy="855.05172"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1920"
-     inkscape:window-height="996"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="1014"
+     inkscape:window-x="-1"
+     inkscape:window-y="-15"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -962,6 +962,34 @@
          width="40"
          id="rect3358"
          style="fill:none;stroke:none" />
+    </g>
+    <g
+       id="g4143"
+       inkscape:export-filename="/home/oeichler/dateien/cpp/MapRoom/src/icons/48x48/help.png"
+       inkscape:export-xdpi="107.30576"
+       inkscape:export-ydpi="107.30576">
+      <path
+         transform="matrix(0.73869422,0,0,0.73869422,360.4243,6.9034532)"
+         d="m 230.31496,317.12598 a 26.574802,26.574802 0 1 1 -53.1496,0 26.574802,26.574802 0 1 1 53.1496,0 z"
+         sodipodi:ry="26.574802"
+         sodipodi:rx="26.574802"
+         sodipodi:cy="317.12598"
+         sodipodi:cx="203.74016"
+         id="path3351"
+         style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.35374012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3353"
+         y="255.38133"
+         x="502.03925"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ececec;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
+         xml:space="preserve"><tspan
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ececec;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold"
+           y="255.38133"
+           x="502.03925"
+           id="tspan3355"
+           sodipodi:role="line">?</tspan></text>
     </g>
   </g>
   <g

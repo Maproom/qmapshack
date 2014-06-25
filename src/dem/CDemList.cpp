@@ -82,6 +82,7 @@ void CDemList::updateHelpText()
 {
     if(treeWidget->topLevelItemCount() == 0)
     {
+        labelIcon->show();
         labelHelpFillMapList->show();
         labelHelpActivateMap->hide();
     }
@@ -92,10 +93,12 @@ void CDemList::updateHelpText()
         CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->topLevelItem(0));
         if(item && item->isActivated())
         {
+            labelIcon->hide();
             labelHelpActivateMap->hide();
         }
         else
         {
+            labelIcon->show();
             labelHelpActivateMap->show();
         }
     }

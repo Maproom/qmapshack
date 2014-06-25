@@ -84,5 +84,6 @@
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMoveMap.png</file>
+        <file>animation/loader.gif</file>
     </qresource>
 </RCC>

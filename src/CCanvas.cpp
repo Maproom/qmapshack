@@ -56,6 +56,16 @@ CCanvas::CCanvas(QWidget *parent)
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);
     connect(timerToolTip, SIGNAL(timeout()), this, SLOT(slotToolTip()));
+
+    loadIndicator = new QMovie(this);
+    loadIndicator->setFileName("://animation/loader.gif");
+    mapLoadIndicator = new QLabel(this);
+    mapLoadIndicator->setMovie(loadIndicator);
+    loadIndicator->start();
+
+
+    connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));
+    connect(map, SIGNAL(sigStopThread()), mapLoadIndicator, SLOT(hide()));
 }
 
 CCanvas::~CCanvas()
@@ -85,6 +95,10 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     if(map) map->resize(s);
 
     QWidget::resizeEvent(e);
+
+    // move map loading indicator to new center of canvas
+    QPoint p(mapLoadIndicator->width()>>1, mapLoadIndicator->height()>>1);
+    mapLoadIndicator->move(rect().center() - p);
 }
 
 void CCanvas::paintEvent(QPaintEvent * e)

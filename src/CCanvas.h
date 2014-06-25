@@ -27,6 +27,8 @@ class QPointF;
 class CGrid;
 class IMouse;
 class QTimer;
+class QMovie;
+class QLabel;
 
 inline  void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 {
@@ -89,16 +91,24 @@ class CCanvas : public QWidget
         bool needsRedraw;
         /// the map object attached to this canvas
         CMap * map;
+
         /// the grid attached to this canvas
         CGrid * grid;
 
+        /// the current point of focus (usually the canvas center)
         QPointF posFocus;
 
+        /// the current mouse handler
         IMouse * mouse;
 
+        /// tool tip timer for vector map tool tips
         QTimer * timerToolTip;
+
+        /// the position of the tool tip
         QPoint posToolTip;
 
+        QMovie * loadIndicator;
+        QLabel * mapLoadIndicator;
 };
 
 #endif //CCANVAS_H

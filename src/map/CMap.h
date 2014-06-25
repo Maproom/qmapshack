@@ -101,10 +101,12 @@ class CMap : public QThread
 
         static void setupMapPath();
         static void saveMapPath(QSettings &cfg);
-        static void loadMapPath(QSettings &cfg);        
+        static void loadMapPath(QSettings &cfg);
 
     signals:
         void sigCanvasUpdate();
+        void sigStartThread();
+        void sigStopThread();
 
     public slots:
         void emitSigCanvasUpdate();

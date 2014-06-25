@@ -120,6 +120,7 @@ CMap::CMap(CCanvas *parent)
 
     resize(canvas->size());
     connect(this, SIGNAL(finished()), canvas, SLOT(update()));
+    connect(this, SIGNAL(finished()), SIGNAL(sigStopThread()));
 
     buildMapList();
 
@@ -505,6 +506,7 @@ void CMap::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r
 
     if(needsRedraw && !isRunning())
     {
+        emit sigStartThread();
         start();
     }
 

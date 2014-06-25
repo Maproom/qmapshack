@@ -15,6 +15,7 @@ set( SRCS
     GeoMath.cpp
     CMainWindow.cpp
     CCanvas.cpp
+    dem/CDem.cpp
     map/IMap.cpp
     map/CMap.cpp
     map/CMapItem.cpp
@@ -45,13 +46,14 @@ set( SRCS
 )
 
 set( HDRS
-    version.h    
+    version.h
     GeoMath.h
     CFileExt.h
     CAppOpts.h
     CSettings.h
     CMainWindow.h
     CCanvas.h
+    dem/CDem.h
     map/IMap.h
     map/CMap.h
     map/CMapItem.h

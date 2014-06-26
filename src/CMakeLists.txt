@@ -30,6 +30,7 @@ set( SRCS
     map/CMapMAP.cpp
     map/CMapVRT.cpp
     map/CMapPathSetup.cpp
+    map/CMapPropSetup.cpp
     map/garmin/IGarminStrTbl.cpp
     map/garmin/CGarminStrTbl6.cpp
     map/garmin/CGarminStrTbl8.cpp
@@ -72,6 +73,7 @@ set( HDRS
     map/CMapMAP.h
     map/CMapVRT.h
     map/CMapPathSetup.h
+    map/CMapPropSetup.h
     map/garmin/Garmin.h
     map/garmin/IGarminStrTbl.h
     map/garmin/CGarminStrTbl6.h
@@ -97,6 +99,7 @@ set( UIS
     dem/IDemList.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
+    map/IMapPropSetup.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
 )

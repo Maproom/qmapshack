@@ -108,6 +108,7 @@ class CMap : public QThread
         void sigCanvasUpdate();
         void sigStartThread();
         void sigStopThread();
+        void sigScaleChanged(const QPointF& scale);
 
     public slots:
         void emitSigCanvasUpdate();

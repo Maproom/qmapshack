@@ -19,7 +19,7 @@
 #include "map/IMap.h"
 #include "map/CMap.h"
 
-#include <QPainter>
+#include <QtWidgets>
 
 QPointF operator*(const QPointF& p1, const QPointF& p2)
 {
@@ -47,6 +47,17 @@ IMap::~IMap()
     pj_free(pjtar);
     pj_free(pjsrc);
 }
+
+void IMap::saveConfig(QSettings& cfg)
+{
+    cfg.setValue("opacity", opacity);
+}
+
+void IMap::loadConfig(QSettings& cfg)
+{
+    opacity = cfg.value("opacity", opacity).toFloat();
+}
+
 
 void IMap::convertRad2M(QPointF &p)
 {

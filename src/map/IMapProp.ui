@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IMapProps</class>
- <widget class="QWidget" name="IMapProps">
+ <class>IMapProp</class>
+ <widget class="QWidget" name="IMapProp">
   <property name="geometry">
    <rect>
     <x>0</x>

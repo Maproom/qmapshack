@@ -101,7 +101,7 @@ set( UIS
     dem/IDemList.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
-    map/IMapPropSetup.ui
+    map/IMapProp.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
 )

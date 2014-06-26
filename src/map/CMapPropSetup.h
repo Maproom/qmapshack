@@ -21,9 +21,9 @@
 
 
 #include "IMapPropSetup.h"
-#include "ui_IMapPropSetup.h"
+#include "ui_IMapProp.h"
 
-class CMapPropSetup : public IMapPropSetup, private Ui::IMapProps
+class CMapPropSetup : public IMapPropSetup, private Ui::IMapProp
 {
     Q_OBJECT
     public:    

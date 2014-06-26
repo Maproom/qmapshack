@@ -43,11 +43,11 @@ void CDemItem::updateIcon()
         return;
     }
 
-    QPixmap img("://icons/32x32/map.png");
+    QPixmap img("://icons/32x32Mmap.png");
     QFileInfo fi(filenames.first());
     if(fi.suffix().toLower() == "vrt")
     {
-        img = QPixmap("://icons/32x32/mime_vrt.png");
+        img = QPixmap("://icons/32x32/MimeVRT.png");
     }
 
     if(isActivated())

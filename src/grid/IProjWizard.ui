@@ -167,7 +167,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/gridWizard.png</pixmap>
+        <pixmap resource="../resources.qrc">:/icons/48x48/GridWizzard.png</pixmap>
        </property>
       </widget>
      </item>

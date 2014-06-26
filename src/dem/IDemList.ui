@@ -88,7 +88,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/help.png</pixmap>
+        <pixmap resource="../resources.qrc">:/icons/48x48/Help.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -149,8 +149,8 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/check.png</normaloff>
-     <normalon>:/icons/32x32/cancel.png</normalon>:/icons/32x32/check.png</iconset>
+     <normaloff>:/icons/32x32/Check.png</normaloff>
+     <normalon>:/icons/32x32/Cancel.png</normalon>:/icons/32x32/Check.png</iconset>
    </property>
    <property name="text">
     <string>Activate</string>

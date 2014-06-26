@@ -92,27 +92,27 @@ void CMapItem::updateIcon()
         return;
     }
 
-    QPixmap img("://icons/32x32/map.png");
+    QPixmap img("://icons/32x32/Map.png");
     QFileInfo fi(filename);
     if(fi.suffix().toLower() == "rmap")
     {
-        img = QPixmap("://icons/32x32/mime_rmap.png");
+        img = QPixmap("://icons/32x32/MimeRMAP.png");
     }
     else if(fi.suffix().toLower() == "jnx")
     {
-        img = QPixmap("://icons/32x32/mime_jnx.png");
+        img = QPixmap("://icons/32x32/MimeJNX.png");
     }
     else if(fi.suffix().toLower() == "vrt")
     {
-        img = QPixmap("://icons/32x32/mime_vrt.png");
+        img = QPixmap("://icons/32x32/MimeVRT.png");
     }
     else if(fi.suffix().toLower() == "img")
     {
-        img = QPixmap("://icons/32x32/mime_img.png");
+        img = QPixmap("://icons/32x32/MimeIMG.png");
     }
     else if(fi.suffix().toLower() == "map")
     {
-        img = QPixmap("://icons/32x32/mime_map.png");
+        img = QPixmap("://icons/32x32/MimeMAP.png");
     }
 
     setIcon(0,QIcon(img));
@@ -141,14 +141,14 @@ bool CMapItem::toggleActivate()
 void CMapItem::deactivate()
 {
     QMutexLocker lock(&mutexActiveMaps);
+    showChildren(false);
+
     delete mapfile;
 
     updateIcon();
     moveToBottom();
 
     setFlags(flags() & ~Qt::ItemIsDragEnabled);
-
-    showChildren(false);
 }
 
 

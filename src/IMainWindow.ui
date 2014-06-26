@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset>
     <normaloff>:/icons/32x32/map.png</normaloff>:/icons/32x32/map.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -154,7 +154,7 @@
   <action name="actionAddMapWorkspace">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/addCanvas.png</normaloff>:/icons/32x32/addCanvas.png</iconset>
+     <normaloff>:/icons/32x32/AddMapWorkspace.png</normaloff>:/icons/32x32/AddMapWorkspace.png</iconset>
    </property>
    <property name="text">
     <string>Add Map Workspace</string>
@@ -166,7 +166,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/scale.png</normaloff>:/icons/32x32/scale.png</iconset>
+     <normaloff>:/icons/32x32/Scale.png</normaloff>:/icons/32x32/Scale.png</iconset>
    </property>
    <property name="text">
     <string>Show Scale</string>
@@ -175,7 +175,7 @@
   <action name="actionSetupMapFont">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/font.png</normaloff>:/icons/32x32/font.png</iconset>
+     <normaloff>:/icons/32x32/Font.png</normaloff>:/icons/32x32/Font.png</iconset>
    </property>
    <property name="text">
     <string>Setup Map Font</string>
@@ -187,7 +187,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/grid.png</normaloff>:/icons/32x32/grid.png</iconset>
+     <normaloff>:/icons/32x32/Grid.png</normaloff>:/icons/32x32/Grid.png</iconset>
    </property>
    <property name="text">
     <string>Show Grid</string>
@@ -196,7 +196,7 @@
   <action name="actionSetupGrid">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/gridSetup.png</normaloff>:/icons/32x32/gridSetup.png</iconset>
+     <normaloff>:/icons/32x32/GridSetup.png</normaloff>:/icons/32x32/GridSetup.png</iconset>
    </property>
    <property name="text">
     <string>Setup Grid</string>
@@ -208,7 +208,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/flipDirection.png</normaloff>:/icons/32x32/flipDirection.png</iconset>
+     <normaloff>:/icons/32x32/MouseWheel.png</normaloff>:/icons/32x32/MouseWheel.png</iconset>
    </property>
    <property name="text">
     <string>Flip Mouse Wheel</string>
@@ -217,7 +217,7 @@
   <action name="actionSetupMapPathes">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/pathMap.png</normaloff>:/icons/32x32/pathMap.png</iconset>
+     <normaloff>:/icons/32x32/FolderMap.png</normaloff>:/icons/32x32/FolderMap.png</iconset>
    </property>
    <property name="text">
     <string>Setup Map Pathes</string>
@@ -229,7 +229,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/poiText.png</normaloff>:/icons/32x32/poiText.png</iconset>
+     <normaloff>:/icons/32x32/POIText.png</normaloff>:/icons/32x32/POIText.png</iconset>
    </property>
    <property name="text">
     <string>POI Text</string>
@@ -241,7 +241,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/nightDay.png</normaloff>:/icons/32x32/nightDay.png</iconset>
+     <normaloff>:/icons/32x32/NightDay.png</normaloff>:/icons/32x32/NightDay.png</iconset>
    </property>
    <property name="text">
     <string>Night / Day</string>
@@ -253,7 +253,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/toolTip.png</normaloff>:/icons/32x32/toolTip.png</iconset>
+     <normaloff>:/icons/32x32/ToolTip.png</normaloff>:/icons/32x32/ToolTip.png</iconset>
    </property>
    <property name="text">
     <string>Map Tool Tip</string>

@@ -23,10 +23,12 @@
 #include <QObject>
 #include <QImage>
 #include <QMutex>
+#include <QPointer>
 #include <proj_api.h>
 
 class CMap;
 class QSettings;
+class IMapPropSetup;
 
 class IMap : public QObject
 {
@@ -72,6 +74,8 @@ class IMap : public QObject
          */
         bool activated(){return isActivated;}
 
+        virtual IMapPropSetup * getSetup();
+
         /**
            @brief getInfo
            @param px
@@ -90,6 +94,14 @@ class IMap : public QObject
            @return Return the opacity in a range of 0..100(full opacity)
          */
         int getOpacity(){return qRound(opacity * 100);}
+
+        qreal getMinScale(){return minScale;}
+        qreal getMaxScale(){return maxScale;}
+        void setMinScale(qreal s){minScale = s;}
+        void setMaxScale(qreal s){maxScale = s;}
+
+    signals:
+        void sigPropertiesChanged();
 
     public slots:
         /**
@@ -123,7 +135,13 @@ class IMap : public QObject
          */
         bool isActivated;
 
+        QPointer<IMapPropSetup> setup;
+
         qreal opacity;
+
+        qreal minScale;
+
+        qreal maxScale;
 
 };
 

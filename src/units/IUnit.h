@@ -20,7 +20,7 @@
 #define IUNIT_H
 #include <QObject>
 
-#define NOFLOAT 1e25
+#define NOFLOAT 1e25f
 
 class IUnit : public QObject
 {

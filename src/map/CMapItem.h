@@ -97,11 +97,6 @@ class CMapItem : public QTreeWidgetItem
          */
         QPointer<IMap> mapfile;
 
-        /**
-           @brief
-         */
-        QPointer<CMapPropSetup> setup;
-
 };
 
 #endif //CMAPITEM_H

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IMapPropSetup</class>
- <widget class="QWidget" name="IMapPropSetup">
+ <class>IMapProps</class>
+ <widget class="QWidget" name="IMapProps">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -27,16 +27,17 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QToolButton" name="toolButton">
+      <widget class="QToolButton" name="toolSetMinScale">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale a minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/8x8/bullet_red.png</normaloff>:/icons/8x8/bullet_red.png</iconset>
+         <normaloff>:/icons/8x8/bullet_green.png</normaloff>
+         <normalon>:/icons/8x8/bullet_red.png</normalon>:/icons/8x8/bullet_green.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -60,16 +61,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton_2">
+      <widget class="QToolButton" name="toolSetMaxScale">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale a maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/8x8/bullet_red.png</normaloff>:/icons/8x8/bullet_red.png</iconset>
+         <normaloff>:/icons/8x8/bullet_green.png</normaloff>
+         <normalon>:/icons/8x8/bullet_red.png</normalon>:/icons/8x8/bullet_green.png</iconset>
        </property>
        <property name="iconSize">
         <size>

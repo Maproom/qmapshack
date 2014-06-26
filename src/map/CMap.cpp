@@ -345,8 +345,8 @@ void CMap::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
             CMapItem * item = mapList->item(i);
 
             if(item && item->key == key)
-            {
-                item->activate();
+            {                
+                item->activate();                
                 item->loadConfig(cfg);
                 break;
             }

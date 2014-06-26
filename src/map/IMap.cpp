@@ -18,6 +18,8 @@
 
 #include "map/IMap.h"
 #include "map/CMap.h"
+#include "map/CMapPropSetup.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 
@@ -38,6 +40,8 @@ IMap::IMap(CMap *parent)
     , pjsrc(0)
     , isActivated(false)
     , opacity(1.0)
+    , minScale(NOFLOAT)
+    , maxScale(NOFLOAT)
 {
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }
@@ -46,16 +50,33 @@ IMap::~IMap()
 {
     pj_free(pjtar);
     pj_free(pjsrc);
+    delete setup;
+}
+
+IMapPropSetup * IMap::getSetup()
+{
+    if(setup.isNull())
+    {
+        setup = new CMapPropSetup(this, map);
+    }
+
+    return setup;
 }
 
 void IMap::saveConfig(QSettings& cfg)
 {
     cfg.setValue("opacity", opacity);
+    cfg.setValue("minScale", minScale);
+    cfg.setValue("maxScale", maxScale);
 }
 
 void IMap::loadConfig(QSettings& cfg)
 {
-    opacity = cfg.value("opacity", opacity).toFloat();
+    opacity     = cfg.value("opacity", opacity).toFloat();
+    minScale    = cfg.value("minScale",minScale).toFloat();
+    maxScale    = cfg.value("maxScale",maxScale).toFloat();
+
+    emit sigPropertiesChanged();
 }
 
 

@@ -16,34 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CMAPPROPSETUP_H
-#define CMAPPROPSETUP_H
-
-
 #include "IMapPropSetup.h"
-#include "ui_IMapPropSetup.h"
+#include "CMap.h"
+#include "IMap.h"
 
-class CMapPropSetup : public IMapPropSetup, private Ui::IMapProps
+IMapPropSetup::IMapPropSetup(IMap *mapfile, CMap *map)
+    : mapfile(mapfile)
+    , map(map)
 {
-    Q_OBJECT
-    public:    
-        CMapPropSetup(IMap * mapfile, CMap * map);
-        virtual ~CMapPropSetup();
+    connect(mapfile, SIGNAL(sigPropertiesChanged()), this, SLOT(slotPropertiesChanged()));
+}
 
-    protected slots:
-        void slotPropertiesChanged();
+IMapPropSetup::~IMapPropSetup()
+{
 
-    private slots:        
-        void slotScaleChanged(const QPointF& s);
-        void slotSetMinScale(bool checked);
-        void slotSetMaxScale(bool checked);
-
-    private:
-        void updateScaleLabel();
-
-        QPointF scale;
-
-};
-
-#endif //CMAPPROPSETUP_H
+}
 

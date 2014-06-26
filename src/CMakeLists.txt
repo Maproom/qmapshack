@@ -30,6 +30,7 @@ set( SRCS
     map/CMapMAP.cpp
     map/CMapVRT.cpp
     map/CMapPathSetup.cpp
+    map/IMapPropSetup.cpp
     map/CMapPropSetup.cpp
     map/garmin/IGarminStrTbl.cpp
     map/garmin/CGarminStrTbl6.cpp
@@ -74,6 +75,7 @@ set( HDRS
     map/CMapVRT.h
     map/CMapPathSetup.h
     map/CMapPropSetup.h
+    map/IMapPropSetup.h
     map/garmin/Garmin.h
     map/garmin/IGarminStrTbl.h
     map/garmin/CGarminStrTbl6.h

@@ -16,34 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CMAPPROPSETUP_H
-#define CMAPPROPSETUP_H
+#ifndef IMAPPROPSETUP_H
+#define IMAPPROPSETUP_H
 
+#include <QWidget>
 
-#include "IMapPropSetup.h"
-#include "ui_IMapPropSetup.h"
+class IMap;
+class CMap;
 
-class CMapPropSetup : public IMapPropSetup, private Ui::IMapProps
+class IMapPropSetup : public QWidget
 {
     Q_OBJECT
-    public:    
-        CMapPropSetup(IMap * mapfile, CMap * map);
-        virtual ~CMapPropSetup();
+    public:
+        IMapPropSetup(IMap * mapfile, CMap * map);
+        virtual ~IMapPropSetup();
 
     protected slots:
-        void slotPropertiesChanged();
+        virtual void slotPropertiesChanged()= 0;
 
-    private slots:        
-        void slotScaleChanged(const QPointF& s);
-        void slotSetMinScale(bool checked);
-        void slotSetMaxScale(bool checked);
-
-    private:
-        void updateScaleLabel();
-
-        QPointF scale;
+    protected:
+        IMap * mapfile;
+        CMap * map;
 
 };
 
-#endif //CMAPPROPSETUP_H
+#endif //IMAPPROPSETUP_H
 

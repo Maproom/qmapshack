@@ -73,15 +73,14 @@ void CMapItem::showChildren(bool yes)
         QTreeWidget * tw = treeWidget();
 
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
-        item->setFlags(Qt::ItemIsEnabled);
-        setup = new CMapPropSetup(mapfile, map);
-        tw->setItemWidget(item, 0, setup);
+        item->setFlags(Qt::ItemIsEnabled);        
+        tw->setItemWidget(item, 0, mapfile->getSetup());
     }
     else
     {
         QList<QTreeWidgetItem*> items = takeChildren();
         qDeleteAll(items);
-        delete setup;
+        delete mapfile->getSetup();
     }
 
 }
@@ -115,12 +114,6 @@ void CMapItem::updateIcon()
     {
         img = QPixmap("://icons/32x32/mime_map.png");
     }
-
-//    if(isActivated())
-//    {
-//        QPainter p(&img);
-//        p.drawPixmap(0,0,QPixmap("://icons/16x16/redGlow.png"));
-//    }
 
     setIcon(0,QIcon(img));
 }

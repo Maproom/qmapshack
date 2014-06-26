@@ -18,6 +18,7 @@
 
 #include "map/CMapVRT.h"
 #include "map/CMap.h"
+#include "units/IUnit.h"
 #include "CCanvas.h"
 
 #include <gdal_priv.h>
@@ -155,6 +156,16 @@ void CMapVRT::draw(buffer_t& buf)
         return;
     }
 
+    QPointF scale = buf.scale * buf.zoomFactor;
+    if((minScale != NOFLOAT) && (scale.x() < minScale))
+    {
+        return;
+    }
+    if((maxScale != NOFLOAT) && (scale.x() > maxScale))
+    {
+        return;
+    }
+
     // calculate bounding box;
     QPointF pt1 = ref1;
     QPointF pt2 = ref2;
@@ -221,7 +232,7 @@ void CMapVRT::draw(buffer_t& buf)
 
     // limit number of tiles to keep performance
     double nTiles = ((right - left) * (bottom - top) / (dx*dy));
-    if((nTiles > 10) && (nTiles < 30000))
+    if(nTiles < 50000)
     {
 
         for(qreal y = top; y < bottom; y += dy)

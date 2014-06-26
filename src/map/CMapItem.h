@@ -25,7 +25,7 @@
 
 class IMap;
 class CMap;
-class QSlider;
+class CMapPropSetup;
 class QSettings;
 
 class CMapItem : public QTreeWidgetItem
@@ -79,7 +79,7 @@ class CMapItem : public QTreeWidgetItem
            @brief Show or hide child treewidget items
            @param yes set true to add children, false will remove all children and delete the attached widgets
          */
-        void showChildren(bool yes);     
+        void showChildren(bool yes);
 
     private:
         friend class CMap;
@@ -87,20 +87,20 @@ class CMapItem : public QTreeWidgetItem
         /**
            @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
          */
-        QString         key;
+        QString key;
         /**
            @brief List of map files forming that particular map
          */
-        QStringList     filenames;
+        QString filename;
         /**
            @brief List of loaded map objects when map is activated.
          */
-        QList<IMap*>    files;
+        QPointer<IMap> mapfile;
 
         /**
-           @brief Slider to setup opacity of map
+           @brief
          */
-        QPointer<QSlider> slider;
+        QPointer<CMapPropSetup> setup;
 
 };
 

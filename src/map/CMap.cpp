@@ -52,7 +52,7 @@
 //    ,52428.8
 //};
 
-#define N_ZOOM_LEVELS 36
+#define N_ZOOM_LEVELS 31
 const qreal CMap::scales[N_ZOOM_LEVELS] =
 {
       0.10
@@ -86,11 +86,11 @@ const qreal CMap::scales[N_ZOOM_LEVELS] =
     , 5000.0
     , 7000.0
     , 10000.0
-    , 15000.0
-    , 20000.0
-    , 30000.0
-    , 50000.0
-    , 70000.0
+//    , 15000.0
+//    , 20000.0
+//    , 30000.0
+//    , 50000.0
+//    , 70000.0
 };
 
 QList<CMap*> CMap::maps;
@@ -112,9 +112,11 @@ CMap::CMap(CCanvas *parent)
 {
     // setup map parameters and connect to canvas
     pjsrc = pj_init_plus("+proj=merc +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
+//    pjsrc = pj_init_plus("+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=4500000 +y_0=0 +datum=potsdam +units=m +no_defs");
 //    pjsrc = pj_init_plus("+proj=lcc +lat_1=50 +lat_0=50 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs");
 //    pjsrc = pj_init_plus("+proj=lcc +lat_1=38.66667 +lat_2=33.33333 +lat_0=34 +lon_0=-105.56667 +x_0=0 +y_0=0 +datum=NAD83");
     pjtar = pj_init_plus("+proj=longlat +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
+
 
     zoom(5);
 
@@ -197,7 +199,7 @@ void CMap::getInfo(const QPoint& px, QString& str)
         {
             CMapItem * item = mapList->item(i);
 
-            if(!item || item->files.isEmpty())
+            if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
                 // it is ok to break ass soon as the first map with no
@@ -205,10 +207,7 @@ void CMap::getInfo(const QPoint& px, QString& str)
                 break;
             }
 
-            foreach(IMap * m, item->files)
-            {
-                m->getInfo(px, str);
-            }
+            item->mapfile->getInfo(px, str);
         }
     }
     CMapItem::mutexActiveMaps.unlock();
@@ -228,7 +227,7 @@ void CMap::getToolTip(const QPoint& px, QString& str)
         {
             CMapItem * item = mapList->item(i);
 
-            if(!item || item->files.isEmpty())
+            if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
                 // it is ok to break ass soon as the first map with no
@@ -236,10 +235,8 @@ void CMap::getToolTip(const QPoint& px, QString& str)
                 break;
             }
 
-            foreach(IMap * m, item->files)
-            {
-                m->getToolTip(px, str);
-            }
+            item->mapfile->getToolTip(px, str);
+
         }
     }
     CMapItem::mutexActiveMaps.unlock();
@@ -249,7 +246,7 @@ void CMap::getToolTip(const QPoint& px, QString& str)
 void CMap::saveConfig(QSettings& cfg)
 {
     cfgGroup = cfg.group();
-    QStringList keys;    
+    QStringList keys;
     cfg.beginGroup("map");
     saveActiveMapsList(keys, cfg);
     cfg.setValue("active", keys);
@@ -288,7 +285,7 @@ void CMap::buildMapList()
             CMapItem * item = new CMapItem(*mapList, this);
 
             item->setText(0,fi.baseName());
-            item->filenames  << dir.absoluteFilePath(filename);
+            item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 
             QFile f(dir.absoluteFilePath(filename));
@@ -319,7 +316,7 @@ void CMap::saveActiveMapsList(QStringList& keys, QSettings& cfg)
     for(int i = 0; i < mapList->count(); i++)
     {
         CMapItem * item = mapList->item(i);
-        if(item && !item->files.isEmpty())
+        if(item && !item->mapfile.isNull())
         {
             item->saveConfig(cfg);
             keys << item->key;
@@ -356,7 +353,7 @@ void CMap::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
         }
     }
 
-    mapList->updateHelpText();   
+    mapList->updateHelpText();
 }
 
 void CMap::resize(const QSize& size)
@@ -416,6 +413,8 @@ void CMap::zoom(int idx)
         zoomFactor.rx() = scales[idx];
         zoomFactor.ry() = scales[idx];
         intNeedsRedraw  = true;
+
+        emit  sigScaleChanged(scale*zoomFactor);
     }
     mutex.unlock(); // --------- stop serialize with thread
 }
@@ -576,7 +575,7 @@ void CMap::run()
             {
                 CMapItem * item = mapList->item(i);
 
-                if(!item || item->files.isEmpty())
+                if(!item || item->mapfile.isNull())
                 {
                     // as all active maps have to be at the top of the list
                     // it is ok to break ass soon as the first map with no
@@ -584,10 +583,8 @@ void CMap::run()
                     break;
                 }
 
-                foreach(IMap * m, item->files)
-                {
-                    m->draw(currentBuffer);
-                }
+                item->mapfile->draw(currentBuffer);
+
             }
         }
         CMapItem::mutexActiveMaps.unlock();

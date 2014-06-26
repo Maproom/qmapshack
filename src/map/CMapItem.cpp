@@ -23,6 +23,7 @@
 #include "map/CMapIMG.h"
 #include "map/CMapVRT.h"
 #include "map/CMapMAP.h"
+#include "map/CMapPropSetup.h"
 #include <QtGui>
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
@@ -47,7 +48,7 @@ void CMapItem::saveConfig(QSettings& cfg)
     }
 
     cfg.beginGroup(key);
-    cfg.setValue("opacity", slider->value());
+    mapfile->saveConfig(cfg);
     cfg.endGroup();
 }
 
@@ -59,7 +60,7 @@ void CMapItem::loadConfig(QSettings& cfg)
     }
 
     cfg.beginGroup(key);
-    slider->setValue(cfg.value("opacity", 100).toInt());
+    mapfile->loadConfig(cfg);
     cfg.endGroup();
 }
 
@@ -67,42 +68,33 @@ void CMapItem::loadConfig(QSettings& cfg)
 void CMapItem::showChildren(bool yes)
 {
 
-    if(yes && !files.isEmpty())
+    if(yes && !mapfile.isNull())
     {
         QTreeWidget * tw = treeWidget();
 
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
-        slider = new QSlider(Qt::Horizontal);
-        slider->setMinimum(0);
-        slider->setMaximum(100);
-        slider->setToolTip(slider->tr("Setup map's opacity"));
-        slider->setValue(files.first()->getOpacity());
-        foreach(IMap * map, files)
-        {
-            slider->connect(slider, SIGNAL(valueChanged(int)), map, SLOT(slotSetOpacity(int)));
-        }
-        slider->connect(slider, SIGNAL(valueChanged(int)), map, SLOT(emitSigCanvasUpdate()));
-
-        tw->setItemWidget(item, 0, slider);
+        item->setFlags(Qt::ItemIsEnabled);
+        setup = new CMapPropSetup(mapfile, map);
+        tw->setItemWidget(item, 0, setup);
     }
     else
     {
         QList<QTreeWidgetItem*> items = takeChildren();
         qDeleteAll(items);
-        delete slider;
+        delete setup;
     }
 
 }
 
 void CMapItem::updateIcon()
 {
-    if(filenames.isEmpty())
+    if(filename.isNull())
     {
         return;
     }
 
     QPixmap img("://icons/32x32/map.png");
-    QFileInfo fi(filenames.first());
+    QFileInfo fi(filename);
     if(fi.suffix().toLower() == "rmap")
     {
         img = QPixmap("://icons/32x32/mime_rmap.png");
@@ -136,13 +128,13 @@ void CMapItem::updateIcon()
 bool CMapItem::isActivated()
 {
     QMutexLocker lock(&mutexActiveMaps);
-    return !files.isEmpty();
+    return !mapfile.isNull();
 }
 
 bool CMapItem::toggleActivate()
 {
     QMutexLocker lock(&mutexActiveMaps);
-    if(files.isEmpty())
+    if(mapfile.isNull())
     {
         return activate();
     }
@@ -156,8 +148,7 @@ bool CMapItem::toggleActivate()
 void CMapItem::deactivate()
 {
     QMutexLocker lock(&mutexActiveMaps);
-    qDeleteAll(files);
-    files.clear();
+    delete mapfile;
 
     updateIcon();
     moveToBottom();
@@ -172,54 +163,42 @@ bool CMapItem::activate()
 {
     QMutexLocker lock(&mutexActiveMaps);
 
-    if(!files.isEmpty())
+    delete mapfile;
+
+    // load map by suffix
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() == "rmap")
     {
-        qDeleteAll(files);
-        files.clear();
+        mapfile = new CMapRMAP(filename, map);
+    }
+    else if(fi.suffix().toLower() == "jnx")
+    {
+        mapfile = new CMapJNX(filename, map);
+    }
+    else if(fi.suffix().toLower() == "img")
+    {
+        mapfile = new CMapIMG(filename, map);
+    }
+    else if(fi.suffix().toLower() == "vrt")
+    {
+        mapfile = new CMapVRT(filename, map);
+    }
+    else if(fi.suffix().toLower() == "map")
+    {
+        mapfile = new CMapMAP(filename, map);
     }
 
-    foreach(const QString& filename, filenames)
+    // if map is activated sucessfully add to the list of map files
+    // else delete all previous loaded maps and abort
+    if(mapfile.isNull() || !mapfile->activated())
     {
-        IMap * m = 0;
-        // load map by suffix
-        QFileInfo fi(filename);
-        if(fi.suffix().toLower() == "rmap")
-        {
-            m = new CMapRMAP(filename, map);
-        }
-        else if(fi.suffix().toLower() == "jnx")
-        {
-            m = new CMapJNX(filename, map);
-        }
-        else if(fi.suffix().toLower() == "img")
-        {
-            m = new CMapIMG(filename, map);
-        }
-        else if(fi.suffix().toLower() == "vrt")
-        {
-            m = new CMapVRT(filename, map);
-        }
-        else if(fi.suffix().toLower() == "map")
-        {
-            m = new CMapMAP(filename, map);
-        }
-
-        // if map is activated sucessfully add to the list of map files
-        // else delete all previous loaded maps and abort
-        if(m && m->activated())
-        {
-            files << m;
-        }
-        else
-        {
-            qDeleteAll(files);
-            files.clear();
-            updateIcon();
-            return false;
-        }
+        delete mapfile;
+        updateIcon();
+        return false;
     }
+
     // no mapfiles loaded? Bad.
-    if(files.isEmpty())
+    if(mapfile.isNull())
     {
         return false;
     }
@@ -255,7 +234,7 @@ void CMapItem::moveToBottom()
     for(row = 0; row < w->topLevelItemCount(); row++)
     {
         CMapItem * item = dynamic_cast<CMapItem*>(w->topLevelItem(row));
-        if(item && item->files.isEmpty())
+        if(item && item->mapfile.isNull())
         {
             break;
         }

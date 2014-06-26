@@ -26,6 +26,7 @@
 #include <proj_api.h>
 
 class CMap;
+class QSettings;
 
 class IMap : public QObject
 {
@@ -33,6 +34,9 @@ class IMap : public QObject
     public:
         IMap(CMap * parent);
         virtual ~IMap();
+
+        virtual void saveConfig(QSettings& cfg);
+        virtual void loadConfig(QSettings& cfg);
 
         struct buffer_t
         {
@@ -62,14 +66,36 @@ class IMap : public QObject
 
         virtual void draw(buffer_t& buf) = 0;
 
+        /**
+           @brief Test if map has been loaded successfully
+           @return Return false if map is not loaded
+         */
         bool activated(){return isActivated;}
 
+        /**
+           @brief getInfo
+           @param px
+           @param str
+         */
         virtual void getInfo(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
+        /**
+           @brief getToolTip
+           @param px
+           @param str
+         */
         virtual void getToolTip(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
 
+        /**
+           @brief Read opacity value
+           @return Return the opacity in a range of 0..100(full opacity)
+         */
         int getOpacity(){return qRound(opacity * 100);}
 
     public slots:
+        /**
+           @brief Write opacity value
+           @param value must be in the range of 0..100(full opacity)
+         */
         void slotSetOpacity(int value){opacity = value / 100.0;}
 
     protected:

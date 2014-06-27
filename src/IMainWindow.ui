@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>MapRoom</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/icons/32x32/map.png</normaloff>:/icons/32x32/map.png</iconset>
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/48x48/MapRoom.png</normaloff>:/icons/48x48/MapRoom.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

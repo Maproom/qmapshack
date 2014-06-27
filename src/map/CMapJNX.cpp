@@ -300,7 +300,7 @@ void CMapJNX::draw(buffer_t& buf)
     // ----- start drawing -----
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
-    p.setOpacity(opacity);
+    p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
     foreach(const file_t& mapFile, files)

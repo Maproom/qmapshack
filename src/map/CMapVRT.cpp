@@ -157,11 +157,12 @@ void CMapVRT::draw(buffer_t& buf)
     }
 
     QPointF scale = buf.scale * buf.zoomFactor;
-    if((minScale != NOFLOAT) && (scale.x() < minScale))
+
+    if((getMinScale() != NOFLOAT) && (scale.x() < getMinScale()))
     {
         return;
     }
-    if((maxScale != NOFLOAT) && (scale.x() > maxScale))
+    if((getMaxScale() != NOFLOAT) && (scale.x() > getMaxScale()))
     {
         return;
     }
@@ -227,7 +228,7 @@ void CMapVRT::draw(buffer_t& buf)
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
-    p.setOpacity(opacity);
+    p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
     // limit number of tiles to keep performance

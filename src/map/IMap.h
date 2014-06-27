@@ -93,12 +93,12 @@ class IMap : public QObject
            @brief Read opacity value
            @return Return the opacity in a range of 0..100(full opacity)
          */
-        int getOpacity(){return qRound(opacity * 100);}
+        int getOpacity(){return opacity;}
 
         qreal getMinScale(){return minScale;}
         qreal getMaxScale(){return maxScale;}
-        void setMinScale(qreal s){minScale = s;}
-        void setMaxScale(qreal s){maxScale = s;}
+        void setMinScale(qreal s);
+        void setMaxScale(qreal s);
 
     signals:
         void sigPropertiesChanged();
@@ -108,7 +108,7 @@ class IMap : public QObject
            @brief Write opacity value
            @param value must be in the range of 0..100(full opacity)
          */
-        void slotSetOpacity(int value){opacity = value / 100.0;}
+        void slotSetOpacity(int value){opacity = value;}
 
     protected:
         void convertRad2M(QPointF &p);
@@ -137,6 +137,7 @@ class IMap : public QObject
 
         QPointer<IMapPropSetup> setup;
 
+    private:
         qreal opacity;
 
         qreal minScale;

@@ -39,7 +39,7 @@ IMap::IMap(CMap *parent)
     , map(parent)
     , pjsrc(0)
     , isActivated(false)
-    , opacity(1.0)
+    , opacity(100)
     , minScale(NOFLOAT)
     , maxScale(NOFLOAT)
 {
@@ -65,20 +65,37 @@ IMapPropSetup * IMap::getSetup()
 
 void IMap::saveConfig(QSettings& cfg)
 {
-    cfg.setValue("opacity", opacity);
-    cfg.setValue("minScale", minScale);
-    cfg.setValue("maxScale", maxScale);
+    cfg.setValue("opacity", getOpacity());
+    cfg.setValue("minScale", getMinScale());
+    cfg.setValue("maxScale", getMaxScale());
 }
 
 void IMap::loadConfig(QSettings& cfg)
 {
-    opacity     = cfg.value("opacity", opacity).toFloat();
-    minScale    = cfg.value("minScale",minScale).toFloat();
-    maxScale    = cfg.value("maxScale",maxScale).toFloat();
+    slotSetOpacity(cfg.value("opacity", getOpacity()).toDouble());
+    setMinScale(cfg.value("minScale", getMinScale()).toDouble());
+    setMaxScale(cfg.value("maxScale", getMaxScale()).toDouble());
 
     emit sigPropertiesChanged();
 }
 
+void IMap::setMinScale(qreal s)
+{
+    if((s != NOFLOAT) && (s > maxScale))
+    {
+        return;
+    }
+    minScale = s;
+}
+
+void IMap::setMaxScale(qreal s)
+{
+    if((s != NOFLOAT) && (s < minScale))
+    {
+        return;
+    }
+    maxScale = s;
+}
 
 void IMap::convertRad2M(QPointF &p)
 {

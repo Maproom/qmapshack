@@ -26,14 +26,17 @@
 class CMapPropSetup : public IMapPropSetup, private Ui::IMapProp
 {
     Q_OBJECT
-    public:    
+    public:
         CMapPropSetup(IMap * mapfile, CMap * map);
         virtual ~CMapPropSetup();
 
     protected slots:
         void slotPropertiesChanged();
 
-    private slots:        
+    protected:
+        void resizeEvent(QResizeEvent * e);
+
+    private slots:
         void slotScaleChanged(const QPointF& s);
         void slotSetMinScale(bool checked);
         void slotSetMaxScale(bool checked);
@@ -41,7 +44,7 @@ class CMapPropSetup : public IMapPropSetup, private Ui::IMapProp
     private:
         void updateScaleLabel();
 
-        QPointF scale;
+        static QPointF scale;
 
 };
 

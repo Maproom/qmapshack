@@ -81,18 +81,24 @@ void IMap::loadConfig(QSettings& cfg)
 
 void IMap::setMinScale(qreal s)
 {
-    if((s != NOFLOAT) && (s > maxScale))
+    if((s != NOFLOAT) && (maxScale != NOFLOAT))
     {
-        return;
+        if(s > maxScale)
+        {
+            return;
+        }
     }
     minScale = s;
 }
 
 void IMap::setMaxScale(qreal s)
 {
-    if((s != NOFLOAT) && (s < minScale))
+    if((s != NOFLOAT) && (minScale != NOFLOAT))
     {
-        return;
+        if(s < minScale)
+        {
+            return;
+        }
     }
     maxScale = s;
 }
@@ -113,6 +119,20 @@ void IMap::convertM2Rad(QPointF &p)
         return;
     }
     pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
+}
+
+bool IMap::isOutOfScale(const QPointF& scale)
+{
+    if((getMinScale() != NOFLOAT) && (scale.x() < getMinScale()))
+    {
+        return true;
+    }
+    if((getMaxScale() != NOFLOAT) && (scale.x() > getMaxScale()))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 void IMap::drawTile(QImage& img, QPolygonF& l, QPainter& p)

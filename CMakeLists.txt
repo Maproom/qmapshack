@@ -43,7 +43,7 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
 
   install(
     FILES
-      src/icons/32x32/map.png
+      src/icons/38x49/MapRoom.png
     DESTINATION
       ${DATA_INSTALL_PREFIX}/pixmaps
   )

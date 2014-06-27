@@ -394,6 +394,12 @@ void CMapRMAP::draw(buffer_t& buf)
 
     // find best level for buffer's scale factor derived from base scale and zoom factor
     QPointF bufferScale = buf.scale * buf.zoomFactor;
+
+    if(isOutOfScale(bufferScale))
+    {
+        return;
+    }
+
     level_t& level      = findBestLevel(bufferScale);
 
     // convert top left and bottom right point of buffer to local coord. system

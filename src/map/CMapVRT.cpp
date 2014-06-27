@@ -156,16 +156,8 @@ void CMapVRT::draw(buffer_t& buf)
         return;
     }
 
-    QPointF scale = buf.scale * buf.zoomFactor;
+    QPointF bufferScale = buf.scale * buf.zoomFactor;
 
-    if((getMinScale() != NOFLOAT) && (scale.x() < getMinScale()))
-    {
-        return;
-    }
-    if((getMaxScale() != NOFLOAT) && (scale.x() > getMaxScale()))
-    {
-        return;
-    }
 
     // calculate bounding box;
     QPointF pt1 = ref1;
@@ -231,9 +223,9 @@ void CMapVRT::draw(buffer_t& buf)
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
+
     // limit number of tiles to keep performance
-    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
-    if(nTiles < 50000)
+    if(!isOutOfScale(bufferScale))
     {
 
         for(qreal y = top; y < bottom; y += dy)

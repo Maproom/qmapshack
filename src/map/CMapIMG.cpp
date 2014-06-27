@@ -1110,6 +1110,11 @@ void CMapIMG::draw(buffer_t& buf)
 
     QPointF bufferScale = buf.scale * buf.zoomFactor;
 
+    if(isOutOfScale(bufferScale))
+    {
+        return;
+    }
+
     QPainter p(&buf.image);
     if(getOpacity() != 0)
     {

@@ -114,6 +114,7 @@ class IMap : public QObject
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);
 
+        bool isOutOfScale(const QPointF& scale);
         void drawTile(QImage& img, QPolygonF& l, QPainter& p);
 
         CMap * map;

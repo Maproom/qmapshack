@@ -18,6 +18,7 @@
 
 #include "map/CMapJNX.h"
 #include "map/CMap.h"
+#include "units/IUnit.h"
 #include "GeoMath.h"
 #include "CCanvas.h"
 
@@ -318,26 +319,32 @@ void CMapJNX::draw(buffer_t& buf)
 
         qint32 level = scale2level(bufferScale.x()/5, mapFile);
 
+        // no scalable level found, draw bounding box of map
+        // derive maps corner coordinate
+        QPolygonF l(4);
+        l[0].rx() = mapFile.lon1 * DEG_TO_RAD;
+        l[0].ry() = mapFile.lat1 * DEG_TO_RAD;
+        l[1].rx() = mapFile.lon2 * DEG_TO_RAD;
+        l[1].ry() = mapFile.lat1 * DEG_TO_RAD;
+        l[2].rx() = mapFile.lon2 * DEG_TO_RAD;
+        l[2].ry() = mapFile.lat2 * DEG_TO_RAD;
+        l[3].rx() = mapFile.lon1 * DEG_TO_RAD;
+        l[3].ry() = mapFile.lat2 * DEG_TO_RAD;
+
+        map->convertRad2Px(l);
+
+        // finally scale, rotate and draw tile
+        p.setPen(Qt::black);
+        p.setBrush(Qt::NoBrush);
+        p.drawPolygon(l);
+
+
         if(level < 0)
         {
-            // no scalable level found, draw bounding box of map
-            // derive maps corner coordinate
-            QPolygonF l(4);
-            l[0].rx() = mapFile.lon1 * DEG_TO_RAD;
-            l[0].ry() = mapFile.lat1 * DEG_TO_RAD;
-            l[1].rx() = mapFile.lon2 * DEG_TO_RAD;
-            l[1].ry() = mapFile.lat1 * DEG_TO_RAD;
-            l[2].rx() = mapFile.lon2 * DEG_TO_RAD;
-            l[2].ry() = mapFile.lat2 * DEG_TO_RAD;
-            l[3].rx() = mapFile.lon1 * DEG_TO_RAD;
-            l[3].ry() = mapFile.lat2 * DEG_TO_RAD;
-
-            map->convertRad2Px(l);
-
-            // finally scale, rotate and draw tile
-            p.setPen(QPen(Qt::darkBlue,2));
-            p.setBrush(QBrush(QColor(230,230,255,100) ));
-            p.drawPolygon(l);
+            continue;
+        }
+        if(isOutOfScale(bufferScale))
+        {
             continue;
         }
 

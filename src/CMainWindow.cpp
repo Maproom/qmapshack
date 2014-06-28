@@ -195,9 +195,27 @@ void CMainWindow::addDemList(CDemList * list, const QString &name)
 
 void CMainWindow::slotAddCanvas()
 {
+    int i, cnt = 0;
+    for(i = 0; i < tabWidget->count(); i++)
+    {
+         CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+         if(canvas == 0)
+         {
+             continue;
+         }
+         cnt++;
+    }
+
     CCanvas * canvas = new CCanvas(tabWidget);
     tabWidget->addTab(canvas, canvas->objectName());
     connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+
+    SETTINGS;
+    cfg.beginGroup(QString("Canvas%1").arg(cnt));
+    canvas->loadConfig(cfg);
+    cfg.endGroup();
+
+    tabWidget->setCurrentWidget(canvas);
 }
 
 void CMainWindow::slotTabCloseRequest(int i)

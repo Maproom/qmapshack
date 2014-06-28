@@ -270,9 +270,11 @@ void CMap::loadConfig(QSettings& cfg)
 void CMap::loadConfigForMapItem(CMapItem * item)
 {
     SETTINGS;
+    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
-    cfg.beginGroup("map");
+    cfg.beginGroup("map");    
     item->loadConfig(cfg);
+    cfg.endGroup();
     cfg.endGroup();
     cfg.endGroup();
 }
@@ -313,9 +315,11 @@ void CMap::buildMapList()
 void CMap::saveActiveMapsList(QStringList& keys)
 {
     SETTINGS;
+    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
     cfg.beginGroup("map");
     saveActiveMapsList(keys, cfg);
+    cfg.endGroup();
     cfg.endGroup();
     cfg.endGroup();
 }
@@ -338,9 +342,11 @@ void CMap::saveActiveMapsList(QStringList& keys, QSettings& cfg)
 void CMap::restoreActiveMapsList(QStringList& keys)
 {
     SETTINGS;
+    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
     cfg.beginGroup("map");
     restoreActiveMapsList(keys, cfg);
+    cfg.endGroup();
     cfg.endGroup();
     cfg.endGroup();
 }

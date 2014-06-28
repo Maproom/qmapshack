@@ -67,7 +67,6 @@ CMapList::CMapList(QWidget *parent)
 {
     setupUi(this);
 
-    connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
     connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
 
@@ -137,19 +136,6 @@ void CMapList::slotActivate()
     updateHelpText();
 }
 
-void CMapList::slotItemSelectionChanged()
-{
-    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
-    if(item && item->isActivated())
-    {
-        treeWidget->setDragDropMode(QAbstractItemView::InternalMove);
-    }
-    else
-    {
-        treeWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
-    }
-
-}
 
 void CMapList::slotContextMenu(const QPoint& point)
 {

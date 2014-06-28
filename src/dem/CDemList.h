@@ -59,7 +59,6 @@ class CDemList : public QWidget, private Ui::IDemsList
         void sigChanged();
 
     private slots:
-        void slotItemSelectionChanged();
         void slotActivate();
         void slotContextMenu(const QPoint &point);
 

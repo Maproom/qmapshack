@@ -32,6 +32,7 @@ CMapItem::CMapItem(QTreeWidget *parent, CMap * map)
     : QTreeWidgetItem(parent)
     , map(map)
 {
+    // it's everything but not drag-n-drop until it gets activated
     setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 }
 
@@ -42,7 +43,7 @@ CMapItem::~CMapItem()
 
 void CMapItem::saveConfig(QSettings& cfg)
 {
-    if(!isActivated())
+    if(mapfile.isNull())
     {
         return;
     }
@@ -54,7 +55,7 @@ void CMapItem::saveConfig(QSettings& cfg)
 
 void CMapItem::loadConfig(QSettings& cfg)
 {
-    if(!isActivated())
+    if(mapfile.isNull())
     {
         return;
     }
@@ -141,13 +142,18 @@ bool CMapItem::toggleActivate()
 void CMapItem::deactivate()
 {
     QMutexLocker lock(&mutexActiveMaps);
+    // remove mapfile setup dialog as child of this item
     showChildren(false);
 
+    // remove mapfile object
     delete mapfile;
 
+    // maybe used to reflect changes in the icon
     updateIcon();
+    // move to bottom of the active map list
     moveToBottom();
 
+    // deny drag-n-drop again
     setFlags(flags() & ~Qt::ItemIsDragEnabled);
 }
 
@@ -181,27 +187,36 @@ bool CMapItem::activate()
         mapfile = new CMapMAP(filename, map);
     }
 
-    // if map is activated sucessfully add to the list of map files
-    // else delete all previous loaded maps and abort
-    if(mapfile.isNull() || !mapfile->activated())
-    {
-        delete mapfile;
-        updateIcon();
-        return false;
-    }
-
+    updateIcon();
     // no mapfiles loaded? Bad.
     if(mapfile.isNull())
     {
         return false;
     }
-    updateIcon();
+
+    // if map is activated sucessfully add to the list of map files
+    // else delete all previous loaded maps and abort
+    if(!mapfile->activated())
+    {
+        delete mapfile;
+        return false;
+    }
+    // append list of active map files
     moveToBottom();
 
+    // an active map is subject to drag-n-drop
     setFlags(flags() | Qt::ItemIsDragEnabled);
 
+    /*
+        As the map file setup is stored in the context of the CMap object
+        the configuration has to be loaded via the CMap object to select
+        the correct group context in the QSetting object.
+        This call will result into a call of loadConfig() of this CMapItem
+        object.
+    */
     map->loadConfigForMapItem(this);
 
+    // Add the mapfile setup dialog as child of this item
     showChildren(true);
     return true;
 }

@@ -38,6 +38,16 @@ class CMap : public QThread
 
         void saveConfig(QSettings& cfg);
         void loadConfig(QSettings& cfg);
+        /**
+           @brief This is called most likely from the item itself to call it's loadConfig() method.
+
+           As the setup of a map is stored in the context of the workspace the correct groups have
+           to be set prior to call the item's loadConfig() method. However the item does not know
+           all that stuff. That is why it has to ask it's CMap object to prepare the QSettings object
+           and to call loadConfig();
+
+           @param item the item to call it's loadConfig() method
+         */
         void loadConfigForMapItem(CMapItem * item);
 
         /**
@@ -98,7 +108,23 @@ class CMap : public QThread
          */
         QString getProjection();
 
+        /**
+           @brief Get a full detailed info text about objects close to the given point
+
+           This method will call getInfo() of all items in mapList.
+
+           @param px    the point on the screen in pixel
+           @param str   a string object to receive all information
+        */
         void getInfo(const QPoint& px, QString& str);
+        /**
+           @brief Get an info text fit for a tool tip
+
+           This method will call getToolTip() of all items in mapList.
+
+           @param px    the point on the screen in pixel
+           @param str   a string object to receive all information
+        */
         void getToolTip(const QPoint& px, QString& str);
 
         static void setupMapPath();
@@ -124,6 +150,10 @@ class CMap : public QThread
 
         void zoom(int idx);
 
+        /**
+           @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
+
+         */
         void buildMapList();
 
         /**

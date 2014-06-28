@@ -60,7 +60,6 @@ class CMapList : public QWidget, private Ui::IMapList
         void sigChanged();
 
     private slots:
-        void slotItemSelectionChanged();
         void slotActivate();
         void slotContextMenu(const QPoint &point);
 

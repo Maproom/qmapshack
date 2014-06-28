@@ -223,9 +223,12 @@ void CMapVRT::draw(buffer_t& buf)
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-
+    // estimate number of tiles and use it as a limit if no
+    // user defined limit is given
+    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
+    nTiles = getMaxScale() == NOFLOAT ? nTiles : 0;
     // limit number of tiles to keep performance
-    if(!isOutOfScale(bufferScale))
+    if(!isOutOfScale(bufferScale) && (nTiles < 30000))
     {
 
         for(qreal y = top; y < bottom; y += dy)

@@ -267,6 +267,17 @@ void CMap::loadConfig(QSettings& cfg)
     zoom(idx);
 }
 
+void CMap::loadConfigForMapItem(CMapItem * item)
+{
+    SETTINGS;
+    cfg.beginGroup(cfgGroup);
+    cfg.beginGroup("map");
+    item->loadConfig(cfg);
+    cfg.endGroup();
+    cfg.endGroup();
+}
+
+
 void CMap::buildMapList()
 {
     QCryptographicHash md5(QCryptographicHash::Md5);
@@ -346,8 +357,9 @@ void CMap::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
 
             if(item && item->key == key)
             {                
-                item->activate();                
-                item->loadConfig(cfg);
+                item->activate();
+                //item will call loadConfigForMapItem() if activation is successfull
+                //item->loadConfig(cfg);
                 break;
             }
         }
@@ -355,6 +367,7 @@ void CMap::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
 
     mapList->updateHelpText();
 }
+
 
 void CMap::resize(const QSize& size)
 {

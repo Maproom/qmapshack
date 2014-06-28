@@ -200,6 +200,8 @@ bool CMapItem::activate()
 
     setFlags(flags() | Qt::ItemIsDragEnabled);
 
+    map->loadConfigForMapItem(this);
+
     showChildren(true);
     return true;
 }

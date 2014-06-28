@@ -27,6 +27,7 @@ class QPainter;
 class CCanvas;
 class CMapList;
 class QSettings;
+class CMapItem;
 
 class CMap : public QThread
 {
@@ -37,6 +38,7 @@ class CMap : public QThread
 
         void saveConfig(QSettings& cfg);
         void loadConfig(QSettings& cfg);
+        void loadConfigForMapItem(CMapItem * item);
 
         /**
            @brief Zoom in and out of the map by the scale factors defined in CMapDB::scales.
@@ -166,7 +168,7 @@ class CMap : public QThread
 
         /// the basic scale of the map canvas
         QPointF scale;
-                /// index into scales table
+        /// index into scales table
         int     zoomIndex;
         /// the actual used scaleFactor
         QPointF zoomFactor;
@@ -182,14 +184,19 @@ class CMap : public QThread
         /// bottom left corner of next buffer
         QPointF ref4;
 
+        /// the treewidget holding all active and inactive map items
         CMapList * mapList;
 
+        /// the group label used in QSettings
         QString cfgGroup;
 
+        /// the list of paths to serach maps
         static QStringList mapPaths;
 
+        /// all existing CMap instances
         static QList<CMap*> maps;
 
+        /// a list of supported map formats
         static QStringList supportedFormats;
 
 };

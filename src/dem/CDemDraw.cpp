@@ -30,7 +30,7 @@ QList<CDemDraw*> CDemDraw::dems;
 
 
 CDemDraw::CDemDraw(CCanvas *canvas)
-    : QThread(canvas)
+    : IDrawContext(canvas)
 {
 
     demList = new CDemList(canvas);
@@ -46,10 +46,6 @@ CDemDraw::~CDemDraw()
     dems.removeOne(this);
 }
 
-void CDemDraw::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r)
-{
-
-}
 
 qreal CDemDraw::getElevation(const QPointF& pos)
 {

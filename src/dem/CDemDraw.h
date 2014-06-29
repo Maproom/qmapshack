@@ -19,19 +19,18 @@
 #ifndef CDEMDRAW_H
 #define CDEMDRAW_H
 
-#include <QThread>
+#include "IDrawContext.h"
 
 class QPainter;
 class CDemList;
 class CCanvas;
 
-class CDemDraw : public QThread
+class CDemDraw : public IDrawContext
 {
     public:
         CDemDraw(CCanvas * canvas);
         virtual ~CDemDraw();
 
-        void draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r);
 
         qreal getElevation(const QPointF& pos);
 

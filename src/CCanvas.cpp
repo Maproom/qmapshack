@@ -24,7 +24,7 @@
 #include "grid/CGridSetup.h"
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
-#include "dem/CDem.h"
+#include "dem/CDemDraw.h"
 
 #include <QtWidgets>
 
@@ -52,7 +52,7 @@ CCanvas::CCanvas(QWidget *parent)
 
     map     = new CMapDraw(this);
     grid    = new CGrid(map);
-    dem     = new CDem(this);
+    dem     = new CDemDraw(this);
     mouse   = new CMouseNormal(this);
 
     connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));

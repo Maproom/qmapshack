@@ -17,7 +17,7 @@ set( SRCS
     CCanvas.cpp
     IDrawContext.cpp
     dem/IDem.cpp
-    dem/CDem.cpp
+    dem/CDemDraw.cpp
     dem/CDemVRT.cpp
     dem/CDemList.cpp
     dem/CDemItem.cpp
@@ -62,7 +62,7 @@ set( HDRS
     CCanvas.h
     IDrawContext.h
     dem/IDem.h
-    dem/CDem.h
+    dem/CDemDraw.h
     dem/CDemVRT.h
     dem/CDemList.h
     dem/CDemItem.h

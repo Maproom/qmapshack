@@ -16,42 +16,34 @@
 
 **********************************************************************************************/
 
-#include "CCanvas.h"
-#include "CMainWindow.h"
-#include "dem/CDem.h"
-#include "dem/CDemList.h"
-#include "units/IUnit.h"
+#ifndef CDEMDRAW_H
+#define CDEMDRAW_H
 
-#include <QtWidgets>
+#include <QThread>
 
-QStringList CDem::demPaths;
+class QPainter;
+class CDemList;
+class CCanvas;
 
-QList<CDem*> CDem::dems;
-
-
-CDem::CDem(CCanvas *canvas)
-    : QThread(canvas)
+class CDemDraw : public QThread
 {
+    public:
+        CDemDraw(CCanvas * canvas);
+        virtual ~CDemDraw();
 
-    demList = new CDemList(canvas);
-    CMainWindow::self().addDemList(demList, canvas->objectName());
-    connect(canvas, SIGNAL(destroyed()), demList, SLOT(deleteLater()));
-    connect(demList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
+        void draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r);
 
-    dems << this;
-}
+        qreal getElevation(const QPointF& pos);
 
-CDem::~CDem()
-{
-    dems.removeOne(this);
-}
 
-void CDem::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r)
-{
+    private:
+        CDemList * demList;
 
-}
+        static QStringList demPaths;
 
-qreal CDem::getElevation(const QPointF& pos)
-{
-    return NOFLOAT;
-}
+        static QList<CDemDraw*> dems;
+
+};
+
+#endif //CDEMDRAW_H
+

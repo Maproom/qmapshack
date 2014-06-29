@@ -23,7 +23,7 @@
 #include <QPainter>
 class CMapDraw;
 class CGrid;
-class CDem;
+class CDemDraw;
 class QSettings;
 class QPointF;
 class IMouse;
@@ -97,7 +97,7 @@ class CCanvas : public QWidget
         /// the grid attached to this canvas
         CGrid * grid;
 
-        CDem * dem;
+        CDemDraw * dem;
 
         /// the current point of focus (usually the canvas center)
         QPointF posFocus;

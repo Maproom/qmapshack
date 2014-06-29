@@ -17,10 +17,10 @@
 **********************************************************************************************/
 
 #include "IMapPropSetup.h"
-#include "CMap.h"
+#include "CMapDraw.h"
 #include "IMap.h"
 
-IMapPropSetup::IMapPropSetup(IMap *mapfile, CMap *map)
+IMapPropSetup::IMapPropSetup(IMap *mapfile, CMapDraw *map)
     : mapfile(mapfile)
     , map(map)
 {

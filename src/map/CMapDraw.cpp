@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "map/IMap.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
 #include "map/CMapPathSetup.h"
@@ -29,13 +29,13 @@
 #include <QtWidgets>
 
 
-QList<CMap*> CMap::maps;
-QStringList  CMap::mapPaths;
+QList<CMapDraw*> CMapDraw::maps;
+QStringList  CMapDraw::mapPaths;
 
-QStringList CMap::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap").split('|');
+QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap").split('|');
 
 
-CMap::CMap(CCanvas *parent)
+CMapDraw::CMapDraw(CCanvas *parent)
     : IDrawContext(parent)
 {
     mapList = new CMapList(canvas);
@@ -48,7 +48,7 @@ CMap::CMap(CCanvas *parent)
     maps << this;
 }
 
-CMap::~CMap()
+CMapDraw::~CMapDraw()
 {
 
     maps.removeOne(this);
@@ -56,7 +56,7 @@ CMap::~CMap()
 
 
 
-void CMap::setupMapPath()
+void CMapDraw::setupMapPath()
 {
     CMapPathSetup dlg(mapPaths);
     if(dlg.exec() != QDialog::Accepted)
@@ -64,7 +64,7 @@ void CMap::setupMapPath()
         return;
     }
 
-    foreach(CMap * map, maps)
+    foreach(CMapDraw * map, maps)
     {
         QStringList keys;
         map->saveActiveMapsList(keys);
@@ -73,19 +73,19 @@ void CMap::setupMapPath()
     }
 }
 
-void CMap::saveMapPath(QSettings& cfg)
+void CMapDraw::saveMapPath(QSettings& cfg)
 {
     cfg.setValue("mapPath", mapPaths);
 }
 
-void CMap::loadMapPath(QSettings& cfg)
+void CMapDraw::loadMapPath(QSettings& cfg)
 {
     mapPaths = cfg.value("mapPath", mapPaths).toStringList();
 }
 
 
 
-void CMap::getInfo(const QPoint& px, QString& str)
+void CMapDraw::getInfo(const QPoint& px, QString& str)
 {
     if(isRunning())
     {
@@ -113,7 +113,7 @@ void CMap::getInfo(const QPoint& px, QString& str)
 
 }
 
-void CMap::getToolTip(const QPoint& px, QString& str)
+void CMapDraw::getToolTip(const QPoint& px, QString& str)
 {
     if(isRunning())
     {
@@ -142,7 +142,7 @@ void CMap::getToolTip(const QPoint& px, QString& str)
 
 }
 
-void CMap::saveConfig(QSettings& cfg)
+void CMapDraw::saveConfig(QSettings& cfg)
 {
     cfgGroup = cfg.group();
     QStringList keys;
@@ -154,7 +154,7 @@ void CMap::saveConfig(QSettings& cfg)
 
 }
 
-void CMap::loadConfig(QSettings& cfg)
+void CMapDraw::loadConfig(QSettings& cfg)
 {
     cfgGroup = cfg.group();
     cfg.beginGroup("map");
@@ -166,7 +166,7 @@ void CMap::loadConfig(QSettings& cfg)
     zoom(idx);
 }
 
-void CMap::loadConfigForMapItem(CMapItem * item)
+void CMapDraw::loadConfigForMapItem(CMapItem * item)
 {
     SETTINGS;
     cfg.beginGroup("Canvas");
@@ -179,7 +179,7 @@ void CMap::loadConfigForMapItem(CMapItem * item)
 }
 
 
-void CMap::buildMapList()
+void CMapDraw::buildMapList()
 {
     QCryptographicHash md5(QCryptographicHash::Md5);
 
@@ -211,7 +211,7 @@ void CMap::buildMapList()
     mapList->updateHelpText();
 }
 
-void CMap::saveActiveMapsList(QStringList& keys)
+void CMapDraw::saveActiveMapsList(QStringList& keys)
 {
     SETTINGS;
     cfg.beginGroup("Canvas");
@@ -223,7 +223,7 @@ void CMap::saveActiveMapsList(QStringList& keys)
     cfg.endGroup();
 }
 
-void CMap::saveActiveMapsList(QStringList& keys, QSettings& cfg)
+void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
@@ -238,7 +238,7 @@ void CMap::saveActiveMapsList(QStringList& keys, QSettings& cfg)
     }
 }
 
-void CMap::restoreActiveMapsList(QStringList& keys)
+void CMapDraw::restoreActiveMapsList(QStringList& keys)
 {
     SETTINGS;
     cfg.beginGroup("Canvas");
@@ -250,7 +250,7 @@ void CMap::restoreActiveMapsList(QStringList& keys)
     cfg.endGroup();
 }
 
-void CMap::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
+void CMapDraw::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
@@ -276,7 +276,7 @@ void CMap::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
 
 
 
-void CMap::run()
+void CMapDraw::run()
 {
     mutex.lock();
     QTime t;

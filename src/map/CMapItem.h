@@ -24,14 +24,14 @@
 #include <QPointer>
 
 class IMap;
-class CMap;
+class CMapDraw;
 class CMapPropSetup;
 class QSettings;
 
 class CMapItem : public QTreeWidgetItem
 {
     public:
-        CMapItem(QTreeWidget * parent, CMap *map);
+        CMapItem(QTreeWidget * parent, CMapDraw *map);
         virtual ~CMapItem();
 
         void saveConfig(QSettings& cfg);
@@ -82,8 +82,8 @@ class CMapItem : public QTreeWidgetItem
         void showChildren(bool yes);
 
     private:
-        friend class CMap;
-        CMap * map;
+        friend class CMapDraw;
+        CMapDraw * map;
         /**
            @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
          */

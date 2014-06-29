@@ -21,13 +21,13 @@
 
 #include "IMap.h"
 
-class CMap;
+class CMapDraw;
 
 class CMapRMAP : public IMap
 {
     Q_OBJECT;
 public:
-    CMapRMAP(const QString& filename, CMap *parent);
+    CMapRMAP(const QString& filename, CMapDraw *parent);
 
     void draw(IDrawContext::buffer_t& buf);
 

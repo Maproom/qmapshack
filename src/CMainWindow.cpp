@@ -20,7 +20,7 @@
 #include "CSettings.h"
 #include "CCanvas.h"
 #include "GeoMath.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "map/CMapList.h"
 #include "dem/CDemList.h"
 #include "units/IUnit.h"
@@ -74,7 +74,7 @@ CMainWindow::CMainWindow()
     connect(tabDem, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabDem(int)));
 
     cfg.beginGroup("Canvas");
-    CMap::loadMapPath(cfg);
+    CMapDraw::loadMapPath(cfg);
     int N = cfg.value("numberOfCanvas").toInt();
     for(int i = 0; i < N; i++)
     {
@@ -148,7 +148,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("isNight", actionNightDay->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("mapFont", mapFont);
-    CMap::saveMapPath(cfg);
+    CMapDraw::saveMapPath(cfg);
     cfg.endGroup(); // Canvas
 
 }
@@ -370,5 +370,5 @@ void CMainWindow::slotSetupGrid()
 
 void CMainWindow::slotSetuMapPath()
 {
-    CMap::setupMapPath();
+    CMapDraw::setupMapPath();
 }

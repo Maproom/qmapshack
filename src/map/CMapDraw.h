@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#ifndef CMAP_H
-#define CMAP_H
+#ifndef CMAPDRAW_H
+#define CMAPDRAW_H
 
 #include <QStringList>
 #include "IDrawContext.h"
@@ -28,12 +28,12 @@ class CMapList;
 class QSettings;
 class CMapItem;
 
-class CMap : public IDrawContext
+class CMapDraw : public IDrawContext
 {
     Q_OBJECT
     public:
-        CMap(CCanvas * parent);
-        virtual ~CMap();
+        CMapDraw(CCanvas * parent);
+        virtual ~CMapDraw();
 
         void saveConfig(QSettings& cfg);
         void loadConfig(QSettings& cfg);
@@ -42,7 +42,7 @@ class CMap : public IDrawContext
 
            As the setup of a map is stored in the context of the workspace the correct groups have
            to be set prior to call the item's loadConfig() method. However the item does not know
-           all that stuff. That is why it has to ask it's CMap object to prepare the QSettings object
+           all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
            and to call loadConfig();
 
            @param item the item to call it's loadConfig() method
@@ -107,13 +107,13 @@ class CMap : public IDrawContext
         /// the list of paths to serach maps
         static QStringList mapPaths;
 
-        /// all existing CMap instances
-        static QList<CMap*> maps;
+        /// all existing CMapDraw instances
+        static QList<CMapDraw*> maps;
 
         /// a list of supported map formats
         static QStringList supportedFormats;
 
 };
 
-#endif //CMAP_H
+#endif //CMAPDRAW_H
 

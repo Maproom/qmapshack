@@ -21,12 +21,12 @@
 
 #include "map/IMap.h"
 
-class CMap;
+class CMapDraw;
 
 class CMapMAP : public IMap
 {
     public:
-        CMapMAP(const QString& filename, CMap *parent);
+        CMapMAP(const QString& filename, CMapDraw *parent);
         virtual ~CMapMAP();
 
         void draw(IDrawContext::buffer_t& buf);

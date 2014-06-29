@@ -18,13 +18,13 @@
 
 #include "dem/CDemItem.h"
 #include "dem/CDemVRT.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 
 #include <QtWidgets>
 
 QMutex CDemItem::mutexActiveDems(QMutex::Recursive);
 
-CDemItem::CDemItem(QTreeWidget * parent, CMap *map)
+CDemItem::CDemItem(QTreeWidget * parent, CMapDraw *map)
     : QTreeWidgetItem(parent)
     , map(map)
 {

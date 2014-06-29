@@ -22,7 +22,7 @@ set( SRCS
     dem/CDemList.cpp
     dem/CDemItem.cpp
     map/IMap.cpp
-    map/CMap.cpp
+    map/CMapDraw.cpp
     map/CMapItem.cpp
     map/CMapList.cpp
     map/CMapRMAP.cpp
@@ -67,7 +67,7 @@ set( HDRS
     dem/CDemList.h
     dem/CDemItem.h
     map/IMap.h
-    map/CMap.h
+    map/CMapDraw.h
     map/CMapItem.h
     map/CMapList.h
     map/CMapRMAP.h

@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMapPathSetup.h"
-#include "CMap.h"
+#include "CMapDraw.h"
 
 #include <QtWidgets>
 
@@ -36,7 +36,7 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
         item->setText(path);
     }
 
-    labelHelp->setText(tr("Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1").arg(CMap::getSupportedFormats().join(", ")));
+    labelHelp->setText(tr("Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1").arg(CMapDraw::getSupportedFormats().join(", ")));
 }
 
 CMapPathSetup::~CMapPathSetup()

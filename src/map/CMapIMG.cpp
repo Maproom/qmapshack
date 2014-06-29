@@ -21,7 +21,7 @@
 #include "map/garmin/CGarminStrTbl8.h"
 #include "map/garmin/CGarminStrTblUtf8.h"
 #include "map/garmin/CGarminTyp.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "units/IUnit.h"
 #include "CFileExt.h"
 #include "Platform.h"
@@ -119,7 +119,7 @@ inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 }
 
 
-CMapIMG::CMapIMG(const QString &filename, CMap *parent)
+CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
     : IMap(parent)
     , filename(filename)
     , transparent(false)

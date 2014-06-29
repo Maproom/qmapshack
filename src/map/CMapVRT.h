@@ -22,13 +22,13 @@
 #include "map/IMap.h"
 
 
-class CMap;
+class CMapDraw;
 class GDALDataset;
 
 class CMapVRT : public IMap
 {
     public:
-        CMapVRT(const QString& filename, CMap *parent);
+        CMapVRT(const QString& filename, CMapDraw *parent);
         virtual ~CMapVRT();
 
         void draw(IDrawContext::buffer_t& buf);

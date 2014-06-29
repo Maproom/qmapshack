@@ -19,11 +19,11 @@
 #include "grid/CGridSetup.h"
 #include "grid/CProjWizard.h"
 #include "grid/CGrid.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 
 #include <QtWidgets>
 
-CGridSetup::CGridSetup(CGrid *grid, CMap * map)
+CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
     : grid(grid)
     , map(map)
 {

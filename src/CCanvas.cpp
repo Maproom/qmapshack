@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "CCanvas.h"
 #include "GeoMath.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "units/IUnit.h"
@@ -50,7 +50,7 @@ CCanvas::CCanvas(QWidget *parent)
 
     setMouseTracking(true);
 
-    map     = new CMap(this);
+    map     = new CMapDraw(this);
     grid    = new CGrid(map);
     dem     = new CDem(this);
     mouse   = new CMouseNormal(this);

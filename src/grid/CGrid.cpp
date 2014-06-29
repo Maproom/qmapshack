@@ -20,12 +20,12 @@
 #include "CSettings.h"
 #include "CCanvas.h"
 #include "CMainWindow.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "GeoMath.h"
 
 #include <QtGui>
 
-CGrid::CGrid(CMap *map)
+CGrid::CGrid(CMapDraw *map)
     : QObject(map)
     , map(map)
     , pjWGS84(0)

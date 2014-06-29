@@ -24,7 +24,7 @@
 class CDemVRT : public IDem
 {
     public:
-        CDemVRT(const QString& filename, CMap *parent);
+        CDemVRT(const QString& filename, CMapDraw *parent);
         virtual ~CDemVRT();
 };
 

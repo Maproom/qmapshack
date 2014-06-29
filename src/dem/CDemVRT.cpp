@@ -18,7 +18,7 @@
 
 #include "CDemVRT.h"
 
-CDemVRT::CDemVRT(const QString &filename, CMap *parent)
+CDemVRT::CDemVRT(const QString &filename, CMapDraw *parent)
     : IDem(parent)
 {
 

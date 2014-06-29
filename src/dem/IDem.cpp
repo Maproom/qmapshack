@@ -18,7 +18,7 @@
 
 #include "IDem.h"
 
-IDem::IDem(CMap *parent)
+IDem::IDem(CMapDraw *parent)
 {
 
 }

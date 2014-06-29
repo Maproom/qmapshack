@@ -21,18 +21,18 @@
 
 #include <QObject>
 
-class CMap;
+class CMapDraw;
 
 class IDem : public QObject
 {
     public:
-        IDem(CMap * parent);
+        IDem(CMapDraw * parent);
         virtual ~IDem();
 
         bool activated(){return isActivated;}
 
     protected:
-        CMap * map;
+        CMapDraw * map;
 
         /**
            @brief True if map was loaded successfully

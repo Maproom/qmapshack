@@ -26,7 +26,7 @@
 #include <QPointer>
 #include <proj_api.h>
 
-class CMap;
+class CMapDraw;
 class QSettings;
 class IMapPropSetup;
 
@@ -34,7 +34,7 @@ class IMap : public QObject
 {
     Q_OBJECT
     public:
-        IMap(CMap * parent);
+        IMap(CMapDraw * parent);
         virtual ~IMap();
 
         virtual void saveConfig(QSettings& cfg);
@@ -92,7 +92,7 @@ class IMap : public QObject
         bool isOutOfScale(const QPointF& scale);
         void drawTile(QImage& img, QPolygonF& l, QPainter& p);
 
-        CMap * map;
+        CMapDraw * map;
 
         /// source projection of the current map file
         /**

@@ -21,12 +21,12 @@
 
 #include "map/IMap.h"
 
-class CMap;
+class CMapDraw;
 
 class CMapJNX : public IMap
 {
 public:
-    CMapJNX(const QString& filename, CMap *parent);
+    CMapJNX(const QString& filename, CMapDraw *parent);
 
     void draw(IDrawContext::IDrawContext::buffer_t& buf);
 

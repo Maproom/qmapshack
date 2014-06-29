@@ -21,7 +21,7 @@
 
 #include <QWidget>
 #include <QPainter>
-class CMap;
+class CMapDraw;
 class CGrid;
 class CDem;
 class QSettings;
@@ -92,7 +92,7 @@ class CCanvas : public QWidget
         /// set true to initiate a complete redraw of the screen content
         bool needsRedraw;
         /// the map object attached to this canvas
-        CMap * map;
+        CMapDraw * map;
 
         /// the grid attached to this canvas
         CGrid * grid;

@@ -18,13 +18,13 @@
 
 #include "map/CMapPropSetup.h"
 #include "map/IMap.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
 QPointF CMapPropSetup::scale;
 
-CMapPropSetup::CMapPropSetup(IMap * mapfile, CMap *map)
+CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     : IMapPropSetup(mapfile, map)
 {
     setupUi(this);

@@ -19,7 +19,7 @@
 #include "IDrawContext.h"
 #include "CCanvas.h"
 //#define N_ZOOM_LEVELS 20
-//const qreal CMap::scales[N_ZOOM_LEVELS] =
+//const qreal CMapDraw::scales[N_ZOOM_LEVELS] =
 //{
 //     0.10
 //    ,0.20

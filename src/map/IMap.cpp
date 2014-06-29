@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "map/IMap.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "map/CMapPropSetup.h"
 #include "units/IUnit.h"
 
@@ -25,7 +25,7 @@
 
 
 
-IMap::IMap(CMap *parent)
+IMap::IMap(CMapDraw *parent)
     : QObject(parent)
     , map(parent)
     , pjsrc(0)

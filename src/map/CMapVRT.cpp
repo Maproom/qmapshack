@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "map/CMapVRT.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "units/IUnit.h"
 #include "CCanvas.h"
 
@@ -25,7 +25,7 @@
 #include <ogr_spatialref.h>
 #include <QtWidgets>
 
-CMapVRT::CMapVRT(const QString &filename, CMap *parent)
+CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     : IMap(parent)
     , filename(filename)
     , rasterBandCount(0)

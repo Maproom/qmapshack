@@ -22,13 +22,13 @@
 #include <QWidget>
 
 class IMap;
-class CMap;
+class CMapDraw;
 
 class IMapPropSetup : public QWidget
 {
     Q_OBJECT
     public:
-        IMapPropSetup(IMap * mapfile, CMap * map);
+        IMapPropSetup(IMap * mapfile, CMapDraw * map);
         virtual ~IMapPropSetup();
 
     protected slots:
@@ -36,7 +36,7 @@ class IMapPropSetup : public QWidget
 
     protected:
         IMap * mapfile;
-        CMap * map;
+        CMapDraw * map;
 
 };
 

@@ -24,13 +24,13 @@
 #include <proj_api.h>
 class QPainter;
 class QSettings;
-class CMap;
+class CMapDraw;
 
 class CGrid : public QObject
 {
     Q_OBJECT
     public:
-        CGrid(CMap * map);
+        CGrid(CMapDraw * map);
         virtual ~CGrid();
 
         void saveConfig(QSettings& cfg);
@@ -47,7 +47,7 @@ class CGrid : public QObject
         void findGridSpace(double min, double max, double& xSpace, double& ySpace);
         bool calcIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double& x, double& y);
 
-        CMap * map;
+        CMapDraw * map;
 
         projPJ  pjWGS84;
         projPJ  pjGrid;

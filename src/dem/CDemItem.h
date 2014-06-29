@@ -23,12 +23,12 @@
 #include <QMutex>
 
 class IDem;
-class CMap;
+class CMapDraw;
 
 class CDemItem : public QTreeWidgetItem
 {
     public:
-        CDemItem(QTreeWidget *parent, CMap *map);
+        CDemItem(QTreeWidget *parent, CMapDraw *map);
         virtual ~CDemItem();
 
         /**
@@ -64,7 +64,7 @@ class CDemItem : public QTreeWidgetItem
         void updateIcon();
 
     private:
-        CMap * map;
+        CMapDraw * map;
         /**
            @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
          */

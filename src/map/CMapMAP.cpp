@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "map/CMapMAP.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 
-CMapMAP::CMapMAP(const QString &filename, CMap *parent)
+CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
     : IMap(parent)
 {
 

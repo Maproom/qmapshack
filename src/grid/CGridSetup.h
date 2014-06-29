@@ -23,13 +23,13 @@
 #include "ui_IGridSetup.h"
 
 class CGrid;
-class CMap;
+class CMapDraw;
 
 class CGridSetup : public QDialog, private Ui::IGridSetup
 {
     Q_OBJECT
     public:
-        CGridSetup(CGrid * grid, CMap *map);
+        CGridSetup(CGrid * grid, CMapDraw *map);
         virtual ~CGridSetup();
 
     public slots:
@@ -43,7 +43,7 @@ class CGridSetup : public QDialog, private Ui::IGridSetup
 
     private:
         CGrid * grid;
-        CMap * map;
+        CMapDraw * map;
 };
 
 #endif //CGRIDSETUP_H

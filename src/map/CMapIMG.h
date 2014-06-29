@@ -20,7 +20,7 @@
 #define CMAPIMG_H
 
 #include "map/IMap.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "map/garmin/Garmin.h"
 #include "map/garmin/CGarminPoint.h"
 #include "map/garmin/CGarminPolygon.h"
@@ -28,7 +28,7 @@
 
 #include <QMap>
 
-class CMap;
+class CMapDraw;
 class CFileExt;
 class IGarminStrTbl;
 
@@ -139,7 +139,7 @@ class CMapIMG : public IMap
             IGarminStrTbl * strtbl;
         };
 
-        CMapIMG(const QString &filename, CMap *parent);
+        CMapIMG(const QString &filename, CMapDraw *parent);
         virtual ~CMapIMG();
 
         void draw(IDrawContext::buffer_t& buf);

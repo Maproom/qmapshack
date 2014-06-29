@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "map/CMapJNX.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 #include "CCanvas.h"
@@ -79,7 +79,7 @@ static quint32 scale2jnx(qreal scale)
 
 
 
-CMapJNX::CMapJNX(const QString &filename, CMap *parent)
+CMapJNX::CMapJNX(const QString &filename, CMapDraw *parent)
     : IMap(parent)
     , filename(filename)
     , lon1(180.0)

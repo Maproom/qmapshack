@@ -17,14 +17,14 @@
 **********************************************************************************************/
 
 #include "map/CMapRMAP.h"
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "units/IUnit.h"
 #include "CCanvas.h"
 
 #include <QtGui>
 #include <QtWidgets>
 
-CMapRMAP::CMapRMAP(const QString &filename, CMap *parent)
+CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     : IMap(parent)
     , filename(filename)
 {

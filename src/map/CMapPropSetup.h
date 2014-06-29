@@ -27,7 +27,7 @@ class CMapPropSetup : public IMapPropSetup, private Ui::IMapProp
 {
     Q_OBJECT
     public:
-        CMapPropSetup(IMap * mapfile, CMap * map);
+        CMapPropSetup(IMap * mapfile, CMapDraw * map);
         virtual ~CMapPropSetup();
 
     protected slots:

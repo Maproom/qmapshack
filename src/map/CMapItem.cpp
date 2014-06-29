@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "map/CMap.h"
+#include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapJNX.h"
 #include "map/CMapRMAP.h"
@@ -28,7 +28,7 @@
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
 
-CMapItem::CMapItem(QTreeWidget *parent, CMap * map)
+CMapItem::CMapItem(QTreeWidget *parent, CMapDraw * map)
     : QTreeWidgetItem(parent)
     , map(map)
 {
@@ -208,8 +208,8 @@ bool CMapItem::activate()
     setFlags(flags() | Qt::ItemIsDragEnabled);
 
     /*
-        As the map file setup is stored in the context of the CMap object
-        the configuration has to be loaded via the CMap object to select
+        As the map file setup is stored in the context of the CMapDraw object
+        the configuration has to be loaded via the CMapDraw object to select
         the correct group context in the QSetting object.
         This call will result into a call of loadConfig() of this CMapItem
         object.

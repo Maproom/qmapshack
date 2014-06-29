@@ -2,7 +2,7 @@
 Version=1.0
 Name=MapRoom
 Exec=maproom
-Icon=maproom
+Icon=MapRoom
 Terminal=false
 Type=Application
 X-MultipleArgs=false

@@ -31,7 +31,7 @@ class CMapVRT : public IMap
         CMapVRT(const QString& filename, CMap *parent);
         virtual ~CMapVRT();
 
-        void draw(buffer_t& buf);
+        void draw(IDrawContext::buffer_t& buf);
 
 
 

@@ -1101,7 +1101,7 @@ quint8  CMapIMG::scale2bits(const QPointF& scale)
     return 24;
 }
 
-void CMapIMG::draw(buffer_t& buf)
+void CMapIMG::draw(IDrawContext::buffer_t& buf)
 {
     if(map->needsRedraw())
     {

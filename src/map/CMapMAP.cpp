@@ -30,7 +30,7 @@ CMapMAP::~CMapMAP()
 
 }
 
-void CMapMAP::draw(buffer_t& buf)
+void CMapMAP::draw(IDrawContext::buffer_t& buf)
 {
 
 }

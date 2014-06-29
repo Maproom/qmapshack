@@ -23,15 +23,6 @@
 
 #include <QtWidgets>
 
-QPointF operator*(const QPointF& p1, const QPointF& p2)
-{
-    return QPointF(p1.x() * p2.x(), p1.y() * p2.y());
-}
-
-QPointF operator/(const QPointF& p1, const QPointF& p2)
-{
-    return QPointF(p1.x() / p2.x(), p1.y() / p2.y());
-}
 
 
 IMap::IMap(CMap *parent)

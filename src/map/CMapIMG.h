@@ -142,7 +142,7 @@ class CMapIMG : public IMap
         CMapIMG(const QString &filename, CMap *parent);
         virtual ~CMapIMG();
 
-        void draw(buffer_t& buf);
+        void draw(IDrawContext::buffer_t& buf);
 
         void getInfo(const QPoint& px, QString& str);
         void getToolTip(const QPoint& px, QString& infotext);

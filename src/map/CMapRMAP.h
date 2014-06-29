@@ -29,7 +29,7 @@ class CMapRMAP : public IMap
 public:
     CMapRMAP(const QString& filename, CMap *parent);
 
-    void draw(buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf);
 
 private:
     struct level_t

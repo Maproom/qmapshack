@@ -149,7 +149,7 @@ CMapVRT::~CMapVRT()
     if(dataset) delete dataset;
 }
 
-void CMapVRT::draw(buffer_t& buf)
+void CMapVRT::draw(IDrawContext::buffer_t& buf)
 {
     if(map->needsRedraw())
     {

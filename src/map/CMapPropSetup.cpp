@@ -130,10 +130,10 @@ void CMapPropSetup::updateScaleLabel()
     }
 
     // draw scale indicator
-    int xInd  = HOR_MARGIN + qRound(bar.width() * (1 + log10(scale.x())) / 5) - 2;
+    int xInd  = HOR_MARGIN + qRound(bar.width() * (1 + log10(scale.x())) / 5) - 3;
     int yInd  = yBar - 1;
 
-    QRect ind(xInd, yInd, 4, BAR_HEIGHT + 2);
+    QRect ind(xInd, yInd, 5, BAR_HEIGHT + 2);
     p.setPen(Qt::darkBlue);
     p.setBrush(Qt::NoBrush);
     p.drawRect(ind);

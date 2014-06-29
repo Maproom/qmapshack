@@ -29,7 +29,7 @@ class CMapMAP : public IMap
         CMapMAP(const QString& filename, CMap *parent);
         virtual ~CMapMAP();
 
-        void draw(buffer_t& buf);
+        void draw(IDrawContext::buffer_t& buf);
 };
 
 #endif //CMAPMAP_H

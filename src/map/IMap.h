@@ -19,7 +19,7 @@
 #ifndef IMAP_H
 #define IMAP_H
 
-
+#include <IDrawContext.h>
 #include <QObject>
 #include <QImage>
 #include <QMutex>
@@ -40,33 +40,8 @@ class IMap : public QObject
         virtual void saveConfig(QSettings& cfg);
         virtual void loadConfig(QSettings& cfg);
 
-        struct buffer_t
-        {
-            buffer_t() : zoomFactor(1.0,1.0), scale(1.0,1.0){}
 
-            /// @note: all coordinate values are long/lat WGS84 [rad]
-
-            /// the canvas buffer
-            QImage  image;
-            /// the used projection
-            projPJ  pjsrc;
-            /// the zoomfactor used to draw the canvas
-            QPointF zoomFactor;
-            /// the scale of the global viewport
-            QPointF scale;
-            /// top left corner
-            QPointF ref1;
-            /// top right corner
-            QPointF ref2;
-            /// bottom right corner
-            QPointF ref3;
-            /// bottom left corner
-            QPointF ref4;
-            /// point of focus
-            QPointF focus;
-        };
-
-        virtual void draw(buffer_t& buf) = 0;
+        virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
         /**
            @brief Test if map has been loaded successfully
@@ -146,10 +121,6 @@ class IMap : public QObject
         qreal maxScale;
 
 };
-
-extern QPointF operator*(const QPointF& p1, const QPointF& p2);
-
-extern QPointF operator/(const QPointF& p1, const QPointF& p2);
 
 
 #endif //IMAP_H

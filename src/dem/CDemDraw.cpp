@@ -46,6 +46,16 @@ CDemDraw::~CDemDraw()
     dems.removeOne(this);
 }
 
+void CDemDraw::saveConfig(QSettings& cfg)
+{
+
+}
+
+void CDemDraw::loadConfig(QSettings& cfg)
+{
+
+}
+
 
 qreal CDemDraw::getElevation(const QPointF& pos)
 {

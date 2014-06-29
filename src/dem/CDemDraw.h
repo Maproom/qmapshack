@@ -31,9 +31,10 @@ class CDemDraw : public IDrawContext
         CDemDraw(CCanvas * canvas);
         virtual ~CDemDraw();
 
+        void saveConfig(QSettings& cfg);
+        void loadConfig(QSettings& cfg);
 
         qreal getElevation(const QPointF& pos);
-
 
     private:
         CDemList * demList;

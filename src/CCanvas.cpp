@@ -80,6 +80,7 @@ CCanvas::~CCanvas()
 void CCanvas::saveConfig(QSettings& cfg)
 {
     map->saveConfig(cfg);
+    dem->saveConfig(cfg);
     grid->saveConfig(cfg);
     cfg.setValue("posFocus", posFocus);
 }
@@ -87,6 +88,7 @@ void CCanvas::saveConfig(QSettings& cfg)
 void CCanvas::loadConfig(QSettings& cfg)
 {
     map->loadConfig(cfg);
+    dem->loadConfig(cfg);
     grid->loadConfig(cfg);
     posFocus = cfg.value("posFocus", posFocus).toPointF();
 }
@@ -97,6 +99,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     QSize s = e->size();
     if(map) map->resize(s);
+    if(dem) dem->resize(s);
 
     QWidget::resizeEvent(e);
 
@@ -173,6 +176,7 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     QPointF pt1 = pos;
     map->convertPx2Rad(pt1);
     map->zoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
+    dem->zoom(map->zoom());
     map->convertRad2Px(pt1);
 
     map->convertRad2Px(posFocus);
@@ -208,11 +212,13 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
     if(e->key() == Qt::Key_Plus)
     {
         map->zoom(true, needsRedraw);
+        dem->zoom(map->zoom());
         doUpdate = true;
     }
     else if(e->key() == Qt::Key_Minus)
     {
         map->zoom(false, needsRedraw);
+        dem->zoom(map->zoom());
         doUpdate = true;
     }
     else if(e->key() == Qt::Key_Up)

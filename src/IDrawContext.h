@@ -73,6 +73,8 @@ class IDrawContext : public QThread
            @param needsRedraw   if the zoom action makes a redraw nesseccary needsRedraw is set true
          */
         void zoom(bool in, bool& needsRedraw);
+        void zoom(int idx);
+        int  zoom(){return zoomIndex;}
         /**
            @brief Convert a geo coordinate of format lon/lat WGS84 into the currently used coordinate/projection/datum system.
            @note  The unit is dependent on the currently used projection and must not nesseccarily be meter
@@ -129,8 +131,6 @@ class IDrawContext : public QThread
 
     protected:
         static const qreal scales[];
-
-        void zoom(int idx);
 
         /// the mutex to serialize access
         QMutex mutex;

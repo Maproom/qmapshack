@@ -19,6 +19,7 @@
 #ifndef IDEM_H
 #define IDEM_H
 
+#include "IDrawContext.h"
 #include <QObject>
 #include <proj_api.h>
 
@@ -34,6 +35,8 @@ class IDem : public QObject
 
         void saveConfig(QSettings& cfg);
         void loadConfig(QSettings& cfg);
+
+        virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
         bool activated(){return isActivated;}
 

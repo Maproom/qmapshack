@@ -19,7 +19,7 @@
 #ifndef IMAP_H
 #define IMAP_H
 
-#include <IDrawContext.h>
+#include "IDrawContext.h"
 #include <QObject>
 #include <QImage>
 #include <QMutex>

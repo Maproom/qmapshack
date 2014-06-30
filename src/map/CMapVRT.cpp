@@ -29,6 +29,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     : IMap(parent)
     , filename(filename)
     , rasterBandCount(0)
+    , hasOverviews(false)
 {
     qDebug() << "------------------------------";
     qDebug() << "VRT: try to open" << filename;
@@ -46,7 +47,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     if(rasterBandCount == 1)
     {
         GDALRasterBand * pBand;
-        pBand = dataset->GetRasterBand(1);
+        pBand = dataset->GetRasterBand(1);        
 
         if(pBand == 0)
         {
@@ -54,6 +55,9 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
             QMessageBox::warning(0, tr("Error..."), tr("Failed to load file: %1").arg(filename));
             return;
         }
+
+
+        hasOverviews = pBand->GetOverviewCount() != 0;
 
         //        qDebug() << pBand->GetColorInterpretation();
 
@@ -90,6 +94,15 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
             colortable[idx] = tmp.rgba();
         }
     }
+    else
+    {
+        delete dataset; dataset = 0;
+        QMessageBox::warning(0, tr("Error..."), tr("Only 8bit colortable supported."));
+        return;
+    }
+
+    qDebug() << "has overviews" << hasOverviews;
+
 
     // ------- setup projection ---------------
     char str[1024] = {0};
@@ -131,6 +144,12 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     {
         trFwd.rotate(atan(adfGeoTransform[2]/adfGeoTransform[4]));
     }
+
+    if(pj_is_latlong(pjsrc))
+    {
+        trFwd = trFwd * DEG_TO_RAD;
+    }
+
     trInv = trFwd.inverted();
 
     ref1 = trFwd.map(QPointF(0,0));
@@ -146,7 +165,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
 CMapVRT::~CMapVRT()
 {
-    if(dataset) delete dataset;
+    delete dataset;
 }
 
 void CMapVRT::draw(IDrawContext::buffer_t& buf)
@@ -217,16 +236,30 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     qreal dx =  imgw;
     qreal dy =  imgh;
 
+
+    // estimate number of tiles and use it as a limit if no
+    // user defined limit is given
+    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
+    if(hasOverviews)
+    {
+        while(nTiles > 30000)
+        {
+            dx *= 2;
+            dy *= 2;
+            nTiles /= 4;
+        }
+    }
+    else
+    {
+         nTiles = getMaxScale() == NOFLOAT ? nTiles : 0;
+    }
+
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    // estimate number of tiles and use it as a limit if no
-    // user defined limit is given
-    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
-    nTiles = getMaxScale() == NOFLOAT ? nTiles : 0;
     // limit number of tiles to keep performance
     if(!isOutOfScale(bufferScale) && (nTiles < 30000))
     {

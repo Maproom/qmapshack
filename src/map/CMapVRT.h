@@ -65,6 +65,8 @@ class CMapVRT : public IMap
         QTransform trFwd;
         QTransform trInv;
 
+        bool hasOverviews;
+
 
 };
 

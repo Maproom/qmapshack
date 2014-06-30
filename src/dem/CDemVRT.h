@@ -22,12 +22,44 @@
 #include "dem/IDem.h"
 
 class CDemDraw;
+class GDALDataset;
 
 class CDemVRT : public IDem
 {
     public:
         CDemVRT(const QString& filename, CDemDraw *parent);
         virtual ~CDemVRT();
+
+        void draw(IDrawContext::buffer_t& buf);
+
+
+    private:
+        QString filename;
+        /// instance of GDAL dataset
+        GDALDataset * dataset;
+
+        /// width in number of px
+        quint32 xsize_px;
+        /// height in number of px
+        quint32 ysize_px;
+
+        /// scale [px/m]
+        double xscale;
+        /// scale [px/m]
+        double yscale;
+
+        double xrot;
+        double yrot;
+
+        QPointF ref1;
+        QPointF ref2;
+        QPointF ref3;
+        QPointF ref4;
+
+        QTransform trFwd;
+        QTransform trInv;
+
+        bool hasOverviews;
 
 
 };

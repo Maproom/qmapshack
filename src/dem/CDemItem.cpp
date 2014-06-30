@@ -146,6 +146,15 @@ bool CDemItem::activate()
     moveToBottom();
 
     setFlags(flags() | Qt::ItemIsDragEnabled);
+    /*
+       As the map file setup is stored in the context of the CMapDraw object
+       the configuration has to be loaded via the CMapDraw object to select
+       the correct group context in the QSetting object.
+       This call will result into a call of loadConfig() of this CMapItem
+       object.
+    */
+    dem->loadConfigForDemItem(this);
+
     return true;
 }
 

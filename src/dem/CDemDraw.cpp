@@ -18,6 +18,7 @@
 
 #include "CCanvas.h"
 #include "CMainWindow.h"
+#include "dem/IDem.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
 #include "dem/CDemItem.h"
@@ -199,5 +200,26 @@ qreal CDemDraw::getElevation(const QPointF& pos)
 
 void CDemDraw::drawt(buffer_t& currentBuffer)
 {
-    msleep(500);
+    // iterate over all active maps and call the draw method
+    CDemItem::mutexActiveDems.lock();
+    if(demList)
+    {
+        for(int i = 0; i < demList->count(); i++)
+        {
+            CDemItem * item = demList->item(i);
+
+            if(!item || item->demfile.isNull())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break ass soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            item->demfile->draw(currentBuffer);
+
+        }
+    }
+    CDemItem::mutexActiveDems.unlock();
+
 }

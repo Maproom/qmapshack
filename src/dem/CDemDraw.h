@@ -36,6 +36,9 @@ class CDemDraw : public IDrawContext
 
         qreal getElevation(const QPointF& pos);
 
+    protected:
+        void drawt(buffer_t& currentBuffer){}
+
     private:
         CDemList * demList;
 

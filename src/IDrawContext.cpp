@@ -18,6 +18,9 @@
 
 #include "IDrawContext.h"
 #include "CCanvas.h"
+
+#include <QtWidgets>
+
 //#define N_ZOOM_LEVELS 20
 //const qreal CMapDraw::scales[N_ZOOM_LEVELS] =
 //{
@@ -297,7 +300,7 @@ void IDrawContext::draw(QPainter& p, bool needsRedraw, const QPointF& f, const Q
     convertM2Rad(ref4);
 
     // get current active buffer
-    IDrawContext::buffer_t& currentBuffer = buffer[bufIndex];
+    buffer_t& currentBuffer = buffer[bufIndex];
 
     // convert buffers top left reference point to local coordinate system
     QPointF ref = currentBuffer.ref1;
@@ -328,3 +331,43 @@ void IDrawContext::draw(QPainter& p, bool needsRedraw, const QPointF& f, const Q
     }
 
 }
+
+void IDrawContext::run()
+{
+    mutex.lock();
+    QTime t;
+    t.start();
+    qDebug() << "start thread";
+
+    IDrawContext::buffer_t& currentBuffer = buffer[!bufIndex];
+    while(intNeedsRedraw)
+    {
+        // copy all projection information need by the
+        // map render objects to buffer structure
+        currentBuffer.pjsrc         = pjsrc;
+        currentBuffer.zoomFactor    = zoomFactor;
+        currentBuffer.scale         = scale;
+        currentBuffer.ref1          = ref1;
+        currentBuffer.ref2          = ref2;
+        currentBuffer.ref3          = ref3;
+        currentBuffer.ref4          = ref4;
+        currentBuffer.focus         = focus;
+        intNeedsRedraw              = false;
+        mutex.unlock();
+
+
+        qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);
+        // ----- reset buffer -----
+        currentBuffer.image.fill(Qt::transparent);
+
+        drawt(currentBuffer);
+
+        mutex.lock();
+    }
+    // ----- switch buffer ------
+    bufIndex = !bufIndex;
+    qDebug() << "stop thread" << t.elapsed();
+    mutex.unlock();
+
+}
+

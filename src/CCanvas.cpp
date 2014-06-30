@@ -20,11 +20,12 @@
 #include "CCanvas.h"
 #include "GeoMath.h"
 #include "map/CMapDraw.h"
+#include "dem/CDemDraw.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
-#include "dem/CDemDraw.h"
+
 
 #include <QtWidgets>
 

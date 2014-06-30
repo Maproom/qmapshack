@@ -130,6 +130,19 @@ class IDrawContext : public QThread
         void emitSigCanvasUpdate();
 
     protected:
+        void run();
+        /**
+           @brief The draw method called from the thread.
+
+           That's where the actual drawing has to be done
+
+           @param currentBuffer this is the current buffer reserved for the thread to draw on.
+         */
+        virtual void drawt(buffer_t& currentBuffer) = 0;
+
+        /**
+           @brief The global list of available scale factors
+         */
         static const qreal scales[];
 
         /// the mutex to serialize access

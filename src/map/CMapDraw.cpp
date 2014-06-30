@@ -158,25 +158,13 @@ void CMapDraw::loadConfig(QSettings& cfg)
 {
     cfgGroup = cfg.group();
     cfg.beginGroup("map");
-    QStringList keys = cfg.value("active", "").toStringList();
-    restoreActiveMapsList(keys, cfg);
+    restoreActiveMapsList(cfg.value("active", "").toStringList());
     int idx = cfg.value("zoomIndex",zoomIndex).toInt();
     cfg.endGroup();
 
     zoom(idx);
 }
 
-void CMapDraw::loadConfigForMapItem(CMapItem * item)
-{
-    SETTINGS;
-    cfg.beginGroup("Canvas");
-    cfg.beginGroup(cfgGroup);
-    cfg.beginGroup("map");    
-    item->loadConfig(cfg);
-    cfg.endGroup();
-    cfg.endGroup();
-    cfg.endGroup();
-}
 
 
 void CMapDraw::buildMapList()
@@ -214,7 +202,7 @@ void CMapDraw::buildMapList()
 void CMapDraw::saveActiveMapsList(QStringList& keys)
 {
     SETTINGS;
-    cfg.beginGroup("Canvas");
+//    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
     cfg.beginGroup("map");
     saveActiveMapsList(keys, cfg);
@@ -238,19 +226,21 @@ void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
     }
 }
 
-void CMapDraw::restoreActiveMapsList(QStringList& keys)
+void CMapDraw::loadConfigForMapItem(CMapItem * item)
 {
     SETTINGS;
-    cfg.beginGroup("Canvas");
+//    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
+
+    qDebug() << cfg.group();
     cfg.beginGroup("map");
-    restoreActiveMapsList(keys, cfg);
+    item->loadConfig(cfg);
     cfg.endGroup();
     cfg.endGroup();
     cfg.endGroup();
 }
 
-void CMapDraw::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
+void CMapDraw::restoreActiveMapsList(const QStringList& keys)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
@@ -261,10 +251,8 @@ void CMapDraw::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
             CMapItem * item = mapList->item(i);
 
             if(item && item->key == key)
-            {                
+            {
                 item->activate();
-                //item will call loadConfigForMapItem() if activation is successfull
-                //item->loadConfig(cfg);
                 break;
             }
         }
@@ -274,63 +262,29 @@ void CMapDraw::restoreActiveMapsList(QStringList& keys, QSettings& cfg)
 }
 
 
-
-
-void CMapDraw::run()
+void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer)
 {
-    mutex.lock();
-    QTime t;
-    t.start();
-    qDebug() << "start thread";
-
-    IDrawContext::buffer_t& currentBuffer = buffer[!bufIndex];
-    while(intNeedsRedraw)
+    // iterate over all active maps and call the draw method
+    CMapItem::mutexActiveMaps.lock();
+    if(mapList)
     {
-        // copy all projection information need by the
-        // map render objects to buffer structure
-        currentBuffer.pjsrc         = pjsrc;
-        currentBuffer.zoomFactor    = zoomFactor;
-        currentBuffer.scale         = scale;
-        currentBuffer.ref1          = ref1;
-        currentBuffer.ref2          = ref2;
-        currentBuffer.ref3          = ref3;
-        currentBuffer.ref4          = ref4;
-        currentBuffer.focus         = focus;
-        intNeedsRedraw              = false;
-        mutex.unlock();
-
-
-        qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);
-        // ----- reset buffer -----
-        currentBuffer.image.fill(Qt::transparent);
-
-        // iterate over all active maps and call the draw method
-        CMapItem::mutexActiveMaps.lock();
-        if(mapList)
+        for(int i = 0; i < mapList->count(); i++)
         {
-            for(int i = 0; i < mapList->count(); i++)
+            CMapItem * item = mapList->item(i);
+
+            if(!item || item->mapfile.isNull())
             {
-                CMapItem * item = mapList->item(i);
-
-                if(!item || item->mapfile.isNull())
-                {
-                    // as all active maps have to be at the top of the list
-                    // it is ok to break ass soon as the first map with no
-                    // active files is hit.
-                    break;
-                }
-
-                item->mapfile->draw(currentBuffer);
-
+                // as all active maps have to be at the top of the list
+                // it is ok to break ass soon as the first map with no
+                // active files is hit.
+                break;
             }
-        }
-        CMapItem::mutexActiveMaps.unlock();
-        mutex.lock();
-    }
-    // ----- switch buffer ------
-    bufIndex = !bufIndex;
-    qDebug() << "stop thread" << t.elapsed();
-    mutex.unlock();
 
+            item->mapfile->draw(currentBuffer);
+
+        }
+    }
+    CMapItem::mutexActiveMaps.unlock();
 }
+
 

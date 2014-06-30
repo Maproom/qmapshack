@@ -75,7 +75,7 @@ class CMapDraw : public IDrawContext
 
 
     protected:
-        void run();
+        void drawt(buffer_t& currentBuffer);
 
 
     private:
@@ -94,8 +94,7 @@ class CMapDraw : public IDrawContext
         /**
            @brief Restore list of active maps from configuration file
          */
-        void restoreActiveMapsList(QStringList &keys, QSettings &cfg);
-        void restoreActiveMapsList(QStringList &keys);
+        void restoreActiveMapsList(const QStringList &keys);
 
 
         /// the treewidget holding all active and inactive map items

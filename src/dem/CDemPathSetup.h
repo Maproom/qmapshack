@@ -16,47 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CDEMDRAW_H
-#define CDEMDRAW_H
+#ifndef CDEMPATHSETUP_H
+#define CDEMPATHSETUP_H
 
-#include "IDrawContext.h"
+#include <QDialog>
+#include "ui_IDemPathSetup.h"
 
-class QPainter;
-class CDemList;
-class CCanvas;
-class QSettings;
-
-class CDemDraw : public IDrawContext
+class CDemPathSetup : public QDialog, private Ui::IDemPathSetup
 {
+    Q_OBJECT
     public:
-        CDemDraw(CCanvas * canvas);
-        virtual ~CDemDraw();
+        CDemPathSetup(QStringList& paths);
+        virtual ~CDemPathSetup();
 
-        void saveConfig(QSettings& cfg);
-        void loadConfig(QSettings& cfg);
+    public slots:
+        void accept();
 
-        qreal getElevation(const QPointF& pos);
+    private slots:
+        void slotAddPath();
+        void slotDelPath();
+        void slotItemSelectionChanged();
 
-        static void setupDemPath();
-        static void saveDemPath(QSettings &cfg);
-        static void loadDemPath(QSettings &cfg);
-        static const QStringList& getSupportedFormats(){return supportedFormats;}
-
-    protected:
-        void drawt(buffer_t& currentBuffer);
 
     private:
-        CDemList * demList;
-
-        static QStringList demPaths;
-
-        static QList<CDemDraw*> dems;
-
-        /// a list of supported map formats
-        static QStringList supportedFormats;
-
-
+        QStringList& paths;
 };
 
-#endif //CDEMDRAW_H
+#endif //CDEMPATHSETUP_H
 

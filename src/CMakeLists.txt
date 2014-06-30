@@ -21,6 +21,7 @@ set( SRCS
     dem/CDemVRT.cpp
     dem/CDemList.cpp
     dem/CDemItem.cpp
+    dem/CDemPathSetup.cpp
     map/IMap.cpp
     map/CMapDraw.cpp
     map/CMapItem.cpp
@@ -66,6 +67,7 @@ set( HDRS
     dem/CDemVRT.h
     dem/CDemList.h
     dem/CDemItem.h
+    dem/CDemPathSetup.h
     map/IMap.h
     map/CMapDraw.h
     map/CMapItem.h
@@ -101,6 +103,7 @@ set( HDRS
 set( UIS
     IMainWindow.ui
     dem/IDemList.ui
+    dem/IDemPathSetup.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
     map/IMapProp.ui

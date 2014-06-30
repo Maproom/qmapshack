@@ -111,8 +111,12 @@ class CCanvas : public QWidget
         /// the position of the tool tip
         QPoint posToolTip;
 
-        QMovie * loadIndicator;
+        QMovie * loadIndicator1;
         QLabel * mapLoadIndicator;
+
+        QMovie * loadIndicator2;
+        QLabel * demLoadIndicator;
+
 };
 
 #endif //CCANVAS_H

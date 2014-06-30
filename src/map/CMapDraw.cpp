@@ -30,8 +30,7 @@
 
 
 QList<CMapDraw*> CMapDraw::maps;
-QStringList  CMapDraw::mapPaths;
-
+QStringList CMapDraw::mapPaths;
 QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap").split('|');
 
 
@@ -208,7 +207,7 @@ void CMapDraw::saveActiveMapsList(QStringList& keys)
     saveActiveMapsList(keys, cfg);
     cfg.endGroup();
     cfg.endGroup();
-    cfg.endGroup();
+//    cfg.endGroup();
 }
 
 void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
@@ -231,13 +230,11 @@ void CMapDraw::loadConfigForMapItem(CMapItem * item)
     SETTINGS;
 //    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
-
-    qDebug() << cfg.group();
     cfg.beginGroup("map");
     item->loadConfig(cfg);
     cfg.endGroup();
     cfg.endGroup();
-    cfg.endGroup();
+//    cfg.endGroup();
 }
 
 void CMapDraw::restoreActiveMapsList(const QStringList& keys)

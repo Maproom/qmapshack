@@ -23,6 +23,7 @@
 #include "map/CMapDraw.h"
 #include "map/CMapList.h"
 #include "dem/CDemList.h"
+#include "dem/CDemDraw.h"
 #include "units/IUnit.h"
 #include "version.h"
 
@@ -66,7 +67,8 @@ CMainWindow::CMainWindow()
     connect(actionNightDay, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
-    connect(actionSetupMapPathes, SIGNAL(triggered()), this, SLOT(slotSetuMapPath()));
+    connect(actionSetupMapPathes, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
+    connect(actionSetupDEMPathes, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
@@ -368,7 +370,12 @@ void CMainWindow::slotSetupGrid()
     canvas->setupGrid();
 }
 
-void CMainWindow::slotSetuMapPath()
+void CMainWindow::slotSetupMapPath()
 {
     CMapDraw::setupMapPath();
+}
+
+void CMainWindow::slotSetupDemPath()
+{
+    CDemDraw::setupDemPath();
 }

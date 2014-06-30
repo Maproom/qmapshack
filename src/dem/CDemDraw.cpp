@@ -20,13 +20,15 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
+#include "dem/CDemPathSetup.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
 
-QStringList CDemDraw::demPaths;
 
 QList<CDemDraw*> CDemDraw::dems;
+QStringList CDemDraw::demPaths;
+QStringList CDemDraw::supportedFormats = QString("*.vrt").split('|');
 
 
 CDemDraw::CDemDraw(CCanvas *canvas)
@@ -46,6 +48,33 @@ CDemDraw::~CDemDraw()
     dems.removeOne(this);
 }
 
+void CDemDraw::setupDemPath()
+{
+    CDemPathSetup dlg(demPaths);
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    foreach(CDemDraw * dem, dems)
+    {
+        QStringList keys;
+//        map->saveActiveMapsList(keys);
+//        map->buildMapList();
+//        map->restoreActiveMapsList(keys);
+    }
+}
+
+void CDemDraw::saveDemPath(QSettings& cfg)
+{
+    cfg.setValue("demPaths", demPaths);
+}
+
+void CDemDraw::loadDemPath(QSettings& cfg)
+{
+    demPaths = cfg.value("demPaths", demPaths).toStringList();
+}
+
 void CDemDraw::saveConfig(QSettings& cfg)
 {
 
@@ -60,4 +89,9 @@ void CDemDraw::loadConfig(QSettings& cfg)
 qreal CDemDraw::getElevation(const QPointF& pos)
 {
     return NOFLOAT;
+}
+
+void CDemDraw::drawt(buffer_t& currentBuffer)
+{
+    msleep(500);
 }

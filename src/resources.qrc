@@ -28,6 +28,7 @@
         <file>icons/16x16/DeleteOne.png</file>
         <file>icons/16x16/Down.png</file>
         <file>icons/16x16/FolderMap.png</file>
+        <file>icons/16x16/FolderDEM.png</file>
         <file>icons/16x16/Font.png</file>
         <file>icons/16x16/FromMap.png</file>
         <file>icons/16x16/Grid.png</file>
@@ -65,6 +66,7 @@
         <file>icons/32x32/DeleteOne.png</file>
         <file>icons/32x32/Down.png</file>
         <file>icons/32x32/FolderMap.png</file>
+        <file>icons/32x32/FolderDEM.png</file>
         <file>icons/32x32/Font.png</file>
         <file>icons/32x32/FromMap.png</file>
         <file>icons/32x32/Grid.png</file>
@@ -102,6 +104,7 @@
         <file>icons/48x48/DeleteOne.png</file>
         <file>icons/48x48/Down.png</file>
         <file>icons/48x48/FolderMap.png</file>
+        <file>icons/48x48/FolderDEM.png</file>
         <file>icons/48x48/Font.png</file>
         <file>icons/48x48/FromMap.png</file>
         <file>icons/48x48/Grid.png</file>
@@ -133,5 +136,6 @@
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMoveMap.png</file>
         <file>animation/loader.gif</file>
+        <file>animation/loader2.gif</file>
     </qresource>
 </RCC>

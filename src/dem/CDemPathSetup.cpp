@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
-#include "map/CMapPathSetup.h"
-#include "map/CMapDraw.h"
+#include "dem/CDemPathSetup.h"
+#include "dem/CDemDraw.h"
 
 #include <QtWidgets>
 
-CMapPathSetup::CMapPathSetup(QStringList &paths)
+CDemPathSetup::CDemPathSetup(QStringList &paths)
     : paths(paths)
 {
     setupUi(this);
@@ -36,22 +36,23 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
         item->setText(path);
     }
 
-    labelHelp->setText(tr("Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1").arg(CMapDraw::getSupportedFormats().join(", ")));
+    labelHelp->setText(tr("Add or remove paths containing DEM data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1").arg(CDemDraw::getSupportedFormats().join(", ")));
 }
 
-CMapPathSetup::~CMapPathSetup()
+CDemPathSetup::~CDemPathSetup()
 {
 
 }
-void CMapPathSetup::slotItemSelectionChanged()
+
+void CDemPathSetup::slotItemSelectionChanged()
 {
     QList<QListWidgetItem*> items = listWidget->selectedItems();
     toolDelete->setEnabled(!items.isEmpty());
 }
 
-void CMapPathSetup::slotAddPath()
+void CDemPathSetup::slotAddPath()
 {
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select map path..."), QDir::homePath(), 0);
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select DEM file path..."), QDir::homePath(), 0);
     if(!path.isEmpty())
     {
         QListWidgetItem * item = new QListWidgetItem(listWidget);
@@ -59,13 +60,13 @@ void CMapPathSetup::slotAddPath()
     }
 }
 
-void CMapPathSetup::slotDelPath()
+void CDemPathSetup::slotDelPath()
 {
     QList<QListWidgetItem *> items = listWidget->selectedItems();
     qDeleteAll(items);
 }
 
-void CMapPathSetup::accept()
+void CDemPathSetup::accept()
 {
     paths.clear();
     for(int i = 0; i < listWidget->count(); i++)

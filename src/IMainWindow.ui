@@ -60,6 +60,7 @@
      <string>File</string>
     </property>
     <addaction name="actionSetupMapPathes"/>
+    <addaction name="actionSetupDEMPathes"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -257,6 +258,15 @@
    </property>
    <property name="text">
     <string>Map Tool Tip</string>
+   </property>
+  </action>
+  <action name="actionSetupDEMPathes">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/FolderDEM.png</normaloff>:/icons/32x32/FolderDEM.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup DEM Pathes</string>
    </property>
   </action>
  </widget>

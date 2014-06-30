@@ -16,12 +16,15 @@
 
 **********************************************************************************************/
 
-#include "CDemVRT.h"
+#include "dem/CDemVRT.h"
+#include "dem/CDemDraw.h"
 
-CDemVRT::CDemVRT(const QString &filename, CMapDraw *parent)
+CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     : IDem(parent)
 {
 
+
+    isActivated = true;
 }
 
 CDemVRT::~CDemVRT()

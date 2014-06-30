@@ -88,7 +88,7 @@ void CMapItem::showChildren(bool yes)
 
 void CMapItem::updateIcon()
 {
-    if(filename.isNull())
+    if(filename.isEmpty())
     {
         return;
     }

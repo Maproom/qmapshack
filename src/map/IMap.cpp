@@ -23,8 +23,6 @@
 
 #include <QtWidgets>
 
-
-
 IMap::IMap(CMapDraw *parent)
     : QObject(parent)
     , map(parent)

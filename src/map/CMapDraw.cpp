@@ -201,13 +201,11 @@ void CMapDraw::buildMapList()
 void CMapDraw::saveActiveMapsList(QStringList& keys)
 {
     SETTINGS;
-//    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
     cfg.beginGroup("map");
     saveActiveMapsList(keys, cfg);
     cfg.endGroup();
     cfg.endGroup();
-//    cfg.endGroup();
 }
 
 void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
@@ -228,13 +226,11 @@ void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
 void CMapDraw::loadConfigForMapItem(CMapItem * item)
 {
     SETTINGS;
-//    cfg.beginGroup("Canvas");
     cfg.beginGroup(cfgGroup);
     cfg.beginGroup("map");
     item->loadConfig(cfg);
     cfg.endGroup();
     cfg.endGroup();
-//    cfg.endGroup();
 }
 
 void CMapDraw::restoreActiveMapsList(const QStringList& keys)

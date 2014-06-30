@@ -20,19 +20,37 @@
 #define IDEM_H
 
 #include <QObject>
+#include <proj_api.h>
 
-class CMapDraw;
+class CDemDraw;
+class QSettings;
+
 
 class IDem : public QObject
 {
     public:
-        IDem(CMapDraw * parent);
+        IDem(CDemDraw * parent);
         virtual ~IDem();
+
+        void saveConfig(QSettings& cfg);
+        void loadConfig(QSettings& cfg);
 
         bool activated(){return isActivated;}
 
     protected:
-        CMapDraw * map;
+        CDemDraw * dem;
+
+        /// source projection of the current map file
+        /**
+            Has to be set by subclass. Destruction has to be
+            handeled by subclass.
+        */
+        projPJ  pjsrc;
+        /// target projection
+        /**
+            Is set by IMap() to WGS84. Will be freed by ~IMap()
+        */
+        projPJ  pjtar;
 
         /**
            @brief True if map was loaded successfully

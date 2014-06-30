@@ -18,15 +18,15 @@
 
 #include "dem/CDemItem.h"
 #include "dem/CDemVRT.h"
-#include "map/CMapDraw.h"
+#include "dem/CDemDraw.h"
 
 #include <QtWidgets>
 
 QMutex CDemItem::mutexActiveDems(QMutex::Recursive);
 
-CDemItem::CDemItem(QTreeWidget * parent, CMapDraw *map)
+CDemItem::CDemItem(QTreeWidget * parent, CDemDraw *dem)
     : QTreeWidgetItem(parent)
-    , map(map)
+    , dem(dem)
 {
     setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 }
@@ -36,25 +36,47 @@ CDemItem::~CDemItem()
 
 }
 
-void CDemItem::updateIcon()
+void CDemItem::saveConfig(QSettings& cfg)
 {
-    if(filenames.isEmpty())
+    if(demfile.isNull())
     {
         return;
     }
 
-    QPixmap img("://icons/32x32Mmap.png");
-    QFileInfo fi(filenames.first());
-    if(fi.suffix().toLower() == "vrt")
+    cfg.beginGroup(key);
+    demfile->saveConfig(cfg);
+    cfg.endGroup();
+
+}
+
+void CDemItem::loadConfig(QSettings& cfg)
+{
+    if(demfile.isNull())
     {
-        img = QPixmap("://icons/32x32/MimeVRT.png");
+        return;
     }
 
-    if(isActivated())
+    cfg.beginGroup(key);
+    demfile->loadConfig(cfg);
+    cfg.endGroup();
+
+}
+
+
+void CDemItem::updateIcon()
+{
+    if(filename.isEmpty())
     {
-        QPainter p(&img);
-        p.drawPixmap(0,0,QPixmap("://icons/16x16/redGlow.png"));
+        return;
     }
+
+    QPixmap img("://icons/32x32/Map.png");
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() == "vrt")
+    {
+        img = QPixmap("://icons/32x32/MimeDemVRT.png");
+    }
+
 
     setIcon(0,QIcon(img));
 }
@@ -62,13 +84,13 @@ void CDemItem::updateIcon()
 bool CDemItem::isActivated()
 {
     QMutexLocker lock(&mutexActiveDems);
-    return !files.isEmpty();
+    return !demfile.isNull();
 }
 
 bool CDemItem::toggleActivate()
 {
     QMutexLocker lock(&mutexActiveDems);
-    if(files.isEmpty())
+    if(demfile.isNull())
     {
         return activate();
     }
@@ -82,8 +104,7 @@ bool CDemItem::toggleActivate()
 void CDemItem::deactivate()
 {
     QMutexLocker lock(&mutexActiveDems);
-    qDeleteAll(files);
-    files.clear();
+    delete demfile;
 
     updateIcon();
     moveToBottom();
@@ -96,42 +117,32 @@ bool CDemItem::activate()
 {
     QMutexLocker lock(&mutexActiveDems);
 
-    if(!files.isEmpty())
+    delete demfile;
+
+    // load map by suffix
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() == "vrt")
     {
-        qDeleteAll(files);
-        files.clear();
+        demfile = new CDemVRT(filename, dem);
     }
 
-    foreach(const QString& filename, filenames)
-    {
-        IDem * m = 0;
-        // load map by suffix
-        QFileInfo fi(filename);
-        if(fi.suffix().toLower() == "vrt")
-        {
-            m = new CDemVRT(filename, map);
-        }
+    updateIcon();
 
-        // if map is activated sucessfully add to the list of map files
-        // else delete all previous loaded maps and abort
-        if(m && m->activated())
-        {
-            files << m;
-        }
-        else
-        {
-            qDeleteAll(files);
-            files.clear();
-            updateIcon();
-            return false;
-        }
-    }
     // no mapfiles loaded? Bad.
-    if(files.isEmpty())
+    if(demfile.isNull())
     {
         return false;
     }
-    updateIcon();
+
+    // if map is activated sucessfully add to the list of map files
+    // else delete all previous loaded maps and abort
+    if(!
+            demfile->activated())
+    {
+        delete demfile;
+        return false;
+    }
+
     moveToBottom();
 
     setFlags(flags() | Qt::ItemIsDragEnabled);
@@ -146,7 +157,7 @@ void CDemItem::moveToTop()
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
     w->insertTopLevelItem(0, this);
 
-    map->emitSigCanvasUpdate();
+    dem->emitSigCanvasUpdate();
 }
 
 
@@ -161,12 +172,12 @@ void CDemItem::moveToBottom()
     for(row = 0; row < w->topLevelItemCount(); row++)
     {
         CDemItem * item = dynamic_cast<CDemItem*>(w->topLevelItem(row));
-        if(item && item->files.isEmpty())
+        if(item && item->demfile.isNull())
         {
             break;
         }
     }
     w->insertTopLevelItem(row, this);
 
-    map->emitSigCanvasUpdate();
+    dem->emitSigCanvasUpdate();
 }

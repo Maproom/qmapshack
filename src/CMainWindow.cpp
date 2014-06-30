@@ -77,6 +77,7 @@ CMainWindow::CMainWindow()
 
     cfg.beginGroup("Canvas");
     CMapDraw::loadMapPath(cfg);
+    CDemDraw::loadDemPath(cfg);
     int N = cfg.value("numberOfCanvas").toInt();
     for(int i = 0; i < N; i++)
     {
@@ -151,6 +152,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("mapFont", mapFont);
     CMapDraw::saveMapPath(cfg);
+    CDemDraw::saveDemPath(cfg);
     cfg.endGroup(); // Canvas
 
 }

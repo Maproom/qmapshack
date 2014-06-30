@@ -21,11 +21,15 @@
 
 #include "dem/IDem.h"
 
+class CDemDraw;
+
 class CDemVRT : public IDem
 {
     public:
-        CDemVRT(const QString& filename, CMapDraw *parent);
+        CDemVRT(const QString& filename, CDemDraw *parent);
         virtual ~CDemVRT();
+
+
 };
 
 #endif //CDEMVRT_H

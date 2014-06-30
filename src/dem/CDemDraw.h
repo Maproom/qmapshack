@@ -25,6 +25,7 @@ class QPainter;
 class CDemList;
 class CCanvas;
 class QSettings;
+class CDemItem;
 
 class CDemDraw : public IDrawContext
 {
@@ -34,6 +35,18 @@ class CDemDraw : public IDrawContext
 
         void saveConfig(QSettings& cfg);
         void loadConfig(QSettings& cfg);
+        /**
+           @brief This is called most likely from the item itself to call it's loadConfig() method.
+
+           As the setup of a map is stored in the context of the workspace the correct groups have
+           to be set prior to call the item's loadConfig() method. However the item does not know
+           all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
+           and to call loadConfig();
+
+           @param item the item to call it's loadConfig() method
+        */
+        void loadConfigForDemItem(CDemItem * item);
+
 
         qreal getElevation(const QPointF& pos);
 
@@ -45,8 +58,27 @@ class CDemDraw : public IDrawContext
     protected:
         void drawt(buffer_t& currentBuffer);
 
-    private:
+    private:        
+        /**
+           @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
+
+         */
+        void buildMapList();
+
+        /**
+           @brief Save list of active maps to configuration file
+         */
+        void saveActiveMapsList(QStringList &keys, QSettings &cfg);
+        void saveActiveMapsList(QStringList &keys);
+        /**
+           @brief Restore list of active maps from configuration file
+         */
+        void restoreActiveMapsList(const QStringList &keys);
+
         CDemList * demList;
+
+        /// the group label used in QSettings
+        QString cfgGroup;
 
         static QStringList demPaths;
 

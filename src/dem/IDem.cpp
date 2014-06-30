@@ -16,15 +16,31 @@
 
 **********************************************************************************************/
 
-#include "IDem.h"
+#include "dem/IDem.h"
+#include "dem/CDemDraw.h"
 
-IDem::IDem(CMapDraw *parent)
+
+IDem::IDem(CDemDraw *parent)
+    : QObject(parent)
+    , dem(parent)
+    , pjsrc(0)
+    , isActivated(false)
 {
-
+    pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }
 
 IDem::~IDem()
 {
+    pj_free(pjtar);
+    pj_free(pjsrc);
+}
+
+void IDem::saveConfig(QSettings& cfg)
+{
 
 }
 
+void IDem::loadConfig(QSettings& cfg)
+{
+
+}

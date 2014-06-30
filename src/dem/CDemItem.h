@@ -21,15 +21,21 @@
 
 #include <QTreeWidgetItem>
 #include <QMutex>
+#include <QPointer>
+#include <QString>
 
 class IDem;
-class CMapDraw;
+class CDemDraw;
+class QSettings;
 
 class CDemItem : public QTreeWidgetItem
 {
     public:
-        CDemItem(QTreeWidget *parent, CMapDraw *map);
+        CDemItem(QTreeWidget *parent, CDemDraw *dem);
         virtual ~CDemItem();
+
+        void saveConfig(QSettings& cfg);
+        void loadConfig(QSettings& cfg);
 
         /**
            @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronised.
@@ -64,7 +70,8 @@ class CDemItem : public QTreeWidgetItem
         void updateIcon();
 
     private:
-        CMapDraw * map;
+        friend class CDemDraw;
+        CDemDraw * dem;
         /**
            @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
          */
@@ -72,11 +79,11 @@ class CDemItem : public QTreeWidgetItem
         /**
            @brief List of map files forming that particular map
          */
-        QStringList     filenames;
+        QString     filename;
         /**
            @brief List of loaded map objects when map is activated.
          */
-        QList<IDem*>    files;
+        QPointer<IDem> demfile;
 
 };
 

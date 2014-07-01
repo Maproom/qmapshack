@@ -41,6 +41,14 @@ class IDem : public QObject
         bool activated(){return isActivated;}
 
     protected:
+        /**
+           @brief Reproject (translate, rotate, scale) tile befor drwaing it.
+           @param img   the tile as QImage
+           @param l     a 4 point polygon to fit the tile in
+           @param p     the QPainter used to paint the tile
+         */
+        void drawTile(QImage& img, QPolygonF& l, QPainter& p);
+
         CDemDraw * dem;
 
         /// source projection of the current map file

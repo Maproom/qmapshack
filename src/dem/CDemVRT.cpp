@@ -19,10 +19,13 @@
 #include "dem/CDemVRT.h"
 #include "dem/CDemDraw.h"
 #include "GeoMath.h"
+#include "CCanvas.h"
 
 #include <gdal_priv.h>
 #include <ogr_spatialref.h>
 #include <QtWidgets>
+
+#define TILELIMIT 30000
 
 CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     : IDem(parent)
@@ -129,6 +132,27 @@ CDemVRT::~CDemVRT()
     delete dataset;
 }
 
+//#define GET_VALUE(D, X, Y) D[(X) + (Y) * dx]
+inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
+{
+    return data[x + y * dx];
+}
+
+inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
+{
+    w[0] = getValue(data, x - 1, y - 1, dx);
+    w[1] = getValue(data, x    , y - 1, dx);
+    w[2] = getValue(data, x + 1, y - 1, dx);
+    w[3] = getValue(data, x - 1, y    , dx);
+    w[4] = getValue(data, x    , y    , dx);
+    w[5] = getValue(data, x + 1, y    , dx);
+    w[6] = getValue(data, x - 1, y + 1, dx);
+    w[7] = getValue(data, x    , y + 1, dx);
+    w[8] = getValue(data, x + 1, y + 1, dx);
+}
+
+
+
 void CDemVRT::draw(IDrawContext::buffer_t& buf)
 {
     if(dem->needsRedraw())
@@ -157,212 +181,116 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     pt4 = trInv.map(pt4);
 
     qreal left, right, top, bottom;
-    left     = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
-    right    = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
-    top      = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
-    bottom   = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
+    left     = qRound(pt1.x() < pt4.x() ? pt1.x() : pt4.x());
+    right    = qRound(pt2.x() > pt3.x() ? pt2.x() : pt3.x());
+    top      = qRound(pt1.y() < pt2.y() ? pt1.y() : pt2.y());
+    bottom   = qRound(pt4.y() > pt3.y() ? pt4.y() : pt3.y());
 
-    if(left < 0) left = 0;
-    if(left > xsize_px) left = xsize_px;
+    if(left <= 0) left = 1;
+    if(left >= xsize_px) left = xsize_px - 1;
 
-    if(top < 0) top  = 0;
-    if(top > ysize_px) top  = ysize_px;
+    if(top <= 0) top  = 1;
+    if(top >= ysize_px) top = ysize_px - 1;
 
-    if(right > xsize_px) right = xsize_px;
-    if(right < 0) right = 0;
+    if(right >= xsize_px) right = xsize_px - 1;
+    if(right <= 0) right = 1;
 
-    if(bottom > ysize_px) bottom = ysize_px;
-    if(bottom < 0) bottom = 0;
+    if(bottom >= ysize_px) bottom = ysize_px - 1;
+    if(bottom <= 0) bottom = 1;
 
-    qreal  x = left;
-    qreal  y = top;
-    qreal dx = right - left;
-    qreal dy = bottom - top;
+    qreal imgw = 64;
+    qreal imgh = 64;
+    qreal dx =  imgw;
+    qreal dy =  imgh;
 
-    QPointF p1(left,  top);
-    QPointF p2(right, top);
-    pj_transform(pjsrc, pjtar, 1, 0, &p1.rx(), &p1.ry(), 0);
-    pj_transform(pjsrc, pjtar, 1, 0, &p2.rx(), &p2.ry(), 0);
-    qreal cellsize = GPS_Math_Distance(p1.x(), p1.y(), p2.x(), p2.y()) * 3 / dx;
+    int w = dx + 2;
+    int h = dy + 2;
 
-    dx = qRound(dx) & 0xFFFFFFFC;
-    dy = qRound(dy);
+    // start to draw the map
+    QPainter p(&buf.image);
+    USE_ANTI_ALIASING(p,true);
+    p.setOpacity(0.25);
+    p.translate(-pp);
 
-    if(dx*dy > 50000000)
+    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
+    qDebug() << nTiles;
+    if(nTiles < TILELIMIT)
     {
-        return;
-    }
-
-    QVector<qint16> data(dx*dy);
-    CPLErr err = dataset->RasterIO(GF_Read, x, y, dx, dy, data.data(), dx, dy, GDT_Int16, 1, 0, 0, 0, 0);
-    if(err == CE_Failure)
-    {
-        return;
-    }
-
-    QImage image(dx,dy,QImage::Format_Indexed8);
-    image.setColorTable(graytable);
-
-#define GET_VALUE(D, X, Y) D[(X) + (Y) * dx]
-#define FILL_WINDOW(D, X, Y, W) \
-    W[0] = GET_VALUE(D, X-1, Y-1); \
-    W[1] = GET_VALUE(D, X  , Y-1); \
-    W[2] = GET_VALUE(D, X+1, Y-1); \
-    W[3] = GET_VALUE(D, X-1, Y  ); \
-    W[4] = GET_VALUE(D, X  , Y  ); \
-    W[5] = GET_VALUE(D, X+1, Y  ); \
-    W[6] = GET_VALUE(D, X-1, Y+1); \
-    W[7] = GET_VALUE(D, X  , Y+1); \
-    W[8] = GET_VALUE(D, X+1, Y+1);
-
-    qint16 w[9];
-    qreal zenith  = (90 - 45)*DEG_TO_RAD;
-    qreal azimuth = (360.0 - 0 + 90)*DEG_TO_RAD;
-    qreal dz_dx, dz_dy, slope, aspect;
-
-    // 0 1 2
-    // a b c
-
-    // 3 4 5
-    // d e f
-
-    // 6 7 8
-    // g h i
-
-    for(int m = 1; m < (dy-1); m++)
-    {
-        for(int n = 1; n < (dx-1); n++)
+        for(qreal y = top - 1; y < bottom; y += dy)
         {
-            FILL_WINDOW(data,n,m,w);
-            dz_dx = ((w[2] + 2*w[5] + w[8]) - (w[0] + 2*w[3] + w[6])) / (8 * cellsize);
-            dz_dy = ((w[6] + 2*w[7] + w[8]) - (w[0] + 2*w[1] + w[2])) / (8 * cellsize);
-
-            slope = atan( 1.0 * sqrt( dz_dx*dz_dx + dz_dy*dz_dy) );
-
-            if(dz_dx != 0)
+            if(dem->needsRedraw())
             {
-                aspect = atan2(dz_dy, -dz_dx);
-
-                if(aspect < 0)
-                {
-                    aspect = 2*M_PI + aspect;
-                }
+                break;
             }
-            else
+
+            for(qreal x = left - 1; x < right; x += dx)
             {
+                if(dem->needsRedraw())
+                {
+                    break;
+                }
 
-                if(dz_dy > 0)
-                {
-                    aspect = M_PI/2;
-                }
-                else if(dz_dy < 0)
-                {
+                CPLErr err = CE_Failure;
 
-                    aspect = 1.5*M_PI;
-                }
-                else
+                QVector<qint16> data(w*h);
+                err = dataset->RasterIO(GF_Read, x, y, w, h, data.data(), w, h, GDT_Int16, 1, 0, 0, 0, 0);
+
+                if(err)
                 {
-                    aspect = 0;
+                    continue;
                 }
+
+                QImage img(imgw,imgh,QImage::Format_Indexed8);
+                img.setColorTable(graytable);
+
+                qint16 win[9];
+                qreal dz_dx, dz_dy, aspect, xx_plus_yy, cang;
+
+#define ZFACT           0.5
+#define ZFACT_BY_ZFACT  0.25
+#define SIN_ALT         0.70711
+#define ZFACT_COS_ALT   0.35355
+#define AZ              5.4978
+                for(int m = 1; m < (dy+1); m++)
+                {
+                    for(int n = 1; n < (dx+1); n++)
+                    {
+                        fillWindow(data, n, m, w, win);
+                        dz_dx       = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
+                        dz_dy       = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+                        aspect      = atan2(dz_dy, dz_dx);
+                        xx_plus_yy  = dz_dx * dz_dx + dz_dy * dz_dy;
+
+                        cang = (SIN_ALT - ZFACT_COS_ALT * sqrt(xx_plus_yy) * sin(aspect - AZ)) / sqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
+
+                        if (cang <= 0.0)
+                        {
+                            cang = 1.0;
+                        }
+                        else
+                        {
+                            cang = 1.0 + (254.0 * cang);
+                        }
+
+                        img.setPixel(n - 1, m - 1, cang);
+                    }
+                }
+
+
+                QPolygonF l;
+                l << QPointF(x + 1, y + 1) << QPointF(x + 1 + dx, y + 1) << QPointF(x + 1 + dx, y + 1 + dy) << QPointF(x + 1, y + 1 + dy);
+                l = trFwd.map(l);
+
+                pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+                pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+                pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+                pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+                drawTile(img, l, p);
+
             }
-            quint8 c = qRound(255.0 * ( ( cos(zenith) * cos(slope) ) + ( sin(zenith) * sin(slope) * cos(azimuth - aspect) ) ));
-            image.setPixel(n,m,c);
-
         }
     }
-
-    image.save("hillshade.png");
-
-//    hillshade = 255.0 * ( ( cos(zenith) * cos(slope) ) + ( sin(zenith) * sin(slope) * cos(azimuth - aspect) ) );
-
-
-
 }
 
 
-///************************************************************************/
-///*                         GDALHillshade()                              */
-///************************************************************************/
-
-//typedef struct
-//{
-//    double nsres;
-//    double ewres;
-//    double sin_altRadians;
-//    double cos_altRadians_mul_z_scale_factor;
-//    double azRadians;
-//    double square_z_scale_factor;
-//    double square_M_PI_2;
-//} GDALHillshadeAlgData;
-
-///* Unoptimized formulas are :
-//    x = psData->z*((afWin[0] + afWin[3] + afWin[3] + afWin[6]) -
-//        (afWin[2] + afWin[5] + afWin[5] + afWin[8])) /
-//        (8.0 * psData->ewres * psData->scale);
-
-//    y = psData->z*((afWin[6] + afWin[7] + afWin[7] + afWin[8]) -
-//        (afWin[0] + afWin[1] + afWin[1] + afWin[2])) /
-//        (8.0 * psData->nsres * psData->scale);
-
-//    slope = M_PI / 2 - atan(sqrt(x*x + y*y));
-
-//    aspect = atan2(y,x);
-
-//    cang = sin(alt * degreesToRadians) * sin(slope) +
-//           cos(alt * degreesToRadians) * cos(slope) *
-//           cos(az * degreesToRadians - M_PI/2 - aspect);
-//*/
-
-//void*  GDALCreateHillshadeData(double* adfGeoTransform,
-//                               double z,
-//                               double scale,
-//                               double alt,
-//                               double az,
-//                               int bZevenbergenThorne)
-//{
-//    GDALHillshadeAlgData* pData =
-//        (GDALHillshadeAlgData*)CPLMalloc(sizeof(GDALHillshadeAlgData));
-
-//    const double degreesToRadians = M_PI / 180.0;
-//    pData->nsres = adfGeoTransform[5];
-//    pData->ewres = adfGeoTransform[1];
-//    pData->sin_altRadians = sin(alt * degreesToRadians);
-//    pData->azRadians = az * degreesToRadians;
-//    double z_scale_factor = z / (((bZevenbergenThorne) ? 2 : 8) * scale);
-//    pData->cos_altRadians_mul_z_scale_factor =
-//        cos(alt * degreesToRadians) * z_scale_factor;
-//    pData->square_z_scale_factor = z_scale_factor * z_scale_factor;
-//    pData->square_M_PI_2 = (M_PI*M_PI)/4;
-//    return pData;
-//}
-
-//float GDALHillshadeAlg (float* afWin, float fDstNoDataValue, void* pData)
-//{
-//    GDALHillshadeAlgData* psData = (GDALHillshadeAlgData*)pData;
-//    double x, y, aspect, xx_plus_yy, cang;
-
-//    // First Slope ...
-//    x = ((afWin[0] + afWin[3] + afWin[3] + afWin[6]) -
-//        (afWin[2] + afWin[5] + afWin[5] + afWin[8])) / psData->ewres;
-
-//    y = ((afWin[6] + afWin[7] + afWin[7] + afWin[8]) -
-//        (afWin[0] + afWin[1] + afWin[1] + afWin[2])) / psData->nsres;
-
-//    xx_plus_yy = x * x + y * y;
-
-//    // ... then aspect...
-//    aspect = atan2(y,x);
-
-//    // ... then the shade value
-//    cang = (psData->sin_altRadians -
-//           psData->cos_altRadians_mul_z_scale_factor * sqrt(xx_plus_yy) *
-//           sin(aspect - psData->azRadians)) /
-//           sqrt(1 + psData->square_z_scale_factor * xx_plus_yy);
-
-//    if (cang <= 0.0)
-//        cang = 1.0;
-//    else
-//        cang = 1.0 + (254.0 * cang);
-
-//    return (float) cang;
-//}

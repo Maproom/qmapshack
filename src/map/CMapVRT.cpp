@@ -287,20 +287,38 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                 // read tile from file
                 CPLErr err = CE_Failure;
 
+                // reduce tile size at the border of the file
+                qreal dx_used   = dx;
+                qreal dy_used   = dy;
+                qreal imgw_used = imgw;
+                qreal imgh_used = imgh;
+
+                if((x + dx) > xsize_px)
+                {
+                    dx_used     = xsize_px - x;
+                    imgw_used   = qRound(imgw * dx_used / dx) & 0xFFFFFFFC;
+                    dx_used     = dx * imgw_used / imgw;
+                }
+                if((y + dy) > ysize_px)
+                {
+                    dy_used     = ysize_px - y;
+                    imgh_used   = imgh * dy_used / dy;
+                }
+
                 QImage img;
                 if(rasterBandCount == 1)
                 {
                     GDALRasterBand * pBand;
                     pBand = dataset->GetRasterBand(1);
 
-                    img = QImage(QSize(imgw,imgh),QImage::Format_Indexed8);
+                    img = QImage(QSize(imgw_used,imgh_used),QImage::Format_Indexed8);
                     img.setColorTable(colortable);
 
                     err = pBand->RasterIO(GF_Read
-                        ,(int)x,(int)y
-                        ,dx,dy
+                        ,qRound(x),qRound(y)
+                        ,dx_used,dy_used
                         ,img.bits()
-                        ,imgw,imgh
+                        ,imgw_used,imgh_used
                         ,GDT_Byte,0,0);
                 }
 
@@ -311,7 +329,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
 
 
                 QPolygonF l;
-                l << QPointF(x,y) << QPointF(x+dx,y) << QPointF(x+dx,y+dy) << QPointF(x,y+dy);
+                l << QPointF(x,y) << QPointF(x+dx_used,y) << QPointF(x+dx_used,y+dy_used) << QPointF(x,y+dy_used);
                 l = trFwd.map(l);
 
                 pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);

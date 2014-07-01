@@ -41,7 +41,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(dataset->GetRasterCount() != 1)
     {
         delete dataset; dataset = 0;
-        QMessageBox::warning(0, tr("Error..."), tr("DEM must have one band with 16bit data."));
+        QMessageBox::warning(0, tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
 
@@ -50,7 +50,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(pBand == 0)
     {
         delete dataset; dataset = 0;
-        QMessageBox::warning(0, tr("Error..."), tr("Failed to load file: %1").arg(filename));
+        QMessageBox::warning(0, tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
 
@@ -77,6 +77,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         QMessageBox::warning(0, tr("Error..."), tr("No georeference information found."));
         return;
     }
+
     xsize_px = dataset->GetRasterXSize();
     ysize_px = dataset->GetRasterYSize();
 
@@ -99,6 +100,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(pj_is_latlong(pjsrc))
     {
+        // convert to RAD to match internal notations
         trFwd = trFwd * DEG_TO_RAD;
     }
 
@@ -111,9 +113,6 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     qDebug() << "FF" << trFwd;
     qDebug() << "RR" << trInv;
-
-    qDebug() << ref1 << ref2 << ref3 << ref4;
-
 
     isActivated = true;
 }

@@ -82,7 +82,9 @@ void CDemDraw::loadDemPath(QSettings& cfg)
 
 void CDemDraw::saveConfig(QSettings& cfg)
 {
+    // store group context for later use
     cfgGroup = cfg.group();
+    // -------------------
     QStringList keys;
     cfg.beginGroup("dem");
     saveActiveMapsList(keys, cfg);
@@ -94,7 +96,9 @@ void CDemDraw::saveConfig(QSettings& cfg)
 
 void CDemDraw::loadConfig(QSettings& cfg)
 {
+    // store group context for later use
     cfgGroup = cfg.group();
+    // -------------------
     cfg.beginGroup("dem");
     restoreActiveMapsList(cfg.value("active", "").toStringList());
     int idx = cfg.value("zoomIndex",zoomIndex).toInt();
@@ -124,6 +128,7 @@ void CDemDraw::buildMapList()
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 
+            // calculate MD5 hash from the file's first 1024 bytes
             QFile f(dir.absoluteFilePath(filename));
             f.open(QIODevice::ReadOnly);
             md5.reset();
@@ -183,6 +188,10 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
 
             if(item && item->key == key)
             {
+                /**
+                    @Note   the item will load it's configuration uppon successful activation
+                            by calling loadConfigForDemItem().
+                */
                 item->activate();
                 break;
             }

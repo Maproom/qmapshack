@@ -49,6 +49,14 @@ class IMap : public QObject
          */
         bool activated(){return isActivated;}
 
+        /**
+           @brief Get the map's setup widget.
+
+           As default an instance of CMapPropSetup is used. For other setups you have
+           to override this method.
+
+           @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
+         */
         virtual IMapPropSetup * getSetup();
 
         /**
@@ -70,12 +78,31 @@ class IMap : public QObject
          */
         int getOpacity(){return opacity;}
 
+        /**
+           @brief Read the minimum scale factor the map should be desplayed
+           @return A factor or NOFLOAT if no minimum has been set
+         */
         qreal getMinScale(){return minScale;}
+        /**
+           @brief Read the maximum scale factor the map should be desplayed
+           @return A factor or NOFLOAT if no maximum has been set
+         */
         qreal getMaxScale(){return maxScale;}
+        /**
+           @brief Write the minimum scale the map should be displayed at.
+           @param s A factor or NOFLOAT if no minimum should be set
+         */
         void setMinScale(qreal s);
+        /**
+           @brief Write the maximum scale the map should be displayed at.
+           @param s A factor or NOFLOAT if no maximum should be set
+         */
         void setMaxScale(qreal s);
 
     signals:
+        /**
+           @brief Emitted every time a property of the map is changed
+         */
         void sigPropertiesChanged();
 
     public slots:
@@ -89,9 +116,22 @@ class IMap : public QObject
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);
 
+        /**
+           @brief Test if the given scale is out of the min/max scale
+           @param scale A scale factor for x and y axis
+           @return True if x scale is out of the min/max range
+         */
         bool isOutOfScale(const QPointF& scale);
+
+        /**
+           @brief Reproject (translate, rotate, scale) tile befor drwaing it.
+           @param img   the tile as QImage
+           @param l     a 4 point polygon to fit the tile in
+           @param p     the QPainter used to paint the tile
+         */
         void drawTile(QImage& img, QPolygonF& l, QPainter& p);
 
+        /// the drawcontext this map belongs to
         CMapDraw * map;
 
         /// source projection of the current map file
@@ -111,6 +151,7 @@ class IMap : public QObject
          */
         bool isActivated;
 
+        /// the setup dialog. Use getSetup() for access
         QPointer<IMapPropSetup> setup;
 
     private:

@@ -79,22 +79,32 @@ class CMapDraw : public IDrawContext
 
 
     private:
-
         /**
            @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
 
          */
         void buildMapList();
-
         /**
            @brief Save list of active maps to configuration file
+
+           The group context will be appended by the map's key
+
+           @param keys the stored map's MD5 keys will be written to keys
+           @param cfg  configuration file with correct group context set.
          */
         void saveActiveMapsList(QStringList &keys, QSettings &cfg);
+
+        /**
+           @brief Open configuration befor saving list
+           @param keys the stored map's MD5 keys will be written to keys
+         */
         void saveActiveMapsList(QStringList &keys);
         /**
            @brief Restore list of active maps from configuration file
+           @param keys MD5 hash keys to identify the maps
          */
         void restoreActiveMapsList(const QStringList &keys);
+
 
 
         /// the treewidget holding all active and inactive map items

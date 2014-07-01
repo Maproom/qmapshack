@@ -25,6 +25,8 @@
 #include <ogr_spatialref.h>
 #include <QtWidgets>
 
+#define TILELIMIT 30000
+
 CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     : IMap(parent)
     , filename(filename)
@@ -47,7 +49,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     if(rasterBandCount == 1)
     {
         GDALRasterBand * pBand;
-        pBand = dataset->GetRasterBand(1);        
+        pBand = dataset->GetRasterBand(1);
 
         if(pBand == 0)
         {
@@ -97,7 +99,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     else
     {
         delete dataset; dataset = 0;
-        QMessageBox::warning(0, tr("Error..."), tr("Only 8bit colortable supported."));
+        QMessageBox::warning(0, tr("Error..."), tr("File must be 8 bit palette or gray indexed."));
         return;
     }
 
@@ -132,14 +134,14 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     double adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
-    xscale = adfGeoTransform[1];
-    yscale = adfGeoTransform[5];
-
-    xrot = adfGeoTransform[4];
-    yrot = adfGeoTransform[2];
+    xscale  = adfGeoTransform[1];
+    yscale  = adfGeoTransform[5];
+    xrot    = adfGeoTransform[4];
+    yrot    = adfGeoTransform[2];
 
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
     trFwd.scale(adfGeoTransform[1],adfGeoTransform[5]);
+
     if(adfGeoTransform[4] != 0.0)
     {
         trFwd.rotate(atan(adfGeoTransform[2]/adfGeoTransform[4]));
@@ -147,6 +149,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     if(pj_is_latlong(pjsrc))
     {
+        // convert to RAD to match internal notations
         trFwd = trFwd * DEG_TO_RAD;
     }
 
@@ -242,7 +245,10 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     double nTiles = ((right - left) * (bottom - top) / (dx*dy));
     if(hasOverviews)
     {
-        while(nTiles > 30000)
+        // if there are overviews tiles canbe reduced by reading
+        // with a scale factor from file. Increase amount of pixel
+        // read until tile limit is met.
+        while(nTiles > TILELIMIT)
         {
             dx *= 2;
             dy *= 2;
@@ -251,7 +257,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     }
     else
     {
-         nTiles = getMaxScale() == NOFLOAT ? nTiles : 0;
+        nTiles = getMaxScale() == NOFLOAT ? nTiles : 0;
     }
 
     // start to draw the map
@@ -261,7 +267,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     p.translate(-pp);
 
     // limit number of tiles to keep performance
-    if(!isOutOfScale(bufferScale) && (nTiles < 30000))
+    if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {
 
         for(qreal y = top; y < bottom; y += dy)

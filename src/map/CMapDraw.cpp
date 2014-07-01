@@ -143,7 +143,9 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
 
 void CMapDraw::saveConfig(QSettings& cfg)
 {
+    // store group context for later use
     cfgGroup = cfg.group();
+    // -------------------
     QStringList keys;
     cfg.beginGroup("map");
     saveActiveMapsList(keys, cfg);
@@ -155,7 +157,9 @@ void CMapDraw::saveConfig(QSettings& cfg)
 
 void CMapDraw::loadConfig(QSettings& cfg)
 {
+    // store group context for later use
     cfgGroup = cfg.group();
+    // -------------------
     cfg.beginGroup("map");
     restoreActiveMapsList(cfg.value("active", "").toStringList());
     int idx = cfg.value("zoomIndex",zoomIndex).toInt();
@@ -187,6 +191,7 @@ void CMapDraw::buildMapList()
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 
+            // calculate MD5 hash from the file's first 1024 bytes
             QFile f(dir.absoluteFilePath(filename));
             f.open(QIODevice::ReadOnly);
             md5.reset();
@@ -245,6 +250,10 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
 
             if(item && item->key == key)
             {
+                /**
+                    @Note   the item will load it's configuration uppon successful activation
+                            by calling loadConfigForMapItem().
+                */
                 item->activate();
                 break;
             }

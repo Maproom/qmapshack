@@ -38,6 +38,8 @@ class IDem : public QObject
 
         virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
+        virtual qreal getElevation(const QPointF& pos) = 0;
+
         bool activated(){return isActivated;}
 
     protected:

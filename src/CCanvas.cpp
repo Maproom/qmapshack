@@ -57,6 +57,7 @@ CCanvas::CCanvas(QWidget *parent)
     mouse   = new CMouseNormal(this);
 
     connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
+    connect(dem, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
 
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);

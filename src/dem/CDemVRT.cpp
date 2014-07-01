@@ -18,6 +18,7 @@
 
 #include "dem/CDemVRT.h"
 #include "dem/CDemDraw.h"
+#include "units/IUnit.h"
 #include "GeoMath.h"
 #include "CCanvas.h"
 
@@ -115,6 +116,9 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     ref3 = trFwd.map(QPointF(xsize_px,ysize_px));
     ref4 = trFwd.map(QPointF(0,ysize_px));
 
+    qDebug() << ref1 << ref2 << ref3 << ref4;
+    boundingBox = QRectF(ref1, ref3);
+
     qDebug() << "FF" << trFwd;
     qDebug() << "RR" << trInv;
 
@@ -131,6 +135,42 @@ CDemVRT::~CDemVRT()
 {
     delete dataset;
 }
+
+qreal CDemVRT::getElevation(const QPointF& pos)
+{
+    if(pjsrc == 0) return NOFLOAT;
+
+    qint16 e[4];
+    QPointF pt = pos;
+
+    pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+
+    if(!boundingBox.contains(pt))
+    {
+        return NOFLOAT;
+    }
+
+    pt = trInv.map(pt);
+
+    qreal x    = pt.x() - floor(pt.x());
+    qreal y    = pt.y() - floor(pt.y());
+
+    CPLErr err = dataset->RasterIO(GF_Read, floor(pt.x()), floor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
+    if(err == CE_Failure)
+    {
+        return NOFLOAT;
+    }
+
+    qreal b1 = e[0];
+    qreal b2 = e[1] - e[0];
+    qreal b3 = e[2] - e[0];
+    qreal b4 = e[0] - e[1] - e[2] + e[3];
+
+    qreal ele = b1 + b2 * x + b3 * y + b4 * x * y;
+
+    return ele;
+}
+
 
 //#define GET_VALUE(D, X, Y) D[(X) + (Y) * dx]
 inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
@@ -209,8 +249,16 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
-    p.setOpacity(0.25);
+    p.setOpacity(0.5);
     p.translate(-pp);
+
+    QTime timer;
+    timer.start();
+    quint32 t1 = 0;
+    quint32 t2 = 0;
+    quint32 t3 = 0;
+    quint32 t = 0;
+
 
     double nTiles = ((right - left) * (bottom - top) / (dx*dy));
     qDebug() << nTiles;
@@ -232,14 +280,20 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 CPLErr err = CE_Failure;
 
+                t = timer.elapsed();
+
                 QVector<qint16> data(w*h);
                 err = dataset->RasterIO(GF_Read, x, y, w, h, data.data(), w, h, GDT_Int16, 1, 0, 0, 0, 0);
+
+                t1 += timer.elapsed() - t;
+
 
                 if(err)
                 {
                     continue;
                 }
 
+                t = timer.elapsed();
                 QImage img(imgw,imgh,QImage::Format_Indexed8);
                 img.setColorTable(graytable);
 
@@ -276,6 +330,9 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                     }
                 }
 
+                t2 += timer.elapsed() - t;
+
+                t = timer.elapsed();
 
                 QPolygonF l;
                 l << QPointF(x + 1, y + 1) << QPointF(x + 1 + dx, y + 1) << QPointF(x + 1 + dx, y + 1 + dy) << QPointF(x + 1, y + 1 + dy);
@@ -288,9 +345,12 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 drawTile(img, l, p);
 
+                t3 += timer.elapsed() - t;
             }
         }
     }
+
+    qDebug() << "DEM> read vrt:" << t1 << "calc. shading:" << t2 << "draw tile:" << t3;
 }
 
 

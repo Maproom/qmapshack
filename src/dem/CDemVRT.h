@@ -32,6 +32,7 @@ class CDemVRT : public IDem
 
         void draw(IDrawContext::buffer_t& buf);
 
+        qreal getElevation(const QPointF& pos);
 
     private:
         QString filename;
@@ -61,7 +62,11 @@ class CDemVRT : public IDem
 
         bool hasOverviews;
 
+        QRectF boundingBox;
+
         QVector<QRgb> graytable;
+
+
 
 
 };

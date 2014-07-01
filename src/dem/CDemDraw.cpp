@@ -204,7 +204,34 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
 
 qreal CDemDraw::getElevation(const QPointF& pos)
 {
-    return NOFLOAT;
+    qreal ele = NOFLOAT;
+    if(CDemItem::mutexActiveDems.tryLock())
+    {
+        if(demList)
+        {
+            for(int i = 0; i < demList->count(); i++)
+            {
+                CDemItem * item = demList->item(i);
+
+                if(!item || item->demfile.isNull())
+                {
+                    // as all active maps have to be at the top of the list
+                    // it is ok to break ass soon as the first map with no
+                    // active files is hit.
+                    break;
+                }
+
+                ele = item->demfile->getElevation(pos);
+                if(ele != NOFLOAT)
+                {
+                    break;
+                }
+
+            }
+        }
+        CDemItem::mutexActiveDems.unlock();
+    }
+    return ele;
 }
 
 void CDemDraw::drawt(buffer_t& currentBuffer)

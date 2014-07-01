@@ -61,6 +61,8 @@ class CDemVRT : public IDem
 
         bool hasOverviews;
 
+        QVector<QRgb> graytable;
+
 
 };
 

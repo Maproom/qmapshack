@@ -217,6 +217,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     if(bottom >= ysize_px) bottom = ysize_px - 1;
     if(bottom <= 0) bottom = 1;
 
+    qDebug() << left << top << (right - left) << (bottom - top);
+
     qreal imgw = 64;
     qreal imgh = 64;
     qreal w =  imgw;

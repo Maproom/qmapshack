@@ -96,11 +96,11 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
     qint16 win[9];
     qreal dx, dy, aspect, xx_plus_yy, cang;
 
-#define ZFACT           0.5
-#define ZFACT_BY_ZFACT  0.25
-#define SIN_ALT         0.70711
-#define ZFACT_COS_ALT   0.35355
-#define AZ              5.4978
+#define ZFACT           0.125
+#define ZFACT_BY_ZFACT  (ZFACT*ZFACT)
+#define SIN_ALT         (sin(45*DEG_TO_RAD))
+#define ZFACT_COS_ALT   (ZFACT*cos(45*DEG_TO_RAD))
+#define AZ              (315 * DEG_TO_RAD)
     for(int m = 1; m <= h; m++)
     {
         for(int n = 1; n <= w; n++)

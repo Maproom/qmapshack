@@ -69,6 +69,13 @@ class CDemItem : public QTreeWidgetItem
 
         void updateIcon();
 
+        /**
+           @brief Show or hide child treewidget items
+           @param yes set true to add children, false will remove all children and delete the attached widgets
+         */
+        void showChildren(bool yes);
+
+
     private:
         friend class CDemDraw;
         CDemDraw * dem;

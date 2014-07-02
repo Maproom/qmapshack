@@ -44,7 +44,6 @@ void CMapTreeWidget::dragMoveEvent(QDragMoveEvent  * e)
 
 void CMapTreeWidget::dropEvent (QDropEvent  * e)
 {
-
     CMapItem * item = dynamic_cast<CMapItem*>(currentItem());
     if(item)
     {
@@ -57,7 +56,6 @@ void CMapTreeWidget::dropEvent (QDropEvent  * e)
     {
         item->showChildren(true);
     }
-
 
     emit sigChanged();
 }

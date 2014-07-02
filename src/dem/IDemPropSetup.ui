@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IMapProp</class>
- <widget class="QWidget" name="IMapProp">
+ <class>IDemPropSetup</class>
+ <widget class="QWidget" name="IDemPropSetup">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>59</height>
+    <height>60</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -103,6 +103,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkHillshading">
+     <property name="text">
+      <string>Hillshading</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

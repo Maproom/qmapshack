@@ -122,12 +122,6 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qDebug() << "FF" << trFwd;
     qDebug() << "RR" << trInv;
 
-    graytable.resize(256);
-    for(int i = 0; i < 256; i++)
-    {
-        graytable[i] = qRgb(i,i,i);
-    }
-
     isActivated = true;
 }
 
@@ -172,24 +166,7 @@ qreal CDemVRT::getElevation(const QPointF& pos)
 }
 
 
-//#define GET_VALUE(D, X, Y) D[(X) + (Y) * dx]
-inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
-{
-    return data[x + y * dx];
-}
 
-inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
-{
-    w[0] = getValue(data, x - 1, y - 1, dx);
-    w[1] = getValue(data, x    , y - 1, dx);
-    w[2] = getValue(data, x + 1, y - 1, dx);
-    w[3] = getValue(data, x - 1, y    , dx);
-    w[4] = getValue(data, x    , y    , dx);
-    w[5] = getValue(data, x + 1, y    , dx);
-    w[6] = getValue(data, x - 1, y + 1, dx);
-    w[7] = getValue(data, x    , y + 1, dx);
-    w[8] = getValue(data, x + 1, y + 1, dx);
-}
 
 
 
@@ -199,6 +176,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     {
         return;
     }
+
+    QPointF bufferScale = buf.scale * buf.zoomFactor;
 
     // get pixel offset of top left buffer corner
     QPointF pp = buf.ref1;
@@ -240,38 +219,34 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
     qreal imgw = 64;
     qreal imgh = 64;
-    qreal dx =  imgw;
-    qreal dy =  imgh;
+    qreal w =  imgw;
+    qreal h =  imgh;
 
-    int w = dx + 2;
-    int h = dy + 2;
+    /*
+        As the 3x3 window will create a border of one pixel
+        more data is read than displayed to compensate.
+    */
+    int wp2 = w + 2;
+    int hp2 = h + 2;
 
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p,true);
-    p.setOpacity(0.5);
+    p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    QTime timer;
-    timer.start();
-    quint32 t1 = 0;
-    quint32 t2 = 0;
-    quint32 t3 = 0;
-    quint32 t = 0;
-
-
-    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
-    qDebug() << nTiles;
-    if(nTiles < TILELIMIT)
+    double nTiles = ((right - left) * (bottom - top) / (w * h));
+    qDebug() << "DEM> tiles:" << nTiles;
+    if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {
-        for(qreal y = top - 1; y < bottom; y += dy)
+        for(qreal y = top - 1; y < bottom; y += h)
         {
             if(dem->needsRedraw())
             {
                 break;
             }
 
-            for(qreal x = left - 1; x < right; x += dx)
+            for(qreal x = left - 1; x < right; x += w)
             {
                 if(dem->needsRedraw())
                 {
@@ -280,77 +255,38 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 CPLErr err = CE_Failure;
 
-                t = timer.elapsed();
-
-                QVector<qint16> data(w*h);
-                err = dataset->RasterIO(GF_Read, x, y, w, h, data.data(), w, h, GDT_Int16, 1, 0, 0, 0, 0);
-
-                t1 += timer.elapsed() - t;
-
+                QVector<qint16> data(wp2 * hp2);
+                err = dataset->RasterIO(GF_Read, x, y, wp2, hp2, data.data(), wp2, hp2, GDT_Int16, 1, 0, 0, 0, 0);
 
                 if(err)
                 {
                     continue;
                 }
 
-                t = timer.elapsed();
-                QImage img(imgw,imgh,QImage::Format_Indexed8);
-                img.setColorTable(graytable);
 
-                qint16 win[9];
-                qreal dz_dx, dz_dy, aspect, xx_plus_yy, cang;
-
-#define ZFACT           0.5
-#define ZFACT_BY_ZFACT  0.25
-#define SIN_ALT         0.70711
-#define ZFACT_COS_ALT   0.35355
-#define AZ              5.4978
-                for(int m = 1; m < (dy+1); m++)
-                {
-                    for(int n = 1; n < (dx+1); n++)
-                    {
-                        fillWindow(data, n, m, w, win);
-                        dz_dx       = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
-                        dz_dy       = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
-                        aspect      = atan2(dz_dy, dz_dx);
-                        xx_plus_yy  = dz_dx * dz_dx + dz_dy * dz_dy;
-
-                        cang = (SIN_ALT - ZFACT_COS_ALT * sqrt(xx_plus_yy) * sin(aspect - AZ)) / sqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
-
-                        if (cang <= 0.0)
-                        {
-                            cang = 1.0;
-                        }
-                        else
-                        {
-                            cang = 1.0 + (254.0 * cang);
-                        }
-
-                        img.setPixel(n - 1, m - 1, cang);
-                    }
-                }
-
-                t2 += timer.elapsed() - t;
-
-                t = timer.elapsed();
-
-                QPolygonF l;
-                l << QPointF(x + 1, y + 1) << QPointF(x + 1 + dx, y + 1) << QPointF(x + 1 + dx, y + 1 + dy) << QPointF(x + 1, y + 1 + dy);
+                QPolygonF l(4);
+                l[0] = QPointF(x + 1, y + 1);
+                l[1] = QPointF(x + 1 + w, y + 1);
+                l[2] = QPointF(x + 1 + w, y + 1 + h);
+                l[3] = QPointF(x + 1, y + 1 + h);
                 l = trFwd.map(l);
-
                 pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
                 pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
                 pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
                 pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
-                drawTile(img, l, p);
+                if(getHillshading())
+                {
+                    QImage img(imgw,imgh,QImage::Format_Indexed8);
+                    img.setColorTable(graytable);
 
-                t3 += timer.elapsed() - t;
+                    hillshading(data, w, h, img);
+
+                    drawTile(img, l, p);
+                }
             }
         }
     }
-
-    qDebug() << "DEM> read vrt:" << t1 << "calc. shading:" << t2 << "draw tile:" << t3;
 }
 
 

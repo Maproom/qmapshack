@@ -18,16 +18,45 @@
 
 #include "dem/IDem.h"
 #include "dem/CDemDraw.h"
+#include "dem/CDemPropSetup.h"
 
 #include <QtWidgets>
+
+inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
+{
+    return data[x + y * dx];
+}
+
+inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
+{
+    w[0] = getValue(data, x - 1, y - 1, dx);
+    w[1] = getValue(data, x    , y - 1, dx);
+    w[2] = getValue(data, x + 1, y - 1, dx);
+    w[3] = getValue(data, x - 1, y    , dx);
+    w[4] = getValue(data, x    , y    , dx);
+    w[5] = getValue(data, x + 1, y    , dx);
+    w[6] = getValue(data, x - 1, y + 1, dx);
+    w[7] = getValue(data, x    , y + 1, dx);
+    w[8] = getValue(data, x + 1, y + 1, dx);
+}
+
 
 IDem::IDem(CDemDraw *parent)
     : IDrawObject(parent)
     , dem(parent)
     , pjsrc(0)
     , isActivated(false)
+    , doHillshading(false)
 {
+    slotSetOpacity(50);
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
+
+    graytable.resize(256);
+    for(int i = 0; i < 256; i++)
+    {
+        graytable[i] = qRgb(i,i,i);
+    }
+
 }
 
 IDem::~IDem()
@@ -35,6 +64,68 @@ IDem::~IDem()
     pj_free(pjtar);
     pj_free(pjsrc);
 }
+
+void IDem::saveConfig(QSettings& cfg)
+{
+    IDrawObject::saveConfig(cfg);
+
+    cfg.setValue("doHillshading",doHillshading);
+}
+
+void IDem::loadConfig(QSettings& cfg)
+{
+    IDrawObject::loadConfig(cfg);
+
+    doHillshading = cfg.value("doHillshading",doHillshading).toBool();
+}
+
+
+IDemProp * IDem::getSetup()
+{
+    if(setup.isNull())
+    {
+        setup = new CDemPropSetup(this, dem);
+    }
+
+    return setup;
+}
+
+void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
+{
+    int wp2 = w + 2;
+    qint16 win[9];
+    qreal dx, dy, aspect, xx_plus_yy, cang;
+
+#define ZFACT           0.5
+#define ZFACT_BY_ZFACT  0.25
+#define SIN_ALT         0.70711
+#define ZFACT_COS_ALT   0.35355
+#define AZ              5.4978
+    for(int m = 1; m <= h; m++)
+    {
+        for(int n = 1; n <= w; n++)
+        {
+            fillWindow(data, n, m, wp2, win);
+            dx          = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
+            dy          = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+            aspect      = atan2(dy, dx);
+            xx_plus_yy  = dx * dx + dy * dy;
+            cang        = (SIN_ALT - ZFACT_COS_ALT * sqrt(xx_plus_yy) * sin(aspect - AZ)) / sqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
+
+            if (cang <= 0.0)
+            {
+                cang = 1.0;
+            }
+            else
+            {
+                cang = 1.0 + (254.0 * cang);
+            }
+
+            img.setPixel(n - 1, m - 1, cang);
+        }
+    }
+}
+
 
 void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p)
 {

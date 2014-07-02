@@ -19,6 +19,7 @@
 #include "dem/CDemItem.h"
 #include "dem/CDemVRT.h"
 #include "dem/CDemDraw.h"
+#include "dem/IDemProp.h"
 
 #include <QtWidgets>
 
@@ -62,6 +63,24 @@ void CDemItem::loadConfig(QSettings& cfg)
 
 }
 
+void CDemItem::showChildren(bool yes)
+{
+    if(yes && !demfile.isNull())
+    {
+        QTreeWidget * tw = treeWidget();
+
+        QTreeWidgetItem * item = new QTreeWidgetItem(this);
+        item->setFlags(Qt::ItemIsEnabled);
+        tw->setItemWidget(item, 0, demfile->getSetup());
+    }
+    else
+    {
+        QList<QTreeWidgetItem*> items = takeChildren();
+        qDeleteAll(items);
+        delete demfile->getSetup();
+    }
+}
+
 
 void CDemItem::updateIcon()
 {
@@ -76,7 +95,6 @@ void CDemItem::updateIcon()
     {
         img = QPixmap("://icons/32x32/MimeDemVRT.png");
     }
-
 
     setIcon(0,QIcon(img));
 }
@@ -104,11 +122,18 @@ bool CDemItem::toggleActivate()
 void CDemItem::deactivate()
 {
     QMutexLocker lock(&mutexActiveDems);
+    // remove demfile setup dialog as child of this item
+    showChildren(false);
+
+    // remove demfile object
     delete demfile;
 
+    // maybe used to reflect changes in the icon
     updateIcon();
+    // move to bottom of the active dem list
     moveToBottom();
 
+    // deny drag-n-drop again
     setFlags(flags() & ~Qt::ItemIsDragEnabled);
 }
 
@@ -117,6 +142,7 @@ bool CDemItem::activate()
 {
     QMutexLocker lock(&mutexActiveDems);
 
+    // remove demfile object
     delete demfile;
 
     // load map by suffix
@@ -155,6 +181,8 @@ bool CDemItem::activate()
     */
     dem->loadConfigForDemItem(this);
 
+    // Add the demfile setup dialog as child of this item
+    showChildren(true);
     return true;
 }
 

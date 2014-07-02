@@ -18,11 +18,13 @@ set( SRCS
     canvas/IDrawContext.cpp
     canvas/IDrawObject.cpp
     dem/IDem.cpp
+    dem/IDemProp.cpp
     dem/CDemDraw.cpp
     dem/CDemVRT.cpp
     dem/CDemList.cpp
     dem/CDemItem.cpp
     dem/CDemPathSetup.cpp
+    dem/CDemPropSetup.cpp
     map/IMap.cpp
     map/CMapDraw.cpp
     map/CMapItem.cpp
@@ -65,11 +67,13 @@ set( HDRS
     canvas/IDrawContext.h
     canvas/IDrawObject.h
     dem/IDem.h
+    dem/IDemProp.h
     dem/CDemDraw.h
     dem/CDemVRT.h
     dem/CDemList.h
     dem/CDemItem.h
     dem/CDemPathSetup.h
+    dem/CDemPropSetup.h
     map/IMap.h
     map/CMapDraw.h
     map/CMapItem.h
@@ -106,6 +110,7 @@ set( UIS
     IMainWindow.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui
+    dem/IDemPropSetup.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
     map/IMapProp.ui

@@ -180,7 +180,6 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
 
     QPointF bufferScale = buf.scale * buf.zoomFactor;
 
-
     // calculate bounding box;
     QPointF pt1 = ref1;
     QPointF pt2 = ref2;

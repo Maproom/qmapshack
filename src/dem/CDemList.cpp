@@ -38,7 +38,19 @@ void CDemTreeWidget::dragMoveEvent ( QDragMoveEvent  * event )
 
 void CDemTreeWidget::dropEvent ( QDropEvent  * event )
 {
+    CDemItem * item = dynamic_cast<CDemItem*>(currentItem());
+    if(item)
+    {
+        item->showChildren(false);
+    }
+
     QTreeWidget::dropEvent(event);
+
+    if(item)
+    {
+        item->showChildren(true);
+    }
+
     emit sigChanged();;
 }
 

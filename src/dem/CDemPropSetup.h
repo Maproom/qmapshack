@@ -16,43 +16,37 @@
 
 **********************************************************************************************/
 
-#ifndef CDEMVRT_H
-#define CDEMVRT_H
+#ifndef CDEMPROPSETUP_H
+#define CDEMPROPSETUP_H
 
-#include "dem/IDem.h"
 
-class CDemDraw;
-class GDALDataset;
+#include "dem/IDemProp.h"
+#include "ui_IDemPropSetup.h"
 
-class CDemVRT : public IDem
+class CDemPropSetup : public IDemProp, private Ui::IDemPropSetup
 {
+    Q_OBJECT
     public:
-        CDemVRT(const QString& filename, CDemDraw *parent);
-        virtual ~CDemVRT();
+        CDemPropSetup(IDem *demfile, CDemDraw *dem);
+        virtual ~CDemPropSetup();
 
-        void draw(IDrawContext::buffer_t& buf);
+    protected slots:
+        void slotPropertiesChanged();
 
-        qreal getElevation(const QPointF& pos);
+    protected:
+        void resizeEvent(QResizeEvent * e);
+
+    private slots:
+        void slotScaleChanged(const QPointF& s);
+        void slotSetMinScale(bool checked);
+        void slotSetMaxScale(bool checked);
 
     private:
-        QString filename;
-        /// instance of GDAL dataset
-        GDALDataset * dataset;
+        void updateScaleLabel();
 
-
-        QPointF ref1;
-        QPointF ref2;
-        QPointF ref3;
-        QPointF ref4;
-
-        QTransform trFwd;
-        QTransform trInv;
-
-        bool hasOverviews;
-
-        QRectF boundingBox;
+        static QPointF scale;
 
 };
 
-#endif //CDEMVRT_H
+#endif //CDEMPROPSETUP_H
 

@@ -22,17 +22,24 @@
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
 #include <QObject>
+#include <QPointer>
 #include <proj_api.h>
 
 class CDemDraw;
+class IDemProp;
 class QSettings;
 
 
 class IDem : public IDrawObject
 {
+    Q_OBJECT
     public:
         IDem(CDemDraw * parent);
         virtual ~IDem();
+
+        void saveConfig(QSettings& cfg);
+
+        void loadConfig(QSettings& cfg);
 
         virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
@@ -40,7 +47,25 @@ class IDem : public IDrawObject
 
         bool activated(){return isActivated;}
 
+        /**
+           @brief Get the dem's setup widget.
+
+           As default an instance of CDemPropSetup is used. For other setups you have
+           to override this method.
+
+           @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
+         */
+        virtual IDemProp * getSetup();
+
+        bool getHillshading(){return doHillshading;}
+
+    public slots:
+        void slotSetHillshading(bool yes){doHillshading = yes;}
+
     protected:
+
+        void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage &img);
+
         /**
            @brief Reproject (translate, rotate, scale) tile befor drwaing it.
            @param img   the tile as QImage
@@ -63,10 +88,34 @@ class IDem : public IDrawObject
         */
         projPJ  pjtar;
 
+        /// width in number of px
+        quint32 xsize_px;
+        /// height in number of px
+        quint32 ysize_px;
+
+        /// scale [px/m]
+        double xscale;
+        /// scale [px/m]
+        double yscale;
+
+        double xrot;
+        double yrot;
+
+
         /**
            @brief True if map was loaded successfully
          */
         bool isActivated;
+
+        /// the setup dialog. Use getSetup() for access
+        QPointer<IDemProp> setup;
+
+        QVector<QRgb> graytable;
+
+    private:
+        bool doHillshading;
+
+
 };
 
 #endif //IDEM_H

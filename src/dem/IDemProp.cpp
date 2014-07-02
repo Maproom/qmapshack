@@ -16,43 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CDEMVRT_H
-#define CDEMVRT_H
-
+#include "dem/IDemProp.h"
+#include "dem/CDemDraw.h"
 #include "dem/IDem.h"
 
-class CDemDraw;
-class GDALDataset;
-
-class CDemVRT : public IDem
+IDemProp::IDemProp(IDem *demfile, CDemDraw *dem)
+    : demfile(demfile)
+    , dem(dem)
 {
-    public:
-        CDemVRT(const QString& filename, CDemDraw *parent);
-        virtual ~CDemVRT();
+    connect(demfile, SIGNAL(sigPropertiesChanged()), this, SLOT(slotPropertiesChanged()));
+}
 
-        void draw(IDrawContext::buffer_t& buf);
+IDemProp::~IDemProp()
+{
 
-        qreal getElevation(const QPointF& pos);
-
-    private:
-        QString filename;
-        /// instance of GDAL dataset
-        GDALDataset * dataset;
-
-
-        QPointF ref1;
-        QPointF ref2;
-        QPointF ref3;
-        QPointF ref4;
-
-        QTransform trFwd;
-        QTransform trInv;
-
-        bool hasOverviews;
-
-        QRectF boundingBox;
-
-};
-
-#endif //CDEMVRT_H
+}
 

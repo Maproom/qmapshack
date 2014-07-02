@@ -20,6 +20,7 @@
 #define IDEM_H
 
 #include "IDrawContext.h"
+#include "IDrawObject.h"
 #include <QObject>
 #include <proj_api.h>
 
@@ -27,14 +28,11 @@ class CDemDraw;
 class QSettings;
 
 
-class IDem : public QObject
+class IDem : public IDrawObject
 {
     public:
         IDem(CDemDraw * parent);
         virtual ~IDem();
-
-        void saveConfig(QSettings& cfg);
-        void loadConfig(QSettings& cfg);
 
         virtual void draw(IDrawContext::buffer_t& buf) = 0;
 

@@ -20,25 +20,20 @@
 #define IMAP_H
 
 #include "IDrawContext.h"
-#include <QObject>
+#include "IDrawObject.h"
 #include <QImage>
 #include <QMutex>
 #include <QPointer>
 #include <proj_api.h>
 
 class CMapDraw;
-class QSettings;
 class IMapPropSetup;
 
-class IMap : public QObject
+class IMap : public IDrawObject
 {
-    Q_OBJECT
     public:
         IMap(CMapDraw * parent);
         virtual ~IMap();
-
-        virtual void saveConfig(QSettings& cfg);
-        virtual void loadConfig(QSettings& cfg);
 
 
         virtual void draw(IDrawContext::buffer_t& buf) = 0;
@@ -72,56 +67,10 @@ class IMap : public QObject
          */
         virtual void getToolTip(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
 
-        /**
-           @brief Read opacity value
-           @return Return the opacity in a range of 0..100(full opacity)
-         */
-        int getOpacity(){return opacity;}
-
-        /**
-           @brief Read the minimum scale factor the map should be desplayed
-           @return A factor or NOFLOAT if no minimum has been set
-         */
-        qreal getMinScale(){return minScale;}
-        /**
-           @brief Read the maximum scale factor the map should be desplayed
-           @return A factor or NOFLOAT if no maximum has been set
-         */
-        qreal getMaxScale(){return maxScale;}
-        /**
-           @brief Write the minimum scale the map should be displayed at.
-           @param s A factor or NOFLOAT if no minimum should be set
-         */
-        void setMinScale(qreal s);
-        /**
-           @brief Write the maximum scale the map should be displayed at.
-           @param s A factor or NOFLOAT if no maximum should be set
-         */
-        void setMaxScale(qreal s);
-
-    signals:
-        /**
-           @brief Emitted every time a property of the map is changed
-         */
-        void sigPropertiesChanged();
-
-    public slots:
-        /**
-           @brief Write opacity value
-           @param value must be in the range of 0..100(full opacity)
-         */
-        void slotSetOpacity(int value){opacity = value;}
-
     protected:
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);
 
-        /**
-           @brief Test if the given scale is out of the min/max scale
-           @param scale A scale factor for x and y axis
-           @return True if x scale is out of the min/max range
-         */
-        bool isOutOfScale(const QPointF& scale);
 
         /**
            @brief Reproject (translate, rotate, scale) tile befor drwaing it.
@@ -154,12 +103,6 @@ class IMap : public QObject
         /// the setup dialog. Use getSetup() for access
         QPointer<IMapPropSetup> setup;
 
-    private:
-        qreal opacity;
-
-        qreal minScale;
-
-        qreal maxScale;
 
 };
 

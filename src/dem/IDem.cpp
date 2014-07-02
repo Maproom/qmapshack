@@ -22,7 +22,7 @@
 #include <QtWidgets>
 
 IDem::IDem(CDemDraw *parent)
-    : QObject(parent)
+    : IDrawObject(parent)
     , dem(parent)
     , pjsrc(0)
     , isActivated(false)
@@ -36,15 +36,6 @@ IDem::~IDem()
     pj_free(pjsrc);
 }
 
-void IDem::saveConfig(QSettings& cfg)
-{
-
-}
-
-void IDem::loadConfig(QSettings& cfg)
-{
-
-}
 void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p)
 {
     dem->convertRad2Px(l);

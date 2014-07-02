@@ -24,13 +24,10 @@
 #include <QtWidgets>
 
 IMap::IMap(CMapDraw *parent)
-    : QObject(parent)
+    : IDrawObject(parent)
     , map(parent)
     , pjsrc(0)
     , isActivated(false)
-    , opacity(100)
-    , minScale(NOFLOAT)
-    , maxScale(NOFLOAT)
 {
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }
@@ -52,45 +49,6 @@ IMapPropSetup * IMap::getSetup()
     return setup;
 }
 
-void IMap::saveConfig(QSettings& cfg)
-{
-    cfg.setValue("opacity", getOpacity());
-    cfg.setValue("minScale", getMinScale());
-    cfg.setValue("maxScale", getMaxScale());
-}
-
-void IMap::loadConfig(QSettings& cfg)
-{
-    slotSetOpacity(cfg.value("opacity", getOpacity()).toDouble());
-    setMinScale(cfg.value("minScale", getMinScale()).toDouble());
-    setMaxScale(cfg.value("maxScale", getMaxScale()).toDouble());
-
-    emit sigPropertiesChanged();
-}
-
-void IMap::setMinScale(qreal s)
-{
-    if((s != NOFLOAT) && (maxScale != NOFLOAT))
-    {
-        if(s > maxScale)
-        {
-            return;
-        }
-    }
-    minScale = s;
-}
-
-void IMap::setMaxScale(qreal s)
-{
-    if((s != NOFLOAT) && (minScale != NOFLOAT))
-    {
-        if(s < minScale)
-        {
-            return;
-        }
-    }
-    maxScale = s;
-}
 
 void IMap::convertRad2M(QPointF &p)
 {
@@ -110,19 +68,6 @@ void IMap::convertM2Rad(QPointF &p)
     pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
 }
 
-bool IMap::isOutOfScale(const QPointF& scale)
-{
-    if((getMinScale() != NOFLOAT) && (scale.x() < getMinScale()))
-    {
-        return true;
-    }
-    if((getMaxScale() != NOFLOAT) && (scale.x() > getMaxScale()))
-    {
-        return true;
-    }
-
-    return false;
-}
 
 void IMap::drawTile(QImage& img, QPolygonF& l, QPainter& p)
 {

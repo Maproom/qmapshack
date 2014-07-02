@@ -16,6 +16,7 @@ set( SRCS
     CMainWindow.cpp
     CCanvas.cpp
     IDrawContext.cpp
+    IDrawObject.cpp
     dem/IDem.cpp
     dem/CDemDraw.cpp
     dem/CDemVRT.cpp
@@ -62,6 +63,7 @@ set( HDRS
     CMainWindow.h
     CCanvas.h
     IDrawContext.h
+    IDrawObject.h
     dem/IDem.h
     dem/CDemDraw.h
     dem/CDemVRT.h

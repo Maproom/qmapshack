@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "dem/IDem.h"
 #include "dem/CDemDraw.h"

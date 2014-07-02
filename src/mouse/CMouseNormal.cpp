@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "mouse/CMouseNormal.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 
 #include <QtGui>
 

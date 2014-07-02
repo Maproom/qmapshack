@@ -20,7 +20,7 @@
 #define CMAPDRAW_H
 
 #include <QStringList>
-#include "IDrawContext.h"
+#include "canvas/IDrawContext.h"
 
 class QPainter;
 class CCanvas;

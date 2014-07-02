@@ -14,9 +14,9 @@ set( SRCS
     main.cpp
     GeoMath.cpp
     CMainWindow.cpp
-    CCanvas.cpp
-    IDrawContext.cpp
-    IDrawObject.cpp
+    canvas/CCanvas.cpp
+    canvas/IDrawContext.cpp
+    canvas/IDrawObject.cpp
     dem/IDem.cpp
     dem/CDemDraw.cpp
     dem/CDemVRT.cpp
@@ -61,9 +61,9 @@ set( HDRS
     CAppOpts.h
     CSettings.h
     CMainWindow.h
-    CCanvas.h
-    IDrawContext.h
-    IDrawObject.h
+    canvas/CCanvas.h
+    canvas/IDrawContext.h
+    canvas/IDrawObject.h
     dem/IDem.h
     dem/CDemDraw.h
     dem/CDemVRT.h

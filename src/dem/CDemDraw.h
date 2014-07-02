@@ -19,7 +19,7 @@
 #ifndef CDEMDRAW_H
 #define CDEMDRAW_H
 
-#include "IDrawContext.h"
+#include "canvas/IDrawContext.h"
 
 class QPainter;
 class CDemList;
@@ -58,7 +58,7 @@ class CDemDraw : public IDrawContext
     protected:
         void drawt(buffer_t& currentBuffer);
 
-    private:        
+    private:
         /**
            @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
 

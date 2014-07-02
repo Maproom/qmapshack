@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "CSettings.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 #include "GeoMath.h"
 #include "map/CMapDraw.h"
 #include "map/CMapList.h"

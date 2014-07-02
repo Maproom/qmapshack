@@ -26,7 +26,7 @@
 #include "CFileExt.h"
 #include "Platform.h"
 #include "CMainWindow.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 
 #include <QtWidgets>
 

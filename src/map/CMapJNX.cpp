@@ -20,7 +20,7 @@
 #include "map/CMapDraw.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 
 
 #include <QtGui>

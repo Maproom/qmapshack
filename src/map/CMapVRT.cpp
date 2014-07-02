@@ -19,7 +19,7 @@
 #include "map/CMapVRT.h"
 #include "map/CMapDraw.h"
 #include "units/IUnit.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 
 #include <gdal_priv.h>
 #include <ogr_spatialref.h>

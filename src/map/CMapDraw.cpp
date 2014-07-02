@@ -21,7 +21,7 @@
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
 #include "map/CMapPathSetup.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "CSettings.h"
 

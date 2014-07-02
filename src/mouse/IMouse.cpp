@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "mouse/IMouse.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 
 
 IMouse::IMouse(CCanvas *canvas)

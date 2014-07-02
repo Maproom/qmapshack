@@ -19,7 +19,7 @@
 #include "map/CMapRMAP.h"
 #include "map/CMapDraw.h"
 #include "units/IUnit.h"
-#include "CCanvas.h"
+#include "canvas/CCanvas.h"
 
 #include <QtGui>
 #include <QtWidgets>

@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "IDrawObject.h"
+#include "canvas/IDrawObject.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>

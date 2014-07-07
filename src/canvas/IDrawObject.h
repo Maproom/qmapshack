@@ -61,12 +61,22 @@ class IDrawObject : public QObject
          */
         void setMaxScale(qreal s);
 
+        bool getShowPolygons(){return showPolygons;}
+
+        bool getShowPolylines(){return showPolylines;}
+
+        bool getShowPOIs(){return showPOIs;}
+
     public slots:
         /**
            @brief Write opacity value
            @param value must be in the range of 0..100(full opacity)
          */
         void slotSetOpacity(int value){opacity = value;}
+
+        void slotSetShowPolygons(bool yes){showPolygons = yes;}
+        void slotSetShowPolylines(bool yes){showPolylines = yes;}
+        void slotSetShowPOIs(bool yes){showPOIs = yes;}
 
     signals:
         /**
@@ -89,6 +99,12 @@ class IDrawObject : public QObject
         qreal minScale;
 
         qreal maxScale;
+
+        bool showPolygons;
+
+        bool showPolylines;
+
+        bool showPOIs;
 
 };
 

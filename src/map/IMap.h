@@ -32,9 +32,14 @@ class IMapPropSetup;
 class IMap : public IDrawObject
 {
     public:
-        IMap(CMapDraw * parent);
+        IMap(quint32 features, CMapDraw * parent);
         virtual ~IMap();
 
+        enum features_e
+        {
+             eFeatVisibility  = 0x00000001
+            ,eFeatVectorItems = 0x00000002
+        };
 
         virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
@@ -66,6 +71,9 @@ class IMap : public IDrawObject
            @param str
          */
         virtual void getToolTip(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
+
+        bool hasFeatureVisibility(){return flagsFeature & eFeatVisibility;}
+        bool hasFeatureVectorItems(){return flagsFeature & eFeatVectorItems;}
 
     protected:
         void convertRad2M(QPointF &p);
@@ -102,6 +110,8 @@ class IMap : public IDrawObject
 
         /// the setup dialog. Use getSetup() for access
         QPointer<IMapPropSetup> setup;
+
+        quint32 flagsFeature;
 
 
 };

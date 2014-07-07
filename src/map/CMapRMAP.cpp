@@ -25,7 +25,7 @@
 #include <QtWidgets>
 
 CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
-    : IMap(parent)
+    : IMap(eFeatVisibility,parent)
     , filename(filename)
 {
     qDebug() << "------------------------------";

@@ -28,7 +28,7 @@
 #define TILELIMIT 30000
 
 CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
-    : IMap(parent)
+    : IMap(eFeatVisibility,parent)
     , filename(filename)
     , rasterBandCount(0)
     , hasOverviews(false)

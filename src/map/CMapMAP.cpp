@@ -20,7 +20,7 @@
 #include "map/CMapDraw.h"
 
 CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
-    : IMap(parent)
+    : IMap(eFeatVisibility|eFeatVectorItems, parent)
 {
 
 }

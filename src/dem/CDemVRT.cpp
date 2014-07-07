@@ -86,14 +86,11 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     xsize_px = dataset->GetRasterXSize();
     ysize_px = dataset->GetRasterYSize();
 
-
     double adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
     xscale  = adfGeoTransform[1];
     yscale  = adfGeoTransform[5];
-    xrot    = adfGeoTransform[4];
-    yrot    = adfGeoTransform[2];
 
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
     trFwd.scale(adfGeoTransform[1],adfGeoTransform[5]);
@@ -105,6 +102,9 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(pj_is_latlong(pjsrc))
     {
+
+        xscale *= 111120;
+        yscale *= 111120;
         // convert to RAD to match internal notations
         trFwd = trFwd * DEG_TO_RAD;
     }
@@ -174,6 +174,12 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 {
     if(dem->needsRedraw())
     {
+        return;
+    }
+
+    if(!doHillshading())
+    {
+        QThread::msleep(200);
         return;
     }
 
@@ -277,7 +283,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                 pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
                 pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
-                if(getHillshading())
+                if(doHillshading())
                 {
                     QImage img(imgw,imgh,QImage::Format_Indexed8);
                     img.setColorTable(graytable);

@@ -45,6 +45,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         const QFont& getMapFont(){return mapFont;}
 
     private slots:
+        void slotAbout();
+        void slotHelp();
         void slotAddCanvas();
         void slotTabCloseRequest(int i);
         void slotCurrentTabCanvas(int i);

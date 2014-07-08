@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -83,9 +83,17 @@
      <string>Window</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>?</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionHelp"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menuWindow"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dockMaps">
@@ -270,6 +278,24 @@
    </property>
    <property name="text">
     <string>Setup DEM Paths</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Info.png</normaloff>:/icons/32x32/Info.png</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>

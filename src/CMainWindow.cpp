@@ -26,6 +26,7 @@
 #include "dem/CDemDraw.h"
 #include "units/IUnit.h"
 #include "version.h"
+#include "CAbout.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -59,6 +60,8 @@ CMainWindow::CMainWindow()
     // end ---- restore window geometry -----
 
 
+    connect(actionAbout, SIGNAL(triggered()), this, SLOT(slotAbout()));
+    connect(actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
     connect(actionAddMapWorkspace, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
@@ -196,6 +199,17 @@ void CMainWindow::addDemList(CDemList * list, const QString &name)
 {
     tabDem->addTab(list,name);
 }
+void CMainWindow::slotAbout()
+{
+    CAbout dlg(this);
+    dlg.exec();
+}
+
+void CMainWindow::slotHelp()
+{
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/maproom/wiki/DocMain"));
+}
+
 
 void CMainWindow::slotAddCanvas()
 {

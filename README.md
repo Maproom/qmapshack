@@ -7,10 +7,9 @@ You need a working mercurial, g++, cmake and QT5 installation to compile MapRoom
         make
 
 
-* Dependencies
+Dependencies
 
-    Next to QT5 you will need the development packages of::
+Next to QT5 you will need the development packages of::
 
-        Proj4
-        GDAL
-
+* Proj4
+* GDAL

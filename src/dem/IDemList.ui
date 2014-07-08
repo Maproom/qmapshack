@@ -115,7 +115,7 @@
        <item>
         <widget class="QLabel" name="labelHelpFillMapList">
          <property name="text">
-          <string>To add files with elevation data use File-&gt;Setup DEM Pathes. </string>
+          <string>To add files with elevation data use File-&gt;Setup DEM Paths. </string>
          </property>
          <property name="alignment">
           <set>Qt::AlignJustify|Qt::AlignVCenter</set>

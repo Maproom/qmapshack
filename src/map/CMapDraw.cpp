@@ -187,7 +187,7 @@ void CMapDraw::buildMapList()
 
             CMapItem * item = new CMapItem(*mapList, this);
 
-            item->setText(0,fi.baseName());
+            item->setText(0,fi.baseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 

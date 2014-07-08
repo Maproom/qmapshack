@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
-    <height>414</height>
+    <width>450</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Setup msap paths</string>
+   <string>Setup map paths</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

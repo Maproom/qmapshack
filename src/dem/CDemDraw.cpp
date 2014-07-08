@@ -124,7 +124,7 @@ void CDemDraw::buildMapList()
 
             CDemItem * item = new CDemItem(*demList, this);
 
-            item->setText(0,fi.baseName());
+            item->setText(0,fi.baseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 

@@ -59,8 +59,8 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSetupMapPathes"/>
-    <addaction name="actionSetupDEMPathes"/>
+    <addaction name="actionSetupMapPaths"/>
+    <addaction name="actionSetupDEMPaths"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -215,13 +215,16 @@
     <string>Flip Mouse Wheel</string>
    </property>
   </action>
-  <action name="actionSetupMapPathes">
+  <action name="actionSetupMapPaths">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/32x32/FolderMap.png</normaloff>:/icons/32x32/FolderMap.png</iconset>
    </property>
    <property name="text">
-    <string>Setup Map Pathes</string>
+    <string>Setup Map Paths</string>
+   </property>
+   <property name="toolTip">
+    <string>Setup Map Paths</string>
    </property>
   </action>
   <action name="actionPOIText">
@@ -260,13 +263,13 @@
     <string>Map Tool Tip</string>
    </property>
   </action>
-  <action name="actionSetupDEMPathes">
+  <action name="actionSetupDEMPaths">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/32x32/FolderDEM.png</normaloff>:/icons/32x32/FolderDEM.png</iconset>
    </property>
    <property name="text">
-    <string>Setup DEM Pathes</string>
+    <string>Setup DEM Paths</string>
    </property>
   </action>
  </widget>

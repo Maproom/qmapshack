@@ -67,8 +67,8 @@ CMainWindow::CMainWindow()
     connect(actionNightDay, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
-    connect(actionSetupMapPathes, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
-    connect(actionSetupDEMPathes, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
+    connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
+    connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));

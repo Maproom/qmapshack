@@ -36,6 +36,22 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     connect(map, SIGNAL(sigScaleChanged(QPointF)), this, SLOT(slotScaleChanged(QPointF)));
     connect(toolSetMinScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMinScale(bool)));
     connect(toolSetMaxScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMaxScale(bool)));
+
+    connect(checkPolygons, SIGNAL(toggled(bool)), mapfile, SLOT(slotSetShowPolygons(bool)));
+    connect(checkPolylines, SIGNAL(toggled(bool)), mapfile, SLOT(slotSetShowPolylines(bool)));
+    connect(checkPoints, SIGNAL(toggled(bool)), mapfile, SLOT(slotSetShowPOIs(bool)));
+    connect(checkPolygons, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
+    connect(checkPolylines, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
+    connect(checkPoints, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
+
+    if(mapfile->hasFeatureVectorItems())
+    {
+        frameVectorItems->show();
+    }
+    else
+    {
+        frameVectorItems->hide();
+    }
 }
 
 CMapPropSetup::~CMapPropSetup()
@@ -54,6 +70,9 @@ void CMapPropSetup::slotPropertiesChanged()
     sliderOpacity->blockSignals(true);
     toolSetMaxScale->blockSignals(true);
     toolSetMinScale->blockSignals(true);
+    checkPolygons->blockSignals(true);
+    checkPolylines->blockSignals(true);
+    checkPoints->blockSignals(true);
 
     sliderOpacity->setValue(mapfile->getOpacity());
     qreal minScale = mapfile->getMinScale();
@@ -63,9 +82,17 @@ void CMapPropSetup::slotPropertiesChanged()
 
     updateScaleLabel();
 
+    checkPolygons->setChecked(mapfile->getShowPolygons());
+    checkPolylines->setChecked(mapfile->getShowPolylines());
+    checkPoints->setChecked(mapfile->getShowPOIs());
+
     sliderOpacity->blockSignals(false);
     toolSetMaxScale->blockSignals(false);
     toolSetMinScale->blockSignals(false);
+    checkPolygons->blockSignals(false);
+    checkPolylines->blockSignals(false);
+    checkPoints->blockSignals(false);
+
 }
 
 void CMapPropSetup::slotScaleChanged(const QPointF& s)

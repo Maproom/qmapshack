@@ -66,7 +66,7 @@ void CDemPropSetup::slotPropertiesChanged()
 
     updateScaleLabel();
 
-    checkHillshading->setChecked(demfile->getHillshading());
+    checkHillshading->setChecked(demfile->doHillshading());
 
     sliderOpacity->blockSignals(false);
     toolSetMaxScale->blockSignals(false);

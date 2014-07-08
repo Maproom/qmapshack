@@ -26,7 +26,9 @@ IDrawObject::IDrawObject(QObject *parent)
     , opacity(100)
     , minScale(NOFLOAT)
     , maxScale(NOFLOAT)
-
+    , showPolygons(true)
+    , showPolylines(true)
+    , showPOIs(true)
 {
 
 }
@@ -41,6 +43,9 @@ void IDrawObject::saveConfig(QSettings& cfg)
     cfg.setValue("opacity", getOpacity());
     cfg.setValue("minScale", getMinScale());
     cfg.setValue("maxScale", getMaxScale());
+    cfg.setValue("showPolygons", getShowPolygons());
+    cfg.setValue("showPolylines", getShowPolylines());
+    cfg.setValue("showPOIs", getShowPOIs());
 }
 
 void IDrawObject::loadConfig(QSettings& cfg)
@@ -48,6 +53,9 @@ void IDrawObject::loadConfig(QSettings& cfg)
     slotSetOpacity(cfg.value("opacity", getOpacity()).toDouble());
     setMinScale(cfg.value("minScale", getMinScale()).toDouble());
     setMaxScale(cfg.value("maxScale", getMaxScale()).toDouble());
+    slotSetShowPolygons(cfg.value("showPolygons", getShowPolygons()).toBool());
+    slotSetShowPolylines(cfg.value("showPolylines", getShowPolylines()).toBool());
+    slotSetShowPOIs(cfg.value("showPOIs", getShowPOIs()).toBool());
 
     emit sigPropertiesChanged();
 }

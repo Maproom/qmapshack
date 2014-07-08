@@ -46,7 +46,7 @@ IDem::IDem(CDemDraw *parent)
     , dem(parent)
     , pjsrc(0)
     , isActivated(false)
-    , doHillshading(false)
+    , bHillshading(false)
 {
     slotSetOpacity(50);
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
@@ -69,14 +69,14 @@ void IDem::saveConfig(QSettings& cfg)
 {
     IDrawObject::saveConfig(cfg);
 
-    cfg.setValue("doHillshading",doHillshading);
+    cfg.setValue("doHillshading",bHillshading);
 }
 
 void IDem::loadConfig(QSettings& cfg)
 {
     IDrawObject::loadConfig(cfg);
 
-    doHillshading = cfg.value("doHillshading",doHillshading).toBool();
+    bHillshading = cfg.value("doHillshading",bHillshading).toBool();
 }
 
 

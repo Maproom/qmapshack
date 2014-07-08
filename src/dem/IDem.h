@@ -57,10 +57,10 @@ class IDem : public IDrawObject
          */
         virtual IDemProp * getSetup();
 
-        bool getHillshading(){return doHillshading;}
+        bool doHillshading(){return bHillshading;}
 
     public slots:
-        void slotSetHillshading(bool yes){doHillshading = yes;}
+        void slotSetHillshading(bool yes){bHillshading = yes;}
 
     protected:
 
@@ -98,8 +98,6 @@ class IDem : public IDrawObject
         /// scale [px/m]
         double yscale;
 
-        double xrot;
-        double yrot;
 
 
         /**
@@ -113,7 +111,7 @@ class IDem : public IDrawObject
         QVector<QRgb> graytable;
 
     private:
-        bool doHillshading;
+        bool bHillshading;
 
 
 };

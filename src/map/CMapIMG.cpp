@@ -120,7 +120,7 @@ inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 
 
 CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
-    : IMap(parent)
+    : IMap(eFeatVisibility|eFeatVectorItems,parent)
     , filename(filename)
     , transparent(false)
     , fm(CMainWindow::self().getMapFont())
@@ -1116,10 +1116,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf)
     }
 
     QPainter p(&buf.image);
-    if(getOpacity() != 0)
-    {
-        p.setOpacity(getOpacity()/100.0);
-    }
+    p.setOpacity(getOpacity()/100.0);
     USE_ANTI_ALIASING(p,true);
 
     QFont f = CMainWindow::self().getMapFont();
@@ -1389,7 +1386,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
     CGarminPolygon p;
 
     // decode points
-    if(subdiv.hasPoints && !fast)
+    if(subdiv.hasPoints && !fast && getShowPOIs())
     {
         pData = pRawData + opnt;
         pEnd  = pRawData + (oidx ? oidx : opline ? opline : opgon ? opgon : subdiv.rgn_end);
@@ -1415,7 +1412,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
     }
 
     // decode indexed points
-    if(subdiv.hasIdxPoints && !fast)
+    if(subdiv.hasIdxPoints && !fast && getShowPOIs())
     {
         pData = pRawData + oidx;
         pEnd  = pRawData + (opline ? opline : opgon ? opgon : subdiv.rgn_end);
@@ -1441,7 +1438,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
     }
 
     // decode polylines
-    if(subdiv.hasPolylines && !fast)
+    if(subdiv.hasPolylines && !fast && getShowPolylines())
     {
         CGarminPolygon::cnt = 0;
         pData = pRawData + opline;
@@ -1470,7 +1467,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
     }
 
     // decode polygons
-    if(subdiv.hasPolygons && (getOpacity() != 0))
+    if(subdiv.hasPolygons && getShowPolygons())
     {
         CGarminPolygon::cnt = 0;
         pData = pRawData + opgon;
@@ -1510,7 +1507,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
     //         qDebug() << "point len: " << hex << subdiv.lengthPoints2 << dec << subdiv.lengthPoints2;
     //         qDebug() << "point end: " << hex << subdiv.lengthPoints2 + subdiv.offsetPoints2;
 
-    if(subdiv.lengthPolygons2)
+    if(subdiv.lengthPolygons2 && getShowPolygons())
     {
         pData   = pRawData + subdiv.offsetPolygons2;
         pEnd    = pData + subdiv.lengthPolygons2;
@@ -1535,7 +1532,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
         }
     }
 
-    if(subdiv.lengthPolylines2 && !fast)
+    if(subdiv.lengthPolylines2 && !fast && getShowPolylines())
     {
         pData   = pRawData + subdiv.offsetPolylines2;
         pEnd    = pData + subdiv.lengthPolylines2;
@@ -1559,7 +1556,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
         }
     }
 
-    if(subdiv.lengthPoints2 && !fast)
+    if(subdiv.lengthPoints2 && !fast && getShowPOIs())
     {
         pData   = pRawData + subdiv.offsetPoints2;
         pEnd    = pData + subdiv.lengthPoints2;

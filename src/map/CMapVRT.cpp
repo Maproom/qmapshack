@@ -26,6 +26,9 @@
 #include <QtWidgets>
 
 #define TILELIMIT 2500
+#define TILESIZEX 64
+#define TILESIZEY 64
+
 
 CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility,parent)
@@ -233,8 +236,8 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     if(bottom > ysize_px) bottom = ysize_px;
     if(bottom < 0) bottom = 0;
 
-    qreal imgw = 64;
-    qreal imgh = 64;
+    qreal imgw = TILESIZEX;
+    qreal imgh = TILESIZEY;
     qreal dx =  imgw;
     qreal dy =  imgh;
 

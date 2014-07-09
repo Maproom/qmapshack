@@ -27,6 +27,8 @@
 #include <QtWidgets>
 
 #define TILELIMIT 30000
+#define TILESIZEX 64
+#define TILESIZEY 64
 
 CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     : IDem(parent)
@@ -225,8 +227,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
     qDebug() << left << top << (right - left) << (bottom - top);
 
-    qreal imgw = 64;
-    qreal imgh = 64;
+    qreal imgw = TILESIZEX;
+    qreal imgh = TILESIZEY;
     qreal w =  imgw;
     qreal h =  imgh;
 

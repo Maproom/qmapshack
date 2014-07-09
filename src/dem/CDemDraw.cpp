@@ -24,7 +24,7 @@
 #include "dem/CDemItem.h"
 #include "dem/CDemPathSetup.h"
 #include "units/IUnit.h"
-#include "CSettings.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 

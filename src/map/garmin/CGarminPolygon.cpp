@@ -22,7 +22,7 @@
   Konstantin Galichsky (kg@geopainting.com), http://www.geopainting.com
 
 **********************************************************************************************/
-#include "Platform.h"
+#include "helpers/Platform.h"
 #include "CGarminPolygon.h"
 #include "Garmin.h"
 

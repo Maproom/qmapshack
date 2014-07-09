@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "CAppOpts.h"
+#include "helpers/CAppOpts.h"
 
 #include <QApplication>
 #include <CGetOpt.h>

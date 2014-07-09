@@ -59,13 +59,15 @@ set( SRCS
 )
 
 set( HDRS
+
     version.h
     GeoMath.h
-    CFileExt.h
-    CAppOpts.h
-    CSettings.h
     CMainWindow.h
     CAbout.h
+    helpers/Platform.h
+    helpers/CFileExt.h
+    helpers/CAppOpts.h
+    helpers/CSettings.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h

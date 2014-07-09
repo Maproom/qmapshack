@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "grid/CGrid.h"
-#include "CSettings.h"
+#include "helpers/CSettings.h"
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "map/CMapDraw.h"

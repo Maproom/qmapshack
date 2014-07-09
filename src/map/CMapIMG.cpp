@@ -23,8 +23,8 @@
 #include "map/garmin/CGarminTyp.h"
 #include "map/CMapDraw.h"
 #include "units/IUnit.h"
-#include "CFileExt.h"
-#include "Platform.h"
+#include "helpers/CFileExt.h"
+#include "helpers/Platform.h"
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 

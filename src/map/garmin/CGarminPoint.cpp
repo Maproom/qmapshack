@@ -24,7 +24,7 @@
 **********************************************************************************************/
 #include "CGarminPoint.h"
 #include "Garmin.h"
-#include "Platform.h"
+#include "helpers/Platform.h"
 
 #include <QtCore>
 

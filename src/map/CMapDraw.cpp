@@ -23,7 +23,7 @@
 #include "map/CMapPathSetup.h"
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "CSettings.h"
+#include "helpers/CSettings.h"
 
 #include <QtGui>
 #include <QtWidgets>

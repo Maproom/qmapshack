@@ -181,7 +181,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
     if(!doHillshading())
     {
-        QThread::msleep(200);
+        QThread::msleep(100);
         return;
     }
 

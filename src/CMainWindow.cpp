@@ -122,6 +122,7 @@ CMainWindow::CMainWindow()
 
     menuWindow->addAction(dockMaps->toggleViewAction());
     menuWindow->addAction(dockDem->toggleViewAction());
+    menuWindow->addAction(dockGis->toggleViewAction());
 }
 
 CMainWindow::~CMainWindow()

@@ -24,6 +24,7 @@
 class CMapDraw;
 class CGrid;
 class CDemDraw;
+class CGisDraw;
 class QSettings;
 class QPointF;
 class IMouse;
@@ -102,6 +103,8 @@ class CCanvas : public QWidget
         CGrid * grid;
 
         CDemDraw * dem;
+
+        CGisDraw * gis;
 
         /// the current point of focus (usually the canvas center)
         QPointF posFocus;

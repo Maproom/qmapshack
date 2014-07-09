@@ -26,6 +26,7 @@
 #include "grid/CGridSetup.h"
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
+#include "gis/CGisDraw.h"
 
 
 #include <QtWidgets>
@@ -55,10 +56,12 @@ CCanvas::CCanvas(QWidget *parent)
     map     = new CMapDraw(this);
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
+    gis     = new CGisDraw(this);
     mouse   = new CMouseNormal(this);
 
     connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
     connect(dem, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
+    connect(gis, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
 
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);
@@ -117,6 +120,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     QSize s = e->size();
     if(map) map->resize(s);
     if(dem) dem->resize(s);
+    if(gis) gis->resize(s);
 
     QWidget::resizeEvent(e);
 
@@ -152,6 +156,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
     map->draw(p, needsRedraw, posFocus, r);
     dem->draw(p, needsRedraw, posFocus, r);
+    gis->draw(p, needsRedraw, posFocus, r);
 
     // restore coordinate system to default
     p.resetTransform();
@@ -197,6 +202,7 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     map->convertPx2Rad(pt1);
     map->zoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
     dem->zoom(map->zoom());
+    gis->zoom(map->zoom());
     map->convertRad2Px(pt1);
 
     map->convertRad2Px(posFocus);
@@ -233,12 +239,14 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
     {
         map->zoom(true, needsRedraw);
         dem->zoom(map->zoom());
+        gis->zoom(map->zoom());
         doUpdate = true;
     }
     else if(e->key() == Qt::Key_Minus)
     {
         map->zoom(false, needsRedraw);
         dem->zoom(map->zoom());
+        gis->zoom(map->zoom());
         doUpdate = true;
     }
     else if(e->key() == Qt::Key_Up)
@@ -460,5 +468,6 @@ void CCanvas::setProjection(const QString& proj)
 {
     map->setProjection(proj);
     dem->setProjection(proj);
+    gis->setProjection(proj);
 }
 

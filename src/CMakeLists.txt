@@ -56,6 +56,11 @@ set( SRCS
     grid/mitab.cpp
     mouse/IMouse.cpp
     mouse/CMouseNormal.cpp
+    gis/CGisDraw.cpp
+    gis/IGisItem.cpp
+    gis/CGisItemWpt.cpp
+    gis/CGisItemTrk.cpp
+    gis/CGisItemRte.cpp
 )
 
 set( HDRS
@@ -110,6 +115,11 @@ set( HDRS
     grid/mitab.h
     mouse/IMouse.h
     mouse/CMouseNormal.h
+    gis/CGisDraw.h
+    gis/IGisItem.h
+    gis/CGisItemWpt.h
+    gis/CGisItemTrk.h
+    gis/CGisItemRte.h
 )
 
 set( UIS

@@ -25,7 +25,7 @@
 #include <ogr_spatialref.h>
 #include <QtWidgets>
 
-#define TILELIMIT 5000
+#define TILELIMIT 2500
 
 CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility,parent)
@@ -266,7 +266,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     p.translate(-pp);
 
 
-    qDebug() << imgw << dx;
+    qDebug() << imgw << dx << nTiles;
     // limit number of tiles to keep performance
     if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {
@@ -317,9 +317,9 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
 
                     err = pBand->RasterIO(GF_Read
                         ,qRound(x),qRound(y)
-                        ,dx_used,dy_used
+                        ,qRound(dx_used),qRound(dy_used)
                         ,img.bits()
-                        ,imgw_used,imgh_used
+                        ,qRound(imgw_used),qRound(imgh_used)
                         ,GDT_Byte,0,0);
                 }
 

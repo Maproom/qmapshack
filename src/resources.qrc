@@ -18,6 +18,7 @@
         <file>icons/8x8/bullet_red.png</file>
         <file>icons/8x8/bullet_white.png</file>
         <file>icons/8x8/bullet_yellow.png</file>
+
         <file>icons/16x16/2DFix.png</file>
         <file>icons/16x16/3DFix.png</file>
         <file>icons/16x16/Add.png</file>
@@ -57,6 +58,8 @@
         <file>icons/16x16/ToTop.png</file>
         <file>icons/16x16/ToolTip.png</file>
         <file>icons/16x16/Up.png</file>
+        <file>icons/16x16/SetupMapWorkspace.png</file>
+
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
@@ -96,6 +99,8 @@
         <file>icons/32x32/ToTop.png</file>
         <file>icons/32x32/ToolTip.png</file>
         <file>icons/32x32/Up.png</file>
+        <file>icons/32x32/SetupMapWorkspace.png</file>
+
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
@@ -135,6 +140,8 @@
         <file>icons/48x48/ToTop.png</file>
         <file>icons/48x48/ToolTip.png</file>
         <file>icons/48x48/Up.png</file>
+        <file>icons/48x48/SetupMapWorkspace.png</file>
+
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMoveMap.png</file>

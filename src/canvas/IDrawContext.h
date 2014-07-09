@@ -120,6 +120,20 @@ class IDrawContext : public QThread
          */
         QString getProjection();
 
+        /**
+           @brief Set the projection of the draw context
+
+           This will just create a new source projection object (pjsrc). Most likely you want to
+           overide this method to:
+
+           1) save what ever has to be saved
+           2) call this method
+           3) restore everything with the new projection
+
+           @param proj a Proj4 projection string
+         */
+        virtual void setProjection(const QString& proj);
+
     signals:
         void sigCanvasUpdate();
         void sigStartThread();

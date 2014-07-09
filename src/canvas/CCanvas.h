@@ -58,6 +58,10 @@ class CCanvas : public QWidget
         void setupGrid();
         void convertGridPos2Str(const QPointF& pos, QString& str);
 
+        void setup();
+        QString getProjection();
+        void    setProjection(const QString& proj);
+
         void moveMap(const QPointF &delta);
         void displayInfo(const QPoint& px);
 

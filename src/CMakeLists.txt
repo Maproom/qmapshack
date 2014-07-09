@@ -16,6 +16,7 @@ set( SRCS
     CMainWindow.cpp
     CAbout.cpp
     canvas/CCanvas.cpp
+    canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
     canvas/IDrawObject.cpp
     dem/IDem.cpp
@@ -66,6 +67,7 @@ set( HDRS
     CMainWindow.h
     CAbout.h
     canvas/CCanvas.h
+    canvas/CCanvasSetup.h
     canvas/IDrawContext.h
     canvas/IDrawObject.h
     dem/IDem.h
@@ -111,6 +113,7 @@ set( HDRS
 set( UIS
     IMainWindow.ui
     IAbout.ui
+    canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui
     dem/IDemPropSetup.ui

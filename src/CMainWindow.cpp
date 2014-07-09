@@ -72,6 +72,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
     connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
     connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
+    connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
@@ -394,4 +395,14 @@ void CMainWindow::slotSetupMapPath()
 void CMainWindow::slotSetupDemPath()
 {
     CDemDraw::setupDemPath();
+}
+
+void CMainWindow::slotSetupMapWks()
+{
+    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    if(canvas == 0)
+    {
+        return;
+    }
+    canvas->setup();
 }

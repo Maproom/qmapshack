@@ -68,6 +68,8 @@ class CMapDraw : public IDrawContext
         */
         void getToolTip(const QPoint& px, QString& str);
 
+        void setProjection(const QString& proj);
+
         static void setupMapPath();
         static void saveMapPath(QSettings &cfg);
         static void loadMapPath(QSettings &cfg);

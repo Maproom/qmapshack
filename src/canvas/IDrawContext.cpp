@@ -170,6 +170,16 @@ QString IDrawContext::getProjection()
     return pj_get_def(pjsrc,0);
 }
 
+void IDrawContext::setProjection(const QString& proj)
+{
+    if(pjsrc != 0)
+    {
+        pj_free(pjsrc);
+    }
+
+    pjsrc = pj_init_plus(proj.toLatin1());
+}
+
 bool IDrawContext::needsRedraw()
 {
     bool res = false;

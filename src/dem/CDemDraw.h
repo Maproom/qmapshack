@@ -50,6 +50,8 @@ class CDemDraw : public IDrawContext
 
         qreal getElevation(const QPointF& pos);
 
+        void setProjection(const QString& proj);
+
         static void setupDemPath();
         static void saveDemPath(QSettings &cfg);
         static void loadDemPath(QSettings &cfg);

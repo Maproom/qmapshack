@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "canvas/CCanvasSetup.h"
 #include "GeoMath.h"
 #include "map/CMapDraw.h"
 #include "dem/CDemDraw.h"
@@ -68,12 +69,15 @@ CCanvas::CCanvas(QWidget *parent)
     mapLoadIndicator = new QLabel(this);
     mapLoadIndicator->setMovie(loadIndicator1);
     loadIndicator1->start();
+    mapLoadIndicator->show();
 
     loadIndicator2 = new QMovie(this);
     loadIndicator2->setFileName("://animation/loader2.gif");
     demLoadIndicator = new QLabel(this);
     demLoadIndicator->setMovie(loadIndicator2);
     loadIndicator2->start();
+    demLoadIndicator->show();
+
 
 
     connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));
@@ -94,6 +98,7 @@ void CCanvas::saveConfig(QSettings& cfg)
     dem->saveConfig(cfg);
     grid->saveConfig(cfg);
     cfg.setValue("posFocus", posFocus);
+    cfg.setValue("proj", map->getProjection());
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
@@ -102,6 +107,7 @@ void CCanvas::loadConfig(QSettings& cfg)
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
     posFocus = cfg.value("posFocus", posFocus).toPointF();
+    setProjection(cfg.value("proj", map->getProjection()).toString());
 }
 
 void CCanvas::resizeEvent(QResizeEvent * e)
@@ -393,6 +399,7 @@ void CCanvas::slotTriggerCompleteUpdate()
     update();
 }
 
+
 void CCanvas::slotToolTip()
 {
     QString str;
@@ -437,3 +444,21 @@ void CCanvas::displayInfo(const QPoint& px)
     }
     QToolTip::hideText();
 }
+
+void CCanvas::setup()
+{
+    CCanvasSetup dlg(this);
+    dlg.exec();
+}
+
+QString CCanvas::getProjection()
+{
+    return map->getProjection();
+}
+
+void CCanvas::setProjection(const QString& proj)
+{
+    map->setProjection(proj);
+    dem->setProjection(proj);
+}
+

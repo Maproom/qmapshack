@@ -266,7 +266,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     p.translate(-pp);
 
 
-    qDebug() << imgw << dx << nTiles;
+//    qDebug() << imgw << dx << nTiles;
     // limit number of tiles to keep performance
     if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {

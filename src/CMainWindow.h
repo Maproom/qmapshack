@@ -58,6 +58,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotSetupGrid();
         void slotSetupMapPath();
         void slotSetupDemPath();
+        void slotSetupMapWks();
 
     private:
         friend int main(int argc, char ** argv);

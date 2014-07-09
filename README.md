@@ -2,7 +2,7 @@ You need a working mercurial, g++, cmake and QT5 installation to compile MapRoom
 
         hg clone https://bitbucket.org/maproom/maproom MapRoom
         mkdir build_MapRoom
-        cd MapRoom
+        cd build_MapRoom
         ccmake ../MapRoom
         make
 

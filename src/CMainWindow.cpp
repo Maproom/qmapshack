@@ -27,6 +27,7 @@
 #include "units/IUnit.h"
 #include "version.h"
 #include "CAbout.h"
+#include "gis/CGisWidget.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -39,6 +40,9 @@ CMainWindow::CMainWindow()
     qDebug() << WHAT_STR;
     setupUi(this);
     setWindowTitle(WHAT_STR);
+
+    gisWidget = new CGisWidget(this);
+    dockGis->setWidget(gisWidget);
 
     IUnit::self().setUnitType(IUnit::eTypeMetric, this);
 
@@ -123,6 +127,7 @@ CMainWindow::CMainWindow()
     menuWindow->addAction(dockMaps->toggleViewAction());
     menuWindow->addAction(dockDem->toggleViewAction());
     menuWindow->addAction(dockGis->toggleViewAction());
+
 }
 
 CMainWindow::~CMainWindow()

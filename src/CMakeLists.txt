@@ -61,6 +61,9 @@ set( SRCS
     gis/CGisItemWpt.cpp
     gis/CGisItemTrk.cpp
     gis/CGisItemRte.cpp
+    gis/CGisWidget.cpp
+    gis/CGisListDB.cpp
+    gis/CGisListWks.cpp
 )
 
 set( HDRS
@@ -120,6 +123,9 @@ set( HDRS
     gis/CGisItemWpt.h
     gis/CGisItemTrk.h
     gis/CGisItemRte.h
+    gis/CGisWidget.h
+    gis/CGisListDB.h
+    gis/CGisListWks.h
 )
 
 set( UIS
@@ -134,6 +140,7 @@ set( UIS
     map/IMapProp.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
+    gis/IGisWidget.ui
 )
 
 set( RCS

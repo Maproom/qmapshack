@@ -25,6 +25,7 @@
 class CMapList;
 class CDemList;
 class QLabel;
+class CGisWidget;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -72,6 +73,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         QLabel * lblPosGrid;
 
         QFont mapFont;
+
+        CGisWidget * gisWidget;
 };
 
 #endif //CMAINWINDOW_H

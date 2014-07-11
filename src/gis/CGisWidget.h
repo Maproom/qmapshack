@@ -29,6 +29,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         static CGisWidget& self(){return *pSelf;}
         virtual ~CGisWidget();
 
+        void loadGpx(const QString& filename);
+
 
     private:
         friend class CMainWindow;

@@ -77,7 +77,10 @@ CMainWindow::CMainWindow()
     connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
     connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
     connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
+    connect(actionSaveGISData, SIGNAL(triggered()), this, SLOT(slotSaveGISData()));
+    connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
+
 
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
     connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
@@ -411,4 +414,29 @@ void CMainWindow::slotSetupMapWks()
         return;
     }
     canvas->setup();
+}
+
+void CMainWindow::slotLoadGISData()
+{
+    SETTINGS;
+    QString path = cfg.value("Paths/lastGpxPath", QDir::homePath()).toString();
+
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, "*.gpx");
+
+    if(filenames.isEmpty())
+    {
+        return;
+    }
+    foreach(const QString& filename, filenames)
+    {
+        gisWidget->loadGpx(filename);
+    }
+
+    path = QFileInfo(filenames.first()).absolutePath();
+    cfg.setValue("Paths/lastGpxPath", path);
+}
+
+void CMainWindow::slotSaveGISData()
+{
+
 }

@@ -16,23 +16,16 @@
 
 **********************************************************************************************/
 
-#include "CGisWidget.h"
+#include "gis/CGisProject.h"
+#include "gis/CGisListWks.h"
 
-CGisWidget * CGisWidget::pSelf = 0;
-
-CGisWidget::CGisWidget(QWidget *parent)
-    : QWidget(parent)
-{
-    pSelf = this;
-    setupUi(this);
-}
-
-CGisWidget::~CGisWidget()
+CGisProject::CGisProject(CGisListWks, const QString &gpx)
 {
 
 }
 
-void CGisWidget::loadGpx(const QString& filename)
+CGisProject::~CGisProject()
 {
 
 }
+

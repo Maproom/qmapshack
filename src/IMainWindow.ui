@@ -52,13 +52,16 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionLoadGISData"/>
+    <addaction name="actionSaveGISData"/>
+    <addaction name="separator"/>
     <addaction name="actionSetupMapPaths"/>
     <addaction name="actionSetupDEMPaths"/>
    </widget>
@@ -324,6 +327,24 @@
    </property>
    <property name="text">
     <string>Setup Map Workspace</string>
+   </property>
+  </action>
+  <action name="actionLoadGISData">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/LoadGIS.png</normaloff>:/icons/32x32/LoadGIS.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load GIS Data</string>
+   </property>
+  </action>
+  <action name="actionSaveGISData">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/SaveGIS.png</normaloff>:/icons/32x32/SaveGIS.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save GIS Data</string>
    </property>
   </action>
  </widget>

@@ -64,6 +64,7 @@ set( SRCS
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
+    gis/CGisProject.cpp
 )
 
 set( HDRS
@@ -126,6 +127,7 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
+    gis/CGisProject.h
 )
 
 set( UIS

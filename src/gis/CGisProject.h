@@ -16,23 +16,19 @@
 
 **********************************************************************************************/
 
-#include "CGisWidget.h"
+#ifndef CGISPROJECT_H
+#define CGISPROJECT_H
 
-CGisWidget * CGisWidget::pSelf = 0;
+#include <QTreeWidgetItem>
 
-CGisWidget::CGisWidget(QWidget *parent)
-    : QWidget(parent)
+class CGisListWks;
+
+class CGisProject : public QTreeWidgetItem
 {
-    pSelf = this;
-    setupUi(this);
-}
+    public:
+        CGisProject(CGisListWks, const QString& gpx);
+        virtual ~CGisProject();
+};
 
-CGisWidget::~CGisWidget()
-{
+#endif //CGISPROJECT_H
 
-}
-
-void CGisWidget::loadGpx(const QString& filename)
-{
-
-}

@@ -19,11 +19,29 @@
 #ifndef CGISITEMRTE_H
 #define CGISITEMRTE_H
 
-class CGisItemRte
+#include "gis/IGisItem.h"
+
+class CGisItemRte : public IGisItem
 {
     public:
         CGisItemRte();
         virtual ~CGisItemRte();
+
+    private:
+        typedef wpt_t rtept_t;
+
+        QString key;
+        // -- all gpx tags - start
+        QString name;
+        QString cmt;
+        QString desc;
+        QString src;
+        QStringList links;
+        quint64 number;
+        QString type;
+        QList<rtept_t> rtepts;
+        // -- all gpx tags - stop
+        QMap<QString, QVariant> extensions;
 };
 
 #endif //CGISITEMRTE_H

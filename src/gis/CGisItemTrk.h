@@ -19,11 +19,36 @@
 #ifndef CGISITEMTRK_H
 #define CGISITEMTRK_H
 
-class CGisItemTrk
+#include "gis/IGisItem.h"
+
+class CGisItemTrk : public IGisItem
 {
     public:
         CGisItemTrk();
         virtual ~CGisItemTrk();
+
+    private:
+        typedef wpt_t trkpt_t;
+
+        struct trkseg_t
+        {
+            QVector<trkpt_t> trkpts;
+            QMap<QString, QVariant> extensions;
+        };
+
+
+        QString key;
+        // -- all gpx tags - start
+        QString name;
+        QString cmt;
+        QString desc;
+        QString src;
+        QStringList links;
+        quint64 number;
+        QString type;
+        QVector<trkseg_t> trksegs;
+        // -- all gpx tags - stop
+        QMap<QString, QVariant> extensions;
 };
 
 #endif //CGISITEMTRK_H

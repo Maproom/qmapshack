@@ -21,6 +21,12 @@
 
 #include <QTreeWidgetItem>
 
+#include <QDateTime>
+#include <QString>
+#include <QStringList>
+#include <QMap>
+#include <QVariant>
+
 class IGisItem : public QTreeWidgetItem
 {
     public:
@@ -28,6 +34,33 @@ class IGisItem : public QTreeWidgetItem
         virtual ~IGisItem();
 
     protected:
+
+        struct wpt_t
+        {
+            // -- all gpx tags - start
+            qreal lat;
+            qreal lon;
+            qint32 ele;
+            QDateTime time;
+            qint32 magvar;
+            qint32 geoidheight;
+            QString name;
+            QString cmt;
+            QString desc;
+            QString src;
+            QStringList link;
+            QString sym;
+            QString type;
+            QString fix;
+            qint32 sat;
+            qint32 hdop;
+            qint32 vdop;
+            qint32 pdop;
+            qint32 ageofdgpsdata;
+            qint32 dgpsid;
+            // -- all gpx tags - stop
+            QMap<QString, QVariant> extensions;
+        };
 
 };
 

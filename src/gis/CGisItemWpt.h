@@ -19,11 +19,18 @@
 #ifndef CGISITEMWPT_H
 #define CGISITEMWPT_H
 
-class CGisItemWpt
+#include "gis/IGisItem.h"
+
+class CGisItemWpt : public IGisItem
 {
     public:
         CGisItemWpt();
         virtual ~CGisItemWpt();
+
+    private:
+        QString key;
+        wpt_t wpt;
+        QMap<QString, QVariant> extensions;
 };
 
 #endif //CGISITEMWPT_H

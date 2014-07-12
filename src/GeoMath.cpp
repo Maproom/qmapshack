@@ -44,7 +44,7 @@ static bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *d, qreal *m)
 static void GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg)
 {
 
-    deg = fabs(d) + m / 60.0;
+    deg = abs(d) + m / 60.0;
     if(sign) {
         deg = -deg;
     }

@@ -3,7 +3,13 @@ cmake_minimum_required(VERSION 2.8.11)
 project(MapRoom)
 
 # has to be removed later on
+if(LINUX)
 set(CMAKE_PREFIX_PATH /opt/Qt/5.3/gcc_64/)
+else(linux)
+if(WIN32)
+set(CMAKE_PREFIX_PATH C:/Qt5/5.3/msvc2013_64)
+endif(WIN32)
+endif(LINUX)
 
 set(APPLICATION_NAME maproom)
 

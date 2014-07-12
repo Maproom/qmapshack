@@ -22,6 +22,7 @@ else (GDAL_LIBRARIES AND GDAL_INCLUDE_DIRS)
     NAMES
       gdal.h
     PATHS
+        D:/gdal/include
         /usr/include
         /usr/local/include
         /opt/local/include
@@ -49,6 +50,7 @@ else (GDAL_LIBRARIES AND GDAL_INCLUDE_DIRS)
         gdal
         gdal_i
     PATHS
+      D:/gdal/lib
       /usr/lib
       /usr/local/lib
       /opt/local/lib

@@ -21,7 +21,7 @@
 #include "units/IUnit.h"
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
-
+#include "inttypes.h"
 
 #include <QtGui>
 

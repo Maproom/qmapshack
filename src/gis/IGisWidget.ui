@@ -31,6 +31,12 @@
    </property>
    <item>
     <widget class="CGisListWks" name="treeWks">
+     <property name="iconSize">
+      <size>
+       <width>22</width>
+       <height>22</height>
+      </size>
+     </property>
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>
@@ -43,6 +49,12 @@
    </item>
    <item>
     <widget class="CGisListDB" name="treeDB">
+     <property name="iconSize">
+      <size>
+       <width>22</width>
+       <height>22</height>
+      </size>
+     </property>
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>

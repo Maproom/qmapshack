@@ -31,7 +31,6 @@ class CGisItemWpt : public IGisItem
         virtual ~CGisItemWpt();
 
     private:
-        QString key;
         wpt_t wpt;
         QMap<QString, QVariant> extensions;
 };

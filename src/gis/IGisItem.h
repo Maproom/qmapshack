@@ -38,6 +38,8 @@ class IGisItem : public QTreeWidgetItem
         IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();
 
+        const QString& getKey();
+
     protected:
 
         struct link_t
@@ -88,6 +90,10 @@ class IGisItem : public QTreeWidgetItem
         };
 
         void readWpt(const QDomNode& xml, wpt_t &wpt);
+        void genKey();
+
+
+        QString key;
 
 };
 

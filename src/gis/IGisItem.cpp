@@ -132,3 +132,26 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     }
 
 }
+
+void IGisItem::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+
+        QByteArray tmp((const char *)this, sizeof(*this));
+        md5.addData(tmp);
+        key = md5.result().toHex();
+    }
+}
+
+const QString& IGisItem::getKey()
+{
+    if(key.isEmpty())
+    {
+        genKey();
+    }
+    return key;
+
+
+}

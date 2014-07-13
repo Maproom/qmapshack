@@ -26,6 +26,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
 {
 
+    genKey();
 }
 
 CGisItemTrk::~CGisItemTrk()

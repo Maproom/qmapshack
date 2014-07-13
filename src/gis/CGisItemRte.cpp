@@ -25,6 +25,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
 {
 
+    genKey();
 }
 
 CGisItemRte::~CGisItemRte()

@@ -30,6 +30,8 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
 
     setText(0, wpt.name);
     setIcon(0, getWptIconByName(wpt.sym));
+    getKey();
+
 }
 
 CGisItemWpt::~CGisItemWpt()

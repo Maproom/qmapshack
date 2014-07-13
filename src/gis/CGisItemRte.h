@@ -33,7 +33,6 @@ class CGisItemRte : public IGisItem
     private:
         typedef wpt_t rtept_t;
 
-        QString key;
         // -- all gpx tags - start
         QString name;
         QString cmt;

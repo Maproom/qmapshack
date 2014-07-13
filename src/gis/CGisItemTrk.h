@@ -39,8 +39,6 @@ class CGisItemTrk : public IGisItem
             QMap<QString, QVariant> extensions;
         };
 
-
-        QString key;
         // -- all gpx tags - start
         QString name;
         QString cmt;

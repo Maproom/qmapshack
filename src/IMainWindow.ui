@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -190,6 +190,9 @@
    <property name="text">
     <string>Add Map Workspace</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
   </action>
   <action name="actionShowScale">
    <property name="checkable">
@@ -223,6 +226,9 @@
    <property name="text">
     <string>Show Grid</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
   </action>
   <action name="actionSetupGrid">
    <property name="icon">
@@ -231,6 +237,9 @@
    </property>
    <property name="text">
     <string>Setup Grid</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+G</string>
    </property>
   </action>
   <action name="actionFlipMouseWheel">
@@ -337,6 +346,9 @@
    <property name="text">
     <string>Load GIS Data</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
   </action>
   <action name="actionSaveGISData">
    <property name="icon">
@@ -345,6 +357,9 @@
    </property>
    <property name="text">
     <string>Save GIS Data</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

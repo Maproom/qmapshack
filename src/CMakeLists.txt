@@ -7,6 +7,7 @@ set(CMAKE_AUTOMOC ON)
 # Find the QtWidgets library
 find_package(Qt5Widgets)
 find_package(Qt5Core)
+find_package(Qt5Xml)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 
@@ -56,6 +57,7 @@ set( SRCS
     grid/mitab.cpp
     mouse/IMouse.cpp
     mouse/CMouseNormal.cpp
+    gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
     gis/CGisItemWpt.cpp
@@ -119,6 +121,7 @@ set( HDRS
     grid/mitab.h
     mouse/IMouse.h
     mouse/CMouseNormal.h
+    gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h
     gis/CGisItemWpt.h
@@ -174,6 +177,7 @@ add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
 # Use the Widgets module from Qt 5.
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
+    Qt5::Xml
     CGetOpt
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

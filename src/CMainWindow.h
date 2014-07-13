@@ -66,6 +66,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
     private:
         friend int main(int argc, char ** argv);
         CMainWindow();
+        void loadGISData(const QStringList& filenames);
 
         static CMainWindow * pSelf;
 

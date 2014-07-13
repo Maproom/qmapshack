@@ -18,10 +18,42 @@
 
 #include "gis/CGisProject.h"
 #include "gis/CGisListWks.h"
+#include "gis/CGisItemWpt.h"
+#include "gis/CGisItemTrk.h"
+#include "gis/CGisItemRte.h"
 
-CGisProject::CGisProject(CGisListWks, const QString &gpx)
+#include <QtWidgets>
+#include <QtXml>
+
+CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, CGisListWks *parent)
+    : QTreeWidgetItem(parent)
+    , valid(false)
 {
+    int N;
+    xmlGpx = xml.documentElement();
+    if(xmlGpx.tagName() != "gpx")
+    {
+        QMessageBox::critical(0, QObject::tr("Failed to read..."), QObject::tr("Not a GPX file: ") + filename, QMessageBox::Abort);
+        return;
+    }
 
+    setText(0, defaultName);
+    setIcon(0,QIcon("://icons/32x32/GisProject.png"));
+
+    QList<QTreeWidgetItem*> items;
+
+    const QDomNodeList& xmlWpts = xmlGpx.elementsByTagName("wpt");
+    N = xmlWpts.count();
+    for(int n = 0; n < N; ++n)
+    {
+        const QDomNode& xmlWpt = xmlWpts.item(n);
+        QTreeWidgetItem * item = new CGisItemWpt(xmlWpt, this);
+        items << item;
+    }
+
+    addChildren(items);
+
+    valid = true;
 }
 
 CGisProject::~CGisProject()

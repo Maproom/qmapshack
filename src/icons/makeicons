@@ -1,5 +1,5 @@
 #!/bin/bash
 
-for i in *; do inkscape -D -w 16 -h 16 $i --export-png=16x16/`echo $i | sed -e 's/svg$/png/'`; done
-for i in *; do inkscape -D -w 32 -h 32 $i --export-png=32x32/`echo $i | sed -e 's/svg$/png/'`; done
-for i in *; do inkscape -D -w 48 -h 48 $i --export-png=48x48/`echo $i | sed -e 's/svg$/png/'`; done
+for i in *.svg; do inkscape -D -w 16 -h 16 $i --export-png=16x16/`echo $i | sed -e 's/svg$/png/'`; done
+for i in *.svg; do inkscape -D -w 32 -h 32 $i --export-png=32x32/`echo $i | sed -e 's/svg$/png/'`; done
+for i in *.svg; do inkscape -D -w 48 -h 48 $i --export-png=48x48/`echo $i | sed -e 's/svg$/png/'`; done

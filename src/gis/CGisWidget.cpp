@@ -16,7 +16,11 @@
 
 **********************************************************************************************/
 
-#include "CGisWidget.h"
+#include "gis/CGisWidget.h"
+#include "gis/CGisProject.h"
+
+#include <QtWidgets>
+#include <QtXml>
 
 CGisWidget * CGisWidget::pSelf = 0;
 
@@ -34,5 +38,25 @@ CGisWidget::~CGisWidget()
 
 void CGisWidget::loadGpx(const QString& filename)
 {
+    QFile file(filename);
+    file.open(QIODevice::ReadOnly);
+    QDomDocument xml;
 
+    QString msg;
+    int line;
+    int column;
+    if(!xml.setContent(&file, false, &msg, &line, &column))
+    {
+        file.close();
+        QMessageBox::critical(0, QObject::tr("Failed to read..."), QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg), QMessageBox::Abort);
+        return;
+    }
+
+    CGisProject * item = new CGisProject(xml, QFileInfo(filename).baseName(), treeWks);
+    if(!item->isValid())
+    {
+        delete item;
+    }
+
+    file.close();
 }

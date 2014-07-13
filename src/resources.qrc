@@ -61,6 +61,7 @@
         <file>icons/16x16/SetupMapWorkspace.png</file>
         <file>icons/16x16/SaveGIS.png</file>
         <file>icons/16x16/LoadGIS.png</file>
+        <file>icons/16x16/GisProject.png</file>
 
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
@@ -104,6 +105,7 @@
         <file>icons/32x32/SetupMapWorkspace.png</file>
         <file>icons/32x32/SaveGIS.png</file>
         <file>icons/32x32/LoadGIS.png</file>
+        <file>icons/32x32/GisProject.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -147,6 +149,53 @@
         <file>icons/48x48/SetupMapWorkspace.png</file>
         <file>icons/48x48/SaveGIS.png</file>
         <file>icons/48x48/LoadGIS.png</file>
+        <file>icons/48x48/GisProject.png</file>
+
+        <file>icons/cache/32x32/bluepin.png</file>
+        <file>icons/cache/32x32/cito.png</file>
+        <file>icons/cache/32x32/corrected.png</file>
+        <file>icons/cache/32x32/DistIcon.png</file>
+        <file>icons/cache/32x32/dnf.png</file>
+        <file>icons/cache/32x32/down_icon.png</file>
+        <file>icons/cache/32x32/earth.png</file>
+        <file>icons/cache/32x32/event.png</file>
+        <file>icons/cache/32x32/found.png</file>
+        <file>icons/cache/32x32/ftf.png</file>
+        <file>icons/cache/32x32/greenpin.png</file>
+        <file>icons/cache/32x32/halfstar.png</file>
+        <file>icons/cache/32x32/letterbox.png</file>
+        <file>icons/cache/32x32/log.png</file>
+        <file>icons/cache/32x32/maxicon.png</file>
+        <file>icons/cache/32x32/mega.png</file>
+        <file>icons/cache/32x32/minicon.png</file>
+        <file>icons/cache/32x32/multi.png</file>
+        <file>icons/cache/32x32/needs_maintenance.png</file>
+        <file>icons/cache/32x32/OCMLogo.png</file>
+        <file>icons/cache/32x32/OCMLogoSmall.png</file>
+        <file>icons/cache/32x32/other.png</file>
+        <file>icons/cache/32x32/parking.png</file>
+        <file>icons/cache/32x32/pushpin.png</file>
+        <file>icons/cache/32x32/restore.png</file>
+        <file>icons/cache/32x32/SearchIcon.png</file>
+        <file>icons/cache/32x32/star_empty.png</file>
+        <file>icons/cache/32x32/star.png</file>
+        <file>icons/cache/32x32/traditional.png</file>
+        <file>icons/cache/32x32/trailhead.png</file>
+        <file>icons/cache/32x32/treasure.png</file>
+        <file>icons/cache/32x32/unknown.png</file>
+        <file>icons/cache/32x32/up_icon.png</file>
+        <file>icons/cache/32x32/virtual.png</file>
+        <file>icons/cache/32x32/waypoint-flag-red.png</file>
+        <file>icons/cache/32x32/webcam.png</file>
+        <file>icons/cache/32x32/wherigo.png</file>
+        <file>icons/cache/32x32/write_note.png</file>
+
+        <file>icons/waypoints/32x32/PinRed.png</file>
+        <file>icons/waypoints/32x32/PinGreen.png</file>
+        <file>icons/waypoints/32x32/PinBlue.png</file>
+        <file>icons/waypoints/32x32/FlagRed.png</file>
+        <file>icons/waypoints/32x32/FlagGreen.png</file>
+        <file>icons/waypoints/32x32/FlagBlue.png</file>
 
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>

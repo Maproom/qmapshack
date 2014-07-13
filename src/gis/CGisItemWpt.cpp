@@ -17,10 +17,19 @@
 **********************************************************************************************/
 
 #include "gis/CGisItemWpt.h"
+#include "gis/CGisProject.h"
+#include "gis/WptIcons.h"
 
-CGisItemWpt::CGisItemWpt()
+#include <QtWidgets>
+#include <QtXml>
+
+CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
+    : IGisItem(parent)
 {
+    readWpt(xml, wpt);
 
+    setText(0, wpt.name);
+    setIcon(0, getWptIconByName(wpt.sym));
 }
 
 CGisItemWpt::~CGisItemWpt()

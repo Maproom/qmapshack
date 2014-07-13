@@ -22,6 +22,7 @@
 
 
 #define NOFLOAT 1000000000000.0
+#define NOINT   0x7FFFFFFF
 
 class IUnit : public QObject
 {
@@ -42,6 +43,8 @@ class IUnit : public QObject
         enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
         static void setUnitType(type_e t, QObject *parent);
 
+        static bool parseTimestamp(const QString &time, QDateTime &datetime);
+
         const type_e  type;
         const QString baseunit;
         const qreal   basefactor;
@@ -52,6 +55,7 @@ class IUnit : public QObject
         friend class CResources;
         IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent);
 
+        static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
     private:
         static IUnit * m_self;
 };

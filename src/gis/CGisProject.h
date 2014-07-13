@@ -20,14 +20,24 @@
 #define CGISPROJECT_H
 
 #include <QTreeWidgetItem>
+#include <QDomElement>
 
 class CGisListWks;
 
 class CGisProject : public QTreeWidgetItem
 {
     public:
-        CGisProject(CGisListWks, const QString& gpx);
+        CGisProject(const QDomDocument& xml, const QString& defaultName, CGisListWks * parent);
         virtual ~CGisProject();
+
+        bool isValid(){return valid;}
+
+    private:
+        QString filename;
+
+        QDomElement xmlGpx;
+
+        bool valid;
 };
 
 #endif //CGISPROJECT_H

@@ -64,6 +64,7 @@ static void processOptions()
     }
 
     qlOpts = new CAppOpts(doDebugOut, noSplash, config, args);
+
 }
 
 

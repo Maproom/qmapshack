@@ -26,17 +26,42 @@
 #include <QStringList>
 #include <QMap>
 #include <QVariant>
+#include <QUrl>
+
+#include "units/IUnit.h"
+
+class QDomNode;
 
 class IGisItem : public QTreeWidgetItem
 {
     public:
-        IGisItem();
+        IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();
 
     protected:
 
+        struct link_t
+        {
+            QUrl    uri;
+            QString text;
+            QString type;
+        };
+
         struct wpt_t
         {
+            wpt_t() :
+                lat(NOFLOAT),
+                lon(NOFLOAT),
+                ele(NOINT),
+                magvar(NOINT),
+                geoidheight(NOINT),
+                sat(NOINT),
+                hdop(NOINT),
+                vdop(NOINT),
+                pdop(NOINT),
+                ageofdgpsdata(NOINT),
+                dgpsid(NOINT)
+            {}
             // -- all gpx tags - start
             qreal lat;
             qreal lon;
@@ -48,7 +73,7 @@ class IGisItem : public QTreeWidgetItem
             QString cmt;
             QString desc;
             QString src;
-            QStringList link;
+            QList<link_t> links;
             QString sym;
             QString type;
             QString fix;
@@ -61,6 +86,8 @@ class IGisItem : public QTreeWidgetItem
             // -- all gpx tags - stop
             QMap<QString, QVariant> extensions;
         };
+
+        void readWpt(const QDomNode& xml, wpt_t &wpt);
 
 };
 

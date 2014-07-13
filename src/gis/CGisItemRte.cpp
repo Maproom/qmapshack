@@ -17,8 +17,12 @@
 **********************************************************************************************/
 
 #include "gis/CGisItemRte.h"
+#include "gis/CGisProject.h"
 
-CGisItemRte::CGisItemRte()
+#include <QtXml>
+
+CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
+    : IGisItem(parent)
 {
 
 }

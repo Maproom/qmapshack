@@ -17,8 +17,13 @@
 **********************************************************************************************/
 
 #include "gis/CGisItemTrk.h"
+#include "gis/CGisProject.h"
 
-CGisItemTrk::CGisItemTrk()
+#include <QtXml>
+
+
+CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
+    : IGisItem(parent)
 {
 
 }

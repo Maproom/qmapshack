@@ -28,6 +28,7 @@
 #include "version.h"
 #include "CAbout.h"
 #include "gis/CGisWidget.h"
+#include "gis/WptIcons.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -40,6 +41,8 @@ CMainWindow::CMainWindow()
     qDebug() << WHAT_STR;
     setupUi(this);
     setWindowTitle(WHAT_STR);
+
+    initWptIcons();
 
     gisWidget = new CGisWidget(this);
     dockGis->setWidget(gisWidget);
@@ -131,6 +134,7 @@ CMainWindow::CMainWindow()
     menuWindow->addAction(dockDem->toggleViewAction());
     menuWindow->addAction(dockGis->toggleViewAction());
 
+    loadGISData(qlOpts->arguments);
 }
 
 CMainWindow::~CMainWindow()
@@ -427,13 +431,22 @@ void CMainWindow::slotLoadGISData()
     {
         return;
     }
-    foreach(const QString& filename, filenames)
-    {
-        gisWidget->loadGpx(filename);
-    }
+
+    loadGISData(filenames);
 
     path = QFileInfo(filenames.first()).absolutePath();
     cfg.setValue("Paths/lastGpxPath", path);
+}
+
+void CMainWindow::loadGISData(const QStringList& filenames)
+{
+    foreach(const QString& filename, filenames)
+    {
+        if(QFileInfo(filename).suffix().toLower() == "gpx")
+        {
+            gisWidget->loadGpx(filename);
+        }
+    }
 }
 
 void CMainWindow::slotSaveGISData()

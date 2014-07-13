@@ -21,10 +21,13 @@
 
 #include "gis/IGisItem.h"
 
+class CGisProject;
+class QDomNode;
+
 class CGisItemWpt : public IGisItem
 {
     public:
-        CGisItemWpt();
+        CGisItemWpt(const QDomNode& xml, CGisProject * parent);
         virtual ~CGisItemWpt();
 
     private:

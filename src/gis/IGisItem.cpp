@@ -47,24 +47,7 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     readXml(xml, "cmt", wpt.cmt);
     readXml(xml, "desc", wpt.desc);
     readXml(xml, "src", wpt.src);
-
-    if(xml.namedItem("link").isElement())
-    {
-        const QDomNodeList& links = xml.toElement().elementsByTagName("link");
-        int N = links.count();
-        for(int n = 0; n < N; ++n)
-        {
-            const QDomNode& link = links.item(n);
-
-            link_t tmp;
-            tmp.uri.setUrl(link.attributes().namedItem("href").nodeValue());
-            readXml(link, "text", tmp.text);
-            readXml(link, "type", tmp.type);
-
-            wpt.links << tmp;
-        }
-    }
-
+    readXml(xml, "link", wpt.links);
     readXml(xml, "sym", wpt.sym);
     readXml(xml, "type", wpt.type);
     readXml(xml, "fix", wpt.fix);
@@ -75,6 +58,7 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     readXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
     readXml(xml, "dgpsid", wpt.dgpsid);
 
+    // decode some well known extensions
     if(xml.namedItem("extensions").isElement())
     {
         const QDomNode& ext = xml.namedItem("extensions");

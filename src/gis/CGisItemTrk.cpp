@@ -20,11 +20,74 @@
 #include "gis/CGisProject.h"
 
 #include <QtXml>
+#include <QtWidgets>
+
+#define DEFAULT_COLOR 4
+
+const QColor CGisItemTrk::lineColors[] =
+{
+     Qt::black                    // 0
+    ,Qt::darkRed                 // 1
+    ,Qt::darkGreen               // 2
+    ,Qt::darkYellow              // 3
+    ,Qt::darkBlue                // 4
+    ,Qt::darkMagenta             // 5
+    ,Qt::darkCyan                // 6
+    ,Qt::gray                    // 7
+    ,Qt::darkGray                // 8
+    ,Qt::red                     // 9
+    ,Qt::green                   // 10
+    ,Qt::yellow                  // 11
+    ,Qt::blue                    // 12
+    ,Qt::magenta                 // 13
+    ,Qt::cyan                    // 14
+    ,Qt::white                   // 15
+    ,Qt::transparent             // 16
+};
+
+const QString CGisItemTrk::bulletColors[] =
+{
+
+                                 // 0
+    QString("icons/8x8/bullet_black.png")
+                                 // 1
+    ,QString("icons/8x8/bullet_dark_red.png")
+                                 // 2
+    ,QString("icons/8x8/bullet_dark_green.png")
+                                 // 3
+    ,QString("icons/8x8/bullet_dark_yellow.png")
+                                 // 4
+    ,QString("icons/8x8/bullet_dark_blue.png")
+                                 // 5
+    ,QString("icons/8x8/bullet_dark_magenta.png")
+                                 // 6
+    ,QString("icons/8x8/bullet_dark_cyan.png")
+                                 // 7
+    ,QString("icons/8x8/bullet_gray.png")
+                                 // 8
+    ,QString("icons/8x8/bullet_dark_gray.png")
+                                 // 9
+    ,QString("icons/8x8/bullet_red.png")
+                                 // 10
+    ,QString("icons/8x8/bullet_green.png")
+                                 // 11
+    ,QString("icons/8x8/bullet_yellow.png")
+                                 // 12
+    ,QString("icons/8x8/bullet_blue.png")
+                                 // 13
+    ,QString("icons/8x8/bullet_magenta.png")
+                                 // 14
+    ,QString("icons/8x8/bullet_cyan.png")
+                                 // 15
+    ,QString("icons/8x8/bullet_white.png")
+    ,QString("")                 // 16
+};
 
 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
 {
+    setColor(DEFAULT_COLOR);
     readTrk(xml, trk);
     setText(0, trk.name);
     genKey();
@@ -51,23 +114,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     readXml(xml, "cmt", trk.cmt);
     readXml(xml, "desc", trk.desc);
     readXml(xml, "src", trk.src);
-    if(xml.namedItem("link").isElement())
-    {
-        const QDomNodeList& links = xml.toElement().elementsByTagName("link");
-        int N = links.count();
-        for(int n = 0; n < N; ++n)
-        {
-            const QDomNode& link = links.item(n);
-
-            link_t tmp;
-            tmp.uri.setUrl(link.attributes().namedItem("href").nodeValue());
-            readXml(link, "text", tmp.text);
-            readXml(link, "type", tmp.type);
-
-            trk.links << tmp;
-        }
-    }
-
+    readXml(xml, "link", trk.links);
     readXml(xml, "number", trk.number);
     readXml(xml, "type", trk.type);
 
@@ -80,7 +127,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         trkseg_t& seg = trk.segs[n];
 
         const QDomNodeList& trkpts = trkseg.toElement().elementsByTagName("trkpt");
-        int M = trksegs.count();
+        int M = trkpts.count();
         seg.pts.resize(M);
         for(int m = 0; m < M; ++m)
         {
@@ -88,4 +135,62 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
             readWpt(trkpt, seg.pts[m]);
         }
     }
+
+    // decode some well known extensions
+    if(xml.namedItem("extensions").isElement())
+    {
+        const QDomNode& ext = xml.namedItem("extensions");
+        readXml(ext, "ql:key", key);
+    }
+
+}
+
+void CGisItemTrk::setColor(const QColor& c)
+{
+    int n;
+    int N = sizeof(lineColors)/sizeof(QColor);
+
+    for(n = 0; n < N; n++)
+    {
+        if(lineColors[n] == c)
+        {
+            colorIdx    = n;
+            color       = lineColors[n];
+            bullet      = QPixmap(bulletColors[n]);
+            break;
+        }
+    }
+
+    if(n == N)
+    {
+        colorIdx    = DEFAULT_COLOR;
+        color       = lineColors[DEFAULT_COLOR];
+        bullet      = QPixmap(bulletColors[DEFAULT_COLOR]);
+    }
+
+    setIcon(color.name());
+
+}
+
+
+void CGisItemTrk::setColor(unsigned i)
+{
+    if(i>16) i = DEFAULT_COLOR;
+    colorIdx    = i;
+    color       = lineColors[i];
+    bullet      = QPixmap(bulletColors[i]);
+
+    setIcon(color.name());
+}
+
+void CGisItemTrk::setIcon(const QString& c)
+{
+    QPixmap icon(32,32);
+    icon.fill(Qt::transparent);
+    QPainter p(&icon);
+    p.setBrush(QColor(c));
+    p.setPen(Qt::NoPen);
+    p.drawRect(3,3,26,26);
+
+    QTreeWidgetItem::setIcon(0,QIcon(icon));
 }

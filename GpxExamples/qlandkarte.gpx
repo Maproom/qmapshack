@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:rmc="urn:net:trekbuddy:1.0:nmea:rmc" creator="QLandkarteGT 1.7.7 http://www.qlandkarte.org/" xmlns:wptx1="http://www.garmin.com/xmlschemas/WaypointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.garmin.com/xmlschemas/WaypointExtension/v1 http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd http://www.qlandkarte.org/xmlschemas/v1.1 http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:ql="http://www.qlandkarte.org/xmlschemas/v1.1">
+ <metadata>
+  <time>2014-07-14T13:23:33Z</time>
+ </metadata>
+ <wpt lon="11.72241211" lat="49.50714111">
+  <ele>7</ele>
+  <time>2014-07-14T06:49:10Z</time>
+  <name>point</name>
+  <sym>Flag, Blue</sym>
+  <type>user</type>
+  <extensions>
+   <wptx1:WaypointExtension>
+    <wptx1:Proximity>100</wptx1:Proximity>
+   </wptx1:WaypointExtension>
+   <ql:key>1405320550point0</ql:key>
+  </extensions>
+ </wpt>
+ <trk>
+  <name>Track</name>
+  <extensions>
+   <gpxx:TrackExtension>
+    <gpxx:DisplayColor>DarkGray</gpxx:DisplayColor>
+   </gpxx:TrackExtension>
+   <ql:key>1405344192Track0</ql:key>
+  </extensions>
+  <trkseg>
+   <trkpt lon="11.74205112" lat="49.47175217">
+    <time>1970-01-01T00:00:01.000Z</time>
+   </trkpt>
+   <trkpt lon="11.78021431" lat="49.48226166">
+    <time>1970-01-01T00:00:02.000Z</time>
+   </trkpt>
+   <trkpt lon="11.80126953" lat="49.46555328">
+    <time>1970-01-01T00:00:03.000Z</time>
+   </trkpt>
+   <trkpt lon="11.81870651" lat="49.45746613">
+    <time>1970-01-01T00:00:04.000Z</time>
+   </trkpt>
+   <trkpt lon="11.84370995" lat="49.44722748">
+    <time>1970-01-01T00:00:05.000Z</time>
+   </trkpt>
+   <trkpt lon="11.84930229" lat="49.44102859">
+    <time>1970-01-01T00:00:06.000Z</time>
+   </trkpt>
+   <trkpt lon="11.86213303" lat="49.44345474">
+    <time>1970-01-01T00:00:07.000Z</time>
+   </trkpt>
+  </trkseg>
+ </trk>
+ <rte>
+  <name>14 bis 1421</name>
+  <extensions>
+   <ql:key>140534419214 bis 14210</ql:key>
+  </extensions>
+  <rtept lon="11.684804" lat="49.499081">
+   <name>001</name>
+   <cmt>14</cmt>
+   <desc>14</desc>
+   <sym>Waypoint</sym>
+  </rtept>
+  <rtept lon="11.684804" lat="49.499081">
+   <name>002</name>
+   <cmt>141</cmt>
+   <desc>141</desc>
+   <sym>Waypoint</sym>
+  </rtept>
+  <rtept lon="11.700796" lat="49.553596">
+   <name>003</name>
+   <cmt>85</cmt>
+   <desc>85</desc>
+   <sym>Waypoint</sym>
+  </rtept>
+  <rtept lon="11.818092" lat="49.534573">
+   <name>004</name>
+   <cmt>142</cmt>
+   <desc>142</desc>
+   <sym>Waypoint</sym>
+  </rtept>
+  <rtept lon="11.818092" lat="49.534573">
+   <name>005</name>
+   <cmt>1421</cmt>
+   <desc>1421</desc>
+   <sym>Waypoint</sym>
+  </rtept>
+ </rte>
+ <extensions/>
+</gpx>

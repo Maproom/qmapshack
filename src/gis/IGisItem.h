@@ -93,53 +93,72 @@ class IGisItem : public QTreeWidgetItem
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         virtual void genKey() = 0;
 
+        inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                value = xml.namedItem(tag).toElement().text().toInt();
+            }
+        }
+
+        inline void readXml(const QDomNode& xml, const QString& tag, quint64& value)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                value = xml.namedItem(tag).toElement().text().toULongLong();
+            }
+        }
+
+        inline void readXml(const QDomNode& xml, const QString& tag, qreal& value)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                value = xml.namedItem(tag).toElement().text().toDouble();
+            }
+        }
+
+        inline void readXml(const QDomNode& xml, const QString& tag, QString& value)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                value = xml.namedItem(tag).toElement().text();
+            }
+        }
+
+        inline void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                QString time = xml.namedItem(tag).toElement().text();
+                IUnit::parseTimestamp(time, value);
+
+            }
+        }
+
+        inline void readXml(const QDomNode& xml, const QString& tag, QList<link_t>& l)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                const QDomNodeList& links = xml.toElement().elementsByTagName(tag);
+                int N = links.count();
+                for(int n = 0; n < N; ++n)
+                {
+                    const QDomNode& link = links.item(n);
+
+                    link_t tmp;
+                    tmp.uri.setUrl(link.attributes().namedItem("href").nodeValue());
+                    readXml(link, "text", tmp.text);
+                    readXml(link, "type", tmp.type);
+
+                    l << tmp;
+                }
+            }
+        }
+
 
         QString key;
 
 };
-
-inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        value = xml.namedItem(tag).toElement().text().toInt();
-    }
-}
-
-inline void readXml(const QDomNode& xml, const QString& tag, quint64& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        value = xml.namedItem(tag).toElement().text().toULongLong();
-    }
-}
-
-inline void readXml(const QDomNode& xml, const QString& tag, qreal& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        value = xml.namedItem(tag).toElement().text().toDouble();
-    }
-}
-
-inline void readXml(const QDomNode& xml, const QString& tag, QString& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        value = xml.namedItem(tag).toElement().text();
-    }
-}
-
-inline void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        QString time = xml.namedItem(tag).toElement().text();
-        IUnit::parseTimestamp(time, value);
-
-    }
-}
-
 
 #endif //IGISITEM_H
 

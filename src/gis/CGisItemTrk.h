@@ -32,9 +32,15 @@ class CGisItemTrk : public IGisItem
 
     private:
         struct trk_t;
+        static const QColor  lineColors[];
+        static const QString bulletColors[];
+
 
         void genKey();
         void readTrk(const QDomNode& xml, trk_t& trk);
+        void setColor(const QColor& c);
+        void setColor(unsigned i);
+        void setIcon(const QString& c);
 
         typedef wpt_t trkpt_t;
 
@@ -60,6 +66,14 @@ class CGisItemTrk : public IGisItem
         };
 
         trk_t trk;
+        /// the track line color
+        QColor  color;
+        /// the trakpoint bullet icon
+        QPixmap bullet;
+        /// the track line color by index
+        unsigned colorIdx;
+
+
 };
 
 #endif //CGISITEMTRK_H

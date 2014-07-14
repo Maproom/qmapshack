@@ -33,3 +33,12 @@ CGisItemRte::~CGisItemRte()
 
 }
 
+void CGisItemRte::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData((const char*)&rte, sizeof(rte));
+        key = md5.result().toHex();
+    }
+}

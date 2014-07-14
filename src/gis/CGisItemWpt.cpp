@@ -27,7 +27,6 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
 {
     readWpt(xml, wpt);
-
     setText(0, wpt.name);
     setIcon(0, getWptIconByName(wpt.sym));
     getKey();
@@ -39,3 +38,12 @@ CGisItemWpt::~CGisItemWpt()
 
 }
 
+void CGisItemWpt::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData((const char*)&wpt, sizeof(wpt));
+        key = md5.result().toHex();
+    }
+}

@@ -31,25 +31,35 @@ class CGisItemTrk : public IGisItem
         virtual ~CGisItemTrk();
 
     private:
+        struct trk_t;
+
+        void genKey();
+        void readTrk(const QDomNode& xml, trk_t& trk);
+
         typedef wpt_t trkpt_t;
 
         struct trkseg_t
         {
-            QVector<trkpt_t> trkpts;
+            QVector<trkpt_t> pts;
             QMap<QString, QVariant> extensions;
         };
 
-        // -- all gpx tags - start
-        QString name;
-        QString cmt;
-        QString desc;
-        QString src;
-        QStringList links;
-        quint64 number;
-        QString type;
-        QVector<trkseg_t> trksegs;
-        // -- all gpx tags - stop
-        QMap<QString, QVariant> extensions;
+        struct trk_t
+        {
+            // -- all gpx tags - start
+            QString name;
+            QString cmt;
+            QString desc;
+            QString src;
+            QList<link_t> links;
+            quint64 number;
+            QString type;
+            QVector<trkseg_t> segs;
+            // -- all gpx tags - stop
+            QMap<QString, QVariant> extensions;
+        };
+
+        trk_t trk;
 };
 
 #endif //CGISITEMTRK_H

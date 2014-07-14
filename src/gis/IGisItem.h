@@ -27,10 +27,11 @@
 #include <QMap>
 #include <QVariant>
 #include <QUrl>
+#include <QDomNode>
 
 #include "units/IUnit.h"
 
-class QDomNode;
+
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -90,12 +91,55 @@ class IGisItem : public QTreeWidgetItem
         };
 
         void readWpt(const QDomNode& xml, wpt_t &wpt);
-        void genKey();
+        virtual void genKey() = 0;
 
 
         QString key;
 
 };
+
+inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        value = xml.namedItem(tag).toElement().text().toInt();
+    }
+}
+
+inline void readXml(const QDomNode& xml, const QString& tag, quint64& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        value = xml.namedItem(tag).toElement().text().toULongLong();
+    }
+}
+
+inline void readXml(const QDomNode& xml, const QString& tag, qreal& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        value = xml.namedItem(tag).toElement().text().toDouble();
+    }
+}
+
+inline void readXml(const QDomNode& xml, const QString& tag, QString& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        value = xml.namedItem(tag).toElement().text();
+    }
+}
+
+inline void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        QString time = xml.namedItem(tag).toElement().text();
+        IUnit::parseTimestamp(time, value);
+
+    }
+}
+
 
 #endif //IGISITEM_H
 

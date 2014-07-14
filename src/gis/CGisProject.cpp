@@ -51,6 +51,24 @@ CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, CG
         items << item;
     }
 
+    const QDomNodeList& xmlTrks = xmlGpx.elementsByTagName("trk");
+    N = xmlTrks.count();
+    for(int n = 0; n < N; ++n)
+    {
+        const QDomNode& xmlTrk = xmlTrks.item(n);
+        QTreeWidgetItem * item = new CGisItemTrk(xmlTrk, this);
+        items << item;
+    }
+
+    const QDomNodeList& xmlRtes = xmlGpx.elementsByTagName("rte");
+    N = xmlRtes.count();
+    for(int n = 0; n < N; ++n)
+    {
+        const QDomNode& xmlRte = xmlRtes.item(n);
+        QTreeWidgetItem * item = new CGisItemRte(xmlRte, this);
+        items << item;
+    }
+
     addChildren(items);
 
     valid = true;

@@ -31,19 +31,26 @@ class CGisItemRte : public IGisItem
         virtual ~CGisItemRte();
 
     private:
+        void genKey();
+
         typedef wpt_t rtept_t;
 
-        // -- all gpx tags - start
-        QString name;
-        QString cmt;
-        QString desc;
-        QString src;
-        QStringList links;
-        quint64 number;
-        QString type;
-        QList<rtept_t> rtepts;
-        // -- all gpx tags - stop
-        QMap<QString, QVariant> extensions;
+        struct rte_t
+        {
+            // -- all gpx tags - start
+            QString name;
+            QString cmt;
+            QString desc;
+            QString src;
+            QList<link_t> links;
+            quint64 number;
+            QString type;
+            QList<rtept_t> rtepts;
+            // -- all gpx tags - stop
+            QMap<QString, QVariant> extensions;
+        };
+
+        rte_t rte;
 };
 
 #endif //CGISITEMRTE_H

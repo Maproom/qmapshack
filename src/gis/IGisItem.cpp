@@ -32,39 +32,6 @@ IGisItem::~IGisItem()
 
 }
 
-inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        value = xml.namedItem(tag).toElement().text().toInt();
-    }
-}
-
-inline void readXml(const QDomNode& xml, const QString& tag, qreal& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        value = xml.namedItem(tag).toElement().text().toDouble();
-    }
-}
-
-inline void readXml(const QDomNode& xml, const QString& tag, QString& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        value = xml.namedItem(tag).toElement().text();
-    }
-}
-
-inline void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        QString time = xml.namedItem(tag).toElement().text();
-        IUnit::parseTimestamp(time, value);
-
-    }
-}
 
 void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
 {
@@ -108,19 +75,14 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     readXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
     readXml(xml, "dgpsid", wpt.dgpsid);
 
-}
-
-void IGisItem::genKey()
-{
-    if(key.isEmpty())
+    if(xml.namedItem("extensions").isElement())
     {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-
-        QByteArray tmp((const char *)this, sizeof(*this));
-        md5.addData(tmp);
-        key = md5.result().toHex();
+        const QDomNode& ext = xml.namedItem("extensions");
+        readXml(ext, "ql:key", key);
     }
+
 }
+
 
 const QString& IGisItem::getKey()
 {

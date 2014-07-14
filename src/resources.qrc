@@ -190,6 +190,7 @@
         <file>icons/cache/32x32/wherigo.png</file>
         <file>icons/cache/32x32/write_note.png</file>
 
+        <file>icons/waypoints/32x32/Default.png</file>
         <file>icons/waypoints/32x32/PinRed.png</file>
         <file>icons/waypoints/32x32/PinGreen.png</file>
         <file>icons/waypoints/32x32/PinBlue.png</file>

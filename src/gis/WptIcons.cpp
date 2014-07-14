@@ -23,7 +23,7 @@
 #include <QtGui>
 
 static QMap<QString, QString> wptIcons;
-static const char * wptDefault = "://icons/waypoints/32x32/FlagRed.png";
+static const char * wptDefault = "://icons/waypoints/32x32/Default.png";
 
 void initWptIcons()
 {
@@ -35,12 +35,12 @@ void initWptIcons()
 //    wptIcons["Small City"]          = ":/icons/wpt/small_city15x15.png";
 //    wptIcons["Geocache"]            = ":/icons/wpt/geocache15x15.png";
 //    wptIcons["Geocache Found"]      = ":/icons/wpt/geocache_fnd15x15.png";
-//    wptIcons["Flag, Red"]           = ":/icons/wpt/flag_pin_red15x15.png";
-//    wptIcons["Flag, Blue"]          = ":/icons/wpt/flag_pin_blue15x15.png";
-//    wptIcons["Flag, Green"]         = ":/icons/wpt/flag_pin_green15x15.png";
-//    wptIcons["Pin, Red"]            = ":/icons/wpt/pin_red15x15.png";
-//    wptIcons["Pin, Blue"]           = ":/icons/wpt/pin_blue15x15.png";
-//    wptIcons["Pin, Green"]          = ":/icons/wpt/pin_green15x15.png";
+    wptIcons["Flag, Red"]           = "://icons/waypoints/32x32/FlagRed.png";
+    wptIcons["Flag, Blue"]          = "://icons/waypoints/32x32/FlagBlue.png";
+    wptIcons["Flag, Green"]         = "://icons/waypoints/32x32/FlagGreen.png";
+    wptIcons["Pin, Red"]            = "://icons/waypoints/32x32/PinRed.png";
+    wptIcons["Pin, Blue"]           = "://icons/waypoints/32x32/PinBlue.png";
+    wptIcons["Pin, Green"]          = "://icons/waypoints/32x32/PinGreen.png";
 //    wptIcons["Block, Red"]          = ":/icons/wpt/box_red15x15.png";
 //    wptIcons["Block, Blue"]         = ":/icons/wpt/box_blue15x15.png";
 //    wptIcons["Block, Green"]        = ":/icons/wpt/box_green15x15.png";

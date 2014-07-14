@@ -162,8 +162,7 @@ bool CDemItem::activate()
 
     // if map is activated sucessfully add to the list of map files
     // else delete all previous loaded maps and abort
-    if(!
-            demfile->activated())
+    if(!demfile->activated())
     {
         delete demfile;
         return false;

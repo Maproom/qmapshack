@@ -23,6 +23,7 @@
 #include <QDomElement>
 
 class CGisListWks;
+class CGisDraw;
 
 class CGisProject : public QTreeWidgetItem
 {
@@ -31,6 +32,8 @@ class CGisProject : public QTreeWidgetItem
         virtual ~CGisProject();
 
         bool isValid(){return valid;}
+
+        void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
 
     private:
         QString filename;

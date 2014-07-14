@@ -30,6 +30,8 @@ class CGisItemTrk : public IGisItem
         CGisItemTrk(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemTrk();
 
+        void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+
     private:
         struct trk_t;
         static const QColor  lineColors[];
@@ -52,6 +54,7 @@ class CGisItemTrk : public IGisItem
 
         struct trk_t
         {
+            trk_t() : number(0) {}
             // -- all gpx tags - start
             QString name;
             QString cmt;

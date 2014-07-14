@@ -106,11 +106,14 @@ void CCanvas::saveConfig(QSettings& cfg)
 
 void CCanvas::loadConfig(QSettings& cfg)
 {
-    map->loadConfig(cfg);
+    map->loadConfig(cfg);    
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
     posFocus = cfg.value("posFocus", posFocus).toPointF();
     setProjection(cfg.value("proj", map->getProjection()).toString());
+
+    dem->zoom(map->zoom());
+    gis->zoom(map->zoom());
 }
 
 void CCanvas::resizeEvent(QResizeEvent * e)
@@ -200,9 +203,7 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     QPointF pos = e->posF();
     QPointF pt1 = pos;
     map->convertPx2Rad(pt1);
-    map->zoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
-    dem->zoom(map->zoom());
-    gis->zoom(map->zoom());
+    setZoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
     map->convertRad2Px(pt1);
 
     map->convertRad2Px(posFocus);
@@ -237,16 +238,12 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     if(e->key() == Qt::Key_Plus)
     {
-        map->zoom(true, needsRedraw);
-        dem->zoom(map->zoom());
-        gis->zoom(map->zoom());
+        setZoom(true, needsRedraw);
         doUpdate = true;
     }
     else if(e->key() == Qt::Key_Minus)
     {
-        map->zoom(false, needsRedraw);
-        dem->zoom(map->zoom());
-        gis->zoom(map->zoom());
+        setZoom(false, needsRedraw);
         doUpdate = true;
     }
     else if(e->key() == Qt::Key_Up)
@@ -471,3 +468,9 @@ void CCanvas::setProjection(const QString& proj)
     gis->setProjection(proj);
 }
 
+void CCanvas::setZoom(bool in, bool& needsRedraw)
+{
+    map->zoom(in, needsRedraw);
+    dem->zoom(map->zoom());
+    gis->zoom(map->zoom());
+}

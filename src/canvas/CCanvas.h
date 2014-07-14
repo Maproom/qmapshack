@@ -93,6 +93,7 @@ class CCanvas : public QWidget
 
     private:
         void drawScale(QPainter& p);
+        void setZoom(bool in, bool& needsRedraw);
 
         /// set true to initiate a complete redraw of the screen content
         bool needsRedraw;

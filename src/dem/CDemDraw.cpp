@@ -102,7 +102,6 @@ void CDemDraw::saveConfig(QSettings& cfg)
     cfg.beginGroup("dem");
     saveActiveMapsList(keys, cfg);
     cfg.setValue("active", keys);
-    cfg.setValue("zoomIndex", zoomIndex);
     cfg.endGroup();
 
 }
@@ -114,10 +113,7 @@ void CDemDraw::loadConfig(QSettings& cfg)
     // -------------------
     cfg.beginGroup("dem");
     restoreActiveMapsList(cfg.value("active", "").toStringList());
-    int idx = cfg.value("zoomIndex",zoomIndex).toInt();
     cfg.endGroup();
-
-    zoom(idx);
 }
 
 void CDemDraw::buildMapList()

@@ -17,12 +17,15 @@
 **********************************************************************************************/
 
 #include "gis/CGisDraw.h"
+#include "gis/CGisWidget.h"
 #include "canvas/CCanvas.h"
+
+#include <QtWidgets>
 
 CGisDraw::CGisDraw(CCanvas *parent)
     : IDrawContext(parent)
 {
-
+    connect(&CGisWidget::self(), SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
 }
 
 CGisDraw::~CGisDraw()
@@ -32,5 +35,27 @@ CGisDraw::~CGisDraw()
 
 void CGisDraw::drawt(buffer_t& currentBuffer)
 {
+
+    QPointF pt1 = currentBuffer.ref1;
+    QPointF pt2 = currentBuffer.ref2;
+    QPointF pt3 = currentBuffer.ref3;
+    QPointF pt4 = currentBuffer.ref4;
+
+    qreal left, right, top, bottom;
+    left     = (pt1.x() < pt4.x() ? pt1.x() : pt4.x());
+    right    = (pt2.x() > pt3.x() ? pt2.x() : pt3.x());
+    top      = (pt1.y() < pt2.y() ? pt1.y() : pt2.y());
+    bottom   = (pt4.y() > pt3.y() ? pt4.y() : pt3.y());
+
+    QPointF pp = currentBuffer.ref1;
+    convertRad2Px(pp);
+
+    QRectF rect(QPointF(left,top), QPointF(right, bottom));
+    QPainter p(&currentBuffer.image);
+
+    USE_ANTI_ALIASING(p,true);
+    p.translate(-pp);
+
+    CGisWidget::self().draw(p,rect, this);
 
 }

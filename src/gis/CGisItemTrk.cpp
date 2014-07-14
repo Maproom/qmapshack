@@ -108,6 +108,12 @@ void CGisItemTrk::genKey()
     }
 }
 
+void CGisItemTrk::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
+{
+
+}
+
+
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {
     readXml(xml, "name", trk.name);

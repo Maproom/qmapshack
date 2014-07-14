@@ -51,7 +51,7 @@ void CDemTreeWidget::dropEvent ( QDropEvent  * event )
         item->showChildren(true);
     }
 
-    emit sigChanged();;
+    emit sigChanged();
 }
 
 

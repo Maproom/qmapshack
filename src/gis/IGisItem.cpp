@@ -21,6 +21,8 @@
 
 #include <QtXml>
 
+QMutex IGisItem::mutexItems;
+
 IGisItem::IGisItem(QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent)
 {

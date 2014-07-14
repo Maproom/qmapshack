@@ -18,6 +18,7 @@
 
 #include "gis/CGisWidget.h"
 #include "gis/CGisProject.h"
+#include "gis/IGisItem.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -52,11 +53,29 @@ void CGisWidget::loadGpx(const QString& filename)
         return;
     }
 
+    IGisItem::mutexItems.lock();
     CGisProject * item = new CGisProject(xml, QFileInfo(filename).baseName(), treeWks);
     if(!item->isValid())
     {
         delete item;
     }
-
+    IGisItem::mutexItems.unlock();
     file.close();
+
+    emit sigChanged();
+}
+
+void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+{
+    IGisItem::mutexItems.lock();
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->draw(p, viewport, gis);
+    }
+    IGisItem::mutexItems.unlock();
 }

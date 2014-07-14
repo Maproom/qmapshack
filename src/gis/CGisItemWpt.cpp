@@ -18,7 +18,9 @@
 
 #include "gis/CGisItemWpt.h"
 #include "gis/CGisProject.h"
+#include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
+
 
 #include <QtWidgets>
 #include <QtXml>
@@ -27,8 +29,10 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
 {
     readWpt(xml, wpt);
+    icon = getWptIconByName(wpt.sym);
+
     setText(0, wpt.name);
-    setIcon(0, getWptIconByName(wpt.sym));
+    setIcon(0, icon);
     getKey();
 
 }
@@ -46,4 +50,16 @@ void CGisItemWpt::genKey()
         md5.addData((const char*)&wpt, sizeof(wpt));
         key = md5.result().toHex();
     }
+}
+
+void CGisItemWpt::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
+{
+    QPointF pt(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
+    if(!viewport.contains(pt))
+    {
+        return;
+    }
+
+    gis->convertRad2Px(pt);
+    p.drawPixmap(pt.x(),pt.y()-22, 22, 22, icon);
 }

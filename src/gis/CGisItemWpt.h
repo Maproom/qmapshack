@@ -30,10 +30,14 @@ class CGisItemWpt : public IGisItem
         CGisItemWpt(const QDomNode& xml, CGisProject * parent);
         virtual ~CGisItemWpt();
 
+        void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+
     private:
         void genKey();
 
         wpt_t wpt;
+
+        QPixmap icon;
 
 };
 

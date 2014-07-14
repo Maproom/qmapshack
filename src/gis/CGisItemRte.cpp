@@ -24,7 +24,9 @@
 CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
 {
-
+    readRte(xml, rte);
+    setText(0, rte.name);
+    setIcon(0, QIcon("://icons/32x32/Route.png"));
     genKey();
 }
 
@@ -41,4 +43,39 @@ void CGisItemRte::genKey()
         md5.addData((const char*)&rte, sizeof(rte));
         key = md5.result().toHex();
     }
+}
+
+void CGisItemRte::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
+{
+
+}
+
+
+void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
+{
+    readXml(xml, "name", rte.name);
+    readXml(xml, "cmt", rte.cmt);
+    readXml(xml, "desc", rte.desc);
+    readXml(xml, "src", rte.src);
+    readXml(xml, "link", rte.links);
+    readXml(xml, "number", rte.number);
+    readXml(xml, "type", rte.type);
+
+    const QDomNodeList& rtepts = xml.toElement().elementsByTagName("rtept");
+    int M = rtepts.count();
+    rte.pts.resize(M);
+    for(int m = 0; m < M; ++m)
+    {
+        const QDomNode& rtept = rtepts.item(m);
+        readWpt(rtept, rte.pts[m]);
+    }
+
+    // decode some well known extensions
+    if(xml.namedItem("extensions").isElement())
+    {
+        const QDomNode& ext = xml.namedItem("extensions");
+        readXml(ext, "ql:key", key);
+    }
+
+
 }

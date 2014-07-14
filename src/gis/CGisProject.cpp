@@ -79,3 +79,16 @@ CGisProject::~CGisProject()
 
 }
 
+void CGisProject::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+{
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->draw(p, viewport, gis);
+    }
+
+}

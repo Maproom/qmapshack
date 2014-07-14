@@ -30,13 +30,18 @@ class CGisItemRte : public IGisItem
         CGisItemRte(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemRte();
 
+        void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+
     private:
+        struct rte_t;
         void genKey();
+        void readRte(const QDomNode& xml, rte_t& rte);
 
         typedef wpt_t rtept_t;
 
         struct rte_t
         {
+            rte_t() : number(0) {}
             // -- all gpx tags - start
             QString name;
             QString cmt;
@@ -45,7 +50,7 @@ class CGisItemRte : public IGisItem
             QList<link_t> links;
             quint64 number;
             QString type;
-            QList<rtept_t> rtepts;
+            QVector<rtept_t> pts;
             // -- all gpx tags - stop
             QMap<QString, QVariant> extensions;
         };

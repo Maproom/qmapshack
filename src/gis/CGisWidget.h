@@ -22,6 +22,8 @@
 #include <QWidget>
 #include "ui_IGisWidget.h"
 
+class CGisDraw;
+
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
     Q_OBJECT
@@ -31,6 +33,10 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void loadGpx(const QString& filename);
 
+        void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
+
+    signals:
+        void sigChanged();
 
     private:
         friend class CMainWindow;

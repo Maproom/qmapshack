@@ -28,10 +28,11 @@
 #include <QVariant>
 #include <QUrl>
 #include <QDomNode>
+#include <QMutex>
 
 #include "units/IUnit.h"
 
-
+class CGisDraw;
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -39,9 +40,16 @@ class IGisItem : public QTreeWidgetItem
         IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();
 
+        static QMutex mutexItems;
+
         const QString& getKey();
 
+        virtual void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis) = 0;
+
     protected:
+        struct wpt_t;
+        void readWpt(const QDomNode& xml, wpt_t &wpt);
+        virtual void genKey() = 0;
 
         struct link_t
         {
@@ -90,8 +98,6 @@ class IGisItem : public QTreeWidgetItem
             QMap<QString, QVariant> extensions;
         };
 
-        void readWpt(const QDomNode& xml, wpt_t &wpt);
-        virtual void genKey() = 0;
 
         inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
         {
@@ -154,7 +160,6 @@ class IGisItem : public QTreeWidgetItem
                 }
             }
         }
-
 
         QString key;
 

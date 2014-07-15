@@ -33,7 +33,7 @@ class IDrawContext : public QThread
 {
     Q_OBJECT
     public:
-        IDrawContext(CCanvas *parent);
+        IDrawContext(const QString &name, CCanvas *parent);
         virtual ~IDrawContext();
 
         struct buffer_t

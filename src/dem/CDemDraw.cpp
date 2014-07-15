@@ -35,7 +35,7 @@ QStringList CDemDraw::supportedFormats = QString("*.vrt").split('|');
 
 
 CDemDraw::CDemDraw(CCanvas *canvas)
-    : IDrawContext(canvas)
+    : IDrawContext("dem",canvas)
 {
 
     demList = new CDemList(canvas);

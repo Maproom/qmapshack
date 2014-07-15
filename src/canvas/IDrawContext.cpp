@@ -98,7 +98,7 @@ QPointF operator/(const QPointF& p1, const QPointF& p2)
 }
 
 
-IDrawContext::IDrawContext(CCanvas *parent)
+IDrawContext::IDrawContext(const QString& name, CCanvas *parent)
     : QThread(parent)
     , canvas(parent)
     , bufIndex(false)
@@ -110,6 +110,7 @@ IDrawContext::IDrawContext(CCanvas *parent)
     , zoomIndex(0)
 
 {
+    setObjectName(name);
     // setup map parameters and connect to canvas
     pjsrc = pj_init_plus("+proj=merc +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
 //    pjsrc = pj_init_plus("+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=4500000 +y_0=0 +datum=potsdam +units=m +no_defs");
@@ -376,7 +377,7 @@ void IDrawContext::run()
     }
     // ----- switch buffer ------
     bufIndex = !bufIndex;
-    qDebug() << "stop thread" << t.elapsed();
+    qDebug() << objectName() << "stop thread" << t.elapsed();
     mutex.unlock();
 
 }

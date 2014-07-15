@@ -21,11 +21,25 @@
 
 #include <QTreeWidget>
 
+class QAction;
+
 class CGisListWks : public QTreeWidget
 {
+    Q_OBJECT
     public:
         CGisListWks(QWidget * parent);
         virtual ~CGisListWks();
+
+    signals:
+        void sigChanged();
+
+    private slots:
+        void slotContextMenu(const QPoint& point);
+        void slotCloseProject();
+
+    private:
+        QMenu * menuProject;
+        QAction  * actionClose;
 };
 
 #endif //CGISLISTWKS_H

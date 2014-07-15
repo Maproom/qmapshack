@@ -36,7 +36,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     setIcon(0, icon);
     getKey();
 
-
+    // Limit icon size to 22 pixel max.
     if(icon.width() > 22 || icon.height() > 22)
     {
         qreal s;
@@ -82,7 +82,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     blockedAreas << QRectF(pt - focus, icon.size());
 }
 
-bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
+inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
 {
     foreach(const QRectF& r, blockedAreas)
     {
@@ -108,18 +108,23 @@ void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
     QRectF rect = fm.boundingRect(wpt.name);
     rect.adjust(-2,-2,2,2);
 
+    // place label on top
     rect.moveCenter(pt + QPointF(icon.width()/2, - fm.height()));
     if(isBlocked(rect, blockedAreas))
     {
+        // place label on bottom
         rect.moveCenter(pt + QPointF( icon.width()/2, + fm.height() + icon.height()));
         if(isBlocked(rect, blockedAreas))
         {
+            // place label on right
             rect.moveCenter(pt + QPointF( icon.width() + rect.width()/2, +fm.height()));
             if(isBlocked(rect, blockedAreas))
             {
+                // place label on left
                 rect.moveCenter(pt + QPointF( - rect.width()/2, +fm.height()));
                 if(isBlocked(rect, blockedAreas))
                 {
+                    // failed to place label anywhere
                     return;
                 }
             }
@@ -127,7 +132,5 @@ void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
     }
 
     CCanvas::drawText(wpt.name,p,rect.toRect(), Qt::darkBlue);
-
-
     blockedAreas << rect;
 }

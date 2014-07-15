@@ -31,6 +31,8 @@ CGisWidget::CGisWidget(QWidget *parent)
 {
     pSelf = this;
     setupUi(this);
+
+    connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 }
 
 CGisWidget::~CGisWidget()
@@ -73,6 +75,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     QList<QRectF> blockedAreas;
 
     IGisItem::mutexItems.lock();
+    // draw mandatory stuff first
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
@@ -83,6 +86,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         item->drawItem(p, viewport, blockedAreas, gis);
     }
 
+    // draw optional labels second
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));

@@ -31,6 +31,12 @@
    </property>
    <item>
     <widget class="CGisListWks" name="treeWks">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
      <property name="iconSize">
       <size>
        <width>22</width>
@@ -49,6 +55,9 @@
    </item>
    <item>
     <widget class="CGisListDB" name="treeDB">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="iconSize">
       <size>
        <width>22</width>

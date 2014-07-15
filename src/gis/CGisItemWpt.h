@@ -30,7 +30,7 @@ class CGisItemWpt : public IGisItem
         CGisItemWpt(const QDomNode& xml, CGisProject * parent);
         virtual ~CGisItemWpt();
 
-        void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+        void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis, QList<QRect>& blockedAreas);
 
     private:
         void genKey();

@@ -108,7 +108,7 @@ void CGisItemTrk::genKey()
     }
 }
 
-void CGisItemTrk::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
+void CGisItemTrk::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis, QList<QRect> &blockedAreas)
 {
 
 }

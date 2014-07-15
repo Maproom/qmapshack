@@ -44,7 +44,7 @@ class IGisItem : public QTreeWidgetItem
 
         const QString& getKey();
 
-        virtual void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis) = 0;
+        virtual void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis, QList<QRect>& blockedAreas) = 0;
 
     protected:
         struct wpt_t;

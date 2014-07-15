@@ -42,14 +42,6 @@ CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, CG
 
     QList<QTreeWidgetItem*> items;
 
-    const QDomNodeList& xmlWpts = xmlGpx.elementsByTagName("wpt");
-    N = xmlWpts.count();
-    for(int n = 0; n < N; ++n)
-    {
-        const QDomNode& xmlWpt = xmlWpts.item(n);
-        QTreeWidgetItem * item = new CGisItemWpt(xmlWpt, this);
-        items << item;
-    }
 
     const QDomNodeList& xmlTrks = xmlGpx.elementsByTagName("trk");
     N = xmlTrks.count();
@@ -69,6 +61,15 @@ CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, CG
         items << item;
     }
 
+    const QDomNodeList& xmlWpts = xmlGpx.elementsByTagName("wpt");
+    N = xmlWpts.count();
+    for(int n = 0; n < N; ++n)
+    {
+        const QDomNode& xmlWpt = xmlWpts.item(n);
+        QTreeWidgetItem * item = new CGisItemWpt(xmlWpt, this);
+        items << item;
+    }
+
     addChildren(items);
 
     valid = true;
@@ -81,6 +82,7 @@ CGisProject::~CGisProject()
 
 void CGisProject::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
+    QList<QRect> blockedAreas;
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
@@ -88,7 +90,7 @@ void CGisProject::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         {
             continue;
         }
-        item->draw(p, viewport, gis);
+        item->draw(p, viewport, gis, blockedAreas);
     }
 
 }

@@ -68,7 +68,7 @@ void CGisItemWpt::genKey()
     }
 }
 
-void CGisItemWpt::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
+void CGisItemWpt::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis, QList<QRect> &blockedAreas)
 {
     QPointF pt(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
     if(!viewport.contains(pt))
@@ -77,4 +77,6 @@ void CGisItemWpt::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
     }
     gis->convertRad2Px(pt);
     p.drawPixmap(pt - focus, icon);
+
+    blockedAreas << QRect(pt - focus, icon.size());
 }

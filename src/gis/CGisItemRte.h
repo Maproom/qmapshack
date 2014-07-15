@@ -30,7 +30,7 @@ class CGisItemRte : public IGisItem
         CGisItemRte(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemRte();
 
-        void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+        void draw(QPainter& p, const QRectF& viewport, CGisDraw * gis, QList<QRect>& blockedAreas);
 
     private:
         struct rte_t;

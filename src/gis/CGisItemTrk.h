@@ -45,7 +45,10 @@ class CGisItemTrk : public IGisItem
         void setColor(unsigned i);
         void setIcon(const QString& c);
 
-        typedef wpt_t trkpt_t;
+        struct trkpt_t : public wpt_t
+        {
+
+        };
 
         struct trkseg_t
         {

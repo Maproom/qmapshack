@@ -86,7 +86,7 @@ const QString CGisItemTrk::bulletColors[] =
 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
-{
+{    
     setColor(DEFAULT_COLOR);
     readTrk(xml, trk);
     setText(0, trk.name);
@@ -148,10 +148,21 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     }
 
     // decode some well known extensions
+
     if(xml.namedItem("extensions").isElement())
     {
-        const QDomNode& ext = xml.namedItem("extensions");
-        readXml(ext, "ql:key", key);
+        QMap<QString,QDomElement> extensions            = mapChildElements(xml.namedItem("extensions"));
+        QMap<QString,QDomElement> gpxxTrackExtension    = mapChildElements(extensions.value("gpxx:TrackExtension"));
+
+
+//        QString str;
+//        const QDomNode& ext = xml.namedItem("extensions");
+//        readXml(ext, "ql:key", key);
+
+//        const QDomNode& trkext = xml.namedItem("gpxx:TrackExtension");
+//        readXml(trkext, "gpxx:DisplayColor", str);
+
+//        qDebug() << str;
     }
 
 }

@@ -51,6 +51,7 @@ class IGisItem : public QTreeWidgetItem
         struct wpt_t;
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         virtual void genKey() = 0;
+        QMap<QString,QDomElement> mapChildElements(const QDomNode& parent);
 
         struct link_t
         {

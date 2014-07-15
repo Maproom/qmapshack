@@ -40,7 +40,7 @@ IMap::~IMap()
     delete setup;
 }
 
-IMapPropSetup * IMap::getSetup()
+IMapProp *IMap::getSetup()
 {
     if(setup.isNull())
     {

@@ -25,7 +25,7 @@
 QPointF CMapPropSetup::scale;
 
 CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
-    : IMapPropSetup(mapfile, map)
+    : IMapProp(mapfile, map)
 {
     setupUi(this);
 
@@ -61,7 +61,7 @@ CMapPropSetup::~CMapPropSetup()
 
 void CMapPropSetup::resizeEvent(QResizeEvent * e)
 {
-    IMapPropSetup::resizeEvent(e);
+    IMapProp::resizeEvent(e);
     updateScaleLabel();
 }
 

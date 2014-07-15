@@ -27,7 +27,7 @@
 #include <proj_api.h>
 
 class CMapDraw;
-class IMapPropSetup;
+class IMapProp;
 
 class IMap : public IDrawObject
 {
@@ -57,7 +57,7 @@ class IMap : public IDrawObject
 
            @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
          */
-        virtual IMapPropSetup * getSetup();
+        virtual IMapProp *getSetup();
 
         /**
            @brief getInfo
@@ -109,7 +109,7 @@ class IMap : public IDrawObject
         bool isActivated;
 
         /// the setup dialog. Use getSetup() for access
-        QPointer<IMapPropSetup> setup;
+        QPointer<IMapProp> setup;
 
         quint32 flagsFeature;
 

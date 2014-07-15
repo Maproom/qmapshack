@@ -21,6 +21,7 @@ set( SRCS
     canvas/IDrawContext.cpp
     canvas/IDrawObject.cpp
     dem/IDem.cpp
+    map/IMapProp.cpp
     dem/IDemProp.cpp
     dem/CDemDraw.cpp
     dem/CDemVRT.cpp
@@ -37,8 +38,7 @@ set( SRCS
     map/CMapIMG.cpp
     map/CMapMAP.cpp
     map/CMapVRT.cpp
-    map/CMapPathSetup.cpp
-    map/IMapPropSetup.cpp
+    map/CMapPathSetup.cpp    
     map/CMapPropSetup.cpp
     map/garmin/IGarminStrTbl.cpp
     map/garmin/CGarminStrTbl6.cpp
@@ -92,6 +92,7 @@ set( HDRS
     dem/CDemPathSetup.h
     dem/CDemPropSetup.h
     map/IMap.h
+    map/IMapProp.h
     map/CMapDraw.h
     map/CMapItem.h
     map/CMapList.h
@@ -101,8 +102,7 @@ set( HDRS
     map/CMapMAP.h
     map/CMapVRT.h
     map/CMapPathSetup.h
-    map/CMapPropSetup.h
-    map/IMapPropSetup.h
+    map/CMapPropSetup.h    
     map/garmin/Garmin.h
     map/garmin/IGarminStrTbl.h
     map/garmin/CGarminStrTbl6.h
@@ -142,7 +142,7 @@ set( UIS
     dem/IDemPropSetup.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
-    map/IMapProp.ui
+    map/IMapPropSetup.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     gis/IGisWidget.ui

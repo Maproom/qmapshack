@@ -38,6 +38,7 @@ class CGisItemWpt : public IGisItem
         wpt_t wpt;
 
         QPixmap icon;
+        QPointF focus;
 
 };
 

@@ -23,7 +23,7 @@
 #include <QPixmap>
 
 extern void initWptIcons();
-extern QPixmap getWptIconByName(const QString& name, QString * src = 0);
+extern QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src = 0);
 extern void setWptIconByName(const QString& name, const QString& filename);
 extern void setWptIconByName(const QString& name, const QPixmap& icon);
 

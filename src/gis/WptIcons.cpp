@@ -22,12 +22,22 @@
 
 #include <QtGui>
 
-static QMap<QString, QString> wptIcons;
 static const char * wptDefault = "://icons/waypoints/32x32/Default.png";
+
+struct icon_t
+{
+    icon_t(): path(wptDefault), focus(16,16){}
+    icon_t(const QString& path, int x, int y) : path(path), focus(x,y) {}
+    QString path;
+    QPoint  focus;
+};
+
+static QMap<QString, icon_t> wptIcons;
 
 void initWptIcons()
 {
 
+    wptIcons["Default"]            = icon_t(wptDefault, 16, 16);
 //    wptIcons["City (Capitol)"]      = ":/icons/wpt/capitol_city15x15.png";
 //    wptIcons["City (Large)"]        = ":/icons/wpt/large_city15x15.png";
 //    wptIcons["City (Medium)"]       = ":/icons/wpt/medium_city15x15.png";
@@ -35,12 +45,12 @@ void initWptIcons()
 //    wptIcons["Small City"]          = ":/icons/wpt/small_city15x15.png";
 //    wptIcons["Geocache"]            = ":/icons/wpt/geocache15x15.png";
 //    wptIcons["Geocache Found"]      = ":/icons/wpt/geocache_fnd15x15.png";
-    wptIcons["Flag, Red"]           = "://icons/waypoints/32x32/FlagRed.png";
-    wptIcons["Flag, Blue"]          = "://icons/waypoints/32x32/FlagBlue.png";
-    wptIcons["Flag, Green"]         = "://icons/waypoints/32x32/FlagGreen.png";
-    wptIcons["Pin, Red"]            = "://icons/waypoints/32x32/PinRed.png";
-    wptIcons["Pin, Blue"]           = "://icons/waypoints/32x32/PinBlue.png";
-    wptIcons["Pin, Green"]          = "://icons/waypoints/32x32/PinGreen.png";
+    wptIcons["Flag, Red"]           = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32);
+    wptIcons["Flag, Blue"]          = icon_t("://icons/waypoints/32x32/FlagBlue.png", 0, 32);
+    wptIcons["Flag, Green"]         = icon_t("://icons/waypoints/32x32/FlagGreen.png", 0, 32);
+    wptIcons["Pin, Red"]            = icon_t("://icons/waypoints/32x32/PinRed.png", 0, 32);
+    wptIcons["Pin, Blue"]           = icon_t("://icons/waypoints/32x32/PinBlue.png", 0, 32);
+    wptIcons["Pin, Green"]          = icon_t("://icons/waypoints/32x32/PinGreen.png", 0, 32);
 //    wptIcons["Block, Red"]          = ":/icons/wpt/box_red15x15.png";
 //    wptIcons["Block, Blue"]         = ":/icons/wpt/box_blue15x15.png";
 //    wptIcons["Block, Green"]        = ":/icons/wpt/box_green15x15.png";
@@ -76,7 +86,8 @@ void initWptIcons()
 
 void setWptIconByName(const QString& name, const QString& filename)
 {
-    wptIcons[name] = filename;
+    QPixmap icon(filename);
+    wptIcons[name] = icon_t(filename, icon.width()>>1, icon.height()>>1);
 }
 
 
@@ -86,7 +97,7 @@ void setWptIconByName(const QString& name, const QPixmap& icon)
     QString filename = dirIcon.filePath(name + ".png");
 
     icon.save(filename);
-    wptIcons[name] = filename;
+    wptIcons[name] = icon_t(filename, icon.width()>>1, icon.height()>>1);
 }
 
 QPixmap loadIcon(const QString& path)
@@ -106,15 +117,18 @@ QPixmap loadIcon(const QString& path)
     return QPixmap();
 }
 
-QPixmap getWptIconByName(const QString& name, QString * src)
+QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
 {
 
     if(wptIcons.contains(name))
     {
-        const QString& icon = wptIcons[name];
+        focus               = wptIcons[name].focus;
+        const QString& icon = wptIcons[name].path;
         if(src) *src = icon;
+
         return loadIcon(icon);
     }
 
-    return QPixmap(wptDefault);
+    focus = wptIcons["Dafault"].focus;
+    return loadIcon(wptIcons[name].path);
 }

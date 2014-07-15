@@ -29,12 +29,28 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
 {
     readWpt(xml, wpt);
-    icon = getWptIconByName(wpt.sym);
+    icon = getWptIconByName(wpt.sym, focus);
 
     setText(0, wpt.name);
     setIcon(0, icon);
     getKey();
 
+
+    if(icon.width() > 22 || icon.height() > 22)
+    {
+        qreal s;
+        if(icon.width() > icon.height())
+        {
+            s = 22.0/icon.width();
+        }
+        else
+        {
+            s = 22.0/icon.height();
+        }
+
+        focus = focus * s;
+        icon  = icon.scaled(icon.size()*s,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+    }
 }
 
 CGisItemWpt::~CGisItemWpt()
@@ -59,7 +75,6 @@ void CGisItemWpt::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
     {
         return;
     }
-
     gis->convertRad2Px(pt);
-    p.drawPixmap(pt.x(),pt.y()-22, 22, 22, icon);
+    p.drawPixmap(pt - focus, icon);
 }

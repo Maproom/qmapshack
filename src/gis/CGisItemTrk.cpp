@@ -108,7 +108,12 @@ void CGisItemTrk::genKey()
     }
 }
 
-void CGisItemTrk::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis, QList<QRect> &blockedAreas)
+void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+{
+
+}
+
+void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
 
 }

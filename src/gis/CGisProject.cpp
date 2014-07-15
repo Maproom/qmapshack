@@ -22,6 +22,7 @@
 #include "gis/CGisItemTrk.h"
 #include "gis/CGisItemRte.h"
 
+
 #include <QtWidgets>
 #include <QtXml>
 
@@ -80,9 +81,8 @@ CGisProject::~CGisProject()
 
 }
 
-void CGisProject::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
-    QList<QRect> blockedAreas;
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
@@ -90,7 +90,22 @@ void CGisProject::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         {
             continue;
         }
-        item->draw(p, viewport, gis, blockedAreas);
+        item->drawItem(p, viewport, blockedAreas, gis);
+    }
+
+}
+
+void CGisProject::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
+{
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }
 
 }

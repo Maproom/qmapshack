@@ -19,6 +19,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/CGisProject.h"
 #include "gis/IGisItem.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -65,8 +66,12 @@ void CGisWidget::loadGpx(const QString& filename)
     emit sigChanged();
 }
 
+
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
+    QFontMetricsF fm(CMainWindow::self().getMapFont());
+    QList<QRectF> blockedAreas;
+
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
@@ -75,7 +80,17 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         {
             continue;
         }
-        item->draw(p, viewport, gis);
+        item->drawItem(p, viewport, blockedAreas, gis);
+    }
+
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }
     IGisItem::mutexItems.unlock();
 }

@@ -52,7 +52,6 @@ void CGisDraw::drawt(buffer_t& currentBuffer)
 
     QRectF rect(QPointF(left,top), QPointF(right, bottom));
     QPainter p(&currentBuffer.image);
-
     USE_ANTI_ALIASING(p,true);
     p.translate(-pp);
 

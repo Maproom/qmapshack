@@ -33,7 +33,8 @@ class CGisProject : public QTreeWidgetItem
 
         bool isValid(){return valid;}
 
-        void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
+        void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+        void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
 
     private:
         QString filename;

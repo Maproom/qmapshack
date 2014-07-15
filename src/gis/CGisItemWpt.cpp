@@ -20,6 +20,7 @@
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
+#include "canvas/CCanvas.h"
 
 
 #include <QtWidgets>
@@ -68,7 +69,7 @@ void CGisItemWpt::genKey()
     }
 }
 
-void CGisItemWpt::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis, QList<QRect> &blockedAreas)
+void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     QPointF pt(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
     if(!viewport.contains(pt))
@@ -78,5 +79,55 @@ void CGisItemWpt::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis, QList
     gis->convertRad2Px(pt);
     p.drawPixmap(pt - focus, icon);
 
-    blockedAreas << QRect(pt - focus, icon.size());
+    blockedAreas << QRectF(pt - focus, icon.size());
+}
+
+bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
+{
+    foreach(const QRectF& r, blockedAreas)
+    {
+        if(rect.intersects(r))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+{
+    QPointF pt(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
+    if(!viewport.contains(pt))
+    {
+        return;
+    }
+    gis->convertRad2Px(pt);
+    pt = pt - focus;
+
+
+    QRectF rect = fm.boundingRect(wpt.name);
+    rect.adjust(-2,-2,2,2);
+
+    rect.moveCenter(pt + QPointF(icon.width()/2, - fm.height()));
+    if(isBlocked(rect, blockedAreas))
+    {
+        rect.moveCenter(pt + QPointF( icon.width()/2, + fm.height() + icon.height()));
+        if(isBlocked(rect, blockedAreas))
+        {
+            rect.moveCenter(pt + QPointF( icon.width() + rect.width()/2, +fm.height()));
+            if(isBlocked(rect, blockedAreas))
+            {
+                rect.moveCenter(pt + QPointF( - rect.width()/2, +fm.height()));
+                if(isBlocked(rect, blockedAreas))
+                {
+                    return;
+                }
+            }
+        }
+    }
+
+    CCanvas::drawText(wpt.name,p,rect.toRect(), Qt::darkBlue);
+
+
+    blockedAreas << rect;
 }

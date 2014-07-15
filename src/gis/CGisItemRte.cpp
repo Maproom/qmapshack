@@ -45,11 +45,15 @@ void CGisItemRte::genKey()
     }
 }
 
-void CGisItemRte::draw(QPainter& p, const QRectF& viewport, CGisDraw *gis, QList<QRect> &blockedAreas)
+void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
 
 }
 
+void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+{
+
+}
 
 void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
 {

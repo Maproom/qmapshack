@@ -32,9 +32,9 @@
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="1014"
-     inkscape:window-x="-1"
-     inkscape:window-y="-15"
+     inkscape:window-height="996"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1"
      gridtolerance="10">
     <inkscape:grid
@@ -63,7 +63,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <g
-       id="g3835">
+       id="g3014">
+      <path
+         id="path3006"
+         d="m 9.9720309,16.621509 -3.8289187,3.121631 -3.7953317,0 0,24.836138 38.0876655,0 0,-24.836138 -19.043833,0 -3.828919,-3.121631 -7.5906631,0 z"
+         style="fill:#ffffff;stroke:#000080;stroke-width:1.94090377999999997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         inkscape:connector-curvature="0" />
       <rect
          y="21.421965"
          x="6.010222"
@@ -81,11 +86,6 @@
          id="path3815"
          d="m 6.1484012,43.244628 0,-5.302204 3.8082904,0 3.8082904,-5.302203 3.808291,5.302203 7.616581,-10.604407 7.616581,5.302204 3.80829,5.302203 0,5.302204 z"
          style="fill:#8080ff;stroke:none" />
-      <path
-         id="path3006"
-         d="m 9.9720309,16.621509 -3.8289187,3.121631 -3.7953317,0 0,24.836138 38.0876655,0 0,-24.836138 -19.043833,0 -3.828919,-3.121631 -7.5906631,0 z"
-         style="fill:none;stroke:#000080;stroke-width:1.94090378;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         inkscape:connector-curvature="0" />
       <rect
          y="10.600393"
          x="1.391613"

@@ -346,6 +346,9 @@
    <property name="text">
     <string>Load GIS Data</string>
    </property>
+   <property name="toolTip">
+    <string>Load projects from file</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+L</string>
    </property>
@@ -353,10 +356,13 @@
   <action name="actionSaveGISData">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SaveGIS.png</normaloff>:/icons/32x32/SaveGIS.png</iconset>
+     <normaloff>:/icons/32x32/SaveAllGIS.png</normaloff>:/icons/32x32/SaveAllGIS.png</iconset>
    </property>
    <property name="text">
-    <string>Save GIS Data</string>
+    <string>Save All GIS Data</string>
+   </property>
+   <property name="toolTip">
+    <string>Save all projects in the workspace</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>

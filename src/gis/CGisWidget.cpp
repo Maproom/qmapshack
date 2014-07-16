@@ -49,7 +49,7 @@ void CGisWidget::loadGpx(const QString& filename)
     // create md5 hash
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(file.readAll());
-    file.reset();
+    file.close();
     QString key = md5.result().toHex();
 
     // skip if project is already loaded
@@ -58,22 +58,9 @@ void CGisWidget::loadGpx(const QString& filename)
         return;
     }
 
-    // load file content to xml document
-    QDomDocument xml;
-    QString msg;
-    int line;
-    int column;
-    if(!xml.setContent(&file, false, &msg, &line, &column))
-    {
-        file.close();
-        QMessageBox::critical(0, QObject::tr("Failed to read..."), QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg), QMessageBox::Abort);
-        return;
-    }
-    file.close();
-
     // add project to workspace
     IGisItem::mutexItems.lock();
-    CGisProject * item = new CGisProject(xml, QFileInfo(filename).baseName(), key, treeWks);
+    CGisProject * item = new CGisProject(filename, key, treeWks);
     if(!item->isValid())
     {
         delete item;

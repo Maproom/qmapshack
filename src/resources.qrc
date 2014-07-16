@@ -60,6 +60,7 @@
         <file>icons/16x16/Up.png</file>
         <file>icons/16x16/SetupMapWorkspace.png</file>
         <file>icons/16x16/SaveGIS.png</file>
+        <file>icons/16x16/SaveAllGIS.png</file>
         <file>icons/16x16/LoadGIS.png</file>
         <file>icons/16x16/GisProject.png</file>
         <file>icons/16x16/Route.png</file>
@@ -106,6 +107,7 @@
         <file>icons/32x32/Up.png</file>
         <file>icons/32x32/SetupMapWorkspace.png</file>
         <file>icons/32x32/SaveGIS.png</file>
+        <file>icons/32x32/SaveAllGIS.png</file>
         <file>icons/32x32/LoadGIS.png</file>
         <file>icons/32x32/GisProject.png</file>
         <file>icons/32x32/Route.png</file>
@@ -152,6 +154,7 @@
         <file>icons/48x48/Up.png</file>
         <file>icons/48x48/SetupMapWorkspace.png</file>
         <file>icons/48x48/SaveGIS.png</file>
+        <file>icons/48x48/SaveAllGIS.png</file>
         <file>icons/48x48/LoadGIS.png</file>
         <file>icons/48x48/GisProject.png</file>
         <file>icons/48x48/Route.png</file>

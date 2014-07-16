@@ -423,7 +423,7 @@ void CMainWindow::slotSetupMapWks()
 void CMainWindow::slotLoadGISData()
 {
     SETTINGS;
-    QString path = cfg.value("Paths/lastGpxPath", QDir::homePath()).toString();
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
     QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, "*.gpx");
 
@@ -435,7 +435,7 @@ void CMainWindow::slotLoadGISData()
     loadGISData(filenames);
 
     path = QFileInfo(filenames.first()).absolutePath();
-    cfg.setValue("Paths/lastGpxPath", path);
+    cfg.setValue("Paths/lastGisPath", path);
 }
 
 void CMainWindow::loadGISData(const QStringList& filenames)

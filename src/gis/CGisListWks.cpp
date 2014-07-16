@@ -25,8 +25,10 @@ CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
 {
 
-    menuProject = new QMenu(this);
-    actionClose = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
+    menuProject     = new QMenu(this);
+    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
+    actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
+    actionClose     = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
 }
@@ -58,8 +60,6 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         QPoint p = mapToGlobal(point);
         menuProject->exec(p);
     }
-
-
 }
 
 void CGisListWks::slotCloseProject()
@@ -74,4 +74,30 @@ void CGisListWks::slotCloseProject()
         }
     }
     emit sigChanged();
+}
+
+void CGisListWks::slotSaveProject()
+{
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
+    {
+        CGisProject * project = dynamic_cast<CGisProject*>(item);
+        if(project != 0)
+        {
+            project->save();
+        }
+    }
+}
+
+void CGisListWks::slotSaveAsProject()
+{
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
+    {
+        CGisProject * project = dynamic_cast<CGisProject*>(item);
+        if(project != 0)
+        {
+            project->saveAs();
+        }
+    }
 }

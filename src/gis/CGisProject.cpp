@@ -21,16 +21,38 @@
 #include "gis/CGisItemWpt.h"
 #include "gis/CGisItemTrk.h"
 #include "gis/CGisItemRte.h"
+#include "helpers/CSettings.h"
 
 
 #include <QtWidgets>
 #include <QtXml>
 
-CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, const QString& key, CGisListWks *parent)
+CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWks *parent)
     : QTreeWidgetItem(parent)
     , key(key)
+    , filename(filename)
     , valid(false)
 {
+    setText(0, QFileInfo(filename).baseName());
+    setIcon(0,QIcon("://icons/32x32/GisProject.png"));
+
+    // cerate file instance
+    QFile file(filename);
+    file.open(QIODevice::ReadOnly);
+
+    // load file content to xml document
+    QDomDocument xml;
+    QString msg;
+    int line;
+    int column;
+    if(!xml.setContent(&file, false, &msg, &line, &column))
+    {
+        file.close();
+        QMessageBox::critical(0, QObject::tr("Failed to read..."), QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg), QMessageBox::Abort);
+        return;
+    }
+    file.close();
+
     int N;
     xmlGpx = xml.documentElement();
     if(xmlGpx.tagName() != "gpx")
@@ -39,8 +61,6 @@ CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, co
         return;
     }
 
-    setText(0, defaultName);
-    setIcon(0,QIcon("://icons/32x32/GisProject.png"));
 
     QList<QTreeWidgetItem*> items;
 
@@ -109,4 +129,37 @@ void CGisProject::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& b
         item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }
 
+}
+
+void CGisProject::save()
+{
+    saveGpx(filename);
+}
+
+void CGisProject::saveAs()
+{
+    SETTINGS;
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+
+    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx");
+
+    if(fn.isEmpty())
+    {
+        return;
+    }
+    saveGpx(fn);
+
+    path = QFileInfo(fn).absolutePath();
+    cfg.setValue("Paths/lastGisPath", path);
+
+
+}
+
+void CGisProject::saveGpx(const QString& fn)
+{
+    // todo save gpx
+
+
+    filename = fn;
+    setText(0, QFileInfo(filename).baseName());
 }

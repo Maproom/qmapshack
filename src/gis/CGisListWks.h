@@ -37,11 +37,16 @@ class CGisListWks : public QTreeWidget
 
     private slots:
         void slotContextMenu(const QPoint& point);
+        void slotSaveProject();
+        void slotSaveAsProject();
         void slotCloseProject();
 
     private:
         QMenu * menuProject;
+        QAction  * actionSave;
+        QAction  * actionSaveAs;
         QAction  * actionClose;
+
 };
 
 #endif //CGISLISTWKS_H

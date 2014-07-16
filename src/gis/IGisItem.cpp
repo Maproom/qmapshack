@@ -88,16 +88,45 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     readXml(xml, "pdop", wpt.pdop);
     readXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
     readXml(xml, "dgpsid", wpt.dgpsid);
-
-    // decode some well known extensions
-    if(xml.namedItem("extensions").isElement())
-    {
-        const QDomNode& ext = xml.namedItem("extensions");
-        readXml(ext, "ql:key", key);
-    }
-
 }
 
+
+QDomNode IGisItem::writeWpt(QDomNode& gpx, const wpt_t& wpt)
+{
+    QString str;
+
+    QDomDocument doc = gpx.ownerDocument();
+
+    QDomElement xmlWpt = doc.createElement("wpt");
+    gpx.appendChild(xmlWpt);
+
+    str.sprintf("%1.8f", wpt.lat);
+    xmlWpt.setAttribute("lat",str);
+    str.sprintf("%1.8f", wpt.lon);
+    xmlWpt.setAttribute("lon",str);
+
+    writeXml(xmlWpt, "ele", wpt.ele);
+    writeXml(xmlWpt, "time", wpt.time);
+    writeXml(xmlWpt, "magvar", wpt.magvar);
+    writeXml(xmlWpt, "geoidheight", wpt.geoidheight);
+    writeXml(xmlWpt, "name", wpt.name);
+    writeXml(xmlWpt, "cmt", wpt.cmt);
+    writeXml(xmlWpt, "desc", wpt.desc);
+    writeXml(xmlWpt, "src", wpt.src);
+    writeXml(xmlWpt, "link", wpt.links);
+    writeXml(xmlWpt, "sym", wpt.sym);
+    writeXml(xmlWpt, "type", wpt.type);
+    writeXml(xmlWpt, "fix", wpt.fix);
+    writeXml(xmlWpt, "sat", wpt.sat);
+    writeXml(xmlWpt, "hdop", wpt.hdop);
+    writeXml(xmlWpt, "vdop", wpt.vdop);
+    writeXml(xmlWpt, "pdop", wpt.pdop);
+    writeXml(xmlWpt, "ageofdgpsdata", wpt.ageofdgpsdata);
+    writeXml(xmlWpt, "dgpsid", wpt.dgpsid);
+
+
+    return xmlWpt;
+}
 
 const QString& IGisItem::getKey()
 {

@@ -47,9 +47,12 @@ class IGisItem : public QTreeWidgetItem
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
 
+        virtual void save(QDomNode& gpx) = 0;
+
     protected:
         struct wpt_t;
         void readWpt(const QDomNode& xml, wpt_t &wpt);
+        QDomNode writeWpt(QDomNode &gpx, const wpt_t &wpt);
         virtual void genKey() = 0;
         QMap<QString,QDomElement> mapChildElements(const QDomNode& parent);
 
@@ -162,6 +165,68 @@ class IGisItem : public QTreeWidgetItem
                 }
             }
         }
+
+        inline void writeXml(QDomNode& xml, const QString& tag, qint32 val)
+        {
+            if(val != NOINT)
+            {
+                QDomElement elem = xml.ownerDocument().createElement(tag);
+                xml.appendChild(elem);
+                QDomText text = xml.ownerDocument().createTextNode(QString::number(val));
+                elem.appendChild(text);
+            }
+        }
+
+        inline void writeXml(QDomNode& xml, const QString& tag, const QString& val)
+        {
+            if(!val.isEmpty())
+            {
+                QDomElement elem = xml.ownerDocument().createElement(tag);
+                xml.appendChild(elem);
+                QDomText text = xml.ownerDocument().createTextNode(val);
+                elem.appendChild(text);
+            }
+        }
+
+        inline void writeXml(QDomNode& xml, const QString& tag, qreal val)
+        {
+            if(val != NOFLOAT)
+            {
+                QDomElement elem = xml.ownerDocument().createElement(tag);
+                xml.appendChild(elem);
+                QDomText text = xml.ownerDocument().createTextNode(QString("%1").arg(val,0,'f',8));
+                elem.appendChild(text);
+            }
+        }
+
+        inline void writeXml(QDomNode& xml, const QString& tag, const QDateTime& time)
+        {
+            if(time.isValid())
+            {
+                QDomElement elem = xml.ownerDocument().createElement(tag);
+                xml.appendChild(elem);
+                QDomText text = xml.ownerDocument().createTextNode(time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'"));
+                elem.appendChild(text);
+            }
+        }
+
+
+        inline void writeXml(QDomNode& xml, const QString& tag, const QList<link_t>& links)
+        {
+            if(!links.isEmpty())
+            {
+                foreach(const link_t& link, links)
+                {
+                    QDomElement elem = xml.ownerDocument().createElement(tag);
+                    xml.appendChild(elem);
+
+                    elem.setAttribute("href", link.uri.toString());
+                    writeXml(elem, "text", link.text);
+                    writeXml(elem, "type", link.type);
+                }
+            }
+        }
+
 
         QString key;
 

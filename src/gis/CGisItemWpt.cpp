@@ -30,6 +30,13 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
 {
     readWpt(xml, wpt);
+        // decode some well known extensions
+    if(xml.namedItem("extensions").isElement())
+    {
+        const QDomNode& ext = xml.namedItem("extensions");
+        readXml(ext, "ql:key", key);
+    }
+
     icon = getWptIconByName(wpt.sym, focus);
 
     setText(0, wpt.name);
@@ -133,4 +140,12 @@ void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
     CCanvas::drawText(wpt.name,p,rect.toRect(), Qt::darkBlue);
     blockedAreas << rect;
+}
+
+void CGisItemWpt::save(QDomNode& gpx)
+{
+    QDomNode xmlWpt     = writeWpt(gpx, wpt);
+    QDomElement xmlExt  = gpx.ownerDocument().createElement("extensions");
+    xmlWpt.appendChild(xmlExt);
+    writeXml(xmlExt, "ql:key", key);
 }

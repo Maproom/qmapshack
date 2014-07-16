@@ -33,6 +33,8 @@ class CGisItemWpt : public IGisItem
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
 
+        void save(QDomNode& gpx);
+
     private:
         void genKey();
 

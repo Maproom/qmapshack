@@ -80,6 +80,9 @@ void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
         const QDomNode& ext = xml.namedItem("extensions");
         readXml(ext, "ql:key", key);
     }
+}
 
+void CGisItemRte::save(QDomNode& gpx)
+{
 
 }

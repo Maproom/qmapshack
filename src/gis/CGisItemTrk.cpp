@@ -167,6 +167,12 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 
 }
 
+void CGisItemTrk::save(QDomNode& gpx)
+{
+
+}
+
+
 void CGisItemTrk::setColor(const QColor& c)
 {
     int n;

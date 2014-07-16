@@ -36,6 +36,19 @@ CGisListWks::~CGisListWks()
 
 }
 
+bool CGisListWks::hasProject(const QString& key)
+{
+    for(int i = 0; i < topLevelItemCount(); i++)
+    {
+        CGisProject * item = dynamic_cast<CGisProject*>(topLevelItem(i));
+        if(item && item->getKey() == key)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
     CGisProject * item = dynamic_cast<CGisProject*>(currentItem());

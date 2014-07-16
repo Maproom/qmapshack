@@ -30,6 +30,8 @@ class CGisListWks : public QTreeWidget
         CGisListWks(QWidget * parent);
         virtual ~CGisListWks();
 
+        bool hasProject(const QString& key);
+
     signals:
         void sigChanged();
 

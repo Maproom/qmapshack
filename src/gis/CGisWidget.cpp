@@ -42,10 +42,24 @@ CGisWidget::~CGisWidget()
 
 void CGisWidget::loadGpx(const QString& filename)
 {
+    // cerate file instance
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
-    QDomDocument xml;
 
+    // create md5 hash
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(file.readAll());
+    file.reset();
+    QString key = md5.result().toHex();
+
+    // skip if project is already loaded
+    if(treeWks->hasProject(key))
+    {
+        return;
+    }
+
+    // load file content to xml document
+    QDomDocument xml;
     QString msg;
     int line;
     int column;
@@ -55,15 +69,16 @@ void CGisWidget::loadGpx(const QString& filename)
         QMessageBox::critical(0, QObject::tr("Failed to read..."), QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg), QMessageBox::Abort);
         return;
     }
+    file.close();
 
+    // add project to workspace
     IGisItem::mutexItems.lock();
-    CGisProject * item = new CGisProject(xml, QFileInfo(filename).baseName(), treeWks);
+    CGisProject * item = new CGisProject(xml, QFileInfo(filename).baseName(), key, treeWks);
     if(!item->isValid())
     {
         delete item;
     }
     IGisItem::mutexItems.unlock();
-    file.close();
 
     emit sigChanged();
 }

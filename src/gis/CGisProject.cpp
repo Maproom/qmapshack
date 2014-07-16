@@ -26,8 +26,9 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, CGisListWks *parent)
+CGisProject::CGisProject(const QDomDocument &xml, const QString &defaultName, const QString& key, CGisListWks *parent)
     : QTreeWidgetItem(parent)
+    , key(key)
     , valid(false)
 {
     int N;

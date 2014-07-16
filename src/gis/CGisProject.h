@@ -28,15 +28,17 @@ class CGisDraw;
 class CGisProject : public QTreeWidgetItem
 {
     public:
-        CGisProject(const QDomDocument& xml, const QString& defaultName, CGisListWks * parent);
+        CGisProject(const QDomDocument& xml, const QString& defaultName, const QString &key, CGisListWks * parent);
         virtual ~CGisProject();
 
+        const QString& getKey(){return key;}
         bool isValid(){return valid;}
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
 
     private:
+        QString key;
         QString filename;
 
         QDomElement xmlGpx;

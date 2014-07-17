@@ -104,7 +104,7 @@ CGisProject::~CGisProject()
 
 }
 
-void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
+void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis)
 {
     for(int i = 0; i < childCount(); i++)
     {
@@ -118,12 +118,19 @@ void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& b
         {
             continue;
         }
+
+        if(seenKeys.contains(item->getKey()))
+        {
+            continue;
+        }
+        seenKeys << item->getKey();
+
         item->drawItem(p, viewport, blockedAreas, gis);
     }
 
 }
 
-void CGisProject::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
+void CGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis)
 {
 
     for(int i = 0; i < childCount(); i++)
@@ -138,6 +145,12 @@ void CGisProject::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& b
         {
             continue;
         }
+
+        if(seenKeys.contains(item->getKey()))
+        {
+            continue;
+        }
+
         item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }
 

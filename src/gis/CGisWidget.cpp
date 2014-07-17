@@ -19,6 +19,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/CGisProject.h"
 #include "gis/IGisItem.h"
+#include "gis/CGisDraw.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -75,28 +76,42 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());
     QList<QRectF> blockedAreas;
+    QSet<QString> seenKeys;
 
     IGisItem::mutexItems.lock();
     // draw mandatory stuff first
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
+        if(gis->needsRedraw())
+        {
+            break;
+        }
+
         CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
         if(item == 0)
         {
             continue;
         }
-        item->drawItem(p, viewport, blockedAreas, gis);
+        item->drawItem(p, viewport, blockedAreas, seenKeys, gis);
     }
 
-    // draw optional labels second
+    // reset seen keys as lables will build the list a second time
+    seenKeys.clear();
+
+    // draw optional labels second    
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
+        if(gis->needsRedraw())
+        {
+            break;
+        }
+
         CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
         if(item == 0)
         {
             continue;
         }
-        item->drawLabel(p, viewport, blockedAreas, fm, gis);
+        item->drawLabel(p, viewport, blockedAreas, seenKeys, fm, gis);
     }
     IGisItem::mutexItems.unlock();
 }

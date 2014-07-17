@@ -26,23 +26,40 @@
 #include <QtWidgets>
 #include <QtXml>
 
+inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
+{
+    foreach(const QRectF& r, blockedAreas)
+    {
+        if(rect.intersects(r))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
+    , proximity(NOFLOAT)
 {
+    // --- start read and process data ----
     readWpt(xml, wpt);
-        // decode some well known extensions
+    // decode some well known extensions
     if(xml.namedItem("extensions").isElement())
-    {
+    {        
         const QDomNode& ext = xml.namedItem("extensions");
         readXml(ext, "ql:key", key);
+
+        QDomChildMap childmap = mapChildElements(ext);
+        if(childmap.contains("wptx1:WaypointExtension"))
+        {
+            QDomNode wptx1 = childmap["wptx1:WaypointExtension"];
+            readXml(wptx1, "wptx1:Proximity", proximity);
+        }
     }
 
     icon = getWptIconByName(wpt.sym, focus);
-
-    setText(0, wpt.name);
-    setIcon(0, icon);
-    getKey();
-
     // Limit icon size to 22 pixel max.
     if(icon.width() > 22 || icon.height() > 22)
     {
@@ -59,6 +76,12 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
         focus = focus * s;
         icon  = icon.scaled(icon.size()*s,Qt::KeepAspectRatio,Qt::SmoothTransformation);
     }
+    // --- stop read and process data ----
+
+    setText(0, wpt.name);
+    setIcon(0, icon);
+    genKey();
+
 }
 
 CGisItemWpt::~CGisItemWpt()
@@ -69,9 +92,15 @@ CGisItemWpt::~CGisItemWpt()
 void CGisItemWpt::save(QDomNode& gpx)
 {
     QDomNode xmlWpt     = writeWpt(gpx, wpt);
+    // write the key as extension tag
     QDomElement xmlExt  = gpx.ownerDocument().createElement("extensions");
     xmlWpt.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key);
+
+    // write other well known extensions
+    QDomElement wptx1  = gpx.ownerDocument().createElement("wptx1:WaypointExtension");
+    xmlExt.appendChild(wptx1);
+    writeXml(wptx1, "wptx1:Proximity", proximity);
 }
 
 void CGisItemWpt::genKey()
@@ -95,18 +124,6 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     p.drawPixmap(pt - focus, icon);
 
     blockedAreas << QRectF(pt - focus, icon.size());
-}
-
-inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
-{
-    foreach(const QRectF& r, blockedAreas)
-    {
-        if(rect.intersects(r))
-        {
-            return true;
-        }
-    }
-    return false;
 }
 
 void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)

@@ -40,14 +40,6 @@ class CGisProject : public QTreeWidgetItem
         void save();
         void saveAs();
 
-    private:
-        void saveGpx(const QString& fn);
-        QDomNode writeMetadata(QDomDocument& doc);
-
-        // Those are standard GPX/XML namespaces
-        static const QString gpx_ns;
-        static const QString xsi_ns;
-
         // Those are the URIs of the GPX extensions we support
         static const QString gpxx_ns;
         static const QString gpxtpx_ns;
@@ -56,6 +48,13 @@ class CGisProject : public QTreeWidgetItem
         static const QString ql_ns;
         static const QString gs_ns;
 
+    private:
+        void saveGpx(const QString& fn);
+        QDomNode writeMetadata(QDomDocument& doc);
+
+        // Those are standard GPX/XML namespaces
+        static const QString gpx_ns;
+        static const QString xsi_ns;
 
         QString key;
         QString filename;

@@ -24,7 +24,9 @@
 CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
 {
+    // --- start read and process data ----
     readRte(xml, rte);
+    // --- stop read and process data ----
     setText(0, rte.name);
     setIcon(0, QIcon("://icons/32x32/Route.png"));
     genKey();

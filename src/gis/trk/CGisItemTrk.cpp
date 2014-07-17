@@ -87,8 +87,10 @@ const QString CGisItemTrk::bulletColors[] =
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
 {    
+    // --- start read and process data ----
     setColor(DEFAULT_COLOR);
     readTrk(xml, trk);
+    // --- stop read and process data ----
     setText(0, trk.name);
     genKey();
 }

@@ -29,6 +29,16 @@
 #include <QtWidgets>
 #include <QtXml>
 
+const QString CGisProject::gpx_ns      = "http://www.topografix.com/GPX/1/1";
+const QString CGisProject::xsi_ns      = "http://www.w3.org/2001/XMLSchema-instance";
+const QString CGisProject::gpxx_ns     = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
+const QString CGisProject::gpxtpx_ns   = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
+const QString CGisProject::wptx1_ns    = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
+const QString CGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
+const QString CGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
+const QString CGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
+
+
 CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWks *parent)
     : QTreeWidgetItem(parent)
     , key(key)
@@ -249,6 +259,24 @@ void CGisProject::saveGpx(const QString& fn)
         }
         item->save(gpx);
     }
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->save(gpx);
+    }
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->save(gpx);
+    }
 
     //  ---- stop  content of gpx
 
@@ -272,15 +300,6 @@ void CGisProject::saveGpx(const QString& fn)
     filename = _fn_;
     setText(0, QFileInfo(filename).baseName());
 }
-
-const QString CGisProject::gpx_ns      = "http://www.topografix.com/GPX/1/1";
-const QString CGisProject::xsi_ns      = "http://www.w3.org/2001/XMLSchema-instance";
-const QString CGisProject::gpxx_ns     = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
-const QString CGisProject::gpxtpx_ns   = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
-const QString CGisProject::wptx1_ns    = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
-const QString CGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
-const QString CGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
-const QString CGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
 QDomNode CGisProject::writeMetadata(QDomDocument& doc)
 {

@@ -34,6 +34,8 @@
 
 class CGisDraw;
 
+typedef QMap<QString,QDomElement> QDomChildMap;
+
 class IGisItem : public QTreeWidgetItem
 {
     public:
@@ -54,7 +56,7 @@ class IGisItem : public QTreeWidgetItem
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         QDomNode writeWpt(QDomNode &gpx, const wpt_t &wpt);
         virtual void genKey() = 0;
-        QMap<QString,QDomElement> mapChildElements(const QDomNode& parent);
+        QDomChildMap mapChildElements(const QDomNode& parent);
 
         struct link_t
         {

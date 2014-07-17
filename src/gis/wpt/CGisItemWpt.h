@@ -39,6 +39,7 @@ class CGisItemWpt : public IGisItem
         void genKey();
 
         wpt_t wpt;
+        qreal proximity;
 
         QPixmap icon;
         QPointF focus;

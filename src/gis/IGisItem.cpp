@@ -34,7 +34,7 @@ IGisItem::~IGisItem()
 
 }
 
-QMap<QString,QDomElement> IGisItem::mapChildElements(const QDomNode& parent)
+QDomChildMap IGisItem::mapChildElements(const QDomNode& parent)
 {
     // I tried to use QDomNamedNodeMap first, but it did not work. After
     // setNamedItem(child) the size() remained 0. XML support in QT sucks.

@@ -206,6 +206,13 @@
         <file>icons/waypoints/32x32/FlagRed.png</file>
         <file>icons/waypoints/32x32/FlagGreen.png</file>
         <file>icons/waypoints/32x32/FlagBlue.png</file>
+        <file>icons/waypoints/32x32/BoxRed.png</file>
+        <file>icons/waypoints/32x32/BoxGreen.png</file>
+        <file>icons/waypoints/32x32/BoxBlue.png</file>
+        <file>icons/waypoints/32x32/DiamondRed.png</file>
+        <file>icons/waypoints/32x32/DiamondGreen.png</file>
+        <file>icons/waypoints/32x32/DiamondBlue.png</file>
+
 
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>

@@ -23,6 +23,32 @@
 
 QMutex IGisItem::mutexItems;
 
+
+
+
+const IGisItem::color_t IGisItem::colorMap[] =
+{
+     {"Black",       QColor(Qt::black)}
+    ,{"DarkRed",     QColor(Qt::darkRed)}
+    ,{"DarkGreen",   QColor(Qt::darkGreen)}
+    ,{"DarkYellow",  QColor(Qt::darkYellow)}
+    ,{"DarkBlue",    QColor(Qt::darkBlue)}
+    ,{"DarkMagenta", QColor(Qt::darkMagenta)}
+    ,{"DarkCyan",    QColor(Qt::darkCyan)}
+    ,{"LightGray",   QColor(Qt::gray)}
+    ,{"DarkGray",    QColor(Qt::darkGray)}
+    ,{"Red",         QColor(Qt::red)}
+    ,{"Green",       QColor(Qt::green)}
+    ,{"Yellow",      QColor(Qt::yellow)}
+    ,{"Blue",        QColor(Qt::blue)}
+    ,{"Magenta",     QColor(Qt::magenta)}
+    ,{"Cyan",        QColor(Qt::cyan)}
+    ,{"White",       QColor(Qt::white)}
+    ,{"Transparent", QColor(Qt::transparent)}
+    ,{0, QColor()}
+
+};
+
 IGisItem::IGisItem(QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent)
 {
@@ -34,41 +60,11 @@ IGisItem::~IGisItem()
 
 }
 
-QDomChildMap IGisItem::mapChildElements(const QDomNode& parent)
-{
-    // I tried to use QDomNamedNodeMap first, but it did not work. After
-    // setNamedItem(child) the size() remained 0. XML support in QT sucks.
-
-    QMap<QString,QDomElement> map;
-
-    QDomNode child = parent.firstChild();
-    while (!child.isNull())
-    {
-        if (child.isElement())
-        {
-            if (child.prefix().isEmpty())
-            {
-                map.insert(child.nodeName(), child.toElement());
-                qDebug() << child.nodeName() << child.toElement().text();
-            }
-            else
-            {
-                map.insert(child.namespaceURI()+":"+child.localName(), child.toElement());
-                qDebug() << (child.namespaceURI()+":"+child.localName()) << child.toElement().text();
-            }
-        }
-        child = child.nextSibling();
-    }
-
-    return map;
-}
-
-
 void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
 {
-    const QDomNamedNodeMap& attr = xml.attributes();
-    wpt.lon = attr.namedItem("lon").nodeValue().toDouble();
+    const QDomNamedNodeMap& attr = xml.attributes();    
     wpt.lat = attr.namedItem("lat").nodeValue().toDouble();
+    wpt.lon = attr.namedItem("lon").nodeValue().toDouble();
 
     readXml(xml, "ele", wpt.ele);
     readXml(xml, "time", wpt.time);
@@ -135,6 +131,34 @@ const QString& IGisItem::getKey()
         genKey();
     }
     return key;
+}
 
+QColor IGisItem::str2color(const QString& name)
+{
+    const color_t * p = colorMap;
+    while(p->name)
+    {
+        if(p->name == name)
+        {
+            return p->color;
+        }
+        p++;
+    }
 
+    return QColor();
+}
+
+QString IGisItem::color2str(const QColor& color)
+{
+    const color_t * p = colorMap;
+    while(p->name)
+    {
+        if(p->color == color)
+        {
+            return p->name;
+        }
+        p++;
+    }
+
+    return "";
 }

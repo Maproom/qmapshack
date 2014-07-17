@@ -18,6 +18,7 @@
 
 #include "gis/CGisListWks.h"
 #include "gis/CGisProject.h"
+#include "gis/IGisItem.h"
 
 #include <QtWidgets>
 
@@ -40,6 +41,7 @@ CGisListWks::~CGisListWks()
 
 bool CGisListWks::hasProject(const QString& key)
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < topLevelItemCount(); i++)
     {
         CGisProject * item = dynamic_cast<CGisProject*>(topLevelItem(i));
@@ -54,7 +56,6 @@ bool CGisListWks::hasProject(const QString& key)
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
     CGisProject * item = dynamic_cast<CGisProject*>(currentItem());
-
     if(item != 0)
     {
         QPoint p = mapToGlobal(point);
@@ -64,6 +65,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
 void CGisListWks::slotCloseProject()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -78,6 +80,7 @@ void CGisListWks::slotCloseProject()
 
 void CGisListWks::slotSaveProject()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -91,6 +94,7 @@ void CGisListWks::slotSaveProject()
 
 void CGisListWks::slotSaveAsProject()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {

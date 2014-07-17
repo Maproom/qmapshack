@@ -29,12 +29,12 @@
 #include <QUrl>
 #include <QDomNode>
 #include <QMutex>
+#include <QColor>
 
 #include "units/IUnit.h"
 
 class CGisDraw;
 
-typedef QMap<QString,QDomElement> QDomChildMap;
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -56,7 +56,17 @@ class IGisItem : public QTreeWidgetItem
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         QDomNode writeWpt(QDomNode &gpx, const wpt_t &wpt);
         virtual void genKey() = 0;
-        QDomChildMap mapChildElements(const QDomNode& parent);
+        QColor str2color(const QString& name);
+        QString color2str(const QColor &color);
+
+
+
+        struct color_t
+        {
+            const char * name;
+            QColor color;
+        };
+
 
         struct link_t
         {
@@ -106,11 +116,39 @@ class IGisItem : public QTreeWidgetItem
         };
 
 
+        QString key;
+        static const color_t colorMap[];
+
+
         inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
         {
             if(xml.namedItem(tag).isElement())
             {
-                value = xml.namedItem(tag).toElement().text().toInt();
+                qint32 tmp;
+                bool ok = false;
+                tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
+                if(!ok)
+                {
+                    tmp = qRound(xml.namedItem(tag).toElement().text().toDouble(&ok));
+                }
+                if(ok)
+                {
+                    value = tmp;
+                }
+            }
+        }
+
+        inline void readXml(const QDomNode& xml, const QString& tag, quint32& value)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                quint32 tmp;
+                bool ok = false;
+                tmp = xml.namedItem(tag).toElement().text().toUInt(&ok);
+                if(ok)
+                {
+                    value = tmp;
+                }
             }
         }
 
@@ -118,7 +156,13 @@ class IGisItem : public QTreeWidgetItem
         {
             if(xml.namedItem(tag).isElement())
             {
-                value = xml.namedItem(tag).toElement().text().toULongLong();
+                quint64 tmp;
+                bool ok = false;
+                tmp = xml.namedItem(tag).toElement().text().toULongLong(&ok);
+                if(ok)
+                {
+                    value = tmp;
+                }
             }
         }
 
@@ -126,7 +170,13 @@ class IGisItem : public QTreeWidgetItem
         {
             if(xml.namedItem(tag).isElement())
             {
-                value = xml.namedItem(tag).toElement().text().toDouble();
+                qreal tmp;
+                bool ok = false;
+                tmp = xml.namedItem(tag).toElement().text().toDouble(&ok);
+                if(ok)
+                {
+                    value = tmp;
+                }
             }
         }
 
@@ -229,8 +279,6 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-
-        QString key;
 
 };
 

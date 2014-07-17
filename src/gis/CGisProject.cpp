@@ -160,6 +160,7 @@ void CGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& 
         {
             continue;
         }
+        seenKeys << item->getKey();
 
         item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }

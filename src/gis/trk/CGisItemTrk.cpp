@@ -125,25 +125,25 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         {
             const QDomNode& trkpt = trkpts.item(m);
             readWpt(trkpt, seg.pts[m]);
+
+            const QDomNode& ext = trkpt.namedItem("extensions");
+            if(ext.isElement())
+            {
+                readXml(ext, "ql:flags", seg.pts[m].flags);
+            }
         }
     }
 
     // decode some well known extensions
-
-    if(xml.namedItem("extensions").isElement())
+    const QDomNode& ext = xml.namedItem("extensions");
+    if(ext.isElement())
     {
-        QMap<QString,QDomElement> extensions            = mapChildElements(xml.namedItem("extensions"));
-        QMap<QString,QDomElement> gpxxTrackExtension    = mapChildElements(extensions.value("gpxx:TrackExtension"));
+        QString str;
+        readXml(ext, "ql:key", key);
 
-
-//        QString str;
-//        const QDomNode& ext = xml.namedItem("extensions");
-//        readXml(ext, "ql:key", key);
-
-//        const QDomNode& trkext = xml.namedItem("gpxx:TrackExtension");
-//        readXml(trkext, "gpxx:DisplayColor", str);
-
-//        qDebug() << str;
+        const QDomNode& gpxx = ext.namedItem("gpxx:TrackExtension");
+        readXml(gpxx, "gpxx:DisplayColor", str);
+        setColor(str2color(str));
     }
 
 }

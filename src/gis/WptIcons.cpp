@@ -51,12 +51,12 @@ void initWptIcons()
     wptIcons["Pin, Red"]            = icon_t("://icons/waypoints/32x32/PinRed.png", 0, 32);
     wptIcons["Pin, Blue"]           = icon_t("://icons/waypoints/32x32/PinBlue.png", 0, 32);
     wptIcons["Pin, Green"]          = icon_t("://icons/waypoints/32x32/PinGreen.png", 0, 32);
-//    wptIcons["Block, Red"]          = ":/icons/wpt/box_red15x15.png";
-//    wptIcons["Block, Blue"]         = ":/icons/wpt/box_blue15x15.png";
-//    wptIcons["Block, Green"]        = ":/icons/wpt/box_green15x15.png";
-//    wptIcons["Blue Diamond"]        = ":/icons/wpt/diamond_blue15x15.png";
-//    wptIcons["Green Diamond"]       = ":/icons/wpt/diamond_green15x15.png";
-//    wptIcons["Red Diamond"]         = ":/icons/wpt/diamond_red15x15.png";
+    wptIcons["Block, Red"]          = icon_t("://icons/waypoints/32x32/BoxRed.png", 16, 16);
+    wptIcons["Block, Blue"]         = icon_t("://icons/waypoints/32x32/BoxBlue.png", 16, 16);
+    wptIcons["Block, Green"]        = icon_t("://icons/waypoints/32x32/BoxGreen.png", 16, 16);
+    wptIcons["Blue Diamond"]        = icon_t("://icons/waypoints/32x32/DiamondBlue.png", 16, 16);
+    wptIcons["Green Diamond"]       = icon_t("://icons/waypoints/32x32/DiamondGreen.png", 16, 16);
+    wptIcons["Red Diamond"]         = icon_t("://icons/waypoints/32x32/DiamaondRed.png", 16, 16);
 
 
     setWptIconByName("Traditional Cache", "://icons/cache/32x32/traditional.png");

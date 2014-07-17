@@ -21,6 +21,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
 #include "canvas/CCanvas.h"
+#include "GeoMath.h"
 
 
 #include <QtWidgets>
@@ -51,14 +52,11 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
         const QDomNode& ext = xml.namedItem("extensions");
         readXml(ext, "ql:key", key);
 
-        QDomChildMap childmap = mapChildElements(ext);
-        if(childmap.contains("wptx1:WaypointExtension"))
-        {
-            QDomNode wptx1 = childmap["wptx1:WaypointExtension"];
-            readXml(wptx1, "wptx1:Proximity", proximity);
-        }
+        const QDomNode& wptx1 = ext.namedItem("wptx1:WaypointExtension");
+        readXml(wptx1, "wptx1:Proximity", proximity);
     }
 
+    // translate icon from kind of well known string to pixmap object
     icon = getWptIconByName(wpt.sym, focus);
     // Limit icon size to 22 pixel max.
     if(icon.width() > 22 || icon.height() > 22)
@@ -81,7 +79,6 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     setText(0, wpt.name);
     setIcon(0, icon);
     genKey();
-
 }
 
 CGisItemWpt::~CGisItemWpt()
@@ -122,6 +119,23 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     }
     gis->convertRad2Px(pt);
     p.drawPixmap(pt - focus, icon);
+
+    if(proximity != NOFLOAT)
+    {
+        QPointF pt1(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
+        pt1 = GPS_Math_Wpt_Projection(pt1, proximity, 90 * DEG_TO_RAD);
+        gis->convertRad2Px(pt1);
+
+        double r = pt1.x() - pt.x();
+
+        p.save();
+        p.setBrush(Qt::NoBrush);
+        p.setPen(QPen(Qt::white,3));
+        p.drawEllipse(QRect(pt.x() - r - 1, pt.y() - r - 1, 2*r + 1, 2*r + 1));
+        p.setPen(QPen(Qt::red,1));
+        p.drawEllipse(QRect(pt.x() - r - 1, pt.y() - r - 1, 2*r + 1, 2*r + 1));
+        p.restore();
+    }
 
     blockedAreas << QRectF(pt - focus, icon.size());
 }

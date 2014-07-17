@@ -49,7 +49,16 @@ class CGisItemTrk : public IGisItem
 
         struct trkpt_t : public wpt_t
         {
+            trkpt_t() : flags(0) {}
+            enum flag_e
+            {
+                 eSelected  = 1  ///< selected by track info view
+                ,eCursor    = 2  ///< selected by cursor
+                ,eDeleted   = 4  ///< mark point as deleted
+                ,eFocus     = 8  ///< mark current point of user focus
+            };
 
+            quint32 flags;
         };
 
         struct trkseg_t

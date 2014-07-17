@@ -60,9 +60,9 @@ set( SRCS
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
-    gis/CGisItemWpt.cpp
-    gis/CGisItemTrk.cpp
-    gis/CGisItemRte.cpp
+    gis/wpt/CGisItemWpt.cpp
+    gis/trk/CGisItemTrk.cpp
+    gis/rte/CGisItemRte.cpp
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
@@ -124,9 +124,9 @@ set( HDRS
     gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h
-    gis/CGisItemWpt.h
-    gis/CGisItemTrk.h
-    gis/CGisItemRte.h
+    gis/wpt/CGisItemWpt.h
+    gis/trk/CGisItemTrk.h
+    gis/rte/CGisItemRte.h
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h

@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisItemWpt.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
@@ -64,6 +64,14 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
 CGisItemWpt::~CGisItemWpt()
 {
 
+}
+
+void CGisItemWpt::save(QDomNode& gpx)
+{
+    QDomNode xmlWpt     = writeWpt(gpx, wpt);
+    QDomElement xmlExt  = gpx.ownerDocument().createElement("extensions");
+    xmlWpt.appendChild(xmlExt);
+    writeXml(xmlExt, "ql:key", key);
 }
 
 void CGisItemWpt::genKey()
@@ -142,10 +150,3 @@ void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
     blockedAreas << rect;
 }
 
-void CGisItemWpt::save(QDomNode& gpx)
-{
-    QDomNode xmlWpt     = writeWpt(gpx, wpt);
-    QDomElement xmlExt  = gpx.ownerDocument().createElement("extensions");
-    xmlWpt.appendChild(xmlExt);
-    writeXml(xmlExt, "ql:key", key);
-}

@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisItemTrk.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "gis/CGisProject.h"
 
 #include <QtXml>
@@ -98,27 +98,6 @@ CGisItemTrk::~CGisItemTrk()
 
 }
 
-void CGisItemTrk::genKey()
-{
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&trk, sizeof(trk));
-        key = md5.result().toHex();
-    }
-}
-
-void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
-{
-
-}
-
-void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
-{
-
-}
-
-
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {
     readXml(xml, "name", trk.name);
@@ -168,6 +147,26 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 }
 
 void CGisItemTrk::save(QDomNode& gpx)
+{
+
+}
+
+void CGisItemTrk::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData((const char*)&trk, sizeof(trk));
+        key = md5.result().toHex();
+    }
+}
+
+void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+{
+
+}
+
+void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
 
 }

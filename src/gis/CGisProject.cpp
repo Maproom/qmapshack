@@ -18,9 +18,10 @@
 
 #include "gis/CGisProject.h"
 #include "gis/CGisListWks.h"
-#include "gis/CGisItemWpt.h"
-#include "gis/CGisItemTrk.h"
-#include "gis/CGisItemRte.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/CGisDraw.h"
 #include "helpers/CSettings.h"
 #include "version.h"
 
@@ -107,6 +108,11 @@ void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& b
 {
     for(int i = 0; i < childCount(); i++)
     {
+        if(gis->needsRedraw())
+        {
+            break;
+        }
+
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
         if(item == 0)
         {
@@ -122,6 +128,11 @@ void CGisProject::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& b
 
     for(int i = 0; i < childCount(); i++)
     {
+        if(gis->needsRedraw())
+        {
+            break;
+        }
+
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
         if(item == 0)
         {

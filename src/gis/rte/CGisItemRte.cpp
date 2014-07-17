@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisItemRte.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/CGisProject.h"
 
 #include <QtXml>
@@ -31,26 +31,6 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
 }
 
 CGisItemRte::~CGisItemRte()
-{
-
-}
-
-void CGisItemRte::genKey()
-{
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&rte, sizeof(rte));
-        key = md5.result().toHex();
-    }
-}
-
-void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
-{
-
-}
-
-void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
 
 }
@@ -82,7 +62,29 @@ void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
     }
 }
 
+
 void CGisItemRte::save(QDomNode& gpx)
 {
 
 }
+
+void CGisItemRte::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData((const char*)&rte, sizeof(rte));
+        key = md5.result().toHex();
+    }
+}
+
+void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+{
+
+}
+
+void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+{
+
+}
+

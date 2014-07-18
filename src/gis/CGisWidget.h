@@ -38,6 +38,10 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
     signals:
         void sigChanged();
 
+    public slots:
+        void slotSaveAll();
+
+
     private:
         friend class CMainWindow;
         CGisWidget(QWidget * parent);

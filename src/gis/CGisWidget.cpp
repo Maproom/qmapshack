@@ -73,6 +73,23 @@ void CGisWidget::loadGpx(const QString& filename)
     emit sigChanged();
 }
 
+void CGisWidget::slotSaveAll()
+{
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    IGisItem::mutexItems.lock();
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->save();
+    }
+    IGisItem::mutexItems.unlock();
+    QApplication::restoreOverrideCursor();
+}
+
 
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {

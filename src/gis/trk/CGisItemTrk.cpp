@@ -18,9 +18,12 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/CGisProject.h"
+#include "gis/CGisDraw.h"
+#include "GeoMath.h"
 
 #include <QtXml>
 #include <QtWidgets>
+#include <proj_api.h>
 
 #define DEFAULT_COLOR 4
 
@@ -83,9 +86,12 @@ const QString CGisItemTrk::bulletColors[] =
     ,QString("")                 // 16
 };
 
+const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+
 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {    
     // --- start read and process data ----
     setColor(DEFAULT_COLOR);
@@ -102,6 +108,11 @@ CGisItemTrk::~CGisItemTrk()
 
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {
+    qreal north = -90;
+    qreal east  = -180;
+    qreal south =  90;
+    qreal west  =  180;
+
     readXml(xml, "name", trk.name);
     readXml(xml, "cmt", trk.cmt);
     readXml(xml, "desc", trk.desc);
@@ -118,21 +129,30 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         const QDomNode& trkseg = trksegs.item(n);
         trkseg_t& seg = trk.segs[n];
 
-        const QDomNodeList& trkpts = trkseg.toElement().elementsByTagName("trkpt");
-        int M = trkpts.count();
+        const QDomNodeList& xmlTrkpts = trkseg.toElement().elementsByTagName("trkpt");
+        int M = xmlTrkpts.count();
         seg.pts.resize(M);
         for(int m = 0; m < M; ++m)
         {
-            const QDomNode& trkpt = trkpts.item(m);
-            readWpt(trkpt, seg.pts[m]);
+            trkpt_t& trkpt = seg.pts[m];
+            const QDomNode& xmlTrkpt = xmlTrkpts.item(m);
+            readWpt(xmlTrkpt, trkpt);
 
-            const QDomNode& ext = trkpt.namedItem("extensions");
+            const QDomNode& ext = xmlTrkpt.namedItem("extensions");
             if(ext.isElement())
             {
-                readXml(ext, "ql:flags", seg.pts[m].flags);
+                readXml(ext, "ql:flags", trkpt.flags);
             }
+
+            if(trkpt.lon < west)  west    = trkpt.lon;
+            if(trkpt.lon > east)  east    = trkpt.lon;
+            if(trkpt.lat < south) south   = trkpt.lat;
+            if(trkpt.lat > north) north   = trkpt.lat;
+
         }
     }
+
+    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
     // decode some well known extensions
     const QDomNode& ext = xml.namedItem("extensions");
@@ -163,16 +183,108 @@ void CGisItemTrk::genKey()
     }
 }
 
+
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
+    if(!viewport.intersects(boundingRect))
+    {
+        return;
+    }
 
+    QPointF     pt1;
+    QPolygonF   line;
+
+    QPointF p1 = viewport.topLeft();
+    QPointF p2 = viewport.bottomRight();
+    gis->convertRad2Px(p1);
+    gis->convertRad2Px(p2);
+
+    QRectF extViewport(p1,p2);
+
+    foreach (const trkseg_t& seg, trk.segs)
+    {
+        foreach(const trkpt_t& pt, seg.pts)
+        {
+            if(pt.flags & trkpt_t::eDeleted)
+            {
+                continue;
+            }
+
+            pt1.setX(pt.lon);
+            pt1.setY(pt.lat);
+            pt1 *= DEG_TO_RAD;                       
+            line << pt1;
+        }
+    }
+
+    gis->convertRad2Px(line);
+
+    QList<QPolygonF> lines;
+    splitLineToViewport(line, extViewport, lines);
+
+    p.setPen(penBackground);
+    foreach(const QPolygonF& line, lines)
+    {
+        p.drawPolyline(line);
+    }
+    penForeground.setColor(color);
+    p.setPen(penForeground);
+    foreach(const QPolygonF& line, lines)
+    {
+        p.drawPolyline(line);
+    }
 }
+
+
 
 void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
 
 }
 
+
+void CGisItemTrk::splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines)
+{
+    int i;
+    QPointF pt, ptt, pt1;
+    QPolygonF subline;
+    const int size = line.size();
+
+    pt = line[0];
+    subline << pt;
+
+    for(i = 1; i < size; i++)
+    {
+        pt1 = line[i];
+
+        if(!GPS_Math_LineCrossesRect(pt, pt1, extViewport))
+        {
+            pt = pt1;
+            if(subline.size() > 1)
+            {
+                lines << subline;
+            }
+            subline.clear();
+            subline << pt;
+            continue;
+        }
+
+        ptt = pt1 - pt;
+        if(ptt.manhattanLength() < 5)
+        {
+            continue;
+        }
+
+        subline << pt1;
+        pt = pt1;
+    }
+
+    if(subline.size() > 1)
+    {
+        lines << subline;
+    }
+
+}
 
 void CGisItemTrk::setColor(const QColor& c)
 {

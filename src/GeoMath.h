@@ -21,12 +21,13 @@
 #define GEOMATH_H
 #include <QString>
 #include <QPointF>
+#include <QRectF>
 
 struct point3D
 {
-    double x;
-    double y;
-    double z;
+    qreal x;
+    qreal y;
+    qreal z;
 };
 
 struct pointDP : public point3D
@@ -43,7 +44,9 @@ extern qreal    GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2
 /// use for short distances, much quicker processing
 extern qreal    GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, const qreal v2);
 extern void     GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal distance, const qreal bearing, qreal& lon2, qreal& lat2);
-extern void     GPS_Math_DouglasPeucker(QVector<pointDP>& line, double d);
-extern QPointF  GPS_Math_Wpt_Projection(const QPointF& pt1, double distance, double bearing);
+extern void     GPS_Math_DouglasPeucker(QVector<pointDP>& line, qreal d);
+extern QPointF  GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearing);
+extern bool     GPS_Math_LineCrossesRect(const QPointF& p1, const QPointF& p2, const QRectF& rect);
 
 #endif                           //GEOMATH_H
+

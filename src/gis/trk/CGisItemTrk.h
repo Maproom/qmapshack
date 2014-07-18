@@ -21,6 +21,8 @@
 
 #include "gis/IGisItem.h"
 
+#include <QPen>
+
 class QDomNode;
 class CGisProject;
 
@@ -46,6 +48,7 @@ class CGisItemTrk : public IGisItem
         void setColor(const QColor& c);
         void setColor(unsigned i);
         void setIcon(const QString& c);
+        void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
 
         struct trkpt_t : public wpt_t
         {
@@ -83,7 +86,12 @@ class CGisItemTrk : public IGisItem
             QMap<QString, QVariant> extensions;
         };
 
+        static const QPen penBackground;
+        QPen penForeground;
+
         trk_t trk;
+
+        QRectF boundingRect;
         /// the track line color
         QColor  color;
         /// the trakpoint bullet icon

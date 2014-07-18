@@ -60,13 +60,15 @@ void CGisWidget::loadGpx(const QString& filename)
     }
 
     // add project to workspace
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     IGisItem::mutexItems.lock();
     CGisProject * item = new CGisProject(filename, key, treeWks);
     if(!item->isValid())
     {
         delete item;
     }
-    IGisItem::mutexItems.unlock();
+    IGisItem::mutexItems.unlock();    
+    QApplication::restoreOverrideCursor();
 
     emit sigChanged();
 }

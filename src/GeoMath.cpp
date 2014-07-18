@@ -221,12 +221,12 @@ void GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal dis
     lon2 = cos(lat1) == 0 ? lon1 : fmod(lon1 - asin(sin(-bearing) * sin(d) / cos(lat1)) + PI, TWOPI) - PI;
 }
 
-double GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
+qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
 {
 
     point3D v1, v2, v3, v1x2;
 
-    double a1x2, a3;
+    qreal a1x2, a3;
 
     // (x0 - x1)
     v1.x    = x0.x - x1.x;
@@ -265,7 +265,7 @@ struct segment
     qint32 idx2;
 };
 
-void GPS_Math_DouglasPeucker(QVector<pointDP> &line, double d)
+void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
 {
     if(line.count() < 3) return;
 
@@ -282,7 +282,7 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, double d)
 
         for(int i = seg.idx1 + 1; i < seg.idx2; i++)
         {
-            double distance = GPS_Math_distPointLine3D(x1, x2, line[i]);
+            qreal distance = GPS_Math_distPointLine3D(x1, x2, line[i]);
             if(distance > d)
             {
                 idx = i;
@@ -305,19 +305,45 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, double d)
     }
 }
 
-QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, double distance, double bearing)
+QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearing)
 {
     QPointF pt2;
 
-    double d    = distance / 6378130.0;
-    double lon1 = pt1.x();
-    double lat1 = pt1.y();
+    qreal d    = distance / 6378130.0;
+    qreal lon1 = pt1.x();
+    qreal lat1 = pt1.y();
 
-    double lat2 = asin(sin(lat1) * cos(d) + cos(lat1) * sin(d) * cos(-bearing));
-    double lon2 = cos(lat1) == 0 ? lon1 : fmod(lon1 - asin(sin(-bearing) * sin(d) / cos(lat1)) + M_PI, (2*M_PI)) - M_PI;
+    qreal lat2 = asin(sin(lat1) * cos(d) + cos(lat1) * sin(d) * cos(-bearing));
+    qreal lon2 = cos(lat1) == 0 ? lon1 : fmod(lon1 - asin(sin(-bearing) * sin(d) / cos(lat1)) + M_PI, (2*M_PI)) - M_PI;
 
     pt2.rx() = lon2;
     pt2.ry() = lat2;
     return pt2;
 }
 
+
+bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF &rect)
+{
+
+    // the trival case
+    if(rect.contains(p1) || rect.contains(p2))
+    {
+        return true;
+    }
+
+    qreal slope    = qreal(p2.y() - p1.y()) / (p2.x() - p1.x());
+    qreal offset   = p1.y() - slope * p1.x();
+    qreal y1       = offset + slope * rect.left();
+    qreal y2       = offset + slope * rect.right();
+
+    if((y1 < rect.top()) && (y2 < rect.top()))
+    {
+        return false;
+    }
+    else if((y1 > rect.bottom()) && (y2 > rect.bottom()))
+    {
+        return false;
+    }
+
+    return true;
+}

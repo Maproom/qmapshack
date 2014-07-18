@@ -6,6 +6,13 @@ You need a working mercurial, g++, cmake and QT5 installation to compile MapRoom
         ccmake ../MapRoom
         make
 
+To update the code to the cutting edge do in build_MapRoom::
+
+        hg pull
+        hg update
+        make
+
+As everything is better with a GUI you might want to have a look at [TortoiseHg](http://tortoisehg.bitbucket.org/).
 
 Dependencies
 

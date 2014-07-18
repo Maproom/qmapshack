@@ -105,8 +105,8 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(pj_is_latlong(pjsrc))
     {
 
-        xscale *= 111120;
-        yscale *= 111120;
+        xscale *= 111120 / 2;
+        yscale *= 111120 / 2;
         // convert to RAD to match internal notations
         trFwd = trFwd * DEG_TO_RAD;
     }

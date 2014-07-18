@@ -61,7 +61,6 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotSetupDemPath();
         void slotSetupMapWks();
         void slotLoadGISData();
-        void slotSaveGISData();
 
     private:
         friend int main(int argc, char ** argv);

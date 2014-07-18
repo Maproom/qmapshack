@@ -80,7 +80,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
     connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
     connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
-    connect(actionSaveGISData, SIGNAL(triggered()), this, SLOT(slotSaveGISData()));
+    connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
@@ -449,7 +449,3 @@ void CMainWindow::loadGISData(const QStringList& filenames)
     }
 }
 
-void CMainWindow::slotSaveGISData()
-{
-
-}

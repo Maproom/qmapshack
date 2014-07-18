@@ -80,7 +80,9 @@ void CGisListWks::slotCloseProject()
 
 void CGisListWks::slotSaveProject()
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    IGisItem::mutexItems.lock();
+
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -90,11 +92,15 @@ void CGisListWks::slotSaveProject()
             project->save();
         }
     }
+    IGisItem::mutexItems.unlock();
+    QApplication::restoreOverrideCursor();
 }
 
 void CGisListWks::slotSaveAsProject()
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    IGisItem::mutexItems.lock();
+
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -104,4 +110,6 @@ void CGisListWks::slotSaveAsProject()
             project->saveAs();
         }
     }
+    IGisItem::mutexItems.unlock();
+    QApplication::restoreOverrideCursor();
 }

@@ -109,7 +109,7 @@ int main(int argc, char ** argv)
 
     GDALAllRegister();
 
-    QCoreApplication::setApplicationName("MapRoom");
+    QCoreApplication::setApplicationName("QMapShack");
     QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
 

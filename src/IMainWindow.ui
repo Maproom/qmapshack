@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MapRoom</string>
+   <string>QMapShack</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/48x48/MapRoom.png</normaloff>:/icons/48x48/MapRoom.png</iconset>
+    <normaloff>:/icons/48x48/QMapShack.png</normaloff>:/icons/48x48/QMapShack.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">

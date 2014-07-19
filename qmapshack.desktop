@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
-Name=MapRoom
-Exec=maproom
-Icon=MapRoom
+Name=QMapShack
+Exec=qmapshack
+Icon=QMapShack
 Terminal=false
 Type=Application
 X-MultipleArgs=false

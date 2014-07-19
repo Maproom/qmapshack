@@ -1,12 +1,12 @@
-You need a working mercurial, g++, cmake and QT5 installation to compile MapRoom on your computer. Clone and compile the code base by::
+You need a working mercurial, g++, cmake and QT5 installation to compile QMapShack on your computer. Clone and compile the code base by::
 
-        hg clone https://bitbucket.org/maproom/maproom MapRoom
-        mkdir build_MapRoom
-        cd build_MapRoom
-        ccmake ../MapRoom
+        hg clone https://bitbucket.org/maproom/qmapshack QMapShack
+        mkdir build_QMapShack
+        cd build_QMapShack
+        ccmake ../QMapShack
         make
 
-To update the code to the cutting edge do in build_MapRoom::
+To update the code to the cutting edge do in build_QMapShack::
 
         hg pull
         hg update

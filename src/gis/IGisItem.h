@@ -54,10 +54,12 @@ class IGisItem : public QTreeWidgetItem
     protected:
         struct wpt_t;
         void readWpt(const QDomNode& xml, wpt_t &wpt);
-        QDomNode writeWpt(QDomNode &gpx, const wpt_t &wpt);
+        void writeWpt(QDomElement &xmlWpt, const wpt_t &wpt);
         virtual void genKey() = 0;
         QColor str2color(const QString& name);
         QString color2str(const QColor &color);
+        void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
+        void drawArrows(const QPolygonF &line, const QRectF &extViewport, QPainter& p);
 
 
 
@@ -229,6 +231,28 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
+        inline void writeXml(QDomNode& xml, const QString& tag, quint32 val)
+        {
+            if(val != NOINT)
+            {
+                QDomElement elem = xml.ownerDocument().createElement(tag);
+                xml.appendChild(elem);
+                QDomText text = xml.ownerDocument().createTextNode(QString::number(val));
+                elem.appendChild(text);
+            }
+        }
+
+        inline void writeXml(QDomNode& xml, const QString& tag, quint64 val)
+        {
+            if(val != 0)
+            {
+                QDomElement elem = xml.ownerDocument().createElement(tag);
+                xml.appendChild(elem);
+                QDomText text = xml.ownerDocument().createTextNode(QString::number(val));
+                elem.appendChild(text);
+            }
+        }
+
         inline void writeXml(QDomNode& xml, const QString& tag, const QString& val)
         {
             if(!val.isEmpty())
@@ -277,6 +301,18 @@ class IGisItem : public QTreeWidgetItem
                     writeXml(elem, "type", link.type);
                 }
             }
+        }
+
+        inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
+        {
+            foreach(const QRectF& r, blockedAreas)
+            {
+                if(rect.intersects(r))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 

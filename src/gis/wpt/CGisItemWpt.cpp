@@ -27,17 +27,6 @@
 #include <QtWidgets>
 #include <QtXml>
 
-inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
-{
-    foreach(const QRectF& r, blockedAreas)
-    {
-        if(rect.intersects(r))
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
 
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
@@ -58,22 +47,6 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
 
     // translate icon from kind of well known string to pixmap object
     icon = getWptIconByName(wpt.sym, focus);
-    // Limit icon size to 22 pixel max.
-    if(icon.width() > 22 || icon.height() > 22)
-    {
-        qreal s;
-        if(icon.width() > icon.height())
-        {
-            s = 22.0/icon.width();
-        }
-        else
-        {
-            s = 22.0/icon.height();
-        }
-
-        focus = focus * s;
-        icon  = icon.scaled(icon.size()*s,Qt::KeepAspectRatio,Qt::SmoothTransformation);
-    }
     // --- stop read and process data ----
 
     setText(0, wpt.name);
@@ -88,14 +61,19 @@ CGisItemWpt::~CGisItemWpt()
 
 void CGisItemWpt::save(QDomNode& gpx)
 {
-    QDomNode xmlWpt     = writeWpt(gpx, wpt);
+    QDomDocument doc = gpx.ownerDocument();
+
+    QDomElement xmlWpt = doc.createElement("wpt");
+    gpx.appendChild(xmlWpt);
+    writeWpt(xmlWpt, wpt);
+
     // write the key as extension tag
-    QDomElement xmlExt  = gpx.ownerDocument().createElement("extensions");
+    QDomElement xmlExt  = doc.createElement("extensions");
     xmlWpt.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key);
 
     // write other well known extensions
-    QDomElement wptx1  = gpx.ownerDocument().createElement("wptx1:WaypointExtension");
+    QDomElement wptx1  = doc.createElement("wptx1:WaypointExtension");
     xmlExt.appendChild(wptx1);
     writeXml(wptx1, "wptx1:Proximity", proximity);
 }

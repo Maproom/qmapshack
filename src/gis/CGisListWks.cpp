@@ -98,7 +98,6 @@ void CGisListWks::slotSaveProject()
 
 void CGisListWks::slotSaveAsProject()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     IGisItem::mutexItems.lock();
 
     QList<QTreeWidgetItem*> items = selectedItems();
@@ -111,5 +110,5 @@ void CGisListWks::slotSaveAsProject()
         }
     }
     IGisItem::mutexItems.unlock();
-    QApplication::restoreOverrideCursor();
+
 }

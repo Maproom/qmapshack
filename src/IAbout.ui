@@ -22,7 +22,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/icons/48x48/MapRoom.png</pixmap>
+        <pixmap resource="resources.qrc">:/icons/48x48/QMapShack.png</pixmap>
        </property>
       </widget>
      </item>
@@ -35,7 +35,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>MapRoom, Version</string>
+        <string>QMapShack, Version</string>
        </property>
       </widget>
      </item>

@@ -113,9 +113,6 @@ IDrawContext::IDrawContext(const QString& name, CCanvas *parent)
     setObjectName(name);
     // setup map parameters and connect to canvas
     pjsrc = pj_init_plus("+proj=merc +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
-//    pjsrc = pj_init_plus("+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=4500000 +y_0=0 +datum=potsdam +units=m +no_defs");
-//    pjsrc = pj_init_plus("+proj=lcc +lat_1=50 +lat_0=50 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs");
-//    pjsrc = pj_init_plus("+proj=lcc +lat_1=38.66667 +lat_2=33.33333 +lat_0=34 +lon_0=-105.56667 +x_0=0 +y_0=0 +datum=NAD83");
     pjtar = pj_init_plus("+proj=longlat +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
 
 
@@ -154,8 +151,8 @@ void IDrawContext::resize(const QSize& size)
 //    int a       = sqrt(viewWidth*viewWidth + viewHeight*viewHeight);
 //    bufWidth    = a + 100;
 //    bufHeight   = a + 100;
-    bufWidth    = viewWidth  + 100;
-    bufHeight   = viewHeight + 100;
+    bufWidth    = viewWidth  + 00;
+    bufHeight   = viewHeight + 00;
 
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
@@ -364,8 +361,9 @@ void IDrawContext::run()
         currentBuffer.ref4          = ref4;
         currentBuffer.focus         = focus;
         intNeedsRedraw              = false;
-        mutex.unlock();
 
+        qDebug() << (ref1 * RAD_TO_DEG) << (ref2 * RAD_TO_DEG) << (ref3 * RAD_TO_DEG) << (ref4 * RAD_TO_DEG);
+        mutex.unlock();        
 
         qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);
         // ----- reset buffer -----

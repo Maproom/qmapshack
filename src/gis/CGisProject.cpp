@@ -217,7 +217,7 @@ void CGisProject::saveGpx(const QString& fn)
             {
                 const  QDomElement& docElem = xml.documentElement();
                 const QDomNamedNodeMap& attr = docElem.attributes();
-                if(!attr.namedItem("creator").nodeValue().startsWith("MapRoom"))
+                if(!attr.namedItem("creator").nodeValue().startsWith("QMapShack"))
                 {
                     throw 0;
                 }
@@ -230,10 +230,10 @@ void CGisProject::saveGpx(const QString& fn)
         catch(int)
         {
             int res = QMessageBox::warning(0,QObject::tr("File exists ...")
-                ,QObject::tr("The file exists and it has not been created by MapRoom. "
+                ,QObject::tr("The file exists and it has not been created by QMapShack. "
                 "If you press 'yes' all data in this file will be lost. "
-                "Even if this file contains GPX data and has been loaded by MapRoom, "
-                "MapRoom might not be able to load and store all elements of this file.  "
+                "Even if this file contains GPX data and has been loaded by QMapShack, "
+                "QMapShack might not be able to load and store all elements of this file.  "
                 "Those elements will be lost. I recommend to use another file. "
                 "<b>Do you really want to overwrite the file?</b>")
                 ,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
@@ -262,7 +262,7 @@ void CGisProject::saveGpx(const QString& fn)
     }
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
+        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
         if(item == 0)
         {
             continue;
@@ -271,7 +271,7 @@ void CGisProject::saveGpx(const QString& fn)
     }
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
+        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
         if(item == 0)
         {
             continue;
@@ -308,7 +308,7 @@ QDomNode CGisProject::writeMetadata(QDomDocument& doc)
     doc.appendChild(gpx);
 
     gpx.setAttribute("version","1.1");
-    gpx.setAttribute("creator","MapRoom " VER_STR " http://www.qlandkarte.org/");
+    gpx.setAttribute("creator","QMapShack " VER_STR " http://www.qlandkarte.org/");
     gpx.setAttribute("xmlns",gpx_ns);
     gpx.setAttribute("xmlns:xsi",xsi_ns);
     gpx.setAttribute("xmlns:gpxx",gpxx_ns);

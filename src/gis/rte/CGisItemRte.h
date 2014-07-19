@@ -21,6 +21,8 @@
 
 #include "gis/IGisItem.h"
 
+#include <QPen>
+
 class QDomNode;
 class CGisProject;
 
@@ -40,7 +42,11 @@ class CGisItemRte : public IGisItem
         void genKey();
         void readRte(const QDomNode& xml, rte_t& rte);
 
-        typedef wpt_t rtept_t;
+        struct rtept_t : public wpt_t
+        {
+            QPixmap icon;
+            QPointF focus;
+        };
 
         struct rte_t
         {
@@ -58,7 +64,12 @@ class CGisItemRte : public IGisItem
             QMap<QString, QVariant> extensions;
         };
 
+        static const QPen penBackground;
+        QPen penForeground;
+
         rte_t rte;
+
+        QRectF boundingRect;
 };
 
 #endif //CGISITEMRTE_H

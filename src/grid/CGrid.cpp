@@ -118,6 +118,11 @@ void CGrid::findGridSpace(double min, double max, double& xSpace, double& ySpace
         xSpace = 5*M_PI/180;
         ySpace = 5*M_PI/180;
     }
+    else if(dX < M_PI/1.8)
+    {
+        xSpace = 5*M_PI/180;
+        ySpace = 5*M_PI/180;
+    }
 
     else if(dX < 3000)
     {
@@ -244,6 +249,13 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     double x = xStart - xGridSpace;
     double y = yStart + yGridSpace;
 
+    if(pj_is_latlong(pjGrid))
+    {
+        if(y > (85*DEG_TO_RAD)) y = (85*DEG_TO_RAD);
+        if(btmMin < -(85*DEG_TO_RAD - yGridSpace)) btmMin = -(85*DEG_TO_RAD - yGridSpace);
+    }
+
+
     //    qDebug() << xStart  << yStart ;
     //    qDebug() << xGridSpace  << yGridSpace ;
 
@@ -277,6 +289,8 @@ void CGrid::draw(QPainter& p, const QRect& rect)
             pj_transform(pjGrid, pjWGS84, 1, 0, &p2.rx(), &p2.ry(), 0);
             pj_transform(pjGrid, pjWGS84, 1, 0, &p3.rx(), &p3.ry(), 0);
             pj_transform(pjGrid, pjWGS84, 1, 0, &p4.rx(), &p4.ry(), 0);
+
+//            qDebug() << (p1 * RAD_TO_DEG) << (p2 * RAD_TO_DEG) << (p3 * RAD_TO_DEG) << (p4 * RAD_TO_DEG);
 
             map->convertRad2Px(p1);
             map->convertRad2Px(p2);

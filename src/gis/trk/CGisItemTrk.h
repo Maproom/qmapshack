@@ -46,9 +46,7 @@ class CGisItemTrk : public IGisItem
         void genKey();
         void readTrk(const QDomNode& xml, trk_t& trk);
         void setColor(const QColor& c);
-        void setColor(unsigned i);
         void setIcon(const QString& c);
-        void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
 
         struct trkpt_t : public wpt_t
         {

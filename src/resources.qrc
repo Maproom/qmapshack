@@ -38,7 +38,7 @@
         <file>icons/16x16/Help.png</file>
         <file>icons/16x16/Info.png</file>
         <file>icons/16x16/Map.png</file>
-        <file>icons/16x16/MapRoom.png</file>
+        <file>icons/16x16/QMapShack.png</file>
         <file>icons/16x16/MimeIMG.png</file>
         <file>icons/16x16/MimeJNX.png</file>
         <file>icons/16x16/MimeMAP.png</file>
@@ -85,7 +85,7 @@
         <file>icons/32x32/Help.png</file>
         <file>icons/32x32/Info.png</file>
         <file>icons/32x32/Map.png</file>
-        <file>icons/32x32/MapRoom.png</file>
+        <file>icons/32x32/QMapShack.png</file>
         <file>icons/32x32/MimeIMG.png</file>
         <file>icons/32x32/MimeJNX.png</file>
         <file>icons/32x32/MimeMAP.png</file>
@@ -132,7 +132,7 @@
         <file>icons/48x48/Help.png</file>
         <file>icons/48x48/Info.png</file>
         <file>icons/48x48/Map.png</file>
-        <file>icons/48x48/MapRoom.png</file>
+        <file>icons/48x48/QMapShack.png</file>
         <file>icons/48x48/MimeIMG.png</file>
         <file>icons/48x48/MimeJNX.png</file>
         <file>icons/48x48/MimeMAP.png</file>

@@ -221,7 +221,7 @@ void CMainWindow::slotAbout()
 
 void CMainWindow::slotHelp()
 {
-    QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/maproom/wiki/DocMain"));
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocMain"));
 }
 
 

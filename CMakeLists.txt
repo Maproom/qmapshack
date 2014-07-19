@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11)
 
-project(MapRoom)
+project(QMapShack)
 
 # has to be removed later on
 
@@ -14,27 +14,27 @@ set(CMAKE_PREFIX_PATH C:/Qt5/5.3/msvc2013_64)
 endif(WIN32)
 
 
-set(APPLICATION_NAME maproom)
+set(APPLICATION_NAME qmapshack)
 
 set(APPLICATION_VERSION_MAJOR "0")
-set(APPLICATION_VERSION_MINOR "1")
-set(APPLICATION_VERSION_PATCH "0.post")
+set(APPLICATION_VERSION_MINOR "2")
+set(APPLICATION_VERSION_PATCH "0.pre")
 
 add_definitions(-DVER_MAJOR=${APPLICATION_VERSION_MAJOR} -DVER_MINOR=${APPLICATION_VERSION_MINOR} -DVER_STEP=${APPLICATION_VERSION_PATCH} -DAPPLICATION_NAME=${PROJECT_NAME})
 
 
 if (APPLE)
-  set(PROGNAME "MapRoom")
+  set(PROGNAME "QMapShack")
   set(CONFIGDIR "Library/Application Support/${PROGNAME}/")
   set(MAC_BUNDLE_PATH ${EXECUTABLE_OUTPUT_PATH}/${PROGNAME}.app)
-  set(MAC_ICON_FILE maproom.icns)
+  set(MAC_ICON_FILE qmapshack.icns)
   set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${APPLICATION_VERSION_MAJOR}.${APPLICATION_VERSION_MINOR}.${APPLICATION_VERSION_PATCH})
   set(MACOSX_BUNDLE_ICON_FILE ${MAC_ICON_FILE})
   set(MACOSX_BUNDLE_BUNDLE_NAME ${PROGNAME})
   set(MACOSX_BUNDLE_BUNDLE_VERSION ${APPLICATION_VERSION_MAJOR}.${APPLICATION_VERSION_MINOR})
-  set(MACOSX_BUNDLE_GUI_IDENTIFIER org.qlandkarte.MapRoom)
+  set(MACOSX_BUNDLE_GUI_IDENTIFIER org.qlandkarte.QMapShack)
 else(APPLE)
-  set(PROGNAME maproom)
+  set(PROGNAME qmapshack)
   set(CONFIGDIR ".config/QLandkarte/")
 endif(APPLE)
 if(MSVC)
@@ -68,21 +68,21 @@ add_subdirectory(src)
 if (UNIX AND NOT WIN32 AND NOT APPLE)
   install(
     FILES
-      maproom.desktop
+      qmapshack.desktop
     DESTINATION
       ${XDG_APPS_DIR}
   )
 
   install(
     FILES
-      src/icons/48x48/MapRoom.png
+      src/icons/48x48/QMapShack.png
     DESTINATION
       ${DATA_INSTALL_PREFIX}/pixmaps
   )
 
   install(
     FILES
-      maproom.1
+      qmapshack.1
     DESTINATION
       ${MAN_INSTALL_DIR}/man1
   )

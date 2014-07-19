@@ -19,7 +19,6 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
-#include "GeoMath.h"
 
 #include <QtXml>
 #include <QtWidgets>
@@ -94,7 +93,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {    
     // --- start read and process data ----
-    setColor(DEFAULT_COLOR);
+    setColor(penForeground.color());
     readTrk(xml, trk);
     // --- stop read and process data ----
     setText(0, trk.name);
@@ -171,6 +170,45 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 void CGisItemTrk::save(QDomNode& gpx)
 {
 
+    QDomDocument doc = gpx.ownerDocument();
+
+    QDomElement xmlTrk = doc.createElement("trk");
+    gpx.appendChild(xmlTrk);
+
+    writeXml(xmlTrk, "name", trk.name);
+    writeXml(xmlTrk, "cmt", trk.cmt);
+    writeXml(xmlTrk, "desc", trk.desc);
+    writeXml(xmlTrk, "src", trk.src);
+    writeXml(xmlTrk, "link", trk.links);
+    writeXml(xmlTrk, "number", trk.number);
+    writeXml(xmlTrk, "type", trk.type);
+
+    // write the key as extension tag
+    QDomElement xmlExt  = doc.createElement("extensions");
+    xmlTrk.appendChild(xmlExt);
+    writeXml(xmlExt, "ql:key", key);
+
+    // write other well known extensions
+    QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
+    xmlExt.appendChild(gpxx);
+    writeXml(gpxx, "gpxx:DisplayColor", color2str(color));
+
+    foreach(const trkseg_t& seg, trk.segs)
+    {
+        QDomElement xmlTrkseg = doc.createElement("trkseg");
+        xmlTrk.appendChild(xmlTrkseg);
+
+        foreach(const trkpt_t& pt, seg.pts)
+        {
+            QDomElement xmlTrkpt = doc.createElement("trkpt");
+            xmlTrkseg.appendChild(xmlTrkpt);
+            writeWpt(xmlTrkpt, pt);
+
+            QDomElement xmlExt  = doc.createElement("extensions");
+            xmlTrkpt.appendChild(xmlExt);
+            writeXml(xmlExt, "ql:flags", pt.flags);
+        }
+    }
 }
 
 void CGisItemTrk::genKey()
@@ -198,7 +236,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     QPointF p2 = viewport.bottomRight();
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
-
     QRectF extViewport(p1,p2);
 
     foreach (const trkseg_t& seg, trk.segs)
@@ -229,10 +266,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     }
     penForeground.setColor(color);
     p.setPen(penForeground);
+    p.setBrush(color);
     foreach(const QPolygonF& line, lines)
     {
         p.drawPolyline(line);
+        drawArrows(line, extViewport, p);
     }
+
+
+
 }
 
 
@@ -243,48 +285,8 @@ void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 }
 
 
-void CGisItemTrk::splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines)
-{
-    int i;
-    QPointF pt, ptt, pt1;
-    QPolygonF subline;
-    const int size = line.size();
 
-    pt = line[0];
-    subline << pt;
 
-    for(i = 1; i < size; i++)
-    {
-        pt1 = line[i];
-
-        if(!GPS_Math_LineCrossesRect(pt, pt1, extViewport))
-        {
-            pt = pt1;
-            if(subline.size() > 1)
-            {
-                lines << subline;
-            }
-            subline.clear();
-            subline << pt;
-            continue;
-        }
-
-        ptt = pt1 - pt;
-        if(ptt.manhattanLength() < 5)
-        {
-            continue;
-        }
-
-        subline << pt1;
-        pt = pt1;
-    }
-
-    if(subline.size() > 1)
-    {
-        lines << subline;
-    }
-
-}
 
 void CGisItemTrk::setColor(const QColor& c)
 {
@@ -314,15 +316,6 @@ void CGisItemTrk::setColor(const QColor& c)
 }
 
 
-void CGisItemTrk::setColor(unsigned i)
-{
-    if(i>16) i = DEFAULT_COLOR;
-    colorIdx    = i;
-    color       = lineColors[i];
-    bullet      = QPixmap(bulletColors[i]);
-
-    setIcon(color.name());
-}
 
 void CGisItemTrk::setIcon(const QString& c)
 {

@@ -120,15 +120,40 @@ QPixmap loadIcon(const QString& path)
 QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
 {
 
+    QPixmap icon;
+    QString path;
+
     if(wptIcons.contains(name))
     {
-        focus               = wptIcons[name].focus;
-        const QString& icon = wptIcons[name].path;
-        if(src) *src = icon;
+        focus   = wptIcons[name].focus;
+        path    = wptIcons[name].path;
+        if(src) *src = path;
 
-        return loadIcon(icon);
+    }
+    else
+    {
+        focus   = wptIcons["Default"].focus;
+        path    = wptIcons["Default"].path;
+        if(src) *src = path;
+    }
+    icon = loadIcon(path);
+
+    // Limit icon size to 22 pixel max.
+    if(icon.width() > 22 || icon.height() > 22)
+    {
+        qreal s;
+        if(icon.width() > icon.height())
+        {
+            s = 22.0/icon.width();
+        }
+        else
+        {
+            s = 22.0/icon.height();
+        }
+
+        focus = focus * s;
+        icon  = icon.scaled(icon.size()*s,Qt::KeepAspectRatio,Qt::SmoothTransformation);
     }
 
-    focus = wptIcons["Dafault"].focus;
-    return loadIcon(wptIcons[name].path);
+    return icon;
 }

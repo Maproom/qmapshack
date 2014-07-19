@@ -18,6 +18,8 @@
 
 #include "gis/IGisItem.h"
 #include "units/IUnit.h"
+#include "canvas/CCanvas.h"
+#include "GeoMath.h"
 
 #include <QtXml>
 
@@ -87,14 +89,9 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
 }
 
 
-QDomNode IGisItem::writeWpt(QDomNode& gpx, const wpt_t& wpt)
+void IGisItem::writeWpt(QDomElement& xmlWpt, const wpt_t& wpt)
 {
     QString str;
-
-    QDomDocument doc = gpx.ownerDocument();
-
-    QDomElement xmlWpt = doc.createElement("wpt");
-    gpx.appendChild(xmlWpt);
 
     str.sprintf("%1.8f", wpt.lat);
     xmlWpt.setAttribute("lat",str);
@@ -120,8 +117,6 @@ QDomNode IGisItem::writeWpt(QDomNode& gpx, const wpt_t& wpt)
     writeXml(xmlWpt, "ageofdgpsdata", wpt.ageofdgpsdata);
     writeXml(xmlWpt, "dgpsid", wpt.dgpsid);
 
-
-    return xmlWpt;
 }
 
 const QString& IGisItem::getKey()
@@ -162,3 +157,113 @@ QString IGisItem::color2str(const QColor& color)
 
     return "";
 }
+
+void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines)
+{
+    int i;
+    QPointF pt, ptt, pt1;
+    QPolygonF subline;
+    const int size = line.size();
+
+    pt = line[0];
+    subline << pt;
+
+    for(i = 1; i < size; i++)
+    {
+        pt1 = line[i];
+
+        if(!GPS_Math_LineCrossesRect(pt, pt1, extViewport))
+        {
+            pt = pt1;
+            if(subline.size() > 1)
+            {
+                lines << subline;
+            }
+            subline.clear();
+            subline << pt;
+            continue;
+        }
+
+        ptt = pt1 - pt;
+        if(ptt.manhattanLength() < 5)
+        {
+            continue;
+        }
+
+        subline << pt1;
+        pt = pt1;
+    }
+
+    if(subline.size() > 1)
+    {
+        lines << subline;
+    }
+
+}
+
+void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPainter& p)
+{
+    QPointF arrow[4] =
+    {
+        QPointF( 20.0, 7.0),     //front
+        QPointF( 0.0, 0.0),      //upper tail
+        QPointF( 5.0, 7.0),      //mid tail
+        QPointF( 0.0, 15.0)      //lower tail
+    };
+
+    QPointF  pt, pt1, ptt;
+
+    // draw direction arrows
+    bool    start = true;
+    double  heading;
+
+    //generate arrow pic on-the-fly
+    QImage arrow_pic(21,16, QImage::Format_ARGB32);
+    arrow_pic.fill( qRgba(0,0,0,0));
+    QPainter t_paint(&arrow_pic);
+    USE_ANTI_ALIASING(t_paint, true);
+    t_paint.setPen(QPen(Qt::white, 2));
+    t_paint.setBrush(p.brush());
+    t_paint.drawPolygon(arrow, 4);
+    t_paint.end();
+
+    foreach(pt,line)
+    {
+        if(start)                // no arrow on  the first loop
+        {
+            start = false;
+        }
+        else
+        {
+            if(!extViewport.contains(pt))
+            {
+                pt1 = pt;
+                continue;
+            }
+            if((abs(pt.x() - pt1.x()) + abs(pt.y() - pt1.y())) < 7)
+            {
+                pt1 = pt;
+                continue;
+            }
+            // keep distance
+            if((abs(pt.x() - ptt.x()) + abs(pt.y() - ptt.y())) > 100)
+            {
+                if(0 != pt.x() - pt1.x() && (pt.y() - pt1.y()))
+                {
+                    heading = ( atan2((double)(pt.y() - pt1.y()), (double)(pt.x() - pt1.x())) * 180.) / M_PI;
+
+                    p.save();
+                    // draw arrow between bullets
+                    p.translate((pt.x() + pt1.x())/2,(pt.y() + pt1.y())/2);
+                    p.rotate(heading);
+                    p.drawImage(-11, -7, arrow_pic);
+                    p.restore();
+                    //remember last point
+                    ptt = pt;
+                }
+            }
+        }
+        pt1 = pt;
+    }
+}
+

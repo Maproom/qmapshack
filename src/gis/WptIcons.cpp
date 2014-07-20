@@ -45,6 +45,7 @@ void initWptIcons()
 //    wptIcons["Small City"]          = ":/icons/wpt/small_city15x15.png";
 //    wptIcons["Geocache"]            = ":/icons/wpt/geocache15x15.png";
 //    wptIcons["Geocache Found"]      = ":/icons/wpt/geocache_fnd15x15.png";
+    wptIcons["Residence"]           = icon_t("://icons/waypoints/32x32/Residence.png", 16, 16);
     wptIcons["Flag, Red"]           = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32);
     wptIcons["Flag, Blue"]          = icon_t("://icons/waypoints/32x32/FlagBlue.png", 0, 32);
     wptIcons["Flag, Green"]         = icon_t("://icons/waypoints/32x32/FlagGreen.png", 0, 32);

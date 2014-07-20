@@ -636,7 +636,7 @@ bool CMapIMG::readBasics()
     while(subfile != subfiles.end())
     {
         PROGRESS(cnt++, throw exce_t(errAbort,tr("User abort: ") + filename))
-        if((*subfile).parts.contains("GMP")) throw exce_t(errFormat,tr("File is NT format. QLandkarte GT is unable to read map files with NT format: ") + filename);
+        if((*subfile).parts.contains("GMP")) throw exce_t(errFormat,tr("File is NT format. QMapShack is unable to read map files with NT format: ") + filename);
 
         readSubfileBasics(*subfile, file);
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>580</width>
-    <height>287</height>
+    <height>369</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,14 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="radioLonLat">
+        <property name="text">
+         <string>Lon/Lat</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
        <layout class="QHBoxLayout">
         <item>
          <widget class="QRadioButton" name="radioUTM">
@@ -74,7 +81,7 @@
         </item>
        </layout>
       </item>
-      <item row="4" column="1">
+      <item row="6" column="1">
        <layout class="QHBoxLayout">
         <item>
          <widget class="QRadioButton" name="radioUserDef">
@@ -88,17 +95,24 @@
         </item>
        </layout>
       </item>
-      <item row="5" column="0">
+      <item row="7" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Datum</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="7" column="1">
        <widget class="QComboBox" name="comboDatum"/>
       </item>
-      <item row="6" column="1">
+      <item row="2" column="1">
+       <widget class="QRadioButton" name="radioWorldMercator">
+        <property name="text">
+         <string>World Mercator (OSM)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
        <spacer>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -111,31 +125,17 @@
         </property>
        </spacer>
       </item>
-      <item row="7" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Result:</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
+      <item row="9" column="1">
        <widget class="QLabel" name="labelResult">
         <property name="text">
          <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QRadioButton" name="radioWorldMercator">
-        <property name="text">
-         <string>World Mercator (OSM)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QRadioButton" name="radioLonLat">
-        <property name="text">
-         <string>Lon/Lat</string>
         </property>
        </widget>
       </item>
@@ -143,6 +143,20 @@
        <widget class="QLabel" name="label">
         <property name="text">
          <string>Projection</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QRadioButton" name="radioUPSNorth">
+        <property name="text">
+         <string>UPS North (North Pole)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QRadioButton" name="radioUPSSouth">
+        <property name="text">
+         <string>UPS South (South Pole)</string>
         </property>
        </widget>
       </item>

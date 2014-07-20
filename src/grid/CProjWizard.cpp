@@ -58,6 +58,8 @@ CProjWizard::CProjWizard(QLineEdit &line)
     connect(radioLonLat, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(radioMercator, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(radioWorldMercator, SIGNAL(clicked()), this, SLOT(slotChange()));
+    connect(radioUPSNorth, SIGNAL(clicked()), this, SLOT(slotChange()));
+    connect(radioUPSSouth, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(radioUTM, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(radioUserDef, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(comboDatum, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChange()));
@@ -161,6 +163,14 @@ void CProjWizard::slotChange()
         str += "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
         labelResult->setText(str);
         return;
+    }
+    else if(radioUPSNorth->isChecked())
+    {
+        str += "+init=epsg:32661";
+    }
+    else if(radioUPSSouth->isChecked())
+    {
+        str += "+init=epsg:32761";
     }
     else if(radioUTM->isChecked())
     {

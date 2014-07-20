@@ -253,11 +253,19 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     {
         if(y > (85*DEG_TO_RAD)) y = (85*DEG_TO_RAD);
         if(btmMin < -(85*DEG_TO_RAD - yGridSpace)) btmMin = -(85*DEG_TO_RAD - yGridSpace);
+
+        if(x > rightMax)
+        {
+            if(fabs(x) > fabs(rightMax))
+            {
+                xStart = x = -180 * DEG_TO_RAD;
+            }
+            if(fabs(x) < fabs(rightMax))
+            {
+                rightMax = 180 * DEG_TO_RAD;
+            }
+        }
     }
-
-
-    //    qDebug() << xStart  << yStart ;
-    //    qDebug() << xGridSpace  << yGridSpace ;
 
     QList< val_t > horzTopTicks;
     QList< val_t > horzBtmTicks;

@@ -129,6 +129,11 @@ void CGisItemRte::genKey()
 
 void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
+    if(!viewport.intersects(boundingRect))
+    {
+        return;
+    }
+
     QPolygonF line;
 
     QPointF p1 = viewport.topLeft();
@@ -172,6 +177,12 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
 
 void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
+    if(!viewport.intersects(boundingRect))
+    {
+        return;
+    }
+
+
     foreach(const rtept_t& rtept, rte.pts)
     {
 

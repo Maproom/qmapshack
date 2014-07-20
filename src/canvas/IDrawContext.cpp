@@ -151,8 +151,8 @@ void IDrawContext::resize(const QSize& size)
 //    int a       = sqrt(viewWidth*viewWidth + viewHeight*viewHeight);
 //    bufWidth    = a + 100;
 //    bufHeight   = a + 100;
-    bufWidth    = viewWidth  + 00;
-    bufHeight   = viewHeight + 00;
+    bufWidth    = viewWidth  + 100;
+    bufHeight   = viewHeight + 100;
 
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
@@ -307,6 +307,29 @@ void IDrawContext::draw(QPainter& p, bool needsRedraw, const QPointF& f, const Q
     ref4 = f1 + QPointF(-bufWidth/2,  bufHeight/2) * bufferScale;
     convertM2Rad(ref4);
 
+    if(ref1.x() > ref2.x())
+    {
+        if(fabs(ref1.x()) > fabs(ref2.x()))
+        {
+            qDebug() << "bam! west boundary";
+
+            ref1.rx() = 2*(180*DEG_TO_RAD) - ref1.rx();
+        }
+        if(fabs(ref4.x()) > fabs(ref3.x()))
+        {
+            qDebug() << "bam! west boundary";
+
+            ref4.rx() = 2*(180*DEG_TO_RAD) - ref4.rx();
+        }
+
+        if(fabs(ref1.x()) < fabs(ref2.x()))
+        {
+            qDebug() << "bam! east boundary";
+        }
+    }
+
+    qDebug() << (ref1 * RAD_TO_DEG) << (ref2 * RAD_TO_DEG) << (ref3 * RAD_TO_DEG) << (ref4 * RAD_TO_DEG);
+
     // get current active buffer
     buffer_t& currentBuffer = buffer[bufIndex];
 
@@ -350,6 +373,7 @@ void IDrawContext::run()
     IDrawContext::buffer_t& currentBuffer = buffer[!bufIndex];
     while(intNeedsRedraw)
     {
+
         // copy all projection information need by the
         // map render objects to buffer structure
         currentBuffer.pjsrc         = pjsrc;
@@ -362,7 +386,13 @@ void IDrawContext::run()
         currentBuffer.focus         = focus;
         intNeedsRedraw              = false;
 
-        qDebug() << (ref1 * RAD_TO_DEG) << (ref2 * RAD_TO_DEG) << (ref3 * RAD_TO_DEG) << (ref4 * RAD_TO_DEG);
+//        QPointF(31.9108, 80.6753) QPointF(177.797, 80.6753) QPointF(177.797, 46.2182) QPointF(31.9108, 46.2182) - ok - east
+//        QPointF(36.9414, 80.6898) QPointF(-177.172, 80.6898) QPointF(-177.172, 46.2805) QPointF(36.9414, 46.2805) - not ok - east
+
+//        QPointF(-179.508, 80.8269) QPointF(-33.6213, 80.8269) QPointF(-33.6213, 46.869) QPointF(-179.508, 46.869) - ok - west
+//        QPointF(172.318, 80.9124) QPointF(-41.7959, 80.9124) QPointF(-41.7959, 47.2374) QPointF(172.318, 47.2374) - not ok - west
+
+
         mutex.unlock();        
 
         qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);

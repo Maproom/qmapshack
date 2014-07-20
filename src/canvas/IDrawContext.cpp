@@ -148,9 +148,6 @@ void IDrawContext::resize(const QSize& size)
     viewHeight  = size.height();
 
     center      = QPointF(viewWidth/2.0, viewHeight/2.0);
-//    int a       = sqrt(viewWidth*viewWidth + viewHeight*viewHeight);
-//    bufWidth    = a + 100;
-//    bufHeight   = a + 100;
     bufWidth    = viewWidth  + 100;
     bufHeight   = viewHeight + 100;
 
@@ -225,7 +222,38 @@ void IDrawContext::convertRad2M(QPointF &p)
     {
         return;
     }
+
+    qreal y = p.y();
+    /*
+        Proj4 makes a wrap around for values outside the
+        range of -180..180°. But the draw context has no
+        turnaround. It exceeds the values. We have to
+        apply fixes in that case.
+    */
+    bool fixWest = p.x() < (-180*DEG_TO_RAD);
+    bool fixEast = p.x() > ( 180*DEG_TO_RAD);
+
     pj_transform(pjtar,pjsrc,1,0,&p.rx(),&p.ry(),0);
+
+    /*
+        The idea of the fix is to calculate a point
+        at the boundary with the same latitude and use it
+        as offset.
+    */
+    if(fixWest)
+    {
+        QPointF o(-180*DEG_TO_RAD,y);
+        convertRad2M(o);
+        p.rx() = 2*o.x() + p.x();
+    }
+
+    if(fixEast)
+    {
+        QPointF o(180*DEG_TO_RAD,y);
+        convertRad2M(o);
+        p.rx() = 2*o.x() + p.x();
+    }
+
 }
 
 void IDrawContext::convertM2Rad(QPointF &p)
@@ -234,7 +262,9 @@ void IDrawContext::convertM2Rad(QPointF &p)
     {
         return;
     }
+
     pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
+
 }
 
 void IDrawContext::convertPx2Rad(QPointF &p)
@@ -307,33 +337,34 @@ void IDrawContext::draw(QPainter& p, bool needsRedraw, const QPointF& f, const Q
     ref4 = f1 + QPointF(-bufWidth/2,  bufHeight/2) * bufferScale;
     convertM2Rad(ref4);
 
+    // adjust west <-> east boundaries
     if(ref1.x() > ref2.x())
     {
         if(fabs(ref1.x()) > fabs(ref2.x()))
         {
-            qDebug() << "bam! west boundary";
-
-            ref1.rx() = 2*(180*DEG_TO_RAD) - ref1.rx();
+            ref1.rx() = -2*(180*DEG_TO_RAD) + ref1.rx();
         }
         if(fabs(ref4.x()) > fabs(ref3.x()))
         {
-            qDebug() << "bam! west boundary";
-
-            ref4.rx() = 2*(180*DEG_TO_RAD) - ref4.rx();
+            ref4.rx() = -2*(180*DEG_TO_RAD) + ref4.rx();
         }
 
         if(fabs(ref1.x()) < fabs(ref2.x()))
         {
-            qDebug() << "bam! east boundary";
+            ref2.rx() = 2*(180*DEG_TO_RAD) + ref2.rx();
+        }
+        if(fabs(ref4.x()) < fabs(ref3.x()))
+        {
+            ref3.rx() = 2*(180*DEG_TO_RAD) + ref3.rx();
         }
     }
 
-    qDebug() << (ref1 * RAD_TO_DEG) << (ref2 * RAD_TO_DEG) << (ref3 * RAD_TO_DEG) << (ref4 * RAD_TO_DEG);
+//    qDebug() << (ref1 * RAD_TO_DEG) << (ref2 * RAD_TO_DEG) << (ref3 * RAD_TO_DEG) << (ref4 * RAD_TO_DEG);
 
     // get current active buffer
     buffer_t& currentBuffer = buffer[bufIndex];
 
-    // convert buffers top left reference point to local coordinate system
+    // convert buffers top left reference point to local coordinate system    
     QPointF ref = currentBuffer.ref1;
     convertRad2M(ref);
 
@@ -385,13 +416,6 @@ void IDrawContext::run()
         currentBuffer.ref4          = ref4;
         currentBuffer.focus         = focus;
         intNeedsRedraw              = false;
-
-//        QPointF(31.9108, 80.6753) QPointF(177.797, 80.6753) QPointF(177.797, 46.2182) QPointF(31.9108, 46.2182) - ok - east
-//        QPointF(36.9414, 80.6898) QPointF(-177.172, 80.6898) QPointF(-177.172, 46.2805) QPointF(36.9414, 46.2805) - not ok - east
-
-//        QPointF(-179.508, 80.8269) QPointF(-33.6213, 80.8269) QPointF(-33.6213, 46.869) QPointF(-179.508, 46.869) - ok - west
-//        QPointF(172.318, 80.9124) QPointF(-41.7959, 80.9124) QPointF(-41.7959, 47.2374) QPointF(172.318, 47.2374) - not ok - west
-
 
         mutex.unlock();        
 

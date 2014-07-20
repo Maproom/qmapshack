@@ -168,10 +168,6 @@ qreal CDemVRT::getElevation(const QPointF& pos)
 }
 
 
-
-
-
-
 void CDemVRT::draw(IDrawContext::buffer_t& buf)
 {
     if(dem->needsRedraw())

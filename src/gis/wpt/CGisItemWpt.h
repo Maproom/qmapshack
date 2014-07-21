@@ -37,9 +37,51 @@ class CGisItemWpt : public IGisItem
 
     private:
         void genKey();
+        void setIcon();
+        void readGcExt(const QDomNode& xmlCache);
+
+        enum geocacheservice_e {eGC, eOC, eTC};
+
+        struct geocachelog_t
+        {
+            geocachelog_t() : id(0){}
+            quint32 id;
+            QDateTime date;
+            QString type;
+            QString finderId;
+            QString finder;
+            QString text;
+        };
+
+        struct geocache_t
+        {
+            geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0){}
+            geocacheservice_e service;
+            bool hasData;
+            quint32 id;
+            bool available;
+            bool archived;
+            qreal difficulty;
+            qreal terrain;
+            QString status;
+            QString name;
+            QString owner;
+            QString ownerId;
+            QString type;
+            QString container;
+            QString shortDesc;
+            QString longDesc;
+            QString hint;
+            QString country;
+            QString state;
+            QString locale;
+            QList<geocachelog_t> logs;
+        };
+
 
         wpt_t wpt;
         qreal proximity;
+        geocache_t geocache;
 
         QPixmap icon;
         QPointF focus;

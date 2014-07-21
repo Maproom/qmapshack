@@ -43,20 +43,53 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
 
         const QDomNode& wptx1 = ext.namedItem("wptx1:WaypointExtension");
         readXml(wptx1, "wptx1:Proximity", proximity);
+
+        const QDomNode& xmlCache = ext.namedItem("cache");
+        if(!xmlCache.isNull())
+        {
+            // read OC cache extensions
+        }
     }
 
-    // translate icon from kind of well known string to pixmap object
-    icon = getWptIconByName(wpt.sym, focus);
+    const QDomNode& xmlCache = xml.namedItem("groundspeak:cache");
+    if(!xmlCache.isNull() && !geocache.hasData)
+    {
+        readGcExt(xmlCache);
+    }
     // --- stop read and process data ----
 
     setText(0, wpt.name);
-    setIcon(0, icon);
+    setIcon();
     genKey();
 }
 
 CGisItemWpt::~CGisItemWpt()
 {
 
+}
+
+void CGisItemWpt::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData((const char*)&wpt, sizeof(wpt));
+        key = md5.result().toHex();
+    }
+}
+
+void CGisItemWpt::setIcon()
+{
+    if(geocache.hasData)
+    {
+        icon = getWptIconByName(geocache.type, focus);
+    }
+    else
+    {
+        icon = getWptIconByName(wpt.sym, focus);
+    }
+
+    QTreeWidgetItem::setIcon(0,icon);
 }
 
 void CGisItemWpt::save(QDomNode& gpx)
@@ -78,15 +111,68 @@ void CGisItemWpt::save(QDomNode& gpx)
     writeXml(wptx1, "wptx1:Proximity", proximity);
 }
 
-void CGisItemWpt::genKey()
+void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 {
-    if(key.isEmpty())
+
+    geocache.service = eGC;
+    const QDomNamedNodeMap& attr = xmlCache.attributes();
+    geocache.id = attr.namedItem("id").nodeValue().toInt();
+
+    geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
+    geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
+    if(geocache.archived)
     {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&wpt, sizeof(wpt));
-        key = md5.result().toHex();
+        geocache.status = QObject::tr("Archived");
     }
+    else if(geocache.available)
+    {
+        geocache.status = QObject::tr("Available");
+    }
+    else
+    {
+        geocache.status = QObject::tr("Not Available");
+    }
+
+    readXml(xmlCache, "groundspeak:name", geocache.name);
+    readXml(xmlCache, "groundspeak:placed_by", geocache.owner);
+    readXml(xmlCache, "groundspeak:type", geocache.type);
+    readXml(xmlCache, "groundspeak:container", geocache.container);
+    readXml(xmlCache, "groundspeak:difficulty", geocache.difficulty);
+    readXml(xmlCache, "groundspeak:terrain", geocache.terrain);
+    readXml(xmlCache, "groundspeak:short_description", geocache.shortDesc);
+    readXml(xmlCache, "groundspeak:long_description", geocache.longDesc);
+    readXml(xmlCache, "groundspeak:encoded_hints", geocache.hint);
+    readXml(xmlCache, "groundspeak:country", geocache.country);
+    readXml(xmlCache, "groundspeak:state", geocache.state);
+
+    const QDomNodeList& logs = xmlCache.toElement().elementsByTagName("groundspeak:log");
+    uint N = logs.count();
+
+    for(uint n = 0; n < N; ++n)
+    {
+        const QDomNode& xmlLog = logs.item(n);
+        const QDomNamedNodeMap& attr = xmlLog.attributes();
+
+        geocachelog_t log;
+        log.id = attr.namedItem("id").nodeValue().toUInt();
+        readXml(xmlLog, "groundspeak:date", log.date);
+        readXml(xmlLog, "groundspeak:type", log.type);
+        if(xmlLog.namedItem("groundspeak:finder").isElement())
+        {
+            const QDomNamedNodeMap& attr = xmlLog.namedItem("groundspeak:finder").attributes();
+            log.finderId = attr.namedItem("id").nodeValue();
+        }
+
+        readXml(xmlLog, "groundspeak:finder", log.finder);
+        readXml(xmlLog, "groundspeak:text", log.text);
+
+        geocache.logs << log;
+
+    }
+    geocache.hasData = true;
 }
+
+
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {

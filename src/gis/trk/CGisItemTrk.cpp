@@ -230,7 +230,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     }
 
     QPointF     pt1;
-    QPolygonF   line;
 
     QPointF p1 = viewport.topLeft();
     QPointF p2 = viewport.bottomRight();
@@ -238,6 +237,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
+    line.clear();
     foreach (const trkseg_t& seg, trk.segs)
     {
         foreach(const trkpt_t& pt, seg.pts)
@@ -259,21 +259,19 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     QList<QPolygonF> lines;
     splitLineToViewport(line, extViewport, lines);
 
+    p.setBrush(color);
     p.setPen(penBackground);
-    foreach(const QPolygonF& line, lines)
+    foreach(const QPolygonF& l, lines)
     {
-        p.drawPolyline(line);
+        p.drawPolyline(l);
+        drawArrows(l, extViewport, p);
     }
     penForeground.setColor(color);
     p.setPen(penForeground);
-    p.setBrush(color);
-    foreach(const QPolygonF& line, lines)
+    foreach(const QPolygonF& l, lines)
     {
-        p.drawPolyline(line);
-        drawArrows(line, extViewport, p);
+        p.drawPolyline(l);
     }
-
-
 
 }
 

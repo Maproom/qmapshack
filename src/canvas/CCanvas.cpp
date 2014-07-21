@@ -165,7 +165,9 @@ void CCanvas::paintEvent(QPaintEvent * e)
     p.resetTransform();
     // ----- start to draw static content -----
 
+    mouse->draw(p, rect());
     grid->draw(p, rect());
+
 
     drawScale(p);
 

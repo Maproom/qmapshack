@@ -23,6 +23,7 @@
 #include "ui_IGisWidget.h"
 
 class CGisDraw;
+class IGisItem;
 
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
@@ -32,8 +33,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         virtual ~CGisWidget();
 
         void loadGpx(const QString& filename);
-
         void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
+        void getItemByPos(const QPointF& pos, QList<IGisItem*> items);
 
     signals:
         void sigChanged();

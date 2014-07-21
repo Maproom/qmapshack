@@ -109,11 +109,17 @@ void CGisItemWpt::save(QDomNode& gpx)
     QDomElement wptx1  = doc.createElement("wptx1:WaypointExtension");
     xmlExt.appendChild(wptx1);
     writeXml(wptx1, "wptx1:Proximity", proximity);
+
+    if(geocache.hasData && geocache.service == eGC)
+    {
+        QDomElement xmlCache = doc.createElement("groundspeak:cache");
+        writeGcExt(xmlCache);
+        xmlWpt.appendChild(xmlCache);
+    }
 }
 
 void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 {
-
     geocache.service = eGC;
     const QDomNamedNodeMap& attr = xmlCache.attributes();
     geocache.id = attr.namedItem("id").nodeValue().toInt();
@@ -172,17 +178,78 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.hasData = true;
 }
 
+void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
+{
+    QString str;
+    xmlCache.toElement().setAttribute("xmlns:groundspeak", "http://www.groundspeak.com/cache/1/0");
+    xmlCache.toElement().setAttribute("id", geocache.id);
+    xmlCache.toElement().setAttribute("archived", geocache.archived ? "True" : "False");
+    xmlCache.toElement().setAttribute("available", geocache.available ? "True" : "False");
 
+    writeXml(xmlCache, "groundspeak:name", geocache.name);
+    writeXml(xmlCache, "groundspeak:placed_by", geocache.owner);
+    writeXml(xmlCache, "groundspeak:type", geocache.type);
+    writeXml(xmlCache, "groundspeak:container", geocache.container);
+
+    if(geocache.difficulty == int(geocache.difficulty))
+    {
+        str.sprintf("%1.0f", geocache.difficulty);
+    }
+    else
+    {
+        str.sprintf("%1.1f", geocache.difficulty);
+    }
+    writeXml(xmlCache, "groundspeak:difficulty", str);
+
+    if(geocache.terrain == int(geocache.terrain))
+    {
+        str.sprintf("%1.0f", geocache.terrain);
+    }
+    else
+    {
+        str.sprintf("%1.1f", geocache.terrain);
+    }
+    writeXml(xmlCache, "groundspeak:terrain", str);
+    writeXmlHtml(xmlCache, "groundspeak:short_description", geocache.shortDesc);
+    writeXmlHtml(xmlCache, "groundspeak:long_description", geocache.longDesc);
+    writeXml(xmlCache, "groundspeak:encoded_hints", geocache.hint);
+
+    if(!geocache.logs.isEmpty())
+    {
+        QDomElement xmlLogs = xmlCache.ownerDocument().createElement("groundspeak:logs");
+        xmlCache.appendChild(xmlLogs);
+
+        foreach(const geocachelog_t& log, geocache.logs)
+        {
+            QDomElement xmlLog = xmlCache.ownerDocument().createElement("groundspeak:log");
+            xmlLogs.appendChild(xmlLog);
+
+            xmlLog.setAttribute("id", log.id);
+            writeXml(xmlLog, "groundspeak:date", log.date);
+            writeXml(xmlLog, "groundspeak:type", log.type);
+
+            QDomElement xmlFinder = xmlCache.ownerDocument().createElement("groundspeak:finder");
+            xmlLog.appendChild(xmlFinder);
+
+            QDomText _finder_ = xmlCache.ownerDocument().createCDATASection(log.finder);
+            xmlFinder.appendChild(_finder_);
+            xmlFinder.setAttribute("id", log.finderId);
+
+            writeXmlHtml(xmlLog, "groundspeak:text", log.text);
+        }
+    }
+}
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
-    QPointF pt(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
-    if(!viewport.contains(pt))
+    pos = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
+    if(!viewport.contains(pos))
     {
+        pos = QPoint();
         return;
     }
-    gis->convertRad2Px(pt);
-    p.drawPixmap(pt - focus, icon);
+    gis->convertRad2Px(pos);
+    p.drawPixmap(pos - focus, icon);
 
     if(proximity != NOFLOAT)
     {
@@ -190,30 +257,28 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
         pt1 = GPS_Math_Wpt_Projection(pt1, proximity, 90 * DEG_TO_RAD);
         gis->convertRad2Px(pt1);
 
-        double r = pt1.x() - pt.x();
+        double r = pt1.x() - pos.x();
 
         p.save();
         p.setBrush(Qt::NoBrush);
         p.setPen(QPen(Qt::white,3));
-        p.drawEllipse(QRect(pt.x() - r - 1, pt.y() - r - 1, 2*r + 1, 2*r + 1));
+        p.drawEllipse(QRect(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1));
         p.setPen(QPen(Qt::red,1));
-        p.drawEllipse(QRect(pt.x() - r - 1, pt.y() - r - 1, 2*r + 1, 2*r + 1));
+        p.drawEllipse(QRect(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1));
         p.restore();
     }
 
-    blockedAreas << QRectF(pt - focus, icon.size());
+    blockedAreas << QRectF(pos - focus, icon.size());
 }
 
 void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
-    QPointF pt(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
-    if(!viewport.contains(pt))
+    if(pos.isNull())
     {
         return;
     }
-    gis->convertRad2Px(pt);
-    pt = pt - focus;
 
+    QPointF pt = pos - focus;
 
     QRectF rect = fm.boundingRect(wpt.name);
     rect.adjust(-2,-2,2,2);

@@ -29,6 +29,7 @@ class CMouseNormal : public IMouse
         CMouseNormal(CCanvas *canvas);
         virtual ~CMouseNormal();
 
+        void draw(QPainter& p, const QRect &rect);
         void mousePressEvent(QMouseEvent * e);
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);

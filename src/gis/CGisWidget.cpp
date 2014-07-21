@@ -91,6 +91,14 @@ void CGisWidget::slotSaveAll()
 }
 
 
+void CGisWidget::getItemByPos(const QPointF& pos, QList<IGisItem*> items)
+{
+    IGisItem::mutexItems.lock();
+
+
+    IGisItem::mutexItems.unlock();
+}
+
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());

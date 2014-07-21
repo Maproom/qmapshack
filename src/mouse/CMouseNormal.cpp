@@ -18,6 +18,8 @@
 
 #include "mouse/CMouseNormal.h"
 #include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
+#include "gis/IGisItem.h"
 
 #include <QtGui>
 
@@ -35,6 +37,7 @@ CMouseNormal::~CMouseNormal()
 
 void CMouseNormal::mousePressEvent(QMouseEvent * e)
 {
+    point = e->pos();
     if(e->button() == Qt::LeftButton)
     {
         lastPos = e->pos();
@@ -44,6 +47,7 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
 
 void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 {
+    point = e->pos();
     const QPoint pos = e->pos();
 
     if(mapMove)
@@ -63,8 +67,16 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 
 void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
 {
+    point = e->pos();
     if(e->button() == Qt::LeftButton)
     {
         mapMove = false;
     }
+}
+
+void CMouseNormal::draw(QPainter& p, const QRect &rect)
+{
+    QList<IGisItem*> items;
+    CGisWidget::self().getItemByPos(point, items);
+
 }

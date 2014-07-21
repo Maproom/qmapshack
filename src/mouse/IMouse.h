@@ -37,6 +37,7 @@ class IMouse : public QObject
             eNormal
         };
 
+        virtual void draw(QPainter& p, const QRect &rect) = 0;
         virtual void mousePressEvent(QMouseEvent * e) = 0;
         virtual void mouseMoveEvent(QMouseEvent * e) = 0;
         virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
@@ -51,8 +52,8 @@ class IMouse : public QObject
     protected:
         /// the functions mouse icon
         QCursor cursor;
-
         CCanvas * canvas;
+        QPointF point;
 
 };
 

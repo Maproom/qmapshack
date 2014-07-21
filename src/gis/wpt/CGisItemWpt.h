@@ -39,6 +39,7 @@ class CGisItemWpt : public IGisItem
         void genKey();
         void setIcon();
         void readGcExt(const QDomNode& xmlCache);
+        void writeGcExt(QDomNode& xmlCache);
 
         enum geocacheservice_e {eGC, eOC, eTC};
 
@@ -85,6 +86,7 @@ class CGisItemWpt : public IGisItem
 
         QPixmap icon;
         QPointF focus;
+        QPointF pos;
 
 };
 

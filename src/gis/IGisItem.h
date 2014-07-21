@@ -45,11 +45,10 @@ class IGisItem : public QTreeWidgetItem
         static QMutex mutexItems;
 
         const QString& getKey();
-
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
-
         virtual void save(QDomNode& gpx) = 0;
+
 
     protected:
         struct wpt_t;
@@ -272,6 +271,19 @@ class IGisItem : public QTreeWidgetItem
                 xml.appendChild(elem);
                 QDomText text = xml.ownerDocument().createTextNode(QString("%1").arg(val,0,'f',8));
                 elem.appendChild(text);
+            }
+        }
+
+        inline void writeXmlHtml(QDomNode& xml, const QString& tag, const QString& val)
+        {
+            if(!val.isEmpty())
+            {
+                QDomElement elem = xml.ownerDocument().createElement(tag);
+                xml.appendChild(elem);
+                QDomText text = xml.ownerDocument().createCDATASection(val);
+                elem.appendChild(text);
+                elem.setAttribute("html","True");
+
             }
         }
 

@@ -96,6 +96,8 @@ class CGisItemTrk : public IGisItem
         QPixmap bullet;
         /// the track line color by index
         unsigned colorIdx;
+        ///
+        QPolygonF line;
 
 
 };

@@ -300,8 +300,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                 if((x + dx) > xsize_px)
                 {
                     dx_used     = xsize_px - x;
-                    imgw_used   = qFloor(imgw * dx_used / dx) & 0xFFFFFFFC;
-                    dx_used     = dx * imgw_used / imgw - 1;
+                    imgw_used   = qRound(imgw * dx_used / dx) & 0xFFFFFFFC;
                 }
                 if((y + dy) > ysize_px)
                 {
@@ -309,12 +308,12 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                     imgh_used   = imgh * dy_used / dy;
                 }
 
-                x = qFloor(x);
-                y = qFloor(y);
-                dx_used = qFloor(dx_used);
-                dy_used = qFloor(dy_used);
-                imgw_used = qFloor(imgw_used);
-                imgh_used = qFloor(imgh_used);
+                x           = qRound(x);
+                y           = qRound(y);
+                dx_used     = qFloor(dx_used);
+                dy_used     = qFloor(dy_used);
+                imgw_used   = qRound(imgw_used);
+                imgh_used   = qRound(imgh_used);
 
                 if(imgw_used < 1 || imgh_used < 1)
                 {

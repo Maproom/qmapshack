@@ -86,6 +86,19 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     readXml(xml, "pdop", wpt.pdop);
     readXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
     readXml(xml, "dgpsid", wpt.dgpsid);
+
+    // some GPX 1.0 backward compatibility
+    QString url;
+    readXml(xml, "url", url);
+    if(!url.isEmpty())
+    {
+        link_t link;
+        link.uri.setUrl(url);
+        readXml(xml, "urlname", link.text);
+
+        wpt.links << link;
+    }
+
 }
 
 

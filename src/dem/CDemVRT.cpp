@@ -151,7 +151,9 @@ qreal CDemVRT::getElevation(const QPointF& pos)
     qreal x    = pt.x() - floor(pt.x());
     qreal y    = pt.y() - floor(pt.y());
 
+    mutex.lock();
     CPLErr err = dataset->RasterIO(GF_Read, floor(pt.x()), floor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
+    mutex.unlock();
     if(err == CE_Failure)
     {
         return NOFLOAT;
@@ -221,8 +223,6 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     if(bottom >= ysize_px) bottom = ysize_px - 1;
     if(bottom <= 0) bottom = 1;
 
-    qDebug() << left << top << (right - left) << (bottom - top);
-
     qreal imgw = TILESIZEX;
     qreal imgh = TILESIZEY;
     qreal w =  imgw;
@@ -261,8 +261,35 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 CPLErr err = CE_Failure;
 
-                QVector<qint16> data(wp2 * hp2);
-                err = dataset->RasterIO(GF_Read, x, y, wp2, hp2, data.data(), wp2, hp2, GDT_Int16, 1, 0, 0, 0, 0);
+                qreal wp2_used = wp2;
+                qreal hp2_used = hp2;
+                qreal w_used   = w;
+                qreal h_used   = h;
+
+                if((x + wp2) > xsize_px)
+                {
+                    wp2_used = xsize_px - x;
+                    w_used   = wp2_used - 2;
+                    if(w_used < 2)
+                    {
+                        continue;
+                    }
+                }
+
+                if((y + hp2) > ysize_px)
+                {
+                    hp2_used = ysize_px - y;
+                    h_used   = hp2_used - 2;
+                    if(h_used < 2)
+                    {
+                        continue;
+                    }
+                }
+
+                QVector<qint16> data(wp2_used * hp2_used);
+                mutex.lock();
+                err = dataset->RasterIO(GF_Read, x, y, wp2_used, hp2_used, data.data(), wp2_used, hp2_used, GDT_Int16, 1, 0, 0, 0, 0);
+                mutex.unlock();
 
                 if(err)
                 {
@@ -272,9 +299,9 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 QPolygonF l(4);
                 l[0] = QPointF(x + 1, y + 1);
-                l[1] = QPointF(x + 1 + w, y + 1);
-                l[2] = QPointF(x + 1 + w, y + 1 + h);
-                l[3] = QPointF(x + 1, y + 1 + h);
+                l[1] = QPointF(x + 1 + w_used, y + 1);
+                l[2] = QPointF(x + 1 + w_used, y + 1 + h_used);
+                l[3] = QPointF(x + 1, y + 1 + h_used);
                 l = trFwd.map(l);
                 pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
                 pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
@@ -283,10 +310,10 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 if(doHillshading())
                 {
-                    QImage img(imgw,imgh,QImage::Format_Indexed8);
+                    QImage img(w_used,h_used,QImage::Format_Indexed8);
                     img.setColorTable(graytable);
 
-                    hillshading(data, w, h, img);
+                    hillshading(data, w_used, h_used, img);
 
                     drawTile(img, l, p);
                 }

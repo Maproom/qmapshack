@@ -21,6 +21,8 @@
 
 #include "dem/IDem.h"
 
+#include <QMutex>
+
 class CDemDraw;
 class GDALDataset;
 
@@ -35,6 +37,8 @@ class CDemVRT : public IDem
         qreal getElevation(const QPointF& pos);
 
     private:
+        QMutex mutex;
+
         QString filename;
         /// instance of GDAL dataset
         GDALDataset * dataset;

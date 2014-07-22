@@ -103,7 +103,6 @@ void CGisWidget::getItemByPos(const QPointF& pos, QList<IGisItem*>& items)
         }
         item->getItemByPos(pos, items);
     }
-
     IGisItem::mutexItems.unlock();
 }
 

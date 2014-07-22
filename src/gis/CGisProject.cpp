@@ -130,8 +130,8 @@ void CGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
             items << item;
         }
     }
-
 }
+
 
 void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis)
 {

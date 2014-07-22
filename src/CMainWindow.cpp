@@ -360,7 +360,7 @@ void CMainWindow::slotUpdateCurrentWidget()
     CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
     if(canvas)
     {
-        canvas->slotTriggerCompleteUpdate();
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
         return;
     }
 

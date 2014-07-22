@@ -20,6 +20,7 @@
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
+#include "gis/CGisWidget.h"
 
 #include <QtGui>
 
@@ -40,8 +41,9 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
     point = e->pos();
     if(e->button() == Qt::LeftButton)
     {
-        lastPos = e->pos();
-        mapMove = true;
+        lastPos     = e->pos();
+        mapMove     = true;
+        mapDidMove  = false;
     }
 }
 
@@ -56,7 +58,8 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         {
             QPoint delta = pos - lastPos;
             canvas->moveMap(delta);
-            lastPos = pos;
+            lastPos     = pos;
+            mapDidMove  = true;
         }
     }
     else
@@ -70,8 +73,24 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
 {
     point = e->pos();
     if(e->button() == Qt::LeftButton)
-    {
-        mapMove = false;
+    {      
+        if(!mapDidMove)
+        {
+            QList<IGisItem*> items;
+            CGisWidget::self().getItemByPos(point, items);
+
+            if(items.size() == 1)
+            {
+                IGisItem * item = items.first();
+                item->treeWidget()->setCurrentItem(item);
+                item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
+                item->gainUserFocus();
+            }
+
+        }
+
+        mapMove     = false;
+        mapDidMove  = false;
     }
 }
 

@@ -35,12 +35,15 @@ class CGisItemWpt : public IGisItem
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
+        void gainUserFocus();
 
     private:
         void genKey();
         void setIcon();
         void readGcExt(const QDomNode& xmlCache);
         void writeGcExt(QDomNode& xmlCache);
+
+        static QString keyUserFocus;
 
         enum geocacheservice_e {eGC, eOC, eTC};
 

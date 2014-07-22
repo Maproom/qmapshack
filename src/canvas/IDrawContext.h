@@ -27,13 +27,13 @@
 #include <proj_api.h>
 
 
-class CCanvas;
+#include "canvas/CCanvas.h"
 
 class IDrawContext : public QThread
 {
     Q_OBJECT
     public:
-        IDrawContext(const QString &name, CCanvas *parent);
+        IDrawContext(const QString &name, CCanvas::redraw_e maskRedraw, CCanvas *parent);
         virtual ~IDrawContext();
 
         struct buffer_t
@@ -72,7 +72,7 @@ class IDrawContext : public QThread
            @param in            set true to zoom in, and false to zoom out
            @param needsRedraw   if the zoom action makes a redraw nesseccary needsRedraw is set true
          */
-        void zoom(bool in, bool& needsRedraw);
+        void zoom(bool in, CCanvas::redraw_e &needsRedraw);
         void zoom(int idx);
         int  zoom(){return zoomIndex;}
         /**
@@ -112,7 +112,7 @@ class IDrawContext : public QThread
             @param f            the point of focus in [°] that is drawn in the middle of the viewport.
          */
 
-        void draw(QPainter& p, bool needsRedraw, const QPointF &f, const QRectF &r);
+        void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF &f, const QRectF &r);
 
         /**
            @brief Get the projection string of this map object
@@ -135,7 +135,7 @@ class IDrawContext : public QThread
         virtual void setProjection(const QString& proj);
 
     signals:
-        void sigCanvasUpdate();
+        void sigCanvasUpdate(CCanvas::redraw_e flags);
         void sigStartThread();
         void sigStopThread();
         void sigScaleChanged(const QPointF& scale);
@@ -167,6 +167,8 @@ class IDrawContext : public QThread
 
         /// the canvas this map object is attached to
         CCanvas * canvas;
+
+        const CCanvas::redraw_e maskRedraw;
         /// map canvas twin buffer
         buffer_t buffer[2];
         /// the main threads currently used map canvas buffer

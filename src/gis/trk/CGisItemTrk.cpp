@@ -87,6 +87,7 @@ const QString CGisItemTrk::bulletColors[] =
 
 const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
+QString CGisItemTrk::keyUserFocus;
 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
@@ -234,6 +235,12 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
 
     return false;
 }
+
+void CGisItemTrk::gainUserFocus()
+{
+    keyUserFocus = key;
+}
+
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {

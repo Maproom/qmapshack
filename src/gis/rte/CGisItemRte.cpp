@@ -27,6 +27,7 @@
 #include <proj_api.h>
 
 const QPen CGisItemRte::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+QString CGisItemRte::keyUserFocus;
 
 CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
@@ -132,6 +133,12 @@ bool CGisItemRte::isCloseTo(const QPointF& pos)
 
     return false;
 }
+
+void CGisItemRte::gainUserFocus()
+{
+    keyUserFocus = key;
+}
+
 
 void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {

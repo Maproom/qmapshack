@@ -59,9 +59,9 @@ CCanvas::CCanvas(QWidget *parent)
     gis     = new CGisDraw(this);
     mouse   = new CMouseNormal(this);
 
-    connect(map, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
-    connect(dem, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
-    connect(gis, SIGNAL(sigCanvasUpdate()), this, SLOT(slotTriggerCompleteUpdate()));
+    connect(map, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
+    connect(dem, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
+    connect(gis, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
 
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);
@@ -118,7 +118,7 @@ void CCanvas::loadConfig(QSettings& cfg)
 
 void CCanvas::resizeEvent(QResizeEvent * e)
 {
-    needsRedraw = true;
+    needsRedraw = eRedrawAll;
 
     QSize s = e->size();
     if(map) map->resize(s);
@@ -176,7 +176,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     drawScale(p);
 
     p.end();
-    needsRedraw = false;
+    needsRedraw = eRedrawNone;
 
 }
 
@@ -404,9 +404,9 @@ void CCanvas::drawScale(QPainter& p)
     drawText(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
 }
 
-void CCanvas::slotTriggerCompleteUpdate()
+void CCanvas::slotTriggerCompleteUpdate(CCanvas::redraw_e flags)
 {
-    needsRedraw = true;
+    needsRedraw = flags;
     update();
 }
 
@@ -429,7 +429,7 @@ void CCanvas::moveMap(const QPointF& delta)
     posFocus -= delta;
     map->convertPx2Rad(posFocus);
 
-    slotTriggerCompleteUpdate();
+    slotTriggerCompleteUpdate(eRedrawAll);
 }
 
 void CCanvas::setupGrid()
@@ -474,7 +474,7 @@ void CCanvas::setProjection(const QString& proj)
     gis->setProjection(proj);
 }
 
-void CCanvas::setZoom(bool in, bool& needsRedraw)
+void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 {
     map->zoom(in, needsRedraw);
     dem->zoom(map->zoom());

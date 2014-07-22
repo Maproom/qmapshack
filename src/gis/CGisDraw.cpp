@@ -23,7 +23,7 @@
 #include <QtWidgets>
 
 CGisDraw::CGisDraw(CCanvas *parent)
-    : IDrawContext("gis",parent)
+    : IDrawContext("gis", CCanvas::eRedrawGis, parent)
 {
     connect(&CGisWidget::self(), SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
 }

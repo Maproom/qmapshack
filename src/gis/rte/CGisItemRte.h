@@ -37,11 +37,14 @@ class CGisItemRte : public IGisItem
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
+        void gainUserFocus();
 
     private:
         struct rte_t;
         void genKey();
         void readRte(const QDomNode& xml, rte_t& rte);
+
+        static QString keyUserFocus;
 
         struct rtept_t : public wpt_t
         {

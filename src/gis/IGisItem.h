@@ -50,6 +50,7 @@ class IGisItem : public QTreeWidgetItem
         virtual void drawHighlight(QPainter& p) = 0;
         virtual void save(QDomNode& gpx) = 0;
         virtual bool isCloseTo(const QPointF& pos) = 0;
+        virtual void gainUserFocus() = 0;
 
     protected:
         struct wpt_t;

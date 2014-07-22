@@ -35,7 +35,7 @@ QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap").spl
 
 
 CMapDraw::CMapDraw(CCanvas *parent)
-    : IDrawContext("map",parent)
+    : IDrawContext("map", CCanvas::eRedrawMap, parent)
 {
     mapList = new CMapList(canvas);
     CMainWindow::self().addMapList(mapList, canvas->objectName());

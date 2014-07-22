@@ -37,17 +37,19 @@ class CGisItemTrk : public IGisItem
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
+        void gainUserFocus();
 
     private:
         struct trk_t;
         static const QColor  lineColors[];
         static const QString bulletColors[];
 
-
         void genKey();
         void readTrk(const QDomNode& xml, trk_t& trk);
         void setColor(const QColor& c);
         void setIcon(const QString& c);
+
+        static QString keyUserFocus;
 
         struct trkpt_t : public wpt_t
         {

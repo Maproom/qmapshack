@@ -27,7 +27,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-
+QString CGisItemWpt::keyUserFocus;
 
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
@@ -249,6 +249,11 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
     }
 
     return ((pos - posScreen).manhattanLength() < 22);
+}
+
+void CGisItemWpt::gainUserFocus()
+{
+    keyUserFocus = key;
 }
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)

@@ -70,11 +70,20 @@ class CCanvas : public QWidget
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font);
         static void drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color);
 
+        enum redraw_e
+        {
+              eRedrawNone = 0
+            , eRedrawMap = 0x01
+            , eRedrawDem = 0x02
+            , eRedrawGis = 0x04
+            , eRedrawAll = 0xFFFFFFFF
+        };
+
     signals:
         void sigMousePosition(const QPointF& pos, qreal ele);
 
     public slots:
-        void slotTriggerCompleteUpdate();
+        void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
 
     protected:
         void resizeEvent(QResizeEvent * e);
@@ -93,10 +102,10 @@ class CCanvas : public QWidget
 
     private:
         void drawScale(QPainter& p);
-        void setZoom(bool in, bool& needsRedraw);
+        void setZoom(bool in, redraw_e &needsRedraw);
 
         /// set true to initiate a complete redraw of the screen content
-        bool needsRedraw;
+        redraw_e needsRedraw;
         /// the map object attached to this canvas
         CMapDraw * map;
 

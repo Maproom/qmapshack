@@ -33,7 +33,23 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         virtual ~CGisWidget();
 
         void loadGpx(const QString& filename);
+        /**
+           @brief Draw all loaded data in the workspace that is visible
+
+           @param p         the painter to be used
+           @param viewport  the viewport in units of rad
+           @param gis       the draw context to be used
+         */
         void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
+        /**
+           @brief Get items close to the given point
+
+           Note: Do not store the pointers in items permanently as they can become invalid
+           once you reach the main event loop again.
+
+           @param pos       the position in pixel
+           @param items     an empty item list that will get filled with temporary pointers
+         */
         void getItemByPos(const QPointF& pos, QList<IGisItem *> &items);
 
     signals:

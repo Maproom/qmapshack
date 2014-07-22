@@ -51,6 +51,6 @@ void CCanvasSetup::accept()
         return;
     }
     canvas->setProjection(lineProjection->text());
-    canvas->slotTriggerCompleteUpdate();
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
     QDialog::accept();
 }

@@ -98,9 +98,10 @@ QPointF operator/(const QPointF& p1, const QPointF& p2)
 }
 
 
-IDrawContext::IDrawContext(const QString& name, CCanvas *parent)
+IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CCanvas *parent)
     : QThread(parent)
     , canvas(parent)
+    , maskRedraw(maskRedraw)
     , bufIndex(false)
     , bufWidth(100)
     , bufHeight(100)
@@ -133,7 +134,7 @@ IDrawContext::~IDrawContext()
 
 void IDrawContext::emitSigCanvasUpdate()
 {
-    emit sigCanvasUpdate();
+    emit sigCanvasUpdate(maskRedraw);
 }
 
 
@@ -184,11 +185,11 @@ bool IDrawContext::needsRedraw()
     return res;
 }
 
-void IDrawContext::zoom(bool in, bool &needsRedraw)
+void IDrawContext::zoom(bool in, CCanvas::redraw_e& needsRedraw)
 {
     if(pjsrc == 0) return;
     zoom(zoomIndex + (in ? -1 : 1));
-    needsRedraw = true;
+    needsRedraw = CCanvas::eRedrawAll;
 }
 
 void IDrawContext::zoom(int idx)
@@ -311,7 +312,7 @@ void IDrawContext::convertRad2Px(QPolygonF& poly)
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-void IDrawContext::draw(QPainter& p, bool needsRedraw, const QPointF& f, const QRectF &r)
+void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f, const QRectF &r)
 {
     if(pjsrc == 0) return;
 
@@ -383,10 +384,10 @@ void IDrawContext::draw(QPainter& p, bool needsRedraw, const QPointF& f, const Q
     p.restore();
 
     // intNeedsRedraw is reset by the thread
-    if(needsRedraw) intNeedsRedraw = true;
+    if(needsRedraw & maskRedraw) intNeedsRedraw = true;
     mutex.unlock(); // --------- stop serialize with thread
 
-    if(needsRedraw && !isRunning())
+    if((needsRedraw  & maskRedraw) && !isRunning())
     {
         emit sigStartThread();
         start();

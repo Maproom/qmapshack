@@ -224,6 +224,7 @@ void CGisItemTrk::genKey()
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
+    line.clear();
     if(!viewport.intersects(boundingRect))
     {
         return;
@@ -237,7 +238,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
-    line.clear();
     foreach (const trkseg_t& seg, trk.segs)
     {
         foreach(const trkpt_t& pt, seg.pts)

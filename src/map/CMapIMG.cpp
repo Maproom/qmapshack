@@ -33,7 +33,7 @@
 #undef DEBUG_SHOW_SECT_DESC
 #undef DEBUG_SHOW_TRE_DATA
 #undef DEBUG_SHOW_SUBDIV_DATA
-#define DEBUG_SHOW_MAPLEVELS
+#undef DEBUG_SHOW_MAPLEVELS
 #undef DEBUG_SHOW_SECTION_BORDERS
 #undef DEBUG_SHOW_SUBDIV_BORDERS
 
@@ -675,10 +675,15 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     subfile.east = GARMIN_RAD(i32);
     i32 = gar_ptr_load(int24_t, &pTreHdr->southbound);
     subfile.south = GARMIN_RAD(i32);
-    i32 = gar_ptr_load(int24_t, &pTreHdr->westbound);
+    i32 = gar_ptr_load(int24_t, &pTreHdr->westbound);   
     subfile.west = GARMIN_RAD(i32);
 
     if(subfile.east == subfile.west)
+    {
+        subfile.east = -subfile.east;
+    }
+
+    if(subfile.west > 0 && subfile.east < 0)
     {
         subfile.east = -subfile.east;
     }
@@ -1236,12 +1241,16 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
     QMap<QString,subfile_desc_t>::const_iterator subfile = subfiles.constBegin();
     while(subfile != subfiles.constEnd())
     {
-        //         qDebug() << "subfile:" << subfile->area << viewport << subfile->area.intersects(viewport);
+//        qDebug() << "-------";
+//        qDebug() << (viewport.topLeft() * RAD_TO_DEG) << (viewport.bottomRight() * RAD_TO_DEG);
+//        qDebug() << (subfile->area.topLeft() * RAD_TO_DEG) << (subfile->area.bottomRight() * RAD_TO_DEG);
+//        qDebug() << subfile->area.intersects(viewport);
         if(!subfile->area.intersects(viewport))
         {
             ++subfile;
             continue;
         }
+
         if(map->needsRedraw())
         {
             break;

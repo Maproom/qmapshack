@@ -165,7 +165,11 @@ void CCanvas::paintEvent(QPaintEvent * e)
     p.resetTransform();
     // ----- start to draw static content -----
 
-    mouse->draw(p, rect());
+    if(!gis->isRunning())
+    {
+        // no mouse interaction while GIS data is drawn.
+        mouse->draw(p, rect());
+    }
     grid->draw(p, rect());
 
 

@@ -62,6 +62,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
     else
     {
         canvas->displayInfo(pos);
+        canvas->update();
     }
 }
 

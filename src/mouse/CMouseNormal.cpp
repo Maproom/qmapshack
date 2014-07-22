@@ -82,9 +82,11 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
             if(items.size() == 1)
             {
                 IGisItem * item = items.first();
+                item->treeWidget()->collapseAll();
                 item->treeWidget()->setCurrentItem(item);
                 item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
                 item->gainUserFocus();
+                canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
             }
 
         }

@@ -406,7 +406,7 @@ void CCanvas::drawScale(QPainter& p)
 
 void CCanvas::slotTriggerCompleteUpdate(CCanvas::redraw_e flags)
 {
-    needsRedraw = flags;
+    needsRedraw = (redraw_e)(needsRedraw | flags);
     update();
 }
 

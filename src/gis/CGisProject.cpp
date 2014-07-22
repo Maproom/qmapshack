@@ -114,6 +114,25 @@ CGisProject::~CGisProject()
 
 }
 
+void CGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
+{
+    for(int i = 0; i < childCount(); i++)
+    {
+
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        if(item->isCloseTo(pos))
+        {
+            items << item;
+        }
+    }
+
+}
+
 void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis)
 {
     for(int i = 0; i < childCount(); i++)

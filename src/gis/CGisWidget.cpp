@@ -91,10 +91,18 @@ void CGisWidget::slotSaveAll()
 }
 
 
-void CGisWidget::getItemByPos(const QPointF& pos, QList<IGisItem*> items)
+void CGisWidget::getItemByPos(const QPointF& pos, QList<IGisItem*>& items)
 {
     IGisItem::mutexItems.lock();
-
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->getItemByPos(pos, items);
+    }
 
     IGisItem::mutexItems.unlock();
 }

@@ -221,6 +221,11 @@ void CGisItemTrk::genKey()
     }
 }
 
+bool CGisItemTrk::isCloseTo(const QPointF& pos)
+{
+
+    return false;
+}
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
@@ -283,6 +288,10 @@ void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 }
 
 
+void CGisItemTrk::drawHighlight(QPainter& p)
+{
+
+}
 
 
 

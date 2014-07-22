@@ -24,6 +24,8 @@
 #define NOFLOAT 1000000000000.0
 #define NOINT   0x7FFFFFFF
 
+extern const QPointF NOPOINT;
+
 class IUnit : public QObject
 {
     Q_OBJECT;

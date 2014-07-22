@@ -32,8 +32,9 @@ class CGisItemWpt : public IGisItem
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-
+        void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
+        bool isCloseTo(const QPointF& pos);
 
     private:
         void genKey();
@@ -86,7 +87,7 @@ class CGisItemWpt : public IGisItem
 
         QPixmap icon;
         QPointF focus;
-        QPointF pos;
+        QPointF posScreen;
 
 };
 

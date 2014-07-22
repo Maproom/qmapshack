@@ -23,6 +23,8 @@
 #include <QtCore>
 IUnit * IUnit::m_self = 0;
 
+const QPointF NOPOINT(NOFLOAT, NOFLOAT);
+
 IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
 : QObject(parent)
 , type(type)

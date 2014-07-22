@@ -79,4 +79,8 @@ void CMouseNormal::draw(QPainter& p, const QRect &rect)
     QList<IGisItem*> items;
     CGisWidget::self().getItemByPos(point, items);
 
+    foreach(IGisItem * item, items)
+    {
+        item->drawHighlight(p);
+    }
 }

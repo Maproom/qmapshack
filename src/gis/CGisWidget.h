@@ -34,7 +34,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void loadGpx(const QString& filename);
         void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
-        void getItemByPos(const QPointF& pos, QList<IGisItem*> items);
+        void getItemByPos(const QPointF& pos, QList<IGisItem *> &items);
 
     signals:
         void sigChanged();

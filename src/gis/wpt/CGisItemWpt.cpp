@@ -32,6 +32,7 @@
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
     , proximity(NOFLOAT)
+    , posScreen(NOPOINT)
 {
     // --- start read and process data ----
     readWpt(xml, wpt);
@@ -240,16 +241,26 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
     }
 }
 
+bool CGisItemWpt::isCloseTo(const QPointF& pos)
+{
+    if(posScreen == NOPOINT)
+    {
+        return false;
+    }
+
+    return ((pos - posScreen).manhattanLength() < 10);
+}
+
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
-    pos = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
-    if(!viewport.contains(pos))
+    posScreen = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
+    if(!viewport.contains(posScreen))
     {
-        pos = QPoint();
+        posScreen = NOPOINT;
         return;
     }
-    gis->convertRad2Px(pos);
-    p.drawPixmap(pos - focus, icon);
+    gis->convertRad2Px(posScreen);
+    p.drawPixmap(posScreen - focus, icon);
 
     if(proximity != NOFLOAT)
     {
@@ -257,28 +268,28 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
         pt1 = GPS_Math_Wpt_Projection(pt1, proximity, 90 * DEG_TO_RAD);
         gis->convertRad2Px(pt1);
 
-        double r = pt1.x() - pos.x();
+        double r = pt1.x() - posScreen.x();
 
         p.save();
         p.setBrush(Qt::NoBrush);
         p.setPen(QPen(Qt::white,3));
-        p.drawEllipse(QRect(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1));
+        p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
         p.setPen(QPen(Qt::red,1));
-        p.drawEllipse(QRect(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1));
+        p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
         p.restore();
     }
 
-    blockedAreas << QRectF(pos - focus, icon.size());
+    blockedAreas << QRectF(posScreen - focus, icon.size());
 }
 
 void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
-    if(pos.isNull())
+    if(posScreen == NOPOINT)
     {
         return;
     }
 
-    QPointF pt = pos - focus;
+    QPointF pt = posScreen - focus;
 
     QRectF rect = fm.boundingRect(wpt.name);
     rect.adjust(-2,-2,2,2);
@@ -310,3 +321,13 @@ void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
     blockedAreas << rect;
 }
 
+void CGisItemWpt::drawHighlight(QPainter& p)
+{
+    if(posScreen == NOPOINT)
+    {
+        return;
+    }
+
+    p.setPen(QPen(Qt::red, 3));
+    p.drawEllipse(posScreen, 10,10);
+}

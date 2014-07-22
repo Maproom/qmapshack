@@ -127,6 +127,12 @@ void CGisItemRte::genKey()
     }
 }
 
+bool CGisItemRte::isCloseTo(const QPointF& pos)
+{
+
+    return false;
+}
+
 void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     if(!viewport.intersects(boundingRect))
@@ -226,3 +232,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
     }
 }
 
+void CGisItemRte::drawHighlight(QPainter& p)
+{
+
+}

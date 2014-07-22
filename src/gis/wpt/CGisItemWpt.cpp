@@ -248,7 +248,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
         return false;
     }
 
-    return ((pos - posScreen).manhattanLength() < 10);
+    return ((pos - posScreen).manhattanLength() < 22);
 }
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
@@ -328,6 +328,6 @@ void CGisItemWpt::drawHighlight(QPainter& p)
         return;
     }
 
-    p.setPen(QPen(Qt::red, 3));
-    p.drawEllipse(posScreen, 10,10);
+    p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
+
 }

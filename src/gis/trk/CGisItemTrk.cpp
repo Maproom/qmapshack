@@ -224,6 +224,14 @@ void CGisItemTrk::genKey()
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {
 
+    foreach(const QPointF& pt, line)
+    {
+        if((pt - pos).manhattanLength() < 10)
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -290,6 +298,10 @@ void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
 void CGisItemTrk::drawHighlight(QPainter& p)
 {
+
+    p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(line);
+
 
 }
 

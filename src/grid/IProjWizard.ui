@@ -30,13 +30,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QRadioButton" name="radioLonLat">
-        <property name="text">
-         <string>Lon/Lat</string>
-        </property>
-       </widget>
-      </item>
       <item row="5" column="1">
        <layout class="QHBoxLayout">
         <item>
@@ -139,13 +132,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Projection</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="1">
        <widget class="QRadioButton" name="radioUPSNorth">
         <property name="text">
@@ -157,6 +143,13 @@
        <widget class="QRadioButton" name="radioUPSSouth">
         <property name="text">
          <string>UPS South (South Pole)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Projection</string>
         </property>
        </widget>
       </item>

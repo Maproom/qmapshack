@@ -55,7 +55,6 @@ CProjWizard::CProjWizard(QLineEdit &line)
     comboHemisphere->addItem(tr("north"), "");
     comboHemisphere->addItem(tr("south"), "+south");
 
-    connect(radioLonLat, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(radioMercator, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(radioWorldMercator, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(radioUPSNorth, SIGNAL(clicked()), this, SLOT(slotChange()));
@@ -68,17 +67,11 @@ CProjWizard::CProjWizard(QLineEdit &line)
     connect(spinUTMZone, SIGNAL(valueChanged(int)), this, SLOT(slotChange()));
 
     QString projstr = line.text();
-    QRegExp re1("\\s*\\+proj=longlat\\s(.*)");
     QRegExp re2("\\s*\\+proj=merc \\+a=6378137 \\+b=6378137 \\+lat_ts=0.0 \\+lon_0=0.0 \\+x_0=0.0 \\+y_0=0 \\+k=1.0 \\+units=m \\+nadgrids=@null \\+no_defs");
     QRegExp re3("\\s*\\+proj=merc\\s(.*)");
     QRegExp re4("\\s*\\+proj=utm \\+zone=([0-9]+)\\s(.*)");
 
-    if(re1.exactMatch(projstr))
-    {
-        radioLonLat->setChecked(true);
-        findDatum(re1.cap(1));
-    }
-    else if(re2.exactMatch(projstr))
+    if(re2.exactMatch(projstr))
     {
         radioWorldMercator->setChecked(true);
     }
@@ -150,11 +143,7 @@ void CProjWizard::findDatum(const QString& str)
 void CProjWizard::slotChange()
 {
     QString str;
-    if(radioLonLat->isChecked())
-    {
-        str += "+proj=longlat ";
-    }
-    else if(radioMercator->isChecked())
+    if(radioMercator->isChecked())
     {
         str += "+proj=merc ";
     }

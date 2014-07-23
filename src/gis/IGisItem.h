@@ -45,6 +45,8 @@ class IGisItem : public QTreeWidgetItem
         static QMutex mutexItems;
 
         const QString& getKey();
+        const QPixmap& getIcon(){return icon;}
+        virtual const QString& getName() = 0;
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
         virtual void drawHighlight(QPainter& p) = 0;
@@ -120,6 +122,7 @@ class IGisItem : public QTreeWidgetItem
 
 
         QString key;
+        QPixmap icon;
         static const color_t colorMap[];
 
 

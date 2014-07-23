@@ -168,7 +168,7 @@ class CMapIMG : public IMap
 
         quint8 scale2bits(const QPointF &scale);
         void setupTyp();
-        bool readBasics();
+        void readBasics();
         void readSubfileBasics(subfile_desc_t& subfile, CFileExt &file);
         void processPrimaryMapData();
         void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);

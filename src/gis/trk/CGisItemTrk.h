@@ -32,6 +32,7 @@ class CGisItemTrk : public IGisItem
         CGisItemTrk(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemTrk();
 
+        const QString& getName(){return trk.name;}
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);

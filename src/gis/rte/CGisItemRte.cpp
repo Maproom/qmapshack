@@ -31,13 +31,14 @@ QString CGisItemRte::keyUserFocus;
 
 CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
-    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)    
 {
     // --- start read and process data ----
-    readRte(xml, rte);
+    readRte(xml, rte);    
+    icon = QPixmap("://icons/32x32/Route.png");
     // --- stop read and process data ----
     setText(0, rte.name);
-    setIcon(0, QIcon("://icons/32x32/Route.png"));
+    setIcon(0, icon);
     genKey();
 }
 

@@ -32,6 +32,7 @@ class CGisItemRte : public IGisItem
         CGisItemRte(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemRte();
 
+        const QString& getName(){return rte.name;}
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
@@ -72,8 +73,8 @@ class CGisItemRte : public IGisItem
         QPen penForeground;
 
         rte_t rte;
+        QRectF boundingRect;        
 
-        QRectF boundingRect;
 };
 
 #endif //CGISITEMRTE_H

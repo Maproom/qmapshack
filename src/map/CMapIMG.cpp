@@ -470,7 +470,7 @@ void CMapIMG::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray&
 }
 
 
-bool CMapIMG::readBasics()
+void CMapIMG::readBasics()
 {
     char tmpstr[64];
     qint64 fsize    = QFileInfo(filename).size();
@@ -2015,7 +2015,6 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
 {
     CGarminTyp::label_type_e labelType = CGarminTyp::eStandard;
-    bool showLabel = true;
 
     QPixmap blueBullet(":/icons/8x8/bullet_blue.png");
     QPixmap redBullet(":/icons/8x8/bullet_red.png");
@@ -2043,19 +2042,17 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
         }
 
         labelType = CGarminTyp::eStandard;
-        showLabel = true;
         if(pointProperties.contains(pt->type))
         {
             p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
             labelType = pointProperties[pt->type].labelType;
-            showLabel = labelType != CGarminTyp::eNone;
         }
         else
         {
             p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, redBullet);
         }
 
-        if(CMainWindow::self().isPOIText() /*&& showLabel*/)
+        if(CMainWindow::self().isPOIText())
         {
 
             // calculate bounding rectangle with a border of 2 px

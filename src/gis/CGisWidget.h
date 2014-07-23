@@ -50,7 +50,9 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
            @param pos       the position in pixel
            @param items     an empty item list that will get filled with temporary pointers
          */
-        void getItemByPos(const QPointF& pos, QList<IGisItem *> &items);
+        void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
+
+        IGisItem * getItemByKey(const QString& key);
 
     signals:
         void sigChanged();

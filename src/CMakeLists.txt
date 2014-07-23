@@ -171,6 +171,12 @@ include_directories(
 
 )
 
+if(UNIX)
+    add_definitions(-Wall)
+endif(UNIX)
+
+
+
 # Tell CMake to create the helloworld executable
 add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
 

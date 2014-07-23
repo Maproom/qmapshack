@@ -30,6 +30,7 @@ class CGisItemWpt : public IGisItem
         CGisItemWpt(const QDomNode& xml, CGisProject * parent);
         virtual ~CGisItemWpt();
 
+        const QString& getName(){return wpt.name;}
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
@@ -88,7 +89,6 @@ class CGisItemWpt : public IGisItem
         qreal proximity;
         geocache_t geocache;
 
-        QPixmap icon;
         QPointF focus;
         QPointF posScreen;
 

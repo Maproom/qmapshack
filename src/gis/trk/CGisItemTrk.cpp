@@ -345,12 +345,12 @@ void CGisItemTrk::setColor(const QColor& c)
 
 void CGisItemTrk::setIcon(const QString& c)
 {
-    QPixmap icon(32,32);
-    icon.fill(Qt::transparent);
-    QPainter p(&icon);
-    p.setBrush(QColor(c));
-    p.setPen(Qt::NoPen);
-    p.drawRect(3,3,26,26);
+    icon = QPixmap("://icons/48x48/Track.png");
 
-    QTreeWidgetItem::setIcon(0,QIcon(icon));
+    QPixmap mask( icon.size() );
+    mask.fill( color );
+    mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
+    icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    QTreeWidgetItem::setIcon(0,icon);
 }

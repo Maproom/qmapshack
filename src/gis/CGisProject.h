@@ -35,6 +35,7 @@ class CGisProject : public QTreeWidgetItem
         bool  isValid(){return valid;}
         const QString& getKey(){return key;}
         void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
+        IGisItem * getItemByKey(const QString& key);
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);

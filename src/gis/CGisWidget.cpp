@@ -91,20 +91,42 @@ void CGisWidget::slotSaveAll()
 }
 
 
-void CGisWidget::getItemByPos(const QPointF& pos, QList<IGisItem*>& items)
+void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
 {
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
-        if(item == 0)
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
         {
             continue;
         }
-        item->getItemByPos(pos, items);
+        project->getItemByPos(pos, items);
     }
     IGisItem::mutexItems.unlock();
 }
+
+IGisItem * CGisWidget::getItemByKey(const QString& key)
+{
+    IGisItem * item = 0;
+    IGisItem::mutexItems.lock();
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
+        {
+            continue;
+        }
+        item = project->getItemByKey(key);
+        if(item != 0)
+        {
+            break;
+        }
+    }
+    IGisItem::mutexItems.unlock();
+    return item;
+}
+
 
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {

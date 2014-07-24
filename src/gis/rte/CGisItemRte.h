@@ -73,7 +73,9 @@ class CGisItemRte : public IGisItem
         QPen penForeground;
 
         rte_t rte;
-        QRectF boundingRect;        
+        QRectF boundingRect;
+
+        QPolygonF line;
 
 };
 

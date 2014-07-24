@@ -35,7 +35,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
 {
     // --- start read and process data ----
     readRte(xml, rte);    
-    icon = QPixmap("://icons/32x32/Route.png");
+    icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     // --- stop read and process data ----
     setText(0, rte.name);
     setIcon(0, icon);
@@ -131,6 +131,13 @@ void CGisItemRte::genKey()
 
 bool CGisItemRte::isCloseTo(const QPointF& pos)
 {
+    foreach(const QPointF& pt, line)
+    {
+        if((pt - pos).manhattanLength() < 10)
+        {
+            return true;
+        }
+    }
 
     return false;
 }
@@ -143,12 +150,11 @@ void CGisItemRte::gainUserFocus()
 
 void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
+    line.clear();
     if(!viewport.intersects(boundingRect))
     {
         return;
     }
-
-    QPolygonF line;
 
     QPointF p1 = viewport.topLeft();
     QPointF p2 = viewport.bottomRight();
@@ -242,5 +248,16 @@ void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
 void CGisItemRte::drawHighlight(QPainter& p)
 {
+    if(line.isEmpty())
+    {
+        return;
+    }
 
+    p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(line);
+
+    foreach(const QPointF& pt, line)
+    {
+        p.drawImage(pt - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
+    }
 }

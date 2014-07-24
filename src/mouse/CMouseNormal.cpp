@@ -17,11 +17,11 @@
 **********************************************************************************************/
 
 #include "mouse/CMouseNormal.h"
+#include "mouse/CScrOptUnclutter.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
-#include "CMainWindow.h"
 
 #include <QtGui>
 
@@ -31,6 +31,7 @@ CMouseNormal::CMouseNormal(CCanvas *canvas)
     , stateItemSel(eStateIdle)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
+    screenUnclutter = new CScrOptUnclutter(this);
 }
 
 CMouseNormal::~CMouseNormal()
@@ -96,7 +97,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 {
                     stateItemSel = eStateIdle;
 
-                    IGisItem * item = CGisWidget::self().getItemByKey(screenItems.first().key);
+                    IGisItem * item = CGisWidget::self().getItemByKey(screenUnclutter->getItemKey());
                     if(item)
                     {
                         item->treeWidget()->collapseAll();
@@ -107,31 +108,16 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
 
                         stateItemSel = eStateShowOptions;
                     }
-                    canvas->update();
                     break;
                 }
                 case eStateHooverMultiple:
                 {
                     stateItemSel = eStateUnclutterMultiple;
-                    canvas->update();
                     break;
                 }
                 case eStateUnclutterMultiple:
                 {
-                    stateItemSel = eStateIdle;
-
-                    foreach(screen_item_t screenItem, screenItems)
-                    {
-                        if(screenItem.area.contains(point.toPoint()))
-                        {
-                            screenItems.clear();
-                            screenItems << screenItem;
-
-                            stateItemSel = eStateShowOptions;
-                            break;
-                        }
-                    }
-                    canvas->update();
+                    stateItemSel = screenUnclutter->selectItem(point.toPoint()) ? eStateShowOptions : eStateIdle;
                     break;
                 }
                 case eStateShowOptions:
@@ -142,24 +128,19 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 }
                 default:;
             }
+            canvas->update();
         }
         mapMove     = false;
         mapDidMove  = false;
     }
 }
 
-const QPoint positions[] =
+void CMouseNormal::wheelEvent(QWheelEvent * e)
 {
-      QPoint(-50,-23)
-    , QPoint( 50,-23)
-    , QPoint(-50, 23)
-    , QPoint( 50, 23)
-    , QPoint(-22,-55)
-    , QPoint( 22,-55)
-    , QPoint(-22, 55)
-    , QPoint( 22, 55)
+    screenUnclutter->clear();
+    stateItemSel = eStateIdle;
+}
 
-};
 
 void CMouseNormal::draw(QPainter& p, const QRect &rect)
 {
@@ -170,7 +151,7 @@ void CMouseNormal::draw(QPainter& p, const QRect &rect)
         case eStateHooverSingle:
         case eStateHooverMultiple:
         {
-            screenItems.clear();
+            screenUnclutter->clear();
 
             QList<IGisItem*> items;
             CGisWidget::self().getItemsByPos(point, items);
@@ -184,69 +165,26 @@ void CMouseNormal::draw(QPainter& p, const QRect &rect)
             foreach(IGisItem * item, items)
             {
                 item->drawHighlight(p);
-
-                screen_item_t screenItem;
-                screenItem.name = item->getName();
-                screenItem.key  = item->getKey();
-                screenItem.icon = item->getIcon();
-                screenItem.area = screenItem.icon.rect();
-
-                screenItems << screenItem;
+                screenUnclutter->addItem(item);
             }
 
-            stateItemSel = (screenItems.size() == 1) ? eStateHooverSingle : eStateHooverMultiple;
+            stateItemSel = (screenUnclutter->size() == 1) ? eStateHooverSingle : eStateHooverMultiple;
             break;
         }
         case eStateUnclutterMultiple:
         {
-            QFontMetrics fm(CMainWindow::self().getMapFont());
-            for(int cnt = 0; cnt < screenItems.size(); cnt++)
-            {
-                screen_item_t& screenItem = screenItems[cnt];
-
-                if(screenItem.text.isNull())
-                {
-
-                    screenItem.area.moveCenter(point.toPoint() + positions[cnt]);
-                    screenItem.text = fm.boundingRect(screenItem.name);
-                    if(cnt & 0x01)
-                    {
-                        screenItem.text.moveTopLeft(screenItem.area.topRight() + QPoint( 14, fm.height()/2));
-                    }
-                    else
-                    {
-                        screenItem.text.moveTopRight(screenItem.area.topLeft() + QPoint(-14, fm.height()/2));
-                    }
-                    screenItem.text.adjust(-2, -2, 2, 2);
-                }
-            }
-
-            foreach(const screen_item_t& screenItem, screenItems)
-            {
-
-                p.setPen(Qt::NoPen);
-                p.setBrush(QColor(255,255,255,255));
-                p.drawEllipse(screenItem.area.center(), 20,20);
-                p.drawRoundedRect(screenItem.text, 3, 3);
-
-                p.setPen(QPen(Qt::lightGray,2));
-                p.setBrush(Qt::NoBrush);
-                p.drawEllipse(screenItem.area.center(), 18,18);
-
-                p.drawPixmap(screenItem.area, screenItem.icon);
-                CCanvas::drawText(screenItem.name, p, screenItem.text, Qt::darkBlue);
-            }
+            screenUnclutter->draw(p, point.toPoint());
             break;
         }
         case eStateShowOptions:
         {
-            IGisItem * item = CGisWidget::self().getItemByKey(screenItems.first().key);
+            IGisItem * item = CGisWidget::self().getItemByKey(screenUnclutter->getItemKey());
             if(item == 0)
             {
                 break;
             }
             item->drawHighlight(p);
-            // todo: draw item otions
+            // todo: draw item options
             break;
         }
         default:;

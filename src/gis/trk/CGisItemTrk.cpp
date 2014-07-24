@@ -305,11 +305,12 @@ void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
 void CGisItemTrk::drawHighlight(QPainter& p)
 {
-
+    if(line.isEmpty())
+    {
+        return;
+    }
     p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(line);
-
-
 }
 
 

@@ -26,6 +26,7 @@
 #include <QRect>
 
 class CCanvas;
+class CScrOptUnclutter;
 
 class CMouseNormal : public IMouse
 {
@@ -37,7 +38,7 @@ class CMouseNormal : public IMouse
         void mousePressEvent(QMouseEvent * e);
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);
-
+        void wheelEvent(QWheelEvent * e);
 
     protected:
         /// the flag is true if the map moving is in progress
@@ -64,16 +65,18 @@ class CMouseNormal : public IMouse
 
         item_selection_states_e stateItemSel;
 
-        struct screen_item_t
-        {
-            QString name;
-            QString key;
-            QPixmap icon;
-            QRect   area;
-            QRect   text;
-        };
+        CScrOptUnclutter * screenUnclutter;
 
-        QList<screen_item_t> screenItems;
+//        struct screen_item_t
+//        {
+//            QString name;
+//            QString key;
+//            QPixmap icon;
+//            QRect   area;
+//            QRect   text;
+//        };
+
+//        QList<screen_item_t> screenItems;
 };
 
 #endif //CMOUSENORMAL_H

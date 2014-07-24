@@ -206,6 +206,8 @@ void CCanvas::mouseReleaseEvent(QMouseEvent *e)
 
 void CCanvas::wheelEvent(QWheelEvent * e)
 {
+    mouse->wheelEvent(e);
+
     QPointF pos = e->posF();
     QPointF pt1 = pos;
     map->convertPx2Rad(pt1);

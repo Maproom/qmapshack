@@ -16,48 +16,36 @@
 
 **********************************************************************************************/
 
-#ifndef IMOUSE_H
-#define IMOUSE_H
+#ifndef ISCROPT_H
+#define ISCROPT_H
 
 #include <QObject>
-#include <QCursor>
+#include <QPixmap>
+#include <QRect>
 
-class QMouseEvent;
-class QWheelEvent;
-class CCanvas;
-
-class IMouse : public QObject
+class IScrOpt : public QObject
 {
-    Q_OBJECT
     public:
-        IMouse(CCanvas * canvas);
-        virtual ~IMouse();
+        IScrOpt(QObject * parent);
+        virtual ~IScrOpt();
 
-        enum type_e
-        {
-            eNormal
-        };
+        virtual void clear(){items.clear();}
+        virtual int  size(){return items.size();}
 
-        virtual void draw(QPainter& p, const QRect &rect) = 0;
-        virtual void mousePressEvent(QMouseEvent * e) = 0;
-        virtual void mouseMoveEvent(QMouseEvent * e) = 0;
-        virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
-        virtual void wheelEvent(QWheelEvent * e) = 0;
-        /// the current mouse cursor
-        /**
-            Each mouse function is represented by a special cursor. The main
-            widget uses this method to query the current cursor.
-        */
-        operator const QCursor&(){return cursor;}
-
+        virtual void draw(QPainter& p, const QPoint& point) = 0;
 
     protected:
-        /// the functions mouse icon
-        QCursor cursor;
-        CCanvas * canvas;
-        QPointF point;
+        struct item_t
+        {
+            QString name;
+            QString key;
+            QPixmap icon;
+            QRect   area;
+            QRect   text;
+        };
 
+        QList<item_t> items;
 };
 
-#endif //IMOUSE_H
+#endif //ISCROPT_H
 

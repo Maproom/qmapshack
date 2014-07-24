@@ -56,7 +56,9 @@ set( SRCS
     grid/CProjWizard.cpp
     grid/mitab.cpp
     mouse/IMouse.cpp
+    mouse/IScrOpt.cpp
     mouse/CMouseNormal.cpp
+    mouse/CScrOptUnclutter.cpp
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
@@ -120,7 +122,9 @@ set( HDRS
     grid/CProjWizard.h
     grid/mitab.h
     mouse/IMouse.h
+    mouse/IScrOpt.h
     mouse/CMouseNormal.h
+    mouse/CScrOptUnclutter.h
     gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h

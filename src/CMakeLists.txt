@@ -58,18 +58,18 @@ set( SRCS
     mouse/IMouse.cpp
     mouse/IScrOpt.cpp
     mouse/CMouseNormal.cpp
-    mouse/CScrOptUnclutter.cpp
-    mouse/CScrOptWpt.cpp
+    mouse/CScrOptUnclutter.cpp    
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
     gis/wpt/CGisItemWpt.cpp
+    gis/wpt/CScrOptWpt.cpp
     gis/trk/CGisItemTrk.cpp
     gis/rte/CGisItemRte.cpp
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
-    gis/CGisProject.cpp
+    gis/CGisProject.cpp    
 )
 
 set( HDRS
@@ -125,18 +125,18 @@ set( HDRS
     mouse/IMouse.h
     mouse/IScrOpt.h
     mouse/CMouseNormal.h
-    mouse/CScrOptUnclutter.h
-    mouse/CScrOptWpt.h
+    mouse/CScrOptUnclutter.h    
     gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h
     gis/wpt/CGisItemWpt.h
+    gis/wpt/CScrOptWpt.h
     gis/trk/CGisItemTrk.h
     gis/rte/CGisItemRte.h
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
-    gis/CGisProject.h
+    gis/CGisProject.h    
 )
 
 set( UIS
@@ -152,7 +152,7 @@ set( UIS
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     gis/IGisWidget.ui
-    mouse/IScrOptWpt.ui
+    gis/wpt/IScrOptWpt.ui
 )
 
 set( RCS

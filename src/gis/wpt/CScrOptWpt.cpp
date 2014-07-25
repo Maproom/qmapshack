@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 
-#include "mouse/CScrOptWpt.h"
+#include "gis/wpt/CScrOptWpt.h"
 #include "mouse/IMouse.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "canvas/CCanvas.h"

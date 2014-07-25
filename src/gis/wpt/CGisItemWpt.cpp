@@ -22,7 +22,7 @@
 #include "gis/WptIcons.h"
 #include "canvas/CCanvas.h"
 #include "mouse/IMouse.h"
-#include "mouse/CScrOptWpt.h"
+#include "gis/wpt/CScrOptWpt.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 

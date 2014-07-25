@@ -38,7 +38,6 @@ void IScrOpt::clear()
     {
         QApplication::restoreOverrideCursor();
         doSpecialCursor = false;
-        return;
     }
     items.clear();
 }

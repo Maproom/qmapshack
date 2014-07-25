@@ -120,15 +120,19 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 }
                 case eStateUnclutterMultiple:
                 {
-                    const IScrOpt::item_t * scropt = screenUnclutter->selectItem(point.toPoint());
-                    if(scropt != 0)
+                    const IScrOpt::item_t * scrOpt = screenUnclutter->selectItem(point.toPoint());
+                    if(scrOpt != 0)
                     {
-                        QString key = scropt->key;
+                        QString key = scrOpt->key;
                         screenUnclutter->clear();
 
                         IGisItem * item = CGisWidget::self().getItemByKey(key);
                         if(item)
                         {
+                            item->treeWidget()->collapseAll();
+                            item->treeWidget()->setCurrentItem(item);
+                            item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
+
                             delete screenItemOption;
                             screenItemOption = item->getScreenOptions(this);
 

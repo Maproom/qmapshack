@@ -66,6 +66,7 @@
         <file>icons/16x16/Route.png</file>
         <file>icons/16x16/Close.png</file>
         <file>icons/16x16/Track.png</file>
+        <file>icons/16x16/EditDetails.png</file>
 
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
@@ -114,6 +115,7 @@
         <file>icons/32x32/Route.png</file>
         <file>icons/32x32/Close.png</file>
         <file>icons/32x32/Track.png</file>
+        <file>icons/32x32/EditDetails.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -162,6 +164,7 @@
         <file>icons/48x48/Route.png</file>
         <file>icons/48x48/Close.png</file>
         <file>icons/48x48/Track.png</file>
+        <file>icons/48x48/EditDetails.png</file>
 
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>

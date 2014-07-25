@@ -46,3 +46,7 @@ CScrOptWpt::~CScrOptWpt()
 
 }
 
+void CScrOptWpt::draw(QPainter& p)
+{
+    wpt->drawHighlight(p);
+}

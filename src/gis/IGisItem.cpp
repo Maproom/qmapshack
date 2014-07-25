@@ -22,11 +22,9 @@
 #include "GeoMath.h"
 
 #include <QtXml>
+#include <QtWidgets>
 
 QMutex IGisItem::mutexItems;
-
-
-
 
 const IGisItem::color_t IGisItem::colorMap[] =
 {
@@ -280,3 +278,9 @@ void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPai
     }
 }
 
+void IGisItem::removeHtml(QString &str)
+{
+    QTextDocument html;
+    html.setHtml(str);
+    str = html.toPlainText();
+}

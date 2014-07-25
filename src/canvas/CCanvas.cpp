@@ -31,6 +31,10 @@
 
 #include <QtWidgets>
 
+QPen CCanvas::penBorderBlue(QColor(10,10,150,220),2);
+QPen CCanvas::penBorderBlack(QColor(0,0,0,200),2);
+QBrush CCanvas::brushBackWhite(QColor(255,255,255,210));
+QBrush CCanvas::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
 
 CCanvas::CCanvas(QWidget *parent)
@@ -210,6 +214,7 @@ void CCanvas::wheelEvent(QWheelEvent * e)
 
     QPointF pos = e->posF();
     QPointF pt1 = pos;
+
     map->convertPx2Rad(pt1);
     setZoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
     map->convertRad2Px(pt1);

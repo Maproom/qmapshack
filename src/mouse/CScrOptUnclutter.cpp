@@ -67,22 +67,19 @@ QString CScrOptUnclutter::getItemKey(int index)
     return QString::Null();
 }
 
-bool CScrOptUnclutter::selectItem(const QPoint& point)
+const IScrOpt::item_t * CScrOptUnclutter::selectItem(const QPoint& point)
 {
     foreach(const item_t& item, items)
     {
         if(item.area.contains(point))
         {
-            item_t copy = item;
-            items.clear();
-            items << copy;
-            return true;
+            return &item;
         }
     }
-    return false;
+    return 0;
 }
 
-void CScrOptUnclutter::draw(QPainter& p, const QPoint& point)
+void CScrOptUnclutter::draw(QPainter& p)
 {
     QFontMetrics fm(CMainWindow::self().getMapFont());
     for(int cnt = 0; cnt < items.size(); cnt++)
@@ -92,7 +89,7 @@ void CScrOptUnclutter::draw(QPainter& p, const QPoint& point)
         if(item.text.isNull())
         {
 
-            item.area.moveCenter(point + positions[cnt]);
+            item.area.moveCenter(mousePos + positions[cnt]);
             item.text = fm.boundingRect(item.name);
             if(cnt & 0x01)
             {

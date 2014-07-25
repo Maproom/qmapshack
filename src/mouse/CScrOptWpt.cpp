@@ -16,29 +16,33 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTUNCLUTTER_H
-#define CSCROPTUNCLUTTER_H
 
-#include "mouse/IScrOpt.h"
+#include "mouse/CScrOptWpt.h"
+#include "mouse/IMouse.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 
-class IGisItem;
+#include <QtWidgets>
 
-
-class CScrOptUnclutter : public IScrOpt
+CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, IMouse *parent)
+    : IScrOpt(parent)
+    , QWidget(parent->getCanvas())
+    , wpt(wpt)
 {
-    public:
-        CScrOptUnclutter(QObject * parent);
-        virtual ~CScrOptUnclutter();
+    setupUi(this);
+    label->setFont(CMainWindow::self().getMapFont());
 
-        void addItem(IGisItem * gisItem);
-        QString getItemKey(int index = 0);
-        const item_t *selectItem(const QPoint& point);
+    label->setText(wpt->getInfo());
 
-        void draw(QPainter& p);
+    QPointF pt = wpt->getPointCloseBy(mousePos);
+    move(pt.toPoint());
+    adjustSize();
+    show();
+}
 
-    private:
-        static const QPoint positions[];
-};
+CScrOptWpt::~CScrOptWpt()
+{
 
-#endif //CSCROPTUNCLUTTER_H
+}
 

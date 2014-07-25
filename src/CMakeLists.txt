@@ -59,6 +59,7 @@ set( SRCS
     mouse/IScrOpt.cpp
     mouse/CMouseNormal.cpp
     mouse/CScrOptUnclutter.cpp
+    mouse/CScrOptWpt.cpp
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
@@ -125,6 +126,7 @@ set( HDRS
     mouse/IScrOpt.h
     mouse/CMouseNormal.h
     mouse/CScrOptUnclutter.h
+    mouse/CScrOptWpt.h
     gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h
@@ -150,6 +152,7 @@ set( UIS
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     gis/IGisWidget.ui
+    mouse/IScrOptWpt.ui
 )
 
 set( RCS

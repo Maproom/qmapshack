@@ -24,8 +24,10 @@
 #include <QStringList>
 #include <QPixmap>
 #include <QRect>
+#include <QPointer>
 
 class CCanvas;
+class IScrOpt;
 class CScrOptUnclutter;
 
 class CMouseNormal : public IMouse
@@ -60,23 +62,14 @@ class CMouseNormal : public IMouse
             /// the user clicked on multiple cluttered items and gets now an uncluttered representation
             , eStateUnclutterMultiple = 3
             /// the user has selected a single item, show options how to proceed
-            , eStateShowOptions = 4
+            , eStateShowItemOptions = 4
         };
 
         item_selection_states_e stateItemSel;
 
         CScrOptUnclutter * screenUnclutter;
+        QPointer<IScrOpt>  screenItemOption;
 
-//        struct screen_item_t
-//        {
-//            QString name;
-//            QString key;
-//            QPixmap icon;
-//            QRect   area;
-//            QRect   text;
-//        };
-
-//        QList<screen_item_t> screenItems;
 };
 
 #endif //CMOUSENORMAL_H

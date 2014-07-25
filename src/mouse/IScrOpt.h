@@ -23,18 +23,14 @@
 #include <QPixmap>
 #include <QRect>
 
+class QMouseEvent;
+
 class IScrOpt : public QObject
 {
     public:
         IScrOpt(QObject * parent);
         virtual ~IScrOpt();
 
-        virtual void clear(){items.clear();}
-        virtual int  size(){return items.size();}
-
-        virtual void draw(QPainter& p, const QPoint& point) = 0;
-
-    protected:
         struct item_t
         {
             QString name;
@@ -44,7 +40,20 @@ class IScrOpt : public QObject
             QRect   text;
         };
 
+        virtual void clear();
+        virtual int  size(){return items.size();}
+
+        virtual void draw(QPainter& p) = 0;
+
+        virtual void mouseMoveEvent(QMouseEvent * e);
+
+    protected:
+
         QList<item_t> items;
+
+        bool doSpecialCursor;
+
+        QPoint mousePos;
 };
 
 #endif //ISCROPT_H

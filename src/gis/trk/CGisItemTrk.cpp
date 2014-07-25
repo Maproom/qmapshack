@@ -106,6 +106,26 @@ CGisItemTrk::~CGisItemTrk()
 
 }
 
+void CGisItemTrk::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData((const char*)&trk, sizeof(trk));
+        key = md5.result().toHex();
+    }
+}
+
+
+QString CGisItemTrk::getInfo()
+{
+    QString str = getName();
+
+
+    return str;
+}
+
+
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {
     qreal north = -90;
@@ -212,15 +232,6 @@ void CGisItemTrk::save(QDomNode& gpx)
     }
 }
 
-void CGisItemTrk::genKey()
-{
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&trk, sizeof(trk));
-        key = md5.result().toHex();
-    }
-}
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {

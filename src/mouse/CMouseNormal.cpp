@@ -20,7 +20,9 @@
 #include "mouse/CScrOptUnclutter.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
-#include "gis/IGisItem.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/CGisWidget.h"
 
 #include <QtGui>
@@ -54,6 +56,12 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
 
 void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 {
+    screenUnclutter->mouseMoveEvent(e);
+    if(!screenItemOption.isNull())
+    {
+        screenItemOption->mouseMoveEvent(e);
+    }
+
     point = e->pos();
     const QPoint pos = e->pos();
 
@@ -70,7 +78,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
     else
     {
         canvas->displayInfo(pos);
-        canvas->update();
+        canvas->update();                
     }
 }
 
@@ -81,16 +89,6 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
     {      
         if(!mapDidMove)
         {
-            /*
-                items | ring of items | action
-                ------|---------------|------------
-                   0  |     no        | -
-                   1  |     no        | highight in list and start to show options
-                  >1  |     no        | start to show ring of items
-                  >1  |     yes       | highight in list and start to show options
-            */
-
-
             switch(stateItemSel)
             {
                 case eStateHooverSingle:
@@ -103,10 +101,15 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                         item->treeWidget()->collapseAll();
                         item->treeWidget()->setCurrentItem(item);
                         item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
-                        item->gainUserFocus();
-                        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 
-                        stateItemSel = eStateShowOptions;
+                        delete screenItemOption;
+                        screenItemOption = item->getScreenOptions(this);
+
+                        if(!screenItemOption.isNull())
+                        {
+                            stateItemSel = eStateShowItemOptions;
+
+                        }
                     }
                     break;
                 }
@@ -117,12 +120,32 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 }
                 case eStateUnclutterMultiple:
                 {
-                    stateItemSel = screenUnclutter->selectItem(point.toPoint()) ? eStateShowOptions : eStateIdle;
+                    const IScrOpt::item_t * scropt = screenUnclutter->selectItem(point.toPoint());
+                    if(scropt != 0)
+                    {
+                        QString key = scropt->key;
+                        screenUnclutter->clear();
+
+                        IGisItem * item = CGisWidget::self().getItemByKey(key);
+                        if(item)
+                        {
+                            delete screenItemOption;
+                            screenItemOption = item->getScreenOptions(this);
+
+                            if(!screenItemOption.isNull())
+                            {
+                                stateItemSel = eStateShowItemOptions;
+                                break;
+                            }
+                        }
+                    }
+                    screenUnclutter->clear();
+                    stateItemSel = eStateIdle;
                     break;
                 }
-                case eStateShowOptions:
+                case eStateShowItemOptions:
                 {
-                    // todo: check click against list of rectangles
+                    delete screenItemOption;
                     stateItemSel = eStateIdle;
                     break;
                 }
@@ -138,6 +161,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
 void CMouseNormal::wheelEvent(QWheelEvent * e)
 {
     screenUnclutter->clear();
+    delete screenItemOption;
     stateItemSel = eStateIdle;
 }
 
@@ -173,18 +197,18 @@ void CMouseNormal::draw(QPainter& p, const QRect &rect)
         }
         case eStateUnclutterMultiple:
         {
-            screenUnclutter->draw(p, point.toPoint());
+            screenUnclutter->draw(p);
             break;
         }
-        case eStateShowOptions:
+        case eStateShowItemOptions:
         {
-            IGisItem * item = CGisWidget::self().getItemByKey(screenUnclutter->getItemKey());
-            if(item == 0)
+            if(screenItemOption.isNull())
             {
+                stateItemSel = eStateIdle;
                 break;
             }
-            item->drawHighlight(p);
-            // todo: draw item options
+
+            screenItemOption->draw(p);
             break;
         }
         default:;

@@ -17,9 +17,12 @@
 **********************************************************************************************/
 
 #include "IScrOpt.h"
+#include <QtWidgets>
+
 
 IScrOpt::IScrOpt(QObject *parent)
     : QObject(parent)
+    , doSpecialCursor(false)
 {
 
 }
@@ -29,3 +32,38 @@ IScrOpt::~IScrOpt()
 
 }
 
+void IScrOpt::clear()
+{
+    if(doSpecialCursor)
+    {
+        QApplication::restoreOverrideCursor();
+        doSpecialCursor = false;
+        return;
+    }
+    items.clear();
+}
+
+void IScrOpt::mouseMoveEvent(QMouseEvent * e)
+{
+    mousePos = e->pos();
+
+    foreach(const item_t& item, items)
+    {
+        if(item.area.contains(mousePos))
+        {
+            if(!doSpecialCursor)
+            {
+                QApplication::setOverrideCursor(Qt::PointingHandCursor);
+                doSpecialCursor = true;
+            }
+            return;
+        }
+    }
+
+    if(doSpecialCursor)
+    {
+        QApplication::restoreOverrideCursor();
+        doSpecialCursor = false;
+        return;
+    }
+}

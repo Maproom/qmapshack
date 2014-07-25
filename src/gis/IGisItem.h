@@ -34,7 +34,8 @@
 #include "units/IUnit.h"
 
 class CGisDraw;
-
+class IScrOpt;
+class IMouse;
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -44,15 +45,45 @@ class IGisItem : public QTreeWidgetItem
 
         static QMutex mutexItems;
 
+        /**
+           @brief Get key string to identify object
+           @return
+         */
         const QString& getKey();
+        /**
+           @brief Get icon attached to object
+           @return
+         */
         const QPixmap& getIcon(){return icon;}
+        /**
+           @brief Get name of this item.
+           @return
+         */
         virtual const QString& getName() = 0;
+
+        virtual QString getInfo() = 0;
+
+        /**
+           @brief Get screen option object to display and handle actions for this item.
+           @param mouse     a pointer to the mouse object initiating the action
+           @return A null pointer is returned if no screen option are available
+         */
+        virtual IScrOpt * getScreenOptions(IMouse * mouse){return 0;}
+
+        /**
+           @brief Get a point of the item that is close by the given screen pixel coordinate
+           @param point     a point in screen pixels
+           @return If no point is found NOPOINT is returned.
+         */
+        virtual QPointF getPointCloseBy(const QPoint& point){return NOPOINT;}
+
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
         virtual void drawHighlight(QPainter& p) = 0;
         virtual void save(QDomNode& gpx) = 0;
         virtual bool isCloseTo(const QPointF& pos) = 0;
         virtual void gainUserFocus() = 0;
+
 
     protected:
         struct wpt_t;
@@ -63,7 +94,7 @@ class IGisItem : public QTreeWidgetItem
         QString color2str(const QColor &color);
         void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
         void drawArrows(const QPolygonF &line, const QRectF &extViewport, QPainter& p);
-
+        void removeHtml(QString &str);
 
 
         struct color_t

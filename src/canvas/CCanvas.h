@@ -45,6 +45,8 @@ progress.setWindowModality(Qt::WindowModal);\
 progress.setValue(x); \
 if (progress.wasCanceled()) cmd;\
 
+#define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,5,5)
+
 
 class CCanvas : public QWidget
 {
@@ -78,6 +80,12 @@ class CCanvas : public QWidget
             , eRedrawGis = 0x04
             , eRedrawAll = 0xFFFFFFFF
         };
+
+        static QPen penBorderBlue;
+        static QPen penBorderBlack;
+        static QBrush brushBackWhite;
+        static QBrush brushBackYellow;
+
 
     signals:
         void sigMousePosition(const QPointF& pos, qreal ele);

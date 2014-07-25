@@ -31,6 +31,9 @@ class CGisItemWpt : public IGisItem
         virtual ~CGisItemWpt();
 
         const QString& getName(){return wpt.name;}
+        QString getInfo();
+        IScrOpt * getScreenOptions(IMouse * mouse);
+        QPointF getPointCloseBy(const QPoint& ){return posScreen;}
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);

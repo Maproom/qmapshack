@@ -47,6 +47,25 @@ CGisItemRte::~CGisItemRte()
 
 }
 
+void CGisItemRte::genKey()
+{
+    if(key.isEmpty())
+    {
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData((const char*)&rte, sizeof(rte));
+        key = md5.result().toHex();
+    }
+}
+
+QString CGisItemRte::getInfo()
+{
+    QString str = getName();
+
+
+    return str;
+}
+
+
 void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
 {
     qreal north = -90;
@@ -119,15 +138,6 @@ void CGisItemRte::save(QDomNode& gpx)
 
 }
 
-void CGisItemRte::genKey()
-{
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&rte, sizeof(rte));
-        key = md5.result().toHex();
-    }
-}
 
 bool CGisItemRte::isCloseTo(const QPointF& pos)
 {

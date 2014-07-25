@@ -16,29 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTUNCLUTTER_H
-#define CSCROPTUNCLUTTER_H
+#ifndef CSCROPTWPT_H
+#define CSCROPTWPT_H
 
 #include "mouse/IScrOpt.h"
 
-class IGisItem;
+#include <QWidget>
+#include "ui_IScrOptWpt.h"
 
+class CGisItemWpt;
+class IMouse;
 
-class CScrOptUnclutter : public IScrOpt
+class CScrOptWpt : public IScrOpt , public QWidget, private Ui::IScrOptWpt
 {
     public:
-        CScrOptUnclutter(QObject * parent);
-        virtual ~CScrOptUnclutter();
+        CScrOptWpt(CGisItemWpt * wpt, IMouse *parent);
+        virtual ~CScrOptWpt();
 
-        void addItem(IGisItem * gisItem);
-        QString getItemKey(int index = 0);
-        const item_t *selectItem(const QPoint& point);
-
-        void draw(QPainter& p);
+        void draw(QPainter& p){}
 
     private:
-        static const QPoint positions[];
+        CGisItemWpt * wpt;
+        QString info;
 };
 
-#endif //CSCROPTUNCLUTTER_H
+#endif //CSCROPTWPT_H
 

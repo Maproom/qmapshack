@@ -33,6 +33,7 @@ class CGisItemRte : public IGisItem
         virtual ~CGisItemRte();
 
         const QString& getName(){return rte.name;}
+        QString getInfo();
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);

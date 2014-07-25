@@ -50,6 +50,8 @@ class IMouse : public QObject
         */
         operator const QCursor&(){return cursor;}
 
+        const QPointF& getPoint(){return point;}
+        CCanvas * getCanvas(){return canvas;}
 
     protected:
         /// the functions mouse icon

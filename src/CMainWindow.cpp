@@ -71,7 +71,7 @@ CMainWindow::CMainWindow()
     connect(actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
     connect(actionAddMapWorkspace, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
-    connect(actionShowGrid, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
+    connect(actionShowGrid, SIGNAL(changed()), this, SLOT(update()));
     connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionMapToolTip, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionNightDay, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));

@@ -21,6 +21,9 @@
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
 #include "canvas/CCanvas.h"
+#include "mouse/IMouse.h"
+#include "mouse/CScrOptWpt.h"
+#include "units/IUnit.h"
 #include "GeoMath.h"
 
 
@@ -77,6 +80,81 @@ void CGisItemWpt::genKey()
         md5.addData((const char*)&wpt, sizeof(wpt));
         key = md5.result().toHex();
     }
+}
+
+QString CGisItemWpt::getInfo()
+{
+    QString str = getName();
+
+    if(geocache.hasData)
+    {
+        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0,'f',1).arg(geocache.terrain, 0,'f',1).arg(geocache.name);
+    }
+
+    if(wpt.time.isValid())
+    {
+        if(!str.isEmpty()) str += "\n";
+
+        str += wpt.time.toString();
+    }
+
+    if(wpt.ele != NOINT)
+    {
+        if(!str.isEmpty()) str += "\n";
+        QString val, unit;
+        IUnit::self().meter2elevation(wpt.ele, val, unit);
+        str += QObject::tr("elevation: %1 %2").arg(val).arg(unit);
+    }
+
+    if(proximity != NOFLOAT)
+    {
+        if(!str.isEmpty()) str += "\n";
+        QString val, unit;
+        IUnit::self().meter2distance(proximity, val, unit);
+        str += QObject::tr("proximity: %1 %2").arg(val).arg(unit);
+    }
+
+    if(wpt.desc.count())
+    {
+        if(!str.isEmpty()) str += "\n";
+
+        if(wpt.desc.count() < 200)
+        {
+            str += wpt.desc;
+        }
+        else
+        {
+            str += wpt.desc.left(197) + "...";
+        }
+    }
+    else
+    {
+        QString cmt = wpt.cmt;
+//        removeHtml(cmt);
+
+        if(cmt.count())
+        {
+            if(!str.isEmpty()) str += "\n";
+
+            if(cmt.count() < 200)
+            {
+                str += cmt;
+            }
+            else
+            {
+                str += cmt.left(197) + "...";
+            }
+        }
+    }
+
+//    qDebug() << str;
+
+    return str;
+}
+
+IScrOpt * CGisItemWpt::getScreenOptions(IMouse * mouse)
+{
+    return new CScrOptWpt(this, mouse);
 }
 
 void CGisItemWpt::setIcon()

@@ -65,6 +65,7 @@ set( SRCS
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
     gis/trk/CGisItemTrk.cpp
+    gis/trk/CScrOptTrk.cpp
     gis/rte/CGisItemRte.cpp
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
@@ -132,6 +133,7 @@ set( HDRS
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/trk/CGisItemTrk.h
+    gis/trk/CScrOptTrk.h
     gis/rte/CGisItemRte.h
     gis/CGisWidget.h
     gis/CGisListDB.h
@@ -153,6 +155,7 @@ set( UIS
     grid/IProjWizard.ui
     gis/IGisWidget.ui
     gis/wpt/IScrOptWpt.ui
+    gis/trk/IScrOptTrk.ui
 )
 
 set( RCS

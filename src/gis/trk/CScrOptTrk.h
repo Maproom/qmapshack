@@ -16,36 +16,28 @@
 
 **********************************************************************************************/
 
+#ifndef CSCROPTTRK_H
+#define CSCROPTTRK_H
 
-#include "gis/wpt/CScrOptWpt.h"
-#include "mouse/IMouse.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
+#include "mouse/IScrOpt.h"
 
-#include <QtWidgets>
+#include <QWidget>
+#include "ui_IScrOptTrk.h"
 
-CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, IMouse *parent)
-    : IScrOpt(parent)
-    , QWidget(parent->getCanvas())
-    , wpt(wpt)
+class CGisItemTrk;
+class IMouse;
+
+class CScrOptTrk : public IScrOpt , public QWidget, private Ui::IScrOptTrk
 {
-    setupUi(this);
-    label->setFont(CMainWindow::self().getMapFont());
-    label->setText(wpt->getInfo());
+    public:
+        CScrOptTrk(CGisItemTrk * trk, IMouse *parent);
+        virtual ~CScrOptTrk();
 
-    QPointF pt = wpt->getPointCloseBy(parent->getPoint().toPoint());
-    move(pt.toPoint());
-    adjustSize();
-    show();
-}
+        void draw(QPainter& p);
 
-CScrOptWpt::~CScrOptWpt()
-{
+    private:
+        CGisItemTrk * trk;
+};
 
-}
+#endif //CSCROPTTRK_H
 
-void CScrOptWpt::draw(QPainter& p)
-{
-    wpt->drawHighlight(p);
-}

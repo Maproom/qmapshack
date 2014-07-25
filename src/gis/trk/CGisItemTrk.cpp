@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CScrOptTrk.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 
@@ -125,6 +126,27 @@ QString CGisItemTrk::getInfo()
     return str;
 }
 
+IScrOpt * CGisItemTrk::getScreenOptions(IMouse * mouse)
+{
+    return new CScrOptTrk(this, mouse);
+}
+
+QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
+{
+    qint32 d    = NOINT;
+    QPointF pt  = NOPOINT;
+    foreach(const QPointF& point, line)
+    {
+        int tmp = (screenPos - point).manhattanLength();
+        if(tmp < d)
+        {
+            pt  = point;
+            d   = tmp;
+        }
+    }
+
+    return pt;
+}
 
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {

@@ -20,6 +20,7 @@
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
+#include "GeoMath.h"
 
 #include <QtXml>
 #include <QtWidgets>
@@ -99,6 +100,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     readTrk(xml, trk);
     // --- stop read and process data ----
     setText(0, trk.name);
+    setToolTip(0, getInfo());
     genKey();
 }
 
@@ -119,16 +121,48 @@ void CGisItemTrk::genKey()
 
 
 QString CGisItemTrk::getInfo()
-{
+{    
+    QString val1, unit1, val2, unit2;
     QString str = getName();
-
-    if(trk.segs.first().pts.first().time.isValid())
+    if(cntVisiblePoints == 0)
     {
-        if(!str.isEmpty()) str += "\n";
-
-        str += trk.segs.first().pts.first().time.toString();
+        return str;
     }
 
+    IUnit::self().meter2distance(totalDistance, val1, unit1);
+    str += "\n";
+    str += QObject::tr("Length: %1 %2").arg(val1).arg(unit1);
+    str += QObject::tr(", Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
+
+    if(totalElapsedSeconds != NOTIME)
+    {
+        IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
+        str += "\n";
+        str += QObject::tr("Time: %1").arg(val1);
+
+        IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val1, unit1);
+        str += QObject::tr(", Speed: %1 %2").arg(val1).arg(unit1);
+    }
+
+    if(timeStart.isValid())
+    {
+        str += "\n";
+        str += QObject::tr("Start: %1").arg(timeStart.toString());
+    }
+    if(timeEnd.isValid())
+    {
+        str += "\n";
+        str += QObject::tr("End: %1").arg(timeEnd.toString());
+    }
+
+    if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
+    {
+        IUnit::self().meter2elevation(totalAscend, val1, unit1);
+        IUnit::self().meter2elevation(totalDescend, val2, unit2);
+
+        str += "\n";
+        str += QObject::tr("%1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+    }
 
     return str;
 }
@@ -215,6 +249,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         setColor(str2color(str));
     }
 
+    deriveSecondaryData();
 }
 
 void CGisItemTrk::save(QDomNode& gpx)
@@ -259,6 +294,134 @@ void CGisItemTrk::save(QDomNode& gpx)
             writeXml(xmlExt, "ql:flags", pt.flags);
         }
     }
+}
+
+
+#define ASCEND_THRESHOLD    5
+
+void CGisItemTrk::deriveSecondaryData()
+{
+    // reset all secondary data
+    cntTotalPoints          = 0;
+    cntVisiblePoints        = 0;
+    timeStart               = QDateTime();
+    timeEnd                 = QDateTime();
+    totalDistance           = NOFLOAT;
+    totalAscend             = NOFLOAT;
+    totalDescend            = NOFLOAT;
+    totalElapsedSeconds     = NOTIME;
+    totalElapsedSecondsMoving = NOTIME;
+
+
+    // remove empty segments
+    QVector<trkseg_t>::iterator i = trk.segs.begin();
+    while(i != trk.segs.end())
+    {
+        if((*i).pts.isEmpty())
+        {
+            i = trk.segs.erase(i);
+            continue;
+        }
+        i++;
+    }
+
+    // no segments -> no data -> nothing to do
+    if(trk.segs.isEmpty())
+    {
+        return;
+    }
+
+    trkpt_t * lastTrkpt     = 0;
+    quint32 timestampStart  = NOTIME;
+    qreal lastEle           = NOFLOAT;
+
+    for(int s = 0; s < trk.segs.size(); s++)
+    {
+        trkseg_t& seg = trk.segs[s];
+
+        for(int p = 0; p < seg.pts.size(); p++)
+        {
+            trkpt_t& trkpt = seg.pts[p];
+
+            cntTotalPoints++;
+            if(trkpt.flags & trkpt_t::eDeleted)
+            {
+                trkpt.reset();
+                continue;
+            }
+            cntVisiblePoints++;
+
+            if(lastTrkpt != 0)
+            {
+                trkpt.deltaDistance     = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+                trkpt.distance          = lastTrkpt->distance + trkpt.deltaDistance;
+                trkpt.elapsedSeconds    = trkpt.time.toTime_t() - timestampStart;
+
+                // ascend descend
+                if(lastEle != NOFLOAT)
+                {
+
+                    qreal delta     = trkpt.ele - lastEle;
+                    qreal absDelta  = fabs(delta);
+
+                    if(absDelta > ASCEND_THRESHOLD /*&& absDelta < 100*/)
+                    {
+                        if(delta > 0)
+                        {
+                            trkpt.ascend  = lastTrkpt->ascend + delta;
+                            trkpt.descend = lastTrkpt->descend;
+                        }
+                        else
+                        {
+                            trkpt.ascend  = lastTrkpt->ascend;
+                            trkpt.descend = lastTrkpt->descend - delta;
+                        }
+                        lastEle = trkpt.ele;
+                    }
+                    else
+                    {
+                        trkpt.ascend     = lastTrkpt->ascend;
+                        trkpt.descend    = lastTrkpt->descend;
+                    }
+                }
+
+            }
+            else
+            {
+                timeStart       = trkpt.time;
+                timestampStart  = timeStart.toTime_t();
+                lastEle         = trkpt.ele;
+
+                trkpt.deltaDistance         = 0;
+                trkpt.distance              = 0;
+                trkpt.ascend                = 0;
+                trkpt.descend               = 0;
+                trkpt.elapsedSeconds        = 0;
+                trkpt.elapsedSecondsMoving  = 0;
+            }
+
+            lastTrkpt = &trkpt;
+        }
+    }
+
+    if(lastTrkpt != 0)
+    {
+        timeEnd                 = lastTrkpt->time;
+        totalDistance           = lastTrkpt->distance;
+        totalAscend             = lastTrkpt->ascend;
+        totalDescend            = lastTrkpt->descend;
+        totalElapsedSeconds     = lastTrkpt->elapsedSeconds;
+        totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
+    }
+
+    qDebug() << "--------------" << getName() << "------------------";
+    qDebug() << "totalDistance" << totalDistance;
+    qDebug() << "totalAscend" << totalAscend;
+    qDebug() << "totalDescend" << totalDescend;
+    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
+    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
+
+
 }
 
 

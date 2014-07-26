@@ -52,21 +52,49 @@ class CGisItemTrk : public IGisItem
         void readTrk(const QDomNode& xml, trk_t& trk);
         void setColor(const QColor& c);
         void setIcon(const QString& c);
+        void deriveSecondaryData();
 
         static QString keyUserFocus;
 
         struct trkpt_t : public wpt_t
         {
-            trkpt_t() : flags(0) {}
+            trkpt_t()
+                : flags(0)
+            {reset();}
+
+            void reset()
+            {
+                deltaDistance   = NOFLOAT;
+                distance        = NOFLOAT;
+                ascend          = NOFLOAT;
+                descend         = NOFLOAT;
+                elapsedSeconds  = NOTIME;
+                elapsedSecondsMoving = NOTIME;
+            }
+
             enum flag_e
             {
-                 eSelected  = 1  ///< selected by track info view
-                ,eCursor    = 2  ///< selected by cursor
-                ,eDeleted   = 4  ///< mark point as deleted
-                ,eFocus     = 8  ///< mark current point of user focus
+                 eSelected  = 0x00000001  ///< selected by track info view
+//                ,eCursor    = 0x00000002  ///< selected by cursor
+                ,eDeleted   = 0x00000004  ///< mark point as deleted
+//                ,eFocus     = 0x00000008  ///< mark current point of user focus
+                ,eAllowEdit = 0x80000000
             };
 
             quint32 flags;
+
+            /// the distance to the last point
+            qreal deltaDistance;
+            /// the distance from the start of the track
+            qreal distance;
+            /// the ascend from the start of the track
+            qreal ascend;
+            /// the descend from the start of the track
+            qreal descend;
+            /// the seconds since the start of the track
+            quint32 elapsedSeconds;
+
+            quint32 elapsedSecondsMoving;
         };
 
         struct trkseg_t
@@ -95,6 +123,17 @@ class CGisItemTrk : public IGisItem
         QPen penForeground;
 
         trk_t trk;
+
+        quint32     cntTotalPoints;
+        quint32     cntVisiblePoints;
+        QDateTime   timeStart;
+        QDateTime   timeEnd;
+        qreal       totalDistance;
+        qreal       totalAscend;
+        qreal       totalDescend;
+        quint32     totalElapsedSeconds;
+        quint32     totalElapsedSecondsMoving;
+
 
         QRectF boundingRect;
         /// the track line color

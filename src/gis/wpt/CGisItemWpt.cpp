@@ -64,6 +64,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
 
     setText(0, wpt.name);
     setIcon();
+    setToolTip(0, getInfo());
     genKey();
 }
 

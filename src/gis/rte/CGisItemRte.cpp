@@ -40,6 +40,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
     // --- stop read and process data ----
     setText(0, rte.name);
     setIcon(0, icon);
+    setToolTip(0,getInfo());
     genKey();
 }
 

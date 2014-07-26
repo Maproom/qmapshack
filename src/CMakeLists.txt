@@ -67,6 +67,7 @@ set( SRCS
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
     gis/rte/CGisItemRte.cpp
+    gis/rte/CScrOptRte.cpp
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
@@ -135,6 +136,7 @@ set( HDRS
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
     gis/rte/CGisItemRte.h
+    gis/rte/CScrOptRte.h
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
@@ -156,6 +158,7 @@ set( UIS
     gis/IGisWidget.ui
     gis/wpt/IScrOptWpt.ui
     gis/trk/IScrOptTrk.ui
+    gis/rte/IScrOptRte.ui
 )
 
 set( RCS

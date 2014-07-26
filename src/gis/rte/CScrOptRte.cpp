@@ -16,38 +16,38 @@
 
 **********************************************************************************************/
 
-
-#include "gis/wpt/CScrOptWpt.h"
+#include "gis/rte/CScrOptRte.h"
+#include "gis/rte/CGisItemRte.h"
 #include "mouse/IMouse.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 
-#include <QtWidgets>
 
-CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, IMouse *parent)
+
+CScrOptRte::CScrOptRte(CGisItemRte *rte, IMouse *parent)
     : IScrOpt(parent)
     , QWidget(parent->getCanvas())
-    , wpt(wpt)
+    , rte(rte)
 {
     setupUi(this);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(wpt->getInfo());
+    label->setText(rte->getInfo());
 
-    anchor = wpt->getPointCloseBy(parent->getPoint().toPoint());
+
+    anchor = rte->getPointCloseBy(parent->getPoint().toPoint());
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();
 }
 
-CScrOptWpt::~CScrOptWpt()
+CScrOptRte::~CScrOptRte()
 {
 
 }
 
-void CScrOptWpt::draw(QPainter& p)
+void CScrOptRte::draw(QPainter& p)
 {
-    wpt->drawHighlight(p);
+    rte->drawHighlight(p);
 
     QRectF r = rect();
     r.moveTopLeft(QPoint(x(), y()));

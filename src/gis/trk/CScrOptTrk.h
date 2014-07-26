@@ -37,6 +37,7 @@ class CScrOptTrk : public IScrOpt , public QWidget, private Ui::IScrOptTrk
 
     private:
         CGisItemTrk * trk;
+        QPointF anchor;
 };
 
 #endif //CSCROPTTRK_H

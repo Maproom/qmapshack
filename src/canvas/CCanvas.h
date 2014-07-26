@@ -82,6 +82,7 @@ class CCanvas : public QWidget
         };
 
         static QPen penBorderBlue;
+        static QPen penBorderGray;
         static QPen penBorderBlack;
         static QBrush brushBackWhite;
         static QBrush brushBackYellow;

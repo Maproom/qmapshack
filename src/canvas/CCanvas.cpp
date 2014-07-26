@@ -32,8 +32,9 @@
 #include <QtWidgets>
 
 QPen CCanvas::penBorderBlue(QColor(10,10,150,220),2);
+QPen CCanvas::penBorderGray(Qt::lightGray,2);
 QPen CCanvas::penBorderBlack(QColor(0,0,0,200),2);
-QBrush CCanvas::brushBackWhite(QColor(255,255,255,210));
+QBrush CCanvas::brushBackWhite(QColor(255,255,255,255));
 QBrush CCanvas::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
 
@@ -169,12 +170,12 @@ void CCanvas::paintEvent(QPaintEvent * e)
     p.resetTransform();
     // ----- start to draw static content -----
 
+    grid->draw(p, rect());
     if(!gis->isRunning())
     {
         // no mouse interaction while GIS data is drawn.
         mouse->draw(p, rect());
     }
-    grid->draw(p, rect());
 
 
     drawScale(p);

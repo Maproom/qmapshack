@@ -122,6 +122,13 @@ QString CGisItemTrk::getInfo()
 {
     QString str = getName();
 
+    if(trk.segs.first().pts.first().time.isValid())
+    {
+        if(!str.isEmpty()) str += "\n";
+
+        str += trk.segs.first().pts.first().time.toString();
+    }
+
 
     return str;
 }

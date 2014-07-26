@@ -28,9 +28,12 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, IMouse *parent)
     , trk(trk)
 {
     setupUi(this);
+    label->setFont(CMainWindow::self().getMapFont());
+    label->setText(trk->getInfo());
 
-    QPointF pt = trk->getPointCloseBy(parent->getPoint().toPoint());
-    move(pt.toPoint());
+
+    anchor = trk->getPointCloseBy(parent->getPoint().toPoint());
+    move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();
 }
@@ -43,4 +46,21 @@ CScrOptTrk::~CScrOptTrk()
 void CScrOptTrk::draw(QPainter& p)
 {
     trk->drawHighlight(p);
+
+    QRectF r = rect();
+    r.moveTopLeft(QPoint(x(), y()));
+    QPainterPath path1;
+    path1.addRoundedRect(r,5,5);
+
+    QPolygonF poly2;
+    poly2 << anchor << (r.topLeft() + QPointF(10,0)) << (r.topLeft() + QPointF(0,10)) << anchor;
+    QPainterPath path2;
+    path2.addPolygon(poly2);
+
+    path1 = path1.united(path2);
+
+    p.setPen(CCanvas::penBorderGray);
+    p.setBrush(CCanvas::brushBackWhite);
+    p.drawPolygon(path1.toFillPolygon());
+
 }

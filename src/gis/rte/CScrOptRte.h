@@ -16,29 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTWPT_H
-#define CSCROPTWPT_H
+#ifndef CSCROPTRTE_H
+#define CSCROPTRTE_H
 
 #include "mouse/IScrOpt.h"
 
 #include <QWidget>
-#include "ui_IScrOptWpt.h"
+#include "ui_IScrOptRte.h"
 
-class CGisItemWpt;
+class CGisItemRte;
 class IMouse;
 
-class CScrOptWpt : public IScrOpt , public QWidget, private Ui::IScrOptWpt
+class CScrOptRte : public IScrOpt , public QWidget, private Ui::IScrOptRte
 {
     public:
-        CScrOptWpt(CGisItemWpt * wpt, IMouse *parent);
-        virtual ~CScrOptWpt();
+        CScrOptRte(CGisItemRte * rte, IMouse *parent);
+        virtual ~CScrOptRte();
 
         void draw(QPainter& p);
 
     private:
-        CGisItemWpt * wpt;
+        CGisItemRte * rte;
         QPointF anchor;
 };
 
-#endif //CSCROPTWPT_H
+#endif //CSCROPTRTE_H
 

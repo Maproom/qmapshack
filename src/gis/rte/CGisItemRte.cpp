@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/CScrOptRte.h"
 #include "gis/CGisProject.h"
 #include "gis/WptIcons.h"
 #include "gis/CGisDraw.h"
@@ -65,6 +66,27 @@ QString CGisItemRte::getInfo()
     return str;
 }
 
+IScrOpt * CGisItemRte::getScreenOptions(IMouse * mouse)
+{
+    return new CScrOptRte(this, mouse);
+}
+
+QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
+{
+    qint32 d    = NOINT;
+    QPointF pt  = NOPOINT;
+    foreach(const QPointF& point, line)
+    {
+        int tmp = (screenPos - point).manhattanLength();
+        if(tmp < d)
+        {
+            pt  = point;
+            d   = tmp;
+        }
+    }
+
+    return pt;
+}
 
 void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
 {

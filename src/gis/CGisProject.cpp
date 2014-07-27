@@ -73,10 +73,14 @@ CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWk
         return;
     }
 
+    const QDomNode& xmlMetadata = xmlGpx.namedItem("metadata");
+    if(xmlMetadata.isElement())
+    {
+        readMetadata(xmlMetadata, metadata);
+    }
+
 
     QList<QTreeWidgetItem*> items;
-
-
     const QDomNodeList& xmlTrks = xmlGpx.elementsByTagName("trk");
     N = xmlTrks.count();
     for(int n = 0; n < N; ++n)
@@ -113,6 +117,144 @@ CGisProject::~CGisProject()
 {
 
 }
+
+void CGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
+{
+
+    IGisItem::readXml(xml,"name", metadata.name);
+    IGisItem::readXml(xml,"desc", metadata.desc);
+
+    const QDomNode& xmlAuthor = xml.namedItem("author");
+    if(xmlAuthor.isElement())
+    {
+        IGisItem::readXml(xml,"name", metadata.author.name);
+
+        const QDomNode& xmlEmail = xmlAuthor.namedItem("email");
+        if(xmlEmail.isElement())
+        {
+            const QDomNamedNodeMap& attr = xmlEmail.attributes();
+            metadata.author.id = attr.namedItem("id").nodeValue();
+            metadata.author.domain = attr.namedItem("domain").nodeValue();
+        }
+
+        const QDomNode& xmlLink = xmlAuthor.namedItem("link");
+        if(xmlLink.isElement())
+        {
+            metadata.author.link.uri.setUrl(xmlLink.attributes().namedItem("href").nodeValue());
+            IGisItem::readXml(xmlLink, "text", metadata.author.link.text);
+            IGisItem::readXml(xmlLink, "type", metadata.author.link.type);
+        }
+    }
+
+    const QDomNode& xmlCopyright = xml.namedItem("copyright");
+    if(xmlCopyright.isElement())
+    {
+        metadata.copyright.author = xmlCopyright.attributes().namedItem("author").nodeValue();
+        IGisItem::readXml(xmlCopyright, "year", metadata.copyright.year);
+        IGisItem::readXml(xmlCopyright, "license", metadata.copyright.license);
+    }
+
+    IGisItem::readXml(xml,"link", metadata.links);
+    IGisItem::readXml(xml,"time", metadata.time);
+    IGisItem::readXml(xml,"keywords", metadata.keywords);
+
+    const QDomNode& xmlBounds = xml.namedItem("bounds");
+    if(xmlBounds.isElement())
+    {
+        const QDomNamedNodeMap& attr = xmlBounds.attributes();
+        metadata.bounds.setLeft(attr.namedItem("minlon").nodeValue().toDouble());
+        metadata.bounds.setTop(attr.namedItem("maxlat").nodeValue().toDouble());
+        metadata.bounds.setRight(attr.namedItem("maxlon").nodeValue().toDouble());
+        metadata.bounds.setBottom(attr.namedItem("minlat").nodeValue().toDouble());
+    }
+}
+
+QDomNode CGisProject::writeMetadata(QDomDocument& doc)
+{
+    QDomElement gpx = doc.createElement("gpx");
+    doc.appendChild(gpx);
+
+    gpx.setAttribute("version","1.1");
+    gpx.setAttribute("creator","QMapShack " VER_STR " http://www.qlandkarte.org/");
+    gpx.setAttribute("xmlns",gpx_ns);
+    gpx.setAttribute("xmlns:xsi",xsi_ns);
+    gpx.setAttribute("xmlns:gpxx",gpxx_ns);
+    gpx.setAttribute("xmlns:gpxtpx",gpxtpx_ns);
+    gpx.setAttribute("xmlns:wptx1",wptx1_ns);
+    gpx.setAttribute("xmlns:rmc",rmc_ns);
+    gpx.setAttribute("xmlns:ql",ql_ns);
+
+    QString schemaLocation = QString()
+        + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
+        + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
+        + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
+        + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd"
+        + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd";
+
+    gpx.setAttribute("xsi:schemaLocation", schemaLocation);
+
+    QDomElement xmlMetadata = doc.createElement("metadata");
+    gpx.appendChild(xmlMetadata);
+
+    IGisItem::writeXml(xmlMetadata,"name", metadata.name);
+    IGisItem::writeXml(xmlMetadata,"desc", metadata.desc);
+
+    if(!metadata.author.name.isEmpty())
+    {
+        QDomElement xmlAuthor = doc.createElement("author");
+        xmlMetadata.appendChild(xmlAuthor);
+
+        IGisItem::writeXml(xmlAuthor,"name", metadata.author.name);
+
+        if(!metadata.author.id.isEmpty() && !metadata.author.domain.isEmpty())
+        {
+            QDomElement xmlEmail = doc.createElement("email");
+            xmlAuthor.appendChild(xmlEmail);
+            xmlEmail.setAttribute("id", metadata.author.id);
+            xmlEmail.setAttribute("domain", metadata.author.domain);
+        }
+
+        if(metadata.author.link.uri.isValid())
+        {
+            QDomElement xmlLink = doc.createElement("link");
+            xmlAuthor.appendChild(xmlLink);
+
+            xmlLink.setAttribute("href", metadata.author.link.uri.toString());
+            IGisItem::writeXml(xmlLink, "text", metadata.author.link.text);
+            IGisItem::writeXml(xmlLink, "type", metadata.author.link.type);
+
+        }
+    }
+
+    if(!metadata.copyright.author.isEmpty())
+    {
+        QDomElement xmlCopyright = doc.createElement("copyright");
+        xmlMetadata.appendChild(xmlCopyright);
+
+        xmlCopyright.setAttribute("author", metadata.copyright.author);
+        IGisItem::writeXml(xmlCopyright, "year", metadata.copyright.year);
+        IGisItem::writeXml(xmlCopyright, "license", metadata.copyright.license);
+
+    }
+    IGisItem::writeXml(xmlMetadata, "link", metadata.links);
+    IGisItem::writeXml(xmlMetadata, "time", metadata.time);
+    IGisItem::writeXml(xmlMetadata, "keywords", metadata.keywords);
+
+    if(metadata.bounds.isValid())
+    {
+        QDomElement xmlBounds = doc.createElement("bounds");
+        xmlMetadata.appendChild(xmlBounds);
+
+        xmlBounds.setAttribute("minlat", metadata.bounds.bottom());
+        xmlBounds.setAttribute("minlon", metadata.bounds.left());
+        xmlBounds.setAttribute("maxlat", metadata.bounds.top());
+        xmlBounds.setAttribute("maxlon", metadata.bounds.right());
+
+    }
+
+    return gpx;
+}
+
 
 void CGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
 {
@@ -340,37 +482,3 @@ void CGisProject::saveGpx(const QString& fn)
     setText(0, QFileInfo(filename).baseName());
 }
 
-QDomNode CGisProject::writeMetadata(QDomDocument& doc)
-{
-    QDomElement gpx = doc.createElement("gpx");
-    doc.appendChild(gpx);
-
-    gpx.setAttribute("version","1.1");
-    gpx.setAttribute("creator","QMapShack " VER_STR " http://www.qlandkarte.org/");
-    gpx.setAttribute("xmlns",gpx_ns);
-    gpx.setAttribute("xmlns:xsi",xsi_ns);
-    gpx.setAttribute("xmlns:gpxx",gpxx_ns);
-    gpx.setAttribute("xmlns:gpxtpx",gpxtpx_ns);
-    gpx.setAttribute("xmlns:wptx1",wptx1_ns);
-    gpx.setAttribute("xmlns:rmc",rmc_ns);
-    gpx.setAttribute("xmlns:ql",ql_ns);
-
-    QString schemaLocation = QString()
-        + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
-        + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
-        + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
-        + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd"
-        + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd";
-
-    gpx.setAttribute("xsi:schemaLocation", schemaLocation);
-
-    QDomElement metadata = doc.createElement("metadata");
-    gpx.appendChild(metadata);
-
-    QDomElement time = doc.createElement("time");
-    metadata.appendChild(time);
-    QDomText _time_ = doc.createTextNode(QDateTime::currentDateTime().toUTC().toString("yyyy-MM-dd'T'hh:mm:ss'Z'"));
-    time.appendChild(_time_);
-
-    return gpx;
-}

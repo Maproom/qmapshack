@@ -86,6 +86,7 @@ class IGisItem : public QTreeWidgetItem
 
 
     protected:
+        friend class CGisProject;
         struct wpt_t;
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         void writeWpt(QDomElement &xmlWpt, const wpt_t &wpt);
@@ -157,7 +158,7 @@ class IGisItem : public QTreeWidgetItem
         static const color_t colorMap[];
 
 
-        inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
+        static inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
         {
             if(xml.namedItem(tag).isElement())
             {
@@ -175,7 +176,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void readXml(const QDomNode& xml, const QString& tag, quint32& value)
+        static inline void readXml(const QDomNode& xml, const QString& tag, quint32& value)
         {
             if(xml.namedItem(tag).isElement())
             {
@@ -189,7 +190,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void readXml(const QDomNode& xml, const QString& tag, quint64& value)
+        static inline void readXml(const QDomNode& xml, const QString& tag, quint64& value)
         {
             if(xml.namedItem(tag).isElement())
             {
@@ -203,7 +204,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void readXml(const QDomNode& xml, const QString& tag, qreal& value)
+        static inline void readXml(const QDomNode& xml, const QString& tag, qreal& value)
         {
             if(xml.namedItem(tag).isElement())
             {
@@ -217,7 +218,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void readXml(const QDomNode& xml, const QString& tag, QString& value)
+        static inline void readXml(const QDomNode& xml, const QString& tag, QString& value)
         {
             if(xml.namedItem(tag).isElement())
             {
@@ -225,7 +226,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
+        static inline void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
         {
             if(xml.namedItem(tag).isElement())
             {
@@ -235,7 +236,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void readXml(const QDomNode& xml, const QString& tag, QList<link_t>& l)
+        static inline void readXml(const QDomNode& xml, const QString& tag, QList<link_t>& l)
         {
             if(xml.namedItem(tag).isElement())
             {
@@ -255,7 +256,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void writeXml(QDomNode& xml, const QString& tag, qint32 val)
+        static inline void writeXml(QDomNode& xml, const QString& tag, qint32 val)
         {
             if(val != NOINT)
             {
@@ -266,7 +267,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void writeXml(QDomNode& xml, const QString& tag, quint32 val)
+        static inline void writeXml(QDomNode& xml, const QString& tag, quint32 val)
         {
             if(val != NOINT)
             {
@@ -277,7 +278,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void writeXml(QDomNode& xml, const QString& tag, quint64 val)
+        static inline void writeXml(QDomNode& xml, const QString& tag, quint64 val)
         {
             if(val != 0)
             {
@@ -288,7 +289,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void writeXml(QDomNode& xml, const QString& tag, const QString& val)
+        static inline void writeXml(QDomNode& xml, const QString& tag, const QString& val)
         {
             if(!val.isEmpty())
             {
@@ -299,7 +300,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void writeXml(QDomNode& xml, const QString& tag, qreal val)
+        static inline void writeXml(QDomNode& xml, const QString& tag, qreal val)
         {
             if(val != NOFLOAT)
             {
@@ -310,7 +311,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void writeXmlHtml(QDomNode& xml, const QString& tag, const QString& val)
+        static inline void writeXmlHtml(QDomNode& xml, const QString& tag, const QString& val)
         {
             if(!val.isEmpty())
             {
@@ -323,7 +324,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline void writeXml(QDomNode& xml, const QString& tag, const QDateTime& time)
+        static inline void writeXml(QDomNode& xml, const QString& tag, const QDateTime& time)
         {
             if(time.isValid())
             {
@@ -335,7 +336,7 @@ class IGisItem : public QTreeWidgetItem
         }
 
 
-        inline void writeXml(QDomNode& xml, const QString& tag, const QList<link_t>& links)
+        static inline void writeXml(QDomNode& xml, const QString& tag, const QList<link_t>& links)
         {
             if(!links.isEmpty())
             {
@@ -351,7 +352,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
+        static inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
         {
             foreach(const QRectF& r, blockedAreas)
             {

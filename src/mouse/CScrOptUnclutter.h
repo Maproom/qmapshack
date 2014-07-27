@@ -30,14 +30,32 @@ class CScrOptUnclutter : public IScrOpt
         CScrOptUnclutter(QObject * parent);
         virtual ~CScrOptUnclutter();
 
+        struct item_t
+        {
+            QString name;
+            QString key;
+            QPixmap icon;
+            QRect   area;
+            QRect   text;
+            QRect   active;
+        };
+
+        virtual void clear();
+        virtual int  size(){return items.size();}
+
         void addItem(IGisItem * gisItem);
         QString getItemKey(int index = 0);
         const item_t *selectItem(const QPoint& point);
 
         void draw(QPainter& p);
+        void mouseMoveEvent(QMouseEvent * e);
 
     private:
         static const QPoint positions[];
+        QList<item_t> items;
+        bool doSpecialCursor;
+
+
 };
 
 #endif //CSCROPTUNCLUTTER_H

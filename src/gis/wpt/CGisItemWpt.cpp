@@ -153,9 +153,9 @@ QString CGisItemWpt::getInfo()
     return str;
 }
 
-IScrOpt * CGisItemWpt::getScreenOptions(IMouse * mouse)
+IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    return new CScrOptWpt(this, mouse);
+    return new CScrOptWpt(this, origin, mouse);
 }
 
 void CGisItemWpt::setIcon()

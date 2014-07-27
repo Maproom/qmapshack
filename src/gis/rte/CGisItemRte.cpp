@@ -67,9 +67,9 @@ QString CGisItemRte::getInfo()
     return str;
 }
 
-IScrOpt * CGisItemRte::getScreenOptions(IMouse * mouse)
+IScrOpt * CGisItemRte::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    return new CScrOptRte(this, mouse);
+    return new CScrOptRte(this, origin, mouse);
 }
 
 QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)

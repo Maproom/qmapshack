@@ -31,29 +31,20 @@ class IScrOpt : public QObject
         IScrOpt(QObject * parent);
         virtual ~IScrOpt();
 
-        struct item_t
-        {
-            QString name;
-            QString key;
-            QPixmap icon;
-            QRect   area;
-            QRect   text;
-        };
 
-        virtual void clear();
-        virtual int  size(){return items.size();}
+        void setOrigin(const QPoint& pos){origin = pos;}
+        const QPoint& getOrigin(){return origin;}
 
         virtual void draw(QPainter& p) = 0;
-
-        virtual void mouseMoveEvent(QMouseEvent * e);
+        virtual void mouseMoveEvent(QMouseEvent *);
 
     protected:
 
-        QList<item_t> items;
-
-        bool doSpecialCursor;
+        QPoint origin;
 
         QPoint mousePos;
+
+
 };
 
 #endif //ISCROPT_H

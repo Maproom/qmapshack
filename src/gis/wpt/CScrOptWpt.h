@@ -30,7 +30,7 @@ class IMouse;
 class CScrOptWpt : public IScrOpt , public QWidget, private Ui::IScrOptWpt
 {
     public:
-        CScrOptWpt(CGisItemWpt * wpt, IMouse *parent);
+        CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
         virtual ~CScrOptWpt();
 
         void draw(QPainter& p);

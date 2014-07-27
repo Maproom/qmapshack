@@ -39,6 +39,7 @@ const QPoint CScrOptUnclutter::positions[] =
 
 CScrOptUnclutter::CScrOptUnclutter(QObject *parent)
     : IScrOpt(parent)
+    , doSpecialCursor(false)
 {
 
 }
@@ -46,6 +47,41 @@ CScrOptUnclutter::CScrOptUnclutter(QObject *parent)
 CScrOptUnclutter::~CScrOptUnclutter()
 {
 
+}
+
+void CScrOptUnclutter::clear()
+{
+    if(doSpecialCursor)
+    {
+        QApplication::restoreOverrideCursor();
+        doSpecialCursor = false;
+    }
+    items.clear();
+}
+
+void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
+{
+    IScrOpt::mouseMoveEvent(e);
+
+    foreach(const item_t& item, items)
+    {
+        if(item.active.contains(mousePos))
+        {
+            if(!doSpecialCursor)
+            {
+                QApplication::setOverrideCursor(Qt::PointingHandCursor);
+                doSpecialCursor = true;
+            }
+            return;
+        }
+    }
+
+    if(doSpecialCursor)
+    {
+        QApplication::restoreOverrideCursor();
+        doSpecialCursor = false;
+        return;
+    }
 }
 
 void CScrOptUnclutter::addItem(IGisItem * gisItem)
@@ -56,6 +92,7 @@ void CScrOptUnclutter::addItem(IGisItem * gisItem)
     item.key        = gisItem->getKey();
     item.icon       = gisItem->getIcon();
     item.area       = item.icon.rect();
+    item.active     = item.area.adjusted(-10,-10,10,10);
 }
 
 QString CScrOptUnclutter::getItemKey(int index)
@@ -67,11 +104,11 @@ QString CScrOptUnclutter::getItemKey(int index)
     return QString::Null();
 }
 
-const IScrOpt::item_t * CScrOptUnclutter::selectItem(const QPoint& point)
+const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& point)
 {
     foreach(const item_t& item, items)
     {
-        if(item.area.contains(point))
+        if(item.active.contains(point))
         {
             return &item;
         }
@@ -89,7 +126,8 @@ void CScrOptUnclutter::draw(QPainter& p)
         if(item.text.isNull())
         {
 
-            item.area.moveCenter(mousePos + positions[cnt]);
+            item.area.moveCenter(origin + positions[cnt]);
+            item.active.moveCenter(item.area.center());
             item.text = fm.boundingRect(item.name);
             if(cnt & 0x01)
             {
@@ -105,6 +143,7 @@ void CScrOptUnclutter::draw(QPainter& p)
 
     foreach(const item_t& item, items)
     {
+
 
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,255));

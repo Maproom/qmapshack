@@ -22,17 +22,18 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 
-CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, IMouse *parent)
+CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
     : IScrOpt(parent)
     , QWidget(parent->getCanvas())
     , trk(trk)
 {
     setupUi(this);
+    setOrigin(origin);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(trk->getInfo());
 
 
-    anchor = trk->getPointCloseBy(parent->getPoint().toPoint());
+    anchor = trk->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();

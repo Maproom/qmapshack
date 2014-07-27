@@ -24,17 +24,18 @@
 
 
 
-CScrOptRte::CScrOptRte(CGisItemRte *rte, IMouse *parent)
+CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& origin, IMouse *parent)
     : IScrOpt(parent)
     , QWidget(parent->getCanvas())
     , rte(rte)
 {
     setupUi(this);
+    setOrigin(origin);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(rte->getInfo());
 
 
-    anchor = rte->getPointCloseBy(parent->getPoint().toPoint());
+    anchor = rte->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();

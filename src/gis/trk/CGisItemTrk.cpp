@@ -132,7 +132,15 @@ QString CGisItemTrk::getInfo()
     IUnit::self().meter2distance(totalDistance, val1, unit1);
     str += "\n";
     str += QObject::tr("Length: %1 %2").arg(val1).arg(unit1);
-    str += QObject::tr(", Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
+
+    if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
+    {
+        IUnit::self().meter2elevation(totalAscend, val1, unit1);
+        IUnit::self().meter2elevation(totalDescend, val2, unit2);
+
+        str += QObject::tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+    }
+
 
     if(totalElapsedSeconds != NOTIME)
     {
@@ -155,21 +163,16 @@ QString CGisItemTrk::getInfo()
         str += QObject::tr("End: %1").arg(timeEnd.toString());
     }
 
-    if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
-    {
-        IUnit::self().meter2elevation(totalAscend, val1, unit1);
-        IUnit::self().meter2elevation(totalDescend, val2, unit2);
+    str += "\n";
+    str += QObject::tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
 
-        str += "\n";
-        str += QObject::tr("%1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
-    }
 
     return str;
 }
 
-IScrOpt * CGisItemTrk::getScreenOptions(IMouse * mouse)
+IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    return new CScrOptTrk(this, mouse);
+    return new CScrOptTrk(this, origin, mouse);
 }
 
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)

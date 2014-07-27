@@ -68,7 +68,7 @@ class IGisItem : public QTreeWidgetItem
            @param mouse     a pointer to the mouse object initiating the action
            @return A null pointer is returned if no screen option are available
          */
-        virtual IScrOpt * getScreenOptions(IMouse * mouse){return 0;}
+        virtual IScrOpt * getScreenOptions(const QPoint& origin, IMouse * mouse){return 0;}
 
         /**
            @brief Get a point of the item that is close by the given screen pixel coordinate

@@ -34,7 +34,7 @@ class CGisItemTrk : public IGisItem
 
         const QString& getName(){return trk.name;}
         QString getInfo();
-        IScrOpt * getScreenOptions(IMouse * mouse);
+        IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);

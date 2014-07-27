@@ -48,7 +48,7 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
     {
         lastPos     = e->pos();
         // start to block map moving when a previous click
-        // has triggered a selection of nay kind
+        // has triggered a selection of any kind
         mapMove     = (stateItemSel < eStateNoMapMovePossible);
         mapDidMove  = false;
     }
@@ -103,7 +103,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                         item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
 
                         delete screenItemOption;
-                        screenItemOption = item->getScreenOptions(this);
+                        screenItemOption = item->getScreenOptions(e->pos(), this);
 
                         if(!screenItemOption.isNull())
                         {
@@ -115,12 +115,13 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 }
                 case eStateHooverMultiple:
                 {
+                    screenUnclutter->setOrigin(e->pos());
                     stateItemSel = eStateUnclutterMultiple;
                     break;
                 }
                 case eStateUnclutterMultiple:
                 {
-                    const IScrOpt::item_t * scrOpt = screenUnclutter->selectItem(point.toPoint());
+                    const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point.toPoint());
                     if(scrOpt != 0)
                     {
                         QString key = scrOpt->key;
@@ -134,7 +135,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                             item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
 
                             delete screenItemOption;
-                            screenItemOption = item->getScreenOptions(this);
+                            screenItemOption = item->getScreenOptions(screenUnclutter->getOrigin(), this);
 
                             if(!screenItemOption.isNull())
                             {

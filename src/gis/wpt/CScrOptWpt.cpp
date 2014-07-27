@@ -25,16 +25,17 @@
 
 #include <QtWidgets>
 
-CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, IMouse *parent)
+CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
     : IScrOpt(parent)
     , QWidget(parent->getCanvas())
     , wpt(wpt)
 {
     setupUi(this);
+    setOrigin(origin);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(wpt->getInfo());
 
-    anchor = wpt->getPointCloseBy(parent->getPoint().toPoint());
+    anchor = wpt->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();

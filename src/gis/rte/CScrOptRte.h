@@ -30,7 +30,7 @@ class IMouse;
 class CScrOptRte : public IScrOpt , public QWidget, private Ui::IScrOptRte
 {
     public:
-        CScrOptRte(CGisItemRte * rte, IMouse *parent);
+        CScrOptRte(CGisItemRte * rte, const QPoint &origin, IMouse *parent);
         virtual ~CScrOptRte();
 
         void draw(QPainter& p);

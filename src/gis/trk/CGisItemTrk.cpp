@@ -155,12 +155,12 @@ QString CGisItemTrk::getInfo()
     if(timeStart.isValid())
     {
         str += "\n";
-        str += QObject::tr("Start: %1").arg(timeStart.toString());
+        str += QObject::tr("Start: %1").arg(IUnit::datetime2string(timeStart, boundingRect.center()));
     }
     if(timeEnd.isValid())
     {
         str += "\n";
-        str += QObject::tr("End: %1").arg(timeEnd.toString());
+        str += QObject::tr("End: %1").arg(IUnit::datetime2string(timeEnd, boundingRect.center()));
     }
 
     str += "\n";
@@ -178,7 +178,7 @@ IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 {
     qint32 d    = NOINT;
-    QPointF pt  = NOPOINT;
+    QPointF pt  = NOPOINTF;
     foreach(const QPointF& point, line)
     {
         int tmp = (screenPos - point).manhattanLength();

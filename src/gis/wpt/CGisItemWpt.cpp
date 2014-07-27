@@ -35,7 +35,7 @@ QString CGisItemWpt::keyUserFocus;
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     : IGisItem(parent)
     , proximity(NOFLOAT)
-    , posScreen(NOPOINT)
+    , posScreen(NOPOINTF)
 {
     // --- start read and process data ----
     readWpt(xml, wpt);
@@ -96,7 +96,7 @@ QString CGisItemWpt::getInfo()
     {
         if(!str.isEmpty()) str += "\n";
 
-        str += wpt.time.toString();
+        str += IUnit::datetime2string(wpt.time, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD));
     }
 
     if(wpt.ele != NOINT)
@@ -322,7 +322,7 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {
-    if(posScreen == NOPOINT)
+    if(posScreen == NOPOINTF)
     {
         return false;
     }
@@ -340,7 +340,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     posScreen = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
     if(!viewport.contains(posScreen))
     {
-        posScreen = NOPOINT;
+        posScreen = NOPOINTF;
         return;
     }
     gis->convertRad2Px(posScreen);
@@ -368,7 +368,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
 
 void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
-    if(posScreen == NOPOINT)
+    if(posScreen == NOPOINTF)
     {
         return;
     }
@@ -407,7 +407,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
 void CGisItemWpt::drawHighlight(QPainter& p)
 {
-    if(posScreen == NOPOINT)
+    if(posScreen == NOPOINTF)
     {
         return;
     }

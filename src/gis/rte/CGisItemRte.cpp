@@ -75,7 +75,7 @@ IScrOpt * CGisItemRte::getScreenOptions(const QPoint& origin, IMouse * mouse)
 QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 {
     qint32 d    = NOINT;
-    QPointF pt  = NOPOINT;
+    QPointF pt  = NOPOINTF;
     foreach(const QPointF& point, line)
     {
         int tmp = (screenPos - point).manhattanLength();

@@ -25,6 +25,7 @@
 #include "dem/CDemList.h"
 #include "dem/CDemDraw.h"
 #include "units/IUnit.h"
+#include "units/CTimeZoneSetup.h"
 #include "version.h"
 #include "CAbout.h"
 #include "gis/CGisWidget.h"
@@ -80,6 +81,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
     connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
     connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
+    connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
@@ -119,6 +121,13 @@ CMainWindow::CMainWindow()
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
     cfg.endGroup(); // Canvas
+
+    QByteArray tz;
+    IUnit::tz_mode_e tzmode;
+    tz = cfg.value("main/units/timezone", "UTC").toByteArray();
+    tzmode = (IUnit::tz_mode_e)cfg.value("main/units/timezone/mode", IUnit::eTZUtc).toInt();
+    IUnit::setTimeZoneSetup(tzmode, tz);
+
 
     QStatusBar * status = statusBar();
     lblPosWGS84 = new QLabel(status);
@@ -171,6 +180,13 @@ CMainWindow::~CMainWindow()
     CMapDraw::saveMapPath(cfg);
     CDemDraw::saveDemPath(cfg);
     cfg.endGroup(); // Canvas
+
+    QByteArray tz;
+    IUnit::tz_mode_e tzmode;
+    IUnit::getTimeZoneSetup(tzmode, tz);
+
+    cfg.setValue("main/units/timezone", tz);
+    cfg.setValue("main/units/timezone/mode", tzmode);
 
 }
 
@@ -418,6 +434,12 @@ void CMainWindow::slotSetupMapWks()
         return;
     }
     canvas->setup();
+}
+
+void CMainWindow::slotSetupTimeZone()
+{
+    CTimeZoneSetup dlg(this);
+    dlg.exec();
 }
 
 void CMainWindow::slotLoadGISData()

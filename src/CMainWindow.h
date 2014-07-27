@@ -60,6 +60,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotSetupMapPath();
         void slotSetupDemPath();
         void slotSetupMapWks();
+        void slotSetupTimeZone();
         void slotLoadGISData();
 
     private:

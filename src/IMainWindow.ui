@@ -81,6 +81,7 @@
     <addaction name="actionSetupMapFont"/>
     <addaction name="actionSetupGrid"/>
     <addaction name="actionSetupMapWks"/>
+    <addaction name="actionSetupTimeZone"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -366,6 +367,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSetupTimeZone">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/TimeZoneSetup.png</normaloff>:/icons/32x32/TimeZoneSetup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Time Zone</string>
    </property>
   </action>
  </widget>

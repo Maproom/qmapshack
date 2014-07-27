@@ -73,9 +73,9 @@ class IGisItem : public QTreeWidgetItem
         /**
            @brief Get a point of the item that is close by the given screen pixel coordinate
            @param point     a point in screen pixels
-           @return If no point is found NOPOINT is returned.
+           @return If no point is found NOPOINTF is returned.
          */
-        virtual QPointF getPointCloseBy(const QPoint& point){return NOPOINT;}
+        virtual QPointF getPointCloseBy(const QPoint& point){return NOPOINTF;}
 
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;

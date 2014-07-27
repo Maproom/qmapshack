@@ -19,13 +19,15 @@
 #ifndef IUNIT_H
 #define IUNIT_H
 #include <QObject>
+#include <QTimeZone>
 
 
 #define NOFLOAT 1000000000000.0
 #define NOINT   0x7FFFFFFF
 #define NOTIME  0xFFFFFFFF
 
-extern const QPointF NOPOINT;
+extern const QPointF NOPOINTF;
+extern const QPoint  NOPOINT;
 
 class IUnit : public QObject
 {
@@ -48,17 +50,37 @@ class IUnit : public QObject
 
         static bool parseTimestamp(const QString &time, QDateTime &datetime);
 
+        static QString datetime2string(const QDateTime& time, const QPointF& pos = NOPOINTF);
+
+        static QByteArray pos2timezone(const QPointF& pos);
+
         const type_e  type;
         const QString baseunit;
         const qreal   basefactor;
         const QString speedunit;
         const qreal   speedfactor;
+        static const char *  tblTimezone[];
+
+        enum tz_mode_e
+        {
+             eTZUtc
+            ,eTZLocal
+            ,eTZAuto
+            ,eTZSelected
+        };
+
+        static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone){mode = timeZoneMode; zone = timeZone;}
+        static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone){timeZoneMode = mode; timeZone = zone;}
 
     protected:
-        friend class CResources;
         IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent);
 
         static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
+
+        static tz_mode_e  timeZoneMode;
+        static QByteArray timeZone;
+
+
     private:
         static IUnit * m_self;
 };

@@ -74,7 +74,9 @@ class IDrawContext : public QThread
          */
         void zoom(bool in, CCanvas::redraw_e &needsRedraw);
         void zoom(int idx);
+        void zoom(const QRectF& rect);
         int  zoom(){return zoomIndex;}
+
         /**
            @brief Convert a geo coordinate of format lon/lat WGS84 into the currently used coordinate/projection/datum system.
            @note  The unit is dependent on the currently used projection and must not nesseccarily be meter

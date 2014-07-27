@@ -66,6 +66,7 @@ class CCanvas : public QWidget
         void    setProjection(const QString& proj);
 
         void moveMap(const QPointF &delta);
+        void zoomTo(const QRectF& rect);
         void displayInfo(const QPoint& px);
 
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color);

@@ -35,7 +35,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>QMapShack, Version</string>
+        <string>&lt;b&gt;QMapShack&lt;/b&gt;, Version</string>
        </property>
       </widget>
      </item>

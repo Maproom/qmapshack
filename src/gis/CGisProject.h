@@ -47,6 +47,8 @@ class CGisProject : public QTreeWidgetItem
         void save();
         void saveAs();
 
+        QString getInfo();
+
         // Those are the URIs of the GPX extensions we support
         static const QString gpxx_ns;
         static const QString gpxtpx_ns;

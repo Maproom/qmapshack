@@ -109,6 +109,7 @@ CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWk
     }
 
     addChildren(items);
+    setToolTip(0, getInfo());
 
     valid = true;
 }
@@ -116,6 +117,35 @@ CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWk
 CGisProject::~CGisProject()
 {
 
+}
+
+QString CGisProject::getInfo()
+{
+    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;
+
+    if(metadata.time.isValid())
+    {
+        str += "\n";
+        str += IUnit::datetime2string(metadata.time);
+    }
+
+
+    if(!metadata.desc.isEmpty())
+    {
+        str += "\n";
+
+        if(metadata.desc.count() < 200)
+        {
+            str += metadata.desc;
+        }
+        else
+        {
+            str += metadata.desc.left(197) + "...";
+        }
+    }
+
+
+    return str;
 }
 
 void CGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)

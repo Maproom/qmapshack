@@ -45,6 +45,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         bool flipMouseWheel();
         const QFont& getMapFont(){return mapFont;}
 
+        void zoomWksTo(const QRectF rect);
+
     private slots:
         void slotAbout();
         void slotHelp();

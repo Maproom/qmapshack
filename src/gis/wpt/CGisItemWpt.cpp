@@ -62,6 +62,8 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     }
     // --- stop read and process data ----
 
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
     setText(0, wpt.name);
     setIcon();
     setToolTip(0, getInfo());
@@ -104,7 +106,7 @@ QString CGisItemWpt::getInfo()
         if(!str.isEmpty()) str += "\n";
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
-        str += QObject::tr("elevation: %1 %2").arg(val).arg(unit);
+        str += QObject::tr("Elevation: %1 %2").arg(val).arg(unit);
     }
 
     if(proximity != NOFLOAT)
@@ -112,7 +114,7 @@ QString CGisItemWpt::getInfo()
         if(!str.isEmpty()) str += "\n";
         QString val, unit;
         IUnit::self().meter2distance(proximity, val, unit);
-        str += QObject::tr("proximity: %1 %2").arg(val).arg(unit);
+        str += QObject::tr("Proximity: %1 %2").arg(val).arg(unit);
     }
 
     if(wpt.desc.count())

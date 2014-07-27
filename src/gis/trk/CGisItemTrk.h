@@ -134,8 +134,6 @@ class CGisItemTrk : public IGisItem
         quint32     totalElapsedSeconds;
         quint32     totalElapsedSecondsMoving;
 
-
-        QRectF boundingRect;
         /// the track line color
         QColor  color;
         /// the trakpoint bullet icon

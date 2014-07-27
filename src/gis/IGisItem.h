@@ -63,6 +63,8 @@ class IGisItem : public QTreeWidgetItem
 
         virtual QString getInfo() = 0;
 
+        virtual QRectF getBoundingRect(){return boundingRect;}
+
         /**
            @brief Get screen option object to display and handle actions for this item.
            @param mouse     a pointer to the mouse object initiating the action
@@ -155,6 +157,7 @@ class IGisItem : public QTreeWidgetItem
 
         QString key;
         QPixmap icon;
+        QRectF boundingRect;
         static const color_t colorMap[];
 
 

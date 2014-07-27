@@ -440,6 +440,15 @@ void CCanvas::moveMap(const QPointF& delta)
     slotTriggerCompleteUpdate(eRedrawAll);
 }
 
+void CCanvas::zoomTo(const QRectF& rect)
+{
+    posFocus = rect.center();
+    map->zoom(rect);
+    dem->zoom(map->zoom());
+    gis->zoom(map->zoom());
+    slotTriggerCompleteUpdate(eRedrawAll);
+}
+
 void CCanvas::setupGrid()
 {
     CGridSetup dlg(grid, map);

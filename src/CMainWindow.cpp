@@ -229,6 +229,16 @@ void CMainWindow::addDemList(CDemList * list, const QString &name)
 {
     tabDem->addTab(list,name);
 }
+
+void CMainWindow::zoomWksTo(const QRectF rect)
+{
+    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    if(canvas)
+    {
+        canvas->zoomTo(rect);
+    }
+}
+
 void CMainWindow::slotAbout()
 {
     CAbout dlg(this);

@@ -46,6 +46,7 @@
 //    ,52428.8
 //};
 
+#define BUFFER_BORDER 50
 #define N_ZOOM_LEVELS 31
 const qreal IDrawContext::scales[N_ZOOM_LEVELS] =
 {
@@ -149,8 +150,8 @@ void IDrawContext::resize(const QSize& size)
     viewHeight  = size.height();
 
     center      = QPointF(viewWidth/2.0, viewHeight/2.0);
-    bufWidth    = viewWidth  + 100;
-    bufHeight   = viewHeight + 100;
+    bufWidth    = viewWidth  + 2 * BUFFER_BORDER;
+    bufHeight   = viewHeight + 2 * BUFFER_BORDER;
 
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
@@ -183,6 +184,35 @@ bool IDrawContext::needsRedraw()
     res = intNeedsRedraw;
     mutex.unlock();
     return res;
+}
+
+void IDrawContext::zoom(const QRectF& rect)
+{
+    if(pjsrc == 0) return;
+
+    // special case for elements with no extent
+    if(rect.width() == 0 || rect.height() == 0)
+    {
+        zoom(8);
+        return;
+    }
+
+    // zoom out from closest zoom level until a match is found
+    for(int i = 0; i < N_ZOOM_LEVELS; i++)
+    {
+        zoom(i);
+        QPointF pt1 = rect.topLeft();
+        QPointF pt2 = rect.bottomRight();
+
+        convertRad2Px(pt1);
+        convertRad2Px(pt2);
+
+        QPointF pt = pt2 - pt1;
+        if(fabs(pt.x()) < (bufWidth - 2 * BUFFER_BORDER) && fabs(pt.y() < (bufHeight - 2 * BUFFER_BORDER)))
+        {
+            break;
+        }
+    }
 }
 
 void IDrawContext::zoom(bool in, CCanvas::redraw_e& needsRedraw)

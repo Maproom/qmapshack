@@ -19,6 +19,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/CGisProject.h"
 #include "gis/IGisItem.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -32,6 +33,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionClose     = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
 }
 
 CGisListWks::~CGisListWks()
@@ -111,4 +113,14 @@ void CGisListWks::slotSaveAsProject()
     }
     IGisItem::mutexItems.unlock();
 
+}
+
+void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
+{
+    Q_UNUSED(column);
+    IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+    if(gisItem != 0)
+    {
+        CMainWindow::self().zoomWksTo(gisItem->getBoundingRect());
+    }
 }

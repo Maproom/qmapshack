@@ -40,6 +40,7 @@ class CGisListWks : public QTreeWidget
         void slotSaveProject();
         void slotSaveAsProject();
         void slotCloseProject();
+        void slotItemDoubleClicked(QTreeWidgetItem * item, int column);
 
     private:
         QMenu * menuProject;

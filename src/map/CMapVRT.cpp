@@ -99,12 +99,6 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
             colortable[idx] = tmp.rgba();
         }
     }
-    else
-    {
-        delete dataset; dataset = 0;
-        QMessageBox::warning(0, tr("Error..."), tr("File must be 8 bit palette or gray indexed."));
-        return;
-    }
 
     qDebug() << "has overviews" << hasOverviews;
 
@@ -336,6 +330,49 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                         ,imgw_used,imgh_used
                         ,GDT_Byte,0,0);
                 }
+                else
+                {
+                    img = QImage(imgw_used,imgh_used, QImage::Format_ARGB32);
+                    QVector<quint8> buffer(imgw_used * imgh_used);
+
+                    QRgb testPix = qRgba(GCI_RedBand, GCI_GreenBand, GCI_BlueBand, GCI_AlphaBand);
+
+                    for(int b = 1; b <= rasterBandCount; ++b)
+                    {
+
+                        GDALRasterBand * pBand;
+                        pBand = dataset->GetRasterBand(b);
+
+                        err = pBand->RasterIO(GF_Read
+                            , x, y
+                            , dx_used, dy_used
+                            , buffer.data()
+                            , imgw_used, imgh_used
+                            , GDT_Byte, 0, 0);
+
+                        if(!err)
+                        {
+                            int pbandColour = pBand->GetColorInterpretation();
+                            unsigned int offset;
+
+                            for (offset = 0; offset < sizeof(testPix) && *(((quint8 *)&testPix) + offset) != pbandColour; offset++);
+                            if(offset < sizeof(testPix))
+                            {
+                                quint8 * pTar   = img.bits() + offset;
+                                quint8 * pSrc   = buffer.data();
+                                const int size  = buffer.size();
+
+                                for(int i = 0; i < size; ++i)
+                                {
+                                    *pTar = *pSrc;
+                                    pTar += sizeof(testPix);
+                                    pSrc += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+
 
                 if(err)
                 {

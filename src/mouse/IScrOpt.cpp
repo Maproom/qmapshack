@@ -21,8 +21,8 @@
 #include <QtWidgets>
 
 
-IScrOpt::IScrOpt(QObject *parent)
-    : QObject(parent)
+IScrOpt::IScrOpt(QWidget *parent)
+    : QWidget(parent)
 {
 
 }

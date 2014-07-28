@@ -18,17 +18,17 @@
 
 
 #include "gis/wpt/CScrOptWpt.h"
-#include "mouse/IMouse.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/CGisWidget.h"
+#include "mouse/IMouse.h"
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
 
 CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
-    : IScrOpt(parent)
-    , QWidget(parent->getCanvas())
-    , wpt(wpt)
+    : IScrOpt(parent->getCanvas())
+    , key(wpt->getKey())
 {
     setupUi(this);
     setOrigin(origin);
@@ -39,6 +39,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();
+
+    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 }
 
 CScrOptWpt::~CScrOptWpt()
@@ -46,9 +48,20 @@ CScrOptWpt::~CScrOptWpt()
 
 }
 
+void CScrOptWpt::slotDelete()
+{
+    CGisWidget::self().delItemByKey(key);
+}
+
 void CScrOptWpt::draw(QPainter& p)
 {
-    wpt->drawHighlight(p);
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if(item == 0)
+    {
+        QWidget::deleteLater();
+        return;
+    }
+    item->drawHighlight(p);
 
     QRectF r = rect();
     r.moveTopLeft(QPoint(x(), y()));

@@ -37,7 +37,7 @@ const QPoint CScrOptUnclutter::positions[] =
 };
 
 
-CScrOptUnclutter::CScrOptUnclutter(QObject *parent)
+CScrOptUnclutter::CScrOptUnclutter(QWidget *parent)
     : IScrOpt(parent)
     , doSpecialCursor(false)
 {

@@ -127,6 +127,27 @@ IGisItem * CGisWidget::getItemByKey(const QString& key)
     return item;
 }
 
+void CGisWidget::delItemByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
+        {
+            continue;
+        }
+        project->delItemByKey(key);
+        if(project->childCount() == 0)
+        {
+            delete project;
+        }
+    }
+
+    IGisItem::mutexItems.unlock();
+
+    emit sigChanged();
+}
 
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {

@@ -18,14 +18,14 @@
 
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/CGisWidget.h"
 #include "mouse/IMouse.h"
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 
 CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
-    : IScrOpt(parent)
-    , QWidget(parent->getCanvas())
-    , trk(trk)
+    : IScrOpt(parent->getCanvas())
+    , key(trk->getKey())
 {
     setupUi(this);
     setOrigin(origin);
@@ -37,6 +37,8 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();
+
+    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 }
 
 CScrOptTrk::~CScrOptTrk()
@@ -44,9 +46,22 @@ CScrOptTrk::~CScrOptTrk()
 
 }
 
+void CScrOptTrk::slotDelete()
+{
+    CGisWidget::self().delItemByKey(key);
+}
+
+
 void CScrOptTrk::draw(QPainter& p)
 {
-    trk->drawHighlight(p);
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if(item == 0)
+    {
+        QWidget::deleteLater();
+        return;
+    }
+    item->drawHighlight(p);
+
 
     QRectF r = rect();
     r.moveTopLeft(QPoint(x(), y()));

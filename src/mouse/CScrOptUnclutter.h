@@ -27,7 +27,7 @@ class IGisItem;
 class CScrOptUnclutter : public IScrOpt
 {
     public:
-        CScrOptUnclutter(QObject * parent);
+        CScrOptUnclutter(QWidget *parent);
         virtual ~CScrOptUnclutter();
 
         struct item_t

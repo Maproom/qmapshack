@@ -27,16 +27,20 @@
 class CGisItemWpt;
 class IMouse;
 
-class CScrOptWpt : public IScrOpt , public QWidget, private Ui::IScrOptWpt
+class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
 {
+    Q_OBJECT
     public:
         CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
         virtual ~CScrOptWpt();
 
         void draw(QPainter& p);
 
+    private slots:
+        void slotDelete();
+
     private:
-        CGisItemWpt * wpt;
+        QString key;
         QPointF anchor;
 };
 

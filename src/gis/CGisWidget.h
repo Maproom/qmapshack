@@ -54,6 +54,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         IGisItem * getItemByKey(const QString& key);
 
+        void delItemByKey(const QString& key);
+
     signals:
         void sigChanged();
 

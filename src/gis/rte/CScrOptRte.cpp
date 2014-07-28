@@ -18,16 +18,14 @@
 
 #include "gis/rte/CScrOptRte.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/CGisWidget.h"
 #include "mouse/IMouse.h"
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 
-
-
 CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& origin, IMouse *parent)
-    : IScrOpt(parent)
-    , QWidget(parent->getCanvas())
-    , rte(rte)
+    : IScrOpt(parent->getCanvas())
+    , key(rte->getKey())
 {
     setupUi(this);
     setOrigin(origin);
@@ -39,6 +37,8 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& origin, IMouse *parent)
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
     show();
+
+    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 }
 
 CScrOptRte::~CScrOptRte()
@@ -46,9 +46,22 @@ CScrOptRte::~CScrOptRte()
 
 }
 
+void CScrOptRte::slotDelete()
+{
+    CGisWidget::self().delItemByKey(key);
+}
+
+
 void CScrOptRte::draw(QPainter& p)
 {
-    rte->drawHighlight(p);
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if(item == 0)
+    {
+        QWidget::deleteLater();
+        return;
+    }
+    item->drawHighlight(p);
+
 
     QRectF r = rect();
     r.moveTopLeft(QPoint(x(), y()));

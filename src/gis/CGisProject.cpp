@@ -323,6 +323,31 @@ IGisItem * CGisProject::getItemByKey(const QString& key)
     return 0;
 }
 
+void CGisProject::delItemByKey(const QString& key)
+{
+    QList<QTreeWidgetItem*> items;
+    for(int i = childCount(); i > 0; i--)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        if(item->getKey() == key)
+        {
+            QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(0));
+            QMessageBox::StandardButtons res = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+            if(res != QMessageBox::Ok)
+            {
+                continue;
+            }
+
+            items << takeChild(i-1);
+        }
+    }
+    qDeleteAll(items);
+}
 
 void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis)
 {

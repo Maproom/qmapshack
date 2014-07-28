@@ -19,16 +19,16 @@
 #ifndef ISCROPT_H
 #define ISCROPT_H
 
-#include <QObject>
+#include <QWidget>
 #include <QPixmap>
 #include <QRect>
 
 class QMouseEvent;
 
-class IScrOpt : public QObject
+class IScrOpt : public QWidget
 {
     public:
-        IScrOpt(QObject * parent);
+        IScrOpt(QWidget * parent);
         virtual ~IScrOpt();
 
 

@@ -33,7 +33,7 @@ CMouseNormal::CMouseNormal(CCanvas *canvas)
     , stateItemSel(eStateIdle)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
-    screenUnclutter = new CScrOptUnclutter(this);
+    screenUnclutter = new CScrOptUnclutter(canvas);
 }
 
 CMouseNormal::~CMouseNormal()
@@ -62,22 +62,21 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         screenItemOption->mouseMoveEvent(e);
     }
 
-    point = e->pos();
-    const QPoint pos = e->pos();
+    point = e->pos();    
 
     if(mapMove)
     {
-        if(pos != lastPos)
+        if(point != lastPos)
         {
-            QPoint delta = pos - lastPos;
+            QPoint delta = point - lastPos;
             canvas->moveMap(delta);
-            lastPos     = pos;
+            lastPos     = point;
             mapDidMove  = true;
         }
     }
     else
     {
-        canvas->displayInfo(pos);
+        canvas->displayInfo(point);
         canvas->update();                
     }
 }
@@ -103,7 +102,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                         item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
 
                         delete screenItemOption;
-                        screenItemOption = item->getScreenOptions(e->pos(), this);
+                        screenItemOption = item->getScreenOptions(point, this);
 
                         if(!screenItemOption.isNull())
                         {
@@ -121,7 +120,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 }
                 case eStateUnclutterMultiple:
                 {
-                    const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point.toPoint());
+                    const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
                     if(scrOpt != 0)
                     {
                         QString key = scrOpt->key;

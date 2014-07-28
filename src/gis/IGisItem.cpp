@@ -24,7 +24,7 @@
 #include <QtXml>
 #include <QtWidgets>
 
-QMutex IGisItem::mutexItems;
+QMutex IGisItem::mutexItems(QMutex::Recursive);
 
 const IGisItem::color_t IGisItem::colorMap[] =
 {

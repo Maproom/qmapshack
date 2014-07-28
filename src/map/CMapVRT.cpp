@@ -333,13 +333,14 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                 else
                 {
                     img = QImage(imgw_used,imgh_used, QImage::Format_ARGB32);
+                    img.fill(qRgba(255,255,255,255));
+
                     QVector<quint8> buffer(imgw_used * imgh_used);
 
                     QRgb testPix = qRgba(GCI_RedBand, GCI_GreenBand, GCI_BlueBand, GCI_AlphaBand);
 
                     for(int b = 1; b <= rasterBandCount; ++b)
                     {
-
                         GDALRasterBand * pBand;
                         pBand = dataset->GetRasterBand(b);
 
@@ -372,7 +373,6 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                         }
                     }
                 }
-
 
                 if(err)
                 {

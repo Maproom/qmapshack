@@ -107,6 +107,7 @@ int main(int argc, char ** argv)
     qInstallMessageHandler(myMessageOutput);
 #endif
 
+    // find Qt's transaltions first
     QString locale = QLocale::system().name();
     QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     QTranslator *qtTranslator = new QTranslator(&a);
@@ -118,10 +119,11 @@ int main(int argc, char ** argv)
     {
         a.installTranslator(qtTranslator);
     }
+
+    // find MapShack's translations
     QStringList dirList;
     dirList << QCoreApplication::applicationDirPath().replace(QRegExp("bin$"), "share/qmapshack/translations");
-    dirList << "./src";
-    qDebug() << dirList;
+//    dirList << "./src";
     foreach(QString dir, dirList)
     {
         QString transName = QLatin1String("qmapshack_") + locale;

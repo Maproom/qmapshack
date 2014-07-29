@@ -518,7 +518,7 @@ void CGisProject::saveGpx(const QString& fn)
 
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::warning(0, QObject::tr("Save GIS data failed..."), QObject::tr("Failed to create file '%1'").arg(_fn_), QMessageBox::Abort);
+        QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to create file '%1'").arg(_fn_), QMessageBox::Abort);
         return;
     }
     QTextStream out(&file);
@@ -528,7 +528,7 @@ void CGisProject::saveGpx(const QString& fn)
     file.close();
     if(file.error() != QFile::NoError)
     {
-        QMessageBox::warning(0, QObject::tr("Save GIS data failed..."), QObject::tr("Failed to write file '%1'").arg(_fn_), QMessageBox::Abort);
+        QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to write file '%1'").arg(_fn_), QMessageBox::Abort);
         return;
     }
 

@@ -43,7 +43,14 @@ class IGisItem : public QTreeWidgetItem
         IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();
 
+        /// this mutex has to be locked when ever the item list is accessed.
         static QMutex mutexItems;
+
+        /**
+           @brief Save the item's data into a GPX structure
+           @param gpx       the files <gpx> tag to attach the data to
+         */
+        virtual void save(QDomNode& gpx) = 0;
 
         /**
            @brief Get key string to identify object
@@ -51,18 +58,30 @@ class IGisItem : public QTreeWidgetItem
          */
         const QString& getKey();
         /**
-           @brief Get icon attached to object
+           @brief Get the icon attached to object
            @return
          */
         const QPixmap& getIcon(){return icon;}
         /**
            @brief Get name of this item.
-           @return
+           @return A reference to the internal string object
          */
         virtual const QString& getName() = 0;
 
+        /**
+           @brief Get a short string with the items properties to be displayed in tool tips or similar
+           @return A string object.
+        */
         virtual QString getInfo() = 0;
 
+
+        /**
+           @brief Get the dimension of the item
+
+           All coordinates are in Rad. Items with no
+
+           @return
+         */
         virtual QRectF getBoundingRect(){return boundingRect;}
 
         /**
@@ -79,11 +98,18 @@ class IGisItem : public QTreeWidgetItem
          */
         virtual QPointF getPointCloseBy(const QPoint& point){return NOPOINTF;}
 
+        /**
+           @brief Test if the item is close to a given pixel coordinate of the screen
+
+           @param pos       the coordinate on the screen in pixel
+           @return If no point can be found NOPOINTF is returned.
+        */
+        virtual bool isCloseTo(const QPointF& pos) = 0;
+
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
-        virtual void drawHighlight(QPainter& p) = 0;
-        virtual void save(QDomNode& gpx) = 0;
-        virtual bool isCloseTo(const QPointF& pos) = 0;
+        virtual void drawHighlight(QPainter& p) = 0;        
+
         virtual void gainUserFocus() = 0;
 
 
@@ -91,7 +117,7 @@ class IGisItem : public QTreeWidgetItem
         friend class CGisProject;
         struct wpt_t;
         void readWpt(const QDomNode& xml, wpt_t &wpt);
-        void writeWpt(QDomElement &xmlWpt, const wpt_t &wpt);
+        void writeWpt(QDomElement &xml, const wpt_t &wpt);
         virtual void genKey() = 0;
         QColor str2color(const QString& name);
         QString color2str(const QColor &color);

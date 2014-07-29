@@ -38,8 +38,28 @@ class CGisProject : public QTreeWidgetItem
 
         bool  isValid(){return valid;}
         const QString& getKey(){return key;}
+
+        /**
+           @brief Get a list of items that are close to a given pixel coordinate of the screen
+
+           @note: The returned pointers are just for temporary use. Best you use them to get the item's key.
+
+           @param pos       the coordinate on the screen in pixel
+           @param items     a list the item's pointer is stored to.
+        */
         void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
+
+        /**
+           @brief Get a temporary pointer to the item with matching key
+           @param key
+           @return If no item is found 0 is returned.
+        */
         IGisItem * getItemByKey(const QString& key);
+
+        /**
+           @brief Delete items with matching key
+           @param key
+        */
         void delItemByKey(const QString& key);
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
@@ -63,7 +83,6 @@ class CGisProject : public QTreeWidgetItem
 
         void saveGpx(const QString& fn);
         QDomNode writeMetadata(QDomDocument& doc);
-
         void readMetadata(const QDomNode& xml, metadata_t& metadata);
 
         // Those are standard GPX/XML namespaces

@@ -19,6 +19,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/CGisProject.h"
 #include "gis/IGisItem.h"
+#include "gis/CGisWidget.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -28,12 +29,18 @@ CGisListWks::CGisListWks(QWidget *parent)
 {
 
     menuProject     = new QMenu(this);
-    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
     actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
+    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));    
     actionClose     = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
+
+    menuItem        = new QMenu(this);
+    actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
+    actionDelete    = menuItem->addAction(QIcon("://icons/48x48/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+
+    actionEditDetails->setEnabled(false);
 }
 
 CGisListWks::~CGisListWks()
@@ -57,12 +64,20 @@ bool CGisListWks::hasProject(const QString& key)
 
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
-    CGisProject * item = dynamic_cast<CGisProject*>(currentItem());
-    if(item != 0)
+    CGisProject * project = dynamic_cast<CGisProject*>(currentItem());
+    if(project != 0)
     {
         QPoint p = mapToGlobal(point);
         menuProject->exec(p);
     }
+
+    IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
+    if(gisItem != 0)
+    {
+        QPoint p = mapToGlobal(point);
+        menuItem->exec(p);
+    }
+
 }
 
 void CGisListWks::slotCloseProject()
@@ -115,12 +130,30 @@ void CGisListWks::slotSaveAsProject()
 
 }
 
-void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
+void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
 {
-    Q_UNUSED(column);
+    IGisItem::mutexItems.lock();
     IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
     if(gisItem != 0)
     {
         CMainWindow::self().zoomWksTo(gisItem->getBoundingRect());
+    }    
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotEditItem()
+{
+
+}
+
+void CGisListWks::slotDeleteItem()
+{
+    IGisItem::mutexItems.lock();
+    IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().delItemByKey(key);
     }
+    IGisItem::mutexItems.unlock();
 }

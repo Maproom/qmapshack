@@ -40,13 +40,19 @@ class CGisListWks : public QTreeWidget
         void slotSaveProject();
         void slotSaveAsProject();
         void slotCloseProject();
-        void slotItemDoubleClicked(QTreeWidgetItem * item, int column);
+        void slotItemDoubleClicked(QTreeWidgetItem * item, int);
+        void slotEditItem();
+        void slotDeleteItem();
 
     private:
         QMenu * menuProject;
         QAction  * actionSave;
         QAction  * actionSaveAs;
         QAction  * actionClose;
+
+        QMenu * menuItem;
+        QAction * actionEditDetails;
+        QAction * actionDelete;
 
 };
 

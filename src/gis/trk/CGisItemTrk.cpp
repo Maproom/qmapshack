@@ -26,7 +26,8 @@
 #include <QtWidgets>
 #include <proj_api.h>
 
-#define DEFAULT_COLOR 4
+#define ASCEND_THRESHOLD    5
+#define DEFAULT_COLOR       4
 
 const QColor CGisItemTrk::lineColors[] =
 {
@@ -300,8 +301,6 @@ void CGisItemTrk::save(QDomNode& gpx)
 }
 
 
-#define ASCEND_THRESHOLD    5
-
 void CGisItemTrk::deriveSecondaryData()
 {
     // reset all secondary data
@@ -367,7 +366,7 @@ void CGisItemTrk::deriveSecondaryData()
                     qreal delta     = trkpt.ele - lastEle;
                     qreal absDelta  = fabs(delta);
 
-                    if(absDelta > ASCEND_THRESHOLD /*&& absDelta < 100*/)
+                    if(absDelta > ASCEND_THRESHOLD)
                     {
                         if(delta > 0)
                         {
@@ -417,12 +416,12 @@ void CGisItemTrk::deriveSecondaryData()
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
 
-    qDebug() << "--------------" << getName() << "------------------";
-    qDebug() << "totalDistance" << totalDistance;
-    qDebug() << "totalAscend" << totalAscend;
-    qDebug() << "totalDescend" << totalDescend;
-    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
-    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
+//    qDebug() << "--------------" << getName() << "------------------";
+//    qDebug() << "totalDistance" << totalDistance;
+//    qDebug() << "totalAscend" << totalAscend;
+//    qDebug() << "totalDescend" << totalDescend;
+//    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
+//    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 
 
 }
@@ -498,7 +497,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     {
         p.drawPolyline(l);
     }
-
 }
 
 

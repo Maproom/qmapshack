@@ -41,19 +41,33 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
            @param gis       the draw context to be used
          */
         void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
+
         /**
            @brief Get items close to the given point
 
-           Note: Do not store the pointers in items permanently as they can become invalid
-           once you reach the main event loop again.
+           Note: Do not store the pointers of items permanently as they can become invalid
+           once you reach the main event loop again. Store the key instead.
 
            @param pos       the position in pixel
            @param items     an empty item list that will get filled with temporary pointers
          */
         void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
 
+        /**
+           @brief Find first item with matching key
+           @param key       the item's key as it is returned from IGisItem::getKey()
+           @return If no item is found 0 is returned.
+        */
         IGisItem * getItemByKey(const QString& key);
 
+        /**
+           @brief Delete all items with matching key from workspace
+
+           As an item can be attached to several projects each one of these items is deleted.
+           The method will prompt the user with a message box for each item deleted
+
+           @param key       the item's key as it is returned from IGisItem::getKey()
+         */
         void delItemByKey(const QString& key);
 
     signals:

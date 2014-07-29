@@ -133,8 +133,6 @@ QString CGisItemWpt::getInfo()
     else
     {
         QString cmt = wpt.cmt;
-//        removeHtml(cmt);
-
         if(cmt.count())
         {
             if(!str.isEmpty()) str += "\n";
@@ -149,9 +147,6 @@ QString CGisItemWpt::getInfo()
             }
         }
     }
-
-//    qDebug() << str;
-
     return str;
 }
 

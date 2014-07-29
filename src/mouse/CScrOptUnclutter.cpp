@@ -131,13 +131,13 @@ void CScrOptUnclutter::draw(QPainter& p)
             item.text = fm.boundingRect(item.name);
             if(cnt & 0x01)
             {
-                item.text.moveTopLeft(item.area.topRight() + QPoint( 14, fm.height()/2));
+                item.text.moveTopLeft(item.area.topRight() + QPoint( 17, fm.height()/2));
             }
             else
             {
-                item.text.moveTopRight(item.area.topLeft() + QPoint(-14, fm.height()/2));
+                item.text.moveTopRight(item.area.topLeft() + QPoint(-17, fm.height()/2));
             }
-            item.text.adjust(-2, -2, 2, 2);
+            item.text.adjust(-4, -3, 4, 3);
         }
     }
 
@@ -148,9 +148,10 @@ void CScrOptUnclutter::draw(QPainter& p)
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,255));
         p.drawEllipse(item.area.center(), 20,20);
+        p.setPen(QPen(Qt::lightGray,2));
         p.drawRoundedRect(item.text, 3, 3);
 
-        p.setPen(QPen(Qt::lightGray,2));
+//        p.setPen(QPen(Qt::lightGray,2));
         p.setBrush(Qt::NoBrush);
         p.drawEllipse(item.area.center(), 18,18);
 

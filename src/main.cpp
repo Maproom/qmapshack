@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "helpers/CAppOpts.h"
 
-#include <QApplication>
+#include <QtCore>
 #include <CGetOpt.h>
 #include <iostream>
 #include <gdal.h>
@@ -106,6 +106,34 @@ int main(int argc, char ** argv)
 #ifndef Q_OS_WIN32
     qInstallMessageHandler(myMessageOutput);
 #endif
+
+    QString locale = QLocale::system().name();
+    QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    QTranslator *qtTranslator = new QTranslator(&a);
+    if (qtTranslator->load(QLatin1String("qt_") + locale,resourceDir))
+    {
+        a.installTranslator(qtTranslator);
+    }
+    else if (qtTranslator->load(QLatin1String("qt_") + locale,QCoreApplication::applicationDirPath()))
+    {
+        a.installTranslator(qtTranslator);
+    }
+    QStringList dirList;
+    dirList << QCoreApplication::applicationDirPath().replace(QRegExp("bin$"), "share/qmapshack/translations");
+    dirList << "./src";
+    qDebug() << dirList;
+    foreach(QString dir, dirList)
+    {
+        QString transName = QLatin1String("qmapshack_") + locale;
+        if (qtTranslator->load( transName, dir))
+        {
+            a.installTranslator(qtTranslator);
+            qDebug() << "using file '"+ QDir(dir).canonicalPath() + "/" + transName + ".qm' for translations.";
+            break;
+        }
+    }
+
+
 
     GDALAllRegister();
 

@@ -8,6 +8,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 find_package(Qt5Core)
 find_package(Qt5Xml)
+find_package(Qt5LinguistTools)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 
@@ -172,11 +173,26 @@ set( RCS
 qt5_wrap_ui(UI_HDRS ${UIS})
 qt5_add_resources(RC_SRCS ${RCS})
 
+if(UNIX)
+    add_definitions(-Wall)
+endif(UNIX)
+
+
+file(GLOB TRANSLATIONS_FILES locale/*.ts)
+
+
+qt5_add_translation(
+    ${APPLICATION_NAME}_QM_FILES
+    ${TRANSLATIONS_FILES}
+)
+
+
 set(ALLINP
     ${SRCS}
     ${HDRS}
     ${UI_HDRS}
     ${RC_SRCS}
+    ${${APPLICATION_NAME}_QM_FILES}
 )
 
 include_directories(
@@ -186,10 +202,6 @@ include_directories(
     ${PROJ_INCLUDE_DIRS}
 
 )
-
-if(UNIX)
-    add_definitions(-Wall)
-endif(UNIX)
 
 
 
@@ -212,3 +224,18 @@ install(
     DESTINATION
       ${BIN_INSTALL_DIR}
 )
+
+if (UNIX AND NOT WIN32 AND NOT APPLE)
+install(
+    FILES
+        ${${APPLICATION_NAME}_QM_FILES}
+    DESTINATION
+        ${DATA_INSTALL_PREFIX}/${APPLICATION_NAME}/translations)
+endif (UNIX AND NOT WIN32 AND NOT APPLE)
+
+if (APPLE)
+add_custom_target(locversion.plist ALL
+    COMMAND
+        ${CMAKE_SOURCE_DIR}/MacOSX/mklocversion.sh ${MAC_BUNDLE_PATH} ${${APPLICATION_NAME}_QM_FILES}
+)
+endif (APPLE)

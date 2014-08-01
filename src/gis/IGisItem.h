@@ -37,8 +37,9 @@ class CGisDraw;
 class IScrOpt;
 class IMouse;
 
-class IGisItem : public QTreeWidgetItem
+class IGisItem : public QObject, public QTreeWidgetItem
 {
+    Q_OBJECT
     public:
         IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();

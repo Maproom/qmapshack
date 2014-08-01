@@ -68,8 +68,10 @@ class CGisItemTrk : public IGisItem
                 distance        = NOFLOAT;
                 ascend          = NOFLOAT;
                 descend         = NOFLOAT;
-                elapsedSeconds  = NOTIME;
-                elapsedSecondsMoving = NOTIME;
+                elapsedSeconds  = NOFLOAT;
+                elapsedSecondsMoving = NOFLOAT;
+                slope           = NOFLOAT;
+                speed           = NOFLOAT;
             }
 
             enum flag_e
@@ -91,10 +93,15 @@ class CGisItemTrk : public IGisItem
             qreal ascend;
             /// the descend from the start of the track
             qreal descend;
-            /// the seconds since the start of the track
-            quint32 elapsedSeconds;
 
-            quint32 elapsedSecondsMoving;
+            qreal slope;
+
+            qreal speed;
+
+            /// the seconds since the start of the track
+            qreal elapsedSeconds;
+
+            qreal elapsedSecondsMoving;
         };
 
         struct trkseg_t
@@ -131,8 +138,8 @@ class CGisItemTrk : public IGisItem
         qreal       totalDistance;
         qreal       totalAscend;
         qreal       totalDescend;
-        quint32     totalElapsedSeconds;
-        quint32     totalElapsedSecondsMoving;
+        qreal       totalElapsedSeconds;
+        qreal       totalElapsedSecondsMoving;
 
         /// the track line color
         QColor  color;

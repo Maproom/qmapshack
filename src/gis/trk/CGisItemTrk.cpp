@@ -153,6 +153,16 @@ QString CGisItemTrk::getInfo()
         str += QObject::tr(", Speed: %1 %2").arg(val1).arg(unit1);
     }
 
+    if(totalElapsedSecondsMoving != NOTIME)
+    {
+        IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
+        str += "\n";
+        str += QObject::tr("Moving: %1").arg(val1);
+
+        IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val1, unit1);
+        str += QObject::tr(", Speed: %1 %2").arg(val1).arg(unit1);
+    }
+
     if(timeStart.isValid())
     {
         str += "\n";
@@ -334,7 +344,7 @@ void CGisItemTrk::deriveSecondaryData()
     }
 
     trkpt_t * lastTrkpt     = 0;
-    quint32 timestampStart  = NOTIME;
+    qreal timestampStart    = NOFLOAT;
     qreal lastEle           = NOFLOAT;
 
     for(int s = 0; s < trk.segs.size(); s++)
@@ -357,7 +367,7 @@ void CGisItemTrk::deriveSecondaryData()
             {
                 trkpt.deltaDistance     = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
                 trkpt.distance          = lastTrkpt->distance + trkpt.deltaDistance;
-                trkpt.elapsedSeconds    = trkpt.time.toTime_t() - timestampStart;
+                trkpt.elapsedSeconds    = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
 
                 // ascend descend
                 if(lastEle != NOFLOAT)
@@ -387,11 +397,27 @@ void CGisItemTrk::deriveSecondaryData()
                     }
                 }
 
+                if(p == 289)
+                {
+                    qDebug() << "hi";
+                }
+
+                qreal dt = (trkpt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
+                if(dt > 0 && ((trkpt.deltaDistance / dt) > 0.2))
+                {
+                    trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving + dt;
+                    qDebug() << p << trkpt.elapsedSecondsMoving;
+                }
+                else
+                {
+                    trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
+                }
+
             }
             else
             {
                 timeStart       = trkpt.time;
-                timestampStart  = timeStart.toTime_t();
+                timestampStart  = timeStart.toMSecsSinceEpoch()/1000.0;
                 lastEle         = trkpt.ele;
 
                 trkpt.deltaDistance         = 0;
@@ -406,6 +432,9 @@ void CGisItemTrk::deriveSecondaryData()
         }
     }
 
+
+
+
     if(lastTrkpt != 0)
     {
         timeEnd                 = lastTrkpt->time;
@@ -416,12 +445,12 @@ void CGisItemTrk::deriveSecondaryData()
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
 
-//    qDebug() << "--------------" << getName() << "------------------";
-//    qDebug() << "totalDistance" << totalDistance;
-//    qDebug() << "totalAscend" << totalAscend;
-//    qDebug() << "totalDescend" << totalDescend;
-//    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
-//    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
+    qDebug() << "--------------" << getName() << "------------------";
+    qDebug() << "totalDistance" << totalDistance;
+    qDebug() << "totalAscend" << totalAscend;
+    qDebug() << "totalDescend" << totalDescend;
+    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
+    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 
 
 }

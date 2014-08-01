@@ -397,16 +397,11 @@ void CGisItemTrk::deriveSecondaryData()
                     }
                 }
 
-                if(p == 289)
-                {
-                    qDebug() << "hi";
-                }
-
+                // time moving
                 qreal dt = (trkpt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
                 if(dt > 0 && ((trkpt.deltaDistance / dt) > 0.2))
                 {
                     trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving + dt;
-                    qDebug() << p << trkpt.elapsedSecondsMoving;
                 }
                 else
                 {
@@ -432,6 +427,80 @@ void CGisItemTrk::deriveSecondaryData()
         }
     }
 
+
+    // speed and slope (short average +-25m)
+    for(int s = 0; s < trk.segs.size(); s++)
+    {
+        trkseg_t& seg = trk.segs[s];
+
+        for(int p = 0; p < seg.pts.size(); p++)
+        {
+            trkpt_t& trkpt = seg.pts[p];
+            if(trkpt.flags & trkpt_t::eDeleted)
+            {
+                continue;
+            }
+
+            qreal d1 = trkpt.distance;
+            qreal e1 = trkpt.ele;
+            qreal t1 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
+            int n = p;
+
+            while(n>0)
+            {
+                trkpt_t & trkpt2 = seg.pts[n];
+                if((trkpt2.flags & trkpt_t::eDeleted) || (trkpt2.ele == NOINT))
+                {
+                    n--;
+                    continue;
+                }
+
+                if(trkpt.distance - trkpt2.distance >= 25)
+                {
+                    d1 = trkpt2.distance;
+                    e1 = trkpt2.ele;
+                    t1 = trkpt2.time.toMSecsSinceEpoch()/1000.0;
+                    break;
+                }
+                n--;
+            }
+
+            qreal d2 = trkpt.distance;
+            qreal e2 = trkpt.ele;
+            qreal t2 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
+            n = p;
+            while(n < seg.pts.size())
+            {
+                trkpt_t & trkpt2 = seg.pts[n];;
+                if((trkpt2.flags & trkpt_t::eDeleted) || (trkpt2.ele == NOINT))
+                {
+                    n++;
+                    continue;
+                }
+
+                if(trkpt2.distance - trkpt.distance >= 25)
+                {
+                    d2 = trkpt2.distance;
+                    e2 = trkpt2.ele;
+                    t2 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
+                    break;
+                }
+                n++;
+            }
+
+            qreal a     = atan((e2 - e1)/(d2 - d1));
+            trkpt.slope = fabs(a * 360.0/(2 * M_PI));
+
+            if((t2 - t1) > 0)
+            {
+                trkpt.speed    = (d2 - d1) / (t2 - t1);
+            }
+            else
+            {
+                trkpt.speed = NOFLOAT;
+            }
+        }
+    }
 
 
 

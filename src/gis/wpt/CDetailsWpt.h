@@ -26,11 +26,16 @@ class CGisItemWpt;
 
 class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
 {    
+    Q_OBJECT
     public:
         CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
         virtual ~CDetailsWpt();
 
+    private slots:
+        void slotLinkActivated(const QString& link);
+
     private:
+        void setupGui();
         CGisItemWpt& wpt;
 };
 

@@ -33,6 +33,9 @@ CGisWidget::CGisWidget(QWidget *parent)
     pSelf = this;
     setupUi(this);
 
+    treeWks->header()->setSectionResizeMode(0,QHeaderView::ResizeToContents);
+
+
     connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 }
 

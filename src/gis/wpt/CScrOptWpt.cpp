@@ -57,6 +57,7 @@ void CScrOptWpt::slotDelete()
 void CScrOptWpt::slotEdit()
 {
     CGisWidget::self().editItemByKey(key);
+    deleteLater();
 }
 
 void CScrOptWpt::draw(QPainter& p)
@@ -64,7 +65,7 @@ void CScrOptWpt::draw(QPainter& p)
     IGisItem * item = CGisWidget::self().getItemByKey(key);
     if(item == 0)
     {
-        QWidget::deleteLater();
+        deleteLater();
         return;
     }
     item->drawHighlight(p);

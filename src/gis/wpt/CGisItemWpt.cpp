@@ -170,6 +170,27 @@ void CGisItemWpt::setIcon()
     QTreeWidgetItem::setIcon(0,icon);
 }
 
+void CGisItemWpt::setName(const QString& str)
+{
+    setText(1,"*");
+    wpt.name = str;
+    setToolTip(0,getInfo());
+}
+
+void CGisItemWpt::setElevation(qint32 val)
+{
+    setText(1,"*");
+    wpt.ele = val;
+    setToolTip(0,getInfo());
+}
+
+void CGisItemWpt::setProximity(qreal val)
+{
+    setText(1,"*");
+    proximity = val;
+    setToolTip(0,getInfo());
+}
+
 void CGisItemWpt::save(QDomNode& gpx)
 {
     QDomDocument doc = gpx.ownerDocument();

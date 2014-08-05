@@ -29,6 +29,21 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     , wpt(wpt)
 {
     setupUi(this);
+    setupGui();
+    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(labelPositon, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+
+}
+
+CDetailsWpt::~CDetailsWpt()
+{
+
+}
+
+void CDetailsWpt::setupGui()
+{
     setWindowTitle(wpt.getName());
 
     QString val, unit;
@@ -40,32 +55,84 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     labelName->setText(QString("<a href='name'>%1</a>").arg(wpt.getName()));
     labelPositon->setText(QString("<a href='position'>%1</a>").arg(strPos));
 
-    if(wpt.wpt.ele != NOINT)
+    if(wpt.getElevation() != NOINT)
     {
-        IUnit::self().meter2elevation(wpt.wpt.ele, val, unit);
+        IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
         labelElevation->setText(QString("<a href='elevation'>%1</a> %2").arg(val).arg(unit));
     }
     else
     {
-        labelElevation->setText(QString("<a href='elevation'>-</a>"));
+        labelElevation->setText(QString("<a href='elevation'>--</a>"));
     }
 
-    if(wpt.proximity != NOFLOAT)
+    if(wpt.getProximity() != NOFLOAT)
     {
-        IUnit::self().meter2elevation(wpt.proximity, val, unit);
+        IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
         labelProximity->setText(QString("<a href='proximity'>%1</a> %2").arg(val).arg(unit));
     }
     else
     {
-        labelProximity->setText(QString("<a href='proximity'>-</a>"));
+        labelProximity->setText(QString("<a href='proximity'>--</a>"));
     }
 
-    labelCmt->setText(wpt.wpt.cmt);
-    labelDesc->setText(wpt.wpt.desc);
+    if(wpt.getComment().isEmpty())
+    {
+        labelCmt->setText(tr("no comment"));
+    }
+    else
+    {
+        labelCmt->setText(wpt.getComment());
+    }
+
+    if(wpt.getDescription().isEmpty())
+    {
+        labelDesc->setText(tr("no description"));
+    }
+    else
+    {
+        labelDesc->setText(wpt.getDescription());
+    }
+
 }
 
-CDetailsWpt::~CDetailsWpt()
+void CDetailsWpt::slotLinkActivated(const QString& link)
 {
+    if(link == "name")
+    {
+        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
+        if(name.isEmpty())
+        {
+            return;
+        }
+        wpt.setName(name);
+    }
+    else if(link == "elevation")
+    {
+        bool ok = false;
+        qint32 ele = QInputDialog::getInt(this, tr("Edit eleavtion..."), tr("Enter new elevation."), wpt.getElevation(), 0, NOINT, 1, &ok);
+        if(ok)
+        {
+            wpt.setElevation(ele);
+        }
+        else
+        {
+            wpt.setElevation(NOINT);
+        }
+    }
+    else if(link == "proximity")
+    {
+        bool ok = false;
+        qreal prox = QInputDialog::getDouble(this, tr("Edit proximity..."), tr("Enter new proximity range."), wpt.getProximity(), 0, NOFLOAT, 1, &ok);
+        if(ok)
+        {
+            wpt.setProximity(prox);
+        }
+        else
+        {
+            wpt.setProximity(NOFLOAT);
+        }
 
+    }
+
+    setupGui();
 }
-

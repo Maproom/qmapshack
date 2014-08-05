@@ -113,6 +113,7 @@ class IGisItem : public QObject, public QTreeWidgetItem
 
         virtual void gainUserFocus() = 0;
 
+        virtual void edit(){}
 
     protected:
         friend class CGisProject;

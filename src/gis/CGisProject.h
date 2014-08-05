@@ -62,6 +62,8 @@ class CGisProject : public QTreeWidgetItem
         */
         void delItemByKey(const QString& key);
 
+        void editItemByKey(const QString& key);
+
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
 

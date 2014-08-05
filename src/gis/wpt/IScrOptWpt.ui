@@ -41,9 +41,9 @@
       <number>3</number>
      </property>
      <item>
-      <widget class="QToolButton" name="toolEditDetails">
+      <widget class="QToolButton" name="toolEdit">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CDetailsWpt.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
@@ -330,6 +331,12 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
 void CGisItemWpt::gainUserFocus()
 {
     keyUserFocus = key;
+}
+
+void CGisItemWpt::edit()
+{
+    CDetailsWpt dlg(*this, 0);
+    dlg.exec();
 }
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)

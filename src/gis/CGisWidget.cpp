@@ -149,6 +149,24 @@ void CGisWidget::delItemByKey(const QString& key)
     emit sigChanged();
 }
 
+void CGisWidget::editItemByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
+        {
+            continue;
+        }
+        project->editItemByKey(key);
+    }
+
+    IGisItem::mutexItems.unlock();
+
+    emit sigChanged();
+}
+
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());

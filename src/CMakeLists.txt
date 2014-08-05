@@ -66,6 +66,7 @@ set( SRCS
     gis/IGisItem.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
+    gis/wpt/CDetailsWpt.cpp
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
     gis/rte/CGisItemRte.cpp
@@ -136,6 +137,7 @@ set( HDRS
     gis/IGisItem.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
+    gis/wpt/CDetailsWpt.h
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
     gis/rte/CGisItemRte.h
@@ -160,6 +162,7 @@ set( UIS
     grid/IProjWizard.ui
     gis/IGisWidget.ui
     gis/wpt/IScrOptWpt.ui
+    gis/wpt/IDetailsWpt.ui
     gis/trk/IScrOptTrk.ui
     gis/rte/IScrOptRte.ui
     units/ITimeZoneSetup.ui

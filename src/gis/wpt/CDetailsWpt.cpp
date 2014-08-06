@@ -20,6 +20,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "GeoMath.h"
 #include "units/IUnit.h"
+#include "helpers/CInputDialog.h"
 
 
 #include <QtWidgets>
@@ -99,7 +100,7 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
 {
     if(link == "name")
     {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
+        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
         if(name.isEmpty())
         {
             return;
@@ -108,29 +109,24 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     }
     else if(link == "elevation")
     {
-        bool ok = false;
-        qint32 ele = QInputDialog::getInt(this, tr("Edit eleavtion..."), tr("Enter new elevation."), wpt.getElevation(), 0, NOINT, 1, &ok);
-        if(ok)
+        QVariant var(wpt.getElevation());
+        CInputDialog dlg(0, tr("Enter new elevation."), var, QVariant(NOINT));
+        if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setElevation(ele);
-        }
-        else
-        {
-            wpt.setElevation(NOINT);
+            wpt.setElevation(var.toInt());
         }
     }
     else if(link == "proximity")
     {
-        bool ok = false;
-        qreal prox = QInputDialog::getDouble(this, tr("Edit proximity..."), tr("Enter new proximity range."), wpt.getProximity(), 0, NOFLOAT, 1, &ok);
-        if(ok)
+        QVariant var(wpt.getProximity());
+        CInputDialog dlg(0, tr("Enter new proximity range."), var, QVariant(NOFLOAT));
+        if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setProximity(prox);
+            wpt.setProximity(var.toDouble());
         }
-        else
-        {
-            wpt.setProximity(NOFLOAT);
-        }
+    }
+    else if(link == "position")
+    {
 
     }
 

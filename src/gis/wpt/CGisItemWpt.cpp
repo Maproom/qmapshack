@@ -172,7 +172,8 @@ void CGisItemWpt::setIcon()
 
 void CGisItemWpt::setName(const QString& str)
 {
-    setText(1,"*");
+    setText(1, "*");
+    setText(0, str);
     wpt.name = str;
     setToolTip(0,getInfo());
 }

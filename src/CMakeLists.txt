@@ -17,6 +17,7 @@ set( SRCS
     GeoMath.cpp
     CMainWindow.cpp
     CAbout.cpp
+    helpers/CInputDialog.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -87,6 +88,7 @@ set( HDRS
     helpers/CFileExt.h
     helpers/CAppOpts.h
     helpers/CSettings.h
+    helpers/CInputDialog.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h
@@ -151,6 +153,7 @@ set( HDRS
 set( UIS
     IMainWindow.ui
     IAbout.ui
+    helpers/IInputDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui

@@ -32,6 +32,7 @@ class CGisItemWpt : public IGisItem
 
         const QString& getName(){return wpt.name;}
         void setName(const QString& str);
+        void setPosition(const QPointF& pos);
         void setElevation(qint32 val);
         void setProximity(qreal val);
         QString getInfo();

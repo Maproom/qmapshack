@@ -38,6 +38,8 @@ struct pointDP : public point3D
 
 extern void     GPS_Math_Deg_To_Str(const qreal& x, const qreal& y, QString& str);
 extern bool     GPS_Math_Str_To_Deg(const QString& str, qreal& lon, qreal& lat);
+extern void     GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg);
+extern void     GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, const int32_t s, qreal& deg);
 /// use for long distances
 extern qreal    GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2, qreal& a1, qreal& a2);
 extern qreal    GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2);

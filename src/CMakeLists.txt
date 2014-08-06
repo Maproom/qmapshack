@@ -18,6 +18,7 @@ set( SRCS
     CMainWindow.cpp
     CAbout.cpp
     helpers/CInputDialog.cpp
+    helpers/CPositionDialog.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -89,6 +90,7 @@ set( HDRS
     helpers/CAppOpts.h
     helpers/CSettings.h
     helpers/CInputDialog.h
+    helpers/CPositionDialog.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h
@@ -154,6 +156,7 @@ set( UIS
     IMainWindow.ui
     IAbout.ui
     helpers/IInputDialog.ui
+    helpers/IPositionDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui

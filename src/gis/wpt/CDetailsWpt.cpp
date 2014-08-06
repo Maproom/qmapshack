@@ -21,6 +21,7 @@
 #include "GeoMath.h"
 #include "units/IUnit.h"
 #include "helpers/CInputDialog.h"
+#include "helpers/CPositionDialog.h"
 
 
 #include <QtWidgets>
@@ -127,7 +128,12 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     }
     else if(link == "position")
     {
-
+        QPointF pos = wpt.getPosition();
+        CPositionDialog dlg(0, pos);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            wpt.setPosition(pos);
+        }
     }
 
     setupGui();

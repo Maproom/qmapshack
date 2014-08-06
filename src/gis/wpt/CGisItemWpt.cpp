@@ -178,6 +178,14 @@ void CGisItemWpt::setName(const QString& str)
     setToolTip(0,getInfo());
 }
 
+void CGisItemWpt::setPosition(const QPointF& pos)
+{
+    setText(1,"*");
+    wpt.lon = pos.x();
+    wpt.lat = pos.y();
+    setToolTip(0,getInfo());
+}
+
 void CGisItemWpt::setElevation(qint32 val)
 {
     setText(1,"*");

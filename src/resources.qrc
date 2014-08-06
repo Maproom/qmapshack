@@ -18,7 +18,6 @@
         <file>icons/8x8/bullet_red.png</file>
         <file>icons/8x8/bullet_white.png</file>
         <file>icons/8x8/bullet_yellow.png</file>
-
         <file>icons/16x16/2DFix.png</file>
         <file>icons/16x16/3DFix.png</file>
         <file>icons/16x16/Add.png</file>
@@ -69,7 +68,6 @@
         <file>icons/16x16/EditDetails.png</file>
         <file>icons/16x16/EditText.png</file>
         <file>icons/16x16/TimeZoneSetup.png</file>
-
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
@@ -120,7 +118,6 @@
         <file>icons/32x32/EditDetails.png</file>
         <file>icons/32x32/EditText.png</file>
         <file>icons/32x32/TimeZoneSetup.png</file>
-
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
@@ -171,8 +168,6 @@
         <file>icons/48x48/EditDetails.png</file>
         <file>icons/48x48/EditText.png</file>
         <file>icons/48x48/TimeZoneSetup.png</file>
-
-
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>
@@ -211,7 +206,6 @@
         <file>icons/cache/32x32/webcam.png</file>
         <file>icons/cache/32x32/wherigo.png</file>
         <file>icons/cache/32x32/write_note.png</file>
-
         <file>icons/waypoints/32x32/Default.png</file>
         <file>icons/waypoints/32x32/PinRed.png</file>
         <file>icons/waypoints/32x32/PinGreen.png</file>
@@ -226,15 +220,13 @@
         <file>icons/waypoints/32x32/DiamondGreen.png</file>
         <file>icons/waypoints/32x32/DiamondBlue.png</file>
         <file>icons/waypoints/32x32/Residence.png</file>
-
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMoveMap.png</file>
         <file>cursors/wptHighlight.png</file>
-
         <file>animation/loader.gif</file>
         <file>animation/loader2.gif</file>
-
         <file>pics/timezones.png</file>
+        <file>pics/splash.png</file>
     </qresource>
 </RCC>

@@ -208,7 +208,7 @@ void IDrawContext::zoom(const QRectF& rect)
         convertRad2Px(pt2);
 
         QPointF pt = pt2 - pt1;
-        if(fabs(pt.x()) < (bufWidth - 2 * BUFFER_BORDER) && fabs(pt.y() < (bufHeight - 2 * BUFFER_BORDER)))
+        if(abs(pt.x()) < (bufWidth - 2 * BUFFER_BORDER) && abs(pt.y() < (bufHeight - 2 * BUFFER_BORDER)))
         {
             break;
         }

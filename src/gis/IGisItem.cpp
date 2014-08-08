@@ -251,13 +251,13 @@ void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPai
                 pt1 = pt;
                 continue;
             }
-            if((abs(pt.x() - pt1.x()) + abs(pt.y() - pt1.y())) < 7)
+            if((qAbs(pt.x() - pt1.x()) + qAbs(pt.y() - pt1.y())) < 7)
             {
                 pt1 = pt;
                 continue;
             }
             // keep distance
-            if((abs(pt.x() - ptt.x()) + abs(pt.y() - ptt.y())) > 100)
+            if((qAbs(pt.x() - ptt.x()) + qAbs(pt.y() - ptt.y())) > 100)
             {
                 if(0 != pt.x() - pt1.x() && (pt.y() - pt1.y()))
                 {

@@ -92,7 +92,7 @@ void CGrid::setProjAndColor(const QString& proj, const QColor& c)
 
 void CGrid::findGridSpace(double min, double max, double& xSpace, double& ySpace)
 {
-    double dX = fabs(min - max) / 10;
+    double dX = qAbs(min - max) / 10;
     if(dX < M_PI/180000)
     {
         xSpace = 5*M_PI/1800000;
@@ -256,11 +256,11 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
         if(x > rightMax)
         {
-            if(fabs(x) > fabs(rightMax))
+            if(qAbs(x) > qAbs(rightMax))
             {
                 xStart = x = -180 * DEG_TO_RAD;
             }
-            if(fabs(x) < fabs(rightMax))
+            if(qAbs(x) < qAbs(rightMax))
             {
                 rightMax = 180 * DEG_TO_RAD;
             }
@@ -347,22 +347,22 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
         foreach(const val_t& val, horzTopTicks)
         {
-            CCanvas::drawText(fabs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
+            CCanvas::drawText(qAbs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
         }
 
         foreach(const val_t& val, horzBtmTicks)
         {
-            CCanvas::drawText(fabs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
+            CCanvas::drawText(qAbs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
         }
 
         foreach(const val_t& val, vertLftTicks)
         {
-            CCanvas::drawText(fabs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
+            CCanvas::drawText(qAbs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
         }
 
         foreach(const val_t& val, vertRgtTicks)
         {
-            CCanvas::drawText(fabs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
+            CCanvas::drawText(qAbs(val.val)<1.e-5?"0":QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
         }
     }
     else

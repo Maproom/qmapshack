@@ -18,8 +18,10 @@
 
 #include "CMainWindow.h"
 #include "helpers/CAppOpts.h"
+#include "version.h"
 
 #include <QtCore>
+#include <QtWidgets>
 #include <CGetOpt.h>
 #include <iostream>
 #include <gdal.h>
@@ -143,8 +145,30 @@ int main(int argc, char ** argv)
     QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
 
+    QSplashScreen *splash = 0;
+    if (!qlOpts->nosplash)
+    {
+        QPixmap pic(":/pics/splash.png");
+        QPainter p(&pic);
+        QFont f = p.font();
+        f.setBold(true);
+
+        p.setPen(Qt::black);
+        p.setFont(f);
+        p.drawText(400,395,"V " VER_STR);
+
+        splash = new QSplashScreen(pic);
+        splash->show();
+    }
+
     CMainWindow w;
     w.show();
+
+    if (splash != 0)
+    {
+        splash->finish(&w);
+        delete splash;
+    }
 
     return a.exec();
 }

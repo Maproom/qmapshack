@@ -31,7 +31,17 @@ class CGisItemWpt : public IGisItem
         virtual ~CGisItemWpt();
 
         const QString& getName(){return wpt.name;}
+        void setName(const QString& str);
+        void setPosition(const QPointF& pos);
+        void setElevation(qint32 val);
+        void setProximity(qreal val);
         QString getInfo();
+        QPointF getPosition(){return QPointF(wpt.lon, wpt.lat);}
+        qint32 getElevation(){return wpt.ele;}
+        qreal getProximity(){return proximity;}
+        const QString& getComment(){return wpt.cmt;}
+        const QString& getDescription(){return wpt.desc;}
+
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& ){return posScreen;}
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
@@ -40,6 +50,8 @@ class CGisItemWpt : public IGisItem
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
         void gainUserFocus();
+
+        void edit();
 
     private:
         void genKey();

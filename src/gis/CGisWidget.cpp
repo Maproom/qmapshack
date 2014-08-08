@@ -33,6 +33,9 @@ CGisWidget::CGisWidget(QWidget *parent)
     pSelf = this;
     setupUi(this);
 
+    treeWks->header()->setSectionResizeMode(0,QHeaderView::ResizeToContents);
+
+
     connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 }
 
@@ -142,6 +145,24 @@ void CGisWidget::delItemByKey(const QString& key)
         {
             delete project;
         }
+    }
+
+    IGisItem::mutexItems.unlock();
+
+    emit sigChanged();
+}
+
+void CGisWidget::editItemByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
+        {
+            continue;
+        }
+        project->editItemByKey(key);
     }
 
     IGisItem::mutexItems.unlock();

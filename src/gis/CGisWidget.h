@@ -70,6 +70,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
          */
         void delItemByKey(const QString& key);
 
+        void editItemByKey(const QString& key);
+
     signals:
         void sigChanged();
 

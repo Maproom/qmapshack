@@ -16,34 +16,47 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTWPT_H
-#define CSCROPTWPT_H
+#include "CInputDialog.h"
 
-#include "mouse/IScrOpt.h"
+#include <QtWidgets>
 
-#include <QWidget>
-#include "ui_IScrOptWpt.h"
-
-class CGisItemWpt;
-class IMouse;
-
-class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
+CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, const QVariant& reset)
+    : QDialog(parent)
+    , val(val)
+    , reset(reset)
 {
-    Q_OBJECT
-    public:
-        CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptWpt();
+    setupUi(this);
+    QPushButton * pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
+    connect(pushReset, SIGNAL(clicked()), this, SLOT(slotReset()));
 
-        void draw(QPainter& p);
+    label->setText(text);
+    if(val != reset)
+    {
+        lineEdit->setText(val.toString());
+    }
 
-    private slots:
-        void slotDelete();
-        void slotEdit();
+}
 
-    private:
-        QString key;
-        QPointF anchor;
-};
+CInputDialog::~CInputDialog()
+{
 
-#endif //CSCROPTWPT_H
+}
 
+void CInputDialog::accept()
+{
+    if(lineEdit->text().isEmpty())
+    {
+        val = reset;
+    }
+    else
+    {
+        val.setValue(lineEdit->text());
+    }
+
+    QDialog::accept();
+}
+
+void CInputDialog::slotReset()
+{
+    lineEdit->clear();
+}

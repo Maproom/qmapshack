@@ -17,6 +17,8 @@ set( SRCS
     GeoMath.cpp
     CMainWindow.cpp
     CAbout.cpp
+    helpers/CInputDialog.cpp
+    helpers/CPositionDialog.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -66,6 +68,7 @@ set( SRCS
     gis/IGisItem.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
+    gis/wpt/CDetailsWpt.cpp
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
     gis/rte/CGisItemRte.cpp
@@ -86,6 +89,8 @@ set( HDRS
     helpers/CFileExt.h
     helpers/CAppOpts.h
     helpers/CSettings.h
+    helpers/CInputDialog.h
+    helpers/CPositionDialog.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h
@@ -136,6 +141,7 @@ set( HDRS
     gis/IGisItem.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
+    gis/wpt/CDetailsWpt.h
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
     gis/rte/CGisItemRte.h
@@ -149,6 +155,8 @@ set( HDRS
 set( UIS
     IMainWindow.ui
     IAbout.ui
+    helpers/IInputDialog.ui
+    helpers/IPositionDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui
@@ -160,6 +168,7 @@ set( UIS
     grid/IProjWizard.ui
     gis/IGisWidget.ui
     gis/wpt/IScrOptWpt.ui
+    gis/wpt/IDetailsWpt.ui
     gis/trk/IScrOptTrk.ui
     gis/rte/IScrOptRte.ui
     units/ITimeZoneSetup.ui

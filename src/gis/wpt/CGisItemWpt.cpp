@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CDetailsWpt.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
@@ -167,6 +168,36 @@ void CGisItemWpt::setIcon()
     }
 
     QTreeWidgetItem::setIcon(0,icon);
+}
+
+void CGisItemWpt::setName(const QString& str)
+{
+    setText(1, "*");
+    setText(0, str);
+    wpt.name = str;
+    setToolTip(0,getInfo());
+}
+
+void CGisItemWpt::setPosition(const QPointF& pos)
+{
+    setText(1,"*");
+    wpt.lon = pos.x();
+    wpt.lat = pos.y();
+    setToolTip(0,getInfo());
+}
+
+void CGisItemWpt::setElevation(qint32 val)
+{
+    setText(1,"*");
+    wpt.ele = val;
+    setToolTip(0,getInfo());
+}
+
+void CGisItemWpt::setProximity(qreal val)
+{
+    setText(1,"*");
+    proximity = val;
+    setToolTip(0,getInfo());
 }
 
 void CGisItemWpt::save(QDomNode& gpx)
@@ -330,6 +361,12 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
 void CGisItemWpt::gainUserFocus()
 {
     keyUserFocus = key;
+}
+
+void CGisItemWpt::edit()
+{
+    CDetailsWpt dlg(*this, 0);
+    dlg.exec();
 }
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)

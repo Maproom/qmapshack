@@ -16,34 +16,28 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTWPT_H
-#define CSCROPTWPT_H
+#ifndef CINPUTDIALOG_H
+#define CINPUTDIALOG_H
 
-#include "mouse/IScrOpt.h"
+#include <QDialog>
+#include "ui_IInputDialog.h"
 
-#include <QWidget>
-#include "ui_IScrOptWpt.h"
-
-class CGisItemWpt;
-class IMouse;
-
-class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
+class CInputDialog : public QDialog, private Ui::IInputDialog
 {
     Q_OBJECT
     public:
-        CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptWpt();
+        CInputDialog(QWidget * parent, const QString &text, QVariant &val, const QVariant &reset);
+        virtual ~CInputDialog();
 
-        void draw(QPainter& p);
+    public slots:
+        void accept();
 
     private slots:
-        void slotDelete();
-        void slotEdit();
-
+        void slotReset();
     private:
-        QString key;
-        QPointF anchor;
+        QVariant& val;
+        QVariant reset;
 };
 
-#endif //CSCROPTWPT_H
+#endif //CINPUTDIALOG_H
 

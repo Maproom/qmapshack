@@ -16,34 +16,30 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTWPT_H
-#define CSCROPTWPT_H
+#ifndef CPOSITIONDIALOG_H
+#define CPOSITIONDIALOG_H
 
-#include "mouse/IScrOpt.h"
+#include <QDialog>
+#include "ui_IPositionDialog.h"
 
-#include <QWidget>
-#include "ui_IScrOptWpt.h"
+class QPointF;
 
-class CGisItemWpt;
-class IMouse;
-
-class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
+class CPositionDialog : public QDialog, private Ui::IPositionDialog
 {
     Q_OBJECT
     public:
-        CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptWpt();
+        CPositionDialog(QWidget * parent, QPointF &pos);
+        virtual ~CPositionDialog();
 
-        void draw(QPainter& p);
+    public slots:
+        void accept();
 
     private slots:
-        void slotDelete();
-        void slotEdit();
+        void slotEdit(const QString& str);
 
     private:
-        QString key;
-        QPointF anchor;
+        QPointF& pos;
 };
 
-#endif //CSCROPTWPT_H
+#endif //CPOSITIONDIALOG_H
 

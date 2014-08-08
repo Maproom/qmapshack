@@ -41,6 +41,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
     show();
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
 }
 
 CScrOptWpt::~CScrOptWpt()
@@ -53,12 +54,18 @@ void CScrOptWpt::slotDelete()
     CGisWidget::self().delItemByKey(key);
 }
 
+void CScrOptWpt::slotEdit()
+{
+    CGisWidget::self().editItemByKey(key);
+    deleteLater();
+}
+
 void CScrOptWpt::draw(QPainter& p)
 {
     IGisItem * item = CGisWidget::self().getItemByKey(key);
     if(item == 0)
     {
-        QWidget::deleteLater();
+        deleteLater();
         return;
     }
     item->drawHighlight(p);

@@ -349,6 +349,24 @@ void CGisProject::delItemByKey(const QString& key)
     qDeleteAll(items);
 }
 
+void CGisProject::editItemByKey(const QString& key)
+{
+    QList<QTreeWidgetItem*> items;
+    for(int i = childCount(); i > 0; i--)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        if(item->getKey() == key)
+        {
+            item->edit();
+        }
+    }
+}
+
 void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis)
 {
     for(int i = 0; i < childCount(); i++)

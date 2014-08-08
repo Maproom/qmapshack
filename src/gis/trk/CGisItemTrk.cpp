@@ -514,12 +514,12 @@ void CGisItemTrk::deriveSecondaryData()
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
 
-    qDebug() << "--------------" << getName() << "------------------";
-    qDebug() << "totalDistance" << totalDistance;
-    qDebug() << "totalAscend" << totalAscend;
-    qDebug() << "totalDescend" << totalDescend;
-    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
-    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
+//    qDebug() << "--------------" << getName() << "------------------";
+//    qDebug() << "totalDistance" << totalDistance;
+//    qDebug() << "totalAscend" << totalAscend;
+//    qDebug() << "totalDescend" << totalDescend;
+//    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
+//    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 
 
 }

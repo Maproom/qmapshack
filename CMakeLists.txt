@@ -11,6 +11,8 @@ endif(UNIX)
 
 if(WIN32)
 set(CMAKE_PREFIX_PATH C:/Qt5/5.3/msvc2013_64)
+set(GDAL_DEV_PATH "" CACHE PATH "Path to directory containing GDAL include and lib, e.g. M:\\lib\\gdal")
+set(PROJ_DEV_PATH "" CACHE PATH "Path to directory containing PROJ.4 include and lib, e.g. M:\\lib\\PROJ")
 endif(WIN32)
 
 

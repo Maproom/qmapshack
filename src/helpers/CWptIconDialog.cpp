@@ -103,5 +103,8 @@ CWptIconDialog::~CWptIconDialog()
 
 void CWptIconDialog::slotItemClicked(QListWidgetItem * item)
 {
-
+    button.setIcon(item->icon());
+    button.setObjectName(item->text());
+    button.setToolTip(item->text());
+    accept();
 }

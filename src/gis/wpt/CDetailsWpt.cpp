@@ -145,5 +145,9 @@ void CDetailsWpt::slotChangeIcon()
 {
 
     CWptIconDialog dlg(toolIcon);
-    dlg.exec();
+    if(dlg.exec() == QDialog::Accepted)
+    {
+        wpt.setIcon(toolIcon->objectName());
+        setupGui();
+    }
 }

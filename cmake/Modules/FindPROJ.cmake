@@ -23,7 +23,9 @@ else (PROJ_LIBRARIES AND PROJ_INCLUDE_DIRS)
     NAMES
       proj_api.h
     PATHS
-        d:/proj/include
+if(WIN32)	
+      ${PROJ_DEV_PATH}/include
+endif(WIN32)
         /usr/include
         /usr/local/include
         /opt/local/include
@@ -40,7 +42,9 @@ else (PROJ_LIBRARIES AND PROJ_INCLUDE_DIRS)
         proj
         proj_i
     PATHS
-        d:/proj/lib
+if(WIN32)	
+      ${PROJ_DEV_PATH}/lib
+endif(WIN32)
         /usr/lib
         /usr/local/lib
         /opt/local/lib

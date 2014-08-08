@@ -22,7 +22,9 @@ else (GDAL_LIBRARIES AND GDAL_INCLUDE_DIRS)
     NAMES
       gdal.h
     PATHS
-        D:/gdal/include
+if(WIN32)	
+      ${GDAL_DEV_PATH}/include
+endif(WIN32)
         /usr/include
         /usr/local/include
         /opt/local/include
@@ -50,7 +52,9 @@ else (GDAL_LIBRARIES AND GDAL_INCLUDE_DIRS)
         gdal
         gdal_i
     PATHS
-      D:/gdal/lib
+if(WIN32)	
+      ${GDAL_DEV_PATH}/lib
+endif(WIN32)
       /usr/lib
       /usr/local/lib
       /opt/local/lib

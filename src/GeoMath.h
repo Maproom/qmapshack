@@ -23,6 +23,8 @@
 #include <QPointF>
 #include <QRectF>
 
+#include <stdint.h>
+
 struct point3D
 {
     qreal x;

@@ -31,7 +31,7 @@
 void GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, const int32_t s, qreal &deg)
 {
 
-    deg = abs(d) + qreal(m) / 60.0 + qreal(s) / 3600;
+    deg = qAbs(d) + qreal(m) / 60.0 + qreal(s) / 3600;
     if(sign)
     {
         deg = -deg;
@@ -44,8 +44,8 @@ void GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, cons
 bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *d, qreal *m)
 {
     bool sign = v < 0;
-    qint32 deg = abs(v);
-    qreal  min = (fabs(v) - deg) * 60.0;
+    qint32 deg = qAbs(v);
+    qreal  min = (qAbs(v) - deg) * 60.0;
 
     *d = deg;
     *m = min;
@@ -57,7 +57,7 @@ bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *d, qreal *m)
 void GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg)
 {
 
-    deg = abs(d) + m / 60.0;
+    deg = qAbs(d) + m / 60.0;
     if(sign) {
         deg = -deg;
     }
@@ -77,7 +77,7 @@ void GPS_Math_Deg_To_Str(const qreal& x, const qreal& y, QString& str)
     QString lat,lng;
     lat = signLat ? "S" : "N";
     lng = signLon ? "W" : "E";
-    str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),abs(degN),minN,lng.toUtf8().data(),abs(degE),minE);
+    str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
 }
 
 
@@ -126,7 +126,7 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
     qreal lambda = L, lambdaP = 2*PI;
     unsigned iterLimit = 20;
 
-    while ((fabs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0)) {
+    while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0)) {
         sinLambda = sin(lambda);
         cosLambda = cos(lambda);
         sinSigma = sqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
@@ -183,7 +183,7 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
     qreal lambda = L, lambdaP = 2*PI;
     unsigned iterLimit = 20;
 
-    while ((fabs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0)) {
+    while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0)) {
         sinLambda = sin(lambda);
         cosLambda = cos(lambda);
         sinSigma = sqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));

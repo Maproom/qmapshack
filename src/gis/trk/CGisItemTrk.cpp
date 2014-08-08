@@ -374,7 +374,7 @@ void CGisItemTrk::deriveSecondaryData()
                 {
 
                     qreal delta     = trkpt.ele - lastEle;
-                    qreal absDelta  = fabs(delta);
+                    qreal absDelta  = qAbs(delta);
 
                     if(absDelta > ASCEND_THRESHOLD)
                     {
@@ -489,7 +489,7 @@ void CGisItemTrk::deriveSecondaryData()
             }
 
             qreal a     = atan((e2 - e1)/(d2 - d1));
-            trkpt.slope = fabs(a * 360.0/(2 * M_PI));
+            trkpt.slope = qAbs(a * 360.0/(2 * M_PI));
 
             if((t2 - t1) > 0)
             {

@@ -208,7 +208,7 @@ void IDrawContext::zoom(const QRectF& rect)
         convertRad2Px(pt2);
 
         QPointF pt = pt2 - pt1;
-        if(fabs(pt.x()) < (bufWidth - 2 * BUFFER_BORDER) && fabs(pt.y() < (bufHeight - 2 * BUFFER_BORDER)))
+        if(qAbs(pt.x()) < (bufWidth - 2 * BUFFER_BORDER) && qAbs(pt.y() < (bufHeight - 2 * BUFFER_BORDER)))
         {
             break;
         }
@@ -371,20 +371,20 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     // adjust west <-> east boundaries
     if(ref1.x() > ref2.x())
     {
-        if(fabs(ref1.x()) > fabs(ref2.x()))
+        if(qAbs(ref1.x()) > qAbs(ref2.x()))
         {
             ref1.rx() = -2*(180*DEG_TO_RAD) + ref1.rx();
         }
-        if(fabs(ref4.x()) > fabs(ref3.x()))
+        if(qAbs(ref4.x()) > qAbs(ref3.x()))
         {
             ref4.rx() = -2*(180*DEG_TO_RAD) + ref4.rx();
         }
 
-        if(fabs(ref1.x()) < fabs(ref2.x()))
+        if(qAbs(ref1.x()) < qAbs(ref2.x()))
         {
             ref2.rx() = 2*(180*DEG_TO_RAD) + ref2.rx();
         }
-        if(fabs(ref4.x()) < fabs(ref3.x()))
+        if(qAbs(ref4.x()) < qAbs(ref3.x()))
         {
             ref3.rx() = 2*(180*DEG_TO_RAD) + ref3.rx();
         }

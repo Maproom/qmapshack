@@ -1,0 +1,86 @@
+QMapShack for Windows (short: QMS) is build with Visual Studio 2013 as 64bit application
+It depends on the 3rd party software listed below
+
+Compile instructions are given at the end of this file
+
+
+1.) Microsoft Visual C++ 2013 Redistributable Package
+  The installer vcredist_x64.exe (ca 7MB size) as downloaded from
+    http://www.microsoft.com/en-us/download/details.aspx?id=40784
+  is contained in the QLGT Installer package and may be executed if selected by the user.
+  Note: Those runtime libraries may already be contained in Windows 7 or WIndows 8 installations.
+
+2.) Qt5 runtime libraries
+  The Qt DLL's are deployed in the QLGT installation directory. 
+  They are part of the "Qt libraries for Windows (VS 2008)" package.
+  This can be retrieved from http://qt.nokia.com/downloads/windows-cpp-vs2008.
+
+3.) The GDAL library, http://www.gdal.org/
+
+4.) The PROJ library http://trac.osgeo.org/proj/
+  
+5.) Icons for the Windows Start Menu ==> We should get rid of them and use own icons
+    kfm_home.ico, kget.ico, khelpcenter.ico, konsole.ico, xmag.ico 
+     have been created from the Nuvola 1.0 icon set (http://www.icon-king.com/projects/nuvola/)
+ 
+
+Additional tools for building and installing
+============================================
+- CMake 2.8, available at http://www.cmake.org/
+- NSIS, available at http://nsis.sourceforge.net/Main_Page
+
+
+Compile instructions - to be verified
+====================
+
+1.) Compile the GDAL library, http://www.gdal.org/
+[Build instructions inspired by http://trac.osgeo.org/gdal/wiki/BuildingOnWindows, http://dominoc925.blogspot.de/2013/03/build-64-bit-gdal-for-windows.html]
+- Download the source code of the version 1.11 (or latest) from http://trac.osgeo.org/gdal/wiki/DownloadSource and unzip
+- In nmake.opt, adapt the following lines, according to your build environment [my settings are given as example]
+  MSVC_VER=1800
+  GDAL_HOME = "M:\lib\gdal"
+  PYDIR   =	"C:\Python34"
+  SWIG = D:\gdal111\swig.exe
+  WIN64=YES
+- From the start menu, enter the VS2013, x64 native command prompt
+- nmake /f makefile.vc
+- nmake /f makefile.vc devinstall
+
+2.) Compile the PROJ library http://trac.osgeo.org/proj/
+- Download the source code of the version 4.8 (or latest) from http://trac.osgeo.org/proj/ and unzip
+- In nmake.opt, adapt the following lines, according to your build environment [my settings are given as example]
+  INSTDIR=M:\lib\\PROJ
+- From the start menu, enter the VS2013, x64 native command prompt
+- nmake /f makefile.vc
+- nmake /f makefile.vc devinstall
+
+3.) Install QT5.3 or later 
+- Download and run the Qt5 Windows Online Installe from http://qt-project.org/downloads
+  Install for VS2013, x64
+- Append or (better?) prepend the Qt5 binary path to your PATH environment variable, e.g.
+  C:\Qt5\5.3\msvc2013_64\bin;%PATH%  
+
+4.) Get the QMapshack source from the repository, e.g. 
+   hg clone https://bitbucket.org/maproom/qmapshack QMapShack  
+Note: you might have to install TortoiseHG   
+  
+5.) TODO Adapt the search path to GDAL and PROJ.4 in the respective CMake Files
+  FindGDAL.cmake and FindPROJ.cmake
+  
+6.) Start the CMake GUI (you did install CMake before, didn't you)
+- Configure (and be sure that it finds GDAL and PROJ.4 ) 
+  TODO If Oliver accepts my CMake Files contribution from 22-July-2014, you can enter GDAL and PROJ.4 paths here directly
+- Generate
+
+7.) Open the generated QMapShack.sln with VS2013
+- Compile the Release Version
+
+8.) Create the installer by executing
+- nsi/copyfiles.bat
+- nsi/QMapShack_Installer.nsi
+  
+
+
+
+
+

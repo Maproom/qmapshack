@@ -368,10 +368,10 @@ CMapRMAP::level_t& CMapRMAP::findBestLevel(const QPointF& s)
     for(;j < levels.size(); j++)
     {
         level_t& level = levels[j];
-        if(fabs(level.xscale - s.x()) < dsx)
+        if(qAbs(level.xscale - s.x()) < dsx)
         {
             i = j;
-            dsx = fabs(level.xscale - s.x());
+            dsx = qAbs(level.xscale - s.x());
         }
     }
 

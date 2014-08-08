@@ -2147,7 +2147,7 @@ void CMapIMG::drawText(QPainter& p)
         path.addPolygon(textpath->polyline);
 
         // get path length and string length
-        qreal length        = fabs(path.length());
+        qreal length        = qAbs(path.length());
         qreal width         = fm.width(textpath->text);
 
         // adjust font size until string fits into polyline

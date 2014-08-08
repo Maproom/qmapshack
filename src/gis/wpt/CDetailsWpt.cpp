@@ -22,6 +22,7 @@
 #include "units/IUnit.h"
 #include "helpers/CInputDialog.h"
 #include "helpers/CPositionDialog.h"
+#include "helpers/CWptIconDialog.h"
 
 
 #include <QtWidgets>
@@ -36,7 +37,7 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     connect(labelPositon, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-
+    connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
 }
 
 CDetailsWpt::~CDetailsWpt()
@@ -54,6 +55,7 @@ void CDetailsWpt::setupGui()
     GPS_Math_Deg_To_Str(pos.x(), pos.y(), strPos);
 
     toolIcon->setIcon(wpt.getIcon());
+    toolIcon->setObjectName(wpt.getIconName());
     labelName->setText(QString("<a href='name'>%1</a>").arg(wpt.getName()));
     labelPositon->setText(QString("<a href='position'>%1</a>").arg(strPos));
 
@@ -137,4 +139,11 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     }
 
     setupGui();
+}
+
+void CDetailsWpt::slotChangeIcon()
+{
+
+    CWptIconDialog dlg(toolIcon);
+    dlg.exec();
 }

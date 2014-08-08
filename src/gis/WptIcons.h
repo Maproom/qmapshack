@@ -22,10 +22,21 @@
 #include <QString>
 #include <QPixmap>
 
+struct icon_t
+{
+    icon_t(): focus(16,16){}
+    icon_t(const QString& path, int x, int y) : path(path), focus(x,y) {}
+    QString path;
+    QPoint  focus;
+};
+
+
 extern void initWptIcons();
+extern const QMap<QString, icon_t> &getWptIcons();
 extern QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src = 0);
 extern void setWptIconByName(const QString& name, const QString& filename);
 extern void setWptIconByName(const QString& name, const QPixmap& icon);
+extern QPixmap loadIcon(const QString& path);
 
 #endif //WPTICONS_H
 

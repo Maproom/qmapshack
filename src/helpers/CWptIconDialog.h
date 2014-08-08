@@ -16,29 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CDETAILSWPT_H
-#define CDETAILSWPT_H
+#ifndef CWPTICONDIALOG_H
+#define CWPTICONDIALOG_H
 
 #include <QDialog>
-#include "ui_IDetailsWpt.h"
+#include "ui_IWptIconDialog.h"
 
-class CGisItemWpt;
+class QToolButton;
+class QListWidgetItem;
 
-class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
-{    
+class CWptIconDialog : public QDialog, private Ui::IWptIconDialog
+{
     Q_OBJECT
     public:
-        CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
-        virtual ~CDetailsWpt();
+        CWptIconDialog(QToolButton * parent);
+        virtual ~CWptIconDialog();
 
     private slots:
-        void slotLinkActivated(const QString& link);
-        void slotChangeIcon();
+        void slotItemClicked(QListWidgetItem * item);
 
     private:
-        void setupGui();
-        CGisItemWpt& wpt;
+        QToolButton& button;
+
 };
 
-#endif //CDETAILSWPT_H
+#endif //CWPTICONDIALOG_H
 

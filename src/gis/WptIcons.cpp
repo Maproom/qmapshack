@@ -24,14 +24,6 @@
 
 static const char * wptDefault = "://icons/waypoints/32x32/Default.png";
 
-struct icon_t
-{
-    icon_t(): path(wptDefault), focus(16,16){}
-    icon_t(const QString& path, int x, int y) : path(path), focus(x,y) {}
-    QString path;
-    QPoint  focus;
-};
-
 static QMap<QString, icon_t> wptIcons;
 
 void initWptIcons()
@@ -57,7 +49,7 @@ void initWptIcons()
     wptIcons["Block, Green"]        = icon_t("://icons/waypoints/32x32/BoxGreen.png", 16, 16);
     wptIcons["Blue Diamond"]        = icon_t("://icons/waypoints/32x32/DiamondBlue.png", 16, 16);
     wptIcons["Green Diamond"]       = icon_t("://icons/waypoints/32x32/DiamondGreen.png", 16, 16);
-    wptIcons["Red Diamond"]         = icon_t("://icons/waypoints/32x32/DiamaondRed.png", 16, 16);
+    wptIcons["Red Diamond"]         = icon_t("://icons/waypoints/32x32/DiamondRed.png", 16, 16);
 
 
     setWptIconByName("Traditional Cache", "://icons/cache/32x32/traditional.png");
@@ -84,6 +76,12 @@ void initWptIcons()
         setWptIconByName(name, dirIcon.filePath(filename));
     }
 }
+
+const QMap<QString, icon_t>& getWptIcons()
+{
+    return wptIcons;
+}
+
 
 void setWptIconByName(const QString& name, const QString& filename)
 {
@@ -128,15 +126,23 @@ QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
     {
         focus   = wptIcons[name].focus;
         path    = wptIcons[name].path;
-        if(src) *src = path;
-
     }
     else
     {
         focus   = wptIcons["Default"].focus;
         path    = wptIcons["Default"].path;
-        if(src) *src = path;
     }
+
+    if(path.isEmpty())
+    {
+        path = wptDefault;
+    }
+
+    if(src)
+    {
+        *src = path;
+    }
+
     icon = loadIcon(path);
 
     // Limit icon size to 22 pixel max.

@@ -30,20 +30,24 @@ class CGisItemWpt : public IGisItem
         CGisItemWpt(const QDomNode& xml, CGisProject * parent);
         virtual ~CGisItemWpt();
 
-        const QString& getName(){return wpt.name;}
         void setName(const QString& str);
         void setPosition(const QPointF& pos);
         void setElevation(qint32 val);
         void setProximity(qreal val);
+        void setIcon(const QString& name);
+
+        const QString& getName(){return wpt.name;}
         QString getInfo();
         QPointF getPosition(){return QPointF(wpt.lon, wpt.lat);}
         qint32 getElevation(){return wpt.ele;}
         qreal getProximity(){return proximity;}
+        const QString& getIconName(){return wpt.sym;}
         const QString& getComment(){return wpt.cmt;}
         const QString& getDescription(){return wpt.desc;}
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& ){return posScreen;}
+
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);

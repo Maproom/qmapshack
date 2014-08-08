@@ -200,6 +200,13 @@ void CGisItemWpt::setProximity(qreal val)
     setToolTip(0,getInfo());
 }
 
+void CGisItemWpt::setIcon(const QString& name)
+{
+    setText(1,"*");
+    wpt.sym = name;
+    setIcon();
+}
+
 void CGisItemWpt::save(QDomNode& gpx)
 {
     QDomDocument doc = gpx.ownerDocument();

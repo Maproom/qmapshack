@@ -107,6 +107,9 @@ class IGisItem : public QObject, public QTreeWidgetItem
         */
         virtual bool isCloseTo(const QPointF& pos) = 0;
 
+        bool isReadOnly(){return readOnlyMode;}
+        virtual void setReadOnlyMode(bool readOnly);
+
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
         virtual void drawHighlight(QPainter& p) = 0;        
@@ -185,11 +188,26 @@ class IGisItem : public QObject, public QTreeWidgetItem
         };
 
 
+        bool readOnlyMode;
         QString key;
         QPixmap icon;
         QRectF boundingRect;
         static const color_t colorMap[];
 
+
+        static inline void readXml(const QDomNode& xml, const QString& tag, bool& value)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                bool tmp;
+                bool ok = false;
+                tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
+                if(ok)
+                {
+                    value = tmp;
+                }
+            }
+        }
 
         static inline void readXml(const QDomNode& xml, const QString& tag, qint32& value)
         {

@@ -80,6 +80,7 @@
         <file>icons/16x16/TextBold.png</file>
         <file>icons/16x16/TextUnderlined.png</file>
         <file>icons/16x16/TextItalic.png</file>
+        <file>icons/16x16/Lock.png</file>
 
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
@@ -143,6 +144,7 @@
         <file>icons/32x32/TextBold.png</file>
         <file>icons/32x32/TextUnderlined.png</file>
         <file>icons/32x32/TextItalic.png</file>
+        <file>icons/32x32/Lock.png</file>
 
 
 
@@ -208,6 +210,7 @@
         <file>icons/48x48/TextBold.png</file>
         <file>icons/48x48/TextUnderlined.png</file>
         <file>icons/48x48/TextItalic.png</file>
+        <file>icons/48x48/Lock.png</file>
 
 
 

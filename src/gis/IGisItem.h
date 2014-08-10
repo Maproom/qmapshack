@@ -277,6 +277,27 @@ class IGisItem : public QObject, public QTreeWidgetItem
             }
         }
 
+        static inline void readXml(const QDomNode& xml, const QString& tag, QString& value, bool& isHtml)
+        {
+            if(xml.namedItem(tag).isElement())
+            {
+                const QDomNamedNodeMap& attr = xml.namedItem(tag).toElement().attributes();
+
+                if(attr.namedItem("html").nodeValue().toLocal8Bit().toLower() == "true")
+                {
+                    isHtml = true;
+                    value = xml.namedItem(tag).toElement().text();
+                }
+                else
+                {
+                    isHtml = false;
+                    value = "<pre>" + xml.namedItem(tag).toElement().text() + "</pre>";
+                    value = xml.namedItem(tag).toElement().text();
+                }
+
+            }
+        }
+
         static inline void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
         {
             if(xml.namedItem(tag).isElement())
@@ -362,7 +383,7 @@ class IGisItem : public QObject, public QTreeWidgetItem
             }
         }
 
-        static inline void writeXmlHtml(QDomNode& xml, const QString& tag, const QString& val)
+        static inline void writeXml(QDomNode& xml, const QString& tag, const QString& val, bool isHtml)
         {
             if(!val.isEmpty())
             {
@@ -370,7 +391,7 @@ class IGisItem : public QObject, public QTreeWidgetItem
                 xml.appendChild(elem);
                 QDomText text = xml.ownerDocument().createCDATASection(val);
                 elem.appendChild(text);
-                elem.setAttribute("html","True");
+                elem.setAttribute("html",isHtml ? "True" : "False");
 
             }
         }

@@ -144,7 +144,6 @@ CTextEditWidget::~CTextEditWidget()
 QString CTextEditWidget::getHtml()
 {
     QString str = textEdit->toHtml();
-    qDebug() << str;
     QRegExp re(".*(\\<body.*body\\>).*");
     if(re.exactMatch(str))
     {

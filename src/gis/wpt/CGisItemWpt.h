@@ -27,6 +27,48 @@ class QDomNode;
 class CGisItemWpt : public IGisItem
 {
     public:
+        enum geocacheservice_e {eGC, eOC, eTC};
+
+        struct geocachelog_t
+        {
+            geocachelog_t() : id(0){}
+            quint32 id;
+            QDateTime date;
+            QString type;
+            QString finderId;
+            QString finder;
+            bool    textIsHtml;
+            QString text;
+        };
+
+        struct geocache_t
+        {
+            geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0), shortDescIsHtml(false), longDescIsHtml(false){}
+            geocacheservice_e service;
+            bool hasData;
+            quint32 id;
+            bool available;
+            bool archived;
+            qreal difficulty;
+            qreal terrain;
+            QString status;
+            QString name;
+            QString owner;
+            QString ownerId;
+            QString type;
+            QString container;
+            bool    shortDescIsHtml;
+            QString shortDesc;
+            bool    longDescIsHtml;
+            QString longDesc;
+            QString hint;
+            QString country;
+            QString state;
+            QString locale;
+            QList<geocachelog_t> logs;
+        };
+
+
         CGisItemWpt(const QDomNode& xml, CGisProject * parent);
         virtual ~CGisItemWpt();
 
@@ -46,6 +88,7 @@ class CGisItemWpt : public IGisItem
         const QString& getIconName(){return wpt.sym;}
         const QString& getComment(){return wpt.cmt;}
         const QString& getDescription(){return wpt.desc;}
+        const geocache_t& getGeoCache(){return geocache;}
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& ){return posScreen;}
@@ -66,44 +109,6 @@ class CGisItemWpt : public IGisItem
         void writeGcExt(QDomNode& xmlCache);
 
         static QString keyUserFocus;
-
-        enum geocacheservice_e {eGC, eOC, eTC};
-
-        struct geocachelog_t
-        {
-            geocachelog_t() : id(0){}
-            quint32 id;
-            QDateTime date;
-            QString type;
-            QString finderId;
-            QString finder;
-            QString text;
-        };
-
-        struct geocache_t
-        {
-            geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0){}
-            geocacheservice_e service;
-            bool hasData;
-            quint32 id;
-            bool available;
-            bool archived;
-            qreal difficulty;
-            qreal terrain;
-            QString status;
-            QString name;
-            QString owner;
-            QString ownerId;
-            QString type;
-            QString container;
-            QString shortDesc;
-            QString longDesc;
-            QString hint;
-            QString country;
-            QString state;
-            QString locale;
-            QList<geocachelog_t> logs;
-        };
 
 
         wpt_t wpt;

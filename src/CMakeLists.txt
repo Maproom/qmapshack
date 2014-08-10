@@ -8,6 +8,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 find_package(Qt5Core)
 find_package(Qt5Xml)
+find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
@@ -71,6 +72,7 @@ set( SRCS
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
     gis/wpt/CDetailsWpt.cpp
+    gis/wpt/CDetailsGeoCache.cpp
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
     gis/rte/CGisItemRte.cpp
@@ -146,6 +148,7 @@ set( HDRS
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h
+    gis/wpt/CDetailsGeoCache.cpp
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
     gis/rte/CGisItemRte.h
@@ -175,6 +178,7 @@ set( UIS
     gis/IGisWidget.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui
+    gis/wpt/IDetailsGeoCache.ui
     gis/trk/IScrOptTrk.ui
     gis/rte/IScrOptRte.ui
     units/ITimeZoneSetup.ui
@@ -227,6 +231,7 @@ add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     Qt5::Xml
+    Qt5::WebKitWidgets
     CGetOpt
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

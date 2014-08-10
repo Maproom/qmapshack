@@ -95,7 +95,7 @@ void CDetailsWpt::setupGui()
         labelProximity->setText(toLink(isReadOnly, "proximity", "--"));
     }
 
-    if(wpt.getComment().isEmpty())
+    if(IGisItem::removeHtml(wpt.getComment()).simplified().isEmpty())
     {
         labelCmt->setText(tr("no comment"));
     }
@@ -104,7 +104,7 @@ void CDetailsWpt::setupGui()
         labelCmt->setText(wpt.getComment());
     }
 
-    if(wpt.getDescription().isEmpty())
+    if(IGisItem::removeHtml(wpt.getDescription()).simplified().isEmpty())
     {
         labelDesc->setText(tr("no description"));
     }

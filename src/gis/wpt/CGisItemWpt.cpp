@@ -18,6 +18,7 @@
 
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CDetailsWpt.h"
+#include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
@@ -279,8 +280,8 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     readXml(xmlCache, "groundspeak:container", geocache.container);
     readXml(xmlCache, "groundspeak:difficulty", geocache.difficulty);
     readXml(xmlCache, "groundspeak:terrain", geocache.terrain);
-    readXml(xmlCache, "groundspeak:short_description", geocache.shortDesc);
-    readXml(xmlCache, "groundspeak:long_description", geocache.longDesc);
+    readXml(xmlCache, "groundspeak:short_description", geocache.shortDesc, geocache.shortDescIsHtml);
+    readXml(xmlCache, "groundspeak:long_description", geocache.longDesc, geocache.longDescIsHtml);
     readXml(xmlCache, "groundspeak:encoded_hints", geocache.hint);
     readXml(xmlCache, "groundspeak:country", geocache.country);
     readXml(xmlCache, "groundspeak:state", geocache.state);
@@ -304,7 +305,7 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
         }
 
         readXml(xmlLog, "groundspeak:finder", log.finder);
-        readXml(xmlLog, "groundspeak:text", log.text);
+        readXml(xmlLog, "groundspeak:text", log.text, log.textIsHtml);
 
         geocache.logs << log;
 
@@ -344,8 +345,8 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
         str.sprintf("%1.1f", geocache.terrain);
     }
     writeXml(xmlCache, "groundspeak:terrain", str);
-    writeXmlHtml(xmlCache, "groundspeak:short_description", geocache.shortDesc);
-    writeXmlHtml(xmlCache, "groundspeak:long_description", geocache.longDesc);
+    writeXml(xmlCache, "groundspeak:short_description", geocache.shortDesc, geocache.shortDescIsHtml);
+    writeXml(xmlCache, "groundspeak:long_description", geocache.longDesc, geocache.longDescIsHtml);
     writeXml(xmlCache, "groundspeak:encoded_hints", geocache.hint);
 
     if(!geocache.logs.isEmpty())
@@ -369,7 +370,7 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
             xmlFinder.appendChild(_finder_);
             xmlFinder.setAttribute("id", log.finderId);
 
-            writeXmlHtml(xmlLog, "groundspeak:text", log.text);
+            writeXml(xmlLog, "groundspeak:text", log.text, log.textIsHtml);
         }
     }
 }
@@ -391,8 +392,16 @@ void CGisItemWpt::gainUserFocus()
 
 void CGisItemWpt::edit()
 {
-    CDetailsWpt dlg(*this, 0);
-    dlg.exec();
+    if(geocache.hasData)
+    {
+        CDetailsGeoCache dlg(*this, 0);
+        dlg.exec();
+    }
+    else
+    {
+        CDetailsWpt dlg(*this, 0);
+        dlg.exec();
+    }
 }
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)

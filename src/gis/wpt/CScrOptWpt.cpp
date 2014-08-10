@@ -35,6 +35,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(IGisItem::removeHtml(wpt->getInfo()));
 
+
     anchor = wpt->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();

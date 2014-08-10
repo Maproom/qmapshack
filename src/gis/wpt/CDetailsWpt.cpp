@@ -23,6 +23,7 @@
 #include "helpers/CInputDialog.h"
 #include "helpers/CPositionDialog.h"
 #include "helpers/CWptIconDialog.h"
+#include "helpers/CTextEditWidget.h"
 
 
 #include <QtWidgets>
@@ -38,6 +39,8 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
+    connect(toolEditCmt, SIGNAL(clicked()), this, SLOT(slotChangeCmt()));
+    connect(toolEditDesc, SIGNAL(clicked()), this, SLOT(slotChangeDesc()));
 }
 
 CDetailsWpt::~CDetailsWpt()
@@ -148,6 +151,28 @@ void CDetailsWpt::slotChangeIcon()
     if(dlg.exec() == QDialog::Accepted)
     {
         wpt.setIcon(toolIcon->objectName());
+        setupGui();
+    }
+}
+
+void CDetailsWpt::slotChangeCmt()
+{
+    CTextEditWidget dlg(0);
+    dlg.setHtml(wpt.getComment());
+    if(dlg.exec() == QDialog::Accepted)
+    {
+        wpt.setComment(dlg.getHtml());
+        setupGui();
+    }
+}
+
+void CDetailsWpt::slotChangeDesc()
+{
+    CTextEditWidget dlg(0);
+    dlg.setHtml(wpt.getDescription());
+    if(dlg.exec() == QDialog::Accepted)
+    {
+        wpt.setDescription(dlg.getHtml());
         setupGui();
     }
 }

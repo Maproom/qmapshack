@@ -18,12 +18,12 @@
 
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CDetailsWpt.h"
+#include "gis/wpt/CScrOptWpt.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
 #include "canvas/CCanvas.h"
 #include "mouse/IMouse.h"
-#include "gis/wpt/CScrOptWpt.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 
@@ -88,7 +88,7 @@ void CGisItemWpt::genKey()
 
 QString CGisItemWpt::getInfo()
 {
-    QString str = getName();
+    QString str = "<div>" + getName() + "</div>";
 
     if(geocache.hasData)
     {
@@ -97,14 +97,14 @@ QString CGisItemWpt::getInfo()
 
     if(wpt.time.isValid())
     {
-        if(!str.isEmpty()) str += "\n";
+        if(!str.isEmpty()) str += "<br/>\n";
 
         str += IUnit::datetime2string(wpt.time, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD));
     }
 
     if(wpt.ele != NOINT)
     {
-        if(!str.isEmpty()) str += "\n";
+        if(!str.isEmpty()) str += "<br/>\n";
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
         str += QObject::tr("Elevation: %1 %2").arg(val).arg(unit);
@@ -112,31 +112,32 @@ QString CGisItemWpt::getInfo()
 
     if(proximity != NOFLOAT)
     {
-        if(!str.isEmpty()) str += "\n";
+        if(!str.isEmpty()) str += "<br/>\n";
         QString val, unit;
         IUnit::self().meter2distance(proximity, val, unit);
         str += QObject::tr("Proximity: %1 %2").arg(val).arg(unit);
     }
 
-    if(wpt.desc.count())
+    QString desc = removeHtml(wpt.desc);
+    if(desc.count())
     {
-        if(!str.isEmpty()) str += "\n";
+        if(!str.isEmpty()) str += "<br/>\n";
 
-        if(wpt.desc.count() < 200)
+        if(desc.count() < 200)
         {
-            str += wpt.desc;
+            str += desc;
         }
         else
         {
-            str += wpt.desc.left(197) + "...";
+            str += desc.left(197) + "...";
         }
     }
     else
     {
-        QString cmt = wpt.cmt;
+        QString cmt = removeHtml(wpt.cmt);
         if(cmt.count())
         {
-            if(!str.isEmpty()) str += "\n";
+            if(!str.isEmpty()) str += "<br/>\n";
 
             if(cmt.count() < 200)
             {
@@ -205,6 +206,20 @@ void CGisItemWpt::setIcon(const QString& name)
     setText(1,"*");
     wpt.sym = name;
     setIcon();
+}
+
+void CGisItemWpt::setComment(const QString& str)
+{
+    setText(1,"*");
+    wpt.cmt = str;
+    setToolTip(0,getInfo());
+}
+
+void CGisItemWpt::setDescription(const QString& str)
+{
+    setText(1,"*");
+    wpt.desc = str;
+    setToolTip(0,getInfo());
 }
 
 void CGisItemWpt::save(QDomNode& gpx)

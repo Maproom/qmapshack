@@ -39,8 +39,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem        = new QMenu(this);
     actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
     actionDelete    = menuItem->addAction(QIcon("://icons/48x48/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
-
-    actionEditDetails->setEnabled(false);
 }
 
 CGisListWks::~CGisListWks()
@@ -143,7 +141,14 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
 
 void CGisListWks::slotEditItem()
 {
-
+    IGisItem::mutexItems.lock();
+    IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().editItemByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotDeleteItem()

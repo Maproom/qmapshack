@@ -43,17 +43,14 @@
        <height>22</height>
       </size>
      </property>
-     <attribute name="headerVisible">
-      <bool>false</bool>
-     </attribute>
      <column>
       <property name="text">
-       <string notr="true">1</string>
+       <string notr="true">Name</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>2</string>
+       <string>State</string>
       </property>
      </column>
     </widget>

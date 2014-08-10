@@ -278,9 +278,9 @@ void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPai
     }
 }
 
-void IGisItem::removeHtml(QString &str)
+QString IGisItem::removeHtml(const QString &str)
 {
     QTextDocument html;
     html.setHtml(str);
-    str = html.toPlainText();
+    return html.toPlainText();
 }

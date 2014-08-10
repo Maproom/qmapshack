@@ -35,6 +35,8 @@ class CGisItemWpt : public IGisItem
         void setElevation(qint32 val);
         void setProximity(qreal val);
         void setIcon(const QString& name);
+        void setComment(const QString& str);
+        void setDescription(const QString& str);
 
         const QString& getName(){return wpt.name;}
         QString getInfo();

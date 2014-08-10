@@ -115,6 +115,8 @@ class IGisItem : public QObject, public QTreeWidgetItem
 
         virtual void edit(){}
 
+        static QString removeHtml(const QString &str);
+
     protected:
         friend class CGisProject;
         struct wpt_t;
@@ -125,7 +127,7 @@ class IGisItem : public QObject, public QTreeWidgetItem
         QString color2str(const QColor &color);
         void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
         void drawArrows(const QPolygonF &line, const QRectF &extViewport, QPainter& p);
-        void removeHtml(QString &str);
+
 
 
         struct color_t

@@ -68,6 +68,19 @@
         <file>icons/16x16/EditDetails.png</file>
         <file>icons/16x16/EditText.png</file>
         <file>icons/16x16/TimeZoneSetup.png</file>
+        <file>icons/16x16/Undo.png</file>
+        <file>icons/16x16/Redo.png</file>
+        <file>icons/16x16/Cut.png</file>
+        <file>icons/16x16/Copy.png</file>
+        <file>icons/16x16/Paste.png</file>
+        <file>icons/16x16/TextLeft.png</file>
+        <file>icons/16x16/TextRight.png</file>
+        <file>icons/16x16/TextCenter.png</file>
+        <file>icons/16x16/TextJustified.png</file>
+        <file>icons/16x16/TextBold.png</file>
+        <file>icons/16x16/TextUnderlined.png</file>
+        <file>icons/16x16/TextItalic.png</file>
+
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
@@ -118,6 +131,21 @@
         <file>icons/32x32/EditDetails.png</file>
         <file>icons/32x32/EditText.png</file>
         <file>icons/32x32/TimeZoneSetup.png</file>
+        <file>icons/32x32/Undo.png</file>
+        <file>icons/32x32/Redo.png</file>
+        <file>icons/32x32/Cut.png</file>
+        <file>icons/32x32/Copy.png</file>
+        <file>icons/32x32/Paste.png</file>
+        <file>icons/32x32/TextLeft.png</file>
+        <file>icons/32x32/TextRight.png</file>
+        <file>icons/32x32/TextCenter.png</file>
+        <file>icons/32x32/TextJustified.png</file>
+        <file>icons/32x32/TextBold.png</file>
+        <file>icons/32x32/TextUnderlined.png</file>
+        <file>icons/32x32/TextItalic.png</file>
+
+
+
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
@@ -168,6 +196,21 @@
         <file>icons/48x48/EditDetails.png</file>
         <file>icons/48x48/EditText.png</file>
         <file>icons/48x48/TimeZoneSetup.png</file>
+        <file>icons/48x48/Undo.png</file>
+        <file>icons/48x48/Redo.png</file>
+        <file>icons/48x48/Cut.png</file>
+        <file>icons/48x48/Copy.png</file>
+        <file>icons/48x48/Paste.png</file>
+        <file>icons/48x48/TextLeft.png</file>
+        <file>icons/48x48/TextRight.png</file>
+        <file>icons/48x48/TextCenter.png</file>
+        <file>icons/48x48/TextJustified.png</file>
+        <file>icons/48x48/TextBold.png</file>
+        <file>icons/48x48/TextUnderlined.png</file>
+        <file>icons/48x48/TextItalic.png</file>
+
+
+
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>

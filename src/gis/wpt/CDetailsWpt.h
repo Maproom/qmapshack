@@ -36,6 +36,7 @@ class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
         void slotChangeIcon();
         void slotChangeCmt();
         void slotChangeDesc();
+        void slotChangeReadOnlyMode(bool on);
 
     private:
         void setupGui();

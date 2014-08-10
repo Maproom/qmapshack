@@ -41,11 +41,22 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
     connect(toolEditCmt, SIGNAL(clicked()), this, SLOT(slotChangeCmt()));
     connect(toolEditDesc, SIGNAL(clicked()), this, SLOT(slotChangeDesc()));
+    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
 }
 
 CDetailsWpt::~CDetailsWpt()
 {
 
+}
+
+QString toLink(bool isReadOnly, const QString& href, const QString& str)
+{
+    if(isReadOnly)
+    {
+        return QString("%1").arg(str);
+    }
+
+    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
 }
 
 void CDetailsWpt::setupGui()
@@ -57,29 +68,31 @@ void CDetailsWpt::setupGui()
     QPointF pos = wpt.getPosition();
     GPS_Math_Deg_To_Str(pos.x(), pos.y(), strPos);
 
+    bool isReadOnly = wpt.isReadOnly();
+
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());
-    labelName->setText(QString("<a href='name'>%1</a>").arg(wpt.getName()));
-    labelPositon->setText(QString("<a href='position'>%1</a>").arg(strPos));
+    labelName->setText(toLink(isReadOnly, "name", wpt.getName()));
+    labelPositon->setText(toLink(isReadOnly, "position", strPos));
 
     if(wpt.getElevation() != NOINT)
     {
         IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
-        labelElevation->setText(QString("<a href='elevation'>%1</a> %2").arg(val).arg(unit));
+        labelElevation->setText(toLink(isReadOnly, "elevation", QString("%1 %2").arg(val).arg(unit)));
     }
     else
     {
-        labelElevation->setText(QString("<a href='elevation'>--</a>"));
+        labelElevation->setText(toLink(isReadOnly, "elevation", "--"));
     }
 
     if(wpt.getProximity() != NOFLOAT)
     {
         IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
-        labelProximity->setText(QString("<a href='proximity'>%1</a> %2").arg(val).arg(unit));
+        labelProximity->setText(toLink(isReadOnly, "proximity", QString("%1 %2").arg(val).arg(unit)));
     }
     else
     {
-        labelProximity->setText(QString("<a href='proximity'>--</a>"));
+        labelProximity->setText(toLink(isReadOnly, "proximity", "--"));
     }
 
     if(wpt.getComment().isEmpty())
@@ -100,6 +113,18 @@ void CDetailsWpt::setupGui()
         labelDesc->setText(wpt.getDescription());
     }
 
+    if(isReadOnly)
+    {
+        toolEditCmt->hide();
+        toolEditDesc->hide();
+    }
+    else
+    {
+        toolEditCmt->show();
+        toolEditDesc->show();
+    }
+
+    toolLock->setChecked(isReadOnly);
 }
 
 void CDetailsWpt::slotLinkActivated(const QString& link)
@@ -147,6 +172,11 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
 void CDetailsWpt::slotChangeIcon()
 {
 
+    if(wpt.isReadOnly())
+    {
+        return;
+    }
+
     CWptIconDialog dlg(toolIcon);
     if(dlg.exec() == QDialog::Accepted)
     {
@@ -175,4 +205,10 @@ void CDetailsWpt::slotChangeDesc()
         wpt.setDescription(dlg.getHtml());
         setupGui();
     }
+}
+
+void CDetailsWpt::slotChangeReadOnlyMode(bool on)
+{
+    wpt.setReadOnlyMode(on);
+    setupGui();
 }

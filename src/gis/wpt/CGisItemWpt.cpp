@@ -45,6 +45,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     {        
         const QDomNode& ext = xml.namedItem("extensions");
         readXml(ext, "ql:key", key);
+        readXml(ext, "ql:readOnly", readOnlyMode);
 
         const QDomNode& wptx1 = ext.namedItem("wptx1:WaypointExtension");
         readXml(wptx1, "wptx1:Proximity", proximity);
@@ -234,6 +235,7 @@ void CGisItemWpt::save(QDomNode& gpx)
     QDomElement xmlExt  = doc.createElement("extensions");
     xmlWpt.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key);
+    writeXml(xmlExt, "ql:readOnly", readOnlyMode);
 
     // write other well known extensions
     QDomElement wptx1  = doc.createElement("wptx1:WaypointExtension");
@@ -246,6 +248,8 @@ void CGisItemWpt::save(QDomNode& gpx)
         writeGcExt(xmlCache);
         xmlWpt.appendChild(xmlCache);
     }
+
+    setText(1,"");
 }
 
 void CGisItemWpt::readGcExt(const QDomNode& xmlCache)

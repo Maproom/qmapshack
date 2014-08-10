@@ -124,8 +124,8 @@ CMainWindow::CMainWindow()
 
     QByteArray tz;
     IUnit::tz_mode_e tzmode;
-    tz = cfg.value("main/units/timezone", "UTC").toByteArray();
-    tzmode = (IUnit::tz_mode_e)cfg.value("main/units/timezone/mode", IUnit::eTZUtc).toInt();
+    tz = cfg.value("Units/timezone", "UTC").toByteArray();
+    tzmode = (IUnit::tz_mode_e)cfg.value("Units/timezone/mode", IUnit::eTZUtc).toInt();
     IUnit::setTimeZoneSetup(tzmode, tz);
 
 
@@ -185,8 +185,8 @@ CMainWindow::~CMainWindow()
     IUnit::tz_mode_e tzmode;
     IUnit::getTimeZoneSetup(tzmode, tz);
 
-    cfg.setValue("main/units/timezone", tz);
-    cfg.setValue("main/units/timezone/mode", tzmode);
+    cfg.setValue("Units/timezone", tz);
+    cfg.setValue("Units/timezone/mode", tzmode);
 
 }
 

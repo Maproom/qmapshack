@@ -453,7 +453,7 @@ void IUnit::setUnitType(type_e t, QObject * parent)
     }
 
     QSettings cfg;
-    cfg.setValue("main/units/type",t);
+    cfg.setValue("Units/type",t);
 }
 
 void IUnit::meter2speed(qreal meter, QString& val, QString& unit)

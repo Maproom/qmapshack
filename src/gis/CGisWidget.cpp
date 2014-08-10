@@ -21,6 +21,7 @@
 #include "gis/IGisItem.h"
 #include "gis/CGisDraw.h"
 #include "CMainWindow.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -33,17 +34,16 @@ CGisWidget::CGisWidget(QWidget *parent)
     pSelf = this;
     setupUi(this);
 
-//    treeWks->header()->setSectionResizeMode(0,QHeaderView::Interactive);
-    treeWks->header()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
-//    treeWks->header()->setCascadingSectionResizes(true);
-
+    SETTINGS;
+    treeWks->header()->resizeSection(0, cfg.value("Workspace/treeWks/colum0/size", 100).toInt());
 
     connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 }
 
 CGisWidget::~CGisWidget()
 {
-
+    SETTINGS;
+    cfg.setValue("Workspace/treeWks/colum0/size", treeWks->header()->sectionSize(0));
 }
 
 void CGisWidget::loadGpx(const QString& filename)

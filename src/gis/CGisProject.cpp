@@ -351,7 +351,6 @@ void CGisProject::delItemByKey(const QString& key)
 
 void CGisProject::editItemByKey(const QString& key)
 {
-    QList<QTreeWidgetItem*> items;
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));

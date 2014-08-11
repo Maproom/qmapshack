@@ -73,6 +73,7 @@ set( SRCS
     gis/wpt/CScrOptWpt.cpp
     gis/wpt/CDetailsWpt.cpp
     gis/wpt/CDetailsGeoCache.cpp
+    gis/wpt/CProjWpt.cpp
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
     gis/rte/CGisItemRte.cpp
@@ -148,7 +149,8 @@ set( HDRS
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h
-    gis/wpt/CDetailsGeoCache.cpp
+    gis/wpt/CDetailsGeoCache.h
+    gis/wpt/CProjWpt.h
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
     gis/rte/CGisItemRte.h
@@ -179,6 +181,7 @@ set( UIS
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui
+    gis/wpt/IProjWpt.ui
     gis/trk/IScrOptTrk.ui
     gis/rte/IScrOptRte.ui
     units/ITimeZoneSetup.ui

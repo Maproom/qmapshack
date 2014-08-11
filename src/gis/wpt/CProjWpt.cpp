@@ -16,36 +16,37 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTWPT_H
-#define CSCROPTWPT_H
+#include "gis/wpt/CProjWpt.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "units/IUnit.h"
 
-#include "mouse/IScrOpt.h"
+#include <QtWidgets>
 
-#include <QWidget>
-#include "ui_IScrOptWpt.h"
-
-class CGisItemWpt;
-class IMouse;
-
-class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
+CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
+    : QDialog(parent)
+    , wpt(wpt)
 {
-    Q_OBJECT
-    public:
-        CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptWpt();
+    setupUi(this);
 
-        void draw(QPainter& p);
+    QString val, unit;
+    IUnit::self().meter2distance(0,val,unit);
+    labelDistUnit->setText(unit);
+}
 
-    private slots:
-        void slotDelete();
-        void slotEdit();
-        void slotMove();
-        void slotProj();
+CProjWpt::~CProjWpt()
+{
 
-    private:
-        QString key;
-        QPointF anchor;
-};
+}
 
-#endif //CSCROPTWPT_H
+void CProjWpt::accept()
+{
+    qreal dist = lineDist->text().toDouble();
+    qreal head = lineHead->text().toDouble();
 
+    if((dist <= 0) || (head > 360) || (head < -360))
+    {
+        return;
+    }
+
+    QDialog::accept();
+}

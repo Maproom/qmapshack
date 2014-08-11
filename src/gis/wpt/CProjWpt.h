@@ -16,36 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTWPT_H
-#define CSCROPTWPT_H
+#ifndef CPROJWPT_H
+#define CPROJWPT_H
 
-#include "mouse/IScrOpt.h"
-
-#include <QWidget>
-#include "ui_IScrOptWpt.h"
+#include <QDialog>
+#include "ui_IProjWpt.h"
 
 class CGisItemWpt;
-class IMouse;
 
-class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
+class CProjWpt : public QDialog, private Ui::IProjWpt
 {
     Q_OBJECT
     public:
-        CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptWpt();
+        CProjWpt(CGisItemWpt &wpt, QWidget * parent);
+        virtual ~CProjWpt();
 
-        void draw(QPainter& p);
-
-    private slots:
-        void slotDelete();
-        void slotEdit();
-        void slotMove();
-        void slotProj();
+    public slots:
+        void accept();
 
     private:
-        QString key;
-        QPointF anchor;
+        CGisItemWpt& wpt;
 };
 
-#endif //CSCROPTWPT_H
+#endif //CPROJWPT_H
 

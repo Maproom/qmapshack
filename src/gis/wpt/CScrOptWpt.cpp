@@ -19,6 +19,7 @@
 
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CProjWpt.h"
 #include "gis/CGisWidget.h"
 #include "mouse/IMouse.h"
 #include "canvas/CCanvas.h"
@@ -36,6 +37,11 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
     label->setText(IGisItem::removeHtml(wpt->getInfo()));
 
 
+    if(wpt->isReadOnly())
+    {
+        toolMove->setEnabled(false);
+    }
+
     anchor = wpt->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
@@ -43,6 +49,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
+    connect(toolMove, SIGNAL(clicked()), this, SLOT(slotMove()));
+    connect(toolProj, SIGNAL(clicked()), this, SLOT(slotProj()));
 }
 
 CScrOptWpt::~CScrOptWpt()
@@ -60,6 +68,24 @@ void CScrOptWpt::slotEdit()
     CGisWidget::self().editItemByKey(key);
     deleteLater();
 }
+
+void CScrOptWpt::slotMove()
+{
+
+}
+
+void CScrOptWpt::slotProj()
+{
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+    if(wpt == 0)
+    {
+        return;
+    }
+
+    CProjWpt dlg(*wpt, 0);
+    dlg.exec();
+}
+
 
 void CScrOptWpt::draw(QPainter& p)
 {

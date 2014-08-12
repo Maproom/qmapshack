@@ -80,6 +80,9 @@
      <property name="pixmap">
       <pixmap resource="../../resources.qrc">:/pics/compass.png</pixmap>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </item>
    <item>

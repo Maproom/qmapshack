@@ -130,16 +130,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/FolderDEM.png</pixmap>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>

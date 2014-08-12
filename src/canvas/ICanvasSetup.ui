@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>109</height>
+    <height>98</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -67,16 +67,6 @@
        </property>
        <property name="standardButtons">
         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/SetupMapWorkspace.png</pixmap>
        </property>
       </widget>
      </item>

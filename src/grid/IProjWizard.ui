@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>580</width>
-    <height>369</height>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -168,23 +168,11 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/GridWizzard.png</pixmap>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

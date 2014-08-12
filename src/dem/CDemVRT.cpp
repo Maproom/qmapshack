@@ -132,7 +132,7 @@ CDemVRT::~CDemVRT()
     delete dataset;
 }
 
-qreal CDemVRT::getElevation(const QPointF& pos)
+qreal CDemVRT::getEelevationAt(const QPointF& pos)
 {
     if(pjsrc == 0) return NOFLOAT;
 

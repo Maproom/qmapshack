@@ -48,7 +48,7 @@ class CDemDraw : public IDrawContext
         void loadConfigForDemItem(CDemItem * item);
 
 
-        qreal getElevation(const QPointF& pos);
+        qreal getEelevationAt(const QPointF& pos);
 
         void setProjection(const QString& proj);
 

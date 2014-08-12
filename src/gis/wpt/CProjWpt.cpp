@@ -18,9 +18,11 @@
 
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CWptIconDialog.h"
 #include "gis/CGisProject.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -31,9 +33,18 @@ CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
 {
     setupUi(this);
 
+    name = wpt.getName();
+
+    toolIcon->setIcon(wpt.getIcon());
+    toolIcon->setObjectName(wpt.getIconName());
+    labelName->setText(QString("<a href='name'>%2</a>").arg(name));
+
     QString val, unit;
     IUnit::self().meter2distance(0,val,unit);
     labelDistUnit->setText(unit);
+
+    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotChangeName()));
+    connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
 }
 
 CProjWpt::~CProjWpt()
@@ -41,12 +52,30 @@ CProjWpt::~CProjWpt()
 
 }
 
+void CProjWpt::slotChangeIcon()
+{
+    CWptIconDialog dlg(toolIcon);
+    dlg.exec();
+}
+
+void CProjWpt::slotChangeName()
+{
+    QString n = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
+    if(n.isEmpty())
+    {
+        return;
+    }
+    name = n;
+    labelName->setText(QString("<a href='name'>%2</a>").arg(name));
+}
+
+
 void CProjWpt::accept()
 {
     qreal dist = lineDist->text().toDouble();
     qreal bearing = lineBearing->text().toDouble();
 
-    if((dist <= 0) || (bearing > 360) || (bearing < -360))
+    if((dist <= 0) || (bearing > 180) || (bearing < -180))
     {
         return;
     }
@@ -60,7 +89,19 @@ void CProjWpt::accept()
     QPointF pos = wpt.getPosition() * DEG_TO_RAD;
     pos = GPS_Math_Wpt_Projection(pos, dist, bearing * DEG_TO_RAD) * RAD_TO_DEG;
 
-    new CGisItemWpt(pos, wpt, project);
+    CGisItemWpt * newWpt = new CGisItemWpt(pos, wpt, project);
+    newWpt->setName(name);
+    newWpt->setIcon(toolIcon->objectName());
+
+    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    if(ele == NOFLOAT)
+    {
+        newWpt->setElevation(NOINT);
+    }
+    else
+    {
+        newWpt->setElevation(qRound(ele));
+    }
 
     QDialog::accept();
 }

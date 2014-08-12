@@ -46,6 +46,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         const QFont& getMapFont(){return mapFont;}
 
         void zoomWksTo(const QRectF rect);
+        qreal getEelevationAt(const QPointF &pos);
 
     private slots:
         void slotAbout();

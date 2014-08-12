@@ -76,14 +76,8 @@ void CScrOptWpt::slotMove()
 
 void CScrOptWpt::slotProj()
 {
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
-    if(wpt == 0)
-    {
-        return;
-    }
-
-    CProjWpt dlg(*wpt, 0);
-    dlg.exec();
+    CGisWidget::self().projWptByKey(key);
+    deleteLater();
 }
 
 

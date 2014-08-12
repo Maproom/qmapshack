@@ -34,8 +34,13 @@ class CProjWpt : public QDialog, private Ui::IProjWpt
     public slots:
         void accept();
 
+    private slots:
+        void slotChangeIcon();
+        void slotChangeName();
+
     private:
         CGisItemWpt& wpt;
+        QString name;
 };
 
 #endif //CPROJWPT_H

@@ -27,6 +27,7 @@
 
 
 #include <QtWidgets>
+#include <proj_api.h>
 
 CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     : QDialog(parent)
@@ -93,6 +94,11 @@ void CDetailsWpt::setupGui()
     else
     {
         labelProximity->setText(toLink(isReadOnly, "proximity", "--"));
+    }
+
+    if(wpt.getTime().isValid())
+    {
+        labelTime->setText(IUnit::datetime2string(wpt.getTime(), QPointF(pos.x()*DEG_TO_RAD, pos.y()*DEG_TO_RAD)));
     }
 
     if(IGisItem::removeHtml(wpt.getComment()).simplified().isEmpty())

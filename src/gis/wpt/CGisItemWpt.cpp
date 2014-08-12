@@ -41,8 +41,10 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisP
     , posScreen(NOPOINTF)
 {
     *this = parentWpt;
-    wpt.lon = pos.x();
-    wpt.lat = pos.y();
+    wpt.lon     = pos.x();
+    wpt.lat     = pos.y();
+    wpt.time    = QDateTime::currentDateTimeUtc();
+
     key.clear();
     readOnlyMode = false;
 
@@ -52,12 +54,6 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisP
     setIcon();
     setToolTip(0, getInfo());
     genKey();
-
-    CGisListWks * wks = dynamic_cast<CGisListWks*>(project->treeWidget());
-    if(wks != 0)
-    {
-        emit wks->sigChanged();
-    }
 }
 
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *project)

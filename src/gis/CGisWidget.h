@@ -72,6 +72,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void editItemByKey(const QString& key);
 
+        void projWptByKey(const QString& key);
+
     signals:
         void sigChanged();
 

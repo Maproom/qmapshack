@@ -20,6 +20,8 @@
 #include "gis/CGisProject.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisDraw.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CProjWpt.h"
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 
@@ -168,7 +170,23 @@ void CGisWidget::editItemByKey(const QString& key)
     }
 
     IGisItem::mutexItems.unlock();
+    emit sigChanged();
+}
 
+void CGisWidget::projWptByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(wpt == 0)
+    {
+        return;
+    }
+
+    CProjWpt dlg(*wpt, 0);
+    dlg.exec();
+
+    IGisItem::mutexItems.unlock();
     emit sigChanged();
 }
 

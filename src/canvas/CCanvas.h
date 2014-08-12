@@ -63,11 +63,12 @@ class CCanvas : public QWidget
 
         void setup();
         QString getProjection();
-        void    setProjection(const QString& proj);
+        void    setProjection(const QString& proj);        
+        qreal getElevationAt(const QPointF &pos);
 
         void moveMap(const QPointF &delta);
         void zoomTo(const QRectF& rect);
-        void displayInfo(const QPoint& px);
+        void displayInfo(const QPoint& px);        
 
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color);
         static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font);

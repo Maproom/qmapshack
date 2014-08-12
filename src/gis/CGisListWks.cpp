@@ -20,6 +20,7 @@
 #include "gis/CGisProject.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -38,7 +39,9 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuItem        = new QMenu(this);
     actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
-    actionDelete    = menuItem->addAction(QIcon("://icons/48x48/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+    actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+
 }
 
 CGisListWks::~CGisListWks()
@@ -72,6 +75,18 @@ void CGisListWks::slotContextMenu(const QPoint& point)
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
     if(gisItem != 0)
     {
+        // try to cast item to special types and hide/show actions on result
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
+        if(wpt == 0)
+        {
+            actionProjWpt->setVisible(false);
+        }
+        else
+        {
+            actionProjWpt->setVisible(true);
+        }
+
+        // display menu
         QPoint p = mapToGlobal(point);
         menuItem->exec(p);
     }
@@ -159,6 +174,18 @@ void CGisListWks::slotDeleteItem()
     {
         QString key = gisItem->getKey();
         CGisWidget::self().delItemByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotProjWpt()
+{
+    IGisItem::mutexItems.lock();
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().projWptByKey(key);
     }
     IGisItem::mutexItems.unlock();
 }

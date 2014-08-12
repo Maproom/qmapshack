@@ -491,6 +491,11 @@ void CCanvas::setProjection(const QString& proj)
     gis->setProjection(proj);
 }
 
+qreal CCanvas::getElevationAt(const QPointF& pos)
+{
+    return dem->getElevation(pos);
+}
+
 void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 {
     map->zoom(in, needsRedraw);

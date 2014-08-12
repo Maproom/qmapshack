@@ -239,6 +239,16 @@ void CMainWindow::zoomWksTo(const QRectF rect)
     }
 }
 
+qreal CMainWindow::getEelevationAt(const QPointF& pos)
+{
+    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    if(canvas)
+    {
+        return canvas->getElevationAt(pos);
+    }
+    return NOFLOAT;
+}
+
 void CMainWindow::slotAbout()
 {
     CAbout dlg(this);

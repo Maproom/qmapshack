@@ -18,9 +18,12 @@
 
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/CGisProject.h"
 #include "units/IUnit.h"
+#include "GeoMath.h"
 
 #include <QtWidgets>
+#include <proj_api.h>
 
 CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
     : QDialog(parent)
@@ -41,12 +44,23 @@ CProjWpt::~CProjWpt()
 void CProjWpt::accept()
 {
     qreal dist = lineDist->text().toDouble();
-    qreal head = lineHead->text().toDouble();
+    qreal bearing = lineBearing->text().toDouble();
 
-    if((dist <= 0) || (head > 360) || (head < -360))
+    if((dist <= 0) || (bearing > 360) || (bearing < -360))
     {
         return;
     }
+
+    CGisProject * project = dynamic_cast<CGisProject*>(wpt.parent());
+    if(project == 0)
+    {
+        return;
+    }
+
+    QPointF pos = wpt.getPosition() * DEG_TO_RAD;
+    pos = GPS_Math_Wpt_Projection(pos, dist, bearing * DEG_TO_RAD) * RAD_TO_DEG;
+
+    new CGisItemWpt(pos, wpt, project);
 
     QDialog::accept();
 }

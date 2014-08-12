@@ -37,9 +37,9 @@ class CGisDraw;
 class IScrOpt;
 class IMouse;
 
-class IGisItem : public QObject, public QTreeWidgetItem
+class IGisItem : public QTreeWidgetItem
 {
-    Q_OBJECT
+
     public:
         IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();
@@ -75,6 +75,14 @@ class IGisItem : public QObject, public QTreeWidgetItem
         */
         virtual QString getInfo() = 0;
 
+        /**
+            @brief Edit content of item.
+
+            This is quite dependent on the item. The default implemntation does nothing. It has to be
+            overwritten and the item has to generate what ever is needed to edit/view it's details.
+
+         */
+        virtual void edit(){}
 
         /**
            @brief Get the dimension of the item
@@ -107,7 +115,19 @@ class IGisItem : public QObject, public QTreeWidgetItem
         */
         virtual bool isCloseTo(const QPointF& pos) = 0;
 
+        /**
+           @brief Query if this item is read only
+           @return True if it is read only.
+         */
         bool isReadOnly(){return readOnlyMode;}
+        /**
+           @brief Set the read only mode.
+
+           This is quite dependent on the item. The default implementation will display a
+           message box with a warning and ask the user to confirm.
+
+           @param readOnly      set true to make item read only
+         */
         virtual void setReadOnlyMode(bool readOnly);
 
         virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
@@ -116,14 +136,14 @@ class IGisItem : public QObject, public QTreeWidgetItem
 
         virtual void gainUserFocus() = 0;
 
-        virtual void edit(){}
-
         static QString removeHtml(const QString &str);
 
     protected:
         friend class CGisProject;
         struct wpt_t;
+        /// read waypoint data from an XML snippet
         void readWpt(const QDomNode& xml, wpt_t &wpt);
+        /// write waypoint data to an XML snippet
         void writeWpt(QDomElement &xml, const wpt_t &wpt);
         virtual void genKey() = 0;
         QColor str2color(const QString& name);

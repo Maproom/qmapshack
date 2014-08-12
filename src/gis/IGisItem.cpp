@@ -66,7 +66,7 @@ void IGisItem::setReadOnlyMode(bool readOnly)
     if(readOnlyMode && !readOnly)
     {
         QString str = QObject::tr("This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.");
-        if(QMessageBox::warning(0, tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok) != QMessageBox::Ok)
+        if(QMessageBox::warning(0, QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok) != QMessageBox::Ok)
         {
             return;
         }

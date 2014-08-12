@@ -23,6 +23,7 @@
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
+#include "gis/CGisListWks.h"
 #include "canvas/CCanvas.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
@@ -34,8 +35,33 @@
 
 QString CGisItemWpt::keyUserFocus;
 
-CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
-    : IGisItem(parent)
+CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisProject * project)
+    : IGisItem(project)
+    , proximity(NOFLOAT)
+    , posScreen(NOPOINTF)
+{
+    *this = parentWpt;
+    wpt.lon = pos.x();
+    wpt.lat = pos.y();
+    key.clear();
+    readOnlyMode = false;
+
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    setText(1, "*");
+    setText(0, wpt.name);
+    setIcon();
+    setToolTip(0, getInfo());
+    genKey();
+
+    CGisListWks * wks = dynamic_cast<CGisListWks*>(project->treeWidget());
+    if(wks != 0)
+    {
+        emit wks->sigChanged();
+    }
+}
+
+CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *project)
+    : IGisItem(project)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
@@ -66,7 +92,6 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
     // --- stop read and process data ----
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-
     setText(0, wpt.name);
     setIcon();
     setToolTip(0, getInfo());
@@ -76,6 +101,23 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *parent)
 CGisItemWpt::~CGisItemWpt()
 {
 
+}
+
+CGisItemWpt& CGisItemWpt::operator=(const CGisItemWpt& w)
+{
+    wpt             = w.wpt;
+    proximity       = w.proximity;
+    geocache        = w.geocache;
+    focus           = w.focus;
+    posScreen       = w.posScreen;
+
+
+    readOnlyMode    = w.readOnlyMode;
+    key             = w.key;
+    icon            = w.icon;
+    boundingRect    = w.boundingRect;
+
+    return *this;
 }
 
 void CGisItemWpt::genKey()

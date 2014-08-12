@@ -81,6 +81,7 @@
         <file>icons/16x16/TextUnderlined.png</file>
         <file>icons/16x16/TextItalic.png</file>
         <file>icons/16x16/Lock.png</file>
+        <file>icons/16x16/UnLock.png</file>
         <file>icons/16x16/WptMove.png</file>
         <file>icons/16x16/WptProj.png</file>
 
@@ -147,6 +148,7 @@
         <file>icons/32x32/TextUnderlined.png</file>
         <file>icons/32x32/TextItalic.png</file>
         <file>icons/32x32/Lock.png</file>
+        <file>icons/32x32/UnLock.png</file>
         <file>icons/32x32/WptMove.png</file>
         <file>icons/32x32/WptProj.png</file>
 
@@ -215,6 +217,7 @@
         <file>icons/48x48/TextUnderlined.png</file>
         <file>icons/48x48/TextItalic.png</file>
         <file>icons/48x48/Lock.png</file>
+        <file>icons/48x48/UnLock.png</file>
         <file>icons/48x48/WptMove.png</file>
         <file>icons/48x48/WptProj.png</file>
 
@@ -279,5 +282,6 @@
         <file>animation/loader2.gif</file>
         <file>pics/timezones.png</file>
         <file>pics/splash.png</file>
+        <file>pics/compass.png</file>
     </qresource>
 </RCC>

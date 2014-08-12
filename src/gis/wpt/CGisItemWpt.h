@@ -68,9 +68,11 @@ class CGisItemWpt : public IGisItem
             QList<geocachelog_t> logs;
         };
 
-
-        CGisItemWpt(const QDomNode& xml, CGisProject * parent);
+        CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, CGisProject *project);
+        CGisItemWpt(const QDomNode& xml, CGisProject * project);
         virtual ~CGisItemWpt();
+
+        CGisItemWpt& operator=(const CGisItemWpt& w);
 
         void setName(const QString& str);
         void setPosition(const QPointF& pos);
@@ -110,13 +112,17 @@ class CGisItemWpt : public IGisItem
 
         static QString keyUserFocus;
 
-
+        // --- start all waypoint data ----
         wpt_t wpt;
         qreal proximity;
         geocache_t geocache;
 
         QPointF focus;
         QPointF posScreen;
+
+        // additonal data, common to all IGisItems, is found in IItem //
+
+        // --- stop all waypoint data ----
 
 };
 

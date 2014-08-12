@@ -36,7 +36,19 @@ class CGisProject : public QTreeWidgetItem
         CGisProject(const QString& filename, const QString &key, CGisListWks * parent);
         virtual ~CGisProject();
 
+        /**
+           @brief Check if the project was initialized correctly.
+
+           For example a if a GPX file does not load correctly the project is invalid.
+
+           @return True if project is valid
+         */
         bool  isValid(){return valid;}
+
+        /**
+           @brief Get unique project key.
+           @return A MD5 hash string
+         */
         const QString& getKey(){return key;}
 
         /**
@@ -62,6 +74,11 @@ class CGisProject : public QTreeWidgetItem
         */
         void delItemByKey(const QString& key);
 
+        /**
+           @brief Call IGisItem::edit() method for items with given key
+
+           @param key   a MD5 hash key
+         */
         void editItemByKey(const QString& key);
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);

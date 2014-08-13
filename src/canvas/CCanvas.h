@@ -25,6 +25,7 @@ class CMapDraw;
 class CGrid;
 class CDemDraw;
 class CGisDraw;
+class CGisItemWpt;
 class QSettings;
 class QPointF;
 class IMouse;
@@ -89,6 +90,8 @@ class CCanvas : public QWidget
         static QBrush brushBackWhite;
         static QBrush brushBackYellow;
 
+        void resetMouse();
+        void setMouseMoveWpt(CGisItemWpt& wpt);
 
     signals:
         void sigMousePosition(const QPointF& pos, qreal ele);

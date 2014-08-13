@@ -230,9 +230,14 @@ void CMainWindow::addDemList(CDemList * list, const QString &name)
     tabDem->addTab(list,name);
 }
 
-void CMainWindow::zoomWksTo(const QRectF rect)
+CCanvas * CMainWindow::getVisibleCanvas()
 {
-    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    return dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+}
+
+void CMainWindow::zoomCanvasTo(const QRectF rect)
+{
+    CCanvas * canvas = getVisibleCanvas();
     if(canvas)
     {
         canvas->zoomTo(rect);
@@ -241,7 +246,7 @@ void CMainWindow::zoomWksTo(const QRectF rect)
 
 qreal CMainWindow::getEelevationAt(const QPointF& pos)
 {
-    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    CCanvas * canvas = getVisibleCanvas();
     if(canvas)
     {
         return canvas->getElevationAt(pos);
@@ -376,7 +381,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
 
     if(actionShowGrid->isChecked())
     {
-        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+        CCanvas * canvas = getVisibleCanvas();
         if(canvas)
         {
             QString str;
@@ -393,7 +398,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
 
 void CMainWindow::slotUpdateCurrentWidget()
 {
-    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    CCanvas * canvas = getVisibleCanvas();
     if(canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
@@ -428,7 +433,7 @@ void CMainWindow::slotSetupMapFont()
 
 void CMainWindow::slotSetupGrid()
 {
-    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    CCanvas * canvas = getVisibleCanvas();
     if(canvas == 0)
     {
         return;
@@ -448,7 +453,7 @@ void CMainWindow::slotSetupDemPath()
 
 void CMainWindow::slotSetupMapWks()
 {
-    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    CCanvas * canvas = getVisibleCanvas();
     if(canvas == 0)
     {
         return;

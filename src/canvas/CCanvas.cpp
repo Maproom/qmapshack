@@ -26,6 +26,7 @@
 #include "grid/CGridSetup.h"
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
+#include "mouse/CMouseMoveWpt.h"
 #include "gis/CGisDraw.h"
 
 
@@ -120,6 +121,29 @@ void CCanvas::loadConfig(QSettings& cfg)
     dem->zoom(map->zoom());
     gis->zoom(map->zoom());
 }
+
+void CCanvas::resetMouse()
+{
+    mouse->deleteLater();
+    mouse = new CMouseNormal(this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
+void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
+{
+    mouse->deleteLater();
+    mouse = new CMouseMoveWpt(wpt, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
 
 void CCanvas::resizeEvent(QResizeEvent * e)
 {

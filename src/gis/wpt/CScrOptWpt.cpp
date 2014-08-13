@@ -71,7 +71,8 @@ void CScrOptWpt::slotEdit()
 
 void CScrOptWpt::slotMove()
 {
-
+    CGisWidget::self().moveWptByKey(key);
+    deleteLater();
 }
 
 void CScrOptWpt::slotProj()

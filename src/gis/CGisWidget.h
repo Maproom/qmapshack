@@ -74,6 +74,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void projWptByKey(const QString& key);
 
+        void moveWptByKey(const QString& key);
+
     signals:
         void sigChanged();
 

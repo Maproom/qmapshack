@@ -277,6 +277,7 @@
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMoveMap.png</file>
+        <file>cursors/cursorMoveWpt.png</file>
         <file>cursors/wptHighlight.png</file>
         <file>animation/loader.gif</file>
         <file>animation/loader2.gif</file>

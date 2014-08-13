@@ -178,16 +178,29 @@ void CGisWidget::projWptByKey(const QString& key)
     IGisItem::mutexItems.lock();
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
-    if(wpt == 0)
+    if(wpt != 0)
     {
-        return;
+        CProjWpt dlg(*wpt, 0);
+        dlg.exec();
     }
-
-    CProjWpt dlg(*wpt, 0);
-    dlg.exec();
 
     IGisItem::mutexItems.unlock();
     emit sigChanged();
+}
+
+void CGisWidget::moveWptByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(wpt != 0)
+    {
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas != 0)
+        {
+            canvas->setMouseMoveWpt(*wpt);
+        }
+    }
+    IGisItem::mutexItems.unlock();
 }
 
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)

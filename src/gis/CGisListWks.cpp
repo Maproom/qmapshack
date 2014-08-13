@@ -149,7 +149,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
     if(gisItem != 0)
     {
-        CMainWindow::self().zoomWksTo(gisItem->getBoundingRect());
+        CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
     }    
     IGisItem::mutexItems.unlock();
 }

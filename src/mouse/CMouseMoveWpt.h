@@ -21,13 +21,16 @@
 
 #include "mouse/IMouse.h"
 
+#include <QPixmap>
+
 class CCanvas;
 class CGisItemWpt;
+class CGisDraw;
 
 class CMouseMoveWpt : public IMouse
 {
     public:
-        CMouseMoveWpt(CGisItemWpt& wpt, CCanvas * parent);
+        CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
         virtual ~CMouseMoveWpt();
 
         void draw(QPainter& p, const QRect &rect);
@@ -35,6 +38,15 @@ class CMouseMoveWpt : public IMouse
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);
         void wheelEvent(QWheelEvent * e);
+
+
+    private:
+        CGisDraw * gis;
+        QString key;
+        QPointF origPos;
+        QPointF newPos;
+        QPointF focus;
+        QPixmap icon;
 
 };
 

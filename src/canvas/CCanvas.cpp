@@ -136,7 +136,7 @@ void CCanvas::resetMouse()
 void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
 {
     mouse->deleteLater();
-    mouse = new CMouseMoveWpt(wpt, this);
+    mouse = new CMouseMoveWpt(wpt, gis, this);
     if(underMouse())
     {
         QApplication::restoreOverrideCursor();

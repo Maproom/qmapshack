@@ -173,11 +173,15 @@ void CGisListWks::slotEditItem()
 void CGisListWks::slotDeleteItem()
 {
     IGisItem::mutexItems.lock();
-    IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
-    if(gisItem != 0)
+
+    foreach(QTreeWidgetItem * item, selectedItems())
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().delItemByKey(key);
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        if(gisItem != 0)
+        {
+            QString key = gisItem->getKey();
+            CGisWidget::self().delItemByKey(key);
+        }
     }
     IGisItem::mutexItems.unlock();
 }

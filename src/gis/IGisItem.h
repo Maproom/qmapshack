@@ -141,17 +141,33 @@ class IGisItem : public QTreeWidgetItem
     protected:
         friend class CGisProject;
         struct wpt_t;
+        struct color_t;
+
         /// read waypoint data from an XML snippet
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         /// write waypoint data to an XML snippet
         void writeWpt(QDomElement &xml, const wpt_t &wpt);
+        /// gnerate a unique key from item's data
         virtual void genKey() = 0;
+        /// convert a color string from GPX to a QT color
         QColor str2color(const QString& name);
+        /// convertr a QT color to a string to be used in a GPX file
         QString color2str(const QColor &color);
+        /// to optimize drawing of large polylines split the line into sections that are visible
         void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
+        /// ditribute arrows over a polyline
         void drawArrows(const QPolygonF &line, const QRectF &extViewport, QPainter& p);
+        /// call when ever you make a change to the item's data
+        void changed(const QString& what);
 
+        quint32 flags;
+        QString key;
+        QPixmap icon;
+        QRectF boundingRect;
+        static const color_t colorMap[];
 
+        typedef QStringList history_t;
+        history_t history;
 
         struct color_t
         {
@@ -214,11 +230,6 @@ class IGisItem : public QTreeWidgetItem
             ,eFlagTainted       = 0x00000004
         };
 
-        quint32 flags;
-        QString key;
-        QPixmap icon;
-        QRectF boundingRect;
-        static const color_t colorMap[];
 
 
         static inline void readXml(const QDomNode& xml, const QString& tag, bool& value)
@@ -354,6 +365,23 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
+        static inline void readXml(const QDomNode& xml, history_t& history)
+        {
+            if(xml.namedItem("ql:history").isElement())
+            {
+                const QDomElement& xmlHistory = xml.namedItem("ql:history").toElement();
+
+                const QDomNodeList& entries = xmlHistory.elementsByTagName("ql:event");
+                int N = entries.count();
+                for(int n = 0; n < N; ++n)
+                {
+                    const QDomNode& entry = entries.item(n);
+                    history << entry.toElement().text();
+                }
+            }
+        }
+
+
         static inline void writeXml(QDomNode& xml, const QString& tag, qint32 val)
         {
             if(val != NOINT)
@@ -446,6 +474,19 @@ class IGisItem : public QTreeWidgetItem
                     elem.setAttribute("href", link.uri.toString());
                     writeXml(elem, "text", link.text);
                     writeXml(elem, "type", link.type);
+                }
+            }
+        }
+
+        static inline void writeXml(QDomNode& xml, const history_t& history)
+        {
+            if(!history.isEmpty())
+            {
+                QDomElement xmlHistory = xml.ownerDocument().createElement("ql:history");
+                xml.appendChild(xmlHistory);
+                foreach(const QString& entry, history)
+                {
+                    writeXml(xmlHistory, "ql:event", entry);
                 }
             }
         }

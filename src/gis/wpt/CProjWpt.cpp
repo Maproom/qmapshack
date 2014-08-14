@@ -90,17 +90,31 @@ void CProjWpt::accept()
     pos = GPS_Math_Wpt_Projection(pos, dist, bearing * DEG_TO_RAD) * RAD_TO_DEG;
 
     CGisItemWpt * newWpt = new CGisItemWpt(pos, wpt, project);
-    newWpt->setName(name);
-    newWpt->setIcon(toolIcon->objectName());
+
+    if(name != newWpt->getName())
+    {
+        newWpt->setName(name);
+    }
+
+    if(toolIcon->objectName() != newWpt->getIconName())
+    {
+        newWpt->setIcon(toolIcon->objectName());
+    }
 
     qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
     if(ele == NOFLOAT)
     {
-        newWpt->setElevation(NOINT);
+        if(newWpt->getElevation() != NOINT)
+        {
+            newWpt->setElevation(NOINT);
+        }
     }
     else
     {
-        newWpt->setElevation(qRound(ele));
+        if(newWpt->getElevation() != qRound(ele))
+        {
+            newWpt->setElevation(qRound(ele));
+        }
     }
 
     QDialog::accept();

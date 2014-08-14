@@ -69,6 +69,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *project)
         const QDomNode& ext = xml.namedItem("extensions");
         readXml(ext, "ql:key", key);
         readXml(ext, "ql:flags", flags);
+        readXml(ext, history);
 
         const QDomNode& wptx1 = ext.namedItem("wptx1:WaypointExtension");
         readXml(wptx1, "wptx1:Proximity", proximity);
@@ -213,53 +214,47 @@ void CGisItemWpt::setIcon()
 
 void CGisItemWpt::setName(const QString& str)
 {
-    setText(1, "*");
     setText(0, str);
     wpt.name = str;
-    setToolTip(0,getInfo());
+    changed(QObject::tr("Changed name"));
 }
 
 void CGisItemWpt::setPosition(const QPointF& pos)
 {
-    setText(1,"*");
     wpt.lon = pos.x();
     wpt.lat = pos.y();
-    setToolTip(0,getInfo());
+    changed(QObject::tr("Changed position"));
 }
 
 void CGisItemWpt::setElevation(qint32 val)
 {
-    setText(1,"*");
     wpt.ele = val;
-    setToolTip(0,getInfo());
+    changed(QObject::tr("Changed elevation"));
 }
 
 void CGisItemWpt::setProximity(qreal val)
 {
-    setText(1,"*");
     proximity = val;
-    setToolTip(0,getInfo());
+    changed(QObject::tr("Changed proximity"));
 }
 
 void CGisItemWpt::setIcon(const QString& name)
-{
-    setText(1,"*");
+{    
     wpt.sym = name;
     setIcon();
+    changed(QObject::tr("Changed icon"));
 }
 
 void CGisItemWpt::setComment(const QString& str)
 {
-    setText(1,"*");
     wpt.cmt = str;
-    setToolTip(0,getInfo());
+    changed(QObject::tr("Changed comment"));
 }
 
 void CGisItemWpt::setDescription(const QString& str)
 {
-    setText(1,"*");
     wpt.desc = str;
-    setToolTip(0,getInfo());
+    changed(QObject::tr("Changed description"));
 }
 
 void CGisItemWpt::save(QDomNode& gpx)
@@ -275,6 +270,7 @@ void CGisItemWpt::save(QDomNode& gpx)
     xmlWpt.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key);
     writeXml(xmlExt, "ql:flags", flags);
+    writeXml(xmlExt, history);
 
     // write other well known extensions
     QDomElement wptx1  = doc.createElement("wptx1:WaypointExtension");

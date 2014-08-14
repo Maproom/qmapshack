@@ -119,6 +119,20 @@ void CDetailsWpt::setupGui()
         labelDesc->setText(wpt.getDescription());
     }
 
+    if(!wpt.getHistory().isEmpty())
+    {
+        textHistory->clear();
+        foreach(const QString& entry, wpt.getHistory())
+        {
+            textHistory->append(entry);
+        }
+        textHistory->show();
+    }
+    else
+    {
+        textHistory->hide();
+    }
+
     if(isReadOnly)
     {
         toolEditCmt->hide();

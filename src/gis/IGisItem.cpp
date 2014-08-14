@@ -61,6 +61,24 @@ IGisItem::~IGisItem()
 
 }
 
+void IGisItem::changed(const QString &what)
+{
+    setText(1,"*");
+    setToolTip(0,getInfo());
+
+    /*
+        If item gets changed but it's origin is not QMapShack
+        then it is assumed to be tainted, as imported data should
+        never be changed without notice.
+    */
+    if(!(flags & eFlagCreatedInQms))
+    {
+        flags |= eFlagTainted;
+    }
+
+    history << QString("%1: %2").arg(QDateTime::currentDateTimeUtc().toString()).arg(what);
+}
+
 bool IGisItem::isReadOnly()
 {
     return !(flags & eFlagWriteAllowed);
@@ -68,12 +86,15 @@ bool IGisItem::isReadOnly()
 
 void IGisItem::setReadOnlyMode(bool readOnly)
 {
-    if(isReadOnly() && !readOnly)
+    if(!(flags & eFlagCreatedInQms))
     {
-        QString str = QObject::tr("This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.");
-        if(QMessageBox::warning(0, QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok) != QMessageBox::Ok)
+        if(isReadOnly() && !readOnly)
         {
-            return;
+            QString str = QObject::tr("This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.");
+            if(QMessageBox::warning(0, QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok) != QMessageBox::Ok)
+            {
+                return;
+            }
         }
     }
 

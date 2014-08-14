@@ -51,7 +51,7 @@ const IGisItem::color_t IGisItem::colorMap[] =
 
 IGisItem::IGisItem(QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent)
-    , readOnlyMode(true)
+    , flags(0)
 {
 
 }
@@ -61,9 +61,14 @@ IGisItem::~IGisItem()
 
 }
 
+bool IGisItem::isReadOnly()
+{
+    return !(flags & eFlagWriteAllowed);
+}
+
 void IGisItem::setReadOnlyMode(bool readOnly)
 {
-    if(readOnlyMode && !readOnly)
+    if(isReadOnly() && !readOnly)
     {
         QString str = QObject::tr("This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.");
         if(QMessageBox::warning(0, QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok) != QMessageBox::Ok)
@@ -72,7 +77,14 @@ void IGisItem::setReadOnlyMode(bool readOnly)
         }
     }
 
-    readOnlyMode = readOnly;
+    if(readOnly)
+    {
+        flags &= ~eFlagWriteAllowed;
+    }
+    else
+    {
+        flags |= eFlagWriteAllowed;
+    }
 }
 
 void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)

@@ -46,7 +46,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisP
     wpt.time    = QDateTime::currentDateTimeUtc();
 
     key.clear();
-    readOnlyMode = false;
+    flags = eFlagCreatedInQms|eFlagWriteAllowed;
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     setText(1, "*");
@@ -68,7 +68,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *project)
     {        
         const QDomNode& ext = xml.namedItem("extensions");
         readXml(ext, "ql:key", key);
-        readXml(ext, "ql:readOnly", readOnlyMode);
+        readXml(ext, "ql:flags", flags);
 
         const QDomNode& wptx1 = ext.namedItem("wptx1:WaypointExtension");
         readXml(wptx1, "wptx1:Proximity", proximity);
@@ -108,7 +108,7 @@ CGisItemWpt& CGisItemWpt::operator=(const CGisItemWpt& w)
     posScreen       = w.posScreen;
 
 
-    readOnlyMode    = w.readOnlyMode;
+    flags           = w.flags;
     key             = w.key;
     icon            = w.icon;
     boundingRect    = w.boundingRect;
@@ -274,7 +274,7 @@ void CGisItemWpt::save(QDomNode& gpx)
     QDomElement xmlExt  = doc.createElement("extensions");
     xmlWpt.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key);
-    writeXml(xmlExt, "ql:readOnly", readOnlyMode);
+    writeXml(xmlExt, "ql:flags", flags);
 
     // write other well known extensions
     QDomElement wptx1  = doc.createElement("wptx1:WaypointExtension");

@@ -119,7 +119,7 @@ class IGisItem : public QTreeWidgetItem
            @brief Query if this item is read only
            @return True if it is read only.
          */
-        bool isReadOnly(){return readOnlyMode;}
+        bool isReadOnly();
         /**
            @brief Set the read only mode.
 
@@ -207,8 +207,14 @@ class IGisItem : public QTreeWidgetItem
             QMap<QString, QVariant> extensions;
         };
 
+        enum flags_e
+        {
+             eFlagCreatedInQms  = 0x00000001
+            ,eFlagWriteAllowed  = 0x00000002
+            ,eFlagTainted       = 0x00000004
+        };
 
-        bool readOnlyMode;
+        quint32 flags;
         QString key;
         QPixmap icon;
         QRectF boundingRect;

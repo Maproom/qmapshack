@@ -316,6 +316,11 @@ void CMainWindow::slotCurrentTabCanvas(int i)
             tabDem->setCurrentIndex(n);
             break;
         }
+    }    
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 }
 
@@ -338,6 +343,11 @@ void CMainWindow::slotCurrentTabMaps(int i)
             break;
         }
     }
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
 }
 
 void CMainWindow::slotCurrentTabDem(int i)
@@ -358,6 +368,11 @@ void CMainWindow::slotCurrentTabDem(int i)
             tabMaps->setCurrentIndex(n);
             break;
         }
+    }
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 }
 

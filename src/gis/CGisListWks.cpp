@@ -39,6 +39,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuItem        = new QMenu(this);
     actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
+    actionMoveWpt   = menuItem->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint..."), this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
@@ -80,10 +81,13 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         if(wpt == 0)
         {
             actionProjWpt->setVisible(false);
+            actionMoveWpt->setVisible(false);
         }
         else
         {
             actionProjWpt->setVisible(true);
+            actionMoveWpt->setVisible(true);
+            actionMoveWpt->setEnabled(!wpt->isReadOnly());
         }
 
         // display menu
@@ -186,6 +190,18 @@ void CGisListWks::slotProjWpt()
     {
         QString key = gisItem->getKey();
         CGisWidget::self().projWptByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotMoveWpt()
+{
+    IGisItem::mutexItems.lock();
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().moveWptByKey(key);
     }
     IGisItem::mutexItems.unlock();
 }

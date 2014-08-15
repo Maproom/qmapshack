@@ -36,11 +36,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(IGisItem::removeHtml(wpt->getInfo()));
 
-
-    if(wpt->isReadOnly())
-    {
-        toolMove->setEnabled(false);
-    }
+    toolMove->setEnabled(!wpt->isReadOnly());
+    toolProj->setEnabled(!wpt->isGeocache());
 
     anchor = wpt->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));

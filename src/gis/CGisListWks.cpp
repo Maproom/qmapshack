@@ -88,6 +88,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionProjWpt->setVisible(true);
             actionMoveWpt->setVisible(true);
             actionMoveWpt->setEnabled(!wpt->isReadOnly());
+            actionProjWpt->setEnabled(!wpt->isGeocache());
         }
 
         // display menu

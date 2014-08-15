@@ -102,6 +102,7 @@ class CGisItemWpt : public IGisItem
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
+        bool isGeocache(){return geocache.hasData;}
         void gainUserFocus();
 
         void edit();

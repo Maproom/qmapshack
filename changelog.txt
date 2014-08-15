@@ -1,0 +1,9 @@
+V 0.3.0
+
+* A lot of little fixes to prevent crashes and glitches due to multithreading
+* Take special care of the +-180 degree problem
+* Add RGB support to raster maps
+* Add a lot of cursor stuff to select items and to display on-screen-options
+* Add timezone support
+* Add dialog to view/edit waypoint data
+* Add 'moving waypoint' and 'project waypoint' as functions to on-screen-options

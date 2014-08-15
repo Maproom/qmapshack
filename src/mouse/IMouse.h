@@ -25,12 +25,14 @@
 class QMouseEvent;
 class QWheelEvent;
 class CCanvas;
+class QTimer;
+class CGisDraw;
 
 class IMouse : public QObject
 {
     Q_OBJECT
     public:
-        IMouse(CCanvas * canvas);
+        IMouse(CGisDraw * gis, CCanvas * canvas);
         virtual ~IMouse();
 
         enum type_e
@@ -49,15 +51,23 @@ class IMouse : public QObject
             widget uses this method to query the current cursor.
         */
         operator const QCursor&(){return cursor;}
-
-        const QPoint& getPoint(){return point;}
         CCanvas * getCanvas(){return canvas;}
 
+    protected slots:
+        virtual void slotPanCanvas();
+
     protected:
+        void panCanvas(const QPoint& pos);
         /// the functions mouse icon
         QCursor cursor;
+
+        CGisDraw * gis;
+
         CCanvas * canvas;
+        // the current point reported by the mouse events
         QPoint point;
+
+        QTimer * timer;
 
 };
 

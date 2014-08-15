@@ -33,7 +33,7 @@ class CScrOptUnclutter;
 class CMouseNormal : public IMouse
 {
     public:
-        CMouseNormal(CCanvas *canvas);
+        CMouseNormal(CGisDraw * gis, CCanvas *canvas);
         virtual ~CMouseNormal();
 
         void draw(QPainter& p, const QRect &rect);

@@ -63,7 +63,7 @@ CCanvas::CCanvas(QWidget *parent)
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
     gis     = new CGisDraw(this);
-    mouse   = new CMouseNormal(this);
+    mouse   = new CMouseNormal(gis, this);
 
     connect(map, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
     connect(dem, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
@@ -125,7 +125,7 @@ void CCanvas::loadConfig(QSettings& cfg)
 void CCanvas::resetMouse()
 {
     mouse->deleteLater();
-    mouse = new CMouseNormal(this);
+    mouse = new CMouseNormal(gis, this);
     if(underMouse())
     {
         QApplication::restoreOverrideCursor();
@@ -195,12 +195,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     // ----- start to draw static content -----
 
     grid->draw(p, rect());
-    if(!gis->isRunning())
-    {
-        // no mouse interaction while GIS data is drawn.
-        mouse->draw(p, rect());
-    }
-
+    mouse->draw(p, rect());
 
     drawScale(p);
 

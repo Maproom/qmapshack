@@ -29,10 +29,9 @@
 #include <proj_api.h>
 
 CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
-    : IMouse(parent)
-    , gis(gis)
+    : IMouse(gis, parent)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"),0,0);
+    cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"),0,0);
     key     = wpt.getKey();
     icon    = getWptIconByName(wpt.getIconName(), focus);
     origPos = wpt.getPosition() * DEG_TO_RAD;
@@ -88,8 +87,17 @@ void CMouseMoveWpt::draw(QPainter& p, const QRect &rect)
 
 }
 
+void CMouseMoveWpt::slotPanCanvas()
+{
+    IMouse::slotPanCanvas();
+
+    newPos  = point;
+    gis->convertPx2Rad(newPos);
+}
+
 void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
 {
+    point  = e->pos();
     if(e->button() == Qt::RightButton)
     {
         canvas->resetMouse();
@@ -111,34 +119,16 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
 
 void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
 {
-    QPoint pt   = e->pos();
-    newPos      = pt;
+    point  = e->pos();
+    newPos  = point;
     gis->convertPx2Rad(newPos);
 
-    if(pt.x() < 100)
-    {
-        canvas->moveMap(QPointF(30, 0));
-    }
-    else if(pt.x() > canvas->width() - 100)
-    {
-        canvas->moveMap(QPointF(-30, 0));
-    }
-
-    if(pt.y() < 100)
-    {
-        canvas->moveMap(QPointF(0, 30));
-    }
-    else if(pt.y() > canvas->height() - 100)
-    {
-        canvas->moveMap(QPointF(0, -30));
-    }
-
-    canvas->update();
+    panCanvas(point);
 }
 
 void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
 {
-
+    point  = e->pos();
 }
 
 void CMouseMoveWpt::wheelEvent(QWheelEvent * e)

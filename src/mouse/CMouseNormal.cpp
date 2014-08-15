@@ -24,11 +24,12 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/CGisWidget.h"
+#include "gis/CGisDraw.h"
 
 #include <QtGui>
 
-CMouseNormal::CMouseNormal(CCanvas *canvas)
-    : IMouse(canvas)
+CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
+    : IMouse(gis, canvas)
     , mapMove(false)
     , stateItemSel(eStateIdle)
 {
@@ -172,6 +173,11 @@ void CMouseNormal::wheelEvent(QWheelEvent * e)
 
 void CMouseNormal::draw(QPainter& p, const QRect &rect)
 {
+    // no mouse interaction while gis thread is running
+    if(gis->isRunning())
+    {
+        return;
+    }
 
     switch(stateItemSel)
     {

@@ -19,12 +19,18 @@
 #include "mouse/IMouse.h"
 #include "canvas/CCanvas.h"
 
+#include <QtWidgets>
 
-IMouse::IMouse(CCanvas *canvas)
+IMouse::IMouse(CGisDraw *gis, CCanvas *canvas)
     : QObject(canvas)
+    , gis(gis)
     , canvas(canvas)
 {
+    timer = new QTimer(this);
+    timer->setSingleShot(true);
+    timer->setInterval(50);
 
+    connect(timer, SIGNAL(timeout()), this, SLOT(slotPanCanvas()));
 }
 
 IMouse::~IMouse()
@@ -32,3 +38,43 @@ IMouse::~IMouse()
 
 }
 
+void IMouse::slotPanCanvas()
+{
+    panCanvas(point);
+}
+
+#define SENSITIVE_FRAME 100
+void IMouse::panCanvas(const QPoint& pos)
+{
+    if(pos.x() < SENSITIVE_FRAME)
+    {
+        int d = SENSITIVE_FRAME - pos.x();
+        canvas->moveMap(QPointF(d , 0));
+        timer->start();
+    }
+    else if(pos.x() > canvas->width() - SENSITIVE_FRAME)
+    {
+        int d = canvas->width() - SENSITIVE_FRAME - pos.x();
+        canvas->moveMap(QPointF(d, 0));
+        timer->start();
+    }
+    else if(pos.y() < SENSITIVE_FRAME)
+    {
+        int d = SENSITIVE_FRAME - pos.y();
+        canvas->moveMap(QPointF(0, d));
+        timer->start();
+    }
+    else if(pos.y() > canvas->height() - SENSITIVE_FRAME)
+    {
+        int d = canvas->height() - SENSITIVE_FRAME - pos.y();
+        canvas->moveMap(QPointF(0, d));
+        timer->start();
+    }
+    else
+    {
+        timer->stop();
+    }
+
+    canvas->update();
+
+}

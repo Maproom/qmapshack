@@ -39,9 +39,10 @@ class CMouseMoveWpt : public IMouse
         void mouseReleaseEvent(QMouseEvent *e);
         void wheelEvent(QWheelEvent * e);
 
+    protected slots:
+        virtual void slotPanCanvas();
 
     private:
-        CGisDraw * gis;
         QString key;
         QPointF origPos;
         QPointF newPos;

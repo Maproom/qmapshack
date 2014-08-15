@@ -120,6 +120,8 @@ class IGisItem : public QTreeWidgetItem
            @return True if it is read only.
          */
         bool isReadOnly();
+
+        bool isTainted();
         /**
            @brief Set the read only mode.
 

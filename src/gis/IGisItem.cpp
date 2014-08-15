@@ -84,6 +84,11 @@ bool IGisItem::isReadOnly()
     return !(flags & eFlagWriteAllowed);
 }
 
+bool IGisItem::isTainted()
+{
+    return (flags & eFlagTainted);
+}
+
 void IGisItem::setReadOnlyMode(bool readOnly)
 {
     if(!(flags & eFlagCreatedInQms))

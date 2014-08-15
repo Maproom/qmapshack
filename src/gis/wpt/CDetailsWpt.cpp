@@ -72,9 +72,18 @@ void CDetailsWpt::setupGui()
     bool isReadOnly = wpt.isReadOnly();
 
     toolIcon->setIcon(wpt.getIcon());
-    toolIcon->setObjectName(wpt.getIconName());
+    toolIcon->setObjectName(wpt.getIconName());   
     labelName->setText(toLink(isReadOnly, "name", wpt.getName()));
     labelPositon->setText(toLink(isReadOnly, "position", strPos));
+
+    if(wpt.isTainted())
+    {
+        labelTainted->show();
+    }
+    else
+    {
+        labelTainted->hide();
+    }
 
     if(wpt.getElevation() != NOINT)
     {
@@ -103,20 +112,24 @@ void CDetailsWpt::setupGui()
 
     if(IGisItem::removeHtml(wpt.getComment()).simplified().isEmpty())
     {
-        labelCmt->setText(tr("no comment"));
+        textCmt->setText(tr("no comment"));
+        textCmt->hide();
     }
     else
     {
-        labelCmt->setText(wpt.getComment());
+        textCmt->setText(wpt.getComment());
+        textCmt->show();
     }
 
     if(IGisItem::removeHtml(wpt.getDescription()).simplified().isEmpty())
     {
-        labelDesc->setText(tr("no description"));
+        textDesc->setText(tr("no description"));
+        textDesc->hide();
     }
     else
     {
-        labelDesc->setText(wpt.getDescription());
+        textDesc->setText(wpt.getDescription());
+        textDesc->show();
     }
 
     if(!wpt.getHistory().isEmpty())

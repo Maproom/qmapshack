@@ -4,7 +4,7 @@
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="50"/>
+        <location filename="../canvas/CCanvas.cpp" line="51"/>
         <source>Workspace %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -79,32 +79,32 @@
 <context>
     <name>CDetailsWpt</name>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="100"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="115"/>
         <source>no comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="109"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="126"/>
         <source>no description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="134"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
         <source>Edit name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="134"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
         <source>Enter new waypoint name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="144"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="177"/>
         <source>Enter new elevation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="153"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="186"/>
         <source>Enter new proximity range.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -112,27 +112,37 @@
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="32"/>
+        <location filename="../gis/CGisListWks.cpp" line="33"/>
         <source>Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="33"/>
+        <location filename="../gis/CGisListWks.cpp" line="34"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="34"/>
+        <location filename="../gis/CGisListWks.cpp" line="35"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="40"/>
+        <location filename="../gis/CGisListWks.cpp" line="41"/>
         <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="41"/>
+        <location filename="../gis/CGisListWks.cpp" line="42"/>
+        <source>Move Waypoint...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="43"/>
+        <source>Proj. Waypoint...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="44"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -153,12 +163,12 @@
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="359"/>
+        <location filename="../CMainWindow.cpp" line="389"/>
         <source>Ele: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="460"/>
+        <location filename="../CMainWindow.cpp" line="490"/>
         <source>Load GIS Data...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -917,6 +927,19 @@ is not a valid coordinate system definition:
     </message>
 </context>
 <context>
+    <name>CProjWpt</name>
+    <message>
+        <location filename="../gis/wpt/CProjWpt.cpp" line="63"/>
+        <source>Edit name...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CProjWpt.cpp" line="63"/>
+        <source>Enter new waypoint name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CTextEditWidget</name>
     <message>
         <location filename="../helpers/CTextEditWidget.cpp" line="73"/>
@@ -1131,47 +1154,60 @@ is not a valid coordinate system definition:
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="47"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit description.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="50"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="109"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="235"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="257"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="179"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="247"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="273"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="155"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="80"/>
         <source>Position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="162"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="188"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="214"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="225"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="87"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="113"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="139"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="203"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="311"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="175"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="100"/>
         <source>Ele.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="201"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="126"/>
         <source>Proximity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="232"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="176"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit comment.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="228"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="244"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read Only Mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>IGisItem</name>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="69"/>
-        <source>Read Only Mode...</source>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="304"/>
+        <source>Date/Time:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1582,6 +1618,39 @@ or
     </message>
 </context>
 <context>
+    <name>IProjWpt</name>
+    <message>
+        <location filename="../gis/wpt/IProjWpt.ui" line="14"/>
+        <source>Waypoint Projection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IProjWpt.ui" line="22"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IProjWpt.ui" line="38"/>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IProjWpt.ui" line="47"/>
+        <source>Clone waypoint and move by:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IProjWpt.ui" line="59"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="../gis/wpt/IProjWpt.ui" line="69"/>
+        <source>°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IScrOptRte</name>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="14"/>
@@ -1654,6 +1723,8 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="66"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="87"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="101"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1663,7 +1734,17 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="104"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="84"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move waypoint to a new location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clone waypoint and move clone a given distance and angle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="145"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1885,39 +1966,44 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="433"/>
+        <location filename="../gis/CGisProject.cpp" line="432"/>
         <source>Save GIS data to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="485"/>
+        <location filename="../gis/CGisProject.cpp" line="484"/>
         <source>File exists ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="486"/>
+        <location filename="../gis/CGisProject.cpp" line="485"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="539"/>
-        <location filename="../gis/CGisProject.cpp" line="549"/>
+        <location filename="../gis/CGisProject.cpp" line="538"/>
+        <location filename="../gis/CGisProject.cpp" line="548"/>
         <source>Saveing GIS data failed...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="539"/>
+        <location filename="../gis/CGisProject.cpp" line="538"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="549"/>
+        <location filename="../gis/CGisProject.cpp" line="548"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="68"/>
+        <location filename="../gis/IGisItem.cpp" line="98"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="99"/>
+        <source>Read Only Mode...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1962,27 +2048,62 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="112"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="151"/>
         <source>Elevation: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="120"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="159"/>
         <source>Proximity: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="266"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="219"/>
+        <source>Changed name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="226"/>
+        <source>Changed position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="232"/>
+        <source>Changed elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="238"/>
+        <source>Changed proximity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="245"/>
+        <source>Changed icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="251"/>
+        <source>Changed comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="257"/>
+        <source>Changed description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="300"/>
         <source>Archived</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="270"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="304"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="274"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="308"/>
         <source>Not Available</source>
         <translation type="unfinished"></translation>
     </message>

@@ -29,9 +29,11 @@
 class CCanvas;
 class IScrOpt;
 class CScrOptUnclutter;
+class QMenu;
 
 class CMouseNormal : public IMouse
 {
+    Q_OBJECT
     public:
         CMouseNormal(CGisDraw * gis, CCanvas *canvas);
         virtual ~CMouseNormal();
@@ -41,6 +43,9 @@ class CMouseNormal : public IMouse
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);
         void wheelEvent(QWheelEvent * e);
+
+    private slots:
+        void slotAddWpt();
 
     protected:
         /// the flag is true if the map moving is in progress
@@ -69,6 +74,8 @@ class CMouseNormal : public IMouse
 
         CScrOptUnclutter * screenUnclutter;
         QPointer<IScrOpt>  screenItemOption;
+
+        QMenu * menu;
 
 };
 

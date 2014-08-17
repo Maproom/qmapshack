@@ -552,5 +552,6 @@ void CGisProject::saveGpx(const QString& fn)
 
     filename = _fn_;
     setText(0, QFileInfo(filename).baseName());
+    setText(1,"");
 }
 

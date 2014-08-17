@@ -91,7 +91,7 @@ bool IGisItem::isTainted()
 
 void IGisItem::setReadOnlyMode(bool readOnly)
 {
-    if(!(flags & eFlagCreatedInQms))
+    if(!(flags & (eFlagCreatedInQms|eFlagTainted)))
     {
         if(isReadOnly() && !readOnly)
         {

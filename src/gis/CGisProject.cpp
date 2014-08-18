@@ -434,7 +434,14 @@ void CGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& 
 
 void CGisProject::save()
 {
-    saveGpx(filename);
+    if(filename.isEmpty())
+    {
+        saveAs();
+    }
+    else
+    {
+        saveGpx(filename);
+    }
 }
 
 void CGisProject::saveAs()

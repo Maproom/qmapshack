@@ -29,6 +29,7 @@
 #include "units/IUnit.h"
 #include "helpers/CWptIconDialog.h"
 #include "GeoMath.h"
+#include "CMainWindow.h"
 
 
 #include <QtWidgets>
@@ -52,6 +53,8 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     wpt.time    = QDateTime::currentDateTimeUtc();
 
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
+    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     setText(1, "*");
@@ -75,6 +78,9 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisP
 
     key.clear();
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
+
+    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     setText(1, "*");
@@ -160,11 +166,7 @@ void CGisItemWpt::genKey()
 const QString& CGisItemWpt::getNewName()
 {
     const int s = lastName.size();
-    if(s == 0)
-    {
-        lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
-    }
-    else
+    if(s != 0)
     {
         int idx;
         for(idx = s; idx > 0; idx--)
@@ -175,11 +177,7 @@ const QString& CGisItemWpt::getNewName()
             }
         }
 
-        if(idx == s)
-        {
-            lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
-        }
-        else if(idx == 0)
+        if(idx == 0)
         {
             lastName = QString::number(lastName.toInt() + 1);
         }
@@ -189,18 +187,18 @@ const QString& CGisItemWpt::getNewName()
         }
 
     }
+    lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
     return lastName;
 }
 
 const QString& CGisItemWpt::getNewIcon()
 {
-    if(lastIcon.isEmpty())
-    {
-        QToolButton but;
-        CWptIconDialog dlg(&but);
-        dlg.exec();
-        lastIcon = but.objectName();
-    }
+    QToolButton but;
+    but.setObjectName(lastIcon);
+    CWptIconDialog dlg(&but);
+    dlg.exec();
+    lastIcon = but.objectName();
+
     return lastIcon;
 }
 

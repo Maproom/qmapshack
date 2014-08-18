@@ -101,21 +101,5 @@ void CProjWpt::accept()
         newWpt->setIcon(toolIcon->objectName());
     }
 
-    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
-    if(ele == NOFLOAT)
-    {
-        if(newWpt->getElevation() != NOINT)
-        {
-            newWpt->setElevation(NOINT);
-        }
-    }
-    else
-    {
-        if(newWpt->getElevation() != qRound(ele))
-        {
-            newWpt->setElevation(qRound(ele));
-        }
-    }
-
     QDialog::accept();
 }

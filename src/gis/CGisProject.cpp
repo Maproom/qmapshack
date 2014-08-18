@@ -38,6 +38,19 @@ const QString CGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString CGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString CGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
+CGisProject::CGisProject(const QString &name, CGisListWks * parent)
+    : QTreeWidgetItem(parent)
+    , valid(true)
+{
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(name.toUtf8());
+    key = md5.result().toHex();
+
+    setText(0, name);
+    setIcon(0,QIcon("://icons/32x32/GisProject.png"));
+
+    setToolTip(0, getInfo());
+}
 
 CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWks *parent)
     : QTreeWidgetItem(parent)

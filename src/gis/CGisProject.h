@@ -33,6 +33,7 @@ class CGisDraw;
 class CGisProject : public QTreeWidgetItem
 {
     public:
+        CGisProject(const QString &name, CGisListWks * parent);
         CGisProject(const QString& filename, const QString &key, CGisListWks * parent);
         virtual ~CGisProject();
 

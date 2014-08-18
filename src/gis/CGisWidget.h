@@ -24,6 +24,7 @@
 
 class CGisDraw;
 class IGisItem;
+class CGisProject;
 
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
@@ -75,6 +76,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         void projWptByKey(const QString& key);
 
         void moveWptByKey(const QString& key);
+
+        CGisProject * selectProject();
 
     signals:
         void sigChanged();

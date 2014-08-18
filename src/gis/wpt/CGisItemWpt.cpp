@@ -27,6 +27,7 @@
 #include "canvas/CCanvas.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
+#include "helpers/CWptIconDialog.h"
 #include "GeoMath.h"
 
 
@@ -34,6 +35,33 @@
 #include <QtXml>
 
 QString CGisItemWpt::keyUserFocus;
+QString CGisItemWpt::lastName;
+QString CGisItemWpt::lastIcon;
+
+
+CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, CGisProject * project)
+    : IGisItem(project)
+    , proximity(NOFLOAT)
+    , posScreen(NOPOINTF)
+{
+
+    wpt.name    = name;
+    wpt.sym     = icon;
+    wpt.lon     = pos.x();
+    wpt.lat     = pos.y();
+    wpt.time    = QDateTime::currentDateTimeUtc();
+
+    flags = eFlagCreatedInQms|eFlagWriteAllowed;
+
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    setText(1, "*");
+    setText(0, wpt.name);
+    setIcon();
+    setToolTip(0, getInfo());
+    genKey();
+
+    project->setText(1,"*");
+}
 
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisProject * project)
     : IGisItem(project)
@@ -54,6 +82,8 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisP
     setIcon();
     setToolTip(0, getInfo());
     genKey();
+
+    project->setText(1,"*");
 }
 
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *project)
@@ -126,6 +156,54 @@ void CGisItemWpt::genKey()
         key = md5.result().toHex();
     }
 }
+
+const QString& CGisItemWpt::getNewName()
+{
+    const int s = lastName.size();
+    if(s == 0)
+    {
+        lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
+    }
+    else
+    {
+        int idx;
+        for(idx = s; idx > 0; idx--)
+        {
+            if(!lastName[idx - 1].isDigit())
+            {
+                break;
+            }
+        }
+
+        if(idx == s)
+        {
+            lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
+        }
+        else if(idx == 0)
+        {
+            lastName = QString::number(lastName.toInt() + 1);
+        }
+        else
+        {
+            lastName = lastName.left(idx) + QString::number(lastName.mid(idx).toInt() + 1);
+        }
+
+    }
+    return lastName;
+}
+
+const QString& CGisItemWpt::getNewIcon()
+{
+    if(lastIcon.isEmpty())
+    {
+        QToolButton but;
+        CWptIconDialog dlg(&but);
+        dlg.exec();
+        lastIcon = but.objectName();
+    }
+    return lastIcon;
+}
+
 
 QString CGisItemWpt::getInfo()
 {
@@ -213,8 +291,9 @@ void CGisItemWpt::setIcon()
 }
 
 void CGisItemWpt::setName(const QString& str)
-{
+{    
     setText(0, str);
+    lastName = str;
     wpt.name = str;
     changed(QObject::tr("Changed name"));
 }
@@ -240,7 +319,8 @@ void CGisItemWpt::setProximity(qreal val)
 
 void CGisItemWpt::setIcon(const QString& name)
 {    
-    wpt.sym = name;
+    lastIcon = name;
+    wpt.sym  = name;
     setIcon();
     changed(QObject::tr("Changed icon"));
 }

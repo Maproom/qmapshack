@@ -22,6 +22,7 @@ set( SRCS
     helpers/CPositionDialog.cpp
     helpers/CWptIconDialog.cpp
     helpers/CTextEditWidget.cpp
+    helpers/CSelectProjectDialog.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -99,6 +100,7 @@ set( HDRS
     helpers/CPositionDialog.h
     helpers/CWptIconDialog.h
     helpers/CTextEditWidget.h
+    helpers/CSelectProjectDialog.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h
@@ -170,6 +172,7 @@ set( UIS
     helpers/IPositionDialog.ui
     helpers/IWptIconDialog.ui
     helpers/ITextEditWidget.ui
+    helpers/ISelectProjectDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui

@@ -25,6 +25,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisProject.h"
 
 #include <QtWidgets>
 
@@ -237,5 +238,29 @@ void CMouseNormal::draw(QPainter& p, const QRect &rect)
 
 void CMouseNormal::slotAddWpt()
 {
+
+    QPointF pt = point;
+    gis->convertPx2Rad(pt);
+
+    QString name = CGisItemWpt::getNewName();
+    if(name.isEmpty())
+    {
+        return;
+    }
+
+    QString icon = CGisItemWpt::getNewIcon();
+    if(icon.isEmpty())
+    {
+        return;
+    }
+
+    CGisProject * project = CGisWidget::self().selectProject();
+    if(project == 0)
+    {
+        return;
+    }
+
+    new CGisItemWpt(pt*RAD_TO_DEG, name, icon, project);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 
 }

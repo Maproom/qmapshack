@@ -24,6 +24,7 @@
 #include "gis/wpt/CProjWpt.h"
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
+#include "helpers/CSelectProjectDialog.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -97,6 +98,40 @@ void CGisWidget::slotSaveAll()
     QApplication::restoreOverrideCursor();
 }
 
+CGisProject * CGisWidget::selectProject()
+{
+    QString key, name;
+
+    CSelectProjectDialog dlg(key, name, treeWks);
+    dlg.exec();
+
+    CGisProject * project = 0;
+    if(!key.isEmpty())
+    {
+        IGisItem::mutexItems.lock();
+        for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+        {
+            project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+            if(project == 0)
+            {
+                continue;
+            }
+            if(key == project->getKey())
+            {
+                break;
+            }
+        }
+        IGisItem::mutexItems.unlock();
+    }
+    else if(!name.isEmpty())
+    {
+        IGisItem::mutexItems.lock();
+        project = new CGisProject(name, treeWks);
+        IGisItem::mutexItems.unlock();
+    }
+
+    return project;
+}
 
 void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
 {

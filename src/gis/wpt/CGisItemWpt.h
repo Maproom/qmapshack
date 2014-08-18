@@ -68,6 +68,7 @@ class CGisItemWpt : public IGisItem
             QList<geocachelog_t> logs;
         };
 
+        CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, CGisProject * project);
         CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, CGisProject *project);
         CGisItemWpt(const QDomNode& xml, CGisProject * project);
         virtual ~CGisItemWpt();
@@ -107,6 +108,9 @@ class CGisItemWpt : public IGisItem
 
         void edit();
 
+        static const QString &getNewName();
+        static const QString &getNewIcon();
+
     private:
         void genKey();
         void setIcon();
@@ -114,6 +118,9 @@ class CGisItemWpt : public IGisItem
         void writeGcExt(QDomNode& xmlCache);
 
         static QString keyUserFocus;
+        static QString lastName;
+        static QString lastIcon;
+
 
         // --- start all waypoint data ----
         wpt_t wpt;

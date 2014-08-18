@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/IGisItem.h"
+#include "gis/CGisProject.h"
 #include "units/IUnit.h"
 #include "canvas/CCanvas.h"
 #include "GeoMath.h"
@@ -66,6 +67,12 @@ void IGisItem::changed(const QString &what)
     setText(1,"*");
     setToolTip(0,getInfo());
 
+    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    if(project)
+    {
+        project->setText(1,"*");
+    }
+
     /*
         If item gets changed but it's origin is not QMapShack
         then it is assumed to be tainted, as imported data should
@@ -91,7 +98,7 @@ bool IGisItem::isTainted()
 
 void IGisItem::setReadOnlyMode(bool readOnly)
 {
-    if(!(flags & eFlagCreatedInQms))
+    if(!(flags & (eFlagCreatedInQms|eFlagTainted)))
     {
         if(isReadOnly() && !readOnly)
         {

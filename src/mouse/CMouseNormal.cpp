@@ -26,7 +26,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 
-#include <QtGui>
+#include <QtWidgets>
 
 CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     : IMouse(gis, canvas)
@@ -35,6 +35,9 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
     screenUnclutter = new CScrOptUnclutter(canvas);
+
+    menu = new QMenu(canvas);
+    menu->addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, SLOT(slotAddWpt()));
 }
 
 CMouseNormal::~CMouseNormal()
@@ -52,6 +55,12 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
         // has triggered a selection of any kind
         mapMove     = (stateItemSel < eStateNoMapMovePossible);
         mapDidMove  = false;
+    }
+    else if(e->button() == Qt::RightButton)
+    {
+        QPoint p = canvas->mapToGlobal(point);
+        menu->exec(p);
+
     }
 }
 
@@ -223,4 +232,10 @@ void CMouseNormal::draw(QPainter& p, const QRect &rect)
         }
         default:;
     }
+}
+
+
+void CMouseNormal::slotAddWpt()
+{
+
 }

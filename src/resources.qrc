@@ -85,6 +85,7 @@
         <file>icons/16x16/WptMove.png</file>
         <file>icons/16x16/WptProj.png</file>
         <file>icons/16x16/Tainted.png</file>
+        <file>icons/16x16/AddWpt.png</file>
 
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
@@ -153,8 +154,7 @@
         <file>icons/32x32/WptMove.png</file>
         <file>icons/32x32/WptProj.png</file>
         <file>icons/32x32/Tainted.png</file>
-
-
+        <file>icons/32x32/AddWpt.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -223,6 +223,7 @@
         <file>icons/48x48/WptMove.png</file>
         <file>icons/48x48/WptProj.png</file>
         <file>icons/48x48/Tainted.png</file>
+        <file>icons/48x48/AddWpt.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

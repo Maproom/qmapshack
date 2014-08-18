@@ -116,13 +116,21 @@ Section "QMapShack" QMapShack
   SetOutPath $INSTDIR
     File Files\Qt5Core.dll
     File Files\Qt5Gui.dll
+	File Files\Qt5Multimedia.dll
+	File Files\Qt5MultimediaWidgets.dll
     File Files\Qt5Network.dll
     File Files\Qt5OpenGL.dll
-    File Files\Qt5Script.dll	
+	File Files\Qt5Positioning.dll
+	File Files\Qt5PrintSupport.dll
+	File Files\Qt5Qml.dll
+	File Files\Qt5Quick.dll
+    File Files\Qt5Script.dll
+	File Files\Qt5Sensors.dll
     File Files\Qt5Sql.dll
     File Files\Qt5Svg.dll
     File Files\Qt5WebKit.dll
-    File Files\Qt5Widgets.dll   
+    File Files\Qt5Widgets.dll 
+    File Files\Qt5WebKitWidgets.dll	
     File Files\Qt5Xml.dll
 	File Files\icudt52.dll
 	File Files\icuin52.dll

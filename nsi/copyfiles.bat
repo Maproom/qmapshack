@@ -20,12 +20,20 @@ cd Files
 rem Section 2.1) Copy Qt files
 copy %QMSI_QT_PATH%\bin\Qt5Core.dll
 copy %QMSI_QT_PATH%\bin\Qt5Gui.dll
+copy %QMSI_QT_PATH%\bin\Qt5Multimedia.dll
+copy %QMSI_QT_PATH%\bin\Qt5MultimediaWidgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Network.dll
 copy %QMSI_QT_PATH%\bin\Qt5OpenGL.dll
+copy %QMSI_QT_PATH%\bin\Qt5Positioning.dll
+copy %QMSI_QT_PATH%\bin\Qt5PrintSupport.dll
+copy %QMSI_QT_PATH%\bin\Qt5Qml.dll
+copy %QMSI_QT_PATH%\bin\Qt5Quick.dll
 copy %QMSI_QT_PATH%\bin\Qt5Script.dll
+copy %QMSI_QT_PATH%\bin\Qt5Sensors.dll
 copy %QMSI_QT_PATH%\bin\Qt5Sql.dll
 copy %QMSI_QT_PATH%\bin\Qt5Svg.dll
 copy %QMSI_QT_PATH%\bin\Qt5WebKit.dll
+copy %QMSI_QT_PATH%\bin\Qt5WebKitWidgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Widgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Xml.dll
 copy %QMSI_QT_PATH%\bin\icudt52.dll

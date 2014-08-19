@@ -480,18 +480,19 @@ void CCanvas::slotCheckTrackOnFocus()
     // any changes?
     if(key != keyTrackOnFocus)
     {
-        // delete what is currently stored;
+        // get access to current track object
+        delete plotTrackProfile;
         keyTrackOnFocus.clear();
-//        delete plotTrackProfile;
 
-        // get access to track object
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-        if(trk == 0)
+        // get access to next track object
+        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+        if(trk2 == 0)
         {
             return;
         }
 
-        plotTrackProfile = new CPlot(CPlotData::eAxisLinear, CPlot::eModeIcon, this);
+        // create new profile plot, the plot will register itself at the track
+        plotTrackProfile = new CPlot(trk2, CPlotData::eAxisLinear, CPlot::eModeIcon, this);
         if(height() < 700)
         {
             plotTrackProfile->resize(200,80);
@@ -503,8 +504,7 @@ void CCanvas::slotCheckTrackOnFocus()
         plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
         plotTrackProfile->show();
 
-        trk->registerPlot(plotTrackProfile);
-
+        // finally store the new key as track on focus
         keyTrackOnFocus = key;
     }
 }

@@ -56,13 +56,23 @@ class CGisItemTrk : public IGisItem
         static const QString& getKeyUserFocus(){return keyUserFocus;}
 
         /**
-           @brief Each CPlot widget that operates on the track must register
+           @brief Each plot widget that operates on the track must register during it's contruction
 
            see registeredPlots for a detailed discussion
 
            @param plot
         */
         void registerPlot(CPlot * plot);
+
+
+        /**
+           @brief Each plot widget that operates on the track must unregister during it's destruction
+
+           see registeredPlots for a detailed discussion
+
+           @param plot
+        */
+        void unregisterPlot(CPlot * plot);
 
     private:
         struct trk_t;
@@ -190,7 +200,7 @@ class CGisItemTrk : public IGisItem
                   the track object in the plot object, too. By that plot and track can
                   easily communicate with each other.
         */
-        QList<CPlot*> registeredPlots;
+        QSet<CPlot*> registeredPlots;
 };
 
 #endif //CGISITEMTRK_H

@@ -18,18 +18,21 @@
 
 #include "plot/CPlot.h"
 #include "canvas/CCanvas.h"
-
+#include "gis/trk/CGisItemTrk.h"
 #include <QtWidgets>
 
-CPlot::CPlot(CPlotData::axistype_e type, mode_e mode, QWidget *parent)
+CPlot::CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : QWidget(parent)
     , mode(mode)
     , needsRedraw(true)
     , showScale(true)
     , thinLine(false)
     , posMouse(-1, -1)
+    , trk(trk)
 {
     setMouseTracking(true);
+
+    trk->registerPlot(this);
 
     data = new CPlotData(type, this);
 
@@ -42,7 +45,7 @@ CPlot::CPlot(CPlotData::axistype_e type, mode_e mode, QWidget *parent)
 
 CPlot::~CPlot()
 {
-
+    trk->unregisterPlot(this);
 }
 
 void CPlot::paintEvent(QPaintEvent * e)

@@ -22,13 +22,14 @@
 #include <QWidget>
 
 #include "plot/CPlotData.h"
+class CGisItemTrk;
 
 class CPlot : public QWidget
 {
     public:
         enum mode_e {eModeNormal, eModeIcon};
 
-        CPlot(CPlotData::axistype_e type, mode_e mode, QWidget * parent);
+        CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
         virtual ~CPlot();
 
     protected:
@@ -53,6 +54,7 @@ class CPlot : public QWidget
         QImage buffer;
         QPoint posMouse;
 
+        CGisItemTrk * trk;
         CPlotData * data;
 };
 

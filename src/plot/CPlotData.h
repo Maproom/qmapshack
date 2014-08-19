@@ -30,9 +30,9 @@ class CPlotAxis;
 class CPlotData : public QObject
 {
     public:
-        enum axis_type_e {eLinear, eTime};
+        enum axistype_e {eAxisLinear, eAxisTime};
 
-        CPlotData(axis_type_e type, QObject * parent);
+        CPlotData(axistype_e type, QObject * parent);
         virtual ~CPlotData();
 
         ///get a reference to the x axis
@@ -77,7 +77,7 @@ class CPlotData : public QObject
 
         bool badData;
 
-        axis_type_e axisType;
+        axistype_e axisType;
 
         qreal xmin;
         qreal xmax;

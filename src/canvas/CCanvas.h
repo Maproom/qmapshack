@@ -21,6 +21,7 @@
 
 #include <QWidget>
 #include <QPainter>
+#include <QPointer>
 
 class CMapDraw;
 class CGrid;
@@ -125,14 +126,12 @@ class CCanvas : public QWidget
         redraw_e needsRedraw;
         /// the map object attached to this canvas
         CMapDraw * map;
-
+        /// the elevation data layer attached to this canvas
+        CDemDraw * dem;
+        /// the GIS data layer attached to this convas
+        CGisDraw * gis;
         /// the grid attached to this canvas
         CGrid * grid;
-
-        CDemDraw * dem;
-
-        CGisDraw * gis;
-
         /// the current point of focus (usually the canvas center)
         QPointF posFocus;
 
@@ -141,19 +140,23 @@ class CCanvas : public QWidget
 
         /// tool tip timer for vector map tool tips
         QTimer * timerToolTip;
-
         /// the position of the tool tip
         QPoint posToolTip;
 
+        /// load indicator for maps
         QMovie * loadIndicator1;
         QLabel * mapLoadIndicator;
 
+        /// load indicator for DEM
         QMovie * loadIndicator2;
         QLabel * demLoadIndicator;
 
+        /// timer to poll for track gaining/loosing focus
         QTimer * timerTrackOnFocus;
+        /// the key of the currentl focused track
         QString keyTrackOnFocus;
-        CPlot *  plotTrackProfile;
+        /// the track profile plot
+        QPointer<CPlot>  plotTrackProfile;
 };
 
 #endif //CCANVAS_H

@@ -25,6 +25,7 @@
 
 class QDomNode;
 class CGisProject;
+class CPlot;
 
 class CGisItemTrk : public IGisItem
 {
@@ -40,10 +41,28 @@ class CGisItemTrk : public IGisItem
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
-        bool isCloseTo(const QPointF& pos);        
+        bool isCloseTo(const QPointF& pos);
+
+
+        /**
+           @brief Switch user focus on and off.
+
+           If the focus is switched on any other track having the focus will loose it.
+
+           @param yes   set true to gain focus.
+        */
         void gainUserFocus(bool yes);
         bool hasUserFocus(){return key == keyUserFocus;}
         static const QString& getKeyUserFocus(){return keyUserFocus;}
+
+        /**
+           @brief Each CPlot widget that operates on the track must register
+
+           see registeredPlots for a detailed discussion
+
+           @param plot
+        */
+        void registerPlot(CPlot * plot);
 
     private:
         struct trk_t;
@@ -152,7 +171,26 @@ class CGisItemTrk : public IGisItem
         ///
         QPolygonF line;
 
+        /**
+            A list of plot objects that need to get informed on any change in data.
 
+            @note This is necessary because QTreeWidgetItem is not derived from QObject.
+                  Thus no signals and slots can be handled. Probably this is because the
+                  signal/slot system would be a huge overhad on treewidgets with a large
+                  amount of items.
+
+                  Anyway we need some kind of signaling between the track object and the
+                  plot objects displaying the data. And we have to keep in mind that
+                  the track can be delete by the user at any time. That is why no other
+                  object is allowed to save a pointer to the track. It must store the
+                  key. But accessing the track via key is expensive.
+
+                  That is why we make an exception here. As the track will delete all
+                  registered plot objects upon destruction, it should be ok to store
+                  the track object in the plot object, too. By that plot and track can
+                  easily communicate with each other.
+        */
+        QList<CPlot*> registeredPlots;
 };
 
 #endif //CGISITEMTRK_H

@@ -20,7 +20,7 @@
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotAxisTime.h"
 
-CPlotData::CPlotData(axis_type_e type, QObject * parent)
+CPlotData::CPlotData(axistype_e type, QObject * parent)
 : QObject(parent)
 , grid(true)
 , badData(true)
@@ -30,7 +30,7 @@ CPlotData::CPlotData(axis_type_e type, QObject * parent)
 , ymin(0)
 , ymax(0)
 {
-    if(type == eLinear)
+    if(type == eAxisLinear)
     {
         xaxis = new CPlotAxis(this);
     }

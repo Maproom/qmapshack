@@ -27,6 +27,7 @@
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CMouseMoveWpt.h"
+#include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "plot/CPlot.h"
@@ -173,6 +174,15 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     if(plotTrackProfile)
     {
+        if(s.height() < 700)
+        {
+            plotTrackProfile->resize(200,80);
+        }
+        else
+        {
+            plotTrackProfile->resize(300,120);
+        }
+
         plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
     }
 }
@@ -466,18 +476,34 @@ void CCanvas::slotToolTip()
 void CCanvas::slotCheckTrackOnFocus()
 {
     const QString& key = CGisItemTrk::getKeyUserFocus();
+
+    // any changes?
     if(key != keyTrackOnFocus)
     {
-        delete plotTrackProfile;
-        plotTrackProfile = 0;
+        // delete what is currently stored;
+        keyTrackOnFocus.clear();
+//        delete plotTrackProfile;
 
-        if(!key.isEmpty())
+        // get access to track object
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+        if(trk == 0)
         {
-            plotTrackProfile = new CPlot(CPlot::eModeIcon, this);
-            plotTrackProfile->resize(300,120);
-            plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
-            plotTrackProfile->show();
+            return;
         }
+
+        plotTrackProfile = new CPlot(CPlotData::eAxisLinear, CPlot::eModeIcon, this);
+        if(height() < 700)
+        {
+            plotTrackProfile->resize(200,80);
+        }
+        else
+        {
+            plotTrackProfile->resize(300,120);
+        }
+        plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
+        plotTrackProfile->show();
+
+        trk->registerPlot(plotTrackProfile);
 
         keyTrackOnFocus = key;
     }

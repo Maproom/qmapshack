@@ -21,14 +21,23 @@
 
 #include <QtWidgets>
 
-CPlot::CPlot(mode_e mode, QWidget *parent)
+CPlot::CPlot(CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : QWidget(parent)
     , mode(mode)
     , needsRedraw(true)
-    , cursorFocus(false)
+    , showScale(true)
+    , thinLine(false)
     , posMouse(-1, -1)
 {
     setMouseTracking(true);
+
+    data = new CPlotData(type, this);
+
+    if(mode == eModeIcon)
+    {
+        showScale = false;
+        thinLine = true;
+    }
 }
 
 CPlot::~CPlot()
@@ -57,7 +66,6 @@ void CPlot::resizeEvent(QResizeEvent * e)
 
 void CPlot::leaveEvent(QEvent * e)
 {
-    cursorFocus = false;
     needsRedraw = true;
     posMouse    = QPoint(-1, -1);
 
@@ -70,7 +78,6 @@ void CPlot::leaveEvent(QEvent * e)
 
 void CPlot::enterEvent(QEvent * e)
 {
-    cursorFocus = true;
     needsRedraw = true;
     QApplication::setOverrideCursor(Qt::PointingHandCursor);
     update();
@@ -108,7 +115,7 @@ void CPlot::draw()
     {
         QRect r = rect();
         r.adjust(2,2,-2,-2);
-        if(cursorFocus || posMouse.x() != -1)
+        if(underMouse() || posMouse.x() != -1)
         {
             p.setPen(CCanvas::penBorderBlue);
             p.setBrush(QColor(255,255,255,255));

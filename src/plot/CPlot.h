@@ -21,12 +21,14 @@
 
 #include <QWidget>
 
+#include "plot/CPlotData.h"
+
 class CPlot : public QWidget
 {
     public:
         enum mode_e {eModeNormal, eModeIcon};
 
-        CPlot(mode_e mode, QWidget * parent);
+        CPlot(CPlotData::axistype_e type, mode_e mode, QWidget * parent);
         virtual ~CPlot();
 
     protected:
@@ -40,11 +42,18 @@ class CPlot : public QWidget
         void draw(QPainter& p);
         void draw();
 
+        // different draw modes
         mode_e mode;
+        // buffer needs update
         bool needsRedraw;
-        bool cursorFocus;
+
+        bool showScale;
+        bool thinLine;
+
         QImage buffer;
         QPoint posMouse;
+
+        CPlotData * data;
 };
 
 #endif //CPLOT_H

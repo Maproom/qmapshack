@@ -50,6 +50,8 @@ void initWptIcons()
     wptIcons["Blue Diamond"]        = icon_t("://icons/waypoints/32x32/DiamondBlue.png", 16, 16);
     wptIcons["Green Diamond"]       = icon_t("://icons/waypoints/32x32/DiamondGreen.png", 16, 16);
     wptIcons["Red Diamond"]         = icon_t("://icons/waypoints/32x32/DiamondRed.png", 16, 16);
+    wptIcons["Parking Area"]        = icon_t("://icons/cache/32x32/parking.png", 16, 16);
+    wptIcons["Trail Head"]          = icon_t("://icons/cache/32x32/trailhead.png", 16, 16);
 
 
     setWptIconByName("Traditional Cache", "://icons/cache/32x32/traditional.png");

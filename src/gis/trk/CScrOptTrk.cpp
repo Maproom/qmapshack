@@ -32,13 +32,18 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(trk->getInfo());
 
+    toolProfile->setChecked(trk->hasUserFocus());
+
 
     anchor = trk->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));
     adjustSize();
-    show();
+    show();        
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEdit()));
+    connect(toolProfile, SIGNAL(toggled(bool)), this, SLOT(slotProfile(bool)));
+    connect(toolCut, SIGNAL(clicked()), this, SLOT(slotCut()));
 }
 
 CScrOptTrk::~CScrOptTrk()
@@ -51,6 +56,22 @@ void CScrOptTrk::slotDelete()
     CGisWidget::self().delItemByKey(key);
 }
 
+void CScrOptTrk::slotEdit()
+{
+
+}
+
+void CScrOptTrk::slotProfile(bool on)
+{
+    CGisWidget::self().focusTrkByKey(on, key);
+    deleteLater();
+}
+
+void CScrOptTrk::slotCut()
+{
+
+    deleteLater();
+}
 
 void CScrOptTrk::draw(QPainter& p)
 {

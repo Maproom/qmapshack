@@ -497,9 +497,9 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
     return ((pos - posScreen).manhattanLength() < 22);
 }
 
-void CGisItemWpt::gainUserFocus()
+void CGisItemWpt::gainUserFocus(bool yes)
 {
-    keyUserFocus = key;
+    keyUserFocus = yes ? key : "";
 }
 
 void CGisItemWpt::edit()

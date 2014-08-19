@@ -104,7 +104,7 @@ class CGisItemWpt : public IGisItem
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
         bool isGeocache(){return geocache.hasData;}
-        void gainUserFocus();
+        void gainUserFocus(bool yes);
 
         void edit();
 

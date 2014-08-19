@@ -16,36 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#ifndef CPLOTAXISTIME_H
+#define CPLOTAXISTIME_H
 
-#include "mouse/IScrOpt.h"
+#include "plot/CPlotAxis.h"
 
-#include <QWidget>
-#include "ui_IScrOptTrk.h"
-
-class CGisItemTrk;
-class IMouse;
-
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
+class CPlotAxisTime : public CPlotAxis
 {
     Q_OBJECT
     public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptTrk();
+        CPlotAxisTime(QObject * parent);
+        virtual ~CPlotAxisTime();
 
-        void draw(QPainter& p);
+        ///calculate format for the given value
+        const QString fmtsgl(qreal /*val*/){return strFormat;}
+        ///calculate format for the given value
+        const QString fmtdbl(qreal /*val*/){return strFormat;}
 
-    private slots:        
-        void slotDelete();
-        void slotEdit();
-        void slotProfile(bool on);
-        void slotCut();
+        const tic_t* ticmark( const tic_t * t );
+    protected:
+        void calc();
 
-    private:
-        QString key;
-        QPointF anchor;
+        QString strFormat;
 };
 
-#endif //CSCROPTTRK_H
+#endif //CPLOTAXISTIME_H
 

@@ -22,6 +22,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -236,6 +237,20 @@ void CGisWidget::moveWptByKey(const QString& key)
         }
     }
     IGisItem::mutexItems.unlock();
+}
+
+void CGisWidget::focusTrkByKey(bool yes, const QString& key)
+{
+    IGisItem::mutexItems.lock();
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+    if(trk != 0)
+    {
+        trk->gainUserFocus(yes);
+    }
+
+    IGisItem::mutexItems.unlock();
+    emit sigChanged();
 }
 
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)

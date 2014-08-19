@@ -16,36 +16,36 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
-
-#include "mouse/IScrOpt.h"
+#ifndef CPLOT_H
+#define CPLOT_H
 
 #include <QWidget>
-#include "ui_IScrOptTrk.h"
 
-class CGisItemTrk;
-class IMouse;
-
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
+class CPlot : public QWidget
 {
-    Q_OBJECT
     public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptTrk();
+        enum mode_e {eModeNormal, eModeIcon};
 
-        void draw(QPainter& p);
+        CPlot(mode_e mode, QWidget * parent);
+        virtual ~CPlot();
 
-    private slots:        
-        void slotDelete();
-        void slotEdit();
-        void slotProfile(bool on);
-        void slotCut();
+    protected:
+        void paintEvent(QPaintEvent * e);
+        void resizeEvent(QResizeEvent * e);
+        void leaveEvent(QEvent * e);
+        void enterEvent(QEvent * e);
+        void mouseMoveEvent(QMouseEvent * e);
 
     private:
-        QString key;
-        QPointF anchor;
+        void draw(QPainter& p);
+        void draw();
+
+        mode_e mode;
+        bool needsRedraw;
+        bool cursorFocus;
+        QImage buffer;
+        QPoint posMouse;
 };
 
-#endif //CSCROPTTRK_H
+#endif //CPLOT_H
 

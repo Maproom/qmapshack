@@ -84,6 +84,10 @@ set( SRCS
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/CGisProject.cpp    
+    plot/CPlotAxis.cpp
+    plot/CPlotAxisTime.cpp
+    plot/CPlot.cpp
+    plot/CPlotData.cpp
 )
 
 set( HDRS
@@ -163,6 +167,10 @@ set( HDRS
     gis/CGisListDB.h
     gis/CGisListWks.h
     gis/CGisProject.h    
+    plot/CPlotAxis.h
+    plot/CPlotAxisTime.h
+    plot/CPlotData.h
+    plot/CPlot.h
 )
 
 set( UIS

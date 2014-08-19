@@ -84,6 +84,8 @@
         <file>icons/16x16/UnLock.png</file>
         <file>icons/16x16/WptMove.png</file>
         <file>icons/16x16/WptProj.png</file>
+        <file>icons/16x16/TrkCut.png</file>
+        <file>icons/16x16/TrkProfile.png</file>
         <file>icons/16x16/Tainted.png</file>
         <file>icons/16x16/AddWpt.png</file>
 
@@ -153,6 +155,8 @@
         <file>icons/32x32/UnLock.png</file>
         <file>icons/32x32/WptMove.png</file>
         <file>icons/32x32/WptProj.png</file>
+        <file>icons/32x32/TrkCut.png</file>
+        <file>icons/32x32/TrkProfile.png</file>
         <file>icons/32x32/Tainted.png</file>
         <file>icons/32x32/AddWpt.png</file>
 
@@ -222,6 +226,8 @@
         <file>icons/48x48/UnLock.png</file>
         <file>icons/48x48/WptMove.png</file>
         <file>icons/48x48/WptProj.png</file>
+        <file>icons/48x48/TrkCut.png</file>
+        <file>icons/48x48/TrkProfile.png</file>
         <file>icons/48x48/Tainted.png</file>
         <file>icons/48x48/AddWpt.png</file>
 

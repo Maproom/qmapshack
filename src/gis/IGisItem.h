@@ -121,6 +121,10 @@ class IGisItem : public QTreeWidgetItem
          */
         bool isReadOnly();
 
+        /**
+           @brief Query if the item is imported and was changed
+           @return True if content was changed.
+         */
         bool isTainted();
         /**
            @brief Set the read only mode.
@@ -136,7 +140,7 @@ class IGisItem : public QTreeWidgetItem
         virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
         virtual void drawHighlight(QPainter& p) = 0;        
 
-        virtual void gainUserFocus() = 0;
+        virtual void gainUserFocus(bool yes) = 0;
 
         static QString removeHtml(const QString &str);
 

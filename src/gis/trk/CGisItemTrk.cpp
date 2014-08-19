@@ -107,7 +107,10 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
 
 CGisItemTrk::~CGisItemTrk()
 {
-
+    if(key == keyUserFocus)
+    {
+        keyUserFocus.clear();
+    }
 }
 
 void CGisItemTrk::genKey()
@@ -539,9 +542,9 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
     return false;
 }
 
-void CGisItemTrk::gainUserFocus()
+void CGisItemTrk::gainUserFocus(bool yes)
 {
-    keyUserFocus = key;
+    keyUserFocus = yes ? key : "";
 }
 
 

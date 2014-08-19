@@ -175,9 +175,9 @@ bool CGisItemRte::isCloseTo(const QPointF& pos)
     return false;
 }
 
-void CGisItemRte::gainUserFocus()
+void CGisItemRte::gainUserFocus(bool yes)
 {
-    keyUserFocus = key;
+    keyUserFocus = yes ? key : "";
 }
 
 

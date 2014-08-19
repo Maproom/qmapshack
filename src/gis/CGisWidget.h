@@ -71,12 +71,35 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
          */
         void delItemByKey(const QString& key);
 
+        /**
+           @brief Edit / view item details
+           @param key       the item's key as it is returned from IGisItem::getKey()
+         */
         void editItemByKey(const QString& key);
 
+        /**
+           @brief Clone waypoint and move clone
+           @param key       the item's key as it is returned from IGisItem::getKey()
+         */
         void projWptByKey(const QString& key);
 
+        /**
+           @brief Move waypoint via mouse
+           @param key       the item's key as it is returned from IGisItem::getKey()
+         */
         void moveWptByKey(const QString& key);
 
+
+        void focusTrkByKey(bool yes, const QString& key);
+
+        /**
+           @brief Select a project via dialog
+
+           If a new project name is entered a new project is created. Else the pointer
+           to an existing project is passed back.
+
+           @return 0 if no project was selected.
+         */
         CGisProject * selectProject();
 
     signals:

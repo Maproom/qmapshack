@@ -357,6 +357,7 @@ void CGisProject::delItemByKey(const QString& key)
             }
 
             items << takeChild(i-1);
+            setText(1,"*");
         }
     }
     qDeleteAll(items);

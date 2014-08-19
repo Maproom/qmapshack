@@ -28,6 +28,8 @@
 #include "mouse/CMouseNormal.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "gis/CGisDraw.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "plot/CPlot.h"
 
 
 #include <QtWidgets>
@@ -42,6 +44,7 @@ QBrush CCanvas::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 CCanvas::CCanvas(QWidget *parent)
     : QWidget(parent)
     , posFocus(12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD)
+    , plotTrackProfile(0)
 {
     setFocusPolicy(Qt::WheelFocus);
 
@@ -88,12 +91,17 @@ CCanvas::CCanvas(QWidget *parent)
     demLoadIndicator->show();
 
 
-
     connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));
     connect(map, SIGNAL(sigStopThread()), mapLoadIndicator, SLOT(hide()));
 
     connect(dem, SIGNAL(sigStartThread()), demLoadIndicator, SLOT(show()));
     connect(dem, SIGNAL(sigStopThread()), demLoadIndicator, SLOT(hide()));
+
+    timerTrackOnFocus = new QTimer(this);
+    timerTrackOnFocus->setSingleShot(false);
+    timerTrackOnFocus->start(1000);
+
+    connect(timerTrackOnFocus, SIGNAL(timeout()), this, SLOT(slotCheckTrackOnFocus()));
 }
 
 CCanvas::~CCanvas()
@@ -162,6 +170,11 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     QPoint p2(demLoadIndicator->width()>>1, demLoadIndicator->height()>>1);
     demLoadIndicator->move(rect().center() - p2);
+
+    if(plotTrackProfile)
+    {
+        plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
+    }
 }
 
 void CCanvas::paintEvent(QPaintEvent * e)
@@ -448,6 +461,26 @@ void CCanvas::slotToolTip()
     }
     QPoint p = mapToGlobal(posToolTip + QPoint(32,0));
     QToolTip::showText(p,str);
+}
+
+void CCanvas::slotCheckTrackOnFocus()
+{
+    const QString& key = CGisItemTrk::getKeyUserFocus();
+    if(key != keyTrackOnFocus)
+    {
+        delete plotTrackProfile;
+        plotTrackProfile = 0;
+
+        if(!key.isEmpty())
+        {
+            plotTrackProfile = new CPlot(CPlot::eModeIcon, this);
+            plotTrackProfile->resize(300,120);
+            plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
+            plotTrackProfile->show();
+        }
+
+        keyTrackOnFocus = key;
+    }
 }
 
 void CCanvas::moveMap(const QPointF& delta)

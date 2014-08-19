@@ -21,6 +21,7 @@
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -39,8 +40,11 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuItem        = new QMenu(this);
     actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
-    actionMoveWpt   = menuItem->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint..."), this, SLOT(slotMoveWpt()));
+    actionMoveWpt   = menuItem->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    actionFocusTrk  = menuItem->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
+    actionFocusTrk->setCheckable(true);
+    connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
 }
@@ -76,7 +80,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
     if(gisItem != 0)
     {
-        // try to cast item to special types and hide/show actions on result
+        // try to cast item to waypoint and hide/show actions on result
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
         if(wpt == 0)
         {
@@ -91,6 +95,17 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionProjWpt->setEnabled(!wpt->isGeocache());
         }
 
+        // try to cast item to track and hide/show actions on result
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gisItem);
+        if(trk == 0)
+        {
+            actionFocusTrk->setVisible(false);
+        }
+        else
+        {
+            actionFocusTrk->setVisible(true);
+            actionFocusTrk->setChecked(trk->hasUserFocus());
+        }
         // display menu
         QPoint p = mapToGlobal(point);
         menuItem->exec(p);
@@ -207,6 +222,18 @@ void CGisListWks::slotMoveWpt()
     {
         QString key = gisItem->getKey();
         CGisWidget::self().moveWptByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotFocusTrk(bool on)
+{
+    IGisItem::mutexItems.lock();
+    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().focusTrkByKey(on, key);
     }
     IGisItem::mutexItems.unlock();
 }

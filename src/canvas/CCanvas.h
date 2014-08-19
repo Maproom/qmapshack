@@ -21,6 +21,7 @@
 
 #include <QWidget>
 #include <QPainter>
+
 class CMapDraw;
 class CGrid;
 class CDemDraw;
@@ -32,6 +33,7 @@ class IMouse;
 class QTimer;
 class QMovie;
 class QLabel;
+class CPlot;
 
 inline  void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 {
@@ -113,6 +115,7 @@ class CCanvas : public QWidget
 
     private slots:
         void slotToolTip();
+        void slotCheckTrackOnFocus();
 
     private:
         void drawScale(QPainter& p);
@@ -148,6 +151,9 @@ class CCanvas : public QWidget
         QMovie * loadIndicator2;
         QLabel * demLoadIndicator;
 
+        QTimer * timerTrackOnFocus;
+        QString keyTrackOnFocus;
+        CPlot *  plotTrackProfile;
 };
 
 #endif //CCANVAS_H

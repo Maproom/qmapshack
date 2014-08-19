@@ -40,8 +40,10 @@ class CGisItemTrk : public IGisItem
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
-        bool isCloseTo(const QPointF& pos);
-        void gainUserFocus();
+        bool isCloseTo(const QPointF& pos);        
+        void gainUserFocus(bool yes);
+        bool hasUserFocus(){return key == keyUserFocus;}
+        static const QString& getKeyUserFocus(){return keyUserFocus;}
 
     private:
         struct trk_t;

@@ -41,7 +41,7 @@ class CGisItemRte : public IGisItem
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
-        void gainUserFocus();
+        void gainUserFocus(bool yes);
 
     private:
         struct rte_t;

@@ -25,7 +25,7 @@
 
 class QDomNode;
 class CGisProject;
-class CPlot;
+class IPlot;
 
 class CGisItemTrk : public IGisItem
 {
@@ -62,7 +62,7 @@ class CGisItemTrk : public IGisItem
 
            @param plot
         */
-        void registerPlot(CPlot * plot);
+        void registerPlot(IPlot * plot);
 
 
         /**
@@ -72,7 +72,7 @@ class CGisItemTrk : public IGisItem
 
            @param plot
         */
-        void unregisterPlot(CPlot * plot);
+        void unregisterPlot(IPlot * plot);
 
     private:
         struct trk_t;
@@ -200,7 +200,7 @@ class CGisItemTrk : public IGisItem
                   the track object in the plot object, too. By that plot and track can
                   easily communicate with each other.
         */
-        QSet<CPlot*> registeredPlots;
+        QSet<IPlot*> registeredPlots;
 };
 
 #endif //CGISITEMTRK_H

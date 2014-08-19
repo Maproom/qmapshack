@@ -16,47 +16,15 @@
 
 **********************************************************************************************/
 
-#ifndef CPLOT_H
-#define CPLOT_H
+#include "plot/CPlotProfile.h"
 
-#include <QWidget>
-
-#include "plot/CPlotData.h"
-class CGisItemTrk;
-
-class CPlot : public QWidget
+CPlotProfile::CPlotProfile(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
+    : IPlot(trk,type, mode, parent)
 {
-    public:
-        enum mode_e {eModeNormal, eModeIcon};
+}
 
-        CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
-        virtual ~CPlot();
+CPlotProfile::~CPlotProfile()
+{
 
-    protected:
-        void paintEvent(QPaintEvent * e);
-        void resizeEvent(QResizeEvent * e);
-        void leaveEvent(QEvent * e);
-        void enterEvent(QEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
-
-    private:
-        void draw(QPainter& p);
-        void draw();
-
-        // different draw modes
-        mode_e mode;
-        // buffer needs update
-        bool needsRedraw;
-
-        bool showScale;
-        bool thinLine;
-
-        QImage buffer;
-        QPoint posMouse;
-
-        CGisItemTrk * trk;
-        CPlotData * data;
-};
-
-#endif //CPLOT_H
+}
 

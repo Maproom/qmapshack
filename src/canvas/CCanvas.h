@@ -34,7 +34,7 @@ class IMouse;
 class QTimer;
 class QMovie;
 class QLabel;
-class CPlot;
+class IPlot;
 
 inline  void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 {
@@ -156,7 +156,7 @@ class CCanvas : public QWidget
         /// the key of the currentl focused track
         QString keyTrackOnFocus;
         /// the track profile plot
-        QPointer<CPlot>  plotTrackProfile;
+        QPointer<IPlot>  plotTrackProfile;
 };
 
 #endif //CCANVAS_H

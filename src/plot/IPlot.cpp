@@ -16,12 +16,14 @@
 
 **********************************************************************************************/
 
-#include "plot/CPlot.h"
+#include "IPlot.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+
 #include <QtWidgets>
 
-CPlot::CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
+IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : QWidget(parent)
     , mode(mode)
     , needsRedraw(true)
@@ -41,20 +43,21 @@ CPlot::CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
         showScale = false;
         thinLine = true;
     }
+
 }
 
-CPlot::~CPlot()
+IPlot::~IPlot()
 {
     trk->unregisterPlot(this);
 }
 
-void CPlot::paintEvent(QPaintEvent * e)
+void IPlot::paintEvent(QPaintEvent * e)
 {
     QPainter p(this);
     draw(p);
 }
 
-void CPlot::resizeEvent(QResizeEvent * e)
+void IPlot::resizeEvent(QResizeEvent * e)
 {
 //    setSizes();
 
@@ -67,7 +70,7 @@ void CPlot::resizeEvent(QResizeEvent * e)
     update();
 }
 
-void CPlot::leaveEvent(QEvent * e)
+void IPlot::leaveEvent(QEvent * e)
 {
     needsRedraw = true;
     posMouse    = QPoint(-1, -1);
@@ -79,14 +82,14 @@ void CPlot::leaveEvent(QEvent * e)
 }
 
 
-void CPlot::enterEvent(QEvent * e)
+void IPlot::enterEvent(QEvent * e)
 {
     needsRedraw = true;
     QApplication::setOverrideCursor(Qt::PointingHandCursor);
     update();
 }
 
-void CPlot::draw(QPainter& p)
+void IPlot::draw(QPainter& p)
 {
     if(needsRedraw)
     {
@@ -97,14 +100,14 @@ void CPlot::draw(QPainter& p)
     p.drawImage(0,0,buffer);
 }
 
-void CPlot::mouseMoveEvent(QMouseEvent * e)
+void IPlot::mouseMoveEvent(QMouseEvent * e)
 {
     posMouse = QPoint(-1,-1);
 
     posMouse = e->pos();
 }
 
-void CPlot::draw()
+void IPlot::draw()
 {
     buffer.fill(Qt::transparent);
     QPainter p(&buffer);

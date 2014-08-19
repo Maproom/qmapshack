@@ -20,7 +20,7 @@
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
-#include "plot/CPlot.h"
+#include "plot/IPlot.h"
 #include "GeoMath.h"
 
 #include <QtXml>
@@ -123,12 +123,12 @@ CGisItemTrk::~CGisItemTrk()
     qDeleteAll(registeredPlots.toList());
 }
 
-void CGisItemTrk::registerPlot(CPlot * plot)
+void CGisItemTrk::registerPlot(IPlot * plot)
 {
     registeredPlots << plot;
 }
 
-void CGisItemTrk::unregisterPlot(CPlot * plot)
+void CGisItemTrk::unregisterPlot(IPlot * plot)
 {
     registeredPlots.remove(plot);
 }

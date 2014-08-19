@@ -30,7 +30,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "plot/CPlot.h"
+#include "plot/CPlotProfile.h"
 
 
 #include <QtWidgets>
@@ -492,7 +492,7 @@ void CCanvas::slotCheckTrackOnFocus()
         }
 
         // create new profile plot, the plot will register itself at the track
-        plotTrackProfile = new CPlot(trk2, CPlotData::eAxisLinear, CPlot::eModeIcon, this);
+        plotTrackProfile = new CPlotProfile(trk2, CPlotData::eAxisLinear, IPlot::eModeIcon, this);
         if(height() < 700)
         {
             plotTrackProfile->resize(200,80);

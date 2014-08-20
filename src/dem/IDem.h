@@ -94,9 +94,9 @@ class IDem : public IDrawObject
         quint32 ysize_px;
 
         /// scale [px/m]
-        double xscale;
+        qreal xscale;
         /// scale [px/m]
-        double yscale;
+        qreal yscale;
 
 
 

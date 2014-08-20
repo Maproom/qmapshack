@@ -29,8 +29,11 @@ class CGisDraw : public IDrawContext
         CGisDraw(CCanvas *parent);
         virtual ~CGisDraw();
 
+        using IDrawContext::draw;
+        void draw(QPainter& p, const QRect& rect);
+
     protected:
-        virtual void drawt(buffer_t& currentBuffer);
+        void drawt(buffer_t& currentBuffer);
 };
 
 #endif //CGISDRAW_H

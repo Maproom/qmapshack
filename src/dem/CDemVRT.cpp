@@ -88,7 +88,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     xsize_px = dataset->GetRasterXSize();
     ysize_px = dataset->GetRasterYSize();
 
-    double adfGeoTransform[6];
+    qreal adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
     xscale  = adfGeoTransform[1];
@@ -241,7 +241,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    double nTiles = ((right - left) * (bottom - top) / (w * h));
+    qreal nTiles = ((right - left) * (bottom - top) / (w * h));
     qDebug() << "DEM> tiles:" << nTiles;
     if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {

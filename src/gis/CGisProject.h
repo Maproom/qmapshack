@@ -84,6 +84,7 @@ class CGisProject : public QTreeWidgetItem
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
+        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
         void save();
         void saveAs();

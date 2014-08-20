@@ -90,7 +90,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         }
 
         int success = 0;
-        double idx = pBand->GetNoDataValue(&success);
+        qreal idx = pBand->GetNoDataValue(&success);
 
         if(success)
         {
@@ -128,7 +128,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     ysize_px = dataset->GetRasterYSize();
 
 
-    double adfGeoTransform[6];
+    qreal adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
     xscale  = adfGeoTransform[1];
@@ -238,7 +238,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
 
     // estimate number of tiles and use it as a limit if no
     // user defined limit is given
-    double nTiles = ((right - left) * (bottom - top) / (dx*dy));
+    qreal nTiles = ((right - left) * (bottom - top) / (dx*dy));
     if(hasOverviews)
     {
         // if there are overviews tiles canbe reduced by reading

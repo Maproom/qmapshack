@@ -96,6 +96,7 @@ QString CGisItemTrk::keyUserFocus;
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , pointOfFocus(0)
 {    
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -621,7 +622,20 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     }
 }
 
+void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+{
+    if(hasUserFocus() && pointOfFocus)
+    {
+        QPointF pt(pointOfFocus->lon, pointOfFocus->lat);
+        pt *= DEG_TO_RAD;
 
+        gis->convertRad2Px(pt);
+
+        p.drawEllipse(pt,10,10);
+
+    }
+
+}
 
 void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
@@ -680,4 +694,38 @@ void CGisItemTrk::setIcon(const QString& c)
     icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     QTreeWidgetItem::setIcon(0,icon);
+}
+
+void CGisItemTrk::setPointOfFocusByDistance(qreal dist)
+{
+    pointOfFocus = 0;
+
+    if(!hasUserFocus())
+    {
+        return;
+    }
+
+    qreal delta = totalDistance;
+
+    foreach (const trkseg_t& seg, trk.segs)
+    {
+        foreach(const trkpt_t& pt, seg.pts)
+        {
+            if(pt.flags & trkpt_t::eDeleted)
+            {
+                continue;
+            }
+
+            qreal d = qAbs(pt.distance - dist);
+            if(d <= delta)
+            {
+                pointOfFocus = &pt;
+                delta = d;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 }

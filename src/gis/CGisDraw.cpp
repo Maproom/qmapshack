@@ -33,6 +33,11 @@ CGisDraw::~CGisDraw()
 
 }
 
+void CGisDraw::draw(QPainter& p, const QRect& rect)
+{
+    CGisWidget::self().fastDraw(p, rect, this);
+}
+
 void CGisDraw::drawt(buffer_t& currentBuffer)
 {
 

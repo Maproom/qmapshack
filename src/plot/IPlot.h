@@ -67,6 +67,7 @@ class IPlot : public QWidget
         void drawGridY( QPainter &p );
         void drawXTic( QPainter &p );
         void drawYTic( QPainter &p );
+        void drawDecoration( QPainter &p );
 
         // different draw modes
         mode_e mode;

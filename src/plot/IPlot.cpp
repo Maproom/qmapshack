@@ -31,7 +31,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , needsRedraw(true)
     , showScale(true)
     , thinLine(false)
-    , posMouse(-1, -1)
+    , posMouse(NOPOINT)
     , trk(trk)
     , fm(font())
     , left(0)
@@ -158,7 +158,7 @@ void IPlot::resizeEvent(QResizeEvent * e)
 void IPlot::leaveEvent(QEvent * e)
 {
     needsRedraw = true;
-    posMouse    = QPoint(-1, -1);
+    posMouse    = NOPOINT;
     QApplication::restoreOverrideCursor();
     update();
 }
@@ -180,13 +180,38 @@ void IPlot::draw(QPainter& p)
     }
 
     p.drawImage(0,0,buffer);
+
+    drawDecoration(p);
 }
 
 void IPlot::mouseMoveEvent(QMouseEvent * e)
 {
-    posMouse = QPoint(-1,-1);
+    posMouse = NOPOINT;
 
-    posMouse = e->pos();
+    if(rectGraphArea.contains(e->pos()))
+    {
+        posMouse = e->pos();
+
+        qreal x = data->x().pt2val(posMouse.x() - left);
+
+        if(data->axisType == CPlotData::eAxisLinear)
+        {
+            trk->setPointOfFocusByDistance(x);
+        }
+        else if(data->axisType == CPlotData::eAxisTime)
+        {
+
+        }
+
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas)
+        {
+            canvas->update();
+        }
+
+    }
+
+    update();
 }
 
 void IPlot::setSizes()
@@ -333,7 +358,7 @@ void IPlot::draw()
     {
         QRect r = rect();
         r.adjust(2,2,-2,-2);
-        if(underMouse() || posMouse.x() != -1)
+        if(underMouse() || posMouse != NOPOINT)
         {
             p.setPen(CCanvas::penBorderBlue);
             p.setOpacity(1.0);
@@ -372,6 +397,7 @@ void IPlot::draw()
     drawYTic(p);
     p.setPen(QPen(Qt::black,2));
     p.drawRect(rectGraphArea);
+
 
 //    drawLegend(p);
 }
@@ -495,13 +521,13 @@ void IPlot::drawXScale( QPainter &p )
         t = data->x().ticmark( t );
     }
 
-    double limMin, limMax, useMin, useMax;
+    qreal limMin, limMax, useMin, useMax;
     data->x().getLimits(limMin, limMax, useMin, useMax);
 
     if((limMax - limMin) <= (useMax - useMin)) return;
 
-    double scale = (right - left) / (limMax - limMin);
-    //     double val   = data->x().pt2val(0);
+    qreal scale = (right - left) / (limMax - limMin);
+    //     qreal val   = data->x().pt2val(0);
 
     int x = left + (useMin - limMin) * scale;
     int y = bottom + 5;
@@ -529,7 +555,7 @@ void IPlot::drawYScale( QPainter &p )
 
     ix = left - scaleWidthY1 - deadAreaX;
 
-    double limMin, limMax, useMin, useMax;
+    qreal limMin, limMax, useMin, useMax;
     data->y().getLimits(limMin, limMax, useMin, useMax);
 
     // draw min/max lables 1st;
@@ -571,8 +597,8 @@ void IPlot::drawYScale( QPainter &p )
 
     if((limMax - limMin) <= (useMax - useMin)) return;
 
-    double scale = (top - bottom) / (limMax - limMin);
-    //     double val   = data->y().pt2val(0);
+    qreal scale = (top - bottom) / (limMax - limMin);
+    //     qreal val   = data->y().pt2val(0);
 
     int x = left - 5;
     int y = bottom + (useMin - limMin) * scale;
@@ -630,7 +656,7 @@ void IPlot::drawGridY( QPainter &p )
     }
 
     // draw min/max lines
-    double limMin, limMax, useMin, useMax;
+    qreal limMin, limMax, useMin, useMax;
     data->y().getLimits(limMin, limMax, useMin, useMax);
 
     if(data->ymin > useMin)
@@ -682,5 +708,15 @@ void IPlot::drawYTic( QPainter &p )
         p.drawLine( ixl, iy, ixl + 5, iy );
         p.drawLine( ixr, iy, ixr - 5, iy );
         t = data->y().ticmark( t );
+    }
+}
+
+void IPlot::drawDecoration( QPainter &p )
+{
+
+    if(posMouse != NOPOINT)
+    {
+        p.setPen(Qt::red);
+        p.drawLine(posMouse.x(), top, posMouse.x(), bottom);
     }
 }

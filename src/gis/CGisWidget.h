@@ -37,11 +37,26 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         /**
            @brief Draw all loaded data in the workspace that is visible
 
+           This method is called from The CGisDraw thread. The thread has to make sure
+           that everything is thread safe.
+
            @param p         the painter to be used
            @param viewport  the viewport in units of rad
            @param gis       the draw context to be used
-         */
+        */
         void draw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
+
+
+        /**
+           @brief Draw all data that is time variant and can't wait for a full update
+
+           This method is called directly from the main thread's paintEvent() method.
+
+           @param p         the painter to be used
+           @param viewport  the viewport in units of rad
+           @param gis       the draw context to be used
+        */
+        void fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
 
         /**
            @brief Get items close to the given point
@@ -51,7 +66,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
            @param pos       the position in pixel
            @param items     an empty item list that will get filled with temporary pointers
-         */
+        */
         void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
 
         /**
@@ -89,7 +104,11 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
          */
         void moveWptByKey(const QString& key);
 
-
+        /**
+           @brief Set user focus to track
+           @param yes       true if focus is set
+           @param key       the item's key as it is returned from IGisItem::getKey()
+         */
         void focusTrkByKey(bool yes, const QString& key);
 
         /**

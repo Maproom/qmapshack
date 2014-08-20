@@ -44,8 +44,8 @@ class CGrid : public QObject
 
     private:
         friend class CGridSetup;
-        void findGridSpace(double min, double max, double& xSpace, double& ySpace);
-        bool calcIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double& x, double& y);
+        void findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace);
+        bool calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qreal& x, qreal& y);
 
         CMapDraw * map;
 

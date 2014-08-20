@@ -84,13 +84,13 @@ class CMapIMG : public IMap
             qint32 iCenterLat;
 
             /// north boundary of area covered by this subsection []
-            double north;
+            qreal north;
             /// east boundary of area covered by this subsection []
-            double east;
+            qreal east;
             /// south boundary of area covered by this subsection []
-            double south;
+            qreal south;
             /// west boundary of area covered by this subsection []
-            double west;
+            qreal west;
 
             /// area in meter coordinates covered by this subdivision []
             QRectF area;
@@ -118,13 +118,13 @@ class CMapIMG : public IMap
             QMap<QString,subfile_part_t> parts;
 
             /// north boundary of area covered by this subfile [rad]
-            double north;
+            qreal north;
             /// east boundary of area covered by this subfile [rad]
-            double east;
+            qreal east;
             /// south boundary of area covered by this subfile [rad]
-            double south;
+            qreal south;
             /// west boundary of area covered by this subfile [rad]
-            double west;
+            qreal west;
 
             /// area in [] covered by this subfile
             QRectF area;

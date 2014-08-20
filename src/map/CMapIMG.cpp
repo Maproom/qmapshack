@@ -42,10 +42,10 @@
 static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewport)
 {
 
-    double north =  -90.0 * DEG_TO_RAD;
-    double south =   90.0 * DEG_TO_RAD;
-    double west  =  180.0 * DEG_TO_RAD;
-    double east  = -180.0 * DEG_TO_RAD;
+    qreal north =  -90.0 * DEG_TO_RAD;
+    qreal south =   90.0 * DEG_TO_RAD;
+    qreal west  =  180.0 * DEG_TO_RAD;
+    qreal east  = -180.0 * DEG_TO_RAD;
 
     foreach(const QPointF& pt, poly)
     {
@@ -1639,7 +1639,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
     font.setBold(false);
     QFontMetricsF metrics(font);
 
-    QVector<double> lengths; lengths.reserve(100);
+    QVector<qreal> lengths; lengths.reserve(100);
 
     int pixmapCount = 0;
     int borderCount = 0;
@@ -1668,7 +1668,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
         if(property.hasPixmap)
         {
             const QImage &pixmap    = CMainWindow::self().isNight() ? property.imgNight : property.imgDay;
-            const double h          = pixmap.height();
+            const qreal h          = pixmap.height();
 
             QList<quint32>::const_iterator it = dict[type].constBegin();
             for( ; it != dict[type].constEnd() ; ++it)
@@ -1700,9 +1700,9 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
                     lengths.reserve(size);
 
-                    double u1, u2, v1, v2;
+                    qreal u1, u2, v1, v2;
                     QPainterPath path;
-                    double segLength, totalLength = 0;
+                    qreal segLength, totalLength = 0;
 
                     u1 = poly[0].x();
                     v1 = poly[0].y();
@@ -1728,7 +1728,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                     path.addPolygon(poly);
                     const int nLength = lengths.count();
 
-                    double curLength = 0;
+                    qreal curLength = 0;
                     QPointF p2       = path.pointAtPercent(curLength / totalLength);
                     for(int i = 0; i < nLength; ++i)
                     {
@@ -1738,7 +1738,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
                         QPointF p1      = p2;
                         p2              = path.pointAtPercent((curLength + segLength) / totalLength);
-                        double angle    = atan((p2.y() - p1.y()) / (p2.x() - p1.x())) * 180 / M_PI;
+                        qreal angle    = atan((p2.y() - p1.y()) / (p2.x() - p1.x())) * 180 / M_PI;
 
                         if(p2.x() - p1.x() < 0)
                         {
@@ -2454,12 +2454,12 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
     int i = 0;                   // index into poly line
     int len;                     // number of points in line
     projXY p1, p2;               // the two points of the polyline close to pt
-    double dx,dy;                // delta x and y defined by p1 and p2
-    double d_p1_p2;              // distance between p1 and p2
-    double u;                    // ratio u the tangent point will divide d_p1_p2
-    double x,y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
-    double distance;             // the distance to the polyline
-    double shortest;             // shortest distance sofar
+    qreal dx,dy;                // delta x and y defined by p1 and p2
+    qreal d_p1_p2;              // distance between p1 and p2
+    qreal u;                    // ratio u the tangent point will divide d_p1_p2
+    qreal x,y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
+    qreal distance;             // the distance to the polyline
+    qreal shortest;             // shortest distance sofar
 
     QPointF resPt = pt;
     QString key, value;
@@ -2582,8 +2582,8 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
     int     npol;
     int     i = 0, j = 0 ,c = 0;
     projXY      p1, p2;          // the two points of the polyline close to pt
-    double  x = pt.x();
-    double  y = pt.y();
+    qreal  x = pt.x();
+    qreal  y = pt.y();
     QString value;
 
     polytype_t::const_iterator line = polygons.begin();

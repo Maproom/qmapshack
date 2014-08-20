@@ -113,7 +113,6 @@ class IDrawContext : public QThread
             @param needsRedraw  set true to trigger a redraw in the background thread
             @param f            the point of focus in [°] that is drawn in the middle of the viewport.
          */
-
         void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF &f, const QRectF &r);
 
         /**

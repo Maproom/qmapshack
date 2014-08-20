@@ -205,18 +205,19 @@ void CCanvas::paintEvent(QPaintEvent * e)
     // fill the backbround with default pattern
     p.fillRect(rect(), "#FFFFBF");
 
-    // ----- start to draw geo-referenced content -----
+    // ----- start to draw thread based content -----
     // move coordinate system to center of the screen
     p.translate(width() >> 1, height() >> 1);
 
     map->draw(p, needsRedraw, posFocus, r);
     dem->draw(p, needsRedraw, posFocus, r);
-    gis->draw(p, needsRedraw, posFocus, r);
+    gis->draw(p, needsRedraw, posFocus, r);   
 
     // restore coordinate system to default
     p.resetTransform();
-    // ----- start to draw static content -----
+    // ----- start to draw fast content -----
 
+    gis->draw(p, rect());
     grid->draw(p, rect());
     mouse->draw(p, rect());
 

@@ -59,14 +59,10 @@ void CPlotProfile::updateData()
 
     qreal basefactor = IUnit::self().basefactor;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
-    for(int s = 0; s < t.segs.size(); s++)
+    foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
     {
-        const CGisItemTrk::trkseg_t& seg = t.segs[s];
-
-        for(int p = 0; p < seg.pts.size(); p++)
+        foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
         {
-            const CGisItemTrk::trkpt_t& trkpt = seg.pts[p];
-
             if(trkpt.flags & CGisItemTrk::trkpt_t::eDeleted)
             {
                 continue;
@@ -74,9 +70,8 @@ void CPlotProfile::updateData()
 
             if(trkpt.ele != NOINT)
             {
-                lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (double)trkpt.time.toTime_t(), trkpt.ele * basefactor);
+                lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.ele * basefactor);
             }
-
         }
     }
 

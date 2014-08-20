@@ -268,12 +268,12 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             break;
         }
 
-        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
-        if(item == 0)
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
         {
             continue;
         }
-        item->drawItem(p, viewport, blockedAreas, seenKeys, gis);
+        project->drawItem(p, viewport, blockedAreas, seenKeys, gis);
     }
 
     // reset seen keys as lables will build the list a second time
@@ -287,12 +287,28 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             break;
         }
 
-        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
-        if(item == 0)
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
         {
             continue;
         }
-        item->drawLabel(p, viewport, blockedAreas, seenKeys, fm, gis);
+        project->drawLabel(p, viewport, blockedAreas, seenKeys, fm, gis);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
+{
+    IGisItem::mutexItems.lock();
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        if(project == 0)
+        {
+            continue;
+        }
+
+        project->drawItem(p, viewport, gis);
     }
     IGisItem::mutexItems.unlock();
 }

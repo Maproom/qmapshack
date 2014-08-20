@@ -90,9 +90,9 @@ void CGrid::setProjAndColor(const QString& proj, const QColor& c)
 
 }
 
-void CGrid::findGridSpace(double min, double max, double& xSpace, double& ySpace)
+void CGrid::findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace)
 {
-    double dX = qAbs(min - max) / 10;
+    qreal dX = qAbs(min - max) / 10;
     if(dX < M_PI/180000)
     {
         xSpace = 5*M_PI/1800000;
@@ -178,19 +178,19 @@ void CGrid::findGridSpace(double min, double max, double& xSpace, double& ySpace
 }
 
 
-bool CGrid::calcIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double& x, double& y)
+bool CGrid::calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qreal& x, qreal& y)
 {
-    double ua = ((x4 - x3)*(y1 - y3) - (y4 - y3)*(x1 - x3))/((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
+    qreal ua = ((x4 - x3)*(y1 - y3) - (y4 - y3)*(x1 - x3))/((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
 
     x = x1 + ua * (x2 - x1);
     y = y1 + ua * (y2 - y1);
 
-    double d12 = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
-    double d1x = (x1 - x)  * (x1 - x)  + (y1 - y)  * (y1 - y);
-    double d2x = (x2 - x)  * (x2 - x)  + (y2 - y)  * (y2 - y);
-    double d34 = (x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3);
-    double d3x = (x3 - x)  * (x3 - x)  + (y3 - y)  * (y3 - y);
-    double d4x = (x4 - x)  * (x4 - x)  + (y4 - y)  * (y4 - y);
+    qreal d12 = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+    qreal d1x = (x1 - x)  * (x1 - x)  + (y1 - y)  * (y1 - y);
+    qreal d2x = (x2 - x)  * (x2 - x)  + (y2 - y)  * (y2 - y);
+    qreal d34 = (x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3);
+    qreal d3x = (x3 - x)  * (x3 - x)  + (y3 - y)  * (y3 - y);
+    qreal d4x = (x4 - x)  * (x4 - x)  + (y4 - y)  * (y4 - y);
 
     return (d12 >= d1x) && (d12 >= d2x) && (d34 >= d3x) && (d34 >= d4x);
 }
@@ -198,9 +198,9 @@ bool CGrid::calcIntersection(double x1, double y1, double x2, double y2, double 
 
 struct val_t
 {
-    val_t(qint32 pos, double val) : pos(pos), val(val){}
+    val_t(qint32 pos, qreal val) : pos(pos), val(val){}
     qint32 pos;
-    double val;
+    qreal val;
 };
 
 void CGrid::draw(QPainter& p, const QRect& rect)
@@ -234,20 +234,20 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     //    qDebug() << topLeft.v  - btmLeft.v;
     //    qDebug() << topRight.v - btmRight.v;
 
-    double topMax   = topLeft.y()  > topRight.y()   ? topLeft.y()  : topRight.y();
-    double btmMin   = btmLeft.y()  < btmRight.y()   ? btmLeft.y()  : btmRight.y();
-    double leftMin  = topLeft.x()  < btmLeft.x()    ? topLeft.x()  : btmLeft.x();
-    double rightMax = topRight.x() > btmRight.x()   ? topRight.x() : btmRight.x();
+    qreal topMax   = topLeft.y()  > topRight.y()   ? topLeft.y()  : topRight.y();
+    qreal btmMin   = btmLeft.y()  < btmRight.y()   ? btmLeft.y()  : btmRight.y();
+    qreal leftMin  = topLeft.x()  < btmLeft.x()    ? topLeft.x()  : btmLeft.x();
+    qreal rightMax = topRight.x() > btmRight.x()   ? topRight.x() : btmRight.x();
 
-    double xGridSpace = 1000;
-    double yGridSpace = 1000;
+    qreal xGridSpace = 1000;
+    qreal yGridSpace = 1000;
     findGridSpace(leftMin, rightMax, xGridSpace, yGridSpace);
 
-    double xStart = floor(leftMin / xGridSpace) * xGridSpace;
-    double yStart = ceil(topMax / yGridSpace) * yGridSpace;
+    qreal xStart = floor(leftMin / xGridSpace) * xGridSpace;
+    qreal yStart = ceil(topMax / yGridSpace) * yGridSpace;
 
-    double x = xStart - xGridSpace;
-    double y = yStart + yGridSpace;
+    qreal x = xStart - xGridSpace;
+    qreal y = yStart + yGridSpace;
 
     if(pj_is_latlong(pjGrid))
     {
@@ -277,8 +277,8 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     p.setPen(QPen(color,1));
     USE_ANTI_ALIASING(p,false);
 
-    double h = rect.height();
-    double w = rect.width();
+    qreal h = rect.height();
+    qreal w = rect.width();
 
     while(y > btmMin)
     {
@@ -290,8 +290,8 @@ void CGrid::draw(QPainter& p, const QRect& rect)
             QPointF p4(x, y - yGridSpace);
 
 
-            double xVal = p1.x();
-            double yVal = p1.y();
+            qreal xVal = p1.x();
+            qreal yVal = p1.y();
 
             pj_transform(pjGrid, pjWGS84, 1, 0, &p1.rx(), &p1.ry(), 0);
             pj_transform(pjGrid, pjWGS84, 1, 0, &p2.rx(), &p2.ry(), 0);
@@ -305,7 +305,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
             map->convertRad2Px(p3);
             map->convertRad2Px(p4);
 
-            double xx,yy;
+            qreal xx,yy;
             if(calcIntersection(0,0,w,0, p1.x(), p1.y(), p4.x(), p4.y(), xx, yy))
             {
                 horzTopTicks << val_t(xx, xVal);

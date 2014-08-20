@@ -41,6 +41,7 @@ class CGisItemTrk : public IGisItem
         bool isCloseTo(const QPointF& pos);
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
@@ -86,6 +87,10 @@ class CGisItemTrk : public IGisItem
            @param plot
         */
         void unregisterPlot(IPlot * plot);
+
+        void setPointOfFocusByDistance(qreal dist);
+
+//        void setPointOfFocusByTime();
 
         struct trk_t;
     private:        
@@ -218,6 +223,8 @@ class CGisItemTrk : public IGisItem
                   easily communicate with each other.
         */
         QSet<IPlot*> registeredPlots;
+
+        const trkpt_t * pointOfFocus;
 };
 
 #endif //CGISITEMTRK_H

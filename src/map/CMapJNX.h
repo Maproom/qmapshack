@@ -84,10 +84,10 @@ private:
 
     struct file_t
     {
-        double lon1;
-        double lat1;
-        double lon2;
-        double lat2;
+        qreal lon1;
+        qreal lat1;
+        qreal lon2;
+        qreal lat2;
         QRectF bbox;
 
         QString filename;
@@ -99,10 +99,10 @@ private:
 
     QList<file_t> files;
 
-    double lon1;
-    double lat1;
-    double lon2;
-    double lat2;
+    qreal lon1;
+    qreal lat1;
+    qreal lon2;
+    qreal lat2;
 
 
 };

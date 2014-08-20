@@ -287,10 +287,10 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf)
 
     QPointF bufferScale = buf.scale * buf.zoomFactor;
 
-    double u1 = buf.ref1.x() * RAD_TO_DEG;
-    double v1 = buf.ref1.y() * RAD_TO_DEG;
-    double u2 = buf.ref3.x() * RAD_TO_DEG;
-    double v2 = buf.ref3.y() * RAD_TO_DEG;
+    qreal u1 = buf.ref1.x() * RAD_TO_DEG;
+    qreal v1 = buf.ref1.y() * RAD_TO_DEG;
+    qreal u2 = buf.ref3.x() * RAD_TO_DEG;
+    qreal v2 = buf.ref3.y() * RAD_TO_DEG;
 
     QRectF viewport;
     viewport.setTop(v2);

@@ -533,7 +533,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
         pt1 = GPS_Math_Wpt_Projection(pt1, proximity, 90 * DEG_TO_RAD);
         gis->convertRad2Px(pt1);
 
-        double r = pt1.x() - posScreen.x();
+        qreal r = pt1.x() - posScreen.x();
 
         p.save();
         p.setBrush(Qt::NoBrush);

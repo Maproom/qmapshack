@@ -406,6 +406,23 @@ void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& b
 
 }
 
+void CGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+{
+    for(int i = 0; i < childCount(); i++)
+    {
+
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+
+
+        item->drawItem(p, viewport, gis);
+    }
+
+}
+
 void CGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis)
 {
 

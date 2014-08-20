@@ -54,6 +54,15 @@ class IPlot : public QWidget
         QImage buffer;
         QPoint posMouse;
 
+        /**
+           @brief The track this plot is attached to
+
+           @note It is save to store the pointer to the track item because
+                 the plot objects registers/unregisters with the track during
+                 construction and destruction.
+
+                 See CGisItem::registeredPlots for details.
+         */
         CGisItemTrk * trk;
         CPlotData * data;
 

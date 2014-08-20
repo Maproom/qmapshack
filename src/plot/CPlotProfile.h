@@ -25,7 +25,7 @@
 class CPlotProfile : public IPlot
 {
     public:
-        CPlotProfile(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
+        CPlotProfile(CGisItemTrk * trk, mode_e mode, QWidget * parent);
         virtual ~CPlotProfile();
 
 };

@@ -18,8 +18,8 @@
 
 #include "plot/CPlotProfile.h"
 
-CPlotProfile::CPlotProfile(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
-    : IPlot(trk,type, mode, parent)
+CPlotProfile::CPlotProfile(CGisItemTrk *trk, mode_e mode, QWidget *parent)
+    : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
 {
 }
 

@@ -492,7 +492,7 @@ void CCanvas::slotCheckTrackOnFocus()
         }
 
         // create new profile plot, the plot will register itself at the track
-        plotTrackProfile = new CPlotProfile(trk2, CPlotData::eAxisLinear, IPlot::eModeIcon, this);
+        plotTrackProfile = new CPlotProfile(trk2, IPlot::eModeIcon, this);
         if(height() < 700)
         {
             plotTrackProfile->resize(200,80);

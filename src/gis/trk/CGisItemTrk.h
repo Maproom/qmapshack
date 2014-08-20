@@ -35,13 +35,15 @@ class CGisItemTrk : public IGisItem
 
         const QString& getName(){return trk.name;}
         QString getInfo();
+
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
+        bool isCloseTo(const QPointF& pos);
+
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
-        bool isCloseTo(const QPointF& pos);
 
 
         /**
@@ -52,7 +54,19 @@ class CGisItemTrk : public IGisItem
            @param yes   set true to gain focus.
         */
         void gainUserFocus(bool yes);
+
+        /**
+           @brief Check for user focus
+
+           @return True if the track has user focus
+         */
         bool hasUserFocus(){return key == keyUserFocus;}
+
+        /**
+           @brief Get the key of the current track with user focus
+
+           @return If no track has the focus an empty string is returned
+         */
         static const QString& getKeyUserFocus(){return keyUserFocus;}
 
         /**
@@ -64,7 +78,6 @@ class CGisItemTrk : public IGisItem
         */
         void registerPlot(IPlot * plot);
 
-
         /**
            @brief Each plot widget that operates on the track must unregister during it's destruction
 
@@ -74,8 +87,8 @@ class CGisItemTrk : public IGisItem
         */
         void unregisterPlot(IPlot * plot);
 
-    private:
         struct trk_t;
+    private:        
         static const QColor  lineColors[];
         static const QString bulletColors[];
 
@@ -85,8 +98,8 @@ class CGisItemTrk : public IGisItem
         void setIcon(const QString& c);
         void deriveSecondaryData();
 
-        static QString keyUserFocus;
 
+    public:
         struct trkpt_t : public wpt_t
         {
             trkpt_t()
@@ -124,14 +137,13 @@ class CGisItemTrk : public IGisItem
             qreal ascend;
             /// the descend from the start of the track
             qreal descend;
-
+            /// the slope over several points close by
             qreal slope;
-
+            /// the speed over several points close by
             qreal speed;
-
             /// the seconds since the start of the track
             qreal elapsedSeconds;
-
+            /// the seconds since the start of the track with moving speed
             qreal elapsedSecondsMoving;
         };
 
@@ -157,10 +169,15 @@ class CGisItemTrk : public IGisItem
             QMap<QString, QVariant> extensions;
         };
 
-        static const QPen penBackground;
-        QPen penForeground;
+        const trk_t& getTrackData(){return trk;}
 
+    private:
         trk_t trk;
+
+        static QString keyUserFocus;
+        static const QPen penBackground;
+
+        QPen penForeground;
 
         quint32     cntTotalPoints;
         quint32     cntVisiblePoints;
@@ -178,7 +195,7 @@ class CGisItemTrk : public IGisItem
         QPixmap bullet;
         /// the track line color by index
         unsigned colorIdx;
-        ///
+        /// the current track line as screen pixel coordinates
         QPolygonF line;
 
         /**

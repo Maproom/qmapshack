@@ -32,7 +32,16 @@ class IPlot : public QWidget
         IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
         virtual ~IPlot();
 
+        virtual void updateData() = 0;
+
     protected:
+        void setYLabel(const QString& str);
+        void setXLabel(const QString& str);
+        void clear();
+        void newLine(const QPolygonF& line, const QString& label);
+        void setLimits();
+        void resetZoom();
+
         void paintEvent(QPaintEvent * e);
         void resizeEvent(QResizeEvent * e);
         void leaveEvent(QEvent * e);
@@ -40,8 +49,24 @@ class IPlot : public QWidget
         void mouseMoveEvent(QMouseEvent * e);
 
 
+        void setSizes();
+        void setLRTB();
+        void setSizeIconArea();
+        void setSizeXLabel();
+        void setSizeYLabel();
+        void setSizeTrackInfo();
+        void setSizeDrawArea();
+
         void draw(QPainter& p);
         void draw();
+        void drawData(QPainter& p);
+        void drawLabels( QPainter &p );
+        void drawXScale( QPainter &p );
+        void drawYScale( QPainter &p );
+        void drawGridX( QPainter &p );
+        void drawGridY( QPainter &p );
+        void drawXTic( QPainter &p );
+        void drawYTic( QPainter &p );
 
         // different draw modes
         mode_e mode;
@@ -56,6 +81,28 @@ class IPlot : public QWidget
 
         CGisItemTrk * trk;
         CPlotData * data;
+
+        QFontMetrics fm;
+
+        int left;
+        int right;
+        int top;
+        int bottom;
+
+        int deadAreaX;
+        int deadAreaY;
+
+        int fontWidth;
+        int fontHeight;
+        int scaleWidthX1;
+        int scaleWidthY1;
+
+        QRect rectX1Label;
+        QRect rectY1Label;
+        QRect rectGraphArea;
+        QRect rectIconArea;
+        QRect rectTrackInfo;
+
 
 };
 

@@ -17,10 +17,15 @@
 **********************************************************************************************/
 
 #include "plot/CPlotProfile.h"
+#include "units/IUnit.h"
+#include "gis/trk/CGisItemTrk.h"
 
 CPlotProfile::CPlotProfile(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : IPlot(trk,type, mode, parent)
 {
+
+
+    updateData();
 }
 
 CPlotProfile::~CPlotProfile()
@@ -28,3 +33,56 @@ CPlotProfile::~CPlotProfile()
 
 }
 
+void CPlotProfile::updateData()
+{
+    CPlotData::axistype_e type = data->axisType;
+
+    if(mode == eModeIcon)
+    {
+        setXLabel(trk->getName());
+        setYLabel("");
+    }
+    else
+    {
+        if(type == CPlotData::eAxisLinear)
+        {
+            setXLabel(tr("distance [%1]").arg(IUnit::self().baseunit));
+        }
+        else
+        {
+            setXLabel(tr("time [h]"));
+        }
+        setYLabel(tr("alt. [%1]").arg(IUnit::self().baseunit));
+    }
+
+    QPolygonF lineEle;
+
+    qreal basefactor = IUnit::self().basefactor;
+    const CGisItemTrk::trk_t& t = trk->getTrackData();
+    for(int s = 0; s < t.segs.size(); s++)
+    {
+        const CGisItemTrk::trkseg_t& seg = t.segs[s];
+
+        for(int p = 0; p < seg.pts.size(); p++)
+        {
+            const CGisItemTrk::trkpt_t& trkpt = seg.pts[p];
+
+            if(trkpt.flags & CGisItemTrk::trkpt_t::eDeleted)
+            {
+                continue;
+            }
+
+            if(trkpt.ele != NOINT)
+            {
+                lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (double)trkpt.time.toTime_t(), trkpt.ele * basefactor);
+            }
+
+        }
+    }
+
+    clear();
+    newLine(lineEle, "GPS");
+    setLimits();
+    resetZoom();
+
+}

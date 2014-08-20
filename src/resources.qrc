@@ -284,6 +284,7 @@
         <file>icons/waypoints/32x32/DiamondGreen.png</file>
         <file>icons/waypoints/32x32/DiamondBlue.png</file>
         <file>icons/waypoints/32x32/Residence.png</file>
+        <file>icons/waypoints/32x32/Waypoint.png</file>
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMoveMap.png</file>

@@ -87,6 +87,25 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
     }
     else
     {
+        switch(stateItemSel)
+        {
+            case eStateIdle:
+            case eStateHooverSingle:
+            case eStateHooverMultiple:
+            {
+                const QString& key = CGisItemTrk::getKeyUserFocus();
+                if(!key.isEmpty())
+                {
+                    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(CGisItemTrk::getKeyUserFocus()));
+                    if(trk != 0)
+                    {
+                        trk->setPointOfFocusByPoint(point);
+                    }
+                }
+                break;
+            }
+            default:;
+        }
         canvas->displayInfo(point);
         canvas->update();                
     }
@@ -195,6 +214,21 @@ void CMouseNormal::draw(QPainter& p, const QRect &rect)
         case eStateHooverSingle:
         case eStateHooverMultiple:
         {
+
+            /*
+                Collect and draw items close to the last mouse position in the draw method.
+
+                This might be a bit odd but there are two reasons:
+
+                1) Multiple update events are combined by the event loop. Thus multiple mouse move
+                   events are reduced a single paint event. As getItemsByPos() is quite cycle
+                   intense this seems like a good idea.
+
+                2) The list of items passed back by getItemsByPos() must not be stored. That is why
+                   the list has to be generated within the draw handler to access the item's drawHighlight()
+                   method.
+
+            */
             screenUnclutter->clear();
 
             QList<IGisItem*> items;

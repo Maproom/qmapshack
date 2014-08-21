@@ -21,8 +21,7 @@
 
 #include <QWidget>
 #include "plot/CPlotData.h"
-
-class CGisItemTrk;
+#include "gis/trk/CGisItemTrk.h"
 
 class IPlot : public QWidget
 {
@@ -33,6 +32,8 @@ class IPlot : public QWidget
         virtual ~IPlot();
 
         virtual void updateData() = 0;
+
+        virtual void setPointOfFocus(const CGisItemTrk::trkpt_t * pt) = 0;
 
     protected:
         void setYLabel(const QString& str);

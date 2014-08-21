@@ -33,7 +33,7 @@ CUnitMetric::~CUnitMetric()
 
 void CUnitMetric::meter2elevation(qreal meter, QString& val, QString& unit)
 {
-    if(meter == NOFLOAT)
+    if(meter == NOFLOAT || meter == NOINT)
     {
         val  = "-";
         unit = "";

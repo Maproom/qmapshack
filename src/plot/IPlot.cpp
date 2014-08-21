@@ -20,7 +20,6 @@
 #include "plot/CPlotAxis.h"
 
 #include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -159,6 +158,9 @@ void IPlot::leaveEvent(QEvent * e)
 {
     needsRedraw = true;
     posMouse    = NOPOINT;
+
+    trk->setPointOfFocusByDistance(NOFLOAT);
+
     QApplication::restoreOverrideCursor();
     update();
 }
@@ -187,7 +189,6 @@ void IPlot::draw(QPainter& p)
 void IPlot::mouseMoveEvent(QMouseEvent * e)
 {
     posMouse = NOPOINT;
-
     if(rectGraphArea.contains(e->pos()))
     {
         posMouse = e->pos();
@@ -209,9 +210,8 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         {
             canvas->update();
         }
-
+        e->accept();
     }
-
     update();
 }
 

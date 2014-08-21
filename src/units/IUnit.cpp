@@ -472,12 +472,14 @@ void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit)
     if(days)
     {
         val = QString("%1:").arg(days) + time.toString("HH:mm:ss");
+        unit = "d";
     }
     else
     {
         val = time.toString("HH:mm:ss");
+        unit = "h";
     }
-    unit.clear();
+
 }
 
 bool IUnit::parseTimestamp(const QString &time, QDateTime &datetime)

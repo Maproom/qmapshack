@@ -99,7 +99,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , pointOfFocus(0)
-{    
+{        
     // --- start read and process data ----
     setColor(penForeground.color());
     readTrk(xml, trk);
@@ -607,6 +607,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     QList<QPolygonF> lines;
     splitLineToViewport(line, extViewport, lines);
 
+    if(key == keyUserFocus)
+    {
+        p.setPen(QPen(Qt::red,11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        foreach(const QPolygonF& l, lines)
+        {
+            p.drawPolyline(l);
+        }
+    }
+
     p.setBrush(color);
     p.setPen(penBackground);
     foreach(const QPolygonF& l, lines)
@@ -619,21 +628,101 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     foreach(const QPolygonF& l, lines)
     {
         p.drawPolyline(l);
-    }
+    }    
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     if(hasUserFocus() && pointOfFocus)
     {
-        QPointF pt(pointOfFocus->lon, pointOfFocus->lat);
-        pt *= DEG_TO_RAD;
+        // derive anchor
+        QPointF anchor(pointOfFocus->lon, pointOfFocus->lat);
+        anchor *= DEG_TO_RAD;
+        gis->convertRad2Px(anchor);
 
-        gis->convertRad2Px(pt);
+        // create trackpoint info text
+        QString str, val1, unit1, val2, unit2, val3, unit3;
+        str += IUnit::datetime2string(pointOfFocus->time, QPointF(pointOfFocus->lon, pointOfFocus->lat) * DEG_TO_RAD) + "\n";
+        IUnit::self().meter2elevation(pointOfFocus->ele, val1, unit1);
+        str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
+        if(pointOfFocus->slope != NOFLOAT)
+        {
+            str += QObject::tr(" slope: %1°(%2%)").arg(pointOfFocus->slope,0,'f',0).arg(qTan(pointOfFocus->slope * DEG_TO_RAD) * 100,0,'f',0);
+        }
+        if(pointOfFocus->speed != NOFLOAT)
+        {
+            IUnit::self().meter2speed(pointOfFocus->speed, val1, unit1);
+            str += QObject::tr(" speed: %1%2").arg(val1).arg(unit1);
+        }
 
+        // calculate bounding box of text
+        QFontMetrics fm(p.font());
+        QRect rectText = fm.boundingRect(QRect(0,0,300,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+
+        // create info box
+        int w = rectText.width()  + 5 + 5;
+        int h = rectText.height() + 5 + 5 + 2*(fm.height() + 8);
+
+
+        QRect box(0, 0, w, h);
+        box.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
+
+        // create bubble path
+        QPainterPath path1;
+        path1.addRoundedRect(box,5,5);
+
+        QPolygonF poly2;
+        poly2 << anchor << (box.bottomLeft() + QPointF(10,-5)) << (box.bottomLeft() + QPointF(30,-5)) << anchor;
+        QPainterPath path2;
+        path2.addPolygon(poly2);
+
+        path1 = path1.united(path2);
+
+        // draw bubble
+        p.setPen(CCanvas::penBorderGray);
+        p.setBrush(CCanvas::brushBackWhite);
+        p.drawPolygon(path1.toFillPolygon());
+
+        p.save();
+        p.translate(box.topLeft());
+        // draw progress bar distance
+        p.translate(5,5);
+        QRect rectBar1(0,0,rectText.width(), 5);
         p.setPen(Qt::black);
-        p.drawEllipse(pt,10,10);
+        p.setBrush(Qt::NoBrush);
+        p.drawRect(rectBar1);
+        qreal d = pointOfFocus->distance * rectBar1.width() / totalDistance;
+        p.drawRect(d-1,-1, 3, 7);
 
+        IUnit::self().meter2distance(pointOfFocus->distance, val1, unit1);
+        IUnit::self().meter2distance(totalDistance - pointOfFocus->distance, val2, unit2);
+        p.setPen(Qt::darkBlue);
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(pointOfFocus->distance * 100 / totalDistance, 0, 'f', 0));
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+
+        // draw progress bar time
+        p.translate(0,fm.height() + 8);
+        QRect rectBar2(0,0,rectText.width(), 5);
+        p.setPen(Qt::black);
+        p.setBrush(Qt::NoBrush);
+        p.drawRect(rectBar2);
+        qreal t = pointOfFocus->elapsedSecondsMoving * rectBar2.width() / totalElapsedSecondsMoving;
+        p.drawRect(t-1,-1, 3, 7);
+
+        IUnit::self().seconds2time(pointOfFocus->elapsedSecondsMoving, val1, unit1);
+        IUnit::self().seconds2time(totalElapsedSecondsMoving - pointOfFocus->elapsedSecondsMoving, val2, unit2);
+        p.setPen(Qt::darkBlue);
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(pointOfFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+
+        // draw text
+        p.translate(0,fm.height() + 8);
+        p.setPen(Qt::darkBlue);
+        p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap,str);
+
+        p.restore();
     }
 
 }
@@ -646,7 +735,7 @@ void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
 void CGisItemTrk::drawHighlight(QPainter& p)
 {
-    if(line.isEmpty())
+    if(line.isEmpty() || key == keyUserFocus)
     {
         return;
     }
@@ -751,17 +840,24 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
             i++;
         }
     }
-
-
     return 0;
 }
 
 void CGisItemTrk::setPointOfFocusByPoint(const QPoint& pt)
 {
+    const trkpt_t * oldPoint = pointOfFocus;
     pointOfFocus = 0;
 
     if(hasUserFocus() || (pt != NOPOINTF))
     {
+        /*
+            Iterate over the polyline used to draw the track as it contains screen
+            coordinates. The polyline has all visible track points. But there are
+            invisible points, those marked as deleted, too. That is why the index
+            into the polyline cant't be used directly. In a second step we have
+            to iterate over all segments and visible points of the trk_t object
+            until the visible index is reached. This is done by getVisibleTrkPtByIndex().
+        */
 
         quint32 i   = 0;
         quint32 idx = 0;
@@ -783,9 +879,15 @@ void CGisItemTrk::setPointOfFocusByPoint(const QPoint& pt)
         }
     }
 
-    // tell it to all registerd plot objects as this method is never called from a plot object
-    foreach(IPlot * plot, registeredPlots)
+    /*
+        As this method is never called by an IPlot object tell it
+        to all registered IPlot objects on a change
+    */
+    if(oldPoint != pointOfFocus)
     {
-        plot->setPointOfFocus(pointOfFocus);
+        foreach(IPlot * plot, registeredPlots)
+        {
+            plot->setPointOfFocus(pointOfFocus);
+        }
     }
 }

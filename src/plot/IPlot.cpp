@@ -192,8 +192,8 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
     {
         posMouse = e->pos();
 
+        // set point of focus at track object
         qreal x = data->x().pt2val(posMouse.x() - left);
-
         if(data->axisType == CPlotData::eAxisLinear)
         {
             trk->setPointOfFocusByDistance(x);
@@ -203,6 +203,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
 
         }
 
+        // update canvas if visible
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
         {

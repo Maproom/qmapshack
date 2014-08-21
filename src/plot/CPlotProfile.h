@@ -29,6 +29,8 @@ class CPlotProfile : public IPlot
         virtual ~CPlotProfile();
 
         void updateData();
+
+        void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
 };
 
 #endif //CPLOTPROFILE_H

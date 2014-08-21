@@ -87,6 +87,22 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
     }
     else
     {
+        switch(stateItemSel)
+        {
+            case eStateIdle:
+            case eStateHooverSingle:
+            case eStateHooverMultiple:
+            {
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(CGisItemTrk::getKeyUserFocus()));
+                if(trk != 0)
+                {
+                    trk->setPointOfFocusByPoint(point);
+                }
+
+                break;
+            }
+            default:;
+        }
         canvas->displayInfo(point);
         canvas->update();                
     }

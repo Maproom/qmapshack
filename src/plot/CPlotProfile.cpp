@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "plot/CPlotProfile.h"
+#include "plot/CPlotAxis.h"
 #include "units/IUnit.h"
 #include "gis/trk/CGisItemTrk.h"
 
@@ -80,4 +81,27 @@ void CPlotProfile::updateData()
     setLimits();
     resetZoom();
 
+}
+
+void CPlotProfile::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
+{
+    if(pt == 0)
+    {
+        if(posMouse != NOPOINT)
+        {
+            posMouse = NOPOINT;
+            needsRedraw = true;
+        }
+    }
+    else
+    {
+        if(posMouse == NOPOINT)
+        {
+            needsRedraw = true;
+        }
+
+        posMouse.rx() = left  + data->x().val2pt(pt->distance);
+        posMouse.ry() = top  +  data->y().val2pt(pt->ele);
+    }
+    update();
 }

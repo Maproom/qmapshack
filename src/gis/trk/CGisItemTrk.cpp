@@ -29,6 +29,8 @@
 
 #define ASCEND_THRESHOLD    5
 #define DEFAULT_COLOR       4
+#define MIN_DIST_CLOSE_TO   10
+#define MIN_DIST_FOCUS      40
 
 const QColor CGisItemTrk::lineColors[] =
 {
@@ -552,15 +554,13 @@ void CGisItemTrk::deriveSecondaryData()
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {
-
     foreach(const QPointF& pt, line)
     {
-        if((pt - pos).manhattanLength() < 10)
+        if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
         {
             return true;
         }
     }
-
     return false;
 }
 
@@ -631,6 +631,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         gis->convertRad2Px(pt);
 
+        p.setPen(Qt::black);
         p.drawEllipse(pt,10,10);
 
     }
@@ -700,12 +701,14 @@ void CGisItemTrk::setPointOfFocusByDistance(qreal dist)
 {
     pointOfFocus = 0;
 
-    if(!hasUserFocus())
+    if(!hasUserFocus() || (dist == NOFLOAT))
     {
         return;
     }
 
     qreal delta = totalDistance;
+
+    /// @todo: optimze search by single out segment and then do a binary search
 
     foreach (const trkseg_t& seg, trk.segs)
     {
@@ -727,5 +730,62 @@ void CGisItemTrk::setPointOfFocusByDistance(qreal dist)
                 break;
             }
         }
+    }
+}
+
+const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
+{
+    quint32 i = 0;
+    foreach (const trkseg_t& seg, trk.segs)
+    {
+        foreach(const trkpt_t& pt, seg.pts)
+        {
+            if(pt.flags & trkpt_t::eDeleted)
+            {
+                continue;
+            }
+            if(i == idx)
+            {
+                return &pt;
+            }
+            i++;
+        }
+    }
+
+
+    return 0;
+}
+
+void CGisItemTrk::setPointOfFocusByPoint(const QPoint& pt)
+{
+    pointOfFocus = 0;
+
+    if(hasUserFocus() || (pt != NOPOINTF))
+    {
+
+        quint32 i   = 0;
+        quint32 idx = 0;
+        qint32 d    = NOINT;
+        foreach(const QPointF& point, line)
+        {
+            int tmp = (pt - point).manhattanLength();
+            if(tmp < d)
+            {
+                idx = i;
+                d   = tmp;
+            }
+            i++;
+        }
+
+        if(d < MIN_DIST_FOCUS)
+        {
+            pointOfFocus = getVisibleTrkPtByIndex(idx);
+        }
+    }
+
+    // tell it to all registerd plot objects as this method is never called from a plot object
+    foreach(IPlot * plot, registeredPlots)
+    {
+        plot->setPointOfFocus(pointOfFocus);
     }
 }

@@ -88,11 +88,24 @@ class CGisItemTrk : public IGisItem
         */
         void unregisterPlot(IPlot * plot);
 
+        /**
+           @brief Use point with the distance from start matching best the given distance.
+
+           @param dist      the distance in [m]
+         */
         void setPointOfFocusByDistance(qreal dist);
+
+        /**
+           @brief Use the point that is closest to the given point.
+
+           @param pt        a point on the screen in pixel.
+         */
+        void setPointOfFocusByPoint(const QPoint& pt);
 
 //        void setPointOfFocusByTime();
 
         struct trk_t;
+        struct trkpt_t;
     private:        
         static const QColor  lineColors[];
         static const QString bulletColors[];
@@ -102,6 +115,7 @@ class CGisItemTrk : public IGisItem
         void setColor(const QColor& c);
         void setIcon(const QString& c);
         void deriveSecondaryData();
+        const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
 
 
     public:

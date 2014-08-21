@@ -159,3 +159,4 @@ void CScrOptUnclutter::draw(QPainter& p)
         CCanvas::drawText(item.name, p, item.text, Qt::darkBlue);
     }
 }
+

@@ -22,12 +22,17 @@
 #include <QWidget>
 #include "ui_IDetailsTrk.h"
 
+class CGisItemTrk;
+
 class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
 {
     Q_OBJECT
     public:
-        CDetailsTrk(QWidget * parent);
+        CDetailsTrk(CGisItemTrk * trk, QWidget * parent);
         virtual ~CDetailsTrk();
+
+    private:
+        QString key;
 };
 
 #endif //CDETAILSTRK_H

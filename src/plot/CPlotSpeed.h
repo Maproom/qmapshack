@@ -27,6 +27,7 @@ class CPlotSpeed : public IPlot
         CPlotSpeed(QWidget * parent);
         virtual ~CPlotSpeed();
 
+        void setTrack(CGisItemTrk * track);
         void updateData();
         void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
 

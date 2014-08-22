@@ -573,7 +573,7 @@ void CGisItemTrk::gainUserFocus(bool yes)
 
 void CGisItemTrk::edit()
 {
-    CDetailsTrk * w = new CDetailsTrk(0);
+    CDetailsTrk * w = new CDetailsTrk(this, 0);
     w->setObjectName(getName());
     CMainWindow::self().addWidgetToTab(w);
 }
@@ -667,6 +667,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
+        QRect rectText = fm.boundingRect(QRect(0,0,500,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
 
         // create info box
         int w = rectText.width()  + 5 + 5;

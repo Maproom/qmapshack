@@ -27,6 +27,7 @@ class CPlotDistance : public IPlot
         CPlotDistance(QWidget * parent);
         virtual ~CPlotDistance();
 
+        void setTrack(CGisItemTrk * track);
         void updateData();
         void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
 

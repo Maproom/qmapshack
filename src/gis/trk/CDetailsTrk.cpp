@@ -20,12 +20,17 @@
 
 #include <QtWidgets>
 
-CDetailsTrk::CDetailsTrk(QWidget *parent)
+CDetailsTrk::CDetailsTrk(CGisItemTrk *trk, QWidget *parent)
     : QWidget(parent)
 {
     qDebug() << "CDetailsTrk";
-
     setupUi(this);
+
+    key = trk->getKey();
+    plotElevation->setTrack(trk);
+    plotDistance->setTrack(trk);
+    plotSpeed->setTrack(trk);
+
 }
 
 CDetailsTrk::~CDetailsTrk()

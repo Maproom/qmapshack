@@ -29,8 +29,8 @@ class CPlotProfile : public IPlot
         CPlotProfile(CGisItemTrk * trk, mode_e mode, QWidget * parent);
         virtual ~CPlotProfile();
 
+        void setTrack(CGisItemTrk * track);
         void updateData();
-
         void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
 };
 

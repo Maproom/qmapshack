@@ -29,8 +29,61 @@ CPlotDistance::~CPlotDistance()
 
 }
 
+void CPlotDistance::setTrack(CGisItemTrk * track)
+{
+    trk = track;
+    trk->registerPlot(this);
+
+    updateData();
+}
+
+
 void CPlotDistance::updateData()
 {
+    CPlotData::axistype_e type = data->axisType;
+
+    if(mode == eModeIcon)
+    {
+        setXLabel(trk->getName());
+        setYLabel("");
+    }
+    else
+    {
+        if(type == CPlotData::eAxisLinear)
+        {
+            setXLabel(tr("distance [%1]").arg(IUnit::self().baseunit));
+        }
+        else
+        {
+            setXLabel(tr("time [h]"));
+        }
+        setYLabel(tr("distance. [%1]").arg(IUnit::self().baseunit));
+    }
+
+    QPolygonF lineDist;
+
+    qreal basefactor = IUnit::self().basefactor;
+    const CGisItemTrk::trk_t& t = trk->getTrackData();
+    foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
+    {
+        foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+        {
+            if(trkpt.flags & CGisItemTrk::trkpt_t::eDeleted)
+            {
+                continue;
+            }
+
+            if(trkpt.distance != NOFLOAT)
+            {
+                lineDist << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.distance * basefactor);
+            }
+        }
+    }
+
+    clear();
+    newLine(lineDist, "GPS");
+    setLimits();
+    resetZoom();
 
 }
 

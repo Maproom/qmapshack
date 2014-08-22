@@ -40,6 +40,14 @@ CPlotProfile::~CPlotProfile()
 
 }
 
+void CPlotProfile::setTrack(CGisItemTrk * track)
+{
+    trk = track;
+    trk->registerPlot(this);
+
+    updateData();
+}
+
 void CPlotProfile::updateData()
 {
     CPlotData::axistype_e type = data->axisType;

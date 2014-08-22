@@ -21,6 +21,7 @@
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "plot/IPlot.h"
+#include "CMainWindow.h"
 #include "GeoMath.h"
 
 #include <QtXml>
@@ -656,7 +657,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         }
 
         // calculate bounding box of text
-        QFontMetrics fm(p.font());
+        QFont f = CMainWindow::self().getMapFont();
+        QFontMetrics fm(f);
         QRect rectText = fm.boundingRect(QRect(0,0,300,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
 
         // create info box
@@ -678,6 +680,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         path1 = path1.united(path2);
 
+        p.setFont(f);
         // draw bubble
         p.setPen(CCanvas::penBorderGray);
         p.setBrush(CCanvas::brushBackWhite);

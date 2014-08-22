@@ -114,6 +114,10 @@ class IPlot : public QWidget
         QRect rectIconArea;
         QRect rectTrackInfo;
 
+        static QPen pens[];
+        static QPen pensThin[];
+        static QColor colors[];
+
 
 };
 

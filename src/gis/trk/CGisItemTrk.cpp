@@ -18,6 +18,7 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/trk/CDetailsTrk.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "plot/IPlot.h"
@@ -570,6 +571,13 @@ void CGisItemTrk::gainUserFocus(bool yes)
     keyUserFocus = yes ? key : "";
 }
 
+void CGisItemTrk::edit()
+{
+    CDetailsTrk * w = new CDetailsTrk(0);
+    w->setObjectName(getName());
+    CMainWindow::self().addWidgetToTab(w);
+}
+
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
@@ -648,7 +656,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
         if(pointOfFocus->slope != NOFLOAT)
         {
-            str += QObject::tr(" slope: %1°(%2%)").arg(pointOfFocus->slope,0,'f',0).arg(qTan(pointOfFocus->slope * DEG_TO_RAD) * 100,0,'f',0);
+            str += QObject::tr(" slope: %1°(%2%)").arg(pointOfFocus->slope,2,'f',0).arg(qTan(pointOfFocus->slope * DEG_TO_RAD) * 100, 2,'f',0);
         }
         if(pointOfFocus->speed != NOFLOAT)
         {
@@ -659,7 +667,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
-        QRect rectText = fm.boundingRect(QRect(0,0,300,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
 
         // create info box
         int w = rectText.width()  + 5 + 5;

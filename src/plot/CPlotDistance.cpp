@@ -16,31 +16,25 @@
 
 **********************************************************************************************/
 
-#ifndef CDETAILSWPT_H
-#define CDETAILSWPT_H
+#include "CPlotDistance.h"
 
-#include <QDialog>
-#include "ui_IDetailsWpt.h"
+CPlotDistance::CPlotDistance(QWidget *parent)
+    : IPlot(0, CPlotData::eAxisTime, eModeNormal, parent)
+{
 
-class CGisItemWpt;
+}
 
-class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
-{    
-    Q_OBJECT
-    public:
-        CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
-        virtual ~CDetailsWpt();
+CPlotDistance::~CPlotDistance()
+{
 
-    private slots:
-        void slotLinkActivated(const QString& link);
-        void slotLinkActivated(const QUrl& url);
-        void slotChangeIcon();
-        void slotChangeReadOnlyMode(bool on);
+}
 
-    private:
-        void setupGui();
-        CGisItemWpt& wpt;
-};
+void CPlotDistance::updateData()
+{
 
-#endif //CDETAILSWPT_H
+}
 
+void CPlotDistance::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
+{
+
+}

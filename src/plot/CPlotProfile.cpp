@@ -21,6 +21,12 @@
 #include "units/IUnit.h"
 #include "gis/trk/CGisItemTrk.h"
 
+CPlotProfile::CPlotProfile(QWidget * parent)
+    : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
+{
+
+}
+
 CPlotProfile::CPlotProfile(CGisItemTrk *trk, mode_e mode, QWidget *parent)
     : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
 {

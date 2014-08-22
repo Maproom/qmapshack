@@ -56,6 +56,8 @@ class CGisItemTrk : public IGisItem
         */
         void gainUserFocus(bool yes);
 
+
+        void edit();
         /**
            @brief Check for user focus
 

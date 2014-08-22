@@ -16,31 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CDETAILSWPT_H
-#define CDETAILSWPT_H
+#ifndef CDETAILSTRK_H
+#define CDETAILSTRK_H
 
-#include <QDialog>
-#include "ui_IDetailsWpt.h"
+#include <QWidget>
+#include "ui_IDetailsTrk.h"
 
-class CGisItemWpt;
-
-class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
-{    
+class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
+{
     Q_OBJECT
     public:
-        CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
-        virtual ~CDetailsWpt();
-
-    private slots:
-        void slotLinkActivated(const QString& link);
-        void slotLinkActivated(const QUrl& url);
-        void slotChangeIcon();
-        void slotChangeReadOnlyMode(bool on);
-
-    private:
-        void setupGui();
-        CGisItemWpt& wpt;
+        CDetailsTrk(QWidget * parent);
+        virtual ~CDetailsTrk();
 };
 
-#endif //CDETAILSWPT_H
+#endif //CDETAILSTRK_H
 

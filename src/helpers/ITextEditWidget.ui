@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>686</width>
+    <width>366</width>
     <height>341</height>
    </rect>
   </property>
@@ -92,6 +92,58 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolLeft">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolCenter">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolRight">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolBlock">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -151,58 +203,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolLeft">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="toolCenter">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="toolRight">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="toolBlock">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QToolButton" name="toolColor">
        <property name="text">
         <string>...</string>
@@ -219,12 +219,6 @@
       <widget class="QComboBox" name="comboStyle"/>
      </item>
      <item>
-      <widget class="QFontComboBox" name="comboFont"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboSize"/>
-     </item>
-     <item>
       <spacer>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -236,6 +230,16 @@
         </size>
        </property>
       </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QFontComboBox" name="comboFont"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboSize"/>
      </item>
     </layout>
    </item>

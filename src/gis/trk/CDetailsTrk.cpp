@@ -16,31 +16,20 @@
 
 **********************************************************************************************/
 
-#ifndef CDETAILSWPT_H
-#define CDETAILSWPT_H
+#include "gis/trk/CDetailsTrk.h"
 
-#include <QDialog>
-#include "ui_IDetailsWpt.h"
+#include <QtWidgets>
 
-class CGisItemWpt;
+CDetailsTrk::CDetailsTrk(QWidget *parent)
+    : QWidget(parent)
+{
+    qDebug() << "CDetailsTrk";
 
-class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
-{    
-    Q_OBJECT
-    public:
-        CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
-        virtual ~CDetailsWpt();
+    setupUi(this);
+}
 
-    private slots:
-        void slotLinkActivated(const QString& link);
-        void slotLinkActivated(const QUrl& url);
-        void slotChangeIcon();
-        void slotChangeReadOnlyMode(bool on);
-
-    private:
-        void setupGui();
-        CGisItemWpt& wpt;
-};
-
-#endif //CDETAILSWPT_H
+CDetailsTrk::~CDetailsTrk()
+{
+    qDebug() << "~CDetailsTrk";
+}
 

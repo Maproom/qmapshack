@@ -230,6 +230,12 @@ void CMainWindow::addDemList(CDemList * list, const QString &name)
     tabDem->addTab(list,name);
 }
 
+void CMainWindow::addWidgetToTab(QWidget * w)
+{
+    tabWidget->addTab(w, w->objectName());
+    tabWidget->setCurrentWidget(w);
+}
+
 CCanvas * CMainWindow::getVisibleCanvas()
 {
     return dynamic_cast<CCanvas*>(tabWidget->currentWidget());

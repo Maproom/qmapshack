@@ -78,6 +78,7 @@ set( SRCS
     gis/wpt/CProjWpt.cpp
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
+    gis/trk/CDetailsTrk.cpp
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
     gis/CGisWidget.cpp
@@ -89,6 +90,8 @@ set( SRCS
     plot/CPlotAxisTime.cpp    
     plot/CPlotData.cpp
     plot/CPlotProfile.cpp
+    plot/CPlotSpeed.cpp
+    plot/CPlotDistance.cpp
 )
 
 set( HDRS
@@ -162,6 +165,7 @@ set( HDRS
     gis/wpt/CProjWpt.h
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
+    gis/trk/CDetailsTrk.cpp
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
     gis/CGisWidget.h
@@ -173,6 +177,8 @@ set( HDRS
     plot/CPlotAxisTime.h
     plot/CPlotData.h
     plot/CPlotProfile.h
+    plot/CPlotSpeed.h
+    plot/CPlotDistance.h
 )
 
 set( UIS
@@ -198,6 +204,7 @@ set( UIS
     gis/wpt/IDetailsGeoCache.ui
     gis/wpt/IProjWpt.ui
     gis/trk/IScrOptTrk.ui
+    gis/trk/IDetailsTrk.ui
     gis/rte/IScrOptRte.ui
     units/ITimeZoneSetup.ui
 )

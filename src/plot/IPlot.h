@@ -32,7 +32,6 @@ class IPlot : public QWidget
         virtual ~IPlot();
 
         virtual void updateData() = 0;
-
         virtual void setPointOfFocus(const CGisItemTrk::trkpt_t * pt) = 0;
 
     protected:
@@ -113,6 +112,10 @@ class IPlot : public QWidget
         QRect rectGraphArea;
         QRect rectIconArea;
         QRect rectTrackInfo;
+
+        static QPen pens[];
+        static QPen pensThin[];
+        static QColor colors[];
 
 
 };

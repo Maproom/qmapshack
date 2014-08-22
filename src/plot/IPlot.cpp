@@ -24,6 +24,34 @@
 
 #include <QtWidgets>
 
+QPen IPlot::pens[] =
+{
+    QPen(Qt::darkBlue,4)
+    , QPen(Qt::darkRed,2)
+    , QPen(Qt::darkYellow,2)
+    , QPen(Qt::darkGreen,2)
+
+};
+
+QPen IPlot::pensThin[] =
+{
+    QPen(Qt::darkBlue,2)
+    , QPen(Qt::darkRed,1)
+    , QPen(Qt::darkYellow,1)
+    , QPen(Qt::darkGreen,1)
+
+};
+
+QColor IPlot::colors[] =
+{
+    QColor(Qt::blue)
+    , QColor(0,0,0,0)
+    , QColor(0,0,0,0)
+    , QColor(0,0,0,0)
+
+};
+
+
 IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : QWidget(parent)
     , mode(mode)
@@ -47,7 +75,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 {
     setMouseTracking(true);
 
-    trk->registerPlot(this);
+    if(trk) trk->registerPlot(this);
 
     data = new CPlotData(type, this);
 
@@ -61,7 +89,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
 IPlot::~IPlot()
 {
-    trk->unregisterPlot(this);
+    if(trk) trk->unregisterPlot(this);
 }
 
 void IPlot::clear()
@@ -159,7 +187,7 @@ void IPlot::leaveEvent(QEvent * e)
     needsRedraw = true;
     posMouse    = NOPOINT;
 
-    trk->setPointOfFocusByDistance(NOFLOAT);
+    if(trk) trk->setPointOfFocusByDistance(NOFLOAT);
 
     QApplication::restoreOverrideCursor();
     update();
@@ -197,7 +225,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         qreal x = data->x().pt2val(posMouse.x() - left);
         if(data->axisType == CPlotData::eAxisLinear)
         {
-            trk->setPointOfFocusByDistance(x);
+            if(trk) trk->setPointOfFocusByDistance(x);
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {
@@ -399,7 +427,6 @@ void IPlot::draw()
     p.setPen(QPen(Qt::black,2));
     p.drawRect(rectGraphArea);
 
-
 //    drawLegend(p);
 }
 
@@ -457,11 +484,10 @@ void IPlot::drawData(QPainter& p)
 //        gradient.setColorAt(1, QColor(0,0,0,0));
         p.setPen(Qt::NoPen);
 //        p.setBrush(gradient);
-        p.setBrush(Qt::blue);
+        p.setBrush(colors[penIdx]);
         p.drawPolygon(background);
 
-//        p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
-        p.setPen(Qt::darkBlue);
+        p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
         p.setBrush(Qt::NoBrush);
         p.drawPolyline(foreground);
 
@@ -717,7 +743,7 @@ void IPlot::drawDecoration( QPainter &p )
 
     if(posMouse != NOPOINT)
     {
-        p.setPen(Qt::red);
+        p.setPen(QPen(Qt::red,2));
         p.drawLine(posMouse.x(), top, posMouse.x(), bottom);
     }
 }

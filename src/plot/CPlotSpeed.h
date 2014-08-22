@@ -16,31 +16,21 @@
 
 **********************************************************************************************/
 
-#ifndef CDETAILSWPT_H
-#define CDETAILSWPT_H
+#ifndef CPLOTSPEED_H
+#define CPLOTSPEED_H
 
-#include <QDialog>
-#include "ui_IDetailsWpt.h"
+#include "plot/IPlot.h"
 
-class CGisItemWpt;
-
-class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
-{    
-    Q_OBJECT
+class CPlotSpeed : public IPlot
+{
     public:
-        CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
-        virtual ~CDetailsWpt();
+        CPlotSpeed(QWidget * parent);
+        virtual ~CPlotSpeed();
 
-    private slots:
-        void slotLinkActivated(const QString& link);
-        void slotLinkActivated(const QUrl& url);
-        void slotChangeIcon();
-        void slotChangeReadOnlyMode(bool on);
+        void updateData();
+        void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
 
-    private:
-        void setupGui();
-        CGisItemWpt& wpt;
 };
 
-#endif //CDETAILSWPT_H
+#endif //CPLOTSPEED_H
 

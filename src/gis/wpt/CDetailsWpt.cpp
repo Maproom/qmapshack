@@ -39,9 +39,8 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     connect(labelPositon, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
-    connect(toolEditCmt, SIGNAL(clicked()), this, SLOT(slotChangeCmt()));
-    connect(toolEditDesc, SIGNAL(clicked()), this, SLOT(slotChangeDesc()));
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
 }
 
@@ -110,27 +109,30 @@ void CDetailsWpt::setupGui()
         labelTime->setText(IUnit::datetime2string(wpt.getTime(), QPointF(pos.x()*DEG_TO_RAD, pos.y()*DEG_TO_RAD)));
     }
 
+    textCmtDesc->clear();
+
+    textCmtDesc->append(toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>")));
     if(IGisItem::removeHtml(wpt.getComment()).simplified().isEmpty())
     {
-        textCmt->setText(tr("no comment"));
-        textCmt->hide();
+        textCmtDesc->append(tr("<p>--- no comment ---</p>"));
     }
     else
     {
-        textCmt->setText(wpt.getComment());
-        textCmt->show();
+        textCmtDesc->append(wpt.getComment());
     }
 
+    textCmtDesc->append(toLink(isReadOnly, "description", tr("<h4>Description:</h4>")));
     if(IGisItem::removeHtml(wpt.getDescription()).simplified().isEmpty())
     {
-        textDesc->setText(tr("no description"));
-        textDesc->hide();
+        textCmtDesc->append(tr("<p>--- no description ---</p>"));
     }
     else
     {
-        textDesc->setText(wpt.getDescription());
-        textDesc->show();
+        textCmtDesc->append(wpt.getDescription());
     }
+    textCmtDesc->moveCursor (QTextCursor::Start) ;
+    textCmtDesc->ensureCursorVisible() ;
+
 
     if(!wpt.getHistory().isEmpty())
     {
@@ -146,16 +148,6 @@ void CDetailsWpt::setupGui()
         textHistory->hide();
     }
 
-    if(isReadOnly)
-    {
-        toolEditCmt->hide();
-        toolEditDesc->hide();
-    }
-    else
-    {
-        toolEditCmt->show();
-        toolEditDesc->show();
-    }
 
     toolLock->setChecked(isReadOnly);
 }
@@ -202,6 +194,35 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     setupGui();
 }
 
+void CDetailsWpt::slotLinkActivated(const QUrl& url)
+{
+    if(url.toString() == "comment")
+    {
+        CTextEditWidget dlg(0);
+        dlg.setHtml(wpt.getComment());
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            wpt.setComment(dlg.getHtml());
+            setupGui();
+        }
+
+    }
+    else if(url.toString() == "description")
+    {
+        CTextEditWidget dlg(0);
+        dlg.setHtml(wpt.getDescription());
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            wpt.setDescription(dlg.getHtml());
+            setupGui();
+        }
+    }
+    else
+    {
+        QDesktopServices::openUrl(url);
+    }
+}
+
 void CDetailsWpt::slotChangeIcon()
 {
 
@@ -218,27 +239,6 @@ void CDetailsWpt::slotChangeIcon()
     }
 }
 
-void CDetailsWpt::slotChangeCmt()
-{
-    CTextEditWidget dlg(0);
-    dlg.setHtml(wpt.getComment());
-    if(dlg.exec() == QDialog::Accepted)
-    {
-        wpt.setComment(dlg.getHtml());
-        setupGui();
-    }
-}
-
-void CDetailsWpt::slotChangeDesc()
-{
-    CTextEditWidget dlg(0);
-    dlg.setHtml(wpt.getDescription());
-    if(dlg.exec() == QDialog::Accepted)
-    {
-        wpt.setDescription(dlg.getHtml());
-        setupGui();
-    }
-}
 
 void CDetailsWpt::slotChangeReadOnlyMode(bool on)
 {

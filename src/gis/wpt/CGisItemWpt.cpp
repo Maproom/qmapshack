@@ -235,7 +235,7 @@ QString CGisItemWpt::getInfo()
         str += QObject::tr("Proximity: %1 %2").arg(val).arg(unit);
     }
 
-    QString desc = removeHtml(wpt.desc);
+    QString desc = removeHtml(wpt.desc).simplified();
     if(desc.count())
     {
         if(!str.isEmpty()) str += "<br/>\n";
@@ -251,7 +251,7 @@ QString CGisItemWpt::getInfo()
     }
     else
     {
-        QString cmt = removeHtml(wpt.cmt);
+        QString cmt = removeHtml(wpt.cmt).simplified();
         if(cmt.count())
         {
             if(!str.isEmpty()) str += "<br/>\n";

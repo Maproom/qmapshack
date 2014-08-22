@@ -33,9 +33,8 @@ class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
 
     private slots:
         void slotLinkActivated(const QString& link);
+        void slotLinkActivated(const QUrl& url);
         void slotChangeIcon();
-        void slotChangeCmt();
-        void slotChangeDesc();
         void slotChangeReadOnlyMode(bool on);
 
     private:

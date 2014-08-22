@@ -458,7 +458,7 @@ void IUnit::setUnitType(type_e t, QObject * parent)
 
 void IUnit::meter2speed(qreal meter, QString& val, QString& unit)
 {
-    val.sprintf("%1.2f",meter * speedfactor);
+    val.sprintf("%2.2f",meter * speedfactor);
     unit = speedunit;
 }
 

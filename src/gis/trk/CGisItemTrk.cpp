@@ -797,40 +797,92 @@ void CGisItemTrk::setIcon(const QString& c)
     QTreeWidgetItem::setIcon(0,icon);
 }
 
-void CGisItemTrk::setPointOfFocusByDistance(qreal dist)
+void CGisItemTrk::setPointOfFocusByDistance(qreal dist, IPlot *initiator)
 {
     pointOfFocus = 0;
 
-    if(!hasUserFocus() || (dist == NOFLOAT))
+    if(dist != NOFLOAT)
     {
-        return;
-    }
+        qreal delta = totalDistance;
 
-    qreal delta = totalDistance;
+        /// @todo: optimze search by single out segment and then do a binary search
 
-    /// @todo: optimze search by single out segment and then do a binary search
-
-    foreach (const trkseg_t& seg, trk.segs)
-    {
-        foreach(const trkpt_t& pt, seg.pts)
+        foreach (const trkseg_t& seg, trk.segs)
         {
-            if(pt.flags & trkpt_t::eDeleted)
+            foreach(const trkpt_t& pt, seg.pts)
             {
-                continue;
-            }
+                if(pt.flags & trkpt_t::eDeleted)
+                {
+                    continue;
+                }
 
-            qreal d = qAbs(pt.distance - dist);
-            if(d <= delta)
-            {
-                pointOfFocus = &pt;
-                delta = d;
-            }
-            else
-            {
-                break;
+                qreal d = qAbs(pt.distance - dist);
+                if(d <= delta)
+                {
+                    pointOfFocus = &pt;
+                    delta = d;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }
+
+    foreach(IPlot * plot, registeredPlots)
+    {
+        if(plot != initiator)
+        {
+            plot->setPointOfFocus(pointOfFocus);
+        }
+    }
+
+}
+
+void CGisItemTrk::setPointOfFocusByTime(quint32 time, IPlot * initiator)
+{
+    pointOfFocus = 0;
+
+
+
+    if(time != NOTIME)
+    {
+        qreal delta = totalElapsedSeconds;
+
+        foreach (const trkseg_t& seg, trk.segs)
+        {
+            foreach(const trkpt_t& pt, seg.pts)
+            {
+                if(pt.flags & trkpt_t::eDeleted)
+                {
+                    continue;
+                }
+
+                qreal d = qAbs(qreal(pt.time.toTime_t()) - qreal(time));
+                if(d <= delta)
+                {
+                    pointOfFocus = &pt;
+                    delta = d;
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+        }
+
+    }
+
+    foreach(IPlot * plot, registeredPlots)
+    {
+        if(plot != initiator)
+        {
+            plot->setPointOfFocus(pointOfFocus);
+        }
+    }
+
 }
 
 const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)

@@ -95,7 +95,9 @@ class CGisItemTrk : public IGisItem
 
            @param dist      the distance in [m]
          */
-        void setPointOfFocusByDistance(qreal dist);
+        void setPointOfFocusByDistance(qreal dist, IPlot * initiator);
+
+        void setPointOfFocusByTime(quint32 time, IPlot * initiator);
 
         /**
            @brief Use the point that is closest to the given point.
@@ -104,7 +106,6 @@ class CGisItemTrk : public IGisItem
          */
         void setPointOfFocusByPoint(const QPoint& pt);
 
-//        void setPointOfFocusByTime();
 
         struct trk_t;
         struct trkpt_t;

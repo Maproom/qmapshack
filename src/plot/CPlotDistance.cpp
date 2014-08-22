@@ -16,7 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CPlotDistance.h"
+#include "plot/CPlotDistance.h"
+#include "plot/CPlotAxisTime.h"
 
 CPlotDistance::CPlotDistance(QWidget *parent)
     : IPlot(0, CPlotData::eAxisTime, eModeNormal, parent)
@@ -89,5 +90,24 @@ void CPlotDistance::updateData()
 
 void CPlotDistance::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
 {
+    if(pt == 0)
+    {
+        if(posMouse != NOPOINT)
+        {
+            posMouse = NOPOINT;
+            needsRedraw = true;
+        }
+    }
+    else
+    {
+        if(posMouse == NOPOINT)
+        {
+            needsRedraw = true;
+        }
+
+        posMouse.rx() = left  + data->x().val2pt(pt->time.toTime_t());
+        posMouse.ry() = top  +  data->y().val2pt(pt->distance);
+    }
+    update();
 
 }

@@ -16,7 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CPlotSpeed.h"
+#include "plot/CPlotSpeed.h"
+#include "plot/CPlotAxis.h"
 
 CPlotSpeed::CPlotSpeed(QWidget *parent)
     : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
@@ -87,5 +88,23 @@ void CPlotSpeed::updateData()
 
 void CPlotSpeed::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
 {
+    if(pt == 0)
+    {
+        if(posMouse != NOPOINT)
+        {
+            posMouse = NOPOINT;
+            needsRedraw = true;
+        }
+    }
+    else
+    {
+        if(posMouse == NOPOINT)
+        {
+            needsRedraw = true;
+        }
 
+        posMouse.rx() = left  + data->x().val2pt(pt->distance);
+        posMouse.ry() = top  +  data->y().val2pt(pt->speed);
+    }
+    update();
 }

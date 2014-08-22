@@ -187,7 +187,7 @@ void IPlot::leaveEvent(QEvent * e)
     needsRedraw = true;
     posMouse    = NOPOINT;
 
-    if(trk) trk->setPointOfFocusByDistance(NOFLOAT);
+    if(trk) trk->setPointOfFocusByDistance(NOFLOAT, this);
 
     QApplication::restoreOverrideCursor();
     update();
@@ -225,11 +225,11 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         qreal x = data->x().pt2val(posMouse.x() - left);
         if(data->axisType == CPlotData::eAxisLinear)
         {
-            if(trk) trk->setPointOfFocusByDistance(x);
+            if(trk) trk->setPointOfFocusByDistance(x, this);
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {
-
+            if(trk) trk->setPointOfFocusByTime(x, this);
         }
 
         // update canvas if visible

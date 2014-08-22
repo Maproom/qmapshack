@@ -58,7 +58,8 @@ void CScrOptTrk::slotDelete()
 
 void CScrOptTrk::slotEdit()
 {
-
+    CGisWidget::self().editItemByKey(key);
+    deleteLater();
 }
 
 void CScrOptTrk::slotProfile(bool on)

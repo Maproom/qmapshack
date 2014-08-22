@@ -37,6 +37,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
 
         void addMapList(CMapList *list, const QString& name);
         void addDemList(CDemList *list, const QString& name);
+        void addWidgetToTab(QWidget * w);
 
         bool isScaleVisible();
         bool isGridVisible();
@@ -58,6 +59,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
            @return If the currently visible tab does not contain a CCanvas object 0 is returned.
         */
         CCanvas * getVisibleCanvas();
+
 
     private slots:
         void slotAbout();

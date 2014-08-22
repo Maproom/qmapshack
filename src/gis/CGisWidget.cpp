@@ -299,7 +299,11 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
 {
-    IGisItem::mutexItems.lock();
+    /*
+        Mutex locking will make map moving very slow if there are many GIS items
+        visible. Remove it for now. But I am not sure if that is a good idea.
+    */
+    //IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
@@ -310,5 +314,5 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
 
         project->drawItem(p, viewport, gis);
     }
-    IGisItem::mutexItems.unlock();
+    //IGisItem::mutexItems.unlock();
 }

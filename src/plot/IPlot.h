@@ -32,7 +32,6 @@ class IPlot : public QWidget
         virtual ~IPlot();
 
         virtual void updateData() = 0;
-
         virtual void setPointOfFocus(const CGisItemTrk::trkpt_t * pt) = 0;
 
     protected:

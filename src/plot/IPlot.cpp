@@ -75,7 +75,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 {
     setMouseTracking(true);
 
-    trk->registerPlot(this);
+    if(trk) trk->registerPlot(this);
 
     data = new CPlotData(type, this);
 
@@ -89,7 +89,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
 IPlot::~IPlot()
 {
-    trk->unregisterPlot(this);
+    if(trk) trk->unregisterPlot(this);
 }
 
 void IPlot::clear()
@@ -187,7 +187,7 @@ void IPlot::leaveEvent(QEvent * e)
     needsRedraw = true;
     posMouse    = NOPOINT;
 
-    trk->setPointOfFocusByDistance(NOFLOAT);
+    if(trk) trk->setPointOfFocusByDistance(NOFLOAT);
 
     QApplication::restoreOverrideCursor();
     update();
@@ -225,7 +225,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         qreal x = data->x().pt2val(posMouse.x() - left);
         if(data->axisType == CPlotData::eAxisLinear)
         {
-            trk->setPointOfFocusByDistance(x);
+            if(trk) trk->setPointOfFocusByDistance(x);
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {

@@ -16,20 +16,25 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/CDetailsTrk.h"
+#include "CPlotSpeed.h"
 
-#include <QtWidgets>
-
-CDetailsTrk::CDetailsTrk(QWidget *parent)
-    : QWidget(parent)
+CPlotSpeed::CPlotSpeed(QWidget *parent)
+    : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
 {
-    qDebug() << "CDetailsTrk";
 
-    setupUi(this);
 }
 
-CDetailsTrk::~CDetailsTrk()
+CPlotSpeed::~CPlotSpeed()
 {
-    qDebug() << "~CDetailsTrk";
+
 }
 
+void CPlotSpeed::updateData()
+{
+
+}
+
+void CPlotSpeed::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
+{
+
+}

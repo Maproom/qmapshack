@@ -16,20 +16,21 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/CDetailsTrk.h"
+#ifndef CPLOTDISTANCE_H
+#define CPLOTDISTANCE_H
 
-#include <QtWidgets>
+#include "plot/IPlot.h"
 
-CDetailsTrk::CDetailsTrk(QWidget *parent)
-    : QWidget(parent)
+class CPlotDistance : public IPlot
 {
-    qDebug() << "CDetailsTrk";
+    public:
+        CPlotDistance(QWidget * parent);
+        virtual ~CPlotDistance();
 
-    setupUi(this);
-}
+        void updateData();
+        void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
 
-CDetailsTrk::~CDetailsTrk()
-{
-    qDebug() << "~CDetailsTrk";
-}
+};
+
+#endif //CPLOTDISTANCE_H
 

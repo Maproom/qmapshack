@@ -22,19 +22,31 @@
 #include "gis/IGisItem.h"
 
 #include <QPen>
+#include <QPointer>
 
 class QDomNode;
 class CGisProject;
 class IPlot;
+class CDetailsTrk;
+class CScrOptTrk;
 
 class CGisItemTrk : public IGisItem
 {
     public:
+        struct trk_t;
+        struct trkpt_t;
+
         CGisItemTrk(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemTrk();
 
         const QString& getName(){return trk.name;}
+        int getColorIdx(){return colorIdx;}
         QString getInfo();
+        QString getInfoTrkPt(const trkpt_t& pt);
+        quint32 getTotalElapsedSeconds(){return totalElapsedSeconds;}
+
+        void setName(const QString& str);
+        void setColor(int idx);
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
@@ -56,7 +68,9 @@ class CGisItemTrk : public IGisItem
         */
         void gainUserFocus(bool yes);
 
-
+        /**
+           @brief Make sure a CDetailsTrk widget is registered with the main tab widget
+        */
         void edit();
         /**
            @brief Check for user focus
@@ -107,11 +121,10 @@ class CGisItemTrk : public IGisItem
         void setPointOfFocusByPoint(const QPoint& pt);
 
 
-        struct trk_t;
-        struct trkpt_t;
-    private:        
         static const QColor  lineColors[];
         static const QString bulletColors[];
+
+    private:        
 
         void genKey();
         void readTrk(const QDomNode& xml, trk_t& trk);
@@ -119,6 +132,7 @@ class CGisItemTrk : public IGisItem
         void setIcon(const QString& c);
         void deriveSecondaryData();
         const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
+        void publishPointOfFocus(const trkpt_t * pt, IPlot *initiator);
 
 
     public:
@@ -242,6 +256,9 @@ class CGisItemTrk : public IGisItem
         QSet<IPlot*> registeredPlots;
 
         const trkpt_t * pointOfFocus;
+
+        QPointer<CDetailsTrk> dlgDetails;
+        QPointer<CScrOptTrk>  srcOpt;
 };
 
 #endif //CGISITEMTRK_H

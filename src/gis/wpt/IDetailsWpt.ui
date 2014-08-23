@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>550</width>
-    <height>366</height>
+    <height>378</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,6 @@
   <property name="windowIcon">
    <iconset resource="../../resources.qrc">
     <normaloff>:/icons/32x32/Map.png</normaloff>:/icons/32x32/Map.png</iconset>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="spacing">

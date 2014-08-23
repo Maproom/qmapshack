@@ -232,7 +232,10 @@ void CMainWindow::addDemList(CDemList * list, const QString &name)
 
 void CMainWindow::addWidgetToTab(QWidget * w)
 {
-    tabWidget->addTab(w, w->objectName());
+    if(tabWidget->indexOf(w) == -1)
+    {
+        tabWidget->addTab(w, w->objectName());
+    }
     tabWidget->setCurrentWidget(w);
 }
 

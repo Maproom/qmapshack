@@ -126,6 +126,10 @@ CGisItemTrk::~CGisItemTrk()
         a copy of the list befor we start to delete.
     */
     qDeleteAll(registeredPlots.toList());
+
+    delete dlgDetails;
+
+    delete srcOpt;
 }
 
 void CGisItemTrk::registerPlot(IPlot * plot)
@@ -210,9 +214,33 @@ QString CGisItemTrk::getInfo()
     return str;
 }
 
+QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
+{
+
+    QString str, val1, unit1;
+    str += IUnit::datetime2string(pt.time, QPointF(pt.lon, pt.lat) * DEG_TO_RAD) + "\n";
+    IUnit::self().meter2elevation(pt.ele, val1, unit1);
+    str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
+    if(pt.slope != NOFLOAT)
+    {
+        str += QObject::tr(" slope: %1°(%2%)").arg(pt.slope,2,'f',0).arg(qTan(pt.slope * DEG_TO_RAD) * 100, 2,'f',0);
+    }
+    if(pt.speed != NOFLOAT)
+    {
+        IUnit::self().meter2speed(pt.speed, val1, unit1);
+        str += QObject::tr(" speed: %1%2").arg(val1).arg(unit1);
+    }
+
+    return str;
+}
+
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    return new CScrOptTrk(this, origin, mouse);
+    if(srcOpt.isNull())
+    {
+        srcOpt = new CScrOptTrk(this, origin, mouse);
+    }
+    return srcOpt;
 }
 
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
@@ -573,9 +601,13 @@ void CGisItemTrk::gainUserFocus(bool yes)
 
 void CGisItemTrk::edit()
 {
-    CDetailsTrk * w = new CDetailsTrk(this, 0);
-    w->setObjectName(getName());
-    CMainWindow::self().addWidgetToTab(w);
+    if(dlgDetails.isNull())
+    {
+       dlgDetails = new CDetailsTrk(*this, 0);
+       dlgDetails->setObjectName(getName());
+    }
+
+    CMainWindow::self().addWidgetToTab(dlgDetails);
 }
 
 
@@ -650,19 +682,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         gis->convertRad2Px(anchor);
 
         // create trackpoint info text
-        QString str, val1, unit1, val2, unit2, val3, unit3;
-        str += IUnit::datetime2string(pointOfFocus->time, QPointF(pointOfFocus->lon, pointOfFocus->lat) * DEG_TO_RAD) + "\n";
-        IUnit::self().meter2elevation(pointOfFocus->ele, val1, unit1);
-        str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
-        if(pointOfFocus->slope != NOFLOAT)
-        {
-            str += QObject::tr(" slope: %1°(%2%)").arg(pointOfFocus->slope,2,'f',0).arg(qTan(pointOfFocus->slope * DEG_TO_RAD) * 100, 2,'f',0);
-        }
-        if(pointOfFocus->speed != NOFLOAT)
-        {
-            IUnit::self().meter2speed(pointOfFocus->speed, val1, unit1);
-            str += QObject::tr(" speed: %1%2").arg(val1).arg(unit1);
-        }
+        QString str, val1, unit1, val2, unit2;
+        str = getInfoTrkPt(*pointOfFocus);
 
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
@@ -754,7 +775,23 @@ void CGisItemTrk::drawHighlight(QPainter& p)
     p.drawPolyline(line);
 }
 
+void CGisItemTrk::setName(const QString& str)
+{
+    setText(0, str);
+    trk.name = str;
+    changed(QObject::tr("Changed name"));
+}
 
+void CGisItemTrk::setColor(int idx)
+{
+    int N = sizeof(lineColors)/sizeof(QColor);
+    if(idx >= N)
+    {
+        return;
+    }
+    setColor(lineColors[idx]);
+    changed(QObject::tr("Changed color"));
+}
 
 void CGisItemTrk::setColor(const QColor& c)
 {
@@ -780,7 +817,6 @@ void CGisItemTrk::setColor(const QColor& c)
     }
 
     setIcon(color.name());
-
 }
 
 
@@ -799,7 +835,7 @@ void CGisItemTrk::setIcon(const QString& c)
 
 void CGisItemTrk::setPointOfFocusByDistance(qreal dist, IPlot *initiator)
 {
-    pointOfFocus = 0;
+    const trkpt_t * newPointOfFocus = 0;
 
     if(dist != NOFLOAT)
     {
@@ -819,7 +855,7 @@ void CGisItemTrk::setPointOfFocusByDistance(qreal dist, IPlot *initiator)
                 qreal d = qAbs(pt.distance - dist);
                 if(d <= delta)
                 {
-                    pointOfFocus = &pt;
+                    newPointOfFocus = &pt;
                     delta = d;
                 }
                 else
@@ -830,24 +866,18 @@ void CGisItemTrk::setPointOfFocusByDistance(qreal dist, IPlot *initiator)
         }
     }
 
-    foreach(IPlot * plot, registeredPlots)
-    {
-        if(plot != initiator)
-        {
-            plot->setPointOfFocus(pointOfFocus);
-        }
-    }
+    publishPointOfFocus(newPointOfFocus, initiator);
 
 }
 
 void CGisItemTrk::setPointOfFocusByTime(quint32 time, IPlot * initiator)
 {
-    pointOfFocus = 0;
-
-
+    const trkpt_t * newPointOfFocus = 0;
 
     if(time != NOTIME)
     {
+        /// @todo: optimze search by single out segment and then do a binary search
+
         qreal delta = totalElapsedSeconds;
 
         foreach (const trkseg_t& seg, trk.segs)
@@ -862,26 +892,18 @@ void CGisItemTrk::setPointOfFocusByTime(quint32 time, IPlot * initiator)
                 qreal d = qAbs(qreal(pt.time.toTime_t()) - qreal(time));
                 if(d <= delta)
                 {
-                    pointOfFocus = &pt;
+                    newPointOfFocus = &pt;
                     delta = d;
                 }
                 else
                 {
                     break;
                 }
-
             }
         }
-
     }
 
-    foreach(IPlot * plot, registeredPlots)
-    {
-        if(plot != initiator)
-        {
-            plot->setPointOfFocus(pointOfFocus);
-        }
-    }
+    publishPointOfFocus(newPointOfFocus, initiator);
 
 }
 
@@ -908,8 +930,7 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
 
 void CGisItemTrk::setPointOfFocusByPoint(const QPoint& pt)
 {
-    const trkpt_t * oldPoint = pointOfFocus;
-    pointOfFocus = 0;
+    const trkpt_t * newPointOfFocus = 0;
 
     if(hasUserFocus() || (pt != NOPOINTF))
     {
@@ -938,19 +959,29 @@ void CGisItemTrk::setPointOfFocusByPoint(const QPoint& pt)
 
         if(d < MIN_DIST_FOCUS)
         {
-            pointOfFocus = getVisibleTrkPtByIndex(idx);
+            newPointOfFocus = getVisibleTrkPtByIndex(idx);
         }
     }
+    publishPointOfFocus(newPointOfFocus, 0);
+}
 
-    /*
-        As this method is never called by an IPlot object tell it
-        to all registered IPlot objects on a change
-    */
-    if(oldPoint != pointOfFocus)
+
+void CGisItemTrk::publishPointOfFocus(const trkpt_t * pt,  IPlot * initiator)
+{
+    if(pt != pointOfFocus)
     {
+        pointOfFocus = pt;
         foreach(IPlot * plot, registeredPlots)
         {
-            plot->setPointOfFocus(pointOfFocus);
+            if(plot != initiator)
+            {
+                plot->setPointOfFocus(pointOfFocus);
+            }
+        }
+
+        if(!dlgDetails.isNull())
+        {
+            dlgDetails->setPointOfFocus(pointOfFocus);
         }
     }
 }

@@ -28,11 +28,42 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
 {
     Q_OBJECT
     public:
-        CDetailsTrk(CGisItemTrk * trk, QWidget * parent);
+        CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
         virtual ~CDetailsTrk();
 
+        void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
+
+    private slots:
+        void slotShowPlots();
+        void slotColorChanged(int idx);
+        void slotChangeReadOnlyMode(bool on);
+        void slotNameChanged();
+        void slotNameChanged(const QString& name);
+
     private:
-        QString key;
+        void setupGui();
+
+        enum columns_t
+        {
+            eColNum
+            ,eColTime
+            ,eColEle
+            ,eColDelta
+            ,eColDist
+            ,eColSpeed
+            ,eColAscend
+            ,eColDescend
+            ,eColPosition
+            ,eColMax
+        };
+
+        /**
+           @brief Pointer to track item
+
+           It is ok to store the pointer as this widget is created by the track item. The
+           track item will destroy this object on it's own destruction.
+        */
+        CGisItemTrk& trk;
 };
 
 #endif //CDETAILSTRK_H

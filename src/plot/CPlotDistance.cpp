@@ -40,7 +40,7 @@ void CPlotDistance::setTrack(CGisItemTrk * track)
 
 
 void CPlotDistance::updateData()
-{
+{       
     CPlotData::axistype_e type = data->axisType;
 
     if(mode == eModeIcon)
@@ -61,10 +61,17 @@ void CPlotDistance::updateData()
         setYLabel(tr("distance. [%1]").arg(IUnit::self().baseunit));
     }
 
+    clear();
+    if(trk->getTotalElapsedSeconds() == 0)
+    {
+        return;
+    }
+
     QPolygonF lineDist;
 
     qreal basefactor = IUnit::self().basefactor;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
+
     foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
     {
         foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
@@ -81,7 +88,7 @@ void CPlotDistance::updateData()
         }
     }
 
-    clear();
+
     newLine(lineDist, "GPS");
     setLimits();
     resetZoom();

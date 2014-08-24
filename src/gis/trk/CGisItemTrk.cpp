@@ -221,9 +221,9 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
     str += IUnit::datetime2string(pt.time, QPointF(pt.lon, pt.lat) * DEG_TO_RAD) + "\n";
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
     str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
-    if(pt.slope != NOFLOAT)
+    if(pt.slope1 != NOFLOAT)
     {
-        str += QObject::tr(" slope: %1°(%2%)").arg(pt.slope,2,'f',0).arg(qTan(pt.slope * DEG_TO_RAD) * 100, 2,'f',0);
+        str += QObject::tr(" slope: %1°(%2%)").arg(pt.slope1,2,'f',0).arg(pt.slope2, 2,'f',0);
     }
     if(pt.speed != NOFLOAT)
     {
@@ -412,7 +412,7 @@ void CGisItemTrk::deriveSecondaryData()
         {
             trkpt_t& trkpt = seg.pts[p];
 
-            cntTotalPoints++;
+            trkpt.idx = cntTotalPoints++;
             if(trkpt.flags & trkpt_t::eDeleted)
             {
                 trkpt.reset();
@@ -545,8 +545,9 @@ void CGisItemTrk::deriveSecondaryData()
                 n++;
             }
 
-            qreal a     = atan((e2 - e1)/(d2 - d1));
-            trkpt.slope = qAbs(a * 360.0/(2 * M_PI));
+            qreal a         = atan((e2 - e1)/(d2 - d1));
+            trkpt.slope1    = qAbs(a * 360.0/(2 * M_PI));
+            trkpt.slope2    = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
 
             if((t2 - t1) > 0)
             {
@@ -862,7 +863,7 @@ void CGisItemTrk::setPointOfFocusByDistance(qreal dist, IPlot *initiator)
                 {
                     break;
                 }
-            }
+            }            
         }
     }
 
@@ -905,6 +906,24 @@ void CGisItemTrk::setPointOfFocusByTime(quint32 time, IPlot * initiator)
 
     publishPointOfFocus(newPointOfFocus, initiator);
 
+}
+
+void CGisItemTrk::setPointOfFocusByIndex(quint32 idx)
+{
+    const trkpt_t * newPointOfFocus = 0;
+
+    foreach (const trkseg_t& seg, trk.segs)
+    {
+        foreach(const trkpt_t& pt, seg.pts)
+        {
+            if(pt.idx == idx)
+            {
+                newPointOfFocus = &pt;
+                publishPointOfFocus(newPointOfFocus, 0);
+                return;
+            }
+        }
+    }
 }
 
 const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)

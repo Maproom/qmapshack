@@ -39,6 +39,7 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
         void slotChangeReadOnlyMode(bool on);
         void slotNameChanged();
         void slotNameChanged(const QString& name);
+        void slotItemSelectionChanged();
 
     private:
         void setupGui();
@@ -51,6 +52,7 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
             ,eColDelta
             ,eColDist
             ,eColSpeed
+            ,eColSlope
             ,eColAscend
             ,eColDescend
             ,eColPosition

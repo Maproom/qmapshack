@@ -113,6 +113,7 @@ class CGisItemTrk : public IGisItem
 
         void setPointOfFocusByTime(quint32 time, IPlot * initiator);
 
+        void setPointOfFocusByIndex(quint32 idx);
         /**
            @brief Use the point that is closest to the given point.
 
@@ -150,7 +151,8 @@ class CGisItemTrk : public IGisItem
                 descend         = NOFLOAT;
                 elapsedSeconds  = NOFLOAT;
                 elapsedSecondsMoving = NOFLOAT;
-                slope           = NOFLOAT;
+                slope1          = NOFLOAT;
+                slope2          = NOFLOAT;
                 speed           = NOFLOAT;
             }
 
@@ -164,6 +166,7 @@ class CGisItemTrk : public IGisItem
             };
 
             quint32 flags;
+            quint32 idx;
 
             /// the distance to the last point
             qreal deltaDistance;
@@ -173,8 +176,10 @@ class CGisItemTrk : public IGisItem
             qreal ascend;
             /// the descend from the start of the track
             qreal descend;
-            /// the slope over several points close by
-            qreal slope;
+            /// the slope [°] over several points close by
+            qreal slope1;
+            /// the slope [%] over several points close by
+            qreal slope2;
             /// the speed over several points close by
             qreal speed;
             /// the seconds since the start of the track

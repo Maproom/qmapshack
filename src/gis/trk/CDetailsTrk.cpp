@@ -58,6 +58,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(lineName, SIGNAL(returnPressed()), this, SLOT(slotNameChanged()));
     connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotNameChanged(QString)));
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
+    connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
 
 
     slotShowPlots();
@@ -96,7 +97,6 @@ void CDetailsTrk::setupGui()
 
     treeWidget->clear();
 
-    int cnt = 0;
     QList<QTreeWidgetItem*> items;
     const CGisItemTrk::trk_t& t = trk.getTrackData();
     foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
@@ -129,7 +129,7 @@ void CDetailsTrk::setupGui()
                 }
             }
 
-            item->setText(eColNum,QString::number(cnt++));
+            item->setText(eColNum,QString::number(trkpt.idx));
             if(trkpt.time.isValid())
             {
                 item->setText(eColTime, trkpt.time.toString(Qt::DefaultLocaleShortDate));
@@ -168,6 +168,8 @@ void CDetailsTrk::setupGui()
             }
             item->setText(eColSpeed,str);
 
+            item->setText(eColSlope, QString("%1°(%2%)").arg(trkpt.slope1,2,'f',0).arg(trkpt.slope2,2,'f',0));
+
             IUnit::self().meter2elevation(trkpt.ascend, val, unit);
             item->setText(eColAscend, tr("%1 %2").arg(val).arg(unit));
             IUnit::self().meter2elevation(trkpt.descend, val, unit);
@@ -183,7 +185,7 @@ void CDetailsTrk::setupGui()
     }
     treeWidget->addTopLevelItems(items);
 
-    treeWidget->header()->setSectionResizeMode(0,QHeaderView::Interactive);
+    treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
 
 }
 
@@ -191,12 +193,16 @@ void CDetailsTrk::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
 {
     if(pt == 0)
     {
-        labelInfoTrkPt->clear();
+
     }
     else
     {
-        labelInfoTrkPt->setText(trk.getInfoTrkPt(*pt));
+        treeWidget->blockSignals(true);
+        treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idx));
+        treeWidget->blockSignals(false);
     }
+
+
 }
 
 void CDetailsTrk::slotShowPlots()
@@ -277,3 +283,12 @@ void CDetailsTrk::slotNameChanged()
     setupGui();
 }
 
+void CDetailsTrk::slotItemSelectionChanged()
+{
+    QTreeWidgetItem * item = treeWidget->currentItem();
+    if(item != 0)
+    {
+        quint32 idx = item->text(eColNum).toUInt();
+        trk.setPointOfFocusByIndex(idx);
+    }
+}

@@ -60,6 +60,12 @@ void CPlotSpeed::updateData()
         setYLabel(tr("speed. [%1]").arg(IUnit::self().speedunit));
     }
 
+    clear();
+    if(trk->getTotalElapsedSeconds() == 0)
+    {
+        return;
+    }
+
     QPolygonF lineSpeed;
 
     qreal speedfactor = IUnit::self().speedfactor;
@@ -80,7 +86,6 @@ void CPlotSpeed::updateData()
         }
     }
 
-    clear();
     newLine(lineSpeed, "GPS");
     setLimits();
     resetZoom();

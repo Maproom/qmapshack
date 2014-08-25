@@ -31,7 +31,8 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
         CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
         virtual ~CDetailsTrk();
 
-        void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
+        void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
+        void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
 
     private slots:
         void slotShowPlots();

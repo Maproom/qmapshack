@@ -89,7 +89,7 @@ void CPlotTrack::updateData()
     needsRedraw = true;
 }
 
-void CPlotTrack::setPointOfFocus(qreal lon, qreal lat)
+void CPlotTrack::setMouseMoveFocus(qreal lon, qreal lat)
 {
     pos.rx() = lon;
     pos.ry() = lat;

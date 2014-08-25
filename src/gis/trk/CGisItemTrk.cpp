@@ -100,7 +100,8 @@ QString CGisItemTrk::keyUserFocus;
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , pointOfFocus(0)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
 {        
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -675,16 +676,16 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
-    if(hasUserFocus() && pointOfFocus)
+    if(hasUserFocus() && mouseMoveFocus)
     {
         // derive anchor
-        QPointF anchor(pointOfFocus->lon, pointOfFocus->lat);
+        QPointF anchor(mouseMoveFocus->lon, mouseMoveFocus->lat);
         anchor *= DEG_TO_RAD;
         gis->convertRad2Px(anchor);
 
         // create trackpoint info text
         QString str, val1, unit1, val2, unit2;
-        str = getInfoTrkPt(*pointOfFocus);
+        str = getInfoTrkPt(*mouseMoveFocus);
 
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
@@ -724,14 +725,14 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.setPen(Qt::black);
         p.setBrush(Qt::NoBrush);
         p.drawRect(rectBar1);
-        qreal d = pointOfFocus->distance * rectBar1.width() / totalDistance;
+        qreal d = mouseMoveFocus->distance * rectBar1.width() / totalDistance;
         p.drawRect(d-1,-1, 3, 7);
 
-        IUnit::self().meter2distance(pointOfFocus->distance, val1, unit1);
-        IUnit::self().meter2distance(totalDistance - pointOfFocus->distance, val2, unit2);
+        IUnit::self().meter2distance(mouseMoveFocus->distance, val1, unit1);
+        IUnit::self().meter2distance(totalDistance - mouseMoveFocus->distance, val2, unit2);
         p.setPen(Qt::darkBlue);
         p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(pointOfFocus->distance * 100 / totalDistance, 0, 'f', 0));
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->distance * 100 / totalDistance, 0, 'f', 0));
         p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
 
         // draw progress bar time
@@ -740,14 +741,14 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.setPen(Qt::black);
         p.setBrush(Qt::NoBrush);
         p.drawRect(rectBar2);
-        qreal t = pointOfFocus->elapsedSecondsMoving * rectBar2.width() / totalElapsedSecondsMoving;
+        qreal t = mouseMoveFocus->elapsedSecondsMoving * rectBar2.width() / totalElapsedSecondsMoving;
         p.drawRect(t-1,-1, 3, 7);
 
-        IUnit::self().seconds2time(pointOfFocus->elapsedSecondsMoving, val1, unit1);
-        IUnit::self().seconds2time(totalElapsedSecondsMoving - pointOfFocus->elapsedSecondsMoving, val2, unit2);
+        IUnit::self().seconds2time(mouseMoveFocus->elapsedSecondsMoving, val1, unit1);
+        IUnit::self().seconds2time(totalElapsedSecondsMoving - mouseMoveFocus->elapsedSecondsMoving, val2, unit2);
         p.setPen(Qt::darkBlue);
         p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(pointOfFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
+        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
         p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
 
         // draw text
@@ -834,7 +835,7 @@ void CGisItemTrk::setIcon(const QString& c)
     QTreeWidgetItem::setIcon(0,icon);
 }
 
-void CGisItemTrk::setPointOfFocusByDistance(qreal dist, IPlot *initiator)
+void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot *initiator)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -867,11 +868,11 @@ void CGisItemTrk::setPointOfFocusByDistance(qreal dist, IPlot *initiator)
         }
     }
 
-    publishPointOfFocus(newPointOfFocus, initiator);
+    publishMouseFocus(newPointOfFocus, mode, initiator);
 
 }
 
-void CGisItemTrk::setPointOfFocusByTime(quint32 time, IPlot * initiator)
+void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * initiator)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -904,50 +905,11 @@ void CGisItemTrk::setPointOfFocusByTime(quint32 time, IPlot * initiator)
         }
     }
 
-    publishPointOfFocus(newPointOfFocus, initiator);
+    publishMouseFocus(newPointOfFocus, mode, initiator);
 
 }
 
-void CGisItemTrk::setPointOfFocusByIndex(quint32 idx)
-{
-    const trkpt_t * newPointOfFocus = 0;
-
-    foreach (const trkseg_t& seg, trk.segs)
-    {
-        foreach(const trkpt_t& pt, seg.pts)
-        {
-            if(pt.idx == idx)
-            {
-                newPointOfFocus = &pt;
-                publishPointOfFocus(newPointOfFocus, 0);
-                return;
-            }
-        }
-    }
-}
-
-const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
-{
-    quint32 i = 0;
-    foreach (const trkseg_t& seg, trk.segs)
-    {
-        foreach(const trkpt_t& pt, seg.pts)
-        {
-            if(pt.flags & trkpt_t::eDeleted)
-            {
-                continue;
-            }
-            if(i == idx)
-            {
-                return &pt;
-            }
-            i++;
-        }
-    }
-    return 0;
-}
-
-void CGisItemTrk::setPointOfFocusByPoint(const QPoint& pt)
+void CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -981,26 +943,83 @@ void CGisItemTrk::setPointOfFocusByPoint(const QPoint& pt)
             newPointOfFocus = getVisibleTrkPtByIndex(idx);
         }
     }
-    publishPointOfFocus(newPointOfFocus, 0);
+    publishMouseFocus(newPointOfFocus, mode, 0);
 }
 
 
-void CGisItemTrk::publishPointOfFocus(const trkpt_t * pt,  IPlot * initiator)
+void CGisItemTrk::setMouseFocusByIndex(quint32 idx, focusmode_e mode)
 {
-    if(pt != pointOfFocus)
+    const trkpt_t * newPointOfFocus = 0;
+
+    foreach (const trkseg_t& seg, trk.segs)
     {
-        pointOfFocus = pt;
-        foreach(IPlot * plot, registeredPlots)
+        foreach(const trkpt_t& pt, seg.pts)
         {
-            if(plot != initiator)
+            if(pt.idx == idx)
             {
-                plot->setPointOfFocus(pointOfFocus);
+                newPointOfFocus = &pt;
+                publishMouseFocus(newPointOfFocus, mode, 0);
+                return;
             }
         }
+    }
+}
 
-        if(!dlgDetails.isNull())
+const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
+{
+    quint32 i = 0;
+    foreach (const trkseg_t& seg, trk.segs)
+    {
+        foreach(const trkpt_t& pt, seg.pts)
         {
-            dlgDetails->setPointOfFocus(pointOfFocus);
+            if(pt.flags & trkpt_t::eDeleted)
+            {
+                continue;
+            }
+            if(i == idx)
+            {
+                return &pt;
+            }
+            i++;
         }
+    }
+    return 0;
+}
+
+
+
+void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot * initiator)
+{
+    switch(mode)
+    {
+        case eFocusMouseMove:
+            if(pt != mouseMoveFocus)
+            {
+                mouseMoveFocus = pt;
+                foreach(IPlot * plot, registeredPlots)
+                {
+                    if(plot != initiator)
+                    {
+                        plot->setMouseMoveFocus(mouseMoveFocus);
+                    }
+                }
+
+                if(!dlgDetails.isNull())
+                {
+                    dlgDetails->setMouseMoveFocus(mouseMoveFocus);
+                }
+            }
+            break;
+        case eFocusMouseClick:
+            if(pt != mouseClickFocus)
+            {
+                mouseClickFocus = pt;
+                if(!dlgDetails.isNull())
+                {
+                    dlgDetails->setMouseClickFocus(mouseClickFocus);
+                }
+            }
+
+        default:;
     }
 }

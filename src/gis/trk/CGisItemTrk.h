@@ -36,6 +36,12 @@ class CGisItemTrk : public IGisItem
         struct trk_t;
         struct trkpt_t;
 
+        enum focusmode_e
+        {
+             eFocusMouseMove
+            ,eFocusMouseClick
+        };
+
         CGisItemTrk(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemTrk();
 
@@ -108,19 +114,30 @@ class CGisItemTrk : public IGisItem
            @brief Use point with the distance from start matching best the given distance.
 
            @param dist      the distance in [m]
+           @param initiator a pointer to an initiating IPlot object, or 0
          */
-        void setPointOfFocusByDistance(qreal dist, IPlot * initiator);
+        void setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot * initiator);
 
-        void setPointOfFocusByTime(quint32 time, IPlot * initiator);
-
-        void setPointOfFocusByIndex(quint32 idx);
         /**
-           @brief Use the point that is closest to the given point.
+           @brief Use point with time from start matching best the given time delta
+
+           @param time      a time delta in [s] relative to the start time
+           @param initiator a pointer to an initiating IPlot object, or 0
+        */
+        void setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * initiator);
+
+        /**
+           @brief Use the point that is closest to the given point on the screen.
 
            @param pt        a point on the screen in pixel.
          */
-        void setPointOfFocusByPoint(const QPoint& pt);
+        void setMouseFocusByPoint(const QPoint& pt, focusmode_e mode);
 
+        /**
+           @brief Use point with given index counter
+           @param idx
+        */
+        void setMouseFocusByIndex(quint32 idx, focusmode_e mode);
 
         static const QColor  lineColors[];
         static const QString bulletColors[];
@@ -133,7 +150,7 @@ class CGisItemTrk : public IGisItem
         void setIcon(const QString& c);
         void deriveSecondaryData();
         const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
-        void publishPointOfFocus(const trkpt_t * pt, IPlot *initiator);
+        void publishMouseFocus(const trkpt_t * pt, focusmode_e mode, IPlot *initiator);
 
 
     public:
@@ -260,7 +277,8 @@ class CGisItemTrk : public IGisItem
         */
         QSet<IPlot*> registeredPlots;
 
-        const trkpt_t * pointOfFocus;
+        const trkpt_t * mouseMoveFocus;
+        const trkpt_t * mouseClickFocus;
 
         QPointer<CDetailsTrk> dlgDetails;
         QPointer<CScrOptTrk>  srcOpt;

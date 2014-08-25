@@ -32,7 +32,7 @@ class IPlot : public QWidget
         virtual ~IPlot();
 
         virtual void updateData() = 0;
-        virtual void setPointOfFocus(const CGisItemTrk::trkpt_t * pt) = 0;
+        virtual void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt) = 0;
 
     protected:
         void setYLabel(const QString& str);
@@ -47,6 +47,7 @@ class IPlot : public QWidget
         void leaveEvent(QEvent * e);
         void enterEvent(QEvent * e);
         void mouseMoveEvent(QMouseEvent * e);
+        void mousePressEvent(QMouseEvent * e);
 
 
         void setSizes();

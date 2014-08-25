@@ -97,7 +97,7 @@ void CPlotProfile::updateData()
 
 }
 
-void CPlotProfile::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
+void CPlotProfile::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
 {
     if(pt == 0)
     {

@@ -191,24 +191,22 @@ void CDetailsTrk::setupGui()
 
 }
 
-void CDetailsTrk::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
+void CDetailsTrk::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
 {
-
-
-    if(pt == 0)
+    if(pt != 0)
     {
-
+        plotTrack->setMouseMoveFocus(pt->lon, pt->lat);
     }
-    else
+}
+
+void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t * pt)
+{
+    if(pt != 0)
     {
         treeWidget->blockSignals(true);
         treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idx));
-        treeWidget->blockSignals(false);       
-
-        plotTrack->setPointOfFocus(pt->lon, pt->lat);
+        treeWidget->blockSignals(false);
     }
-
-
 }
 
 void CDetailsTrk::slotShowPlots()
@@ -295,6 +293,6 @@ void CDetailsTrk::slotItemSelectionChanged()
     if(item != 0)
     {
         quint32 idx = item->text(eColNum).toUInt();
-        trk.setPointOfFocusByIndex(idx);
+        trk.setMouseFocusByIndex(idx, CGisItemTrk::eFocusMouseMove);
     }
 }

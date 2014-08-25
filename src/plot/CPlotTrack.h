@@ -31,7 +31,7 @@ class CPlotTrack : public QWidget
 
         void setTrack(CGisItemTrk * track);
         void updateData();
-        void setPointOfFocus(qreal lon, qreal lat);
+        void setMouseMoveFocus(qreal lon, qreal lat);
 
     protected:
         void resizeEvent(QResizeEvent * e);

@@ -187,7 +187,7 @@ void IPlot::leaveEvent(QEvent * e)
     needsRedraw = true;
     posMouse    = NOPOINT;
 
-    if(trk) trk->setPointOfFocusByDistance(NOFLOAT, this);
+    if(trk) trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, this);
 
     QApplication::restoreOverrideCursor();
     update();
@@ -225,11 +225,11 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         qreal x = data->x().pt2val(posMouse.x() - left);
         if(data->axisType == CPlotData::eAxisLinear)
         {
-            if(trk) trk->setPointOfFocusByDistance(x, this);
+            if(trk) trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, this);
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {
-            if(trk) trk->setPointOfFocusByTime(x, this);
+            if(trk) trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, this);
         }
 
         // update canvas if visible
@@ -237,6 +237,42 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         if(canvas)
         {
             canvas->update();
+        }
+        e->accept();
+    }
+    update();
+}
+
+void IPlot::mousePressEvent(QMouseEvent * e)
+{
+    posMouse = NOPOINT;
+    if((e->button() == Qt::LeftButton) && rectGraphArea.contains(e->pos()))
+    {
+        posMouse = e->pos();
+
+        if(mode == eModeIcon)
+        {
+            trk->edit();
+        }
+        else
+        {
+            // set point of focus at track object
+            qreal x = data->x().pt2val(posMouse.x() - left);
+            if(data->axisType == CPlotData::eAxisLinear)
+            {
+                if(trk) trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, this);
+            }
+            else if(data->axisType == CPlotData::eAxisTime)
+            {
+                if(trk) trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, this);
+            }
+
+            // update canvas if visible
+            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+            if(canvas)
+            {
+                canvas->update();
+            }
         }
         e->accept();
     }

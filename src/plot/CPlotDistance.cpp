@@ -95,7 +95,7 @@ void CPlotDistance::updateData()
 
 }
 
-void CPlotDistance::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
+void CPlotDistance::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
 {
     if(pt == 0)
     {

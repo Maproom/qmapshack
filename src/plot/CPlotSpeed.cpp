@@ -91,7 +91,7 @@ void CPlotSpeed::updateData()
     resetZoom();
 }
 
-void CPlotSpeed::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
+void CPlotSpeed::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
 {
     if(pt == 0)
     {

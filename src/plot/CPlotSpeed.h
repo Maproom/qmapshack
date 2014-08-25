@@ -29,7 +29,7 @@ class CPlotSpeed : public IPlot
 
         void setTrack(CGisItemTrk * track);
         void updateData();
-        void setPointOfFocus(const CGisItemTrk::trkpt_t * pt);
+        void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
 
 };
 

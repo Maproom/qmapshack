@@ -99,7 +99,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
                     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(CGisItemTrk::getKeyUserFocus()));
                     if(trk != 0)
                     {
-                        trk->setPointOfFocusByPoint(point);
+                        trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove);
                     }
                 }
                 break;

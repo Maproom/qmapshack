@@ -202,6 +202,9 @@
       </layout>
      </item>
      <item>
+      <widget class="CPlotTrack" name="plotTrack" native="true"/>
+     </item>
+     <item>
       <widget class="QLabel" name="labelInfo">
        <property name="text">
         <string>-</string>
@@ -232,6 +235,12 @@
    <class>CPlotSpeed</class>
    <extends>QWidget</extends>
    <header>plot/CPlotSpeed.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CPlotTrack</class>
+   <extends>QWidget</extends>
+   <header>plot/CPlotTrack.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -22,6 +22,7 @@
 #include "GeoMath.h"
 
 #include <QtWidgets>
+#include <proj_api.h>
 
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     : QWidget(parent)
@@ -43,6 +44,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     plotElevation->setTrack(&trk);
     plotDistance->setTrack(&trk);
     plotSpeed->setTrack(&trk);
+    plotTrack->setTrack(&trk);
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");
@@ -132,7 +134,7 @@ void CDetailsTrk::setupGui()
             item->setText(eColNum,QString::number(trkpt.idx));
             if(trkpt.time.isValid())
             {
-                item->setText(eColTime, trkpt.time.toString(Qt::DefaultLocaleShortDate));
+                item->setText(eColTime, IUnit::self().datetime2string(trkpt.time, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD));
             }
             else
             {
@@ -191,6 +193,8 @@ void CDetailsTrk::setupGui()
 
 void CDetailsTrk::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
 {
+
+
     if(pt == 0)
     {
 
@@ -199,7 +203,9 @@ void CDetailsTrk::setPointOfFocus(const CGisItemTrk::trkpt_t * pt)
     {
         treeWidget->blockSignals(true);
         treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idx));
-        treeWidget->blockSignals(false);
+        treeWidget->blockSignals(false);       
+
+        plotTrack->setPointOfFocus(pt->lon, pt->lat);
     }
 
 

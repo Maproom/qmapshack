@@ -91,7 +91,7 @@ class IGisItem : public QTreeWidgetItem
 
            @return
          */
-        virtual QRectF getBoundingRect(){return boundingRect;}
+        virtual const QRectF& getBoundingRect(){return boundingRect;}
 
         /**
            @brief Get screen option object to display and handle actions for this item.

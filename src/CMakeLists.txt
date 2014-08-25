@@ -92,6 +92,7 @@ set( SRCS
     plot/CPlotProfile.cpp
     plot/CPlotSpeed.cpp
     plot/CPlotDistance.cpp
+    plot/CPlotTrack.cpp
 )
 
 set( HDRS
@@ -179,6 +180,7 @@ set( HDRS
     plot/CPlotProfile.h
     plot/CPlotSpeed.h
     plot/CPlotDistance.h
+    plot/CPlotTrack.h
 )
 
 set( UIS

@@ -39,6 +39,7 @@ class IPlot : public QWidget
         void setXLabel(const QString& str);
         void clear();
         void newLine(const QPolygonF& line, const QString& label);
+        void addLine(const QPolygonF& line, const QString& label);
         void setLimits();
         void resetZoom();
 
@@ -68,6 +69,7 @@ class IPlot : public QWidget
         void drawGridY( QPainter &p );
         void drawXTic( QPainter &p );
         void drawYTic( QPainter &p );
+        void drawLegend(QPainter& p);
         void drawDecoration( QPainter &p );
 
         // different draw modes

@@ -34,7 +34,7 @@ class CDemVRT : public IDem
 
         void draw(IDrawContext::buffer_t& buf);
 
-        qreal getEelevationAt(const QPointF& pos);
+        qreal getElevationAt(const QPointF& pos);
 
     private:
         QMutex mutex;

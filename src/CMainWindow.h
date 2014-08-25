@@ -54,6 +54,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
            @return If no elevation value can be found for the position NOFLOAT is returned.
          */
         qreal getEelevationAt(const QPointF &pos);
+        void  getEelevationAt(const QPolygonF& pos, QPolygonF &ele);
         /**
            @brief Get pointer to the currently visibale canvas object.
            @return If the currently visible tab does not contain a CCanvas object 0 is returned.

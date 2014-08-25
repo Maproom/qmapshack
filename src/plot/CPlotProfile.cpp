@@ -20,6 +20,9 @@
 #include "plot/CPlotAxis.h"
 #include "units/IUnit.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "CMainWindow.h"
+
+#include <proj_api.h>
 
 CPlotProfile::CPlotProfile(QWidget * parent)
     : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
@@ -71,6 +74,8 @@ void CPlotProfile::updateData()
     }
 
     QPolygonF lineEle;
+    QPolygonF lineDem;
+    QPolygonF coords;
 
     qreal basefactor = IUnit::self().basefactor;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
@@ -86,12 +91,20 @@ void CPlotProfile::updateData()
             if(trkpt.ele != NOINT)
             {
                 lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.ele * basefactor);
+                coords  << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+                lineDem << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), NOFLOAT);
             }
         }
     }
 
+    CMainWindow::self().getEelevationAt(coords, lineDem);
+
     clear();
     newLine(lineEle, "GPS");
+    if(!lineDem.isEmpty())
+    {
+        addLine(lineDem, "DEM");
+    }
     setLimits();
     resetZoom();
 

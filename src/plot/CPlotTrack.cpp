@@ -123,7 +123,7 @@ void CPlotTrack::paintEvent(QPaintEvent * e)
     p.translate(xoff, yoff);
     p.setPen(Qt::red);
     p.setBrush(Qt::red);
-    p.drawEllipse(pos,3,3);
+    p.drawEllipse(pos,5,5);
 }
 
 void CPlotTrack::draw()

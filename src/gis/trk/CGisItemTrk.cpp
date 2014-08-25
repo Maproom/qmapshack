@@ -235,6 +235,28 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
     return str;
 }
 
+QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
+{
+    QString str, val, unit;
+    if(pt.ascend != NOFLOAT)
+    {
+        IUnit::self().meter2elevation(pt.ascend, val, unit);
+        str += QObject::tr("Ascend: %1%2 (%3%) ").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2,'f',0);
+    }
+    if(pt.descend != NOFLOAT)
+    {
+        IUnit::self().meter2elevation(pt.descend, val, unit);
+        str += QObject::tr("Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2,'f',0);
+    }
+    str += "\n";
+    IUnit::self().meter2distance(pt.distance, val, unit);
+    str += QObject::tr("Dist.: %1%2 (%3%) ").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2,'f',0);
+    IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
+    str += QObject::tr("Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2,'f',0);
+
+    return str;
+}
+
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
     if(srcOpt.isNull())

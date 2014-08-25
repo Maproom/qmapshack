@@ -196,6 +196,13 @@ void CDetailsTrk::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
     if(pt != 0)
     {
         plotTrack->setMouseMoveFocus(pt->lon, pt->lat);
+        labelInfoTrkPt->setText(trk.getInfoTrkPt(*pt));
+        labelInfoProgress->setText(trk.getInfoProgress(*pt));
+    }
+    else
+    {
+        labelInfoTrkPt->setText("\n");
+        labelInfoProgress->clear();
     }
 }
 

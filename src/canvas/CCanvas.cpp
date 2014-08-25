@@ -239,7 +239,7 @@ void CCanvas::mouseMoveEvent(QMouseEvent * e)
     qreal ele = NOFLOAT;
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
-    ele = dem->getEelevationAt(pos);
+    ele = dem->getElevationAt(pos);
     emit sigMousePosition(pos * RAD_TO_DEG, ele);
 
     mouse->mouseMoveEvent(e);
@@ -572,7 +572,12 @@ void CCanvas::setProjection(const QString& proj)
 
 qreal CCanvas::getElevationAt(const QPointF& pos)
 {
-    return dem->getEelevationAt(pos);
+    return dem->getElevationAt(pos);
+}
+
+void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
+{
+    return dem->getElevationAt(pos, ele);
 }
 
 void CCanvas::setZoom(bool in, redraw_e& needsRedraw)

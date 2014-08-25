@@ -27,9 +27,9 @@
 QPen IPlot::pens[] =
 {
     QPen(Qt::darkBlue,4)
-    , QPen(Qt::darkRed,2)
-    , QPen(Qt::darkYellow,2)
-    , QPen(Qt::darkGreen,2)
+    , QPen(QColor("#C00000"),3)
+    , QPen(Qt::yellow,3)
+    , QPen(Qt::green,3)
 
 };
 
@@ -143,6 +143,30 @@ void IPlot::newLine(const QPolygonF& line, const QString& label)
     update();
 
 }
+
+void IPlot::addLine(const QPolygonF& line, const QString& label)
+{
+    QRectF r = line.boundingRect();
+    if(!r.isValid())
+    {
+        data->badData = true;
+        return;
+    }
+
+    CPlotData::line_t l;
+    l.points    = line;
+    l.label     = label;
+
+    data->badData = false;
+    data->lines << l;
+    setSizes();
+    data->x().setScale( rectGraphArea.width() );
+    data->y().setScale( rectGraphArea.height() );
+
+    needsRedraw = true;
+    update();
+}
+
 
 void IPlot::setLimits()
 {
@@ -463,7 +487,7 @@ void IPlot::draw()
     p.setPen(QPen(Qt::black,2));
     p.drawRect(rectGraphArea);
 
-//    drawLegend(p);
+    drawLegend(p);
 }
 
 void IPlot::drawData(QPainter& p)
@@ -774,6 +798,33 @@ void IPlot::drawYTic( QPainter &p )
     }
 }
 
+void IPlot::drawLegend(QPainter& p)
+{
+    if(data->lines.size() < 2) return;
+
+    int penIdx = 0;
+    QFontMetrics fm(p.font());
+    int h = fm.height();
+
+    int x = rectGraphArea.left() + 10;
+    int y = rectGraphArea.top()  + 2 + h;
+
+    QList<CPlotData::line_t> lines                  = data->lines;
+    QList<CPlotData::line_t>::const_iterator line   = lines.begin();
+
+    while(line != lines.end())
+    {
+        p.setPen(Qt::black);
+        p.drawText(x + 30 ,y,line->label);
+        p.setPen(pens[penIdx++]);
+        p.drawLine(x, y, x + 20, y);
+
+        y += fm.height();
+        ++line;
+    }
+
+}
+
 void IPlot::drawDecoration( QPainter &p )
 {
 
@@ -783,3 +834,4 @@ void IPlot::drawDecoration( QPainter &p )
         p.drawLine(posMouse.x(), top, posMouse.x(), bottom);
     }
 }
+

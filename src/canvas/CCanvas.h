@@ -69,6 +69,7 @@ class CCanvas : public QWidget
         QString getProjection();
         void  setProjection(const QString& proj);
         qreal getElevationAt(const QPointF &pos);
+        void  getElevationAt(const QPolygonF& pos, QPolygonF &ele);
 
         void moveMap(const QPointF &delta);
         void zoomTo(const QRectF& rect);

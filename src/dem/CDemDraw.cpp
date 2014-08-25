@@ -211,7 +211,7 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
 }
 
 
-qreal CDemDraw::getEelevationAt(const QPointF& pos)
+qreal CDemDraw::getElevationAt(const QPointF& pos)
 {
     qreal ele = NOFLOAT;
     if(CDemItem::mutexActiveDems.tryLock())
@@ -230,7 +230,7 @@ qreal CDemDraw::getEelevationAt(const QPointF& pos)
                     break;
                 }
 
-                ele = item->demfile->getEelevationAt(pos);
+                ele = item->demfile->getElevationAt(pos);
                 if(ele != NOFLOAT)
                 {
                     break;
@@ -241,6 +241,14 @@ qreal CDemDraw::getEelevationAt(const QPointF& pos)
         CDemItem::mutexActiveDems.unlock();
     }
     return ele;
+}
+
+void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
+{
+    for(int i = 0; i < pos.size(); i++)
+    {
+        ele[i].ry() = getElevationAt(pos[i]);
+    }
 }
 
 void CDemDraw::drawt(buffer_t& currentBuffer)

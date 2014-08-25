@@ -263,6 +263,19 @@ qreal CMainWindow::getEelevationAt(const QPointF& pos)
     return NOFLOAT;
 }
 
+void  CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->getElevationAt(pos, ele);
+    }
+    else
+    {
+        ele.clear();
+    }
+}
+
 void CMainWindow::slotAbout()
 {
     CAbout dlg(this);

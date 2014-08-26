@@ -4,7 +4,7 @@
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="51"/>
+        <location filename="../canvas/CCanvas.cpp" line="55"/>
         <source>Workspace %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -77,34 +77,57 @@
     </message>
 </context>
 <context>
+    <name>CDetailsTrk</name>
+    <message>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="147"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="156"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="159"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="165"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="184"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="186"/>
+        <source>%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CDetailsWpt</name>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="115"/>
-        <source>no comment</source>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="114"/>
+        <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="126"/>
-        <source>no description</source>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="117"/>
+        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="124"/>
+        <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="127"/>
+        <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="159"/>
         <source>Edit name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="159"/>
         <source>Enter new waypoint name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="177"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="169"/>
         <source>Enter new elevation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="186"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="178"/>
         <source>Enter new proximity range.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -112,37 +135,42 @@
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="34"/>
+        <location filename="../gis/CGisListWks.cpp" line="35"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="33"/>
+        <location filename="../gis/CGisListWks.cpp" line="34"/>
         <source>Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="35"/>
+        <location filename="../gis/CGisListWks.cpp" line="36"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="41"/>
+        <location filename="../gis/CGisListWks.cpp" line="42"/>
         <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="42"/>
-        <source>Move Waypoint...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="43"/>
-        <source>Proj. Waypoint...</source>
+        <source>Move Waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="44"/>
+        <source>Proj. Waypoint...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="45"/>
+        <source>Track Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="48"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,12 +191,12 @@
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="389"/>
+        <location filename="../CMainWindow.cpp" line="411"/>
         <source>Ele: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="490"/>
+        <location filename="../CMainWindow.cpp" line="512"/>
         <source>Load GIS Data...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -901,6 +929,68 @@
     </message>
 </context>
 <context>
+    <name>CMouseNormal</name>
+    <message>
+        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
+        <source>Add Waypoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPlotDistance</name>
+    <message>
+        <location filename="../plot/CPlotDistance.cpp" line="55"/>
+        <source>distance [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotDistance.cpp" line="59"/>
+        <source>time [h]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotDistance.cpp" line="61"/>
+        <source>distance. [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPlotProfile</name>
+    <message>
+        <location filename="../plot/CPlotProfile.cpp" line="67"/>
+        <source>distance [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotProfile.cpp" line="71"/>
+        <source>time [h]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotProfile.cpp" line="73"/>
+        <source>alt. [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPlotSpeed</name>
+    <message>
+        <location filename="../plot/CPlotSpeed.cpp" line="54"/>
+        <source>distance [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotSpeed.cpp" line="58"/>
+        <source>time [h]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotSpeed.cpp" line="60"/>
+        <source>speed. [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CProjWizard</name>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="55"/>
@@ -1147,6 +1237,80 @@ is not a valid coordinate system definition:
     </message>
 </context>
 <context>
+    <name>IDetailsTrk</name>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="115"/>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="122"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="213"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="129"/>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="146"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="193"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="198"/>
+        <source>Ele.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="203"/>
+        <source>Delta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="208"/>
+        <source>Dist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="218"/>
+        <source>Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="223"/>
+        <source>Ascend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="228"/>
+        <source>Descend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="233"/>
+        <source>Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="246"/>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IDetailsWpt</name>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="14"/>
@@ -1154,59 +1318,47 @@ is not a valid coordinate system definition:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="47"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit description.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="50"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="179"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="247"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="273"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="233"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="259"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="80"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="49"/>
         <source>Position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="87"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="113"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="139"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="203"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="311"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="56"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="82"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="108"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="155"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="189"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="100"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="69"/>
         <source>Ele.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="126"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="95"/>
         <source>Proximity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="176"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit comment.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="228"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="214"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="244"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="230"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read Only Mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="304"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="148"/>
         <source>Date/Time:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1539,6 +1691,14 @@ is not a valid coordinate system definition:
     </message>
 </context>
 <context>
+    <name>IPlot</name>
+    <message>
+        <location filename="../plot/IPlot.cpp" line="465"/>
+        <source>No or bad data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IPositionDialog</name>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="14"/>
@@ -1687,23 +1847,25 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="46"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="60"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="57"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="75"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="92"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="57"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="86"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="118"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1750,6 +1912,19 @@ or
     </message>
 </context>
 <context>
+    <name>ISelectProjectDialog</name>
+    <message>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
+        <source>Select project from list or enter new project name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ITextEditWidget</name>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="14"/>
@@ -1762,10 +1937,10 @@ or
         <location filename="../helpers/ITextEditWidget.ui" line="51"/>
         <location filename="../helpers/ITextEditWidget.ui" line="64"/>
         <location filename="../helpers/ITextEditWidget.ui" line="77"/>
-        <location filename="../helpers/ITextEditWidget.ui" line="117"/>
-        <location filename="../helpers/ITextEditWidget.ui" line="130"/>
-        <location filename="../helpers/ITextEditWidget.ui" line="143"/>
-        <location filename="../helpers/ITextEditWidget.ui" line="156"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="97"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="110"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="123"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="136"/>
         <location filename="../helpers/ITextEditWidget.ui" line="169"/>
         <location filename="../helpers/ITextEditWidget.ui" line="182"/>
         <location filename="../helpers/ITextEditWidget.ui" line="195"/>
@@ -1774,122 +1949,122 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="259"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="263"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="262"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="266"/>
         <source>Ctrl+Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="271"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="275"/>
         <source>Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="274"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="278"/>
         <source>Ctrl+Shift+Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="283"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="287"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="286"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="290"/>
         <source>Ctrl+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="295"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="299"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="298"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="302"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="307"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="311"/>
         <source>Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="310"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="314"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="322"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="326"/>
         <source>Align Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="325"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="329"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="337"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="341"/>
         <source>Align Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="340"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="344"/>
         <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="352"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="356"/>
         <source>Align Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="355"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="359"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="367"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="371"/>
         <source>Align Block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="370"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="374"/>
         <source>Ctrl+J</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="382"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="386"/>
         <source>Underline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="385"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="389"/>
         <source>Ctrl+U</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="397"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="401"/>
         <source>Bold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="400"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="404"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="412"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="416"/>
         <source>Italic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/ITextEditWidget.ui" line="415"/>
+        <location filename="../helpers/ITextEditWidget.ui" line="419"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1938,162 +2113,233 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="63"/>
-        <location filename="../gis/CGisProject.cpp" line="72"/>
+        <location filename="../gis/CGisProject.cpp" line="76"/>
+        <location filename="../gis/CGisProject.cpp" line="85"/>
         <source>Failed to read...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="63"/>
+        <location filename="../gis/CGisProject.cpp" line="76"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="72"/>
+        <location filename="../gis/CGisProject.cpp" line="85"/>
         <source>Not a GPX file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="339"/>
+        <location filename="../gis/CGisProject.cpp" line="352"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="340"/>
+        <location filename="../gis/CGisProject.cpp" line="353"/>
         <source>Delete...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="432"/>
+        <location filename="../gis/CGisProject.cpp" line="470"/>
         <source>Save GIS data to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="484"/>
+        <location filename="../gis/CGisProject.cpp" line="522"/>
         <source>File exists ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="485"/>
+        <location filename="../gis/CGisProject.cpp" line="523"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="538"/>
+        <location filename="../gis/CGisProject.cpp" line="576"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="538"/>
-        <location filename="../gis/CGisProject.cpp" line="548"/>
+        <location filename="../gis/CGisProject.cpp" line="576"/>
+        <location filename="../gis/CGisProject.cpp" line="586"/>
         <source>Saveing GIS data failed...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisProject.cpp" line="548"/>
+        <location filename="../gis/CGisProject.cpp" line="586"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="135"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="169"/>
         <source>Length: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="142"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="176"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="150"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
         <source>Time: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="153"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="163"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="187"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="197"/>
         <source>, Speed: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="160"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="194"/>
         <source>Moving: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="169"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="203"/>
         <source>Start: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="174"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="208"/>
         <source>End: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="178"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="212"/>
         <source>Points: %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="151"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="224"/>
+        <source>Ele.: %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="227"/>
+        <source> slope: %1Â°(%2%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="232"/>
+        <source> speed: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="244"/>
+        <source>Ascend: %1%2 (%3%) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="248"/>
+        <source>Ascend.: - (-) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="254"/>
+        <source>Descend: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="258"/>
+        <source>Descend.: - (-) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="265"/>
+        <source>Dist.: %1%2 (%3%) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="269"/>
+        <source>Dist.: - (-) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="275"/>
+        <source>Moving: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="279"/>
+        <source>Moving.: - (-) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="842"/>
+        <source>Changed color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="234"/>
         <source>Elevation: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="159"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="242"/>
         <source>Proximity: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="219"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="831"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
         <source>Changed name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="226"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="191"/>
+        <source>Edit name...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="191"/>
+        <source>Enter new waypoint name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="310"/>
         <source>Changed position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="232"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="316"/>
         <source>Changed elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="238"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="322"/>
         <source>Changed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="245"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
         <source>Changed icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="251"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="336"/>
         <source>Changed comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="257"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="342"/>
         <source>Changed description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="300"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="385"/>
         <source>Archived</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="304"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="389"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="308"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="393"/>
         <source>Not Available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2114,12 +2360,12 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="98"/>
+        <location filename="../gis/IGisItem.cpp" line="105"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="99"/>
+        <location filename="../gis/IGisItem.cpp" line="106"/>
         <source>Read Only Mode...</source>
         <translation type="unfinished"></translation>
     </message>

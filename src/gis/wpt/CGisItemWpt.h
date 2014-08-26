@@ -110,6 +110,7 @@ class CGisItemWpt : public IGisItem
 
         static const QString &getNewName();
         static const QString &getNewIcon();
+        static void getNewPosition(QPointF &pos);
 
     private:
         void genKey();

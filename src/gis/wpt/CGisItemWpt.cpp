@@ -28,6 +28,7 @@
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
 #include "helpers/CWptIconDialog.h"
+#include "helpers/CPositionDialog.h"
 #include "GeoMath.h"
 #include "CMainWindow.h"
 
@@ -200,6 +201,12 @@ const QString& CGisItemWpt::getNewIcon()
     lastIcon = but.objectName();
 
     return lastIcon;
+}
+
+void CGisItemWpt::getNewPosition(QPointF& pos)
+{
+    CPositionDialog dlg(0, pos);
+    dlg.exec();
 }
 
 

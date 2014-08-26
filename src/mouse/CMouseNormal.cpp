@@ -275,6 +275,9 @@ void CMouseNormal::slotAddWpt()
 
     QPointF pt = point;
     gis->convertPx2Rad(pt);
+    pt *= RAD_TO_DEG;
+
+    CGisItemWpt::getNewPosition(pt);
 
     QString name = CGisItemWpt::getNewName();
     if(name.isEmpty())
@@ -294,7 +297,7 @@ void CMouseNormal::slotAddWpt()
         return;
     }
 
-    new CGisItemWpt(pt*RAD_TO_DEG, name, icon, project);
+    new CGisItemWpt(pt, name, icon, project);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 
 }

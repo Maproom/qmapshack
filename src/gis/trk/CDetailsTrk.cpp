@@ -32,7 +32,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     setupGui();
 
     QPixmap icon(16,8);
-    for(int i=0; i < 17; ++i)
+    for(int i=0; i < TRK_N_COLORS; ++i)
     {
         icon.fill(CGisItemTrk::lineColors[i]);
         comboColor->addItem(icon,"",CGisItemTrk::lineColors[i]);
@@ -197,6 +197,14 @@ void CDetailsTrk::setupGui()
 
     treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
 
+    if(!trk.getHistory().isEmpty())
+    {
+        textHistory->clear();
+        foreach(const QString& entry, trk.getHistory())
+        {
+            textHistory->append(entry);
+        }
+    }
 }
 
 void CDetailsTrk::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)

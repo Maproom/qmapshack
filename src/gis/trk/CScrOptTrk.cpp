@@ -54,6 +54,7 @@ CScrOptTrk::~CScrOptTrk()
 void CScrOptTrk::slotDelete()
 {
     CGisWidget::self().delItemByKey(key);
+    deleteLater();
 }
 
 void CScrOptTrk::slotEdit()
@@ -70,7 +71,7 @@ void CScrOptTrk::slotProfile(bool on)
 
 void CScrOptTrk::slotCut()
 {
-
+    CGisWidget::self().cutTrkByKey(key);
     deleteLater();
 }
 

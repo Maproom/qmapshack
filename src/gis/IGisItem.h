@@ -41,6 +41,9 @@ class IGisItem : public QTreeWidgetItem
 {
 
     public:
+        typedef QStringList history_t;
+        history_t history;
+
         IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();
 
@@ -74,6 +77,8 @@ class IGisItem : public QTreeWidgetItem
            @return A string object.
         */
         virtual QString getInfo() = 0;
+
+        virtual const history_t& getHistory(){return history;}
 
         /**
             @brief Edit content of item.
@@ -173,8 +178,6 @@ class IGisItem : public QTreeWidgetItem
         QRectF boundingRect;
         static const color_t colorMap[];
 
-        typedef QStringList history_t;
-        history_t history;
 
         struct color_t
         {

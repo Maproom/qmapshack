@@ -201,10 +201,11 @@ const QString& IGisItem::getKey()
 
 QColor IGisItem::str2color(const QString& name)
 {
+    QColor ref(name);
     const color_t * p = colorMap;
     while(p->name)
     {
-        if(p->name == name)
+        if(p->color == ref)
         {
             return p->color;
         }

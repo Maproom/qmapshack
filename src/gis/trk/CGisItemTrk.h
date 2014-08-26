@@ -30,6 +30,8 @@ class IPlot;
 class CDetailsTrk;
 class CScrOptTrk;
 
+#define TRK_N_COLORS 17
+
 class CGisItemTrk : public IGisItem
 {
     public:
@@ -42,6 +44,7 @@ class CGisItemTrk : public IGisItem
             ,eFocusMouseClick
         };
 
+        CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * parent);
         CGisItemTrk(const QDomNode &xml, CGisProject *parent);
         virtual ~CGisItemTrk();
 
@@ -79,6 +82,8 @@ class CGisItemTrk : public IGisItem
            @brief Make sure a CDetailsTrk widget is registered with the main tab widget
         */
         void edit();
+
+        bool cut();
         /**
            @brief Check for user focus
 
@@ -140,8 +145,8 @@ class CGisItemTrk : public IGisItem
         */
         void setMouseFocusByIndex(quint32 idx, focusmode_e mode);
 
-        static const QColor  lineColors[];
-        static const QString bulletColors[];
+        static const QColor  lineColors[TRK_N_COLORS];
+        static const QString bulletColors[TRK_N_COLORS];
 
     private:        
 
@@ -226,6 +231,8 @@ class CGisItemTrk : public IGisItem
             QVector<trkseg_t> segs;
             // -- all gpx tags - stop
             QMap<QString, QVariant> extensions;
+
+            QString color;
         };
 
         const trk_t& getTrackData(){return trk;}
@@ -282,7 +289,7 @@ class CGisItemTrk : public IGisItem
         const trkpt_t * mouseClickFocus;
 
         QPointer<CDetailsTrk> dlgDetails;
-        QPointer<CScrOptTrk>  srcOpt;
+        QPointer<CScrOptTrk>  scrOpt;
 };
 
 #endif //CGISITEMTRK_H

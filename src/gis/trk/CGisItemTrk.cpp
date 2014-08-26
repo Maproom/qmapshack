@@ -34,7 +34,7 @@
 #define MIN_DIST_CLOSE_TO   10
 #define MIN_DIST_FOCUS      40
 
-const QColor CGisItemTrk::lineColors[] =
+const QColor CGisItemTrk::lineColors[TRK_N_COLORS] =
 {
      Qt::black                    // 0
     ,Qt::darkRed                 // 1
@@ -55,47 +55,99 @@ const QColor CGisItemTrk::lineColors[] =
     ,Qt::transparent             // 16
 };
 
-const QString CGisItemTrk::bulletColors[] =
+const QString CGisItemTrk::bulletColors[TRK_N_COLORS] =
 {
 
                                  // 0
-    QString("icons/8x8/bullet_black.png")
+    QString("://icons/8x8/bullet_black.png")
                                  // 1
-    ,QString("icons/8x8/bullet_dark_red.png")
+    ,QString("://icons/8x8/bullet_dark_red.png")
                                  // 2
-    ,QString("icons/8x8/bullet_dark_green.png")
+    ,QString("://icons/8x8/bullet_dark_green.png")
                                  // 3
-    ,QString("icons/8x8/bullet_dark_yellow.png")
+    ,QString("://icons/8x8/bullet_dark_yellow.png")
                                  // 4
-    ,QString("icons/8x8/bullet_dark_blue.png")
+    ,QString("://icons/8x8/bullet_dark_blue.png")
                                  // 5
-    ,QString("icons/8x8/bullet_dark_magenta.png")
+    ,QString("://icons/8x8/bullet_dark_magenta.png")
                                  // 6
-    ,QString("icons/8x8/bullet_dark_cyan.png")
+    ,QString("://icons/8x8/bullet_dark_cyan.png")
                                  // 7
-    ,QString("icons/8x8/bullet_gray.png")
+    ,QString("://icons/8x8/bullet_gray.png")
                                  // 8
-    ,QString("icons/8x8/bullet_dark_gray.png")
+    ,QString("://icons/8x8/bullet_dark_gray.png")
                                  // 9
-    ,QString("icons/8x8/bullet_red.png")
+    ,QString("://icons/8x8/bullet_red.png")
                                  // 10
-    ,QString("icons/8x8/bullet_green.png")
+    ,QString("://icons/8x8/bullet_green.png")
                                  // 11
-    ,QString("icons/8x8/bullet_yellow.png")
+    ,QString("://icons/8x8/bullet_yellow.png")
                                  // 12
-    ,QString("icons/8x8/bullet_blue.png")
+    ,QString("://icons/8x8/bullet_blue.png")
                                  // 13
-    ,QString("icons/8x8/bullet_magenta.png")
+    ,QString("://icons/8x8/bullet_magenta.png")
                                  // 14
-    ,QString("icons/8x8/bullet_cyan.png")
+    ,QString("://icons/8x8/bullet_cyan.png")
                                  // 15
-    ,QString("icons/8x8/bullet_white.png")
+    ,QString("://icons/8x8/bullet_white.png")
     ,QString("")                 // 16
 };
+
+
 
 const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
 QString CGisItemTrk::keyUserFocus;
+
+CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * parent)
+    : IGisItem(parent)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
+{
+    flags = eFlagCreatedInQms|eFlagWriteAllowed;
+
+    foreach(const trkseg_t& srcseg, srctrk.segs)
+    {
+        trkseg_t seg;
+        foreach(const trkpt_t& srcpt, srcseg.pts)
+        {
+            if(srcpt.idx < idx1)
+            {
+                continue;
+            }
+            if(srcpt.idx > idx2)
+            {
+                break;
+            }
+
+            seg.pts << srcpt;
+        }
+
+        if(!seg.pts.isEmpty())
+        {
+            trk.segs << seg;
+        }
+    }
+
+    trk.name    = srctrk.name + QString(" (%1 - %2)").arg(idx1).arg(idx2);
+    trk.cmt     = srctrk.cmt;
+    trk.desc    = srctrk.desc;
+    trk.src     = srctrk.src;
+    trk.links   = srctrk.links;
+    trk.number  = srctrk.number;
+    trk.type    = srctrk.type;
+
+    deriveSecondaryData();
+
+    setColor(str2color(srctrk.color));
+    setText(1, "*");
+    setText(0, trk.name);
+    setToolTip(0, getInfo());
+    genKey();
+
+    parent->setText(1,"*");
+}
 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
     : IGisItem(parent)
@@ -129,8 +181,6 @@ CGisItemTrk::~CGisItemTrk()
     qDeleteAll(registeredPlots.toList());
 
     delete dlgDetails;
-
-    delete srcOpt;
 }
 
 void CGisItemTrk::registerPlot(IPlot * plot)
@@ -284,37 +334,42 @@ QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
 
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    if(srcOpt.isNull())
+    if(scrOpt.isNull())
     {
-        srcOpt = new CScrOptTrk(this, origin, mouse);
+        scrOpt = new CScrOptTrk(this, origin, mouse);
     }
-    return srcOpt;
+    return scrOpt;
 }
 
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 {
-    qint32 d    = NOINT;
-    QPointF pt  = NOPOINTF;
+    qint32 i    = 0;
+    qint32 idx  = -1;
+    qint32  d   = NOINT;
     foreach(const QPointF& point, line)
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
         {
-            pt  = point;
+            idx = i;
             d   = tmp;
         }
+        i++;
     }
 
-    return pt;
+    if(idx < 0)
+    {
+        return NOPOINTF;
+    }
+
+    const trkpt_t * newPointOfFocus = getVisibleTrkPtByIndex(idx);
+    publishMouseFocus(newPointOfFocus, eFocusMouseClick, 0);
+
+    return line[idx];
 }
 
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {
-    qreal north = -90;
-    qreal east  = -180;
-    qreal south =  90;
-    qreal west  =  180;
-
     readXml(xml, "name", trk.name);
     readXml(xml, "cmt", trk.cmt);
     readXml(xml, "desc", trk.desc);
@@ -345,16 +400,8 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
             {
                 readXml(ext, "ql:flags", trkpt.flags);
             }
-
-            if(trkpt.lon < west)  west    = trkpt.lon;
-            if(trkpt.lon > east)  east    = trkpt.lon;
-            if(trkpt.lat < south) south   = trkpt.lat;
-            if(trkpt.lat > north) north   = trkpt.lat;
-
         }
     }
-
-    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
     // decode some well known extensions
     const QDomNode& ext = xml.namedItem("extensions");
@@ -364,8 +411,8 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         readXml(ext, "ql:key", key);
 
         const QDomNode& gpxx = ext.namedItem("gpxx:TrackExtension");
-        readXml(gpxx, "gpxx:DisplayColor", str);
-        setColor(str2color(str));
+        readXml(gpxx, "gpxx:DisplayColor", trk.color);
+        setColor(str2color(trk.color));
     }
 
     deriveSecondaryData();
@@ -395,7 +442,7 @@ void CGisItemTrk::save(QDomNode& gpx)
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
     xmlExt.appendChild(gpxx);
-    writeXml(gpxx, "gpxx:DisplayColor", color2str(color));
+    writeXml(gpxx, "gpxx:DisplayColor", trk.color);
 
     foreach(const trkseg_t& seg, trk.segs)
     {
@@ -418,6 +465,12 @@ void CGisItemTrk::save(QDomNode& gpx)
 
 void CGisItemTrk::deriveSecondaryData()
 {
+
+    qreal north = -90;
+    qreal east  = -180;
+    qreal south =  90;
+    qreal west  =  180;
+
     // reset all secondary data
     cntTotalPoints          = 0;
     cntVisiblePoints        = 0;
@@ -467,6 +520,11 @@ void CGisItemTrk::deriveSecondaryData()
                 continue;
             }
             cntVisiblePoints++;
+
+            if(trkpt.lon < west)  west    = trkpt.lon;
+            if(trkpt.lon > east)  east    = trkpt.lon;
+            if(trkpt.lat < south) south   = trkpt.lat;
+            if(trkpt.lat > north) north   = trkpt.lat;
 
             if(lastTrkpt != 0)
             {
@@ -532,6 +590,7 @@ void CGisItemTrk::deriveSecondaryData()
         }
     }
 
+    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
     // speed and slope (short average +-25m)
     for(int s = 0; s < trk.segs.size(); s++)
@@ -659,6 +718,26 @@ void CGisItemTrk::edit()
     CMainWindow::self().addWidgetToTab(dlgDetails);
 }
 
+
+bool CGisItemTrk::cut()
+{
+    if(mouseClickFocus == 0)
+    {
+        return false;
+    }
+
+    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    if(project == 0)
+    {
+        return false;
+    }
+
+
+    new CGisItemTrk(0, mouseClickFocus->idx, trk, project);
+    new CGisItemTrk(mouseClickFocus->idx, cntTotalPoints-1, trk, project);
+
+    return true;
+}
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
@@ -806,6 +885,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.restore();
     }
 
+    if(!scrOpt.isNull() && mouseClickFocus)
+    {
+        QPointF anchor(mouseClickFocus->lon, mouseClickFocus->lat);
+        anchor *= DEG_TO_RAD;
+        gis->convertRad2Px(anchor);
+
+        p.drawPixmap(anchor - QPointF(4,4), QPixmap(bulletColors[colorIdx]));
+    }
+
 }
 
 void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
@@ -872,10 +960,11 @@ void CGisItemTrk::setColor(const QColor& c)
 
 void CGisItemTrk::setIcon(const QString& c)
 {
-    icon = QPixmap("://icons/48x48/Track.png");
+    trk.color   = c;
+    icon        = QPixmap("://icons/48x48/Track.png");
 
     QPixmap mask( icon.size() );
-    mask.fill( color );
+    mask.fill( str2color(c) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
     icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 

@@ -26,19 +26,19 @@
 
 QPen IPlot::pens[] =
 {
-    QPen(Qt::darkBlue,4)
-    , QPen(QColor("#C00000"),3)
-    , QPen(Qt::yellow,3)
-    , QPen(Qt::green,3)
+    QPen(Qt::darkBlue,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(QColor("#C00000"),3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::yellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::green,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 
 };
 
 QPen IPlot::pensThin[] =
 {
-    QPen(Qt::darkBlue,2)
-    , QPen(Qt::darkRed,1)
-    , QPen(Qt::darkYellow,1)
-    , QPen(Qt::darkGreen,1)
+    QPen(Qt::darkBlue,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkRed,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkYellow,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkGreen,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 
 };
 

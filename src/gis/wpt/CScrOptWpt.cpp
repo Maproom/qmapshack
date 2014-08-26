@@ -58,6 +58,7 @@ CScrOptWpt::~CScrOptWpt()
 void CScrOptWpt::slotDelete()
 {
     CGisWidget::self().delItemByKey(key);
+    deleteLater();
 }
 
 void CScrOptWpt::slotEdit()

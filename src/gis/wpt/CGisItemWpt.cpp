@@ -278,7 +278,11 @@ QString CGisItemWpt::getInfo()
 
 IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    return new CScrOptWpt(this, origin, mouse);
+    if(scrOpt.isNull())
+    {
+        scrOpt = new CScrOptWpt(this, origin, mouse);
+    }
+    return scrOpt;
 }
 
 void CGisItemWpt::setIcon()

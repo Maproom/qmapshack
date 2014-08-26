@@ -21,8 +21,11 @@
 
 #include "gis/IGisItem.h"
 
+#include <QPointer>
+
 class CGisProject;
 class QDomNode;
+class CScrOptWpt;
 
 class CGisItemWpt : public IGisItem
 {
@@ -92,8 +95,7 @@ class CGisItemWpt : public IGisItem
         const QString& getIconName(){return wpt.sym;}
         const QString& getComment(){return wpt.cmt;}
         const QString& getDescription(){return wpt.desc;}
-        const geocache_t& getGeoCache(){return geocache;}
-        const history_t& getHistory(){return history;}
+        const geocache_t& getGeoCache(){return geocache;}        
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& ){return posScreen;}
@@ -134,6 +136,8 @@ class CGisItemWpt : public IGisItem
         // additonal data, common to all IGisItems, is found in IItem //
 
         // --- stop all waypoint data ----
+
+        QPointer<CScrOptWpt> scrOpt;
 
 };
 

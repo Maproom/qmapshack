@@ -253,6 +253,19 @@ void CGisWidget::focusTrkByKey(bool yes, const QString& key)
     emit sigChanged();
 }
 
+void CGisWidget::cutTrkByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+    if(trk != 0 && trk->cut())
+    {
+        delete trk;
+    }
+    IGisItem::mutexItems.unlock();
+    emit sigChanged();
+}
+
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());

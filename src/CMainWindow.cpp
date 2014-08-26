@@ -272,6 +272,15 @@ void  CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)
     }
     else
     {
+        for(int i = 0; i < tabWidget->count(); i++)
+        {
+            canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+            if(canvas)
+            {
+                canvas->getElevationAt(pos, ele);
+                return;
+            }
+        }
         ele.clear();
     }
 }

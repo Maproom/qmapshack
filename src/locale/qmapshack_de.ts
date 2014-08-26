@@ -203,12 +203,12 @@
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="411"/>
+        <location filename="../CMainWindow.cpp" line="420"/>
         <source>Ele: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="512"/>
+        <location filename="../CMainWindow.cpp" line="521"/>
         <source>Load GIS Data...</source>
         <translation>Lade GIS Daten...</translation>
     </message>
@@ -1265,9 +1265,9 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="122"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="213"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="219"/>
         <source>Speed</source>
-        <translation>Geschwindigkeit</translation>
+        <translation>Geschw.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="129"/>
@@ -1280,49 +1280,59 @@ ist keine gültige Koordinatensystemdefinition:
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="193"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="199"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="198"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="204"/>
         <source>Ele.</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="203"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="209"/>
         <source>Delta</source>
         <translation>Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="208"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="214"/>
         <source>Dist.</source>
         <translation>Wegstr.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="218"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="224"/>
         <source>Slope</source>
         <translation>Steig.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="223"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="229"/>
         <source>Ascend</source>
         <translation>Aufst.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="228"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="234"/>
         <source>Descend</source>
         <translation>Abst.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="233"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="239"/>
         <source>Position</source>
         <translation>Postion</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="246"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="259"/>
+        <source>Info</source>
+        <translation>Info</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="289"/>
         <source>-</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="300"/>
+        <source>Hist.</source>
+        <translation>Aufz.</translation>
     </message>
 </context>
 <context>
@@ -1881,7 +1891,7 @@ sein</translation>
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="57"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="75"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="92"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="89"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1891,7 +1901,7 @@ sein</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="118"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="115"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1942,12 +1952,12 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
         <source>Select project from list or enter new project name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie ein Projekt aus der Liste oder geben Sie einen neuen Projektnamen ein.</translation>
     </message>
 </context>
 <context>
@@ -2200,103 +2210,147 @@ Zeile %2, Spalte %3:
         <translation>Die Datei konnte nicht geladen werden: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="169"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="219"/>
         <source>Length: %1 %2</source>
         <translation>Länge: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="176"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="226"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="234"/>
         <source>Time: %1</source>
         <translation>Zeit: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="187"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="197"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="237"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="247"/>
         <source>, Speed: %1 %2</source>
         <translation>, Geschw.: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="194"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="244"/>
         <source>Moving: %1</source>
         <translation>Bewegung: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="203"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="253"/>
         <source>Start: %1</source>
         <translation>Beginn: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="208"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="258"/>
         <source>End: %1</source>
         <translation>Ende: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="212"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="262"/>
         <source>Points: %1 (%2)</source>
         <translation>Punkte: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="224"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="274"/>
         <source>Ele.: %1 %2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="227"/>
-        <source> slope: %1Â°(%2%)</source>
-        <translation> Steig. %°(%2%)</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="277"/>
+        <source> slope: %1°(%2%)</source>
+        <translation> Steigung: %1°(%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="232"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="282"/>
         <source> speed: %1%2</source>
         <translation> Geschw.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="244"/>
-        <source>Ascend: %1%2 (%3%) </source>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="294"/>
+        <source>Ascend: %1%2 (%3%)</source>
         <translation>Aufstieg: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="248"/>
-        <source>Ascend.: - (-) </source>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="298"/>
+        <source>Ascend: - (-)</source>
         <translation>Aufstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="254"/>
-        <source>Descend: %1%2 (%3%)</source>
-        <translation>Abstieg: %1%2 (%3%)</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="308"/>
+        <source> Descend: - (-) </source>
+        <translation> Abstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="258"/>
-        <source>Descend.: - (-) </source>
-        <translation>Abstieg: - (-)</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
+        <source> Moving: - (-) </source>
+        <translation> Bewegung: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="265"/>
-        <source>Dist.: %1%2 (%3%) </source>
+        <source>Ascend.: - (-)</source>
+        <translation type="obsolete">Aufst.: - (-)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="304"/>
+        <source> Descend: %1%2 (%3%)</source>
+        <translation> Abstieg.: %1%2 (%3%)</translation>
+    </message>
+    <message>
+        <source> Descend.: - (-) </source>
+        <translation type="obsolete"> Abst..: - (-)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="315"/>
+        <source>Dist.: %1%2 (%3%)</source>
         <translation>Weg: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="269"/>
-        <source>Dist.: - (-) </source>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="319"/>
+        <source>Dist.: - (-)</source>
         <translation>Weg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="275"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="325"/>
+        <source> Moving: %1%2 (%3%)</source>
+        <translation> Bewegung: %1%2 (%3%)</translation>
+    </message>
+    <message>
+        <source> Moving.: - (-) </source>
+        <translation type="obsolete"> Bewegung: - (-)</translation>
+    </message>
+    <message>
+        <source>Ascend: %1%2 (%3%) </source>
+        <translation type="obsolete">Aufstieg: %1%2 (%3%)</translation>
+    </message>
+    <message>
+        <source>Ascend.: - (-) </source>
+        <translation type="obsolete">Aufstieg: - (-)</translation>
+    </message>
+    <message>
+        <source>Descend: %1%2 (%3%)</source>
+        <translation type="obsolete">Abstieg: %1%2 (%3%)</translation>
+    </message>
+    <message>
+        <source>Descend.: - (-) </source>
+        <translation type="obsolete">Abstieg: - (-)</translation>
+    </message>
+    <message>
+        <source>Dist.: %1%2 (%3%) </source>
+        <translation type="obsolete">Weg: %1%2 (%3%)</translation>
+    </message>
+    <message>
+        <source>Dist.: - (-) </source>
+        <translation type="obsolete">Weg: - (-)</translation>
+    </message>
+    <message>
         <source>Moving: %1%2 (%3%)</source>
-        <translation>Bewegung: %1%2 (%3%)</translation>
+        <translation type="obsolete">Bewegung: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="279"/>
         <source>Moving.: - (-) </source>
-        <translation>Bewegung: - (-)</translation>
+        <translation type="obsolete">Bewegung: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="842"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="930"/>
         <source>Changed color</source>
         <translation>Farbe ändern</translation>
     </message>
@@ -2311,8 +2365,8 @@ Zeile %2, Spalte %3:
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="831"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="919"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="307"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
@@ -2327,47 +2381,47 @@ Zeile %2, Spalte %3:
         <translation>Geben Sie einen neuen Namen ein.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="310"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="314"/>
         <source>Changed position</source>
         <translation>Position geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="316"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="320"/>
         <source>Changed elevation</source>
         <translation>Höhe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="322"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="326"/>
         <source>Changed proximity</source>
         <translation>Abstandsalarm geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="334"/>
         <source>Changed icon</source>
         <translation>Symbol geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="336"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="340"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="342"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="346"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="385"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="389"/>
         <source>Archived</source>
         <translation>Archiviert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="389"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="393"/>
         <source>Available</source>
         <translation>Verfügbar:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="393"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="397"/>
         <source>Not Available</source>
         <translation>Nicht verfügbar</translation>
     </message>
@@ -2390,7 +2444,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/IGisItem.cpp" line="105"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
-        <translation type="unfinished">Dieses Element ist schreibgeschützt, weil es wahrscheinlich nicht in QMapShack erstellt wurde. Normalerweise sollte man importierte Daten nicht ändern wollen. Aber wenn Sie der Meinung sind, dass doch, dann drücken Sie &apos;Ok&apos;.</translation>
+        <translation>Dieses Element ist schreibgeschützt, weil es wahrscheinlich nicht in QMapShack erstellt wurde. Normalerweise sollte man importierte Daten nicht ändern wollen. Aber wenn Sie der Meinung sind, dass doch, dann drücken Sie &apos;Ok&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="106"/>

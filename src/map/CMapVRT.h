@@ -27,6 +27,7 @@ class GDALDataset;
 
 class CMapVRT : public IMap
 {
+    Q_OBJECT
     public:
         CMapVRT(const QString& filename, CMapDraw *parent);
         virtual ~CMapVRT();

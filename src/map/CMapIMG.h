@@ -38,6 +38,7 @@ typedef QVector<CGarminPoint> pointtype_t;
 
 class CMapIMG : public IMap
 {
+    Q_OBJECT
     public:
         struct maplevel_t
         {

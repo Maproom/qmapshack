@@ -28,6 +28,7 @@ class GDALDataset;
 
 class CDemVRT : public IDem
 {
+    Q_OBJECT
     public:
         CDemVRT(const QString& filename, CDemDraw *parent);
         virtual ~CDemVRT();

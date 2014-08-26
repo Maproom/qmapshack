@@ -24,6 +24,7 @@
 
 class CPlotProfile : public IPlot
 {
+    Q_OBJECT
     public:
         CPlotProfile(QWidget * parent);
         CPlotProfile(CGisItemTrk * trk, mode_e mode, QWidget * parent);

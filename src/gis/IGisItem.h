@@ -44,6 +44,13 @@ class IGisItem : public QTreeWidgetItem
         typedef QStringList history_t;
         history_t history;
 
+        struct link_t
+        {
+            QUrl    uri;
+            QString text;
+            QString type;
+        };
+
         IGisItem(QTreeWidgetItem * parent);
         virtual ~IGisItem();
 
@@ -186,12 +193,6 @@ class IGisItem : public QTreeWidgetItem
         };
 
 
-        struct link_t
-        {
-            QUrl    uri;
-            QString text;
-            QString type;
-        };
 
         struct wpt_t
         {

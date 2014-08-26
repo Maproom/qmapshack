@@ -25,6 +25,7 @@
 
 class IPlot : public QWidget
 {
+    Q_OBJECT
     public:
         enum mode_e {eModeNormal, eModeIcon};
 

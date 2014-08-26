@@ -95,7 +95,8 @@ class CGisItemWpt : public IGisItem
         const QString& getIconName(){return wpt.sym;}
         const QString& getComment(){return wpt.cmt;}
         const QString& getDescription(){return wpt.desc;}
-        const geocache_t& getGeoCache(){return geocache;}        
+        const geocache_t& getGeoCache(){return geocache;}
+        const QList<link_t>& getLinks(){return wpt.links;}
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& ){return posScreen;}

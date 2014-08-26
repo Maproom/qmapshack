@@ -23,6 +23,7 @@
 
 class CPlotDistance : public IPlot
 {
+    Q_OBJECT
     public:
         CPlotDistance(QWidget * parent);
         virtual ~CPlotDistance();

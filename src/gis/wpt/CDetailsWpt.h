@@ -39,6 +39,7 @@ class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
 
     private:
         void setupGui();
+        QString toLink(bool isReadOnly, const QString& href, const QString& str);
         CGisItemWpt& wpt;
 };
 

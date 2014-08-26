@@ -291,42 +291,42 @@ QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
     if(pt.ascend != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.ascend, val, unit);
-        str += QObject::tr("Ascend: %1%2 (%3%) ").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2,'f',0);
+        str += QObject::tr("Ascend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2,'f',0);
     }
     else
     {
-        str += QObject::tr("Ascend.: - (-) ");
+        str += QObject::tr("Ascend: - (-)");
     }
 
     if(pt.descend != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.descend, val, unit);
-        str += QObject::tr("Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2,'f',0);
+        str += QObject::tr(" Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2,'f',0);
     }
     else
     {
-        str += QObject::tr("Descend.: - (-) ");
+        str += QObject::tr(" Descend: - (-) ");
     }
 
     str += "\n";
     if(pt.distance != NOFLOAT)
     {
         IUnit::self().meter2distance(pt.distance, val, unit);
-        str += QObject::tr("Dist.: %1%2 (%3%) ").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2,'f',0);
+        str += QObject::tr("Dist.: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2,'f',0);
     }
     else
     {
-        str += QObject::tr("Dist.: - (-) ");
+        str += QObject::tr("Dist.: - (-)");
     }
 
     if(pt.elapsedSeconds != NOFLOAT)
     {
         IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
-        str += QObject::tr("Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2,'f',0);
+        str += QObject::tr(" Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2,'f',0);
     }
     else
     {
-        str += QObject::tr("Moving.: - (-) ");
+        str += QObject::tr(" Moving: - (-) ");
     }
 
     return str;
@@ -407,8 +407,9 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     const QDomNode& ext = xml.namedItem("extensions");
     if(ext.isElement())
     {
-        QString str;
         readXml(ext, "ql:key", key);
+        readXml(ext, "ql:flags", flags);
+        readXml(ext, history);
 
         const QDomNode& gpxx = ext.namedItem("gpxx:TrackExtension");
         readXml(gpxx, "gpxx:DisplayColor", trk.color);
@@ -438,6 +439,8 @@ void CGisItemTrk::save(QDomNode& gpx)
     QDomElement xmlExt  = doc.createElement("extensions");
     xmlTrk.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key);
+    writeXml(xmlExt, "ql:flags", flags);
+    writeXml(xmlExt, history);
 
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
@@ -460,6 +463,7 @@ void CGisItemTrk::save(QDomNode& gpx)
             writeXml(xmlExt, "ql:flags", pt.flags);
         }
     }
+    setText(1, "");
 }
 
 

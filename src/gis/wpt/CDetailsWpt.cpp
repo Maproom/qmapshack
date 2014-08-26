@@ -49,7 +49,7 @@ CDetailsWpt::~CDetailsWpt()
 
 }
 
-QString toLink(bool isReadOnly, const QString& href, const QString& str)
+QString CDetailsWpt::toLink(bool isReadOnly, const QString& href, const QString& str)
 {
     if(isReadOnly)
     {
@@ -109,7 +109,13 @@ void CDetailsWpt::setupGui()
         labelTime->setText(IUnit::datetime2string(wpt.getTime(), QPointF(pos.x()*DEG_TO_RAD, pos.y()*DEG_TO_RAD)));
     }
 
-    textCmtDesc->clear();
+    textCmtDesc->document()->clear();
+
+    foreach(const IGisItem::link_t& link, wpt.getLinks())
+    {
+        QString str = QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+        textCmtDesc->append(str);
+    }
 
     textCmtDesc->append(toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>")));
     if(IGisItem::removeHtml(wpt.getComment()).simplified().isEmpty())
@@ -132,6 +138,7 @@ void CDetailsWpt::setupGui()
     }
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
+
 
 
     if(!wpt.getHistory().isEmpty())

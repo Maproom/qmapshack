@@ -23,6 +23,7 @@
 
 class CPlotSpeed : public IPlot
 {
+    Q_OBJECT
     public:
         CPlotSpeed(QWidget * parent);
         virtual ~CPlotSpeed();

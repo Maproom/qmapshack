@@ -149,7 +149,6 @@ void IPlot::addLine(const QPolygonF& line, const QString& label)
     QRectF r = line.boundingRect();
     if(!r.isValid())
     {
-        data->badData = true;
         return;
     }
 
@@ -157,7 +156,6 @@ void IPlot::addLine(const QPolygonF& line, const QString& label)
     l.points    = line;
     l.label     = label;
 
-    data->badData = false;
     data->lines << l;
     setSizes();
     data->x().setScale( rectGraphArea.width() );

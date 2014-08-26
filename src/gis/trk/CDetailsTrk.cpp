@@ -170,7 +170,15 @@ void CDetailsTrk::setupGui()
             }
             item->setText(eColSpeed,str);
 
-            item->setText(eColSlope, QString("%1°(%2%)").arg(trkpt.slope1,2,'f',0).arg(trkpt.slope2,2,'f',0));
+            if(trkpt.slope1 != NOFLOAT)
+            {
+                str = QString("%1°(%2%)").arg(trkpt.slope1,2,'f',0).arg(trkpt.slope2,2,'f',0);
+            }
+            else
+            {
+                str = "-";
+            }
+            item->setText(eColSlope,str);
 
             IUnit::self().meter2elevation(trkpt.ascend, val, unit);
             item->setText(eColAscend, tr("%1 %2").arg(val).arg(unit));
@@ -201,8 +209,8 @@ void CDetailsTrk::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
     }
     else
     {
-        labelInfoTrkPt->setText("\n");
-        labelInfoProgress->clear();
+        labelInfoTrkPt->setText("-\n-");
+        labelInfoProgress->setText("-\n-");
     }
 }
 

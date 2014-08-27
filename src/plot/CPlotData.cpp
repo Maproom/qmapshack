@@ -19,6 +19,7 @@
 #include "plot/CPlotData.h"
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotAxisTime.h"
+#include "units/IUnit.h"
 
 CPlotData::CPlotData(axistype_e type, QObject * parent)
 : QObject(parent)
@@ -70,10 +71,14 @@ void CPlotData::setLimits()
         QPolygonF::const_iterator p = line->points.begin();
         while(p != line->points.end())
         {
-            if(p->x() > xmax) xmax = p->x();
-            if(p->x() < xmin) xmin = p->x();
-            if(p->y() > ymax) ymax = p->y();
-            if(p->y() < ymin) ymin = p->y();
+            if(p->y() != NOFLOAT)
+            {
+
+                if(p->x() > xmax) xmax = p->x();
+                if(p->x() < xmin) xmin = p->x();
+                if(p->y() > ymax) ymax = p->y();
+                if(p->y() < ymin) ymin = p->y();
+            }
             ++p;
         }
 

@@ -29,6 +29,16 @@ class CMapWMTS  : public IMap
         virtual ~CMapWMTS();
 
         void draw(IDrawContext::buffer_t& buf);
+
+    private:
+        struct layer_t
+        {
+            QString     title;
+            QStringList styles;
+            QString     tileMatrixSet;
+            QRectF      boundingBox;
+            QString     resourceURL;
+        };
 };
 
 #endif //CMAPWMTS_H

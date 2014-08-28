@@ -45,6 +45,7 @@ set( SRCS
     map/CMapIMG.cpp
     map/CMapMAP.cpp
     map/CMapVRT.cpp
+    map/CMapWMTS.cpp
     map/CMapPathSetup.cpp    
     map/CMapPropSetup.cpp
     map/garmin/IGarminStrTbl.cpp
@@ -132,6 +133,7 @@ set( HDRS
     map/CMapIMG.h
     map/CMapMAP.h
     map/CMapVRT.h
+    map/CMapWMTS.h
     map/CMapPathSetup.h
     map/CMapPropSetup.h    
     map/garmin/Garmin.h

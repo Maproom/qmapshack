@@ -43,6 +43,7 @@
         <file>icons/16x16/MimeMAP.png</file>
         <file>icons/16x16/MimeRMAP.png</file>
         <file>icons/16x16/MimeVRT.png</file>
+        <file>icons/16x16/MimeWMTS.png</file>
         <file>icons/16x16/MimeDemVRT.png</file>
         <file>icons/16x16/MouseWheel.png</file>
         <file>icons/16x16/NightDay.png</file>
@@ -114,6 +115,7 @@
         <file>icons/32x32/MimeMAP.png</file>
         <file>icons/32x32/MimeRMAP.png</file>
         <file>icons/32x32/MimeVRT.png</file>
+        <file>icons/32x32/MimeWMTS.png</file>
         <file>icons/32x32/MimeDemVRT.png</file>
         <file>icons/32x32/MouseWheel.png</file>
         <file>icons/32x32/NightDay.png</file>
@@ -185,6 +187,7 @@
         <file>icons/48x48/MimeMAP.png</file>
         <file>icons/48x48/MimeRMAP.png</file>
         <file>icons/48x48/MimeVRT.png</file>
+        <file>icons/48x48/MimeWMTS.png</file>
         <file>icons/48x48/MimeDemVRT.png</file>
         <file>icons/48x48/MouseWheel.png</file>
         <file>icons/48x48/NightDay.png</file>

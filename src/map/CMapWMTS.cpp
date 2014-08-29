@@ -21,6 +21,9 @@
 #include <QtWidgets>
 #include <QtXml>
 
+#include <ogr_spatialref.h>
+#include <proj_api.h>
+
 CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility, parent)
 {
@@ -100,9 +103,48 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         layer.resourceURL = layer.resourceURL.replace("{Style}",layer.styles[0]);
         layer.resourceURL = layer.resourceURL.replace("{TileMatrixSet}",layer.tileMatrixSet);
 
-
+        layers << layer;
     }
 
+    const QDomNodeList& xmlTileMatrixSets = xmlContents.childNodes();
+    const int M = xmlTileMatrixSets.count();
+
+    for(int m = 0; m < M; m++)
+    {
+        const QDomNode& xmlTileMatrixSet = xmlTileMatrixSets.at(m);
+        if(xmlTileMatrixSet.nodeName() != "TileMatrixSet")
+        {
+            continue;
+        }
+
+
+        QString Identifier = xmlTileMatrixSet.namedItem("Identifier").toElement().text();
+        tilesets[Identifier] = tileset_t();
+        tileset_t& tileset = tilesets[Identifier];
+
+        QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
+
+        char * ptr = str.toLatin1().data();
+        OGRSpatialReference oSRS;
+        oSRS.importFromURN(ptr);
+        oSRS.exportToProj4(&ptr);
+
+        tileset.pjsrc = pj_init_plus(ptr);
+        if(tileset.pjsrc == 0)
+        {
+            QMessageBox::warning(0, tr("Error..."), tr("No georeference information found."));
+            return;
+        }
+
+        const QDomNodeList& xmlTileMatrixN = xmlTileMatrixSet.toElement().elementsByTagName("TileMatrix");
+        const int N = xmlTileMatrixN.count();
+        for(int n = 0; n < N; n++)
+        {
+            const QDomNode& xmlTileMatrix = xmlTileMatrixN.at(n);
+            qDebug() << xmlTileMatrix.namedItem("Identifier").toElement().text();
+        }
+
+    }
 
     isActivated = true;
 }

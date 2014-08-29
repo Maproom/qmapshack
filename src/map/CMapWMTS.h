@@ -19,6 +19,7 @@
 #ifndef CMAPWMTS_H
 #define CMAPWMTS_H
 #include "map/IMap.h"
+#include <QMap>
 
 class CMapDraw;
 
@@ -39,6 +40,18 @@ class CMapWMTS  : public IMap
             QRectF      boundingBox;
             QString     resourceURL;
         };
+
+        QList<layer_t> layers;
+
+        struct tileset_t
+        {
+            tileset_t() : pjsrc(0) {}
+            ~tileset_t() { if(pjsrc) pj_free(pjsrc); }
+
+            projPJ  pjsrc;
+        };
+
+        QMap<QString,tileset_t> tilesets;
 };
 
 #endif //CMAPWMTS_H

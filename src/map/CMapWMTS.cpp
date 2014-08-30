@@ -118,9 +118,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         }
 
 
-        QString Identifier = xmlTileMatrixSet.namedItem("Identifier").toElement().text();
-        tilesets[Identifier] = tileset_t();
-        tileset_t& tileset = tilesets[Identifier];
+        QString Identifier      = xmlTileMatrixSet.namedItem("Identifier").toElement().text();
+        tilesets[Identifier]    = tileset_t();
+        tileset_t& tileset      = tilesets[Identifier];
 
         QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
 
@@ -140,8 +140,21 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         const int N = xmlTileMatrixN.count();
         for(int n = 0; n < N; n++)
         {
+            QString str;
+            QStringList values;
             const QDomNode& xmlTileMatrix = xmlTileMatrixN.at(n);
-            qDebug() << xmlTileMatrix.namedItem("Identifier").toElement().text();
+            QString Identifier =  xmlTileMatrix.namedItem("Identifier").toElement().text();
+            tileset.tilematrix[Identifier] = tilematrix_t();
+            tilematrix_t& matrix = tileset.tilematrix[Identifier];
+
+            str = xmlTileMatrix.namedItem("TopLeftCorner").toElement().text();
+            values = str.split(" ");
+            matrix.topLeft      = QPointF(values[0].toDouble(), values[1].toDouble());
+            matrix.scale        = xmlTileMatrix.namedItem("ScaleDenominator").toElement().text().toDouble();
+            matrix.tileWidth    = xmlTileMatrix.namedItem("TileWidth").toElement().text().toInt();
+            matrix.tileHeight   = xmlTileMatrix.namedItem("TileHeight").toElement().text().toInt();
+            matrix.matrixWidth  = xmlTileMatrix.namedItem("MatrixWidth").toElement().text().toInt();
+            matrix.matrixHeight = xmlTileMatrix.namedItem("MatrixHeight").toElement().text().toInt();
         }
 
     }

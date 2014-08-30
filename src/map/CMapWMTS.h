@@ -43,12 +43,23 @@ class CMapWMTS  : public IMap
 
         QList<layer_t> layers;
 
+        struct  tilematrix_t
+        {
+            QPointF topLeft;
+            qreal scale;
+            qint32  tileWidth;
+            qint32  tileHeight;
+            qint32  matrixWidth;
+            qint32  matrixHeight;
+        };
+
         struct tileset_t
         {
             tileset_t() : pjsrc(0) {}
             ~tileset_t() { if(pjsrc) pj_free(pjsrc); }
 
             projPJ  pjsrc;
+            QMap<QString,tilematrix_t> tilematrix;
         };
 
         QMap<QString,tileset_t> tilesets;

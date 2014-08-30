@@ -298,5 +298,6 @@
         <file>pics/timezones.png</file>
         <file>pics/splash.png</file>
         <file>pics/compass.png</file>
+        <file>pics/about.png</file>
     </qresource>
 </RCC>

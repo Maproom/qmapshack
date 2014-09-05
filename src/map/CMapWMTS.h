@@ -21,7 +21,9 @@
 #include "map/IMap.h"
 #include <QMap>
 
+
 class CMapDraw;
+class QNetworkAccessManager;
 
 class CMapWMTS  : public IMap
 {
@@ -63,6 +65,8 @@ class CMapWMTS  : public IMap
         };
 
         QMap<QString,tileset_t> tilesets;
+
+        QNetworkAccessManager * accessManager;
 };
 
 #endif //CMAPWMTS_H

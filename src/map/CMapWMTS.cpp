@@ -16,10 +16,14 @@
 
 **********************************************************************************************/
 
-#include "CMapWMTS.h"
+#include "map/CMapWMTS.h"
+#include "map/CMapDraw.h"
+#include "units/IUnit.h"
+
 
 #include <QtWidgets>
 #include <QtXml>
+#include <QtNetwork>
 
 #include <ogr_spatialref.h>
 #include <proj_api.h>
@@ -103,6 +107,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         layer.resourceURL = layer.resourceURL.replace("{Style}",layer.styles[0]);
         layer.resourceURL = layer.resourceURL.replace("{TileMatrixSet}",layer.tileMatrixSet);
 
+        qDebug() << layer.resourceURL;
         layers << layer;
     }
 
@@ -129,6 +134,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         oSRS.importFromURN(ptr);
         oSRS.exportToProj4(&ptr);
 
+        qDebug() << ptr;
         tileset.pjsrc = pj_init_plus(ptr);
         if(tileset.pjsrc == 0)
         {
@@ -159,6 +165,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     }
 
+    accessManager = new QNetworkAccessManager(parent->thread());
+
     isActivated = true;
 }
 
@@ -169,5 +177,82 @@ CMapWMTS::~CMapWMTS()
 
 void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 {
+    if(map->needsRedraw())
+    {
+        return;
+    }
+
+    QPointF bufferScale = buf.scale * buf.zoomFactor;
+
+    qreal x1 = buf.ref1.x() < buf.ref4.x() ? buf.ref1.x() : buf.ref4.x();
+    qreal y1 = buf.ref1.y() > buf.ref2.y() ? buf.ref1.y() : buf.ref2.y();
+
+    qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
+    qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
+
+
+    QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
+
+    foreach(const layer_t& layer, layers)
+    {
+        qDebug() << layer.boundingBox << viewport;
+        if(!layer.boundingBox.intersects(viewport))
+        {
+            continue;
+        }
+
+        const tileset_t& tileset = tilesets[layer.tileMatrixSet];
+
+        QPointF pt1(x1,y1);
+        QPointF pt2(x2,y2);
+
+        pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
+        pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+
+        QPointF s1 = (pt2 - pt1)/QPointF(buf.image.width(), buf.image.height());
+
+//        qDebug() << pt1 << pt2  << s1;
+
+        QString tileMatrixId;
+        qreal d = NOFLOAT;
+        foreach(const QString& key, tileset.tilematrix.keys())
+        {
+            const tilematrix_t& tilematrix = tileset.tilematrix[key];
+            qreal s2 = tilematrix.scale * 0.28e-3;
+
+
+            if(qAbs(s2 - s1.x()) < d)
+            {
+                tileMatrixId = key;
+                d = qAbs(s2 - s1.x());
+            }
+        }
+
+        qDebug() << tileMatrixId << s1 << tileset.tilematrix[tileMatrixId].scale* 0.28e-3;
+
+        const tilematrix_t& tilematrix = tileset.tilematrix[tileMatrixId];
+        quint32 col = qFloor(( pt1.x() - tilematrix.topLeft.x()) / (tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
+        quint32 row = qFloor((-pt1.y() + tilematrix.topLeft.y()) / (tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
+
+        QString url = layer.resourceURL;
+        url = url.replace("{TileMatrix}",tileMatrixId);
+        url = url.replace("{TileRow}",QString::number(row));
+        url = url.replace("{TileCol}",QString::number(col));
+
+        qDebug() << url;
+        QNetworkRequest request(url);
+
+        QNetworkReply * reply = accessManager->get(request);
+
+        while(reply->isRunning())
+        {
+            qApp->processEvents();
+        }
+
+        QImage img;
+        img.loadFromData(reply->readAll());
+
+        img.save("test.png");
+    }
 
 }

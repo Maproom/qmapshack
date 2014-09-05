@@ -34,8 +34,11 @@
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::InternalMove</enum>
+     </property>
      <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
+      <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <property name="iconSize">
       <size>

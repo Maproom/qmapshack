@@ -22,6 +22,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -53,6 +54,56 @@ CGisListWks::~CGisListWks()
 {
 
 }
+
+void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
+{
+    CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(currentItem());
+    CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(itemAt(e->pos()));
+
+    if(trk1 && trk2)
+    {
+        e->setDropAction(Qt::MoveAction);
+        QTreeWidget::dragMoveEvent(e);
+        return;
+    }
+
+    CGisItemWpt * wpt1 = dynamic_cast<CGisItemWpt*>(currentItem());
+    CGisItemWpt * wpt2 = dynamic_cast<CGisItemWpt*>(itemAt(e->pos()));
+
+    if(wpt1 && wpt2)
+    {
+        e->setDropAction(Qt::MoveAction);
+        QTreeWidget::dragMoveEvent(e);
+        return;
+    }
+
+    CGisItemRte * rte1 = dynamic_cast<CGisItemRte*>(currentItem());
+    CGisItemRte * rte2 = dynamic_cast<CGisItemRte*>(itemAt(e->pos()));
+
+    if(rte1 && rte2)
+    {
+        e->setDropAction(Qt::MoveAction);
+        QTreeWidget::dragMoveEvent(e);
+        return;
+    }
+
+//    CGisProject * proj = dynamic_cast<CGisProject*>(itemAt(e->pos()));
+//    if(proj)
+//    {
+//        e->setDropAction(Qt::MoveAction);
+//        QTreeWidget::dragMoveEvent(e);
+//        return;
+//    }
+
+    e->setDropAction(Qt::IgnoreAction);
+}
+
+void CGisListWks::dropEvent ( QDropEvent  * e )
+{
+    QTreeWidget::dropEvent(e);
+    emit sigChanged();
+}
+
 
 bool CGisListWks::hasProject(const QString& key)
 {

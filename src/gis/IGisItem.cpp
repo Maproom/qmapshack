@@ -54,7 +54,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent)
     , flags(0)
 {
-
+    setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 }
 
 IGisItem::~IGisItem()

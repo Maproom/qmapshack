@@ -50,6 +50,15 @@ class IUnit : public QObject
 
         static bool parseTimestamp(const QString &time, QDateTime &datetime);
 
+        /**
+           @brief Convert date time object to string using the current timezone configuration
+
+
+           @param time          the date/time object
+           @param shortDate     set true to get a short ISO time string
+           @param pos           optional a position attached to the date/time object [rad]
+           @return              A time string.
+         */
         static QString datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos = NOPOINTF);
 
         static QByteArray pos2timezone(const QPointF& pos);

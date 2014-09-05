@@ -35,6 +35,10 @@ class CGisListWks : public QTreeWidget
     signals:
         void sigChanged();
 
+    protected:
+        void dragMoveEvent (QDragMoveEvent  * e );
+        void dropEvent ( QDropEvent  * e );
+
     private slots:
         void slotContextMenu(const QPoint& point);
         void slotSaveProject();

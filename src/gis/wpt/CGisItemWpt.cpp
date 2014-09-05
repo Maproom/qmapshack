@@ -223,7 +223,7 @@ QString CGisItemWpt::getInfo()
     {
         if(!str.isEmpty()) str += "<br/>\n";
 
-        str += IUnit::datetime2string(wpt.time, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD));
+        str += IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD));
     }
 
     if(wpt.ele != NOINT)

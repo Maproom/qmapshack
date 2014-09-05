@@ -134,7 +134,7 @@ void CDetailsTrk::setupGui()
             item->setText(eColNum,QString::number(trkpt.idx));
             if(trkpt.time.isValid())
             {
-                item->setText(eColTime, IUnit::self().datetime2string(trkpt.time, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD));
+                item->setText(eColTime, IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD));
             }
             else
             {

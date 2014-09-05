@@ -559,7 +559,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     return datetime;
 }
 
-QString IUnit::datetime2string(const QDateTime& time, const QPointF& pos)
+QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos)
 {
     QTimeZone tz;
 
@@ -582,7 +582,7 @@ QString IUnit::datetime2string(const QDateTime& time, const QPointF& pos)
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return tmp.toString(Qt::SystemLocaleLongDate);
+    return tmp.toString(shortDate ? Qt::ISODate : Qt::SystemLocaleLongDate);
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)

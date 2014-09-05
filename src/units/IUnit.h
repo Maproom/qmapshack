@@ -50,7 +50,7 @@ class IUnit : public QObject
 
         static bool parseTimestamp(const QString &time, QDateTime &datetime);
 
-        static QString datetime2string(const QDateTime& time, const QPointF& pos = NOPOINTF);
+        static QString datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos = NOPOINTF);
 
         static QByteArray pos2timezone(const QPointF& pos);
 

@@ -250,12 +250,12 @@ QString CGisItemTrk::getInfo()
     if(timeStart.isValid())
     {
         str += "\n";
-        str += QObject::tr("Start: %1").arg(IUnit::datetime2string(timeStart, boundingRect.center()));
+        str += QObject::tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
     }
     if(timeEnd.isValid())
     {
         str += "\n";
-        str += QObject::tr("End: %1").arg(IUnit::datetime2string(timeEnd, boundingRect.center()));
+        str += QObject::tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
     }
 
     str += "\n";
@@ -269,7 +269,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
 {
 
     QString str, val1, unit1;
-    str += IUnit::datetime2string(pt.time, QPointF(pt.lon, pt.lat) * DEG_TO_RAD) + "\n";
+    str += IUnit::datetime2string(pt.time, false, QPointF(pt.lon, pt.lat) * DEG_TO_RAD) + "\n";
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
     str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
     if(pt.slope1 != NOFLOAT)

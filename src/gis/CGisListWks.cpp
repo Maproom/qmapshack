@@ -170,6 +170,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     if(gisItem != 0)
     {
         CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
+        CGisWidget::self().focusTrkByKey(true, gisItem->getKey());
     }    
     IGisItem::mutexItems.unlock();
 }

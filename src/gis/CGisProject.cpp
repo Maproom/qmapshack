@@ -139,7 +139,7 @@ QString CGisProject::getInfo()
     if(metadata.time.isValid())
     {
         str += "\n";
-        str += IUnit::datetime2string(metadata.time);
+        str += IUnit::datetime2string(metadata.time, false);
     }
 
 

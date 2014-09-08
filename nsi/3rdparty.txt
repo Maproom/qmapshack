@@ -1,9 +1,6 @@
 QMapShack for Windows (short: QMS) is build with Visual Studio 2013 as 64bit application
 It depends on the 3rd party software listed below
 
-Compile instructions are given at the end of this file
-
-
 1.) Microsoft Visual C++ 2013 Redistributable Package
   The installer vcredist_x64.exe (ca 7MB size) as downloaded from
     http://www.microsoft.com/en-us/download/details.aspx?id=40784
@@ -55,28 +52,26 @@ Compile instructions - to be verified
 - nmake /f makefile.vc devinstall
 
 3.) Install QT5.3 or later 
-- Download and run the Qt5 Windows Online Installe from http://qt-project.org/downloads
+- Download and run the Qt5 Windows Online Installer from http://qt-project.org/downloads
   Install for VS2013, x64
-- Append or (better?) prepend the Qt5 binary path to your PATH environment variable, e.g.
-  C:\Qt5\5.3\msvc2013_64\bin;%PATH%  
 
 4.) Get the QMapshack source from the repository, e.g. 
    hg clone https://bitbucket.org/maproom/qmapshack QMapShack  
 Note: you might have to install TortoiseHG   
-  
-5.) TODO Adapt the search path to GDAL and PROJ.4 in the respective CMake Files
-  FindGDAL.cmake and FindPROJ.cmake
-  
-6.) Start the CMake GUI (you did install CMake before, didn't you)
-- Configure (and be sure that it finds GDAL and PROJ.4 ) 
-  TODO If Oliver accepts my CMake Files contribution from 22-July-2014, you can enter GDAL and PROJ.4 paths here directly
+   
+5.) Start the CMake GUI (you did install CMake before, didn't you)
+- Configure 
+  In the first run there will be errors. 
+  Now enter the directories where you have installed Qt5, GDAL and PROJ.4 to the respective variables.
+  After that, Configure again.  
 - Generate
 
-7.) Open the generated QMapShack.sln with VS2013
+6.) Open the generated QMapShack.sln with VS2013
 - Compile the Release Version
 
-8.) Create the installer by executing
+7.) Create the installer by executing
 - nsi/copyfiles.bat
+  Note: In copyfiles.bat, you may have to adapt the directories where you have installed Qt5, GDAL and PROJ.4.
 - nsi/QMapShack_Installer.nsi
   
 

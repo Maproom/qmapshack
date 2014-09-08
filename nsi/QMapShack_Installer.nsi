@@ -159,6 +159,9 @@ Section "QMapShack" QMapShack
   SetOutPath $INSTDIR
     File Files\gdal*.dll
     File Files\gdal*.exe
+	File Files\nearblack.exe
+	File Files\ogr*.exe
+	File Files\testepsg.exe
   SetOutPath "$INSTDIR\data\"
     File /r Files\data\*.*
   ;END GDAL and PROJ.4 Files        
@@ -190,14 +193,12 @@ LangString DESC_QMapShack ${LANG_GERMAN}  "Landkarten im GeoTiff und Garmin Form
 
 Section "StartMenue" StartMenue
   ;create batch file for a GDAL shell
-  ;fileOpen $0 "$INSTDIR\gdal.bat" w
-  ;fileWrite $0 "cd /D $\"$INSTDIR\gdal\apps$\"$\r$\n" 
-  ;fileWrite $0 "SET PATH=$INSTDIR;$INSTDIR\gdal\python\osgeo;$INSTDIR\proj\apps;$INSTDIR\gdal\apps;$INSTDIR\curl;%PATH%$\r$\n"
-  ;fileWrite $0 "SET GDAL_DATA=$INSTDIR\gdal-data$\r$\n"
-  ;fileWrite $0 "SET GDAL_DRIVER_PATH=$INSTDIR\gdal\plugins$\r$\n"
-  ;fileWrite $0 "SET PYTHONPATH=$INSTDIR\gdal\python;%PYTHONPATH%$\r$\n"
-  ;fileWrite $0 "SET PROJ_LIB=$INSTDIR\proj\SHARE$\r$\n"
-  ;fileClose $0
+  fileOpen $0 "$INSTDIR\gdal_shell.bat" w
+  fileWrite $0 "@cd /D %USERPROFILE%$\r$\n" 
+  fileWrite $0 "@SET PATH=$INSTDIR;%PATH%$\r$\n"
+  fileWrite $0 "@SET GDAL_DATA=$INSTDIR\data$\r$\n"
+  fileWrite $0 "@SET PROJ_LIB=$INSTDIR\share$\r$\n"
+  fileClose $0
 
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
      ;Create shortcuts
@@ -206,8 +207,8 @@ Section "StartMenue" StartMenue
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk" "$INSTDIR\qmapshack.exe" "" "$INSTDIR\QMapShack.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\qmapshack.org.lnk" "https://bitbucket.org/maproom/qmapshack/wiki/Home" "" "$INSTDIR\kfm_home.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Help.lnk" "https://bitbucket.org/maproom/qmapshack/wiki/DocMain" "" "$INSTDIR\Help.ico"
-    ;CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Download.lnk" "http://sourceforge.net/projects/qlandkartegt/" "" "$INSTDIR\kget.ico"
-    ;CreateShortCut "$SMPROGRAMS\$StartMenuFolder\GDAL.lnk" %COMSPEC% "/k $\"$INSTDIR\gdal.bat$\""
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\gdal.org.lnk" "http://www.gdal.org/" "" "$INSTDIR\gdalicon.ico"
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\GDAL shell.lnk" %COMSPEC% "/k $\"$INSTDIR\gdal_shell.bat$\"" "" "" "" "" "GDAL shell"
    !insertmacro MUI_STARTMENU_WRITE_END
 
   ;Create registry entries
@@ -245,8 +246,8 @@ Section "Uninstall"
   Delete "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\qmapshack.org.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\Help.lnk"
-  ;Delete "$SMPROGRAMS\$StartMenuFolder\Download.lnk"
-  ;Delete "$SMPROGRAMS\$StartMenuFolder\GDAL.lnk"
+  Delete "$SMPROGRAMS\$StartMenuFolder\gdal.org.lnk"
+  Delete "$SMPROGRAMS\$StartMenuFolder\GDAL shell.lnk"
   
   RMDir "$SMPROGRAMS\$StartMenuFolder"
 

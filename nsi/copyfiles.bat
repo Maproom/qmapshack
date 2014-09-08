@@ -70,10 +70,7 @@ rem   put them in the same directory as the .exe for better testing
 rem section 2.2.1) GDAL
 xcopy %QMSI_GDAL_PATH%\data data /s /i
 copy %QMSI_GDAL_PATH%\bin\*.dll
-rem ?? Which GDAL executables do we need ??
-copy %QMSI_GDAL_PATH%\bin\gdalinfo.exe
-copy %QMSI_GDAL_PATH%\bin\gdal_translate.exe
-copy %QMSI_GDAL_PATH%\bin\gdalwarp.exe
+copy %QMSI_GDAL_PATH%\bin\*.exe
 rem section 2.2.4) PROJ.4
 xcopy %QMSI_PROJ_PATH%\share share /s /i
 copy %QMSI_PROJ_PATH%\bin\*.dll
@@ -86,8 +83,6 @@ rem copy %QLGTI_LIBEXIF_PATH%\libexif-12.dll
 rem section 2.5) Copy QMapShack GT Files
 copy ..\..\build\bin\Release\qmapshack.exe
 copy ..\..\build\src\*.qm
-rem copy ..\..\src\icons\48x48\QMapShack.png
-rem copy ..\..\src\icons\48x48\Help.png
 copy ..\*.ico
 rem section 2.6) 3rd party SW description
 copy ..\3rdparty.txt

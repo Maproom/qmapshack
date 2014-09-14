@@ -50,11 +50,21 @@ const IGisItem::color_t IGisItem::colorMap[] =
 
 };
 
-IGisItem::IGisItem(QTreeWidgetItem *parent)
+IGisItem::IGisItem(QTreeWidgetItem *parent, int idx)
     : QTreeWidgetItem(parent)
     , flags(0)
 {
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
+
+    if(idx >= 0)
+    {
+        parent->removeChild(this);
+        parent->insertChild(idx, this);
+    }
+    else
+    {
+        /// @todo append items by type
+    }
 }
 
 IGisItem::~IGisItem()

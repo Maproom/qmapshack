@@ -44,9 +44,12 @@ class CGisItemTrk : public IGisItem
             ,eFocusMouseClick
         };
 
-        CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * parent);
-        CGisItemTrk(const QDomNode &xml, CGisProject *parent);
+        CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * project);
+        CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx);
+        CGisItemTrk(const QDomNode &xml, CGisProject *project);
         virtual ~CGisItemTrk();
+
+        CGisItemTrk& operator=(const CGisItemTrk& t);
 
         const QString& getName(){return trk.name;}
         int getColorIdx(){return colorIdx;}

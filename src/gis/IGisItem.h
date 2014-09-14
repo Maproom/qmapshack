@@ -51,7 +51,7 @@ class IGisItem : public QTreeWidgetItem
             QString type;
         };
 
-        IGisItem(QTreeWidgetItem * parent);
+        IGisItem(QTreeWidgetItem * parent, int idx);
         virtual ~IGisItem();
 
         /// this mutex has to be locked when ever the item list is accessed.

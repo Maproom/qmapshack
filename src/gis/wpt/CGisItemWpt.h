@@ -73,6 +73,7 @@ class CGisItemWpt : public IGisItem
 
         CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, CGisProject * project);
         CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, CGisProject *project);
+        CGisItemWpt(const CGisItemWpt &parentWpt, CGisProject *project, int idx);
         CGisItemWpt(const QDomNode& xml, CGisProject * project);
         virtual ~CGisItemWpt();
 

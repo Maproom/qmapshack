@@ -30,8 +30,26 @@
 const QPen CGisItemRte::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 QString CGisItemRte::keyUserFocus;
 
+/// used to create a copy of route with new parent
+CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, CGisProject * project, int idx)
+    : IGisItem(project, idx)
+    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+{
+    *this = parentRte;
+
+    setText(1, "*");
+    setText(0, rte.name);
+    setToolTip(0, getInfo());
+
+    key.clear();
+    genKey();
+
+    project->setText(1,"*");
+}
+
+/// used to create route from GPX file
 CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
-    : IGisItem(parent)
+    : IGisItem(parent, parent->childCount())
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)    
 {
     // --- start read and process data ----
@@ -44,8 +62,22 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
     genKey();
 }
 
+
 CGisItemRte::~CGisItemRte()
 {
+
+}
+
+CGisItemRte& CGisItemRte::operator=(const CGisItemRte& r)
+{
+    rte = r.rte;
+
+    flags           = r.flags;
+    key             = r.key;
+    boundingRect    = r.boundingRect;
+
+
+    return *this;
 
 }
 

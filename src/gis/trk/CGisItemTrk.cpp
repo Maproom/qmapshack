@@ -99,8 +99,9 @@ const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 
 QString CGisItemTrk::keyUserFocus;
 
-CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * parent)
-    : IGisItem(parent)
+/// used to create a new track from a part of an existing track
+CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * project)
+    : IGisItem(project, -1)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
@@ -146,11 +147,31 @@ CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisPr
     setToolTip(0, getInfo());
     genKey();
 
-    parent->setText(1,"*");
+    project->setText(1,"*");
 }
 
-CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * parent)
-    : IGisItem(parent)
+/// used to create a copy of track with new parent
+CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx)
+    : IGisItem(project, idx)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
+{
+    *this = parentTrk;
+
+    setText(1, "*");
+    setText(0, trk.name);
+    setToolTip(0, getInfo());
+
+    key.clear();
+    genKey();
+
+    project->setText(1,"*");
+}
+
+/// used to create track from GPX file
+CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * project)
+    : IGisItem(project, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
@@ -181,6 +202,20 @@ CGisItemTrk::~CGisItemTrk()
     qDeleteAll(registeredPlots.toList());
 
     delete dlgDetails;
+}
+
+CGisItemTrk& CGisItemTrk::operator=(const CGisItemTrk& t)
+{
+    trk = t.trk;
+
+    setColor(t.color);
+
+    flags           = t.flags;
+    key             = t.key;
+    boundingRect    = t.boundingRect;
+
+
+    return *this;
 }
 
 void CGisItemTrk::registerPlot(IPlot * plot)

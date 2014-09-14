@@ -57,12 +57,30 @@ CGisListWks::~CGisListWks()
 
 void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 {
+    /*
+        What's happening here?
+
+        1) Cast current item and item under cursor to GIS item type
+        2) If type matches for both test for common parent
+        2.1) common parent->  move
+        2.1) different parent -> copy
+        3) go on with dragMoveEvent();
+
+    */
+
     CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(currentItem());
     CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(itemAt(e->pos()));
 
     if(trk1 && trk2)
     {
-        e->setDropAction(Qt::MoveAction);
+        if(trk1->parent() == trk2->parent())
+        {
+            e->setDropAction(Qt::MoveAction);
+        }
+        else
+        {
+            e->setDropAction(Qt::CopyAction);
+        }
         QTreeWidget::dragMoveEvent(e);
         return;
     }
@@ -72,7 +90,14 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
     if(wpt1 && wpt2)
     {
-        e->setDropAction(Qt::MoveAction);
+        if(wpt1->parent() == wpt2->parent())
+        {
+            e->setDropAction(Qt::MoveAction);
+        }
+        else
+        {
+            e->setDropAction(Qt::CopyAction);
+        }
         QTreeWidget::dragMoveEvent(e);
         return;
     }
@@ -100,8 +125,88 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
 void CGisListWks::dropEvent ( QDropEvent  * e )
 {
-    QTreeWidget::dropEvent(e);
-    emit sigChanged();
+
+    /*
+        What's happening here?
+
+        1) Test if item will be inserted above ore below item under cursor.
+        2) Cast current item and item under cursor to GIS item type
+        3) If type matches for both test for common parent
+        3.1) common parent-> go on with default drop event
+        3.1) different parent -> create a copy and insert it index
+        4) signal change of project
+
+    */
+
+    // calc. index offset (below/above item)
+    QRect r = visualItemRect(itemAt(e->pos()));
+    int y1 = r.top() + r.height()/2;
+    int y2 = e->pos().y();
+    int off = y2 > y1 ? 1 : 0;
+
+    CGisItemWpt * wpt1 = dynamic_cast<CGisItemWpt*>(currentItem());
+    CGisItemWpt * wpt2 = dynamic_cast<CGisItemWpt*>(itemAt(e->pos()));
+
+    if(wpt1 && wpt2)
+    {
+        if(wpt1->parent() == wpt2->parent())
+        {
+            QTreeWidget::dropEvent(e);
+        }
+        else
+        {
+            CGisProject * project = dynamic_cast<CGisProject*>(wpt2->parent());
+            if(project)
+            {
+                new CGisItemWpt(*wpt1,project, project->indexOfChild(wpt2) + off);
+            }
+        }
+        emit sigChanged();
+        return;
+    }
+
+    CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(currentItem());
+    CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(itemAt(e->pos()));
+
+    if(trk1 && trk2)
+    {
+        if(trk1->parent() == trk2->parent())
+        {
+            QTreeWidget::dropEvent(e);
+        }
+        else
+        {
+            CGisProject * project = dynamic_cast<CGisProject*>(trk2->parent());
+            if(project)
+            {
+                new CGisItemTrk(*trk1,project, project->indexOfChild(trk2) + off);
+            }
+        }
+        emit sigChanged();
+        return;
+    }
+
+    CGisItemRte * rte1 = dynamic_cast<CGisItemRte*>(currentItem());
+    CGisItemRte * rte2 = dynamic_cast<CGisItemRte*>(itemAt(e->pos()));
+
+    if(rte1 && rte2)
+    {
+        if(rte1->parent() == rte2->parent())
+        {
+            QTreeWidget::dropEvent(e);
+        }
+        else
+        {
+            CGisProject * project = dynamic_cast<CGisProject*>(rte2->parent());
+            if(project)
+            {
+                new CGisItemRte(*rte2,project, project->indexOfChild(rte2) + off);
+            }
+        }
+        emit sigChanged();
+        return;
+    }
+
 }
 
 

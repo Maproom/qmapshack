@@ -71,9 +71,33 @@ class CGisItemWpt : public IGisItem
             QList<geocachelog_t> logs;
         };
 
+        /**
+           @brief Create a completely new waypoint
+           @param pos       the waypoint's position [°]
+           @param name      the waypoint's name
+           @param icon      the waypoint's icon
+           @param project   the project the waypoint is added to
+         */
         CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, CGisProject * project);
+        /**
+           @brief Create a copy of an existing waypoint with a new position
+           @param pos       the waypoint's new position [°]
+           @param parentWpt the waypoint to copy
+           @param project   the project the waypoint is added to
+         */
         CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, CGisProject *project);
+        /**
+           @brief Create a 1:1 copy of an existing waypoint (with new key)
+           @param parentWpt the waypoint to copy
+           @param project   the project the waypoint is added to
+           @param idx       the index to insert the item. If -1 the item will be appended to it's group
+         */
         CGisItemWpt(const CGisItemWpt &parentWpt, CGisProject *project, int idx);
+        /**
+           @brief Create item from GPX.
+           @param xml       the GPX section containing the item
+           @param project   the project to append with item
+         */
         CGisItemWpt(const QDomNode& xml, CGisProject * project);
         virtual ~CGisItemWpt();
 

@@ -121,13 +121,10 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
     }
 
     CGisProject * proj = dynamic_cast<CGisProject*>(itemAt(e->pos()));
-    if(proj)
+    if(proj && proj != currentItem()->parent())
     {
-        if(proj != currentItem()->parent())
-        {
-            e->setDropAction(Qt::CopyAction);
-            QTreeWidget::dragMoveEvent(e);
-        }
+        e->setDropAction(Qt::CopyAction);
+        QTreeWidget::dragMoveEvent(e);
         return;
     }
 
@@ -147,6 +144,9 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         3.1) common parent-> go on with default drop event
         3.1) different parent -> create a copy and insert it index
         4) signal change of project
+
+        5) Test if item under cursor is a project
+        6) If project and project is not item's project create a copy
 
     */
 
@@ -221,7 +221,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
 
 
     CGisProject * project = dynamic_cast<CGisProject*>(itemAt(e->pos()));
-    if(project)
+    if(project && project != currentItem()->parent())
     {
         if(wpt1 != 0)
         {

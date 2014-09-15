@@ -93,6 +93,9 @@ CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWk
     }
 
 
+    /** @note   If you change the order of the item types read you have to
+                take care of the order enforced in IGisItem().
+    */
     QList<QTreeWidgetItem*> items;
     const QDomNodeList& xmlTrks = xmlGpx.elementsByTagName("trk");
     N = xmlTrks.count();

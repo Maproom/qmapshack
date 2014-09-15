@@ -1,3 +1,9 @@
+V 0.4.0
+* Add position dialog to "add waypoint"
+* Beautify waypoint edit dialog
+* Add on-screen information and detail dialog for tracks
+* Add drag-n-drop to workspace list to move items (draw order & copy between projects)
+
 V 0.3.1
 * another favour for Debian release
 * Added "Add Waypoint" to mouse context menu

@@ -70,7 +70,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
         {
             for(int n = parent->childCount() - 2; n >= 0; n--)
             {
-                /** @note   The order of item types to test is given by the order items are read from
+                /** @note   The order of item types to test is given by the order items read from
                             the GPX file in the CGisProject constructor.  */
 
                 int childType = parent->child(n)->type();
@@ -86,7 +86,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
         {
             for(int n = parent->childCount() - 2; n >= 0; n--)
             {
-                /** @note   The order of item types to test is given by the order items are read from
+                /** @note   The order of item types to test is given by the order items read from
                             the GPX file in the CGisProject constructor.  */
 
                 int childType = parent->child(n)->type();
@@ -102,7 +102,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
         {
             for(int n = parent->childCount() - 2; n >= 0; n--)
             {
-                /** @note   The order of item types to test is given by the order items are read from
+                /** @note   The order of item types to test is given by the order items read from
                             the GPX file in the CGisProject constructor.  */
 
                 int childType = parent->child(n)->type();
@@ -134,7 +134,7 @@ void IGisItem::changed(const QString &what)
     }
 
     /*
-        If item gets changed but it's origin is not QMapShack
+        If item gets changed but if it's origin is not QMapShack
         then it is assumed to be tainted, as imported data should
         never be changed without notice.
     */

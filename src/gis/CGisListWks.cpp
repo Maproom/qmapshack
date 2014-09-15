@@ -107,20 +107,32 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
     if(rte1 && rte2)
     {
-        e->setDropAction(Qt::MoveAction);
+        if(rte1->parent() == rte2->parent())
+        {
+            e->setDropAction(Qt::MoveAction);
+        }
+        else
+        {
+            e->setDropAction(Qt::CopyAction);
+        }
         QTreeWidget::dragMoveEvent(e);
+        return;
+
+    }
+
+    CGisProject * proj = dynamic_cast<CGisProject*>(itemAt(e->pos()));
+    if(proj)
+    {
+        if(proj != currentItem()->parent())
+        {
+            e->setDropAction(Qt::CopyAction);
+            QTreeWidget::dragMoveEvent(e);
+        }
         return;
     }
 
-//    CGisProject * proj = dynamic_cast<CGisProject*>(itemAt(e->pos()));
-//    if(proj)
-//    {
-//        e->setDropAction(Qt::MoveAction);
-//        QTreeWidget::dragMoveEvent(e);
-//        return;
-//    }
-
     e->setDropAction(Qt::IgnoreAction);
+    QTreeWidget::dragMoveEvent(e);
 }
 
 void CGisListWks::dropEvent ( QDropEvent  * e )
@@ -205,6 +217,24 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         }
         emit sigChanged();
         return;
+    }
+
+
+    CGisProject * project = dynamic_cast<CGisProject*>(itemAt(e->pos()));
+    if(project)
+    {
+        if(wpt1 != 0)
+        {
+            new CGisItemWpt(*wpt1, project, -1);
+        }
+        else if(trk1 != 0)
+        {
+            new CGisItemTrk(*trk1, project, -1);
+        }
+        else if(rte1 != 0)
+        {
+            new CGisItemRte(*rte1, project, -1);
+        }
     }
 
 }

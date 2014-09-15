@@ -18,6 +18,9 @@
 
 #include "gis/IGisItem.h"
 #include "gis/CGisProject.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/rte/CGisItemRte.h"
 #include "units/IUnit.h"
 #include "canvas/CCanvas.h"
 #include "GeoMath.h"
@@ -50,8 +53,8 @@ const IGisItem::color_t IGisItem::colorMap[] =
 
 };
 
-IGisItem::IGisItem(QTreeWidgetItem *parent, int idx)
-    : QTreeWidgetItem(parent)
+IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
+    : QTreeWidgetItem(parent, typ)
     , flags(0)
 {
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
@@ -62,8 +65,47 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, int idx)
         parent->insertChild(idx, this);
     }
     else
-    {
-        /// @todo append items by type
+    {        
+
+        if(type() == eTypeTrk)
+        {
+            for(int n = parent->childCount() - 2; n >= 0; n--)
+            {
+                int childType = parent->child(n)->type();
+                if(childType == eTypeTrk)
+                {
+                    parent->removeChild(this);
+                    parent->insertChild(n+1, this);
+                    break;
+                }
+            }
+        }
+        else if(type() == eTypeRte)
+        {
+            for(int n = parent->childCount() - 2; n >= 0; n--)
+            {
+                int childType = parent->child(n)->type();
+                if( childType == eTypeRte || childType == eTypeTrk)
+                {
+                    parent->removeChild(this);
+                    parent->insertChild(n+1, this);
+                    break;
+                }
+            }
+        }
+        else if(type() == eTypeWpt)
+        {
+            for(int n = parent->childCount() - 2; n >= 0; n--)
+            {
+                int childType = parent->child(n)->type();
+                if(childType == eTypeWpt || childType == eTypeRte || childType == eTypeTrk)
+                {
+                    parent->removeChild(this);
+                    parent->insertChild(n+1, this);
+                    break;
+                }
+            }
+        }
     }
 }
 

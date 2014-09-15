@@ -51,7 +51,14 @@ class IGisItem : public QTreeWidgetItem
             QString type;
         };
 
-        IGisItem(QTreeWidgetItem * parent, int idx);
+        enum type_e
+        {
+              eTypeTrk
+            , eTypeRte
+            , eTypeWpt
+        };
+
+        IGisItem(QTreeWidgetItem * parent, type_e typ, int idx);
         virtual ~IGisItem();
 
         /// this mutex has to be locked when ever the item list is accessed.

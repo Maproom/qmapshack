@@ -101,7 +101,7 @@ QString CGisItemTrk::keyUserFocus;
 
 /// used to create a new track from a part of an existing track
 CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * project)
-    : IGisItem(project, -1)
+    : IGisItem(project, eTypeTrk, -1)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
@@ -152,7 +152,7 @@ CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisPr
 
 /// used to create a copy of track with new parent
 CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx)
-    : IGisItem(project, idx)
+    : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
@@ -171,7 +171,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, in
 
 /// used to create track from GPX file
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * project)
-    : IGisItem(project, project->childCount())
+    : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)

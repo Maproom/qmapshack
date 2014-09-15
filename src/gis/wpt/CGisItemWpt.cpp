@@ -42,7 +42,7 @@ QString CGisItemWpt::lastIcon;
 
 /// used to add a new waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, CGisProject * project)
-    : IGisItem(project, -1)
+    : IGisItem(project, eTypeWpt, -1)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
@@ -69,7 +69,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
 
 /// used to move a copy of waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisProject * project)
-    : IGisItem(project, -1)
+    : IGisItem(project, eTypeWpt, -1)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
@@ -96,7 +96,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisP
 
 /// used to create a copy of waypoint with new parent
 CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, CGisProject *project, int idx)
-    : IGisItem(project, idx)
+    : IGisItem(project, eTypeWpt, idx)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
@@ -114,7 +114,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, CGisProject *project, int
 
 /// used to create waypoint from GPX file
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *project)
-    : IGisItem(project, project->childCount())
+    : IGisItem(project, eTypeWpt, project->childCount())
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {

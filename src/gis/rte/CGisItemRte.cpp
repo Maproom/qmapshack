@@ -32,13 +32,16 @@ QString CGisItemRte::keyUserFocus;
 
 /// used to create a copy of route with new parent
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, CGisProject * project, int idx)
-    : IGisItem(project, idx)
+    : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentRte;
 
+    icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
     setText(1, "*");
     setText(0, rte.name);
+    setIcon(0, icon);
     setToolTip(0, getInfo());
 
     key.clear();
@@ -49,7 +52,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, CGisProject * project, in
 
 /// used to create route from GPX file
 CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
-    : IGisItem(parent, parent->childCount())
+    : IGisItem(parent, eTypeRte, parent->childCount())
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)    
 {
     // --- start read and process data ----

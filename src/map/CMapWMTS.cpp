@@ -18,6 +18,7 @@
 
 #include "map/CMapWMTS.h"
 #include "map/CMapDraw.h"
+#include "map/wmts/CDiskCache.h"
 #include "units/IUnit.h"
 
 
@@ -165,7 +166,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     }
 
-    accessManager = new QNetworkAccessManager(parent->thread());
+    diskCache       = new CDiskCache(this);
+    accessManager   = new QNetworkAccessManager(parent->thread());
 
     isActivated = true;
 }

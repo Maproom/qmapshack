@@ -23,6 +23,7 @@
 
 
 class CMapDraw;
+class IDiskCache;
 class QNetworkAccessManager;
 
 class CMapWMTS  : public IMap
@@ -65,6 +66,8 @@ class CMapWMTS  : public IMap
         };
 
         QMap<QString,tileset_t> tilesets;
+
+        IDiskCache * diskCache;
 
         QNetworkAccessManager * accessManager;
 };

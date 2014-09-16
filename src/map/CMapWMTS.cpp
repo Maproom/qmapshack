@@ -184,8 +184,6 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
         return;
     }
 
-    QPointF bufferScale = buf.scale * buf.zoomFactor;
-
     qreal x1 = buf.ref1.x() < buf.ref4.x() ? buf.ref1.x() : buf.ref4.x();
     qreal y1 = buf.ref1.y() > buf.ref2.y() ? buf.ref1.y() : buf.ref2.y();
 
@@ -194,6 +192,17 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 
 
     QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
+
+    // get pixel offset of top left buffer corner
+    QPointF pp = buf.ref1;
+    map->convertRad2Px(pp);
+
+    // start to draw the map
+    QPainter p(&buf.image);
+    USE_ANTI_ALIASING(p,true);
+    p.setOpacity(getOpacity()/100.0);
+    p.translate(-pp);
+
 
     foreach(const layer_t& layer, layers)
     {
@@ -230,31 +239,56 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
             }
         }
 
-        qDebug() << tileMatrixId << s1 << tileset.tilematrix[tileMatrixId].scale* 0.28e-3;
+//        qDebug() << tileMatrixId << s1 << tileset.tilematrix[tileMatrixId].scale* 0.28e-3;
 
         const tilematrix_t& tilematrix = tileset.tilematrix[tileMatrixId];
-        quint32 col = qFloor(( pt1.x() - tilematrix.topLeft.x()) / (tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
-        quint32 row = qFloor((-pt1.y() + tilematrix.topLeft.y()) / (tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
+        quint32 col = qFloor((pt1.x() - tilematrix.topLeft.x()) / ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
+        quint32 row = qFloor((pt1.y() - tilematrix.topLeft.y()) / (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
+
+        qreal xx1 = col       * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+        qreal yy1 = row       * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
+        qreal xx2 = (col + 1) * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+        qreal yy2 = (row + 1) * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
 
         QString url = layer.resourceURL;
         url = url.replace("{TileMatrix}",tileMatrixId);
         url = url.replace("{TileRow}",QString::number(row));
         url = url.replace("{TileCol}",QString::number(col));
 
-        qDebug() << url;
-        QNetworkRequest request(url);
+//        qDebug() << url << xx1 << yy1 << xx2 << yy2 << pt1 << pt2;
 
-        QNetworkReply * reply = accessManager->get(request);
-
-        while(reply->isRunning())
+        if(diskCache->contains(url))
         {
-            qApp->processEvents();
+            QImage img;
+            diskCache->restore(url, img);
+            QPolygonF l;
+            l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+            pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+            drawTile(img, l, p);
+        }
+        else
+        {
+
         }
 
-        QImage img;
-        img.loadFromData(reply->readAll());
 
-        img.save("test.png");
+//        QNetworkRequest request(url);
+
+//        QNetworkReply * reply = accessManager->get(request);
+
+//        while(reply->isRunning())
+//        {
+//            qApp->processEvents();
+//        }
+
+//        QImage img;
+//        img.loadFromData(reply->readAll());
+
+//        img.save("test.png");
     }
 
 }

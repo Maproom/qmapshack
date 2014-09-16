@@ -21,6 +21,12 @@
 
 #include "map/wmts/IDiskCache.h"
 
+#include <QDir>
+#include <QHash>
+#include <QImage>
+
+class QTimer;
+
 class CDiskCache : public IDiskCache
 {
     Q_OBJECT
@@ -31,6 +37,21 @@ class CDiskCache : public IDiskCache
         virtual void store(const QString& key, QImage& img);
         virtual void restore(const QString& key, QImage& img);
         virtual bool contains(const QString& key);
+
+    private slots:
+        void slotCleanup();
+
+    private:
+        QDir dir;
+
+        /// hash table to cache images als files on disc
+        QHash<QString, QString> table;
+        /// hash table to cache loaded images in memory
+        QHash<QString, QImage>  cache;
+
+        QTimer * timer;
+
+        QImage dummy;
 
 };
 

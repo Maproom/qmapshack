@@ -299,5 +299,7 @@
         <file>pics/splash.png</file>
         <file>pics/compass.png</file>
         <file>pics/about.png</file>
+        <file>pics/noMap256x256.png</file>
+
     </qresource>
 </RCC>

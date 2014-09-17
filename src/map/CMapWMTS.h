@@ -41,6 +41,9 @@ class CMapWMTS  : public IMap
     signals:
         void sigQueueChanged();
 
+    protected:
+        void configureCache();
+
     private slots:
         void slotQueueChanged();
         void slotRequestFinished(QNetworkReply* reply);

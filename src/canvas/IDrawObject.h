@@ -67,6 +67,13 @@ class IDrawObject : public QObject
 
         bool getShowPOIs(){return showPOIs;}
 
+        const QString& getCachePath(){return cachePath;}
+
+        qint32 getCacheSize(){return cacheSizeMB;}
+
+        qint32 getCacheExpiration(){return cacheExpiration;}
+
+
     public slots:
         /**
            @brief Write opacity value
@@ -77,6 +84,10 @@ class IDrawObject : public QObject
         void slotSetShowPolygons(bool yes){showPolygons = yes;}
         void slotSetShowPolylines(bool yes){showPolylines = yes;}
         void slotSetShowPOIs(bool yes){showPOIs = yes;}
+
+        void slotSetCachePath(const QString& path){cachePath = path; configureCache();}
+        void slotSetCacheSize(qint32 size){cacheSizeMB = size; configureCache();}
+        void slotSetCacheExpiration(qint32 days){cacheExpiration = days; configureCache();}
 
     signals:
         /**
@@ -92,6 +103,7 @@ class IDrawObject : public QObject
          */
         bool isOutOfScale(const QPointF& scale);
 
+        virtual void configureCache(){}
 
     private:
         qreal opacity;
@@ -105,6 +117,12 @@ class IDrawObject : public QObject
         bool showPolylines;
 
         bool showPOIs;
+
+        QString cachePath;
+
+        qint32 cacheSizeMB;
+
+        qint32 cacheExpiration;
 
 };
 

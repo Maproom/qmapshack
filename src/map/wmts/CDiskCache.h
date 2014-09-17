@@ -31,7 +31,7 @@ class CDiskCache : public IDiskCache
 {
     Q_OBJECT
     public:
-        CDiskCache(QObject *parent);
+        CDiskCache(const QString& path, qint32 size, qint32 days, QObject *parent);
         virtual ~CDiskCache();
 
         virtual void store(const QString& key, QImage& img);
@@ -44,6 +44,10 @@ class CDiskCache : public IDiskCache
     private:
         QDir dir;
 
+        qint32 size;
+
+        qint32 expiration;
+
         /// hash table to cache images als files on disc
         QHash<QString, QString> table;
         /// hash table to cache loaded images in memory
@@ -52,6 +56,7 @@ class CDiskCache : public IDiskCache
         QTimer * timer;
 
         QImage dummy;
+
 
 };
 

@@ -41,6 +41,8 @@ class CMapPropSetup : public IMapProp, private Ui::IMapPropSetup
         void slotSetMinScale(bool checked);
         void slotSetMaxScale(bool checked);
 
+        void slotSetCachePath();
+
     private:
         void updateScaleLabel();
 

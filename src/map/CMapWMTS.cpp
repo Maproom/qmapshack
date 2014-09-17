@@ -31,6 +31,7 @@
 
 CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility, parent)
+    , lastRequest(false)
 {
     qDebug() << "------------------------------";
     qDebug() << "WTMS: try to open" << filename;
@@ -169,6 +170,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     diskCache       = new CDiskCache(this);
     accessManager   = new QNetworkAccessManager(parent->thread());
 
+    connect(this, SIGNAL(sigQueueChanged()), this, SLOT(slotQueueChanged()));
+    connect(accessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+
     isActivated = true;
 }
 
@@ -177,8 +181,67 @@ CMapWMTS::~CMapWMTS()
 
 }
 
+void CMapWMTS::slotQueueChanged()
+{
+    if(!urlQueue.isEmpty() && urlPending.size() < 6)
+    {
+        QMutexLocker lock(&mutex);
+        QString url = urlQueue.dequeue();        
+        lastRequest = urlQueue.isEmpty();
+
+        QNetworkRequest request;
+        request.setUrl(url);
+        accessManager->get(request);
+        urlPending << url;
+    }
+    else if(lastRequest)
+    {
+        map->emitSigCanvasUpdate();
+        lastRequest = false;
+    }
+}
+
+void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
+{
+    QString url = reply->url().toString();
+
+    if(urlPending.contains(url))
+    {
+        qDebug() << url;
+        QImage img;
+
+        // only take good responses
+        if(!reply->error())
+        {
+            // read image data
+            img.loadFromData(reply->readAll());
+        }
+
+        // always store image to cache, the cache will take care of NULL images
+        diskCache->store(url, img);
+
+        urlPending.removeAll(url);
+
+    }
+
+    // debug output any error
+    if(reply->error())
+    {
+        qDebug() << reply->errorString();
+    }
+
+    // delete reply object
+    reply->deleteLater();
+
+    slotQueueChanged();
+}
+
 void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 {
+    QMutexLocker lock(&mutex);
+
+    urlQueue.clear();
+
     if(map->needsRedraw())
     {
         return;
@@ -242,53 +305,49 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 //        qDebug() << tileMatrixId << s1 << tileset.tilematrix[tileMatrixId].scale* 0.28e-3;
 
         const tilematrix_t& tilematrix = tileset.tilematrix[tileMatrixId];
-        quint32 col = qFloor((pt1.x() - tilematrix.topLeft.x()) / ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
-        quint32 row = qFloor((pt1.y() - tilematrix.topLeft.y()) / (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
+        quint32 col1 = qFloor((pt1.x() - tilematrix.topLeft.x()) / ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
+        quint32 row1 = qFloor((pt1.y() - tilematrix.topLeft.y()) / (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
 
-        qreal xx1 = col       * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
-        qreal yy1 = row       * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
-        qreal xx2 = (col + 1) * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
-        qreal yy2 = (row + 1) * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
+        quint32 col2 = qCeil((pt2.x() - tilematrix.topLeft.x()) / ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
+        quint32 row2 = qCeil((pt2.y() - tilematrix.topLeft.y()) / (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
 
-        QString url = layer.resourceURL;
-        url = url.replace("{TileMatrix}",tileMatrixId);
-        url = url.replace("{TileRow}",QString::number(row));
-        url = url.replace("{TileCol}",QString::number(col));
-
-//        qDebug() << url << xx1 << yy1 << xx2 << yy2 << pt1 << pt2;
-
-        if(diskCache->contains(url))
+        for(quint32 row = row1; row <= row2; row++)
         {
-            QImage img;
-            diskCache->restore(url, img);
-            QPolygonF l;
-            l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
-            pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-            pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-            pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-            pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+            for(quint32 col = col1; col <= col2; col++)
+            {
 
-            drawTile(img, l, p);
+                qreal xx1 = col       * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+                qreal yy1 = row       * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
+                qreal xx2 = (col + 1) * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+                qreal yy2 = (row + 1) * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
+
+                QString url = layer.resourceURL;
+                url = url.replace("{TileMatrix}",tileMatrixId);
+                url = url.replace("{TileRow}",QString::number(row));
+                url = url.replace("{TileCol}",QString::number(col));
+
+//                qDebug() << url << xx1 << yy1 << xx2 << yy2 << pt1 << pt2;
+
+                if(diskCache->contains(url))
+                {
+                    QImage img;
+                    diskCache->restore(url, img);
+                    QPolygonF l;
+                    l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
+                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+                    drawTile(img, l, p);
+                }
+                else
+                {
+                    urlQueue << url;
+                }
+            }
         }
-        else
-        {
 
-        }
-
-
-//        QNetworkRequest request(url);
-
-//        QNetworkReply * reply = accessManager->get(request);
-
-//        while(reply->isRunning())
-//        {
-//            qApp->processEvents();
-//        }
-
-//        QImage img;
-//        img.loadFromData(reply->readAll());
-
-//        img.save("test.png");
+        emit sigQueueChanged();
     }
-
 }

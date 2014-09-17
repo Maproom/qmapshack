@@ -20,6 +20,7 @@
 #define IDISKCACHE_H
 
 #include <QObject>
+#include <QMutex>
 
 class IDiskCache : public QObject
 {
@@ -30,6 +31,10 @@ class IDiskCache : public QObject
         virtual void store(const QString& key, QImage& img) = 0;
         virtual void restore(const QString& key, QImage& img) = 0;
         virtual bool contains(const QString& key) = 0;
+
+
+    protected:
+        QMutex mutex;
 };
 
 #endif //IDISKCACHE_H

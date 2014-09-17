@@ -49,6 +49,8 @@ CDiskCache::~CDiskCache()
 
 void CDiskCache::store(const QString& key, QImage& img)
 {
+    QMutexLocker lock(&mutex);
+
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(key.toLatin1());
 
@@ -69,6 +71,8 @@ void CDiskCache::store(const QString& key, QImage& img)
 
 void CDiskCache::restore(const QString& key, QImage& img)
 {
+    QMutexLocker lock(&mutex);
+
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(key.toLatin1());
 
@@ -95,6 +99,8 @@ void CDiskCache::restore(const QString& key, QImage& img)
 
 bool CDiskCache::contains(const QString& key)
 {
+    QMutexLocker lock(&mutex);
+
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(key.toLatin1());
 
@@ -104,6 +110,8 @@ bool CDiskCache::contains(const QString& key)
 
 void CDiskCache::slotCleanup()
 {
+    QMutexLocker lock(&mutex);
+
     qint64 size = 0;
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     QDateTime now = QDateTime::currentDateTime();

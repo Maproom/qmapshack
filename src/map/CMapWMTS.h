@@ -20,19 +20,30 @@
 #define CMAPWMTS_H
 #include "map/IMap.h"
 #include <QMap>
+#include <QQueue>
+#include <QMutex>
 
 
 class CMapDraw;
 class IDiskCache;
 class QNetworkAccessManager;
+class QNetworkReply;
 
 class CMapWMTS  : public IMap
 {
+    Q_OBJECT
     public:
         CMapWMTS(const QString& filename, CMapDraw *parent);
         virtual ~CMapWMTS();
 
         void draw(IDrawContext::buffer_t& buf);
+
+    signals:
+        void sigQueueChanged();
+
+    private slots:
+        void slotQueueChanged();
+        void slotRequestFinished(QNetworkReply* reply);
 
     private:
         struct layer_t
@@ -67,9 +78,20 @@ class CMapWMTS  : public IMap
 
         QMap<QString,tileset_t> tilesets;
 
-        IDiskCache * diskCache;
 
+        /// Mutex to control access to url queue
+        QMutex mutex;
+        /// a queue with all tile urls to request
+        QQueue<QString> urlQueue;
+        /// the tile cache
+        IDiskCache * diskCache;
+        /// access mangager to request tiles
         QNetworkAccessManager * accessManager;
+
+        QList<QString> urlPending;
+
+        bool lastRequest;
+
 };
 
 #endif //CMAPWMTS_H

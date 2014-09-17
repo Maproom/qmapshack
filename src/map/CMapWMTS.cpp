@@ -64,9 +64,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     QString ServiceType         = xmlServiceIdentification.firstChildElement("ServiceType").text();
     QString ServiceTypeVersion  = xmlServiceIdentification.firstChildElement("ServiceTypeVersion").text();
 
-    if(ServiceType != "OGC WMTS" || ServiceTypeVersion != "1.0.0")
+    if(!ServiceType.contains("WMTS", Qt::CaseInsensitive) || ServiceTypeVersion != "1.0.0")
     {
-        QMessageBox::critical(0, tr("Error..."), tr("Unexpexted service. 'OGC WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(0, tr("Error..."), tr("Unexpexted service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -102,12 +102,31 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         const QDomNode& xmlTileMatrixSetLink = xmlLayer.firstChildElement("TileMatrixSetLink");
         layer.tileMatrixSet = xmlTileMatrixSetLink.namedItem("TileMatrixSet").toElement().text();
 
+        const QDomNode& xmlTileMatrixSetLimits = xmlTileMatrixSetLink.firstChildElement("TileMatrixSetLimits");
+        if(xmlTileMatrixSetLimits.isElement())
+        {
+            const QDomNodeList& xmlTileMatrixLimits = xmlTileMatrixSetLimits.toElement().elementsByTagName("TileMatrixLimits");
+            const int L = xmlTileMatrixLimits.count();
+            for(int l = 0; l < L; l++)
+            {
+                const QDomNode& xmlTileMatrixLimit = xmlTileMatrixLimits.at(l);
+                QString Identifier          = xmlTileMatrixLimit.namedItem("TileMatrix").toElement().text();
+                layer.limits[Identifier]    = limit_t();
+                limit_t& limit              = layer.limits[Identifier];
+
+                limit.minTileRow = xmlTileMatrixLimit.namedItem("MinTileRow").toElement().text().toInt();
+                limit.maxTileRow = xmlTileMatrixLimit.namedItem("MaxTileRow").toElement().text().toInt();
+                limit.minTileCol = xmlTileMatrixLimit.namedItem("MinTileCol").toElement().text().toInt();
+                limit.maxTileCol = xmlTileMatrixLimit.namedItem("MaxTileCol").toElement().text().toInt();
+            }
+        }
+
         const QDomNode& xmlResourceURL = xmlLayer.firstChildElement("ResourceURL");
         const QDomNamedNodeMap& attr = xmlResourceURL.attributes();
 
         layer.resourceURL = attr.namedItem("template").nodeValue();
-        layer.resourceURL = layer.resourceURL.replace("{Style}",layer.styles[0]);
-        layer.resourceURL = layer.resourceURL.replace("{TileMatrixSet}",layer.tileMatrixSet);
+        layer.resourceURL = layer.resourceURL.replace("{style}",layer.styles[0], Qt::CaseInsensitive);
+        layer.resourceURL = layer.resourceURL.replace("{TileMatrixSet}",layer.tileMatrixSet, Qt::CaseInsensitive);
 
         qDebug() << layer.resourceURL;
         layers << layer;
@@ -162,7 +181,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             matrix.tileWidth    = xmlTileMatrix.namedItem("TileWidth").toElement().text().toInt();
             matrix.tileHeight   = xmlTileMatrix.namedItem("TileHeight").toElement().text().toInt();
             matrix.matrixWidth  = xmlTileMatrix.namedItem("MatrixWidth").toElement().text().toInt();
-            matrix.matrixHeight = xmlTileMatrix.namedItem("MatrixHeight").toElement().text().toInt();
+            matrix.matrixHeight = xmlTileMatrix.namedItem("MatrixHeight").toElement().text().toInt();                        
         }
 
     }
@@ -184,15 +203,24 @@ CMapWMTS::~CMapWMTS()
 void CMapWMTS::slotQueueChanged()
 {
     if(!urlQueue.isEmpty() && urlPending.size() < 6)
-    {
+    {        
         QMutexLocker lock(&mutex);
-        QString url = urlQueue.dequeue();        
-        lastRequest = urlQueue.isEmpty();
 
-        QNetworkRequest request;
-        request.setUrl(url);
-        accessManager->get(request);
-        urlPending << url;
+        for(int i = 0; i < (6 - urlPending.size()); i++)
+        {
+            QString url = urlQueue.dequeue();
+            lastRequest = urlQueue.isEmpty();
+
+            QNetworkRequest request;
+            request.setUrl(url);
+            accessManager->get(request);
+            urlPending << url;
+
+            if(lastRequest)
+            {
+                break;
+            }
+        }
     }
     else if(lastRequest)
     {
@@ -207,21 +235,18 @@ void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
 
     if(urlPending.contains(url))
     {
-        qDebug() << url;
         QImage img;
-
         // only take good responses
         if(!reply->error())
         {
             // read image data
             img.loadFromData(reply->readAll());
-        }
 
+        }
         // always store image to cache, the cache will take care of NULL images
         diskCache->store(url, img);
 
         urlPending.removeAll(url);
-
     }
 
     // debug output any error
@@ -247,15 +272,6 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
         return;
     }
 
-    qreal x1 = buf.ref1.x() < buf.ref4.x() ? buf.ref1.x() : buf.ref4.x();
-    qreal y1 = buf.ref1.y() > buf.ref2.y() ? buf.ref1.y() : buf.ref2.y();
-
-    qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
-    qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
-
-
-    QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
-
     // get pixel offset of top left buffer corner
     QPointF pp = buf.ref1;
     map->convertRad2Px(pp);
@@ -267,15 +283,24 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
     p.translate(-pp);
 
 
+    qreal x1 = buf.ref1.x() < buf.ref4.x() ? buf.ref1.x() : buf.ref4.x();
+    qreal y1 = buf.ref1.y() > buf.ref2.y() ? buf.ref1.y() : buf.ref2.y();
+
+    qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
+    qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
+
+    QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
+
     foreach(const layer_t& layer, layers)
     {
-        qDebug() << layer.boundingBox << viewport;
+//        qDebug() << layer.boundingBox << viewport;
         if(!layer.boundingBox.intersects(viewport))
         {
             continue;
         }
 
         const tileset_t& tileset = tilesets[layer.tileMatrixSet];
+        const QMap<QString,limit_t>& limits = layer.limits;
 
         QPointF pt1(x1,y1);
         QPointF pt2(x2,y2);
@@ -303,28 +328,77 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
         }
 
 //        qDebug() << tileMatrixId << s1 << tileset.tilematrix[tileMatrixId].scale* 0.28e-3;
+        qint32 minRow, maxRow, minCol, maxCol;
 
         const tilematrix_t& tilematrix = tileset.tilematrix[tileMatrixId];
-        quint32 col1 = qFloor((pt1.x() - tilematrix.topLeft.x()) / ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
-        quint32 row1 = qFloor((pt1.y() - tilematrix.topLeft.y()) / (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
 
-        quint32 col2 = qCeil((pt2.x() - tilematrix.topLeft.x()) / ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth));
-        quint32 row2 = qCeil((pt2.y() - tilematrix.topLeft.y()) / (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight));
-
-        for(quint32 row = row1; row <= row2; row++)
+        if(!limits.isEmpty())
         {
-            for(quint32 col = col1; col <= col2; col++)
+            if(limits.contains(tileMatrixId))
+            {
+                const limit_t& limit = limits[tileMatrixId];
+                minCol = limit.minTileCol;
+                maxCol = limit.maxTileCol;
+                minRow = limit.minTileRow;
+                maxRow = limit.maxTileRow;
+            }
+            else
+            {
+                // layer has limits but not for the selected tileMatrixId -> skip layer
+                continue;
+            }
+        }
+        else
+        {
+            minCol = 0;
+            maxCol = tilematrix.matrixWidth;
+            minRow = 0;
+            maxRow = tilematrix.matrixHeight;
+        }
+
+
+        qreal xscale =  tilematrix.scale * 0.28e-3;
+        qreal yscale = -tilematrix.scale * 0.28e-3;
+
+        qint32 col1 = qFloor((pt1.x() - tilematrix.topLeft.x()) / ( xscale * tilematrix.tileWidth));
+        qint32 row1 = qFloor((pt1.y() - tilematrix.topLeft.y()) / ( yscale * tilematrix.tileHeight));
+        qint32 col2 = qCeil((pt2.x()  - tilematrix.topLeft.x()) / ( xscale * tilematrix.tileWidth));
+        qint32 row2 = qCeil((pt2.y()  - tilematrix.topLeft.y()) / ( yscale * tilematrix.tileHeight));
+
+//        qDebug() << "-------" << tileMatrixId << layer.title;
+//        qDebug() << minCol << col1 << maxCol;
+//        qDebug() << minRow << row1 << maxRow;
+
+//        qDebug() << minCol << col2 << maxCol;
+//        qDebug() << minRow << row2 << maxRow;
+
+        if(col1 < minCol) col1 = minCol;
+        if(col1 > maxCol) col1 = maxCol;
+        if(row1 < minRow) row1 = minRow;
+        if(row1 > maxRow) row1 = maxRow;
+
+        if(col2 < minCol) col2 = minCol;
+        if(col2 > maxCol) col2 = maxCol;
+        if(row2 < minRow) row2 = minRow;
+        if(row2 > maxRow) row2 = maxRow;
+
+//        qDebug() << col1 << col2;
+//        qDebug() << row1 << row2;
+
+        for(qint32 row = row1; row <= row2; row++)
+        {
+            for(qint32 col = col1; col <= col2; col++)
             {
 
-                qreal xx1 = col       * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
-                qreal yy1 = row       * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
-                qreal xx2 = (col + 1) * ( tilematrix.scale * 0.28e-3 * tilematrix.tileWidth)  + tilematrix.topLeft.x();
-                qreal yy2 = (row + 1) * (-tilematrix.scale * 0.28e-3 * tilematrix.tileHeight) + tilematrix.topLeft.y();
+                qreal xx1 =  col      * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+                qreal yy1 =  row      * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
+                qreal xx2 = (col + 1) * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+                qreal yy2 = (row + 1) * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
 
                 QString url = layer.resourceURL;
-                url = url.replace("{TileMatrix}",tileMatrixId);
-                url = url.replace("{TileRow}",QString::number(row));
-                url = url.replace("{TileCol}",QString::number(col));
+                url = url.replace("{TileMatrix}",tileMatrixId, Qt::CaseInsensitive);
+                url = url.replace("{TileRow}",QString::number(row), Qt::CaseInsensitive);
+                url = url.replace("{TileCol}",QString::number(col), Qt::CaseInsensitive);
 
 //                qDebug() << url << xx1 << yy1 << xx2 << yy2 << pt1 << pt2;
 

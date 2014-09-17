@@ -22,8 +22,10 @@
 
 CDiskCache::CDiskCache(QObject * parent)
     : IDiskCache(parent)
-    , dummy("://pics/noMap256x256.png")
+    //, dummy("://pics/noMap256x256.png")
+    , dummy(256,256, QImage::Format_ARGB32)
 {
+    dummy.fill(Qt::transparent);
     dir = QDir::home().absoluteFilePath(".QMapShack");
 
     dir.mkpath(dir.path());
@@ -116,7 +118,7 @@ void CDiskCache::slotCleanup()
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     QDateTime now = QDateTime::currentDateTime();
     int days        = 1; //CResources::self().getExpireMapCache();
-    quint32 maxSize = 100 * 1024 * 1024; //CResources::self().getSizeMapCache() * 1024*1024;
+    quint32 maxSize = 1000 * 1024 * 1024; //CResources::self().getSizeMapCache() * 1024*1024;
 
     // expire old files and calculate cache size
     foreach(const QFileInfo& fileinfo, files)

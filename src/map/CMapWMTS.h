@@ -46,6 +46,14 @@ class CMapWMTS  : public IMap
         void slotRequestFinished(QNetworkReply* reply);
 
     private:
+        struct limit_t
+        {
+            qint32 minTileRow;
+            qint32 maxTileRow;
+            qint32 minTileCol;
+            qint32 maxTileCol;
+        };
+
         struct layer_t
         {
             QString     title;
@@ -53,6 +61,7 @@ class CMapWMTS  : public IMap
             QString     tileMatrixSet;
             QRectF      boundingBox;
             QString     resourceURL;
+            QMap<QString,limit_t> limits;
         };
 
         QList<layer_t> layers;

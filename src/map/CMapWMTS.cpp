@@ -85,6 +85,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
         layer.title = xmlLayer.firstChildElement("Title").text();
 
+        qDebug() << layer.title;
+
         // read bounding box
         const QDomNode& xmlBoundingBox = xmlLayer.firstChildElement("WGS84BoundingBox");
         str = xmlBoundingBox.namedItem("LowerCorner").toElement().text();
@@ -130,8 +132,27 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         layer.resourceURL = layer.resourceURL.replace("{style}",layer.styles[0], Qt::CaseInsensitive);
         layer.resourceURL = layer.resourceURL.replace("{TileMatrixSet}",layer.tileMatrixSet, Qt::CaseInsensitive);
 
-        qDebug() << layer.resourceURL;
+        // read and replace dimensions in url string by default value
+        const QDomNodeList& xmlDimensions = xmlLayer.toElement().elementsByTagName("Dimension");
+        const int D = xmlDimensions.count();
+        for(int d = 0; d < D; d++)
+        {
+            const QDomNode& xmlDimension = xmlDimensions.at(d);
+
+            QString Identifier = xmlDimension.namedItem("Identifier").toElement().text();
+            QString Default    = xmlDimension.namedItem("Default").toElement().text();
+
+            layer.resourceURL  = layer.resourceURL.replace("{" + Identifier + "}", Default, Qt::CaseInsensitive);
+        }
+
+        layer.enabled     = true;
+
         layers << layer;
+    }
+
+    if(layers.size() > 1)
+    {
+        flagsFeature |= eFeatLayers;
     }
 
     const QDomNodeList& xmlTileMatrixSets = xmlContents.childNodes();
@@ -204,10 +225,58 @@ CMapWMTS::~CMapWMTS()
 
 }
 
+void CMapWMTS::getLayers(QListWidget& list)
+{
+    list.clear();
+    if(layers.size() < 2)
+    {
+        return;
+    }
+
+    QListWidgetItem * item = new QListWidgetItem(tr("--- All ---"), &list);
+    item->setCheckState(Qt::Checked);
+    item->setData(Qt::UserRole, -1);
+
+    int i = 0;
+    foreach(const layer_t& layer, layers)
+    {
+        QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
+        item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
+        item->setData(Qt::UserRole, i++);
+    }
+
+    connect(&list, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotLayersChanged(QListWidgetItem*)));
+}
+
 void CMapWMTS::configureCache()
 {
     delete diskCache;
     diskCache = new CDiskCache(getCachePath(), getCacheSize(), getCacheExpiration(), this);
+}
+
+void CMapWMTS::slotLayersChanged(QListWidgetItem * item)
+{
+    bool isChecked = (item->checkState() == Qt::Checked);
+    int idx = item->data(Qt::UserRole).toInt();
+    if(idx < 0)
+    {
+        QListWidget * list = item->listWidget();
+        list->blockSignals(true);
+
+        for(int i = 0; i < layers.size(); i++)
+        {
+            list->item(i + 1)->setCheckState(isChecked ? Qt::Checked : Qt::Unchecked);
+            layers[i].enabled = isChecked;
+        }
+
+        list->blockSignals(false);
+    }
+    else
+    {
+        layers[idx].enabled = isChecked;
+    }
+
+    map->emitSigCanvasUpdate();
 }
 
 void CMapWMTS::slotQueueChanged()
@@ -244,7 +313,6 @@ void CMapWMTS::slotQueueChanged()
 void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
 {
     QString url = reply->url().toString();
-
     if(urlPending.contains(url))
     {
         QImage img;
@@ -308,7 +376,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
     // draw layers
     foreach(const layer_t& layer, layers)
     {
-        if(!layer.boundingBox.intersects(viewport))
+        if(!layer.boundingBox.intersects(viewport) || !layer.enabled)
         {
             continue;
         }

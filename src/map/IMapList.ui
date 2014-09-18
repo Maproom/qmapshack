@@ -43,6 +43,9 @@
        <height>32</height>
       </size>
      </property>
+     <property name="verticalScrollMode">
+      <enum>QAbstractItemView::ScrollPerPixel</enum>
+     </property>
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>

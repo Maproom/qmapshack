@@ -28,6 +28,7 @@ class CMapDraw;
 class IDiskCache;
 class QNetworkAccessManager;
 class QNetworkReply;
+class QListWidgetItem;
 
 class CMapWMTS  : public IMap
 {
@@ -38,6 +39,8 @@ class CMapWMTS  : public IMap
 
         void draw(IDrawContext::buffer_t& buf);
 
+        void getLayers(QListWidget& list);
+
     signals:
         void sigQueueChanged();
 
@@ -47,6 +50,7 @@ class CMapWMTS  : public IMap
     private slots:
         void slotQueueChanged();
         void slotRequestFinished(QNetworkReply* reply);
+        void slotLayersChanged(QListWidgetItem * item);
 
     private:
         struct limit_t
@@ -59,6 +63,7 @@ class CMapWMTS  : public IMap
 
         struct layer_t
         {
+            bool        enabled;
             QString     title;
             QStringList styles;
             QString     tileMatrixSet;

@@ -84,6 +84,10 @@ bool IDrawObject::isOutOfScale(const QPointF& scale)
     return false;
 }
 
+void IDrawObject::getLayers(QListWidget& list)
+{
+    list.clear();
+}
 
 void IDrawObject::setMinScale(qreal s)
 {

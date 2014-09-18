@@ -40,6 +40,7 @@ class IMap : public IDrawObject
              eFeatVisibility  = 0x00000001
             ,eFeatVectorItems = 0x00000002
             ,eFeatTileCache   = 0x00000004
+            ,eFeatLayers      = 0x00000008
         };
 
         virtual void draw(IDrawContext::buffer_t& buf) = 0;
@@ -76,6 +77,7 @@ class IMap : public IDrawObject
         bool hasFeatureVisibility(){return flagsFeature & eFeatVisibility;}
         bool hasFeatureVectorItems(){return flagsFeature & eFeatVectorItems;}
         bool hasFeatureTileCache(){return flagsFeature & eFeatTileCache;}
+        bool hasFeatureLayers(){return flagsFeature & eFeatLayers;}
 
     protected:
         void convertRad2M(QPointF &p);

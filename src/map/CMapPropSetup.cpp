@@ -65,6 +65,17 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     {
         frameTileCache->hide();
     }
+
+    if(mapfile->hasFeatureLayers())
+    {
+        frameLayers->show();
+        mapfile->getLayers(*listLayers);
+    }
+    else
+    {
+        frameLayers->hide();
+    }
+
 }
 
 CMapPropSetup::~CMapPropSetup()

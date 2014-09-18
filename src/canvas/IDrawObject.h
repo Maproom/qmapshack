@@ -22,6 +22,7 @@
 #include <QObject>
 
 class QSettings;
+class QListWidget;
 
 class IDrawObject : public QObject
 {
@@ -73,6 +74,7 @@ class IDrawObject : public QObject
 
         qint32 getCacheExpiration(){return cacheExpiration;}
 
+        virtual void getLayers(QListWidget& list);
 
     public slots:
         /**

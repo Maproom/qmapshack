@@ -95,7 +95,7 @@ class CMapWMTS  : public IMap
 
         QMap<QString,tileset_t> tilesets;
 
-
+        QString name;
         /// Mutex to control access to url queue
         QMutex mutex;
         /// a queue with all tile urls to request

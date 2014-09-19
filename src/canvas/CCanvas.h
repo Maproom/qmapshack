@@ -22,6 +22,7 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPointer>
+#include <QMap>
 
 class CMapDraw;
 class CGrid;
@@ -97,6 +98,19 @@ class CCanvas : public QWidget
         void resetMouse();
         void setMouseMoveWpt(CGisItemWpt& wpt);
 
+        /**
+           @brief Add a message by key to be reported on the canvas
+
+           Messages from various sources will be collected in a list and displayed in the top left corner
+           of the widget.
+
+           @note The object reporting has to take care to remove the message by reporting an empty string.
+
+           @param key   the key to identify the reporting object
+           @param msg   the message to report
+         */
+        void reportStatus(const QString& key, const QString& msg);
+
     signals:
         void sigMousePosition(const QPointF& pos, qreal ele);
 
@@ -120,6 +134,7 @@ class CCanvas : public QWidget
         void slotCheckTrackOnFocus();
 
     private:
+        void drawStatusMessages(QPainter& p);
         void drawScale(QPainter& p);
         void setZoom(bool in, redraw_e &needsRedraw);
 
@@ -158,6 +173,9 @@ class CCanvas : public QWidget
         QString keyTrackOnFocus;
         /// the track profile plot
         QPointer<IPlot>  plotTrackProfile;
+
+        QLabel * labelStatusMessages;
+        QMap<QString, QString> statusMessages;
 };
 
 #endif //CCANVAS_H

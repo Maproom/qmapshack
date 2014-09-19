@@ -115,6 +115,7 @@ class IMap : public IDrawObject
         /// the setup dialog. Use getSetup() for access
         QPointer<IMapProp> setup;
 
+        /// flag field for features defined in features_e
         quint32 flagsFeature;
 
 

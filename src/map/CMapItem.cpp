@@ -24,7 +24,7 @@
 #include "map/CMapVRT.h"
 #include "map/CMapMAP.h"
 #include "map/CMapWMTS.h"
-#include "map/CMapPropSetup.h"
+#include "map/IMapProp.h"
 #include <QtGui>
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);

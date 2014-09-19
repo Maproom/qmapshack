@@ -68,6 +68,10 @@ class CMapDraw : public IDrawContext
         */
         void getToolTip(const QPoint& px, QString& str);
 
+        /**
+           @brief Set projection of this draw context
+           @param proj      a proj4 string
+         */
         void setProjection(const QString& proj);
 
         static void setupMapPath();
@@ -75,6 +79,18 @@ class CMapDraw : public IDrawContext
         static void loadMapPath(QSettings &cfg);
         static const QStringList& getSupportedFormats(){return supportedFormats;}
 
+        /**
+           @brief Forward messages to CCanvas::reportStatus()
+
+           Messages from various sources will be collected in a list and displayed in the top left corner
+           of the widget.
+
+           @note The object reporting has to take care to remove the message by reporting an empty string.
+
+           @param key   the key to identify the reporting object
+           @param msg   the message to report
+         */
+        void reportStatusToCanvas(const QString& key, const QString& msg);
 
     protected:
         void drawt(buffer_t& currentBuffer);

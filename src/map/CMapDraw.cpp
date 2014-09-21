@@ -274,6 +274,28 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
     mapList->updateHelpText();
 }
 
+void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg)
+{
+    canvas->reportStatus(key, msg);
+//    if(msg.isEmpty())
+//    {
+//        statusMessages.remove(key);
+//    }
+//    else
+//    {
+//        statusMessages[key] = msg;
+//    }
+
+//    QString report;
+//    QStringList keys = statusMessages.keys();
+//    keys.sort();
+//    foreach(const QString& key, keys)
+//    {
+//        report += statusMessages[key] + "\n";
+//    }
+
+//    canvas->setStatusMessage(report);
+}
 
 void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer)
 {

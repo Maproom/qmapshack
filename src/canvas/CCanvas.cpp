@@ -91,6 +91,8 @@ CCanvas::CCanvas(QWidget *parent)
     loadIndicator2->start();
     demLoadIndicator->show();
 
+    labelStatusMessages = new QLabel(this);
+
 
     connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));
     connect(map, SIGNAL(sigStopThread()), mapLoadIndicator, SLOT(hide()));
@@ -153,6 +155,37 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     }
 }
 
+void CCanvas::reportStatus(const QString& key, const QString& msg)
+{
+    if(msg.isEmpty())
+    {
+        statusMessages.remove(key);
+    }
+    else
+    {
+        statusMessages[key] = msg;
+    }
+
+    QString report;
+    QStringList keys = statusMessages.keys();
+    keys.sort();
+    foreach(const QString& key, keys)
+    {
+        report += statusMessages[key] + "\n";
+    }
+
+    if(report.isEmpty())
+    {
+        labelStatusMessages->hide();
+    }
+    else
+    {
+        labelStatusMessages->show();
+        labelStatusMessages->setText(report);
+        labelStatusMessages->adjustSize();
+        update();
+    }
+}
 
 void CCanvas::resizeEvent(QResizeEvent * e)
 {
@@ -171,6 +204,8 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     QPoint p2(demLoadIndicator->width()>>1, demLoadIndicator->height()>>1);
     demLoadIndicator->move(rect().center() - p2);
+
+    labelStatusMessages->move(20,20);
 
     if(plotTrackProfile)
     {
@@ -221,6 +256,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     mouse->draw(p, rect());
     gis->draw(p, rect());
 
+    drawStatusMessages(p);
     drawScale(p);
 
     p.end();
@@ -387,6 +423,19 @@ void CCanvas::drawText(const QString& str, QPainter& p, const QRect& r, const QC
     p.setPen(color);
     p.drawText(r,Qt::AlignCenter,str);
 
+}
+
+void CCanvas::drawStatusMessages(QPainter& p)
+{
+    if(labelStatusMessages->isVisible())
+    {
+        QRect r = labelStatusMessages->rect();
+        r.adjust(-5, -5, 5, 5);
+        r.moveTopLeft(QPoint(15,15));
+        p.setPen(CCanvas::penBorderGray);
+        p.setBrush(CCanvas::brushBackWhite);
+        p.drawRoundedRect(r, 5, 5);
+    }
 }
 
 void CCanvas::drawScale(QPainter& p)

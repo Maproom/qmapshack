@@ -56,6 +56,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     }
     file.close();
 
+    // start to decode XML
+    // validate content as WMTS capability sheet
     const QDomElement& xmlCapabilities = dom.documentElement();
     if(xmlCapabilities.tagName() != "Capabilities")
     {
@@ -72,9 +74,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         return;
     }
 
+    // read setup of all layers
     const QDomNode& xmlContents = xmlCapabilities.namedItem("Contents");
     const QDomNodeList& xmlLayers = xmlContents.toElement().elementsByTagName("Layer");
-
     const int N = xmlLayers.count();
     for(int n = 0; n < N; n++)
     {
@@ -84,8 +86,6 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         layer_t layer;
 
         layer.title = xmlLayer.firstChildElement("Title").text();
-
-        qDebug() << layer.title;
 
         // read bounding box
         const QDomNode& xmlBoundingBox = xmlLayer.firstChildElement("WGS84BoundingBox");
@@ -106,6 +106,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         const QDomNode& xmlTileMatrixSetLink = xmlLayer.firstChildElement("TileMatrixSetLink");
         layer.tileMatrixSet = xmlTileMatrixSetLink.namedItem("TileMatrixSet").toElement().text();
 
+        // read limits if any
         const QDomNode& xmlTileMatrixSetLimits = xmlTileMatrixSetLink.firstChildElement("TileMatrixSetLimits");
         if(xmlTileMatrixSetLimits.isElement())
         {
@@ -125,6 +126,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             }
         }
 
+        // read resource URL of layer and replace placeholders by information that is already available
         const QDomNode& xmlResourceURL = xmlLayer.firstChildElement("ResourceURL");
         const QDomNamedNodeMap& attr = xmlResourceURL.attributes();
 
@@ -145,19 +147,20 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             layer.resourceURL  = layer.resourceURL.replace("{" + Identifier + "}", Default, Qt::CaseInsensitive);
         }
 
+        // enable layer by default
         layer.enabled     = true;
-
         layers << layer;
     }
 
+    // if there is more than one layer the layer list in the properties widget has to be enabled.
     if(layers.size() > 1)
     {
         flagsFeature |= eFeatLayers;
     }
 
+    // read setup of all tile matrices
     const QDomNodeList& xmlTileMatrixSets = xmlContents.childNodes();
     const int M = xmlTileMatrixSets.count();
-
     for(int m = 0; m < M; m++)
     {
         const QDomNode& xmlTileMatrixSet = xmlTileMatrixSets.at(m);
@@ -171,8 +174,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         tilesets[Identifier]    = tileset_t();
         tileset_t& tileset      = tilesets[Identifier];
 
+        // read projection string
         QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
-
         char * ptr = str.toLatin1().data();
         OGRSpatialReference oSRS;
         oSRS.importFromURN(ptr);
@@ -186,6 +189,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             return;
         }
 
+        // read information about all matrix levels
         const QDomNodeList& xmlTileMatrixN = xmlTileMatrixSet.toElement().elementsByTagName("TileMatrix");
         const int N = xmlTileMatrixN.count();
         for(int n = 0; n < N; n++)
@@ -208,14 +212,17 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         }
 
     }
+    // ----  done reading XML file
 
+    // create default cache path from filename
     QFileInfo fi(filename);
     slotSetCachePath(QDir::home().absoluteFilePath(".QMapShack/" + fi.baseName()));
 
     accessManager   = new QNetworkAccessManager(parent->thread());
-
     connect(this, SIGNAL(sigQueueChanged()), this, SLOT(slotQueueChanged()));
     connect(accessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+
+    name = fi.baseName().replace("_", " ");
 
     isActivated = true;
 }
@@ -304,9 +311,20 @@ void CMapWMTS::slotQueueChanged()
     }
     else if(lastRequest && urlPending.isEmpty())
     {
+        lastRequest = false;
         // if all tiles are received the map layer can be redrawn with all tiles from cache
         map->emitSigCanvasUpdate();
-        lastRequest = false;
+    }
+
+    // report status of pending tiles
+    int pending = urlQueue.size() + urlPending.size();
+    if(pending)
+    {
+        map->reportStatusToCanvas(name, tr("%1: %2 tiles pending").arg(name).arg(pending));
+    }
+    else
+    {
+        map->reportStatusToCanvas(name, "");
     }
 }
 
@@ -443,8 +461,8 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 
         qint32 col1 = qFloor((pt1.x() - tilematrix.topLeft.x()) / ( xscale * tilematrix.tileWidth));
         qint32 row1 = qFloor((pt1.y() - tilematrix.topLeft.y()) / ( yscale * tilematrix.tileHeight));
-        qint32 col2 = qCeil((pt2.x()  - tilematrix.topLeft.x()) / ( xscale * tilematrix.tileWidth));
-        qint32 row2 = qCeil((pt2.y()  - tilematrix.topLeft.y()) / ( yscale * tilematrix.tileHeight));
+        qint32 col2 = qFloor((pt2.x() - tilematrix.topLeft.x()) / ( xscale * tilematrix.tileWidth));
+        qint32 row2 = qFloor((pt2.y() - tilematrix.topLeft.y()) / ( yscale * tilematrix.tileHeight));
 
 
         if(col1 < minCol) col1 = minCol;
@@ -464,11 +482,6 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
             for(qint32 col = col1; col <= col2; col++)
             {
 
-                qreal xx1 =  col      * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
-                qreal yy1 =  row      * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
-                qreal xx2 = (col + 1) * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
-                qreal yy2 = (row + 1) * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
-
                 QString url = layer.resourceURL;
                 url = url.replace("{TileMatrix}",tileMatrixId, Qt::CaseInsensitive);
                 url = url.replace("{TileRow}",QString::number(row), Qt::CaseInsensitive);
@@ -478,7 +491,14 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
                 {
                     QImage img;
                     diskCache->restore(url, img);
+
                     QPolygonF l;
+
+                    qreal xx1 =  col      * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+                    qreal yy1 =  row      * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
+                    qreal xx2 = (col + 1) * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+                    qreal yy2 = (row + 1) * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
+
                     l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
                     pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
                     pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);

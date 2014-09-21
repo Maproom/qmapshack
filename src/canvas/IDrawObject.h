@@ -74,6 +74,22 @@ class IDrawObject : public QObject
 
         qint32 getCacheExpiration(){return cacheExpiration;}
 
+        /**
+           @brief Get QListWidgetItems to enable/disable map layers.
+
+           As this property is a bit more complex the idea is to reimplement the method
+           if the map type has layers. The implementation probably will clear the list
+           and insert a checkable list widget item into the list. Additionally it will
+           connect to the QListWidget's signals to be noticed by a change.
+
+           Different to other properties, that will get queried when ever the property
+           widget think it needs an update, getLayers() will only be called once uppon
+           property widget creation.
+
+           The default implementation will simply clear the list.
+
+           @param list
+         */
         virtual void getLayers(QListWidget& list);
 
     public slots:
@@ -105,25 +121,34 @@ class IDrawObject : public QObject
          */
         bool isOutOfScale(const QPointF& scale);
 
+        /**
+           @brief Setup a map cache using cachePath, cacheSizeMB and cacheExpiration
+
+           The default implementation does noting. Streaming maps will probably override
+           it to reconfigure their cache. The method is called when ever a cache property is
+           changed.
+         */
         virtual void configureCache(){}
 
     private:
+        /// the opacity level of a map
         qreal opacity;
-
+        /// the minimum scale a map is visible
         qreal minScale;
-
+        /// the maximum scale a map is visible
         qreal maxScale;
-
+        /// vector maps only: hide/show polygons
         bool showPolygons;
-
+        /// vector maps only: hide/show polylines
         bool showPolylines;
-
+        /// vector maps only: hide/show point of interest
         bool showPOIs;
 
+        /// streaming map only: path to cached tiles
         QString cachePath;
-
+        /// streaming map only: maximum size of all tiles in cache [MByte]
         qint32 cacheSizeMB;
-
+        /// streaming map only: maximum age of tiles in cache [days]
         qint32 cacheExpiration;
 
 };

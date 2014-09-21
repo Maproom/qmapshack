@@ -389,7 +389,14 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
     qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
     qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
 
+    if(x1 < -180.0*DEG_TO_RAD) x1 = -180*DEG_TO_RAD;
+    if(x2 >  180.0*DEG_TO_RAD) x2 =  180*DEG_TO_RAD;
+
+
     QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
+
+
+    qDebug() << (QPointF(x1,y1) * RAD_TO_DEG) << (QPointF(x2,y2) * RAD_TO_DEG);
 
     // draw layers
     foreach(const layer_t& layer, layers)
@@ -408,6 +415,12 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 
         pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
         pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+
+        if(pj_is_latlong(tileset.pjsrc))
+        {
+            pt1 *= RAD_TO_DEG;
+            pt2 *= RAD_TO_DEG;
+        }
 
         // search matrix ID of tile level with best matching scale
         QString tileMatrixId;

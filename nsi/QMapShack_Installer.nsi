@@ -19,7 +19,7 @@
 ; 03-Aug-2014 First version of QMapShack installer based on the existing QLandkarteGT installer
 
 ;=================== BEGIN SCRIPT ====================
-; Include for nice Setup UI
+; Include for nice Setup UI, see http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html
 !include MUI2.nsh
 
 ;------------------------------------------------------------------------
@@ -47,14 +47,15 @@ OutFile "QMapShack_Install.exe"
 ;!define MUI_COMPONENTSPAGE_SMALLDESC ;No value
 !define MUI_INSTFILESPAGE_COLORS "FFFFFF 000000" ;Two colors
 
+!define MUI_ICON "QMapShack.ico"
 !define MUI_HEADERIMAGE
-;!define MUI_HEADERIMAGE_BITMAP "logo_small.bmp"
-;!define MUI_WELCOMEFINISHPAGE_BITMAP "logo_big.bmp"
+!define MUI_HEADERIMAGE_BITMAP "MUI_HEADERIMAGE.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "MUI_WELCOMEFINISHPAGE.bmp"
 
 ; Page welcome description
 !define MUI_WELCOMEPAGE_TITLE "QMapShack"
 !define MUI_WELCOMEPAGE_TITLE_3LINES
-!define MUI_WELCOMEPAGE_TEXT "QMapShack is the successor of QLandkarte GT, based on a different concept. It allows the use of several workspaces and of several maps on a workspace. GIS data is handled  project-oriented and can be exchange with the device by drag-n-drop."
+!define MUI_WELCOMEPAGE_TEXT "QMapShack provides a versatile and fast display of raster and vector maps with visualization of GIS data such as tracks and waypoints. It allows the use of several workspaces and of several maps on a workspace. GIS data is handled project-oriented and can be exchanged with the device by drag-n-drop."
 
 !define MUI_LICENSEPAGE_CHECKBOX
 

@@ -109,6 +109,20 @@ int main(int argc, char ** argv)
     qInstallMessageHandler(myMessageOutput);
 #endif
 
+#ifdef WIN32
+	// setup environment variables for GDAL/Proj4
+	QString apppath = QCoreApplication::applicationDirPath();
+	apppath = apppath.replace("/", "\\");
+
+	//QString env_path = qgetenv("PATH");
+	//env_path += QString(";%1;%1\\proj\\apps;%1\\gdal\\apps;%1\\curl;").arg(apppath);
+	//qputenv("PATH", env_path.toUtf8());
+
+	qputenv("GDAL_DATA", QString("%1\\data").arg(apppath).toUtf8());
+	qputenv("PROJ_LIB", QString("%1\\share").arg(apppath).toUtf8());
+#endif
+
+
     // find Qt's transaltions first
     QString locale = QLocale::system().name();
     QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);

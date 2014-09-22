@@ -20,6 +20,7 @@
 #define CMAPMAP_H
 
 #include "map/IMap.h"
+#include "map/mapsforge/types.h"
 
 class CMapDraw;
 
@@ -30,6 +31,62 @@ class CMapMAP : public IMap
         virtual ~CMapMAP();
 
         void draw(IDrawContext::buffer_t& buf);
+
+    private:
+        enum exce_e {eErrOpen, eErrAccess, errFormat, errAbort};
+        struct exce_t
+        {
+            exce_t(exce_e err, const QString& msg) : err(err), msg(msg){}
+            exce_e err;
+            QString msg;
+        };
+
+        enum header_flags_e
+        {
+             eHeaderFlagDebugInfo = 0x80
+            ,eHeaderFlagStartPosition = 0x40
+            ,eHeaderFlagStartZoomLevel = 0x20
+            ,eHeaderFlagLanguage = 0x10
+            ,eHeaderFlagComment = 0x08
+            ,eHeaderFlagCreator = 0x04
+        };
+
+        struct header_t
+        {
+            header_t() : latStart(0), lonStart(0), zoomStart(0){}
+            char signature[20];
+            quint32 sizeHeader;
+            quint32 version;
+            quint64 sizeFile;
+            quint64 timestamp;
+            qint32  minLat;
+            qint32  minLon;
+            qint32  maxLat;
+            qint32  maxLon;
+            quint16 sizeTile;
+            utf8    projection;
+            quint8  flags;
+            // optional fields
+            qint32  latStart;
+            qint32  lonStart;
+            quint8  zoomStart;
+            utf8    language;
+            utf8    comment;
+            utf8    creator;
+
+        };
+
+        void readBasics();
+
+        QString filename;
+
+        header_t header;
+
+        /// top left point of the map
+        QPointF ref1;
+        /// bottom right point of the map
+        QPointF ref2;
+
 };
 
 #endif //CMAPMAP_H

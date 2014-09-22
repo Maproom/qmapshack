@@ -31,7 +31,7 @@
 
 QList<CMapDraw*> CMapDraw::maps;
 QStringList CMapDraw::mapPaths;
-QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts").split('|');
+QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.map").split('|');
 
 
 CMapDraw::CMapDraw(CCanvas *parent)

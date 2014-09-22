@@ -16,38 +16,54 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#include "mouse/CMouseEditLine.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisDraw.h"
 
-#include "mouse/IScrOpt.h"
+#include <QtWidgets>
 
-#include <QWidget>
-#include "ui_IScrOptTrk.h"
-
-class CGisItemTrk;
-class IMouse;
-
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
+CMouseEditLine::CMouseEditLine(const CGisItemTrk& trk, CGisDraw *gis, CCanvas *parent)
+    : IMouse(gis, parent)
 {
-    Q_OBJECT
-    public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptTrk();
+    cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+}
 
-        void draw(QPainter& p);
+CMouseEditLine::~CMouseEditLine()
+{
 
-    private slots:        
-        void slotDelete();
-        void slotEditDetails();
-        void slotProfile(bool on);
-        void slotCut();
-        void slotEdit();
+}
 
+void CMouseEditLine::draw(QPainter& p, const QRect &rect)
+{
 
-    private:
-        QString key;
-        QPointF anchor;
-};
+}
 
-#endif //CSCROPTTRK_H
+void CMouseEditLine::mousePressEvent(QMouseEvent * e)
+{
+    point  = e->pos();
+    if(e->button() == Qt::RightButton)
+    {
+        canvas->resetMouse();
+        canvas->update();
+    }
+    else if(e->button() == Qt::LeftButton)
+    {
+    }
 
+}
+
+void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
+{
+
+}
+
+void CMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
+{
+
+}
+
+void CMouseEditLine::wheelEvent(QWheelEvent * e)
+{
+
+}

@@ -33,7 +33,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
     label->setText(trk->getInfo());
 
     toolProfile->setChecked(trk->hasUserFocus());
-
+    toolEdit->setEnabled(!trk->isReadOnly());
 
     anchor = trk->getPointCloseBy(origin);
     move(anchor.toPoint() + QPoint(30,30));
@@ -41,9 +41,10 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
     show();        
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEdit()));
+    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
     connect(toolProfile, SIGNAL(toggled(bool)), this, SLOT(slotProfile(bool)));
     connect(toolCut, SIGNAL(clicked()), this, SLOT(slotCut()));
+    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
 }
 
 CScrOptTrk::~CScrOptTrk()
@@ -57,7 +58,7 @@ void CScrOptTrk::slotDelete()
     deleteLater();
 }
 
-void CScrOptTrk::slotEdit()
+void CScrOptTrk::slotEditDetails()
 {
     CGisWidget::self().editItemByKey(key);
     deleteLater();
@@ -72,6 +73,12 @@ void CScrOptTrk::slotProfile(bool on)
 void CScrOptTrk::slotCut()
 {
     CGisWidget::self().cutTrkByKey(key);
+    deleteLater();
+}
+
+void CScrOptTrk::slotEdit()
+{
+    CGisWidget::self().editTrkByKey(key);
     deleteLater();
 }
 

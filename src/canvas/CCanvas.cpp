@@ -27,6 +27,7 @@
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CMouseMoveWpt.h"
+#include "mouse/CMouseEditLine.h"
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -154,6 +155,18 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
         QApplication::setOverrideCursor(*mouse);
     }
 }
+
+void CCanvas::setMouseEditLine(CGisItemTrk& trk)
+{
+    mouse->deleteLater();
+    mouse = new CMouseEditLine(trk, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
 
 void CCanvas::reportStatus(const QString& key, const QString& msg)
 {

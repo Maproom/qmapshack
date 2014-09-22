@@ -29,6 +29,7 @@ class CGrid;
 class CDemDraw;
 class CGisDraw;
 class CGisItemWpt;
+class CGisItemTrk;
 class QSettings;
 class QPointF;
 class IMouse;
@@ -97,6 +98,7 @@ class CCanvas : public QWidget
 
         void resetMouse();
         void setMouseMoveWpt(CGisItemWpt& wpt);
+        void setMouseEditLine(CGisItemTrk& trk);
 
         /**
            @brief Add a message by key to be reported on the canvas

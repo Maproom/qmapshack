@@ -266,6 +266,23 @@ void CGisWidget::cutTrkByKey(const QString& key)
     emit sigChanged();
 }
 
+void CGisWidget::editTrkByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+    if(trk != 0)
+    {
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas != 0)
+        {
+            canvas->setMouseEditLine(*trk);
+        }
+    }
+
+    IGisItem::mutexItems.unlock();
+}
+
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());

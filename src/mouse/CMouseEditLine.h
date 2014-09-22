@@ -16,38 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#ifndef CMOUSEEDITLINE_H
+#define CMOUSEEDITLINE_H
 
-#include "mouse/IScrOpt.h"
+#include "mouse/IMouse.h"
 
-#include <QWidget>
-#include "ui_IScrOptTrk.h"
-
+class CGisDraw;
+class CCanvas;
 class CGisItemTrk;
-class IMouse;
 
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
+class CMouseEditLine  : public IMouse
 {
     Q_OBJECT
     public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &origin, IMouse *parent);
-        virtual ~CScrOptTrk();
+        CMouseEditLine(const CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
+        virtual ~CMouseEditLine();
 
-        void draw(QPainter& p);
+        void draw(QPainter& p, const QRect &rect);
+        void mousePressEvent(QMouseEvent * e);
+        void mouseMoveEvent(QMouseEvent * e);
+        void mouseReleaseEvent(QMouseEvent *e);
+        void wheelEvent(QWheelEvent * e);
 
-    private slots:        
-        void slotDelete();
-        void slotEditDetails();
-        void slotProfile(bool on);
-        void slotCut();
-        void slotEdit();
-
-
-    private:
-        QString key;
-        QPointF anchor;
 };
 
-#endif //CSCROPTTRK_H
+#endif //CMOUSEEDITLINE_H
 

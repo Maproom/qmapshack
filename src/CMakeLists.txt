@@ -71,6 +71,7 @@ set( SRCS
     mouse/IScrOpt.cpp
     mouse/CMouseNormal.cpp
     mouse/CMouseMoveWpt.cpp
+    mouse/CMouseEditLine.cpp
     mouse/CScrOptUnclutter.cpp    
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
@@ -163,6 +164,7 @@ set( HDRS
     mouse/IScrOpt.h
     mouse/CMouseNormal.h
     mouse/CMouseMoveWpt.h
+    mouse/CMouseEditLine.h
     mouse/CScrOptUnclutter.h    
     gis/WptIcons.h
     gis/CGisDraw.h

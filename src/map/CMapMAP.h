@@ -22,6 +22,8 @@
 #include "map/IMap.h"
 #include "map/mapsforge/types.h"
 
+#include <QList>
+
 class CMapDraw;
 
 class CMapMAP : public IMap
@@ -39,6 +41,15 @@ class CMapMAP : public IMap
             exce_t(exce_e err, const QString& msg) : err(err), msg(msg){}
             exce_e err;
             QString msg;
+        };
+
+        struct layer_t
+        {
+            quint8 baseZoom;
+            quint8 minZoom;
+            quint8 maxZoom;
+            quint64 offsetSubFile;
+            quint64 sizeSubFile;
         };
 
         enum header_flags_e
@@ -74,7 +85,12 @@ class CMapMAP : public IMap
             utf8    comment;
             utf8    creator;
 
+            QStringList tagsPOIs;
+            QStringList tagsWays;
+
         };
+
+        QList<layer_t> layers;
 
         void readBasics();
 

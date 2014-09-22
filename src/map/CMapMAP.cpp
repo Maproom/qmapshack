@@ -68,6 +68,7 @@ void CMapMAP::readBasics()
     QDataStream stream(&file);
     stream.setByteOrder(QDataStream::BigEndian);
 
+    // ---------- start file header ----------------------
     stream.readRawData(header.signature,sizeof(header.signature));
     if(strncmp(header.signature, "mapsforge binary OSM", sizeof(header.signature)) != 0)
     {
@@ -115,6 +116,39 @@ void CMapMAP::readBasics()
     {
         stream >> header.creator;
     }
+
+    quint16 size;
+    utf8 tag;
+    stream >> size;
+    for(int i = 0; i < size; i++)
+    {
+        stream >> tag;
+        header.tagsPOIs << tag;
+    }
+    stream >> size;
+    for(int i = 0; i < size; i++)
+    {
+        stream >> tag;
+        header.tagsWays << tag;
+    }
+
+
+    quint8 N;
+    stream >> N;
+    for(int i = 0; i < N; i++)
+    {
+        layer_t layer;
+        stream >> layer.baseZoom;
+        stream >> layer.minZoom;
+        stream >> layer.maxZoom;
+        stream >> layer.offsetSubFile;
+        stream >> layer.sizeSubFile;
+
+        layers << layer;
+    }
+    // ---------- end file header ----------------------
+
+
 
 }
 

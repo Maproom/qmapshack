@@ -38,6 +38,10 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
     connect(toolSetMaxScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMaxScale(bool)));
     connect(checkHillshading, SIGNAL(toggled(bool)), demfile, SLOT(slotSetHillshading(bool)));
     connect(checkHillshading, SIGNAL(clicked()), dem, SLOT(emitSigCanvasUpdate()));
+
+    connect(sliderHillshading, SIGNAL(valueChanged(int)), demfile, SLOT(slotSetFactorHillshade(int)));
+    connect(sliderHillshading, SIGNAL(valueChanged(int)), dem, SLOT(emitSigCanvasUpdate()));
+
 }
 
 CDemPropSetup::~CDemPropSetup()
@@ -57,6 +61,7 @@ void CDemPropSetup::slotPropertiesChanged()
     toolSetMaxScale->blockSignals(true);
     toolSetMinScale->blockSignals(true);
     checkHillshading->blockSignals(true);
+    sliderHillshading->blockSignals(true);
 
     sliderOpacity->setValue(demfile->getOpacity());
     qreal minScale = demfile->getMinScale();
@@ -67,11 +72,13 @@ void CDemPropSetup::slotPropertiesChanged()
     updateScaleLabel();
 
     checkHillshading->setChecked(demfile->doHillshading());
+    sliderHillshading->setValue(demfile->getFactorHillshading());
 
     sliderOpacity->blockSignals(false);
     toolSetMaxScale->blockSignals(false);
     toolSetMinScale->blockSignals(false);
     checkHillshading->blockSignals(false);
+    sliderHillshading->blockSignals(false);
 }
 
 void CDemPropSetup::slotScaleChanged(const QPointF& s)

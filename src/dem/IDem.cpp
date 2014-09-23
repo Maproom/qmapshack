@@ -47,6 +47,7 @@ IDem::IDem(CDemDraw *parent)
     , pjsrc(0)
     , isActivated(false)
     , bHillshading(false)
+    , factorHillshading(1.0)
 {
     slotSetOpacity(50);
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
@@ -70,6 +71,7 @@ void IDem::saveConfig(QSettings& cfg)
     IDrawObject::saveConfig(cfg);
 
     cfg.setValue("doHillshading",bHillshading);
+    cfg.setValue("factorHillshading", factorHillshading);
 }
 
 void IDem::loadConfig(QSettings& cfg)
@@ -77,6 +79,7 @@ void IDem::loadConfig(QSettings& cfg)
     IDrawObject::loadConfig(cfg);
 
     bHillshading = cfg.value("doHillshading",bHillshading).toBool();
+    factorHillshading = cfg.value("factorHillshading", factorHillshading).toFloat();
 }
 
 
@@ -88,6 +91,38 @@ IDemProp * IDem::getSetup()
     }
 
     return setup;
+}
+
+void IDem::slotSetFactorHillshade(int f)
+{
+    if(f == 0)
+    {
+        factorHillshading = 1.0;
+    }
+    else if(f < 0)
+    {
+        factorHillshading = - 1.0/f;
+    }
+    else
+    {
+        factorHillshading = f;
+    }
+}
+
+int IDem::getFactorHillshading()
+{
+    if(factorHillshading == 1.0)
+    {
+        return 0;
+    }
+    else if(factorHillshading < 1)
+    {
+        return - 1.0/factorHillshading;
+    }
+    else
+    {
+        return factorHillshading;
+    }
 }
 
 void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
@@ -106,8 +141,8 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
         for(int n = 1; n <= w; n++)
         {
             fillWindow(data, n, m, wp2, win);
-            dx          = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
-            dy          = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+            dx          = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale*factorHillshading);
+            dy          = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale*factorHillshading);
             aspect      = atan2(dy, dx);
             xx_plus_yy  = dx * dx + dy * dy;
             cang        = (SIN_ALT - ZFACT_COS_ALT * sqrt(xx_plus_yy) * sin(aspect - AZ)) / sqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);

@@ -59,8 +59,12 @@ class IDem : public IDrawObject
 
         bool doHillshading(){return bHillshading;}
 
+        int getFactorHillshading();
+
     public slots:
         void slotSetHillshading(bool yes){bHillshading = yes;}
+
+        void slotSetFactorHillshade(int f);
 
     protected:
 
@@ -112,6 +116,8 @@ class IDem : public IDrawObject
 
     private:
         bool bHillshading;
+
+        qreal factorHillshading;
 
 
 };

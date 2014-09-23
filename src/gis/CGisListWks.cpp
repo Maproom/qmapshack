@@ -44,6 +44,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionMoveWpt   = menuItem->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionFocusTrk  = menuItem->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
+    actionEditTrk   = menuItem->addAction(QIcon("://icons/32x32/LineMove.png"),tr("Edit Track Points"), this, SLOT(slotEditTrk()));
     actionFocusTrk->setCheckable(true);
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
@@ -286,11 +287,14 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         if(trk == 0)
         {
             actionFocusTrk->setVisible(false);
+            actionEditTrk->setVisible(false);
         }
         else
         {
             actionFocusTrk->setVisible(true);
+            actionEditTrk->setVisible(true);
             actionFocusTrk->setChecked(trk->hasUserFocus());
+            actionEditTrk->setEnabled(!trk->isReadOnly());
         }
         // display menu
         QPoint p = mapToGlobal(point);
@@ -421,6 +425,18 @@ void CGisListWks::slotFocusTrk(bool on)
     {
         QString key = gisItem->getKey();
         CGisWidget::self().focusTrkByKey(on, key);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotEditTrk()
+{
+    IGisItem::mutexItems.lock();
+    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().editTrkByKey(key);
     }
     IGisItem::mutexItems.unlock();
 }

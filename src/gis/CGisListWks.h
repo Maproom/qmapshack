@@ -48,8 +48,9 @@ class CGisListWks : public QTreeWidget
         void slotEditItem();
         void slotDeleteItem();
         void slotProjWpt();
-        void slotMoveWpt();
+        void slotMoveWpt();        
         void slotFocusTrk(bool on);
+        void slotEditTrk();
 
     private:
         QMenu * menuProject;
@@ -63,6 +64,7 @@ class CGisListWks : public QTreeWidget
         QAction * actionProjWpt;
         QAction * actionMoveWpt;
         QAction * actionFocusTrk;
+        QAction * actionEditTrk;
 
 };
 

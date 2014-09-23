@@ -55,7 +55,9 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
 
 void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
 {
+    point  = e->pos();
 
+    panCanvas(point);
 }
 
 void CMouseEditLine::mouseReleaseEvent(QMouseEvent *e)

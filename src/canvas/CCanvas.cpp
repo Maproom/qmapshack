@@ -266,7 +266,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     // ----- start to draw fast content -----
 
     grid->draw(p, rect());
-    mouse->draw(p, rect());
+    mouse->draw(p, needsRedraw, rect());
     gis->draw(p, rect());
 
     drawStatusMessages(p);
@@ -325,7 +325,7 @@ void CCanvas::enterEvent(QEvent * e)
     Q_UNUSED(e);
     QApplication::setOverrideCursor(*mouse);
 
-    setMouseTracking(true);
+    mouse->setMouseTracking(true);
 }
 
 
@@ -334,7 +334,7 @@ void CCanvas::leaveEvent(QEvent * e)
     Q_UNUSED(e);
     QApplication::restoreOverrideCursor();
 
-    setMouseTracking(false);
+    mouse->setMouseTracking(false);
 }
 
 void CCanvas::keyPressEvent(QKeyEvent * e)

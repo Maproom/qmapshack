@@ -42,7 +42,7 @@ CMouseMoveWpt::~CMouseMoveWpt()
 
 }
 
-void CMouseMoveWpt::draw(QPainter& p, const QRect &rect)
+void CMouseMoveWpt::draw(QPainter& p,  bool needsRedraw, const QRect &rect)
 {
     QString val, unit, str;
     qreal d, a1 = 0, a2 = 0;
@@ -133,6 +133,6 @@ void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
 
 void CMouseMoveWpt::wheelEvent(QWheelEvent * e)
 {
-
+    canvas->update();
 }
 

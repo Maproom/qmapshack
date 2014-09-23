@@ -38,6 +38,15 @@ IMouse::~IMouse()
 
 }
 
+void IMouse::setMouseTracking(bool enabled)
+{
+    canvas->setMouseTracking(enabled);
+    if(!enabled)
+    {
+        timer->stop();
+    }
+}
+
 void IMouse::slotPanCanvas()
 {
     panCanvas(point);
@@ -49,25 +58,25 @@ void IMouse::panCanvas(const QPoint& pos)
     if(pos.x() < SENSITIVE_FRAME)
     {
         int d = SENSITIVE_FRAME - pos.x();
-        canvas->moveMap(QPointF(d , 0));
+        canvas->moveMap(QPointF(d/2 , 0));
         timer->start();
     }
     else if(pos.x() > canvas->width() - SENSITIVE_FRAME)
     {
         int d = canvas->width() - SENSITIVE_FRAME - pos.x();
-        canvas->moveMap(QPointF(d, 0));
+        canvas->moveMap(QPointF(d/2, 0));
         timer->start();
     }
     else if(pos.y() < SENSITIVE_FRAME)
     {
         int d = SENSITIVE_FRAME - pos.y();
-        canvas->moveMap(QPointF(0, d));
+        canvas->moveMap(QPointF(0, d/2));
         timer->start();
     }
     else if(pos.y() > canvas->height() - SENSITIVE_FRAME)
     {
         int d = canvas->height() - SENSITIVE_FRAME - pos.y();
-        canvas->moveMap(QPointF(0, d));
+        canvas->moveMap(QPointF(0, d/2));
         timer->start();
     }
     else

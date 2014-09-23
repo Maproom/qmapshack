@@ -16,40 +16,44 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEMOVEWPT_H
-#define CMOUSEMOVEWPT_H
+#include "mouse/CScrOptPoint.h"
+#include "canvas/CCanvas.h"
 
-#include "mouse/IMouse.h"
+#include <QtWidgets>
 
-#include <QPixmap>
-
-class CCanvas;
-class CGisItemWpt;
-class CGisDraw;
-
-class CMouseMoveWpt : public IMouse
+CScrOptPoint::CScrOptPoint(const QPointF &point, QWidget *parent)
+    : IScrOpt(parent)
 {
-    public:
-        CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
-        virtual ~CMouseMoveWpt();
+    setupUi(this);
+    setOrigin(point.toPoint());
 
-        void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
-        void mousePressEvent(QMouseEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
-        void mouseReleaseEvent(QMouseEvent *e);
-        void wheelEvent(QWheelEvent * e);
+    move(point.toPoint() + QPoint(30,30));
+    adjustSize();
 
-    protected slots:
-        virtual void slotPanCanvas();
+}
 
-    private:
-        QString key;
-        QPointF origPos;
-        QPointF newPos;
-        QPointF focus;
-        QPixmap icon;
+CScrOptPoint::~CScrOptPoint()
+{
 
-};
+}
 
-#endif //CMOUSEMOVEWPT_H
+void CScrOptPoint::draw(QPainter& p)
+{
+    QRectF r = rect();
+    r.moveTopLeft(QPoint(x(), y()));
+    QPainterPath path1;
+    path1.addRoundedRect(r,5,5);
 
+    qDebug() << origin << r;
+
+    QPolygonF poly2;
+    poly2 << origin << (r.topLeft() + QPointF(10,0)) << (r.topLeft() + QPointF(0,10)) << origin;
+    QPainterPath path2;
+    path2.addPolygon(poly2);
+
+    path1 = path1.united(path2);
+
+    p.setPen(CCanvas::penBorderGray);
+    p.setBrush(CCanvas::brushBackWhite);
+    p.drawPolygon(path1.toFillPolygon());
+}

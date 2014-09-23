@@ -73,6 +73,7 @@ set( SRCS
     mouse/CMouseMoveWpt.cpp
     mouse/CMouseEditLine.cpp
     mouse/CScrOptUnclutter.cpp    
+    mouse/CScrOptPoint.cpp
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
@@ -165,7 +166,8 @@ set( HDRS
     mouse/CMouseNormal.h
     mouse/CMouseMoveWpt.h
     mouse/CMouseEditLine.h
-    mouse/CScrOptUnclutter.h    
+    mouse/CScrOptUnclutter.h
+    mouse/CScrOptPoint.h
     gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h
@@ -210,6 +212,7 @@ set( UIS
     map/IMapPropSetup.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
+    mouse/IScrOptPoint.ui
     gis/IGisWidget.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui

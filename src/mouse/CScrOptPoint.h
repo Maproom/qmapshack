@@ -16,40 +16,20 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEMOVEWPT_H
-#define CMOUSEMOVEWPT_H
+#ifndef CSCROPTPOINT_H
+#define CSCROPTPOINT_H
 
-#include "mouse/IMouse.h"
+#include "mouse/IScrOpt.h"
+#include "ui_IScrOptPoint.h"
 
-#include <QPixmap>
-
-class CCanvas;
-class CGisItemWpt;
-class CGisDraw;
-
-class CMouseMoveWpt : public IMouse
+class CScrOptPoint : public IScrOpt, private Ui::IScrOptPoint
 {
     public:
-        CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
-        virtual ~CMouseMoveWpt();
+        CScrOptPoint(const QPointF& point, QWidget * parent);
+        virtual ~CScrOptPoint();
 
-        void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
-        void mousePressEvent(QMouseEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
-        void mouseReleaseEvent(QMouseEvent *e);
-        void wheelEvent(QWheelEvent * e);
-
-    protected slots:
-        virtual void slotPanCanvas();
-
-    private:
-        QString key;
-        QPointF origPos;
-        QPointF newPos;
-        QPointF focus;
-        QPixmap icon;
-
+        void draw(QPainter& p);
 };
 
-#endif //CMOUSEMOVEWPT_H
+#endif //CSCROPTPOINT_H
 

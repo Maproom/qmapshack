@@ -40,7 +40,7 @@ class IMouse : public QObject
             eNormal
         };
 
-        virtual void draw(QPainter& p, const QRect &rect) = 0;
+        virtual void draw(QPainter& p, bool needsRedraw, const QRect &rect) = 0;
         virtual void mousePressEvent(QMouseEvent * e) = 0;
         virtual void mouseMoveEvent(QMouseEvent * e) = 0;
         virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
@@ -52,6 +52,8 @@ class IMouse : public QObject
         */
         operator const QCursor&(){return cursor;}
         CCanvas * getCanvas(){return canvas;}
+
+        virtual void setMouseTracking(bool enabled);
 
     protected slots:
         virtual void slotPanCanvas();

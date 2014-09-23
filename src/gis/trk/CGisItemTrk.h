@@ -86,6 +86,10 @@ class CGisItemTrk : public IGisItem
         */
         void edit();
 
+        /**
+           @brief Cut track at mouseClickFocus
+           @return Return true on success.
+         */
         bool cut();
         /**
            @brief Check for user focus
@@ -238,7 +242,7 @@ class CGisItemTrk : public IGisItem
             QString color;
         };
 
-        const trk_t& getTrackData(){return trk;}
+        const trk_t& getTrackData() const{return trk;}
 
     private:
         trk_t trk;

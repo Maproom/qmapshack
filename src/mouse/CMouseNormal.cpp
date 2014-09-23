@@ -200,7 +200,7 @@ void CMouseNormal::wheelEvent(QWheelEvent * e)
 }
 
 
-void CMouseNormal::draw(QPainter& p, const QRect &rect)
+void CMouseNormal::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 {
     // no mouse interaction while gis thread is running
     if(gis->isRunning())

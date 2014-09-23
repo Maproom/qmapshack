@@ -20,13 +20,14 @@
 #define CGISITEMRTE_H
 
 #include "gis/IGisItem.h"
+#include "gis/IGisLine.h"
 
 #include <QPen>
 
 class QDomNode;
 class CGisProject;
 
-class CGisItemRte : public IGisItem
+class CGisItemRte : public IGisItem, public IGisLine
 {
     public:
         CGisItemRte(const QDomNode &xml, CGisProject *parent);
@@ -45,6 +46,8 @@ class CGisItemRte : public IGisItem
         void save(QDomNode& gpx);
         bool isCloseTo(const QPointF& pos);
         void gainUserFocus(bool yes);
+
+        void replaceData(const QPolygonF& line){}
 
     private:
         struct rte_t;

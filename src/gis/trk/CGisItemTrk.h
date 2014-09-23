@@ -20,6 +20,7 @@
 #define CGISITEMTRK_H
 
 #include "gis/IGisItem.h"
+#include "gis/IGisLine.h"
 
 #include <QPen>
 #include <QPointer>
@@ -32,7 +33,7 @@ class CScrOptTrk;
 
 #define TRK_N_COLORS 17
 
-class CGisItemTrk : public IGisItem
+class CGisItemTrk : public IGisItem, public IGisLine
 {
     public:
         struct trk_t;
@@ -71,6 +72,7 @@ class CGisItemTrk : public IGisItem
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
 
+        void replaceData(const QPolygonF& line);
 
         /**
            @brief Switch user focus on and off.

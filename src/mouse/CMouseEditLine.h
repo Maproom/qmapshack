@@ -27,6 +27,7 @@ class CGisDraw;
 class CCanvas;
 class CGisItemTrk;
 class CScrOptPoint;
+class CScrOptEditLine;
 
 class CMouseEditLine  : public IMouse
 {
@@ -40,6 +41,11 @@ class CMouseEditLine  : public IMouse
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);
         void wheelEvent(QWheelEvent * e);
+
+    private slots:
+        void slotAbort();
+        void slotCopyToOrig();
+        void slotCopyToNew();
 
     private:
         int getPointCloseBy(const QPoint& screenPos);
@@ -58,6 +64,7 @@ class CMouseEditLine  : public IMouse
         int idxOfFocus;
 
         QPointer<CScrOptPoint> scrOptPoint;
+        CScrOptEditLine * scrOptEditLine;
 };
 
 #endif //CMOUSEEDITLINE_H

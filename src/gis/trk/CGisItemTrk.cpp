@@ -218,6 +218,35 @@ CGisItemTrk& CGisItemTrk::operator=(const CGisItemTrk& t)
     return *this;
 }
 
+void CGisItemTrk::replaceData(const QPolygonF &line)
+{
+    trk.segs.clear();
+    trk.segs.resize(1);
+    trkseg_t& seg = trk.segs.first();
+
+    seg.pts.resize(line.size());
+
+    QPolygonF ele(line.size());
+    CMainWindow::self().getEelevationAt(line, ele);
+
+    for(int i = 0; i < line.size(); i++)
+    {
+        trkpt_t& trkpt      = seg.pts[i];
+        const QPointF& pt   = line[i];
+
+        trkpt.lon = pt.x() * RAD_TO_DEG;
+        trkpt.lat = pt.y() * RAD_TO_DEG;
+        trkpt.ele = ele[i].y();
+    }
+
+    deriveSecondaryData();
+
+    flags |= eFlagTainted;
+    setText(1,"*");
+    parent()->setText(1,"*");
+    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."));
+}
+
 void CGisItemTrk::registerPlot(IPlot * plot)
 {
     registeredPlots << plot;

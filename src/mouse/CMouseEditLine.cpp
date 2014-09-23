@@ -18,9 +18,12 @@
 
 #include "mouse/CMouseEditLine.h"
 #include "mouse/CScrOptPoint.h"
+#include "mouse/CScrOptEditLine.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisWidget.h"
+#include "canvas/CCanvas.h"
+
 
 #include <QtWidgets>
 
@@ -46,11 +49,19 @@ CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
 
     line = coords;
     gis->convertRad2Px(line);
+
+    scrOptEditLine = new CScrOptEditLine(canvas);
+    scrOptEditLine->show();
+
+    connect(scrOptEditLine->pushSaveOrig, SIGNAL(clicked()), this, SLOT(slotCopyToOrig()));
+    connect(scrOptEditLine->pushSaveNew, SIGNAL(clicked()), this, SLOT(slotCopyToNew()));
+    connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
 }
 
 CMouseEditLine::~CMouseEditLine()
 {
     delete scrOptPoint;
+    delete scrOptEditLine;
 }
 
 void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
@@ -91,8 +102,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
     point  = e->pos();
     if(e->button() == Qt::RightButton)
     {
-        canvas->resetMouse();
-        canvas->update();
+        slotAbort();
     }
     else if(e->button() == Qt::LeftButton)
     {
@@ -131,7 +141,10 @@ void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
     {
         case eStateIdle:
         {
-            panCanvas(point);
+            if(!scrOptEditLine->rect().contains(point))
+            {
+                panCanvas(point);
+            }
 
             int old = idxOfFocus;
             idxOfFocus = getPointCloseBy(point);
@@ -175,4 +188,34 @@ int CMouseEditLine::getPointCloseBy(const QPoint& screenPos)
     if(d > 40) idx = -1;
 
     return idx;
+}
+
+void CMouseEditLine::slotAbort()
+{
+    canvas->resetMouse();
+    canvas->update();
+
+}
+
+void CMouseEditLine::slotCopyToOrig()
+{    
+    int res = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+    IGisLine * l = dynamic_cast<IGisLine*>(CGisWidget::self().getItemByKey(key));
+    if(l != 0)
+    {
+        l->replaceData(coords);
+    }
+    canvas->resetMouse();
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void CMouseEditLine::slotCopyToNew()
+{
+
 }

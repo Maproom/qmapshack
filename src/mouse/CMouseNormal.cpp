@@ -139,7 +139,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                             stateItemSel = eStateShowItemOptions;
 
                         }
-                    }
+                    }                    
                     break;
                 }
                 case eStateHooverMultiple:

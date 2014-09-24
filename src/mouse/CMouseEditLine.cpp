@@ -217,5 +217,20 @@ void CMouseEditLine::slotCopyToOrig()
 
 void CMouseEditLine::slotCopyToNew()
 {
+    CGisProject * project = CGisWidget::self().selectProject();
+    if(project == 0)
+    {
+        return;
+    }
 
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    if(trk == 0)
+    {
+        return;
+    }
+
+    new CGisItemTrk(coords, trk->getName(), project, -1);
+
+    canvas->resetMouse();
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }

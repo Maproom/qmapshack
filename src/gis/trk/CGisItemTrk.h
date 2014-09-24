@@ -47,6 +47,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * project);
         CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx);
+        CGisItemTrk(const QPolygonF& line, const QString &name, CGisProject * project, int idx);
         CGisItemTrk(const QDomNode &xml, CGisProject *project);
         virtual ~CGisItemTrk();
 
@@ -166,7 +167,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void deriveSecondaryData();
         const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
         void publishMouseFocus(const trkpt_t * pt, focusmode_e mode, IPlot *initiator);
-
+        void readLine(const QPolygonF &line);
 
     public:
         struct trkpt_t : public wpt_t

@@ -162,10 +162,28 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, in
     setText(1, "*");
     setText(0, trk.name);
     setToolTip(0, getInfo());
-
     key.clear();
     genKey();
+    project->setText(1,"*");
+}
 
+/// usd to create a track from a line of coordinates
+CGisItemTrk::CGisItemTrk(const QPolygonF& line, const QString& name, CGisProject * project, int idx)
+    : IGisItem(project, eTypeTrk, idx)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
+{
+    trk.name = name;
+    readLine(line);
+
+    flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
+
+    setColor(str2color(""));
+    setText(1, "*");
+    setText(0, trk.name);
+    setToolTip(0, getInfo());
+    genKey();
     project->setText(1,"*");
 }
 
@@ -220,6 +238,16 @@ CGisItemTrk& CGisItemTrk::operator=(const CGisItemTrk& t)
 
 void CGisItemTrk::replaceData(const QPolygonF &line)
 {
+    readLine(line);
+
+    flags |= eFlagTainted;
+    setText(1,"*");
+    parent()->setText(1,"*");
+    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."));
+}
+
+void CGisItemTrk::readLine(const QPolygonF &line)
+{
     trk.segs.clear();
     trk.segs.resize(1);
     trkseg_t& seg = trk.segs.first();
@@ -240,11 +268,6 @@ void CGisItemTrk::replaceData(const QPolygonF &line)
     }
 
     deriveSecondaryData();
-
-    flags |= eFlagTainted;
-    setText(1,"*");
-    parent()->setText(1,"*");
-    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."));
 }
 
 void CGisItemTrk::registerPlot(IPlot * plot)

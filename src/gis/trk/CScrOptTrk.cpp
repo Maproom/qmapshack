@@ -36,7 +36,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
     toolEdit->setEnabled(!trk->isReadOnly());
 
     anchor = trk->getPointCloseBy(origin);
-    move(anchor.toPoint() + QPoint(30,30));
+    move(anchor.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
     adjustSize();
     show();        
 

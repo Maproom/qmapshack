@@ -43,11 +43,19 @@ class CMouseEditLine  : public IMouse
         void wheelEvent(QWheelEvent * e);
 
     private slots:
+        void slotDeletePoint();
+        void slotSelectRange();
+
+
         void slotAbort();
         void slotCopyToOrig();
         void slotCopyToNew();
 
     private:
+        void drawPointOfFocus(QPainter& p);
+        void drawBullets(QPainter& p);
+        void drawHighlight1(QPainter& p);
+        void drawHighlight2(QPainter& p);
         int getPointCloseBy(const QPoint& screenPos);
         QString     key;
         QPolygonF   coords;
@@ -57,11 +65,15 @@ class CMouseEditLine  : public IMouse
         {
              eStateIdle
             ,eStatePointSelected
+            ,eStateSelectRange
+            ,eStateRangeSelected
 
         };
 
         state_e state;
-        int idxOfFocus;
+        qint32 idxOfFocus;
+        qint32 idxStart;
+        qint32 idxStop;
 
         QPointer<CScrOptPoint> scrOptPoint;
         CScrOptEditLine * scrOptEditLine;

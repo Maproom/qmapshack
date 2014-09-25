@@ -30,6 +30,9 @@
 CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
     , state(eStateIdle)
+    , idxOfFocus(-1)
+    , idxStart(-1)
+    , idxStop(-1)
 {
     cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
     key     = trk.getKey();
@@ -64,6 +67,64 @@ CMouseEditLine::~CMouseEditLine()
     delete scrOptEditLine;
 }
 
+void CMouseEditLine::drawPointOfFocus(QPainter& p)
+{
+    if(idxOfFocus < 0)
+    {
+        return;
+    }
+
+    const QPointF& pt = line[idxOfFocus];
+
+    p.setPen(Qt::darkBlue);
+    p.setBrush(QColor(255,255,255,200));
+    p.drawEllipse(pt, 6, 6);
+
+    QPixmap bullet("://icons/8x8/bullet_magenta.png");
+    p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
+}
+
+void CMouseEditLine::drawBullets(QPainter& p)
+{
+    QPixmap bullet("://icons/8x8/bullet_magenta.png");
+    foreach(const QPointF& pt, line)
+    {
+        p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
+    }
+}
+
+void CMouseEditLine::drawHighlight1(QPainter& p)
+{
+    if(idxStart < 0 || idxOfFocus < 0)
+    {
+        return;
+    }
+
+    int pos = idxOfFocus < idxStart ? idxOfFocus : idxStart;
+    int len = qAbs(idxOfFocus - idxStart) + 1;
+
+    QPolygonF highlight = line.mid(pos,len);
+
+    p.setPen(QPen(Qt::red, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(highlight);
+}
+
+void CMouseEditLine::drawHighlight2(QPainter& p)
+{
+    if(idxStart < 0 || idxStop < 0)
+    {
+        return;
+    }
+
+    int pos = idxStop < idxStart ? idxStop : idxStart;
+    int len = qAbs(idxStop - idxStart) + 1;
+
+    QPolygonF highlight = line.mid(pos,len);
+
+    p.setPen(QPen(Qt::red, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(highlight);
+}
+
 void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 {
     if(needsRedraw)
@@ -72,24 +133,31 @@ void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         gis->convertRad2Px(line);
     }
 
-    p.setPen(QPen(Qt::magenta, 5));
+    p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(line);
 
-    QPixmap bullet("://icons/8x8/bullet_magenta.png");
-    foreach(const QPointF& pt, line)
+    switch(state)
     {
-        p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
+        case eStateIdle:
+        case eStatePointSelected:
+            drawBullets(p);
+            drawPointOfFocus(p);
+            break;
+
+        case eStateSelectRange:
+            drawHighlight1(p);
+            drawBullets(p);
+            drawPointOfFocus(p);
+            break;
+
+        case eStateRangeSelected:
+            drawHighlight2(p);
+            drawBullets(p);
+            drawPointOfFocus(p);
+            break;
+        default:;
     }
 
-    if(idxOfFocus >= 0)
-    {
-        const QPointF& pt = line[idxOfFocus];
-
-        p.setPen(Qt::darkBlue);
-        p.setBrush(QColor(255,255,255,200));
-        p.drawEllipse(pt, 6, 6);
-        p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
-    }
 
     if(!scrOptPoint.isNull())
     {
@@ -102,7 +170,27 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
     point  = e->pos();
     if(e->button() == Qt::RightButton)
     {
-        slotAbort();
+        switch(state)
+        {
+
+            case eStateSelectRange:
+                cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+                QApplication::restoreOverrideCursor();
+                QApplication::setOverrideCursor(cursor);
+                //break; no break fall thru
+
+            case eStateRangeSelected:
+                state = eStateIdle;
+                idxOfFocus  = -1;
+                idxStart    = -1;
+                idxStop     = -1;
+
+                canvas->update();
+                break;
+
+            default:
+                slotAbort();
+        }
     }
     else if(e->button() == Qt::LeftButton)
     {
@@ -112,8 +200,10 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
             {
                 if(idxOfFocus >= 0)
                 {
-                    scrOptPoint = new CScrOptPoint(line[idxOfFocus], canvas);
+                    scrOptPoint = new CScrOptPoint(line[idxOfFocus], canvas);                    
                     scrOptPoint->show();
+                    connect(scrOptPoint->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeletePoint()));
+                    connect(scrOptPoint->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()));
                     canvas->update();
 
                     state = eStatePointSelected;
@@ -126,7 +216,32 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 canvas->update();
                 idxOfFocus = -1;
                 state = eStateIdle;
+                break;
             }
+            case eStateSelectRange:
+            {
+                state   = eStateRangeSelected;
+                idxStop = idxOfFocus;
+
+                cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+                QApplication::restoreOverrideCursor();
+                QApplication::setOverrideCursor(cursor);
+
+                canvas->update();
+                break;
+            }
+            case eStateRangeSelected:
+            {
+                state = eStateIdle;
+                idxOfFocus  = -1;
+                idxStart    = -1;
+                idxStop     = -1;
+
+                canvas->update();
+                break;
+            }
+
+
             default:;
         }
     }
@@ -140,6 +255,7 @@ void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
     switch(state)
     {
         case eStateIdle:
+        case eStateSelectRange:
         {
             if(!scrOptEditLine->rect().contains(point))
             {
@@ -190,11 +306,44 @@ int CMouseEditLine::getPointCloseBy(const QPoint& screenPos)
     return idx;
 }
 
+void CMouseEditLine::slotDeletePoint()
+{
+    if(idxOfFocus < 0)
+    {
+        return;
+    }
+    scrOptPoint->deleteLater();
+
+    coords.remove(idxOfFocus);
+    line.remove(idxOfFocus);
+
+    idxOfFocus  = -1;
+    state       = eStateIdle;
+
+    canvas->update();
+}
+
+void CMouseEditLine::slotSelectRange()
+{
+    if(idxOfFocus < 0)
+    {
+        return;
+    }
+    scrOptPoint->deleteLater();
+
+    idxStart    = idxOfFocus;
+    state       = eStateSelectRange;
+
+    cursor  = QCursor(QPixmap(":/cursors/cursorSelectRange.png"),0,0);
+    QApplication::restoreOverrideCursor();
+    QApplication::setOverrideCursor(cursor);
+
+}
+
 void CMouseEditLine::slotAbort()
 {
     canvas->resetMouse();
     canvas->update();
-
 }
 
 void CMouseEditLine::slotCopyToOrig()

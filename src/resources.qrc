@@ -90,6 +90,7 @@
         <file>icons/16x16/Tainted.png</file>
         <file>icons/16x16/AddWpt.png</file>
         <file>icons/16x16/LineMove.png</file>
+        <file>icons/16x16/SelectRange.png</file>
 
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
@@ -163,6 +164,7 @@
         <file>icons/32x32/Tainted.png</file>
         <file>icons/32x32/AddWpt.png</file>
         <file>icons/32x32/LineMove.png</file>
+        <file>icons/32x32/SelectRange.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -236,6 +238,7 @@
         <file>icons/48x48/Tainted.png</file>
         <file>icons/48x48/AddWpt.png</file>
         <file>icons/48x48/LineMove.png</file>
+        <file>icons/48x48/SelectRange.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>
@@ -296,6 +299,7 @@
         <file>cursors/cursorMoveMap.png</file>
         <file>cursors/cursorMoveWpt.png</file>
         <file>cursors/cursorMoveLine.png</file>
+        <file>cursors/cursorSelectRange.png</file>
         <file>cursors/wptHighlight.png</file>
         <file>animation/loader.gif</file>
         <file>animation/loader2.gif</file>

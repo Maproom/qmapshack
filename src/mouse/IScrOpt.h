@@ -25,6 +25,8 @@
 
 class QMouseEvent;
 
+#define SCR_OPT_OFFSET 15
+
 class IScrOpt : public QWidget
 {
     public:

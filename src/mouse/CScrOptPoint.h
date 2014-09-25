@@ -22,7 +22,7 @@
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptPoint.h"
 
-class CScrOptPoint : public IScrOpt, private Ui::IScrOptPoint
+class CScrOptPoint : public IScrOpt, public Ui::IScrOptPoint
 {
     public:
         CScrOptPoint(const QPointF& point, QWidget * parent);

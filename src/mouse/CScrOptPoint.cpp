@@ -27,7 +27,7 @@ CScrOptPoint::CScrOptPoint(const QPointF &point, QWidget *parent)
     setupUi(this);
     setOrigin(point.toPoint());
 
-    move(point.toPoint() + QPoint(30,30));
+    move(point.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
     adjustSize();
 
 }
@@ -43,8 +43,6 @@ void CScrOptPoint::draw(QPainter& p)
     r.moveTopLeft(QPoint(x(), y()));
     QPainterPath path1;
     path1.addRoundedRect(r,5,5);
-
-    qDebug() << origin << r;
 
     QPolygonF poly2;
     poly2 << origin << (r.topLeft() + QPointF(10,0)) << (r.topLeft() + QPointF(0,10)) << origin;

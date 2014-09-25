@@ -34,7 +34,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& origin, IMouse *parent)
 
 
     anchor = rte->getPointCloseBy(origin);
-    move(anchor.toPoint() + QPoint(30,30));
+    move(anchor.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
     adjustSize();
     show();
 

@@ -395,9 +395,6 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 
     QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
 
-
-    qDebug() << (QPointF(x1,y1) * RAD_TO_DEG) << (QPointF(x2,y2) * RAD_TO_DEG);
-
     // draw layers
     foreach(const layer_t& layer, layers)
     {

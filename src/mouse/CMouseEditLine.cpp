@@ -19,6 +19,7 @@
 #include "mouse/CMouseEditLine.h"
 #include "mouse/CScrOptPoint.h"
 #include "mouse/CScrOptEditLine.h"
+#include "mouse/CScrOptRange.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
@@ -65,6 +66,7 @@ CMouseEditLine::~CMouseEditLine()
 {
     delete scrOptPoint;
     delete scrOptEditLine;
+    delete scrOptRange;
 }
 
 void CMouseEditLine::drawPointOfFocus(QPainter& p)
@@ -163,6 +165,10 @@ void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
     {
         scrOptPoint->draw(p);
     }
+    if(!scrOptRange.isNull())
+    {
+        scrOptRange->draw(p);
+    }
 }
 
 void CMouseEditLine::mousePressEvent(QMouseEvent * e)
@@ -223,6 +229,10 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 state   = eStateRangeSelected;
                 idxStop = idxOfFocus;
 
+                scrOptRange = new CScrOptRange(line[idxStop], canvas);
+                scrOptRange->show();
+                connect(scrOptRange->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeleteRange()));
+
                 cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
                 QApplication::restoreOverrideCursor();
                 QApplication::setOverrideCursor(cursor);
@@ -232,6 +242,8 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
             }
             case eStateRangeSelected:
             {
+                delete scrOptRange;
+
                 state = eStateIdle;
                 idxOfFocus  = -1;
                 idxStart    = -1;
@@ -338,6 +350,28 @@ void CMouseEditLine::slotSelectRange()
     QApplication::restoreOverrideCursor();
     QApplication::setOverrideCursor(cursor);
 
+}
+
+void CMouseEditLine::slotDeleteRange()
+{
+    if(idxStart < 0 || idxStop < 0)
+    {
+        return;
+    }
+    scrOptRange->deleteLater();
+
+    int len = qAbs(idxStop - idxStart) + 1;
+    int idx = idxStart < idxStop ? idxStart : idxStop;
+    coords.remove(idx,len);
+    line = coords;
+    gis->convertRad2Px(line);
+
+    state = eStateIdle;
+    idxOfFocus  = -1;
+    idxStart    = -1;
+    idxStop     = -1;
+
+    canvas->update();
 }
 
 void CMouseEditLine::slotAbort()

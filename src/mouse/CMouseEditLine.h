@@ -28,6 +28,7 @@ class CCanvas;
 class CGisItemTrk;
 class CScrOptPoint;
 class CScrOptEditLine;
+class CScrOptRange;
 
 class CMouseEditLine  : public IMouse
 {
@@ -45,6 +46,7 @@ class CMouseEditLine  : public IMouse
     private slots:
         void slotDeletePoint();
         void slotSelectRange();
+        void slotDeleteRange();
 
 
         void slotAbort();
@@ -76,6 +78,7 @@ class CMouseEditLine  : public IMouse
         qint32 idxStop;
 
         QPointer<CScrOptPoint> scrOptPoint;
+        QPointer<CScrOptRange> scrOptRange;
         CScrOptEditLine * scrOptEditLine;
 };
 

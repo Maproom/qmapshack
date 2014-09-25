@@ -16,39 +16,20 @@
 
 **********************************************************************************************/
 
-#ifndef ISCROPT_H
-#define ISCROPT_H
+#ifndef CSCROPTRANGE_H
+#define CSCROPTRANGE_H
 
-#include <QWidget>
-#include <QPixmap>
-#include <QRect>
+#include "mouse/IScrOpt.h"
+#include "ui_IScrOptRange.h"
 
-class QMouseEvent;
-
-#define SCR_OPT_OFFSET 15
-
-class IScrOpt : public QWidget
+class CScrOptRange : public IScrOpt, public Ui::IScrOptRange
 {
     public:
-        IScrOpt(QWidget * parent);
-        virtual ~IScrOpt();
+        CScrOptRange(const QPointF& point, QWidget * parent);
+        virtual ~CScrOptRange();
 
-
-        void setOrigin(const QPoint& pos){origin = pos;}
-        const QPoint& getOrigin(){return origin;}
-
-        virtual void draw(QPainter& p) = 0;
-        virtual void mouseMoveEvent(QMouseEvent *);
-
-    protected:
-        void drawBubble(const QPointF &pt, QPainter& p);
-
-        QPoint origin;
-
-        QPoint mousePos;
-
-
+        void draw(QPainter& p);
 };
 
-#endif //ISCROPT_H
+#endif //CSCROPTRANGE_H
 

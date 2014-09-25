@@ -16,7 +16,8 @@
 
 **********************************************************************************************/
 
-#include "IScrOpt.h"
+#include "mouse/IScrOpt.h"
+#include "canvas/CCanvas.h"
 #include "units/IUnit.h"
 #include <QtWidgets>
 
@@ -36,4 +37,23 @@ IScrOpt::~IScrOpt()
 void IScrOpt::mouseMoveEvent(QMouseEvent * e)
 {
     mousePos = e->pos();
+}
+
+void IScrOpt::drawBubble(const QPointF& pt, QPainter& p)
+{
+    QRectF r = rect();
+    r.moveTopLeft(QPoint(x(), y()));
+    QPainterPath path1;
+    path1.addRoundedRect(r,5,5);
+
+    QPolygonF poly2;
+    poly2 << pt << (r.topLeft() + QPointF(10,0)) << (r.topLeft() + QPointF(0,10)) << pt;
+    QPainterPath path2;
+    path2.addPolygon(poly2);
+
+    path1 = path1.united(path2);
+
+    p.setPen(CCanvas::penBorderGray);
+    p.setBrush(CCanvas::brushBackWhite);
+    p.drawPolygon(path1.toFillPolygon());
 }

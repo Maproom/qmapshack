@@ -16,51 +16,27 @@
 
 **********************************************************************************************/
 
-#include "gis/rte/CScrOptRte.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/CGisWidget.h"
-#include "mouse/IMouse.h"
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
+#include "CScrOptRange.h"
 
-CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& origin, IMouse *parent)
-    : IScrOpt(parent->getCanvas())
-    , key(rte->getKey())
+#include <QtWidgets>
+
+CScrOptRange::CScrOptRange(const QPointF &point, QWidget *parent)
+    : IScrOpt(parent)
 {
     setupUi(this);
-    setOrigin(origin);
-    label->setFont(CMainWindow::self().getMapFont());
-    label->setText(rte->getInfo());
+    setOrigin(point.toPoint());
 
-
-    anchor = rte->getPointCloseBy(origin);
-    move(anchor.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
+    move(point.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
     adjustSize();
-    show();
-
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 }
 
-CScrOptRte::~CScrOptRte()
+CScrOptRange::~CScrOptRange()
 {
+
 
 }
 
-void CScrOptRte::slotDelete()
+void CScrOptRange::draw(QPainter& p)
 {
-    CGisWidget::self().delItemByKey(key);
-}
-
-
-void CScrOptRte::draw(QPainter& p)
-{
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
-    {
-        QWidget::deleteLater();
-        return;
-    }
-    item->drawHighlight(p);
-
-    drawBubble(anchor, p);
+    drawBubble(origin, p);
 }

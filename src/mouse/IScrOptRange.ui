@@ -29,7 +29,7 @@
    <item>
     <widget class="QToolButton" name="toolDelete">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete selected range of points.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>Delete selected range of points.</string>
      </property>
      <property name="text">
       <string>...</string>

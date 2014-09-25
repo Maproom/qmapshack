@@ -26,6 +26,7 @@ CScrOptEditLine::CScrOptEditLine(QWidget *parent)
     setupUi(this);
 
     move(0,0);
+    adjustSize();
 }
 
 CScrOptEditLine::~CScrOptEditLine()

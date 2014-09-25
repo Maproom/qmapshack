@@ -37,7 +37,7 @@
      <item>
       <widget class="QToolButton" name="toolEditDetails">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit properties of track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>View details &amp;amp; Edit properties of track.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -51,7 +51,7 @@
      <item>
       <widget class="QToolButton" name="toolDelete">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Delete</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -72,7 +72,7 @@
      <item>
       <widget class="QToolButton" name="toolProfile">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show on-screen profile and detailed information about points.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Show on-screen profile and detailed information about points.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -89,7 +89,7 @@
      <item>
       <widget class="QToolButton" name="toolCut">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cut track at selected point into two tracks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Cut track at selected point into two tracks.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -103,7 +103,7 @@
      <item>
       <widget class="QToolButton" name="toolEdit">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit position of track points.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Edit position of track points.</string>
        </property>
        <property name="text">
         <string>...</string>

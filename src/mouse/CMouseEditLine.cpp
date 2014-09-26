@@ -24,6 +24,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "canvas/CCanvas.h"
+#include "GeoMath.h"
 
 
 #include <QtWidgets>
@@ -31,7 +32,7 @@
 CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
     , state(eStateIdle)
-    , idxOfFocus(-1)
+    , idxFocus(-1)
     , idxStart(-1)
     , idxStop(-1)
 {
@@ -55,7 +56,6 @@ CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     gis->convertRad2Px(line);
 
     scrOptEditLine = new CScrOptEditLine(canvas);
-    scrOptEditLine->show();
 
     connect(scrOptEditLine->pushSaveOrig, SIGNAL(clicked()), this, SLOT(slotCopyToOrig()));
     connect(scrOptEditLine->pushSaveNew, SIGNAL(clicked()), this, SLOT(slotCopyToNew()));
@@ -71,12 +71,12 @@ CMouseEditLine::~CMouseEditLine()
 
 void CMouseEditLine::drawPointOfFocus(QPainter& p)
 {
-    if(idxOfFocus < 0)
+    if(idxFocus < 0)
     {
         return;
     }
 
-    const QPointF& pt = line[idxOfFocus];
+    const QPointF& pt = line[idxFocus];
 
     p.setPen(Qt::darkBlue);
     p.setBrush(QColor(255,255,255,200));
@@ -97,13 +97,13 @@ void CMouseEditLine::drawBullets(QPainter& p)
 
 void CMouseEditLine::drawHighlight1(QPainter& p)
 {
-    if(idxStart < 0 || idxOfFocus < 0)
+    if(idxStart < 0 || idxFocus < 0)
     {
         return;
     }
 
-    int pos = idxOfFocus < idxStart ? idxOfFocus : idxStart;
-    int len = qAbs(idxOfFocus - idxStart) + 1;
+    int pos = idxFocus < idxStart ? idxFocus : idxStart;
+    int len = qAbs(idxFocus - idxStart) + 1;
 
     QPolygonF highlight = line.mid(pos,len);
 
@@ -187,7 +187,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
 
             case eStateRangeSelected:
                 state = eStateIdle;
-                idxOfFocus  = -1;
+                idxFocus  = -1;
                 idxStart    = -1;
                 idxStop     = -1;
 
@@ -204,12 +204,56 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
         {
             case eStateIdle:
             {
-                if(idxOfFocus >= 0)
+                if(idxFocus >= 0)
                 {
-                    scrOptPoint = new CScrOptPoint(line[idxOfFocus], canvas);                    
-                    scrOptPoint->show();
+                    scrOptPoint = new CScrOptPoint(line[idxFocus], canvas);
+
+                    if(idxFocus == 0)
+                    {
+                        scrOptPoint->toolAdd1->setEnabled(false);
+                    }
+                    else
+                    {
+                        qreal a1, a2;
+                        const QPointF& pt1 = coords[idxFocus];
+                        const QPointF& pt2 = coords[idxFocus - 1];
+                        GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
+
+                        QPixmap pix("://icons/16x16/Up.png");
+                        QTransform trans;
+                        trans.rotate(a1);
+
+                        pix = pix.transformed(trans, Qt::SmoothTransformation);
+
+                        scrOptPoint->toolAdd1->setIcon(pix);
+                    }
+                    if(idxFocus == (line.size() - 1))
+                    {
+                        scrOptPoint->toolAdd2->setEnabled(false);
+                    }
+                    else
+                    {
+                        qreal a1, a2;
+                        const QPointF& pt1 = coords[idxFocus];
+                        const QPointF& pt2 = coords[idxFocus + 1];
+                        GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
+
+                        QPixmap pix("://icons/16x16/Up.png");
+                        QTransform trans;
+                        trans.rotate(a1);
+
+                        pix = pix.transformed(trans, Qt::SmoothTransformation);
+
+                        scrOptPoint->toolAdd2->setIcon(pix);
+
+                    }
+
+
+
+
                     connect(scrOptPoint->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeletePoint()));
                     connect(scrOptPoint->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()));
+                    connect(scrOptPoint->toolMove, SIGNAL(clicked()), this, SLOT(slotMovePoint()));
                     canvas->update();
 
                     state = eStatePointSelected;
@@ -220,17 +264,16 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
             {
                 delete scrOptPoint;                
                 canvas->update();
-                idxOfFocus = -1;
+                idxFocus = -1;
                 state = eStateIdle;
                 break;
             }
             case eStateSelectRange:
             {
                 state   = eStateRangeSelected;
-                idxStop = idxOfFocus;
+                idxStop = idxFocus;
 
                 scrOptRange = new CScrOptRange(line[idxStop], canvas);
-                scrOptRange->show();
                 connect(scrOptRange->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeleteRange()));
 
                 cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
@@ -245,7 +288,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 delete scrOptRange;
 
                 state = eStateIdle;
-                idxOfFocus  = -1;
+                idxFocus  = -1;
                 idxStart    = -1;
                 idxStop     = -1;
 
@@ -274,9 +317,9 @@ void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
                 panCanvas(point);
             }
 
-            int old = idxOfFocus;
-            idxOfFocus = getPointCloseBy(point);
-            if(old != idxOfFocus)
+            int old = idxFocus;
+            idxFocus = getPointCloseBy(point);
+            if(old != idxFocus)
             {
                 canvas->update();
             }
@@ -320,16 +363,16 @@ int CMouseEditLine::getPointCloseBy(const QPoint& screenPos)
 
 void CMouseEditLine::slotDeletePoint()
 {
-    if(idxOfFocus < 0)
+    if(idxFocus < 0)
     {
         return;
     }
     scrOptPoint->deleteLater();
 
-    coords.remove(idxOfFocus);
-    line.remove(idxOfFocus);
+    coords.remove(idxFocus);
+    line.remove(idxFocus);
 
-    idxOfFocus  = -1;
+    idxFocus  = -1;
     state       = eStateIdle;
 
     canvas->update();
@@ -337,13 +380,13 @@ void CMouseEditLine::slotDeletePoint()
 
 void CMouseEditLine::slotSelectRange()
 {
-    if(idxOfFocus < 0)
+    if(idxFocus < 0)
     {
         return;
     }
     scrOptPoint->deleteLater();
 
-    idxStart    = idxOfFocus;
+    idxStart    = idxFocus;
     state       = eStateSelectRange;
 
     cursor  = QCursor(QPixmap(":/cursors/cursorSelectRange.png"),0,0);
@@ -367,11 +410,16 @@ void CMouseEditLine::slotDeleteRange()
     gis->convertRad2Px(line);
 
     state = eStateIdle;
-    idxOfFocus  = -1;
+    idxFocus  = -1;
     idxStart    = -1;
     idxStop     = -1;
 
     canvas->update();
+}
+
+void CMouseEditLine::slotMovePoint()
+{
+
 }
 
 void CMouseEditLine::slotAbort()

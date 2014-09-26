@@ -31,7 +31,7 @@ class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
 {
     Q_OBJECT
     public:
-        CScrOptWpt(CGisItemWpt * wpt, const QPoint &origin, IMouse *parent);
+        CScrOptWpt(CGisItemWpt * wpt, const QPoint &point, IMouse *parent);
         virtual ~CScrOptWpt();
 
         void draw(QPainter& p);

@@ -23,21 +23,21 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 
-CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& origin, IMouse *parent)
+CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     : IScrOpt(parent->getCanvas())
     , key(trk->getKey())
 {
-    setupUi(this);
-    setOrigin(origin);
+    setupUi(this);    
+    setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(trk->getInfo());
+    adjustSize();
 
     toolProfile->setChecked(trk->hasUserFocus());
     toolEdit->setEnabled(!trk->isReadOnly());
 
-    anchor = trk->getPointCloseBy(origin);
-    move(anchor.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
-    adjustSize();
+    anchor = trk->getPointCloseBy(point);
+    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();        
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
@@ -92,5 +92,5 @@ void CScrOptTrk::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble(anchor, p);
+    drawBubble2(anchor, p);
 }

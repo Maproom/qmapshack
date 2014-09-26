@@ -1,4 +1,4 @@
-/**********************************************************************************************
+﻿/**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
@@ -361,7 +361,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
     str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
     if(pt.slope1 != NOFLOAT)
     {
-        str += QObject::tr(" slope: %1°(%2%)").arg(pt.slope1,2,'f',0).arg(pt.slope2, 2,'f',0);
+        str += QObject::tr(" slope: %1° (%2%)").arg(pt.slope1,2,'f',0).arg(pt.slope2, 2,'f',0);
     }
     if(pt.speed != NOFLOAT)
     {

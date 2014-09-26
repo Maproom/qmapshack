@@ -41,7 +41,8 @@ class IScrOpt : public QWidget
         virtual void mouseMoveEvent(QMouseEvent *);
 
     protected:
-        void drawBubble(const QPointF &pt, QPainter& p);
+        void drawBubble1(const QPointF &pt, QPainter& p);
+        void drawBubble2(const QPointF &pt, QPainter& p);
 
         QPoint origin;
 

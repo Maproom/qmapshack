@@ -27,21 +27,21 @@
 
 #include <QtWidgets>
 
-CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& origin, IMouse *parent)
+CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     : IScrOpt(parent->getCanvas())
     , key(wpt->getKey())
 {
     setupUi(this);
-    setOrigin(origin);
+    setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(IGisItem::removeHtml(wpt->getInfo()));
+    adjustSize();
 
     toolMove->setEnabled(!wpt->isReadOnly());
     toolProj->setEnabled(!wpt->isGeocache());
 
-    anchor = wpt->getPointCloseBy(origin);
-    move(anchor.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
-    adjustSize();
+    anchor = wpt->getPointCloseBy(point);
+    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
@@ -90,5 +90,5 @@ void CScrOptWpt::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble(anchor, p);
+    drawBubble2(anchor, p);
 }

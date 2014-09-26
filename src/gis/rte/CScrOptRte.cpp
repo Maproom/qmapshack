@@ -23,19 +23,18 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 
-CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& origin, IMouse *parent)
+CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     : IScrOpt(parent->getCanvas())
     , key(rte->getKey())
 {
     setupUi(this);
-    setOrigin(origin);
+    setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(rte->getInfo());
-
-
-    anchor = rte->getPointCloseBy(origin);
-    move(anchor.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
     adjustSize();
+
+    anchor = rte->getPointCloseBy(point);
+    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
@@ -62,5 +61,5 @@ void CScrOptRte::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble(anchor, p);
+    drawBubble2(anchor, p);
 }

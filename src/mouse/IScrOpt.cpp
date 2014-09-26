@@ -39,7 +39,7 @@ void IScrOpt::mouseMoveEvent(QMouseEvent * e)
     mousePos = e->pos();
 }
 
-void IScrOpt::drawBubble(const QPointF& pt, QPainter& p)
+void IScrOpt::drawBubble1(const QPointF& pt, QPainter& p)
 {
     QRectF r = rect();
     r.moveTopLeft(QPoint(x(), y()));
@@ -48,6 +48,25 @@ void IScrOpt::drawBubble(const QPointF& pt, QPainter& p)
 
     QPolygonF poly2;
     poly2 << pt << (r.topLeft() + QPointF(10,0)) << (r.topLeft() + QPointF(0,10)) << pt;
+    QPainterPath path2;
+    path2.addPolygon(poly2);
+
+    path1 = path1.united(path2);
+
+    p.setPen(CCanvas::penBorderGray);
+    p.setBrush(CCanvas::brushBackWhite);
+    p.drawPolygon(path1.toFillPolygon());
+}
+
+void IScrOpt::drawBubble2(const QPointF &pt, QPainter& p)
+{
+    QRectF r = rect();
+    r.moveTopLeft(QPoint(x(), y()));
+    QPainterPath path1;
+    path1.addRoundedRect(r,5,5);
+
+    QPolygonF poly2;
+    poly2 << pt << QPointF(pt.x() - 10, r.top() + 1) << QPointF(pt.x() + 10, r.top() + 1) << pt;
     QPainterPath path2;
     path2.addPolygon(poly2);
 

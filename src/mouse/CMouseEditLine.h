@@ -47,6 +47,7 @@ class CMouseEditLine  : public IMouse
         void slotDeletePoint();
         void slotSelectRange();
         void slotDeleteRange();
+        void slotMovePoint();
 
 
         void slotAbort();
@@ -69,11 +70,12 @@ class CMouseEditLine  : public IMouse
             ,eStatePointSelected
             ,eStateSelectRange
             ,eStateRangeSelected
+            ,eStateMovePoint
 
         };
 
         state_e state;
-        qint32 idxOfFocus;
+        qint32 idxFocus;
         qint32 idxStart;
         qint32 idxStop;
 

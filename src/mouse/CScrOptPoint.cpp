@@ -25,10 +25,12 @@ CScrOptPoint::CScrOptPoint(const QPointF &point, QWidget *parent)
     : IScrOpt(parent)
 {
     setupUi(this);
+    adjustSize();
+
     setOrigin(point.toPoint());
 
-    move(point.toPoint() + QPoint(SCR_OPT_OFFSET,SCR_OPT_OFFSET));
-    adjustSize();
+    move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    show();
 
 }
 
@@ -39,5 +41,5 @@ CScrOptPoint::~CScrOptPoint()
 
 void CScrOptPoint::draw(QPainter& p)
 {
-    drawBubble(origin, p);
+    drawBubble2(origin, p);
 }

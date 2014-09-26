@@ -48,11 +48,11 @@ CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
             {
                 continue;
             }
-            coords << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
+            coords1 << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
         }
     }
 
-    line = coords;
+    line = coords1;
     gis->convertRad2Px(line);
 
     scrOptEditLine = new CScrOptEditLine(canvas);
@@ -131,7 +131,7 @@ void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 {
     if(needsRedraw)
     {
-        line = coords;
+        line = coords1;
         gis->convertRad2Px(line);
     }
 
@@ -154,6 +154,11 @@ void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 
         case eStateRangeSelected:
             drawHighlight2(p);
+            drawBullets(p);
+            drawPointOfFocus(p);
+            break;
+
+        case eStateMovePoint:
             drawBullets(p);
             drawPointOfFocus(p);
             break;
@@ -186,14 +191,23 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 //break; no break fall thru
 
             case eStateRangeSelected:
-                state = eStateIdle;
-                idxFocus  = -1;
+                state       = eStateIdle;
+                idxFocus    = -1;
                 idxStart    = -1;
                 idxStop     = -1;
 
                 canvas->update();
                 break;
 
+            case eStateMovePoint:
+                state       = eStateIdle;
+                idxFocus    = -1;
+                coords1     = coords2;
+                line        = coords1;
+                gis->convertRad2Px(line);
+
+                canvas->update();
+                break;
             default:
                 slotAbort();
         }
@@ -215,8 +229,8 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                     else
                     {
                         qreal a1, a2;
-                        const QPointF& pt1 = coords[idxFocus];
-                        const QPointF& pt2 = coords[idxFocus - 1];
+                        const QPointF& pt1 = coords1[idxFocus];
+                        const QPointF& pt2 = coords1[idxFocus - 1];
                         GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
 
                         QPixmap pix("://icons/16x16/Up.png");
@@ -227,6 +241,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
 
                         scrOptPoint->toolAdd1->setIcon(pix);
                     }
+
                     if(idxFocus == (line.size() - 1))
                     {
                         scrOptPoint->toolAdd2->setEnabled(false);
@@ -234,8 +249,8 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                     else
                     {
                         qreal a1, a2;
-                        const QPointF& pt1 = coords[idxFocus];
-                        const QPointF& pt2 = coords[idxFocus + 1];
+                        const QPointF& pt1 = coords1[idxFocus];
+                        const QPointF& pt2 = coords1[idxFocus + 1];
                         GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
 
                         QPixmap pix("://icons/16x16/Up.png");
@@ -247,9 +262,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                         scrOptPoint->toolAdd2->setIcon(pix);
 
                     }
-
-
-
 
                     connect(scrOptPoint->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeletePoint()));
                     connect(scrOptPoint->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()));
@@ -287,16 +299,22 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
             {
                 delete scrOptRange;
 
-                state = eStateIdle;
-                idxFocus  = -1;
+                state       = eStateIdle;
+                idxFocus    = -1;
                 idxStart    = -1;
                 idxStop     = -1;
 
                 canvas->update();
                 break;
             }
+            case eStateMovePoint:
+            {
+                state       = eStateIdle;
+                idxFocus    = -1;
 
-
+                canvas->update();
+                break;
+            }
             default:;
         }
     }
@@ -323,6 +341,18 @@ void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             {
                 canvas->update();
             }
+            break;
+        }
+        case eStateMovePoint:
+        {
+            panCanvas(point);
+
+            QPointF pt      = point;
+            line[idxFocus]  = pt;
+            gis->convertPx2Rad(pt);
+            coords1[idxFocus]  = pt;
+
+            canvas->update();
             break;
         }
         default:;
@@ -369,7 +399,7 @@ void CMouseEditLine::slotDeletePoint()
     }
     scrOptPoint->deleteLater();
 
-    coords.remove(idxFocus);
+    coords1.remove(idxFocus);
     line.remove(idxFocus);
 
     idxFocus  = -1;
@@ -405,8 +435,8 @@ void CMouseEditLine::slotDeleteRange()
 
     int len = qAbs(idxStop - idxStart) + 1;
     int idx = idxStart < idxStop ? idxStart : idxStop;
-    coords.remove(idx,len);
-    line = coords;
+    coords1.remove(idx,len);
+    line = coords1;
     gis->convertRad2Px(line);
 
     state = eStateIdle;
@@ -419,7 +449,16 @@ void CMouseEditLine::slotDeleteRange()
 
 void CMouseEditLine::slotMovePoint()
 {
+    if(idxFocus < 0)
+    {
+        return;
+    }
+    scrOptPoint->deleteLater();
 
+    coords2 = coords1;
+    state = eStateMovePoint;
+
+    canvas->update();
 }
 
 void CMouseEditLine::slotAbort()
@@ -440,7 +479,7 @@ void CMouseEditLine::slotCopyToOrig()
     IGisLine * l = dynamic_cast<IGisLine*>(CGisWidget::self().getItemByKey(key));
     if(l != 0)
     {
-        l->replaceData(coords);
+        l->replaceData(coords1);
     }
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -460,7 +499,7 @@ void CMouseEditLine::slotCopyToNew()
         return;
     }
 
-    new CGisItemTrk(coords, trk->getName(), project, -1);
+    new CGisItemTrk(coords1, trk->getName(), project, -1);
 
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

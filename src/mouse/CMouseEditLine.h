@@ -61,7 +61,8 @@ class CMouseEditLine  : public IMouse
         void drawHighlight2(QPainter& p);
         int getPointCloseBy(const QPoint& screenPos);
         QString     key;
-        QPolygonF   coords;
+        QPolygonF   coords1;
+        QPolygonF   coords2;
         QPolygonF   line;
 
         enum state_e

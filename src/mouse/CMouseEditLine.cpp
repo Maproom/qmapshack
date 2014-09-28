@@ -289,7 +289,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                         const QPointF& pt2 = coords1[idxFocus + 1];
                         GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
 
-                        QPixmap pix("://icons/16x16/ToTop.png");
+                        QPixmap pix("://icons/32x32/ToTop.png");
                         QTransform trans;
                         trans.rotate(a1 + 180);
 
@@ -304,7 +304,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                         const QPointF& pt2 = coords1[idxFocus - 1];
                         GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
 
-                        QPixmap pix("://icons/16x16/Up.png");
+                        QPixmap pix("://icons/32x32/Up.png");
                         QTransform trans;
                         trans.rotate(a1);
 
@@ -320,7 +320,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                         const QPointF& pt2 = coords1[idxFocus - 1];
                         GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
 
-                        QPixmap pix("://icons/16x16/ToTop.png");
+                        QPixmap pix("://icons/32x32/ToTop.png");
                         QTransform trans;
                         trans.rotate(a1 + 180);
 
@@ -337,7 +337,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                         const QPointF& pt2 = coords1[idxFocus + 1];
                         GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
 
-                        QPixmap pix("://icons/16x16/Up.png");
+                        QPixmap pix("://icons/32x32/Up.png");
                         QTransform trans;
                         trans.rotate(a1);
 

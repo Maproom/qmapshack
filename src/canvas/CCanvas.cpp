@@ -156,6 +156,17 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     }
 }
 
+void CCanvas::setMouseEditLine(QPointF& pt)
+{
+    mouse->deleteLater();
+    mouse = new CMouseEditLine(pt, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
 void CCanvas::setMouseEditLine(CGisItemTrk& trk)
 {
     mouse->deleteLater();
@@ -332,7 +343,12 @@ void CCanvas::enterEvent(QEvent * e)
 void CCanvas::leaveEvent(QEvent * e)
 {
     Q_UNUSED(e);
+    // bad hack to stop bad number of overide cursors.
     QApplication::restoreOverrideCursor();
+    QApplication::restoreOverrideCursor();
+    QApplication::restoreOverrideCursor();
+    QApplication::restoreOverrideCursor();
+
 
     mouse->setMouseTracking(false);
 }

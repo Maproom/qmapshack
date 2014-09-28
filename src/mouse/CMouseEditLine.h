@@ -34,6 +34,19 @@ class CMouseEditLine  : public IMouse
 {
     Q_OBJECT
     public:
+        /**
+           @brief Start to create a new track with given point as first track point
+           @param point     the starting point
+           @param gis       the draw context to use
+           @param parent    the canvas to use
+         */
+        CMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+        /**
+           @brief Edit an existing track
+           @param trk       the track to edit
+           @param gis       the draw context to use
+           @param parent    the canvas to use
+         */
         CMouseEditLine(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
         virtual ~CMouseEditLine();
 
@@ -48,7 +61,13 @@ class CMouseEditLine  : public IMouse
         void slotSelectRange();
         void slotDeleteRange();
         void slotMovePoint();
+        /**
+           @brief Add points towards start of track (eStateAddPointBwd)
+         */
         void slotAddPoint1();
+        /**
+           @brief Add points toward end of track (eStateAddPointFwd)
+         */
         void slotAddPoint2();
 
 
@@ -68,11 +87,13 @@ class CMouseEditLine  : public IMouse
         /// the line's coordinates in [rad]
         QPolygonF   coords1;
         /// backup for coord1
-        QPolygonF   coords2;
+        QPolygonF   save;
         /// the line's coordinates in [pixel]
         QPolygonF   line;
 
+        /// the temporary line of new point to add [rad]
         QPolygonF   newCoords;
+        /// the temporary line of new point to add [pixel]
         QPolygonF   newLine;
 
         enum state_e
@@ -82,7 +103,7 @@ class CMouseEditLine  : public IMouse
             ,eStateSelectRange
             ,eStateRangeSelected
             ,eStateMovePoint
-            ,eStateAddPointBck
+            ,eStateAddPointBwd
             ,eStateAddPointFwd
 
         };

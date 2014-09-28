@@ -99,6 +99,7 @@ class CCanvas : public QWidget
         void resetMouse();
         void setMouseMoveWpt(CGisItemWpt& wpt);
         void setMouseEditLine(CGisItemTrk& trk);
+        void setMouseEditLine(QPointF& pt);
 
         /**
            @brief Add a message by key to be reported on the canvas

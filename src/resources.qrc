@@ -90,6 +90,7 @@
         <file>icons/32x32/TrkProfile.png</file>
         <file>icons/32x32/Tainted.png</file>
         <file>icons/32x32/AddWpt.png</file>
+        <file>icons/32x32/AddTrk.png</file>
         <file>icons/32x32/LineMove.png</file>
         <file>icons/32x32/PointMove.png</file>
         <file>icons/32x32/SelectRange.png</file>
@@ -165,6 +166,7 @@
         <file>icons/48x48/TrkProfile.png</file>
         <file>icons/48x48/Tainted.png</file>
         <file>icons/48x48/AddWpt.png</file>
+        <file>icons/48x48/AddTrk.png</file>
         <file>icons/48x48/LineMove.png</file>
         <file>icons/48x48/PointMove.png</file>
         <file>icons/48x48/SelectRange.png</file>

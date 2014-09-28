@@ -513,6 +513,7 @@ void IPlot::drawData(QPainter& p)
         background << QPointF(left,bottom);
         background << QPointF(left,pty);
         background << QPointF(ptx,pty);
+        foreground << QPointF(ptx,pty);
 
         while(point != polyline.end())
         {

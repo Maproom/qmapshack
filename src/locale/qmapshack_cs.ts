@@ -1015,12 +1015,22 @@ Unknown structure.</source>
 <context>
     <name>CMouseEditLine</name>
     <message>
-        <location filename="../mouse/CMouseEditLine.cpp" line="385"/>
+        <location filename="../mouse/CMouseEditLine.cpp" line="266"/>
+        <source>Add points?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseEditLine.cpp" line="266"/>
+        <source>Add points to temporary line?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseEditLine.cpp" line="698"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditLine.cpp" line="385"/>
+        <location filename="../mouse/CMouseEditLine.cpp" line="698"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1031,6 +1041,11 @@ Unknown structure.</source>
         <location filename="../mouse/CMouseNormal.cpp" line="41"/>
         <source>Add Waypoint</source>
         <translation>Přidat cestovní bod</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <source>Add Track</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1991,8 +2006,26 @@ nebo
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mouse/IScrOptPoint.ui" line="63"/>
+        <source>Move selected point.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPoint.ui" line="77"/>
+        <source>Add points before the selected point.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPoint.ui" line="91"/>
+        <source>Add points after the selected point.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mouse/IScrOptPoint.ui" line="38"/>
         <location filename="../mouse/IScrOptPoint.ui" line="52"/>
+        <location filename="../mouse/IScrOptPoint.ui" line="66"/>
+        <location filename="../mouse/IScrOptPoint.ui" line="80"/>
+        <location filename="../mouse/IScrOptPoint.ui" line="94"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -2413,108 +2446,112 @@ line %2, column %3:
         <translation>Režim pouze pro čtení...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="306"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="307"/>
         <source>Length: %1 %2</source>
         <translation>Délka: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="313"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="314"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="321"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="322"/>
         <source>Time: %1</source>
         <translation>Čas: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="324"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="334"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="325"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="335"/>
         <source>, Speed: %1 %2</source>
         <translation>, Rychlost: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="331"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="332"/>
         <source>Moving: %1</source>
         <translation>Pohyb: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="340"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
         <source>Start: %1</source>
         <translation>Začátek: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="345"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="346"/>
         <source>End: %1</source>
         <translation>Konec: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="349"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="350"/>
         <source>Points: %1 (%2)</source>
         <translation>Body: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="361"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="362"/>
         <source>Ele.: %1 %2</source>
         <translation>Výška: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="364"/>
         <source> slope: %1Â°(%2%)</source>
-        <translation> sklon: %1Â°(%2%)</translation>
+        <translation type="obsolete"> sklon: %1Â°(%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="369"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="370"/>
         <source> speed: %1%2</source>
         <translation> rychlost: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="381"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="382"/>
         <source>Ascend: %1%2 (%3%)</source>
         <translation>Stoupání: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="385"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="386"/>
         <source>Ascend: - (-)</source>
         <translation>Stoupání: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="395"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="396"/>
         <source> Descend: - (-) </source>
         <translation> Klesání: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="416"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="417"/>
         <source> Moving: - (-) </source>
         <translation> Pohyb: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="391"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="392"/>
         <source> Descend: %1%2 (%3%)</source>
         <translation> Klesání: %1%2 (%3%) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="246"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="247"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="402"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="365"/>
+        <source> slope: %1° (%2%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="403"/>
         <source>Dist.: %1%2 (%3%)</source>
         <translation>Vzdálenost: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="406"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="407"/>
         <source>Dist.: - (-)</source>
         <translation>Vzdálenost: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="413"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation> Pohyb: %1%2 (%3%) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1021"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1022"/>
         <source>Changed color</source>
         <translation>Změněná barva</translation>
     </message>
@@ -2529,13 +2566,14 @@ line %2, column %3:
         <translation>Blízkost: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1010"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1011"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="327"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="211"/>
+        <location filename="../mouse/CMouseEditLine.cpp" line="734"/>
         <source>Edit name...</source>
         <translation>Upravit název...</translation>
     </message>
@@ -2604,6 +2642,11 @@ line %2, column %3:
         <location filename="../map/garmin/CGarminTyp.cpp" line="834"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation>Toto je souborový typ s neznámým druhem čáry. Nahlašte to, prosím!</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseEditLine.cpp" line="734"/>
+        <source>Enter new track name.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -238,6 +238,14 @@ CGisItemTrk& CGisItemTrk::operator=(const CGisItemTrk& t)
 
 void CGisItemTrk::replaceData(const QPolygonF &line)
 {
+    /*
+        as this will change the line significantly we better stop
+        all focus operations and close the detail dialog.
+    */
+    mouseClickFocus = 0;
+    mouseMoveFocus  = 0;
+    delete dlgDetails;
+
     readLine(line);
 
     flags |= eFlagTainted;
@@ -1141,7 +1149,7 @@ void CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 {
     const trkpt_t * newPointOfFocus = 0;
 
-    if(hasUserFocus() || (pt != NOPOINTF))
+    if(hasUserFocus() && (pt != NOPOINT))
     {
         /*
             Iterate over the polyline used to draw the track as it contains screen

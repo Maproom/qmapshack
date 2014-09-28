@@ -48,6 +48,8 @@ class CMouseEditLine  : public IMouse
         void slotSelectRange();
         void slotDeleteRange();
         void slotMovePoint();
+        void slotAddPoint1();
+        void slotAddPoint2();
 
 
         void slotAbort();
@@ -55,15 +57,23 @@ class CMouseEditLine  : public IMouse
         void slotCopyToNew();
 
     private:
+        void drawLine(const QPolygonF& l, QPainter& p);
         void drawPointOfFocus(QPainter& p);
-        void drawBullets(QPainter& p);
+        void drawBullets(const QPolygonF& l, QPainter& p);
         void drawHighlight1(QPainter& p);
         void drawHighlight2(QPainter& p);
         int getPointCloseBy(const QPoint& screenPos);
+
         QString     key;
+        /// the line's coordinates in [rad]
         QPolygonF   coords1;
+        /// backup for coord1
         QPolygonF   coords2;
+        /// the line's coordinates in [pixel]
         QPolygonF   line;
+
+        QPolygonF   newCoords;
+        QPolygonF   newLine;
 
         enum state_e
         {
@@ -72,6 +82,8 @@ class CMouseEditLine  : public IMouse
             ,eStateSelectRange
             ,eStateRangeSelected
             ,eStateMovePoint
+            ,eStateAddPointBck
+            ,eStateAddPointFwd
 
         };
 

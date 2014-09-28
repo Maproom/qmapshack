@@ -303,6 +303,7 @@
         <file>cursors/cursorMoveWpt.png</file>
         <file>cursors/cursorMoveLine.png</file>
         <file>cursors/cursorSelectRange.png</file>
+        <file>cursors/cursorAdd.png</file>
         <file>cursors/wptHighlight.png</file>
         <file>animation/loader.gif</file>
         <file>animation/loader2.gif</file>

@@ -242,7 +242,8 @@ void CGisItemTrk::replaceData(const QPolygonF &line)
 
     flags |= eFlagTainted;
     setText(1,"*");
-    parent()->setText(1,"*");
+    setToolTip(0, getInfo());
+    parent()->setText(1,"*");    
     changed(QObject::tr("Changed trackpoints, sacrificed all previous data."));
 }
 

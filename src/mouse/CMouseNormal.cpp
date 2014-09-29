@@ -40,6 +40,7 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     menu = new QMenu(canvas);
     menu->addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, SLOT(slotAddWpt()));
     menu->addAction(QIcon("://icons/32x32/AddTrk.png"), tr("Add Track"), this, SLOT(slotAddTrk()));
+    menu->addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"), this, SLOT(slotAddArea()));
 }
 
 CMouseNormal::~CMouseNormal()
@@ -308,6 +309,15 @@ void CMouseNormal::slotAddTrk()
     QPointF pt = point;
     gis->convertPx2Rad(pt);
 
-    canvas->setMouseEditLine(pt);
+    canvas->setMouseEditLine(pt, IGisItem::eTypeTrk);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void CMouseNormal::slotAddArea()
+{
+    QPointF pt = point;
+    gis->convertPx2Rad(pt);
+
+    canvas->setMouseEditLine(pt, IGisItem::eTypeOvl);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }

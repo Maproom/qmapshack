@@ -156,10 +156,10 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     }
 }
 
-void CCanvas::setMouseEditLine(const QPointF &pt)
+void CCanvas::setMouseEditLine(const QPointF &pt, qint32 type)
 {
     mouse->deleteLater();
-    mouse = new CMouseEditLine(pt, gis, this);
+    mouse = new CMouseEditLine(pt, type, gis, this);
     if(underMouse())
     {
         QApplication::restoreOverrideCursor();

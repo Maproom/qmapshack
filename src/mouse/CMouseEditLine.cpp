@@ -29,14 +29,24 @@
 
 #include <QtWidgets>
 
-CMouseEditLine::CMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * parent)
+CMouseEditLine::CMouseEditLine(const QPointF& point, qint32 type, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
+    , type(type)
     , state(eStateAddPointFwd)
     , idxFocus(0)
     , idxStart(-1)
     , idxStop(-1)
 {
-    cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+    if(type == IGisItem::eTypeOvl)
+    {
+        cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
+    }
+    else
+    {
+        cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+    }
+
+    cursor  = cursor1;
 
     // create a single point line
     coords1 << point;
@@ -55,12 +65,14 @@ CMouseEditLine::CMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * p
 
 CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
+    , type(IGisItem::eTypeTrk)
     , state(eStateIdle)
     , idxFocus(-1)
     , idxStart(-1)
     , idxStop(-1)
 {
-    cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+    cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+    cursor  = cursor1;
     key     = trk.getKey();
 
     // reset any focus the track might have.
@@ -111,8 +123,17 @@ CMouseEditLine::~CMouseEditLine()
 
 void CMouseEditLine::drawLine(const QPolygonF &l, QPainter& p)
 {
-    p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    p.drawPolyline(l);
+    if(type == IGisItem::eTypeOvl)
+    {
+        p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setBrush(QBrush(Qt::magenta, Qt::BDiagPattern));
+        p.drawPolygon(l);
+    }
+    else
+    {
+        p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.drawPolyline(l);
+    }
 }
 
 void CMouseEditLine::drawPointOfFocus(QPainter& p)
@@ -214,24 +235,30 @@ void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 
         case eStateAddPointFwd:
         case eStateAddPointBwd:
-            if(!(idxStart < 0))
-            {
-                drawLine(line.mid(0,idxStart + 1), p);
-                p.drawLine(line[idxStart], newLine.first());
-            }
+        {
+            QPolygonF l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop, -1);
+            drawLine(l, p);
+            drawBullets(l, p);
 
-            drawLine(newLine, p);
+//            if(!(idxStart < 0))
+//            {
+//                drawLine(line.mid(0,idxStart + 1), p);
+//                p.drawLine(line[idxStart], newLine.first());
+//            }
 
-            if(idxStop < line.size())
-            {
-                drawLine(line.mid(idxStop,-1), p);
-                p.drawLine(newLine.last(), line[idxStop]);
-            }
+//            drawLine(newLine, p);
 
-            drawBullets(line, p);
-            drawBullets(newLine, p);
+//            if(idxStop < line.size())
+//            {
+//                drawLine(line.mid(idxStop,-1), p);
+//                p.drawLine(newLine.last(), line[idxStop]);
+//            }
+
+//            drawBullets(line, p);
+//            drawBullets(newLine, p);
 
             break;
+        }
         default:;
     }
 
@@ -255,7 +282,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
         {
 
             case eStateSelectRange:                
-                cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+                cursor  = cursor1;
                 QApplication::restoreOverrideCursor();
                 QApplication::setOverrideCursor(cursor);
                 //break; no break fall thru
@@ -267,8 +294,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 idxFocus    = -1;
                 idxStart    = -1;
                 idxStop     = -1;
-
-                canvas->update();
                 break;
 
             case eStateMovePoint:
@@ -277,8 +302,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 coords1     = save;
                 line        = coords1;
                 gis->convertRad2Px(line);
-
-                canvas->update();
                 break;
 
             case eStateAddPointBwd:
@@ -306,11 +329,9 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 idxStart    = -1;
                 idxStop     = -1;
 
-                cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+                cursor  = cursor1;
                 QApplication::restoreOverrideCursor();
                 QApplication::setOverrideCursor(cursor);
-
-                canvas->update();
                 break;
 
             default:
@@ -321,8 +342,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 idxFocus    = -1;
                 idxStart    = -1;
                 idxStop     = -1;
-                canvas->update();
-        }
+        }        
     }
     else if(e->button() == Qt::LeftButton)
     {
@@ -426,7 +446,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                     connect(scrOptPoint->toolMove, SIGNAL(clicked()), this, SLOT(slotMovePoint()));
                     connect(scrOptPoint->toolAdd1, SIGNAL(clicked()), this, SLOT(slotAddPoint1()));
                     connect(scrOptPoint->toolAdd2, SIGNAL(clicked()), this, SLOT(slotAddPoint2()));
-                    canvas->update();
 
                     state = eStatePointSelected;
                 }
@@ -440,11 +459,9 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 scrOptRange = new CScrOptRange(line[idxStop], canvas);
                 connect(scrOptRange->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeleteRange()));
 
-                cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+                cursor  = cursor1;
                 QApplication::restoreOverrideCursor();
                 QApplication::setOverrideCursor(cursor);
-
-                canvas->update();
                 break;
             }
             case eStateAddPointFwd:
@@ -452,8 +469,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 newLine.append(newLine.last());
                 newCoords.append(newCoords.last());
                 idxFocus++;
-
-                canvas->update();
                 break;
             }
             case eStateAddPointBwd:
@@ -461,8 +476,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 newLine.prepend(newLine.first());
                 newCoords.prepend(newCoords.first());
                 idxFocus = 0;
-
-                canvas->update();
                 break;
             }
             default:
@@ -474,10 +487,10 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 idxFocus    = -1;
                 idxStart    = -1;
                 idxStop     = -1;
-                canvas->update();
             }
         }
     }
+    canvas->update();
 }
 
 void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)

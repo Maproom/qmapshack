@@ -90,6 +90,7 @@ set( SRCS
     gis/trk/CDetailsTrk.cpp
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
+    gis/ovl/CGisItemOvlArea.cpp
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
@@ -187,6 +188,7 @@ set( HDRS
     gis/trk/CDetailsTrk.cpp
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
+    gis/ovl/CGisItemOvlArea.cpp
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h

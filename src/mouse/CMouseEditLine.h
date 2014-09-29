@@ -40,7 +40,7 @@ class CMouseEditLine  : public IMouse
            @param gis       the draw context to use
            @param parent    the canvas to use
          */
-        CMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+        CMouseEditLine(const QPointF& point, qint32 type, CGisDraw * gis, CCanvas * parent);
         /**
            @brief Edit an existing track
            @param trk       the track to edit
@@ -94,6 +94,10 @@ class CMouseEditLine  : public IMouse
         void drawHighlight1(QPainter& p);
         void drawHighlight2(QPainter& p);
         int getPointCloseBy(const QPoint& screenPos);
+
+        qint32      type;
+
+        QCursor     cursor1;
 
         QString     key;
         /// the line's coordinates in [rad]

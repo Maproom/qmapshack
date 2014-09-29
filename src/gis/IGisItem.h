@@ -56,6 +56,7 @@ class IGisItem : public QTreeWidgetItem
               eTypeTrk
             , eTypeRte
             , eTypeWpt
+            , eTypeOvl
         };
 
         IGisItem(QTreeWidgetItem * parent, type_e typ, int idx);

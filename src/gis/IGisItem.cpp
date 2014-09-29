@@ -114,6 +114,23 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
                 }
             }
         }
+        else if(type() == eTypeOvl)
+        {
+            for(int n = parent->childCount() - 2; n >= 0; n--)
+            {
+                /** @note   The order of item types to test is given by the order items read from
+                            the GPX file in the CGisProject constructor.  */
+
+                int childType = parent->child(n)->type();
+                if(childType == eTypeOvl || childType == eTypeWpt || childType == eTypeRte || childType == eTypeTrk)
+                {
+                    parent->removeChild(this);
+                    parent->insertChild(n+1, this);
+                    break;
+                }
+            }
+        }
+
     }
 }
 

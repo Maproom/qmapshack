@@ -57,16 +57,28 @@ class CMouseEditLine  : public IMouse
         void wheelEvent(QWheelEvent * e);
 
     private slots:
+        /**
+           @brief Delete the selected point
+         */
         void slotDeletePoint();
+        /**
+           @brief Start to select a range of points
+         */
         void slotSelectRange();
+        /**
+           @brief Delete selected range of points
+         */
         void slotDeleteRange();
+        /**
+           @brief Move selected point
+         */
         void slotMovePoint();
         /**
-           @brief Add points towards start of track (eStateAddPointBwd)
+           @brief Add points in direction start of track (eStateAddPointBwd)
          */
         void slotAddPoint1();
         /**
-           @brief Add points toward end of track (eStateAddPointFwd)
+           @brief Add points in direction end of track (eStateAddPointFwd)
          */
         void slotAddPoint2();
 

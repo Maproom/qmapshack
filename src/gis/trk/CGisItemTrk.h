@@ -279,7 +279,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
             @note This is necessary because QTreeWidgetItem is not derived from QObject.
                   Thus no signals and slots can be handled. Probably this is because the
-                  signal/slot system would be a huge overhad on treewidgets with a large
+                  signal/slot system would be a huge overhead on treewidgets with a large
                   amount of items.
 
                   Anyway we need some kind of signaling between the track object and the

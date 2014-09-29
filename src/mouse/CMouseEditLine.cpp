@@ -48,11 +48,9 @@ CMouseEditLine::CMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * p
 
     // create permanent line edit on screen options
     scrOptEditLine = new CScrOptEditLine(canvas);
-    scrOptEditLine->pushSaveOrig->hide();
+    scrOptEditLine->pushSaveOrig->hide(); // hide as there is no original
     connect(scrOptEditLine->pushSaveNew, SIGNAL(clicked()), this, SLOT(slotCopyToNew()));
     connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
-
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
@@ -65,7 +63,7 @@ CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
     key     = trk.getKey();
 
-    // switch off any focus the track might have,
+    // reset any focus the track might have.
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick);
     if(trk.hasUserFocus())
@@ -97,6 +95,10 @@ CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     connect(scrOptEditLine->pushSaveNew, SIGNAL(clicked()), this, SLOT(slotCopyToNew()));
     connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
 
+    /*
+        trigger complete update of GIS components to make sure all changes to
+        the originating object are reflected on the canvas->
+    */
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -430,14 +432,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 }
                 break;
             }
-            case eStatePointSelected:
-            {
-                delete scrOptPoint;                
-                canvas->update();
-                idxFocus = -1;
-                state = eStateIdle;
-                break;
-            }
             case eStateSelectRange:
             {
                 state   = eStateRangeSelected;
@@ -449,26 +443,6 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 cursor  = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
                 QApplication::restoreOverrideCursor();
                 QApplication::setOverrideCursor(cursor);
-
-                canvas->update();
-                break;
-            }
-            case eStateRangeSelected:
-            {
-                delete scrOptRange;
-
-                state       = eStateIdle;
-                idxFocus    = -1;
-                idxStart    = -1;
-                idxStop     = -1;
-
-                canvas->update();
-                break;
-            }
-            case eStateMovePoint:
-            {
-                state       = eStateIdle;
-                idxFocus    = -1;
 
                 canvas->update();
                 break;
@@ -491,10 +465,19 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
                 canvas->update();
                 break;
             }
-            default:;
+            default:
+            {
+                delete scrOptPoint;
+                delete scrOptRange;
+
+                state       = eStateIdle;
+                idxFocus    = -1;
+                idxStart    = -1;
+                idxStop     = -1;
+                canvas->update();
+            }
         }
     }
-
 }
 
 void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
@@ -658,12 +641,13 @@ void CMouseEditLine::slotAddPoint1()
     }
     scrOptPoint->deleteLater();
 
-    newCoords.clear();
-    newLine.clear();
-
+    // set point with focus as temporary initial point
+    newCoords.clear();    
     newCoords << coords1[idxFocus];
+    newLine.clear();
     newLine   << line[idxFocus];
 
+    // mark gap to insert points
     idxStart = idxFocus - 1;
     idxStop  = idxFocus;
 
@@ -686,12 +670,13 @@ void CMouseEditLine::slotAddPoint2()
     }
     scrOptPoint->deleteLater();
 
+    // set point with focus as temporary initial point
     newCoords.clear();
+    newCoords << coords1[idxFocus];    
     newLine.clear();
-
-    newCoords << coords1[idxFocus];
     newLine   << line[idxFocus];
 
+    // mark gap to insert points
     idxStart = idxFocus;
     idxStop  = idxFocus + 1;
 
@@ -749,6 +734,7 @@ void CMouseEditLine::slotCopyToNew()
         return;
     }
 
+    /// @todo make this independent from track
     QString name;
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk != 0)

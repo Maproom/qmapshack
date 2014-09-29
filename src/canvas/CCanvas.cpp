@@ -156,7 +156,7 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     }
 }
 
-void CCanvas::setMouseEditLine(QPointF& pt)
+void CCanvas::setMouseEditLine(const QPointF &pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditLine(pt, gis, this);

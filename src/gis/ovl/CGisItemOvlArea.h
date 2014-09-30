@@ -27,8 +27,57 @@ class CGisProject;
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
     public:
-        CGisItemOvlArea(CGisProject * project);
+        CGisItemOvlArea(const QPolygonF& line, const QString &name, CGisProject * project, int idx);
         virtual ~CGisItemOvlArea();
+
+        void save(QDomNode& gpx);
+
+        void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+        void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+        void drawHighlight(QPainter& p);
+
+        void gainUserFocus(bool yes);
+
+        const QString& getName();
+        QString getInfo();
+
+        void getData(QPolygonF& line);
+
+        void setData(const QPolygonF& line);
+
+        bool isCloseTo(const QPointF& pos);
+
+    protected:
+        void genKey();
+
+
+    public:
+
+        struct pt_t : public wpt_t
+        {
+            pt_t(){}
+        };
+
+        struct area_t
+        {
+            area_t() : number(0) {}
+            // -- all gpx tags - start
+            QString name;
+            QString cmt;
+            QString desc;
+            QString src;
+            QList<link_t> links;
+            quint64 number;
+            QString type;
+            QVector<pt_t> pts;
+            // -- all gpx tags - stop
+
+            QString color;
+        };
+
+        area_t area;
+
+
 };
 
 #endif //CGISITEMOVLAREA_H

@@ -27,7 +27,8 @@
 #include "units/IUnit.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CMouseMoveWpt.h"
-#include "mouse/CMouseEditLine.h"
+#include "mouse/CMouseEditTrk.h"
+#include "mouse/CMouseEditArea.h"
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -156,10 +157,10 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     }
 }
 
-void CCanvas::setMouseEditLine(const QPointF &pt, qint32 type)
+void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
     mouse->deleteLater();
-    mouse = new CMouseEditLine(pt, type, gis, this);
+    mouse = new CMouseEditTrk(pt, gis, this);
     if(underMouse())
     {
         QApplication::restoreOverrideCursor();
@@ -167,10 +168,21 @@ void CCanvas::setMouseEditLine(const QPointF &pt, qint32 type)
     }
 }
 
-void CCanvas::setMouseEditLine(CGisItemTrk& trk)
+void CCanvas::setMouseEditTrk(CGisItemTrk& trk)
 {
     mouse->deleteLater();
-    mouse = new CMouseEditLine(trk, gis, this);
+    mouse = new CMouseEditTrk(trk, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
+void CCanvas::setMouseEditArea(const QPointF& pt)
+{
+    mouse->deleteLater();
+    mouse = new CMouseEditArea(pt, gis, this);
     if(underMouse())
     {
         QApplication::restoreOverrideCursor();

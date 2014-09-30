@@ -236,7 +236,7 @@ CGisItemTrk& CGisItemTrk::operator=(const CGisItemTrk& t)
     return *this;
 }
 
-void CGisItemTrk::replaceData(const QPolygonF &line)
+void CGisItemTrk::setData(const QPolygonF &line)
 {
     /*
         as this will change the line significantly we better stop
@@ -253,6 +253,23 @@ void CGisItemTrk::replaceData(const QPolygonF &line)
     setToolTip(0, getInfo());
     parent()->setText(1,"*");    
     changed(QObject::tr("Changed trackpoints, sacrificed all previous data."));
+}
+
+void CGisItemTrk::getData(QPolygonF &line)
+{
+    line.clear();
+    foreach (const CGisItemTrk::trkseg_t& seg, trk.segs)
+    {
+        foreach(const CGisItemTrk::trkpt_t& pt, seg.pts)
+        {
+            if(pt.flags & CGisItemTrk::trkpt_t::eDeleted)
+            {
+                continue;
+            }
+            line << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
+        }
+    }
+
 }
 
 void CGisItemTrk::readLine(const QPolygonF &line)

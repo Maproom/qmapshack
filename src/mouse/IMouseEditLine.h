@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEEDITLINE_H
-#define CMOUSEEDITLINE_H
+#ifndef IMOUSEEDITLINE_H
+#define IMOUSEEDITLINE_H
 
 #include "mouse/IMouse.h"
 #include <QPolygonF>
@@ -25,12 +25,12 @@
 
 class CGisDraw;
 class CCanvas;
-class CGisItemTrk;
+class IGisLine;
 class CScrOptPoint;
 class CScrOptEditLine;
 class CScrOptRange;
 
-class CMouseEditLine  : public IMouse
+class IMouseEditLine  : public IMouse
 {
     Q_OBJECT
     public:
@@ -40,15 +40,15 @@ class CMouseEditLine  : public IMouse
            @param gis       the draw context to use
            @param parent    the canvas to use
          */
-        CMouseEditLine(const QPointF& point, qint32 type, CGisDraw * gis, CCanvas * parent);
+        IMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * parent);
         /**
            @brief Edit an existing track
            @param trk       the track to edit
            @param gis       the draw context to use
            @param parent    the canvas to use
          */
-        CMouseEditLine(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
-        virtual ~CMouseEditLine();
+        IMouseEditLine(IGisLine &src, CGisDraw * gis, CCanvas * parent);
+        virtual ~IMouseEditLine();
 
         void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
         void mousePressEvent(QMouseEvent * e);
@@ -56,7 +56,7 @@ class CMouseEditLine  : public IMouse
         void mouseReleaseEvent(QMouseEvent *e);
         void wheelEvent(QWheelEvent * e);
 
-    private slots:
+    protected slots:
         /**
            @brief Delete the selected point
          */
@@ -85,23 +85,27 @@ class CMouseEditLine  : public IMouse
 
         void slotAbort();
         void slotCopyToOrig();
-        void slotCopyToNew();
+        virtual void slotCopyToNew() = 0;
 
-    private:
-        void drawLine(const QPolygonF& l, QPainter& p);
+    protected:
+        virtual void drawLine(const QPolygonF& l, QPainter& p);
+        /**
+           @brief Get access to the IGisLine object a subclass of IMouseEditLine is handling.
+           @return A valid pointer or 0.
+         */
+        virtual IGisLine * getGisLine() = 0;
+        /// shadow cursor needed to restore cursor after some actions providing their own cursor.
+        QCursor     cursor1;
+        /// the line's coordinates in [rad]
+        QPolygonF   coords1;
+
+    private:        
         void drawPointOfFocus(QPainter& p);
         void drawBullets(const QPolygonF& l, QPainter& p);
         void drawHighlight1(QPainter& p);
         void drawHighlight2(QPainter& p);
         int getPointCloseBy(const QPoint& screenPos);
 
-        qint32      type;
-
-        QCursor     cursor1;
-
-        QString     key;
-        /// the line's coordinates in [rad]
-        QPolygonF   coords1;
         /// backup for coord1
         QPolygonF   save;
         /// the line's coordinates in [pixel]
@@ -134,6 +138,6 @@ class CMouseEditLine  : public IMouse
         CScrOptEditLine * scrOptEditLine;
 };
 
-#endif //CMOUSEEDITLINE_H
+#endif //IMOUSEEDITLINE_H
 
 

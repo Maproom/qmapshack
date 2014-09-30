@@ -73,7 +73,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void drawHighlight(QPainter& p);
         void save(QDomNode& gpx);
 
-        void replaceData(const QPolygonF& line);
+        void setData(const QPolygonF& line);
+        void getData(QPolygonF& line);
 
         /**
            @brief Switch user focus on and off.

@@ -16,38 +16,27 @@
 
 **********************************************************************************************/
 
-#include "mouse/CMouseEditLine.h"
+#include "mouse/IMouseEditLine.h"
 #include "mouse/CScrOptPoint.h"
 #include "mouse/CScrOptEditLine.h"
 #include "mouse/CScrOptRange.h"
-#include "gis/trk/CGisItemTrk.h"
+#include "gis/IGisLine.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "canvas/CCanvas.h"
+#include "units/IUnit.h"
 #include "GeoMath.h"
 
 
 #include <QtWidgets>
 
-CMouseEditLine::CMouseEditLine(const QPointF& point, qint32 type, CGisDraw * gis, CCanvas * parent)
-    : IMouse(gis, parent)
-    , type(type)
+IMouseEditLine::IMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * parent)
+    : IMouse(gis, parent)    
     , state(eStateAddPointFwd)
     , idxFocus(0)
     , idxStart(-1)
     , idxStop(-1)
 {
-    if(type == IGisItem::eTypeOvl)
-    {
-        cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
-    }
-    else
-    {
-        cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
-    }
-
-    cursor  = cursor1;
-
     // create a single point line
     coords1 << point;
     line    << point;
@@ -63,40 +52,15 @@ CMouseEditLine::CMouseEditLine(const QPointF& point, qint32 type, CGisDraw * gis
     connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
 }
 
-CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
+IMouseEditLine::IMouseEditLine(IGisLine &src, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
-    , type(IGisItem::eTypeTrk)
     , state(eStateIdle)
     , idxFocus(-1)
     , idxStart(-1)
     , idxStop(-1)
-{
-    cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
-    cursor  = cursor1;
-    key     = trk.getKey();
+{        
 
-    // reset any focus the track might have.
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick);
-    if(trk.hasUserFocus())
-    {
-        trk.gainUserFocus(false);
-    }
-
-    // get a local copy of the track data
-    const CGisItemTrk::trk_t& data = trk.getTrackData();
-    foreach (const CGisItemTrk::trkseg_t& seg, data.segs)
-    {
-        foreach(const CGisItemTrk::trkpt_t& pt, seg.pts)
-        {
-            if(pt.flags & CGisItemTrk::trkpt_t::eDeleted)
-            {
-                continue;
-            }
-            coords1 << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
-        }
-    }
-
+    src.getData(coords1);
     // calculate a pixel polyline from track coordinates
     line = coords1;
     gis->convertRad2Px(line);
@@ -106,37 +70,22 @@ CMouseEditLine::CMouseEditLine(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     connect(scrOptEditLine->pushSaveOrig, SIGNAL(clicked()), this, SLOT(slotCopyToOrig()));
     connect(scrOptEditLine->pushSaveNew, SIGNAL(clicked()), this, SLOT(slotCopyToNew()));
     connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
-
-    /*
-        trigger complete update of GIS components to make sure all changes to
-        the originating object are reflected on the canvas->
-    */
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-CMouseEditLine::~CMouseEditLine()
+IMouseEditLine::~IMouseEditLine()
 {
     delete scrOptPoint;
     delete scrOptEditLine;
     delete scrOptRange;
 }
 
-void CMouseEditLine::drawLine(const QPolygonF &l, QPainter& p)
+void IMouseEditLine::drawLine(const QPolygonF &l, QPainter& p)
 {
-    if(type == IGisItem::eTypeOvl)
-    {
-        p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        p.setBrush(QBrush(Qt::magenta, Qt::BDiagPattern));
-        p.drawPolygon(l);
-    }
-    else
-    {
-        p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        p.drawPolyline(l);
-    }
+    p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(l);
 }
 
-void CMouseEditLine::drawPointOfFocus(QPainter& p)
+void IMouseEditLine::drawPointOfFocus(QPainter& p)
 {
     if(idxFocus < 0)
     {
@@ -153,7 +102,7 @@ void CMouseEditLine::drawPointOfFocus(QPainter& p)
     p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
 }
 
-void CMouseEditLine::drawBullets(const QPolygonF &l, QPainter& p)
+void IMouseEditLine::drawBullets(const QPolygonF &l, QPainter& p)
 {
     QPixmap bullet("://icons/8x8/bullet_magenta.png");
     foreach(const QPointF& pt, l)
@@ -162,7 +111,7 @@ void CMouseEditLine::drawBullets(const QPolygonF &l, QPainter& p)
     }
 }
 
-void CMouseEditLine::drawHighlight1(QPainter& p)
+void IMouseEditLine::drawHighlight1(QPainter& p)
 {
     if(idxStart < 0 || idxFocus < 0)
     {
@@ -178,7 +127,7 @@ void CMouseEditLine::drawHighlight1(QPainter& p)
     p.drawPolyline(highlight);
 }
 
-void CMouseEditLine::drawHighlight2(QPainter& p)
+void IMouseEditLine::drawHighlight2(QPainter& p)
 {
     if(idxStart < 0 || idxStop < 0)
     {
@@ -194,7 +143,7 @@ void CMouseEditLine::drawHighlight2(QPainter& p)
     p.drawPolyline(highlight);
 }
 
-void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
+void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 {
     if(needsRedraw)
     {
@@ -239,24 +188,6 @@ void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
             QPolygonF l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop, -1);
             drawLine(l, p);
             drawBullets(l, p);
-
-//            if(!(idxStart < 0))
-//            {
-//                drawLine(line.mid(0,idxStart + 1), p);
-//                p.drawLine(line[idxStart], newLine.first());
-//            }
-
-//            drawLine(newLine, p);
-
-//            if(idxStop < line.size())
-//            {
-//                drawLine(line.mid(idxStop,-1), p);
-//                p.drawLine(newLine.last(), line[idxStop]);
-//            }
-
-//            drawBullets(line, p);
-//            drawBullets(newLine, p);
-
             break;
         }
         default:;
@@ -273,7 +204,7 @@ void CMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
     }
 }
 
-void CMouseEditLine::mousePressEvent(QMouseEvent * e)
+void IMouseEditLine::mousePressEvent(QMouseEvent * e)
 {
     point  = e->pos();
     if(e->button() == Qt::RightButton)
@@ -493,7 +424,7 @@ void CMouseEditLine::mousePressEvent(QMouseEvent * e)
     canvas->update();
 }
 
-void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
+void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
 {
     point  = e->pos();    
 
@@ -544,18 +475,18 @@ void CMouseEditLine::mouseMoveEvent(QMouseEvent * e)
     }
 }
 
-void CMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
+void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
 {
 
 }
 
-void CMouseEditLine::wheelEvent(QWheelEvent * e)
+void IMouseEditLine::wheelEvent(QWheelEvent * e)
 {
     canvas->update();
 }
 
 
-int CMouseEditLine::getPointCloseBy(const QPoint& screenPos)
+int IMouseEditLine::getPointCloseBy(const QPoint& screenPos)
 {
     qint32 i    = 0;
     qint32 idx  = -1;
@@ -576,7 +507,7 @@ int CMouseEditLine::getPointCloseBy(const QPoint& screenPos)
     return idx;
 }
 
-void CMouseEditLine::slotDeletePoint()
+void IMouseEditLine::slotDeletePoint()
 {
     if(idxFocus < 0)
     {
@@ -593,7 +524,7 @@ void CMouseEditLine::slotDeletePoint()
     canvas->update();
 }
 
-void CMouseEditLine::slotSelectRange()
+void IMouseEditLine::slotSelectRange()
 {
     if(idxFocus < 0)
     {
@@ -610,7 +541,7 @@ void CMouseEditLine::slotSelectRange()
 
 }
 
-void CMouseEditLine::slotDeleteRange()
+void IMouseEditLine::slotDeleteRange()
 {
     if(idxStart < 0 || idxStop < 0)
     {
@@ -632,7 +563,7 @@ void CMouseEditLine::slotDeleteRange()
     canvas->update();
 }
 
-void CMouseEditLine::slotMovePoint()
+void IMouseEditLine::slotMovePoint()
 {
     if(idxFocus < 0)
     {
@@ -646,7 +577,7 @@ void CMouseEditLine::slotMovePoint()
     canvas->update();
 }
 
-void CMouseEditLine::slotAddPoint1()
+void IMouseEditLine::slotAddPoint1()
 {
     if(idxFocus < 0)
     {
@@ -675,7 +606,7 @@ void CMouseEditLine::slotAddPoint1()
     canvas->update();
 }
 
-void CMouseEditLine::slotAddPoint2()
+void IMouseEditLine::slotAddPoint2()
 {
     if(idxFocus < 0)
     {
@@ -705,13 +636,13 @@ void CMouseEditLine::slotAddPoint2()
 }
 
 
-void CMouseEditLine::slotAbort()
+void IMouseEditLine::slotAbort()
 {
     canvas->resetMouse();
     canvas->update();
 }
 
-void CMouseEditLine::slotCopyToOrig()
+void IMouseEditLine::slotCopyToOrig()
 {    
     if(coords1.size() < 2)
     {
@@ -725,45 +656,12 @@ void CMouseEditLine::slotCopyToOrig()
         return;
     }
 
-    IGisLine * l = dynamic_cast<IGisLine*>(CGisWidget::self().getItemByKey(key));
+    IGisLine * l = getGisLine();
     if(l != 0)
     {
-        l->replaceData(coords1);
+        l->setData(coords1);
     }
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CMouseEditLine::slotCopyToNew()
-{
-    if(coords1.size() < 2)
-    {
-        return;
-    }
-
-    CGisProject * project = CGisWidget::self().selectProject();
-    if(project == 0)
-    {
-        return;
-    }
-
-    /// @todo make this independent from track
-    QString name;
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != 0)
-    {
-        name = trk->getName();
-    }
-
-    name = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name);
-
-    if(name.isEmpty())
-    {
-        return;
-    }
-
-    new CGisItemTrk(coords1,name, project, -1);
-
-    canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-}

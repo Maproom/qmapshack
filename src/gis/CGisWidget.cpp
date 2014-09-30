@@ -276,7 +276,7 @@ void CGisWidget::editTrkByKey(const QString& key)
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas != 0)
         {
-            canvas->setMouseEditLine(*trk);
+            canvas->setMouseEditTrk(*trk);
         }
     }
 

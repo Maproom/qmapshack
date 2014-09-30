@@ -16,20 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef IGISLINE_H
-#define IGISLINE_H
+#ifndef CMOUSEEDITAREA_H
+#define CMOUSEEDITAREA_H
 
-class QPolygonF;
+#include "mouse/IMouseEditLine.h"
 
-class IGisLine
+class CMouseEditArea : public IMouseEditLine
 {
+    Q_OBJECT
     public:
-        IGisLine();
-        virtual ~IGisLine();
+        CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+        virtual ~CMouseEditArea();
 
-        virtual void setData(const QPolygonF& line) = 0;
-        virtual void getData(QPolygonF& line) = 0;
+    protected slots:
+        void slotCopyToNew();
+
+    protected:
+        virtual void drawLine(const QPolygonF& l, QPainter& p);
+        IGisLine * getGisLine();
+
+    private:
+        QString     key;
+
 };
 
-#endif //IGISLINE_H
+#endif //CMOUSEEDITAREA_H
 

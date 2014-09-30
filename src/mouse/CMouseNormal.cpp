@@ -309,7 +309,7 @@ void CMouseNormal::slotAddTrk()
     QPointF pt = point;
     gis->convertPx2Rad(pt);
 
-    canvas->setMouseEditLine(pt, IGisItem::eTypeTrk);
+    canvas->setMouseEditTrk(pt);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -318,6 +318,6 @@ void CMouseNormal::slotAddArea()
     QPointF pt = point;
     gis->convertPx2Rad(pt);
 
-    canvas->setMouseEditLine(pt, IGisItem::eTypeOvl);
+    canvas->setMouseEditArea(pt);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }

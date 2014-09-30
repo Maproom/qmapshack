@@ -68,10 +68,12 @@ set( SRCS
     grid/CProjWizard.cpp
     grid/mitab.cpp
     mouse/IMouse.cpp
+    mouse/IMouseEditLine.cpp
     mouse/IScrOpt.cpp
     mouse/CMouseNormal.cpp
     mouse/CMouseMoveWpt.cpp
-    mouse/CMouseEditLine.cpp
+    mouse/CMouseEditTrk.cpp
+    mouse/CMouseEditArea.cpp
     mouse/CScrOptUnclutter.cpp    
     mouse/CScrOptPoint.cpp
     mouse/CScrOptEditLine.cpp
@@ -166,10 +168,12 @@ set( HDRS
     grid/CProjWizard.h
     grid/mitab.h
     mouse/IMouse.h
+    mouse/IMouseEditLine.h
     mouse/IScrOpt.h
     mouse/CMouseNormal.h
     mouse/CMouseMoveWpt.h
-    mouse/CMouseEditLine.h
+    mouse/CMouseEditTrk.h
+    mouse/CMouseEditArea.h
     mouse/CScrOptUnclutter.h
     mouse/CScrOptPoint.h
     mouse/CScrOptEditLine.h

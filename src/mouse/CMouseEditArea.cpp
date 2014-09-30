@@ -50,7 +50,7 @@ IGisLine * CMouseEditArea::getGisLine()
 
 void CMouseEditArea::slotCopyToNew()
 {
-    if(coords1.size() < 2)
+    if(coords1.size() < 3)
     {
         return;
     }

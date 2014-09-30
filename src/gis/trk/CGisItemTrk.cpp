@@ -258,11 +258,11 @@ void CGisItemTrk::setData(const QPolygonF &line)
 void CGisItemTrk::getData(QPolygonF &line)
 {
     line.clear();
-    foreach (const CGisItemTrk::trkseg_t& seg, trk.segs)
+    foreach (const trkseg_t& seg, trk.segs)
     {
-        foreach(const CGisItemTrk::trkpt_t& pt, seg.pts)
+        foreach(const trkpt_t& pt, seg.pts)
         {
-            if(pt.flags & CGisItemTrk::trkpt_t::eDeleted)
+            if(pt.flags & trkpt_t::eDeleted)
             {
                 continue;
             }
@@ -1015,7 +1015,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
-
+    // tracks have no labels
 }
 
 

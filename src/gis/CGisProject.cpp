@@ -21,6 +21,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/CGisDraw.h"
 #include "helpers/CSettings.h"
 #include "version.h"
@@ -123,6 +124,17 @@ CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWk
         QTreeWidgetItem * item = new CGisItemWpt(xmlWpt, this);
         items << item;
     }
+
+    const QDomElement& xmlExtension = xmlGpx.namedItem("extensions").toElement();
+    const QDomNodeList& xmlAreas = xmlExtension.elementsByTagName("ql:area");
+    N = xmlAreas.count();
+    for(int n = 0; n < N; ++n)
+    {
+        const QDomNode& xmlArea = xmlAreas.item(n);
+        QTreeWidgetItem * item = new CGisItemOvlArea(xmlArea, this);
+        items << item;
+    }
+
 
     addChildren(items);
     setToolTip(0, getInfo());
@@ -571,6 +583,19 @@ void CGisProject::saveGpx(const QString& fn)
         }
         item->save(gpx);
     }
+
+    QDomElement xmlExt = doc.createElement("extensions");
+    gpx.appendChild(xmlExt);
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->save(xmlExt);
+    }
+
 
     //  ---- stop  content of gpx
 

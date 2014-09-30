@@ -22,13 +22,27 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 
+#include <QPen>
+
 class CGisProject;
+
+#define OVL_N_COLORS 17
 
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
     public:
         CGisItemOvlArea(const QPolygonF& line, const QString &name, CGisProject * project, int idx);
+        CGisItemOvlArea(const QDomNode &xml, CGisProject *project);
         virtual ~CGisItemOvlArea();
+
+        void setName(const QString& str);
+        void setColor(int idx);
+        void setData(const QPolygonF& line);
+
+        const QString& getName();
+        QString getInfo();
+        void getData(QPolygonF& line);
+
 
         void save(QDomNode& gpx);
 
@@ -38,15 +52,11 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
 
         void gainUserFocus(bool yes);
 
-        const QString& getName();
-        QString getInfo();
-
-        void getData(QPolygonF& line);
-
-        void setData(const QPolygonF& line);
 
         bool isCloseTo(const QPointF& pos);
 
+        static const QColor  lineColors[OVL_N_COLORS];
+        static const QString bulletColors[OVL_N_COLORS];
     protected:
         void genKey();
 
@@ -75,7 +85,29 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
             QString color;
         };
 
+    private:
+        void readArea(const QDomNode& xml, area_t& area);
+        void setColor(const QColor& c);
+        void setIcon(const QString& c);
+        void readLine(const QPolygonF &line);
+        void deriveSecondaryData();
+
         area_t area;
+
+        static QString keyUserFocus;
+        static const QPen penBackground;
+
+        QPen penForeground;
+
+        /// the track line color
+        QColor  color;
+        /// the trakpoint bullet icon
+        QPixmap bullet;
+        /// the track line color by index
+        unsigned colorIdx;
+
+        QPolygonF line;
+
 
 
 };

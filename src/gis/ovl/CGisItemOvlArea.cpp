@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/ovl/CScrOptOvlArea.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 
@@ -123,6 +124,11 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, CGisProject *project)
 
 CGisItemOvlArea::~CGisItemOvlArea()
 {
+    // reset user focus if focused on this track
+    if(key == keyUserFocus)
+    {
+        keyUserFocus.clear();
+    }
 
 }
 
@@ -146,6 +152,30 @@ bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
         }
     }
     return false;
+}
+
+QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
+{
+    qint32 i    = 0;
+    qint32 idx  = -1;
+    qint32  d   = NOINT;
+    foreach(const QPointF& point, line)
+    {
+        int tmp = (screenPos - point).manhattanLength();
+        if(tmp < d)
+        {
+            idx = i;
+            d   = tmp;
+        }
+        i++;
+    }
+
+    if(idx < 0)
+    {
+        return NOPOINTF;
+    }
+
+    return line[idx];
 }
 
 void CGisItemOvlArea::readLine(const QPolygonF &line)
@@ -174,7 +204,7 @@ void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
     readXml(xml, "ql:link", area.links);
     readXml(xml, "ql:number", area.number);
     readXml(xml, "ql:type", area.type);
-    readXml(xml, "color", area.color);
+    readXml(xml, "ql:color", area.color);
     readXml(xml, "ql:key", key);
     readXml(xml, "ql:flags", flags);
     readXml(xml, history);
@@ -280,7 +310,17 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF
 
 void CGisItemOvlArea::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
+    if(line.isEmpty())
+    {
+        return;
+    }
+    QPointF pt  = getPolygonCentroid(line);
+    QRectF rect = fm.boundingRect(area.name);
+    rect.adjust(-2,-2,2,2);
+    rect.moveCenter(pt);
 
+    CCanvas::drawText(getName(), p, pt.toPoint(), Qt::darkBlue);
+    blockedAreas << rect;
 }
 
 void CGisItemOvlArea::drawHighlight(QPainter& p)
@@ -297,6 +337,33 @@ void CGisItemOvlArea::drawHighlight(QPainter& p)
 void CGisItemOvlArea::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : "";
+}
+
+QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
+{
+    int i, len;
+    qreal x = 0, y = 0;
+
+    len = polygon.size();
+
+    for(i = 0; i < len; i++)
+    {
+        x = x + polygon[i].x();
+        y = y + polygon[i].y();
+    }
+    x = x / len;
+    y = y / len;
+
+    return QPointF(x,y);
+}
+
+IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse)
+{
+    if(scrOpt.isNull())
+    {
+        scrOpt = new CScrOptOvlArea(this, origin, mouse);
+    }
+    return scrOpt;
 }
 
 const QString& CGisItemOvlArea::getName()

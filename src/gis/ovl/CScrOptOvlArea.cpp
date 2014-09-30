@@ -16,36 +16,44 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#include "gis/ovl/CScrOptOvlArea.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/CGisWidget.h"
+#include "canvas/CCanvas.h"
+#include "mouse/IMouse.h"
+#include "CMainWindow.h"
 
-#include "mouse/IScrOpt.h"
-#include "ui_IScrOptTrk.h"
+CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
+    : IScrOpt(parent->getCanvas())
+    , key(area->getKey())
 
-class CGisItemTrk;
-class IMouse;
-
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
 {
-    Q_OBJECT
-    public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
-        virtual ~CScrOptTrk();
+    setupUi(this);
+    setOrigin(point);
+    label->setFont(CMainWindow::self().getMapFont());
+    label->setText(area->getInfo());
+    adjustSize();
 
-        void draw(QPainter& p);
+    anchor = area->getPointCloseBy(point);
+    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    show();
 
-    private slots:        
-        void slotDelete();
-        void slotEditDetails();
-        void slotProfile(bool on);
-        void slotCut();
-        void slotEdit();
+}
 
+CScrOptOvlArea::~CScrOptOvlArea()
+{
 
-    private:
-        QString key;
-        QPointF anchor;
-};
+}
 
-#endif //CSCROPTTRK_H
+void CScrOptOvlArea::draw(QPainter& p)
+{
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if(item == 0)
+    {
+        QWidget::deleteLater();
+        return;
+    }
+    item->drawHighlight(p);
 
+    drawBubble2(anchor, p);
+}

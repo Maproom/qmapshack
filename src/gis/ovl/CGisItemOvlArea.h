@@ -23,8 +23,10 @@
 #include "gis/IGisLine.h"
 
 #include <QPen>
+#include <QPointer>
 
 class CGisProject;
+class CScrOptOvlArea;
 
 #define OVL_N_COLORS 17
 
@@ -50,11 +52,11 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
 
-        void gainUserFocus(bool yes);
-
-
+        IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
+        QPointF getPointCloseBy(const QPoint& screenPos);
         bool isCloseTo(const QPointF& pos);
 
+        void gainUserFocus(bool yes);
         static const QColor  lineColors[OVL_N_COLORS];
         static const QString bulletColors[OVL_N_COLORS];
     protected:
@@ -91,6 +93,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         void setIcon(const QString& c);
         void readLine(const QPolygonF &line);
         void deriveSecondaryData();
+        QPointF getPolygonCentroid(const QPolygonF& polygon);
 
         area_t area;
 
@@ -108,7 +111,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
 
         QPolygonF line;
 
-
+        QPointer<CScrOptOvlArea>  scrOpt;
 
 };
 

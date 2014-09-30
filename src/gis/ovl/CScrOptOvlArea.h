@@ -16,36 +16,28 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#ifndef CSCROPTOVLAREA_H
+#define CSCROPTOVLAREA_H
 
 #include "mouse/IScrOpt.h"
-#include "ui_IScrOptTrk.h"
+#include "ui_IScrOptOvlArea.h"
 
-class CGisItemTrk;
+class CGisItemOvlArea;
 class IMouse;
 
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
+class CScrOptOvlArea : public IScrOpt, private Ui::IScrOptOvlArea
 {
-    Q_OBJECT
     public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
-        virtual ~CScrOptTrk();
+        CScrOptOvlArea(CGisItemOvlArea * area, const QPoint &point, IMouse *parent);
+        virtual ~CScrOptOvlArea();
 
         void draw(QPainter& p);
-
-    private slots:        
-        void slotDelete();
-        void slotEditDetails();
-        void slotProfile(bool on);
-        void slotCut();
-        void slotEdit();
-
 
     private:
         QString key;
         QPointF anchor;
+
 };
 
-#endif //CSCROPTTRK_H
+#endif //CSCROPTOVLAREA_H
 

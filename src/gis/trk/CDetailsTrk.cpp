@@ -97,8 +97,6 @@ void CDetailsTrk::setupGui()
     comboColor->setEnabled(!isReadOnly);
     toolLock->setChecked(isReadOnly);
 
-    treeWidget->clear();
-
     QList<QTreeWidgetItem*> items;
     const CGisItemTrk::trk_t& t = trk.getTrackData();
     foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
@@ -193,8 +191,9 @@ void CDetailsTrk::setupGui()
 
         }
     }
-    treeWidget->addTopLevelItems(items);
 
+    treeWidget->clear();
+    treeWidget->addTopLevelItems(items);
     treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
 
     if(!trk.getHistory().isEmpty())

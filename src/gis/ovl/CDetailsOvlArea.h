@@ -43,6 +43,13 @@ class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
 
     private:
         void setupGui();
+        enum columns_t
+        {
+            eColNum
+            ,eColPosition
+            ,eColMax
+        };
+
         QString toLink(bool isReadOnly, const QString& href, const QString& str);
 
         CGisItemOvlArea& area;

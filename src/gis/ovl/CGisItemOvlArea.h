@@ -114,6 +114,8 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
             bool opacity;
         };
 
+        const area_t& getAreaData() const{return area;}
+
     private:
         void readArea(const QDomNode& xml, area_t& area);
         void setColor(const QColor& c);

@@ -19,6 +19,7 @@
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CTextEditWidget.h"
+#include "GeoMath.h"
 
 
 #include <QtWidgets>
@@ -239,6 +240,29 @@ void CDetailsOvlArea::setupGui()
     }
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
+
+
+    int idx = 0;
+    QList<QTreeWidgetItem*> items;
+    const CGisItemOvlArea::area_t& a = area.getAreaData();
+    foreach(const CGisItemOvlArea::pt_t& pt, a.pts)
+    {
+        QString str;
+        QTreeWidgetItem * item = new QTreeWidgetItem();
+
+        item->setText(eColNum,QString::number(idx++));
+
+        // position
+        GPS_Math_Deg_To_Str(pt.lon, pt.lat, str);
+        item->setText(eColPosition,str);
+
+        items << item;
+
+    }
+
+    treeWidget->clear();
+    treeWidget->addTopLevelItems(items);
+    treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
 
 
 }

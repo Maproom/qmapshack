@@ -95,6 +95,7 @@ CCanvas::CCanvas(QWidget *parent)
     demLoadIndicator->show();
 
     labelStatusMessages = new QLabel(this);
+    labelStatusMessages->hide();
 
 
     connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));

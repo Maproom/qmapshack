@@ -163,7 +163,11 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextBrowser" name="textCmtDesc"/>
+    <widget class="QTextBrowser" name="textCmtDesc">
+     <property name="openLinks">
+      <bool>false</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
@@ -194,7 +198,12 @@
         <widget class="QTreeWidget" name="treeWidget">
          <column>
           <property name="text">
-           <string notr="true">1</string>
+           <string notr="true">#</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Position</string>
           </property>
          </column>
         </widget>

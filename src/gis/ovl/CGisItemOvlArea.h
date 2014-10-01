@@ -29,6 +29,8 @@ class CGisProject;
 class CScrOptOvlArea;
 
 #define OVL_N_COLORS 17
+#define OVL_N_WIDTHS 4
+#define OVL_N_STYLES 8
 
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
@@ -37,13 +39,27 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         CGisItemOvlArea(const QDomNode &xml, CGisProject *project);
         virtual ~CGisItemOvlArea();
 
+        const QString& getName();
+        int getColorIdx(){return colorIdx;}
+        QString getInfo();
+        void getData(QPolygonF& line);
+        const QString& getComment(){return area.cmt;}
+        const QString& getDescription(){return area.desc;}
+        const QList<link_t>& getLinks(){return area.links;}
+        qint32 getWidth(){return area.width;}
+        qint32 getStyle(){return area.style;}
+        bool getOpacity(){return area.opacity;}
+
+
         void setName(const QString& str);
         void setColor(int idx);
         void setData(const QPolygonF& line);
+        void setWidth(qint32 w);
+        void setStyle(qint32 s);
+        void setOpacity(bool yes);
+        void setComment(const QString& str);
+        void setDescription(const QString& str);
 
-        const QString& getName();
-        QString getInfo();
-        void getData(QPolygonF& line);
 
         void save(QDomNode& gpx);
         void edit();
@@ -57,8 +73,17 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         bool isCloseTo(const QPointF& pos);
 
         void gainUserFocus(bool yes);
+
+        struct width_t
+        {
+            int width;
+            QString string;
+        };
+
         static const QColor  lineColors[OVL_N_COLORS];
         static const QString bulletColors[OVL_N_COLORS];
+        static const width_t lineWidths[OVL_N_WIDTHS];
+        static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
     protected:
         void genKey();
 
@@ -72,7 +97,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
 
         struct area_t
         {
-            area_t() : number(0) {}
+            area_t() : number(0), width(5), style(Qt::BDiagPattern), opacity(false) {}
             // -- all gpx tags - start
             QString name;
             QString cmt;
@@ -82,9 +107,10 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
             quint64 number;
             QString type;
             QVector<pt_t> pts;
-            // -- all gpx tags - stop
-
             QString color;
+            qint32 width;
+            qint32 style;
+            bool opacity;
         };
 
     private:
@@ -98,9 +124,9 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         area_t area;
 
         static QString keyUserFocus;
-        static const QPen penBackground;
 
         QPen penForeground;
+        QPen penBackground;
 
         /// the track line color
         QColor  color;

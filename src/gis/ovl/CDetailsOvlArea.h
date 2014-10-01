@@ -26,9 +26,26 @@ class CGisItemOvlArea;
 
 class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
 {
+    Q_OBJECT
     public:
         CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent);
         virtual ~CDetailsOvlArea();
+
+    private slots:
+        void slotSetColor(int idx);
+        void slotSetWidth(int idx);
+        void slotSetStyle(int idx);
+        void slotOpyacity(bool yes);
+        void slotChangeReadOnlyMode(bool on);
+        void slotLinkActivated(const QUrl& url);
+        void slotLinkActivated(const QString& link);
+
+
+    private:
+        void setupGui();
+        QString toLink(bool isReadOnly, const QString& href, const QString& str);
+
+        CGisItemOvlArea& area;
 };
 
 #endif //CDETAILSOVLAREA_H

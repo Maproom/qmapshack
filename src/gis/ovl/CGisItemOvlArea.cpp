@@ -89,12 +89,33 @@ const QString CGisItemOvlArea::bulletColors[OVL_N_COLORS] =
 };
 
 
+const CGisItemOvlArea::width_t CGisItemOvlArea::lineWidths[OVL_N_WIDTHS] =
+{
+    {3, QObject::tr("thin")}
+    ,{5, QObject::tr("normal")}
+    ,{9, QObject::tr("wide")}
+    ,{13, QObject::tr("strong")}
+};
+
+const Qt::BrushStyle CGisItemOvlArea::brushStyles[OVL_N_STYLES] =
+{
+    Qt::NoBrush
+    , Qt::HorPattern
+    , Qt::VerPattern
+    , Qt::CrossPattern
+    , Qt::BDiagPattern
+    , Qt::FDiagPattern
+    , Qt::DiagCrossPattern
+    , Qt::SolidPattern
+};
+
+
 QString CGisItemOvlArea::keyUserFocus;
-const QPen CGisItemOvlArea::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
 CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, CGisProject * project, int idx)
     : IGisItem(project, eTypeOvl, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     area.name = name;
     readLine(line);
@@ -112,6 +133,7 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, CGi
 CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, CGisProject *project)
     : IGisItem(project, eTypeOvl, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -206,6 +228,9 @@ void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
     readXml(xml, "ql:number", area.number);
     readXml(xml, "ql:type", area.type);
     readXml(xml, "ql:color", area.color);
+    readXml(xml, "ql:width", area.width);
+    readXml(xml, "ql:style", area.style);
+    readXml(xml, "ql:opacity", area.opacity);
     readXml(xml, "ql:key", key);
     readXml(xml, "ql:flags", flags);
     readXml(xml, history);
@@ -243,6 +268,9 @@ void CGisItemOvlArea::save(QDomNode& gpx)
     writeXml(xmlArea, "ql:number", area.number);
     writeXml(xmlArea, "ql:type", area.type);
     writeXml(xmlArea, "ql:color", area.color);
+    writeXml(xmlArea, "ql:width", area.width);
+    writeXml(xmlArea, "ql:style", area.style);
+    writeXml(xmlArea, "ql:opacity", area.opacity);
     writeXml(xmlArea, "ql:key", key);
     writeXml(xmlArea, "ql:flags", flags);
     writeXml(xmlArea, history);
@@ -307,11 +335,16 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF
 
     gis->convertRad2Px(line);
 
-    p.setBrush(QBrush(color, Qt::BDiagPattern));
+    color.setAlpha(area.opacity ? 100 : 255);
+
+    penBackground.setWidth(area.width + 2);
+    p.setBrush(Qt::NoBrush);
     p.setPen(penBackground);
     p.drawPolygon(line);
 
     penForeground.setColor(color);
+    penForeground.setWidth(area.width);
+    p.setBrush(QBrush(color, (Qt::BrushStyle)area.style));
     p.setPen(penForeground);
     p.drawPolygon(line);
 
@@ -384,6 +417,38 @@ QString CGisItemOvlArea::getInfo()
 {
     QString str = getName();
 
+    QString desc = removeHtml(area.desc).simplified();
+    if(desc.count())
+    {
+        if(!str.isEmpty()) str += "<br/>\n";
+
+        if(desc.count() < 200)
+        {
+            str += desc;
+        }
+        else
+        {
+            str += desc.left(197) + "...";
+        }
+    }
+    else
+    {
+        QString cmt = removeHtml(area.cmt).simplified();
+        if(cmt.count())
+        {
+            if(!str.isEmpty()) str += "<br/>\n";
+
+            if(cmt.count() < 200)
+            {
+                str += cmt;
+            }
+            else
+            {
+                str += cmt.left(197) + "...";
+            }
+        }
+    }
+
     return str;
 }
 
@@ -405,6 +470,43 @@ void CGisItemOvlArea::setData(const QPolygonF& line)
     setToolTip(0, getInfo());
     parent()->setText(1,"*");
     changed(QObject::tr("Changed area shape."));
+}
+
+void CGisItemOvlArea::setName(const QString& str)
+{
+    setText(0, str);
+    area.name = str;
+    changed(QObject::tr("Changed name."));
+}
+
+void CGisItemOvlArea::setWidth(qint32 w)
+{
+    area.width = w;
+    changed(QObject::tr("Changed border width."));
+}
+
+void CGisItemOvlArea::setStyle(qint32 s)
+{
+    area.style = s;
+    changed(QObject::tr("Changed fill pattern."));
+}
+
+void CGisItemOvlArea::setOpacity(bool yes)
+{
+    area.opacity = yes;
+    changed(QObject::tr("Changed opacity."));
+}
+
+void CGisItemOvlArea::setComment(const QString& str)
+{
+    area.cmt = str;
+    changed(QObject::tr("Changed comment."));
+}
+
+void CGisItemOvlArea::setDescription(const QString& str)
+{
+    area.desc = str;
+    changed(QObject::tr("Changed description."));
 }
 
 

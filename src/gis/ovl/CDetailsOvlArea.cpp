@@ -18,14 +18,228 @@
 
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "helpers/CTextEditWidget.h"
+
+
+#include <QtWidgets>
 
 CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
+    : QDialog(parent)
+    , area(area)
 {
     setupUi(this);
+
+    QPixmap icon(64,24);
+    for(int i=0; i < OVL_N_COLORS; ++i)
+    {
+        icon.fill(CGisItemOvlArea::lineColors[i]);
+        comboColor->addItem(icon,"",CGisItemOvlArea::lineColors[i]);
+    }
+
+    for(int i = 0; i < OVL_N_STYLES; i++)
+    {
+        icon.fill(Qt::white);
+        QPainter p(&icon);
+        p.setPen(Qt::black);
+        p.setBrush(CGisItemOvlArea::brushStyles[i]);
+        p.drawRect(icon.rect());
+
+        comboStyle->addItem(icon,"",(int)CGisItemOvlArea::brushStyles[i]);
+    }
+
+
+    for(int i = 0; i < OVL_N_WIDTHS; i++)
+    {
+        comboBorderWidth->addItem(CGisItemOvlArea::lineWidths[i].string, CGisItemOvlArea::lineWidths[i].width);
+    }
+
+    setupGui();
+
+    connect(comboColor, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetColor(int)));
+    connect(comboBorderWidth, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetWidth(int)));
+    connect(comboStyle, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetStyle(int)));
+    connect(checkOpacity, SIGNAL(toggled(bool)), this, SLOT(slotOpyacity(bool)));
+    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
+    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
+    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
 }
 
 CDetailsOvlArea::~CDetailsOvlArea()
 {
+
+}
+
+
+void CDetailsOvlArea::slotSetColor(int idx)
+{
+    if(area.isReadOnly())
+    {
+        return;
+    }
+
+    area.setColor(idx);
+    setupGui();
+}
+
+void CDetailsOvlArea::slotSetWidth(int idx)
+{
+    if(area.isReadOnly())
+    {
+        return;
+    }
+    area.setWidth(CGisItemOvlArea::lineWidths[idx].width);
+    setupGui();
+}
+
+void CDetailsOvlArea::slotSetStyle(int idx)
+{
+    if(area.isReadOnly())
+    {
+        return;
+    }
+
+    area.setStyle(CGisItemOvlArea::brushStyles[idx]);
+    setupGui();
+}
+
+void CDetailsOvlArea::slotOpyacity(bool yes)
+{
+    if(area.isReadOnly())
+    {
+        return;
+    }
+
+    area.setOpacity(yes);
+    setupGui();
+}
+
+void CDetailsOvlArea::slotChangeReadOnlyMode(bool on)
+{
+    area.setReadOnlyMode(on);
+    setupGui();
+}
+
+void CDetailsOvlArea::slotLinkActivated(const QString& link)
+{
+    if(link == "name")
+    {
+        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, area.getName());
+        if(name.isEmpty())
+        {
+            return;
+        }
+        area.setName(name);
+    }
+
+    setupGui();
+}
+
+void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
+{
+    if(url.toString() == "comment")
+    {
+        CTextEditWidget dlg(0);
+        dlg.setHtml(area.getComment());
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            area.setComment(dlg.getHtml());
+            setupGui();
+        }
+
+    }
+    else if(url.toString() == "description")
+    {
+        CTextEditWidget dlg(0);
+        dlg.setHtml(area.getDescription());
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            area.setDescription(dlg.getHtml());
+            setupGui();
+        }
+    }
+    else
+    {
+        QDesktopServices::openUrl(url);
+    }
+}
+
+
+QString CDetailsOvlArea::toLink(bool isReadOnly, const QString& href, const QString& str)
+{
+    if(isReadOnly)
+    {
+        return QString("%1").arg(str);
+    }
+
+    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+}
+
+void CDetailsOvlArea::setupGui()
+{
+    bool isReadOnly = area.isReadOnly();
+    setWindowTitle(area.getName());
+
+    if(area.isTainted())
+    {
+        labelTainted->show();
+    }
+    else
+    {
+        labelTainted->hide();
+    }
+
+    textHistory->clear();
+    if(!area.getHistory().isEmpty())
+    {
+        foreach(const QString& entry, area.getHistory())
+        {
+            textHistory->append(entry);
+        }
+    }
+
+    toolLock->setChecked(isReadOnly);
+
+    labelName->setText(toLink(isReadOnly, "name", area.getName()));
+
+    comboColor->setCurrentIndex(area.getColorIdx());
+    comboColor->setEnabled(!isReadOnly);
+    comboBorderWidth->setCurrentIndex(comboBorderWidth->findData(area.getWidth()));
+    comboBorderWidth->setEnabled(!isReadOnly);
+    comboStyle->setCurrentIndex(comboStyle->findData(area.getStyle()));
+    comboStyle->setEnabled(!isReadOnly);
+    checkOpacity->setChecked(area.getOpacity());
+    checkOpacity->setEnabled(!isReadOnly);
+
+    textCmtDesc->document()->clear();
+
+    foreach(const IGisItem::link_t& link, area.getLinks())
+    {
+        QString str = QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+        textCmtDesc->append(str);
+    }
+
+    textCmtDesc->append(toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>")));
+    if(IGisItem::removeHtml(area.getComment()).simplified().isEmpty())
+    {
+        textCmtDesc->append(tr("<p>--- no comment ---</p>"));
+    }
+    else
+    {
+        textCmtDesc->append(area.getComment());
+    }
+
+    textCmtDesc->append(toLink(isReadOnly, "description", tr("<h4>Description:</h4>")));
+    if(IGisItem::removeHtml(area.getDescription()).simplified().isEmpty())
+    {
+        textCmtDesc->append(tr("<p>--- no description ---</p>"));
+    }
+    else
+    {
+        textCmtDesc->append(area.getDescription());
+    }
+    textCmtDesc->moveCursor (QTextCursor::Start) ;
+    textCmtDesc->ensureCursorVisible() ;
+
 
 }
 

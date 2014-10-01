@@ -45,8 +45,8 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         QString getInfo();
         void getData(QPolygonF& line);
 
-
         void save(QDomNode& gpx);
+        void edit();
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);

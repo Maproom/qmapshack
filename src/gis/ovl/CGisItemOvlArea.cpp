@@ -18,6 +18,7 @@
 
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
+#include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 
@@ -258,6 +259,14 @@ void CGisItemOvlArea::save(QDomNode& gpx)
 
     setText(1, "");
 
+}
+
+void CGisItemOvlArea::edit()
+{
+    CDetailsOvlArea dlg(*this, 0);
+    dlg.exec();
+
+    deriveSecondaryData();
 }
 
 void CGisItemOvlArea::deriveSecondaryData()

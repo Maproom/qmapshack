@@ -94,6 +94,7 @@ set( SRCS
     gis/rte/CScrOptRte.cpp
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
+    gis/ovl/CDetailsOvlArea.cpp
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
@@ -195,6 +196,7 @@ set( HDRS
     gis/rte/CScrOptRte.h
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
+    gis/ovl/CDetailsOvlArea.h
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
@@ -238,6 +240,7 @@ set( UIS
     gis/trk/IDetailsTrk.ui
     gis/rte/IScrOptRte.ui
     gis/ovl/IScrOptOvlArea.ui
+    gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
 )
 

@@ -235,9 +235,9 @@ void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
     readXml(xml, "ql:flags", flags);
     readXml(xml, history);
 
-    const QDomNode& seg = xml.namedItem("ql:seg");
 
-    const QDomNodeList& xmlPts = seg.toElement().elementsByTagName("ql:pt");
+
+    const QDomNodeList& xmlPts = xml.toElement().elementsByTagName("ql:point");
     int M = xmlPts.count();
     area.pts.resize(M);
     for(int m = 0; m < M; ++m)
@@ -275,13 +275,11 @@ void CGisItemOvlArea::save(QDomNode& gpx)
     writeXml(xmlArea, "ql:flags", flags);
     writeXml(xmlArea, history);
 
-    QDomElement xmlSeg = doc.createElement("ql:seg");
-    xmlArea.appendChild(xmlSeg);
 
     foreach(const pt_t& pt, area.pts)
     {
-        QDomElement xmlPt = doc.createElement("ql:pt");
-        xmlSeg.appendChild(xmlPt);
+        QDomElement xmlPt = doc.createElement("ql:point");
+        xmlArea.appendChild(xmlPt);
         writeWpt(xmlPt, pt);
     }
 

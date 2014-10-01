@@ -116,6 +116,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void editTrkByKey(const QString& key);
 
+        void editAreaByKey(const QString& key);
+
         /**
            @brief Select a project via dialog
 

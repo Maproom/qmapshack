@@ -40,8 +40,8 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();        
 
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
+    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolProfile, SIGNAL(toggled(bool)), this, SLOT(slotProfile(bool)));
     connect(toolCut, SIGNAL(clicked()), this, SLOT(slotCut()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));

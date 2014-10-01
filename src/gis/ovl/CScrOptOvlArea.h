@@ -27,11 +27,17 @@ class IMouse;
 
 class CScrOptOvlArea : public IScrOpt, private Ui::IScrOptOvlArea
 {
+    Q_OBJECT
     public:
         CScrOptOvlArea(CGisItemOvlArea * area, const QPoint &point, IMouse *parent);
         virtual ~CScrOptOvlArea();
 
         void draw(QPainter& p);
+
+    private slots:
+        void slotEditDetails();
+        void slotDelete();
+        void slotEdit();
 
     private:
         QString key;

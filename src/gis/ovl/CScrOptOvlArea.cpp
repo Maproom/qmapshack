@@ -38,11 +38,32 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
+    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
+    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
 }
 
 CScrOptOvlArea::~CScrOptOvlArea()
 {
 
+}
+
+void CScrOptOvlArea::slotEditDetails()
+{
+    CGisWidget::self().editItemByKey(key);
+    deleteLater();
+}
+
+void CScrOptOvlArea::slotDelete()
+{
+    CGisWidget::self().delItemByKey(key);
+    deleteLater();
+}
+
+void CScrOptOvlArea::slotEdit()
+{
+    CGisWidget::self().editAreaByKey(key);
+    deleteLater();
 }
 
 void CScrOptOvlArea::draw(QPainter& p)

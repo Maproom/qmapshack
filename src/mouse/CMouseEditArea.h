@@ -21,11 +21,14 @@
 
 #include "mouse/IMouseEditLine.h"
 
+class CGisItemOvlArea;
+
 class CMouseEditArea : public IMouseEditLine
 {
     Q_OBJECT
     public:
         CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+        CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent);
         virtual ~CMouseEditArea();
 
     protected slots:

@@ -32,6 +32,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "plot/CPlotProfile.h"
 
 
@@ -189,6 +190,18 @@ void CCanvas::setMouseEditArea(const QPointF& pt)
         QApplication::setOverrideCursor(*mouse);
     }
 }
+
+void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
+{
+    mouse->deleteLater();
+    mouse = new CMouseEditArea(area, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
 
 
 void CCanvas::reportStatus(const QString& key, const QString& msg)

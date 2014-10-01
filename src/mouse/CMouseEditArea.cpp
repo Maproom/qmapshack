@@ -30,6 +30,13 @@ CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * p
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
 }
 
+CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent)
+    : IMouseEditLine(area, gis, parent)
+{
+    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
+    key    = area.getKey();
+}
+
 CMouseEditArea::~CMouseEditArea()
 {
 

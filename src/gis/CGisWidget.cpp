@@ -23,6 +23,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -277,6 +278,23 @@ void CGisWidget::editTrkByKey(const QString& key)
         if(canvas != 0)
         {
             canvas->setMouseEditTrk(*trk);
+        }
+    }
+
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisWidget::editAreaByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+
+    CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(getItemByKey(key));
+    if(area != 0)
+    {
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas != 0)
+        {
+            canvas->setMouseEditArea(*area);
         }
     }
 

@@ -30,6 +30,7 @@ class CDemDraw;
 class CGisDraw;
 class CGisItemWpt;
 class CGisItemTrk;
+class CGisItemOvlArea;
 class QSettings;
 class QPointF;
 class IMouse;
@@ -99,7 +100,8 @@ class CCanvas : public QWidget
         void resetMouse();
         void setMouseMoveWpt(CGisItemWpt& wpt);
         void setMouseEditTrk(CGisItemTrk& trk);
-        void setMouseEditTrk(const QPointF& pt);
+        void setMouseEditTrk(const QPointF& pt);        
+        void setMouseEditArea(CGisItemOvlArea& area);
         void setMouseEditArea(const QPointF& pt);
 
         /**

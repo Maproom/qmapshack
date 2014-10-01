@@ -222,19 +222,6 @@ CGisItemTrk::~CGisItemTrk()
     delete dlgDetails;
 }
 
-CGisItemTrk& CGisItemTrk::operator=(const CGisItemTrk& t)
-{
-    trk = t.trk;
-
-    setColor(t.color);
-
-    flags           = t.flags;
-    key             = t.key;
-    boundingRect    = t.boundingRect;
-
-
-    return *this;
-}
 
 void CGisItemTrk::setData(const QPolygonF &line)
 {

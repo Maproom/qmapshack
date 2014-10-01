@@ -130,6 +130,21 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, CGi
     project->setText(1,"*");
 }
 
+CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, CGisProject * project, int idx)
+    : IGisItem(project, eTypeTrk, idx)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+{
+    *this = parentArea;
+
+    setText(1, "*");
+    setText(0, area.name);
+    setToolTip(0, getInfo());
+    key.clear();
+    genKey();
+    project->setText(1,"*");
+}
+
 CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, CGisProject *project)
     : IGisItem(project, eTypeOvl, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -333,7 +348,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF
 
     gis->convertRad2Px(line);
 
-    color.setAlpha(area.opacity ? 100 : 255);
+    p.setOpacity(area.opacity ? 0.3 : 1.0);
 
     penBackground.setWidth(area.width + 2);
     p.setBrush(Qt::NoBrush);

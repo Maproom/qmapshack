@@ -36,6 +36,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
 {
     public:
         CGisItemOvlArea(const QPolygonF& line, const QString &name, CGisProject * project, int idx);
+        CGisItemOvlArea(const CGisItemOvlArea &parentArea, CGisProject * project, int idx);
         CGisItemOvlArea(const QDomNode &xml, CGisProject *project);
         virtual ~CGisItemOvlArea();
 

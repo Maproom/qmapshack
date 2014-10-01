@@ -71,18 +71,6 @@ CGisItemRte::~CGisItemRte()
 
 }
 
-CGisItemRte& CGisItemRte::operator=(const CGisItemRte& r)
-{
-    rte = r.rte;
-
-    flags           = r.flags;
-    key             = r.key;
-    boundingRect    = r.boundingRect;
-
-
-    return *this;
-
-}
 
 void CGisItemRte::genKey()
 {
@@ -233,10 +221,7 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     foreach(const rtept_t& rtept, rte.pts)
     {
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
-        //        if(!viewport.contains(pt))
-        //        {
-        //            return;
-        //        }
+
         gis->convertRad2Px(pt);
 
         line << pt;
@@ -275,10 +260,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
     {
 
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
-//        if(!viewport.contains(pt))
-//        {
-//            return;
-//        }
+
         gis->convertRad2Px(pt);
         pt = pt - rtept.focus;
         p.drawPixmap(pt, rtept.icon);

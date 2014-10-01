@@ -101,8 +101,6 @@ class CGisItemWpt : public IGisItem
         CGisItemWpt(const QDomNode& xml, CGisProject * project);
         virtual ~CGisItemWpt();
 
-        CGisItemWpt& operator=(const CGisItemWpt& w);
-
         void setName(const QString& str);
         void setPosition(const QPointF& pos);
         void setElevation(qint32 val);

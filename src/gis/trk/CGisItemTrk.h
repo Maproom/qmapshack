@@ -51,8 +51,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
         CGisItemTrk(const QDomNode &xml, CGisProject *project);
         virtual ~CGisItemTrk();
 
-        CGisItemTrk& operator=(const CGisItemTrk& t);
-
         const QString& getName(){return trk.name;}
         int getColorIdx(){return colorIdx;}
         QString getInfo();

@@ -34,7 +34,6 @@ class CGisItemRte : public IGisItem, public IGisLine
         CGisItemRte(const CGisItemRte& parentRte, CGisProject * project, int idx);
         virtual ~CGisItemRte();
 
-        CGisItemRte& operator=(const CGisItemRte& r);
 
         const QString& getName(){return rte.name;}
         QString getInfo();

@@ -23,6 +23,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -109,6 +110,24 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
     if(rte1 && rte2)
     {
         if(rte1->parent() == rte2->parent())
+        {
+            e->setDropAction(Qt::MoveAction);
+        }
+        else
+        {
+            e->setDropAction(Qt::CopyAction);
+        }
+        QTreeWidget::dragMoveEvent(e);
+        return;
+
+    }
+
+    CGisItemOvlArea * area1 = dynamic_cast<CGisItemOvlArea*>(currentItem());
+    CGisItemOvlArea * area2 = dynamic_cast<CGisItemOvlArea*>(itemAt(e->pos()));
+
+    if(area1 && area2)
+    {
+        if(area1->parent() == area2->parent())
         {
             e->setDropAction(Qt::MoveAction);
         }
@@ -213,7 +232,28 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
             CGisProject * project = dynamic_cast<CGisProject*>(rte2->parent());
             if(project)
             {
-                new CGisItemRte(*rte2,project, project->indexOfChild(rte2) + off);
+                new CGisItemRte(*rte1,project, project->indexOfChild(rte2) + off);
+            }
+        }
+        emit sigChanged();
+        return;
+    }
+
+    CGisItemOvlArea * area1 = dynamic_cast<CGisItemOvlArea*>(currentItem());
+    CGisItemOvlArea * area2 = dynamic_cast<CGisItemOvlArea*>(itemAt(e->pos()));
+
+    if(area1 && area2)
+    {
+        if(area1->parent() == area2->parent())
+        {
+            QTreeWidget::dropEvent(e);
+        }
+        else
+        {
+            CGisProject * project = dynamic_cast<CGisProject*>(area2->parent());
+            if(project)
+            {
+                new CGisItemOvlArea(*area1,project, project->indexOfChild(area2) + off);
             }
         }
         emit sigChanged();
@@ -236,6 +276,11 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         {
             new CGisItemRte(*rte1, project, -1);
         }
+        else if(area1 != 0)
+        {
+            new CGisItemOvlArea(*area1, project, -1);
+        }
+
     }
 
 }

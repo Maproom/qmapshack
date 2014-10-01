@@ -157,23 +157,6 @@ CGisItemWpt::~CGisItemWpt()
 
 }
 
-CGisItemWpt& CGisItemWpt::operator=(const CGisItemWpt& w)
-{
-    wpt             = w.wpt;
-    proximity       = w.proximity;
-    geocache        = w.geocache;
-    focus           = w.focus;
-    posScreen       = w.posScreen;
-
-
-    flags           = w.flags;
-    key             = w.key;
-    icon            = w.icon;
-    boundingRect    = w.boundingRect;
-
-    return *this;
-}
-
 void CGisItemWpt::genKey()
 {
     if(key.isEmpty())

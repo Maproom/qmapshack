@@ -20,6 +20,7 @@
 #define CPLOTTRACK_H
 
 #include <QWidget>
+#include <proj_api.h>
 
 class CGisItemTrk;
 
@@ -29,7 +30,7 @@ class CPlotTrack : public QWidget
         CPlotTrack(QWidget * parent);
         virtual ~CPlotTrack();
 
-        void setTrack(CGisItemTrk * track);
+        void setTrack(CGisItemTrk * track, const QString &proj = "+init=epsg:3857");
         void updateData();
         void setMouseMoveFocus(qreal lon, qreal lat);
 
@@ -41,11 +42,15 @@ class CPlotTrack : public QWidget
     private:
         void draw();
 
+        projPJ  pjsrc;
+        projPJ  pjtar;
+
         bool needsRedraw;
         CGisItemTrk * trk;
         QImage buffer;
 
-        QPointF topLeft;
+        QPointF pt1;
+        QPointF pt2;
         QPointF scale;
         QPolygonF line;
 

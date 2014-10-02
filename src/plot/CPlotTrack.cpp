@@ -25,21 +25,28 @@
 
 CPlotTrack::CPlotTrack(QWidget *parent)
     : QWidget(parent)
+    , pjsrc(0)
+    , pjtar(0)
     , needsRedraw(true)
     , trk(0)
     , xoff(0)
     , yoff(0)
-{    
+    , pos(NOPOINTF)
+{
+    pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }
 
 CPlotTrack::~CPlotTrack()
 {
+    if(pjtar) pj_free(pjtar);
+    if(pjsrc) pj_free(pjsrc);
 
 }
 
-void CPlotTrack::setTrack(CGisItemTrk * track)
+void CPlotTrack::setTrack(CGisItemTrk * track, const QString& proj)
 {
     trk = track;
+    pjsrc = pj_init_plus(proj.toLatin1());
 
     updateData();
 }
@@ -55,18 +62,25 @@ void CPlotTrack::updateData()
     QRectF r = buffer.rect();
     r.adjust(5,5,-5,-5);
 
-    topLeft = boundingRect.topLeft() * RAD_TO_DEG;
-    if(qAbs(boundingRect.width()) > qAbs(boundingRect.height() * 2))
+    pt1 = boundingRect.topLeft();
+    pt2 = boundingRect.bottomRight();
+
+    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+
+    qreal w = pt2.x() - pt1.x();
+    qreal h = pt2.y() - pt1.y();
+
+    if(qAbs(w) > qAbs(h))
     {
-        scale.rx()  = r.width() / boundingRect.width();
-        scale.ry() = -scale.x() * 2;
+        scale.rx() = r.width() / w;
+        scale.ry() = -scale.x();
     }
     else
     {
-        scale.ry() = r.height() / boundingRect.height();
-        scale.rx() = -scale.y() / 2;
+        scale.ry() = r.height() / h;
+        scale.rx() = -scale.y();
     }
-    scale      /= RAD_TO_DEG;
 
     line.clear();
     const CGisItemTrk::trk_t& t = trk->getTrackData();
@@ -79,22 +93,28 @@ void CPlotTrack::updateData()
                 continue;
             }
 
-            line << (QPointF(trkpt.lon, trkpt.lat) - topLeft) * scale;
+            QPointF pt(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+            pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+
+            line << (pt - pt1) * scale;
         }
     }
 
-    xoff = qRound((buffer.width()  - boundingRect.width()  * scale.x() * RAD_TO_DEG) / 2);
-    yoff = qRound((buffer.height() - boundingRect.height() * scale.y() * RAD_TO_DEG) / 2);
+    xoff = qRound((buffer.width()  - w * scale.x()) / 2);
+    yoff = qRound((buffer.height() - h * scale.y()) / 2);
+
+
 
     needsRedraw = true;
 }
 
 void CPlotTrack::setMouseMoveFocus(qreal lon, qreal lat)
 {
-    pos.rx() = lon;
-    pos.ry() = lat;
+    pos.rx() = lon * DEG_TO_RAD;
+    pos.ry() = lat * DEG_TO_RAD;
 
-    pos = (pos - topLeft) * scale;
+    pj_transform(pjtar, pjsrc, 1, 0, &pos.rx(), &pos.ry(), 0);
+    pos = (pos - pt1) * scale;
     update();
 }
 

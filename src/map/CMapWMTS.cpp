@@ -288,10 +288,10 @@ void CMapWMTS::slotLayersChanged(QListWidgetItem * item)
 
 void CMapWMTS::slotQueueChanged()
 {
+    QMutexLocker lock(&mutex);
+
     if(!urlQueue.isEmpty() && urlPending.size() < 6)
     {        
-        QMutexLocker lock(&mutex);
-
         // request up to 6 pending request
         for(int i = 0; i < (6 - urlPending.size()); i++)
         {

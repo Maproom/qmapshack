@@ -387,8 +387,19 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
                 state   = eStateRangeSelected;
                 idxStop = idxFocus;
 
-                scrOptRange = new CScrOptRange(line[idxStop], canvas);
-                connect(scrOptRange->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeleteRange()));
+                if(idxStop < 0)
+                {
+                    state       = eStateIdle;
+                    idxFocus    = -1;
+                    idxStart    = -1;
+                    idxStop     = -1;
+
+                }
+                else
+                {
+                    scrOptRange = new CScrOptRange(line[idxStop], canvas);
+                    connect(scrOptRange->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeleteRange()));
+                }
 
                 cursor  = cursor1;
                 QApplication::restoreOverrideCursor();

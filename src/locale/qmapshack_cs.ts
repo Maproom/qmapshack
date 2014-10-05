@@ -1048,18 +1048,23 @@ Unknown structure.</source>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
         <source>Add Waypoint</source>
         <translation>Přidat cestovní bod</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <source>Copy position</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1923,12 +1928,12 @@ není platným vymezením soustavy souřadnic
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="652"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="672"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="652"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="672"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2727,18 +2732,18 @@ line %2, column %3:
         <translation>Změněná barva</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="237"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="240"/>
         <source>Elevation: %1 %2</source>
         <translation>Výška: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="245"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="248"/>
         <source>Proximity: %1 %2</source>
         <translation>Blízkost: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1023"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="310"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="313"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
@@ -2755,47 +2760,47 @@ line %2, column %3:
         <translation>Zadat nový název pro cestovní bod.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="317"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="320"/>
         <source>Changed position</source>
         <translation>Změněná poloha</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="323"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="326"/>
         <source>Changed elevation</source>
         <translation>Změněná výška</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="329"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="332"/>
         <source>Changed proximity</source>
         <translation>Změněná blízkost</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="340"/>
         <source>Changed icon</source>
         <translation>Změněná ikona</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="343"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="346"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="349"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="352"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="392"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="395"/>
         <source>Archived</source>
         <translation>Archivováno</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="396"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="399"/>
         <source>Available</source>
         <translation>Dostupné</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="403"/>
         <source>Not Available</source>
         <translation>Nedostupné</translation>
     </message>

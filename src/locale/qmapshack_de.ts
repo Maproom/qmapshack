@@ -81,32 +81,32 @@
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="127"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Name ändern...</translation>
+        <translation>Name ändern...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="127"/>
         <source>Enter new waypoint name.</source>
-        <translation type="unfinished">Geben Sie einen neuen Namen ein.</translation>
+        <translation>Geben Sie einen neuen Namen ein.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="222"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="225"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="232"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="235"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -1076,19 +1076,24 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
         <source>Add Waypoint</source>
         <translation>Wegpunkt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Track hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebiet hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <source>Copy position</source>
+        <translation>Position kopieren</translation>
     </message>
 </context>
 <context>
@@ -1401,52 +1406,52 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="37"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="75"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="105"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="126"/>
         <source>Border width</source>
-        <translation type="unfinished"></translation>
+        <translation>Randbreite</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="140"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiel</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="159"/>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparenz</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="179"/>
         <source>Points</source>
-        <translation type="unfinished">Punkte</translation>
+        <translation>Punkte</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="206"/>
         <source>Position</source>
-        <translation type="unfinished">Position</translation>
+        <translation>Position</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="215"/>
         <source>Hist.</source>
-        <translation type="unfinished">Hist.</translation>
+        <translation>Hist.</translation>
     </message>
 </context>
 <context>
@@ -1963,20 +1968,20 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../mouse/IMouseEditLine.cpp" line="240"/>
         <source>Add points?</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte hinzufügen?</translation>
     </message>
     <message>
         <location filename="../mouse/IMouseEditLine.cpp" line="240"/>
         <source>Add points to temporary line?</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte zur temporären Linie hinzufügen?</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="652"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="672"/>
         <source>Warning!</source>
         <translation>Warnung!</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="652"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="672"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation>Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
@@ -2179,17 +2184,17 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="63"/>
         <source>Move selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählten Punkt verschieben.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="77"/>
         <source>Add points before the selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte vor dem ausgewählten Punkt einfügen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="91"/>
         <source>Add points after the selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte nach dem ausgewählten Punkt einfügen.</translation>
     </message>
 </context>
 <context>
@@ -2364,7 +2369,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
         <source>Select a project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein Projekt auswählen...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
@@ -2731,57 +2736,57 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="94"/>
         <source>thin</source>
-        <translation type="unfinished"></translation>
+        <translation>dünn</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="95"/>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>normal</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="96"/>
         <source>wide</source>
-        <translation type="unfinished"></translation>
+        <translation>breit</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="97"/>
         <source>strong</source>
-        <translation type="unfinished"></translation>
+        <translation>sehr breit</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="485"/>
         <source>Changed area shape.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebietsausdehnung geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="492"/>
         <source>Changed name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Namen geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="498"/>
         <source>Changed border width.</source>
-        <translation type="unfinished"></translation>
+        <translation>Randbreite geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="504"/>
         <source>Changed fill pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Füllmuster geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="510"/>
         <source>Changed opacity.</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparent geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="516"/>
         <source>Changed comment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommentar geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="522"/>
         <source>Changed description.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="534"/>
@@ -2802,63 +2807,63 @@ Zeile %2, Spalte %3:
         <translation>Geben Sie einen neuen Namen ein.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="237"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="240"/>
         <source>Elevation: %1 %2</source>
         <translation>Höhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="245"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="248"/>
         <source>Proximity: %1 %2</source>
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1023"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="310"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="313"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="317"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="320"/>
         <source>Changed position</source>
         <translation>Position geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="323"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="326"/>
         <source>Changed elevation</source>
         <translation>Höhe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="329"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="332"/>
         <source>Changed proximity</source>
         <translation>Abstandsalarm geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="340"/>
         <source>Changed icon</source>
         <translation>Symbol geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="343"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="346"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="349"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="352"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="392"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="395"/>
         <source>Archived</source>
         <translation>Archiviert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="396"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="399"/>
         <source>Available</source>
         <translation>Verfügbar</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="403"/>
         <source>Not Available</source>
         <translation>Nicht verfügbar</translation>
     </message>
@@ -2892,7 +2897,7 @@ Zeile %2, Spalte %3:
         <location filename="../mouse/CMouseEditArea.cpp" line="78"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="84"/>
         <source>Enter new track name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuen Tracknamen eingeben.</translation>
     </message>
 </context>
 </TS>

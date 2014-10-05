@@ -26,6 +26,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisProject.h"
+#include "GeoMath.h"
 
 #include <QtWidgets>
 
@@ -41,6 +42,8 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     menu->addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, SLOT(slotAddWpt()));
     menu->addAction(QIcon("://icons/32x32/AddTrk.png"), tr("Add Track"), this, SLOT(slotAddTrk()));
     menu->addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"), this, SLOT(slotAddArea()));
+    menu->addSeparator();
+    menu->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
 }
 
 CMouseNormal::~CMouseNormal()
@@ -324,4 +327,16 @@ void CMouseNormal::slotAddArea()
 
     canvas->setMouseEditArea(pt);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void CMouseNormal::slotCopyPosition()
+{
+    QPointF pt = point;
+    gis->convertPx2Rad(pt);
+
+    QString position;
+    GPS_Math_Deg_To_Str(pt.x() * RAD_TO_DEG, pt.y() * RAD_TO_DEG, position);
+
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(position);
 }

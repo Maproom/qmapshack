@@ -48,6 +48,7 @@ class CMouseNormal : public IMouse
         void slotAddWpt();
         void slotAddTrk();
         void slotAddArea();
+        void slotCopyPosition();
 
     protected:
         /// the flag is true if the map moving is in progress

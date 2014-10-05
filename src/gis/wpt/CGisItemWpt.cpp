@@ -209,7 +209,10 @@ const QString& CGisItemWpt::getNewIcon()
 void CGisItemWpt::getNewPosition(QPointF& pos)
 {
     CPositionDialog dlg(0, pos);
-    dlg.exec();
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        pos = NOPOINTF;
+    }
 }
 
 

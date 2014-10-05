@@ -280,6 +280,10 @@ void CMouseNormal::slotAddWpt()
     pt *= RAD_TO_DEG;
 
     CGisItemWpt::getNewPosition(pt);
+    if(pt == NOPOINTF)
+    {
+        return;
+    }
 
     QString name = CGisItemWpt::getNewName();
     if(name.isEmpty())

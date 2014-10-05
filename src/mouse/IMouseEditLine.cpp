@@ -387,19 +387,8 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
                 state   = eStateRangeSelected;
                 idxStop = idxFocus;
 
-                if(idxStop < 0)
-                {
-                    state       = eStateIdle;
-                    idxFocus    = -1;
-                    idxStart    = -1;
-                    idxStop     = -1;
-
-                }
-                else
-                {
-                    scrOptRange = new CScrOptRange(line[idxStop], canvas);
-                    connect(scrOptRange->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeleteRange()));
-                }
+                scrOptRange = new CScrOptRange(line[idxStop], canvas);
+                connect(scrOptRange->toolDelete, SIGNAL(clicked()), this, SLOT(slotDeleteRange()));
 
                 cursor  = cursor1;
                 QApplication::restoreOverrideCursor();
@@ -442,6 +431,20 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
     switch(state)
     {
         case eStateIdle:
+        {
+            if(!scrOptEditLine->rect().contains(point))
+            {
+                panCanvas(point);
+            }
+
+            int old = idxFocus;
+            idxFocus = getPointCloseBy(point);
+            if(old != idxFocus)
+            {
+                canvas->update();
+            }
+            break;
+        }
         case eStateSelectRange:
         {
             if(!scrOptEditLine->rect().contains(point))
@@ -451,6 +454,12 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
 
             int old = idxFocus;
             idxFocus = getPointCloseBy(point);
+
+            if(idxFocus < 0)
+            {
+                idxFocus = old;
+            }
+
             if(old != idxFocus)
             {
                 canvas->update();

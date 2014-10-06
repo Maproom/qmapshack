@@ -118,6 +118,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void reverseTrkByKey(const QString& key);
 
+        void combineTrkByKey(const QString& key);
+
         void editAreaByKey(const QString& key);
 
 

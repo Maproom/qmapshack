@@ -281,6 +281,20 @@ void CGisWidget::reverseTrkByKey(const QString& key)
 
 }
 
+void CGisWidget::combineTrkByKey(const QString& key)
+{
+    IGisItem::mutexItems.lock();
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+    if(trk)
+    {
+//        trk->reverse();
+    }
+    IGisItem::mutexItems.unlock();
+    emit sigChanged();
+
+}
+
 void CGisWidget::editTrkByKey(const QString& key)
 {
     IGisItem::mutexItems.lock();

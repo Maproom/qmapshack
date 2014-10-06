@@ -98,6 +98,7 @@
         <file>icons/32x32/SelectRange.png</file>
         <file>icons/32x32/Area.png</file>
         <file>icons/32x32/Reverse.png</file>
+        <file>icons/32x32/Combine.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -178,6 +179,7 @@
         <file>icons/48x48/SelectRange.png</file>
         <file>icons/48x48/Area.png</file>
         <file>icons/48x48/Reverse.png</file>
+        <file>icons/48x48/Combine.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

@@ -67,6 +67,7 @@ class CGisListWks : public QTreeWidget
         QAction * actionFocusTrk;
         QAction * actionEditTrk;
         QAction * actionReverseTrk;
+        QAction * actionCombineTrk;
 
 
 };

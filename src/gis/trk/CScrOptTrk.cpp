@@ -46,6 +46,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolCut, SIGNAL(clicked()), this, SLOT(slotCut()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
     connect(toolReverse, SIGNAL(clicked()), this, SLOT(slotReverse()));
+    connect(toolCombine, SIGNAL(clicked()), this, SLOT(slotCombine()));
 }
 
 CScrOptTrk::~CScrOptTrk()
@@ -87,6 +88,13 @@ void CScrOptTrk::slotReverse()
 {
     CGisWidget::self().reverseTrkByKey(key);
     deleteLater();
+}
+
+void CScrOptTrk::slotCombine()
+{
+    CGisWidget::self().combineTrkByKey(key);
+    deleteLater();
+
 }
 
 void CScrOptTrk::draw(QPainter& p)

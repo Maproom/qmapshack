@@ -851,9 +851,15 @@ void CGisItemTrk::reverse()
         return;
     }
 
+    QString name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
+    if(name1.isEmpty())
+    {
+        return;
+    }
+
     CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1);
 
-    trk1->trk.name = trk.name + "_rev";
+    trk1->trk.name = name1;
     trk1->trk.segs.clear();
     foreach(const trkseg_t& seg, trk.segs)
     {

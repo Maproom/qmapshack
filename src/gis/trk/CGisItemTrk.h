@@ -93,6 +93,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
            @return Return true on success.
          */
         bool cut();
+
+        void reverse();
         /**
            @brief Check for user focus
 

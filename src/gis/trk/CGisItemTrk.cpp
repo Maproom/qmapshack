@@ -843,6 +843,38 @@ bool CGisItemTrk::cut()
     return true;
 }
 
+void CGisItemTrk::reverse()
+{
+    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    if(project == 0)
+    {
+        return;
+    }
+
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1);
+
+    trk1->trk.name = trk.name + "_rev";
+    trk1->trk.segs.clear();
+    foreach(const trkseg_t& seg, trk.segs)
+    {
+        trkseg_t seg1;
+        foreach(const trkpt_t& pt, seg.pts)
+        {
+            trkpt_t pt1     = pt;
+            pt1.time        = QDateTime();
+
+            seg1.pts.push_front(pt1);
+        }
+        trk1->trk.segs.push_front(seg1);
+    }
+    trk1->deriveSecondaryData();
+    trk1->setText(0, trk1->getName());
+    trk1->setToolTip(0, trk1->getInfo());
+    trk1->setText(1,"*");
+    project->setText(1,"*");
+
+}
+
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     line.clear();

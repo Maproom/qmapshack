@@ -40,6 +40,7 @@ class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
         void slotProfile(bool on);
         void slotCut();
         void slotEdit();
+        void slotReverse();
 
 
     private:

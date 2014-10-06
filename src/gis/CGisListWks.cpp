@@ -46,6 +46,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionFocusTrk  = menuItem->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
     actionEditTrk   = menuItem->addAction(QIcon("://icons/32x32/LineMove.png"),tr("Edit Track Points"), this, SLOT(slotEditTrk()));
+    actionReverseTrk = menuItem->addAction(QIcon("://icons/32x32/Reverse.png"),tr("Reverse Track"), this, SLOT(slotReverseTrk()));
     actionFocusTrk->setCheckable(true);
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
@@ -333,13 +334,15 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         {
             actionFocusTrk->setVisible(false);
             actionEditTrk->setVisible(false);
+            actionReverseTrk->setVisible(false);
         }
         else
         {
             actionFocusTrk->setVisible(true);
             actionEditTrk->setVisible(true);
+            actionReverseTrk->setVisible(true);
             actionFocusTrk->setChecked(trk->hasUserFocus());
-            actionEditTrk->setEnabled(!trk->isReadOnly());
+            actionEditTrk->setEnabled(!trk->isReadOnly());            
         }
         // display menu
         QPoint p = mapToGlobal(point);
@@ -482,6 +485,18 @@ void CGisListWks::slotEditTrk()
     {
         QString key = gisItem->getKey();
         CGisWidget::self().editTrkByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotReverseTrk()
+{
+    IGisItem::mutexItems.lock();
+    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().reverseTrkByKey(key);
     }
     IGisItem::mutexItems.unlock();
 }

@@ -16,52 +16,41 @@
 
 **********************************************************************************************/
 
-#ifndef CPLOTTRACK_H
-#define CPLOTTRACK_H
+#ifndef CCOMBINETRK_H
+#define CCOMBINETRK_H
 
-#include <QWidget>
-#include <proj_api.h>
+#include <QDialog>
+#include "ui_ICombineTrk.h"
 
 class CGisItemTrk;
+class CGisProject;
 
-class CPlotTrack : public QWidget
+class CCombineTrk : public QDialog, private Ui::ICombineTrk
 {
+    Q_OBJECT
     public:
-        CPlotTrack(QWidget * parent);
-        virtual ~CPlotTrack();
+        CCombineTrk(CGisItemTrk& trk, CGisProject& project, QWidget * parent);
+        virtual ~CCombineTrk();
 
-        void setTrack(CGisItemTrk * track, const QString &proj = "+init=epsg:3857");
-        void setTrack(const QPolygonF &track, const QString &proj = "+init=epsg:3857");
-        void updateData();
-        void setMouseMoveFocus(qreal lon, qreal lat);
+        const QStringList& getTrackKeys(){return keys;}
 
-    protected:
-        void resizeEvent(QResizeEvent * e);
-        void paintEvent(QPaintEvent * e);
+    public slots:
+        void accept();
 
+    private slots:
+        void slotSelectionChanged();
+        void slotSelect();
+        void slotRemove();
+        void slotUp();
+        void slotDown();
 
     private:
-        void draw();
+        void updatePreview();
+        CGisItemTrk& trk;
+        CGisProject& project;
 
-        projPJ  pjsrc;
-        projPJ  pjtar;
-
-        bool needsRedraw;
-        CGisItemTrk * trk;
-        QPolygonF coords;
-
-        QImage buffer;
-
-        QPointF pt1;
-        QPointF pt2;
-        QPointF scale;
-        QPolygonF line;
-
-        qint32 xoff;
-        qint32 yoff;
-
-        QPointF pos;
+        QStringList keys;
 };
 
-#endif //CPLOTTRACK_H
+#endif //CCOMBINETRK_H
 

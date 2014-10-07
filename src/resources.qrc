@@ -53,6 +53,7 @@
         <file>icons/32x32/POIText.png</file>
         <file>icons/32x32/Reset.png</file>
         <file>icons/32x32/Right.png</file>
+        <file>icons/32x32/Left.png</file>
         <file>icons/32x32/Scale.png</file>
         <file>icons/32x32/SelectColor.png</file>
         <file>icons/32x32/ToBottom.png</file>
@@ -134,6 +135,7 @@
         <file>icons/48x48/POIText.png</file>
         <file>icons/48x48/Reset.png</file>
         <file>icons/48x48/Right.png</file>
+        <file>icons/48x48/Left.png</file>
         <file>icons/48x48/Scale.png</file>
         <file>icons/48x48/SelectColor.png</file>
         <file>icons/48x48/ToBottom.png</file>

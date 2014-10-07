@@ -90,6 +90,7 @@ set( SRCS
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
     gis/trk/CDetailsTrk.cpp
+    gis/trk/CCombineTrk.cpp
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
     gis/ovl/CGisItemOvlArea.cpp
@@ -191,7 +192,8 @@ set( HDRS
     gis/wpt/CProjWpt.h
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
-    gis/trk/CDetailsTrk.cpp
+    gis/trk/CDetailsTrk.h
+    gis/trk/CCombineTrk.h
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
     gis/ovl/CGisItemOvlArea.h
@@ -238,6 +240,7 @@ set( UIS
     gis/wpt/IProjWpt.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/IDetailsTrk.ui
+    gis/trk/ICombineTrk.ui
     gis/rte/IScrOptRte.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui

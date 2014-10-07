@@ -288,7 +288,7 @@ void CGisWidget::combineTrkByKey(const QString& key)
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk)
     {
-//        trk->reverse();
+        trk->combine();
     }
     IGisItem::mutexItems.unlock();
     emit sigChanged();

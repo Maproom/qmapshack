@@ -95,6 +95,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
         bool cut();
 
         void reverse();
+
+        void combine();
         /**
            @brief Check for user focus
 

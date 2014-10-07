@@ -51,19 +51,59 @@ void CPlotTrack::setTrack(CGisItemTrk * track, const QString& proj)
     updateData();
 }
 
+void CPlotTrack::setTrack(const QPolygonF& track, const QString &proj)
+{
+    coords = track;
+    pjsrc = pj_init_plus(proj.toLatin1());
+
+    updateData();
+}
+
 void CPlotTrack::updateData()
 {
-    if(trk == 0)
+    if(trk == 0 && coords.isEmpty())
     {
         return;
     }
 
-    const QRectF& boundingRect = trk->getBoundingRect();
+    QRectF boundingRect;
+    if(trk)
+    {
+        coords.clear();
+        const CGisItemTrk::trk_t& t = trk->getTrackData();
+        foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
+        {
+            foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+            {
+                if(trkpt.flags & CGisItemTrk::trkpt_t::eDeleted)
+                {
+                    continue;
+                }
+
+                coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+            }
+        }
+    }
+
+    qreal north = -90 * DEG_TO_RAD;
+    qreal east  = -180 * DEG_TO_RAD;
+    qreal south =  90 * DEG_TO_RAD;
+    qreal west  =  180 * DEG_TO_RAD;
+
+    foreach(const QPointF& trkpt, coords)
+    {
+        if(trkpt.x() < west)  west    = trkpt.x();
+        if(trkpt.x() > east)  east    = trkpt.x();
+        if(trkpt.y() < south) south   = trkpt.y();
+        if(trkpt.y() > north) north   = trkpt.y();
+    }
+
+
     QRectF r = buffer.rect();
     r.adjust(5,5,-5,-5);
 
-    pt1 = boundingRect.topLeft();
-    pt2 = boundingRect.bottomRight();
+    pt1 = QPointF(west, north);
+    pt2 = QPointF(east, south);
 
     pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
     pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
@@ -83,27 +123,15 @@ void CPlotTrack::updateData()
     }
 
     line.clear();
-    const CGisItemTrk::trk_t& t = trk->getTrackData();
-    foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
+    foreach(const QPointF& trkpt, coords)
     {
-        foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
-        {
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eDeleted)
-            {
-                continue;
-            }
-
-            QPointF pt(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-            pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
-
-            line << (pt - pt1) * scale;
-        }
+        QPointF pt(trkpt.x(), trkpt.y());
+        pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+        line << (pt - pt1) * scale;
     }
 
     xoff = qRound((buffer.width()  - w * scale.x()) / 2);
     yoff = qRound((buffer.height() - h * scale.y()) / 2);
-
-
 
     needsRedraw = true;
 }

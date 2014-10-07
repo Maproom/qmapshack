@@ -19,6 +19,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CDetailsTrk.h"
+#include "gis/trk/CCombineTrk.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
 #include "plot/IPlot.h"
@@ -873,6 +874,51 @@ void CGisItemTrk::reverse()
         }
         trk1->trk.segs.push_front(seg1);
     }
+    trk1->deriveSecondaryData();
+    trk1->setText(0, trk1->getName());
+    trk1->setToolTip(0, trk1->getInfo());
+    trk1->setText(1,"*");
+    project->setText(1,"*");
+
+}
+
+void CGisItemTrk::combine()
+{
+    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    if(project == 0)
+    {
+        return;
+    }
+
+    CCombineTrk dlg(*this, *project, 0);
+    dlg.exec();
+
+    QStringList keys = dlg.getTrackKeys();
+    if(keys.isEmpty())
+    {
+        return;
+    }
+
+    QString name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "& other");
+    if(name1.isEmpty())
+    {
+        return;
+    }
+
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1);
+
+    trk1->trk.name = name1;
+    foreach(const QString& key, keys)
+    {
+        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));
+        if(trk2 == 0)
+        {
+            continue;
+        }
+
+        trk1->trk.segs += trk2->trk.segs;
+    }
+
     trk1->deriveSecondaryData();
     trk1->setText(0, trk1->getName());
     trk1->setToolTip(0, trk1->getInfo());

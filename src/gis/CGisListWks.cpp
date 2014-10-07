@@ -336,12 +336,14 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionFocusTrk->setVisible(false);
             actionEditTrk->setVisible(false);
             actionReverseTrk->setVisible(false);
+            actionCombineTrk->setVisible(false);
         }
         else
         {
             actionFocusTrk->setVisible(true);
             actionEditTrk->setVisible(true);
             actionReverseTrk->setVisible(true);
+            actionCombineTrk->setVisible(true);
             actionFocusTrk->setChecked(trk->hasUserFocus());
             actionEditTrk->setEnabled(!trk->isReadOnly());            
         }

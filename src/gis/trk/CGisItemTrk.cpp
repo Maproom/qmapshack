@@ -908,6 +908,7 @@ void CGisItemTrk::combine()
     CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1);
 
     trk1->trk.name = name1;
+    trk1->trk.segs.clear();
     foreach(const QString& key, keys)
     {
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));

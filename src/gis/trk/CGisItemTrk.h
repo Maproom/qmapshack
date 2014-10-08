@@ -45,7 +45,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
             ,eFocusMouseClick
         };
 
-        CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * project);
+        CGisItemTrk(const QString& name, quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * project);
         CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx);
         CGisItemTrk(const QPolygonF& line, const QString &name, CGisProject * project, int idx);
         CGisItemTrk(const QDomNode &xml, CGisProject *project);

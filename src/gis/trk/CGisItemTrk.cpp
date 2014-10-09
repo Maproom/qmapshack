@@ -101,13 +101,13 @@ const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 QString CGisItemTrk::keyUserFocus;
 
 /// used to create a new track from a part of an existing track
-CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * project)
+CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * project)
     : IGisItem(project, eTypeTrk, -1)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
-    flags = eFlagCreatedInQms|eFlagWriteAllowed;
+    flags = eFlagCreatedInQms;
 
     foreach(const trkseg_t& srcseg, srctrk.segs)
     {
@@ -132,7 +132,7 @@ CGisItemTrk::CGisItemTrk(quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisPr
         }
     }
 
-    trk.name    = srctrk.name + QString(" (%1 - %2)").arg(idx1).arg(idx2);
+    trk.name    = name;
     trk.cmt     = srctrk.cmt;
     trk.desc    = srctrk.desc;
     trk.src     = srctrk.src;
@@ -837,9 +837,21 @@ bool CGisItemTrk::cut()
         return false;
     }
 
+    QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idx);
+    name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+    if(name1.isEmpty())
+    {
+        return false;
+    }
+    new CGisItemTrk(name1, 0, mouseClickFocus->idx, trk, project);
 
-    new CGisItemTrk(0, mouseClickFocus->idx, trk, project);
-    new CGisItemTrk(mouseClickFocus->idx, cntTotalPoints-1, trk, project);
+    name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idx).arg(cntTotalPoints-1);
+    name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+    if(name1.isEmpty())
+    {
+        return false;
+    }
+    new CGisItemTrk(name1, mouseClickFocus->idx, cntTotalPoints-1, trk, project);
 
     return true;
 }
@@ -899,7 +911,7 @@ void CGisItemTrk::combine()
         return;
     }
 
-    QString name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "& other");
+    QString name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + " & other");
     if(name1.isEmpty())
     {
         return;

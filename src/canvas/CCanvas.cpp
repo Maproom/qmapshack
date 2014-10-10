@@ -29,6 +29,7 @@
 #include "mouse/CMouseMoveWpt.h"
 #include "mouse/CMouseEditTrk.h"
 #include "mouse/CMouseEditArea.h"
+#include "mouse/CMouseRangeTrk.h"
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -174,6 +175,17 @@ void CCanvas::setMouseEditTrk(CGisItemTrk& trk)
 {
     mouse->deleteLater();
     mouse = new CMouseEditTrk(trk, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
+void CCanvas::setMouseRangeTrk(CGisItemTrk& trk)
+{
+    mouse->deleteLater();
+    mouse = new CMouseRangeTrk(trk, gis, this);
     if(underMouse())
     {
         QApplication::restoreOverrideCursor();

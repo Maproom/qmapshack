@@ -16,39 +16,44 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#ifndef CMOUSERANGETRK_H
+#define CMOUSERANGETRK_H
 
-#include "mouse/IScrOpt.h"
-#include "ui_IScrOptTrk.h"
+#include "mouse/IMouse.h"
+#include <QPointer>
 
 class CGisItemTrk;
-class IMouse;
+class CGisDraw;
+class CCanvas;
+class CScrOptRangeTrk;
 
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
+class CMouseRangeTrk : public IMouse
 {
-    Q_OBJECT
     public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
-        virtual ~CScrOptTrk();
+        CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * parent);
+        virtual ~CMouseRangeTrk();
 
-        void draw(QPainter& p);
-
-    private slots:        
-        void slotDelete();
-        void slotEditDetails();
-        void slotProfile(bool on);
-        void slotCut();
-        void slotEdit();
-        void slotReverse();
-        void slotCombine();
-        void slotRange();
-
+        void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
+        void mousePressEvent(QMouseEvent * e);
+        void mouseMoveEvent(QMouseEvent * e);
+        void mouseReleaseEvent(QMouseEvent *e);
+        void wheelEvent(QWheelEvent * e);
 
     private:
         QString key;
-        QPointF anchor;
+
+        enum state_e
+        {
+             eStateIdle
+            ,eStateRangeSelected
+        };
+
+        state_e state;
+
+        QPointer<CScrOptRangeTrk> scrOptRange;
+
+
 };
 
-#endif //CSCROPTTRK_H
+#endif //CMOUSERANGETRK_H
 

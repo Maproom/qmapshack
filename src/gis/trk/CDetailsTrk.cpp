@@ -129,7 +129,7 @@ void CDetailsTrk::setupGui()
                 }
             }
 
-            item->setText(eColNum,QString::number(trkpt.idx));
+            item->setText(eColNum,QString::number(trkpt.idxTotal));
             if(trkpt.time.isValid())
             {
                 item->setText(eColTime, IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD));
@@ -226,7 +226,7 @@ void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t * pt)
     if(pt != 0)
     {
         treeWidget->blockSignals(true);
-        treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idx));
+        treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idxTotal));
         treeWidget->blockSignals(false);
     }
 }

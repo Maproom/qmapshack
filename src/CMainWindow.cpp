@@ -155,6 +155,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MainWindow/geometry", saveGeometry());
 
     cfg.beginGroup("Canvas");
+    QList<CCanvas*> allCanvas;
     for(int i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
@@ -166,6 +167,8 @@ CMainWindow::~CMainWindow()
         cfg.beginGroup(QString("Canvas%1").arg(i));
         canvas->saveConfig(cfg);
         cfg.endGroup();
+
+        allCanvas << canvas;
     }
 
     cfg.setValue("visibleCanvas", tabWidget->currentIndex());
@@ -180,6 +183,14 @@ CMainWindow::~CMainWindow()
     CMapDraw::saveMapPath(cfg);
     CDemDraw::saveDemPath(cfg);
     cfg.endGroup(); // Canvas
+
+    /*
+        Delete all canvas objects now to make sure they are destroyed before all
+        other objects. This allows children of the canvas to access central objects
+        like CGisWidget safely uppon their destruction. (e.g. CMouseRangeTrk to reset
+        it's track's draw mode by key)
+    */
+    qDeleteAll(allCanvas);
 
     QByteArray tz;
     IUnit::tz_mode_e tzmode;

@@ -104,6 +104,7 @@ QString CGisItemTrk::keyUserFocus;
 CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * project)
     : IGisItem(project, eTypeTrk, -1)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -114,11 +115,11 @@ CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const 
         trkseg_t seg;
         foreach(const trkpt_t& srcpt, srcseg.pts)
         {
-            if(srcpt.idx < idx1)
+            if(srcpt.idxTotal < idx1)
             {
                 continue;
             }
-            if(srcpt.idx > idx2)
+            if(srcpt.idxTotal > idx2)
             {
                 break;
             }
@@ -155,6 +156,7 @@ CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const 
 CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -169,14 +171,15 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, in
 }
 
 /// usd to create a track from a line of coordinates
-CGisItemTrk::CGisItemTrk(const QPolygonF& line, const QString& name, CGisProject * project, int idx)
+CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, CGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
     trk.name = name;
-    readLine(line);
+    readLine(l);
 
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
 
@@ -192,6 +195,7 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& line, const QString& name, CGisProject
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {        
@@ -224,7 +228,7 @@ CGisItemTrk::~CGisItemTrk()
 }
 
 
-void CGisItemTrk::setData(const QPolygonF &line)
+void CGisItemTrk::setData(const QPolygonF &l)
 {
     /*
         as this will change the line significantly we better stop
@@ -234,7 +238,7 @@ void CGisItemTrk::setData(const QPolygonF &line)
     mouseMoveFocus  = 0;
     delete dlgDetails;
 
-    readLine(line);
+    readLine(l);
 
     flags |= eFlagTainted;
     setText(1,"*");
@@ -243,9 +247,9 @@ void CGisItemTrk::setData(const QPolygonF &line)
     changed(QObject::tr("Changed trackpoints, sacrificed all previous data."));
 }
 
-void CGisItemTrk::getData(QPolygonF &line)
+void CGisItemTrk::getData(QPolygonF &l)
 {
-    line.clear();
+    l.clear();
     foreach (const trkseg_t& seg, trk.segs)
     {
         foreach(const trkpt_t& pt, seg.pts)
@@ -254,27 +258,27 @@ void CGisItemTrk::getData(QPolygonF &line)
             {
                 continue;
             }
-            line << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
+            l << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
         }
     }
 
 }
 
-void CGisItemTrk::readLine(const QPolygonF &line)
+void CGisItemTrk::readLine(const QPolygonF &l)
 {
     trk.segs.clear();
     trk.segs.resize(1);
     trkseg_t& seg = trk.segs.first();
 
-    seg.pts.resize(line.size());
+    seg.pts.resize(l.size());
 
-    QPolygonF ele(line.size());
-    CMainWindow::self().getEelevationAt(line, ele);
+    QPolygonF ele(l.size());
+    CMainWindow::self().getEelevationAt(l, ele);
 
-    for(int i = 0; i < line.size(); i++)
+    for(int i = 0; i < l.size(); i++)
     {
         trkpt_t& trkpt      = seg.pts[i];
-        const QPointF& pt   = line[i];
+        const QPointF& pt   = l[i];
 
         trkpt.lon = pt.x() * RAD_TO_DEG;
         trkpt.lat = pt.y() * RAD_TO_DEG;
@@ -447,7 +451,7 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
     qint32 i    = 0;
     qint32 idx  = -1;
     qint32  d   = NOINT;
-    foreach(const QPointF& point, line)
+    foreach(const QPointF& point, lineSimple)
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
@@ -466,7 +470,7 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
     const trkpt_t * newPointOfFocus = getVisibleTrkPtByIndex(idx);
     publishMouseFocus(newPointOfFocus, eFocusMouseClick, 0);
 
-    return line[idx];
+    return lineSimple[idx];
 }
 
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
@@ -618,13 +622,13 @@ void CGisItemTrk::deriveSecondaryData()
         {
             trkpt_t& trkpt = seg.pts[p];
 
-            trkpt.idx = cntTotalPoints++;
+            trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.flags & trkpt_t::eDeleted)
             {
                 trkpt.reset();
                 continue;
             }
-            cntVisiblePoints++;
+            trkpt.idxVisible = cntVisiblePoints++;
 
             if(trkpt.lon < west)  west    = trkpt.lon;
             if(trkpt.lon > east)  east    = trkpt.lon;
@@ -797,7 +801,7 @@ void CGisItemTrk::deriveSecondaryData()
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {
-    foreach(const QPointF& pt, line)
+    foreach(const QPointF& pt, lineSimple)
     {
         if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
         {
@@ -837,21 +841,21 @@ bool CGisItemTrk::cut()
         return false;
     }
 
-    QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idx);
+    QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
     name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
         return false;
     }
-    new CGisItemTrk(name1, 0, mouseClickFocus->idx, trk, project);
+    new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
 
-    name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idx).arg(cntTotalPoints-1);
+    name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idxTotal).arg(cntTotalPoints-1);
     name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
         return false;
     }
-    new CGisItemTrk(name1, mouseClickFocus->idx, cntTotalPoints-1, trk, project);
+    new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
 
     return true;
 }
@@ -942,40 +946,95 @@ void CGisItemTrk::combine()
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
-    line.clear();
+    lineSimple.clear();
+    lineFull.clear();
+
     if(!viewport.intersects(boundingRect))
     {
         return;
     }
 
-    QPointF     pt1;
-
+    QPointF pt1;
     QPointF p1 = viewport.topLeft();
     QPointF p2 = viewport.bottomRight();
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
-    foreach (const trkseg_t& seg, trk.segs)
+    if(drawMode == eDrawNormal)
     {
-        foreach(const trkpt_t& pt, seg.pts)
+        // in normal mode the trackline without points marked as deleted is drawn
+        foreach (const trkseg_t& seg, trk.segs)
         {
-            if(pt.flags & trkpt_t::eDeleted)
+            foreach(const trkpt_t& pt, seg.pts)
             {
-                continue;
-            }
+                if(pt.flags & trkpt_t::eDeleted)
+                {
+                    continue;
+                }
 
-            pt1.setX(pt.lon);
-            pt1.setY(pt.lat);
-            pt1 *= DEG_TO_RAD;                       
-            line << pt1;
+                pt1.setX(pt.lon);
+                pt1.setY(pt.lat);
+                pt1 *= DEG_TO_RAD;
+                lineSimple << pt1;
+            }
         }
     }
+    else
+    {
+        // in full mode the complete track including points marked as deleted
+        // is drawn as gray line first. Then the track without points marked as
+        // deleted is drawn with it's configured color
+        foreach (const trkseg_t& seg, trk.segs)
+        {
+            foreach(const trkpt_t& pt, seg.pts)
+            {
+                pt1.setX(pt.lon);
+                pt1.setY(pt.lat);
+                pt1 *= DEG_TO_RAD;
 
-    gis->convertRad2Px(line);
+                lineFull << pt1;
 
+                if(pt.flags & trkpt_t::eDeleted)
+                {
+                    continue;
+                }
+
+                lineSimple << pt1;
+            }
+        }
+    }
+    gis->convertRad2Px(lineSimple);
+    gis->convertRad2Px(lineFull);
+
+    // draw the full line first
+    if(drawMode == eDrawRange)
+    {
+        QList<QPolygonF> lines;
+        splitLineToViewport(lineFull, extViewport, lines);
+
+        p.setPen(QPen(Qt::lightGray,5,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+
+        foreach(const QPolygonF& l, lines)
+        {
+            p.drawPolyline(l);
+        }
+
+        QPixmap bullet("://icons/8x8/bullet_dark_gray.png");
+        foreach(const QPolygonF& l, lines)
+        {
+            foreach(const QPointF& pt, l)
+            {
+                p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
+            }
+        }
+
+    }
+    // -------------------------
+
+    // draw the reduced track line
     QList<QPolygonF> lines;
-    splitLineToViewport(line, extViewport, lines);
+    splitLineToViewport(lineSimple, extViewport, lines);
 
     if(key == keyUserFocus)
     {
@@ -998,7 +1057,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     foreach(const QPolygonF& l, lines)
     {
         p.drawPolyline(l);
-    }    
+    }
+    // -------------------------
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
@@ -1094,7 +1154,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         p.drawPixmap(anchor - QPointF(4,4), QPixmap(bulletColors[colorIdx]));
     }
-
 }
 
 void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
@@ -1105,12 +1164,35 @@ void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
 void CGisItemTrk::drawHighlight(QPainter& p)
 {
-    if(line.isEmpty() || key == keyUserFocus)
+    if(lineSimple.isEmpty() || key == keyUserFocus)
     {
         return;
     }
     p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    p.drawPolyline(line);
+    p.drawPolyline(lineSimple);
+}
+
+void CGisItemTrk::drawRange(QPainter& p)
+{
+    if((mouseClickFocus != 0) && (mouseMoveFocus != 0))
+    {
+        int idx1 = mouseClickFocus->idxVisible;
+        int idx2 = mouseMoveFocus->idxVisible;
+
+        if(idx1 > idx2)
+        {
+            qSwap(idx1,idx2);
+        }
+
+        QPolygonF line = lineSimple.mid(idx1, idx2 - idx1 + 1);
+
+        p.setPen(QPen(Qt::red, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.drawPolyline(line);
+        foreach(const QPointF& pt, line)
+        {
+            p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
+        }
+    }
 }
 
 void CGisItemTrk::setName(const QString& str)
@@ -1250,7 +1332,7 @@ void CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 {
     const trkpt_t * newPointOfFocus = 0;
 
-    if(hasUserFocus() && (pt != NOPOINT))
+    if((hasUserFocus() || (drawMode == eDrawRange)) && (pt != NOPOINT))
     {
         /*
             Iterate over the polyline used to draw the track as it contains screen
@@ -1264,7 +1346,7 @@ void CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
         quint32 i   = 0;
         quint32 idx = 0;
         qint32 d    = NOINT;
-        foreach(const QPointF& point, line)
+        foreach(const QPointF& point, lineSimple)
         {
             int tmp = (pt - point).manhattanLength();
             if(tmp < d)
@@ -1292,7 +1374,7 @@ void CGisItemTrk::setMouseFocusByIndex(quint32 idx, focusmode_e mode)
     {
         foreach(const trkpt_t& pt, seg.pts)
         {
-            if(pt.idx == idx)
+            if(pt.idxTotal == idx)
             {
                 newPointOfFocus = &pt;
                 publishMouseFocus(newPointOfFocus, mode, 0);

@@ -503,3 +503,15 @@ void CGisListWks::slotReverseTrk()
     }
     IGisItem::mutexItems.unlock();
 }
+
+void CGisListWks::slotCombineTrk()
+{
+    IGisItem::mutexItems.lock();
+    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().combineTrkByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
+}

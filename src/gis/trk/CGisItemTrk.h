@@ -45,9 +45,15 @@ class CGisItemTrk : public IGisItem, public IGisLine
             ,eFocusMouseClick
         };
 
+        enum drawmode_e
+        {
+              eDrawNormal
+            , eDrawRange
+        };
+
         CGisItemTrk(const QString& name, quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * project);
         CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx);
-        CGisItemTrk(const QPolygonF& line, const QString &name, CGisProject * project, int idx);
+        CGisItemTrk(const QPolygonF& l, const QString &name, CGisProject * project, int idx);
         CGisItemTrk(const QDomNode &xml, CGisProject *project);
         virtual ~CGisItemTrk();
 
@@ -60,6 +66,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         void setName(const QString& str);
         void setColor(int idx);
+        void setDrawMode(drawmode_e mode){drawMode = mode;}
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
@@ -69,10 +76,11 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
+        void drawRange(QPainter& p);
         void save(QDomNode& gpx);
 
-        void setData(const QPolygonF& line);
-        void getData(QPolygonF& line);
+        void setData(const QPolygonF& l);
+        void getData(QPolygonF& l);
 
         /**
            @brief Switch user focus on and off.
@@ -94,9 +102,21 @@ class CGisItemTrk : public IGisItem, public IGisLine
          */
         bool cut();
 
+        /**
+           @brief Reverse the complete track
+
+           @note All timestamps will be removed
+         */
         void reverse();
 
+        /**
+           @brief Combine this track with several others.
+
+           Handle the complete process of selecting tracks, choosing the order and
+           the final name with dialogs.
+         */
         void combine();
+
         /**
            @brief Check for user focus
 
@@ -170,7 +190,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void deriveSecondaryData();
         const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
         void publishMouseFocus(const trkpt_t * pt, focusmode_e mode, IPlot *initiator);
-        void readLine(const QPolygonF &line);
+        void readLine(const QPolygonF &l);
 
     public:
         struct trkpt_t : public wpt_t
@@ -194,15 +214,14 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
             enum flag_e
             {
-                 eSelected  = 0x00000001  ///< selected by track info view
-//                ,eCursor    = 0x00000002  ///< selected by cursor
-                ,eDeleted   = 0x00000004  ///< mark point as deleted
-//                ,eFocus     = 0x00000008  ///< mark current point of user focus
-                ,eAllowEdit = 0x80000000
+                eDeleted   = 0x00000004  ///< mark point as deleted
             };
 
             quint32 flags;
-            quint32 idx;
+            /// index within the complete track
+            quint32 idxTotal;
+            /// offset into lineSimple
+            qint32  idxVisible;
 
             /// the distance to the last point
             qreal deltaDistance;
@@ -258,6 +277,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         QPen penForeground;
 
+        drawmode_e drawMode;
+
         quint32     cntTotalPoints;
         quint32     cntVisiblePoints;
         QDateTime   timeStart;
@@ -275,7 +296,9 @@ class CGisItemTrk : public IGisItem, public IGisLine
         /// the track line color by index
         unsigned colorIdx;
         /// the current track line as screen pixel coordinates
-        QPolygonF line;
+        QPolygonF lineSimple;
+        /// visible and invisible points
+        QPolygonF lineFull;
 
         /**
             A list of plot objects that need to get informed on any change in data.

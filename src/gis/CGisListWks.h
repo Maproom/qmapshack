@@ -52,6 +52,7 @@ class CGisListWks : public QTreeWidget
         void slotFocusTrk(bool on);
         void slotEditTrk();
         void slotReverseTrk();
+        void slotCombineTrk();
 
     private:
         QMenu * menuProject;

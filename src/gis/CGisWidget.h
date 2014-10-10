@@ -120,6 +120,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void combineTrkByKey(const QString& key);
 
+        void rangeTrkByKey(const QString& key);
+
         void editAreaByKey(const QString& key);
 
 

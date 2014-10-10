@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="39"/>
         <source>Add or remove paths containing DEM data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Hinzufügen oder entfernen von Verzeichnissen mit DEM Daten. Im Verzeichnis können mehrere Dateien vorliegen. Allerdings wird kein Unterverzeichnis durchsucht. Unterstützte Formate sind: %1</translation>
+        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit DEM Daten. Im Verzeichnis können mehrere Dateien vorliegen. Allerdings wird kein Unterverzeichnis durchsucht. Unterstützte Formate sind: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="55"/>
@@ -54,7 +54,11 @@
         <location filename="../dem/CDemVRT.cpp" line="51"/>
         <location filename="../dem/CDemVRT.cpp" line="60"/>
         <source>DEM must have one band with 16bit or 32bit data.</source>
-        <translation>Das DEM muss aus einem Satz mit 16 oder 32Bit Daten bestehen.</translation>
+        <translation>DEM muss aus einem Satz mit 16 bit oder 32 bit Daten bestehen.</translation>
+    </message>
+    <message>
+        <source>DEM must have one band with 16 bit or 32 bit data.</source>
+        <translation type="vanished">Das DEM muss aus einem Satz mit 16 bit oder 32 bit Daten bestehen.</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="84"/>
@@ -126,11 +130,11 @@
     <name>CDetailsWpt</name>
     <message>
         <source>no comment</source>
-        <translation type="obsolete">kein Kommentar vorhanden</translation>
+        <translation type="vanished">kein Kommentar vorhanden</translation>
     </message>
     <message>
         <source>no description</source>
-        <translation type="obsolete">keine Beschreibung vorhanden</translation>
+        <translation type="vanished">keine Beschreibung vorhanden</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="120"/>
@@ -202,7 +206,7 @@
     </message>
     <message>
         <source>Move Waypoint...</source>
-        <translation type="obsolete">Wegpunkt verschieben...</translation>
+        <translation type="vanished">Wegpunkt verschieben...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="46"/>
@@ -222,12 +226,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="49"/>
         <source>Reverse Track</source>
-        <translation>Track umdrehen</translation>
+        <translation>Track umkehren</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="50"/>
         <source>Combine Tracks</source>
-        <translation>Track verbinden</translation>
+        <translation>Tracks verbinden</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="53"/>
@@ -331,8 +335,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="168"/>
         <source>Welsh</source>
-        <translatorcomment>?</translatorcomment>
-        <translation></translation>
+        <translation>Walisisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="169"/>
@@ -402,47 +405,48 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="182"/>
         <source>Estonian</source>
-        <translation></translation>
+        <translation>Estnisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="183"/>
         <source>Latvian</source>
-        <translation></translation>
+        <translation>Lettisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="184"/>
         <source>Romanian</source>
-        <translation></translation>
+        <translation>Rumänisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="185"/>
         <source>Albanian</source>
-        <translation></translation>
+        <translatorcomment>Albanisch</translatorcomment>
+        <translation>Albanisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="186"/>
         <source>Bosnian</source>
-        <translation></translation>
+        <translation>Bosnisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="187"/>
         <source>Lithuanian</source>
-        <translation></translation>
+        <translation>Litauisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="188"/>
         <source>Serbian</source>
-        <translation></translation>
+        <translation>Serbisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="189"/>
         <source>Macedonian</source>
-        <translation></translation>
+        <translation>Makedonisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="190"/>
         <source>Bulgarian</source>
-        <translation></translation>
+        <translation>Bulgarisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="247"/>
@@ -507,7 +511,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="259"/>
         <source>Railroad</source>
-        <translation>Einsenbahn</translation>
+        <translation>Eisenbahn</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="260"/>
@@ -527,7 +531,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="263"/>
         <source>Time zone</source>
-        <translation></translation>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="264"/>
@@ -558,32 +562,32 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="270"/>
         <source>Minor land contour</source>
-        <translation></translation>
+        <translation>Höhenlinie klein</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="271"/>
         <source>Intermediate land contour</source>
-        <translation></translation>
+        <translation>Höhenlinie mittel</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="272"/>
         <source>Major land contour</source>
-        <translation></translation>
+        <translation>Höhenlinie groß</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="273"/>
         <source>Minor depth contour</source>
-        <translation></translation>
+        <translation>Tiefenlinie klein</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="274"/>
         <source>Intermediate depth contour</source>
-        <translation></translation>
+        <translation>Tiefenlinie mittel</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="275"/>
         <source>Major depth contour</source>
-        <translation></translation>
+        <translation>Tiefenlinie groß</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="276"/>
@@ -594,7 +598,7 @@
         <location filename="../map/CMapIMG.cpp" line="277"/>
         <location filename="../map/CMapIMG.cpp" line="359"/>
         <source>Airport runway</source>
-        <translation></translation>
+        <translation>Landebahn</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="278"/>
@@ -634,17 +638,17 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="349"/>
         <source>Military base</source>
-        <translation></translation>
+        <translation>Militärbasis</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="350"/>
         <source>Parking lot</source>
-        <translation></translation>
+        <translation>Parkplatz</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="351"/>
         <source>Parking garage</source>
-        <translation></translation>
+        <translation>Parkhaus</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="352"/>
@@ -654,7 +658,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="353"/>
         <source>Shopping center</source>
-        <translation></translation>
+        <translation>Einkaufszentrum</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="354"/>
@@ -664,7 +668,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="355"/>
         <source>University/College</source>
-        <translation></translation>
+        <translation>Universität/Hochschule</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="356"/>
@@ -674,12 +678,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="357"/>
         <source>Industrial complex</source>
-        <translation></translation>
+        <translation>Industrie</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="358"/>
         <source>Reservation</source>
-        <translation></translation>
+        <translation>Schutzgebiet</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="360"/>
@@ -689,12 +693,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="361"/>
         <source>Sports complex</source>
-        <translation></translation>
+        <translation>Sportanlage</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="362"/>
         <source>Golf course</source>
-        <translation></translation>
+        <translation>Golfplatz</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="363"/>
@@ -706,12 +710,12 @@
         <location filename="../map/CMapIMG.cpp" line="365"/>
         <location filename="../map/CMapIMG.cpp" line="366"/>
         <source>National park</source>
-        <translation></translation>
+        <translation>Nationalpark</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="367"/>
         <source>City park</source>
-        <translation></translation>
+        <translation>Stadtpark</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="368"/>
@@ -1007,7 +1011,7 @@
     <message>
         <location filename="../map/CMapVRT.cpp" line="88"/>
         <source>File must be 8 bit palette or gray indexed.</source>
-        <translation>Die Datei muss eine 8Bit Palette haben, oder Graustufen.</translation>
+        <translation>Die Datei muss eine 8 bit Palette haben, oder Graustufen.</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="123"/>
@@ -1064,7 +1068,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;OGC WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="obsolete">Unerwarterter Dienst. &apos;OGC WMTS 1.0.0&apos; Wird erwartet. &apos;%1 %2&apos; wird gelesen.</translation>
+        <translation type="vanished">Unerwarterter Dienst. &apos;OGC WMTS 1.0.0&apos; Wird erwartet. &apos;%1 %2&apos; wird gelesen.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="188"/>
@@ -1075,12 +1079,20 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMouseEditLine</name>
     <message>
+        <source>Add points?</source>
+        <translation type="vanished">Punkte hinzufügen?</translation>
+    </message>
+    <message>
+        <source>Add points to temporary line?</source>
+        <translation type="vanished">Punkte zur temporären Linie hinzufügen?</translation>
+    </message>
+    <message>
         <source>Warning!</source>
-        <translation type="obsolete">Warnung!</translation>
+        <translation type="vanished">Warnung!</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="obsolete">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
+        <translation type="vanished">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
 </context>
 <context>
@@ -1098,7 +1110,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Area</source>
-        <translation>Gebiet hinzufügen</translation>
+        <translation>Fläche hinzufügen</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="46"/>
@@ -1250,7 +1262,7 @@ ist keine gültige Koordinatensystemdefinition:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="145"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -1314,7 +1326,6 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -1354,7 +1365,6 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../dem/IDemList.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -1424,7 +1434,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="249"/>
         <source>Hint:</source>
-        <translation>Hilfe:</translation>
+        <translation>Hinweis:</translation>
     </message>
 </context>
 <context>
@@ -1452,17 +1462,17 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="126"/>
         <source>Border width</source>
-        <translation>Randbreite</translation>
+        <translation>Rahmenbreite</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="140"/>
         <source>Style</source>
-        <translation>Stiel</translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="159"/>
         <source>Opacity</source>
-        <translation>Transparenz</translation>
+        <translation>Deckkraft</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="179"/>
@@ -1485,7 +1495,6 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -1575,7 +1584,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="obsolete">Bezeichnung</translation>
+        <translation type="vanished">Bezeichnung</translation>
     </message>
 </context>
 <context>
@@ -1587,7 +1596,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit comment.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kommentar bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kommentar bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="233"/>
@@ -1602,7 +1611,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit description.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beschreibung bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beschreibung bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="49"/>
@@ -1644,7 +1653,6 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/IGisWidget.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -1881,12 +1889,11 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Pathss. </source>
-        <translation type="obsolete">Um Karten zuzufügen -&gt; Menü Datei - Kartenverzeichnisse angeben.</translation>
+        <translation type="vanished">Um Karten zuzufügen -&gt; Menü Datei - Kartenverzeichnisse angeben.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -1928,7 +1935,6 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../map/IMapPropSetup.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2130,7 +2136,7 @@ sein</translation>
         <source>m</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="69"/>
         <source>°</source>
         <translation></translation>
@@ -2141,7 +2147,6 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptEditLine.ui" line="26"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2185,7 +2190,6 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2228,7 +2232,6 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2247,7 +2250,6 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2277,7 +2279,6 @@ sein</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2308,7 +2309,7 @@ sein</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
         <source>Reverse track.</source>
-        <translation>Track umdrehen.</translation>
+        <translation>Track umkehren.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="134"/>
@@ -2317,11 +2318,11 @@ sein</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Details anzeigen &amp;amp; Bearbeiten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Details anzeigen &amp;amp; Bearbeiten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit properties of track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Detailansicht &amp;amp; Trackeigenschaften bearbeiten..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Detailansicht &amp;amp; Trackeigenschaften bearbeiten..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
@@ -2336,19 +2337,19 @@ sein</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löschen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löschen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show on-screen profile and detailed information about points.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt das Profil und detaillierte Informationen der Punkte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt das Profil und detaillierte Informationen der Punkte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cut track at selected point into two tracks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Teilt den Track am selektierten Punkt in zwei Teile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Teilt den Track am selektierten Punkt in zwei Teile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit position of track points.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bearbeiten der Position von Trackpunkten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bearbeiten der Position von Trackpunkten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="163"/>
@@ -2361,7 +2362,6 @@ sein</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="20"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2402,12 +2402,12 @@ sein</translation>
     <name>ISelectProjectDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
         <source>Select a project...</source>
-        <translation>Ein Projekt auswählen...</translation>
+        <translation>Wähle ein Projekt...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
@@ -2420,7 +2420,6 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2668,8 +2667,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="243"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
-        <translatorcomment>?</translatorcomment>
-        <translation>Geänderte Wegpunkte, alle vorherigen Daten sind verloren.</translation>
+        <translation>Wegpunkte geändert, alle vorherigen Daten sind verloren.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="320"/>
@@ -2724,7 +2722,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source> slope: %1°(%2%)</source>
-        <translation type="obsolete">Neigung: %1°(%2%)</translation>
+        <translation type="vanished">Neigung: %1°(%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="383"/>
@@ -2784,37 +2782,37 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="96"/>
         <source>wide</source>
-        <translation>breit</translation>
+        <translation>weit</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="97"/>
         <source>strong</source>
-        <translation>sehr breit</translation>
+        <translation>stark</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="485"/>
         <source>Changed area shape.</source>
-        <translation>Gebietsausdehnung geändert.</translation>
+        <translation>Flächenform geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="492"/>
         <source>Changed name.</source>
-        <translation>Namen geändert.</translation>
+        <translation>Name geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="498"/>
         <source>Changed border width.</source>
-        <translation>Randbreite geändert.</translation>
+        <translation>Umrnadungsbreite geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="504"/>
         <source>Changed fill pattern.</source>
-        <translation>Füllmuster geändert.</translation>
+        <translation>Füllung geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="510"/>
         <source>Changed opacity.</source>
-        <translation>Transparent geändert.</translation>
+        <translation>Durchsichtigkeit geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="516"/>
@@ -2828,7 +2826,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="534"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1119"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1118"/>
         <source>Changed color</source>
         <translation>Farbe geändert</translation>
     </message>
@@ -2857,7 +2855,7 @@ Zeile %2, Spalte %3:
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1108"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1107"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="313"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
@@ -2939,7 +2937,7 @@ Zeile %2, Spalte %3:
         <location filename="../mouse/CMouseEditArea.cpp" line="78"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="84"/>
         <source>Enter new track name.</source>
-        <translation>Neuen Tracknamen eingeben.</translation>
+        <translation>Name eingeben.</translation>
     </message>
 </context>
 </TS>

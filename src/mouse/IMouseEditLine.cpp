@@ -160,7 +160,7 @@ void IMouseEditLine::drawArrows(const QPolygonF &l, QPainter& p)
     qreal  heading;
 
     //generate arrow pic on-the-fly
-    QImage arrow_pic(21,16, QImage::Format_ARGB32);
+    QImage arrow_pic(25,20, QImage::Format_ARGB32);
     arrow_pic.fill( qRgba(0,0,0,0));
     QPainter t_paint(&arrow_pic);
     USE_ANTI_ALIASING(t_paint, true);
@@ -449,6 +449,10 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
 
                     state = eStatePointSelected;
                 }
+                else
+                {
+                    state = eStateMapMove;
+                }
                 break;
             }
             case eStateSelectRange:
@@ -501,11 +505,6 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
     {
         case eStateIdle:
         {
-            if(!scrOptEditLine->rect().contains(point))
-            {
-                panCanvas(point);
-            }
-
             int old = idxFocus;
             idxFocus = getPointCloseBy(point);
             if(old != idxFocus)
@@ -560,13 +559,30 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             canvas->update();
 
         }
+        case eStateMapMove:
+        {
+            if(point != lastPoint)
+            {
+                QPoint delta = point - lastPoint;
+                canvas->moveMap(delta);
+            }
+            break;
+        }
         default:;
     }
+
+    lastPoint = point;
 }
 
 void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
 {
-
+    if(e->button() == Qt::LeftButton)
+    {
+        if(state == eStateMapMove)
+        {
+            state = eStateIdle;
+        }
+    }
 }
 
 void IMouseEditLine::wheelEvent(QWheelEvent * e)

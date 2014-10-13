@@ -126,6 +126,7 @@ class IMouseEditLine  : public IMouse
             ,eStateMovePoint
             ,eStateAddPointBwd
             ,eStateAddPointFwd
+            ,eStateMapMove
 
         };
 
@@ -137,6 +138,8 @@ class IMouseEditLine  : public IMouse
         QPointer<CScrOptPoint> scrOptPoint;
         QPointer<CScrOptRange> scrOptRange;
         CScrOptEditLine * scrOptEditLine;
+
+        QPoint lastPoint;
 };
 
 #endif //IMOUSEEDITLINE_H

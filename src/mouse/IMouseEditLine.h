@@ -104,6 +104,7 @@ class IMouseEditLine  : public IMouse
         void drawBullets(const QPolygonF& l, QPainter& p);
         void drawHighlight1(QPainter& p);
         void drawHighlight2(QPainter& p);
+        void drawArrows(const QPolygonF &l, QPainter& p);
         int getPointCloseBy(const QPoint& screenPos);
 
         /// backup for coord1

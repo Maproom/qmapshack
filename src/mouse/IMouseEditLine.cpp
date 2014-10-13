@@ -143,6 +143,68 @@ void IMouseEditLine::drawHighlight2(QPainter& p)
     p.drawPolyline(highlight);
 }
 
+void IMouseEditLine::drawArrows(const QPolygonF &l, QPainter& p)
+{
+    QPointF arrow[4] =
+    {
+        QPointF( 24.0, 9.0),     //front
+        QPointF( 0.0, 0.0),      //upper tail
+        QPointF( 5.0, 9.0),      //mid tail
+        QPointF( 0.0, 19.0)      //lower tail
+    };
+
+    QPointF  pt, pt1, ptt;
+
+    // draw direction arrows
+    bool    start = true;
+    qreal  heading;
+
+    //generate arrow pic on-the-fly
+    QImage arrow_pic(21,16, QImage::Format_ARGB32);
+    arrow_pic.fill( qRgba(0,0,0,0));
+    QPainter t_paint(&arrow_pic);
+    USE_ANTI_ALIASING(t_paint, true);
+    t_paint.setPen(QPen(Qt::white, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    t_paint.setBrush(Qt::magenta);
+    t_paint.drawPolygon(arrow, 4);
+    t_paint.end();
+
+    foreach(pt,l)
+    {
+        if(start)                // no arrow on  the first loop
+        {
+            start = false;
+        }
+        else
+        {
+            if((qAbs(pt.x() - pt1.x()) + qAbs(pt.y() - pt1.y())) < 7)
+            {
+                pt1 = pt;
+                continue;
+            }
+            // keep distance
+            if((qAbs(pt.x() - ptt.x()) + qAbs(pt.y() - ptt.y())) > 100)
+            {
+                if(0 != pt.x() - pt1.x() && (pt.y() - pt1.y()))
+                {
+                    heading = ( atan2((qreal)(pt.y() - pt1.y()), (qreal)(pt.x() - pt1.x())) * 180.) / M_PI;
+
+                    p.save();
+                    // draw arrow between bullets
+                    p.translate((pt.x() + pt1.x())/2,(pt.y() + pt1.y())/2);
+                    p.rotate(heading);
+                    p.drawImage(-13, -9, arrow_pic);
+                    p.restore();
+                    //remember last point
+                    ptt = pt;
+                }
+            }
+        }
+        pt1 = pt;
+    }
+
+}
+
 void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 {
     if(needsRedraw)
@@ -153,30 +215,36 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         gis->convertRad2Px(newLine);
     }
 
+
+
     switch(state)
     {
         case eStateIdle:
         case eStatePointSelected:
-            drawLine(line, p);
+            drawArrows(line, p);
+            drawLine(line, p);            
             drawBullets(line, p);
             drawPointOfFocus(p);
             break;
 
         case eStateSelectRange:
-            drawLine(line, p);
+            drawArrows(line, p);
+            drawLine(line, p);            
             drawHighlight1(p);
             drawBullets(line, p);
             drawPointOfFocus(p);
             break;
 
         case eStateRangeSelected:
-            drawLine(line, p);
+            drawArrows(line, p);
+            drawLine(line, p);            
             drawHighlight2(p);
             drawBullets(line, p);
             drawPointOfFocus(p);
             break;
 
         case eStateMovePoint:
+            drawArrows(line, p);
             drawLine(line, p);
             drawBullets(line, p);
             drawPointOfFocus(p);
@@ -186,7 +254,8 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         case eStateAddPointBwd:
         {
             QPolygonF l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop, -1);
-            drawLine(l, p);
+            drawArrows(l, p);
+            drawLine(l, p);            
             drawBullets(l, p);
             break;
         }

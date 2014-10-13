@@ -944,6 +944,75 @@ void CGisItemTrk::combine()
 
 }
 
+void CGisItemTrk::hideSelectedPoints()
+{
+
+    if((mouseClickFocus == 0) && (mouseMoveFocus == 0))
+    {
+        return;
+    }
+
+    quint32 idx1 = mouseClickFocus->idxTotal;
+    quint32 idx2 = mouseMoveFocus->idxTotal;
+
+    if(idx1 > idx2)
+    {
+        qSwap(idx1,idx2);
+    }
+
+    for(int s = 0; s < trk.segs.size(); s++)
+    {
+        trkseg_t& seg = trk.segs[s];
+        for(int i = 0; i < seg.pts.size(); i++)
+        {
+            trkpt_t& trkpt = seg.pts[i];
+
+            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+            {
+                trkpt.flags |= trkpt_t::eDeleted;
+            }
+        }
+    }
+    mouseClickFocus = 0;
+    mouseMoveFocus  = 0;
+    deriveSecondaryData();
+    setToolTip(0, getInfo());
+}
+
+void CGisItemTrk::showSelectedPoints()
+{
+    if((mouseClickFocus == 0) && (mouseMoveFocus == 0))
+    {
+        return;
+    }
+
+    quint32 idx1 = mouseClickFocus->idxTotal;
+    quint32 idx2 = mouseMoveFocus->idxTotal;
+
+    if(idx1 > idx2)
+    {
+        qSwap(idx1,idx2);
+    }
+
+    for(int s = 0; s < trk.segs.size(); s++)
+    {
+        trkseg_t& seg = trk.segs[s];
+        for(int i = 0; i < seg.pts.size(); i++)
+        {
+            trkpt_t& trkpt = seg.pts[i];
+
+            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+            {
+                trkpt.flags &= ~trkpt_t::eDeleted;
+            }
+        }
+    }
+    mouseClickFocus = 0;
+    mouseMoveFocus  = 0;
+    deriveSecondaryData();
+    setToolTip(0, getInfo());
+}
+
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     lineSimple.clear();
@@ -1328,9 +1397,10 @@ void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * in
 
 }
 
-void CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
+QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 {
     const trkpt_t * newPointOfFocus = 0;
+    quint32 idx = 0;
 
     if((hasUserFocus() || (drawMode == eDrawRange)) && (pt != NOPOINT))
     {
@@ -1343,9 +1413,8 @@ void CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
             until the visible index is reached. This is done by getVisibleTrkPtByIndex().
         */
 
-        quint32 i   = 0;
-        quint32 idx = 0;
-        qint32 d    = NOINT;
+        quint32 i = 0;
+        qint32 d  = NOINT;
         foreach(const QPointF& point, lineSimple)
         {
             int tmp = (pt - point).manhattanLength();
@@ -1363,6 +1432,8 @@ void CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
         }
     }
     publishMouseFocus(newPointOfFocus, mode, 0);
+
+    return newPointOfFocus ? lineSimple[idx] : NOPOINTF;
 }
 
 

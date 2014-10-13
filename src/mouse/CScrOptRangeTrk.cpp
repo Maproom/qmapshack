@@ -41,3 +41,4 @@ void CScrOptRangeTrk::draw(QPainter& p)
 {
     drawBubble2(origin, p);
 }
+

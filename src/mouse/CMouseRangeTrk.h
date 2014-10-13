@@ -29,6 +29,7 @@ class CScrOptRangeTrk;
 
 class CMouseRangeTrk : public IMouse
 {
+    Q_OBJECT;
     public:
         CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * parent);
         virtual ~CMouseRangeTrk();
@@ -38,6 +39,10 @@ class CMouseRangeTrk : public IMouse
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);
         void wheelEvent(QWheelEvent * e);
+
+    private slots:
+        void slotHidePoints();
+        void slotShowPoints();
 
     private:
         QString key;

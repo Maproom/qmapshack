@@ -117,6 +117,10 @@ class CGisItemTrk : public IGisItem, public IGisLine
          */
         void combine();
 
+        void hideSelectedPoints();
+
+        void showSelectedPoints();
+
         /**
            @brief Check for user focus
 
@@ -170,7 +174,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
            @param pt        a point on the screen in pixel.
          */
-        void setMouseFocusByPoint(const QPoint& pt, focusmode_e mode);
+        QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e mode);
 
         /**
            @brief Use point with given index counter

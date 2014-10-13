@@ -93,8 +93,11 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
                 CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
                 if(trk != 0)
                 {
-                    QPointF pt = trk->getPointCloseBy(point);
+                    QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove);
                     scrOptRange = new CScrOptRangeTrk(pt, canvas);
+                    connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
+                    connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
+
                     state = eStateRangeSelected;
                     canvas->update();
                 }
@@ -136,3 +139,30 @@ void CMouseRangeTrk::wheelEvent(QWheelEvent * e)
 {
 
 }
+
+void CMouseRangeTrk::slotHidePoints()
+{
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    if(trk != 0)
+    {
+        trk->hideSelectedPoints();
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
+    scrOptRange->deleteLater();
+    canvas->resetMouse();
+}
+
+void CMouseRangeTrk::slotShowPoints()
+{
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    if(trk != 0)
+    {
+        trk->showSelectedPoints();
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
+    scrOptRange->deleteLater();
+    canvas->resetMouse();
+}
+

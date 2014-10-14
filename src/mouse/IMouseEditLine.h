@@ -126,7 +126,7 @@ class IMouseEditLine  : public IMouse
             ,eStateMovePoint
             ,eStateAddPointBwd
             ,eStateAddPointFwd
-            ,eStateMapMove
+            ,eStateMoveMap
 
         };
 

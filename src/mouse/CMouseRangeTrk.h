@@ -50,10 +50,16 @@ class CMouseRangeTrk : public IMouse
         enum state_e
         {
              eStateIdle
+            ,eStateMoveMap
+            ,eStateSelectRange
             ,eStateRangeSelected
         };
 
         state_e state;
+
+        QPointF anchor;
+
+        QPoint lastPoint;
 
         QPointer<CScrOptRangeTrk> scrOptRange;
 

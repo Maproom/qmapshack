@@ -451,7 +451,7 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
                 }
                 else
                 {
-                    state = eStateMapMove;
+                    state = eStateMoveMap;
                 }
                 break;
             }
@@ -559,7 +559,7 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             canvas->update();
 
         }
-        case eStateMapMove:
+        case eStateMoveMap:
         {
             if(point != lastPoint)
             {
@@ -578,7 +578,7 @@ void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        if(state == eStateMapMove)
+        if(state == eStateMoveMap)
         {
             state = eStateIdle;
         }

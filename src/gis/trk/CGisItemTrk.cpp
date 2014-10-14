@@ -22,6 +22,7 @@
 #include "gis/trk/CCombineTrk.h"
 #include "gis/CGisProject.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisWidget.h"
 #include "plot/IPlot.h"
 #include "CMainWindow.h"
 #include "GeoMath.h"
@@ -1069,6 +1070,36 @@ void CGisItemTrk::showSelectedPoints()
     setToolTip(0, getInfo());
     setText(1,"*");
     parent()->setText(1,"*");
+}
+
+void CGisItemTrk::copySelectedPoints()
+{
+    if((mouseClickFocus == 0) && (mouseMoveFocus == 0))
+    {
+        return;
+    }
+
+    quint32 idx1 = mouseClickFocus->idxTotal;
+    quint32 idx2 = mouseMoveFocus->idxTotal;
+
+    if(idx1 > idx2)
+    {
+        qSwap(idx1,idx2);
+    }
+
+    CGisProject * project = CGisWidget::self().selectProject();
+    if(project == 0)
+    {
+        return;
+    }
+
+    QString name1 = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
+    name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+    if(name1.isEmpty())
+    {
+        return;
+    }
+    new CGisItemTrk(name1, idx1, idx2, trk, project);
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)

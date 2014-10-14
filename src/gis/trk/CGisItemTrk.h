@@ -122,6 +122,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         void showSelectedPoints();
 
+        void copySelectedPoints();
+
         /**
            @brief Check for user focus
 

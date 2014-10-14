@@ -43,6 +43,7 @@ CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
         trk.gainUserFocus(false);
     }
 
+    canvas->reportStatus(key, tr("<b>Edit Track Points</b><br/>Select a track point for more options.<br/>"));
     /*
         trigger complete update of GIS components to make sure all changes to
         the originating object are reflected on the canvas
@@ -52,7 +53,13 @@ CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
 
 CMouseEditTrk::~CMouseEditTrk()
 {
+    canvas->reportStatus(key, "");
+}
 
+void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
+{
+    canvas->reportStatus(key, "");
+    IMouseEditLine::mousePressEvent(e);
 }
 
 IGisLine * CMouseEditTrk::getGisLine()

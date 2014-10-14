@@ -244,9 +244,9 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     {
         labelStatusMessages->show();
         labelStatusMessages->setText(report);
-        labelStatusMessages->adjustSize();
-        update();
+        labelStatusMessages->adjustSize();        
     }
+    update();
 }
 
 void CCanvas::resizeEvent(QResizeEvent * e)
@@ -267,7 +267,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     QPoint p2(demLoadIndicator->width()>>1, demLoadIndicator->height()>>1);
     demLoadIndicator->move(rect().center() - p2);
 
-    labelStatusMessages->move(20,20);
+    labelStatusMessages->move(20,50);
 
     if(plotTrackProfile)
     {
@@ -498,7 +498,7 @@ void CCanvas::drawStatusMessages(QPainter& p)
     {
         QRect r = labelStatusMessages->rect();
         r.adjust(-5, -5, 5, 5);
-        r.moveTopLeft(QPoint(15,15));
+        r.moveTopLeft(QPoint(15,45));
         p.setPen(CCanvas::penBorderGray);
         p.setBrush(CCanvas::brushBackWhite);
         p.drawRoundedRect(r, 5, 5);

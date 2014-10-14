@@ -27,7 +27,7 @@
 CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(point, gis, parent)
 {
-    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
+    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);    
 }
 
 CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent)
@@ -35,12 +35,20 @@ CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * 
 {
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
     key    = area.getKey();
+    canvas->reportStatus(key, tr("<b>Edit Area</b><br/>Select a corner point for more options.<br/>"));
 }
 
 CMouseEditArea::~CMouseEditArea()
 {
-
+    canvas->reportStatus(key, "");
 }
+
+void CMouseEditArea::mousePressEvent(QMouseEvent * e)
+{
+    canvas->reportStatus(key, "");
+    IMouseEditLine::mousePressEvent(e);
+}
+
 
 void CMouseEditArea::drawLine(const QPolygonF &l, QPainter& p)
 {

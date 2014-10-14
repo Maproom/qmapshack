@@ -43,6 +43,7 @@ class CMouseRangeTrk : public IMouse
     private slots:
         void slotHidePoints();
         void slotShowPoints();
+        void slotCopy();
 
     private:
         QString key;

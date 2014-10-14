@@ -320,7 +320,7 @@ void CMapWMTS::slotQueueChanged()
     int pending = urlQueue.size() + urlPending.size();
     if(pending)
     {
-        map->reportStatusToCanvas(name, tr("%1: %2 tiles pending").arg(name).arg(pending));
+        map->reportStatusToCanvas(name, tr("<b>%1</b>: %2 tiles pending<br/>").arg(name).arg(pending));
     }
     else
     {

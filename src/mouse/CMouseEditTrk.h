@@ -31,6 +31,8 @@ class CMouseEditTrk : public IMouseEditLine
         CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
         virtual ~CMouseEditTrk();
 
+        void mousePressEvent(QMouseEvent * e);
+
     protected slots:
         void slotCopyToNew();
 

@@ -31,6 +31,8 @@ class CMouseEditArea : public IMouseEditLine
         CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent);
         virtual ~CMouseEditArea();
 
+        void mousePressEvent(QMouseEvent * e);
+
     protected slots:
         void slotCopyToNew();
 

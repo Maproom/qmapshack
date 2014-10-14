@@ -142,7 +142,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
                 if(trk != 0 && anchor != NOPOINTF)
                 {
                     QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove);
-                    scrOptRange = new CScrOptRangeTrk(pt, canvas);
+                    scrOptRange = new CScrOptRangeTrk(pt, trk, canvas);
                     connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
                     connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
 
@@ -150,6 +150,13 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
                     canvas->update();
                 }
 
+                break;
+            }
+            case eStateRangeSelected:
+            {
+                scrOptRange->deleteLater();
+                state = eStateIdle;
+                canvas->update();
                 break;
             }
             default:;

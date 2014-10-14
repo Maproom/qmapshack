@@ -370,6 +370,60 @@ QString CGisItemTrk::getInfo()
     return str;
 }
 
+QString CGisItemTrk::getInfoRange()
+{
+    qreal tmp, d, slope1, slope2;
+    QString str, val, unit;
+    if(mouseClickFocus == 0 || mouseMoveFocus == 0)
+    {
+        return str;
+    }
+
+    int idx1 = mouseClickFocus->idxTotal;
+    int idx2 = mouseMoveFocus->idxTotal;
+    const trkpt_t * pt1, * pt2;
+    if(idx1 < idx2)
+    {
+        pt1 = mouseClickFocus;
+        pt2 = mouseMoveFocus;
+    }
+    else
+    {
+        pt1 = mouseMoveFocus;
+        pt2 = mouseClickFocus;
+    }
+
+    d = tmp = pt2->distance - pt1->distance;
+    IUnit::self().meter2distance(tmp, val, unit);
+    str += QString("%3 %1%2\n").arg(val).arg(unit).arg(QChar(0x21A6));
+    if(pt1->time.isValid() && pt2->time.isValid())
+    {
+        quint32 t  = pt2->time.toTime_t() - pt1->time.toTime_t();
+        quint32 hh = t / 3600;
+        quint32 mm = (t - hh * 3600) / 60;
+        quint32 ss = (t - hh * 3600 - mm * 60);
+
+        str += QString("%4 %1:%2:%3\n").arg(hh,2,10,QChar('0')).arg(mm,2,10,QChar('0')).arg(ss,2,10,QChar('0')).arg(QChar(0x231a));
+    }
+
+    tmp       = atan((pt2->ascend - pt1->ascend)/d);
+    slope1    = qAbs(tmp * 360.0/(2 * M_PI));
+    slope2    = qTan(slope1 * DEG_TO_RAD) * 100;
+
+    IUnit::self().meter2elevation(pt2->ascend - pt1->ascend, val, unit);
+    str += QString("%3 %1%2 (%4%5, %6%)\n").arg(val).arg(unit).arg(QChar(0x2197)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+
+    tmp       = atan((pt2->descend - pt1->descend)/d);
+    slope1    = qAbs(tmp * 360.0/(2 * M_PI));
+    slope2    = qTan(slope1 * DEG_TO_RAD) * 100;
+
+    IUnit::self().meter2elevation(pt2->descend - pt1->descend, val, unit);
+    str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2198)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+
+
+    return str;
+}
+
 QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
 {
 
@@ -977,6 +1031,8 @@ void CGisItemTrk::hideSelectedPoints()
     mouseMoveFocus  = 0;
     deriveSecondaryData();
     setToolTip(0, getInfo());
+    setText(1,"*");
+    parent()->setText(1,"*");
 }
 
 void CGisItemTrk::showSelectedPoints()
@@ -1011,6 +1067,8 @@ void CGisItemTrk::showSelectedPoints()
     mouseMoveFocus  = 0;
     deriveSecondaryData();
     setToolTip(0, getInfo());
+    setText(1,"*");
+    parent()->setText(1,"*");
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)

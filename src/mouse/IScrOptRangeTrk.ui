@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>110</width>
-    <height>45</height>
+    <width>100</width>
+    <height>100</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>3</number>
    </property>
@@ -30,30 +30,80 @@
     <number>3</number>
    </property>
    <item>
-    <widget class="QToolButton" name="toolHidePoints">
-     <property name="toolTip">
-      <string>Hide points.</string>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>3</number>
      </property>
-     <property name="text">
-      <string>...</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/PointHide.png</normaloff>:/icons/32x32/PointHide.png</iconset>
-     </property>
-    </widget>
+     <item>
+      <widget class="QToolButton" name="toolHidePoints">
+       <property name="toolTip">
+        <string>Hide points.</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/32x32/PointHide.png</normaloff>:/icons/32x32/PointHide.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolShowPoints">
+       <property name="toolTip">
+        <string>Show points.</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/32x32/PointShow.png</normaloff>:/icons/32x32/PointShow.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolCopy">
+       <property name="toolTip">
+        <string>Copy track points to clipboard</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/32x32/Copy.png</normaloff>:/icons/32x32/Copy.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QToolButton" name="toolShowPoints">
-     <property name="toolTip">
-      <string>Show points.</string>
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="text">
-      <string>...</string>
+      <string>TextLabel</string>
      </property>
-     <property name="icon">
-      <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/PointShow.png</normaloff>:/icons/32x32/PointShow.png</iconset>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
      </property>
     </widget>
    </item>

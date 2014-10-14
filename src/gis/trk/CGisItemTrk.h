@@ -60,6 +60,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         const QString& getName(){return trk.name;}
         int getColorIdx(){return colorIdx;}
         QString getInfo();
+        QString getInfoRange();
         QString getInfoTrkPt(const trkpt_t& pt);
         QString getInfoProgress(const trkpt_t& pt);
         quint32 getTotalElapsedSeconds(){return totalElapsedSeconds;}

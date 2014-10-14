@@ -557,6 +557,7 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             newCoords[idxFocus] = pt;
 
             canvas->update();
+            break;
 
         }
         case eStateMoveMap:

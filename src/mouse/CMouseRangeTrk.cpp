@@ -159,6 +159,12 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
             case eStateRangeSelected:
             {
                 scrOptRange->deleteLater();
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+                if(trk != 0)
+                {
+                    trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
+                    trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick);
+                }
                 state = eStateIdle;
                 canvas->update();
                 break;

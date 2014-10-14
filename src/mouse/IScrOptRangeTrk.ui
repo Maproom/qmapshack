@@ -37,7 +37,7 @@
      <item>
       <widget class="QToolButton" name="toolHidePoints">
        <property name="toolTip">
-        <string>Hide points.</string>
+        <string>Hide all points.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -51,7 +51,7 @@
      <item>
       <widget class="QToolButton" name="toolShowPoints">
        <property name="toolTip">
-        <string>Show points.</string>
+        <string>Show all points.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -65,7 +65,7 @@
      <item>
       <widget class="QToolButton" name="toolCopy">
        <property name="toolTip">
-        <string>Copy track points to clipboard</string>
+        <string>Copy track points as new track.</string>
        </property>
        <property name="text">
         <string>...</string>

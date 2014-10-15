@@ -1,3 +1,10 @@
+V 0.6.0
+* Reverse tracks
+* Add dialog to combine tracks
+* Add range select to tracks
+* Add function to hide/show track points
+* Add function to copy selected track points as new track
+
 V 0.5.0
 * Add support for WMTS maps
 * Edit/create tracks

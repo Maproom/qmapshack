@@ -55,8 +55,8 @@ set( SRCS
     map/garmin/CGarminPoint.cpp
     map/garmin/CGarminPolygon.cpp
     map/garmin/CGarminTyp.cpp
-    map/wmts/CDiskCache.cpp
-    map/wmts/IDiskCache.cpp
+    map/cache/CDiskCache.cpp
+    map/cache/IDiskCache.cpp
     map/mapsforge/types.cpp
     units/IUnit.cpp
     units/CUnitImperial.cpp
@@ -160,8 +160,8 @@ set( HDRS
     map/garmin/CGarminPoint.h
     map/garmin/CGarminPolygon.h
     map/garmin/CGarminTyp.h
-    map/wmts/CDiskCache.h
-    map/wmts/IDiskCache.h
+    map/cache/CDiskCache.h
+    map/cache/IDiskCache.h
     map/mapsforge/types.h
     units/IUnit.h
     units/CUnitImperial.h

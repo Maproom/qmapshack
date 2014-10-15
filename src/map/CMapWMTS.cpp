@@ -18,7 +18,7 @@
 
 #include "map/CMapWMTS.h"
 #include "map/CMapDraw.h"
-#include "map/wmts/CDiskCache.h"
+#include "map/cache/CDiskCache.h"
 #include "units/IUnit.h"
 
 

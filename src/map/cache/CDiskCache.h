@@ -19,7 +19,7 @@
 #ifndef CDISKCACHE_H
 #define CDISKCACHE_H
 
-#include "map/wmts/IDiskCache.h"
+#include "map/cache/IDiskCache.h"
 
 #include <QDir>
 #include <QHash>

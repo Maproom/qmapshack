@@ -81,32 +81,32 @@
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="127"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Upravit název...</translation>
+        <translation>Upravit název...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="127"/>
         <source>Enter new waypoint name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadat  nový název cestovního bodu.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="222"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Poznámka:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Poznámka:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="225"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- žádná poznámka ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- žádná poznámka ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="232"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Popis:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Popis:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="235"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- žádný popis ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- žádný popis ---&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -195,7 +195,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="46"/>
         <source>Proj. Waypoint...</source>
-        <translation>Promítnout cestovní bod</translation>
+        <translation>Promítnout cestovní bod...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="47"/>
@@ -205,17 +205,17 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="48"/>
         <source>Edit Track Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit body stopy</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="49"/>
         <source>Reverse Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrátit stopu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="50"/>
         <source>Combine Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Spojit stopy</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="53"/>
@@ -898,17 +898,17 @@
     <message>
         <location filename="../map/CMapMAP.cpp" line="46"/>
         <source>Failed ...</source>
-        <translation type="unfinished">Nepodařilo se...</translation>
+        <translation>Nepodařilo se...</translation>
     </message>
     <message>
         <location filename="../map/CMapMAP.cpp" line="65"/>
         <source>Failed to open: </source>
-        <translation type="unfinished">Nepodařilo se otevřít: </translation>
+        <translation>Nepodařilo se otevřít: </translation>
     </message>
     <message>
         <location filename="../map/CMapMAP.cpp" line="75"/>
         <source>Bad file format: </source>
-        <translation type="unfinished">Špatný formát souboru: </translation>
+        <translation>Špatný formát souboru: </translation>
     </message>
 </context>
 <context>
@@ -929,7 +929,7 @@
     <message>
         <location filename="../map/CMapPropSetup.cpp" line="151"/>
         <source>Cache path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta k vyrovnávací paměti...</translation>
     </message>
 </context>
 <context>
@@ -1012,19 +1012,19 @@
         <location filename="../map/CMapWMTS.cpp" line="73"/>
         <location filename="../map/CMapWMTS.cpp" line="188"/>
         <source>Error...</source>
-        <translation type="unfinished">Chyba...</translation>
+        <translation>Chyba...</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="44"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se otevřít %1</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="54"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Chyba při čtení: %1
+        <translation>Chyba při čtení: %1
 Řádek %2, Sloupec %3:
 %4</translation>
     </message>
@@ -1032,27 +1032,28 @@ line %2, column %3:
         <location filename="../map/CMapWMTS.cpp" line="64"/>
         <source>Failed to read: %1
 Unknown structure.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při čtení: %1
+Neznámá stavba.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="73"/>
         <source>Unexpexted service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neočekávaná služba. Očekáváno &apos;* WMTS 1.0.0&apos;. Přečteno &apos;%1 %2&apos;.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="188"/>
         <source>No georeference information found.</source>
-        <translation type="unfinished">Nenalezeny žádné údaje o vyjádření prostorových vztahů.</translation>
+        <translation>Nenalezeny žádné údaje o soustavě souřadnic.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="243"/>
         <source>--- All ---</source>
-        <translation type="unfinished"></translation>
+        <translation>--- Vše ---</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="323"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 dlaždic čeká&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1060,7 +1061,7 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="38"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a corner point for more options.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Upravit oblast&lt;/b&gt;&lt;br/&gt;Vyberte rohový bod pro více voleb.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1068,7 +1069,7 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="46"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a track point for more options.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Upravit body stopy&lt;/b&gt;&lt;br/&gt;Vyberte bod stopy pro více voleb.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1081,17 +1082,17 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat stopu</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat oblast</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="46"/>
         <source>Copy position</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat polohu</translation>
     </message>
 </context>
 <context>
@@ -1099,7 +1100,7 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="48"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point. And then a second one.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vybrat rozsah&lt;/b&gt;&lt;br/&gt;Vyberte první bod stopy. A potom druhý.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1275,7 +1276,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="14"/>
         <source>Combine Tracks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Spojit stopy...</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="43"/>
@@ -1283,7 +1284,7 @@ není platným vymezením soustavy souřadnic
         <location filename="../gis/trk/ICombineTrk.ui" line="117"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="144"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -1426,52 +1427,52 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="37"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="75"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="105"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="126"/>
         <source>Border width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šířka okraje</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="140"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Styl</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="159"/>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Neprůhlednost</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="179"/>
         <source>Points</source>
-        <translation type="unfinished">Body</translation>
+        <translation>Body</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="206"/>
         <source>Position</source>
-        <translation type="unfinished">Poloha</translation>
+        <translation>Poloha</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="215"/>
         <source>Hist.</source>
-        <translation type="unfinished">Hist.</translation>
+        <translation>Hist.</translation>
     </message>
 </context>
 <context>
@@ -1486,7 +1487,8 @@ není platným vymezením soustavy souřadnic
         <location filename="../gis/trk/IDetailsTrk.ui" line="49"/>
         <source>-
 -</source>
-        <translation type="unfinished"></translation>
+        <translation>-
+-</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="117"/>
@@ -1868,7 +1870,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation type="unfinished"></translation>
+        <translation>Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
@@ -1952,17 +1954,17 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../map/IMapPropSetup.ui" line="184"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="208"/>
         <source>Cache Size (MB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost vyrovnávací paměti (MB)</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="228"/>
         <source>Expiration (Days)</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum vypršení (dny)</translation>
     </message>
 </context>
 <context>
@@ -1970,22 +1972,22 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../mouse/IMouseEditLine.cpp" line="309"/>
         <source>Add points?</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat body?</translation>
     </message>
     <message>
         <location filename="../mouse/IMouseEditLine.cpp" line="309"/>
         <source>Add points to temporary line?</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat body do dočasné čáry?</translation>
     </message>
     <message>
         <location filename="../mouse/IMouseEditLine.cpp" line="758"/>
         <source>Warning!</source>
-        <translation type="unfinished"></translation>
+        <translation>Varování!</translation>
     </message>
     <message>
         <location filename="../mouse/IMouseEditLine.cpp" line="758"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
 </context>
 <context>
@@ -2116,22 +2118,22 @@ nebo
     <message>
         <location filename="../mouse/IScrOptEditLine.ui" line="26"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptEditLine.ui" line="50"/>
         <source>Save to orignal</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit do předlohy</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptEditLine.ui" line="57"/>
         <source>Save as new</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit jako nový</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptEditLine.ui" line="64"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Přerušit</translation>
     </message>
 </context>
 <context>
@@ -2139,19 +2141,19 @@ nebo
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="51"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="69"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="98"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Textový štítek</translation>
+        <translation>Textový štítek</translation>
     </message>
 </context>
 <context>
@@ -2159,32 +2161,32 @@ nebo
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="35"/>
         <source>Delete point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat bod.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="49"/>
         <source>Select a range of points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat rozsah bodů.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="63"/>
         <source>Move selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout vybraný bod.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="77"/>
         <source>Add points before the selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat body před vybraný bod.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="91"/>
         <source>Add points after the selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat body po vybraném bodu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="38"/>
@@ -2193,7 +2195,7 @@ nebo
         <location filename="../mouse/IScrOptPoint.ui" line="80"/>
         <location filename="../mouse/IScrOptPoint.ui" line="94"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2201,17 +2203,17 @@ nebo
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="32"/>
         <source>Delete selected range of points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vybraný rozsah bodů.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="35"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2219,34 +2221,34 @@ nebo
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="40"/>
         <source>Hide all points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt všechny body.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="43"/>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="57"/>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="71"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="54"/>
         <source>Show all points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat všechny body.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
         <source>Copy track points as new track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat body stopy jako novou stopu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="103"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Textový štítek</translation>
+        <translation>Textový štítek</translation>
     </message>
 </context>
 <context>
@@ -2288,37 +2290,37 @@ nebo
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details &amp;amp; Edit properties of track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit podrobnosti a upravit vlastnosti stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="71"/>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
         <source>Show on-screen profile and detailed information about points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat promítnutý profil a podrobné údaje o bodech.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="145"/>
         <source>Cut track at selected point into two tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyjmout stopu na vybraném bodu do dvou stop.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="103"/>
         <source>Edit position of track points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit polohu bodů stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="117"/>
         <source>Reverse track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrátit stopu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="131"/>
         <source>Combine tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spojit stopy.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2396,7 +2398,7 @@ nebo
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
         <source>Select a project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat projekt...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
@@ -2746,12 +2748,12 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="248"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněny body stop. Obětována veškerá předchozí data.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="437"/>
         <source> slope: %1° (%2%)</source>
-        <translation type="unfinished"></translation>
+        <translation> sklon: %1° (%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="475"/>
@@ -2771,57 +2773,57 @@ line %2, column %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="94"/>
         <source>thin</source>
-        <translation type="unfinished"></translation>
+        <translation>Tenký</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="95"/>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Obvyklý</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="96"/>
         <source>wide</source>
-        <translation type="unfinished"></translation>
+        <translation>Široký</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="97"/>
         <source>strong</source>
-        <translation type="unfinished"></translation>
+        <translation>Silný</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="485"/>
         <source>Changed area shape.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněn tvar oblasti.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="492"/>
         <source>Changed name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněn název.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="498"/>
         <source>Changed border width.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněna šířka okraje.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="504"/>
         <source>Changed fill pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněn vzor výplně.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="510"/>
         <source>Changed opacity.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněna neprůhlednost.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="516"/>
         <source>Changed comment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněna poznámka.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="522"/>
         <source>Changed description.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněn popis.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="534"/>
@@ -2932,7 +2934,7 @@ line %2, column %3:
         <location filename="../mouse/CMouseEditArea.cpp" line="86"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="91"/>
         <source>Enter new track name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadat název nové stopy.</translation>
     </message>
 </context>
 </TS>

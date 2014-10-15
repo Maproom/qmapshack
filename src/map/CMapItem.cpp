@@ -24,6 +24,7 @@
 #include "map/CMapVRT.h"
 #include "map/CMapMAP.h"
 #include "map/CMapWMTS.h"
+#include "map/CMapTMS.h"
 #include "map/IMapProp.h"
 #include <QtGui>
 
@@ -120,6 +121,10 @@ void CMapItem::updateIcon()
     {
         img = QPixmap("://icons/32x32/MimeWMTS.png");
     }
+    else if(fi.suffix().toLower() == "tms")
+    {
+        img = QPixmap("://icons/32x32/MimeTMS.png");
+    }
 
     setIcon(0,QIcon(img));
 }
@@ -194,6 +199,10 @@ bool CMapItem::activate()
     else if(fi.suffix().toLower() == "wmts")
     {
         mapfile = new CMapWMTS(filename, map);
+    }
+    else if(fi.suffix().toLower() == "tms")
+    {
+        mapfile = new CMapTMS(filename, map);
     }
 
     updateIcon();

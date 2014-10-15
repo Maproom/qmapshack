@@ -50,7 +50,39 @@ class CMapTMS : public IMap
 
 
     private:
+        struct layer_t;
+        QString createUrl(const layer_t& layer, int x, int y, int z);
+
+        struct layer_t
+        {
+            layer_t() : enabled(true), minZoomLevel(0), maxZoomLevel(0){}
+            bool enabled;
+            qint32 minZoomLevel;
+            qint32 maxZoomLevel;
+            QString title;
+            QString strUrl;
+            QString script;
+
+        };
+
+        struct rawHeaderItem_t
+        {
+            QString name;
+            QString value;
+        };
+
+        QVector<layer_t> layers;
+
         QString name;
+
+        QString copyright;
+
+        qint32 minZoomLevel;
+
+        qint32 maxZoomLevel;
+
+        QList<rawHeaderItem_t> rawHeaderItems;
+
         /// Mutex to control access to url queue
         QMutex mutex;
         /// a queue with all tile urls to request
@@ -63,6 +95,8 @@ class CMapTMS : public IMap
         QList<QString> urlPending;
 
         bool lastRequest;
+
+        qreal scale;
 
 };
 

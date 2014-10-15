@@ -8,6 +8,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 find_package(Qt5Core)
 find_package(Qt5Xml)
+find_package(Qt5Script)
 find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(GDAL REQUIRED)
@@ -301,6 +302,7 @@ add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     Qt5::Xml
+    Qt5::Script
     Qt5::WebKitWidgets
     CGetOpt
     ${GDAL_LIBRARIES}

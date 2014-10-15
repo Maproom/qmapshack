@@ -38,6 +38,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     qDebug() << "------------------------------";
     qDebug() << "WTMS: try to open" << filename;
 
+
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {

@@ -113,11 +113,10 @@ void CDiskCache::slotCleanup()
 {
     QMutexLocker lock(&mutex);
 
-    qint64 size = 0;
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     QDateTime now = QDateTime::currentDateTime();
     int days        = expiration;
-    quint32 maxSize = size * 1024 * 1024;
+    qint32 maxSize = size * 1024 * 1024;
 
     // expire old files and calculate cache size
     foreach(const QFileInfo& fileinfo, files)
@@ -144,6 +143,8 @@ void CDiskCache::slotCleanup()
             table.remove(hash);
             cache.remove(hash);
             QFile::remove(fileinfo.absoluteFilePath());
+
+            qDebug() << "remove" << fileinfo.absoluteFilePath();
 
             size -= fileinfo.size();
 

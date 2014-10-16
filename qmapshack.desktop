@@ -10,3 +10,4 @@ Categories=Qt;Utility;Geography;
 GenericName=GPS device mapping utility
 Keywords=map;GPS;geocaching;waypoints;tracks;
 MimeType=application/x-gpx;
+StartupNotify=true

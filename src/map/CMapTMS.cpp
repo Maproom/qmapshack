@@ -387,7 +387,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
         QPointF s1  = buf.scale * buf.zoomFactor;
         qreal d     = NOFLOAT;
 
-        for(qint32 i = layer.minZoomLevel; i < layer.maxZoomLevel && i < 18; i++)
+        for(qint32 i = layer.minZoomLevel; i < 18; i++)
         {
             qreal s2 = 0.6 * (1<<i);
             if(qAbs(s2 - s1.x()) < d)
@@ -396,6 +396,12 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
                 d = qAbs(s2 - s1.x());
             }
         }
+
+        if(z > layer.maxZoomLevel)
+        {
+            continue;
+        }
+
         z = 18 - z;
 
 

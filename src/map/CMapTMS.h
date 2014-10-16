@@ -98,8 +98,6 @@ class CMapTMS : public IMap
 
         bool lastRequest;
 
-        qreal scale;
-
         QTime timeLastUpdate;
 
 };

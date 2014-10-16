@@ -22,6 +22,7 @@
 #include <QMap>
 #include <QQueue>
 #include <QMutex>
+#include <QTime>
 
 
 class CMapDraw;
@@ -29,6 +30,7 @@ class IDiskCache;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QListWidgetItem;
+
 
 class CMapWMTS  : public IMap
 {
@@ -108,6 +110,8 @@ class CMapWMTS  : public IMap
         QList<QString> urlPending;
 
         bool lastRequest;
+
+        QTime timeLastUpdate;
 
 };
 

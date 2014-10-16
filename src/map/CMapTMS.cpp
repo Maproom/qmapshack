@@ -55,7 +55,6 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     , maxZoomLevel(18)
     , diskCache(0)
     , lastRequest(false)
-    , scale( 1.19432854652)
 {
     qDebug() << "------------------------------";
     qDebug() << "TMS: try to open" << filename;
@@ -218,17 +217,16 @@ void CMapTMS::slotQueueChanged()
             }
         }
     }
-
-    if(timeLastUpdate.elapsed() > 2000)
-    {
-        timeLastUpdate.start();
-        map->emitSigCanvasUpdate();
-    }
-
     else if(lastRequest && urlPending.isEmpty())
     {
         lastRequest = false;
         // if all tiles are received the map layer can be redrawn with all tiles from cache
+        map->emitSigCanvasUpdate();
+    }
+
+    if(timeLastUpdate.elapsed() > 2000)
+    {
+        timeLastUpdate.start();
         map->emitSigCanvasUpdate();
     }
 

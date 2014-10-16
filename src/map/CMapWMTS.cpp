@@ -317,6 +317,13 @@ void CMapWMTS::slotQueueChanged()
         map->emitSigCanvasUpdate();
     }
 
+    if(timeLastUpdate.elapsed() > 2000)
+    {
+        timeLastUpdate.start();
+        map->emitSigCanvasUpdate();
+    }
+
+
     // report status of pending tiles
     int pending = urlQueue.size() + urlPending.size();
     if(pending)
@@ -365,6 +372,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 {
     QMutexLocker lock(&mutex);
 
+    timeLastUpdate.start();
     urlQueue.clear();
 
     if(map->needsRedraw())

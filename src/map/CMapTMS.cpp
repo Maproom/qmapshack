@@ -218,6 +218,13 @@ void CMapTMS::slotQueueChanged()
             }
         }
     }
+
+    if(timeLastUpdate.elapsed() > 2000)
+    {
+        timeLastUpdate.start();
+        map->emitSigCanvasUpdate();
+    }
+
     else if(lastRequest && urlPending.isEmpty())
     {
         lastRequest = false;
@@ -342,6 +349,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
 {
     QMutexLocker lock(&mutex);
 
+    timeLastUpdate.start();
     urlQueue.clear();
 
     if(map->needsRedraw())
@@ -369,25 +377,21 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
     if(x1 < -180.0*DEG_TO_RAD) x1 = -180*DEG_TO_RAD;
     if(x2 >  180.0*DEG_TO_RAD) x2 =  180*DEG_TO_RAD;
 
-    // convert viewport to layer's coordinate system
-    QPointF pt1(x1,y1);
-    QPointF pt2(x2,y2);
-
-    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-
-
-
     // draw layers
     foreach(const layer_t& layer, layers)
     {
-        qint32 z = 17;
-        QPointF s1 = (pt2 - pt1)/QPointF(buf.image.width(), buf.image.height());
-        qreal d = NOFLOAT;
-
-        for(qint32 i = layer.minZoomLevel; i < layer.maxZoomLevel; i++)
+        if(!layer.enabled)
         {
-            qreal s2 = scale * (1<<i);
+            continue;
+        }
+
+        qint32 z    = 17;
+        QPointF s1  = buf.scale * buf.zoomFactor;
+        qreal d     = NOFLOAT;
+
+        for(qint32 i = layer.minZoomLevel; i < layer.maxZoomLevel && i < 18; i++)
+        {
+            qreal s2 = 0.6 * (1<<i);
             if(qAbs(s2 - s1.x()) < d)
             {
                 z = i;
@@ -403,6 +407,8 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
         col2 = lon2tile(x2 * RAD_TO_DEG, z) / 256;
         row1 = lat2tile(y1 * RAD_TO_DEG, z) / 256;
         row2 = lat2tile(y2 * RAD_TO_DEG, z) / 256;
+
+//        qDebug() << col1 << col2 << row1 << row2 << (col2 - col1) << (row2 - row1) << ((col2 - col1) * (row2 - row1));
 
         // start to request tiles. draw tiles in cache, queue urls of tile yet to be requested
         for(qint32 row = row1; row <= row2; row++)

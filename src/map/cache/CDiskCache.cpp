@@ -24,7 +24,7 @@ CDiskCache::CDiskCache(const QString &path, qint32 size, qint32 days, QObject * 
     : IDiskCache(parent)   
     , dir(path)
     , size(size)
-    , expiration(size)
+    , expiration(days)
     , dummy(256,256, QImage::Format_ARGB32)
 {
     dummy.fill(Qt::transparent);
@@ -39,7 +39,7 @@ CDiskCache::CDiskCache(const QString &path, qint32 size, qint32 days, QObject * 
 
     timer = new QTimer(this);
     timer->setSingleShot(false);
-    timer->start(60000);
+    timer->start(20000);
     connect(timer, SIGNAL(timeout()), this, SLOT(slotCleanup()));
 }
 
@@ -114,10 +114,10 @@ void CDiskCache::slotCleanup()
     QMutexLocker lock(&mutex);
 
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
-    QDateTime now = QDateTime::currentDateTime();
-    int days        = expiration;
-    qint32 maxSize = size * 1024 * 1024;
-
+    QDateTime now       = QDateTime::currentDateTime();
+    int days            = expiration;
+    qint32 maxSize      = size * 1024 * 1024;
+    qint32 tmpSize      = 0;
     // expire old files and calculate cache size
     foreach(const QFileInfo& fileinfo, files)
     {
@@ -130,11 +130,11 @@ void CDiskCache::slotCleanup()
         }
         else
         {
-            size += fileinfo.size();
+            tmpSize += fileinfo.size();
         }
     }
 
-    if(size > maxSize)
+    if(tmpSize > maxSize)
     {
         // if cache is still too large remove oldest files
         foreach(const QFileInfo& fileinfo, files)

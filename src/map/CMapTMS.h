@@ -21,10 +21,12 @@
 
 #include "map/IMap.h"
 #include <QQueue>
-#include <QNetworkAccessManager>
+#include <QTime>
 
 class IDiskCache;
 class QListWidgetItem;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 class CMapTMS : public IMap
 {
@@ -97,6 +99,8 @@ class CMapTMS : public IMap
         bool lastRequest;
 
         qreal scale;
+
+        QTime timeLastUpdate;
 
 };
 

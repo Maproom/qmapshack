@@ -104,6 +104,8 @@ set( SRCS
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/CGisProject.cpp
+    gis-search/IGisSearch.cpp
+    gis-search/CSearchGoogle.cpp
     plot/IPlot.cpp
     plot/CPlotAxis.cpp
     plot/CPlotAxisTime.cpp    
@@ -209,7 +211,9 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
-    gis/CGisProject.h    
+    gis/CGisProject.h
+    gis-search/IGisSearch.h
+    gis-search/CSearchGoogle.h
     plot/IPlot.h
     plot/CPlotAxis.h
     plot/CPlotAxisTime.h

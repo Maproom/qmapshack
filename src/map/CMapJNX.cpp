@@ -180,7 +180,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
             stream >> dummy;
             readCString(stream, ba);
             level.copyright1 = codec->toUnicode(ba);
-            copyright += level.copyright1 + "\n";
+
         }
         qDebug() << i << hex << level.nTiles << level.offset << level.scale;
     }
@@ -217,7 +217,6 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
             level.name2 = codec->toUnicode(ba);
             readCString(stream, ba);
             level.copyright2 = codec->toUnicode(ba);
-            copyright += level.copyright2 + "\n";
         }
     }
 

@@ -230,7 +230,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
 CMapWMTS::~CMapWMTS()
 {
-    map->reportStatusToCanvas(name, "");
+
 }
 
 void CMapWMTS::getLayers(QListWidget& list)

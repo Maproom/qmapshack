@@ -17,9 +17,10 @@
 **********************************************************************************************/
 
 #include "gis/CGisWidget.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisDraw.h"
+#include "gis/gpx/CGisProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -100,20 +101,20 @@ void CGisWidget::slotSaveAll()
     QApplication::restoreOverrideCursor();
 }
 
-CGisProject * CGisWidget::selectProject()
+IGisProject * CGisWidget::selectProject()
 {
     QString key, name;
 
     CSelectProjectDialog dlg(key, name, treeWks);
     dlg.exec();
 
-    CGisProject * project = 0;
+    IGisProject * project = 0;
     if(!key.isEmpty())
     {
         IGisItem::mutexItems.lock();
         for(int i = 0; i < treeWks->topLevelItemCount(); i++)
         {
-            project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+            project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
             if(project == 0)
             {
                 continue;
@@ -140,7 +141,7 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(project == 0)
         {
             continue;
@@ -156,7 +157,7 @@ IGisItem * CGisWidget::getItemByKey(const QString& key)
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(project == 0)
         {
             continue;
@@ -176,7 +177,7 @@ void CGisWidget::delItemByKey(const QString& key)
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(project == 0)
         {
             continue;
@@ -198,7 +199,7 @@ void CGisWidget::editItemByKey(const QString& key)
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(project == 0)
         {
             continue;
@@ -361,7 +362,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             break;
         }
 
-        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(project == 0)
         {
             continue;
@@ -380,7 +381,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             break;
         }
 
-        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(project == 0)
         {
             continue;
@@ -399,7 +400,7 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
     //IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(project == 0)
         {
             continue;

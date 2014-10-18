@@ -19,7 +19,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "gis/ovl/CDetailsOvlArea.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "gis/CGisDraw.h"
 
 #include <QtWidgets>
@@ -112,7 +112,7 @@ const Qt::BrushStyle CGisItemOvlArea::brushStyles[OVL_N_STYLES] =
 
 QString CGisItemOvlArea::keyUserFocus;
 
-CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, CGisProject * project, int idx)
+CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx)
     : IGisItem(project, eTypeOvl, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -130,7 +130,7 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, CGi
     project->setText(1,"*");
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, CGisProject * project, int idx)
+CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -145,7 +145,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, CGisProject 
     project->setText(1,"*");
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, CGisProject *project)
+CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     : IGisItem(project, eTypeOvl, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)

@@ -25,7 +25,7 @@
 #include <QPen>
 #include <QPointer>
 
-class CGisProject;
+class IGisProject;
 class CScrOptOvlArea;
 
 #define OVL_N_COLORS 17
@@ -35,9 +35,9 @@ class CScrOptOvlArea;
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
     public:
-        CGisItemOvlArea(const QPolygonF& line, const QString &name, CGisProject * project, int idx);
-        CGisItemOvlArea(const CGisItemOvlArea &parentArea, CGisProject * project, int idx);
-        CGisItemOvlArea(const QDomNode &xml, CGisProject *project);
+        CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx);
+        CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx);
+        CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
         virtual ~CGisItemOvlArea();
 
         const QString& getName();

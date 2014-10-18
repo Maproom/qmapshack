@@ -17,9 +17,10 @@
 **********************************************************************************************/
 
 #include "gis/CGisListWks.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
+#include "gis/gpx/CGisProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"
@@ -142,7 +143,7 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
     }
 
-    CGisProject * proj = dynamic_cast<CGisProject*>(itemAt(e->pos()));
+    IGisProject * proj = dynamic_cast<IGisProject*>(itemAt(e->pos()));
     if(proj && proj != currentItem()->parent())
     {
         e->setDropAction(Qt::CopyAction);
@@ -189,7 +190,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         }
         else
         {
-            CGisProject * project = dynamic_cast<CGisProject*>(wpt2->parent());
+            IGisProject * project = dynamic_cast<IGisProject*>(wpt2->parent());
             if(project)
             {
                 new CGisItemWpt(*wpt1,project, project->indexOfChild(wpt2) + off);
@@ -210,7 +211,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         }
         else
         {
-            CGisProject * project = dynamic_cast<CGisProject*>(trk2->parent());
+            IGisProject * project = dynamic_cast<IGisProject*>(trk2->parent());
             if(project)
             {
                 new CGisItemTrk(*trk1,project, project->indexOfChild(trk2) + off);
@@ -231,7 +232,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         }
         else
         {
-            CGisProject * project = dynamic_cast<CGisProject*>(rte2->parent());
+            IGisProject * project = dynamic_cast<IGisProject*>(rte2->parent());
             if(project)
             {
                 new CGisItemRte(*rte1,project, project->indexOfChild(rte2) + off);
@@ -252,7 +253,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         }
         else
         {
-            CGisProject * project = dynamic_cast<CGisProject*>(area2->parent());
+            IGisProject * project = dynamic_cast<IGisProject*>(area2->parent());
             if(project)
             {
                 new CGisItemOvlArea(*area1,project, project->indexOfChild(area2) + off);
@@ -263,7 +264,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
     }
 
 
-    CGisProject * project = dynamic_cast<CGisProject*>(itemAt(e->pos()));
+    IGisProject * project = dynamic_cast<IGisProject*>(itemAt(e->pos()));
     if(project && project != currentItem()->parent())
     {
         if(wpt1 != 0)
@@ -293,7 +294,7 @@ bool CGisListWks::hasProject(const QString& key)
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < topLevelItemCount(); i++)
     {
-        CGisProject * item = dynamic_cast<CGisProject*>(topLevelItem(i));
+        IGisProject * item = dynamic_cast<IGisProject*>(topLevelItem(i));
         if(item && item->getKey() == key)
         {
             return true;
@@ -304,7 +305,7 @@ bool CGisListWks::hasProject(const QString& key)
 
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
-    CGisProject * project = dynamic_cast<CGisProject*>(currentItem());
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
     if(project != 0)
     {
         QPoint p = mapToGlobal(point);
@@ -360,7 +361,7 @@ void CGisListWks::slotCloseProject()
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(item);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
             delete project;

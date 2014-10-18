@@ -20,7 +20,7 @@
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CScrOptWpt.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
 #include "gis/CGisListWks.h"
@@ -41,7 +41,7 @@ QString CGisItemWpt::lastName;
 QString CGisItemWpt::lastIcon;
 
 /// used to add a new waypoint
-CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, CGisProject * project)
+CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
     : IGisItem(project, eTypeWpt, -1)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
@@ -68,7 +68,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
 }
 
 /// used to move a copy of waypoint
-CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisProject * project)
+CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisProject *project)
     : IGisItem(project, eTypeWpt, -1)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
@@ -95,7 +95,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, CGisP
 }
 
 /// used to create a copy of waypoint with new parent
-CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, CGisProject *project, int idx)
+CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx)
     : IGisItem(project, eTypeWpt, idx)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
@@ -113,7 +113,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, CGisProject *project, int
 }
 
 /// used to create waypoint from GPX file
-CGisItemWpt::CGisItemWpt(const QDomNode &xml, CGisProject *project)
+CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     : IGisItem(project, eTypeWpt, project->childCount())
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)

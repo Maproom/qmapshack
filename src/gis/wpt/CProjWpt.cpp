@@ -19,7 +19,7 @@
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CWptIconDialog.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 #include "CMainWindow.h"
@@ -80,7 +80,7 @@ void CProjWpt::accept()
         return;
     }
 
-    CGisProject * project = dynamic_cast<CGisProject*>(wpt.parent());
+    IGisProject * project = dynamic_cast<IGisProject*>(wpt.parent());
     if(project == 0)
     {
         return;

@@ -70,7 +70,7 @@ void CMouseEditArea::slotCopyToNew()
         return;
     }
 
-    CGisProject * project = CGisWidget::self().selectProject();
+    IGisProject * project = CGisWidget::self().selectProject();
     if(project == 0)
     {
         return;

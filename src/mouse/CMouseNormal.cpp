@@ -25,7 +25,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "GeoMath.h"
 
 #include <QtWidgets>
@@ -300,7 +300,7 @@ void CMouseNormal::slotAddWpt()
         return;
     }
 
-    CGisProject * project = CGisWidget::self().selectProject();
+    IGisProject * project = CGisWidget::self().selectProject();
     if(project == 0)
     {
         return;

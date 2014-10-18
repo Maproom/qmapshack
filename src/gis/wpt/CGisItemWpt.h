@@ -23,9 +23,10 @@
 
 #include <QPointer>
 
-class CGisProject;
+class IGisProject;
 class QDomNode;
 class CScrOptWpt;
+
 
 class CGisItemWpt : public IGisItem
 {
@@ -78,27 +79,27 @@ class CGisItemWpt : public IGisItem
            @param icon      the waypoint's icon
            @param project   the project the waypoint is added to
          */
-        CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, CGisProject * project);
+        CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject * project);
         /**
            @brief Create a copy of an existing waypoint with a new position
            @param pos       the waypoint's new position [°]
            @param parentWpt the waypoint to copy
            @param project   the project the waypoint is added to
          */
-        CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, CGisProject *project);
+        CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, IGisProject *project);
         /**
            @brief Create a 1:1 copy of an existing waypoint (with new key)
            @param parentWpt the waypoint to copy
            @param project   the project the waypoint is added to
            @param idx       the index to insert the item. If -1 the item will be appended to it's group
          */
-        CGisItemWpt(const CGisItemWpt &parentWpt, CGisProject *project, int idx);
+        CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx);
         /**
            @brief Create item from GPX.
            @param xml       the GPX section containing the item
            @param project   the project to append with item
          */
-        CGisItemWpt(const QDomNode& xml, CGisProject * project);
+        CGisItemWpt(const QDomNode& xml, IGisProject * project);
         virtual ~CGisItemWpt();
 
         void setName(const QString& str);

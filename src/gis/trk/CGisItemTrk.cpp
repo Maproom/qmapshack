@@ -20,7 +20,7 @@
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CCombineTrk.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "plot/IPlot.h"
@@ -102,7 +102,7 @@ const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 QString CGisItemTrk::keyUserFocus;
 
 /// used to create a new track from a part of an existing track
-CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const trk_t& srctrk, CGisProject * project)
+CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const trk_t& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, -1)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
@@ -154,7 +154,7 @@ CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const 
 }
 
 /// used to create a copy of track with new parent
-CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx)
+CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
@@ -172,7 +172,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, in
 }
 
 /// usd to create a track from a line of coordinates
-CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, CGisProject * project, int idx)
+CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
@@ -193,7 +193,7 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, CGisProject * 
 }
 
 /// used to create track from GPX file
-CGisItemTrk::CGisItemTrk(const QDomNode& xml, CGisProject * project)
+CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
@@ -890,7 +890,7 @@ bool CGisItemTrk::cut()
         return false;
     }
 
-    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project == 0)
     {
         return false;
@@ -917,7 +917,7 @@ bool CGisItemTrk::cut()
 
 void CGisItemTrk::reverse()
 {
-    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project == 0)
     {
         return;
@@ -955,7 +955,7 @@ void CGisItemTrk::reverse()
 
 void CGisItemTrk::combine()
 {
-    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project == 0)
     {
         return;
@@ -1087,7 +1087,7 @@ void CGisItemTrk::copySelectedPoints()
         qSwap(idx1,idx2);
     }
 
-    CGisProject * project = CGisWidget::self().selectProject();
+    IGisProject * project = CGisWidget::self().selectProject();
     if(project == 0)
     {
         return;

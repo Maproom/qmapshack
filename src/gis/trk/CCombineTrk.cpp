@@ -18,12 +18,12 @@
 
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "plot/CPlotTrack.h"
 
 #include <QtWidgets>
 
-CCombineTrk::CCombineTrk(CGisItemTrk& trk, CGisProject& project, QWidget * parent)
+CCombineTrk::CCombineTrk(CGisItemTrk& trk, IGisProject& project, QWidget * parent)
     : QDialog(parent)
     , trk(trk)
     , project(project)

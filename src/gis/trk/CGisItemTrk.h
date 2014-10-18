@@ -26,7 +26,7 @@
 #include <QPointer>
 
 class QDomNode;
-class CGisProject;
+class IGisProject;
 class IPlot;
 class CDetailsTrk;
 class CScrOptTrk;
@@ -51,10 +51,10 @@ class CGisItemTrk : public IGisItem, public IGisLine
             , eDrawRange
         };
 
-        CGisItemTrk(const QString& name, quint32 idx1, quint32 idx2, const trk_t &srctrk, CGisProject * project);
-        CGisItemTrk(const CGisItemTrk& parentTrk, CGisProject * project, int idx);
-        CGisItemTrk(const QPolygonF& l, const QString &name, CGisProject * project, int idx);
-        CGisItemTrk(const QDomNode &xml, CGisProject *project);
+        CGisItemTrk(const QString& name, quint32 idx1, quint32 idx2, const trk_t &srctrk, IGisProject *project);
+        CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx);
+        CGisItemTrk(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
+        CGisItemTrk(const QDomNode &xml, IGisProject *project);
         virtual ~CGisItemTrk();
 
         const QString& getName(){return trk.name;}

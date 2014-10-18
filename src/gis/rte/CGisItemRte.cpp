@@ -18,7 +18,7 @@
 
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "gis/WptIcons.h"
 #include "gis/CGisDraw.h"
 #include "canvas/CCanvas.h"
@@ -31,7 +31,7 @@ const QPen CGisItemRte::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 QString CGisItemRte::keyUserFocus;
 
 /// used to create a copy of route with new parent
-CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, CGisProject * project, int idx)
+CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
@@ -51,7 +51,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, CGisProject * project, in
 }
 
 /// used to create route from GPX file
-CGisItemRte::CGisItemRte(const QDomNode& xml, CGisProject * parent)
+CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     : IGisItem(parent, eTypeRte, parent->childCount())
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)    
 {

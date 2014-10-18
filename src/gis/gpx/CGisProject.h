@@ -20,8 +20,8 @@
 #define CGISPROJECT_H
 
 #include "gis/IGisItem.h"
+#include "gis/IGisProject.h"
 
-#include <QTreeWidgetItem>
 #include <QDomElement>
 #include <QDateTime>
 #include <QUrl>
@@ -30,7 +30,7 @@ class CGisListWks;
 class CGisDraw;
 
 
-class CGisProject : public QTreeWidgetItem
+class CGisProject : public IGisProject
 {
     public:
         CGisProject(const QString &name, CGisListWks * parent);
@@ -45,46 +45,6 @@ class CGisProject : public QTreeWidgetItem
            @return True if project is valid
          */
         bool  isValid(){return valid;}
-
-        /**
-           @brief Get unique project key.
-           @return A MD5 hash string
-         */
-        const QString& getKey(){return key;}
-
-        /**
-           @brief Get a list of items that are close to a given pixel coordinate of the screen
-
-           @note: The returned pointers are just for temporary use. Best you use them to get the item's key.
-
-           @param pos       the coordinate on the screen in pixel
-           @param items     a list the item's pointer is stored to.
-        */
-        void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
-
-        /**
-           @brief Get a temporary pointer to the item with matching key
-           @param key
-           @return If no item is found 0 is returned.
-        */
-        IGisItem * getItemByKey(const QString& key);
-
-        /**
-           @brief Delete items with matching key
-           @param key
-        */
-        void delItemByKey(const QString& key);
-
-        /**
-           @brief Call IGisItem::edit() method for items with given key
-
-           @param key   a MD5 hash key
-         */
-        void editItemByKey(const QString& key);
-
-        void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
         void save();
         void saveAs();

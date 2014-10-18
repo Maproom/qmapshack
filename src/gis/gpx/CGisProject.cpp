@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisProject.h"
+#include "gis/gpx/CGisProject.h"
 #include "gis/CGisListWks.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -39,14 +39,10 @@ const QString CGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString CGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString CGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
-CGisProject::CGisProject(const QString &name, CGisListWks * parent)
-    : QTreeWidgetItem(parent)
+CGisProject::CGisProject(const QString &name,  CGisListWks * parent)
+    : IGisProject("", parent)
     , valid(true)
 {
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(name.toUtf8());
-    key = md5.result().toHex();
-
     setText(0, name);
     setIcon(0,QIcon("://icons/32x32/GisProject.png"));
 
@@ -54,8 +50,7 @@ CGisProject::CGisProject(const QString &name, CGisListWks * parent)
 }
 
 CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWks *parent)
-    : QTreeWidgetItem(parent)
-    , key(key)
+    : IGisProject(key, parent)
     , filename(filename)
     , valid(false)
 {
@@ -314,156 +309,7 @@ QDomNode CGisProject::writeMetadata(QDomDocument& doc)
 }
 
 
-void CGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
-{
-    for(int i = 0; i < childCount(); i++)
-    {
 
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(item->isCloseTo(pos))
-        {
-            items << item;
-        }
-    }
-}
-
-IGisItem * CGisProject::getItemByKey(const QString& key)
-{
-    for(int i = 0; i < childCount(); i++)
-    {
-
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(item->getKey() == key)
-        {
-            return item;
-        }
-    }
-    return 0;
-}
-
-void CGisProject::delItemByKey(const QString& key)
-{
-    QList<QTreeWidgetItem*> items;
-    for(int i = childCount(); i > 0; i--)
-    {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(item->getKey() == key)
-        {
-            QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(0));
-            QMessageBox::StandardButtons res = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
-            if(res != QMessageBox::Ok)
-            {
-                continue;
-            }
-
-            items << takeChild(i-1);
-            setText(1,"*");
-        }
-    }
-    qDeleteAll(items);
-}
-
-void CGisProject::editItemByKey(const QString& key)
-{
-    for(int i = childCount(); i > 0; i--)
-    {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(item->getKey() == key)
-        {
-            item->edit();
-        }
-    }
-}
-
-void CGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis)
-{
-    for(int i = 0; i < childCount(); i++)
-    {
-        if(gis->needsRedraw())
-        {
-            break;
-        }
-
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(seenKeys.contains(item->getKey()))
-        {
-            continue;
-        }
-        seenKeys << item->getKey();
-
-        item->drawItem(p, viewport, blockedAreas, gis);
-    }
-
-}
-
-void CGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
-{
-    for(int i = 0; i < childCount(); i++)
-    {
-
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-
-        item->drawItem(p, viewport, gis);
-    }
-
-}
-
-void CGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis)
-{
-
-    for(int i = 0; i < childCount(); i++)
-    {
-        if(gis->needsRedraw())
-        {
-            break;
-        }
-
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(seenKeys.contains(item->getKey()))
-        {
-            continue;
-        }
-        seenKeys << item->getKey();
-
-        item->drawLabel(p, viewport, blockedAreas, fm, gis);
-    }
-
-}
 
 void CGisProject::save()
 {

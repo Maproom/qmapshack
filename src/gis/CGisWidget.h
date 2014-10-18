@@ -24,7 +24,7 @@
 
 class CGisDraw;
 class IGisItem;
-class CGisProject;
+class IGisProject;
 
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
@@ -134,7 +134,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
            @return 0 if no project was selected.
          */
-        CGisProject * selectProject();
+        IGisProject * selectProject();
 
     signals:
         void sigChanged();

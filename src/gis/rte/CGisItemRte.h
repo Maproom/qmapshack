@@ -25,13 +25,13 @@
 #include <QPen>
 
 class QDomNode;
-class CGisProject;
+class IGisProject;
 
 class CGisItemRte : public IGisItem, public IGisLine
 {
     public:
-        CGisItemRte(const QDomNode &xml, CGisProject *parent);
-        CGisItemRte(const CGisItemRte& parentRte, CGisProject * project, int idx);
+        CGisItemRte(const QDomNode &xml, IGisProject *parent);
+        CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx);
         virtual ~CGisItemRte();
 
 

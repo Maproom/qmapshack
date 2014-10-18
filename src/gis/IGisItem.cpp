@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/IGisItem.h"
-#include "gis/CGisProject.h"
+#include "gis/IGisProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -144,7 +144,7 @@ void IGisItem::changed(const QString &what)
     setText(1,"*");
     setToolTip(0,getInfo());
 
-    CGisProject * project = dynamic_cast<CGisProject*>(parent());
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project)
     {
         project->setText(1,"*");

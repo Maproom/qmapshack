@@ -86,6 +86,10 @@ set( SRCS
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
     gis/IGisLine.cpp
+    gis/CGisWidget.cpp
+    gis/CGisListDB.cpp
+    gis/CGisListWks.cpp
+    gis/IGisProject.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
     gis/wpt/CDetailsWpt.cpp
@@ -100,10 +104,7 @@ set( SRCS
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
     gis/ovl/CDetailsOvlArea.cpp
-    gis/CGisWidget.cpp
-    gis/CGisListDB.cpp
-    gis/CGisListWks.cpp
-    gis/CGisProject.cpp
+    gis/gpx/CGisProject.cpp
     plot/IPlot.cpp
     plot/CPlotAxis.cpp
     plot/CPlotAxisTime.cpp    
@@ -192,6 +193,10 @@ set( HDRS
     gis/CGisDraw.h
     gis/IGisItem.h
     gis/IGisLine.h
+    gis/IGisProject.h
+    gis/CGisWidget.h
+    gis/CGisListDB.h
+    gis/CGisListWks.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h
@@ -205,11 +210,8 @@ set( HDRS
     gis/rte/CScrOptRte.h
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
-    gis/ovl/CDetailsOvlArea.h
-    gis/CGisWidget.h
-    gis/CGisListDB.h
-    gis/CGisListWks.h
-    gis/CGisProject.h    
+    gis/ovl/CDetailsOvlArea.h    
+    gis/gpx/CGisProject.h
     plot/IPlot.h
     plot/CPlotAxis.h
     plot/CPlotAxisTime.h

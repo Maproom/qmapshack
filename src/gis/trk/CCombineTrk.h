@@ -23,13 +23,13 @@
 #include "ui_ICombineTrk.h"
 
 class CGisItemTrk;
-class CGisProject;
+class IGisProject;
 
 class CCombineTrk : public QDialog, private Ui::ICombineTrk
 {
     Q_OBJECT
     public:
-        CCombineTrk(CGisItemTrk& trk, CGisProject& project, QWidget * parent);
+        CCombineTrk(CGisItemTrk& trk, IGisProject &project, QWidget * parent);
         virtual ~CCombineTrk();
 
         const QStringList& getTrackKeys(){return keys;}
@@ -47,7 +47,7 @@ class CCombineTrk : public QDialog, private Ui::ICombineTrk
     private:
         void updatePreview();
         CGisItemTrk& trk;
-        CGisProject& project;
+        IGisProject& project;
 
         QStringList keys;
 };

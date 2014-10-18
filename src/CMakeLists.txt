@@ -104,9 +104,6 @@ set( SRCS
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/CGisProject.cpp
-    gis-search/IGisSearch.cpp
-    gis-search/CGisSearchWidget.cpp
-    gis-search/CSearchGoogle.cpp
     plot/IPlot.cpp
     plot/CPlotAxis.cpp
     plot/CPlotAxisTime.cpp    
@@ -212,10 +209,7 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
-    gis/CGisProject.h
-    gis-search/IGisSearch.h
-    gis-search/CGisSearchWidget.h
-    gis-search/CSearchGoogle.h
+    gis/CGisProject.h    
     plot/IPlot.h
     plot/CPlotAxis.h
     plot/CPlotAxisTime.h
@@ -258,7 +252,6 @@ set( UIS
     gis/rte/IScrOptRte.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
-    gis-search/IGisSearchWidget.ui
     units/ITimeZoneSetup.ui
 )
 

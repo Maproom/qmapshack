@@ -105,6 +105,7 @@ set( SRCS
     gis/ovl/CScrOptOvlArea.cpp
     gis/ovl/CDetailsOvlArea.cpp
     gis/gpx/CGpxProject.cpp
+    gis/search/CSearchGoogle.cpp
     plot/IPlot.cpp
     plot/CPlotAxis.cpp
     plot/CPlotAxisTime.cpp    
@@ -212,6 +213,7 @@ set( HDRS
     gis/ovl/CScrOptOvlArea.h
     gis/ovl/CDetailsOvlArea.h    
     gis/gpx/CGpxProject.h
+    gis/search/CSearchGoogle.h
     plot/IPlot.h
     plot/CPlotAxis.h
     plot/CPlotAxisTime.h

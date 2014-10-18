@@ -59,12 +59,25 @@ static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
 }
 
 
-CWptIconDialog::CWptIconDialog(QToolButton *parent)
-    : button(*parent)
+CWptIconDialog::CWptIconDialog(QAction *parent)
+    : button(0)
+    , action(parent)
 {
     setupUi(this);
+    setupList(action);
+}
 
-    QString currentIcon = button.objectName();
+CWptIconDialog::CWptIconDialog(QToolButton *parent)
+    : button(parent)
+    , action(0)
+{
+    setupUi(this);
+    setupList(button);
+}
+
+void CWptIconDialog::setupList(QObject * obj)
+{
+    QString currentIcon = obj->objectName();
     QListWidgetItem * currentItem = 0;
 
     const QMap<QString, icon_t>& wptIcons = getWptIcons();
@@ -103,8 +116,17 @@ CWptIconDialog::~CWptIconDialog()
 
 void CWptIconDialog::slotItemClicked(QListWidgetItem * item)
 {
-    button.setIcon(item->icon());
-    button.setObjectName(item->text());
-    button.setToolTip(item->text());
+    if(button)
+    {
+        button->setIcon(item->icon());
+        button->setObjectName(item->text());
+        button->setToolTip(item->text());
+    }
+    else if(action)
+    {
+        action->setIcon(item->icon());
+        action->setObjectName(item->text());
+        action->setToolTip(item->text());
+    }
     accept();
 }

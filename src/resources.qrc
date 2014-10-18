@@ -37,6 +37,7 @@
         <file>icons/32x32/GridWizzard.png</file>
         <file>icons/32x32/Help.png</file>
         <file>icons/32x32/Info.png</file>
+        <file>icons/32x32/Error.png</file>
         <file>icons/32x32/Map.png</file>
         <file>icons/32x32/QMapShack.png</file>
         <file>icons/32x32/MimeIMG.png</file>
@@ -103,6 +104,7 @@
         <file>icons/32x32/Area.png</file>
         <file>icons/32x32/Reverse.png</file>
         <file>icons/32x32/Combine.png</file>
+        <file>icons/32x32/SearchGoogle.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -122,6 +124,7 @@
         <file>icons/48x48/GridWizzard.png</file>
         <file>icons/48x48/Help.png</file>
         <file>icons/48x48/Info.png</file>
+        <file>icons/48x48/Error.png</file>
         <file>icons/48x48/Map.png</file>
         <file>icons/48x48/QMapShack.png</file>
         <file>icons/48x48/MimeIMG.png</file>
@@ -188,6 +191,7 @@
         <file>icons/48x48/Area.png</file>
         <file>icons/48x48/Reverse.png</file>
         <file>icons/48x48/Combine.png</file>
+        <file>icons/48x48/SearchGoogle.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

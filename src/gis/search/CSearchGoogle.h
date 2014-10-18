@@ -16,34 +16,36 @@
 
 **********************************************************************************************/
 
-#ifndef CWPTICONDIALOG_H
-#define CWPTICONDIALOG_H
+#ifndef CSEARCHGOOGLE_H
+#define CSEARCHGOOGLE_H
 
-#include <QDialog>
-#include "ui_IWptIconDialog.h"
+#include <gis/IGisProject.h>
 
-class QToolButton;
-class QAction;
-class QListWidgetItem;
+#include <QObject>
+#include <QNetworkAccessManager>
 
-class CWptIconDialog : public QDialog, private Ui::IWptIconDialog
+class CGisListWks;
+class QLineEdit;
+
+class CSearchGoogle : public QObject, public IGisProject
 {
     Q_OBJECT
     public:
-        CWptIconDialog(QToolButton * parent);
-        CWptIconDialog(QAction * parent);
-        virtual ~CWptIconDialog();
+        CSearchGoogle(CGisListWks * parent);
+        virtual ~CSearchGoogle();
 
     private slots:
-        void slotItemClicked(QListWidgetItem * item);
+        void slotChangeSymbol();
+        void slotStartSearch();
+        void slotRequestFinished(QNetworkReply* reply);
 
     private:
-        void setupList(QObject *obj);
+        QLineEdit * edit;
 
-        QToolButton * button;
-        QAction     * action;
+        QAction * actSymbol;
 
+        QNetworkAccessManager networkAccessManager;
 };
 
-#endif //CWPTICONDIALOG_H
+#endif //CSEARCHGOOGLE_H
 

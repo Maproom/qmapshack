@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/gpx/CGisProject.h"
+#include "gis/gpx/CGpxProject.h"
 #include "gis/CGisListWks.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -30,16 +30,16 @@
 #include <QtWidgets>
 #include <QtXml>
 
-const QString CGisProject::gpx_ns      = "http://www.topografix.com/GPX/1/1";
-const QString CGisProject::xsi_ns      = "http://www.w3.org/2001/XMLSchema-instance";
-const QString CGisProject::gpxx_ns     = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
-const QString CGisProject::gpxtpx_ns   = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
-const QString CGisProject::wptx1_ns    = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
-const QString CGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
-const QString CGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
-const QString CGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
+const QString CGpxProject::gpx_ns      = "http://www.topografix.com/GPX/1/1";
+const QString CGpxProject::xsi_ns      = "http://www.w3.org/2001/XMLSchema-instance";
+const QString CGpxProject::gpxx_ns     = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
+const QString CGpxProject::gpxtpx_ns   = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
+const QString CGpxProject::wptx1_ns    = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
+const QString CGpxProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
+const QString CGpxProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
+const QString CGpxProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
-CGisProject::CGisProject(const QString &name,  CGisListWks * parent)
+CGpxProject::CGpxProject(const QString &name,  CGisListWks * parent)
     : IGisProject("", parent)
     , valid(true)
 {
@@ -49,7 +49,7 @@ CGisProject::CGisProject(const QString &name,  CGisListWks * parent)
     setToolTip(0, getInfo());
 }
 
-CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWks *parent)
+CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWks *parent)
     : IGisProject(key, parent)
     , filename(filename)
     , valid(false)
@@ -137,12 +137,12 @@ CGisProject::CGisProject(const QString &filename, const QString& key, CGisListWk
     valid = true;
 }
 
-CGisProject::~CGisProject()
+CGpxProject::~CGpxProject()
 {
 
 }
 
-QString CGisProject::getInfo()
+QString CGpxProject::getInfo()
 {
     QString str = metadata.name.isEmpty() ? text(0) : metadata.name;
 
@@ -171,7 +171,7 @@ QString CGisProject::getInfo()
     return str;
 }
 
-void CGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
+void CGpxProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
 {
 
     IGisItem::readXml(xml,"name", metadata.name);
@@ -222,7 +222,7 @@ void CGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
     }
 }
 
-QDomNode CGisProject::writeMetadata(QDomDocument& doc)
+QDomNode CGpxProject::writeMetadata(QDomDocument& doc)
 {
     QDomElement gpx = doc.createElement("gpx");
     doc.appendChild(gpx);
@@ -311,7 +311,7 @@ QDomNode CGisProject::writeMetadata(QDomDocument& doc)
 
 
 
-void CGisProject::save()
+void CGpxProject::save()
 {
     if(filename.isEmpty())
     {
@@ -323,7 +323,7 @@ void CGisProject::save()
     }
 }
 
-void CGisProject::saveAs()
+void CGpxProject::saveAs()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
@@ -340,7 +340,7 @@ void CGisProject::saveAs()
     cfg.setValue("Paths/lastGisPath", path);
 }
 
-void CGisProject::saveGpx(const QString& fn)
+void CGpxProject::saveGpx(const QString& fn)
 {
     QString _fn_ = fn;
 

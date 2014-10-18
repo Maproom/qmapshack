@@ -166,7 +166,7 @@ class IGisItem : public QTreeWidgetItem
         static QString removeHtml(const QString &str);
 
     protected:
-        friend class CGisProject;
+        friend class CGpxProject;
         struct wpt_t;
         struct color_t;
 

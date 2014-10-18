@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#ifndef CGISPROJECT_H
-#define CGISPROJECT_H
+#ifndef CGPXPROJECT_H
+#define CGPXPROJECT_H
 
 #include "gis/IGisItem.h"
 #include "gis/IGisProject.h"
@@ -30,12 +30,12 @@ class CGisListWks;
 class CGisDraw;
 
 
-class CGisProject : public IGisProject
+class CGpxProject : public IGisProject
 {
     public:
-        CGisProject(const QString &name, CGisListWks * parent);
-        CGisProject(const QString& filename, const QString &key, CGisListWks * parent);
-        virtual ~CGisProject();
+        CGpxProject(const QString &name, CGisListWks * parent);
+        CGpxProject(const QString& filename, const QString &key, CGisListWks * parent);
+        virtual ~CGpxProject();
 
         /**
            @brief Check if the project was initialized correctly.
@@ -110,5 +110,5 @@ class CGisProject : public IGisProject
         bool valid;
 };
 
-#endif //CGISPROJECT_H
+#endif //CGPXPROJECT_H
 

@@ -20,7 +20,7 @@
 #include "gis/IGisProject.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
-#include "gis/gpx/CGisProject.h"
+#include "gis/gpx/CGpxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"
@@ -378,7 +378,7 @@ void CGisListWks::slotSaveProject()
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(item);
+        CGpxProject * project = dynamic_cast<CGpxProject*>(item);
         if(project != 0)
         {
             project->save();
@@ -395,7 +395,7 @@ void CGisListWks::slotSaveAsProject()
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(item);
+        CGpxProject * project = dynamic_cast<CGpxProject*>(item);
         if(project != 0)
         {
             project->saveAs();

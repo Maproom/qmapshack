@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "helpers/CSelectProjectDialog.h"
-#include "gis/gpx/CGisProject.h"
+#include "gis/gpx/CGpxProject.h"
 
 #include <QtWidgets>
 
@@ -30,7 +30,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, QTreeWid
 
     for(int i = 0; i < parent->topLevelItemCount(); i++)
     {
-        CGisProject * project = dynamic_cast<CGisProject*>(parent->topLevelItem(i));
+        CGpxProject * project = dynamic_cast<CGpxProject*>(parent->topLevelItem(i));
         if(project == 0)
         {
          continue;

@@ -104,7 +104,7 @@ set( SRCS
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
     gis/ovl/CDetailsOvlArea.cpp
-    gis/gpx/CGisProject.cpp
+    gis/gpx/CGpxProject.cpp
     plot/IPlot.cpp
     plot/CPlotAxis.cpp
     plot/CPlotAxisTime.cpp    
@@ -211,7 +211,7 @@ set( HDRS
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
     gis/ovl/CDetailsOvlArea.h    
-    gis/gpx/CGisProject.h
+    gis/gpx/CGpxProject.h
     plot/IPlot.h
     plot/CPlotAxis.h
     plot/CPlotAxisTime.h

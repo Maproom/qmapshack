@@ -71,7 +71,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
             for(int n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
-                            the GPX file in the CGisProject constructor.  */
+                            the GPX file in the CGpxProject constructor.  */
 
                 int childType = parent->child(n)->type();
                 if(childType == eTypeTrk)
@@ -87,7 +87,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
             for(int n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
-                            the GPX file in the CGisProject constructor.  */
+                            the GPX file in the CGpxProject constructor.  */
 
                 int childType = parent->child(n)->type();
                 if( childType == eTypeRte || childType == eTypeTrk)
@@ -103,7 +103,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
             for(int n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
-                            the GPX file in the CGisProject constructor.  */
+                            the GPX file in the CGpxProject constructor.  */
 
                 int childType = parent->child(n)->type();
                 if(childType == eTypeWpt || childType == eTypeRte || childType == eTypeTrk)
@@ -119,7 +119,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
             for(int n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
-                            the GPX file in the CGisProject constructor.  */
+                            the GPX file in the CGpxProject constructor.  */
 
                 int childType = parent->child(n)->type();
                 if(childType == eTypeOvl || childType == eTypeWpt || childType == eTypeRte || childType == eTypeTrk)

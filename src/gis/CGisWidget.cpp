@@ -20,7 +20,7 @@
 #include "gis/IGisProject.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisDraw.h"
-#include "gis/gpx/CGisProject.h"
+#include "gis/gpx/CGpxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -73,7 +73,7 @@ void CGisWidget::loadGpx(const QString& filename)
     // add project to workspace
     QApplication::setOverrideCursor(Qt::WaitCursor);
     IGisItem::mutexItems.lock();
-    CGisProject * item = new CGisProject(filename, key, treeWks);
+    CGpxProject * item = new CGpxProject(filename, key, treeWks);
     if(!item->isValid())
     {
         delete item;
@@ -90,7 +90,7 @@ void CGisWidget::slotSaveAll()
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGisProject * item = dynamic_cast<CGisProject*>(treeWks->topLevelItem(i));
+        CGpxProject * item = dynamic_cast<CGpxProject*>(treeWks->topLevelItem(i));
         if(item == 0)
         {
             continue;
@@ -129,7 +129,7 @@ IGisProject * CGisWidget::selectProject()
     else if(!name.isEmpty())
     {
         IGisItem::mutexItems.lock();
-        project = new CGisProject(name, treeWks);
+        project = new CGpxProject(name, treeWks);
         IGisItem::mutexItems.unlock();
     }
 

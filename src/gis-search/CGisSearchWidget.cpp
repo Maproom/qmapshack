@@ -16,40 +16,18 @@
 
 **********************************************************************************************/
 
-#include "gis-search/IGisSearch.h"
-#include "gis-search/CGisSearchWidget.h"
-#include "gis/WptIcons.h"
-#include "helpers/CWptIconDialog.h"
+#include "CGisSearchWidget.h"
 
 #include <QtWidgets>
 
-IGisSearch::IGisSearch(QTreeWidget *parent)
-    : QTreeWidgetItem(parent)
-    , symName("Default")
+CGisSearchWidget::CGisSearchWidget(QWidget *parent)
+    : QWidget(parent)
 {
-    QPointF focus;
-    edit = new CGisSearchWidget(parent);
-    edit->toolIcon->setIcon(getWptIconByName(symName, focus));
-    edit->toolIcon->setObjectName(symName);
-
-    edit->lineEdit->addAction(QIcon("://icons/32x32/SearchGoogle.png"), QLineEdit::LeadingPosition);
-
-    parent->setItemWidget(this, 0, edit);
-
-    connect(edit->toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
+    setupUi(this);
 }
 
-IGisSearch::~IGisSearch()
+CGisSearchWidget::~CGisSearchWidget()
 {
 
 }
 
-void IGisSearch::slotChangeIcon()
-{
-    CWptIconDialog dlg(edit->toolIcon);
-    if(dlg.exec() == QDialog::Accepted)
-    {
-        symName = edit->toolIcon->objectName();
-    }
-
-}

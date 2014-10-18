@@ -22,6 +22,7 @@
 #include <QTreeWidget>
 
 class QAction;
+class CSearchGoogle;
 
 class CGisListWks : public QTreeWidget
 {
@@ -69,6 +70,8 @@ class CGisListWks : public QTreeWidget
         QAction * actionEditTrk;
         QAction * actionReverseTrk;
         QAction * actionCombineTrk;
+
+        CSearchGoogle * searchGoogle;
 
 
 };

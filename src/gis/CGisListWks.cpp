@@ -53,8 +53,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
-    CSearchGoogle * search = new CSearchGoogle();
-    addTopLevelItem(search);
+    searchGoogle = new CSearchGoogle(this);
 
 }
 

@@ -18,9 +18,10 @@
 
 #include "gis-search/CSearchGoogle.h"
 
-CSearchGoogle::CSearchGoogle()
+CSearchGoogle::CSearchGoogle(QTreeWidget *parent)
+    : IGisSearch(parent)
 {
-    setIcon(0, QIcon("://icons/32x32/SearchGoogle.png"));
+
 }
 
 CSearchGoogle::~CSearchGoogle()

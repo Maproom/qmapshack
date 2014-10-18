@@ -22,16 +22,21 @@
 #include <QTreeWidgetItem>
 #include <QObject>
 
-class QLineEdit;
+class CGisSearchWidget;
 
 class IGisSearch : public QObject, public QTreeWidgetItem
 {
+    Q_OBJECT
     public:
-        IGisSearch();
+        IGisSearch(QTreeWidget * parent);
         virtual ~IGisSearch();
 
+    protected slots:
+        void slotChangeIcon();
+
     protected:
-        QLineEdit * edit;
+        QString  symName;
+        CGisSearchWidget * edit;
 };
 
 #endif //IGISSEARCH_H

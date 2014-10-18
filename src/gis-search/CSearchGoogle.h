@@ -25,7 +25,7 @@ class CSearchGoogle :  public IGisSearch
 {
     Q_OBJECT
     public:
-        CSearchGoogle();
+        CSearchGoogle(QTreeWidget * parent);
         virtual ~CSearchGoogle();
 };
 

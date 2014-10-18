@@ -53,6 +53,7 @@ class CGisListWks : public QTreeWidget
         void slotEditTrk();
         void slotReverseTrk();
         void slotCombineTrk();
+        void slotAddEmptyProject();
 
     private:
         QMenu * menuProject;
@@ -69,6 +70,9 @@ class CGisListWks : public QTreeWidget
         QAction * actionEditTrk;
         QAction * actionReverseTrk;
         QAction * actionCombineTrk;
+
+        QMenu * menuNone;
+        QAction * actionNewProject;
 
 
 };

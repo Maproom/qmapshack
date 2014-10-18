@@ -54,6 +54,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
+    menuNone        = new QMenu(this);
+    actionNewProject = menuNone->addAction(QIcon("://icons/32x32/AddProject.png"), tr("Add Empty Project"), this, SLOT(slotAddEmptyProject()));
+
     new CSearchGoogle(this);
 }
 
@@ -307,11 +310,20 @@ bool CGisListWks::hasProject(const QString& key)
 
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
-    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+
+    if(selectedItems().isEmpty())
+    {
+        QPoint p = mapToGlobal(point);
+        menuNone->exec(p);
+        return;
+    }
+
+    CGpxProject * project = dynamic_cast<CGpxProject*>(currentItem());
     if(project != 0)
     {
         QPoint p = mapToGlobal(point);
         menuProject->exec(p);
+        return;
     }
 
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
@@ -353,8 +365,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         // display menu
         QPoint p = mapToGlobal(point);
         menuItem->exec(p);
+        return;
     }
-
 }
 
 void CGisListWks::slotCloseProject()
@@ -517,4 +529,15 @@ void CGisListWks::slotCombineTrk()
         CGisWidget::self().combineTrkByKey(key);
     }
     IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotAddEmptyProject()
+{
+    QString name = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, tr("New Project"));
+    if(name.isEmpty())
+    {
+        return;
+    }
+
+    new CGpxProject(name, this);
 }

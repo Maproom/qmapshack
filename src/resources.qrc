@@ -95,6 +95,7 @@
         <file>icons/32x32/AddWpt.png</file>
         <file>icons/32x32/AddTrk.png</file>
         <file>icons/32x32/AddArea.png</file>
+        <file>icons/32x32/AddProject.png</file>
         <file>icons/32x32/LineMove.png</file>
         <file>icons/32x32/PointMove.png</file>
         <file>icons/32x32/PointHide.png</file>
@@ -182,6 +183,7 @@
         <file>icons/48x48/AddWpt.png</file>
         <file>icons/48x48/AddTrk.png</file>
         <file>icons/48x48/AddArea.png</file>
+        <file>icons/48x48/AddProject.png</file>
         <file>icons/48x48/LineMove.png</file>
         <file>icons/48x48/PointMove.png</file>
         <file>icons/48x48/PointHide.png</file>

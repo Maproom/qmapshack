@@ -183,10 +183,6 @@ void CGisWidget::delItemByKey(const QString& key)
             continue;
         }
         project->delItemByKey(key);
-        if(project->childCount() == 0)
-        {
-            delete project;
-        }
     }
 
     IGisItem::mutexItems.unlock();

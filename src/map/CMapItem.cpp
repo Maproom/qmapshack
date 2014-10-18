@@ -219,6 +219,9 @@ bool CMapItem::activate()
         delete mapfile;
         return false;
     }
+
+    setToolTip(0, mapfile->getCopyright());
+
     // append list of active map files
     moveToBottom();
 

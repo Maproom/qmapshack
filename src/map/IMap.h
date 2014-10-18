@@ -79,6 +79,8 @@ class IMap : public IDrawObject
         bool hasFeatureTileCache(){return flagsFeature & eFeatTileCache;}
         bool hasFeatureLayers(){return flagsFeature & eFeatLayers;}
 
+        const QString& getCopyright(){return copyright;}
+
     protected:
         void convertRad2M(QPointF &p);
         void convertM2Rad(QPointF &p);
@@ -119,6 +121,7 @@ class IMap : public IDrawObject
         quint32 flagsFeature;
 
 
+        QString copyright;
 };
 
 

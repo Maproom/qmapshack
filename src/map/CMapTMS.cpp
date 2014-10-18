@@ -162,7 +162,7 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
 
 CMapTMS::~CMapTMS()
 {
-
+    map->reportStatusToCanvas(name, "");
 }
 
 void CMapTMS::getLayers(QListWidget& list)

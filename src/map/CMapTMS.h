@@ -77,8 +77,6 @@ class CMapTMS : public IMap
 
         QString name;
 
-        QString copyright;
-
         qint32 minZoomLevel;
 
         qint32 maxZoomLevel;

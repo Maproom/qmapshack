@@ -32,6 +32,7 @@
 
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
+    , menuNone(0)
 {
 
     menuProject     = new QMenu(this);
@@ -47,22 +48,25 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionMoveWpt   = menuItem->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionFocusTrk  = menuItem->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
+    actionRangeTrk  = menuItem->addAction(QIcon("://icons/32x32/SelectRange.png"),tr("Select Range"), this, SLOT(slotRangeTrk()));
     actionEditTrk   = menuItem->addAction(QIcon("://icons/32x32/LineMove.png"),tr("Edit Track Points"), this, SLOT(slotEditTrk()));
     actionReverseTrk = menuItem->addAction(QIcon("://icons/32x32/Reverse.png"),tr("Reverse Track"), this, SLOT(slotReverseTrk()));
     actionCombineTrk = menuItem->addAction(QIcon("://icons/32x32/Combine.png"),tr("Combine Tracks"), this, SLOT(slotCombineTrk()));
     actionFocusTrk->setCheckable(true);
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
-    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
-
-    menuNone        = new QMenu(this);
-    actionNewProject = menuNone->addAction(QIcon("://icons/32x32/AddProject.png"), tr("Add Empty Project"), this, SLOT(slotAddEmptyProject()));
-
-    new CSearchGoogle(this);
+    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));    
 }
 
 CGisListWks::~CGisListWks()
 {
 
+}
+
+void CGisListWks::setExternalMenu(QMenu * project)
+{
+    menuNone = project;
+    connect(CMainWindow::self().findChild<QAction*>("actionAddEmptyProject"), SIGNAL(triggered()), this, SLOT(slotAddEmptyProject()));
+    connect(CMainWindow::self().findChild<QAction*>("actionSearchGoogle"), SIGNAL(triggered(bool)), this, SLOT(slotSearchGoogle(bool)));
 }
 
 void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
@@ -311,7 +315,7 @@ bool CGisListWks::hasProject(const QString& key)
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
 
-    if(selectedItems().isEmpty())
+    if(selectedItems().isEmpty() && menuNone)
     {
         QPoint p = mapToGlobal(point);
         menuNone->exec(p);
@@ -352,6 +356,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionEditTrk->setVisible(false);
             actionReverseTrk->setVisible(false);
             actionCombineTrk->setVisible(false);
+            actionRangeTrk->setVisible(false);
         }
         else
         {
@@ -359,6 +364,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionEditTrk->setVisible(true);
             actionReverseTrk->setVisible(true);
             actionCombineTrk->setVisible(true);
+            actionRangeTrk->setVisible(true);
             actionFocusTrk->setChecked(trk->hasUserFocus());
             actionEditTrk->setEnabled(!trk->isReadOnly());            
         }
@@ -531,6 +537,18 @@ void CGisListWks::slotCombineTrk()
     IGisItem::mutexItems.unlock();
 }
 
+void CGisListWks::slotRangeTrk()
+{
+    IGisItem::mutexItems.lock();
+    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().rangeTrkByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
 void CGisListWks::slotAddEmptyProject()
 {
     QString name = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, tr("New Project"));
@@ -541,3 +559,13 @@ void CGisListWks::slotAddEmptyProject()
 
     new CGpxProject(name, this);
 }
+
+void CGisListWks::slotSearchGoogle(bool on)
+{
+    delete searchGoogle;
+    if(on)
+    {
+        searchGoogle = new CSearchGoogle(this);
+    }
+}
+

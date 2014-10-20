@@ -37,6 +37,9 @@ CSearchGoogle::CSearchGoogle(CGisListWks * parent)
     SETTINGS;
     QString symName = cfg.value("Search/symbol","Default").toString();
 
+    parent->takeTopLevelItem(parent->indexOfTopLevelItem(this));
+    parent->insertTopLevelItem(0, this);
+
     edit = new QLineEdit(parent);
     actSymbol = edit->addAction(getWptIconByName(symName, focus), QLineEdit::TrailingPosition);
     actSymbol->setObjectName(symName);

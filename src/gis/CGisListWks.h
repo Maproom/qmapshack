@@ -20,8 +20,10 @@
 #define CGISLISTWKS_H
 
 #include <QTreeWidget>
+#include <QPointer>
 
 class QAction;
+class CSearchGoogle;
 
 class CGisListWks : public QTreeWidget
 {
@@ -30,7 +32,9 @@ class CGisListWks : public QTreeWidget
         CGisListWks(QWidget * parent);
         virtual ~CGisListWks();
 
-        bool hasProject(const QString& key);
+        void setExternalMenu(QMenu * project);
+
+        bool hasProject(const QString& key);        
 
     signals:
         void sigChanged();
@@ -53,9 +57,11 @@ class CGisListWks : public QTreeWidget
         void slotEditTrk();
         void slotReverseTrk();
         void slotCombineTrk();
+        void slotRangeTrk();
         void slotAddEmptyProject();
+        void slotSearchGoogle(bool on);
 
-    private:
+    private:                
         QMenu * menuProject;
         QAction  * actionSave;
         QAction  * actionSaveAs;
@@ -70,11 +76,11 @@ class CGisListWks : public QTreeWidget
         QAction * actionEditTrk;
         QAction * actionReverseTrk;
         QAction * actionCombineTrk;
+        QAction * actionRangeTrk;
 
         QMenu * menuNone;
-        QAction * actionNewProject;
 
-
+        QPointer<CSearchGoogle> searchGoogle;
 };
 
 #endif //CGISLISTWKS_H

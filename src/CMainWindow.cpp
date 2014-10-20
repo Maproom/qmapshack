@@ -45,7 +45,7 @@ CMainWindow::CMainWindow()
 
     initWptIcons();
 
-    gisWidget = new CGisWidget(this);
+    gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);
 
     IUnit::self().setUnitType(IUnit::eTypeMetric, this);

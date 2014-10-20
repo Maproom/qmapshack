@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -95,7 +95,15 @@
     <addaction name="actionAbout"/>
     <addaction name="actionHelp"/>
    </widget>
+   <widget class="QMenu" name="menuProject">
+    <property name="title">
+     <string>Project</string>
+    </property>
+    <addaction name="actionAddEmptyProject"/>
+    <addaction name="actionSearchGoogle"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuProject"/>
    <addaction name="menuView"/>
    <addaction name="menuWindow"/>
    <addaction name="menu"/>
@@ -376,6 +384,27 @@
    </property>
    <property name="text">
     <string>Setup Time Zone</string>
+   </property>
+  </action>
+  <action name="actionAddEmptyProject">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/AddProject.png</normaloff>:/icons/32x32/AddProject.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add empty project</string>
+   </property>
+  </action>
+  <action name="actionSearchGoogle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/SearchGoogle.png</normaloff>:/icons/32x32/SearchGoogle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Search Google</string>
    </property>
   </action>
  </widget>

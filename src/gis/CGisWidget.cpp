@@ -34,11 +34,13 @@
 
 CGisWidget * CGisWidget::pSelf = 0;
 
-CGisWidget::CGisWidget(QWidget *parent)
+CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     : QWidget(parent)
 {
     pSelf = this;
     setupUi(this);
+
+    treeWks->setExternalMenu(menuProject);
 
     SETTINGS;
     treeWks->header()->resizeSection(0, cfg.value("Workspace/treeWks/colum0/size", 100).toInt());

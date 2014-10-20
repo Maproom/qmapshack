@@ -145,7 +145,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
     private:
         friend class CMainWindow;
-        CGisWidget(QWidget * parent);
+        CGisWidget(QMenu * menuProject, QWidget * parent);
 
         static CGisWidget * pSelf;
 };

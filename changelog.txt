@@ -1,3 +1,6 @@
+* Add Google GIS search
+* Add support for TMS maps
+
 V 0.6.0
 * Reverse tracks
 * Add dialog to combine tracks

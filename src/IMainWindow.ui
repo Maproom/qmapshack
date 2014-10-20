@@ -100,6 +100,7 @@
      <string>Project</string>
     </property>
     <addaction name="actionAddEmptyProject"/>
+    <addaction name="actionCloseAllProjects"/>
     <addaction name="actionSearchGoogle"/>
    </widget>
    <addaction name="menuFile"/>
@@ -405,6 +406,15 @@
    </property>
    <property name="text">
     <string>Search Google</string>
+   </property>
+  </action>
+  <action name="actionCloseAllProjects">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/DeleteMultiple.png</normaloff>:/icons/32x32/DeleteMultiple.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close all projects</string>
    </property>
   </action>
  </widget>

@@ -66,6 +66,7 @@ void CGisListWks::setExternalMenu(QMenu * project)
 {
     menuNone = project;
     connect(CMainWindow::self().findChild<QAction*>("actionAddEmptyProject"), SIGNAL(triggered()), this, SLOT(slotAddEmptyProject()));
+    connect(CMainWindow::self().findChild<QAction*>("actionCloseAllProjects"), SIGNAL(triggered(bool)), this, SLOT(slotCloseAllProjects()));
     connect(CMainWindow::self().findChild<QAction*>("actionSearchGoogle"), SIGNAL(triggered(bool)), this, SLOT(slotSearchGoogle(bool)));
 }
 
@@ -558,6 +559,21 @@ void CGisListWks::slotAddEmptyProject()
     }
 
     new CGpxProject(name, this);
+}
+
+void CGisListWks::slotCloseAllProjects()
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard);
+    foreach(QTreeWidgetItem * item, items)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project != 0)
+        {
+            delete project;
+        }
+    }
+    emit sigChanged();
 }
 
 void CGisListWks::slotSearchGoogle(bool on)

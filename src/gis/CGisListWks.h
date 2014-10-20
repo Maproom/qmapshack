@@ -59,7 +59,9 @@ class CGisListWks : public QTreeWidget
         void slotCombineTrk();
         void slotRangeTrk();
         void slotAddEmptyProject();
+        void slotCloseAllProjects();
         void slotSearchGoogle(bool on);
+
 
     private:                
         QMenu * menuProject;

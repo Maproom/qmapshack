@@ -179,7 +179,16 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
         char * ptr = str.toLatin1().data();
         OGRSpatialReference oSRS;
-        oSRS.importFromURN(ptr);
+
+        if(str.startsWith("EPSG"))
+        {
+            QStringList tokens = str.split(":");
+            oSRS.importFromEPSG(tokens.last().toInt());
+        }
+        else
+        {
+            oSRS.importFromURN(ptr);
+        }
         oSRS.exportToProj4(&ptr);
 
         qDebug() << ptr;

@@ -64,10 +64,16 @@ class CGisItemTrk : public IGisItem, public IGisLine
         QString getInfoTrkPt(const trkpt_t& pt);
         QString getInfoProgress(const trkpt_t& pt);
         quint32 getTotalElapsedSeconds(){return totalElapsedSeconds;}
+        const QString& getComment(){return trk.cmt;}
+        const QString& getDescription(){return trk.desc;}
+        const QList<link_t>& getLinks(){return trk.links;}
 
         void setName(const QString& str);
         void setColor(int idx);
         void setDrawMode(drawmode_e mode){drawMode = mode;}
+        void setComment(const QString& str);
+        void setDescription(const QString& str);
+
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
@@ -197,7 +203,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void deriveSecondaryData();
         const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
         void publishMouseFocus(const trkpt_t * pt, focusmode_e mode, IPlot *initiator);
-        void readLine(const QPolygonF &l);
+        void readLine(const QPolygonF &l);        
 
     public:
         struct trkpt_t : public wpt_t

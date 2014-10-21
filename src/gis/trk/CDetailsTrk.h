@@ -41,8 +41,10 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
         void slotNameChanged();
         void slotNameChanged(const QString& name);
         void slotItemSelectionChanged();
+        void slotLinkActivated(const QUrl& url);
 
     private:
+        QString toLink(bool isReadOnly, const QString& href, const QString& str);
         void setupGui();
 
         enum columns_t

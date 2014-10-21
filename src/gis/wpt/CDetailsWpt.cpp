@@ -209,9 +209,9 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
         dlg.setHtml(wpt.getComment());
         if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setComment(dlg.getHtml());
-            setupGui();
+            wpt.setComment(dlg.getHtml());            
         }
+        setupGui();
 
     }
     else if(url.toString() == "description")
@@ -220,9 +220,9 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
         dlg.setHtml(wpt.getDescription());
         if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setDescription(dlg.getHtml());
-            setupGui();
+            wpt.setDescription(dlg.getHtml());            
         }
+        setupGui();
     }
     else
     {

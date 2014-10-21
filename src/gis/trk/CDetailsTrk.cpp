@@ -18,6 +18,7 @@
 
 #include "gis/trk/CDetailsTrk.h"
 #include "helpers/CSettings.h"
+#include "helpers/CTextEditWidget.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 
@@ -61,7 +62,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotNameChanged(QString)));
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
     connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
-
+    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
 
     slotShowPlots();
 
@@ -76,6 +77,17 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("showProgress", checkProgress->isChecked());
     cfg.endGroup();
 }
+
+QString CDetailsTrk::toLink(bool isReadOnly, const QString& href, const QString& str)
+{
+    if(isReadOnly)
+    {
+        return QString("%1").arg(str);
+    }
+
+    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+}
+
 
 void CDetailsTrk::setupGui()
 {
@@ -195,6 +207,37 @@ void CDetailsTrk::setupGui()
     treeWidget->clear();
     treeWidget->addTopLevelItems(items);
     treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
+
+    textCmtDesc->document()->clear();
+
+    foreach(const IGisItem::link_t& link, trk.getLinks())
+    {
+        QString str = QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+        textCmtDesc->append(str);
+    }
+
+    textCmtDesc->append(toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>")));
+    if(IGisItem::removeHtml(trk.getComment()).simplified().isEmpty())
+    {
+        textCmtDesc->append(tr("<p>--- no comment ---</p>"));
+    }
+    else
+    {
+        textCmtDesc->append(trk.getComment());
+    }
+
+    textCmtDesc->append(toLink(isReadOnly, "description", tr("<h4>Description:</h4>")));
+    if(IGisItem::removeHtml(trk.getDescription()).simplified().isEmpty())
+    {
+        textCmtDesc->append(tr("<p>--- no description ---</p>"));
+    }
+    else
+    {
+        textCmtDesc->append(trk.getDescription());
+    }
+    textCmtDesc->moveCursor (QTextCursor::Start) ;
+    textCmtDesc->ensureCursorVisible() ;
+
 
     if(!trk.getHistory().isEmpty())
     {
@@ -316,5 +359,34 @@ void CDetailsTrk::slotItemSelectionChanged()
     {
         quint32 idx = item->text(eColNum).toUInt();
         trk.setMouseFocusByIndex(idx, CGisItemTrk::eFocusMouseMove);
+    }
+}
+
+void CDetailsTrk::slotLinkActivated(const QUrl& url)
+{
+    if(url.toString() == "comment")
+    {
+        CTextEditWidget dlg(0);
+        dlg.setHtml(trk.getComment());
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            trk.setComment(dlg.getHtml());
+        }
+        setupGui();
+
+    }
+    else if(url.toString() == "description")
+    {
+        CTextEditWidget dlg(0);
+        dlg.setHtml(trk.getDescription());
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            trk.setDescription(dlg.getHtml());
+        }
+        setupGui();
+    }
+    else
+    {
+        QDesktopServices::openUrl(url);
     }
 }

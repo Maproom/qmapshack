@@ -1360,6 +1360,18 @@ void CGisItemTrk::setName(const QString& str)
     changed(QObject::tr("Changed name"));
 }
 
+void CGisItemTrk::setComment(const QString& str)
+{
+    trk.cmt = str;
+    changed(QObject::tr("Changed comment"));
+}
+
+void CGisItemTrk::setDescription(const QString& str)
+{
+    trk.desc = str;
+    changed(QObject::tr("Changed description"));
+}
+
 void CGisItemTrk::setColor(int idx)
 {
     int N = sizeof(lineColors)/sizeof(QColor);

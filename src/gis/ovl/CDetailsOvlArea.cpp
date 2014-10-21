@@ -143,9 +143,9 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
         dlg.setHtml(area.getComment());
         if(dlg.exec() == QDialog::Accepted)
         {
-            area.setComment(dlg.getHtml());
-            setupGui();
+            area.setComment(dlg.getHtml());            
         }
+        setupGui();
 
     }
     else if(url.toString() == "description")
@@ -154,9 +154,9 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
         dlg.setHtml(area.getDescription());
         if(dlg.exec() == QDialog::Accepted)
         {
-            area.setDescription(dlg.getHtml());
-            setupGui();
+            area.setDescription(dlg.getHtml());            
         }
+        setupGui();
     }
     else
     {

@@ -100,8 +100,8 @@
      <string>Project</string>
     </property>
     <addaction name="actionAddEmptyProject"/>
-    <addaction name="actionCloseAllProjects"/>
     <addaction name="actionSearchGoogle"/>
+    <addaction name="actionCloseAllProjects"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuProject"/>

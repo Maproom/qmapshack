@@ -52,6 +52,8 @@ void IDrawObject::saveConfig(QSettings& cfg)
     cfg.setValue("cachePath", cachePath);
     cfg.setValue("cacheSizeMB", cacheSizeMB);
     cfg.setValue("cacheExpiration", cacheExpiration);
+
+
 }
 
 void IDrawObject::loadConfig(QSettings& cfg)

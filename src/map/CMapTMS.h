@@ -39,6 +39,10 @@ class CMapTMS : public IMap
 
         void getLayers(QListWidget& list);
 
+        void saveConfig(QSettings& cfg);
+
+        void loadConfig(QSettings& cfg);
+
     signals:
         void sigQueueChanged();
 

@@ -250,10 +250,6 @@ void CMapWMTS::getLayers(QListWidget& list)
         return;
     }
 
-    QListWidgetItem * item = new QListWidgetItem(tr("--- All ---"), &list);
-    item->setCheckState(Qt::Checked);
-    item->setData(Qt::UserRole, -1);
-
     int i = 0;
     foreach(const layer_t& layer, layers)
     {
@@ -264,6 +260,55 @@ void CMapWMTS::getLayers(QListWidget& list)
 
     connect(&list, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotLayersChanged(QListWidgetItem*)));
 }
+
+void CMapWMTS::saveConfig(QSettings& cfg)
+{
+    IMap::saveConfig(cfg);
+    if(layers.size() < 2)
+    {
+        return;
+    }
+
+    // save indices of enbaled layers
+    QStringList enabled;
+    for(int i = 0; i< layers.size(); i++)
+    {
+        if(layers[i].enabled)
+        {
+            enabled << QString::number(i);
+        }
+    }
+    cfg.setValue("enabledLayers", enabled);
+}
+
+void CMapWMTS::loadConfig(QSettings& cfg)
+{
+    IMap::loadConfig(cfg);
+    if(layers.size() < 2)
+    {
+        return;
+    }
+
+    QStringList enabled;
+    // set all layers to disabled first
+    for(int i = 0; i< layers.size(); i++)
+    {
+        layers[i].enabled = false;
+        enabled << QString::number(i);
+    }
+
+    // enable layers stored in configuration
+    enabled = cfg.value("enabledLayers", enabled).toStringList();
+    foreach(const QString& str, enabled)
+    {
+        int idx = str.toInt();
+        if(idx < layers.size())
+        {
+            layers[idx].enabled = true;
+        }
+    }
+}
+
 
 void CMapWMTS::configureCache()
 {

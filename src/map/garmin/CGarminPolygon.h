@@ -57,8 +57,10 @@ class CGarminPolygon
         qint16 dLng;
         /// delta latitude from subdivision center
         qint16 dLat;
-        /// the actual polyline points as longitude / latitude [rad]
+        /// the actual polyline points as longitude / latitude [rad], will become pixel later
         QPolygonF poly;
+        /// the actual polyline points as longitude / latitude [rad]
+        QPolygonF coords;
 
         quint32 id;
 

@@ -94,3 +94,12 @@ void IMap::drawTile(QImage& img, QPolygonF& l, QPainter& p)
     p.restore();
 
 }
+
+bool IMap::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+{
+    Q_UNUSED(pt1);
+    Q_UNUSED(pt2);
+    Q_UNUSED(threshold);
+    Q_UNUSED(polyline);
+    return false;
+}

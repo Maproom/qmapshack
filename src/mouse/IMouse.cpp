@@ -18,6 +18,7 @@
 
 #include "mouse/IMouse.h"
 #include "canvas/CCanvas.h"
+#include <gis/CGisDraw.h>
 
 #include <QtWidgets>
 

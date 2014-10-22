@@ -205,6 +205,12 @@ void IMouseEditLine::drawArrows(const QPolygonF &l, QPainter& p)
 
 }
 
+void IMouseEditLine::drawLeadLine(const QPolygonF &l, QPainter& p)
+{
+    p.setPen(QPen(QColor(255,255,0,100), 9, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(l);
+}
+
 void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 {
     if(needsRedraw)
@@ -214,8 +220,6 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         newLine = newCoords;
         gis->convertRad2Px(newLine);
     }
-
-
 
     switch(state)
     {
@@ -255,6 +259,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         case eStateAddPointBwd:
         {
             QPolygonF l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop, -1);
+            drawLeadLine(leadLinePixel, p);
             drawArrows(l, p);
             drawLine(l, p);            
             drawBullets(l, p);
@@ -557,6 +562,17 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             gis->convertPx2Rad(pt);
             newCoords[idxFocus] = pt;
 
+            leadLineCoord.clear();
+            leadLinePixel.clear();
+            // find polyline to snap
+            if(newLine.size() > 1)
+            {                
+                QPointF pt0 = state == eStateAddPointFwd ? newCoords[idxFocus - 1] : newCoords[1];
+                canvas->findPolylineCloseBy(pt0, pt, 10, leadLineCoord);
+                leadLinePixel = leadLineCoord;
+                gis->convertRad2Px(leadLinePixel);
+            }
+
             canvas->update();
             break;
 
@@ -719,7 +735,11 @@ void IMouseEditLine::slotAddPoint2()
     {
         return;
     }
-    scrOptPoint->deleteLater();
+
+    if(!scrOptPoint.isNull())
+    {
+        scrOptPoint->deleteLater();
+    }
 
     // set point with focus as temporary initial point
     newCoords.clear();

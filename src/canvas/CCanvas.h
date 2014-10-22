@@ -119,6 +119,20 @@ class CCanvas : public QWidget
          */
         void reportStatus(const QString& key, const QString& msg);
 
+        /**
+           @brief Find a matching street polyline
+
+           The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
+           the threshold. The returned poylline uses lon/lat as coordinates.
+
+           @param pt1           first point in [rad]
+           @param pt2           second point in [rad]
+           @param threshold     the "close enough" threshold in [pixel]
+           @param polyline      the resulting polyline, if any, in [rad]
+           @return              Return true if a line has been found.
+        */
+        bool findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+
     signals:
         void sigMousePosition(const QPointF& pos, qreal ele);
 

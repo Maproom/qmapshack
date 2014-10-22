@@ -74,12 +74,30 @@ class IMap : public IDrawObject
          */
         virtual void getToolTip(const QPoint& px, QString& str){Q_UNUSED(px); Q_UNUSED(str);}
 
+        /**
+           @brief Return copyright notice if any
+           @return If no copyright notice has been decoded the string will be empty
+        */
+        const QString& getCopyright(){return copyright;}
+
         bool hasFeatureVisibility(){return flagsFeature & eFeatVisibility;}
         bool hasFeatureVectorItems(){return flagsFeature & eFeatVectorItems;}
         bool hasFeatureTileCache(){return flagsFeature & eFeatTileCache;}
         bool hasFeatureLayers(){return flagsFeature & eFeatLayers;}
 
-        const QString& getCopyright(){return copyright;}
+        /**
+           @brief Find a matching street polyline
+
+           The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
+           the threshold. The returned poylline uses lon/lat as coordinates.
+
+           @param pt1           first point in [rad]
+           @param pt2           second point in [rad]
+           @param threshold     the "close enough" threshold in [pixel]
+           @param polyline      the resulting polyline, if any, in [rad]
+           @return              Return true if a line has been found.
+        */
+        virtual bool findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
     protected:
         void convertRad2M(QPointF &p);

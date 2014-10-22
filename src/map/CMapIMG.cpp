@@ -2640,3 +2640,94 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
     }
 }
 
+
+static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal threshold)
+{
+    int i = 0;                   // index into poly line
+    int len;                     // number of points in line
+    QPointF p1, p2;               // the two points of the polyline close to pt
+    qreal dx,dy;                // delta x and y defined by p1 and p2
+    qreal d_p1_p2;              // distance between p1 and p2
+    qreal u;                    // ratio u the tangent point will divide d_p1_p2
+    qreal x,y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
+    qreal distance;             // the distance to the polyline
+
+    qreal d = threshold + 1;
+
+    len = line.size();
+    // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
+    for(i=1; i<len; ++i)
+    {
+        p1 = line[i-1];
+        p2 = line[i];
+
+        dx = p2.x() - p1.x();
+        dy = p2.y() - p1.y();
+
+        d_p1_p2 = sqrt(dx * dx + dy * dy);
+
+        u = ((pt.x() - p1.x()) * dx + (pt.y() - p1.y()) * dy) / (d_p1_p2 * d_p1_p2);
+
+        if(u < 0.0 || u > 1.0)
+        {
+            distance = sqrt((p1.x() - pt.x())*(p1.y() - pt.x()) + (p1.y() - pt.y())*(p1.y() - pt.y()));
+            if(distance < threshold)
+            {
+                d = threshold = distance;
+            }
+
+            distance = sqrt((p2.x() - pt.x())*(p2.x() - pt.x()) + (p2.y() - pt.y())*(p2.y() - pt.y()));
+            if(distance < threshold)
+            {
+                d = threshold = distance;
+            }
+
+            continue;
+        }
+
+        x = p1.x() + u * dx;
+        y = p1.y() + u * dy;
+
+        distance = sqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
+
+        if(distance < threshold)
+        {
+            d = threshold = distance;
+        }
+    }
+
+    return d;
+}
+
+
+
+bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+{
+    QPointF   _pt1  = pt1;
+    QPointF   _pt2  = pt2;
+    map->convertRad2Px(_pt1);
+    map->convertRad2Px(_pt2);
+
+    foreach(const CGarminPolygon& line, polylines)
+    {
+        if(line.poly.size() < 2)
+        {
+            continue;
+        }
+        if(0x20 <= line.type && line.type <= 0x25)
+        {
+            continue;
+        }
+
+        qreal dist1 = ::getDistance(line.poly, _pt1, threshold);
+        qreal dist2 = ::getDistance(line.poly, _pt2, threshold);
+
+        if(dist1 < threshold && dist2 < threshold)
+        {
+            polyline  = line.coords;
+            threshold = dist1 < dist2 ? dist1 : dist2;
+        }
+    }
+
+    return !polyline.isEmpty();
+}

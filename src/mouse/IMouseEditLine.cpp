@@ -219,6 +219,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 
     switch(state)
     {
+        case eStateMoveMap:
         case eStateIdle:
         case eStatePointSelected:
             drawArrows(line, p);

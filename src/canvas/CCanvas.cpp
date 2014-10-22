@@ -98,7 +98,6 @@ CCanvas::CCanvas(QWidget *parent)
     labelStatusMessages = new QLabel(this);
     labelStatusMessages->hide();
 
-
     connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));
     connect(map, SIGNAL(sigStopThread()), mapLoadIndicator, SLOT(hide()));
 
@@ -162,6 +161,7 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
+
     mouse->deleteLater();
     mouse = new CMouseEditTrk(pt, gis, this);
     if(underMouse())
@@ -701,4 +701,9 @@ void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
     map->zoom(in, needsRedraw);
     dem->zoom(map->zoom());
     gis->zoom(map->zoom());
+}
+
+bool CCanvas::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+{
+    return map->findPolylineCloseBy(pt1, pt2, threshold, polyline);
 }

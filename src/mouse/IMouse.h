@@ -21,12 +21,14 @@
 
 #include <QObject>
 #include <QCursor>
+#include <QPointer>
 
 class QMouseEvent;
 class QWheelEvent;
 class CCanvas;
 class QTimer;
 class CGisDraw;
+
 
 class IMouse : public QObject
 {
@@ -63,9 +65,9 @@ class IMouse : public QObject
         /// the functions mouse icon
         QCursor cursor;
 
-        CGisDraw * gis;
+        QPointer<CGisDraw> gis;
 
-        CCanvas * canvas;
+        QPointer<CCanvas>  canvas;
         // the current point reported by the mouse events
         QPoint point;
 

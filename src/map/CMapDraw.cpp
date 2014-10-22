@@ -149,7 +149,39 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
         }
     }
     CMapItem::mutexActiveMaps.unlock();
+}
 
+bool CMapDraw::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+{
+    if(isRunning())
+    {
+        return false;
+    }
+    bool res = false;
+    CMapItem::mutexActiveMaps.lock();
+    if(mapList)
+    {
+        for(int i = 0; i < mapList->count(); i++)
+        {
+            CMapItem * item = mapList->item(i);
+
+            if(!item || item->mapfile.isNull())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break ass soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            res = item->mapfile->findPolylineCloseBy(pt1, pt2, threshold, polyline);
+            if(res)
+            {
+                break;
+            }
+        }
+    }
+    CMapItem::mutexActiveMaps.unlock();
+    return res;
 }
 
 void CMapDraw::saveConfig(QSettings& cfg)
@@ -277,24 +309,6 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
 void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg)
 {
     canvas->reportStatus(key, msg);
-//    if(msg.isEmpty())
-//    {
-//        statusMessages.remove(key);
-//    }
-//    else
-//    {
-//        statusMessages[key] = msg;
-//    }
-
-//    QString report;
-//    QStringList keys = statusMessages.keys();
-//    keys.sort();
-//    foreach(const QString& key, keys)
-//    {
-//        report += statusMessages[key] + "\n";
-//    }
-
-//    canvas->setStatusMessage(report);
 }
 
 void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer)

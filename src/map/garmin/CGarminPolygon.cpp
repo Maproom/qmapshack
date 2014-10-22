@@ -218,6 +218,9 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
     {
         poly.squeeze();
     }
+
+    coords = poly;
+
     return bytes_total;
 }
 
@@ -345,8 +348,9 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     if(poly.size() * 1.2 < maxVecSize)
     {
         poly.squeeze();
-        poly.squeeze();
     }
+
+    coords = poly;
 
     return bytes_total;
 }

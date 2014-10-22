@@ -53,7 +53,7 @@ CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
 
 CMouseEditTrk::~CMouseEditTrk()
 {
-    canvas->reportStatus(key, "");
+//    canvas->reportStatus(key,"");
 }
 
 void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
@@ -98,5 +98,5 @@ void CMouseEditTrk::slotCopyToNew()
     new CGisItemTrk(coords1,name, project, -1);
 
     canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);    
 }

@@ -105,6 +105,7 @@ class IMouseEditLine  : public IMouse
         void drawHighlight1(QPainter& p);
         void drawHighlight2(QPainter& p);
         void drawArrows(const QPolygonF &l, QPainter& p);
+        void drawLeadLine(const QPolygonF &l, QPainter& p);
         int getPointCloseBy(const QPoint& screenPos);
 
         /// backup for coord1
@@ -140,6 +141,9 @@ class IMouseEditLine  : public IMouse
         CScrOptEditLine * scrOptEditLine;
 
         QPoint lastPoint;
+
+        QPolygonF leadLineCoord;
+        QPolygonF leadLinePixel;
 };
 
 #endif //IMOUSEEDITLINE_H

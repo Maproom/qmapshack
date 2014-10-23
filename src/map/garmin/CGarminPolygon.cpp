@@ -96,8 +96,8 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
     const quint8 * const pStart = pData;
 
     labels.clear();
-    poly.resize(0);
-    poly.reserve(maxVecSize);
+    coords.resize(0);
+    coords.reserve(maxVecSize);
 
     /* poly_type
 
@@ -194,7 +194,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 
     if(x1 >= 0x800000 && !isNegative) x1 = 0x7fffff;
 
-    poly << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
+    coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
     // next points
     while(sr.get(x,y))
@@ -204,22 +204,22 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 
         if(x1 >= 0x800000 && !isNegative) x1 = 0x7fffff;
 
-        poly << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
+        coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
     }
 
     id = cnt++;
     //     qDebug() << "<<<" << id;
 
-    if(maxVecSize < poly.size())
+    if(maxVecSize < coords.size())
     {
-        maxVecSize = poly.size();
+        maxVecSize = coords.size();
     }
-    if(poly.size() * 1.2 < maxVecSize)
+    if(coords.size() * 1.2 < maxVecSize)
     {
-        poly.squeeze();
+        coords.squeeze();
     }
 
-    coords = poly;
+    pixel = coords;
 
     return bytes_total;
 }
@@ -242,8 +242,8 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     const quint8 * const pStart = pData;
 
     labels.clear();
-    poly.resize(0);
-    poly.reserve(maxVecSize);
+    coords.resize(0);
+    coords.reserve(maxVecSize);
 
     type        = *pData++;
     subtype     = *pData++;;
@@ -302,7 +302,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
 
     if(x1 >= 0x800000 && !isNegative) x1 = 0x7fffff;
 
-    poly << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
+    coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
     // next points
     while(sr.get(x,y))
@@ -324,7 +324,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
 //#ifdef DEBUG_SHOW_POLY_PTS
 //        qDebug() << xy.u << xy.v << (RAD_TO_DEG * xy.u) << (RAD_TO_DEG * xy.v);
 //#endif
-        poly << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
+        coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
     }
 
     if(hasV2Label)
@@ -341,16 +341,16 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     id = cnt++;
     //     qDebug() << "<<<" << id;
 
-    if(maxVecSize < poly.size())
+    if(maxVecSize < coords.size())
     {
-        maxVecSize = poly.size();
+        maxVecSize = coords.size();
     }
-    if(poly.size() * 1.2 < maxVecSize)
+    if(coords.size() * 1.2 < maxVecSize)
     {
-        poly.squeeze();
+        coords.squeeze();
     }
 
-    coords = poly;
+    pixel = coords;
 
     return bytes_total;
 }

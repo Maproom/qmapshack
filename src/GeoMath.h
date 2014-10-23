@@ -25,6 +25,9 @@
 
 #include <stdint.h>
 
+class QPolygonF;
+class IDrawContext;
+
 struct point3D
 {
     qreal x;
@@ -36,6 +39,20 @@ struct pointDP : public point3D
 {
     pointDP():used(true){}
     bool used;
+};
+
+struct segment_t
+{
+    segment_t() : idx11(-1), idx12(-1), idx21(-1){}
+
+    void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext * context);
+
+    qint32 idx11;
+    qint32 idx12;
+    qint32 idx21;
+
+    QPointF px1;
+    QPointF px2;
 };
 
 extern void     GPS_Math_Deg_To_Str(const qreal& x, const qreal& y, QString& str);
@@ -51,6 +68,7 @@ extern void     GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, cons
 extern void     GPS_Math_DouglasPeucker(QVector<pointDP>& line, qreal d);
 extern QPointF  GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearing);
 extern bool     GPS_Math_LineCrossesRect(const QPointF& p1, const QPointF& p2, const QRectF& rect);
+extern void     GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t& result);
 
 #endif                           //GEOMATH_H
 

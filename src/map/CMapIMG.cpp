@@ -1457,7 +1457,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, true, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.poly, viewport))
+            if(isCompletlyOutside(p.pixel, viewport))
             {
                 continue;
             }
@@ -1487,7 +1487,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, false, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.poly, viewport))
+            if(isCompletlyOutside(p.pixel, viewport))
             {
                 continue;
             }
@@ -1526,7 +1526,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, false, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.poly, viewport))
+            if(isCompletlyOutside(p.pixel, viewport))
             {
                 continue;
             }
@@ -1551,7 +1551,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, true, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.poly, viewport))
+            if(isCompletlyOutside(p.pixel, viewport))
             {
                 continue;
             }
@@ -1614,7 +1614,7 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
                 continue;
             }
 
-            QPolygonF& poly = item->poly;
+            QPolygonF& poly = item->pixel;
 
             map->convertRad2Px(poly);
 
@@ -1678,7 +1678,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
                     pixmapCount++;
 
-                    QPolygonF& poly = item.poly;
+                    QPolygonF& poly = item.pixel;
                     int size        = poly.size();
 
                     if(size < 2)
@@ -1820,7 +1820,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
 void CMapIMG::drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polyline_property& property, const QFontMetricsF& metrics, const QFont& font, const QPointF& scale)
 {
-    QPolygonF& poly     = l.poly;
+    QPolygonF& poly     = l.pixel;
     const int size      = poly.size();
     const int lineWidth = p.pen().width();
 
@@ -1843,8 +1843,8 @@ void CMapIMG::drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polylin
 
 void CMapIMG::drawLine(QPainter& p, const CGarminPolygon& l)
 {
-    const QPolygonF& poly     = l.poly;
-    const int size      = poly.size();
+    const QPolygonF& poly   = l.pixel;
+    const int size          = poly.size();
 
     if(size < 2)
     {
@@ -2472,7 +2472,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
     polytype_t::const_iterator line = polylines.begin();
     while(line != polylines.end())
     {
-        len = line->poly.size();
+        len = line->pixel.size();
         // need at least 2 points
         if(len < 2)
         {
@@ -2483,10 +2483,10 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
         // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
         for(i=1; i<len; ++i)
         {
-            p1.u = line->poly[i-1].x();
-            p1.v = line->poly[i-1].y();
-            p2.u = line->poly[i].x();
-            p2.v = line->poly[i].y();
+            p1.u = line->pixel[i-1].x();
+            p1.v = line->pixel[i-1].y();
+            p2.u = line->pixel[i].x();
+            p2.v = line->pixel[i].y();
 
             dx = p2.u - p1.u;
             dy = p2.v - p1.v;
@@ -2590,17 +2590,17 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
     while(line != polygons.end())
     {
 
-        npol = line->poly.size();
+        npol = line->pixel.size();
         if(npol > 2)
         {
             c = 0;
             // see http://local.wasp.uwa.edu.au/~pbourke/geometry/insidepoly/
             for (i = 0, j = npol-1; i < npol; j = i++)
             {
-                p1.u = line->poly[j].x();
-                p1.v = line->poly[j].y();
-                p2.u = line->poly[i].x();
-                p2.v = line->poly[i].y();
+                p1.u = line->pixel[j].x();
+                p1.v = line->pixel[j].y();
+                p2.u = line->pixel[i].x();
+                p2.v = line->pixel[i].y();
 
                 if ((((p2.v <= y) && (y < p1.v))  || ((p1.v <= y) && (y < p2.v))) &&
                     (x < (p1.u - p2.u) * (y - p2.v) / (p1.v - p2.v) + p2.u))
@@ -2703,14 +2703,9 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
 
 bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
 {
-    QPointF   _pt1  = pt1;
-    QPointF   _pt2  = pt2;
-    map->convertRad2Px(_pt1);
-    map->convertRad2Px(_pt2);
-
     foreach(const CGarminPolygon& line, polylines)
     {
-        if(line.poly.size() < 2)
+        if(line.pixel.size() < 2)
         {
             continue;
         }
@@ -2719,8 +2714,8 @@ bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, 
             continue;
         }
 
-        qreal dist1 = ::getDistance(line.poly, _pt1, threshold);
-        qreal dist2 = ::getDistance(line.poly, _pt2, threshold);
+        qreal dist1 = ::getDistance(line.pixel, pt1, threshold);
+        qreal dist2 = ::getDistance(line.pixel, pt2, threshold);
 
         if(dist1 < threshold && dist2 < threshold)
         {

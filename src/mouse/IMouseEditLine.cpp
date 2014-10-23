@@ -258,7 +258,15 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         case eStateAddPointFwd:
         case eStateAddPointBwd:
         {
-            QPolygonF l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop, -1);
+            QPolygonF l;
+            if(subLinePixel.isEmpty())
+            {
+                l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop, -1);
+            }
+            else
+            {
+                l = line.mid(0, idxStart + 1) + subLinePixel + line.mid(idxStop, -1);
+            }
             drawLeadLine(leadLinePixel, p);
             drawArrows(l, p);
             drawLine(l, p);            
@@ -562,16 +570,28 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             gis->convertPx2Rad(pt);
             newCoords[idxFocus] = pt;
 
+            QPointF px1;
+            QPointF px2;
             leadLineCoord.clear();
             leadLinePixel.clear();
             // find polyline to snap
             if(newLine.size() > 1)
             {                
-                QPointF pt0 = state == eStateAddPointFwd ? newCoords[idxFocus - 1] : newCoords[1];
-                canvas->findPolylineCloseBy(pt0, pt, 10, leadLineCoord);
+                px2 = newLine[idxFocus];
+                px1 = state == eStateAddPointFwd ? newLine[idxFocus - 1] : newLine[1];
+                canvas->findPolylineCloseBy(px1, px2, 10, leadLineCoord);
                 leadLinePixel = leadLineCoord;
                 gis->convertRad2Px(leadLinePixel);
             }
+
+            subLinePixel.clear();
+            if(!leadLinePixel.isEmpty())
+            {
+                segment_t result;
+                GPS_Math_SubPolyline(px1, px2, 10, leadLinePixel, result);
+                result.apply(leadLineCoord, leadLinePixel, subLineCoord, subLinePixel, gis);
+            }
+
 
             canvas->update();
             break;
@@ -791,4 +811,5 @@ void IMouseEditLine::slotCopyToOrig()
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
+
 

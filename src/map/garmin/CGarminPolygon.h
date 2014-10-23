@@ -57,8 +57,11 @@ class CGarminPolygon
         qint16 dLng;
         /// delta latitude from subdivision center
         qint16 dLat;
-        /// the actual polyline points as longitude / latitude [rad], will become pixel later
-        QPolygonF poly;
+        /** @brief the actual polyline points as [pixel]
+          @note After decode() or decode2() the content will be the same as coords.
+                It is up to the render object to convert it into pixel coordinates
+        */
+        QPolygonF pixel;
         /// the actual polyline points as longitude / latitude [rad]
         QPolygonF coords;
 

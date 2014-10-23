@@ -18,6 +18,7 @@
 **********************************************************************************************/
 
 #include "GeoMath.h"
+#include "canvas/IDrawContext.h"
 #include <math.h>
 #include <stdlib.h>
 #include <proj_api.h>
@@ -90,13 +91,13 @@ bool GPS_Math_Str_To_Deg(const QString& str, qreal& lon, qreal& lat)
     }
 
     bool signLat    = re.cap(1) == "S";
-    int degLat      = re.cap(2).toInt();
+    qint32 degLat      = re.cap(2).toInt();
     qreal minLat   = re.cap(3).toDouble();
 
     GPS_Math_DegMin_To_Deg(signLat, degLat, minLat, lat);
 
     bool signLon    = re.cap(4) == "W";
-    int degLon      = re.cap(5).toInt();
+    qint32 degLon      = re.cap(5).toInt();
     qreal minLon   = re.cap(6).toDouble();
 
     GPS_Math_DegMin_To_Deg(signLon, degLon, minLon, lon);
@@ -287,13 +288,13 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
 
     while(!stack.isEmpty())
     {
-        int idx = -1;
+        qint32 idx = -1;
         segment seg = stack.pop();
 
         pointDP& x1 = line[seg.idx1];
         pointDP& x2 = line[seg.idx2];
 
-        for(int i = seg.idx1 + 1; i < seg.idx2; i++)
+        for(qint32 i = seg.idx1 + 1; i < seg.idx2; i++)
         {
             qreal distance = GPS_Math_distPointLine3D(x1, x2, line[i]);
             if(distance > d)
@@ -310,7 +311,7 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
         }
         else
         {
-            for(int i = seg.idx1 + 1; i < seg.idx2; i++)
+            for(qint32 i = seg.idx1 + 1; i < seg.idx2; i++)
             {
                 line[i].used = false;
             }
@@ -359,4 +360,224 @@ bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF
     }
 
     return true;
+}
+
+
+void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t &result)
+{
+    qint32 i, len;
+    projXY p1, p2;
+    qreal dx,dy;                // delta x and y defined by p1 and p2
+    qreal d_p1_p2;              // distance between p1 and p2
+    qreal u;                    // ratio u the tangent point will divide d_p1_p2
+    qreal x,y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
+    qreal distance;             // the distance to the polyline
+    qreal shortest1 = threshold;
+    qreal shortest2 = threshold;
+    qint32 idx11 = -1, idx21 = -1, idx12 = -1;
+
+    QPointF pt11;
+    QPointF pt21;
+
+    len = pixel.size();
+
+    // find points on line closest to pt1 and pt2
+    for(i=1; i<len; ++i)
+    {
+        p1.u = pixel[i - 1].x();
+        p1.v = pixel[i - 1].y();
+        p2.u = pixel[i].x();
+        p2.v = pixel[i].y();
+
+        dx = p2.u - p1.u;
+        dy = p2.v - p1.v;
+        d_p1_p2 = sqrt(dx * dx + dy * dy);
+
+        // find point on line closest to pt1
+        u = ((pt1.x() - p1.u) * dx + (pt1.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
+
+        if(u >= 0.0 && u <= 1.0)
+        {
+            x = p1.u + u * dx;
+            y = p1.v + u * dy;
+
+            distance = sqrt((x - pt1.x())*(x - pt1.x()) + (y - pt1.y())*(y - pt1.y()));
+
+            if(distance < shortest1)
+            {
+                idx11 = i - 1;
+                idx12 = i;
+                pt11.setX(x);
+                pt11.setY(y);
+                shortest1 = distance;
+            }
+        }
+
+        // find point on line closest to pt2
+        u = ((pt2.x() - p1.u) * dx + (pt2.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
+
+        if(u >= 0.0 && u <= 1.0)
+        {
+
+            x = p1.u + u * dx;
+            y = p1.v + u * dy;
+
+            distance = sqrt((x - pt2.x())*(x - pt2.x()) + (y - pt2.y())*(y - pt2.y()));
+
+            if(distance < shortest2)
+            {
+                idx21 = i - 1;
+                pt21.setX(x);
+                pt21.setY(y);
+                shortest2 = distance;
+            }
+        }
+    }
+
+    // if 1st point can't be found test for distance to both ends
+    if(idx11 == -1)
+    {
+        QPointF px = pixel.first();
+        distance = sqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
+        if(distance < (threshold<<1))
+        {
+            idx11 = 0;
+            idx12 = 1;
+            pt11 = px;
+        }
+        else
+        {
+            px = pixel.last();
+            distance = sqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
+            if(distance < (threshold<<1))
+            {
+                idx11 = pixel.size() - 2;
+                idx12 = pixel.size() - 1;
+                pt11 = px;
+            }
+        }
+    }
+
+    // if 2nd point can't be found test for distance to both ends
+    if(idx21 == -1)
+    {
+        QPointF px = pixel.first();
+        distance = sqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
+
+        if(distance < (threshold<<1))
+        {
+            idx21 = 0;
+            pt21 = px;
+        }
+        else
+        {
+            px = pixel.last();
+            distance = sqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
+            if(distance < (threshold<<1))
+            {
+                idx21 = pixel.size() - 2;
+                pt21 = px;
+            }
+        }
+    }
+
+    //    qDebug() << pixel.size() << idx11 << idx12 << idx21 << pt1 << pt2 << pt11 << pt21;
+
+    result.idx11 = idx11;
+    result.idx12 = idx12;
+    result.idx21 = idx21;
+    result.px1   = pt11;
+    result.px2   = pt21;
+
+//    // copy segment of line 1 to pixel2
+//    if(idx11 != -1 && idx21 != -1)
+//    {
+//        if(idx11 == idx21)
+//        {
+//            pixel2.push_back(pt11);
+//            pixel2.push_back(pt21);
+//        }
+//        else if(idx12 == idx21)
+//        {
+//            pixel2.push_back(pt11);
+//            pixel2.push_back(pixel[idx12]);
+//            pixel2.push_back(pt21);
+//        }
+//        else if(idx11 < idx21)
+//        {
+//            pixel2.push_back(pt11);
+//            for(i = idx12; i <= idx21; i++)
+//            {
+//                pixel2.push_back(pixel[i]);
+//            }
+//            pixel2.push_back(pt21);
+//        }
+//        else if(idx11 > idx21)
+//        {
+//            pixel2.push_back(pt11);
+//            for(i = idx11; i > idx21; i--)
+//            {
+//                pixel2.push_back(pixel[i]);
+//            }
+//            pixel2.push_back(pt21);
+//        }
+//    }
+}
+
+void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext * context)
+{
+
+    QPointF pt1 = px1;
+    QPointF pt2 = px2;
+
+    context->convertPx2Rad(pt1);
+    context->convertPx2Rad(pt2);
+
+    if(idx11 != -1 && idx21 != -1)
+    {
+        if(idx11 == idx21)
+        {
+            segPixel.push_back(px1);
+            segPixel.push_back(px2);
+
+            segCoord.push_back(pt1);
+            segCoord.push_back(pt2);
+
+        }
+        else if(idx12 == idx21)
+        {
+            segPixel.push_back(px1);
+            segPixel.push_back(pixel[idx12]);
+            segPixel.push_back(px2);
+
+            segCoord.push_back(pt1);
+            segCoord.push_back(coords[idx12]);
+            segCoord.push_back(pt2);
+
+        }
+        else if(idx11 < idx21)
+        {
+            segPixel.push_back(px1);
+            segCoord.push_back(pt1);
+            for(int i = idx12; i <= idx21; i++)
+            {
+                segPixel.push_back(pixel[i]);
+                segCoord.push_back(coords[i]);
+            }
+            segPixel.push_back(px2);
+            segCoord.push_back(pt2);
+        }
+        else if(idx11 > idx21)
+        {
+            segPixel.push_back(px1);
+            segCoord.push_back(pt1);
+            for(int i = idx11; i > idx21; i--)
+            {
+                segPixel.push_back(pixel[i]);
+                segCoord.push_back(coords[i]);
+            }
+            segPixel.push_back(px2);
+            segCoord.push_back(pt2);
+        }
+    }
 }

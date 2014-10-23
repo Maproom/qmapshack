@@ -144,6 +144,8 @@ class IMouseEditLine  : public IMouse
 
         QPolygonF leadLineCoord;
         QPolygonF leadLinePixel;
+        QPolygonF subLineCoord;
+        QPolygonF subLinePixel;
 };
 
 #endif //IMOUSEEDITLINE_H

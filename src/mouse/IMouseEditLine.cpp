@@ -265,7 +265,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
             }
             else
             {
-                l = line.mid(0, idxStart + 1) + subLinePixel + line.mid(idxStop, -1);
+                l = line.mid(0, idxStart + 1) + newLine.mid(0, newLine.size() - 2) + subLinePixel + line.mid(idxStop, -1);
             }
             drawLeadLine(leadLinePixel, p);
             drawArrows(l, p);
@@ -484,13 +484,34 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
             }
             case eStateAddPointFwd:
             {
+                if(!subLineCoord.isEmpty())
+                {
+                    newLine.pop_back();
+                    newLine.pop_back();
+                    newLine     += subLinePixel;
+                    newCoords.pop_back();
+                    newCoords.pop_back();
+                    newCoords   += subLineCoord;
+
+                    subLineCoord.clear();
+                    subLinePixel.clear();
+                }
                 newLine.append(newLine.last());
                 newCoords.append(newCoords.last());
-                idxFocus++;
+                idxFocus = newLine.size() - 1;
                 break;
             }
             case eStateAddPointBwd:
             {
+                if(!subLineCoord.isEmpty())
+                {
+                    newLine     = subLinePixel;
+                    newCoords   = subLineCoord;
+
+                    subLineCoord.clear();
+                    subLinePixel.clear();
+                }
+
                 newLine.prepend(newLine.first());
                 newCoords.prepend(newCoords.first());
                 idxFocus = 0;
@@ -585,11 +606,25 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             }
 
             subLinePixel.clear();
+            subLineCoord.clear();
             if(!leadLinePixel.isEmpty())
             {
                 segment_t result;
                 GPS_Math_SubPolyline(px1, px2, 10, leadLinePixel, result);
                 result.apply(leadLineCoord, leadLinePixel, subLineCoord, subLinePixel, gis);
+
+                if(state == eStateAddPointBwd)
+                {
+                    QPolygonF tmp1;
+                    QPolygonF tmp2;
+                    for(int i = 0; i < subLineCoord.size(); i++)
+                    {
+                        tmp1.push_front(subLineCoord[i]);
+                        tmp2.push_front(subLinePixel[i]);
+                    }
+                    subLineCoord = tmp1;
+                    subLinePixel = tmp2;
+                }
             }
 
 

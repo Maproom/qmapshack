@@ -83,8 +83,8 @@ class IMouseEditLine  : public IMouse
         void slotAddPoint2();
 
 
-        void slotAbort();
-        void slotCopyToOrig();
+        virtual void slotAbort();
+        virtual void slotCopyToOrig();
         virtual void slotCopyToNew() = 0;
 
     protected:

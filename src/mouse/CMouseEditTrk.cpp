@@ -67,8 +67,23 @@ IGisLine * CMouseEditTrk::getGisLine()
     return dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
 }
 
+void CMouseEditTrk::slotAbort()
+{
+    canvas->reportStatus(key,"");
+    IMouseEditLine::slotAbort();
+}
+
+void CMouseEditTrk::slotCopyToOrig()
+{
+    canvas->reportStatus(key,"");
+    IMouseEditLine::slotCopyToOrig();
+}
+
+
 void CMouseEditTrk::slotCopyToNew()
 {
+    canvas->reportStatus(key,"");
+
     if(coords1.size() < 2)
     {
         return;
@@ -98,5 +113,5 @@ void CMouseEditTrk::slotCopyToNew()
     new CGisItemTrk(coords1,name, project, -1);
 
     canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);    
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);            
 }

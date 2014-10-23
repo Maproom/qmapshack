@@ -488,40 +488,6 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     result.idx21 = idx21;
     result.px1   = pt11;
     result.px2   = pt21;
-
-//    // copy segment of line 1 to pixel2
-//    if(idx11 != -1 && idx21 != -1)
-//    {
-//        if(idx11 == idx21)
-//        {
-//            pixel2.push_back(pt11);
-//            pixel2.push_back(pt21);
-//        }
-//        else if(idx12 == idx21)
-//        {
-//            pixel2.push_back(pt11);
-//            pixel2.push_back(pixel[idx12]);
-//            pixel2.push_back(pt21);
-//        }
-//        else if(idx11 < idx21)
-//        {
-//            pixel2.push_back(pt11);
-//            for(i = idx12; i <= idx21; i++)
-//            {
-//                pixel2.push_back(pixel[i]);
-//            }
-//            pixel2.push_back(pt21);
-//        }
-//        else if(idx11 > idx21)
-//        {
-//            pixel2.push_back(pt11);
-//            for(i = idx11; i > idx21; i--)
-//            {
-//                pixel2.push_back(pixel[i]);
-//            }
-//            pixel2.push_back(pt21);
-//        }
-//    }
 }
 
 void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext * context)

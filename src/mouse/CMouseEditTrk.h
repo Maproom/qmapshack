@@ -33,8 +33,11 @@ class CMouseEditTrk : public IMouseEditLine
 
         void mousePressEvent(QMouseEvent * e);
 
-    protected slots:
+    protected slots:        
+        void slotAbort();
         void slotCopyToNew();
+        void slotCopyToOrig();
+
 
     protected:
         IGisLine * getGisLine();

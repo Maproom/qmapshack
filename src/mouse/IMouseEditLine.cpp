@@ -597,9 +597,20 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             leadLinePixel.clear();
             // find polyline to snap
             if(newLine.size() > 1)
-            {                
-                px2 = newLine[idxFocus];
-                px1 = state == eStateAddPointFwd ? newLine[idxFocus - 1] : newLine[1];
+            {
+                if(state == eStateAddPointBwd)
+                {
+                    px1 = newLine[idxFocus];
+                    px2 = state == eStateAddPointFwd ? newLine[idxFocus - 1] : newLine[1];
+                }
+                else
+                {
+                    px2 = newLine[idxFocus];
+                    px1 = state == eStateAddPointFwd ? newLine[idxFocus - 1] : newLine[1];
+
+                }
+
+
                 canvas->findPolylineCloseBy(px1, px2, 10, leadLineCoord);
                 leadLinePixel = leadLineCoord;
                 gis->convertRad2Px(leadLinePixel);
@@ -613,18 +624,6 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
                 GPS_Math_SubPolyline(px1, px2, 10, leadLinePixel, result);
                 result.apply(leadLineCoord, leadLinePixel, subLineCoord, subLinePixel, gis);
 
-                if(state == eStateAddPointBwd)
-                {
-                    QPolygonF tmp1;
-                    QPolygonF tmp2;
-                    for(int i = 0; i < subLineCoord.size(); i++)
-                    {
-                        tmp1.push_front(subLineCoord[i]);
-                        tmp2.push_front(subLinePixel[i]);
-                    }
-                    subLineCoord = tmp1;
-                    subLinePixel = tmp2;
-                }
             }
 
 

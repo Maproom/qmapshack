@@ -34,7 +34,9 @@ class CMouseEditArea : public IMouseEditLine
         void mousePressEvent(QMouseEvent * e);
 
     protected slots:
+        void slotAbort();
         void slotCopyToNew();
+        void slotCopyToOrig();
 
     protected:
         virtual void drawLine(const QPolygonF& l, QPainter& p);

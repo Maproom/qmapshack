@@ -63,8 +63,22 @@ IGisLine * CMouseEditArea::getGisLine()
     return dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
 }
 
+void CMouseEditArea::slotAbort()
+{
+    canvas->reportStatus(key,"");
+    IMouseEditLine::slotAbort();
+}
+
+void CMouseEditArea::slotCopyToOrig()
+{
+    canvas->reportStatus(key,"");
+    IMouseEditLine::slotCopyToOrig();
+}
+
 void CMouseEditArea::slotCopyToNew()
 {
+    canvas->reportStatus(key,"");
+
     if(coords1.size() < 3)
     {
         return;

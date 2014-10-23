@@ -207,7 +207,7 @@ void IMouseEditLine::drawArrows(const QPolygonF &l, QPainter& p)
 
 void IMouseEditLine::drawLeadLine(const QPolygonF &l, QPainter& p)
 {
-    p.setPen(QPen(QColor(255,255,0,100), 9, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(QColor(255,255,0,150), 9, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(l);
 }
 

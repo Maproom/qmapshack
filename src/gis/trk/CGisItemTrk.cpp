@@ -207,6 +207,19 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setText(0, trk.name);
     setToolTip(0, getInfo());
     genKey();
+
+//    QFile file(trk.name + ".dat");
+//    file.open(QIODevice::WriteOnly);
+//    QDataStream stream(&file);
+//    *this >> stream;
+//    file.close();
+
+//    if(file.open(QIODevice::ReadOnly))
+//    {
+//        QDataStream stream(&file);
+//        *this << stream;
+//        file.close();
+//    }
 }
 
 CGisItemTrk::~CGisItemTrk()
@@ -255,7 +268,7 @@ void CGisItemTrk::getData(QPolygonF &l)
     {
         foreach(const trkpt_t& pt, seg.pts)
         {
-            if(pt.flags & trkpt_t::eDeleted)
+            if(pt.flags & trkpt_t::eHidden)
             {
                 continue;
             }
@@ -555,6 +568,11 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
             const QDomNode& xmlTrkpt = xmlTrkpts.item(m);
             readWpt(xmlTrkpt, trkpt);
 
+            trkpt.shdwLon   = trkpt.lon;
+            trkpt.shdwLat   = trkpt.lat;
+            trkpt.shdwEle   = trkpt.ele;
+            trkpt.shdwTime  = trkpt.time;
+
             const QDomNode& ext = xmlTrkpt.namedItem("extensions");
             if(ext.isElement())
             {
@@ -678,7 +696,7 @@ void CGisItemTrk::deriveSecondaryData()
             trkpt_t& trkpt = seg.pts[p];
 
             trkpt.idxTotal = cntTotalPoints++;
-            if(trkpt.flags & trkpt_t::eDeleted)
+            if(trkpt.flags & trkpt_t::eHidden)
             {
                 trkpt.reset();
                 continue;
@@ -764,7 +782,7 @@ void CGisItemTrk::deriveSecondaryData()
         for(int p = 0; p < seg.pts.size(); p++)
         {
             trkpt_t& trkpt = seg.pts[p];
-            if(trkpt.flags & trkpt_t::eDeleted)
+            if(trkpt.flags & trkpt_t::eHidden)
             {
                 continue;
             }
@@ -777,7 +795,7 @@ void CGisItemTrk::deriveSecondaryData()
             while(n>0)
             {
                 trkpt_t & trkpt2 = seg.pts[n];
-                if((trkpt2.flags & trkpt_t::eDeleted) || (trkpt2.ele == NOINT))
+                if((trkpt2.flags & trkpt_t::eHidden) || (trkpt2.ele == NOINT))
                 {
                     n--;
                     continue;
@@ -800,7 +818,7 @@ void CGisItemTrk::deriveSecondaryData()
             while(n < seg.pts.size())
             {
                 trkpt_t & trkpt2 = seg.pts[n];;
-                if((trkpt2.flags & trkpt_t::eDeleted) || (trkpt2.ele == NOINT))
+                if((trkpt2.flags & trkpt_t::eHidden) || (trkpt2.ele == NOINT))
                 {
                     n++;
                     continue;
@@ -1024,7 +1042,7 @@ void CGisItemTrk::hideSelectedPoints()
 
             if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
             {
-                trkpt.flags |= trkpt_t::eDeleted;
+                trkpt.flags |= trkpt_t::eHidden;
             }
         }
     }
@@ -1060,7 +1078,7 @@ void CGisItemTrk::showSelectedPoints()
 
             if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
             {
-                trkpt.flags &= ~trkpt_t::eDeleted;
+                trkpt.flags &= ~trkpt_t::eHidden;
             }
         }
     }
@@ -1126,7 +1144,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
         {
             foreach(const trkpt_t& pt, seg.pts)
             {
-                if(pt.flags & trkpt_t::eDeleted)
+                if(pt.flags & trkpt_t::eHidden)
                 {
                     continue;
                 }
@@ -1153,7 +1171,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
 
                 lineFull << pt1;
 
-                if(pt.flags & trkpt_t::eDeleted)
+                if(pt.flags & trkpt_t::eHidden)
                 {
                     continue;
                 }
@@ -1438,7 +1456,7 @@ void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot *i
         {
             foreach(const trkpt_t& pt, seg.pts)
             {
-                if(pt.flags & trkpt_t::eDeleted)
+                if(pt.flags & trkpt_t::eHidden)
                 {
                     continue;
                 }
@@ -1475,7 +1493,7 @@ void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * in
         {
             foreach(const trkpt_t& pt, seg.pts)
             {
-                if(pt.flags & trkpt_t::eDeleted)
+                if(pt.flags & trkpt_t::eHidden)
                 {
                     continue;
                 }
@@ -1563,7 +1581,7 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
     {
         foreach(const trkpt_t& pt, seg.pts)
         {
-            if(pt.flags & trkpt_t::eDeleted)
+            if(pt.flags & trkpt_t::eHidden)
             {
                 continue;
             }

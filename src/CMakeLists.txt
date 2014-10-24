@@ -90,6 +90,7 @@ set( SRCS
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/IGisProject.cpp
+    gis/CGisSerialization.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
     gis/wpt/CDetailsWpt.cpp
@@ -198,6 +199,7 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
+    gis/CGisSerialization.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h

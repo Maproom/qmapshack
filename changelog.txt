@@ -1,5 +1,6 @@
 * Add Google GIS search
 * Add support for TMS maps
+* Snap to line for track and area edit
 
 V 0.6.0
 * Reverse tracks

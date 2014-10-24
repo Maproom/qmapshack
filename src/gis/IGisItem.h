@@ -51,6 +51,46 @@ class IGisItem : public QTreeWidgetItem
             QString type;
         };
 
+        struct wpt_t
+        {
+            wpt_t() :
+                lat(NOFLOAT),
+                lon(NOFLOAT),
+                ele(NOINT),
+                magvar(NOINT),
+                geoidheight(NOINT),
+                sat(NOINT),
+                hdop(NOINT),
+                vdop(NOINT),
+                pdop(NOINT),
+                ageofdgpsdata(NOINT),
+                dgpsid(NOINT)
+            {}
+            // -- all gpx tags - start
+            qreal lat;
+            qreal lon;
+            qint32 ele;
+            QDateTime time;
+            qint32 magvar;
+            qint32 geoidheight;
+            QString name;
+            QString cmt;
+            QString desc;
+            QString src;
+            QList<link_t> links;
+            QString sym;
+            QString type;
+            QString fix;
+            qint32 sat;
+            qint32 hdop;
+            qint32 vdop;
+            qint32 pdop;
+            qint32 ageofdgpsdata;
+            qint32 dgpsid;
+            // -- all gpx tags - stop
+            QMap<QString, QVariant> extensions;
+        };
+
         enum type_e
         {
               eTypeTrk
@@ -166,9 +206,8 @@ class IGisItem : public QTreeWidgetItem
         static QString removeHtml(const QString &str);
 
     protected:
-        friend class CGpxProject;
-        struct wpt_t;
         struct color_t;
+        friend class CGpxProject;
 
         /// read waypoint data from an XML snippet
         void readWpt(const QDomNode& xml, wpt_t &wpt);
@@ -200,47 +239,6 @@ class IGisItem : public QTreeWidgetItem
             QColor color;
         };
 
-
-
-        struct wpt_t
-        {
-            wpt_t() :
-                lat(NOFLOAT),
-                lon(NOFLOAT),
-                ele(NOINT),
-                magvar(NOINT),
-                geoidheight(NOINT),
-                sat(NOINT),
-                hdop(NOINT),
-                vdop(NOINT),
-                pdop(NOINT),
-                ageofdgpsdata(NOINT),
-                dgpsid(NOINT)
-            {}
-            // -- all gpx tags - start
-            qreal lat;
-            qreal lon;
-            qint32 ele;
-            QDateTime time;
-            qint32 magvar;
-            qint32 geoidheight;
-            QString name;
-            QString cmt;
-            QString desc;
-            QString src;
-            QList<link_t> links;
-            QString sym;
-            QString type;
-            QString fix;
-            qint32 sat;
-            qint32 hdop;
-            qint32 vdop;
-            qint32 pdop;
-            qint32 ageofdgpsdata;
-            qint32 dgpsid;
-            // -- all gpx tags - stop
-            QMap<QString, QVariant> extensions;
-        };
 
         enum flags_e
         {

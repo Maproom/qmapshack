@@ -57,6 +57,25 @@ class CGisItemTrk : public IGisItem, public IGisLine
         CGisItemTrk(const QDomNode &xml, IGisProject *project);
         virtual ~CGisItemTrk();
 
+        /**
+           @brief Serialize object out of a QDataStream
+
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        QDataStream& operator<<(QDataStream& stream);
+        /**
+           @brief Serialize object into a QDataStream
+
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        QDataStream& operator>>(QDataStream& stream);
+
         const QString& getName(){return trk.name;}
         int getColorIdx(){return colorIdx;}
         QString getInfo();
@@ -124,10 +143,31 @@ class CGisItemTrk : public IGisItem, public IGisLine
          */
         void combine();
 
+        /**
+           @brief Set the trkpt_t::eHidden flag
+
+           The flag is set for all track points between mouseClickFocus and mouseMoveFocus,
+           regardless of their previous state.
+
+        */
         void hideSelectedPoints();
 
+        /**
+           @brief Reset the trkpt_t::eHidden flag
+
+           The flag is reset for all track points between mouseClickFocus and mouseMoveFocus,
+           regardless of their previous state.
+
+         */
         void showSelectedPoints();
 
+        /**
+           @brief Copy a section into a new track object
+
+           The section is defined by mouseClickFocus and mouseMoveFocus, All points are copied,
+           including the hidden (trkpt_t::eHidden) ones.
+
+        */
         void copySelectedPoints();
 
         /**
@@ -227,7 +267,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
             enum flag_e
             {
-                eDeleted   = 0x00000004  ///< mark point as deleted
+                eHidden   = 0x00000004  ///< mark point as deleted
             };
 
             quint32 flags;
@@ -235,6 +275,16 @@ class CGisItemTrk : public IGisItem, public IGisLine
             quint32 idxTotal;
             /// offset into lineSimple
             qint32  idxVisible;
+
+            /// shadow latitude
+            qreal shdwLat;
+            /// shadow longitude
+            qreal shdwLon;
+            /// shadow elevation
+            qint32 shdwEle;
+            /// shadow timestamp
+            QDateTime shdwTime;
+
 
             /// the distance to the last point
             qreal deltaDistance;

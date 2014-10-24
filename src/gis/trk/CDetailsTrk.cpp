@@ -126,7 +126,7 @@ void CDetailsTrk::setupGui()
             item->setTextAlignment(eColSpeed,Qt::AlignRight);
 
 
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eDeleted)
+            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
             {
                 for(int i = 0; i < eColMax; i++)
                 {

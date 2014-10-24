@@ -74,7 +74,7 @@ void CPlotSpeed::updateData()
     {
         foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
         {
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eDeleted)
+            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
             {
                 continue;
             }

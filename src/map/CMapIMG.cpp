@@ -2670,18 +2670,6 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
 
         if(u < 0.0 || u > 1.0)
         {
-            distance = sqrt((p1.x() - pt.x())*(p1.y() - pt.x()) + (p1.y() - pt.y())*(p1.y() - pt.y()));
-            if(distance < threshold)
-            {
-                d = threshold = distance;
-            }
-
-            distance = sqrt((p2.x() - pt.x())*(p2.x() - pt.x()) + (p2.y() - pt.y())*(p2.y() - pt.y()));
-            if(distance < threshold)
-            {
-                d = threshold = distance;
-            }
-
             continue;
         }
 
@@ -2720,7 +2708,7 @@ bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, 
         if(dist1 < threshold && dist2 < threshold)
         {
             polyline  = line.coords;
-            threshold = dist1 < dist2 ? dist1 : dist2;
+            threshold = qMin(dist1, dist2);
         }
     }
 

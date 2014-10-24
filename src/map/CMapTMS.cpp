@@ -471,7 +471,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
             for(qint32 col = col1; col <= col2; col++)
             {
                 QString url = createUrl(layer, col, row, z);
-                qDebug() << url;
+//                qDebug() << url;
 
                 if(diskCache->contains(url))
                 {

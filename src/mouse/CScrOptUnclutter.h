@@ -51,7 +51,7 @@ class CScrOptUnclutter : public IScrOpt
         void mouseMoveEvent(QMouseEvent * e);
 
     private:
-        static const QPoint positions[];
+        static const QPoint positions[9][8];
         QList<item_t> items;
         bool doSpecialCursor;
 

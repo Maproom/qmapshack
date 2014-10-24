@@ -23,16 +23,71 @@
 
 #include <QtWidgets>
 
-const QPoint CScrOptUnclutter::positions[] =
+const QPoint CScrOptUnclutter::positions[9][8] =
 {
-      QPoint(-50,-23)
-    , QPoint( 50,-23)
-    , QPoint(-50, 23)
-    , QPoint( 50, 23)
-    , QPoint(-22,-55)
-    , QPoint( 22,-55)
-    , QPoint(-22, 55)
-    , QPoint( 22, 55)
+    {
+
+    },
+
+    {
+          QPoint(-50,-23)
+    },
+
+    {
+          QPoint(-30,0)
+        , QPoint( 30,0)
+    },
+
+    {
+          QPoint(  0,-30)
+        , QPoint( 30, 30)
+        , QPoint(-30, 30)
+    },
+
+    {
+          QPoint(-30,-30)
+        , QPoint( 30,-30)
+        , QPoint(-30, 30)
+        , QPoint( 30, 30)
+    },
+
+    {
+          QPoint(-25, 40)
+        , QPoint( 25, 40)
+        , QPoint(-40, -5)
+        , QPoint( 40, -5)
+        , QPoint(  0,-40)
+    },
+
+    {
+          QPoint(-40,-22)
+        , QPoint( 40,-22)
+        , QPoint(-40, 22)
+        , QPoint( 40, 22)
+        , QPoint(  0,-55)
+        , QPoint(  0, 55)
+    },
+
+    {
+          QPoint(-50,-23)
+        , QPoint( 50,-23)
+        , QPoint(-45, 21)
+        , QPoint( 45, 21)
+        , QPoint(-22,-55)
+        , QPoint( 22,-55)
+        , QPoint(  0, 50)
+    },
+
+    {
+          QPoint(-50,-23)
+        , QPoint( 50,-23)
+        , QPoint(-50, 23)
+        , QPoint( 50, 23)
+        , QPoint(-22,-55)
+        , QPoint( 22,-55)
+        , QPoint(-22, 55)
+        , QPoint( 22, 55)
+    }
 
 };
 
@@ -118,15 +173,16 @@ const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& poin
 
 void CScrOptUnclutter::draw(QPainter& p)
 {
+    const int N = items.size();
     QFontMetrics fm(CMainWindow::self().getMapFont());
-    for(int cnt = 0; cnt < items.size(); cnt++)
+    for(int cnt = 0; cnt < N; cnt++)
     {
         item_t& item = items[cnt];
 
         if(item.text.isNull())
         {
 
-            item.area.moveCenter(origin + positions[cnt]);
+            item.area.moveCenter(origin + positions[N][cnt]);
             item.active.moveCenter(item.area.center());
             item.text = fm.boundingRect(item.name);
             if(cnt & 0x01)

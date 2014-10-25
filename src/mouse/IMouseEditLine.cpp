@@ -207,7 +207,7 @@ void IMouseEditLine::drawArrows(const QPolygonF &l, QPainter& p)
 
 void IMouseEditLine::drawLeadLine(const QPolygonF &l, QPainter& p)
 {
-    p.setPen(QPen(QColor(255,255,0,150), 9, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(QColor(255,255,0,100), 9, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(l);
 }
 
@@ -256,20 +256,36 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
             break;
 
         case eStateAddPointFwd:
+        {
+            QPolygonF l;
+            if(subLinePixel.isEmpty())
+            {
+                l = line.mid(0, idxStart) + newLine + line.mid(idxStop, -1);
+            }
+            else
+            {
+                l = line.mid(0, idxStart) + newLine.mid(0, newLine.size() - 2) + subLinePixel + line.mid(idxStop, -1);
+            }
+            drawLeadLine(leadLinePixel, p);
+            drawArrows(l, p);
+            drawLine(l, p);            
+            drawBullets(l, p);
+            break;
+        }
         case eStateAddPointBwd:
         {
             QPolygonF l;
             if(subLinePixel.isEmpty())
             {
-                l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop, -1);
+                l = line.mid(0, idxStart + 1) + newLine + line.mid(idxStop + 1, -1);
             }
             else
             {
-                l = line.mid(0, idxStart + 1) + newLine.mid(0, newLine.size() - 2) + subLinePixel + line.mid(idxStop, -1);
+                l = line.mid(0, idxStart + 1) + subLinePixel + newLine.mid(2, -1) + line.mid(idxStop + 1, -1);
             }
             drawLeadLine(leadLinePixel, p);
             drawArrows(l, p);
-            drawLine(l, p);            
+            drawLine(l, p);
             drawBullets(l, p);
             break;
         }
@@ -324,17 +340,21 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
                 {
                     if(state == eStateAddPointBwd)
                     {
+                        // remove first point, which is the current moving point
                         newCoords.pop_front();
+                        save = coords1.mid(0, idxStart + 1) + newCoords + coords1.mid(idxStop + 1, -1);
                     }
 
                     if(state == eStateAddPointFwd)
                     {
+                        // remove last point, which is the current moving point
                         newCoords.pop_back();
+                        save = coords1.mid(0, idxStart) + newCoords + coords1.mid(idxStop, -1);
                     }
 
-                    save        = coords1.mid(0, idxStart + 1) + newCoords + coords1.mid(idxStop, -1);
-                    coords1     = save;
-                    line        = coords1;
+
+                    coords1 = save;
+                    line    = coords1;
                     gis->convertRad2Px(line);
                 }
 
@@ -488,10 +508,10 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
                 {
                     newLine.pop_back();
                     newLine.pop_back();
-                    newLine     += subLinePixel;
+                    newLine     = newLine + subLinePixel;
                     newCoords.pop_back();
                     newCoords.pop_back();
-                    newCoords   += subLineCoord;
+                    newCoords   = newCoords + subLineCoord;
 
                     subLineCoord.clear();
                     subLinePixel.clear();
@@ -505,8 +525,12 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
             {
                 if(!subLineCoord.isEmpty())
                 {
-                    newLine     = subLinePixel;
-                    newCoords   = subLineCoord;
+                    newLine.pop_front();
+                    newLine.pop_front();
+                    newLine = subLinePixel + newLine;
+                    newCoords.pop_front();
+                    newCoords.pop_front();
+                    newCoords = subLineCoord + newCoords;
 
                     subLineCoord.clear();
                     subLinePixel.clear();
@@ -591,39 +615,43 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             gis->convertPx2Rad(pt);
             newCoords[idxFocus] = pt;
 
-            QPointF px1;
-            QPointF px2;
+
             leadLineCoord.clear();
             leadLinePixel.clear();
-            // find polyline to snap
-            if(newLine.size() > 1)
-            {
-                if(state == eStateAddPointBwd)
-                {
-                    px1 = newLine[idxFocus];
-                    px2 = state == eStateAddPointFwd ? newLine[idxFocus - 1] : newLine[1];
-                }
-                else
-                {
-                    px2 = newLine[idxFocus];
-                    px1 = state == eStateAddPointFwd ? newLine[idxFocus - 1] : newLine[1];
-
-                }
-
-
-                canvas->findPolylineCloseBy(px1, px2, 10, leadLineCoord);
-                leadLinePixel = leadLineCoord;
-                gis->convertRad2Px(leadLinePixel);
-            }
-
             subLinePixel.clear();
             subLineCoord.clear();
-            if(!leadLinePixel.isEmpty())
+
+
+            // find polyline to snap
+            QPointF px1;
+            QPointF px2;
+            if(newLine.size() > 1)
+            {                
+                px1 = state == eStateAddPointFwd ? newLine[idxFocus - 1] : newLine[1];
+                px2 = newLine[idxFocus];
+            }
+
+            if(canvas->findPolylineCloseBy(px2, px2, 10, leadLineCoord))
             {
+                leadLinePixel = leadLineCoord;
+                gis->convertRad2Px(leadLinePixel);
+
                 segment_t result;
                 GPS_Math_SubPolyline(px1, px2, 10, leadLinePixel, result);
                 result.apply(leadLineCoord, leadLinePixel, subLineCoord, subLinePixel, gis);
 
+                if(state == eStateAddPointBwd)
+                {
+                    QPolygonF tmp1;
+                    QPolygonF tmp2;
+                    for(int i = 0; i < subLineCoord.size(); i++)
+                    {
+                        tmp1.push_front(subLineCoord[i]);
+                        tmp2.push_front(subLinePixel[i]);
+                    }
+                    subLineCoord = tmp1;
+                    subLinePixel = tmp2;
+                }
             }
 
 
@@ -762,11 +790,17 @@ void IMouseEditLine::slotAddPoint1()
     }
     scrOptPoint->deleteLater();
 
-    // set point with focus as temporary initial point
-    newCoords.clear();    
-    newCoords << coords1[idxFocus];
+    newCoords.clear();
     newLine.clear();
-    newLine   << line[idxFocus];
+    /*
+        Adding points will work completely on newLine and newCoords until the
+        line segment is taken over or dumped. The current point of focus is
+        added twice. The first time as fixed starting point of the tmeporary
+        newLine. And the second time as initial point to be moved by the mouse.
+
+    */
+    newCoords << coords1[idxFocus]  << coords1[idxFocus];
+    newLine   << line[idxFocus]     << line[idxFocus];
 
     // mark gap to insert points
     idxStart = idxFocus - 1;
@@ -795,18 +829,25 @@ void IMouseEditLine::slotAddPoint2()
         scrOptPoint->deleteLater();
     }
 
-    // set point with focus as temporary initial point
+
     newCoords.clear();
-    newCoords << coords1[idxFocus];    
     newLine.clear();
-    newLine   << line[idxFocus];
+    /*
+        Adding points will work completely on newLine and newCoords until the
+        line segment is taken over or dumped. The current point of focus is
+        added twice. The first time as fixed starting point of the tmeporary
+        newLine. And the second time as initial point to be moved by the mouse.
+
+    */
+    newCoords << coords1[idxFocus]  << coords1[idxFocus];
+    newLine   << line[idxFocus]     << line[idxFocus];
 
     // mark gap to insert points
     idxStart = idxFocus;
     idxStop  = idxFocus + 1;
 
     // set focus to first point in newLine
-    idxFocus = 0;
+    idxFocus = 1;
 
     state   = eStateAddPointFwd;
     cursor  = QCursor(QPixmap(":/cursors/cursorAdd.png"),0,0);

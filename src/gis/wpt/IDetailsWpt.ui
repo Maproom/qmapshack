@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>550</width>
-    <height>378</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,6 +35,22 @@
    </property>
    <item>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="3" column="1">
+      <widget class="QTextBrowser" name="textCmtDesc">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="openLinks">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
@@ -125,29 +141,6 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="1">
-      <widget class="Line" name="line_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QTextBrowser" name="textCmtDesc">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="openLinks">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
@@ -224,23 +217,10 @@
        </item>
       </layout>
      </item>
-     <item row="0" column="0">
-      <widget class="QToolButton" name="toolIcon">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>22</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-      </widget>
+     <item row="4" column="1">
+      <widget class="CHistoryListWidget" name="listHistory"/>
      </item>
-     <item row="6" column="1">
+     <item row="5" column="1">
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -256,8 +236,21 @@
        </property>
       </spacer>
      </item>
-     <item row="5" column="1">
-      <widget class="CHistoryListWidget" name="listHistory"/>
+     <item row="0" column="0">
+      <widget class="QToolButton" name="toolIcon">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

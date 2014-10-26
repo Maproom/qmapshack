@@ -32,6 +32,8 @@
 #define VER_TRKSEG  quint8(1)
 #define VER_TRKPT   quint8(1)
 #define VER_WPT_T   quint8(1)
+#define VER_GC_T    quint8(1)
+#define VER_GCLOG_T quint8(1)
 
 #define MAGIC_SIZE  10
 #define MAGIC_TRK   "QMTrk     "
@@ -107,6 +109,103 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::wpt_t& wpt)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CGisItemWpt::geocachelog_t& log)
+{
+    stream << VER_GCLOG_T;
+    stream << log.id;
+    stream << log.date;
+    stream << log.type;
+    stream << log.finderId;
+    stream << log.finder;
+    stream << quint8(log.textIsHtml);
+    stream << log.text;
+
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocachelog_t& log)
+{
+    quint8 version, tmp8;
+
+    stream >> version;
+    stream >> log.id;
+    stream >> log.date;
+    stream >> log.type;
+    stream >> log.finderId;
+    stream >> log.finder;
+    stream >> tmp8;
+    log.textIsHtml = tmp8;
+    stream >> log.text;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const CGisItemWpt::geocache_t& geocache)
+{
+    stream << VER_GC_T;
+    stream << quint8(geocache.hasData);
+    if(geocache.hasData)
+    {
+        stream << geocache.id;
+        stream << quint8(geocache.available);
+        stream << quint8(geocache.archived);
+        stream << geocache.difficulty;
+        stream << geocache.terrain;
+        stream << geocache.status;
+        stream << geocache.name;
+        stream << geocache.owner;
+        stream << geocache.ownerId;
+        stream << geocache.type;
+        stream << geocache.container;
+        stream << quint8(geocache.shortDescIsHtml);
+        stream << geocache.shortDesc;
+        stream << quint8(geocache.longDescIsHtml);
+        stream << geocache.longDesc;
+        stream << geocache.hint;
+        stream << geocache.country;
+        stream << geocache.state;
+        stream << geocache.locale;
+        stream << geocache.logs;
+    }
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
+{
+    quint8 version, tmp8;
+
+    stream >> version;
+    stream >> tmp8;
+    geocache.hasData = tmp8;
+    if(geocache.hasData)
+    {
+        stream >> geocache.id;
+        stream >> tmp8;
+        geocache.available = tmp8;
+        stream >> tmp8;
+        geocache.archived = tmp8;
+        stream >> geocache.difficulty;
+        stream >> geocache.terrain;
+        stream >> geocache.status;
+        stream >> geocache.name;
+        stream >> geocache.owner;
+        stream >> geocache.ownerId;
+        stream >> geocache.type;
+        stream >> geocache.container;
+        stream >> tmp8;
+        geocache.shortDescIsHtml = tmp8;
+        stream >> geocache.shortDesc;
+        stream >> tmp8;
+        geocache.longDescIsHtml = tmp8;
+        stream >> geocache.longDesc;
+        stream >> geocache.hint;
+        stream >> geocache.country;
+        stream >> geocache.state;
+        stream >> geocache.locale;
+        stream >> geocache.logs;
+    }
+    return stream;
+}
 
 QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkseg_t& seg)
 {
@@ -135,6 +234,8 @@ QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkpt_t& pt)
     stream >> (IGisItem::wpt_t&)pt;
     return stream;
 }
+
+// ---------------- main objects ---------------------------------
 
 QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
 {
@@ -207,11 +308,53 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 
 QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
 {
+    quint8      version;
+    QByteArray  buffer;
+    QIODevice * dev = stream.device();
+    qint64      pos = dev->pos();
+
+    char magic[10];
+    stream.readRawData(magic,MAGIC_SIZE);
+
+    if(strncmp(magic,MAGIC_WPT,MAGIC_SIZE))
+    {
+        dev->seek(pos);
+        return stream;
+    }
+
+    stream >> version;
+    stream >> buffer;
+    buffer = qUncompress(buffer);
+
+    QDataStream in(&buffer, QIODevice::ReadOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_3);
+
+    in >> key;
+    in >> flags;
+    in >> proximity;
+    in >> wpt;
+    in >> geocache;
+
     return stream;
 }
 
 QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
 {
+    QByteArray  buffer;
+    QDataStream out(&buffer, QIODevice::WriteOnly);
+    out.setByteOrder(QDataStream::LittleEndian);
+    out.setVersion(QDataStream::Qt_5_3);
+
+    out << key;
+    out << flags;
+    out << proximity;
+    out << wpt;
+    out << geocache;
+
+    stream.writeRawData(MAGIC_WPT, MAGIC_SIZE);
+    stream << VER_WPT;
+    stream << qCompress(buffer,9);
 
     return stream;
 }

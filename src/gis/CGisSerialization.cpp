@@ -371,12 +371,73 @@ QDataStream& CGisItemRte::operator>>(QDataStream& stream)
 }
 
 QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
-{
+{    
+    quint8      version, tmp8;
+    QByteArray  buffer;
+    QIODevice * dev = stream.device();
+    qint64      pos = dev->pos();
+
+    char magic[10];
+    stream.readRawData(magic,MAGIC_SIZE);
+
+    if(strncmp(magic,MAGIC_AREA,MAGIC_SIZE))
+    {
+        dev->seek(pos);
+        return stream;
+    }
+
+    stream >> version;
+    stream >> buffer;
+    buffer = qUncompress(buffer);
+
+    QDataStream in(&buffer, QIODevice::ReadOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_3);
+
+    in >> key;
+    in >> flags;
+    in >> area.name;
+    in >> area.cmt;
+    in >> area.desc;
+    in >> area.src;
+    in >> area.links;
+    in >> area.number;
+    in >> area.type;
+    in >> area.pts;
+    in >> area.color;
+    in >> area.width;
+    in >> area.style;
+    in >> tmp8;
+    area.opacity = tmp8;
+
     return stream;
 }
 
 QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream)
 {
+    QByteArray  buffer;
+    QDataStream out(&buffer, QIODevice::WriteOnly);
+    out.setByteOrder(QDataStream::LittleEndian);
+    out.setVersion(QDataStream::Qt_5_3);
+
+    out << key;
+    out << flags;
+    out << area.name;
+    out << area.cmt;
+    out << area.desc;
+    out << area.src;
+    out << area.links;
+    out << area.number;
+    out << area.type;
+    out << area.pts;
+    out << area.color;
+    out << area.width;
+    out << area.style;
+    out << quint8(area.opacity);
+
+    stream.writeRawData(MAGIC_AREA, MAGIC_SIZE);
+    stream << VER_AREA;
+    stream << qCompress(buffer,9);
 
     return stream;
 }

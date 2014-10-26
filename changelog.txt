@@ -1,3 +1,4 @@
+V 0.7.0
 * Add Google GIS search
 * Add support for TMS maps
 * Snap to line for track and area edit

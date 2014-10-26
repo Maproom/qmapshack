@@ -327,13 +327,13 @@ void CGisItemWpt::setPosition(const QPointF& pos)
 void CGisItemWpt::setElevation(qint32 val)
 {
     wpt.ele = val;
-    changed(QObject::tr("Changed elevation"),"://icons/48x48/EditText.png");
+    changed(QObject::tr("Changed elevation"),"://icons/48x48/SetEle.png");
 }
 
 void CGisItemWpt::setProximity(qreal val)
 {
     proximity = val;
-    changed(QObject::tr("Changed proximity"),"://icons/48x48/EditText.png");
+    changed(QObject::tr("Changed proximity"),"://icons/48x48/WptProx.png");
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -352,13 +352,13 @@ void CGisItemWpt::setIcon(const QString& name)
 void CGisItemWpt::setComment(const QString& str)
 {
     wpt.cmt = str;
-    changed(QObject::tr("Changed comment"), "://icons/48x48/EditDetails.png");
+    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setDescription(const QString& str)
 {
     wpt.desc = str;
-    changed(QObject::tr("Changed description"), "://icons/48x48/EditDetails.png");
+    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::save(QDomNode& gpx)

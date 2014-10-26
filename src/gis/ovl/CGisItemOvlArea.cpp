@@ -502,13 +502,13 @@ void CGisItemOvlArea::setWidth(qint32 w)
 void CGisItemOvlArea::setStyle(qint32 s)
 {
     area.style = s;
-    changed(QObject::tr("Changed fill pattern."), "://icons/48x48/EditDetails.png");
+    changed(QObject::tr("Changed fill pattern."), "://icons/48x48/Pattern.png");
 }
 
 void CGisItemOvlArea::setOpacity(bool yes)
 {
     area.opacity = yes;
-    changed(QObject::tr("Changed opacity."), "://icons/48x48/EditDetails.png");
+    changed(QObject::tr("Changed opacity."), "://icons/48x48/Opacity.png");
 }
 
 void CGisItemOvlArea::setComment(const QString& str)
@@ -532,7 +532,7 @@ void CGisItemOvlArea::setColor(int idx)
         return;
     }
     setColor(lineColors[idx]);
-    changed(QObject::tr("Changed color"), "icons/48x48/SelectColor.png");
+    changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
 }
 
 void CGisItemOvlArea::setColor(const QColor& c)

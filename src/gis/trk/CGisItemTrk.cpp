@@ -250,7 +250,7 @@ void CGisItemTrk::setData(const QPolygonF &l)
     setText(1,"*");
     setToolTip(0, getInfo());
     parent()->setText(1,"*");    
-    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."), "icons/48x48/LineMove.png");
+    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
 }
 
 void CGisItemTrk::getData(QPolygonF &l)

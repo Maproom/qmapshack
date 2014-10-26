@@ -34,6 +34,8 @@ class CGisItemRte : public IGisItem, public IGisLine
         CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx);
         virtual ~CGisItemRte();
 
+        QDataStream& operator<<(QDataStream& stream);
+        QDataStream& operator>>(QDataStream& stream);
 
         const QString& getName(){return rte.name;}
         QString getInfo();

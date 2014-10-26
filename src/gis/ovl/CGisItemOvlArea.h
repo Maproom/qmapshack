@@ -40,6 +40,9 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
         virtual ~CGisItemOvlArea();
 
+        QDataStream& operator<<(QDataStream& stream);
+        QDataStream& operator>>(QDataStream& stream);
+
         const QString& getName();
         int getColorIdx(){return colorIdx;}
         QString getInfo();

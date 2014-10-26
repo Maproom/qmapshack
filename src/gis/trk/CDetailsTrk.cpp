@@ -238,15 +238,7 @@ void CDetailsTrk::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
 
-
-    if(!trk.getHistory().isEmpty())
-    {
-        textHistory->clear();
-        foreach(const QString& entry, trk.getHistory())
-        {
-            textHistory->append(entry);
-        }
-    }
+    listHistory->setupHistory(trk.getHistory());
 }
 
 void CDetailsTrk::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)

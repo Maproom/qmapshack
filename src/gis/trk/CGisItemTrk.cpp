@@ -151,6 +151,7 @@ CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const 
     genKey();
 
     project->setText(1,"*");
+    setupHistory();
 }
 
 /// used to create a copy of track with new parent
@@ -169,6 +170,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     key.clear();
     genKey();
     project->setText(1,"*");
+    setupHistory();
 }
 
 /// usd to create a track from a line of coordinates
@@ -190,6 +192,7 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
     setToolTip(0, getInfo());
     genKey();
     project->setText(1,"*");
+    setupHistory();
 }
 
 /// used to create track from GPX file
@@ -208,18 +211,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setToolTip(0, getInfo());
     genKey();
 
-//    QFile file(trk.name + ".dat");
-//    file.open(QIODevice::WriteOnly);
-//    QDataStream stream(&file);
-//    *this >> stream;
-//    file.close();
-
-//    if(file.open(QIODevice::ReadOnly))
-//    {
-//        QDataStream stream(&file);
-//        *this << stream;
-//        file.close();
-//    }
+    setupHistory();
 }
 
 CGisItemTrk::~CGisItemTrk()
@@ -258,7 +250,7 @@ void CGisItemTrk::setData(const QPolygonF &l)
     setText(1,"*");
     setToolTip(0, getInfo());
     parent()->setText(1,"*");    
-    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."));
+    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."), "icons/48x48/LineMove.png");
 }
 
 void CGisItemTrk::getData(QPolygonF &l)
@@ -1048,10 +1040,8 @@ void CGisItemTrk::hideSelectedPoints()
     }
     mouseClickFocus = 0;
     mouseMoveFocus  = 0;
-    deriveSecondaryData();
-    setToolTip(0, getInfo());
-    setText(1,"*");
-    parent()->setText(1,"*");
+    deriveSecondaryData();    
+    changed(QObject::tr("Hide points."), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::showSelectedPoints()
@@ -1085,9 +1075,7 @@ void CGisItemTrk::showSelectedPoints()
     mouseClickFocus = 0;
     mouseMoveFocus  = 0;
     deriveSecondaryData();
-    setToolTip(0, getInfo());
-    setText(1,"*");
-    parent()->setText(1,"*");
+    changed(QObject::tr("Show points."), "://icons/48x48/PointShow.png");
 }
 
 void CGisItemTrk::copySelectedPoints()
@@ -1375,19 +1363,19 @@ void CGisItemTrk::setName(const QString& str)
 {
     setText(0, str);
     trk.name = str;
-    changed(QObject::tr("Changed name"));
+    changed(QObject::tr("Changed name"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemTrk::setComment(const QString& str)
 {
     trk.cmt = str;
-    changed(QObject::tr("Changed comment"));
+    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemTrk::setDescription(const QString& str)
 {
     trk.desc = str;
-    changed(QObject::tr("Changed description"));
+    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemTrk::setColor(int idx)
@@ -1398,7 +1386,7 @@ void CGisItemTrk::setColor(int idx)
         return;
     }
     setColor(lineColors[idx]);
-    changed(QObject::tr("Changed color"));
+    changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
 }
 
 void CGisItemTrk::setColor(const QColor& c)

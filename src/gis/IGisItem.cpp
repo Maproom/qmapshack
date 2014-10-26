@@ -139,7 +139,7 @@ IGisItem::~IGisItem()
 
 }
 
-void IGisItem::changed(const QString &what)
+void IGisItem::changed(const QString &what, const QString &icon)
 {
     setText(1,"*");
     setToolTip(0,getInfo());
@@ -160,7 +160,41 @@ void IGisItem::changed(const QString &what)
         flags |= eFlagTainted;
     }
 
-    history << QString("%1: %2").arg(QDateTime::currentDateTimeUtc().toString()).arg(what);
+    history << history_t();
+    history_t& event = history.last();
+    event.time      = QDateTime::currentDateTimeUtc();
+    event.comment   = what;
+    event.icon      = icon;
+
+    QDataStream stream(&event.data, QIODevice::WriteOnly);
+    stream.setByteOrder(QDataStream::LittleEndian);
+    stream.setVersion(QDataStream::Qt_5_3);
+
+    *this >> stream;
+}
+
+void IGisItem::setupHistory()
+{
+    // if history is empty setup an initial item
+    if(history.isEmpty())
+    {
+        history << history_t();
+        history_t& event = history.last();
+        event.time      = QDateTime::currentDateTimeUtc();
+        event.comment   = QObject::tr("Initial version.");
+        event.icon      = "://icons/48x48/Start.png";
+    }
+
+    history_t& event = history.last();
+    // if the last item has no data fill it with the current data
+    if(event.data.isEmpty())
+    {
+        QDataStream stream(&event.data, QIODevice::WriteOnly);
+        stream.setByteOrder(QDataStream::LittleEndian);
+        stream.setVersion(QDataStream::Qt_5_3);
+
+        *this >> stream;
+    }
 }
 
 bool IGisItem::isReadOnly()

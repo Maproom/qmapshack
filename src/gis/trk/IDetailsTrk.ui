@@ -395,7 +395,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QTextBrowser" name="textHistory"/>
+        <widget class="CHistoryListWidget" name="listHistory"/>
        </item>
       </layout>
      </widget>
@@ -427,6 +427,11 @@
    <extends>QWidget</extends>
    <header>plot/CPlotTrack.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CHistoryListWidget</class>
+   <extends>QListWidget</extends>
+   <header>helpers/CHistoryListWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

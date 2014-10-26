@@ -24,6 +24,7 @@ set( SRCS
     helpers/CWptIconDialog.cpp
     helpers/CTextEditWidget.cpp
     helpers/CSelectProjectDialog.cpp
+    helpers/CHistoryListWidget.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -132,6 +133,7 @@ set( HDRS
     helpers/CWptIconDialog.h
     helpers/CTextEditWidget.h
     helpers/CSelectProjectDialog.h
+    helpers/CHistoryListWidget.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h

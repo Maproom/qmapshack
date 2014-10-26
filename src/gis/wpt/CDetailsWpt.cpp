@@ -139,22 +139,7 @@ void CDetailsWpt::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
 
-
-
-    if(!wpt.getHistory().isEmpty())
-    {
-        textHistory->clear();
-        foreach(const QString& entry, wpt.getHistory())
-        {
-            textHistory->append(entry);
-        }
-        textHistory->show();
-    }
-    else
-    {
-        textHistory->hide();
-    }
-
+    listHistory->setupHistory(wpt.getHistory());
 
     toolLock->setChecked(isReadOnly);
 }

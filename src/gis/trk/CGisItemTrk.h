@@ -57,23 +57,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         CGisItemTrk(const QDomNode &xml, IGisProject *project);
         virtual ~CGisItemTrk();
 
-        /**
-           @brief Serialize object out of a QDataStream
-
-           See CGisSerialization.cpp for implementation
-
-           @param stream the binary data stream
-           @return The stream object.
-        */
         QDataStream& operator<<(QDataStream& stream);
-        /**
-           @brief Serialize object into a QDataStream
-
-           See CGisSerialization.cpp for implementation
-
-           @param stream the binary data stream
-           @return The stream object.
-        */
         QDataStream& operator>>(QDataStream& stream);
 
         const QString& getName(){return trk.name;}

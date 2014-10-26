@@ -128,6 +128,7 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGi
     setToolTip(0, getInfo());
     genKey();
     project->setText(1,"*");
+    setupHistory();
 }
 
 CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx)
@@ -143,6 +144,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
     key.clear();
     genKey();
     project->setText(1,"*");
+    setupHistory();
 }
 
 CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
@@ -157,7 +159,7 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     setText(0, area.name);
     setToolTip(0, getInfo());
     genKey();
-
+    setupHistory();
 }
 
 CGisItemOvlArea::~CGisItemOvlArea()
@@ -167,7 +169,6 @@ CGisItemOvlArea::~CGisItemOvlArea()
     {
         keyUserFocus.clear();
     }
-
 }
 
 void CGisItemOvlArea::genKey()
@@ -482,44 +483,44 @@ void CGisItemOvlArea::setData(const QPolygonF& line)
     setText(1,"*");
     setToolTip(0, getInfo());
     parent()->setText(1,"*");
-    changed(QObject::tr("Changed area shape."));
+    changed(QObject::tr("Changed area shape."), "://icons/48x48/AreaMove.png");
 }
 
 void CGisItemOvlArea::setName(const QString& str)
 {
     setText(0, str);
     area.name = str;
-    changed(QObject::tr("Changed name."));
+    changed(QObject::tr("Changed name."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setWidth(qint32 w)
 {
     area.width = w;
-    changed(QObject::tr("Changed border width."));
+    changed(QObject::tr("Changed border width."), "://icons/48x48/TextBold.png");
 }
 
 void CGisItemOvlArea::setStyle(qint32 s)
 {
     area.style = s;
-    changed(QObject::tr("Changed fill pattern."));
+    changed(QObject::tr("Changed fill pattern."), "://icons/48x48/EditDetails.png");
 }
 
 void CGisItemOvlArea::setOpacity(bool yes)
 {
     area.opacity = yes;
-    changed(QObject::tr("Changed opacity."));
+    changed(QObject::tr("Changed opacity."), "://icons/48x48/EditDetails.png");
 }
 
 void CGisItemOvlArea::setComment(const QString& str)
 {
     area.cmt = str;
-    changed(QObject::tr("Changed comment."));
+    changed(QObject::tr("Changed comment."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setDescription(const QString& str)
 {
     area.desc = str;
-    changed(QObject::tr("Changed description."));
+    changed(QObject::tr("Changed description."), "://icons/48x48/EditText.png");
 }
 
 
@@ -531,7 +532,7 @@ void CGisItemOvlArea::setColor(int idx)
         return;
     }
     setColor(lineColors[idx]);
-    changed(QObject::tr("Changed color"));
+    changed(QObject::tr("Changed color"), "icons/48x48/SelectColor.png");
 }
 
 void CGisItemOvlArea::setColor(const QColor& c)

@@ -65,6 +65,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     genKey();
 
     project->setText(1,"*");
+    setupHistory();
 }
 
 /// used to move a copy of waypoint
@@ -92,6 +93,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     genKey();
 
     project->setText(1,"*");
+    setupHistory();
 }
 
 /// used to create a copy of waypoint with new parent
@@ -110,6 +112,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     genKey();
 
     project->setText(1,"*");
+    setupHistory();
 }
 
 /// used to create waypoint from GPX file
@@ -150,6 +153,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     setIcon();
     setToolTip(0, getInfo());
     genKey();
+    setupHistory();
 }
 
 CGisItemWpt::~CGisItemWpt()
@@ -310,26 +314,26 @@ void CGisItemWpt::setName(const QString& str)
     setText(0, str);
     lastName = str;
     wpt.name = str;
-    changed(QObject::tr("Changed name"));
+    changed(QObject::tr("Changed name"),"://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setPosition(const QPointF& pos)
 {
     wpt.lon = pos.x();
     wpt.lat = pos.y();
-    changed(QObject::tr("Changed position"));
+    changed(QObject::tr("Changed position"),"://icons/48x48/WptMove.png");
 }
 
 void CGisItemWpt::setElevation(qint32 val)
 {
     wpt.ele = val;
-    changed(QObject::tr("Changed elevation"));
+    changed(QObject::tr("Changed elevation"),"://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setProximity(qreal val)
 {
     proximity = val;
-    changed(QObject::tr("Changed proximity"));
+    changed(QObject::tr("Changed proximity"),"://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -337,19 +341,24 @@ void CGisItemWpt::setIcon(const QString& name)
     lastIcon = name;
     wpt.sym  = name;
     setIcon();
-    changed(QObject::tr("Changed icon"));
+
+    QPointF focus;
+    QString path;
+    getWptIconByName(name, focus, &path);
+
+    changed(QObject::tr("Changed icon"), path);
 }
 
 void CGisItemWpt::setComment(const QString& str)
 {
     wpt.cmt = str;
-    changed(QObject::tr("Changed comment"));
+    changed(QObject::tr("Changed comment"), "://icons/48x48/EditDetails.png");
 }
 
 void CGisItemWpt::setDescription(const QString& str)
 {
     wpt.desc = str;
-    changed(QObject::tr("Changed description"));
+    changed(QObject::tr("Changed description"), "://icons/48x48/EditDetails.png");
 }
 
 void CGisItemWpt::save(QDomNode& gpx)

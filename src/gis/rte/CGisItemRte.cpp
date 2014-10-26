@@ -48,6 +48,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
     genKey();
 
     project->setText(1,"*");
+    setupHistory();
 }
 
 /// used to create route from GPX file
@@ -63,6 +64,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     setIcon(0, icon);
     setToolTip(0,getInfo());
     genKey();
+    setupHistory();
 }
 
 

@@ -189,14 +189,7 @@ void CDetailsOvlArea::setupGui()
         labelTainted->hide();
     }
 
-    textHistory->clear();
-    if(!area.getHistory().isEmpty())
-    {
-        foreach(const QString& entry, area.getHistory())
-        {
-            textHistory->append(entry);
-        }
-    }
+    listHistory->setupHistory(area.getHistory());
 
     toolLock->setChecked(isReadOnly);
 

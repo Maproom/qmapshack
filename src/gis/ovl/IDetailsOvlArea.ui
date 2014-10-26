@@ -231,7 +231,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QTextBrowser" name="textHistory"/>
+        <widget class="CHistoryListWidget" name="listHistory"/>
        </item>
       </layout>
      </widget>
@@ -239,6 +239,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CHistoryListWidget</class>
+   <extends>QListWidget</extends>
+   <header>helpers/CHistoryListWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

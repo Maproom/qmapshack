@@ -102,6 +102,9 @@ class CGisItemWpt : public IGisItem
         CGisItemWpt(const QDomNode& xml, IGisProject * project);
         virtual ~CGisItemWpt();
 
+        QDataStream& operator<<(QDataStream& stream);
+        QDataStream& operator>>(QDataStream& stream);
+
         void setName(const QString& str);
         void setPosition(const QPointF& pos);
         void setElevation(qint32 val);

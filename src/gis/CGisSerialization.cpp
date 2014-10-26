@@ -18,6 +18,9 @@
 
 #include "gis/CGisSerialization.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 
 #include <QtWidgets>
 
@@ -198,6 +201,39 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.segs;
 
     deriveSecondaryData();
+
+    return stream;
+}
+
+QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
+{
+    return stream;
+}
+
+QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
+{
+
+    return stream;
+}
+
+QDataStream& CGisItemRte::operator<<(QDataStream& stream)
+{
+    return stream;
+}
+
+QDataStream& CGisItemRte::operator>>(QDataStream& stream)
+{
+
+    return stream;
+}
+
+QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
+{
+    return stream;
+}
+
+QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream)
+{
 
     return stream;
 }

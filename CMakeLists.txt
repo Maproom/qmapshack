@@ -5,7 +5,7 @@ project(QMapShack)
 # has to be removed later on
 
 if(UNIX)
-set(CMAKE_PREFIX_PATH /opt/Qt/5.3/gcc_64)
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /opt/Qt/5.3/gcc_64)
 endif(UNIX)
 
 
@@ -13,7 +13,7 @@ if(WIN32)
 set(QT_DEV_PATH   "" CACHE PATH "Path to directory containing Qt5 include and lib, e.g. C:\\Qt5\\5.3\\msvc2013_64")
 set(GDAL_DEV_PATH "" CACHE PATH "Path to directory containing GDAL include and lib, e.g. M:\\lib\\gdal")
 set(PROJ_DEV_PATH "" CACHE PATH "Path to directory containing PROJ.4 include and lib, e.g. M:\\lib\\PROJ")
-set(CMAKE_PREFIX_PATH ${QT_DEV_PATH})
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT_DEV_PATH})
 endif(WIN32)
 
 

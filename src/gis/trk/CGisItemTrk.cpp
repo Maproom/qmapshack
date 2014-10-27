@@ -1620,3 +1620,12 @@ void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot
         default:;
     }
 }
+
+void CGisItemTrk::changed(const QString& what, const QString& icon)
+{
+    IGisItem::changed(what, icon);
+    if(!dlgDetails.isNull())
+    {
+        dlgDetails->setupGui();
+    }
+}

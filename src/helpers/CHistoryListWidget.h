@@ -24,11 +24,21 @@
 
 class CHistoryListWidget : public QListWidget
 {
+    Q_OBJECT
     public:
         CHistoryListWidget(QWidget * parent);
         virtual ~CHistoryListWidget();
 
-        void setupHistory(const QList<IGisItem::history_t>& history);
+        void setupHistory(IGisItem &gisItem);
+
+    signals:
+        void sigChanged();
+
+    private slots:
+        void slotSelectionChanged();
+
+    private:
+        QString key;
 };
 
 #endif //CHISTORYLISTWIDGET_H

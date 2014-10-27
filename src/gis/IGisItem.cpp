@@ -160,8 +160,15 @@ void IGisItem::changed(const QString &what, const QString &icon)
         flags |= eFlagTainted;
     }
 
-    history << history_t();
-    history_t& event = history.last();
+    // forget all history entries after the current entry
+    for(int i = history.events.size() - 1; i > history.histIdxCurrent; i--)
+    {
+        history.events.pop_back();
+    }
+
+    // append history by new entry
+    history.events << history_event_t();
+    history_event_t& event = history.events.last();
     event.time      = QDateTime::currentDateTimeUtc();
     event.comment   = what;
     event.icon      = icon;
@@ -171,30 +178,75 @@ void IGisItem::changed(const QString &what, const QString &icon)
     stream.setVersion(QDataStream::Qt_5_3);
 
     *this >> stream;
+
+    history.histIdxCurrent = history.events.size() - 1;
 }
 
 void IGisItem::setupHistory()
-{
+{    
+    history.histIdxInitial = -1;
+    history.histIdxCurrent = -1;
+
     // if history is empty setup an initial item
-    if(history.isEmpty())
+    if(history.events.isEmpty())
     {
-        history << history_t();
-        history_t& event = history.last();
+        history.events << history_event_t();
+        history_event_t& event = history.events.last();
         event.time      = QDateTime::currentDateTimeUtc();
         event.comment   = QObject::tr("Initial version.");
         event.icon      = "://icons/48x48/Start.png";
     }
 
-    history_t& event = history.last();
-    // if the last item has no data fill it with the current data
-    if(event.data.isEmpty())
+    // search for the first item with data
+    for(int i = 0; i < history.events.size(); i++)
     {
+        if(!history.events[i].data.isEmpty())
+        {
+            history.histIdxInitial = i;
+            break;
+        }
+    }
+
+    // if no initial item can be found fill the last item with data
+    // and make it the initial item
+    if(history.histIdxInitial == -1)
+    {
+        history_event_t& event = history.events.last();
+
         QDataStream stream(&event.data, QIODevice::WriteOnly);
         stream.setByteOrder(QDataStream::LittleEndian);
         stream.setVersion(QDataStream::Qt_5_3);
-
         *this >> stream;
+
+        history.histIdxInitial = history.events.size() - 1;
     }
+
+    history.histIdxCurrent = history.events.size() - 1;
+}
+
+void IGisItem::loadHistoryEntry(int idx)
+{
+    // test for bad index
+    if((idx >= history.events.size()) || (idx < 0))
+    {
+        return;
+    }
+
+    history_event_t& event = history.events[idx];
+
+    // test for no data
+    if(event.data.isEmpty())
+    {
+        return;
+    }
+
+    // restore item from history entry
+    QDataStream stream(&event.data, QIODevice::ReadOnly);
+    stream.setByteOrder(QDataStream::LittleEndian);
+    stream.setVersion(QDataStream::Qt_5_3);
+    *this << stream;
+
+    history.histIdxCurrent = idx;
 }
 
 bool IGisItem::isReadOnly()

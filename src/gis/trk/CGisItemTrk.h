@@ -70,13 +70,14 @@ class CGisItemTrk : public IGisItem, public IGisLine
         const QString& getComment(){return trk.cmt;}
         const QString& getDescription(){return trk.desc;}
         const QList<link_t>& getLinks(){return trk.links;}
+        void getData(QPolygonF& l);
 
         void setName(const QString& str);
         void setColor(int idx);
         void setDrawMode(drawmode_e mode){drawMode = mode;}
         void setComment(const QString& str);
         void setDescription(const QString& str);
-
+        void setData(const QPolygonF& l);
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
@@ -89,8 +90,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void drawRange(QPainter& p);
         void save(QDomNode& gpx);
 
-        void setData(const QPolygonF& l);
-        void getData(QPolygonF& l);
 
         /**
            @brief Switch user focus on and off.
@@ -219,15 +218,62 @@ class CGisItemTrk : public IGisItem, public IGisLine
         static const QString bulletColors[TRK_N_COLORS];
 
     private:        
-
         void genKey();
+        /**
+           @brief Read track data from section in GPX file
+           @param xml   The XML <trk> section
+           @param trk   The track structure to fill
+        */
         void readTrk(const QDomNode& xml, trk_t& trk);
+        /**
+           @brief Derive secondary data from the track data
+
+           This has to be called each time the track data is changed.
+        */
+        void deriveSecondaryData();
+        /**
+           @brief Try to get access Nth visible point matching the idx
+
+           This will iterate over all segments and count the visible points. If the
+           count matches idx a pointer to the track point is passed
+
+           @param idx The index into all visible points
+           @return A null pointer of no point is found.
+        */
+        const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
+
+        /**
+           @brief Tell the point of focus to all plots and the detail dialog
+
+           @param pt        A pointer to the point itself
+           @param mode      The reason for the focus
+           @param initiator A pointer to an IPlot object that has set the point of focus. Can be 0.
+        */
+        void publishMouseFocus(const trkpt_t * pt, focusmode_e mode, IPlot *initiator);
+        /**
+           @brief Replace all trackpoints by the coordinates stored in the polyline
+
+           The DEM layer will be queried for elevation data. All other data is lost.
+
+           @param l     A polyline with coordinates [rad]
+         */
+        void readLine(const QPolygonF &l);        
+        /**
+           @brief Overide IGisItem::changed() method
+
+           As the CDetailsTrk is no modal dialog that blocks the GUI from any other input the track
+           can be changed while the widget is visible. Therfore it needs some feedback to update the
+           CDetailsTrk widget. Usualy this would be a signal. However CGisItemTrk is a QTreeWidgetItem
+           and therefor no QObject. Fortunately there the dlgDetails pointer. So CDetailsTrk::setupGui()
+           can be called from changed()
+
+           @param what  The reason string
+           @param icon  An icon string
+        */
+        void changed(const QString& what, const QString& icon);
+
         void setColor(const QColor& c);
         void setIcon(const QString& c);
-        void deriveSecondaryData();
-        const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
-        void publishMouseFocus(const trkpt_t * pt, focusmode_e mode, IPlot *initiator);
-        void readLine(const QPolygonF &l);        
 
     public:
         struct trkpt_t : public wpt_t
@@ -268,7 +314,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
             qint32 shdwEle;
             /// shadow timestamp
             QDateTime shdwTime;
-
 
             /// the distance to the last point
             qreal deltaDistance;
@@ -314,6 +359,10 @@ class CGisItemTrk : public IGisItem, public IGisLine
             QString color;
         };
 
+        /**
+           @brief Read only access to the track data.
+           @return
+        */
         const trk_t& getTrackData() const{return trk;}
 
     private:

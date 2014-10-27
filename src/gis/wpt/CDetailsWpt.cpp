@@ -32,6 +32,7 @@
 CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     : QDialog(parent)
     , wpt(wpt)
+    , originator(false)
 {
     setupUi(this);
     setupGui();
@@ -42,6 +43,8 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
+
+    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 }
 
 CDetailsWpt::~CDetailsWpt()
@@ -61,6 +64,12 @@ QString CDetailsWpt::toLink(bool isReadOnly, const QString& href, const QString&
 
 void CDetailsWpt::setupGui()
 {
+    if(originator)
+    {
+        return;
+    }
+    originator = true;
+
     setWindowTitle(wpt.getName());
 
     QString val, unit;
@@ -139,9 +148,11 @@ void CDetailsWpt::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
 
-    listHistory->setupHistory(wpt.getHistory());
-
     toolLock->setChecked(isReadOnly);
+
+    listHistory->setupHistory(wpt);
+
+    originator = false;
 }
 
 void CDetailsWpt::slotLinkActivated(const QString& link)

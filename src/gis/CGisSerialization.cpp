@@ -296,12 +296,14 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.number;
     in >> trk.type;
     in >> trk.color;
-    setColor(trk.color);
 
     trk.segs.clear();
     in >> trk.segs;
 
     deriveSecondaryData();
+    setColor(trk.color);
+    setText(0, trk.name);
+    setToolTip(0, getInfo());
 
     return stream;
 }
@@ -335,6 +337,10 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     in >> proximity;
     in >> wpt;
     in >> geocache;
+
+    setIcon();
+    setText(0, wpt.name);
+    setToolTip(0, getInfo());
 
     return stream;
 }
@@ -409,6 +415,10 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     in >> area.style;
     in >> tmp8;
     area.opacity = tmp8;
+
+    setColor(str2color(area.color));
+    setText(0, area.name);
+    setToolTip(0, getInfo());
 
     return stream;
 }

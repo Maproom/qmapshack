@@ -39,10 +39,9 @@ class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
         void slotChangeReadOnlyMode(bool on);
         void slotLinkActivated(const QUrl& url);
         void slotLinkActivated(const QString& link);
-
-
-    private:
         void setupGui();
+
+    private:        
         enum columns_t
         {
             eColNum
@@ -53,6 +52,8 @@ class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
         QString toLink(bool isReadOnly, const QString& href, const QString& str);
 
         CGisItemOvlArea& area;
+
+        bool originator;
 };
 
 #endif //CDETAILSOVLAREA_H

@@ -17,13 +17,14 @@
 **********************************************************************************************/
 
 #include "helpers/CHistoryListWidget.h"
+#include "gis/CGisWidget.h"
 
 #include <QtWidgets>
 
 CHistoryListWidget::CHistoryListWidget(QWidget *parent)
     : QListWidget(parent)
 {
-
+    connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
 }
 
 CHistoryListWidget::~CHistoryListWidget()
@@ -31,24 +32,51 @@ CHistoryListWidget::~CHistoryListWidget()
 
 }
 
-void CHistoryListWidget::setupHistory(const QList<IGisItem::history_t>& history)
+void CHistoryListWidget::setupHistory(IGisItem& gisItem)
 {
+    blockSignals(true);
     clear();
 
-    foreach(const IGisItem::history_t& entry, history)
+    key = gisItem.getKey();
+
+    const IGisItem::history_t& history = gisItem.getHistory();
+
+    //foreach(const IGisItem::history_event_t& event, history.events)
+    for(int i = 0; i < history.events.size(); i++)
     {
+        const IGisItem::history_event_t& event = history.events[i];
+
         QString str;
         QListWidgetItem * item = new QListWidgetItem(this);
 
-        str  = entry.time.toString();
+        str  = event.time.toString();
         str += "\n";
-        str += entry.comment;
+        str += event.comment;
 
         item->setText(str);
-        item->setIcon(QIcon(entry.icon));
-        if(entry.data.isEmpty())
+        item->setIcon(QIcon(event.icon));
+        if(event.data.isEmpty())
         {
             item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
         }
     }
+
+    if(history.histIdxCurrent < count())
+    {
+        setCurrentItem(item(history.histIdxCurrent));
+    }
+    blockSignals(false);
+}
+
+void CHistoryListWidget::slotSelectionChanged()
+{
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if(item == 0)
+    {
+        return;
+    }
+
+    item->loadHistoryEntry(currentRow());
+
+    emit sigChanged();
 }

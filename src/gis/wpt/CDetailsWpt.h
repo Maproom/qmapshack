@@ -36,11 +36,13 @@ class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
         void slotLinkActivated(const QUrl& url);
         void slotChangeIcon();
         void slotChangeReadOnlyMode(bool on);
-
-    private:
         void setupGui();
+
+    private:        
         QString toLink(bool isReadOnly, const QString& href, const QString& str);
         CGisItemWpt& wpt;
+
+        bool originator;
 };
 
 #endif //CDETAILSWPT_H

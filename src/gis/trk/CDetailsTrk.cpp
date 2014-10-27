@@ -28,9 +28,9 @@
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     : QWidget(parent)
     , trk(trk)
+    , originator(false)
 {
-    setupUi(this);
-    setupGui();
+    setupUi(this);    
 
     QPixmap icon(16,8);
     for(int i=0; i < TRK_N_COLORS; ++i)
@@ -39,13 +39,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         comboColor->addItem(icon,"",CGisItemTrk::lineColors[i]);
     }
 
-    lineName->setText(trk.getName());
-    comboColor->setCurrentIndex(trk.getColorIdx());
-
-    plotElevation->setTrack(&trk);
-    plotDistance->setTrack(&trk);
-    plotSpeed->setTrack(&trk);
-    plotTrack->setTrack(&trk);
+    setupGui();
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");
@@ -63,6 +57,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
     connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
+
+    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
     slotShowPlots();
 
@@ -90,9 +86,14 @@ QString CDetailsTrk::toLink(bool isReadOnly, const QString& href, const QString&
 
 
 void CDetailsTrk::setupGui()
-{
-    QString str, val, unit;
+{    
+    if(originator)
+    {
+        return;
+    }
+    originator = true;
 
+    QString str, val, unit;
     bool isReadOnly = trk.isReadOnly();
 
     if(trk.isTainted())
@@ -105,7 +106,8 @@ void CDetailsTrk::setupGui()
     }
 
     labelInfo->setText(trk.getInfo());
-    lineName->setEnabled(!isReadOnly);
+    lineName->setEnabled(!isReadOnly);    
+    comboColor->setCurrentIndex(trk.getColorIdx());
     comboColor->setEnabled(!isReadOnly);
     toolLock->setChecked(isReadOnly);
 
@@ -208,6 +210,8 @@ void CDetailsTrk::setupGui()
     treeWidget->addTopLevelItems(items);
     treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
 
+    lineName->setText(trk.getName());
+
     textCmtDesc->document()->clear();
 
     foreach(const IGisItem::link_t& link, trk.getLinks())
@@ -238,7 +242,14 @@ void CDetailsTrk::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
 
-    listHistory->setupHistory(trk.getHistory());
+    plotElevation->setTrack(&trk);
+    plotDistance->setTrack(&trk);
+    plotSpeed->setTrack(&trk);
+    plotTrack->setTrack(&trk);
+
+    listHistory->setupHistory(trk);
+
+    originator = false;
 }
 
 void CDetailsTrk::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)

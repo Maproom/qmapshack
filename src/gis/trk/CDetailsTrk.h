@@ -34,6 +34,9 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
         void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
         void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
 
+    public slots:
+        void setupGui();
+
     private slots:
         void slotShowPlots();
         void slotColorChanged(int idx);
@@ -45,7 +48,7 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
 
     private:
         QString toLink(bool isReadOnly, const QString& href, const QString& str);
-        void setupGui();
+
 
         enum columns_t
         {
@@ -69,6 +72,8 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
            track item will destroy this object on it's own destruction.
         */
         CGisItemTrk& trk;
+
+        bool originator;
 };
 
 #endif //CDETAILSTRK_H

@@ -27,6 +27,7 @@
 CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     : QDialog(parent)
     , area(area)
+    , originator(false)
 {
     setupUi(this);
 
@@ -63,6 +64,8 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+
+    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 }
 
 CDetailsOvlArea::~CDetailsOvlArea()
@@ -177,6 +180,12 @@ QString CDetailsOvlArea::toLink(bool isReadOnly, const QString& href, const QStr
 
 void CDetailsOvlArea::setupGui()
 {
+    if(originator)
+    {
+        return;
+    }
+    originator = true;
+
     bool isReadOnly = area.isReadOnly();
     setWindowTitle(area.getName());
 
@@ -189,9 +198,6 @@ void CDetailsOvlArea::setupGui()
         labelTainted->hide();
     }
 
-    listHistory->setupHistory(area.getHistory());
-
-    toolLock->setChecked(isReadOnly);
 
     labelName->setText(toLink(isReadOnly, "name", area.getName()));
 
@@ -257,6 +263,10 @@ void CDetailsOvlArea::setupGui()
     treeWidget->addTopLevelItems(items);
     treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
 
+    toolLock->setChecked(isReadOnly);
 
+    listHistory->setupHistory(area);
+
+    originator = false;
 }
 

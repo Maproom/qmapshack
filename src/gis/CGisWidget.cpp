@@ -188,7 +188,6 @@ void CGisWidget::delItemByKey(const QString& key)
     }
 
     IGisItem::mutexItems.unlock();
-
     emit sigChanged();
 }
 

@@ -41,13 +41,21 @@ class IGisItem : public QTreeWidgetItem
 {
 
     public:
-        struct history_t
+        struct history_event_t
         {
             QDateTime time;
             QString   icon;
             QString   comment;
             QByteArray data;
         };
+
+        struct history_t
+        {
+            qint32 histIdxInitial;
+            qint32 histIdxCurrent;
+            QList<history_event_t> events;
+        };
+
 
         struct link_t
         {
@@ -138,8 +146,6 @@ class IGisItem : public QTreeWidgetItem
         */
         virtual QString getInfo() = 0;
 
-        virtual const QList<history_t>& getHistory(){return history;}
-
         /**
             @brief Edit content of item.
 
@@ -227,6 +233,18 @@ class IGisItem : public QTreeWidgetItem
         */
         virtual QDataStream& operator>>(QDataStream& stream) = 0;
 
+        /**
+           @brief Get read access to history of changes
+
+           @return A reference to the history structure.
+        */
+        const history_t& getHistory() const {return history;}
+
+        /**
+           @brief Load a given state of chnage from the history
+           @param idx
+        */
+        void loadHistoryEntry(int idx);
 
         static QString removeHtml(const QString &str);
 
@@ -240,6 +258,8 @@ class IGisItem : public QTreeWidgetItem
         void writeWpt(QDomElement &xml, const wpt_t &wpt);
         /// gnerate a unique key from item's data
         virtual void genKey() = 0;
+        /// setup the history structure right after the creation of the item
+        void setupHistory();
         /// convert a color string from GPX to a QT color
         QColor str2color(const QString& name);
         /// convertr a QT color to a string to be used in a GPX file
@@ -249,15 +269,15 @@ class IGisItem : public QTreeWidgetItem
         /// ditribute arrows over a polyline
         void drawArrows(const QPolygonF &line, const QRectF &extViewport, QPainter& p);
         /// call when ever you make a change to the item's data
-        void changed(const QString& what, const QString& icon);
-
-        void setupHistory();
+        virtual void changed(const QString& what, const QString& icon);
 
         quint32 flags;
         QString key;
         QPixmap icon;
         QRectF boundingRect;
-        QList<history_t> history;
+
+        history_t history;
+
 
         static const color_t colorMap[];
 
@@ -411,7 +431,7 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        static inline void readXml(const QDomNode& xml, QList<history_t>& history)
+        static inline void readXml(const QDomNode& xml, history_t& history)
         {
             if(xml.namedItem("ql:history").isElement())
             {
@@ -422,13 +442,16 @@ class IGisItem : public QTreeWidgetItem
                 for(int n = 0; n < N; ++n)
                 {
                     const QDomNode& xmlEntry = xmlEntries.item(n);
-                    history_t entry;
+                    history_event_t entry;
                     readXml(xmlEntry, "ql:icon", entry.icon);
                     readXml(xmlEntry, "ql:time", entry.time);
                     readXml(xmlEntry, "ql:comment", entry.comment);
 
-                    history << entry;
+                    history.events << entry;
                 }
+
+                history.histIdxInitial = history.events.size() - 1;
+                history.histIdxCurrent = history.histIdxInitial;
             }
         }
 
@@ -529,19 +552,19 @@ class IGisItem : public QTreeWidgetItem
             }
         }
 
-        static inline void writeXml(QDomNode& xml, const QList<history_t>& history)
+        static inline void writeXml(QDomNode& xml, const history_t& history)
         {
-            if(!history.isEmpty())
+            if(!history.events.isEmpty())
             {
                 QDomElement xmlHistory = xml.ownerDocument().createElement("ql:history");
                 xml.appendChild(xmlHistory);
-                foreach(const history_t& entry, history)
+                foreach(const history_event_t& event, history.events)
                 {
                     QDomElement xmlEvent = xml.ownerDocument().createElement("ql:event");
                     xmlHistory.appendChild(xmlEvent);
-                    writeXml(xmlEvent,"ql:icon", entry.icon);
-                    writeXml(xmlEvent,"ql:time", entry.time);
-                    writeXml(xmlEvent,"ql:comment", entry.comment);
+                    writeXml(xmlEvent,"ql:icon", event.icon);
+                    writeXml(xmlEvent,"ql:time", event.time);
+                    writeXml(xmlEvent,"ql:comment", event.comment);
 
                 }
             }

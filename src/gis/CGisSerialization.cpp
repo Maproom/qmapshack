@@ -242,7 +242,7 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
     QByteArray  buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);
     out.setByteOrder(QDataStream::LittleEndian);
-    out.setVersion(QDataStream::Qt_5_3);
+    out.setVersion(QDataStream::Qt_5_2);
 
     out << key;
     out << flags;
@@ -284,7 +284,7 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 
     QDataStream in(&buffer, QIODevice::ReadOnly);
     in.setByteOrder(QDataStream::LittleEndian);
-    in.setVersion(QDataStream::Qt_5_3);
+    in.setVersion(QDataStream::Qt_5_2);
 
     in >> key;
     in >> flags;
@@ -330,7 +330,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
 
     QDataStream in(&buffer, QIODevice::ReadOnly);
     in.setByteOrder(QDataStream::LittleEndian);
-    in.setVersion(QDataStream::Qt_5_3);
+    in.setVersion(QDataStream::Qt_5_2);
 
     in >> key;
     in >> flags;
@@ -350,7 +350,7 @@ QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
     QByteArray  buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);
     out.setByteOrder(QDataStream::LittleEndian);
-    out.setVersion(QDataStream::Qt_5_3);
+    out.setVersion(QDataStream::Qt_5_2);
 
     out << key;
     out << flags;
@@ -398,7 +398,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
 
     QDataStream in(&buffer, QIODevice::ReadOnly);
     in.setByteOrder(QDataStream::LittleEndian);
-    in.setVersion(QDataStream::Qt_5_3);
+    in.setVersion(QDataStream::Qt_5_2);
 
     in >> key;
     in >> flags;
@@ -428,7 +428,7 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream)
     QByteArray  buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);
     out.setByteOrder(QDataStream::LittleEndian);
-    out.setVersion(QDataStream::Qt_5_3);
+    out.setVersion(QDataStream::Qt_5_2);
 
     out << key;
     out << flags;

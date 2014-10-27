@@ -175,7 +175,7 @@ void IGisItem::changed(const QString &what, const QString &icon)
 
     QDataStream stream(&event.data, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);
-    stream.setVersion(QDataStream::Qt_5_3);
+    stream.setVersion(QDataStream::Qt_5_2);
 
     *this >> stream;
 
@@ -215,7 +215,7 @@ void IGisItem::setupHistory()
 
         QDataStream stream(&event.data, QIODevice::WriteOnly);
         stream.setByteOrder(QDataStream::LittleEndian);
-        stream.setVersion(QDataStream::Qt_5_3);
+        stream.setVersion(QDataStream::Qt_5_2);
         *this >> stream;
 
         history.histIdxInitial = history.events.size() - 1;
@@ -243,7 +243,7 @@ void IGisItem::loadHistoryEntry(int idx)
     // restore item from history entry
     QDataStream stream(&event.data, QIODevice::ReadOnly);
     stream.setByteOrder(QDataStream::LittleEndian);
-    stream.setVersion(QDataStream::Qt_5_3);
+    stream.setVersion(QDataStream::Qt_5_2);
     *this << stream;
 
     history.histIdxCurrent = idx;

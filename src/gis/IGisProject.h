@@ -73,6 +73,10 @@ class IGisProject : public QTreeWidgetItem
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
         void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
+        virtual void save() = 0;
+        virtual void saveAs() = 0;
+
+
     private:
         QString key;
 };

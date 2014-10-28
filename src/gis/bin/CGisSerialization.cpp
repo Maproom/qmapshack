@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisSerialization.h"
+#include "gis/bin/CGisSerialization.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"

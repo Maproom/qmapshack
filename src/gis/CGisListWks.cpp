@@ -323,7 +323,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         return;
     }
 
-    CGpxProject * project = dynamic_cast<CGpxProject*>(currentItem());
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
     if(project != 0)
     {
         QPoint p = mapToGlobal(point);
@@ -399,7 +399,7 @@ void CGisListWks::slotSaveProject()
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
-        CGpxProject * project = dynamic_cast<CGpxProject*>(item);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
             project->save();
@@ -416,7 +416,7 @@ void CGisListWks::slotSaveAsProject()
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
-        CGpxProject * project = dynamic_cast<CGpxProject*>(item);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
             project->saveAs();

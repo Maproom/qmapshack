@@ -92,7 +92,7 @@ void CGisWidget::slotSaveAll()
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        CGpxProject * item = dynamic_cast<CGpxProject*>(treeWks->topLevelItem(i));
+        IGisProject * item = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
         if(item == 0)
         {
             continue;

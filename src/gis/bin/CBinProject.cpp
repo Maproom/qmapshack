@@ -16,39 +16,25 @@
 
 **********************************************************************************************/
 
-#ifndef CSEARCHGOOGLE_H
-#define CSEARCHGOOGLE_H
+#include "CBinProject.h"
 
-#include <gis/IGisProject.h>
-
-#include <QObject>
-#include <QNetworkAccessManager>
-
-class CGisListWks;
-class QLineEdit;
-
-class CSearchGoogle : public QObject, public IGisProject
+CBinProject::CBinProject(const QString &filename, const QString &key, CGisListWks *parent)
+    : IGisProject(key,parent)
 {
-    Q_OBJECT
-    public:
-        CSearchGoogle(CGisListWks * parent);
-        virtual ~CSearchGoogle();
 
-        void save(){}
-        void saveAs(){}
+}
 
-    private slots:
-        void slotChangeSymbol();
-        void slotStartSearch();
-        void slotRequestFinished(QNetworkReply* reply);
+CBinProject::~CBinProject()
+{
 
-    private:
-        QLineEdit * edit;
+}
 
-        QAction * actSymbol;
+void CBinProject::save()
+{
 
-        QNetworkAccessManager networkAccessManager;
-};
+}
 
-#endif //CSEARCHGOOGLE_H
+void CBinProject::saveAs()
+{
 
+}

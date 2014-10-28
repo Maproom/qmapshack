@@ -23,9 +23,11 @@
 
 #include <QtWidgets>
 
-IGisProject::IGisProject(const QString& key, CGisListWks *parent)
+IGisProject::IGisProject(const QString& key, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
     , key(key)
+    , filename(filename)
+    , valid(false)
 {
     if(key.isEmpty())
     {

@@ -19,7 +19,6 @@
 #ifndef CGPXPROJECT_H
 #define CGPXPROJECT_H
 
-#include "gis/IGisItem.h"
 #include "gis/IGisProject.h"
 
 #include <QDomElement>
@@ -37,15 +36,6 @@ class CGpxProject : public IGisProject
         CGpxProject(const QString& filename, const QString &key, CGisListWks * parent);
         virtual ~CGpxProject();
 
-        /**
-           @brief Check if the project was initialized correctly.
-
-           For example a if a GPX file does not load correctly the project is invalid.
-
-           @return True if project is valid
-         */
-        bool  isValid(){return valid;}
-
         void save();
         void saveAs();
 
@@ -60,8 +50,6 @@ class CGpxProject : public IGisProject
         static const QString gs_ns;
 
     private:
-        struct metadata_t;
-
         void saveGpx(const QString& fn);
         QDomNode writeMetadata(QDomDocument& doc);
         void readMetadata(const QDomNode& xml, metadata_t& metadata);
@@ -70,44 +58,8 @@ class CGpxProject : public IGisProject
         static const QString gpx_ns;
         static const QString xsi_ns;
 
-        struct person_t
-        {
-            QString name;
-            QString id;
-            QString domain;
-            IGisItem::link_t link;
-        };
-
-        struct copyright_t
-        {
-            QString author;
-            QString year;
-            QString license;
-        };
-
-        struct metadata_t
-        {
-            QString name;
-            QString desc;
-            person_t author;
-            copyright_t copyright;
-            QList<IGisItem::link_t> links;
-            QDateTime time;
-            QString keywords;
-            QRectF bounds;
-            // -- all gpx tags - stop
-            QMap<QString, QVariant> extensions;
-
-        };
-
-        QString key;
-
-        metadata_t metadata;
-        QString filename;
-
         QDomElement xmlGpx;
 
-        bool valid;
 };
 
 #endif //CGPXPROJECT_H

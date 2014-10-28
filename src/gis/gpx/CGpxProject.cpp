@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/gpx/CGpxProject.h"
+#include "gis/bin/CBinProject.h"
 #include "gis/CGisListWks.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -40,19 +41,16 @@ const QString CGpxProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v
 const QString CGpxProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
 CGpxProject::CGpxProject(const QString &name,  CGisListWks * parent)
-    : IGisProject("", parent)
-    , valid(true)
+    : IGisProject("", "", parent)
 {
     setText(0, name);
     setIcon(0,QIcon("://icons/32x32/GisProject.png"));
-
     setToolTip(0, getInfo());
+    valid = true;
 }
 
 CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWks *parent)
-    : IGisProject(key, parent)
-    , filename(filename)
-    , valid(false)
+    : IGisProject(key, filename, parent)
 {
     setText(0, QFileInfo(filename).baseName());
     setIcon(0,QIcon("://icons/32x32/GisProject.png"));
@@ -328,13 +326,26 @@ void CGpxProject::saveAs()
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
-    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx");
+    QString filter;
+    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
 
     if(fn.isEmpty())
     {
         return;
     }
-    saveGpx(fn);
+
+    if(filter == "*.gpx")
+    {
+        saveGpx(fn);
+    }
+    else if(filter == "*.qms")
+    {
+        CBinProject::saveAs(fn, *this);
+    }
+    else
+    {
+        return;
+    }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);

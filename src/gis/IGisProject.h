@@ -19,16 +19,19 @@
 #ifndef IGISPROJECT_H
 #define IGISPROJECT_H
 
+#include "gis/IGisItem.h"
 #include <QTreeWidgetItem>
+
 
 class CGisListWks;
 class IGisItem;
 class CGisDraw;
+class QDataStream;
 
 class IGisProject : public QTreeWidgetItem
 {
     public:
-        IGisProject(const QString &key, CGisListWks * parent);
+        IGisProject(const QString &key, const QString& filename, CGisListWks * parent);
         virtual ~IGisProject();
 
         /**
@@ -68,6 +71,16 @@ class IGisProject : public QTreeWidgetItem
          */
         void editItemByKey(const QString& key);
 
+        /**
+           @brief Check if the project was initialized correctly.
+
+           For example a if a GPX file does not load correctly the project is invalid.
+
+           @return True if project is valid
+         */
+        bool  isValid(){return valid;}
+
+
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
@@ -76,9 +89,68 @@ class IGisProject : public QTreeWidgetItem
         virtual void save() = 0;
         virtual void saveAs() = 0;
 
+        /**
+           @brief Serialize object out of a QDataStream
 
-    private:
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        virtual QDataStream& operator<<(QDataStream& stream);
+        /**
+           @brief Serialize object into a QDataStream
+
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        virtual QDataStream& operator>>(QDataStream& stream);
+
+        struct person_t
+        {
+            QString name;
+            QString id;
+            QString domain;
+            IGisItem::link_t link;
+        };
+
+        struct copyright_t
+        {
+            QString author;
+            QString year;
+            QString license;
+        };
+
+        struct metadata_t
+        {
+            QString name;
+            QString desc;
+            person_t author;
+            copyright_t copyright;
+            QList<IGisItem::link_t> links;
+            QDateTime time;
+            QString keywords;
+            QRectF bounds;
+            // -- all gpx tags - stop
+            QMap<QString, QVariant> extensions;
+
+        };
+
+
+    protected:
+
         QString key;
+        QString filename;
+        bool valid;
+
+
+        metadata_t metadata;
+
+
+
+
 };
 
 #endif //IGISPROJECT_H

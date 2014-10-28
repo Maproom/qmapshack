@@ -30,6 +30,8 @@ class CBinProject : public IGisProject
         void save();
         void saveAs();
 
+        static void saveAs(const QString& filename, IGisProject& project);
+
 };
 
 #endif //CBINPROJECT_H

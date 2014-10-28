@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "gis/IGisProject.h"
 #include "gis/bin/CGisSerialization.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -34,12 +35,16 @@
 #define VER_WPT_T   quint8(1)
 #define VER_GC_T    quint8(1)
 #define VER_GCLOG_T quint8(1)
+#define VER_PROJECT quint8(1)
+#define VER_COPYRIGHT quint8(1)
+#define VER_PERSON  quint8(1)
 
 #define MAGIC_SIZE  10
 #define MAGIC_TRK   "QMTrk     "
 #define MAGIC_WPT   "QMWpt     "
 #define MAGIC_RTE   "QMRte     "
 #define MAGIC_AREA  "QMArea    "
+#define MAGIC_PROJ  "QMProj    "
 
 
 QDataStream& operator<<(QDataStream& stream, const IGisItem::link_t& link)
@@ -232,6 +237,32 @@ QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkpt_t& pt)
     quint8 version;
     stream >> version >> pt.flags >> pt.shdwLon >> pt.shdwLat >> pt.shdwEle >> pt.shdwTime;
     stream >> (IGisItem::wpt_t&)pt;
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const IGisProject::copyright_t& c)
+{
+    stream << VER_COPYRIGHT << c.author << c.year << c.license;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, IGisProject::copyright_t& c)
+{
+    quint8 version;
+    stream >> version >> c.author >> c.year >> c.license;
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const IGisProject::person_t& p)
+{
+    stream << VER_PERSON << p.name << p.id << p.domain << p.link;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, IGisProject::person_t& p)
+{
+    quint8 version;
+    stream >> version >> p.name >> p.id >> p.domain >> p.link;
     return stream;
 }
 
@@ -452,6 +483,71 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream)
     return stream;
 }
 
+QDataStream& IGisProject::operator<<(QDataStream& stream)
+{
+
+
+    return stream;
+}
+
+QDataStream& IGisProject::operator>>(QDataStream& stream)
+{
+    stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
+    stream << VER_PROJECT;
+
+    stream << metadata.name;
+    stream << metadata.desc;
+    stream << metadata.author;
+    stream << metadata.copyright;
+    stream << metadata.links;
+    stream << metadata.time;
+    stream << metadata.keywords;
+    stream << metadata.bounds;
+
+
+//    for(int i = 0; i < childCount(); i++)
+//    {
+//        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
+//        if(item == 0)
+//        {
+//            continue;
+//        }
+//        item->save(gpx);
+//    }
+//    for(int i = 0; i < childCount(); i++)
+//    {
+//        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
+//        if(item == 0)
+//        {
+//            continue;
+//        }
+//        item->save(gpx);
+//    }
+//    for(int i = 0; i < childCount(); i++)
+//    {
+//        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
+//        if(item == 0)
+//        {
+//            continue;
+//        }
+//        item->save(gpx);
+//    }
+
+//    QDomElement xmlExt = doc.createElement("extensions");
+//    gpx.appendChild(xmlExt);
+//    for(int i = 0; i < childCount(); i++)
+//    {
+//        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
+//        if(item == 0)
+//        {
+//            continue;
+//        }
+//        item->save(xmlExt);
+//    }
+
+
+    return stream;
+}
 
 CGisSerialization::CGisSerialization()
 {

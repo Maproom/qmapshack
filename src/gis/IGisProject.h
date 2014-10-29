@@ -37,6 +37,7 @@ class IGisProject : public QTreeWidgetItem
         virtual void save() = 0;
         virtual void saveAs() = 0;
 
+        void setFilename(const QString& fn);
         virtual QString getInfo();
 
         /**

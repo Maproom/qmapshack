@@ -16,7 +16,10 @@
 
 **********************************************************************************************/
 
-#include "CBinProject.h"
+#include "gis/bin/CBinProject.h"
+#include "gis/gpx/CGpxProject.h"
+#include "helpers/CSettings.h"
+
 
 #include <QtWidgets>
 
@@ -50,12 +53,21 @@ CBinProject::~CBinProject()
 
 }
 
-void CBinProject::saveAs(const QString& filename, IGisProject& project)
+void CBinProject::saveAs(const QString& fn, IGisProject& project)
 {
-    QFile file(filename);
+    QString _fn_ = fn;
+    QFileInfo fi(_fn_);
+    if(fi.suffix() != "qms")
+    {
+        _fn_ += ".qms";
+    }
+
+    // todo save qms
+    QFile file(_fn_);
+
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+        QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
         return;
     }
     QDataStream out(&file);
@@ -66,14 +78,57 @@ void CBinProject::saveAs(const QString& filename, IGisProject& project)
 
     file.close();
 
+    project.setFilename(_fn_);
+    project.setText(1,"");
+
 }
 
 void CBinProject::save()
 {
 
+    if(filename.isEmpty())
+    {
+        saveAs();
+    }
+    else
+    {
+        saveAs(filename, *this);
+    }
 }
 
 void CBinProject::saveAs()
 {
+    SETTINGS;
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+
+    QString filter = "*.qms";
+    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+
+    if(fn.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo fi(fn);
+
+    if(filter == "*.gpx")
+    {
+        if(fi.suffix() != "gpx")
+        {
+            fn += ".gpx";
+        }
+        CGpxProject::saveAs(fn, *this);
+    }
+    else if(filter == "*.qms")
+    {
+        saveAs(fn, *this);
+    }
+    else
+    {
+        return;
+    }
+
+    path = QFileInfo(fn).absolutePath();
+    cfg.setValue("Paths/lastGisPath", path);
 
 }

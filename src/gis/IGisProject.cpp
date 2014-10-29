@@ -42,6 +42,12 @@ IGisProject::~IGisProject()
 
 }
 
+void IGisProject::setFilename(const QString& fn)
+{
+    filename = fn;
+    setText(0, QFileInfo(filename).baseName());
+}
+
 QString IGisProject::getInfo()
 {
     QString str = metadata.name.isEmpty() ? text(0) : metadata.name;

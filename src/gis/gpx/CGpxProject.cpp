@@ -291,7 +291,7 @@ void CGpxProject::saveAs()
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
-    QString filter;
+    QString filter = "*.gpx";
     QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
 
     if(fn.isEmpty())
@@ -303,19 +303,10 @@ void CGpxProject::saveAs()
 
     if(filter == "*.gpx")
     {
-        if(fi.suffix() != "gpx")
-        {
-            fn += ".gpx";
-        }
-        saveGpx(fn);
+        saveAs(fn, *this);
     }
     else if(filter == "*.qms")
     {
-        if(fi.suffix() != "qms")
-        {
-            fn += ".qms";
-        }
-
         CBinProject::saveAs(fn, *this);
     }
     else
@@ -327,10 +318,10 @@ void CGpxProject::saveAs()
     cfg.setValue("Paths/lastGisPath", path);
 }
 
-void CGpxProject::saveGpx(const QString& fn)
+
+void CGpxProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
-
     QFileInfo fi(_fn_);
     if(fi.suffix() != "gpx")
     {
@@ -387,29 +378,29 @@ void CGpxProject::saveGpx(const QString& fn)
     QDomDocument doc;
 
     //  ---- start content of gpx
-    QDomNode gpx = writeMetadata(doc);
+    QDomNode gpx = project.writeMetadata(doc);
 
-    for(int i = 0; i < childCount(); i++)
+    for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
+        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(project.child(i));
         if(item == 0)
         {
             continue;
         }
         item->save(gpx);
     }
-    for(int i = 0; i < childCount(); i++)
+    for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
+        CGisItemRte * item = dynamic_cast<CGisItemRte*>(project.child(i));
         if(item == 0)
         {
             continue;
         }
         item->save(gpx);
     }
-    for(int i = 0; i < childCount(); i++)
+    for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
+        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(project.child(i));
         if(item == 0)
         {
             continue;
@@ -419,9 +410,9 @@ void CGpxProject::saveGpx(const QString& fn)
 
     QDomElement xmlExt = doc.createElement("extensions");
     gpx.appendChild(xmlExt);
-    for(int i = 0; i < childCount(); i++)
+    for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
+        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(project.child(i));
         if(item == 0)
         {
             continue;
@@ -448,9 +439,7 @@ void CGpxProject::saveGpx(const QString& fn)
         return;
     }
 
-
-    filename = _fn_;
-    setText(0, QFileInfo(filename).baseName());
-    setText(1,"");
+    project.setFilename(_fn_);
+    project.setText(1,"");
 }
 

@@ -30,7 +30,7 @@ class CBinProject : public IGisProject
         void save();
         void saveAs();
 
-        static void saveAs(const QString& filename, IGisProject& project);
+        static void saveAs(const QString& fn, IGisProject& project);
 
 };
 

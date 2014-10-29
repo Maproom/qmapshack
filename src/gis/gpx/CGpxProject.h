@@ -39,6 +39,8 @@ class CGpxProject : public IGisProject
         void save();
         void saveAs();
 
+        static void saveAs(const QString& fn, IGisProject& project);
+
 
         // Those are the URIs of the GPX extensions we support
         static const QString gpxx_ns;

@@ -497,6 +497,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     in >> tmp8;
     area.opacity = tmp8;
 
+    deriveSecondaryData();
     setColor(str2color(area.color));
     setText(0, area.name);
     setToolTip(0, getInfo());

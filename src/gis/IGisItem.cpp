@@ -249,6 +249,7 @@ void IGisItem::loadHistoryEntry(int idx)
     history.histIdxCurrent = idx;
 }
 
+
 bool IGisItem::isReadOnly()
 {
     return !(flags & eFlagWriteAllowed);

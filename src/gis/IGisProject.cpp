@@ -42,6 +42,35 @@ IGisProject::~IGisProject()
 
 }
 
+QString IGisProject::getInfo()
+{
+    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;
+
+    if(metadata.time.isValid())
+    {
+        str += "\n";
+        str += IUnit::datetime2string(metadata.time, false);
+    }
+
+
+    if(!metadata.desc.isEmpty())
+    {
+        str += "\n";
+
+        if(metadata.desc.count() < 200)
+        {
+            str += metadata.desc;
+        }
+        else
+        {
+            str += metadata.desc.left(197) + "...";
+        }
+    }
+
+
+    return str;
+}
+
 IGisItem * IGisProject::getItemByKey(const QString& key)
 {
     for(int i = 0; i < childCount(); i++)

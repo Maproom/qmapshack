@@ -33,7 +33,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         static CGisWidget& self(){return *pSelf;}
         virtual ~CGisWidget();
 
-        void loadGpx(const QString& filename);
+        void loadGisProject(const QString& filename);
         /**
            @brief Draw all loaded data in the workspace that is visible
 

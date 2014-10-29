@@ -100,6 +100,8 @@ class CGisItemWpt : public IGisItem
            @param project   the project to append with item
          */
         CGisItemWpt(const QDomNode& xml, IGisProject * project);
+
+        CGisItemWpt(const history_t& hist, IGisProject * project);
         virtual ~CGisItemWpt();
 
         QDataStream& operator<<(QDataStream& stream);

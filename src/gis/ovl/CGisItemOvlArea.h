@@ -38,6 +38,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx);
         CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx);
         CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
+        CGisItemOvlArea(const history_t& hist, IGisProject * project);
         virtual ~CGisItemOvlArea();
 
         QDataStream& operator<<(QDataStream& stream);

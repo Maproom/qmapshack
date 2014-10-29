@@ -55,6 +55,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx);
         CGisItemTrk(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
         CGisItemTrk(const QDomNode &xml, IGisProject *project);
+        CGisItemTrk(const history_t& hist, IGisProject * project);
         virtual ~CGisItemTrk();
 
         QDataStream& operator<<(QDataStream& stream);

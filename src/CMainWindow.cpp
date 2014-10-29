@@ -529,7 +529,7 @@ void CMainWindow::slotLoadGISData()
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
-    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, "*.gpx");
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, "GPS Exchange Format (*.gpx);; QMapShack Binary (*.qms)");
 
     if(filenames.isEmpty())
     {
@@ -546,10 +546,7 @@ void CMainWindow::loadGISData(const QStringList& filenames)
 {
     foreach(const QString& filename, filenames)
     {
-        if(QFileInfo(filename).suffix().toLower() == "gpx")
-        {
-            gisWidget->loadGpx(filename);
-        }
+        gisWidget->loadGisProject(filename);
     }
 }
 

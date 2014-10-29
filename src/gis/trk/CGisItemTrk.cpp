@@ -214,6 +214,19 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setupHistory();
 }
 
+CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
+    : IGisItem(project, eTypeTrk, project->childCount())
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
+{
+    history = hist;
+    loadHistoryEntry(hist.histIdxCurrent);
+}
+
+
+
 CGisItemTrk::~CGisItemTrk()
 {
     // reset user focus if focused on this track

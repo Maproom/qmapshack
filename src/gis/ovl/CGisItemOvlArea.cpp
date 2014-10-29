@@ -162,6 +162,17 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     setupHistory();
 }
 
+CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
+    : IGisItem(project, eTypeOvl, project->childCount())
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+{
+    history = hist;
+    loadHistoryEntry(hist.histIdxCurrent);
+}
+
+
+
 CGisItemOvlArea::~CGisItemOvlArea()
 {
     // reset user focus if focused on this track

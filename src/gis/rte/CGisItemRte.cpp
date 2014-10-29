@@ -67,6 +67,15 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     setupHistory();
 }
 
+CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
+    : IGisItem(project, eTypeRte, project->childCount())
+    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+{
+    history = hist;
+    loadHistoryEntry(hist.histIdxCurrent);
+}
+
+
 
 CGisItemRte::~CGisItemRte()
 {

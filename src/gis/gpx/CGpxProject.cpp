@@ -90,14 +90,12 @@ CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWk
     /** @note   If you change the order of the item types read you have to
                 take care of the order enforced in IGisItem().
     */
-    QList<QTreeWidgetItem*> items;
     const QDomNodeList& xmlTrks = xmlGpx.elementsByTagName("trk");
     N = xmlTrks.count();
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlTrk = xmlTrks.item(n);
-        QTreeWidgetItem * item = new CGisItemTrk(xmlTrk, this);
-        items << item;
+        new CGisItemTrk(xmlTrk, this);
     }
 
     const QDomNodeList& xmlRtes = xmlGpx.elementsByTagName("rte");
@@ -105,8 +103,7 @@ CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWk
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlRte = xmlRtes.item(n);
-        QTreeWidgetItem * item = new CGisItemRte(xmlRte, this);
-        items << item;
+        new CGisItemRte(xmlRte, this);
     }
 
     const QDomNodeList& xmlWpts = xmlGpx.elementsByTagName("wpt");
@@ -114,8 +111,7 @@ CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWk
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlWpt = xmlWpts.item(n);
-        QTreeWidgetItem * item = new CGisItemWpt(xmlWpt, this);
-        items << item;
+        new CGisItemWpt(xmlWpt, this);
     }
 
     const QDomElement& xmlExtension = xmlGpx.namedItem("extensions").toElement();
@@ -124,12 +120,9 @@ CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWk
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlArea = xmlAreas.item(n);
-        QTreeWidgetItem * item = new CGisItemOvlArea(xmlArea, this);
-        items << item;
+        new CGisItemOvlArea(xmlArea, this);
     }
 
-
-    addChildren(items);
     setToolTip(0, getInfo());
 
     valid = true;
@@ -140,34 +133,6 @@ CGpxProject::~CGpxProject()
 
 }
 
-QString CGpxProject::getInfo()
-{
-    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;
-
-    if(metadata.time.isValid())
-    {
-        str += "\n";
-        str += IUnit::datetime2string(metadata.time, false);
-    }
-
-
-    if(!metadata.desc.isEmpty())
-    {
-        str += "\n";
-
-        if(metadata.desc.count() < 200)
-        {
-            str += metadata.desc;
-        }
-        else
-        {
-            str += metadata.desc.left(197) + "...";
-        }
-    }
-
-
-    return str;
-}
 
 void CGpxProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
 {
@@ -334,12 +299,23 @@ void CGpxProject::saveAs()
         return;
     }
 
+    QFileInfo fi(fn);
+
     if(filter == "*.gpx")
     {
+        if(fi.suffix() != "gpx")
+        {
+            fn += ".gpx";
+        }
         saveGpx(fn);
     }
     else if(filter == "*.qms")
     {
+        if(fi.suffix() != "qms")
+        {
+            fn += ".qms";
+        }
+
         CBinProject::saveAs(fn, *this);
     }
     else

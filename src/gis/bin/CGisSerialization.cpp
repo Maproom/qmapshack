@@ -25,26 +25,34 @@
 
 #include <QtWidgets>
 
-#define VER_TRK     quint8(1)
-#define VER_WPT     quint8(1)
-#define VER_RTE     quint8(1)
-#define VER_AREA    quint8(1)
-#define VER_LINK    quint8(1)
-#define VER_TRKSEG  quint8(1)
-#define VER_TRKPT   quint8(1)
-#define VER_WPT_T   quint8(1)
-#define VER_GC_T    quint8(1)
-#define VER_GCLOG_T quint8(1)
-#define VER_PROJECT quint8(1)
-#define VER_COPYRIGHT quint8(1)
-#define VER_PERSON  quint8(1)
+#define VER_TRK         quint8(1)
+#define VER_WPT         quint8(1)
+#define VER_RTE         quint8(1)
+#define VER_AREA        quint8(1)
+#define VER_LINK        quint8(1)
+#define VER_TRKSEG      quint8(1)
+#define VER_TRKPT       quint8(1)
+#define VER_WPT_T       quint8(1)
+#define VER_GC_T        quint8(1)
+#define VER_GCLOG_T     quint8(1)
+#define VER_PROJECT     quint8(1)
+#define VER_COPYRIGHT   quint8(1)
+#define VER_PERSON      quint8(1)
+#define VER_HIST        quint8(1)
+#define VER_HIST_EVT    quint8(1)
+#define VER_ITEM        quint8(1)
 
-#define MAGIC_SIZE  10
-#define MAGIC_TRK   "QMTrk     "
-#define MAGIC_WPT   "QMWpt     "
-#define MAGIC_RTE   "QMRte     "
-#define MAGIC_AREA  "QMArea    "
-#define MAGIC_PROJ  "QMProj    "
+#define MAGIC_SIZE      10
+#define MAGIC_TRK       "QMTrk     "
+#define MAGIC_WPT       "QMWpt     "
+#define MAGIC_RTE       "QMRte     "
+#define MAGIC_AREA      "QMArea    "
+#define MAGIC_PROJ      "QMProj    "
+
+#define ITEM_WPT        quint8(1)
+#define ITEM_TRK        quint8(2)
+#define ITEM_RTE        quint8(3)
+#define ITEM_AREA       quint8(4)
 
 
 QDataStream& operator<<(QDataStream& stream, const IGisItem::link_t& link)
@@ -113,6 +121,47 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::wpt_t& wpt)
 
     return stream;
 }
+
+QDataStream& operator<<(QDataStream& stream, const IGisItem::history_event_t& e)
+{
+    stream << VER_HIST_EVT;
+    stream << e.time;
+    stream << e.icon;
+    stream << e.comment;
+    stream << e.data;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, IGisItem::history_event_t& e)
+{
+    quint8 version;
+    stream >> version;
+    stream >> e.time;
+    stream >> e.icon;
+    stream >> e.comment;
+    stream >> e.data;
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const IGisItem::history_t& h)
+{
+    stream << VER_HIST;
+    stream << h.histIdxInitial;
+    stream << h.histIdxCurrent;
+    stream << h.events;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h)
+{
+    quint8 version;
+    stream >> version;
+    stream >> h.histIdxInitial;
+    stream >> h.histIdxCurrent;
+    stream >> h.events;
+    return stream;
+}
+
 
 QDataStream& operator<<(QDataStream& stream, const CGisItemWpt::geocachelog_t& log)
 {
@@ -265,6 +314,7 @@ QDataStream& operator>>(QDataStream& stream, IGisProject::person_t& p)
     stream >> version >> p.name >> p.id >> p.domain >> p.link;
     return stream;
 }
+
 
 // ---------------- main objects ---------------------------------
 
@@ -486,6 +536,54 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream)
 QDataStream& IGisProject::operator<<(QDataStream& stream)
 {
 
+    quint8      version;
+    QIODevice * dev = stream.device();
+    qint64      pos = dev->pos();
+
+    char magic[10];
+    stream.readRawData(magic,MAGIC_SIZE);
+
+    if(strncmp(magic,MAGIC_PROJ,MAGIC_SIZE))
+    {
+        dev->seek(pos);
+        return stream;
+    }
+
+    stream >> version;
+    stream >> filename;
+    stream >> metadata.name;
+    stream >> metadata.desc;
+    stream >> metadata.author;
+    stream >> metadata.copyright;
+    stream >> metadata.links;
+    stream >> metadata.time;
+    stream >> metadata.keywords;
+    stream >> metadata.bounds;
+
+    while(!stream.atEnd())
+    {
+        IGisItem::history_t history;
+        quint8 version, type;
+        stream >> version;
+        stream >> type;
+        stream >> history;
+        switch(type)
+        {
+            case ITEM_WPT:
+                new CGisItemWpt(history, this);
+                break;
+            case ITEM_TRK:
+                new CGisItemTrk(history, this);
+                break;
+            case ITEM_RTE:
+                new CGisItemRte(history, this);
+                break;
+            case ITEM_AREA:
+                new CGisItemOvlArea(history, this);
+                break;
+            default:;
+        }
+    }
 
     return stream;
 }
@@ -495,6 +593,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
     stream << VER_PROJECT;
 
+    stream << filename;
     stream << metadata.name;
     stream << metadata.desc;
     stream << metadata.author;
@@ -504,46 +603,50 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     stream << metadata.keywords;
     stream << metadata.bounds;
 
-
-//    for(int i = 0; i < childCount(); i++)
-//    {
-//        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-//        if(item == 0)
-//        {
-//            continue;
-//        }
-//        item->save(gpx);
-//    }
-//    for(int i = 0; i < childCount(); i++)
-//    {
-//        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
-//        if(item == 0)
-//        {
-//            continue;
-//        }
-//        item->save(gpx);
-//    }
-//    for(int i = 0; i < childCount(); i++)
-//    {
-//        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
-//        if(item == 0)
-//        {
-//            continue;
-//        }
-//        item->save(gpx);
-//    }
-
-//    QDomElement xmlExt = doc.createElement("extensions");
-//    gpx.appendChild(xmlExt);
-//    for(int i = 0; i < childCount(); i++)
-//    {
-//        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
-//        if(item == 0)
-//        {
-//            continue;
-//        }
-//        item->save(xmlExt);
-//    }
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        stream << VER_ITEM;
+        stream << ITEM_TRK;
+        stream << item->getHistory();
+    }
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        stream << VER_ITEM;
+        stream << ITEM_RTE;
+        stream << item->getHistory();
+    }
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        stream << VER_ITEM;
+        stream << ITEM_WPT;
+        stream << item->getHistory();
+    }
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        stream << VER_ITEM;
+        stream << ITEM_AREA;
+        stream << item->getHistory();
+    }
 
 
     return stream;

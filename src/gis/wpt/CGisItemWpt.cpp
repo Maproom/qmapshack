@@ -156,6 +156,17 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     setupHistory();
 }
 
+CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
+    : IGisItem(project, eTypeWpt, project->childCount())
+    , proximity(NOFLOAT)
+    , posScreen(NOPOINTF)
+{
+    history = hist;
+    loadHistoryEntry(hist.histIdxCurrent);
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+}
+
+
 CGisItemWpt::~CGisItemWpt()
 {
 
@@ -390,6 +401,7 @@ void CGisItemWpt::save(QDomNode& gpx)
 
     setText(1,"");
 }
+
 
 void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 {

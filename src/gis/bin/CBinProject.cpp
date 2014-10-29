@@ -23,7 +23,26 @@
 CBinProject::CBinProject(const QString &filename, const QString &key, CGisListWks *parent)
     : IGisProject(key, filename, parent)
 {
+    setText(0, QFileInfo(filename).baseName());
+    setIcon(0,QIcon("://icons/32x32/GisProject.png"));
 
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+        return;
+    }
+
+    QDataStream in(&file);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_2);
+
+    *this << in;
+
+    file.close();
+
+    setToolTip(0, getInfo());
+    valid = true;
 }
 
 CBinProject::~CBinProject()
@@ -33,7 +52,6 @@ CBinProject::~CBinProject()
 
 void CBinProject::saveAs(const QString& filename, IGisProject& project)
 {
-
     QFile file(filename);
     if(!file.open(QIODevice::WriteOnly))
     {
@@ -42,11 +60,12 @@ void CBinProject::saveAs(const QString& filename, IGisProject& project)
     }
     QDataStream out(&file);
     out.setByteOrder(QDataStream::LittleEndian);
-    out.setVersion(QDataStream::Qt_5_2);
+    out.setVersion(QDataStream::Qt_5_2);   
 
     project >> out;
 
     file.close();
+
 }
 
 void CBinProject::save()

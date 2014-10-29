@@ -21,6 +21,7 @@
 #include "gis/IGisItem.h"
 #include "gis/CGisDraw.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/bin/CBinProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -54,7 +55,7 @@ CGisWidget::~CGisWidget()
     cfg.setValue("Workspace/treeWks/colum0/size", treeWks->header()->sectionSize(0));
 }
 
-void CGisWidget::loadGpx(const QString& filename)
+void CGisWidget::loadGisProject(const QString& filename)
 {
     // cerate file instance
     QFile file(filename);
@@ -75,8 +76,18 @@ void CGisWidget::loadGpx(const QString& filename)
     // add project to workspace
     QApplication::setOverrideCursor(Qt::WaitCursor);
     IGisItem::mutexItems.lock();
-    CGpxProject * item = new CGpxProject(filename, key, treeWks);
-    if(!item->isValid())
+    IGisProject * item = 0;
+    QString suffix = QFileInfo(filename).suffix().toLower();
+    if(suffix == "gpx")
+    {
+        item = new CGpxProject(filename, key, treeWks);
+    }
+    else if(suffix == "qms")
+    {
+        item = new CBinProject(filename, key, treeWks);
+    }
+
+    if(item && !item->isValid())
     {
         delete item;
     }
@@ -85,6 +96,7 @@ void CGisWidget::loadGpx(const QString& filename)
 
     emit sigChanged();
 }
+
 
 void CGisWidget::slotSaveAll()
 {

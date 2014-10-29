@@ -34,6 +34,11 @@ class IGisProject : public QTreeWidgetItem
         IGisProject(const QString &key, const QString& filename, CGisListWks * parent);
         virtual ~IGisProject();
 
+        virtual void save() = 0;
+        virtual void saveAs() = 0;
+
+        virtual QString getInfo();
+
         /**
            @brief Get unique project key.
            @return A MD5 hash string
@@ -85,9 +90,6 @@ class IGisProject : public QTreeWidgetItem
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
         void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-
-        virtual void save() = 0;
-        virtual void saveAs() = 0;
 
         /**
            @brief Serialize object out of a QDataStream

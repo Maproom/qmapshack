@@ -250,7 +250,7 @@ class IGisItem : public QTreeWidgetItem
 
     protected:
         struct color_t;
-        friend class CGpxProject;
+        friend class IGisProject;
 
         /// read waypoint data from an XML snippet
         void readWpt(const QDomNode& xml, wpt_t &wpt);

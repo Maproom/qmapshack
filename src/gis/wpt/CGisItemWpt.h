@@ -104,6 +104,7 @@ class CGisItemWpt : public IGisItem
         CGisItemWpt(const history_t& hist, IGisProject * project);
         virtual ~CGisItemWpt();
 
+        void save(QDomNode& gpx);
         QDataStream& operator<<(QDataStream& stream);
         QDataStream& operator>>(QDataStream& stream);
 
@@ -132,8 +133,7 @@ class CGisItemWpt : public IGisItem
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawHighlight(QPainter& p);
-        void save(QDomNode& gpx);
+        void drawHighlight(QPainter& p);        
         bool isCloseTo(const QPointF& pos);
         bool isGeocache(){return geocache.hasData;}
         void gainUserFocus(bool yes);
@@ -146,6 +146,7 @@ class CGisItemWpt : public IGisItem
 
     private:
         void genKey();
+        void readGpx(const QDomNode& xml);
         void setIcon();
         void readGcExt(const QDomNode& xmlCache);
         void writeGcExt(QDomNode& xmlCache);

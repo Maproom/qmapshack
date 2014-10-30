@@ -121,33 +121,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
-    // --- start read and process data ----
-    readWpt(xml, wpt);
-    // decode some well known extensions
-    if(xml.namedItem("extensions").isElement())
-    {        
-        const QDomNode& ext = xml.namedItem("extensions");
-        readXml(ext, "ql:key", key);
-        readXml(ext, "ql:flags", flags);
-        readXml(ext, history);
-
-        const QDomNode& wptx1 = ext.namedItem("wptx1:WaypointExtension");
-        readXml(wptx1, "wptx1:Proximity", proximity);
-
-        const QDomNode& xmlCache = ext.namedItem("cache");
-        if(!xmlCache.isNull())
-        {
-            // read OC cache extensions
-        }
-    }
-
-    const QDomNode& xmlCache = xml.namedItem("groundspeak:cache");
-    if(!xmlCache.isNull() && !geocache.hasData)
-    {
-        readGcExt(xmlCache);
-    }
-    // --- stop read and process data ----
-
+    readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     setText(0, wpt.name);
     setIcon();
@@ -372,35 +346,6 @@ void CGisItemWpt::setDescription(const QString& str)
     changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
-void CGisItemWpt::save(QDomNode& gpx)
-{
-    QDomDocument doc = gpx.ownerDocument();
-
-    QDomElement xmlWpt = doc.createElement("wpt");
-    gpx.appendChild(xmlWpt);
-    writeWpt(xmlWpt, wpt);
-
-    // write the key as extension tag
-    QDomElement xmlExt  = doc.createElement("extensions");
-    xmlWpt.appendChild(xmlExt);
-    writeXml(xmlExt, "ql:key", key);
-    writeXml(xmlExt, "ql:flags", flags);
-    writeXml(xmlExt, history);
-
-    // write other well known extensions
-    QDomElement wptx1  = doc.createElement("wptx1:WaypointExtension");
-    xmlExt.appendChild(wptx1);
-    writeXml(wptx1, "wptx1:Proximity", proximity);
-
-    if(geocache.hasData && geocache.service == eGC)
-    {
-        QDomElement xmlCache = doc.createElement("groundspeak:cache");
-        writeGcExt(xmlCache);
-        xmlWpt.appendChild(xmlCache);
-    }
-
-    setText(1,"");
-}
 
 
 void CGisItemWpt::readGcExt(const QDomNode& xmlCache)

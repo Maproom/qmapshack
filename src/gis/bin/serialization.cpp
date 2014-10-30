@@ -17,7 +17,6 @@
 **********************************************************************************************/
 
 #include "gis/IGisProject.h"
-#include "gis/bin/CGisSerialization.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -651,15 +650,5 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
 
 
     return stream;
-}
-
-CGisSerialization::CGisSerialization()
-{
-
-}
-
-CGisSerialization::~CGisSerialization()
-{
-
 }
 

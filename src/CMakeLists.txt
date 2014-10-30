@@ -91,8 +91,11 @@ set( SRCS
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/IGisProject.cpp
-    gis/bin/CGisSerialization.cpp
+    gis/gpx/CGpxProject.cpp
+    gis/gpx/serialization.cpp
     gis/bin/CBinProject.cpp
+    gis/bin/serialization.cpp
+    gis/search/CSearchGoogle.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
     gis/wpt/CDetailsWpt.cpp
@@ -106,9 +109,7 @@ set( SRCS
     gis/rte/CScrOptRte.cpp
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
-    gis/ovl/CDetailsOvlArea.cpp
-    gis/gpx/CGpxProject.cpp
-    gis/search/CSearchGoogle.cpp
+    gis/ovl/CDetailsOvlArea.cpp    
     plot/IPlot.cpp
     plot/CPlotAxis.cpp
     plot/CPlotAxisTime.cpp    
@@ -202,7 +203,6 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
-    gis/bin/CGisSerialization.h
     gis/bin/CBinProject.cpp
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h

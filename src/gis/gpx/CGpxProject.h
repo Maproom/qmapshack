@@ -42,22 +42,9 @@ class CGpxProject : public IGisProject
         static void saveAs(const QString& fn, IGisProject& project);
 
 
-        // Those are the URIs of the GPX extensions we support
-        static const QString gpxx_ns;
-        static const QString gpxtpx_ns;
-        static const QString wptx1_ns;
-        static const QString rmc_ns;
-        static const QString ql_ns;
-        static const QString gs_ns;
-
     private:
         void saveGpx(const QString& fn);
-        QDomNode writeMetadata(QDomDocument& doc);
-        void readMetadata(const QDomNode& xml, metadata_t& metadata);
 
-        // Those are standard GPX/XML namespaces
-        static const QString gpx_ns;
-        static const QString xsi_ns;
 
         QDomElement xmlGpx;
 

@@ -37,7 +37,8 @@ class IGisProject : public QTreeWidgetItem
         virtual void save() = 0;
         virtual void saveAs() = 0;
 
-        void setFilename(const QString& fn);
+//        virtual void setFilename(const QString& fn);
+
         virtual QString getInfo();
 
         /**
@@ -141,8 +142,23 @@ class IGisProject : public QTreeWidgetItem
 
         };
 
-
+        QDomNode writeMetadata(QDomDocument& doc);
     protected:
+        void markAsSaved();
+        void readMetadata(const QDomNode& xml, metadata_t& metadata);
+
+        // Those are the URIs of the GPX extensions we support
+        static const QString gpxx_ns;
+        static const QString gpxtpx_ns;
+        static const QString wptx1_ns;
+        static const QString rmc_ns;
+        static const QString ql_ns;
+        static const QString gs_ns;
+        // Those are standard GPX/XML namespaces
+        static const QString gpx_ns;
+        static const QString xsi_ns;
+
+
 
         QString key;
         QString filename;

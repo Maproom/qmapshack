@@ -23,6 +23,7 @@
 
 #include <QtWidgets>
 
+
 IGisProject::IGisProject(const QString& key, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
     , key(key)
@@ -42,10 +43,25 @@ IGisProject::~IGisProject()
 
 }
 
-void IGisProject::setFilename(const QString& fn)
+//void IGisProject::setFilename(const QString& fn)
+//{
+//    filename = fn;
+//    setText(0, QFileInfo(filename).baseName());
+//}
+
+void IGisProject::markAsSaved()
 {
-    filename = fn;
-    setText(0, QFileInfo(filename).baseName());
+    setText(1,"");
+    for(int i = 0; i < childCount(); i++)
+    {
+
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        item->setText(1,"");
+    }
 }
 
 QString IGisProject::getInfo()
@@ -228,3 +244,4 @@ void IGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& 
     }
 
 }
+

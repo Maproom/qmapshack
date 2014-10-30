@@ -53,6 +53,57 @@ CBinProject::~CBinProject()
 
 }
 
+
+void CBinProject::save()
+{
+
+    if(filename.isEmpty())
+    {
+        saveAs();
+    }
+    else
+    {
+        saveAs(filename, *this);
+        markAsSaved();
+    }
+}
+
+void CBinProject::saveAs()
+{
+    SETTINGS;
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+
+    QString filter = "*.qms";
+    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+
+    if(fn.isEmpty())
+    {
+        return;
+    }
+
+
+    if(filter == "*.gpx")
+    {
+        CGpxProject::saveAs(fn, *this);
+    }
+    else if(filter == "*.qms")
+    {
+        saveAs(fn, *this);
+
+        filename = fn;
+        setText(0, QFileInfo(filename).baseName());
+        markAsSaved();
+    }
+    else
+    {
+        return;
+    }
+
+    path = QFileInfo(fn).absolutePath();
+    cfg.setValue("Paths/lastGisPath", path);
+
+}
+
 void CBinProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
@@ -72,63 +123,10 @@ void CBinProject::saveAs(const QString& fn, IGisProject& project)
     }
     QDataStream out(&file);
     out.setByteOrder(QDataStream::LittleEndian);
-    out.setVersion(QDataStream::Qt_5_2);   
+    out.setVersion(QDataStream::Qt_5_2);
 
     project >> out;
 
     file.close();
-
-    project.setFilename(_fn_);
-    project.setText(1,"");
-
 }
 
-void CBinProject::save()
-{
-
-    if(filename.isEmpty())
-    {
-        saveAs();
-    }
-    else
-    {
-        saveAs(filename, *this);
-    }
-}
-
-void CBinProject::saveAs()
-{
-    SETTINGS;
-    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
-
-    QString filter = "*.qms";
-    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
-
-    if(fn.isEmpty())
-    {
-        return;
-    }
-
-    QFileInfo fi(fn);
-
-    if(filter == "*.gpx")
-    {
-        if(fi.suffix() != "gpx")
-        {
-            fn += ".gpx";
-        }
-        CGpxProject::saveAs(fn, *this);
-    }
-    else if(filter == "*.qms")
-    {
-        saveAs(fn, *this);
-    }
-    else
-    {
-        return;
-    }
-
-    path = QFileInfo(fn).absolutePath();
-    cfg.setValue("Paths/lastGisPath", path);
-
-}

@@ -27,8 +27,8 @@ class IGisLine
         IGisLine();
         virtual ~IGisLine();
 
-        virtual void setData(const QPolygonF& line) = 0;
-        virtual void getData(QPolygonF& line) = 0;
+        virtual void setDataFromPolyline(const QPolygonF& line) = 0;
+        virtual void getPolylineFromData(QPolygonF& line) = 0;
 };
 
 #endif //IGISLINE_H

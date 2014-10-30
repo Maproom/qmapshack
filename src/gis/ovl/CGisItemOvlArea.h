@@ -47,7 +47,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         const QString& getName();
         int getColorIdx(){return colorIdx;}
         QString getInfo();
-        void getData(QPolygonF& line);
+        void getPolylineFromData(QPolygonF& line);
         const QString& getComment(){return area.cmt;}
         const QString& getDescription(){return area.desc;}
         const QList<link_t>& getLinks(){return area.links;}
@@ -58,7 +58,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
 
         void setName(const QString& str);
         void setColor(int idx);
-        void setData(const QPolygonF& line);
+        void setDataFromPolyline(const QPolygonF& line);
         void setWidth(qint32 w);
         void setStyle(qint32 s);
         void setOpacity(bool yes);

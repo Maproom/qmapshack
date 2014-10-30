@@ -60,7 +60,7 @@ IMouseEditLine::IMouseEditLine(IGisLine &src, CGisDraw *gis, CCanvas *parent)
     , idxStop(-1)
 {        
 
-    src.getData(coords1);
+    src.getPolylineFromData(coords1);
     // calculate a pixel polyline from track coordinates
     line = coords1;
     gis->convertRad2Px(line);
@@ -882,7 +882,7 @@ void IMouseEditLine::slotCopyToOrig()
     IGisLine * l = getGisLine();
     if(l != 0)
     {
-        l->setData(coords1);
+        l->setDataFromPolyline(coords1);
     }
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

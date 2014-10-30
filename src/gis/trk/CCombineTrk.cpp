@@ -195,7 +195,7 @@ void CCombineTrk::updatePreview()
             continue;
         }
         QPolygonF line1;
-        trk1->getData(line1);
+        trk1->getPolylineFromData(line1);
 
         line += line1;
     }

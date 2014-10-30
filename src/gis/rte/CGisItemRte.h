@@ -49,8 +49,8 @@ class CGisItemRte : public IGisItem, public IGisLine
         bool isCloseTo(const QPointF& pos);
         void gainUserFocus(bool yes);
 
-        void setData(const QPolygonF& line){}
-        void getData(QPolygonF& line){}
+        void setDataFromPolyline(const QPolygonF& line){}
+        void getPolylineFromData(QPolygonF& line){}
 
     private:
         struct rte_t;

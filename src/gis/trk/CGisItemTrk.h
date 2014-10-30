@@ -71,14 +71,14 @@ class CGisItemTrk : public IGisItem, public IGisLine
         const QString& getComment(){return trk.cmt;}
         const QString& getDescription(){return trk.desc;}
         const QList<link_t>& getLinks(){return trk.links;}
-        void getData(QPolygonF& l);
+        void getPolylineFromData(QPolygonF& l);
 
         void setName(const QString& str);
         void setColor(int idx);
         void setDrawMode(drawmode_e mode){drawMode = mode;}
         void setComment(const QString& str);
         void setDescription(const QString& str);
-        void setData(const QPolygonF& l);
+        void setDataFromPolyline(const QPolygonF& l);
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
@@ -258,7 +258,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
            @param l     A polyline with coordinates [rad]
          */
-        void readLine(const QPolygonF &l);        
+        void readTrackDataFromPolyLine(const QPolygonF &l);
         /**
            @brief Overide IGisItem::changed() method
 

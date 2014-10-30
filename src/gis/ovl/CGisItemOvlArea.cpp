@@ -409,7 +409,7 @@ QString CGisItemOvlArea::getInfo()
     return str;
 }
 
-void CGisItemOvlArea::getData(QPolygonF& line)
+void CGisItemOvlArea::getPolylineFromData(QPolygonF& line)
 {    
     line.clear();
     foreach(const pt_t& pt, area.pts)
@@ -418,7 +418,7 @@ void CGisItemOvlArea::getData(QPolygonF& line)
     }
 }
 
-void CGisItemOvlArea::setData(const QPolygonF& line)
+void CGisItemOvlArea::setDataFromPolyline(const QPolygonF& line)
 {
     readLine(line);
 

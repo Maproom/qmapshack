@@ -182,7 +182,7 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
     , mouseClickFocus(0)
 {
     trk.name = name;
-    readLine(l);
+    readTrackDataFromPolyLine(l);
 
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
 
@@ -247,7 +247,7 @@ CGisItemTrk::~CGisItemTrk()
 }
 
 
-void CGisItemTrk::setData(const QPolygonF &l)
+void CGisItemTrk::setDataFromPolyline(const QPolygonF &l)
 {
     /*
         as this will change the line significantly we better stop
@@ -257,7 +257,7 @@ void CGisItemTrk::setData(const QPolygonF &l)
     mouseMoveFocus  = 0;
     delete dlgDetails;
 
-    readLine(l);
+    readTrackDataFromPolyLine(l);
 
     flags |= eFlagTainted;
     setText(1,"*");
@@ -266,7 +266,7 @@ void CGisItemTrk::setData(const QPolygonF &l)
     changed(QObject::tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
 }
 
-void CGisItemTrk::getData(QPolygonF &l)
+void CGisItemTrk::getPolylineFromData(QPolygonF &l)
 {
     l.clear();
     foreach (const trkseg_t& seg, trk.segs)
@@ -283,7 +283,7 @@ void CGisItemTrk::getData(QPolygonF &l)
 
 }
 
-void CGisItemTrk::readLine(const QPolygonF &l)
+void CGisItemTrk::readTrackDataFromPolyLine(const QPolygonF &l)
 {
     trk.segs.clear();
     trk.segs.resize(1);

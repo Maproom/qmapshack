@@ -34,7 +34,7 @@ CGpxProject::CGpxProject(const QString &name,  CGisListWks * parent)
     : IGisProject("", "", parent)
 {
     setText(0, name);
-    setIcon(0,QIcon("://icons/32x32/GisProject.png"));
+    setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
     setToolTip(0, getInfo());
     valid = true;
 }
@@ -43,7 +43,7 @@ CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWk
     : IGisProject(key, filename, parent)
 {
     setText(0, QFileInfo(filename).baseName());
-    setIcon(0,QIcon("://icons/32x32/GisProject.png"));
+    setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
 
     // cerate file instance
     QFile file(filename);

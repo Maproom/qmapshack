@@ -9,14 +9,14 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64px"
-   height="64px"
-   id="svg3373"
+   width="64"
+   height="64"
+   id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="LoadGIS.svg">
+   sodipodi:docname="QmsProject.svg">
   <defs
-     id="defs3375" />
+     id="defs4" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,91 +24,79 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11"
-     inkscape:cx="17.876669"
-     inkscape:cy="30.392307"
+     inkscape:zoom="11.2"
+     inkscape:cx="2.1832751"
+     inkscape:cy="35.807015"
+     inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:document-units="px"
-     inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="1014"
-     inkscape:window-x="-1"
-     inkscape:window-y="-15"
+     inkscape:window-height="1012"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
-       id="grid4212" />
+       id="grid2985"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <metadata
-     id="metadata3378">
+     id="metadata7">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
      id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
+     transform="translate(0,-988.36218)">
+    <path
+       style="fill:none;stroke:#000080;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 54.195846,1014.5765 c 0,0 -15,1 -22.999999,6 -6.836782,4.273 14.726779,4.2732 10.999999,8 -3.72678,3.7268 -28.376052,2.4145 -32.8593748,5.1854 -2.005004,1.2391 -5.0000008,5 -5.0000008,5"
+       id="path3078"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csssc" />
+    <g
+       id="g3015"
+       transform="translate(0,-3.4013032)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3763"
+         d="m 27.270471,996.11501 25.339695,10.78739 -28.507157,10.7873 3.167462,-21.57469"
+         style="fill:#008000;stroke:#008000;stroke-width:1.34993112;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path3761"
+         d="m 20.720056,1034.6463 3.609174,-39.39147 3.609174,0 z"
+         style="fill:#000000;stroke:#000000;stroke-width:0.71901649px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+    </g>
     <rect
        style="fill:none;stroke:none"
-       id="rect3170-3"
-       width="35"
-       height="35"
-       x="15.045455"
-       y="14.318178" />
-    <g
-       id="g4204"
-       transform="translate(-4.6031783,0)">
-      <rect
-         y="15.014559"
-         x="20.308897"
-         height="33.607246"
-         width="24.47312"
-         id="rect4006-9-0"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.32052755;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path4010-7-5"
-         d="m 24.065275,19.49552 16.960344,0"
-         style="fill:none;stroke:#000080;stroke-width:1.32052755;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:transform-center-y="-1.9999976"
-         inkscape:transform-center-x="-2.567705"
-         inkscape:connector-curvature="0"
-         id="path4010-0-6-2"
-         d="m 24.065275,25.09719 16.960344,0"
-         style="fill:none;stroke:#000080;stroke-width:1.32052755;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:transform-center-y="-2.9999926"
-         inkscape:transform-center-x="0.432295"
-         inkscape:connector-curvature="0"
-         id="path4010-6-2-8"
-         d="m 24.065294,30.69876 16.960345,0"
-         style="fill:none;stroke:#000080;stroke-width:1.32052755;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text3176"
-         y="42.65152"
-         x="20.777876"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-         xml:space="preserve"><tspan
-           style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Bold"
-           y="42.65152"
-           x="20.777876"
-           id="tspan3178"
-           sodipodi:role="line">GPX</tspan></text>
-    </g>
-    <path
-       style="fill:#000080;stroke:#000080;stroke-width:1.44390047px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="M 41.55767,15.070198 49.384348,31.792055 41.55767,48.513913 z"
-       id="path4214"
-       inkscape:connector-curvature="0" />
-  </g>
+       id="rect3769"
+       width="40"
+       height="40"
+       x="2.6406245"
+       y="991.49402" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3859"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:12px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3861"><rect
+           id="rect3863"
+           width="75.35714"
+           height="62.142857"
+           x="-9.4642859"
+           y="2.2142856" /></flowRegion><flowPara
+         id="flowPara3865" /></flowRoot>  </g>
 </svg>

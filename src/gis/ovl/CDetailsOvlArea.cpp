@@ -76,7 +76,7 @@ CDetailsOvlArea::~CDetailsOvlArea()
 
 void CDetailsOvlArea::slotSetColor(int idx)
 {
-    if(area.isReadOnly())
+    if(area.isReadOnly() || originator)
     {
         return;
     }
@@ -87,7 +87,7 @@ void CDetailsOvlArea::slotSetColor(int idx)
 
 void CDetailsOvlArea::slotSetWidth(int idx)
 {
-    if(area.isReadOnly())
+    if(area.isReadOnly() || originator)
     {
         return;
     }
@@ -97,7 +97,7 @@ void CDetailsOvlArea::slotSetWidth(int idx)
 
 void CDetailsOvlArea::slotSetStyle(int idx)
 {
-    if(area.isReadOnly())
+    if(area.isReadOnly() || originator)
     {
         return;
     }
@@ -108,7 +108,7 @@ void CDetailsOvlArea::slotSetStyle(int idx)
 
 void CDetailsOvlArea::slotOpyacity(bool yes)
 {
-    if(area.isReadOnly())
+    if(area.isReadOnly() || originator)
     {
         return;
     }

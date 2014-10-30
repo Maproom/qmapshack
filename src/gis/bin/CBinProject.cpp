@@ -125,7 +125,12 @@ void CBinProject::saveAs(const QString& fn, IGisProject& project)
     out.setByteOrder(QDataStream::LittleEndian);
     out.setVersion(QDataStream::Qt_5_2);
 
+    QString tmp = project.getFilename();
+    project.setFilename(_fn_);
+
     project >> out;
+
+    project.setFilename(tmp);
 
     file.close();
 }

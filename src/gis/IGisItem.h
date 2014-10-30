@@ -558,8 +558,9 @@ class IGisItem : public QTreeWidgetItem
             {
                 QDomElement xmlHistory = xml.ownerDocument().createElement("ql:history");
                 xml.appendChild(xmlHistory);
-                foreach(const history_event_t& event, history.events)
+                for(int i = 0; i < history.histIdxCurrent; i++)
                 {
+                    const history_event_t& event = history.events[i];
                     QDomElement xmlEvent = xml.ownerDocument().createElement("ql:event");
                     xmlHistory.appendChild(xmlEvent);
                     writeXml(xmlEvent,"ql:icon", event.icon);

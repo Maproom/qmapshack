@@ -43,12 +43,6 @@ IGisProject::~IGisProject()
 
 }
 
-//void IGisProject::setFilename(const QString& fn)
-//{
-//    filename = fn;
-//    setText(0, QFileInfo(filename).baseName());
-//}
-
 void IGisProject::markAsSaved()
 {
     setText(1,"");

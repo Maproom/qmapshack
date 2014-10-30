@@ -528,8 +528,10 @@ void CMainWindow::slotLoadGISData()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+    QString filter = cfg.value("Paths/lastGisFilter", "GPS Exchange Format (*.gpx)").toString();
 
-    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, "GPS Exchange Format (*.gpx);; QMapShack Binary (*.qms)");
+
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, "GPS Exchange Format (*.gpx);; QMapShack Binary (*.qms)", &filter);
 
     if(filenames.isEmpty())
     {
@@ -540,6 +542,7 @@ void CMainWindow::slotLoadGISData()
 
     path = QFileInfo(filenames.first()).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
+    cfg.setValue("Paths/lastGisFilter", filter);
 }
 
 void CMainWindow::loadGISData(const QStringList& filenames)

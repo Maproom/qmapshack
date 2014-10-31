@@ -35,16 +35,290 @@ const QString IGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
+static void readXml(const QDomNode& xml, const QString& tag, bool& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        bool tmp;
+        bool ok = false;
+        tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
+        if(ok)
+        {
+            value = tmp;
+        }
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        qint32 tmp;
+        bool ok = false;
+        tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
+        if(!ok)
+        {
+            tmp = qRound(xml.namedItem(tag).toElement().text().toDouble(&ok));
+        }
+        if(ok)
+        {
+            value = tmp;
+        }
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, quint32& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        quint32 tmp;
+        bool ok = false;
+        tmp = xml.namedItem(tag).toElement().text().toUInt(&ok);
+        if(ok)
+        {
+            value = tmp;
+        }
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, quint64& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        quint64 tmp;
+        bool ok = false;
+        tmp = xml.namedItem(tag).toElement().text().toULongLong(&ok);
+        if(ok)
+        {
+            value = tmp;
+        }
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, qreal& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        qreal tmp;
+        bool ok = false;
+        tmp = xml.namedItem(tag).toElement().text().toDouble(&ok);
+        if(ok)
+        {
+            value = tmp;
+        }
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, QString& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        value = xml.namedItem(tag).toElement().text();
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, QString& value, bool& isHtml)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        const QDomNamedNodeMap& attr = xml.namedItem(tag).toElement().attributes();
+
+        if(attr.namedItem("html").nodeValue().toLocal8Bit().toLower() == "true")
+        {
+            isHtml = true;
+            value = xml.namedItem(tag).toElement().text();
+        }
+        else
+        {
+            isHtml = false;
+            value = "<pre>" + xml.namedItem(tag).toElement().text() + "</pre>";
+            value = xml.namedItem(tag).toElement().text();
+        }
+
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        QString time = xml.namedItem(tag).toElement().text();
+        IUnit::parseTimestamp(time, value);
+
+    }
+}
+
+static void readXml(const QDomNode& xml, const QString& tag, QList<IGisItem::link_t>& l)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        const QDomNodeList& links = xml.toElement().elementsByTagName(tag);
+        int N = links.count();
+        for(int n = 0; n < N; ++n)
+        {
+            const QDomNode& link = links.item(n);
+
+            IGisItem::link_t tmp;
+            tmp.uri.setUrl(link.attributes().namedItem("href").nodeValue());
+            readXml(link, "text", tmp.text);
+            readXml(link, "type", tmp.type);
+
+            l << tmp;
+        }
+    }
+}
+
+static void readXml(const QDomNode& xml, IGisItem::history_t& history)
+{
+    if(xml.namedItem("ql:history").isElement())
+    {
+        const QDomElement& xmlHistory = xml.namedItem("ql:history").toElement();
+
+        const QDomNodeList& xmlEntries = xmlHistory.elementsByTagName("ql:event");
+        int N = xmlEntries.count();
+        for(int n = 0; n < N; ++n)
+        {
+            const QDomNode& xmlEntry = xmlEntries.item(n);
+            IGisItem::history_event_t entry;
+            readXml(xmlEntry, "ql:icon", entry.icon);
+            readXml(xmlEntry, "ql:time", entry.time);
+            readXml(xmlEntry, "ql:comment", entry.comment);
+
+            history.events << entry;
+        }
+
+        history.histIdxInitial = history.events.size() - 1;
+        history.histIdxCurrent = history.histIdxInitial;
+    }
+}
+
+
+static void writeXml(QDomNode& xml, const QString& tag, qint32 val)
+{
+    if(val != NOINT)
+    {
+        QDomElement elem = xml.ownerDocument().createElement(tag);
+        xml.appendChild(elem);
+        QDomText text = xml.ownerDocument().createTextNode(QString::number(val));
+        elem.appendChild(text);
+    }
+}
+
+static void writeXml(QDomNode& xml, const QString& tag, quint32 val)
+{
+    if(val != NOINT)
+    {
+        QDomElement elem = xml.ownerDocument().createElement(tag);
+        xml.appendChild(elem);
+        QDomText text = xml.ownerDocument().createTextNode(QString::number(val));
+        elem.appendChild(text);
+    }
+}
+
+static void writeXml(QDomNode& xml, const QString& tag, quint64 val)
+{
+    if(val != 0)
+    {
+        QDomElement elem = xml.ownerDocument().createElement(tag);
+        xml.appendChild(elem);
+        QDomText text = xml.ownerDocument().createTextNode(QString::number(val));
+        elem.appendChild(text);
+    }
+}
+
+static void writeXml(QDomNode& xml, const QString& tag, const QString& val)
+{
+    if(!val.isEmpty())
+    {
+        QDomElement elem = xml.ownerDocument().createElement(tag);
+        xml.appendChild(elem);
+        QDomText text = xml.ownerDocument().createTextNode(val);
+        elem.appendChild(text);
+    }
+}
+
+static void writeXml(QDomNode& xml, const QString& tag, qreal val)
+{
+    if(val != NOFLOAT)
+    {
+        QDomElement elem = xml.ownerDocument().createElement(tag);
+        xml.appendChild(elem);
+        QDomText text = xml.ownerDocument().createTextNode(QString("%1").arg(val,0,'f',8));
+        elem.appendChild(text);
+    }
+}
+
+static void writeXml(QDomNode& xml, const QString& tag, const QString& val, bool isHtml)
+{
+    if(!val.isEmpty())
+    {
+        QDomElement elem = xml.ownerDocument().createElement(tag);
+        xml.appendChild(elem);
+        QDomText text = xml.ownerDocument().createCDATASection(val);
+        elem.appendChild(text);
+        elem.setAttribute("html",isHtml ? "True" : "False");
+
+    }
+}
+
+static void writeXml(QDomNode& xml, const QString& tag, const QDateTime& time)
+{
+    if(time.isValid())
+    {
+        QDomElement elem = xml.ownerDocument().createElement(tag);
+        xml.appendChild(elem);
+        QDomText text = xml.ownerDocument().createTextNode(time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'"));
+        elem.appendChild(text);
+    }
+}
+
+
+static void writeXml(QDomNode& xml, const QString& tag, const QList<IGisItem::link_t>& links)
+{
+    if(!links.isEmpty())
+    {
+        foreach(const IGisItem::link_t& link, links)
+        {
+            QDomElement elem = xml.ownerDocument().createElement(tag);
+            xml.appendChild(elem);
+
+            elem.setAttribute("href", link.uri.toString());
+            writeXml(elem, "text", link.text);
+            writeXml(elem, "type", link.type);
+        }
+    }
+}
+
+static void writeXml(QDomNode& xml, const IGisItem::history_t& history)
+{
+    if(history.events.size() > 1)
+    {
+        QDomElement xmlHistory = xml.ownerDocument().createElement("ql:history");
+        xml.appendChild(xmlHistory);
+        for(int i = 0; i <= history.histIdxCurrent; i++)
+        {
+            const IGisItem::history_event_t& event = history.events[i];
+            QDomElement xmlEvent = xml.ownerDocument().createElement("ql:event");
+            xmlHistory.appendChild(xmlEvent);
+            writeXml(xmlEvent,"ql:icon", event.icon);
+            writeXml(xmlEvent,"ql:time", event.time);
+            writeXml(xmlEvent,"ql:comment", event.comment);
+
+        }
+    }
+}
+
+
 void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
 {
 
-    IGisItem::readXml(xml,"name", metadata.name);
-    IGisItem::readXml(xml,"desc", metadata.desc);
+    readXml(xml,"name", metadata.name);
+    readXml(xml,"desc", metadata.desc);
 
     const QDomNode& xmlAuthor = xml.namedItem("author");
     if(xmlAuthor.isElement())
     {
-        IGisItem::readXml(xml,"name", metadata.author.name);
+        readXml(xml,"name", metadata.author.name);
 
         const QDomNode& xmlEmail = xmlAuthor.namedItem("email");
         if(xmlEmail.isElement())
@@ -58,8 +332,8 @@ void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
         if(xmlLink.isElement())
         {
             metadata.author.link.uri.setUrl(xmlLink.attributes().namedItem("href").nodeValue());
-            IGisItem::readXml(xmlLink, "text", metadata.author.link.text);
-            IGisItem::readXml(xmlLink, "type", metadata.author.link.type);
+            readXml(xmlLink, "text", metadata.author.link.text);
+            readXml(xmlLink, "type", metadata.author.link.type);
         }
     }
 
@@ -67,13 +341,13 @@ void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
     if(xmlCopyright.isElement())
     {
         metadata.copyright.author = xmlCopyright.attributes().namedItem("author").nodeValue();
-        IGisItem::readXml(xmlCopyright, "year", metadata.copyright.year);
-        IGisItem::readXml(xmlCopyright, "license", metadata.copyright.license);
+        readXml(xmlCopyright, "year", metadata.copyright.year);
+        readXml(xmlCopyright, "license", metadata.copyright.license);
     }
 
-    IGisItem::readXml(xml,"link", metadata.links);
-    IGisItem::readXml(xml,"time", metadata.time);
-    IGisItem::readXml(xml,"keywords", metadata.keywords);
+    readXml(xml,"link", metadata.links);
+    readXml(xml,"time", metadata.time);
+    readXml(xml,"keywords", metadata.keywords);
 
     const QDomNode& xmlBounds = xml.namedItem("bounds");
     if(xmlBounds.isElement())
@@ -113,15 +387,15 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
     QDomElement xmlMetadata = doc.createElement("metadata");
     gpx.appendChild(xmlMetadata);
 
-    IGisItem::writeXml(xmlMetadata,"name", metadata.name);
-    IGisItem::writeXml(xmlMetadata,"desc", metadata.desc);
+    writeXml(xmlMetadata,"name", metadata.name);
+    writeXml(xmlMetadata,"desc", metadata.desc);
 
     if(!metadata.author.name.isEmpty())
     {
         QDomElement xmlAuthor = doc.createElement("author");
         xmlMetadata.appendChild(xmlAuthor);
 
-        IGisItem::writeXml(xmlAuthor,"name", metadata.author.name);
+        writeXml(xmlAuthor,"name", metadata.author.name);
 
         if(!metadata.author.id.isEmpty() && !metadata.author.domain.isEmpty())
         {
@@ -137,8 +411,8 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
             xmlAuthor.appendChild(xmlLink);
 
             xmlLink.setAttribute("href", metadata.author.link.uri.toString());
-            IGisItem::writeXml(xmlLink, "text", metadata.author.link.text);
-            IGisItem::writeXml(xmlLink, "type", metadata.author.link.type);
+            writeXml(xmlLink, "text", metadata.author.link.text);
+            writeXml(xmlLink, "type", metadata.author.link.type);
 
         }
     }
@@ -149,13 +423,13 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
         xmlMetadata.appendChild(xmlCopyright);
 
         xmlCopyright.setAttribute("author", metadata.copyright.author);
-        IGisItem::writeXml(xmlCopyright, "year", metadata.copyright.year);
-        IGisItem::writeXml(xmlCopyright, "license", metadata.copyright.license);
+        writeXml(xmlCopyright, "year", metadata.copyright.year);
+        writeXml(xmlCopyright, "license", metadata.copyright.license);
 
     }
-    IGisItem::writeXml(xmlMetadata, "link", metadata.links);
-    IGisItem::writeXml(xmlMetadata, "time", metadata.time);
-    IGisItem::writeXml(xmlMetadata, "keywords", metadata.keywords);
+    writeXml(xmlMetadata, "link", metadata.links);
+    writeXml(xmlMetadata, "time", metadata.time);
+    writeXml(xmlMetadata, "keywords", metadata.keywords);
 
     if(metadata.bounds.isValid())
     {
@@ -227,6 +501,129 @@ void CGisItemWpt::save(QDomNode& gpx)
         xmlWpt.appendChild(xmlCache);
     }
 }
+
+void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
+{
+    geocache.service = eGC;
+    const QDomNamedNodeMap& attr = xmlCache.attributes();
+    geocache.id = attr.namedItem("id").nodeValue().toInt();
+
+    geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
+    geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
+    if(geocache.archived)
+    {
+        geocache.status = QObject::tr("Archived");
+    }
+    else if(geocache.available)
+    {
+        geocache.status = QObject::tr("Available");
+    }
+    else
+    {
+        geocache.status = QObject::tr("Not Available");
+    }
+
+    readXml(xmlCache, "groundspeak:name", geocache.name);
+    readXml(xmlCache, "groundspeak:placed_by", geocache.owner);
+    readXml(xmlCache, "groundspeak:type", geocache.type);
+    readXml(xmlCache, "groundspeak:container", geocache.container);
+    readXml(xmlCache, "groundspeak:difficulty", geocache.difficulty);
+    readXml(xmlCache, "groundspeak:terrain", geocache.terrain);
+    readXml(xmlCache, "groundspeak:short_description", geocache.shortDesc, geocache.shortDescIsHtml);
+    readXml(xmlCache, "groundspeak:long_description", geocache.longDesc, geocache.longDescIsHtml);
+    readXml(xmlCache, "groundspeak:encoded_hints", geocache.hint);
+    readXml(xmlCache, "groundspeak:country", geocache.country);
+    readXml(xmlCache, "groundspeak:state", geocache.state);
+
+    const QDomNodeList& logs = xmlCache.toElement().elementsByTagName("groundspeak:log");
+    uint N = logs.count();
+
+    for(uint n = 0; n < N; ++n)
+    {
+        const QDomNode& xmlLog = logs.item(n);
+        const QDomNamedNodeMap& attr = xmlLog.attributes();
+
+        geocachelog_t log;
+        log.id = attr.namedItem("id").nodeValue().toUInt();
+        readXml(xmlLog, "groundspeak:date", log.date);
+        readXml(xmlLog, "groundspeak:type", log.type);
+        if(xmlLog.namedItem("groundspeak:finder").isElement())
+        {
+            const QDomNamedNodeMap& attr = xmlLog.namedItem("groundspeak:finder").attributes();
+            log.finderId = attr.namedItem("id").nodeValue();
+        }
+
+        readXml(xmlLog, "groundspeak:finder", log.finder);
+        readXml(xmlLog, "groundspeak:text", log.text, log.textIsHtml);
+
+        geocache.logs << log;
+
+    }
+    geocache.hasData = true;
+}
+
+void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
+{
+    QString str;
+    xmlCache.toElement().setAttribute("xmlns:groundspeak", "http://www.groundspeak.com/cache/1/0");
+    xmlCache.toElement().setAttribute("id", geocache.id);
+    xmlCache.toElement().setAttribute("archived", geocache.archived ? "True" : "False");
+    xmlCache.toElement().setAttribute("available", geocache.available ? "True" : "False");
+
+    writeXml(xmlCache, "groundspeak:name", geocache.name);
+    writeXml(xmlCache, "groundspeak:placed_by", geocache.owner);
+    writeXml(xmlCache, "groundspeak:type", geocache.type);
+    writeXml(xmlCache, "groundspeak:container", geocache.container);
+
+    if(geocache.difficulty == int(geocache.difficulty))
+    {
+        str.sprintf("%1.0f", geocache.difficulty);
+    }
+    else
+    {
+        str.sprintf("%1.1f", geocache.difficulty);
+    }
+    writeXml(xmlCache, "groundspeak:difficulty", str);
+
+    if(geocache.terrain == int(geocache.terrain))
+    {
+        str.sprintf("%1.0f", geocache.terrain);
+    }
+    else
+    {
+        str.sprintf("%1.1f", geocache.terrain);
+    }
+    writeXml(xmlCache, "groundspeak:terrain", str);
+    writeXml(xmlCache, "groundspeak:short_description", geocache.shortDesc, geocache.shortDescIsHtml);
+    writeXml(xmlCache, "groundspeak:long_description", geocache.longDesc, geocache.longDescIsHtml);
+    writeXml(xmlCache, "groundspeak:encoded_hints", geocache.hint);
+
+    if(!geocache.logs.isEmpty())
+    {
+        QDomElement xmlLogs = xmlCache.ownerDocument().createElement("groundspeak:logs");
+        xmlCache.appendChild(xmlLogs);
+
+        foreach(const geocachelog_t& log, geocache.logs)
+        {
+            QDomElement xmlLog = xmlCache.ownerDocument().createElement("groundspeak:log");
+            xmlLogs.appendChild(xmlLog);
+
+            xmlLog.setAttribute("id", log.id);
+            writeXml(xmlLog, "groundspeak:date", log.date);
+            writeXml(xmlLog, "groundspeak:type", log.type);
+
+            QDomElement xmlFinder = xmlCache.ownerDocument().createElement("groundspeak:finder");
+            xmlLog.appendChild(xmlFinder);
+
+            QDomText _finder_ = xmlCache.ownerDocument().createCDATASection(log.finder);
+            xmlFinder.appendChild(_finder_);
+            xmlFinder.setAttribute("id", log.finderId);
+
+            writeXml(xmlLog, "groundspeak:text", log.text, log.textIsHtml);
+        }
+    }
+}
+
 
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {

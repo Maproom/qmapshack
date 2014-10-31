@@ -40,7 +40,7 @@ CBinProject::CBinProject(const QString &filename, const QString &key, CGisListWk
     in.setByteOrder(QDataStream::LittleEndian);
     in.setVersion(QDataStream::Qt_5_2);
 
-    *this << in;
+    *this << in;    
 
     file.close();
 

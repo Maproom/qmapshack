@@ -137,7 +137,7 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
 {
     history = hist;
     loadHistoryEntry(hist.histIdxCurrent);
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);    
 }
 
 

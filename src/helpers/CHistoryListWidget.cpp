@@ -77,6 +77,8 @@ void CHistoryListWidget::slotSelectionChanged()
     }
 
     item->loadHistoryEntry(currentRow());
+    item->setText(1,"*");
+    item->parent()->setText(1,"*");
 
     emit sigChanged();
 }

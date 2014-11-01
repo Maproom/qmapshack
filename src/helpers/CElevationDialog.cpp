@@ -60,7 +60,7 @@ void CElevationDialog::accept()
     }
     else
     {
-        val.setValue(lineValue->text());
+        val.setValue(lineValue->text().toDouble() / IUnit::self().basefactor);
     }
 
     QDialog::accept();

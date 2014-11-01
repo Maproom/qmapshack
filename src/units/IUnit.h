@@ -31,7 +31,7 @@ extern const QPoint  NOPOINT;
 
 class IUnit : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
     public:
         virtual ~IUnit();
 

@@ -26,6 +26,7 @@
 #include "dem/CDemDraw.h"
 #include "units/IUnit.h"
 #include "units/CTimeZoneSetup.h"
+#include "units/CUnitsSetup.h"
 #include "version.h"
 #include "CAbout.h"
 #include "gis/CGisWidget.h"
@@ -48,7 +49,7 @@ CMainWindow::CMainWindow()
     gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);
 
-    IUnit::self().setUnitType(IUnit::eTypeMetric, this);
+
 
     SETTINGS;
     // start ---- restore window geometry -----
@@ -67,6 +68,7 @@ CMainWindow::CMainWindow()
     }
     // end ---- restore window geometry -----
 
+    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
 
     connect(actionAbout, SIGNAL(triggered()), this, SLOT(slotAbout()));
     connect(actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
@@ -82,6 +84,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
     connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
     connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
+    connect(actionSetupUnits, SIGNAL(triggered()), this, SLOT(slotSetupUnits()));
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
@@ -153,6 +156,8 @@ CMainWindow::~CMainWindow()
     SETTINGS;
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());
+    cfg.setValue("MainWindow/units", IUnit::self().type);
+
 
     cfg.beginGroup("Canvas");
     QList<CCanvas*> allCanvas;
@@ -521,6 +526,12 @@ void CMainWindow::slotSetupMapWks()
 void CMainWindow::slotSetupTimeZone()
 {
     CTimeZoneSetup dlg(this);
+    dlg.exec();
+}
+
+void CMainWindow::slotSetupUnits()
+{
+    CUnitsSetup dlg(this);
     dlg.exec();
 }
 

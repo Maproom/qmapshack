@@ -75,6 +75,7 @@
         <file>icons/32x32/EditDetails.png</file>
         <file>icons/32x32/EditText.png</file>
         <file>icons/32x32/TimeZoneSetup.png</file>
+        <file>icons/32x32/UnitSetup.png</file>
         <file>icons/32x32/Undo.png</file>
         <file>icons/32x32/Redo.png</file>
         <file>icons/32x32/Cut.png</file>
@@ -171,6 +172,7 @@
         <file>icons/48x48/EditDetails.png</file>
         <file>icons/48x48/EditText.png</file>
         <file>icons/48x48/TimeZoneSetup.png</file>
+        <file>icons/48x48/UnitSetup.png</file>
         <file>icons/48x48/Undo.png</file>
         <file>icons/48x48/Redo.png</file>
         <file>icons/48x48/Cut.png</file>

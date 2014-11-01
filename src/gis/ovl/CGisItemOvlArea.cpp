@@ -292,6 +292,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF
 
     gis->convertRad2Px(line);
 
+    p.save();
     p.setOpacity(area.opacity ? 0.3 : 1.0);
 
     penBackground.setWidth(area.width + 2);
@@ -304,7 +305,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF
     p.setBrush(QBrush(color, (Qt::BrushStyle)area.style));
     p.setPen(penForeground);
     p.drawPolygon(line);
-
+    p.restore();
 }
 
 void CGisItemOvlArea::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)

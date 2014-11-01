@@ -307,15 +307,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
             /// offset into lineSimple
             qint32  idxVisible;
 
-            /// shadow latitude
-            qreal shdwLat;
-            /// shadow longitude
-            qreal shdwLon;
-            /// shadow elevation
-            qint32 shdwEle;
-            /// shadow timestamp
-            QDateTime shdwTime;
-
             /// the distance to the last point
             qreal deltaDistance;
             /// the distance from the start of the track

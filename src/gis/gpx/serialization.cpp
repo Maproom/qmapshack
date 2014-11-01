@@ -652,11 +652,6 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
             const QDomNode& xmlTrkpt = xmlTrkpts.item(m);
             readWpt(xmlTrkpt, trkpt);
 
-            trkpt.shdwLon   = trkpt.lon;
-            trkpt.shdwLat   = trkpt.lat;
-            trkpt.shdwEle   = trkpt.ele;
-            trkpt.shdwTime  = trkpt.time;
-
             const QDomNode& ext = xmlTrkpt.namedItem("extensions");
             if(ext.isElement())
             {

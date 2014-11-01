@@ -72,6 +72,15 @@ class CGisItemWpt : public IGisItem
             QList<geocachelog_t> logs;
         };
 
+        struct image_t
+        {
+            QImage  pixmap;
+            qreal   direction;
+            QString info;
+            QString filePath;
+            QString fileName;
+        };
+
         /**
            @brief Create a completely new waypoint
            @param pos       the waypoint's position [°]
@@ -101,6 +110,11 @@ class CGisItemWpt : public IGisItem
          */
         CGisItemWpt(const QDomNode& xml, IGisProject * project);
 
+        /**
+           @brief Create item from list of changes
+           @param hist      the change history
+           @param project   the project to append with item
+        */
         CGisItemWpt(const history_t& hist, IGisProject * project);
         virtual ~CGisItemWpt();
 
@@ -160,6 +174,7 @@ class CGisItemWpt : public IGisItem
         wpt_t wpt;
         qreal proximity;
         geocache_t geocache;
+        QList<image_t> images;
 
         QPointF focus;
         QPointF posScreen;

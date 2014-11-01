@@ -34,6 +34,7 @@
 #define VER_WPT_T       quint8(1)
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
+#define VER_IMAGE       quint8(1)
 #define VER_PROJECT     quint8(1)
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
@@ -260,6 +261,38 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CGisItemWpt::image_t& image)
+{
+    QBuffer imgBuf;
+    image.pixmap.save(&imgBuf,"JPEG");
+
+    stream << VER_IMAGE;
+    stream << imgBuf.data();
+    stream << image.direction;
+    stream << image.info;
+    stream << image.filePath;
+    stream << image.fileName;
+
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CGisItemWpt::image_t& image)
+{
+    quint8 version;
+    QBuffer imgBuf;
+
+    stream >> version;
+    stream >> imgBuf.buffer();
+    stream >> image.direction;
+    stream >> image.info;
+    stream >> image.filePath;
+    stream >> image.fileName;
+
+    image.pixmap.load(&imgBuf,"JPEG");
+
+    return stream;
+}
+
 QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkseg_t& seg)
 {
     stream << VER_TRKSEG << seg.pts;
@@ -275,7 +308,7 @@ QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkseg_t& seg)
 
 QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkpt_t& pt)
 {
-    stream << VER_TRKPT << pt.flags << pt.shdwLon << pt.shdwLat << pt.shdwEle << pt.shdwTime;
+    stream << VER_TRKPT << pt.flags;
     stream << (const IGisItem::wpt_t&)pt;
     return stream;
 }
@@ -283,7 +316,7 @@ QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkpt_t& pt)
 QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkpt_t& pt)
 {
     quint8 version;
-    stream >> version >> pt.flags >> pt.shdwLon >> pt.shdwLat >> pt.shdwEle >> pt.shdwTime;
+    stream >> version >> pt.flags;
     stream >> (IGisItem::wpt_t&)pt;
     return stream;
 }
@@ -417,6 +450,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     in >> proximity;
     in >> wpt;
     in >> geocache;
+    in >> images;
 
     setIcon();
     setText(0, wpt.name);
@@ -437,6 +471,7 @@ QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
     out << proximity;
     out << wpt;
     out << geocache;
+    out << images;
 
     stream.writeRawData(MAGIC_WPT, MAGIC_SIZE);
     stream << VER_WPT;

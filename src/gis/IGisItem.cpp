@@ -224,7 +224,7 @@ void IGisItem::setupHistory()
     history.histIdxCurrent = history.events.size() - 1;
 }
 
-void IGisItem::loadHistoryEntry(int idx)
+void IGisItem::loadHistory(int idx)
 {
     // test for bad index
     if((idx >= history.events.size()) || (idx < 0))
@@ -249,6 +249,20 @@ void IGisItem::loadHistoryEntry(int idx)
     history.histIdxCurrent = idx;
 }
 
+void IGisItem::cutHistory(int idx)
+{
+    // test for bad index
+    if((idx >= history.events.size()) || (idx < 0))
+    {
+        return;
+    }
+
+    while(history.events.size() > (idx + 1))
+    {
+        history.events.pop_back();
+    }
+    loadHistory(idx);
+}
 
 bool IGisItem::isReadOnly()
 {

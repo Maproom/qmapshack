@@ -72,7 +72,7 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     history = hist;
-    loadHistoryEntry(hist.histIdxCurrent);
+    loadHistory(hist.histIdxCurrent);
 }
 
 

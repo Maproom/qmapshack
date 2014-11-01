@@ -36,9 +36,13 @@ class CHistoryListWidget : public QListWidget
 
     private slots:
         void slotSelectionChanged();
+        void slotContextMenu(const QPoint& point);
+        void slotCutHistory();
 
     private:
         QString key;
+        QMenu * menu;
+        QAction * actionCutHistory;
 };
 
 #endif //CHISTORYLISTWIDGET_H

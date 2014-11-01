@@ -136,7 +136,7 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
     , posScreen(NOPOINTF)
 {
     history = hist;
-    loadHistoryEntry(hist.histIdxCurrent);
+    loadHistory(hist.histIdxCurrent);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);    
 }
 

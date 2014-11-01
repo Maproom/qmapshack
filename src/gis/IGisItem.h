@@ -244,7 +244,9 @@ class IGisItem : public QTreeWidgetItem
            @brief Load a given state of chnage from the history
            @param idx
         */
-        void loadHistoryEntry(int idx);
+        void loadHistory(int idx);
+
+        void cutHistory(int idx);
 
         static QString removeHtml(const QString &str);
 

@@ -222,7 +222,7 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     , mouseClickFocus(0)
 {
     history = hist;
-    loadHistoryEntry(hist.histIdxCurrent);
+    loadHistory(hist.histIdxCurrent);
 }
 
 

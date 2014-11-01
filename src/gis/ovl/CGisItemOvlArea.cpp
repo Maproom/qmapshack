@@ -168,7 +168,7 @@ CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     history = hist;
-    loadHistoryEntry(hist.histIdxCurrent);
+    loadHistory(hist.histIdxCurrent);
 }
 
 

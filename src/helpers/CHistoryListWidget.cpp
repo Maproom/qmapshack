@@ -24,7 +24,12 @@
 CHistoryListWidget::CHistoryListWidget(QWidget *parent)
     : QListWidget(parent)
 {
+    setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+
+    menu = new QMenu(this);
+    actionCutHistory = menu->addAction(QIcon("://icons/32x32/CutHistory.png"),tr("Cut history"), this, SLOT(slotCutHistory()));
 }
 
 CHistoryListWidget::~CHistoryListWidget()
@@ -76,7 +81,38 @@ void CHistoryListWidget::slotSelectionChanged()
         return;
     }
 
-    item->loadHistoryEntry(currentRow());
+    item->loadHistory(currentRow());
+    item->setText(1,"*");
+    item->parent()->setText(1,"*");
+
+    emit sigChanged();
+}
+
+void CHistoryListWidget::slotContextMenu(const QPoint& point)
+{
+    if(currentRow() == (count() - 1) || (count() == 0))
+    {
+        return;
+    }
+
+    QPoint p = mapToGlobal(point);
+    menu->exec(p);
+}
+
+void CHistoryListWidget::slotCutHistory()
+{
+    if(currentRow() == (count() - 1))
+    {
+        return;
+    }
+
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if(item == 0)
+    {
+        return;
+    }
+
+    item->cutHistory(currentRow());
     item->setText(1,"*");
     item->parent()->setText(1,"*");
 

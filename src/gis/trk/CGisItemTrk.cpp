@@ -102,7 +102,7 @@ const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 QString CGisItemTrk::keyUserFocus;
 
 /// used to create a new track from a part of an existing track
-CGisItemTrk::CGisItemTrk(const QString &name, quint32 idx1, quint32 idx2, const trk_t& srctrk, IGisProject * project)
+CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, -1)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
@@ -928,14 +928,26 @@ void CGisItemTrk::hideSelectedPoints()
         return;
     }
 
-    quint32 idx1 = mouseClickFocus->idxTotal;
-    quint32 idx2 = mouseMoveFocus->idxTotal;
-
+    // read start/stop indices
+    qint32 idx1 = mouseClickFocus->idxTotal;
+    qint32 idx2 = mouseMoveFocus->idxTotal;
     if(idx1 > idx2)
     {
         qSwap(idx1,idx2);
     }
 
+    // if first index is the first point adjust index to hide it, too
+    if(idx1 == 0)
+    {
+        idx1 = -1;
+    }
+    // if second index is the last point adjust index to hide it, too
+    if(idx2 == cntTotalPoints - 1)
+    {
+        idx2 = cntTotalPoints;
+    }
+
+    // iterate over all segments and delete points between idx1 and idx2
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -962,8 +974,8 @@ void CGisItemTrk::showSelectedPoints()
         return;
     }
 
-    quint32 idx1 = mouseClickFocus->idxTotal;
-    quint32 idx2 = mouseMoveFocus->idxTotal;
+    qint32 idx1 = mouseClickFocus->idxTotal;
+    qint32 idx2 = mouseMoveFocus->idxTotal;
 
     if(idx1 > idx2)
     {
@@ -1455,7 +1467,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 }
 
 
-void CGisItemTrk::setMouseFocusByIndex(quint32 idx, focusmode_e mode)
+void CGisItemTrk::setMouseFocusByIndex(qint32 idx, focusmode_e mode)
 {
     const trkpt_t * newPointOfFocus = 0;
 

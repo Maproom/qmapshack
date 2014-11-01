@@ -51,7 +51,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
             , eDrawRange
         };
 
-        CGisItemTrk(const QString& name, quint32 idx1, quint32 idx2, const trk_t &srctrk, IGisProject *project);
+        CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const trk_t &srctrk, IGisProject *project);
         CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx);
         CGisItemTrk(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
         CGisItemTrk(const QDomNode &xml, IGisProject *project);
@@ -213,7 +213,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
            @brief Use point with given index counter
            @param idx
         */
-        void setMouseFocusByIndex(quint32 idx, focusmode_e mode);
+        void setMouseFocusByIndex(qint32 idx, focusmode_e mode);
 
         static const QColor  lineColors[TRK_N_COLORS];
         static const QString bulletColors[TRK_N_COLORS];
@@ -303,7 +303,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
             quint32 flags;
             /// index within the complete track
-            quint32 idxTotal;
+            qint32  idxTotal;
             /// offset into lineSimple
             qint32  idxVisible;
 
@@ -376,8 +376,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         drawmode_e drawMode;
 
-        quint32     cntTotalPoints;
-        quint32     cntVisiblePoints;
+        qint32      cntTotalPoints;
+        qint32      cntVisiblePoints;
         QDateTime   timeStart;
         QDateTime   timeEnd;
         qreal       totalDistance;

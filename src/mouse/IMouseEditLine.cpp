@@ -755,9 +755,10 @@ void IMouseEditLine::slotDeleteRange()
     }
     scrOptRange->deleteLater();
 
-    int len = qAbs(idxStop - idxStart) + 1;
+    int len = qAbs(idxStop - idxStart);
     int idx = idxStart < idxStop ? idxStart : idxStop;
-    coords1.remove(idx,len);
+
+    coords1.remove(idx+1,len-1);
     line = coords1;
     gis->convertRad2Px(line);
 

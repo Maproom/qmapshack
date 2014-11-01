@@ -24,6 +24,7 @@
 #include "helpers/CPositionDialog.h"
 #include "helpers/CWptIconDialog.h"
 #include "helpers/CTextEditWidget.h"
+#include "helpers/CElevationDialog.h"
 
 
 #include <QtWidgets>
@@ -169,7 +170,7 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     else if(link == "elevation")
     {
         QVariant var(wpt.getElevation());
-        CInputDialog dlg(0, tr("Enter new elevation."), var, QVariant(NOINT));
+        CElevationDialog dlg(0, var, QVariant(NOINT), wpt.getPosition());
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setElevation(var.toInt());

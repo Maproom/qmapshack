@@ -58,6 +58,7 @@ class CGisListWks : public QTreeWidget
         void slotReverseTrk();
         void slotCombineTrk();
         void slotRangeTrk();
+        void slotEditArea();
         void slotAddEmptyProject();
         void slotCloseAllProjects();
         void slotSearchGoogle(bool on);
@@ -79,6 +80,7 @@ class CGisListWks : public QTreeWidget
         QAction * actionReverseTrk;
         QAction * actionCombineTrk;
         QAction * actionRangeTrk;
+        QAction * actionEditArea;
 
         QMenu * menuNone;
 

@@ -52,6 +52,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditTrk   = menuItem->addAction(QIcon("://icons/32x32/LineMove.png"),tr("Edit Track Points"), this, SLOT(slotEditTrk()));
     actionReverseTrk = menuItem->addAction(QIcon("://icons/32x32/Reverse.png"),tr("Reverse Track"), this, SLOT(slotReverseTrk()));
     actionCombineTrk = menuItem->addAction(QIcon("://icons/32x32/Combine.png"),tr("Combine Tracks"), this, SLOT(slotCombineTrk()));
+    actionEditArea   = menuItem->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     actionFocusTrk->setCheckable(true);
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));    
@@ -369,6 +370,17 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionFocusTrk->setChecked(trk->hasUserFocus());
             actionEditTrk->setEnabled(!trk->isReadOnly());            
         }
+
+        // try to cast item to track and hide/show actions on result
+        CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(gisItem);
+        if(area == 0)
+        {
+            actionEditArea->setVisible(false);
+        }
+        else
+        {
+            actionEditArea->setVisible(true);
+        }
         // display menu
         QPoint p = mapToGlobal(point);
         menuItem->exec(p);
@@ -549,6 +561,19 @@ void CGisListWks::slotRangeTrk()
     }
     IGisItem::mutexItems.unlock();
 }
+
+void CGisListWks::slotEditArea()
+{
+    IGisItem::mutexItems.lock();
+    CGisItemOvlArea * gisItem = dynamic_cast<CGisItemOvlArea*>(currentItem());
+    if(gisItem != 0)
+    {
+        QString key = gisItem->getKey();
+        CGisWidget::self().editAreaByKey(key);
+    }
+    IGisItem::mutexItems.unlock();
+}
+
 
 void CGisListWks::slotAddEmptyProject()
 {

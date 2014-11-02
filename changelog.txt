@@ -1,4 +1,5 @@
 V 0.8.0
+* Add unit setup (metric, imperial, nautical)
 * Add data serialization for track, waypoint, route and area
 * Add binary *.qms format to store projects without any loss of data
 * Enhance item history to perform full undo and redo

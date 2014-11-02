@@ -28,7 +28,15 @@ class CSelectProjectDialog : public QDialog, private Ui::ISelectProjectDialog
 {
     Q_OBJECT
     public:
-        CSelectProjectDialog(QString& key, QString& name, QTreeWidget *parent);
+        enum type_e
+        {
+             eTypeNone
+            ,eTypeQms
+            ,eTypeGpx
+
+        };
+
+        CSelectProjectDialog(QString& key, QString& name, type_e& type, QTreeWidget *parent);
         virtual ~CSelectProjectDialog();
 
     public slots:
@@ -38,10 +46,12 @@ class CSelectProjectDialog : public QDialog, private Ui::ISelectProjectDialog
         void slotItemClicked(QListWidgetItem * item);
         void slotProjectChanged(const QString& text);
         void slotProjectEdited(const QString& text);
+        void slotTypeChanged();
 
     private:
         QString& key;
         QString& name;
+        type_e& type;
 
 };
 

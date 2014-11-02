@@ -22,6 +22,15 @@
 
 
 #include <QtWidgets>
+CBinProject::CBinProject(const QString &name,  CGisListWks * parent)
+    : IGisProject("", "", parent)
+{
+    setText(0, name);
+    setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
+    setToolTip(0, getInfo());
+    valid = true;
+}
+
 
 CBinProject::CBinProject(const QString &filename, const QString &key, CGisListWks *parent)
     : IGisProject(key, filename, parent)

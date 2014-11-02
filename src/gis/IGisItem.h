@@ -246,7 +246,7 @@ class IGisItem : public QTreeWidgetItem
         */
         void loadHistory(int idx);
 
-        void cutHistory(int idx);
+        void cutHistory();
 
         static QString removeHtml(const QString &str);
 

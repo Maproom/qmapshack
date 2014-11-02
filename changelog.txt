@@ -1,3 +1,9 @@
+V 0.8.0
+* Add data serialization for track, waypoint, route and area
+* Add binary *.qms format to store projects without any loss of data
+* Enhance item history to perform full undo and redo
+* Many little fixes and enhancements
+
 V 0.7.0
 * Add Google GIS search
 * Add support for TMS maps

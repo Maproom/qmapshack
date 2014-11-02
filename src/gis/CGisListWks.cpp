@@ -21,11 +21,13 @@
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/bin/CBinProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/search/CSearchGoogle.h"
+#include "helpers/CSelectProjectDialog.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
@@ -577,13 +579,23 @@ void CGisListWks::slotEditArea()
 
 void CGisListWks::slotAddEmptyProject()
 {
-    QString name = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, tr("New Project"));
+    QString key, name;
+    CSelectProjectDialog::type_e type;
+    CSelectProjectDialog dlg(key, name, type, 0);
+    dlg.exec();
     if(name.isEmpty())
     {
         return;
     }
 
-    new CGpxProject(name, this);
+    if(type == CSelectProjectDialog::eTypeGpx)
+    {
+        new CGpxProject(name, this);
+    }
+    else if(type == CSelectProjectDialog::eTypeQms)
+    {
+        new CBinProject(name, this);
+    }
 }
 
 void CGisListWks::slotCloseAllProjects()

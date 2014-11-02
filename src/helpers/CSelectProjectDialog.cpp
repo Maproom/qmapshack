@@ -18,26 +18,54 @@
 
 #include "helpers/CSelectProjectDialog.h"
 #include "gis/IGisProject.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, QTreeWidget * parent)
+CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& type, QTreeWidget * parent)
     : QDialog(parent)
     , key(key)
     , name(name)
+    , type(type)
 {
     setupUi(this);
 
-    for(int i = 0; i < parent->topLevelItemCount(); i++)
+    if(parent)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
-        if(project == 0)
+        for(int i = 0; i < parent->topLevelItemCount(); i++)
         {
-         continue;
-        }
+            IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
+            if(project == 0)
+            {
+             continue;
+            }
 
-        QListWidgetItem * item = new QListWidgetItem(project->icon(0), project->text(0),listWidget);
-        item->setData(Qt::UserRole, project->getKey());
+            QListWidgetItem * item = new QListWidgetItem(project->icon(0), project->text(0),listWidget);
+            item->setData(Qt::UserRole, project->getKey());
+        }
+    }
+    else
+    {
+        listWidget->hide();
+        label1->hide();
+    }
+    frameType->setEnabled(listWidget->count() == 0);
+
+    SETTINGS;
+    QString filter = cfg.value("Paths/lastGisFilter", "GPS Exchange Format (*.qms)").toString();
+    if(filter.contains("qms"))
+    {
+        radioQms->setChecked(true);
+        type = eTypeQms;
+    }
+    else if(filter.contains("gpx"))
+    {
+        radioGpx->setChecked(true);
+        type = eTypeGpx;
+    }
+    else
+    {
+        radioQms->setChecked(true);
     }
 
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
@@ -45,7 +73,10 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, QTreeWid
     connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
     connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotProjectChanged(QString)));
     connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(slotProjectEdited(QString)));
+    connect(radioQms, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
+    connect(radioGpx, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
 
+    adjustSize();
 }
 
 CSelectProjectDialog::~CSelectProjectDialog()
@@ -61,11 +92,13 @@ void CSelectProjectDialog::reject()
     QDialog::reject();
 }
 
+
 void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
 {
 
     key = item->data(Qt::UserRole).toString();
     lineEdit->setText(item->text());
+    frameType->setEnabled(false);
 }
 
 void CSelectProjectDialog::slotProjectChanged(const QString& text)
@@ -79,4 +112,17 @@ void CSelectProjectDialog::slotProjectEdited(const QString& text)
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!text.isEmpty());
     key.clear();
     name = text;
+    frameType->setEnabled(true);
+}
+
+void CSelectProjectDialog::slotTypeChanged()
+{
+    if(radioQms->isChecked())
+    {
+        type = eTypeQms;
+    }
+    else if(radioGpx->isChecked())
+    {
+        type = eTypeGpx;
+    }
 }

@@ -249,19 +249,12 @@ void IGisItem::loadHistory(int idx)
     history.histIdxCurrent = idx;
 }
 
-void IGisItem::cutHistory(int idx)
+void IGisItem::cutHistory()
 {
-    // test for bad index
-    if((idx >= history.events.size()) || (idx < 0))
-    {
-        return;
-    }
-
-    while(history.events.size() > (idx + 1))
+    while(history.events.size() > (history.histIdxCurrent + 1))
     {
         history.events.pop_back();
     }
-    loadHistory(idx);
 }
 
 bool IGisItem::isReadOnly()

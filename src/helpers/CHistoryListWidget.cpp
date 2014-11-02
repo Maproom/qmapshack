@@ -112,7 +112,7 @@ void CHistoryListWidget::slotCutHistory()
         return;
     }
 
-    item->cutHistory(currentRow());
+    item->cutHistory();
     item->setText(1,"*");
     item->parent()->setText(1,"*");
 

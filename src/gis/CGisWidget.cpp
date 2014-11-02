@@ -118,8 +118,9 @@ void CGisWidget::slotSaveAll()
 IGisProject * CGisWidget::selectProject()
 {
     QString key, name;
+    CSelectProjectDialog::type_e type;
 
-    CSelectProjectDialog dlg(key, name, treeWks);
+    CSelectProjectDialog dlg(key, name, type, treeWks);
     dlg.exec();
 
     IGisProject * project = 0;
@@ -143,7 +144,15 @@ IGisProject * CGisWidget::selectProject()
     else if(!name.isEmpty())
     {
         IGisItem::mutexItems.lock();
-        project = new CGpxProject(name, treeWks);
+        if(type == CSelectProjectDialog::eTypeGpx)
+        {
+            project = new CGpxProject(name, treeWks);
+        }
+        else if (type == CSelectProjectDialog::eTypeQms)
+        {
+            project = new CBinProject(name, treeWks);
+        }
+
         IGisItem::mutexItems.unlock();
     }
 

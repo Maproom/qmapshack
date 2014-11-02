@@ -24,6 +24,7 @@
 class CBinProject : public IGisProject
 {
     public:
+        CBinProject(const QString &name,  CGisListWks * parent);
         CBinProject(const QString& filename, const QString &key, CGisListWks * parent);
         virtual ~CBinProject();
 

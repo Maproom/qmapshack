@@ -93,6 +93,7 @@ void CDetailsTrk::setupGui()
     {
         return;
     }
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     originator = true;
 
     QString str, val, unit;
@@ -252,6 +253,7 @@ void CDetailsTrk::setupGui()
     listHistory->setupHistory(trk);
 
     originator = false;
+    QApplication::restoreOverrideCursor();
 }
 
 void CDetailsTrk::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
@@ -315,7 +317,6 @@ void CDetailsTrk::slotColorChanged(int idx)
     {
         trk.setColor(idx);
     }
-    setupGui();
 }
 
 void CDetailsTrk::slotChangeReadOnlyMode(bool on)
@@ -354,7 +355,6 @@ void CDetailsTrk::slotNameChanged()
     }
 
     lineName->setPalette(palette);
-    setupGui();
 }
 
 void CDetailsTrk::slotItemSelectionChanged()
@@ -377,8 +377,6 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setComment(dlg.getHtml());
         }
-        setupGui();
-
     }
     else if(url.toString() == "description")
     {
@@ -388,7 +386,6 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setDescription(dlg.getHtml());
         }
-        setupGui();
     }
     else
     {

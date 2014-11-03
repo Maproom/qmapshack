@@ -21,7 +21,7 @@
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
 #include "gis/gpx/CGpxProject.h"
-#include "gis/bin/CBinProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"
@@ -594,7 +594,7 @@ void CGisListWks::slotAddEmptyProject()
     }
     else if(type == CSelectProjectDialog::eTypeQms)
     {
-        new CBinProject(name, this);
+        new CQmsProject(name, this);
     }
 }
 

@@ -16,13 +16,13 @@
 
 **********************************************************************************************/
 
-#include "gis/bin/CBinProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "helpers/CSettings.h"
 
 
 #include <QtWidgets>
-CBinProject::CBinProject(const QString &name,  CGisListWks * parent)
+CQmsProject::CQmsProject(const QString &name,  CGisListWks * parent)
     : IGisProject("", "", parent)
 {
     setText(0, name);
@@ -32,7 +32,7 @@ CBinProject::CBinProject(const QString &name,  CGisListWks * parent)
 }
 
 
-CBinProject::CBinProject(const QString &filename, const QString &key, CGisListWks *parent)
+CQmsProject::CQmsProject(const QString &filename, const QString &key, CGisListWks *parent)
     : IGisProject(key, filename, parent)
 {
     setText(0, QFileInfo(filename).baseName());
@@ -57,13 +57,13 @@ CBinProject::CBinProject(const QString &filename, const QString &key, CGisListWk
     valid = true;
 }
 
-CBinProject::~CBinProject()
+CQmsProject::~CQmsProject()
 {
 
 }
 
 
-void CBinProject::save()
+void CQmsProject::save()
 {
 
     if(filename.isEmpty())
@@ -77,7 +77,7 @@ void CBinProject::save()
     }
 }
 
-void CBinProject::saveAs()
+void CQmsProject::saveAs()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
@@ -113,7 +113,7 @@ void CBinProject::saveAs()
 
 }
 
-void CBinProject::saveAs(const QString& fn, IGisProject& project)
+void CQmsProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
     QFileInfo fi(_fn_);

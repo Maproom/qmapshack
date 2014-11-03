@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#ifndef CBINPROJECT_H
-#define CBINPROJECT_H
+#ifndef CQMSPROJECT_H
+#define CQMSPROJECT_H
 
 #include "gis/IGisProject.h"
 
-class CBinProject : public IGisProject
+class CQmsProject : public IGisProject
 {
     public:
-        CBinProject(const QString &name,  CGisListWks * parent);
-        CBinProject(const QString& filename, const QString &key, CGisListWks * parent);
-        virtual ~CBinProject();
+        CQmsProject(const QString &name,  CGisListWks * parent);
+        CQmsProject(const QString& filename, const QString &key, CGisListWks * parent);
+        virtual ~CQmsProject();
 
         void save();
         void saveAs();
@@ -35,5 +35,5 @@ class CBinProject : public IGisProject
 
 };
 
-#endif //CBINPROJECT_H
+#endif //CQMSPROJECT_H
 

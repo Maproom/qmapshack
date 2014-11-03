@@ -21,7 +21,7 @@
 #include "gis/IGisItem.h"
 #include "gis/CGisDraw.h"
 #include "gis/gpx/CGpxProject.h"
-#include "gis/bin/CBinProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -84,7 +84,7 @@ void CGisWidget::loadGisProject(const QString& filename)
     }
     else if(suffix == "qms")
     {
-        item = new CBinProject(filename, key, treeWks);
+        item = new CQmsProject(filename, key, treeWks);
     }
 
     if(item && !item->isValid())
@@ -150,7 +150,7 @@ IGisProject * CGisWidget::selectProject()
         }
         else if (type == CSelectProjectDialog::eTypeQms)
         {
-            project = new CBinProject(name, treeWks);
+            project = new CQmsProject(name, treeWks);
         }
 
         IGisItem::mutexItems.unlock();

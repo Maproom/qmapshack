@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/gpx/CGpxProject.h"
-#include "gis/bin/CBinProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "gis/CGisListWks.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -161,7 +161,7 @@ void CGpxProject::saveAs()
     }
     else if(filter == "*.qms")
     {
-        CBinProject::saveAs(fn, *this);
+        CQmsProject::saveAs(fn, *this);
     }
     else
     {

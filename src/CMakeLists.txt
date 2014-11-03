@@ -95,8 +95,8 @@ set( SRCS
     gis/IGisProject.cpp
     gis/gpx/CGpxProject.cpp
     gis/gpx/serialization.cpp
-    gis/bin/CBinProject.cpp
-    gis/bin/serialization.cpp
+    gis/qms/CQmsProject.cpp
+    gis/qms/serialization.cpp
     gis/search/CSearchGoogle.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
@@ -207,7 +207,7 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
-    gis/bin/CBinProject.cpp
+    gis/qms/CQmsProject.cpp
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h

@@ -2979,7 +2979,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="967"/>
         <source>Hide points.</source>
-        <translation>Pukte ausblenden.</translation>
+        <translation>Punkte ausblenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1001"/>

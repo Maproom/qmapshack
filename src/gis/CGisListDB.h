@@ -20,12 +20,18 @@
 #define CGISLISTDB_H
 
 #include <QTreeWidget>
+#include <QSqlDatabase>
 
 class CGisListDB : public QTreeWidget
 {
     public:
         CGisListDB(QWidget * parent);
         virtual ~CGisListDB();
+
+    private:
+        void initDB();
+        void migrateDB(int version);
+        QSqlDatabase db;
 };
 
 #endif //CGISLISTDB_H

@@ -9,6 +9,7 @@ find_package(Qt5Widgets)
 find_package(Qt5Core)
 find_package(Qt5Xml)
 find_package(Qt5Script)
+find_package(Qt5Sql)
 find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(GDAL REQUIRED)
@@ -319,6 +320,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     Qt5::Xml
     Qt5::Script
+    Qt5::Sql
     Qt5::WebKitWidgets
     CGetOpt
     ${GDAL_LIBRARIES}

@@ -20,8 +20,8 @@
 #include "GeoMath.h"
 #include "canvas/IDrawContext.h"
 #include <math.h>
-#include <stdlib.h>
 #include <proj_api.h>
+#include <stdlib.h>
 
 #include <QtGui>
 #include <QtWidgets>
@@ -31,7 +31,6 @@
 
 void GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, const int32_t s, qreal &deg)
 {
-
     deg = qAbs(d) + qreal(m) / 60.0 + qreal(s) / 3600;
     if(sign)
     {
@@ -46,20 +45,20 @@ bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *d, qreal *m)
 {
     bool sign = v < 0;
     qint32 deg = qAbs(v);
-    qreal  min = (qAbs(v) - deg) * 60.0;
+    qreal min = (qAbs(v) - deg) * 60.0;
 
     *d = deg;
     *m = min;
 
-    return sign;
+    return(sign);
 }
 
 
 void GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg)
 {
-
     deg = qAbs(d) + m / 60.0;
-    if(sign) {
+    if(sign)
+    {
         deg = -deg;
     }
 
@@ -85,9 +84,10 @@ void GPS_Math_Deg_To_Str(const qreal& x, const qreal& y, QString& str)
 bool GPS_Math_Str_To_Deg(const QString& str, qreal& lon, qreal& lat)
 {
     QRegExp re("^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$");
-    if(!re.exactMatch(str)) {
+    if(!re.exactMatch(str))
+    {
         QMessageBox::warning(0,QObject::tr("Error"),QObject::tr("Bad position format. Must be: [N|S] ddd mm.sss [W|E] ddd mm.sss"),QMessageBox::Abort,QMessageBox::Abort);
-        return false;
+        return(false);
     }
 
     bool signLat    = re.cap(1) == "S";
@@ -102,7 +102,7 @@ bool GPS_Math_Str_To_Deg(const QString& str, qreal& lon, qreal& lat)
 
     GPS_Math_DegMin_To_Deg(signLon, degLon, minLon, lon);
 
-    return true;
+    return(true);
 }
 
 // from http://www.movable-type.co.uk/scripts/LatLongVincenty.html
@@ -127,13 +127,15 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
     qreal lambda = L, lambdaP = 2*PI;
     unsigned iterLimit = 20;
 
-    while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0)) {
+    while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0))
+    {
         sinLambda = sin(lambda);
         cosLambda = cos(lambda);
         sinSigma = sqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
 
-        if (sinSigma==0){
-            return 0;  // co-incident points
+        if (sinSigma==0)
+        {
+            return(0);  // co-incident points
         }
 
         cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
@@ -142,7 +144,8 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         cosSqAlpha = 1 - sinAlpha * sinAlpha;
         cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
 
-        if (isnan(cos2SigmaM)){
+        if (isnan(cos2SigmaM))
+        {
             cos2SigmaM = 0;  // equatorial line: cosSqAlpha=0 (§6)
         }
 
@@ -150,8 +153,10 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         lambdaP = lambda;
         lambda = L + (1-C) * f * sinAlpha * (sigma + C*sinSigma*(cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
     }
-    if (iterLimit==0) return FP_NAN;  // formula failed to converge
-
+    if (iterLimit==0)
+    {
+        return( FP_NAN);              // formula failed to converge
+    }
     qreal uSq = cosSqAlpha * (a*a - b*b) / (b*b);
     qreal A = 1 + uSq/16384*(4096+uSq*(-768+uSq*(320-175*uSq)));
     qreal B = uSq/1024 * (256+uSq*(-128+uSq*(74-47*uSq)));
@@ -160,7 +165,7 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
 
     a1 = atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * 360 / TWOPI;
     a2 = atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda) * 360 / TWOPI;
-    return s;
+    return(s);
 }
 
 qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2)
@@ -184,13 +189,15 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
     qreal lambda = L, lambdaP = 2*PI;
     unsigned iterLimit = 20;
 
-    while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0)) {
+    while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0))
+    {
         sinLambda = sin(lambda);
         cosLambda = cos(lambda);
         sinSigma = sqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
 
-        if (sinSigma==0){
-            return 0;  // co-incident points
+        if (sinSigma==0)
+        {
+            return(0);  // co-incident points
         }
 
         cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
@@ -199,7 +206,8 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         cosSqAlpha = 1 - sinAlpha * sinAlpha;
         cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
 
-        if (isnan(cos2SigmaM)){
+        if (isnan(cos2SigmaM))
+        {
             cos2SigmaM = 0;  // equatorial line: cosSqAlpha=0 (§6)
         }
 
@@ -207,15 +215,17 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         lambdaP = lambda;
         lambda = L + (1-C) * f * sinAlpha * (sigma + C*sinSigma*(cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
     }
-    if (iterLimit==0) return FP_NAN;  // formula failed to converge
-
+    if (iterLimit==0)
+    {
+        return( FP_NAN);              // formula failed to converge
+    }
     qreal uSq = cosSqAlpha * (a*a - b*b) / (b*b);
     qreal A = 1 + uSq/16384*(4096+uSq*(-768+uSq*(320-175*uSq)));
     qreal B = uSq/1024 * (256+uSq*(-128+uSq*(74-47*uSq)));
     qreal deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)));
     qreal s = b*A*(sigma-deltaSigma);
 
-    return s;
+    return(s);
 }
 
 qreal GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, const qreal v2)
@@ -225,7 +235,7 @@ qreal GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, con
 
     qreal d = 2*asin(sqrt(sin(dV/2) * sin(dV/2) + cos(v1) * cos(v2) * sin(dU/2) * sin(dU/2)));
 
-    return 6371010 * d;
+    return(6371010 * d);
 }
 
 void GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal distance, const qreal bearing, qreal& lon2, qreal& lat2)
@@ -237,7 +247,6 @@ void GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal dis
 
 qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
 {
-
     point3D v1, v2, v3, v1x2;
 
     qreal a1x2, a3;
@@ -267,21 +276,28 @@ qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
     // |(x2 - x1)|
     a3      = v3.x*v3.x + v3.y*v3.y + v3.z*v3.z;
 
-    return sqrt(a1x2/a3);
+    return(sqrt(a1x2/a3));
 }
 
 
 struct segment
 {
-    segment(): idx1(0), idx2(0){}
-    segment(qint32 idx1, quint32 idx2) : idx1(idx1), idx2(idx2) {}
+    segment() : idx1(0), idx2(0)
+    {
+    }
+    segment(qint32 idx1, quint32 idx2) : idx1(idx1), idx2(idx2)
+    {
+    }
     qint32 idx1;
     qint32 idx2;
 };
 
 void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
 {
-    if(line.count() < 3) return;
+    if(line.count() < 3)
+    {
+        return;
+    }
 
     QStack<segment> stack;
     stack << segment(0, line.size() - 1);
@@ -332,17 +348,16 @@ QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearin
 
     pt2.rx() = lon2;
     pt2.ry() = lat2;
-    return pt2;
+    return(pt2);
 }
 
 
 bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF &rect)
 {
-
     // the trival case
     if(rect.contains(p1) || rect.contains(p2))
     {
-        return true;
+        return(true);
     }
 
     qreal slope    = qreal(p2.y() - p1.y()) / (p2.x() - p1.x());
@@ -352,14 +367,14 @@ bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF
 
     if((y1 < rect.top()) && (y2 < rect.top()))
     {
-        return false;
+        return(false);
     }
     else if((y1 > rect.bottom()) && (y2 > rect.bottom()))
     {
-        return false;
+        return(false);
     }
 
-    return true;
+    return(true);
 }
 
 
@@ -418,7 +433,6 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
 
         if(u >= 0.0 && u <= 1.0)
         {
-
             x = p1.u + u * dx;
             y = p1.v + u * dy;
 
@@ -492,7 +506,6 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
 
 void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext * context)
 {
-
     QPointF pt1 = px1;
     QPointF pt2 = px2;
 
@@ -508,7 +521,6 @@ void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF
 
             segCoord.push_back(pt1);
             segCoord.push_back(pt2);
-
         }
         else if(idx12 == idx21)
         {
@@ -519,7 +531,6 @@ void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF
             segCoord.push_back(pt1);
             segCoord.push_back(coords[idx12]);
             segCoord.push_back(pt2);
-
         }
         else if(idx11 < idx21)
         {

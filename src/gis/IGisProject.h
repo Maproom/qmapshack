@@ -157,6 +157,7 @@ class IGisProject : public QTreeWidgetItem
 
         QDomNode writeMetadata(QDomDocument& doc);
     protected:
+        void setupName(const QString& defaultName);
         void markAsSaved();
         void readMetadata(const QDomNode& xml, metadata_t& metadata);
 

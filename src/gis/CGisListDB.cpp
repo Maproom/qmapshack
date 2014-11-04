@@ -121,9 +121,11 @@ void CGisListDB::initDB()
     if(!query.exec( "CREATE TABLE workspace ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "type           INTEGER NOT NULL,"
+                    "name           TEXT NOT NULL,"
+                    "key            TEXT NOT NULL,"
                     "changed        BOOLEAN DEFAULT FALSE,"
-                    "data           BLOB NOT NULL,"
-                    "key            TEXT NOT NULL"
+                    "data           BLOB NOT NULL"
+
                     ")"))
     {
         qDebug() << query.lastQuery();

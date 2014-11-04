@@ -22,11 +22,11 @@
 
 
 #include <QtWidgets>
-CQmsProject::CQmsProject(const QString &name,  CGisListWks * parent)
-    : IGisProject(eTypeQms, "", "", parent)
-{
-    setText(0, name);
+CQmsProject::CQmsProject(const QString &name,  CGisListWks * parent, const QString &key)
+    : IGisProject(eTypeQms, key, "", parent)
+{    
     setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
+    setupName(name);
     setToolTip(0, getInfo());
     valid = true;
 }
@@ -34,10 +34,7 @@ CQmsProject::CQmsProject(const QString &name,  CGisListWks * parent)
 
 CQmsProject::CQmsProject(const QString &filename, const QString &key, CGisListWks *parent)
     : IGisProject(eTypeQms, key, filename, parent)
-{
-    setText(0, QFileInfo(filename).baseName());
-    setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
-
+{   
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
@@ -53,6 +50,8 @@ CQmsProject::CQmsProject(const QString &filename, const QString &key, CGisListWk
 
     file.close();
 
+    setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
+    setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(0, getInfo());
     valid = true;
 }

@@ -49,6 +49,7 @@ CMainWindow::CMainWindow()
 
     initWptIcons();
 
+    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
 
     QString path = cfg.value("Paths/database", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
@@ -74,7 +75,6 @@ CMainWindow::CMainWindow()
     }
     // end ---- restore window geometry -----
 
-    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
 
     connect(actionAbout, SIGNAL(triggered()), this, SLOT(slotAbout()));
     connect(actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));

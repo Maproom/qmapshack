@@ -146,11 +146,11 @@ IGisProject * CGisWidget::selectProject()
         IGisItem::mutexItems.lock();
         if(type == CSelectProjectDialog::eTypeGpx)
         {
-            project = new CGpxProject(name, treeWks);
+            project = new CGpxProject(name, treeWks, "");
         }
         else if (type == CSelectProjectDialog::eTypeQms)
         {
-            project = new CQmsProject(name, treeWks);
+            project = new CQmsProject(name, treeWks, "");
         }
 
         IGisItem::mutexItems.unlock();

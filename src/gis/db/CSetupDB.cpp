@@ -16,39 +16,16 @@
 
 **********************************************************************************************/
 
-#ifndef CGPXPROJECT_H
-#define CGPXPROJECT_H
+#include "CSetupDB.h"
 
-#include "gis/IGisProject.h"
-
-#include <QDomElement>
-#include <QDateTime>
-#include <QUrl>
-
-class CGisListWks;
-class CGisDraw;
-
-
-class CGpxProject : public IGisProject
+CSetupDB::CSetupDB(QWidget *parent)
+    : QDialog(parent)
 {
-    public:
-        CGpxProject(const QString &name, CGisListWks * parent, const QString& key);
-        CGpxProject(const QString& filename, const QString &key, CGisListWks * parent);
-        virtual ~CGpxProject();
+    setupUi(this);
+}
 
-        void save();
-        void saveAs();
+CSetupDB::~CSetupDB()
+{
 
-        static void saveAs(const QString& fn, IGisProject& project);
-
-
-    private:
-        void saveGpx(const QString& fn);
-
-
-        QDomElement xmlGpx;
-
-};
-
-#endif //CGPXPROJECT_H
+}
 

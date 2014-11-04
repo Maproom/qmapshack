@@ -683,7 +683,6 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << item->getHistory();
     }
 
-
     return stream;
 }
 

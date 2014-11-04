@@ -37,6 +37,7 @@
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
     , menuNone(0)
+    , saveOnMinutes(5)
 {
     db = QSqlDatabase::database();
 
@@ -62,7 +63,15 @@ CGisListWks::CGisListWks(QWidget *parent)
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
-    connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(saveWorkspace()));
+    connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));
+
+    slotLoadWorkspace();
+
+    if(saveOnMinutes)
+    {
+        QTimer::singleShot(saveOnMinutes * 60000, this, SLOT(slotLoadWorkspace()));
+    }
+
 }
 
 CGisListWks::~CGisListWks()
@@ -315,7 +324,7 @@ bool CGisListWks::hasProject(const QString& key)
     return(false);
 }
 
-void CGisListWks::saveWorkspace()
+void CGisListWks::slotSaveWorkspace()
 {
     QSqlQuery query(db);
     if(!query.exec("DELETE FROM workspace"))
@@ -323,7 +332,7 @@ void CGisListWks::saveWorkspace()
         QUERY_EXEC(return);
     }
 
-    qDebug() << "saveWorkspace()";
+    qDebug() << "slotSaveWorkspace()";
 
     const int total = topLevelItemCount();
     PROGRESS_SETUP(tr("Saving workspace. Please wait."), total);
@@ -345,15 +354,71 @@ void CGisListWks::saveWorkspace()
 
         *project >> stream;
 
-        query.prepare("INSERT INTO workspace (type, key, changed, data) VALUES (:type, :key, :changed, :data)");
-        query.bindValue(":changed", project->text(1) == "*");
+        query.prepare("INSERT INTO workspace (type, key, name, changed, data) VALUES (:type, :key, :name, :changed, :data)");
         query.bindValue(":type", project->getType());
         query.bindValue(":key", project->getKey());
+        query.bindValue(":name", project->text(0));
+        query.bindValue(":changed", project->text(1) == "*");
         query.bindValue(":data", data);
         QUERY_EXEC(continue);
+    }
+}
 
+void CGisListWks::slotLoadWorkspace()
+{
+    QSqlQuery query(db);
+
+    query.prepare("SELECT type, key, name, changed, data FROM workspace");
+    QUERY_EXEC(return);
+
+    PROGRESS_SETUP(tr("Loading workspace. Please wait."), query.size());
+    quint32 progCnt = 0;
+
+    while(query.next())
+    {
+        PROGRESS(progCnt++, return);
+
+
+        int  type       = query.value(0).toInt();
+        QString key     = query.value(1).toString();
+        QString name    = query.value(2).toString();
+        bool changed    = query.value(3).toBool();
+        QByteArray data = query.value(4).toByteArray();
+
+        QDataStream stream(&data, QIODevice::ReadOnly);
+        stream.setVersion(QDataStream::Qt_5_2);
+        stream.setByteOrder(QDataStream::LittleEndian);
+
+        IGisProject * project = 0;
+        switch(type)
+        {
+            case IGisProject::eTypeQms:
+            {
+                project = new CQmsProject(name,this, key);
+                *project << stream;
+                break;
+            }
+            case IGisProject::eTypeGpx:
+            {
+                project = new CGpxProject(name,this, key);
+                *project << stream;
+                break;
+            }
+        }
+
+        if(project == 0)
+        {
+            continue;
+        }
+
+        project->setToolTip(0,project->getInfo());
+        project->setText(1, changed ? "*" : "");
     }
 
+    if(saveOnMinutes)
+    {
+        QTimer::singleShot(saveOnMinutes * 60000, this, SLOT(slotLoadWorkspace()));
+    }
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)
@@ -628,11 +693,11 @@ void CGisListWks::slotAddEmptyProject()
 
     if(type == CSelectProjectDialog::eTypeGpx)
     {
-        new CGpxProject(name, this);
+        new CGpxProject(name, this, "");
     }
     else if(type == CSelectProjectDialog::eTypeQms)
     {
-        new CQmsProject(name, this);
+        new CQmsProject(name, this, "");
     }
 }
 

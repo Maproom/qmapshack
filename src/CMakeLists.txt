@@ -98,6 +98,7 @@ set( SRCS
     gis/gpx/serialization.cpp
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
+    gis/db/CSetupDB.cpp
     gis/search/CSearchGoogle.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
@@ -210,6 +211,7 @@ set( HDRS
     gis/CGisListWks.h
     gis/qms/CQmsProject.cpp
     gis/db/macros.h
+    gis/db/CSetupDB.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h
@@ -259,6 +261,7 @@ set( UIS
     mouse/IScrOptRange.ui
     mouse/IScrOptRangeTrk.ui
     gis/IGisWidget.ui
+    gis/db/ISetupDB.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui

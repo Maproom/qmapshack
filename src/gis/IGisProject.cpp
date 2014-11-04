@@ -44,6 +44,20 @@ IGisProject::~IGisProject()
 
 }
 
+void IGisProject::setupName(const QString &defaultName)
+{
+    if(metadata.name.isEmpty())
+    {
+        setText(0, defaultName);
+        metadata.name = defaultName;
+    }
+    else
+    {
+        setText(0,metadata.name);
+    }
+
+}
+
 void IGisProject::markAsSaved()
 {
     setText(1,"");

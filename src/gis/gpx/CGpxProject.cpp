@@ -30,21 +30,18 @@
 
 #include <QtWidgets>
 
-CGpxProject::CGpxProject(const QString &name,  CGisListWks * parent)
-    : IGisProject(eTypeGpx, "", "", parent)
-{
-    setText(0, name);
+CGpxProject::CGpxProject(const QString &name,  CGisListWks * parent, const QString &key)
+    : IGisProject(eTypeGpx, key, "", parent)
+{    
     setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
+    setupName(name);
     setToolTip(0, getInfo());
     valid = true;
 }
 
 CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWks *parent)
     : IGisProject(eTypeGpx, key, filename, parent)
-{
-    setText(0, QFileInfo(filename).baseName());
-    setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
-
+{        
     // cerate file instance
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
@@ -113,8 +110,9 @@ CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWk
         new CGisItemOvlArea(xmlArea, this);
     }
 
+    setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
+    setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(0, getInfo());
-
     valid = true;
 }
 

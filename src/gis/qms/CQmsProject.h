@@ -24,7 +24,7 @@
 class CQmsProject : public IGisProject
 {
     public:
-        CQmsProject(const QString &name,  CGisListWks * parent);
+        CQmsProject(const QString &name,  CGisListWks * parent, const QString& key);
         CQmsProject(const QString& filename, const QString &key, CGisListWks * parent);
         virtual ~CQmsProject();
 

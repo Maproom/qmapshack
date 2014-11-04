@@ -45,7 +45,8 @@ class CGisListWks : public QTreeWidget
         void dropEvent ( QDropEvent  * e );
 
     private slots:
-        void saveWorkspace();
+        void slotSaveWorkspace();
+        void slotLoadWorkspace();
         void slotContextMenu(const QPoint& point);
         void slotSaveProject();
         void slotSaveAsProject();
@@ -89,6 +90,8 @@ class CGisListWks : public QTreeWidget
         QMenu * menuNone;
 
         QPointer<CSearchGoogle> searchGoogle;
+
+        qint32 saveOnMinutes;
 };
 
 #endif //CGISLISTWKS_H

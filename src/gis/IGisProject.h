@@ -31,7 +31,15 @@ class QDataStream;
 class IGisProject : public QTreeWidgetItem
 {
     public:
-        IGisProject(const QString &key, const QString& filename, CGisListWks * parent);
+        enum type_e
+        {
+              eTypeGoogle
+            , eTypeQms
+            , eTypeGpx
+            , eTypeDb
+        };
+
+        IGisProject(type_e type, const QString &key, const QString& filename, CGisListWks * parent);
         virtual ~IGisProject();
 
         virtual void save() = 0;
@@ -40,14 +48,18 @@ class IGisProject : public QTreeWidgetItem
         virtual void setFilename(const QString& fn){filename = fn;}
         virtual QString getFilename(){return filename;}
 
-        virtual QString getInfo();
-
+        type_e getType(){return type;}
         /**
            @brief Get unique project key.
            @return A MD5 hash string
          */
         const QString& getKey(){return key;}
 
+        /**
+           @brief Get a short metadata summary
+           @return Informational string.
+         */
+        virtual QString getInfo();
         /**
            @brief Get a temporary pointer to the item with matching key
            @param key
@@ -159,17 +171,12 @@ class IGisProject : public QTreeWidgetItem
         static const QString gpx_ns;
         static const QString xsi_ns;
 
-
-
+        type_e type;
         QString key;
         QString filename;
         bool valid;
 
-
         metadata_t metadata;
-
-
-
 
 };
 

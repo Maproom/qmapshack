@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 CQmsProject::CQmsProject(const QString &name,  CGisListWks * parent)
-    : IGisProject("", "", parent)
+    : IGisProject(eTypeQms, "", "", parent)
 {
     setText(0, name);
     setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
@@ -33,7 +33,7 @@ CQmsProject::CQmsProject(const QString &name,  CGisListWks * parent)
 
 
 CQmsProject::CQmsProject(const QString &filename, const QString &key, CGisListWks *parent)
-    : IGisProject(key, filename, parent)
+    : IGisProject(eTypeQms, key, filename, parent)
 {
     setText(0, QFileInfo(filename).baseName());
     setIcon(0,QIcon("://icons/32x32/QmsProject.png"));

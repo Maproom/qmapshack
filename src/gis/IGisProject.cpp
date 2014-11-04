@@ -24,8 +24,9 @@
 #include <QtWidgets>
 
 
-IGisProject::IGisProject(const QString& key, const QString &filename, CGisListWks *parent)
+IGisProject::IGisProject(type_e type, const QString& key, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
+    , type(type)
     , key(key)
     , filename(filename)
     , valid(false)

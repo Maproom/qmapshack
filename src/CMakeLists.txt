@@ -209,6 +209,7 @@ set( HDRS
     gis/CGisListDB.h
     gis/CGisListWks.h
     gis/qms/CQmsProject.cpp
+    gis/db/macros.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h

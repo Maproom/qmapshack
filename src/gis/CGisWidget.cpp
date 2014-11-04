@@ -16,19 +16,19 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWidget.h"
-#include "gis/IGisProject.h"
-#include "gis/IGisItem.h"
+#include "CMainWindow.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisWidget.h"
+#include "gis/IGisItem.h"
+#include "gis/IGisProject.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "CMainWindow.h"
-#include "helpers/CSettings.h"
 #include "helpers/CSelectProjectDialog.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -91,7 +91,7 @@ void CGisWidget::loadGisProject(const QString& filename)
     {
         delete item;
     }
-    IGisItem::mutexItems.unlock();    
+    IGisItem::mutexItems.unlock();
     QApplication::restoreOverrideCursor();
 
     emit sigChanged();
@@ -156,7 +156,7 @@ IGisProject * CGisWidget::selectProject()
         IGisItem::mutexItems.unlock();
     }
 
-    return project;
+    return(project);
 }
 
 void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
@@ -192,7 +192,7 @@ IGisItem * CGisWidget::getItemByKey(const QString& key)
         }
     }
     IGisItem::mutexItems.unlock();
-    return item;
+    return(item);
 }
 
 void CGisWidget::delItemByKey(const QString& key)
@@ -297,7 +297,6 @@ void CGisWidget::reverseTrkByKey(const QString& key)
     }
     IGisItem::mutexItems.unlock();
     emit sigChanged();
-
 }
 
 void CGisWidget::combineTrkByKey(const QString& key)
@@ -311,7 +310,6 @@ void CGisWidget::combineTrkByKey(const QString& key)
     }
     IGisItem::mutexItems.unlock();
     emit sigChanged();
-
 }
 
 void CGisWidget::editTrkByKey(const QString& key)
@@ -391,7 +389,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     // reset seen keys as lables will build the list a second time
     seenKeys.clear();
 
-    // draw optional labels second    
+    // draw optional labels second
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         if(gis->needsRedraw())
@@ -414,7 +412,7 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
     /*
         Mutex locking will make map moving very slow if there are many GIS items
         visible. Remove it for now. But I am not sure if that is a good idea.
-    */
+     */
     //IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {

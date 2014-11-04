@@ -28,30 +28,36 @@
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
 #include "version.h"
+#include "config.h"
 #include "CAbout.h"
 #include "gis/CGisWidget.h"
 #include "gis/WptIcons.h"
 
 #include <QtGui>
 #include <QtWidgets>
+#include <QtSql>
 
 CMainWindow * CMainWindow::pSelf = 0;
 
 CMainWindow::CMainWindow()
 {
+    SETTINGS;
+
     pSelf = this;
-    qDebug() << WHAT_STR;
     setupUi(this);
     setWindowTitle(WHAT_STR);
 
     initWptIcons();
 
+
+    QString path = cfg.value("Paths/database", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(path);
+    db.open();
+
     gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);
 
-
-
-    SETTINGS;
     // start ---- restore window geometry -----
     if ( cfg.contains("MainWindow/geometry"))
     {

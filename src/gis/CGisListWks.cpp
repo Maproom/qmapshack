@@ -16,30 +16,33 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisListWks.h"
-#include "gis/IGisProject.h"
-#include "gis/IGisItem.h"
-#include "gis/CGisWidget.h"
-#include "gis/gpx/CGpxProject.h"
-#include "gis/qms/CQmsProject.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/search/CSearchGoogle.h"
-#include "helpers/CSelectProjectDialog.h"
 #include "CMainWindow.h"
+#include "gis/CGisListWks.h"
+#include "gis/CGisWidget.h"
+#include "gis/IGisItem.h"
+#include "gis/IGisProject.h"
+#include "gis/db/macros.h"
+#include "gis/gpx/CGpxProject.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/qms/CQmsProject.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/search/CSearchGoogle.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CSelectProjectDialog.h"
 
+#include <QtSql>
 #include <QtWidgets>
 
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
     , menuNone(0)
 {
+    db = QSqlDatabase::database();
 
     menuProject     = new QMenu(this);
     actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
-    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));    
+    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
     actionClose     = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
@@ -57,12 +60,13 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditArea   = menuItem->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     actionFocusTrk->setCheckable(true);
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
-    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));    
+    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+
+    connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(saveWorkspace()));
 }
 
 CGisListWks::~CGisListWks()
 {
-
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -84,7 +88,7 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
         2.1) different parent -> copy
         3) go on with dragMoveEvent();
 
-    */
+     */
 
     CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(currentItem());
     CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(itemAt(e->pos()));
@@ -135,7 +139,6 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
         }
         QTreeWidget::dragMoveEvent(e);
         return;
-
     }
 
     CGisItemOvlArea * area1 = dynamic_cast<CGisItemOvlArea*>(currentItem());
@@ -153,7 +156,6 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
         }
         QTreeWidget::dragMoveEvent(e);
         return;
-
     }
 
     IGisProject * proj = dynamic_cast<IGisProject*>(itemAt(e->pos()));
@@ -170,7 +172,6 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
 void CGisListWks::dropEvent ( QDropEvent  * e )
 {
-
     /*
         What's happening here?
 
@@ -184,7 +185,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         5) Test if item under cursor is a project
         6) If project and project is not item's project create a copy
 
-    */
+     */
 
     // calc. index offset (below/above item)
     QRect r = visualItemRect(itemAt(e->pos()));
@@ -296,9 +297,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         {
             new CGisItemOvlArea(*area1, project, -1);
         }
-
     }
-
 }
 
 
@@ -310,15 +309,55 @@ bool CGisListWks::hasProject(const QString& key)
         IGisProject * item = dynamic_cast<IGisProject*>(topLevelItem(i));
         if(item && item->getKey() == key)
         {
-            return true;
+            return(true);
         }
     }
-    return false;
+    return(false);
+}
+
+void CGisListWks::saveWorkspace()
+{
+    QSqlQuery query(db);
+    if(!query.exec("DELETE FROM workspace"))
+    {
+        QUERY_EXEC(return);
+    }
+
+    qDebug() << "saveWorkspace()";
+
+    const int total = topLevelItemCount();
+    PROGRESS_SETUP(tr("Saving workspace. Please wait."), total);
+
+    for(int i = 0; i < total; i++)
+    {
+        PROGRESS(i, return);
+
+        IGisProject * project = dynamic_cast<IGisProject*>(topLevelItem(i));
+        if(project == 0)
+        {
+            continue;
+        }
+
+        QByteArray data;
+        QDataStream stream(&data, QIODevice::WriteOnly);
+        stream.setVersion(QDataStream::Qt_5_2);
+        stream.setByteOrder(QDataStream::LittleEndian);
+
+        *project >> stream;
+
+        query.prepare("INSERT INTO workspace (type, key, changed, data) VALUES (:type, :key, :changed, :data)");
+        query.bindValue(":changed", project->text(1) == "*");
+        query.bindValue(":type", project->getType());
+        query.bindValue(":key", project->getKey());
+        query.bindValue(":data", data);
+        QUERY_EXEC(continue);
+
+    }
+
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
-
     if(selectedItems().isEmpty() && menuNone)
     {
         QPoint p = mapToGlobal(point);
@@ -370,7 +409,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionCombineTrk->setVisible(true);
             actionRangeTrk->setVisible(true);
             actionFocusTrk->setChecked(trk->hasUserFocus());
-            actionEditTrk->setEnabled(!trk->isReadOnly());            
+            actionEditTrk->setEnabled(!trk->isReadOnly());
         }
 
         // try to cast item to track and hide/show actions on result
@@ -437,7 +476,6 @@ void CGisListWks::slotSaveAsProject()
         }
     }
     IGisItem::mutexItems.unlock();
-
 }
 
 void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
@@ -448,7 +486,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     {
         CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
         CGisWidget::self().focusTrkByKey(true, gisItem->getKey());
-    }    
+    }
     IGisItem::mutexItems.unlock();
 }
 

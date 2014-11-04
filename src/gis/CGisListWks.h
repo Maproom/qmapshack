@@ -21,6 +21,7 @@
 
 #include <QTreeWidget>
 #include <QPointer>
+#include <QSqlDatabase>
 
 class QAction;
 class CSearchGoogle;
@@ -44,6 +45,7 @@ class CGisListWks : public QTreeWidget
         void dropEvent ( QDropEvent  * e );
 
     private slots:
+        void saveWorkspace();
         void slotContextMenu(const QPoint& point);
         void slotSaveProject();
         void slotSaveAsProject();
@@ -65,6 +67,8 @@ class CGisListWks : public QTreeWidget
 
 
     private:                
+        QSqlDatabase db;
+
         QMenu * menuProject;
         QAction  * actionSave;
         QAction  * actionSaveAs;

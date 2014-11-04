@@ -17,40 +17,17 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
-#include "helpers/CSettings.h"
-#include "config.h"
+#include "gis/db/macros.h"
 
-#include <QtWidgets>
 #include <QtSql>
+#include <QtWidgets>
 
-#define DB_VERSION 1
-
-#define QUERY_EXEC(cmd) \
-if(!query.exec())\
-{ \
-    qDebug() << query.lastQuery();\
-    qDebug() << query.lastError();\
-    cmd;\
-}\
-
-#define PROGRESS_SETUP(lbl, max) \
-QProgressDialog progress(lbl, "Abort", 0, max, 0);\
-progress.setWindowModality(Qt::WindowModal);\
-
-#define PROGRESS(x, cmd) \
-progress.setValue(x); \
-if (progress.wasCanceled()) cmd;\
 
 
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
 {
-    SETTINGS;
-    QString path = cfg.value("Paths/database", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
-
-    db = QSqlDatabase::addDatabase("QSQLITE","qmapshack");
-    db.setDatabaseName(path);
-    db.open();
+    db = QSqlDatabase::database();
 
     QSqlQuery query(db);
 
@@ -95,13 +72,10 @@ CGisListDB::CGisListDB(QWidget *parent)
     {
         initDB();
     }
-
-
 }
 
 CGisListDB::~CGisListDB()
 {
-
 }
 
 void CGisListDB::initDB()
@@ -112,45 +86,45 @@ void CGisListDB::initDB()
     {
         query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
         query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(;);
+        QUERY_EXEC(; );
     }
 
     if(!query.exec( "CREATE TABLE folders ("
-        "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-        "type           INTEGER,"
-        "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-        "icon           TEXT NOT NULL,"
-        "name           TEXT NOT NULL,"
-        "comment        TEXT,"
-        "locked       BOOLEAN DEFAULT FALSE"
-        ")"))
+                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "type           INTEGER,"
+                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                    "icon           TEXT NOT NULL,"
+                    "name           TEXT NOT NULL,"
+                    "comment        TEXT,"
+                    "locked       BOOLEAN DEFAULT FALSE"
+                    ")"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
     }
 
     if(!query.exec( "CREATE TABLE items ("
-        "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-        "type           INTEGER,"
-        "key            TEXT NOT NULL,"
-        "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-        "icon           TEXT NOT NULL,"
-        "name           TEXT NOT NULL,"
-        "comment        TEXT,"
-        "data           BLOB NOT NULL"
-        ")"))
+                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "type           INTEGER,"
+                    "key            TEXT NOT NULL,"
+                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                    "icon           TEXT NOT NULL,"
+                    "name           TEXT NOT NULL,"
+                    "comment        TEXT,"
+                    "data           BLOB NOT NULL"
+                    ")"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
     }
 
     if(!query.exec( "CREATE TABLE workspace ("
-        "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-        "type           INTEGER NOT NULL,"
-        "changed        BOOLEAN DEFAULT FALSE,"
-        "data           BLOB NOT NULL,"
-        "key            TEXT NOT NULL"
-        ")"))
+                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "type           INTEGER NOT NULL,"
+                    "changed        BOOLEAN DEFAULT FALSE,"
+                    "data           BLOB NOT NULL,"
+                    "key            TEXT NOT NULL"
+                    ")"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
@@ -163,24 +137,24 @@ void CGisListDB::initDB()
     }
 
     if(!query.exec( "CREATE TABLE folder2folder ("
-        "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-        "parent         INTEGER NOT NULL,"
-        "child          INTEGER NOT NULL,"
-        "FOREIGN KEY(parent) REFERENCES folders(id),"
-        "FOREIGN KEY(child) REFERENCES folders(id)"
-        ")"))
+                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "parent         INTEGER NOT NULL,"
+                    "child          INTEGER NOT NULL,"
+                    "FOREIGN KEY(parent) REFERENCES folders(id),"
+                    "FOREIGN KEY(child) REFERENCES folders(id)"
+                    ")"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
     }
 
     if(!query.exec( "CREATE TABLE folder2item ("
-        "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-        "parent         INTEGER NOT NULL,"
-        "child          INTEGER NOT NULL,"
-        "FOREIGN KEY(parent) REFERENCES folders(id),"
-        "FOREIGN KEY(child) REFERENCES items(id)"
-        ")"))
+                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "parent         INTEGER NOT NULL,"
+                    "child          INTEGER NOT NULL,"
+                    "FOREIGN KEY(parent) REFERENCES folders(id),"
+                    "FOREIGN KEY(child) REFERENCES items(id)"
+                    ")"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
@@ -199,5 +173,6 @@ void CGisListDB::migrateDB(int version)
     }
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", version - 1);
-    QUERY_EXEC(;);
+    QUERY_EXEC(; );
 }
+

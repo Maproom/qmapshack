@@ -75,7 +75,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     if(saveOnExit && (saveEvery > 0))
     {
-        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotLoadWorkspace()));
+        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
 }
@@ -376,7 +376,7 @@ void CGisListWks::slotSaveWorkspace()
 
     if(saveEvery)
     {
-        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotLoadWorkspace()));
+        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
 }
@@ -432,10 +432,6 @@ void CGisListWks::slotLoadWorkspace()
         project->setText(1, changed ? "*" : "");
     }
 
-    if(saveEvery)
-    {
-        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotLoadWorkspace()));
-    }
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)

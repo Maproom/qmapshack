@@ -106,11 +106,12 @@ class IGisItem : public QTreeWidgetItem
 
         enum type_e
         {
-              eTypeTrk
-            , eTypeRte
-            , eTypeWpt
-            , eTypeOvl
+              eTypeWpt = 1
+            , eTypeTrk = 2
+            , eTypeRte = 3
+            , eTypeOvl = 4
         };
+
 
         IGisItem(QTreeWidgetItem * parent, type_e typ, int idx);
         virtual ~IGisItem();

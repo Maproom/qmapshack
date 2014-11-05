@@ -45,10 +45,10 @@ CQmsProject::CQmsProject(const QString &filename, const QString &key, CGisListWk
     QDataStream in(&file);
     in.setByteOrder(QDataStream::LittleEndian);
     in.setVersion(QDataStream::Qt_5_2);
-
     *this << in;    
-
     file.close();
+
+    markAsSaved();
 
     setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
     setupName(QFileInfo(filename).baseName().replace("_", " "));
@@ -96,10 +96,11 @@ void CQmsProject::saveAs()
     }
     else if(filter == "*.qms")
     {
-        saveAs(fn, *this);
-
         filename = fn;
-        setText(0, QFileInfo(filename).baseName());
+        metadata.name.clear();
+        setupName(QFileInfo(filename).baseName().replace("_", " "));
+
+        saveAs(fn, *this);
         markAsSaved();
     }
     else

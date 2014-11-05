@@ -150,10 +150,11 @@ void CGpxProject::saveAs()
 
     if(filter == "*.gpx")
     {
-        saveAs(fn, *this);
-
         filename = fn;
-        setText(0, QFileInfo(filename).baseName());
+        metadata.name.clear();
+        setupName(QFileInfo(filename).baseName().replace("_", " "));
+
+        saveAs(fn, *this);
         markAsSaved();
 
     }

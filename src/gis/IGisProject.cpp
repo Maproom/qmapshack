@@ -98,6 +98,8 @@ QString IGisProject::getInfo()
         }
     }
 
+    str += QObject::tr("\nFilename: %1").arg(filename);
+
 
     return str;
 }

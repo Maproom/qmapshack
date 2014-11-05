@@ -40,7 +40,7 @@
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
 #define VER_HIST_EVT    quint8(1)
-#define VER_ITEM        quint8(1)
+#define VER_ITEM        quint8(2)
 
 #define MAGIC_SIZE      10
 #define MAGIC_TRK       "QMTrk     "
@@ -49,10 +49,10 @@
 #define MAGIC_AREA      "QMArea    "
 #define MAGIC_PROJ      "QMProj    "
 
-#define ITEM_WPT        quint8(1)
-#define ITEM_TRK        quint8(2)
-#define ITEM_RTE        quint8(3)
-#define ITEM_AREA       quint8(4)
+//#define ITEM_WPT        quint8(1)
+//#define ITEM_TRK        quint8(2)
+//#define ITEM_RTE        quint8(3)
+//#define ITEM_AREA       quint8(4)
 
 
 QDataStream& operator<<(QDataStream& stream, const IGisItem::link_t& link)
@@ -598,26 +598,38 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     while(!stream.atEnd())
     {
         IGisItem::history_t history;
+        quint8 changed = 0;
         quint8 version, type;
         stream >> version;
         stream >> type;
         stream >> history;
+        if(version > 1)
+        {
+            stream >> changed;
+        }
+
+        IGisItem * item = 0;
         switch(type)
         {
-            case ITEM_WPT:
-                new CGisItemWpt(history, this);
+            case IGisItem::eTypeWpt:
+                item = new CGisItemWpt(history, this);
                 break;
-            case ITEM_TRK:
-                new CGisItemTrk(history, this);
+            case IGisItem::eTypeTrk:
+                item = new CGisItemTrk(history, this);
                 break;
-            case ITEM_RTE:
-                new CGisItemRte(history, this);
+            case IGisItem::eTypeRte:
+                item = new CGisItemRte(history, this);
                 break;
-            case ITEM_AREA:
-                new CGisItemOvlArea(history, this);
+            case IGisItem::eTypeOvl:
+                item = new CGisItemOvlArea(history, this);
                 break;
             default:;
         }
+        if(item && changed)
+        {
+            item->setText(1,"*");
+        }
+
     }
 
     return stream;
@@ -646,8 +658,9 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
             continue;
         }
         stream << VER_ITEM;
-        stream << ITEM_TRK;
+        stream << quint8(item->type());
         stream << item->getHistory();
+        stream << quint8(item->text(1) == "*");
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -657,8 +670,9 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
             continue;
         }
         stream << VER_ITEM;
-        stream << ITEM_RTE;
+        stream << quint8(item->type());
         stream << item->getHistory();
+        stream << quint8(item->text(1) == "*");
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -668,8 +682,9 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
             continue;
         }
         stream << VER_ITEM;
-        stream << ITEM_WPT;
+        stream << quint8(item->type());
         stream << item->getHistory();
+        stream << quint8(item->text(1) == "*");
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -679,8 +694,9 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
             continue;
         }
         stream << VER_ITEM;
-        stream << ITEM_AREA;
+        stream << quint8(item->type());
         stream << item->getHistory();
+        stream << quint8(item->text(1) == "*");
     }
 
     return stream;

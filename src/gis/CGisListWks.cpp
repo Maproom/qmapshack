@@ -67,8 +67,6 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));
 
-    slotLoadWorkspace();
-
     SETTINGS;
     saveOnExit  = cfg.value("Database/saveOnExit", saveOnExit).toBool();
     saveEvery   = cfg.value("Database/saveEvery", saveEvery).toInt();
@@ -78,6 +76,7 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
+    slotLoadWorkspace();
 }
 
 CGisListWks::~CGisListWks()

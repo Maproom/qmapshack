@@ -435,7 +435,7 @@
      <normaloff>:/icons/32x32/DatabaseSetup.png</normaloff>:/icons/32x32/DatabaseSetup.png</iconset>
    </property>
    <property name="text">
-    <string>SetupDatabase</string>
+    <string>Setup Database</string>
    </property>
   </action>
  </widget>

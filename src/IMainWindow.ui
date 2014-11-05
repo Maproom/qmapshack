@@ -102,9 +102,9 @@
     </property>
     <addaction name="actionAddEmptyProject"/>
     <addaction name="actionSearchGoogle"/>
-    <addaction name="actionCloseAllProjects"/>
     <addaction name="separator"/>
     <addaction name="actionSetupDatabase"/>
+    <addaction name="actionCloseAllProjects"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuProject"/>

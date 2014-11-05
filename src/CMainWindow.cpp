@@ -32,6 +32,7 @@
 #include "CAbout.h"
 #include "gis/CGisWidget.h"
 #include "gis/WptIcons.h"
+#include "gis/db/CSetupDB.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -51,7 +52,7 @@ CMainWindow::CMainWindow()
 
     IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
 
-    QString path = cfg.value("Paths/database", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
+    QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(path);
     db.open();
@@ -91,6 +92,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
     connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
     connect(actionSetupUnits, SIGNAL(triggered()), this, SLOT(slotSetupUnits()));
+    connect(actionSetupDatabase, SIGNAL(triggered()), this, SLOT(slotSetupDatabase()));
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
@@ -538,6 +540,12 @@ void CMainWindow::slotSetupTimeZone()
 void CMainWindow::slotSetupUnits()
 {
     CUnitsSetup dlg(this);
+    dlg.exec();
+}
+
+void CMainWindow::slotSetupDatabase()
+{
+    CSetupDB dlg(this);
     dlg.exec();
 }
 

@@ -115,6 +115,8 @@
         <file>icons/32x32/SetEle.png</file>
         <file>icons/32x32/Pattern.png</file>
         <file>icons/32x32/Opacity.png</file>
+        <file>icons/32x32/DatabaseSetup.png</file>
+        <file>icons/32x32/Path.png</file>
 
 
         <file>icons/48x48/2DFix.png</file>
@@ -213,6 +215,8 @@
         <file>icons/48x48/SetEle.png</file>
         <file>icons/48x48/Pattern.png</file>
         <file>icons/48x48/Opacity.png</file>
+        <file>icons/48x48/DatabaseSetup.png</file>
+        <file>icons/48x48/Path.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

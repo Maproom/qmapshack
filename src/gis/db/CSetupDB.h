@@ -25,9 +25,17 @@
 
 class CSetupDB : public QDialog, private Ui::ISetupDB
 {
+    Q_OBJECT
     public:
         CSetupDB(QWidget * parent);
         virtual ~CSetupDB();
+
+    public slots:
+        void accept();
+
+
+    private slots:
+        void slotSetupPath();
 };
 
 #endif //CSETUPDB_H

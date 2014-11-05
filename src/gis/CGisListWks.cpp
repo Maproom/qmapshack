@@ -30,6 +30,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectProjectDialog.h"
+#include "helpers/CSettings.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -37,7 +38,8 @@
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
     , menuNone(0)
-    , saveOnMinutes(5)
+    , saveOnExit(true)
+    , saveEvery(5)
 {
     db = QSqlDatabase::database();
 
@@ -67,9 +69,13 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     slotLoadWorkspace();
 
-    if(saveOnMinutes)
+    SETTINGS;
+    saveOnExit  = cfg.value("Database/saveOnExit", saveOnExit).toBool();
+    saveEvery   = cfg.value("Database/saveEvery", saveEvery).toInt();
+
+    if(saveOnExit && (saveEvery > 0))
     {
-        QTimer::singleShot(saveOnMinutes * 60000, this, SLOT(slotLoadWorkspace()));
+        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotLoadWorkspace()));
     }
 
 }
@@ -326,6 +332,11 @@ bool CGisListWks::hasProject(const QString& key)
 
 void CGisListWks::slotSaveWorkspace()
 {
+    if(!saveOnExit)
+    {
+        return;
+    }
+
     QSqlQuery query(db);
     if(!query.exec("DELETE FROM workspace"))
     {
@@ -362,6 +373,12 @@ void CGisListWks::slotSaveWorkspace()
         query.bindValue(":data", data);
         QUERY_EXEC(continue);
     }
+
+    if(saveEvery)
+    {
+        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotLoadWorkspace()));
+    }
+
 }
 
 void CGisListWks::slotLoadWorkspace()
@@ -415,9 +432,9 @@ void CGisListWks::slotLoadWorkspace()
         project->setText(1, changed ? "*" : "");
     }
 
-    if(saveOnMinutes)
+    if(saveEvery)
     {
-        QTimer::singleShot(saveOnMinutes * 60000, this, SLOT(slotLoadWorkspace()));
+        QTimer::singleShot(saveEvery * 60000, this, SLOT(slotLoadWorkspace()));
     }
 }
 

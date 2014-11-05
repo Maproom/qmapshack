@@ -91,7 +91,9 @@ class CGisListWks : public QTreeWidget
 
         QPointer<CSearchGoogle> searchGoogle;
 
-        qint32 saveOnMinutes;
+        bool saveOnExit;
+        qint32 saveEvery;
+
 };
 
 #endif //CGISLISTWKS_H

@@ -44,6 +44,7 @@ class IGisItem : public QTreeWidgetItem
         struct history_event_t
         {
             QDateTime time;
+            QString   hash;
             QString   icon;
             QString   comment;
             QByteArray data;

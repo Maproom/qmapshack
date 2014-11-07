@@ -182,12 +182,8 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
         str += "*";
     }
     setText(1, str);
-
-    // update hash
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(history.events[history.histIdxCurrent].data);
-    hash = md5.result().toHex();
 }
+
 
 void IGisItem::changed(const QString &what, const QString &icon)
 {    
@@ -220,9 +216,14 @@ void IGisItem::changed(const QString &what, const QString &icon)
 
     *this >> stream;
 
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(event.data);
+    event.hash = md5.result().toHex();
+
     history.histIdxCurrent = history.events.size() - 1;
 
     updateDecoration(eMarkChanged, eMarkNone);
+    qDebug() << history.events[history.histIdxCurrent].hash;
 }
 
 void IGisItem::setupHistory()
@@ -261,10 +262,16 @@ void IGisItem::setupHistory()
         stream.setVersion(QDataStream::Qt_5_2);
         *this >> stream;
 
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData(event.data);
+        event.hash = md5.result().toHex();
+
         history.histIdxInitial = history.events.size() - 1;
     }
 
     history.histIdxCurrent = history.events.size() - 1;
+
+    qDebug() << history.events[history.histIdxCurrent].hash;
 }
 
 void IGisItem::loadHistory(int idx)
@@ -290,6 +297,8 @@ void IGisItem::loadHistory(int idx)
     *this << stream;
 
     history.histIdxCurrent = idx;
+
+    qDebug() << history.events[history.histIdxCurrent].hash;
 }
 
 void IGisItem::cutHistory()

@@ -91,6 +91,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
     protected:
         void genKey();
+        void setSymbol();
 
 
     public:

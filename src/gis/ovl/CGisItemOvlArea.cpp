@@ -123,12 +123,10 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGi
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
 
     setColor(str2color(""));
-    setText(1, "*");
-    setText(0, area.name);
-    setToolTip(0, getInfo());
     genKey();
-    project->setText(1,"*");
+
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx)
@@ -138,13 +136,11 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
 {
     *this = parentArea;
 
-    setText(1, "*");
-    setText(0, area.name);
-    setToolTip(0, getInfo());
     key.clear();
     genKey();
-    project->setText(1,"*");
+
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
@@ -156,10 +152,9 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     setColor(penForeground.color());
     readArea(xml, area);
     // --- stop read and process data ----
-    setText(0, area.name);
-    setToolTip(0, getInfo());
     genKey();
     setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
 }
 
 CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
@@ -180,6 +175,11 @@ CGisItemOvlArea::~CGisItemOvlArea()
     {
         keyUserFocus.clear();
     }
+}
+
+void CGisItemOvlArea::setSymbol()
+{
+    setColor(str2color(area.color));
 }
 
 void CGisItemOvlArea::genKey()
@@ -424,10 +424,9 @@ void CGisItemOvlArea::setDataFromPolyline(const QPolygonF& line)
     readLine(line);
 
     flags |= eFlagTainted;
-    setText(1,"*");
-    setToolTip(0, getInfo());
-    parent()->setText(1,"*");
+
     changed(QObject::tr("Changed area shape."), "://icons/48x48/AreaMove.png");
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void CGisItemOvlArea::setName(const QString& str)

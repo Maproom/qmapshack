@@ -627,9 +627,8 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         }
         if(item && changed)
         {
-            item->setText(1,"*");
+            item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
-
     }
 
     return stream;
@@ -660,7 +659,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -672,7 +671,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -684,7 +683,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -696,7 +695,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
 
     return stream;

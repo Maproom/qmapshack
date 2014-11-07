@@ -139,17 +139,41 @@ IGisItem::~IGisItem()
 
 }
 
-void IGisItem::changed(const QString &what, const QString &icon)
+void IGisItem::updateDecoration(mark_e enable, mark_e disable)
 {
-    setText(1,"*");
+    // update text and icon
     setToolTip(0,getInfo());
+    setText(0, getName());
+    setSymbol();
 
+    // update project if necessary
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project)
+    if(project && (enable & eMarkChanged))
     {
         project->setText(1,"*");
     }
 
+    // set marks in column 1
+    quint32 mask = data(1,Qt::UserRole).toUInt();
+    mask |=  enable;
+    mask &= ~disable;
+    setData(1, Qt::UserRole, mask);
+
+    QString str;
+    if(mask & eMarkChanged)
+    {
+        str += "*";
+    }
+    setText(1, str);
+
+    // update hash
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(history.events[history.histIdxCurrent].data);
+    hash = md5.result().toHex();
+}
+
+void IGisItem::changed(const QString &what, const QString &icon)
+{    
     /*
         If item gets changed but if it's origin is not QMapShack
         then it is assumed to be tainted, as imported data should
@@ -180,6 +204,8 @@ void IGisItem::changed(const QString &what, const QString &icon)
     *this >> stream;
 
     history.histIdxCurrent = history.events.size() - 1;
+
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void IGisItem::setupHistory()

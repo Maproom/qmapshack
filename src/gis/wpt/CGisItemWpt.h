@@ -159,6 +159,7 @@ class CGisItemWpt : public IGisItem
         static void getNewPosition(QPointF &pos);
 
     private:
+        void setSymbol();
         void genKey();
         void readGpx(const QDomNode& xml);
         void setIcon();

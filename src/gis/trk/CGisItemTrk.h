@@ -219,6 +219,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         static const QString bulletColors[TRK_N_COLORS];
 
     private:        
+        void setSymbol();
         void genKey();
         /**
            @brief Read track data from section in GPX file

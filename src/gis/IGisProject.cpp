@@ -69,7 +69,7 @@ void IGisProject::markAsSaved()
         {
             continue;
         }
-        item->setText(1,"");
+        item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
     }
 }
 

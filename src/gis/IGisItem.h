@@ -112,12 +112,25 @@ class IGisItem : public QTreeWidgetItem
             , eTypeOvl = 4
         };
 
+        enum mark_e
+        {
+             eMarkNone      = 0
+            ,eMarkChanged   = 0x00000001
+        };
+
 
         IGisItem(QTreeWidgetItem * parent, type_e typ, int idx);
         virtual ~IGisItem();
 
         /// this mutex has to be locked when ever the item list is accessed.
         static QMutex mutexItems;
+
+        /**
+           @brief Update the visual representation of the QTreeWidgetItem
+           @param enable
+           @param disable
+         */
+        virtual void updateDecoration(mark_e enable, mark_e disable);
 
         /**
            @brief Save the item's data into a GPX structure
@@ -254,6 +267,8 @@ class IGisItem : public QTreeWidgetItem
     protected:
         struct color_t;
 
+        /// set icon of QTreeWidgetItem
+        virtual void setSymbol() = 0;
         /// read waypoint data from an XML snippet
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         /// write waypoint data to an XML snippet
@@ -275,6 +290,7 @@ class IGisItem : public QTreeWidgetItem
 
         quint32 flags;
         QString key;
+        QString hash;
         QPixmap icon;
         QRectF boundingRect;
 

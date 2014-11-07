@@ -82,8 +82,7 @@ void CHistoryListWidget::slotSelectionChanged()
     }
 
     item->loadHistory(currentRow());
-    item->setText(1,"*");
-    item->parent()->setText(1,"*");
+    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
 
     emit sigChanged();
 }

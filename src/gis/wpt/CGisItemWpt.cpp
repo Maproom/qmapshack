@@ -58,14 +58,10 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-    setText(1, "*");
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
-    genKey();
 
-    project->setText(1,"*");
+    genKey();
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to move a copy of waypoint
@@ -86,14 +82,10 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-    setText(1, "*");
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
-    genKey();
 
-    project->setText(1,"*");
+    genKey();
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to create a copy of waypoint with new parent
@@ -103,16 +95,12 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     , posScreen(NOPOINTF)
 {
     *this = parentWpt;
-    setText(1, "*");
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
 
     key.clear();
     genKey();
 
-    project->setText(1,"*");
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to create waypoint from GPX file
@@ -123,11 +111,10 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
 {
     readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
+
     genKey();
     setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
 }
 
 CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
@@ -144,6 +131,11 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
 CGisItemWpt::~CGisItemWpt()
 {
 
+}
+
+void CGisItemWpt::setSymbol()
+{
+    setIcon();
 }
 
 void CGisItemWpt::genKey()
@@ -325,7 +317,6 @@ void CGisItemWpt::setIcon(const QString& name)
 {    
     lastIcon = name;
     wpt.sym  = name;
-    setIcon();
 
     QPointF focus;
     QString path;

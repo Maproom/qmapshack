@@ -37,18 +37,11 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 {
     *this = parentRte;
 
-    icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    setText(1, "*");
-    setText(0, rte.name);
-    setIcon(0, icon);
-    setToolTip(0, getInfo());
-
     key.clear();
     genKey();
 
-    project->setText(1,"*");
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to create route from GPX file
@@ -58,13 +51,11 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
 {
     // --- start read and process data ----
     readRte(xml, rte);    
-    icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     // --- stop read and process data ----
-    setText(0, rte.name);
-    setIcon(0, icon);
-    setToolTip(0,getInfo());
+
     genKey();
     setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
 }
 
 CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
@@ -80,6 +71,12 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
 CGisItemRte::~CGisItemRte()
 {
 
+}
+
+void CGisItemRte::setSymbol()
+{
+    icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    setIcon(0, icon);
 }
 
 

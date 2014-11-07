@@ -143,14 +143,9 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
 
     deriveSecondaryData();
 
-    setColor(str2color(srctrk.color));
-    setText(1, "*");
-    setText(0, trk.name);
-    setToolTip(0, getInfo());
     genKey();
-
-    project->setText(1,"*");
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to create a copy of track with new parent
@@ -163,13 +158,10 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
 {
     *this = parentTrk;
 
-    setText(1, "*");
-    setText(0, trk.name);
-    setToolTip(0, getInfo());
     key.clear();
     genKey();
-    project->setText(1,"*");
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// usd to create a track from a line of coordinates
@@ -186,12 +178,9 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
 
     setColor(str2color(""));
-    setText(1, "*");
-    setText(0, trk.name);
-    setToolTip(0, getInfo());
     genKey();
-    project->setText(1,"*");
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to create track from GPX file
@@ -206,11 +195,9 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setColor(penForeground.color());
     readTrk(xml, trk);
     // --- stop read and process data ----
-    setText(0, trk.name);
-    setToolTip(0, getInfo());
     genKey();
-
     setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
 }
 
 CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
@@ -245,6 +232,10 @@ CGisItemTrk::~CGisItemTrk()
     delete dlgDetails;
 }
 
+void CGisItemTrk::setSymbol()
+{
+    setColor(str2color(trk.color));
+}
 
 void CGisItemTrk::setDataFromPolyline(const QPolygonF &l)
 {
@@ -259,9 +250,6 @@ void CGisItemTrk::setDataFromPolyline(const QPolygonF &l)
     readTrackDataFromPolyLine(l);
 
     flags |= eFlagTainted;
-    setText(1,"*");
-    setToolTip(0, getInfo());
-    parent()->setText(1,"*");
     changed(QObject::tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
 }
 
@@ -871,10 +859,7 @@ void CGisItemTrk::reverse()
         trk1->trk.segs.push_front(seg1);
     }
     trk1->deriveSecondaryData();
-    trk1->setText(0, trk1->getName());
-    trk1->setToolTip(0, trk1->getInfo());
-    trk1->setText(1,"*");
-    project->setText(1,"*");
+    trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void CGisItemTrk::combine()
@@ -916,10 +901,7 @@ void CGisItemTrk::combine()
     }
 
     trk1->deriveSecondaryData();
-    trk1->setText(0, trk1->getName());
-    trk1->setToolTip(0, trk1->getInfo());
-    trk1->setText(1,"*");
-    project->setText(1,"*");
+    trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void CGisItemTrk::hideSelectedPoints()

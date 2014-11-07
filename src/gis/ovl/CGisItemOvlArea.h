@@ -55,7 +55,6 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         qint32 getStyle(){return area.style;}
         bool getOpacity(){return area.opacity;}
 
-
         void setName(const QString& str);
         void setColor(int idx);
         void setDataFromPolyline(const QPolygonF& line);
@@ -64,7 +63,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         void setOpacity(bool yes);
         void setComment(const QString& str);
         void setDescription(const QString& str);
-
+        void setLinks(const QList<link_t>& links);
 
         void save(QDomNode& gpx);
         void edit();

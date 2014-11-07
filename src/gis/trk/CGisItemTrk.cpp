@@ -1273,6 +1273,13 @@ void CGisItemTrk::setDescription(const QString& str)
     changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
+void CGisItemTrk::setLinks(const QList<link_t>& links)
+{
+    trk.links = links;
+    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+}
+
+
 void CGisItemTrk::setColor(int idx)
 {
     int N = sizeof(lineColors)/sizeof(QColor);

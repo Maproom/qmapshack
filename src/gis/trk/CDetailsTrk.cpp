@@ -19,6 +19,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "helpers/CSettings.h"
 #include "helpers/CTextEditWidget.h"
+#include "helpers/CLinksDialog.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 
@@ -352,6 +353,16 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setDescription(dlg.getHtml());
         }
+    }
+    else if(url.toString() == "links")
+    {
+        QList<IGisItem::link_t> links = trk.getLinks();
+        CLinksDialog dlg(links, 0);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            trk.setLinks(links);
+        }
+        setupGui();
     }
     else
     {

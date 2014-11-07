@@ -78,6 +78,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void setDrawMode(drawmode_e mode){drawMode = mode;}
         void setComment(const QString& str);
         void setDescription(const QString& str);
+        void setLinks(const QList<link_t>& links);
         void setDataFromPolyline(const QPolygonF& l);
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);

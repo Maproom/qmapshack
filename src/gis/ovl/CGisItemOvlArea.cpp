@@ -456,6 +456,12 @@ void CGisItemOvlArea::setDescription(const QString& str)
     changed(QObject::tr("Changed description."), "://icons/48x48/EditText.png");
 }
 
+void CGisItemOvlArea::setLinks(const QList<link_t>& links)
+{
+    area.links = links;
+    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+}
+
 
 void CGisItemOvlArea::setColor(int idx)
 {

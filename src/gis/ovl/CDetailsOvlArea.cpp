@@ -19,6 +19,7 @@
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CTextEditWidget.h"
+#include "helpers/CLinksDialog.h"
 #include "GeoMath.h"
 
 
@@ -158,6 +159,16 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
         if(dlg.exec() == QDialog::Accepted)
         {
             area.setDescription(dlg.getHtml());            
+        }
+        setupGui();
+    }
+    else if(url.toString() == "links")
+    {
+        QList<IGisItem::link_t> links = area.getLinks();
+        CLinksDialog dlg(links, 0);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            area.setLinks(links);
         }
         setupGui();
     }

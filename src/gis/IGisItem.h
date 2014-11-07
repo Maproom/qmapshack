@@ -110,6 +110,7 @@ class IGisItem : public QTreeWidgetItem
             , eTypeTrk = 2
             , eTypeRte = 3
             , eTypeOvl = 4
+            , eTypeMax = 5
         };
 
         enum mark_e

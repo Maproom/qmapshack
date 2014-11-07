@@ -100,8 +100,6 @@ class IGisProject : public QTreeWidgetItem
          */
         bool  isValid(){return valid;}
 
-
-
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
         void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);

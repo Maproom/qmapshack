@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -32,7 +32,7 @@
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="55"/>
         <source>Select DEM file path...</source>
-        <translation>Pfad für DEM Dateien auswählen...</translation>
+        <translation>Pfad für DEM Dateien wählen...</translation>
     </message>
 </context>
 <context>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>DEM must have one band with 16 bit or 32 bit data.</source>
-        <translation type="obsolete">Das DEM muss aus einem Satz mit 16 bit oder 32 bit Daten bestehen.</translation>
+        <translation type="vanished">Das DEM muss aus einem Satz mit 16 bit oder 32 bit Daten bestehen.</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="84"/>
@@ -83,115 +83,103 @@
 <context>
     <name>CDetailsOvlArea</name>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="130"/>
+        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="131"/>
         <source>Edit name...</source>
-        <translation>Name ändern...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="130"/>
+        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="131"/>
         <source>Enter new waypoint name.</source>
         <translation>Geben Sie einen neuen Namen ein.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="221"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
+        <translation type="vanished">&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="224"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="231"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
+        <translation type="vanished">&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="234"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="162"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="171"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="174"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="180"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="199"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="201"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="154"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="163"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="166"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="191"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="193"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="226"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
+        <translation type="vanished">&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="229"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="236"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
+        <translation type="vanished">&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="239"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>CDetailsWpt</name>
     <message>
         <source>no comment</source>
-        <translation type="obsolete">kein Kommentar vorhanden</translation>
+        <translation type="vanished">kein Kommentar vorhanden</translation>
     </message>
     <message>
         <source>no description</source>
-        <translation type="obsolete">keine Beschreibung vorhanden</translation>
+        <translation type="vanished">keine Beschreibung vorhanden</translation>
+    </message>
+    <message>
+        <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
+        <translation type="vanished">&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
+        <translation type="vanished">&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
+        <translation type="vanished">&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
+        <translation type="vanished">&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="130"/>
-        <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="133"/>
-        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="140"/>
-        <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="143"/>
-        <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="163"/>
         <source>Edit name...</source>
-        <translation>Name ändern...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="163"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="130"/>
         <source>Enter new waypoint name.</source>
         <translation>Geben Sie einen neuen Namen ein.</translation>
     </message>
     <message>
         <source>Enter new elevation.</source>
-        <translation type="obsolete">Geben Sie eine Höhe ein.</translation>
+        <translation type="vanished">Geben Sie eine Höhe ein.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="182"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="149"/>
         <source>Enter new proximity range.</source>
         <translation>Geben Sie einen Abstandsalarm ein.</translation>
     </message>
@@ -201,7 +189,7 @@
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="85"/>
         <source>No DEM data found for that point.</source>
-        <translation>Keine Höhendaten für den Punkt gefunden.</translation>
+        <translation>Keine Höhendaten für diesen Punkt gefunden.</translation>
     </message>
 </context>
 <context>
@@ -233,7 +221,7 @@
     </message>
     <message>
         <source>Move Waypoint...</source>
-        <translation type="obsolete">Wegpunkt verschieben...</translation>
+        <translation type="vanished">Wegpunkt verschieben...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="57"/>
@@ -248,7 +236,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="59"/>
         <source>Select Range</source>
-        <translation>Teilstrecke auswählen</translation>
+        <translation>Bereich wählen</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="60"/>
@@ -268,7 +256,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="63"/>
         <source>Edit Area Points</source>
-        <translation>Punkte der Fläche bearbeiten</translation>
+        <translation>Flächenpunkte bearbeiten</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="66"/>
@@ -278,16 +266,20 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="400"/>
         <source>Saving workspace. Please wait.</source>
-        <translation>Speichere den Arbeitsplatz. Bitte warten.</translation>
+        <translation>Ansicht speichern. Bitte warten.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="441"/>
         <source>Loading workspace. Please wait.</source>
-        <translation>Lade den Arbeitsplatz. Bitte warten.</translation>
+        <translation>Ansicht laden. Bitte warten.</translation>
+    </message>
+    <message>
+        <source>Add Empty Project</source>
+        <translation type="vanished">Leeres Projekt hinzufügen</translation>
     </message>
     <message>
         <source>New Project</source>
-        <translation type="obsolete">Neues Projekt</translation>
+        <translation type="vanished">Neues Projekt</translation>
     </message>
 </context>
 <context>
@@ -308,7 +300,7 @@
     <message>
         <location filename="../helpers/CHistoryListWidget.cpp" line="32"/>
         <source>Cut history</source>
-        <translation>Restl. Verlauf abschneiden</translation>
+        <translation>Historie kürzen</translation>
     </message>
 </context>
 <context>
@@ -995,9 +987,9 @@
         <translation>Hinzufügen oder entfernen von Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
     </message>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="54"/>
+        <location filename="../map/CMapPathSetup.cpp" line="55"/>
         <source>Select map path...</source>
-        <translation>Kartenpfad auswählen...</translation>
+        <translation>Kartenpfad wählen...</translation>
     </message>
 </context>
 <context>
@@ -1080,7 +1072,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>--- All ---</source>
-        <translation type="obsolete">--- Alle ---</translation>
+        <translation type="vanished">--- Alle ---</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="288"/>
@@ -1154,7 +1146,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>--- All ---</source>
-        <translation type="obsolete">--- Alle ---</translation>
+        <translation type="vanished">--- Alle ---</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="385"/>
@@ -1163,11 +1155,11 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>%1: %2 tiles pending</source>
-        <translation type="obsolete">%1: %2 unerledigte Kacheln</translation>
+        <translation type="vanished">%1: %2 unerledigte Kacheln</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;OGC WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="obsolete">Unerwarterter Dienst. &apos;OGC WMTS 1.0.0&apos; Wird erwartet. &apos;%1 %2&apos; wird gelesen.</translation>
+        <translation type="vanished">Unerwarterter Dienst. &apos;OGC WMTS 1.0.0&apos; Wird erwartet. &apos;%1 %2&apos; wird gelesen.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="198"/>
@@ -1187,19 +1179,19 @@ Unbekannte Struktur.</translation>
     <name>CMouseEditLine</name>
     <message>
         <source>Add points?</source>
-        <translation type="obsolete">Punkte hinzufügen?</translation>
+        <translation type="vanished">Punkte hinzufügen?</translation>
     </message>
     <message>
         <source>Add points to temporary line?</source>
-        <translation type="obsolete">Punkte zur temporären Linie hinzufügen?</translation>
+        <translation type="vanished">Punkte zur temporären Linie hinzufügen?</translation>
     </message>
     <message>
         <source>Warning!</source>
-        <translation type="obsolete">Warnung!</translation>
+        <translation type="vanished">Warnung!</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="obsolete">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
+        <translation type="vanished">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
 </context>
 <context>
@@ -1329,7 +1321,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/wpt/CProjWpt.cpp" line="63"/>
         <source>Edit name...</source>
-        <translation>Name ändern...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CProjWpt.cpp" line="63"/>
@@ -1355,17 +1347,17 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/db/CSetupDB.cpp" line="55"/>
         <source>Setup database...</source>
-        <translation>Datenbank einstellen...</translation>
+        <translation>Datenbank einrichten...</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDB.cpp" line="55"/>
         <source>Changes will become active after an application&apos;s restart.</source>
-        <translation>Die Änderungen werden erst nach dem Neustart des Programmes aktiv.</translation>
+        <translation>Änderungen werden nach Neustart der Anwendung aktiv.</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDB.cpp" line="63"/>
         <source>Select database path...</source>
-        <translation>Pfad für die Datenbank auswählen...</translation>
+        <translation>Datenbankpfad w#ählen...</translation>
     </message>
 </context>
 <context>
@@ -1416,7 +1408,7 @@ ist keine gültige Koordinatensystemdefinition:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="145"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -1672,7 +1664,6 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="251"/>
         <source>Progress</source>
-        <translatorcomment>?</translatorcomment>
         <translation>Verlauf</translation>
     </message>
     <message>
@@ -1698,8 +1689,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="360"/>
         <source>Delta</source>
-        <translatorcomment>?</translatorcomment>
-        <translation></translation>
+        <translation>Delta</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="365"/>
@@ -1743,7 +1733,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="obsolete">Bezeichnung</translation>
+        <translation type="vanished">Bezeichnung</translation>
     </message>
 </context>
 <context>
@@ -1755,7 +1745,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit comment.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kommentar bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kommentar bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="121"/>
@@ -1770,7 +1760,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit description.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beschreibung bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beschreibung bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="155"/>
@@ -1812,7 +1802,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="14"/>
         <source>Edit elevation...</source>
-        <translation>Höhe ändern ...</translation>
+        <translation>Höhenangabe bearbeiten...</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="22"/>
@@ -1827,7 +1817,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="39"/>
         <source>Get elevation from active digital elevation model.</source>
-        <translation>Die aus dem aktiven Höhenmodell lesen.</translation>
+        <translation>Höhe aus aktivem digitalen Höhenmodell entnehmen.</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="42"/>
@@ -1905,6 +1895,36 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../helpers/IInputDialog.ui" line="20"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
+    </message>
+</context>
+<context>
+    <name>ILinksDialog</name>
+    <message>
+        <location filename="../helpers/ILinksDialog.ui" line="14"/>
+        <source>Links...</source>
+        <translation>Verbindungen...</translation>
+    </message>
+    <message>
+        <location filename="../helpers/ILinksDialog.ui" line="23"/>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <location filename="../helpers/ILinksDialog.ui" line="28"/>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <location filename="../helpers/ILinksDialog.ui" line="33"/>
+        <source>Uri</source>
+        <translatorcomment>?</translatorcomment>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <location filename="../helpers/ILinksDialog.ui" line="43"/>
+        <location filename="../helpers/ILinksDialog.ui" line="63"/>
+        <source>...</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2078,7 +2098,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="399"/>
         <source>Add empty project</source>
-        <translation>Ein leeres Projekt hinzufügen</translation>
+        <translation>Leeres Projekt hinzufügen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="411"/>
@@ -2093,12 +2113,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="429"/>
         <source>Setup Units</source>
-        <translation>Einheiten einstellen</translation>
+        <translation>Einheiten einrichten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="438"/>
         <source>Setup Database</source>
-        <translation>Datenbank einstellen</translation>
+        <translation>Datenbank einrichten</translation>
     </message>
 </context>
 <context>
@@ -2110,7 +2130,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Pathss. </source>
-        <translation type="obsolete">Um Karten zuzufügen -&gt; Menü Datei - Kartenverzeichnisse angeben.</translation>
+        <translation type="vanished">Um Karten zuzufügen -&gt; Menü Datei - Kartenverzeichnisse angeben.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -2353,7 +2373,7 @@ sein</translation>
         <source>m</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="69"/>
         <source>°</source>
         <translation></translation>
@@ -2486,7 +2506,7 @@ sein</translation>
     </message>
     <message>
         <source>Hide points.</source>
-        <translation type="obsolete">Pukte ausblenden.</translation>
+        <translation type="vanished">Pukte ausblenden.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="43"/>
@@ -2497,11 +2517,11 @@ sein</translation>
     </message>
     <message>
         <source>Show points.</source>
-        <translation type="obsolete">Punkte anzeigen.</translation>
+        <translation type="vanished">Punkte anzeigen.</translation>
     </message>
     <message>
         <source>Copy track points to clipboard</source>
-        <translation type="obsolete">Trackpunkte in die Zwischenablage kopieren</translation>
+        <translation type="vanished">Trackpunkte in die Zwischenablage kopieren</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="103"/>
@@ -2582,11 +2602,11 @@ sein</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Details anzeigen &amp;amp; Bearbeiten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Details anzeigen &amp;amp; Bearbeiten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit properties of track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Detailansicht &amp;amp; Trackeigenschaften bearbeiten..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Detailansicht &amp;amp; Trackeigenschaften bearbeiten..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
@@ -2602,19 +2622,19 @@ sein</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löschen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löschen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show on-screen profile and detailed information about points.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt das Profil und detaillierte Informationen der Punkte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt das Profil und detaillierte Informationen der Punkte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cut track at selected point into two tracks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Teilt den Track am selektierten Punkt in zwei Teile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Teilt den Track am selektierten Punkt in zwei Teile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit position of track points.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bearbeiten der Position von Trackpunkten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bearbeiten der Position von Trackpunkten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="174"/>
@@ -2667,7 +2687,7 @@ sein</translation>
     <name>ISelectProjectDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
@@ -2682,7 +2702,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="36"/>
         <source>New project is created as:</source>
-        <translation>Format des neuen Projektes:</translation>
+        <translation>Das neue Projekt wird erstellt als:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="73"/>
@@ -2700,12 +2720,12 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="14"/>
         <source>Setup database...</source>
-        <translation>Datenbank einstellen...</translation>
+        <translation>Datenbank einrichten...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="35"/>
         <source>save workspace on exit, and every</source>
-        <translation>den Arbeitsplatz beim Schließen speichern und alle</translation>
+        <translation>Ansicht beim Beenden speichern, und alle</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="45"/>
@@ -2733,7 +2753,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="14"/>
         <source>Edit text...</source>
-        <translation>Text eingeben...</translation>
+        <translation>Text bearbeiten...</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="25"/>
@@ -2901,22 +2921,22 @@ sein</translation>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="14"/>
         <source>Setup units...</source>
-        <translation>Einheiten einstellen...</translation>
+        <translation>Einheiten einrichten...</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="22"/>
         <source>Metric</source>
-        <translation>Metrisch</translation>
+        <translation>metrisch</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="29"/>
         <source>Imperial</source>
-        <translation>Imperial</translation>
+        <translation>imperial</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="36"/>
         <source>Nautic</source>
-        <translation>Nautisch</translation>
+        <translation>nautisch</translation>
     </message>
 </context>
 <context>
@@ -2963,36 +2983,31 @@ Zeile %2, Spalte %3:
         <location filename="../gis/IGisProject.cpp" line="112"/>
         <source>
 Filename: %1</source>
-        <translation>
-Dateiname: %1</translation>
+        <translation>Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="128"/>
         <source>
 Waypoints: %1</source>
-        <translation>
-Wegpunkte: %1</translation>
+        <translation>Wegpunkte: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="132"/>
         <source>
 Tracks: %1</source>
-        <translation>
-Tracks: %1</translation>
+        <translation>Tracks: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="136"/>
         <source>
 Routes: %1</source>
-        <translation>
-Routen: %1</translation>
+        <translation>Routen: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="140"/>
         <source>
 Areas: %1</source>
-        <translation>
-Flächen: %1</translation>
+        <translation>Fläche: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="197"/>
@@ -3104,11 +3119,11 @@ Flächen: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="430"/>
         <source> slope: %1%3 (%2%)</source>
-        <translation> Neigung: %1%3 (%2%)</translation>
+        <translation>Neigung: %1%3 (%2%)</translation>
     </message>
     <message>
         <source> slope: %1° (%2%)</source>
-        <translation type="obsolete"> Neigung: %1° (%2%)</translation>
+        <translation type="vanished"> Neigung: %1° (%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="940"/>
@@ -3122,7 +3137,7 @@ Flächen: %1</translation>
     </message>
     <message>
         <source> slope: %1°(%2%)</source>
-        <translation type="obsolete">Neigung: %1°(%2%)</translation>
+        <translation type="vanished">Neigung: %1°(%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="435"/>
@@ -3225,8 +3240,15 @@ Flächen: %1</translation>
         <translation>Beschreibung geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="468"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1284"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="462"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1279"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="333"/>
+        <source>Changed links</source>
+        <translation>Geänderte Verbindungen</translation>
+    </message>
+    <message>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1291"/>
         <source>Changed color</source>
         <translation>Farbe geändert</translation>
     </message>
@@ -3240,12 +3262,12 @@ Flächen: %1</translation>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Edit name...</source>
-        <translation>Name ändern...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="165"/>
         <source>Enter new waypoint name.</source>
-        <translation>Geben Sie einen neuen Namen ein.</translation>
+        <translation>Name eingeben.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="211"/>
@@ -3319,27 +3341,57 @@ Flächen: %1</translation>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="459"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
-        <translation>Dieser Dateityp hat eine unbekannte Polygon Kodierung. Bitte berichten!</translation>
+        <translation>Dieser Dateityp hat eine unbekannte Polygon Kodierung. Bitte mitteilen!</translation>
     </message>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="834"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
-        <translation>Dieser Dateityp hat eine unbekannte Polyline Kodierung. Bitte berichten!</translation>
+        <translation>Dieser Dateityp hat eine unbekannte Polyline Kodierung. Bitte mitteilen!</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="239"/>
         <source>Initial version.</source>
-        <translation>initiale Version</translation>
+        <translation>Erstversion.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="319"/>
+        <location filename="../gis/IGisItem.cpp" line="323"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
         <translation>Diese Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="320"/>
+        <location filename="../gis/IGisItem.cpp" line="324"/>
         <source>Read Only Mode...</source>
         <translation>Schreibgeschützt...</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="513"/>
+        <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
+        <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="516"/>
+        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
+        <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="523"/>
+        <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
+        <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="526"/>
+        <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
+        <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="533"/>
+        <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
+        <translation>&lt;h4&gt;Verbindungen:&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="536"/>
+        <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
+        <translation>&lt;h4&gt;keine Verbindungen:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="803"/>
@@ -3354,7 +3406,7 @@ Flächen: %1</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <source>Enter new area name.</source>
-        <translation>Geben Sie einen Namen für das Gebiet an.</translation>
+        <translation>Name eingeben.</translation>
     </message>
 </context>
 </TS>

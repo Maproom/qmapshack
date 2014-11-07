@@ -55,7 +55,6 @@ class CGisItemRte : public IGisItem, public IGisLine
     private:
         struct rte_t;
         void setSymbol();
-        void genKey();
         void readRte(const QDomNode& xml, rte_t& rte);
 
         static QString keyUserFocus;

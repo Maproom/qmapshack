@@ -90,7 +90,6 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         static const width_t lineWidths[OVL_N_WIDTHS];
         static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
     protected:
-        void genKey();
         void setSymbol();
 
 

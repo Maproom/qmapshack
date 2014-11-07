@@ -98,7 +98,6 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 
     key.clear();
     genKey();
-
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -138,15 +137,6 @@ void CGisItemWpt::setSymbol()
     setIcon();
 }
 
-void CGisItemWpt::genKey()
-{
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&wpt, sizeof(wpt));
-        key = md5.result().toHex();
-    }
-}
 
 const QString& CGisItemWpt::getNewName()
 {

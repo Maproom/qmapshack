@@ -220,7 +220,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
     private:        
         void setSymbol();
-        void genKey();
         /**
            @brief Read track data from section in GPX file
            @param xml   The XML <trk> section

@@ -139,6 +139,23 @@ IGisItem::~IGisItem()
 
 }
 
+void IGisItem::genKey()
+{
+    if(key.isEmpty())
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream.setByteOrder(QDataStream::LittleEndian);
+        stream.setVersion(QDataStream::Qt_5_2);
+
+        *this >> stream;
+
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData(buffer);
+        key = md5.result().toHex();
+    }
+}
+
 void IGisItem::updateDecoration(mark_e enable, mark_e disable)
 {
     // update text and icon
@@ -220,7 +237,7 @@ void IGisItem::setupHistory()
         history_event_t& event = history.events.last();
         event.time      = QDateTime::currentDateTimeUtc();
         event.comment   = QObject::tr("Initial version.");
-        event.icon      = "://icons/48x48/Start.png";
+        event.icon      = "://icons/48x48/Start.png";        
     }
 
     // search for the first item with data

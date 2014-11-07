@@ -186,6 +186,52 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
 void CGisListWks::dropEvent ( QDropEvent  * e )
 {
+    // block out items with same key (duplicats)
+    IGisItem * item1 = dynamic_cast<IGisItem*>(currentItem());
+    IGisItem * item2 = dynamic_cast<IGisItem*>(itemAt(e->pos()));
+    if(item1 && item2)
+    {
+        // if it is a drop on an item and the other item is in another project
+        if(item1->parent() != item2->parent())
+        {
+            // iterate over all items of the target project and check keys
+            QTreeWidgetItem * parent = item2->parent();
+            for(int i = 0; i < parent->childCount(); i++)
+            {
+                IGisItem * item = dynamic_cast<IGisItem*>(parent->child(i));
+                if(item)
+                {
+                    if(item->getKey() == item1->getKey())
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        // if it is a drop on a project the project is different from the source item's project
+        IGisProject * parent = dynamic_cast<IGisProject*>(itemAt(e->pos()));
+        if(parent && item1->parent() != parent)
+        {
+            // iterate over all items of the target project and check keys
+            for(int i = 0; i < parent->childCount(); i++)
+            {
+                IGisItem * item = dynamic_cast<IGisItem*>(parent->child(i));
+                if(item)
+                {
+                    if(item->getKey() == item1->getKey())
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    // go on with item insertion
+
     /*
         What's happening here?
 
@@ -339,7 +385,7 @@ void CGisListWks::slotSaveWorkspace()
     QSqlQuery query(db);
     if(!query.exec("DELETE FROM workspace"))
     {
-        QUERY_EXEC(return);
+        QUERY_EXEC(return );
     }
 
     qDebug() << "slotSaveWorkspace()";
@@ -349,7 +395,7 @@ void CGisListWks::slotSaveWorkspace()
 
     for(int i = 0; i < total; i++)
     {
-        PROGRESS(i, return);
+        PROGRESS(i, return );
 
         IGisProject * project = dynamic_cast<IGisProject*>(topLevelItem(i));
         if(project == 0)
@@ -377,7 +423,6 @@ void CGisListWks::slotSaveWorkspace()
     {
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
-
 }
 
 void CGisListWks::slotLoadWorkspace()
@@ -385,17 +430,17 @@ void CGisListWks::slotLoadWorkspace()
     QSqlQuery query(db);
 
     query.prepare("SELECT type, key, name, changed, data FROM workspace");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 
     PROGRESS_SETUP(tr("Loading workspace. Please wait."), query.size());
     quint32 progCnt = 0;
 
     while(query.next())
     {
-        PROGRESS(progCnt++, return);
+        PROGRESS(progCnt++, return );
 
 
-        int  type       = query.value(0).toInt();
+        int type       = query.value(0).toInt();
         QString key     = query.value(1).toString();
         QString name    = query.value(2).toString();
         bool changed    = query.value(3).toBool();
@@ -408,18 +453,19 @@ void CGisListWks::slotLoadWorkspace()
         IGisProject * project = 0;
         switch(type)
         {
-            case IGisProject::eTypeQms:
-            {
-                project = new CQmsProject(name,this, key);
-                *project << stream;
-                break;
-            }
-            case IGisProject::eTypeGpx:
-            {
-                project = new CGpxProject(name,this, key);
-                *project << stream;
-                break;
-            }
+        case IGisProject::eTypeQms:
+        {
+            project = new CQmsProject(name,this, key);
+            *project << stream;
+            break;
+        }
+
+        case IGisProject::eTypeGpx:
+        {
+            project = new CGpxProject(name,this, key);
+            *project << stream;
+            break;
+        }
         }
 
         if(project == 0)
@@ -430,7 +476,6 @@ void CGisListWks::slotLoadWorkspace()
         project->setToolTip(0,project->getInfo());
         project->setText(1, changed ? "*" : "");
     }
-
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)

@@ -274,7 +274,7 @@ class IGisItem : public QTreeWidgetItem
         /// write waypoint data to an XML snippet
         void writeWpt(QDomElement &xml, const wpt_t &wpt);
         /// gnerate a unique key from item's data
-        virtual void genKey() = 0;
+        virtual void genKey();
         /// setup the history structure right after the creation of the item
         void setupHistory();
         /// convert a color string from GPX to a QT color

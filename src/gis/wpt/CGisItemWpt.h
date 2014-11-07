@@ -160,7 +160,6 @@ class CGisItemWpt : public IGisItem
 
     private:
         void setSymbol();
-        void genKey();
         void readGpx(const QDomNode& xml);
         void setIcon();
         void readGcExt(const QDomNode& xmlCache);

@@ -304,16 +304,6 @@ void CGisItemTrk::unregisterPlot(IPlot * plot)
 }
 
 
-void CGisItemTrk::genKey()
-{
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&trk, sizeof(trk));
-        key = md5.result().toHex();
-    }
-}
-
 
 QString CGisItemTrk::getInfo()
 {

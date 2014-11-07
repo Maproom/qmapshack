@@ -182,16 +182,6 @@ void CGisItemOvlArea::setSymbol()
     setColor(str2color(area.color));
 }
 
-void CGisItemOvlArea::genKey()
-{
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&area, sizeof(area));
-        key = md5.result().toHex();
-    }
-}
-
 bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
 {
     foreach(const QPointF& pt, line)

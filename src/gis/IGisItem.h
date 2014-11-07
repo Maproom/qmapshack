@@ -265,6 +265,8 @@ class IGisItem : public QTreeWidgetItem
         void cutHistory();
 
         static QString removeHtml(const QString &str);
+        static QString createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links);
+        static QString toLink(bool isReadOnly, const QString& href, const QString& str);
 
     protected:
         struct color_t;

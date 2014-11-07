@@ -327,7 +327,11 @@ void CGisItemWpt::setDescription(const QString& str)
     changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
-
+void CGisItemWpt::setLinks(const QList<link_t>& links)
+{
+    wpt.links = links;
+    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+}
 
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)

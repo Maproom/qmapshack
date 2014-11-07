@@ -129,6 +129,7 @@ class CGisItemWpt : public IGisItem
         void setIcon(const QString& name);
         void setComment(const QString& str);
         void setDescription(const QString& str);
+        void setLinks(const QList<link_t>& links);
 
         const QString& getName(){return wpt.name;}
         QString getInfo();

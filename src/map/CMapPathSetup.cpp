@@ -43,6 +43,7 @@ CMapPathSetup::~CMapPathSetup()
 {
 
 }
+
 void CMapPathSetup::slotItemSelectionChanged()
 {
     QList<QListWidgetItem*> items = listWidget->selectedItems();

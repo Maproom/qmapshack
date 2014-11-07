@@ -39,6 +39,36 @@ class IGisProject : public QTreeWidgetItem
             , eTypeDb
         };
 
+        struct person_t
+        {
+            QString name;
+            QString id;
+            QString domain;
+            IGisItem::link_t link;
+        };
+
+        struct copyright_t
+        {
+            QString author;
+            QString year;
+            QString license;
+        };
+
+        struct metadata_t
+        {
+            QString name;
+            QString desc;
+            person_t author;
+            copyright_t copyright;
+            QList<IGisItem::link_t> links;
+            QDateTime time;
+            QString keywords;
+            QRectF bounds;
+            // -- all gpx tags - stop
+            QMap<QString, QVariant> extensions;
+
+        };
+
         IGisProject(type_e type, const QString& filename, CGisListWks * parent);
         virtual ~IGisProject();
 
@@ -49,6 +79,7 @@ class IGisProject : public QTreeWidgetItem
         virtual QString getFilename(){return filename;}
 
         type_e getType(){return type;}
+
         /**
            @brief Get unique project key.
            @return A MD5 hash string
@@ -76,7 +107,6 @@ class IGisProject : public QTreeWidgetItem
            @param items     a list the item's pointer is stored to.
         */
         void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
-
 
         /**
            @brief Delete items with matching key
@@ -113,6 +143,7 @@ class IGisProject : public QTreeWidgetItem
            @return The stream object.
         */
         virtual QDataStream& operator<<(QDataStream& stream);
+
         /**
            @brief Serialize object into a QDataStream
 
@@ -123,37 +154,13 @@ class IGisProject : public QTreeWidgetItem
         */
         virtual QDataStream& operator>>(QDataStream& stream);
 
-        struct person_t
-        {
-            QString name;
-            QString id;
-            QString domain;
-            IGisItem::link_t link;
-        };
-
-        struct copyright_t
-        {
-            QString author;
-            QString year;
-            QString license;
-        };
-
-        struct metadata_t
-        {
-            QString name;
-            QString desc;
-            person_t author;
-            copyright_t copyright;
-            QList<IGisItem::link_t> links;
-            QDateTime time;
-            QString keywords;
-            QRectF bounds;
-            // -- all gpx tags - stop
-            QMap<QString, QVariant> extensions;
-
-        };
-
+        /**
+           @brief writeMetadata
+           @param doc
+           @return
+         */
         QDomNode writeMetadata(QDomDocument& doc);
+
     protected:
         void genKey();
         void setupName(const QString& defaultName);

@@ -47,9 +47,6 @@ class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
         void slotLinkActivated(const QUrl& url);
 
     private:
-        QString toLink(bool isReadOnly, const QString& href, const QString& str);
-
-
         enum columns_t
         {
             eColNum

@@ -16,43 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CDETAILSOVLAREA_H
-#define CDETAILSOVLAREA_H
+#ifndef CLINKSDIALOG_H
+#define CLINKSDIALOG_H
 
+#include "gis/IGisItem.h"
 #include <QDialog>
-#include "ui_IDetailsOvlArea.h"
+#include "ui_ILinksDialog.h"
 
-class CGisItemOvlArea;
-
-class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
+class CLinksDialog : public QDialog, private Ui::ILinksDialog
 {
     Q_OBJECT
     public:
-        CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent);
-        virtual ~CDetailsOvlArea();
+        CLinksDialog(QList<IGisItem::link_t>& links, QWidget * parent);
+        virtual ~CLinksDialog();
+
+    public slots:
+        void accept();
 
     private slots:
-        void slotSetColor(int idx);
-        void slotSetWidth(int idx);
-        void slotSetStyle(int idx);
-        void slotOpyacity(bool yes);
-        void slotChangeReadOnlyMode(bool on);
-        void slotLinkActivated(const QUrl& url);
-        void slotLinkActivated(const QString& link);
-        void setupGui();
+        void slotAddLink();
+        void slotDelLink();
+        void slotItemSelectionChanged();
 
-    private:        
-        enum columns_t
-        {
-            eColNum
-            ,eColPosition
-            ,eColMax
-        };
-
-        CGisItemOvlArea& area;
-
-        bool originator;
+    private:
+        QList<IGisItem::link_t>& links;
 };
 
-#endif //CDETAILSOVLAREA_H
+#endif //CLINKSDIALOG_H
 

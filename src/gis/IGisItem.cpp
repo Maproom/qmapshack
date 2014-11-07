@@ -223,7 +223,6 @@ void IGisItem::changed(const QString &what, const QString &icon)
     history.histIdxCurrent = history.events.size() - 1;
 
     updateDecoration(eMarkChanged, eMarkNone);
-    qDebug() << history.events[history.histIdxCurrent].hash;
 }
 
 void IGisItem::setupHistory()
@@ -270,8 +269,6 @@ void IGisItem::setupHistory()
     }
 
     history.histIdxCurrent = history.events.size() - 1;
-
-    qDebug() << history.events[history.histIdxCurrent].hash;
 }
 
 void IGisItem::loadHistory(int idx)
@@ -297,8 +294,6 @@ void IGisItem::loadHistory(int idx)
     *this << stream;
 
     history.histIdxCurrent = idx;
-
-    qDebug() << history.events[history.histIdxCurrent].hash;
 }
 
 void IGisItem::cutHistory()
@@ -498,4 +493,55 @@ QString IGisItem::removeHtml(const QString &str)
     QTextDocument html;
     html.setHtml(str);
     return html.toPlainText();
+}
+
+
+QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str)
+{
+    if(isReadOnly)
+    {
+        return QString("%1").arg(str);
+    }
+
+    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+}
+
+QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links)
+{
+    QString str;
+
+    str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"));
+    if(removeHtml(cmt).simplified().isEmpty())
+    {
+        str += QObject::tr("<p>--- no comment ---</p>");
+    }
+    else
+    {
+        str += cmt;
+    }
+
+    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"));
+    if(removeHtml(desc).simplified().isEmpty())
+    {
+        str += QObject::tr("<p>--- no description ---</p>");
+    }
+    else
+    {
+        str += desc;
+    }
+
+    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"));
+    if(links.isEmpty())
+    {
+        str += QObject::tr("<p>--- no links ---</p>");
+    }
+    else
+    {
+        foreach(const link_t& link, links)
+        {
+            str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+        }
+    }
+
+    return str;
 }

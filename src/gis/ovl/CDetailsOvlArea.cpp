@@ -19,6 +19,7 @@
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CTextEditWidget.h"
+#include "helpers/CLinksDialog.h"
 #include "GeoMath.h"
 
 
@@ -161,22 +162,22 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
         }
         setupGui();
     }
+    else if(url.toString() == "links")
+    {
+        QList<IGisItem::link_t> links = area.getLinks();
+        CLinksDialog dlg(links, 0);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            area.setLinks(links);
+        }
+        setupGui();
+    }
     else
     {
         QDesktopServices::openUrl(url);
     }
 }
 
-
-QString CDetailsOvlArea::toLink(bool isReadOnly, const QString& href, const QString& str)
-{
-    if(isReadOnly)
-    {
-        return QString("%1").arg(str);
-    }
-
-    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
-}
 
 void CDetailsOvlArea::setupGui()
 {
@@ -199,7 +200,7 @@ void CDetailsOvlArea::setupGui()
     }
 
 
-    labelName->setText(toLink(isReadOnly, "name", area.getName()));
+    labelName->setText(IGisItem::toLink(isReadOnly, "name", area.getName()));
 
     comboColor->setCurrentIndex(area.getColorIdx());
     comboColor->setEnabled(!isReadOnly);
@@ -211,35 +212,9 @@ void CDetailsOvlArea::setupGui()
     checkOpacity->setEnabled(!isReadOnly);
 
     textCmtDesc->document()->clear();
-
-    foreach(const IGisItem::link_t& link, area.getLinks())
-    {
-        QString str = QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
-        textCmtDesc->append(str);
-    }
-
-    textCmtDesc->append(toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>")));
-    if(IGisItem::removeHtml(area.getComment()).simplified().isEmpty())
-    {
-        textCmtDesc->append(tr("<p>--- no comment ---</p>"));
-    }
-    else
-    {
-        textCmtDesc->append(area.getComment());
-    }
-
-    textCmtDesc->append(toLink(isReadOnly, "description", tr("<h4>Description:</h4>")));
-    if(IGisItem::removeHtml(area.getDescription()).simplified().isEmpty())
-    {
-        textCmtDesc->append(tr("<p>--- no description ---</p>"));
-    }
-    else
-    {
-        textCmtDesc->append(area.getDescription());
-    }
+    textCmtDesc->append(IGisItem::createText(isReadOnly, area.getComment(), area.getDescription(), area.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
-
 
     int idx = 0;
     QList<QTreeWidgetItem*> items;
@@ -254,9 +229,7 @@ void CDetailsOvlArea::setupGui()
         // position
         GPS_Math_Deg_To_Str(pt.lon, pt.lat, str);
         item->setText(eColPosition,str);
-
         items << item;
-
     }
 
     treeWidget->clear();

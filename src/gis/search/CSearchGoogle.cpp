@@ -30,7 +30,7 @@
 #include <QtXml>
 
 CSearchGoogle::CSearchGoogle(CGisListWks * parent)
-    : IGisProject(eTypeGoogle, "","", parent)
+    : IGisProject(eTypeGoogle, "", parent)
 {
     QPointF focus;
 

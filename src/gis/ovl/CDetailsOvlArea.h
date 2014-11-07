@@ -49,8 +49,6 @@ class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
             ,eColMax
         };
 
-        QString toLink(bool isReadOnly, const QString& href, const QString& str);
-
         CGisItemOvlArea& area;
 
         bool originator;

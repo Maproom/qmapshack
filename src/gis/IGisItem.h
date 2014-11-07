@@ -44,6 +44,7 @@ class IGisItem : public QTreeWidgetItem
         struct history_event_t
         {
             QDateTime time;
+            QString   hash;
             QString   icon;
             QString   comment;
             QByteArray data;
@@ -110,6 +111,13 @@ class IGisItem : public QTreeWidgetItem
             , eTypeTrk = 2
             , eTypeRte = 3
             , eTypeOvl = 4
+            , eTypeMax = 5
+        };
+
+        enum mark_e
+        {
+             eMarkNone      = 0
+            ,eMarkChanged   = 0x00000001
         };
 
 
@@ -118,6 +126,13 @@ class IGisItem : public QTreeWidgetItem
 
         /// this mutex has to be locked when ever the item list is accessed.
         static QMutex mutexItems;
+
+        /**
+           @brief Update the visual representation of the QTreeWidgetItem
+           @param enable
+           @param disable
+         */
+        virtual void updateDecoration(mark_e enable, mark_e disable);
 
         /**
            @brief Save the item's data into a GPX structure
@@ -250,16 +265,20 @@ class IGisItem : public QTreeWidgetItem
         void cutHistory();
 
         static QString removeHtml(const QString &str);
+        static QString createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links);
+        static QString toLink(bool isReadOnly, const QString& href, const QString& str);
 
     protected:
         struct color_t;
 
+        /// set icon of QTreeWidgetItem
+        virtual void setSymbol() = 0;
         /// read waypoint data from an XML snippet
         void readWpt(const QDomNode& xml, wpt_t &wpt);
         /// write waypoint data to an XML snippet
         void writeWpt(QDomElement &xml, const wpt_t &wpt);
         /// gnerate a unique key from item's data
-        virtual void genKey() = 0;
+        virtual void genKey();
         /// setup the history structure right after the creation of the item
         void setupHistory();
         /// convert a color string from GPX to a QT color
@@ -275,6 +294,7 @@ class IGisItem : public QTreeWidgetItem
 
         quint32 flags;
         QString key;
+        QString hash;
         QPixmap icon;
         QRectF boundingRect;
 

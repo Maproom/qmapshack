@@ -58,14 +58,10 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-    setText(1, "*");
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
-    genKey();
 
-    project->setText(1,"*");
+    genKey();
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to move a copy of waypoint
@@ -86,14 +82,10 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-    setText(1, "*");
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
-    genKey();
 
-    project->setText(1,"*");
+    genKey();
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to create a copy of waypoint with new parent
@@ -103,16 +95,11 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     , posScreen(NOPOINTF)
 {
     *this = parentWpt;
-    setText(1, "*");
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
 
     key.clear();
     genKey();
-
-    project->setText(1,"*");
     setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 /// used to create waypoint from GPX file
@@ -123,11 +110,10 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
 {
     readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-    setText(0, wpt.name);
-    setIcon();
-    setToolTip(0, getInfo());
+
     genKey();
     setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
 }
 
 CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
@@ -146,15 +132,11 @@ CGisItemWpt::~CGisItemWpt()
 
 }
 
-void CGisItemWpt::genKey()
+void CGisItemWpt::setSymbol()
 {
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((const char*)&wpt, sizeof(wpt));
-        key = md5.result().toHex();
-    }
+    setIcon();
 }
+
 
 const QString& CGisItemWpt::getNewName()
 {
@@ -325,7 +307,6 @@ void CGisItemWpt::setIcon(const QString& name)
 {    
     lastIcon = name;
     wpt.sym  = name;
-    setIcon();
 
     QPointF focus;
     QString path;
@@ -346,7 +327,11 @@ void CGisItemWpt::setDescription(const QString& str)
     changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
-
+void CGisItemWpt::setLinks(const QList<link_t>& links)
+{
+    wpt.links = links;
+    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+}
 
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)

@@ -19,6 +19,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "helpers/CSettings.h"
 #include "helpers/CTextEditWidget.h"
+#include "helpers/CLinksDialog.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 
@@ -76,15 +77,6 @@ CDetailsTrk::~CDetailsTrk()
     cfg.endGroup();
 }
 
-QString CDetailsTrk::toLink(bool isReadOnly, const QString& href, const QString& str)
-{
-    if(isReadOnly)
-    {
-        return QString("%1").arg(str);
-    }
-
-    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
-}
 
 
 void CDetailsTrk::setupGui()
@@ -216,32 +208,7 @@ void CDetailsTrk::setupGui()
     lineName->setText(trk.getName());
 
     textCmtDesc->document()->clear();
-
-    foreach(const IGisItem::link_t& link, trk.getLinks())
-    {
-        QString str = QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
-        textCmtDesc->append(str);
-    }
-
-    textCmtDesc->append(toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>")));
-    if(IGisItem::removeHtml(trk.getComment()).simplified().isEmpty())
-    {
-        textCmtDesc->append(tr("<p>--- no comment ---</p>"));
-    }
-    else
-    {
-        textCmtDesc->append(trk.getComment());
-    }
-
-    textCmtDesc->append(toLink(isReadOnly, "description", tr("<h4>Description:</h4>")));
-    if(IGisItem::removeHtml(trk.getDescription()).simplified().isEmpty())
-    {
-        textCmtDesc->append(tr("<p>--- no description ---</p>"));
-    }
-    else
-    {
-        textCmtDesc->append(trk.getDescription());
-    }
+    textCmtDesc->append(IGisItem::createText(isReadOnly, trk.getComment(), trk.getDescription(), trk.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
 
@@ -386,6 +353,16 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setDescription(dlg.getHtml());
         }
+    }
+    else if(url.toString() == "links")
+    {
+        QList<IGisItem::link_t> links = trk.getLinks();
+        CLinksDialog dlg(links, 0);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            trk.setLinks(links);
+        }
+        setupGui();
     }
     else
     {

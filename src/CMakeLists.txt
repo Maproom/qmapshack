@@ -27,6 +27,7 @@ set( SRCS
     helpers/CSelectProjectDialog.cpp
     helpers/CHistoryListWidget.cpp
     helpers/CElevationDialog.cpp
+    helpers/CLinksDialog.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -141,6 +142,7 @@ set( HDRS
     helpers/CSelectProjectDialog.h
     helpers/CHistoryListWidget.h
     helpers/CElevationDialog.h
+    helpers/CLinksDialog.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h
@@ -247,6 +249,7 @@ set( UIS
     helpers/ITextEditWidget.ui
     helpers/ISelectProjectDialog.ui
     helpers/IElevationDialog.ui
+    helpers/ILinksDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui

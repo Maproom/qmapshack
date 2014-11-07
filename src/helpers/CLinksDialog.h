@@ -16,23 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CQMSPROJECT_H
-#define CQMSPROJECT_H
+#ifndef CLINKSDIALOG_H
+#define CLINKSDIALOG_H
 
-#include "gis/IGisProject.h"
+#include "gis/IGisItem.h"
+#include <QDialog>
+#include "ui_ILinksDialog.h"
 
-class CQmsProject : public IGisProject
+class CLinksDialog : public QDialog, private Ui::ILinksDialog
 {
+    Q_OBJECT
     public:
-        CQmsProject(const QString& filename, CGisListWks * parent);
-        virtual ~CQmsProject();
+        CLinksDialog(QList<IGisItem::link_t>& links, QWidget * parent);
+        virtual ~CLinksDialog();
 
-        void save();
-        void saveAs();
+    public slots:
+        void accept();
 
-        static void saveAs(const QString& fn, IGisProject& project);
+    private slots:
+        void slotAddLink();
+        void slotDelLink();
+        void slotItemSelectionChanged();
 
+    private:
+        QList<IGisItem::link_t>& links;
 };
 
-#endif //CQMSPROJECT_H
+#endif //CLINKSDIALOG_H
 

@@ -39,92 +39,6 @@ class IGisProject : public QTreeWidgetItem
             , eTypeDb
         };
 
-        IGisProject(type_e type, const QString &key, const QString& filename, CGisListWks * parent);
-        virtual ~IGisProject();
-
-        virtual void save() = 0;
-        virtual void saveAs() = 0;
-
-        virtual void setFilename(const QString& fn){filename = fn;}
-        virtual QString getFilename(){return filename;}
-
-        type_e getType(){return type;}
-        /**
-           @brief Get unique project key.
-           @return A MD5 hash string
-         */
-        const QString& getKey(){return key;}
-
-        /**
-           @brief Get a short metadata summary
-           @return Informational string.
-         */
-        virtual QString getInfo();
-        /**
-           @brief Get a temporary pointer to the item with matching key
-           @param key
-           @return If no item is found 0 is returned.
-        */
-        IGisItem * getItemByKey(const QString& key);
-
-        /**
-           @brief Get a list of items that are close to a given pixel coordinate of the screen
-
-           @note: The returned pointers are just for temporary use. Best you use them to get the item's key.
-
-           @param pos       the coordinate on the screen in pixel
-           @param items     a list the item's pointer is stored to.
-        */
-        void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
-
-
-        /**
-           @brief Delete items with matching key
-           @param key
-        */
-        void delItemByKey(const QString& key);
-
-        /**
-           @brief Call IGisItem::edit() method for items with given key
-
-           @param key   a MD5 hash key
-         */
-        void editItemByKey(const QString& key);
-
-        /**
-           @brief Check if the project was initialized correctly.
-
-           For example a if a GPX file does not load correctly the project is invalid.
-
-           @return True if project is valid
-         */
-        bool  isValid(){return valid;}
-
-
-
-        void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-
-        /**
-           @brief Serialize object out of a QDataStream
-
-           See CGisSerialization.cpp for implementation
-
-           @param stream the binary data stream
-           @return The stream object.
-        */
-        virtual QDataStream& operator<<(QDataStream& stream);
-        /**
-           @brief Serialize object into a QDataStream
-
-           See CGisSerialization.cpp for implementation
-
-           @param stream the binary data stream
-           @return The stream object.
-        */
-        virtual QDataStream& operator>>(QDataStream& stream);
-
         struct person_t
         {
             QString name;
@@ -155,8 +69,100 @@ class IGisProject : public QTreeWidgetItem
 
         };
 
+        IGisProject(type_e type, const QString& filename, CGisListWks * parent);
+        virtual ~IGisProject();
+
+        virtual void save() = 0;
+        virtual void saveAs() = 0;
+
+        virtual void setFilename(const QString& fn){filename = fn;}
+        virtual QString getFilename(){return filename;}
+
+        type_e getType(){return type;}
+
+        /**
+           @brief Get unique project key.
+           @return A MD5 hash string
+         */
+        const QString& getKey(){genKey(); return key;}
+
+        /**
+           @brief Get a short metadata summary
+           @return Informational string.
+         */
+        virtual QString getInfo();
+        /**
+           @brief Get a temporary pointer to the item with matching key
+           @param key
+           @return If no item is found 0 is returned.
+        */
+        IGisItem * getItemByKey(const QString& key);
+
+        /**
+           @brief Get a list of items that are close to a given pixel coordinate of the screen
+
+           @note: The returned pointers are just for temporary use. Best you use them to get the item's key.
+
+           @param pos       the coordinate on the screen in pixel
+           @param items     a list the item's pointer is stored to.
+        */
+        void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
+
+        /**
+           @brief Delete items with matching key
+           @param key
+        */
+        void delItemByKey(const QString& key);
+
+        /**
+           @brief Call IGisItem::edit() method for items with given key
+
+           @param key   a MD5 hash key
+         */
+        void editItemByKey(const QString& key);
+
+        /**
+           @brief Check if the project was initialized correctly.
+
+           For example a if a GPX file does not load correctly the project is invalid.
+
+           @return True if project is valid
+         */
+        bool  isValid(){return valid;}
+
+        void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
+        void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);
+        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+
+        /**
+           @brief Serialize object out of a QDataStream
+
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        virtual QDataStream& operator<<(QDataStream& stream);
+
+        /**
+           @brief Serialize object into a QDataStream
+
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        virtual QDataStream& operator>>(QDataStream& stream);
+
+        /**
+           @brief writeMetadata
+           @param doc
+           @return
+         */
         QDomNode writeMetadata(QDomDocument& doc);
+
     protected:
+        void genKey();
         void setupName(const QString& defaultName);
         void markAsSaved();
         void readMetadata(const QDomNode& xml, metadata_t& metadata);

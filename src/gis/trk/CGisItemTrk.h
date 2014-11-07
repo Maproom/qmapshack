@@ -78,6 +78,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         void setDrawMode(drawmode_e mode){drawMode = mode;}
         void setComment(const QString& str);
         void setDescription(const QString& str);
+        void setLinks(const QList<link_t>& links);
         void setDataFromPolyline(const QPolygonF& l);
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
@@ -219,7 +220,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         static const QString bulletColors[TRK_N_COLORS];
 
     private:        
-        void genKey();
+        void setSymbol();
         /**
            @brief Read track data from section in GPX file
            @param xml   The XML <trk> section

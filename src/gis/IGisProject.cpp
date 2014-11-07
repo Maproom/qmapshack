@@ -24,24 +24,35 @@
 #include <QtWidgets>
 
 
-IGisProject::IGisProject(type_e type, const QString& key, const QString &filename, CGisListWks *parent)
+IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
     , type(type)
-    , key(key)
     , filename(filename)
     , valid(false)
 {
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((char*)this, sizeof(*this));
-        this->key = md5.result().toHex();
-    }
+
 }
 
 IGisProject::~IGisProject()
 {
 
+}
+
+void IGisProject::genKey()
+{
+    if(key.isEmpty())
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream.setByteOrder(QDataStream::LittleEndian);
+        stream.setVersion(QDataStream::Qt_5_2);
+
+        *this >> stream;
+
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData(buffer);
+        key = md5.result().toHex();
+    }
 }
 
 void IGisProject::setupName(const QString &defaultName)
@@ -69,7 +80,7 @@ void IGisProject::markAsSaved()
         {
             continue;
         }
-        item->setText(1,"");
+        item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
     }
 }
 
@@ -100,6 +111,34 @@ QString IGisProject::getInfo()
 
     str += QObject::tr("\nFilename: %1").arg(filename);
 
+    // count number of items by type
+    int counter[IGisItem::eTypeMax] = {0};
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        counter[item->type()]++;
+    }
+    if(counter[IGisItem::eTypeWpt])
+    {
+        str += QObject::tr("\nWaypoints: %1").arg(counter[IGisItem::eTypeWpt]);
+    }
+    if(counter[IGisItem::eTypeTrk])
+    {
+        str += QObject::tr("\nTracks: %1").arg(counter[IGisItem::eTypeTrk]);
+    }
+    if(counter[IGisItem::eTypeRte])
+    {
+        str += QObject::tr("\nRoutes: %1").arg(counter[IGisItem::eTypeRte]);
+    }
+    if(counter[IGisItem::eTypeOvl])
+    {
+        str += QObject::tr("\nAreas: %1").arg(counter[IGisItem::eTypeOvl]);
+    }
 
     return str;
 }

@@ -39,7 +39,7 @@
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
-#define VER_HIST_EVT    quint8(1)
+#define VER_HIST_EVT    quint8(2)
 #define VER_ITEM        quint8(2)
 
 #define MAGIC_SIZE      10
@@ -48,11 +48,6 @@
 #define MAGIC_RTE       "QMRte     "
 #define MAGIC_AREA      "QMArea    "
 #define MAGIC_PROJ      "QMProj    "
-
-//#define ITEM_WPT        quint8(1)
-//#define ITEM_TRK        quint8(2)
-//#define ITEM_RTE        quint8(3)
-//#define ITEM_AREA       quint8(4)
 
 
 QDataStream& operator<<(QDataStream& stream, const IGisItem::link_t& link)
@@ -125,10 +120,11 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::wpt_t& wpt)
 QDataStream& operator<<(QDataStream& stream, const IGisItem::history_event_t& e)
 {
     stream << VER_HIST_EVT;
-    stream << e.time;
+    stream << e.time;    
     stream << e.icon;
     stream << e.comment;
     stream << e.data;
+    stream << e.hash;
     return stream;
 }
 
@@ -140,6 +136,11 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::history_event_t& e)
     stream >> e.icon;
     stream >> e.comment;
     stream >> e.data;
+    if(version > 1)
+    {
+        stream >> e.hash;
+    }
+
     return stream;
 }
 
@@ -627,9 +628,8 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         }
         if(item && changed)
         {
-            item->setText(1,"*");
+            item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
-
     }
 
     return stream;
@@ -660,7 +660,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -672,7 +672,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -684,7 +684,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -696,7 +696,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->text(1) == "*");
+        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
     }
 
     return stream;

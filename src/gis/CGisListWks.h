@@ -25,6 +25,7 @@
 
 class QAction;
 class CSearchGoogle;
+class IGisProject;
 
 class CGisListWks : public QTreeWidget
 {
@@ -34,9 +35,7 @@ class CGisListWks : public QTreeWidget
         virtual ~CGisListWks();
 
         void setExternalMenu(QMenu * project);
-
-        bool hasProject(const QString& key);        
-
+        bool hasProject(IGisProject *project);
     signals:
         void sigChanged();
 

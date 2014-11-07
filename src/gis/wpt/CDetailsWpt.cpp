@@ -25,6 +25,7 @@
 #include "helpers/CWptIconDialog.h"
 #include "helpers/CTextEditWidget.h"
 #include "helpers/CElevationDialog.h"
+#include "helpers/CLinksDialog.h"
 
 
 #include <QtWidgets>
@@ -53,15 +54,6 @@ CDetailsWpt::~CDetailsWpt()
 
 }
 
-QString CDetailsWpt::toLink(bool isReadOnly, const QString& href, const QString& str)
-{
-    if(isReadOnly)
-    {
-        return QString("%1").arg(str);
-    }
-
-    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
-}
 
 void CDetailsWpt::setupGui()
 {
@@ -82,8 +74,8 @@ void CDetailsWpt::setupGui()
 
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());   
-    labelName->setText(toLink(isReadOnly, "name", wpt.getName()));
-    labelPositon->setText(toLink(isReadOnly, "position", strPos));
+    labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName()));
+    labelPositon->setText(IGisItem::toLink(isReadOnly, "position", strPos));
 
     if(wpt.isTainted())
     {
@@ -97,21 +89,21 @@ void CDetailsWpt::setupGui()
     if(wpt.getElevation() != NOINT)
     {
         IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
-        labelElevation->setText(toLink(isReadOnly, "elevation", QString("%1 %2").arg(val).arg(unit)));
+        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", QString("%1 %2").arg(val).arg(unit)));
     }
     else
     {
-        labelElevation->setText(toLink(isReadOnly, "elevation", "--"));
+        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", "--"));
     }
 
     if(wpt.getProximity() != NOFLOAT)
     {
         IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
-        labelProximity->setText(toLink(isReadOnly, "proximity", QString("%1 %2").arg(val).arg(unit)));
+        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", QString("%1 %2").arg(val).arg(unit)));
     }
     else
     {
-        labelProximity->setText(toLink(isReadOnly, "proximity", "--"));
+        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", "--"));
     }
 
     if(wpt.getTime().isValid())
@@ -120,32 +112,7 @@ void CDetailsWpt::setupGui()
     }
 
     textCmtDesc->document()->clear();
-
-    foreach(const IGisItem::link_t& link, wpt.getLinks())
-    {
-        QString str = QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
-        textCmtDesc->append(str);
-    }
-
-    textCmtDesc->append(toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>")));
-    if(IGisItem::removeHtml(wpt.getComment()).simplified().isEmpty())
-    {
-        textCmtDesc->append(tr("<p>--- no comment ---</p>"));
-    }
-    else
-    {
-        textCmtDesc->append(wpt.getComment());
-    }
-
-    textCmtDesc->append(toLink(isReadOnly, "description", tr("<h4>Description:</h4>")));
-    if(IGisItem::removeHtml(wpt.getDescription()).simplified().isEmpty())
-    {
-        textCmtDesc->append(tr("<p>--- no description ---</p>"));
-    }
-    else
-    {
-        textCmtDesc->append(wpt.getDescription());
-    }
+    textCmtDesc->append(IGisItem::createText(isReadOnly, wpt.getComment(), wpt.getDescription(), wpt.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start) ;
     textCmtDesc->ensureCursorVisible() ;
 
@@ -218,6 +185,16 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setDescription(dlg.getHtml());            
+        }
+        setupGui();
+    }
+    else if(url.toString() == "links")
+    {
+        QList<IGisItem::link_t> links = wpt.getLinks();
+        CLinksDialog dlg(links, 0);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            wpt.setLinks(links);
         }
         setupGui();
     }

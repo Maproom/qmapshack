@@ -139,17 +139,54 @@ IGisItem::~IGisItem()
 
 }
 
-void IGisItem::changed(const QString &what, const QString &icon)
+void IGisItem::genKey()
 {
-    setText(1,"*");
-    setToolTip(0,getInfo());
+    if(key.isEmpty())
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream.setByteOrder(QDataStream::LittleEndian);
+        stream.setVersion(QDataStream::Qt_5_2);
 
+        *this >> stream;
+
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData(buffer);
+        key = md5.result().toHex();
+    }
+}
+
+void IGisItem::updateDecoration(mark_e enable, mark_e disable)
+{
+    // update text and icon
+    setToolTip(0,getInfo());
+    setText(0, getName());
+    setSymbol();
+
+    // update project if necessary
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project)
+    if(project && (enable & eMarkChanged))
     {
         project->setText(1,"*");
     }
 
+    // set marks in column 1
+    quint32 mask = data(1,Qt::UserRole).toUInt();
+    mask |=  enable;
+    mask &= ~disable;
+    setData(1, Qt::UserRole, mask);
+
+    QString str;
+    if(mask & eMarkChanged)
+    {
+        str += "*";
+    }
+    setText(1, str);
+}
+
+
+void IGisItem::changed(const QString &what, const QString &icon)
+{    
     /*
         If item gets changed but if it's origin is not QMapShack
         then it is assumed to be tainted, as imported data should
@@ -179,7 +216,13 @@ void IGisItem::changed(const QString &what, const QString &icon)
 
     *this >> stream;
 
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(event.data);
+    event.hash = md5.result().toHex();
+
     history.histIdxCurrent = history.events.size() - 1;
+
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void IGisItem::setupHistory()
@@ -194,7 +237,7 @@ void IGisItem::setupHistory()
         history_event_t& event = history.events.last();
         event.time      = QDateTime::currentDateTimeUtc();
         event.comment   = QObject::tr("Initial version.");
-        event.icon      = "://icons/48x48/Start.png";
+        event.icon      = "://icons/48x48/Start.png";        
     }
 
     // search for the first item with data
@@ -217,6 +260,10 @@ void IGisItem::setupHistory()
         stream.setByteOrder(QDataStream::LittleEndian);
         stream.setVersion(QDataStream::Qt_5_2);
         *this >> stream;
+
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData(event.data);
+        event.hash = md5.result().toHex();
 
         history.histIdxInitial = history.events.size() - 1;
     }
@@ -446,4 +493,55 @@ QString IGisItem::removeHtml(const QString &str)
     QTextDocument html;
     html.setHtml(str);
     return html.toPlainText();
+}
+
+
+QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str)
+{
+    if(isReadOnly)
+    {
+        return QString("%1").arg(str);
+    }
+
+    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+}
+
+QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links)
+{
+    QString str;
+
+    str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"));
+    if(removeHtml(cmt).simplified().isEmpty())
+    {
+        str += QObject::tr("<p>--- no comment ---</p>");
+    }
+    else
+    {
+        str += cmt;
+    }
+
+    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"));
+    if(removeHtml(desc).simplified().isEmpty())
+    {
+        str += QObject::tr("<p>--- no description ---</p>");
+    }
+    else
+    {
+        str += desc;
+    }
+
+    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"));
+    if(links.isEmpty())
+    {
+        str += QObject::tr("<p>--- no links ---</p>");
+    }
+    else
+    {
+        foreach(const link_t& link, links)
+        {
+            str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+        }
+    }
+
+    return str;
 }

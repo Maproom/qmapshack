@@ -39,7 +39,7 @@ class IGisProject : public QTreeWidgetItem
             , eTypeDb
         };
 
-        IGisProject(type_e type, const QString &key, const QString& filename, CGisListWks * parent);
+        IGisProject(type_e type, const QString& filename, CGisListWks * parent);
         virtual ~IGisProject();
 
         virtual void save() = 0;
@@ -53,7 +53,7 @@ class IGisProject : public QTreeWidgetItem
            @brief Get unique project key.
            @return A MD5 hash string
          */
-        const QString& getKey(){return key;}
+        const QString& getKey(){genKey(); return key;}
 
         /**
            @brief Get a short metadata summary
@@ -157,6 +157,7 @@ class IGisProject : public QTreeWidgetItem
 
         QDomNode writeMetadata(QDomDocument& doc);
     protected:
+        void genKey();
         void setupName(const QString& defaultName);
         void markAsSaved();
         void readMetadata(const QDomNode& xml, metadata_t& metadata);

@@ -361,15 +361,21 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
 }
 
 
-bool CGisListWks::hasProject(const QString& key)
+bool CGisListWks::hasProject(IGisProject * project)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
+
+    QString key = project->getKey();
+
     for(int i = 0; i < topLevelItemCount(); i++)
     {
         IGisProject * item = dynamic_cast<IGisProject*>(topLevelItem(i));
         if(item && item->getKey() == key)
         {
-            return(true);
+            if(item != project)
+            {
+                return(true);
+            }
         }
     }
     return(false);
@@ -441,7 +447,7 @@ void CGisListWks::slotLoadWorkspace()
 
 
         int type       = query.value(0).toInt();
-        QString key     = query.value(1).toString();
+//        QString key     = query.value(1).toString();
         QString name    = query.value(2).toString();
         bool changed    = query.value(3).toBool();
         QByteArray data = query.value(4).toByteArray();
@@ -455,14 +461,14 @@ void CGisListWks::slotLoadWorkspace()
         {
         case IGisProject::eTypeQms:
         {
-            project = new CQmsProject(name,this, key);
+            project = new CQmsProject(name,this);
             *project << stream;
             break;
         }
 
         case IGisProject::eTypeGpx:
         {
-            project = new CGpxProject(name,this, key);
+            project = new CGpxProject(name,this);
             *project << stream;
             break;
         }
@@ -750,11 +756,11 @@ void CGisListWks::slotAddEmptyProject()
 
     if(type == CSelectProjectDialog::eTypeGpx)
     {
-        new CGpxProject(name, this, "");
+        new CGpxProject(name, this);
     }
     else if(type == CSelectProjectDialog::eTypeQms)
     {
-        new CQmsProject(name, this, "");
+        new CQmsProject(name, this);
     }
 }
 

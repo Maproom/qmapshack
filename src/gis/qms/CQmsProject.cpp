@@ -22,20 +22,26 @@
 
 
 #include <QtWidgets>
-CQmsProject::CQmsProject(const QString &name,  CGisListWks * parent, const QString &key)
-    : IGisProject(eTypeQms, key, "", parent)
-{    
-    setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
-    setupName(name);
-    setToolTip(0, getInfo());
-    valid = true;
-}
 
 
-CQmsProject::CQmsProject(const QString &filename, const QString &key, CGisListWks *parent)
-    : IGisProject(eTypeQms, key, filename, parent)
+CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
+    : IGisProject(eTypeQms, filename, parent)
 {   
+    setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
+
+    // cerate file instance
     QFile file(filename);
+
+    // if the file does not exist, the filename is assumed to be a name for a new project
+    if(!file.exists())
+    {
+        IGisProject::filename.clear();
+        setupName(filename);
+        setToolTip(0, getInfo());
+        valid = true;
+        return;
+    }
+
     if(!file.open(QIODevice::ReadOnly))
     {
         QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
@@ -50,7 +56,6 @@ CQmsProject::CQmsProject(const QString &filename, const QString &key, CGisListWk
 
     markAsSaved();
 
-    setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
     setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(0, getInfo());
     valid = true;

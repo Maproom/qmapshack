@@ -30,21 +30,30 @@
 
 #include <QtWidgets>
 
-CGpxProject::CGpxProject(const QString &name,  CGisListWks * parent, const QString &key)
-    : IGisProject(eTypeGpx, key, "", parent)
-{    
+CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
+    : IGisProject(eTypeGpx, filename, parent)
+{               
     setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
-    setupName(name);
-    setToolTip(0, getInfo());
-    valid = true;
-}
 
-CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWks *parent)
-    : IGisProject(eTypeGpx, key, filename, parent)
-{        
     // cerate file instance
     QFile file(filename);
-    file.open(QIODevice::ReadOnly);
+
+    // if the file does not exist, the filename is assumed to be a name for a new project
+    if(!file.exists())
+    {
+        IGisProject::filename.clear();
+        setupName(filename);
+        setToolTip(0, getInfo());
+        valid = true;
+        return;
+    }
+
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+        return;
+    }
+
 
     // load file content to xml document
     QDomDocument xml;
@@ -110,7 +119,6 @@ CGpxProject::CGpxProject(const QString &filename, const QString& key, CGisListWk
         new CGisItemOvlArea(xmlArea, this);
     }
 
-    setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
     setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(0, getInfo());
     valid = true;

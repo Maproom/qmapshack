@@ -32,8 +32,7 @@ class CGisDraw;
 class CGpxProject : public IGisProject
 {
     public:
-        CGpxProject(const QString &name, CGisListWks * parent, const QString& key);
-        CGpxProject(const QString& filename, const QString &key, CGisListWks * parent);
+        CGpxProject(const QString &filename, CGisListWks * parent);
         virtual ~CGpxProject();
 
         void save();

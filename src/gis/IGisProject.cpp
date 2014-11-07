@@ -24,24 +24,35 @@
 #include <QtWidgets>
 
 
-IGisProject::IGisProject(type_e type, const QString& key, const QString &filename, CGisListWks *parent)
+IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
     , type(type)
-    , key(key)
     , filename(filename)
     , valid(false)
 {
-    if(key.isEmpty())
-    {
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData((char*)this, sizeof(*this));
-        this->key = md5.result().toHex();
-    }
+
 }
 
 IGisProject::~IGisProject()
 {
 
+}
+
+void IGisProject::genKey()
+{
+    if(key.isEmpty())
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream.setByteOrder(QDataStream::LittleEndian);
+        stream.setVersion(QDataStream::Qt_5_2);
+
+        *this >> stream;
+
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData(buffer);
+        key = md5.result().toHex();
+    }
 }
 
 void IGisProject::setupName(const QString &defaultName)

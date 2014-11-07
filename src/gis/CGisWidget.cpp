@@ -57,21 +57,6 @@ CGisWidget::~CGisWidget()
 
 void CGisWidget::loadGisProject(const QString& filename)
 {
-    // cerate file instance
-    QFile file(filename);
-    file.open(QIODevice::ReadOnly);
-
-    // create md5 hash
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(file.readAll());
-    file.close();
-    QString key = md5.result().toHex();
-
-    // skip if project is already loaded
-    if(treeWks->hasProject(key))
-    {
-        return;
-    }
 
     // add project to workspace
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -80,17 +65,24 @@ void CGisWidget::loadGisProject(const QString& filename)
     QString suffix = QFileInfo(filename).suffix().toLower();
     if(suffix == "gpx")
     {
-        item = new CGpxProject(filename, key, treeWks);
+        item = new CGpxProject(filename, treeWks);
     }
     else if(suffix == "qms")
     {
-        item = new CQmsProject(filename, key, treeWks);
+        item = new CQmsProject(filename, treeWks);
     }
 
     if(item && !item->isValid())
     {
         delete item;
     }
+
+    // skip if project is already loaded
+    if(item && treeWks->hasProject(item))
+    {
+        delete item;
+    }
+
     IGisItem::mutexItems.unlock();
     QApplication::restoreOverrideCursor();
 
@@ -146,11 +138,11 @@ IGisProject * CGisWidget::selectProject()
         IGisItem::mutexItems.lock();
         if(type == CSelectProjectDialog::eTypeGpx)
         {
-            project = new CGpxProject(name, treeWks, "");
+            project = new CGpxProject(name, treeWks);
         }
         else if (type == CSelectProjectDialog::eTypeQms)
         {
-            project = new CQmsProject(name, treeWks, "");
+            project = new CQmsProject(name, treeWks);
         }
 
         IGisItem::mutexItems.unlock();

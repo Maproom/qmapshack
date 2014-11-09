@@ -16,40 +16,18 @@
 
 **********************************************************************************************/
 
-#ifndef CGISLISTDB_H
-#define CGISLISTDB_H
+#include "CDBFolderDatabase.h"
 
-#include <QTreeWidget>
-#include <QSqlDatabase>
-
-class QMenu;
-class CDBFolderDatabase;
-
-class CGisListDB : public QTreeWidget
+CDBFolderDatabase::CDBFolderDatabase(QTreeWidget *parent)
+    : IDBFolder(eTypeDatabase, 1, parent)
 {
-    Q_OBJECT
-    public:
-        CGisListDB(QWidget * parent);
-        virtual ~CGisListDB();
+    setToolTip(0, QObject::tr("All your data grouped by folders."));
+    setIcon(0, QIcon("://icons/32x32/Database.png"));
+    setText(0, QObject::tr("Database"));    
+}
 
-    private slots:
-        void slotContextMenu(const QPoint& point);
-        void slotAddFolder();
+CDBFolderDatabase::~CDBFolderDatabase()
+{
 
-    private:
-        void initDB();
-        void migrateDB(int version);
-        QSqlDatabase db;
-
-        QMenu * menuDatabase;
-        QAction * actionAddFolder;
-
-        QMenu * menuProject;
-        QMenu * menuItem;
-
-        QTreeWidgetItem * itemLostFound;
-        CDBFolderDatabase * itemDatabase;
-};
-
-#endif //CGISLISTDB_H
+}
 

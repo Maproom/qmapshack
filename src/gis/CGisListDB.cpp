@@ -18,6 +18,8 @@
 
 #include "gis/CGisListDB.h"
 #include "gis/db/macros.h"
+#include "gis/db/CSetupFolder.h"
+#include "gis/db/CDBFolderDatabase.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -72,6 +74,22 @@ CGisListDB::CGisListDB(QWidget *parent)
     {
         initDB();
     }
+
+    itemLostFound = new QTreeWidgetItem(this, IDBFolder::eTypeLostFound);
+    itemLostFound->setIcon(0,QIcon("://icons/32x32/DeleteMultiple.png"));
+    itemLostFound->setText(0,tr("Lost & Found"));
+
+    itemDatabase = new CDBFolderDatabase(this);
+    itemDatabase->setIcon(0,QIcon("://icons/32x32/Database.png"));
+    itemDatabase->setText(0,tr("Database"));
+
+    menuDatabase        = new QMenu(this);
+    actionAddFolder     = menuDatabase->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
+
+    menuProject         = new QMenu(this);
+    menuItem            = new QMenu(this);
+
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
 }
 
 CGisListDB::~CGisListDB()
@@ -93,7 +111,6 @@ void CGisListDB::initDB()
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "type           INTEGER,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "icon           TEXT NOT NULL,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
                     "locked       BOOLEAN DEFAULT FALSE"
@@ -132,7 +149,7 @@ void CGisListDB::initDB()
         qDebug() << query.lastError();
     }
 
-    if(!query.exec("INSERT INTO folders (icon, name, comment) VALUES ('', 'database', '')"))
+    if(!query.exec("INSERT INTO folders (name, comment) VALUES (database', '')"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
@@ -177,4 +194,35 @@ void CGisListDB::migrateDB(int version)
     query.bindValue(":version", version - 1);
     QUERY_EXEC(; );
 }
+
+void CGisListDB::slotContextMenu(const QPoint& point)
+{
+    QPoint p = mapToGlobal(point);
+    QTreeWidgetItem * item = currentItem();
+    if(item == 0 || item == itemDatabase)
+    {
+        menuDatabase->exec(p);
+        return;
+    }
+}
+
+void CGisListDB::slotAddFolder()
+{
+    QTreeWidgetItem * item = currentItem();
+    if(item == 0)
+    {
+        return;
+    }
+
+    IDBFolder::type_e type = IDBFolder::eTypeProject;
+    QString name;
+
+    CSetupFolder dlg(type, name, this);
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+}
+
 

@@ -16,40 +16,17 @@
 
 **********************************************************************************************/
 
-#ifndef CGISLISTDB_H
-#define CGISLISTDB_H
+#ifndef CDBFOLDERDATABASE_H
+#define CDBFOLDERDATABASE_H
 
-#include <QTreeWidget>
-#include <QSqlDatabase>
+#include "gis/db/IDBFolder.h"
 
-class QMenu;
-class CDBFolderDatabase;
-
-class CGisListDB : public QTreeWidget
+class CDBFolderDatabase : public IDBFolder
 {
-    Q_OBJECT
     public:
-        CGisListDB(QWidget * parent);
-        virtual ~CGisListDB();
-
-    private slots:
-        void slotContextMenu(const QPoint& point);
-        void slotAddFolder();
-
-    private:
-        void initDB();
-        void migrateDB(int version);
-        QSqlDatabase db;
-
-        QMenu * menuDatabase;
-        QAction * actionAddFolder;
-
-        QMenu * menuProject;
-        QMenu * menuItem;
-
-        QTreeWidgetItem * itemLostFound;
-        CDBFolderDatabase * itemDatabase;
+        CDBFolderDatabase(QTreeWidget *parent);
+        virtual ~CDBFolderDatabase();
 };
 
-#endif //CGISLISTDB_H
+#endif //CDBFOLDERDATABASE_H
 

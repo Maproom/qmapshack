@@ -70,7 +70,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Path.png</normaloff>:/icons/32x32/Path.png</iconset>
+         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
        </property>
        <property name="iconSize">
         <size>

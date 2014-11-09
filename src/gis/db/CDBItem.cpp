@@ -16,40 +16,15 @@
 
 **********************************************************************************************/
 
-#ifndef CGISLISTDB_H
-#define CGISLISTDB_H
+#include "gis/db/CDBItem.h"
 
-#include <QTreeWidget>
-#include <QSqlDatabase>
-
-class QMenu;
-class CDBFolderDatabase;
-
-class CGisListDB : public QTreeWidget
+CDBItem::CDBItem()
 {
-    Q_OBJECT
-    public:
-        CGisListDB(QWidget * parent);
-        virtual ~CGisListDB();
 
-    private slots:
-        void slotContextMenu(const QPoint& point);
-        void slotAddFolder();
+}
 
-    private:
-        void initDB();
-        void migrateDB(int version);
-        QSqlDatabase db;
+CDBItem::~CDBItem()
+{
 
-        QMenu * menuDatabase;
-        QAction * actionAddFolder;
-
-        QMenu * menuProject;
-        QMenu * menuItem;
-
-        QTreeWidgetItem * itemLostFound;
-        CDBFolderDatabase * itemDatabase;
-};
-
-#endif //CGISLISTDB_H
+}
 

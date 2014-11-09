@@ -69,6 +69,7 @@
         <file>icons/32x32/LoadGIS.png</file>
         <file>icons/32x32/GpxProject.png</file>
         <file>icons/32x32/QmsProject.png</file>
+        <file>icons/32x32/DBProject.png</file>
         <file>icons/32x32/Route.png</file>
         <file>icons/32x32/Close.png</file>
         <file>icons/32x32/Track.png</file>
@@ -116,8 +117,11 @@
         <file>icons/32x32/Pattern.png</file>
         <file>icons/32x32/Opacity.png</file>
         <file>icons/32x32/DatabaseSetup.png</file>
-        <file>icons/32x32/Path.png</file>
+        <file>icons/32x32/PathBlue.png</file>
+        <file>icons/32x32/PathOrange.png</file>
+        <file>icons/32x32/PathGreen.png</file>
         <file>icons/32x32/Link.png</file>
+        <file>icons/32x32/Database.png</file>
 
 
         <file>icons/48x48/2DFix.png</file>
@@ -170,6 +174,7 @@
         <file>icons/48x48/LoadGIS.png</file>
         <file>icons/48x48/GpxProject.png</file>
         <file>icons/48x48/QmsProject.png</file>
+        <file>icons/48x48/DBProject.png</file>
         <file>icons/48x48/Route.png</file>
         <file>icons/48x48/Close.png</file>
         <file>icons/48x48/Track.png</file>
@@ -217,8 +222,11 @@
         <file>icons/48x48/Pattern.png</file>
         <file>icons/48x48/Opacity.png</file>
         <file>icons/48x48/DatabaseSetup.png</file>
-        <file>icons/48x48/Path.png</file>
+        <file>icons/48x48/PathBlue.png</file>
+        <file>icons/48x48/PathOrange.png</file>
+        <file>icons/48x48/PathGreen.png</file>
         <file>icons/48x48/Link.png</file>
+        <file>icons/48x48/Database.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

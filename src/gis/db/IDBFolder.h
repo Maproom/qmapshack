@@ -16,40 +16,34 @@
 
 **********************************************************************************************/
 
-#ifndef CGISLISTDB_H
-#define CGISLISTDB_H
+#ifndef IDBFOLDER_H
+#define IDBFOLDER_H
 
-#include <QTreeWidget>
-#include <QSqlDatabase>
+#include <QTreeWidgetItem>
 
-class QMenu;
-class CDBFolderDatabase;
-
-class CGisListDB : public QTreeWidget
+class IDBFolder : public QTreeWidgetItem
 {
-    Q_OBJECT
     public:
-        CGisListDB(QWidget * parent);
-        virtual ~CGisListDB();
+        enum type_e
+        {
+             eTypeLostFound
+            ,eTypeDatabase
+            ,eTypeGroup
+            ,eTypeProject
+            ,eTypeOther
+        };
 
-    private slots:
-        void slotContextMenu(const QPoint& point);
-        void slotAddFolder();
+
+        IDBFolder(type_e type, quint64 key, QTreeWidgetItem * parent);
+        IDBFolder(type_e type, quint64 key, QTreeWidget * parent);
+        virtual ~IDBFolder();
+
+        quint64 getKey(){return key;}
 
     private:
-        void initDB();
-        void migrateDB(int version);
-        QSqlDatabase db;
+        quint64 key;
 
-        QMenu * menuDatabase;
-        QAction * actionAddFolder;
-
-        QMenu * menuProject;
-        QMenu * menuItem;
-
-        QTreeWidgetItem * itemLostFound;
-        CDBFolderDatabase * itemDatabase;
 };
 
-#endif //CGISLISTDB_H
+#endif //IDBFOLDER_H
 

@@ -16,6 +16,7 @@ find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 
 set( SRCS
+
     main.cpp
     GeoMath.cpp
     CMainWindow.cpp
@@ -100,6 +101,14 @@ set( SRCS
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
     gis/db/CSetupDB.cpp
+    gis/db/CSetupFolder.cpp
+    gis/db/IDBFolder.cpp
+    gis/db/CDBFolderDatabase.cpp
+    gis/db/CDBFolderGroup.cpp
+    gis/db/CDBFolderOther.cpp
+    gis/db/CDBFolderProject.cpp
+    gis/db/CDBItem.cpp
+    gis/db/CDBProject.cpp
     gis/search/CSearchGoogle.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
@@ -214,6 +223,14 @@ set( HDRS
     gis/qms/CQmsProject.cpp
     gis/db/macros.h
     gis/db/CSetupDB.h
+    gis/db/CSetupFolder.h
+    gis/db/IDBFolder.h
+    gis/db/CDBFolderDatabase.h
+    gis/db/CDBFolderGroup.h
+    gis/db/CDBFolderOther.h
+    gis/db/CDBFolderProject.h
+    gis/db/CDBItem.h
+    gis/db/CDBProject.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h
@@ -265,6 +282,7 @@ set( UIS
     mouse/IScrOptRangeTrk.ui
     gis/IGisWidget.ui
     gis/db/ISetupDB.ui
+    gis/db/ISetupFolder.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui

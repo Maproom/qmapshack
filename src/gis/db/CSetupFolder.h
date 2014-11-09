@@ -16,40 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CGISLISTDB_H
-#define CGISLISTDB_H
+#ifndef CSETUPFOLDER_H
+#define CSETUPFOLDER_H
 
-#include <QTreeWidget>
-#include <QSqlDatabase>
+#include "gis/db/IDBFolder.h"
+#include <QDialog>
+#include "ui_ISetupFolder.h"
 
-class QMenu;
-class CDBFolderDatabase;
-
-class CGisListDB : public QTreeWidget
+class CSetupFolder : public QDialog, private Ui::ISetupFolder
 {
-    Q_OBJECT
     public:
-        CGisListDB(QWidget * parent);
-        virtual ~CGisListDB();
+        CSetupFolder(IDBFolder::type_e type, QString& name, QWidget * parent);
+        virtual ~CSetupFolder();
 
-    private slots:
-        void slotContextMenu(const QPoint& point);
-        void slotAddFolder();
+    public slots:
+        void accept();
 
     private:
-        void initDB();
-        void migrateDB(int version);
-        QSqlDatabase db;
+        IDBFolder::type_e type;
+        QString& name;
 
-        QMenu * menuDatabase;
-        QAction * actionAddFolder;
-
-        QMenu * menuProject;
-        QMenu * menuItem;
-
-        QTreeWidgetItem * itemLostFound;
-        CDBFolderDatabase * itemDatabase;
 };
 
-#endif //CGISLISTDB_H
+#endif //CSETUPFOLDER_H
 

@@ -14,7 +14,7 @@
    id="svg3376"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="Path.svg">
+   sodipodi:docname="PathOrange.svg">
   <defs
      id="defs3378" />
   <sodipodi:namedview
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -63,19 +63,15 @@
        height="40"
        x="4.3097157"
        y="9.4960203" />
-    <g
-       id="g3789"
-       transform="matrix(0.86956521,0,0,0.83603134,0.56324111,3.1610331)">
-      <path
-         inkscape:connector-curvature="0"
-         id="path3014"
-         d="m 6.8181815,14 -2,5 0,30 40.0000005,0 0,-30 -23,0 -2,-5 -13.0000005,0 z"
-         style="fill:#007cff;fill-opacity:1;stroke:#007cff;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path3016"
-         d="m 4.8181815,49 5,-25 40.0000005,0 -5,25 z"
-         style="fill:#000080;stroke:#000080;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
-    </g>
+    <path
+       style="fill:#668000;fill-opacity:1;stroke:#668000;stroke-width:0.85263341999999998px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 6.4920945,14.865472 -1.7391304,4.180157 0,25.08094 34.7826089,0 0,-25.08094 -20,0 -1.73913,-4.180157 -11.3043485,0 z"
+       id="path3014"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#445500;stroke:#445500;stroke-width:0.85263341999999998px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 4.7529641,44.126569 4.3478261,-20.900784 34.7826088,0 -4.347826,20.900784 z"
+       id="path3016"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>

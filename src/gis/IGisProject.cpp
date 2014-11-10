@@ -125,19 +125,19 @@ QString IGisProject::getInfo()
     }
     if(counter[IGisItem::eTypeWpt])
     {
-        str += QObject::tr("\nWaypoints: %1").arg(counter[IGisItem::eTypeWpt]);
+        str += "\n" + QObject::tr("Waypoints: %1").arg(counter[IGisItem::eTypeWpt]);
     }
     if(counter[IGisItem::eTypeTrk])
     {
-        str += QObject::tr("\nTracks: %1").arg(counter[IGisItem::eTypeTrk]);
+        str += "\n" + QObject::tr("Tracks: %1").arg(counter[IGisItem::eTypeTrk]);
     }
     if(counter[IGisItem::eTypeRte])
     {
-        str += QObject::tr("\nRoutes: %1").arg(counter[IGisItem::eTypeRte]);
+        str += "\n" + QObject::tr("Routes: %1").arg(counter[IGisItem::eTypeRte]);
     }
     if(counter[IGisItem::eTypeOvl])
     {
-        str += QObject::tr("\nAreas: %1").arg(counter[IGisItem::eTypeOvl]);
+        str += "\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
     }
 
     return str;

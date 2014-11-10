@@ -40,6 +40,11 @@ class IDBFolder : public QTreeWidgetItem
 
         quint64 getKey(){return key;}
 
+        static IDBFolder * createFolderByType(type_e type, quint64 key, QTreeWidgetItem *parent);
+
+    protected:
+        void updateName();
+
     private:
         quint64 key;
 

@@ -16,7 +16,11 @@
 
 **********************************************************************************************/
 
-#include "IDBFolder.h"
+#include "gis/db/IDBFolder.h"
+#include "gis/db/CDBFolderGroup.h"
+#include "gis/db/CDBFolderProject.h"
+#include "gis/db/CDBFolderOther.h"
+
 
 IDBFolder::IDBFolder(type_e type, quint64 key, QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent, type)
@@ -37,3 +41,22 @@ IDBFolder::~IDBFolder()
 
 }
 
+IDBFolder * IDBFolder::createFolderByType(type_e type, quint64 key, QTreeWidgetItem * parent)
+{
+    switch(type)
+    {
+    case eTypeGroup:
+        return new CDBFolderGroup(key, parent);
+    case eTypeProject:
+        return new CDBFolderProject(key, parent);
+    case eTypeOther:
+        return new CDBFolderOther(key, parent);
+    default:
+        return 0;
+    }
+}
+
+void IDBFolder::updateName()
+{
+
+}

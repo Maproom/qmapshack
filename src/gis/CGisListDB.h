@@ -22,6 +22,8 @@
 #include <QTreeWidget>
 #include <QSqlDatabase>
 
+#include <gis/db/IDBFolder.h>
+
 class QMenu;
 class CDBFolderDatabase;
 
@@ -39,6 +41,10 @@ class CGisListDB : public QTreeWidget
     private:
         void initDB();
         void migrateDB(int version);
+
+        void addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent);
+
+
         QSqlDatabase db;
 
         QMenu * menuDatabase;

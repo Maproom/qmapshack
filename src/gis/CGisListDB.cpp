@@ -113,7 +113,7 @@ void CGisListDB::initDB()
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
-                    "locked       BOOLEAN DEFAULT FALSE"
+                    "locked         BOOLEAN DEFAULT FALSE"
                     ")"))
     {
         qDebug() << query.lastQuery();
@@ -199,7 +199,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 {
     QPoint p = mapToGlobal(point);
     QTreeWidgetItem * item = currentItem();
-    if(item == 0 || item == itemDatabase)
+    if((item == 0) || (item->type() == IDBFolder::eTypeDatabase))
     {
         menuDatabase->exec(p);
         return;
@@ -208,21 +208,57 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 
 void CGisListDB::slotAddFolder()
 {
-    QTreeWidgetItem * item = currentItem();
-    if(item == 0)
+    IDBFolder * parentFolder = dynamic_cast<IDBFolder*>(currentItem());
+    if(parentFolder == 0)
     {
         return;
     }
+    quint64 idParent = parentFolder->getKey();
 
     IDBFolder::type_e type = IDBFolder::eTypeProject;
     QString name;
-
     CSetupFolder dlg(type, name, this);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;
     }
 
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO folders (name, type) VALUES (:name, :type)");
+    query.bindValue(":name", name);
+    query.bindValue(":type", type);
+    QUERY_EXEC(return);
+
+    query.prepare("SELECT last_insert_rowid() from folders");
+    QUERY_EXEC(return);
+    query.next();
+    quint64 idChild = query.value(0).toULongLong();
+    if(idChild == 0)
+    {
+        qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
+        return;
+    }
+
+    query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
+    query.bindValue(":parent", idParent);
+    query.bindValue(":child", idChild);
+    QUERY_EXEC(return);
+
+    IDBFolder * childFolder = IDBFolder::createFolderByType(type, idChild, parentFolder);
+
+
 }
 
+void CGisListDB::addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent)
+{
+    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard|Qt::MatchRecursive, 0);
 
+    foreach(QTreeWidgetItem * item, items)
+    {
+        IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+        if(folder == 0)
+        {
+            continue;
+        }
+    }
+}

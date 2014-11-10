@@ -555,6 +555,7 @@ class CMapIMG : public IMap
 
         QVector<textpath_t> textpaths;
         qint8 selectedLanguage;
+        QSet<QString> copyrights;
 };
 
 #endif //CMAPIMG_H

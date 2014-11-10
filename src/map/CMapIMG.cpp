@@ -642,6 +642,18 @@ void CMapIMG::readBasics()
 
         ++subfile;
     }
+
+    // combine copyright sections
+    copyright.clear();
+    foreach(const QString& str, copyrights)
+    {
+        if(!copyright.isEmpty())
+        {
+            copyright += "\n";
+        }
+        copyright += str;
+    }
+
     qDebug() << "dimensions:\t" << "N" << (maparea.bottom()*RAD_TO_DEG) << "E" << (maparea.right()*RAD_TO_DEG) << "S" << (maparea.top()*RAD_TO_DEG) << "W" << (maparea.left()*RAD_TO_DEG);
 }
 
@@ -666,6 +678,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     qDebug() << "TRE2 offset        :" << hex << gar_load(uint32_t, pTreHdr->tre2_offset);
     qDebug() << "TRE2 size          :" << dec << gar_load(uint32_t, pTreHdr->tre2_size);
 #endif                       // DEBUG_SHOW_TRE_DATA
+
+    copyrights << QString(file.data(subfile.parts["TRE"].offset + gar_load(uint16_t, pTreHdr->length)));
 
     // read map boundaries from header
     qint32 i32;

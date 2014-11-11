@@ -64,6 +64,9 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     hasOverviews = pBand->GetOverviewCount() != 0;
     qDebug() << "has overviews" << hasOverviews;
 
+    noData = pBand->GetNoDataValue(&hasNoData);
+    qDebug() << "no data:" << hasNoData << noData;
+
     // ------- setup projection ---------------
     char str[1024] = {0};
     if(dataset->GetProjectionRef())
@@ -155,6 +158,11 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
     CPLErr err = dataset->RasterIO(GF_Read, floor(pt.x()), floor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
     mutex.unlock();
     if(err == CE_Failure)
+    {
+        return NOFLOAT;
+    }
+
+    if(hasNoData && e[0] == noData)
     {
         return NOFLOAT;
     }

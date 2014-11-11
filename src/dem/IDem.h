@@ -114,6 +114,10 @@ class IDem : public IDrawObject
 
         QVector<QRgb> graytable;
 
+        int hasNoData;
+
+        double noData;
+
     private:
         bool bHillshading;
 

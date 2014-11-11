@@ -46,6 +46,8 @@ IDem::IDem(CDemDraw *parent)
     , dem(parent)
     , pjsrc(0)
     , isActivated(false)
+    , hasNoData(0)
+    , noData(0)
     , bHillshading(false)
     , factorHillshading(1.0)
 {
@@ -53,10 +55,11 @@ IDem::IDem(CDemDraw *parent)
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 
     graytable.resize(256);
-    for(int i = 0; i < 256; i++)
+    for(int i = 0; i < 255; i++)
     {
-        graytable[i] = qRgb(i,i,i);
+        graytable[i] = qRgba(i,i,i,255);
     }
+    graytable[255] = qRgba(0,0,0,0);
 
 }
 
@@ -141,6 +144,13 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
         for(int n = 1; n <= w; n++)
         {
             fillWindow(data, n, m, wp2, win);
+
+            if(hasNoData && win[4] == noData)
+            {
+                img.setPixel(n - 1, m - 1, 255);
+                continue;
+            }
+
             dx          = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale*factorHillshading);
             dy          = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale*factorHillshading);
             aspect      = atan2(dy, dx);

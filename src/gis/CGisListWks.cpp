@@ -213,7 +213,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
     {
         // if it is a drop on a project the project is different from the source item's project
         IGisProject * parent = dynamic_cast<IGisProject*>(itemAt(e->pos()));
-        if(parent && item1->parent() != parent)
+        if(parent && item1 && item1->parent() != parent)
         {
             // iterate over all items of the target project and check keys
             for(int i = 0; i < parent->childCount(); i++)

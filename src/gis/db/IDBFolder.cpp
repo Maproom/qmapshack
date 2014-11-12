@@ -16,24 +16,28 @@
 
 **********************************************************************************************/
 
+#include "gis/db/macros.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderProject.h"
 #include "gis/db/CDBFolderOther.h"
 
+#include <QtSql>
 
-IDBFolder::IDBFolder(type_e type, quint64 key, QTreeWidgetItem *parent)
+IDBFolder::IDBFolder(type_e type, quint64 id, QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent, type)
-    , key(key)
+    , id(id)
 {
-
+    db = QSqlDatabase::database();
+    setupFromDB();
 }
 
-IDBFolder::IDBFolder(type_e type, quint64 key, QTreeWidget * parent)
+IDBFolder::IDBFolder(type_e type, quint64 id, QTreeWidget * parent)
     : QTreeWidgetItem(parent, type)
-    , key(key)
+    , id(id)
 {
-
+    db = QSqlDatabase::database();
+    setupFromDB();
 }
 
 IDBFolder::~IDBFolder()
@@ -41,22 +45,62 @@ IDBFolder::~IDBFolder()
 
 }
 
-IDBFolder * IDBFolder::createFolderByType(type_e type, quint64 key, QTreeWidgetItem * parent)
+IDBFolder * IDBFolder::createFolderByType(int type, quint64 id, QTreeWidgetItem * parent)
 {
     switch(type)
     {
     case eTypeGroup:
-        return new CDBFolderGroup(key, parent);
+        return new CDBFolderGroup(id, parent);
     case eTypeProject:
-        return new CDBFolderProject(key, parent);
+        return new CDBFolderProject(id, parent);
     case eTypeOther:
-        return new CDBFolderOther(key, parent);
+        return new CDBFolderOther(id, parent);
     default:
         return 0;
     }
 }
 
-void IDBFolder::updateName()
+void IDBFolder::setupFromDB()
 {
+    if(id == 0)
+    {
+        return;
+    }
+    QSqlQuery query(db);
+
+    query.prepare("SELECT name FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    query.next();
+
+    setText(1, query.value(0).toString());
+
+    query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    query.next();
+
+    if(query.value(0).toInt() == 1)
+    {
+        setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    }
+
+}
+
+void IDBFolder::expanding()
+{
+    qDeleteAll(takeChildren());
+
+    QSqlQuery query(db);
+
+    query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.name");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    while(query.next())
+    {
+        quint64 idChild     = query.value(0).toULongLong();
+        quint32 typeChild   = query.value(1).toInt();
+        IDBFolder::createFolderByType(typeChild, idChild, this);
+    }
 
 }

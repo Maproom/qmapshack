@@ -26,6 +26,7 @@
 
 class QMenu;
 class CDBFolderDatabase;
+class CDBFolderLostFound;
 
 class CGisListDB : public QTreeWidget
 {
@@ -34,9 +35,12 @@ class CGisListDB : public QTreeWidget
         CGisListDB(QWidget * parent);
         virtual ~CGisListDB();
 
+
     private slots:
         void slotContextMenu(const QPoint& point);
         void slotAddFolder();
+
+        void slotItemExpanded(QTreeWidgetItem * item);
 
     private:
         void initDB();
@@ -53,7 +57,7 @@ class CGisListDB : public QTreeWidget
         QMenu * menuProject;
         QMenu * menuItem;
 
-        QTreeWidgetItem * itemLostFound;
+        CDBFolderLostFound * itemLostFound;
         CDBFolderDatabase * itemDatabase;
 };
 

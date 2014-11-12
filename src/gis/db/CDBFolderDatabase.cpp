@@ -16,14 +16,14 @@
 
 **********************************************************************************************/
 
-#include "CDBFolderDatabase.h"
+#include "gis/db/CDBFolderDatabase.h"
 
 CDBFolderDatabase::CDBFolderDatabase(QTreeWidget *parent)
     : IDBFolder(eTypeDatabase, 1, parent)
 {
-    setToolTip(0, QObject::tr("All your data grouped by folders."));
+    setToolTip(1, QObject::tr("All your data grouped by folders."));
     setIcon(0, QIcon("://icons/32x32/Database.png"));
-    setText(0, QObject::tr("Database"));    
+    setText(1, QObject::tr("Database"));
 }
 
 CDBFolderDatabase::~CDBFolderDatabase()

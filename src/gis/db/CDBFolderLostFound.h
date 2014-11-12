@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBFolderOther.h"
+#ifndef CDBFOLDERLOSTFOUND_H
+#define CDBFOLDERLOSTFOUND_H
 
-CDBFolderOther::CDBFolderOther(quint64 key, QTreeWidgetItem * parent)
-    : IDBFolder(eTypeOther, key, parent)
+#include "gis/db/IDBFolder.h"
+
+class CDBFolderLostFound : public IDBFolder
 {
-    setIcon(0,QIcon("://icons/32x32/PathOrange.png"));
-    setCheckState(0, Qt::Unchecked);
-}
+    public:
+        CDBFolderLostFound(QTreeWidget *parent);
+        virtual ~CDBFolderLostFound();
+};
 
-CDBFolderOther::~CDBFolderOther()
-{
-
-}
+#endif //CDBFOLDERLOSTFOUND_H
 

@@ -103,6 +103,7 @@ set( SRCS
     gis/db/CSetupDB.cpp
     gis/db/CSetupFolder.cpp
     gis/db/IDBFolder.cpp
+    gis/db/CDBFolderLostFound.cpp
     gis/db/CDBFolderDatabase.cpp
     gis/db/CDBFolderGroup.cpp
     gis/db/CDBFolderOther.cpp
@@ -225,6 +226,7 @@ set( HDRS
     gis/db/CSetupDB.h
     gis/db/CSetupFolder.h
     gis/db/IDBFolder.h
+    gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderDatabase.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderOther.h

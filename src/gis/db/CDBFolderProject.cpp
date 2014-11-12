@@ -22,6 +22,7 @@ CDBFolderProject::CDBFolderProject(quint64 key, QTreeWidgetItem * parent)
     : IDBFolder(eTypeProject, key, parent)
 {
     setIcon(0,QIcon("://icons/32x32/PathGreen.png"));
+    setCheckState(0, Qt::Unchecked);
 }
 
 CDBFolderProject::~CDBFolderProject()

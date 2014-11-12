@@ -16,16 +16,17 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBFolderOther.h"
+#include "gis/db/CDBFolderLostFound.h"
 
-CDBFolderOther::CDBFolderOther(quint64 key, QTreeWidgetItem * parent)
-    : IDBFolder(eTypeOther, key, parent)
+CDBFolderLostFound::CDBFolderLostFound(QTreeWidget *parent)
+    : IDBFolder(eTypeLostFound, 0, parent)
 {
-    setIcon(0,QIcon("://icons/32x32/PathOrange.png"));
-    setCheckState(0, Qt::Unchecked);
+    setToolTip(1, QObject::tr("All your data grouped by folders."));
+    setIcon(0, QIcon("://icons/32x32/DeleteMultiple.png"));
+    setText(1, QObject::tr("Lost & Found"));
 }
 
-CDBFolderOther::~CDBFolderOther()
+CDBFolderLostFound::~CDBFolderLostFound()
 {
 
 }

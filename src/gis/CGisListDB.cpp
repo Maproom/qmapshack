@@ -74,8 +74,8 @@ CGisListDB::CGisListDB(QWidget *parent)
         initDB();
     }
 
-    itemLostFound       = new CDBFolderLostFound(this);
-    itemDatabase        = new CDBFolderDatabase(this);
+//    itemLostFound       = new CDBFolderLostFound(this);
+//    itemDatabase        = new CDBFolderDatabase(this);
 
     menuDatabase        = new QMenu(this);
     actionAddFolder     = menuDatabase->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
@@ -86,7 +86,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
 
-    itemDatabase->setExpanded(true);
+//    itemDatabase->setExpanded(true);
 }
 
 CGisListDB::~CGisListDB()

@@ -20,33 +20,38 @@
 #define IDBFOLDER_H
 
 #include <QTreeWidgetItem>
+#include <QSqlDatabase>
 
 class IDBFolder : public QTreeWidgetItem
 {
     public:
         enum type_e
         {
-             eTypeLostFound
-            ,eTypeDatabase
-            ,eTypeGroup
-            ,eTypeProject
-            ,eTypeOther
+             eTypeLostFound = 1
+            ,eTypeDatabase = 2
+            ,eTypeGroup = 3
+            ,eTypeProject = 4
+            ,eTypeOther = 5
         };
 
 
-        IDBFolder(type_e type, quint64 key, QTreeWidgetItem * parent);
-        IDBFolder(type_e type, quint64 key, QTreeWidget * parent);
+        IDBFolder(type_e type, quint64 id, QTreeWidgetItem * parent);
+        IDBFolder(type_e type, quint64 id, QTreeWidget * parent);
         virtual ~IDBFolder();
 
-        quint64 getKey(){return key;}
+        quint64 getId(){return id;}
 
-        static IDBFolder * createFolderByType(type_e type, quint64 key, QTreeWidgetItem *parent);
+        virtual void expanding();
+
+        static IDBFolder * createFolderByType(int type, quint64 id, QTreeWidgetItem *parent);
 
     protected:
-        void updateName();
+        void setupFromDB();
+
 
     private:
-        quint64 key;
+        QSqlDatabase db;
+        quint64 id;
 
 };
 

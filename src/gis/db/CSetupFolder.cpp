@@ -18,12 +18,16 @@
 
 #include "gis/db/CSetupFolder.h"
 
-CSetupFolder::CSetupFolder(IDBFolder::type_e type, QString &name, QWidget *parent)
+#include <QtWidgets>
+
+CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, QWidget *parent)
     : QDialog(parent)
     , type(type)
     , name(name)
 {
     setupUi(this);
+
+    connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotNameChanged(QString)));
 
     lineName->setText(name);
     switch(type)
@@ -39,6 +43,8 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e type, QString &name, QWidget *paren
             break;
         default:;
     }
+
+    slotNameChanged(name);
 }
 
 CSetupFolder::~CSetupFolder()
@@ -63,4 +69,9 @@ void CSetupFolder::accept()
     }
 
     QDialog::accept();
+}
+
+void CSetupFolder::slotNameChanged(const QString& text)
+{
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!text.isEmpty());
 }

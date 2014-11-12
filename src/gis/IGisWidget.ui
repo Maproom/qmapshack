@@ -45,9 +45,12 @@
      </property>
      <property name="iconSize">
       <size>
-       <width>22</width>
-       <height>22</height>
+       <width>20</width>
+       <height>20</height>
       </size>
+     </property>
+     <property name="indentation">
+      <number>14</number>
      </property>
      <column>
       <property name="text">
@@ -68,16 +71,21 @@
      </property>
      <property name="iconSize">
       <size>
-       <width>22</width>
-       <height>22</height>
+       <width>20</width>
+       <height>20</height>
       </size>
      </property>
-     <attribute name="headerVisible">
-      <bool>false</bool>
-     </attribute>
+     <property name="indentation">
+      <number>14</number>
+     </property>
      <column>
       <property name="text">
-       <string notr="true">1</string>
+       <string notr="true">-</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Name</string>
       </property>
      </column>
     </widget>

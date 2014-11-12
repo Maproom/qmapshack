@@ -44,7 +44,8 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     treeWks->setExternalMenu(menuProject);
 
     SETTINGS;
-    treeWks->header()->resizeSection(0, cfg.value("Workspace/treeWks/colum0/size", 100).toInt());
+    treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
+    treeDB->header()->restoreState(cfg.value("Workspace/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
     connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 }
@@ -52,7 +53,8 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
 CGisWidget::~CGisWidget()
 {
     SETTINGS;
-    cfg.setValue("Workspace/treeWks/colum0/size", treeWks->header()->sectionSize(0));
+    cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
+    cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
 }
 
 void CGisWidget::loadGisProject(const QString& filename)

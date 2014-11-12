@@ -25,15 +25,19 @@
 
 class CSetupFolder : public QDialog, private Ui::ISetupFolder
 {
+    Q_OBJECT
     public:
-        CSetupFolder(IDBFolder::type_e type, QString& name, QWidget * parent);
+        CSetupFolder(IDBFolder::type_e& type, QString& name, QWidget * parent);
         virtual ~CSetupFolder();
 
     public slots:
         void accept();
 
+    private slots:
+        void slotNameChanged(const QString& text);
+
     private:
-        IDBFolder::type_e type;
+        IDBFolder::type_e& type;
         QString& name;
 
 };

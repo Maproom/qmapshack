@@ -20,11 +20,10 @@
 #include "gis/db/macros.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderLostFound.h"
 
 #include <QtSql>
 #include <QtWidgets>
-
-
 
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
@@ -75,13 +74,8 @@ CGisListDB::CGisListDB(QWidget *parent)
         initDB();
     }
 
-    itemLostFound = new QTreeWidgetItem(this, IDBFolder::eTypeLostFound);
-    itemLostFound->setIcon(0,QIcon("://icons/32x32/DeleteMultiple.png"));
-    itemLostFound->setText(0,tr("Lost & Found"));
-
-    itemDatabase = new CDBFolderDatabase(this);
-    itemDatabase->setIcon(0,QIcon("://icons/32x32/Database.png"));
-    itemDatabase->setText(0,tr("Database"));
+    itemLostFound       = new CDBFolderLostFound(this);
+    itemDatabase        = new CDBFolderDatabase(this);
 
     menuDatabase        = new QMenu(this);
     actionAddFolder     = menuDatabase->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
@@ -90,6 +84,9 @@ CGisListDB::CGisListDB(QWidget *parent)
     menuItem            = new QMenu(this);
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
+
+    itemDatabase->setExpanded(true);
 }
 
 CGisListDB::~CGisListDB()
@@ -109,7 +106,7 @@ void CGisListDB::initDB()
 
     if(!query.exec( "CREATE TABLE folders ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER,"
+                    "type           INTEGER NOT NULL,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
@@ -149,7 +146,7 @@ void CGisListDB::initDB()
         qDebug() << query.lastError();
     }
 
-    if(!query.exec("INSERT INTO folders (name, comment) VALUES (database', '')"))
+    if(!query.exec("INSERT INTO folders (type, name, comment) VALUES (2, 'Database', '')"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
@@ -198,8 +195,8 @@ void CGisListDB::migrateDB(int version)
 void CGisListDB::slotContextMenu(const QPoint& point)
 {
     QPoint p = mapToGlobal(point);
-    QTreeWidgetItem * item = currentItem();
-    if((item == 0) || (item->type() == IDBFolder::eTypeDatabase))
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if((folder != 0))
     {
         menuDatabase->exec(p);
         return;
@@ -213,7 +210,7 @@ void CGisListDB::slotAddFolder()
     {
         return;
     }
-    quint64 idParent = parentFolder->getKey();
+    quint64 idParent = parentFolder->getId();
 
     IDBFolder::type_e type = IDBFolder::eTypeProject;
     QString name;
@@ -245,8 +242,17 @@ void CGisListDB::slotAddFolder()
     QUERY_EXEC(return);
 
     IDBFolder * childFolder = IDBFolder::createFolderByType(type, idChild, parentFolder);
+}
 
+void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
+{
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+    if(folder == 0)
+    {
+        return;
+    }
 
+    folder->expanding();
 }
 
 void CGisListDB::addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent)

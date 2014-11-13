@@ -24,19 +24,19 @@
 
 #include <QtSql>
 
-IDBFolder::IDBFolder(type_e type, quint64 id, QTreeWidgetItem *parent)
+IDBFolder::IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent, type)
+    , db(db)
     , id(id)
 {
-    db = QSqlDatabase::database();
     setupFromDB();
 }
 
-IDBFolder::IDBFolder(type_e type, quint64 id, QTreeWidget * parent)
+IDBFolder::IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent)
     : QTreeWidgetItem(parent, type)
+    , db(db)
     , id(id)
 {
-    db = QSqlDatabase::database();
     setupFromDB();
 }
 
@@ -45,16 +45,16 @@ IDBFolder::~IDBFolder()
 
 }
 
-IDBFolder * IDBFolder::createFolderByType(int type, quint64 id, QTreeWidgetItem * parent)
+IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem * parent)
 {
     switch(type)
     {
     case eTypeGroup:
-        return new CDBFolderGroup(id, parent);
+        return new CDBFolderGroup(db, id, parent);
     case eTypeProject:
-        return new CDBFolderProject(id, parent);
+        return new CDBFolderProject(db, id, parent);
     case eTypeOther:
-        return new CDBFolderOther(id, parent);
+        return new CDBFolderOther(db, id, parent);
     default:
         return 0;
     }
@@ -100,7 +100,7 @@ void IDBFolder::expanding()
     {
         quint64 idChild     = query.value(0).toULongLong();
         quint32 typeChild   = query.value(1).toInt();
-        IDBFolder::createFolderByType(typeChild, idChild, this);
+        IDBFolder::createFolderByType(db, typeChild, idChild, this);
     }
 
 }

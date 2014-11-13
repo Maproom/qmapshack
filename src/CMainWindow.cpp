@@ -52,11 +52,6 @@ CMainWindow::CMainWindow()
 
     IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
 
-    QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(path);
-    db.open();
-
     gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);
 

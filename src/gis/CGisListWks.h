@@ -66,7 +66,11 @@ class CGisListWks : public QTreeWidget
         void slotSearchGoogle(bool on);
 
 
-    private:                
+    private:
+        void configDB();
+        void initDB();
+        void migrateDB(int version);
+
         QSqlDatabase db;
 
         QMenu * menuProject;

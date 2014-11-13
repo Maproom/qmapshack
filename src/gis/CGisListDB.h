@@ -43,6 +43,7 @@ class CGisListDB : public QTreeWidget
         void slotItemExpanded(QTreeWidgetItem * item);
 
     private:
+        void configDB();
         void initDB();
         void migrateDB(int version);
 

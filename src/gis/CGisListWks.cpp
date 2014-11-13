@@ -31,17 +31,23 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "config.h"
 
 #include <QtSql>
 #include <QtWidgets>
+
+#define DB_VERSION 1
 
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
     , menuNone(0)
     , saveOnExit(true)
     , saveEvery(5)
-{
-    db = QSqlDatabase::database();
+{    
+    db = QSqlDatabase::addDatabase("QSQLITE","Workspace");
+    db.setDatabaseName(QDir::home().filePath(CONFIGDIR).append("/workspace.db"));
+    db.open();
+    configDB();
 
     menuProject     = new QMenu(this);
     actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
@@ -82,6 +88,96 @@ CGisListWks::CGisListWks(QWidget *parent)
 CGisListWks::~CGisListWks()
 {
 }
+
+void CGisListWks::configDB()
+{
+    QSqlQuery query(db);
+    if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA synchronous=OFF"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA temp_store=MEMORY"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA default_cache_size=50"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA page_size=8192"))
+    {
+        return;
+    }
+
+    if(!query.exec("SELECT version FROM versioninfo"))
+    {
+        initDB();
+    }
+    else if(query.next())
+    {
+        int version = query.value(0).toInt();
+        if(version != DB_VERSION)
+        {
+            migrateDB(version);
+        }
+    }
+    else
+    {
+        initDB();
+    }
+}
+
+void CGisListWks::initDB()
+{
+    QSqlQuery query(db);
+
+    if(query.exec( "CREATE TABLE versioninfo ( version TEXT )"))
+    {
+        query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
+        query.bindValue(":version", DB_VERSION);
+        QUERY_EXEC(; );
+    }
+
+    if(!query.exec( "CREATE TABLE workspace ("
+                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "type           INTEGER NOT NULL,"
+                    "name           TEXT NOT NULL,"
+                    "key            TEXT NOT NULL,"
+                    "changed        BOOLEAN DEFAULT FALSE,"
+                    "data           BLOB NOT NULL"
+
+                    ")"))
+    {
+        qDebug() << query.lastQuery();
+        qDebug() << query.lastError();
+    }
+
+
+}
+
+void CGisListWks::migrateDB(int version)
+{
+    QSqlQuery query(db);
+
+    for(version++; version <= DB_VERSION; version++)
+    {
+        switch(version)
+        {
+        }
+    }
+    query.prepare( "UPDATE versioninfo set version=:version");
+    query.bindValue(":version", version - 1);
+    QUERY_EXEC(; );
+}
+
 
 void CGisListWks::setExternalMenu(QMenu * project)
 {
@@ -445,9 +541,7 @@ void CGisListWks::slotLoadWorkspace()
     {
         PROGRESS(progCnt++, return );
 
-
-        int type       = query.value(0).toInt();
-//        QString key     = query.value(1).toString();
+        int type        = query.value(0).toInt();
         QString name    = query.value(2).toString();
         bool changed    = query.value(3).toBool();
         QByteArray data = query.value(4).toByteArray();

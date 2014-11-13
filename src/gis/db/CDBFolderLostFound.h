@@ -24,7 +24,7 @@
 class CDBFolderLostFound : public IDBFolder
 {
     public:
-        CDBFolderLostFound(QTreeWidget *parent);
+        CDBFolderLostFound(QSqlDatabase &db, QTreeWidget *parent);
         virtual ~CDBFolderLostFound();
 };
 

@@ -21,17 +21,46 @@
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderLostFound.h"
+#include "helpers/CSettings.h"
+#include "config.h"
 
 #include <QtSql>
 #include <QtWidgets>
 
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
+{   
+    SETTINGS;
+    QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
+    db = QSqlDatabase::addDatabase("QSQLITE", "Database");
+    db.setDatabaseName(path);
+    db.open();
+    configDB();
+
+
+    itemLostFound       = new CDBFolderLostFound(db, this);
+    itemDatabase        = new CDBFolderDatabase(db, this);
+
+    menuDatabase        = new QMenu(this);
+    actionAddFolder     = menuDatabase->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
+
+    menuProject         = new QMenu(this);
+    menuItem            = new QMenu(this);
+
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
+
+    itemDatabase->setExpanded(true);
+}
+
+CGisListDB::~CGisListDB()
 {
-    db = QSqlDatabase::database();
+}
 
+
+void CGisListDB::configDB()
+{
     QSqlQuery query(db);
-
     if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
     {
         return;
@@ -73,24 +102,6 @@ CGisListDB::CGisListDB(QWidget *parent)
     {
         initDB();
     }
-
-    itemLostFound       = new CDBFolderLostFound(this);
-    itemDatabase        = new CDBFolderDatabase(this);
-
-    menuDatabase        = new QMenu(this);
-    actionAddFolder     = menuDatabase->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
-
-    menuProject         = new QMenu(this);
-    menuItem            = new QMenu(this);
-
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
-    connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
-
-    itemDatabase->setExpanded(true);
-}
-
-CGisListDB::~CGisListDB()
-{
 }
 
 void CGisListDB::initDB()
@@ -126,20 +137,6 @@ void CGisListDB::initDB()
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
                     "data           BLOB NOT NULL"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE workspace ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "key            TEXT NOT NULL,"
-                    "changed        BOOLEAN DEFAULT FALSE,"
-                    "data           BLOB NOT NULL"
-
                     ")"))
     {
         qDebug() << query.lastQuery();
@@ -241,7 +238,7 @@ void CGisListDB::slotAddFolder()
     query.bindValue(":child", idChild);
     QUERY_EXEC(return);
 
-    IDBFolder * childFolder = IDBFolder::createFolderByType(type, idChild, parentFolder);
+    IDBFolder * childFolder = IDBFolder::createFolderByType(db, type, idChild, parentFolder);
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)

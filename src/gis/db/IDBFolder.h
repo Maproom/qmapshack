@@ -20,7 +20,8 @@
 #define IDBFOLDER_H
 
 #include <QTreeWidgetItem>
-#include <QSqlDatabase>
+
+class QSqlDatabase;
 
 class IDBFolder : public QTreeWidgetItem
 {
@@ -35,22 +36,22 @@ class IDBFolder : public QTreeWidgetItem
         };
 
 
-        IDBFolder(type_e type, quint64 id, QTreeWidgetItem * parent);
-        IDBFolder(type_e type, quint64 id, QTreeWidget * parent);
+        IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
+        IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
         virtual ~IDBFolder();
 
         quint64 getId(){return id;}
 
         virtual void expanding();
 
-        static IDBFolder * createFolderByType(int type, quint64 id, QTreeWidgetItem *parent);
+        static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
     protected:
         void setupFromDB();
 
 
     private:
-        QSqlDatabase db;
+        QSqlDatabase& db;
         quint64 id;
 
 };

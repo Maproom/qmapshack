@@ -1,3 +1,8 @@
+V 0.8.1
+* Handle "no data" values in DEM files
+* Garmin maps: read copyright information 
+* Save/Restore workspace on exit/start
+
 V 0.8.0
 * Add unit setup (metric, imperial, nautical)
 * Add data serialization for track, waypoint, route and area
@@ -37,7 +42,6 @@ V 0.3.0.bureaucratic
 * Add copyright notice to GpxExamples to satisfy bureaucrats @ debian
 
 V 0.3.0
-
 * A lot of little fixes to prevent crashes and glitches due to multithreading
 * Take special care of the +-180 degree problem
 * Add RGB support to raster maps

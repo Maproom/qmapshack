@@ -21,8 +21,8 @@
 CDBFolderProject::CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetItem * parent)
     : IDBFolder(db, eTypeProject, key, parent)
 {
-    setIcon(0,QIcon("://icons/32x32/PathGreen.png"));
-    setCheckState(0, Qt::Unchecked);
+    setIcon(eColumnSym,QIcon("://icons/32x32/PathGreen.png"));
+    setCheckState(eColumnSym, Qt::Unchecked);
 }
 
 CDBFolderProject::~CDBFolderProject()

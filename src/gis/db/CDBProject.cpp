@@ -18,10 +18,12 @@
 
 #include "gis/db/CDBProject.h"
 
-CDBProject::CDBProject(CGisListWks *parent)
+CDBProject::CDBProject(quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, "", parent)
 {
     setIcon(0,QIcon("://icons/32x32/DBProject.png"));
+
+    valid = true;
 }
 
 CDBProject::~CDBProject()
@@ -29,3 +31,12 @@ CDBProject::~CDBProject()
 
 }
 
+void CDBProject::save()
+{
+
+}
+
+void CDBProject::saveAs()
+{
+
+}

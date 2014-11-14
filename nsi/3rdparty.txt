@@ -46,10 +46,10 @@ Compile instructions - to be verified
 2.) Compile the PROJ library http://trac.osgeo.org/proj/
 - Download the source code of the version 4.8 (or latest) from http://trac.osgeo.org/proj/ and unzip
 - In nmake.opt, adapt the following lines, according to your build environment [my settings are given as example]
-  INSTDIR=M:\lib\\PROJ
+  INSTDIR=M:\lib\PROJ
 - From the start menu, enter the VS2013, x64 native command prompt
 - nmake /f makefile.vc
-- nmake /f makefile.vc devinstall
+- nmake /f makefile.vc install-all
 
 3.) Install QT5.3 or later 
 - Download and run the Qt5 Windows Online Installer from http://qt-project.org/downloads
@@ -69,7 +69,10 @@ Note: you might have to install TortoiseHG
 6.) Open the generated QMapShack.sln with VS2013
 - Compile the Release Version
 
-7.) Create the installer by executing
+7.) Download the VC redistributable installer 
+  from http://www.microsoft.com/en-us/download/details.aspx?id=40784
+
+8.) Create the installer by executing
 - nsi/copyfiles.bat
   Note: In copyfiles.bat, you may have to adapt the directories where you have installed Qt5, GDAL and PROJ.4.
 - nsi/QMapShack_Installer.nsi

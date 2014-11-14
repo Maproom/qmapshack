@@ -6,17 +6,17 @@ rem http://technet.microsoft.com/en-us/library/bb491035.aspx
 rem http://vlaurie.com/computers2/Articles/environment.htm
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.3\msvc2013_64"
+set QMSI_QT_PATH="C:\Qt5\5.3\msvc2013"
 rem get the VC redistributable installer from http://www.microsoft.com/en-us/download/details.aspx?id=40784
 set QMSI_VCREDIST_PATH="M:\deploy"
 rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
-set QMSI_GDAL_PATH="M:\lib\gdal"
-set QMSI_PROJ_PATH="M:\lib\PROJ"
+set QMSI_GDAL_PATH="M:\lib32\gdal"
+set QMSI_PROJ_PATH="M:\lib32\PROJ"
 
 rem Section 2.) Copy Files
-del /s/q Files
-mkdir Files
-cd Files
+del /s/q Files32
+mkdir Files32
+cd Files32
 
 rem Section 2.1) Copy Qt files
 copy %QMSI_QT_PATH%\bin\Qt5Core.dll
@@ -78,12 +78,12 @@ copy %QMSI_PROJ_PATH%\bin\*.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
 
 rem section 2.3) Copy MSVC Redist Files
-copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe
+copy %QMSI_VCREDIST_PATH%\vcredist_x86.exe
 rem section 2.4) Copy libexif Files
 rem copy %QLGTI_LIBEXIF_PATH%\libexif-12.dll
 rem section 2.5) Copy QMapShack GT Files
-copy ..\..\build\bin\Release\qmapshack.exe
-copy ..\..\build\src\*.qm
+copy ..\..\build32\bin\Release\qmapshack.exe
+copy ..\..\build32\src\*.qm
 copy ..\*.ico
 rem section 2.6) 3rd party SW description
 copy ..\3rdparty.txt

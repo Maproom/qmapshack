@@ -115,6 +115,9 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
             qint32 width;
             qint32 style;
             bool opacity;
+
+            // secondary data;
+            qreal area;
         };
 
         const area_t& getAreaData() const{return area;}
@@ -128,6 +131,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         QPointF getPolygonCentroid(const QPolygonF& polygon);
 
         area_t area;
+
 
         static QString keyUserFocus;
 

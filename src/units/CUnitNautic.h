@@ -32,6 +32,7 @@ class CUnitNautic : public IUnit
         void meter2elevation(qreal meter, QString& val, QString& unit);
         void meter2distance(qreal meter, QString& val, QString& unit);
         void meter2speed(qreal meter, QString& val, QString& unit);
+        void meter2area(qreal meter, QString& val, QString& unit);
         qreal elevation2meter(const QString& val);
 };
 #endif                           //CUNITNAUTIC_H

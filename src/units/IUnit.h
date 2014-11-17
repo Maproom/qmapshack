@@ -42,8 +42,10 @@ class IUnit : public QObject
         virtual void meter2distance(qreal meter, QString& val, QString& unit) = 0;
         /// convert meter per second to a speed value string and unit label
         virtual void meter2speed(qreal meter, QString& val, QString& unit);
+        virtual void meter2area(qreal meter, QString& val, QString& unit) = 0;
         virtual void seconds2time(quint32 ttime, QString& val, QString& unit);
         virtual qreal elevation2meter(const QString& val) = 0;
+
 
         enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
         static void setUnitType(type_e t, QObject *parent);

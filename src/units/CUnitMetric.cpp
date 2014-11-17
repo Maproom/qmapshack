@@ -99,6 +99,20 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit)
     unit = speedunit;
 }
 
+void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit)
+{
+    if(meter == NOFLOAT)
+    {
+        val  = "-";
+        unit = "";
+    }
+    else
+    {
+        val.sprintf("%1.2f", meter / 1000000);
+        unit = "km²";
+    }
+
+}
 
 qreal CUnitMetric::elevation2meter(const QString& val)
 {

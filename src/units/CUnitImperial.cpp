@@ -77,6 +77,21 @@ void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit)
     }
 }
 
+void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit)
+{
+    if(meter == NOFLOAT)
+    {
+        val  = "-";
+        unit = "";
+    }
+    else
+    {
+        val.sprintf("%1.2f", meter / (1/0.6213699E-3 * 1/0.6213699E-3));
+        unit = "ml²";
+    }
+}
+
+
 
 qreal CUnitImperial::elevation2meter(const QString& val)
 {

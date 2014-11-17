@@ -76,6 +76,21 @@ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit)
     }
 }
 
+void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit)
+{
+    if(meter == NOFLOAT)
+    {
+        val  = "-";
+        unit = "";
+    }
+    else
+    {
+        val.sprintf("%1.2f", meter / (1852 * 1852));
+        unit = "nm²";
+    }
+
+}
+
 
 qreal CUnitNautic::elevation2meter(const QString& val)
 {

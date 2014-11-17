@@ -21,6 +21,7 @@
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/IGisProject.h"
 #include "gis/CGisDraw.h"
+#include "GeoMath.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -260,6 +261,32 @@ void CGisItemOvlArea::deriveSecondaryData()
     }
 
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
+
+    QPolygonF line(area.pts.size());
+    for(int i = 1; i < area.pts.size(); i++)
+    {
+        qreal a1, a2, d;
+        const pt_t& pt11 = area.pts[i - 1];
+        const pt_t& pt12 = area.pts[i];
+
+        QPointF& pt21    = line[i - 1];
+        QPointF& pt22    = line[i];
+
+        d = GPS_Math_Distance(pt11.lon * DEG_TO_RAD, pt11.lat * DEG_TO_RAD, pt12.lon * DEG_TO_RAD, pt12.lat * DEG_TO_RAD, a1, a2);
+
+        pt22.rx() = pt21.x() + cos(a1 * DEG_TO_RAD) * d;
+        pt22.ry() = pt21.y() + sin(a1 * DEG_TO_RAD) * d;
+    }
+
+    area.area = 0;
+    int j = line.size() - 1;
+    for(int i = 0; i < line.size(); i++)
+    {
+        area.area += (line[j].x() + line[i].x())*(line[j].y() - line[i].y());
+        j = i;
+    }
+
+    area.area = area.area/2;
 }
 
 void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
@@ -363,7 +390,11 @@ const QString& CGisItemOvlArea::getName()
 
 QString CGisItemOvlArea::getInfo()
 {
+    QString unit, val;
     QString str = getName();
+
+    IUnit::self().meter2area(area.area, val, unit);
+    str += "\n" + QObject::tr("Area: %1%2").arg(val).arg(unit);
 
     QString desc = removeHtml(area.desc).simplified();
     if(desc.count())

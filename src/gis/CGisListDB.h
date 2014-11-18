@@ -39,13 +39,16 @@ class CGisListDB : public QTreeWidget
     private slots:
         void slotContextMenu(const QPoint& point);
         void slotAddFolder();
+
         void slotItemExpanded(QTreeWidgetItem * item);
-        void slotItemChanged(QTreeWidgetItem * item, int column);
 
     private:
         void configDB();
         void initDB();
         void migrateDB(int version);
+
+        void addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent);
+
 
         QSqlDatabase db;
 

@@ -22,7 +22,6 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisProject.h"
 #include "gis/gpx/CGpxProject.h"
-#include "gis/db/CDBProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -78,44 +77,20 @@ void CGisWidget::loadGisProject(const QString& filename)
     if(item && !item->isValid())
     {
         delete item;
-        item = 0;
     }
 
     // skip if project is already loaded
     if(item && treeWks->hasProject(item))
     {
         delete item;
-        item = 0;
     }
 
     IGisItem::mutexItems.unlock();
     QApplication::restoreOverrideCursor();
+
     emit sigChanged();
 }
 
-void CGisWidget::loadGisProject(quint64 id)
-{
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    IGisItem::mutexItems.lock();
-
-    IGisProject * item = new CDBProject(id, treeWks);
-
-    if(item && !item->isValid())
-    {
-        delete item;
-        item = 0;
-    }
-
-    if(item && treeWks->hasProject(item))
-    {
-        delete item;
-        item = 0;
-    }
-
-    IGisItem::mutexItems.unlock();
-    QApplication::restoreOverrideCursor();
-    emit sigChanged();
-}
 
 void CGisWidget::slotSaveAll()
 {

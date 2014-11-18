@@ -21,7 +21,6 @@
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderProject.h"
 #include "gis/db/CDBFolderOther.h"
-#include "gis/CGisWidget.h"
 
 #include <QtSql>
 
@@ -74,7 +73,7 @@ void IDBFolder::setupFromDB()
     QUERY_EXEC(return);
     query.next();
 
-    setText(eColumnName, query.value(0).toString());
+    setText(1, query.value(0).toString());
 
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
     query.bindValue(":id", id);
@@ -104,16 +103,4 @@ void IDBFolder::expanding()
         IDBFolder::createFolderByType(db, typeChild, idChild, this);
     }
 
-}
-
-void IDBFolder::checked()
-{
-    if(checkState(eColumnSym) == Qt::Checked)
-    {
-        CGisWidget::self().loadGisProject(id);
-    }
-    else
-    {
-
-    }
 }

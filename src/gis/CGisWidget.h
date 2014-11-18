@@ -34,7 +34,6 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         virtual ~CGisWidget();
 
         void loadGisProject(const QString& filename);
-        void loadGisProject(quint64 id);
         /**
            @brief Draw all loaded data in the workspace that is visible
 

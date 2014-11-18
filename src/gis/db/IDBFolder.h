@@ -28,17 +28,11 @@ class IDBFolder : public QTreeWidgetItem
     public:
         enum type_e
         {
-             eTypeLostFound = QTreeWidgetItem::UserType + 1
-            ,eTypeDatabase  = QTreeWidgetItem::UserType + 2
-            ,eTypeGroup     = QTreeWidgetItem::UserType + 3
-            ,eTypeProject   = QTreeWidgetItem::UserType + 4
-            ,eTypeOther     = QTreeWidgetItem::UserType + 5
-        };
-
-        enum column_e
-        {
-              eColumnSym
-            , eColumnName
+             eTypeLostFound = 1
+            ,eTypeDatabase = 2
+            ,eTypeGroup = 3
+            ,eTypeProject = 4
+            ,eTypeOther = 5
         };
 
 
@@ -49,8 +43,6 @@ class IDBFolder : public QTreeWidgetItem
         quint64 getId(){return id;}
 
         virtual void expanding();
-
-        virtual void checked();
 
         static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 

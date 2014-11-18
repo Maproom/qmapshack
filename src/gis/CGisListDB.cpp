@@ -49,7 +49,6 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
 
     itemDatabase->setExpanded(true);
 }
@@ -239,8 +238,7 @@ void CGisListDB::slotAddFolder()
     query.bindValue(":child", idChild);
     QUERY_EXEC(return);
 
-    IDBFolder::createFolderByType(db, type, idChild, parentFolder);
-    parentFolder->sortChildren(1, Qt::AscendingOrder);
+    IDBFolder * childFolder = IDBFolder::createFolderByType(db, type, idChild, parentFolder);
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
@@ -254,14 +252,16 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
     folder->expanding();
 }
 
-void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
+void CGisListDB::addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent)
 {
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-    if(folder != 0)
+    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard|Qt::MatchRecursive, 0);
+
+    foreach(QTreeWidgetItem * item, items)
     {
-        if(column == IDBFolder::eColumnSym)
+        IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+        if(folder == 0)
         {
-            folder->checked();
+            continue;
         }
     }
 }

@@ -55,10 +55,11 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info)
 
     if(pj_is_latlong(pjGrid))
     {
-        QString str;
+        QString lat,lng;
         pt *= RAD_TO_DEG;
-        GPS_Math_Deg_To_Str(pt.x(), pt.y(), str);
-        info += tr("[Grid: %1] ").arg(str);
+        lat = pt.y() < 0 ? "S" : "N";
+        lng = pt.x() < 0 ? "W" : "E";
+        info += tr("[Grid: %1%2%5 %3%4%5] ").arg(lat).arg(qAbs(pt.y()), 0, 'f', 6).arg(lng).arg(qAbs(pt.x()), 0, 'f', 6).arg(QChar('\260'));
     }
     else
     {

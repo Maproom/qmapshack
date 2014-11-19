@@ -35,6 +35,11 @@ class IDBFolder : public QTreeWidgetItem
             ,eTypeOther = 5
         };
 
+        enum column_e
+        {
+             eColumnCheckbox = 0
+            ,eColumnName = 1
+        };
 
         IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
         IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
@@ -43,6 +48,7 @@ class IDBFolder : public QTreeWidgetItem
         quint64 getId(){return id;}
 
         virtual void expanding();
+        virtual void close(quint64 idFolder);
 
         static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 

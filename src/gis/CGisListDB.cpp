@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
+#include "gis/CGisWidget.h"
 #include "gis/db/macros.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/CDBFolderDatabase.h"
@@ -49,6 +50,7 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
+    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
 
     itemDatabase->setExpanded(true);
 }
@@ -189,6 +191,19 @@ void CGisListDB::migrateDB(int version)
     QUERY_EXEC(; );
 }
 
+void CGisListDB::queueDBAction(const action_t& act)
+{
+    switch(act.action)
+    {
+    case eActW2DCloseProject:
+    {
+        itemDatabase->close(act.idFolder);
+        break;
+    }
+    default:;
+    }
+}
+
 void CGisListDB::slotContextMenu(const QPoint& point)
 {
     QPoint p = mapToGlobal(point);
@@ -238,7 +253,7 @@ void CGisListDB::slotAddFolder()
     query.bindValue(":child", idChild);
     QUERY_EXEC(return);
 
-    IDBFolder * childFolder = IDBFolder::createFolderByType(db, type, idChild, parentFolder);
+    IDBFolder::createFolderByType(db, type, idChild, parentFolder);
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
@@ -252,16 +267,22 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
     folder->expanding();
 }
 
-void CGisListDB::addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent)
+void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
 {
-    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard|Qt::MatchRecursive, 0);
-
-    foreach(QTreeWidgetItem * item, items)
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+    if(folder != 0)
     {
-        IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-        if(folder == 0)
+        if(column == IDBFolder::eColumnCheckbox)
         {
-            continue;
+            if(folder->checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+            {
+                CGisWidget::self().queueActionForWks(action_t(eActD2WLoadProject, folder->getId(), 0));
+            }
+            else
+            {
+                CGisWidget::self().queueActionForWks(action_t(eActD2WCloseProject, folder->getId(), 0));
+            }
         }
+        return;
     }
 }

@@ -24,8 +24,16 @@
 class CDBProject : public IGisProject
 {
     public:
-        CDBProject(CGisListWks * parent);
+        CDBProject(quint64 id, CGisListWks * parent);
         virtual ~CDBProject();
+
+        void save();
+        void saveAs();
+
+        quint64 getId(){return id;}
+
+    private:
+        quint64 id;
 };
 
 #endif //CDBPROJECT_H

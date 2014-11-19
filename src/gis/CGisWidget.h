@@ -26,6 +26,24 @@ class CGisDraw;
 class IGisItem;
 class IGisProject;
 
+enum action_e
+{
+    // all database to workspace actions
+     eActD2WLoadProject
+    ,eActD2WCloseProject
+
+    // all workspace to database actions
+    ,eActW2DCloseProject
+};
+
+struct action_t
+{
+    action_t(action_e action, quint64 idFolder, quint64 idItem) : action(action), idFolder(idFolder), idItem(idItem){}
+    action_e action;
+    quint64  idFolder;
+    quint64  idItem;
+};
+
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
     Q_OBJECT
@@ -135,6 +153,10 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
            @return 0 if no project was selected.
          */
         IGisProject * selectProject();
+
+        void queueActionForWks(const action_t& act);
+        void queueActionForDb(const action_t& act);
+
 
     signals:
         void sigChanged();

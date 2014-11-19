@@ -73,7 +73,7 @@ void IDBFolder::setupFromDB()
     QUERY_EXEC(return);
     query.next();
 
-    setText(1, query.value(0).toString());
+    setText(eColumnName, query.value(0).toString());
 
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
     query.bindValue(":id", id);
@@ -101,6 +101,25 @@ void IDBFolder::expanding()
         quint64 idChild     = query.value(0).toULongLong();
         quint32 typeChild   = query.value(1).toInt();
         IDBFolder::createFolderByType(db, typeChild, idChild, this);
+    }
+}
+
+void IDBFolder::close(quint64 idFolder)
+{
+    if(id == idFolder)
+    {
+        treeWidget()->blockSignals(true);
+        setCheckState(eColumnCheckbox, Qt::Unchecked);
+        treeWidget()->blockSignals(false);
+    }
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+        if(folder)
+        {
+            folder->close(idFolder);
+        }
     }
 
 }

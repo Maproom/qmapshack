@@ -57,9 +57,20 @@ CGisWidget::~CGisWidget()
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
 }
 
+void CGisWidget::queueActionForWks(const action_t& act)
+{
+    treeWks->queueDBAction(act);
+    emit sigChanged();
+}
+
+void CGisWidget::queueActionForDb(const action_t& act)
+{
+    treeDB->queueDBAction(act);
+}
+
+
 void CGisWidget::loadGisProject(const QString& filename)
 {
-
     // add project to workspace
     QApplication::setOverrideCursor(Qt::WaitCursor);
     IGisItem::mutexItems.lock();
@@ -77,12 +88,14 @@ void CGisWidget::loadGisProject(const QString& filename)
     if(item && !item->isValid())
     {
         delete item;
+        item = 0;
     }
 
     // skip if project is already loaded
     if(item && treeWks->hasProject(item))
     {
         delete item;
+        item = 0;
     }
 
     IGisItem::mutexItems.unlock();
@@ -90,7 +103,6 @@ void CGisWidget::loadGisProject(const QString& filename)
 
     emit sigChanged();
 }
-
 
 void CGisWidget::slotSaveAll()
 {

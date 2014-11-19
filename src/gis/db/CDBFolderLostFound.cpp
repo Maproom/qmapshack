@@ -21,9 +21,9 @@
 CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidget *parent)
     : IDBFolder(db, eTypeLostFound, 0, parent)
 {
-    setToolTip(1, QObject::tr("All your data grouped by folders."));
-    setIcon(0, QIcon("://icons/32x32/DeleteMultiple.png"));
-    setText(1, QObject::tr("Lost & Found"));
+    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
+    setIcon(eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
+    setText(eColumnName, QObject::tr("Lost & Found"));
 }
 
 CDBFolderLostFound::~CDBFolderLostFound()

@@ -23,6 +23,7 @@
 #include <QPointer>
 #include <QSqlDatabase>
 
+struct action_t;
 class QAction;
 class CSearchGoogle;
 class IGisProject;
@@ -36,6 +37,9 @@ class CGisListWks : public QTreeWidget
 
         void setExternalMenu(QMenu * project);
         bool hasProject(IGisProject *project);
+
+        void queueDBAction(const action_t& act);
+
     signals:
         void sigChanged();
 

@@ -17,14 +17,28 @@
 **********************************************************************************************/
 
 #include "gis/db/CDBProject.h"
+#include "gis/CGisWidget.h"
 
-CDBProject::CDBProject(CGisListWks *parent)
+CDBProject::CDBProject(quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, "", parent)
+    , id(id)
 {
     setIcon(0,QIcon("://icons/32x32/DBProject.png"));
+
+    valid = true;
 }
 
 CDBProject::~CDBProject()
+{
+    CGisWidget::self().queueActionForDb(action_t(eActW2DCloseProject, id, 0));
+}
+
+void CDBProject::save()
+{
+
+}
+
+void CDBProject::saveAs()
 {
 
 }

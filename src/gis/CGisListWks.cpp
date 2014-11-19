@@ -17,11 +17,13 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "config.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
 #include "gis/IGisProject.h"
 #include "gis/db/macros.h"
+#include "gis/db/CDBProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/qms/CQmsProject.h"
@@ -31,7 +33,6 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
-#include "config.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -43,7 +44,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     , menuNone(0)
     , saveOnExit(true)
     , saveEvery(5)
-{    
+{
     db = QSqlDatabase::addDatabase("QSQLITE","Workspace");
     db.setDatabaseName(QDir::home().filePath(CONFIGDIR).append("/workspace.db"));
     db.open();
@@ -159,8 +160,6 @@ void CGisListWks::initDB()
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
     }
-
-
 }
 
 void CGisListWks::migrateDB(int version)
@@ -177,7 +176,6 @@ void CGisListWks::migrateDB(int version)
     query.bindValue(":version", version - 1);
     QUERY_EXEC(; );
 }
-
 
 void CGisListWks::setExternalMenu(QMenu * project)
 {
@@ -882,3 +880,50 @@ void CGisListWks::slotSearchGoogle(bool on)
     }
 }
 
+
+void CGisListWks::queueDBAction(const action_t& act)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    switch(act.action)
+    {
+    case eActD2WLoadProject:
+    {
+        IGisProject * item = new CDBProject(act.idFolder, this);
+        if(item && !item->isValid())
+        {
+            delete item;
+            item = 0;
+        }
+        // skip if project is already loaded
+        if(item && hasProject(item))
+        {
+            delete item;
+            item = 0;
+        }
+        break;
+    }
+
+    case eActD2WCloseProject:
+    {
+        QList<QTreeWidgetItem*> items;
+        for(int i = 0; i < topLevelItemCount(); i++)
+        {
+            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+            if(project == 0)
+            {
+                continue;
+            }
+
+            if(project->getId() == act.idFolder)
+            {
+                items << project;
+            }
+        }
+
+        qDeleteAll(items);
+        break;
+    }
+    default:;
+    }
+}

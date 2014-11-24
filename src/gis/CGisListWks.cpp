@@ -889,7 +889,7 @@ void CGisListWks::queueDBAction(const action_t& act)
     {
     case eActD2WLoadProject:
     {
-        IGisProject * item = new CDBProject(act.idFolder, this);
+        IGisProject * item = new CDBProject(act.connectionName, act.idFolder, this);
         if(item && !item->isValid())
         {
             delete item;

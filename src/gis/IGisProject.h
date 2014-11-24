@@ -56,6 +56,7 @@ class IGisProject : public QTreeWidgetItem
 
         struct metadata_t
         {
+            metadata_t() : time(QDateTime::currentDateTimeUtc()){}
             QString name;
             QString desc;
             person_t author;

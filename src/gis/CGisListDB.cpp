@@ -123,7 +123,8 @@ void CGisListDB::initDB()
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
-                    "locked         BOOLEAN DEFAULT FALSE"
+                    "locked         BOOLEAN DEFAULT FALSE,"
+                    "data           BLOB"
                     ")"))
     {
         qDebug() << query.lastQuery();
@@ -276,11 +277,11 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
         {
             if(folder->checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
             {
-                CGisWidget::self().queueActionForWks(action_t(eActD2WLoadProject, folder->getId(), 0));
+                CGisWidget::self().queueActionForWks(action_t(eActD2WLoadProject, db.connectionName(), folder->getId(), 0));
             }
             else
             {
-                CGisWidget::self().queueActionForWks(action_t(eActD2WCloseProject, folder->getId(), 0));
+                CGisWidget::self().queueActionForWks(action_t(eActD2WCloseProject, "", folder->getId(), 0));
             }
         }
         return;

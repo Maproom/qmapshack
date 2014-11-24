@@ -38,8 +38,9 @@ enum action_e
 
 struct action_t
 {
-    action_t(action_e action, quint64 idFolder, quint64 idItem) : action(action), idFolder(idFolder), idItem(idItem){}
+    action_t(action_e action, const QString& connectionName, quint64 idFolder, quint64 idItem) : action(action), connectionName(connectionName), idFolder(idFolder), idItem(idItem){}
     action_e action;
+    QString  connectionName;
     quint64  idFolder;
     quint64  idItem;
 };

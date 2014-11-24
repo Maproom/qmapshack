@@ -18,19 +18,49 @@
 
 #include "gis/db/CDBProject.h"
 #include "gis/CGisWidget.h"
+#include "gis/db/macros.h"
 
-CDBProject::CDBProject(quint64 id, CGisListWks *parent)
+#include <QtSql>
+
+CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, "", parent)
-    , id(id)
+    , id(id)    
 {
     setIcon(0,QIcon("://icons/32x32/DBProject.png"));
+    db = QSqlDatabase::database(dbName);
+
+    QSqlQuery query(db);
+    query.prepare("SELECT date, name, data FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    query.next();
+
+    QString date    = query.value(0).toString();
+    QString name    = query.value(1).toString();
+    QByteArray data = query.value(2).toByteArray();
+
+    if(data.isEmpty())
+    {
+        metadata.name = name;
+        metadata.time = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
+    }
+    else
+    {
+        QDataStream in(&data, QIODevice::ReadOnly);
+        in.setByteOrder(QDataStream::LittleEndian);
+        in.setVersion(QDataStream::Qt_5_2);
+        *this << in;
+    }
+
+    setText(0, name);
+    setToolTip(0, getInfo());
 
     valid = true;
 }
 
 CDBProject::~CDBProject()
 {
-    CGisWidget::self().queueActionForDb(action_t(eActW2DCloseProject, id, 0));
+    CGisWidget::self().queueActionForDb(action_t(eActW2DCloseProject, "", id, 0));
 }
 
 void CDBProject::save()

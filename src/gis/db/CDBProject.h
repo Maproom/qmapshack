@@ -20,11 +20,12 @@
 #define CDBPROJECT_H
 
 #include "gis/IGisProject.h"
+#include <QSqlDatabase>
 
 class CDBProject : public IGisProject
 {
     public:
-        CDBProject(quint64 id, CGisListWks * parent);
+        CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
         virtual ~CDBProject();
 
         void save();
@@ -33,6 +34,7 @@ class CDBProject : public IGisProject
         quint64 getId(){return id;}
 
     private:
+        QSqlDatabase db;
         quint64 id;
 };
 

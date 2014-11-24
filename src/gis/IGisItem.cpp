@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/IGisItem.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -519,6 +519,36 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     {
         str += cmt;
     }
+
+    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"));
+    if(removeHtml(desc).simplified().isEmpty())
+    {
+        str += QObject::tr("<p>--- no description ---</p>");
+    }
+    else
+    {
+        str += desc;
+    }
+
+    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"));
+    if(links.isEmpty())
+    {
+        str += QObject::tr("<p>--- no links ---</p>");
+    }
+    else
+    {
+        foreach(const link_t& link, links)
+        {
+            str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+        }
+    }
+
+    return str;
+}
+
+QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<link_t>& links)
+{
+    QString str;
 
     str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"));
     if(removeHtml(desc).simplified().isEmpty())

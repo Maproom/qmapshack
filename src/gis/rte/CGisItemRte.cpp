@@ -18,7 +18,7 @@
 
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/WptIcons.h"
 #include "gis/CGisDraw.h"
 #include "canvas/CCanvas.h"

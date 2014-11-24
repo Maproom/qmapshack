@@ -19,7 +19,7 @@
 #ifndef CDBPROJECT_H
 #define CDBPROJECT_H
 
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 
 class CDBProject : public IGisProject
 {

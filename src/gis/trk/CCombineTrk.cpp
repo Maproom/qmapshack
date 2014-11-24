@@ -18,7 +18,7 @@
 
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "plot/CPlotTrack.h"
 
 #include <QtWidgets>

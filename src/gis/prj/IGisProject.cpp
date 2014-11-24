@@ -16,10 +16,13 @@
 
 **********************************************************************************************/
 
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/prj/CDetailsPrj.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisDraw.h"
+#include "CMainWindow.h"
+
 
 #include <QtWidgets>
 
@@ -35,7 +38,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
 
 IGisProject::~IGisProject()
 {
-
+    delete dlgDetails;
 }
 
 void IGisProject::genKey()
@@ -54,6 +57,49 @@ void IGisProject::genKey()
         key = md5.result().toHex();
     }
 }
+
+
+void IGisProject::edit()
+{
+    if(dlgDetails.isNull())
+    {
+        dlgDetails = new CDetailsPrj(*this, 0);
+        dlgDetails->setObjectName(getName());
+    }
+
+    CMainWindow::self().addWidgetToTab(dlgDetails);
+}
+
+void IGisProject::setName(const QString& str)
+{
+    metadata.name = str;
+    setText(0, str);
+    changed();
+}
+
+void IGisProject::setKeywords(const QString& str)
+{
+    metadata.keywords = str;
+    changed();
+}
+
+void IGisProject::setDescription(const QString& str)
+{
+    metadata.desc = str;
+    changed();
+}
+
+void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
+{
+    metadata.links = links;
+    changed();
+}
+
+void IGisProject::changed()
+{
+    setText(1,"*");
+}
+
 
 void IGisProject::setupName(const QString &defaultName)
 {

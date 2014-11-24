@@ -95,7 +95,8 @@ set( SRCS
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
-    gis/IGisProject.cpp
+    gis/prj/IGisProject.cpp
+    gis/prj/CDetailsPrj.cpp
     gis/gpx/CGpxProject.cpp
     gis/gpx/serialization.cpp
     gis/qms/CQmsProject.cpp
@@ -217,7 +218,8 @@ set( HDRS
     gis/CGisDraw.h
     gis/IGisItem.h
     gis/IGisLine.h
-    gis/IGisProject.h
+    gis/prj/IGisProject.h
+    gis/prj/CDetailsPrj.h
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
@@ -283,6 +285,7 @@ set( UIS
     mouse/IScrOptRange.ui
     mouse/IScrOptRangeTrk.ui
     gis/IGisWidget.ui
+    gis/prj/IDetailsPrj.ui
     gis/db/ISetupDB.ui
     gis/db/ISetupFolder.ui
     gis/wpt/IScrOptWpt.ui

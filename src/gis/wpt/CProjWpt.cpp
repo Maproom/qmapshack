@@ -19,7 +19,7 @@
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CWptIconDialog.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "units/IUnit.h"
 #include "GeoMath.h"
 #include "CMainWindow.h"

@@ -21,12 +21,13 @@
 
 #include "gis/IGisItem.h"
 #include <QTreeWidgetItem>
-
+#include <QPointer>
 
 class CGisListWks;
 class IGisItem;
 class CGisDraw;
 class QDataStream;
+class CDetailsPrj;
 
 class IGisProject : public QTreeWidgetItem
 {
@@ -73,6 +74,8 @@ class IGisProject : public QTreeWidgetItem
         IGisProject(type_e type, const QString& filename, CGisListWks * parent);
         virtual ~IGisProject();
 
+        void edit();
+
         virtual void save() = 0;
         virtual void saveAs() = 0;
 
@@ -86,6 +89,17 @@ class IGisProject : public QTreeWidgetItem
            @return A MD5 hash string
          */
         const QString& getKey(){genKey(); return key;}
+        const QString& getName(){return metadata.name;}
+        const QDateTime& getTime(){return metadata.time;}
+        const QString& getKeywords(){return metadata.keywords;}
+        const QString& getDescription(){return metadata.desc;}
+        const QList<IGisItem::link_t>& getLinks(){return metadata.links;}
+
+
+        void setName(const QString& str);
+        void setKeywords(const QString& str);
+        void setDescription(const QString& str);
+        void setLinks(const QList<IGisItem::link_t>& links);
 
         /**
            @brief Get a short metadata summary
@@ -167,6 +181,7 @@ class IGisProject : public QTreeWidgetItem
         void setupName(const QString& defaultName);
         void markAsSaved();
         void readMetadata(const QDomNode& xml, metadata_t& metadata);
+        void changed();
 
         // Those are the URIs of the GPX extensions we support
         static const QString gpxx_ns;
@@ -185,6 +200,8 @@ class IGisProject : public QTreeWidgetItem
         bool valid;
 
         metadata_t metadata;
+
+        QPointer<CDetailsPrj> dlgDetails;
 
 };
 

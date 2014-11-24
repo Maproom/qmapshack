@@ -16,23 +16,32 @@
 
 **********************************************************************************************/
 
-#ifndef CQMSPROJECT_H
-#define CQMSPROJECT_H
+#ifndef CDETAILSPRJ_H
+#define CDETAILSPRJ_H
 
-#include "gis/prj/IGisProject.h"
+#include <QWidget>
+#include <QPointer>
+#include "ui_IDetailsPrj.h"
 
-class CQmsProject : public IGisProject
+class CDetailsPrj;
+class IGisProject;
+
+class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
 {
+    Q_OBJECT
     public:
-        CQmsProject(const QString& filename, CGisListWks * parent);
-        virtual ~CQmsProject();
+        CDetailsPrj(IGisProject& prj, QWidget * parent);
+        virtual ~CDetailsPrj();
 
-        void save();
-        void saveAs();
+    private slots:
+        void slotLinkActivated(const QString& link);
+        void slotLinkActivated(const QUrl& url);
 
-        static void saveAs(const QString& fn, IGisProject& project);
+    private:
+        void setupGui();
 
+        IGisProject& prj;
 };
 
-#endif //CQMSPROJECT_H
+#endif //CDETAILSPRJ_H
 

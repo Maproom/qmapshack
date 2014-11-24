@@ -20,7 +20,7 @@
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CScrOptWpt.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/CGisDraw.h"
 #include "gis/WptIcons.h"
 #include "gis/CGisListWks.h"

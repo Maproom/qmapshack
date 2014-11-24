@@ -19,7 +19,7 @@
 #ifndef CGPXPROJECT_H
 #define CGPXPROJECT_H
 
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 
 #include <QDomElement>
 #include <QDateTime>

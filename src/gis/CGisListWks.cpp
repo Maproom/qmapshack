@@ -21,7 +21,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/db/macros.h"
 #include "gis/db/CDBProject.h"
 #include "gis/gpx/CGpxProject.h"
@@ -53,6 +53,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProject     = new QMenu(this);
     actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
     actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
+    actionEditPrj   = menuProject->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
     actionClose     = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
@@ -695,6 +696,19 @@ void CGisListWks::slotSaveAsProject()
             project->saveAs();
         }
     }
+    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotEditPrj()
+{
+    IGisItem::mutexItems.lock();
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project != 0)
+    {
+        project->edit();
+    }
+
     IGisItem::mutexItems.unlock();
 }
 

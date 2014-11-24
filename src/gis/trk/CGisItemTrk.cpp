@@ -20,7 +20,7 @@
 #include "GeoMath.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"

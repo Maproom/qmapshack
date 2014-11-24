@@ -25,7 +25,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/CGisWidget.h"
 #include "gis/CGisDraw.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "GeoMath.h"
 
 #include <QtWidgets>

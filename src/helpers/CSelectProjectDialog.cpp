@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "helpers/CSelectProjectDialog.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>

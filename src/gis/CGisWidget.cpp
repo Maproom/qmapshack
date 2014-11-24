@@ -20,7 +20,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/qms/CQmsProject.h"

@@ -19,7 +19,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "gis/ovl/CDetailsOvlArea.h"
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/CGisDraw.h"
 
 #include <QtWidgets>

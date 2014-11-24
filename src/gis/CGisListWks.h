@@ -53,6 +53,7 @@ class CGisListWks : public QTreeWidget
         void slotContextMenu(const QPoint& point);
         void slotSaveProject();
         void slotSaveAsProject();
+        void slotEditPrj();
         void slotCloseProject();
         void slotItemDoubleClicked(QTreeWidgetItem * item, int);
         void slotEditItem();
@@ -80,6 +81,7 @@ class CGisListWks : public QTreeWidget
         QMenu * menuProject;
         QAction  * actionSave;
         QAction  * actionSaveAs;
+        QAction  * actionEditPrj;
         QAction  * actionClose;
 
         QMenu * menuItem;

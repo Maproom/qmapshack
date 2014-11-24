@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/IGisProject.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/rte/CGisItemRte.h"

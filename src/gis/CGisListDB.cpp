@@ -136,7 +136,7 @@ void CGisListDB::initDB()
                     "type           INTEGER,"
                     "key            TEXT NOT NULL,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "icon           TEXT NOT NULL,"
+                    "icon           BLOB NOT NULL,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
                     "data           BLOB NOT NULL"
@@ -199,6 +199,11 @@ void CGisListDB::queueDBAction(const action_t& act)
     case eActW2DCloseProject:
     {
         itemDatabase->close(act.idFolder);
+        break;
+    }
+    case eActW2DUpdateProject:
+    {
+        itemDatabase->update(act.idFolder);
         break;
     }
     default:;

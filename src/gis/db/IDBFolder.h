@@ -49,6 +49,7 @@ class IDBFolder : public QTreeWidgetItem
 
         virtual void expanding();
         virtual void close(quint64 idFolder);
+        virtual void update(quint64 idFolder);
 
         static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 

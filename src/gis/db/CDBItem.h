@@ -21,11 +21,21 @@
 
 #include <QTreeWidgetItem>
 
+class IDBFolder;
+class QSqlDatabase;
+
 class CDBItem : public QTreeWidgetItem
 {
     public:
-        CDBItem();
+        CDBItem(QSqlDatabase& db, quint64 id, IDBFolder * parent);
         virtual ~CDBItem();
+
+    private:
+        QSqlDatabase& db;
+        quint64 id;
+
+        int type;
+        QString key;
 };
 
 #endif //CDBITEM_H

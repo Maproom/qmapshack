@@ -18,9 +18,17 @@
 
 #include "gis/db/CDBProject.h"
 #include "gis/CGisWidget.h"
+#include "gis/qms/CQmsProject.h"
+#include "gis/gpx/CGpxProject.h"
 #include "gis/db/macros.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "helpers/CSettings.h"
 
 #include <QtSql>
+#include <QtWidgets>
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, "", parent)
@@ -55,6 +63,52 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     setText(0, name);
     setToolTip(0, getInfo());
 
+
+    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.type, t2.name");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    while(query.next())
+    {
+        quint64 idChild = query.value(0).toULongLong();
+        QSqlQuery query(db);
+        query.prepare("SELECT type, data FROM items WHERE id=:id");
+        query.bindValue(":id", idChild);
+        QUERY_EXEC(return);
+        if(query.next())
+        {
+            int type = query.value(0).toInt();
+
+            QByteArray data(query.value(1).toByteArray());
+            QDataStream in(&data, QIODevice::ReadOnly);
+            in.setByteOrder(QDataStream::LittleEndian);
+            in.setVersion(QDataStream::Qt_5_2);
+
+            IGisItem::history_t history;
+            in >> history;
+            IGisItem * item = 0;
+            switch(type)
+            {
+                case IGisItem::eTypeWpt:
+                    item = new CGisItemWpt(history, this);
+                    break;
+                case IGisItem::eTypeTrk:
+                    item = new CGisItemTrk(history, this);
+                    break;
+                case IGisItem::eTypeRte:
+                    item = new CGisItemRte(history, this);
+                    break;
+                case IGisItem::eTypeOvl:
+                    item = new CGisItemOvlArea(history, this);
+                    break;
+                default:;
+            }
+
+
+        }
+
+    }
+
+
     valid = true;
 }
 
@@ -63,13 +117,139 @@ CDBProject::~CDBProject()
     CGisWidget::self().queueActionForDb(action_t(eActW2DCloseProject, "", id, 0));
 }
 
-void CDBProject::save()
-{
-
-}
 
 void CDBProject::saveAs()
 {
+    SETTINGS;
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
+    QString filter = "*.qms";
+    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+
+    if(fn.isEmpty())
+    {
+        return;
+    }
+
+    if(filter == "*.gpx")
+    {
+        CGpxProject::saveAs(fn, *this);
+    }
+    else if(filter == "*.qms")
+    {
+        CQmsProject::saveAs(fn, *this);
+    }
+    else
+    {
+        return;
+    }
+
+    path = QFileInfo(fn).absolutePath();
+    cfg.setValue("Paths/lastGisPath", path);
 }
 
+void CDBProject::save()
+{
+    QSqlQuery query(db);
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        quint64 idItem = 0;
+
+        // serialize complete history of item
+        QByteArray data;
+        QDataStream in(&data, QIODevice::WriteOnly);
+        in.setByteOrder(QDataStream::LittleEndian);
+        in.setVersion(QDataStream::Qt_5_2);
+        in << item->getHistory();
+
+        // test if item exists in database
+        query.prepare("SELECT id FROM items WHERE key=:key");
+        query.bindValue(":key", item->getKey());
+        QUERY_EXEC(return);
+
+        QBuffer buffer;
+        buffer.open(QIODevice::ReadWrite);
+        QPixmap pixmap = item->getIcon();
+        pixmap.save(&buffer, "PNG");
+        buffer.seek(0);
+
+
+        if(query.next())
+        {
+            // item exits -> update item data in database
+            idItem = query.value(0).toULongLong();
+            query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
+            query.bindValue(":type",    item->type());
+            query.bindValue(":key",     item->getKey());
+            query.bindValue(":icon",    buffer.data());
+            query.bindValue(":name",    item->getName());
+            query.bindValue(":comment", item->getInfo());
+            query.bindValue(":data", data);
+            query.bindValue(":id", idItem);
+            QUERY_EXEC(return;);
+
+        }
+        else
+        {
+            // item is unknown to database -> create item in database
+            query.prepare("INSERT INTO items (type, key, icon, name, comment, data) VALUES (:type, :key, :icon, :name, :comment, :data)");
+            query.bindValue(":type",    item->type());
+            query.bindValue(":key",     item->getKey());
+            query.bindValue(":icon",    buffer.data());
+            query.bindValue(":name",    item->getName());
+            query.bindValue(":comment", item->getInfo());
+            query.bindValue(":data", data);
+            QUERY_EXEC(return;);
+
+            query.prepare("SELECT last_insert_rowid() from items");
+            QUERY_EXEC(return;);
+            query.next();
+            idItem = query.value(0).toULongLong();
+            if(idItem == 0)
+            {
+                qDebug() << "childId equals 0. bad.";
+                return;
+            }
+        }
+
+        // check if relation already exists.
+        query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
+        query.bindValue(":parent", id);
+        query.bindValue(":child", idItem);
+        QUERY_EXEC(;);
+
+        if(!query.next())
+        {
+            // create relation
+            query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
+            query.bindValue(":parent", id);
+            query.bindValue(":child", idItem);
+            QUERY_EXEC(return);
+        }
+    }
+
+    // serialize metadata of project
+    QByteArray data;
+    QDataStream in(&data, QIODevice::WriteOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_2);
+    *this >> in;
+
+    // update folder entry in database
+    query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data WHERE id=:id");
+    query.bindValue(":name", getName());
+    query.bindValue(":comment", getInfo());
+    query.bindValue(":data", data);
+    query.bindValue(":id", getId());
+    QUERY_EXEC(return);
+
+    CGisWidget::self().queueActionForDb(action_t(eActW2DUpdateProject, "", id, 0));
+
+    markAsSaved();
+}

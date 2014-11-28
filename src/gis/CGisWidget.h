@@ -34,6 +34,7 @@ enum action_e
 
     // all workspace to database actions
     ,eActW2DCloseProject
+    ,eActW2DUpdateProject
 };
 
 struct action_t

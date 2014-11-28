@@ -33,6 +33,28 @@ class CDBProject : public IGisProject
 
         quint64 getId(){return id;}
 
+        /**
+           @brief Serialize object out of a QDataStream
+
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        QDataStream& operator<<(QDataStream& stream);
+
+        /**
+           @brief Serialize object into a QDataStream
+
+           See CGisSerialization.cpp for implementation
+
+           @param stream the binary data stream
+           @return The stream object.
+        */
+        QDataStream& operator>>(QDataStream& stream);
+
+
+
     private:
         QSqlDatabase db;
         quint64 id;

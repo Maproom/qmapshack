@@ -21,6 +21,7 @@
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderProject.h"
 #include "gis/db/CDBFolderOther.h"
+#include "gis/db/CDBItem.h"
 
 #include <QtSql>
 
@@ -84,6 +85,17 @@ void IDBFolder::setupFromDB()
     {
         setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
     }
+    else
+    {
+        query.prepare("SELECT EXISTS(SELECT 1 FROM folder2item WHERE parent=:id LIMIT 1)");
+        query.bindValue(":id", id);
+        QUERY_EXEC(return);
+        query.next();
+        if(query.value(0).toInt() == 1)
+        {
+            setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+        }
+    }
 
 }
 
@@ -102,6 +114,16 @@ void IDBFolder::expanding()
         quint32 typeChild   = query.value(1).toInt();
         IDBFolder::createFolderByType(db, typeChild, idChild, this);
     }
+
+    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.type, t2.name");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    while(query.next())
+    {
+        quint64 idChild = query.value(0).toULongLong();
+        new CDBItem(db, idChild, this);
+    }
+
 }
 
 void IDBFolder::close(quint64 idFolder)
@@ -112,14 +134,37 @@ void IDBFolder::close(quint64 idFolder)
         setCheckState(eColumnCheckbox, Qt::Unchecked);
         treeWidget()->blockSignals(false);
     }
-
-    for(int i = 0; i < childCount(); i++)
+    else
     {
-        IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
-        if(folder)
+        for(int i = 0; i < childCount(); i++)
         {
-            folder->close(idFolder);
+            IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+            if(folder)
+            {
+                folder->close(idFolder);
+            }
         }
     }
 
+}
+
+void IDBFolder::update(quint64 idFolder)
+{
+    if(id == idFolder && isExpanded())
+    {
+        treeWidget()->blockSignals(true);
+        expanding();
+        treeWidget()->blockSignals(false);
+    }
+    else
+    {
+        for(int i = 0; i < childCount(); i++)
+        {
+            IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+            if(folder)
+            {
+                folder->close(idFolder);
+            }
+        }
+    }
 }

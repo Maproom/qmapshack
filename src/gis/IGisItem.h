@@ -37,6 +37,7 @@ class CGisDraw;
 class IScrOpt;
 class IMouse;
 
+
 class IGisItem : public QTreeWidgetItem
 {
 
@@ -335,6 +336,9 @@ class IGisItem : public QTreeWidgetItem
 
 
 };
+
+QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h);
+QDataStream& operator<<(QDataStream& stream, const IGisItem::history_t& h);
 
 #endif //IGISITEM_H
 

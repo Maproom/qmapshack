@@ -57,6 +57,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
     , flags(0)
 {
+    int n;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 
     if(idx >= 0)
@@ -68,7 +69,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
     {        
         if(type() == eTypeTrk)
         {
-            for(int n = parent->childCount() - 2; n >= 0; n--)
+            for(n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
                             the GPX file in the CGpxProject constructor.  */
@@ -84,7 +85,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
         }
         else if(type() == eTypeRte)
         {
-            for(int n = parent->childCount() - 2; n >= 0; n--)
+            for(n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
                             the GPX file in the CGpxProject constructor.  */
@@ -100,7 +101,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
         }
         else if(type() == eTypeWpt)
         {
-            for(int n = parent->childCount() - 2; n >= 0; n--)
+            for(n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
                             the GPX file in the CGpxProject constructor.  */
@@ -116,7 +117,7 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
         }
         else if(type() == eTypeOvl)
         {
-            for(int n = parent->childCount() - 2; n >= 0; n--)
+            for(n = parent->childCount() - 2; n >= 0; n--)
             {
                 /** @note   The order of item types to test is given by the order items read from
                             the GPX file in the CGpxProject constructor.  */
@@ -131,6 +132,11 @@ IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
             }
         }
 
+        if(n < 0)
+        {
+            parent->removeChild(this);
+            parent->insertChild(0, this);
+        }
     }
 }
 

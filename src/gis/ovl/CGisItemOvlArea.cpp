@@ -137,9 +137,8 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
 {
     *this = parentArea;
 
-    key.clear();
-    genKey();
-
+//    key.clear();
+//    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

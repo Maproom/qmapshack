@@ -24,10 +24,10 @@
 #include "CMainWindow.h"
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
-    : IScrOpt(parent->getCanvas())
-    , key(area->getKey())
-
+    : IScrOpt(parent->getCanvas())    
 {
+    key = area->getKey();
+
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());

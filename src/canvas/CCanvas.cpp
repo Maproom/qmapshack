@@ -592,7 +592,7 @@ void CCanvas::slotToolTip()
 
 void CCanvas::slotCheckTrackOnFocus()
 {
-    const QString& key = CGisItemTrk::getKeyUserFocus();
+    const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
 
     // any changes?
     if(key != keyTrackOnFocus)

@@ -40,7 +40,7 @@ class CHistoryListWidget : public QListWidget
         void slotCutHistory();
 
     private:
-        QString key;
+        IGisItem::key_t key;
         QMenu * menu;
         QAction * actionCutHistory;
 };

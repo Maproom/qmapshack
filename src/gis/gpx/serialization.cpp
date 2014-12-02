@@ -453,7 +453,7 @@ void CGisItemWpt::readGpx(const QDomNode& xml)
     if(xml.namedItem("extensions").isElement())
     {
         const QDomNode& ext = xml.namedItem("extensions");
-        readXml(ext, "ql:key", key);
+        readXml(ext, "ql:key", key.item);
         readXml(ext, "ql:flags", flags);
         readXml(ext, history);
 
@@ -485,7 +485,7 @@ void CGisItemWpt::save(QDomNode& gpx)
     // write the key as extension tag
     QDomElement xmlExt  = doc.createElement("extensions");
     xmlWpt.appendChild(xmlExt);
-    writeXml(xmlExt, "ql:key", key);
+    writeXml(xmlExt, "ql:key", key.item);
     writeXml(xmlExt, "ql:flags", flags);
     writeXml(xmlExt, history);
 
@@ -664,7 +664,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     const QDomNode& ext = xml.namedItem("extensions");
     if(ext.isElement())
     {
-        readXml(ext, "ql:key", key);
+        readXml(ext, "ql:key", key.item);
         readXml(ext, "ql:flags", flags);
         readXml(ext, history);
 
@@ -695,7 +695,7 @@ void CGisItemTrk::save(QDomNode& gpx)
     // write the key as extension tag
     QDomElement xmlExt  = doc.createElement("extensions");
     xmlTrk.appendChild(xmlExt);
-    writeXml(xmlExt, "ql:key", key);
+    writeXml(xmlExt, "ql:key", key.item);
     writeXml(xmlExt, "ql:flags", flags);
     writeXml(xmlExt, history);
 
@@ -760,7 +760,7 @@ void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
     if(xml.namedItem("extensions").isElement())
     {
         const QDomNode& ext = xml.namedItem("extensions");
-        readXml(ext, "ql:key", key);
+        readXml(ext, "ql:key", key.item);
     }
 }
 
@@ -783,7 +783,7 @@ void CGisItemRte::save(QDomNode& gpx)
     // write the key as extension tag
     QDomElement xmlExt  = doc.createElement("extensions");
     xmlRte.appendChild(xmlExt);
-    writeXml(xmlExt, "ql:key", key);
+    writeXml(xmlExt, "ql:key", key.item);
 
     foreach(const rtept_t& pt, rte.pts)
     {
@@ -807,7 +807,7 @@ void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
     readXml(xml, "ql:width", area.width);
     readXml(xml, "ql:style", area.style);
     readXml(xml, "ql:opacity", area.opacity);
-    readXml(xml, "ql:key", key);
+    readXml(xml, "ql:key", key.item);
     readXml(xml, "ql:flags", flags);
     readXml(xml, history);
 
@@ -847,7 +847,7 @@ void CGisItemOvlArea::save(QDomNode& gpx)
     writeXml(xmlArea, "ql:width", area.width);
     writeXml(xmlArea, "ql:style", area.style);
     writeXml(xmlArea, "ql:opacity", area.opacity);
-    writeXml(xmlArea, "ql:key", key);
+    writeXml(xmlArea, "ql:key", key.item);
     writeXml(xmlArea, "ql:flags", flags);
     writeXml(xmlArea, history);
 

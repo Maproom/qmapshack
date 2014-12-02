@@ -359,7 +359,7 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
     out.setByteOrder(QDataStream::LittleEndian);
     out.setVersion(QDataStream::Qt_5_2);
 
-    out << key;
+    out << key.item;
     out << flags;
     out << trk.name;
     out << trk.cmt;
@@ -401,7 +401,7 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in.setByteOrder(QDataStream::LittleEndian);
     in.setVersion(QDataStream::Qt_5_2);
 
-    in >> key;
+    in >> key.item;
     in >> flags;
     in >> trk.name;
     in >> trk.cmt;
@@ -447,7 +447,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     in.setByteOrder(QDataStream::LittleEndian);
     in.setVersion(QDataStream::Qt_5_2);
 
-    in >> key;
+    in >> key.item;
     in >> flags;
     in >> proximity;
     in >> wpt;
@@ -468,7 +468,7 @@ QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
     out.setByteOrder(QDataStream::LittleEndian);
     out.setVersion(QDataStream::Qt_5_2);
 
-    out << key;
+    out << key.item;
     out << flags;
     out << proximity;
     out << wpt;
@@ -517,7 +517,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     in.setByteOrder(QDataStream::LittleEndian);
     in.setVersion(QDataStream::Qt_5_2);
 
-    in >> key;
+    in >> key.item;
     in >> flags;
     in >> area.name;
     in >> area.cmt;
@@ -548,7 +548,7 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream)
     out.setByteOrder(QDataStream::LittleEndian);
     out.setVersion(QDataStream::Qt_5_2);
 
-    out << key;
+    out << key.item;
     out << flags;
     out << area.name;
     out << area.cmt;

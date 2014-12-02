@@ -170,7 +170,7 @@ class CGisItemWpt : public IGisItem
         void readGcExt(const QDomNode& xmlCache);
         void writeGcExt(QDomNode& xmlCache);
 
-        static QString keyUserFocus;
+        static key_t keyUserFocus;
         static QString lastName;
         static QString lastIcon;
 

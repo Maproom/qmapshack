@@ -20,6 +20,7 @@
 #define CMOUSEEDITAREA_H
 
 #include "mouse/IMouseEditLine.h"
+#include "gis/IGisItem.h"
 
 class CGisItemOvlArea;
 
@@ -43,8 +44,7 @@ class CMouseEditArea : public IMouseEditLine
         IGisLine * getGisLine();
 
     private:
-        QString     key;
-
+        IGisItem::key_t key;
 };
 
 #endif //CMOUSEEDITAREA_H

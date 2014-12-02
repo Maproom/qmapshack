@@ -20,6 +20,7 @@
 #define CSCROPTWPT_H
 
 #include "mouse/IScrOpt.h"
+#include "gis/IGisItem.h"
 
 #include <QWidget>
 #include "ui_IScrOptWpt.h"
@@ -43,7 +44,7 @@ class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
         void slotProj();
 
     private:
-        QString key;
+        IGisItem::key_t key;
         QPointF anchor;
 };
 

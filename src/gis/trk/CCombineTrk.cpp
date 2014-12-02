@@ -44,16 +44,20 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, IGisProject& project, QWidget * paren
             continue;
         }
 
+        const IGisItem::key_t& key = trk1->getKey();
         QListWidgetItem * item = new QListWidgetItem(listAvailable);
         item->setText(trk1->getName());
         item->setIcon(trk1->getIcon());
-        item->setData(Qt::UserRole, trk1->getKey());
+        item->setData(Qt::UserRole + 1, key.item);
+        item->setData(Qt::UserRole + 2, key.project);
     }
 
+    const IGisItem::key_t& key = trk.getKey();
     QListWidgetItem * item = new QListWidgetItem(listSelected);
     item->setText(trk.getName());
     item->setIcon(trk.getIcon());
-    item->setData(Qt::UserRole, trk.getKey());
+    item->setData(Qt::UserRole + 1, key.item);
+    item->setData(Qt::UserRole + 2, key.project);
 
     connect(listAvailable, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
     connect(listSelected, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
@@ -79,7 +83,9 @@ void CCombineTrk::accept()
 {
     for(int i = 0; i < listSelected->count(); i++)
     {
-        QString key = listSelected->item(i)->data(Qt::UserRole).toString();
+        IGisItem::key_t key;
+        key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
+        key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
         if(trk1 == 0)
         {
@@ -139,10 +145,20 @@ void CCombineTrk::slotRemove()
     QListWidgetItem * item;
     item = listSelected->currentItem();
 
-    if((item == 0) || (item->data(Qt::UserRole).toString() == trk.getKey()))
+    if(item == 0)
     {
         return;
     }
+
+    IGisItem::key_t key;
+    key.item    = item->data(Qt::UserRole + 1).toString();
+    key.project = item->data(Qt::UserRole + 2).toString();
+
+    if(key == trk.getKey())
+    {
+        return;
+    }
+
 
     listSelected->takeItem(listSelected->row(item));
     listAvailable->addItem(item);
@@ -187,8 +203,12 @@ void CCombineTrk::updatePreview()
 {
     QPolygonF line;
     for(int i = 0; i < listSelected->count(); i++)
-    {
-        QString key = listSelected->item(i)->data(Qt::UserRole).toString();
+    {      
+        IGisItem::key_t key;
+        key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
+        key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
+
+
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
         if(trk1 == 0)
         {

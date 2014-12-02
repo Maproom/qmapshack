@@ -20,6 +20,7 @@
 #define CMOUSERANGETRK_H
 
 #include "mouse/IMouse.h"
+#include "gis/IGisItem.h"
 #include <QPointer>
 
 class CGisItemTrk;
@@ -46,7 +47,7 @@ class CMouseRangeTrk : public IMouse
         void slotCopy();
 
     private:
-        QString key;
+        IGisItem::key_t key;
 
         enum state_e
         {

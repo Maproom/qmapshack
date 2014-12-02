@@ -180,7 +180,7 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
     IGisItem::mutexItems.unlock();
 }
 
-IGisItem * CGisWidget::getItemByKey(const QString& key)
+IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
 {
     IGisItem * item = 0;
     IGisItem::mutexItems.lock();
@@ -191,6 +191,12 @@ IGisItem * CGisWidget::getItemByKey(const QString& key)
         {
             continue;
         }
+
+        if(project->getKey() != key.project)
+        {
+            continue;
+        }
+
         item = project->getItemByKey(key);
         if(item != 0)
         {
@@ -201,7 +207,7 @@ IGisItem * CGisWidget::getItemByKey(const QString& key)
     return(item);
 }
 
-void CGisWidget::delItemByKey(const QString& key)
+void CGisWidget::delItemByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
     QMessageBox::StandardButtons last = QMessageBox::NoButton;
@@ -223,7 +229,7 @@ void CGisWidget::delItemByKey(const QString& key)
     emit sigChanged();
 }
 
-void CGisWidget::editItemByKey(const QString& key)
+void CGisWidget::editItemByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -240,7 +246,7 @@ void CGisWidget::editItemByKey(const QString& key)
     emit sigChanged();
 }
 
-void CGisWidget::projWptByKey(const QString& key)
+void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 
@@ -255,7 +261,7 @@ void CGisWidget::projWptByKey(const QString& key)
     emit sigChanged();
 }
 
-void CGisWidget::moveWptByKey(const QString& key)
+void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
@@ -270,7 +276,7 @@ void CGisWidget::moveWptByKey(const QString& key)
     IGisItem::mutexItems.unlock();
 }
 
-void CGisWidget::focusTrkByKey(bool yes, const QString& key)
+void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 
@@ -284,7 +290,7 @@ void CGisWidget::focusTrkByKey(bool yes, const QString& key)
     emit sigChanged();
 }
 
-void CGisWidget::cutTrkByKey(const QString& key)
+void CGisWidget::cutTrkByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 
@@ -297,7 +303,7 @@ void CGisWidget::cutTrkByKey(const QString& key)
     emit sigChanged();
 }
 
-void CGisWidget::reverseTrkByKey(const QString& key)
+void CGisWidget::reverseTrkByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 
@@ -310,7 +316,7 @@ void CGisWidget::reverseTrkByKey(const QString& key)
     emit sigChanged();
 }
 
-void CGisWidget::combineTrkByKey(const QString& key)
+void CGisWidget::combineTrkByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 
@@ -323,7 +329,7 @@ void CGisWidget::combineTrkByKey(const QString& key)
     emit sigChanged();
 }
 
-void CGisWidget::editTrkByKey(const QString& key)
+void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 
@@ -340,7 +346,7 @@ void CGisWidget::editTrkByKey(const QString& key)
     IGisItem::mutexItems.unlock();
 }
 
-void CGisWidget::rangeTrkByKey(const QString& key)
+void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 
@@ -357,7 +363,7 @@ void CGisWidget::rangeTrkByKey(const QString& key)
     IGisItem::mutexItems.unlock();
 }
 
-void CGisWidget::editAreaByKey(const QString& key)
+void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();
 

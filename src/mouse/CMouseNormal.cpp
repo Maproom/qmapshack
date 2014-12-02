@@ -98,10 +98,10 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
             case eStateHooverSingle:
             case eStateHooverMultiple:
             {
-                const QString& key = CGisItemTrk::getKeyUserFocus();
-                if(!key.isEmpty())
+                const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
+                if(!key.item.isEmpty())
                 {
-                    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(CGisItemTrk::getKeyUserFocus()));
+                    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
                     if(trk != 0)
                     {
                         trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove);
@@ -158,10 +158,9 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                     const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
                     if(scrOpt != 0)
                     {
-                        QString key = scrOpt->key;
                         screenUnclutter->clear();
 
-                        IGisItem * item = CGisWidget::self().getItemByKey(key);
+                        IGisItem * item = CGisWidget::self().getItemByKey(scrOpt->key);
                         if(item)
                         {
                             item->treeWidget()->collapseAll();

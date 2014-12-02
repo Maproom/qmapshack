@@ -22,8 +22,9 @@
 #include <QWidget>
 #include "ui_IGisWidget.h"
 
+#include "gis/IGisItem.h"
+
 class CGisDraw;
-class IGisItem;
 class IGisProject;
 
 enum action_e
@@ -94,7 +95,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
            @param key       the item's key as it is returned from IGisItem::getKey()
            @return If no item is found 0 is returned.
         */
-        IGisItem * getItemByKey(const QString& key);
+        IGisItem * getItemByKey(const IGisItem::key_t &key);
 
         /**
            @brief Delete all items with matching key from workspace
@@ -104,45 +105,45 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
            @param key       the item's key as it is returned from IGisItem::getKey()
          */
-        void delItemByKey(const QString& key);
+        void delItemByKey(const IGisItem::key_t &key);
 
         /**
            @brief Edit / view item details
            @param key       the item's key as it is returned from IGisItem::getKey()
          */
-        void editItemByKey(const QString& key);
+        void editItemByKey(const IGisItem::key_t &key);
 
         /**
            @brief Clone waypoint and move clone
            @param key       the item's key as it is returned from IGisItem::getKey()
          */
-        void projWptByKey(const QString& key);
+        void projWptByKey(const IGisItem::key_t &key);
 
         /**
            @brief Move waypoint via mouse
            @param key       the item's key as it is returned from IGisItem::getKey()
          */
-        void moveWptByKey(const QString& key);
+        void moveWptByKey(const IGisItem::key_t &key);
 
         /**
            @brief Set user focus to track
            @param yes       true if focus is set
            @param key       the item's key as it is returned from IGisItem::getKey()
          */
-        void focusTrkByKey(bool yes, const QString& key);
+        void focusTrkByKey(bool yes, const IGisItem::key_t &key);
 
 
-        void cutTrkByKey(const QString& key);
+        void cutTrkByKey(const IGisItem::key_t &key);
 
-        void editTrkByKey(const QString& key);
+        void editTrkByKey(const IGisItem::key_t &key);
 
-        void reverseTrkByKey(const QString& key);
+        void reverseTrkByKey(const IGisItem::key_t &key);
 
-        void combineTrkByKey(const QString& key);
+        void combineTrkByKey(const IGisItem::key_t &key);
 
-        void rangeTrkByKey(const QString& key);
+        void rangeTrkByKey(const IGisItem::key_t &key);
 
-        void editAreaByKey(const QString& key);
+        void editAreaByKey(const IGisItem::key_t &key);
 
 
 

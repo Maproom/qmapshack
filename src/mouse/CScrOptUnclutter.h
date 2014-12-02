@@ -20,8 +20,7 @@
 #define CSCROPTUNCLUTTER_H
 
 #include "mouse/IScrOpt.h"
-
-class IGisItem;
+#include "gis/IGisItem.h"
 
 
 class CScrOptUnclutter : public IScrOpt
@@ -33,7 +32,7 @@ class CScrOptUnclutter : public IScrOpt
         struct item_t
         {
             QString name;
-            QString key;
+            IGisItem::key_t key;
             QPixmap icon;
             QRect   area;
             QRect   text;
@@ -44,7 +43,7 @@ class CScrOptUnclutter : public IScrOpt
         virtual int  size(){return items.size();}
 
         void addItem(IGisItem * gisItem);
-        QString getItemKey(int index = 0);
+        IGisItem::key_t getItemKey(int index = 0);
         const item_t *selectItem(const QPoint& point);
 
         void draw(QPainter& p);

@@ -20,6 +20,7 @@
 #define CMOUSEMOVEWPT_H
 
 #include "mouse/IMouse.h"
+#include "gis/IGisItem.h"
 
 #include <QPixmap>
 
@@ -43,7 +44,7 @@ class CMouseMoveWpt : public IMouse
         virtual void slotPanCanvas();
 
     private:
-        QString key;
+        IGisItem::key_t key;
         QPointF origPos;
         QPointF newPos;
         QPointF focus;

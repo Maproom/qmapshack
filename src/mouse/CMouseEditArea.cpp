@@ -34,18 +34,18 @@ CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * 
     : IMouseEditLine(area, gis, parent)
 {
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
-    key    = area.getKey();
-    canvas->reportStatus(key, tr("<b>Edit Area</b><br/>Select a corner point for more options.<br/>"));
+    key         = area.getKey();
+    canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a corner point for more options.<br/>"));
 }
 
 CMouseEditArea::~CMouseEditArea()
 {
-    canvas->reportStatus(key, "");
+    canvas->reportStatus(key.item, "");
 }
 
 void CMouseEditArea::mousePressEvent(QMouseEvent * e)
 {
-    canvas->reportStatus(key, "");
+    canvas->reportStatus(key.item, "");
     IMouseEditLine::mousePressEvent(e);
 }
 
@@ -65,19 +65,19 @@ IGisLine * CMouseEditArea::getGisLine()
 
 void CMouseEditArea::slotAbort()
 {
-    canvas->reportStatus(key,"");
+    canvas->reportStatus(key.item,"");
     IMouseEditLine::slotAbort();
 }
 
 void CMouseEditArea::slotCopyToOrig()
 {
-    canvas->reportStatus(key,"");
+    canvas->reportStatus(key.item,"");
     IMouseEditLine::slotCopyToOrig();
 }
 
 void CMouseEditArea::slotCopyToNew()
 {
-    canvas->reportStatus(key,"");
+    canvas->reportStatus(key.item,"");
 
     if(coords1.size() < 3)
     {

@@ -112,7 +112,7 @@ class IGisProject : public QTreeWidgetItem
            @param key
            @return If no item is found 0 is returned.
         */
-        IGisItem * getItemByKey(const QString& key);
+        IGisItem * getItemByKey(const IGisItem::key_t &key);
 
         /**
            @brief Get a list of items that are close to a given pixel coordinate of the screen
@@ -128,14 +128,14 @@ class IGisProject : public QTreeWidgetItem
            @brief Delete items with matching key
            @param key
         */
-        void delItemByKey(const QString& key, QMessageBox::StandardButtons &last);
+        void delItemByKey(const IGisItem::key_t &key, QMessageBox::StandardButtons &last);
 
         /**
            @brief Call IGisItem::edit() method for items with given key
 
            @param key   a MD5 hash key
          */
-        void editItemByKey(const QString& key);
+        void editItemByKey(const IGisItem::key_t &key);
 
         /**
            @brief Check if the project was initialized correctly.

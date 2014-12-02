@@ -169,7 +169,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
            @return If no track has the focus an empty string is returned
          */
-        static const QString& getKeyUserFocus(){return keyUserFocus;}
+        static const key_t& getKeyUserFocus(){return keyUserFocus;}
 
         /**
            @brief Each plot widget that operates on the track must register during it's contruction
@@ -363,7 +363,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
     private:
         trk_t trk;
 
-        static QString keyUserFocus;
+        static key_t keyUserFocus;
         static const QPen penBackground;
 
         QPen penForeground;

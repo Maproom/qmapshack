@@ -28,9 +28,10 @@
 #include <QtWidgets>
 
 CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
-    : IScrOpt(parent->getCanvas())
-    , key(wpt->getKey())
+    : IScrOpt(parent->getCanvas())    
 {
+    key         = wpt->getKey();
+
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());

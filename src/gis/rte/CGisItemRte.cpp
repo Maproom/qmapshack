@@ -28,7 +28,7 @@
 #include <proj_api.h>
 
 const QPen CGisItemRte::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-QString CGisItemRte::keyUserFocus;
+IGisItem::key_t CGisItemRte::keyUserFocus;
 
 /// used to create a copy of route with new parent
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx)
@@ -131,7 +131,7 @@ bool CGisItemRte::isCloseTo(const QPointF& pos)
 
 void CGisItemRte::gainUserFocus(bool yes)
 {
-    keyUserFocus = yes ? key : "";
+    keyUserFocus = yes ? key : key_t();
 }
 
 

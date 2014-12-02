@@ -166,7 +166,13 @@ CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
     loadHistory(hist.histIdxCurrent);
 }
 
-
+CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project)
+    : IGisItem(project, eTypeOvl, -1)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+{
+    loadFromDb(id, db);
+}
 
 CGisItemOvlArea::~CGisItemOvlArea()
 {

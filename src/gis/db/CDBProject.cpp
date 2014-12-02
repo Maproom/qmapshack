@@ -60,54 +60,35 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         *this << in;
     }
 
-    setText(0, name);
-    setToolTip(0, getInfo());
 
-
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.type, t2.name");
+    query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.type, t2.name");
     query.bindValue(":id", id);
     QUERY_EXEC(return);
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        QSqlQuery query(db);
-        query.prepare("SELECT type, data FROM items WHERE id=:id");
-        query.bindValue(":id", idChild);
-        QUERY_EXEC(return);
-        if(query.next())
+        qint32  type    = query.value(1).toInt();
+
+        switch(type)
         {
-            int type = query.value(0).toInt();
-
-            QByteArray data(query.value(1).toByteArray());
-            QDataStream in(&data, QIODevice::ReadOnly);
-            in.setByteOrder(QDataStream::LittleEndian);
-            in.setVersion(QDataStream::Qt_5_2);
-
-            IGisItem::history_t history;
-            in >> history;
-            IGisItem * item = 0;
-            switch(type)
-            {
-                case IGisItem::eTypeWpt:
-                    item = new CGisItemWpt(history, this);
-                    break;
-                case IGisItem::eTypeTrk:
-                    item = new CGisItemTrk(history, this);
-                    break;
-                case IGisItem::eTypeRte:
-                    item = new CGisItemRte(history, this);
-                    break;
-                case IGisItem::eTypeOvl:
-                    item = new CGisItemOvlArea(history, this);
-                    break;
-                default:;
-            }
-
-
+            case IGisItem::eTypeWpt:
+                new CGisItemWpt(idChild, db, this);
+                break;
+            case IGisItem::eTypeTrk:
+                new CGisItemTrk(idChild, db, this);
+                break;
+            case IGisItem::eTypeRte:
+                new CGisItemRte(idChild, db, this);
+                break;
+            case IGisItem::eTypeOvl:
+                new CGisItemOvlArea(idChild, db, this);
+                break;
+            default:;
         }
-
     }
 
+    setText(0, name);
+    setToolTip(0, getInfo());
 
     valid = true;
 }
@@ -152,8 +133,19 @@ void CDBProject::save()
 {
     QSqlQuery query(db);
 
-    for(int i = 0; i < childCount(); i++)
+    int N = childCount();
+    QProgressDialog progress(QObject::tr("Save ..."), QObject::tr("Abort save"), 0, 100);
+    progress.setWindowModality(Qt::WindowModal);
+
+    for(int i = 0; i < N; i++)
     {
+        progress.setValue(i * 100 / N);
+        if (progress.wasCanceled())
+        {
+            return;
+        }
+
+
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
         if(item == 0)
         {

@@ -211,6 +211,15 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     loadHistory(hist.histIdxCurrent);
 }
 
+CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
+    : IGisItem(project, eTypeTrk, -1)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
+{
+    loadFromDb(id, db);
+}
 
 
 CGisItemTrk::~CGisItemTrk()

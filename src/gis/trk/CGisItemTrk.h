@@ -30,6 +30,7 @@ class IGisProject;
 class IPlot;
 class CDetailsTrk;
 class CScrOptTrk;
+class QSqlDatabase;
 
 #define TRK_N_COLORS 17
 
@@ -56,6 +57,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         CGisItemTrk(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
         CGisItemTrk(const QDomNode &xml, IGisProject *project);
         CGisItemTrk(const history_t& hist, IGisProject * project);
+        CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project);
         virtual ~CGisItemTrk();
 
         QDataStream& operator<<(QDataStream& stream);

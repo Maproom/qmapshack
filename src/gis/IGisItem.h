@@ -36,6 +36,8 @@
 class CGisDraw;
 class IScrOpt;
 class IMouse;
+class QSqlDatabase;
+class IGisProject;
 
 
 class IGisItem : public QTreeWidgetItem
@@ -122,7 +124,7 @@ class IGisItem : public QTreeWidgetItem
         };
 
 
-        IGisItem(QTreeWidgetItem * parent, type_e typ, int idx);
+        IGisItem(IGisProject *parent, type_e typ, int idx);
         virtual ~IGisItem();
 
         /// this mutex has to be locked when ever the item list is accessed.
@@ -146,6 +148,7 @@ class IGisItem : public QTreeWidgetItem
            @return
          */
         const QString& getKey();
+
         /**
            @brief Get the icon attached to object
            @return
@@ -293,6 +296,8 @@ class IGisItem : public QTreeWidgetItem
         void drawArrows(const QPolygonF &line, const QRectF &extViewport, QPainter& p);
         /// call when ever you make a change to the item's data
         virtual void changed(const QString& what, const QString& icon);
+
+        virtual void loadFromDb(quint64 id, QSqlDatabase& db);
 
         quint32 flags;
         QString key;

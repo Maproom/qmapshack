@@ -21,12 +21,14 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/db/macros.h"
 #include "units/IUnit.h"
 #include "canvas/CCanvas.h"
 #include "GeoMath.h"
 
 #include <QtXml>
 #include <QtWidgets>
+#include <QtSql>
 
 QMutex IGisItem::mutexItems(QMutex::Recursive);
 
@@ -53,7 +55,7 @@ const IGisItem::color_t IGisItem::colorMap[] =
 
 };
 
-IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
+IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
     , flags(0)
 {
@@ -159,6 +161,23 @@ void IGisItem::genKey()
         QCryptographicHash md5(QCryptographicHash::Md5);
         md5.addData(buffer);
         key = md5.result().toHex();
+    }
+}
+
+void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
+{
+    QSqlQuery query(db);
+    query.prepare("SELECT data FROM items WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    if(query.next())
+    {
+        QByteArray data(query.value(0).toByteArray());
+        QDataStream in(&data, QIODevice::ReadOnly);
+        in.setByteOrder(QDataStream::LittleEndian);
+        in.setVersion(QDataStream::Qt_5_2);
+        in >> history;
+        loadHistory(history.histIdxCurrent);
     }
 }
 

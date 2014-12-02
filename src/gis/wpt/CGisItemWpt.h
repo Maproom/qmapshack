@@ -26,6 +26,7 @@
 class IGisProject;
 class QDomNode;
 class CScrOptWpt;
+class QSqlDatabase;
 
 
 class CGisItemWpt : public IGisItem
@@ -116,6 +117,9 @@ class CGisItemWpt : public IGisItem
            @param project   the project to append with item
         */
         CGisItemWpt(const history_t& hist, IGisProject * project);
+
+        CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project);
+
         virtual ~CGisItemWpt();
 
         void save(QDomNode& gpx);

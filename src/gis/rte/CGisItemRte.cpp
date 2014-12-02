@@ -37,8 +37,8 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 {
     *this = parentRte;
 
-//    key.clear();
-//    genKey();
+    key.clear();
+    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

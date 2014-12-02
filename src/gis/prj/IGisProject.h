@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include <QTreeWidgetItem>
 #include <QPointer>
+#include <QMessageBox>
 
 class CGisListWks;
 class IGisItem;
@@ -126,7 +127,7 @@ class IGisProject : public QTreeWidgetItem
            @brief Delete items with matching key
            @param key
         */
-        void delItemByKey(const QString& key);
+        void delItemByKey(const QString& key, QMessageBox::StandardButtons &last);
 
         /**
            @brief Call IGisItem::edit() method for items with given key

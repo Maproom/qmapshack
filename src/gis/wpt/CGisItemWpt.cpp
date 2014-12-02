@@ -96,8 +96,8 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 {
     *this = parentWpt;
 
-//    key.clear();
-//    genKey();
+    key.clear();
+    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

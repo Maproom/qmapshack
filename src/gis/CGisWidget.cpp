@@ -192,6 +192,7 @@ IGisItem * CGisWidget::getItemByKey(const QString& key)
 void CGisWidget::delItemByKey(const QString& key)
 {
     IGisItem::mutexItems.lock();
+    QMessageBox::StandardButtons last = QMessageBox::NoButton;
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
@@ -199,7 +200,11 @@ void CGisWidget::delItemByKey(const QString& key)
         {
             continue;
         }
-        project->delItemByKey(key);
+        project->delItemByKey(key, last);
+        if(last == QMessageBox::Cancel)
+        {
+            break;
+        }
     }
 
     IGisItem::mutexItems.unlock();

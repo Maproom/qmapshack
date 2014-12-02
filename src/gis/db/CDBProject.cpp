@@ -162,7 +162,7 @@ void CDBProject::save()
 
         // test if item exists in database
         query.prepare("SELECT id FROM items WHERE key=:key");
-        query.bindValue(":key", item->getKey());
+        query.bindValue(":key", item->getKey().item);
         QUERY_EXEC(return);
 
         QBuffer buffer;
@@ -178,7 +178,7 @@ void CDBProject::save()
             idItem = query.value(0).toULongLong();
             query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
             query.bindValue(":type",    item->type());
-            query.bindValue(":key",     item->getKey());
+            query.bindValue(":key",     item->getKey().item);
             query.bindValue(":icon",    buffer.data());
             query.bindValue(":name",    item->getName());
             query.bindValue(":comment", item->getInfo());
@@ -192,7 +192,7 @@ void CDBProject::save()
             // item is unknown to database -> create item in database
             query.prepare("INSERT INTO items (type, key, icon, name, comment, data) VALUES (:type, :key, :icon, :name, :comment, :data)");
             query.bindValue(":type",    item->type());
-            query.bindValue(":key",     item->getKey());
+            query.bindValue(":key",     item->getKey().item);
             query.bindValue(":icon",    buffer.data());
             query.bindValue(":name",    item->getName());
             query.bindValue(":comment", item->getInfo());

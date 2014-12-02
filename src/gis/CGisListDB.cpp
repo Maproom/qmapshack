@@ -32,7 +32,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
 {   
     SETTINGS;
-    QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/qms.db")).toString();
+    QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/database.db")).toString();
     db = QSqlDatabase::addDatabase("QSQLITE", "Database");
     db.setDatabaseName(path);
     db.open();

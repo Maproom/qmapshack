@@ -98,6 +98,7 @@ void CHistoryListWidget::slotContextMenu(const QPoint& point)
     menu->exec(p);
 }
 
+
 void CHistoryListWidget::slotCutHistory()
 {
     if(currentRow() == (count() - 1))

@@ -30,6 +30,8 @@
 
 QMutex IGisItem::mutexItems(QMutex::Recursive);
 
+QString IGisItem::noKey;
+
 const IGisItem::color_t IGisItem::colorMap[] =
 {
      {"Black",       QColor(Qt::black)}
@@ -53,12 +55,14 @@ const IGisItem::color_t IGisItem::colorMap[] =
 
 };
 
-IGisItem::IGisItem(QTreeWidgetItem *parent, type_e typ, int idx)
+IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
     , flags(0)
 {
     int n;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
+
+    key.project = parent->getKey();
 
     if(idx >= 0)
     {
@@ -147,7 +151,7 @@ IGisItem::~IGisItem()
 
 void IGisItem::genKey()
 {
-    if(key.isEmpty())
+    if(key.item.isEmpty())
     {
         QByteArray buffer;
         QDataStream stream(&buffer, QIODevice::WriteOnly);
@@ -158,8 +162,19 @@ void IGisItem::genKey()
 
         QCryptographicHash md5(QCryptographicHash::Md5);
         md5.addData(buffer);
-        key = md5.result().toHex();
+        key.item = md5.result().toHex();
     }
+}
+
+QString IGisItem::getNameEx()
+{
+    QString str = getName();
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    if(project)
+    {
+        str += " @ " + project->getName();
+    }
+    return str;
 }
 
 void IGisItem::updateDecoration(mark_e enable, mark_e disable)
@@ -345,9 +360,9 @@ void IGisItem::setReadOnlyMode(bool readOnly)
 }
 
 
-const QString& IGisItem::getKey()
+const IGisItem::key_t &IGisItem::getKey()
 {
-    if(key.isEmpty())
+    if(key.item.isEmpty())
     {
         genKey();
     }

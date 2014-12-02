@@ -741,8 +741,7 @@ void CGisListWks::slotEditItem()
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().editItemByKey(key);
+        CGisWidget::self().editItemByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -756,11 +755,10 @@ void CGisListWks::slotDeleteItem()
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != 0)
         {
-            QString key = gisItem->getKey();
             IGisProject * project = dynamic_cast<IGisProject*>(gisItem->parent());
             if(project)
             {
-                project->delItemByKey(key, last);
+                project->delItemByKey(gisItem->getKey(), last);
             }
             if(last == QMessageBox::Cancel)
             {
@@ -777,8 +775,7 @@ void CGisListWks::slotProjWpt()
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().projWptByKey(key);
+        CGisWidget::self().projWptByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -788,9 +785,8 @@ void CGisListWks::slotMoveWpt()
     IGisItem::mutexItems.lock();
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
-    {
-        QString key = gisItem->getKey();
-        CGisWidget::self().moveWptByKey(key);
+    {        
+        CGisWidget::self().moveWptByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -801,8 +797,7 @@ void CGisListWks::slotFocusTrk(bool on)
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().focusTrkByKey(on, key);
+        CGisWidget::self().focusTrkByKey(on, gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -813,8 +808,7 @@ void CGisListWks::slotEditTrk()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().editTrkByKey(key);
+        CGisWidget::self().editTrkByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -825,8 +819,7 @@ void CGisListWks::slotReverseTrk()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().reverseTrkByKey(key);
+        CGisWidget::self().reverseTrkByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -837,8 +830,7 @@ void CGisListWks::slotCombineTrk()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().combineTrkByKey(key);
+        CGisWidget::self().combineTrkByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -849,8 +841,7 @@ void CGisListWks::slotRangeTrk()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().rangeTrkByKey(key);
+        CGisWidget::self().rangeTrkByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }
@@ -861,8 +852,7 @@ void CGisListWks::slotEditArea()
     CGisItemOvlArea * gisItem = dynamic_cast<CGisItemOvlArea*>(currentItem());
     if(gisItem != 0)
     {
-        QString key = gisItem->getKey();
-        CGisWidget::self().editAreaByKey(key);
+        CGisWidget::self().editAreaByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
 }

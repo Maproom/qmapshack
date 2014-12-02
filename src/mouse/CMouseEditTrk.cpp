@@ -33,7 +33,7 @@ CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(trk, gis, parent)
 {
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
-    key    = trk.getKey();
+    key         = trk.getKey();
 
     // reset any focus the track might have.
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
@@ -43,7 +43,7 @@ CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
         trk.gainUserFocus(false);
     }
 
-    canvas->reportStatus(key, tr("<b>Edit Track Points</b><br/>Select a track point for more options.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Edit Track Points</b><br/>Select a track point for more options.<br/>"));
     /*
         trigger complete update of GIS components to make sure all changes to
         the originating object are reflected on the canvas
@@ -58,7 +58,7 @@ CMouseEditTrk::~CMouseEditTrk()
 
 void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
 {
-    canvas->reportStatus(key, "");
+    canvas->reportStatus(key.item, "");
     IMouseEditLine::mousePressEvent(e);
 }
 
@@ -69,20 +69,20 @@ IGisLine * CMouseEditTrk::getGisLine()
 
 void CMouseEditTrk::slotAbort()
 {
-    canvas->reportStatus(key,"");
+    canvas->reportStatus(key.item,"");
     IMouseEditLine::slotAbort();
 }
 
 void CMouseEditTrk::slotCopyToOrig()
 {
-    canvas->reportStatus(key,"");
+    canvas->reportStatus(key.item,"");
     IMouseEditLine::slotCopyToOrig();
 }
 
 
 void CMouseEditTrk::slotCopyToNew()
 {
-    canvas->reportStatus(key,"");
+    canvas->reportStatus(key.item,"");
 
     if(coords1.size() < 2)
     {

@@ -36,7 +36,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-QString CGisItemWpt::keyUserFocus;
+IGisItem::key_t CGisItemWpt::keyUserFocus;
 QString CGisItemWpt::lastName;
 QString CGisItemWpt::lastIcon;
 
@@ -346,7 +346,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
 
 void CGisItemWpt::gainUserFocus(bool yes)
 {
-    keyUserFocus = yes ? key : "";
+    keyUserFocus = yes ? key : key_t();
 }
 
 void CGisItemWpt::edit()

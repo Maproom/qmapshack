@@ -31,10 +31,10 @@
 CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
     : IMouse(gis, parent)
 {
-    cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"),0,0);
-    key     = wpt.getKey();
-    icon    = getWptIconByName(wpt.getIconName(), focus);
-    origPos = wpt.getPosition() * DEG_TO_RAD;
+    cursor      = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"),0,0);
+    key         = wpt.getKey();
+    icon        = getWptIconByName(wpt.getIconName(), focus);
+    origPos     = wpt.getPosition() * DEG_TO_RAD;
 }
 
 CMouseMoveWpt::~CMouseMoveWpt()

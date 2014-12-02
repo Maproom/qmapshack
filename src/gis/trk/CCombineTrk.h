@@ -20,6 +20,7 @@
 #define CCOMBINETRK_H
 
 #include <QDialog>
+#include "gis/IGisItem.h"
 #include "ui_ICombineTrk.h"
 
 class CGisItemTrk;
@@ -32,7 +33,7 @@ class CCombineTrk : public QDialog, private Ui::ICombineTrk
         CCombineTrk(CGisItemTrk& trk, IGisProject &project, QWidget * parent);
         virtual ~CCombineTrk();
 
-        const QStringList& getTrackKeys(){return keys;}
+        const QList<IGisItem::key_t>& getTrackKeys(){return keys;}
 
     public slots:
         void accept();
@@ -49,7 +50,7 @@ class CCombineTrk : public QDialog, private Ui::ICombineTrk
         CGisItemTrk& trk;
         IGisProject& project;
 
-        QStringList keys;
+        QList<IGisItem::key_t> keys;
 };
 
 #endif //CCOMBINETRK_H

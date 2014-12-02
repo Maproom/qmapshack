@@ -20,6 +20,8 @@
 #define CSCROPTOVLAREA_H
 
 #include "mouse/IScrOpt.h"
+#include "gis/IGisItem.h"
+
 #include "ui_IScrOptOvlArea.h"
 
 class CGisItemOvlArea;
@@ -40,7 +42,7 @@ class CScrOptOvlArea : public IScrOpt, private Ui::IScrOptOvlArea
         void slotEdit();
 
     private:
-        QString key;
+        IGisItem::key_t key;
         QPointF anchor;
 
 };

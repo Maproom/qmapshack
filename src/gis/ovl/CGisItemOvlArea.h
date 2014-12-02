@@ -133,7 +133,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         area_t area;
 
 
-        static QString keyUserFocus;
+        static key_t keyUserFocus;
 
         QPen penForeground;
         QPen penBackground;

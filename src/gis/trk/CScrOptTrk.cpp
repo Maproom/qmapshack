@@ -25,8 +25,9 @@
 
 CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     : IScrOpt(parent->getCanvas())
-    , key(trk->getKey())
 {
+    key         = trk->getKey();
+
     setupUi(this);    
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());

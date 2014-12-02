@@ -143,21 +143,22 @@ void CScrOptUnclutter::addItem(IGisItem * gisItem)
 {
     items << item_t();
     item_t& item    = items.last();
-    item.name       = gisItem->getName();
+    item.name       = gisItem->getNameEx();
     item.key        = gisItem->getKey();
     item.icon       = gisItem->getIcon();
     item.area       = item.icon.rect();
     item.active     = item.area.adjusted(-10,-10,10,10);
 }
 
-QString CScrOptUnclutter::getItemKey(int index)
+IGisItem::key_t CScrOptUnclutter::getItemKey(int index)
 {
     if(index < items.size())
     {
         return items[index].key;
     }
-    return QString::Null();
+    return IGisItem::key_t();
 }
+
 
 const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& point)
 {

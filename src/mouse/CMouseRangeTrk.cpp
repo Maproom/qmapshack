@@ -31,8 +31,8 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     , state(eStateIdle)
     , anchor(NOPOINTF)
 {
-    cursor  = QCursor(QPixmap("://cursors/cursorSelectRange.png"),0,0);
-    key = trk.getKey();
+    cursor      = QCursor(QPixmap("://cursors/cursorSelectRange.png"),0,0);
+    key         = trk.getKey();
 
     // reset user focus if the track has it
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
@@ -45,7 +45,7 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     // switch to full mode to show deleted (hidden) track points, too
     trk.setDrawMode(CGisItemTrk::eDrawRange);
 
-    canvas->reportStatus(key, tr("<b>Select Range</b><br/>Select first track point. And then a second one.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Select Range</b><br/>Select first track point. And then a second one.<br/>"));
     /*
         trigger complete update of GIS components to make sure all changes to
         the originating object are reflected on the canvas
@@ -55,7 +55,7 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
 
 CMouseRangeTrk::~CMouseRangeTrk()
 {
-    canvas->reportStatus(key, "");
+    canvas->reportStatus(key.item, "");
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk)
@@ -112,7 +112,7 @@ void CMouseRangeTrk::draw(QPainter& p,  bool needsRedraw, const QRect &rect)
 
 void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
 {
-    canvas->reportStatus(key, "");
+    canvas->reportStatus(key.item, "");
     point  = e->pos();
     if(e->button() == Qt::RightButton)
     {

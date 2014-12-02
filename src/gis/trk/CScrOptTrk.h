@@ -20,6 +20,7 @@
 #define CSCROPTTRK_H
 
 #include "mouse/IScrOpt.h"
+#include "gis/IGisItem.h"
 #include "ui_IScrOptTrk.h"
 
 class CGisItemTrk;
@@ -46,7 +47,7 @@ class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
 
 
     private:
-        QString key;
+        IGisItem::key_t key;
         QPointF anchor;
 };
 

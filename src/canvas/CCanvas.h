@@ -24,6 +24,8 @@
 #include <QPointer>
 #include <QMap>
 
+#include "gis/IGisItem.h"
+
 class CMapDraw;
 class CGrid;
 class CDemDraw;
@@ -192,7 +194,7 @@ class CCanvas : public QWidget
         /// timer to poll for track gaining/loosing focus
         QTimer * timerTrackOnFocus;
         /// the key of the currentl focused track
-        QString keyTrackOnFocus;
+        IGisItem::key_t keyTrackOnFocus;
         /// the track profile plot
         QPointer<IPlot>  plotTrackProfile;
 

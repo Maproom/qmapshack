@@ -36,6 +36,7 @@
 class CGisDraw;
 class IScrOpt;
 class IMouse;
+class IGisProject;
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -120,8 +121,16 @@ class IGisItem : public QTreeWidgetItem
             ,eMarkChanged   = 0x00000001
         };
 
+        struct key_t
+        {
+            bool operator==(const key_t& k) const {return ((item == k.item) && (project == k.project));}
+            bool operator!=(const key_t& k) const {return ((item != k.item) || (project != k.project));}
+            void clear(){item.clear(); project.clear();}
+            QString item;
+            QString project;
+        };
 
-        IGisItem(QTreeWidgetItem * parent, type_e typ, int idx);
+        IGisItem(IGisProject *parent, type_e typ, int idx);
         virtual ~IGisItem();
 
         /// this mutex has to be locked when ever the item list is accessed.
@@ -144,7 +153,8 @@ class IGisItem : public QTreeWidgetItem
            @brief Get key string to identify object
            @return
          */
-        const QString& getKey();
+        const key_t& getKey();
+
         /**
            @brief Get the icon attached to object
            @return
@@ -155,6 +165,12 @@ class IGisItem : public QTreeWidgetItem
            @return A reference to the internal string object
          */
         virtual const QString& getName() = 0;
+
+        /**
+           @brief Get name of this item extended by the project name
+           @return A string object.
+        */
+        virtual QString getNameEx();
 
         /**
            @brief Get a short string with the items properties to be displayed in tool tips or similar
@@ -269,6 +285,8 @@ class IGisItem : public QTreeWidgetItem
         static QString createText(bool isReadOnly, const QString& desc, const QList<link_t>& links);
         static QString toLink(bool isReadOnly, const QString& href, const QString& str);
 
+        static QString noKey;
+
     protected:
         struct color_t;
 
@@ -294,7 +312,7 @@ class IGisItem : public QTreeWidgetItem
         virtual void changed(const QString& what, const QString& icon);
 
         quint32 flags;
-        QString key;
+        key_t   key;
         QString hash;
         QPixmap icon;
         QRectF boundingRect;

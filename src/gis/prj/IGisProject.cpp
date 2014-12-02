@@ -189,7 +189,7 @@ QString IGisProject::getInfo()
     return str;
 }
 
-IGisItem * IGisProject::getItemByKey(const QString& key)
+IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
 {
     for(int i = 0; i < childCount(); i++)
     {
@@ -227,7 +227,7 @@ void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
 }
 
 
-void IGisProject::delItemByKey(const QString& key, QMessageBox::StandardButtons& last)
+void IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::StandardButtons& last)
 {
     QList<QTreeWidgetItem*> items;
     for(int i = childCount(); i > 0; i--)
@@ -256,7 +256,7 @@ void IGisProject::delItemByKey(const QString& key, QMessageBox::StandardButtons&
     qDeleteAll(items);
 }
 
-void IGisProject::editItemByKey(const QString& key)
+void IGisProject::editItemByKey(const IGisItem::key_t& key)
 {
     for(int i = childCount(); i > 0; i--)
     {
@@ -288,11 +288,11 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& b
             continue;
         }
 
-        if(seenKeys.contains(item->getKey()))
-        {
-            continue;
-        }
-        seenKeys << item->getKey();
+//        if(seenKeys.contains(item->getKey()))
+//        {
+//            continue;
+//        }
+//        seenKeys << item->getKey();
 
         item->drawItem(p, viewport, blockedAreas, gis);
     }
@@ -332,11 +332,11 @@ void IGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& 
             continue;
         }
 
-        if(seenKeys.contains(item->getKey()))
-        {
-            continue;
-        }
-        seenKeys << item->getKey();
+//        if(seenKeys.contains(item->getKey()))
+//        {
+//            continue;
+//        }
+//        seenKeys << item->getKey();
 
         item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }

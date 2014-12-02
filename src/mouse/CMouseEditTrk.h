@@ -20,6 +20,7 @@
 #define CMOUSEEDITTRK_H
 
 #include "mouse/IMouseEditLine.h"
+#include "gis/IGisItem.h"
 
 class CGisItemTrk;
 
@@ -43,7 +44,7 @@ class CMouseEditTrk : public IMouseEditLine
         IGisLine * getGisLine();
 
     private:
-        QString     key;
+        IGisItem::key_t key;
 };
 
 #endif //CMOUSEEDITTRK_H

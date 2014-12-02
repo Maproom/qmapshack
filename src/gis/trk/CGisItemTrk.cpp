@@ -98,7 +98,7 @@ const QString CGisItemTrk::bulletColors[TRK_N_COLORS] =
 
 const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
-QString CGisItemTrk::keyUserFocus;
+IGisItem::key_t CGisItemTrk::keyUserFocus;
 
 /// used to create a new track from a part of an existing track
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
@@ -771,7 +771,8 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
 
 void CGisItemTrk::gainUserFocus(bool yes)
 {
-    keyUserFocus = yes ? key : "";
+    keyUserFocus    = yes ? key : key_t();
+
 }
 
 void CGisItemTrk::edit()
@@ -863,7 +864,7 @@ void CGisItemTrk::combine()
     CCombineTrk dlg(*this, *project, 0);
     dlg.exec();
 
-    QStringList keys = dlg.getTrackKeys();
+    QList<IGisItem::key_t> keys = dlg.getTrackKeys();
     if(keys.isEmpty())
     {
         return;
@@ -879,7 +880,7 @@ void CGisItemTrk::combine()
 
     trk1->trk.name = name1;
     trk1->trk.segs.clear();
-    foreach(const QString &key, keys)
+    foreach(const IGisItem::key_t &key, keys)
     {
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));
         if(trk2 == 0)
@@ -1223,7 +1224,7 @@ void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &
 
 void CGisItemTrk::drawHighlight(QPainter& p)
 {
-    if(lineSimple.isEmpty() || key == keyUserFocus)
+    if(lineSimple.isEmpty() || (key == keyUserFocus))
     {
         return;
     }

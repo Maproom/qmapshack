@@ -20,6 +20,7 @@
 #define CSCROPTRTE_H
 
 #include "mouse/IScrOpt.h"
+#include "gis/IGisItem.h"
 
 #include <QWidget>
 #include "ui_IScrOptRte.h"
@@ -40,7 +41,7 @@ class CScrOptRte : public IScrOpt, private Ui::IScrOptRte
         void slotDelete();
 
     private:
-        QString key;
+        IGisItem::key_t key;
         QPointF anchor;
 };
 

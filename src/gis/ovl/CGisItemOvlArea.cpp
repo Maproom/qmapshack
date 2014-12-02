@@ -111,7 +111,7 @@ const Qt::BrushStyle CGisItemOvlArea::brushStyles[OVL_N_STYLES] =
 };
 
 
-QString CGisItemOvlArea::keyUserFocus;
+IGisItem::key_t CGisItemOvlArea::keyUserFocus;
 
 CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx)
     : IGisItem(project, eTypeOvl, idx)
@@ -352,7 +352,7 @@ void CGisItemOvlArea::drawHighlight(QPainter& p)
 
 void CGisItemOvlArea::gainUserFocus(bool yes)
 {
-    keyUserFocus = yes ? key : "";
+    keyUserFocus = yes ? key : key_t();
 }
 
 QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)

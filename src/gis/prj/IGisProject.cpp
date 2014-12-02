@@ -227,7 +227,7 @@ void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
 }
 
 
-void IGisProject::delItemByKey(const QString& key)
+void IGisProject::delItemByKey(const QString& key, QMessageBox::StandardButtons& last)
 {
     QList<QTreeWidgetItem*> items;
     for(int i = childCount(); i > 0; i--)
@@ -240,13 +240,15 @@ void IGisProject::delItemByKey(const QString& key)
 
         if(item->getKey() == key)
         {
-            QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(0));
-            QMessageBox::StandardButtons res = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
-            if(res != QMessageBox::Ok)
+            if(last != QMessageBox::YesToAll)
             {
-                continue;
+                QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(0));
+                last = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+                if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
+                {
+                    continue;
+                }
             }
-
             items << takeChild(i-1);
             setText(1,"*");
         }

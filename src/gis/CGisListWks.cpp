@@ -651,67 +651,105 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         return;
     }
 
-    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
-    if(project != 0)
+    if(selectedItems().count() > 1)
     {
-        QPoint p = mapToGlobal(point);
-        menuProject->exec(p);
-        return;
-    }
-
-    IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
-    if(gisItem != 0)
-    {
-        // try to cast item to waypoint and hide/show actions on result
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
-        if(wpt == 0)
+        IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+        if(project != 0)
         {
+            actionEditPrj->setVisible(false);
+
+            QPoint p = mapToGlobal(point);
+            menuProject->exec(p);
+            return;
+        }
+
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
+        if(gisItem != 0)
+        {
+            actionEditDetails->setVisible(false);
             actionProjWpt->setVisible(false);
             actionMoveWpt->setVisible(false);
-        }
-        else
-        {
-            actionProjWpt->setVisible(true);
-            actionMoveWpt->setVisible(true);
-            actionMoveWpt->setEnabled(!wpt->isReadOnly());
-            actionProjWpt->setEnabled(!wpt->isGeocache());
-        }
-
-        // try to cast item to track and hide/show actions on result
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gisItem);
-        if(trk == 0)
-        {
             actionFocusTrk->setVisible(false);
             actionEditTrk->setVisible(false);
             actionReverseTrk->setVisible(false);
             actionCombineTrk->setVisible(false);
             actionRangeTrk->setVisible(false);
+            actionEditArea->setVisible(false);
+
+            QPoint p = mapToGlobal(point);
+            menuItem->exec(p);
         }
-        else
+        return;
+    }
+
+    if(selectedItems().count() == 1)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+        if(project != 0)
         {
-            actionFocusTrk->setVisible(true);
-            actionEditTrk->setVisible(true);
-            actionReverseTrk->setVisible(true);
-            actionCombineTrk->setVisible(true);
-            actionRangeTrk->setVisible(true);
-            actionFocusTrk->setChecked(trk->hasUserFocus());
-            actionEditTrk->setEnabled(!trk->isReadOnly());
+            actionEditPrj->setVisible(true);
+
+            QPoint p = mapToGlobal(point);
+            menuProject->exec(p);
+            return;
         }
 
-        // try to cast item to track and hide/show actions on result
-        CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(gisItem);
-        if(area == 0)
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
+        if(gisItem != 0)
         {
-            actionEditArea->setVisible(false);
+            actionEditDetails->setVisible(true);
+
+            // try to cast item to waypoint and hide/show actions on result
+            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
+            if(wpt == 0)
+            {
+                actionProjWpt->setVisible(false);
+                actionMoveWpt->setVisible(false);
+            }
+            else
+            {
+                actionProjWpt->setVisible(true);
+                actionMoveWpt->setVisible(true);
+                actionMoveWpt->setEnabled(!wpt->isReadOnly());
+                actionProjWpt->setEnabled(!wpt->isGeocache());
+            }
+
+            // try to cast item to track and hide/show actions on result
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gisItem);
+            if(trk == 0)
+            {
+                actionFocusTrk->setVisible(false);
+                actionEditTrk->setVisible(false);
+                actionReverseTrk->setVisible(false);
+                actionCombineTrk->setVisible(false);
+                actionRangeTrk->setVisible(false);
+            }
+            else
+            {
+                actionFocusTrk->setVisible(true);
+                actionEditTrk->setVisible(true);
+                actionReverseTrk->setVisible(true);
+                actionCombineTrk->setVisible(true);
+                actionRangeTrk->setVisible(true);
+                actionFocusTrk->setChecked(trk->hasUserFocus());
+                actionEditTrk->setEnabled(!trk->isReadOnly());
+            }
+
+            // try to cast item to track and hide/show actions on result
+            CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(gisItem);
+            if(area == 0)
+            {
+                actionEditArea->setVisible(false);
+            }
+            else
+            {
+                actionEditArea->setVisible(true);
+            }
+            // display menu
+            QPoint p = mapToGlobal(point);
+            menuItem->exec(p);
+            return;
         }
-        else
-        {
-            actionEditArea->setVisible(true);
-        }
-        // display menu
-        QPoint p = mapToGlobal(point);
-        menuItem->exec(p);
-        return;
     }
 }
 
@@ -804,14 +842,22 @@ void CGisListWks::slotEditItem()
 void CGisListWks::slotDeleteItem()
 {
     IGisItem::mutexItems.lock();
-
+    QMessageBox::StandardButtons last = QMessageBox::NoButton;
     foreach(QTreeWidgetItem * item, selectedItems())
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != 0)
         {
             QString key = gisItem->getKey();
-            CGisWidget::self().delItemByKey(key);
+            IGisProject * project = dynamic_cast<IGisProject*>(gisItem->parent());
+            if(project)
+            {
+                project->delItemByKey(key, last);
+            }
+            if(last == QMessageBox::Cancel)
+            {
+                break;
+            }
         }
     }
     IGisItem::mutexItems.unlock();

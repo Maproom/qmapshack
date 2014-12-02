@@ -131,14 +131,14 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGi
 }
 
 CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx)
-    : IGisItem(project, eTypeTrk, idx)
+    : IGisItem(project, eTypeOvl, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentArea;
 
-//    key.clear();
-//    genKey();
+    key.clear();
+    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

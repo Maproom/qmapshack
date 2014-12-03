@@ -158,8 +158,6 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
 {
     *this = parentTrk;
 
-    key.clear();
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

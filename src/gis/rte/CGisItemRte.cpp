@@ -36,9 +36,8 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentRte;
+    key.project = project->getKey();
 
-    key.clear();
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

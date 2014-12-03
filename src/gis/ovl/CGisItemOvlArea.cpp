@@ -136,9 +136,8 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentArea;
+    key.project = project->getKey();
 
-    key.clear();
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

@@ -322,7 +322,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                     IGisItem * gisItem = dynamic_cast<IGisItem*>(parent->child(i));
                     if(gisItem)
                     {
-                        if(gisItem->getKey() == gisItem1->getKey())
+                        if(gisItem->getKey().item == gisItem1->getKey().item)
                         {
                             duplicate << gisItem1;
                         }
@@ -342,7 +342,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                     IGisItem * gisItem = dynamic_cast<IGisItem*>(parent->child(i));
                     if(gisItem)
                     {
-                        if(gisItem->getKey() == gisItem1->getKey())
+                        if(gisItem->getKey().item == gisItem1->getKey().item)
                         {
                             duplicate << gisItem1;
                         }
@@ -841,8 +841,10 @@ void CGisListWks::slotEditItem()
 void CGisListWks::slotDeleteItem()
 {
     IGisItem::mutexItems.lock();
-    QMessageBox::StandardButtons last = QMessageBox::NoButton;
-    foreach(QTreeWidgetItem * item, selectedItems())
+    QList<QTreeWidgetItem*> items       = selectedItems();
+    QMessageBox::StandardButtons last   = QMessageBox::NoButton;
+
+    foreach(QTreeWidgetItem * item, items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != 0)

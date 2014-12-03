@@ -157,9 +157,8 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     , mouseClickFocus(0)
 {
     *this = parentTrk;
+    key.project = project->getKey();
 
-    key.clear();
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

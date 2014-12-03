@@ -96,9 +96,8 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     , posScreen(NOPOINTF)
 {
     *this = parentWpt;
+    key.project = project->getKey();
 
-    key.clear();
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

@@ -705,24 +705,6 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
 
 QDataStream& CDBProject::operator<<(QDataStream& stream)
 {
-    stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
-    stream << VER_PROJECT;
-
-    stream << filename;
-    stream << metadata.name;
-    stream << metadata.desc;
-    stream << metadata.author;
-    stream << metadata.copyright;
-    stream << metadata.links;
-    stream << metadata.time;
-    stream << metadata.keywords;
-    stream << metadata.bounds;
-
-    return stream;
-}
-
-QDataStream& CDBProject::operator>>(QDataStream& stream)
-{
     quint8      version;
     QIODevice * dev = stream.device();
     qint64      pos = dev->pos();
@@ -746,6 +728,24 @@ QDataStream& CDBProject::operator>>(QDataStream& stream)
     stream >> metadata.time;
     stream >> metadata.keywords;
     stream >> metadata.bounds;
+
+    return stream;
+}
+
+QDataStream& CDBProject::operator>>(QDataStream& stream)
+{    
+    stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
+    stream << VER_PROJECT;
+
+    stream << filename;
+    stream << metadata.name;
+    stream << metadata.desc;
+    stream << metadata.author;
+    stream << metadata.copyright;
+    stream << metadata.links;
+    stream << metadata.time;
+    stream << metadata.keywords;
+    stream << metadata.bounds;
 
     return stream;
 }

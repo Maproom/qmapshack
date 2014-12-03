@@ -108,6 +108,7 @@ class IGisItem : public QTreeWidgetItem
             QMap<QString, QVariant> extensions;
         };
 
+        /// never ever change these numbers. it will break binary data files
         enum type_e
         {
               eTypeWpt = 1

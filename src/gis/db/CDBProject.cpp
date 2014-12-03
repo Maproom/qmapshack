@@ -61,7 +61,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     }
 
 
-    query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.type, t2.name");
+    query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
     query.bindValue(":id", id);
     QUERY_EXEC(return);
     while(query.next())

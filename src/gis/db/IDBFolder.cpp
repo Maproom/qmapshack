@@ -107,7 +107,7 @@ void IDBFolder::expanding()
     QSqlQuery query(db);
 
     // folders 1st
-    query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.name");
+    query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
     query.bindValue(":id", id);
     QUERY_EXEC(return);
     while(query.next())
@@ -118,7 +118,7 @@ void IDBFolder::expanding()
     }
 
     // tracks 2nd
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.name");
+    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeTrk);
     QUERY_EXEC(return);
@@ -129,7 +129,7 @@ void IDBFolder::expanding()
     }
 
     // routes 3rd
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.name");
+    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeRte);
     QUERY_EXEC(return);
@@ -140,7 +140,7 @@ void IDBFolder::expanding()
     }
 
     //waypoints 4th
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.name");
+    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeWpt);
     QUERY_EXEC(return);
@@ -151,7 +151,7 @@ void IDBFolder::expanding()
     }
 
     // overlays 5th
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.name");
+    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeOvl);
     QUERY_EXEC(return);

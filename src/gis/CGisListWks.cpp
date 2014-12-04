@@ -21,11 +21,11 @@
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/prj/IGisProject.h"
-#include "gis/db/macros.h"
 #include "gis/db/CDBProject.h"
+#include "gis/db/macros.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
@@ -84,7 +84,7 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
-    slotLoadWorkspace();
+    QTimer::singleShot(100, this, SLOT(slotLoadWorkspace()));
 }
 
 CGisListWks::~CGisListWks()
@@ -188,7 +188,6 @@ void CGisListWks::setExternalMenu(QMenu * project)
 
 void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 {
-
     QTreeWidgetItem * item1 = currentItem();
     QTreeWidgetItem * item2 = itemAt(e->pos());
 
@@ -364,7 +363,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
     }
 
 
-    // go on with item insertion        
+    // go on with item insertion
     /*
         What's happening here?
 
@@ -574,12 +573,12 @@ void CGisListWks::slotSaveWorkspace()
         stream.setVersion(QDataStream::Qt_5_2);
         stream.setByteOrder(QDataStream::LittleEndian);
 
-        *project >> stream;
+        project->IGisProject::operator>>(stream);
 
         query.prepare("INSERT INTO workspace (type, key, name, changed, data) VALUES (:type, :key, :name, :changed, :data)");
         query.bindValue(":type", project->getType());
         query.bindValue(":key", project->getKey());
-        query.bindValue(":name", project->text(0));
+        query.bindValue(":name", project->getName());
         query.bindValue(":changed", project->text(1) == "*");
         query.bindValue(":data", data);
         QUERY_EXEC(continue);
@@ -619,15 +618,29 @@ void CGisListWks::slotLoadWorkspace()
         {
         case IGisProject::eTypeQms:
         {
-            project = new CQmsProject(name,this);
+            project = new CQmsProject(name, this);
             *project << stream;
             break;
         }
 
         case IGisProject::eTypeGpx:
         {
-            project = new CGpxProject(name,this);
+            project = new CGpxProject(name, this);
             *project << stream;
+            break;
+        }
+
+        case IGisProject::eTypeDb:
+        {
+            CDBProject * dbProject;
+            project = dbProject = new CDBProject(this);
+            project->IGisProject::operator<<(stream);
+            dbProject->restoreDBLink();
+            if(!project->isValid())
+            {
+                delete project;
+                project = 0;
+            }
             break;
         }
         }
@@ -640,6 +653,8 @@ void CGisListWks::slotLoadWorkspace()
         project->setToolTip(0,project->getInfo());
         project->setText(1, changed ? "*" : "");
     }
+
+    emit sigChanged();
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)
@@ -879,7 +894,7 @@ void CGisListWks::slotMoveWpt()
     IGisItem::mutexItems.lock();
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
-    {        
+    {
         CGisWidget::self().moveWptByKey(gisItem->getKey());
     }
     IGisItem::mutexItems.unlock();
@@ -1041,6 +1056,7 @@ void CGisListWks::queueDBAction(const action_t& act)
         qDeleteAll(items);
         break;
     }
+
     default:;
     }
 }

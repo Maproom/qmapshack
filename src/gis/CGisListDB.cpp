@@ -120,6 +120,7 @@ void CGisListDB::initDB()
     if(!query.exec( "CREATE TABLE folders ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "type           INTEGER NOT NULL,"
+                    "key            TEXT,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"

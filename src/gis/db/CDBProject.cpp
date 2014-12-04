@@ -29,9 +29,14 @@
 
 #include <QtSql>
 #include <QtWidgets>
+CDBProject::CDBProject(CGisListWks * parent)
+    : IGisProject(eTypeDb, "", parent)
+{
+    setIcon(0,QIcon("://icons/32x32/DBProject.png"));
+}
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
-    : IGisProject(eTypeDb, "", parent)
+    : IGisProject(eTypeDb, dbName, parent)
     , id(id)    
 {
     setIcon(0,QIcon("://icons/32x32/DBProject.png"));
@@ -51,6 +56,11 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     {
         metadata.name = name;
         metadata.time = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
+
+        query.prepare("UPDATE folders SET key=:key WHERE id=:id");
+        query.bindValue(":key", getKey());
+        query.bindValue(":id", id);
+        QUERY_EXEC(return);
     }
     else
     {
@@ -98,6 +108,21 @@ CDBProject::~CDBProject()
     CGisWidget::self().queueActionForDb(action_t(eActW2DCloseProject, "", id, 0));
 }
 
+void CDBProject::restoreDBLink()
+{
+    db = QSqlDatabase::database(filename);
+
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM folders WHERE key=:key");
+    query.bindValue(":key", getKey());
+    QUERY_EXEC(return);
+    if(query.next())
+    {
+        id = query.value(0).toULongLong();
+        setupName("----");
+        valid = true;
+    }
+}
 
 void CDBProject::saveAs()
 {

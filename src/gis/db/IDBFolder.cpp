@@ -201,7 +201,7 @@ void IDBFolder::update(quint64 idFolder)
             IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
             if(folder)
             {
-                folder->close(idFolder);
+                folder->update(idFolder);
             }
         }
     }

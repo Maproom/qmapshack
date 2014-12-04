@@ -25,6 +25,7 @@
 class CDBProject : public IGisProject
 {
     public:
+        CDBProject(CGisListWks * parent);
         CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
         virtual ~CDBProject();
 
@@ -53,7 +54,7 @@ class CDBProject : public IGisProject
         */
         QDataStream& operator>>(QDataStream& stream);
 
-
+        void restoreDBLink();
 
     private:
         QSqlDatabase db;

@@ -241,7 +241,7 @@ void CGisListDB::slotAddFolder()
     query.bindValue(":child", idChild);
     QUERY_EXEC(return);
 
-    IDBFolder * childFolder = IDBFolder::createFolderByType(type, idChild, parentFolder);
+    IDBFolder::createFolderByType(type, idChild, parentFolder);
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)

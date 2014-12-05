@@ -1,3 +1,10 @@
+V 0.8.2
+* Calculate area covered by area overlays
+* Change coordinate format for long/lat grid from dd mm.mm to dd.dddddd
+* Add edit widget for project details
+* Add drag-n-drop for multiple GIS items
+* Enhance delete of multiple items
+
 V 0.8.1
 * Handle "no data" values in DEM files
 * Garmin maps: read copyright information 

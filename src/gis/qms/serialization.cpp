@@ -36,7 +36,7 @@
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
 #define VER_IMAGE       quint8(1)
-#define VER_PROJECT     quint8(1)
+#define VER_PROJECT     quint8(2)
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
@@ -596,6 +596,10 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     stream >> metadata.time;
     stream >> metadata.keywords;
     stream >> metadata.bounds;
+    if(version > 1)
+    {
+        stream >> key;
+    }
 
     while(!stream.atEnd())
     {
@@ -649,7 +653,8 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     stream << metadata.links;
     stream << metadata.time;
     stream << metadata.keywords;
-    stream << metadata.bounds;
+    stream << metadata.bounds;    
+    stream << key;
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -728,6 +733,10 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     stream >> metadata.time;
     stream >> metadata.keywords;
     stream >> metadata.bounds;
+    if(version > 1)
+    {
+        stream >> key;
+    }
 
     return stream;
 }
@@ -746,6 +755,7 @@ QDataStream& CDBProject::operator>>(QDataStream& stream)
     stream << metadata.time;
     stream << metadata.keywords;
     stream << metadata.bounds;
+    stream << key;
 
     return stream;
 }

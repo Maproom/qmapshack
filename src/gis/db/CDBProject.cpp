@@ -123,7 +123,7 @@ void CDBProject::restoreDBLink()
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM folders WHERE key=:key");
-    query.bindValue(":key", getKey());
+    query.bindValue(":key", getKey());   
     QUERY_EXEC(return);
     if(query.next())
     {

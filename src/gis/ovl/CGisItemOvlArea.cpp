@@ -283,7 +283,7 @@ void CGisItemOvlArea::deriveSecondaryData()
         j = i;
     }
 
-    area.area = area.area/2;
+    area.area = qAbs(area.area/2);
 }
 
 void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)

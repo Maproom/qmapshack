@@ -20,6 +20,7 @@
 #define CGISWIDGET_H
 
 #include <QWidget>
+#include <QSqlDatabase>
 #include "ui_IGisWidget.h"
 
 #include "gis/IGisItem.h"
@@ -32,19 +33,25 @@ enum action_e
     // all database to workspace actions
      eActD2WLoadProject
     ,eActD2WCloseProject
+    ,eActD2WInfoProject
 
     // all workspace to database actions
-    ,eActW2DCloseProject
-    ,eActW2DUpdateProject
+    ,eActW2DInfoProject
 };
 
 struct action_t
 {
-    action_t(action_e action, const QString& connectionName, quint64 idFolder, quint64 idItem) : action(action), connectionName(connectionName), idFolder(idFolder), idItem(idItem){}
+    action_t(action_e action, const QSqlDatabase& db, quint64 id) : action(action), connectionName(db.connectionName()), id(id){}
     action_e action;
     QString  connectionName;
-    quint64  idFolder;
-    quint64  idItem;
+    quint64  id;
+};
+
+struct action_info_t : action_t
+{
+    action_info_t(action_e action, const QSqlDatabase& db, quint64 id) : action_t(action, db, id), isLoaded(false){}
+    bool isLoaded;
+    QSet<QString> keysChildren;
 };
 
 class CGisWidget : public QWidget, private Ui::IGisWidget
@@ -157,7 +164,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
          */
         IGisProject * selectProject();
 
-        void queueActionForWks(const action_t& act);
+        void queueActionForWks(action_t &act);
         void queueActionForDb(const action_t& act);
 
 

@@ -158,6 +158,7 @@ class IGisItem : public QTreeWidgetItem
          */
         const key_t& getKey();
 
+
         /**
            @brief Get the icon attached to object
            @return

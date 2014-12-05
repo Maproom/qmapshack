@@ -45,11 +45,14 @@ class CGisListDB : public QTreeWidget
         void slotItemChanged(QTreeWidgetItem * item, int column);
 
     private:
+        friend class CGisListDBEditLock;
         void configDB();
         void initDB();
         void migrateDB(int version);
 
         void addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent);
+
+        int isInternalEdit;
 
         QSqlDatabase db;
 

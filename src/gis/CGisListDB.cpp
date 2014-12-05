@@ -28,8 +28,19 @@
 #include <QtSql>
 #include <QtWidgets>
 
+class CGisListDBEditLock
+{
+    public:
+        CGisListDBEditLock(CGisListDB * widget) : widget(widget){widget->isInternalEdit += 1;}
+        ~CGisListDBEditLock(){widget->isInternalEdit -= 1;}
+    private:
+        CGisListDB * widget;
+};
+
+
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
+    , isInternalEdit(0)
 {   
     SETTINGS;
     QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/database.db")).toString();
@@ -195,16 +206,14 @@ void CGisListDB::migrateDB(int version)
 
 void CGisListDB::queueDBAction(const action_t& act)
 {
+    CGisListDBEditLock lock(this);
+
     switch(act.action)
     {
-    case eActW2DCloseProject:
+    case eActW2DInfoProject:
     {
-        itemDatabase->close(act.idFolder);
-        break;
-    }
-    case eActW2DUpdateProject:
-    {
-        itemDatabase->update(act.idFolder);
+        const action_info_t& info = static_cast<const action_info_t&>(act);
+        itemDatabase->update(info);
         break;
     }
     default:;
@@ -224,6 +233,8 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 
 void CGisListDB::slotAddFolder()
 {
+    CGisListDBEditLock lock(this);
+
     IDBFolder * parentFolder = dynamic_cast<IDBFolder*>(currentItem());
     if(parentFolder == 0)
     {
@@ -264,7 +275,9 @@ void CGisListDB::slotAddFolder()
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
-{
+{   
+    CGisListDBEditLock lock(this);
+
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
     if(folder == 0)
     {
@@ -276,20 +289,15 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
 
 void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
 {
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-    if(folder != 0)
+    if(isInternalEdit)
     {
-        if(column == IDBFolder::eColumnCheckbox)
-        {
-            if(folder->checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
-            {
-                CGisWidget::self().queueActionForWks(action_t(eActD2WLoadProject, db.connectionName(), folder->getId(), 0));
-            }
-            else
-            {
-                CGisWidget::self().queueActionForWks(action_t(eActD2WCloseProject, "", folder->getId(), 0));
-            }
-        }
+        return;
+    }
+
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+    if(folder != 0 && (column == IDBFolder::eColumnCheckbox))
+    {
+        folder->toggle(folder->getId());
         return;
     }
 }

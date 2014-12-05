@@ -38,7 +38,7 @@ class CGisListWks : public QTreeWidget
         void setExternalMenu(QMenu * project);
         bool hasProject(IGisProject *project);
 
-        void queueDBAction(const action_t& act);
+        void queueDBAction(action_t &act);
 
     signals:
         void sigChanged();

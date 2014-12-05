@@ -22,6 +22,7 @@
 #include <QTreeWidgetItem>
 
 class QSqlDatabase;
+struct action_info_t;
 
 class IDBFolder : public QTreeWidgetItem
 {
@@ -41,21 +42,23 @@ class IDBFolder : public QTreeWidgetItem
             ,eColumnName = 1
         };
 
-        IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
-        IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
+        IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
+        IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
         virtual ~IDBFolder();
 
         quint64 getId(){return id;}
 
         virtual void expanding();
-        virtual void close(quint64 idFolder);
-        virtual void update(quint64 idFolder);
+        virtual void update(const action_info_t &info);
+        virtual void toggle(quint64 idFolder);
 
         static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
-    protected:
+    protected:        
         void setupFromDB();
+        virtual void expanding(const action_info_t &info);
 
+        bool isLoadable;
 
     private:
         QSqlDatabase& db;

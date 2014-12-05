@@ -19,10 +19,9 @@
 #include "gis/db/CDBFolderOther.h"
 
 CDBFolderOther::CDBFolderOther(QSqlDatabase& db, quint64 key, QTreeWidgetItem * parent)
-    : IDBFolder(db, eTypeOther, key, parent)
+    : IDBFolder(true, db, eTypeOther, key, parent)
 {
     setIcon(eColumnCheckbox,QIcon("://icons/32x32/PathOrange.png"));
-    setCheckState(eColumnCheckbox, Qt::Unchecked);
 }
 
 CDBFolderOther::~CDBFolderOther()

@@ -19,7 +19,7 @@
 #include "gis/db/CDBFolderGroup.h"
 
 CDBFolderGroup::CDBFolderGroup(QSqlDatabase& db, quint64 key, QTreeWidgetItem * parent)
-    : IDBFolder(db, eTypeGroup, key, parent)
+    : IDBFolder(false, db, eTypeGroup, key, parent)
 {
     setIcon(eColumnCheckbox,QIcon("://icons/32x32/PathBlue.png"));
 }

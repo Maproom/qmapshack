@@ -22,6 +22,8 @@
 #include "gis/prj/IGisProject.h"
 #include <QSqlDatabase>
 
+struct action_t;
+
 class CDBProject : public IGisProject
 {
     public:
@@ -33,6 +35,7 @@ class CDBProject : public IGisProject
         void saveAs();
 
         quint64 getId(){return id;}
+        const QSqlDatabase& getDb(){return db;}
 
         /**
            @brief Serialize object out of a QDataStream

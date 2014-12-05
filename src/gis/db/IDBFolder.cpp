@@ -23,19 +23,22 @@
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBItem.h"
 #include "gis/IGisItem.h"
+#include "gis/CGisWidget.h"
 
 #include <QtSql>
 
-IDBFolder::IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem *parent)
+IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem *parent)
     : QTreeWidgetItem(parent, type)
+    , isLoadable(isLoadable)
     , db(db)
     , id(id)
 {
     setupFromDB();
 }
 
-IDBFolder::IDBFolder(QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent)
+IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent)
     : QTreeWidgetItem(parent, type)
+    , isLoadable(isLoadable)
     , db(db)
     , id(id)
 {
@@ -62,20 +65,129 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
     }
 }
 
+
+void IDBFolder::expanding()
+{
+    action_info_t info(eActD2WInfoProject, db, id);
+    CGisWidget::self().queueActionForWks(info);
+
+    qDeleteAll(takeChildren());
+    expanding(info);
+}
+
+
+void IDBFolder::update(const action_info_t& info)
+{
+    if(id == info.id)
+    {
+        QSqlQuery query(db);
+
+        // save state to restore later
+        bool expanded = isExpanded();
+        // take all children as anything could have happened
+        qDeleteAll(takeChildren());
+
+        // update text and tooltip
+        query.prepare("SELECT name, comment FROM folders WHERE id=:id");
+        query.bindValue(":id", id);
+        QUERY_EXEC(return);
+        query.next();
+
+        setText(eColumnName, query.value(0).toString());
+        setToolTip(eColumnName, query.value(1).toString());
+
+        // count folders linked to this folder
+        query.prepare("SELECT COUNT() FROM folder2folder WHERE parent=:id");
+        query.bindValue(":id", id);
+        QUERY_EXEC(return);
+        query.next();
+
+        qint32 nFolders = query.value(0).toInt();
+
+        // count items linked to this folder
+        query.prepare("SELECT COUNT() FROM folder2item WHERE parent=:id");
+        query.bindValue(":id", id);
+        QUERY_EXEC(return);
+        query.next();
+
+        qint32 nItems = query.value(0).toInt();
+
+        if(nFolders || nItems)
+        {
+            setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+        }
+        else
+        {
+            setChildIndicatorPolicy(QTreeWidgetItem::DontShowIndicator);
+        }
+
+
+        if(expanded)
+        {
+            expanding(info);
+        }
+
+        setCheckState(eColumnCheckbox, info.isLoaded ? Qt::Checked : Qt::Unchecked);
+    }
+    else
+    {
+        for(int i = 0; i < childCount(); i++)
+        {
+            IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+            if(folder)
+            {
+                folder->update(info);
+            }
+        }
+    }
+}
+
+void IDBFolder::toggle(quint64 idFolder)
+{
+    if(id == idFolder)
+    {
+        if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+        {
+            action_t action(eActD2WLoadProject, db, id);
+            CGisWidget::self().queueActionForWks(action);
+        }
+        else
+        {
+            action_t action(eActD2WCloseProject, db, id);
+            CGisWidget::self().queueActionForWks(action);
+        }
+    }
+    else
+    {
+        for(int i = 0; i < childCount(); i++)
+        {
+            IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+            if(folder)
+            {
+                folder->toggle(idFolder);
+            }
+        }
+    }
+}
+
+
 void IDBFolder::setupFromDB()
 {
     if(id == 0)
     {
         return;
     }
+
+
     QSqlQuery query(db);
 
-    query.prepare("SELECT name FROM folders WHERE id=:id");
+    query.prepare("SELECT name, comment FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return);
     query.next();
 
     setText(eColumnName, query.value(0).toString());
+    setToolTip(eColumnName, query.value(1).toString());
 
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
     query.bindValue(":id", id);
@@ -98,12 +210,16 @@ void IDBFolder::setupFromDB()
         }
     }
 
+    if(isLoadable)
+    {
+        action_info_t info(eActD2WInfoProject, db, id);
+        CGisWidget::self().queueActionForWks(info);
+        setCheckState(eColumnCheckbox, info.isLoaded ? Qt::Checked : Qt::Unchecked);
+    }
 }
 
-void IDBFolder::expanding()
+void IDBFolder::expanding(const action_info_t& info)
 {
-    qDeleteAll(takeChildren());
-
     QSqlQuery query(db);
 
     // folders 1st
@@ -125,7 +241,8 @@ void IDBFolder::expanding()
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        new CDBItem(db, idChild, this);
+        CDBItem * item = new CDBItem(db, idChild, this);
+        item->setCheckState(eColumnCheckbox, info.keysChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 
     // routes 3rd
@@ -136,7 +253,8 @@ void IDBFolder::expanding()
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        new CDBItem(db, idChild, this);
+        CDBItem * item = new CDBItem(db, idChild, this);
+        item->setCheckState(eColumnCheckbox, info.keysChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 
     //waypoints 4th
@@ -147,7 +265,8 @@ void IDBFolder::expanding()
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        new CDBItem(db, idChild, this);
+        CDBItem * item = new CDBItem(db, idChild, this);
+        item->setCheckState(eColumnCheckbox, info.keysChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 
     // overlays 5th
@@ -158,51 +277,7 @@ void IDBFolder::expanding()
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        new CDBItem(db, idChild, this);
-    }
-
-
-}
-
-void IDBFolder::close(quint64 idFolder)
-{
-    if(id == idFolder)
-    {
-        treeWidget()->blockSignals(true);
-        setCheckState(eColumnCheckbox, Qt::Unchecked);
-        treeWidget()->blockSignals(false);
-    }
-    else
-    {
-        for(int i = 0; i < childCount(); i++)
-        {
-            IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
-            if(folder)
-            {
-                folder->close(idFolder);
-            }
-        }
-    }
-
-}
-
-void IDBFolder::update(quint64 idFolder)
-{
-    if(id == idFolder && isExpanded())
-    {
-        treeWidget()->blockSignals(true);
-        expanding();
-        treeWidget()->blockSignals(false);
-    }
-    else
-    {
-        for(int i = 0; i < childCount(); i++)
-        {
-            IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
-            if(folder)
-            {
-                folder->update(idFolder);
-            }
-        }
+        CDBItem * item = new CDBItem(db, idChild, this);
+        item->setCheckState(eColumnCheckbox, info.keysChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 }

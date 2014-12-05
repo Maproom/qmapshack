@@ -57,7 +57,7 @@ CGisWidget::~CGisWidget()
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
 }
 
-void CGisWidget::queueActionForWks(const action_t& act)
+void CGisWidget::queueActionForWks(action_t& act)
 {
     treeWks->queueDBAction(act);
     emit sigChanged();

@@ -19,10 +19,10 @@
 #include "gis/db/CDBFolderProject.h"
 
 CDBFolderProject::CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetItem * parent)
-    : IDBFolder(db, eTypeProject, key, parent)
+    : IDBFolder(true, db, eTypeProject, key, parent)
 {
     setIcon(eColumnCheckbox,QIcon("://icons/32x32/PathGreen.png"));
-    setCheckState(eColumnCheckbox, Qt::Unchecked);
+    isLoadable = true;
 }
 
 CDBFolderProject::~CDBFolderProject()

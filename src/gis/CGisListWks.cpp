@@ -1013,7 +1013,7 @@ void CGisListWks::slotSearchGoogle(bool on)
 }
 
 
-void CGisListWks::queueDBAction(const action_t& act)
+void CGisListWks::queueDBAction(action_t& act)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -1021,7 +1021,7 @@ void CGisListWks::queueDBAction(const action_t& act)
     {
     case eActD2WLoadProject:
     {
-        IGisProject * item = new CDBProject(act.connectionName, act.idFolder, this);
+        IGisProject * item = new CDBProject(act.connectionName, act.id, this);
         if(item && !item->isValid())
         {
             delete item;
@@ -1047,13 +1047,40 @@ void CGisListWks::queueDBAction(const action_t& act)
                 continue;
             }
 
-            if(project->getId() == act.idFolder)
+            if((project->getId() == act.id) && (project->getDb().connectionName() == act.connectionName))
             {
                 items << project;
             }
         }
 
         qDeleteAll(items);
+        break;
+    }
+    case eActD2WInfoProject:
+    {
+        action_info_t& info = static_cast<action_info_t&>(act);
+
+        for(int i = 0; i < topLevelItemCount(); i++)
+        {
+            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+            if(project == 0)
+            {
+                continue;
+            }
+
+            if((project->getId() == act.id) && (project->getDb().connectionName() == act.connectionName))
+            {
+                info.isLoaded = true;
+                for(int n = 0; n < project->childCount(); n++)
+                {
+                    IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+                    if(item)
+                    {
+                        info.keysChildren << item->getKey().item;
+                    }
+                }
+            }
+        }
         break;
     }
 

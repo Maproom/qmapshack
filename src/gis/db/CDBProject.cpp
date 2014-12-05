@@ -70,6 +70,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         *this << in;
     }
 
+    action_info_t info(eActW2DInfoProject, db, id);
 
     query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
     query.bindValue(":id", id);
@@ -79,33 +80,41 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         quint64 idChild = query.value(0).toULongLong();
         qint32  type    = query.value(1).toInt();
 
+        IGisItem * item;
         switch(type)
         {
             case IGisItem::eTypeWpt:
-                new CGisItemWpt(idChild, db, this);
+                item = new CGisItemWpt(idChild, db, this);
                 break;
             case IGisItem::eTypeTrk:
-                new CGisItemTrk(idChild, db, this);
+                item = new CGisItemTrk(idChild, db, this);
                 break;
             case IGisItem::eTypeRte:
-                new CGisItemRte(idChild, db, this);
+                item = new CGisItemRte(idChild, db, this);
                 break;
             case IGisItem::eTypeOvl:
-                new CGisItemOvlArea(idChild, db, this);
+                item = new CGisItemOvlArea(idChild, db, this);
                 break;
-            default:;
+            default:
+                item = 0;
+        }
+        if(item)
+        {
+            info.keysChildren << item->getKey().item;
         }
     }
 
+    info.isLoaded = true;
+    CGisWidget::self().queueActionForDb(info);
+
     setText(0, name);
     setToolTip(0, getInfo());
-
     valid = true;
 }
 
 CDBProject::~CDBProject()
 {
-    CGisWidget::self().queueActionForDb(action_t(eActW2DCloseProject, "", id, 0));
+    CGisWidget::self().queueActionForDb(action_info_t(eActW2DInfoProject, db, id));
 }
 
 void CDBProject::restoreDBLink()
@@ -157,6 +166,7 @@ void CDBProject::saveAs()
 void CDBProject::save()
 {
     QSqlQuery query(db);
+    action_info_t info(eActW2DInfoProject, db, id);
 
     int N = childCount();
     QProgressDialog progress(QObject::tr("Save ..."), QObject::tr("Abort save"), 0, 100);
@@ -249,6 +259,8 @@ void CDBProject::save()
             query.bindValue(":child", idItem);
             QUERY_EXEC(return);
         }
+
+        info.keysChildren << item->getKey().item;
     }
 
     // serialize metadata of project
@@ -266,7 +278,9 @@ void CDBProject::save()
     query.bindValue(":id", getId());
     QUERY_EXEC(return);
 
-    CGisWidget::self().queueActionForDb(action_t(eActW2DUpdateProject, "", id, 0));
+    info.isLoaded = true;
+    CGisWidget::self().queueActionForDb(info);
 
     markAsSaved();
 }
+

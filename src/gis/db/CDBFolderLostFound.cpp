@@ -19,7 +19,7 @@
 #include "gis/db/CDBFolderLostFound.h"
 
 CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidget *parent)
-    : IDBFolder(db, eTypeLostFound, 0, parent)
+    : IDBFolder(false, db, eTypeLostFound, 0, parent)
 {
     setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
     setIcon(eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));

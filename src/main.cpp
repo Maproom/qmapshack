@@ -30,11 +30,11 @@ CAppOpts *qlOpts;
 
 static void usage(std::ostream &s)
 {
-    s << "usage: qlandkartegt [-d | --debug]\n"
-         "                    [-h | --help]\n"
-         "                    [-n | --no-splash]\n"
-         "                    [-c | --config=file]\n"
-         "                    [files...]\n"
+    s << "usage: qmapshack [-d | --debug]\n"
+         "                 [-h | --help]\n"
+         "                 [-n | --no-splash]\n"
+         "                 [-c | --config=file]\n"
+         "                 [files...]\n"
          "\n";
 }
 

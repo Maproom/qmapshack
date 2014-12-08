@@ -142,12 +142,13 @@ void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
 void CScrOptUnclutter::addItem(IGisItem * gisItem)
 {
     items << item_t();
-    item_t& item    = items.last();
-    item.name       = gisItem->getNameEx();
-    item.key        = gisItem->getKey();
-    item.icon       = gisItem->getIcon();
-    item.area       = item.icon.rect();
-    item.active     = item.area.adjusted(-10,-10,10,10);
+    item_t& item        = items.last();
+    item.hasUserFocus   = gisItem->hasUserFocus();
+    item.name           = gisItem->getNameEx();
+    item.key            = gisItem->getKey();
+    item.icon           = gisItem->getIcon();
+    item.area           = item.icon.rect();
+    item.active         = item.area.adjusted(-10,-10,10,10);
 }
 
 IGisItem::key_t CScrOptUnclutter::getItemKey(int index)
@@ -200,14 +201,12 @@ void CScrOptUnclutter::draw(QPainter& p)
 
     foreach(const item_t& item, items)
     {
-
-
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,255));
         p.drawEllipse(item.area.center(), 20,20);        
         p.drawRoundedRect(item.text, 3, 3);
 
-        p.setPen(QPen(Qt::lightGray,2));
+        p.setPen(QPen(item.hasUserFocus ? Qt::red : Qt::lightGray,2));
         p.setBrush(Qt::NoBrush);
         p.drawRoundedRect(item.text, 3, 3);
         p.drawEllipse(item.area.center(), 18,18);

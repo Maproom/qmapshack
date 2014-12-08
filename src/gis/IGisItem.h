@@ -247,6 +247,14 @@ class IGisItem : public QTreeWidgetItem
         virtual void gainUserFocus(bool yes) = 0;
 
         /**
+           @brief Check for user focus
+
+           @return True if the item has user focus. The default implementation is always false.
+         */
+        virtual bool hasUserFocus(){return false;}
+
+
+        /**
            @brief Serialize object out of a QDataStream
 
            See CGisSerialization.cpp for implementation

@@ -131,6 +131,10 @@ void CDBProject::restoreDBLink()
         setupName("----");
         valid = true;
     }
+
+    action_info_t info(eActW2DInfoProject, db, id);
+    info.isLoaded = true;
+    CGisWidget::self().queueActionForDb(info);
 }
 
 void CDBProject::saveAs()

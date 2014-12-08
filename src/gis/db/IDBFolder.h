@@ -51,6 +51,7 @@ class IDBFolder : public QTreeWidgetItem
         virtual void expanding();
         virtual void update(const action_info_t &info);
         virtual void toggle(quint64 idFolder);
+        virtual void remove(quint64 idFolder);
 
         static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
@@ -60,8 +61,9 @@ class IDBFolder : public QTreeWidgetItem
 
         bool isLoadable;
 
-    private:
         QSqlDatabase& db;
+
+    private:        
         quint64 id;
 
 };

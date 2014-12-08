@@ -41,6 +41,7 @@ class CGisListDB : public QTreeWidget
     private slots:
         void slotContextMenu(const QPoint& point);
         void slotAddFolder();
+        void slotDelFolder();
         void slotItemExpanded(QTreeWidgetItem * item);
         void slotItemChanged(QTreeWidgetItem * item, int column);
 
@@ -56,14 +57,15 @@ class CGisListDB : public QTreeWidget
 
         QSqlDatabase db;
 
-        QMenu * menuDatabase;
+
+        QMenu * menuFolder;
         QAction * actionAddFolder;
+        QAction * actionDelFolder;
 
-        QMenu * menuProject;
-        QMenu * menuItem;
+        QMenu * menuDatabase;
 
-        CDBFolderLostFound * itemLostFound;
-        CDBFolderDatabase * itemDatabase;
+        CDBFolderLostFound * folderLostFound;
+        CDBFolderDatabase *  folderDatabase;
 };
 
 #endif //CGISLISTDB_H

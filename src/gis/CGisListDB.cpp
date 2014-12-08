@@ -50,20 +50,22 @@ CGisListDB::CGisListDB(QWidget *parent)
     configDB();
 
 
-    itemLostFound       = new CDBFolderLostFound(db, this);
-    itemDatabase        = new CDBFolderDatabase(db, this);
+    folderLostFound     = new CDBFolderLostFound(db, this);
+    folderDatabase      = new CDBFolderDatabase(db, this);
+
+    menuFolder          = new QMenu(this);
+    actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
+    actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, SLOT(slotDelFolder()));
 
     menuDatabase        = new QMenu(this);
-    actionAddFolder     = menuDatabase->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
-
-    menuProject         = new QMenu(this);
-    menuItem            = new QMenu(this);
+    menuDatabase->addAction(actionAddFolder);
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
     connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
 
-    itemDatabase->setExpanded(true);
+    folderDatabase->setExpanded(true);
+    folderLostFound->update();
 }
 
 CGisListDB::~CGisListDB()
@@ -213,7 +215,8 @@ void CGisListDB::queueDBAction(const action_t& act)
     case eActW2DInfoProject:
     {
         const action_info_t& info = static_cast<const action_info_t&>(act);
-        itemDatabase->update(info);
+        folderDatabase->update(info);
+        folderLostFound->update();
         break;
     }
     default:;
@@ -224,10 +227,17 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 {
     QPoint p = mapToGlobal(point);
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
-    if((folder != 0))
+    if((folder == folderDatabase))
     {
         menuDatabase->exec(p);
-        return;
+    }
+    else if((folder == folderLostFound))
+    {
+
+    }
+    else if(folder != 0)
+    {
+        menuFolder->exec(p);
     }
 }
 
@@ -272,6 +282,29 @@ void CGisListDB::slotAddFolder()
     QUERY_EXEC(return);
 
     IDBFolder::createFolderByType(db, type, idChild, parentFolder);
+}
+
+void CGisListDB::slotDelFolder()
+{
+    CGisListDBEditLock lock(this);
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == 0)
+    {
+        return;
+    }
+
+
+    int res = QMessageBox::question(this, tr("Delete database folder..."), tr("Are you sure you want to delete \"%1\" from the database?").arg(folder->text(1)), QMessageBox::Ok|QMessageBox::No);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+
+    folder->remove(folder->getId());
+    delete folder;
+
+    folderLostFound->update();
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)

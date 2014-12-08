@@ -31,6 +31,7 @@ class CScrOptUnclutter : public IScrOpt
 
         struct item_t
         {
+            bool    hasUserFocus;
             QString name;
             IGisItem::key_t key;
             QPixmap icon;

@@ -60,6 +60,9 @@ CGisListDB::CGisListDB(QWidget *parent)
     menuDatabase        = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
 
+    menuLostFound       = new QMenu(this);
+    actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete"), this, SLOT(slotDelLostFound()));
+
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
     connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
@@ -233,7 +236,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     }
     else if((folder == folderLostFound))
     {
-
+        menuLostFound->exec(p);
     }
     else if(folder != 0)
     {
@@ -293,18 +296,34 @@ void CGisListDB::slotDelFolder()
         return;
     }
 
-
     int res = QMessageBox::question(this, tr("Delete database folder..."), tr("Are you sure you want to delete \"%1\" from the database?").arg(folder->text(1)), QMessageBox::Ok|QMessageBox::No);
     if(res != QMessageBox::Ok)
     {
         return;
     }
 
-
     folder->remove(folder->getId());
     delete folder;
 
     folderLostFound->update();
+}
+
+void CGisListDB::slotDelLostFound()
+{
+    CGisListDBEditLock lock(this);
+    CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(currentItem());
+    if(folder == 0)
+    {
+        return;
+    }
+
+    int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all items from Lost&Found? This will remove them permanently."), QMessageBox::Ok|QMessageBox::No);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+    folder->clear();
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)

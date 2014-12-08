@@ -28,7 +28,8 @@ class CDBFolderLostFound : public IDBFolder
         virtual ~CDBFolderLostFound();
 
         void update();
-        void expanding();
+        void expanding(){}
+        void clear();
 };
 
 #endif //CDBFOLDERLOSTFOUND_H

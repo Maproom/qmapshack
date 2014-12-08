@@ -62,7 +62,12 @@ void CDBFolderLostFound::update()
     }
 }
 
-void CDBFolderLostFound::expanding()
+void CDBFolderLostFound::clear()
 {
+    QSqlQuery query(db);
 
+    query.prepare("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)");
+    QUERY_EXEC(return);
+
+    update();
 }

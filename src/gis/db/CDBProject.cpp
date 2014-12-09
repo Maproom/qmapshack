@@ -70,43 +70,6 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         *this << in;
     }
 
-    action_info_t info(eActW2DInfoProject, db, id);
-
-    query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return);
-    while(query.next())
-    {
-        quint64 idChild = query.value(0).toULongLong();
-        qint32  type    = query.value(1).toInt();
-
-        IGisItem * item;
-        switch(type)
-        {
-            case IGisItem::eTypeWpt:
-                item = new CGisItemWpt(idChild, db, this);
-                break;
-            case IGisItem::eTypeTrk:
-                item = new CGisItemTrk(idChild, db, this);
-                break;
-            case IGisItem::eTypeRte:
-                item = new CGisItemRte(idChild, db, this);
-                break;
-            case IGisItem::eTypeOvl:
-                item = new CGisItemOvlArea(idChild, db, this);
-                break;
-            default:
-                item = 0;
-        }
-        if(item)
-        {
-            info.keysChildren << item->getKey().item;
-        }
-    }
-
-    info.isLoaded = true;
-    CGisWidget::self().queueActionForDb(info);
-
     setText(0, name);
     setToolTip(0, getInfo());
     valid = true;
@@ -288,3 +251,131 @@ void CDBProject::save()
     markAsSaved();
 }
 
+void CDBProject::showItem(quint64 idChild)
+{
+    if(idChild == 0)
+    {
+        return showAllItems();
+    }
+
+    QSqlQuery query(db);
+    query.prepare("SELECT key, type FROM items WHERE id=:id");
+    query.bindValue(":id", idChild);
+    QUERY_EXEC(return);
+    if(!query.next())
+    {
+        return;
+    }
+
+    QString key     = query.value(0).toString();
+    qint32  type    = query.value(1).toInt();
+
+    const int N = childCount();
+    for(int i = 0; i < N; i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        if(item->getKey().item == key)
+        {
+            return;
+        }
+    }
+
+    IGisItem * item;
+    switch(type)
+    {
+        case IGisItem::eTypeWpt:
+            item = new CGisItemWpt(idChild, db, this);
+            break;
+        case IGisItem::eTypeTrk:
+            item = new CGisItemTrk(idChild, db, this);
+            break;
+        case IGisItem::eTypeRte:
+            item = new CGisItemRte(idChild, db, this);
+            break;
+        case IGisItem::eTypeOvl:
+            item = new CGisItemOvlArea(idChild, db, this);
+            break;
+        default:
+            item = 0;
+    }
+}
+
+void CDBProject::hideItem(quint64 idChild)
+{
+    QSqlQuery query(db);
+    query.prepare("SELECT key FROM items WHERE id=:id");
+    query.bindValue(":id", idChild);
+    QUERY_EXEC(return);
+    if(!query.next())
+    {
+        return;
+    }
+
+
+    QString key = query.value(0).toString();
+
+    const int N = childCount();
+    for(int i = 0; i < N; i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        if(item->getKey().item == key)
+        {
+            delete item;
+            return;
+        }
+    }
+
+}
+
+void CDBProject::showAllItems()
+{
+    QSqlQuery query(db);
+    action_info_t info(eActW2DInfoProject, db, id);
+
+    query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    while(query.next())
+    {
+        quint64 idChild = query.value(0).toULongLong();
+        qint32  type    = query.value(1).toInt();
+
+        IGisItem * item;
+        switch(type)
+        {
+            case IGisItem::eTypeWpt:
+                item = new CGisItemWpt(idChild, db, this);
+                break;
+            case IGisItem::eTypeTrk:
+                item = new CGisItemTrk(idChild, db, this);
+                break;
+            case IGisItem::eTypeRte:
+                item = new CGisItemRte(idChild, db, this);
+                break;
+            case IGisItem::eTypeOvl:
+                item = new CGisItemOvlArea(idChild, db, this);
+                break;
+            default:
+                item = 0;
+        }
+        if(item)
+        {
+            info.keysChildren << item->getKey().item;
+        }
+    }
+
+    info.isLoaded = true;
+    CGisWidget::self().queueActionForDb(info);
+
+    setToolTip(0, getInfo());
+}

@@ -1019,7 +1019,7 @@ void CGisListWks::queueDBAction(action_t& act)
 
     switch(act.action)
     {
-    case eActD2WLoadProject:
+    case eActD2WShowProject:
     {
         IGisProject * item = new CDBProject(act.connectionName, act.id, this);
         if(item && !item->isValid())
@@ -1035,8 +1035,7 @@ void CGisListWks::queueDBAction(action_t& act)
         }
         break;
     }
-
-    case eActD2WCloseProject:
+    case eActD2WHideProject:
     {
         QList<QTreeWidgetItem*> items;
         for(int i = 0; i < topLevelItemCount(); i++)
@@ -1054,6 +1053,61 @@ void CGisListWks::queueDBAction(action_t& act)
         }
 
         qDeleteAll(items);
+        break;
+    }
+    case eActD2WShowAllItems:
+    {
+        for(int i = 0; i < topLevelItemCount(); i++)
+        {
+            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+            if(project == 0)
+            {
+                continue;
+            }
+
+            if(act.id == project->getId())
+            {
+                project->showItem(0);
+            }
+        }
+        break;
+    }
+    case eActD2WShowItem:
+    {
+        action_item_t& item = static_cast<action_item_t&>(act);
+
+        for(int i = 0; i < topLevelItemCount(); i++)
+        {
+            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+            if(project == 0)
+            {
+                continue;
+            }
+
+            if(item.idFolder == project->getId())
+            {
+                project->showItem(item.id);
+            }
+        }
+        break;
+    }
+    case eActD2WHideItem:
+    {
+        action_item_t& item = static_cast<action_item_t&>(act);
+
+        for(int i = 0; i < topLevelItemCount(); i++)
+        {
+            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+            if(project == 0)
+            {
+                continue;
+            }
+
+            if(item.idFolder == project->getId())
+            {
+                project->hideItem(item.id);
+            }
+        }
         break;
     }
     case eActD2WInfoProject:

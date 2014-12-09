@@ -31,6 +31,7 @@ class CDBItem : public QTreeWidgetItem
         virtual ~CDBItem();
 
         const QString& getKey(){return key;}
+        void toggle();
 
     private:
         QSqlDatabase& db;

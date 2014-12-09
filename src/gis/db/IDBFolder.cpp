@@ -148,12 +148,14 @@ void IDBFolder::toggle(quint64 idFolder)
     {
         if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
         {
-            action_t action(eActD2WLoadProject, db, id);
-            CGisWidget::self().queueActionForWks(action);
+            action_t action1(eActD2WShowProject, db, id);
+            CGisWidget::self().queueActionForWks(action1);
+            action_t action2(eActD2WShowAllItems, db, id);
+            CGisWidget::self().queueActionForWks(action2);
         }
         else
         {
-            action_t action(eActD2WCloseProject, db, id);
+            action_t action(eActD2WHideProject, db, id);
             CGisWidget::self().queueActionForWks(action);
         }
     }
@@ -181,45 +183,10 @@ void IDBFolder::remove(quint64 idFolder)
         }
         quint64 idParent = folder->getId();
 
-        action_t action(eActD2WCloseProject, db, id);
+        action_t action(eActD2WHideProject, db, id);
         CGisWidget::self().queueActionForWks(action);
 
-        QSqlQuery query(db);
-        // delete this particular relation first
-        query.prepare("DELETE FROM folder2folder WHERE parent=:parent AND child=:child");
-        query.bindValue(":parent", idParent);
-        query.bindValue(":child", idFolder);
-        QUERY_EXEC(;);
-
-        query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE child=:id LIMIT 1)");
-        query.bindValue(":id", idFolder);
-        QUERY_EXEC(;);
-        // if there is no other relation delete the children, too.
-        if(!query.next() || (query.value(0).toInt() == 0))
-        {
-            /// @todo find folder via database
-//            for(int i = 0; i < childCount(); i++)
-//            {
-//                IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
-//                if(folder)
-//                {
-//                    folder->remove(folder->getId());
-//                    continue;
-//                }
-//                // stop as folders are always first
-//                break;
-//            }
-
-            // remove the child items relations
-            query.prepare("DELETE FROM folder2item WHERE parent=:id");
-            query.bindValue(":id", idFolder);
-            QUERY_EXEC(;);
-
-            // and remove the folder
-            query.prepare("DELETE FROM folders WHERE id=:id");
-            query.bindValue(":id", idFolder);
-            QUERY_EXEC(;);
-        }
+        remove(idParent, idFolder);
     }
     else
     {
@@ -233,6 +200,7 @@ void IDBFolder::remove(quint64 idFolder)
         }
     }
 }
+
 
 
 void IDBFolder::setupFromDB()
@@ -346,3 +314,37 @@ void IDBFolder::expanding(const action_info_t& info)
     }
 }
 
+void IDBFolder::remove(quint64 idParent, quint64 idFolder)
+{
+    QSqlQuery query(db);
+    // delete this particular relation first
+    query.prepare("DELETE FROM folder2folder WHERE parent=:parent AND child=:child");
+    query.bindValue(":parent", idParent);
+    query.bindValue(":child", idFolder);
+    QUERY_EXEC(;);
+
+    query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE child=:id LIMIT 1)");
+    query.bindValue(":id", idFolder);
+    QUERY_EXEC(;);
+    // if there is no other relation delete the children, too.
+    if(!query.next() || (query.value(0).toInt() == 0))
+    {
+        query.prepare("SELECT child FROM folder2folder WHERE parent=:id");
+        query.bindValue(":id", idFolder);
+        QUERY_EXEC(;);
+        while(query.next())
+        {
+            remove(idFolder, query.value(0).toULongLong());
+        }
+
+        // remove the child items relations
+        query.prepare("DELETE FROM folder2item WHERE parent=:id");
+        query.bindValue(":id", idFolder);
+        QUERY_EXEC(;);
+
+        // and remove the folder
+        query.prepare("DELETE FROM folders WHERE id=:id");
+        query.bindValue(":id", idFolder);
+        QUERY_EXEC(;);
+    }
+}

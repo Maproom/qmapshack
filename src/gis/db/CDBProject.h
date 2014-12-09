@@ -59,7 +59,12 @@ class CDBProject : public IGisProject
 
         void restoreDBLink();
 
+        void showItem(quint64 idChild);
+        void hideItem(quint64 idChild);
+
     private:
+        void showAllItems();
+
         QSqlDatabase db;
         quint64 id;
 };

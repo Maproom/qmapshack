@@ -19,6 +19,7 @@
 #include "gis/db/CDBItem.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
+#include "gis/CGisWidget.h"
 
 #include <QtSql>
 
@@ -27,6 +28,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
     , db(db)
     , id(id)
 {
+    qDebug() << "CDBItem::CDBItem()";
     QSqlQuery query(db);
     query.prepare("SELECT type, key, icon, name, comment FROM items WHERE id=:id");
     query.bindValue(":id", id);
@@ -46,6 +48,27 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
 
 CDBItem::~CDBItem()
 {
-
+    qDebug() << "CDBItem::~CDBItem()";
 }
 
+void CDBItem::toggle()
+{
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    if(folder == 0)
+    {
+        return;
+    }
+
+    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+    {
+        action_t action1(eActD2WShowProject, db, folder->getId());
+        CGisWidget::self().queueActionForWks(action1);
+        action_item_t action2(eActD2WShowItem, db, id, folder->getId());
+        CGisWidget::self().queueActionForWks(action2);
+    }
+    else
+    {
+        action_item_t action(eActD2WHideItem, db, id, folder->getId());
+        CGisWidget::self().queueActionForWks(action);
+    }
+}

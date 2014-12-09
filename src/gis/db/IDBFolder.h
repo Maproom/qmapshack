@@ -58,6 +58,7 @@ class IDBFolder : public QTreeWidgetItem
     protected:        
         void setupFromDB();
         virtual void expanding(const action_info_t &info);
+        virtual void remove(quint64 idParent, quint64 idFolder);
 
         bool isLoadable;
 

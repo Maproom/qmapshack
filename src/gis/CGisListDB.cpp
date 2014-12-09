@@ -22,6 +22,7 @@
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderLostFound.h"
+#include "gis/db/CDBItem.h"
 #include "helpers/CSettings.h"
 #include "config.h"
 
@@ -31,8 +32,8 @@
 class CGisListDBEditLock
 {
     public:
-        CGisListDBEditLock(CGisListDB * widget) : widget(widget){widget->isInternalEdit += 1;}
-        ~CGisListDBEditLock(){widget->isInternalEdit -= 1;}
+        CGisListDBEditLock(CGisListDB * widget) : widget(widget){QApplication::setOverrideCursor(Qt::WaitCursor); widget->isInternalEdit += 1;}
+        ~CGisListDBEditLock(){QApplication::restoreOverrideCursor(); widget->isInternalEdit -= 1;}
     private:
         CGisListDB * widget;
 };
@@ -345,11 +346,22 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
     {
         return;
     }
+    CGisListDBEditLock lock(this);
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-    if(folder != 0 && (column == IDBFolder::eColumnCheckbox))
+    if(column == IDBFolder::eColumnCheckbox)
     {
-        folder->toggle(folder->getId());
-        return;
+        IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+        if(folder != 0)
+        {
+            folder->toggle(folder->getId());
+            return;
+        }
+
+        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        if(dbItem != 0)
+        {
+            dbItem->toggle();
+            return;
+        }
     }
 }

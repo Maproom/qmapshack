@@ -36,7 +36,7 @@ class CGisListDB : public QTreeWidget
         CGisListDB(QWidget * parent);
         virtual ~CGisListDB();
 
-        void queueDBAction(const action_t& act);
+        bool event(QEvent * e);
 
     private slots:
         void slotContextMenu(const QPoint& point);
@@ -52,6 +52,7 @@ class CGisListDB : public QTreeWidget
         void initDB();
         void migrateDB(int version);
 
+        CDBFolderDatabase *getDataBase(const QString& name);
         void addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent);
 
         int isInternalEdit;

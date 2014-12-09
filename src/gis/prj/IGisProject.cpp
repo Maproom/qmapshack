@@ -41,6 +41,7 @@ IGisProject::~IGisProject()
     delete dlgDetails;
 }
 
+
 void IGisProject::genKey()
 {
     if(key.isEmpty())
@@ -227,9 +228,8 @@ void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
 }
 
 
-void IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::StandardButtons& last)
+bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::StandardButtons& last)
 {
-    QList<QTreeWidgetItem*> items;
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
@@ -246,14 +246,26 @@ void IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
                 last = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
-                    continue;
+                    // as each item in the project has to be unique, we can stop searching.
+                    return false;
                 }
             }
-            items << takeChild(i-1);
-            setText(1,"*");
+            delete item;
+
+            /*
+                Database projects are a bit different. Deleteing an item does not really
+                mean the project is changed as the item is still stored in the database.
+            */
+            if(type != eTypeDb)
+            {
+                changed();
+            }
+
+            // as each item in the project has to be unique, we can stop searching.
+            return true;
         }
     }
-    qDeleteAll(items);
+    return false;
 }
 
 void IGisProject::editItemByKey(const IGisItem::key_t& key)

@@ -28,7 +28,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
     , db(db)
     , id(id)
 {
-    qDebug() << "CDBItem::CDBItem()";
+//    qDebug() << "CDBItem::CDBItem()";
     QSqlQuery query(db);
     query.prepare("SELECT type, key, icon, name, comment FROM items WHERE id=:id");
     query.bindValue(":id", id);
@@ -48,7 +48,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
 
 CDBItem::~CDBItem()
 {
-    qDebug() << "CDBItem::~CDBItem()";
+//    qDebug() << "CDBItem::~CDBItem()";
 }
 
 void CDBItem::toggle()
@@ -59,16 +59,19 @@ void CDBItem::toggle()
         return;
     }
 
-//    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
-//    {
-//        action_t action1(eActD2WShowProject, db, folder->getId());
-//        CGisWidget::self().queueActionForWks(action1);
-//        action_item_t action2(eActD2WShowItem, db, id, folder->getId());
-//        CGisWidget::self().queueActionForWks(action2);
-//    }
-//    else
-//    {
-//        action_item_t action(eActD2WHideItem, db, id, folder->getId());
-//        CGisWidget::self().queueActionForWks(action);
-//    }
+    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+    {
+        CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
+        CGisWidget::self().postEventForWks(evt1);
+
+        CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(folder->getId(), folder->getDBName());
+        evt2->items << evt_item_t(id, type);
+        CGisWidget::self().postEventForWks(evt2);
+    }
+    else
+    {
+        CEvtD2WHideItems * evt2 = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
+        evt2->keys << key;
+        CGisWidget::self().postEventForWks(evt2);
+    }
 }

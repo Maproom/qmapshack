@@ -32,10 +32,25 @@
 class CGisListDBEditLock
 {
     public:
-        CGisListDBEditLock(CGisListDB * widget) : widget(widget){QApplication::setOverrideCursor(Qt::WaitCursor); widget->isInternalEdit += 1;}
-        ~CGisListDBEditLock(){QApplication::restoreOverrideCursor(); widget->isInternalEdit -= 1;}
+        CGisListDBEditLock(bool waitCursor, CGisListDB * widget) : widget(widget), waitCursor(waitCursor)
+        {
+            if(waitCursor)
+            {
+                QApplication::setOverrideCursor(Qt::WaitCursor);
+            }
+            widget->isInternalEdit += 1;
+        }
+        ~CGisListDBEditLock()
+        {
+            if(waitCursor)
+            {
+                QApplication::restoreOverrideCursor();
+            }
+            widget->isInternalEdit -= 1;
+        }
     private:
         CGisListDB * widget;
+        bool waitCursor;
 };
 
 
@@ -210,22 +225,42 @@ void CGisListDB::migrateDB(int version)
     QUERY_EXEC(; );
 }
 
-//void CGisListDB::queueDBAction(const action_t& act)
-//{
-//    CGisListDBEditLock lock(this);
+CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
+{
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
+        if(database && (database->getDBName() == name))
+        {
+            return database;
+        }
+    }
+    return 0;
+}
 
-//    switch(act.action)
-//    {
-//    case eActW2DInfoProject:
-//    {
-//        const action_info_t& info = static_cast<const action_info_t&>(act);
-//        folderDatabase->update(info);
-//        folderLostFound->update();
-//        break;
-//    }
-//    default:;
-//    }
-//}
+bool CGisListDB::event(QEvent * e)
+{
+    CGisListDBEditLock lock(true, this);
+
+    switch(e->type())
+    {
+    case eEvtW2DAckInfo:
+    {
+        CEvtW2DAckInfo * evt = (CEvtW2DAckInfo*)e;
+        IDBFolder * folder = getDataBase(evt->db);
+        if(folder)
+        {
+            folder->update(evt);
+
+        }
+        e->accept();
+        return true;
+    }
+    }
+
+    return QTreeWidget::event(e);
+}
 
 void CGisListDB::slotContextMenu(const QPoint& point)
 {
@@ -247,7 +282,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 
 void CGisListDB::slotAddFolder()
 {
-    CGisListDBEditLock lock(this);
+    CGisListDBEditLock lock(false, this);
 
     IDBFolder * parentFolder = dynamic_cast<IDBFolder*>(currentItem());
     if(parentFolder == 0)
@@ -290,7 +325,7 @@ void CGisListDB::slotAddFolder()
 
 void CGisListDB::slotDelFolder()
 {
-    CGisListDBEditLock lock(this);
+    CGisListDBEditLock lock(false, this);
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == 0)
     {
@@ -303,7 +338,7 @@ void CGisListDB::slotDelFolder()
         return;
     }
 
-    folder->remove(folder->getId());
+    folder->remove();
     delete folder;
 
     folderLostFound->update();
@@ -311,7 +346,7 @@ void CGisListDB::slotDelFolder()
 
 void CGisListDB::slotDelLostFound()
 {
-    CGisListDBEditLock lock(this);
+    CGisListDBEditLock lock(false, this);
     CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(currentItem());
     if(folder == 0)
     {
@@ -329,7 +364,7 @@ void CGisListDB::slotDelLostFound()
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
 {   
-    CGisListDBEditLock lock(this);
+    CGisListDBEditLock lock(true, this);
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
     if(folder == 0)
@@ -337,7 +372,7 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
         return;
     }
 
-//    folder->expanding();
+    folder->expanding();
 }
 
 void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
@@ -346,14 +381,14 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
     {
         return;
     }
-    CGisListDBEditLock lock(this);
+    CGisListDBEditLock lock(true, this);
 
     if(column == IDBFolder::eColumnCheckbox)
     {
         IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
         if(folder != 0)
         {
-//            folder->toggle(folder->getId());
+            folder->toggle();
             return;
         }
 

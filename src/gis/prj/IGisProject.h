@@ -128,7 +128,7 @@ class IGisProject : public QTreeWidgetItem
            @brief Delete items with matching key
            @param key
         */
-        void delItemByKey(const IGisItem::key_t &key, QMessageBox::StandardButtons &last);
+        bool delItemByKey(const IGisItem::key_t &key, QMessageBox::StandardButtons &last);
 
         /**
            @brief Call IGisItem::edit() method for items with given key

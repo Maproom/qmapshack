@@ -311,7 +311,7 @@ qt5_wrap_ui(UI_HDRS ${UIS})
 qt5_add_resources(RC_SRCS ${RCS})
 
 if(UNIX)
-    add_definitions(-Wall)
+    add_definitions(-Wall -Wno-switch)
 endif(UNIX)
 
 

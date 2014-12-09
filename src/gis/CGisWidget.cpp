@@ -27,6 +27,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "gis/db/CDBProject.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
 
@@ -57,16 +58,15 @@ CGisWidget::~CGisWidget()
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
 }
 
-//void CGisWidget::queueActionForWks(action_t& act)
-//{
-//    treeWks->queueDBAction(act);
-//    emit sigChanged();
-//}
+void CGisWidget::postEventForWks(QEvent * event)
+{
+    QCoreApplication::postEvent(treeWks, event);
+}
 
-//void CGisWidget::queueActionForDb(const action_t& act)
-//{
-//    treeDB->queueDBAction(act);
-//}
+void CGisWidget::postEventForDb(QEvent * event)
+{
+    QCoreApplication::postEvent(treeDB, event);
+}
 
 
 void CGisWidget::loadGisProject(const QString& filename)
@@ -218,7 +218,17 @@ void CGisWidget::delItemByKey(const IGisItem::key_t& key)
         {
             continue;
         }
-        project->delItemByKey(key, last);
+
+        if(project->delItemByKey(key, last))
+        {
+            // update database tree if that is a database project
+            CDBProject * dbp = dynamic_cast<CDBProject*>(project);
+            if(dbp)
+            {
+                dbp->postStatus();
+            }
+        }
+
         if(last == QMessageBox::Cancel)
         {
             break;

@@ -31,7 +31,7 @@ CSetupDB::CSetupDB(QWidget *parent)
     cfg.beginGroup("Database");
     checkSaveOnExit->setChecked(cfg.value("saveOnExit", true).toBool());
     spinSaveEvery->setValue(cfg.value("saveEvery",5).toInt());
-    labelDatabasePath->setText(cfg.value("path",QDir::home().filePath(CONFIGDIR).append("qms.db")).toString());
+    labelDatabasePath->setText(cfg.value("path",QDir::home().filePath(CONFIGDIR).append("database.db")).toString());
     cfg.endGroup();
 
     connect(toolDatabasePath, SIGNAL(clicked()), this, SLOT(slotSetupPath()));

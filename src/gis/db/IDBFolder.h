@@ -22,7 +22,7 @@
 #include <QTreeWidgetItem>
 
 class QSqlDatabase;
-struct action_info_t;
+class CEvtW2DAckInfo;
 
 class IDBFolder : public QTreeWidgetItem
 {
@@ -47,25 +47,26 @@ class IDBFolder : public QTreeWidgetItem
         virtual ~IDBFolder();
 
         quint64 getId(){return id;}
+        QString getDBName();
 
-//        virtual void expanding();
-//        virtual void update(const action_info_t &info);
-//        virtual void toggle(quint64 idFolder);
-        virtual void remove(quint64 idFolder);
+        virtual void expanding();
+        virtual void update(CEvtW2DAckInfo * info);
+        virtual void toggle();
+        virtual void remove();
 
         static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
     protected:        
         void setupFromDB();
-//        virtual void expanding(const action_info_t &info);
+        virtual void addChildren(const QSet<QString> &activeChildren);
         virtual void remove(quint64 idParent, quint64 idFolder);
-
-        bool isLoadable;
 
         QSqlDatabase& db;
 
-    private:        
         quint64 id;
+        QString key;
+        bool isLoadable;        
+
 
 };
 

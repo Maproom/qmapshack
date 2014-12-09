@@ -77,7 +77,8 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
 
 CDBProject::~CDBProject()
 {
-//    CGisWidget::self().queueActionForDb(action_info_t(eActW2DInfoProject, db, id));
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(false, getId(), db.connectionName());
+    CGisWidget::self().postEventForDb(info);
 }
 
 void CDBProject::restoreDBLink()
@@ -94,10 +95,23 @@ void CDBProject::restoreDBLink()
         setupName("----");
         valid = true;
     }
+}
 
-//    action_info_t info(eActW2DInfoProject, db, id);
-//    info.isLoaded = true;
-//    CGisWidget::self().queueActionForDb(info);
+void CDBProject::postStatus()
+{
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
+
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(n));
+        if(item)
+        {
+            info->keysChildren << item->getKey().item;
+        }
+    }
+
+    CGisWidget::self().postEventForDb(info);
 }
 
 void CDBProject::saveAs()
@@ -133,249 +147,178 @@ void CDBProject::saveAs()
 void CDBProject::save()
 {
     QSqlQuery query(db);
-//    action_info_t info(eActW2DInfoProject, db, id);
 
     int N = childCount();
     QProgressDialog progress(QObject::tr("Save ..."), QObject::tr("Abort save"), 0, 100);
     progress.setWindowModality(Qt::WindowModal);
 
-    for(int i = 0; i < N; i++)
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
+
+    try
     {
-        progress.setValue(i * 100 / N);
-        if (progress.wasCanceled())
+        for(int i = 0; i < N; i++)
         {
-            return;
+            progress.setValue(i * 100 / N);
+            if (progress.wasCanceled())
+            {
+                throw 0;
+            }
+
+
+            IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+            if(item == 0)
+            {
+                continue;
+            }
+            quint64 idItem = 0;
+
+            // serialize complete history of item
+            QByteArray data;
+            QDataStream in(&data, QIODevice::WriteOnly);
+            in.setByteOrder(QDataStream::LittleEndian);
+            in.setVersion(QDataStream::Qt_5_2);
+            in << item->getHistory();
+
+            // test if item exists in database
+            query.prepare("SELECT id FROM items WHERE key=:key");
+            query.bindValue(":key", item->getKey().item);
+            QUERY_EXEC(throw -1);
+
+            QBuffer buffer;
+            buffer.open(QIODevice::ReadWrite);
+            QPixmap pixmap = item->getIcon();
+            pixmap.save(&buffer, "PNG");
+            buffer.seek(0);
+
+
+            if(query.next())
+            {
+                // item exits -> update item data in database
+                idItem = query.value(0).toULongLong();
+                query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
+                query.bindValue(":type",    item->type());
+                query.bindValue(":key",     item->getKey().item);
+                query.bindValue(":icon",    buffer.data());
+                query.bindValue(":name",    item->getName());
+                query.bindValue(":comment", item->getInfo());
+                query.bindValue(":data", data);
+                query.bindValue(":id", idItem);
+                QUERY_EXEC(throw -1);
+
+            }
+            else
+            {
+                // item is unknown to database -> create item in database
+                query.prepare("INSERT INTO items (type, key, icon, name, comment, data) VALUES (:type, :key, :icon, :name, :comment, :data)");
+                query.bindValue(":type",    item->type());
+                query.bindValue(":key",     item->getKey().item);
+                query.bindValue(":icon",    buffer.data());
+                query.bindValue(":name",    item->getName());
+                query.bindValue(":comment", item->getInfo());
+                query.bindValue(":data", data);
+                QUERY_EXEC(throw -1);
+
+                query.prepare("SELECT last_insert_rowid() from items");
+                QUERY_EXEC(throw -1);
+                query.next();
+                idItem = query.value(0).toULongLong();
+                if(idItem == 0)
+                {
+                    qDebug() << "childId equals 0. bad.";
+                    throw -1;
+                }
+            }
+
+            // check if relation already exists.
+            query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
+            query.bindValue(":parent", id);
+            query.bindValue(":child", idItem);
+            QUERY_EXEC(;);
+
+            if(!query.next())
+            {
+                // create relation
+                query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
+                query.bindValue(":parent", id);
+                query.bindValue(":child", idItem);
+                QUERY_EXEC(throw -1);
+            }
+
+            info->keysChildren << item->getKey().item;
+            item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
         }
 
-
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-        quint64 idItem = 0;
-
-        // serialize complete history of item
+        // serialize metadata of project
         QByteArray data;
         QDataStream in(&data, QIODevice::WriteOnly);
         in.setByteOrder(QDataStream::LittleEndian);
         in.setVersion(QDataStream::Qt_5_2);
-        in << item->getHistory();
+        *this >> in;
 
-        // test if item exists in database
-        query.prepare("SELECT id FROM items WHERE key=:key");
-        query.bindValue(":key", item->getKey().item);
-        QUERY_EXEC(return);
+        // update folder entry in database
+        query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data WHERE id=:id");
+        query.bindValue(":name", getName());
+        query.bindValue(":comment", getInfo());
+        query.bindValue(":data", data);
+        query.bindValue(":id", getId());
+        QUERY_EXEC(throw -1);
 
-        QBuffer buffer;
-        buffer.open(QIODevice::ReadWrite);
-        QPixmap pixmap = item->getIcon();
-        pixmap.save(&buffer, "PNG");
-        buffer.seek(0);
-
-
-        if(query.next())
+        CGisWidget::self().postEventForDb(info);
+        setText(1,"");
+    }
+    catch(int n)
+    {
+        if(n < 0)
         {
-            // item exits -> update item data in database
-            idItem = query.value(0).toULongLong();
-            query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
-            query.bindValue(":type",    item->type());
-            query.bindValue(":key",     item->getKey().item);
-            query.bindValue(":icon",    buffer.data());
-            query.bindValue(":name",    item->getName());
-            query.bindValue(":comment", item->getInfo());
-            query.bindValue(":data", data);
-            query.bindValue(":id", idItem);
-            QUERY_EXEC(return;);
-
+            delete info;
         }
         else
         {
-            // item is unknown to database -> create item in database
-            query.prepare("INSERT INTO items (type, key, icon, name, comment, data) VALUES (:type, :key, :icon, :name, :comment, :data)");
-            query.bindValue(":type",    item->type());
-            query.bindValue(":key",     item->getKey().item);
-            query.bindValue(":icon",    buffer.data());
-            query.bindValue(":name",    item->getName());
-            query.bindValue(":comment", item->getInfo());
-            query.bindValue(":data", data);
-            QUERY_EXEC(return;);
-
-            query.prepare("SELECT last_insert_rowid() from items");
-            QUERY_EXEC(return;);
-            query.next();
-            idItem = query.value(0).toULongLong();
-            if(idItem == 0)
-            {
-                qDebug() << "childId equals 0. bad.";
-                return;
-            }
+            CGisWidget::self().postEventForDb(info);
         }
-
-        // check if relation already exists.
-        query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
-        query.bindValue(":parent", id);
-        query.bindValue(":child", idItem);
-        QUERY_EXEC(;);
-
-        if(!query.next())
-        {
-            // create relation
-            query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
-            query.bindValue(":parent", id);
-            query.bindValue(":child", idItem);
-            QUERY_EXEC(return);
-        }
-
-//        info.keysChildren << item->getKey().item;
-    }
-
-    // serialize metadata of project
-    QByteArray data;
-    QDataStream in(&data, QIODevice::WriteOnly);
-    in.setByteOrder(QDataStream::LittleEndian);
-    in.setVersion(QDataStream::Qt_5_2);
-    *this >> in;
-
-    // update folder entry in database
-    query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data WHERE id=:id");
-    query.bindValue(":name", getName());
-    query.bindValue(":comment", getInfo());
-    query.bindValue(":data", data);
-    query.bindValue(":id", getId());
-    QUERY_EXEC(return);
-
-//    info.isLoaded = true;
-//    CGisWidget::self().queueActionForDb(info);
-
-    markAsSaved();
-}
-
-void CDBProject::showItem(quint64 idChild)
-{
-    if(idChild == 0)
-    {
-        return showAllItems();
-    }
-
-    QSqlQuery query(db);
-    query.prepare("SELECT key, type FROM items WHERE id=:id");
-    query.bindValue(":id", idChild);
-    QUERY_EXEC(return);
-    if(!query.next())
-    {
-        return;
-    }
-
-    QString key     = query.value(0).toString();
-    qint32  type    = query.value(1).toInt();
-
-    const int N = childCount();
-    for(int i = 0; i < N; i++)
-    {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(item->getKey().item == key)
-        {
-            return;
-        }
-    }
-
-    IGisItem * item;
-    switch(type)
-    {
-        case IGisItem::eTypeWpt:
-            item = new CGisItemWpt(idChild, db, this);
-            break;
-        case IGisItem::eTypeTrk:
-            item = new CGisItemTrk(idChild, db, this);
-            break;
-        case IGisItem::eTypeRte:
-            item = new CGisItemRte(idChild, db, this);
-            break;
-        case IGisItem::eTypeOvl:
-            item = new CGisItemOvlArea(idChild, db, this);
-            break;
-        default:
-            item = 0;
     }
 }
 
-void CDBProject::hideItem(quint64 idChild)
+void CDBProject::showItems(CEvtD2WShowItems * evt)
 {
-    QSqlQuery query(db);
-    query.prepare("SELECT key FROM items WHERE id=:id");
-    query.bindValue(":id", idChild);
-    QUERY_EXEC(return);
-    if(!query.next())
+
+    foreach(const evt_item_t& item, evt->items)
     {
-        return;
-    }
-
-
-    QString key = query.value(0).toString();
-
-    const int N = childCount();
-    for(int i = 0; i < N; i++)
-    {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        if(item->getKey().item == key)
-        {
-            delete item;
-            return;
-        }
-    }
-
-}
-
-void CDBProject::showAllItems()
-{
-    QSqlQuery query(db);
-//    action_info_t info(eActW2DInfoProject, db, id);
-
-    query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return);
-    while(query.next())
-    {
-        quint64 idChild = query.value(0).toULongLong();
-        qint32  type    = query.value(1).toInt();
-
-        IGisItem * item;
-        switch(type)
+        switch(item.type)
         {
             case IGisItem::eTypeWpt:
-                item = new CGisItemWpt(idChild, db, this);
+                new CGisItemWpt(item.id, db, this);
                 break;
             case IGisItem::eTypeTrk:
-                item = new CGisItemTrk(idChild, db, this);
+                new CGisItemTrk(item.id, db, this);
                 break;
             case IGisItem::eTypeRte:
-                item = new CGisItemRte(idChild, db, this);
+                new CGisItemRte(item.id, db, this);
                 break;
             case IGisItem::eTypeOvl:
-                item = new CGisItemOvlArea(idChild, db, this);
+                new CGisItemOvlArea(item.id, db, this);
                 break;
-            default:
-                item = 0;
-        }
-        if(item)
-        {
-//            info.keysChildren << item->getKey().item;
+            default:;
         }
     }
 
-//    info.isLoaded = true;
-//    CGisWidget::self().queueActionForDb(info);
-
     setToolTip(0, getInfo());
+    postStatus();
 }
+
+void CDBProject::hideItems(CEvtD2WHideItems * evt)
+{
+    IGisItem::key_t key;
+    key.project = getKey();
+
+    QMessageBox::StandardButtons last = QMessageBox::YesToAll;
+
+    foreach(const QString& k, evt->keys)
+    {
+        key.item = k;
+        delItemByKey(key, last);
+    }
+    setToolTip(0, getInfo());
+    postStatus();
+}
+

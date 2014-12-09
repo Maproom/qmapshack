@@ -22,7 +22,8 @@
 #include "gis/prj/IGisProject.h"
 #include <QSqlDatabase>
 
-struct action_t;
+class CEvtD2WShowItems;
+class CEvtD2WHideItems;
 
 class CDBProject : public IGisProject
 {
@@ -31,11 +32,19 @@ class CDBProject : public IGisProject
         CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
         virtual ~CDBProject();
 
+        /**
+           @brief Restore database link after the project has been restored from binary storage.
+
+           Typically this is done after the project has been restored in the workspace on application's startup.
+
+        */
+        void restoreDBLink();
+
         void save();
         void saveAs();
 
         quint64 getId(){return id;}
-        const QSqlDatabase& getDb(){return db;}
+        QString getDBName(){return db.connectionName();}
 
         /**
            @brief Serialize object out of a QDataStream
@@ -57,14 +66,13 @@ class CDBProject : public IGisProject
         */
         QDataStream& operator>>(QDataStream& stream);
 
-        void restoreDBLink();
 
-        void showItem(quint64 idChild);
-        void hideItem(quint64 idChild);
+        void postStatus();
+
+        void showItems(CEvtD2WShowItems * evt);
+        void hideItems(CEvtD2WHideItems * evt);
 
     private:
-        void showAllItems();
-
         QSqlDatabase db;
         quint64 id;
 };

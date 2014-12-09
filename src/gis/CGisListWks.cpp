@@ -1013,131 +1013,131 @@ void CGisListWks::slotSearchGoogle(bool on)
 }
 
 
-void CGisListWks::queueDBAction(action_t& act)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
+//void CGisListWks::queueDBAction(action_t& act)
+//{
+//    QMutexLocker lock(&IGisItem::mutexItems);
 
-    switch(act.action)
-    {
-    case eActD2WShowProject:
-    {
-        IGisProject * item = new CDBProject(act.connectionName, act.id, this);
-        if(item && !item->isValid())
-        {
-            delete item;
-            item = 0;
-        }
-        // skip if project is already loaded
-        if(item && hasProject(item))
-        {
-            delete item;
-            item = 0;
-        }
-        break;
-    }
-    case eActD2WHideProject:
-    {
-        QList<QTreeWidgetItem*> items;
-        for(int i = 0; i < topLevelItemCount(); i++)
-        {
-            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
-            if(project == 0)
-            {
-                continue;
-            }
+//    switch(act.action)
+//    {
+//    case eActD2WShowProject:
+//    {
+//        IGisProject * item = new CDBProject(act.connectionName, act.id, this);
+//        if(item && !item->isValid())
+//        {
+//            delete item;
+//            item = 0;
+//        }
+//        // skip if project is already loaded
+//        if(item && hasProject(item))
+//        {
+//            delete item;
+//            item = 0;
+//        }
+//        break;
+//    }
+//    case eActD2WHideProject:
+//    {
+//        QList<QTreeWidgetItem*> items;
+//        for(int i = 0; i < topLevelItemCount(); i++)
+//        {
+//            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+//            if(project == 0)
+//            {
+//                continue;
+//            }
 
-            if((project->getId() == act.id) && (project->getDb().connectionName() == act.connectionName))
-            {
-                items << project;
-            }
-        }
+//            if((project->getId() == act.id) && (project->getDb().connectionName() == act.connectionName))
+//            {
+//                items << project;
+//            }
+//        }
 
-        qDeleteAll(items);
-        break;
-    }
-    case eActD2WShowAllItems:
-    {
-        for(int i = 0; i < topLevelItemCount(); i++)
-        {
-            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
-            if(project == 0)
-            {
-                continue;
-            }
+//        qDeleteAll(items);
+//        break;
+//    }
+//    case eActD2WShowAllItems:
+//    {
+//        for(int i = 0; i < topLevelItemCount(); i++)
+//        {
+//            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+//            if(project == 0)
+//            {
+//                continue;
+//            }
 
-            if(act.id == project->getId())
-            {
-                project->showItem(0);
-            }
-        }
-        break;
-    }
-    case eActD2WShowItem:
-    {
-        action_item_t& item = static_cast<action_item_t&>(act);
+//            if(act.id == project->getId())
+//            {
+//                project->showItem(0);
+//            }
+//        }
+//        break;
+//    }
+//    case eActD2WShowItem:
+//    {
+//        action_item_t& item = static_cast<action_item_t&>(act);
 
-        for(int i = 0; i < topLevelItemCount(); i++)
-        {
-            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
-            if(project == 0)
-            {
-                continue;
-            }
+//        for(int i = 0; i < topLevelItemCount(); i++)
+//        {
+//            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+//            if(project == 0)
+//            {
+//                continue;
+//            }
 
-            if(item.idFolder == project->getId())
-            {
-                project->showItem(item.id);
-            }
-        }
-        break;
-    }
-    case eActD2WHideItem:
-    {
-        action_item_t& item = static_cast<action_item_t&>(act);
+//            if(item.idFolder == project->getId())
+//            {
+//                project->showItem(item.id);
+//            }
+//        }
+//        break;
+//    }
+//    case eActD2WHideItem:
+//    {
+//        action_item_t& item = static_cast<action_item_t&>(act);
 
-        for(int i = 0; i < topLevelItemCount(); i++)
-        {
-            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
-            if(project == 0)
-            {
-                continue;
-            }
+//        for(int i = 0; i < topLevelItemCount(); i++)
+//        {
+//            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+//            if(project == 0)
+//            {
+//                continue;
+//            }
 
-            if(item.idFolder == project->getId())
-            {
-                project->hideItem(item.id);
-            }
-        }
-        break;
-    }
-    case eActD2WInfoProject:
-    {
-        action_info_t& info = static_cast<action_info_t&>(act);
+//            if(item.idFolder == project->getId())
+//            {
+//                project->hideItem(item.id);
+//            }
+//        }
+//        break;
+//    }
+//    case eActD2WInfoProject:
+//    {
+//        action_info_t& info = static_cast<action_info_t&>(act);
 
-        for(int i = 0; i < topLevelItemCount(); i++)
-        {
-            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
-            if(project == 0)
-            {
-                continue;
-            }
+//        for(int i = 0; i < topLevelItemCount(); i++)
+//        {
+//            CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+//            if(project == 0)
+//            {
+//                continue;
+//            }
 
-            if((project->getId() == act.id) && (project->getDb().connectionName() == act.connectionName))
-            {
-                info.isLoaded = true;
-                for(int n = 0; n < project->childCount(); n++)
-                {
-                    IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
-                    if(item)
-                    {
-                        info.keysChildren << item->getKey().item;
-                    }
-                }
-            }
-        }
-        break;
-    }
+//            if((project->getId() == act.id) && (project->getDb().connectionName() == act.connectionName))
+//            {
+//                info.isLoaded = true;
+//                for(int n = 0; n < project->childCount(); n++)
+//                {
+//                    IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+//                    if(item)
+//                    {
+//                        info.keysChildren << item->getKey().item;
+//                    }
+//                }
+//            }
+//        }
+//        break;
+//    }
 
-    default:;
-    }
-}
+//    default:;
+//    }
+//}

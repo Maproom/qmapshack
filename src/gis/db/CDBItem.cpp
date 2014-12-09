@@ -59,16 +59,16 @@ void CDBItem::toggle()
         return;
     }
 
-    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
-    {
-        action_t action1(eActD2WShowProject, db, folder->getId());
-        CGisWidget::self().queueActionForWks(action1);
-        action_item_t action2(eActD2WShowItem, db, id, folder->getId());
-        CGisWidget::self().queueActionForWks(action2);
-    }
-    else
-    {
-        action_item_t action(eActD2WHideItem, db, id, folder->getId());
-        CGisWidget::self().queueActionForWks(action);
-    }
+//    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+//    {
+//        action_t action1(eActD2WShowProject, db, folder->getId());
+//        CGisWidget::self().queueActionForWks(action1);
+//        action_item_t action2(eActD2WShowItem, db, id, folder->getId());
+//        CGisWidget::self().queueActionForWks(action2);
+//    }
+//    else
+//    {
+//        action_item_t action(eActD2WHideItem, db, id, folder->getId());
+//        CGisWidget::self().queueActionForWks(action);
+//    }
 }

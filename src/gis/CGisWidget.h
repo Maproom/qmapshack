@@ -28,40 +28,40 @@
 class CGisDraw;
 class IGisProject;
 
-enum action_e
-{
-    // all database to workspace actions
-     eActD2WShowProject
-    ,eActD2WHideProject
-    ,eActD2WShowAllItems
-    ,eActD2WShowItem
-    ,eActD2WHideItem
-    ,eActD2WInfoProject
+//enum action_e
+//{
+//    // all database to workspace actions
+//     eActD2WShowProject
+//    ,eActD2WHideProject
+//    ,eActD2WShowAllItems
+//    ,eActD2WShowItem
+//    ,eActD2WHideItem
+//    ,eActD2WInfoProject
 
-    // all workspace to database actions
-    ,eActW2DInfoProject
-};
+//    // all workspace to database actions
+//    ,eActW2DInfoProject
+//};
 
-struct action_t
-{
-    action_t(action_e action, const QSqlDatabase& db, quint64 id) : action(action), connectionName(db.connectionName()), id(id){}
-    action_e action;
-    QString  connectionName;
-    quint64  id;
-};
+//struct action_t
+//{
+//    action_t(action_e action, const QSqlDatabase& db, quint64 id) : action(action), connectionName(db.connectionName()), id(id){}
+//    action_e action;
+//    QString  connectionName;
+//    quint64  id;
+//};
 
-struct action_info_t : action_t
-{
-    action_info_t(action_e action, const QSqlDatabase& db, quint64 id) : action_t(action, db, id), isLoaded(false){}
-    bool isLoaded;
-    QSet<QString> keysChildren;
-};
+//struct action_info_t : action_t
+//{
+//    action_info_t(action_e action, const QSqlDatabase& db, quint64 id) : action_t(action, db, id), isLoaded(false){}
+//    bool isLoaded;
+//    QSet<QString> keysChildren;
+//};
 
-struct action_item_t : action_t
-{
-    action_item_t(action_e action, const QSqlDatabase& db, quint64 id, quint64 idFolder) : action_t(action, db, id), idFolder(idFolder){}
-    quint64 idFolder;
-};
+//struct action_item_t : action_t
+//{
+//    action_item_t(action_e action, const QSqlDatabase& db, quint64 id, quint64 idFolder) : action_t(action, db, id), idFolder(idFolder){}
+//    quint64 idFolder;
+//};
 
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
@@ -173,8 +173,8 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
          */
         IGisProject * selectProject();
 
-        void queueActionForWks(action_t &act);
-        void queueActionForDb(const action_t& act);
+//        void queueActionForWks(action_t &act);
+//        void queueActionForDb(const action_t& act);
 
 
     signals:

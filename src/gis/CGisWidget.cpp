@@ -57,16 +57,16 @@ CGisWidget::~CGisWidget()
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
 }
 
-void CGisWidget::queueActionForWks(action_t& act)
-{
-    treeWks->queueDBAction(act);
-    emit sigChanged();
-}
+//void CGisWidget::queueActionForWks(action_t& act)
+//{
+//    treeWks->queueDBAction(act);
+//    emit sigChanged();
+//}
 
-void CGisWidget::queueActionForDb(const action_t& act)
-{
-    treeDB->queueDBAction(act);
-}
+//void CGisWidget::queueActionForDb(const action_t& act)
+//{
+//    treeDB->queueDBAction(act);
+//}
 
 
 void CGisWidget::loadGisProject(const QString& filename)

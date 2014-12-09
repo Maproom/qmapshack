@@ -77,7 +77,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
 
 CDBProject::~CDBProject()
 {
-    CGisWidget::self().queueActionForDb(action_info_t(eActW2DInfoProject, db, id));
+//    CGisWidget::self().queueActionForDb(action_info_t(eActW2DInfoProject, db, id));
 }
 
 void CDBProject::restoreDBLink()
@@ -95,9 +95,9 @@ void CDBProject::restoreDBLink()
         valid = true;
     }
 
-    action_info_t info(eActW2DInfoProject, db, id);
-    info.isLoaded = true;
-    CGisWidget::self().queueActionForDb(info);
+//    action_info_t info(eActW2DInfoProject, db, id);
+//    info.isLoaded = true;
+//    CGisWidget::self().queueActionForDb(info);
 }
 
 void CDBProject::saveAs()
@@ -133,7 +133,7 @@ void CDBProject::saveAs()
 void CDBProject::save()
 {
     QSqlQuery query(db);
-    action_info_t info(eActW2DInfoProject, db, id);
+//    action_info_t info(eActW2DInfoProject, db, id);
 
     int N = childCount();
     QProgressDialog progress(QObject::tr("Save ..."), QObject::tr("Abort save"), 0, 100);
@@ -227,7 +227,7 @@ void CDBProject::save()
             QUERY_EXEC(return);
         }
 
-        info.keysChildren << item->getKey().item;
+//        info.keysChildren << item->getKey().item;
     }
 
     // serialize metadata of project
@@ -245,8 +245,8 @@ void CDBProject::save()
     query.bindValue(":id", getId());
     QUERY_EXEC(return);
 
-    info.isLoaded = true;
-    CGisWidget::self().queueActionForDb(info);
+//    info.isLoaded = true;
+//    CGisWidget::self().queueActionForDb(info);
 
     markAsSaved();
 }
@@ -340,7 +340,7 @@ void CDBProject::hideItem(quint64 idChild)
 void CDBProject::showAllItems()
 {
     QSqlQuery query(db);
-    action_info_t info(eActW2DInfoProject, db, id);
+//    action_info_t info(eActW2DInfoProject, db, id);
 
     query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
     query.bindValue(":id", id);
@@ -370,12 +370,12 @@ void CDBProject::showAllItems()
         }
         if(item)
         {
-            info.keysChildren << item->getKey().item;
+//            info.keysChildren << item->getKey().item;
         }
     }
 
-    info.isLoaded = true;
-    CGisWidget::self().queueActionForDb(info);
+//    info.isLoaded = true;
+//    CGisWidget::self().queueActionForDb(info);
 
     setToolTip(0, getInfo());
 }

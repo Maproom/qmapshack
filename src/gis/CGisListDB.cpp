@@ -210,22 +210,22 @@ void CGisListDB::migrateDB(int version)
     QUERY_EXEC(; );
 }
 
-void CGisListDB::queueDBAction(const action_t& act)
-{
-    CGisListDBEditLock lock(this);
+//void CGisListDB::queueDBAction(const action_t& act)
+//{
+//    CGisListDBEditLock lock(this);
 
-    switch(act.action)
-    {
-    case eActW2DInfoProject:
-    {
-        const action_info_t& info = static_cast<const action_info_t&>(act);
-        folderDatabase->update(info);
-        folderLostFound->update();
-        break;
-    }
-    default:;
-    }
-}
+//    switch(act.action)
+//    {
+//    case eActW2DInfoProject:
+//    {
+//        const action_info_t& info = static_cast<const action_info_t&>(act);
+//        folderDatabase->update(info);
+//        folderLostFound->update();
+//        break;
+//    }
+//    default:;
+//    }
+//}
 
 void CGisListDB::slotContextMenu(const QPoint& point)
 {
@@ -337,7 +337,7 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
         return;
     }
 
-    folder->expanding();
+//    folder->expanding();
 }
 
 void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
@@ -353,7 +353,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
         IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
         if(folder != 0)
         {
-            folder->toggle(folder->getId());
+//            folder->toggle(folder->getId());
             return;
         }
 

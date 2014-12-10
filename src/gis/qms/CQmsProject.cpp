@@ -142,7 +142,7 @@ void CQmsProject::saveAs(const QString& fn, IGisProject& project)
     QString tmp = project.getFilename();
     project.setFilename(_fn_);
 
-    project >> out;
+    project.IGisProject::operator>>(out);
 
     project.setFilename(tmp);
 

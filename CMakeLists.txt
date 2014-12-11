@@ -5,7 +5,7 @@ project(QMapShack)
 # has to be removed later on
 
 if(UNIX)
-set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /opt/Qt/5.3/gcc_64)
+#set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /opt/Qt/5.3/gcc_64)
 endif(UNIX)
 
 

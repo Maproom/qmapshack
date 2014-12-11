@@ -24,6 +24,8 @@
 #include <QTreeWidgetItem>
 #include <QDir>
 
+class CMainWindow;
+
 class CQlgtDb : public QObject
 {
     public:
@@ -43,15 +45,18 @@ class CQlgtDb : public QObject
             eFolderN    = QTreeWidgetItem::UserType + 104
         };
 
-        CQlgtDb(const QString& filename);
+        CQlgtDb(const QString& filename, CMainWindow * parent);
         virtual ~CQlgtDb();
 
     private:
         void initDB();
         void migrateDB(int version);
+        void printStatistic();
         QSqlDatabase db;
         QDir        path;
         QString     name;
+
+        CMainWindow * gui;
 };
 
 #endif //CQLGTDB_H

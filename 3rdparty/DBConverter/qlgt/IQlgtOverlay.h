@@ -20,6 +20,7 @@
 #define IQLGTOVERLAY_H
 
 #include <QObject>
+#include <proj_api.h>
 #include "qlgt/IItem.h"
 
 class IQlgtOverlay : public QObject, public IItem
@@ -27,6 +28,22 @@ class IQlgtOverlay : public QObject, public IItem
     public:
         IQlgtOverlay(QObject * parent);
         virtual ~IQlgtOverlay();
+
+        enum type_e {eEnd,eBase};
+
+        struct pt_t : public projXY
+        {
+            int idx;
+        };
+
+
+        QString type;
+        QColor color;
+        QList<pt_t> points;
+        qint32 style;
+        quint32 width;
+        quint8 opacity;
+
 };
 
 QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl);

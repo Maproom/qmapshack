@@ -82,6 +82,13 @@
      </layout>
     </item>
     <item>
+     <widget class="QPushButton" name="pushStart">
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QTextBrowser" name="textBrowser"/>
     </item>
    </layout>

@@ -3,7 +3,7 @@
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
+    the Free Softwareation, either version 3 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CQlgtDb.h"
+#include "CMainWindow.h"
 #include "gis/db/macros.h"
 #include "gis/WptIcons.h"
 #include "qlgt/CQlb.h"
@@ -28,7 +29,8 @@
 
 #define DB_QLGT_VERSION 9
 
-CQlgtDb::CQlgtDb(const QString &filename)
+CQlgtDb::CQlgtDb(const QString &filename, CMainWindow *parent)
+    : gui(parent)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","qlandkarte");
     db.setDatabaseName(filename);
@@ -81,6 +83,8 @@ CQlgtDb::CQlgtDb(const QString &filename)
     {
         initDB();
     }
+
+    printStatistic();
 }
 
 CQlgtDb::~CQlgtDb()
@@ -503,3 +507,59 @@ void CQlgtDb::migrateDB(int version)
     QUERY_EXEC(; );
 }
 
+void CQlgtDb::printStatistic()
+{
+    QSqlQuery query(db);
+
+    gui->stdOut(tr("Open database: %1").arg(db.databaseName()));
+
+    query.prepare("SELECT COUNT() FROM folders");
+    QUERY_EXEC(; );
+    if(query.next())
+    {
+        gui->stdOut(tr("Folders:          %1").arg(query.value(0).toInt()));
+    }
+
+    query.prepare("SELECT COUNT() FROM items WHERE type=:type");
+    query.bindValue(":type", eTrk);
+    QUERY_EXEC(; );
+    if(query.next())
+    {
+        gui->stdOut(tr("Tracks:           %1").arg(query.value(0).toInt()));
+    }
+    query.prepare("SELECT COUNT() FROM items WHERE type=:type");
+    query.bindValue(":type", eRte);
+    QUERY_EXEC(; );
+    if(query.next())
+    {
+        gui->stdErr(tr("Routes:           %1 (only the basic routepoints will be converted to QMapShack)").arg(query.value(0).toInt()));
+    }
+    query.prepare("SELECT COUNT() FROM items WHERE type=:type");
+    query.bindValue(":type", eWpt);
+    QUERY_EXEC(; );
+    if(query.next())
+    {
+        gui->stdOut(tr("Waypoints:        %1").arg(query.value(0).toInt()));
+    }
+    query.prepare("SELECT COUNT() FROM items WHERE type=:type");
+    query.bindValue(":type", eOvl);
+    QUERY_EXEC(; );
+    if(query.next())
+    {
+        gui->stdErr(tr("Overlays:         %1 (only area overlays will be converted to QMapShack)").arg(query.value(0).toInt()));
+    }
+    query.prepare("SELECT COUNT() FROM diarys");
+    query.bindValue(":type", eDry);
+    QUERY_EXEC(; );
+    if(query.next())
+    {
+        gui->stdOut(tr("Diaries:          %1").arg(query.value(0).toInt()));
+    }
+    query.prepare("SELECT COUNT() FROM items WHERE type=:type");
+    query.bindValue(":type", eMap);
+    QUERY_EXEC(; );
+    if(query.next())
+    {
+        gui->stdErr(tr("Map selections:   %1 (can't be converted to QMapShack)").arg(query.value(0).toInt()));
+    }
+}

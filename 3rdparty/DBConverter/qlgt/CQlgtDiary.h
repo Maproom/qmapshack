@@ -27,6 +27,10 @@ class CQlgtDiary : public QObject, public IItem
     public:
         CQlgtDiary(QObject * parent);
         virtual ~CQlgtDiary();
+
+        enum type_e {eEnd,eBase, eWpt, eTrk, eRte};
+
+        quint64 keyProjectGeoDB;
 };
 
 QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary);

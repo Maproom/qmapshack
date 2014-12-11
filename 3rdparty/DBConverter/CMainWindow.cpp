@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
+#include "CQlgtDb.h"
 
 #include <QtWidgets>
 
@@ -46,10 +47,16 @@ CMainWindow::CMainWindow()
     labelSource->setText(cfg.value("File/source","-").toString());
     labelTarget->setText(cfg.value("File/target","-").toString());
 
+    textBrowser->setFont(QFont("Courier",10));
 
     connect(toolSource, SIGNAL(clicked()), this, SLOT(slotSelectSource()));
     connect(toolTarget, SIGNAL(clicked()), this, SLOT(slotSelectTarget()));
 
+
+    if(QFile::exists(labelSource->text()))
+    {
+        dbQlgt = new CQlgtDb(labelSource->text(), this);
+    }
 
 }
 
@@ -78,6 +85,10 @@ void CMainWindow::slotSelectSource()
 
     labelSource->setText(filename);
 
+    delete dbQlgt;
+    textBrowser->clear();
+    dbQlgt = new CQlgtDb(filename, this);
+
 }
 
 void CMainWindow::slotSelectTarget()
@@ -98,6 +109,17 @@ void CMainWindow::slotSelectTarget()
     }
 
     labelTarget->setText(filename);
-
 }
 
+void CMainWindow::stdOut(const QString& str)
+{
+    textBrowser->setTextColor(Qt::black);
+    textBrowser->append(str);
+}
+
+
+void CMainWindow::stdErr(const QString& str)
+{
+    textBrowser->setTextColor(Qt::red);
+    textBrowser->append(str);
+}

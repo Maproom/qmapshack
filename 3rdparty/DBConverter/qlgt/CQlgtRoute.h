@@ -20,6 +20,7 @@
 #define CQLGTROUTE_H
 
 #include <QObject>
+#include <proj_api.h>
 #include "qlgt/IItem.h"
 
 class CQlgtRoute : public QObject, public IItem
@@ -27,6 +28,31 @@ class CQlgtRoute : public QObject, public IItem
     public:
         CQlgtRoute(QObject * parent);
         virtual ~CQlgtRoute();
+
+        enum type_e {eEnd, eBase, eRtePts, eRteSec};
+        struct pt_t
+        {
+            float lon;
+            float lat;
+
+            QString action;
+
+            operator const projXY ()
+            {
+                projXY p;
+                p.u = lon;
+                p.v = lat;
+                return p;
+            }
+        };
+
+        /// primary route, just the basic points like A to B via C
+        QVector<pt_t> priRoute;
+
+        quint32 ttime;
+
+        QString iconString;
+
 };
 
 

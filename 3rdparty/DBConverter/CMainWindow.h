@@ -20,7 +20,10 @@
 #define CMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPointer>
 #include "ui_IMainWindow.h"
+
+class CQlgtDb;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -29,9 +32,16 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         CMainWindow();
         virtual ~CMainWindow();
 
+        void stdOut(const QString& str);
+        void stdErr(const QString& str);
+
     private slots:
         void slotSelectSource();
         void slotSelectTarget();
+
+
+    private:
+        QPointer<CQlgtDb> dbQlgt;
 };
 
 #endif //CMAINWINDOW_H

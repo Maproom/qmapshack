@@ -124,22 +124,22 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="226"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Poznámka:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Poznámka:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="229"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- žádná poznámka ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- žádná poznámka ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="236"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Popis:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Popis:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="239"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- žádný popis ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- žádný popis ---&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -189,7 +189,7 @@
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="85"/>
         <source>No DEM data found for that point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro tento bod nebyla nalezena žádná data DEM.</translation>
     </message>
 </context>
 <context>
@@ -232,7 +232,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="59"/>
         <source>Select Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat rozsah</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="60"/>
@@ -252,7 +252,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="63"/>
         <source>Edit Area Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit body oblasti</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="66"/>
@@ -262,12 +262,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="400"/>
         <source>Saving workspace. Please wait.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukládá se pracovní oblast. Počkejte, prosím.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="441"/>
         <source>Loading workspace. Please wait.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrává se pracovní oblast. Počkejte, prosím.</translation>
     </message>
 </context>
 <context>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../helpers/CHistoryListWidget.cpp" line="32"/>
         <source>Cut history</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyjmout historii</translation>
     </message>
 </context>
 <context>
@@ -1036,31 +1036,31 @@
         <location filename="../map/CMapTMS.cpp" line="69"/>
         <location filename="../map/CMapTMS.cpp" line="79"/>
         <source>Error...</source>
-        <translation type="unfinished">Chyba...</translation>
+        <translation>Chyba...</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="69"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Nepodařilo se otevřít %1</translation>
+        <translation>Nepodařilo se otevřít %1</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="79"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Chyba při čtení: %1
+        <translation>Chyba při čtení: %1
 Řádek %2, Sloupec %3:
 %4</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="117"/>
         <source>Layer %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrstva %1</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="288"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt;: %2 dlaždic čeká&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 dlaždic čeká&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1291,12 +1291,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/search/CSearchGoogle.cpp" line="120"/>
         <source>Unknown response</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámá odpověď</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchGoogle.cpp" line="130"/>
         <source>Error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba: </translation>
     </message>
 </context>
 <context>
@@ -1304,17 +1304,17 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/db/CSetupDB.cpp" line="55"/>
         <source>Setup database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit databázi...</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDB.cpp" line="55"/>
         <source>Changes will become active after an application&apos;s restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změny budou uvedeny v činnost po opětovném spuštění programu.</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDB.cpp" line="63"/>
         <source>Select database path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat cestu k databázi...</translation>
     </message>
 </context>
 <context>
@@ -1632,7 +1632,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="302"/>
         <source>Points</source>
-        <translation type="unfinished">Body</translation>
+        <translation>Body</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="350"/>
@@ -1748,27 +1748,27 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="14"/>
         <source>Edit elevation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit výšku...</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="22"/>
         <source>Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="32"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="39"/>
         <source>Get elevation from active digital elevation model.</source>
-        <translation type="unfinished"></translation>
+        <translation>Získat výšku z činného digitálního výškového modelu.</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="42"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -1873,7 +1873,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="101"/>
         <source>Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekt</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="121"/>
@@ -2014,27 +2014,27 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="399"/>
         <source>Add empty project</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat prázdný projekt</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="411"/>
         <source>Search Google</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat pomocí Google</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="420"/>
         <source>Close all projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít všechny projekty</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="429"/>
         <source>Setup Units</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit jednotky</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="438"/>
         <source>Setup Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit databázi</translation>
     </message>
 </context>
 <context>
@@ -2589,17 +2589,17 @@ nebo
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="36"/>
         <source>New project is created as:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový projekt je vytvořen jako:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="73"/>
         <source>*.qms</source>
-        <translation type="unfinished"></translation>
+        <translation>*.qms</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="83"/>
         <source>*.gpx</source>
-        <translation type="unfinished"></translation>
+        <translation>*.gpx</translation>
     </message>
 </context>
 <context>
@@ -2607,32 +2607,32 @@ nebo
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="14"/>
         <source>Setup database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit databázi...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="35"/>
         <source>save workspace on exit, and every</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit pracovní oblast při ukončení, a každých</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="45"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minut</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="62"/>
         <source>Database path</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta k databázi</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="69"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDB.ui" line="92"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -2644,7 +2644,7 @@ nebo
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="14"/>
         <source>Edit text...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit text...</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="25"/>
@@ -2812,22 +2812,22 @@ nebo
     <message>
         <location filename="../units/IUnitsSetup.ui" line="14"/>
         <source>Setup units...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit jednotky...</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="22"/>
         <source>Metric</source>
-        <translation type="unfinished"></translation>
+        <translation>Metrické</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="29"/>
         <source>Imperial</source>
-        <translation type="unfinished"></translation>
+        <translation>Anglické</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="36"/>
         <source>Nautic</source>
-        <translation type="unfinished"></translation>
+        <translation>Nautické</translation>
     </message>
 </context>
 <context>
@@ -2874,31 +2874,36 @@ line %2, column %3:
         <location filename="../gis/IGisProject.cpp" line="112"/>
         <source>
 Filename: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Název souboru: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="128"/>
         <source>
 Waypoints: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Cestovní body: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="132"/>
         <source>
 Tracks: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Stopy: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="136"/>
         <source>
 Routes: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Cesty: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="140"/>
         <source>
 Areas: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Oblasti: %1</translation>
     </message>
     <message>
         <location filename="../gis/IGisProject.cpp" line="197"/>
@@ -2915,14 +2920,14 @@ Areas: %1</source>
         <location filename="../gis/qms/CQmsProject.cpp" line="47"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="135"/>
         <source>Failed to open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se otevřít...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="53"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="47"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="135"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Nepodařilo se otevřít %1</translation>
+        <translation>Nepodařilo se otevřít %1</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="151"/>
@@ -2959,7 +2964,7 @@ Areas: %1</source>
     <message>
         <location filename="../gis/IGisItem.cpp" line="239"/>
         <source>Initial version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Počáteční verze.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="319"/>
@@ -3020,17 +3025,17 @@ Areas: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="430"/>
         <source> slope: %1%3 (%2%)</source>
-        <translation type="unfinished"></translation>
+        <translation> sklon: %1%3 (%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="940"/>
         <source>Hide points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt body.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="974"/>
         <source>Show points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat body.</translation>
     </message>
     <message>
         <source> slope: %1Â°(%2%)</source>
@@ -3260,7 +3265,7 @@ Areas: %1</source>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <source>Enter new area name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadat název nové oblasti.</translation>
     </message>
 </context>
 </TS>

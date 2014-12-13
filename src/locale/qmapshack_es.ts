@@ -485,27 +485,27 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="247"/>
         <source>Major highway</source>
-        <translation type="unfinished"></translation>
+        <translation>Autovía Primaria</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="248"/>
         <source>Principal highway</source>
-        <translation type="unfinished"></translation>
+        <translation>Autovía secundaria</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="249"/>
         <source>Other highway</source>
-        <translation type="unfinished"></translation>
+        <translation>Otras autovías</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="250"/>
         <source>Arterial road</source>
-        <translation type="unfinished"></translation>
+        <translation>Carretera principal</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="251"/>
         <source>Collector road</source>
-        <translation type="unfinished"></translation>
+        <translation>Carretera secundaria</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="252"/>
@@ -535,7 +535,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="257"/>
         <source>Major highway connector</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión con autovía principal</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="258"/>
@@ -560,7 +560,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="262"/>
         <source>Stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Arroyo</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="263"/>
@@ -682,7 +682,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="351"/>
         <source>Parking garage</source>
-        <translation type="unfinished"></translation>
+        <translation>Garaje</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="352"/>
@@ -1464,12 +1464,12 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation>Para añadir archivos con información de elevación use Archivo-&gt;Configurar Rutas DEM. </translation>
+        <translation>Para añadir archivos con información de elevación use Archivo-&gt;Configurar Rutas a los DEM. </translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
-        <translation>Use el menú contextual  (right mouse button click on entry) para activar un archivo. Use arrastrar y soltar para mover el archivo activado en el orden de procesamiento.</translation>
+        <translation>Use el menú contextual (botón derecho del ratón y seleccione) para activar un archivo. Use arrastrar y soltar para mover el archivo activado en el orden de procesamiento.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="156"/>
@@ -1581,7 +1581,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="215"/>
         <source>Hist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Historial</translation>
     </message>
 </context>
 <context>
@@ -1628,12 +1628,12 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="350"/>
         <source>Time</source>
-        <translation>Hora</translation>
+        <translation>Tiempo</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="355"/>
         <source>Ele.</source>
-        <translation>Alt.</translation>
+        <translation>Altitud</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="360"/>
@@ -1643,7 +1643,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="365"/>
         <source>Dist.</source>
-        <translation>Dist.</translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="375"/>
@@ -1678,7 +1678,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="399"/>
         <source>Hist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Historial</translation>
     </message>
 </context>
 <context>
@@ -1790,7 +1790,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../grid/IGridSetup.ui" line="37"/>
         <source>restore default</source>
-        <translation type="unfinished"></translation>
+        <translation>restaurar predeterminado</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="40"/>
@@ -1874,7 +1874,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../IMainWindow.ui" line="158"/>
         <source>Dig. Elev. Model (DEM)</source>
-        <translation>Modelo Digital de Terreno (DEM)</translation>
+        <translation>Modelo Digital del Terreno (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="191"/>
@@ -1945,7 +1945,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../IMainWindow.ui" line="315"/>
         <source>Map Tool Tip</source>
-        <translation>Consejo de la Herramienta de Mapas</translation>
+        <translation>Mostrar Tooltips en los Mapas</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="324"/>
@@ -2043,7 +2043,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
-        <translation>Use el menú contextual (right mouse button click on entry) para activar un mapa. Use arrastrar y soltar para mover el mapa activado en el orden de dibujado. </translation>
+        <translation>Use el menú contextual (botón derecho del ratón, y seleccione) para activar un mapa. Use arrastrar y soltar para mover el mapa activado en el orden de dibujado. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="141"/>
@@ -2642,7 +2642,7 @@ o
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="266"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="275"/>
@@ -2945,7 +2945,7 @@ Areas: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="334"/>
         <source>Time: %1</source>
-        <translation>Hora: %1</translation>
+        <translation>Tiempo: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="337"/>
@@ -2976,7 +2976,7 @@ Areas: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="427"/>
         <source>Ele.: %1 %2</source>
-        <translation>Alt.: %1 %2</translation>
+        <translation>Altitud: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="430"/>
@@ -3031,7 +3031,7 @@ Areas: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="468"/>
         <source>Dist.: %1%2 (%3%)</source>
-        <translation>Dist.: %1%2 (%3%)</translation>
+        <translation>Distancia: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="472"/>
@@ -3061,7 +3061,7 @@ Areas: %1</source>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="97"/>
         <source>strong</source>
-        <translation type="unfinished"></translation>
+        <translation>intenso</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="418"/>

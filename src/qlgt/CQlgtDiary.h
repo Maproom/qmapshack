@@ -25,7 +25,7 @@
 class CQlgtDiary : public QObject, public IItem
 {
     public:
-        CQlgtDiary(QObject * parent);
+        CQlgtDiary(quint64 id, QObject * parent);
         virtual ~CQlgtDiary();
 
         enum type_e {eEnd,eBase, eWpt, eTrk, eRte};

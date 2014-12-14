@@ -23,13 +23,14 @@
 #include <QSqlDatabase>
 
 #include <gis/db/IDBFolder.h>
+#include <gis/db/IDB.h>
 
 struct action_t;
 class QMenu;
 class CDBFolderDatabase;
 class CDBFolderLostFound;
 
-class CGisListDB : public QTreeWidget
+class CGisListDB : public QTreeWidget, private IDB
 {
     Q_OBJECT
     public:
@@ -48,17 +49,11 @@ class CGisListDB : public QTreeWidget
 
     private:
         friend class CGisListDBEditLock;
-        void configDB();
-        void initDB();
-        void migrateDB(int version);
 
         CDBFolderDatabase *getDataBase(const QString& name);
         void addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent);
 
         int isInternalEdit;
-
-        QSqlDatabase db;
-
 
         QMenu * menuFolder;
         QAction * actionAddFolder;

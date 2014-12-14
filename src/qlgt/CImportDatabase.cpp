@@ -39,6 +39,10 @@ CImportDatabase::CImportDatabase(QWidget *parent)
     connect(toolSelectTarget, SIGNAL(clicked()), this, SLOT(slotSelectTarget()));
     connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
 
+    if(QFile::exists(labelSource->text()))
+    {
+        dbQlgt = new CQlgtDb(labelSource->text(), this);
+    }
 }
 
 CImportDatabase::~CImportDatabase()

@@ -64,18 +64,19 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     int n;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 
-    if(parent)
+    if(parent == 0)
     {
-        key.project = parent->getKey();
+        return;
     }
 
+    key.project = parent->getKey();
     if(idx >= 0)
     {
         parent->removeChild(this);
         parent->insertChild(idx, this);
     }
     else
-    {        
+    {
         if(type() == eTypeTrk)
         {
             for(n = parent->childCount() - 2; n >= 0; n--)

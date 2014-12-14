@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2009 Joerg Wunsch <j@uriah.heep.sax.de>
+    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,29 +15,25 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
-#ifndef CAPPOPTS_H
-#define CAPPOPTS_H
-/*
- * This class holds the options passed from the command-line,
- * including the positional arguments.
- */
 
-#include <QStringList>
+#ifndef IDB_H
+#define IDB_H
 
-class CAppOpts
+#include <QSqlDatabase>
+
+class IDB
 {
     public:
-        const bool debug;        // -d, print debug messages
-        const bool nosplash;     // -n, do not display splash screen
-        const QString configfile;
-        const QStringList arguments;
+        IDB();
+        virtual ~IDB();
 
-        CAppOpts(bool doDebug, bool noSplash, const QString& config, const QStringList& args)
-            : debug(doDebug)
-            , nosplash(noSplash)
-            , configfile(config)
-            , arguments(args) {}
+    protected:
+        void setupDB(const QString &filename, const QString &connectionName);
+        void initDB();
+        void migrateDB(int version);
+
+        QSqlDatabase db;
 };
 
-extern CAppOpts *qlOpts;
-#endif                           //CAPPOPTS_H
+#endif //IDB_H
+

@@ -26,7 +26,7 @@
 class CQlgtRoute : public QObject, public IItem
 {
     public:
-        CQlgtRoute(QObject * parent);
+        CQlgtRoute(quint64 id, QObject * parent);
         virtual ~CQlgtRoute();
 
         enum type_e {eEnd, eBase, eRtePts, eRteSec};

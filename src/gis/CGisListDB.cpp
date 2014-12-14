@@ -58,13 +58,10 @@ CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
     , isInternalEdit(0)
 {   
+
     SETTINGS;
     QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/database.db")).toString();
-    db = QSqlDatabase::addDatabase("QSQLITE", "Database");
-    db.setDatabaseName(path);
-    db.open();
-    configDB();
-
+    setupDB(path, "Database");
 
     folderLostFound     = new CDBFolderLostFound(db, this);
     folderDatabase      = new CDBFolderDatabase(db, this);
@@ -91,139 +88,6 @@ CGisListDB::~CGisListDB()
 {
 }
 
-
-void CGisListDB::configDB()
-{
-    QSqlQuery query(db);
-    if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA synchronous=OFF"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA temp_store=MEMORY"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA default_cache_size=50"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA page_size=8192"))
-    {
-        return;
-    }
-
-    if(!query.exec("SELECT version FROM versioninfo"))
-    {
-        initDB();
-    }
-    else if(query.next())
-    {
-        int version = query.value(0).toInt();
-        if(version != DB_VERSION)
-        {
-            migrateDB(version);
-        }
-    }
-    else
-    {
-        initDB();
-    }
-}
-
-void CGisListDB::initDB()
-{
-    QSqlQuery query(db);
-
-    if(query.exec( "CREATE TABLE versioninfo ( version TEXT )"))
-    {
-        query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
-        query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(; );
-    }
-
-    if(!query.exec( "CREATE TABLE folders ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "key            TEXT,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "locked         BOOLEAN DEFAULT FALSE,"
-                    "data           BLOB"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE items ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER,"
-                    "key            TEXT NOT NULL,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "icon           BLOB NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "data           BLOB NOT NULL"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec("INSERT INTO folders (type, name, comment) VALUES (2, 'Database', '')"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE folder2folder ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES folders(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE folder2item ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES items(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-}
-
-void CGisListDB::migrateDB(int version)
-{
-    QSqlQuery query(db);
-
-    for(version++; version <= DB_VERSION; version++)
-    {
-        switch(version)
-        {
-        }
-    }
-    query.prepare( "UPDATE versioninfo set version=:version");
-    query.bindValue(":version", version - 1);
-    QUERY_EXEC(; );
-}
 
 CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
 {

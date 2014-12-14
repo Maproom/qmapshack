@@ -26,7 +26,7 @@
 #include <QPointer>
 
 class CImportDatabase;
-//class CQmsDb;
+class CQmsDb;
 
 class CQlgtDb : public QObject
 {
@@ -63,7 +63,7 @@ class CQlgtDb : public QObject
 
         CImportDatabase * gui;
 
-//        QPointer<CQmsDb> dbQms;
+        QPointer<CQmsDb> dbQms;
 
         quint32 nItems;
 };

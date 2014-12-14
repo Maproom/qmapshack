@@ -24,7 +24,7 @@
 class CQlgtWpt : public QObject, public IItem
 {
     public:
-        CQlgtWpt(QObject * parent);
+        CQlgtWpt(quint64 id, QObject * parent);
         virtual ~CQlgtWpt();
 
         void setIcon(const QString& str);
@@ -90,7 +90,7 @@ class CQlgtWpt : public QObject, public IItem
             QString info;
             QPixmap pixmap;
             QString filePath;
-            QString filename;
+            QString fileName;
         };
         QList<image_t> images;
 

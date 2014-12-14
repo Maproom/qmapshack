@@ -18,7 +18,8 @@
 
 #include "IItem.h"
 
-IItem::IItem()
+IItem::IItem(quint64 id)
+    : id(id)
 {
 
 }

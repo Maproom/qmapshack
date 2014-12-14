@@ -27,7 +27,7 @@
 class IItem
 {
     public:
-        IItem();
+        IItem(quint64  id);
         virtual ~IItem();
 
         QString getInfo(){return "no info";}
@@ -43,6 +43,8 @@ class IItem
         QString parentWpt;
 
         QString key;
+
+        quint64 id;
 };
 
 #endif //IITEM_H

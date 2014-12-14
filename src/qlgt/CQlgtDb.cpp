@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CQlgtDb.h"
-//#include "CQmsDb.h"
+#include "qlgt/CQlgtDb.h"
+#include "qlgt/CQmsDb.h"
 #include "qlgt/CQlb.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
@@ -413,11 +413,13 @@ void CQlgtDb::migrateDB(int version)
                 QDataStream stream(&array, QIODevice::ReadOnly);
                 stream.setVersion(QDataStream::Qt_4_5);
 
+                quint64 id = query.value(0).toULongLong();
+
                 switch(query.value(2).toInt())
                 {
                 case eWpt:
                 {
-                    CQlgtWpt wpt(0);
+                    CQlgtWpt wpt(id, 0);
                     stream >> wpt;
                     comment = wpt.getInfo();
                 }
@@ -425,7 +427,7 @@ void CQlgtDb::migrateDB(int version)
 
                 case eTrk:
                 {
-                    CQlgtTrack trk(0);
+                    CQlgtTrack trk(id, 0);
                     stream >> trk;
                     comment = trk.getInfo();
                 }
@@ -433,7 +435,7 @@ void CQlgtDb::migrateDB(int version)
 
                 case eRte:
                 {
-                    CQlgtRoute rte(0);
+                    CQlgtRoute rte(id, 0);
                     stream >> rte;
                     comment = rte.getInfo();
                 }
@@ -581,40 +583,36 @@ void CQlgtDb::printStatistic()
 
 void CQlgtDb::start(const QString& filename)
 {
-//    quint32 cnt = 1;
-//    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
-//    progress.setWindowModality(Qt::WindowModal);
+    quint32 cnt = 1;
+    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
+    progress.setWindowModality(Qt::WindowModal);
 
-//    gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
-//    dbQms = new CQmsDb(filename, gui);
+    gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
+    dbQms = new CQmsDb(filename, gui);
 
-//    QSqlQuery query(db);
-//    query.prepare("SELECT id FROM items");
-//    QUERY_EXEC(return;);
-//    while(query.next())
-//    {
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM items");
+    QUERY_EXEC(return;);
+    while(query.next())
+    {
 
-//        progress.setValue(cnt++ * 100 / nItems);
-//        if (progress.wasCanceled())
-//        {
-//            break;
-//        }
-//        xferItem(query.value(0).toULongLong());
-//    }
+        progress.setValue(cnt++ * 100 / nItems);
+        if (progress.wasCanceled())
+        {
+            break;
+        }
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        xferItem(query.value(0).toULongLong());
+    }
+    progress.setValue(100);
 
+    delete dbQms;
+    gui->stdOut(tr("------ Done ------"));
 
 }
 
 void CQlgtDb::xferItem(quint64 id)
 {
-//    "type           INTEGER,"
-//    "key            TEXT NOT NULL,"
-//    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-//    "icon           TEXT NOT NULL,"
-//    "name           TEXT NOT NULL,"
-//    "comment        TEXT,"
-//    "data           BLOB NOT NULL"
-
     QSqlQuery query(db);
     query.prepare("SELECT type, data FROM items WHERE id=:id");
     query.bindValue(":id", id);
@@ -631,25 +629,26 @@ void CQlgtDb::xferItem(quint64 id)
         {
         case eWpt:
         {
-            CQlgtWpt wpt1(0);
+            CQlgtWpt wpt1(id, 0);
             stream >> wpt1;
+            dbQms->addWpt(wpt1);
             break;
         }
         case eTrk:
         {
-            CQlgtTrack trk1(0);
+            CQlgtTrack trk1(id, 0);
             stream >> trk1;
             break;
         }
         case eRte:
         {
-            CQlgtRoute rte1(0);
+            CQlgtRoute rte1(id, 0);
             stream >> rte1;
             break;
         }
         case eOvl:
         {
-            IQlgtOverlay ovl1(0);
+            IQlgtOverlay ovl1(id, 0);
             stream >> ovl1;
             if(ovl1.type != "Area")
             {

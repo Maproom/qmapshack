@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2009 Joerg Wunsch <j@uriah.heep.sax.de>
+    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,29 +15,33 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
-#ifndef CAPPOPTS_H
-#define CAPPOPTS_H
-/*
- * This class holds the options passed from the command-line,
- * including the positional arguments.
- */
 
-#include <QStringList>
+#ifndef CQMSDB_H
+#define CQMSDB_H
 
-class CAppOpts
+#include <QObject>
+#include <QMap>
+#include "gis/db/IDB.h"
+
+class CImportDatabase;
+class IGisItem;
+class CQlgtWpt;
+
+class CQmsDb : public QObject, private IDB
 {
     public:
-        const bool debug;        // -d, print debug messages
-        const bool nosplash;     // -n, do not display splash screen
-        const QString configfile;
-        const QStringList arguments;
+        CQmsDb(const QString& filename, CImportDatabase * parent);
+        virtual ~CQmsDb();
 
-        CAppOpts(bool doDebug, bool noSplash, const QString& config, const QStringList& args)
-            : debug(doDebug)
-            , nosplash(noSplash)
-            , configfile(config)
-            , arguments(args) {}
+        void addWpt(CQlgtWpt& wpt);
+
+    private:
+        quint64 store(IGisItem& item);
+
+        CImportDatabase * gui;
+
+        QMap<quint64, quint64> mapItemIDs;
 };
 
-extern CAppOpts *qlOpts;
-#endif                           //CAPPOPTS_H
+#endif //CQMSDB_H
+

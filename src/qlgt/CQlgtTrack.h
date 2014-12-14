@@ -51,7 +51,7 @@ QDataStream& operator <<(QDataStream& s, CFlags& flag);
 class CQlgtTrack : public QObject, public IItem
 {
     public:
-        CQlgtTrack(QObject * parent);
+        CQlgtTrack(quint64 id, QObject * parent);
         virtual ~CQlgtTrack();
 
 

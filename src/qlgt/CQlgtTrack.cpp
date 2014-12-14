@@ -315,8 +315,9 @@ QDataStream& operator <<(QDataStream& s, CQlgtTrack& trk)
     return s;
 }
 
-CQlgtTrack::CQlgtTrack(QObject *parent)
+CQlgtTrack::CQlgtTrack(quint64 id, QObject *parent)
     : QObject(parent)
+    , IItem(id)
 {
 
 }

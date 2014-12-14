@@ -354,8 +354,9 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
 }
 
 
-CQlgtWpt::CQlgtWpt(QObject *parent)
+CQlgtWpt::CQlgtWpt(quint64 id, QObject *parent)
     : QObject(parent)
+    , IItem(id)
 {
 
 }

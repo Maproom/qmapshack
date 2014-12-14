@@ -182,7 +182,8 @@ QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
 }
 
 
-IQlgtOverlay::IQlgtOverlay(QObject *parent)
+IQlgtOverlay::IQlgtOverlay(quint64 id, QObject *parent)
+    : IItem(id)
 {
 
 }

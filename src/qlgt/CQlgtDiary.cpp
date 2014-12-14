@@ -244,8 +244,9 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
     return s;
 }
 
-CQlgtDiary::CQlgtDiary(QObject *parent)
+CQlgtDiary::CQlgtDiary(quint64 id, QObject *parent)
     : QObject(parent)
+    , IItem(id)
 {
 
 }

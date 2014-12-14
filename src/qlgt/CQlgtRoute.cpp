@@ -256,8 +256,9 @@ QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
     return s;
 }
 
-CQlgtRoute::CQlgtRoute(QObject *parent)
+CQlgtRoute::CQlgtRoute(quint64 id, QObject *parent)
     : QObject(parent)
+    , IItem(id)
 {
 
 }

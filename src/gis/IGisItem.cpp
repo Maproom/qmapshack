@@ -64,7 +64,10 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     int n;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 
-    key.project = parent->getKey();
+    if(parent)
+    {
+        key.project = parent->getKey();
+    }
 
     if(idx >= 0)
     {

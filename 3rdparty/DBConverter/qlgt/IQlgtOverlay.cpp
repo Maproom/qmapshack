@@ -65,24 +65,23 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
 
                 QDataStream s1(&entry->data, QIODevice::ReadOnly);
                 s1.setVersion(QDataStream::Qt_4_5);
-                QString type, key;
 
-                s1 >> type;
-                if(type == "Text")
+                s1 >> ovl.type;
+                if(ovl.type == "Text")
                 {
                     QRect rect;
                     QString text;
-                    s1 >> rect >> text >> key;
+                    s1 >> rect >> text >> ovl.key;
                 }
-                else if(type == "TextBox")
+                else if(ovl.type == "TextBox")
                 {
                     QRect rect;
                     QPoint pt;
                     QString text;
                     double lon, lat;
-                    s1 >> lon >> lat >> pt >> rect >> text >> key;
+                    s1 >> lon >> lat >> pt >> rect >> text >> ovl.key;
                 }
-                else if(type == "Distance")
+                else if(ovl.type == "Distance")
                 {
                     float speed;
                     QString name;
@@ -96,9 +95,9 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
                         s1 >> pt.u >> pt.v;
                         pt.idx = idx++;
                     }
-                    s1 >> speed >> key >> parentWpt;
+                    s1 >> speed >> ovl.key >> parentWpt;
                 }
-                else if(type == "Area")
+                else if(ovl.type == "Area")
                 {
                     int size, idx = 0;
                     IQlgtOverlay::pt_t pt;

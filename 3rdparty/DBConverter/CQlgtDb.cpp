@@ -17,13 +17,21 @@
 **********************************************************************************************/
 
 #include "CQlgtDb.h"
+#include "CQmsDb.h"
 #include "CMainWindow.h"
-#include "gis/db/macros.h"
-#include "gis/WptIcons.h"
 #include "qlgt/CQlb.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
 #include "qlgt/CQlgtRoute.h"
+#include "qlgt/IQlgtOverlay.h"
+
+#include "gis/db/macros.h"
+#include "gis/WptIcons.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+
 #include <QtSql>
 #include <QtWidgets>
 
@@ -31,6 +39,7 @@
 
 CQlgtDb::CQlgtDb(const QString &filename, CMainWindow *parent)
     : gui(parent)
+    , nItems(0)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","qlandkarte");
     db.setDatabaseName(filename);
@@ -513,6 +522,8 @@ void CQlgtDb::printStatistic()
 
     gui->stdOut(tr("Open database: %1").arg(db.databaseName()));
 
+    nItems = 0;
+
     query.prepare("SELECT COUNT() FROM folders");
     QUERY_EXEC(; );
     if(query.next())
@@ -525,6 +536,7 @@ void CQlgtDb::printStatistic()
     QUERY_EXEC(; );
     if(query.next())
     {
+        nItems += query.value(0).toInt();
         gui->stdOut(tr("Tracks:           %1").arg(query.value(0).toInt()));
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
@@ -532,6 +544,7 @@ void CQlgtDb::printStatistic()
     QUERY_EXEC(; );
     if(query.next())
     {
+        nItems += query.value(0).toInt();
         gui->stdErr(tr("Routes:           %1 (only the basic routepoints will be converted to QMapShack)").arg(query.value(0).toInt()));
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
@@ -539,6 +552,7 @@ void CQlgtDb::printStatistic()
     QUERY_EXEC(; );
     if(query.next())
     {
+        nItems += query.value(0).toInt();
         gui->stdOut(tr("Waypoints:        %1").arg(query.value(0).toInt()));
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
@@ -546,6 +560,7 @@ void CQlgtDb::printStatistic()
     QUERY_EXEC(; );
     if(query.next())
     {
+        nItems += query.value(0).toInt();
         gui->stdErr(tr("Overlays:         %1 (only area overlays will be converted to QMapShack)").arg(query.value(0).toInt()));
     }
     query.prepare("SELECT COUNT() FROM diarys");
@@ -561,5 +576,90 @@ void CQlgtDb::printStatistic()
     if(query.next())
     {
         gui->stdErr(tr("Map selections:   %1 (can't be converted to QMapShack)").arg(query.value(0).toInt()));
+    }
+}
+
+void CQlgtDb::start(const QString& filename)
+{
+    quint32 cnt = 1;
+    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
+    progress.setWindowModality(Qt::WindowModal);
+
+    gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
+    dbQms = new CQmsDb(filename, gui);
+
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM items");
+    QUERY_EXEC(return;);
+    while(query.next())
+    {
+
+        progress.setValue(cnt++ * 100 / nItems);
+        if (progress.wasCanceled())
+        {
+            break;
+        }
+        xferItem(query.value(0).toULongLong());
+    }
+
+
+}
+
+void CQlgtDb::xferItem(quint64 id)
+{
+//    "type           INTEGER,"
+//    "key            TEXT NOT NULL,"
+//    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+//    "icon           TEXT NOT NULL,"
+//    "name           TEXT NOT NULL,"
+//    "comment        TEXT,"
+//    "data           BLOB NOT NULL"
+
+    QSqlQuery query(db);
+    query.prepare("SELECT type, data FROM items WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return;);
+
+    if(query.next())
+    {
+        QByteArray data = query.value(1).toByteArray();
+        QDataStream stream(&data, QIODevice::ReadOnly);
+        stream.setVersion(QDataStream::Qt_4_5);
+
+
+        switch(query.value(0).toInt())
+        {
+        case eWpt:
+        {
+            CQlgtWpt wpt1(0);
+            stream >> wpt1;
+            CGisItemWpt wpt2(wpt1);
+            break;
+        }
+        case eTrk:
+        {
+            CQlgtTrack trk1(0);
+            stream >> trk1;
+            break;
+        }
+        case eRte:
+        {
+            CQlgtRoute rte1(0);
+            stream >> rte1;
+            break;
+        }
+        case eOvl:
+        {
+            IQlgtOverlay ovl1(0);
+            stream >> ovl1;
+            if(ovl1.type != "Area")
+            {
+                gui->stdErr(tr("Overlay of type '%1' cant be converted").arg(ovl1.type));
+                break;
+            }
+            break;
+        }
+        }
+
     }
 }

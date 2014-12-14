@@ -23,8 +23,10 @@
 #include <QSqlDatabase>
 #include <QTreeWidgetItem>
 #include <QDir>
+#include <QPointer>
 
 class CMainWindow;
+class CQmsDb;
 
 class CQlgtDb : public QObject
 {
@@ -48,15 +50,22 @@ class CQlgtDb : public QObject
         CQlgtDb(const QString& filename, CMainWindow * parent);
         virtual ~CQlgtDb();
 
+        void start(const QString& filename);
+
     private:
         void initDB();
         void migrateDB(int version);
         void printStatistic();
+        void xferItem(quint64 id);
         QSqlDatabase db;
         QDir        path;
         QString     name;
 
         CMainWindow * gui;
+
+        QPointer<CQmsDb> dbQms;
+
+        quint32 nItems;
 };
 
 #endif //CQLGTDB_H

@@ -27,6 +27,7 @@ class IGisProject;
 class QDomNode;
 class CScrOptWpt;
 class QSqlDatabase;
+class CQlgtWpt;
 
 
 class CGisItemWpt : public IGisItem
@@ -82,6 +83,10 @@ class CGisItemWpt : public IGisItem
             QString fileName;
         };
 
+#ifdef CONVERTER
+        CGisItemWpt(CQlgtWpt& wpt1);
+#endif
+
         /**
            @brief Create a completely new waypoint
            @param pos       the waypoint's position [°]
@@ -118,6 +123,12 @@ class CGisItemWpt : public IGisItem
         */
         CGisItemWpt(const history_t& hist, IGisProject * project);
 
+        /**
+           @brief Read item from database by it's database ID
+           @param id        the item's ID in the database
+           @param db        the database itself
+           @param project   the project to append with item
+        */
         CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project);
 
         virtual ~CGisItemWpt();

@@ -19,11 +19,27 @@
 #ifndef CQMSDB_H
 #define CQMSDB_H
 
-class CQmsDb
+#include <QObject>
+#include <QSqlDatabase>
+#include <QDir>
+
+class CMainWindow;
+
+class CQmsDb : public QObject
 {
     public:
-        CQmsDb();
+        CQmsDb(const QString &filename, CMainWindow *parent);
         virtual ~CQmsDb();
+
+    private:
+        void initDB();
+        void migrateDB(int version);
+
+        QSqlDatabase db;
+        QDir        path;
+        QString     name;
+
+        CMainWindow * gui;
 };
 
 #endif //CQMSDB_H

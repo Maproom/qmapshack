@@ -16,34 +16,12 @@
 
 **********************************************************************************************/
 
-#ifndef CMAINWINDOW_H
-#define CMAINWINDOW_H
 
-#include <QMainWindow>
-#include <QPointer>
-#include "ui_IMainWindow.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "qlgt/CQlgtWpt.h"
 
-class CQlgtDb;
-
-class CMainWindow : public QMainWindow, private Ui::IMainWindow
+CGisItemWpt::CGisItemWpt(CQlgtWpt& wpt1)
+    : IGisItem(0, eTypeWpt, -1)
 {
-    Q_OBJECT
-    public:
-        CMainWindow();
-        virtual ~CMainWindow();
 
-        void stdOut(const QString& str);
-        void stdErr(const QString& str);
-
-    private slots:
-        void slotSelectSource();
-        void slotSelectTarget();
-        void slotStart();
-
-
-    private:
-        QPointer<CQlgtDb> dbQlgt;
-};
-
-#endif //CMAINWINDOW_H
-
+}

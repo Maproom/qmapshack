@@ -10,11 +10,13 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 find_package(Qt5Core)
 find_package(Qt5Sql)
+find_package(Qt5Xml)
 find_package(Qt5LinguistTools)
 
 set( SRCS
 
     main.cpp
+    converter.cpp
     CMainWindow.cpp
     CQlgtDb.cpp
     CQmsDb.cpp
@@ -26,6 +28,9 @@ set( SRCS
     qlgt/CQlgtRoute.cpp
     qlgt/CQlgtDiary.cpp
     qlgt/IQlgtOverlay.cpp
+
+    ../../src/gis/IGisItem.cpp
+    ../../src/gis/wpt/CGisItemWpt.cpp
 
 )
 
@@ -46,6 +51,9 @@ set( HDRS
     qlgt/CQlgtDiary.h
     qlgt/IQlgtOverlay.h
 
+    ../../src/gis/IGisItem.h
+    ../../src/gis/wpt/CGisItemWpt.h
+
 )
 
 set( UIS
@@ -64,6 +72,7 @@ if(UNIX)
     add_definitions(-Wall -Wno-switch)
 endif(UNIX)
 
+add_definitions(-DCONVERTER)
 
 file(GLOB TRANSLATIONS_FILES locale/*.ts)
 
@@ -96,6 +105,7 @@ add_executable(${APPNAME} WIN32 ${ALLINP})
 target_link_libraries(${APPNAME}
     Qt5::Widgets
     Qt5::Sql
+    Qt5::Xml
 )
 
 install(

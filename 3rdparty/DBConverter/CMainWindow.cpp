@@ -51,6 +51,7 @@ CMainWindow::CMainWindow()
 
     connect(toolSource, SIGNAL(clicked()), this, SLOT(slotSelectSource()));
     connect(toolTarget, SIGNAL(clicked()), this, SLOT(slotSelectTarget()));
+    connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
 
 
     if(QFile::exists(labelSource->text()))
@@ -69,6 +70,20 @@ CMainWindow::~CMainWindow()
     cfg.setValue("File/source", labelSource->text());
     cfg.setValue("File/target", labelTarget->text());
 }
+
+void CMainWindow::stdOut(const QString& str)
+{
+    textBrowser->setTextColor(Qt::black);
+    textBrowser->append(str);
+}
+
+
+void CMainWindow::stdErr(const QString& str)
+{
+    textBrowser->setTextColor(Qt::red);
+    textBrowser->append(str);
+}
+
 
 void CMainWindow::slotSelectSource()
 {
@@ -111,15 +126,10 @@ void CMainWindow::slotSelectTarget()
     labelTarget->setText(filename);
 }
 
-void CMainWindow::stdOut(const QString& str)
+void CMainWindow::slotStart()
 {
-    textBrowser->setTextColor(Qt::black);
-    textBrowser->append(str);
+    pushStart->setEnabled(false);
+    dbQlgt->start(labelTarget->text());
+    pushStart->setEnabled(true);
 }
 
-
-void CMainWindow::stdErr(const QString& str)
-{
-    textBrowser->setTextColor(Qt::red);
-    textBrowser->append(str);
-}

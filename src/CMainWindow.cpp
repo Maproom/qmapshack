@@ -33,6 +33,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupDB.h"
+#include "qlgt/CImportDatabase.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -88,6 +89,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
     connect(actionSetupUnits, SIGNAL(triggered()), this, SLOT(slotSetupUnits()));
     connect(actionSetupDatabase, SIGNAL(triggered()), this, SLOT(slotSetupDatabase()));
+    connect(actionImportDatabase, SIGNAL(triggered()), this, SLOT(slotImportDatabase()));
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
@@ -542,6 +544,12 @@ void CMainWindow::slotSetupDatabase()
 {
     CSetupDB dlg(this);
     dlg.exec();
+}
+
+void CMainWindow::slotImportDatabase()
+{
+    CImportDatabase * widget = new CImportDatabase(this);
+    addWidgetToTab(widget);
 }
 
 void CMainWindow::slotLoadGISData()

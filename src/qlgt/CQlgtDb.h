@@ -25,8 +25,8 @@
 #include <QDir>
 #include <QPointer>
 
-class CMainWindow;
-class CQmsDb;
+class CImportDatabase;
+//class CQmsDb;
 
 class CQlgtDb : public QObject
 {
@@ -47,7 +47,7 @@ class CQlgtDb : public QObject
             eFolderN    = QTreeWidgetItem::UserType + 104
         };
 
-        CQlgtDb(const QString& filename, CMainWindow * parent);
+        CQlgtDb(const QString& filename, CImportDatabase * parent);
         virtual ~CQlgtDb();
 
         void start(const QString& filename);
@@ -61,9 +61,9 @@ class CQlgtDb : public QObject
         QDir        path;
         QString     name;
 
-        CMainWindow * gui;
+        CImportDatabase * gui;
 
-        QPointer<CQmsDb> dbQms;
+//        QPointer<CQmsDb> dbQms;
 
         quint32 nItems;
 };

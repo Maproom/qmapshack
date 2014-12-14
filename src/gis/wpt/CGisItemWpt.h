@@ -27,8 +27,6 @@ class IGisProject;
 class QDomNode;
 class CScrOptWpt;
 class QSqlDatabase;
-class CQlgtWpt;
-
 
 class CGisItemWpt : public IGisItem
 {
@@ -82,10 +80,6 @@ class CGisItemWpt : public IGisItem
             QString filePath;
             QString fileName;
         };
-
-#ifdef CONVERTER
-        CGisItemWpt(CQlgtWpt& wpt1);
-#endif
 
         /**
            @brief Create a completely new waypoint

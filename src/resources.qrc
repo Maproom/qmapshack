@@ -117,6 +117,7 @@
         <file>icons/32x32/Pattern.png</file>
         <file>icons/32x32/Opacity.png</file>
         <file>icons/32x32/DatabaseSetup.png</file>
+        <file>icons/32x32/DatabaseConvert.png</file>
         <file>icons/32x32/PathBlue.png</file>
         <file>icons/32x32/PathOrange.png</file>
         <file>icons/32x32/PathGreen.png</file>
@@ -222,6 +223,7 @@
         <file>icons/48x48/Pattern.png</file>
         <file>icons/48x48/Opacity.png</file>
         <file>icons/48x48/DatabaseSetup.png</file>
+        <file>icons/48x48/DatabaseConvert.png</file>
         <file>icons/48x48/PathBlue.png</file>
         <file>icons/48x48/PathOrange.png</file>
         <file>icons/48x48/PathGreen.png</file>

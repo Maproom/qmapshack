@@ -80,6 +80,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotSetupTimeZone();
         void slotSetupUnits();
         void slotSetupDatabase();
+        void slotImportDatabase();
         void slotLoadGISData();
 
     private:

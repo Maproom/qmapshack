@@ -65,7 +65,7 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(3rdparty/CGetOpt)
-add_subdirectory(3rdparty/DBConverter)
+#add_subdirectory(3rdparty/DBConverter)
 add_subdirectory(src)
 
 

@@ -17,13 +17,13 @@
 **********************************************************************************************/
 
 #include "CQlgtDb.h"
-#include "CQmsDb.h"
-#include "CMainWindow.h"
+//#include "CQmsDb.h"
 #include "qlgt/CQlb.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
 #include "qlgt/CQlgtRoute.h"
 #include "qlgt/IQlgtOverlay.h"
+#include "qlgt/CImportDatabase.h"
 
 #include "gis/db/macros.h"
 #include "gis/WptIcons.h"
@@ -37,7 +37,7 @@
 
 #define DB_QLGT_VERSION 9
 
-CQlgtDb::CQlgtDb(const QString &filename, CMainWindow *parent)
+CQlgtDb::CQlgtDb(const QString &filename, CImportDatabase *parent)
     : gui(parent)
     , nItems(0)
 {
@@ -581,26 +581,26 @@ void CQlgtDb::printStatistic()
 
 void CQlgtDb::start(const QString& filename)
 {
-    quint32 cnt = 1;
-    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
-    progress.setWindowModality(Qt::WindowModal);
+//    quint32 cnt = 1;
+//    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
+//    progress.setWindowModality(Qt::WindowModal);
 
-    gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
-    dbQms = new CQmsDb(filename, gui);
+//    gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
+//    dbQms = new CQmsDb(filename, gui);
 
-    QSqlQuery query(db);
-    query.prepare("SELECT id FROM items");
-    QUERY_EXEC(return;);
-    while(query.next())
-    {
+//    QSqlQuery query(db);
+//    query.prepare("SELECT id FROM items");
+//    QUERY_EXEC(return;);
+//    while(query.next())
+//    {
 
-        progress.setValue(cnt++ * 100 / nItems);
-        if (progress.wasCanceled())
-        {
-            break;
-        }
-        xferItem(query.value(0).toULongLong());
-    }
+//        progress.setValue(cnt++ * 100 / nItems);
+//        if (progress.wasCanceled())
+//        {
+//            break;
+//        }
+//        xferItem(query.value(0).toULongLong());
+//    }
 
 
 }
@@ -633,7 +633,6 @@ void CQlgtDb::xferItem(quint64 id)
         {
             CQlgtWpt wpt1(0);
             stream >> wpt1;
-            CGisItemWpt wpt2(wpt1);
             break;
         }
         case eTrk:

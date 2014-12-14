@@ -16,76 +16,54 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
+#include "qlgt/CImportDatabase.h"
+#include "qlgt/CQlgtDb.h"
 #include "helpers/CSettings.h"
-#include "CQlgtDb.h"
 
 #include <QtWidgets>
 
-CMainWindow::CMainWindow()
+CImportDatabase::CImportDatabase(QWidget *parent)
+    : QWidget(parent)
 {
     setupUi(this);
+    setObjectName(tr("Import QLandkarte Database"));
 
     SETTINGS;
 
-    // start ---- restore window geometry -----
-    if ( cfg.contains("MainWindow/geometry"))
-    {
-        restoreGeometry(cfg.value("MainWindow/geometry").toByteArray());
-    }
-    else
-    {
-        setGeometry(0,0,800,600);
-    }
-
-    if ( cfg.contains("MainWindow/state"))
-    {
-        restoreState(cfg.value("MainWindow/state").toByteArray());
-    }
-    // end ---- restore window geometry -----
-
-    labelSource->setText(cfg.value("File/source","-").toString());
-    labelTarget->setText(cfg.value("File/target","-").toString());
+    labelSource->setText(cfg.value("ConvertDB/source","-").toString());
+    labelTarget->setText(cfg.value("ConvertDB/target","-").toString());
 
     textBrowser->setFont(QFont("Courier",10));
 
-    connect(toolSource, SIGNAL(clicked()), this, SLOT(slotSelectSource()));
-    connect(toolTarget, SIGNAL(clicked()), this, SLOT(slotSelectTarget()));
+    connect(toolSelectSource, SIGNAL(clicked()), this, SLOT(slotSelectSource()));
+    connect(toolSelectTarget, SIGNAL(clicked()), this, SLOT(slotSelectTarget()));
     connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
 
-
-    if(QFile::exists(labelSource->text()))
-    {
-        dbQlgt = new CQlgtDb(labelSource->text(), this);
-    }
-
 }
 
-CMainWindow::~CMainWindow()
+CImportDatabase::~CImportDatabase()
 {
     SETTINGS;
-    cfg.setValue("MainWindow/state", saveState());
-    cfg.setValue("MainWindow/geometry", saveGeometry());
+    cfg.setValue("ConvertDB/source", labelSource->text());
+    cfg.setValue("ConvertDB/target", labelTarget->text());
 
-    cfg.setValue("File/source", labelSource->text());
-    cfg.setValue("File/target", labelTarget->text());
 }
 
-void CMainWindow::stdOut(const QString& str)
+void CImportDatabase::stdOut(const QString& str)
 {
     textBrowser->setTextColor(Qt::black);
     textBrowser->append(str);
 }
 
 
-void CMainWindow::stdErr(const QString& str)
+void CImportDatabase::stdErr(const QString& str)
 {
     textBrowser->setTextColor(Qt::red);
     textBrowser->append(str);
 }
 
 
-void CMainWindow::slotSelectSource()
+void CImportDatabase::slotSelectSource()
 {
     SETTINGS;
     QString path = cfg.value("Path/source",QDir::homePath()).toString();
@@ -106,7 +84,7 @@ void CMainWindow::slotSelectSource()
 
 }
 
-void CMainWindow::slotSelectTarget()
+void CImportDatabase::slotSelectTarget()
 {
     SETTINGS;
     QString path = cfg.value("Path/target",QDir::homePath()).toString();
@@ -126,7 +104,7 @@ void CMainWindow::slotSelectTarget()
     labelTarget->setText(filename);
 }
 
-void CMainWindow::slotStart()
+void CImportDatabase::slotStart()
 {
     pushStart->setEnabled(false);
     dbQlgt->start(labelTarget->text());

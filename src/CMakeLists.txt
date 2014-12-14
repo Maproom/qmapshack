@@ -134,6 +134,15 @@ set( SRCS
     plot/CPlotSpeed.cpp
     plot/CPlotDistance.cpp
     plot/CPlotTrack.cpp
+    qlgt/CQlb.cpp
+    qlgt/IItem.cpp
+    qlgt/CQlgtWpt.cpp
+    qlgt/CQlgtTrack.cpp
+    qlgt/CQlgtRoute.cpp
+    qlgt/CQlgtDiary.cpp
+    qlgt/IQlgtOverlay.cpp
+    qlgt/CImportDatabase.cpp
+    qlgt/CQlgtDb.cpp
 )
 
 set( HDRS
@@ -259,6 +268,15 @@ set( HDRS
     plot/CPlotSpeed.h
     plot/CPlotDistance.h
     plot/CPlotTrack.h
+    qlgt/CQlb.h
+    qlgt/IItem.h
+    qlgt/CQlgtWpt.h
+    qlgt/CQlgtTrack.h
+    qlgt/CQlgtRoute.h
+    qlgt/CQlgtDiary.h
+    qlgt/IQlgtOverlay.h
+    qlgt/CImportDatabase.h
+    qlgt/CQlgtDb.h
 )
 
 set( UIS
@@ -300,6 +318,7 @@ set( UIS
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
     units/IUnitsSetup.ui
+    qlgt/IImportDatabase.ui
 )
 
 set( RCS

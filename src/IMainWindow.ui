@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -104,6 +104,7 @@
     <addaction name="actionSearchGoogle"/>
     <addaction name="separator"/>
     <addaction name="actionSetupDatabase"/>
+    <addaction name="actionImportDatabase"/>
     <addaction name="actionCloseAllProjects"/>
    </widget>
    <addaction name="menuFile"/>
@@ -439,6 +440,18 @@
    </property>
    <property name="text">
     <string>Setup Database</string>
+   </property>
+  </action>
+  <action name="actionImportDatabase">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/DatabaseConvert.png</normaloff>:/icons/32x32/DatabaseConvert.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import Database</string>
+   </property>
+   <property name="toolTip">
+    <string>Import QLandkarte GT database</string>
    </property>
   </action>
  </widget>

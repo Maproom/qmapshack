@@ -16,12 +16,35 @@
 
 **********************************************************************************************/
 
+#ifndef CIMPORTDATABASE_H
+#define CIMPORTDATABASE_H
 
-#include "gis/wpt/CGisItemWpt.h"
-#include "qlgt/CQlgtWpt.h"
+#include <QWidget>
+#include <QPointer>
+#include "ui_IImportDatabase.h"
 
-CGisItemWpt::CGisItemWpt(CQlgtWpt& wpt1)
-    : IGisItem(0, eTypeWpt, -1)
+class CQlgtDb;
+
+class CImportDatabase : public QWidget, private Ui::IImportDatabase
 {
+    Q_OBJECT
+    public:
+        CImportDatabase(QWidget * parent);
+        virtual ~CImportDatabase();
 
-}
+        void stdOut(const QString& str);
+        void stdErr(const QString& str);
+
+    private slots:
+        void slotSelectSource();
+        void slotSelectTarget();
+        void slotStart();
+
+
+    private:
+        QPointer<CQlgtDb> dbQlgt;
+
+};
+
+#endif //CIMPORTDATABASE_H
+

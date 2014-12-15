@@ -248,6 +248,9 @@ class CQlgtTrack : public QObject, public IItem
         bool hasExt1Data() { return ext1Data;}
         void setExt1Data() { ext1Data = true;}
 
+        bool hasShadow1;
+        bool hasShadow2;
+
 };
 
 QDataStream& operator >>(QDataStream& s, CQlgtTrack& trk);

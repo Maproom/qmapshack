@@ -16,8 +16,11 @@
 
 **********************************************************************************************/
 
+#include "gis/WptIcons.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "qlgt/CQlgtWpt.h"
+#include "qlgt/CQlgtTrack.h"
 #include "units/IUnit.h"
 
 inline qreal readFloat(float val)
@@ -34,7 +37,11 @@ CGisItemWpt::CGisItemWpt(CQlgtWpt& wpt1)
     wpt.name        = wpt1.name;
     wpt.cmt         = wpt1.comment;
     wpt.desc        = wpt1.description;
-    setIcon(wpt1.iconString);
+    wpt.sym         = wpt1.iconString;
+
+    QPointF focus;
+    icon  = getWptIconByName(wpt.sym, focus);
+
 
     wpt.lat     = readFloat(wpt1.lat);
     wpt.lon     = readFloat(wpt1.lon);
@@ -106,6 +113,48 @@ CGisItemWpt::CGisItemWpt(CQlgtWpt& wpt1)
 
         images << image;
     }
+
+    genKey();
+    setupHistory();
+}
+
+
+CGisItemTrk::CGisItemTrk(CQlgtTrack& trk1)
+    : IGisItem(0, eTypeTrk, -1)
+{
+
+    trk.name        = trk1.name;
+    trk.cmt         = trk1.comment;
+    trk.desc        = trk1.description;
+    trk.color       = lineColors[trk1.colorIdx].name();
+
+    bool hasExtData = trk1.hasExt1Data();
+    trkseg_t seg;
+    foreach(const CQlgtTrack::pt_t& pt1, trk1.track)
+    {
+        trkpt_t pt;
+        if(pt1.flags & CQlgtTrack::pt_t::eDeleted)
+        {
+            pt.flags |= trkpt_t::eHidden;
+        }
+
+        pt.lon  = pt1._lon;
+        pt.lat  = pt1._lat;
+        pt.ele  = pt1._ele == WPT_NOFLOAT ? NOINT : qRound(pt1._ele);
+        pt.time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
+        pt.time.addMSecs(pt1._timestamp_msec);
+
+        if(hasExtData)
+        {
+            pt.hdop = pt1.hdop;
+            pt.vdop = pt1.vdop;
+            pt.pdop = pt1.pdop;
+        }
+
+        seg.pts << pt;
+    }
+
+    trk.segs << seg;
 
     genKey();
     setupHistory();

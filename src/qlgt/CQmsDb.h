@@ -26,6 +26,7 @@
 class CImportDatabase;
 class IGisItem;
 class CQlgtWpt;
+class CQlgtTrack;
 
 class CQmsDb : public QObject, private IDB
 {
@@ -33,7 +34,8 @@ class CQmsDb : public QObject, private IDB
         CQmsDb(const QString& filename, CImportDatabase * parent);
         virtual ~CQmsDb();
 
-        void addWpt(CQlgtWpt& wpt);
+        void addWpt(CQlgtWpt& wpt1);
+        void addTrk(CQlgtTrack& trk1);
 
     private:
         quint64 store(IGisItem& item);

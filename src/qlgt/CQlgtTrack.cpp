@@ -267,6 +267,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
                     s1 >> trkpt._lat;
                     s1 >> trkpt._ele;
                 }
+                track.hasShadow1 = true;
                 break;
             }
 
@@ -297,6 +298,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
                     s1 >> dummy;
                     s1 >> dummy;
                 }
+                track.hasShadow2 = true;
                 break;
             }
 
@@ -318,6 +320,9 @@ QDataStream& operator <<(QDataStream& s, CQlgtTrack& trk)
 CQlgtTrack::CQlgtTrack(quint64 id, QObject *parent)
     : QObject(parent)
     , IItem(id)
+    , ext1Data(false)
+    , hasShadow1(false)
+    , hasShadow2(false)
 {
 
 }

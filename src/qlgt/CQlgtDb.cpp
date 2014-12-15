@@ -638,6 +638,7 @@ void CQlgtDb::xferItem(quint64 id)
         {
             CQlgtTrack trk1(id, 0);
             stream >> trk1;
+            dbQms->addTrk(trk1);
             break;
         }
         case eRte:

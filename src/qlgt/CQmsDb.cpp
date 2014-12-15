@@ -20,7 +20,9 @@
 #include "qlgt/CQmsDb.h"
 #include "qlgt/CImportDatabase.h"
 #include "qlgt/CQlgtWpt.h"
+#include "qlgt/CQlgtTrack.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
 
 #include <QtSql>
 
@@ -49,6 +51,16 @@ void CQmsDb::addWpt(CQlgtWpt& wpt1)
     if(id != 0)
     {
         mapItemIDs[wpt1.id] = id;
+    }
+}
+
+void CQmsDb::addTrk(CQlgtTrack &trk1)
+{
+    CGisItemTrk trk(trk1);
+    quint64 id = store(trk);
+    if(id != 0)
+    {
+        mapItemIDs[trk1.id] = id;
     }
 }
 

@@ -56,6 +56,8 @@ class CQlgtDb : public QObject
         void initDB();
         void migrateDB(int version);
         void printStatistic();
+        void xferFolders();
+        void xferItems();
         void xferItem(quint64 id);
         QSqlDatabase db;
         QDir        path;
@@ -66,6 +68,12 @@ class CQlgtDb : public QObject
         QPointer<CQmsDb> dbQms;
 
         quint32 nItems;
+        quint32 nFolders;
+        quint32 nWpt;
+        quint32 nTrk;
+        quint32 nRte;
+        quint32 nOvl;
+        quint32 nDiary;
 };
 
 #endif //CQLGTDB_H

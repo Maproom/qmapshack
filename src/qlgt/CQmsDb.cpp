@@ -21,6 +21,7 @@
 #include "qlgt/CImportDatabase.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
+#include "gis/db/CDBProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
 
@@ -41,6 +42,12 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
 
 CQmsDb::~CQmsDb()
 {
+
+}
+
+void CQmsDb::addFolder(CQlgtFolder& folder)
+{
+    CDBProject project(folder);
 
 }
 

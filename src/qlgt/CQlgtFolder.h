@@ -16,37 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CQMSDB_H
-#define CQMSDB_H
+#ifndef CQLGTFOLDER_H
+#define CQLGTFOLDER_H
 
 #include <QObject>
-#include <QMap>
-#include "gis/db/IDB.h"
 
-class CImportDatabase;
-class IGisItem;
-class CQlgtFolder;
-class CQlgtWpt;
-class CQlgtTrack;
+class QSqlDatabase;
+class CQlgtDiary;
 
-class CQmsDb : public QObject, private IDB
+class CQlgtFolder : public QObject
 {
     public:
-        CQmsDb(const QString& filename, CImportDatabase * parent);
-        virtual ~CQmsDb();
+        CQlgtFolder(quint64 id, QSqlDatabase& db);
+        virtual ~CQlgtFolder();
 
-        void addFolder(CQlgtFolder &folder);
-        void addWpt(CQlgtWpt &wpt1);
-        void addTrk(CQlgtTrack &trk1);
+        qint32 type;
+        QString name;
+        QString comment;
+        bool locked;
 
-    private:
-        quint64 store(IGisItem &item);
-
-        CImportDatabase * gui;
-
-        QMap<quint64, quint64> mapFolderIDs;
-        QMap<quint64, quint64> mapItemIDs;
+        CQlgtDiary * diary;
 };
 
-#endif //CQMSDB_H
+#endif //CQLGTFOLDER_H
 

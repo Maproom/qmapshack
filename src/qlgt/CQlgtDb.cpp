@@ -19,6 +19,7 @@
 #include "qlgt/CQlgtDb.h"
 #include "qlgt/CQmsDb.h"
 #include "qlgt/CQlb.h"
+#include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
 #include "qlgt/CQlgtRoute.h"
@@ -40,6 +41,12 @@
 CQlgtDb::CQlgtDb(const QString &filename, CImportDatabase *parent)
     : gui(parent)
     , nItems(0)
+    , nFolders(0)
+    , nWpt(0)
+    , nTrk(0)
+    , nRte(0)
+    , nOvl(0)
+    , nDiary(0)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","qlandkarte");
     db.setDatabaseName(filename);
@@ -530,7 +537,8 @@ void CQlgtDb::printStatistic()
     QUERY_EXEC(; );
     if(query.next())
     {
-        gui->stdOut(tr("Folders:          %1").arg(query.value(0).toInt()));
+        nFolders = query.value(0).toInt();
+        gui->stdOut(tr("Folders:          %1").arg(nFolders));
     }
 
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
@@ -583,12 +591,61 @@ void CQlgtDb::printStatistic()
 
 void CQlgtDb::start(const QString& filename)
 {
+    gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
+    dbQms = new CQmsDb(filename, gui);
+
+    xferFolders();
+    xferItems();
+
+    delete dbQms;
+    gui->stdOut(tr("------ Done ------"));
+
+}
+
+void CQlgtDb::xferFolders()
+{
+    nDiary = 0;
+
     quint32 cnt = 1;
     QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
     progress.setWindowModality(Qt::WindowModal);
 
-    gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
-    dbQms = new CQmsDb(filename, gui);
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM folders");
+    QUERY_EXEC(return;);
+    while(query.next())
+    {
+        progress.setValue(cnt++ * 100 / nFolders);
+        if (progress.wasCanceled())
+        {
+            break;
+        }
+
+        CQlgtFolder folder1(query.value(0).toULongLong(), db);
+        if(folder1.diary)
+        {
+            nDiary++;
+        }
+
+        dbQms->addFolder(folder1);
+
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+    }
+    progress.setValue(100);
+    gui->stdOut(tr("Imported %1 folders and %2 diaries").arg(nFolders).arg(nDiary));
+}
+
+void CQlgtDb::xferItems()
+{
+    quint32 cnt = 1;
+    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
+    progress.setWindowModality(Qt::WindowModal);
+
+    nWpt = 0;
+    nTrk = 0;
+    nRte = 0;
+    nOvl = 0;
+
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM items");
@@ -606,9 +663,11 @@ void CQlgtDb::start(const QString& filename)
     }
     progress.setValue(100);
 
-    delete dbQms;
-    gui->stdOut(tr("------ Done ------"));
+    gui->stdOut(tr("Imported %1 tracks, %2 waypoints, %3 routes, %4 areas").arg(nTrk).arg(nWpt).arg(nRte).arg(nOvl));
+    gui->stdOut(tr("Import folders..."));
 
+    query.prepare("SELECT id FROM folders");
+    QUERY_EXEC(return;);
 }
 
 void CQlgtDb::xferItem(quint64 id)
@@ -632,6 +691,7 @@ void CQlgtDb::xferItem(quint64 id)
             CQlgtWpt wpt1(id, 0);
             stream >> wpt1;
             dbQms->addWpt(wpt1);
+            nWpt++;
             break;
         }
         case eTrk:
@@ -639,6 +699,7 @@ void CQlgtDb::xferItem(quint64 id)
             CQlgtTrack trk1(id, 0);
             stream >> trk1;
             dbQms->addTrk(trk1);
+            nTrk++;
             break;
         }
         case eRte:

@@ -163,7 +163,7 @@ class IGisItem : public QTreeWidgetItem
            @brief Get the icon attached to object
            @return
          */
-        virtual const QPixmap& getIcon(){return icon;}
+        virtual const QPixmap& getIcon() const {return icon;}
         /**
            @brief Get name of this item.
            @return A reference to the internal string object

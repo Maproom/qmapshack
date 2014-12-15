@@ -59,7 +59,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         CGisItemTrk(const QDomNode &xml, IGisProject *project);
         CGisItemTrk(const history_t& hist, IGisProject * project);
         CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project);
-        CGisItemTrk(CQlgtTrack& trk1);
+        CGisItemTrk(const CQlgtTrack& trk1);
         virtual ~CGisItemTrk();
 
         QDataStream& operator<<(QDataStream& stream);

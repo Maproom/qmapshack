@@ -17,8 +17,11 @@
 **********************************************************************************************/
 
 #include "gis/WptIcons.h"
+#include "gis/db/CDBProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
+
+#include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
 #include "units/IUnit.h"
@@ -28,7 +31,13 @@ inline qreal readFloat(float val)
     return val == WPT_NOFLOAT ? NOFLOAT : val;
 }
 
-CGisItemWpt::CGisItemWpt(CQlgtWpt& wpt1)
+CDBProject::CDBProject(CQlgtFolder& folder)
+    : IGisProject(eTypeDb, "", 0)
+{
+
+}
+
+CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
     : IGisItem(0, eTypeWpt, -1)
 {
     qreal direction;
@@ -119,7 +128,7 @@ CGisItemWpt::CGisItemWpt(CQlgtWpt& wpt1)
 }
 
 
-CGisItemTrk::CGisItemTrk(CQlgtTrack& trk1)
+CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     : IGisItem(0, eTypeTrk, -1)
 {
 
@@ -127,6 +136,7 @@ CGisItemTrk::CGisItemTrk(CQlgtTrack& trk1)
     trk.cmt         = trk1.comment;
     trk.desc        = trk1.description;
     trk.color       = lineColors[trk1.colorIdx].name();
+    setColor(lineColors[trk1.colorIdx]);
 
     bool hasExtData = trk1.hasExt1Data();
     trkseg_t seg;
@@ -156,6 +166,7 @@ CGisItemTrk::CGisItemTrk(CQlgtTrack& trk1)
 
     trk.segs << seg;
 
+    deriveSecondaryData();
     genKey();
     setupHistory();
 }

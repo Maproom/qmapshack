@@ -24,12 +24,14 @@
 
 class CEvtD2WShowItems;
 class CEvtD2WHideItems;
+class CQlgtFolder;
 
 class CDBProject : public IGisProject
 {
     public:
         CDBProject(CGisListWks * parent);
         CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
+        CDBProject(CQlgtFolder& folder);
         virtual ~CDBProject();
 
         /**

@@ -245,7 +245,7 @@ class CQlgtTrack : public QObject, public IItem
         quint32 useMultiColor;
         qint32  idMultiColor;
 
-        bool hasExt1Data() { return ext1Data;}
+        bool hasExt1Data() const { return ext1Data;}
         void setExt1Data() { ext1Data = true;}
 
         bool hasShadow1;

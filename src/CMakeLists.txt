@@ -138,6 +138,7 @@ set( SRCS
     qlgt/converter.cpp
     qlgt/CQlb.cpp
     qlgt/IItem.cpp
+    qlgt/CQlgtFolder.cpp
     qlgt/CQlgtWpt.cpp
     qlgt/CQlgtTrack.cpp
     qlgt/CQlgtRoute.cpp
@@ -274,6 +275,7 @@ set( HDRS
     plot/CPlotTrack.h
     qlgt/CQlb.h
     qlgt/IItem.h
+    qlgt/CQlgtFolder.h
     qlgt/CQlgtWpt.h
     qlgt/CQlgtTrack.h
     qlgt/CQlgtRoute.h

@@ -126,7 +126,7 @@ class CGisItemWpt : public IGisItem
         */
         CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project);
 
-        CGisItemWpt(CQlgtWpt& wpt1);
+        CGisItemWpt(const CQlgtWpt& wpt1);
 
         virtual ~CGisItemWpt();
 

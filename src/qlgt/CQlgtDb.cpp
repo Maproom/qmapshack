@@ -597,6 +597,25 @@ void CQlgtDb::start(const QString& filename)
     xferItems();
     xferFolders();
 
+    QSqlQuery query(db);
+    query.prepare("Select parent, child FROM folder2folder");
+    QUERY_EXEC(return;);
+    while(query.next())
+    {
+        quint64 idParent    = query.value(0).toULongLong();
+        quint64 idChild     = query.value(1).toULongLong();
+        dbQms->addFolder2FolderRelation(idParent, idChild);
+    }
+
+    query.prepare("Select parent, child FROM folder2item");
+    QUERY_EXEC(return;);
+    while(query.next())
+    {
+        quint64 idParent    = query.value(0).toULongLong();
+        quint64 idChild     = query.value(1).toULongLong();
+        dbQms->addFolder2ItemRelation(idParent, idChild);
+    }
+
     delete dbQms;
     gui->stdOut(tr("------ Done ------"));
 

@@ -47,6 +47,8 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
     mapFolderTypes[CQlgtDb::eFolder2] = IDBFolder::eTypeProject;
     mapFolderTypes[CQlgtDb::eFolderN] = IDBFolder::eTypeOther;
 
+    mapFolderIDs[1] = 1;
+    mapFolderIDs[0] = 1;
 }
 
 CQmsDb::~CQmsDb()
@@ -54,10 +56,31 @@ CQmsDb::~CQmsDb()
 
 }
 
+
+void CQmsDb::addFolder2FolderRelation(quint64 parent, quint64 child)
+{
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
+    query.bindValue(":parent", mapFolderIDs[parent]);
+    query.bindValue(":child", mapFolderIDs[child]);
+    QUERY_EXEC(return);
+}
+
+void CQmsDb::addFolder2ItemRelation(quint64 parent, quint64 child)
+{
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
+    query.bindValue(":parent", mapFolderIDs[parent]);
+    query.bindValue(":child", mapItemIDs[child]);
+    QUERY_EXEC(return);
+}
+
+
 void CQmsDb::addFolder(CQlgtFolder& folder)
 {
     QSqlQuery query(db);
 
+    // folders without child items
     if(folder.items.isEmpty())
     {
 
@@ -80,6 +103,10 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
         return;
     }
 
+    /*
+        Folders with child items will be loaded as complete CDBProject first, to
+        generate key and info text properly
+    */
     CDBProject project(folder);
     foreach(quint64 id, folder.items)
     {
@@ -139,8 +166,6 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
         return;
     }
     mapFolderIDs[folder.id] = id;
-
-
 }
 
 void CQmsDb::addWpt(CQlgtWpt& wpt1)

@@ -35,6 +35,9 @@ class CQmsDb : public QObject, private IDB
         CQmsDb(const QString& filename, CImportDatabase * parent);
         virtual ~CQmsDb();
 
+        void addFolder2FolderRelation(quint64 parent, quint64 child);
+        void addFolder2ItemRelation(quint64 parent, quint64 child);
+
         void addFolder(CQlgtFolder &folder);
         void addWpt(CQlgtWpt &wpt1);
         void addTrk(CQlgtTrack &trk1);

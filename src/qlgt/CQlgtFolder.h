@@ -20,6 +20,7 @@
 #define CQLGTFOLDER_H
 
 #include <QObject>
+#include <QSet>
 
 class QSqlDatabase;
 class CQlgtDiary;
@@ -36,6 +37,9 @@ class CQlgtFolder : public QObject
         bool locked;
 
         CQlgtDiary * diary;
+
+        quint64 id;
+        QSet<quint64> items;
 };
 
 #endif //CQLGTFOLDER_H

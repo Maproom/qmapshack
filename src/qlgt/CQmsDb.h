@@ -44,6 +44,8 @@ class CQmsDb : public QObject, private IDB
 
         CImportDatabase * gui;
 
+        QMap<int, int> mapFolderTypes;
+
         QMap<quint64, quint64> mapFolderIDs;
         QMap<quint64, quint64> mapItemIDs;
 };

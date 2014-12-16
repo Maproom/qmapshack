@@ -594,8 +594,8 @@ void CQlgtDb::start(const QString& filename)
     gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
     dbQms = new CQmsDb(filename, gui);
 
-    xferFolders();
     xferItems();
+    xferFolders();
 
     delete dbQms;
     gui->stdOut(tr("------ Done ------"));
@@ -621,7 +621,9 @@ void CQlgtDb::xferFolders()
             break;
         }
 
-        CQlgtFolder folder1(query.value(0).toULongLong(), db);
+        quint64 idFolder = query.value(0).toULongLong();
+
+        CQlgtFolder folder1(idFolder, db);
         if(folder1.diary)
         {
             nDiary++;

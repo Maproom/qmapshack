@@ -24,6 +24,7 @@
 #include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
+#include "qlgt/CQlgtDiary.h"
 #include "units/IUnit.h"
 
 inline qreal readFloat(float val)
@@ -34,7 +35,11 @@ inline qreal readFloat(float val)
 CDBProject::CDBProject(CQlgtFolder& folder)
     : IGisProject(eTypeDb, "", 0)
 {
-
+    metadata.name = folder.name;
+    if(folder.diary)
+    {
+        metadata.desc = folder.diary->comment;
+    }
 }
 
 CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)

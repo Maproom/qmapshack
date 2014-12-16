@@ -27,6 +27,7 @@ CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
     : type(0)
     , locked(false)
     , diary(0)
+    , id(id)
 {
     QSqlQuery query(db);
 
@@ -55,6 +56,14 @@ CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
 
         diary = new CQlgtDiary(idDiary, this);
         stream >> *diary;
+    }
+
+    query.prepare("SELECT child FROM folder2item WHERE parent=:folder");
+    query.bindValue(":folder", id);
+    QUERY_EXEC(return;);
+    while(query.next())
+    {
+        items << query.value(0).toULongLong();
     }
 }
 

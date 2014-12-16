@@ -17,13 +17,18 @@
 **********************************************************************************************/
 
 #include "gis/db/macros.h"
+#include "gis/db/IDBFolder.h"
+#include "qlgt/CQlgtDb.h"
 #include "qlgt/CQmsDb.h"
 #include "qlgt/CImportDatabase.h"
+#include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
 #include "gis/db/CDBProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 
 #include <QtSql>
 
@@ -38,6 +43,10 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
     }
     setupDB(filename, "qlgt2qms");
 
+    mapFolderTypes[CQlgtDb::eFolder1] = IDBFolder::eTypeGroup;
+    mapFolderTypes[CQlgtDb::eFolder2] = IDBFolder::eTypeProject;
+    mapFolderTypes[CQlgtDb::eFolderN] = IDBFolder::eTypeOther;
+
 }
 
 CQmsDb::~CQmsDb()
@@ -47,7 +56,90 @@ CQmsDb::~CQmsDb()
 
 void CQmsDb::addFolder(CQlgtFolder& folder)
 {
+    QSqlQuery query(db);
+
+    if(folder.items.isEmpty())
+    {
+
+        query.prepare("INSERT INTO folders (type, name, locked) VALUES (:type, :name, :locked)");
+        query.bindValue(":type", mapFolderTypes[folder.type]);
+        query.bindValue(":name", folder.name);
+        query.bindValue(":locked", folder.locked);
+        QUERY_EXEC(return);
+
+        query.prepare("SELECT last_insert_rowid() from folders");
+        QUERY_EXEC(return);
+        query.next();
+        quint64 id = query.value(0).toULongLong();
+        if(id == 0)
+        {
+            qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
+            return;
+        }
+        mapFolderIDs[folder.id] = id;
+        return;
+    }
+
     CDBProject project(folder);
+    foreach(quint64 id, folder.items)
+    {
+        quint64 idChild = mapItemIDs[id];
+        query.prepare("SELECT type FROM items WHERE id=:id");
+        query.bindValue(":id", idChild);
+        QUERY_EXEC(continue);
+        if(query.next())
+        {
+            int type = query.value(0).toInt();
+            switch(type)
+            {
+                case IGisItem::eTypeWpt:
+                    new CGisItemWpt(idChild, db, &project);
+                    break;
+                case IGisItem::eTypeTrk:
+                    new CGisItemTrk(idChild, db, &project);
+                    break;
+                case IGisItem::eTypeRte:
+                    new CGisItemRte(idChild, db, &project);
+                    break;
+                case IGisItem::eTypeOvl:
+                    new CGisItemOvlArea(idChild, db, &project);
+                    break;
+                default:;
+            }
+        }
+        else
+        {
+            gui->stdErr(tr("%1: drop item with QLGT DB ID %2").arg(folder.name).arg(id));
+        }
+    }
+
+    // serialize metadata of project
+    QByteArray data;
+    QDataStream in(&data, QIODevice::WriteOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_2);
+    project >> in;
+
+    query.prepare("INSERT INTO folders (type, key, name, comment, locked, data) VALUES (:type, :key, :name, :comment, :locked, :data)");
+    query.bindValue(":type",    mapFolderTypes[folder.type]);
+    query.bindValue(":key",     project.getKey());
+    query.bindValue(":name",    project.getName());
+    query.bindValue(":comment", project.getInfo());
+    query.bindValue(":locked",  folder.locked);
+    query.bindValue(":data",    data);
+    QUERY_EXEC(return);
+
+    query.prepare("SELECT last_insert_rowid() from folders");
+    QUERY_EXEC(return);
+    query.next();
+    quint64 id = query.value(0).toULongLong();
+    if(id == 0)
+    {
+        qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
+        return;
+    }
+    mapFolderIDs[folder.id] = id;
+
 
 }
 

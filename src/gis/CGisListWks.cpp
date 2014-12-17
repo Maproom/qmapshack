@@ -71,7 +71,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     , saveOnExit(true)
     , saveEvery(5)
 {
-    db = QSqlDatabase::addDatabase("QSQLITE","Workspace");
+    db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
     db.setDatabaseName(QDir::home().filePath(CONFIGDIR).append("/workspace.db"));
     db.open();
     configDB();

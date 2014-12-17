@@ -78,6 +78,11 @@ void CQmsDb::addFolder2ItemRelation(quint64 parent, quint64 child)
 
 void CQmsDb::addFolder(CQlgtFolder& folder)
 {
+    if(folder.id < 2)
+    {
+        return;
+    }
+
     QSqlQuery query(db);
 
     // folders without child items

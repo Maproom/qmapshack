@@ -68,6 +68,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         in.setByteOrder(QDataStream::LittleEndian);
         in.setVersion(QDataStream::Qt_5_2);
         *this << in;
+        filename = dbName;
     }
 
     setText(0, name);

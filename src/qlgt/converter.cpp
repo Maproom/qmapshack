@@ -29,7 +29,7 @@
 
 inline qreal readFloat(float val)
 {
-    return val == WPT_NOFLOAT ? NOFLOAT : val;
+    return val > NOFLOAT ? NOFLOAT : val;
 }
 
 CDBProject::CDBProject(CQlgtFolder& folder)
@@ -46,20 +46,17 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
     : IGisItem(0, eTypeWpt, -1)
 {
     qreal direction;
+    QDateTime time = QDateTime::fromTime_t(wpt1.timestamp,QTimeZone("UTC"));
 
-    wpt.time        = QDateTime::fromTime_t(wpt1.timestamp,QTimeZone("UTC"));
+    wpt.time        = time.toUTC();
     wpt.name        = wpt1.name;
     wpt.cmt         = wpt1.comment;
     wpt.desc        = wpt1.description;
     wpt.sym         = wpt1.iconString;
 
-    QPointF focus;
-    icon  = getWptIconByName(wpt.sym, focus);
-
-
     wpt.lat     = readFloat(wpt1.lat);
     wpt.lon     = readFloat(wpt1.lon);
-    wpt.ele     = readFloat(wpt1.ele);
+    wpt.ele     = wpt1.ele == WPT_NOFLOAT ? NOINT : qRound(wpt1.ele);
     proximity   = readFloat(wpt1.prx);
     direction   = readFloat(wpt1.dir);
     if(!wpt1.link.isEmpty())
@@ -127,7 +124,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
 
         images << image;
     }
-
+    setIcon();
     genKey();
     setupHistory();
 }
@@ -152,12 +149,14 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
         {
             pt.flags |= trkpt_t::eHidden;
         }
+        QDateTime time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
+        time.addMSecs(pt1._timestamp_msec);
 
         pt.lon  = pt1._lon;
         pt.lat  = pt1._lat;
         pt.ele  = pt1._ele == WPT_NOFLOAT ? NOINT : qRound(pt1._ele);
         pt.time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
-        pt.time.addMSecs(pt1._timestamp_msec);
+        pt.time = time.toUTC();
 
         if(hasExtData)
         {

@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -104,12 +104,18 @@
     <addaction name="actionSearchGoogle"/>
     <addaction name="separator"/>
     <addaction name="actionSetupDatabase"/>
-    <addaction name="actionImportDatabase"/>
     <addaction name="actionCloseAllProjects"/>
+   </widget>
+   <widget class="QMenu" name="menuExtra">
+    <property name="title">
+     <string>Tool</string>
+    </property>
+    <addaction name="actionImportDatabase"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuProject"/>
    <addaction name="menuView"/>
+   <addaction name="menuExtra"/>
    <addaction name="menuWindow"/>
    <addaction name="menu"/>
   </widget>

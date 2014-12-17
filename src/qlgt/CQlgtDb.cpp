@@ -73,7 +73,7 @@ CQlgtDb::CQlgtDb(const QString &filename, CImportDatabase *parent)
         return;
     }
 
-    if(!query.exec("PRAGMA default_cache_size=50"))
+    if(!query.exec("PRAGMA default_cache_size=1000"))
     {
         return;
     }
@@ -626,7 +626,7 @@ void CQlgtDb::xferFolders()
     nDiary = 0;
 
     quint32 cnt = 1;
-    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
+    QProgressDialog progress(tr("Restore folders..."),tr("Abort"), 0, 100, gui);
     progress.setWindowModality(Qt::WindowModal);
 
     QSqlQuery query(db);

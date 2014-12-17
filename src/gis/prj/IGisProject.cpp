@@ -157,7 +157,10 @@ QString IGisProject::getInfo()
         }
     }
 
-    str += QObject::tr("\nFilename: %1").arg(filename);
+    if(!filename.isEmpty())
+    {
+        str += QObject::tr("\nFilename: %1").arg(filename);
+    }
 
     // count number of items by type
     int counter[IGisItem::eTypeMax] = {0};

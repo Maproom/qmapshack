@@ -56,6 +56,8 @@ class IDBFolder : public QTreeWidgetItem
 
         static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
+        bool operator<(const QTreeWidgetItem &other) const;
+
     protected:        
         void setupFromDB();
         virtual void addChildren(const QSet<QString> &activeChildren);

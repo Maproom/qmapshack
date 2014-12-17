@@ -50,6 +50,18 @@ IDBFolder::~IDBFolder()
 
 }
 
+bool IDBFolder::operator<(const QTreeWidgetItem &other) const
+{
+    const IDBFolder * folder = dynamic_cast<const IDBFolder*>(&other);
+    if(folder == 0)
+    {
+        return false;
+    }
+
+
+    return text(eColumnName) < folder->text(eColumnName);
+}
+
 IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem * parent)
 {
     switch(type)
@@ -137,8 +149,9 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     if(isExpanded())
     {
         qDeleteAll(takeChildren());
-        addChildren(info->keysChildren);
+        addChildren(info->keysChildren);        
     }
+
 
 }
 
@@ -243,6 +256,8 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
         quint32 typeChild   = query.value(1).toInt();
         IDBFolder::createFolderByType(db, typeChild, idChild, this);
     }
+
+    sortChildren(1, Qt::AscendingOrder);
 
     // tracks 2nd
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");

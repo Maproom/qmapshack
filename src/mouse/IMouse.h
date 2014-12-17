@@ -46,6 +46,7 @@ class IMouse : public QObject
         virtual void mousePressEvent(QMouseEvent * e) = 0;
         virtual void mouseMoveEvent(QMouseEvent * e) = 0;
         virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
+        virtual void mouseDoubleClickEvent(QMouseEvent *e){}
         virtual void wheelEvent(QWheelEvent * e) = 0;
         /// the current mouse cursor
         /**

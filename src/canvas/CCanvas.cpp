@@ -350,6 +350,12 @@ void CCanvas::mouseReleaseEvent(QMouseEvent *e)
     QWidget::mouseReleaseEvent(e);
 }
 
+void CCanvas::mouseDoubleClickEvent(QMouseEvent * e)
+{
+    mouse->mouseDoubleClickEvent(e);
+    QWidget::mouseDoubleClickEvent(e);
+}
+
 void CCanvas::wheelEvent(QWheelEvent * e)
 {
     mouse->wheelEvent(e);

@@ -142,17 +142,18 @@ QString IGisProject::getInfo()
     }
 
 
-    if(!metadata.desc.isEmpty())
+    QString desc = IGisItem::removeHtml(metadata.desc).simplified();
+    if(!desc.isEmpty())
     {
         str += "\n";
 
-        if(metadata.desc.count() < 200)
+        if(desc.count() < 100)
         {
-            str += metadata.desc;
+            str += desc;
         }
         else
         {
-            str += metadata.desc.left(197) + "...";
+            str += desc.left(97) + "...";
         }
     }
 

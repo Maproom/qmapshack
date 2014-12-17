@@ -29,7 +29,7 @@ IDB::~IDB()
 {
 }
 
-void IDB::setupDB(const QString& filename, const QString& connectionName)
+bool IDB::setupDB(const QString& filename, const QString& connectionName)
 {
     db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
     db.setDatabaseName(filename);
@@ -38,48 +38,49 @@ void IDB::setupDB(const QString& filename, const QString& connectionName)
     QSqlQuery query(db);
     if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
     {
-        return;
+        return false;
     }
 
     if(!query.exec("PRAGMA synchronous=OFF"))
     {
-        return;
+        return false;
     }
 
     if(!query.exec("PRAGMA temp_store=MEMORY"))
     {
-        return;
+        return false;
     }
 
     if(!query.exec("PRAGMA default_cache_size=50"))
     {
-        return;
+        return false;
     }
 
     if(!query.exec("PRAGMA page_size=8192"))
     {
-        return;
+        return false;
     }
 
     if(!query.exec("SELECT version FROM versioninfo"))
     {
-        initDB();
+        return initDB();
     }
     else if(query.next())
     {
         int version = query.value(0).toInt();
         if(version != DB_VERSION)
         {
-            migrateDB(version);
+            return migrateDB(version);
         }
     }
     else
     {
-        initDB();
+        return initDB();
     }
+    return true;
 }
 
-void IDB::initDB()
+bool IDB::initDB()
 {
     QSqlQuery query(db);
 
@@ -87,7 +88,7 @@ void IDB::initDB()
     {
         query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
         query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(; );
+        QUERY_EXEC(return false;);
     }
 
     if(!query.exec( "CREATE TABLE folders ("
@@ -103,6 +104,7 @@ void IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
+        return false;
     }
 
     if(!query.exec( "CREATE TABLE items ("
@@ -118,12 +120,14 @@ void IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
+        return false;
     }
 
     if(!query.exec("INSERT INTO folders (type, name, comment) VALUES (2, 'Database', '')"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
+        return false;
     }
 
     if(!query.exec( "CREATE TABLE folder2folder ("
@@ -136,6 +140,7 @@ void IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
+        return false;
     }
 
     if(!query.exec( "CREATE TABLE folder2item ("
@@ -148,10 +153,12 @@ void IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
+        return false;
     }
+    return true;
 }
 
-void IDB::migrateDB(int version)
+bool IDB::migrateDB(int version)
 {
     QSqlQuery query(db);
 
@@ -163,6 +170,7 @@ void IDB::migrateDB(int version)
     }
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", version - 1);
-    QUERY_EXEC(; );
+    QUERY_EXEC(return false;);
+    return true;
 }
 

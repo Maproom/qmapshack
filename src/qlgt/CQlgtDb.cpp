@@ -593,6 +593,13 @@ void CQlgtDb::start(const QString& filename)
 {
     gui->stdOut(tr("------ Start to convert database to %1------").arg(filename));
     dbQms = new CQmsDb(filename, gui);
+    if(!dbQms->isValid())
+    {
+        gui->stdErr(tr("Failed to create target database."));
+        gui->stdOut(tr("------ Abort ------"));
+        return;
+    }
+
 
     xferItems();
     xferFolders();

@@ -28,9 +28,9 @@ class IDB
         virtual ~IDB();
 
     protected:
-        void setupDB(const QString &filename, const QString &connectionName);
-        void initDB();
-        void migrateDB(int version);
+        bool setupDB(const QString &filename, const QString &connectionName);
+        bool initDB();
+        bool migrateDB(int version);
 
         QSqlDatabase db;
 };

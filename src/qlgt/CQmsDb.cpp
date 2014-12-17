@@ -31,17 +31,29 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 
 #include <QtSql>
+#include <QtWidgets>
 
 CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
     : QObject(parent)
+    , valid(false)
     , gui(parent)
+
 {
     if(QFile::exists(filename))
     {
+        int res = QMessageBox::question(0, tr("Existing file..."), tr("Remove existing %1?").arg(filename), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        if(res != QMessageBox::Ok)
+        {
+            return;
+        }
         gui->stdErr(tr("Remove existing file %1").arg(filename));
         QFile::remove(filename);
     }
-    setupDB(filename, "qlgt2qms");
+    valid = setupDB(filename, "qlgt2qms");
+    if(!valid)
+    {
+        return;
+    }
 
     mapFolderTypes[CQlgtDb::eFolder1] = IDBFolder::eTypeGroup;
     mapFolderTypes[CQlgtDb::eFolder2] = IDBFolder::eTypeProject;

@@ -42,7 +42,10 @@ class CQmsDb : public QObject, private IDB
         void addWpt(CQlgtWpt &wpt1);
         void addTrk(CQlgtTrack &trk1);
 
+        bool isValid(){return valid;}
     private:
+        bool valid;
+
         quint64 store(IGisItem &item);
 
         CImportDatabase * gui;

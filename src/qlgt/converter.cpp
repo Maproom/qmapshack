@@ -145,10 +145,6 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     foreach(const CQlgtTrack::pt_t& pt1, trk1.track)
     {
         trkpt_t pt;
-        if(pt1.flags & CQlgtTrack::pt_t::eDeleted)
-        {
-            pt.flags |= trkpt_t::eHidden;
-        }
         QDateTime time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
         time.addMSecs(pt1._timestamp_msec);
 
@@ -170,7 +166,43 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
 
     trk.segs << seg;
 
-    deriveSecondaryData();
     genKey();
     setupHistory();
+
+    bool hasHiddenPoints = false;
+    for(int i = 0; i < trk1.track.size(); i++)
+    {
+        trkpt_t&                pt  = trk.segs[0].pts[i];
+        const CQlgtTrack::pt_t& pt1 = trk1.track[i];
+
+        if(pt1.flags & CQlgtTrack::pt_t::eDeleted)
+        {
+            pt.flags |= trkpt_t::eHidden;
+            hasHiddenPoints = true;
+        }
+    }
+
+    deriveSecondaryData();
+
+    if(hasHiddenPoints)
+    {
+        // append history by new entry
+        history.events << history_event_t();
+        history_event_t& event = history.events.last();
+        event.time      = QDateTime::currentDateTimeUtc();
+        event.comment   = QObject::tr("Copy flag information from QLandkarte GT track");
+        event.icon      = "://icons/48x48/PointHide.png";
+
+        QDataStream stream(&event.data, QIODevice::WriteOnly);
+        stream.setByteOrder(QDataStream::LittleEndian);
+        stream.setVersion(QDataStream::Qt_5_2);
+
+        *this >> stream;
+
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        md5.addData(event.data);
+        event.hash = md5.result().toHex();
+
+        history.histIdxCurrent = history.events.size() - 1;
+    }
 }

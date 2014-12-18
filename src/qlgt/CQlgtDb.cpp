@@ -745,6 +745,8 @@ void CQlgtDb::xferItem(quint64 id)
                 gui->stdErr(tr("Overlay of type '%1' cant be converted").arg(ovl1.type));
                 break;
             }
+            dbQms->addArea(ovl1);
+            nOvl++;
             break;
         }
         }

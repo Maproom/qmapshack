@@ -24,6 +24,8 @@
 #include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
+#include "qlgt/CQlgtRoute.h"
+#include "qlgt/IQlgtOverlay.h"
 #include "gis/db/CDBProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -202,6 +204,16 @@ void CQmsDb::addTrk(CQlgtTrack &trk1)
     if(id != 0)
     {
         mapItemIDs[trk1.id] = id;
+    }
+}
+
+void CQmsDb::addArea(IQlgtOverlay& ovl1)
+{
+    CGisItemOvlArea ovl(ovl1);
+    quint64 id = store(ovl);
+    if(id != 0)
+    {
+        mapItemIDs[ovl1.id] = id;
     }
 }
 

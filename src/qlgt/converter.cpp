@@ -20,11 +20,15 @@
 #include "gis/db/CDBProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 
 #include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQlgtTrack.h"
 #include "qlgt/CQlgtDiary.h"
+#include "qlgt/CQlgtRoute.h"
+#include "qlgt/IQlgtOverlay.h"
 #include "units/IUnit.h"
 
 inline qreal readFloat(float val)
@@ -204,4 +208,32 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
 
         history.histIdxCurrent = history.events.size() - 1;
     }
+}
+
+
+CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
+    : IGisItem(0, eTypeOvl, -1)
+{
+    area.name       = ovl.name;
+    area.cmt        = ovl.comment;
+    area.desc       = ovl.description;
+    area.color      = ovl.color.name();
+    area.width      = ovl.width;
+    area.style      = ovl.style;
+    area.opacity    = ovl.opacity != 255;
+
+    foreach(const IQlgtOverlay::pt_t& pt1, ovl.points)
+    {
+        pt_t pt;
+        pt.lon = pt1.u * RAD_TO_DEG;
+        pt.lat = pt1.v * RAD_TO_DEG;
+
+        area.pts << pt;
+    }
+
+    setColor(str2color(area.color));
+    deriveSecondaryData();
+
+    genKey();
+    setupHistory();
 }

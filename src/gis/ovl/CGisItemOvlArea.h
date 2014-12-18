@@ -27,6 +27,7 @@
 
 class IGisProject;
 class CScrOptOvlArea;
+class IQlgtOverlay;
 
 #define OVL_N_COLORS 17
 #define OVL_N_WIDTHS 4
@@ -40,6 +41,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
         CGisItemOvlArea(const history_t& hist, IGisProject * project);
         CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
+        CGisItemOvlArea(const IQlgtOverlay& ovl);
         virtual ~CGisItemOvlArea();
 
         QDataStream& operator<<(QDataStream& stream);

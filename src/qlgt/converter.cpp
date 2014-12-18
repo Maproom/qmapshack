@@ -151,7 +151,6 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
         pt.lon  = pt1._lon;
         pt.lat  = pt1._lat;
         pt.ele  = pt1._ele == WPT_NOFLOAT ? NOINT : qRound(pt1._ele);
-        pt.time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
         pt.time = time.toUTC();
 
         if(hasExtData)

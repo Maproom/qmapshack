@@ -207,6 +207,16 @@ void CQmsDb::addTrk(CQlgtTrack &trk1)
     }
 }
 
+void CQmsDb::addRte(CQlgtRoute& rte1)
+{
+    CGisItemRte rte(rte1);
+    quint64 id = store(rte);
+    if(id != 0)
+    {
+        mapItemIDs[rte1.id] = id;
+    }
+}
+
 void CQmsDb::addArea(IQlgtOverlay& ovl1)
 {
     CGisItemOvlArea ovl(ovl1);

@@ -26,6 +26,7 @@
 
 class QDomNode;
 class IGisProject;
+class CQlgtRoute;
 
 class CGisItemRte : public IGisItem, public IGisLine
 {
@@ -34,6 +35,7 @@ class CGisItemRte : public IGisItem, public IGisLine
         CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx);
         CGisItemRte(const history_t& hist, IGisProject * project);
         CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
+        CGisItemRte(const CQlgtRoute& rte1);
         virtual ~CGisItemRte();
 
         QDataStream& operator<<(QDataStream& stream);

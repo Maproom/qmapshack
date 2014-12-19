@@ -110,7 +110,7 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
-    QTimer::singleShot(100, this, SLOT(slotLoadWorkspace()));
+    QTimer::singleShot(500, this, SLOT(slotLoadWorkspace()));
 }
 
 CGisListWks::~CGisListWks()

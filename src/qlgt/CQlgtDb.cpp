@@ -555,7 +555,7 @@ void CQlgtDb::printStatistic()
     if(query.next())
     {
         nItems += query.value(0).toInt();
-        gui->stdErr(tr("Routes:           %1 (only the basic routepoints will be converted to QMapShack)").arg(query.value(0).toInt()));
+        gui->stdErr(tr("Routes:           %1 (not supported yet)").arg(query.value(0).toInt()));
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
     query.bindValue(":type", eWpt);
@@ -734,6 +734,8 @@ void CQlgtDb::xferItem(quint64 id)
         {
             CQlgtRoute rte1(id, 0);
             stream >> rte1;
+            //dbQms->addRte(rte1);
+            //nRte++;
             break;
         }
         case eOvl:

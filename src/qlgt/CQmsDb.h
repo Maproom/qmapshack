@@ -28,6 +28,7 @@ class IGisItem;
 class CQlgtFolder;
 class CQlgtWpt;
 class CQlgtTrack;
+class CQlgtRoute;
 class IQlgtOverlay;
 
 class CQmsDb : public QObject, private IDB
@@ -42,6 +43,7 @@ class CQmsDb : public QObject, private IDB
         void addFolder(CQlgtFolder &folder);
         void addWpt(CQlgtWpt &wpt1);
         void addTrk(CQlgtTrack &trk1);
+        void addRte(CQlgtRoute& rte1);
         void addArea(IQlgtOverlay& ovl1);
 
         bool isValid(){return valid;}

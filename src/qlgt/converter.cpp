@@ -237,3 +237,30 @@ CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
     genKey();
     setupHistory();
 }
+
+
+CGisItemRte::CGisItemRte(const CQlgtRoute& rte1)
+    : IGisItem(0, eTypeRte, -1)
+{
+    rte.name        = rte1.name;
+    rte.cmt         = rte1.comment;
+    rte.desc        = rte1.description;
+
+    QPointF focus;
+    QPixmap icon = getWptIconByName(rte1.iconString, focus);
+
+    foreach (const CQlgtRoute::pt_t& pt1, rte1.priRoute)
+    {
+        rtept_t pt;
+        pt.lon      = pt1.lon;
+        pt.lat      = pt1.lat;
+        pt.icon     = icon;
+        pt.focus    = focus;
+
+        rte.pts << pt;
+    }
+
+    setSymbol();
+    genKey();
+    setupHistory();
+}

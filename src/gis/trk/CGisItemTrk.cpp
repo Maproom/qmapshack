@@ -363,7 +363,7 @@ QString CGisItemTrk::getInfo()
     }
     if(timeEnd.isValid())
     {
-        str += "\n";
+        str += "<br/>\n";
         str += QObject::tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
     }
 

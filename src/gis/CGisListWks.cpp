@@ -221,7 +221,6 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
     // changeing the item order is only valid for single selected items
     if(selectedItems().count() == 1)
     {
-    {
         /*
             What's happening here?
 
@@ -890,19 +889,6 @@ void CGisListWks::slotEditPrj()
         project->edit();
     }
 
-}
-
-void CGisListWks::slotEditPrj()
-{
-    IGisItem::mutexItems.lock();
-
-    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
-    if(project != 0)
-    {
-        project->edit();
-    }
-
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )

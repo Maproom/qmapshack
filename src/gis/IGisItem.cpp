@@ -200,16 +200,6 @@ QString IGisItem::getNameEx()
     return str;
 }
 
-QString IGisItem::getNameEx()
-{
-    QString str = getName();
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project)
-    {
-        str += " @ " + project->getName();
-    }
-    return str;
-}
 
 void IGisItem::updateDecoration(mark_e enable, mark_e disable)
 {

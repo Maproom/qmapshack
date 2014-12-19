@@ -22,6 +22,8 @@
  * including the positional arguments.
  */
 
+#include <QStringList>
+
 class CAppOpts
 {
     public:

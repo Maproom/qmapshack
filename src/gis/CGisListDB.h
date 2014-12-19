@@ -23,42 +23,49 @@
 #include <QSqlDatabase>
 
 #include <gis/db/IDBFolder.h>
+#include <gis/db/IDB.h>
 
+struct action_t;
 class QMenu;
 class CDBFolderDatabase;
 class CDBFolderLostFound;
 
-class CGisListDB : public QTreeWidget
+class CGisListDB : public QTreeWidget, private IDB
 {
     Q_OBJECT
     public:
         CGisListDB(QWidget * parent);
         virtual ~CGisListDB();
 
+        bool event(QEvent * e);
 
     private slots:
         void slotContextMenu(const QPoint& point);
         void slotAddFolder();
-
+        void slotDelFolder();
+        void slotDelLostFound();
         void slotItemExpanded(QTreeWidgetItem * item);
+        void slotItemChanged(QTreeWidgetItem * item, int column);
 
     private:
-        void initDB();
-        void migrateDB(int version);
+        friend class CGisListDBEditLock;
 
+        CDBFolderDatabase *getDataBase(const QString& name);
         void addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent);
 
+        int isInternalEdit;
 
-        QSqlDatabase db;
+        QMenu * menuFolder;
+        QAction * actionAddFolder;
+        QAction * actionDelFolder;
 
         QMenu * menuDatabase;
-        QAction * actionAddFolder;
 
-        QMenu * menuProject;
-        QMenu * menuItem;
+        QMenu * menuLostFound;
+        QAction * actionDelLostFound;
 
-        CDBFolderLostFound * itemLostFound;
-        CDBFolderDatabase * itemDatabase;
+        CDBFolderLostFound * folderLostFound;
+        CDBFolderDatabase *  folderDatabase;
 };
 
 #endif //CGISLISTDB_H

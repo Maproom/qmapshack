@@ -17,194 +17,136 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
+#include "gis/CGisWidget.h"
 #include "gis/db/macros.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderLostFound.h"
+#include "gis/db/CDBItem.h"
+#include "helpers/CSettings.h"
+#include "config.h"
 
 #include <QtSql>
 #include <QtWidgets>
 
+class CGisListDBEditLock
+{
+    public:
+        CGisListDBEditLock(bool waitCursor, CGisListDB * widget) : widget(widget), waitCursor(waitCursor)
+        {
+            if(waitCursor)
+            {
+                QApplication::setOverrideCursor(Qt::WaitCursor);
+            }
+            widget->isInternalEdit += 1;
+        }
+        ~CGisListDBEditLock()
+        {
+            if(waitCursor)
+            {
+                QApplication::restoreOverrideCursor();
+            }
+            widget->isInternalEdit -= 1;
+        }
+    private:
+        CGisListDB * widget;
+        bool waitCursor;
+};
+
+
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
-{
-    db = QSqlDatabase::database();
+    , isInternalEdit(0)
+{   
 
-    QSqlQuery query(db);
+    SETTINGS;
+    QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/database.db")).toString();
+    setupDB(path, "Database");
+    folderLostFound     = new CDBFolderLostFound(db, this);
+    folderDatabase      = new CDBFolderDatabase(db, this);
 
-    if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA synchronous=OFF"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA temp_store=MEMORY"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA default_cache_size=50"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA page_size=8192"))
-    {
-        return;
-    }
-
-    if(!query.exec("SELECT version FROM versioninfo"))
-    {
-        initDB();
-    }
-    else if(query.next())
-    {
-        int version = query.value(0).toInt();
-        if(version != DB_VERSION)
-        {
-            migrateDB(version);
-        }
-    }
-    else
-    {
-        initDB();
-    }
-
-//    itemLostFound       = new CDBFolderLostFound(this);
-//    itemDatabase        = new CDBFolderDatabase(this);
+    menuFolder          = new QMenu(this);
+    actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
+    actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, SLOT(slotDelFolder()));
 
     menuDatabase        = new QMenu(this);
-    actionAddFolder     = menuDatabase->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
+    menuDatabase->addAction(actionAddFolder);
 
-    menuProject         = new QMenu(this);
-    menuItem            = new QMenu(this);
+    menuLostFound       = new QMenu(this);
+    actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete"), this, SLOT(slotDelLostFound()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
+    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
 
-//    itemDatabase->setExpanded(true);
+    folderDatabase->setExpanded(true);
+    folderLostFound->update();
 }
 
 CGisListDB::~CGisListDB()
 {
 }
 
-void CGisListDB::initDB()
+
+CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
 {
-    QSqlQuery query(db);
-
-    if(query.exec( "CREATE TABLE versioninfo ( version TEXT )"))
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
     {
-        query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
-        query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(; );
-    }
-
-    if(!query.exec( "CREATE TABLE folders ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "locked         BOOLEAN DEFAULT FALSE"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE items ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER,"
-                    "key            TEXT NOT NULL,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "icon           TEXT NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "data           BLOB NOT NULL"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE workspace ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "key            TEXT NOT NULL,"
-                    "changed        BOOLEAN DEFAULT FALSE,"
-                    "data           BLOB NOT NULL"
-
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec("INSERT INTO folders (type, name, comment) VALUES (2, 'Database', '')"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE folder2folder ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES folders(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-
-    if(!query.exec( "CREATE TABLE folder2item ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES items(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
-}
-
-void CGisListDB::migrateDB(int version)
-{
-    QSqlQuery query(db);
-
-    for(version++; version <= DB_VERSION; version++)
-    {
-        switch(version)
+        CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
+        if(database && (database->getDBName() == name))
         {
+            return database;
         }
     }
-    query.prepare( "UPDATE versioninfo set version=:version");
-    query.bindValue(":version", version - 1);
-    QUERY_EXEC(; );
+    return 0;
+}
+
+bool CGisListDB::event(QEvent * e)
+{
+    CGisListDBEditLock lock(true, this);
+
+    switch(e->type())
+    {
+    case eEvtW2DAckInfo:
+    {
+        CEvtW2DAckInfo * evt = (CEvtW2DAckInfo*)e;
+        IDBFolder * folder = getDataBase(evt->db);
+        if(folder)
+        {
+            folder->update(evt);
+
+        }
+        e->accept();
+        return true;
+    }
+    }
+
+    return QTreeWidget::event(e);
 }
 
 void CGisListDB::slotContextMenu(const QPoint& point)
 {
     QPoint p = mapToGlobal(point);
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
-    if((folder != 0))
+    if((folder == folderDatabase))
     {
         menuDatabase->exec(p);
-        return;
+    }
+    else if((folder == folderLostFound))
+    {
+        menuLostFound->exec(p);
+    }
+    else if(folder != 0)
+    {
+        menuFolder->exec(p);
     }
 }
 
 void CGisListDB::slotAddFolder()
 {
+    CGisListDBEditLock lock(false, this);
+
     IDBFolder * parentFolder = dynamic_cast<IDBFolder*>(currentItem());
     if(parentFolder == 0)
     {
@@ -241,11 +183,52 @@ void CGisListDB::slotAddFolder()
     query.bindValue(":child", idChild);
     QUERY_EXEC(return);
 
-    IDBFolder::createFolderByType(type, idChild, parentFolder);
+    IDBFolder::createFolderByType(db, type, idChild, parentFolder);
+}
+
+void CGisListDB::slotDelFolder()
+{
+    CGisListDBEditLock lock(false, this);
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == 0)
+    {
+        return;
+    }
+
+    int res = QMessageBox::question(this, tr("Delete database folder..."), tr("Are you sure you want to delete \"%1\" from the database?").arg(folder->text(1)), QMessageBox::Ok|QMessageBox::No);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+    folder->remove();
+    delete folder;
+
+    folderLostFound->update();
+}
+
+void CGisListDB::slotDelLostFound()
+{
+    CGisListDBEditLock lock(false, this);
+    CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(currentItem());
+    if(folder == 0)
+    {
+        return;
+    }
+
+    int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all items from Lost&Found? This will remove them permanently."), QMessageBox::Ok|QMessageBox::No);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+    folder->clear();
 }
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
-{
+{   
+    CGisListDBEditLock lock(true, this);
+
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
     if(folder == 0)
     {
@@ -255,16 +238,28 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
     folder->expanding();
 }
 
-void CGisListDB::addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent)
+void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
 {
-    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard|Qt::MatchRecursive, 0);
+    if(isInternalEdit)
+    {
+        return;
+    }
+    CGisListDBEditLock lock(true, this);
 
-    foreach(QTreeWidgetItem * item, items)
+    if(column == IDBFolder::eColumnCheckbox)
     {
         IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-        if(folder == 0)
+        if(folder != 0)
         {
-            continue;
+            folder->toggle();
+            return;
+        }
+
+        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        if(dbItem != 0)
+        {
+            dbItem->toggle();
+            return;
         }
     }
 }

@@ -33,6 +33,7 @@
 #include "CMainWindow.h"
 
 
+
 #include <QtWidgets>
 #include <QtXml>
 
@@ -95,6 +96,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     , posScreen(NOPOINTF)
 {
     *this = parentWpt;
+    key.project = project->getKey();
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -124,6 +126,14 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);    
 }
 
+CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
+    : IGisItem(project, eTypeWpt, -1)
+    , proximity(NOFLOAT)
+    , posScreen(NOPOINTF)
+{
+    loadFromDb(id, db);
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+}
 
 CGisItemWpt::~CGisItemWpt()
 {
@@ -187,7 +197,7 @@ void CGisItemWpt::getNewPosition(QPointF& pos)
 
 QString CGisItemWpt::getInfo()
 {
-    QString str = "<div>" + getName() + "</div>";
+    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 
     if(geocache.hasData)
     {

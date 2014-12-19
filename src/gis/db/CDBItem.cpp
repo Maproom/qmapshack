@@ -17,14 +17,61 @@
 **********************************************************************************************/
 
 #include "gis/db/CDBItem.h"
+#include "gis/db/IDBFolder.h"
+#include "gis/db/macros.h"
+#include "gis/CGisWidget.h"
 
-CDBItem::CDBItem()
+#include <QtSql>
+
+CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
+    : QTreeWidgetItem(parent)
+    , db(db)
+    , id(id)
 {
+//    qDebug() << "CDBItem::CDBItem()";
+    QSqlQuery query(db);
+    query.prepare("SELECT type, key, icon, name, comment FROM items WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    if(query.next())
+    {
+        QPixmap pixmap;
+        type = query.value(0).toInt();
+        key = query.value(1).toString();
+        pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
+        setIcon(0, pixmap);
+        setText(1, query.value(3).toString());
+        setToolTip(1, query.value(4).toString());
 
+    }
 }
 
 CDBItem::~CDBItem()
 {
-
+//    qDebug() << "CDBItem::~CDBItem()";
 }
 
+void CDBItem::toggle()
+{
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    if(folder == 0)
+    {
+        return;
+    }
+
+    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+    {
+        CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
+        CGisWidget::self().postEventForWks(evt1);
+
+        CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(folder->getId(), folder->getDBName());
+        evt2->items << evt_item_t(id, type);
+        CGisWidget::self().postEventForWks(evt2);
+    }
+    else
+    {
+        CEvtD2WHideItems * evt2 = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
+        evt2->keys << key;
+        CGisWidget::self().postEventForWks(evt2);
+    }
+}

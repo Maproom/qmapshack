@@ -24,7 +24,7 @@
 class CDBFolderDatabase : public IDBFolder
 {
     public:
-        CDBFolderDatabase(QTreeWidget *parent);
+        CDBFolderDatabase(QSqlDatabase &db, QTreeWidget *parent);
         virtual ~CDBFolderDatabase();
 };
 

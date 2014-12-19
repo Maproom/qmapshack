@@ -23,9 +23,11 @@
 #include <QPointer>
 #include <QSqlDatabase>
 
+struct action_t;
 class QAction;
 class CSearchGoogle;
 class IGisProject;
+class CDBProject;
 
 class CGisListWks : public QTreeWidget
 {
@@ -36,6 +38,12 @@ class CGisListWks : public QTreeWidget
 
         void setExternalMenu(QMenu * project);
         bool hasProject(IGisProject *project);
+
+        IGisProject * getProjectByKey(const QString& key);
+        CDBProject * getProjectById(quint64 id, const QString& db);
+
+        bool event(QEvent * e);
+
     signals:
         void sigChanged();
 
@@ -67,7 +75,11 @@ class CGisListWks : public QTreeWidget
         void slotSearchGoogle(bool on);
 
 
-    private:                
+    private:
+        void configDB();
+        void initDB();
+        void migrateDB(int version);
+
         QSqlDatabase db;
 
         QMenu * menuProject;

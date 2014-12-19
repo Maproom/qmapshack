@@ -136,7 +136,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentArea;
-
+    key.project = project->getKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -164,7 +164,13 @@ CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
     loadHistory(hist.histIdxCurrent);
 }
 
-
+CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project)
+    : IGisItem(project, eTypeOvl, -1)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+{
+    loadFromDb(id, db);
+}
 
 CGisItemOvlArea::~CGisItemOvlArea()
 {
@@ -388,10 +394,10 @@ const QString& CGisItemOvlArea::getName()
 QString CGisItemOvlArea::getInfo()
 {
     QString unit, val;
-    QString str = getName();
+    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 
     IUnit::self().meter2area(area.area, val, unit);
-    str += "\n" + QObject::tr("Area: %1%2").arg(val).arg(unit);
+    str += "<br/>\n" + QObject::tr("Area: %1%2").arg(val).arg(unit);
 
     QString desc = removeHtml(area.desc).simplified();
     if(desc.count())

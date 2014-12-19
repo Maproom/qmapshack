@@ -20,12 +20,92 @@
 #define CGISWIDGET_H
 
 #include <QWidget>
+#include <QSqlDatabase>
+#include <QEvent>
 #include "ui_IGisWidget.h"
 
 #include "gis/IGisItem.h"
 
 class CGisDraw;
 class IGisProject;
+
+enum event_types_e
+{
+     eEvtD2WReqInfo     = QEvent::User + 1
+    ,eEvtD2WShowFolder  = QEvent::User + 2
+    ,eEvtD2WHideFolder  = QEvent::User + 3
+    ,eEvtD2WShowItems   = QEvent::User + 4
+    ,eEvtD2WHideItems   = QEvent::User + 5
+
+    ,eEvtW2DAckInfo     = QEvent::User + 100
+};
+
+struct evt_item_t
+{
+    evt_item_t(quint64 id, quint32 type) : id(id), type(type){}
+    quint64 id;
+    quint32 type;
+};
+
+class CEvtD2WReqInfo : public QEvent
+{
+    public:
+        CEvtD2WReqInfo(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WReqInfo)), id(id), db(db){}
+
+        quint64 id;
+        QString db;
+};
+
+class CEvtD2WShowFolder : public QEvent
+{
+    public:
+        CEvtD2WShowFolder(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WShowFolder)), id(id), db(db){}
+
+        quint64 id;
+        QString db;
+};
+
+class CEvtD2WHideFolder : public QEvent
+{
+    public:
+        CEvtD2WHideFolder(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WHideFolder)), id(id), db(db){}
+
+        quint64 id;
+        QString db;
+};
+
+class CEvtD2WShowItems : public QEvent
+{
+    public:
+        CEvtD2WShowItems(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WShowItems)), id(id), db(db){}
+
+        quint64 id;
+        QString db;
+        QList<evt_item_t> items;
+};
+
+class CEvtD2WHideItems : public QEvent
+{
+    public:
+        CEvtD2WHideItems(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WHideItems)), id(id), db(db){}
+
+        quint64 id;
+        QString db;
+        QSet<QString> keys;
+};
+
+class CEvtW2DAckInfo : public QEvent
+{
+    public:
+        CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DAckInfo)), isLoaded(loaded), id(id), db(db){}
+
+        bool isLoaded;
+        quint64 id;
+        QString db;
+        QSet<QString> keysChildren;
+
+};
+
 
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
@@ -125,8 +205,6 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 
         void editAreaByKey(const IGisItem::key_t &key);
 
-
-
         /**
            @brief Select a project via dialog
 
@@ -136,6 +214,10 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
            @return 0 if no project was selected.
          */
         IGisProject * selectProject();
+
+        void postEventForWks(QEvent * event);
+        void postEventForDb(QEvent * event);
+
 
     signals:
         void sigChanged();

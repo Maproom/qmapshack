@@ -147,6 +147,7 @@ class CCanvas : public QWidget
         void mousePressEvent(QMouseEvent * e);
         void mouseMoveEvent(QMouseEvent * e);
         void mouseReleaseEvent(QMouseEvent *e);
+        void mouseDoubleClickEvent(QMouseEvent * e);
         void wheelEvent(QWheelEvent * e);
         void enterEvent(QEvent * e);
         void leaveEvent(QEvent * e);

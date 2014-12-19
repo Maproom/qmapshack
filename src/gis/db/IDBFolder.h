@@ -22,6 +22,9 @@
 #include <QTreeWidgetItem>
 #include <QSqlDatabase>
 
+class QSqlDatabase;
+class CEvtW2DAckInfo;
+
 class IDBFolder : public QTreeWidgetItem
 {
     public:
@@ -34,24 +37,39 @@ class IDBFolder : public QTreeWidgetItem
             ,eTypeOther = 5
         };
 
+        enum column_e
+        {
+             eColumnCheckbox = 0
+            ,eColumnName = 1
+        };
 
-        IDBFolder(type_e type, quint64 id, QTreeWidgetItem * parent);
-        IDBFolder(type_e type, quint64 id, QTreeWidget * parent);
+        IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
+        IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
         virtual ~IDBFolder();
 
         quint64 getId(){return id;}
+        QString getDBName();
 
         virtual void expanding();
+        virtual void update(CEvtW2DAckInfo * info);
+        virtual void toggle();
+        virtual void remove();
 
-        static IDBFolder * createFolderByType(int type, quint64 id, QTreeWidgetItem *parent);
+        static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
-    protected:
+        bool operator<(const QTreeWidgetItem &other) const;
+
+    protected:        
         void setupFromDB();
+        virtual void addChildren(const QSet<QString> &activeChildren);
+        virtual void remove(quint64 idParent, quint64 idFolder);
 
+        QSqlDatabase& db;
 
-    private:
-        QSqlDatabase db;
         quint64 id;
+        QString key;
+        bool isLoadable;        
+
 
 };
 

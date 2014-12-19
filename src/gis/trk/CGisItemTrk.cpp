@@ -157,6 +157,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     , mouseClickFocus(0)
 {
     *this = parentTrk;
+    key.project = project->getKey();
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -209,6 +210,15 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     loadHistory(hist.histIdxCurrent);
 }
 
+CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
+    : IGisItem(project, eTypeTrk, -1)
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
+{
+    loadFromDb(id, db);
+}
 
 
 CGisItemTrk::~CGisItemTrk()
@@ -306,14 +316,15 @@ void CGisItemTrk::unregisterPlot(IPlot * plot)
 QString CGisItemTrk::getInfo()
 {
     QString val1, unit1, val2, unit2;
-    QString str = getName();
+    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
+
     if(cntVisiblePoints == 0)
     {
         return(str);
     }
 
     IUnit::self().meter2distance(totalDistance, val1, unit1);
-    str += "\n";
+    str += "<br/>\n";
     str += QObject::tr("Length: %1 %2").arg(val1).arg(unit1);
 
     if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
@@ -328,7 +339,7 @@ QString CGisItemTrk::getInfo()
     if(totalElapsedSeconds != NOTIME)
     {
         IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
-        str += "\n";
+        str += "<br/>\n";
         str += QObject::tr("Time: %1").arg(val1);
 
         IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val1, unit1);
@@ -338,7 +349,7 @@ QString CGisItemTrk::getInfo()
     if(totalElapsedSecondsMoving != NOTIME)
     {
         IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
-        str += "\n";
+        str += "<br/>\n";
         str += QObject::tr("Moving: %1").arg(val1);
 
         IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val1, unit1);
@@ -347,7 +358,7 @@ QString CGisItemTrk::getInfo()
 
     if(timeStart.isValid())
     {
-        str += "\n";
+        str += "<br/>\n";
         str += QObject::tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
     }
     if(timeEnd.isValid())
@@ -356,7 +367,7 @@ QString CGisItemTrk::getInfo()
         str += QObject::tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
     }
 
-    str += "\n";
+    str += "<br/>\n";
     str += QObject::tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
 
 

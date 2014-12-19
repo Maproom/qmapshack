@@ -78,6 +78,9 @@
      <property name="indentation">
       <number>14</number>
      </property>
+     <property name="sortingEnabled">
+      <bool>false</bool>
+     </property>
      <column>
       <property name="text">
        <string notr="true">-</string>

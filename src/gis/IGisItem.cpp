@@ -21,12 +21,14 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/db/macros.h"
 #include "units/IUnit.h"
 #include "canvas/CCanvas.h"
 #include "GeoMath.h"
 
 #include <QtXml>
 #include <QtWidgets>
+#include <QtSql>
 
 QMutex IGisItem::mutexItems(QMutex::Recursive);
 
@@ -62,15 +64,19 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     int n;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 
-    key.project = parent->getKey();
+    if(parent == 0)
+    {
+        return;
+    }
 
+    key.project = parent->getKey();
     if(idx >= 0)
     {
         parent->removeChild(this);
         parent->insertChild(idx, this);
     }
     else
-    {        
+    {
         if(type() == eTypeTrk)
         {
             for(n = parent->childCount() - 2; n >= 0; n--)
@@ -164,6 +170,34 @@ void IGisItem::genKey()
         md5.addData(buffer);
         key.item = md5.result().toHex();
     }
+}
+
+void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
+{
+    QSqlQuery query(db);
+    query.prepare("SELECT data FROM items WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return);
+    if(query.next())
+    {
+        QByteArray data(query.value(0).toByteArray());
+        QDataStream in(&data, QIODevice::ReadOnly);
+        in.setByteOrder(QDataStream::LittleEndian);
+        in.setVersion(QDataStream::Qt_5_2);
+        in >> history;
+        loadHistory(history.histIdxCurrent);
+    }
+}
+
+QString IGisItem::getNameEx()
+{
+    QString str = getName();
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    if(project)
+    {
+        str += " @ " + project->getName();
+    }
+    return str;
 }
 
 QString IGisItem::getNameEx()

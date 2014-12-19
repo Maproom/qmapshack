@@ -17,13 +17,15 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "config.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/prj/IGisProject.h"
+#include "gis/db/CDBProject.h"
 #include "gis/db/macros.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
@@ -35,13 +37,44 @@
 #include <QtSql>
 #include <QtWidgets>
 
+#define DB_VERSION 1
+
+class CGisListWksEditLock
+{
+    public:
+        CGisListWksEditLock(bool waitCursor, QMutex& mutex) : mutex(mutex), waitCursor(waitCursor)
+        {
+            if(waitCursor)
+            {
+                QApplication::setOverrideCursor(Qt::WaitCursor);
+            }
+            mutex.lock();
+        }
+        ~CGisListWksEditLock()
+        {
+            if(waitCursor)
+            {
+                QApplication::restoreOverrideCursor();
+            }
+            mutex.unlock();
+        }
+    private:
+        QMutex& mutex;
+        bool waitCursor;
+
+};
+
+
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
     , menuNone(0)
     , saveOnExit(true)
     , saveEvery(5)
 {
-    db = QSqlDatabase::database();
+    db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
+    db.setDatabaseName(QDir::home().filePath(CONFIGDIR).append("/workspace.db"));
+    db.open();
+    configDB();
 
     menuProject     = new QMenu(this);
     actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
@@ -77,11 +110,98 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
-    slotLoadWorkspace();
+    QTimer::singleShot(100, this, SLOT(slotLoadWorkspace()));
 }
 
 CGisListWks::~CGisListWks()
 {
+}
+
+void CGisListWks::configDB()
+{
+    QSqlQuery query(db);
+    if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA synchronous=OFF"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA temp_store=MEMORY"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA default_cache_size=50"))
+    {
+        return;
+    }
+
+    if(!query.exec("PRAGMA page_size=8192"))
+    {
+        return;
+    }
+
+    if(!query.exec("SELECT version FROM versioninfo"))
+    {
+        initDB();
+    }
+    else if(query.next())
+    {
+        int version = query.value(0).toInt();
+        if(version != DB_VERSION)
+        {
+            migrateDB(version);
+        }
+    }
+    else
+    {
+        initDB();
+    }
+}
+
+void CGisListWks::initDB()
+{
+    QSqlQuery query(db);
+
+    if(query.exec( "CREATE TABLE versioninfo ( version TEXT )"))
+    {
+        query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
+        query.bindValue(":version", DB_VERSION);
+        QUERY_EXEC(; );
+    }
+
+    if(!query.exec( "CREATE TABLE workspace ("
+                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "type           INTEGER NOT NULL,"
+                    "name           TEXT NOT NULL,"
+                    "key            TEXT NOT NULL,"
+                    "changed        BOOLEAN DEFAULT FALSE,"
+                    "data           BLOB NOT NULL"
+
+                    ")"))
+    {
+        qDebug() << query.lastQuery();
+        qDebug() << query.lastError();
+    }
+}
+
+void CGisListWks::migrateDB(int version)
+{
+    QSqlQuery query(db);
+
+    for(version++; version <= DB_VERSION; version++)
+    {
+        switch(version)
+        {
+        }
+    }
+    query.prepare( "UPDATE versioninfo set version=:version");
+    query.bindValue(":version", version - 1);
+    QUERY_EXEC(; );
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -94,13 +214,13 @@ void CGisListWks::setExternalMenu(QMenu * project)
 
 void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 {
-
     QTreeWidgetItem * item1 = currentItem();
     QTreeWidgetItem * item2 = itemAt(e->pos());
 
 
     // changeing the item order is only valid for single selected items
     if(selectedItems().count() == 1)
+    {
     {
         /*
             What's happening here?
@@ -269,8 +389,13 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         return;
     }
 
+    if(items.isEmpty())
+    {
+        return;
+    }
 
-    // go on with item insertion        
+
+    // go on with item insertion
     /*
         What's happening here?
 
@@ -429,7 +554,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
 
 bool CGisListWks::hasProject(IGisProject * project)
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     QString key = project->getKey();
 
@@ -445,6 +570,37 @@ bool CGisListWks::hasProject(IGisProject * project)
         }
     }
     return(false);
+}
+
+IGisProject * CGisListWks::getProjectByKey(const QString& key)
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    for(int i = 0; i < topLevelItemCount(); i++)
+    {
+        IGisProject * item = dynamic_cast<IGisProject*>(topLevelItem(i));
+        if(item && item->getKey() == key)
+        {
+            return item;
+        }
+    }
+    return 0;
+}
+
+CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    for(int i = 0; i < topLevelItemCount(); i++)
+    {
+        CDBProject * item = dynamic_cast<CDBProject*>(topLevelItem(i));
+        if(item && item->getId() == id && item->getDBName() == db)
+        {
+            return item;
+        }
+    }
+    return 0;
+
 }
 
 void CGisListWks::slotSaveWorkspace()
@@ -480,12 +636,12 @@ void CGisListWks::slotSaveWorkspace()
         stream.setVersion(QDataStream::Qt_5_2);
         stream.setByteOrder(QDataStream::LittleEndian);
 
-        *project >> stream;
+        project->IGisProject::operator>>(stream);
 
         query.prepare("INSERT INTO workspace (type, key, name, changed, data) VALUES (:type, :key, :name, :changed, :data)");
         query.bindValue(":type", project->getType());
         query.bindValue(":key", project->getKey());
-        query.bindValue(":name", project->text(0));
+        query.bindValue(":name", project->getName());
         query.bindValue(":changed", project->text(1) == "*");
         query.bindValue(":data", data);
         QUERY_EXEC(continue);
@@ -511,9 +667,7 @@ void CGisListWks::slotLoadWorkspace()
     {
         PROGRESS(progCnt++, return );
 
-
-        int type       = query.value(0).toInt();
-//        QString key     = query.value(1).toString();
+        int type        = query.value(0).toInt();
         QString name    = query.value(2).toString();
         bool changed    = query.value(3).toBool();
         QByteArray data = query.value(4).toByteArray();
@@ -527,15 +681,33 @@ void CGisListWks::slotLoadWorkspace()
         {
         case IGisProject::eTypeQms:
         {
-            project = new CQmsProject(name,this);
+            project = new CQmsProject(name, this);
             *project << stream;
             break;
         }
 
         case IGisProject::eTypeGpx:
         {
-            project = new CGpxProject(name,this);
+            project = new CGpxProject(name, this);
             *project << stream;
+            break;
+        }
+
+        case IGisProject::eTypeDb:
+        {
+            CDBProject * dbProject;
+            project = dbProject = new CDBProject(this);
+            project->IGisProject::operator<<(stream);
+            dbProject->restoreDBLink();
+            if(!project->isValid())
+            {
+                delete project;
+                project = 0;
+            }
+            else
+            {
+                dbProject->postStatus();
+            }
             break;
         }
         }
@@ -548,6 +720,8 @@ void CGisListWks::slotLoadWorkspace()
         project->setToolTip(0,project->getInfo());
         project->setText(1, changed ? "*" : "");
     }
+
+    emit sigChanged();
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)
@@ -663,7 +837,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
 void CGisListWks::slotCloseProject()
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -678,8 +852,7 @@ void CGisListWks::slotCloseProject()
 
 void CGisListWks::slotSaveProject()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
@@ -690,13 +863,11 @@ void CGisListWks::slotSaveProject()
             project->save();
         }
     }
-    IGisItem::mutexItems.unlock();
-    QApplication::restoreOverrideCursor();
 }
 
 void CGisListWks::slotSaveAsProject()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
@@ -707,7 +878,18 @@ void CGisListWks::slotSaveAsProject()
             project->saveAs();
         }
     }
-    IGisItem::mutexItems.unlock();
+}
+
+void CGisListWks::slotEditPrj()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project != 0)
+    {
+        project->edit();
+    }
+
 }
 
 void CGisListWks::slotEditPrj()
@@ -725,143 +907,159 @@ void CGisListWks::slotEditPrj()
 
 void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
     IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
     if(gisItem != 0)
     {
         CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
         CGisWidget::self().focusTrkByKey(true, gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotEditItem()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().editItemByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotDeleteItem()
-{
-    IGisItem::mutexItems.lock();
+{        
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     QList<QTreeWidgetItem*> items       = selectedItems();
     QMessageBox::StandardButtons last   = QMessageBox::NoButton;
+
+    QSet<CDBProject*> projects;
 
     foreach(QTreeWidgetItem * item, items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != 0)
         {
+            bool yes = false;
             IGisProject * project = dynamic_cast<IGisProject*>(gisItem->parent());
             if(project)
             {
-                project->delItemByKey(gisItem->getKey(), last);
+                yes = project->delItemByKey(gisItem->getKey(), last);
             }
+
+            /*
+                collect database projects to update their counterpart in
+                the database view, after all operations are done.
+            */
+            if(yes && project->getType() == IGisProject::eTypeDb)
+            {
+                projects << dynamic_cast<CDBProject*>(project);
+            }
+
             if(last == QMessageBox::Cancel)
             {
                 break;
             }
         }
     }
-    IGisItem::mutexItems.unlock();
+
+    // make all database projects that are changed to post their new status
+    // this will update the database view.
+    foreach(CDBProject * project, projects)
+    {
+        if(project)
+        {
+            project->postStatus();
+        }
+    }
+
 }
 
 void CGisListWks::slotProjWpt()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().projWptByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotMoveWpt()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
-    {        
+    {
         CGisWidget::self().moveWptByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotFocusTrk(bool on)
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().focusTrkByKey(on, gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotEditTrk()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().editTrkByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotReverseTrk()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().reverseTrkByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotCombineTrk()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().combineTrkByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotRangeTrk()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().rangeTrkByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 void CGisListWks::slotEditArea()
 {
-    IGisItem::mutexItems.lock();
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     CGisItemOvlArea * gisItem = dynamic_cast<CGisItemOvlArea*>(currentItem());
     if(gisItem != 0)
     {
         CGisWidget::self().editAreaByKey(gisItem->getKey());
     }
-    IGisItem::mutexItems.unlock();
 }
 
 
 void CGisListWks::slotAddEmptyProject()
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     QString key, name;
     CSelectProjectDialog::type_e type;
     CSelectProjectDialog dlg(key, name, type, 0);
@@ -883,7 +1081,14 @@ void CGisListWks::slotAddEmptyProject()
 
 void CGisListWks::slotCloseAllProjects()
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
+    int res = QMessageBox::question(this, tr("Close all projects..."), tr("This will remove all projects from the workspace."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
     QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard);
     foreach(QTreeWidgetItem * item, items)
     {
@@ -898,10 +1103,85 @@ void CGisListWks::slotCloseAllProjects()
 
 void CGisListWks::slotSearchGoogle(bool on)
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     delete searchGoogle;
     if(on)
     {
         searchGoogle = new CSearchGoogle(this);
     }
+}
+
+bool CGisListWks::event(QEvent * e)
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    switch(e->type())
+    {
+    case eEvtD2WReqInfo:
+    {
+        CEvtD2WReqInfo * evt = (CEvtD2WReqInfo*)e;
+        CDBProject * project =  getProjectById(evt->id, evt->db);
+        if(project)
+        {
+            project->postStatus();
+        }
+        e->accept();
+        emit sigChanged();
+        return true;
+    }
+    case eEvtD2WShowFolder:
+    {
+        CEvtD2WShowFolder * evt = (CEvtD2WShowFolder*)e;
+        CDBProject * project =  getProjectById(evt->id, evt->db);
+        if(project == 0)
+        {
+            project = new CDBProject(evt->db, evt->id, this);
+            if(!project->isValid())
+            {
+                delete project;
+            }
+        }
+        e->accept();
+        emit sigChanged();
+        return true;
+    }
+    case eEvtD2WHideFolder:
+    {
+        CEvtD2WHideFolder * evt = (CEvtD2WHideFolder*)e;
+        CDBProject * project =  getProjectById(evt->id, evt->db);
+        delete project;
+
+        e->accept();
+        emit sigChanged();
+        return true;
+    }
+    case eEvtD2WShowItems:
+    {
+        CEvtD2WShowItems * evt = (CEvtD2WShowItems*)e;
+        CDBProject * project =  getProjectById(evt->id, evt->db);
+        if(project)
+        {
+            project->showItems(evt);
+        }
+        e->accept();
+        emit sigChanged();
+        return true;
+    }
+    case eEvtD2WHideItems:
+    {
+        CEvtD2WHideItems * evt = (CEvtD2WHideItems*)e;
+        CDBProject * project =  getProjectById(evt->id, evt->db);
+        if(project)
+        {
+            project->hideItems(evt);
+        }
+        e->accept();
+        emit sigChanged();
+        return true;
+    }
+    }
+
+    return QTreeWidget::event(e);
 }
 

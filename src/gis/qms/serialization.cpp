@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/prj/IGisProject.h"
+#include "gis/db/CDBProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -35,7 +36,7 @@
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
 #define VER_IMAGE       quint8(1)
-#define VER_PROJECT     quint8(1)
+#define VER_PROJECT     quint8(2)
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
@@ -595,6 +596,10 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     stream >> metadata.time;
     stream >> metadata.keywords;
     stream >> metadata.bounds;
+    if(version > 1)
+    {
+        stream >> key;
+    }
 
     while(!stream.atEnd())
     {
@@ -648,7 +653,8 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     stream << metadata.links;
     stream << metadata.time;
     stream << metadata.keywords;
-    stream << metadata.bounds;
+    stream << metadata.bounds;    
+    stream << key;
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -702,3 +708,54 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     return stream;
 }
 
+QDataStream& CDBProject::operator<<(QDataStream& stream)
+{
+    quint8      version;
+    QIODevice * dev = stream.device();
+    qint64      pos = dev->pos();
+
+    char magic[10];
+    stream.readRawData(magic,MAGIC_SIZE);
+
+    if(strncmp(magic,MAGIC_PROJ,MAGIC_SIZE))
+    {
+        dev->seek(pos);
+        return stream;
+    }
+
+    stream >> version;
+    stream >> filename;
+    stream >> metadata.name;
+    stream >> metadata.desc;
+    stream >> metadata.author;
+    stream >> metadata.copyright;
+    stream >> metadata.links;
+    stream >> metadata.time;
+    stream >> metadata.keywords;
+    stream >> metadata.bounds;
+    if(version > 1)
+    {
+        stream >> key;
+    }
+
+    return stream;
+}
+
+QDataStream& CDBProject::operator>>(QDataStream& stream)
+{    
+    stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
+    stream << VER_PROJECT;
+
+    stream << filename;
+    stream << metadata.name;
+    stream << metadata.desc;
+    stream << metadata.author;
+    stream << metadata.copyright;
+    stream << metadata.links;
+    stream << metadata.time;
+    stream << metadata.keywords;
+    stream << metadata.bounds;
+    stream << key;
+
+    return stream;
+}

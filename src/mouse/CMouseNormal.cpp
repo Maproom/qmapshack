@@ -196,6 +196,15 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
     }
 }
 
+void CMouseNormal::mouseDoubleClickEvent(QMouseEvent *e)
+{
+    if(stateItemSel == eStateIdle)
+    {
+        const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
+        CGisWidget::self().focusTrkByKey(false, key);
+    }
+}
+
 void CMouseNormal::wheelEvent(QWheelEvent * e)
 {
     screenUnclutter->clear();

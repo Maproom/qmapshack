@@ -101,6 +101,7 @@ set( SRCS
     gis/gpx/serialization.cpp
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
+    gis/db/IDB.cpp
     gis/db/CSetupDB.cpp
     gis/db/CSetupFolder.cpp
     gis/db/IDBFolder.cpp
@@ -134,6 +135,18 @@ set( SRCS
     plot/CPlotSpeed.cpp
     plot/CPlotDistance.cpp
     plot/CPlotTrack.cpp
+    qlgt/converter.cpp
+    qlgt/CQlb.cpp
+    qlgt/IItem.cpp
+    qlgt/CQlgtFolder.cpp
+    qlgt/CQlgtWpt.cpp
+    qlgt/CQlgtTrack.cpp
+    qlgt/CQlgtRoute.cpp
+    qlgt/CQlgtDiary.cpp
+    qlgt/IQlgtOverlay.cpp
+    qlgt/CImportDatabase.cpp
+    qlgt/CQlgtDb.cpp
+    qlgt/CQmsDb.cpp
 )
 
 set( HDRS
@@ -224,6 +237,7 @@ set( HDRS
     gis/CGisListDB.h
     gis/CGisListWks.h
     gis/qms/CQmsProject.cpp
+    gis/db/IDB.cpp
     gis/db/macros.h
     gis/db/CSetupDB.h
     gis/db/CSetupFolder.h
@@ -259,6 +273,17 @@ set( HDRS
     plot/CPlotSpeed.h
     plot/CPlotDistance.h
     plot/CPlotTrack.h
+    qlgt/CQlb.h
+    qlgt/IItem.h
+    qlgt/CQlgtFolder.h
+    qlgt/CQlgtWpt.h
+    qlgt/CQlgtTrack.h
+    qlgt/CQlgtRoute.h
+    qlgt/CQlgtDiary.h
+    qlgt/IQlgtOverlay.h
+    qlgt/CImportDatabase.h
+    qlgt/CQlgtDb.h
+    qlgt/CQmsDb.h
 )
 
 set( UIS
@@ -300,6 +325,7 @@ set( UIS
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
     units/IUnitsSetup.ui
+    qlgt/IImportDatabase.ui
 )
 
 set( RCS
@@ -311,7 +337,7 @@ qt5_wrap_ui(UI_HDRS ${UIS})
 qt5_add_resources(RC_SRCS ${RCS})
 
 if(UNIX)
-    add_definitions(-Wall)
+    add_definitions(-Wall -Wno-switch)
 endif(UNIX)
 
 

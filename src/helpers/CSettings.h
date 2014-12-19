@@ -18,7 +18,7 @@
 #ifndef CSETTINGS_H
 #define CSETTINGS_H
 
-#include "CAppOpts.h"
+#include "helpers/CAppOpts.h"
 #include <QtCore>
 
 class CSettings : public QObject

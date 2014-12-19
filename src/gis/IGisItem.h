@@ -36,7 +36,9 @@
 class CGisDraw;
 class IScrOpt;
 class IMouse;
+class QSqlDatabase;
 class IGisProject;
+
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -106,6 +108,7 @@ class IGisItem : public QTreeWidgetItem
             QMap<QString, QVariant> extensions;
         };
 
+        /// never ever change these numbers. it will break binary data files
         enum type_e
         {
               eTypeWpt = 1
@@ -155,11 +158,12 @@ class IGisItem : public QTreeWidgetItem
          */
         const key_t& getKey();
 
+
         /**
            @brief Get the icon attached to object
            @return
          */
-        virtual const QPixmap& getIcon(){return icon;}
+        virtual const QPixmap& getIcon() const {return icon;}
         /**
            @brief Get name of this item.
            @return A reference to the internal string object
@@ -319,6 +323,8 @@ class IGisItem : public QTreeWidgetItem
         /// call when ever you make a change to the item's data
         virtual void changed(const QString& what, const QString& icon);
 
+        virtual void loadFromDb(quint64 id, QSqlDatabase& db);
+
         quint32 flags;
         key_t   key;
         QString hash;
@@ -361,6 +367,9 @@ class IGisItem : public QTreeWidgetItem
 
 
 };
+
+QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h);
+QDataStream& operator<<(QDataStream& stream, const IGisItem::history_t& h);
 
 #endif //IGISITEM_H
 

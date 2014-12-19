@@ -41,6 +41,7 @@ IGisProject::~IGisProject()
     delete dlgDetails;
 }
 
+
 void IGisProject::genKey()
 {
     if(key.isEmpty())
@@ -132,30 +133,35 @@ void IGisProject::markAsSaved()
 
 QString IGisProject::getInfo()
 {
-    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;
+    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;    
+    str = "<div style='font-weight: bold;'>" + str + "</div>";
 
     if(metadata.time.isValid())
     {
-        str += "\n";
+        str += "<br/>\n";
         str += IUnit::datetime2string(metadata.time, false);
     }
 
 
-    if(!metadata.desc.isEmpty())
+    QString desc = IGisItem::removeHtml(metadata.desc).simplified();
+    if(!desc.isEmpty())
     {
-        str += "\n";
+        str += "<br/>\n";
 
-        if(metadata.desc.count() < 200)
+        if(desc.count() < 100)
         {
-            str += metadata.desc;
+            str += desc;
         }
         else
         {
-            str += metadata.desc.left(197) + "...";
+            str += desc.left(97) + "...";
         }
     }
 
-    str += QObject::tr("\nFilename: %1").arg(filename);
+    if(!filename.isEmpty())
+    {
+        str += QObject::tr("<br/>\nFilename: %1").arg(filename);
+    }
 
     // count number of items by type
     int counter[IGisItem::eTypeMax] = {0};
@@ -171,19 +177,19 @@ QString IGisProject::getInfo()
     }
     if(counter[IGisItem::eTypeWpt])
     {
-        str += "\n" + QObject::tr("Waypoints: %1").arg(counter[IGisItem::eTypeWpt]);
+        str += "<br/>\n" + QObject::tr("Waypoints: %1").arg(counter[IGisItem::eTypeWpt]);
     }
     if(counter[IGisItem::eTypeTrk])
     {
-        str += "\n" + QObject::tr("Tracks: %1").arg(counter[IGisItem::eTypeTrk]);
+        str += "<br/>\n" + QObject::tr("Tracks: %1").arg(counter[IGisItem::eTypeTrk]);
     }
     if(counter[IGisItem::eTypeRte])
     {
-        str += "\n" + QObject::tr("Routes: %1").arg(counter[IGisItem::eTypeRte]);
+        str += "<br/>\n" + QObject::tr("Routes: %1").arg(counter[IGisItem::eTypeRte]);
     }
     if(counter[IGisItem::eTypeOvl])
     {
-        str += "\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
+        str += "<br/>\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
     }
 
     return str;
@@ -227,9 +233,8 @@ void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
 }
 
 
-void IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::StandardButtons& last)
+bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::StandardButtons& last)
 {
-    QList<QTreeWidgetItem*> items;
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
@@ -246,14 +251,26 @@ void IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
                 last = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
-                    continue;
+                    // as each item in the project has to be unique, we can stop searching.
+                    return false;
                 }
             }
-            items << takeChild(i-1);
-            setText(1,"*");
+            delete item;
+
+            /*
+                Database projects are a bit different. Deleteing an item does not really
+                mean the project is changed as the item is still stored in the database.
+            */
+            if(type != eTypeDb)
+            {
+                changed();
+            }
+
+            // as each item in the project has to be unique, we can stop searching.
+            return true;
         }
     }
-    qDeleteAll(items);
+    return false;
 }
 
 void IGisProject::editItemByKey(const IGisItem::key_t& key)

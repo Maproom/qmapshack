@@ -27,6 +27,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "gis/db/CDBProject.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
 
@@ -57,9 +58,19 @@ CGisWidget::~CGisWidget()
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
 }
 
+void CGisWidget::postEventForWks(QEvent * event)
+{
+    QCoreApplication::postEvent(treeWks, event);
+}
+
+void CGisWidget::postEventForDb(QEvent * event)
+{
+    QCoreApplication::postEvent(treeDB, event);
+}
+
+
 void CGisWidget::loadGisProject(const QString& filename)
 {
-
     // add project to workspace
     QApplication::setOverrideCursor(Qt::WaitCursor);
     IGisItem::mutexItems.lock();
@@ -77,12 +88,14 @@ void CGisWidget::loadGisProject(const QString& filename)
     if(item && !item->isValid())
     {
         delete item;
+        item = 0;
     }
 
     // skip if project is already loaded
     if(item && treeWks->hasProject(item))
     {
         delete item;
+        item = 0;
     }
 
     IGisItem::mutexItems.unlock();
@@ -90,7 +103,6 @@ void CGisWidget::loadGisProject(const QString& filename)
 
     emit sigChanged();
 }
-
 
 void CGisWidget::slotSaveAll()
 {
@@ -206,7 +218,17 @@ void CGisWidget::delItemByKey(const IGisItem::key_t& key)
         {
             continue;
         }
-        project->delItemByKey(key, last);
+
+        if(project->delItemByKey(key, last))
+        {
+            // update database tree if that is a database project
+            CDBProject * dbp = dynamic_cast<CDBProject*>(project);
+            if(dbp)
+            {
+                dbp->postStatus();
+            }
+        }
+
         if(last == QMessageBox::Cancel)
         {
             break;

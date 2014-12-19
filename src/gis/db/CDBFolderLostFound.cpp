@@ -17,13 +17,17 @@
 **********************************************************************************************/
 
 #include "gis/db/CDBFolderLostFound.h"
+#include "gis/db/CDBItem.h"
+#include "gis/db/macros.h"
 
-CDBFolderLostFound::CDBFolderLostFound(QTreeWidget *parent)
-    : IDBFolder(eTypeLostFound, 0, parent)
+#include <QtSql>
+
+CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidget *parent)
+    : IDBFolder(false, db, eTypeLostFound, 0, parent)
 {
-    setToolTip(1, QObject::tr("All your data grouped by folders."));
-    setIcon(0, QIcon("://icons/32x32/DeleteMultiple.png"));
-    setText(1, QObject::tr("Lost & Found"));
+    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
+    setIcon(eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
+    setText(eColumnName, QObject::tr("Lost & Found"));
 }
 
 CDBFolderLostFound::~CDBFolderLostFound()
@@ -31,3 +35,39 @@ CDBFolderLostFound::~CDBFolderLostFound()
 
 }
 
+void CDBFolderLostFound::update()
+{
+    int cnt = 0;
+    QSqlQuery query(db);
+
+    qDeleteAll(takeChildren());
+
+    query.prepare("SELECT id FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name");
+    QUERY_EXEC(return);
+
+    while(query.next())
+    {
+        quint64 id = query.value(0).toULongLong();
+        new CDBItem(db, id, this);
+        cnt++;
+    }
+
+    if(cnt)
+    {
+        setText(eColumnName, QObject::tr("Lost & Found (%1)").arg(cnt));
+    }
+    else
+    {
+        setText(eColumnName, QObject::tr("Lost & Found"));
+    }
+}
+
+void CDBFolderLostFound::clear()
+{
+    QSqlQuery query(db);
+
+    query.prepare("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)");
+    QUERY_EXEC(return);
+
+    update();
+}

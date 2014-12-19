@@ -18,12 +18,12 @@
 
 #include "gis/db/CDBFolderDatabase.h"
 
-CDBFolderDatabase::CDBFolderDatabase(QTreeWidget *parent)
-    : IDBFolder(eTypeDatabase, 1, parent)
+CDBFolderDatabase::CDBFolderDatabase(QSqlDatabase& db, QTreeWidget *parent)
+    : IDBFolder(false, db, eTypeDatabase, 1, parent)
 {
-    setToolTip(1, QObject::tr("All your data grouped by folders."));
-    setIcon(0, QIcon("://icons/32x32/Database.png"));
-    setText(1, QObject::tr("Database"));
+    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
+    setIcon(eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
+    setText(eColumnName, QObject::tr("Database"));
 }
 
 CDBFolderDatabase::~CDBFolderDatabase()

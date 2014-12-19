@@ -33,6 +33,7 @@ class CGisItemRte : public IGisItem, public IGisLine
         CGisItemRte(const QDomNode &xml, IGisProject *parent);
         CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx);
         CGisItemRte(const history_t& hist, IGisProject * project);
+        CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
         virtual ~CGisItemRte();
 
         QDataStream& operator<<(QDataStream& stream);

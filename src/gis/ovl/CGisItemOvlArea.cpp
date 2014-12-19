@@ -395,10 +395,10 @@ const QString& CGisItemOvlArea::getName()
 QString CGisItemOvlArea::getInfo()
 {
     QString unit, val;
-    QString str = getName();
+    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 
     IUnit::self().meter2area(area.area, val, unit);
-    str += "\n" + QObject::tr("Area: %1%2").arg(val).arg(unit);
+    str += "<br/>\n" + QObject::tr("Area: %1%2").arg(val).arg(unit);
 
     QString desc = removeHtml(area.desc).simplified();
     if(desc.count())

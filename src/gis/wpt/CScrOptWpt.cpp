@@ -35,7 +35,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(IGisItem::removeHtml(wpt->getInfo()));
+    label->setText(wpt->getInfo());
     adjustSize();
 
     toolMove->setEnabled(!wpt->isReadOnly());

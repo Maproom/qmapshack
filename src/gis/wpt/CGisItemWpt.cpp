@@ -197,7 +197,7 @@ void CGisItemWpt::getNewPosition(QPointF& pos)
 
 QString CGisItemWpt::getInfo()
 {
-    QString str = "<div>" + getName() + "</div>";
+    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 
     if(geocache.hasData)
     {

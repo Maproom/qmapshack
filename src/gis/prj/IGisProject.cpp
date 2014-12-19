@@ -133,11 +133,12 @@ void IGisProject::markAsSaved()
 
 QString IGisProject::getInfo()
 {
-    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;
+    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;    
+    str = "<div style='font-weight: bold;'>" + str + "</div>";
 
     if(metadata.time.isValid())
     {
-        str += "\n";
+        str += "<br/>\n";
         str += IUnit::datetime2string(metadata.time, false);
     }
 
@@ -145,7 +146,7 @@ QString IGisProject::getInfo()
     QString desc = IGisItem::removeHtml(metadata.desc).simplified();
     if(!desc.isEmpty())
     {
-        str += "\n";
+        str += "<br/>\n";
 
         if(desc.count() < 100)
         {
@@ -159,7 +160,7 @@ QString IGisProject::getInfo()
 
     if(!filename.isEmpty())
     {
-        str += QObject::tr("\nFilename: %1").arg(filename);
+        str += QObject::tr("<br/>\nFilename: %1").arg(filename);
     }
 
     // count number of items by type
@@ -176,19 +177,19 @@ QString IGisProject::getInfo()
     }
     if(counter[IGisItem::eTypeWpt])
     {
-        str += "\n" + QObject::tr("Waypoints: %1").arg(counter[IGisItem::eTypeWpt]);
+        str += "<br/>\n" + QObject::tr("Waypoints: %1").arg(counter[IGisItem::eTypeWpt]);
     }
     if(counter[IGisItem::eTypeTrk])
     {
-        str += "\n" + QObject::tr("Tracks: %1").arg(counter[IGisItem::eTypeTrk]);
+        str += "<br/>\n" + QObject::tr("Tracks: %1").arg(counter[IGisItem::eTypeTrk]);
     }
     if(counter[IGisItem::eTypeRte])
     {
-        str += "\n" + QObject::tr("Routes: %1").arg(counter[IGisItem::eTypeRte]);
+        str += "<br/>\n" + QObject::tr("Routes: %1").arg(counter[IGisItem::eTypeRte]);
     }
     if(counter[IGisItem::eTypeOvl])
     {
-        str += "\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
+        str += "<br/>\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
     }
 
     return str;

@@ -32,6 +32,7 @@
 #define VER_LINK        quint8(1)
 #define VER_TRKSEG      quint8(1)
 #define VER_TRKPT       quint8(1)
+#define VER_RTEPT       quint8(1)
 #define VER_WPT_T       quint8(1)
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
@@ -323,6 +324,22 @@ QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkpt_t& pt)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CGisItemRte::rtept_t& pt)
+{
+    stream << VER_RTEPT << pt.focus << pt.icon;
+    stream << (const IGisItem::wpt_t&)pt;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CGisItemRte::rtept_t& pt)
+{
+    quint8 version;
+    stream >> version >> pt.focus >> pt.icon;
+    stream >> (IGisItem::wpt_t&)pt;
+    return stream;
+}
+
+
 QDataStream& operator<<(QDataStream& stream, const IGisProject::copyright_t& c)
 {
     stream << VER_COPYRIGHT << c.author << c.year << c.license;
@@ -484,11 +501,69 @@ QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
 
 QDataStream& CGisItemRte::operator<<(QDataStream& stream)
 {
+    quint8      version;
+    QByteArray  buffer;
+    QIODevice * dev = stream.device();
+    qint64      pos = dev->pos();
+
+    char magic[10];
+    stream.readRawData(magic,MAGIC_SIZE);
+
+    if(strncmp(magic,MAGIC_RTE,MAGIC_SIZE))
+    {
+        dev->seek(pos);
+        return stream;
+    }
+
+    stream >> version;
+    stream >> buffer;
+    buffer = qUncompress(buffer);
+
+    QDataStream in(&buffer, QIODevice::ReadOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_2);
+
+    in >> key.item;
+    in >> flags;
+    in >> rte.name;
+    in >> rte.cmt;
+    in >> rte.desc;
+    in >> rte.src;
+    in >> rte.links;
+    in >> rte.number;
+    in >> rte.type;
+    in >> rte.pts;
+
+    setSymbol();
+    deriveSecondaryData();
+    setText(0, rte.name);
+    setToolTip(0, getInfo());
+
     return stream;
 }
 
 QDataStream& CGisItemRte::operator>>(QDataStream& stream)
 {
+
+    QByteArray  buffer;
+    QDataStream out(&buffer, QIODevice::WriteOnly);
+    out.setByteOrder(QDataStream::LittleEndian);
+    out.setVersion(QDataStream::Qt_5_2);
+
+    out << key.item;
+    out << flags;
+    out << rte.name;
+    out << rte.cmt;
+    out << rte.desc;
+    out << rte.src;
+    out << rte.links;
+    out << rte.number;
+    out << rte.type;
+    out << rte.pts;
+
+    stream.writeRawData(MAGIC_RTE, MAGIC_SIZE);
+    stream << VER_RTE;
+    stream << qCompress(buffer,9);
 
     return stream;
 }

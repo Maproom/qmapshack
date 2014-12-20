@@ -31,6 +31,12 @@ class CQlgtRoute;
 class CGisItemRte : public IGisItem, public IGisLine
 {
     public:
+        struct rtept_t : public wpt_t
+        {
+            QPixmap icon;
+            QPointF focus;
+        };
+
         CGisItemRte(const QDomNode &xml, IGisProject *parent);
         CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx);
         CGisItemRte(const history_t& hist, IGisProject * project);
@@ -57,16 +63,12 @@ class CGisItemRte : public IGisItem, public IGisLine
 
     private:
         struct rte_t;
+        void deriveSecondaryData();
         void setSymbol();
         void readRte(const QDomNode& xml, rte_t& rte);
 
         static key_t keyUserFocus;
 
-        struct rtept_t : public wpt_t
-        {
-            QPixmap icon;
-            QPointF focus;
-        };
 
         struct rte_t
         {

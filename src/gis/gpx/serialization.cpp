@@ -724,10 +724,6 @@ void CGisItemTrk::save(QDomNode& gpx)
 
 void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
 {
-    qreal north = -90;
-    qreal east  = -180;
-    qreal south =  90;
-    qreal west  =  180;
 
     readXml(xml, "name", rte.name);
     readXml(xml, "cmt", rte.cmt);
@@ -746,15 +742,7 @@ void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
         const QDomNode& xmlRtept = xmlRtepts.item(m);
         readWpt(xmlRtept, rtept);
         rtept.icon = getWptIconByName(rtept.sym, rtept.focus);
-
-        if(rtept.lon < west)  west    = rtept.lon;
-        if(rtept.lon > east)  east    = rtept.lon;
-        if(rtept.lat < south) south   = rtept.lat;
-        if(rtept.lat > north) north   = rtept.lat;
-
     }
-
-    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
     // decode some well known extensions
     if(xml.namedItem("extensions").isElement())

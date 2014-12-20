@@ -52,6 +52,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
 
     genKey();
     setupHistory();
+    deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);
 }
 
@@ -59,19 +60,39 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
-    history = hist;
+    history = hist;    
     loadHistory(hist.histIdxCurrent);
+    deriveSecondaryData();
 }
 
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeRte, -1)
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
-    loadFromDb(id, db);
+    loadFromDb(id, db);    
 }
 
 CGisItemRte::~CGisItemRte()
 {
+
+}
+
+void CGisItemRte::deriveSecondaryData()
+{
+    qreal north = -90;
+    qreal east  = -180;
+    qreal south =  90;
+    qreal west  =  180;
+
+    foreach(const rtept_t& rtept, rte.pts)
+    {
+        if(rtept.lon < west)  west    = rtept.lon;
+        if(rtept.lon > east)  east    = rtept.lon;
+        if(rtept.lat < south) south   = rtept.lat;
+        if(rtept.lat > north) north   = rtept.lat;
+    }
+
+    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
 }
 

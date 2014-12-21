@@ -2236,8 +2236,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../qlgt/IImportDatabase.ui" line="28"/>
         <source>Source Database:</source>
-        <translatorcomment>Quelldatenbank:</translatorcomment>
-        <translation></translation>
+        <translation>Quelldatenbank:</translation>
     </message>
     <message>
         <location filename="../qlgt/IImportDatabase.ui" line="35"/>

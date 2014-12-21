@@ -6,7 +6,7 @@ rem http://technet.microsoft.com/en-us/library/bb491035.aspx
 rem http://vlaurie.com/computers2/Articles/environment.htm
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.3\msvc2013"
+set QMSI_QT_PATH="C:\Qt5\5.4\msvc2013"
 rem get the VC redistributable installer from http://www.microsoft.com/en-us/download/details.aspx?id=40784
 set QMSI_VCREDIST_PATH="M:\deploy"
 rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
@@ -33,13 +33,14 @@ copy %QMSI_QT_PATH%\bin\Qt5Script.dll
 copy %QMSI_QT_PATH%\bin\Qt5Sensors.dll
 copy %QMSI_QT_PATH%\bin\Qt5Sql.dll
 copy %QMSI_QT_PATH%\bin\Qt5Svg.dll
+copy %QMSI_QT_PATH%\bin\Qt5WebChannel.dll
 copy %QMSI_QT_PATH%\bin\Qt5WebKit.dll
 copy %QMSI_QT_PATH%\bin\Qt5WebKitWidgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Widgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Xml.dll
-copy %QMSI_QT_PATH%\bin\icudt52.dll
-copy %QMSI_QT_PATH%\bin\icuin52.dll
-copy %QMSI_QT_PATH%\bin\icuuc52.dll
+copy %QMSI_QT_PATH%\bin\icudt53.dll
+copy %QMSI_QT_PATH%\bin\icuin53.dll
+copy %QMSI_QT_PATH%\bin\icuuc53.dll
 copy %QMSI_QT_PATH%\bin\libEGL.dll
 copy %QMSI_QT_PATH%\bin\libGLESv2.dll
 mkdir imageformats

@@ -130,13 +130,14 @@ Section "QMapShack" QMapShack
 	File Files32\Qt5Sensors.dll
     File Files32\Qt5Sql.dll
     File Files32\Qt5Svg.dll
+	File Files32\Qt5WebChannel.dll
     File Files32\Qt5WebKit.dll
     File Files32\Qt5Widgets.dll 
     File Files32\Qt5WebKitWidgets.dll	
     File Files32\Qt5Xml.dll
-	File Files32\icudt52.dll
-	File Files32\icuin52.dll
-	File Files32\icuuc52.dll
+	File Files32\icudt53.dll
+	File Files32\icuin53.dll
+	File Files32\icuuc53.dll
 	File Files32\libEGL.dll
 	File Files32\libGLESv2.dll
 

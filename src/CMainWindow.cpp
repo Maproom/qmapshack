@@ -32,7 +32,7 @@
 #include "CAbout.h"
 #include "gis/CGisWidget.h"
 #include "gis/WptIcons.h"
-#include "gis/db/CSetupDB.h"
+#include "gis/db/CSetupWorkspace.h"
 #include "qlgt/CImportDatabase.h"
 
 #include <QtGui>
@@ -88,7 +88,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
     connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
     connect(actionSetupUnits, SIGNAL(triggered()), this, SLOT(slotSetupUnits()));
-    connect(actionSetupDatabase, SIGNAL(triggered()), this, SLOT(slotSetupDatabase()));
+    connect(actionSetupWorkspace, SIGNAL(triggered()), this, SLOT(slotSetupWorkspace()));
     connect(actionImportDatabase, SIGNAL(triggered()), this, SLOT(slotImportDatabase()));
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
@@ -540,9 +540,9 @@ void CMainWindow::slotSetupUnits()
     dlg.exec();
 }
 
-void CMainWindow::slotSetupDatabase()
+void CMainWindow::slotSetupWorkspace()
 {
-    CSetupDB dlg(this);
+    CSetupWorkspace dlg(this);
     dlg.exec();
 }
 

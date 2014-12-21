@@ -16,27 +16,24 @@
 
 **********************************************************************************************/
 
-#ifndef CSETUPDB_H
-#define CSETUPDB_H
+#ifndef CSETUPWORKSPACE_H
+#define CSETUPWORKSPACE_H
 
 #include <QDialog>
-#include "ui_ISetupDB.h"
+#include "ui_ISetupWorkspace.h"
 
 
-class CSetupDB : public QDialog, private Ui::ISetupDB
+class CSetupWorkspace : public QDialog, private Ui::ISetupWorkspace
 {
     Q_OBJECT
     public:
-        CSetupDB(QWidget * parent);
-        virtual ~CSetupDB();
+        CSetupWorkspace(QWidget * parent);
+        virtual ~CSetupWorkspace();
 
     public slots:
         void accept();
 
-
-    private slots:
-        void slotSetupPath();
 };
 
-#endif //CSETUPDB_H
+#endif //CSETUPWORKSPACE_H
 

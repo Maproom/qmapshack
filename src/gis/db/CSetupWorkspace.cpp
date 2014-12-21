@@ -16,13 +16,13 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CSetupDB.h"
+#include "gis/db/CSetupWorkspace.h"
 #include "helpers/CSettings.h"
 #include "config.h"
 
 #include <QtWidgets>
 
-CSetupDB::CSetupDB(QWidget *parent)
+CSetupWorkspace::CSetupWorkspace(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -31,25 +31,22 @@ CSetupDB::CSetupDB(QWidget *parent)
     cfg.beginGroup("Database");
     checkSaveOnExit->setChecked(cfg.value("saveOnExit", true).toBool());
     spinSaveEvery->setValue(cfg.value("saveEvery",5).toInt());
-    labelDatabasePath->setText(cfg.value("path",QDir::home().filePath(CONFIGDIR).append("database.db")).toString());
     cfg.endGroup();
 
-    connect(toolDatabasePath, SIGNAL(clicked()), this, SLOT(slotSetupPath()));
     connect(checkSaveOnExit, SIGNAL(toggled(bool)), spinSaveEvery, SLOT(setEnabled(bool)));
 }
 
-CSetupDB::~CSetupDB()
+CSetupWorkspace::~CSetupWorkspace()
 {
 
 }
 
-void CSetupDB::accept()
+void CSetupWorkspace::accept()
 {
     SETTINGS;
     cfg.beginGroup("Database");
     cfg.setValue("saveOnExit", checkSaveOnExit->isChecked());
     cfg.setValue("saveEvery", spinSaveEvery->value());
-    cfg.setValue("path", labelDatabasePath->text());
     cfg.endGroup();
 
     QMessageBox::information(this, tr("Setup database..."), tr("Changes will become active after an application's restart."), QMessageBox::Ok);
@@ -57,13 +54,3 @@ void CSetupDB::accept()
     QDialog::accept();
 }
 
-void CSetupDB::slotSetupPath()
-{
-    QFileInfo fi(labelDatabasePath->text());
-    QString filename = QFileDialog::getSaveFileName(this, tr("Select database path..."),fi.absoluteFilePath(), "Database (*.db)");
-    if(filename.isEmpty())
-    {
-        return;
-    }
-    labelDatabasePath->setText(filename);
-}

@@ -71,7 +71,7 @@ void CImportDatabase::slotSelectSource()
 {
     SETTINGS;
     QString path = cfg.value("Path/source",QDir::homePath()).toString();
-    QString filename = QFileDialog::getOpenFileName(this, tr("Select source databse..."), path, "*.db");
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select source database..."), path, "*.db");
     if(filename.isEmpty())
     {
         return;
@@ -92,7 +92,7 @@ void CImportDatabase::slotSelectTarget()
 {
     SETTINGS;
     QString path = cfg.value("Path/target",QDir::homePath()).toString();
-    QString filename = QFileDialog::getSaveFileName(this, tr("Select target databse..."), path, "*.db");
+    QString filename = QFileDialog::getSaveFileName(this, tr("Select target database..."), path, "*.db");
     if(filename.isEmpty())
     {
         return;

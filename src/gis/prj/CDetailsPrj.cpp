@@ -67,7 +67,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
 {
     if(link == "name")
     {
-        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, prj.getName());
+        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
         if(name.isEmpty())
         {
             return;

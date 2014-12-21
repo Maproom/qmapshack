@@ -23,14 +23,12 @@
 #include <QSqlDatabase>
 
 #include <gis/db/IDBFolder.h>
-#include <gis/db/IDB.h>
 
 struct action_t;
 class QMenu;
 class CDBFolderDatabase;
-class CDBFolderLostFound;
 
-class CGisListDB : public QTreeWidget, private IDB
+class CGisListDB : public QTreeWidget
 {
     Q_OBJECT
     public:
@@ -64,7 +62,6 @@ class CGisListDB : public QTreeWidget, private IDB
         QMenu * menuLostFound;
         QAction * actionDelLostFound;
 
-        CDBFolderLostFound * folderLostFound;
         CDBFolderDatabase *  folderDatabase;
 };
 

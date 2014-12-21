@@ -24,6 +24,7 @@
 
 class QSqlDatabase;
 class CEvtW2DAckInfo;
+class CDBFolderDatabase;
 
 class IDBFolder : public QTreeWidgetItem
 {
@@ -49,7 +50,9 @@ class IDBFolder : public QTreeWidgetItem
 
         quint64 getId(){return id;}
         QString getDBName();
+        CDBFolderDatabase * getDBFolder();
 
+        virtual void addFolder(type_e type, const QString &name);
         virtual void expanding();
         virtual void update(CEvtW2DAckInfo * info);
         virtual void toggle();

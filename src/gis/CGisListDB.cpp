@@ -19,10 +19,10 @@
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
 #include "gis/db/macros.h"
-#include "gis/db/CSetupFolder.h"
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBItem.h"
+#include "gis/db/CSetupFolder.h"
 #include "helpers/CSettings.h"
 #include "config.h"
 
@@ -61,9 +61,8 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     SETTINGS;
     QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/database.db")).toString();
-    setupDB(path, "Database");
-    folderLostFound     = new CDBFolderLostFound(db, this);
-    folderDatabase      = new CDBFolderDatabase(db, this);
+
+    folderDatabase      = new CDBFolderDatabase(path, "Database", this);
 
     menuFolder          = new QMenu(this);
     actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
@@ -73,14 +72,13 @@ CGisListDB::CGisListDB(QWidget *parent)
     menuDatabase->addAction(actionAddFolder);
 
     menuLostFound       = new QMenu(this);
-    actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete"), this, SLOT(slotDelLostFound()));
+    actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
     connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
 
     folderDatabase->setExpanded(true);
-    folderLostFound->update();
 }
 
 CGisListDB::~CGisListDB()
@@ -132,12 +130,16 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     if((folder == folderDatabase))
     {
         menuDatabase->exec(p);
+        return;
     }
-    else if((folder == folderLostFound))
+
+    CDBFolderLostFound * lostFound = dynamic_cast<CDBFolderLostFound*>(currentItem());
+
+    if(lostFound)
     {
         menuLostFound->exec(p);
     }
-    else if(folder != 0)
+    else
     {
         menuFolder->exec(p);
     }
@@ -147,12 +149,11 @@ void CGisListDB::slotAddFolder()
 {
     CGisListDBEditLock lock(false, this);
 
-    IDBFolder * parentFolder = dynamic_cast<IDBFolder*>(currentItem());
-    if(parentFolder == 0)
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == 0)
     {
         return;
     }
-    quint64 idParent = parentFolder->getId();
 
     IDBFolder::type_e type = IDBFolder::eTypeProject;
     QString name;
@@ -162,28 +163,7 @@ void CGisListDB::slotAddFolder()
         return;
     }
 
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO folders (name, type) VALUES (:name, :type)");
-    query.bindValue(":name", name);
-    query.bindValue(":type", type);
-    QUERY_EXEC(return);
-
-    query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return);
-    query.next();
-    quint64 idChild = query.value(0).toULongLong();
-    if(idChild == 0)
-    {
-        qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
-        return;
-    }
-
-    query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
-    query.bindValue(":parent", idParent);
-    query.bindValue(":child", idChild);
-    QUERY_EXEC(return);
-
-    IDBFolder::createFolderByType(db, type, idChild, parentFolder);
+    folder->addFolder(type, name);
 }
 
 void CGisListDB::slotDelFolder()
@@ -201,10 +181,15 @@ void CGisListDB::slotDelFolder()
         return;
     }
 
+    CDBFolderDatabase * dbfolder = folder->getDBFolder();
+
     folder->remove();
     delete folder;
 
-    folderLostFound->update();
+    if(dbfolder)
+    {
+        dbfolder->updateLostFound();
+    }
 }
 
 void CGisListDB::slotDelLostFound()

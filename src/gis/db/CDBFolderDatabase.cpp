@@ -17,13 +17,18 @@
 **********************************************************************************************/
 
 #include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderLostFound.h"
 
-CDBFolderDatabase::CDBFolderDatabase(QSqlDatabase& db, QTreeWidget *parent)
-    : IDBFolder(false, db, eTypeDatabase, 1, parent)
+CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& name, QTreeWidget *parent)
+    : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
 {
     setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
     setIcon(eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
-    setText(eColumnName, QObject::tr("Database"));
+    setText(eColumnName, name);
+
+    setupDB(filename, name);
+
+    setupFromDB();
 }
 
 CDBFolderDatabase::~CDBFolderDatabase()
@@ -31,3 +36,15 @@ CDBFolderDatabase::~CDBFolderDatabase()
 
 }
 
+void CDBFolderDatabase::expanding()
+{
+    IDBFolder::expanding();
+
+    folderLostFound  = new CDBFolderLostFound(IDB::db, 0);
+    insertChild(0, folderLostFound);
+}
+
+void CDBFolderDatabase::updateLostFound()
+{
+    folderLostFound->update();
+}

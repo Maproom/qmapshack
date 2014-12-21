@@ -22,12 +22,13 @@
 
 #include <QtSql>
 
-CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidget *parent)
+CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent)
     : IDBFolder(false, db, eTypeLostFound, 0, parent)
 {
-    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
+    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));    
     setText(eColumnName, QObject::tr("Lost & Found"));
+
+    update();
 }
 
 CDBFolderLostFound::~CDBFolderLostFound()
@@ -55,10 +56,12 @@ void CDBFolderLostFound::update()
     if(cnt)
     {
         setText(eColumnName, QObject::tr("Lost & Found (%1)").arg(cnt));
+        setIcon(eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
     }
     else
     {
         setText(eColumnName, QObject::tr("Lost & Found"));
+        setIcon(eColumnCheckbox, QIcon("://icons/32x32/Empty.png"));
     }
 }
 

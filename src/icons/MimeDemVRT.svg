@@ -13,8 +13,8 @@
    height="64px"
    id="svg3016"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="Neues Dokument 2">
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="MimeDemVRT.svg">
   <defs
      id="defs3018" />
   <sodipodi:namedview
@@ -32,9 +32,9 @@
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="996"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="992"
+     inkscape:window-x="-4"
+     inkscape:window-y="-1"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata3021">
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -53,14 +53,14 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <g
-       id="g3147">
+       id="g3106">
       <rect
          y="8.3147955"
          x="8.3440924"
          height="33.188591"
          width="33.129997"
          id="rect3167-8-3"
-         style="fill:none;stroke:#806600;stroke-width:1.87165701;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:#ffffff;stroke:#806600;stroke-width:1.87165701000000007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <rect
          ry="1.5290817e-06"
          y="31.437569"

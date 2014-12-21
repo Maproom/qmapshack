@@ -22,6 +22,7 @@
 #include "gis/db/CDBFolderProject.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBItem.h"
+#include "gis/db/CDBFolderDatabase.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
 
@@ -33,7 +34,7 @@ IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id,
     , id(id)
     , isLoadable(isLoadable)
 {
-    setupFromDB();        
+
 }
 
 IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent)
@@ -42,7 +43,7 @@ IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id,
     , id(id)
     , isLoadable(isLoadable)
 {
-    setupFromDB();
+
 }
 
 IDBFolder::~IDBFolder()
@@ -80,6 +81,47 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
 QString IDBFolder::getDBName()
 {
     return db.connectionName();
+}
+
+CDBFolderDatabase * IDBFolder::getDBFolder()
+{
+    if(type() == eTypeDatabase)
+    {
+        return dynamic_cast<CDBFolderDatabase*>(this);
+    }
+
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    if(folder != 0)
+    {
+        return folder->getDBFolder();
+    }
+    return 0;
+}
+
+void IDBFolder::addFolder(type_e type, const QString& name)
+{
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO folders (name, type) VALUES (:name, :type)");
+    query.bindValue(":name", name);
+    query.bindValue(":type", type);
+    QUERY_EXEC(return);
+
+    query.prepare("SELECT last_insert_rowid() from folders");
+    QUERY_EXEC(return);
+    query.next();
+    quint64 idChild = query.value(0).toULongLong();
+    if(idChild == 0)
+    {
+        qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
+        return;
+    }
+
+    query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
+    query.bindValue(":parent", id);
+    query.bindValue(":child", idChild);
+    QUERY_EXEC(return);
+
+    IDBFolder::createFolderByType(db, type, idChild, this);
 }
 
 void IDBFolder::expanding()

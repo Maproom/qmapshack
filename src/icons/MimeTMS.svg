@@ -13,7 +13,7 @@
    height="64px"
    id="svg3462"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="MimeTMS.svg">
   <defs
      id="defs3464" />
@@ -32,9 +32,9 @@
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="1012"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="992"
+     inkscape:window-x="-4"
+     inkscape:window-y="-1"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,7 +57,14 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <g
-       id="g3042">
+       id="g3121">
+      <rect
+         y="12.314795"
+         x="16.525911"
+         height="33.188591"
+         width="33.129997"
+         id="rect3167"
+         style="fill:#ffffff;stroke:#aa0000;stroke-width:1.87165701000000007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path
          inkscape:connector-curvature="0"
          id="path3319"
@@ -86,13 +93,6 @@
              y="44"
              style="font-size:9px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;font-family:Sans;-inkscape-font-specification:Sans Bold">TMS</tspan></text>
       </g>
-      <rect
-         y="12.314795"
-         x="16.525911"
-         height="33.188591"
-         width="33.129997"
-         id="rect3167"
-         style="fill:none;stroke:#aa0000;stroke-width:1.87165701000000007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
   </g>
 </svg>

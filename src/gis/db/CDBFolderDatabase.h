@@ -20,12 +20,21 @@
 #define CDBFOLDERDATABASE_H
 
 #include "gis/db/IDBFolder.h"
+#include <gis/db/IDB.h>
 
-class CDBFolderDatabase : public IDBFolder
+class CDBFolderLostFound;
+
+class CDBFolderDatabase : public IDBFolder, private IDB
 {
     public:
-        CDBFolderDatabase(QSqlDatabase &db, QTreeWidget *parent);
+        CDBFolderDatabase(const QString &filename, const QString &name, QTreeWidget *parent);
         virtual ~CDBFolderDatabase();
+
+        void expanding();
+
+        void updateLostFound();
+    private:
+        CDBFolderLostFound * folderLostFound;
 };
 
 #endif //CDBFOLDERDATABASE_H

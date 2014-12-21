@@ -13,7 +13,7 @@
    height="64px"
    id="svg3513"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="MimeVRT.svg">
   <defs
      id="defs3515" />
@@ -32,9 +32,9 @@
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="996"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="992"
+     inkscape:window-x="-4"
+     inkscape:window-y="-1"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata3518">
@@ -53,14 +53,14 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <g
-       id="g2993">
+       id="g3092">
       <rect
          y="13.769343"
          x="17.798641"
          height="33.188591"
          width="33.129997"
          id="rect3167-8-3"
-         style="fill:none;stroke:#806600;stroke-width:1.87165701000000007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:#ffffff;stroke:#806600;stroke-width:1.87165701000000007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path
          inkscape:connector-curvature="0"
          id="path3319-6-1"

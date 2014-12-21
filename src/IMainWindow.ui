@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -454,7 +454,7 @@
      <normaloff>:/icons/32x32/DatabaseConvert.png</normaloff>:/icons/32x32/DatabaseConvert.png</iconset>
    </property>
    <property name="text">
-    <string>Import Database</string>
+    <string>Import Database from QLandkarte</string>
    </property>
    <property name="toolTip">
     <string>Import QLandkarte GT database</string>

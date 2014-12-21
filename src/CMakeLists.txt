@@ -102,6 +102,7 @@ set( SRCS
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
     gis/db/IDB.cpp
+    gis/db/CSetupDatabase.cpp
     gis/db/CSetupWorkspace.cpp
     gis/db/CSetupFolder.cpp
     gis/db/IDBFolder.cpp
@@ -239,6 +240,7 @@ set( HDRS
     gis/qms/CQmsProject.cpp
     gis/db/IDB.cpp
     gis/db/macros.h
+    gis/db/CSetupDatabase.h
     gis/db/CSetupWorkspace.h
     gis/db/CSetupFolder.h
     gis/db/IDBFolder.h
@@ -311,6 +313,7 @@ set( UIS
     mouse/IScrOptRangeTrk.ui
     gis/IGisWidget.ui
     gis/prj/IDetailsPrj.ui
+    gis/db/ISetupDatabase.ui
     gis/db/ISetupWorkspace.ui
     gis/db/ISetupFolder.ui
     gis/wpt/IScrOptWpt.ui

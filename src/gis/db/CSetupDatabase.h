@@ -16,36 +16,34 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBFolderDatabase.h"
-#include "gis/db/CDBFolderLostFound.h"
+#ifndef CSETUPDATABASE_H
+#define CSETUPDATABASE_H
 
-CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& name, QTreeWidget *parent)
-    : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
-    , filename(filename)
+#include <QDialog>
+#include "ui_ISetupDatabase.h"
+
+class CGisListDB;
+
+class CSetupDatabase : public QDialog, private Ui::ISetupDatabase
 {
-    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
-    setText(eColumnName, name);
+    Q_OBJECT
+    public:
+        CSetupDatabase(QString &name, QString &filename, CGisListDB& parent);
+        virtual ~CSetupDatabase();
 
-    setupDB(filename, name);
+    public slots:
+        void accept();
 
-    setupFromDB();
-}
+    private slots:
+        void slotNewDB();
+        void slotOpenDB();
+        void slotUpdateButtonBox();
 
-CDBFolderDatabase::~CDBFolderDatabase()
-{
+    private:
+        CGisListDB& list;
+        QString& name;
+        QString& filename;
+};
 
-}
+#endif //CSETUPDATABASE_H
 
-void CDBFolderDatabase::expanding()
-{
-    IDBFolder::expanding();
-
-    folderLostFound  = new CDBFolderLostFound(IDB::db, 0);
-    insertChild(0, folderLostFound);
-}
-
-void CDBFolderDatabase::updateLostFound()
-{
-    folderLostFound->update();
-}

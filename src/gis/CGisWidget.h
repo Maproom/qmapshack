@@ -225,6 +225,9 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
     public slots:
         void slotSaveAll();
 
+    private slots:
+        void slotHelpText();
+
 
     private:
         friend class CMainWindow;

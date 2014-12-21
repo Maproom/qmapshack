@@ -23,6 +23,7 @@
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/CSetupFolder.h"
+#include "gis/db/CSetupDatabase.h"
 #include "helpers/CSettings.h"
 #include "config.h"
 
@@ -60,9 +61,17 @@ CGisListDB::CGisListDB(QWidget *parent)
 {   
 
     SETTINGS;
-    QString path = cfg.value("Database/path", QDir::home().filePath(CONFIGDIR).append("/database.db")).toString();
+    QStringList names = cfg.value("Database/names").toStringList();
+    QStringList files = cfg.value("Database/files").toStringList();
 
-    folderDatabase      = new CDBFolderDatabase(path, "Database", this);
+    const int N = names.count();
+    for(int i = 0; i < N; i++)
+    {
+        addDatabase(names[i], files[i]);
+    }
+
+    menuNone            = new QMenu(this);
+    actionAddDatabase   = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, SLOT(slotAddDatabase()));
 
     menuFolder          = new QMenu(this);
     actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
@@ -70,6 +79,7 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     menuDatabase        = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
+    actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
 
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
@@ -77,17 +87,34 @@ CGisListDB::CGisListDB(QWidget *parent)
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
     connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
-
-    folderDatabase->setExpanded(true);
 }
 
 CGisListDB::~CGisListDB()
 {
+    SETTINGS;
+    QStringList names;
+    QStringList files;
+
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
+        if(database)
+        {
+            names << database->text(IDBFolder::eColumnName);
+            files << database->getFilename();
+        }
+    }
+
+    cfg.setValue("Database/names", names);
+    cfg.setValue("Database/files", files);
+
 }
 
 
 CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
 {
+    CGisListDBEditLock lock(true, this);
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
@@ -99,6 +126,22 @@ CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
     }
     return 0;
 }
+
+bool CGisListDB::hasDatabase(const QString& name)
+{
+    CGisListDBEditLock lock(true, this);
+    const int N = topLevelItemCount();
+    for(int i = 0; i < N; i++)
+    {
+        CDBFolderDatabase * folder = dynamic_cast<CDBFolderDatabase*>(topLevelItem(i));
+        if(folder && (folder->text(IDBFolder::eColumnName) == name))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 bool CGisListDB::event(QEvent * e)
 {
@@ -126,23 +169,71 @@ bool CGisListDB::event(QEvent * e)
 void CGisListDB::slotContextMenu(const QPoint& point)
 {
     QPoint p = mapToGlobal(point);
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
-    if((folder == folderDatabase))
+
+    if(selectedItems().isEmpty())
+    {
+        menuNone->exec(p);
+        return;
+    }
+
+    CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(currentItem());
+    if(database)
     {
         menuDatabase->exec(p);
         return;
     }
 
     CDBFolderLostFound * lostFound = dynamic_cast<CDBFolderLostFound*>(currentItem());
-
     if(lostFound)
     {
         menuLostFound->exec(p);
+        return;
     }
-    else
+
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder)
     {
         menuFolder->exec(p);
+        return;
     }
+}
+
+void CGisListDB::slotAddDatabase()
+{
+    QString name, filename("-");
+    CSetupDatabase dlg(name, filename, *this);
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return ;
+    }
+
+    addDatabase(name, filename);
+    emit sigChanged();
+}
+
+void CGisListDB::addDatabase(const QString& name, const QString& filename)
+{
+    new CDBFolderDatabase(filename, name, this);
+
+}
+
+void CGisListDB::slotDelDatabase()
+{
+    CDBFolderDatabase * folder = dynamic_cast<CDBFolderDatabase*>(currentItem());
+    if(folder == 0)
+    {
+        return;
+    }
+
+    int res = QMessageBox::question(this, tr("Remove database..."), tr("Do you realy want to remove '%1' from the list?").arg(folder->text(IDBFolder::eColumnName)), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+    delete folder;
+
+    emit sigChanged();
 }
 
 void CGisListDB::slotAddFolder()
@@ -248,3 +339,4 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
         }
     }
 }
+

@@ -49,6 +49,9 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     treeDB->header()->restoreState(cfg.value("Workspace/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
     connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(treeDB, SIGNAL(sigChanged()), SLOT(slotHelpText()));
+
+    slotHelpText();
 }
 
 CGisWidget::~CGisWidget()
@@ -102,6 +105,18 @@ void CGisWidget::loadGisProject(const QString& filename)
     QApplication::restoreOverrideCursor();
 
     emit sigChanged();
+}
+
+void CGisWidget::slotHelpText()
+{
+    if(treeDB->topLevelItemCount() == 0)
+    {
+        frameHelp->show();
+    }
+    else
+    {
+        frameHelp->hide();
+    }
 }
 
 void CGisWidget::slotSaveAll()

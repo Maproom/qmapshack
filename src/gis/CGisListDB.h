@@ -35,7 +35,11 @@ class CGisListDB : public QTreeWidget
         CGisListDB(QWidget * parent);
         virtual ~CGisListDB();
 
+        bool hasDatabase(const QString& name);
         bool event(QEvent * e);
+
+    signals:
+        void sigChanged();
 
     private slots:
         void slotContextMenu(const QPoint& point);
@@ -44,25 +48,31 @@ class CGisListDB : public QTreeWidget
         void slotDelLostFound();
         void slotItemExpanded(QTreeWidgetItem * item);
         void slotItemChanged(QTreeWidgetItem * item, int column);
+        void slotAddDatabase();
+        void slotDelDatabase();
 
     private:
         friend class CGisListDBEditLock;
 
         CDBFolderDatabase *getDataBase(const QString& name);
-        void addFolder(IDBFolder::type_e type, quint64 key, IDBFolder *parent);
+        void addDatabase(const QString& name, const QString& filename);
 
         int isInternalEdit;
+
+        QMenu * menuNone;
+        QAction * actionAddDatabase;
 
         QMenu * menuFolder;
         QAction * actionAddFolder;
         QAction * actionDelFolder;
 
         QMenu * menuDatabase;
+        QAction * actionDelDatabase;
 
         QMenu * menuLostFound;
         QAction * actionDelLostFound;
 
-        CDBFolderDatabase *  folderDatabase;
+//        CDBFolderDatabase *  folderDatabase;
 };
 
 #endif //CGISLISTDB_H

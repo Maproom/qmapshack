@@ -2279,7 +2279,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="14"/>
         <source>Links...</source>
-        <translation>Verbindungen...</translation>
+        <translation>Verknüpfungen...</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="23"/>
@@ -3764,7 +3764,7 @@ Dateiname: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1289"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="341"/>
         <source>Changed links</source>
-        <translation>Geänderte Verbindungen</translation>
+        <translation>Verknüpfung geändert</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="508"/>
@@ -3909,13 +3909,13 @@ Dateiname: %1</translation>
         <location filename="../gis/IGisItem.cpp" line="578"/>
         <location filename="../gis/IGisItem.cpp" line="608"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Verbindungen:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Verknüpfungen:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="581"/>
         <location filename="../gis/IGisItem.cpp" line="611"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
-        <translation>&lt;h4&gt;keine Verbindungen:&lt;/h4&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;--- keine Verknüpfungen ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="813"/>

@@ -50,6 +50,7 @@ class CGisListDB : public QTreeWidget
         void slotItemChanged(QTreeWidgetItem * item, int column);
         void slotAddDatabase();
         void slotDelDatabase();
+        void slotDelItem();
 
     private:
         friend class CGisListDBEditLock;
@@ -68,6 +69,9 @@ class CGisListDB : public QTreeWidget
 
         QMenu * menuDatabase;
         QAction * actionDelDatabase;
+
+        QMenu * menuItem;
+        QAction * actionDelItem;
 
         QMenu * menuLostFound;
         QAction * actionDelLostFound;

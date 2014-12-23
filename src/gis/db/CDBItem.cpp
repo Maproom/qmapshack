@@ -75,3 +75,25 @@ void CDBItem::toggle()
         CGisWidget::self().postEventForWks(evt2);
     }
 }
+
+void CDBItem::remove()
+{
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    if(folder == 0)
+    {
+        return;
+    }
+
+    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+    {
+        CEvtD2WHideItems * evt = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
+        evt->keys << key;
+        CGisWidget::self().postEventForWks(evt);
+    }
+
+    QSqlQuery query(db);
+    query.prepare("DELETE FROM folder2item WHERE parent=:parent AND child=:child");
+    query.bindValue(":parent", folder->getId());
+    query.bindValue(":child", id);
+    QUERY_EXEC();
+}

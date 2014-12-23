@@ -30,10 +30,12 @@ class CDBItem : public QTreeWidgetItem
         CDBItem(QSqlDatabase& db, quint64 id, IDBFolder * parent);
         virtual ~CDBItem();
 
+        quint64 getId(){return id;}
         const QString& getKey(){return key;}
         void toggle();
+        void remove();
 
-    private:
+    private:        
         QSqlDatabase& db;
         quint64 id;
 

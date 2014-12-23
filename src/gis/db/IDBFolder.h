@@ -25,6 +25,7 @@
 class QSqlDatabase;
 class CEvtW2DAckInfo;
 class CDBFolderDatabase;
+class CDBItem;
 
 class IDBFolder : public QTreeWidgetItem
 {

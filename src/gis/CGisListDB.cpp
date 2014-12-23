@@ -77,6 +77,9 @@ CGisListDB::CGisListDB(QWidget *parent)
     actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
     actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, SLOT(slotDelFolder()));
 
+    menuItem            = new QMenu(this);
+    actionDelItem       = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, SLOT(slotDelItem()));
+
     menuDatabase        = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
@@ -196,6 +199,13 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         menuFolder->exec(p);
         return;
     }
+
+    CDBItem * item = dynamic_cast<CDBItem*>(currentItem());
+    if(item)
+    {
+        menuItem->exec(p);
+        return;
+    }
 }
 
 void CGisListDB::slotAddDatabase()
@@ -312,6 +322,57 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
     }
 
     folder->expanding();
+}
+
+void CGisListDB::slotDelItem()
+{
+    CGisListDBEditLock lock(false, this);
+
+    int last = QMessageBox::NoButton;
+
+    QList<QTreeWidgetItem*> dbItems;
+    QSet<CDBFolderDatabase*> dbFolders;
+
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
+    {
+        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        if(dbItem == 0)
+        {
+            continue;
+        }
+
+        IDBFolder * folder = dynamic_cast<IDBFolder*>(dbItem->parent());
+        if(folder == 0)
+        {
+            continue;
+        }
+
+        if(last != QMessageBox::YesToAll)
+        {
+            QString msg = QObject::tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->text(IDBFolder::eColumnName)).arg(folder->text(IDBFolder::eColumnName));
+            last = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+        }
+        if(last == QMessageBox::No)
+        {
+            continue;
+        }
+        if(last == QMessageBox::Cancel)
+        {
+            return;
+        }
+
+        dbItem->remove();
+        dbItems << dbItem;
+        dbFolders << folder->getDBFolder();
+    }
+
+    qDeleteAll(dbItems);
+    foreach(CDBFolderDatabase * dbFolder, dbFolders)
+    {
+        dbFolder->updateLostFound();
+    }
+
 }
 
 void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)

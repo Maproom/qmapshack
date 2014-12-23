@@ -160,9 +160,6 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
         /**
            @brief Delete all items with matching key from workspace
 
-           As an item can be attached to several projects each one of these items is deleted.
-           The method will prompt the user with a message box for each item deleted
-
            @param key       the item's key as it is returned from IGisItem::getKey()
          */
         void delItemByKey(const IGisItem::key_t &key);
@@ -172,6 +169,12 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
            @param key       the item's key as it is returned from IGisItem::getKey()
          */
         void editItemByKey(const IGisItem::key_t &key);
+
+        /**
+           @brief Select a project and add a copy of the item to the project
+           @param key       the item's key as it is returned from IGisItem::getKey()
+        */
+        void copyItemByKey(const IGisItem::key_t &key);
 
         /**
            @brief Clone waypoint and move clone

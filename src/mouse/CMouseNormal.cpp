@@ -51,6 +51,20 @@ CMouseNormal::~CMouseNormal()
 
 }
 
+void CMouseNormal::stopTracking()
+{
+    const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
+    if(!key.item.isEmpty())
+    {
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+        if(trk != 0)
+        {
+            trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
+        }
+    }
+
+}
+
 void CMouseNormal::mousePressEvent(QMouseEvent * e)
 {
     point = e->pos();
@@ -144,6 +158,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                             stateItemSel = eStateShowItemOptions;
 
                         }
+                        stopTracking();
                     }                    
                     break;
                 }
@@ -151,6 +166,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 {
                     screenUnclutter->setOrigin(e->pos());
                     stateItemSel = eStateUnclutterMultiple;
+                    stopTracking();
                     break;
                 }
                 case eStateUnclutterMultiple:

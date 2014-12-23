@@ -40,6 +40,7 @@ class CScrOptWpt : public IScrOpt , private Ui::IScrOptWpt
     private slots:
         void slotDelete();
         void slotEdit();
+        void slotCopy();
         void slotMove();
         void slotProj();
 

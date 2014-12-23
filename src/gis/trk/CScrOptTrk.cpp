@@ -43,6 +43,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
 
     connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolProfile, SIGNAL(toggled(bool)), this, SLOT(slotProfile(bool)));
     connect(toolCut, SIGNAL(clicked()), this, SLOT(slotCut()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
@@ -59,6 +60,12 @@ CScrOptTrk::~CScrOptTrk()
 void CScrOptTrk::slotDelete()
 {
     CGisWidget::self().delItemByKey(key);
+    deleteLater();
+}
+
+void CScrOptTrk::slotCopy()
+{
+    CGisWidget::self().copyItemByKey(key);
     deleteLater();
 }
 

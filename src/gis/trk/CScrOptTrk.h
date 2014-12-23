@@ -37,6 +37,7 @@ class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
 
     private slots:        
         void slotDelete();
+        void slotCopy();
         void slotEditDetails();
         void slotProfile(bool on);
         void slotCut();

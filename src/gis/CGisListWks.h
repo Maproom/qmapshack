@@ -73,6 +73,7 @@ class CGisListWks : public QTreeWidget
         void slotAddEmptyProject();
         void slotCloseAllProjects();
         void slotSearchGoogle(bool on);
+        void slotCopyItem();
 
 
     private:
@@ -90,6 +91,7 @@ class CGisListWks : public QTreeWidget
 
         QMenu * menuItem;
         QAction * actionEditDetails;
+        QAction * actionCopyItem;
         QAction * actionDelete;
         QAction * actionProjWpt;
         QAction * actionMoveWpt;

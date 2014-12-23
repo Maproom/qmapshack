@@ -86,7 +86,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
 
     menuItem        = new QMenu(this);
-    actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
+    actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));   
+    actionCopyItem  = menuItem->addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
     actionMoveWpt   = menuItem->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionFocusTrk  = menuItem->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
@@ -97,7 +98,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditArea   = menuItem->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     actionFocusTrk->setCheckable(true);
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
-    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));    
 
     connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));
 
@@ -958,7 +959,29 @@ void CGisListWks::slotDeleteItem()
             project->postStatus();
         }
     }
+}
 
+void CGisListWks::slotCopyItem()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    IGisProject * project = CGisWidget::self().selectProject();
+    if(project == 0)
+    {
+        return;
+    }
+
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
+    {
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        if(gisItem == 0)
+        {
+            continue;
+        }
+
+        project->insertCopyOfItem(gisItem);
+    }
 }
 
 void CGisListWks::slotProjWpt()

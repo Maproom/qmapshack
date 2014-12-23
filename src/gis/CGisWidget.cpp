@@ -271,6 +271,28 @@ void CGisWidget::editItemByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
+void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
+{
+    IGisItem::mutexItems.lock();
+
+    IGisItem * item = getItemByKey(key);
+    if(item == 0)
+    {
+        return;
+    }
+
+    IGisProject * project = selectProject();
+    if(project == 0)
+    {
+        return;
+    }
+
+    project->insertCopyOfItem(item);
+
+    IGisItem::mutexItems.unlock();
+    emit sigChanged();
+}
+
 void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 {
     IGisItem::mutexItems.lock();

@@ -52,6 +52,9 @@ class CMouseNormal : public IMouse
         void slotCopyPosition();
 
     protected:
+        void stopTracking();
+
+
         /// the flag is true if the map moving is in progress
         bool mapMove;
         /// the flag is true if the map has been moved actually

@@ -40,6 +40,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     show();
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
 }
 
 CScrOptRte::~CScrOptRte()
@@ -52,6 +53,11 @@ void CScrOptRte::slotDelete()
     CGisWidget::self().delItemByKey(key);
 }
 
+void CScrOptRte::slotCopy()
+{
+    CGisWidget::self().copyItemByKey(key);
+    deleteLater();
+}
 
 void CScrOptRte::draw(QPainter& p)
 {

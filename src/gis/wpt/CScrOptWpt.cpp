@@ -47,6 +47,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
+    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolMove, SIGNAL(clicked()), this, SLOT(slotMove()));
     connect(toolProj, SIGNAL(clicked()), this, SLOT(slotProj()));
 }
@@ -65,6 +66,12 @@ void CScrOptWpt::slotDelete()
 void CScrOptWpt::slotEdit()
 {
     CGisWidget::self().editItemByKey(key);
+    deleteLater();
+}
+
+void CScrOptWpt::slotCopy()
+{
+    CGisWidget::self().copyItemByKey(key);
     deleteLater();
 }
 

@@ -38,6 +38,7 @@ class CScrOptOvlArea : public IScrOpt, private Ui::IScrOptOvlArea
 
     private slots:
         void slotEditDetails();
+        void slotCopy();
         void slotDelete();
         void slotEdit();
 

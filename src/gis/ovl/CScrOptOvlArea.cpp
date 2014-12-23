@@ -42,6 +42,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
 
     connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
 }
 
@@ -55,6 +56,13 @@ void CScrOptOvlArea::slotEditDetails()
     CGisWidget::self().editItemByKey(key);
     deleteLater();
 }
+
+void CScrOptOvlArea::slotCopy()
+{
+    CGisWidget::self().copyItemByKey(key);
+    deleteLater();
+}
+
 
 void CScrOptOvlArea::slotDelete()
 {

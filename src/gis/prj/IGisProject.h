@@ -137,6 +137,8 @@ class IGisProject : public QTreeWidgetItem
          */
         void editItemByKey(const IGisItem::key_t &key);
 
+        void insertCopyOfItem(IGisItem *item);
+
         /**
            @brief Check if the project was initialized correctly.
 

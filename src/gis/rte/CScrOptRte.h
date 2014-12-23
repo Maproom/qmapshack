@@ -39,6 +39,7 @@ class CScrOptRte : public IScrOpt, private Ui::IScrOptRte
 
     private slots:
         void slotDelete();
+        void slotCopy();
 
     private:
         IGisItem::key_t key;

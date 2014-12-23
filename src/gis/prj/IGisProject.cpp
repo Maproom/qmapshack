@@ -19,6 +19,10 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/prj/CDetailsPrj.h"
 #include "gis/IGisItem.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisDraw.h"
 #include "CMainWindow.h"
@@ -287,6 +291,57 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
         {
             item->edit();
         }
+    }
+}
+
+void IGisProject::insertCopyOfItem(IGisItem * item)
+{
+    IGisItem::key_t key = item->getKey();
+    key.project = getKey();
+
+    if(getItemByKey(key) != 0)
+    {
+        return;
+    }
+
+    switch(item->type())
+    {
+    case IGisItem::eTypeTrk:
+    {
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+        if(trk != 0)
+        {
+            new CGisItemTrk(*trk, this, -1);
+        }
+        break;
+    }
+    case IGisItem::eTypeWpt:
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(wpt != 0)
+        {
+            new CGisItemWpt(*wpt, this, -1);
+        }
+        break;
+    }
+    case IGisItem::eTypeRte:
+    {
+        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
+        if(rte != 0)
+        {
+            new CGisItemRte(*rte, this, -1);
+        }
+        break;
+    }
+    case IGisItem::eTypeOvl:
+    {
+        CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(item);
+        if(area != 0)
+        {
+            new CGisItemOvlArea(*area, this, -1);
+        }
+        break;
+    }
     }
 }
 

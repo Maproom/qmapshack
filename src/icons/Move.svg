@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.8890873"
-     inkscape:cx="1.7772742"
-     inkscape:cy="8.5958721"
+     inkscape:zoom="5.5"
+     inkscape:cx="21.998327"
+     inkscape:cy="9.6337227"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -71,11 +71,26 @@
        x="15.430301"
        y="14.430304" />
     <rect
+       style="fill:#000080;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.9321835;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3860"
+       width="14"
+       height="4"
+       x="21"
+       y="40" />
+    <rect
        style="fill:#80b3ff;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3828"
        width="24.230301"
        height="34.230301"
        x="30.521212"
        y="9.4303045" />
+    <path
+       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 35.835634,35 4.76171,3e-6 0,4.753904 4.07804,0 0,-4.753907 4.761706,0 0,-4.093642 -4.761706,0 -3e-6,-4.753907 -4.078037,0 -4e-6,4.753912 -4.761706,-5e-6 0,4.093642 z"
+       id="rect3117-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/add.png"
+       inkscape:export-xdpi="75.913841"
+       inkscape:export-ydpi="75.913841" />
   </g>
 </svg>

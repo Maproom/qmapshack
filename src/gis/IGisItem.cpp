@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/IGisItem.h"
+#include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -204,15 +205,15 @@ QString IGisItem::getNameEx()
 void IGisItem::updateDecoration(mark_e enable, mark_e disable)
 {
     // update text and icon
-    setToolTip(0,getInfo());
-    setText(0, getName());
+    setToolTip(CGisListWks::eColumnName,getInfo());
+    setText(CGisListWks::eColumnName, getName());
     setSymbol();
 
     // update project if necessary
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project && (enable & eMarkChanged))
     {
-        project->setText(1,"*");
+        project->setText(CGisListWks::eColumnDecoration,"*");
     }
 
     // set marks in column 1
@@ -226,7 +227,7 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
     {
         str += "*";
     }
-    setText(1, str);
+    setText(CGisListWks::eColumnDecoration, str);
 }
 
 

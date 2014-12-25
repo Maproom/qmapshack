@@ -32,14 +32,14 @@
 CDBProject::CDBProject(CGisListWks * parent)
     : IGisProject(eTypeDb, "", parent)
 {
-    setIcon(0,QIcon("://icons/32x32/DBProject.png"));
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/DBProject.png"));
 }
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, dbName, parent)
     , id(id)    
 {
-    setIcon(0,QIcon("://icons/32x32/DBProject.png"));
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/DBProject.png"));
     db = QSqlDatabase::database(dbName);
 
     QSqlQuery query(db);
@@ -71,8 +71,8 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         filename = dbName;
     }
 
-    setText(0, name);
-    setToolTip(0, getInfo());
+    setText(CGisListWks::eColumnName, name);
+    setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
 }
 
@@ -265,7 +265,7 @@ void CDBProject::save()
         QUERY_EXEC(throw -1);
 
         CGisWidget::self().postEventForDb(info);
-        setText(1,"");
+        setText(CGisListWks::eColumnDecoration,"");
     }
     catch(int n)
     {
@@ -303,7 +303,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
         }
     }
 
-    setToolTip(0, getInfo());
+    setToolTip(CGisListWks::eColumnName, getInfo());
     postStatus();
 }
 
@@ -319,7 +319,7 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
         key.item = k;
         delItemByKey(key, last);
     }
-    setToolTip(0, getInfo());
+    setToolTip(CGisListWks::eColumnName, getInfo());
     postStatus();
 }
 

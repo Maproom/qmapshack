@@ -281,12 +281,12 @@ void CGisItemWpt::setIcon()
         icon = getWptIconByName(wpt.sym, focus);
     }
 
-    QTreeWidgetItem::setIcon(0,icon);
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnName,icon);
 }
 
 void CGisItemWpt::setName(const QString& str)
 {    
-    setText(0, str);
+    setText(CGisListWks::eColumnName, str);
     lastName = str;
     wpt.name = str;
     changed(QObject::tr("Changed name"),"://icons/48x48/EditText.png");

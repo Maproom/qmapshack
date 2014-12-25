@@ -1266,7 +1266,7 @@ void CGisItemTrk::drawRange(QPainter& p)
 
 void CGisItemTrk::setName(const QString& str)
 {
-    setText(0, str);
+    setText(CGisListWks::eColumnName, str);
     trk.name = str;
     changed(QObject::tr("Changed name"), "://icons/48x48/EditText.png");
 }
@@ -1339,7 +1339,7 @@ void CGisItemTrk::setIcon(const QString& c)
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
     icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-    QTreeWidgetItem::setIcon(0,icon);
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnName,icon);
 }
 
 void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot *initiator)

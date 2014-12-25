@@ -19,6 +19,7 @@
 #include "gis/qms/CQmsProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "helpers/CSettings.h"
+#include "gis/CGisListWks.h"
 
 
 #include <QtWidgets>
@@ -27,7 +28,7 @@
 CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeQms, filename, parent)
 {   
-    setIcon(0,QIcon("://icons/32x32/QmsProject.png"));
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/QmsProject.png"));
 
     // cerate file instance
     QFile file(filename);
@@ -37,7 +38,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
     {
         IGisProject::filename.clear();
         setupName(filename);
-        setToolTip(0, getInfo());
+        setToolTip(CGisListWks::eColumnName, getInfo());
         valid = true;
         return;
     }
@@ -57,7 +58,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
     markAsSaved();
 
     setupName(QFileInfo(filename).baseName().replace("_", " "));
-    setToolTip(0, getInfo());
+    setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
 }
 

@@ -278,12 +278,14 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
     IGisItem * item = getItemByKey(key);
     if(item == 0)
     {
+        IGisItem::mutexItems.unlock();
         return;
     }
 
     IGisProject * project = selectProject();
     if(project == 0)
     {
+        IGisItem::mutexItems.unlock();
         return;
     }
 

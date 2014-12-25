@@ -21,6 +21,7 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/WptIcons.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisListWks.h"
 #include "canvas/CCanvas.h"
 
 #include <QtWidgets>
@@ -99,7 +100,7 @@ void CGisItemRte::deriveSecondaryData()
 void CGisItemRte::setSymbol()
 {
     icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    setIcon(0, icon);
+    setIcon(CGisListWks::eColumnName, icon);
 }
 
 

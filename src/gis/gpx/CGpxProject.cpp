@@ -33,7 +33,7 @@
 CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeGpx, filename, parent)
 {               
-    setIcon(0,QIcon("://icons/32x32/GpxProject.png"));
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
 
     // cerate file instance
     QFile file(filename);
@@ -43,7 +43,7 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     {
         IGisProject::filename.clear();
         setupName(filename);
-        setToolTip(0, getInfo());
+        setToolTip(CGisListWks::eColumnName, getInfo());
         valid = true;
         return;
     }
@@ -120,7 +120,7 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     }
 
     setupName(QFileInfo(filename).baseName().replace("_", " "));
-    setToolTip(0, getInfo());
+    setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
 }
 

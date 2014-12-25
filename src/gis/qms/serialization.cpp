@@ -22,6 +22,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/CGisListWks.h"
 
 #include <QtWidgets>
 
@@ -434,8 +435,8 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 
     deriveSecondaryData();
     setColor(trk.color);
-    setText(0, trk.name);
-    setToolTip(0, getInfo());
+    setText(CGisListWks::eColumnName, trk.name);
+    setToolTip(CGisListWks::eColumnName, getInfo());
 
     return stream;
 }
@@ -472,8 +473,8 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     in >> images;
 
     setIcon();
-    setText(0, wpt.name);
-    setToolTip(0, getInfo());
+    setText(CGisListWks::eColumnName, wpt.name);
+    setToolTip(CGisListWks::eColumnName, getInfo());
 
     return stream;
 }
@@ -536,8 +537,8 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
 
     setSymbol();
     deriveSecondaryData();
-    setText(0, rte.name);
-    setToolTip(0, getInfo());
+    setText(CGisListWks::eColumnName, rte.name);
+    setToolTip(CGisListWks::eColumnName, getInfo());
 
     return stream;
 }
@@ -610,8 +611,8 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
 
     deriveSecondaryData();
     setColor(str2color(area.color));
-    setText(0, area.name);
-    setToolTip(0, getInfo());
+    setText(CGisListWks::eColumnName, area.name);
+    setToolTip(CGisListWks::eColumnName, getInfo());
 
     return stream;
 }

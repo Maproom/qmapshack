@@ -717,8 +717,11 @@ void CGisListWks::slotLoadWorkspace()
             continue;
         }
 
-        project->setToolTip(0,project->getInfo());
-        project->setText(1, changed ? "*" : "");
+        project->setToolTip(eColumnName,project->getInfo());
+        if(changed)
+        {
+            project->setText(eColumnDecoration, "*");
+        }
     }
 
     emit sigChanged();

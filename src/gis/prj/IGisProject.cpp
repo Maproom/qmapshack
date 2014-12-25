@@ -78,7 +78,7 @@ void IGisProject::edit()
 void IGisProject::setName(const QString& str)
 {
     metadata.name = str;
-    setText(0, str);
+    setText(CGisListWks::eColumnName, str);
     changed();
 }
 
@@ -102,7 +102,7 @@ void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
 
 void IGisProject::changed()
 {
-    setText(1,"*");
+    setText(CGisListWks::eColumnDecoration,"*");
 }
 
 
@@ -110,19 +110,19 @@ void IGisProject::setupName(const QString &defaultName)
 {
     if(metadata.name.isEmpty())
     {
-        setText(0, defaultName);
+        setText(CGisListWks::eColumnName, defaultName);
         metadata.name = defaultName;
     }
     else
     {
-        setText(0,metadata.name);
+        setText(CGisListWks::eColumnName,metadata.name);
     }
 
 }
 
 void IGisProject::markAsSaved()
 {
-    setText(1,"");
+    setText(CGisListWks::eColumnDecoration,"");
     for(int i = 0; i < childCount(); i++)
     {
 
@@ -137,7 +137,7 @@ void IGisProject::markAsSaved()
 
 QString IGisProject::getInfo()
 {
-    QString str = metadata.name.isEmpty() ? text(0) : metadata.name;    
+    QString str = metadata.name.isEmpty() ? text(CGisListWks::eColumnName) : metadata.name;
     str = "<div style='font-weight: bold;'>" + str + "</div>";
 
     if(metadata.time.isValid())
@@ -251,7 +251,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
         {
             if(last != QMessageBox::YesToAll)
             {
-                QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(0));
+                QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
                 last = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {

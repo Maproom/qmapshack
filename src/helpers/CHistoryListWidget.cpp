@@ -113,8 +113,8 @@ void CHistoryListWidget::slotCutHistory()
     }
 
     item->cutHistory();
-    item->setText(1,"*");
-    item->parent()->setText(1,"*");
+    item->setText(CGisListWks::eColumnDecoration,"*");
+    item->parent()->setText(CGisListWks::eColumnDecoration,"*");
 
     emit sigChanged();
 }

@@ -20,6 +20,7 @@
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
 #include "gis/CGisWidget.h"
+#include "gis/CGisListDB.h"
 
 #include <QtSql>
 
@@ -39,9 +40,9 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
         type = query.value(0).toInt();
         key = query.value(1).toString();
         pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
-        setIcon(0, pixmap);
-        setText(1, query.value(3).toString());
-        setToolTip(1, query.value(4).toString());
+        setIcon(CGisListDB::eColumnCheckbox, pixmap);
+        setText(CGisListDB::eColumnName, query.value(3).toString());
+        setToolTip(CGisListDB::eColumnName, query.value(4).toString());
 
     }
 }

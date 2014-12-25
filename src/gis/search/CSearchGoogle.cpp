@@ -45,12 +45,12 @@ CSearchGoogle::CSearchGoogle(CGisListWks * parent)
     actSymbol->setObjectName(symName);
     connect(actSymbol, SIGNAL(triggered()), this, SLOT(slotChangeSymbol()));
 
-    parent->setItemWidget(this, 0, edit);
+    parent->setItemWidget(this, CGisListWks::eColumnName, edit);
 
     connect(edit, SIGNAL(returnPressed()), this, SLOT(slotStartSearch()));
     connect(&networkAccessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
 
-    setIcon(1, QIcon("://icons/32x32/SearchGoogle.png"));
+    setIcon(CGisListWks::eColumnDecoration, QIcon("://icons/32x32/SearchGoogle.png"));
 }
 
 CSearchGoogle::~CSearchGoogle()
@@ -119,8 +119,8 @@ void CSearchGoogle::slotRequestFinished(QNetworkReply* reply)
     {
         status = tr("Unknown response");
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
-        item->setText(0, status);
-        item->setIcon(0,QIcon("://icons/32x32/Error.png"));
+        item->setText(CGisListWks::eColumnName, status);
+        item->setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/Error.png"));
         return;
     }
 
@@ -130,8 +130,8 @@ void CSearchGoogle::slotRequestFinished(QNetworkReply* reply)
         status  = tr("Error: ");
         status += root.namedItem("error_message").toElement().text();
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
-        item->setText(0, status);
-        item->setIcon(0,QIcon("://icons/32x32/Error.png"));
+        item->setText(CGisListWks::eColumnName, status);
+        item->setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/Error.png"));
         return;
     }
 

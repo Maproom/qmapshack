@@ -50,16 +50,19 @@
       </size>
      </property>
      <property name="indentation">
-      <number>14</number>
+      <number>10</number>
      </property>
+     <attribute name="headerDefaultSectionSize">
+      <number>40</number>
+     </attribute>
      <column>
       <property name="text">
-       <string notr="true">Name</string>
+       <string notr="true"/>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>State</string>
+       <string>Name</string>
       </property>
      </column>
     </widget>

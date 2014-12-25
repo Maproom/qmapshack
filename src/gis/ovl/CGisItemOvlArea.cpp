@@ -21,6 +21,7 @@
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisListWks.h"
 #include "GeoMath.h"
 
 #include <QtWidgets>
@@ -455,7 +456,7 @@ void CGisItemOvlArea::setDataFromPolyline(const QPolygonF& line)
 
 void CGisItemOvlArea::setName(const QString& str)
 {
-    setText(0, str);
+    setText(CGisListWks::eColumnName, str);
     area.name = str;
     changed(QObject::tr("Changed name."), "://icons/48x48/EditText.png");
 }
@@ -544,5 +545,5 @@ void CGisItemOvlArea::setIcon(const QString& c)
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
     icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-    QTreeWidgetItem::setIcon(0,icon);
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnName,icon);
 }

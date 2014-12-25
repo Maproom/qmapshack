@@ -18,7 +18,9 @@
 
 #include "helpers/CSelectProjectDialog.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/CGisListWks.h"
 #include "helpers/CSettings.h"
+
 
 #include <QtWidgets>
 
@@ -40,7 +42,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
              continue;
             }
 
-            QListWidgetItem * item = new QListWidgetItem(project->icon(0), project->text(0),listWidget);
+            QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnName), project->text(CGisListWks::eColumnName),listWidget);
             item->setData(Qt::UserRole, project->getKey());
         }
     }

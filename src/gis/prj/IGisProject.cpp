@@ -305,15 +305,18 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     IGisItem * item2 = getItemByKey(key);
     if(item2 != 0)
     {
+
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
             CSelectCopyAction dlg(item, item2, 0);
             dlg.exec();
             result = dlg.getResult();
+            if(dlg.allOthersToo())
+            {
+                lastResult = result;
+            }
         }
-
-        lastResult = result;
 
         if(result == CSelectCopyAction::eResultSkip)
         {

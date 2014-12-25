@@ -40,6 +40,7 @@ class CSelectCopyAction : public QDialog, private Ui::ISelectCopyAction
         };
 
         result_e getResult(){return result;}
+        bool allOthersToo();
 
     private slots:
         void slotSelectResult();

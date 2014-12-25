@@ -295,13 +295,8 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
     }
 }
 
-/*
-  * replace
-  * skip
 
-
-*/
-void IGisProject::insertCopyOfItem(IGisItem * item)
+void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
 {
     bool clone = false;
     IGisItem::key_t key = item->getKey();
@@ -310,10 +305,16 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
     IGisItem * item2 = getItemByKey(key);
     if(item2 != 0)
     {
-        CSelectCopyAction dlg(item, item2, 0);
-        dlg.exec();
+        int result = lastResult;
+        if(lastResult == CSelectCopyAction::eResultNone)
+        {
+            CSelectCopyAction dlg(item, item2, 0);
+            dlg.exec();
+            result = dlg.getResult();
+        }
 
-        int result = dlg.getResult();
+        lastResult = result;
+
         if(result == CSelectCopyAction::eResultSkip)
         {
             return;
@@ -348,7 +349,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk != 0)
         {
-            new CGisItemTrk(*trk, this, -1, clone);
+            new CGisItemTrk(*trk, this, off, clone);
         }
         break;
     }
@@ -357,7 +358,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
         if(wpt != 0)
         {
-            new CGisItemWpt(*wpt, this, -1, clone);
+            new CGisItemWpt(*wpt, this, off, clone);
         }
         break;
     }
@@ -366,7 +367,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
         if(rte != 0)
         {
-            new CGisItemRte(*rte, this, -1, clone);
+            new CGisItemRte(*rte, this, off, clone);
         }
         break;
     }
@@ -375,7 +376,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(item);
         if(area != 0)
         {
-            new CGisItemOvlArea(*area, this, -1, clone);
+            new CGisItemOvlArea(*area, this, off, clone);
         }
         break;
     }

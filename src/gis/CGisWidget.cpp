@@ -29,6 +29,7 @@
 #include "gis/wpt/CProjWpt.h"
 #include "gis/db/CDBProject.h"
 #include "helpers/CSelectProjectDialog.h"
+#include "helpers/CSelectCopyAction.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
@@ -173,8 +174,6 @@ IGisProject * CGisWidget::selectProject()
         {
             project = new CQmsProject(name, treeWks);
         }
-
-
     }
 
     return(project);
@@ -289,7 +288,8 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
         return;
     }
 
-    project->insertCopyOfItem(item);
+    int lastResult = CSelectCopyAction::eResultNone;
+    project->insertCopyOfItem(item, -1, lastResult);
 
 
     emit sigChanged();

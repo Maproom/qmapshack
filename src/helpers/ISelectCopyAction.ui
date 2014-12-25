@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>246</height>
+    <height>285</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Copy item...</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -116,6 +116,20 @@
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>The clone's name will be appended with '_Clone'</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0" colspan="2">
+    <widget class="Line" name="line_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QCheckBox" name="checkAllOtherToo">
+     <property name="text">
+      <string>And for all other items, too.</string>
      </property>
     </widget>
    </item>

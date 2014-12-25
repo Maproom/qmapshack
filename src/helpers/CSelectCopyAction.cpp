@@ -44,6 +44,11 @@ CSelectCopyAction::~CSelectCopyAction()
 
 }
 
+bool CSelectCopyAction::allOthersToo()
+{
+    return checkAllOtherToo->isChecked();
+}
+
 void CSelectCopyAction::slotSelectResult()
 {
     if(sender() == pushCopy)

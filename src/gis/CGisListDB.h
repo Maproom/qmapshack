@@ -35,6 +35,12 @@ class CGisListDB : public QTreeWidget
         CGisListDB(QWidget * parent);
         virtual ~CGisListDB();
 
+        enum column_e
+        {
+             eColumnCheckbox = 0
+            ,eColumnName = 1
+        };
+
         bool hasDatabase(const QString& name);
         bool event(QEvent * e);
 

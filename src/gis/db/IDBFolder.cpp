@@ -23,6 +23,7 @@
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/CDBFolderDatabase.h"
+#include "gis/CGisListDB.h"
 #include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
 
@@ -60,7 +61,7 @@ bool IDBFolder::operator<(const QTreeWidgetItem &other) const
     }
 
 
-    return text(eColumnName) < folder->text(eColumnName);
+    return text(CGisListDB::eColumnName) < folder->text(CGisListDB::eColumnName);
 }
 
 IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem * parent)
@@ -150,7 +151,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
         return;
     }
 
-    setCheckState(eColumnCheckbox, info->isLoaded ? Qt::Checked : Qt::Unchecked);
+    setCheckState(CGisListDB::eColumnCheckbox, info->isLoaded ? Qt::Checked : Qt::Unchecked);
 
     QSqlQuery query(db);
     // update text and tooltip
@@ -159,8 +160,8 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     QUERY_EXEC(return);
     query.next();
 
-    setText(eColumnName, query.value(0).toString());
-    setToolTip(eColumnName, query.value(1).toString());
+    setText(CGisListDB::eColumnName, query.value(0).toString());
+    setToolTip(CGisListDB::eColumnName, query.value(1).toString());
 
     // count folders linked to this folder
     query.prepare("SELECT COUNT() FROM folder2folder WHERE parent=:id");
@@ -199,7 +200,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
 
 void IDBFolder::toggle()
 {
-    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+    if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
         CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(getId(), getDBName());
         CGisWidget::self().postEventForWks(evt1);
@@ -252,8 +253,8 @@ void IDBFolder::setupFromDB()
     query.next();
 
     key = query.value(0).toString();
-    setText(eColumnName, query.value(1).toString());
-    setToolTip(eColumnName, query.value(2).toString());
+    setText(CGisListDB::eColumnName, query.value(1).toString());
+    setToolTip(CGisListDB::eColumnName, query.value(2).toString());
 
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
     query.bindValue(":id", id);
@@ -278,7 +279,7 @@ void IDBFolder::setupFromDB()
 
     if(isLoadable)
     {
-        setCheckState(eColumnCheckbox, Qt::Unchecked);
+        setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
         CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
         CGisWidget::self().postEventForWks(evt);
     }
@@ -310,7 +311,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     {
         quint64 idChild = query.value(0).toULongLong();
         CDBItem * item = new CDBItem(db, idChild, this);
-        item->setCheckState(eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 
     // routes 3rd
@@ -322,7 +323,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     {
         quint64 idChild = query.value(0).toULongLong();
         CDBItem * item = new CDBItem(db, idChild, this);
-        item->setCheckState(eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 
     //waypoints 4th
@@ -334,7 +335,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     {
         quint64 idChild = query.value(0).toULongLong();
         CDBItem * item = new CDBItem(db, idChild, this);
-        item->setCheckState(eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 
     // overlays 5th
@@ -346,7 +347,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     {
         quint64 idChild = query.value(0).toULongLong();
         CDBItem * item = new CDBItem(db, idChild, this);
-        item->setCheckState(eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
     }
 }
 

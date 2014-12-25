@@ -18,14 +18,15 @@
 
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderLostFound.h"
+#include "gis/CGisListDB.h"
 
 CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& name, QTreeWidget *parent)
     : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
     , filename(filename)
 {
-    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
-    setText(eColumnName, name);
+    setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
+    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
+    setText(CGisListDB::eColumnName, name);
 
     setupDB(filename, name);
 

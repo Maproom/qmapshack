@@ -104,7 +104,7 @@ CGisListDB::~CGisListDB()
         CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
         if(database)
         {
-            names << database->text(IDBFolder::eColumnName);
+            names << database->text(CGisListDB::eColumnName);
             files << database->getFilename();
         }
     }
@@ -137,7 +137,7 @@ bool CGisListDB::hasDatabase(const QString& name)
     for(int i = 0; i < N; i++)
     {
         CDBFolderDatabase * folder = dynamic_cast<CDBFolderDatabase*>(topLevelItem(i));
-        if(folder && (folder->text(IDBFolder::eColumnName) == name))
+        if(folder && (folder->text(CGisListDB::eColumnName) == name))
         {
             return true;
         }
@@ -235,7 +235,7 @@ void CGisListDB::slotDelDatabase()
         return;
     }
 
-    int res = QMessageBox::question(this, tr("Remove database..."), tr("Do you realy want to remove '%1' from the list?").arg(folder->text(IDBFolder::eColumnName)), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+    int res = QMessageBox::question(this, tr("Remove database..."), tr("Do you realy want to remove '%1' from the list?").arg(folder->text(CGisListDB::eColumnName)), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
     if(res != QMessageBox::Ok)
     {
         return;
@@ -350,7 +350,7 @@ void CGisListDB::slotDelItem()
 
         if(last != QMessageBox::YesToAll)
         {
-            QString msg = QObject::tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->text(IDBFolder::eColumnName)).arg(folder->text(IDBFolder::eColumnName));
+            QString msg = QObject::tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->text(CGisListDB::eColumnName)).arg(folder->text(CGisListDB::eColumnName));
             last = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
         }
         if(last == QMessageBox::No)
@@ -383,7 +383,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
     }
     CGisListDBEditLock lock(true, this);
 
-    if(column == IDBFolder::eColumnCheckbox)
+    if(column == CGisListDB::eColumnCheckbox)
     {
         IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
         if(folder != 0)

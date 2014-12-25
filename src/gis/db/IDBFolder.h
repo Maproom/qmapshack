@@ -39,12 +39,6 @@ class IDBFolder : public QTreeWidgetItem
             ,eTypeOther = 5
         };
 
-        enum column_e
-        {
-             eColumnCheckbox = 0
-            ,eColumnName = 1
-        };
-
         IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
         IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
         virtual ~IDBFolder();

@@ -59,7 +59,7 @@ void CDBItem::toggle()
         return;
     }
 
-    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+    if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
         CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
         CGisWidget::self().postEventForWks(evt1);
@@ -84,7 +84,7 @@ void CDBItem::remove()
         return;
     }
 
-    if(checkState(IDBFolder::eColumnCheckbox) == Qt::Checked)
+    if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
         CEvtD2WHideItems * evt = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
         evt->keys << key;

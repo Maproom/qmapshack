@@ -19,14 +19,15 @@
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/macros.h"
+#include "gis/CGisListDB.h"
 
 #include <QtSql>
 
 CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent)
     : IDBFolder(false, db, eTypeLostFound, 0, parent)
 {
-    setToolTip(eColumnName, QObject::tr("All your data grouped by folders."));    
-    setText(eColumnName, QObject::tr("Lost & Found"));
+    setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
+    setText(CGisListDB::eColumnName, QObject::tr("Lost & Found"));
 
     update();
 }
@@ -55,13 +56,13 @@ void CDBFolderLostFound::update()
 
     if(cnt)
     {
-        setText(eColumnName, QObject::tr("Lost & Found (%1)").arg(cnt));
-        setIcon(eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
+        setText(CGisListDB::eColumnName, QObject::tr("Lost & Found (%1)").arg(cnt));
+        setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
     }
     else
     {
-        setText(eColumnName, QObject::tr("Lost & Found"));
-        setIcon(eColumnCheckbox, QIcon("://icons/32x32/Empty.png"));
+        setText(CGisListDB::eColumnName, QObject::tr("Lost & Found"));
+        setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Empty.png"));
     }
 }
 

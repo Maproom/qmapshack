@@ -103,7 +103,7 @@ class CGisItemWpt : public IGisItem
            @param project   the project the waypoint is added to
            @param idx       the index to insert the item. If -1 the item will be appended to it's group
          */
-        CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx);
+        CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone);
         /**
            @brief Create item from GPX.
            @param xml       the GPX section containing the item
@@ -143,8 +143,8 @@ class CGisItemWpt : public IGisItem
         void setDescription(const QString& str);
         void setLinks(const QList<link_t>& links);
 
-        const QString& getName(){return wpt.name;}
-        QString getInfo();
+        const QString& getName() const {return wpt.name;}
+        QString getInfo() const;
         QPointF getPosition(){return QPointF(wpt.lon, wpt.lat);}
         qint32 getElevation(){return wpt.ele;}
         qreal getProximity(){return proximity;}

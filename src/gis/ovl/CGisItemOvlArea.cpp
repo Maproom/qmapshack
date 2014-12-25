@@ -131,13 +131,21 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGi
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx)
+CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeOvl, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentArea;
     key.project = project->getKey();
+
+    if(clone)
+    {
+        area.name += QObject::tr("_Clone");
+        key.item.clear();
+    }
+
+
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -387,12 +395,12 @@ IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse
     return scrOpt;
 }
 
-const QString& CGisItemOvlArea::getName()
+const QString& CGisItemOvlArea::getName() const
 {
     return area.name;
 }
 
-QString CGisItemOvlArea::getInfo()
+QString CGisItemOvlArea::getInfo() const
 {
     QString unit, val;
     QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";

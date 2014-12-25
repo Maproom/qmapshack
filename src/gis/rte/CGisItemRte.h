@@ -38,7 +38,7 @@ class CGisItemRte : public IGisItem, public IGisLine
         };
 
         CGisItemRte(const QDomNode &xml, IGisProject *parent);
-        CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx);
+        CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
         CGisItemRte(const history_t& hist, IGisProject * project);
         CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
         CGisItemRte(const CQlgtRoute& rte1);
@@ -47,8 +47,8 @@ class CGisItemRte : public IGisItem, public IGisLine
         QDataStream& operator<<(QDataStream& stream);
         QDataStream& operator>>(QDataStream& stream);
 
-        const QString& getName(){return rte.name;}
-        QString getInfo();
+        const QString& getName() const {return rte.name;}
+        QString getInfo() const;
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& screenPos);
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);

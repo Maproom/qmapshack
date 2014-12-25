@@ -26,6 +26,7 @@ set( SRCS
     helpers/CWptIconDialog.cpp
     helpers/CTextEditWidget.cpp
     helpers/CSelectProjectDialog.cpp
+    helpers/CSelectCopyAction.cpp
     helpers/CHistoryListWidget.cpp
     helpers/CElevationDialog.cpp
     helpers/CLinksDialog.cpp
@@ -162,6 +163,7 @@ set( HDRS
     helpers/CSettings.h
     helpers/CInputDialog.h
     helpers/CPositionDialog.h
+    helpers/CSelectCopyAction.h
     helpers/CWptIconDialog.h
     helpers/CTextEditWidget.h
     helpers/CSelectProjectDialog.h
@@ -296,6 +298,7 @@ set( UIS
     helpers/IWptIconDialog.ui
     helpers/ITextEditWidget.ui
     helpers/ISelectProjectDialog.ui
+    helpers/ISelectCopyAction.ui
     helpers/IElevationDialog.ui
     helpers/ILinksDialog.ui
     canvas/ICanvasSetup.ui

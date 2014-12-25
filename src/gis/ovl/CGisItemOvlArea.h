@@ -37,7 +37,7 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
 {
     public:
         CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx);
-        CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx);
+        CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);
         CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
         CGisItemOvlArea(const history_t& hist, IGisProject * project);
         CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
@@ -47,9 +47,9 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         QDataStream& operator<<(QDataStream& stream);
         QDataStream& operator>>(QDataStream& stream);
 
-        const QString& getName();
+        const QString& getName() const;
         int getColorIdx(){return colorIdx;}
-        QString getInfo();
+        QString getInfo() const;
         void getPolylineFromData(QPolygonF& line);
         const QString& getComment(){return area.cmt;}
         const QString& getDescription(){return area.desc;}

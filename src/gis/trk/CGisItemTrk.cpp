@@ -149,7 +149,7 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
 }
 
 /// used to create a copy of track with new parent
-CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx)
+CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
@@ -158,6 +158,12 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
 {
     *this = parentTrk;
     key.project = project->getKey();
+
+    if(clone)
+    {
+        trk.name += QObject::tr("_Clone");
+        key.item.clear();
+    }
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -313,7 +319,7 @@ void CGisItemTrk::unregisterPlot(IPlot * plot)
 
 
 
-QString CGisItemTrk::getInfo()
+QString CGisItemTrk::getInfo() const
 {
     QString val1, unit1, val2, unit2;
     QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
@@ -842,7 +848,7 @@ void CGisItemTrk::reverse()
         return;
     }
 
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1);
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);
 
     trk1->trk.name = name1;
     trk1->trk.segs.clear();
@@ -885,7 +891,7 @@ void CGisItemTrk::combine()
         return;
     }
 
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1);
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);
 
     trk1->trk.name = name1;
     trk1->trk.segs.clear();

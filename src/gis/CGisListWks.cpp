@@ -435,7 +435,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(wpt2->parent());
                 if(project)
                 {
-                    new CGisItemWpt(*wpt1,project, project->indexOfChild(wpt2) + off);
+                    new CGisItemWpt(*wpt1,project, project->indexOfChild(wpt2) + off, false);
                 }
             }
             emit sigChanged();
@@ -456,7 +456,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(trk2->parent());
                 if(project)
                 {
-                    new CGisItemTrk(*trk1,project, project->indexOfChild(trk2) + off);
+                    new CGisItemTrk(*trk1,project, project->indexOfChild(trk2) + off, false);
                 }
             }
             emit sigChanged();
@@ -477,7 +477,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(rte2->parent());
                 if(project)
                 {
-                    new CGisItemRte(*rte1,project, project->indexOfChild(rte2) + off);
+                    new CGisItemRte(*rte1,project, project->indexOfChild(rte2) + off, false);
                 }
             }
             emit sigChanged();
@@ -498,7 +498,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(area2->parent());
                 if(project)
                 {
-                    new CGisItemOvlArea(*area1,project, project->indexOfChild(area2) + off);
+                    new CGisItemOvlArea(*area1,project, project->indexOfChild(area2) + off, false);
                 }
             }
             emit sigChanged();
@@ -528,22 +528,22 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 if(item->type() == IGisItem::eTypeWpt)
                 {
                     CGisItemWpt * wpt1 = dynamic_cast<CGisItemWpt*>(item);
-                    new CGisItemWpt(*wpt1, project, -1);
+                    new CGisItemWpt(*wpt1, project, -1, false);
                 }
                 if(item->type() == IGisItem::eTypeTrk)
                 {
                     CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(item);
-                    new CGisItemTrk(*trk1, project, -1);
+                    new CGisItemTrk(*trk1, project, -1, false);
                 }
                 if(item->type() == IGisItem::eTypeRte)
                 {
                     CGisItemRte * rte1 = dynamic_cast<CGisItemRte*>(item);
-                    new CGisItemRte(*rte1, project, -1);
+                    new CGisItemRte(*rte1, project, -1, false);
                 }
                 if(item->type() == IGisItem::eTypeOvl)
                 {
                     CGisItemOvlArea * area1 = dynamic_cast<CGisItemOvlArea*>(item);
-                    new CGisItemOvlArea(*area1, project, -1);
+                    new CGisItemOvlArea(*area1, project, -1, false);
                 }
             }
         }

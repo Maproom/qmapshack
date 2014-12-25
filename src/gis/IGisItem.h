@@ -168,7 +168,7 @@ class IGisItem : public QTreeWidgetItem
            @brief Get name of this item.
            @return A reference to the internal string object
          */
-        virtual const QString& getName() = 0;
+        virtual const QString& getName() const = 0;
 
         /**
            @brief Get name of this item extended by the project name
@@ -180,7 +180,7 @@ class IGisItem : public QTreeWidgetItem
            @brief Get a short string with the items properties to be displayed in tool tips or similar
            @return A string object.
         */
-        virtual QString getInfo() = 0;
+        virtual QString getInfo() const = 0;
 
         /**
             @brief Edit content of item.

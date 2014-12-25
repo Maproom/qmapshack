@@ -54,7 +54,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         };
 
         CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const trk_t &srctrk, IGisProject *project);
-        CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx);
+        CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx, bool clone);
         CGisItemTrk(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
         CGisItemTrk(const QDomNode &xml, IGisProject *project);
         CGisItemTrk(const history_t& hist, IGisProject * project);
@@ -65,9 +65,9 @@ class CGisItemTrk : public IGisItem, public IGisLine
         QDataStream& operator<<(QDataStream& stream);
         QDataStream& operator>>(QDataStream& stream);
 
-        const QString& getName(){return trk.name;}
+        const QString& getName() const {return trk.name;}
         int getColorIdx(){return colorIdx;}
-        QString getInfo();
+        QString getInfo() const;
         QString getInfoRange();
         QString getInfoTrkPt(const trkpt_t& pt);
         QString getInfoProgress(const trkpt_t& pt);

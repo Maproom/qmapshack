@@ -90,13 +90,19 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
 }
 
 /// used to create a copy of waypoint with new parent
-CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx)
+CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeWpt, idx)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
     *this = parentWpt;
     key.project = project->getKey();
+
+    if(clone)
+    {
+        wpt.name += QObject::tr("_Clone");
+        key.item.clear();
+    }
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -195,7 +201,7 @@ void CGisItemWpt::getNewPosition(QPointF& pos)
 }
 
 
-QString CGisItemWpt::getInfo()
+QString CGisItemWpt::getInfo() const
 {
     QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 

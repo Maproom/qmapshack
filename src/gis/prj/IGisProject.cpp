@@ -25,6 +25,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisDraw.h"
+#include "helpers/CSelectCopyAction.h"
 #include "CMainWindow.h"
 
 
@@ -294,14 +295,50 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
     }
 }
 
+/*
+  * replace
+  * skip
+
+
+*/
 void IGisProject::insertCopyOfItem(IGisItem * item)
 {
+    bool clone = false;
     IGisItem::key_t key = item->getKey();
     key.project = getKey();
 
-    if(getItemByKey(key) != 0)
+    IGisItem * item2 = getItemByKey(key);
+    if(item2 != 0)
     {
-        return;
+        CSelectCopyAction dlg(item, item2, 0);
+        dlg.exec();
+
+        int result = dlg.getResult();
+        if(result == CSelectCopyAction::eResultSkip)
+        {
+            return;
+        }
+        if(result == CSelectCopyAction::eResultNone)
+        {
+            return;
+        }
+        if(result == CSelectCopyAction::eResultClone)
+        {
+            clone = true;
+        }
+        else
+        {
+            // replace item2 with item
+            if(item != item2)
+            {
+                delete item2;
+            }
+            else
+            {
+                // replacing an item with itself does not make sense
+                return;
+            }
+        }
     }
 
     switch(item->type())
@@ -311,7 +348,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk != 0)
         {
-            new CGisItemTrk(*trk, this, -1);
+            new CGisItemTrk(*trk, this, -1, clone);
         }
         break;
     }
@@ -320,7 +357,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
         if(wpt != 0)
         {
-            new CGisItemWpt(*wpt, this, -1);
+            new CGisItemWpt(*wpt, this, -1, clone);
         }
         break;
     }
@@ -329,7 +366,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
         if(rte != 0)
         {
-            new CGisItemRte(*rte, this, -1);
+            new CGisItemRte(*rte, this, -1, clone);
         }
         break;
     }
@@ -338,7 +375,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item)
         CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(item);
         if(area != 0)
         {
-            new CGisItemOvlArea(*area, this, -1);
+            new CGisItemOvlArea(*area, this, -1, clone);
         }
         break;
     }

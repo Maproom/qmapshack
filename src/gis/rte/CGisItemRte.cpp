@@ -32,12 +32,19 @@ const QPen CGisItemRte::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 IGisItem::key_t CGisItemRte::keyUserFocus;
 
 /// used to create a copy of route with new parent
-CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx)
+CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentRte;
     key.project = project->getKey();
+
+    if(clone)
+    {
+        rte.name += QObject::tr("_Clone");
+        key.item.clear();
+    }
+
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -104,7 +111,7 @@ void CGisItemRte::setSymbol()
 }
 
 
-QString CGisItemRte::getInfo()
+QString CGisItemRte::getInfo() const
 {
     QString str = getName();
 

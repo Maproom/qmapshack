@@ -76,7 +76,7 @@ void CGisWidget::loadGisProject(const QString& filename)
 {
     // add project to workspace
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     IGisProject * item = 0;
     QString suffix = QFileInfo(filename).suffix().toLower();
     if(suffix == "gpx")
@@ -101,7 +101,7 @@ void CGisWidget::loadGisProject(const QString& filename)
         item = 0;
     }
 
-    IGisItem::mutexItems.unlock();
+
     QApplication::restoreOverrideCursor();
 
     emit sigChanged();
@@ -122,7 +122,7 @@ void CGisWidget::slotHelpText()
 void CGisWidget::slotSaveAll()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * item = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
@@ -132,7 +132,7 @@ void CGisWidget::slotSaveAll()
         }
         item->save();
     }
-    IGisItem::mutexItems.unlock();
+
     QApplication::restoreOverrideCursor();
 }
 
@@ -147,7 +147,7 @@ IGisProject * CGisWidget::selectProject()
     IGisProject * project = 0;
     if(!key.isEmpty())
     {
-        IGisItem::mutexItems.lock();
+        QMutexLocker lock(&IGisItem::mutexItems);
         for(int i = 0; i < treeWks->topLevelItemCount(); i++)
         {
             project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
@@ -160,11 +160,11 @@ IGisProject * CGisWidget::selectProject()
                 break;
             }
         }
-        IGisItem::mutexItems.unlock();
+
     }
     else if(!name.isEmpty())
     {
-        IGisItem::mutexItems.lock();
+        QMutexLocker lock(&IGisItem::mutexItems);
         if(type == CSelectProjectDialog::eTypeGpx)
         {
             project = new CGpxProject(name, treeWks);
@@ -174,7 +174,7 @@ IGisProject * CGisWidget::selectProject()
             project = new CQmsProject(name, treeWks);
         }
 
-        IGisItem::mutexItems.unlock();
+
     }
 
     return(project);
@@ -182,7 +182,7 @@ IGisProject * CGisWidget::selectProject()
 
 void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
@@ -192,13 +192,13 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
         }
         project->getItemByPos(pos, items);
     }
-    IGisItem::mutexItems.unlock();
+
 }
 
 IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
 {
     IGisItem * item = 0;
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
@@ -218,13 +218,13 @@ IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
             break;
         }
     }
-    IGisItem::mutexItems.unlock();
+
     return(item);
 }
 
 void CGisWidget::delItemByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     QMessageBox::StandardButtons last = QMessageBox::NoButton;
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
@@ -250,13 +250,13 @@ void CGisWidget::delItemByKey(const IGisItem::key_t& key)
         }
     }
 
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::editItemByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
@@ -267,37 +267,37 @@ void CGisWidget::editItemByKey(const IGisItem::key_t& key)
         project->editItemByKey(key);
     }
 
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     IGisItem * item = getItemByKey(key);
     if(item == 0)
     {
-        IGisItem::mutexItems.unlock();
+
         return;
     }
 
     IGisProject * project = selectProject();
     if(project == 0)
     {
-        IGisItem::mutexItems.unlock();
+
         return;
     }
 
     project->insertCopyOfItem(item);
 
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
     if(wpt != 0)
@@ -306,13 +306,13 @@ void CGisWidget::projWptByKey(const IGisItem::key_t& key)
         dlg.exec();
     }
 
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
     if(wpt != 0)
     {
@@ -322,12 +322,12 @@ void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
             canvas->setMouseMoveWpt(*wpt);
         }
     }
-    IGisItem::mutexItems.unlock();
+
 }
 
 void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk != 0)
@@ -335,52 +335,52 @@ void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
         trk->gainUserFocus(yes);
     }
 
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::cutTrkByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk != 0 && trk->cut())
     {
         delete trk;
     }
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::reverseTrkByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk)
     {
         trk->reverse();
     }
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::combineTrkByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk)
     {
         trk->combine();
     }
-    IGisItem::mutexItems.unlock();
+
     emit sigChanged();
 }
 
 void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk != 0)
@@ -392,12 +392,12 @@ void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
         }
     }
 
-    IGisItem::mutexItems.unlock();
+
 }
 
 void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk != 0)
@@ -409,12 +409,12 @@ void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
         }
     }
 
-    IGisItem::mutexItems.unlock();
+
 }
 
 void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
 {
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(getItemByKey(key));
     if(area != 0)
@@ -426,7 +426,7 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
         }
     }
 
-    IGisItem::mutexItems.unlock();
+
 }
 
 void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
@@ -435,7 +435,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     QList<QRectF> blockedAreas;
     QSet<QString> seenKeys;
 
-    IGisItem::mutexItems.lock();
+    QMutexLocker lock(&IGisItem::mutexItems);
     // draw mandatory stuff first
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
@@ -470,7 +470,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         }
         project->drawLabel(p, viewport, blockedAreas, seenKeys, fm, gis);
     }
-    IGisItem::mutexItems.unlock();
+
 }
 
 void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
@@ -479,7 +479,7 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
         Mutex locking will make map moving very slow if there are many GIS items
         visible. Remove it for now. But I am not sure if that is a good idea.
      */
-    //IGisItem::mutexItems.lock();
+    //QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
@@ -490,5 +490,5 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
 
         project->drawItem(p, viewport, gis);
     }
-    //IGisItem::mutexItems.unlock();
+    //
 }

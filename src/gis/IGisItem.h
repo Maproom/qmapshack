@@ -174,7 +174,7 @@ class IGisItem : public QTreeWidgetItem
            @brief Get name of this item extended by the project name
            @return A string object.
         */
-        virtual QString getNameEx();
+        virtual QString getNameEx() const;
 
         /**
            @brief Get a short string with the items properties to be displayed in tool tips or similar
@@ -198,7 +198,7 @@ class IGisItem : public QTreeWidgetItem
 
            @return
          */
-        virtual const QRectF& getBoundingRect(){return boundingRect;}
+        virtual const QRectF& getBoundingRect() const {return boundingRect;}
 
         /**
            @brief Get screen option object to display and handle actions for this item.
@@ -226,13 +226,13 @@ class IGisItem : public QTreeWidgetItem
            @brief Query if this item is read only
            @return True if it is read only.
          */
-        bool isReadOnly();
+        bool isReadOnly() const;
 
         /**
            @brief Query if the item is imported and was changed
            @return True if content was changed.
          */
-        bool isTainted();
+        bool isTainted() const;
         /**
            @brief Set the read only mode.
 
@@ -255,7 +255,7 @@ class IGisItem : public QTreeWidgetItem
 
            @return True if the item has user focus. The default implementation is always false.
          */
-        virtual bool hasUserFocus(){return false;}
+        virtual bool hasUserFocus() const {return false;}
 
 
         /**

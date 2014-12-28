@@ -97,9 +97,10 @@ class CEvtD2WHideItems : public QEvent
 class CEvtW2DAckInfo : public QEvent
 {
     public:
-        CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DAckInfo)), isLoaded(loaded), id(id), db(db){}
+        CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DAckInfo)), isLoaded(loaded), updateLostFound(false), id(id), db(db){}
 
         bool isLoaded;
+        bool updateLostFound;
         quint64 id;
         QString db;
         QSet<QString> keysChildren;

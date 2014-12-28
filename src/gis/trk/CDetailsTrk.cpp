@@ -344,6 +344,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setComment(dlg.getHtml());
         }
+        setupGui();
     }
     else if(url.toString() == "description")
     {
@@ -353,6 +354,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setDescription(dlg.getHtml());
         }
+        setupGui();
     }
     else if(url.toString() == "links")
     {

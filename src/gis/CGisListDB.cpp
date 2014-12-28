@@ -87,6 +87,10 @@ CGisListDB::CGisListDB(QWidget *parent)
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
 
+    menuLostFoundItem       = new QMenu(this);
+    actionDelLostFoundItem  = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, SLOT(slotDelLostFoundItem()));
+
+
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
     connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
@@ -154,12 +158,15 @@ bool CGisListDB::event(QEvent * e)
     {
     case eEvtW2DAckInfo:
     {
-        CEvtW2DAckInfo * evt = (CEvtW2DAckInfo*)e;
-        IDBFolder * folder = getDataBase(evt->db);
+        CEvtW2DAckInfo * evt        = (CEvtW2DAckInfo*)e;
+        CDBFolderDatabase * folder  = getDataBase(evt->db);
         if(folder)
         {
             folder->update(evt);
-
+            if(evt->updateLostFound)
+            {
+                folder->updateLostFound();
+            }
         }
         e->accept();
         return true;
@@ -203,7 +210,16 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     CDBItem * item = dynamic_cast<CDBItem*>(currentItem());
     if(item)
     {
-        menuItem->exec(p);
+        CDBFolderLostFound * lostFound = dynamic_cast<CDBFolderLostFound*>(item->parent());
+        if(lostFound)
+        {
+            menuLostFoundItem->exec(p);
+        }
+        else
+        {
+            menuItem->exec(p);
+        }
+
         return;
     }
 }
@@ -310,6 +326,43 @@ void CGisListDB::slotDelLostFound()
 
     folder->clear();
 }
+
+void CGisListDB::slotDelLostFoundItem()
+{
+    CGisListDBEditLock lock(false, this);
+
+    int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all selected items from Lost&Found? This will remove them permanently."), QMessageBox::Ok|QMessageBox::No);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+    QSet<CDBFolderLostFound*> folders;
+    QList<QTreeWidgetItem*> delItems;
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
+    {
+
+        CDBItem * dbItem            = dynamic_cast<CDBItem*>(item);
+        CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(dbItem->parent());
+
+        if(folder && dbItem)
+        {
+            if(folder->delItem(dbItem))
+            {
+                delItems    << dbItem;
+                folders     << folder;
+            }
+        }
+    }
+
+    qDeleteAll(delItems);
+    foreach(CDBFolderLostFound* folder, folders)
+    {
+        folder->update();
+    }
+}
+
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
 {   

@@ -75,3 +75,13 @@ void CDBFolderLostFound::clear()
 
     update();
 }
+
+bool CDBFolderLostFound::delItem(CDBItem * item)
+{
+    QSqlQuery query(db);
+
+    query.prepare("DELETE FROM items WHERE id=:id AND id NOT IN (SELECT child from folder2item)");
+    query.bindValue(":id", item->getId());
+    QUERY_EXEC(return false);
+    return true;
+}

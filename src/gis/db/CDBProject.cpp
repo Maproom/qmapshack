@@ -275,6 +275,7 @@ void CDBProject::save()
         }
         else
         {
+            info->updateLostFound = true;
             CGisWidget::self().postEventForDb(info);
         }
     }

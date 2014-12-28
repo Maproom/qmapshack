@@ -190,7 +190,7 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
     }
 }
 
-QString IGisItem::getNameEx()
+QString IGisItem::getNameEx() const
 {
     QString str = getName();
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
@@ -350,12 +350,12 @@ void IGisItem::cutHistory()
     }
 }
 
-bool IGisItem::isReadOnly()
+bool IGisItem::isReadOnly() const
 {
     return !(flags & eFlagWriteAllowed);
 }
 
-bool IGisItem::isTainted()
+bool IGisItem::isTainted() const
 {
     return (flags & eFlagTainted);
 }

@@ -136,7 +136,7 @@ void IGisProject::markAsSaved()
     }
 }
 
-QString IGisProject::getInfo()
+QString IGisProject::getInfo() const
 {
     QString str = metadata.name.isEmpty() ? text(CGisListWks::eColumnName) : metadata.name;
     str = "<div style='font-weight: bold;'>" + str + "</div>";

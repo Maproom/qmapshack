@@ -52,6 +52,12 @@
      <property name="indentation">
       <number>10</number>
      </property>
+     <property name="animated">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
      <attribute name="headerDefaultSectionSize">
       <number>40</number>
      </attribute>
@@ -86,6 +92,12 @@
      </property>
      <property name="indentation">
       <number>14</number>
+     </property>
+     <property name="animated">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
      <column>
       <property name="text">

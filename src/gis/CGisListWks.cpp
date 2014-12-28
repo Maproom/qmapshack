@@ -351,6 +351,17 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         int y2 = e->pos().y();
         int off = y2 > y1 ? 1 : 0;
 
+        IGisProject * prj1 = dynamic_cast<IGisProject*>(currentItem());
+        IGisProject * prj2 = dynamic_cast<IGisProject*>(itemAt(e->pos()));
+        if(prj1 && prj2)
+        {
+            prj2->setFlags(prj2->flags() & ~Qt::ItemIsDropEnabled);
+            QTreeWidget::dropEvent(e);
+            prj2->setFlags(prj2->flags() |  Qt::ItemIsDropEnabled);
+            emit sigChanged();
+            return;
+        }
+
         CGisItemWpt * wpt1 = dynamic_cast<CGisItemWpt*>(currentItem());
         CGisItemWpt * wpt2 = dynamic_cast<CGisItemWpt*>(itemAt(e->pos()));
 
@@ -454,7 +465,10 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
             }
 
             IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-            project->insertCopyOfItem(gisItem, -1, lastResult);
+            if(gisItem)
+            {
+                project->insertCopyOfItem(gisItem, -1, lastResult);
+            }
         }
     }
     emit sigChanged();

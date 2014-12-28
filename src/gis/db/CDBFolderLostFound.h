@@ -30,6 +30,7 @@ class CDBFolderLostFound : public IDBFolder
         void update();
         void expanding(){}
         void clear();
+        bool delItem(CDBItem * item);
 };
 
 #endif //CDBFOLDERLOSTFOUND_H

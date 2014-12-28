@@ -52,6 +52,7 @@ class CGisListDB : public QTreeWidget
         void slotAddFolder();
         void slotDelFolder();
         void slotDelLostFound();
+        void slotDelLostFoundItem();
         void slotItemExpanded(QTreeWidgetItem * item);
         void slotItemChanged(QTreeWidgetItem * item, int column);
         void slotAddDatabase();
@@ -81,6 +82,10 @@ class CGisListDB : public QTreeWidget
 
         QMenu * menuLostFound;
         QAction * actionDelLostFound;
+
+        QMenu * menuLostFoundItem;
+        QAction * actionDelLostFoundItem;
+
 
 //        CDBFolderDatabase *  folderDatabase;
 };

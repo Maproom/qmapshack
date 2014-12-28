@@ -77,24 +77,30 @@ class IGisProject : public QTreeWidgetItem
 
         void edit();
 
+        /**
+           @brief Save the project using it's native format.
+         */
         virtual void save() = 0;
+        /**
+           @brief Save the project selecting one of the available formats.
+        */
         virtual void saveAs() = 0;
 
         virtual void setFilename(const QString& fn){filename = fn;}
-        virtual QString getFilename(){return filename;}
+        virtual QString getFilename() const {return filename;}
 
-        type_e getType(){return type;}
+        type_e getType() const {return type;}
 
         /**
            @brief Get unique project key.
            @return A MD5 hash string
          */
         const QString& getKey(){genKey(); return key;}
-        const QString& getName(){return metadata.name;}
-        const QDateTime& getTime(){return metadata.time;}
-        const QString& getKeywords(){return metadata.keywords;}
-        const QString& getDescription(){return metadata.desc;}
-        const QList<IGisItem::link_t>& getLinks(){return metadata.links;}
+        const QString& getName() const {return metadata.name;}
+        const QDateTime& getTime() const {return metadata.time;}
+        const QString& getKeywords() const {return metadata.keywords;}
+        const QString& getDescription() const {return metadata.desc;}
+        const QList<IGisItem::link_t>& getLinks() const {return metadata.links;}
 
 
         void setName(const QString& str);
@@ -106,7 +112,7 @@ class IGisProject : public QTreeWidgetItem
            @brief Get a short metadata summary
            @return Informational string.
          */
-        virtual QString getInfo();
+        virtual QString getInfo() const;
         /**
            @brief Get a temporary pointer to the item with matching key
            @param key
@@ -137,6 +143,18 @@ class IGisProject : public QTreeWidgetItem
          */
         void editItemByKey(const IGisItem::key_t &key);
 
+        /**
+           @brief Add a copy if the gven item to the project
+
+           Befor the item is inserted the method will use it's key to find a duplicat item.
+           If there is an item with the same item key a copy option dialog is shown. Depending
+           the result the action is performed or aborted. The result will be copied into
+           lastResult to repeat the same decision on subsequent items.
+
+           @param item          pointer to item
+           @param off           the offset into the tree widget, -1 for none
+           @param lastResult    a reference to hold the last result of the copy option dialog
+        */
         void insertCopyOfItem(IGisItem *item, int off, int &lastResult);
 
         /**
@@ -146,7 +164,7 @@ class IGisProject : public QTreeWidgetItem
 
            @return True if project is valid
          */
-        bool  isValid(){return valid;}
+        bool  isValid() const {return valid;}
 
         void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis);
         void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis);

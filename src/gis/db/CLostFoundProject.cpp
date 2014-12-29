@@ -78,4 +78,6 @@ void CLostFoundProject::updateFromDb()
             default:;
         }
     }
+
+    setText(CGisListWks::eColumnDecoration,"");
 }

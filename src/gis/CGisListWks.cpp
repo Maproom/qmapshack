@@ -87,21 +87,42 @@ CGisListWks::CGisListWks(QWidget *parent)
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
 
-    menuItem        = new QMenu(this);
-    actionEditDetails = menuItem->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));   
-    actionCopyItem  = menuItem->addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
-    actionMoveWpt   = menuItem->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
-    actionProjWpt   = menuItem->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
-    actionFocusTrk  = menuItem->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
-    actionRangeTrk  = menuItem->addAction(QIcon("://icons/32x32/SelectRange.png"),tr("Select Range"), this, SLOT(slotRangeTrk()));
-    actionEditTrk   = menuItem->addAction(QIcon("://icons/32x32/LineMove.png"),tr("Edit Track Points"), this, SLOT(slotEditTrk()));
-    actionReverseTrk = menuItem->addAction(QIcon("://icons/32x32/Reverse.png"),tr("Reverse Track"), this, SLOT(slotReverseTrk()));
-    actionCombineTrk = menuItem->addAction(QIcon("://icons/32x32/Combine.png"),tr("Combine Tracks"), this, SLOT(slotCombineTrk()));
-    actionEditArea   = menuItem->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
+    menuItemTrk     = new QMenu(this);
+    actionEditDetails = menuItemTrk->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
+    actionCopyItem  = menuItemTrk->addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
+    actionFocusTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
     actionFocusTrk->setCheckable(true);
-    connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
-    actionDelete    = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));    
+    actionRangeTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/SelectRange.png"),tr("Select Range"), this, SLOT(slotRangeTrk()));
+    actionEditTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/LineMove.png"),tr("Edit Track Points"), this, SLOT(slotEditTrk()));
+    actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),tr("Reverse Track"), this, SLOT(slotReverseTrk()));
+    actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),tr("Combine Tracks"), this, SLOT(slotCombineTrk()));
+    actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
+    menuItemWpt     = new QMenu(this);
+    menuItemWpt->addAction(actionEditDetails);
+    menuItemWpt->addAction(actionCopyItem);
+    actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
+    actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    menuItemWpt->addAction(actionDelete);
+
+    menuItemRte     = new QMenu(this);
+    menuItemRte->addAction(actionEditDetails);
+    menuItemRte->addAction(actionCopyItem);
+    menuItemRte->addAction(actionDelete);
+
+
+    menuItemOvl     = new QMenu(this);
+    menuItemOvl->addAction(actionEditDetails);
+    menuItemOvl->addAction(actionCopyItem);
+    actionEditArea  = menuItemOvl->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
+    menuItemOvl->addAction(actionDelete);
+
+
+    menuItem        = new QMenu(this);
+    menuItem->addAction(actionCopyItem);
+    menuItem->addAction(actionDelete);
+
+    connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));
 
     SETTINGS;
@@ -653,9 +674,9 @@ void CGisListWks::slotLoadWorkspace()
 
 void CGisListWks::slotContextMenu(const QPoint& point)
 {
+    QPoint p = mapToGlobal(point);
     if(selectedItems().isEmpty() && menuNone)
     {
-        QPoint p = mapToGlobal(point);
         menuNone->exec(p);
         return;
     }
@@ -665,9 +686,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
         if(project != 0)
         {
-            actionEditPrj->setVisible(false);
-
-            QPoint p = mapToGlobal(point);
+            actionEditPrj->setVisible(false);           
             menuProject->exec(p);
             return;
         }
@@ -675,18 +694,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
         if(gisItem != 0)
         {
-            actionEditDetails->setVisible(false);
-            actionProjWpt->setVisible(false);
-            actionMoveWpt->setVisible(false);
-            actionFocusTrk->setVisible(false);
-            actionEditTrk->setVisible(false);
-            actionReverseTrk->setVisible(false);
-            actionCombineTrk->setVisible(false);
-            actionRangeTrk->setVisible(false);
-            actionEditArea->setVisible(false);
-
-            QPoint p = mapToGlobal(point);
             menuItem->exec(p);
+            return;
         }
         return;
     }
@@ -696,8 +705,6 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
         if(project != 0)
         {
-            actionEditPrj->setVisible(true);
-
             if(project->getType() == IGisProject::eTypeLostFound)
             {
                 actionSave->setVisible(false);
@@ -708,66 +715,28 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionSave->setVisible(true);
                 actionEditPrj->setVisible(true);
             }
-
-            QPoint p = mapToGlobal(point);
             menuProject->exec(p);
             return;
         }
 
         IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());       
         if(gisItem != 0)
-        {                       
-            actionEditDetails->setVisible(true);
-
-            // try to cast item to waypoint and hide/show actions on result
-            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
-            if(wpt == 0)
+        {
+            switch(gisItem->type())
             {
-                actionProjWpt->setVisible(false);
-                actionMoveWpt->setVisible(false);
+            case IGisItem::eTypeTrk:
+                menuItemTrk->exec(p);
+                break;
+            case IGisItem::eTypeWpt:
+                menuItemWpt->exec(p);
+                break;
+            case IGisItem::eTypeRte:
+                menuItemRte->exec(p);
+                break;
+            case IGisItem::eTypeOvl:
+                menuItemOvl->exec(p);
+                break;
             }
-            else
-            {
-                actionProjWpt->setVisible(true);
-                actionMoveWpt->setVisible(true);
-                actionMoveWpt->setEnabled(!wpt->isReadOnly());
-                actionProjWpt->setEnabled(!wpt->isGeocache());
-            }
-
-            // try to cast item to track and hide/show actions on result
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gisItem);
-            if(trk == 0)
-            {
-                actionFocusTrk->setVisible(false);
-                actionEditTrk->setVisible(false);
-                actionReverseTrk->setVisible(false);
-                actionCombineTrk->setVisible(false);
-                actionRangeTrk->setVisible(false);
-            }
-            else
-            {
-                actionFocusTrk->setVisible(true);
-                actionEditTrk->setVisible(true);
-                actionReverseTrk->setVisible(true);
-                actionCombineTrk->setVisible(true);
-                actionRangeTrk->setVisible(true);
-                actionFocusTrk->setChecked(trk->hasUserFocus());
-                actionEditTrk->setEnabled(!trk->isReadOnly());
-            }
-
-            // try to cast item to track and hide/show actions on result
-            CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(gisItem);
-            if(area == 0)
-            {
-                actionEditArea->setVisible(false);
-            }
-            else
-            {
-                actionEditArea->setVisible(true);
-            }
-            // display menu
-            QPoint p = mapToGlobal(point);
-            menuItem->exec(p);
             return;
         }
     }

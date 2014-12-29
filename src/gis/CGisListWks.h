@@ -97,6 +97,10 @@ class CGisListWks : public QTreeWidget
         QAction  * actionClose;
 
         QMenu * menuItem;
+        QMenu * menuItemTrk;
+        QMenu * menuItemWpt;
+        QMenu * menuItemRte;
+        QMenu * menuItemOvl;
         QAction * actionEditDetails;
         QAction * actionCopyItem;
         QAction * actionDelete;

@@ -31,6 +31,7 @@
 #include <QtWidgets>
 CDBProject::CDBProject(CGisListWks * parent)
     : IGisProject(eTypeDb, "", parent)
+    , id(0)
 {
     setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/DBProject.png"));
 }
@@ -264,6 +265,7 @@ void CDBProject::save()
         query.bindValue(":id", getId());
         QUERY_EXEC(throw -1);
 
+        info->updateLostFound = true;
         CGisWidget::self().postEventForDb(info);
         setText(CGisListWks::eColumnDecoration,"");
     }
@@ -282,8 +284,7 @@ void CDBProject::save()
 }
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)
-{
-
+{    
     foreach(const evt_item_t& item, evt->items)
     {
         switch(item.type)

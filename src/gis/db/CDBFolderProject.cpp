@@ -23,8 +23,6 @@ CDBFolderProject::CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetIte
     : IDBFolder(true, db, eTypeProject, key, parent)
 {
     setIcon(CGisListDB::eColumnCheckbox,QIcon("://icons/32x32/PathGreen.png"));
-    isLoadable = true;
-
     setupFromDB();
 }
 

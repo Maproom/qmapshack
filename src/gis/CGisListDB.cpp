@@ -324,7 +324,9 @@ void CGisListDB::slotDelLostFound()
         return;
     }
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     folder->clear();
+    QApplication::restoreOverrideCursor();
 }
 
 void CGisListDB::slotDelLostFoundItem()
@@ -337,6 +339,7 @@ void CGisListDB::slotDelLostFoundItem()
         return;
     }
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     QSet<CDBFolderLostFound*> folders;
     QList<QTreeWidgetItem*> delItems;
     QList<QTreeWidgetItem*> items = selectedItems();
@@ -361,6 +364,7 @@ void CGisListDB::slotDelLostFoundItem()
     {
         folder->update();
     }
+    QApplication::restoreOverrideCursor();
 }
 
 

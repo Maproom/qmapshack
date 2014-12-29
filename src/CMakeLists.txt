@@ -114,6 +114,7 @@ set( SRCS
     gis/db/CDBFolderProject.cpp
     gis/db/CDBItem.cpp
     gis/db/CDBProject.cpp
+    gis/db/CLostFoundProject.cpp
     gis/search/CSearchGoogle.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
@@ -253,6 +254,7 @@ set( HDRS
     gis/db/CDBFolderProject.h
     gis/db/CDBItem.h
     gis/db/CDBProject.h
+    gis/db/CLostFoundProject.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h

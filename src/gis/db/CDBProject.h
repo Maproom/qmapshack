@@ -74,7 +74,7 @@ class CDBProject : public IGisProject
         void showItems(CEvtD2WShowItems * evt);
         void hideItems(CEvtD2WHideItems * evt);
 
-    private:
+    protected:
         QSqlDatabase db;
         quint64 id;
 };

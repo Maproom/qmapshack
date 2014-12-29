@@ -39,6 +39,7 @@ class IGisProject : public QTreeWidgetItem
             , eTypeQms
             , eTypeGpx
             , eTypeDb
+            , eTypeLostFound
         };
 
         struct person_t

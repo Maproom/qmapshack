@@ -23,8 +23,6 @@ CDBFolderOther::CDBFolderOther(QSqlDatabase& db, quint64 key, QTreeWidgetItem * 
     : IDBFolder(true, db, eTypeOther, key, parent)
 {
     setIcon(CGisListDB::eColumnCheckbox,QIcon("://icons/32x32/PathOrange.png"));
-    setCheckState(0, Qt::Unchecked);
-
     setupFromDB();
 }
 

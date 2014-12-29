@@ -36,6 +36,7 @@ enum event_types_e
     ,eEvtD2WHideFolder  = QEvent::User + 3
     ,eEvtD2WShowItems   = QEvent::User + 4
     ,eEvtD2WHideItems   = QEvent::User + 5
+    ,eEvtD2WUpdateLnF   = QEvent::User + 6
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
 };
@@ -106,6 +107,16 @@ class CEvtW2DAckInfo : public QEvent
         QSet<QString> keysChildren;
 
 };
+
+class CEvtD2WUpdateLnF : public QEvent
+{
+    public:
+        CEvtD2WUpdateLnF(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WUpdateLnF)), id(id), db(db){}
+
+        quint64 id;
+        QString db;
+};
+
 
 
 class CGisWidget : public QWidget, private Ui::IGisWidget

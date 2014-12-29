@@ -58,7 +58,7 @@ class IDBFolder : public QTreeWidgetItem
         bool operator<(const QTreeWidgetItem &other) const;
 
     protected:        
-        void setupFromDB();
+        virtual void setupFromDB();
         virtual void addChildren(const QSet<QString> &activeChildren);
         virtual void remove(quint64 idParent, quint64 idFolder);
 

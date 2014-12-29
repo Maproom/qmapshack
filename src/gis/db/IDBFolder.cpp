@@ -194,8 +194,6 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
         qDeleteAll(takeChildren());
         addChildren(info->keysChildren);        
     }
-
-
 }
 
 void IDBFolder::toggle()
@@ -206,8 +204,15 @@ void IDBFolder::toggle()
         CGisWidget::self().postEventForWks(evt1);
 
         QSqlQuery query(db);
-        query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
-        query.bindValue(":id", getId());
+        if(getId() == 0)
+        {
+            query.prepare("SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name");
+        }
+        else
+        {
+            query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
+            query.bindValue(":id", getId());
+        }
         QUERY_EXEC(return);
 
         CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(getId(), getDBName());

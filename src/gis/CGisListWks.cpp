@@ -22,6 +22,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
+#include "gis/db/CLostFoundProject.h"
 #include "gis/db/macros.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
@@ -697,14 +698,25 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         {
             actionEditPrj->setVisible(true);
 
+            if(project->getType() == IGisProject::eTypeLostFound)
+            {
+                actionSave->setVisible(false);
+                actionEditPrj->setVisible(false);
+            }
+            else
+            {
+                actionSave->setVisible(true);
+                actionEditPrj->setVisible(true);
+            }
+
             QPoint p = mapToGlobal(point);
             menuProject->exec(p);
             return;
         }
 
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());       
         if(gisItem != 0)
-        {
+        {                       
             actionEditDetails->setVisible(true);
 
             // try to cast item to waypoint and hide/show actions on result
@@ -1073,7 +1085,14 @@ bool CGisListWks::event(QEvent * e)
         CDBProject * project =  getProjectById(evt->id, evt->db);
         if(project == 0)
         {
-            project = new CDBProject(evt->db, evt->id, this);
+            if(evt->id == 0)
+            {
+                project = new CLostFoundProject(evt->db, this);
+            }
+            else
+            {
+                project = new CDBProject(evt->db, evt->id, this);
+            }
             if(!project->isValid())
             {
                 delete project;
@@ -1112,6 +1131,18 @@ bool CGisListWks::event(QEvent * e)
         if(project)
         {
             project->hideItems(evt);
+        }
+        e->accept();
+        emit sigChanged();
+        return true;
+    }
+    case eEvtD2WUpdateLnF:
+    {
+        CEvtD2WUpdateLnF * evt = (CEvtD2WUpdateLnF*)e;
+        CLostFoundProject * project = dynamic_cast<CLostFoundProject*>(getProjectById(evt->id, evt->db));
+        if(project)
+        {
+            project->updateFromDb();
         }
         e->accept();
         emit sigChanged();

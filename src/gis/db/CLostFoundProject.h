@@ -16,27 +16,24 @@
 
 **********************************************************************************************/
 
-#ifndef CDBFOLDERLOSTFOUND_H
-#define CDBFOLDERLOSTFOUND_H
+#ifndef CLOSTFOUNDPROJECT_H
+#define CLOSTFOUNDPROJECT_H
 
-#include "gis/db/IDBFolder.h"
+#include "gis/db/CDBProject.h"
+#include <QSqlDatabase>
 
-class CDBFolderLostFound : public IDBFolder
+class CLostFoundProject : public CDBProject
 {
     public:
-        CDBFolderLostFound(QSqlDatabase &db, QTreeWidgetItem *parent);
-        virtual ~CDBFolderLostFound();
+        CLostFoundProject(const QString &dbName, CGisListWks * parent);
 
-        void update(CEvtW2DAckInfo * info);
-        void update();
-        void expanding(){}
-        void clear();
-        bool delItem(CDBItem * item);
+        virtual ~CLostFoundProject();
 
+        void save(){}
 
-    protected:
-        void setupFromDB();
+        void updateFromDb();
+
 };
 
-#endif //CDBFOLDERLOSTFOUND_H
+#endif //CLOSTFOUNDPROJECT_H
 

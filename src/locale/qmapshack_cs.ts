@@ -227,135 +227,152 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="82"/>
-        <source>Remove Database</source>
+        <location filename="../gis/CGisListDB.cpp" line="81"/>
+        <location filename="../gis/CGisListDB.cpp" line="91"/>
+        <source>Delete Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="85"/>
+        <source>Remove Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="88"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="228"/>
+        <location filename="../gis/CGisListDB.cpp" line="254"/>
         <source>Remove database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="228"/>
+        <location filename="../gis/CGisListDB.cpp" line="254"/>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="269"/>
+        <location filename="../gis/CGisListDB.cpp" line="295"/>
         <source>Delete database folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="269"/>
+        <location filename="../gis/CGisListDB.cpp" line="295"/>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="295"/>
+        <location filename="../gis/CGisListDB.cpp" line="321"/>
+        <location filename="../gis/CGisListDB.cpp" line="336"/>
         <source>Remove items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="295"/>
+        <location filename="../gis/CGisListDB.cpp" line="321"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="336"/>
+        <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="80"/>
+        <location filename="../gis/CGisListWks.cpp" line="82"/>
         <source>Save As...</source>
         <translation>Uložit jako...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="81"/>
+        <location filename="../gis/CGisListWks.cpp" line="83"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="82"/>
+        <location filename="../gis/CGisListWks.cpp" line="84"/>
         <source>Edit..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="83"/>
+        <location filename="../gis/CGisListWks.cpp" line="85"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="89"/>
+        <location filename="../gis/CGisListWks.cpp" line="91"/>
         <source>Edit...</source>
         <translation>Upravit...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="90"/>
+        <location filename="../gis/CGisListWks.cpp" line="92"/>
+        <source>Copy to...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="104"/>
         <source>Move Waypoint</source>
         <translation>Přesunout cestovní bod</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="91"/>
+        <location filename="../gis/CGisListWks.cpp" line="105"/>
         <source>Proj. Waypoint...</source>
         <translation>Promítnout cestovní bod...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="92"/>
+        <location filename="../gis/CGisListWks.cpp" line="93"/>
         <source>Track Profile</source>
         <translation>Sledovat profil</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="93"/>
+        <location filename="../gis/CGisListWks.cpp" line="95"/>
         <source>Select Range</source>
         <translation>Vybrat rozsah</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="94"/>
+        <location filename="../gis/CGisListWks.cpp" line="96"/>
         <source>Edit Track Points</source>
         <translation>Upravit body stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="95"/>
+        <location filename="../gis/CGisListWks.cpp" line="97"/>
         <source>Reverse Track</source>
         <translation>Obrátit stopu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="96"/>
+        <location filename="../gis/CGisListWks.cpp" line="98"/>
         <source>Combine Tracks</source>
         <translation>Spojit stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="97"/>
+        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Edit Area Points</source>
         <translation>Upravit body oblasti</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="100"/>
+        <location filename="../gis/CGisListWks.cpp" line="99"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="621"/>
+        <location filename="../gis/CGisListWks.cpp" line="567"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Ukládá se pracovní oblast. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="662"/>
+        <location filename="../gis/CGisListWks.cpp" line="608"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Nahrává se pracovní oblast. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1070"/>
+        <location filename="../gis/CGisListWks.cpp" line="1003"/>
         <source>Close all projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1070"/>
+        <location filename="../gis/CGisListWks.cpp" line="1003"/>
         <source>This will remove all projects from the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2091,17 +2108,17 @@ není platným vymezením soustavy souřadnic
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="62"/>
         <source>State</source>
-        <translation>Stav</translation>
+        <translation type="obsolete">Stav</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="94"/>
+        <location filename="../gis/IGisWidget.ui" line="65"/>
+        <location filename="../gis/IGisWidget.ui" line="97"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="127"/>
+        <location filename="../gis/IGisWidget.ui" line="130"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2741,13 +2758,19 @@ nebo
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="51"/>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="69"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="65"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="83"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="98"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="51"/>
+        <source>Copy area into another project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="112"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
@@ -2862,16 +2885,22 @@ nebo
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="31"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="45"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="59"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="42"/>
+        <source>Copy route into another project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Smazat&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="71"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="85"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
@@ -2889,37 +2918,42 @@ nebo
         <translation>Zobrazit podrobnosti a upravit vlastnosti stopy.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="71"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
+        <source>Copy track into another project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="89"/>
         <source>Show on-screen profile and detailed information about points.</source>
         <translation>Ukázat promítnutý profil a podrobné údaje o bodech.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="148"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="162"/>
         <source>Cut track at selected point into two tracks.</source>
         <translation>Vyjmout stopu na vybraném bodu do dvou stop.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
         <source>Edit position of track points.</source>
         <translation>Upravit polohu bodů stopy.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="92"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
         <source>Select a range of points.</source>
         <translation type="unfinished">Vybrat rozsah bodů.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="134"/>
         <source>Reverse track.</source>
         <translation>Obrátit stopu.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="134"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="148"/>
         <source>Combine tracks.</source>
         <translation>Spojit stopy.</translation>
     </message>
@@ -2930,12 +2964,13 @@ nebo
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="57"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="74"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="95"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="71"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="92"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="109"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="123"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="137"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="165"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -2944,7 +2979,7 @@ nebo
         <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Smazat&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="177"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="191"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
@@ -2964,30 +2999,87 @@ nebo
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="66"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="87"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="80"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="101"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
+        <source>Copy waypoint into another project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Smazat&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="84"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move waypoint to a new location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Přesunout cestovní bod do nového umístění.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clone waypoint and move clone a given distance and angle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klonovat cestovní bod a přesunout kopii o danou vzdálenost a ve stanoveném úhlu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="145"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="159"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
+    </message>
+</context>
+<context>
+    <name>ISelectCopyAction</name>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="14"/>
+        <source>Copy item...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="23"/>
+        <source>Replace existing item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="30"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="40"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="67"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="77"/>
+        <source>TextLabel</source>
+        <translation type="unfinished">Textový štítek</translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="60"/>
+        <source>Do not copy item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="97"/>
+        <source>Create a clone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="104"/>
+        <source>Replace with:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="111"/>
+        <source>Keep item:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="118"/>
+        <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectCopyAction.ui" line="132"/>
+        <source>And for all other items, too.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3400,69 +3492,75 @@ Areas: %1</source>
 Oblasti: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="163"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="168"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="180"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="185"/>
         <source>Waypoints: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="184"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="189"/>
         <source>Tracks: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="188"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="193"/>
         <source>Routes: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="192"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="197"/>
         <source>Areas: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="250"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="255"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Jste si jistý, že chcete smazat &apos;%1&apos; z projektu &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="251"/>
+        <location filename="../gis/CGisListDB.cpp" line="410"/>
+        <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="411"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="256"/>
         <source>Delete...</source>
         <translation>Smazat...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="53"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="47"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="135"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="136"/>
         <source>Failed to open...</source>
         <translation>Nepodařilo se otevřít...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="53"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="47"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="135"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="136"/>
         <source>Failed to open %1</source>
         <translation>Nepodařilo se otevřít %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="124"/>
+        <location filename="../gis/db/CDBProject.cpp" line="125"/>
         <location filename="../gis/gpx/CGpxProject.cpp" line="151"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="90"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="91"/>
         <source>Save GIS data to...</source>
         <translation>Uložit data GIS do...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="153"/>
+        <location filename="../gis/db/CDBProject.cpp" line="154"/>
         <source>Save ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="153"/>
+        <location filename="../gis/db/CDBProject.cpp" line="154"/>
         <source>Abort save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3493,112 +3591,112 @@ Filename: %1</source>
         <translation>Nepodařilo se zapsat soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="284"/>
+        <location filename="../gis/IGisItem.cpp" line="285"/>
         <source>Initial version.</source>
         <translation>Počáteční verze.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="368"/>
+        <location filename="../gis/IGisItem.cpp" line="369"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
         <translation>Tento prvek je pravděpodobně pouze pro čtení, protože nebyl vytvořen v programu QMapShack. Obvykle nemáte zájem měnit zavedená data. Ale pokud si myslíte, že je to tentokrát na místě, stiskněte OK.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="369"/>
+        <location filename="../gis/IGisItem.cpp" line="370"/>
         <source>Read Only Mode...</source>
         <translation>Režim pouze pro čtení...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="558"/>
+        <location filename="../gis/IGisItem.cpp" line="559"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Poznámka:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="561"/>
+        <location filename="../gis/IGisItem.cpp" line="562"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;--- žádná poznámka ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="568"/>
-        <location filename="../gis/IGisItem.cpp" line="598"/>
+        <location filename="../gis/IGisItem.cpp" line="569"/>
+        <location filename="../gis/IGisItem.cpp" line="599"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Popis:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="571"/>
-        <location filename="../gis/IGisItem.cpp" line="601"/>
+        <location filename="../gis/IGisItem.cpp" line="572"/>
+        <location filename="../gis/IGisItem.cpp" line="602"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;--- žádný popis ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="578"/>
-        <location filename="../gis/IGisItem.cpp" line="608"/>
+        <location filename="../gis/IGisItem.cpp" line="579"/>
+        <location filename="../gis/IGisItem.cpp" line="609"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="581"/>
-        <location filename="../gis/IGisItem.cpp" line="611"/>
+        <location filename="../gis/IGisItem.cpp" line="582"/>
+        <location filename="../gis/IGisItem.cpp" line="612"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="328"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="334"/>
         <source>Length: %1 %2</source>
         <translation>Délka: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="335"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="343"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="349"/>
         <source>Time: %1</source>
         <translation>Čas: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="346"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="356"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="352"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="362"/>
         <source>, Speed: %1 %2</source>
         <translation>, Rychlost: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="359"/>
         <source>Moving: %1</source>
         <translation>Pohyb: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="362"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="368"/>
         <source>Start: %1</source>
         <translation>Začátek: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="367"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="373"/>
         <source>End: %1</source>
         <translation>Konec: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="371"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="377"/>
         <source>Points: %1 (%2)</source>
         <translation>Body: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="436"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
         <source>Ele.: %1 %2</source>
         <translation>Výška: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="439"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="445"/>
         <source> slope: %1%3 (%2%)</source>
         <translation> sklon: %1%3 (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="950"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="956"/>
         <source>Hide points.</source>
         <translation>Skrýt body.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="984"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="990"/>
         <source>Show points.</source>
         <translation>Ukázat body.</translation>
     </message>
@@ -3607,37 +3705,37 @@ Filename: %1</source>
         <translation type="obsolete"> sklon: %1Â°(%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="450"/>
         <source> speed: %1%2</source>
         <translation> rychlost: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="462"/>
         <source>Ascend: %1%2 (%3%)</source>
         <translation>Stoupání: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="460"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="466"/>
         <source>Ascend: - (-)</source>
         <translation>Stoupání: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="470"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="476"/>
         <source> Descend: - (-) </source>
         <translation> Klesání: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="491"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="497"/>
         <source> Moving: - (-) </source>
         <translation> Pohyb: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="466"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="472"/>
         <source> Descend: %1%2 (%3%)</source>
         <translation> Klesání: %1%2 (%3%) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="261"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="267"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Změněny body stop. Obětována veškerá předchozí data.</translation>
     </message>
@@ -3646,155 +3744,163 @@ Filename: %1</source>
         <translation type="obsolete"> sklon: %1° (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="477"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="483"/>
         <source>Dist.: %1%2 (%3%)</source>
         <translation>Vzdálenost: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="481"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="487"/>
         <source>Dist.: - (-)</source>
         <translation>Vzdálenost: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="487"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="493"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation> Pohyb: %1%2 (%3%) </translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="95"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="96"/>
         <source>thin</source>
         <translation>Tenký</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="96"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="97"/>
         <source>normal</source>
         <translation>Obvyklý</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="97"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="98"/>
         <source>wide</source>
         <translation>Široký</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="98"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="99"/>
         <source>strong</source>
         <translation>Silný</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="400"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="144"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="44"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="164"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="103"/>
+        <source>_Clone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="409"/>
         <source>Area: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="452"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="461"/>
         <source>Changed area shape.</source>
         <translation>Změněn tvar oblasti.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="460"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="469"/>
         <source>Changed name.</source>
         <translation>Změněn název.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="466"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="475"/>
         <source>Changed border width.</source>
         <translation>Změněna šířka okraje.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="472"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="481"/>
         <source>Changed fill pattern.</source>
         <translation>Změněn vzor výplně.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="478"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="487"/>
         <source>Changed opacity.</source>
         <translation>Změněna neprůhlednost.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="484"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="493"/>
         <source>Changed comment.</source>
         <translation>Změněna poznámka.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="490"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="499"/>
         <source>Changed description.</source>
         <translation>Změněn popis.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="496"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1289"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="341"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="505"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1295"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
         <source>Changed links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="508"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1301"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="517"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1307"/>
         <source>Changed color</source>
         <translation>Změněná barva</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="219"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="225"/>
         <source>Elevation: %1 %2</source>
         <translation>Výška: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="227"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="233"/>
         <source>Proximity: %1 %2</source>
         <translation>Blízkost: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1271"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="292"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1277"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="298"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="813"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="821"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="839"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="882"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1009"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="173"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="845"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="888"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1015"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="179"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Edit name...</source>
         <translation>Upravit název...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="173"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="179"/>
         <source>Enter new waypoint name.</source>
         <translation>Zadat nový název pro cestovní bod.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="299"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="305"/>
         <source>Changed position</source>
         <translation>Změněná poloha</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="305"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="311"/>
         <source>Changed elevation</source>
         <translation>Změněná výška</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="311"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="317"/>
         <source>Changed proximity</source>
         <translation>Změněná blízkost</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="323"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="329"/>
         <source>Changed icon</source>
         <translation>Změněná ikona</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1277"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="329"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1283"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="335"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1283"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="335"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1289"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="341"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
@@ -3830,11 +3936,11 @@ Filename: %1</source>
         <translation>Toto je souborový typ s neznámým druhem čáry. Nahlašte to, prosím!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="813"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="821"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="839"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="882"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1009"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="845"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="888"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1015"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Enter new track name.</source>
         <translation>Zadat název nové stopy.</translation>
@@ -3845,19 +3951,19 @@ Filename: %1</source>
         <translation>Zadat název nové oblasti.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderDatabase.cpp" line="26"/>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="28"/>
+        <location filename="../gis/db/CDBFolderDatabase.cpp" line="27"/>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <source>All your data grouped by folders.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="29"/>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="63"/>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="67"/>
+        <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
         <source>Lost &amp; Found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="58"/>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="62"/>
         <source>Lost &amp; Found (%1)</source>
         <translation type="unfinished"></translation>
     </message>

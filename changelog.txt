@@ -1,3 +1,8 @@
+V 0.9.1
+* Complete function of 'Lost & Found' folder
+* Add copy function to all items including dialog to select copy action.
+* Workspace: move status column to column 0
+
 V 0.9.0
 * Fix sign of area calculation
 * Mark item with user focus in item unclutter screen

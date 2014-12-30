@@ -721,10 +721,11 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
         IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());       
         if(gisItem != 0)
-        {
+        {          
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
+                actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 menuItemTrk->exec(p);
                 break;
             case IGisItem::eTypeWpt:

@@ -35,6 +35,8 @@ class CQlgtTrack;
 
 #define TRK_N_COLORS 17
 
+#include <QDebug>
+
 class CGisItemTrk : public IGisItem, public IGisLine
 {
     public:
@@ -164,7 +166,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
            @return True if the track has user focus
          */
-        bool hasUserFocus(){return key == keyUserFocus;}
+        bool hasUserFocus() const {return key == keyUserFocus;}
 
         /**
            @brief Get the key of the current track with user focus

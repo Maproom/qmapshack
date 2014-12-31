@@ -18,6 +18,7 @@
 
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
+#include "gis/trk/filter/CFilterMedian.h"
 #include "helpers/CSettings.h"
 #include "helpers/CTextEditWidget.h"
 #include "helpers/CLinksDialog.h"
@@ -49,6 +50,12 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     item->setText(0, tr("Reduce Points (Douglas Peuker)"));
     item2 = new QTreeWidgetItem(item);
     treeFilter->setItemWidget(item2,0, new CFilterDouglasPeuker(trk, treeFilter));
+
+    item = new QTreeWidgetItem(treeFilter);
+    item->setIcon(0, QIcon("://icons/32x32/SetEle.png"));
+    item->setText(0, tr("Smooth Profile (Median Method)"));
+    item2 = new QTreeWidgetItem(item);
+    treeFilter->setItemWidget(item2,0, new CFilterMedian(trk, treeFilter));
 
 
     SETTINGS;

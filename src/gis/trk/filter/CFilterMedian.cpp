@@ -16,37 +16,34 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterDouglasPeuker.h"
+#include "CFilterMedian.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-#include <QtWidgets>
-
-CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
+CFilterMedian::CFilterMedian(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
     , trk(trk)
 {
     setupUi(this);
 
-    labelUnit->setText(IUnit::self().baseunit);
-
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance",5).toInt());
+    spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points",5).toInt());
 
     connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
 
 }
 
-CFilterDouglasPeuker::~CFilterDouglasPeuker()
+CFilterMedian::~CFilterMedian()
 {
     SETTINGS;
-    cfg.setValue("TrackDetails/Filter/DouglasPeuker/distance", spinBox->value());
+    cfg.setValue("TrackDetails/Filter/Median/points", spinBox->value());
+
 }
 
-void CFilterDouglasPeuker::slotApply()
+void CFilterMedian::slotApply()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);    
+    trk.filterSmoothProfile(spinBox->value());
     QApplication::restoreOverrideCursor();
 }

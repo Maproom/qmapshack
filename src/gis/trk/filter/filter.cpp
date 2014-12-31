@@ -92,5 +92,57 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     IUnit::self().meter2distance(dist, val, unit);
 
     deriveSecondaryData();
-    changed(QObject::tr("Reduced points by Douglas Peuker (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
+    changed(QObject::tr("Reduced points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
+}
+
+void CGisItemTrk::filterSmoothProfile(int points)
+{
+
+    QVector<int> window(points, 0);
+    QVector<int> ele1, ele2;
+
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+
+            ele1 << pt.ele;
+            ele2 << pt.ele;
+        }
+    }
+
+    if(ele1.size() < (points + 1))
+    {
+        return;
+    }
+
+    int d = points >> 1;
+    for(int i = d; i < ele1.size() - d; i++)
+    {
+        for(int n = i - d, m = 0; m < points; n++, m++)
+        {
+            window[m] = ele1[n];
+        }
+
+        qSort(window);
+        ele2[i] = window[d];
+    }
+
+    int cnt = 0;
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+            pt.ele = ele2[cnt++];
+        }
+    }
+    deriveSecondaryData();
+    changed(QObject::tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
+
 }

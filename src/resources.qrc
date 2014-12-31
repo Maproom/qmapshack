@@ -125,6 +125,7 @@
         <file>icons/32x32/Link.png</file>
         <file>icons/32x32/Database.png</file>
         <file>icons/32x32/Empty.png</file>
+        <file>icons/32x32/Apply.png</file>
 
 
         <file>icons/48x48/2DFix.png</file>
@@ -233,6 +234,7 @@
         <file>icons/48x48/Link.png</file>
         <file>icons/48x48/Database.png</file>
         <file>icons/48x48/Empty.png</file>
+        <file>icons/48x48/Apply.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/trk/CDetailsTrk.h"
+#include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "helpers/CSettings.h"
 #include "helpers/CTextEditWidget.h"
 #include "helpers/CLinksDialog.h"
@@ -41,6 +42,14 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     }
 
     setupGui();
+
+    QTreeWidgetItem * item, * item2;
+    item = new QTreeWidgetItem(treeFilter);
+    item->setIcon(0, QIcon("://icons/32x32/PointHide.png"));
+    item->setText(0, tr("Reduce Points (Douglas Peuker)"));
+    item2 = new QTreeWidgetItem(item);
+    treeFilter->setItemWidget(item2,0, new CFilterDouglasPeuker(trk, treeFilter));
+
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");

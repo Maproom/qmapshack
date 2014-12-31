@@ -222,6 +222,15 @@ class CGisItemTrk : public IGisItem, public IGisLine
         */
         void setMouseFocusByIndex(qint32 idx, focusmode_e mode);
 
+        /**
+           @brief Reduce the amount of visible track points with the help of the Douglas Peuker algorithm
+
+           @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+
+           @param dist
+         */
+        void filterReducePoints(qreal dist);
+
         static const QColor  lineColors[TRK_N_COLORS];
         static const QString bulletColors[TRK_N_COLORS];
 

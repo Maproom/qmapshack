@@ -30,6 +30,7 @@ class IDrawContext;
 
 struct point3D
 {
+    point3D() : x(0), y(0), z(0){}
     qreal x;
     qreal y;
     qreal z;

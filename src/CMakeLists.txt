@@ -125,6 +125,8 @@ set( SRCS
     gis/trk/CScrOptTrk.cpp
     gis/trk/CDetailsTrk.cpp
     gis/trk/CCombineTrk.cpp
+    gis/trk/filter/filter.cpp
+    gis/trk/filter/CFilterDouglasPeuker.cpp
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
     gis/ovl/CGisItemOvlArea.cpp
@@ -264,6 +266,7 @@ set( HDRS
     gis/trk/CScrOptTrk.h
     gis/trk/CDetailsTrk.h
     gis/trk/CCombineTrk.h
+    gis/trk/filter/CFilterDouglasPeuker.h
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
     gis/ovl/CGisItemOvlArea.h
@@ -328,6 +331,7 @@ set( UIS
     gis/trk/IScrOptTrk.ui
     gis/trk/IDetailsTrk.ui
     gis/trk/ICombineTrk.ui
+    gis/trk/filter/IFilterDouglasPeuker.ui
     gis/rte/IScrOptRte.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui

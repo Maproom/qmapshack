@@ -23,6 +23,7 @@
 CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& name, QTreeWidget *parent)
     : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
     , filename(filename)
+    , folderLostFound(0)
 {
     setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
     setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
@@ -48,5 +49,8 @@ void CDBFolderDatabase::expanding()
 
 void CDBFolderDatabase::updateLostFound()
 {
-    folderLostFound->update();
+    if(folderLostFound)
+    {
+        folderLostFound->update();
+    }
 }

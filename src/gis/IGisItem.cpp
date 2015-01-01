@@ -62,7 +62,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
     , flags(0)
 {
-    int n;
+    int n = -1;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 
     if(parent == 0)

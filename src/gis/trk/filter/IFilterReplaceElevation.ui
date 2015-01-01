@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IFilterMedian</class>
- <widget class="QWidget" name="IFilterMedian">
+ <class>IFilterReplaceElevation</class>
+ <widget class="QWidget" name="IFilterReplaceElevation">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>58</height>
+    <width>996</width>
+    <height>69</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,9 +30,9 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Smooth Profile (Median Method)</string>
+      <string>Replace Elevation Data</string>
      </property>
     </widget>
    </item>
@@ -44,48 +44,9 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Smooth elevation of track points with a median filter of size </string>
+        <string>Replace elevation of track points with the values from loaded DEM files.</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="spinBox">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimum">
-        <number>5</number>
-       </property>
-       <property name="maximum">
-        <number>9</number>
-       </property>
-       <property name="singleStep">
-        <number>2</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>points</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item>
       <widget class="QToolButton" name="toolApply">

@@ -233,6 +233,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         void filterSmoothProfile(int points);
 
+        void filterReplaceElevation();
+
         static const QColor  lineColors[TRK_N_COLORS];
         static const QString bulletColors[TRK_N_COLORS];
 

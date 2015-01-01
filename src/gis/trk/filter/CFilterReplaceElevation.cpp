@@ -16,34 +16,26 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterMedian.h"
+#include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "helpers/CSettings.h"
-#include "units/IUnit.h"
 
-CFilterMedian::CFilterMedian(CGisItemTrk &trk, QWidget *parent)
+CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
     , trk(trk)
 {
     setupUi(this);
 
-    SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points",5).toInt());
-
     connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
-
 }
 
-CFilterMedian::~CFilterMedian()
+CFilterReplaceElevation::~CFilterReplaceElevation()
 {
-    SETTINGS;
-    cfg.setValue("TrackDetails/Filter/Median/points", spinBox->value());
 
 }
 
-void CFilterMedian::slotApply()
+void CFilterReplaceElevation::slotApply()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    trk.filterSmoothProfile(spinBox->value());
+    trk.filterReplaceElevation();
     QApplication::restoreOverrideCursor();
 }

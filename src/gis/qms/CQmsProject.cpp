@@ -157,5 +157,7 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
     project.setFilename(tmp);
 
     file.close();
+
+    return true;
 }
 

@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/trk/CGisItemTrk.h"
+#include "CMainWindow.h"
 #include "GeoMath.h"
 
 #include <proj_api.h>
@@ -145,4 +146,40 @@ void CGisItemTrk::filterSmoothProfile(int points)
     deriveSecondaryData();
     changed(QObject::tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
 
+}
+
+void CGisItemTrk::filterReplaceElevation()
+{
+    QPolygonF line;
+
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+
+            line << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
+        }
+    }
+
+    QPolygonF ele(line.size());
+    CMainWindow::self().getEelevationAt(line, ele);
+
+    int cnt = 0;
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+
+            pt.ele = ele[cnt++].y();
+        }
+    }
+
+    deriveSecondaryData();
+    changed(QObject::tr("Replaced elevation data with data from DEM files."), "://icons/48x48/SetEle.png");
 }

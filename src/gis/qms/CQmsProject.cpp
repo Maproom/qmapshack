@@ -68,21 +68,25 @@ CQmsProject::~CQmsProject()
 }
 
 
-void CQmsProject::save()
+bool CQmsProject::save()
 {
 
     if(filename.isEmpty())
     {
-        saveAs();
+        return saveAs();
     }
     else
     {
-        saveAs(filename, *this);
-        markAsSaved();
+        if(saveAs(filename, *this))
+        {
+            markAsSaved();
+        }
     }
+
+    return true;
 }
 
-void CQmsProject::saveAs()
+bool CQmsProject::saveAs()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
@@ -92,13 +96,14 @@ void CQmsProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return;
+        return false;
     }
 
 
+    bool res = false;
     if(filter == "*.gpx")
     {
-        CGpxProject::saveAs(fn, *this);
+        res = CGpxProject::saveAs(fn, *this);
     }
     else if(filter == "*.qms")
     {
@@ -106,20 +111,24 @@ void CQmsProject::saveAs()
         metadata.name.clear();
         setupName(QFileInfo(filename).baseName().replace("_", " "));
 
-        saveAs(fn, *this);
-        markAsSaved();
+        res = saveAs(fn, *this);
+        if(res)
+        {
+            markAsSaved();
+        }
     }
     else
     {
-        return;
+        return false;
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
 
+    return res;
 }
 
-void CQmsProject::saveAs(const QString& fn, IGisProject& project)
+bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
     QFileInfo fi(_fn_);
@@ -134,7 +143,7 @@ void CQmsProject::saveAs(const QString& fn, IGisProject& project)
     if(!file.open(QIODevice::WriteOnly))
     {
         QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
-        return;
+        return false;
     }
     QDataStream out(&file);
     out.setByteOrder(QDataStream::LittleEndian);

@@ -34,8 +34,8 @@ class CSearchGoogle : public QObject, public IGisProject
         CSearchGoogle(CGisListWks * parent);
         virtual ~CSearchGoogle();
 
-        void save(){}
-        void saveAs(){}
+        bool save(){return false;}
+        bool saveAs(){return false;}
 
     private slots:
         void slotChangeSymbol();

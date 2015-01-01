@@ -129,20 +129,24 @@ CGpxProject::~CGpxProject()
 
 }
 
-void CGpxProject::save()
+bool CGpxProject::save()
 {
     if(filename.isEmpty())
     {
-        saveAs();
+        return saveAs();
     }
     else
     {
-        saveAs(filename, *this);
-        markAsSaved();
+        if(saveAs(filename, *this))
+        {
+            markAsSaved();
+        }
     }
+
+    return true;
 }
 
-void CGpxProject::saveAs()
+bool CGpxProject::saveAs()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
@@ -152,35 +156,40 @@ void CGpxProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return;
+        return false;
     }
 
 
+    bool res = false;
     if(filter == "*.gpx")
     {
         filename = fn;
         metadata.name.clear();
         setupName(QFileInfo(filename).baseName().replace("_", " "));
 
-        saveAs(fn, *this);
-        markAsSaved();
+        res = saveAs(fn, *this);
+        if(res)
+        {
+            markAsSaved();
+        }
 
     }
     else if(filter == "*.qms")
     {
-        CQmsProject::saveAs(fn, *this);
+        res = CQmsProject::saveAs(fn, *this);
     }
     else
     {
-        return;
+        return false;
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
+    return res;
 }
 
 
-void CGpxProject::saveAs(const QString& fn, IGisProject& project)
+bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
     QFileInfo fi(_fn_);
@@ -229,7 +238,7 @@ void CGpxProject::saveAs(const QString& fn, IGisProject& project)
                 ,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
             if(res == QMessageBox::No)
             {
-                return;
+                return false;
             }
         }
 
@@ -287,7 +296,7 @@ void CGpxProject::saveAs(const QString& fn, IGisProject& project)
     if(!file.open(QIODevice::WriteOnly))
     {
         QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to create file '%1'").arg(_fn_), QMessageBox::Abort);
-        return;
+        return false;
     }
     QTextStream out(&file);
     out.setCodec("UTF-8");
@@ -297,7 +306,9 @@ void CGpxProject::saveAs(const QString& fn, IGisProject& project)
     if(file.error() != QFile::NoError)
     {
         QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to write file '%1'").arg(_fn_), QMessageBox::Abort);
-        return;
+        return false;
     }
+
+    return true;
 }
 

@@ -116,7 +116,7 @@ void CDBProject::postStatus()
     CGisWidget::self().postEventForDb(info);
 }
 
-void CDBProject::saveAs()
+bool CDBProject::saveAs()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
@@ -126,27 +126,30 @@ void CDBProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return;
+        return false;
     }
 
+    bool res = false;
     if(filter == "*.gpx")
     {
-        CGpxProject::saveAs(fn, *this);
+        res = CGpxProject::saveAs(fn, *this);
     }
     else if(filter == "*.qms")
     {
-        CQmsProject::saveAs(fn, *this);
+        res = CQmsProject::saveAs(fn, *this);
     }
     else
     {
-        return;
+        return false;
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
+
+    return res;
 }
 
-void CDBProject::save()
+bool CDBProject::save()
 {
     QSqlQuery query(db);
 
@@ -280,7 +283,10 @@ void CDBProject::save()
             info->updateLostFound = true;
             CGisWidget::self().postEventForDb(info);
         }
+
+        return false;
     }
+    return true;
 }
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)

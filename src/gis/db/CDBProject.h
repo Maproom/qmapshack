@@ -42,8 +42,8 @@ class CDBProject : public IGisProject
         */
         void restoreDBLink();
 
-        void save();
-        void saveAs();
+        bool save();
+        bool saveAs();
 
         quint64 getId(){return id;}
         QString getDBName(){return db.connectionName();}

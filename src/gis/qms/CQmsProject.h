@@ -27,10 +27,10 @@ class CQmsProject : public IGisProject
         CQmsProject(const QString& filename, CGisListWks * parent);
         virtual ~CQmsProject();
 
-        void save();
-        void saveAs();
+        bool save();
+        bool saveAs();
 
-        static void saveAs(const QString& fn, IGisProject& project);
+        static bool saveAs(const QString& fn, IGisProject& project);
 
 };
 

@@ -81,11 +81,11 @@ class IGisProject : public QTreeWidgetItem
         /**
            @brief Save the project using it's native format.
          */
-        virtual void save() = 0;
+        virtual bool save() = 0;
         /**
            @brief Save the project selecting one of the available formats.
         */
-        virtual void saveAs() = 0;
+        virtual bool saveAs() = 0;
 
         virtual void setFilename(const QString& fn){filename = fn;}
         virtual QString getFilename() const {return filename;}

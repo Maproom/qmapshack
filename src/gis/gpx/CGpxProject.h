@@ -35,10 +35,10 @@ class CGpxProject : public IGisProject
         CGpxProject(const QString &filename, CGisListWks * parent);
         virtual ~CGpxProject();
 
-        void save();
-        void saveAs();
+        bool save();
+        bool saveAs();
 
-        static void saveAs(const QString& fn, IGisProject& project);
+        static bool saveAs(const QString& fn, IGisProject& project);
 
 
     private:

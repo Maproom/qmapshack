@@ -29,7 +29,7 @@ class CLostFoundProject : public CDBProject
 
         virtual ~CLostFoundProject();
 
-        void save(){}
+        bool save(){return false;}
 
         void updateFromDb();
 

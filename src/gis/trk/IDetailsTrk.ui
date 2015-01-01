@@ -419,6 +419,15 @@
           <property name="selectionMode">
            <enum>QAbstractItemView::NoSelection</enum>
           </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
           <attribute name="headerVisible">
            <bool>false</bool>
           </attribute>
@@ -452,7 +461,14 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="CHistoryListWidget" name="listHistory"/>
+         <widget class="CHistoryListWidget" name="listHistory">
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

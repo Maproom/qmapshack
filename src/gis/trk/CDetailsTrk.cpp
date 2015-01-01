@@ -44,18 +44,14 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
-    QTreeWidgetItem * item, * item2;
+    QTreeWidgetItem * item;
     item = new QTreeWidgetItem(treeFilter);
-    item->setIcon(0, QIcon("://icons/32x32/PointHide.png"));
-    item->setText(0, tr("Reduce Points (Douglas Peuker)"));
-    item2 = new QTreeWidgetItem(item);
-    treeFilter->setItemWidget(item2,0, new CFilterDouglasPeuker(trk, treeFilter));
+    item->setIcon(0, QIcon("://icons/48x48/PointHide.png"));
+    treeFilter->setItemWidget(item,0, new CFilterDouglasPeuker(trk, treeFilter));
 
     item = new QTreeWidgetItem(treeFilter);
-    item->setIcon(0, QIcon("://icons/32x32/SetEle.png"));
-    item->setText(0, tr("Smooth Profile (Median Method)"));
-    item2 = new QTreeWidgetItem(item);
-    treeFilter->setItemWidget(item2,0, new CFilterMedian(trk, treeFilter));
+    item->setIcon(0, QIcon("://icons/48x48/SetEle.png"));
+    treeFilter->setItemWidget(item,0, new CFilterMedian(trk, treeFilter));
 
 
     SETTINGS;

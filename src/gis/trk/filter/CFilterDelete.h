@@ -16,37 +16,28 @@
 
 **********************************************************************************************/
 
-#include "mouse/CScrOptRangeTrk.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "CMainWindow.h"
+#ifndef CFILTERDELETE_H
+#define CFILTERDELETE_H
 
-#include <QtWidgets>
+#include <QWidget>
+#include "ui_IFilterDelete.h"
 
-CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, QWidget *parent)
-    : IScrOpt(parent)
+class CGisItemTrk;
+
+class CFilterDelete : public QWidget, private Ui::IFilterDelete
 {
-    setupUi(this);    
-    label->setFont(CMainWindow::self().getMapFont());
-    label->setText(trk->getInfoRange());
-    adjustSize();
+    Q_OBJECT
+    public:
+        CFilterDelete(CGisItemTrk& trk, QWidget * parent);
+        virtual ~CFilterDelete();
 
-    bool isReadOnly = trk->isReadOnly();
-    toolHidePoints->setEnabled(!isReadOnly);
-    toolShowPoints->setEnabled(!isReadOnly);
+    private slots:
+        void slotApply();
 
-    setOrigin(point.toPoint());
+    private:
+        CGisItemTrk& trk;
 
-    move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
-    show();
-}
+};
 
-CScrOptRangeTrk::~CScrOptRangeTrk()
-{
-
-}
-
-void CScrOptRangeTrk::draw(QPainter& p)
-{
-    drawBubble2(origin, p);
-}
+#endif //CFILTERDELETE_H
 

@@ -18,6 +18,7 @@
 
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
+#include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterMedian.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterOffsetElevation.h"
@@ -46,21 +47,28 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
-    QTreeWidgetItem * item;
-    item = new QTreeWidgetItem(treeFilter);
-    item->setIcon(0, QIcon("://icons/48x48/PointHide.png"));
+    QTreeWidgetItem * item, * item0;
+    item0 = new QTreeWidgetItem(treeFilter);
+    item0->setIcon(0, QIcon("://icons/48x48/PointHide.png"));
+    item0->setText(0, tr("Reduce visible track points"));
+
+    item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterDouglasPeuker(trk, treeFilter));
 
-    item = new QTreeWidgetItem(treeFilter);
-    item->setIcon(0, QIcon("://icons/48x48/SetEle.png"));
+    item = new QTreeWidgetItem(item0);
+    treeFilter->setItemWidget(item,0, new CFilterDelete(trk, treeFilter));
+
+    item0 = new QTreeWidgetItem(treeFilter);
+    item0->setIcon(0, QIcon("://icons/48x48/SetEle.png"));
+    item0->setText(0, tr("Change elevation of track points"));
+
+    item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterMedian(trk, treeFilter));
 
-    item = new QTreeWidgetItem(treeFilter);
-    item->setIcon(0, QIcon("://icons/48x48/SetEle.png"));
+    item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterReplaceElevation(trk, treeFilter));
 
-    item = new QTreeWidgetItem(treeFilter);
-    item->setIcon(0, QIcon("://icons/48x48/SetEle.png"));
+    item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterOffsetElevation(trk, treeFilter));
 
 
@@ -112,6 +120,8 @@ void CDetailsTrk::setupGui()
 
     QString str, val, unit;
     bool isReadOnly = trk.isReadOnly();
+
+    tabWidget->widget(2)->setEnabled(!isReadOnly);
 
     if(trk.isTainted())
     {

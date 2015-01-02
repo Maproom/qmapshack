@@ -394,7 +394,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="tabFilter">
        <attribute name="title">
         <string>Filter</string>
        </attribute>
@@ -418,15 +418,6 @@
          <widget class="QTreeWidget" name="treeFilter">
           <property name="selectionMode">
            <enum>QAbstractItemView::NoSelection</enum>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>48</width>
-            <height>48</height>
-           </size>
-          </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
           </property>
           <attribute name="headerVisible">
            <bool>false</bool>

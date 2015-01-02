@@ -93,7 +93,33 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     IUnit::self().meter2distance(dist, val, unit);
 
     deriveSecondaryData();
-    changed(QObject::tr("Reduced points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
+    changed(QObject::tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
+}
+
+void CGisItemTrk::filterDelete()
+{
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        QVector<trkpt_t> pts;
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+
+            if(pt.flags & trkpt_t::eHidden)
+            {
+                continue;
+            }
+
+            pts << pt;
+        }
+
+        seg.pts = pts;
+
+    }
+    deriveSecondaryData();
+    changed(QObject::tr("Permanently removed all hidden track points"), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterSmoothProfile(int points)

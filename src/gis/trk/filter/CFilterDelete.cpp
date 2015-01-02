@@ -16,37 +16,26 @@
 
 **********************************************************************************************/
 
-#include "mouse/CScrOptRangeTrk.h"
+#include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "CMainWindow.h"
 
-#include <QtWidgets>
-
-CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, QWidget *parent)
-    : IScrOpt(parent)
+CFilterDelete::CFilterDelete(CGisItemTrk &trk, QWidget *parent)
+    : QWidget(parent)
+    , trk(trk)
 {
-    setupUi(this);    
-    label->setFont(CMainWindow::self().getMapFont());
-    label->setText(trk->getInfoRange());
-    adjustSize();
+    setupUi(this);
 
-    bool isReadOnly = trk->isReadOnly();
-    toolHidePoints->setEnabled(!isReadOnly);
-    toolShowPoints->setEnabled(!isReadOnly);
-
-    setOrigin(point.toPoint());
-
-    move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
-    show();
+    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
 }
 
-CScrOptRangeTrk::~CScrOptRangeTrk()
+CFilterDelete::~CFilterDelete()
 {
 
 }
 
-void CScrOptRangeTrk::draw(QPainter& p)
+void CFilterDelete::slotApply()
 {
-    drawBubble2(origin, p);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    trk.filterDelete();
+    QApplication::restoreOverrideCursor();
 }
-

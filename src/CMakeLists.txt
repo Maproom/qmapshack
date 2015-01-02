@@ -127,6 +127,7 @@ set( SRCS
     gis/trk/CCombineTrk.cpp
     gis/trk/filter/filter.cpp
     gis/trk/filter/CFilterDouglasPeuker.cpp
+    gis/trk/filter/CFilterDelete.cpp
     gis/trk/filter/CFilterMedian.cpp
     gis/trk/filter/CFilterReplaceElevation.cpp
     gis/trk/filter/CFilterOffsetElevation.cpp
@@ -270,6 +271,7 @@ set( HDRS
     gis/trk/CDetailsTrk.h
     gis/trk/CCombineTrk.h
     gis/trk/filter/CFilterDouglasPeuker.h
+    gis/trk/filter/CFilterDelete.h
     gis/trk/filter/CFilterMedian.h
     gis/trk/filter/CFilterReplaceElevation.h
     gis/trk/filter/CFilterOffsetElevation.h
@@ -338,6 +340,7 @@ set( UIS
     gis/trk/IDetailsTrk.ui
     gis/trk/ICombineTrk.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
+    gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterMedian.ui
     gis/trk/filter/IFilterReplaceElevation.ui
     gis/trk/filter/IFilterOffsetElevation.ui

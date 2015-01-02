@@ -183,3 +183,28 @@ void CGisItemTrk::filterReplaceElevation()
     deriveSecondaryData();
     changed(QObject::tr("Replaced elevation data with data from DEM files."), "://icons/48x48/SetEle.png");
 }
+
+void CGisItemTrk::filterOffsetElevation(int offset)
+{
+
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+
+            if(pt.ele != NOINT)
+            {
+                pt.ele += offset;
+            }
+        }
+    }
+
+    QString val, unit;
+    IUnit::self().meter2elevation(offset, val, unit);
+    deriveSecondaryData();
+    changed(QObject::tr("Offset elevation data by %1%2.").arg(val).arg(unit), "://icons/48x48/SetEle.png");
+
+}

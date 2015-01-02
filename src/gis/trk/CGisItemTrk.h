@@ -235,6 +235,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         void filterReplaceElevation();
 
+        void filterOffsetElevation(int offset);
+
         static const QColor  lineColors[TRK_N_COLORS];
         static const QString bulletColors[TRK_N_COLORS];
 

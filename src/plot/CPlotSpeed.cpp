@@ -88,6 +88,8 @@ void CPlotSpeed::updateData()
 
     newLine(lineSpeed, "GPS");
     setLimits();
+    data->ymin = 0;
+    data->y().setLimits(0,data->ymax);
     resetZoom();
 }
 

@@ -56,15 +56,11 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="suffix">
+        <string>m</string>
+       </property>
        <property name="minimum">
         <number>1</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelUnit">
-       <property name="text">
-        <string>m</string>
        </property>
       </widget>
      </item>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IFilterMedian</class>
- <widget class="QWidget" name="IFilterMedian">
+ <class>IFilterOffsetElevation</class>
+ <widget class="QWidget" name="IFilterOffsetElevation">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>58</height>
+    <width>400</width>
+    <height>71</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,9 +30,9 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Smooth Profile (Median Method)</string>
+      <string>Offset Elevation</string>
      </property>
     </widget>
    </item>
@@ -43,8 +43,14 @@
      </property>
      <item>
       <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Smooth deviation of the track points elevation with a Median filter of size </string>
+        <string>Add offset of</string>
        </property>
       </widget>
      </item>
@@ -57,16 +63,20 @@
         </sizepolicy>
        </property>
        <property name="suffix">
-        <string>points</string>
+        <string notr="true">m</string>
        </property>
        <property name="minimum">
-        <number>5</number>
+        <number>-8000</number>
        </property>
        <property name="maximum">
-        <number>9</number>
+        <number>8000</number>
        </property>
-       <property name="singleStep">
-        <number>2</number>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>to track points elevation.</string>
        </property>
       </widget>
      </item>
@@ -101,13 +111,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

@@ -16,14 +16,12 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterDouglasPeuker.h"
+#include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "helpers/CSettings.h"
 #include "units/IUnit.h"
+#include "helpers/CSettings.h"
 
-#include <QtWidgets>
-
-CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
+CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
     , trk(trk)
 {
@@ -32,21 +30,20 @@ CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
     spinBox->setSuffix(IUnit::self().baseunit);
 
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance",5).toInt());
+    spinBox->setValue(cfg.value("TrackDetails/Filter/OffsetElevation/offset",0).toInt());
 
     connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
-
 }
 
-CFilterDouglasPeuker::~CFilterDouglasPeuker()
+CFilterOffsetElevation::~CFilterOffsetElevation()
 {
     SETTINGS;
-    cfg.setValue("TrackDetails/Filter/DouglasPeuker/distance", spinBox->value());
+    cfg.setValue("TrackDetails/Filter/OffsetElevation/offset", spinBox->value());
 }
 
-void CFilterDouglasPeuker::slotApply()
+void CFilterOffsetElevation::slotApply()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);    
+    trk.filterOffsetElevation(spinBox->value()/IUnit::self().basefactor);
     QApplication::restoreOverrideCursor();
 }

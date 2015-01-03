@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/IGisItem.h"
+#include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -621,3 +622,32 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
 
     return str;
 }
+
+bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw *gis)
+{
+    QPolygonF tmp1;
+    tmp1 << rect.topLeft();
+    tmp1 << rect.topRight();
+    tmp1 << rect.bottomRight();
+    tmp1 << rect.bottomLeft();
+
+    gis->convertRad2Px(tmp1);
+
+    QPolygonF tmp2 = viewport;
+    gis->convertRad2Px(tmp2);
+
+    return tmp2.boundingRect().intersects(tmp2.boundingRect());
+}
+
+bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis)
+{
+    QPolygonF tmp2 = viewport;
+    gis->convertRad2Px(tmp2);
+
+    QPointF pt = point;
+    gis->convertRad2Px(pt);
+
+    return tmp2.boundingRect().contains(pt);
+
+}
+

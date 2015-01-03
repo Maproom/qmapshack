@@ -137,7 +137,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
            @param viewport  the viewport in units of rad
            @param gis       the draw context to be used
         */
-        void draw(QPainter& p, const QRectF &viewport, CGisDraw *gis);
+        void draw(QPainter& p, const QPolygonF &viewport, CGisDraw *gis);
 
 
         /**

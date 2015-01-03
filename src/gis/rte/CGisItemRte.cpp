@@ -162,16 +162,16 @@ void CGisItemRte::gainUserFocus(bool yes)
 }
 
 
-void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     line.clear();
-    if(!viewport.intersects(boundingRect))
+    if(!isVisible(boundingRect, viewport, gis))
     {
         return;
     }
 
-    QPointF p1 = viewport.topLeft();
-    QPointF p2 = viewport.bottomRight();
+    QPointF p1 = viewport[0];
+    QPointF p2 = viewport[2];
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
@@ -206,9 +206,9 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
 
 }
 
-void CGisItemRte::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
-    if(!viewport.intersects(boundingRect))
+    if(!isVisible(boundingRect, viewport, gis))
     {
         return;
     }

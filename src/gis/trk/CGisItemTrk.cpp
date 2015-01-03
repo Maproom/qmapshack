@@ -1020,19 +1020,19 @@ void CGisItemTrk::copySelectedPoints()
     new CGisItemTrk(name1, idx1, idx2, trk, project);
 }
 
-void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     lineSimple.clear();
     lineFull.clear();
 
-    if(!viewport.intersects(boundingRect))
+    if(!isVisible(boundingRect, viewport,gis))
     {
         return;
     }
 
     QPointF pt1;
-    QPointF p1 = viewport.topLeft();
-    QPointF p2 = viewport.bottomRight();
+    QPointF p1 = viewport[0];
+    QPointF p2 = viewport[2];
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
@@ -1231,7 +1231,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     }
 }
 
-void CGisItemTrk::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
     // tracks have no labels
 }

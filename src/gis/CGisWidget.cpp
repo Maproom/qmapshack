@@ -429,7 +429,7 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
 
 }
 
-void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());
     QList<QRectF> blockedAreas;

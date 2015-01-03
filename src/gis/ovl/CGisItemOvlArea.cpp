@@ -301,10 +301,10 @@ void CGisItemOvlArea::deriveSecondaryData()
     area.area = qAbs(area.area/2);
 }
 
-void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
+void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
     line.clear();
-    if(!viewport.intersects(boundingRect))
+    if(!isVisible(boundingRect, viewport, gis))
     {
         return;
     }
@@ -337,7 +337,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF
     p.restore();
 }
 
-void CGisItemOvlArea::drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
+void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
     if(line.isEmpty())
     {

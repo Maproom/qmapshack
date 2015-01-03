@@ -377,10 +377,10 @@ void CGisItemWpt::edit()
     }
 }
 
-void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     posScreen = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
-    if(!viewport.contains(posScreen))
+    if(!isVisible(posScreen, viewport, gis))
     {
         posScreen = NOPOINTF;
         return;
@@ -408,7 +408,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF> &b
     blockedAreas << QRectF(posScreen - focus, icon.size());
 }
 
-void CGisItemWpt::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
     if(posScreen == NOPOINTF)
     {

@@ -386,7 +386,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     }
 }
 
-void IGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
+void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
     for(int i = 0; i < childCount(); i++)
     {
@@ -423,7 +423,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 }
 
-void IGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
+void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
 
     for(int i = 0; i < childCount(); i++)

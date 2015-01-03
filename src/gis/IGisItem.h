@@ -243,9 +243,9 @@ class IGisItem : public QTreeWidgetItem
          */
         virtual void setReadOnlyMode(bool readOnly);
 
-        virtual void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
+        virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
         virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis){}
-        virtual void drawLabel(QPainter& p, const QRectF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
+        virtual void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
         virtual void drawHighlight(QPainter& p) = 0;        
 
         virtual void gainUserFocus(bool yes) = 0;
@@ -324,6 +324,11 @@ class IGisItem : public QTreeWidgetItem
         virtual void changed(const QString& what, const QString& icon);
 
         virtual void loadFromDb(quint64 id, QSqlDatabase& db);
+
+        bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
+        bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
+
+
 
         quint32 flags;
         key_t   key;

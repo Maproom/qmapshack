@@ -91,9 +91,9 @@ class CGisItemTrk : public IGisItem, public IGisLine
         QPointF getPointCloseBy(const QPoint& screenPos);
         bool isCloseTo(const QPointF& pos);
 
-        void drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+        void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
         void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+        void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
         void drawHighlight(QPainter& p);
         void drawRange(QPainter& p);
         void save(QDomNode& gpx);

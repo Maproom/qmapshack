@@ -293,8 +293,6 @@ void CCanvas::paintEvent(QPaintEvent * e)
         return;
     }
 
-    const QRectF& r = e->rect();
-
     QPainter p;
     p.begin(this);
     USE_ANTI_ALIASING(p,true);
@@ -306,9 +304,9 @@ void CCanvas::paintEvent(QPaintEvent * e)
     // move coordinate system to center of the screen
     p.translate(width() >> 1, height() >> 1);
 
-    map->draw(p, needsRedraw, posFocus, r);
-    dem->draw(p, needsRedraw, posFocus, r);
-    gis->draw(p, needsRedraw, posFocus, r);   
+    map->draw(p, needsRedraw, posFocus);
+    dem->draw(p, needsRedraw, posFocus);
+    gis->draw(p, needsRedraw, posFocus);
 
     // restore coordinate system to default
     p.resetTransform();

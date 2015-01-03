@@ -386,7 +386,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     }
 }
 
-void IGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, CGisDraw * gis)
+void IGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
     for(int i = 0; i < childCount(); i++)
     {
@@ -400,12 +400,6 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, QList<QRectF>& b
         {
             continue;
         }
-
-//        if(seenKeys.contains(item->getKey()))
-//        {
-//            continue;
-//        }
-//        seenKeys << item->getKey();
 
         item->drawItem(p, viewport, blockedAreas, gis);
     }
@@ -429,7 +423,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 }
 
-void IGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, QSet<QString> &seenKeys, const QFontMetricsF& fm, CGisDraw * gis)
+void IGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
 
     for(int i = 0; i < childCount(); i++)
@@ -444,12 +438,6 @@ void IGisProject::drawLabel(QPainter& p, const QRectF& viewport, QList<QRectF>& 
         {
             continue;
         }
-
-//        if(seenKeys.contains(item->getKey()))
-//        {
-//            continue;
-//        }
-//        seenKeys << item->getKey();
 
         item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }

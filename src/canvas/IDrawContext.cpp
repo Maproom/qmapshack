@@ -342,7 +342,7 @@ void IDrawContext::convertRad2Px(QPolygonF& poly)
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f, const QRectF &r)
+void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f)
 {
     if(pjsrc == 0) return;
 

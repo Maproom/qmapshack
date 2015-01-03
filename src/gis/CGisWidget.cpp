@@ -433,7 +433,6 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());
     QList<QRectF> blockedAreas;
-    QSet<QString> seenKeys;
 
     QMutexLocker lock(&IGisItem::mutexItems);
     // draw mandatory stuff first
@@ -449,11 +448,8 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         {
             continue;
         }
-        project->drawItem(p, viewport, blockedAreas, seenKeys, gis);
+        project->drawItem(p, viewport, blockedAreas, gis);
     }
-
-    // reset seen keys as lables will build the list a second time
-    seenKeys.clear();
 
     // draw optional labels second
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -468,7 +464,7 @@ void CGisWidget::draw(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         {
             continue;
         }
-        project->drawLabel(p, viewport, blockedAreas, seenKeys, fm, gis);
+        project->drawLabel(p, viewport, blockedAreas, fm, gis);
     }
 
 }

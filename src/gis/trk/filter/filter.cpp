@@ -232,5 +232,95 @@ void CGisItemTrk::filterOffsetElevation(int offset)
     IUnit::self().meter2elevation(offset, val, unit);
     deriveSecondaryData();
     changed(QObject::tr("Offset elevation data by %1%2.").arg(val).arg(unit), "://icons/48x48/SetEle.png");
+}
 
+void CGisItemTrk::filterNewDate(const QDateTime& date)
+{
+
+    qint64 delta = date.toTime_t() - timeStart.toUTC().toTime_t();
+
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+            pt.time = pt.time.addSecs(delta);
+        }
+    }
+
+    deriveSecondaryData();
+    changed(QObject::tr("Changed start of track to %1.").arg(date.toString()), "://icons/48x48/Time.png");
+}
+
+void CGisItemTrk::filterObscureDate(int delta)
+{
+    if(delta == 0)
+    {
+        for(int i = 0; i < trk.segs.size(); i++)
+        {
+            trkseg_t& seg = trk.segs[i];
+
+            for(int n = 0; n < seg.pts.size(); n++)
+            {
+                trkpt_t& pt = seg.pts[n];
+                pt.time = QDateTime();
+            }
+        }
+
+        deriveSecondaryData();
+        changed(QObject::tr("Remove timestamps."), "://icons/48x48/Time.png");
+    }
+    else
+    {
+        QDateTime timestamp = timeStart;
+        if(!timestamp.isValid())
+        {
+            timestamp = QDateTime::currentDateTime();
+        }
+
+        for(int i = 0; i < trk.segs.size(); i++)
+        {
+            trkseg_t& seg = trk.segs[i];
+
+            for(int n = 0; n < seg.pts.size(); n++)
+            {
+                trkpt_t& pt = seg.pts[n];
+                pt.time = timestamp;
+                timestamp = timestamp.addSecs(delta);
+            }
+        }
+
+        deriveSecondaryData();
+        changed(QObject::tr("Set artifical timestamps with delta of %1 sec.").arg(delta), "://icons/48x48/Time.png");
+    }
+}
+
+void CGisItemTrk::filterSpeed(qreal speed)
+{
+
+    QDateTime timestamp = timeStart;
+    if(!timestamp.isValid())
+    {
+        timestamp = QDateTime::currentDateTime();
+    }
+
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+            qreal dmsec = 1000 * pt.deltaDistance/speed;
+            timestamp   = timestamp.addMSecs(qRound(dmsec));
+            pt.time     = timestamp;
+        }
+    }
+
+    deriveSecondaryData();
+    QString val, unit;
+    IUnit::self().meter2speed(speed, val, unit);
+    changed(QObject::tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }

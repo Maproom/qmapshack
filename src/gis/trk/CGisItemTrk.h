@@ -239,7 +239,11 @@ class CGisItemTrk : public IGisItem, public IGisLine
 
         void filterOffsetElevation(int offset);
 
+        void filterNewDate(const QDateTime& date);
 
+        void filterObscureDate(int delta);
+
+        void filterSpeed(qreal speed);
 
         static const QColor  lineColors[TRK_N_COLORS];
         static const QString bulletColors[TRK_N_COLORS];

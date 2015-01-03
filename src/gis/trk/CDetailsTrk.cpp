@@ -22,6 +22,9 @@
 #include "gis/trk/filter/CFilterMedian.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterOffsetElevation.h"
+#include "gis/trk/filter/CFilterNewDate.h"
+#include "gis/trk/filter/CFilterObscureDate.h"
+#include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CSettings.h"
 #include "helpers/CTextEditWidget.h"
 #include "helpers/CLinksDialog.h"
@@ -70,6 +73,23 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterOffsetElevation(trk, treeFilter));
+
+    item0 = new QTreeWidgetItem(treeFilter);
+    item0->setIcon(0, QIcon("://icons/48x48/Time.png"));
+    item0->setText(0, tr("Change timestamp of track points"));
+
+    item = new QTreeWidgetItem(item0);
+    treeFilter->setItemWidget(item,0, new CFilterNewDate(trk, treeFilter));
+
+    item = new QTreeWidgetItem(item0);
+    treeFilter->setItemWidget(item,0, new CFilterObscureDate(trk, treeFilter));
+
+    item = new QTreeWidgetItem(item0);
+    treeFilter->setItemWidget(item,0, new CFilterSpeed(trk, treeFilter));
+
+    item0 = new QTreeWidgetItem(treeFilter);
+    item0->setIcon(0, QIcon("://icons/48x48/TrkCut.png"));
+    item0->setText(0, tr("Cut track into pieces"));
 
 
     SETTINGS;

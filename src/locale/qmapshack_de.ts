@@ -145,12 +145,32 @@
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="154"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="163"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="166"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="191"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="193"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="56"/>
+        <source>Reduce visible track points</source>
+        <translation>Die Anzahl der sichtbaren Trackpunkte reduzieren</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="66"/>
+        <source>Change elevation of track points</source>
+        <translation>Die Höheninformation der Trackpunkte ändern</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="79"/>
+        <source>Change timestamp of track points</source>
+        <translation>Die Zeitmarken der Trackpunkte ändern</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="92"/>
+        <source>Cut track into pieces</source>
+        <translation>Den Track in Stücke zerschneiden</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="206"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="215"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="218"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="224"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="243"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="245"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
@@ -437,7 +457,7 @@
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../helpers/CHistoryListWidget.cpp" line="32"/>
+        <location filename="../helpers/CHistoryListWidget.cpp" line="34"/>
         <source>Cut history</source>
         <translation>Historie kürzen</translation>
     </message>
@@ -2097,6 +2117,11 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="399"/>
+        <source>Filter</source>
+        <translation>Filter</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="436"/>
         <source>Hist.</source>
         <translation>Hist.</translation>
     </message>
@@ -2192,6 +2217,225 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../helpers/IElevationDialog.ui" line="42"/>
         <source>...</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterDelete</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDelete.ui" line="51"/>
+        <source>&lt;b&gt;Remove Track Points&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDelete.ui" line="63"/>
+        <source>Remove all hidden track points permanently.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterDouglasPeuker</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="45"/>
+        <source>&lt;b&gt;Hide Points (Douglas Peuker)&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
+        <source>Hide track points if the distance to a line between neighboring points is less than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="93"/>
+        <source>Apply filter now.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="96"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterMedian</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterMedian.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
+        <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
+        <source>Smooth deviation of the track points elevation with a Median filter of size </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
+        <source>points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterMedian.ui" line="105"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterNewDate</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterNewDate.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
+        <source>&lt;b&gt;Change Time&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>
+        <source>Change start of track to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterNewDate.ui" line="71"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterObscureDate</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
+        <source>&lt;b&gt;Obscure Timestamps&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="54"/>
+        <source>Increase timestamp by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>
+        <source> sec.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="68"/>
+        <source>with each track point. 0 sec. will remove timestamps.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="88"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterOffsetElevation</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="51"/>
+        <source>&lt;b&gt;Offset Elevation&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="69"/>
+        <source>Add offset of</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="95"/>
+        <source>to track points elevation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="115"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterReplaceElevation</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="51"/>
+        <source>&lt;b&gt;Replace Elevation Data&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
+        <source>Replace elevation of track points with the values from loaded DEM files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="70"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterSpeed</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="35"/>
+        <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
+        <source>Set speed to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
+        <source> km/h</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3647,57 +3891,57 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="53"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="136"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="145"/>
         <source>Failed to open...</source>
         <translation>Öffnen fehlgeschlagen...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="53"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="136"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="145"/>
         <source>Failed to open %1</source>
         <translation>Öffnen fehlgeschlagen: %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="125"/>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="151"/>
-        <location filename="../gis/qms/CQmsProject.cpp" line="91"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="155"/>
+        <location filename="../gis/qms/CQmsProject.cpp" line="95"/>
         <source>Save GIS data to...</source>
         <translation>GIS Daten speichern in...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="154"/>
+        <location filename="../gis/db/CDBProject.cpp" line="157"/>
         <source>Save ...</source>
         <translation>Speichern ...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="154"/>
+        <location filename="../gis/db/CDBProject.cpp" line="157"/>
         <source>Abort save</source>
         <translation>Speichern abbrechen</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="222"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="231"/>
         <source>File exists ...</source>
         <translation>Datei existiert...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="223"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="232"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation>Diese Datei wurde nicht mit QMapShack erstellt. Wenn Sie &apos;Ja&apos; drücken werden alle Daten dieser Datei gelöscht. Selbst wenn diese Datei GPX Daten enthält und mit QMapShack geladen wurde, können nicht alle Elemente dieser Datei durch QMapShack geladen und gespeichert werden. Diese Elemente sind verloren. Ich empfehle die Nutzung einer anderen Datei. &lt;b&gt;Wollen Sie die Datei wirklich überschreiben?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="289"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="298"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Datei %1&apos; konnte nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="289"/>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="299"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="298"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="308"/>
         <source>Saveing GIS data failed...</source>
         <translation>Speichern der GIS Daten fehlgeschlagen...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="299"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="308"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Datei %1&apos; konnte nicht gespeichert werden</translation>
     </message>
@@ -3998,51 +4242,51 @@ Dateiname: %1</translation>
         <translation>Dieser Dateityp hat eine unbekannte Polyline Kodierung. Bitte mitteilen!</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="285"/>
+        <location filename="../gis/IGisItem.cpp" line="286"/>
         <source>Initial version.</source>
         <translation>Erstversion.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="369"/>
+        <location filename="../gis/IGisItem.cpp" line="370"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
         <translation>Diese Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="370"/>
+        <location filename="../gis/IGisItem.cpp" line="371"/>
         <source>Read Only Mode...</source>
         <translation>Schreibgeschützt...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="559"/>
+        <location filename="../gis/IGisItem.cpp" line="560"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="562"/>
+        <location filename="../gis/IGisItem.cpp" line="563"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="569"/>
-        <location filename="../gis/IGisItem.cpp" line="599"/>
+        <location filename="../gis/IGisItem.cpp" line="570"/>
+        <location filename="../gis/IGisItem.cpp" line="600"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="572"/>
-        <location filename="../gis/IGisItem.cpp" line="602"/>
+        <location filename="../gis/IGisItem.cpp" line="573"/>
+        <location filename="../gis/IGisItem.cpp" line="603"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="579"/>
-        <location filename="../gis/IGisItem.cpp" line="609"/>
+        <location filename="../gis/IGisItem.cpp" line="580"/>
+        <location filename="../gis/IGisItem.cpp" line="610"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Verknüpfungen:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="582"/>
-        <location filename="../gis/IGisItem.cpp" line="612"/>
+        <location filename="../gis/IGisItem.cpp" line="583"/>
+        <location filename="../gis/IGisItem.cpp" line="613"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine Verknüpfungen ---&lt;/p&gt;</translation>
     </message>
@@ -4062,7 +4306,7 @@ Dateiname: %1</translation>
         <translation>Name eingeben.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderDatabase.cpp" line="27"/>
+        <location filename="../gis/db/CDBFolderDatabase.cpp" line="28"/>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <source>All your data grouped by folders.</source>
         <translation>Alle Daten nach Ordnern gruppiert.</translation>
@@ -4110,6 +4354,51 @@ Dateiname: %1</translation>
         <location filename="../qlgt/CQlgtTrack.cpp" line="285"/>
         <source>Number of trackpoints is not equal the number of shadow data trackpoints.</source>
         <translation>Anzahl der Trackpunkte entspricht nicht der Anzahl der ausgeblendeten Trackpunkte.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="96"/>
+        <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
+        <translation>Punkte mit Hilfe des Douglas Peuker Algorithmus versteckt (%1%2)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="122"/>
+        <source>Permanently removed all hidden track points</source>
+        <translation>Alle versteckten Trackpunkte für immer gelöscht</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="173"/>
+        <source>Smoothed profile with a Median filter of size %1</source>
+        <translation>Das Profil mit einem Medianfilter der Länge %1 geglättet</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="210"/>
+        <source>Replaced elevation data with data from DEM files.</source>
+        <translation>Höhendaten durch Daten aus den DEM Dateien ersetzt</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="234"/>
+        <source>Offset elevation data by %1%2.</source>
+        <translation>Höhendaten um %1%2 verschoben.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="254"/>
+        <source>Changed start of track to %1.</source>
+        <translation>Trackanfang auf %1 verschoben.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="273"/>
+        <source>Remove timestamps.</source>
+        <translation>Zeitmarken entfernt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="296"/>
+        <source>Set artifical timestamps with delta of %1 sec.</source>
+        <translation>Künstliche Zeitmarken mit einem Abstand von %1 Sek. gesetzt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="325"/>
+        <source>Changed speed to %1%2.</source>
+        <translation>Die Geschwindigkeit auf %1%2 gesetzt.</translation>
     </message>
 </context>
 </TS>

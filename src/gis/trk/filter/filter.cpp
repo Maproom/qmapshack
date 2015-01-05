@@ -311,8 +311,13 @@ void CGisItemTrk::filterSpeed(qreal speed)
         trkseg_t& seg = trk.segs[i];
 
         for(int n = 0; n < seg.pts.size(); n++)
-        {
+        {          
             trkpt_t& pt = seg.pts[n];
+            if(pt.flags & trkpt_t::eHidden)
+            {
+                continue;
+            }
+
             qreal dmsec = 1000 * pt.deltaDistance/speed;
             timestamp   = timestamp.addMSecs(qRound(dmsec));
             pt.time     = timestamp;

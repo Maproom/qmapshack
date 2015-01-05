@@ -849,6 +849,7 @@ void CGisItemTrk::reverse()
     }
 
     CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);
+    trk1->key.item.clear();
 
     trk1->trk.name = name1;
     trk1->trk.segs.clear();

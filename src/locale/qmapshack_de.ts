@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -33,6 +33,14 @@
         <location filename="../dem/CDemPathSetup.cpp" line="55"/>
         <source>Select DEM file path...</source>
         <translation>Pfad für DEM Dateien wählen...</translation>
+    </message>
+</context>
+<context>
+    <name>CDemPropSetup</name>
+    <message>
+        <location filename="../dem/CDemPropSetup.cpp" line="187"/>
+        <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Stufe %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -435,6 +443,19 @@
     <message>
         <source>New Project</source>
         <translation type="obsolete">Neues Projekt</translation>
+    </message>
+</context>
+<context>
+    <name>CGisWidget</name>
+    <message>
+        <location filename="../gis/CGisWidget.cpp" line="349"/>
+        <source>Cut Track...</source>
+        <translation>Track zerschneiden...</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWidget.cpp" line="349"/>
+        <source>Do you want to delete the original track?</source>
+        <translation>Wollen sie den originalen Track löschen?</translation>
     </message>
 </context>
 <context>
@@ -1777,7 +1798,7 @@ ist keine gültige Koordinatensystemdefinition:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="145"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -1844,35 +1865,55 @@ ist keine gültige Koordinatensystemdefinition:
         <translation></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="20"/>
+        <location filename="../dem/IDemPropSetup.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ändert die Transparenz der Karte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="32"/>
+        <location filename="../dem/IDemPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klicken, um die aktuelle Skalierung als minimale Skalierung zu benutzen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="35"/>
-        <location filename="../dem/IDemPropSetup.ui" line="72"/>
+        <location filename="../dem/IDemPropSetup.ui" line="53"/>
+        <location filename="../dem/IDemPropSetup.ui" line="90"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="56"/>
+        <location filename="../dem/IDemPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stellt den Skalierungsbereich ein, in dem die Karte sichtbar ist. Benutzen Sie die beiden Knöpfe links und rechts um die minimale und maximale Skalierung einzustellen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="69"/>
+        <location filename="../dem/IDemPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klicken um die aktuelle Skalierung als maximale Skalierung zu benutzen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="97"/>
+        <location filename="../dem/IDemPropSetup.ui" line="124"/>
         <source>Hillshading</source>
         <translation>Schummerung</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="150"/>
+        <source>Slope </source>
+        <translation>Hangneigung</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="192"/>
+        <location filename="../dem/IDemPropSetup.ui" line="199"/>
+        <location filename="../dem/IDemPropSetup.ui" line="206"/>
+        <location filename="../dem/IDemPropSetup.ui" line="213"/>
+        <location filename="../dem/IDemPropSetup.ui" line="232"/>
+        <location filename="../dem/IDemPropSetup.ui" line="251"/>
+        <location filename="../dem/IDemPropSetup.ui" line="270"/>
+        <location filename="../dem/IDemPropSetup.ui" line="277"/>
+        <location filename="../dem/IDemPropSetup.ui" line="284"/>
+        <location filename="../dem/IDemPropSetup.ui" line="303"/>
+        <location filename="../dem/IDemPropSetup.ui" line="310"/>
+        <source>TextLabel</source>
+        <translation>Bezeichnung</translation>
     </message>
 </context>
 <context>
@@ -2224,22 +2265,22 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="51"/>
         <source>&lt;b&gt;Remove Track Points&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Trackpunkte entfernen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="63"/>
         <source>Remove all hidden track points permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle versteckten Trackpunkte werden für immer entfernt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2247,32 +2288,32 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="45"/>
         <source>&lt;b&gt;Hide Points (Douglas Peuker)&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Trackpunkte verstecken (Douglas Peuker)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
-        <translation type="unfinished"></translation>
+        <translation>Trackpunkte werden versteckt, wenn der Abstand zu einer Linien zwischen benachbarten Punkten weniger beträgt als</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="93"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Den Filter jetzt anwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="96"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2280,27 +2321,27 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
         <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Profil glätten (Medianmethode) &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
-        <translation type="unfinished"></translation>
+        <translation>Veringeren Sie die Varianz der Trackpunkthöhe mit einem Medianfilter der Länge </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
         <source>points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="105"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2308,22 +2349,22 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
         <source>&lt;b&gt;Change Time&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Zeit ändern&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>
         <source>Change start of track to </source>
-        <translation type="unfinished"></translation>
+        <translation>Verändern Sie die Anfangszeit des Tracks auf </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="71"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2331,32 +2372,32 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
         <source>&lt;b&gt;Obscure Timestamps&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Zeitmarken verschleiern&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="54"/>
         <source>Increase timestamp by</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergrößern Sie die Zeitmarke um </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>
         <source> sec.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sek.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="68"/>
         <source>with each track point. 0 sec. will remove timestamps.</source>
-        <translation type="unfinished"></translation>
+        <translation>für jeden Trackpunkt. 0 Sek. entfernt alle Zeitmarken.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="88"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2364,27 +2405,27 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="51"/>
         <source>&lt;b&gt;Offset Elevation&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Offset Höhe&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="69"/>
         <source>Add offset of</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügen Sie einen Offset von </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="95"/>
         <source>to track points elevation.</source>
-        <translation type="unfinished"></translation>
+        <translation>zu jeder Trackpunkthöhe hinzu. </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="115"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2392,22 +2433,22 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="51"/>
         <source>&lt;b&gt;Replace Elevation Data&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Höhendaten ersetzen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetzen Sie die Höhendaten der Trackpunkte mit Daten aus den geladenen DEM Dateien.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="70"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2415,27 +2456,27 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="35"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Geschwindigkeit ändern&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
         <source>Set speed to </source>
-        <translation type="unfinished"></translation>
+        <translation>Ändern Sie die Geschwindigkeit auf </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
         <source> km/h</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2870,54 +2911,54 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ändern Sie die Transparenz der Karte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="47"/>
+        <location filename="../map/IMapPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klicken um die aktuelle Skalierung als minimale Skalierung zu benutzen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="50"/>
-        <location filename="../map/IMapPropSetup.ui" line="87"/>
-        <location filename="../map/IMapPropSetup.ui" line="194"/>
+        <location filename="../map/IMapPropSetup.ui" line="53"/>
+        <location filename="../map/IMapPropSetup.ui" line="90"/>
+        <location filename="../map/IMapPropSetup.ui" line="200"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="71"/>
+        <location filename="../map/IMapPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stellen Sie den Skalierungsbereich ein, in dem die Karte sichtbar ist. Benutzen Sie die beiden Knöpfe links und rechts um die minimale und maximale Skalierung einzustellen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="84"/>
+        <location filename="../map/IMapPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klicken um die aktuelle Skalierung als maximale Skalierung zu benutzen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="134"/>
+        <location filename="../map/IMapPropSetup.ui" line="137"/>
         <source>Areas</source>
         <translation>Flächen</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="141"/>
+        <location filename="../map/IMapPropSetup.ui" line="144"/>
         <source>Lines</source>
         <translation>Linien</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="148"/>
+        <location filename="../map/IMapPropSetup.ui" line="151"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="184"/>
+        <location filename="../map/IMapPropSetup.ui" line="190"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="208"/>
+        <location filename="../map/IMapPropSetup.ui" line="220"/>
         <source>Cache Size (MB)</source>
         <translation>Cache (MB)</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="228"/>
+        <location filename="../map/IMapPropSetup.ui" line="240"/>
         <source>Expiration (Days)</source>
         <translation>Verfallzeit (Tage)</translation>
     </message>
@@ -3063,7 +3104,7 @@ sein</translation>
         <source>m</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -4006,12 +4047,12 @@ Dateiname: %1</translation>
         <translation type="obsolete"> Neigung: %1° (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="956"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="973"/>
         <source>Hide points.</source>
         <translation>Punkte ausblenden.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="990"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1007"/>
         <source>Show points.</source>
         <translation>Punkte anzeigen.</translation>
     </message>
@@ -4134,23 +4175,23 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="505"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1295"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1312"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="517"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1307"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1324"/>
         <source>Changed color</source>
         <translation>Farbe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="845"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="888"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1015"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="813"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="828"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="849"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="899"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1032"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="179"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
@@ -4173,7 +4214,7 @@ Dateiname: %1</translation>
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1277"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1294"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="298"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
@@ -4199,13 +4240,13 @@ Dateiname: %1</translation>
         <translation>Symbol geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1283"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1300"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="335"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1289"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1306"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="341"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
@@ -4291,11 +4332,11 @@ Dateiname: %1</translation>
         <translation>&lt;p&gt;--- keine Verknüpfungen ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="845"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="888"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1015"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="813"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="828"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="849"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="899"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1032"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Enter new track name.</source>
         <translation>Name eingeben.</translation>
@@ -4396,7 +4437,7 @@ Dateiname: %1</translation>
         <translation>Künstliche Zeitmarken mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="325"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="330"/>
         <source>Changed speed to %1%2.</source>
         <translation>Die Geschwindigkeit auf %1%2 gesetzt.</translation>
     </message>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES">
+<TS version="2.1" language="es_ES">
 <context>
     <name>CCanvas</name>
     <message>
@@ -33,6 +33,14 @@
         <location filename="../dem/CDemPathSetup.cpp" line="55"/>
         <source>Select DEM file path...</source>
         <translation>Seleccione la ruta al archivo DEM...</translation>
+    </message>
+</context>
+<context>
+    <name>CDemPropSetup</name>
+    <message>
+        <location filename="../dem/CDemPropSetup.cpp" line="187"/>
+        <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -390,6 +398,19 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1003"/>
         <source>This will remove all projects from the workspace.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CGisWidget</name>
+    <message>
+        <location filename="../gis/CGisWidget.cpp" line="349"/>
+        <source>Cut Track...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWidget.cpp" line="349"/>
+        <source>Do you want to delete the original track?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1685,7 +1706,7 @@ no es una definición de sistema de coordenadas válido:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="145"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation type="unfinished"></translation>
@@ -1752,35 +1773,55 @@ no es una definición de sistema de coordenadas válido:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="20"/>
+        <location filename="../dem/IDemPropSetup.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar la opacidad del mapa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="32"/>
+        <location filename="../dem/IDemPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pulse para usar la escala actual como la escala mínima a la que mostrar el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="35"/>
-        <location filename="../dem/IDemPropSetup.ui" line="72"/>
+        <location filename="../dem/IDemPropSetup.ui" line="53"/>
+        <location filename="../dem/IDemPropSetup.ui" line="90"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="56"/>
+        <location filename="../dem/IDemPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Controle el rango de escalas para las cuales desea que se muestre el mapa. Use los dos botones a izquierda y derecha para definir la escala actual como bien la escala mínima o máxima para el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="69"/>
+        <location filename="../dem/IDemPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pulse para usar la escala actual como la escala máxima a la que mostrar el mapa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="97"/>
+        <location filename="../dem/IDemPropSetup.ui" line="124"/>
         <source>Hillshading</source>
         <translation>Sombreado</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="150"/>
+        <source>Slope </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="192"/>
+        <location filename="../dem/IDemPropSetup.ui" line="199"/>
+        <location filename="../dem/IDemPropSetup.ui" line="206"/>
+        <location filename="../dem/IDemPropSetup.ui" line="213"/>
+        <location filename="../dem/IDemPropSetup.ui" line="232"/>
+        <location filename="../dem/IDemPropSetup.ui" line="251"/>
+        <location filename="../dem/IDemPropSetup.ui" line="270"/>
+        <location filename="../dem/IDemPropSetup.ui" line="277"/>
+        <location filename="../dem/IDemPropSetup.ui" line="284"/>
+        <location filename="../dem/IDemPropSetup.ui" line="303"/>
+        <location filename="../dem/IDemPropSetup.ui" line="310"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2755,54 +2796,54 @@ no es una definición de sistema de coordenadas válido:
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar la opacidad del mapa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="47"/>
+        <location filename="../map/IMapPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pulse para usar la escala actual como la escala mínima a la que mostrar el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="50"/>
-        <location filename="../map/IMapPropSetup.ui" line="87"/>
-        <location filename="../map/IMapPropSetup.ui" line="194"/>
+        <location filename="../map/IMapPropSetup.ui" line="53"/>
+        <location filename="../map/IMapPropSetup.ui" line="90"/>
+        <location filename="../map/IMapPropSetup.ui" line="200"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="71"/>
+        <location filename="../map/IMapPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Controle el rango de escalas para las cuales desea que se muestre el mapa. Use los dos botones a izquierda y derecha para definir la escala actual como bien la escala mínima o máxima para el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="84"/>
+        <location filename="../map/IMapPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pulse para usar la escala actual como la escala máxima a la que mostrar el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="134"/>
+        <location filename="../map/IMapPropSetup.ui" line="137"/>
         <source>Areas</source>
         <translation>Áreas</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="141"/>
+        <location filename="../map/IMapPropSetup.ui" line="144"/>
         <source>Lines</source>
         <translation>Líneas</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="148"/>
+        <location filename="../map/IMapPropSetup.ui" line="151"/>
         <source>Points</source>
         <translation>Puntos</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="184"/>
+        <location filename="../map/IMapPropSetup.ui" line="190"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="208"/>
+        <location filename="../map/IMapPropSetup.ui" line="220"/>
         <source>Cache Size (MB)</source>
         <translation>Tamaño de Caché (MiB)</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="228"/>
+        <location filename="../map/IMapPropSetup.ui" line="240"/>
         <source>Expiration (Days)</source>
         <translation>Caducidad (Días)</translation>
     </message>
@@ -2947,7 +2988,7 @@ o
         <source>m</source>
         <translation>m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation>º</translation>
@@ -3878,12 +3919,12 @@ Filename: %1</source>
         <translation> En movimiento: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="956"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="973"/>
         <source>Hide points.</source>
         <translation>Ocultar puntos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="990"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1007"/>
         <source>Show points.</source>
         <translation>Mostrar puntos.</translation>
     </message>
@@ -3982,14 +4023,14 @@ Filename: %1</source>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="505"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1295"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1312"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
         <source>Changed links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="517"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1307"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1324"/>
         <source>Changed color</source>
         <translation>Se cambió el color</translation>
     </message>
@@ -4004,17 +4045,17 @@ Filename: %1</source>
         <translation>Proximidad: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1277"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1294"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="298"/>
         <source>Changed name</source>
         <translation>Se cambió el nombre</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="845"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="888"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1015"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="813"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="828"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="849"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="899"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1032"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="179"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
@@ -4047,13 +4088,13 @@ Filename: %1</source>
         <translation>Se cambió el icono</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1283"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1300"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="335"/>
         <source>Changed comment</source>
         <translation>Se cambió el comentario</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1289"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1306"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="341"/>
         <source>Changed description</source>
         <translation>Se cambió la descripción</translation>
@@ -4139,11 +4180,11 @@ Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="845"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="888"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1015"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="813"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="828"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="849"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="899"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1032"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Enter new track name.</source>
         <translation>Introduzca el nombre del nuevo track.</translation>
@@ -4240,7 +4281,7 @@ Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="325"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="330"/>
         <source>Changed speed to %1%2.</source>
         <translation type="unfinished"></translation>
     </message>

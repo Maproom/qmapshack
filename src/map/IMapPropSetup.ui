@@ -41,6 +41,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>3</number>
+     </property>
      <item>
       <widget class="QToolButton" name="toolSetMinScale">
        <property name="toolTip">
@@ -178,6 +181,9 @@
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>3</number>
+        </property>
         <item>
          <widget class="QLabel" name="labelCachePath">
           <property name="text">
@@ -201,6 +207,12 @@
        <layout class="QFormLayout" name="formLayout">
         <property name="fieldGrowthPolicy">
          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+        </property>
+        <property name="horizontalSpacing">
+         <number>3</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>3</number>
         </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_2">

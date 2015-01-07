@@ -61,14 +61,29 @@ class IDem : public IDrawObject
 
         int getFactorHillshading();
 
+        bool doSlopeColor(){return bSlopeColor;}
+
+        int getGradeSlopeColor(){return gradeSlopeColor;}
+
+
+        const QVector<QRgb> getSlopeColorTable(){return slopetable;}
+
+        static const qreal tblGrade[5][6];
+
     public slots:
         void slotSetHillshading(bool yes){bHillshading = yes;}
 
         void slotSetFactorHillshade(int f);
 
+        void slotSetSlopeColor(bool yes){bSlopeColor = yes;}
+
+        void slotSetGradeSlopeColor(int g);
+
     protected:
 
         void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage &img);
+
+        void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
         /**
            @brief Reproject (translate, rotate, scale) tile befor drwaing it.
@@ -114,14 +129,20 @@ class IDem : public IDrawObject
 
         QVector<QRgb> graytable;
 
+        QVector<QRgb> slopetable;
+
         int hasNoData;
 
-        double noData;
+        double noData;        
 
     private:
-        bool bHillshading;
+        bool bHillshading;        
 
         qreal factorHillshading;
+
+        bool bSlopeColor;
+
+        int gradeSlopeColor;
 
 
 };

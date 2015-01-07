@@ -108,8 +108,8 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(pj_is_latlong(pjsrc))
     {
 
-        xscale *= 111120 / 2;
-        yscale *= 111120 / 2;
+        xscale *= 111120;
+        yscale *= 111120;
         // convert to RAD to match internal notations
         trFwd = trFwd * DEG_TO_RAD;
     }
@@ -185,7 +185,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
         return;
     }
 
-    if(!doHillshading())
+    if(!doHillshading() && !doSlopeColor())
     {
         QThread::msleep(100);
         return;
@@ -318,12 +318,26 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 if(doHillshading())
                 {
+                    QPolygonF r = l;
+
                     QImage img(w_used,h_used,QImage::Format_Indexed8);
                     img.setColorTable(graytable);
 
                     hillshading(data, w_used, h_used, img);
 
-                    drawTile(img, l, p);
+                    drawTile(img, r, p);
+                }
+
+                if(doSlopeColor())
+                {
+                    QPolygonF r = l;
+
+                    QImage img(w_used,h_used,QImage::Format_Indexed8);
+                    img.setColorTable(slopetable);
+
+                    slopecolor(data, w_used, h_used, img);
+
+                    drawTile(img, r, p);
                 }
             }
         }

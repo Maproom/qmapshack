@@ -40,6 +40,7 @@ class CDemPropSetup : public IDemProp, private Ui::IDemPropSetup
         void slotScaleChanged(const QPointF& s);
         void slotSetMinScale(bool checked);
         void slotSetMaxScale(bool checked);
+        void slotSetGradeSlopeColor(int val);
 
     private:
         void updateScaleLabel();

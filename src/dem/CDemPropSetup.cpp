@@ -36,11 +36,30 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
     connect(dem, SIGNAL(sigScaleChanged(QPointF)), this, SLOT(slotScaleChanged(QPointF)));
     connect(toolSetMinScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMinScale(bool)));
     connect(toolSetMaxScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMaxScale(bool)));
+
     connect(checkHillshading, SIGNAL(toggled(bool)), demfile, SLOT(slotSetHillshading(bool)));
     connect(checkHillshading, SIGNAL(clicked()), dem, SLOT(emitSigCanvasUpdate()));
-
     connect(sliderHillshading, SIGNAL(valueChanged(int)), demfile, SLOT(slotSetFactorHillshade(int)));
     connect(sliderHillshading, SIGNAL(valueChanged(int)), dem, SLOT(emitSigCanvasUpdate()));
+
+    connect(checkSlopeColor, SIGNAL(toggled(bool)), demfile, SLOT(slotSetSlopeColor(bool)));
+    connect(checkSlopeColor, SIGNAL(clicked()), dem, SLOT(emitSigCanvasUpdate()));
+    connect(sliderSlopeColor, SIGNAL(valueChanged(int)), demfile, SLOT(slotSetGradeSlopeColor(int)));
+    connect(sliderSlopeColor, SIGNAL(valueChanged(int)), dem, SLOT(emitSigCanvasUpdate()));
+    connect(sliderSlopeColor, SIGNAL(valueChanged(int)), this, SLOT(slotSetGradeSlopeColor(int)));
+
+    const QVector<QRgb>& colortable = demfile->getSlopeColorTable();
+    QPixmap pixmap(20,10);
+    pixmap.fill(colortable[5]);
+    labelColor5->setPixmap(pixmap);
+    pixmap.fill(colortable[4]);
+    labelColor4->setPixmap(pixmap);
+    pixmap.fill(colortable[3]);
+    labelColor3->setPixmap(pixmap);
+    pixmap.fill(colortable[2]);
+    labelColor2->setPixmap(pixmap);
+    pixmap.fill(colortable[1]);
+    labelColor1->setPixmap(pixmap);
 
 }
 
@@ -62,6 +81,8 @@ void CDemPropSetup::slotPropertiesChanged()
     toolSetMinScale->blockSignals(true);
     checkHillshading->blockSignals(true);
     sliderHillshading->blockSignals(true);
+    checkSlopeColor->blockSignals(true);
+    sliderSlopeColor->blockSignals(true);
 
     sliderOpacity->setValue(demfile->getOpacity());
     qreal minScale = demfile->getMinScale();
@@ -73,12 +94,19 @@ void CDemPropSetup::slotPropertiesChanged()
 
     checkHillshading->setChecked(demfile->doHillshading());
     sliderHillshading->setValue(demfile->getFactorHillshading());
+    checkSlopeColor->setChecked(demfile->doSlopeColor());
+    sliderSlopeColor->setValue(demfile->getGradeSlopeColor());
+
+    slotSetGradeSlopeColor(sliderSlopeColor->value());
 
     sliderOpacity->blockSignals(false);
     toolSetMaxScale->blockSignals(false);
     toolSetMinScale->blockSignals(false);
     checkHillshading->blockSignals(false);
     sliderHillshading->blockSignals(false);
+    checkSlopeColor->blockSignals(false);
+    sliderSlopeColor->blockSignals(false);
+
 }
 
 void CDemPropSetup::slotScaleChanged(const QPointF& s)
@@ -152,4 +180,18 @@ void CDemPropSetup::updateScaleLabel()
     p.drawRect(ind);
 
     labelScale->setPixmap(pix);
+}
+
+void CDemPropSetup::slotSetGradeSlopeColor(int val)
+{
+    labelGrade->setText(tr("<b>Grade %1</b>").arg(val));
+
+    const qreal * g = IDem::tblGrade[val];
+
+    labelValue1->setText(QString("> %1%2").arg(g[1]).arg(QChar(0260)));
+    labelValue2->setText(QString("> %1%2").arg(g[2]).arg(QChar(0260)));
+    labelValue3->setText(QString("> %1%2").arg(g[3]).arg(QChar(0260)));
+    labelValue4->setText(QString("> %1%2").arg(g[4]).arg(QChar(0260)));
+    labelValue5->setText(QString("> %1%2").arg(g[5]).arg(QChar(0260)));
+
 }

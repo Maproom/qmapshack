@@ -40,6 +40,14 @@ inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
     w[8] = getValue(data, x + 1, y + 1, dx);
 }
 
+const qreal IDem::tblGrade[5][6] =
+{
+     {0,0,0,0,0,0}
+    ,{0.0,27.0,30.0,32.0,35.0,39.0}
+    ,{0.0,27.0,30.0,32.0,35.0,39.0}
+    ,{0.0,27.0,29.0,30.0,31.0,34.0}
+    ,{0.0,23.0,25.0,27.0,28.0,30.0}
+};
 
 IDem::IDem(CDemDraw *parent)
     : IDrawObject(parent)
@@ -50,6 +58,8 @@ IDem::IDem(CDemDraw *parent)
     , noData(0)
     , bHillshading(false)
     , factorHillshading(1.0)
+    , bSlopeColor(false)
+    , gradeSlopeColor(1)
 {
     slotSetOpacity(50);
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
@@ -61,6 +71,12 @@ IDem::IDem(CDemDraw *parent)
     }
     graytable[255] = qRgba(0,0,0,0);
 
+    slopetable << qRgba(0,0,0,0);
+    slopetable << qRgba(0,128,0,100);
+    slopetable << qRgba(0,255,0,100);
+    slopetable << qRgba(255,255,0,100);
+    slopetable << qRgba(255,128,0,100);
+    slopetable << qRgba(255,0,0,100);
 }
 
 IDem::~IDem()
@@ -75,6 +91,8 @@ void IDem::saveConfig(QSettings& cfg)
 
     cfg.setValue("doHillshading",bHillshading);
     cfg.setValue("factorHillshading", factorHillshading);
+    cfg.setValue("doSlopeColor",bSlopeColor);
+    cfg.setValue("gradeSlopeColor", gradeSlopeColor);
 }
 
 void IDem::loadConfig(QSettings& cfg)
@@ -83,6 +101,8 @@ void IDem::loadConfig(QSettings& cfg)
 
     bHillshading = cfg.value("doHillshading",bHillshading).toBool();
     factorHillshading = cfg.value("factorHillshading", factorHillshading).toFloat();
+    bSlopeColor = cfg.value("doSlopeColor", bSlopeColor).toBool();
+    gradeSlopeColor = cfg.value("gradeSlopeColor", gradeSlopeColor).toInt();
 }
 
 
@@ -110,6 +130,12 @@ void IDem::slotSetFactorHillshade(int f)
     {
         factorHillshading = f;
     }
+}
+
+void IDem::slotSetGradeSlopeColor(int g)
+{
+    /// @todo check range
+    gradeSlopeColor = g;
 }
 
 int IDem::getFactorHillshading()
@@ -167,6 +193,51 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
             }
 
             img.setPixel(n - 1, m - 1, cang);
+        }
+    }
+}
+
+void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
+{
+    int wp2 = w + 2;
+    qint16 win[9];
+    qreal dx, dy, k, slope;
+
+    for(int m = 1; m <= h; m++)
+    {
+        for(int n = 1; n <= w; n++)
+        {
+            fillWindow(data, n, m, wp2, win);
+            dx  = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
+            dy  = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+            k   = (dx * dx + dy * dy);
+            slope =  atan(sqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
+
+            if(slope > tblGrade[gradeSlopeColor][5])
+            {
+                img.setPixel(n - 1, m - 1, 5);
+            }
+            else if(slope > tblGrade[gradeSlopeColor][4])
+            {
+                img.setPixel(n - 1, m - 1, 4);
+            }
+            else if(slope > tblGrade[gradeSlopeColor][3])
+            {
+                img.setPixel(n - 1, m - 1, 3);
+            }
+            else if(slope > tblGrade[gradeSlopeColor][2])
+            {
+                img.setPixel(n - 1, m - 1, 2);
+            }
+            else if(slope > tblGrade[gradeSlopeColor][1])
+            {
+                img.setPixel(n - 1, m - 1, 1);
+            }
+            else
+            {
+                img.setPixel(n - 1, m - 1, 0);
+            }
+
         }
     }
 }

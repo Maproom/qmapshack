@@ -370,7 +370,7 @@ qt5_wrap_ui(UI_HDRS ${UIS})
 qt5_add_resources(RC_SRCS ${RCS})
 
 if(UNIX)
-    add_definitions(-Wall -Wno-switch)
+    add_definitions(-Wall -Wno-switch -Wno-strict-aliasing)
 endif(UNIX)
 
 

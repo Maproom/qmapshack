@@ -2132,7 +2132,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
 void CMapIMG::drawLabels(QPainter& p, const QVector<strlbl_t> &lbls)
 {
     QFont f = CMainWindow::self().getMapFont();
-    QVector<QFont> fonts(5, f);
+    QVector<QFont> fonts(8, f);
     fonts[CGarminTyp::eSmall].setPointSize(f.pointSize() - 2);
     fonts[CGarminTyp::eLarge].setPointSize(f.pointSize() + 2);
 

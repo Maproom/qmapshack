@@ -245,9 +245,12 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
     // start to draw the map
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
-    p.setOpacity(getOpacity()/100.0);
+    USE_ANTI_ALIASING(p,true);    
     p.translate(-pp);
+
+    qreal o1 = getOpacity()/100.0;
+    qreal o2 = ((o1 + 0.4) >= 1.0) ? o1 : (o1 + 0.4);
+    p.setOpacity(o1);
 
     qreal nTiles = ((right - left) * (bottom - top) / (w * h));
     qDebug() << "DEM> tiles:" << nTiles;
@@ -337,7 +340,9 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                     slopecolor(data, w_used, h_used, img);
 
+                    p.setOpacity(o2);
                     drawTile(img, r, p);
+                    p.setOpacity(o1);
                 }
             }
         }

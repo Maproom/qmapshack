@@ -1,3 +1,12 @@
+V 0.10.0
+* Fix crash when saving a DB project before the database tree has been opened
+* Add track filters to hide trackpoints
+* Add track filters to change elevation
+* Add track filters to change timestamp
+* Add DEM layer to colorize the slope
+* Fix issue with duplicate key when reversing a track
+* Add project selection for all track operations
+
 V 0.9.1
 * Complete function of 'Lost & Found' folder
 * Add copy function to all items including dialog to select copy action.

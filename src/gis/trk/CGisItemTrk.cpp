@@ -809,18 +809,19 @@ bool CGisItemTrk::cut()
         return(false);
     }
 
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project == 0)
-    {
-        return(false);
-    }
-
     QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
     name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
         return(false);
     }
+
+    IGisProject * project = CGisWidget::self().selectProject();
+    if(project == 0)
+    {
+        return false;
+    }
+
     new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
 
     name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idxTotal).arg(cntTotalPoints-1);
@@ -829,6 +830,13 @@ bool CGisItemTrk::cut()
     {
         return(false);
     }
+
+    project = CGisWidget::self().selectProject();
+    if(project == 0)
+    {
+        return false;
+    }
+
     new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
 
     return(true);
@@ -836,14 +844,16 @@ bool CGisItemTrk::cut()
 
 void CGisItemTrk::reverse()
 {
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project == 0)
+
+
+    QString name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
+    if(name1.isEmpty())
     {
         return;
     }
 
-    QString name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
-    if(name1.isEmpty())
+    IGisProject * project = CGisWidget::self().selectProject();
+    if(project == 0)
     {
         return;
     }
@@ -892,7 +902,13 @@ void CGisItemTrk::combine()
         return;
     }
 
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);
+    IGisProject * projectNew = CGisWidget::self().selectProject();
+    if(projectNew == 0)
+    {
+        return;
+    }
+
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, -1, false);
 
     trk1->trk.name = name1;
     trk1->trk.segs.clear();

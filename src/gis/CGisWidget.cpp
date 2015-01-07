@@ -346,7 +346,11 @@ void CGisWidget::cutTrkByKey(const IGisItem::key_t& key)
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk != 0 && trk->cut())
     {
-        delete trk;
+        int res = QMessageBox::question(this, tr("Cut Track..."), tr("Do you want to delete the original track?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+        if(res == QMessageBox::Ok)
+        {
+            delete trk;
+        }
     }
 
     emit sigChanged();

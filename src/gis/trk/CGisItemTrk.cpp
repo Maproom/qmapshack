@@ -162,7 +162,8 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     if(clone)
     {
         trk.name += QObject::tr("_Clone");
-        key.item.clear();
+        key.item.clear();        
+        history.events.clear();
     }
 
     setupHistory();
@@ -844,8 +845,6 @@ bool CGisItemTrk::cut()
 
 void CGisItemTrk::reverse()
 {
-
-
     QString name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
     if(name1.isEmpty())
     {
@@ -858,11 +857,18 @@ void CGisItemTrk::reverse()
         return;
     }
 
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);
-    trk1->key.item.clear();
-
+    // start with a 1:1 copy of the first track
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);    
     trk1->trk.name = name1;
+    /*
+        clear track data, item key and history. To clear the history is important as
+        the original track's history would restore the original key
+
+    */
     trk1->trk.segs.clear();
+    trk1->key.item.clear();
+    trk1->history.events.clear();
+
     foreach(const trkseg_t &seg, trk.segs)
     {
         trkseg_t seg1;
@@ -875,7 +881,9 @@ void CGisItemTrk::reverse()
         }
         trk1->trk.segs.push_front(seg1);
     }
+    // restore secondary data and create a new history
     trk1->deriveSecondaryData();
+    trk1->setupHistory();
     trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -908,10 +916,21 @@ void CGisItemTrk::combine()
         return;
     }
 
+    // start with a 1:1 copy of the first track
     CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, -1, false);
-
+    // replace name
     trk1->trk.name = name1;
+
+    /*
+        clear track data, item key and history. To clear the history is important as
+        the original track's history would restore the original key
+
+    */
     trk1->trk.segs.clear();
+    trk1->key.item.clear();
+    trk1->history.events.clear();
+
+    // copy the segments of all tracks to new track
     foreach(const IGisItem::key_t &key, keys)
     {
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));
@@ -923,7 +942,9 @@ void CGisItemTrk::combine()
         trk1->trk.segs += trk2->trk.segs;
     }
 
-    trk1->deriveSecondaryData();
+    // restore secondary data and create a new history
+    trk1->deriveSecondaryData();    
+    trk1->setupHistory();
     trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 

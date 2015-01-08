@@ -76,7 +76,8 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     wpt.lat     = pos.y();
     wpt.time    = QDateTime::currentDateTimeUtc();
 
-    key.clear();
+    key.item.clear();
+    history.events.clear();
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
 
     qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
@@ -102,6 +103,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     {
         wpt.name += QObject::tr("_Clone");
         key.item.clear();
+        history.events.clear();
     }
 
     setupHistory();

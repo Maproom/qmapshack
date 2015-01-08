@@ -143,6 +143,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
     {
         area.name += QObject::tr("_Clone");
         key.item.clear();
+        history.events.clear();
     }
 
 

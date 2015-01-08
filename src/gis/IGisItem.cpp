@@ -172,6 +172,14 @@ void IGisItem::genKey()
         md5.addData(buffer);
         key.item = md5.result().toHex();
     }
+    if(key.project.isEmpty())
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(parent());
+        if(project)
+        {
+            key.project = project->getKey();
+        }
+    }
 }
 
 void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)

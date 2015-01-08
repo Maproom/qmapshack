@@ -43,6 +43,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
     {
         rte.name += QObject::tr("_Clone");
         key.item.clear();
+        history.events.clear();
     }
 
     setupHistory();

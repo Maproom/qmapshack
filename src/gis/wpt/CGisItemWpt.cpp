@@ -117,6 +117,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 
+    genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }

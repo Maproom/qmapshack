@@ -396,7 +396,7 @@ void IGisItem::setReadOnlyMode(bool readOnly)
 
 const IGisItem::key_t &IGisItem::getKey()
 {
-    if(key.item.isEmpty())
+    if(key.item.isEmpty() || key.project.isEmpty())
     {
         genKey();
     }

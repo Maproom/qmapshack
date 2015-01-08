@@ -16,30 +16,48 @@
 
 **********************************************************************************************/
 
-#ifndef CPLOTTRACK_H
-#define CPLOTTRACK_H
+#ifndef ITRACK_H
+#define ITRACK_H
 
-#include "plot/ITrack.h"
-#include <QWidget>
+#include <proj_api.h>
+#include <QPolygonF>
+#include <QImage>
 
+class QRectF;
+class QPainter;
 class CGisItemTrk;
 
-class CPlotTrack : public QWidget, public ITrack
+class ITrack
 {
     public:
-        CPlotTrack(QWidget * parent);
-        virtual ~CPlotTrack();
+        ITrack();
+        virtual ~ITrack();
 
-        void setMouseMoveFocus(qreal lon, qreal lat);
+        void setSize(int w, int h);
+        void setTrack(CGisItemTrk * track);
+        void setTrack(const QPolygonF &track);
 
     protected:
-        void resizeEvent(QResizeEvent * e);
-        void paintEvent(QPaintEvent * e);
+        void setupProjection(const QRectF &boundingBox);
+        void updateData();
+        void draw(QPainter& p);
+        void draw();
 
-    private:
+        projPJ  pjsrc;
+        projPJ  pjtar;
 
-        QPointF pos;
+        bool needsRedraw;
+        CGisItemTrk * trk;
+        QPolygonF coords;
+        QPolygonF line;
+
+        QImage buffer;
+
+        QPointF scale;
+        qint32 xoff;
+        qint32 yoff;
+
 };
 
-#endif //CPLOTTRACK_H
+#endif //ITRACK_H
 

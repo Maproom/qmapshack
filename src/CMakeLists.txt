@@ -146,6 +146,7 @@ set( SRCS
     plot/CPlotProfile.cpp
     plot/CPlotSpeed.cpp
     plot/CPlotDistance.cpp
+    plot/ITrack.cpp
     plot/CPlotTrack.cpp
     qlgt/converter.cpp
     qlgt/CQlb.cpp
@@ -295,6 +296,7 @@ set( HDRS
     plot/CPlotProfile.h
     plot/CPlotSpeed.h
     plot/CPlotDistance.h
+    plot/ITrack.h
     plot/CPlotTrack.h
     qlgt/CQlb.h
     qlgt/IItem.h

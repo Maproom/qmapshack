@@ -17,133 +17,20 @@
 **********************************************************************************************/
 
 #include "plot/CPlotTrack.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "canvas/IDrawContext.h"
 
 #include <QtWidgets>
-#include <proj_api.h>
 
 CPlotTrack::CPlotTrack(QWidget *parent)
     : QWidget(parent)
-    , pjsrc(0)
-    , pjtar(0)
-    , needsRedraw(true)
-    , trk(0)
-    , xoff(0)
-    , yoff(0)
     , pos(NOPOINTF)
 {
-    pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
+
 }
 
 CPlotTrack::~CPlotTrack()
 {
-    if(pjtar) pj_free(pjtar);
-    if(pjsrc) pj_free(pjsrc);
 
-}
-
-void CPlotTrack::setupProjection(const QRectF& boundingBox)
-{
-    if(pjsrc)
-    {
-        pj_free(pjsrc);
-        pjsrc = 0;
-    }
-
-    if(boundingBox.top() > (60*DEG_TO_RAD))
-    {
-        pjsrc =  pj_init_plus("+init=epsg:32661");
-    }
-    else if(boundingBox.bottom() < (-60*DEG_TO_RAD))
-    {
-        pjsrc =  pj_init_plus("+init=epsg:32761");
-    }
-    else
-    {
-        pjsrc =  pj_init_plus("+init=epsg:3857");
-    }
-}
-
-void CPlotTrack::setTrack(CGisItemTrk * track)
-{
-    trk = track;
-
-    setupProjection(trk->getBoundingRect());
-
-    updateData();
-}
-
-void CPlotTrack::setTrack(const QPolygonF& track)
-{
-    coords = track;
-
-    setupProjection(coords.boundingRect());
-
-    updateData();
-}
-
-void CPlotTrack::updateData()
-{
-    if((pjsrc == 0) || (trk == 0 && coords.isEmpty()))
-    {
-        return;
-    }
-
-    QRectF boundingRect;
-    if(trk)
-    {
-        coords.clear();
-        const CGisItemTrk::trk_t& t = trk->getTrackData();
-        foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
-        {
-            foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
-            {
-                if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
-                {
-                    continue;
-                }
-
-                coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-            }
-        }
-    }
-
-    line.clear();
-    foreach(const QPointF& trkpt, coords)
-    {
-        QPointF pt(trkpt.x(), trkpt.y());
-        pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
-        line << pt;
-    }
-
-    QRectF r1 = line.boundingRect();
-    qreal  w1 = r1.width();
-    qreal  h1 = r1.height();
-
-    QRectF r2 = buffer.rect();
-    qreal  w2 = r2.width();
-    qreal  h2 = r2.height();
-
-    if(qAbs(w1) > qAbs(h1))
-    {
-        scale.rx() = (w2 - 10) / w1;
-        scale.ry() = -scale.x();
-        xoff = 0;
-        yoff = -((h2 - 10)/scale.y() + h1) / 2;
-    }
-    else
-    {
-        scale.ry() = (-h2 + 10) / h1;
-        scale.rx() = -scale.y();
-        xoff = -((w2 - 10)/scale.x() - w1) / 2;
-        yoff = 0;
-    }
-
-    xoff += r1.left()   - 5/scale.x();
-    yoff += r1.bottom() - 5/scale.y();
-
-    needsRedraw = true;
 }
 
 void CPlotTrack::setMouseMoveFocus(qreal lon, qreal lat)
@@ -160,10 +47,7 @@ void CPlotTrack::resizeEvent(QResizeEvent * e)
 {
     QSize s = e->size();
     setMinimumWidth(s.height());
-
-    buffer = QImage(s.height(), s.height(), QImage::Format_ARGB32);
-
-    updateData();
+    setSize(s.height(), s.height());
 }
 
 void CPlotTrack::paintEvent(QPaintEvent * e)
@@ -171,13 +55,7 @@ void CPlotTrack::paintEvent(QPaintEvent * e)
     QPainter p(this);
     USE_ANTI_ALIASING(p, true);
 
-    if(needsRedraw)
-    {
-        draw();
-        needsRedraw = false;
-    }
-
-    p.drawImage(0,0,buffer);
+    draw(p);
 
     p.setPen(Qt::red);
     p.setBrush(Qt::red);
@@ -186,17 +64,3 @@ void CPlotTrack::paintEvent(QPaintEvent * e)
     p.drawEllipse(pos,5/scale.x(),5/scale.x());
 }
 
-void CPlotTrack::draw()
-{
-    QPainter p(&buffer);
-    USE_ANTI_ALIASING(p, true);
-    p.setPen(Qt::black);
-    p.setBrush(Qt::white);
-    p.drawRect(buffer.rect());
-
-
-    p.setPen(QPen(Qt::darkBlue,2/scale.x()));
-    p.scale(scale.x(), scale.y());
-    p.translate(-xoff,-yoff);
-    p.drawPolyline(line);
-}

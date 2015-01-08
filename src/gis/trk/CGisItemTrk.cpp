@@ -142,8 +142,6 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
     trk.type    = srctrk.type;
 
     deriveSecondaryData();
-
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -162,10 +160,11 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     if(clone)
     {
         trk.name += QObject::tr("_Clone");
-        key.item.clear();        
+        key.clear();
         history.events.clear();
     }
 
+    deriveSecondaryData();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -182,9 +181,8 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
     readTrackDataFromPolyLine(l);
 
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
-
     setColor(str2color(""));
-    genKey();
+
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -201,7 +199,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setColor(penForeground.color());
     readTrk(xml, trk);
     // --- stop read and process data ----
-    genKey();
+
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }
@@ -866,7 +864,7 @@ void CGisItemTrk::reverse()
 
     */
     trk1->trk.segs.clear();
-    trk1->key.item.clear();
+    trk1->key.clear();
     trk1->history.events.clear();
 
     foreach(const trkseg_t &seg, trk.segs)
@@ -927,7 +925,7 @@ void CGisItemTrk::combine()
 
     */
     trk1->trk.segs.clear();
-    trk1->key.item.clear();
+    trk1->key.clear();
     trk1->history.events.clear();
 
     // copy the segments of all tracks to new track

@@ -60,7 +60,6 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -76,7 +75,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     wpt.lat     = pos.y();
     wpt.time    = QDateTime::currentDateTimeUtc();
 
-    key.item.clear();
+    key.clear();
     history.events.clear();
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
 
@@ -85,7 +84,6 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 
-    genKey();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -102,7 +100,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     if(clone)
     {
         wpt.name += QObject::tr("_Clone");
-        key.item.clear();
+        key.clear();
         history.events.clear();
     }
 
@@ -119,7 +117,6 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 
-    genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }

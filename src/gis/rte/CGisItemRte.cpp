@@ -42,7 +42,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
     if(clone)
     {
         rte.name += QObject::tr("_Clone");
-        key.item.clear();
+        key.clear();
         history.events.clear();
     }
 
@@ -59,7 +59,6 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     readRte(xml, rte);    
     // --- stop read and process data ----
 
-    genKey();
     setupHistory();
     deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);

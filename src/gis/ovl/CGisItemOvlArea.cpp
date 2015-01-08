@@ -125,8 +125,6 @@ CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGi
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
 
     setColor(str2color(""));
-    genKey();
-
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
@@ -142,10 +140,9 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
     if(clone)
     {
         area.name += QObject::tr("_Clone");
-        key.item.clear();
+        key.clear();
         history.events.clear();
     }
-
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -160,7 +157,7 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     setColor(penForeground.color());
     readArea(xml, area);
     // --- stop read and process data ----
-    genKey();
+
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }

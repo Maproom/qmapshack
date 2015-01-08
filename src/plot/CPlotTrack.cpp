@@ -43,25 +43,49 @@ CPlotTrack::~CPlotTrack()
 
 }
 
-void CPlotTrack::setTrack(CGisItemTrk * track, const QString& proj)
+void CPlotTrack::setupProjection(const QRectF& boundingBox)
+{
+    if(pjsrc)
+    {
+        pj_free(pjsrc);
+        pjsrc = 0;
+    }
+
+    if(boundingBox.top() > (60*DEG_TO_RAD))
+    {
+        pjsrc =  pj_init_plus("+init=epsg:32661");
+    }
+    else if(boundingBox.bottom() < (-60*DEG_TO_RAD))
+    {
+        pjsrc =  pj_init_plus("+init=epsg:32761");
+    }
+    else
+    {
+        pjsrc =  pj_init_plus("+init=epsg:3857");
+    }
+}
+
+void CPlotTrack::setTrack(CGisItemTrk * track)
 {
     trk = track;
-    pjsrc = pj_init_plus(proj.toLatin1());
+
+    setupProjection(trk->getBoundingRect());
 
     updateData();
 }
 
-void CPlotTrack::setTrack(const QPolygonF& track, const QString &proj)
+void CPlotTrack::setTrack(const QPolygonF& track)
 {
     coords = track;
-    pjsrc = pj_init_plus(proj.toLatin1());
+
+    setupProjection(coords.boundingRect());
 
     updateData();
 }
 
 void CPlotTrack::updateData()
 {
-    if(trk == 0 && coords.isEmpty())
+    if((pjsrc == 0) || (trk == 0 && coords.isEmpty()))
     {
         return;
     }
@@ -85,53 +109,39 @@ void CPlotTrack::updateData()
         }
     }
 
-    qreal north = -90 * DEG_TO_RAD;
-    qreal east  = -180 * DEG_TO_RAD;
-    qreal south =  90 * DEG_TO_RAD;
-    qreal west  =  180 * DEG_TO_RAD;
-
-    foreach(const QPointF& trkpt, coords)
-    {
-        if(trkpt.x() < west)  west    = trkpt.x();
-        if(trkpt.x() > east)  east    = trkpt.x();
-        if(trkpt.y() < south) south   = trkpt.y();
-        if(trkpt.y() > north) north   = trkpt.y();
-    }
-
-
-    QRectF r = buffer.rect();
-    r.adjust(5,5,-5,-5);
-
-    pt1 = QPointF(west, north);
-    pt2 = QPointF(east, south);
-
-    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-
-    qreal w = pt2.x() - pt1.x();
-    qreal h = pt2.y() - pt1.y();
-
-    if(qAbs(w) > qAbs(h))
-    {
-        scale.rx() = r.width() / w;
-        scale.ry() = -scale.x();
-    }
-    else
-    {
-        scale.ry() = r.height() / h;
-        scale.rx() = -scale.y();
-    }
-
     line.clear();
     foreach(const QPointF& trkpt, coords)
     {
         QPointF pt(trkpt.x(), trkpt.y());
         pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
-        line << (pt - pt1) * scale;
+        line << pt;
     }
 
-    xoff = qRound((buffer.width()  - w * scale.x()) / 2);
-    yoff = qRound((buffer.height() - h * scale.y()) / 2);
+    QRectF r1 = line.boundingRect();
+    qreal  w1 = r1.width();
+    qreal  h1 = r1.height();
+
+    QRectF r2 = buffer.rect();
+    qreal  w2 = r2.width();
+    qreal  h2 = r2.height();
+
+    if(qAbs(w1) > qAbs(h1))
+    {
+        scale.rx() = (w2 - 10) / w1;
+        scale.ry() = -scale.x();
+        xoff = 0;
+        yoff = -((h2 - 10)/scale.y() + h1) / 2;
+    }
+    else
+    {
+        scale.ry() = (-h2 + 10) / h1;
+        scale.rx() = -scale.y();
+        xoff = -((w2 - 10)/scale.x() - w1) / 2;
+        yoff = 0;
+    }
+
+    xoff += r1.left()   - 5/scale.x();
+    yoff += r1.bottom() - 5/scale.y();
 
     needsRedraw = true;
 }
@@ -142,7 +152,7 @@ void CPlotTrack::setMouseMoveFocus(qreal lon, qreal lat)
     pos.ry() = lat * DEG_TO_RAD;
 
     pj_transform(pjtar, pjsrc, 1, 0, &pos.rx(), &pos.ry(), 0);
-    pos = (pos - pt1) * scale;
+
     update();
 }
 
@@ -168,10 +178,12 @@ void CPlotTrack::paintEvent(QPaintEvent * e)
     }
 
     p.drawImage(0,0,buffer);
-    p.translate(xoff, yoff);
+
     p.setPen(Qt::red);
     p.setBrush(Qt::red);
-    p.drawEllipse(pos,5,5);
+    p.scale(scale.x(), scale.y());
+    p.translate(-xoff, -yoff);
+    p.drawEllipse(pos,5/scale.x(),5/scale.x());
 }
 
 void CPlotTrack::draw()
@@ -182,7 +194,9 @@ void CPlotTrack::draw()
     p.setBrush(Qt::white);
     p.drawRect(buffer.rect());
 
-    p.translate(xoff,yoff);
-    p.setPen(QPen(Qt::darkBlue,2));
+
+    p.setPen(QPen(Qt::darkBlue,2/scale.x()));
+    p.scale(scale.x(), scale.y());
+    p.translate(-xoff,-yoff);
     p.drawPolyline(line);
 }

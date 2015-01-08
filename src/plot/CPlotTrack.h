@@ -30,8 +30,8 @@ class CPlotTrack : public QWidget
         CPlotTrack(QWidget * parent);
         virtual ~CPlotTrack();
 
-        void setTrack(CGisItemTrk * track, const QString &proj = "+init=epsg:3857");
-        void setTrack(const QPolygonF &track, const QString &proj = "+init=epsg:3857");
+        void setTrack(CGisItemTrk * track);
+        void setTrack(const QPolygonF &track);
         void updateData();
         void setMouseMoveFocus(qreal lon, qreal lat);
 
@@ -41,6 +41,7 @@ class CPlotTrack : public QWidget
 
 
     private:
+        void setupProjection(const QRectF &boundingBox);
         void draw();
 
         projPJ  pjsrc;

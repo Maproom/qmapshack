@@ -33,6 +33,9 @@ class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
         CDetailsPrj(IGisProject& prj, QWidget * parent);
         virtual ~CDetailsPrj();
 
+    protected:
+        void resizeEvent(QResizeEvent * e);
+
     private slots:
         void slotLinkActivated(const QString& link);
         void slotLinkActivated(const QUrl& url);
@@ -40,7 +43,10 @@ class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
     private:
         void setupGui();
 
+        enum eTblCol{eSym, eInfo, eComment, eMax};
+
         IGisProject& prj;
+
 };
 
 #endif //CDETAILSPRJ_H

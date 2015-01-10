@@ -39,6 +39,13 @@ ITrack::~ITrack()
     if(pjsrc) pj_free(pjsrc);
 }
 
+void ITrack::save(QImage& image)
+{
+    setSize(image.width(), image.height());
+    draw();
+    image = buffer;
+}
+
 void ITrack::setSize(int w, int h)
 {
     buffer = QImage(w, h, QImage::Format_ARGB32);
@@ -92,7 +99,6 @@ void ITrack::updateData()
         return;
     }
 
-    QRectF boundingRect;
     if(trk)
     {
         coords.clear();
@@ -162,11 +168,14 @@ void ITrack::draw(QPainter& p)
 
 void ITrack::draw()
 {
+    buffer.fill(Qt::transparent);
     QPainter p(&buffer);
     USE_ANTI_ALIASING(p, true);
-    p.setPen(Qt::black);
-    p.setBrush(Qt::white);
-    p.drawRect(buffer.rect());
+
+
+    p.setPen(CCanvas::penBorderBlack);
+    p.setBrush(QColor(255,255,255,255));
+    PAINT_ROUNDED_RECT(p,buffer.rect().adjusted(1,1,-1,-1));
 
     p.setPen(QPen(Qt::darkBlue,2/scale.x()));
     p.scale(scale.x(), scale.y());

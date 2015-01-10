@@ -28,6 +28,13 @@ CPlotTrack::CPlotTrack(QWidget *parent)
 
 }
 
+CPlotTrack::CPlotTrack(CGisItemTrk * trk, QWidget * parent)
+    : QWidget(parent)
+    , pos(NOPOINTF)
+{
+    setTrack(trk);
+}
+
 CPlotTrack::~CPlotTrack()
 {
 

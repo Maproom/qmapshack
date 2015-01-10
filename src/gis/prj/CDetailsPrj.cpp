@@ -23,23 +23,25 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CTextEditWidget.h"
 #include "helpers/CLinksDialog.h"
+#include "plot/CPlotProfile.h"
+#include "plot/CPlotTrack.h"
 
 #include <QtWidgets>
+#include <QtPrintSupport>
 
 CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     : QWidget(parent)
     , prj(prj)
 {
     setupUi(this);
-    setupGui();
 
     connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelKeywords, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(textDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
+    connect(toolPrint, SIGNAL(clicked()), this, SLOT(slotPrint()));
+    connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
 
-    QFont f = font();
-
-
+    slotSetupGui();
 
 }
 
@@ -51,15 +53,43 @@ CDetailsPrj::~CDetailsPrj()
 void CDetailsPrj::resizeEvent(QResizeEvent * e)
 {
     QWidget::resizeEvent(e);
-    setupGui();
+    slotSetupGui();
+}
+
+void CDetailsPrj::getTrackProfile(CGisItemTrk * trk, QImage& image)
+{
+    CPlotProfile plot(trk, IPlot::eModeIcon, this);
+    plot.setSolid(true);
+    plot.save(image);
+}
+
+void CDetailsPrj::getTrackOverview(CGisItemTrk * trk, QImage& image)
+{
+    CPlotTrack plot(trk, this);
+    plot.save(image);
+}
+
+
+void CDetailsPrj::slotSetupGui()
+{
+    textDesc->document()->setTextWidth(textDesc->size().width() - 20);
+    draw(*textDesc->document());
 }
 
 #define ROOT_FRAME_MARGIN 5
-void CDetailsPrj::setupGui()
-{
-    int w = width();
+#define CHAR_PER_LINE 130
 
-    QFont f = font();
+void CDetailsPrj::draw(QTextDocument& doc)
+{
+    int cnt, w = doc.textWidth();
+
+    QFontMetrics fm(QFont(font().family(),10));
+    int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE *  fm.width("X")));
+    if(pointSize == 0) return;
+
+    QFont f = textDesc->font();
+    f.setPointSize(pointSize);
+    textDesc->setFont(f);
 
     QTextFrameFormat fmtFrameStandard;
     fmtFrameStandard.setTopMargin(5);
@@ -88,13 +118,16 @@ void CDetailsPrj::setupGui()
     fmtTableStandard.setHeaderRowCount(1);
     fmtTableStandard.setTopMargin(10);
     fmtTableStandard.setBottomMargin(20);
-    fmtTableStandard.setWidth(w - 2 * ROOT_FRAME_MARGIN);
+    fmtTableStandard.setWidth(w - 4 * ROOT_FRAME_MARGIN);
 
     QVector<QTextLength> constraints;
     constraints << QTextLength(QTextLength::FixedLength, 32);
     constraints << QTextLength(QTextLength::VariableLength, 50);
     constraints << QTextLength(QTextLength::VariableLength, 100);
     fmtTableStandard.setColumnWidthConstraints(constraints);
+
+    QTextTableFormat fmtTableInfo;
+    fmtTableInfo.setBorder(0);
 
 
     QTextCharFormat fmtCharHeader;
@@ -118,11 +151,11 @@ void CDetailsPrj::setupGui()
     }
     labelKeywords->setText(IGisItem::toLink(isReadOnly, "keywords", keywords));
 
-    textDesc->document()->clear();
 
-    QTextDocument * doc = textDesc->document();
-    doc->rootFrame()->setFrameFormat(fmtFrameRoot);
-    QTextCursor cursor = doc->rootFrame()->firstCursorPosition();
+
+    doc.clear();
+    doc.rootFrame()->setFrameFormat(fmtFrameRoot);
+    QTextCursor cursor = doc.rootFrame()->firstCursorPosition();
 
     QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
     {
@@ -168,6 +201,14 @@ void CDetailsPrj::setupGui()
         table->cellAt(0,eInfo).firstCursorPosition().insertText(tr("Info"));
         table->cellAt(0,eComment).firstCursorPosition().insertText(tr("Comment"));
 
+        cnt = 1;
+        foreach(CGisItemWpt * wpt, wpts)
+        {
+            table->cellAt(cnt,eSym).firstCursorPosition().insertImage(wpt->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+            table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(wpt->getInfo());
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(true, wpt->getComment(), wpt->getDescription(), wpt->getLinks()));
+            cnt++;
+        }
 
         cursor.setPosition(table->lastPosition() + 1);
     }
@@ -184,6 +225,49 @@ void CDetailsPrj::setupGui()
         table->cellAt(0,eInfo).firstCursorPosition().insertText(tr("Info"));
         table->cellAt(0,eComment).firstCursorPosition().insertText(tr("Comment"));
 
+        cnt = 1;
+
+        foreach(CGisItemTrk * trk, trks)
+        {
+            table->cellAt(cnt,eSym).firstCursorPosition().insertImage(trk->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+
+            int w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
+            int h1 = qRound(w1/2.0);
+
+            if(w1 < 300)
+            {
+                table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(trk->getInfo());
+
+                QTextTable * table1 = table->cellAt(cnt,eInfo).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+
+                QImage profile(w1,h1,QImage::Format_ARGB32);
+                getTrackProfile(trk, profile);
+                table1->cellAt(0,0).firstCursorPosition().insertImage(profile);
+
+                QImage overview(h1,h1,QImage::Format_ARGB32);
+                getTrackOverview(trk, overview);
+                table1->cellAt(0,1).firstCursorPosition().insertImage(overview);
+
+            }
+            else
+            {
+                QTextTable * table1 = table->cellAt(cnt,eInfo).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
+
+                table1->cellAt(0,0).firstCursorPosition().insertHtml(trk->getInfo());
+
+                QImage profile(w1,h1,QImage::Format_ARGB32);
+                getTrackProfile(trk, profile);
+                table1->cellAt(0,1).firstCursorPosition().insertImage(profile);
+
+                QImage overview(h1,h1,QImage::Format_ARGB32);
+                getTrackOverview(trk, overview);
+                table1->cellAt(0,2).firstCursorPosition().insertImage(overview);
+            }
+
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(true, trk->getComment(), trk->getDescription(), trk->getLinks()));
+
+            cnt++;
+        }
 
 
         cursor.setPosition(table->lastPosition() + 1);
@@ -219,7 +303,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
         }
         prj.setKeywords(keywords);
     }
-    setupGui();
+    slotSetupGui();
 }
 
 void CDetailsPrj::slotLinkActivated(const QUrl& url)
@@ -232,7 +316,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         {
             prj.setDescription(dlg.getHtml());
         }
-        setupGui();
+        slotSetupGui();
     }
     else if(url.toString() == "links")
     {
@@ -242,7 +326,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         {
             prj.setLinks(links);
         }
-        setupGui();
+        slotSetupGui();
     }
     else
     {
@@ -250,5 +334,20 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
     }
 }
 
+void CDetailsPrj::slotPrint()
+{
+    QPrinter printer;
+    QPrintDialog dialog(&printer, this);
+    dialog.setWindowTitle(tr("Print Diary"));
+    if (dialog.exec() != QDialog::Accepted)
+        return;
 
+    QTextDocument doc;
+    QSizeF pageSize = printer.pageRect(QPrinter::DevicePixel).size();
+    doc.setPageSize(pageSize);
+    draw(doc);
+    doc.print(&printer);
+
+    slotSetupGui();
+}
 

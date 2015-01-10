@@ -25,6 +25,7 @@
 
 class CDetailsPrj;
 class IGisProject;
+class CGisItemTrk;
 
 class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
 {
@@ -39,9 +40,13 @@ class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
     private slots:
         void slotLinkActivated(const QString& link);
         void slotLinkActivated(const QUrl& url);
+        void slotPrint();
+        void slotSetupGui();
 
     private:
-        void setupGui();
+        void getTrackProfile(CGisItemTrk * trk, QImage& image);
+        void getTrackOverview(CGisItemTrk * trk, QImage& image);        
+        void draw(QTextDocument& doc);
 
         enum eTblCol{eSym, eInfo, eComment, eMax};
 

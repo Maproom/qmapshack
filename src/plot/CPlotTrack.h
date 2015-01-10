@@ -28,6 +28,7 @@ class CPlotTrack : public QWidget, public ITrack
 {
     public:
         CPlotTrack(QWidget * parent);
+        CPlotTrack(CGisItemTrk * trk, QWidget * parent);
         virtual ~CPlotTrack();
 
         void setMouseMoveFocus(qreal lon, qreal lat);

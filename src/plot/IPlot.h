@@ -35,6 +35,9 @@ class IPlot : public QWidget
         virtual void updateData() = 0;
         virtual void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt) = 0;
 
+        void save(QImage& image);
+        void setSolid(bool yes){solid = yes;}
+
     protected:
         void setYLabel(const QString& str);
         void setXLabel(const QString& str);
@@ -80,6 +83,7 @@ class IPlot : public QWidget
 
         bool showScale;
         bool thinLine;
+        bool solid;
 
         QImage buffer;
         QPoint posMouse;

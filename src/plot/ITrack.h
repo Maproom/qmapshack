@@ -37,6 +37,8 @@ class ITrack
         void setTrack(CGisItemTrk * track);
         void setTrack(const QPolygonF &track);
 
+        void save(QImage& image);
+
     protected:
         void setupProjection(const QRectF &boundingBox);
         void updateData();

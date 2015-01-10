@@ -12,6 +12,7 @@ find_package(Qt5Script)
 find_package(Qt5Sql)
 find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
+find_package(Qt5PrintSupport)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 
@@ -413,6 +414,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Script
     Qt5::Sql
     Qt5::WebKitWidgets
+    Qt5::PrintSupport
     CGetOpt
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

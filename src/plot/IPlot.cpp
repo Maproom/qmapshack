@@ -58,6 +58,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , needsRedraw(true)
     , showScale(true)
     , thinLine(false)
+    , solid(true)
     , posMouse(NOPOINT)
     , trk(trk)
     , fm(font())
@@ -445,7 +446,7 @@ void IPlot::draw()
     {
         QRect r = rect();
         r.adjust(2,2,-2,-2);
-        if(underMouse() || posMouse != NOPOINT)
+        if(underMouse() || posMouse != NOPOINT || solid)
         {
             p.setPen(CCanvas::penBorderBlue);
             p.setOpacity(1.0);
@@ -834,3 +835,11 @@ void IPlot::drawDecoration( QPainter &p )
     }
 }
 
+void IPlot::save(QImage& image)
+{
+    resize(image.size());
+    setSizes();
+    buffer = QImage(image.size(), QImage::Format_ARGB32);
+    draw();
+    image = buffer;
+}

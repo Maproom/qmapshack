@@ -110,6 +110,25 @@ void CGisItemRte::setSymbol()
     setIcon(CGisListWks::eColumnName, icon);
 }
 
+void CGisItemRte::setComment(const QString& str)
+{
+    rte.cmt = str;
+    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
+}
+
+void CGisItemRte::setDescription(const QString& str)
+{
+    rte.desc = str;
+    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
+}
+
+void CGisItemRte::setLinks(const QList<link_t>& links)
+{
+    rte.links = links;
+    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+}
+
+
 
 QString CGisItemRte::getInfo() const
 {

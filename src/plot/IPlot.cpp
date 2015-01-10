@@ -448,7 +448,7 @@ void IPlot::draw()
         r.adjust(2,2,-2,-2);
         if(underMouse() || posMouse != NOPOINT || solid)
         {
-            p.setPen(CCanvas::penBorderBlue);
+            p.setPen(solid ? CCanvas::penBorderBlack : CCanvas::penBorderBlue);
             p.setOpacity(1.0);
         }
         else

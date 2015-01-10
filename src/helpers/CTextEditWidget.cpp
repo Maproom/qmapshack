@@ -83,20 +83,6 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     comboStyle->addItem("Ordered List (Alpha upper)");
     connect(comboStyle, SIGNAL(activated(int)), this, SLOT(textStyle(int)));
 
-    connect(comboFont, SIGNAL(activated(const QString &)), this, SLOT(textFamily(const QString &)));
-
-    comboSize->setObjectName("comboSize");
-    comboSize->setEditable(true);
-
-    QFontDatabase db;
-    foreach(int size, db.standardSizes())
-    {
-        comboSize->addItem(QString::number(size));
-    }
-
-    connect(comboSize, SIGNAL(activated(const QString &)), this, SLOT(textSize(const QString &)));
-    comboSize->setCurrentIndex(comboSize->findText(QString::number(QApplication::font().pointSize())));
-
     connect(textEdit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)), this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
     connect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorPositionChanged()));
 
@@ -148,7 +134,10 @@ QString CTextEditWidget::getHtml()
     if(re.exactMatch(str))
     {
         str = re.cap(1);
-        str = str.replace("body>","div>").replace("<body","<div");
+
+        QRegExp re1("<body.*>");
+        re1.setMinimal(true);
+        str = str.replace("body>","div>").replace(re1,"<div>");
     }
 
     return str;
@@ -190,21 +179,6 @@ void CTextEditWidget::textAlign(QAction *a)
         textEdit->setAlignment(Qt::AlignJustify);
 }
 
-
-void CTextEditWidget::textFamily(const QString &f)
-{
-    QTextCharFormat fmt;
-    fmt.setFontFamily(f);
-    mergeFormatOnWordOrSelection(fmt);
-}
-
-
-void CTextEditWidget::textSize(const QString &p)
-{
-    QTextCharFormat fmt;
-    fmt.setFontPointSize(p.toFloat());
-    mergeFormatOnWordOrSelection(fmt);
-}
 
 
 void CTextEditWidget::textStyle(int styleIndex)
@@ -295,8 +269,6 @@ void CTextEditWidget::mergeFormatOnWordOrSelection(const QTextCharFormat &format
 
 void CTextEditWidget::fontChanged(const QFont &f)
 {
-    comboFont->setCurrentIndex(comboFont->findText(QFontInfo(f).family()));
-    comboSize->setCurrentIndex(comboSize->findText(QString::number(f.pointSize())));
     actionTextBold->setChecked(f.bold());
     actionTextItalic->setChecked(f.italic());
     actionTextUnderline->setChecked(f.underline());

@@ -37,6 +37,22 @@ class CGisItemRte : public IGisItem, public IGisLine
             QPointF focus;
         };
 
+        struct rte_t
+        {
+            rte_t() : number(0) {}
+            // -- all gpx tags - start
+            QString name;
+            QString cmt;
+            QString desc;
+            QString src;
+            QList<link_t> links;
+            quint64 number;
+            QString type;
+            QVector<rtept_t> pts;
+            // -- all gpx tags - stop
+            QMap<QString, QVariant> extensions;
+        };
+
         CGisItemRte(const QDomNode &xml, IGisProject *parent);
         CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
         CGisItemRte(const history_t& hist, IGisProject * project);
@@ -61,8 +77,15 @@ class CGisItemRte : public IGisItem, public IGisLine
         void setDataFromPolyline(const QPolygonF& line){}
         void getPolylineFromData(QPolygonF& line){}
 
+        const QString& getComment(){return rte.cmt;}
+        const QString& getDescription(){return rte.desc;}
+        const QList<link_t>& getLinks(){return rte.links;}
+
+        void setComment(const QString& str);
+        void setDescription(const QString& str);
+        void setLinks(const QList<link_t>& links);
+
     private:
-        struct rte_t;
         void deriveSecondaryData();
         void setSymbol();
         void readRte(const QDomNode& xml, rte_t& rte);
@@ -70,21 +93,6 @@ class CGisItemRte : public IGisItem, public IGisLine
         static key_t keyUserFocus;
 
 
-        struct rte_t
-        {
-            rte_t() : number(0) {}
-            // -- all gpx tags - start
-            QString name;
-            QString cmt;
-            QString desc;
-            QString src;
-            QList<link_t> links;
-            quint64 number;
-            QString type;
-            QVector<rtept_t> pts;
-            // -- all gpx tags - stop
-            QMap<QString, QVariant> extensions;
-        };
 
         static const QPen penBackground;
         QPen penForeground;

@@ -103,7 +103,6 @@ class IGisProject : public QTreeWidgetItem
         const QString& getDescription() const {return metadata.desc;}
         const QList<IGisItem::link_t>& getLinks() const {return metadata.links;}
 
-
         void setName(const QString& str);
         void setKeywords(const QString& str);
         void setDescription(const QString& str);

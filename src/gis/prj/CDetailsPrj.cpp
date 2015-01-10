@@ -162,7 +162,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
         QTextCursor cursor1(diaryFrame);
 
         cursor1.setCharFormat(fmtCharStandard);
-        cursor1.setBlockFormat(fmtBlockStandard);
+        cursor1.setBlockFormat(fmtBlockStandard);                
         cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
 
         cursor.setPosition(cursor1.position()+1);
@@ -206,7 +206,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
         {
             table->cellAt(cnt,eSym).firstCursorPosition().insertImage(wpt->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
             table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(wpt->getInfo());
-            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(true, wpt->getComment(), wpt->getDescription(), wpt->getLinks()));
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly(), wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
             cnt++;
         }
 
@@ -264,7 +264,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
                 table1->cellAt(0,2).firstCursorPosition().insertImage(overview);
             }
 
-            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(true, trk->getComment(), trk->getDescription(), trk->getLinks()));
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly(), trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
 
             cnt++;
         }
@@ -308,23 +308,99 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
 
 void CDetailsPrj::slotLinkActivated(const QUrl& url)
 {
-    if(url.toString() == "description")
+    if(url.path() == "description")
     {
-        CTextEditWidget dlg(0);
-        dlg.setHtml(prj.getDescription());
-        if(dlg.exec() == QDialog::Accepted)
+        if(url.hasQuery())
         {
-            prj.setDescription(dlg.getHtml());
+            IGisItem::key_t key;
+            key.project = prj.getKey();
+
+            QString query = url.query();
+            if(query.startsWith("key="))
+            {
+                key.item = query.mid(4);
+            }
+
+            IGisItem * item = prj.getItemByKey(key);
+            if(item)
+            {
+                CTextEditWidget dlg(this);
+                dlg.setHtml(item->getDescription());
+                if(dlg.exec() == QDialog::Accepted)
+                {
+                    item->setDescription(dlg.getHtml());
+                }
+            }
+        }
+        else
+        {
+            CTextEditWidget dlg(0);
+            dlg.setHtml(prj.getDescription());
+            if(dlg.exec() == QDialog::Accepted)
+            {
+                prj.setDescription(dlg.getHtml());
+            }
         }
         slotSetupGui();
     }
-    else if(url.toString() == "links")
+    else if(url.path() == "comment")
     {
-        QList<IGisItem::link_t> links = prj.getLinks();
-        CLinksDialog dlg(links, 0);
-        if(dlg.exec() == QDialog::Accepted)
+        if(url.hasQuery())
         {
-            prj.setLinks(links);
+            IGisItem::key_t key;
+            key.project = prj.getKey();
+
+            QString query = url.query();
+            if(query.startsWith("key="))
+            {
+                key.item = query.mid(4);
+            }
+
+            IGisItem * item = prj.getItemByKey(key);
+            if(item)
+            {
+                CTextEditWidget dlg(this);
+                dlg.setHtml(item->getComment());
+                if(dlg.exec() == QDialog::Accepted)
+                {
+                    item->setComment(dlg.getHtml());
+                }
+            }
+        }
+        slotSetupGui();
+    }
+    else if(url.path() == "links")
+    {
+        if(url.hasQuery())
+        {
+            IGisItem::key_t key;
+            key.project = prj.getKey();
+
+            QString query = url.query();
+            if(query.startsWith("key="))
+            {
+                key.item = query.mid(4);
+            }
+
+            IGisItem * item = prj.getItemByKey(key);
+            if(item)
+            {
+                QList<IGisItem::link_t> links = item->getLinks();
+                CLinksDialog dlg(links, 0);
+                if(dlg.exec() == QDialog::Accepted)
+                {
+                    item->setLinks(links);
+                }
+            }
+        }
+        else
+        {
+            QList<IGisItem::link_t> links = prj.getLinks();
+            CLinksDialog dlg(links, 0);
+            if(dlg.exec() == QDialog::Accepted)
+            {
+                prj.setLinks(links);
+            }
         }
         slotSetupGui();
     }

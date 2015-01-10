@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>396</width>
+    <width>427</width>
     <height>341</height>
    </rect>
   </property>
@@ -234,14 +234,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QFontComboBox" name="comboFont"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboSize"/>
-     </item>
-    </layout>
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
    </item>
    <item>
     <widget class="QTextEdit" name="textEdit"/>

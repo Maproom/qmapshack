@@ -141,7 +141,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
 
     setWindowTitle(prj.getName());
 
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", prj.getName()));
+    labelName->setText(IGisItem::toLink(isReadOnly, "name", prj.getName(), ""));
     labelTime->setText(IUnit::datetime2string(prj.getTime(), false));
 
     QString keywords = prj.getKeywords();
@@ -149,7 +149,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
     {
         keywords = tr("none");
     }
-    labelKeywords->setText(IGisItem::toLink(isReadOnly, "keywords", keywords));
+    labelKeywords->setText(IGisItem::toLink(isReadOnly, "keywords", keywords, ""));
 
 
 

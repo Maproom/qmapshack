@@ -200,7 +200,7 @@ void CDetailsOvlArea::setupGui()
     }
 
 
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", area.getName()));
+    labelName->setText(IGisItem::toLink(isReadOnly, "name", area.getName(), ""));
 
     comboColor->setCurrentIndex(area.getColorIdx());
     comboColor->setEnabled(!isReadOnly);

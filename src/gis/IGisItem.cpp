@@ -551,21 +551,27 @@ QString IGisItem::removeHtml(const QString &str)
 }
 
 
-QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str)
+QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString &key)
 {
     if(isReadOnly)
     {
         return QString("%1").arg(str);
     }
-
-    return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+    if(key.isEmpty())
+    {
+        return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+    }
+    else
+    {
+        return QString("<a href='%1?key=%3'>%2</a>").arg(href).arg(str).arg(key);
+    }
 }
 
-QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links)
+QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString &key)
 {
     QString str;
 
-    str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"));
+    str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
     if(removeHtml(cmt).simplified().isEmpty())
     {
         str += QObject::tr("<p>--- no comment ---</p>");
@@ -575,7 +581,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         str += cmt;
     }
 
-    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"));
+    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
     if(removeHtml(desc).simplified().isEmpty())
     {
         str += QObject::tr("<p>--- no description ---</p>");
@@ -585,7 +591,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         str += desc;
     }
 
-    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"));
+    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
     if(links.isEmpty())
     {
         str += QObject::tr("<p>--- no links ---</p>");
@@ -601,11 +607,11 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     return str;
 }
 
-QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<link_t>& links)
+QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key)
 {
     QString str;
 
-    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"));
+    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
     if(removeHtml(desc).simplified().isEmpty())
     {
         str += QObject::tr("<p>--- no description ---</p>");
@@ -615,7 +621,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
         str += desc;
     }
 
-    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"));
+    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
     if(links.isEmpty())
     {
         str += QObject::tr("<p>--- no links ---</p>");

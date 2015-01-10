@@ -293,9 +293,9 @@ class IGisItem : public QTreeWidgetItem
         void cutHistory();
 
         static QString removeHtml(const QString &str);
-        static QString createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links);
-        static QString createText(bool isReadOnly, const QString& desc, const QList<link_t>& links);
-        static QString toLink(bool isReadOnly, const QString& href, const QString& str);
+        static QString createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString& key = "");
+        static QString createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key = "");
+        static QString toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key);
 
         static QString noKey;
 

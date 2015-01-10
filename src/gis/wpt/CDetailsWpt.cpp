@@ -74,8 +74,8 @@ void CDetailsWpt::setupGui()
 
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());   
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName()));
-    labelPositon->setText(IGisItem::toLink(isReadOnly, "position", strPos));
+    labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName(), ""));
+    labelPositon->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));
 
     if(wpt.isTainted())
     {
@@ -89,21 +89,21 @@ void CDetailsWpt::setupGui()
     if(wpt.getElevation() != NOINT)
     {
         IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
-        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", QString("%1 %2").arg(val).arg(unit)));
+        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", QString("%1 %2").arg(val).arg(unit), ""));
     }
     else
     {
-        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", "--"));
+        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", "--", ""));
     }
 
     if(wpt.getProximity() != NOFLOAT)
     {
         IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
-        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", QString("%1 %2").arg(val).arg(unit)));
+        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", QString("%1 %2").arg(val).arg(unit), ""));
     }
     else
     {
-        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", "--"));
+        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", "--", ""));
     }
 
     if(wpt.getTime().isValid())

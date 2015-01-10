@@ -56,7 +56,7 @@ CCanvas::CCanvas(QWidget *parent)
     int count = 1;
     while(1)
     {
-        QString name = tr("Workspace %1").arg(count);
+        QString name = tr("View %1").arg(count);
         if(CMainWindow::self().findChild<CCanvas*>(name) == 0)
         {
             setObjectName(name);

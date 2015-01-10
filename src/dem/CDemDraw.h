@@ -38,7 +38,7 @@ class CDemDraw : public IDrawContext
         /**
            @brief This is called most likely from the item itself to call it's loadConfig() method.
 
-           As the setup of a map is stored in the context of the workspace the correct groups have
+           As the setup of a map is stored in the context of the view the correct groups have
            to be set prior to call the item's loadConfig() method. However the item does not know
            all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
            and to call loadConfig();

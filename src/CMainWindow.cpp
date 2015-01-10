@@ -75,7 +75,7 @@ CMainWindow::CMainWindow()
 
     connect(actionAbout, SIGNAL(triggered()), this, SLOT(slotAbout()));
     connect(actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
-    connect(actionAddMapWorkspace, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
+    connect(actionAddMapView, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(update()));
     connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
@@ -85,7 +85,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
     connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
     connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
-    connect(actionSetupMapWks, SIGNAL(triggered()), this, SLOT(slotSetupMapWks()));
+    connect(actionSetupMapView, SIGNAL(triggered()), this, SLOT(slotSetupMapView()));
     connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
     connect(actionSetupUnits, SIGNAL(triggered()), this, SLOT(slotSetupUnits()));
     connect(actionSetupWorkspace, SIGNAL(triggered()), this, SLOT(slotSetupWorkspace()));
@@ -518,7 +518,7 @@ void CMainWindow::slotSetupDemPath()
     CDemDraw::setupDemPath();
 }
 
-void CMainWindow::slotSetupMapWks()
+void CMainWindow::slotSetupMapView()
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas == 0)

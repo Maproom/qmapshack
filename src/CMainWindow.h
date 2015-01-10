@@ -76,7 +76,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
         void slotSetupGrid();
         void slotSetupMapPath();
         void slotSetupDemPath();
-        void slotSetupMapWks();
+        void slotSetupMapView();
         void slotSetupTimeZone();
         void slotSetupUnits();
         void slotSetupWorkspace();

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Setup Map Workspace...</string>
+   <string>Setup Map View...</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

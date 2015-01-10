@@ -69,7 +69,7 @@
     <property name="title">
      <string>View</string>
     </property>
-    <addaction name="actionAddMapWorkspace"/>
+    <addaction name="actionAddMapView"/>
     <addaction name="separator"/>
     <addaction name="actionShowScale"/>
     <addaction name="actionShowGrid"/>
@@ -81,7 +81,7 @@
     <addaction name="actionSetupMapFont"/>
     <addaction name="actionSetupUnits"/>
     <addaction name="actionSetupGrid"/>
-    <addaction name="actionSetupMapWks"/>
+    <addaction name="actionSetupMapView"/>
     <addaction name="actionSetupTimeZone"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
@@ -202,13 +202,16 @@
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_2"/>
   </widget>
-  <action name="actionAddMapWorkspace">
+  <action name="actionAddMapView">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/32x32/AddMapWorkspace.png</normaloff>:/icons/32x32/AddMapWorkspace.png</iconset>
    </property>
    <property name="text">
-    <string>Add Map Workspace</string>
+    <string>Add Map View</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Map View</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
@@ -349,13 +352,16 @@
     <string>Help</string>
    </property>
   </action>
-  <action name="actionSetupMapWks">
+  <action name="actionSetupMapView">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/32x32/SetupMapWorkspace.png</normaloff>:/icons/32x32/SetupMapWorkspace.png</iconset>
    </property>
    <property name="text">
-    <string>Setup Map Workspace</string>
+    <string>Setup Map View</string>
+   </property>
+   <property name="toolTip">
+    <string>Setup Map View</string>
    </property>
   </action>
   <action name="actionLoadGISData">

@@ -58,7 +58,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , needsRedraw(true)
     , showScale(true)
     , thinLine(false)
-    , solid(true)
+    , solid(false)
     , posMouse(NOPOINT)
     , trk(trk)
     , fm(font())
@@ -800,7 +800,7 @@ void IPlot::drawYTic( QPainter &p )
 
 void IPlot::drawLegend(QPainter& p)
 {
-    if(data->lines.size() < 2) return;
+    if((data->lines.size() < 2) || (mode == eModeIcon)) return;
 
     int penIdx = 0;
     QFontMetrics fm(p.font());

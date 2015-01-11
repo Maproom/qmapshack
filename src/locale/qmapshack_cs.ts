@@ -10,7 +10,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="59"/>
         <source>View %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pohled %1</translation>
     </message>
 </context>
 <context>
@@ -128,24 +128,24 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="194"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Cestovní body&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="201"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="225"/>
         <source>Info</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="202"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="226"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámka</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="218"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Stopy&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="286"/>
@@ -170,7 +170,7 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="417"/>
         <source>Print Diary</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisk deníku</translation>
     </message>
 </context>
 <context>
@@ -1761,7 +1761,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="14"/>
         <source>Setup Map View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit pohled na mapu...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="22"/>
@@ -2016,7 +2016,7 @@ není platným vymezením soustavy souřadnic
         <location filename="../gis/prj/IDetailsPrj.ui" line="58"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="99"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="85"/>
@@ -2712,13 +2712,13 @@ není platným vymezením soustavy souřadnic
         <location filename="../IMainWindow.ui" line="211"/>
         <location filename="../IMainWindow.ui" line="214"/>
         <source>Add Map View</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat pohled na mapu</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="361"/>
         <location filename="../IMainWindow.ui" line="364"/>
         <source>Setup Map View</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit pohled na mapu</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="373"/>
@@ -3553,7 +3553,7 @@ nebo
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="14"/>
         <source>Setup workspace...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit pracovní oblast...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="35"/>

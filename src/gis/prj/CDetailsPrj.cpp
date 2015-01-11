@@ -152,6 +152,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
     labelKeywords->setText(IGisItem::toLink(isReadOnly, "keywords", keywords, ""));
 
 
+    int scrollVal = textDesc->verticalScrollBar()->value();
 
     doc.clear();
     doc.rootFrame()->setFrameFormat(fmtFrameRoot);
@@ -273,10 +274,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
         cursor.setPosition(table->lastPosition() + 1);
     }
 
-
-    textDesc->moveCursor(QTextCursor::Start) ;
-    textDesc->ensureCursorVisible() ;
-
+    textDesc->verticalScrollBar()->setValue(scrollVal);
 }
 
 void CDetailsPrj::slotLinkActivated(const QString& link)
@@ -413,6 +411,9 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
 void CDetailsPrj::slotPrint()
 {
     QPrinter printer;
+
+    printer.setResolution(150);
+    printer.setPageSize(QPrinter::A4);
     QPrintDialog dialog(&printer, this);
     dialog.setWindowTitle(tr("Print Diary"));
     if (dialog.exec() != QDialog::Accepted)

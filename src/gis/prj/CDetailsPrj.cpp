@@ -82,6 +82,7 @@ void CDetailsPrj::slotSetupGui()
 void CDetailsPrj::draw(QTextDocument& doc)
 {
     int cnt, w = doc.textWidth();
+    int nItems = 0;
 
     QFontMetrics fm(QFont(font().family(),10));
     int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE *  fm.width("X")));
@@ -179,6 +180,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
         if(trk != 0)
         {
             trks << trk;
+            nItems++;
             continue;
         }
 
@@ -186,9 +188,14 @@ void CDetailsPrj::draw(QTextDocument& doc)
         if(wpt != 0)
         {
             wpts << wpt;
+            nItems++;
             continue;
         }
     }
+
+    int n=1;
+    QProgressDialog progress(tr("Build diary..."), tr("Abort"), 0, 100, this);
+    progress.setWindowModality(Qt::WindowModal);
 
     if(!wpts.isEmpty())
     {
@@ -205,6 +212,13 @@ void CDetailsPrj::draw(QTextDocument& doc)
         cnt = 1;
         foreach(CGisItemWpt * wpt, wpts)
         {
+            progress.setValue(n++*100.0/nItems);
+            if(progress.wasCanceled())
+            {
+                return;
+            }
+
+
             table->cellAt(cnt,eSym).firstCursorPosition().insertImage(wpt->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
             table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(wpt->getInfo());
             table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly(), wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
@@ -229,7 +243,13 @@ void CDetailsPrj::draw(QTextDocument& doc)
         cnt = 1;
 
         foreach(CGisItemTrk * trk, trks)
-        {
+        {            
+            progress.setValue(n++*100.0/nItems);
+            if(progress.wasCanceled())
+            {
+                return;
+            }
+
             table->cellAt(cnt,eSym).firstCursorPosition().insertImage(trk->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
             int w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);

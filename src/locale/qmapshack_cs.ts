@@ -4377,7 +4377,7 @@ Název souboru: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="296"/>
-        <source>Set artifical timestamps with delta of %1 sec.</source>
+        <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Uměle utvořená časová razítka nastavena s odstupem %1 s.</translation>
     </message>
     <message>

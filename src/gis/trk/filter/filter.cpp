@@ -293,7 +293,7 @@ void CGisItemTrk::filterObscureDate(int delta)
         }
 
         deriveSecondaryData();
-        changed(QObject::tr("Set artifical timestamps with delta of %1 sec.").arg(delta), "://icons/48x48/Time.png");
+        changed(QObject::tr("Set artificial timestamps with delta of %1 sec.").arg(delta), "://icons/48x48/Time.png");
     }
 }
 

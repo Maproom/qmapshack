@@ -4491,7 +4491,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="296"/>
-        <source>Set artifical timestamps with delta of %1 sec.</source>
+        <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Künstliche Zeitmarken mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>

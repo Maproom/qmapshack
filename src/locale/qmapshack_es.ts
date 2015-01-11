@@ -4335,7 +4335,7 @@ Filename: %1</source>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="296"/>
-        <source>Set artifical timestamps with delta of %1 sec.</source>
+        <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

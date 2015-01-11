@@ -175,6 +175,13 @@ bool CDBProject::save()
             {
                 continue;
             }
+
+            if(item->text(CGisListWks::eColumnDecoration).isEmpty())
+            {
+                info->keysChildren << item->getKey().item;
+                continue;
+            }
+
             quint64 idItem = 0;
 
             // serialize complete history of item

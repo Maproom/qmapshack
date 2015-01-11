@@ -570,70 +570,105 @@ QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& st
 QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString &key)
 {
     QString str;
+    bool isEmpty;
 
-    str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
-    if(removeHtml(cmt).simplified().isEmpty())
+    isEmpty = removeHtml(cmt).simplified().isEmpty();
+    if(!isReadOnly || !isEmpty)
     {
-        str += QObject::tr("<p>--- no comment ---</p>");
-    }
-    else
-    {
-        str += cmt;
-    }
 
-    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
-    if(removeHtml(desc).simplified().isEmpty())
-    {
-        str += QObject::tr("<p>--- no description ---</p>");
-    }
-    else
-    {
-        str += desc;
-    }
-
-    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
-    if(links.isEmpty())
-    {
-        str += QObject::tr("<p>--- no links ---</p>");
-    }
-    else
-    {
-        foreach(const link_t& link, links)
+        str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
+        if(isEmpty)
         {
-            str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+            str += QObject::tr("<p>--- no comment ---</p>");
+        }
+        else
+        {
+            str += cmt;
         }
     }
 
+    isEmpty = removeHtml(desc).simplified().isEmpty();
+    if(!isReadOnly || !isEmpty)
+    {
+        str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
+        if(removeHtml(desc).simplified().isEmpty())
+        {
+            str += QObject::tr("<p>--- no description ---</p>");
+        }
+        else
+        {
+            str += desc;
+        }
+    }
+
+    isEmpty = links.isEmpty();
+    if(!isReadOnly || !isEmpty)
+    {
+        str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
+        if(isEmpty)
+        {
+            str += QObject::tr("<p>--- no links ---</p>");
+        }
+        else
+        {
+            foreach(const link_t& link, links)
+            {
+                if(link.text.isEmpty())
+                {
+                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.uri.toString());
+                }
+                else
+                {
+                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+                }
+            }
+        }
+    }
     return str;
 }
 
 QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key)
 {
     QString str;
+    bool isEmpty;
 
-    str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
-    if(removeHtml(desc).simplified().isEmpty())
+    isEmpty = removeHtml(desc).simplified().isEmpty();
+    if(!isReadOnly || !isEmpty)
     {
-        str += QObject::tr("<p>--- no description ---</p>");
-    }
-    else
-    {
-        str += desc;
-    }
-
-    str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
-    if(links.isEmpty())
-    {
-        str += QObject::tr("<p>--- no links ---</p>");
-    }
-    else
-    {
-        foreach(const link_t& link, links)
+        str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
+        if(removeHtml(desc).simplified().isEmpty())
         {
-            str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+            str += QObject::tr("<p>--- no description ---</p>");
+        }
+        else
+        {
+            str += desc;
         }
     }
 
+    isEmpty = links.isEmpty();
+    if(!isReadOnly || !isEmpty)
+    {
+        str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
+        if(isEmpty)
+        {
+            str += QObject::tr("<p>--- no links ---</p>");
+        }
+        else
+        {
+            foreach(const link_t& link, links)
+            {
+                if(link.text.isEmpty())
+                {
+                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.uri.toString());
+                }
+                else
+                {
+                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
+                }
+            }
+        }
+    }
     return str;
 }
 

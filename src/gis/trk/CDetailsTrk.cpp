@@ -18,6 +18,7 @@
 
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
+#include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterMedian.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
@@ -57,6 +58,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterDouglasPeuker(trk, treeFilter));
+
+    item = new QTreeWidgetItem(item0);
+    treeFilter->setItemWidget(item,0, new CFilterReset(trk, treeFilter));
 
     item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterDelete(trk, treeFilter));

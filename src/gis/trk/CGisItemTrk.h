@@ -231,6 +231,8 @@ class CGisItemTrk : public IGisItem, public IGisLine
          */
         void filterReducePoints(qreal dist);
 
+        void filterReset();
+
         void filterDelete();
 
         void filterSmoothProfile(int points);

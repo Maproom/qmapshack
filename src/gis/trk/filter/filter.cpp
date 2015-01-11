@@ -96,6 +96,22 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     changed(QObject::tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
 }
 
+void CGisItemTrk::filterReset()
+{
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            trkpt_t& pt = seg.pts[n];
+            pt.flags &= ~trkpt_t::eHidden;
+        }
+    }
+    deriveSecondaryData();
+    changed(QObject::tr("Reset all hidden track points to visible"), "://icons/48x48/PointHide.png");
+}
+
 void CGisItemTrk::filterDelete()
 {
     for(int i = 0; i < trk.segs.size(); i++)

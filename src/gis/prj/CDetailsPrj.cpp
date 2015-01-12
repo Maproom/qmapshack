@@ -21,6 +21,7 @@
 #include "gis/IGisItem.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CTextEditWidget.h"
 #include "helpers/CLinksDialog.h"
 #include "plot/CPlotProfile.h"
@@ -89,6 +90,8 @@ bool sortWptByTime(const CGisItemWpt * wpt1, const CGisItemWpt * wpt2)
 {
     return wpt1->getTime() < wpt2->getTime();
 }
+
+
 
 void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 {
@@ -186,6 +189,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     QList<CGisItemTrk*> trks;
     QList<CGisItemWpt*> wpts;
+    QList<CGisItemOvlArea*> areas;
     const int N = prj.childCount();
     for(int i = 0; i < N; i++)
     {
@@ -201,6 +205,14 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         if(wpt != 0)
         {
             wpts << wpt;
+            nItems++;
+            continue;
+        }
+
+        CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(prj.child(i));
+        if(area != 0)
+        {
+            areas << area;
             nItems++;
             continue;
         }
@@ -309,6 +321,37 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
             cnt++;
         }
 
+
+        cursor.setPosition(table->lastPosition() + 1);
+    }
+
+    if(!areas.isEmpty())
+    {
+        cursor.insertHtml(tr("<h2>Areas</h2>"));
+        QTextTable * table = cursor.insertTable(areas.count()+1, eMax, fmtTableStandard);
+
+        table->cellAt(0,eSym).setFormat(fmtCharHeader);
+        table->cellAt(0,eInfo).setFormat(fmtCharHeader);
+        table->cellAt(0,eComment).setFormat(fmtCharHeader);
+
+        table->cellAt(0,eInfo).firstCursorPosition().insertText(tr("Info"));
+        table->cellAt(0,eComment).firstCursorPosition().insertText(tr("Comment"));
+
+        cnt = 1;
+        foreach(CGisItemOvlArea * area, areas)
+        {
+            progress.setValue(n++*100.0/nItems);
+            if(progress.wasCanceled())
+            {
+                return;
+            }
+
+
+            table->cellAt(cnt,eSym).firstCursorPosition().insertImage(area->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+            table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(area->getInfo());
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
+            cnt++;
+        }
 
         cursor.setPosition(table->lastPosition() + 1);
     }

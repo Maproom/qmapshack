@@ -148,7 +148,7 @@ class CGisItemWpt : public IGisItem
         QPointF getPosition(){return QPointF(wpt.lon, wpt.lat);}
         qint32 getElevation(){return wpt.ele;}
         qreal getProximity(){return proximity;}
-        const QDateTime& getTime(){return wpt.time;}
+        const QDateTime& getTime()const{return wpt.time;}
         const QString& getIconName(){return wpt.sym;}
         const QString& getComment(){return wpt.cmt;}
         const QString& getDescription(){return wpt.desc;}

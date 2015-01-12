@@ -78,6 +78,7 @@ class CGisItemTrk : public IGisItem, public IGisLine
         const QString& getDescription(){return trk.desc;}
         const QList<link_t>& getLinks(){return trk.links;}
         void getPolylineFromData(QPolygonF& l);
+        const QDateTime& getTimeStart()const {return timeStart;}
 
         void setName(const QString& str);
         void setColor(int idx);

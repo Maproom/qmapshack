@@ -59,6 +59,35 @@
       </widget>
      </item>
      <item>
+      <widget class="QRadioButton" name="radioSortByTime">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Sort By Time</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioOrderAsProject">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Keep Order of Project</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="toolPrint">
        <property name="toolTip">
         <string>Print diary</string>

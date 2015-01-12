@@ -39,6 +39,8 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     connect(textDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(toolPrint, SIGNAL(clicked()), this, SLOT(slotPrint()));
     connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
+    connect(radioSortByTime, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
+    connect(radioOrderAsProject, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
 
     slotSetupGui();
 
@@ -77,6 +79,16 @@ void CDetailsPrj::slotSetupGui()
 
 #define ROOT_FRAME_MARGIN 5
 #define CHAR_PER_LINE 130
+
+bool sortTrkByTime(const CGisItemTrk * trk1, const CGisItemTrk * trk2)
+{
+    return trk1->getTimeStart() < trk2->getTimeStart();
+}
+
+bool sortWptByTime(const CGisItemWpt * wpt1, const CGisItemWpt * wpt2)
+{
+    return wpt1->getTime() < wpt2->getTime();
+}
 
 void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 {
@@ -192,6 +204,12 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
             nItems++;
             continue;
         }
+    }
+
+    if(radioSortByTime->isChecked())
+    {
+        qSort(trks.begin(), trks.end(), sortTrkByTime);
+        qSort(wpts.begin(), wpts.end(), sortWptByTime);
     }
 
     int n=1;
@@ -330,11 +348,10 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
     if(url.path() == "name")
     {
         QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
-        if(name.isEmpty())
+        if(!name.isEmpty())
         {
-            return;
-        }
-        prj.setName(name);
+            prj.setName(name);
+        }        
         slotSetupGui();
     }
     else if(url.path() == "description")

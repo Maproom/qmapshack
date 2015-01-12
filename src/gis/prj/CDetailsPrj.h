@@ -46,7 +46,7 @@ class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
     private:
         void getTrackProfile(CGisItemTrk * trk, QImage& image);
         void getTrackOverview(CGisItemTrk * trk, QImage& image);        
-        void draw(QTextDocument& doc);
+        void draw(QTextDocument& doc, bool printable);
 
         enum eTblCol{eSym, eInfo, eComment, eMax};
 

@@ -35,7 +35,6 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
 {
     setupUi(this);
 
-    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelKeywords, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(textDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(toolPrint, SIGNAL(clicked()), this, SLOT(slotPrint()));
@@ -73,13 +72,13 @@ void CDetailsPrj::getTrackOverview(CGisItemTrk * trk, QImage& image)
 void CDetailsPrj::slotSetupGui()
 {
     textDesc->document()->setTextWidth(textDesc->size().width() - 20);
-    draw(*textDesc->document());
+    draw(*textDesc->document(), false);
 }
 
 #define ROOT_FRAME_MARGIN 5
 #define CHAR_PER_LINE 130
 
-void CDetailsPrj::draw(QTextDocument& doc)
+void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 {
     int cnt, w = doc.textWidth();
     int nItems = 0;
@@ -138,11 +137,10 @@ void CDetailsPrj::draw(QTextDocument& doc)
     fmtCharHeader.setForeground(Qt::white);
 
 
-    bool isReadOnly = false;
+    bool isReadOnly = printable;
 
     setWindowTitle(prj.getName());
 
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", prj.getName(), ""));
     labelTime->setText(IUnit::datetime2string(prj.getTime(), false));
 
     QString keywords = prj.getKeywords();
@@ -158,6 +156,9 @@ void CDetailsPrj::draw(QTextDocument& doc)
     doc.clear();
     doc.rootFrame()->setFrameFormat(fmtFrameRoot);
     QTextCursor cursor = doc.rootFrame()->firstCursorPosition();
+
+    cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getName()), ""));
+
 
     QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
     {
@@ -221,7 +222,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
 
             table->cellAt(cnt,eSym).firstCursorPosition().insertImage(wpt->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
             table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(wpt->getInfo());
-            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly(), wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly()||printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
             cnt++;
         }
 
@@ -285,7 +286,7 @@ void CDetailsPrj::draw(QTextDocument& doc)
                 table1->cellAt(0,2).firstCursorPosition().insertImage(overview);
             }
 
-            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly(), trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly()||printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
 
             cnt++;
         }
@@ -326,7 +327,17 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
 
 void CDetailsPrj::slotLinkActivated(const QUrl& url)
 {
-    if(url.path() == "description")
+    if(url.path() == "name")
+    {
+        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
+        if(name.isEmpty())
+        {
+            return;
+        }
+        prj.setName(name);
+        slotSetupGui();
+    }
+    else if(url.path() == "description")
     {
         if(url.hasQuery())
         {
@@ -442,7 +453,7 @@ void CDetailsPrj::slotPrint()
     QTextDocument doc;
     QSizeF pageSize = printer.pageRect(QPrinter::DevicePixel).size();
     doc.setPageSize(pageSize);
-    draw(doc);
+    draw(doc, true);
     doc.print(&printer);
 
     slotSetupGui();

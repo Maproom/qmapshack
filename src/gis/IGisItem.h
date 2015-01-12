@@ -182,9 +182,9 @@ class IGisItem : public QTreeWidgetItem
         */
         virtual QString getInfo() const = 0;
 
-        virtual const QString& getComment() = 0;
-        virtual const QString& getDescription() = 0;
-        virtual const QList<link_t>& getLinks() = 0;
+        virtual const QString& getComment()const = 0;
+        virtual const QString& getDescription()const = 0;
+        virtual const QList<link_t>& getLinks()const = 0;
 
 
         virtual void setComment(const QString& str) = 0;

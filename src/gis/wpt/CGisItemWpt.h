@@ -145,15 +145,15 @@ class CGisItemWpt : public IGisItem
 
         const QString& getName() const {return wpt.name;}
         QString getInfo() const;
-        QPointF getPosition(){return QPointF(wpt.lon, wpt.lat);}
-        qint32 getElevation(){return wpt.ele;}
-        qreal getProximity(){return proximity;}
+        QPointF getPosition()const{return QPointF(wpt.lon, wpt.lat);}
+        qint32 getElevation()const{return wpt.ele;}
+        qreal getProximity()const{return proximity;}
         const QDateTime& getTime()const{return wpt.time;}
-        const QString& getIconName(){return wpt.sym;}
-        const QString& getComment(){return wpt.cmt;}
-        const QString& getDescription(){return wpt.desc;}
-        const geocache_t& getGeoCache(){return geocache;}
-        const QList<link_t>& getLinks(){return wpt.links;}
+        const QString& getIconName()const{return wpt.sym;}
+        const QString& getComment()const{return wpt.cmt;}
+        const QString& getDescription()const{return wpt.desc;}
+        const geocache_t& getGeoCache()const{return geocache;}
+        const QList<link_t>& getLinks()const{return wpt.links;}
 
         IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
         QPointF getPointCloseBy(const QPoint& ){return posScreen;}

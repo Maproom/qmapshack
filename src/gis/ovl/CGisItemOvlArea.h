@@ -48,15 +48,15 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
         QDataStream& operator>>(QDataStream& stream);
 
         const QString& getName() const;
-        int getColorIdx(){return colorIdx;}
+        int getColorIdx()const{return colorIdx;}
         QString getInfo() const;
         void getPolylineFromData(QPolygonF& line);
-        const QString& getComment(){return area.cmt;}
-        const QString& getDescription(){return area.desc;}
-        const QList<link_t>& getLinks(){return area.links;}
-        qint32 getWidth(){return area.width;}
-        qint32 getStyle(){return area.style;}
-        bool getOpacity(){return area.opacity;}
+        const QString& getComment()const{return area.cmt;}
+        const QString& getDescription()const{return area.desc;}
+        const QList<link_t>& getLinks()const{return area.links;}
+        qint32 getWidth()const{return area.width;}
+        qint32 getStyle()const{return area.style;}
+        bool getOpacity()const{return area.opacity;}
 
         void setName(const QString& str);
         void setColor(int idx);

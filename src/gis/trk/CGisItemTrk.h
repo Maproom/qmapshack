@@ -74,9 +74,9 @@ class CGisItemTrk : public IGisItem, public IGisLine
         QString getInfoTrkPt(const trkpt_t& pt);
         QString getInfoProgress(const trkpt_t& pt);
         quint32 getTotalElapsedSeconds(){return totalElapsedSeconds;}
-        const QString& getComment(){return trk.cmt;}
-        const QString& getDescription(){return trk.desc;}
-        const QList<link_t>& getLinks(){return trk.links;}
+        const QString& getComment()const{return trk.cmt;}
+        const QString& getDescription()const{return trk.desc;}
+        const QList<link_t>& getLinks()const{return trk.links;}
         void getPolylineFromData(QPolygonF& l);
         const QDateTime& getTimeStart()const {return timeStart;}
 

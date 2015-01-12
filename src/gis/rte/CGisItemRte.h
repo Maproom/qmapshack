@@ -77,9 +77,9 @@ class CGisItemRte : public IGisItem, public IGisLine
         void setDataFromPolyline(const QPolygonF& line){}
         void getPolylineFromData(QPolygonF& line){}
 
-        const QString& getComment(){return rte.cmt;}
-        const QString& getDescription(){return rte.desc;}
-        const QList<link_t>& getLinks(){return rte.links;}
+        const QString& getComment()const{return rte.cmt;}
+        const QString& getDescription()const{return rte.desc;}
+        const QList<link_t>& getLinks()const{return rte.links;}
 
         void setComment(const QString& str);
         void setDescription(const QString& str);

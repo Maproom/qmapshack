@@ -54,7 +54,7 @@ void CPlotDistance::updateData()
         }
         else
         {
-            setXLabel(tr("time [h]"));
+            setXLabel(tr("time"));
         }
         setYLabel(tr("distance. [%1]").arg(IUnit::self().baseunit));
     }

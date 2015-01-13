@@ -100,7 +100,6 @@ const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
-/// used to create a new track from a part of an existing track
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, -1)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -146,7 +145,6 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-/// used to create a copy of track with new parent
 CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -169,7 +167,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-/// usd to create a track from a line of coordinates
+
 CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -187,7 +185,7 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-/// used to create track from GPX file
+
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)

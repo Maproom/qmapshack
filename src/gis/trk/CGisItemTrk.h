@@ -55,12 +55,54 @@ public:
         , eDrawRange
     };
 
+    /**
+       @brief Used to create a new track from a part of an existing track
+       @param name
+       @param idx1
+       @param idx2
+       @param srctrk
+       @param project
+     */
     CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const trk_t &srctrk, IGisProject *project);
+    /**
+       @brief Used to create a copy of track with new parent
+       @param parentTrk
+       @param project
+       @param idx
+       @param clone
+     */
     CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx, bool clone);
+    /**
+       @brief Used to restore a track from a line of coordinates
+       @param l
+       @param name
+       @param project
+       @param idx
+     */
     CGisItemTrk(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
+    /**
+       @brief Used to create track from GPX file
+       @param xml
+       @param project
+     */
     CGisItemTrk(const QDomNode &xml, IGisProject *project);
+    /**
+       @brief Used to restore track from history structure
+       @param hist
+       @param project
+     */
     CGisItemTrk(const history_t& hist, IGisProject * project);
+    /**
+       @brief Used to restore track from database
+       @param id
+       @param db
+       @param project
+     */
     CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project);
+    /**
+       @brief CGisItemTrk
+       @param trk1
+     */
     CGisItemTrk(const CQlgtTrack& trk1);
     virtual ~CGisItemTrk();
 
@@ -258,24 +300,64 @@ public:
 
        @note All filter implementations are found in src/gis/trk/filter/filter.cpp
 
-       @param dist
+       @param dist the Douglas Peuker distance in meters
      */
     void filterReducePoints(qreal dist);
+    /**
+       @brief filterReset
 
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
     void filterReset();
+    /**
+       @brief filterDelete
 
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
     void filterDelete();
+    /**
+       @brief filterSmoothProfile
 
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+
+       @param points  size of Median filter
+     */
     void filterSmoothProfile(int points);
-
+    /**
+       @brief filterReplaceElevation
+     */
     void filterReplaceElevation();
+    /**
+       @brief filterOffsetElevation
 
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+
+       @param offset elevation offset in meters
+     */
     void filterOffsetElevation(int offset);
+    /**
+       @brief filterNewDate
 
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+
+       @param date new date for start of track
+     */
     void filterNewDate(const QDateTime& date);
+    /**
+       @brief filterObscureDate
 
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+
+       @param delta intervall to increase timestamps in seconds
+     */
     void filterObscureDate(int delta);
+    /**
+       @brief filterSpeed
 
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+
+       @param speed speed in meter per seconds
+     */
     void filterSpeed(qreal speed);
 
     static const QColor lineColors[TRK_N_COLORS];

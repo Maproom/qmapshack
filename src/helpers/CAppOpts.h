@@ -26,17 +26,19 @@
 
 class CAppOpts
 {
-    public:
-        const bool debug;        // -d, print debug messages
-        const bool nosplash;     // -n, do not display splash screen
-        const QString configfile;
-        const QStringList arguments;
+public:
+    const bool debug;            // -d, print debug messages
+    const bool nosplash;         // -n, do not display splash screen
+    const QString configfile;
+    const QStringList arguments;
 
-        CAppOpts(bool doDebug, bool noSplash, const QString& config, const QStringList& args)
-            : debug(doDebug)
-            , nosplash(noSplash)
-            , configfile(config)
-            , arguments(args) {}
+    CAppOpts(bool doDebug, bool noSplash, const QString& config, const QStringList& args)
+        : debug(doDebug)
+        , nosplash(noSplash)
+        , configfile(config)
+        , arguments(args)
+    {
+    }
 };
 
 extern CAppOpts *qlOpts;

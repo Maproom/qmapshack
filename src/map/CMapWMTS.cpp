@@ -16,15 +16,15 @@
 
 **********************************************************************************************/
 
-#include "map/CMapWMTS.h"
 #include "map/CMapDraw.h"
+#include "map/CMapWMTS.h"
 #include "map/cache/CDiskCache.h"
 #include "units/IUnit.h"
 
 
+#include <QtNetwork>
 #include <QtWidgets>
 #include <QtXml>
-#include <QtNetwork>
 
 #include <ogr_spatialref.h>
 #include <proj_api.h>
@@ -218,9 +218,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             matrix.tileWidth    = xmlTileMatrix.namedItem("TileWidth").toElement().text().toInt();
             matrix.tileHeight   = xmlTileMatrix.namedItem("TileHeight").toElement().text().toInt();
             matrix.matrixWidth  = xmlTileMatrix.namedItem("MatrixWidth").toElement().text().toInt();
-            matrix.matrixHeight = xmlTileMatrix.namedItem("MatrixHeight").toElement().text().toInt();                        
+            matrix.matrixHeight = xmlTileMatrix.namedItem("MatrixHeight").toElement().text().toInt();
         }
-
     }
     // ----  done reading XML file
 
@@ -251,7 +250,7 @@ void CMapWMTS::getLayers(QListWidget& list)
     }
 
     int i = 0;
-    foreach(const layer_t& layer, layers)
+    foreach(const layer_t &layer, layers)
     {
         QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
@@ -299,7 +298,7 @@ void CMapWMTS::loadConfig(QSettings& cfg)
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    foreach(const QString& str, enabled)
+    foreach(const QString &str, enabled)
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -346,7 +345,7 @@ void CMapWMTS::slotQueueChanged()
     QMutexLocker lock(&mutex);
 
     if(!urlQueue.isEmpty() && urlPending.size() < 6)
-    {        
+    {
         // request up to 6 pending request
         for(int i = 0; i < (6 - urlPending.size()); i++)
         {
@@ -401,7 +400,6 @@ void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
         {
             // read image data
             img.loadFromData(reply->readAll());
-
         }
         // always store image to cache, the cache will take care of NULL images
         diskCache->store(url, img);
@@ -452,14 +450,20 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
     qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
     qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
 
-    if(x1 < -180.0*DEG_TO_RAD) x1 = -180*DEG_TO_RAD;
-    if(x2 >  180.0*DEG_TO_RAD) x2 =  180*DEG_TO_RAD;
+    if(x1 < -180.0*DEG_TO_RAD)
+    {
+        x1 = -180*DEG_TO_RAD;
+    }
+    if(x2 >  180.0*DEG_TO_RAD)
+    {
+        x2 =  180*DEG_TO_RAD;
+    }
 
 
     QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
 
     // draw layers
-    foreach(const layer_t& layer, layers)
+    foreach(const layer_t &layer, layers)
     {
         if(!layer.boundingBox.intersects(viewport) || !layer.enabled)
         {
@@ -484,9 +488,9 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
 
         // search matrix ID of tile level with best matching scale
         QString tileMatrixId;
-        QPointF s1 = (pt2 - pt1)/QPointF(buf.image.width(), buf.image.height());        
+        QPointF s1 = (pt2 - pt1)/QPointF(buf.image.width(), buf.image.height());
         qreal d = NOFLOAT;
-        foreach(const QString& key, tileset.tilematrix.keys())
+        foreach(const QString &key, tileset.tilematrix.keys())
         {
             const tilematrix_t& tilematrix = tileset.tilematrix[key];
             qreal s2 = tilematrix.scale * 0.28e-3;
@@ -538,15 +542,39 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
         qint32 row2 = qFloor((pt2.y() - tilematrix.topLeft.y()) / ( yscale * tilematrix.tileHeight));
 
 
-        if(col1 < minCol) col1 = minCol;
-        if(col1 > maxCol) col1 = maxCol;
-        if(row1 < minRow) row1 = minRow;
-        if(row1 > maxRow) row1 = maxRow;
+        if(col1 < minCol)
+        {
+            col1 = minCol;
+        }
+        if(col1 > maxCol)
+        {
+            col1 = maxCol;
+        }
+        if(row1 < minRow)
+        {
+            row1 = minRow;
+        }
+        if(row1 > maxRow)
+        {
+            row1 = maxRow;
+        }
 
-        if(col2 < minCol) col2 = minCol;
-        if(col2 > maxCol) col2 = maxCol;
-        if(row2 < minRow) row2 = minRow;
-        if(row2 > maxRow) row2 = maxRow;
+        if(col2 < minCol)
+        {
+            col2 = minCol;
+        }
+        if(col2 > maxCol)
+        {
+            col2 = maxCol;
+        }
+        if(row2 < minRow)
+        {
+            row2 = minRow;
+        }
+        if(row2 > maxRow)
+        {
+            row2 = maxRow;
+        }
 
 
         // start to request tiles. draw tiles in cache, queue urls of tile yet to be requested
@@ -554,7 +582,6 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf)
         {
             for(qint32 col = col1; col <= col2; col++)
             {
-
                 QString url = layer.resourceURL;
                 url = url.replace("{TileMatrix}",tileMatrixId, Qt::CaseInsensitive);
                 url = url.replace("{TileRow}",QString::number(row), Qt::CaseInsensitive);

@@ -28,47 +28,45 @@ class GDALDataset;
 class CMapVRT : public IMap
 {
     Q_OBJECT
-    public:
-        CMapVRT(const QString& filename, CMapDraw *parent);
-        virtual ~CMapVRT();
+public:
+    CMapVRT(const QString& filename, CMapDraw *parent);
+    virtual ~CMapVRT();
 
-        void draw(IDrawContext::buffer_t& buf);
-
-
-
-    private:
-        QString filename;
-        /// instance of GDAL dataset
-        GDALDataset * dataset;
-        /// number of color bands used by the *vrt
-        int rasterBandCount;
-        /// QT representation of the vrt's color table
-        QVector<QRgb> colortable;
-
-        /// width in number of px
-        quint32 xsize_px;
-        /// height in number of px
-        quint32 ysize_px;
-
-        /// scale [px/m]
-        qreal xscale;
-        /// scale [px/m]
-        qreal yscale;
-
-        qreal xrot;
-        qreal yrot;
-
-        QPointF ref1;
-        QPointF ref2;
-        QPointF ref3;
-        QPointF ref4;
-
-        QTransform trFwd;
-        QTransform trInv;
-
-        bool hasOverviews;
+    void draw(IDrawContext::buffer_t& buf);
 
 
+
+private:
+    QString filename;
+    /// instance of GDAL dataset
+    GDALDataset * dataset;
+    /// number of color bands used by the *vrt
+    int rasterBandCount;
+    /// QT representation of the vrt's color table
+    QVector<QRgb> colortable;
+
+    /// width in number of px
+    quint32 xsize_px;
+    /// height in number of px
+    quint32 ysize_px;
+
+    /// scale [px/m]
+    qreal xscale;
+    /// scale [px/m]
+    qreal yscale;
+
+    qreal xrot;
+    qreal yrot;
+
+    QPointF ref1;
+    QPointF ref2;
+    QPointF ref3;
+    QPointF ref4;
+
+    QTransform trFwd;
+    QTransform trInv;
+
+    bool hasOverviews;
 };
 
 #endif //CMAPVRT_H

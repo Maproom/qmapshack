@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBFolderGroup.h"
 #include "gis/CGisListDB.h"
+#include "gis/db/CDBFolderGroup.h"
 
 CDBFolderGroup::CDBFolderGroup(QSqlDatabase& db, quint64 key, QTreeWidgetItem * parent)
     : IDBFolder(false, db, eTypeGroup, key, parent)
@@ -28,6 +28,5 @@ CDBFolderGroup::CDBFolderGroup(QSqlDatabase& db, quint64 key, QTreeWidgetItem * 
 
 CDBFolderGroup::~CDBFolderGroup()
 {
-
 }
 

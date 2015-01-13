@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "map/CMapRMAP.h"
-#include "map/CMapDraw.h"
-#include "units/IUnit.h"
 #include "canvas/CCanvas.h"
+#include "map/CMapDraw.h"
+#include "map/CMapRMAP.h"
+#include "units/IUnit.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -116,7 +116,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     QString datum;
     QStringList lines = QString(charbuf).split("\r\n");
 
-    foreach(const QString& line, lines)
+    foreach(const QString &line, lines)
     {
 //        qDebug() << line;
         if(line.startsWith("Version="))
@@ -260,26 +260,61 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     }
     else
     {
-
         xref1  =  180 * DEG_TO_RAD;
         yref1  =  -90 * DEG_TO_RAD;
         xref2  = -180 * DEG_TO_RAD;
         yref2  =   90 * DEG_TO_RAD;
     }
 
-    if(c0.u < xref1) xref1 = c0.u;
-    if(c0.u > xref2) xref2 = c0.u;
-    if(c1.u < xref1) xref1 = c1.u;
-    if(c1.u > xref2) xref2 = c1.u;
-    if(c2.u < xref1) xref1 = c2.u;
-    if(c2.u > xref2) xref2 = c2.u;
+    if(c0.u < xref1)
+    {
+        xref1 = c0.u;
+    }
+    if(c0.u > xref2)
+    {
+        xref2 = c0.u;
+    }
+    if(c1.u < xref1)
+    {
+        xref1 = c1.u;
+    }
+    if(c1.u > xref2)
+    {
+        xref2 = c1.u;
+    }
+    if(c2.u < xref1)
+    {
+        xref1 = c2.u;
+    }
+    if(c2.u > xref2)
+    {
+        xref2 = c2.u;
+    }
 
-    if(c0.v > yref1) yref1 = c0.v;
-    if(c0.v < yref2) yref2 = c0.v;
-    if(c1.v > yref1) yref1 = c1.v;
-    if(c1.v < yref2) yref2 = c1.v;
-    if(c2.v > yref1) yref1 = c2.v;
-    if(c2.v < yref2) yref2 = c2.v;
+    if(c0.v > yref1)
+    {
+        yref1 = c0.v;
+    }
+    if(c0.v < yref2)
+    {
+        yref2 = c0.v;
+    }
+    if(c1.v > yref1)
+    {
+        yref1 = c1.v;
+    }
+    if(c1.v < yref2)
+    {
+        yref2 = c1.v;
+    }
+    if(c2.v > yref1)
+    {
+        yref1 = c2.v;
+    }
+    if(c2.v < yref2)
+    {
+        yref2 = c2.v;
+    }
 
     scale.rx() = (xref2 - xref1) / xsize_px;
     scale.ry() = (yref2 - yref1) / ysize_px;
@@ -308,16 +343,14 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
 
 bool CMapRMAP::setProjection(const QString& projection, const QString& datum)
 {
-
     QString projstr;
     if(projection.startsWith("0,UTM"))
     {
         QStringList vals    = projection.split(",");
-        int  zone           = vals[2].toInt();
+        int zone           = vals[2].toInt();
         bool isSouth        = vals[3] != "N";
 
         projstr += QString("+proj=utm +zone=%1 %2").arg(zone).arg(isSouth ? "+south" : "");
-
     }
     if(projection.startsWith("1,"))
     {
@@ -348,24 +381,30 @@ bool CMapRMAP::setProjection(const QString& projection, const QString& datum)
     pjsrc = pj_init_plus(projstr.toLocal8Bit().data());
     if(pjsrc == 0)
     {
-        return false;
+        return(false);
     }
 
     char * ptr = pj_get_def(pjsrc,0);
     qDebug() << "rmap:" << ptr;
 
-    return true;
+    return(true);
 }
 
 CMapRMAP::level_t& CMapRMAP::findBestLevel(const QPointF& s)
 {
     int i = levels.size() - 1;
-    if(s.x() < levels[0].xscale) return levels[0];
-    if(s.x() > levels[i].xscale) return levels[i];
+    if(s.x() < levels[0].xscale)
+    {
+        return( levels[0]);
+    }
+    if(s.x() > levels[i].xscale)
+    {
+        return( levels[i]);
+    }
 
     int j = 0;
     qreal dsx = NOFLOAT;
-    for(;j < levels.size(); j++)
+    for(; j < levels.size(); j++)
     {
         level_t& level = levels[j];
         if(qAbs(level.xscale - s.x()) < dsx)
@@ -375,13 +414,12 @@ CMapRMAP::level_t& CMapRMAP::findBestLevel(const QPointF& s)
         }
     }
 
-    return levels[i];
+    return(levels[i]);
 }
 
 
 void CMapRMAP::draw(IDrawContext::buffer_t& buf)
 {
-
     if(map->needsRedraw())
     {
         return;
@@ -415,15 +453,39 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf)
     int idxx2 =  ceil((p2.x() - xref1) / (level.xscale * tileSizeX));
     int idxy2 =  ceil((p2.y() - yref1) / (level.yscale * tileSizeY));
 
-    if(idxx1 < 0)               idxx1 = 0;
-    if(idxx1 >= level.xTiles)   idxx1 = level.xTiles;
-    if(idxx2 < 0)               idxx2 = 0;
-    if(idxx2 >= level.xTiles)   idxx2 = level.xTiles;
+    if(idxx1 < 0)
+    {
+        idxx1 = 0;
+    }
+    if(idxx1 >= level.xTiles)
+    {
+        idxx1 = level.xTiles;
+    }
+    if(idxx2 < 0)
+    {
+        idxx2 = 0;
+    }
+    if(idxx2 >= level.xTiles)
+    {
+        idxx2 = level.xTiles;
+    }
 
-    if(idxy1 < 0)               idxy1 = 0;
-    if(idxy1 >= level.yTiles)   idxy1 = level.yTiles;
-    if(idxy2 < 0)               idxy2 = 0;
-    if(idxy2 >= level.yTiles)   idxy2 = level.yTiles;
+    if(idxy1 < 0)
+    {
+        idxy1 = 0;
+    }
+    if(idxy1 >= level.yTiles)
+    {
+        idxy1 = level.yTiles;
+    }
+    if(idxy2 < 0)
+    {
+        idxy2 = 0;
+    }
+    if(idxy2 >= level.yTiles)
+    {
+        idxy2 = level.yTiles;
+    }
 
     // ----- start drawing -----
     QPainter p(&buf.image);
@@ -446,7 +508,6 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf)
 
         for(int idxx = idxx1; idxx < idxx2; idxx++)
         {
-
             if(map->needsRedraw())
             {
                 break;
@@ -461,7 +522,10 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf)
             QImage img;
             img.load(&file,"JPG");
 
-            if(img.isNull()) continue;
+            if(img.isNull())
+            {
+                continue;
+            }
 
             qreal imgw = img.width();
             qreal imgh = img.height();
@@ -471,9 +535,9 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf)
             l[0].rx() = xref1 + idxx * tileSizeX * level.xscale;
             l[0].ry() = yref1 + idxy * tileSizeY * level.yscale;
             l[1].rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale;
-            l[1].ry() = yref1 +  idxy * tileSizeY * level.yscale ;
-            l[2].rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale ;
-            l[2].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale ;
+            l[1].ry() = yref1 +  idxy * tileSizeY * level.yscale;
+            l[2].rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale;
+            l[2].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale;
             l[3].rx() = xref1 +  idxx * tileSizeX * level.xscale;
             l[3].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale;
 

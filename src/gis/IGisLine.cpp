@@ -20,11 +20,9 @@
 
 IGisLine::IGisLine()
 {
-
 }
 
 IGisLine::~IGisLine()
 {
-
 }
 

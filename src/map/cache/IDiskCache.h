@@ -19,22 +19,22 @@
 #ifndef IDISKCACHE_H
 #define IDISKCACHE_H
 
-#include <QObject>
 #include <QMutex>
+#include <QObject>
 
 class IDiskCache : public QObject
 {
-    public:
-        IDiskCache(QObject *parent);
-        virtual ~IDiskCache();
+public:
+    IDiskCache(QObject *parent);
+    virtual ~IDiskCache();
 
-        virtual void store(const QString& key, QImage& img) = 0;
-        virtual void restore(const QString& key, QImage& img) = 0;
-        virtual bool contains(const QString& key) = 0;
+    virtual void store(const QString& key, QImage& img) = 0;
+    virtual void restore(const QString& key, QImage& img) = 0;
+    virtual bool contains(const QString& key) = 0;
 
 
-    protected:
-        QMutex mutex;
+protected:
+    QMutex mutex;
 };
 
 #endif //IDISKCACHE_H

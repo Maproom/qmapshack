@@ -16,15 +16,14 @@
 
 **********************************************************************************************/
 
-#include "helpers/CHistoryListWidget.h"
 #include "gis/CGisWidget.h"
+#include "helpers/CHistoryListWidget.h"
 
 #include <QtWidgets>
 
 CHistoryListWidget::CHistoryListWidget(QWidget *parent)
     : QListWidget(parent)
 {
-
     setIconSize(QSize(32,32));
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
@@ -36,7 +35,6 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
 
 CHistoryListWidget::~CHistoryListWidget()
 {
-
 }
 
 void CHistoryListWidget::setupHistory(IGisItem& gisItem)

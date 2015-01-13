@@ -20,26 +20,26 @@
 #define CLINKSDIALOG_H
 
 #include "gis/IGisItem.h"
-#include <QDialog>
 #include "ui_ILinksDialog.h"
+#include <QDialog>
 
 class CLinksDialog : public QDialog, private Ui::ILinksDialog
 {
     Q_OBJECT
-    public:
-        CLinksDialog(QList<IGisItem::link_t>& links, QWidget * parent);
-        virtual ~CLinksDialog();
+public:
+    CLinksDialog(QList<IGisItem::link_t>& links, QWidget * parent);
+    virtual ~CLinksDialog();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotAddLink();
-        void slotDelLink();
-        void slotItemSelectionChanged();
+private slots:
+    void slotAddLink();
+    void slotDelLink();
+    void slotItemSelectionChanged();
 
-    private:
-        QList<IGisItem::link_t>& links;
+private:
+    QList<IGisItem::link_t>& links;
 };
 
 #endif //CLINKSDIALOG_H

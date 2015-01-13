@@ -19,8 +19,8 @@
 #ifndef CMOUSERANGETRK_H
 #define CMOUSERANGETRK_H
 
-#include "mouse/IMouse.h"
 #include "gis/IGisItem.h"
+#include "mouse/IMouse.h"
 #include <QPointer>
 
 class CGisItemTrk;
@@ -31,41 +31,39 @@ class CScrOptRangeTrk;
 class CMouseRangeTrk : public IMouse
 {
     Q_OBJECT;
-    public:
-        CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * parent);
-        virtual ~CMouseRangeTrk();
+public:
+    CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * parent);
+    virtual ~CMouseRangeTrk();
 
-        void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
-        void mousePressEvent(QMouseEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
-        void mouseReleaseEvent(QMouseEvent *e);
-        void wheelEvent(QWheelEvent * e);
+    void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
+    void mousePressEvent(QMouseEvent * e);
+    void mouseMoveEvent(QMouseEvent * e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void wheelEvent(QWheelEvent * e);
 
-    private slots:
-        void slotHidePoints();
-        void slotShowPoints();
-        void slotCopy();
+private slots:
+    void slotHidePoints();
+    void slotShowPoints();
+    void slotCopy();
 
-    private:
-        IGisItem::key_t key;
+private:
+    IGisItem::key_t key;
 
-        enum state_e
-        {
-             eStateIdle
-            ,eStateMoveMap
-            ,eStateSelectRange
-            ,eStateRangeSelected
-        };
+    enum state_e
+    {
+        eStateIdle
+        ,eStateMoveMap
+        ,eStateSelectRange
+        ,eStateRangeSelected
+    };
 
-        state_e state;
+    state_e state;
 
-        QPointF anchor;
+    QPointF anchor;
 
-        QPoint lastPoint;
+    QPoint lastPoint;
 
-        QPointer<CScrOptRangeTrk> scrOptRange;
-
-
+    QPointer<CScrOptRangeTrk> scrOptRange;
 };
 
 #endif //CMOUSERANGETRK_H

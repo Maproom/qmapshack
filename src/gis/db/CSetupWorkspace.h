@@ -19,20 +19,19 @@
 #ifndef CSETUPWORKSPACE_H
 #define CSETUPWORKSPACE_H
 
-#include <QDialog>
 #include "ui_ISetupWorkspace.h"
+#include <QDialog>
 
 
 class CSetupWorkspace : public QDialog, private Ui::ISetupWorkspace
 {
     Q_OBJECT
-    public:
-        CSetupWorkspace(QWidget * parent);
-        virtual ~CSetupWorkspace();
+public:
+    CSetupWorkspace(QWidget * parent);
+    virtual ~CSetupWorkspace();
 
-    public slots:
-        void accept();
-
+public slots:
+    void accept();
 };
 
 #endif //CSETUPWORKSPACE_H

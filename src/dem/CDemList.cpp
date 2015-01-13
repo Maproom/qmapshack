@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "dem/CDemList.h"
 #include "dem/CDemItem.h"
+#include "dem/CDemList.h"
 
 #include <QtWidgets>
 
@@ -71,7 +71,6 @@ CDemList::CDemList(QWidget *parent)
 
 CDemList::~CDemList()
 {
-
 }
 
 void CDemList::clear()
@@ -81,12 +80,12 @@ void CDemList::clear()
 
 int CDemList::count()
 {
-    return treeWidget->topLevelItemCount();
+    return(treeWidget->topLevelItemCount());
 }
 
 CDemItem * CDemList::item(int i)
 {
-    return dynamic_cast<CDemItem *>(treeWidget->topLevelItem(i));
+    return(dynamic_cast<CDemItem *>(treeWidget->topLevelItem(i)));
 }
 
 void CDemList::updateHelpText()
@@ -118,7 +117,10 @@ void CDemList::updateHelpText()
 void CDemList::slotActivate()
 {
     CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
-    if(item == 0) return;
+    if(item == 0)
+    {
+        return;
+    }
 
     bool activated = item->toggleActivate();
     if(!activated)

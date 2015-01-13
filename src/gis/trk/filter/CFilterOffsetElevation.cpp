@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "units/IUnit.h"
+#include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "helpers/CSettings.h"
+#include "units/IUnit.h"
 
 CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)

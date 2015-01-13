@@ -23,21 +23,34 @@
 
 struct uintX
 {
-    uintX():val(0){}
-    operator quint64(){return val;}
+    uintX() : val(0)
+    {
+    }
+    operator quint64()
+    {
+        return( val);
+    }
     quint64 val;
 };
 
 struct intX
 {
-    intX():val(0){}
-    operator qint64(){return val;}
+    intX() : val(0)
+    {
+    }
+    operator qint64()
+    {
+        return( val);
+    }
     qint64 val;
 };
 
 struct utf8
 {
-    operator QString(){return val;}
+    operator QString()
+    {
+        return( val);
+    }
     QString val;
 };
 

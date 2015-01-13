@@ -20,15 +20,13 @@
 #include "CUnitImperial.h"
 
 CUnitImperial::CUnitImperial(QObject * parent)
-: IUnit(eTypeImperial, "ft", 3.28084, "ml/h", 2.23693164, parent)
+    : IUnit(eTypeImperial, "ft", 3.28084, "ml/h", 2.23693164, parent)
 {
-
 }
 
 
 CUnitImperial::~CUnitImperial()
 {
-
 }
 
 
@@ -44,7 +42,6 @@ void CUnitImperial::meter2elevation(qreal meter, QString& val, QString& unit)
         val.sprintf("%1.0f", meter * 3.28084);
         unit = "ft";
     }
-
 }
 
 
@@ -55,23 +52,28 @@ void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit)
         val  = "-";
         unit = "";
     }
-    else if(meter < 10) {
+    else if(meter < 10)
+    {
         val.sprintf("%1.1f", meter * 3.28084);
         unit = "ft";
     }
-    else if(meter < 1600) {
+    else if(meter < 1600)
+    {
         val.sprintf("%1.0f", meter * 3.28084);
         unit = "ft";
     }
-    else if(meter < 16000) {
+    else if(meter < 16000)
+    {
         val.sprintf("%1.2f", meter * 0.6213699E-3);
         unit = "ml";
     }
-    else if(meter < 32000) {
+    else if(meter < 32000)
+    {
         val.sprintf("%1.1f", meter * 0.6213699E-3);
         unit = "ml";
     }
-    else {
+    else
+    {
         val.sprintf("%1.0f", meter * 0.6213699E-3);
         unit = "ml";
     }
@@ -95,5 +97,5 @@ void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit)
 
 qreal CUnitImperial::elevation2meter(const QString& val)
 {
-    return val.toDouble() / 3.28084;
+    return(val.toDouble() / 3.28084);
 }

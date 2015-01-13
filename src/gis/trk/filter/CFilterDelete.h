@@ -19,24 +19,23 @@
 #ifndef CFILTERDELETE_H
 #define CFILTERDELETE_H
 
-#include <QWidget>
 #include "ui_IFilterDelete.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
 class CFilterDelete : public QWidget, private Ui::IFilterDelete
 {
     Q_OBJECT
-    public:
-        CFilterDelete(CGisItemTrk& trk, QWidget * parent);
-        virtual ~CFilterDelete();
+public:
+    CFilterDelete(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterDelete();
 
-    private slots:
-        void slotApply();
+private slots:
+    void slotApply();
 
-    private:
-        CGisItemTrk& trk;
-
+private:
+    CGisItemTrk& trk;
 };
 
 #endif //CFILTERDELETE_H

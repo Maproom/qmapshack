@@ -19,10 +19,10 @@
 #ifndef CDEMITEM_H
 #define CDEMITEM_H
 
-#include <QTreeWidgetItem>
 #include <QMutex>
 #include <QPointer>
 #include <QString>
+#include <QTreeWidgetItem>
 
 class IDem;
 class CDemDraw;
@@ -30,68 +30,67 @@ class QSettings;
 
 class CDemItem : public QTreeWidgetItem
 {
-    public:
-        CDemItem(QTreeWidget *parent, CDemDraw *dem);
-        virtual ~CDemItem();
+public:
+    CDemItem(QTreeWidget *parent, CDemDraw *dem);
+    virtual ~CDemItem();
 
-        void saveConfig(QSettings& cfg);
-        void loadConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg);
 
-        /**
-           @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronised.
-         */
-        static QMutex mutexActiveDems;
+    /**
+       @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronised.
+     */
+    static QMutex mutexActiveDems;
 
-        /**
-           @brief Query if dem objects are loaded
-           @return True if the internal list of dem objects is not empty.
-         */
-        bool isActivated();
-        /**
-           @brief Either loads or destroys internal map objects
-           @return True if the internal list of maps is not empty after the operation.
-         */
-        bool toggleActivate();
-        /**
-         * @brief Load all internal map objects
-         * @return Return true on success.
-         */
-        bool activate();
-        /**
-           @brief Delete all internal map objects
-         */
-        void deactivate();
-        /**
-           @brief Move item to top of list widget
-         */
-        void moveToTop();
-        void moveToBottom();
+    /**
+       @brief Query if dem objects are loaded
+       @return True if the internal list of dem objects is not empty.
+     */
+    bool isActivated();
+    /**
+       @brief Either loads or destroys internal map objects
+       @return True if the internal list of maps is not empty after the operation.
+     */
+    bool toggleActivate();
+    /**
+     * @brief Load all internal map objects
+     * @return Return true on success.
+     */
+    bool activate();
+    /**
+       @brief Delete all internal map objects
+     */
+    void deactivate();
+    /**
+       @brief Move item to top of list widget
+     */
+    void moveToTop();
+    void moveToBottom();
 
-        void updateIcon();
+    void updateIcon();
 
-        /**
-           @brief Show or hide child treewidget items
-           @param yes set true to add children, false will remove all children and delete the attached widgets
-         */
-        void showChildren(bool yes);
+    /**
+       @brief Show or hide child treewidget items
+       @param yes set true to add children, false will remove all children and delete the attached widgets
+     */
+    void showChildren(bool yes);
 
 
-    private:
-        friend class CDemDraw;
-        CDemDraw * dem;
-        /**
-           @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
-         */
-        QString         key;
-        /**
-           @brief List of map files forming that particular map
-         */
-        QString     filename;
-        /**
-           @brief List of loaded map objects when map is activated.
-         */
-        QPointer<IDem> demfile;
-
+private:
+    friend class CDemDraw;
+    CDemDraw * dem;
+    /**
+       @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
+     */
+    QString key;
+    /**
+       @brief List of map files forming that particular map
+     */
+    QString filename;
+    /**
+       @brief List of loaded map objects when map is activated.
+     */
+    QPointer<IDem> demfile;
 };
 
 #endif //CDEMITEM_H

@@ -19,34 +19,37 @@
 #ifndef CSELECTCOPYACTION_H
 #define CSELECTCOPYACTION_H
 
-#include <QDialog>
 #include "ui_ISelectCopyAction.h"
+#include <QDialog>
 
 class IGisItem;
 
 class CSelectCopyAction : public QDialog, private Ui::ISelectCopyAction
 {
     Q_OBJECT
-    public:
-        CSelectCopyAction(const IGisItem * src, const IGisItem * tar, QWidget * parent);
-        virtual ~CSelectCopyAction();
+public:
+    CSelectCopyAction(const IGisItem * src, const IGisItem * tar, QWidget * parent);
+    virtual ~CSelectCopyAction();
 
-        enum result_e
-        {
-            eResultNone,
-            eResultCopy,
-            eResultSkip,
-            eResultClone
-        };
+    enum result_e
+    {
+        eResultNone,
+        eResultCopy,
+        eResultSkip,
+        eResultClone
+    };
 
-        result_e getResult(){return result;}
-        bool allOthersToo();
+    result_e getResult()
+    {
+        return( result);
+    }
+    bool allOthersToo();
 
-    private slots:
-        void slotSelectResult();
+private slots:
+    void slotSelectResult();
 
-    private:
-        result_e result;
+private:
+    result_e result;
 };
 
 #endif //CSELECTCOPYACTION_H

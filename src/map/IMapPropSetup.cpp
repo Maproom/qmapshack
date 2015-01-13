@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "IMapPropSetup.h"
 #include "CMapDraw.h"
 #include "IMap.h"
+#include "IMapPropSetup.h"
 
 IMapPropSetup::IMapPropSetup(IMap *mapfile, CMapDraw *map)
     : mapfile(mapfile)
@@ -29,6 +29,5 @@ IMapPropSetup::IMapPropSetup(IMap *mapfile, CMapDraw *map)
 
 IMapPropSetup::~IMapPropSetup()
 {
-
 }
 

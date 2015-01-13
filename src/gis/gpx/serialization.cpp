@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
-#include "gis/prj/IGisProject.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/WptIcons.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "version.h"
 
 #include <QtXml>
@@ -134,7 +134,6 @@ static void readXml(const QDomNode& xml, const QString& tag, QString& value, boo
             value = "<pre>" + xml.namedItem(tag).toElement().text() + "</pre>";
             value = xml.namedItem(tag).toElement().text();
         }
-
     }
 }
 
@@ -144,7 +143,6 @@ static void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
     {
         QString time = xml.namedItem(tag).toElement().text();
         IUnit::parseTimestamp(time, value);
-
     }
 }
 
@@ -257,7 +255,6 @@ static void writeXml(QDomNode& xml, const QString& tag, const QString& val, bool
         QDomText text = xml.ownerDocument().createCDATASection(val);
         elem.appendChild(text);
         elem.setAttribute("html",isHtml ? "True" : "False");
-
     }
 }
 
@@ -303,7 +300,6 @@ static void writeXml(QDomNode& xml, const IGisItem::history_t& history)
             writeXml(xmlEvent,"ql:icon", event.icon);
             writeXml(xmlEvent,"ql:time", event.time);
             writeXml(xmlEvent,"ql:comment", event.comment);
-
         }
     }
 }
@@ -311,7 +307,6 @@ static void writeXml(QDomNode& xml, const IGisItem::history_t& history)
 
 void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
 {
-
     readXml(xml,"name", metadata.name);
     readXml(xml,"desc", metadata.desc);
 
@@ -376,11 +371,11 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
     gpx.setAttribute("xmlns:ql",ql_ns);
 
     QString schemaLocation = QString()
-        + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
-        + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
-        + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
-        + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd"
-        + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd";
+                             + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
+                             + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
+                             + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
+                             + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd"
+                             + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd";
 
     gpx.setAttribute("xsi:schemaLocation", schemaLocation);
 
@@ -413,7 +408,6 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
             xmlLink.setAttribute("href", metadata.author.link.uri.toString());
             writeXml(xmlLink, "text", metadata.author.link.text);
             writeXml(xmlLink, "type", metadata.author.link.type);
-
         }
     }
 
@@ -425,7 +419,6 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
         xmlCopyright.setAttribute("author", metadata.copyright.author);
         writeXml(xmlCopyright, "year", metadata.copyright.year);
         writeXml(xmlCopyright, "license", metadata.copyright.license);
-
     }
     writeXml(xmlMetadata, "link", metadata.links);
     writeXml(xmlMetadata, "time", metadata.time);
@@ -440,10 +433,9 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
         xmlBounds.setAttribute("minlon", metadata.bounds.left());
         xmlBounds.setAttribute("maxlat", metadata.bounds.top());
         xmlBounds.setAttribute("maxlon", metadata.bounds.right());
-
     }
 
-    return gpx;
+    return(gpx);
 }
 
 void CGisItemWpt::readGpx(const QDomNode& xml)
@@ -557,7 +549,6 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
         readXml(xmlLog, "groundspeak:text", log.text, log.textIsHtml);
 
         geocache.logs << log;
-
     }
     geocache.hasData = true;
 }
@@ -603,7 +594,7 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
         QDomElement xmlLogs = xmlCache.ownerDocument().createElement("groundspeak:logs");
         xmlCache.appendChild(xmlLogs);
 
-        foreach(const geocachelog_t& log, geocache.logs)
+        foreach(const geocachelog_t &log, geocache.logs)
         {
             QDomElement xmlLog = xmlCache.ownerDocument().createElement("groundspeak:log");
             xmlLogs.appendChild(xmlLog);
@@ -678,7 +669,6 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 
 void CGisItemTrk::save(QDomNode& gpx)
 {
-
     QDomDocument doc = gpx.ownerDocument();
 
     QDomElement xmlTrk = doc.createElement("trk");
@@ -704,12 +694,12 @@ void CGisItemTrk::save(QDomNode& gpx)
     xmlExt.appendChild(gpxx);
     writeXml(gpxx, "gpxx:DisplayColor", trk.color);
 
-    foreach(const trkseg_t& seg, trk.segs)
+    foreach(const trkseg_t &seg, trk.segs)
     {
         QDomElement xmlTrkseg = doc.createElement("trkseg");
         xmlTrk.appendChild(xmlTrkseg);
 
-        foreach(const trkpt_t& pt, seg.pts)
+        foreach(const trkpt_t &pt, seg.pts)
         {
             QDomElement xmlTrkpt = doc.createElement("trkpt");
             xmlTrkseg.appendChild(xmlTrkpt);
@@ -724,7 +714,6 @@ void CGisItemTrk::save(QDomNode& gpx)
 
 void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
 {
-
     readXml(xml, "name", rte.name);
     readXml(xml, "cmt", rte.cmt);
     readXml(xml, "desc", rte.desc);
@@ -773,13 +762,12 @@ void CGisItemRte::save(QDomNode& gpx)
     xmlRte.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key.item);
 
-    foreach(const rtept_t& pt, rte.pts)
+    foreach(const rtept_t &pt, rte.pts)
     {
         QDomElement xmlRtept = doc.createElement("rtept");
         xmlRte.appendChild(xmlRtept);
         writeWpt(xmlRtept, pt);
     }
-
 }
 
 void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
@@ -840,7 +828,7 @@ void CGisItemOvlArea::save(QDomNode& gpx)
     writeXml(xmlArea, history);
 
 
-    foreach(const pt_t& pt, area.pts)
+    foreach(const pt_t &pt, area.pts)
     {
         QDomElement xmlPt = doc.createElement("ql:point");
         xmlArea.appendChild(xmlPt);
@@ -884,7 +872,6 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
 
         wpt.links << link;
     }
-
 }
 
 
@@ -915,5 +902,4 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt)
     writeXml(xml, "pdop", wpt.pdop);
     writeXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
     writeXml(xml, "dgpsid", wpt.dgpsid);
-
 }

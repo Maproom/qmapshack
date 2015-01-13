@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "plot/ITrack.h"
 #include "canvas/IDrawContext.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "plot/ITrack.h"
 
 #include <QtWidgets>
 
@@ -35,8 +35,14 @@ ITrack::ITrack()
 
 ITrack::~ITrack()
 {
-    if(pjtar) pj_free(pjtar);
-    if(pjsrc) pj_free(pjsrc);
+    if(pjtar)
+    {
+        pj_free(pjtar);
+    }
+    if(pjsrc)
+    {
+        pj_free(pjsrc);
+    }
 }
 
 void ITrack::save(QImage& image)
@@ -118,7 +124,7 @@ void ITrack::updateData()
     }
 
     line.clear();
-    foreach(const QPointF& trkpt, coords)
+    foreach(const QPointF &trkpt, coords)
     {
         QPointF pt(trkpt.x(), trkpt.y());
         pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
@@ -126,12 +132,12 @@ void ITrack::updateData()
     }
 
     QRectF r1 = line.boundingRect();
-    qreal  w1 = r1.width();
-    qreal  h1 = r1.height();
+    qreal w1 = r1.width();
+    qreal h1 = r1.height();
 
     QRectF r2 = buffer.rect();
-    qreal  w2 = r2.width();
-    qreal  h2 = r2.height();
+    qreal w2 = r2.width();
+    qreal h2 = r2.height();
 
     if(qAbs(w1) > qAbs(h1))
     {

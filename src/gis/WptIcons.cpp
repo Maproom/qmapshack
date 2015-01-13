@@ -28,7 +28,6 @@ static QMap<QString, icon_t> wptIcons;
 
 void initWptIcons()
 {
-
     wptIcons["Default"]            = icon_t(wptDefault, 16, 16);
 //    wptIcons["City (Capitol)"]      = ":/icons/wpt/capitol_city15x15.png";
 //    wptIcons["City (Large)"]        = ":/icons/wpt/large_city15x15.png";
@@ -82,7 +81,7 @@ void initWptIcons()
 
 const QMap<QString, icon_t>& getWptIcons()
 {
-    return wptIcons;
+    return(wptIcons);
 }
 
 
@@ -107,21 +106,20 @@ QPixmap loadIcon(const QString& path)
     QFileInfo finfo(path);
     if(finfo.completeSuffix() != "bmp")
     {
-        return QPixmap(path);
+        return(QPixmap(path));
     }
     else
     {
         QImage img = QPixmap(path).toImage().convertToFormat(QImage::Format_Indexed8);
         img.setColor(0,qRgba(0,0,0,0));
-        return QPixmap::fromImage(img);
+        return(QPixmap::fromImage(img));
     }
 
-    return QPixmap();
+    return(QPixmap());
 }
 
 QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
 {
-
     QPixmap icon;
     QString path;
 
@@ -165,5 +163,5 @@ QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
         icon  = icon.scaled(icon.size()*s,Qt::KeepAspectRatio,Qt::SmoothTransformation);
     }
 
-    return icon;
+    return(icon);
 }

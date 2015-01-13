@@ -26,27 +26,26 @@
 class CDemPropSetup : public IDemProp, private Ui::IDemPropSetup
 {
     Q_OBJECT
-    public:
-        CDemPropSetup(IDem *demfile, CDemDraw *dem);
-        virtual ~CDemPropSetup();
+public:
+    CDemPropSetup(IDem *demfile, CDemDraw *dem);
+    virtual ~CDemPropSetup();
 
-    protected slots:
-        void slotPropertiesChanged();
+protected slots:
+    void slotPropertiesChanged();
 
-    protected:
-        void resizeEvent(QResizeEvent * e);
+protected:
+    void resizeEvent(QResizeEvent * e);
 
-    private slots:
-        void slotScaleChanged(const QPointF& s);
-        void slotSetMinScale(bool checked);
-        void slotSetMaxScale(bool checked);
-        void slotSetGradeSlopeColor(int val);
+private slots:
+    void slotScaleChanged(const QPointF& s);
+    void slotSetMinScale(bool checked);
+    void slotSetMaxScale(bool checked);
+    void slotSetGradeSlopeColor(int val);
 
-    private:
-        void updateScaleLabel();
+private:
+    void updateScaleLabel();
 
-        static QPointF scale;
-
+    static QPointF scale;
 };
 
 #endif //CDEMPROPSETUP_H

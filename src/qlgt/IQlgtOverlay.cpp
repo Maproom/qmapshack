@@ -20,17 +20,19 @@
 
 struct ovl_head_entry_t
 {
-    ovl_head_entry_t() : type(IQlgtOverlay::eEnd), offset(0) {}
-    qint32      type;
-    quint32     offset;
-    QByteArray  data;
+    ovl_head_entry_t() : type(IQlgtOverlay::eEnd), offset(0)
+    {
+    }
+    qint32 type;
+    quint32 offset;
+    QByteArray data;
 };
 
 
 QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
 {
     QIODevice * dev = s.device();
-    qint64      pos = dev->pos();
+    qint64 pos = dev->pos();
 
     char magic[9];
     s.readRawData(magic,9);
@@ -38,7 +40,7 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
     if(strncmp(magic,"QLOvl   ",9))
     {
         dev->seek(pos);
-        return s;
+        return(s);
     }
 
     QList<ovl_head_entry_t> entries;
@@ -48,7 +50,10 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
         ovl_head_entry_t entry;
         s >> entry.type >> entry.offset;
         entries << entry;
-        if(entry.type == IQlgtOverlay::eEnd) break;
+        if(entry.type == IQlgtOverlay::eEnd)
+        {
+            break;
+        }
     }
 
     QList<ovl_head_entry_t>::iterator entry = entries.begin();
@@ -60,65 +65,64 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
 
         switch(entry->type)
         {
-            case IQlgtOverlay::eBase:
+        case IQlgtOverlay::eBase:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+
+            s1 >> ovl.type;
+            if(ovl.type == "Text")
             {
-
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-
-                s1 >> ovl.type;
-                if(ovl.type == "Text")
-                {
-                    QRect rect;
-                    QString text;
-                    s1 >> rect >> text >> ovl.key;
-                }
-                else if(ovl.type == "TextBox")
-                {
-                    QRect rect;
-                    QPoint pt;
-                    QString text;
-                    double lon, lat;
-                    s1 >> lon >> lat >> pt >> rect >> text >> ovl.key;
-                }
-                else if(ovl.type == "Distance")
-                {
-                    float speed;
-                    QString name;
-                    QString comment;
-                    QString parentWpt;
-                    int size, idx = 0;
-                    IQlgtOverlay::pt_t pt;
-                    s1 >> name >> comment >> size;
-                    for(int i = 0; i < size; ++i)
-                    {
-                        s1 >> pt.u >> pt.v;
-                        pt.idx = idx++;
-                    }
-                    s1 >> speed >> ovl.key >> parentWpt;
-                }
-                else if(ovl.type == "Area")
-                {
-                    int size, idx = 0;
-                    IQlgtOverlay::pt_t pt;
-                    s1 >> ovl.name >> ovl.comment >> size;
-                    for(int i = 0; i < size; ++i)
-                    {
-                        s1 >> pt.u >> pt.v;
-                        pt.idx = idx++;
-                        ovl.points << pt;
-                    }
-                    s1 >> ovl.color >> ovl.key >> ovl.parentWpt >> ovl.style >> ovl.width >> ovl.opacity;
-                }
-                break;
+                QRect rect;
+                QString text;
+                s1 >> rect >> text >> ovl.key;
             }
+            else if(ovl.type == "TextBox")
+            {
+                QRect rect;
+                QPoint pt;
+                QString text;
+                double lon, lat;
+                s1 >> lon >> lat >> pt >> rect >> text >> ovl.key;
+            }
+            else if(ovl.type == "Distance")
+            {
+                float speed;
+                QString name;
+                QString comment;
+                QString parentWpt;
+                int size, idx = 0;
+                IQlgtOverlay::pt_t pt;
+                s1 >> name >> comment >> size;
+                for(int i = 0; i < size; ++i)
+                {
+                    s1 >> pt.u >> pt.v;
+                    pt.idx = idx++;
+                }
+                s1 >> speed >> ovl.key >> parentWpt;
+            }
+            else if(ovl.type == "Area")
+            {
+                int size, idx = 0;
+                IQlgtOverlay::pt_t pt;
+                s1 >> ovl.name >> ovl.comment >> size;
+                for(int i = 0; i < size; ++i)
+                {
+                    s1 >> pt.u >> pt.v;
+                    pt.idx = idx++;
+                    ovl.points << pt;
+                }
+                s1 >> ovl.color >> ovl.key >> ovl.parentWpt >> ovl.style >> ovl.width >> ovl.opacity;
+            }
+            break;
+        }
 
-            default:;
+        default:;
         }
         ++entry;
     }
 
-    return s;
+    return(s);
 }
 
 QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
@@ -178,18 +182,16 @@ QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
         ++entry;
     }
 
-    return s;
+    return(s);
 }
 
 
 IQlgtOverlay::IQlgtOverlay(quint64 id, QObject *parent)
     : IItem(id)
 {
-
 }
 
 IQlgtOverlay::~IQlgtOverlay()
 {
-
 }
 

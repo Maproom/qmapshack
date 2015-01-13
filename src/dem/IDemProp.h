@@ -27,17 +27,16 @@ class CDemDraw;
 class IDemProp : public QWidget
 {
     Q_OBJECT
-    public:
-        IDemProp(IDem *demfile, CDemDraw *dem);
-        virtual ~IDemProp();
+public:
+    IDemProp(IDem *demfile, CDemDraw *dem);
+    virtual ~IDemProp();
 
-    protected slots:
-        virtual void slotPropertiesChanged()= 0;
+protected slots:
+    virtual void slotPropertiesChanged()= 0;
 
-    protected:
-        IDem * demfile;
-        CDemDraw * dem;
-
+protected:
+    IDem * demfile;
+    CDemDraw * dem;
 };
 
 #endif //IDEMPROP_H

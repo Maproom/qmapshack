@@ -23,10 +23,10 @@
 
 class CGarminStrTbl8 : public IGarminStrTbl
 {
-    public:
-        CGarminStrTbl8(const quint16 codepage, const quint8 mask, QObject * parent);
-        virtual ~CGarminStrTbl8();
+public:
+    CGarminStrTbl8(const quint16 codepage, const quint8 mask, QObject * parent);
+    virtual ~CGarminStrTbl8();
 
-        void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
+    void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
 };
 #endif                           //CGARMINSTRTBL8_H

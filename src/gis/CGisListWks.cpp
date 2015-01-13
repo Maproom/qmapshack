@@ -32,8 +32,8 @@
 #include "gis/search/CSearchGoogle.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSelectCopyAction.h"
+#include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
 
 #include <QtSql>
@@ -43,27 +43,26 @@
 
 class CGisListWksEditLock
 {
-    public:
-        CGisListWksEditLock(bool waitCursor, QMutex& mutex) : mutex(mutex), waitCursor(waitCursor)
+public:
+    CGisListWksEditLock(bool waitCursor, QMutex& mutex) : mutex(mutex), waitCursor(waitCursor)
+    {
+        if(waitCursor)
         {
-            if(waitCursor)
-            {
-                QApplication::setOverrideCursor(Qt::WaitCursor);
-            }
-            mutex.lock();
+            QApplication::setOverrideCursor(Qt::WaitCursor);
         }
-        ~CGisListWksEditLock()
+        mutex.lock();
+    }
+    ~CGisListWksEditLock()
+    {
+        if(waitCursor)
         {
-            if(waitCursor)
-            {
-                QApplication::restoreOverrideCursor();
-            }
-            mutex.unlock();
+            QApplication::restoreOverrideCursor();
         }
-    private:
-        QMutex& mutex;
-        bool waitCursor;
-
+        mutex.unlock();
+    }
+private:
+    QMutex& mutex;
+    bool waitCursor;
 };
 
 
@@ -81,7 +80,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProject     = new QMenu(this);
     actionEditPrj   = menuProject->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
     actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
-    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));    
+    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
     actionClose     = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
@@ -339,7 +338,6 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
 void CGisListWks::dropEvent ( QDropEvent  * e )
 {
-
     QList<QTreeWidgetItem*> items   = selectedItems();
     if(items.isEmpty())
     {
@@ -364,7 +362,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         5) Test if item under cursor is a project
         6) If project and project is not item's project create a copy
 
-    */
+     */
     if(items.size() == 1)
     {
         // calc. index offset (below/above item)
@@ -526,10 +524,10 @@ IGisProject * CGisListWks::getProjectByKey(const QString& key)
         IGisProject * item = dynamic_cast<IGisProject*>(topLevelItem(i));
         if(item && item->getKey() == key)
         {
-            return item;
+            return(item);
         }
     }
-    return 0;
+    return(0);
 }
 
 CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
@@ -541,11 +539,10 @@ CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
         CDBProject * item = dynamic_cast<CDBProject*>(topLevelItem(i));
         if(item && item->getId() == id && item->getDBName() == db)
         {
-            return item;
+            return(item);
         }
     }
-    return 0;
-
+    return(0);
 }
 
 void CGisListWks::slotSaveWorkspace()
@@ -686,7 +683,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
         if(project != 0)
         {
-            actionEditPrj->setVisible(false);           
+            actionEditPrj->setVisible(false);
             menuProject->exec(p);
             return;
         }
@@ -719,21 +716,24 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             return;
         }
 
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());       
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
         if(gisItem != 0)
-        {          
+        {
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 menuItemTrk->exec(p);
                 break;
+
             case IGisItem::eTypeWpt:
                 menuItemWpt->exec(p);
                 break;
+
             case IGisItem::eTypeRte:
                 menuItemRte->exec(p);
                 break;
+
             case IGisItem::eTypeOvl:
                 menuItemOvl->exec(p);
                 break;
@@ -797,7 +797,6 @@ void CGisListWks::slotEditPrj()
     {
         project->edit();
     }
-
 }
 
 void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
@@ -822,7 +821,7 @@ void CGisListWks::slotEditItem()
 }
 
 void CGisListWks::slotDeleteItem()
-{        
+{
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items       = selectedItems();
@@ -845,7 +844,7 @@ void CGisListWks::slotDeleteItem()
             /*
                 collect database projects to update their counterpart in
                 the database view, after all operations are done.
-            */
+             */
             if(yes && project->getType() == IGisProject::eTypeDb)
             {
                 projects << dynamic_cast<CDBProject*>(project);
@@ -1047,8 +1046,9 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return true;
+        return(true);
     }
+
     case eEvtD2WShowFolder:
     {
         CEvtD2WShowFolder * evt = (CEvtD2WShowFolder*)e;
@@ -1070,8 +1070,9 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return true;
+        return(true);
     }
+
     case eEvtD2WHideFolder:
     {
         CEvtD2WHideFolder * evt = (CEvtD2WHideFolder*)e;
@@ -1080,8 +1081,9 @@ bool CGisListWks::event(QEvent * e)
 
         e->accept();
         emit sigChanged();
-        return true;
+        return(true);
     }
+
     case eEvtD2WShowItems:
     {
         CEvtD2WShowItems * evt = (CEvtD2WShowItems*)e;
@@ -1092,8 +1094,9 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return true;
+        return(true);
     }
+
     case eEvtD2WHideItems:
     {
         CEvtD2WHideItems * evt = (CEvtD2WHideItems*)e;
@@ -1104,8 +1107,9 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return true;
+        return(true);
     }
+
     case eEvtD2WUpdateLnF:
     {
         CEvtD2WUpdateLnF * evt = (CEvtD2WUpdateLnF*)e;
@@ -1116,10 +1120,10 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return true;
+        return(true);
     }
     }
 
-    return QTreeWidget::event(e);
+    return(QTreeWidget::event(e));
 }
 

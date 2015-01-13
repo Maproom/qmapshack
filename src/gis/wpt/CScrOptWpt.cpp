@@ -17,18 +17,18 @@
 **********************************************************************************************/
 
 
-#include "gis/wpt/CScrOptWpt.h"
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
-#include "gis/CGisWidget.h"
+#include "gis/wpt/CScrOptWpt.h"
 #include "mouse/IMouse.h"
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 
 CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
-    : IScrOpt(parent->getCanvas())    
+    : IScrOpt(parent->getCanvas())
 {
     key         = wpt->getKey();
 
@@ -54,7 +54,6 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
 
 CScrOptWpt::~CScrOptWpt()
 {
-
 }
 
 void CScrOptWpt::slotDelete()

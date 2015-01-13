@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "helpers/CSelectCopyAction.h"
 #include "gis/IGisItem.h"
+#include "helpers/CSelectCopyAction.h"
 
 #include <QtWidgets>
 
@@ -41,12 +41,11 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
 
 CSelectCopyAction::~CSelectCopyAction()
 {
-
 }
 
 bool CSelectCopyAction::allOthersToo()
 {
-    return checkAllOtherToo->isChecked();
+    return(checkAllOtherToo->isChecked());
 }
 
 void CSelectCopyAction::slotSelectResult()

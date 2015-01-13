@@ -16,13 +16,13 @@
 
 **********************************************************************************************/
 
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/ovl/CScrOptOvlArea.h"
-#include "gis/ovl/CDetailsOvlArea.h"
-#include "gis/prj/IGisProject.h"
+#include "GeoMath.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
-#include "GeoMath.h"
+#include "gis/ovl/CDetailsOvlArea.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/ovl/CScrOptOvlArea.h"
+#include "gis/prj/IGisProject.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -33,7 +33,7 @@
 
 const QColor CGisItemOvlArea::lineColors[OVL_N_COLORS] =
 {
-     Qt::black                    // 0
+    Qt::black                     // 0
     ,Qt::darkRed                 // 1
     ,Qt::darkGreen               // 2
     ,Qt::darkYellow              // 3
@@ -54,38 +54,37 @@ const QColor CGisItemOvlArea::lineColors[OVL_N_COLORS] =
 
 const QString CGisItemOvlArea::bulletColors[OVL_N_COLORS] =
 {
-
-                                 // 0
+    // 0
     QString("://icons/8x8/bullet_black.png")
-                                 // 1
+    // 1
     ,QString("://icons/8x8/bullet_dark_red.png")
-                                 // 2
+    // 2
     ,QString("://icons/8x8/bullet_dark_green.png")
-                                 // 3
+    // 3
     ,QString("://icons/8x8/bullet_dark_yellow.png")
-                                 // 4
+    // 4
     ,QString("://icons/8x8/bullet_dark_blue.png")
-                                 // 5
+    // 5
     ,QString("://icons/8x8/bullet_dark_magenta.png")
-                                 // 6
+    // 6
     ,QString("://icons/8x8/bullet_dark_cyan.png")
-                                 // 7
+    // 7
     ,QString("://icons/8x8/bullet_gray.png")
-                                 // 8
+    // 8
     ,QString("://icons/8x8/bullet_dark_gray.png")
-                                 // 9
+    // 9
     ,QString("://icons/8x8/bullet_red.png")
-                                 // 10
+    // 10
     ,QString("://icons/8x8/bullet_green.png")
-                                 // 11
+    // 11
     ,QString("://icons/8x8/bullet_yellow.png")
-                                 // 12
+    // 12
     ,QString("://icons/8x8/bullet_blue.png")
-                                 // 13
+    // 13
     ,QString("://icons/8x8/bullet_magenta.png")
-                                 // 14
+    // 14
     ,QString("://icons/8x8/bullet_cyan.png")
-                                 // 15
+    // 15
     ,QString("://icons/8x8/bullet_white.png")
     ,QString("")                 // 16
 };
@@ -195,22 +194,22 @@ void CGisItemOvlArea::setSymbol()
 
 bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
 {
-    foreach(const QPointF& pt, line)
+    foreach(const QPointF &pt, line)
     {
         if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
         {
-            return true;
+            return(true);
         }
     }
-    return false;
+    return(false);
 }
 
 QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 {
     qint32 i    = 0;
     qint32 idx  = -1;
-    qint32  d   = NOINT;
-    foreach(const QPointF& point, line)
+    qint32 d   = NOINT;
+    foreach(const QPointF &point, line)
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
@@ -223,10 +222,10 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 
     if(idx < 0)
     {
-        return NOPOINTF;
+        return(NOPOINTF);
     }
 
-    return line[idx];
+    return(line[idx]);
 }
 
 void CGisItemOvlArea::readLine(const QPolygonF &line)
@@ -262,12 +261,24 @@ void CGisItemOvlArea::deriveSecondaryData()
     qreal south =  90;
     qreal west  =  180;
 
-    foreach(const pt_t& pt, area.pts)
+    foreach(const pt_t &pt, area.pts)
     {
-        if(pt.lon < west)  west    = pt.lon;
-        if(pt.lon > east)  east    = pt.lon;
-        if(pt.lat < south) south   = pt.lat;
-        if(pt.lat > north) north   = pt.lat;
+        if(pt.lon < west)
+        {
+            west    = pt.lon;
+        }
+        if(pt.lon > east)
+        {
+            east    = pt.lon;
+        }
+        if(pt.lat < south)
+        {
+            south   = pt.lat;
+        }
+        if(pt.lat > north)
+        {
+            north   = pt.lat;
+        }
     }
 
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
@@ -309,7 +320,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
 
     QPointF pt1;
 
-    foreach(const pt_t& pt, area.pts)
+    foreach(const pt_t &pt, area.pts)
     {
         pt1.setX(pt.lon);
         pt1.setY(pt.lat);
@@ -358,7 +369,6 @@ void CGisItemOvlArea::drawHighlight(QPainter& p)
     }
     p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolygon(line);
-
 }
 
 void CGisItemOvlArea::gainUserFocus(bool yes)
@@ -381,7 +391,7 @@ QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
     x = x / len;
     y = y / len;
 
-    return QPointF(x,y);
+    return(QPointF(x,y));
 }
 
 IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse)
@@ -390,12 +400,12 @@ IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse
     {
         scrOpt = new CScrOptOvlArea(this, origin, mouse);
     }
-    return scrOpt;
+    return(scrOpt);
 }
 
 const QString& CGisItemOvlArea::getName() const
 {
-    return area.name;
+    return(area.name);
 }
 
 QString CGisItemOvlArea::getInfo() const
@@ -409,7 +419,10 @@ QString CGisItemOvlArea::getInfo() const
     QString desc = removeHtml(area.desc).simplified();
     if(desc.count())
     {
-        if(!str.isEmpty()) str += "<br/>\n";
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
 
         if(desc.count() < 200)
         {
@@ -425,7 +438,10 @@ QString CGisItemOvlArea::getInfo() const
         QString cmt = removeHtml(area.cmt).simplified();
         if(cmt.count())
         {
-            if(!str.isEmpty()) str += "<br/>\n";
+            if(!str.isEmpty())
+            {
+                str += "<br/>\n";
+            }
 
             if(cmt.count() < 200)
             {
@@ -438,13 +454,13 @@ QString CGisItemOvlArea::getInfo() const
         }
     }
 
-    return str;
+    return(str);
 }
 
 void CGisItemOvlArea::getPolylineFromData(QPolygonF& line)
-{    
+{
     line.clear();
-    foreach(const pt_t& pt, area.pts)
+    foreach(const pt_t &pt, area.pts)
     {
         line << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
     }

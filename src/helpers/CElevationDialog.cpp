@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "helpers/CElevationDialog.h"
 #include "units/IUnit.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -44,12 +44,10 @@ CElevationDialog::CElevationDialog(QWidget * parent, QVariant &val, const QVaria
         IUnit::self().meter2elevation(val.toDouble(), str, unit);
         lineValue->setText(str);
     }
-
 }
 
 CElevationDialog::~CElevationDialog()
 {
-
 }
 
 void CElevationDialog::accept()

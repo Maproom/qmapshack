@@ -20,10 +20,12 @@
 
 struct rte_head_entry_t
 {
-    rte_head_entry_t() : type(CQlgtRoute::eEnd), offset(0) {}
-    qint32      type;
-    quint32     offset;
-    QByteArray  data;
+    rte_head_entry_t() : type(CQlgtRoute::eEnd), offset(0)
+    {
+    }
+    qint32 type;
+    quint32 offset;
+    QByteArray data;
 };
 
 
@@ -31,7 +33,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
 {
     quint32 nRtePts = 0;
     QIODevice * dev = s.device();
-    qint64      pos = dev->pos();
+    qint64 pos = dev->pos();
 
     char magic[9];
     s.readRawData(magic,9);
@@ -39,7 +41,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
     if(strncmp(magic,"QLRte   ",9))
     {
         dev->seek(pos);
-        return s;
+        return(s);
     }
 
     QList<rte_head_entry_t> entries;
@@ -49,7 +51,10 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
         rte_head_entry_t entry;
         s >> entry.type >> entry.offset;
         entries << entry;
-        if(entry.type == CQlgtRoute::eEnd) break;
+        if(entry.type == CQlgtRoute::eEnd)
+        {
+            break;
+        }
     }
 
     QList<rte_head_entry_t>::iterator entry = entries.begin();
@@ -61,48 +66,47 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
 
         switch(entry->type)
         {
-            case CQlgtRoute::eBase:
+        case CQlgtRoute::eBase:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+
+            s1 >> route.key;
+            s1 >> route.timestamp;
+            s1 >> route.name;
+            s1 >> route.iconString;
+            s1 >> route.ttime;
+            s1 >> route.parentWpt;
+
+            break;
+        }
+
+        case CQlgtRoute::eRtePts:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+            quint32 n;
+
+            route.priRoute.clear();
+            s1 >> nRtePts;
+
+            for(n = 0; n < nRtePts; ++n)
             {
+                CQlgtRoute::pt_t rtept;
+                float u, v;
+                QString action;
 
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
+                s1 >> u;
+                s1 >> v;
+                s1 >> action;
 
-                s1 >> route.key;
-                s1 >> route.timestamp;
-                s1 >> route.name;
-                s1 >> route.iconString;
-                s1 >> route.ttime;
-                s1 >> route.parentWpt;
-
-                break;
+                rtept.lon = u;
+                rtept.lat = v;
+                rtept.action = action;
+                route.priRoute << rtept;
             }
-
-            case CQlgtRoute::eRtePts:
-            {
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-                quint32 n;
-
-                route.priRoute.clear();
-                s1 >> nRtePts;
-
-                for(n = 0; n < nRtePts; ++n)
-                {
-                    CQlgtRoute::pt_t rtept;
-                    float u, v;
-                    QString action;
-
-                    s1 >> u;
-                    s1 >> v;
-                    s1 >> action;
-
-                    rtept.lon = u;
-                    rtept.lat = v;
-                    rtept.action = action;
-                    route.priRoute << rtept;
-                }
-                break;
-            }
+            break;
+        }
 //            case CQlgtRoute::eRteSec:
 //            {
 //                QDataStream s1(&entry->data, QIODevice::ReadOnly);
@@ -129,14 +133,14 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
 //                }
 //                break;
 //            }
-            default:;
+        default:;
         }
 
         ++entry;
     }
 
 
-    return s;
+    return(s);
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
@@ -253,18 +257,16 @@ QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
     }
 
 
-    return s;
+    return(s);
 }
 
 CQlgtRoute::CQlgtRoute(quint64 id, QObject *parent)
     : QObject(parent)
     , IItem(id)
 {
-
 }
 
 CQlgtRoute::~CQlgtRoute()
 {
-
 }
 

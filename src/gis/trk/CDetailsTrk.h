@@ -19,58 +19,58 @@
 #ifndef CDETAILSTRK_H
 #define CDETAILSTRK_H
 
-#include <QWidget>
 #include "ui_IDetailsTrk.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
 class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
 {
     Q_OBJECT
-    public:
-        CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
-        virtual ~CDetailsTrk();
+public:
+    CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
+    virtual ~CDetailsTrk();
 
-        void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
-        void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
+    void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
 
-    public slots:
-        void setupGui();
+public slots:
+    void setupGui();
 
-    private slots:
-        void slotShowPlots();
-        void slotColorChanged(int idx);
-        void slotChangeReadOnlyMode(bool on);
-        void slotNameChanged();
-        void slotNameChanged(const QString& name);
-        void slotItemSelectionChanged();
-        void slotLinkActivated(const QUrl& url);
+private slots:
+    void slotShowPlots();
+    void slotColorChanged(int idx);
+    void slotChangeReadOnlyMode(bool on);
+    void slotNameChanged();
+    void slotNameChanged(const QString& name);
+    void slotItemSelectionChanged();
+    void slotLinkActivated(const QUrl& url);
 
-    private:
-        enum columns_t
-        {
-            eColNum
-            ,eColTime
-            ,eColEle
-            ,eColDelta
-            ,eColDist
-            ,eColSpeed
-            ,eColSlope
-            ,eColAscend
-            ,eColDescend
-            ,eColPosition
-            ,eColMax
-        };
+private:
+    enum columns_t
+    {
+        eColNum
+        ,eColTime
+        ,eColEle
+        ,eColDelta
+        ,eColDist
+        ,eColSpeed
+        ,eColSlope
+        ,eColAscend
+        ,eColDescend
+        ,eColPosition
+        ,eColMax
+    };
 
-        /**
-           @brief Pointer to track item
+    /**
+       @brief Pointer to track item
 
-           It is ok to store the pointer as this widget is created by the track item. The
-           track item will destroy this object on it's own destruction.
-        */
-        CGisItemTrk& trk;
+       It is ok to store the pointer as this widget is created by the track item. The
+       track item will destroy this object on it's own destruction.
+     */
+    CGisItemTrk& trk;
 
-        bool originator;
+    bool originator;
 };
 
 #endif //CDETAILSTRK_H

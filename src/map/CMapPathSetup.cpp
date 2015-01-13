@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "map/CMapPathSetup.h"
 #include "map/CMapDraw.h"
+#include "map/CMapPathSetup.h"
 
 #include <QtWidgets>
 
@@ -30,7 +30,7 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelPath()));
     connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
 
-    foreach(const QString& path, paths)
+    foreach(const QString &path, paths)
     {
         QListWidgetItem * item = new QListWidgetItem(listWidget);
         item->setText(path);
@@ -41,7 +41,6 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
 
 CMapPathSetup::~CMapPathSetup()
 {
-
 }
 
 void CMapPathSetup::slotItemSelectionChanged()

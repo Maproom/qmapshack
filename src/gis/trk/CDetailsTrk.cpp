@@ -16,21 +16,21 @@
 
 **********************************************************************************************/
 
+#include "GeoMath.h"
 #include "gis/trk/CDetailsTrk.h"
-#include "gis/trk/filter/CFilterDouglasPeuker.h"
-#include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterDelete.h"
+#include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/filter/CFilterMedian.h"
-#include "gis/trk/filter/CFilterReplaceElevation.h"
-#include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/filter/CFilterNewDate.h"
 #include "gis/trk/filter/CFilterObscureDate.h"
+#include "gis/trk/filter/CFilterOffsetElevation.h"
+#include "gis/trk/filter/CFilterReplaceElevation.h"
+#include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterSpeed.h"
+#include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CTextEditWidget.h"
-#include "helpers/CLinksDialog.h"
 #include "units/IUnit.h"
-#include "GeoMath.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -40,7 +40,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     , trk(trk)
     , originator(false)
 {
-    setupUi(this);    
+    setupUi(this);
 
     QPixmap icon(16,8);
     for(int i=0; i < TRK_N_COLORS; ++i)
@@ -117,7 +117,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
     slotShowPlots();
-
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -134,7 +133,7 @@ CDetailsTrk::~CDetailsTrk()
 
 
 void CDetailsTrk::setupGui()
-{    
+{
     if(originator)
     {
         return;
@@ -157,7 +156,7 @@ void CDetailsTrk::setupGui()
     }
 
     labelInfo->setText(trk.getInfo());
-    lineName->setEnabled(!isReadOnly);    
+    lineName->setEnabled(!isReadOnly);
     comboColor->setCurrentIndex(trk.getColorIdx());
     comboColor->setEnabled(!isReadOnly);
     toolLock->setChecked(isReadOnly);
@@ -168,7 +167,6 @@ void CDetailsTrk::setupGui()
     {
         foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
         {
-
             QTreeWidgetItem * item = new QTreeWidgetItem();
             item->setTextAlignment(eColNum,Qt::AlignLeft);
             item->setTextAlignment(eColEle,Qt::AlignRight);
@@ -253,7 +251,6 @@ void CDetailsTrk::setupGui()
             item->setText(eColPosition,str);
 
             items << item;
-
         }
     }
 
@@ -265,8 +262,8 @@ void CDetailsTrk::setupGui()
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, trk.getComment(), trk.getDescription(), trk.getLinks()));
-    textCmtDesc->moveCursor (QTextCursor::Start) ;
-    textCmtDesc->ensureCursorVisible() ;
+    textCmtDesc->moveCursor (QTextCursor::Start);
+    textCmtDesc->ensureCursorVisible();
 
     plotElevation->setTrack(&trk);
     plotDistance->setTrack(&trk);
@@ -346,7 +343,6 @@ void CDetailsTrk::slotChangeReadOnlyMode(bool on)
 {
     trk.setReadOnlyMode(on);
     setupGui();
-
 }
 
 void CDetailsTrk::slotNameChanged(const QString& name)
@@ -366,7 +362,7 @@ void CDetailsTrk::slotNameChanged(const QString& name)
 
 void CDetailsTrk::slotNameChanged()
 {
-    QString  name  = lineName->text();
+    QString name  = lineName->text();
     QString _name_ = trk.getName();
 
     QPalette palette = lineName->palette();

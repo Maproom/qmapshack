@@ -19,8 +19,8 @@
 #ifndef CSCROPTTRK_H
 #define CSCROPTTRK_H
 
-#include "mouse/IScrOpt.h"
 #include "gis/IGisItem.h"
+#include "mouse/IScrOpt.h"
 #include "ui_IScrOptTrk.h"
 
 class CGisItemTrk;
@@ -29,27 +29,27 @@ class IMouse;
 class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
 {
     Q_OBJECT
-    public:
-        CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
-        virtual ~CScrOptTrk();
+public:
+    CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
+    virtual ~CScrOptTrk();
 
-        void draw(QPainter& p);
+    void draw(QPainter& p);
 
-    private slots:        
-        void slotDelete();
-        void slotCopy();
-        void slotEditDetails();
-        void slotProfile(bool on);
-        void slotCut();
-        void slotEdit();
-        void slotReverse();
-        void slotCombine();
-        void slotRange();
+private slots:
+    void slotDelete();
+    void slotCopy();
+    void slotEditDetails();
+    void slotProfile(bool on);
+    void slotCut();
+    void slotEdit();
+    void slotReverse();
+    void slotCombine();
+    void slotRange();
 
 
-    private:
-        IGisItem::key_t key;
-        QPointF anchor;
+private:
+    IGisItem::key_t key;
+    QPointF anchor;
 };
 
 #endif //CSCROPTTRK_H

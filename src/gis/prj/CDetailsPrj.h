@@ -19,9 +19,9 @@
 #ifndef CDETAILSPRJ_H
 #define CDETAILSPRJ_H
 
-#include <QWidget>
-#include <QPointer>
 #include "ui_IDetailsPrj.h"
+#include <QPointer>
+#include <QWidget>
 
 class CDetailsPrj;
 class IGisProject;
@@ -30,28 +30,27 @@ class CGisItemTrk;
 class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
 {
     Q_OBJECT
-    public:
-        CDetailsPrj(IGisProject& prj, QWidget * parent);
-        virtual ~CDetailsPrj();
+public:
+    CDetailsPrj(IGisProject& prj, QWidget * parent);
+    virtual ~CDetailsPrj();
 
-    protected:
-        void resizeEvent(QResizeEvent * e);
+protected:
+    void resizeEvent(QResizeEvent * e);
 
-    private slots:
-        void slotLinkActivated(const QString& link);
-        void slotLinkActivated(const QUrl& url);
-        void slotPrint();
-        void slotSetupGui();
+private slots:
+    void slotLinkActivated(const QString& link);
+    void slotLinkActivated(const QUrl& url);
+    void slotPrint();
+    void slotSetupGui();
 
-    private:
-        void getTrackProfile(CGisItemTrk * trk, QImage& image);
-        void getTrackOverview(CGisItemTrk * trk, QImage& image);        
-        void draw(QTextDocument& doc, bool printable);
+private:
+    void getTrackProfile(CGisItemTrk * trk, QImage& image);
+    void getTrackOverview(CGisItemTrk * trk, QImage& image);
+    void draw(QTextDocument& doc, bool printable);
 
-        enum eTblCol{eSym, eInfo, eComment, eMax};
+    enum eTblCol {eSym, eInfo, eComment, eMax};
 
-        IGisProject& prj;
-
+    IGisProject& prj;
 };
 
 #endif //CDETAILSPRJ_H

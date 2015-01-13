@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "canvas/IDrawContext.h"
 #include "canvas/CCanvas.h"
+#include "canvas/IDrawContext.h"
 
 #include <QtWidgets>
 
@@ -50,7 +50,7 @@
 #define N_ZOOM_LEVELS 31
 const qreal IDrawContext::scales[N_ZOOM_LEVELS] =
 {
-      0.10
+    0.10
     , 0.15
     , 0.20
     , 0.30
@@ -90,12 +90,12 @@ const qreal IDrawContext::scales[N_ZOOM_LEVELS] =
 
 QPointF operator*(const QPointF& p1, const QPointF& p2)
 {
-    return QPointF(p1.x() * p2.x(), p1.y() * p2.y());
+    return(QPointF(p1.x() * p2.x(), p1.y() * p2.y()));
 }
 
 QPointF operator/(const QPointF& p1, const QPointF& p2)
 {
-    return QPointF(p1.x() / p2.x(), p1.y() / p2.y());
+    return(QPointF(p1.x() / p2.x(), p1.y() / p2.y()));
 }
 
 
@@ -123,14 +123,12 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
     resize(canvas->size());
     connect(this, SIGNAL(finished()), canvas, SLOT(update()));
     connect(this, SIGNAL(finished()), SIGNAL(sigStopThread()));
-
 }
 
 IDrawContext::~IDrawContext()
 {
     pj_free(pjtar);
     pj_free(pjsrc);
-
 }
 
 void IDrawContext::emitSigCanvasUpdate()
@@ -162,9 +160,9 @@ QString IDrawContext::getProjection()
 {
     if(pjsrc == 0)
     {
-        return QString::Null();
+        return(QString::Null());
     }
-    return pj_get_def(pjsrc,0);
+    return(pj_get_def(pjsrc,0));
 }
 
 void IDrawContext::setProjection(const QString& proj)
@@ -183,12 +181,15 @@ bool IDrawContext::needsRedraw()
     mutex.lock();
     res = intNeedsRedraw;
     mutex.unlock();
-    return res;
+    return(res);
 }
 
 void IDrawContext::zoom(const QRectF& rect)
 {
-    if(pjsrc == 0) return;
+    if(pjsrc == 0)
+    {
+        return;
+    }
 
     // special case for elements with no extent
     if(rect.width() == 0 || rect.height() == 0)
@@ -217,7 +218,10 @@ void IDrawContext::zoom(const QRectF& rect)
 
 void IDrawContext::zoom(bool in, CCanvas::redraw_e& needsRedraw)
 {
-    if(pjsrc == 0) return;
+    if(pjsrc == 0)
+    {
+        return;
+    }
     zoom(zoomIndex + (in ? -1 : 1));
     needsRedraw = CCanvas::eRedrawAll;
 }
@@ -242,7 +246,7 @@ void IDrawContext::zoom(int idx)
         zoomFactor.ry() = scales[idx];
         intNeedsRedraw  = true;
 
-        emit  sigScaleChanged(scale*zoomFactor);
+        emit sigScaleChanged(scale*zoomFactor);
     }
     mutex.unlock(); // --------- stop serialize with thread
 }
@@ -260,7 +264,7 @@ void IDrawContext::convertRad2M(QPointF &p)
         range of -180..180°. But the draw context has no
         turnaround. It exceeds the values. We have to
         apply fixes in that case.
-    */
+     */
     bool fixWest = p.x() < (-180*DEG_TO_RAD);
     bool fixEast = p.x() > ( 180*DEG_TO_RAD);
 
@@ -270,7 +274,7 @@ void IDrawContext::convertRad2M(QPointF &p)
         The idea of the fix is to calculate a point
         at the boundary with the same latitude and use it
         as offset.
-    */
+     */
     if(fixWest)
     {
         QPointF o(-180*DEG_TO_RAD,y);
@@ -284,7 +288,6 @@ void IDrawContext::convertRad2M(QPointF &p)
         convertRad2M(o);
         p.rx() = 2*o.x() + p.x();
     }
-
 }
 
 void IDrawContext::convertM2Rad(QPointF &p)
@@ -295,7 +298,6 @@ void IDrawContext::convertM2Rad(QPointF &p)
     }
 
     pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
-
 }
 
 void IDrawContext::convertPx2Rad(QPointF &p)
@@ -344,7 +346,10 @@ void IDrawContext::convertRad2Px(QPolygonF& poly)
 
 void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f)
 {
-    if(pjsrc == 0) return;
+    if(pjsrc == 0)
+    {
+        return;
+    }
 
     // convert global coordinate of focus into point of map
     focus = f;
@@ -395,7 +400,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     // get current active buffer
     buffer_t& currentBuffer = buffer[bufIndex];
 
-    // convert buffers top left reference point to local coordinate system    
+    // convert buffers top left reference point to local coordinate system
     QPointF ref = currentBuffer.ref1;
     convertRad2M(ref);
 
@@ -414,7 +419,10 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     p.restore();
 
     // intNeedsRedraw is reset by the thread
-    if(needsRedraw & maskRedraw) intNeedsRedraw = true;
+    if(needsRedraw & maskRedraw)
+    {
+        intNeedsRedraw = true;
+    }
     mutex.unlock(); // --------- stop serialize with thread
 
     if((needsRedraw  & maskRedraw) && !isRunning())
@@ -422,7 +430,6 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
         emit sigStartThread();
         start();
     }
-
 }
 
 void IDrawContext::run()
@@ -435,7 +442,6 @@ void IDrawContext::run()
     IDrawContext::buffer_t& currentBuffer = buffer[!bufIndex];
     while(intNeedsRedraw)
     {
-
         // copy all projection information need by the
         // map render objects to buffer structure
         currentBuffer.pjsrc         = pjsrc;
@@ -448,7 +454,7 @@ void IDrawContext::run()
         currentBuffer.focus         = focus;
         intNeedsRedraw              = false;
 
-        mutex.unlock();        
+        mutex.unlock();
 
         qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);
         // ----- reset buffer -----
@@ -462,6 +468,5 @@ void IDrawContext::run()
     bufIndex = !bufIndex;
     qDebug() << objectName() << "stop thread" << t.elapsed();
     mutex.unlock();
-
 }
 

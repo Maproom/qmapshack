@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
-#include "map/CMapJNX.h"
-#include "map/CMapDraw.h"
-#include "units/IUnit.h"
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "inttypes.h"
+#include "map/CMapDraw.h"
+#include "map/CMapJNX.h"
+#include "units/IUnit.h"
 
 #include <QtGui>
 
@@ -37,17 +37,16 @@ static void readCString(QDataStream& stream, QByteArray& ba)
         ba += byte;
         stream >> byte;
     }
-
 }
 
 static quint32 scale2jnx(qreal scale)
 {
     /*
-    Ok, I've made some calculations, and got the following formula to
-    calculate the JNX scale (S) depending on the map's meters/pixel
-    ratio (R):
+       Ok, I've made some calculations, and got the following formula to
+       calculate the JNX scale (S) depending on the map's meters/pixel
+       ratio (R):
 
-      S(R) =
+       S(R) =
         qRound(
           76437 *
           exp(
@@ -60,21 +59,21 @@ static quint32 scale2jnx(qreal scale)
         )
 
 
-    where
-      qRound - is a function which returns the closest integer from
+       where
+       qRound - is a function which returns the closest integer from
         floating point value, [unfortunately its defined in C99 but not standard C++]
-      exp - exponent,
-      ln - natural logarithm.
+       exp - exponent,
+       ln - natural logarithm.
 
-    Magic number 130.2084 - is an average value for
-      (JNX scale) / (maps meters per pixel)
-    ratio among all zoom levels in metric system.
+       Magic number 130.2084 - is an average value for
+       (JNX scale) / (maps meters per pixel)
+       ratio among all zoom levels in metric system.
 
-    Magic number 2.000032708011 is a ratio on which our standard scale
-    table is built. It is (76437 / 4777) ^ (1/4).
-    */
+       Magic number 2.000032708011 is a ratio on which our standard scale
+       table is built. It is (76437 / 4777) ^ (1/4).
+     */
 
-    return (uint32_t)floor(0.5 + 76437 * exp(log(2.000032708011) * floor(0.5 + log(scale * 10 * 130.2084 / 76437) / log(2.000032708011) ) ) );
+    return((uint32_t)floor(0.5 + 76437 * exp(log(2.000032708011) * floor(0.5 + log(scale * 10 * 130.2084 / 76437) / log(2.000032708011) ) ) ));
 }
 
 
@@ -101,7 +100,6 @@ CMapJNX::CMapJNX(const QString &filename, CMapDraw *parent)
 
 void CMapJNX::readFile(const QString& fn, qint32& productId)
 {
-
     hdr_t hdr;
 
     qDebug() << fn;
@@ -157,7 +155,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
     qDebug() << hex << "Version:" << hdr.version << "DevId" <<  hdr.devid;
     qDebug() << mapFile.lon1 << mapFile.lat1 << mapFile.lon2 << mapFile.lat2;
     qDebug() << hex <<  hdr.lon1 <<  hdr.lat1 <<  hdr.lon2 <<  hdr.lat2;
-    qDebug() << hex << "Details:" <<  hdr.details << "Expire:" <<  hdr.expire << "CRC:" <<  hdr.crc ;
+    qDebug() << hex << "Details:" <<  hdr.details << "Expire:" <<  hdr.expire << "CRC:" <<  hdr.crc;
     qDebug() << hex << "Signature:" <<  hdr.signature << "Offset:" <<  hdr.signature_offset;
 
     QString strTopLeft, strBottomRight;
@@ -223,7 +221,6 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
 
     for(quint32 i = 0; i < hdr.details; i++)
     {
-
         level_t& level = mapFile.levels[i];
         const quint32 M = level.nTiles;
         file.seek(level.offset);
@@ -232,7 +229,6 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
 
         for(quint32 m = 0; m < M; m++)
         {
-
             qint32 top, right, bottom, left;
             tile_t& tile = level.tiles[m];
 
@@ -246,11 +242,22 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
         }
     }
 
-    if(mapFile.lon1 < lon1) lon1  = mapFile.lon1;
-    if(mapFile.lat1 > lat1) lat1  = mapFile.lat1;
-    if(mapFile.lon2 > lon2) lon2  = mapFile.lon2;
-    if(mapFile.lat2 < lat2) lat2  = mapFile.lat2;
-
+    if(mapFile.lon1 < lon1)
+    {
+        lon1  = mapFile.lon1;
+    }
+    if(mapFile.lat1 > lat1)
+    {
+        lat1  = mapFile.lat1;
+    }
+    if(mapFile.lon2 > lon2)
+    {
+        lon2  = mapFile.lon2;
+    }
+    if(mapFile.lat2 < lat2)
+    {
+        lat2  = mapFile.lat2;
+    }
 }
 
 qint32 CMapJNX::scale2level(qreal s, const file_t& file)
@@ -268,13 +275,12 @@ qint32 CMapJNX::scale2level(qreal s, const file_t& file)
         }
     }
 
-    return idxLvl;
+    return(idxLvl);
 }
 
 
 void CMapJNX::draw(IDrawContext::buffer_t& buf)
 {
-
     if(map->needsRedraw())
     {
         return;
@@ -305,7 +311,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf)
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    foreach(const file_t& mapFile, files)
+    foreach(const file_t &mapFile, files)
     {
         if(!viewport.intersects(mapFile.bbox))
         {
@@ -364,7 +370,6 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf)
         const quint32 M = tiles.size();
         for(quint32 m = 0; m < M; m++)
         {
-
             if(map->needsRedraw())
             {
                 break;

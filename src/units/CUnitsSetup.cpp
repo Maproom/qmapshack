@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
-#include "CMainWindow.h"
 
 CUnitsSetup::CUnitsSetup(QWidget *parent)
     : QDialog(parent)
@@ -30,9 +30,11 @@ CUnitsSetup::CUnitsSetup(QWidget *parent)
     case IUnit::eTypeMetric:
         radioMetric->setChecked(true);
         break;
+
     case IUnit::eTypeImperial:
         radioImperial->setChecked(true);
         break;
+
     case IUnit::eTypeNautic:
         radioNautic->setChecked(true);
         break;
@@ -41,7 +43,6 @@ CUnitsSetup::CUnitsSetup(QWidget *parent)
 
 CUnitsSetup::~CUnitsSetup()
 {
-
 }
 
 void CUnitsSetup::accept()

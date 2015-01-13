@@ -19,9 +19,9 @@
 #ifndef CCOMBINETRK_H
 #define CCOMBINETRK_H
 
-#include <QDialog>
 #include "gis/IGisItem.h"
 #include "ui_ICombineTrk.h"
+#include <QDialog>
 
 class CGisItemTrk;
 class IGisProject;
@@ -29,28 +29,31 @@ class IGisProject;
 class CCombineTrk : public QDialog, private Ui::ICombineTrk
 {
     Q_OBJECT
-    public:
-        CCombineTrk(CGisItemTrk& trk, IGisProject &project, QWidget * parent);
-        virtual ~CCombineTrk();
+public:
+    CCombineTrk(CGisItemTrk& trk, IGisProject &project, QWidget * parent);
+    virtual ~CCombineTrk();
 
-        const QList<IGisItem::key_t>& getTrackKeys(){return keys;}
+    const QList<IGisItem::key_t>& getTrackKeys()
+    {
+        return( keys);
+    }
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotSelectionChanged();
-        void slotSelect();
-        void slotRemove();
-        void slotUp();
-        void slotDown();
+private slots:
+    void slotSelectionChanged();
+    void slotSelect();
+    void slotRemove();
+    void slotUp();
+    void slotDown();
 
-    private:
-        void updatePreview();
-        CGisItemTrk& trk;
-        IGisProject& project;
+private:
+    void updatePreview();
+    CGisItemTrk& trk;
+    IGisProject& project;
 
-        QList<IGisItem::key_t> keys;
+    QList<IGisItem::key_t> keys;
 };
 
 #endif //CCOMBINETRK_H

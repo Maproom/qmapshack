@@ -16,20 +16,20 @@
 
 **********************************************************************************************/
 
-#include "plot/CPlotData.h"
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotAxisTime.h"
+#include "plot/CPlotData.h"
 #include "units/IUnit.h"
 
 CPlotData::CPlotData(axistype_e type, QObject * parent)
-: QObject(parent)
-, grid(true)
-, badData(true)
-, axisType(type)
-, xmin(0)
-, xmax(0)
-, ymin(0)
-, ymax(0)
+    : QObject(parent)
+    , grid(true)
+    , badData(true)
+    , axisType(type)
+    , xmin(0)
+    , xmax(0)
+    , ymin(0)
+    , ymax(0)
 {
     if(type == eAxisLinear)
     {
@@ -46,7 +46,6 @@ CPlotData::CPlotData(axistype_e type, QObject * parent)
 
 CPlotData::~CPlotData()
 {
-
 }
 
 
@@ -58,7 +57,10 @@ void CPlotData::setLimits()
     }
 
     QList<line_t>::const_iterator line  = lines.begin();
-    if(line == lines.end()) return;
+    if(line == lines.end())
+    {
+        return;
+    }
     QPolygonF::const_iterator p         = line->points.begin();
 
     xmin = p->x();
@@ -73,11 +75,22 @@ void CPlotData::setLimits()
         {
             if(p->y() != NOFLOAT)
             {
-
-                if(p->x() > xmax) xmax = p->x();
-                if(p->x() < xmin) xmin = p->x();
-                if(p->y() > ymax) ymax = p->y();
-                if(p->y() < ymin) ymin = p->y();
+                if(p->x() > xmax)
+                {
+                    xmax = p->x();
+                }
+                if(p->x() < xmin)
+                {
+                    xmin = p->x();
+                }
+                if(p->y() > ymax)
+                {
+                    ymax = p->y();
+                }
+                if(p->y() < ymin)
+                {
+                    ymin = p->y();
+                }
             }
             ++p;
         }

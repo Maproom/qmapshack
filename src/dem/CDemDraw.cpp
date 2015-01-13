@@ -16,15 +16,15 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "dem/IDem.h"
+#include "canvas/CCanvas.h"
 #include "dem/CDemDraw.h"
-#include "dem/CDemList.h"
 #include "dem/CDemItem.h"
+#include "dem/CDemList.h"
 #include "dem/CDemPathSetup.h"
-#include "units/IUnit.h"
+#include "dem/IDem.h"
 #include "helpers/CSettings.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 
@@ -37,7 +37,6 @@ QStringList CDemDraw::supportedFormats = QString("*.vrt").split('|');
 CDemDraw::CDemDraw(CCanvas *canvas)
     : IDrawContext("dem", CCanvas::eRedrawDem, canvas)
 {
-
     demList = new CDemList(canvas);
     CMainWindow::self().addDemList(demList, canvas->objectName());
     connect(canvas, SIGNAL(destroyed()), demList, SLOT(deleteLater()));
@@ -103,7 +102,6 @@ void CDemDraw::saveConfig(QSettings& cfg)
     saveActiveMapsList(keys, cfg);
     cfg.setValue("active", keys);
     cfg.endGroup();
-
 }
 
 void CDemDraw::loadConfig(QSettings& cfg)
@@ -123,11 +121,11 @@ void CDemDraw::buildMapList()
     QMutexLocker lock(&CDemItem::mutexActiveDems);
     demList->clear();
 
-    foreach(const QString& path, demPaths)
+    foreach(const QString &path, demPaths)
     {
         QDir dir(path);
         // find available maps
-        foreach(const QString& filename, dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
+        foreach(const QString &filename, dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
         {
             QFileInfo fi(filename);
 
@@ -189,7 +187,7 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
 {
     QMutexLocker lock(&CDemItem::mutexActiveDems);
 
-    foreach(const QString& key, keys)
+    foreach(const QString &key, keys)
     {
         for(int i = 0; i < demList->count(); i++)
         {
@@ -200,7 +198,7 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
                 /**
                     @Note   the item will load it's configuration uppon successful activation
                             by calling loadConfigForDemItem().
-                */
+                 */
                 item->activate();
                 break;
             }
@@ -235,12 +233,11 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
                 {
                     break;
                 }
-
             }
         }
         CDemItem::mutexActiveDems.unlock();
     }
-    return ele;
+    return(ele);
 }
 
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
@@ -270,9 +267,7 @@ void CDemDraw::drawt(buffer_t& currentBuffer)
             }
 
             item->demfile->draw(currentBuffer);
-
         }
     }
     CDemItem::mutexActiveDems.unlock();
-
 }

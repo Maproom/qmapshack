@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderLostFound.h"
-#include "gis/CGisListDB.h"
 
 CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& name, QTreeWidget *parent)
     : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
@@ -36,7 +36,6 @@ CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& nam
 
 CDBFolderDatabase::~CDBFolderDatabase()
 {
-
 }
 
 void CDBFolderDatabase::expanding()

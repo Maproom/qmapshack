@@ -27,72 +27,81 @@
 #define NOTIME  0xFFFFFFFF
 
 extern const QPointF NOPOINTF;
-extern const QPoint  NOPOINT;
+extern const QPoint NOPOINT;
 
 class IUnit : public QObject
 {
     Q_OBJECT
-    public:
-        virtual ~IUnit();
+public:
+    virtual ~IUnit();
 
-        static IUnit& self(){return *m_self;}
-        /// convert meter of elevation into a value and unit string
-        virtual void meter2elevation(qreal meter, QString& val, QString& unit) = 0;
-        /// convert meter of distance into a value and unit string
-        virtual void meter2distance(qreal meter, QString& val, QString& unit) = 0;
-        /// convert meter per second to a speed value string and unit label
-        virtual void meter2speed(qreal meter, QString& val, QString& unit);
-        virtual void meter2area(qreal meter, QString& val, QString& unit) = 0;
-        virtual void seconds2time(quint32 ttime, QString& val, QString& unit);
-        virtual qreal elevation2meter(const QString& val) = 0;
-
-
-        enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
-        static void setUnitType(type_e t, QObject *parent);
-
-        static bool parseTimestamp(const QString &time, QDateTime &datetime);
-
-        /**
-           @brief Convert date time object to string using the current timezone configuration
+    static IUnit& self()
+    {
+        return( *m_self);
+    }
+    /// convert meter of elevation into a value and unit string
+    virtual void meter2elevation(qreal meter, QString& val, QString& unit) = 0;
+    /// convert meter of distance into a value and unit string
+    virtual void meter2distance(qreal meter, QString& val, QString& unit) = 0;
+    /// convert meter per second to a speed value string and unit label
+    virtual void meter2speed(qreal meter, QString& val, QString& unit);
+    virtual void meter2area(qreal meter, QString& val, QString& unit) = 0;
+    virtual void seconds2time(quint32 ttime, QString& val, QString& unit);
+    virtual qreal elevation2meter(const QString& val) = 0;
 
 
-           @param time          the date/time object
-           @param shortDate     set true to get a short ISO time string
-           @param pos           optional a position attached to the date/time object [rad]
-           @return              A time string.
-         */
-        static QString datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos = NOPOINTF);
+    enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
+    static void setUnitType(type_e t, QObject *parent);
 
-        static QByteArray pos2timezone(const QPointF& pos);
+    static bool parseTimestamp(const QString &time, QDateTime &datetime);
 
-        const type_e  type;
-        const QString baseunit;
-        const qreal   basefactor;
-        const QString speedunit;
-        const qreal   speedfactor;
-        static const char *  tblTimezone[];
-
-        enum tz_mode_e
-        {
-             eTZUtc
-            ,eTZLocal
-            ,eTZAuto
-            ,eTZSelected
-        };
-
-        static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone){mode = timeZoneMode; zone = timeZone;}
-        static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone){timeZoneMode = mode; timeZone = zone;}
-
-    protected:
-        IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent);
-
-        static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
-
-        static tz_mode_e  timeZoneMode;
-        static QByteArray timeZone;
+    /**
+       @brief Convert date time object to string using the current timezone configuration
 
 
-    private:
-        static IUnit * m_self;
+       @param time          the date/time object
+       @param shortDate     set true to get a short ISO time string
+       @param pos           optional a position attached to the date/time object [rad]
+       @return              A time string.
+     */
+    static QString datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos = NOPOINTF);
+
+    static QByteArray pos2timezone(const QPointF& pos);
+
+    const type_e type;
+    const QString baseunit;
+    const qreal basefactor;
+    const QString speedunit;
+    const qreal speedfactor;
+    static const char *  tblTimezone[];
+
+    enum tz_mode_e
+    {
+        eTZUtc
+        ,eTZLocal
+        ,eTZAuto
+        ,eTZSelected
+    };
+
+    static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone)
+    {
+        mode = timeZoneMode; zone = timeZone;
+    }
+    static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone)
+    {
+        timeZoneMode = mode; timeZone = zone;
+    }
+
+protected:
+    IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent);
+
+    static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
+
+    static tz_mode_e timeZoneMode;
+    static QByteArray timeZone;
+
+
+private:
+    static IUnit * m_self;
 };
 #endif                           //IUNIT_H

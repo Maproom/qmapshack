@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBFolderOther.h"
 #include "gis/CGisListDB.h"
+#include "gis/db/CDBFolderOther.h"
 
 CDBFolderOther::CDBFolderOther(QSqlDatabase& db, quint64 key, QTreeWidgetItem * parent)
     : IDBFolder(true, db, eTypeOther, key, parent)
@@ -28,6 +28,5 @@ CDBFolderOther::CDBFolderOther(QSqlDatabase& db, quint64 key, QTreeWidgetItem * 
 
 CDBFolderOther::~CDBFolderOther()
 {
-
 }
 

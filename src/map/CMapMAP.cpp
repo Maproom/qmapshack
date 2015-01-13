@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "map/CMapMAP.h"
-#include "map/CMapDraw.h"
 #include "helpers/CFileExt.h"
+#include "map/CMapDraw.h"
+#include "map/CMapMAP.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -33,7 +33,6 @@ CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility|eFeatVectorItems, parent)
     , filename(filename)
 {
-
     qDebug() << "------------------------------";
     qDebug() << "MAP: try to open" << filename;
 
@@ -53,12 +52,10 @@ CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
 
 CMapMAP::~CMapMAP()
 {
-
 }
 
 void CMapMAP::readBasics()
 {
-
     CFileExt file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
@@ -147,12 +144,8 @@ void CMapMAP::readBasics()
         layers << layer;
     }
     // ---------- end file header ----------------------
-
-
-
 }
 
 void CMapMAP::draw(IDrawContext::buffer_t& buf)
 {
-
 }

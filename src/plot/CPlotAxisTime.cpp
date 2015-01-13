@@ -21,21 +21,18 @@
 #include <QtWidgets>
 
 CPlotAxisTime::CPlotAxisTime(QObject * parent)
-: CPlotAxis(parent)
+    : CPlotAxis(parent)
 {
-
 }
 
 
 CPlotAxisTime::~CPlotAxisTime()
 {
-
 }
 
 
 void CPlotAxisTime::calc()
 {
-
     int dSec    = usedMax - usedMin;
     ticStart    = usedMin;
     strFormat   = "hh:mm:ss";
@@ -112,7 +109,6 @@ void CPlotAxisTime::calc()
     {
         ticStart += interval;
     }
-
 }
 
 
@@ -126,5 +122,5 @@ const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t * t )
         tic.lbl = time.toString(strFormat);
     }
 
-    return _tic_;
+    return(_tic_);
 }

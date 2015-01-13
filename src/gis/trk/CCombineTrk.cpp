@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "gis/prj/IGisProject.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/prj/IGisProject.h"
 #include "plot/CPlotTrack.h"
 
 #include <QtWidgets>
@@ -71,12 +71,10 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, IGisProject& project, QWidget * paren
 
     slotSelectionChanged();
     updatePreview();
-
 }
 
 CCombineTrk::~CCombineTrk()
 {
-
 }
 
 void CCombineTrk::accept()
@@ -173,14 +171,16 @@ void CCombineTrk::slotUp()
     if(item)
     {
         int row = listSelected->row(item);
-        if(row == 0) return;
+        if(row == 0)
+        {
+            return;
+        }
         listSelected->takeItem(row);
         row = row - 1;
         listSelected->insertItem(row,item);
         listSelected->setCurrentItem(item);
     }
     updatePreview();
-
 }
 
 void CCombineTrk::slotDown()
@@ -189,7 +189,10 @@ void CCombineTrk::slotDown()
     if(item)
     {
         int row = listSelected->row(item);
-        if(row == (listSelected->count() - 1)) return;
+        if(row == (listSelected->count() - 1))
+        {
+            return;
+        }
         listSelected->takeItem(row);
         row = row + 1;
         listSelected->insertItem(row,item);
@@ -203,7 +206,7 @@ void CCombineTrk::updatePreview()
 {
     QPolygonF line;
     for(int i = 0; i < listSelected->count(); i++)
-    {      
+    {
         IGisItem::key_t key;
         key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
         key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();

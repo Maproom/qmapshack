@@ -19,8 +19,8 @@
 #ifndef CGISLISTDB_H
 #define CGISLISTDB_H
 
-#include <QTreeWidget>
 #include <QSqlDatabase>
+#include <QTreeWidget>
 
 #include <gis/db/IDBFolder.h>
 
@@ -31,60 +31,60 @@ class CDBFolderDatabase;
 class CGisListDB : public QTreeWidget
 {
     Q_OBJECT
-    public:
-        CGisListDB(QWidget * parent);
-        virtual ~CGisListDB();
+public:
+    CGisListDB(QWidget * parent);
+    virtual ~CGisListDB();
 
-        enum column_e
-        {
-             eColumnCheckbox = 0
-            ,eColumnName = 1
-        };
+    enum column_e
+    {
+        eColumnCheckbox = 0
+        ,eColumnName = 1
+    };
 
-        bool hasDatabase(const QString& name);
-        bool event(QEvent * e);
+    bool hasDatabase(const QString& name);
+    bool event(QEvent * e);
 
-    signals:
-        void sigChanged();
+signals:
+    void sigChanged();
 
-    private slots:
-        void slotContextMenu(const QPoint& point);
-        void slotAddFolder();
-        void slotDelFolder();
-        void slotDelLostFound();
-        void slotDelLostFoundItem();
-        void slotItemExpanded(QTreeWidgetItem * item);
-        void slotItemChanged(QTreeWidgetItem * item, int column);
-        void slotAddDatabase();
-        void slotDelDatabase();
-        void slotDelItem();
+private slots:
+    void slotContextMenu(const QPoint& point);
+    void slotAddFolder();
+    void slotDelFolder();
+    void slotDelLostFound();
+    void slotDelLostFoundItem();
+    void slotItemExpanded(QTreeWidgetItem * item);
+    void slotItemChanged(QTreeWidgetItem * item, int column);
+    void slotAddDatabase();
+    void slotDelDatabase();
+    void slotDelItem();
 
-    private:
-        friend class CGisListDBEditLock;
+private:
+    friend class CGisListDBEditLock;
 
-        CDBFolderDatabase *getDataBase(const QString& name);
-        void addDatabase(const QString& name, const QString& filename);
+    CDBFolderDatabase *getDataBase(const QString& name);
+    void addDatabase(const QString& name, const QString& filename);
 
-        int isInternalEdit;
+    int isInternalEdit;
 
-        QMenu * menuNone;
-        QAction * actionAddDatabase;
+    QMenu * menuNone;
+    QAction * actionAddDatabase;
 
-        QMenu * menuFolder;
-        QAction * actionAddFolder;
-        QAction * actionDelFolder;
+    QMenu * menuFolder;
+    QAction * actionAddFolder;
+    QAction * actionDelFolder;
 
-        QMenu * menuDatabase;
-        QAction * actionDelDatabase;
+    QMenu * menuDatabase;
+    QAction * actionDelDatabase;
 
-        QMenu * menuItem;
-        QAction * actionDelItem;
+    QMenu * menuItem;
+    QAction * actionDelItem;
 
-        QMenu * menuLostFound;
-        QAction * actionDelLostFound;
+    QMenu * menuLostFound;
+    QAction * actionDelLostFound;
 
-        QMenu * menuLostFoundItem;
-        QAction * actionDelLostFoundItem;
+    QMenu * menuLostFoundItem;
+    QAction * actionDelLostFoundItem;
 
 
 //        CDBFolderDatabase *  folderDatabase;

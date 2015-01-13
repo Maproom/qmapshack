@@ -19,24 +19,23 @@
 #ifndef CFILTERNEWDATE_H
 #define CFILTERNEWDATE_H
 
-#include <QWidget>
 #include "ui_IFilterNewDate.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
 class CFilterNewDate : public QWidget, private Ui::IFilterNewDate
 {
     Q_OBJECT
-    public:
-        CFilterNewDate(CGisItemTrk& trk, QWidget * parent);
-        virtual ~CFilterNewDate();
+public:
+    CFilterNewDate(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterNewDate();
 
-    private slots:
-        void slotApply();
+private slots:
+    void slotApply();
 
-    private:
-        CGisItemTrk& trk;
-
+private:
+    CGisItemTrk& trk;
 };
 
 #endif //CFILTERNEWDATE_H

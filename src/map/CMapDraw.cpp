@@ -16,14 +16,14 @@
 
 **********************************************************************************************/
 
-#include "map/IMap.h"
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
 #include "map/CMapPathSetup.h"
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
-#include "helpers/CSettings.h"
+#include "map/IMap.h"
 
 #include <QtGui>
 #include <QtWidgets>
@@ -49,7 +49,6 @@ CMapDraw::CMapDraw(CCanvas *parent)
 
 CMapDraw::~CMapDraw()
 {
-
     maps.removeOne(this);
 }
 
@@ -120,7 +119,6 @@ void CMapDraw::getInfo(const QPoint& px, QString& str)
         }
     }
     CMapItem::mutexActiveMaps.unlock();
-
 }
 
 void CMapDraw::getToolTip(const QPoint& px, QString& str)
@@ -145,7 +143,6 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
             }
 
             item->mapfile->getToolTip(px, str);
-
         }
     }
     CMapItem::mutexActiveMaps.unlock();
@@ -155,7 +152,7 @@ bool CMapDraw::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold,
 {
     if(isRunning())
     {
-        return false;
+        return(false);
     }
     bool res = false;
     CMapItem::mutexActiveMaps.lock();
@@ -181,7 +178,7 @@ bool CMapDraw::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold,
         }
     }
     CMapItem::mutexActiveMaps.unlock();
-    return res;
+    return(res);
 }
 
 void CMapDraw::saveConfig(QSettings& cfg)
@@ -195,7 +192,6 @@ void CMapDraw::saveConfig(QSettings& cfg)
     cfg.setValue("active", keys);
     cfg.setValue("zoomIndex", zoomIndex);
     cfg.endGroup();
-
 }
 
 void CMapDraw::loadConfig(QSettings& cfg)
@@ -220,11 +216,11 @@ void CMapDraw::buildMapList()
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
 
-    foreach(const QString& path, mapPaths)
+    foreach(const QString &path, mapPaths)
     {
         QDir dir(path);
         // find available maps
-        foreach(const QString& filename, dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
+        foreach(const QString &filename, dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
         {
             QFileInfo fi(filename);
 
@@ -285,7 +281,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    foreach(const QString& key, keys)
+    foreach(const QString &key, keys)
     {
         for(int i = 0; i < mapList->count(); i++)
         {
@@ -296,7 +292,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
                 /**
                     @Note   the item will load it's configuration uppon successful activation
                             by calling loadConfigForMapItem().
-                */
+                 */
                 item->activate();
                 break;
             }
@@ -330,7 +326,6 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer)
             }
 
             item->mapfile->draw(currentBuffer);
-
         }
     }
     CMapItem::mutexActiveMaps.unlock();

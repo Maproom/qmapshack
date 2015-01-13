@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "dem/IDemProp.h"
 #include "dem/CDemDraw.h"
 #include "dem/IDem.h"
+#include "dem/IDemProp.h"
 
 IDemProp::IDemProp(IDem *demfile, CDemDraw *dem)
     : demfile(demfile)
@@ -29,6 +29,5 @@ IDemProp::IDemProp(IDem *demfile, CDemDraw *dem)
 
 IDemProp::~IDemProp()
 {
-
 }
 

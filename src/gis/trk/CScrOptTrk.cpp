@@ -16,19 +16,19 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/CScrOptTrk.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/CGisWidget.h"
-#include "mouse/IMouse.h"
-#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CScrOptTrk.h"
+#include "mouse/IMouse.h"
 
 CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     : IScrOpt(parent->getCanvas())
 {
     key         = trk->getKey();
 
-    setupUi(this);    
+    setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(trk->getInfo());
@@ -39,7 +39,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
 
     anchor = trk->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
-    show();        
+    show();
 
     connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
@@ -54,7 +54,6 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
 
 CScrOptTrk::~CScrOptTrk()
 {
-
 }
 
 void CScrOptTrk::slotDelete()
@@ -103,7 +102,6 @@ void CScrOptTrk::slotCombine()
 {
     CGisWidget::self().combineTrkByKey(key);
     deleteLater();
-
 }
 
 void CScrOptTrk::slotRange()

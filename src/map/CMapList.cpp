@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "map/CMapList.h"
 #include "map/CMapItem.h"
+#include "map/CMapList.h"
 
 #include <QtWidgets>
 
@@ -76,7 +76,6 @@ CMapList::CMapList(QWidget *parent)
 
 CMapList::~CMapList()
 {
-
 }
 
 void CMapList::clear()
@@ -86,12 +85,12 @@ void CMapList::clear()
 
 int CMapList::count()
 {
-    return treeWidget->topLevelItemCount();
+    return(treeWidget->topLevelItemCount());
 }
 
 CMapItem * CMapList::item(int i)
 {
-    return dynamic_cast<CMapItem *>(treeWidget->topLevelItem(i));
+    return(dynamic_cast<CMapItem *>(treeWidget->topLevelItem(i)));
 }
 
 void CMapList::updateHelpText()
@@ -123,7 +122,10 @@ void CMapList::updateHelpText()
 void CMapList::slotActivate()
 {
     CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
-    if(item == 0) return;
+    if(item == 0)
+    {
+        return;
+    }
 
     bool activated = item->toggleActivate();
     if(!activated)

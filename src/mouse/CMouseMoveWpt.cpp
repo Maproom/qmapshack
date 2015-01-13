@@ -16,14 +16,14 @@
 
 **********************************************************************************************/
 
-#include "mouse/CMouseMoveWpt.h"
-#include "gis/wpt/CGisItemWpt.h"
+#include "GeoMath.h"
+#include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/WptIcons.h"
-#include "canvas/CCanvas.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "mouse/CMouseMoveWpt.h"
 #include "units/IUnit.h"
-#include "GeoMath.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -39,7 +39,6 @@ CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
 
 CMouseMoveWpt::~CMouseMoveWpt()
 {
-
 }
 
 void CMouseMoveWpt::draw(QPainter& p,  bool needsRedraw, const QRect &rect)
@@ -84,7 +83,6 @@ void CMouseMoveWpt::draw(QPainter& p,  bool needsRedraw, const QRect &rect)
 
     p.drawPixmap(p1 - focus, icon);
     p.drawPixmap(p2 - focus, icon);
-
 }
 
 void CMouseMoveWpt::slotPanCanvas()

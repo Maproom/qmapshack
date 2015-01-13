@@ -14,12 +14,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-  Garmin and MapSource are registered trademarks or trademarks of Garmin Ltd.
-  or one of its subsidiaries.
+   Garmin and MapSource are registered trademarks or trademarks of Garmin Ltd.
+   or one of its subsidiaries.
 
-  This source is based on John Mechalas documentation "Garmin IMG File Format" found
-  at sourceforge. The missing bits and error were rectified by the source code of
-  Konstantin Galichsky (kg@geopainting.com), http://www.geopainting.com
+   This source is based on John Mechalas documentation "Garmin IMG File Format" found
+   at sourceforge. The missing bits and error were rectified by the source code of
+   Konstantin Galichsky (kg@geopainting.com), http://www.geopainting.com
 
 **********************************************************************************************/
 #include "CGarminPoint.h"
@@ -29,18 +29,16 @@
 #include <QtCore>
 
 CGarminPoint::CGarminPoint()
-: type(0)
-, isLbl6(false)
-, hasSubType(false)
-, lbl_ptr(0xFFFFFFFF)
+    : type(0)
+    , isLbl6(false)
+    , hasSubType(false)
+    , lbl_ptr(0xFFFFFFFF)
 {
-
 }
 
 
 CGarminPoint::~CGarminPoint()
 {
-
 }
 
 
@@ -75,10 +73,10 @@ quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift
     if(hasSubType)
     {
         type |= *pData;
-        return 9;
+        return(9);
     }
 
-    return 8;
+    return(8);
 }
 
 
@@ -115,8 +113,7 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
         lbl_ptr     = gar_ptr_load(uint24_t, pData);
         isLbl6      = lbl_ptr & 0x00400000;
         lbl_ptr    &= 0x003FFFFF;
-
     }
 
-    return byte_size;
+    return(byte_size);
 }

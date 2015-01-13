@@ -19,27 +19,27 @@
 #ifndef CCANVASSETUP_H
 #define CCANVASSETUP_H
 
-#include <QDialog>
 #include "ui_ICanvasSetup.h"
+#include <QDialog>
 
 class CCanvas;
 
 class CCanvasSetup : public QDialog, private Ui::ICanvasSetup
 {
     Q_OBJECT
-    public:
-        CCanvasSetup(CCanvas *canvas);
-        virtual ~CCanvasSetup();
+public:
+    CCanvasSetup(CCanvas *canvas);
+    virtual ~CCanvasSetup();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
 
-    protected slots:
-        void slotProjWizard();
+protected slots:
+    void slotProjWizard();
 
-    protected:
-        CCanvas * canvas;
+protected:
+    CCanvas * canvas;
 };
 
 #endif //CCANVASSETUP_H

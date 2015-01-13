@@ -23,21 +23,24 @@
 
 class CFileExt : public QFile
 {
-    public:
-        CFileExt(const QString &filename)
-            : QFile(filename)
-            , mapped(NULL)
-            {}
+public:
+    CFileExt(const QString &filename)
+        : QFile(filename)
+        , mapped(NULL)
+    {
+    }
 
-        // data access function
-        const char *data(qint64 offset)
+    // data access function
+    const char *data(qint64 offset)
+    {
+        if(!mapped)
         {
-            if(!mapped)
-                mapped = reinterpret_cast<const char*>(map(0, size()));
-            return mapped + offset;
+            mapped = reinterpret_cast<const char*>(map(0, size()));
         }
-    private:
-        const char *mapped;
+        return( mapped + offset);
+    }
+private:
+    const char *mapped;
 };
 
 

@@ -16,21 +16,21 @@
 
 **********************************************************************************************/
 
-#include "gis/db/macros.h"
-#include "gis/db/IDBFolder.h"
-#include "qlgt/CQlgtDb.h"
-#include "qlgt/CQmsDb.h"
-#include "qlgt/CImportDatabase.h"
-#include "qlgt/CQlgtFolder.h"
-#include "qlgt/CQlgtWpt.h"
-#include "qlgt/CQlgtTrack.h"
-#include "qlgt/CQlgtRoute.h"
-#include "qlgt/IQlgtOverlay.h"
 #include "gis/db/CDBProject.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
+#include "gis/db/IDBFolder.h"
+#include "gis/db/macros.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "qlgt/CImportDatabase.h"
+#include "qlgt/CQlgtDb.h"
+#include "qlgt/CQlgtFolder.h"
+#include "qlgt/CQlgtRoute.h"
+#include "qlgt/CQlgtTrack.h"
+#include "qlgt/CQlgtWpt.h"
+#include "qlgt/CQmsDb.h"
+#include "qlgt/IQlgtOverlay.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -67,7 +67,6 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
 
 CQmsDb::~CQmsDb()
 {
-
 }
 
 
@@ -77,7 +76,7 @@ void CQmsDb::addFolder2FolderRelation(quint64 parent, quint64 child)
     query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
     query.bindValue(":parent", mapFolderIDs[parent]);
     query.bindValue(":child", mapFolderIDs[child]);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 }
 
 void CQmsDb::addFolder2ItemRelation(quint64 parent, quint64 child)
@@ -86,7 +85,7 @@ void CQmsDb::addFolder2ItemRelation(quint64 parent, quint64 child)
     query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
     query.bindValue(":parent", mapFolderIDs[parent]);
     query.bindValue(":child", mapItemIDs[child]);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 }
 
 
@@ -102,15 +101,14 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
     // folders without child items
     if(folder.items.isEmpty())
     {
-
         query.prepare("INSERT INTO folders (type, name, locked) VALUES (:type, :name, :locked)");
         query.bindValue(":type", mapFolderTypes[folder.type]);
         query.bindValue(":name", folder.name);
         query.bindValue(":locked", folder.locked);
-        QUERY_EXEC(return);
+        QUERY_EXEC(return );
 
         query.prepare("SELECT last_insert_rowid() from folders");
-        QUERY_EXEC(return);
+        QUERY_EXEC(return );
         query.next();
         quint64 id = query.value(0).toULongLong();
         if(id == 0)
@@ -125,7 +123,7 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
     /*
         Folders with child items will be loaded as complete CDBProject first, to
         generate key and info text properly
-    */
+     */
     CDBProject project(folder);
     foreach(quint64 id, folder.items)
     {
@@ -138,19 +136,23 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
             int type = query.value(0).toInt();
             switch(type)
             {
-                case IGisItem::eTypeWpt:
-                    new CGisItemWpt(idChild, db, &project);
-                    break;
-                case IGisItem::eTypeTrk:
-                    new CGisItemTrk(idChild, db, &project);
-                    break;
-                case IGisItem::eTypeRte:
-                    new CGisItemRte(idChild, db, &project);
-                    break;
-                case IGisItem::eTypeOvl:
-                    new CGisItemOvlArea(idChild, db, &project);
-                    break;
-                default:;
+            case IGisItem::eTypeWpt:
+                new CGisItemWpt(idChild, db, &project);
+                break;
+
+            case IGisItem::eTypeTrk:
+                new CGisItemTrk(idChild, db, &project);
+                break;
+
+            case IGisItem::eTypeRte:
+                new CGisItemRte(idChild, db, &project);
+                break;
+
+            case IGisItem::eTypeOvl:
+                new CGisItemOvlArea(idChild, db, &project);
+                break;
+
+            default:;
             }
         }
         else
@@ -173,10 +175,10 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
     query.bindValue(":comment", project.getInfo());
     query.bindValue(":locked",  folder.locked);
     query.bindValue(":data",    data);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 
     query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
     quint64 id = query.value(0).toULongLong();
     if(id == 0)
@@ -258,6 +260,5 @@ quint64 CQmsDb::store(IGisItem& item)
     query.next();
     quint64 idItem = query.value(0).toULongLong();
 
-    return idItem;
-
+    return(idItem);
 }

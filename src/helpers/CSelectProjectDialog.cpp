@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "helpers/CSelectProjectDialog.h"
-#include "gis/prj/IGisProject.h"
 #include "gis/CGisListWks.h"
+#include "gis/prj/IGisProject.h"
+#include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
 
 
@@ -39,7 +39,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
             IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
             if(project == 0)
             {
-             continue;
+                continue;
             }
 
             QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnName), project->text(CGisListWks::eColumnName),listWidget);
@@ -83,7 +83,6 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 
 CSelectProjectDialog::~CSelectProjectDialog()
 {
-
 }
 
 void CSelectProjectDialog::reject()
@@ -97,7 +96,6 @@ void CSelectProjectDialog::reject()
 
 void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
 {
-
     key = item->data(Qt::UserRole).toString();
     lineEdit->setText(item->text());
     frameType->setEnabled(false);

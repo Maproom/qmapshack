@@ -26,125 +26,139 @@ class QFontMetrics;
 class CPlotAxis : public QObject
 {
     Q_OBJECT
-        public:
-        CPlotAxis(QObject * parent);
-        virtual ~CPlotAxis();
+public:
+    CPlotAxis(QObject * parent);
+    virtual ~CPlotAxis();
 
-        /// tic mark information structure
-        struct tic_t
+    /// tic mark information structure
+    struct tic_t
+    {
+        tic_t()
         {
-            tic_t(){val=0;lbl="";}
-            qreal val;
-            QString lbl;
-        };
-
-        ///tic type
-        enum tictype_e
-        {
-            eNoTic,               /**< no tics are produced*/
-            eTicMinMax,           /**< only min max tics are produced*/
-            eTicNorm,             /**< tics by interval*/
-            eTicFull              /**< minmax && norm*/
-        };
-
-        ///zoom in/out with a given point as static
-        virtual void zoom(bool in, int point);
-        ///set the desired minimum and maximum value equal to limit values
-        virtual void resetZoom();
-        ///add delta_pt to min and max values
-        virtual void move(int delta);
-        ///set the desired minimum and maximum value
-        virtual void setMinMax(qreal givenMin, qreal givenMax);
-        ///set the limit minimum and maximum value
-        virtual void setLimits(qreal min, qreal max);
-        ///set the scale factor for a given size in points
-        virtual void setScale(const unsigned int pts);
-        ///calculate format for the given value
-        virtual const QString fmtsgl(qreal val);
-        ///calculate format for the given value
-        virtual const QString fmtdbl(qreal val);
-        ///get the maximum width of a scale with provided fontmetrics
-        virtual int getScaleWidth(const QFontMetrics& m);
-        ///get a new ticmark object
-        virtual const tic_t* ticmark(const tic_t * t = NULL);
-        /// get the total limits and the used ones
-        virtual void getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& useMax);
-
-        inline int val2pt( qreal val )
-        {
-            if ( scale == 0 )
-            {
-                return 0;
-            }
-            return ( int ) ( ( val - usedMin ) * scale + 0.5 );
+            val=0; lbl="";
         }
+        qreal val;
+        QString lbl;
+    };
 
-        inline qreal pt2val( int pt )
+    ///tic type
+    enum tictype_e
+    {
+        eNoTic,                   /**< no tics are produced*/
+        eTicMinMax,               /**< only min max tics are produced*/
+        eTicNorm,                 /**< tics by interval*/
+        eTicFull                  /**< minmax && norm*/
+    };
+
+    ///zoom in/out with a given point as static
+    virtual void zoom(bool in, int point);
+    ///set the desired minimum and maximum value equal to limit values
+    virtual void resetZoom();
+    ///add delta_pt to min and max values
+    virtual void move(int delta);
+    ///set the desired minimum and maximum value
+    virtual void setMinMax(qreal givenMin, qreal givenMax);
+    ///set the limit minimum and maximum value
+    virtual void setLimits(qreal min, qreal max);
+    ///set the scale factor for a given size in points
+    virtual void setScale(const unsigned int pts);
+    ///calculate format for the given value
+    virtual const QString fmtsgl(qreal val);
+    ///calculate format for the given value
+    virtual const QString fmtdbl(qreal val);
+    ///get the maximum width of a scale with provided fontmetrics
+    virtual int getScaleWidth(const QFontMetrics& m);
+    ///get a new ticmark object
+    virtual const tic_t* ticmark(const tic_t * t = NULL);
+    /// get the total limits and the used ones
+    virtual void getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& useMax);
+
+    inline int val2pt( qreal val )
+    {
+        if ( scale == 0 )
         {
-            if ( scale == 0 )
-            {
-                return 0;
-            }
-            return ( qreal ) ( ( (qreal)pt - 0.5 ) / scale + usedMin );
+            return( 0);
         }
+        return( ( int ) ( ( val - usedMin ) * scale + 0.5 ));
+    }
 
-        void setAutoscale(bool on){autoscale = on;}
-
-        inline tictype_e getTicType(){return ticType;}
-        inline tictype_e setTicType(tictype_e t)
+    inline qreal pt2val( int pt )
+    {
+        if ( scale == 0 )
         {
-            tictype_e old = ticType;
-            ticType = t;
-            return old;
+            return( 0);
         }
+        return( ( qreal ) ( ( (qreal)pt - 0.5 ) / scale + usedMin ));
+    }
 
-        qreal min(){return usedMin;}
-        qreal max(){return usedMax;}
+    void setAutoscale(bool on)
+    {
+        autoscale = on;
+    }
 
-    protected:
-        virtual void calc();
+    inline tictype_e getTicType()
+    {
+        return( ticType);
+    }
+    inline tictype_e setTicType(tictype_e t)
+    {
+        tictype_e old = ticType;
+        ticType = t;
+        return( old);
+    }
 
-        ///true if axis has been initialized
-        bool initialized;
-        ///true if autoscaling
-        bool autoscale;
+    qreal min()
+    {
+        return( usedMin);
+    }
+    qreal max()
+    {
+        return( usedMax);
+    }
 
-        ///scalefactor
-        qreal scale;
+protected:
+    virtual void calc();
 
-        ///the actual applied min value
-        qreal usedMin;
-        ///the actual applied max value
-        qreal usedMax;
+    ///true if axis has been initialized
+    bool initialized;
+    ///true if autoscaling
+    bool autoscale;
 
-        qreal limitMin;
-        qreal limitMax;
+    ///scalefactor
+    qreal scale;
 
-        ///the intervall of the ticmarks
-        qreal interval;
+    ///the actual applied min value
+    qreal usedMin;
+    ///the actual applied max value
+    qreal usedMax;
 
-        ///start value of the tic marks
-        qreal ticStart;
+    qreal limitMin;
+    qreal limitMax;
 
-        /// this is set to -1 by default
-        /**
-            a value > 0 will override the dynamic value in getScaleWidth();
-        */
-        qint32 scaleWidth;
+    ///the intervall of the ticmarks
+    qreal interval;
 
-        ///the ticmark generation type
-        tictype_e ticType;
-        ///local copy of the last ticmark object
-        tic_t tic;
+    ///start value of the tic marks
+    qreal ticStart;
 
-        /// used by ticmark()
-        bool firstTic;
-        /// used by ticmark()
-        bool lastTic;
+    /// this is set to -1 by default
+    /**
+        a value > 0 will override the dynamic value in getScaleWidth();
+     */
+    qint32 scaleWidth;
 
-        ///points of dimension
-        quint32 points;
+    ///the ticmark generation type
+    tictype_e ticType;
+    ///local copy of the last ticmark object
+    tic_t tic;
 
+    /// used by ticmark()
+    bool firstTic;
+    /// used by ticmark()
+    bool lastTic;
+
+    ///points of dimension
+    quint32 points;
 };
 
 #endif //CPLOTAXIS_H

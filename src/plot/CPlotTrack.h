@@ -26,20 +26,20 @@ class CGisItemTrk;
 
 class CPlotTrack : public QWidget, public ITrack
 {
-    public:
-        CPlotTrack(QWidget * parent);
-        CPlotTrack(CGisItemTrk * trk, QWidget * parent);
-        virtual ~CPlotTrack();
+public:
+    CPlotTrack(QWidget * parent);
+    CPlotTrack(CGisItemTrk * trk, QWidget * parent);
+    virtual ~CPlotTrack();
 
-        void setMouseMoveFocus(qreal lon, qreal lat);
+    void setMouseMoveFocus(qreal lon, qreal lat);
 
-    protected:
-        void resizeEvent(QResizeEvent * e);
-        void paintEvent(QPaintEvent * e);
+protected:
+    void resizeEvent(QResizeEvent * e);
+    void paintEvent(QPaintEvent * e);
 
-    private:
+private:
 
-        QPointF pos;
+    QPointF pos;
 };
 
 #endif //CPLOTTRACK_H

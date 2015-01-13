@@ -19,30 +19,30 @@
 #ifndef CSETUPDATABASE_H
 #define CSETUPDATABASE_H
 
-#include <QDialog>
 #include "ui_ISetupDatabase.h"
+#include <QDialog>
 
 class CGisListDB;
 
 class CSetupDatabase : public QDialog, private Ui::ISetupDatabase
 {
     Q_OBJECT
-    public:
-        CSetupDatabase(QString &name, QString &filename, CGisListDB& parent);
-        virtual ~CSetupDatabase();
+public:
+    CSetupDatabase(QString &name, QString &filename, CGisListDB& parent);
+    virtual ~CSetupDatabase();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotNewDB();
-        void slotOpenDB();
-        void slotUpdateButtonBox();
+private slots:
+    void slotNewDB();
+    void slotOpenDB();
+    void slotUpdateButtonBox();
 
-    private:
-        CGisListDB& list;
-        QString& name;
-        QString& filename;
+private:
+    CGisListDB& list;
+    QString& name;
+    QString& filename;
 };
 
 #endif //CSETUPDATABASE_H

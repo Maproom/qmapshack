@@ -20,16 +20,16 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/prj/IGisProject.h"
+#include "gis/db/CDBProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
-#include "gis/db/CDBProject.h"
-#include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSelectCopyAction.h"
+#include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
@@ -161,7 +161,6 @@ IGisProject * CGisWidget::selectProject()
                 break;
             }
         }
-
     }
     else if(!name.isEmpty())
     {
@@ -191,7 +190,6 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
         }
         project->getItemByPos(pos, items);
     }
-
 }
 
 IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
@@ -277,14 +275,12 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
     IGisItem * item = getItemByKey(key);
     if(item == 0)
     {
-
         return;
     }
 
     IGisProject * project = selectProject();
     if(project == 0)
     {
-
         return;
     }
 
@@ -322,7 +318,6 @@ void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
             canvas->setMouseMoveWpt(*wpt);
         }
     }
-
 }
 
 void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
@@ -395,8 +390,6 @@ void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
             canvas->setMouseEditTrk(*trk);
         }
     }
-
-
 }
 
 void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
@@ -412,8 +405,6 @@ void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
             canvas->setMouseRangeTrk(*trk);
         }
     }
-
-
 }
 
 void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
@@ -429,8 +420,6 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
             canvas->setMouseEditArea(*area);
         }
     }
-
-
 }
 
 void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
@@ -470,7 +459,6 @@ void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
         }
         project->drawLabel(p, viewport, blockedAreas, fm, gis);
     }
-
 }
 
 void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)

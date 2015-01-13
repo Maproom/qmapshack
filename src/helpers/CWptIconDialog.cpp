@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "helpers/CWptIconDialog.h"
 #include "gis/WptIcons.h"
+#include "helpers/CWptIconDialog.h"
 
 #include <QtWidgets>
 
@@ -53,9 +53,9 @@ static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
             _s2 = "0";
         }
 
-        return _s1.toInt() < _s2.toInt();
+        return(_s1.toInt() < _s2.toInt());
     }
-    return s1 < s2;
+    return(s1 < s2);
 }
 
 
@@ -96,7 +96,6 @@ void CWptIconDialog::setupList(QObject * obj)
         {
             currentItem = item;
         }
-
     }
 
     if(currentItem)
@@ -106,12 +105,10 @@ void CWptIconDialog::setupList(QObject * obj)
     }
 
     connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
-
 }
 
 CWptIconDialog::~CWptIconDialog()
 {
-
 }
 
 void CWptIconDialog::slotItemClicked(QListWidgetItem * item)

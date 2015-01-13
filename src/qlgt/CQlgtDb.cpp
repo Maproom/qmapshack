@@ -16,22 +16,22 @@
 
 **********************************************************************************************/
 
-#include "qlgt/CQlgtDb.h"
-#include "qlgt/CQmsDb.h"
-#include "qlgt/CQlb.h"
-#include "qlgt/CQlgtFolder.h"
-#include "qlgt/CQlgtWpt.h"
-#include "qlgt/CQlgtTrack.h"
-#include "qlgt/CQlgtRoute.h"
-#include "qlgt/IQlgtOverlay.h"
 #include "qlgt/CImportDatabase.h"
+#include "qlgt/CQlb.h"
+#include "qlgt/CQlgtDb.h"
+#include "qlgt/CQlgtFolder.h"
+#include "qlgt/CQlgtRoute.h"
+#include "qlgt/CQlgtTrack.h"
+#include "qlgt/CQlgtWpt.h"
+#include "qlgt/CQmsDb.h"
+#include "qlgt/IQlgtOverlay.h"
 
-#include "gis/db/macros.h"
 #include "gis/WptIcons.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
+#include "gis/db/macros.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -606,7 +606,7 @@ void CQlgtDb::start(const QString& filename)
 
     QSqlQuery query(db);
     query.prepare("Select parent, child FROM folder2folder");
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
     while(query.next())
     {
         quint64 idParent    = query.value(0).toULongLong();
@@ -615,7 +615,7 @@ void CQlgtDb::start(const QString& filename)
     }
 
     query.prepare("Select parent, child FROM folder2item");
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
     while(query.next())
     {
         quint64 idParent    = query.value(0).toULongLong();
@@ -625,7 +625,6 @@ void CQlgtDb::start(const QString& filename)
 
     delete dbQms;
     gui->stdOut(tr("------ Done ------"));
-
 }
 
 void CQlgtDb::xferFolders()
@@ -638,10 +637,10 @@ void CQlgtDb::xferFolders()
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM folders");
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
     while(query.next())
     {
-        progress.setValue(cnt++ * 100 / nFolders);
+        progress.setValue(cnt++ *100 / nFolders);
         if (progress.wasCanceled())
         {
             break;
@@ -677,11 +676,10 @@ void CQlgtDb::xferItems()
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM items");
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
     while(query.next())
     {
-
-        progress.setValue(cnt++ * 100 / nItems);
+        progress.setValue(cnt++ *100 / nItems);
         if (progress.wasCanceled())
         {
             break;
@@ -695,7 +693,7 @@ void CQlgtDb::xferItems()
     gui->stdOut(tr("Import folders..."));
 
     query.prepare("SELECT id FROM folders");
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
 }
 
 void CQlgtDb::xferItem(quint64 id)
@@ -703,7 +701,7 @@ void CQlgtDb::xferItem(quint64 id)
     QSqlQuery query(db);
     query.prepare("SELECT type, data FROM items WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
 
     if(query.next())
     {
@@ -722,6 +720,7 @@ void CQlgtDb::xferItem(quint64 id)
             nWpt++;
             break;
         }
+
         case eTrk:
         {
             CQlgtTrack trk1(id, 0);
@@ -730,6 +729,7 @@ void CQlgtDb::xferItem(quint64 id)
             nTrk++;
             break;
         }
+
         case eRte:
         {
             CQlgtRoute rte1(id, 0);
@@ -738,6 +738,7 @@ void CQlgtDb::xferItem(quint64 id)
             nRte++;
             break;
         }
+
         case eOvl:
         {
             IQlgtOverlay ovl1(id, 0);
@@ -752,6 +753,5 @@ void CQlgtDb::xferItem(quint64 id)
             break;
         }
         }
-
     }
 }

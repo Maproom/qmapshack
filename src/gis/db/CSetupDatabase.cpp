@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CSetupDatabase.h"
 #include "gis/CGisListDB.h"
+#include "gis/db/CSetupDatabase.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
@@ -42,7 +42,6 @@ CSetupDatabase::CSetupDatabase(QString& name, QString& filename, CGisListDB &par
 
 CSetupDatabase::~CSetupDatabase()
 {
-
 }
 
 void CSetupDatabase::slotUpdateButtonBox()
@@ -64,7 +63,6 @@ void CSetupDatabase::slotUpdateButtonBox()
 
 void CSetupDatabase::accept()
 {
-
     name = lineName->text();
     if(list.hasDatabase(name))
     {

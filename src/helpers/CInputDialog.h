@@ -19,24 +19,24 @@
 #ifndef CINPUTDIALOG_H
 #define CINPUTDIALOG_H
 
-#include <QDialog>
 #include "ui_IInputDialog.h"
+#include <QDialog>
 
 class CInputDialog : public QDialog, private Ui::IInputDialog
 {
     Q_OBJECT
-    public:
-        CInputDialog(QWidget * parent, const QString &text, QVariant &val, const QVariant &reset);
-        virtual ~CInputDialog();
+public:
+    CInputDialog(QWidget * parent, const QString &text, QVariant &val, const QVariant &reset);
+    virtual ~CInputDialog();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotReset();
-    private:
-        QVariant& val;
-        QVariant reset;
+private slots:
+    void slotReset();
+private:
+    QVariant& val;
+    QVariant reset;
 };
 
 #endif //CINPUTDIALOG_H

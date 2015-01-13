@@ -29,34 +29,33 @@ class GDALDataset;
 class CDemVRT : public IDem
 {
     Q_OBJECT
-    public:
-        CDemVRT(const QString& filename, CDemDraw *parent);
-        virtual ~CDemVRT();
+public:
+    CDemVRT(const QString& filename, CDemDraw *parent);
+    virtual ~CDemVRT();
 
-        void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf);
 
-        qreal getElevationAt(const QPointF& pos);
+    qreal getElevationAt(const QPointF& pos);
 
-    private:
-        QMutex mutex;
+private:
+    QMutex mutex;
 
-        QString filename;
-        /// instance of GDAL dataset
-        GDALDataset * dataset;
+    QString filename;
+    /// instance of GDAL dataset
+    GDALDataset * dataset;
 
 
-        QPointF ref1;
-        QPointF ref2;
-        QPointF ref3;
-        QPointF ref4;
+    QPointF ref1;
+    QPointF ref2;
+    QPointF ref3;
+    QPointF ref4;
 
-        QTransform trFwd;
-        QTransform trInv;
+    QTransform trFwd;
+    QTransform trInv;
 
-        bool hasOverviews;
+    bool hasOverviews;
 
-        QRectF boundingBox;
-
+    QRectF boundingBox;
 };
 
 #endif //CDEMVRT_H

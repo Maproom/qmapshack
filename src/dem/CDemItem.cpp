@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemVRT.h"
-#include "dem/CDemDraw.h"
 #include "dem/IDemProp.h"
 
 #include <QtWidgets>
@@ -34,7 +34,6 @@ CDemItem::CDemItem(QTreeWidget * parent, CDemDraw *dem)
 
 CDemItem::~CDemItem()
 {
-
 }
 
 void CDemItem::saveConfig(QSettings& cfg)
@@ -47,7 +46,6 @@ void CDemItem::saveConfig(QSettings& cfg)
     cfg.beginGroup(key);
     demfile->saveConfig(cfg);
     cfg.endGroup();
-
 }
 
 void CDemItem::loadConfig(QSettings& cfg)
@@ -60,7 +58,6 @@ void CDemItem::loadConfig(QSettings& cfg)
     cfg.beginGroup(key);
     demfile->loadConfig(cfg);
     cfg.endGroup();
-
 }
 
 void CDemItem::showChildren(bool yes)
@@ -102,7 +99,7 @@ void CDemItem::updateIcon()
 bool CDemItem::isActivated()
 {
     QMutexLocker lock(&mutexActiveDems);
-    return !demfile.isNull();
+    return(!demfile.isNull());
 }
 
 bool CDemItem::toggleActivate()
@@ -110,12 +107,12 @@ bool CDemItem::toggleActivate()
     QMutexLocker lock(&mutexActiveDems);
     if(demfile.isNull())
     {
-        return activate();
+        return(activate());
     }
     else
     {
         deactivate();
-        return false;
+        return(false);
     }
 }
 
@@ -157,7 +154,7 @@ bool CDemItem::activate()
     // no mapfiles loaded? Bad.
     if(demfile.isNull())
     {
-        return false;
+        return(false);
     }
 
     // if map is activated sucessfully add to the list of map files
@@ -165,7 +162,7 @@ bool CDemItem::activate()
     if(!demfile->activated())
     {
         delete demfile;
-        return false;
+        return(false);
     }
 
     moveToBottom();
@@ -177,12 +174,12 @@ bool CDemItem::activate()
        the correct group context in the QSetting object.
        This call will result into a call of loadConfig() of this CMapItem
        object.
-    */
+     */
     dem->loadConfigForDemItem(this);
 
     // Add the demfile setup dialog as child of this item
     showChildren(true);
-    return true;
+    return(true);
 }
 
 void CDemItem::moveToTop()
@@ -199,7 +196,6 @@ void CDemItem::moveToTop()
 
 void CDemItem::moveToBottom()
 {
-
     int row;
     QTreeWidget * w = treeWidget();
     QMutexLocker lock(&mutexActiveDems);

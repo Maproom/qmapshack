@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "helpers/CSettings.h"
 #include "qlgt/CImportDatabase.h"
 #include "qlgt/CQlgtDb.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -50,7 +50,6 @@ CImportDatabase::~CImportDatabase()
     SETTINGS;
     cfg.setValue("ConvertDB/source", labelSource->text());
     cfg.setValue("ConvertDB/target", labelTarget->text());
-
 }
 
 void CImportDatabase::stdOut(const QString& str)
@@ -85,7 +84,6 @@ void CImportDatabase::slotSelectSource()
     delete dbQlgt;
     textBrowser->clear();
     dbQlgt = new CQlgtDb(filename, this);
-
 }
 
 void CImportDatabase::slotSelectTarget()

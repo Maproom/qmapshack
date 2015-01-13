@@ -34,8 +34,6 @@ CScrOptRange::CScrOptRange(const QPointF &point, QWidget *parent)
 
 CScrOptRange::~CScrOptRange()
 {
-
-
 }
 
 void CScrOptRange::draw(QPainter& p)

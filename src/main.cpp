@@ -20,22 +20,22 @@
 #include "helpers/CAppOpts.h"
 #include "version.h"
 
+#include <CGetOpt.h>
 #include <QtCore>
 #include <QtWidgets>
-#include <CGetOpt.h>
-#include <iostream>
 #include <gdal.h>
+#include <iostream>
 
 CAppOpts *qlOpts;
 
 static void usage(std::ostream &s)
 {
     s << "usage: qmapshack [-d | --debug]\n"
-         "                 [-h | --help]\n"
-         "                 [-n | --no-splash]\n"
-         "                 [-c | --config=file]\n"
-         "                 [files...]\n"
-         "\n";
+        "                 [-h | --help]\n"
+        "                 [-n | --no-splash]\n"
+        "                 [-c | --config=file]\n"
+        "                 [files...]\n"
+        "\n";
 }
 
 
@@ -66,7 +66,6 @@ static void processOptions()
     }
 
     qlOpts = new CAppOpts(doDebugOut, noSplash, config, args);
-
 }
 
 
@@ -74,26 +73,25 @@ static void myMessageOutput(QtMsgType type, const QMessageLogContext &context, c
 {
     switch (type)
     {
-        case QtDebugMsg:
-            if (qlOpts->debug)
-            {
+    case QtDebugMsg:
+        if (qlOpts->debug)
+        {
+            std::cout << msg.toUtf8().constData() << std::endl;
+        }
+        break;
 
-                std::cout << msg.toUtf8().constData() << std::endl;
-            }
-            break;
+    case QtWarningMsg:
+        std::cerr << "Warning: " << msg.toUtf8().constData() << std::endl;
+        break;
 
-        case QtWarningMsg:
-            std::cerr << "Warning: " << msg.toUtf8().constData() << std::endl;
-            break;
+    case QtCriticalMsg:
+        std::cerr << "Critical: " <<  msg.toUtf8().constData() << std::endl;
+        break;
 
-        case QtCriticalMsg:
-            std::cerr << "Critical: " <<  msg.toUtf8().constData() << std::endl;
-            break;
-
-        case QtFatalMsg:
-            std::cerr << "Fatal: " << msg.toUtf8().constData() << std::endl;
-            abort();
-            break;
+    case QtFatalMsg:
+        std::cerr << "Fatal: " << msg.toUtf8().constData() << std::endl;
+        abort();
+        break;
     }
 }
 
@@ -101,7 +99,6 @@ static void myMessageOutput(QtMsgType type, const QMessageLogContext &context, c
 
 int main(int argc, char ** argv)
 {
-
     QApplication a(argc, argv);
     processOptions();
 
@@ -110,16 +107,16 @@ int main(int argc, char ** argv)
 #endif
 
 #ifdef WIN32
-	// setup environment variables for GDAL/Proj4
-	QString apppath = QCoreApplication::applicationDirPath();
-	apppath = apppath.replace("/", "\\");
+    // setup environment variables for GDAL/Proj4
+    QString apppath = QCoreApplication::applicationDirPath();
+    apppath = apppath.replace("/", "\\");
 
-	//QString env_path = qgetenv("PATH");
-	//env_path += QString(";%1;%1\\proj\\apps;%1\\gdal\\apps;%1\\curl;").arg(apppath);
-	//qputenv("PATH", env_path.toUtf8());
+    //QString env_path = qgetenv("PATH");
+    //env_path += QString(";%1;%1\\proj\\apps;%1\\gdal\\apps;%1\\curl;").arg(apppath);
+    //qputenv("PATH", env_path.toUtf8());
 
-	qputenv("GDAL_DATA", QString("%1\\data").arg(apppath).toUtf8());
-	qputenv("PROJ_LIB", QString("%1\\share").arg(apppath).toUtf8());
+    qputenv("GDAL_DATA", QString("%1\\data").arg(apppath).toUtf8());
+    qputenv("PROJ_LIB", QString("%1\\share").arg(apppath).toUtf8());
 #endif
 
 
@@ -184,5 +181,5 @@ int main(int argc, char ** argv)
         delete splash;
     }
 
-    return a.exec();
+    return(a.exec());
 }

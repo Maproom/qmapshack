@@ -16,18 +16,16 @@
 
 **********************************************************************************************/
 
-#include "plot/CPlotDistance.h"
 #include "plot/CPlotAxisTime.h"
+#include "plot/CPlotDistance.h"
 
 CPlotDistance::CPlotDistance(QWidget *parent)
     : IPlot(0, CPlotData::eAxisTime, eModeNormal, parent)
 {
-
 }
 
 CPlotDistance::~CPlotDistance()
 {
-
 }
 
 void CPlotDistance::setTrack(CGisItemTrk * track)
@@ -40,7 +38,7 @@ void CPlotDistance::setTrack(CGisItemTrk * track)
 
 
 void CPlotDistance::updateData()
-{       
+{
     CPlotData::axistype_e type = data->axisType;
 
     if(mode == eModeIcon)
@@ -92,7 +90,6 @@ void CPlotDistance::updateData()
     newLine(lineDist, "GPS");
     setLimits();
     resetZoom();
-
 }
 
 void CPlotDistance::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
@@ -116,5 +113,4 @@ void CPlotDistance::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
         posMouse.ry() = top  +  data->y().val2pt(pt->distance);
     }
     update();
-
 }

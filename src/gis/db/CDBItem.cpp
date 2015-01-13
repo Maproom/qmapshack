@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisListDB.h"
+#include "gis/CGisWidget.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
-#include "gis/CGisWidget.h"
-#include "gis/CGisListDB.h"
 
 #include <QtSql>
 
@@ -33,7 +33,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
     QSqlQuery query(db);
     query.prepare("SELECT type, key, icon, name, comment FROM items WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     if(query.next())
     {
         QPixmap pixmap;
@@ -43,7 +43,6 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
         setIcon(CGisListDB::eColumnCheckbox, pixmap);
         setText(CGisListDB::eColumnName, query.value(3).toString());
         setToolTip(CGisListDB::eColumnName, query.value(4).toString());
-
     }
 }
 

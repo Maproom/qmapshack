@@ -30,76 +30,93 @@ class CQlgtRoute;
 
 class CGisItemRte : public IGisItem, public IGisLine
 {
-    public:
-        struct rtept_t : public wpt_t
+public:
+    struct rtept_t : public wpt_t
+    {
+        QPixmap icon;
+        QPointF focus;
+    };
+
+    struct rte_t
+    {
+        rte_t() : number(0)
         {
-            QPixmap icon;
-            QPointF focus;
-        };
+        }
+        // -- all gpx tags - start
+        QString name;
+        QString cmt;
+        QString desc;
+        QString src;
+        QList<link_t> links;
+        quint64 number;
+        QString type;
+        QVector<rtept_t> pts;
+        // -- all gpx tags - stop
+        QMap<QString, QVariant> extensions;
+    };
 
-        struct rte_t
-        {
-            rte_t() : number(0) {}
-            // -- all gpx tags - start
-            QString name;
-            QString cmt;
-            QString desc;
-            QString src;
-            QList<link_t> links;
-            quint64 number;
-            QString type;
-            QVector<rtept_t> pts;
-            // -- all gpx tags - stop
-            QMap<QString, QVariant> extensions;
-        };
+    CGisItemRte(const QDomNode &xml, IGisProject *parent);
+    CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
+    CGisItemRte(const history_t& hist, IGisProject * project);
+    CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
+    CGisItemRte(const CQlgtRoute& rte1);
+    virtual ~CGisItemRte();
 
-        CGisItemRte(const QDomNode &xml, IGisProject *parent);
-        CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
-        CGisItemRte(const history_t& hist, IGisProject * project);
-        CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
-        CGisItemRte(const CQlgtRoute& rte1);
-        virtual ~CGisItemRte();
+    QDataStream& operator<<(QDataStream& stream);
+    QDataStream& operator>>(QDataStream& stream);
 
-        QDataStream& operator<<(QDataStream& stream);
-        QDataStream& operator>>(QDataStream& stream);
+    const QString& getName() const
+    {
+        return( rte.name);
+    }
+    QString getInfo() const;
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
+    QPointF getPointCloseBy(const QPoint& screenPos);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+    void drawHighlight(QPainter& p);
+    void save(QDomNode& gpx);
+    bool isCloseTo(const QPointF& pos);
+    void gainUserFocus(bool yes);
 
-        const QString& getName() const {return rte.name;}
-        QString getInfo() const;
-        IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-        QPointF getPointCloseBy(const QPoint& screenPos);
-        void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawHighlight(QPainter& p);
-        void save(QDomNode& gpx);
-        bool isCloseTo(const QPointF& pos);
-        void gainUserFocus(bool yes);
+    void setDataFromPolyline(const QPolygonF& line)
+    {
+    }
+    void getPolylineFromData(QPolygonF& line)
+    {
+    }
 
-        void setDataFromPolyline(const QPolygonF& line){}
-        void getPolylineFromData(QPolygonF& line){}
+    const QString& getComment() const
+    {
+        return( rte.cmt);
+    }
+    const QString& getDescription() const
+    {
+        return( rte.desc);
+    }
+    const QList<link_t>& getLinks() const
+    {
+        return( rte.links);
+    }
 
-        const QString& getComment()const{return rte.cmt;}
-        const QString& getDescription()const{return rte.desc;}
-        const QList<link_t>& getLinks()const{return rte.links;}
+    void setComment(const QString& str);
+    void setDescription(const QString& str);
+    void setLinks(const QList<link_t>& links);
 
-        void setComment(const QString& str);
-        void setDescription(const QString& str);
-        void setLinks(const QList<link_t>& links);
+private:
+    void deriveSecondaryData();
+    void setSymbol();
+    void readRte(const QDomNode& xml, rte_t& rte);
 
-    private:
-        void deriveSecondaryData();
-        void setSymbol();
-        void readRte(const QDomNode& xml, rte_t& rte);
-
-        static key_t keyUserFocus;
+    static key_t keyUserFocus;
 
 
 
-        static const QPen penBackground;
-        QPen penForeground;
+    static const QPen penBackground;
+    QPen penForeground;
 
-        rte_t rte;
-        QPolygonF line;
-
+    rte_t rte;
+    QPolygonF line;
 };
 
 #endif //CGISITEMRTE_H

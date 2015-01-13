@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "GeoMath.h"
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
-#include "helpers/CTextEditWidget.h"
 #include "helpers/CLinksDialog.h"
-#include "GeoMath.h"
+#include "helpers/CTextEditWidget.h"
 
 
 #include <QtWidgets>
@@ -71,7 +71,6 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
 
 CDetailsOvlArea::~CDetailsOvlArea()
 {
-
 }
 
 
@@ -147,10 +146,9 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
         dlg.setHtml(area.getComment());
         if(dlg.exec() == QDialog::Accepted)
         {
-            area.setComment(dlg.getHtml());            
+            area.setComment(dlg.getHtml());
         }
         setupGui();
-
     }
     else if(url.toString() == "description")
     {
@@ -158,7 +156,7 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
         dlg.setHtml(area.getDescription());
         if(dlg.exec() == QDialog::Accepted)
         {
-            area.setDescription(dlg.getHtml());            
+            area.setDescription(dlg.getHtml());
         }
         setupGui();
     }
@@ -213,8 +211,8 @@ void CDetailsOvlArea::setupGui()
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, area.getComment(), area.getDescription(), area.getLinks()));
-    textCmtDesc->moveCursor (QTextCursor::Start) ;
-    textCmtDesc->ensureCursorVisible() ;
+    textCmtDesc->moveCursor (QTextCursor::Start);
+    textCmtDesc->ensureCursorVisible();
 
     int idx = 0;
     QList<QTreeWidgetItem*> items;

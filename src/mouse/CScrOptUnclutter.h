@@ -19,43 +19,44 @@
 #ifndef CSCROPTUNCLUTTER_H
 #define CSCROPTUNCLUTTER_H
 
-#include "mouse/IScrOpt.h"
 #include "gis/IGisItem.h"
+#include "mouse/IScrOpt.h"
 
 
 class CScrOptUnclutter : public IScrOpt
 {
-    public:
-        CScrOptUnclutter(QWidget *parent);
-        virtual ~CScrOptUnclutter();
+public:
+    CScrOptUnclutter(QWidget *parent);
+    virtual ~CScrOptUnclutter();
 
-        struct item_t
-        {
-            bool    hasUserFocus;
-            QString name;
-            IGisItem::key_t key;
-            QPixmap icon;
-            QRect   area;
-            QRect   text;
-            QRect   active;
-        };
+    struct item_t
+    {
+        bool hasUserFocus;
+        QString name;
+        IGisItem::key_t key;
+        QPixmap icon;
+        QRect area;
+        QRect text;
+        QRect active;
+    };
 
-        virtual void clear();
-        virtual int  size(){return items.size();}
+    virtual void clear();
+    virtual int  size()
+    {
+        return( items.size());
+    }
 
-        void addItem(IGisItem * gisItem);
-        IGisItem::key_t getItemKey(int index = 0);
-        const item_t *selectItem(const QPoint& point);
+    void addItem(IGisItem * gisItem);
+    IGisItem::key_t getItemKey(int index = 0);
+    const item_t *selectItem(const QPoint& point);
 
-        void draw(QPainter& p);
-        void mouseMoveEvent(QMouseEvent * e);
+    void draw(QPainter& p);
+    void mouseMoveEvent(QMouseEvent * e);
 
-    private:
-        static const QPoint positions[9][8];
-        QList<item_t> items;
-        bool doSpecialCursor;
-
-
+private:
+    static const QPoint positions[9][8];
+    QList<item_t> items;
+    bool doSpecialCursor;
 };
 
 #endif //CSCROPTUNCLUTTER_H

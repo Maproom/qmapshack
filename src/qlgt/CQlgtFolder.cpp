@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "qlgt/CQlgtFolder.h"
+#include "gis/db/macros.h"
 #include "qlgt/CQlgtDb.h"
 #include "qlgt/CQlgtDiary.h"
-#include "gis/db/macros.h"
+#include "qlgt/CQlgtFolder.h"
 
 #include <QtSql>
 
@@ -33,7 +33,7 @@ CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
 
     query.prepare("SELECT type, name, comment, locked FROM folders WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
 
     if(query.next())
     {
@@ -45,7 +45,7 @@ CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
 
     query.prepare("SELECT id, data FROM diarys WHERE parent=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
 
     if(query.next())
     {
@@ -60,7 +60,7 @@ CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
 
     query.prepare("SELECT child FROM folder2item WHERE parent=:folder");
     query.bindValue(":folder", id);
-    QUERY_EXEC(return;);
+    QUERY_EXEC(return; );
     while(query.next())
     {
         items << query.value(0).toULongLong();
@@ -69,6 +69,5 @@ CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
 
 CQlgtFolder::~CQlgtFolder()
 {
-
 }
 

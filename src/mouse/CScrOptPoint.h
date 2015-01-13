@@ -24,11 +24,11 @@
 
 class CScrOptPoint : public IScrOpt, public Ui::IScrOptPoint
 {
-    public:
-        CScrOptPoint(const QPointF& point, QWidget * parent);
-        virtual ~CScrOptPoint();
+public:
+    CScrOptPoint(const QPointF& point, QWidget * parent);
+    virtual ~CScrOptPoint();
 
-        void draw(QPainter& p);
+    void draw(QPainter& p);
 };
 
 #endif //CSCROPTPOINT_H

@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterNewDate.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterNewDate.h"
 
 CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
@@ -32,7 +32,6 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
 
 CFilterNewDate::~CFilterNewDate()
 {
-
 }
 
 

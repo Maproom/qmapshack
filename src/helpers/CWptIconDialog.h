@@ -19,8 +19,8 @@
 #ifndef CWPTICONDIALOG_H
 #define CWPTICONDIALOG_H
 
-#include <QDialog>
 #include "ui_IWptIconDialog.h"
+#include <QDialog>
 
 class QToolButton;
 class QAction;
@@ -29,20 +29,19 @@ class QListWidgetItem;
 class CWptIconDialog : public QDialog, private Ui::IWptIconDialog
 {
     Q_OBJECT
-    public:
-        CWptIconDialog(QToolButton * parent);
-        CWptIconDialog(QAction * parent);
-        virtual ~CWptIconDialog();
+public:
+    CWptIconDialog(QToolButton * parent);
+    CWptIconDialog(QAction * parent);
+    virtual ~CWptIconDialog();
 
-    private slots:
-        void slotItemClicked(QListWidgetItem * item);
+private slots:
+    void slotItemClicked(QListWidgetItem * item);
 
-    private:
-        void setupList(QObject *obj);
+private:
+    void setupList(QObject *obj);
 
-        QToolButton * button;
-        QAction     * action;
-
+    QToolButton * button;
+    QAction     * action;
 };
 
 #endif //CWPTICONDIALOG_H

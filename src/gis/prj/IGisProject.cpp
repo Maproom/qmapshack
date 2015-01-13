@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#include "gis/prj/IGisProject.h"
-#include "gis/prj/CDetailsPrj.h"
-#include "gis/IGisItem.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/CGisListWks.h"
-#include "gis/CGisDraw.h"
-#include "helpers/CSelectCopyAction.h"
 #include "CMainWindow.h"
+#include "gis/CGisDraw.h"
+#include "gis/CGisListWks.h"
+#include "gis/IGisItem.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/prj/CDetailsPrj.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CSelectCopyAction.h"
 
 
 #include <QtWidgets>
@@ -38,7 +38,6 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , filename(filename)
     , valid(false)
 {
-
 }
 
 IGisProject::~IGisProject()
@@ -118,7 +117,6 @@ void IGisProject::setupName(const QString &defaultName)
     {
         setText(CGisListWks::eColumnName,metadata.name);
     }
-
 }
 
 void IGisProject::markAsSaved()
@@ -126,7 +124,6 @@ void IGisProject::markAsSaved()
     setText(CGisListWks::eColumnDecoration,"");
     for(int i = 0; i < childCount(); i++)
     {
-
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
         if(item == 0)
         {
@@ -197,14 +194,13 @@ QString IGisProject::getInfo() const
         str += "<br/>\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
     }
 
-    return str;
+    return(str);
 }
 
 IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
 {
     for(int i = 0; i < childCount(); i++)
     {
-
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
         if(item == 0)
         {
@@ -213,17 +209,16 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
 
         if(item->getKey() == key)
         {
-            return item;
+            return(item);
         }
     }
-    return 0;
+    return(0);
 }
 
 void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
 {
     for(int i = 0; i < childCount(); i++)
     {
-
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
         if(item == 0)
         {
@@ -257,7 +252,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
                     // as each item in the project has to be unique, we can stop searching.
-                    return false;
+                    return(false);
                 }
             }
             delete item;
@@ -265,17 +260,17 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
             /*
                 Database projects are a bit different. Deleteing an item does not really
                 mean the project is changed as the item is still stored in the database.
-            */
+             */
             if(type != eTypeDb)
             {
                 changed();
             }
 
             // as each item in the project has to be unique, we can stop searching.
-            return true;
+            return(true);
         }
     }
-    return false;
+    return(false);
 }
 
 void IGisProject::editItemByKey(const IGisItem::key_t& key)
@@ -305,7 +300,6 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     IGisItem * item2 = getItemByKey(key);
     if(item2 != 0)
     {
-
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
@@ -356,6 +350,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
         }
         break;
     }
+
     case IGisItem::eTypeWpt:
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
@@ -365,6 +360,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
         }
         break;
     }
+
     case IGisItem::eTypeRte:
     {
         CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
@@ -374,6 +370,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
         }
         break;
     }
+
     case IGisItem::eTypeOvl:
     {
         CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(item);
@@ -403,14 +400,12 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         item->drawItem(p, viewport, blockedAreas, gis);
     }
-
 }
 
 void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     for(int i = 0; i < childCount(); i++)
     {
-
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
         if(item == 0)
         {
@@ -420,12 +415,10 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         item->drawItem(p, viewport, gis);
     }
-
 }
 
 void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
-
     for(int i = 0; i < childCount(); i++)
     {
         if(gis->needsRedraw())
@@ -441,6 +434,5 @@ void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
 
         item->drawLabel(p, viewport, blockedAreas, fm, gis);
     }
-
 }
 

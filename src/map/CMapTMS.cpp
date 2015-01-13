@@ -16,37 +16,37 @@
 
 **********************************************************************************************/
 
-#include "map/CMapTMS.h"
 #include "map/CMapDraw.h"
+#include "map/CMapTMS.h"
 #include "map/cache/CDiskCache.h"
 #include "units/IUnit.h"
 
-#include <QtWidgets>
 #include <QtNetwork>
-#include <QtXml>
 #include <QtScript>
+#include <QtWidgets>
+#include <QtXml>
 #include <ogr_spatialref.h>
 #include <proj_api.h>
 
 inline int lon2tile(double lon, int z)
 {
-    return (int)(qRound(256*(lon + 180.0) / 360.0 * pow(2.0, z)));
+    return((int)(qRound(256*(lon + 180.0) / 360.0 * pow(2.0, z))));
 }
 
 inline int lat2tile(double lat, int z)
 {
-    return (int)(qRound(256*(1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * pow(2.0, z)));
+    return((int)(qRound(256*(1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * pow(2.0, z))));
 }
 
 inline double tile2lon(int x, int z)
 {
-    return x / pow(2.0, z) * 360.0 - 180;
+    return(x / pow(2.0, z) * 360.0 - 180);
 }
 
 inline double tile2lat(int y, int z)
 {
     double n = M_PI - 2.0 * M_PI * y / pow(2.0, z);
-    return 180.0 / M_PI * atan(0.5 * (exp(n) - exp(-n)));
+    return(180.0 / M_PI * atan(0.5 * (exp(n) - exp(-n))));
 }
 
 CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
@@ -174,7 +174,7 @@ void CMapTMS::getLayers(QListWidget& list)
     }
 
     int i = 0;
-    foreach(const layer_t& layer, layers)
+    foreach(const layer_t &layer, layers)
     {
         QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
@@ -223,7 +223,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    foreach(const QString& str, enabled)
+    foreach(const QString &str, enabled)
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -255,7 +255,7 @@ void CMapTMS::slotQueueChanged()
 
             QNetworkRequest request;
             request.setUrl(url);
-            foreach(const rawHeaderItem_t& item, rawHeaderItems)
+            foreach(const rawHeaderItem_t &item, rawHeaderItems)
             {
                 request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
             }
@@ -304,7 +304,6 @@ void CMapTMS::slotRequestFinished(QNetworkReply* reply)
         {
             // read image data
             img.loadFromData(reply->readAll());
-
         }
         // always store image to cache, the cache will take care of NULL images
         diskCache->store(url, img);
@@ -355,12 +354,11 @@ QString CMapTMS::createUrl(const layer_t& layer, int x, int y, int z)
 {
     if(layer.strUrl.startsWith("script"))
     {
-
         QString filename = layer.strUrl.mid(9);
         QFile scriptFile(filename);
         if (!scriptFile.open(QIODevice::ReadOnly))
         {
-            return "";
+            return("");
         }
         QTextStream stream(&scriptFile);
         QString contents = stream.readAll();
@@ -378,7 +376,7 @@ QString CMapTMS::createUrl(const layer_t& layer, int x, int y, int z)
         QScriptValueList args;
         args << z << x << y;
         QScriptValue res = fun.call(QScriptValue(), args);
-        return res.toString();
+        return(res.toString());
     }
     else if(!layer.script.isEmpty())
     {
@@ -387,10 +385,10 @@ QString CMapTMS::createUrl(const layer_t& layer, int x, int y, int z)
         QScriptValueList args;
         args << z << x << y;
         QScriptValue res = fun.call(QScriptValue(), args);
-        return res.toString();
+        return(res.toString());
     }
 
-    return layer.strUrl.arg(z).arg(x).arg(y);
+    return(layer.strUrl.arg(z).arg(x).arg(y));
 }
 
 
@@ -423,11 +421,17 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
     qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
     qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
 
-    if(x1 < -180.0*DEG_TO_RAD) x1 = -180*DEG_TO_RAD;
-    if(x2 >  180.0*DEG_TO_RAD) x2 =  180*DEG_TO_RAD;
+    if(x1 < -180.0*DEG_TO_RAD)
+    {
+        x1 = -180*DEG_TO_RAD;
+    }
+    if(x2 >  180.0*DEG_TO_RAD)
+    {
+        x2 =  180*DEG_TO_RAD;
+    }
 
     // draw layers
-    foreach(const layer_t& layer, layers)
+    foreach(const layer_t &layer, layers)
     {
         if(!layer.enabled)
         {
@@ -492,10 +496,8 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
                 {
                     urlQueue << url;
                 }
-
-            }                        
+            }
         }
         emit sigQueueChanged();
     }
-
 }

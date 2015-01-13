@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
+#include "GeoMath.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "GeoMath.h"
 
-#include <QtWidgets>
 #include <QtWebKitWidgets>
+#include <QtWidgets>
 
 
 CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
@@ -87,7 +87,6 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
 CDetailsGeoCache::~CDetailsGeoCache()
 {
-
 }
 
 void CDetailsGeoCache::slotHintChanged(bool on)

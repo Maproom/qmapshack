@@ -19,17 +19,17 @@
 #ifndef CTIMEZONESETUP_H
 #define CTIMEZONESETUP_H
 
-#include <QDialog>
 #include "ui_ITimeZoneSetup.h"
+#include <QDialog>
 
-class CTimeZoneSetup :public QDialog, private Ui::ITimeZoneSetup
+class CTimeZoneSetup : public QDialog, private Ui::ITimeZoneSetup
 {
-    public:
-        CTimeZoneSetup(QWidget * parent);
-        virtual ~CTimeZoneSetup();
+public:
+    CTimeZoneSetup(QWidget * parent);
+    virtual ~CTimeZoneSetup();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 };
 
 #endif //CTIMEZONESETUP_H

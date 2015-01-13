@@ -20,17 +20,19 @@
 
 struct diary_head_entry_t
 {
-    diary_head_entry_t() : type(CQlgtDiary::eEnd), offset(0) {}
-    qint32      type;
-    quint32     offset;
-    QByteArray  data;
+    diary_head_entry_t() : type(CQlgtDiary::eEnd), offset(0)
+    {
+    }
+    qint32 type;
+    quint32 offset;
+    QByteArray data;
 };
 
 
 QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
 {
     QIODevice * dev = s.device();
-    qint64      pos = dev->pos();
+    qint64 pos = dev->pos();
 
     char magic[9];
     s.readRawData(magic,9);
@@ -38,7 +40,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
     if(strncmp(magic,"QLDry   ",9))
     {
         dev->seek(pos);
-        return s;
+        return(s);
     }
 
     QList<diary_head_entry_t> entries;
@@ -48,7 +50,10 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
         diary_head_entry_t entry;
         s >> entry.type >> entry.offset;
         entries << entry;
-        if(entry.type == CQlgtDiary::eEnd) break;
+        if(entry.type == CQlgtDiary::eEnd)
+        {
+            break;
+        }
     }
 
     QList<diary_head_entry_t>::iterator entry = entries.begin();
@@ -59,20 +64,20 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
         s >> entry->data;
         switch(entry->type)
         {
-            case CQlgtDiary::eBase:
-            {
-                QString comment, name,key;
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
+        case CQlgtDiary::eBase:
+        {
+            QString comment, name,key;
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
 
-                s1 >> diary.timestamp;
-                s1 >> diary.comment;
-                s1 >> diary.name;
-                s1 >> diary.keyProjectGeoDB;
-                s1 >> diary.key;
+            s1 >> diary.timestamp;
+            s1 >> diary.comment;
+            s1 >> diary.name;
+            s1 >> diary.keyProjectGeoDB;
+            s1 >> diary.key;
 
-                break;
-            }
+            break;
+        }
 //            case CQlgtDiary::eWpt:
 //            {
 //                int cnt;
@@ -122,13 +127,13 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
 //                break;
 
 //            }
-            default:;
+        default:;
         }
 
         ++entry;
     }
 
-    return s;
+    return(s);
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
@@ -241,18 +246,16 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
         ++entry;
     }
 
-    return s;
+    return(s);
 }
 
 CQlgtDiary::CQlgtDiary(quint64 id, QObject *parent)
     : QObject(parent)
     , IItem(id)
 {
-
 }
 
 CQlgtDiary::~CQlgtDiary()
 {
-
 }
 

@@ -29,67 +29,68 @@ class CDemItem;
 
 class CDemDraw : public IDrawContext
 {
-    public:
-        CDemDraw(CCanvas * canvas);
-        virtual ~CDemDraw();
+public:
+    CDemDraw(CCanvas * canvas);
+    virtual ~CDemDraw();
 
-        void saveConfig(QSettings& cfg);
-        void loadConfig(QSettings& cfg);
-        /**
-           @brief This is called most likely from the item itself to call it's loadConfig() method.
+    void saveConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg);
+    /**
+       @brief This is called most likely from the item itself to call it's loadConfig() method.
 
-           As the setup of a map is stored in the context of the view the correct groups have
-           to be set prior to call the item's loadConfig() method. However the item does not know
-           all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
-           and to call loadConfig();
+       As the setup of a map is stored in the context of the view the correct groups have
+       to be set prior to call the item's loadConfig() method. However the item does not know
+       all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
+       and to call loadConfig();
 
-           @param item the item to call it's loadConfig() method
-        */
-        void loadConfigForDemItem(CDemItem * item);
+       @param item the item to call it's loadConfig() method
+     */
+    void loadConfigForDemItem(CDemItem * item);
 
-        qreal getElevationAt(const QPointF& pos);
-        void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
+    qreal getElevationAt(const QPointF& pos);
+    void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
 
-        void setProjection(const QString& proj);
+    void setProjection(const QString& proj);
 
-        static void setupDemPath();
-        static void saveDemPath(QSettings &cfg);
-        static void loadDemPath(QSettings &cfg);
-        static const QStringList& getSupportedFormats(){return supportedFormats;}
+    static void setupDemPath();
+    static void saveDemPath(QSettings &cfg);
+    static void loadDemPath(QSettings &cfg);
+    static const QStringList& getSupportedFormats()
+    {
+        return( supportedFormats);
+    }
 
-    protected:
-        void drawt(buffer_t& currentBuffer);
+protected:
+    void drawt(buffer_t& currentBuffer);
 
-    private:
-        /**
-           @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
+private:
+    /**
+       @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
 
-         */
-        void buildMapList();
+     */
+    void buildMapList();
 
-        /**
-           @brief Save list of active maps to configuration file
-         */
-        void saveActiveMapsList(QStringList &keys, QSettings &cfg);
-        void saveActiveMapsList(QStringList &keys);
-        /**
-           @brief Restore list of active maps from configuration file
-         */
-        void restoreActiveMapsList(const QStringList &keys);
+    /**
+       @brief Save list of active maps to configuration file
+     */
+    void saveActiveMapsList(QStringList &keys, QSettings &cfg);
+    void saveActiveMapsList(QStringList &keys);
+    /**
+       @brief Restore list of active maps from configuration file
+     */
+    void restoreActiveMapsList(const QStringList &keys);
 
-        CDemList * demList;
+    CDemList * demList;
 
-        /// the group label used in QSettings
-        QString cfgGroup;
+    /// the group label used in QSettings
+    QString cfgGroup;
 
-        static QStringList demPaths;
+    static QStringList demPaths;
 
-        static QList<CDemDraw*> dems;
+    static QList<CDemDraw*> dems;
 
-        /// a list of supported map formats
-        static QStringList supportedFormats;
-
-
+    /// a list of supported map formats
+    static QStringList supportedFormats;
 };
 
 #endif //CDEMDRAW_H

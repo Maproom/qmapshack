@@ -32,16 +32,19 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, QWidget *pare
     lineName->setText(name);
     switch(type)
     {
-        case IDBFolder::eTypeGroup:
-            radioGroup->setChecked(true);
-            break;
-        case IDBFolder::eTypeProject:
-            radioProject->setChecked(true);
-            break;
-        case IDBFolder::eTypeOther:
-            radioOther->setChecked(true);
-            break;
-        default:;
+    case IDBFolder::eTypeGroup:
+        radioGroup->setChecked(true);
+        break;
+
+    case IDBFolder::eTypeProject:
+        radioProject->setChecked(true);
+        break;
+
+    case IDBFolder::eTypeOther:
+        radioOther->setChecked(true);
+        break;
+
+    default:;
     }
 
     slotNameChanged(name);
@@ -49,7 +52,6 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, QWidget *pare
 
 CSetupFolder::~CSetupFolder()
 {
-
 }
 
 void CSetupFolder::accept()

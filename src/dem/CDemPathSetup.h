@@ -19,27 +19,27 @@
 #ifndef CDEMPATHSETUP_H
 #define CDEMPATHSETUP_H
 
-#include <QDialog>
 #include "ui_IDemPathSetup.h"
+#include <QDialog>
 
 class CDemPathSetup : public QDialog, private Ui::IDemPathSetup
 {
     Q_OBJECT
-    public:
-        CDemPathSetup(QStringList& paths);
-        virtual ~CDemPathSetup();
+public:
+    CDemPathSetup(QStringList& paths);
+    virtual ~CDemPathSetup();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotAddPath();
-        void slotDelPath();
-        void slotItemSelectionChanged();
+private slots:
+    void slotAddPath();
+    void slotDelPath();
+    void slotItemSelectionChanged();
 
 
-    private:
-        QStringList& paths;
+private:
+    QStringList& paths;
 };
 
 #endif //CDEMPATHSETUP_H

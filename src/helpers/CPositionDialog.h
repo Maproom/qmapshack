@@ -19,26 +19,26 @@
 #ifndef CPOSITIONDIALOG_H
 #define CPOSITIONDIALOG_H
 
-#include <QDialog>
 #include "ui_IPositionDialog.h"
+#include <QDialog>
 
 class QPointF;
 
 class CPositionDialog : public QDialog, private Ui::IPositionDialog
 {
     Q_OBJECT
-    public:
-        CPositionDialog(QWidget * parent, QPointF &pos);
-        virtual ~CPositionDialog();
+public:
+    CPositionDialog(QWidget * parent, QPointF &pos);
+    virtual ~CPositionDialog();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotEdit(const QString& str);
+private slots:
+    void slotEdit(const QString& str);
 
-    private:
-        QPointF& pos;
+private:
+    QPointF& pos;
 };
 
 #endif //CPOSITIONDIALOG_H

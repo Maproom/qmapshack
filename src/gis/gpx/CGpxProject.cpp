@@ -16,14 +16,14 @@
 
 **********************************************************************************************/
 
-#include "gis/gpx/CGpxProject.h"
-#include "gis/qms/CQmsProject.h"
-#include "gis/CGisListWks.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisListWks.h"
+#include "gis/gpx/CGpxProject.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/qms/CQmsProject.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
 
 
@@ -32,7 +32,7 @@
 
 CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeGpx, filename, parent)
-{               
+{
     setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
 
     // cerate file instance
@@ -85,7 +85,7 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
 
     /** @note   If you change the order of the item types read you have to
                 take care of the order enforced in IGisItem().
-    */
+     */
     const QDomNodeList& xmlTrks = xmlGpx.elementsByTagName("trk");
     N = xmlTrks.count();
     for(int n = 0; n < N; ++n)
@@ -126,14 +126,13 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
 
 CGpxProject::~CGpxProject()
 {
-
 }
 
 bool CGpxProject::save()
 {
     if(filename.isEmpty())
     {
-        return saveAs();
+        return(saveAs());
     }
     else
     {
@@ -143,7 +142,7 @@ bool CGpxProject::save()
         }
     }
 
-    return true;
+    return(true);
 }
 
 bool CGpxProject::saveAs()
@@ -156,7 +155,7 @@ bool CGpxProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return false;
+        return(false);
     }
 
 
@@ -172,7 +171,6 @@ bool CGpxProject::saveAs()
         {
             markAsSaved();
         }
-
     }
     else if(filter == "*.qms")
     {
@@ -180,12 +178,12 @@ bool CGpxProject::saveAs()
     }
     else
     {
-        return false;
+        return(false);
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
-    return res;
+    return(res);
 }
 
 
@@ -214,7 +212,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
             int column;
             if(xml.setContent(&file, false, &msg, &line, &column))
             {
-                const  QDomElement& docElem = xml.documentElement();
+                const QDomElement& docElem = xml.documentElement();
                 const QDomNamedNodeMap& attr = docElem.attributes();
                 if(!attr.namedItem("creator").nodeValue().startsWith("QMapShack"))
                 {
@@ -229,16 +227,16 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         catch(int)
         {
             int res = QMessageBox::warning(0,QObject::tr("File exists ...")
-                ,QObject::tr("The file exists and it has not been created by QMapShack. "
-                "If you press 'yes' all data in this file will be lost. "
-                "Even if this file contains GPX data and has been loaded by QMapShack, "
-                "QMapShack might not be able to load and store all elements of this file.  "
-                "Those elements will be lost. I recommend to use another file. "
-                "<b>Do you really want to overwrite the file?</b>")
-                ,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
+                                           ,QObject::tr("The file exists and it has not been created by QMapShack. "
+                                                        "If you press 'yes' all data in this file will be lost. "
+                                                        "Even if this file contains GPX data and has been loaded by QMapShack, "
+                                                        "QMapShack might not be able to load and store all elements of this file.  "
+                                                        "Those elements will be lost. I recommend to use another file. "
+                                                        "<b>Do you really want to overwrite the file?</b>")
+                                           ,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
             if(res == QMessageBox::No)
             {
-                return false;
+                return(false);
             }
         }
 
@@ -296,7 +294,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     if(!file.open(QIODevice::WriteOnly))
     {
         QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to create file '%1'").arg(_fn_), QMessageBox::Abort);
-        return false;
+        return(false);
     }
     QTextStream out(&file);
     out.setCodec("UTF-8");
@@ -306,9 +304,9 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     if(file.error() != QFile::NoError)
     {
         QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to write file '%1'").arg(_fn_), QMessageBox::Abort);
-        return false;
+        return(false);
     }
 
-    return true;
+    return(true);
 }
 

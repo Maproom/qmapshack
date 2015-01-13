@@ -22,24 +22,23 @@
 
 class CGarminStrTbl6 : public IGarminStrTbl
 {
-    public:
-        CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject * parent);
-        virtual ~CGarminStrTbl6();
+public:
+    CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject * parent);
+    virtual ~CGarminStrTbl6();
 
-        void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
+    void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
 
-    private:
-        static const char str6tbl1[];
-        static const char str6tbl2[];
-        static const char str6tbl3[];
+private:
+    static const char str6tbl1[];
+    static const char str6tbl2[];
+    static const char str6tbl3[];
 
-        void fill();
-        /// temp shift reg buffer
-        quint32 reg;
-        /// bits in buffer
-        quint32 bits;
-        /// pointer to current data;
-        const quint8 * p;
-
+    void fill();
+    /// temp shift reg buffer
+    quint32 reg;
+    /// bits in buffer
+    quint32 bits;
+    /// pointer to current data;
+    const quint8 * p;
 };
 #endif                           //CGARMINSTRTBL6_H

@@ -17,24 +17,24 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "canvas/CCanvasSetup.h"
-#include "GeoMath.h"
-#include "map/CMapDraw.h"
 #include "dem/CDemDraw.h"
+#include "gis/CGisDraw.h"
+#include "gis/CGisWidget.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
-#include "units/IUnit.h"
-#include "mouse/CMouseNormal.h"
-#include "mouse/CMouseMoveWpt.h"
-#include "mouse/CMouseEditTrk.h"
+#include "map/CMapDraw.h"
 #include "mouse/CMouseEditArea.h"
+#include "mouse/CMouseEditTrk.h"
+#include "mouse/CMouseMoveWpt.h"
+#include "mouse/CMouseNormal.h"
 #include "mouse/CMouseRangeTrk.h"
-#include "gis/CGisWidget.h"
-#include "gis/CGisDraw.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/ovl/CGisItemOvlArea.h"
 #include "plot/CPlotProfile.h"
+#include "units/IUnit.h"
 
 
 #include <QtWidgets>
@@ -113,7 +113,6 @@ CCanvas::CCanvas(QWidget *parent)
 
 CCanvas::~CCanvas()
 {
-
 }
 
 void CCanvas::saveConfig(QSettings& cfg)
@@ -127,7 +126,7 @@ void CCanvas::saveConfig(QSettings& cfg)
 
 void CCanvas::loadConfig(QSettings& cfg)
 {
-    map->loadConfig(cfg);    
+    map->loadConfig(cfg);
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
     posFocus = cfg.value("posFocus", posFocus).toPointF();
@@ -161,7 +160,6 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
-
     mouse->deleteLater();
     mouse = new CMouseEditTrk(pt, gis, this);
     if(underMouse())
@@ -231,7 +229,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     QString report;
     QStringList keys = statusMessages.keys();
     keys.sort();
-    foreach(const QString& key, keys)
+    foreach(const QString &key, keys)
     {
         report += statusMessages[key] + "\n";
     }
@@ -244,7 +242,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     {
         labelStatusMessages->show();
         labelStatusMessages->setText(report);
-        labelStatusMessages->adjustSize();        
+        labelStatusMessages->adjustSize();
     }
     update();
 }
@@ -254,9 +252,18 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     needsRedraw = eRedrawAll;
 
     QSize s = e->size();
-    if(map) map->resize(s);
-    if(dem) dem->resize(s);
-    if(gis) gis->resize(s);
+    if(map)
+    {
+        map->resize(s);
+    }
+    if(dem)
+    {
+        dem->resize(s);
+    }
+    if(gis)
+    {
+        gis->resize(s);
+    }
 
     QWidget::resizeEvent(e);
 
@@ -321,7 +328,6 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
     p.end();
     needsRedraw = eRedrawNone;
-
 }
 
 void CCanvas::mousePressEvent(QMouseEvent * e)
@@ -448,9 +454,8 @@ void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, co
 
 void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font)
 {
-
-    QFontMetrics    fm(font);
-    QRect           r = fm.boundingRect(str);
+    QFontMetrics fm(font);
+    QRect r = fm.boundingRect(str);
 
     r.moveCenter(center);
 
@@ -470,13 +475,11 @@ void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, co
 
     p.setPen(color);
     p.drawText(r.topLeft(),str);
-
 }
 
 
 void CCanvas::drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color)
 {
-
     p.setPen(Qt::white);
     p.setFont(CMainWindow::self().getMapFont());
 
@@ -493,7 +496,6 @@ void CCanvas::drawText(const QString& str, QPainter& p, const QRect& r, const QC
 
     p.setPen(color);
     p.drawText(r,Qt::AlignCenter,str);
-
 }
 
 void CCanvas::drawStatusMessages(QPainter& p)
@@ -511,7 +513,6 @@ void CCanvas::drawStatusMessages(QPainter& p)
 
 void CCanvas::drawScale(QPainter& p)
 {
-
     if(!CMainWindow::self().isScaleVisible())
     {
         return;
@@ -680,7 +681,7 @@ void CCanvas::setup()
 
 QString CCanvas::getProjection()
 {
-    return map->getProjection();
+    return(map->getProjection());
 }
 
 void CCanvas::setProjection(const QString& proj)
@@ -692,12 +693,12 @@ void CCanvas::setProjection(const QString& proj)
 
 qreal CCanvas::getElevationAt(const QPointF& pos)
 {
-    return dem->getElevationAt(pos);
+    return(dem->getElevationAt(pos));
 }
 
 void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 {
-    return dem->getElevationAt(pos, ele);
+    return(dem->getElevationAt(pos, ele));
 }
 
 void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
@@ -709,5 +710,5 @@ void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 
 bool CCanvas::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
 {
-    return map->findPolylineCloseBy(pt1, pt2, threshold, polyline);
+    return(map->findPolylineCloseBy(pt1, pt2, threshold, polyline));
 }

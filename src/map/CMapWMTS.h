@@ -20,8 +20,8 @@
 #define CMAPWMTS_H
 #include "map/IMap.h"
 #include <QMap>
-#include <QQueue>
 #include <QMutex>
+#include <QQueue>
 #include <QTime>
 
 
@@ -32,92 +32,99 @@ class QNetworkReply;
 class QListWidgetItem;
 
 
-class CMapWMTS  : public IMap
+class CMapWMTS : public IMap
 {
     Q_OBJECT
-    public:
-        CMapWMTS(const QString& filename, CMapDraw *parent);
-        virtual ~CMapWMTS();
+public:
+    CMapWMTS(const QString& filename, CMapDraw *parent);
+    virtual ~CMapWMTS();
 
-        void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf);
 
-        void getLayers(QListWidget& list);
+    void getLayers(QListWidget& list);
 
-        void saveConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg);
 
-        void loadConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg);
 
 
-    signals:
-        void sigQueueChanged();
+signals:
+    void sigQueueChanged();
 
-    protected:
-        void configureCache();
+protected:
+    void configureCache();
 
-    private slots:
-        void slotQueueChanged();
-        void slotRequestFinished(QNetworkReply* reply);
-        void slotLayersChanged(QListWidgetItem * item);
+private slots:
+    void slotQueueChanged();
+    void slotRequestFinished(QNetworkReply* reply);
+    void slotLayersChanged(QListWidgetItem * item);
 
-    private:
-        struct limit_t
+private:
+    struct limit_t
+    {
+        qint32 minTileRow;
+        qint32 maxTileRow;
+        qint32 minTileCol;
+        qint32 maxTileCol;
+    };
+
+    struct layer_t
+    {
+        bool enabled;
+        QString title;
+        QStringList styles;
+        QString tileMatrixSet;
+        QRectF boundingBox;
+        QString resourceURL;
+        QMap<QString,limit_t> limits;
+    };
+
+    QList<layer_t> layers;
+
+    struct  tilematrix_t
+    {
+        QPointF topLeft;
+        qreal scale;
+        qint32 tileWidth;
+        qint32 tileHeight;
+        qint32 matrixWidth;
+        qint32 matrixHeight;
+    };
+
+    struct tileset_t
+    {
+        tileset_t() : pjsrc(0)
         {
-            qint32 minTileRow;
-            qint32 maxTileRow;
-            qint32 minTileCol;
-            qint32 maxTileCol;
-        };
-
-        struct layer_t
+        }
+        ~tileset_t()
         {
-            bool        enabled;
-            QString     title;
-            QStringList styles;
-            QString     tileMatrixSet;
-            QRectF      boundingBox;
-            QString     resourceURL;
-            QMap<QString,limit_t> limits;
-        };
+            if(pjsrc)
+            {
+                pj_free(pjsrc);
+            }
+        }
 
-        QList<layer_t> layers;
+        projPJ pjsrc;
+        QMap<QString,tilematrix_t> tilematrix;
+    };
 
-        struct  tilematrix_t
-        {
-            QPointF topLeft;
-            qreal scale;
-            qint32  tileWidth;
-            qint32  tileHeight;
-            qint32  matrixWidth;
-            qint32  matrixHeight;
-        };
+    QMap<QString,tileset_t> tilesets;
 
-        struct tileset_t
-        {
-            tileset_t() : pjsrc(0) {}
-            ~tileset_t() { if(pjsrc) pj_free(pjsrc); }
+    QString name;
+    /// Mutex to control access to url queue
+    QMutex mutex;
+    /// a queue with all tile urls to request
+    QQueue<QString> urlQueue;
+    /// the tile cache
+    IDiskCache * diskCache;
+    /// access mangager to request tiles
+    QNetworkAccessManager * accessManager;
 
-            projPJ  pjsrc;
-            QMap<QString,tilematrix_t> tilematrix;
-        };
+    QList<QString> urlPending;
 
-        QMap<QString,tileset_t> tilesets;
+    bool lastRequest;
 
-        QString name;
-        /// Mutex to control access to url queue
-        QMutex mutex;
-        /// a queue with all tile urls to request
-        QQueue<QString> urlQueue;
-        /// the tile cache
-        IDiskCache * diskCache;
-        /// access mangager to request tiles
-        QNetworkAccessManager * accessManager;
-
-        QList<QString> urlPending;
-
-        bool lastRequest;
-
-        QTime timeLastUpdate;
-
+    QTime timeLastUpdate;
 };
 
 #endif //CMAPWMTS_H

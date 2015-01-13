@@ -16,15 +16,14 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/CGisItemTrk.h"
 #include "CMainWindow.h"
 #include "GeoMath.h"
+#include "gis/trk/CGisItemTrk.h"
 
 #include <proj_api.h>
 
 void CGisItemTrk::filterReducePoints(qreal dist)
 {
-
     QVector<pointDP> line;
 
     foreach (const trkseg_t &seg, trk.segs)
@@ -132,7 +131,6 @@ void CGisItemTrk::filterDelete()
         }
 
         seg.pts = pts;
-
     }
     deriveSecondaryData();
     changed(QObject::tr("Permanently removed all hidden track points"), "://icons/48x48/PointHide.png");
@@ -140,7 +138,6 @@ void CGisItemTrk::filterDelete()
 
 void CGisItemTrk::filterSmoothProfile(int points)
 {
-
     QVector<int> window(points, 0);
     QVector<int> ele1, ele2;
 
@@ -187,7 +184,6 @@ void CGisItemTrk::filterSmoothProfile(int points)
     }
     deriveSecondaryData();
     changed(QObject::tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
-
 }
 
 void CGisItemTrk::filterReplaceElevation()
@@ -228,7 +224,6 @@ void CGisItemTrk::filterReplaceElevation()
 
 void CGisItemTrk::filterOffsetElevation(int offset)
 {
-
     for(int i = 0; i < trk.segs.size(); i++)
     {
         trkseg_t& seg = trk.segs[i];
@@ -252,7 +247,6 @@ void CGisItemTrk::filterOffsetElevation(int offset)
 
 void CGisItemTrk::filterNewDate(const QDateTime& date)
 {
-
     qint64 delta = date.toTime_t() - timeStart.toUTC().toTime_t();
 
     for(int i = 0; i < trk.segs.size(); i++)
@@ -315,7 +309,6 @@ void CGisItemTrk::filterObscureDate(int delta)
 
 void CGisItemTrk::filterSpeed(qreal speed)
 {
-
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {
@@ -327,7 +320,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
         trkseg_t& seg = trk.segs[i];
 
         for(int n = 0; n < seg.pts.size(); n++)
-        {          
+        {
             trkpt_t& pt = seg.pts[n];
             if(pt.flags & trkpt_t::eHidden)
             {

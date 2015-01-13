@@ -19,32 +19,32 @@
 #ifndef CMOUSEEDITAREA_H
 #define CMOUSEEDITAREA_H
 
-#include "mouse/IMouseEditLine.h"
 #include "gis/IGisItem.h"
+#include "mouse/IMouseEditLine.h"
 
 class CGisItemOvlArea;
 
 class CMouseEditArea : public IMouseEditLine
 {
     Q_OBJECT
-    public:
-        CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-        CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent);
-        virtual ~CMouseEditArea();
+public:
+    CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+    CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent);
+    virtual ~CMouseEditArea();
 
-        void mousePressEvent(QMouseEvent * e);
+    void mousePressEvent(QMouseEvent * e);
 
-    protected slots:
-        void slotAbort();
-        void slotCopyToNew();
-        void slotCopyToOrig();
+protected slots:
+    void slotAbort();
+    void slotCopyToNew();
+    void slotCopyToOrig();
 
-    protected:
-        virtual void drawLine(const QPolygonF& l, QPainter& p);
-        IGisLine * getGisLine();
+protected:
+    virtual void drawLine(const QPolygonF& l, QPainter& p);
+    IGisLine * getGisLine();
 
-    private:
-        IGisItem::key_t key;
+private:
+    IGisItem::key_t key;
 };
 
 #endif //CMOUSEEDITAREA_H

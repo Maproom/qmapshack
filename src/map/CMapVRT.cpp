@@ -16,14 +16,14 @@
 
 **********************************************************************************************/
 
-#include "map/CMapVRT.h"
-#include "map/CMapDraw.h"
-#include "units/IUnit.h"
 #include "canvas/CCanvas.h"
+#include "map/CMapDraw.h"
+#include "map/CMapVRT.h"
+#include "units/IUnit.h"
 
+#include <QtWidgets>
 #include <gdal_priv.h>
 #include <ogr_spatialref.h>
-#include <QtWidgets>
 
 #define TILELIMIT 2500
 #define TILESIZEX 64
@@ -218,17 +218,41 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     top      = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
     bottom   = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
 
-    if(left < 0) left = 0;
-    if(left > xsize_px) left = xsize_px;
+    if(left < 0)
+    {
+        left = 0;
+    }
+    if(left > xsize_px)
+    {
+        left = xsize_px;
+    }
 
-    if(top < 0) top  = 0;
-    if(top > ysize_px) top  = ysize_px;
+    if(top < 0)
+    {
+        top  = 0;
+    }
+    if(top > ysize_px)
+    {
+        top  = ysize_px;
+    }
 
-    if(right > xsize_px) right = xsize_px;
-    if(right < 0) right = 0;
+    if(right > xsize_px)
+    {
+        right = xsize_px;
+    }
+    if(right < 0)
+    {
+        right = 0;
+    }
 
-    if(bottom > ysize_px) bottom = ysize_px;
-    if(bottom < 0) bottom = 0;
+    if(bottom > ysize_px)
+    {
+        bottom = ysize_px;
+    }
+    if(bottom < 0)
+    {
+        bottom = 0;
+    }
 
     qreal imgw = TILESIZEX;
     qreal imgh = TILESIZEY;
@@ -267,7 +291,6 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     // limit number of tiles to keep performance
     if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {
-
         for(qreal y = top; y < bottom; y += dy)
         {
             if(map->needsRedraw())
@@ -324,11 +347,11 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                     img.setColorTable(colortable);
 
                     err = pBand->RasterIO(GF_Read
-                        ,x,y
-                        ,dx_used,dy_used
-                        ,img.bits()
-                        ,imgw_used,imgh_used
-                        ,GDT_Byte,0,0);
+                                          ,x,y
+                                          ,dx_used,dy_used
+                                          ,img.bits()
+                                          ,imgw_used,imgh_used
+                                          ,GDT_Byte,0,0);
                 }
                 else
                 {
@@ -345,18 +368,21 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
                         pBand = dataset->GetRasterBand(b);
 
                         err = pBand->RasterIO(GF_Read
-                            , x, y
-                            , dx_used, dy_used
-                            , buffer.data()
-                            , imgw_used, imgh_used
-                            , GDT_Byte, 0, 0);
+                                              , x, y
+                                              , dx_used, dy_used
+                                              , buffer.data()
+                                              , imgw_used, imgh_used
+                                              , GDT_Byte, 0, 0);
 
                         if(!err)
                         {
                             int pbandColour = pBand->GetColorInterpretation();
                             unsigned int offset;
 
-                            for (offset = 0; offset < sizeof(testPix) && *(((quint8 *)&testPix) + offset) != pbandColour; offset++);
+                            for (offset = 0; offset < sizeof(testPix) && *(((quint8 *)&testPix) + offset) != pbandColour; offset++)
+                            {
+                                ;
+                            }
                             if(offset < sizeof(testPix))
                             {
                                 quint8 * pTar   = img.bits() + offset;

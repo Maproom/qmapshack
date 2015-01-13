@@ -33,12 +33,15 @@ CTimeZoneSetup::CTimeZoneSetup(QWidget *parent)
     case IUnit::eTZUtc:
         radioUtc->setChecked(true);
         break;
+
     case IUnit::eTZLocal:
         radioLocal->setChecked(true);
         break;
+
     case IUnit::eTZAuto:
         radioAutomatic->setChecked(true);
         break;
+
     case IUnit::eTZSelected:
         radioSelected->setChecked(true);
         break;
@@ -52,12 +55,10 @@ CTimeZoneSetup::CTimeZoneSetup(QWidget *parent)
     }
 
     comboTimeZone->setCurrentIndex(comboTimeZone->findText(QString(zone)));
-
 }
 
 CTimeZoneSetup::~CTimeZoneSetup()
 {
-
 }
 
 void CTimeZoneSetup::accept()

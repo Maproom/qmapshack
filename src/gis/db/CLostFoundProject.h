@@ -24,15 +24,17 @@
 
 class CLostFoundProject : public CDBProject
 {
-    public:
-        CLostFoundProject(const QString &dbName, CGisListWks * parent);
+public:
+    CLostFoundProject(const QString &dbName, CGisListWks * parent);
 
-        virtual ~CLostFoundProject();
+    virtual ~CLostFoundProject();
 
-        bool save(){return false;}
+    bool save()
+    {
+        return( false);
+    }
 
-        void updateFromDb();
-
+    void updateFromDb();
 };
 
 #endif //CLOSTFOUNDPROJECT_H

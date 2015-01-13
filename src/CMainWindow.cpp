@@ -16,28 +16,28 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "helpers/CSettings.h"
-#include "canvas/CCanvas.h"
-#include "GeoMath.h"
-#include "map/CMapDraw.h"
-#include "map/CMapList.h"
-#include "dem/CDemList.h"
-#include "dem/CDemDraw.h"
-#include "units/IUnit.h"
-#include "units/CTimeZoneSetup.h"
-#include "units/CUnitsSetup.h"
-#include "version.h"
-#include "config.h"
 #include "CAbout.h"
+#include "CMainWindow.h"
+#include "GeoMath.h"
+#include "canvas/CCanvas.h"
+#include "config.h"
+#include "dem/CDemDraw.h"
+#include "dem/CDemList.h"
 #include "gis/CGisWidget.h"
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
+#include "helpers/CSettings.h"
+#include "map/CMapDraw.h"
+#include "map/CMapList.h"
 #include "qlgt/CImportDatabase.h"
+#include "units/CTimeZoneSetup.h"
+#include "units/CUnitsSetup.h"
+#include "units/IUnit.h"
+#include "version.h"
 
 #include <QtGui>
-#include <QtWidgets>
 #include <QtSql>
+#include <QtWidgets>
 
 CMainWindow * CMainWindow::pSelf = 0;
 
@@ -199,7 +199,7 @@ CMainWindow::~CMainWindow()
         other objects. This allows children of the canvas to access central objects
         like CGisWidget safely uppon their destruction. (e.g. CMouseRangeTrk to reset
         it's track's draw mode by key)
-    */
+     */
     qDeleteAll(allCanvas);
 
     QByteArray tz;
@@ -208,37 +208,36 @@ CMainWindow::~CMainWindow()
 
     cfg.setValue("Units/timezone", tz);
     cfg.setValue("Units/timezone/mode", tzmode);
-
 }
 
 bool CMainWindow::isScaleVisible()
 {
-    return actionShowScale->isChecked();
+    return(actionShowScale->isChecked());
 }
 
 bool CMainWindow::isGridVisible()
 {
-    return actionShowGrid->isChecked();
+    return(actionShowGrid->isChecked());
 }
 
 bool CMainWindow::isNight()
 {
-    return actionNightDay->isChecked();
+    return(actionNightDay->isChecked());
 }
 
 bool CMainWindow::isPOIText()
 {
-    return actionPOIText->isChecked();
+    return(actionPOIText->isChecked());
 }
 
 bool CMainWindow::isMapToolTip()
 {
-    return actionMapToolTip->isChecked();
+    return(actionMapToolTip->isChecked());
 }
 
 bool CMainWindow::flipMouseWheel()
 {
-    return actionFlipMouseWheel->isChecked();
+    return(actionFlipMouseWheel->isChecked());
 }
 
 void CMainWindow::addMapList(CMapList * list, const QString &name)
@@ -262,7 +261,7 @@ void CMainWindow::addWidgetToTab(QWidget * w)
 
 CCanvas * CMainWindow::getVisibleCanvas()
 {
-    return dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    return(dynamic_cast<CCanvas*>(tabWidget->currentWidget()));
 }
 
 void CMainWindow::zoomCanvasTo(const QRectF rect)
@@ -279,12 +278,12 @@ qreal CMainWindow::getEelevationAt(const QPointF& pos)
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
     {
-        return canvas->getElevationAt(pos);
+        return(canvas->getElevationAt(pos));
     }
-    return NOFLOAT;
+    return(NOFLOAT);
 }
 
-void  CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)
+void CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
@@ -323,12 +322,12 @@ void CMainWindow::slotAddCanvas()
     int i, cnt = 0;
     for(i = 0; i < tabWidget->count(); i++)
     {
-         CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-         if(canvas == 0)
-         {
-             continue;
-         }
-         cnt++;
+        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+        if(canvas == 0)
+        {
+            continue;
+        }
+        cnt++;
     }
 
     CCanvas * canvas = new CCanvas(tabWidget);
@@ -368,7 +367,7 @@ void CMainWindow::slotCurrentTabCanvas(int i)
             tabDem->setCurrentIndex(n);
             break;
         }
-    }    
+    }
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
     {
@@ -478,7 +477,6 @@ void CMainWindow::slotUpdateCurrentWidget()
         w->update();
         return;
     }
-
 }
 
 
@@ -495,7 +493,6 @@ void CMainWindow::slotSetupMapFont()
             w->update();
         }
     }
-
 }
 
 void CMainWindow::slotSetupGrid()
@@ -575,7 +572,7 @@ void CMainWindow::slotLoadGISData()
 
 void CMainWindow::loadGISData(const QStringList& filenames)
 {
-    foreach(const QString& filename, filenames)
+    foreach(const QString &filename, filenames)
     {
         gisWidget->loadGisProject(filename);
     }

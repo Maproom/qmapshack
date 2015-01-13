@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterReplaceElevation.h"
 
 CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
@@ -30,7 +30,6 @@ CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *pare
 
 CFilterReplaceElevation::~CFilterReplaceElevation()
 {
-
 }
 
 void CFilterReplaceElevation::slotApply()

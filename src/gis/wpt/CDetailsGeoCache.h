@@ -19,24 +19,24 @@
 #ifndef CDETAILSGEOCACHE_H
 #define CDETAILSGEOCACHE_H
 
-#include <QDialog>
 #include "ui_IDetailsGeoCache.h"
+#include <QDialog>
 
 class CGisItemWpt;
 
 class CDetailsGeoCache : public QDialog, private Ui::IDetailsGeoCache
 {
     Q_OBJECT
-    public:
-        CDetailsGeoCache(CGisItemWpt& wpt, QWidget * parent);
-        virtual ~CDetailsGeoCache();
+public:
+    CDetailsGeoCache(CGisItemWpt& wpt, QWidget * parent);
+    virtual ~CDetailsGeoCache();
 
-    private slots:
-        void slotHintChanged(bool on);
-        void slotLinkClicked(const QUrl& url);
+private slots:
+    void slotHintChanged(bool on);
+    void slotLinkClicked(const QUrl& url);
 
-    private:
-        CGisItemWpt& wpt;
+private:
+    CGisItemWpt& wpt;
 };
 
 #endif //CDETAILSGEOCACHE_H

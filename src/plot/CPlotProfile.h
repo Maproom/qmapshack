@@ -25,14 +25,14 @@
 class CPlotProfile : public IPlot
 {
     Q_OBJECT
-    public:
-        CPlotProfile(QWidget * parent);
-        CPlotProfile(CGisItemTrk * trk, mode_e mode, QWidget * parent);
-        virtual ~CPlotProfile();
+public:
+    CPlotProfile(QWidget * parent);
+    CPlotProfile(CGisItemTrk * trk, mode_e mode, QWidget * parent);
+    virtual ~CPlotProfile();
 
-        void setTrack(CGisItemTrk * track);
-        void updateData();
-        void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
+    void setTrack(CGisItemTrk * track);
+    void updateData();
+    void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
 };
 
 #endif //CPLOTPROFILE_H

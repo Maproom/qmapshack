@@ -19,14 +19,14 @@
 #ifndef CABOUT_H
 #define CABOUT_H
 
-#include <QDialog>
 #include "ui_IAbout.h"
+#include <QDialog>
 
 class CAbout : public QDialog, private Ui::IAbout
 {
-    public:
-        CAbout(QWidget * parent);
-        virtual ~CAbout();
+public:
+    CAbout(QWidget * parent);
+    virtual ~CAbout();
 };
 
 #endif //CABOUT_H

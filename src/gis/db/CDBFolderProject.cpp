@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBFolderProject.h"
 #include "gis/CGisListDB.h"
+#include "gis/db/CDBFolderProject.h"
 
 CDBFolderProject::CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetItem * parent)
     : IDBFolder(true, db, eTypeProject, key, parent)
@@ -28,6 +28,5 @@ CDBFolderProject::CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetIte
 
 CDBFolderProject::~CDBFolderProject()
 {
-
 }
 

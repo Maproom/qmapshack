@@ -32,6 +32,5 @@ CScrOptEditLine::CScrOptEditLine(QWidget *parent)
 
 CScrOptEditLine::~CScrOptEditLine()
 {
-
 }
 

@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "dem/CDemDraw.h"
 #include "dem/CDemPropSetup.h"
 #include "dem/IDem.h"
-#include "dem/CDemDraw.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -60,12 +60,10 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
     labelColor2->setPixmap(pixmap);
     pixmap.fill(colortable[1]);
     labelColor1->setPixmap(pixmap);
-
 }
 
 CDemPropSetup::~CDemPropSetup()
 {
-
 }
 
 void CDemPropSetup::resizeEvent(QResizeEvent * e)
@@ -106,7 +104,6 @@ void CDemPropSetup::slotPropertiesChanged()
     sliderHillshading->blockSignals(false);
     checkSlopeColor->blockSignals(false);
     sliderSlopeColor->blockSignals(false);
-
 }
 
 void CDemPropSetup::slotScaleChanged(const QPointF& s)
@@ -167,7 +164,6 @@ void CDemPropSetup::updateScaleLabel()
         p.setPen(Qt::NoPen);
         p.setBrush(Qt::darkGreen);
         p.drawRect(range);
-
     }
 
     // draw scale indicator
@@ -193,5 +189,4 @@ void CDemPropSetup::slotSetGradeSlopeColor(int val)
     labelValue3->setText(QString("> %1%2").arg(g[3]).arg(QChar(0260)));
     labelValue4->setText(QString("> %1%2").arg(g[4]).arg(QChar(0260)));
     labelValue5->setText(QString("> %1%2").arg(g[5]).arg(QChar(0260)));
-
 }

@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "mouse/IScrOpt.h"
 #include "canvas/CCanvas.h"
+#include "mouse/IScrOpt.h"
 #include "units/IUnit.h"
 #include <QtWidgets>
 
@@ -25,12 +25,10 @@
 IScrOpt::IScrOpt(QWidget *parent)
     : QWidget(parent)
 {
-
 }
 
 IScrOpt::~IScrOpt()
 {
-
 }
 
 

@@ -48,7 +48,6 @@ CPositionDialog::CPositionDialog(QWidget * parent, QPointF &pos)
 
 CPositionDialog::~CPositionDialog()
 {
-
 }
 
 void CPositionDialog::accept()
@@ -68,7 +67,6 @@ void CPositionDialog::accept()
     }
     else if(reCoord1.exactMatch(str))
     {
-
         bool signLat    = reCoord1.cap(1) == "S";
         int degLat      = reCoord1.cap(2).toInt();
         qreal minLat    = reCoord1.cap(3).toDouble();
@@ -101,7 +99,6 @@ void CPositionDialog::accept()
         int secLon    = reCoord4.cap(8).toInt();
 
         GPS_Math_DegMinSec_To_Deg(signLon, degLon, minLon, secLon, lon);
-
     }
     else if(reCoord5.exactMatch(str))
     {
@@ -110,8 +107,14 @@ void CPositionDialog::accept()
         lat             = reCoord5.cap(1).toDouble();
         lon             = reCoord5.cap(3).toDouble();
 
-        if(signLon) lon = -lon;
-        if(signLat) lat = -lat;
+        if(signLon)
+        {
+            lon = -lon;
+        }
+        if(signLat)
+        {
+            lat = -lat;
+        }
     }
     else
     {
@@ -122,7 +125,6 @@ void CPositionDialog::accept()
     pos.ry() = lat;
 
     QDialog::accept();
-
 }
 
 void CPositionDialog::slotEdit(const QString& str)

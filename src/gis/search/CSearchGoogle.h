@@ -21,8 +21,8 @@
 
 #include <gis/prj/IGisProject.h>
 
-#include <QObject>
 #include <QNetworkAccessManager>
+#include <QObject>
 
 class CGisListWks;
 class QLineEdit;
@@ -30,24 +30,30 @@ class QLineEdit;
 class CSearchGoogle : public QObject, public IGisProject
 {
     Q_OBJECT
-    public:
-        CSearchGoogle(CGisListWks * parent);
-        virtual ~CSearchGoogle();
+public:
+    CSearchGoogle(CGisListWks * parent);
+    virtual ~CSearchGoogle();
 
-        bool save(){return false;}
-        bool saveAs(){return false;}
+    bool save()
+    {
+        return( false);
+    }
+    bool saveAs()
+    {
+        return( false);
+    }
 
-    private slots:
-        void slotChangeSymbol();
-        void slotStartSearch();
-        void slotRequestFinished(QNetworkReply* reply);
+private slots:
+    void slotChangeSymbol();
+    void slotStartSearch();
+    void slotRequestFinished(QNetworkReply* reply);
 
-    private:
-        QLineEdit * edit;
+private:
+    QLineEdit * edit;
 
-        QAction * actSymbol;
+    QAction * actSymbol;
 
-        QNetworkAccessManager networkAccessManager;
+    QNetworkAccessManager networkAccessManager;
 };
 
 #endif //CSEARCHGOOGLE_H

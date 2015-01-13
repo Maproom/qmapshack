@@ -19,32 +19,32 @@
 #ifndef CMOUSEEDITTRK_H
 #define CMOUSEEDITTRK_H
 
-#include "mouse/IMouseEditLine.h"
 #include "gis/IGisItem.h"
+#include "mouse/IMouseEditLine.h"
 
 class CGisItemTrk;
 
 class CMouseEditTrk : public IMouseEditLine
 {
     Q_OBJECT
-    public:
-        CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-        CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
-        virtual ~CMouseEditTrk();
+public:
+    CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+    CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
+    virtual ~CMouseEditTrk();
 
-        void mousePressEvent(QMouseEvent * e);
+    void mousePressEvent(QMouseEvent * e);
 
-    protected slots:        
-        void slotAbort();
-        void slotCopyToNew();
-        void slotCopyToOrig();
+protected slots:
+    void slotAbort();
+    void slotCopyToNew();
+    void slotCopyToOrig();
 
 
-    protected:
-        IGisLine * getGisLine();
+protected:
+    IGisLine * getGisLine();
 
-    private:
-        IGisItem::key_t key;
+private:
+    IGisItem::key_t key;
 };
 
 #endif //CMOUSEEDITTRK_H

@@ -26,21 +26,27 @@ class QSqlDatabase;
 
 class CDBItem : public QTreeWidgetItem
 {
-    public:
-        CDBItem(QSqlDatabase& db, quint64 id, IDBFolder * parent);
-        virtual ~CDBItem();
+public:
+    CDBItem(QSqlDatabase& db, quint64 id, IDBFolder * parent);
+    virtual ~CDBItem();
 
-        quint64 getId(){return id;}
-        const QString& getKey(){return key;}
-        void toggle();
-        void remove();
+    quint64 getId()
+    {
+        return( id);
+    }
+    const QString& getKey()
+    {
+        return( key);
+    }
+    void toggle();
+    void remove();
 
-    private:        
-        QSqlDatabase& db;
-        quint64 id;
+private:
+    QSqlDatabase& db;
+    quint64 id;
 
-        int type;
-        QString key;
+    int type;
+    QString key;
 };
 
 #endif //CDBITEM_H

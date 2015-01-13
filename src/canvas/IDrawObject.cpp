@@ -33,12 +33,10 @@ IDrawObject::IDrawObject(QObject *parent)
     , cacheSizeMB(100)
     , cacheExpiration(8)
 {
-
 }
 
 IDrawObject::~IDrawObject()
 {
-
 }
 
 void IDrawObject::saveConfig(QSettings& cfg)
@@ -52,8 +50,6 @@ void IDrawObject::saveConfig(QSettings& cfg)
     cfg.setValue("cachePath", cachePath);
     cfg.setValue("cacheSizeMB", cacheSizeMB);
     cfg.setValue("cacheExpiration", cacheExpiration);
-
-
 }
 
 void IDrawObject::loadConfig(QSettings& cfg)
@@ -76,14 +72,14 @@ bool IDrawObject::isOutOfScale(const QPointF& scale)
 {
     if((getMinScale() != NOFLOAT) && (scale.x() < getMinScale()))
     {
-        return true;
+        return(true);
     }
     if((getMaxScale() != NOFLOAT) && (scale.x() > getMaxScale()))
     {
-        return true;
+        return(true);
     }
 
-    return false;
+    return(false);
 }
 
 void IDrawObject::getLayers(QListWidget& list)

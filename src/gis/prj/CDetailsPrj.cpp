@@ -16,19 +16,19 @@
 
 **********************************************************************************************/
 
+#include "gis/IGisItem.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/CDetailsPrj.h"
 #include "gis/prj/IGisProject.h"
-#include "gis/IGisItem.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "helpers/CTextEditWidget.h"
 #include "helpers/CLinksDialog.h"
+#include "helpers/CTextEditWidget.h"
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
 
-#include <QtWidgets>
 #include <QtPrintSupport>
+#include <QtWidgets>
 
 CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     : QWidget(parent)
@@ -44,12 +44,10 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     connect(radioOrderAsProject, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
 
     slotSetupGui();
-
 }
 
 CDetailsPrj::~CDetailsPrj()
 {
-
 }
 
 void CDetailsPrj::resizeEvent(QResizeEvent * e)
@@ -83,12 +81,12 @@ void CDetailsPrj::slotSetupGui()
 
 bool sortTrkByTime(const CGisItemTrk * trk1, const CGisItemTrk * trk2)
 {
-    return trk1->getTimeStart() < trk2->getTimeStart();
+    return(trk1->getTimeStart() < trk2->getTimeStart());
 }
 
 bool sortWptByTime(const CGisItemWpt * wpt1, const CGisItemWpt * wpt2)
 {
-    return wpt1->getTime() < wpt2->getTime();
+    return(wpt1->getTime() < wpt2->getTime());
 }
 
 
@@ -100,7 +98,10 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     QFontMetrics fm(QFont(font().family(),10));
     int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE *  fm.width("X")));
-    if(pointSize == 0) return;
+    if(pointSize == 0)
+    {
+        return;
+    }
 
     QFont f = textDesc->font();
     f.setPointSize(pointSize);
@@ -180,7 +181,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         QTextCursor cursor1(diaryFrame);
 
         cursor1.setCharFormat(fmtCharStandard);
-        cursor1.setBlockFormat(fmtBlockStandard);                
+        cursor1.setBlockFormat(fmtBlockStandard);
         cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
 
         cursor.setPosition(cursor1.position()+1);
@@ -243,7 +244,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         cnt = 1;
         foreach(CGisItemWpt * wpt, wpts)
         {
-            progress.setValue(n++*100.0/nItems);
+            progress.setValue(n++ *100.0/nItems);
             if(progress.wasCanceled())
             {
                 return;
@@ -274,8 +275,8 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         cnt = 1;
 
         foreach(CGisItemTrk * trk, trks)
-        {            
-            progress.setValue(n++*100.0/nItems);
+        {
+            progress.setValue(n++ *100.0/nItems);
             if(progress.wasCanceled())
             {
                 return;
@@ -299,7 +300,6 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
                 QImage overview(h1,h1,QImage::Format_ARGB32);
                 getTrackOverview(trk, overview);
                 table1->cellAt(0,1).firstCursorPosition().insertImage(overview);
-
             }
             else
             {
@@ -340,7 +340,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         cnt = 1;
         foreach(CGisItemOvlArea * area, areas)
         {
-            progress.setValue(n++*100.0/nItems);
+            progress.setValue(n++ *100.0/nItems);
             if(progress.wasCanceled())
             {
                 return;
@@ -394,7 +394,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         if(!name.isEmpty())
         {
             prj.setName(name);
-        }        
+        }
         slotSetupGui();
     }
     else if(url.path() == "description")
@@ -508,7 +508,9 @@ void CDetailsPrj::slotPrint()
     QPrintDialog dialog(&printer, this);
     dialog.setWindowTitle(tr("Print Diary"));
     if (dialog.exec() != QDialog::Accepted)
+    {
         return;
+    }
 
     QTextDocument doc;
     QSizeF pageSize = printer.pageRect(QPrinter::DevicePixel).size();

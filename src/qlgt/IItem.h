@@ -26,25 +26,28 @@
 
 class IItem
 {
-    public:
-        IItem(quint64  id);
-        virtual ~IItem();
+public:
+    IItem(quint64 id);
+    virtual ~IItem();
 
-        QString getInfo(){return "no info";}
+    QString getInfo()
+    {
+        return( "no info");
+    }
 
-        quint32 timestamp;
+    quint32 timestamp;
 
-        QString name;
-        QString comment;
-        QString description;
-        QPixmap iconPixmap;
-        QString iconString;
+    QString name;
+    QString comment;
+    QString description;
+    QPixmap iconPixmap;
+    QString iconString;
 
-        QString parentWpt;
+    QString parentWpt;
 
-        QString key;
+    QString key;
 
-        quint64 id;
+    quint64 id;
 };
 
 #endif //IITEM_H

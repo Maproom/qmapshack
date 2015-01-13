@@ -19,8 +19,8 @@
 #ifndef CSCROPTOVLAREA_H
 #define CSCROPTOVLAREA_H
 
-#include "mouse/IScrOpt.h"
 #include "gis/IGisItem.h"
+#include "mouse/IScrOpt.h"
 
 #include "ui_IScrOptOvlArea.h"
 
@@ -30,22 +30,21 @@ class IMouse;
 class CScrOptOvlArea : public IScrOpt, private Ui::IScrOptOvlArea
 {
     Q_OBJECT
-    public:
-        CScrOptOvlArea(CGisItemOvlArea * area, const QPoint &point, IMouse *parent);
-        virtual ~CScrOptOvlArea();
+public:
+    CScrOptOvlArea(CGisItemOvlArea * area, const QPoint &point, IMouse *parent);
+    virtual ~CScrOptOvlArea();
 
-        void draw(QPainter& p);
+    void draw(QPainter& p);
 
-    private slots:
-        void slotEditDetails();
-        void slotCopy();
-        void slotDelete();
-        void slotEdit();
+private slots:
+    void slotEditDetails();
+    void slotCopy();
+    void slotDelete();
+    void slotEdit();
 
-    private:
-        IGisItem::key_t key;
-        QPointF anchor;
-
+private:
+    IGisItem::key_t key;
+    QPointF anchor;
 };
 
 #endif //CSCROPTOVLAREA_H

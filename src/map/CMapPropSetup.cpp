@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "map/CMapDraw.h"
 #include "map/CMapPropSetup.h"
 #include "map/IMap.h"
-#include "map/CMapDraw.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -75,12 +75,10 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     {
         frameLayers->hide();
     }
-
 }
 
 CMapPropSetup::~CMapPropSetup()
 {
-
 }
 
 void CMapPropSetup::resizeEvent(QResizeEvent * e)
@@ -124,7 +122,6 @@ void CMapPropSetup::slotPropertiesChanged()
     checkPoints->blockSignals(false);
     spinCacheSize->blockSignals(false);
     spinCacheExpiration->blockSignals(false);
-
 }
 
 void CMapPropSetup::slotScaleChanged(const QPointF& s)
@@ -147,7 +144,6 @@ void CMapPropSetup::slotSetMaxScale(bool checked)
 
 void CMapPropSetup::slotSetCachePath()
 {
-
     QString path = QFileDialog::getExistingDirectory(this, tr("Cache path..."), labelCachePath->text());
     if(path.isEmpty())
     {
@@ -196,7 +192,6 @@ void CMapPropSetup::updateScaleLabel()
         p.setPen(Qt::NoPen);
         p.setBrush(Qt::darkGreen);
         p.drawRect(range);
-
     }
 
     // draw scale indicator

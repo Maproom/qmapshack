@@ -19,8 +19,8 @@
 #ifndef IDBFOLDER_H
 #define IDBFOLDER_H
 
-#include <QTreeWidgetItem>
 #include <QSqlDatabase>
+#include <QTreeWidgetItem>
 
 class QSqlDatabase;
 class CEvtW2DAckInfo;
@@ -29,46 +29,47 @@ class CDBItem;
 
 class IDBFolder : public QTreeWidgetItem
 {
-    public:
-        enum type_e
-        {
-             eTypeLostFound = 1
-            ,eTypeDatabase = 2
-            ,eTypeGroup = 3
-            ,eTypeProject = 4
-            ,eTypeOther = 5
-        };
+public:
+    enum type_e
+    {
+        eTypeLostFound = 1
+        ,eTypeDatabase = 2
+        ,eTypeGroup = 3
+        ,eTypeProject = 4
+        ,eTypeOther = 5
+    };
 
-        IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
-        IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
-        virtual ~IDBFolder();
+    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
+    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
+    virtual ~IDBFolder();
 
-        quint64 getId(){return id;}
-        QString getDBName();
-        CDBFolderDatabase * getDBFolder();
+    quint64 getId()
+    {
+        return( id);
+    }
+    QString getDBName();
+    CDBFolderDatabase * getDBFolder();
 
-        virtual void addFolder(type_e type, const QString &name);
-        virtual void expanding();
-        virtual void update(CEvtW2DAckInfo * info);
-        virtual void toggle();
-        virtual void remove();
+    virtual void addFolder(type_e type, const QString &name);
+    virtual void expanding();
+    virtual void update(CEvtW2DAckInfo * info);
+    virtual void toggle();
+    virtual void remove();
 
-        static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
+    static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
-        bool operator<(const QTreeWidgetItem &other) const;
+    bool operator<(const QTreeWidgetItem &other) const;
 
-    protected:        
-        virtual void setupFromDB();
-        virtual void addChildren(const QSet<QString> &activeChildren);
-        virtual void remove(quint64 idParent, quint64 idFolder);
+protected:
+    virtual void setupFromDB();
+    virtual void addChildren(const QSet<QString> &activeChildren);
+    virtual void remove(quint64 idParent, quint64 idFolder);
 
-        QSqlDatabase& db;
+    QSqlDatabase& db;
 
-        quint64 id;
-        QString key;
-        bool isLoadable;        
-
-
+    quint64 id;
+    QString key;
+    bool isLoadable;
 };
 
 #endif //IDBFOLDER_H

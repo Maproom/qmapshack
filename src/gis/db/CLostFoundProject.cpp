@@ -16,16 +16,16 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CLostFoundProject.h"
 #include "gis/CGisListWks.h"
+#include "gis/db/CLostFoundProject.h"
 #include "gis/db/macros.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 
-#include <QtWidgets>
 #include <QtSql>
+#include <QtWidgets>
 
 
 CLostFoundProject::CLostFoundProject(const QString &dbName, CGisListWks * parent)
@@ -45,7 +45,6 @@ CLostFoundProject::CLostFoundProject(const QString &dbName, CGisListWks * parent
 
 CLostFoundProject::~CLostFoundProject()
 {
-
 }
 
 void CLostFoundProject::updateFromDb()
@@ -54,7 +53,7 @@ void CLostFoundProject::updateFromDb()
 
     QSqlQuery query(db);
     query.prepare("SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 
     while(query.next())
     {
@@ -63,19 +62,23 @@ void CLostFoundProject::updateFromDb()
 
         switch(type)
         {
-            case IGisItem::eTypeWpt:
-                new CGisItemWpt(id, db, this);
-                break;
-            case IGisItem::eTypeTrk:
-                new CGisItemTrk(id, db, this);
-                break;
-            case IGisItem::eTypeRte:
-                new CGisItemRte(id, db, this);
-                break;
-            case IGisItem::eTypeOvl:
-                new CGisItemOvlArea(id, db, this);
-                break;
-            default:;
+        case IGisItem::eTypeWpt:
+            new CGisItemWpt(id, db, this);
+            break;
+
+        case IGisItem::eTypeTrk:
+            new CGisItemTrk(id, db, this);
+            break;
+
+        case IGisItem::eTypeRte:
+            new CGisItemRte(id, db, this);
+            break;
+
+        case IGisItem::eTypeOvl:
+            new CGisItemOvlArea(id, db, this);
+            break;
+
+        default:;
         }
     }
 

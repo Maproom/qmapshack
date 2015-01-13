@@ -20,15 +20,13 @@
 #include "CUnitNautic.h"
 
 CUnitNautic::CUnitNautic(QObject * parent)
-: IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, parent)
+    : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, parent)
 {
-
 }
 
 
 CUnitNautic::~CUnitNautic()
 {
-
 }
 
 
@@ -88,11 +86,10 @@ void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit)
         val.sprintf("%1.2f", meter / (1852 * 1852));
         unit = "nm²";
     }
-
 }
 
 
 qreal CUnitNautic::elevation2meter(const QString& val)
 {
-    return val.toDouble();
+    return(val.toDouble());
 }

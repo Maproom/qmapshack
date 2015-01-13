@@ -19,11 +19,11 @@
 #ifndef CSCROPTRTE_H
 #define CSCROPTRTE_H
 
-#include "mouse/IScrOpt.h"
 #include "gis/IGisItem.h"
+#include "mouse/IScrOpt.h"
 
-#include <QWidget>
 #include "ui_IScrOptRte.h"
+#include <QWidget>
 
 class CGisItemRte;
 class IMouse;
@@ -31,19 +31,19 @@ class IMouse;
 class CScrOptRte : public IScrOpt, private Ui::IScrOptRte
 {
     Q_OBJECT
-    public:
-        CScrOptRte(CGisItemRte * rte, const QPoint &point, IMouse *parent);        
-        virtual ~CScrOptRte();
+public:
+    CScrOptRte(CGisItemRte * rte, const QPoint &point, IMouse *parent);
+    virtual ~CScrOptRte();
 
-        void draw(QPainter& p);
+    void draw(QPainter& p);
 
-    private slots:
-        void slotDelete();
-        void slotCopy();
+private slots:
+    void slotDelete();
+    void slotCopy();
 
-    private:
-        IGisItem::key_t key;
-        QPointF anchor;
+private:
+    IGisItem::key_t key;
+    QPointF anchor;
 };
 
 #endif //CSCROPTRTE_H

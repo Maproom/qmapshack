@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "grid/CProjWizard.h"
-#include "grid/CGrid.h"
 #include "map/CMapDraw.h"
 
 #include <QtWidgets>
@@ -40,12 +40,10 @@ CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
     connect(toolFromMap, SIGNAL(clicked()), this, SLOT(slotProjFromMap()));
     connect(toolProjWizzard, SIGNAL(clicked()), this, SLOT(slotProjWizard()));
     connect(toolGridColor,SIGNAL(clicked()),this,SLOT(slotSelectGridColor()));
-
 }
 
 CGridSetup::~CGridSetup()
 {
-
 }
 
 void CGridSetup::accept()

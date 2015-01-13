@@ -19,8 +19,8 @@
 #ifndef CGRIDSETUP_H
 #define CGRIDSETUP_H
 
-#include <QDialog>
 #include "ui_IGridSetup.h"
+#include <QDialog>
 
 class CGrid;
 class CMapDraw;
@@ -28,22 +28,22 @@ class CMapDraw;
 class CGridSetup : public QDialog, private Ui::IGridSetup
 {
     Q_OBJECT
-    public:
-        CGridSetup(CGrid * grid, CMapDraw *map);
-        virtual ~CGridSetup();
+public:
+    CGridSetup(CGrid * grid, CMapDraw *map);
+    virtual ~CGridSetup();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotProjWizard();
-        void slotSelectGridColor();
-        void slotRestoreDefault();
-        void slotProjFromMap();
+private slots:
+    void slotProjWizard();
+    void slotSelectGridColor();
+    void slotRestoreDefault();
+    void slotProjFromMap();
 
-    private:
-        CGrid * grid;
-        CMapDraw * map;
+private:
+    CGrid * grid;
+    CMapDraw * map;
 };
 
 #endif //CGRIDSETUP_H

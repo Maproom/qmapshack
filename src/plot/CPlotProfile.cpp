@@ -16,31 +16,27 @@
 
 **********************************************************************************************/
 
-#include "plot/CPlotProfile.h"
-#include "plot/CPlotAxis.h"
-#include "units/IUnit.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "CMainWindow.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "plot/CPlotAxis.h"
+#include "plot/CPlotProfile.h"
+#include "units/IUnit.h"
 
 #include <proj_api.h>
 
 CPlotProfile::CPlotProfile(QWidget * parent)
     : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
 {
-
 }
 
 CPlotProfile::CPlotProfile(CGisItemTrk *trk, mode_e mode, QWidget *parent)
     : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
 {
-
-
     updateData();
 }
 
 CPlotProfile::~CPlotProfile()
 {
-
 }
 
 void CPlotProfile::setTrack(CGisItemTrk * track)
@@ -91,7 +87,7 @@ void CPlotProfile::updateData()
             if(trkpt.ele != NOINT)
             {
                 lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.ele * basefactor);
-                coords  << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+                coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
                 lineDem << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), NOFLOAT);
             }
         }
@@ -107,7 +103,6 @@ void CPlotProfile::updateData()
     }
     setLimits();
     resetZoom();
-
 }
 
 void CPlotProfile::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)

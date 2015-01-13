@@ -16,13 +16,13 @@
 
 **********************************************************************************************/
 
-#include "gis/wpt/CProjWpt.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CWptIconDialog.h"
-#include "gis/prj/IGisProject.h"
-#include "units/IUnit.h"
-#include "GeoMath.h"
 #include "CMainWindow.h"
+#include "GeoMath.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CProjWpt.h"
+#include "helpers/CWptIconDialog.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -49,7 +49,6 @@ CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
 
 CProjWpt::~CProjWpt()
 {
-
 }
 
 void CProjWpt::slotChangeIcon()

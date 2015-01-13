@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "mouse/CScrOptPoint.h"
 #include "canvas/CCanvas.h"
+#include "mouse/CScrOptPoint.h"
 
 #include <QtWidgets>
 
@@ -31,12 +31,10 @@ CScrOptPoint::CScrOptPoint(const QPointF &point, QWidget *parent)
 
     move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
-
 }
 
 CScrOptPoint::~CScrOptPoint()
 {
-
 }
 
 void CScrOptPoint::draw(QPainter& p)

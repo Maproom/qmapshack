@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
-#include "canvas/CCanvas.h"
 
 #include <QtWidgets>
 
@@ -30,7 +30,6 @@ CGisDraw::CGisDraw(CCanvas *parent)
 
 CGisDraw::~CGisDraw()
 {
-
 }
 
 void CGisDraw::draw(QPainter& p, const QRect& rect)
@@ -40,7 +39,6 @@ void CGisDraw::draw(QPainter& p, const QRect& rect)
 
 void CGisDraw::drawt(buffer_t& currentBuffer)
 {
-
     QPointF pt1 = currentBuffer.ref1;
     QPointF pt2 = currentBuffer.ref2;
     QPointF pt3 = currentBuffer.ref3;
@@ -66,5 +64,4 @@ void CGisDraw::drawt(buffer_t& currentBuffer)
     p.translate(-pp);
 
     CGisWidget::self().draw(p,viewport, this);
-
 }

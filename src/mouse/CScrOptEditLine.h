@@ -25,12 +25,13 @@
 class CScrOptEditLine : public IScrOpt, public Ui::IScrOptEditLine
 {
     Q_OBJECT
-    public:
-        CScrOptEditLine(QWidget * parent);
-        virtual ~CScrOptEditLine();
+public:
+    CScrOptEditLine(QWidget * parent);
+    virtual ~CScrOptEditLine();
 
-        void draw(QPainter& p){}
-
+    void draw(QPainter& p)
+    {
+    }
 };
 
 #endif //CSCROPTEDITLINE_H

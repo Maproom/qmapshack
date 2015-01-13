@@ -24,14 +24,13 @@
 class CPlotSpeed : public IPlot
 {
     Q_OBJECT
-    public:
-        CPlotSpeed(QWidget * parent);
-        virtual ~CPlotSpeed();
+public:
+    CPlotSpeed(QWidget * parent);
+    virtual ~CPlotSpeed();
 
-        void setTrack(CGisItemTrk * track);
-        void updateData();
-        void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
-
+    void setTrack(CGisItemTrk * track);
+    void updateData();
+    void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
 };
 
 #endif //CPLOTSPEED_H

@@ -16,18 +16,16 @@
 
 **********************************************************************************************/
 
-#include "plot/CPlotSpeed.h"
 #include "plot/CPlotAxis.h"
+#include "plot/CPlotSpeed.h"
 
 CPlotSpeed::CPlotSpeed(QWidget *parent)
     : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
 {
-
 }
 
 CPlotSpeed::~CPlotSpeed()
 {
-
 }
 
 void CPlotSpeed::setTrack(CGisItemTrk * track)

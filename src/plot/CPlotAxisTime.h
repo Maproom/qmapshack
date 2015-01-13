@@ -24,20 +24,26 @@
 class CPlotAxisTime : public CPlotAxis
 {
     Q_OBJECT
-    public:
-        CPlotAxisTime(QObject * parent);
-        virtual ~CPlotAxisTime();
+public:
+    CPlotAxisTime(QObject * parent);
+    virtual ~CPlotAxisTime();
 
-        ///calculate format for the given value
-        const QString fmtsgl(qreal /*val*/){return strFormat;}
-        ///calculate format for the given value
-        const QString fmtdbl(qreal /*val*/){return strFormat;}
+    ///calculate format for the given value
+    const QString fmtsgl(qreal /*val*/)
+    {
+        return( strFormat);
+    }
+    ///calculate format for the given value
+    const QString fmtdbl(qreal /*val*/)
+    {
+        return( strFormat);
+    }
 
-        const tic_t* ticmark( const tic_t * t );
-    protected:
-        void calc();
+    const tic_t* ticmark( const tic_t * t );
+protected:
+    void calc();
 
-        QString strFormat;
+    QString strFormat;
 };
 
 #endif //CPLOTAXISTIME_H

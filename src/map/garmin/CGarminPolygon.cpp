@@ -14,17 +14,17 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-  Garmin and MapSource are registered trademarks or trademarks of Garmin Ltd.
-  or one of its subsidiaries.
+   Garmin and MapSource are registered trademarks or trademarks of Garmin Ltd.
+   or one of its subsidiaries.
 
-  This source is based on John Mechalas documentation "Garmin IMG File Format" found
-  at sourceforge. The missing bits and error were rectified by the source code of
-  Konstantin Galichsky (kg@geopainting.com), http://www.geopainting.com
+   This source is based on John Mechalas documentation "Garmin IMG File Format" found
+   at sourceforge. The missing bits and error were rectified by the source code of
+   Konstantin Galichsky (kg@geopainting.com), http://www.geopainting.com
 
 **********************************************************************************************/
-#include "helpers/Platform.h"
 #include "CGarminPolygon.h"
 #include "Garmin.h"
+#include "helpers/Platform.h"
 
 #include <assert.h>
 
@@ -41,14 +41,13 @@ struct sign_info_t
     bool nx;
     bool y_has_sign;
     bool ny;
-
 };
 sign_info_t::sign_info_t()
-: sign_info_bits(2)
-, x_has_sign(true)
-, nx(false)
-, y_has_sign(true)
-, ny(false)
+    : sign_info_bits(2)
+    , x_has_sign(true)
+    , nx(false)
+    , y_has_sign(true)
+    , ny(false)
 {
 }
 
@@ -57,23 +56,21 @@ quint32 CGarminPolygon::cnt = 0;
 qint32 CGarminPolygon::maxVecSize = 0;
 
 CGarminPolygon::CGarminPolygon()
-: type(0)
-, direction(false)
-, lbl_info(0)
-, lbl_in_NET(false)
-, hasV2Label(false)
-, dLng(0)
-, dLat(0)
-, id(0)
+    : type(0)
+    , direction(false)
+    , lbl_info(0)
+    , lbl_in_NET(false)
+    , hasV2Label(false)
+    , dLng(0)
+    , dLat(0)
+    , id(0)
 
 {
-
 }
 
 
 CGarminPolygon::~CGarminPolygon()
 {
-
 }
 
 
@@ -108,7 +105,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
         bit 0..6    type
 
         bit 7       bitstream_len is two bytes (true)
-    */
+     */
     type = *pData++;
 
     two_byte_len = type & 0x80;
@@ -126,7 +123,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
         bit 0..21   off set into LBL section
         bit 22      use extra bit for coordinates
         bit 23      use label data of NET section
-    */
+     */
     lbl_info    = gar_ptr_load(uint24_t, pData);
     lbl_in_NET  = lbl_info & 0x800000;
     extra_bit   = lbl_info & 0x400000;
@@ -158,13 +155,13 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 
     if(pEnd && ((pStart + bytes_total) > pEnd))
     {
-        return bytes_total;
+        return(bytes_total);
     }
 
     /* bitstream info
         bit 0..3    base bits longitude
         bit 4..7    base bits latitude
-    */
+     */
     bs_info = *pData++;;
 
     //if(extra_bit) qWarning("extrabit");
@@ -192,7 +189,10 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
     x1 = ((qint32)dLng << shift) + iCenterLon;
     y1 = ((qint32)dLat << shift) + iCenterLat;
 
-    if(x1 >= 0x800000 && !isNegative) x1 = 0x7fffff;
+    if(x1 >= 0x800000 && !isNegative)
+    {
+        x1 = 0x7fffff;
+    }
 
     coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
@@ -202,7 +202,10 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
         x1 += (x << shift);
         y1 += (y << shift);
 
-        if(x1 >= 0x800000 && !isNegative) x1 = 0x7fffff;
+        if(x1 >= 0x800000 && !isNegative)
+        {
+            x1 = 0x7fffff;
+        }
 
         coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
     }
@@ -221,7 +224,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 
     pixel = coords;
 
-    return bytes_total;
+    return(bytes_total);
 }
 
 
@@ -263,7 +266,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     }
     else
     {
-        bs_len = ((* pData) >> 1) - 1;
+        bs_len = ((*pData) >> 1) - 1;
         pData       += 1;
         bytes_total += 1;
     }
@@ -300,7 +303,10 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     x1 = ((qint32)dLng << shift) + iCenterLon;
     y1 = ((qint32)dLat << shift) + iCenterLat;
 
-    if(x1 >= 0x800000 && !isNegative) x1 = 0x7fffff;
+    if(x1 >= 0x800000 && !isNegative)
+    {
+        x1 = 0x7fffff;
+    }
 
     coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
@@ -310,7 +316,10 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
         x1 += (x << shift);
         y1 += (y << shift);
 
-        if(x1 >= 0x800000 && !isNegative) x1 = 0x7fffff;
+        if(x1 >= 0x800000 && !isNegative)
+        {
+            x1 = 0x7fffff;
+        }
 
 //        xy.u = GARMIN_RAD(x1);
 //        xy.v = GARMIN_RAD(y1);
@@ -352,7 +361,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
 
     pixel = coords;
 
-    return bytes_total;
+    return(bytes_total);
 }
 
 
@@ -414,30 +423,39 @@ int CGarminPolygon::bits_per_coord(quint8 base, bool is_signed)
 {
     int n = 2;
 
-    if ( base <= 9 ) n+= base;
-    else n+= (2*base-9);
+    if ( base <= 9 )
+    {
+        n+= base;
+    }
+    else
+    {
+        n+= (2*base-9);
+    }
 
-    if ( is_signed ) ++n;
-    return n;
+    if ( is_signed )
+    {
+        ++n;
+    }
+    return(n);
 }
 
 
 CShiftReg::CShiftReg(const quint8* pData, quint32 n, quint32 bx, quint32 by, bool extra_bit, sign_info_t& si)
-: reg(0)
-, pData(pData)
-, bytes(n)
-, xmask(0xFFFFFFFF)
-, ymask(0xFFFFFFFF)
-, xsign(1)
-, ysign(1)
-, xsign2(2)
-, ysign2(2)
-, bits(0)
-, bits_per_x(bx)
-, bits_per_y(by)
-, bits_per_coord(bx + by + (extra_bit ? 1 : 0))
-, sinfo(si)
-, extraBit(extra_bit)
+    : reg(0)
+    , pData(pData)
+    , bytes(n)
+    , xmask(0xFFFFFFFF)
+    , ymask(0xFFFFFFFF)
+    , xsign(1)
+    , ysign(1)
+    , xsign2(2)
+    , ysign2(2)
+    , bits(0)
+    , bits_per_x(bx)
+    , bits_per_y(by)
+    , bits_per_coord(bx + by + (extra_bit ? 1 : 0))
+    , sinfo(si)
+    , extraBit(extra_bit)
 {
     // create bit masks
     xmask = (xmask << (32-bx)) >> (32-bx);
@@ -460,7 +478,10 @@ CShiftReg::CShiftReg(const quint8* pData, quint32 n, quint32 bx, quint32 by, boo
 bool CShiftReg::get(qint32& x, qint32& y)
 {
     x = y = 0;
-    if(bits < (bits_per_coord)) return false;
+    if(bits < (bits_per_coord))
+    {
+        return( false);
+    }
 
     // don't know what to do with it -> skip extra bit
     if(extraBit)
@@ -492,7 +513,6 @@ bool CShiftReg::get(qint32& x, qint32& y)
         {
             x = tmp - (xsign2) - x;
         }
-
     }
     else
     {
@@ -543,7 +563,7 @@ bool CShiftReg::get(qint32& x, qint32& y)
 
     // fill register until it has enought bits for one coord. pair again
     fill(bits_per_coord);
-    return true;
+    return(true);
 }
 
 

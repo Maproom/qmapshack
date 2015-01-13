@@ -786,7 +786,6 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
 void CGisItemTrk::gainUserFocus(bool yes)
 {
     keyUserFocus    = yes ? key : key_t();
-
 }
 
 void CGisItemTrk::edit()
@@ -818,7 +817,7 @@ bool CGisItemTrk::cut()
     IGisProject * project = CGisWidget::self().selectProject();
     if(project == 0)
     {
-        return false;
+        return(false);
     }
 
     new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
@@ -833,7 +832,7 @@ bool CGisItemTrk::cut()
     project = CGisWidget::self().selectProject();
     if(project == 0)
     {
-        return false;
+        return(false);
     }
 
     new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
@@ -856,13 +855,13 @@ void CGisItemTrk::reverse()
     }
 
     // start with a 1:1 copy of the first track
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);    
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);
     trk1->trk.name = name1;
     /*
         clear track data, item key and history. To clear the history is important as
         the original track's history would restore the original key
 
-    */
+     */
     trk1->trk.segs.clear();
     trk1->key.clear();
     trk1->history.events.clear();
@@ -923,7 +922,7 @@ void CGisItemTrk::combine()
         clear track data, item key and history. To clear the history is important as
         the original track's history would restore the original key
 
-    */
+     */
     trk1->trk.segs.clear();
     trk1->key.clear();
     trk1->history.events.clear();
@@ -941,7 +940,7 @@ void CGisItemTrk::combine()
     }
 
     // restore secondary data and create a new history
-    trk1->deriveSecondaryData();    
+    trk1->deriveSecondaryData();
     trk1->setupHistory();
     trk1->updateDecoration(eMarkChanged, eMarkNone);
 }

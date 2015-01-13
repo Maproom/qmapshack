@@ -21,10 +21,10 @@
 
 #include "IMouse.h"
 
-#include <QStringList>
 #include <QPixmap>
-#include <QRect>
 #include <QPointer>
+#include <QRect>
+#include <QStringList>
 
 class CCanvas;
 class IScrOpt;
@@ -34,56 +34,55 @@ class QMenu;
 class CMouseNormal : public IMouse
 {
     Q_OBJECT
-    public:
-        CMouseNormal(CGisDraw * gis, CCanvas *canvas);
-        virtual ~CMouseNormal();
+public:
+    CMouseNormal(CGisDraw * gis, CCanvas *canvas);
+    virtual ~CMouseNormal();
 
-        void draw(QPainter& p,  bool needsRedraw,  const QRect &rect);
-        void mousePressEvent(QMouseEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
-        void mouseReleaseEvent(QMouseEvent *e);
-        void mouseDoubleClickEvent(QMouseEvent *e);
-        void wheelEvent(QWheelEvent * e);
+    void draw(QPainter& p,  bool needsRedraw,  const QRect &rect);
+    void mousePressEvent(QMouseEvent * e);
+    void mouseMoveEvent(QMouseEvent * e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void mouseDoubleClickEvent(QMouseEvent *e);
+    void wheelEvent(QWheelEvent * e);
 
-    private slots:
-        void slotAddWpt();
-        void slotAddTrk();
-        void slotAddArea();
-        void slotCopyPosition();
+private slots:
+    void slotAddWpt();
+    void slotAddTrk();
+    void slotAddArea();
+    void slotCopyPosition();
 
-    protected:
-        void stopTracking();
+protected:
+    void stopTracking();
 
 
-        /// the flag is true if the map moving is in progress
-        bool mapMove;
-        /// the flag is true if the map has been moved actually
-        bool mapDidMove;
-        /// always the last seen mouse cursor position
-        QPoint lastPos;
+    /// the flag is true if the map moving is in progress
+    bool mapMove;
+    /// the flag is true if the map has been moved actually
+    bool mapDidMove;
+    /// always the last seen mouse cursor position
+    QPoint lastPos;
 
-        enum item_selection_states_e
-        {
-              eStateIdle = 0
-            /// there is only a single item close to the cursor
-            , eStateHooverSingle = 1
-            /// there are multiple items close to the cursor
-            , eStateHooverMultiple = 2
-            /// not a real state, but at this value and above no map move is allowed to take place
-            , eStateNoMapMovePossible = 3
-            /// the user clicked on multiple cluttered items and gets now an uncluttered representation
-            , eStateUnclutterMultiple = 3
-            /// the user has selected a single item, show options how to proceed
-            , eStateShowItemOptions = 4
-        };
+    enum item_selection_states_e
+    {
+        eStateIdle = 0
+                     /// there is only a single item close to the cursor
+        , eStateHooverSingle = 1
+                               /// there are multiple items close to the cursor
+        , eStateHooverMultiple = 2
+                                 /// not a real state, but at this value and above no map move is allowed to take place
+        , eStateNoMapMovePossible = 3
+                                    /// the user clicked on multiple cluttered items and gets now an uncluttered representation
+        , eStateUnclutterMultiple = 3
+                                    /// the user has selected a single item, show options how to proceed
+        , eStateShowItemOptions = 4
+    };
 
-        item_selection_states_e stateItemSel;
+    item_selection_states_e stateItemSel;
 
-        CScrOptUnclutter * screenUnclutter;
-        QPointer<IScrOpt>  screenItemOption;
+    CScrOptUnclutter * screenUnclutter;
+    QPointer<IScrOpt>  screenItemOption;
 
-        QMenu * menu;
-
+    QMenu * menu;
 };
 
 #endif //CMOUSENORMAL_H

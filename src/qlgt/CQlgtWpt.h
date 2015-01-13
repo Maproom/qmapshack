@@ -23,87 +23,89 @@
 
 class CQlgtWpt : public QObject, public IItem
 {
-    public:
-        CQlgtWpt(quint64 id, QObject * parent);
-        virtual ~CQlgtWpt();
+public:
+    CQlgtWpt(quint64 id, QObject * parent);
+    virtual ~CQlgtWpt();
 
-        void setIcon(const QString& str);
+    void setIcon(const QString& str);
 
-        enum geocacheservice_e {eGC, eOC, eTC};
-        enum type_e {eEnd,eBase,eImage,eGeoCache};
+    enum geocacheservice_e {eGC, eOC, eTC};
+    enum type_e {eEnd,eBase,eImage,eGeoCache};
 
-        struct geocachelog_t
+    struct geocachelog_t
+    {
+        geocachelog_t() : id(0)
         {
-            geocachelog_t() : id(0){}
-            quint32 id;
-            QString date;
-            QString type;
-            QString finderId;
-            QString finder;
-            QString text;
-        };
-
-        struct geocache_t
-        {
-            geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0), exportBuddies(false){}
-            geocacheservice_e service;
-            bool hasData;
-            quint32 id;
-            bool available;
-            bool archived;
-            float difficulty;
-            float terrain;
-            QString status;
-            QString name;
-            QString owner;
-            QString ownerId;
-            QString type;
-            QString container;
-            QString shortDesc;
-            QString longDesc;
-            QString hint;
-            QString country;
-            QString state;
-            QString locale;
-            QList<geocachelog_t> logs;
-            bool exportBuddies;
-
-        };
-
-
-        geocache_t geocache;
-
-        quint32 selected;
-        quint32 sticky;
-        float   lat;             ///< [deg]
-        float   lon;             ///< [deg]
-        float   ele;             ///< [m]
-        float   prx;             ///< [m]
-        float   dir;             ///< [deg]
-        QString link;
-        QString urlname;
+        }
+        quint32 id;
+        QString date;
         QString type;
+        QString finderId;
+        QString finder;
+        QString text;
+    };
 
-        struct image_t
+    struct geocache_t
+    {
+        geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0), exportBuddies(false)
         {
-            quint32 offset;
-            QString info;
-            QPixmap pixmap;
-            QString filePath;
-            QString fileName;
-        };
-        QList<image_t> images;
+        }
+        geocacheservice_e service;
+        bool hasData;
+        quint32 id;
+        bool available;
+        bool archived;
+        float difficulty;
+        float terrain;
+        QString status;
+        QString name;
+        QString owner;
+        QString ownerId;
+        QString type;
+        QString container;
+        QString shortDesc;
+        QString longDesc;
+        QString hint;
+        QString country;
+        QString state;
+        QString locale;
+        QList<geocachelog_t> logs;
+        bool exportBuddies;
+    };
 
-        struct buddy_t
-        {
-            QString name;
-            QSet<QString> pos;
-            float lon;
-            float lat;
-        };
 
-        QList<buddy_t> buddies;
+    geocache_t geocache;
 
+    quint32 selected;
+    quint32 sticky;
+    float lat;                   ///< [deg]
+    float lon;                   ///< [deg]
+    float ele;                   ///< [m]
+    float prx;                   ///< [m]
+    float dir;                   ///< [deg]
+    QString link;
+    QString urlname;
+    QString type;
+
+    struct image_t
+    {
+        quint32 offset;
+        QString info;
+        QPixmap pixmap;
+        QString filePath;
+        QString fileName;
+    };
+    QList<image_t> images;
+
+    struct buddy_t
+    {
+        QString name;
+        QSet<QString> pos;
+        float lon;
+        float lat;
+    };
+
+    QList<buddy_t> buddies;
 };
 
 QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt);

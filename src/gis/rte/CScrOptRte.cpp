@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
-#include "gis/rte/CScrOptRte.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/CGisWidget.h"
-#include "mouse/IMouse.h"
-#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/rte/CScrOptRte.h"
+#include "mouse/IMouse.h"
 
 CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     : IScrOpt(parent->getCanvas())
@@ -45,7 +45,6 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
 
 CScrOptRte::~CScrOptRte()
 {
-
 }
 
 void CScrOptRte::slotDelete()

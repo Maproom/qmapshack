@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvasSetup.h"
 #include "canvas/CCanvas.h"
+#include "canvas/CCanvasSetup.h"
 #include "grid/CProjWizard.h"
 
 CCanvasSetup::CCanvasSetup(CCanvas * canvas)
@@ -34,7 +34,6 @@ CCanvasSetup::CCanvasSetup(CCanvas * canvas)
 
 CCanvasSetup::~CCanvasSetup()
 {
-
 }
 
 void CCanvasSetup::slotProjWizard()

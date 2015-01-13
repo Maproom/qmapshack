@@ -19,9 +19,9 @@
 
 #ifndef GEOMATH_H
 #define GEOMATH_H
-#include <QString>
 #include <QPointF>
 #include <QRectF>
+#include <QString>
 
 #include <stdint.h>
 
@@ -30,7 +30,9 @@ class IDrawContext;
 
 struct point3D
 {
-    point3D() : x(0), y(0), z(0){}
+    point3D() : x(0), y(0), z(0)
+    {
+    }
     qreal x;
     qreal y;
     qreal z;
@@ -38,13 +40,17 @@ struct point3D
 
 struct pointDP : public point3D
 {
-    pointDP():used(true){}
+    pointDP() : used(true)
+    {
+    }
     bool used;
 };
 
 struct segment_t
 {
-    segment_t() : idx11(-1), idx12(-1), idx21(-1){}
+    segment_t() : idx11(-1), idx12(-1), idx21(-1)
+    {
+    }
 
     void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext * context);
 

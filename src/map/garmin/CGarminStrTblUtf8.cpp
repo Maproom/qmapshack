@@ -20,15 +20,13 @@
 #include <QtCore>
 
 CGarminStrTblUtf8::CGarminStrTblUtf8(const quint16 codepage, const quint8 mask, QObject * parent)
-: IGarminStrTbl(codepage, mask, parent)
+    : IGarminStrTbl(codepage, mask, parent)
 {
-
 }
 
 
 CGarminStrTblUtf8::~CGarminStrTblUtf8()
 {
-
 }
 
 
@@ -37,7 +35,10 @@ void CGarminStrTblUtf8::get(CFileExt& file, quint32 offset, type_e t, QStringLis
     labels.clear();
     offset = calcOffset(file, offset, t);
 
-    if(offset == 0xFFFFFFFF) return;
+    if(offset == 0xFFFFFFFF)
+    {
+        return;
+    }
 
     if(offset > (quint32)sizeLBL1)
     {

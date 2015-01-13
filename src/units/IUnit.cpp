@@ -16,8 +16,8 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111 USA
 
 **********************************************************************************************/
-#include "CUnitMetric.h"
 #include "CUnitImperial.h"
+#include "CUnitMetric.h"
 #include "CUnitNautic.h"
 
 #include <QtWidgets>
@@ -25,7 +25,7 @@
 IUnit * IUnit::m_self = 0;
 
 const QPointF NOPOINTF(NOFLOAT, NOFLOAT);
-const QPoint  NOPOINT (NOINT, NOINT);
+const QPoint NOPOINT (NOINT, NOINT);
 
 IUnit::tz_mode_e IUnit::timeZoneMode = IUnit::eTZUtc;
 QByteArray IUnit::timeZone = "UTC";
@@ -419,22 +419,24 @@ const int N_TIMEZONES = sizeof(IUnit::tblTimezone)/sizeof(const char*);
 
 
 IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
-: QObject(parent)
-, type(type)
-, baseunit(baseunit)
-, basefactor(basefactor)
-, speedunit(speedunit)
-, speedfactor(speedfactor)
+    : QObject(parent)
+    , type(type)
+    , baseunit(baseunit)
+    , basefactor(basefactor)
+    , speedunit(speedunit)
+    , speedfactor(speedfactor)
 {
     //there can be only one...
-    if(m_self) delete m_self;
+    if(m_self)
+    {
+        delete m_self;
+    }
     m_self = this;
 }
 
 
 IUnit::~IUnit()
 {
-
 }
 
 void IUnit::setUnitType(type_e t, QObject * parent)
@@ -444,9 +446,11 @@ void IUnit::setUnitType(type_e t, QObject * parent)
     case eTypeMetric:
         new CUnitMetric(parent);
         break;
+
     case eTypeImperial:
         new CUnitImperial(parent);
         break;
+
     case eTypeNautic:
         new CUnitNautic(parent);
         break;
@@ -479,7 +483,6 @@ void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit)
         val = time.toString("HH:mm:ss");
         unit = "h";
     }
-
 }
 
 bool IUnit::parseTimestamp(const QString &time, QDateTime &datetime)
@@ -489,11 +492,11 @@ bool IUnit::parseTimestamp(const QString &time, QDateTime &datetime)
 
     if (!datetime.isValid())
     {
-        return false;
+        return(false);
     }
 
 
-    return true;
+    return(true);
 }
 
 
@@ -509,7 +512,6 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     i = timetext.indexOf(".");
     if (i != -1)
     {
-
         if(timetext[i+1] == '0')
         {
             format += ".zzz";
@@ -556,7 +558,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     datetime.setOffsetFromUtc(tzoffset);
 
 
-    return datetime;
+    return(datetime);
 }
 
 QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos)
@@ -567,22 +569,25 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
 
     switch(tmpMode)
     {
-        case eTZUtc:
-            tz = QTimeZone("UTC");
-            break;
-        case eTZLocal:
-            tz = QTimeZone(QTimeZone::systemTimeZoneId());
-            break;
-        case eTZAuto:
-            tz = QTimeZone(pos2timezone(pos));
-            break;
-        case eTZSelected:
-            tz = QTimeZone(timeZone);
-            break;
+    case eTZUtc:
+        tz = QTimeZone("UTC");
+        break;
+
+    case eTZLocal:
+        tz = QTimeZone(QTimeZone::systemTimeZoneId());
+        break;
+
+    case eTZAuto:
+        tz = QTimeZone(pos2timezone(pos));
+        break;
+
+    case eTZSelected:
+        tz = QTimeZone(timeZone);
+        break;
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return tmp.toString(shortDate ? Qt::ISODate : Qt::SystemLocaleLongDate);
+    return(tmp.toString(shortDate ? Qt::ISODate : Qt::SystemLocaleLongDate));
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)
@@ -596,14 +601,14 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
 
     if(qRed(rgb) == 0 && qGreen(rgb) == 0)
     {
-        return "UTC";
+        return("UTC");
     }
 
     int tz   = ((qRed(rgb) & 248) << 1) + ((qGreen(rgb) >> 4) & 15);
     if(tz >= N_TIMEZONES)
     {
-        return 0;
+        return(0);
     }
 
-    return tblTimezone[tz];
+    return(tblTimezone[tz]);
 }

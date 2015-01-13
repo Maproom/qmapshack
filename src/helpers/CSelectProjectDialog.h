@@ -19,40 +19,38 @@
 #ifndef CSELECTPROJECTDIALOG_H
 #define CSELECTPROJECTDIALOG_H
 
-#include <QDialog>
 #include "ui_ISelectProjectDialog.h"
+#include <QDialog>
 
 class QTreeWidget;
 
 class CSelectProjectDialog : public QDialog, private Ui::ISelectProjectDialog
 {
     Q_OBJECT
-    public:
-        enum type_e
-        {
-             eTypeNone
-            ,eTypeQms
-            ,eTypeGpx
+public:
+    enum type_e
+    {
+        eTypeNone
+        ,eTypeQms
+        ,eTypeGpx
+    };
 
-        };
+    CSelectProjectDialog(QString& key, QString& name, type_e& type, QTreeWidget *parent);
+    virtual ~CSelectProjectDialog();
 
-        CSelectProjectDialog(QString& key, QString& name, type_e& type, QTreeWidget *parent);
-        virtual ~CSelectProjectDialog();
+public slots:
+    void reject();
 
-    public slots:
-        void reject();
+private slots:
+    void slotItemClicked(QListWidgetItem * item);
+    void slotProjectChanged(const QString& text);
+    void slotProjectEdited(const QString& text);
+    void slotTypeChanged();
 
-    private slots:
-        void slotItemClicked(QListWidgetItem * item);
-        void slotProjectChanged(const QString& text);
-        void slotProjectEdited(const QString& text);
-        void slotTypeChanged();
-
-    private:
-        QString& key;
-        QString& name;
-        type_e& type;
-
+private:
+    QString& key;
+    QString& name;
+    type_e& type;
 };
 
 #endif //CSELECTPROJECTDIALOG_H

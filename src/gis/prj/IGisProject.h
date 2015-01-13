@@ -20,9 +20,9 @@
 #define IGISPROJECT_H
 
 #include "gis/IGisItem.h"
-#include <QTreeWidgetItem>
-#include <QPointer>
 #include <QMessageBox>
+#include <QPointer>
+#include <QTreeWidgetItem>
 
 class CGisListWks;
 class IGisItem;
@@ -32,198 +32,228 @@ class CDetailsPrj;
 
 class IGisProject : public QTreeWidgetItem
 {
-    public:
-        enum type_e
+public:
+    enum type_e
+    {
+        eTypeGoogle
+        , eTypeQms
+        , eTypeGpx
+        , eTypeDb
+        , eTypeLostFound
+    };
+
+    struct person_t
+    {
+        QString name;
+        QString id;
+        QString domain;
+        IGisItem::link_t link;
+    };
+
+    struct copyright_t
+    {
+        QString author;
+        QString year;
+        QString license;
+    };
+
+    struct metadata_t
+    {
+        metadata_t() : time(QDateTime::currentDateTimeUtc())
         {
-              eTypeGoogle
-            , eTypeQms
-            , eTypeGpx
-            , eTypeDb
-            , eTypeLostFound
-        };
+        }
+        QString name;
+        QString desc;
+        person_t author;
+        copyright_t copyright;
+        QList<IGisItem::link_t> links;
+        QDateTime time;
+        QString keywords;
+        QRectF bounds;
+        // -- all gpx tags - stop
+        QMap<QString, QVariant> extensions;
+    };
 
-        struct person_t
-        {
-            QString name;
-            QString id;
-            QString domain;
-            IGisItem::link_t link;
-        };
+    IGisProject(type_e type, const QString& filename, CGisListWks * parent);
+    virtual ~IGisProject();
 
-        struct copyright_t
-        {
-            QString author;
-            QString year;
-            QString license;
-        };
+    void edit();
 
-        struct metadata_t
-        {
-            metadata_t() : time(QDateTime::currentDateTimeUtc()){}
-            QString name;
-            QString desc;
-            person_t author;
-            copyright_t copyright;
-            QList<IGisItem::link_t> links;
-            QDateTime time;
-            QString keywords;
-            QRectF bounds;
-            // -- all gpx tags - stop
-            QMap<QString, QVariant> extensions;
+    /**
+       @brief Save the project using it's native format.
+     */
+    virtual bool save() = 0;
+    /**
+       @brief Save the project selecting one of the available formats.
+     */
+    virtual bool saveAs() = 0;
 
-        };
+    virtual void setFilename(const QString& fn)
+    {
+        filename = fn;
+    }
+    virtual QString getFilename() const
+    {
+        return( filename);
+    }
 
-        IGisProject(type_e type, const QString& filename, CGisListWks * parent);
-        virtual ~IGisProject();
+    type_e getType() const
+    {
+        return( type);
+    }
 
-        void edit();
+    /**
+       @brief Get unique project key.
+       @return A MD5 hash string
+     */
+    const QString& getKey()
+    {
+        genKey(); return( key);
+    }
+    const QString& getName() const
+    {
+        return( metadata.name);
+    }
+    const QDateTime& getTime() const
+    {
+        return( metadata.time);
+    }
+    const QString& getKeywords() const
+    {
+        return( metadata.keywords);
+    }
+    const QString& getDescription() const
+    {
+        return( metadata.desc);
+    }
+    const QList<IGisItem::link_t>& getLinks() const
+    {
+        return( metadata.links);
+    }
 
-        /**
-           @brief Save the project using it's native format.
-         */
-        virtual bool save() = 0;
-        /**
-           @brief Save the project selecting one of the available formats.
-        */
-        virtual bool saveAs() = 0;
+    void setName(const QString& str);
+    void setKeywords(const QString& str);
+    void setDescription(const QString& str);
+    void setLinks(const QList<IGisItem::link_t>& links);
 
-        virtual void setFilename(const QString& fn){filename = fn;}
-        virtual QString getFilename() const {return filename;}
+    /**
+       @brief Get a short metadata summary
+       @return Informational string.
+     */
+    virtual QString getInfo() const;
+    /**
+       @brief Get a temporary pointer to the item with matching key
+       @param key
+       @return If no item is found 0 is returned.
+     */
+    IGisItem * getItemByKey(const IGisItem::key_t &key);
 
-        type_e getType() const {return type;}
+    /**
+       @brief Get a list of items that are close to a given pixel coordinate of the screen
 
-        /**
-           @brief Get unique project key.
-           @return A MD5 hash string
-         */
-        const QString& getKey(){genKey(); return key;}
-        const QString& getName() const {return metadata.name;}
-        const QDateTime& getTime() const {return metadata.time;}
-        const QString& getKeywords() const {return metadata.keywords;}
-        const QString& getDescription() const {return metadata.desc;}
-        const QList<IGisItem::link_t>& getLinks() const {return metadata.links;}
+       @note: The returned pointers are just for temporary use. Best you use them to get the item's key.
 
-        void setName(const QString& str);
-        void setKeywords(const QString& str);
-        void setDescription(const QString& str);
-        void setLinks(const QList<IGisItem::link_t>& links);
+       @param pos       the coordinate on the screen in pixel
+       @param items     a list the item's pointer is stored to.
+     */
+    void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
 
-        /**
-           @brief Get a short metadata summary
-           @return Informational string.
-         */
-        virtual QString getInfo() const;
-        /**
-           @brief Get a temporary pointer to the item with matching key
-           @param key
-           @return If no item is found 0 is returned.
-        */
-        IGisItem * getItemByKey(const IGisItem::key_t &key);
+    /**
+       @brief Delete items with matching key
+       @param key
+     */
+    bool delItemByKey(const IGisItem::key_t &key, QMessageBox::StandardButtons &last);
 
-        /**
-           @brief Get a list of items that are close to a given pixel coordinate of the screen
+    /**
+       @brief Call IGisItem::edit() method for items with given key
 
-           @note: The returned pointers are just for temporary use. Best you use them to get the item's key.
+       @param key   a MD5 hash key
+     */
+    void editItemByKey(const IGisItem::key_t &key);
 
-           @param pos       the coordinate on the screen in pixel
-           @param items     a list the item's pointer is stored to.
-        */
-        void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
+    /**
+       @brief Add a copy if the gven item to the project
 
-        /**
-           @brief Delete items with matching key
-           @param key
-        */
-        bool delItemByKey(const IGisItem::key_t &key, QMessageBox::StandardButtons &last);
+       Befor the item is inserted the method will use it's key to find a duplicat item.
+       If there is an item with the same item key a copy option dialog is shown. Depending
+       the result the action is performed or aborted. The result will be copied into
+       lastResult to repeat the same decision on subsequent items.
 
-        /**
-           @brief Call IGisItem::edit() method for items with given key
+       @param item          pointer to item
+       @param off           the offset into the tree widget, -1 for none
+       @param lastResult    a reference to hold the last result of the copy option dialog
+     */
+    void insertCopyOfItem(IGisItem *item, int off, int &lastResult);
 
-           @param key   a MD5 hash key
-         */
-        void editItemByKey(const IGisItem::key_t &key);
+    /**
+       @brief Check if the project was initialized correctly.
 
-        /**
-           @brief Add a copy if the gven item to the project
+       For example a if a GPX file does not load correctly the project is invalid.
 
-           Befor the item is inserted the method will use it's key to find a duplicat item.
-           If there is an item with the same item key a copy option dialog is shown. Depending
-           the result the action is performed or aborted. The result will be copied into
-           lastResult to repeat the same decision on subsequent items.
+       @return True if project is valid
+     */
+    bool  isValid() const
+    {
+        return( valid);
+    }
 
-           @param item          pointer to item
-           @param off           the offset into the tree widget, -1 for none
-           @param lastResult    a reference to hold the last result of the copy option dialog
-        */
-        void insertCopyOfItem(IGisItem *item, int off, int &lastResult);
+    void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+    void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
-        /**
-           @brief Check if the project was initialized correctly.
+    /**
+       @brief Serialize object out of a QDataStream
 
-           For example a if a GPX file does not load correctly the project is invalid.
+       See CGisSerialization.cpp for implementation
 
-           @return True if project is valid
-         */
-        bool  isValid() const {return valid;}
+       @param stream the binary data stream
+       @return The stream object.
+     */
+    virtual QDataStream& operator<<(QDataStream& stream);
 
-        void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+    /**
+       @brief Serialize object into a QDataStream
 
-        /**
-           @brief Serialize object out of a QDataStream
+       See CGisSerialization.cpp for implementation
 
-           See CGisSerialization.cpp for implementation
+       @param stream the binary data stream
+       @return The stream object.
+     */
+    virtual QDataStream& operator>>(QDataStream& stream);
 
-           @param stream the binary data stream
-           @return The stream object.
-        */
-        virtual QDataStream& operator<<(QDataStream& stream);
+    /**
+       @brief writeMetadata
+       @param doc
+       @return
+     */
+    QDomNode writeMetadata(QDomDocument& doc);
 
-        /**
-           @brief Serialize object into a QDataStream
+protected:
+    void genKey();
+    void setupName(const QString& defaultName);
+    void markAsSaved();
+    void readMetadata(const QDomNode& xml, metadata_t& metadata);
+    void changed();
 
-           See CGisSerialization.cpp for implementation
+    // Those are the URIs of the GPX extensions we support
+    static const QString gpxx_ns;
+    static const QString gpxtpx_ns;
+    static const QString wptx1_ns;
+    static const QString rmc_ns;
+    static const QString ql_ns;
+    static const QString gs_ns;
+    // Those are standard GPX/XML namespaces
+    static const QString gpx_ns;
+    static const QString xsi_ns;
 
-           @param stream the binary data stream
-           @return The stream object.
-        */
-        virtual QDataStream& operator>>(QDataStream& stream);
+    type_e type;
+    QString key;
+    QString filename;
+    bool valid;
 
-        /**
-           @brief writeMetadata
-           @param doc
-           @return
-         */
-        QDomNode writeMetadata(QDomDocument& doc);
+    metadata_t metadata;
 
-    protected:
-        void genKey();
-        void setupName(const QString& defaultName);
-        void markAsSaved();
-        void readMetadata(const QDomNode& xml, metadata_t& metadata);
-        void changed();
-
-        // Those are the URIs of the GPX extensions we support
-        static const QString gpxx_ns;
-        static const QString gpxtpx_ns;
-        static const QString wptx1_ns;
-        static const QString rmc_ns;
-        static const QString ql_ns;
-        static const QString gs_ns;
-        // Those are standard GPX/XML namespaces
-        static const QString gpx_ns;
-        static const QString xsi_ns;
-
-        type_e type;
-        QString key;
-        QString filename;
-        bool valid;
-
-        metadata_t metadata;
-
-        QPointer<CDetailsPrj> dlgDetails;
-
+    QPointer<CDetailsPrj> dlgDetails;
 };
 
 #endif //IGISPROJECT_H

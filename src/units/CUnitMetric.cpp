@@ -19,15 +19,13 @@
 #include "CUnitMetric.h"
 
 CUnitMetric::CUnitMetric(QObject * parent)
-: IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent)
+    : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent)
 {
-
 }
 
 
 CUnitMetric::~CUnitMetric()
 {
-
 }
 
 
@@ -111,10 +109,9 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit)
         val.sprintf("%1.2f", meter / 1000000);
         unit = "km²";
     }
-
 }
 
 qreal CUnitMetric::elevation2meter(const QString& val)
 {
-    return val.toDouble();
+    return(val.toDouble());
 }

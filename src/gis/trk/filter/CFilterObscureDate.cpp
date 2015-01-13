@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterObscureDate.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterObscureDate.h"
 #include "helpers/CSettings.h"
 
 CFilterObscureDate::CFilterObscureDate(CGisItemTrk &trk, QWidget *parent)

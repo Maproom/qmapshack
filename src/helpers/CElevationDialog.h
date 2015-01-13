@@ -19,27 +19,26 @@
 #ifndef CELEVATIONDIALOG_H
 #define CELEVATIONDIALOG_H
 
-#include <QDialog>
 #include "ui_IElevationDialog.h"
+#include <QDialog>
 
 class CElevationDialog : public QDialog, private Ui::IElevationDialog
 {
     Q_OBJECT
-    public:
-        CElevationDialog(QWidget * parent, QVariant &val, const QVariant &reset, const QPointF& pos);
-        virtual ~CElevationDialog();
+public:
+    CElevationDialog(QWidget * parent, QVariant &val, const QVariant &reset, const QPointF& pos);
+    virtual ~CElevationDialog();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotReset();
-        void slotGetEle();
-    private:
-        QVariant& val;
-        QVariant reset;
-        QPointF pos;
-
+private slots:
+    void slotReset();
+    void slotGetEle();
+private:
+    QVariant& val;
+    QVariant reset;
+    QPointF pos;
 };
 
 #endif //CELEVATIONDIALOG_H

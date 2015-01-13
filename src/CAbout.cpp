@@ -19,9 +19,9 @@
 #include "CAbout.h"
 #include "version.h"
 
+#include <QtWidgets>
 #include <gdal.h>
 #include <proj_api.h>
-#include <QtWidgets>
 
 CAbout::CAbout(QWidget *parent)
     : QDialog(parent)
@@ -36,6 +36,5 @@ CAbout::CAbout(QWidget *parent)
 
 CAbout::~CAbout()
 {
-
 }
 

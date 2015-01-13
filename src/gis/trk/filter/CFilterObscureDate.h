@@ -19,23 +19,23 @@
 #ifndef CFILTEROBSCUREDATE_H
 #define CFILTEROBSCUREDATE_H
 
-#include <QWidget>
 #include "ui_IFilterObscureDate.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
 class CFilterObscureDate : public QWidget, private Ui::IFilterObscureDate
 {
     Q_OBJECT
-    public:
-        CFilterObscureDate(CGisItemTrk& trk, QWidget * parent);
-        virtual ~CFilterObscureDate();
+public:
+    CFilterObscureDate(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterObscureDate();
 
-    private slots:
-        void slotApply();
+private slots:
+    void slotApply();
 
-    private:
-        CGisItemTrk& trk;
+private:
+    CGisItemTrk& trk;
 };
 
 #endif //CFILTEROBSCUREDATE_H

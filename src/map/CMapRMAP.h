@@ -34,7 +34,9 @@ public:
 private:
     struct level_t
     {
-        level_t(): offsetLevel(0), width(0), height(0), xTiles(0), yTiles(0), xscale(0), yscale(0){}
+        level_t() : offsetLevel(0), width(0), height(0), xTiles(0), yTiles(0), xscale(0), yscale(0)
+        {
+        }
         quint64 offsetLevel;
         qint32 width;
         qint32 height;
@@ -45,7 +47,7 @@ private:
         quint64 getOffsetJpeg(quint32 x, quint32 y)
         {
             qint32 idx = y * xTiles + x;
-            return idx < offsetJpegs.size() ? offsetJpegs[idx] : 0;
+            return(idx < offsetJpegs.size() ? offsetJpegs[idx] : 0);
         }
 
         qreal xscale;
@@ -77,7 +79,6 @@ private:
     qreal yref2;
 
     QPointF scale;
-
 };
 
 #endif // CMAPRMAP_H

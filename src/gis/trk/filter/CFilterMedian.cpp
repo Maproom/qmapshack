@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterMedian.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterMedian.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
@@ -31,14 +31,12 @@ CFilterMedian::CFilterMedian(CGisItemTrk &trk, QWidget *parent)
     spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points",5).toInt());
 
     connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
-
 }
 
 CFilterMedian::~CFilterMedian()
 {
     SETTINGS;
     cfg.setValue("TrackDetails/Filter/Median/points", spinBox->value());
-
 }
 
 void CFilterMedian::slotApply()

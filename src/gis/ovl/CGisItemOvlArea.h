@@ -35,123 +35,150 @@ class IQlgtOverlay;
 
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
-    public:
-        CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx);
-        CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);
-        CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
-        CGisItemOvlArea(const history_t& hist, IGisProject * project);
-        CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
-        CGisItemOvlArea(const IQlgtOverlay& ovl);
-        virtual ~CGisItemOvlArea();
+public:
+    CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx);
+    CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);
+    CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
+    CGisItemOvlArea(const history_t& hist, IGisProject * project);
+    CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
+    CGisItemOvlArea(const IQlgtOverlay& ovl);
+    virtual ~CGisItemOvlArea();
 
-        QDataStream& operator<<(QDataStream& stream);
-        QDataStream& operator>>(QDataStream& stream);
+    QDataStream& operator<<(QDataStream& stream);
+    QDataStream& operator>>(QDataStream& stream);
 
-        const QString& getName() const;
-        int getColorIdx()const{return colorIdx;}
-        QString getInfo() const;
-        void getPolylineFromData(QPolygonF& line);
-        const QString& getComment()const{return area.cmt;}
-        const QString& getDescription()const{return area.desc;}
-        const QList<link_t>& getLinks()const{return area.links;}
-        qint32 getWidth()const{return area.width;}
-        qint32 getStyle()const{return area.style;}
-        bool getOpacity()const{return area.opacity;}
+    const QString& getName() const;
+    int getColorIdx() const
+    {
+        return( colorIdx);
+    }
+    QString getInfo() const;
+    void getPolylineFromData(QPolygonF& line);
+    const QString& getComment() const
+    {
+        return( area.cmt);
+    }
+    const QString& getDescription() const
+    {
+        return( area.desc);
+    }
+    const QList<link_t>& getLinks() const
+    {
+        return( area.links);
+    }
+    qint32 getWidth() const
+    {
+        return( area.width);
+    }
+    qint32 getStyle() const
+    {
+        return( area.style);
+    }
+    bool getOpacity() const
+    {
+        return( area.opacity);
+    }
 
-        void setName(const QString& str);
-        void setColor(int idx);
-        void setDataFromPolyline(const QPolygonF& line);
-        void setWidth(qint32 w);
-        void setStyle(qint32 s);
-        void setOpacity(bool yes);
-        void setComment(const QString& str);
-        void setDescription(const QString& str);
-        void setLinks(const QList<link_t>& links);
+    void setName(const QString& str);
+    void setColor(int idx);
+    void setDataFromPolyline(const QPolygonF& line);
+    void setWidth(qint32 w);
+    void setStyle(qint32 s);
+    void setOpacity(bool yes);
+    void setComment(const QString& str);
+    void setDescription(const QString& str);
+    void setLinks(const QList<link_t>& links);
 
-        void save(QDomNode& gpx);
-        void edit();
+    void save(QDomNode& gpx);
+    void edit();
 
-        void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawHighlight(QPainter& p);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+    void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+    void drawHighlight(QPainter& p);
 
-        IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-        QPointF getPointCloseBy(const QPoint& screenPos);
-        bool isCloseTo(const QPointF& pos);
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
+    QPointF getPointCloseBy(const QPoint& screenPos);
+    bool isCloseTo(const QPointF& pos);
 
-        void gainUserFocus(bool yes);
+    void gainUserFocus(bool yes);
 
-        struct width_t
+    struct width_t
+    {
+        int width;
+        QString string;
+    };
+
+    static const QColor lineColors[OVL_N_COLORS];
+    static const QString bulletColors[OVL_N_COLORS];
+    static const width_t lineWidths[OVL_N_WIDTHS];
+    static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
+protected:
+    void setSymbol();
+
+
+public:
+
+    struct pt_t : public wpt_t
+    {
+        pt_t()
         {
-            int width;
-            QString string;
-        };
+        }
+    };
 
-        static const QColor  lineColors[OVL_N_COLORS];
-        static const QString bulletColors[OVL_N_COLORS];
-        static const width_t lineWidths[OVL_N_WIDTHS];
-        static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
-    protected:
-        void setSymbol();
-
-
-    public:
-
-        struct pt_t : public wpt_t
+    struct area_t
+    {
+        area_t() : number(0), width(5), style(Qt::BDiagPattern), opacity(false)
         {
-            pt_t(){}
-        };
+        }
+        // -- all gpx tags - start
+        QString name;
+        QString cmt;
+        QString desc;
+        QString src;
+        QList<link_t> links;
+        quint64 number;
+        QString type;
+        QVector<pt_t> pts;
+        QString color;
+        qint32 width;
+        qint32 style;
+        bool opacity;
 
-        struct area_t
-        {
-            area_t() : number(0), width(5), style(Qt::BDiagPattern), opacity(false) {}
-            // -- all gpx tags - start
-            QString name;
-            QString cmt;
-            QString desc;
-            QString src;
-            QList<link_t> links;
-            quint64 number;
-            QString type;
-            QVector<pt_t> pts;
-            QString color;
-            qint32 width;
-            qint32 style;
-            bool opacity;
+        // secondary data;
+        qreal area;
+    };
 
-            // secondary data;
-            qreal area;
-        };
+    const area_t& getAreaData() const
+    {
+        return( area);
+    }
 
-        const area_t& getAreaData() const{return area;}
+private:
+    void readArea(const QDomNode& xml, area_t& area);
+    void setColor(const QColor& c);
+    void setIcon(const QString& c);
+    void readLine(const QPolygonF &line);
+    void deriveSecondaryData();
+    QPointF getPolygonCentroid(const QPolygonF& polygon);
 
-    private:
-        void readArea(const QDomNode& xml, area_t& area);
-        void setColor(const QColor& c);
-        void setIcon(const QString& c);
-        void readLine(const QPolygonF &line);
-        void deriveSecondaryData();
-        QPointF getPolygonCentroid(const QPolygonF& polygon);
-
-        area_t area;
+    area_t area;
 
 
-        static key_t keyUserFocus;
+    static key_t keyUserFocus;
 
-        QPen penForeground;
-        QPen penBackground;
+    QPen penForeground;
+    QPen penBackground;
 
-        /// the track line color
-        QColor  color;
-        /// the trakpoint bullet icon
-        QPixmap bullet;
-        /// the track line color by index
-        unsigned colorIdx;
+    /// the track line color
+    QColor color;
+    /// the trakpoint bullet icon
+    QPixmap bullet;
+    /// the track line color by index
+    unsigned colorIdx;
 
-        QPolygonF line;
+    QPolygonF line;
 
-        QPointer<CScrOptOvlArea>  scrOpt;
-
+    QPointer<CScrOptOvlArea>  scrOpt;
 };
 
 #endif //CGISITEMOVLAREA_H

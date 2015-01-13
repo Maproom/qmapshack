@@ -16,16 +16,16 @@
 
 **********************************************************************************************/
 
+#include "GeoMath.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "GeoMath.h"
-#include "units/IUnit.h"
-#include "helpers/CInputDialog.h"
-#include "helpers/CPositionDialog.h"
-#include "helpers/CWptIconDialog.h"
-#include "helpers/CTextEditWidget.h"
 #include "helpers/CElevationDialog.h"
+#include "helpers/CInputDialog.h"
 #include "helpers/CLinksDialog.h"
+#include "helpers/CPositionDialog.h"
+#include "helpers/CTextEditWidget.h"
+#include "helpers/CWptIconDialog.h"
+#include "units/IUnit.h"
 
 
 #include <QtWidgets>
@@ -51,7 +51,6 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
 
 CDetailsWpt::~CDetailsWpt()
 {
-
 }
 
 
@@ -73,7 +72,7 @@ void CDetailsWpt::setupGui()
     bool isReadOnly = wpt.isReadOnly();
 
     toolIcon->setIcon(wpt.getIcon());
-    toolIcon->setObjectName(wpt.getIconName());   
+    toolIcon->setObjectName(wpt.getIconName());
     labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName(), ""));
     labelPositon->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));
 
@@ -113,8 +112,8 @@ void CDetailsWpt::setupGui()
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, wpt.getComment(), wpt.getDescription(), wpt.getLinks()));
-    textCmtDesc->moveCursor (QTextCursor::Start) ;
-    textCmtDesc->ensureCursorVisible() ;
+    textCmtDesc->moveCursor (QTextCursor::Start);
+    textCmtDesc->ensureCursorVisible();
 
     toolLock->setChecked(isReadOnly);
 
@@ -173,10 +172,9 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
         dlg.setHtml(wpt.getComment());
         if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setComment(dlg.getHtml());            
+            wpt.setComment(dlg.getHtml());
         }
         setupGui();
-
     }
     else if(url.toString() == "description")
     {
@@ -184,7 +182,7 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
         dlg.setHtml(wpt.getDescription());
         if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setDescription(dlg.getHtml());            
+            wpt.setDescription(dlg.getHtml());
         }
         setupGui();
     }
@@ -206,7 +204,6 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
 
 void CDetailsWpt::slotChangeIcon()
 {
-
     if(wpt.isReadOnly())
     {
         return;

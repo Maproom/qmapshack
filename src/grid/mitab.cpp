@@ -19,7 +19,6 @@
 
 const MapInfoDatumInfo asDatumInfoListQL[] =
 {
-
     {                            // Datum ignore
         0,  "",                            29, 0,   0,    0,   0, 0, 0, 0, 0
     },

@@ -16,15 +16,15 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBProject.h"
 #include "gis/CGisWidget.h"
-#include "gis/qms/CQmsProject.h"
-#include "gis/gpx/CGpxProject.h"
+#include "gis/db/CDBProject.h"
 #include "gis/db/macros.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
+#include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/qms/CQmsProject.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
 
 #include <QtSql>
@@ -38,7 +38,7 @@ CDBProject::CDBProject(CGisListWks * parent)
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, dbName, parent)
-    , id(id)    
+    , id(id)
 {
     setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/DBProject.png"));
     db = QSqlDatabase::database(dbName);
@@ -46,7 +46,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     QSqlQuery query(db);
     query.prepare("SELECT date, name, data FROM folders WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
 
     QString date    = query.value(0).toString();
@@ -61,7 +61,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         query.prepare("UPDATE folders SET key=:key WHERE id=:id");
         query.bindValue(":key", getKey());
         query.bindValue(":id", id);
-        QUERY_EXEC(return);
+        QUERY_EXEC(return );
     }
     else
     {
@@ -89,8 +89,8 @@ void CDBProject::restoreDBLink()
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM folders WHERE key=:key");
-    query.bindValue(":key", getKey());   
-    QUERY_EXEC(return);
+    query.bindValue(":key", getKey());
+    QUERY_EXEC(return );
     if(query.next())
     {
         id = query.value(0).toULongLong();
@@ -126,7 +126,7 @@ bool CDBProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return false;
+        return(false);
     }
 
     bool res = false;
@@ -140,13 +140,13 @@ bool CDBProject::saveAs()
     }
     else
     {
-        return false;
+        return(false);
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
 
-    return res;
+    return(res);
 }
 
 bool CDBProject::save()
@@ -216,7 +216,6 @@ bool CDBProject::save()
                 query.bindValue(":data", data);
                 query.bindValue(":id", idItem);
                 QUERY_EXEC(throw -1);
-
             }
             else
             {
@@ -245,7 +244,7 @@ bool CDBProject::save()
             query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
             query.bindValue(":parent", id);
             query.bindValue(":child", idItem);
-            QUERY_EXEC(;);
+            QUERY_EXEC(; );
 
             if(!query.next())
             {
@@ -291,30 +290,34 @@ bool CDBProject::save()
             CGisWidget::self().postEventForDb(info);
         }
 
-        return false;
+        return(false);
     }
-    return true;
+    return(true);
 }
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)
-{    
-    foreach(const evt_item_t& item, evt->items)
+{
+    foreach(const evt_item_t &item, evt->items)
     {
         switch(item.type)
         {
-            case IGisItem::eTypeWpt:
-                new CGisItemWpt(item.id, db, this);
-                break;
-            case IGisItem::eTypeTrk:
-                new CGisItemTrk(item.id, db, this);
-                break;
-            case IGisItem::eTypeRte:
-                new CGisItemRte(item.id, db, this);
-                break;
-            case IGisItem::eTypeOvl:
-                new CGisItemOvlArea(item.id, db, this);
-                break;
-            default:;
+        case IGisItem::eTypeWpt:
+            new CGisItemWpt(item.id, db, this);
+            break;
+
+        case IGisItem::eTypeTrk:
+            new CGisItemTrk(item.id, db, this);
+            break;
+
+        case IGisItem::eTypeRte:
+            new CGisItemRte(item.id, db, this);
+            break;
+
+        case IGisItem::eTypeOvl:
+            new CGisItemOvlArea(item.id, db, this);
+            break;
+
+        default:;
         }
     }
 
@@ -329,7 +332,7 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
 
     QMessageBox::StandardButtons last = QMessageBox::YesToAll;
 
-    foreach(const QString& k, evt->keys)
+    foreach(const QString &k, evt->keys)
     {
         key.item = k;
         delItemByKey(key, last);

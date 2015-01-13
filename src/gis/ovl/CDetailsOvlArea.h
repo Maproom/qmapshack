@@ -19,39 +19,39 @@
 #ifndef CDETAILSOVLAREA_H
 #define CDETAILSOVLAREA_H
 
-#include <QDialog>
 #include "ui_IDetailsOvlArea.h"
+#include <QDialog>
 
 class CGisItemOvlArea;
 
 class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
 {
     Q_OBJECT
-    public:
-        CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent);
-        virtual ~CDetailsOvlArea();
+public:
+    CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent);
+    virtual ~CDetailsOvlArea();
 
-    private slots:
-        void slotSetColor(int idx);
-        void slotSetWidth(int idx);
-        void slotSetStyle(int idx);
-        void slotOpyacity(bool yes);
-        void slotChangeReadOnlyMode(bool on);
-        void slotLinkActivated(const QUrl& url);
-        void slotLinkActivated(const QString& link);
-        void setupGui();
+private slots:
+    void slotSetColor(int idx);
+    void slotSetWidth(int idx);
+    void slotSetStyle(int idx);
+    void slotOpyacity(bool yes);
+    void slotChangeReadOnlyMode(bool on);
+    void slotLinkActivated(const QUrl& url);
+    void slotLinkActivated(const QString& link);
+    void setupGui();
 
-    private:        
-        enum columns_t
-        {
-            eColNum
-            ,eColPosition
-            ,eColMax
-        };
+private:
+    enum columns_t
+    {
+        eColNum
+        ,eColPosition
+        ,eColMax
+    };
 
-        CGisItemOvlArea& area;
+    CGisItemOvlArea& area;
 
-        bool originator;
+    bool originator;
 };
 
 #endif //CDETAILSOVLAREA_H

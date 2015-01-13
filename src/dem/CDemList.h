@@ -19,23 +19,25 @@
 #ifndef CDEMLIST_H
 #define CDEMLIST_H
 
-#include <QWidget>
 #include <QTreeWidget>
+#include <QWidget>
 
 class CDemItem;
 
 class CDemTreeWidget : public QTreeWidget
 {
     Q_OBJECT
-    public:
-        CDemTreeWidget(QWidget * parent): QTreeWidget(parent){}
+public:
+    CDemTreeWidget(QWidget * parent) : QTreeWidget(parent)
+    {
+    }
 
-    signals:
-        void sigChanged();
+signals:
+    void sigChanged();
 
-    protected:
-        void dragMoveEvent ( QDragMoveEvent  * event );
-        void dropEvent ( QDropEvent  * event );
+protected:
+    void dragMoveEvent ( QDragMoveEvent  * event );
+    void dropEvent ( QDropEvent  * event );
 };
 
 
@@ -44,26 +46,29 @@ class CDemTreeWidget : public QTreeWidget
 class CDemList : public QWidget, private Ui::IDemsList
 {
     Q_OBJECT
-    public:
-        CDemList(QWidget * parent);
-        virtual ~CDemList();
+public:
+    CDemList(QWidget * parent);
+    virtual ~CDemList();
 
-        void clear();
-        int count();
-        CDemItem * item(int i);
-        operator QTreeWidget*(){return treeWidget;}
+    void clear();
+    int count();
+    CDemItem * item(int i);
+    operator QTreeWidget*()
+    {
+        return( treeWidget);
+    }
 
-        void updateHelpText();
+    void updateHelpText();
 
-    signals:
-        void sigChanged();
+signals:
+    void sigChanged();
 
-    private slots:
-        void slotActivate();
-        void slotContextMenu(const QPoint &point);
+private slots:
+    void slotActivate();
+    void slotContextMenu(const QPoint &point);
 
-    private:
-        QMenu * menu;
+private:
+    QMenu * menu;
 };
 
 #endif //CDEMLIST_H

@@ -31,173 +31,212 @@ class CQlgtWpt;
 
 class CGisItemWpt : public IGisItem
 {
-    public:
-        enum geocacheservice_e {eGC, eOC, eTC};
+public:
+    enum geocacheservice_e {eGC, eOC, eTC};
 
-        struct geocachelog_t
+    struct geocachelog_t
+    {
+        geocachelog_t() : id(0)
         {
-            geocachelog_t() : id(0){}
-            quint32 id;
-            QDateTime date;
-            QString type;
-            QString finderId;
-            QString finder;
-            bool    textIsHtml;
-            QString text;
-        };
+        }
+        quint32 id;
+        QDateTime date;
+        QString type;
+        QString finderId;
+        QString finder;
+        bool textIsHtml;
+        QString text;
+    };
 
-        struct geocache_t
+    struct geocache_t
+    {
+        geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0), shortDescIsHtml(false), longDescIsHtml(false)
         {
-            geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0), shortDescIsHtml(false), longDescIsHtml(false){}
-            geocacheservice_e service;
-            bool hasData;
-            quint32 id;
-            bool available;
-            bool archived;
-            qreal difficulty;
-            qreal terrain;
-            QString status;
-            QString name;
-            QString owner;
-            QString ownerId;
-            QString type;
-            QString container;
-            bool    shortDescIsHtml;
-            QString shortDesc;
-            bool    longDescIsHtml;
-            QString longDesc;
-            QString hint;
-            QString country;
-            QString state;
-            QString locale;
-            QList<geocachelog_t> logs;
-        };
+        }
+        geocacheservice_e service;
+        bool hasData;
+        quint32 id;
+        bool available;
+        bool archived;
+        qreal difficulty;
+        qreal terrain;
+        QString status;
+        QString name;
+        QString owner;
+        QString ownerId;
+        QString type;
+        QString container;
+        bool shortDescIsHtml;
+        QString shortDesc;
+        bool longDescIsHtml;
+        QString longDesc;
+        QString hint;
+        QString country;
+        QString state;
+        QString locale;
+        QList<geocachelog_t> logs;
+    };
 
-        struct image_t
-        {
-            QImage  pixmap;
-            qreal   direction;
-            QString info;
-            QString filePath;
-            QString fileName;
-        };
+    struct image_t
+    {
+        QImage pixmap;
+        qreal direction;
+        QString info;
+        QString filePath;
+        QString fileName;
+    };
 
-        /**
-           @brief Create a completely new waypoint
-           @param pos       the waypoint's position [°]
-           @param name      the waypoint's name
-           @param icon      the waypoint's icon
-           @param project   the project the waypoint is added to
-         */
-        CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject * project);
-        /**
-           @brief Create a copy of an existing waypoint with a new position
-           @param pos       the waypoint's new position [°]
-           @param parentWpt the waypoint to copy
-           @param project   the project the waypoint is added to
-         */
-        CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, IGisProject *project);
-        /**
-           @brief Create a 1:1 copy of an existing waypoint (with new key)
-           @param parentWpt the waypoint to copy
-           @param project   the project the waypoint is added to
-           @param idx       the index to insert the item. If -1 the item will be appended to it's group
-         */
-        CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone);
-        /**
-           @brief Create item from GPX.
-           @param xml       the GPX section containing the item
-           @param project   the project to append with item
-         */
-        CGisItemWpt(const QDomNode& xml, IGisProject * project);
+    /**
+       @brief Create a completely new waypoint
+       @param pos       the waypoint's position [°]
+       @param name      the waypoint's name
+       @param icon      the waypoint's icon
+       @param project   the project the waypoint is added to
+     */
+    CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject * project);
+    /**
+       @brief Create a copy of an existing waypoint with a new position
+       @param pos       the waypoint's new position [°]
+       @param parentWpt the waypoint to copy
+       @param project   the project the waypoint is added to
+     */
+    CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, IGisProject *project);
+    /**
+       @brief Create a 1:1 copy of an existing waypoint (with new key)
+       @param parentWpt the waypoint to copy
+       @param project   the project the waypoint is added to
+       @param idx       the index to insert the item. If -1 the item will be appended to it's group
+     */
+    CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone);
+    /**
+       @brief Create item from GPX.
+       @param xml       the GPX section containing the item
+       @param project   the project to append with item
+     */
+    CGisItemWpt(const QDomNode& xml, IGisProject * project);
 
-        /**
-           @brief Create item from list of changes
-           @param hist      the change history
-           @param project   the project to append with item
-        */
-        CGisItemWpt(const history_t& hist, IGisProject * project);
+    /**
+       @brief Create item from list of changes
+       @param hist      the change history
+       @param project   the project to append with item
+     */
+    CGisItemWpt(const history_t& hist, IGisProject * project);
 
-        /**
-           @brief Read item from database by it's database ID
-           @param id        the item's ID in the database
-           @param db        the database itself
-           @param project   the project to append with item
-        */
-        CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project);
+    /**
+       @brief Read item from database by it's database ID
+       @param id        the item's ID in the database
+       @param db        the database itself
+       @param project   the project to append with item
+     */
+    CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project);
 
-        CGisItemWpt(const CQlgtWpt& wpt1);
+    CGisItemWpt(const CQlgtWpt& wpt1);
 
-        virtual ~CGisItemWpt();
+    virtual ~CGisItemWpt();
 
-        void save(QDomNode& gpx);
-        QDataStream& operator<<(QDataStream& stream);
-        QDataStream& operator>>(QDataStream& stream);
+    void save(QDomNode& gpx);
+    QDataStream& operator<<(QDataStream& stream);
+    QDataStream& operator>>(QDataStream& stream);
 
-        void setName(const QString& str);
-        void setPosition(const QPointF& pos);
-        void setElevation(qint32 val);
-        void setProximity(qreal val);
-        void setIcon(const QString& name);
-        void setComment(const QString& str);
-        void setDescription(const QString& str);
-        void setLinks(const QList<link_t>& links);
+    void setName(const QString& str);
+    void setPosition(const QPointF& pos);
+    void setElevation(qint32 val);
+    void setProximity(qreal val);
+    void setIcon(const QString& name);
+    void setComment(const QString& str);
+    void setDescription(const QString& str);
+    void setLinks(const QList<link_t>& links);
 
-        const QString& getName() const {return wpt.name;}
-        QString getInfo() const;
-        QPointF getPosition()const{return QPointF(wpt.lon, wpt.lat);}
-        qint32 getElevation()const{return wpt.ele;}
-        qreal getProximity()const{return proximity;}
-        const QDateTime& getTime()const{return wpt.time;}
-        const QString& getIconName()const{return wpt.sym;}
-        const QString& getComment()const{return wpt.cmt;}
-        const QString& getDescription()const{return wpt.desc;}
-        const geocache_t& getGeoCache()const{return geocache;}
-        const QList<link_t>& getLinks()const{return wpt.links;}
+    const QString& getName() const
+    {
+        return( wpt.name);
+    }
+    QString getInfo() const;
+    QPointF getPosition() const
+    {
+        return( QPointF(wpt.lon, wpt.lat));
+    }
+    qint32 getElevation() const
+    {
+        return( wpt.ele);
+    }
+    qreal getProximity() const
+    {
+        return( proximity);
+    }
+    const QDateTime& getTime() const
+    {
+        return( wpt.time);
+    }
+    const QString& getIconName() const
+    {
+        return( wpt.sym);
+    }
+    const QString& getComment() const
+    {
+        return( wpt.cmt);
+    }
+    const QString& getDescription() const
+    {
+        return( wpt.desc);
+    }
+    const geocache_t& getGeoCache() const
+    {
+        return( geocache);
+    }
+    const QList<link_t>& getLinks() const
+    {
+        return( wpt.links);
+    }
 
-        IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-        QPointF getPointCloseBy(const QPoint& ){return posScreen;}
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
+    QPointF getPointCloseBy(const QPoint& )
+    {
+        return( posScreen);
+    }
 
-        void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawHighlight(QPainter& p);        
-        bool isCloseTo(const QPointF& pos);
-        bool isGeocache(){return geocache.hasData;}
-        void gainUserFocus(bool yes);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+    void drawHighlight(QPainter& p);
+    bool isCloseTo(const QPointF& pos);
+    bool isGeocache()
+    {
+        return( geocache.hasData);
+    }
+    void gainUserFocus(bool yes);
 
-        void edit();
+    void edit();
 
-        static const QString &getNewName();
-        static const QString &getNewIcon();
-        static void getNewPosition(QPointF &pos);
+    static const QString &getNewName();
+    static const QString &getNewIcon();
+    static void getNewPosition(QPointF &pos);
 
-    private:
-        void setSymbol();
-        void readGpx(const QDomNode& xml);
-        void setIcon();
-        void readGcExt(const QDomNode& xmlCache);
-        void writeGcExt(QDomNode& xmlCache);
+private:
+    void setSymbol();
+    void readGpx(const QDomNode& xml);
+    void setIcon();
+    void readGcExt(const QDomNode& xmlCache);
+    void writeGcExt(QDomNode& xmlCache);
 
-        static key_t keyUserFocus;
-        static QString lastName;
-        static QString lastIcon;
+    static key_t keyUserFocus;
+    static QString lastName;
+    static QString lastIcon;
 
 
-        // --- start all waypoint data ----
-        wpt_t wpt;
-        qreal proximity;
-        geocache_t geocache;
-        QList<image_t> images;
+    // --- start all waypoint data ----
+    wpt_t wpt;
+    qreal proximity;
+    geocache_t geocache;
+    QList<image_t> images;
 
-        QPointF focus;
-        QPointF posScreen;
+    QPointF focus;
+    QPointF posScreen;
 
-        // additonal data, common to all IGisItems, is found in IItem //
+    // additonal data, common to all IGisItems, is found in IItem //
 
-        // --- stop all waypoint data ----
+    // --- stop all waypoint data ----
 
-        QPointer<CScrOptWpt> scrOpt;
-
+    QPointer<CScrOptWpt> scrOpt;
 };
 
 #endif //CGISITEMWPT_H

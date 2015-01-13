@@ -19,28 +19,28 @@
 #ifndef CPROJWPT_H
 #define CPROJWPT_H
 
-#include <QDialog>
 #include "ui_IProjWpt.h"
+#include <QDialog>
 
 class CGisItemWpt;
 
 class CProjWpt : public QDialog, private Ui::IProjWpt
 {
     Q_OBJECT
-    public:
-        CProjWpt(CGisItemWpt &wpt, QWidget * parent);
-        virtual ~CProjWpt();
+public:
+    CProjWpt(CGisItemWpt &wpt, QWidget * parent);
+    virtual ~CProjWpt();
 
-    public slots:
-        void accept();
+public slots:
+    void accept();
 
-    private slots:
-        void slotChangeIcon();
-        void slotChangeName();
+private slots:
+    void slotChangeIcon();
+    void slotChangeName();
 
-    private:
-        CGisItemWpt& wpt;
-        QString name;
+private:
+    CGisItemWpt& wpt;
+    QString name;
 };
 
 #endif //CPROJWPT_H

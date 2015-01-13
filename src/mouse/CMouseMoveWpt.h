@@ -19,8 +19,8 @@
 #ifndef CMOUSEMOVEWPT_H
 #define CMOUSEMOVEWPT_H
 
-#include "mouse/IMouse.h"
 #include "gis/IGisItem.h"
+#include "mouse/IMouse.h"
 
 #include <QPixmap>
 
@@ -30,26 +30,25 @@ class CGisDraw;
 
 class CMouseMoveWpt : public IMouse
 {
-    public:
-        CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
-        virtual ~CMouseMoveWpt();
+public:
+    CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
+    virtual ~CMouseMoveWpt();
 
-        void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
-        void mousePressEvent(QMouseEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
-        void mouseReleaseEvent(QMouseEvent *e);
-        void wheelEvent(QWheelEvent * e);
+    void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
+    void mousePressEvent(QMouseEvent * e);
+    void mouseMoveEvent(QMouseEvent * e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void wheelEvent(QWheelEvent * e);
 
-    protected slots:
-        virtual void slotPanCanvas();
+protected slots:
+    virtual void slotPanCanvas();
 
-    private:
-        IGisItem::key_t key;
-        QPointF origPos;
-        QPointF newPos;
-        QPointF focus;
-        QPixmap icon;
-
+private:
+    IGisItem::key_t key;
+    QPointF origPos;
+    QPointF newPos;
+    QPointF focus;
+    QPixmap icon;
 };
 
 #endif //CMOUSEMOVEWPT_H

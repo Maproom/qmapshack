@@ -18,22 +18,22 @@
 
 #include "gis/WptIcons.h"
 #include "gis/db/CDBProject.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/rte/CGisItemRte.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 
-#include "qlgt/CQlgtFolder.h"
-#include "qlgt/CQlgtWpt.h"
-#include "qlgt/CQlgtTrack.h"
 #include "qlgt/CQlgtDiary.h"
+#include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtRoute.h"
+#include "qlgt/CQlgtTrack.h"
+#include "qlgt/CQlgtWpt.h"
 #include "qlgt/IQlgtOverlay.h"
 #include "units/IUnit.h"
 
 inline qreal readFloat(float val)
 {
-    return val > NOFLOAT ? NOFLOAT : val;
+    return(val > NOFLOAT ? NOFLOAT : val);
 }
 
 CDBProject::CDBProject(CQlgtFolder& folder)
@@ -79,7 +79,6 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
 
     if(wpt1.geocache.hasData)
     {
-
         geocache.service    = CGisItemWpt::geocacheservice_e(wpt1.geocache.service);
         geocache.hasData    = wpt1.geocache.hasData;
         geocache.id         = wpt1.geocache.id;
@@ -137,7 +136,6 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
 CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     : IGisItem(0, eTypeTrk, -1)
 {
-
     trk.name        = trk1.name;
     trk.cmt         = trk1.comment;
     trk.desc        = trk1.description;

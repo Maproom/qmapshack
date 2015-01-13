@@ -24,14 +24,13 @@
 class CPlotDistance : public IPlot
 {
     Q_OBJECT
-    public:
-        CPlotDistance(QWidget * parent);
-        virtual ~CPlotDistance();
+public:
+    CPlotDistance(QWidget * parent);
+    virtual ~CPlotDistance();
 
-        void setTrack(CGisItemTrk * track);
-        void updateData();
-        void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
-
+    void setTrack(CGisItemTrk * track);
+    void updateData();
+    void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
 };
 
 #endif //CPLOTDISTANCE_H

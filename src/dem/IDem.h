@@ -33,118 +33,137 @@ class QSettings;
 class IDem : public IDrawObject
 {
     Q_OBJECT
-    public:
-        IDem(CDemDraw * parent);
-        virtual ~IDem();
+public:
+    IDem(CDemDraw * parent);
+    virtual ~IDem();
 
-        void saveConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg);
 
-        void loadConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg);
 
-        virtual void draw(IDrawContext::buffer_t& buf) = 0;
+    virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
-        virtual qreal getElevationAt(const QPointF& pos) = 0;
+    virtual qreal getElevationAt(const QPointF& pos) = 0;
 
-        bool activated(){return isActivated;}
+    bool activated()
+    {
+        return( isActivated);
+    }
 
-        /**
-           @brief Get the dem's setup widget.
+    /**
+       @brief Get the dem's setup widget.
 
-           As default an instance of CDemPropSetup is used. For other setups you have
-           to override this method.
+       As default an instance of CDemPropSetup is used. For other setups you have
+       to override this method.
 
-           @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
-         */
-        virtual IDemProp * getSetup();
+       @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
+     */
+    virtual IDemProp * getSetup();
 
-        bool doHillshading(){return bHillshading;}
+    bool doHillshading()
+    {
+        return( bHillshading);
+    }
 
-        int getFactorHillshading();
+    int getFactorHillshading();
 
-        bool doSlopeColor(){return bSlopeColor;}
+    bool doSlopeColor()
+    {
+        return( bSlopeColor);
+    }
 
-        int getGradeSlopeColor(){return gradeSlopeColor;}
-
-
-        const QVector<QRgb> getSlopeColorTable(){return slopetable;}
-
-        static const qreal tblGrade[5][6];
-
-    public slots:
-        void slotSetHillshading(bool yes){bHillshading = yes;}
-
-        void slotSetFactorHillshade(int f);
-
-        void slotSetSlopeColor(bool yes){bSlopeColor = yes;}
-
-        void slotSetGradeSlopeColor(int g);
-
-    protected:
-
-        void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage &img);
-
-        void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
-
-        /**
-           @brief Reproject (translate, rotate, scale) tile befor drwaing it.
-           @param img   the tile as QImage
-           @param l     a 4 point polygon to fit the tile in
-           @param p     the QPainter used to paint the tile
-         */
-        void drawTile(QImage& img, QPolygonF& l, QPainter& p);
-
-        CDemDraw * dem;
-
-        /// source projection of the current map file
-        /**
-            Has to be set by subclass. Destruction has to be
-            handeled by subclass.
-        */
-        projPJ  pjsrc;
-        /// target projection
-        /**
-            Is set by IMap() to WGS84. Will be freed by ~IMap()
-        */
-        projPJ  pjtar;
-
-        /// width in number of px
-        quint32 xsize_px;
-        /// height in number of px
-        quint32 ysize_px;
-
-        /// scale [px/m]
-        qreal xscale;
-        /// scale [px/m]
-        qreal yscale;
+    int getGradeSlopeColor()
+    {
+        return( gradeSlopeColor);
+    }
 
 
+    const QVector<QRgb> getSlopeColorTable()
+    {
+        return( slopetable);
+    }
 
-        /**
-           @brief True if map was loaded successfully
-         */
-        bool isActivated;
+    static const qreal tblGrade[5][6];
 
-        /// the setup dialog. Use getSetup() for access
-        QPointer<IDemProp> setup;
+public slots:
+    void slotSetHillshading(bool yes)
+    {
+        bHillshading = yes;
+    }
 
-        QVector<QRgb> graytable;
+    void slotSetFactorHillshade(int f);
 
-        QVector<QRgb> slopetable;
+    void slotSetSlopeColor(bool yes)
+    {
+        bSlopeColor = yes;
+    }
 
-        int hasNoData;
+    void slotSetGradeSlopeColor(int g);
 
-        double noData;        
+protected:
 
-    private:
-        bool bHillshading;        
+    void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
-        qreal factorHillshading;
+    void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
-        bool bSlopeColor;
+    /**
+       @brief Reproject (translate, rotate, scale) tile befor drwaing it.
+       @param img   the tile as QImage
+       @param l     a 4 point polygon to fit the tile in
+       @param p     the QPainter used to paint the tile
+     */
+    void drawTile(QImage& img, QPolygonF& l, QPainter& p);
 
-        int gradeSlopeColor;
+    CDemDraw * dem;
+
+    /// source projection of the current map file
+    /**
+        Has to be set by subclass. Destruction has to be
+        handeled by subclass.
+     */
+    projPJ pjsrc;
+    /// target projection
+    /**
+        Is set by IMap() to WGS84. Will be freed by ~IMap()
+     */
+    projPJ pjtar;
+
+    /// width in number of px
+    quint32 xsize_px;
+    /// height in number of px
+    quint32 ysize_px;
+
+    /// scale [px/m]
+    qreal xscale;
+    /// scale [px/m]
+    qreal yscale;
 
 
+
+    /**
+       @brief True if map was loaded successfully
+     */
+    bool isActivated;
+
+    /// the setup dialog. Use getSetup() for access
+    QPointer<IDemProp> setup;
+
+    QVector<QRgb> graytable;
+
+    QVector<QRgb> slopetable;
+
+    int hasNoData;
+
+    double noData;
+
+private:
+    bool bHillshading;
+
+    qreal factorHillshading;
+
+    bool bSlopeColor;
+
+    int gradeSlopeColor;
 };
 
 #endif //IDEM_H

@@ -19,9 +19,9 @@
 #ifndef CGISLISTWKS_H
 #define CGISLISTWKS_H
 
-#include <QTreeWidget>
 #include <QPointer>
 #include <QSqlDatabase>
+#include <QTreeWidget>
 
 struct action_t;
 class QAction;
@@ -32,94 +32,93 @@ class CDBProject;
 class CGisListWks : public QTreeWidget
 {
     Q_OBJECT
-    public:
-        CGisListWks(QWidget * parent);
-        virtual ~CGisListWks();
+public:
+    CGisListWks(QWidget * parent);
+    virtual ~CGisListWks();
 
-        enum column_e
-        {
-             eColumnDecoration = 0
-            ,eColumnName = 1
-        };
-
-
-        void setExternalMenu(QMenu * project);
-        bool hasProject(IGisProject *project);
-
-        IGisProject * getProjectByKey(const QString& key);
-        CDBProject * getProjectById(quint64 id, const QString& db);
-
-        bool event(QEvent * e);
-
-    signals:
-        void sigChanged();
-
-    protected:
-        void dragMoveEvent (QDragMoveEvent  * e );
-        void dropEvent ( QDropEvent  * e );
-
-    private slots:
-        void slotSaveWorkspace();
-        void slotLoadWorkspace();
-        void slotContextMenu(const QPoint& point);
-        void slotSaveProject();
-        void slotSaveAsProject();
-        void slotEditPrj();
-        void slotCloseProject();
-        void slotItemDoubleClicked(QTreeWidgetItem * item, int);
-        void slotEditItem();
-        void slotDeleteItem();
-        void slotProjWpt();
-        void slotMoveWpt();        
-        void slotFocusTrk(bool on);
-        void slotEditTrk();
-        void slotReverseTrk();
-        void slotCombineTrk();
-        void slotRangeTrk();
-        void slotEditArea();
-        void slotAddEmptyProject();
-        void slotCloseAllProjects();
-        void slotSearchGoogle(bool on);
-        void slotCopyItem();
+    enum column_e
+    {
+        eColumnDecoration = 0
+        ,eColumnName = 1
+    };
 
 
-    private:
-        void configDB();
-        void initDB();
-        void migrateDB(int version);
+    void setExternalMenu(QMenu * project);
+    bool hasProject(IGisProject *project);
 
-        QSqlDatabase db;
+    IGisProject * getProjectByKey(const QString& key);
+    CDBProject * getProjectById(quint64 id, const QString& db);
 
-        QMenu * menuProject;
-        QAction  * actionSave;
-        QAction  * actionSaveAs;
-        QAction  * actionEditPrj;
-        QAction  * actionClose;
+    bool event(QEvent * e);
 
-        QMenu * menuItem;
-        QMenu * menuItemTrk;
-        QMenu * menuItemWpt;
-        QMenu * menuItemRte;
-        QMenu * menuItemOvl;
-        QAction * actionEditDetails;
-        QAction * actionCopyItem;
-        QAction * actionDelete;
-        QAction * actionProjWpt;
-        QAction * actionMoveWpt;
-        QAction * actionFocusTrk;
-        QAction * actionEditTrk;
-        QAction * actionReverseTrk;
-        QAction * actionCombineTrk;
-        QAction * actionRangeTrk;
-        QAction * actionEditArea;
+signals:
+    void sigChanged();
 
-        QMenu * menuNone;
+protected:
+    void dragMoveEvent (QDragMoveEvent  * e );
+    void dropEvent ( QDropEvent  * e );
 
-        QPointer<CSearchGoogle> searchGoogle;
+private slots:
+    void slotSaveWorkspace();
+    void slotLoadWorkspace();
+    void slotContextMenu(const QPoint& point);
+    void slotSaveProject();
+    void slotSaveAsProject();
+    void slotEditPrj();
+    void slotCloseProject();
+    void slotItemDoubleClicked(QTreeWidgetItem * item, int);
+    void slotEditItem();
+    void slotDeleteItem();
+    void slotProjWpt();
+    void slotMoveWpt();
+    void slotFocusTrk(bool on);
+    void slotEditTrk();
+    void slotReverseTrk();
+    void slotCombineTrk();
+    void slotRangeTrk();
+    void slotEditArea();
+    void slotAddEmptyProject();
+    void slotCloseAllProjects();
+    void slotSearchGoogle(bool on);
+    void slotCopyItem();
 
-        bool saveOnExit;
-        qint32 saveEvery;
 
+private:
+    void configDB();
+    void initDB();
+    void migrateDB(int version);
+
+    QSqlDatabase db;
+
+    QMenu * menuProject;
+    QAction  * actionSave;
+    QAction  * actionSaveAs;
+    QAction  * actionEditPrj;
+    QAction  * actionClose;
+
+    QMenu * menuItem;
+    QMenu * menuItemTrk;
+    QMenu * menuItemWpt;
+    QMenu * menuItemRte;
+    QMenu * menuItemOvl;
+    QAction * actionEditDetails;
+    QAction * actionCopyItem;
+    QAction * actionDelete;
+    QAction * actionProjWpt;
+    QAction * actionMoveWpt;
+    QAction * actionFocusTrk;
+    QAction * actionEditTrk;
+    QAction * actionReverseTrk;
+    QAction * actionCombineTrk;
+    QAction * actionRangeTrk;
+    QAction * actionEditArea;
+
+    QMenu * menuNone;
+
+    QPointer<CSearchGoogle> searchGoogle;
+
+    bool saveOnExit;
+    qint32 saveEvery;
 };
 
 #endif //CGISLISTWKS_H

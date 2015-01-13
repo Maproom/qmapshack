@@ -19,8 +19,8 @@
 #ifndef CMAPLIST_H
 #define CMAPLIST_H
 
-#include <QWidget>
 #include <QTreeWidget>
+#include <QWidget>
 
 class CMapItem;
 class QMenu;
@@ -28,16 +28,18 @@ class QMenu;
 class CMapTreeWidget : public QTreeWidget
 {
     Q_OBJECT
-    public:
-        CMapTreeWidget(QWidget * parent): QTreeWidget(parent){}
+public:
+    CMapTreeWidget(QWidget * parent) : QTreeWidget(parent)
+    {
+    }
 
-    signals:
-        void sigChanged();
+signals:
+    void sigChanged();
 
-    protected:
-        void dragEnterEvent(QDragEnterEvent * e);
-        void dragMoveEvent (QDragMoveEvent  * e );
-        void dropEvent ( QDropEvent  * e );
+protected:
+    void dragEnterEvent(QDragEnterEvent * e);
+    void dragMoveEvent (QDragMoveEvent  * e );
+    void dropEvent ( QDropEvent  * e );
 };
 
 #include "ui_IMapList.h"
@@ -45,26 +47,29 @@ class CMapTreeWidget : public QTreeWidget
 class CMapList : public QWidget, private Ui::IMapList
 {
     Q_OBJECT
-    public:
-        CMapList(QWidget * parent);
-        virtual ~CMapList();
+public:
+    CMapList(QWidget * parent);
+    virtual ~CMapList();
 
-        void clear();
-        int count();
-        CMapItem * item(int i);
-        operator QTreeWidget*(){return treeWidget;}
+    void clear();
+    int count();
+    CMapItem * item(int i);
+    operator QTreeWidget*()
+    {
+        return( treeWidget);
+    }
 
-        void updateHelpText();
+    void updateHelpText();
 
-    signals:
-        void sigChanged();
+signals:
+    void sigChanged();
 
-    private slots:
-        void slotActivate();
-        void slotContextMenu(const QPoint &point);
+private slots:
+    void slotActivate();
+    void slotContextMenu(const QPoint &point);
 
-    private:
-        QMenu * menu;
+private:
+    QMenu * menu;
 };
 
 #endif //CMAPLIST_H

@@ -34,12 +34,10 @@ CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, 
     {
         lineEdit->setText(val.toString());
     }
-
 }
 
 CInputDialog::~CInputDialog()
 {
-
 }
 
 void CInputDialog::accept()

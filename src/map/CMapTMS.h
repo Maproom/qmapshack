@@ -31,77 +31,77 @@ class QNetworkReply;
 class CMapTMS : public IMap
 {
     Q_OBJECT
-    public:
-        CMapTMS(const QString& filename, CMapDraw *parent);
-        virtual ~CMapTMS();
+public:
+    CMapTMS(const QString& filename, CMapDraw *parent);
+    virtual ~CMapTMS();
 
-        void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf);
 
-        void getLayers(QListWidget& list);
+    void getLayers(QListWidget& list);
 
-        void saveConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg);
 
-        void loadConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg);
 
-    signals:
-        void sigQueueChanged();
+signals:
+    void sigQueueChanged();
 
-    protected:
-        void configureCache();
+protected:
+    void configureCache();
 
-    private slots:
-        void slotQueueChanged();
-        void slotRequestFinished(QNetworkReply* reply);
-        void slotLayersChanged(QListWidgetItem * item);
+private slots:
+    void slotQueueChanged();
+    void slotRequestFinished(QNetworkReply* reply);
+    void slotLayersChanged(QListWidgetItem * item);
 
 
-    private:
-        struct layer_t;
-        QString createUrl(const layer_t& layer, int x, int y, int z);
+private:
+    struct layer_t;
+    QString createUrl(const layer_t& layer, int x, int y, int z);
 
-        struct layer_t
+    struct layer_t
+    {
+        layer_t() : enabled(true), minZoomLevel(0), maxZoomLevel(0)
         {
-            layer_t() : enabled(true), minZoomLevel(0), maxZoomLevel(0){}
-            bool enabled;
-            qint32 minZoomLevel;
-            qint32 maxZoomLevel;
-            QString title;
-            QString strUrl;
-            QString script;
-
-        };
-
-        struct rawHeaderItem_t
-        {
-            QString name;
-            QString value;
-        };
-
-        QVector<layer_t> layers;
-
-        QString name;
-
+        }
+        bool enabled;
         qint32 minZoomLevel;
-
         qint32 maxZoomLevel;
+        QString title;
+        QString strUrl;
+        QString script;
+    };
 
-        QList<rawHeaderItem_t> rawHeaderItems;
+    struct rawHeaderItem_t
+    {
+        QString name;
+        QString value;
+    };
 
-        /// Mutex to control access to url queue
-        QMutex mutex;
-        /// a queue with all tile urls to request
-        QQueue<QString> urlQueue;
-        /// the tile cache
-        IDiskCache * diskCache;
-        /// access mangager to request tiles
-        QNetworkAccessManager * accessManager;
+    QVector<layer_t> layers;
 
-        QList<QString> urlPending;
+    QString name;
 
-        bool lastRequest;
+    qint32 minZoomLevel;
 
-        QTime timeLastUpdate;
+    qint32 maxZoomLevel;
 
+    QList<rawHeaderItem_t> rawHeaderItems;
+
+    /// Mutex to control access to url queue
+    QMutex mutex;
+    /// a queue with all tile urls to request
+    QQueue<QString> urlQueue;
+    /// the tile cache
+    IDiskCache * diskCache;
+    /// access mangager to request tiles
+    QNetworkAccessManager * accessManager;
+
+    QList<QString> urlPending;
+
+    bool lastRequest;
+
+    QTime timeLastUpdate;
 };
 
 #endif //CMAPTMS_H

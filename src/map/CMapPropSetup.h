@@ -26,28 +26,27 @@
 class CMapPropSetup : public IMapProp, private Ui::IMapPropSetup
 {
     Q_OBJECT
-    public:
-        CMapPropSetup(IMap * mapfile, CMapDraw * map);
-        virtual ~CMapPropSetup();
+public:
+    CMapPropSetup(IMap * mapfile, CMapDraw * map);
+    virtual ~CMapPropSetup();
 
-    protected slots:
-        void slotPropertiesChanged();
+protected slots:
+    void slotPropertiesChanged();
 
-    protected:
-        void resizeEvent(QResizeEvent * e);
+protected:
+    void resizeEvent(QResizeEvent * e);
 
-    private slots:
-        void slotScaleChanged(const QPointF& s);
-        void slotSetMinScale(bool checked);
-        void slotSetMaxScale(bool checked);
+private slots:
+    void slotScaleChanged(const QPointF& s);
+    void slotSetMinScale(bool checked);
+    void slotSetMaxScale(bool checked);
 
-        void slotSetCachePath();
+    void slotSetCachePath();
 
-    private:
-        void updateScaleLabel();
+private:
+    void updateScaleLabel();
 
-        static QPointF scale;
-
+    static QPointF scale;
 };
 
 #endif //CMAPPROPSETUP_H

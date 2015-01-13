@@ -19,23 +19,23 @@
 #ifndef CFILTERSPEED_H
 #define CFILTERSPEED_H
 
-#include <QWidget>
 #include "ui_IFilterSpeed.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
 class CFilterSpeed : public QWidget, private Ui::IFilterSpeed
 {
     Q_OBJECT
-    public:
-        CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
-        virtual ~CFilterSpeed();
+public:
+    CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterSpeed();
 
-    private slots:
-        void slotApply();
+private slots:
+    void slotApply();
 
-    private:
-        CGisItemTrk& trk;
+private:
+    CGisItemTrk& trk;
 };
 
 #endif //CFILTERSPEED_H

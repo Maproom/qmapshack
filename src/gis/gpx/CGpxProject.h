@@ -21,8 +21,8 @@
 
 #include "gis/prj/IGisProject.h"
 
-#include <QDomElement>
 #include <QDateTime>
+#include <QDomElement>
 #include <QUrl>
 
 class CGisListWks;
@@ -31,22 +31,21 @@ class CGisDraw;
 
 class CGpxProject : public IGisProject
 {
-    public:
-        CGpxProject(const QString &filename, CGisListWks * parent);
-        virtual ~CGpxProject();
+public:
+    CGpxProject(const QString &filename, CGisListWks * parent);
+    virtual ~CGpxProject();
 
-        bool save();
-        bool saveAs();
+    bool save();
+    bool saveAs();
 
-        static bool saveAs(const QString& fn, IGisProject& project);
-
-
-    private:
-        void saveGpx(const QString& fn);
+    static bool saveAs(const QString& fn, IGisProject& project);
 
 
-        QDomElement xmlGpx;
+private:
+    void saveGpx(const QString& fn);
 
+
+    QDomElement xmlGpx;
 };
 
 #endif //CGPXPROJECT_H

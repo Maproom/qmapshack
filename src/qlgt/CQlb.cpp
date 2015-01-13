@@ -17,25 +17,23 @@
 **********************************************************************************************/
 
 #include "CQlb.h"
-#include "qlgt/CQlgtWpt.h"
-#include "qlgt/CQlgtTrack.h"
-#include "qlgt/CQlgtRoute.h"
 #include "qlgt/CQlgtDiary.h"
+#include "qlgt/CQlgtRoute.h"
+#include "qlgt/CQlgtTrack.h"
+#include "qlgt/CQlgtWpt.h"
 #include "qlgt/IQlgtOverlay.h"
 
 
 #include <QtCore>
 
 CQlb::CQlb(QObject * parent)
-: QObject(parent)
+    : QObject(parent)
 {
-
 }
 
 
 CQlb::~CQlb()
 {
-
 }
 
 
@@ -45,7 +43,7 @@ CQlb& CQlb::operator <<(CQlgtWpt& wpt)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << wpt;
 
-    return *this;
+    return(*this);
 }
 
 
@@ -55,7 +53,7 @@ CQlb& CQlb::operator <<(CQlgtTrack& trk)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << trk;
 
-    return *this;
+    return(*this);
 }
 
 
@@ -65,7 +63,7 @@ CQlb& CQlb::operator <<(CQlgtRoute& rte)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << rte;
 
-    return *this;
+    return(*this);
 }
 
 
@@ -75,7 +73,7 @@ CQlb& CQlb::operator <<(CQlgtDiary& dry)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << dry;
 
-    return *this;
+    return(*this);
 }
 
 
@@ -85,7 +83,7 @@ CQlb& CQlb::operator <<(IQlgtOverlay& ovl)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << ovl;
 
-    return *this;
+    return(*this);
 }
 
 
@@ -109,37 +107,35 @@ void CQlb::load(QIODevice* ioDevice)
     stream >> type;
     while(type != eEnd)
     {
-
         switch(type)
         {
+        case eWpt:
+            stream >> wpts;
+            break;
 
-            case eWpt:
-                stream >> wpts;
-                break;
+        case eTrack:
+            stream >> trks;
+            break;
 
-            case eTrack:
-                stream >> trks;
-                break;
+        case eDiary:
+            stream >> drys;
+            break;
 
-            case eDiary:
-                stream >> drys;
-                break;
+        case eOverlay:
+            stream >> ovls;
+            break;
 
-            case eOverlay:
-                stream >> ovls;
-                break;
+        case eRoute:
+            stream >> rtes;
+            break;
 
-            case eRoute:
-                stream >> rtes;
-                break;
+        case eMapSel:
+            stream >> sels;
+            break;
 
-            case eMapSel:
-                stream >> sels;
-                break;
-
-            default:
-                ioDevice->close();
-                return;
+        default:
+            ioDevice->close();
+            return;
         }
 
         stream >> type;

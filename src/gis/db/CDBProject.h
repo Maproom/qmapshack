@@ -28,55 +28,61 @@ class CQlgtFolder;
 
 class CDBProject : public IGisProject
 {
-    public:
-        CDBProject(CGisListWks * parent);
-        CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
-        CDBProject(CQlgtFolder& folder);
-        virtual ~CDBProject();
+public:
+    CDBProject(CGisListWks * parent);
+    CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
+    CDBProject(CQlgtFolder& folder);
+    virtual ~CDBProject();
 
-        /**
-           @brief Restore database link after the project has been restored from binary storage.
+    /**
+       @brief Restore database link after the project has been restored from binary storage.
 
-           Typically this is done after the project has been restored in the workspace on application's startup.
+       Typically this is done after the project has been restored in the workspace on application's startup.
 
-        */
-        void restoreDBLink();
+     */
+    void restoreDBLink();
 
-        bool save();
-        bool saveAs();
+    bool save();
+    bool saveAs();
 
-        quint64 getId(){return id;}
-        QString getDBName(){return db.connectionName();}
+    quint64 getId()
+    {
+        return( id);
+    }
+    QString getDBName()
+    {
+        return( db.connectionName());
+    }
 
-        /**
-           @brief Serialize object out of a QDataStream
+    /**
+       @brief Serialize object out of a QDataStream
 
-           See CGisSerialization.cpp for implementation
+       See CGisSerialization.cpp for implementation
 
-           @param stream the binary data stream
-           @return The stream object.
-        */
-        QDataStream& operator<<(QDataStream& stream);
+       @param stream the binary data stream
+       @return The stream object.
+     */
+    QDataStream& operator<<(QDataStream& stream);
 
-        /**
-           @brief Serialize object into a QDataStream
+    /**
+       @brief Serialize object into a QDataStream
 
-           See CGisSerialization.cpp for implementation
+       See CGisSerialization.cpp for implementation
 
-           @param stream the binary data stream
-           @return The stream object.
-        */
-        QDataStream& operator>>(QDataStream& stream);
+       @param stream the binary data stream
+       @return The stream object.
+     */
+    QDataStream& operator>>(QDataStream& stream);
 
 
-        void postStatus();
+    void postStatus();
 
-        void showItems(CEvtD2WShowItems * evt);
-        void hideItems(CEvtD2WHideItems * evt);
+    void showItems(CEvtD2WShowItems * evt);
+    void hideItems(CEvtD2WHideItems * evt);
 
-    protected:
-        QSqlDatabase db;
-        quint64 id;
+protected:
+    QSqlDatabase db;
+    quint64 id;
 };
 
 #endif //CDBPROJECT_H

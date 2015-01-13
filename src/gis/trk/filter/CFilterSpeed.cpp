@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 

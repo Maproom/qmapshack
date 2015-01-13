@@ -22,20 +22,20 @@
 #define DB_VERSION 1
 
 #define QUERY_EXEC(cmd) \
-if(!query.exec())\
-{ \
-    qDebug() << query.lastQuery();\
-    qDebug() << query.lastError();\
-    cmd;\
-}\
+    if(!query.exec()) \
+    { \
+        qDebug() << query.lastQuery(); \
+        qDebug() << query.lastError(); \
+        cmd; \
+    } \
 
 #define PROGRESS_SETUP(lbl, max) \
-QProgressDialog progress(lbl, "Abort", 0, max, 0);\
-progress.setWindowModality(Qt::WindowModal);\
+    QProgressDialog progress(lbl, "Abort", 0, max, 0); \
+    progress.setWindowModality(Qt::WindowModal); \
 
 #define PROGRESS(x, cmd) \
-progress.setValue(x); \
-if (progress.wasCanceled()) cmd;\
+    progress.setValue(x); \
+    if (progress.wasCanceled()) { cmd; } \
 
 
 #endif //MACROS_H

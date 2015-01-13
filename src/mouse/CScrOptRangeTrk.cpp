@@ -16,16 +16,16 @@
 
 **********************************************************************************************/
 
-#include "mouse/CScrOptRangeTrk.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "CMainWindow.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "mouse/CScrOptRangeTrk.h"
 
 #include <QtWidgets>
 
 CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, QWidget *parent)
     : IScrOpt(parent)
 {
-    setupUi(this);    
+    setupUi(this);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(trk->getInfoRange());
     adjustSize();
@@ -42,7 +42,6 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, QWidge
 
 CScrOptRangeTrk::~CScrOptRangeTrk()
 {
-
 }
 
 void CScrOptRangeTrk::draw(QPainter& p)

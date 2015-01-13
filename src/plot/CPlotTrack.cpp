@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "plot/CPlotTrack.h"
 #include "canvas/IDrawContext.h"
+#include "plot/CPlotTrack.h"
 
 #include <QtWidgets>
 
@@ -25,7 +25,6 @@ CPlotTrack::CPlotTrack(QWidget *parent)
     : QWidget(parent)
     , pos(NOPOINTF)
 {
-
 }
 
 CPlotTrack::CPlotTrack(CGisItemTrk * trk, QWidget * parent)
@@ -37,7 +36,6 @@ CPlotTrack::CPlotTrack(CGisItemTrk * trk, QWidget * parent)
 
 CPlotTrack::~CPlotTrack()
 {
-
 }
 
 void CPlotTrack::setMouseMoveFocus(qreal lon, qreal lat)

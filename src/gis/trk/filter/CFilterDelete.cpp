@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterDelete.h"
 
 CFilterDelete::CFilterDelete(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
@@ -30,7 +30,6 @@ CFilterDelete::CFilterDelete(CGisItemTrk &trk, QWidget *parent)
 
 CFilterDelete::~CFilterDelete()
 {
-
 }
 
 void CFilterDelete::slotApply()

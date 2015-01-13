@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "config.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "helpers/CSettings.h"
-#include "config.h"
 
 #include <QtWidgets>
 
@@ -38,7 +38,6 @@ CSetupWorkspace::CSetupWorkspace(QWidget *parent)
 
 CSetupWorkspace::~CSetupWorkspace()
 {
-
 }
 
 void CSetupWorkspace::accept()

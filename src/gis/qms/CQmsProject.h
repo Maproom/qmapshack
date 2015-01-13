@@ -23,15 +23,14 @@
 
 class CQmsProject : public IGisProject
 {
-    public:
-        CQmsProject(const QString& filename, CGisListWks * parent);
-        virtual ~CQmsProject();
+public:
+    CQmsProject(const QString& filename, CGisListWks * parent);
+    virtual ~CQmsProject();
 
-        bool save();
-        bool saveAs();
+    bool save();
+    bool saveAs();
 
-        static bool saveAs(const QString& fn, IGisProject& project);
-
+    static bool saveAs(const QString& fn, IGisProject& project);
 };
 
 #endif //CQMSPROJECT_H

@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "mouse/CMouseEditTrk.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/CGisWidget.h"
 #include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "mouse/CMouseEditTrk.h"
 
 #include <QtWidgets>
 
@@ -47,7 +47,7 @@ CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
     /*
         trigger complete update of GIS components to make sure all changes to
         the originating object are reflected on the canvas
-    */
+     */
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -64,7 +64,7 @@ void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
 
 IGisLine * CMouseEditTrk::getGisLine()
 {
-    return dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    return(dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key)));
 }
 
 void CMouseEditTrk::slotAbort()
@@ -113,5 +113,5 @@ void CMouseEditTrk::slotCopyToNew()
     new CGisItemTrk(coords1,name, project, -1);
 
     canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);            
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }

@@ -23,9 +23,9 @@
 
 class CDBFolderOther : public IDBFolder
 {
-    public:
-        CDBFolderOther(QSqlDatabase &db, quint64 key, QTreeWidgetItem *parent);
-        virtual ~CDBFolderOther();
+public:
+    CDBFolderOther(QSqlDatabase &db, quint64 key, QTreeWidgetItem *parent);
+    virtual ~CDBFolderOther();
 };
 
 #endif //CDBFOLDEROTHER_H

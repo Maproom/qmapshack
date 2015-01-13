@@ -16,26 +16,25 @@
 
 **********************************************************************************************/
 
-#include "helpers/Platform.h"
 #include "IGarminStrTbl.h"
 #include "helpers/CFileExt.h"
+#include "helpers/Platform.h"
 
 #include <QtCore>
 
 IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject * parent)
-: QObject(parent)
-, offsetLBL1(0)
-, offsetLBL6(0)
-, offsetNET1(0)
-, addrshift1(0)
-, addrshift2(0)
-, codepage(codepage)
-, codec(0)
-, mask(mask)
+    : QObject(parent)
+    , offsetLBL1(0)
+    , offsetLBL6(0)
+    , offsetNET1(0)
+    , addrshift1(0)
+    , addrshift2(0)
+    , codepage(codepage)
+    , codec(0)
+    , mask(mask)
 {
     if(codepage != 0)
     {
-
         if(1250 <= codepage && codepage <= 1258)
         {
             char strcp[64];
@@ -72,13 +71,11 @@ IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject 
     mask64   = mask32;
     mask64 <<= 32;
     mask64  |= mask32;
-
 }
 
 
 IGarminStrTbl::~IGarminStrTbl()
 {
-
 }
 
 
@@ -137,7 +134,7 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
     {
         if(offsetNET1 == 0)
         {
-            return 0xFFFFFFFF;
+            return(0xFFFFFFFF);
         }
 
         QByteArray data;
@@ -145,12 +142,12 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
         newOffset = gar_ptr_load(uint32_t, data.data());
         if(newOffset & 0x00400000)
         {
-            return 0xFFFFFFFF;
+            return(0xFFFFFFFF);
         }
         newOffset = (newOffset & 0x003FFFFF);
     }
 
     newOffset <<= addrshift1;
     //     qDebug() << hex << newOffset;
-    return newOffset;
+    return(newOffset);
 }

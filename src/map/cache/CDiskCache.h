@@ -30,34 +30,32 @@ class QTimer;
 class CDiskCache : public IDiskCache
 {
     Q_OBJECT
-    public:
-        CDiskCache(const QString& path, qint32 size, qint32 days, QObject *parent);
-        virtual ~CDiskCache();
+public:
+    CDiskCache(const QString& path, qint32 size, qint32 days, QObject *parent);
+    virtual ~CDiskCache();
 
-        virtual void store(const QString& key, QImage& img);
-        virtual void restore(const QString& key, QImage& img);
-        virtual bool contains(const QString& key);
+    virtual void store(const QString& key, QImage& img);
+    virtual void restore(const QString& key, QImage& img);
+    virtual bool contains(const QString& key);
 
-    private slots:
-        void slotCleanup();
+private slots:
+    void slotCleanup();
 
-    private:
-        QDir dir;
+private:
+    QDir dir;
 
-        qint32 size;
+    qint32 size;
 
-        qint32 expiration;
+    qint32 expiration;
 
-        /// hash table to cache images als files on disc
-        QHash<QString, QString> table;
-        /// hash table to cache loaded images in memory
-        QHash<QString, QImage>  cache;
+    /// hash table to cache images als files on disc
+    QHash<QString, QString> table;
+    /// hash table to cache loaded images in memory
+    QHash<QString, QImage>  cache;
 
-        QTimer * timer;
+    QTimer * timer;
 
-        QImage dummy;
-
-
+    QImage dummy;
 };
 
 #endif //CDISKCACHE_H

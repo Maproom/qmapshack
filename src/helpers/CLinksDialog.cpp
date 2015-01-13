@@ -38,12 +38,10 @@ CLinksDialog::CLinksDialog(QList<IGisItem::link_t> &links, QWidget *parent)
         item->setText(2, link.uri.toString());
         item->setFlags(item->flags()|Qt::ItemIsEditable);
     }
-
 }
 
 CLinksDialog::~CLinksDialog()
 {
-
 }
 
 void CLinksDialog::slotItemSelectionChanged()

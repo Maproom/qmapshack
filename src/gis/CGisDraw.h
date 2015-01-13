@@ -25,15 +25,15 @@ class CCanvas;
 
 class CGisDraw : public IDrawContext
 {
-    public:
-        CGisDraw(CCanvas *parent);
-        virtual ~CGisDraw();
+public:
+    CGisDraw(CCanvas *parent);
+    virtual ~CGisDraw();
 
-        using IDrawContext::draw;
-        void draw(QPainter& p, const QRect& rect);
+    using IDrawContext::draw;
+    void draw(QPainter& p, const QRect& rect);
 
-    protected:
-        void drawt(buffer_t& currentBuffer);
+protected:
+    void drawt(buffer_t& currentBuffer);
 };
 
 #endif //CGISDRAW_H

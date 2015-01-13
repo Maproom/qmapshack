@@ -19,24 +19,23 @@
 #ifndef CFILTERRESET_H
 #define CFILTERRESET_H
 
-#include <QWidget>
 #include "ui_IFilterReset.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
 class CFilterReset : public QWidget, private Ui::IFilterReset
 {
     Q_OBJECT
-    public:
-        CFilterReset(CGisItemTrk& trk, QWidget * parent);
-        virtual ~CFilterReset();
+public:
+    CFilterReset(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterReset();
 
-    private slots:
-        void slotApply();
+private slots:
+    void slotApply();
 
-    private:
-        CGisItemTrk& trk;
-
+private:
+    CGisItemTrk& trk;
 };
 
 #endif //CFILTERRESET_H

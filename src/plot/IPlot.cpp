@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
-#include "plot/IPlot.h"
 #include "plot/CPlotAxis.h"
+#include "plot/IPlot.h"
 
-#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 
 #include <QtWidgets>
 
@@ -30,7 +30,6 @@ QPen IPlot::pens[] =
     , QPen(QColor("#C00000"),3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::yellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::green,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-
 };
 
 QPen IPlot::pensThin[] =
@@ -39,7 +38,6 @@ QPen IPlot::pensThin[] =
     , QPen(Qt::darkRed,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::darkYellow,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::darkGreen,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-
 };
 
 QColor IPlot::colors[] =
@@ -48,7 +46,6 @@ QColor IPlot::colors[] =
     , QColor(0,0,0,0)
     , QColor(0,0,0,0)
     , QColor(0,0,0,0)
-
 };
 
 
@@ -76,7 +73,10 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 {
     setMouseTracking(true);
 
-    if(trk) trk->registerPlot(this);
+    if(trk)
+    {
+        trk->registerPlot(this);
+    }
 
     data = new CPlotData(type, this);
 
@@ -85,12 +85,14 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
         showScale = false;
         thinLine = true;
     }
-
 }
 
 IPlot::~IPlot()
 {
-    if(trk) trk->unregisterPlot(this);
+    if(trk)
+    {
+        trk->unregisterPlot(this);
+    }
 }
 
 void IPlot::clear()
@@ -142,7 +144,6 @@ void IPlot::newLine(const QPolygonF& line, const QString& label)
 
     needsRedraw = true;
     update();
-
 }
 
 void IPlot::addLine(const QPolygonF& line, const QString& label)
@@ -210,7 +211,10 @@ void IPlot::leaveEvent(QEvent * e)
     needsRedraw = true;
     posMouse    = NOPOINT;
 
-    if(trk) trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, this);
+    if(trk)
+    {
+        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, this);
+    }
 
     QApplication::restoreOverrideCursor();
     update();
@@ -248,11 +252,17 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         qreal x = data->x().pt2val(posMouse.x() - left);
         if(data->axisType == CPlotData::eAxisLinear)
         {
-            if(trk) trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, this);
+            if(trk)
+            {
+                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, this);
+            }
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {
-            if(trk) trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, this);
+            if(trk)
+            {
+                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, this);
+            }
         }
 
         // update canvas if visible
@@ -283,11 +293,17 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             qreal x = data->x().pt2val(posMouse.x() - left);
             if(data->axisType == CPlotData::eAxisLinear)
             {
-                if(trk) trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, this);
+                if(trk)
+                {
+                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, this);
+                }
             }
             else if(data->axisType == CPlotData::eAxisTime)
             {
-                if(trk) trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, this);
+                if(trk)
+                {
+                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, this);
+                }
             }
 
             // update canvas if visible
@@ -323,7 +339,6 @@ void IPlot::setSizes()
     setSizeYLabel();
     setSizeTrackInfo();
     setSizeDrawArea();
-
 }
 
 void IPlot::setLRTB()
@@ -583,7 +598,7 @@ void IPlot::drawXScale( QPainter &p )
 
     if ( data->x().getTicType() == CPlotAxis::eNoTic )
     {
-        return ;
+        return;
     }
 
     p.setPen(Qt::darkBlue);
@@ -611,7 +626,10 @@ void IPlot::drawXScale( QPainter &p )
     qreal limMin, limMax, useMin, useMax;
     data->x().getLimits(limMin, limMax, useMin, useMax);
 
-    if((limMax - limMin) <= (useMax - useMin)) return;
+    if((limMax - limMin) <= (useMax - useMin))
+    {
+        return;
+    }
 
     qreal scale = (right - left) / (limMax - limMin);
     //     qreal val   = data->x().pt2val(0);
@@ -622,7 +640,6 @@ void IPlot::drawXScale( QPainter &p )
 
     p.setPen(QPen(Qt::red,3));
     p.drawLine(x,y, x + w, y);
-
 }
 
 
@@ -631,7 +648,9 @@ void IPlot::drawYScale( QPainter &p )
     QString format_single_prec;
     QRect recText;
     if ( data->y().getTicType() == CPlotAxis::eNoTic )
-        return ;
+    {
+        return;
+    }
 
     p.setPen(Qt::darkBlue);
     recText.setHeight( fontHeight );
@@ -682,7 +701,10 @@ void IPlot::drawYScale( QPainter &p )
         t = data->y().ticmark( t );
     }
 
-    if((limMax - limMin) <= (useMax - useMin)) return;
+    if((limMax - limMin) <= (useMax - useMin))
+    {
+        return;
+    }
 
     qreal scale = (top - bottom) / (limMax - limMin);
     //     qreal val   = data->y().pt2val(0);
@@ -693,7 +715,6 @@ void IPlot::drawYScale( QPainter &p )
 
     p.setPen(QPen(Qt::red,3));
     p.drawLine(x,y, x, y + h);
-
 }
 
 
@@ -800,7 +821,10 @@ void IPlot::drawYTic( QPainter &p )
 
 void IPlot::drawLegend(QPainter& p)
 {
-    if((data->lines.size() < 2) || (mode == eModeIcon)) return;
+    if((data->lines.size() < 2) || (mode == eModeIcon))
+    {
+        return;
+    }
 
     int penIdx = 0;
     QFontMetrics fm(p.font());
@@ -815,19 +839,17 @@ void IPlot::drawLegend(QPainter& p)
     while(line != lines.end())
     {
         p.setPen(Qt::black);
-        p.drawText(x + 30 ,y,line->label);
+        p.drawText(x + 30,y,line->label);
         p.setPen(pens[penIdx++]);
         p.drawLine(x, y, x + 20, y);
 
         y += fm.height();
         ++line;
     }
-
 }
 
 void IPlot::drawDecoration( QPainter &p )
 {
-
     if(posMouse != NOPOINT)
     {
         p.setPen(QPen(Qt::red,2));

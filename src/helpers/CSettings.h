@@ -23,28 +23,32 @@
 
 class CSettings : public QObject
 {
-
-    public:
-        CSettings()
+public:
+    CSettings()
+    {
+        if(!qlOpts->configfile.isEmpty())
         {
-            if(!qlOpts->configfile.isEmpty())
-            {
-                cfg = new QSettings(qlOpts->configfile, QSettings::IniFormat, this);
-            }
-            else
-            {
-                cfg = new QSettings(this);
-            }
+            cfg = new QSettings(qlOpts->configfile, QSettings::IniFormat, this);
         }
-        ~CSettings(){}
+        else
+        {
+            cfg = new QSettings(this);
+        }
+    }
+    ~CSettings()
+    {
+    }
 
-        QSettings& get(){return *cfg;}
+    QSettings& get()
+    {
+        return( *cfg);
+    }
 
-    private:
-        QSettings  * cfg;
+private:
+    QSettings  * cfg;
 };
 
 #define SETTINGS \
-CSettings ccfg;\
-QSettings& cfg = ccfg.get()
+    CSettings ccfg; \
+    QSettings& cfg = ccfg.get()
 #endif                           //CSETTINGS_H

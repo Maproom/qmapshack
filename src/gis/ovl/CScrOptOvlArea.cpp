@@ -16,15 +16,15 @@
 
 **********************************************************************************************/
 
-#include "gis/ovl/CScrOptOvlArea.h"
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/CGisWidget.h"
-#include "canvas/CCanvas.h"
-#include "mouse/IMouse.h"
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/ovl/CScrOptOvlArea.h"
+#include "mouse/IMouse.h"
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
-    : IScrOpt(parent->getCanvas())    
+    : IScrOpt(parent->getCanvas())
 {
     key = area->getKey();
 
@@ -48,7 +48,6 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
 
 CScrOptOvlArea::~CScrOptOvlArea()
 {
-
 }
 
 void CScrOptOvlArea::slotEditDetails()

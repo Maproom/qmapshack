@@ -16,50 +16,49 @@
 
 **********************************************************************************************/
 
+#include "config.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
-#include "gis/db/macros.h"
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBItem.h"
-#include "gis/db/CSetupFolder.h"
 #include "gis/db/CSetupDatabase.h"
+#include "gis/db/CSetupFolder.h"
+#include "gis/db/macros.h"
 #include "helpers/CSettings.h"
-#include "config.h"
 
 #include <QtSql>
 #include <QtWidgets>
 
 class CGisListDBEditLock
 {
-    public:
-        CGisListDBEditLock(bool waitCursor, CGisListDB * widget) : widget(widget), waitCursor(waitCursor)
+public:
+    CGisListDBEditLock(bool waitCursor, CGisListDB * widget) : widget(widget), waitCursor(waitCursor)
+    {
+        if(waitCursor)
         {
-            if(waitCursor)
-            {
-                QApplication::setOverrideCursor(Qt::WaitCursor);
-            }
-            widget->isInternalEdit += 1;
+            QApplication::setOverrideCursor(Qt::WaitCursor);
         }
-        ~CGisListDBEditLock()
+        widget->isInternalEdit += 1;
+    }
+    ~CGisListDBEditLock()
+    {
+        if(waitCursor)
         {
-            if(waitCursor)
-            {
-                QApplication::restoreOverrideCursor();
-            }
-            widget->isInternalEdit -= 1;
+            QApplication::restoreOverrideCursor();
         }
-    private:
-        CGisListDB * widget;
-        bool waitCursor;
+        widget->isInternalEdit -= 1;
+    }
+private:
+    CGisListDB * widget;
+    bool waitCursor;
 };
 
 
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
     , isInternalEdit(0)
-{   
-
+{
     SETTINGS;
     QStringList names = cfg.value("Database/names").toStringList();
     QStringList files = cfg.value("Database/files").toStringList();
@@ -115,7 +114,6 @@ CGisListDB::~CGisListDB()
 
     cfg.setValue("Database/names", names);
     cfg.setValue("Database/files", files);
-
 }
 
 
@@ -128,10 +126,10 @@ CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
         CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
         if(database && (database->getDBName() == name))
         {
-            return database;
+            return(database);
         }
     }
-    return 0;
+    return(0);
 }
 
 bool CGisListDB::hasDatabase(const QString& name)
@@ -143,10 +141,10 @@ bool CGisListDB::hasDatabase(const QString& name)
         CDBFolderDatabase * folder = dynamic_cast<CDBFolderDatabase*>(topLevelItem(i));
         if(folder && (folder->text(CGisListDB::eColumnName) == name))
         {
-            return true;
+            return(true);
         }
     }
-    return false;
+    return(false);
 }
 
 
@@ -169,11 +167,11 @@ bool CGisListDB::event(QEvent * e)
             }
         }
         e->accept();
-        return true;
+        return(true);
     }
     }
 
-    return QTreeWidget::event(e);
+    return(QTreeWidget::event(e));
 }
 
 void CGisListDB::slotContextMenu(const QPoint& point)
@@ -230,7 +228,7 @@ void CGisListDB::slotAddDatabase()
     CSetupDatabase dlg(name, filename, *this);
     if(dlg.exec() != QDialog::Accepted)
     {
-        return ;
+        return;
     }
 
     addDatabase(name, filename);
@@ -240,7 +238,6 @@ void CGisListDB::slotAddDatabase()
 void CGisListDB::addDatabase(const QString& name, const QString& filename)
 {
     new CDBFolderDatabase(filename, name, this);
-
 }
 
 void CGisListDB::slotDelDatabase()
@@ -345,7 +342,6 @@ void CGisListDB::slotDelLostFoundItem()
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
-
         CDBItem * dbItem            = dynamic_cast<CDBItem*>(item);
         CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(dbItem->parent());
 
@@ -353,8 +349,8 @@ void CGisListDB::slotDelLostFoundItem()
         {
             if(folder->delItem(dbItem))
             {
-                delItems    << dbItem;
-                folders     << folder;
+                delItems << dbItem;
+                folders << folder;
             }
         }
     }
@@ -369,7 +365,7 @@ void CGisListDB::slotDelLostFoundItem()
 
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
-{   
+{
     CGisListDBEditLock lock(true, this);
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
@@ -429,7 +425,6 @@ void CGisListDB::slotDelItem()
     {
         dbFolder->updateLostFound();
     }
-
 }
 
 void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)

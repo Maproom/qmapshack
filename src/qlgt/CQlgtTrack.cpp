@@ -26,23 +26,25 @@ QDataStream& operator >>(QDataStream& s, CFlags& flag)
     s >> f;
     flag.setFlags(f);
     flag.setChanged(true);
-    return s;
+    return(s);
 }
 
 
 QDataStream& operator <<(QDataStream& s, CFlags& flag)
 {
     s << flag.flag();
-    return s;
+    return(s);
 }
 
 
 struct trk_head_entry_t
 {
-    trk_head_entry_t() : type(CQlgtTrack::eEnd), offset(0) {}
-    qint32      type;
-    quint32     offset;
-    QByteArray  data;
+    trk_head_entry_t() : type(CQlgtTrack::eEnd), offset(0)
+    {
+    }
+    qint32 type;
+    quint32 offset;
+    QByteArray data;
 };
 
 
@@ -50,7 +52,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
 {
     quint32 nTrkPts = 0;
     QIODevice * dev = s.device();
-    qint64      pos = dev->pos();
+    qint64 pos = dev->pos();
 
     char magic[9];
     s.readRawData(magic,9);
@@ -58,7 +60,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
     if(strncmp(magic,"QLTrk   ",9))
     {
         dev->seek(pos);
-        return s;
+        return(s);
     }
 
     QList<trk_head_entry_t> entries;
@@ -68,7 +70,10 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
         trk_head_entry_t entry;
         s >> entry.type >> entry.offset;
         entries << entry;
-        if(entry.type == CQlgtTrack::eEnd) break;
+        if(entry.type == CQlgtTrack::eEnd)
+        {
+            break;
+        }
     }
 
     QList<trk_head_entry_t>::iterator entry = entries.begin();
@@ -80,100 +85,99 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
 
         switch(entry->type)
         {
-            case CQlgtTrack::eBase:
+        case CQlgtTrack::eBase:
+        {
+            QString key;
+
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+
+            s1 >> track.key;
+            s1 >> track.timestamp;
+            s1 >> track.name;
+            s1 >> track.comment;
+            s1 >> track.colorIdx;
+            s1 >> track.parentWpt;
+            if(!s1.atEnd())
             {
+                s1 >> track.doScaleWpt2Track;
+            }
+            if(!s1.atEnd())
+            {
+                s1 >> track.cntMedianFilterApplied;
+            }
+            if(!s1.atEnd())
+            {
+                s1 >> track.useMultiColor;
+            }
+            if(!s1.atEnd())
+            {
+                s1 >> track.idMultiColor;
+            }
 
-                QString key;
+            //track.setColor(track.colorIdx);
 
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
+            break;
+        }
 
-                s1 >> track.key;
-                s1 >> track.timestamp;
-                s1 >> track.name;
-                s1 >> track.comment;
-                s1 >> track.colorIdx;
-                s1 >> track.parentWpt;
-                if(!s1.atEnd())
-                {
-                    s1 >> track.doScaleWpt2Track;
-                }
-                if(!s1.atEnd())
-                {
-                    s1 >> track.cntMedianFilterApplied;
-                }
-                if(!s1.atEnd())
-                {
-                    s1 >> track.useMultiColor;
-                }
-                if(!s1.atEnd())
-                {
-                    s1 >> track.idMultiColor;
-                }
+        case CQlgtTrack::eTrkPts:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+            quint32 n;
 
-                //track.setColor(track.colorIdx);
+            track.track.clear();
+            s1 >> nTrkPts;
 
+            for(n = 0; n < nTrkPts; ++n)
+            {
+                CQlgtTrack::pt_t trkpt;
+                s1 >> trkpt.lon;
+                s1 >> trkpt.lat;
+                s1 >> trkpt.ele;
+                s1 >> trkpt.timestamp;
+                s1 >> trkpt.flags;
+
+                trkpt._lon = trkpt.lon;
+                trkpt._lat = trkpt.lat;
+                trkpt._ele = trkpt.ele;
+                trkpt._timestamp = trkpt.timestamp;
+                trkpt._timestamp_msec = trkpt.timestamp_msec;
+
+                track << trkpt;
+            }
+            break;
+        }
+
+        case CQlgtTrack::eTrkPts2:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+
+            quint32 nTrkPts1 = 0;
+
+            s1 >> nTrkPts1;
+            if(nTrkPts1 != nTrkPts)
+            {
+                QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of training data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 
-            case CQlgtTrack::eTrkPts:
+            QList<CQlgtTrack::pt_t>::iterator pt1 = track.track.begin();
+            while (pt1 != track.track.end())
             {
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-                quint32 n;
+                quint32 dummy;
+                s1 >> pt1->timestamp_msec;
+                s1 >> dummy;
+                s1 >> dummy;
+                s1 >> dummy;
+                s1 >> dummy;
+                s1 >> dummy;
 
-                track.track.clear();
-                s1 >> nTrkPts;
-
-                for(n = 0; n < nTrkPts; ++n)
-                {
-                    CQlgtTrack::pt_t trkpt;
-                    s1 >> trkpt.lon;
-                    s1 >> trkpt.lat;
-                    s1 >> trkpt.ele;
-                    s1 >> trkpt.timestamp;
-                    s1 >> trkpt.flags;
-
-                    trkpt._lon = trkpt.lon;
-                    trkpt._lat = trkpt.lat;
-                    trkpt._ele = trkpt.ele;
-                    trkpt._timestamp = trkpt.timestamp;
-                    trkpt._timestamp_msec = trkpt.timestamp_msec;
-
-                    track << trkpt;
-                }
-                break;
+                pt1++;
             }
-
-            case CQlgtTrack::eTrkPts2:
-            {
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-
-                quint32 nTrkPts1 = 0;
-
-                s1 >> nTrkPts1;
-                if(nTrkPts1 != nTrkPts)
-                {
-                    QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of training data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
-                    break;
-                }
-
-                QList<CQlgtTrack::pt_t>::iterator pt1 = track.track.begin();
-                while (pt1 != track.track.end())
-                {
-                    quint32 dummy;
-                    s1 >> pt1->timestamp_msec;
-                    s1 >> dummy;
-                    s1 >> dummy;
-                    s1 >> dummy;
-                    s1 >> dummy;
-                    s1 >> dummy;
-
-                    pt1++;
-                }
-                break;
-            }
+            break;
+        }
 
 //            case CQlgtTrack::eTrain:
 //            {
@@ -200,121 +204,120 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
 //                track.setTraineeData();
 //                break;
 //            }
-            case CQlgtTrack::eTrkExt1:
+        case CQlgtTrack::eTrkExt1:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+            quint32 nTrkPts1 = 0;
+
+            s1 >> nTrkPts1;
+            if(nTrkPts1 != nTrkPts)
             {
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-                quint32 nTrkPts1 = 0;
-
-                s1 >> nTrkPts1;
-                if(nTrkPts1 != nTrkPts)
-                {
-                    QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of extended data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
-                    break;
-                }
-
-                QList<CQlgtTrack::pt_t>::iterator pt1 = track.track.begin();
-                while (pt1 != track.track.end())
-                {
-                                 ///< [m]
-                    s1 >> pt1->altitude;
-                                 ///< [m]
-                    s1 >> pt1->height;
-                                 ///< [m/s]
-                    s1 >> pt1->velocity;
-                                 ///< [deg]
-                    s1 >> pt1->heading;
-                                 ///< [deg]
-                    s1 >> pt1->magnetic;
-                    s1 >> pt1->vdop;
-                    s1 >> pt1->hdop;
-                    s1 >> pt1->pdop;
-                    s1 >> pt1->x;///< [m] cartesian gps coordinate
-                    s1 >> pt1->y;///< [m] cartesian gps coordinate
-                    s1 >> pt1->z;///< [m] cartesian gps coordinate
-                                 ///< [m/s] velocity
-                    s1 >> pt1->vx;
-                                 ///< [m/s] velocity
-                    s1 >> pt1->vy;
-                                 ///< [m/s] velocity
-                    s1 >> pt1->vz;
-                    pt1++;
-                }
-
-                track.setExt1Data();
+                QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of extended data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 
-            case CQlgtTrack::eTrkShdw:
+            QList<CQlgtTrack::pt_t>::iterator pt1 = track.track.begin();
+            while (pt1 != track.track.end())
             {
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-                quint32 n;
+                ///< [m]
+                s1 >> pt1->altitude;
+                ///< [m]
+                s1 >> pt1->height;
+                ///< [m/s]
+                s1 >> pt1->velocity;
+                ///< [deg]
+                s1 >> pt1->heading;
+                ///< [deg]
+                s1 >> pt1->magnetic;
+                s1 >> pt1->vdop;
+                s1 >> pt1->hdop;
+                s1 >> pt1->pdop;
+                s1 >> pt1->x;    ///< [m] cartesian gps coordinate
+                s1 >> pt1->y;    ///< [m] cartesian gps coordinate
+                s1 >> pt1->z;    ///< [m] cartesian gps coordinate
+                                 ///< [m/s] velocity
+                s1 >> pt1->vx;
+                ///< [m/s] velocity
+                s1 >> pt1->vy;
+                ///< [m/s] velocity
+                s1 >> pt1->vz;
+                pt1++;
+            }
 
-                quint32 nTrkPts1 = 0;
+            track.setExt1Data();
+            break;
+        }
 
-                s1 >> nTrkPts1;
-                if(nTrkPts1 != nTrkPts)
-                {
-                    QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
-                    break;
-                }
+        case CQlgtTrack::eTrkShdw:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+            quint32 n;
 
-                for(n = 0; n < nTrkPts; ++n)
-                {
-                    CQlgtTrack::pt_t& trkpt = track.track[n];
-                    s1 >> trkpt._lon;
-                    s1 >> trkpt._lat;
-                    s1 >> trkpt._ele;
-                }
-                track.hasShadow1 = true;
+            quint32 nTrkPts1 = 0;
+
+            s1 >> nTrkPts1;
+            if(nTrkPts1 != nTrkPts)
+            {
+                QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 
-            case CQlgtTrack::eTrkShdw2:
+            for(n = 0; n < nTrkPts; ++n)
             {
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-                quint32 n;
+                CQlgtTrack::pt_t& trkpt = track.track[n];
+                s1 >> trkpt._lon;
+                s1 >> trkpt._lat;
+                s1 >> trkpt._ele;
+            }
+            track.hasShadow1 = true;
+            break;
+        }
 
-                quint32 nTrkPts1 = 0;
+        case CQlgtTrack::eTrkShdw2:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+            quint32 n;
 
-                s1 >> nTrkPts1;
-                if(nTrkPts1 != nTrkPts)
-                {
-                    QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
-                    break;
-                }
+            quint32 nTrkPts1 = 0;
 
-                for(n = 0; n < nTrkPts; ++n)
-                {
-                    quint32 dummy;
-                    CQlgtTrack::pt_t& trkpt = track.track[n];
-                    s1 >> trkpt._timestamp;
-                    s1 >> trkpt._timestamp_msec;
-                    s1 >> dummy;
-                    s1 >> dummy;
-                    s1 >> dummy;
-                    s1 >> dummy;
-                    s1 >> dummy;
-                }
-                track.hasShadow2 = true;
+            s1 >> nTrkPts1;
+            if(nTrkPts1 != nTrkPts)
+            {
+                QMessageBox::warning(0, QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 
-            default:;
+            for(n = 0; n < nTrkPts; ++n)
+            {
+                quint32 dummy;
+                CQlgtTrack::pt_t& trkpt = track.track[n];
+                s1 >> trkpt._timestamp;
+                s1 >> trkpt._timestamp_msec;
+                s1 >> dummy;
+                s1 >> dummy;
+                s1 >> dummy;
+                s1 >> dummy;
+                s1 >> dummy;
+            }
+            track.hasShadow2 = true;
+            break;
+        }
+
+        default:;
         }
 
         ++entry;
     }
 
-    return s;
+    return(s);
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtTrack& trk)
 {
-
-    return s;
+    return(s);
 }
 
 CQlgtTrack::CQlgtTrack(quint64 id, QObject *parent)
@@ -324,12 +327,10 @@ CQlgtTrack::CQlgtTrack(quint64 id, QObject *parent)
     , hasShadow1(false)
     , hasShadow2(false)
 {
-
 }
 
 CQlgtTrack::~CQlgtTrack()
 {
-
 }
 
 CQlgtTrack& CQlgtTrack::operator<<(const pt_t& pt)
@@ -340,5 +341,5 @@ CQlgtTrack& CQlgtTrack::operator<<(const pt_t& pt)
     track.last().flags  &= ~pt_t::eFocus;
     track.last().flags  &= ~pt_t::eSelected;
 
-    return *this;
+    return(*this);
 }

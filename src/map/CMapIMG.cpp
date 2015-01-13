@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "helpers/CFileExt.h"
+#include "helpers/Platform.h"
+#include "map/CMapDraw.h"
 #include "map/CMapIMG.h"
 #include "map/garmin/CGarminStrTbl6.h"
 #include "map/garmin/CGarminStrTbl8.h"
 #include "map/garmin/CGarminStrTblUtf8.h"
 #include "map/garmin/CGarminTyp.h"
-#include "map/CMapDraw.h"
 #include "units/IUnit.h"
-#include "helpers/CFileExt.h"
-#include "helpers/Platform.h"
-#include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 
 #include <QtWidgets>
 
@@ -41,18 +41,29 @@
 
 static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewport)
 {
-
     qreal north =  -90.0 * DEG_TO_RAD;
     qreal south =   90.0 * DEG_TO_RAD;
     qreal west  =  180.0 * DEG_TO_RAD;
     qreal east  = -180.0 * DEG_TO_RAD;
 
-    foreach(const QPointF& pt, poly)
+    foreach(const QPointF &pt, poly)
     {
-        if(north < pt.y()) north = pt.y();
-        if(south > pt.y()) south = pt.y();
-        if(west  > pt.x()) west  = pt.x();
-        if(east  < pt.x()) east  = pt.x();
+        if(north < pt.y())
+        {
+            north = pt.y();
+        }
+        if(south > pt.y())
+        {
+            south = pt.y();
+        }
+        if(west  > pt.x())
+        {
+            west  = pt.x();
+        }
+        if(east  < pt.x())
+        {
+            east  = pt.x();
+        }
     }
 
     QRectF ref(west, north,  east - west, south - north);
@@ -68,10 +79,10 @@ static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewp
 
     if(viewport.intersects(ref))
     {
-        return false;
+        return(false);
     }
 
-    return true;
+    return(true);
 }
 
 static inline QImage img2line(const QImage &img, int width)
@@ -98,7 +109,7 @@ static inline QImage img2line(const QImage &img, int width)
             bytesToCopy -= bpl_src;
         }
     }
-    return newImage;
+    return(newImage);
 }
 
 inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
@@ -110,12 +121,12 @@ inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
     {
         if(rect.intersects(*rectPoi))
         {
-            return true;
+            return(true);
         }
         rectPoi++;
     }
     rectPois << rect;
-    return false;
+    return(false);
 }
 
 
@@ -147,7 +158,6 @@ CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
 
 CMapIMG::~CMapIMG()
 {
-
 }
 
 void CMapIMG::setupTyp()
@@ -426,8 +436,6 @@ void CMapIMG::setupTyp()
         file.close();
         break;
     }
-
-
 }
 
 void CMapIMG::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data)
@@ -466,7 +474,6 @@ void CMapIMG::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray&
     {
         *p++ ^= mask;
     }
-
 }
 
 
@@ -554,7 +561,7 @@ void CMapIMG::readBasics()
                     storing the subfile's name and type. The first part
                     with a size info and it's name / type not stored in the
                     set is used to get the location information.
-    */
+     */
     QSet<QString> subfileNames;
     while(dataoffset < (size_t)fsize)
     {
@@ -576,7 +583,6 @@ void CMapIMG::readBasics()
             // skip MAPSORC.MPS section
             if(strcmp(tmpstr,"MAPSOURC") && strcmp(tmpstr,"SENDMAP2"))
             {
-
                 subfile_desc_t& subfile = subfiles[tmpstr];
                 subfile.name = tmpstr;
 
@@ -587,7 +593,6 @@ void CMapIMG::readBasics()
                 part.size   = gar_load(uint32_t, pFATBlock->size);
                 part.offset = gar_load(uint16_t, pFATBlock->blocks[0]) * blocksize;
             }
-
         }
 
         dataoffset += sizeof(FATblock_t);
@@ -636,7 +641,10 @@ void CMapIMG::readBasics()
     while(subfile != subfiles.end())
     {
         PROGRESS(cnt++, throw exce_t(errAbort,tr("User abort: ") + filename))
-        if((*subfile).parts.contains("GMP")) throw exce_t(errFormat,tr("File is NT format. QMapShack is unable to read map files with NT format: ") + filename);
+        if((*subfile).parts.contains("GMP"))
+        {
+            throw exce_t(errFormat,tr("File is NT format. QMapShack is unable to read map files with NT format: ") + filename);
+        }
 
         readSubfileBasics(*subfile, file);
 
@@ -645,7 +653,7 @@ void CMapIMG::readBasics()
 
     // combine copyright sections
     copyright.clear();
-    foreach(const QString& str, copyrights)
+    foreach(const QString &str, copyrights)
     {
         if(!copyright.isEmpty())
         {
@@ -661,7 +669,10 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 {
     quint32 i;
     // test for mandatory subfile parts
-    if(!(subfile.parts.contains("TRE") && subfile.parts.contains("RGN"))) return;
+    if(!(subfile.parts.contains("TRE") && subfile.parts.contains("RGN")))
+    {
+        return;
+    }
 
     QByteArray trehdr;
     readFile(file, subfile.parts["TRE"].offset, sizeof(hdr_tre_t), trehdr);
@@ -689,7 +700,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     subfile.east = GARMIN_RAD(i32);
     i32 = gar_ptr_load(int24_t, &pTreHdr->southbound);
     subfile.south = GARMIN_RAD(i32);
-    i32 = gar_ptr_load(int24_t, &pTreHdr->westbound);   
+    i32 = gar_ptr_load(int24_t, &pTreHdr->westbound);
     subfile.west = GARMIN_RAD(i32);
 
     if(subfile.east == subfile.west)
@@ -725,8 +736,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     if(pTreHdr->flag & 0x80)
     {
         throw exce_t(errLock,tr("File contains locked / encypted data. Garmin does not "
-            "want you to use this file with any other software than "
-            "the one supplied by Garmin."));
+                                "want you to use this file with any other software than "
+                                "the one supplied by Garmin."));
     }
 
     quint32 nlevels             = gar_load(uint32_t, pTreHdr->tre1_size) / sizeof(tre_map_level_t);
@@ -744,7 +755,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         nsubdivs_last   = gar_load(uint16_t, pMapLevel->nsubdiv);
 #ifdef DEBUG_SHOW_MAPLEVEL_DATA
         qDebug() << "level" << TRE_MAP_LEVEL(pMapLevel) << "inherited" << TRE_MAP_INHER(pMapLevel)
-            << "bits" << pMapLevel->bits << "#subdivs" << gar_load(uint16_t, pMapLevel->nsubdiv);
+                 << "bits" << pMapLevel->bits << "#subdivs" << gar_load(uint16_t, pMapLevel->nsubdiv);
 #endif                   // DEBUG_SHOW_MAPLEVEL_DATA
         ++pMapLevel;
     }
@@ -897,7 +908,6 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     // read extended NT elements
     if((gar_load(uint16_t, pTreHdr->hdr_subfile_part_t::length) >= 0x9A) && pTreHdr->tre7_size && (gar_load(uint16_t, pTreHdr->tre7_rec_size) >= sizeof(tre_subdiv2_t)))
     {
-
         rgnoff = subfile.parts["RGN"].offset;
         //         qDebug() << subdivs.count() << (pTreHdr->tre7_size / pTreHdr->tre7_rec_size) << pTreHdr->tre7_rec_size;
         QByteArray subdiv2;
@@ -908,7 +918,10 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         //        const quint32 entries2 = subdivs.size();
 
         bool skipPois = true;
-        if(gar_load(uint16_t, pTreHdr->tre7_rec_size) == sizeof(tre_subdiv2_t)) skipPois = false;
+        if(gar_load(uint16_t, pTreHdr->tre7_rec_size) == sizeof(tre_subdiv2_t))
+        {
+            skipPois = false;
+        }
 
         //         for(int i = 0; i < pTreHdr->tre7_rec_size; ++i){
         //             if(i%4 == 0) fprintf(stderr,"\n");
@@ -927,7 +940,6 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
         while(subdiv != subdivs.end())
         {
-
             //             for(int i = 0; i < pTreHdr->tre7_rec_size; ++i){
             //                 if(i%4 == 0) fprintf(stderr,"\n");
             //                 fprintf(stderr,"%02X ", ((quint8*)pSubDiv2)[i]);
@@ -951,7 +963,6 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         subdiv_prev->lengthPolygons2  = rgnOffPolyg2 + rgnLenPolyg2 - subdiv_prev->offsetPolygons2;
         subdiv_prev->lengthPolylines2 = rgnOffPolyl2 + rgnLenPolyl2 - subdiv_prev->offsetPolylines2;
         subdiv_prev->lengthPoints2    = skipPois ? 0 : rgnOffPoint2 + rgnLenPoint2 - subdiv_prev->offsetPoints2;
-
     }
 
     subfile.subdivs = subdivs;
@@ -1019,28 +1030,37 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
         switch(pLblHdr->coding)
         {
-            case 0x06:
-                subfile.strtbl = new CGarminStrTbl6(codepage, mask, this);
-                subfile.strtbl->registerLBL1(offsetLbl1, gar_load(uint32_t, pLblHdr->lbl1_length), pLblHdr->addr_shift);
-                subfile.strtbl->registerLBL6(offsetLbl6, gar_load(uint32_t, pLblHdr->lbl6_length));
-                if(pNetHdr) subfile.strtbl->registerNET1(offsetNet1, gar_load(uint32_t, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
-                break;
+        case 0x06:
+            subfile.strtbl = new CGarminStrTbl6(codepage, mask, this);
+            subfile.strtbl->registerLBL1(offsetLbl1, gar_load(uint32_t, pLblHdr->lbl1_length), pLblHdr->addr_shift);
+            subfile.strtbl->registerLBL6(offsetLbl6, gar_load(uint32_t, pLblHdr->lbl6_length));
+            if(pNetHdr)
+            {
+                subfile.strtbl->registerNET1(offsetNet1, gar_load(uint32_t, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
+            }
+            break;
 
-            case 0x09:
-                subfile.strtbl = new CGarminStrTbl8(codepage, mask, this);
-                subfile.strtbl->registerLBL1(offsetLbl1, gar_load(uint32_t, pLblHdr->lbl1_length), pLblHdr->addr_shift);
-                subfile.strtbl->registerLBL6(offsetLbl6, gar_load(uint32_t, pLblHdr->lbl6_length));
-                if(pNetHdr) subfile.strtbl->registerNET1(offsetNet1, gar_load(uint32_t, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
-                break;
+        case 0x09:
+            subfile.strtbl = new CGarminStrTbl8(codepage, mask, this);
+            subfile.strtbl->registerLBL1(offsetLbl1, gar_load(uint32_t, pLblHdr->lbl1_length), pLblHdr->addr_shift);
+            subfile.strtbl->registerLBL6(offsetLbl6, gar_load(uint32_t, pLblHdr->lbl6_length));
+            if(pNetHdr)
+            {
+                subfile.strtbl->registerNET1(offsetNet1, gar_load(uint32_t, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
+            }
+            break;
 
-            case 0x0A:
-                subfile.strtbl = new CGarminStrTblUtf8(codepage, mask, this);
-                subfile.strtbl->registerLBL1(offsetLbl1, gar_load(uint32_t, pLblHdr->lbl1_length), pLblHdr->addr_shift);
-                subfile.strtbl->registerLBL6(offsetLbl6, gar_load(uint32_t, pLblHdr->lbl6_length));
-                if(pNetHdr) subfile.strtbl->registerNET1(offsetNet1, gar_load(uint32_t, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
-                break;
+        case 0x0A:
+            subfile.strtbl = new CGarminStrTblUtf8(codepage, mask, this);
+            subfile.strtbl->registerLBL1(offsetLbl1, gar_load(uint32_t, pLblHdr->lbl1_length), pLblHdr->addr_shift);
+            subfile.strtbl->registerLBL6(offsetLbl6, gar_load(uint32_t, pLblHdr->lbl6_length));
+            if(pNetHdr)
+            {
+                subfile.strtbl->registerNET1(offsetNet1, gar_load(uint32_t, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
+            }
+            break;
 
-            default:;
+        default:;
             qWarning() << "Unknown label coding" << hex << pLblHdr->coding;
         }
     }
@@ -1048,7 +1068,6 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
 void CMapIMG::processPrimaryMapData()
 {
-
     QMap<QString,subfile_desc_t>::const_iterator subfile = subfiles.begin();
     /*
      * Query all subfiles for possible maplevels.
@@ -1088,36 +1107,100 @@ void CMapIMG::processPrimaryMapData()
         qDebug() << ml.bits << ml.level << ml.useBaseMap;
     }
 #endif
-
-
 }
 
 
-quint8  CMapIMG::scale2bits(const QPointF& scale)
+quint8 CMapIMG::scale2bits(const QPointF& scale)
 {
-    if(scale.x() >= 70000.0) return 2;
-    if(scale.x() >= 50000.0) return 3;
-    if(scale.x() >= 30000.0) return 4;
-    if(scale.x() >= 20000.0) return 5;
-    if(scale.x() >= 15000.0) return 6;
-    if(scale.x() >= 10000.0) return 7;
-    if(scale.x() >= 7000.0) return 8;
-    if(scale.x() >= 5000.0) return 9;
-    if(scale.x() >= 3000.0) return 10;
-    if(scale.x() >= 2000.0) return 11;
-    if(scale.x() >= 1500.0) return 12;
-    if(scale.x() >= 1000.0) return 13;
-    if(scale.x() >= 700.0) return 14;
-    if(scale.x() >= 500.0) return 15;
-    if(scale.x() >= 300.0) return 16;
-    if(scale.x() >= 200.0) return 17;
-    if(scale.x() >= 100.0) return 18;
-    if(scale.x() >= 70.0) return 19;
-    if(scale.x() >= 30.0) return 20;
-    if(scale.x() >= 15.0) return 21;
-    if(scale.x() >= 7.0) return 22;
-    if(scale.x() >= 3.0) return 23;
-    return 24;
+    if(scale.x() >= 70000.0)
+    {
+        return( 2);
+    }
+    if(scale.x() >= 50000.0)
+    {
+        return( 3);
+    }
+    if(scale.x() >= 30000.0)
+    {
+        return( 4);
+    }
+    if(scale.x() >= 20000.0)
+    {
+        return( 5);
+    }
+    if(scale.x() >= 15000.0)
+    {
+        return( 6);
+    }
+    if(scale.x() >= 10000.0)
+    {
+        return( 7);
+    }
+    if(scale.x() >= 7000.0)
+    {
+        return( 8);
+    }
+    if(scale.x() >= 5000.0)
+    {
+        return( 9);
+    }
+    if(scale.x() >= 3000.0)
+    {
+        return( 10);
+    }
+    if(scale.x() >= 2000.0)
+    {
+        return( 11);
+    }
+    if(scale.x() >= 1500.0)
+    {
+        return( 12);
+    }
+    if(scale.x() >= 1000.0)
+    {
+        return( 13);
+    }
+    if(scale.x() >= 700.0)
+    {
+        return( 14);
+    }
+    if(scale.x() >= 500.0)
+    {
+        return( 15);
+    }
+    if(scale.x() >= 300.0)
+    {
+        return( 16);
+    }
+    if(scale.x() >= 200.0)
+    {
+        return( 17);
+    }
+    if(scale.x() >= 100.0)
+    {
+        return( 18);
+    }
+    if(scale.x() >= 70.0)
+    {
+        return( 19);
+    }
+    if(scale.x() >= 30.0)
+    {
+        return( 20);
+    }
+    if(scale.x() >= 15.0)
+    {
+        return( 21);
+    }
+    if(scale.x() >= 7.0)
+    {
+        return( 22);
+    }
+    if(scale.x() >= 3.0)
+    {
+        return( 23);
+    }
+    return(24);
 }
 
 void CMapIMG::draw(IDrawContext::buffer_t& buf)
@@ -1159,8 +1242,12 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf)
     do
     {
         --maplevel;
-        if(bits >= maplevel->bits) break;
-    } while(maplevel != maplevels.begin());
+        if(bits >= maplevel->bits)
+        {
+            break;
+        }
+    }
+    while(maplevel != maplevels.begin());
 
     QPointF pt1 = buf.ref1;
     QPointF pt2 = buf.ref2;
@@ -1334,7 +1421,10 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
 void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStrTbl * strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois)
 {
-    if(subdiv.rgn_start == subdiv.rgn_end && !subdiv.lengthPolygons2 && !subdiv.lengthPolylines2 && !subdiv.lengthPoints2) return;
+    if(subdiv.rgn_start == subdiv.rgn_end && !subdiv.lengthPolygons2 && !subdiv.lengthPolylines2 && !subdiv.lengthPoints2)
+    {
+        return;
+    }
     //fprintf(stderr, "loadSubDiv\n");
     //     qDebug() << "---------" << file.fileName() << "---------";
 
@@ -1363,7 +1453,6 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
         {
             oidx = (objCnt - 1) * sizeof(quint16) + subdiv.rgn_start;
         }
-
     }
     // test for polylines
     if(subdiv.hasPolylines)
@@ -1427,7 +1516,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             if(strtbl)
             {
                 p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
-                    : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
+                : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
             }
 
             points.push_back(p);
@@ -1453,7 +1542,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             if(strtbl)
             {
                 p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
-                    : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
+                : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
             }
 
             pois.push_back(p);
@@ -1551,7 +1640,6 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             }
 
             polygons.push_back(p);
-
         }
     }
 
@@ -1598,12 +1686,11 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             if(strtbl)
             {
                 p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
-                    : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
+                : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
             }
             pois.push_back(p);
         }
     }
-
 }
 
 void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
@@ -1621,7 +1708,6 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
         polytype_t::iterator item = lines.begin();
         while (item != lines.end())
         {
-
             if(item->type != type)
             {
                 ++item;
@@ -1636,11 +1722,13 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
 
             p.drawPolygon(poly);
 
-            if(!polygonProperties[type].known) qDebug() << "unknown polygon" << hex << type;
+            if(!polygonProperties[type].known)
+            {
+                qDebug() << "unknown polygon" << hex << type;
+            }
             ++item;
         }
     }
-
 }
 
 
@@ -1669,7 +1757,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
     QMap<quint32, CGarminTyp::polyline_property>::iterator props = polylineProperties.begin();
     QMap<quint32, CGarminTyp::polyline_property>::iterator end = polylineProperties.end();
-    for(;props != end; ++props)
+    for(; props != end; ++props)
     {
         const quint32 &type = props.key();
         const CGarminTyp::polyline_property& property = props.value();
@@ -1685,11 +1773,10 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
             const qreal h          = pixmap.height();
 
             QList<quint32>::const_iterator it = dict[type].constBegin();
-            for( ; it != dict[type].constEnd() ; ++it)
+            for(; it != dict[type].constEnd(); ++it)
             {
                 CGarminPolygon &item = lines[*it];
                 {
-
                     pixmapCount++;
 
                     QPolygonF& poly = item.pixel;
@@ -1779,7 +1866,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                 p.setPen(CMainWindow::self().isNight() ? property.penBorderNight : property.penBorderDay);
 
                 QList<quint32>::const_iterator it = dict[type].constBegin();
-                for( ; it != dict[type].constEnd() ; ++it)
+                for(; it != dict[type].constEnd(); ++it)
                 {
                     borderCount++;
                     drawLine(p, lines[*it], property, metrics, font, scale);
@@ -1791,7 +1878,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                 p.setPen(CMainWindow::self().isNight() ? property.penLineNight : property.penLineDay);
 
                 QList<quint32>::const_iterator it = dict[type].constBegin();
-                for( ; it != dict[type].constEnd() ; ++it)
+                for(; it != dict[type].constEnd(); ++it)
                 {
                     normalCount++;
                     drawLine(p, lines[*it], property, metrics, font, scale);
@@ -1802,7 +1889,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
     // 2nd run to draw foreground lines.
     props = polylineProperties.begin();
-    for(;props != end; ++props)
+    for(; props != end; ++props)
     {
         const quint32 &type = props.key();
         const CGarminTyp::polyline_property& property = props.value();
@@ -1818,7 +1905,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
             p.setPen(CMainWindow::self().isNight() ? property.penLineNight : property.penLineDay);
 
             QList<quint32>::const_iterator it = dict[type].constBegin();
-            for( ; it != dict[type].constEnd() ; ++it)
+            for(; it != dict[type].constEnd(); ++it)
             {
                 drawLine(p, lines[*it]);
             }
@@ -1875,33 +1962,34 @@ void CMapIMG::drawLine(QPainter& p, const CGarminPolygon& l)
 
 void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QFontMetricsF& metrics, qint32 lineWidth)
 {
-
     QString str;
     if (!item.labels.isEmpty())
     {
-
         switch(item.type)
         {
-            case 0x23:
-            case 0x20:
-            case 0x24:
-            case 0x21:
-            case 0x25:
-            case 0x22:
-            {
-                QString unit;
-                QString val = item.labels[0];
-                IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-                str = QString("%1 %2").arg(val).arg(unit);
-            }
-            break;
+        case 0x23:
+        case 0x20:
+        case 0x24:
+        case 0x21:
+        case 0x25:
+        case 0x22:
+        {
+            QString unit;
+            QString val = item.labels[0];
+            IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+            str = QString("%1 %2").arg(val).arg(unit);
+        }
+        break;
 
-            default:
-                str = item.labels.join(" ").simplified();
+        default:
+            str = item.labels.join(" ").simplified();
         }
     }
 
-    if(str.isEmpty()) return;
+    if(str.isEmpty())
+    {
+        return;
+    }
 
     textpath_t tp;
     tp.polyline     = line;
@@ -1927,7 +2015,6 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
     pointtype_t::iterator pt = pts.begin();
     while(pt != pts.end())
     {
-
 //        if((pt->type > 0x1600) && (zoomFactor > CResources::self().getZoomLevelThresholdPois()))
 //        {
 //            ++pt;
@@ -1967,7 +2054,6 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 
         if(CMainWindow::self().isPOIText() && showLabel)
         {
-
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt->labels.join(" "));
             rect.adjust(0,0,4,4);
@@ -1977,7 +2063,10 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
             QVector<strlbl_t>::const_iterator label = labels.constBegin();
             while(label != labels.constEnd())
             {
-                if(label->rect.intersects(rect)) break;
+                if(label->rect.intersects(rect))
+                {
+                    break;
+                }
                 ++label;
             }
 
@@ -2068,7 +2157,6 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
 
         if(CMainWindow::self().isPOIText())
         {
-
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt->labels.join(" "));
             rect.adjust(0,0,4,4);
@@ -2078,7 +2166,10 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
             QVector<strlbl_t>::const_iterator label = labels.begin();
             while(label != labels.end())
             {
-                if(label->rect.intersects(rect)) break;
+                if(label->rect.intersects(rect))
+                {
+                    break;
+                }
                 ++label;
             }
 
@@ -2171,7 +2262,10 @@ void CMapIMG::drawText(QPainter& p)
             fm      = QFontMetricsF(font);
             width   = fm.width(textpath->text);
 
-            if((font.pixelSize() < 8)) break;
+            if((font.pixelSize() < 8))
+            {
+                break;
+            }
         }
 
         // no way to draw a readable string - skip
@@ -2231,7 +2325,6 @@ void CMapIMG::drawText(QPainter& p)
 
         for(int i = 0; i < size; ++i)
         {
-
             percent1  = percent2;
             percent2  = (offset + fm.width(text[i])) / length;
 
@@ -2277,12 +2370,10 @@ void CMapIMG::drawText(QPainter& p)
 
 void CMapIMG::getInfo(const QPoint& px, QString& str)
 {
-
 }
 
 void CMapIMG::getToolTip(const QPoint& px, QString& infotext)
 {
-
     bool first = true;
     QMultiMap<QString, QString> dict;
     getInfoPoints(px, dict);
@@ -2293,7 +2384,7 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext)
 
     QString str;
 
-    foreach(const QString& value, values)
+    foreach(const QString &value, values)
     {
         if(value == "-")
         {
@@ -2314,7 +2405,7 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext)
     if(str.isEmpty())
     {
         getInfoPolygons(px, dict);
-        foreach(const QString& value, values)
+        foreach(const QString &value, values)
         {
             if(value == "-")
             {
@@ -2346,7 +2437,6 @@ void CMapIMG::getInfoPoints(const QPoint& pt, QMultiMap<QString, QString>& dict)
         {
             if(point->labels.size())
             {
-
                 QString str;
                 if((point->type == 0x6200)||(point->type == 0x6300))
                 {
@@ -2397,7 +2487,6 @@ void CMapIMG::getInfoPoints(const QPoint& pt, QMultiMap<QString, QString>& dict)
         }
         ++point;
     }
-
 }
 
 
@@ -2509,7 +2598,10 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 
             u = ((pt.x() - p1.u) * dx + (pt.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
 
-            if(u < 0.0 || u > 1.0) continue;
+            if(u < 0.0 || u > 1.0)
+            {
+                continue;
+            }
 
             x = p1.u + u * dx;
             y = p1.v + u * dy;
@@ -2524,28 +2616,28 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
                 {
                     switch(type)
                     {
-                                 // "Minor depth contour"
-                        case 0x23:
-                                 // "Minor land contour"
-                        case 0x20:
-                                 // "Intermediate depth contour",
-                        case 0x24:
-                                 // "Intermediate land contour",
-                        case 0x21:
-                                 // "Major depth contour",
-                        case 0x25:
-                                 // "Major land contour",
-                        case 0x22:
-                        {
-                            QString unit;
-                            QString val = line->labels[0];
-                            IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-                            value = QString("%1 %2").arg(val).arg(unit);
-                        }
-                        break;
+                    // "Minor depth contour"
+                    case 0x23:
+                    // "Minor land contour"
+                    case 0x20:
+                    // "Intermediate depth contour",
+                    case 0x24:
+                    // "Intermediate land contour",
+                    case 0x21:
+                    // "Major depth contour",
+                    case 0x25:
+                    // "Major land contour",
+                    case 0x22:
+                    {
+                        QString unit;
+                        QString val = line->labels[0];
+                        IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                        value = QString("%1 %2").arg(val).arg(unit);
+                    }
+                    break;
 
-                        default:
-                            value = line->labels.join(" ").simplified();
+                    default:
+                        value = line->labels.join(" ").simplified();
                     }
                 }
                 else
@@ -2557,7 +2649,6 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
                 shortest = distance;
                 found = true;
             }
-
         }
         ++line;
     }
@@ -2593,17 +2684,16 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 
 void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict)
 {
-    int     npol;
-    int     i = 0, j = 0 ,c = 0;
-    projXY      p1, p2;          // the two points of the polyline close to pt
-    qreal  x = pt.x();
-    qreal  y = pt.y();
+    int npol;
+    int i = 0, j = 0,c = 0;
+    projXY p1, p2;               // the two points of the polyline close to pt
+    qreal x = pt.x();
+    qreal y = pt.y();
     QString value;
 
     polytype_t::const_iterator line = polygons.begin();
     while(line != polygons.end())
     {
-
         npol = line->pixel.size();
         if(npol > 2)
         {
@@ -2631,7 +2721,6 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
                 }
                 else
                 {
-
                     if(selectedLanguage != -1)
                     {
                         if(polygonProperties[line->type].strings[selectedLanguage].size())
@@ -2646,7 +2735,6 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
                             dict.insert(tr("Area"), polygonProperties[line->type].strings[0]);
                         }
                     }
-
                 }
             }
         }
@@ -2698,14 +2786,14 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
         }
     }
 
-    return d;
+    return(d);
 }
 
 
 
 bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
 {
-    foreach(const CGarminPolygon& line, polylines)
+    foreach(const CGarminPolygon &line, polylines)
     {
         if(line.pixel.size() < 2)
         {
@@ -2726,5 +2814,5 @@ bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, 
         }
     }
 
-    return !polyline.isEmpty();
+    return(!polyline.isEmpty());
 }

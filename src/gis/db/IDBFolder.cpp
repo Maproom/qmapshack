@@ -16,40 +16,37 @@
 
 **********************************************************************************************/
 
-#include "gis/db/macros.h"
-#include "gis/db/IDBFolder.h"
-#include "gis/db/CDBFolderGroup.h"
-#include "gis/db/CDBFolderProject.h"
-#include "gis/db/CDBFolderOther.h"
-#include "gis/db/CDBItem.h"
-#include "gis/db/CDBFolderDatabase.h"
 #include "gis/CGisListDB.h"
-#include "gis/IGisItem.h"
 #include "gis/CGisWidget.h"
+#include "gis/IGisItem.h"
+#include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderGroup.h"
+#include "gis/db/CDBFolderOther.h"
+#include "gis/db/CDBFolderProject.h"
+#include "gis/db/CDBItem.h"
+#include "gis/db/IDBFolder.h"
+#include "gis/db/macros.h"
 
 #include <QtSql>
 
 IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem *parent)
-    : QTreeWidgetItem(parent, type)    
+    : QTreeWidgetItem(parent, type)
     , db(db)
     , id(id)
     , isLoadable(isLoadable)
 {
-
 }
 
 IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent)
-    : QTreeWidgetItem(parent, type)    
+    : QTreeWidgetItem(parent, type)
     , db(db)
     , id(id)
     , isLoadable(isLoadable)
 {
-
 }
 
 IDBFolder::~IDBFolder()
 {
-
 }
 
 bool IDBFolder::operator<(const QTreeWidgetItem &other) const
@@ -57,11 +54,11 @@ bool IDBFolder::operator<(const QTreeWidgetItem &other) const
     const IDBFolder * folder = dynamic_cast<const IDBFolder*>(&other);
     if(folder == 0)
     {
-        return false;
+        return(false);
     }
 
 
-    return text(CGisListDB::eColumnName) < folder->text(CGisListDB::eColumnName);
+    return(text(CGisListDB::eColumnName) < folder->text(CGisListDB::eColumnName));
 }
 
 IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem * parent)
@@ -69,34 +66,37 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
     switch(type)
     {
     case eTypeGroup:
-        return new CDBFolderGroup(db, id, parent);
+        return(new CDBFolderGroup(db, id, parent));
+
     case eTypeProject:
-        return new CDBFolderProject(db, id, parent);
+        return(new CDBFolderProject(db, id, parent));
+
     case eTypeOther:
-        return new CDBFolderOther(db, id, parent);
+        return(new CDBFolderOther(db, id, parent));
+
     default:
-        return 0;
+        return(0);
     }
 }
 
 QString IDBFolder::getDBName()
 {
-    return db.connectionName();
+    return(db.connectionName());
 }
 
 CDBFolderDatabase * IDBFolder::getDBFolder()
 {
     if(type() == eTypeDatabase)
     {
-        return dynamic_cast<CDBFolderDatabase*>(this);
+        return(dynamic_cast<CDBFolderDatabase*>(this));
     }
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
     if(folder != 0)
     {
-        return folder->getDBFolder();
+        return(folder->getDBFolder());
     }
-    return 0;
+    return(0);
 }
 
 void IDBFolder::addFolder(type_e type, const QString& name)
@@ -105,10 +105,10 @@ void IDBFolder::addFolder(type_e type, const QString& name)
     query.prepare("INSERT INTO folders (name, type) VALUES (:name, :type)");
     query.bindValue(":name", name);
     query.bindValue(":type", type);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 
     query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
     quint64 idChild = query.value(0).toULongLong();
     if(idChild == 0)
@@ -120,7 +120,7 @@ void IDBFolder::addFolder(type_e type, const QString& name)
     query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
     query.bindValue(":parent", id);
     query.bindValue(":child", idChild);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 
     IDBFolder::createFolderByType(db, type, idChild, this);
 }
@@ -136,7 +136,6 @@ void IDBFolder::expanding()
 
 void IDBFolder::update(CEvtW2DAckInfo * info)
 {
-
     if(info->id != id)
     {
         // forward call if not for local ID
@@ -157,7 +156,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     // update text and tooltip
     query.prepare("SELECT name, comment FROM folders WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
 
     setText(CGisListDB::eColumnName, query.value(0).toString());
@@ -166,7 +165,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     // count folders linked to this folder
     query.prepare("SELECT COUNT() FROM folder2folder WHERE parent=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
 
     qint32 nFolders = query.value(0).toInt();
@@ -174,7 +173,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     // count items linked to this folder
     query.prepare("SELECT COUNT() FROM folder2item WHERE parent=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
 
     qint32 nItems = query.value(0).toInt();
@@ -192,7 +191,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     if(isExpanded())
     {
         qDeleteAll(takeChildren());
-        addChildren(info->keysChildren);        
+        addChildren(info->keysChildren);
     }
 }
 
@@ -213,7 +212,7 @@ void IDBFolder::toggle()
             query.prepare("SELECT t1.child, t2.type FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
             query.bindValue(":id", getId());
         }
-        QUERY_EXEC(return);
+        QUERY_EXEC(return );
 
         CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(getId(), getDBName());
         while(query.next())
@@ -231,7 +230,6 @@ void IDBFolder::toggle()
 
 void IDBFolder::remove()
 {
-
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
     if(folder == 0)
     {
@@ -254,7 +252,7 @@ void IDBFolder::setupFromDB()
 
     query.prepare("SELECT key, name, comment FROM folders WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
 
     key = query.value(0).toString();
@@ -263,7 +261,7 @@ void IDBFolder::setupFromDB()
 
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.next();
 
     if(query.value(0).toInt() == 1)
@@ -274,7 +272,7 @@ void IDBFolder::setupFromDB()
     {
         query.prepare("SELECT EXISTS(SELECT 1 FROM folder2item WHERE parent=:id LIMIT 1)");
         query.bindValue(":id", id);
-        QUERY_EXEC(return);
+        QUERY_EXEC(return );
         query.next();
         if(query.value(0).toInt() == 1)
         {
@@ -297,7 +295,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     // folders 1st
     query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 idChild     = query.value(0).toULongLong();
@@ -311,7 +309,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeTrk);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
@@ -323,7 +321,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeRte);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
@@ -335,7 +333,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeWpt);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
@@ -347,7 +345,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeOvl);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
@@ -363,17 +361,17 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
     query.prepare("DELETE FROM folder2folder WHERE parent=:parent AND child=:child");
     query.bindValue(":parent", idParent);
     query.bindValue(":child", idFolder);
-    QUERY_EXEC(;);
+    QUERY_EXEC(; );
 
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE child=:id LIMIT 1)");
     query.bindValue(":id", idFolder);
-    QUERY_EXEC(;);
+    QUERY_EXEC(; );
     // if there is no other relation delete the children, too.
     if(!query.next() || (query.value(0).toInt() == 0))
     {
         query.prepare("SELECT child FROM folder2folder WHERE parent=:id");
         query.bindValue(":id", idFolder);
-        QUERY_EXEC(;);
+        QUERY_EXEC(; );
         while(query.next())
         {
             remove(idFolder, query.value(0).toULongLong());
@@ -382,11 +380,11 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
         // remove the child items relations
         query.prepare("DELETE FROM folder2item WHERE parent=:id");
         query.bindValue(":id", idFolder);
-        QUERY_EXEC(;);
+        QUERY_EXEC(; );
 
         // and remove the folder
         query.prepare("DELETE FROM folders WHERE id=:id");
         query.bindValue(":id", idFolder);
-        QUERY_EXEC(;);
+        QUERY_EXEC(; );
     }
 }

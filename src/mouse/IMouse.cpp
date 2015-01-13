@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "mouse/IMouse.h"
 #include "canvas/CCanvas.h"
+#include "mouse/IMouse.h"
 #include <gis/CGisDraw.h>
 
 #include <QtWidgets>
@@ -36,7 +36,6 @@ IMouse::IMouse(CGisDraw *gis, CCanvas *canvas)
 
 IMouse::~IMouse()
 {
-
 }
 
 void IMouse::setMouseTracking(bool enabled)
@@ -59,7 +58,7 @@ void IMouse::panCanvas(const QPoint& pos)
     if(pos.x() < SENSITIVE_FRAME)
     {
         int d = SENSITIVE_FRAME - pos.x();
-        canvas->moveMap(QPointF(d/2 , 0));
+        canvas->moveMap(QPointF(d/2, 0));
         timer->start();
     }
     else if(pos.x() > canvas->width() - SENSITIVE_FRAME)
@@ -86,5 +85,4 @@ void IMouse::panCanvas(const QPoint& pos)
     }
 
     canvas->update();
-
 }

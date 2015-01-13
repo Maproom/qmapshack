@@ -19,113 +19,114 @@
 #ifndef IPLOT_H
 #define IPLOT_H
 
-#include <QWidget>
-#include "plot/CPlotData.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "plot/CPlotData.h"
+#include <QWidget>
 
 class IPlot : public QWidget
 {
     Q_OBJECT
-    public:
-        enum mode_e {eModeNormal, eModeIcon};
+public:
+    enum mode_e {eModeNormal, eModeIcon};
 
-        IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
-        virtual ~IPlot();
+    IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
+    virtual ~IPlot();
 
-        virtual void updateData() = 0;
-        virtual void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt) = 0;
+    virtual void updateData() = 0;
+    virtual void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt) = 0;
 
-        void save(QImage& image);
-        void setSolid(bool yes){solid = yes;}
+    void save(QImage& image);
+    void setSolid(bool yes)
+    {
+        solid = yes;
+    }
 
-    protected:
-        void setYLabel(const QString& str);
-        void setXLabel(const QString& str);
-        void clear();
-        void newLine(const QPolygonF& line, const QString& label);
-        void addLine(const QPolygonF& line, const QString& label);
-        void setLimits();
-        void resetZoom();
+protected:
+    void setYLabel(const QString& str);
+    void setXLabel(const QString& str);
+    void clear();
+    void newLine(const QPolygonF& line, const QString& label);
+    void addLine(const QPolygonF& line, const QString& label);
+    void setLimits();
+    void resetZoom();
 
-        void paintEvent(QPaintEvent * e);
-        void resizeEvent(QResizeEvent * e);
-        void leaveEvent(QEvent * e);
-        void enterEvent(QEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
-        void mousePressEvent(QMouseEvent * e);
-
-
-        void setSizes();
-        void setLRTB();
-        void setSizeIconArea();
-        void setSizeXLabel();
-        void setSizeYLabel();
-        void setSizeTrackInfo();
-        void setSizeDrawArea();
-
-        void draw(QPainter& p);
-        void draw();
-        void drawData(QPainter& p);
-        void drawLabels( QPainter &p );
-        void drawXScale( QPainter &p );
-        void drawYScale( QPainter &p );
-        void drawGridX( QPainter &p );
-        void drawGridY( QPainter &p );
-        void drawXTic( QPainter &p );
-        void drawYTic( QPainter &p );
-        void drawLegend(QPainter& p);
-        void drawDecoration( QPainter &p );
-
-        // different draw modes
-        mode_e mode;
-        // buffer needs update
-        bool needsRedraw;
-
-        bool showScale;
-        bool thinLine;
-        bool solid;
-
-        QImage buffer;
-        QPoint posMouse;
-
-        /**
-           @brief The track this plot is attached to
-
-           @note It is save to store the pointer to the track item because
-                 the plot objects registers/unregisters with the track during
-                 construction and destruction.
-
-                 See CGisItem::registeredPlots for details.
-         */
-        CGisItemTrk * trk;
-        CPlotData * data;
-
-        QFontMetrics fm;
-
-        int left;
-        int right;
-        int top;
-        int bottom;
-
-        int deadAreaX;
-        int deadAreaY;
-
-        int fontWidth;
-        int fontHeight;
-        int scaleWidthX1;
-        int scaleWidthY1;
-
-        QRect rectX1Label;
-        QRect rectY1Label;
-        QRect rectGraphArea;
-        QRect rectIconArea;
-        QRect rectTrackInfo;
-
-        static QPen pens[];
-        static QPen pensThin[];
-        static QColor colors[];
+    void paintEvent(QPaintEvent * e);
+    void resizeEvent(QResizeEvent * e);
+    void leaveEvent(QEvent * e);
+    void enterEvent(QEvent * e);
+    void mouseMoveEvent(QMouseEvent * e);
+    void mousePressEvent(QMouseEvent * e);
 
 
+    void setSizes();
+    void setLRTB();
+    void setSizeIconArea();
+    void setSizeXLabel();
+    void setSizeYLabel();
+    void setSizeTrackInfo();
+    void setSizeDrawArea();
+
+    void draw(QPainter& p);
+    void draw();
+    void drawData(QPainter& p);
+    void drawLabels( QPainter &p );
+    void drawXScale( QPainter &p );
+    void drawYScale( QPainter &p );
+    void drawGridX( QPainter &p );
+    void drawGridY( QPainter &p );
+    void drawXTic( QPainter &p );
+    void drawYTic( QPainter &p );
+    void drawLegend(QPainter& p);
+    void drawDecoration( QPainter &p );
+
+    // different draw modes
+    mode_e mode;
+    // buffer needs update
+    bool needsRedraw;
+
+    bool showScale;
+    bool thinLine;
+    bool solid;
+
+    QImage buffer;
+    QPoint posMouse;
+
+    /**
+       @brief The track this plot is attached to
+
+       @note It is save to store the pointer to the track item because
+             the plot objects registers/unregisters with the track during
+             construction and destruction.
+
+             See CGisItem::registeredPlots for details.
+     */
+    CGisItemTrk * trk;
+    CPlotData * data;
+
+    QFontMetrics fm;
+
+    int left;
+    int right;
+    int top;
+    int bottom;
+
+    int deadAreaX;
+    int deadAreaY;
+
+    int fontWidth;
+    int fontHeight;
+    int scaleWidthX1;
+    int scaleWidthY1;
+
+    QRect rectX1Label;
+    QRect rectY1Label;
+    QRect rectGraphArea;
+    QRect rectIconArea;
+    QRect rectTrackInfo;
+
+    static QPen pens[];
+    static QPen pensThin[];
+    static QColor colors[];
 };
 
 #endif //IPLOT_H

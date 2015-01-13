@@ -16,44 +16,43 @@
 
 **********************************************************************************************/
 
-#include "mouse/CScrOptUnclutter.h"
-#include "gis/IGisItem.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "gis/IGisItem.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "mouse/CScrOptUnclutter.h"
 
 #include <QtWidgets>
 
 const QPoint CScrOptUnclutter::positions[9][8] =
 {
     {
-
     },
 
     {
-          QPoint(-50,-23)
+        QPoint(-50,-23)
     },
 
     {
-          QPoint(-30,0)
+        QPoint(-30,0)
         , QPoint( 30,0)
     },
 
     {
-          QPoint(  0,-30)
+        QPoint(  0,-30)
         , QPoint( 30, 30)
         , QPoint(-30, 30)
     },
 
     {
-          QPoint(-30,-30)
+        QPoint(-30,-30)
         , QPoint( 30,-30)
         , QPoint(-30, 30)
         , QPoint( 30, 30)
     },
 
     {
-          QPoint(-25, 40)
+        QPoint(-25, 40)
         , QPoint( 25, 40)
         , QPoint(-40, -5)
         , QPoint( 40, -5)
@@ -61,7 +60,7 @@ const QPoint CScrOptUnclutter::positions[9][8] =
     },
 
     {
-          QPoint(-40,-22)
+        QPoint(-40,-22)
         , QPoint( 40,-22)
         , QPoint(-40, 22)
         , QPoint( 40, 22)
@@ -70,7 +69,7 @@ const QPoint CScrOptUnclutter::positions[9][8] =
     },
 
     {
-          QPoint(-50,-23)
+        QPoint(-50,-23)
         , QPoint( 50,-23)
         , QPoint(-45, 21)
         , QPoint( 45, 21)
@@ -80,7 +79,7 @@ const QPoint CScrOptUnclutter::positions[9][8] =
     },
 
     {
-          QPoint(-50,-23)
+        QPoint(-50,-23)
         , QPoint( 50,-23)
         , QPoint(-50, 23)
         , QPoint( 50, 23)
@@ -89,7 +88,6 @@ const QPoint CScrOptUnclutter::positions[9][8] =
         , QPoint(-22, 55)
         , QPoint( 22, 55)
     }
-
 };
 
 
@@ -97,12 +95,10 @@ CScrOptUnclutter::CScrOptUnclutter(QWidget *parent)
     : IScrOpt(parent)
     , doSpecialCursor(false)
 {
-
 }
 
 CScrOptUnclutter::~CScrOptUnclutter()
 {
-
 }
 
 void CScrOptUnclutter::clear()
@@ -119,7 +115,7 @@ void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
 {
     IScrOpt::mouseMoveEvent(e);
 
-    foreach(const item_t& item, items)
+    foreach(const item_t &item, items)
     {
         if(item.active.contains(mousePos))
         {
@@ -156,22 +152,22 @@ IGisItem::key_t CScrOptUnclutter::getItemKey(int index)
 {
     if(index < items.size())
     {
-        return items[index].key;
+        return(items[index].key);
     }
-    return IGisItem::key_t();
+    return(IGisItem::key_t());
 }
 
 
 const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& point)
 {
-    foreach(const item_t& item, items)
+    foreach(const item_t &item, items)
     {
         if(item.active.contains(point))
         {
-            return &item;
+            return(&item);
         }
     }
-    return 0;
+    return(0);
 }
 
 void CScrOptUnclutter::draw(QPainter& p)
@@ -184,7 +180,6 @@ void CScrOptUnclutter::draw(QPainter& p)
 
         if(item.text.isNull())
         {
-
             item.area.moveCenter(origin + positions[N][cnt]);
             item.active.moveCenter(item.area.center());
             item.text = fm.boundingRect(item.name);
@@ -200,11 +195,11 @@ void CScrOptUnclutter::draw(QPainter& p)
         }
     }
 
-    foreach(const item_t& item, items)
+    foreach(const item_t &item, items)
     {
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,255));
-        p.drawEllipse(item.area.center(), 20,20);        
+        p.drawEllipse(item.area.center(), 20,20);
         p.drawRoundedRect(item.text, 3, 3);
 
         p.setPen(QPen(item.hasUserFocus ? Qt::red : Qt::lightGray,2));

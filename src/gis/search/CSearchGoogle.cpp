@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#include "gis/search/CSearchGoogle.h"
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 #include "gis/CGisListWks.h"
 #include "gis/WptIcons.h"
+#include "gis/search/CSearchGoogle.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CWptIconDialog.h"
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconDialog.h"
 
-#include <QtWidgets>
 #include <QtNetwork>
+#include <QtWidgets>
 #include <QtXml>
 
 CSearchGoogle::CSearchGoogle(CGisListWks * parent)
@@ -64,7 +64,6 @@ void CSearchGoogle::slotChangeSymbol()
 
     SETTINGS;
     cfg.setValue("Search/symbol", actSymbol->objectName());
-
 }
 
 void CSearchGoogle::slotStartSearch()
@@ -157,7 +156,6 @@ void CSearchGoogle::slotRequestFinished(QNetworkReply* reply)
 
 
                 new CGisItemWpt(QPointF(lon,lat), address, actSymbol->objectName(), this);
-
             }
         }
     }
@@ -168,5 +166,4 @@ void CSearchGoogle::slotRequestFinished(QNetworkReply* reply)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
-
 }

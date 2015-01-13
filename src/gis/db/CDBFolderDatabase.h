@@ -26,17 +26,19 @@ class CDBFolderLostFound;
 
 class CDBFolderDatabase : public IDBFolder, private IDB
 {
-    public:
-        CDBFolderDatabase(const QString &filename, const QString &name, QTreeWidget *parent);
-        virtual ~CDBFolderDatabase();
+public:
+    CDBFolderDatabase(const QString &filename, const QString &name, QTreeWidget *parent);
+    virtual ~CDBFolderDatabase();
 
-        void expanding();
-        void updateLostFound();
-        const QString& getFilename(){return filename;}
-    private:
-        QString filename;
-        CDBFolderLostFound * folderLostFound;
-
+    void expanding();
+    void updateLostFound();
+    const QString& getFilename()
+    {
+        return( filename);
+    }
+private:
+    QString filename;
+    CDBFolderLostFound * folderLostFound;
 };
 
 #endif //CDBFOLDERDATABASE_H

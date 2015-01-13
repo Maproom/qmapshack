@@ -23,12 +23,12 @@ class QPolygonF;
 
 class IGisLine
 {
-    public:
-        IGisLine();
-        virtual ~IGisLine();
+public:
+    IGisLine();
+    virtual ~IGisLine();
 
-        virtual void setDataFromPolyline(const QPolygonF& line) = 0;
-        virtual void getPolylineFromData(QPolygonF& line) = 0;
+    virtual void setDataFromPolyline(const QPolygonF& line) = 0;
+    virtual void getPolylineFromData(QPolygonF& line) = 0;
 };
 
 #endif //IGISLINE_H

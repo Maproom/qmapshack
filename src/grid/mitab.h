@@ -20,25 +20,25 @@
 
 struct MapInfoDatumInfo
 {
-    int         nMapInfoDatumID;
+    int nMapInfoDatumID;
     const char  *pszOGCDatumName;
-    int         nEllipsoid;
-    double      dfShiftX;
-    double      dfShiftY;
-    double      dfShiftZ;
-    double      dfDatumParm0;    /* RotX */
-    double      dfDatumParm1;    /* RotY */
-    double      dfDatumParm2;    /* RotZ */
-    double      dfDatumParm3;    /* Scale Factor */
-    double      dfDatumParm4;    /* Prime Meridian */
+    int nEllipsoid;
+    double dfShiftX;
+    double dfShiftY;
+    double dfShiftZ;
+    double dfDatumParm0;         /* RotX */
+    double dfDatumParm1;         /* RotY */
+    double dfDatumParm2;         /* RotZ */
+    double dfDatumParm3;         /* Scale Factor */
+    double dfDatumParm4;         /* Prime Meridian */
 };
 
 struct MapInfoSpheroidInfo
 {
-    int         nMapInfoId;
+    int nMapInfoId;
     const char *pszMapinfoName;
-    double      dfA;             /* semi major axis in meters */
-    double      dfInvFlattening; /* Inverse flattening */
+    double dfA;                  /* semi major axis in meters */
+    double dfInvFlattening;      /* Inverse flattening */
 };
 
 extern const MapInfoDatumInfo asDatumInfoListQL[];

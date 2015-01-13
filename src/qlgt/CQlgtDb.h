@@ -19,61 +19,61 @@
 #ifndef CQLGTDB_H
 #define CQLGTDB_H
 
+#include <QDir>
 #include <QObject>
+#include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidgetItem>
-#include <QDir>
-#include <QPointer>
 
 class CImportDatabase;
 class CQmsDb;
 
 class CQlgtDb : public QObject
 {
-    public:
-        enum EntryType_e
-        {
-            eWpt        = QTreeWidgetItem::UserType + 3,
-            eTrk        = QTreeWidgetItem::UserType + 4,
-            eRte        = QTreeWidgetItem::UserType + 5,
-            eOvl        = QTreeWidgetItem::UserType + 6,
-            eMap        = QTreeWidgetItem::UserType + 7,
-            eDry        = QTreeWidgetItem::UserType + 8,
+public:
+    enum EntryType_e
+    {
+        eWpt        = QTreeWidgetItem::UserType + 3,
+        eTrk        = QTreeWidgetItem::UserType + 4,
+        eRte        = QTreeWidgetItem::UserType + 5,
+        eOvl        = QTreeWidgetItem::UserType + 6,
+        eMap        = QTreeWidgetItem::UserType + 7,
+        eDry        = QTreeWidgetItem::UserType + 8,
 
-            eFolder0    = QTreeWidgetItem::UserType + 100,
-            eFolderT    = QTreeWidgetItem::UserType + 101,
-            eFolder1    = QTreeWidgetItem::UserType + 102,
-            eFolder2    = QTreeWidgetItem::UserType + 103,
-            eFolderN    = QTreeWidgetItem::UserType + 104
-        };
+        eFolder0    = QTreeWidgetItem::UserType + 100,
+        eFolderT    = QTreeWidgetItem::UserType + 101,
+        eFolder1    = QTreeWidgetItem::UserType + 102,
+        eFolder2    = QTreeWidgetItem::UserType + 103,
+        eFolderN    = QTreeWidgetItem::UserType + 104
+    };
 
-        CQlgtDb(const QString& filename, CImportDatabase * parent);
-        virtual ~CQlgtDb();
+    CQlgtDb(const QString& filename, CImportDatabase * parent);
+    virtual ~CQlgtDb();
 
-        void start(const QString& filename);
+    void start(const QString& filename);
 
-    private:
-        void initDB();
-        void migrateDB(int version);
-        void printStatistic();
-        void xferFolders();
-        void xferItems();
-        void xferItem(quint64 id);
-        QSqlDatabase db;
-        QDir        path;
-        QString     name;
+private:
+    void initDB();
+    void migrateDB(int version);
+    void printStatistic();
+    void xferFolders();
+    void xferItems();
+    void xferItem(quint64 id);
+    QSqlDatabase db;
+    QDir path;
+    QString name;
 
-        CImportDatabase * gui;
+    CImportDatabase * gui;
 
-        QPointer<CQmsDb> dbQms;
+    QPointer<CQmsDb> dbQms;
 
-        quint32 nItems;
-        quint32 nFolders;
-        quint32 nWpt;
-        quint32 nTrk;
-        quint32 nRte;
-        quint32 nOvl;
-        quint32 nDiary;
+    quint32 nItems;
+    quint32 nFolders;
+    quint32 nWpt;
+    quint32 nTrk;
+    quint32 nRte;
+    quint32 nOvl;
+    quint32 nDiary;
 };
 
 #endif //CQLGTDB_H

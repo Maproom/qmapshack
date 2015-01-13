@@ -16,21 +16,21 @@
 
 **********************************************************************************************/
 
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/wpt/CDetailsWpt.h"
-#include "gis/wpt/CDetailsGeoCache.h"
-#include "gis/wpt/CScrOptWpt.h"
-#include "gis/prj/IGisProject.h"
-#include "gis/CGisDraw.h"
-#include "gis/WptIcons.h"
-#include "gis/CGisListWks.h"
+#include "CMainWindow.h"
+#include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "gis/CGisDraw.h"
+#include "gis/CGisListWks.h"
+#include "gis/WptIcons.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/wpt/CDetailsGeoCache.h"
+#include "gis/wpt/CDetailsWpt.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CScrOptWpt.h"
+#include "helpers/CPositionDialog.h"
+#include "helpers/CWptIconDialog.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
-#include "helpers/CWptIconDialog.h"
-#include "helpers/CPositionDialog.h"
-#include "GeoMath.h"
-#include "CMainWindow.h"
 
 
 
@@ -47,7 +47,6 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
-
     wpt.name    = name;
     wpt.sym     = icon;
     wpt.lon     = pos.x();
@@ -129,7 +128,7 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);    
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 }
 
 CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
@@ -143,7 +142,6 @@ CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
 
 CGisItemWpt::~CGisItemWpt()
 {
-
 }
 
 void CGisItemWpt::setSymbol()
@@ -174,10 +172,9 @@ const QString& CGisItemWpt::getNewName()
         {
             lastName = lastName.left(idx) + QString::number(lastName.mid(idx).toInt() + 1);
         }
-
     }
     lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
-    return lastName;
+    return(lastName);
 }
 
 const QString& CGisItemWpt::getNewIcon()
@@ -188,7 +185,7 @@ const QString& CGisItemWpt::getNewIcon()
     dlg.exec();
     lastIcon = but.objectName();
 
-    return lastIcon;
+    return(lastIcon);
 }
 
 void CGisItemWpt::getNewPosition(QPointF& pos)
@@ -212,14 +209,20 @@ QString CGisItemWpt::getInfo() const
 
     if(wpt.time.isValid())
     {
-        if(!str.isEmpty()) str += "<br/>\n";
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
 
         str += IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD));
     }
 
     if(wpt.ele != NOINT)
     {
-        if(!str.isEmpty()) str += "<br/>\n";
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
         str += QObject::tr("Elevation: %1 %2").arg(val).arg(unit);
@@ -227,7 +230,10 @@ QString CGisItemWpt::getInfo() const
 
     if(proximity != NOFLOAT)
     {
-        if(!str.isEmpty()) str += "<br/>\n";
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
         QString val, unit;
         IUnit::self().meter2distance(proximity, val, unit);
         str += QObject::tr("Proximity: %1 %2").arg(val).arg(unit);
@@ -236,7 +242,10 @@ QString CGisItemWpt::getInfo() const
     QString desc = removeHtml(wpt.desc).simplified();
     if(desc.count())
     {
-        if(!str.isEmpty()) str += "<br/>\n";
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
 
         if(desc.count() < 200)
         {
@@ -252,7 +261,10 @@ QString CGisItemWpt::getInfo() const
         QString cmt = removeHtml(wpt.cmt).simplified();
         if(cmt.count())
         {
-            if(!str.isEmpty()) str += "<br/>\n";
+            if(!str.isEmpty())
+            {
+                str += "<br/>\n";
+            }
 
             if(cmt.count() < 200)
             {
@@ -264,7 +276,7 @@ QString CGisItemWpt::getInfo() const
             }
         }
     }
-    return str;
+    return(str);
 }
 
 IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
@@ -273,7 +285,7 @@ IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
     {
         scrOpt = new CScrOptWpt(this, origin, mouse);
     }
-    return scrOpt;
+    return(scrOpt);
 }
 
 void CGisItemWpt::setIcon()
@@ -291,7 +303,7 @@ void CGisItemWpt::setIcon()
 }
 
 void CGisItemWpt::setName(const QString& str)
-{    
+{
     setText(CGisListWks::eColumnName, str);
     lastName = str;
     wpt.name = str;
@@ -318,7 +330,7 @@ void CGisItemWpt::setProximity(qreal val)
 }
 
 void CGisItemWpt::setIcon(const QString& name)
-{    
+{
     lastIcon = name;
     wpt.sym  = name;
 
@@ -352,7 +364,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {
     if(posScreen == NOPOINTF)
     {
-        return false;
+        return(false);
     }
 
     return ((pos - posScreen).manhattanLength() < 22);
@@ -421,11 +433,11 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
     rect.adjust(-2,-2,2,2);
 
     // place label on top
-    rect.moveCenter(pt + QPointF(icon.width()/2, - fm.height()));
+    rect.moveCenter(pt + QPointF(icon.width()/2, -fm.height()));
     if(isBlocked(rect, blockedAreas))
     {
         // place label on bottom
-        rect.moveCenter(pt + QPointF( icon.width()/2, + fm.height() + icon.height()));
+        rect.moveCenter(pt + QPointF( icon.width()/2, +fm.height() + icon.height()));
         if(isBlocked(rect, blockedAreas))
         {
             // place label on right
@@ -433,7 +445,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
             if(isBlocked(rect, blockedAreas))
             {
                 // place label on left
-                rect.moveCenter(pt + QPointF( - rect.width()/2, +fm.height()));
+                rect.moveCenter(pt + QPointF( -rect.width()/2, +fm.height()));
                 if(isBlocked(rect, blockedAreas))
                 {
                     // failed to place label anywhere
@@ -455,5 +467,4 @@ void CGisItemWpt::drawHighlight(QPainter& p)
     }
 
     p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
-
 }

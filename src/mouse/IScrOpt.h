@@ -19,9 +19,9 @@
 #ifndef ISCROPT_H
 #define ISCROPT_H
 
-#include <QWidget>
 #include <QPixmap>
 #include <QRect>
+#include <QWidget>
 
 class QMouseEvent;
 
@@ -29,26 +29,30 @@ class QMouseEvent;
 
 class IScrOpt : public QWidget
 {
-    public:
-        IScrOpt(QWidget * parent);
-        virtual ~IScrOpt();
+public:
+    IScrOpt(QWidget * parent);
+    virtual ~IScrOpt();
 
 
-        void setOrigin(const QPoint& pos){origin = pos;}
-        const QPoint& getOrigin(){return origin;}
+    void setOrigin(const QPoint& pos)
+    {
+        origin = pos;
+    }
+    const QPoint& getOrigin()
+    {
+        return( origin);
+    }
 
-        virtual void draw(QPainter& p) = 0;
-        virtual void mouseMoveEvent(QMouseEvent *);
+    virtual void draw(QPainter& p) = 0;
+    virtual void mouseMoveEvent(QMouseEvent *);
 
-    protected:
-        void drawBubble1(const QPointF &pt, QPainter& p);
-        void drawBubble2(const QPointF &pt, QPainter& p);
+protected:
+    void drawBubble1(const QPointF &pt, QPainter& p);
+    void drawBubble2(const QPointF &pt, QPainter& p);
 
-        QPoint origin;
+    QPoint origin;
 
-        QPoint mousePos;
-
-
+    QPoint mousePos;
 };
 
 #endif //ISCROPT_H

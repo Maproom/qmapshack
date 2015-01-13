@@ -19,9 +19,9 @@
 #ifndef CMAPITEM_H
 #define CMAPITEM_H
 
-#include <QTreeWidgetItem>
 #include <QMutex>
 #include <QPointer>
+#include <QTreeWidgetItem>
 
 class IMap;
 class CMapDraw;
@@ -30,73 +30,72 @@ class QSettings;
 
 class CMapItem : public QTreeWidgetItem
 {
-    public:
-        CMapItem(QTreeWidget * parent, CMapDraw *map);
-        virtual ~CMapItem();
+public:
+    CMapItem(QTreeWidget * parent, CMapDraw *map);
+    virtual ~CMapItem();
 
-        void saveConfig(QSettings& cfg);
-        void loadConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg);
 
-        /**
-           @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronised.
-         */
-        static QMutex mutexActiveMaps;
+    /**
+       @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronised.
+     */
+    static QMutex mutexActiveMaps;
 
-        /**
-           @brief Query if map objects are loaded
-           @return True if the internal list of map objects is not empty.
-         */
-        bool isActivated();
-        /**
-           @brief Either loads or destroys internal map objects
-           @return True if the internal list of maps is not empty after the operation.
-         */
-        bool toggleActivate();
-        /**
-         * @brief Load all internal map objects
-         * @return Return true on success.
-         */
-        bool activate();
-        /**
-           @brief Delete all internal map objects
-         */
-        void deactivate();
-        /**
-           @brief Move item to top of list widget
-         */
-        void moveToTop();
-        /**
-           @brief Move item to bottom of active maps list
-         */
-        void moveToBottom();
+    /**
+       @brief Query if map objects are loaded
+       @return True if the internal list of map objects is not empty.
+     */
+    bool isActivated();
+    /**
+       @brief Either loads or destroys internal map objects
+       @return True if the internal list of maps is not empty after the operation.
+     */
+    bool toggleActivate();
+    /**
+     * @brief Load all internal map objects
+     * @return Return true on success.
+     */
+    bool activate();
+    /**
+       @brief Delete all internal map objects
+     */
+    void deactivate();
+    /**
+       @brief Move item to top of list widget
+     */
+    void moveToTop();
+    /**
+       @brief Move item to bottom of active maps list
+     */
+    void moveToBottom();
 
-        /**
-           @brief Set item's icon accorting to map type and state
-         */
-        void updateIcon();
+    /**
+       @brief Set item's icon accorting to map type and state
+     */
+    void updateIcon();
 
-        /**
-           @brief Show or hide child treewidget items
-           @param yes set true to add children, false will remove all children and delete the attached widgets
-         */
-        void showChildren(bool yes);
+    /**
+       @brief Show or hide child treewidget items
+       @param yes set true to add children, false will remove all children and delete the attached widgets
+     */
+    void showChildren(bool yes);
 
-    private:
-        friend class CMapDraw;
-        CMapDraw * map;
-        /**
-           @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
-         */
-        QString key;
-        /**
-           @brief List of map files forming that particular map
-         */
-        QString filename;
-        /**
-           @brief List of loaded map objects when map is activated.
-         */
-        QPointer<IMap> mapfile;
-
+private:
+    friend class CMapDraw;
+    CMapDraw * map;
+    /**
+       @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
+     */
+    QString key;
+    /**
+       @brief List of map files forming that particular map
+     */
+    QString filename;
+    /**
+       @brief List of loaded map objects when map is activated.
+     */
+    QPointer<IMap> mapfile;
 };
 
 #endif //CMAPITEM_H

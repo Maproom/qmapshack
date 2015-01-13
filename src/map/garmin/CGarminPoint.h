@@ -14,41 +14,41 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-  Garmin and MapSource are registered trademarks or trademarks of Garmin Ltd.
-  or one of its subsidiaries.
+   Garmin and MapSource are registered trademarks or trademarks of Garmin Ltd.
+   or one of its subsidiaries.
 
-  This source is based on John Mechalas documentation "Garmin IMG File Format" found
-  at sourceforge. The missing bits and error were rectified by the source code of
-  Konstantin Galichsky (kg@geopainting.com), http://www.geopainting.com
+   This source is based on John Mechalas documentation "Garmin IMG File Format" found
+   at sourceforge. The missing bits and error were rectified by the source code of
+   Konstantin Galichsky (kg@geopainting.com), http://www.geopainting.com
 
 **********************************************************************************************/
 #ifndef CGARMINPOINT_H
 #define CGARMINPOINT_H
 
-#include <QtGlobal>
-#include <QStringList>
 #include <QPointF>
+#include <QStringList>
+#include <QtGlobal>
 
 class CGarminTile;
 
 class CGarminPoint
 {
-    public:
-        CGarminPoint();
-        virtual ~CGarminPoint();
+public:
+    CGarminPoint();
+    virtual ~CGarminPoint();
 
-        quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData);
-        quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData, const quint8 * pEnd);
+    quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData);
+    quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData, const quint8 * pEnd);
 
-        quint32 type;
-        bool isLbl6;
-        bool hasSubType;
+    quint32 type;
+    bool isLbl6;
+    bool hasSubType;
 
-        //QString label;
-        QPointF pos;
+    //QString label;
+    QPointF pos;
 
-        QStringList labels;
+    QStringList labels;
 
-        quint32 lbl_ptr;
+    quint32 lbl_ptr;
 };
 #endif                           //CGARMINPOINT_H

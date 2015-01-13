@@ -19,8 +19,8 @@
 #ifndef CMAINWINDOW_H
 #define CMAINWINDOW_H
 
-#include <QMainWindow>
 #include "ui_IMainWindow.h"
+#include <QMainWindow>
 
 class CMapList;
 class CDemList;
@@ -31,73 +31,79 @@ class CCanvas;
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
     Q_OBJECT
-    public:
-        static CMainWindow& self(){return *pSelf;}
-        virtual ~CMainWindow();
+public:
+    static CMainWindow& self()
+    {
+        return( *pSelf);
+    }
+    virtual ~CMainWindow();
 
-        void addMapList(CMapList *list, const QString& name);
-        void addDemList(CDemList *list, const QString& name);
-        void addWidgetToTab(QWidget * w);
+    void addMapList(CMapList *list, const QString& name);
+    void addDemList(CDemList *list, const QString& name);
+    void addWidgetToTab(QWidget * w);
 
-        bool isScaleVisible();
-        bool isGridVisible();
-        bool isNight();
-        bool isPOIText();
-        bool isMapToolTip();
-        bool flipMouseWheel();
-        const QFont& getMapFont(){return mapFont;}
+    bool isScaleVisible();
+    bool isGridVisible();
+    bool isNight();
+    bool isPOIText();
+    bool isMapToolTip();
+    bool flipMouseWheel();
+    const QFont& getMapFont()
+    {
+        return( mapFont);
+    }
 
-        void zoomCanvasTo(const QRectF rect);
-        /**
-           @brief Read the elevation from DEM data attached to the currently visible canvas for a given location
-           @param pos   a poistion in units of [rad]
-           @return If no elevation value can be found for the position NOFLOAT is returned.
-         */
-        qreal getEelevationAt(const QPointF &pos);
-        void  getEelevationAt(const QPolygonF& pos, QPolygonF &ele);
-        /**
-           @brief Get pointer to the currently visibale canvas object.
-           @return If the currently visible tab does not contain a CCanvas object 0 is returned.
-        */
-        CCanvas * getVisibleCanvas();
+    void zoomCanvasTo(const QRectF rect);
+    /**
+       @brief Read the elevation from DEM data attached to the currently visible canvas for a given location
+       @param pos   a poistion in units of [rad]
+       @return If no elevation value can be found for the position NOFLOAT is returned.
+     */
+    qreal getEelevationAt(const QPointF &pos);
+    void  getEelevationAt(const QPolygonF& pos, QPolygonF &ele);
+    /**
+       @brief Get pointer to the currently visibale canvas object.
+       @return If the currently visible tab does not contain a CCanvas object 0 is returned.
+     */
+    CCanvas * getVisibleCanvas();
 
 
-    private slots:
-        void slotAbout();
-        void slotHelp();
-        void slotAddCanvas();
-        void slotTabCloseRequest(int i);
-        void slotCurrentTabCanvas(int i);
-        void slotCurrentTabMaps(int i);
-        void slotCurrentTabDem(int i);
-        void slotMousePosition(const QPointF& pos, qreal ele);
-        void slotUpdateCurrentWidget();
-        void slotSetupMapFont();
-        void slotSetupGrid();
-        void slotSetupMapPath();
-        void slotSetupDemPath();
-        void slotSetupMapView();
-        void slotSetupTimeZone();
-        void slotSetupUnits();
-        void slotSetupWorkspace();
-        void slotImportDatabase();
-        void slotLoadGISData();
+private slots:
+    void slotAbout();
+    void slotHelp();
+    void slotAddCanvas();
+    void slotTabCloseRequest(int i);
+    void slotCurrentTabCanvas(int i);
+    void slotCurrentTabMaps(int i);
+    void slotCurrentTabDem(int i);
+    void slotMousePosition(const QPointF& pos, qreal ele);
+    void slotUpdateCurrentWidget();
+    void slotSetupMapFont();
+    void slotSetupGrid();
+    void slotSetupMapPath();
+    void slotSetupDemPath();
+    void slotSetupMapView();
+    void slotSetupTimeZone();
+    void slotSetupUnits();
+    void slotSetupWorkspace();
+    void slotImportDatabase();
+    void slotLoadGISData();
 
-    private:
-        friend int main(int argc, char ** argv);
-        CMainWindow();
-        void loadGISData(const QStringList& filenames);
+private:
+    friend int main(int argc, char ** argv);
+    CMainWindow();
+    void loadGISData(const QStringList& filenames);
 
-        static CMainWindow * pSelf;
+    static CMainWindow * pSelf;
 
-        /// status bar label
-        QLabel * lblPosWGS84;
-        QLabel * lblElevation;
-        QLabel * lblPosGrid;
+    /// status bar label
+    QLabel * lblPosWGS84;
+    QLabel * lblElevation;
+    QLabel * lblPosGrid;
 
-        QFont mapFont;
+    QFont mapFont;
 
-        CGisWidget * gisWidget;
+    CGisWidget * gisWidget;
 };
 
 #endif //CMAINWINDOW_H

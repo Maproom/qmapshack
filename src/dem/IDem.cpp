@@ -16,33 +16,33 @@
 
 **********************************************************************************************/
 
-#include "dem/IDem.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemPropSetup.h"
+#include "dem/IDem.h"
 
 #include <QtWidgets>
 
 inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
 {
-    return data[x + y * dx];
+    return(data[x + y * dx]);
 }
 
 inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
 {
     w[0] = getValue(data, x - 1, y - 1, dx);
-    w[1] = getValue(data, x    , y - 1, dx);
+    w[1] = getValue(data, x, y - 1, dx);
     w[2] = getValue(data, x + 1, y - 1, dx);
-    w[3] = getValue(data, x - 1, y    , dx);
-    w[4] = getValue(data, x    , y    , dx);
-    w[5] = getValue(data, x + 1, y    , dx);
+    w[3] = getValue(data, x - 1, y, dx);
+    w[4] = getValue(data, x, y, dx);
+    w[5] = getValue(data, x + 1, y, dx);
     w[6] = getValue(data, x - 1, y + 1, dx);
-    w[7] = getValue(data, x    , y + 1, dx);
+    w[7] = getValue(data, x, y + 1, dx);
     w[8] = getValue(data, x + 1, y + 1, dx);
 }
 
 const qreal IDem::tblGrade[5][6] =
 {
-     {0,0,0,0,0,0}
+    {0,0,0,0,0,0}
     ,{0.0,27.0,31.0,34.0,39.0,50.0}
     ,{0.0,27.0,30.0,32.0,35.0,39.0}
     ,{0.0,27.0,29.0,30.0,31.0,34.0}
@@ -113,7 +113,7 @@ IDemProp * IDem::getSetup()
         setup = new CDemPropSetup(this, dem);
     }
 
-    return setup;
+    return(setup);
 }
 
 void IDem::slotSetFactorHillshade(int f)
@@ -124,7 +124,7 @@ void IDem::slotSetFactorHillshade(int f)
     }
     else if(f < 0)
     {
-        factorHillshading = - 1.0/f;
+        factorHillshading = -1.0/f;
     }
     else
     {
@@ -142,15 +142,15 @@ int IDem::getFactorHillshading()
 {
     if(factorHillshading == 1.0)
     {
-        return 0;
+        return(0);
     }
     else if(factorHillshading < 1)
     {
-        return - 1.0/factorHillshading;
+        return(-1.0/factorHillshading);
     }
     else
     {
-        return factorHillshading;
+        return(factorHillshading);
     }
 }
 
@@ -237,7 +237,6 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
             {
                 img.setPixel(n - 1, m - 1, 0);
             }
-
         }
     }
 }
@@ -265,5 +264,4 @@ void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p)
     p.rotate(a);
     p.drawImage(0,0,img);
     p.restore();
-
 }

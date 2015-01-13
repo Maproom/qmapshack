@@ -19,21 +19,21 @@
 #include "CProjWizard.h"
 #include "grid/mitab.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
+#include <proj_api.h>
 
-struct mitab_entry_t {QString name; int idx;};
+struct mitab_entry_t {QString name; int idx; };
 
 static bool mitabLessThan(const mitab_entry_t &s1, const mitab_entry_t &s2)
 {
-    return s1.name < s2.name;
+    return(s1.name < s2.name);
 }
 
 CProjWizard::CProjWizard(QLineEdit &line)
     : line(line)
 {
     setupUi(this);
-    mitab_entry_t           entry;
+    mitab_entry_t entry;
     QList<mitab_entry_t>    list;
     int idx                 = 0;
     const MapInfoDatumInfo * di   = asDatumInfoListQL;
@@ -43,7 +43,7 @@ CProjWizard::CProjWizard(QLineEdit &line)
         entry.name  = di->pszOGCDatumName;
         entry.idx   = idx;
         list << entry;
-        ++di;++idx;
+        ++di; ++idx;
     }
     qSort(list.begin(), list.end(), mitabLessThan);
 
@@ -63,7 +63,7 @@ CProjWizard::CProjWizard(QLineEdit &line)
     connect(radioUserDef, SIGNAL(clicked()), this, SLOT(slotChange()));
     connect(comboDatum, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChange()));
     connect(comboHemisphere, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChange()));
-    connect(lineUserDef, SIGNAL(textChanged(const QString&)), this, SLOT(slotChange()));
+    connect(lineUserDef, SIGNAL(textChanged(const QString &)), this, SLOT(slotChange()));
     connect(spinUTMZone, SIGNAL(valueChanged(int)), this, SLOT(slotChange()));
 
     QString projstr = line.text();
@@ -100,7 +100,6 @@ CProjWizard::CProjWizard(QLineEdit &line)
 
 CProjWizard::~CProjWizard()
 {
-
 }
 
 
@@ -112,14 +111,16 @@ void CProjWizard::findDatum(const QString& str)
 
     while(di->nMapInfoDatumID != -1)
     {
-
         cmp.clear();
         if(di->pszOGCDatumName != QString(""))
         {
             const MapInfoSpheroidInfo * si = asSpheroidInfoList;
             while(si->nMapInfoId != -1)
             {
-                if(si->nMapInfoId == di->nEllipsoid) break;
+                if(si->nMapInfoId == di->nEllipsoid)
+                {
+                    break;
+                }
                 ++si;
             }
 
@@ -134,9 +135,8 @@ void CProjWizard::findDatum(const QString& str)
             break;
         }
 
-        ++di;++idx;
+        ++di; ++idx;
     }
-
 }
 
 
@@ -164,7 +164,6 @@ void CProjWizard::slotChange()
     else if(radioUTM->isChecked())
     {
         str += QString("+proj=utm +zone=%1 %2 ").arg(spinUTMZone->value()).arg(comboHemisphere->itemData(comboHemisphere->currentIndex()).toString());
-
     }
     else if(radioUserDef->isChecked())
     {
@@ -178,7 +177,10 @@ void CProjWizard::slotChange()
         const MapInfoSpheroidInfo * si = asSpheroidInfoList;
         while(si->nMapInfoId != -1)
         {
-            if(si->nMapInfoId == di.nEllipsoid) break;
+            if(si->nMapInfoId == di.nEllipsoid)
+            {
+                break;
+            }
             ++si;
         }
 
@@ -209,12 +211,12 @@ bool CProjWizard::validProjStr(const QString projStr)
     if (!projCheck)
     {
         QMessageBox::warning(0, tr("Error..."),tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(pj_errno)),QMessageBox::Abort,QMessageBox::Abort);
-        return false;
+        return(false);
     }
     else
     {
         pj_free(projCheck);
-        return true;
+        return(true);
     }
 }
 

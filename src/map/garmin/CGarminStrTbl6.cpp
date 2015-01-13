@@ -45,15 +45,13 @@ const char CGarminStrTbl6::str6tbl3[] =
 };
 
 CGarminStrTbl6::CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject * parent)
-: IGarminStrTbl(codepage, mask, parent)
+    : IGarminStrTbl(codepage, mask, parent)
 {
-
 }
 
 
 CGarminStrTbl6::~CGarminStrTbl6()
 {
-
 }
 
 
@@ -75,7 +73,10 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
 
     offset = calcOffset(file, offset,t);
 
-    if(offset == 0xFFFFFFFF) return;
+    if(offset == 0xFFFFFFFF)
+    {
+        return;
+    }
 
     if(offset > (quint32)sizeLBL1)
     {
@@ -83,8 +84,8 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
         return;
     }
 
-    quint8  c1  = 0;
-    quint8  c2  = 0;
+    quint8 c1  = 0;
+    quint8 c2  = 0;
     quint32 idx = 0;
     reg         = 0;
     bits        = 0;
@@ -101,7 +102,10 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     {
         c1 = reg >> 26; reg <<= 6; bits -= 6; fill();
         //terminator
-        if(c1 > 0x2F) break;
+        if(c1 > 0x2F)
+        {
+            break;
+        }
 
         c2 = str6tbl1[c1];
         if(c2 == 0)
@@ -122,9 +126,13 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
                 if(strlen(buffer))
                 {
                     if (codepage != 0)
+                    {
                         labels << codec->toUnicode(buffer);
+                    }
                     else
+                    {
                         labels << buffer;
+                    }
                 }
                 idx = 0;
                 buffer[0] = 0;
@@ -140,8 +148,12 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     if(strlen(buffer))
     {
         if (codepage != 0)
+        {
             labels << codec->toUnicode(buffer);
+        }
         else
+        {
             labels << buffer;
+        }
     }
 }

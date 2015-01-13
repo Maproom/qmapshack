@@ -21,11 +21,9 @@
 IItem::IItem(quint64 id)
     : id(id)
 {
-
 }
 
 IItem::~IItem()
 {
-
 }
 

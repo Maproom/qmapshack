@@ -17,14 +17,14 @@
 **********************************************************************************************/
 
 #include "map/CMapDraw.h"
+#include "map/CMapIMG.h"
 #include "map/CMapItem.h"
 #include "map/CMapJNX.h"
-#include "map/CMapRMAP.h"
-#include "map/CMapIMG.h"
-#include "map/CMapVRT.h"
 #include "map/CMapMAP.h"
-#include "map/CMapWMTS.h"
+#include "map/CMapRMAP.h"
 #include "map/CMapTMS.h"
+#include "map/CMapVRT.h"
+#include "map/CMapWMTS.h"
 #include "map/IMapProp.h"
 #include <QtGui>
 
@@ -40,7 +40,6 @@ CMapItem::CMapItem(QTreeWidget *parent, CMapDraw * map)
 
 CMapItem::~CMapItem()
 {
-
 }
 
 void CMapItem::saveConfig(QSettings& cfg)
@@ -70,13 +69,12 @@ void CMapItem::loadConfig(QSettings& cfg)
 
 void CMapItem::showChildren(bool yes)
 {
-
     if(yes && !mapfile.isNull())
     {
         QTreeWidget * tw = treeWidget();
 
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
-        item->setFlags(Qt::ItemIsEnabled);        
+        item->setFlags(Qt::ItemIsEnabled);
         tw->setItemWidget(item, 0, mapfile->getSetup());
     }
     else
@@ -85,7 +83,6 @@ void CMapItem::showChildren(bool yes)
         qDeleteAll(items);
         delete mapfile->getSetup();
     }
-
 }
 
 void CMapItem::updateIcon()
@@ -132,7 +129,7 @@ void CMapItem::updateIcon()
 bool CMapItem::isActivated()
 {
     QMutexLocker lock(&mutexActiveMaps);
-    return !mapfile.isNull();
+    return(!mapfile.isNull());
 }
 
 bool CMapItem::toggleActivate()
@@ -140,12 +137,12 @@ bool CMapItem::toggleActivate()
     QMutexLocker lock(&mutexActiveMaps);
     if(mapfile.isNull())
     {
-        return activate();
+        return(activate());
     }
     else
     {
         deactivate();
-        return false;
+        return(false);
     }
 }
 
@@ -209,7 +206,7 @@ bool CMapItem::activate()
     // no mapfiles loaded? Bad.
     if(mapfile.isNull())
     {
-        return false;
+        return(false);
     }
 
     // if map is activated sucessfully add to the list of map files
@@ -217,7 +214,7 @@ bool CMapItem::activate()
     if(!mapfile->activated())
     {
         delete mapfile;
-        return false;
+        return(false);
     }
 
     setToolTip(0, mapfile->getCopyright());
@@ -234,12 +231,12 @@ bool CMapItem::activate()
         the correct group context in the QSetting object.
         This call will result into a call of loadConfig() of this CMapItem
         object.
-    */
+     */
     map->loadConfigForMapItem(this);
 
     // Add the mapfile setup dialog as child of this item
     showChildren(true);
-    return true;
+    return(true);
 }
 
 void CMapItem::moveToTop()
@@ -256,7 +253,6 @@ void CMapItem::moveToTop()
 
 void CMapItem::moveToBottom()
 {
-
     int row;
     QTreeWidget * w = treeWidget();
     QMutexLocker lock(&mutexActiveMaps);

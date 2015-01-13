@@ -21,17 +21,19 @@
 
 struct wpt_head_entry_t
 {
-    wpt_head_entry_t() : type(CQlgtWpt::eEnd), offset(0) {}
-    qint32      type;
-    quint32     offset;
-    QByteArray  data;
+    wpt_head_entry_t() : type(CQlgtWpt::eEnd), offset(0)
+    {
+    }
+    qint32 type;
+    quint32 offset;
+    QByteArray data;
 };
 
 
 QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
 {
     QIODevice * dev = s.device();
-    qint64      pos = dev->pos();
+    qint64 pos = dev->pos();
 
     char magic[9];
     s.readRawData(magic,9);
@@ -40,7 +42,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
     {
         dev->seek(pos);
         //         throw(QObject::tr("This is not waypoint data."));
-        return s;
+        return(s);
     }
 
     QList<wpt_head_entry_t> entries;
@@ -50,7 +52,10 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
         wpt_head_entry_t entry;
         s >> entry.type >> entry.offset;
         entries << entry;
-        if(entry.type == CQlgtWpt::eEnd) break;
+        if(entry.type == CQlgtWpt::eEnd)
+        {
+            break;
+        }
     }
 
     QList<wpt_head_entry_t>::iterator entry = entries.begin();
@@ -62,129 +67,129 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
 
         switch(entry->type)
         {
-            case CQlgtWpt::eBase:
+        case CQlgtWpt::eBase:
+        {
+            QString icon;
+            QString key;
+
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+
+            s1 >> wpt.key;
+            s1 >> wpt.sticky;
+            s1 >> wpt.timestamp;
+            s1 >> icon;
+            s1 >> wpt.name;
+            s1 >> wpt.comment;
+            s1 >> wpt.lat;
+            s1 >> wpt.lon;
+            s1 >> wpt.ele;
+            s1 >> wpt.prx;
+            s1 >> wpt.link;
+            s1 >> wpt.description;
+            s1 >> wpt.urlname;
+            s1 >> wpt.type;
+            s1 >> wpt.parentWpt;
+            s1 >> wpt.selected;
+
+            if(!s1.atEnd())
             {
-                QString icon;
-                QString key;
-
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-
-                s1 >> wpt.key;
-                s1 >> wpt.sticky;
-                s1 >> wpt.timestamp;
-                s1 >> icon;
-                s1 >> wpt.name;
-                s1 >> wpt.comment;
-                s1 >> wpt.lat;
-                s1 >> wpt.lon;
-                s1 >> wpt.ele;
-                s1 >> wpt.prx;
-                s1 >> wpt.link;
-                s1 >> wpt.description;
-                s1 >> wpt.urlname;
-                s1 >> wpt.type;
-                s1 >> wpt.parentWpt;
-                s1 >> wpt.selected;
-
-                if(!s1.atEnd())
-                {
-                    s1 >> wpt.dir;
-                }
-                else
-                {
-                    wpt.dir = WPT_NOFLOAT;
-                }
-
-                wpt.setIcon(icon);
-                break;
+                s1 >> wpt.dir;
+            }
+            else
+            {
+                wpt.dir = WPT_NOFLOAT;
             }
 
-            case CQlgtWpt::eImage:
+            wpt.setIcon(icon);
+            break;
+        }
+
+        case CQlgtWpt::eImage:
+        {
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+            CQlgtWpt::image_t img;
+
+            wpt.images.clear();
+
+            s1 >> img.offset;
+            while(img.offset)
             {
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-                CQlgtWpt::image_t img;
-
-                wpt.images.clear();
-
+                wpt.images << img;
                 s1 >> img.offset;
-                while(img.offset)
-                {
-                    wpt.images << img;
-                    s1 >> img.offset;
-                }
-
-                QList<CQlgtWpt::image_t>::iterator image = wpt.images.begin();
-                while(image != wpt.images.end())
-                {
-                    s1.device()->seek(image->offset);
-                    s1 >> image->filePath;
-                    s1 >> image->info;
-                    s1 >> image->pixmap;
-                    ++image;
-                }
-                break;
             }
 
-            case CQlgtWpt::eGeoCache:
+            QList<CQlgtWpt::image_t>::iterator image = wpt.images.begin();
+            while(image != wpt.images.end())
             {
-                quint32 N, n;
-                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-                s1.setVersion(QDataStream::Qt_4_5);
-                wpt.geocache = CQlgtWpt::geocache_t();
-                CQlgtWpt::geocache_t& cache = wpt.geocache;
+                s1.device()->seek(image->offset);
+                s1 >> image->filePath;
+                s1 >> image->info;
+                s1 >> image->pixmap;
+                ++image;
+            }
+            break;
+        }
 
-                s1 >> (quint8&)cache.service;
-                s1 >> cache.hasData;
-                s1 >> cache.id;
-                s1 >> cache.available;
-                s1 >> cache.archived;
-                s1 >> cache.difficulty;
-                s1 >> cache.terrain;
-                s1 >> cache.status;
-                s1 >> cache.name;
-                s1 >> cache.owner;
-                s1 >> cache.ownerId;
-                s1 >> cache.type;
-                s1 >> cache.container;
-                s1 >> cache.shortDesc;
-                s1 >> cache.longDesc;
-                s1 >> cache.hint;
-                s1 >> cache.country;
-                s1 >> cache.state;
-                s1 >> cache.locale;
+        case CQlgtWpt::eGeoCache:
+        {
+            quint32 N, n;
+            QDataStream s1(&entry->data, QIODevice::ReadOnly);
+            s1.setVersion(QDataStream::Qt_4_5);
+            wpt.geocache = CQlgtWpt::geocache_t();
+            CQlgtWpt::geocache_t& cache = wpt.geocache;
 
-                s1 >> N;
+            s1 >> (quint8&)cache.service;
+            s1 >> cache.hasData;
+            s1 >> cache.id;
+            s1 >> cache.available;
+            s1 >> cache.archived;
+            s1 >> cache.difficulty;
+            s1 >> cache.terrain;
+            s1 >> cache.status;
+            s1 >> cache.name;
+            s1 >> cache.owner;
+            s1 >> cache.ownerId;
+            s1 >> cache.type;
+            s1 >> cache.container;
+            s1 >> cache.shortDesc;
+            s1 >> cache.longDesc;
+            s1 >> cache.hint;
+            s1 >> cache.country;
+            s1 >> cache.state;
+            s1 >> cache.locale;
 
-                for(n = 0; n < N; n++)
-                {
-                    CQlgtWpt::geocachelog_t log;
+            s1 >> N;
 
-                    s1 >> log.id;
-                    s1 >> log.date;
-                    s1 >> log.type;
-                    s1 >> log.finderId;
-                    s1 >> log.finder;
-                    s1 >> log.text;
+            for(n = 0; n < N; n++)
+            {
+                CQlgtWpt::geocachelog_t log;
 
-                    cache.logs << log;
-                }
+                s1 >> log.id;
+                s1 >> log.date;
+                s1 >> log.type;
+                s1 >> log.finderId;
+                s1 >> log.finder;
+                s1 >> log.text;
 
-                s1 >> cache.exportBuddies;
-
-                cache.hasData = true;
-
-                break;
+                cache.logs << log;
             }
 
-            default:;
+            s1 >> cache.exportBuddies;
+
+            cache.hasData = true;
+
+            break;
+        }
+
+        default:;
         }
 
         ++entry;
     }
 
-    return s;
+    return(s);
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
@@ -264,7 +269,6 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
     //---------------------------------------
     if(wpt.geocache.hasData)
     {
-
         wpt_head_entry_t entryGeoCache;
         entryGeoCache.type = CQlgtWpt::eGeoCache;
         QDataStream s3(&entryGeoCache.data, QIODevice::WriteOnly);
@@ -350,7 +354,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
         ++entry;
     }
 
-    return s;
+    return(s);
 }
 
 
@@ -358,12 +362,10 @@ CQlgtWpt::CQlgtWpt(quint64 id, QObject *parent)
     : QObject(parent)
     , IItem(id)
 {
-
 }
 
 CQlgtWpt::~CQlgtWpt()
 {
-
 }
 
 void CQlgtWpt::setIcon(const QString& str)

@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "mouse/CMouseEditArea.h"
+#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/ovl/CGisItemOvlArea.h"
-#include "canvas/CCanvas.h"
+#include "mouse/CMouseEditArea.h"
 
 
 #include <QtWidgets>
@@ -27,7 +27,7 @@
 CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(point, gis, parent)
 {
-    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);    
+    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
 }
 
 CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent)
@@ -60,7 +60,7 @@ void CMouseEditArea::drawLine(const QPolygonF &l, QPainter& p)
 
 IGisLine * CMouseEditArea::getGisLine()
 {
-    return dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
+    return(dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key)));
 }
 
 void CMouseEditArea::slotAbort()

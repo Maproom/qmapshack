@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "map/IMap.h"
 #include "map/CMapDraw.h"
 #include "map/CMapPropSetup.h"
+#include "map/IMap.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -47,7 +47,7 @@ IMapProp *IMap::getSetup()
         setup = new CMapPropSetup(this, map);
     }
 
-    return setup;
+    return(setup);
 }
 
 
@@ -92,7 +92,6 @@ void IMap::drawTile(QImage& img, QPolygonF& l, QPainter& p)
     p.rotate(a);
     p.drawImage(0,0,img);
     p.restore();
-
 }
 
 bool IMap::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
@@ -101,5 +100,5 @@ bool IMap::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPo
     Q_UNUSED(pt2);
     Q_UNUSED(threshold);
     Q_UNUSED(polyline);
-    return false;
+    return(false);
 }

@@ -19,24 +19,23 @@
 #ifndef CFILTEROFFSETELEVATION_H
 #define CFILTEROFFSETELEVATION_H
 
-#include <QWidget>
 #include "ui_IFilterOffsetElevation.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
 class CFilterOffsetElevation : public QWidget, private Ui::IFilterOffsetElevation
 {
     Q_OBJECT
-    public:
-        CFilterOffsetElevation(CGisItemTrk& trk, QWidget * parent);
-        virtual ~CFilterOffsetElevation();
+public:
+    CFilterOffsetElevation(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterOffsetElevation();
 
-    private slots:
-        void slotApply();
+private slots:
+    void slotApply();
 
-    private:
-        CGisItemTrk& trk;
-
+private:
+    CGisItemTrk& trk;
 };
 
 #endif //CFILTEROFFSETELEVATION_H

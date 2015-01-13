@@ -21,11 +21,9 @@
 IDiskCache::IDiskCache(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 IDiskCache::~IDiskCache()
 {
-
 }
 

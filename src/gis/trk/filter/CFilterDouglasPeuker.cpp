@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
@@ -35,7 +35,6 @@ CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
     spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance",5).toInt());
 
     connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
-
 }
 
 CFilterDouglasPeuker::~CFilterDouglasPeuker()
@@ -47,6 +46,6 @@ CFilterDouglasPeuker::~CFilterDouglasPeuker()
 void CFilterDouglasPeuker::slotApply()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);    
+    trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);
     QApplication::restoreOverrideCursor();
 }

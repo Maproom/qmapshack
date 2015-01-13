@@ -18,9 +18,9 @@
 #ifndef CQLB_H
 #define CQLB_H
 
-#include <QObject>
-#include <QIODevice>
 #include <QByteArray>
+#include <QIODevice>
+#include <QObject>
 
 class CQlgtWpt;
 class CQlgtTrack;
@@ -37,63 +37,80 @@ class IQlgtOverlay;
     ...
     qint32 eEnd
 
-*/
+ */
 class CQlb : public QObject
 {
     Q_OBJECT
-    public:
-        CQlb(QObject * parent);
-        virtual ~CQlb();
+public:
+    CQlb(QObject * parent);
+    virtual ~CQlb();
 
-        enum type_e {eEnd, eWpt, eTrack, eDiary, eOverlay, eRoute, eMapSel};
+    enum type_e {eEnd, eWpt, eTrack, eDiary, eOverlay, eRoute, eMapSel};
 
-        /// collect wapoint data
-        /**
-            This will serialize the waypoint object to wpts
-        */
-        CQlb& operator <<(CQlgtWpt &wpt);
+    /// collect wapoint data
+    /**
+        This will serialize the waypoint object to wpts
+     */
+    CQlb& operator <<(CQlgtWpt &wpt);
 
-        CQlb& operator <<(CQlgtTrack &trk);
+    CQlb& operator <<(CQlgtTrack &trk);
 
-        CQlb& operator <<(CQlgtDiary &dry);
+    CQlb& operator <<(CQlgtDiary &dry);
 
-        CQlb& operator <<(IQlgtOverlay &ovl);
+    CQlb& operator <<(IQlgtOverlay &ovl);
 
-        CQlb& operator <<(CQlgtRoute &rte);
+    CQlb& operator <<(CQlgtRoute &rte);
 
 
-        /// get access to stored waypoint data
-        QByteArray& waypoints(){return wpts;}
-        /// get access to stored track data
-        QByteArray& tracks(){return trks;}
-        /// get access to stored diary data
-        QByteArray& diary(){return drys;}
-        /// get access to stored overlay data
-        QByteArray& overlays(){return ovls;}
-        /// get access to stored route data
-        QByteArray& routes(){return rtes;}
-        /// get access to stored map selection data
-        QByteArray& mapsels(){return sels;}
-        /// write collected data to file
-        void save(const QString& filename);
-        void save(QIODevice *ioDevice);
-        /// read file and store elements in their designated byte arrays
-        void load(const QString& filename);
-        void load(QIODevice *ioDevice);
+    /// get access to stored waypoint data
+    QByteArray& waypoints()
+    {
+        return( wpts);
+    }
+    /// get access to stored track data
+    QByteArray& tracks()
+    {
+        return( trks);
+    }
+    /// get access to stored diary data
+    QByteArray& diary()
+    {
+        return( drys);
+    }
+    /// get access to stored overlay data
+    QByteArray& overlays()
+    {
+        return( ovls);
+    }
+    /// get access to stored route data
+    QByteArray& routes()
+    {
+        return( rtes);
+    }
+    /// get access to stored map selection data
+    QByteArray& mapsels()
+    {
+        return( sels);
+    }
+    /// write collected data to file
+    void save(const QString& filename);
+    void save(QIODevice *ioDevice);
+    /// read file and store elements in their designated byte arrays
+    void load(const QString& filename);
+    void load(QIODevice *ioDevice);
 
-    private:
-        /// byte array to hold all waypoints
-        QByteArray wpts;
-        /// byte array to hold all tracks
-        QByteArray trks;
-        /// byte array to hold all routes
-        QByteArray rtes;
-        /// byte array to hold diary
-        QByteArray drys;
-        /// byte array to hold overlays
-        QByteArray ovls;
-        /// byte array to hold map selections
-        QByteArray sels;
-
+private:
+    /// byte array to hold all waypoints
+    QByteArray wpts;
+    /// byte array to hold all tracks
+    QByteArray trks;
+    /// byte array to hold all routes
+    QByteArray rtes;
+    /// byte array to hold diary
+    QByteArray drys;
+    /// byte array to hold overlays
+    QByteArray ovls;
+    /// byte array to hold map selections
+    QByteArray sels;
 };
 #endif                           //CQLB_H

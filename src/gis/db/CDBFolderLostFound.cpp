@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisListDB.h"
+#include "gis/CGisWidget.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/macros.h"
-#include "gis/CGisListDB.h"
-#include "gis/CGisWidget.h"
 
 #include <QtSql>
 
@@ -37,7 +37,6 @@ CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent
 
 CDBFolderLostFound::~CDBFolderLostFound()
 {
-
 }
 
 void CDBFolderLostFound::setupFromDB()
@@ -49,7 +48,7 @@ void CDBFolderLostFound::setupFromDB()
 
 
     query.prepare("SELECT id FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name");
-    QUERY_EXEC(return);    
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 id      = query.value(0).toULongLong();
@@ -70,7 +69,6 @@ void CDBFolderLostFound::setupFromDB()
 
     CEvtD2WUpdateLnF * evt = new CEvtD2WUpdateLnF(getId(), getDBName());
     CGisWidget::self().postEventForWks(evt);
-
 }
 
 void CDBFolderLostFound::update(CEvtW2DAckInfo * info)
@@ -92,7 +90,7 @@ void CDBFolderLostFound::clear()
     QSqlQuery query(db);
 
     query.prepare("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 
     setupFromDB();
 }
@@ -112,5 +110,5 @@ bool CDBFolderLostFound::delItem(CDBItem * item)
     query.bindValue(":id", item->getId());
     QUERY_EXEC(return false);
 
-    return true;
+    return(true);
 }

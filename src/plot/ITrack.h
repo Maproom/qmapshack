@@ -19,9 +19,9 @@
 #ifndef ITRACK_H
 #define ITRACK_H
 
-#include <proj_api.h>
-#include <QPolygonF>
 #include <QImage>
+#include <QPolygonF>
+#include <proj_api.h>
 
 class QRectF;
 class QPainter;
@@ -29,36 +29,35 @@ class CGisItemTrk;
 
 class ITrack
 {
-    public:
-        ITrack();
-        virtual ~ITrack();
+public:
+    ITrack();
+    virtual ~ITrack();
 
-        void setSize(int w, int h);
-        void setTrack(CGisItemTrk * track);
-        void setTrack(const QPolygonF &track);
+    void setSize(int w, int h);
+    void setTrack(CGisItemTrk * track);
+    void setTrack(const QPolygonF &track);
 
-        void save(QImage& image);
+    void save(QImage& image);
 
-    protected:
-        void setupProjection(const QRectF &boundingBox);
-        void updateData();
-        void draw(QPainter& p);
-        void draw();
+protected:
+    void setupProjection(const QRectF &boundingBox);
+    void updateData();
+    void draw(QPainter& p);
+    void draw();
 
-        projPJ  pjsrc;
-        projPJ  pjtar;
+    projPJ pjsrc;
+    projPJ pjtar;
 
-        bool needsRedraw;
-        CGisItemTrk * trk;
-        QPolygonF coords;
-        QPolygonF line;
+    bool needsRedraw;
+    CGisItemTrk * trk;
+    QPolygonF coords;
+    QPolygonF line;
 
-        QImage buffer;
+    QImage buffer;
 
-        QPointF scale;
-        qint32 xoff;
-        qint32 yoff;
-
+    QPointF scale;
+    qint32 xoff;
+    qint32 yoff;
 };
 
 #endif //ITRACK_H

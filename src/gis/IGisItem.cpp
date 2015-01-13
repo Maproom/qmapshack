@@ -16,21 +16,21 @@
 
 **********************************************************************************************/
 
-#include "gis/IGisItem.h"
+#include "GeoMath.h"
+#include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
+#include "gis/IGisItem.h"
+#include "gis/db/macros.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/db/macros.h"
 #include "units/IUnit.h"
-#include "canvas/CCanvas.h"
-#include "GeoMath.h"
 
-#include <QtXml>
-#include <QtWidgets>
 #include <QtSql>
+#include <QtWidgets>
+#include <QtXml>
 
 QMutex IGisItem::mutexItems(QMutex::Recursive);
 
@@ -38,7 +38,7 @@ QString IGisItem::noKey;
 
 const IGisItem::color_t IGisItem::colorMap[] =
 {
-     {"Black",       QColor(Qt::black)}
+    {"Black",       QColor(Qt::black)}
     ,{"DarkRed",     QColor(Qt::darkRed)}
     ,{"DarkGreen",   QColor(Qt::darkGreen)}
     ,{"DarkYellow",  QColor(Qt::darkYellow)}
@@ -56,7 +56,6 @@ const IGisItem::color_t IGisItem::colorMap[] =
     ,{"White",       QColor(Qt::white)}
     ,{"Transparent", QColor(Qt::transparent)}
     ,{0, QColor()}
-
 };
 
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
@@ -154,7 +153,6 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
 
 IGisItem::~IGisItem()
 {
-
 }
 
 void IGisItem::genKey()
@@ -187,7 +185,7 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
     QSqlQuery query(db);
     query.prepare("SELECT data FROM items WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     if(query.next())
     {
         QByteArray data(query.value(0).toByteArray());
@@ -207,7 +205,7 @@ QString IGisItem::getNameEx() const
     {
         str += " @ " + project->getName();
     }
-    return str;
+    return(str);
 }
 
 
@@ -241,12 +239,12 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
 
 
 void IGisItem::changed(const QString &what, const QString &icon)
-{    
+{
     /*
         If item gets changed but if it's origin is not QMapShack
         then it is assumed to be tainted, as imported data should
         never be changed without notice.
-    */
+     */
     if(!(flags & eFlagCreatedInQms))
     {
         flags |= eFlagTainted;
@@ -281,7 +279,7 @@ void IGisItem::changed(const QString &what, const QString &icon)
 }
 
 void IGisItem::setupHistory()
-{    
+{
     history.histIdxInitial = -1;
     history.histIdxCurrent = -1;
 
@@ -292,7 +290,7 @@ void IGisItem::setupHistory()
         history_event_t& event = history.events.last();
         event.time      = QDateTime::currentDateTimeUtc();
         event.comment   = QObject::tr("Initial version.");
-        event.icon      = "://icons/48x48/Start.png";        
+        event.icon      = "://icons/48x48/Start.png";
     }
 
     // search for the first item with data
@@ -361,7 +359,7 @@ void IGisItem::cutHistory()
 
 bool IGisItem::isReadOnly() const
 {
-    return !(flags & eFlagWriteAllowed);
+    return(!(flags & eFlagWriteAllowed));
 }
 
 bool IGisItem::isTainted() const
@@ -400,7 +398,7 @@ const IGisItem::key_t &IGisItem::getKey()
     {
         genKey();
     }
-    return key;
+    return(key);
 }
 
 QColor IGisItem::str2color(const QString& name)
@@ -411,12 +409,12 @@ QColor IGisItem::str2color(const QString& name)
     {
         if(p->color == ref)
         {
-            return p->color;
+            return(p->color);
         }
         p++;
     }
 
-    return QColor();
+    return(QColor());
 }
 
 QString IGisItem::color2str(const QColor& color)
@@ -426,12 +424,12 @@ QString IGisItem::color2str(const QColor& color)
     {
         if(p->color == color)
         {
-            return p->name;
+            return(p->name);
         }
         p++;
     }
 
-    return "";
+    return("");
 }
 
 void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines)
@@ -474,7 +472,6 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
     {
         lines << subline;
     }
-
 }
 
 void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPainter& p)
@@ -487,11 +484,11 @@ void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPai
         QPointF( 0.0, 15.0)      //lower tail
     };
 
-    QPointF  pt, pt1, ptt;
+    QPointF pt, pt1, ptt;
 
     // draw direction arrows
-    bool    start = true;
-    qreal  heading;
+    bool start = true;
+    qreal heading;
 
     //generate arrow pic on-the-fly
     QImage arrow_pic(21,16, QImage::Format_ARGB32);
@@ -547,7 +544,7 @@ QString IGisItem::removeHtml(const QString &str)
 {
     QTextDocument html;
     html.setHtml(str);
-    return html.toPlainText();
+    return(html.toPlainText());
 }
 
 
@@ -555,15 +552,15 @@ QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& st
 {
     if(isReadOnly)
     {
-        return QString("%1").arg(str);
+        return(QString("%1").arg(str));
     }
     if(key.isEmpty())
     {
-        return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+        return(QString("<a href='%1'>%2</a>").arg(href).arg(str));
     }
     else
     {
-        return QString("<a href='%1?key=%3'>%2</a>").arg(href).arg(str).arg(key);
+        return(QString("<a href='%1?key=%3'>%2</a>").arg(href).arg(str).arg(key));
     }
 }
 
@@ -575,7 +572,6 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     isEmpty = removeHtml(cmt).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-
         str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
         if(isEmpty)
         {
@@ -611,7 +607,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         }
         else
         {
-            foreach(const link_t& link, links)
+            foreach(const link_t &link, links)
             {
                 if(link.text.isEmpty())
                 {
@@ -624,7 +620,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
             }
         }
     }
-    return str;
+    return(str);
 }
 
 QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key)
@@ -656,7 +652,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
         }
         else
         {
-            foreach(const link_t& link, links)
+            foreach(const link_t &link, links)
             {
                 if(link.text.isEmpty())
                 {
@@ -669,7 +665,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
             }
         }
     }
-    return str;
+    return(str);
 }
 
 bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw *gis)
@@ -685,7 +681,7 @@ bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw
     QPolygonF tmp2 = viewport;
     gis->convertRad2Px(tmp2);
 
-    return tmp2.boundingRect().intersects(tmp2.boundingRect());
+    return(tmp2.boundingRect().intersects(tmp2.boundingRect()));
 }
 
 bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis)
@@ -696,7 +692,6 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
     QPointF pt = point;
     gis->convertRad2Px(pt);
 
-    return tmp2.boundingRect().contains(pt);
-
+    return(tmp2.boundingRect().contains(pt));
 }
 

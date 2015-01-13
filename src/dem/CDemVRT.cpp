@@ -16,15 +16,15 @@
 
 **********************************************************************************************/
 
-#include "dem/CDemVRT.h"
-#include "dem/CDemDraw.h"
-#include "units/IUnit.h"
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "dem/CDemDraw.h"
+#include "dem/CDemVRT.h"
+#include "units/IUnit.h"
 
+#include <QtWidgets>
 #include <gdal_priv.h>
 #include <ogr_spatialref.h>
-#include <QtWidgets>
 
 #define TILELIMIT 30000
 #define TILESIZEX 64
@@ -107,7 +107,6 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(pj_is_latlong(pjsrc))
     {
-
         xscale *= 111120;
         yscale *= 111120;
         // convert to RAD to match internal notations
@@ -137,7 +136,10 @@ CDemVRT::~CDemVRT()
 
 qreal CDemVRT::getElevationAt(const QPointF& pos)
 {
-    if(pjsrc == 0) return NOFLOAT;
+    if(pjsrc == 0)
+    {
+        return( NOFLOAT);
+    }
 
     qint16 e[4];
     QPointF pt = pos;
@@ -146,7 +148,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
 
     if(!boundingBox.contains(pt))
     {
-        return NOFLOAT;
+        return(NOFLOAT);
     }
 
     pt = trInv.map(pt);
@@ -159,12 +161,12 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
     mutex.unlock();
     if(err == CE_Failure)
     {
-        return NOFLOAT;
+        return(NOFLOAT);
     }
 
     if(hasNoData && e[0] == noData)
     {
-        return NOFLOAT;
+        return(NOFLOAT);
     }
 
     qreal b1 = e[0];
@@ -174,7 +176,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
 
     qreal ele = b1 + b2 * x + b3 * y + b4 * x * y;
 
-    return ele;
+    return(ele);
 }
 
 
@@ -219,17 +221,41 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     top      = qRound(pt1.y() < pt2.y() ? pt1.y() : pt2.y());
     bottom   = qRound(pt4.y() > pt3.y() ? pt4.y() : pt3.y());
 
-    if(left <= 0) left = 1;
-    if(left >= xsize_px) left = xsize_px - 1;
+    if(left <= 0)
+    {
+        left = 1;
+    }
+    if(left >= xsize_px)
+    {
+        left = xsize_px - 1;
+    }
 
-    if(top <= 0) top  = 1;
-    if(top >= ysize_px) top = ysize_px - 1;
+    if(top <= 0)
+    {
+        top  = 1;
+    }
+    if(top >= ysize_px)
+    {
+        top = ysize_px - 1;
+    }
 
-    if(right >= xsize_px) right = xsize_px - 1;
-    if(right <= 0) right = 1;
+    if(right >= xsize_px)
+    {
+        right = xsize_px - 1;
+    }
+    if(right <= 0)
+    {
+        right = 1;
+    }
 
-    if(bottom >= ysize_px) bottom = ysize_px - 1;
-    if(bottom <= 0) bottom = 1;
+    if(bottom >= ysize_px)
+    {
+        bottom = ysize_px - 1;
+    }
+    if(bottom <= 0)
+    {
+        bottom = 1;
+    }
 
     qreal imgw = TILESIZEX;
     qreal imgh = TILESIZEY;
@@ -239,13 +265,13 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     /*
         As the 3x3 window will create a border of one pixel
         more data is read than displayed to compensate.
-    */
+     */
     int wp2 = w + 2;
     int hp2 = h + 2;
 
     // start to draw the map
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);    
+    USE_ANTI_ALIASING(p,true);
     p.translate(-pp);
 
     qreal o1 = getOpacity()/100.0;

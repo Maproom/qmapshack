@@ -19,15 +19,19 @@
 #ifndef WPTICONS_H
 #define WPTICONS_H
 
-#include <QString>
 #include <QPixmap>
+#include <QString>
 
 struct icon_t
 {
-    icon_t(): focus(16,16){}
-    icon_t(const QString& path, int x, int y) : path(path), focus(x,y) {}
+    icon_t() : focus(16,16)
+    {
+    }
+    icon_t(const QString& path, int x, int y) : path(path), focus(x,y)
+    {
+    }
     QString path;
-    QPoint  focus;
+    QPoint focus;
 };
 
 

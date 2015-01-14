@@ -134,7 +134,7 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
     {
         if(offsetNET1 == 0)
         {
-            return(0xFFFFFFFF);
+            return 0xFFFFFFFF;
         }
 
         QByteArray data;
@@ -142,12 +142,12 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
         newOffset = gar_ptr_load(uint32_t, data.data());
         if(newOffset & 0x00400000)
         {
-            return(0xFFFFFFFF);
+            return 0xFFFFFFFF;
         }
         newOffset = (newOffset & 0x003FFFFF);
     }
 
     newOffset <<= addrshift1;
     //     qDebug() << hex << newOffset;
-    return(newOffset);
+    return newOffset;
 }

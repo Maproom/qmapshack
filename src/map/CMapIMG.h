@@ -239,7 +239,7 @@ private:
 
         quint32 blocksize()
         {
-            return( 1 << (e1 + e2));
+            return 1 << (e1 + e2);
         }
     };
     struct FATblock_t
@@ -507,17 +507,17 @@ private:
         {
             if (ml.bits != bits || ml.level != level || ml.useBaseMap != useBaseMap)
             {
-                return( false);
+                return false;
             }
             else
             {
-                return( true);
+                return true;
             }
         }
 
         static bool GreaterThan(const map_level_t &ml1, const map_level_t &ml2)
         {
-            return( ml1.bits < ml2.bits);
+            return ml1.bits < ml2.bits;
         }
     };
 

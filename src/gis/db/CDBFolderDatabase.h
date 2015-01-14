@@ -34,7 +34,7 @@ public:
     void updateLostFound();
     const QString& getFilename()
     {
-        return( filename);
+        return filename;
     }
 private:
     QString filename;

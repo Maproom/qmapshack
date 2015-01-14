@@ -492,11 +492,11 @@ bool IUnit::parseTimestamp(const QString &time, QDateTime &datetime)
 
     if (!datetime.isValid())
     {
-        return(false);
+        return false;
     }
 
 
-    return(true);
+    return true;
 }
 
 
@@ -558,7 +558,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     datetime.setOffsetFromUtc(tzoffset);
 
 
-    return(datetime);
+    return datetime;
 }
 
 QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos)
@@ -587,7 +587,7 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return(tmp.toString(shortDate ? Qt::ISODate : Qt::SystemLocaleLongDate));
+    return tmp.toString(shortDate ? Qt::ISODate : Qt::SystemLocaleLongDate);
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)
@@ -601,14 +601,14 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
 
     if(qRed(rgb) == 0 && qGreen(rgb) == 0)
     {
-        return("UTC");
+        return "UTC";
     }
 
     int tz   = ((qRed(rgb) & 248) << 1) + ((qGreen(rgb) >> 4) & 15);
     if(tz >= N_TIMEZONES)
     {
-        return(0);
+        return 0;
     }
 
-    return(tblTimezone[tz]);
+    return tblTimezone[tz];
 }

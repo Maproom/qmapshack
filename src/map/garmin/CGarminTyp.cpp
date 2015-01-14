@@ -51,30 +51,30 @@ bool CGarminTyp::decode(const QByteArray& array, QMap<quint32, polygon_property>
 
     if(!parseHeader(in))
     {
-        return(false);
+        return false;
     }
 
     if(!parseDrawOrder(in, drawOrder))
     {
-        return(false);
+        return false;
     }
 
     if(!parsePolygon(in, polygons))
     {
-        return(false);
+        return false;
     }
 
     if(!parsePolyline(in, polylines))
     {
-        return(false);
+        return false;
     }
 
     if(!parsePoint(in, points))
     {
-        return(false);
+        return false;
     }
 
-    return(true);
+    return true;
 }
 
 QTextCodec * CGarminTyp::getCodec(quint16 codepage)
@@ -85,7 +85,7 @@ QTextCodec * CGarminTyp::getCodec(quint16 codepage)
         codec = QTextCodec::codecForName("UTF-8");
     }
 
-    return(codec);
+    return codec;
 }
 
 
@@ -104,7 +104,7 @@ bool CGarminTyp::parseHeader(QDataStream& in)
     if(garmintyp != "GARMIN TYP")
     {
         qDebug() << "CMapTDB::readTYP() not a known typ file";
-        return(false);
+        return false;
     }
 
     /* reading typ creation date string */
@@ -136,7 +136,7 @@ bool CGarminTyp::parseHeader(QDataStream& in)
     qDebug() << "Order      doff/dlen/aoff/amod/asize:" << hex << "\t" << sectOrder.dataOffset << "\t" << sectOrder.dataLength << "\t" << sectOrder.arrayOffset << "\t" << sectOrder.arrayModulo << "\t" << sectOrder.arrayOffset;
 #endif
 
-    return(true);
+    return true;
 }
 
 
@@ -144,12 +144,12 @@ bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
 {
     if(sectOrder.arrayModulo != 5)
     {
-        return(false);
+        return false;
     }
 
     if((sectOrder.arraySize % sectOrder.arrayModulo) != 0)
     {
-        return(true);
+        return true;
     }
 
     in.device()->seek(sectOrder.arrayOffset);
@@ -215,7 +215,7 @@ bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
     printf(" \n");
 #endif
 
-    return(true);
+    return true;
 }
 
 
@@ -225,7 +225,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
 
     if(!sectPolygons.arrayModulo || ((sectPolygons.arraySize % sectPolygons.arrayModulo) != 0))
     {
-        return(true);
+        return true;
     }
 
     QTextCodec * codec = getCodec(codepage);
@@ -529,7 +529,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         }
     }
 
-    return(true);
+    return true;
 }
 
 
@@ -539,7 +539,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 
     if(!sectPolylines.arrayModulo || ((sectPolylines.arraySize % sectPolylines.arrayModulo) != 0))
     {
-        return(true);
+        return true;
     }
 
     QTextCodec * codec = getCodec(codepage);
@@ -912,7 +912,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 #endif
         }
     }
-    return(true);
+    return true;
 }
 
 
@@ -940,7 +940,7 @@ bool CGarminTyp::decodeBppAndBytes(int ncolors, int w, int flags, int& bpp, int&
         }
         else
         {
-            return( false);
+            return false;
         }
         break;
     }
@@ -965,7 +965,7 @@ bool CGarminTyp::decodeBppAndBytes(int ncolors, int w, int flags, int& bpp, int&
         }
         else
         {
-            return( false);
+            return false;
         }
         break;
     }
@@ -994,13 +994,13 @@ bool CGarminTyp::decodeBppAndBytes(int ncolors, int w, int flags, int& bpp, int&
         }
         else
         {
-            return( false);
+            return false;
         }
         break;
     }
 
     default:
-        return( false);
+        return false;
     }
 
     bytes = (w * bpp) / 8;
@@ -1009,7 +1009,7 @@ bool CGarminTyp::decodeBppAndBytes(int ncolors, int w, int flags, int& bpp, int&
         ++bytes;
     }
 
-    return(true);
+    return true;
 }
 
 
@@ -1060,7 +1060,7 @@ bool CGarminTyp::decodeColorTable(QDataStream& in, QImage& img, int ncolors, int
             img.setColor(i,qRgba(0,0,0,0));
         }
     }
-    return(true);
+    return true;
 }
 
 
@@ -1120,7 +1120,7 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
 
     if(!sectPoints.arrayModulo || ((sectPoints.arraySize % sectPoints.arrayModulo) != 0))
     {
-        return(true);
+        return true;
     }
 
     QTextCodec * codec = getCodec(codepage);
@@ -1311,5 +1311,5 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
         }
     }
 
-    return(true);
+    return true;
 }

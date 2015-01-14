@@ -77,18 +77,18 @@ public:
     {
         if ( scale == 0 )
         {
-            return( 0);
+            return 0;
         }
-        return( ( int ) ( ( val - usedMin ) * scale + 0.5 ));
+        return ( int ) ( ( val - usedMin ) * scale + 0.5 );
     }
 
     inline qreal pt2val( int pt )
     {
         if ( scale == 0 )
         {
-            return( 0);
+            return 0;
         }
-        return( ( qreal ) ( ( (qreal)pt - 0.5 ) / scale + usedMin ));
+        return ( qreal ) ( ( (qreal)pt - 0.5 ) / scale + usedMin );
     }
 
     void setAutoscale(bool on)
@@ -98,22 +98,22 @@ public:
 
     inline tictype_e getTicType()
     {
-        return( ticType);
+        return ticType;
     }
     inline tictype_e setTicType(tictype_e t)
     {
         tictype_e old = ticType;
         ticType = t;
-        return( old);
+        return old;
     }
 
     qreal min()
     {
-        return( usedMin);
+        return usedMin;
     }
     qreal max()
     {
-        return( usedMax);
+        return usedMax;
     }
 
 protected:

@@ -26,7 +26,7 @@ struct mitab_entry_t {QString name; int idx; };
 
 static bool mitabLessThan(const mitab_entry_t &s1, const mitab_entry_t &s2)
 {
-    return(s1.name < s2.name);
+    return s1.name < s2.name;
 }
 
 CProjWizard::CProjWizard(QLineEdit &line)
@@ -211,12 +211,12 @@ bool CProjWizard::validProjStr(const QString projStr)
     if (!projCheck)
     {
         QMessageBox::warning(0, tr("Error..."),tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(pj_errno)),QMessageBox::Abort,QMessageBox::Abort);
-        return(false);
+        return false;
     }
     else
     {
         pj_free(projCheck);
-        return(true);
+        return true;
     }
 }
 

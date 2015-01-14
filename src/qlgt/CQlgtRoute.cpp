@@ -41,7 +41,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
     if(strncmp(magic,"QLRte   ",9))
     {
         dev->seek(pos);
-        return(s);
+        return s;
     }
 
     QList<rte_head_entry_t> entries;
@@ -140,7 +140,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
     }
 
 
-    return(s);
+    return s;
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
@@ -257,7 +257,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
     }
 
 
-    return(s);
+    return s;
 }
 
 CQlgtRoute::CQlgtRoute(quint64 id, QObject *parent)

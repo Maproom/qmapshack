@@ -113,5 +113,5 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit)
 
 qreal CUnitMetric::elevation2meter(const QString& val)
 {
-    return(val.toDouble());
+    return val.toDouble();
 }

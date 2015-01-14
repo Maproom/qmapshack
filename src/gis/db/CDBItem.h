@@ -32,11 +32,11 @@ public:
 
     quint64 getId()
     {
-        return( id);
+        return id;
     }
     const QString& getKey()
     {
-        return( key);
+        return key;
     }
     void toggle();
     void remove();

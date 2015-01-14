@@ -94,12 +94,12 @@ public:
     }
     virtual QString getFilename() const
     {
-        return( filename);
+        return filename;
     }
 
     type_e getType() const
     {
-        return( type);
+        return type;
     }
 
     /**
@@ -108,27 +108,27 @@ public:
      */
     const QString& getKey()
     {
-        genKey(); return( key);
+        genKey(); return key;
     }
     const QString& getName() const
     {
-        return( metadata.name);
+        return metadata.name;
     }
     const QDateTime& getTime() const
     {
-        return( metadata.time);
+        return metadata.time;
     }
     const QString& getKeywords() const
     {
-        return( metadata.keywords);
+        return metadata.keywords;
     }
     const QString& getDescription() const
     {
-        return( metadata.desc);
+        return metadata.desc;
     }
     const QList<IGisItem::link_t>& getLinks() const
     {
-        return( metadata.links);
+        return metadata.links;
     }
 
     void setName(const QString& str);
@@ -194,7 +194,7 @@ public:
      */
     bool  isValid() const
     {
-        return( valid);
+        return valid;
     }
 
     void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);

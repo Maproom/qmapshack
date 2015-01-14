@@ -47,7 +47,7 @@ private:
         quint64 getOffsetJpeg(quint32 x, quint32 y)
         {
             qint32 idx = y * xTiles + x;
-            return(idx < offsetJpegs.size() ? offsetJpegs[idx] : 0);
+            return idx < offsetJpegs.size() ? offsetJpegs[idx] : 0;
         }
 
         qreal xscale;

@@ -681,7 +681,7 @@ void CCanvas::setup()
 
 QString CCanvas::getProjection()
 {
-    return(map->getProjection());
+    return map->getProjection();
 }
 
 void CCanvas::setProjection(const QString& proj)
@@ -693,12 +693,12 @@ void CCanvas::setProjection(const QString& proj)
 
 qreal CCanvas::getElevationAt(const QPointF& pos)
 {
-    return(dem->getElevationAt(pos));
+    return dem->getElevationAt(pos);
 }
 
 void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 {
-    return(dem->getElevationAt(pos, ele));
+    return dem->getElevationAt(pos, ele);
 }
 
 void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
@@ -710,5 +710,5 @@ void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 
 bool CCanvas::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
 {
-    return(map->findPolylineCloseBy(pt1, pt2, threshold, polyline));
+    return map->findPolylineCloseBy(pt1, pt2, threshold, polyline);
 }

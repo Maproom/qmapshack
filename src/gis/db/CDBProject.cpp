@@ -126,7 +126,7 @@ bool CDBProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return(false);
+        return false;
     }
 
     bool res = false;
@@ -140,13 +140,13 @@ bool CDBProject::saveAs()
     }
     else
     {
-        return(false);
+        return false;
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
 
-    return(res);
+    return res;
 }
 
 bool CDBProject::save()
@@ -290,9 +290,9 @@ bool CDBProject::save()
             CGisWidget::self().postEventForDb(info);
         }
 
-        return(false);
+        return false;
     }
-    return(true);
+    return true;
 }
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)

@@ -60,7 +60,7 @@ void CMouseEditArea::drawLine(const QPolygonF &l, QPainter& p)
 
 IGisLine * CMouseEditArea::getGisLine()
 {
-    return(dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key)));
+    return dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
 }
 
 void CMouseEditArea::slotAbort()

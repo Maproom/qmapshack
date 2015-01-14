@@ -73,10 +73,10 @@ quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift
     if(hasSubType)
     {
         type |= *pData;
-        return(9);
+        return 9;
     }
 
-    return(8);
+    return 8;
 }
 
 
@@ -115,5 +115,5 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
         lbl_ptr    &= 0x003FFFFF;
     }
 
-    return(byte_size);
+    return byte_size;
 }

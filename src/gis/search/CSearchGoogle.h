@@ -36,11 +36,11 @@ public:
 
     bool save()
     {
-        return( false);
+        return false;
     }
     bool saveAs()
     {
-        return( false);
+        return false;
     }
 
 private slots:

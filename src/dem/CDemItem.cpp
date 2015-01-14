@@ -99,7 +99,7 @@ void CDemItem::updateIcon()
 bool CDemItem::isActivated()
 {
     QMutexLocker lock(&mutexActiveDems);
-    return(!demfile.isNull());
+    return !demfile.isNull();
 }
 
 bool CDemItem::toggleActivate()
@@ -107,12 +107,12 @@ bool CDemItem::toggleActivate()
     QMutexLocker lock(&mutexActiveDems);
     if(demfile.isNull())
     {
-        return(activate());
+        return activate();
     }
     else
     {
         deactivate();
-        return(false);
+        return false;
     }
 }
 
@@ -154,7 +154,7 @@ bool CDemItem::activate()
     // no mapfiles loaded? Bad.
     if(demfile.isNull())
     {
-        return(false);
+        return false;
     }
 
     // if map is activated sucessfully add to the list of map files
@@ -162,7 +162,7 @@ bool CDemItem::activate()
     if(!demfile->activated())
     {
         delete demfile;
-        return(false);
+        return false;
     }
 
     moveToBottom();
@@ -179,7 +179,7 @@ bool CDemItem::activate()
 
     // Add the demfile setup dialog as child of this item
     showChildren(true);
-    return(true);
+    return true;
 }
 
 void CDemItem::moveToTop()

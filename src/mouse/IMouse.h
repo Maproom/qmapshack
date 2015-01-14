@@ -57,11 +57,11 @@ public:
      */
     operator const QCursor&()
     {
-        return( cursor);
+        return cursor;
     }
     CCanvas * getCanvas()
     {
-        return( canvas);
+        return canvas;
     }
 
     virtual void setMouseTracking(bool enabled);

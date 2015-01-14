@@ -212,32 +212,32 @@ CMainWindow::~CMainWindow()
 
 bool CMainWindow::isScaleVisible()
 {
-    return(actionShowScale->isChecked());
+    return actionShowScale->isChecked();
 }
 
 bool CMainWindow::isGridVisible()
 {
-    return(actionShowGrid->isChecked());
+    return actionShowGrid->isChecked();
 }
 
 bool CMainWindow::isNight()
 {
-    return(actionNightDay->isChecked());
+    return actionNightDay->isChecked();
 }
 
 bool CMainWindow::isPOIText()
 {
-    return(actionPOIText->isChecked());
+    return actionPOIText->isChecked();
 }
 
 bool CMainWindow::isMapToolTip()
 {
-    return(actionMapToolTip->isChecked());
+    return actionMapToolTip->isChecked();
 }
 
 bool CMainWindow::flipMouseWheel()
 {
-    return(actionFlipMouseWheel->isChecked());
+    return actionFlipMouseWheel->isChecked();
 }
 
 void CMainWindow::addMapList(CMapList * list, const QString &name)
@@ -261,7 +261,7 @@ void CMainWindow::addWidgetToTab(QWidget * w)
 
 CCanvas * CMainWindow::getVisibleCanvas()
 {
-    return(dynamic_cast<CCanvas*>(tabWidget->currentWidget()));
+    return dynamic_cast<CCanvas*>(tabWidget->currentWidget());
 }
 
 void CMainWindow::zoomCanvasTo(const QRectF rect)
@@ -278,9 +278,9 @@ qreal CMainWindow::getEelevationAt(const QPointF& pos)
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
     {
-        return(canvas->getElevationAt(pos));
+        return canvas->getElevationAt(pos);
     }
-    return(NOFLOAT);
+    return NOFLOAT;
 }
 
 void CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)

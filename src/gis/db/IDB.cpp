@@ -38,51 +38,51 @@ bool IDB::setupDB(const QString& filename, const QString& connectionName)
     QSqlQuery query(db);
     if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
     {
-        return(false);
+        return false;
     }
 
     if(!query.exec("PRAGMA synchronous=OFF"))
     {
-        return(false);
+        return false;
     }
 
     if(!query.exec("PRAGMA temp_store=MEMORY"))
     {
-        return(false);
+        return false;
     }
 
     if(!query.exec("PRAGMA default_cache_size=50"))
     {
-        return(false);
+        return false;
     }
 
     if(!query.exec("PRAGMA page_size=8192"))
     {
-        return(false);
+        return false;
     }
 
     if(!query.exec("SELECT version FROM versioninfo"))
     {
-        return(initDB());
+        return initDB();
     }
     else if(query.next())
     {
         int version = query.value(0).toInt();
         if(version != DB_VERSION)
         {
-            return(migrateDB(version));
+            return migrateDB(version);
         }
     }
     else
     {
-        return(initDB());
+        return initDB();
     }
 
     query.prepare( "UPDATE folders SET name=:name WHERE id=1");
     query.bindValue(":name", connectionName);
     QUERY_EXEC(; )
 
-    return(true);
+    return true;
 }
 
 bool IDB::initDB()
@@ -93,7 +93,7 @@ bool IDB::initDB()
     {
         query.prepare( "INSERT INTO versioninfo (version, type) VALUES(:version, 'QMapShack')");
         query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(return(false); );
+        QUERY_EXEC(return false;  );
     }
 
     if(!query.exec( "CREATE TABLE folders ("
@@ -109,7 +109,7 @@ bool IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
-        return(false);
+        return false;
     }
 
     if(!query.exec( "CREATE TABLE items ("
@@ -125,12 +125,12 @@ bool IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
-        return(false);
+        return false;
     }
 
     query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
     query.bindValue(":name", db.connectionName());
-    QUERY_EXEC(return(false); );
+    QUERY_EXEC(return false;  );
 
     if(!query.exec( "CREATE TABLE folder2folder ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -142,7 +142,7 @@ bool IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
-        return(false);
+        return false;
     }
 
     if(!query.exec( "CREATE TABLE folder2item ("
@@ -155,9 +155,9 @@ bool IDB::initDB()
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
-        return(false);
+        return false;
     }
-    return(true);
+    return true;
 }
 
 bool IDB::migrateDB(int version)
@@ -172,7 +172,7 @@ bool IDB::migrateDB(int version)
     }
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", version - 1);
-    QUERY_EXEC(return(false); );
-    return(true);
+    QUERY_EXEC(return false;  );
+    return true;
 }
 

@@ -32,7 +32,7 @@ public:
 
     QString getInfo()
     {
-        return( "no info");
+        return "no info";
     }
 
     quint32 timestamp;

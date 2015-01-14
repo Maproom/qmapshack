@@ -47,7 +47,7 @@ public:
 
     bool activated()
     {
-        return( isActivated);
+        return isActivated;
     }
 
     /**
@@ -62,25 +62,25 @@ public:
 
     bool doHillshading()
     {
-        return( bHillshading);
+        return bHillshading;
     }
 
     int getFactorHillshading();
 
     bool doSlopeColor()
     {
-        return( bSlopeColor);
+        return bSlopeColor;
     }
 
     int getGradeSlopeColor()
     {
-        return( gradeSlopeColor);
+        return gradeSlopeColor;
     }
 
 
     const QVector<QRgb> getSlopeColorTable()
     {
-        return( slopetable);
+        return slopetable;
     }
 
     static const qreal tblGrade[5][6];

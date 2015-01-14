@@ -260,5 +260,5 @@ quint64 CQmsDb::store(IGisItem& item)
     query.next();
     quint64 idItem = query.value(0).toULongLong();
 
-    return(idItem);
+    return idItem;
 }

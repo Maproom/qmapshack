@@ -198,10 +198,10 @@ bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
     {
         if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
         {
-            return(true);
+            return true;
         }
     }
-    return(false);
+    return false;
 }
 
 QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
@@ -222,10 +222,10 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 
     if(idx < 0)
     {
-        return(NOPOINTF);
+        return NOPOINTF;
     }
 
-    return(line[idx]);
+    return line[idx];
 }
 
 void CGisItemOvlArea::readLine(const QPolygonF &line)
@@ -391,7 +391,7 @@ QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
     x = x / len;
     y = y / len;
 
-    return(QPointF(x,y));
+    return QPointF(x,y);
 }
 
 IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse)
@@ -400,12 +400,12 @@ IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse
     {
         scrOpt = new CScrOptOvlArea(this, origin, mouse);
     }
-    return(scrOpt);
+    return scrOpt;
 }
 
 const QString& CGisItemOvlArea::getName() const
 {
-    return(area.name);
+    return area.name;
 }
 
 QString CGisItemOvlArea::getInfo() const
@@ -454,7 +454,7 @@ QString CGisItemOvlArea::getInfo() const
         }
     }
 
-    return(str);
+    return str;
 }
 
 void CGisItemOvlArea::getPolylineFromData(QPolygonF& line)

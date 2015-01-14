@@ -47,7 +47,7 @@ IMapProp *IMap::getSetup()
         setup = new CMapPropSetup(this, map);
     }
 
-    return(setup);
+    return setup;
 }
 
 
@@ -100,5 +100,5 @@ bool IMap::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPo
     Q_UNUSED(pt2);
     Q_UNUSED(threshold);
     Q_UNUSED(polyline);
-    return(false);
+    return false;
 }

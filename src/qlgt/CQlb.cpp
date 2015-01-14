@@ -43,7 +43,7 @@ CQlb& CQlb::operator <<(CQlgtWpt& wpt)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << wpt;
 
-    return(*this);
+    return *this;
 }
 
 
@@ -53,7 +53,7 @@ CQlb& CQlb::operator <<(CQlgtTrack& trk)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << trk;
 
-    return(*this);
+    return *this;
 }
 
 
@@ -63,7 +63,7 @@ CQlb& CQlb::operator <<(CQlgtRoute& rte)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << rte;
 
-    return(*this);
+    return *this;
 }
 
 
@@ -73,7 +73,7 @@ CQlb& CQlb::operator <<(CQlgtDiary& dry)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << dry;
 
-    return(*this);
+    return *this;
 }
 
 
@@ -83,7 +83,7 @@ CQlb& CQlb::operator <<(IQlgtOverlay& ovl)
     stream.setVersion(QDataStream::Qt_4_5);
     stream << ovl;
 
-    return(*this);
+    return *this;
 }
 
 

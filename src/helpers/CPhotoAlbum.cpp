@@ -28,7 +28,6 @@ CPhotoAlbum::CPhotoAlbum(QWidget *parent)
 
 CPhotoAlbum::~CPhotoAlbum()
 {
-
 }
 
 void CPhotoAlbum::setSource(CGisItemWpt& wpt)

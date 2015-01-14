@@ -40,7 +40,7 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
     if(strncmp(magic,"QLOvl   ",9))
     {
         dev->seek(pos);
-        return(s);
+        return s;
     }
 
     QList<ovl_head_entry_t> entries;
@@ -122,7 +122,7 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
         ++entry;
     }
 
-    return(s);
+    return s;
 }
 
 QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
@@ -182,7 +182,7 @@ QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
         ++entry;
     }
 
-    return(s);
+    return s;
 }
 
 

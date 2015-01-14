@@ -38,12 +38,12 @@ public:
     ///get a reference to the x axis
     CPlotAxis& x()
     {
-        return( *xaxis);
+        return *xaxis;
     }
     ///get a reference to the y axis
     CPlotAxis& y()
     {
-        return( *yaxis);
+        return *yaxis;
     }
 
     /// setup all internal data to fit the dynamic range of all data points

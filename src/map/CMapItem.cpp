@@ -129,7 +129,7 @@ void CMapItem::updateIcon()
 bool CMapItem::isActivated()
 {
     QMutexLocker lock(&mutexActiveMaps);
-    return(!mapfile.isNull());
+    return !mapfile.isNull();
 }
 
 bool CMapItem::toggleActivate()
@@ -137,12 +137,12 @@ bool CMapItem::toggleActivate()
     QMutexLocker lock(&mutexActiveMaps);
     if(mapfile.isNull())
     {
-        return(activate());
+        return activate();
     }
     else
     {
         deactivate();
-        return(false);
+        return false;
     }
 }
 
@@ -206,7 +206,7 @@ bool CMapItem::activate()
     // no mapfiles loaded? Bad.
     if(mapfile.isNull())
     {
-        return(false);
+        return false;
     }
 
     // if map is activated sucessfully add to the list of map files
@@ -214,7 +214,7 @@ bool CMapItem::activate()
     if(!mapfile->activated())
     {
         delete mapfile;
-        return(false);
+        return false;
     }
 
     setToolTip(0, mapfile->getCopyright());
@@ -236,7 +236,7 @@ bool CMapItem::activate()
 
     // Add the mapfile setup dialog as child of this item
     showChildren(true);
-    return(true);
+    return true;
 }
 
 void CMapItem::moveToTop()

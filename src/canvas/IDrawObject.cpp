@@ -72,14 +72,14 @@ bool IDrawObject::isOutOfScale(const QPointF& scale)
 {
     if((getMinScale() != NOFLOAT) && (scale.x() < getMinScale()))
     {
-        return(true);
+        return true;
     }
     if((getMaxScale() != NOFLOAT) && (scale.x() > getMaxScale()))
     {
-        return(true);
+        return true;
     }
 
-    return(false);
+    return false;
 }
 
 void IDrawObject::getLayers(QListWidget& list)

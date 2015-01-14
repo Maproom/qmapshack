@@ -205,7 +205,7 @@ QString IGisItem::getNameEx() const
     {
         str += " @ " + project->getName();
     }
-    return(str);
+    return str;
 }
 
 
@@ -359,12 +359,12 @@ void IGisItem::cutHistory()
 
 bool IGisItem::isReadOnly() const
 {
-    return(!(flags & eFlagWriteAllowed));
+    return !(flags & eFlagWriteAllowed);
 }
 
 bool IGisItem::isTainted() const
 {
-    return (flags & eFlagTainted);
+    return flags & eFlagTainted;
 }
 
 void IGisItem::setReadOnlyMode(bool readOnly)
@@ -398,7 +398,7 @@ const IGisItem::key_t &IGisItem::getKey()
     {
         genKey();
     }
-    return(key);
+    return key;
 }
 
 QColor IGisItem::str2color(const QString& name)
@@ -409,12 +409,12 @@ QColor IGisItem::str2color(const QString& name)
     {
         if(p->color == ref)
         {
-            return(p->color);
+            return p->color;
         }
         p++;
     }
 
-    return(QColor());
+    return QColor();
 }
 
 QString IGisItem::color2str(const QColor& color)
@@ -424,12 +424,12 @@ QString IGisItem::color2str(const QColor& color)
     {
         if(p->color == color)
         {
-            return(p->name);
+            return p->name;
         }
         p++;
     }
 
-    return("");
+    return "";
 }
 
 void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines)
@@ -544,7 +544,7 @@ QString IGisItem::removeHtml(const QString &str)
 {
     QTextDocument html;
     html.setHtml(str);
-    return(html.toPlainText());
+    return html.toPlainText();
 }
 
 
@@ -552,15 +552,15 @@ QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& st
 {
     if(isReadOnly)
     {
-        return(QString("%1").arg(str));
+        return QString("%1").arg(str);
     }
     if(key.isEmpty())
     {
-        return(QString("<a href='%1'>%2</a>").arg(href).arg(str));
+        return QString("<a href='%1'>%2</a>").arg(href).arg(str);
     }
     else
     {
-        return(QString("<a href='%1?key=%3'>%2</a>").arg(href).arg(str).arg(key));
+        return QString("<a href='%1?key=%3'>%2</a>").arg(href).arg(str).arg(key);
     }
 }
 
@@ -620,7 +620,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
             }
         }
     }
-    return(str);
+    return str;
 }
 
 QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key)
@@ -665,7 +665,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
             }
         }
     }
-    return(str);
+    return str;
 }
 
 bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw *gis)
@@ -681,7 +681,7 @@ bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw
     QPolygonF tmp2 = viewport;
     gis->convertRad2Px(tmp2);
 
-    return(tmp2.boundingRect().intersects(tmp2.boundingRect()));
+    return tmp2.boundingRect().intersects(tmp2.boundingRect());
 }
 
 bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis)
@@ -692,6 +692,6 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
     QPointF pt = point;
     gis->convertRad2Px(pt);
 
-    return(tmp2.boundingRect().contains(pt));
+    return tmp2.boundingRect().contains(pt);
 }
 

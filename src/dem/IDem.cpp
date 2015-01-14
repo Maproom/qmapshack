@@ -24,7 +24,7 @@
 
 inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
 {
-    return(data[x + y * dx]);
+    return data[x + y * dx];
 }
 
 inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
@@ -113,7 +113,7 @@ IDemProp * IDem::getSetup()
         setup = new CDemPropSetup(this, dem);
     }
 
-    return(setup);
+    return setup;
 }
 
 void IDem::slotSetFactorHillshade(int f)
@@ -142,15 +142,15 @@ int IDem::getFactorHillshading()
 {
     if(factorHillshading == 1.0)
     {
-        return(0);
+        return 0;
     }
     else if(factorHillshading < 1)
     {
-        return(-1.0/factorHillshading);
+        return -1.0/factorHillshading;
     }
     else
     {
-        return(factorHillshading);
+        return factorHillshading;
     }
 }
 

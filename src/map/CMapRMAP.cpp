@@ -381,13 +381,13 @@ bool CMapRMAP::setProjection(const QString& projection, const QString& datum)
     pjsrc = pj_init_plus(projstr.toLocal8Bit().data());
     if(pjsrc == 0)
     {
-        return(false);
+        return false;
     }
 
     char * ptr = pj_get_def(pjsrc,0);
     qDebug() << "rmap:" << ptr;
 
-    return(true);
+    return true;
 }
 
 CMapRMAP::level_t& CMapRMAP::findBestLevel(const QPointF& s)
@@ -395,11 +395,11 @@ CMapRMAP::level_t& CMapRMAP::findBestLevel(const QPointF& s)
     int i = levels.size() - 1;
     if(s.x() < levels[0].xscale)
     {
-        return( levels[0]);
+        return levels[0];
     }
     if(s.x() > levels[i].xscale)
     {
-        return( levels[i]);
+        return levels[i];
     }
 
     int j = 0;
@@ -414,7 +414,7 @@ CMapRMAP::level_t& CMapRMAP::findBestLevel(const QPointF& s)
         }
     }
 
-    return(levels[i]);
+    return levels[i];
 }
 
 

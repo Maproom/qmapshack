@@ -34,7 +34,7 @@ QDataStream& operator>>(QDataStream& s, uintX& v)
 
     v.val |= tmp << shift;
 
-    return(s);
+    return s;
 }
 
 QDataStream& operator>>(QDataStream& s, intX& v)
@@ -60,7 +60,7 @@ QDataStream& operator>>(QDataStream& s, intX& v)
         v.val |= tmp << shift;
     }
 
-    return(s);
+    return s;
 }
 
 QDataStream& operator>>(QDataStream& s, utf8& v)
@@ -70,5 +70,5 @@ QDataStream& operator>>(QDataStream& s, utf8& v)
 
     v.val = QString::fromUtf8(s.device()->read(l));
 
-    return(s);
+    return s;
 }

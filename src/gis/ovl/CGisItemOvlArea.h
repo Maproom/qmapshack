@@ -50,33 +50,33 @@ public:
     const QString& getName() const;
     int getColorIdx() const
     {
-        return( colorIdx);
+        return colorIdx;
     }
     QString getInfo() const;
     void getPolylineFromData(QPolygonF& line);
     const QString& getComment() const
     {
-        return( area.cmt);
+        return area.cmt;
     }
     const QString& getDescription() const
     {
-        return( area.desc);
+        return area.desc;
     }
     const QList<link_t>& getLinks() const
     {
-        return( area.links);
+        return area.links;
     }
     qint32 getWidth() const
     {
-        return( area.width);
+        return area.width;
     }
     qint32 getStyle() const
     {
-        return( area.style);
+        return area.style;
     }
     bool getOpacity() const
     {
-        return( area.opacity);
+        return area.opacity;
     }
 
     void setName(const QString& str);
@@ -150,7 +150,7 @@ public:
 
     const area_t& getAreaData() const
     {
-        return( area);
+        return area;
     }
 
 private:

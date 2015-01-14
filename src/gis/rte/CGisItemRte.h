@@ -67,7 +67,7 @@ public:
 
     const QString& getName() const
     {
-        return( rte.name);
+        return rte.name;
     }
     QString getInfo() const;
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
@@ -88,15 +88,15 @@ public:
 
     const QString& getComment() const
     {
-        return( rte.cmt);
+        return rte.cmt;
     }
     const QString& getDescription() const
     {
-        return( rte.desc);
+        return rte.desc;
     }
     const QList<link_t>& getLinks() const
     {
-        return( rte.links);
+        return rte.links;
     }
 
     void setComment(const QString& str);

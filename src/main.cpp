@@ -181,5 +181,5 @@ int main(int argc, char ** argv)
         delete splash;
     }
 
-    return(a.exec());
+    return a.exec();
 }

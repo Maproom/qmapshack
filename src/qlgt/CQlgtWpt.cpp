@@ -42,7 +42,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
     {
         dev->seek(pos);
         //         throw(QObject::tr("This is not waypoint data."));
-        return(s);
+        return s;
     }
 
     QList<wpt_head_entry_t> entries;
@@ -189,7 +189,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
         ++entry;
     }
 
-    return(s);
+    return s;
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
@@ -354,7 +354,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
         ++entry;
     }
 
-    return(s);
+    return s;
 }
 
 

@@ -51,7 +51,7 @@ public:
      */
     bool activated()
     {
-        return( isActivated);
+        return isActivated;
     }
 
     /**
@@ -89,24 +89,24 @@ public:
      */
     const QString& getCopyright()
     {
-        return( copyright);
+        return copyright;
     }
 
     bool hasFeatureVisibility()
     {
-        return( flagsFeature & eFeatVisibility);
+        return flagsFeature & eFeatVisibility;
     }
     bool hasFeatureVectorItems()
     {
-        return( flagsFeature & eFeatVectorItems);
+        return flagsFeature & eFeatVectorItems;
     }
     bool hasFeatureTileCache()
     {
-        return( flagsFeature & eFeatTileCache);
+        return flagsFeature & eFeatTileCache;
     }
     bool hasFeatureLayers()
     {
-        return( flagsFeature & eFeatLayers);
+        return flagsFeature & eFeatLayers;
     }
 
     /**

@@ -41,7 +41,7 @@ public:
 
     QSettings& get()
     {
-        return( *cfg);
+        return *cfg;
     }
 
 private:

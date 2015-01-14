@@ -40,7 +40,7 @@ public:
     }
     const QPoint& getOrigin()
     {
-        return( origin);
+        return origin;
     }
 
     virtual void draw(QPainter& p) = 0;

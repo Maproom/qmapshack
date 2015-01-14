@@ -237,7 +237,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
         }
         CDemItem::mutexActiveDems.unlock();
     }
-    return(ele);
+    return ele;
 }
 
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)

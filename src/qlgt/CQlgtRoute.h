@@ -42,7 +42,7 @@ public:
             projXY p;
             p.u = lon;
             p.v = lat;
-            return( p);
+            return p;
         }
     };
 

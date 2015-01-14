@@ -33,7 +33,7 @@
 
 inline qreal readFloat(float val)
 {
-    return(val > NOFLOAT ? NOFLOAT : val);
+    return val > NOFLOAT ? NOFLOAT : val;
 }
 
 CDBProject::CDBProject(CQlgtFolder& folder)

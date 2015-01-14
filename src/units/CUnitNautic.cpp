@@ -91,5 +91,5 @@ void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit)
 
 qreal CUnitNautic::elevation2meter(const QString& val)
 {
-    return(val.toDouble());
+    return val.toDouble();
 }

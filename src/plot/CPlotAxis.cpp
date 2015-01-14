@@ -22,7 +22,7 @@
 
 inline qreal qLog10(qreal x)
 {
-    return( qLn(x)/qLn(10));
+    return qLn(x)/qLn(10);
 }
 
 CPlotAxis::CPlotAxis( QObject * parent )
@@ -196,7 +196,7 @@ const QString CPlotAxis::fmtsgl( qreal val )
         }
     }
 
-    return(f);
+    return f;
 }
 
 
@@ -262,7 +262,7 @@ const QString CPlotAxis::fmtdbl( qreal val )
             f = "%1." + QString( "%1" ).arg( ( int ) ( -exponent + 2 ) ) + "f";
         }
     }
-    return(f);
+    return f;
 }
 
 
@@ -270,7 +270,7 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
 {
     if ( scaleWidth > 0 )
     {
-        return( scaleWidth * m.width( " " ));
+        return scaleWidth * m.width( " " );
     }
 
     int width = 0;
@@ -287,7 +287,7 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
         }
         t = ticmark( t );
     }
-    return(width);
+    return width;
 }
 
 
@@ -307,7 +307,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
     switch ( ticType )
     {
     case eNoTic:
-        return( 0);
+        return 0;
         break;
 
     case eTicMinMax:
@@ -323,7 +323,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
         }
         else
         {
-            return( 0);
+            return 0;
         }
         break;
 
@@ -331,7 +331,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
         if ( interval == 0 )
         {
             //qWarning() << "CPlotAxis::ticmark() mode 'norm': interval == 0";
-            return( 0);
+            return 0;
         }
         if ( t == NULL )
         {
@@ -342,7 +342,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
             tic.val += interval;
             if ( ( tic.val - usedMax ) > interval / 20 )
             {
-                return( 0);
+                return 0;
             }
         }
         break;
@@ -361,7 +361,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
         else if ( lastTic == true )
         {
             lastTic = false;
-            return( 0);
+            return 0;
         }
         else
         {
@@ -377,7 +377,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
 
     tic.lbl.sprintf( format_single_prec.toLatin1(), tic.val );
 
-    return(&tic);
+    return &tic;
 }
 
 

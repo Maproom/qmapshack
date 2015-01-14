@@ -435,7 +435,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
         xmlBounds.setAttribute("maxlon", metadata.bounds.right());
     }
 
-    return(gpx);
+    return gpx;
 }
 
 void CGisItemWpt::readGpx(const QDomNode& xml)

@@ -97,5 +97,5 @@ void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit)
 
 qreal CUnitImperial::elevation2meter(const QString& val)
 {
-    return(val.toDouble() / 3.28084);
+    return val.toDouble() / 3.28084;
 }

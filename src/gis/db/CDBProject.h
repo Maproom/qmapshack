@@ -47,11 +47,11 @@ public:
 
     quint64 getId()
     {
-        return( id);
+        return id;
     }
     QString getDBName()
     {
-        return( db.connectionName());
+        return db.connectionName();
     }
 
     /**

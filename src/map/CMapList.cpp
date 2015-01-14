@@ -85,12 +85,12 @@ void CMapList::clear()
 
 int CMapList::count()
 {
-    return(treeWidget->topLevelItemCount());
+    return treeWidget->topLevelItemCount();
 }
 
 CMapItem * CMapList::item(int i)
 {
-    return(dynamic_cast<CMapItem *>(treeWidget->topLevelItem(i)));
+    return dynamic_cast<CMapItem *>(treeWidget->topLevelItem(i));
 }
 
 void CMapList::updateHelpText()

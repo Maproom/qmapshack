@@ -48,7 +48,7 @@ public:
 
     bool isValid()
     {
-        return( valid);
+        return valid;
     }
 private:
     bool valid;

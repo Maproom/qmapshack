@@ -43,7 +43,7 @@ public:
     virtual void clear();
     virtual int  size()
     {
-        return( items.size());
+        return items.size();
     }
 
     void addItem(IGisItem * gisItem);

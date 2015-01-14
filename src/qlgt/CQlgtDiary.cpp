@@ -40,7 +40,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
     if(strncmp(magic,"QLDry   ",9))
     {
         dev->seek(pos);
-        return(s);
+        return s;
     }
 
     QList<diary_head_entry_t> entries;
@@ -133,7 +133,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
         ++entry;
     }
 
-    return(s);
+    return s;
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
@@ -246,7 +246,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
         ++entry;
     }
 
-    return(s);
+    return s;
 }
 
 CQlgtDiary::CQlgtDiary(quint64 id, QObject *parent)

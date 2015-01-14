@@ -28,7 +28,7 @@ struct uintX
     }
     operator quint64()
     {
-        return( val);
+        return val;
     }
     quint64 val;
 };
@@ -40,7 +40,7 @@ struct intX
     }
     operator qint64()
     {
-        return( val);
+        return val;
     }
     qint64 val;
 };
@@ -49,7 +49,7 @@ struct utf8
 {
     operator QString()
     {
-        return( val);
+        return val;
     }
     QString val;
 };

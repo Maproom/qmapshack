@@ -110,5 +110,5 @@ bool CDBFolderLostFound::delItem(CDBItem * item)
     query.bindValue(":id", item->getId());
     QUERY_EXEC(return false);
 
-    return(true);
+    return true;
 }

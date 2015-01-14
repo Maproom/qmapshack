@@ -41,7 +41,7 @@ public:
 
     result_e getResult()
     {
-        return( result);
+        return result;
     }
     bool allOthersToo();
 

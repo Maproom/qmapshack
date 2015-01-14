@@ -80,12 +80,12 @@ void CDemList::clear()
 
 int CDemList::count()
 {
-    return(treeWidget->topLevelItemCount());
+    return treeWidget->topLevelItemCount();
 }
 
 CDemItem * CDemList::item(int i)
 {
-    return(dynamic_cast<CDemItem *>(treeWidget->topLevelItem(i)));
+    return dynamic_cast<CDemItem *>(treeWidget->topLevelItem(i));
 }
 
 void CDemList::updateHelpText()

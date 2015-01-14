@@ -34,7 +34,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow
 public:
     static CMainWindow& self()
     {
-        return( *pSelf);
+        return *pSelf;
     }
     virtual ~CMainWindow();
 
@@ -50,7 +50,7 @@ public:
     bool flipMouseWheel();
     const QFont& getMapFont()
     {
-        return( mapFont);
+        return mapFont;
     }
 
     void zoomCanvasTo(const QRectF rect);

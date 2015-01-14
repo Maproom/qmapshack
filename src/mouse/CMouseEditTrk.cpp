@@ -64,7 +64,7 @@ void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
 
 IGisLine * CMouseEditTrk::getGisLine()
 {
-    return(dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key)));
+    return dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
 }
 
 void CMouseEditTrk::slotAbort()

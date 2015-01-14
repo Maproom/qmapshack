@@ -31,12 +31,12 @@ public:
     ///calculate format for the given value
     const QString fmtsgl(qreal /*val*/)
     {
-        return( strFormat);
+        return strFormat;
     }
     ///calculate format for the given value
     const QString fmtdbl(qreal /*val*/)
     {
-        return( strFormat);
+        return strFormat;
     }
 
     const tic_t* ticmark( const tic_t * t );

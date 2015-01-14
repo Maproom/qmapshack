@@ -155,7 +155,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 
     if(pEnd && ((pStart + bytes_total) > pEnd))
     {
-        return(bytes_total);
+        return bytes_total;
     }
 
     /* bitstream info
@@ -224,7 +224,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 
     pixel = coords;
 
-    return(bytes_total);
+    return bytes_total;
 }
 
 
@@ -292,7 +292,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     //     assert((pEnd - pStart) >= bytes_total);
     if(((quint32)(pEnd - pStart)) < bytes_total)
     {
-        return (pEnd - pStart);
+        return pEnd - pStart;
     }
 
     CShiftReg sr(pData,bs_len,bx,by,false,signinfo);
@@ -361,7 +361,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
 
     pixel = coords;
 
-    return(bytes_total);
+    return bytes_total;
 }
 
 
@@ -436,7 +436,7 @@ int CGarminPolygon::bits_per_coord(quint8 base, bool is_signed)
     {
         ++n;
     }
-    return(n);
+    return n;
 }
 
 
@@ -480,7 +480,7 @@ bool CShiftReg::get(qint32& x, qint32& y)
     x = y = 0;
     if(bits < (bits_per_coord))
     {
-        return( false);
+        return false;
     }
 
     // don't know what to do with it -> skip extra bit
@@ -563,7 +563,7 @@ bool CShiftReg::get(qint32& x, qint32& y)
 
     // fill register until it has enought bits for one coord. pair again
     fill(bits_per_coord);
-    return(true);
+    return true;
 }
 
 

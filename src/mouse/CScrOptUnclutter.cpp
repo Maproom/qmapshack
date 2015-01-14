@@ -152,9 +152,9 @@ IGisItem::key_t CScrOptUnclutter::getItemKey(int index)
 {
     if(index < items.size())
     {
-        return(items[index].key);
+        return items[index].key;
     }
-    return(IGisItem::key_t());
+    return IGisItem::key_t();
 }
 
 
@@ -164,10 +164,10 @@ const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& poin
     {
         if(item.active.contains(point))
         {
-            return(&item);
+            return &item;
         }
     }
-    return(0);
+    return 0;
 }
 
 void CScrOptUnclutter::draw(QPainter& p)

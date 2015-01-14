@@ -35,7 +35,7 @@ public:
 
     const QList<IGisItem::key_t>& getTrackKeys()
     {
-        return( keys);
+        return keys;
     }
 
 public slots:

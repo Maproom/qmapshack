@@ -111,11 +111,11 @@ public:
 
     const QString& getName() const
     {
-        return( trk.name);
+        return trk.name;
     }
     int getColorIdx()
     {
-        return( colorIdx);
+        return colorIdx;
     }
     QString getInfo() const;
     QString getInfoRange();
@@ -123,24 +123,24 @@ public:
     QString getInfoProgress(const trkpt_t& pt);
     quint32 getTotalElapsedSeconds()
     {
-        return( totalElapsedSeconds);
+        return totalElapsedSeconds;
     }
     const QString& getComment() const
     {
-        return( trk.cmt);
+        return trk.cmt;
     }
     const QString& getDescription() const
     {
-        return( trk.desc);
+        return trk.desc;
     }
     const QList<link_t>& getLinks() const
     {
-        return( trk.links);
+        return trk.links;
     }
     void getPolylineFromData(QPolygonF& l);
     const QDateTime& getTimeStart() const
     {
-        return( timeStart);
+        return timeStart;
     }
 
     void setName(const QString& str);
@@ -235,7 +235,7 @@ public:
      */
     bool hasUserFocus() const
     {
-        return( key == keyUserFocus);
+        return key == keyUserFocus;
     }
 
     /**
@@ -245,7 +245,7 @@ public:
      */
     static const key_t& getKeyUserFocus()
     {
-        return( keyUserFocus);
+        return keyUserFocus;
     }
 
     /**
@@ -506,7 +506,7 @@ public:
      */
     const trk_t& getTrackData() const
     {
-        return( trk);
+        return trk;
     }
 
 private:

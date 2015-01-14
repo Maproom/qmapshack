@@ -26,14 +26,14 @@ QDataStream& operator >>(QDataStream& s, CFlags& flag)
     s >> f;
     flag.setFlags(f);
     flag.setChanged(true);
-    return(s);
+    return s;
 }
 
 
 QDataStream& operator <<(QDataStream& s, CFlags& flag)
 {
     s << flag.flag();
-    return(s);
+    return s;
 }
 
 
@@ -60,7 +60,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
     if(strncmp(magic,"QLTrk   ",9))
     {
         dev->seek(pos);
-        return(s);
+        return s;
     }
 
     QList<trk_head_entry_t> entries;
@@ -312,12 +312,12 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
         ++entry;
     }
 
-    return(s);
+    return s;
 }
 
 QDataStream& operator <<(QDataStream& s, CQlgtTrack& trk)
 {
-    return(s);
+    return s;
 }
 
 CQlgtTrack::CQlgtTrack(quint64 id, QObject *parent)
@@ -341,5 +341,5 @@ CQlgtTrack& CQlgtTrack::operator<<(const pt_t& pt)
     track.last().flags  &= ~pt_t::eFocus;
     track.last().flags  &= ~pt_t::eSelected;
 
-    return(*this);
+    return *this;
 }

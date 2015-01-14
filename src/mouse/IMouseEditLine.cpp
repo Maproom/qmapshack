@@ -716,7 +716,7 @@ int IMouseEditLine::getPointCloseBy(const QPoint& screenPos)
         idx = -1;
     }
 
-    return(idx);
+    return idx;
 }
 
 void IMouseEditLine::slotDeletePoint()

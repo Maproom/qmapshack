@@ -152,7 +152,7 @@ bool CMapDraw::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold,
 {
     if(isRunning())
     {
-        return(false);
+        return false;
     }
     bool res = false;
     CMapItem::mutexActiveMaps.lock();
@@ -178,7 +178,7 @@ bool CMapDraw::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold,
         }
     }
     CMapItem::mutexActiveMaps.unlock();
-    return(res);
+    return res;
 }
 
 void CMapDraw::saveConfig(QSettings& cfg)

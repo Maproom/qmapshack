@@ -145,12 +145,12 @@ QString CGisItemRte::getInfo() const
     QString str = getName();
 
 
-    return(str);
+    return str;
 }
 
 IScrOpt * CGisItemRte::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    return(new CScrOptRte(this, origin, mouse));
+    return new CScrOptRte(this, origin, mouse);
 }
 
 QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
@@ -167,7 +167,7 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
         }
     }
 
-    return(pt);
+    return pt;
 }
 
 
@@ -178,11 +178,11 @@ bool CGisItemRte::isCloseTo(const QPointF& pos)
     {
         if((pt - pos).manhattanLength() < 10)
         {
-            return(true);
+            return true;
         }
     }
 
-    return(false);
+    return false;
 }
 
 void CGisItemRte::gainUserFocus(bool yes)

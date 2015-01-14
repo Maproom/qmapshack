@@ -31,7 +31,7 @@ public:
 
     bool save()
     {
-        return( false);
+        return false;
     }
 
     void updateFromDb();

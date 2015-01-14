@@ -174,7 +174,7 @@ const QString& CGisItemWpt::getNewName()
         }
     }
     lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
-    return(lastName);
+    return lastName;
 }
 
 const QString& CGisItemWpt::getNewIcon()
@@ -185,7 +185,7 @@ const QString& CGisItemWpt::getNewIcon()
     dlg.exec();
     lastIcon = but.objectName();
 
-    return(lastIcon);
+    return lastIcon;
 }
 
 void CGisItemWpt::getNewPosition(QPointF& pos)
@@ -276,7 +276,7 @@ QString CGisItemWpt::getInfo() const
             }
         }
     }
-    return(str);
+    return str;
 }
 
 IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
@@ -285,7 +285,7 @@ IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
     {
         scrOpt = new CScrOptWpt(this, origin, mouse);
     }
-    return(scrOpt);
+    return scrOpt;
 }
 
 void CGisItemWpt::setIcon()
@@ -364,10 +364,10 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {
     if(posScreen == NOPOINTF)
     {
-        return(false);
+        return false;
     }
 
-    return ((pos - posScreen).manhattanLength() < 22);
+    return (pos - posScreen).manhattanLength() < 22;
 }
 
 void CGisItemWpt::gainUserFocus(bool yes)

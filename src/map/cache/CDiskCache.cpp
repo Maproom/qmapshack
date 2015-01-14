@@ -104,7 +104,7 @@ bool CDiskCache::contains(const QString& key)
     md5.addData(key.toLatin1());
 
     QString hash = md5.result().toHex();
-    return(table.contains(hash) || cache.contains(hash));
+    return table.contains(hash) || cache.contains(hash);
 }
 
 void CDiskCache::slotCleanup()

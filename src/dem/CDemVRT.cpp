@@ -138,7 +138,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
 {
     if(pjsrc == 0)
     {
-        return( NOFLOAT);
+        return NOFLOAT;
     }
 
     qint16 e[4];
@@ -148,7 +148,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
 
     if(!boundingBox.contains(pt))
     {
-        return(NOFLOAT);
+        return NOFLOAT;
     }
 
     pt = trInv.map(pt);
@@ -161,12 +161,12 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
     mutex.unlock();
     if(err == CE_Failure)
     {
-        return(NOFLOAT);
+        return NOFLOAT;
     }
 
     if(hasNoData && e[0] == noData)
     {
-        return(NOFLOAT);
+        return NOFLOAT;
     }
 
     qreal b1 = e[0];
@@ -176,7 +176,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
 
     qreal ele = b1 + b2 * x + b3 * y + b4 * x * y;
 
-    return(ele);
+    return ele;
 }
 
 

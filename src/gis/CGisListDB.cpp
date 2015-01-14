@@ -126,10 +126,10 @@ CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
         CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
         if(database && (database->getDBName() == name))
         {
-            return(database);
+            return database;
         }
     }
-    return(0);
+    return 0;
 }
 
 bool CGisListDB::hasDatabase(const QString& name)
@@ -141,10 +141,10 @@ bool CGisListDB::hasDatabase(const QString& name)
         CDBFolderDatabase * folder = dynamic_cast<CDBFolderDatabase*>(topLevelItem(i));
         if(folder && (folder->text(CGisListDB::eColumnName) == name))
         {
-            return(true);
+            return true;
         }
     }
-    return(false);
+    return false;
 }
 
 
@@ -167,11 +167,11 @@ bool CGisListDB::event(QEvent * e)
             }
         }
         e->accept();
-        return(true);
+        return true;
     }
     }
 
-    return(QTreeWidget::event(e));
+    return QTreeWidget::event(e);
 }
 
 void CGisListDB::slotContextMenu(const QPoint& point)

@@ -37,7 +37,7 @@ public:
         {
             mapped = reinterpret_cast<const char*>(map(0, size()));
         }
-        return( mapped + offset);
+        return mapped + offset;
     }
 private:
     const char *mapped;

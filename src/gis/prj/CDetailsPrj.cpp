@@ -81,12 +81,12 @@ void CDetailsPrj::slotSetupGui()
 
 bool sortTrkByTime(const CGisItemTrk * trk1, const CGisItemTrk * trk2)
 {
-    return(trk1->getTimeStart() < trk2->getTimeStart());
+    return trk1->getTimeStart() < trk2->getTimeStart();
 }
 
 bool sortWptByTime(const CGisItemWpt * wpt1, const CGisItemWpt * wpt2)
 {
-    return(wpt1->getTime() < wpt2->getTime());
+    return wpt1->getTime() < wpt2->getTime();
 }
 
 

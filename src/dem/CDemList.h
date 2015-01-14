@@ -55,7 +55,7 @@ public:
     CDemItem * item(int i);
     operator QTreeWidget*()
     {
-        return( treeWidget);
+        return treeWidget;
     }
 
     void updateHelpText();

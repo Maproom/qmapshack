@@ -140,7 +140,7 @@ class CGisWidget : public QWidget, private Ui::IGisWidget
 public:
     static CGisWidget& self()
     {
-        return( *pSelf);
+        return *pSelf;
     }
     virtual ~CGisWidget();
 

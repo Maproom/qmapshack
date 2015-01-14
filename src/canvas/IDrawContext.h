@@ -79,7 +79,7 @@ public:
     void zoom(const QRectF& rect);
     int  zoom()
     {
-        return( zoomIndex);
+        return zoomIndex;
     }
 
     /**

@@ -71,7 +71,7 @@ bool CQmsProject::save()
 {
     if(filename.isEmpty())
     {
-        return(saveAs());
+        return saveAs();
     }
     else
     {
@@ -81,7 +81,7 @@ bool CQmsProject::save()
         }
     }
 
-    return(true);
+    return true;
 }
 
 bool CQmsProject::saveAs()
@@ -94,7 +94,7 @@ bool CQmsProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return(false);
+        return false;
     }
 
 
@@ -117,13 +117,13 @@ bool CQmsProject::saveAs()
     }
     else
     {
-        return(false);
+        return false;
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
 
-    return(res);
+    return res;
 }
 
 bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
@@ -141,7 +141,7 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
     if(!file.open(QIODevice::WriteOnly))
     {
         QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
-        return(false);
+        return false;
     }
     QDataStream out(&file);
     out.setByteOrder(QDataStream::LittleEndian);
@@ -156,6 +156,6 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 
     file.close();
 
-    return(true);
+    return true;
 }
 

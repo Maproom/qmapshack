@@ -122,5 +122,5 @@ const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t * t )
         tic.lbl = time.toString(strFormat);
     }
 
-    return(_tic_);
+    return _tic_;
 }

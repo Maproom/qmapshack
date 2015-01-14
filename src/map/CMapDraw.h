@@ -79,7 +79,7 @@ public:
     static void loadMapPath(QSettings &cfg);
     static const QStringList& getSupportedFormats()
     {
-        return( supportedFormats);
+        return supportedFormats;
     }
 
     /**

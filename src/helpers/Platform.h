@@ -135,62 +135,62 @@ typedef unsigned __int64 uint64_t;
 static inline uint16_t
 __gar_endian_uint16_t(uint16_t x)
 {
-    return(((x >> 8) & 0xffu) | ((x & 0xffu) << 8));
+    return ((x >> 8) & 0xffu) | ((x & 0xffu) << 8);
 }
 
 
 static inline uint32_t
 __gar_endian_uint32_t(uint32_t x)
 {
-    return (((x & 0xff000000u) >> 24) |
-            ((x & 0x00ff0000u) >>  8) |
-            ((x & 0x0000ff00u) <<  8) |
-            ((x & 0x000000ffu) << 24));
+    return ((x & 0xff000000u) >> 24) |
+           ((x & 0x00ff0000u) >>  8) |
+           ((x & 0x0000ff00u) <<  8) |
+           ((x & 0x000000ffu) << 24);
 }
 
 
 static inline uint64_t
 __gar_endian_uint64_t(uint64_t x)
 {
-    return (((x & 0xff00000000000000ull) >> 56) |
-            ((x & 0x00ff000000000000ull) >> 40) |
-            ((x & 0x0000ff0000000000ull) >> 24) |
-            ((x & 0x000000ff00000000ull) >>  8) |
-            ((x & 0x00000000ff000000ull) <<  8) |
-            ((x & 0x0000000000ff0000ull) << 24) |
-            ((x & 0x000000000000ff00ull) << 40) |
-            ((x & 0x00000000000000ffull) << 56));
+    return ((x & 0xff00000000000000ull) >> 56) |
+           ((x & 0x00ff000000000000ull) >> 40) |
+           ((x & 0x0000ff0000000000ull) >> 24) |
+           ((x & 0x000000ff00000000ull) >>  8) |
+           ((x & 0x00000000ff000000ull) <<  8) |
+           ((x & 0x0000000000ff0000ull) << 24) |
+           ((x & 0x000000000000ff00ull) << 40) |
+           ((x & 0x00000000000000ffull) << 56);
 }
 
 
 static inline int16_t
 __gar_endian_int16_t(int16_t x)
 {
-    return(((x >> 8) & 0xffu) | ((x & 0xffu) << 8));
+    return ((x >> 8) & 0xffu) | ((x & 0xffu) << 8);
 }
 
 
 static inline int32_t
 __gar_endian_int32_t(int32_t x)
 {
-    return (((x & 0xff000000u) >> 24) |
-            ((x & 0x00ff0000u) >>  8) |
-            ((x & 0x0000ff00u) <<  8) |
-            ((x & 0x000000ffu) << 24));
+    return ((x & 0xff000000u) >> 24) |
+           ((x & 0x00ff0000u) >>  8) |
+           ((x & 0x0000ff00u) <<  8) |
+           ((x & 0x000000ffu) << 24);
 }
 
 
 static inline int64_t
 __gar_endian_int64_t(int64_t x)
 {
-    return (((x & 0xff00000000000000ull) >> 56) |
-            ((x & 0x00ff000000000000ull) >> 40) |
-            ((x & 0x0000ff0000000000ull) >> 24) |
-            ((x & 0x000000ff00000000ull) >>  8) |
-            ((x & 0x00000000ff000000ull) <<  8) |
-            ((x & 0x0000000000ff0000ull) << 24) |
-            ((x & 0x000000000000ff00ull) << 40) |
-            ((x & 0x00000000000000ffull) << 56));
+    return ((x & 0xff00000000000000ull) >> 56) |
+           ((x & 0x00ff000000000000ull) >> 40) |
+           ((x & 0x0000ff0000000000ull) >> 24) |
+           ((x & 0x000000ff00000000ull) >>  8) |
+           ((x & 0x00000000ff000000ull) <<  8) |
+           ((x & 0x0000000000ff0000ull) << 24) |
+           ((x & 0x000000000000ff00ull) << 40) |
+           ((x & 0x00000000000000ffull) << 56);
 }
 
 
@@ -205,7 +205,7 @@ __gar_endian_float(float x)
 
     _v._f = x;
     _v._u = gar_endian(uint32_t, _v._u);
-    return(_v._f);
+    return _v._f;
 }
 
 
@@ -220,7 +220,7 @@ __gar_endian_double(double x)
 
     _v._d = x;
     _v._u = gar_endian(uint64_t, _v._u);
-    return(_v._d);
+    return _v._d;
 }
 #endif                           // HAVE_BIGENDIAN
 
@@ -297,9 +297,9 @@ __gar_ptr_load_uint16_t(const uint8_t *p)
     register uint16_t temp;
 
     asm __volatile__ ("lhbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return(temp);
+    return temp;
 #else
-    return((uint16_t)(p[0] | (p[1] << 8)));
+    return (uint16_t)(p[0] | (p[1] << 8));
 #endif
 }
 
@@ -312,9 +312,9 @@ __gar_ptr_load_uint24_t(const uint8_t *p)
 
     asm __volatile__ ("lwbrx %0,0,%1"       : "=r" (temp) : "b" (p), "m" (*p));
     asm __volatile__ ("rlwinm %0,%1,0,8,31" : "=r" (temp) : "r" (temp));
-    return(temp);
+    return temp;
 #else
-    return((uint32_t)(p[0] | (p[1] << 8) | (p[2] << 16)));
+    return (uint32_t)(p[0] | (p[1] << 8) | (p[2] << 16));
 #endif
 }
 
@@ -326,9 +326,9 @@ __gar_ptr_load_uint32_t(const uint8_t *p)
     register uint32_t temp;
 
     asm __volatile__ ("lwbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return(temp);
+    return temp;
 #else
-    return((uint32_t)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24)));
+    return (uint32_t)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
 #endif
 }
 
@@ -336,8 +336,8 @@ __gar_ptr_load_uint32_t(const uint8_t *p)
 static inline uint64_t
 __gar_ptr_load_uint64_t(const uint8_t *p)
 {
-    return ((uint64_t)__gar_ptr_load_uint32_t(p) |
-            ((uint64_t)__gar_ptr_load_uint32_t(p + 4) << 32));
+    return (uint64_t)__gar_ptr_load_uint32_t(p) |
+           ((uint64_t)__gar_ptr_load_uint32_t(p + 4) << 32);
 }
 
 
@@ -348,9 +348,9 @@ __gar_ptr_load_int16_t(const uint8_t *p)
     register int16_t temp;
 
     asm __volatile__ ("lhbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return(temp);
+    return temp;
 #else
-    return((int16_t)(p[0] | (p[1] << 8)));
+    return (int16_t)(p[0] | (p[1] << 8));
 #endif
 }
 
@@ -363,9 +363,9 @@ __gar_ptr_load_int24_t(const uint8_t *p)
 
     asm __volatile__ ("lwbrx %0,0,%1"       : "=r" (temp) : "b" (p), "m" (*p));
     asm __volatile__ ("rlwinm %0,%1,0,8,31" : "=r" (temp) : "r" (temp));
-    return(temp);
+    return temp;
 #else
-    return(p[0] | (p[1] << 8) | (p[2] << 16));
+    return p[0] | (p[1] << 8) | (p[2] << 16);
 #endif
 }
 
@@ -377,9 +377,9 @@ __gar_ptr_load_int32_t(const uint8_t *p)
     register int32_t temp;
 
     asm __volatile__ ("lwbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return(temp);
+    return temp;
 #else
-    return((int32_t)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24)));
+    return (int32_t)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
 #endif
 }
 
@@ -387,8 +387,8 @@ __gar_ptr_load_int32_t(const uint8_t *p)
 static inline int64_t
 __gar_ptr_load_int64_t(const uint8_t *p)
 {
-    return ((int64_t)__gar_ptr_load_uint32_t(p) |
-            ((int64_t)__gar_ptr_load_int32_t(p + 4) << 32));
+    return (int64_t)__gar_ptr_load_uint32_t(p) |
+           ((int64_t)__gar_ptr_load_int32_t(p + 4) << 32);
 }
 
 
@@ -402,7 +402,7 @@ __gar_ptr_load_float(const uint8_t * p)
     } _v;
 
     _v._u = gar_ptr_load(uint32_t, p);
-    return(_v._f);
+    return _v._f;
 }
 
 
@@ -416,7 +416,7 @@ __gar_ptr_load_double(const uint8_t * p)
     } _v;
 
     _v._u = gar_ptr_load(uint64_t, p);
-    return(_v._d);
+    return _v._d;
 }
 
 

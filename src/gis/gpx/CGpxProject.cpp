@@ -132,7 +132,7 @@ bool CGpxProject::save()
 {
     if(filename.isEmpty())
     {
-        return(saveAs());
+        return saveAs();
     }
     else
     {
@@ -142,7 +142,7 @@ bool CGpxProject::save()
         }
     }
 
-    return(true);
+    return true;
 }
 
 bool CGpxProject::saveAs()
@@ -155,7 +155,7 @@ bool CGpxProject::saveAs()
 
     if(fn.isEmpty())
     {
-        return(false);
+        return false;
     }
 
 
@@ -178,12 +178,12 @@ bool CGpxProject::saveAs()
     }
     else
     {
-        return(false);
+        return false;
     }
 
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
-    return(res);
+    return res;
 }
 
 
@@ -236,7 +236,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
                                            ,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
             if(res == QMessageBox::No)
             {
-                return(false);
+                return false;
             }
         }
 
@@ -294,7 +294,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     if(!file.open(QIODevice::WriteOnly))
     {
         QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to create file '%1'").arg(_fn_), QMessageBox::Abort);
-        return(false);
+        return false;
     }
     QTextStream out(&file);
     out.setCodec("UTF-8");
@@ -304,9 +304,9 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     if(file.error() != QFile::NoError)
     {
         QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to write file '%1'").arg(_fn_), QMessageBox::Abort);
-        return(false);
+        return false;
     }
 
-    return(true);
+    return true;
 }
 

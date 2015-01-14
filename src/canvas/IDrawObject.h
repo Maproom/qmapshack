@@ -41,7 +41,7 @@ public:
      */
     int getOpacity()
     {
-        return( opacity);
+        return opacity;
     }
 
     /**
@@ -50,7 +50,7 @@ public:
      */
     qreal getMinScale()
     {
-        return( minScale);
+        return minScale;
     }
     /**
        @brief Read the maximum scale factor the object should be displayed
@@ -58,7 +58,7 @@ public:
      */
     qreal getMaxScale()
     {
-        return( maxScale);
+        return maxScale;
     }
     /**
        @brief Write the minimum scale the object should be displayed at.
@@ -73,32 +73,32 @@ public:
 
     bool getShowPolygons()
     {
-        return( showPolygons);
+        return showPolygons;
     }
 
     bool getShowPolylines()
     {
-        return( showPolylines);
+        return showPolylines;
     }
 
     bool getShowPOIs()
     {
-        return( showPOIs);
+        return showPOIs;
     }
 
     const QString& getCachePath()
     {
-        return( cachePath);
+        return cachePath;
     }
 
     qint32 getCacheSize()
     {
-        return( cacheSizeMB);
+        return cacheSizeMB;
     }
 
     qint32 getCacheExpiration()
     {
-        return( cacheExpiration);
+        return cacheExpiration;
     }
 
     /**

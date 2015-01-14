@@ -187,17 +187,17 @@ public:
 
     QSet<quint8> getLanguages()
     {
-        return( languages);
+        return languages;
     }
 
     quint16 getFid()
     {
-        return( fid);
+        return fid;
     }
 
     quint16 getPid()
     {
-        return( pid);
+        return pid;
     }
 
 protected:

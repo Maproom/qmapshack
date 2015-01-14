@@ -37,7 +37,7 @@ public:
 
     static IUnit& self()
     {
-        return( *m_self);
+        return *m_self;
     }
     /// convert meter of elevation into a value and unit string
     virtual void meter2elevation(qreal meter, QString& val, QString& unit) = 0;

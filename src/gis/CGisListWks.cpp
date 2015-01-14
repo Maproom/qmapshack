@@ -508,11 +508,11 @@ bool CGisListWks::hasProject(IGisProject * project)
         {
             if(item != project)
             {
-                return(true);
+                return true;
             }
         }
     }
-    return(false);
+    return false;
 }
 
 IGisProject * CGisListWks::getProjectByKey(const QString& key)
@@ -524,10 +524,10 @@ IGisProject * CGisListWks::getProjectByKey(const QString& key)
         IGisProject * item = dynamic_cast<IGisProject*>(topLevelItem(i));
         if(item && item->getKey() == key)
         {
-            return(item);
+            return item;
         }
     }
-    return(0);
+    return 0;
 }
 
 CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
@@ -539,10 +539,10 @@ CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
         CDBProject * item = dynamic_cast<CDBProject*>(topLevelItem(i));
         if(item && item->getId() == id && item->getDBName() == db)
         {
-            return(item);
+            return item;
         }
     }
-    return(0);
+    return 0;
 }
 
 void CGisListWks::slotSaveWorkspace()
@@ -1046,7 +1046,7 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return(true);
+        return true;
     }
 
     case eEvtD2WShowFolder:
@@ -1070,7 +1070,7 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return(true);
+        return true;
     }
 
     case eEvtD2WHideFolder:
@@ -1081,7 +1081,7 @@ bool CGisListWks::event(QEvent * e)
 
         e->accept();
         emit sigChanged();
-        return(true);
+        return true;
     }
 
     case eEvtD2WShowItems:
@@ -1094,7 +1094,7 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return(true);
+        return true;
     }
 
     case eEvtD2WHideItems:
@@ -1107,7 +1107,7 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return(true);
+        return true;
     }
 
     case eEvtD2WUpdateLnF:
@@ -1120,10 +1120,10 @@ bool CGisListWks::event(QEvent * e)
         }
         e->accept();
         emit sigChanged();
-        return(true);
+        return true;
     }
     }
 
-    return(QTreeWidget::event(e));
+    return QTreeWidget::event(e);
 }
 

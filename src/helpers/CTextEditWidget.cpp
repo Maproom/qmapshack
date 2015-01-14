@@ -139,7 +139,7 @@ QString CTextEditWidget::getHtml()
         str = str.replace("body>","div>").replace(re1,"<div>");
     }
 
-    return(str);
+    return str;
 }
 
 void CTextEditWidget::textBold()

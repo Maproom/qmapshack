@@ -128,11 +128,11 @@ public:
     {
         bool operator==(const key_t& k) const
         {
-            return ((item == k.item) && (project == k.project));
+            return (item == k.item) && (project == k.project);
         }
         bool operator!=(const key_t& k) const
         {
-            return ((item != k.item) || (project != k.project));
+            return (item != k.item) || (project != k.project);
         }
         void clear()
         {
@@ -174,7 +174,7 @@ public:
      */
     virtual const QPixmap& getIcon() const
     {
-        return( icon);
+        return icon;
     }
     /**
        @brief Get name of this item.
@@ -223,7 +223,7 @@ public:
      */
     virtual const QRectF& getBoundingRect() const
     {
-        return( boundingRect);
+        return boundingRect;
     }
 
     /**
@@ -233,7 +233,7 @@ public:
      */
     virtual IScrOpt * getScreenOptions(const QPoint& origin, IMouse * mouse)
     {
-        return( 0);
+        return 0;
     }
 
     /**
@@ -243,7 +243,7 @@ public:
      */
     virtual QPointF getPointCloseBy(const QPoint& point)
     {
-        return( NOPOINTF);
+        return NOPOINTF;
     }
 
     /**
@@ -291,7 +291,7 @@ public:
      */
     virtual bool hasUserFocus() const
     {
-        return( false);
+        return false;
     }
 
 
@@ -321,7 +321,7 @@ public:
      */
     const history_t& getHistory() const
     {
-        return( history);
+        return history;
     }
 
     /**
@@ -404,10 +404,10 @@ protected:
         {
             if(rect.intersects(r))
             {
-                return( true);
+                return true;
             }
         }
-        return( false);
+        return false;
     }
 };
 

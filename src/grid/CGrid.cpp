@@ -193,7 +193,7 @@ bool CGrid::calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, q
     qreal d3x = (x3 - x)  * (x3 - x)  + (y3 - y)  * (y3 - y);
     qreal d4x = (x4 - x)  * (x4 - x)  + (y4 - y)  * (y4 - y);
 
-    return((d12 >= d1x) && (d12 >= d2x) && (d34 >= d3x) && (d34 >= d4x));
+    return (d12 >= d1x) && (d12 >= d2x) && (d34 >= d3x) && (d34 >= d4x);
 }
 
 

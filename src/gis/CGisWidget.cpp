@@ -175,7 +175,7 @@ IGisProject * CGisWidget::selectProject()
         }
     }
 
-    return(project);
+    return project;
 }
 
 void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
@@ -216,7 +216,7 @@ IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
         }
     }
 
-    return(item);
+    return item;
 }
 
 void CGisWidget::delItemByKey(const IGisItem::key_t& key)

@@ -19,22 +19,22 @@
 #ifndef CPHOTOALBUM_H
 #define CPHOTOALBUM_H
 
-#include <QWidget>
 #include "ui_IPhotoAlbum.h"
+#include <QWidget>
 
 #include <gis/wpt/CGisItemWpt.h>
 
 class CPhotoAlbum : public QWidget, private Ui::IPhotoAlbum
 {
     Q_OBJECT
-    public:
-        CPhotoAlbum(QWidget * parent);
-        virtual ~CPhotoAlbum();
+public:
+    CPhotoAlbum(QWidget * parent);
+    virtual ~CPhotoAlbum();
 
-        void setSource(CGisItemWpt& wpt);
+    void setSource(CGisItemWpt& wpt);
 
-    private:
-        QList<CGisItemWpt::image_t> images;
+private:
+    QList<CGisItemWpt::image_t> images;
 };
 
 #endif //CPHOTOALBUM_H

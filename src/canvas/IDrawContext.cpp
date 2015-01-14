@@ -90,12 +90,12 @@ const qreal IDrawContext::scales[N_ZOOM_LEVELS] =
 
 QPointF operator*(const QPointF& p1, const QPointF& p2)
 {
-    return(QPointF(p1.x() * p2.x(), p1.y() * p2.y()));
+    return QPointF(p1.x() * p2.x(), p1.y() * p2.y());
 }
 
 QPointF operator/(const QPointF& p1, const QPointF& p2)
 {
-    return(QPointF(p1.x() / p2.x(), p1.y() / p2.y()));
+    return QPointF(p1.x() / p2.x(), p1.y() / p2.y());
 }
 
 
@@ -160,9 +160,9 @@ QString IDrawContext::getProjection()
 {
     if(pjsrc == 0)
     {
-        return(QString::Null());
+        return QString::Null();
     }
-    return(pj_get_def(pjsrc,0));
+    return pj_get_def(pjsrc,0);
 }
 
 void IDrawContext::setProjection(const QString& proj)
@@ -181,7 +181,7 @@ bool IDrawContext::needsRedraw()
     mutex.lock();
     res = intNeedsRedraw;
     mutex.unlock();
-    return(res);
+    return res;
 }
 
 void IDrawContext::zoom(const QRectF& rect)

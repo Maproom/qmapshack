@@ -65,32 +65,32 @@ public:
     /// get access to stored waypoint data
     QByteArray& waypoints()
     {
-        return( wpts);
+        return wpts;
     }
     /// get access to stored track data
     QByteArray& tracks()
     {
-        return( trks);
+        return trks;
     }
     /// get access to stored diary data
     QByteArray& diary()
     {
-        return( drys);
+        return drys;
     }
     /// get access to stored overlay data
     QByteArray& overlays()
     {
-        return( ovls);
+        return ovls;
     }
     /// get access to stored route data
     QByteArray& routes()
     {
-        return( rtes);
+        return rtes;
     }
     /// get access to stored map selection data
     QByteArray& mapsels()
     {
-        return( sels);
+        return sels;
     }
     /// write collected data to file
     void save(const QString& filename);

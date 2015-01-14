@@ -54,11 +54,11 @@ bool IDBFolder::operator<(const QTreeWidgetItem &other) const
     const IDBFolder * folder = dynamic_cast<const IDBFolder*>(&other);
     if(folder == 0)
     {
-        return(false);
+        return false;
     }
 
 
-    return(text(CGisListDB::eColumnName) < folder->text(CGisListDB::eColumnName));
+    return text(CGisListDB::eColumnName) < folder->text(CGisListDB::eColumnName);
 }
 
 IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem * parent)
@@ -66,37 +66,37 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
     switch(type)
     {
     case eTypeGroup:
-        return(new CDBFolderGroup(db, id, parent));
+        return new CDBFolderGroup(db, id, parent);
 
     case eTypeProject:
-        return(new CDBFolderProject(db, id, parent));
+        return new CDBFolderProject(db, id, parent);
 
     case eTypeOther:
-        return(new CDBFolderOther(db, id, parent));
+        return new CDBFolderOther(db, id, parent);
 
     default:
-        return(0);
+        return 0;
     }
 }
 
 QString IDBFolder::getDBName()
 {
-    return(db.connectionName());
+    return db.connectionName();
 }
 
 CDBFolderDatabase * IDBFolder::getDBFolder()
 {
     if(type() == eTypeDatabase)
     {
-        return(dynamic_cast<CDBFolderDatabase*>(this));
+        return dynamic_cast<CDBFolderDatabase*>(this);
     }
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
     if(folder != 0)
     {
-        return(folder->getDBFolder());
+        return folder->getDBFolder();
     }
-    return(0);
+    return 0;
 }
 
 void IDBFolder::addFolder(type_e type, const QString& name)

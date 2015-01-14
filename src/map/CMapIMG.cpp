@@ -79,10 +79,10 @@ static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewp
 
     if(viewport.intersects(ref))
     {
-        return(false);
+        return false;
     }
 
-    return(true);
+    return true;
 }
 
 static inline QImage img2line(const QImage &img, int width)
@@ -109,7 +109,7 @@ static inline QImage img2line(const QImage &img, int width)
             bytesToCopy -= bpl_src;
         }
     }
-    return(newImage);
+    return newImage;
 }
 
 inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
@@ -121,12 +121,12 @@ inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
     {
         if(rect.intersects(*rectPoi))
         {
-            return(true);
+            return true;
         }
         rectPoi++;
     }
     rectPois << rect;
-    return(false);
+    return false;
 }
 
 
@@ -1114,93 +1114,93 @@ quint8 CMapIMG::scale2bits(const QPointF& scale)
 {
     if(scale.x() >= 70000.0)
     {
-        return( 2);
+        return 2;
     }
     if(scale.x() >= 50000.0)
     {
-        return( 3);
+        return 3;
     }
     if(scale.x() >= 30000.0)
     {
-        return( 4);
+        return 4;
     }
     if(scale.x() >= 20000.0)
     {
-        return( 5);
+        return 5;
     }
     if(scale.x() >= 15000.0)
     {
-        return( 6);
+        return 6;
     }
     if(scale.x() >= 10000.0)
     {
-        return( 7);
+        return 7;
     }
     if(scale.x() >= 7000.0)
     {
-        return( 8);
+        return 8;
     }
     if(scale.x() >= 5000.0)
     {
-        return( 9);
+        return 9;
     }
     if(scale.x() >= 3000.0)
     {
-        return( 10);
+        return 10;
     }
     if(scale.x() >= 2000.0)
     {
-        return( 11);
+        return 11;
     }
     if(scale.x() >= 1500.0)
     {
-        return( 12);
+        return 12;
     }
     if(scale.x() >= 1000.0)
     {
-        return( 13);
+        return 13;
     }
     if(scale.x() >= 700.0)
     {
-        return( 14);
+        return 14;
     }
     if(scale.x() >= 500.0)
     {
-        return( 15);
+        return 15;
     }
     if(scale.x() >= 300.0)
     {
-        return( 16);
+        return 16;
     }
     if(scale.x() >= 200.0)
     {
-        return( 17);
+        return 17;
     }
     if(scale.x() >= 100.0)
     {
-        return( 18);
+        return 18;
     }
     if(scale.x() >= 70.0)
     {
-        return( 19);
+        return 19;
     }
     if(scale.x() >= 30.0)
     {
-        return( 20);
+        return 20;
     }
     if(scale.x() >= 15.0)
     {
-        return( 21);
+        return 21;
     }
     if(scale.x() >= 7.0)
     {
-        return( 22);
+        return 22;
     }
     if(scale.x() >= 3.0)
     {
-        return( 23);
+        return 23;
     }
-    return(24);
+    return 24;
 }
 
 void CMapIMG::draw(IDrawContext::buffer_t& buf)
@@ -2786,7 +2786,7 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
         }
     }
 
-    return(d);
+    return d;
 }
 
 
@@ -2814,5 +2814,5 @@ bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, 
         }
     }
 
-    return(!polyline.isEmpty());
+    return !polyline.isEmpty();
 }

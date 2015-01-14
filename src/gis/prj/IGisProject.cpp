@@ -194,7 +194,7 @@ QString IGisProject::getInfo() const
         str += "<br/>\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
     }
 
-    return(str);
+    return str;
 }
 
 IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
@@ -209,10 +209,10 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
 
         if(item->getKey() == key)
         {
-            return(item);
+            return item;
         }
     }
-    return(0);
+    return 0;
 }
 
 void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
@@ -252,7 +252,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
                     // as each item in the project has to be unique, we can stop searching.
-                    return(false);
+                    return false;
                 }
             }
             delete item;
@@ -267,10 +267,10 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
             }
 
             // as each item in the project has to be unique, we can stop searching.
-            return(true);
+            return true;
         }
     }
-    return(false);
+    return false;
 }
 
 void IGisProject::editItemByKey(const IGisItem::key_t& key)

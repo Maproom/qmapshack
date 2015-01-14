@@ -323,7 +323,7 @@ QString CGisItemTrk::getInfo() const
 
     if(cntVisiblePoints == 0)
     {
-        return(str);
+        return str;
     }
 
     IUnit::self().meter2distance(totalDistance, val1, unit1);
@@ -374,7 +374,7 @@ QString CGisItemTrk::getInfo() const
     str += QObject::tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
 
 
-    return(str);
+    return str;
 }
 
 QString CGisItemTrk::getInfoRange()
@@ -383,7 +383,7 @@ QString CGisItemTrk::getInfoRange()
     QString str, val, unit;
     if(mouseClickFocus == 0 || mouseMoveFocus == 0)
     {
-        return(str);
+        return str;
     }
 
     int idx1 = mouseClickFocus->idxTotal;
@@ -428,7 +428,7 @@ QString CGisItemTrk::getInfoRange()
     str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2198)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
 
 
-    return(str);
+    return str;
 }
 
 QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
@@ -447,7 +447,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
         str += QObject::tr(" speed: %1%2").arg(val1).arg(unit1);
     }
 
-    return(str);
+    return str;
 }
 
 QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
@@ -494,7 +494,7 @@ QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
         str += QObject::tr(" Moving: - (-) ");
     }
 
-    return(str);
+    return str;
 }
 
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
@@ -503,7 +503,7 @@ IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
     {
         scrOpt = new CScrOptTrk(this, origin, mouse);
     }
-    return(scrOpt);
+    return scrOpt;
 }
 
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
@@ -524,13 +524,13 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 
     if(idx < 0)
     {
-        return(NOPOINTF);
+        return NOPOINTF;
     }
 
     const trkpt_t * newPointOfFocus = getVisibleTrkPtByIndex(idx);
     publishMouseFocus(newPointOfFocus, eFocusMouseClick, 0);
 
-    return(lineSimple[idx]);
+    return lineSimple[idx];
 }
 
 
@@ -775,10 +775,10 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
     {
         if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
         {
-            return(true);
+            return true;
         }
     }
-    return(false);
+    return false;
 }
 
 void CGisItemTrk::gainUserFocus(bool yes)
@@ -802,20 +802,20 @@ bool CGisItemTrk::cut()
 {
     if(mouseClickFocus == 0)
     {
-        return(false);
+        return false;
     }
 
     QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
     name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
-        return(false);
+        return false;
     }
 
     IGisProject * project = CGisWidget::self().selectProject();
     if(project == 0)
     {
-        return(false);
+        return false;
     }
 
     new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
@@ -824,18 +824,18 @@ bool CGisItemTrk::cut()
     name1 = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
-        return(false);
+        return false;
     }
 
     project = CGisWidget::self().selectProject();
     if(project == 0)
     {
-        return(false);
+        return false;
     }
 
     new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
 
-    return(true);
+    return true;
 }
 
 void CGisItemTrk::reverse()
@@ -1489,7 +1489,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
     }
     publishMouseFocus(newPointOfFocus, mode, 0);
 
-    return(newPointOfFocus ? lineSimple[idx] : NOPOINTF);
+    return newPointOfFocus ? lineSimple[idx] : NOPOINTF;
 }
 
 
@@ -1524,12 +1524,12 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
             }
             if(i == idx)
             {
-                return(&pt);
+                return &pt;
             }
             i++;
         }
     }
-    return(0);
+    return 0;
 }
 
 

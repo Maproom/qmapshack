@@ -53,9 +53,9 @@ static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
             _s2 = "0";
         }
 
-        return(_s1.toInt() < _s2.toInt());
+        return _s1.toInt() < _s2.toInt();
     }
-    return(s1 < s2);
+    return s1 < s2;
 }
 
 

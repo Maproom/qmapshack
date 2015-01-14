@@ -36,7 +36,7 @@ public:
     }
     const quint32 flag() const
     {
-        return( flags);
+        return flags;
     }
     void setFlags( quint32 f )
     {
@@ -48,7 +48,7 @@ public:
     }
     quint32 operator  & (quint32 f) const
     {
-        return( flags&f);
+        return flags&f;
     }
     quint32 operator |= (quint32 f)
     {
@@ -56,7 +56,7 @@ public:
         {
             changed = true;
         }
-        flags|=f; return( flags);
+        flags|=f; return flags;
     }
     quint32 operator &= (quint32 f)
     {
@@ -64,7 +64,7 @@ public:
         {
             changed = true;
         }
-        flags&=f; return( flags);
+        flags&=f; return flags;
     }
     quint32 operator >> (quint32 & f)
     {
@@ -72,11 +72,11 @@ public:
         {
             changed = true;
         }
-        flags = f; return( flags);
+        flags = f; return flags;
     }
     const bool isChanged() const
     {
-        return( changed);
+        return changed;
     }
     void setChanged(bool b)
     {
@@ -124,7 +124,7 @@ public:
 
         bool operator==(const pt_t& pt) const
         {
-            return( pt.idx == idx);
+            return pt.idx == idx;
         }
 
         /// index counter for easy QVector access
@@ -299,7 +299,7 @@ public:
 
     bool hasExt1Data() const
     {
-        return( ext1Data);
+        return ext1Data;
     }
     void setExt1Data()
     {

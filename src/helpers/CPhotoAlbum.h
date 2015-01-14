@@ -31,9 +31,20 @@ public:
     CPhotoAlbum(QWidget * parent);
     virtual ~CPhotoAlbum();
 
-    void setSource(CGisItemWpt& wpt);
+    void reload(const QList<CGisItemWpt::image_t>& imgs);
+
+signals:
+    void sigChanged(const QList<CGisItemWpt::image_t>& imgs);
+
+public slots:
+    void slotAddImage();
+    void slotDelImage();
+
+protected:
+    void resizeEvent(QResizeEvent * e);
 
 private:
+    void updateView();
     QList<CGisItemWpt::image_t> images;
 };
 

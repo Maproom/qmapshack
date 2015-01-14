@@ -22,7 +22,7 @@
 #include "ui_IDetailsWpt.h"
 #include <QDialog>
 
-class CGisItemWpt;
+#include <gis/wpt/CGisItemWpt.h>
 
 class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
 {
@@ -36,6 +36,7 @@ private slots:
     void slotLinkActivated(const QUrl& url);
     void slotChangeIcon();
     void slotChangeReadOnlyMode(bool on);
+    void slotChangedImages(const QList<CGisItemWpt::image_t>& images);
     void setupGui();
 
 private:

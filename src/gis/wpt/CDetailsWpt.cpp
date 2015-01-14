@@ -47,6 +47,10 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+
+    connect(toolAddImage, SIGNAL(clicked()), photoAlbum, SLOT(slotAddImage()));
+    connect(toolDelImage, SIGNAL(clicked()), photoAlbum, SLOT(slotDelImage()));
+    connect(photoAlbum, SIGNAL(sigChanged(QList<CGisItemWpt::image_t>)), this, SLOT(slotChangedImages(QList<CGisItemWpt::image_t>)));
 }
 
 CDetailsWpt::~CDetailsWpt()
@@ -119,6 +123,20 @@ void CDetailsWpt::setupGui()
 
     listHistory->setupHistory(wpt);
 
+    photoAlbum->reload(wpt.getImages());
+    toolAddImage->hide();
+    toolDelImage->hide();
+
+    if(!isReadOnly)
+    {
+        toolAddImage->show();
+        if(photoAlbum->isVisible())
+        {
+            toolDelImage->show();
+        }
+    }
+
+//    adjustSize();
     originator = false;
 }
 
@@ -221,5 +239,11 @@ void CDetailsWpt::slotChangeIcon()
 void CDetailsWpt::slotChangeReadOnlyMode(bool on)
 {
     wpt.setReadOnlyMode(on);
+    setupGui();
+}
+
+void CDetailsWpt::slotChangedImages(const QList<CGisItemWpt::image_t>& images)
+{
+    wpt.setImages(images);
     setupGui();
 }

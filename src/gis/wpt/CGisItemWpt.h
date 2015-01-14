@@ -146,6 +146,7 @@ public:
     void setComment(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
+    void setImages(const QList<image_t>& imgs);
 
     const QString& getName() const
     {

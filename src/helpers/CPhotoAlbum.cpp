@@ -30,7 +30,69 @@ CPhotoAlbum::~CPhotoAlbum()
 {
 }
 
-void CPhotoAlbum::setSource(CGisItemWpt& wpt)
+void CPhotoAlbum::resizeEvent(QResizeEvent * e)
 {
-    images = wpt.getImages();
+    QWidget::resizeEvent(e);
+    updateView();
+}
+
+void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)
+{
+    images = imgs;
+    updateView();
+}
+
+void CPhotoAlbum::slotAddImage()
+{
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), "./");
+    if(filenames.isEmpty())
+    {
+        return;
+    }
+    foreach(const QString& filename, filenames)
+    {
+        CGisItemWpt::image_t image;
+        image.fileName = filename;
+        image.pixmap.load(filename);
+
+        images << image;
+    }
+
+    emit sigChanged(images);
+}
+
+void CPhotoAlbum::slotDelImage()
+{
+
+}
+
+
+void CPhotoAlbum::updateView()
+{
+    if(images.isEmpty())
+    {
+        hide();
+        return;
+    }
+    setEnabled(true);
+    show();
+
+    QPixmap img(label->size());
+    img.fill(Qt::black);
+    QPainter p(&img);
+
+
+    int xoff = 0;
+    for(int i = 0; i < images.size(); i++)
+    {
+        CGisItemWpt::image_t& image = images[i];
+
+        QImage tmp = image.pixmap.scaledToHeight(height(), Qt::SmoothTransformation);
+
+        p.drawImage(xoff,0,tmp);
+
+        xoff += tmp.width();
+    }
+
+    label->setPixmap(img);
 }

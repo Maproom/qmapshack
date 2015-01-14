@@ -359,6 +359,11 @@ void CGisItemWpt::setLinks(const QList<link_t>& links)
     changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
 }
 
+void CGisItemWpt::setImages(const QList<image_t>& imgs)
+{
+    images = imgs;
+    changed(QObject::tr("Changed images"), "://icons/48x48/Image.png");
+}
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {

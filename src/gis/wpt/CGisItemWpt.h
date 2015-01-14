@@ -188,6 +188,10 @@ public:
     {
         return( wpt.links);
     }
+    const QList<image_t>& getImages() const
+    {
+        return( images);
+    }
 
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& )

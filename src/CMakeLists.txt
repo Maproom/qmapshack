@@ -31,6 +31,7 @@ set( SRCS
     helpers/CHistoryListWidget.cpp
     helpers/CElevationDialog.cpp
     helpers/CLinksDialog.cpp
+    helpers/CPhotoAlbum.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -183,6 +184,7 @@ set( HDRS
     helpers/CHistoryListWidget.h
     helpers/CElevationDialog.h
     helpers/CLinksDialog.h
+    helpers/CPhotoAlbum.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h
@@ -325,6 +327,7 @@ set( UIS
     helpers/ISelectCopyAction.ui
     helpers/IElevationDialog.ui
     helpers/ILinksDialog.ui
+    helpers/IPhotoAlbum.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui

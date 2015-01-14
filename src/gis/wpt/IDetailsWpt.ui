@@ -227,22 +227,6 @@
      <item row="4" column="1">
       <widget class="CHistoryListWidget" name="listHistory"/>
      </item>
-     <item row="5" column="1">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item row="0" column="0">
       <widget class="QToolButton" name="toolIcon">
        <property name="text">
@@ -259,6 +243,22 @@
        </property>
       </widget>
      </item>
+     <item row="5" column="1">
+      <widget class="CPhotoAlbum" name="photoAlbum" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>150</height>
+        </size>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
@@ -268,6 +268,12 @@
    <class>CHistoryListWidget</class>
    <extends>QListWidget</extends>
    <header>helpers/CHistoryListWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CPhotoAlbum</class>
+   <extends>QWidget</extends>
+   <header>helpers/CPhotoAlbum.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

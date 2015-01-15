@@ -22,8 +22,12 @@
 
 CPhotoAlbum::CPhotoAlbum(QWidget *parent)
     : QWidget(parent)
+    , idx1stVisible(0)
+    , idxSelected(0)
 {
     setupUi(this);
+    connect(toolLeft, SIGNAL(clicked()), this, SLOT(slotLeft()));
+    connect(toolRight, SIGNAL(clicked()), this, SLOT(slotRight()));
 }
 
 CPhotoAlbum::~CPhotoAlbum()
@@ -39,6 +43,13 @@ void CPhotoAlbum::resizeEvent(QResizeEvent * e)
 void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)
 {
     images = imgs;
+
+    if(idxSelected >= images.size())
+    {
+        idx1stVisible   = 0;
+        idxSelected     = 0;
+    }
+
     updateView();
 }
 
@@ -55,6 +66,21 @@ void CPhotoAlbum::slotAddImage()
         image.fileName = filename;
         image.pixmap.load(filename);
 
+        int w = image.pixmap.width();
+        int h = image.pixmap.height();
+
+        if(w < h)
+        {
+            h *= 400.0 / w;
+            w  = 400;
+        }
+        else
+        {
+            h *= 600.0 / w;
+            w  = 600;
+        }
+        image.pixmap = image.pixmap.scaled(w,h,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
         images << image;
     }
 
@@ -66,9 +92,35 @@ void CPhotoAlbum::slotDelImage()
 
 }
 
+void CPhotoAlbum::slotRight()
+{
+    idxSelected++;
+
+    while(!label->rect().contains(rects[idxSelected]))
+    {
+        idx1stVisible++;
+    }
+
+    updateView();
+}
+
+void CPhotoAlbum::slotLeft()
+{
+    idxSelected--;
+    while(!label->rect().contains(rects[idxSelected]))
+    {
+        idx1stVisible--;
+    }
+
+    updateView();
+}
+
 
 void CPhotoAlbum::updateView()
 {
+    toolLeft->setEnabled(idxSelected != 0);
+    toolRight->setEnabled(idxSelected != (images.size() - 1));
+
     if(images.isEmpty())
     {
         hide();
@@ -81,17 +133,47 @@ void CPhotoAlbum::updateView()
     img.fill(Qt::black);
     QPainter p(&img);
 
-
     int xoff = 0;
+
+    for(int i = 0; i < rects.size() && i < idx1stVisible; i++)
+    {
+        xoff -= rects[i].width();
+    }
+
+    rects.clear();
     for(int i = 0; i < images.size(); i++)
     {
         CGisItemWpt::image_t& image = images[i];
 
-        QImage tmp = image.pixmap.scaledToHeight(height(), Qt::SmoothTransformation);
+        QImage tmp  = image.pixmap.scaledToHeight(label->height(), Qt::SmoothTransformation);
 
-        p.drawImage(xoff,0,tmp);
+        if(tmp.width() > label->width())
+        {
+            tmp  = image.pixmap.scaledToWidth(label->width(), Qt::SmoothTransformation);
+        }
+
+        QRect r     = tmp.rect();
+
+        int yoff = (height()- r.height()) / 2;
+
+        p.save();
+        p.translate(xoff,yoff);
+        p.drawImage(0,0,tmp);
+        p.setPen(QPen(Qt::black, 3));
+        p.setBrush(Qt::NoBrush);
+        p.drawRect(r);
+        p.restore();
+
+        r.moveTopLeft(QPoint(xoff, yoff));
+        rects << r;
 
         xoff += tmp.width();
+    }
+
+    if(idxSelected < rects.size())
+    {
+        p.setPen(QPen(Qt::yellow, 5));
+        p.drawRect(rects[idxSelected]);
     }
 
     label->setPixmap(img);

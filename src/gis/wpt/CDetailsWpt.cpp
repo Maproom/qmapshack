@@ -123,14 +123,15 @@ void CDetailsWpt::setupGui()
 
     listHistory->setupHistory(wpt);
 
-    photoAlbum->reload(wpt.getImages());
+    const QList<CGisItemWpt::image_t>& images = wpt.getImages();
+    photoAlbum->reload(images);
     toolAddImage->hide();
     toolDelImage->hide();
 
     if(!isReadOnly)
     {
         toolAddImage->show();
-        if(photoAlbum->isVisible())
+        if(!images.isEmpty())
         {
             toolDelImage->show();
         }

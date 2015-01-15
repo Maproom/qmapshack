@@ -43,9 +43,17 @@ public slots:
 protected:
     void resizeEvent(QResizeEvent * e);
 
+private slots:
+    void slotRight();
+    void slotLeft();
+
 private:
     void updateView();
     QList<CGisItemWpt::image_t> images;
+    QList<QRect> rects;
+
+    qint32 idx1stVisible;
+    qint32 idxSelected;
 };
 
 #endif //CPHOTOALBUM_H

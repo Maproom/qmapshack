@@ -40,10 +40,11 @@ struct point3D
 
 struct pointDP : public point3D
 {
-    pointDP() : used(true)
+    pointDP() : used(true), idx(-1)
     {
     }
     bool used;
+    qint32 idx;
 };
 
 struct segment_t

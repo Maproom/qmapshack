@@ -360,6 +360,8 @@ public:
      */
     void filterSpeed(qreal speed);
 
+    void findWaypointsCloseBy();
+
     static const QColor lineColors[TRK_N_COLORS];
     static const QString bulletColors[TRK_N_COLORS];
 
@@ -377,6 +379,7 @@ private:
        This has to be called each time the track data is changed.
      */
     void deriveSecondaryData();
+
     /**
        @brief Try to get access Nth visible point matching the idx
 

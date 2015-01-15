@@ -25,6 +25,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "plot/IPlot.h"
 
 #include <QtWidgets>
@@ -768,6 +769,105 @@ void CGisItemTrk::deriveSecondaryData()
 //    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 }
 
+struct trkwpt_t
+{
+    trkwpt_t() : x(0), y(0), idx(-1), lastDistance(20*20)
+    {
+
+    }
+
+    qreal x;
+    qreal y;
+    IGisItem::key_t key;
+    qint32 idx;
+    qreal  lastDistance;
+};
+
+void CGisItemTrk::findWaypointsCloseBy()
+{
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    if(project == 0)
+    {
+        return;
+    }
+
+    QVector<pointDP> line;
+
+    // combine all segments to a single line
+    foreach (const trkseg_t &seg, trk.segs)
+    {
+        foreach(const trkpt_t &pt, seg.pts)
+        {
+            if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                continue;
+            }
+            pointDP dp;
+            dp.x    = pt.lon * DEG_TO_RAD;
+            dp.y    = pt.lat * DEG_TO_RAD;
+            dp.idx  = pt.idxTotal;
+            line << dp;
+        }
+    }
+
+    // convert coodinates of all waypoints into meter coordinates relative to the first track point
+    point3D pt0 = line[0];
+    QList<trkwpt_t> trkwpts;
+    for(int i=0; i < project->childCount(); i++)
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->child(i));
+        if(wpt == 0)
+        {
+            continue;
+        }
+
+        QPointF pos;
+        pos = wpt->getPosition();
+
+        trkwpt_t trkwpt;
+        trkwpt.x      = pos.x() * DEG_TO_RAD;
+        trkwpt.y      = pos.y() * DEG_TO_RAD;
+        trkwpt.key    = wpt->getKey();
+
+        qreal a1, a2;
+        qreal d = GPS_Math_Distance(pt0.x, pt0.y, trkwpt.x, trkwpt.y, a1, a2);
+
+        trkwpt.x = cos(a1 * DEG_TO_RAD) * d;
+        trkwpt.y = sin(a1 * DEG_TO_RAD) * d;
+
+        trkwpts << trkwpt;
+    }
+
+
+    // convert all coordinates into meter relative to the first track point.
+    line[0].x = 0;
+    line[0].y = 0;
+    for(int i = 1; i < line.size(); i++)
+    {
+        qreal d, a1, a2;
+        pointDP& pt1 = line[i - 1];
+        pointDP& pt2 = line[i];
+
+        d = GPS_Math_Distance(pt0.x, pt0.y, pt2.x, pt2.y, a1, a2);
+
+        pt0 = pt2;
+
+        pt2.x = pt1.x + cos(a1 * DEG_TO_RAD) * d;
+        pt2.y = pt1.y + sin(a1 * DEG_TO_RAD) * d;
+
+        // test for waypoint close by
+        for(int n = 0; n < trkwpts.size(); n++)
+        {
+            trkwpt_t& trkwpt = trkwpts[n];
+            qreal d = (trkwpt.x - pt2.x)*(trkwpt.x - pt2.x) + (trkwpt.y - pt2.y)*(trkwpt.y - pt2.y);
+            if(d < trkwpt.lastDistance)
+            {
+                trkwpt.idx = pt2.idx;
+                trkwpt.lastDistance = d;
+            }
+        }
+    }
+}
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {

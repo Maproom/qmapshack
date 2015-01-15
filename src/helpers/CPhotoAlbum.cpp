@@ -96,7 +96,7 @@ void CPhotoAlbum::slotRight()
 {
     idxSelected++;
 
-    while(!label->rect().contains(rects[idxSelected]))
+    if(!label->rect().contains(rects[idxSelected]))
     {
         idx1stVisible++;
     }
@@ -107,7 +107,7 @@ void CPhotoAlbum::slotRight()
 void CPhotoAlbum::slotLeft()
 {
     idxSelected--;
-    while(!label->rect().contains(rects[idxSelected]))
+    if(!label->rect().contains(rects[idxSelected]))
     {
         idx1stVisible--;
     }

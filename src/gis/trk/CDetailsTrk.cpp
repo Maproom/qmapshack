@@ -116,6 +116,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
+    trk.findWaypointsCloseBy();
+
     slotShowPlots();
 }
 

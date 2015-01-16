@@ -1,3 +1,11 @@
+V 0.11.0
+* Auto-switch projection for pole caps in track plot
+* Fix several issues with elements derived from existing ones still having the same key.
+* Add project diary (project details)
+* Add track filter to reset hidden track points to visible
+* Save only changed items to database (speed up)
+* Add photo album and viewer to waypoint details
+
 V 0.10.0
 * Fix crash when saving a DB project before the database tree has been opened
 * Add track filters to hide trackpoints

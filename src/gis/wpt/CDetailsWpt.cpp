@@ -137,7 +137,6 @@ void CDetailsWpt::setupGui()
         }
     }
 
-//    adjustSize();
     originator = false;
 }
 

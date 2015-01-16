@@ -89,15 +89,20 @@ void CPhotoAlbum::slotAddImage()
 
 void CPhotoAlbum::slotDelImage()
 {
-
+    images.removeAt(idxSelected);
+    emit sigChanged(images);
 }
 
 void CPhotoAlbum::slotRight()
 {
     idxSelected++;
+    QRect r1 = rects[idxSelected];
+    QRect r2 = label->rect();
 
-    if(!label->rect().contains(rects[idxSelected]))
+    while(!r2.contains(r1))
     {
+        int w = rects[idx1stVisible].width();
+        r1.moveLeft(r1.left() - w);
         idx1stVisible++;
     }
 
@@ -107,9 +112,14 @@ void CPhotoAlbum::slotRight()
 void CPhotoAlbum::slotLeft()
 {
     idxSelected--;
-    if(!label->rect().contains(rects[idxSelected]))
+    QRect r1 = rects[idxSelected];
+    QRect r2 = label->rect();
+
+    while(!r2.contains(r1))
     {
         idx1stVisible--;
+        int w = rects[idx1stVisible].width();
+        r1.moveLeft(r1.left() + w);
     }
 
     updateView();

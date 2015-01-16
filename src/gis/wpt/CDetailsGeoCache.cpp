@@ -81,6 +81,8 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     webDesc->setHtml(desc);
     webDesc->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
+    photoAlbum->reload(wpt.getImages());
+
     connect(checkHint, SIGNAL(toggled(bool)), this, SLOT(slotHintChanged(bool)));
     connect(webDesc, SIGNAL(linkClicked(QUrl)), this, SLOT(slotLinkClicked(QUrl)));
 }

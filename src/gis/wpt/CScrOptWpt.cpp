@@ -40,6 +40,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
 
     toolMove->setEnabled(!wpt->isReadOnly());
     toolProj->setEnabled(!wpt->isGeocache());
+    photoAlbum->reload(wpt->getImages());
 
     anchor = wpt->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
@@ -50,6 +51,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolMove, SIGNAL(clicked()), this, SLOT(slotMove()));
     connect(toolProj, SIGNAL(clicked()), this, SLOT(slotProj()));
+
+    adjustSize();
 }
 
 CScrOptWpt::~CScrOptWpt()

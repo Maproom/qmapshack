@@ -37,6 +37,10 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     , originator(false)
 {
     setupUi(this);
+    toolAddImage->hide();
+    toolDelImage->hide();
+    photoAlbum->hide();
+
     setupGui();
     connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelPositon, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));

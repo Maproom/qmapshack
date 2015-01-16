@@ -16,7 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CPhotoAlbum.h"
+#include "helpers/CPhotoAlbum.h"
+#include "helpers/CPhotoViewer.h"
 
 #include <QtWidgets>
 
@@ -38,6 +39,12 @@ void CPhotoAlbum::resizeEvent(QResizeEvent * e)
 {
     QWidget::resizeEvent(e);
     updateView();
+}
+
+void CPhotoAlbum::mouseDoubleClickEvent(QMouseEvent * e)
+{
+    CPhotoViewer dlg(images, 0,this);
+    dlg.exec();
 }
 
 void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)

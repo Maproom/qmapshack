@@ -42,6 +42,7 @@ public slots:
 
 protected:
     void resizeEvent(QResizeEvent * e);
+    void mouseDoubleClickEvent(QMouseEvent * e);
 
 private slots:
     void slotRight();

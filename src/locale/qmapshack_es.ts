@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES">
+<TS version="2.1" language="es_ES">
 <context>
     <name>CCanvas</name>
     <message>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="58"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="100"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="102"/>
         <source>???</source>
         <translation></translation>
     </message>
@@ -215,12 +215,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="208"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="217"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="220"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="226"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="245"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="210"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="219"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="222"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="228"/>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="247"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="249"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
@@ -260,17 +260,17 @@
         <translation type="obsolete">&lt;p&gt;---sin descripción---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="129"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="151"/>
         <source>Edit name...</source>
         <translation>Editar nombre...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="129"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="151"/>
         <source>Enter new waypoint name.</source>
         <translation>Introducir el nombre del nuevo waypoint.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="148"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="170"/>
         <source>Enter new proximity range.</source>
         <translation>Introduzca el nuevo valor de proximidad.</translation>
     </message>
@@ -1402,6 +1402,14 @@ Estructura desconocida.</translation>
     </message>
 </context>
 <context>
+    <name>CPhotoAlbum</name>
+    <message>
+        <location filename="../helpers/CPhotoAlbum.cpp" line="65"/>
+        <source>Select images...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CPlotDistance</name>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="53"/>
@@ -1760,7 +1768,7 @@ no es una definición de sistema de coordenadas válido:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="145"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation type="unfinished"></translation>
@@ -1913,48 +1921,48 @@ no es una definición de sistema de coordenadas válido:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="35"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="70"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="92"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="105"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="118"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="131"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="157"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="170"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="183"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="196"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="209"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="222"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="235"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="248"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="43"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="62"/>
         <source>about:blank</source>
         <translation>about:blank</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="59"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="85"/>
         <source>Position:</source>
         <translation>Posición:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="79"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="105"/>
         <source>Difficulty</source>
         <translation>Dificultad</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="157"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="183"/>
         <source>Terrain</source>
         <translation>Terreno</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="231"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="35"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="249"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="259"/>
         <source>Hint:</source>
         <translation>Consejo:</translation>
     </message>
@@ -2167,47 +2175,59 @@ no es una definición de sistema de coordenadas válido:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="128"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="249"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="207"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="236"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="273"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="293"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="162"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="52"/>
         <source>Position:</source>
         <translation>Posición:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="72"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="90"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="59"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="85"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="111"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="151"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="169"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="195"/>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="221"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="182"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="72"/>
         <source>Ele.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="208"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="98"/>
         <source>Proximity:</source>
         <translation>Proximidad:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="109"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="188"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;El waypoint se importó en QMapShack y ha sido modificado, por lo que ya no muestra los datos originales. Por favor consulte  los cambios en el histórico. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="125"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="204"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read Only Mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modo Sólo Lectura&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsWpt.ui" line="65"/>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="270"/>
+        <source>Add images.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="290"/>
+        <source>Delete selected image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsWpt.ui" line="144"/>
         <source>Date/Time:</source>
         <translation>Fecha/Hora:</translation>
     </message>
@@ -2988,6 +3008,20 @@ no es una definición de sistema de coordenadas válido:
     </message>
 </context>
 <context>
+    <name>IPhotoAlbum</name>
+    <message>
+        <location filename="../helpers/IPhotoAlbum.ui" line="20"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IPhotoAlbum.ui" line="50"/>
+        <location filename="../helpers/IPhotoAlbum.ui" line="77"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+</context>
+<context>
     <name>IPlot</name>
     <message>
         <location filename="../plot/IPlot.cpp" line="481"/>
@@ -3104,7 +3138,7 @@ o
         <source>m</source>
         <translation>m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation>º</translation>
@@ -3963,113 +3997,113 @@ Filename: %1</source>
         <translation>Fallo al escribir en el archivo &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="331"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="332"/>
         <source>Length: %1 %2</source>
         <translation>Longitud: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="338"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="339"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="346"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="347"/>
         <source>Time: %1</source>
         <translation>Tiempo: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="349"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="359"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="350"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="360"/>
         <source>, Speed: %1 %2</source>
         <translation>, Velocidad: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="356"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="357"/>
         <source>Moving: %1</source>
         <translation>En movimiento: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="365"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="366"/>
         <source>Start: %1</source>
         <translation>Comienzo: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="370"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="371"/>
         <source>End: %1</source>
         <translation>Final: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="374"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="375"/>
         <source>Points: %1 (%2)</source>
         <translation>Puntos: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="439"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="440"/>
         <source>Ele.: %1 %2</source>
         <translation>Altitud: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="443"/>
         <source> slope: %1%3 (%2%)</source>
         <translation> pendiente: %1%3 (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="447"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="448"/>
         <source> speed: %1%2</source>
         <translation> velocidad: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="459"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="460"/>
         <source>Ascend: %1%2 (%3%)</source>
         <translation>Ascenso: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="463"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
         <source>Ascend: - (-)</source>
         <translation>Ascenso: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="473"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
         <source> Descend: - (-) </source>
         <translation> Descenso: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="494"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="495"/>
         <source> Moving: - (-) </source>
         <translation> En movimiento: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="989"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1089"/>
         <source>Hide points.</source>
         <translation>Ocultar puntos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1023"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1123"/>
         <source>Show points.</source>
         <translation>Mostrar puntos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="470"/>
         <source> Descend: %1%2 (%3%)</source>
         <translation> Descenso: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="264"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="265"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Se cambiaron los puntos del track, y descartados todos los datos previos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="480"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="481"/>
         <source>Dist.: %1%2 (%3%)</source>
         <translation>Distancia: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="484"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="485"/>
         <source>Dist.: - (-)</source>
         <translation>Dist.: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="490"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="491"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation> En movimiento: %1%2 (%3%)</translation>
     </message>
@@ -4096,7 +4130,7 @@ Filename: %1</source>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="141"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="44"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="160"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="161"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="101"/>
         <source>_Clone</source>
         <translation type="unfinished"></translation>
@@ -4144,14 +4178,14 @@ Filename: %1</source>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="519"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="138"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1328"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1428"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="359"/>
         <source>Changed links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="531"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1340"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1440"/>
         <source>Changed color</source>
         <translation>Se cambió el color</translation>
     </message>
@@ -4166,17 +4200,17 @@ Filename: %1</source>
         <translation>Proximidad: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1310"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1410"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="310"/>
         <source>Changed name</source>
         <translation>Se cambió el nombre</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="809"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="824"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="843"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="902"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1048"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="909"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="924"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="943"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1002"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1148"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="176"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
@@ -4209,15 +4243,20 @@ Filename: %1</source>
         <translation>Se cambió el icono</translation>
     </message>
     <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="365"/>
+        <source>Changed images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="126"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1316"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1416"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
         <source>Changed comment</source>
         <translation>Se cambió el comentario</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="132"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1322"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1422"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="353"/>
         <source>Changed description</source>
         <translation>Se cambió la descripción</translation>
@@ -4303,11 +4342,11 @@ Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="809"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="824"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="843"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="902"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1048"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="909"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="924"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="943"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1002"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1148"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Enter new track name.</source>
         <translation>Introduzca el nombre del nuevo track.</translation>

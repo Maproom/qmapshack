@@ -23,9 +23,6 @@
    <iconset resource="../../resources.qrc">
     <normaloff>:/icons/32x32/Map.png</normaloff>:/icons/32x32/Map.png</iconset>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">

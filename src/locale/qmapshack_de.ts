@@ -132,7 +132,7 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="229"/>
         <source>Build diary...</source>
-        <translation>Erstelle Tagebuch...</translation>
+        <translation>Tagebuch erstellen...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="229"/>
@@ -205,22 +205,22 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="57"/>
         <source>Reduce visible track points</source>
-        <translation>Die Anzahl der sichtbaren Trackpunkte reduzieren</translation>
+        <translation>Sichtbare Trackpunkte reduzieren</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="70"/>
         <source>Change elevation of track points</source>
-        <translation>Die Höheninformation der Trackpunkte ändern</translation>
+        <translation>Höhe von Trackpunkten ändern</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="83"/>
         <source>Change timestamp of track points</source>
-        <translation>Die Zeitmarken der Trackpunkte ändern</translation>
+        <translation>Zeitstempel von Trackpunkten ändern</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="96"/>
         <source>Cut track into pieces</source>
-        <translation>Den Track in Stücke zerschneiden</translation>
+        <translation>Track in Stücke teilen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="210"/>
@@ -377,12 +377,12 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="318"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden für immer entfernt.</translation>
+        <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaftentfernt.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="333"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>Sind Sie sicher, dass Sie alle ausgewählten Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden für immer entfernt.</translation>
+        <translation>Sind Sie sicher, dass Sie alle ausgewählten Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
 </context>
 <context>
@@ -410,7 +410,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="90"/>
         <source>Edit...</source>
-        <translation>Ändern...</translation>
+        <translation>Bearbeiten...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="91"/>
@@ -444,7 +444,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="95"/>
         <source>Edit Track Points</source>
-        <translation>Wegpunkte bearbeiten</translation>
+        <translation>Trackpunkte bearbeiten</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="96"/>
@@ -500,12 +500,12 @@
     <message>
         <location filename="../gis/CGisWidget.cpp" line="344"/>
         <source>Cut Track...</source>
-        <translation>Track zerschneiden...</translation>
+        <translation>Track teilen...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="344"/>
         <source>Do you want to delete the original track?</source>
-        <translation>Wollen sie den originalen Track löschen?</translation>
+        <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
 </context>
 <context>
@@ -538,7 +538,7 @@
     <message>
         <location filename="../qlgt/CImportDatabase.cpp" line="29"/>
         <source>Import QLandkarte Database</source>
-        <translation>Importiert eine QLandkarte Datenbank</translation>
+        <translation>QLandkarte Datenbank importieren</translation>
     </message>
     <message>
         <location filename="../qlgt/CImportDatabase.cpp" line="73"/>
@@ -569,7 +569,7 @@
     <message>
         <location filename="../CMainWindow.cpp" line="559"/>
         <source>Load GIS Data...</source>
-        <translation>Lade GIS Daten...</translation>
+        <translation>GIS Daten laden...</translation>
     </message>
 </context>
 <context>
@@ -1240,7 +1240,7 @@
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="39"/>
         <source>Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Hinzufügen oder entfernen von Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
+        <translation>Hinzufügen oder Entfernen von Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
     </message>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="54"/>
@@ -1486,7 +1486,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="48"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point. And then a second one.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Bereich wählen&lt;/b&gt;&lt;br/&gt;Wähle einen ersten Punkt. Dann einen zweiten.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Bereich wählen&lt;/b&gt;&lt;br/&gt;Wählen Sie einen ersten Punkt. Dann einen zweiten.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1494,7 +1494,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../helpers/CPhotoAlbum.cpp" line="65"/>
         <source>Select images...</source>
-        <translation>Photos auswählen...</translation>
+        <translation>Bilder wählen...</translation>
     </message>
 </context>
 <context>
@@ -1511,7 +1511,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="obsolete">Zeit [h]</translation>
+        <translation type="obsolete">Uhrzeit</translation>
     </message>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="59"/>
@@ -1909,7 +1909,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
         <source>Setup DEM file pathss</source>
-        <translation>Pfad für die DEM Dateien setzen</translation>
+        <translation>Pfad für DEM Dateien setzen</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
@@ -1997,7 +1997,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
-        <translation>Nutze das Kontextmenü ( Klick mit rechter Maustaste auf Eintrag), um eine Datei zu aktivieren. Nutze Ziehen u. Ablegen um die aktivierte Datei in der Reihenfolge der Ansicht zu verschieben.</translation>
+        <translation>Nutze das Kontextmenü (Klick mit rechter Maustaste auf Eintrag), um eine Datei zu aktivieren. Nutze Ziehen u. Ablegen um die aktivierte Datei in der Reihenfolge der Ansicht zu verschieben.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="156"/>
@@ -2128,12 +2128,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="70"/>
         <source>Sort By Time</source>
-        <translation>Nach der Zeit sortieren</translation>
+        <translation>Sortieren nach Zeit</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
         <source>Keep Order of Project</source>
-        <translation>Die Reihenfolge beibehalten</translation>
+        <translation>Reihenfolge beibehalten</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="93"/>
@@ -2149,7 +2149,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="113"/>
         <source>Rebuild diary.</source>
-        <translation>Tagebuch erneut erstellen.</translation>
+        <translation>Tagebuch aktualisieren.</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="43"/>
@@ -2240,7 +2240,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="156"/>
         <source>Info</source>
-        <translation></translation>
+        <translation>Info.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="273"/>
@@ -2322,12 +2322,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="270"/>
         <source>Add images.</source>
-        <translation>Photos hinzufügen.</translation>
+        <translation>Bilder hinzufügen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="290"/>
         <source>Delete selected image.</source>
-        <translation>Ausgewähltes Foto entfernen.</translation>
+        <translation>Ausgewähltes Bild löschen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="144"/>
@@ -2340,7 +2340,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="14"/>
         <source>Edit elevation...</source>
-        <translation>Höhenangabe bearbeiten...</translation>
+        <translation>Höhe bearbeiten...</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="22"/>
@@ -2378,7 +2378,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="63"/>
         <source>Remove all hidden track points permanently.</source>
-        <translation>Alle versteckten Trackpunkte werden für immer entfernt.</translation>
+        <translation>Alle verborgenen Trackpunkte werden dauerhaft entfernt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
@@ -2396,12 +2396,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="45"/>
         <source>&lt;b&gt;Hide Points (Douglas Peuker)&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Trackpunkte verstecken (Douglas Peuker)&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Trackpunkte verbergen (Douglas Peuker)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
-        <translation>Trackpunkte werden versteckt, wenn der Abstand zu einer Linien zwischen benachbarten Punkten weniger beträgt als</translation>
+        <translation>Trackpunkte werden verborgen, wenn der Abstand zu einer Linien zwischen benachbarten Punkten weniger beträgt als</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
@@ -2429,12 +2429,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
         <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Profil glätten (Medianmethode) &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Profil glätten (Median-Methode) &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
-        <translation>Veringeren Sie die Varianz der Trackpunkthöhe mit einem Medianfilter der Länge </translation>
+        <translation>Glättet die Abweichung der Höhe von Trackpunkten mit einem Median-Filter der Größe </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
@@ -2462,7 +2462,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>
         <source>Change start of track to </source>
-        <translation>Verändern Sie die Anfangszeit des Tracks auf </translation>
+        <translation>Ändert den Trackbeginn auf </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="71"/>
@@ -2480,22 +2480,22 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
         <source>&lt;b&gt;Obscure Timestamps&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Zeitmarken verschleiern&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Zeitstempel verschleiern&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="54"/>
         <source>Increase timestamp by</source>
-        <translation>Vergrößern Sie die Zeitmarke um </translation>
+        <translation>Erhöht den Zeitstempel um </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>
         <source> sec.</source>
-        <translation>Sek.</translation>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="68"/>
         <source>with each track point. 0 sec. will remove timestamps.</source>
-        <translation>für jeden Trackpunkt. 0 Sek. entfernt alle Zeitmarken.</translation>
+        <translation>für jeden Trackpunkt. 0 s. entfernt alle Zeitstempel.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="88"/>
@@ -2513,17 +2513,17 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="51"/>
         <source>&lt;b&gt;Offset Elevation&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Offset Höhe&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Höhenversatz&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="69"/>
         <source>Add offset of</source>
-        <translation>Fügen Sie einen Offset von </translation>
+        <translation>Fügt einen Versatz von </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="95"/>
         <source>to track points elevation.</source>
-        <translation>zu jeder Trackpunkthöhe hinzu. </translation>
+        <translation>zur Höhe der Trackpunkte hinzu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="115"/>
@@ -2546,7 +2546,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation>Ersetzen Sie die Höhendaten der Trackpunkte mit Daten aus den geladenen DEM Dateien.</translation>
+        <translation>Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="70"/>
@@ -2564,7 +2564,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
         <source>&lt;b&gt;Reset Hidden Track Points&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Versteckte Trackpunkte zurücksetzen&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Verborgene Trackpunkte wiederherstellen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
@@ -2592,12 +2592,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
         <source>Set speed to </source>
-        <translation>Ändern Sie die Geschwindigkeit auf </translation>
+        <translation>Ändert Geschwindigkeit auf </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
         <source> km/h</source>
-        <translation></translation>
+        <translation> km/h</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
@@ -2714,7 +2714,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../helpers/IInputDialog.ui" line="14"/>
         <source>Edit...</source>
-        <translation>Ändern...</translation>
+        <translation>Bearbeiten...</translation>
     </message>
     <message>
         <location filename="../helpers/IInputDialog.ui" line="20"/>
@@ -3044,7 +3044,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../map/IMapPropSetup.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ändern Sie die Transparenz der Karte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ändert die Transparenz der Karte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="50"/>
@@ -3061,7 +3061,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../map/IMapPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stellen Sie den Skalierungsbereich ein, in dem die Karte sichtbar ist. Benutzen Sie die beiden Knöpfe links und rechts um die minimale und maximale Skalierung einzustellen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stellt den Skalierungsbereich ein, in dem die Karte sichtbar ist. Benutzen Sie die beiden Knöpfe links und rechts um die minimale und maximale Skalierung einzustellen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="87"/>
@@ -3162,7 +3162,7 @@ ist keine gültige Koordinatensystemdefinition:
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 or
 &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation>Falsches Positionsformat. Das muss entweder 
+        <translation>Falsches Positionsformat. Muss entweder 
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 oder
 &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;
@@ -3174,7 +3174,7 @@ sein</translation>
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
         <source>Proj4 Wizzard</source>
-        <translation></translation>
+        <translation>Proj4 Wizard</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
@@ -3252,7 +3252,7 @@ sein</translation>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="66"/>
         <source>m</source>
-        <translation></translation>
+        <translation> m</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
@@ -3333,7 +3333,7 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="49"/>
         <source>Select a range of points.</source>
-        <translation>Wähle einen Punktebereich.</translation>
+        <translation>Einen Punktebereich auswählen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="63"/>
@@ -3361,7 +3361,7 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="32"/>
         <source>Delete selected range of points.</source>
-        <translation>Gewählten Punktebereich löschen.</translation>
+        <translation>Löscht gewählten Punktebereich.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="35"/>
@@ -3379,17 +3379,17 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="40"/>
         <source>Hide all points.</source>
-        <translation>Alle Punkte ausblenden.</translation>
+        <translation>Blendet alle Punkte aus.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="54"/>
         <source>Show all points.</source>
-        <translation>Alle Punkte anzeigen.</translation>
+        <translation>Zeigt alle Punkte an.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
         <source>Copy track points as new track.</source>
-        <translation>Trackpunkte in neuen Track kopieren.</translation>
+        <translation>Kopiert Trackpunkte in neuen Track.</translation>
     </message>
     <message>
         <source>Hide points.</source>
@@ -3426,7 +3426,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="28"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Details anzeigen; Bearbeiten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Details anzeigen &amp; Bearbeiten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="31"/>
@@ -3438,7 +3438,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="42"/>
         <source>Copy route into another project.</source>
-        <translation>Route in ein anderes Projekt kopieren.</translation>
+        <translation>Kopiert die Route in ein anderes Projekt.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
@@ -3461,7 +3461,7 @@ sein</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details &amp;amp; Edit properties of track.</source>
-        <translation>Detailansicht &amp;amp; Trackeigenschaften bearbeiten.</translation>
+        <translation>Detailansicht &amp; Trackeigenschaften bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
@@ -3598,12 +3598,12 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="14"/>
         <source>Copy item...</source>
-        <translation>Elemente kopieren...</translation>
+        <translation>Element kopieren...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="23"/>
         <source>Replace existing item</source>
-        <translation>Bestehendes Element ersetzen</translation>
+        <translation>Ersetzt vorhandenes Element</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="30"/>
@@ -3621,7 +3621,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="97"/>
         <source>Create a clone</source>
-        <translation>Einen Klon erstellen</translation>
+        <translation>Abbild erstellen</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="104"/>
@@ -3636,12 +3636,12 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="118"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
-        <translation>Der Name das Klones wird mit &apos;_Klon&apos; erweitert</translation>
+        <translation>Der Name das Abbildes wird mit &apos;_Klon&apos; erweitert</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="132"/>
         <source>And for all other items, too.</source>
-        <translation>Und auch für alle weiteren Elemente.</translation>
+        <translation>Auch für alle anderen Elemente anwenden.</translation>
     </message>
 </context>
 <context>
@@ -3653,7 +3653,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
         <source>Select a project...</source>
-        <translation>Wähle ein Projekt...</translation>
+        <translation>Ein Projekt wählen...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
@@ -3720,7 +3720,7 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="46"/>
         <source>Add new database.</source>
-        <translation>Neue Datenbank hinzufügen.</translation>
+        <translation>Fügt eine neue Datenbank hinzu.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="49"/>
@@ -3731,7 +3731,7 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="60"/>
         <source>Open existing database.</source>
-        <translation>Öffne eine vorhandene DAtenbank.</translation>
+        <translation>Öffnet ein vorhandene Datenbank.</translation>
     </message>
 </context>
 <context>
@@ -3816,7 +3816,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="259"/>
         <source>Ctrl+Z</source>
-        <translation></translation>
+        <translation>Strg+Z</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="268"/>
@@ -3826,7 +3826,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="271"/>
         <source>Ctrl+Shift+Z</source>
-        <translation></translation>
+        <translation>Strg+Shift+Z</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="280"/>
@@ -3836,7 +3836,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="283"/>
         <source>Ctrl+X</source>
-        <translation></translation>
+        <translation>Strg+X</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="292"/>
@@ -3846,7 +3846,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="295"/>
         <source>Ctrl+C</source>
-        <translation></translation>
+        <translation>Strg+C</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="304"/>
@@ -3856,7 +3856,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="307"/>
         <source>Ctrl+V</source>
-        <translation></translation>
+        <translation>Strg+V</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="319"/>
@@ -3866,7 +3866,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="322"/>
         <source>Ctrl+L</source>
-        <translation></translation>
+        <translation>Strg+L</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="334"/>
@@ -3876,7 +3876,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="337"/>
         <source>Ctrl+R</source>
-        <translation></translation>
+        <translation>Strg+R</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="349"/>
@@ -3886,7 +3886,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="352"/>
         <source>Ctrl+E</source>
-        <translation></translation>
+        <translation>Strg+E</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="364"/>
@@ -3896,7 +3896,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="367"/>
         <source>Ctrl+J</source>
-        <translation></translation>
+        <translation>Strg+J</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="379"/>
@@ -3906,7 +3906,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="382"/>
         <source>Ctrl+U</source>
-        <translation></translation>
+        <translation>Strg+U</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="394"/>
@@ -3916,7 +3916,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="397"/>
         <source>Ctrl+B</source>
-        <translation></translation>
+        <translation>Strg+B</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="409"/>
@@ -3926,7 +3926,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="412"/>
         <source>Ctrl+I</source>
-        <translation></translation>
+        <translation>Strg+I</translation>
     </message>
 </context>
 <context>
@@ -4194,7 +4194,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="443"/>
         <source> slope: %1%3 (%2%)</source>
-        <translation> Neigung: %1%3 (%2%)</translation>
+        <translation>, Neigung: %1%3 (%2%)</translation>
     </message>
     <message>
         <source> slope: %1° (%2%)</source>
@@ -4217,12 +4217,12 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="448"/>
         <source> speed: %1%2</source>
-        <translation>Geschwindigkeit: %1%2</translation>
+        <translation>, Geschw.: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="460"/>
         <source>Ascend: %1%2 (%3%)</source>
-        <translation>Anstieg: %1%2 (%3%)</translation>
+        <translation>Anstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
@@ -4232,17 +4232,17 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="470"/>
         <source> Descend: %1%2 (%3%)</source>
-        <translation> Abstieg: %1%2 (%3%)</translation>
+        <translation>, Abstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
         <source> Descend: - (-) </source>
-        <translation> Abstieg: - (-) </translation>
+        <translation>, Abstieg: - (-) </translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="481"/>
         <source>Dist.: %1%2 (%3%)</source>
-        <translation>Entf.: %1%2 (%3%)</translation>
+        <translation>Entf.: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="485"/>
@@ -4252,12 +4252,12 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="491"/>
         <source> Moving: %1%2 (%3%)</source>
-        <translation>Bewegung: %1%2 (%3%)</translation>
+        <translation>, Bewegung: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="495"/>
         <source> Moving: - (-) </source>
-        <translation> Bewegung: - (-) </translation>
+        <translation>, Bewegung: - (-) </translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="95"/>
@@ -4397,7 +4397,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="365"/>
         <source>Changed images</source>
-        <translation>Photos geändert</translation>
+        <translation>Bilder geändert</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="126"/>
@@ -4561,32 +4561,32 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="95"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
-        <translation>Punkte mit Hilfe des Douglas Peuker Algorithmus versteckt (%1%2)</translation>
+        <translation>Punkte verstecken mit dem Douglas-Peuker Algorithmus (%1%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="111"/>
         <source>Reset all hidden track points to visible</source>
-        <translation>Alle Trackpunkte auf sichtbar zurücksetzen</translation>
+        <translation>Alle verborgenen Trackpunkte zurücksetzen</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="136"/>
         <source>Permanently removed all hidden track points</source>
-        <translation>Alle versteckten Trackpunkte für immer gelöscht</translation>
+        <translation>Alle verborgenen Trackpunkte wurden dauerhaft entfernt</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="186"/>
         <source>Smoothed profile with a Median filter of size %1</source>
-        <translation>Das Profil mit einem Medianfilter der Länge %1 geglättet</translation>
+        <translation>Mit einem Median-Filter der Größe %1 geglättetes Profil</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="222"/>
         <source>Replaced elevation data with data from DEM files.</source>
-        <translation>Höhendaten durch Daten aus den DEM Dateien ersetzt</translation>
+        <translation>Höhendaten durch Daten von DEM Dateien ersetzt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="245"/>
         <source>Offset elevation data by %1%2.</source>
-        <translation>Höhendaten um %1%2 verschoben.</translation>
+        <translation>Versatz der Höhendaten um %1%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="264"/>
@@ -4596,17 +4596,17 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="283"/>
         <source>Remove timestamps.</source>
-        <translation>Zeitmarken entfernt.</translation>
+        <translation>Zeitstempel entfernt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="306"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
-        <translation>Künstliche Zeitmarken mit einem Abstand von %1 Sek. gesetzt.</translation>
+        <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="339"/>
         <source>Changed speed to %1%2.</source>
-        <translation>Die Geschwindigkeit auf %1%2 gesetzt.</translation>
+        <translation>Geschwindigkeit auf %1%2 geändert.</translation>
     </message>
 </context>
 </TS>

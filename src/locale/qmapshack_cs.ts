@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>CCanvas</name>
     <message>
@@ -128,12 +128,12 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="229"/>
         <source>Build diary...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestavit deník...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="229"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="234"/>
@@ -162,7 +162,7 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="330"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Oblasti&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="366"/>
@@ -202,12 +202,12 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="70"/>
         <source>Change elevation of track points</source>
-        <translation>Změnit informace o výšce bodů stopy.</translation>
+        <translation>Změnit informace o výškách bodů stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="83"/>
         <source>Change timestamp of track points</source>
-        <translation>Změnit časové razítko bodů stopy</translation>
+        <translation>Změnit časová razítka bodů stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="96"/>
@@ -397,12 +397,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="104"/>
         <source>Proj. Waypoint...</source>
-        <translation>Promítnout cestovní bod...</translation>
+        <translation>Promítnutí cestovního bodu...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="92"/>
         <source>Track Profile</source>
-        <translation>Sledovat profil</translation>
+        <translation>Profil stopy</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="94"/>
@@ -1415,7 +1415,7 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../helpers/CPhotoAlbum.cpp" line="65"/>
         <source>Select images...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat obrázky...</translation>
     </message>
 </context>
 <context>
@@ -1428,7 +1428,7 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="57"/>
         <source>time</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas</translation>
     </message>
     <message>
         <source>time [h]</source>
@@ -2045,17 +2045,17 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="70"/>
         <source>Sort By Time</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
         <source>Keep Order of Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachovat pořadí projektu</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="93"/>
         <source>Print diary</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisk deníku</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="96"/>
@@ -2066,7 +2066,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="113"/>
         <source>Rebuild diary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestavit deník znovu.</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="43"/>
@@ -2228,12 +2228,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="270"/>
         <source>Add images.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat obrázky.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="290"/>
         <source>Delete selected image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vybraný obrázek.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="144"/>
@@ -2279,12 +2279,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="51"/>
         <source>&lt;b&gt;Remove Track Points&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Odstranit cestovní body&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Odstranit body stopy&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="63"/>
         <source>Remove all hidden track points permanently.</source>
-        <translation>Odstranit trvale všechny skryté cestovní body.</translation>
+        <translation>Odstranit trvale všechny skryté body stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
@@ -2307,7 +2307,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
-        <translation>Skrýt cestovní body, když je vzdálenost k čáře mezi sousedícími body méně než</translation>
+        <translation>Skrýt body stopy, když je vzdálenost k čáře mezi sousedícími body méně než</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
@@ -2340,7 +2340,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
-        <translation>Zmenšit odchylku výšky cestovních bodů pomocí filtru střední hodnoty o velikosti </translation>
+        <translation>Zmenšit odchylku výšky bodů stopy pomocí filtru střední hodnoty o velikosti </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
@@ -2429,7 +2429,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="95"/>
         <source>to track points elevation.</source>
-        <translation>ke každé výšce cestovního bodu.</translation>
+        <translation>ke každé výšce bodu stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="115"/>
@@ -2452,7 +2452,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation>Nahradit výšková data cestovních bodů daty z nahraných souborů s digitálními výškovými modely.</translation>
+        <translation>Nahradit výšková data bodů stopy daty z nahraných souborů s digitálními výškovými modely.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="70"/>
@@ -2465,22 +2465,22 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
         <source>&lt;b&gt;Reset Hidden Track Points&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Nastavit znovu skryté body stopy&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
         <source>Make all trackpoints visible again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Udělat všechny body stopy znovu viditelnými.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="54"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3029,13 +3029,13 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../helpers/IPhotoAlbum.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../helpers/IPhotoAlbum.ui" line="50"/>
         <location filename="../helpers/IPhotoAlbum.ui" line="77"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -4336,7 +4336,7 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="365"/>
         <source>Changed images</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněné obrázky</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="126"/>
@@ -4452,12 +4452,12 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="111"/>
         <source>Reset all hidden track points to visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit znovu všechny skryté body stopy na viditelné</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="136"/>
         <source>Permanently removed all hidden track points</source>
-        <translation>Všechny skryté body stopy odstraněné trvale</translation>
+        <translation>Všechny skryté body stopy odstraněny trvale</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="186"/>

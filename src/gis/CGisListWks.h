@@ -28,6 +28,7 @@ class QAction;
 class CSearchGoogle;
 class IGisProject;
 class CDBProject;
+class IDeviceWatcher;
 
 class CGisListWks : public QTreeWidget
 {
@@ -119,6 +120,8 @@ private:
 
     bool saveOnExit;
     qint32 saveEvery;
+
+    IDeviceWatcher * deviceWatcher;
 };
 
 #endif //CGISLISTWKS_H

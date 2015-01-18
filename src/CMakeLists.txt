@@ -164,6 +164,8 @@ set( SRCS
     qlgt/CImportDatabase.cpp
     qlgt/CQlgtDb.cpp
     qlgt/CQmsDb.cpp
+    device/IDeviceWatcher.cpp
+    device/CDeviceWatcherLinux.cpp
 )
 
 set( HDRS
@@ -316,6 +318,8 @@ set( HDRS
     qlgt/CImportDatabase.h
     qlgt/CQlgtDb.h
     qlgt/CQmsDb.h
+    device/IDeviceWatcher.h
+    device/CDeviceWatcherLinux.h
 )
 
 set( UIS

@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "config.h"
+#include "device/CDeviceWatcherLinux.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
@@ -132,6 +133,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     {
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
+
+    deviceWatcher = new CDeviceWatcherLinux(this);
 
     QTimer::singleShot(500, this, SLOT(slotLoadWorkspace()));
 }

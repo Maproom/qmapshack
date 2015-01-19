@@ -27,6 +27,8 @@ public:
     IDeviceWatcher(QObject * parent);
     virtual ~IDeviceWatcher();
 
+protected:
+    void probeForDevice(const QString& path);
 
 };
 

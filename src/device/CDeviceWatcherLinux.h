@@ -21,7 +21,7 @@
 
 #include "device/IDeviceWatcher.h"
 
-class QSocketNotifier;
+class QDBusObjectPath;
 
 class CDeviceWatcherLinux : public IDeviceWatcher
 {
@@ -31,12 +31,14 @@ public:
     virtual ~CDeviceWatcherLinux();
 
 private slots:
-    void slotParseDeviceInfo();
+    void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
+    void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
+
 
 private:
-    void parseLine(const QByteArray &line);
-    int netlinkSocket;
-    QSocketNotifier * notifier;
+    QString readMountPoint(const QString &path);
+    void mount(const QString& path);
+    void unmount(const QString &path);
 };
 
 #endif //CDEVICEWATCHERLINUX_H

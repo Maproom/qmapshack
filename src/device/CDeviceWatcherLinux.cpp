@@ -18,102 +18,106 @@
 
 #include "CDeviceWatcherLinux.h"
 
-#include <asm/types.h>
-#include <errno.h>
-#include <linux/netlink.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <unistd.h>
-
-#include <QtCore>
-#include <QtNetwork>
-
-#define UDEV_MONITOR_KERNEL     1
-#define UEVENT_BUFFER_SIZE      4096
-
-/*
-    Most of the code is copied from QDeviceWatcher written by Wang Bin <wbsecg1@gmail.com>
- */
+#include <QtWidgets>
+#include <QtDBus>
 
 CDeviceWatcherLinux::CDeviceWatcherLinux(QObject *parent)
     : IDeviceWatcher(parent)
-    , netlinkSocket(-1)
 {
-    int retval;
-    struct sockaddr_nl sockAddr;
-    const int buffersize = 16 * 1024 * 1024;
+    QDBusConnection::systemBus().connect("org.freedesktop.UDisks2",
+                   "/org/freedesktop/UDisks2",
+                   "org.freedesktop.DBus.ObjectManager",
+                   "InterfacesAdded",
+                   this,
+                   SLOT(slotDeviceAdded(QDBusObjectPath,QVariantMap)));
 
-    memset(&sockAddr, 0x00, sizeof(struct sockaddr_nl));
-    sockAddr.nl_family = AF_NETLINK;
-    sockAddr.nl_pid = getpid();
-    sockAddr.nl_groups = UDEV_MONITOR_KERNEL;
-
-    netlinkSocket = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);
-    if (netlinkSocket == -1)
-    {
-        qWarning("error getting socket: %s", strerror(errno));
-        return;
-    }
-
-    setsockopt(netlinkSocket, SOL_SOCKET, SO_RCVBUFFORCE, &buffersize, sizeof(buffersize));
-    retval = bind(netlinkSocket, (struct sockaddr*) &sockAddr, sizeof(struct sockaddr_nl));
-    if (retval < 0)
-    {
-        qWarning("bind failed: %s", strerror(errno));
-        close(netlinkSocket);
-        netlinkSocket = -1;
-        return;
-    }
-    else if (retval == 0)
-    {
-        //from libudev-monitor.c
-        struct sockaddr_nl sockAddr1;
-        socklen_t addrlen;
-
-        /*
-         * get the address the kernel has assigned us
-         * it is usually, but not necessarily the pid
-         */
-        addrlen = sizeof(struct sockaddr_nl);
-        getsockname(netlinkSocket, (struct sockaddr *)&sockAddr1, &addrlen);
-
-        sockAddr.nl_pid = sockAddr1.nl_pid;
-    }
-
-    notifier = new QSocketNotifier(netlinkSocket, QSocketNotifier::Read, this);
-    connect(notifier, SIGNAL(activated(int)), SLOT(slotParseDeviceInfo()));     //will always active
-    notifier->setEnabled(true);
+    QDBusConnection::systemBus().connect("org.freedesktop.UDisks2",
+                   "/org/freedesktop/UDisks2",
+                   "org.freedesktop.DBus.ObjectManager",
+                   "InterfacesRemoved",
+                   this,
+                   SLOT(slotDeviceRemoved(QDBusObjectPath,QStringList)));
 }
 
 CDeviceWatcherLinux::~CDeviceWatcherLinux()
 {
 }
 
-void CDeviceWatcherLinux::slotParseDeviceInfo()
+
+void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map)
 {
-    QByteArray data(UEVENT_BUFFER_SIZE, 0);
-
-    size_t len = read(notifier->socket(), data.data(), UEVENT_BUFFER_SIZE);
-    data.resize(len);
-    data = data.replace(0, '\n').trimmed();
-
-    QBuffer buffer(&data);
-    buffer.open(QIODevice::ReadOnly);
-    while(!buffer.atEnd())
-    {
-        parseLine(buffer.readLine().trimmed());
-    }
-    buffer.close();
-}
-
-void CDeviceWatcherLinux::parseLine(const QByteArray& line)
-{
-    // only watching for block devices.
-    if (!line.contains("/block/"))
+    // ignore all paths other than a filesystem
+    if(!map.contains("org.freedesktop.UDisks2.Filesystem"))
     {
         return;
     }
 
-    qDebug() << line;
+    QString strPath = path.path();
+
+    mount(strPath);
+    probeForDevice(readMountPoint(strPath));
+    unmount(strPath);
 }
+
+void CDeviceWatcherLinux::slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list)
+{
+    // ignore all paths other than a filesystem
+    if(!list.contains("org.freedesktop.UDisks2.Filesystem"))
+    {
+        return;
+    }
+
+    qDebug() << "slotDeviceRemoved" << path.path() << list;
+}
+
+
+
+QString CDeviceWatcherLinux::readMountPoint(const QString& path)
+{
+    QStringList points;
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",
+                                                          path,
+                                                          "org.freedesktop.DBus.Properties",
+                                                          "Get");
+
+    QList<QVariant> args;
+    args << "org.freedesktop.UDisks2.Filesystem" << "MountPoints";
+    message.setArguments(args);
+
+    QDBusMessage reply = QDBusConnection::systemBus().call(message);
+
+    QList<QByteArray> list;
+    foreach (QVariant arg, reply.arguments())
+    {
+        arg.value<QDBusVariant>().variant().value<QDBusArgument>() >> list;
+    }
+
+    foreach (QByteArray point, list)
+    {
+        points.append(point);
+    }
+
+    if(!points.isEmpty())
+    {
+        return points.first();
+    }
+    return "";
+}
+
+void CDeviceWatcherLinux::mount(const QString &path)
+{
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Mount");
+    QVariantMap args;
+    args.insert("options", "flush");
+    message << args;
+    QDBusConnection::systemBus().call(message);
+}
+
+void CDeviceWatcherLinux::unmount(const QString &path)
+{
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Unmount");
+    QVariantMap args;
+    message << args;
+    QDBusConnection::systemBus().call(message);
+}
+

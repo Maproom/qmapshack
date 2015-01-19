@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "IDeviceWatcher.h"
+#include <QtCore>
 
 IDeviceWatcher::IDeviceWatcher(QObject *parent)
     : QObject(parent)
@@ -29,3 +30,13 @@ IDeviceWatcher::~IDeviceWatcher()
 
 }
 
+void IDeviceWatcher::probeForDevice(const QString& path)
+{
+    QDir dir(path);
+    if(!dir.exists())
+    {
+        return;
+    }
+
+    qDebug() << "Probe device at" << path;
+}

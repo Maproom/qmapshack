@@ -52,6 +52,8 @@ public:
 
     bool event(QEvent * e);
 
+    void removeDevice(const QString& key);
+
 signals:
     void sigChanged();
 

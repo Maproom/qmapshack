@@ -16,31 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CDEVICEWATCHERLINUX_H
-#define CDEVICEWATCHERLINUX_H
+#include "device/IDevice.h"
+#include "gis/CGisListWks.h"
 
-#include "device/IDeviceWatcher.h"
-
-class QDBusObjectPath;
-
-class CDeviceWatcherLinux : public IDeviceWatcher
+IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
+    : QTreeWidgetItem(parent)
+    , path(path)
+    , key(key)
 {
-    Q_OBJECT
-public:
-    CDeviceWatcherLinux(CGisListWks *parent);
-    virtual ~CDeviceWatcherLinux();
+    setIcon(CGisListWks::eColumnName, QIcon("://icons/32x32/Device.png"));
+}
 
-private slots:
-    void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
-    void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
-    void slotUpdate();
+IDevice::~IDevice()
+{
 
-
-private:
-    QString readMountPoint(const QString &path);
-    void mount(const QString& path);
-    void unmount(const QString &path);
-};
-
-#endif //CDEVICEWATCHERLINUX_H
+}
 

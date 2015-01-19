@@ -167,6 +167,9 @@ set( SRCS
     qlgt/CQmsDb.cpp
     device/IDeviceWatcher.cpp
     device/CDeviceWatcherLinux.cpp
+    device/IDevice.cpp
+    device/CDeviceGarmin.cpp
+    device/CDeviceTwoNav.cpp
 )
 
 set( HDRS
@@ -321,6 +324,9 @@ set( HDRS
     qlgt/CQmsDb.h
     device/IDeviceWatcher.h
     device/CDeviceWatcherLinux.h
+    device/IDevice.h
+    device/CDeviceGarmin.h
+    device/CDeviceTwoNav.h
 )
 
 set( UIS

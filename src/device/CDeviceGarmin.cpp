@@ -16,31 +16,21 @@
 
 **********************************************************************************************/
 
-#ifndef CDEVICEWATCHERLINUX_H
-#define CDEVICEWATCHERLINUX_H
+#include "device/CDeviceGarmin.h"
+#include "gis/CGisListWks.h"
 
-#include "device/IDeviceWatcher.h"
+#include <QtWidgets>
 
-class QDBusObjectPath;
-
-class CDeviceWatcherLinux : public IDeviceWatcher
+CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, QTreeWidget *parent)
+    : IDevice(path, key, parent)
 {
-    Q_OBJECT
-public:
-    CDeviceWatcherLinux(CGisListWks *parent);
-    virtual ~CDeviceWatcherLinux();
+    setText(CGisListWks::eColumnName, "Garmin");
 
-private slots:
-    void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
-    void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
-    void slotUpdate();
+    qDebug() << path << key;
+}
 
+CDeviceGarmin::~CDeviceGarmin()
+{
 
-private:
-    QString readMountPoint(const QString &path);
-    void mount(const QString& path);
-    void unmount(const QString &path);
-};
-
-#endif //CDEVICEWATCHERLINUX_H
+}
 

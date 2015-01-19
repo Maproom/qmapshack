@@ -21,14 +21,23 @@
 
 #include <QObject>
 
+class CGisListWks;
+class IDevice;
+
 class IDeviceWatcher : public QObject
 {
+    Q_OBJECT
 public:
-    IDeviceWatcher(QObject * parent);
+    IDeviceWatcher(CGisListWks *parent);
     virtual ~IDeviceWatcher();
 
+private slots:
+    virtual void slotUpdate() = 0;
+
 protected:
-    void probeForDevice(const QString& path);
+    void probeForDevice(const QString &mountPoint, const QString& path, const QString &vendor, const QString &model);
+
+    CGisListWks * listWks;
 
 };
 

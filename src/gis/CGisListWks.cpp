@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "config.h"
 #include "device/CDeviceWatcherLinux.h"
+#include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
@@ -240,6 +241,8 @@ void CGisListWks::setExternalMenu(QMenu * project)
 
 void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     QTreeWidgetItem * item1 = currentItem();
     QTreeWidgetItem * item2 = itemAt(e->pos());
 
@@ -341,6 +344,8 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
 
 void CGisListWks::dropEvent ( QDropEvent  * e )
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     QList<QTreeWidgetItem*> items   = selectedItems();
     if(items.isEmpty())
     {
@@ -497,6 +502,18 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
     emit sigChanged();
 }
 
+void CGisListWks::removeDevice(const QString& key)
+{
+    for(int i = 0; i < topLevelItemCount(); i++)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(topLevelItem(i));
+        if(device && device->getKey() == key)
+        {
+            delete device;
+            return;
+        }
+    }
+}
 
 bool CGisListWks::hasProject(IGisProject * project)
 {
@@ -825,7 +842,7 @@ void CGisListWks::slotEditItem()
 
 void CGisListWks::slotDeleteItem()
 {
-    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items       = selectedItems();
     QMessageBox::StandardButtons last   = QMessageBox::NoButton;

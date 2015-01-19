@@ -16,31 +16,23 @@
 
 **********************************************************************************************/
 
-#ifndef CDEVICEWATCHERLINUX_H
-#define CDEVICEWATCHERLINUX_H
+#ifndef IDEVICE_H
+#define IDEVICE_H
 
-#include "device/IDeviceWatcher.h"
+#include <QTreeWidgetItem>
 
-class QDBusObjectPath;
-
-class CDeviceWatcherLinux : public IDeviceWatcher
+class IDevice : public QTreeWidgetItem
 {
-    Q_OBJECT
-public:
-    CDeviceWatcherLinux(CGisListWks *parent);
-    virtual ~CDeviceWatcherLinux();
+    public:
+        IDevice(const QString& path, const QString& key, QTreeWidget * parent);
+        virtual ~IDevice();
 
-private slots:
-    void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
-    void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
-    void slotUpdate();
+        const QString& getKey() const {return key;}
 
-
-private:
-    QString readMountPoint(const QString &path);
-    void mount(const QString& path);
-    void unmount(const QString &path);
+    protected:
+        QString path;
+        QString key;
 };
 
-#endif //CDEVICEWATCHERLINUX_H
+#endif //IDEVICE_H
 

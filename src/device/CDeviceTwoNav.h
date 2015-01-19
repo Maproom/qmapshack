@@ -16,31 +16,17 @@
 
 **********************************************************************************************/
 
-#ifndef CDEVICEWATCHERLINUX_H
-#define CDEVICEWATCHERLINUX_H
+#ifndef CDEVICETWONAV_H
+#define CDEVICETWONAV_H
 
-#include "device/IDeviceWatcher.h"
+#include "device/IDevice.h"
 
-class QDBusObjectPath;
-
-class CDeviceWatcherLinux : public IDeviceWatcher
+class CDeviceTwoNav : public IDevice
 {
-    Q_OBJECT
-public:
-    CDeviceWatcherLinux(CGisListWks *parent);
-    virtual ~CDeviceWatcherLinux();
-
-private slots:
-    void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
-    void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
-    void slotUpdate();
-
-
-private:
-    QString readMountPoint(const QString &path);
-    void mount(const QString& path);
-    void unmount(const QString &path);
+    public:
+        CDeviceTwoNav(const QString &path, const QString &key, QTreeWidget * parent);
+        virtual ~CDeviceTwoNav();
 };
 
-#endif //CDEVICEWATCHERLINUX_H
+#endif //CDEVICETWONAV_H
 

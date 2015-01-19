@@ -16,27 +16,29 @@
 
 **********************************************************************************************/
 
-#include "CDeviceWatcherLinux.h"
+#include "device/CDeviceWatcherLinux.h"
+#include "gis/CGisListWks.h"
 
-#include <QtWidgets>
 #include <QtDBus>
+#include <QtWidgets>
+#include <QtXml>
 
-CDeviceWatcherLinux::CDeviceWatcherLinux(QObject *parent)
+CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks *parent)
     : IDeviceWatcher(parent)
 {
     QDBusConnection::systemBus().connect("org.freedesktop.UDisks2",
-                   "/org/freedesktop/UDisks2",
-                   "org.freedesktop.DBus.ObjectManager",
-                   "InterfacesAdded",
-                   this,
-                   SLOT(slotDeviceAdded(QDBusObjectPath,QVariantMap)));
+                                         "/org/freedesktop/UDisks2",
+                                         "org.freedesktop.DBus.ObjectManager",
+                                         "InterfacesAdded",
+                                         this,
+                                         SLOT(slotDeviceAdded(QDBusObjectPath,QVariantMap)));
 
     QDBusConnection::systemBus().connect("org.freedesktop.UDisks2",
-                   "/org/freedesktop/UDisks2",
-                   "org.freedesktop.DBus.ObjectManager",
-                   "InterfacesRemoved",
-                   this,
-                   SLOT(slotDeviceRemoved(QDBusObjectPath,QStringList)));
+                                         "/org/freedesktop/UDisks2",
+                                         "org.freedesktop.DBus.ObjectManager",
+                                         "InterfacesRemoved",
+                                         this,
+                                         SLOT(slotDeviceRemoved(QDBusObjectPath,QStringList)));
 }
 
 CDeviceWatcherLinux::~CDeviceWatcherLinux()
@@ -52,10 +54,28 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
         return;
     }
 
+    // create path of to drive the block device belongs to
+    QDBusInterface * blockIface = new QDBusInterface("org.freedesktop.UDisks2", path.path(), "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
+    QDBusObjectPath drive_object = blockIface->property("Drive").value<QDBusObjectPath>();
+
+    // read vendor string attached to drive
+    QDBusInterface * driveIface = new QDBusInterface("org.freedesktop.UDisks2", drive_object.path(),"org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus(), this);
+    QString vendor = driveIface->property("Vendor").toString();
+    QString model  = driveIface->property("Model").toString();
+
+    delete blockIface;
+    delete driveIface;
+
+    if(model.isEmpty() || vendor.isEmpty())
+    {
+        return;
+    }
+
+
     QString strPath = path.path();
 
     mount(strPath);
-    probeForDevice(readMountPoint(strPath));
+    probeForDevice(readMountPoint(strPath), strPath, vendor, model);
     unmount(strPath);
 }
 
@@ -68,17 +88,75 @@ void CDeviceWatcherLinux::slotDeviceRemoved(const QDBusObjectPath& path, const Q
     }
 
     qDebug() << "slotDeviceRemoved" << path.path() << list;
+    listWks->removeDevice(path.path());
 }
 
+void CDeviceWatcherLinux::slotUpdate()
+{
+    QList<QDBusObjectPath> paths;
+    QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2","/org/freedesktop/UDisks2/block_devices","org.freedesktop.DBus.Introspectable","Introspect");
+    QDBusPendingReply<QString> reply = QDBusConnection::systemBus().call(call);
+    if (!reply.isValid())
+    {
+        qWarning("UDisks2Manager: error: %s", qPrintable(reply.error().name()));
+        return;
+    }
+
+    QDomDocument doc;
+    doc.setContent(reply);
+    const QDomElement& xmlRoot = doc.documentElement();
+    const QDomNodeList& xmlNodes = xmlRoot.elementsByTagName("node");
+    const int N = xmlNodes.count();
+    for(int n = 0; n < N; n++)
+    {
+        const QDomNode& xmlNode = xmlNodes.item(n);
+        const QDomNamedNodeMap& attr = xmlNode.attributes();
+
+        QString name = attr.namedItem("name").nodeValue();
+        if(!name.isEmpty())
+        {
+            paths << QDBusObjectPath("/org/freedesktop/UDisks2/block_devices/" + name);
+        }
+
+    }
+
+
+    foreach (QDBusObjectPath path, paths)
+    {
+
+        QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path.path(), "org.freedesktop.DBus.Introspectable","Introspect");
+        QDBusPendingReply<QString> reply = QDBusConnection::systemBus().call(call);
+
+        if (!reply.isValid())
+        {
+            qWarning("UDisks2Manager: error: %s", qPrintable(reply.error().name()));
+            continue;
+        }
+
+        QDomDocument doc;
+        doc.setContent(reply);
+        const QDomElement& xmlRoot = doc.documentElement();
+        const QDomNodeList& xmlInterfaces = xmlRoot.elementsByTagName("interface");
+        const int N = xmlInterfaces.count();
+        for(int n = 0; n < N; n++)
+        {
+            const QDomNode& xmlInterface = xmlInterfaces.item(n);
+            const QDomNamedNodeMap& attr = xmlInterface.attributes();
+            if(attr.namedItem("name").nodeValue() == "org.freedesktop.UDisks2.Filesystem")
+            {
+                QVariantMap map;
+                map["org.freedesktop.UDisks2.Filesystem"] = QVariant();
+                slotDeviceAdded(path, map);
+            }
+        }
+    }
+}
 
 
 QString CDeviceWatcherLinux::readMountPoint(const QString& path)
 {
     QStringList points;
-    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",
-                                                          path,
-                                                          "org.freedesktop.DBus.Properties",
-                                                          "Get");
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.DBus.Properties","Get");
 
     QList<QVariant> args;
     args << "org.freedesktop.UDisks2.Filesystem" << "MountPoints";

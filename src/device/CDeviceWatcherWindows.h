@@ -16,34 +16,21 @@
 
 **********************************************************************************************/
 
-#ifndef IDEVICEWATCHER_H
-#define IDEVICEWATCHER_H
+#ifndef CDEVICEWATCHERWINDOWS_H
+#define CDEVICEWATCHERWINDOWS_H
 
-#include <QObject>
+#include "device/IDeviceWatcher.h"
 
-class CGisListWks;
-class IDevice;
-
-class IDeviceWatcher : public QObject
+class CDeviceWatcherWindows : public IDeviceWatcher
 {
     Q_OBJECT
 public:
-    IDeviceWatcher(CGisListWks *parent);
-    virtual ~IDeviceWatcher();
-
-    virtual void mount(const QString& path){}
-    virtual void unmount(const QString &path){}
-
+    CDeviceWatcherWindows(CGisListWks *parent);
+    virtual ~CDeviceWatcherWindows();
 
 private slots:
-    virtual void slotUpdate() = 0;
-
-protected:
-    void probeForDevice(const QString &mountPoint, const QString& path, const QString &vendor, const QString &model);
-
-    CGisListWks * listWks;
-
+    void slotUpdate();
 };
 
-#endif //IDEVICEWATCHER_H
+#endif //CDEVICEWATCHERWINDOWS_H
 

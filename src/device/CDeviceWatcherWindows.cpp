@@ -16,34 +16,25 @@
 
 **********************************************************************************************/
 
-#ifndef IDEVICEWATCHER_H
-#define IDEVICEWATCHER_H
+#include "device/CDeviceWatcherWindows.h"
+#include "gis/CGisListWks.h"
 
-#include <QObject>
-
-class CGisListWks;
-class IDevice;
-
-class IDeviceWatcher : public QObject
+CDeviceWatcherWindows::CDeviceWatcherWindows(CGisListWks *parent)
+    : IDeviceWatcher(parent)
 {
-    Q_OBJECT
-public:
-    IDeviceWatcher(CGisListWks *parent);
-    virtual ~IDeviceWatcher();
+    /** @todo add code to detect devices pluged into the computer.
 
-    virtual void mount(const QString& path){}
-    virtual void unmount(const QString &path){}
+        maybe a good point to start is looking at the code of:
+        http://qt-project.org/forums/viewthread/9605
+    */
+}
 
+CDeviceWatcherWindows::~CDeviceWatcherWindows()
+{
 
-private slots:
-    virtual void slotUpdate() = 0;
+}
 
-protected:
-    void probeForDevice(const QString &mountPoint, const QString& path, const QString &vendor, const QString &model);
-
-    CGisListWks * listWks;
-
-};
-
-#endif //IDEVICEWATCHER_H
-
+void CDeviceWatcherWindows::slotUpdate()
+{
+    /// @todo query the list of drived to detect already connected devices.
+}

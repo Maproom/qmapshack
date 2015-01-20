@@ -30,6 +30,9 @@ public:
     CDeviceWatcherLinux(CGisListWks *parent);
     virtual ~CDeviceWatcherLinux();
 
+    void mount(const QString& path);
+    void unmount(const QString &path);
+
 private slots:
     void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
     void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
@@ -38,8 +41,6 @@ private slots:
 
 private:
     QString readMountPoint(const QString &path);
-    void mount(const QString& path);
-    void unmount(const QString &path);
 };
 
 #endif //CDEVICEWATCHERLINUX_H

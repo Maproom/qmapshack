@@ -166,11 +166,25 @@ set( SRCS
     qlgt/CQlgtDb.cpp
     qlgt/CQmsDb.cpp
     device/IDeviceWatcher.cpp
-    device/CDeviceWatcherLinux.cpp
     device/IDevice.cpp
     device/CDeviceGarmin.cpp
     device/CDeviceTwoNav.cpp
 )
+
+if(UNIX)
+set( SRCS
+    ${SRCS}
+    device/CDeviceWatcherLinux.cpp
+)
+endif(UNIX)
+
+if(WIN32)
+set( SRCS
+    ${SRCS}
+    device/CDeviceWatcherWindows.cpp
+)
+endif(WIN32)
+
 
 set( HDRS
 
@@ -322,12 +336,25 @@ set( HDRS
     qlgt/CImportDatabase.h
     qlgt/CQlgtDb.h
     qlgt/CQmsDb.h
-    device/IDeviceWatcher.h
-    device/CDeviceWatcherLinux.h
+    device/IDeviceWatcher.h    
     device/IDevice.h
     device/CDeviceGarmin.h
     device/CDeviceTwoNav.h
 )
+
+if(UNIX)
+set( HDRS
+    ${HDRS}
+    device/CDeviceWatcherLinux.h
+)
+endif(UNIX)
+
+if(WIN32)
+set( HDRS
+    ${HDRS}
+    device/CDeviceWatcherWindows.h
+)
+endif(WIN32)
 
 set( UIS
     IMainWindow.ui

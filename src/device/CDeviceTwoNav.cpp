@@ -19,10 +19,11 @@
 #include "device/CDeviceTwoNav.h"
 #include "gis/CGisListWks.h"
 
-CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, QTreeWidget *parent)
+CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QString& model, QTreeWidget *parent)
     : IDevice(path, key, parent)
 {
-    setText(CGisListWks::eColumnName, "TwoNav");
+    setText(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
+    setToolTip(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
 }
 
 CDeviceTwoNav::~CDeviceTwoNav()

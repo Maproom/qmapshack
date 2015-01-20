@@ -25,7 +25,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
-
+#include "device/IDevice.h"
 
 
 #include <QtWidgets>
@@ -34,7 +34,22 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
+    loadGpx(filename);
+}
 
+CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
+    : IGisProject(eTypeGpx, filename, parent)
+{
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
+    loadGpx(filename);
+}
+
+CGpxProject::~CGpxProject()
+{
+}
+
+void CGpxProject::loadGpx(const QString& filename)
+{
     // cerate file instance
     QFile file(filename);
 
@@ -122,10 +137,6 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
-}
-
-CGpxProject::~CGpxProject()
-{
 }
 
 bool CGpxProject::save()

@@ -74,8 +74,10 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
 
     QString strPath = path.path();
 
+
     mount(strPath);
-    probeForDevice(readMountPoint(strPath), strPath, vendor, model);
+    QString mountPoint = readMountPoint(strPath);
+    probeForDevice(mountPoint, strPath, vendor, QFileInfo(mountPoint).fileName());
     unmount(strPath);
 }
 

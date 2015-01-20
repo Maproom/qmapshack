@@ -20,6 +20,9 @@
 #define IDEVICE_H
 
 #include <QTreeWidgetItem>
+#include <QDir>
+
+class CGisDraw;
 
 class IDevice : public QTreeWidgetItem
 {
@@ -29,8 +32,12 @@ class IDevice : public QTreeWidgetItem
 
         const QString& getKey() const {return key;}
 
+        void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+        void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+
     protected:
-        QString path;
+        QDir dir;
         QString key;
 };
 

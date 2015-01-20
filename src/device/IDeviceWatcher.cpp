@@ -27,7 +27,7 @@ IDeviceWatcher::IDeviceWatcher(CGisListWks *parent)
     : QObject(parent)
     , listWks(parent)
 {
-    QTimer::singleShot(600, this, SLOT(slotUpdate()));
+    QTimer::singleShot(1000, this, SLOT(slotUpdate()));
 }
 
 IDeviceWatcher::~IDeviceWatcher()
@@ -48,14 +48,15 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
 
     if(entries.contains("Garmin"))
     {
-        qDebug() << "It's a Garmin!";
-        new CDeviceGarmin(mountPoint, path, listWks);
+        if(dir.exists("Garmin/GarminDevice.xml"))
+        {
+            new CDeviceGarmin(mountPoint, path, model, listWks);
+        }
 
     }
     else if(entries.contains("TwoNavData"))
     {
-        qDebug() << "It's a TwoNav!";
-        new CDeviceTwoNav(mountPoint, path, listWks);
+        new CDeviceTwoNav(mountPoint, path, model, listWks);
     }
     else
     {

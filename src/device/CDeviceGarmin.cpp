@@ -18,15 +18,71 @@
 
 #include "device/CDeviceGarmin.h"
 #include "gis/CGisListWks.h"
+#include "gis/gpx/CGpxProject.h"
 
 #include <QtWidgets>
+#include <QtXml>
 
-CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, QTreeWidget *parent)
+CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, QTreeWidget *parent)
     : IDevice(path, key, parent)
 {
     setText(CGisListWks::eColumnName, "Garmin");
 
-    qDebug() << path << key;
+    QFile file(dir.absoluteFilePath("Garmin/GarminDevice.xml"));
+    file.open(QIODevice::ReadOnly);
+
+    QDomDocument dom;
+    dom.setContent(&file);
+    file.close();
+
+    const QDomElement& xmlDevice    = dom.documentElement();
+    const QDomNode& xmlModel        = xmlDevice.namedItem("Model");
+
+    id              = xmlDevice.namedItem("Id").toElement().text();
+    description     = xmlModel.namedItem("Description").toElement().text();
+    partno          = xmlModel.namedItem("PartNumber").toElement().text();
+
+    setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description).arg(model));
+    setToolTip(CGisListWks::eColumnName, QString("%1 (%2, %3)").arg(description).arg(partno).arg(model));
+
+    const QDomNode& xmlMassStorageMode  = xmlDevice.namedItem("MassStorageMode");
+    const QDomNodeList& xmlDataTypes    = xmlMassStorageMode.toElement().elementsByTagName("DataType");
+
+    const int N = xmlDataTypes.count();
+    for(int n = 0; n < N; n++)
+    {
+        const QDomNode& xmlDataType = xmlDataTypes.item(n);
+        const QDomNode& xmlName     = xmlDataType.namedItem("Name");
+        const QDomNode& xmlFile     = xmlDataType.namedItem("File");
+        const QDomNode& xmlLocation = xmlFile.namedItem("Location");
+        const QDomNode& xmlPath     = xmlLocation.namedItem("Path");
+
+        QString name = xmlName.toElement().text();
+        if(name == "UserDataSync")
+        {
+            pathGpx = xmlPath.toElement().text();
+        }
+        else if(name == "GeotaggedPhotos")
+        {
+            pathPictures = xmlPath.toElement().text();
+        }
+        else if(name == "GeocachePhotos")
+        {
+            pathSpoilers = xmlPath.toElement().text();
+        }
+    }
+
+    QDir dirGpx(dir.absoluteFilePath(pathGpx));
+    QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
+
+    foreach(const QString& entry, entries)
+    {
+        IGisProject * project =  new CGpxProject(dirGpx.absoluteFilePath(entry), this);
+        if(!project->isValid())
+        {
+            delete project;
+        }
+    }
 }
 
 CDeviceGarmin::~CDeviceGarmin()

@@ -27,12 +27,20 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectCopyAction.h"
-
+#include "device/IDevice.h"
 
 #include <QtWidgets>
 
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
+    : QTreeWidgetItem(parent)
+    , type(type)
+    , filename(filename)
+    , valid(false)
+{
+}
+
+IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)

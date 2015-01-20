@@ -23,9 +23,18 @@
 
 class CDeviceGarmin : public IDevice
 {
-    public:
-        CDeviceGarmin(const QString &path, const QString &key, QTreeWidget * parent);
-        virtual ~CDeviceGarmin();
+public:
+    CDeviceGarmin(const QString &path, const QString &key, const QString& model, QTreeWidget * parent);
+    virtual ~CDeviceGarmin();
+
+
+private:
+    QString id;
+    QString partno;
+    QString description;
+    QString pathPictures;
+    QString pathGpx;
+    QString pathSpoilers;
 };
 
 #endif //CDEVICEGARMIN_H

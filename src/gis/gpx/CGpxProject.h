@@ -28,11 +28,11 @@
 class CGisListWks;
 class CGisDraw;
 
-
 class CGpxProject : public IGisProject
 {
 public:
     CGpxProject(const QString &filename, CGisListWks * parent);
+    CGpxProject(const QString &filename, IDevice * parent);
     virtual ~CGpxProject();
 
     bool save();
@@ -40,10 +40,8 @@ public:
 
     static bool saveAs(const QString& fn, IGisProject& project);
 
-
 private:
-    void saveGpx(const QString& fn);
-
+    void loadGpx(const QString& filename);
 
     QDomElement xmlGpx;
 };

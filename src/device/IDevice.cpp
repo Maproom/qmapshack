@@ -21,7 +21,7 @@
 
 IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
     : QTreeWidgetItem(parent)
-    , path(path)
+    , dir(path)
     , key(key)
 {
     setIcon(CGisListWks::eColumnName, QIcon("://icons/32x32/Device.png"));
@@ -32,3 +32,17 @@ IDevice::~IDevice()
 
 }
 
+void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
+{
+
+}
+
+void IDevice::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
+{
+
+}
+
+void IDevice::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+{
+
+}

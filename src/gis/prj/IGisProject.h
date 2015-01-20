@@ -29,6 +29,7 @@ class IGisItem;
 class CGisDraw;
 class QDataStream;
 class CDetailsPrj;
+class IDevice;
 
 class IGisProject : public QTreeWidgetItem
 {
@@ -75,6 +76,7 @@ public:
     };
 
     IGisProject(type_e type, const QString& filename, CGisListWks * parent);
+    IGisProject(type_e type, const QString &filename, IDevice *parent);
     virtual ~IGisProject();
 
     void edit();

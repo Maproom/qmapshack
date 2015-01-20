@@ -37,7 +37,7 @@ inline qreal readFloat(float val)
 }
 
 CDBProject::CDBProject(CQlgtFolder& folder)
-    : IGisProject(eTypeDb, "", 0)
+    : IGisProject(eTypeDb, "", (CGisListWks*)0)
 {
     metadata.name = folder.name;
     if(folder.diary)

@@ -13,7 +13,9 @@ find_package(Qt5Sql)
 find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(Qt5PrintSupport)
+if(UNIX)
 find_package(Qt5DBus)
+endif(UNIX)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 
@@ -453,6 +455,17 @@ include_directories(
 # Tell CMake to create the helloworld executable
 add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
 
+if(UNIX)
+set(DBUS_LIB
+    Qt5::DBus
+)
+else(UNIX)
+set(DBUS_LIB
+)
+endif(UNIX)
+
+
+
 # Use the Widgets module from Qt 5.
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
@@ -461,11 +474,10 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Sql
     Qt5::WebKitWidgets
     Qt5::PrintSupport
-    Qt5::DBus
     CGetOpt
+	${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
-
 )
 
 install(

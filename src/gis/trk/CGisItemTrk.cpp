@@ -773,14 +773,13 @@ struct trkwpt_t
 {
     trkwpt_t() : x(0), y(0), idx(-1), lastDistance(20*20)
     {
-
     }
 
     qreal x;
     qreal y;
     IGisItem::key_t key;
     qint32 idx;
-    qreal  lastDistance;
+    qreal lastDistance;
 };
 
 void CGisItemTrk::findWaypointsCloseBy()

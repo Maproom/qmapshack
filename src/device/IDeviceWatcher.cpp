@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "device/IDeviceWatcher.h"
 #include "device/CDeviceGarmin.h"
 #include "device/CDeviceTwoNav.h"
+#include "device/IDeviceWatcher.h"
 #include "gis/CGisListWks.h"
 
 #include <QtCore>
@@ -32,7 +32,6 @@ IDeviceWatcher::IDeviceWatcher(CGisListWks *parent)
 
 IDeviceWatcher::~IDeviceWatcher()
 {
-
 }
 
 void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& path, const QString& label)
@@ -43,7 +42,7 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
         return;
     }
 
-    qDebug() << "Probe device at" << mountPoint << path << label ;
+    qDebug() << "Probe device at" << mountPoint << path << label;
     QStringList entries = dir.entryList();
 
     if(entries.contains("Garmin"))
@@ -53,7 +52,6 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
             new CDeviceGarmin(mountPoint, path, label, listWks);
             emit sigChanged();
         }
-
     }
     else if(entries.contains("TwoNavData"))
     {

@@ -23,9 +23,9 @@
 
 class CDeviceTwoNav : public IDevice
 {
-    public:
-        CDeviceTwoNav(const QString &path, const QString &key, const QString &model, QTreeWidget * parent);
-        virtual ~CDeviceTwoNav();
+public:
+    CDeviceTwoNav(const QString &path, const QString &key, const QString &model, QTreeWidget * parent);
+    virtual ~CDeviceTwoNav();
 };
 
 #endif //CDEVICETWONAV_H

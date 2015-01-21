@@ -88,7 +88,7 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     QDir dirGpx(dir.absoluteFilePath(pathGpx));
     QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
 
-    foreach(const QString& entry, entries)
+    foreach(const QString &entry, entries)
     {
         IGisProject * project =  new CGpxProject(dirGpx.absoluteFilePath(entry), this);
         if(!project->isValid())
@@ -100,6 +100,5 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
 
 CDeviceGarmin::~CDeviceGarmin()
 {
-
 }
 

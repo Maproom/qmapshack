@@ -28,6 +28,5 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
 
 CDeviceTwoNav::~CDeviceTwoNav()
 {
-
 }
 

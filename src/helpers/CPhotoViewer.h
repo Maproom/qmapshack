@@ -44,7 +44,6 @@ private:
     QRect rectClose;
     QRect rectPrev;
     QRect rectNext;
-
 };
 
 #endif //CPHOTOVIEWER_H

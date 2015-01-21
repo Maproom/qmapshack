@@ -67,7 +67,7 @@ void CPhotoAlbum::slotAddImage()
     {
         return;
     }
-    foreach(const QString& filename, filenames)
+    foreach(const QString &filename, filenames)
     {
         CGisItemWpt::image_t image;
         image.fileName = filename;

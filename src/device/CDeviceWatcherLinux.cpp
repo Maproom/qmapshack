@@ -119,13 +119,11 @@ void CDeviceWatcherLinux::slotUpdate()
         {
             paths << QDBusObjectPath("/org/freedesktop/UDisks2/block_devices/" + name);
         }
-
     }
 
 
     foreach (QDBusObjectPath path, paths)
     {
-
         QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path.path(), "org.freedesktop.DBus.Introspectable","Introspect");
         QDBusPendingReply<QString> reply = QDBusConnection::systemBus().call(call);
 

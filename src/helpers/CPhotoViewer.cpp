@@ -46,7 +46,6 @@ CPhotoViewer::CPhotoViewer(QList<CGisItemWpt::image_t> &images, int idx, QWidget
 
 CPhotoViewer::~CPhotoViewer()
 {
-
 }
 
 
@@ -90,7 +89,6 @@ void CPhotoViewer::setImageAtIdx(int i)
         }
 
         rectImage.moveCenter(center);
-
     }
     else
     {
@@ -134,7 +132,6 @@ void CPhotoViewer::paintEvent(QPaintEvent * e)
         p.drawRect(rectPrev);
         p.drawPixmap(rectPrev, QPixmap("://icons/32x32/Left.png"));
     }
-
 }
 
 

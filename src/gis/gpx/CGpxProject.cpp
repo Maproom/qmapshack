@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
@@ -25,7 +26,6 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
-#include "device/IDevice.h"
 
 
 #include <QtWidgets>

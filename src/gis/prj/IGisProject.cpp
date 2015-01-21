@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/IGisItem.h"
@@ -27,7 +28,6 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectCopyAction.h"
-#include "device/IDevice.h"
 
 #include <QtWidgets>
 

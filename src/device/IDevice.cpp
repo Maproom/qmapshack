@@ -30,7 +30,6 @@ IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
 
 IDevice::~IDevice()
 {
-
 }
 
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)

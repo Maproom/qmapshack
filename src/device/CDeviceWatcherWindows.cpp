@@ -26,12 +26,11 @@ CDeviceWatcherWindows::CDeviceWatcherWindows(CGisListWks *parent)
 
         maybe a good point to start is looking at the code of:
         http://qt-project.org/forums/viewthread/9605
-    */
+     */
 }
 
 CDeviceWatcherWindows::~CDeviceWatcherWindows()
 {
-
 }
 
 void CDeviceWatcherWindows::slotUpdate()

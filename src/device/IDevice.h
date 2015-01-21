@@ -19,26 +19,29 @@
 #ifndef IDEVICE_H
 #define IDEVICE_H
 
-#include <QTreeWidgetItem>
 #include <QDir>
+#include <QTreeWidgetItem>
 
 class CGisDraw;
 
 class IDevice : public QTreeWidgetItem
 {
-    public:
-        IDevice(const QString& path, const QString& key, QTreeWidget * parent);
-        virtual ~IDevice();
+public:
+    IDevice(const QString& path, const QString& key, QTreeWidget * parent);
+    virtual ~IDevice();
 
-        const QString& getKey() const {return key;}
+    const QString& getKey() const
+    {
+        return key;
+    }
 
-        void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-        void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-        void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+    void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+    void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
-    protected:
-        QDir dir;
-        QString key;
+protected:
+    QDir dir;
+    QString key;
 };
 
 #endif //IDEVICE_H

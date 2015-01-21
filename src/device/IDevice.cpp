@@ -32,6 +32,51 @@ IDevice::~IDevice()
 {
 }
 
+QString IDevice::getName() const
+{
+    return text(CGisListWks::eColumnName);
+}
+
+void IDevice::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project)
+        {
+            project->getItemByPos(pos, items);
+        }
+    }
+}
+
+IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
+{
+    IGisItem * item = 0;
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project)
+        {
+            if(project->getKey() != key.project)
+            {
+                continue;
+            }
+
+            item = project->getItemByKey(key);
+            if(item != 0)
+            {
+                break;
+            }
+
+        }
+    }
+    return item;
+}
+
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
     const int N = childCount();

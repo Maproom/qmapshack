@@ -128,18 +128,21 @@ public:
     {
         bool operator==(const key_t& k) const
         {
-            return (item == k.item) && (project == k.project);
+            return (item == k.item) && (project == k.project) && (device == k.device);
         }
         bool operator!=(const key_t& k) const
         {
-            return (item != k.item) || (project != k.project);
+            return (item != k.item) || (project != k.project) || (device != k.device);
         }
         void clear()
         {
-            item.clear(); project.clear();
+            item.clear();
+            project.clear();
+            device.clear();
         }
         QString item;
         QString project;
+        QString device;
     };
 
     IGisItem(IGisProject *parent, type_e typ, int idx);

@@ -112,10 +112,15 @@ public:
     {
         genKey(); return key;
     }
-    const QString& getName() const
-    {
-        return metadata.name;
-    }
+
+    /**
+       @brief Get the unique key of the device the project is attached to
+       @return If the project is not attached to a device the string is empty
+    */
+    QString getDeviceKey();
+
+    QString getName() const;
+
     const QDateTime& getTime() const
     {
         return metadata.time;

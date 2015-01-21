@@ -22,7 +22,9 @@
 #include <QDir>
 #include <QTreeWidgetItem>
 
+#include "gis/IGisItem.h"
 class CGisDraw;
+
 
 class IDevice : public QTreeWidgetItem
 {
@@ -34,6 +36,11 @@ public:
     {
         return key;
     }
+
+    QString getName() const;
+
+    void getItemByPos(const QPointF& pos, QList<IGisItem *> &items);
+    IGisItem * getItemByKey(const IGisItem::key_t& key);
 
     void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
     void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);

@@ -71,6 +71,8 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     }
 
     key.project = parent->getKey();
+    key.device  = parent->getDeviceKey();
+
     if(idx >= 0)
     {
         parent->removeChild(this);
@@ -203,7 +205,7 @@ QString IGisItem::getNameEx() const
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project)
     {
-        str += " @ " + project->getName();
+        str += " @ " + project->getName();               
     }
     return str;
 }

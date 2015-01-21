@@ -71,6 +71,17 @@ void IGisProject::genKey()
     }
 }
 
+QString IGisProject::getDeviceKey()
+{
+    IDevice * device = dynamic_cast<IDevice*>(parent());
+    if(device)
+    {
+        return device->getKey();
+    }
+
+    return "";
+}
+
 
 void IGisProject::edit()
 {
@@ -140,6 +151,18 @@ void IGisProject::markAsSaved()
         item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
     }
 }
+
+QString IGisProject::getName() const
+{
+    IDevice * device = dynamic_cast<IDevice*>(parent());
+    if(device == 0)
+    {
+        return metadata.name;
+    }
+
+    return metadata.name + " @ " + device->getName();
+}
+
 
 QString IGisProject::getInfo() const
 {

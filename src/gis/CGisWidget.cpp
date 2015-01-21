@@ -184,12 +184,20 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(project == 0)
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
         {
+            project->getItemByPos(pos, items);
             continue;
         }
-        project->getItemByPos(pos, items);
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->getItemByPos(pos, items);
+            continue;
+        }
+
     }
 }
 
@@ -199,21 +207,37 @@ IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(project == 0)
+        QTreeWidgetItem * item1 = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item1);
+        if(project)
         {
+            if(project->getKey() != key.project)
+            {
+                continue;
+            }
+
+            item = project->getItemByKey(key);
+            if(item != 0)
+            {
+                break;
+            }
+
             continue;
         }
 
-        if(project->getKey() != key.project)
+        IDevice * device = dynamic_cast<IDevice*>(item1);
+        if(device)
         {
-            continue;
-        }
+            if(device->getKey() != key.device)
+            {
+                continue;
+            }
 
-        item = project->getItemByKey(key);
-        if(item != 0)
-        {
-            break;
+            item = device->getItemByKey(key);
+            if(item != 0)
+            {
+                break;
+            }
         }
     }
 

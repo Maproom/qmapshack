@@ -181,5 +181,11 @@ int main(int argc, char ** argv)
         delete splash;
     }
 
+    QDir dir = QDir::home();
+    if(!dir.exists(".config/QLandkarte"))
+    {
+        dir.mkpath(".config/QLandkarte");
+    }
+
     return a.exec();
 }

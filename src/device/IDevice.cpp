@@ -18,6 +18,7 @@
 
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
+#include "gis/prj/IGisProject.h"
 
 IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
     : QTreeWidgetItem(parent)
@@ -34,15 +35,39 @@ IDevice::~IDevice()
 
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
-
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project)
+        {
+            project->drawItem(p, viewport, blockedAreas, gis);
+        }
+    }
 }
 
 void IDevice::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
-
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project)
+        {
+            project->drawLabel(p, viewport, blockedAreas, fm, gis);
+        }
+    }
 }
 
 void IDevice::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
-
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project)
+        {
+            project->drawItem(p, viewport, gis);
+        }
+    }
 }

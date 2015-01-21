@@ -34,6 +34,8 @@ public:
     virtual void mount(const QString& path){}
     virtual void unmount(const QString &path){}
 
+signals:
+    void sigChanged();
 
 private slots:
     /**

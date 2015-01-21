@@ -72,6 +72,19 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         }
     }
 
+    if(!dir.exists(pathGpx))
+    {
+        dir.mkpath(pathGpx);
+    }
+    if(!dir.exists(pathPictures))
+    {
+        dir.mkpath(pathPictures);
+    }
+    if(!dir.exists(pathSpoilers))
+    {
+        dir.mkpath(pathSpoilers);
+    }
+
     QDir dirGpx(dir.absoluteFilePath(pathGpx));
     QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
 

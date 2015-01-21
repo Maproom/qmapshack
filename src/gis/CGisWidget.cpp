@@ -31,6 +31,7 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "device/IDevice.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -436,12 +437,20 @@ void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
             break;
         }
 
-        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(project == 0)
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
         {
+            project->drawItem(p, viewport, blockedAreas, gis);
             continue;
         }
-        project->drawItem(p, viewport, blockedAreas, gis);
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->drawItem(p, viewport, blockedAreas, gis);
+            continue;
+        }
     }
 
     // draw optional labels second
@@ -452,12 +461,20 @@ void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
             break;
         }
 
-        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(project == 0)
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
         {
+            project->drawLabel(p, viewport, blockedAreas, fm, gis);
             continue;
         }
-        project->drawLabel(p, viewport, blockedAreas, fm, gis);
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->drawLabel(p, viewport, blockedAreas, fm, gis);
+            continue;
+        }
     }
 }
 
@@ -470,13 +487,19 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
     //QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(project == 0)
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
         {
+            project->drawItem(p, viewport, gis);
             continue;
         }
-
-        project->drawItem(p, viewport, gis);
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->drawItem(p, viewport, gis);
+            continue;
+        }
     }
-    //
 }

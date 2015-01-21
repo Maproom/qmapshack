@@ -78,6 +78,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     , menuNone(0)
     , saveOnExit(true)
     , saveEvery(5)
+    , deviceWatcher(0)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
     db.setDatabaseName(QDir::home().filePath(CONFIGDIR).append("/workspace.db"));
@@ -145,6 +146,10 @@ CGisListWks::CGisListWks(QWidget *parent)
 #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);
 #endif
+    if(deviceWatcher)
+    {
+        connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    }
 
     QTimer::singleShot(500, this, SLOT(slotLoadWorkspace()));
 }
@@ -519,6 +524,7 @@ void CGisListWks::removeDevice(const QString& key)
         if(device && device->getKey() == key)
         {
             delete device;
+            emit sigChanged();
             return;
         }
     }

@@ -35,7 +35,7 @@ IDeviceWatcher::~IDeviceWatcher()
 
 }
 
-void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& path, const QString& vendor, const QString& model)
+void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& path, const QString& label)
 {
     QDir dir(mountPoint);
     if(!dir.exists())
@@ -43,20 +43,20 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
         return;
     }
 
-    qDebug() << "Probe device at" << mountPoint << path << vendor << model ;
+    qDebug() << "Probe device at" << mountPoint << path << label ;
     QStringList entries = dir.entryList();
 
     if(entries.contains("Garmin"))
     {
         if(dir.exists("Garmin/GarminDevice.xml"))
         {
-            new CDeviceGarmin(mountPoint, path, model, listWks);
+            new CDeviceGarmin(mountPoint, path, label, listWks);
         }
 
     }
     else if(entries.contains("TwoNavData"))
     {
-        new CDeviceTwoNav(mountPoint, path, model, listWks);
+        new CDeviceTwoNav(mountPoint, path, label, listWks);
     }
     else
     {

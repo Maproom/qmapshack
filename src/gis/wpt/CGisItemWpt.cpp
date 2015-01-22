@@ -95,6 +95,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 {
     *this = parentWpt;
     key.project = project->getKey();
+    key.device  = project->getDeviceKey();
 
     if(clone)
     {

@@ -38,6 +38,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 {
     *this = parentRte;
     key.project = project->getKey();
+    key.device  = project->getDeviceKey();
 
     if(clone)
     {

@@ -332,6 +332,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     bool clone = false;
     IGisItem::key_t key = item->getKey();
     key.project = getKey();
+    key.device  = getDeviceKey();
 
     IGisItem * item2 = getItemByKey(key);
     if(item2 != 0)

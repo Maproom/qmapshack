@@ -135,6 +135,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
 {
     *this = parentArea;
     key.project = project->getKey();
+    key.device  = project->getDeviceKey();
 
     if(clone)
     {

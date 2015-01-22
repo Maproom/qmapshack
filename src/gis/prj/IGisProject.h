@@ -204,6 +204,13 @@ public:
         return valid;
     }
 
+    /**
+       @brief Test if this project is handled by a device
+       @return True if handled by a device
+    */
+    bool isOnDevice() const;
+
+
     void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
     void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);

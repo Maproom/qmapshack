@@ -281,14 +281,20 @@ void CGisWidget::editItemByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(project == 0)
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project != 0)
         {
+            project->editItemByKey(key);
             continue;
         }
-        project->editItemByKey(key);
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device != 0)
+        {
+            device->editItemByKey(key);
+            continue;
+        }
     }
-
 
     emit sigChanged();
 }

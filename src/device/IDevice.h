@@ -41,6 +41,7 @@ public:
 
     void getItemByPos(const QPointF& pos, QList<IGisItem *> &items);
     IGisItem * getItemByKey(const IGisItem::key_t& key);
+    void editItemByKey(const IGisItem::key_t& key);
 
     void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
     void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);

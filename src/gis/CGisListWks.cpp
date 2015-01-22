@@ -342,10 +342,21 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
             QTreeWidget::dragMoveEvent(e);
             return;
         }
+
+        IGisProject * proj1 = dynamic_cast<IGisProject*>(item1);
+        if(proj1)
+        {
+            if(proj1->isOnDevice())
+            {
+                e->setDropAction(Qt::IgnoreAction);
+                QTreeWidget::dragMoveEvent(e);
+                return;
+            }
+        }
     }
 
     IGisProject * proj = dynamic_cast<IGisProject*>(item2);
-    if(proj && (proj != currentItem()->parent()))
+    if(proj && (proj != currentItem()->parent()) && !proj->isOnDevice())
     {
         e->setDropAction(Qt::CopyAction);
         QTreeWidget::dragMoveEvent(e);
@@ -754,14 +765,21 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
         if(gisItem != 0)
         {
+            bool isOnDevice = gisItem->isOnDevice();
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
+                actionCombineTrk->setDisabled(isOnDevice);
+                actionRangeTrk->setDisabled(isOnDevice);
+                actionReverseTrk->setDisabled(isOnDevice);
+                actionEditTrk->setDisabled(isOnDevice);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 menuItemTrk->exec(p);
                 break;
 
             case IGisItem::eTypeWpt:
+                actionMoveWpt->setDisabled(isOnDevice);
+                actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
                 break;
 
@@ -770,6 +788,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 break;
 
             case IGisItem::eTypeOvl:
+                actionEditArea->setDisabled(isOnDevice);
                 menuItemOvl->exec(p);
                 break;
             }

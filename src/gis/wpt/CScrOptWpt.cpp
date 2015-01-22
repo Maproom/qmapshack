@@ -38,8 +38,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     label->setText(wpt->getInfo());
     adjustSize();
 
-    toolMove->setEnabled(!wpt->isReadOnly());
-    toolProj->setEnabled(!wpt->isGeocache());
+    toolMove->setDisabled(wpt->isReadOnly());
+    toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
     photoAlbum->reload(wpt->getImages());
 
     anchor = wpt->getPointCloseBy(point);

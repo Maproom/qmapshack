@@ -361,12 +361,22 @@ void IGisItem::cutHistory()
 
 bool IGisItem::isReadOnly() const
 {
-    return !(flags & eFlagWriteAllowed);
+    return !(flags & eFlagWriteAllowed) || isOnDevice();
 }
 
 bool IGisItem::isTainted() const
 {
     return flags & eFlagTainted;
+}
+
+bool IGisItem::isOnDevice() const
+{
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    if(project == 0)
+    {
+        return false;
+    }
+    return project->isOnDevice();
 }
 
 void IGisItem::setReadOnlyMode(bool readOnly)

@@ -42,7 +42,6 @@ void IDevice::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
         if(project)
         {
@@ -75,6 +74,19 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
         }
     }
     return item;
+}
+
+void IDevice::editItemByKey(const IGisItem::key_t& key)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project)
+        {
+            project->editItemByKey(key);
+        }
+    }
 }
 
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)

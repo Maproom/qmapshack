@@ -268,6 +268,9 @@ public:
        @return True if content was changed.
      */
     bool isTainted() const;
+
+    bool isOnDevice() const;
+
     /**
        @brief Set the read only mode.
 

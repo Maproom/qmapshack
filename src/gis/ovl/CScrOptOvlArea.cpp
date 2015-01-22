@@ -34,7 +34,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     label->setText(area->getInfo());
     adjustSize();
 
-    toolEdit->setEnabled(!area->isReadOnly());
+    toolEdit->setDisabled(area->isReadOnly());
 
     anchor = area->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));

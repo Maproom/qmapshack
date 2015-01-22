@@ -82,6 +82,11 @@ QString IGisProject::getDeviceKey()
     return "";
 }
 
+bool IGisProject::isOnDevice() const
+{
+    IDevice * device = dynamic_cast<IDevice*>(parent());
+    return (device != 0);
+}
 
 void IGisProject::edit()
 {

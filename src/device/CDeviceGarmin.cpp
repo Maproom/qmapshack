@@ -87,7 +87,6 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
 
     QDir dirGpx(dir.absoluteFilePath(pathGpx));
     QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
-
     foreach(const QString &entry, entries)
     {
         IGisProject * project =  new CGpxProject(dirGpx.absoluteFilePath(entry), this);
@@ -96,6 +95,18 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
             delete project;
         }
     }
+
+    QDir dirGpxCurrent(dir.absoluteFilePath(pathGpx + "/Current"));
+    entries = dirGpxCurrent.entryList(QStringList("*.gpx"));
+    foreach(const QString &entry, entries)
+    {
+        IGisProject * project =  new CGpxProject(dirGpxCurrent.absoluteFilePath(entry), this);
+        if(!project->isValid())
+        {
+            delete project;
+        }
+    }
+
 }
 
 CDeviceGarmin::~CDeviceGarmin()

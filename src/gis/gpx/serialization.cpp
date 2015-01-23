@@ -35,6 +35,74 @@ const QString IGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
+static QString unifyColor(const QString& color)
+{
+    if(QColor(color) == Qt::black)
+    {
+        return "Black";
+    }
+    else if(QColor(color) == Qt::darkRed)
+    {
+        return "DarkRed";
+    }
+    else if(QColor(color) == Qt::darkGreen)
+    {
+        return "DarkGreen";
+    }
+    else if(QColor(color) == Qt::darkYellow)
+    {
+        return "DarkYellow";
+    }
+    else if(QColor(color) == Qt::darkBlue)
+    {
+        return "DarkBlue";
+    }
+    else if(QColor(color) == Qt::darkMagenta)
+    {
+        return "DarkMagenta";
+    }
+    else if(QColor(color) == Qt::darkCyan)
+    {
+        return "DarkCyan";
+    }
+    else if(QColor(color) == Qt::gray)
+    {
+        return "Gray";
+    }
+    else if(QColor(color) == Qt::darkGray)
+    {
+        return "DarkGray";
+    }
+    else if(QColor(color) == Qt::red)
+    {
+        return "Red";
+    }
+    else if(QColor(color) == Qt::yellow)
+    {
+        return "Yellow";
+    }
+    else if(QColor(color) == Qt::blue)
+    {
+        return "Blue";
+    }
+    else if(QColor(color) == Qt::magenta)
+    {
+        return "Magenta";
+    }
+    else if(QColor(color) == Qt::cyan)
+    {
+        return "Cyan";
+    }
+    else if(QColor(color) == Qt::white)
+    {
+        return "White";
+    }
+
+
+    return "Blue";
+}
+
+
 static void readXml(const QDomNode& xml, const QString& tag, bool& value)
 {
     if(xml.namedItem(tag).isElement())
@@ -486,7 +554,7 @@ void CGisItemWpt::save(QDomNode& gpx)
     xmlExt.appendChild(wptx1);
     writeXml(wptx1, "wptx1:Proximity", proximity);
 
-    if(geocache.hasData && geocache.service == eGC)
+    if(geocache.hasData /*&& geocache.service == eGC*/)
     {
         QDomElement xmlCache = doc.createElement("groundspeak:cache");
         writeGcExt(xmlCache);
@@ -667,6 +735,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     deriveSecondaryData();
 }
 
+
 void CGisItemTrk::save(QDomNode& gpx)
 {
     QDomDocument doc = gpx.ownerDocument();
@@ -692,7 +761,7 @@ void CGisItemTrk::save(QDomNode& gpx)
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
     xmlExt.appendChild(gpxx);
-    writeXml(gpxx, "gpxx:DisplayColor", trk.color);
+    writeXml(gpxx, "gpxx:DisplayColor", unifyColor(trk.color));
 
     foreach(const trkseg_t &seg, trk.segs)
     {

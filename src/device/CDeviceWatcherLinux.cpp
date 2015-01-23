@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "device/CDeviceWatcherLinux.h"
+#include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 
 #include <QtDBus>
@@ -75,10 +76,10 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
     QString strPath = path.path();
 
 
-    mount(strPath);
+    IDevice::mount(strPath);
     QString mountPoint = readMountPoint(strPath);
     probeForDevice(mountPoint, strPath, QFileInfo(mountPoint).fileName());
-    unmount(strPath);
+    IDevice::umount(strPath);
 }
 
 void CDeviceWatcherLinux::slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list)
@@ -180,22 +181,5 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
         return points.first();
     }
     return "";
-}
-
-void CDeviceWatcherLinux::mount(const QString &path)
-{
-    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Mount");
-    QVariantMap args;
-    args.insert("options", "flush");
-    message << args;
-    QDBusConnection::systemBus().call(message);
-}
-
-void CDeviceWatcherLinux::unmount(const QString &path)
-{
-    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Unmount");
-    QVariantMap args;
-    message << args;
-    QDBusConnection::systemBus().call(message);
 }
 

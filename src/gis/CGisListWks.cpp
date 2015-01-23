@@ -89,7 +89,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditPrj   = menuProject->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
     actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
     actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
-    actionClose     = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
+    actionCloseProj = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
+    actionDelProj   = menuProject->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
@@ -274,7 +275,6 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
             3) go on with dragMoveEvent();
 
          */
-
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(item1);
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(item2);
 
@@ -356,7 +356,7 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
     }
 
     IGisProject * proj = dynamic_cast<IGisProject*>(item2);
-    if(proj && (proj != currentItem()->parent()) && !proj->isOnDevice())
+    if(proj && (proj != currentItem()->parent()))
     {
         e->setDropAction(Qt::CopyAction);
         QTreeWidget::dragMoveEvent(e);
@@ -729,7 +729,10 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
         if(project != 0)
         {
-            actionEditPrj->setVisible(false);
+            bool isOnDevice = project->isOnDevice();
+            actionCloseProj->setVisible(!isOnDevice);
+            actionDelProj->setVisible(isOnDevice);
+            actionEditPrj->setVisible(false);           
             menuProject->exec(p);
             return;
         }
@@ -750,11 +753,15 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         {
             if(project->getType() == IGisProject::eTypeLostFound)
             {
+                actionDelProj->setVisible(false);
                 actionSave->setVisible(false);
                 actionEditPrj->setVisible(false);
             }
             else
             {
+                bool isOnDevice = project->isOnDevice();
+                actionCloseProj->setVisible(!isOnDevice);
+                actionDelProj->setVisible(isOnDevice);
                 actionSave->setVisible(true);
                 actionEditPrj->setVisible(true);
             }
@@ -807,6 +814,24 @@ void CGisListWks::slotCloseProject()
         if(project != 0)
         {
             delete project;
+        }
+    }
+    emit sigChanged();
+}
+
+void CGisListWks::slotDeleteProject()
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project != 0)
+        {
+            if(project->remove())
+            {
+                delete project;
+            }
         }
     }
     emit sigChanged();

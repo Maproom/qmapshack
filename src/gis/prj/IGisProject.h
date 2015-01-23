@@ -242,6 +242,29 @@ public:
      */
     QDomNode writeMetadata(QDomDocument& doc);
 
+    /**
+       @brief Mount volume the project's file is stored at
+
+       This is only valid for projects located on GPS devices.
+       For all other projects the method does nothing.
+     */
+    void mount();
+    /**
+       @brief Umount volume the project's file is stored at
+
+       This is only valid for projects located on GPS devices.
+       For all other projects the method does nothing.
+     */
+    void umount();
+
+    /**
+       @brief Removed the projects file from disk.
+
+       This is only valid for projects located on GPS devices.
+       For all other projects the method does nothing.
+    */
+    bool remove();
+
 protected:
     void genKey();
     void setupName(const QString& defaultName);

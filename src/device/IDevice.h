@@ -32,6 +32,12 @@ public:
     IDevice(const QString& path, const QString& key, QTreeWidget * parent);
     virtual ~IDevice();
 
+    static void mount(const QString& path);
+    static void umount(const QString &path);
+
+    void mount(){mount(key);}
+    void umount(){umount(key);}
+
     const QString& getKey() const
     {
         return key;
@@ -47,7 +53,9 @@ public:
     void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
+
 protected:
+
     QDir dir;
     QString key;
 };

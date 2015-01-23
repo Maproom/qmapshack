@@ -31,12 +31,6 @@ public:
     IDeviceWatcher(CGisListWks *parent);
     virtual ~IDeviceWatcher();
 
-    virtual void mount(const QString& path)
-    {
-    }
-    virtual void unmount(const QString &path)
-    {
-    }
 
 signals:
     void sigChanged();

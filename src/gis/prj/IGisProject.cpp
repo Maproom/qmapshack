@@ -473,3 +473,41 @@ void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
     }
 }
 
+void IGisProject::mount()
+{
+    if(!isOnDevice())
+    {
+        return;
+    }
+    IDevice * device = dynamic_cast<IDevice*>(parent());
+    if(device)
+    {
+        device->mount();
+    }
+}
+
+void IGisProject::umount()
+{
+    if(!isOnDevice())
+    {
+        return;
+    }
+    IDevice * device = dynamic_cast<IDevice*>(parent());
+    if(device)
+    {
+        device->umount();
+    }
+}
+
+bool IGisProject::remove()
+{
+    int res = QMessageBox::question(0, QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1").arg(filename), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
+    if(res != QMessageBox::Ok)
+    {
+        return false;
+    }
+    mount();
+    QFile::remove(filename);
+    umount();
+    return true;
+}

@@ -207,10 +207,10 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         _fn_ += ".gpx";
     }
 
-    // todo save gpx
-    QFile file(_fn_);
+    project.mount();
 
     // safety check for existing files
+    QFile file(_fn_);
     if(file.exists())
     {
         file.open(QIODevice::ReadOnly);
@@ -247,6 +247,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
                                            ,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
             if(res == QMessageBox::No)
             {
+                project.umount();
                 return false;
             }
         }
@@ -254,9 +255,9 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         file.close();
     }
 
-    QDomDocument doc;
 
     //  ---- start content of gpx
+    QDomDocument doc;
     QDomNode gpx = project.writeMetadata(doc);
 
     for(int i = 0; i < project.childCount(); i++)
@@ -302,22 +303,29 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
 
     //  ---- stop  content of gpx
 
-    if(!file.open(QIODevice::WriteOnly))
+    bool res = true;
+    try
     {
-        QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to create file '%1'").arg(_fn_), QMessageBox::Abort);
-        return false;
+        if(!file.open(QIODevice::WriteOnly))
+        {
+            throw QObject::tr("Failed to create file '%1'").arg(_fn_);
+        }
+        QTextStream out(&file);
+        out.setCodec("UTF-8");
+        out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;;
+        out << doc.toString();
+        file.close();
+        if(file.error() != QFile::NoError)
+        {
+            throw QObject::tr("Failed to write file '%1'").arg(_fn_);
+        }
     }
-    QTextStream out(&file);
-    out.setCodec("UTF-8");
-    out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;;
-    out << doc.toString();
-    file.close();
-    if(file.error() != QFile::NoError)
+    catch(const QString& msg)
     {
-        QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), QObject::tr("Failed to write file '%1'").arg(_fn_), QMessageBox::Abort);
-        return false;
+        QMessageBox::warning(0, QObject::tr("Saveing GIS data failed..."), msg, QMessageBox::Abort);
+        res = false;
     }
-
-    return true;
+    project.umount();
+    return res;
 }
 

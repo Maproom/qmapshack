@@ -20,6 +20,8 @@
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
 
+#include <QtDBus>
+
 IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
     : QTreeWidgetItem(parent)
     , dir(path)
@@ -31,6 +33,28 @@ IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
 IDevice::~IDevice()
 {
 }
+
+void IDevice::mount(const QString& path)
+{
+#ifdef Q_OS_LINUX
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Mount");
+    QVariantMap args;
+    args.insert("options", "flush");
+    message << args;
+    QDBusConnection::systemBus().call(message);
+#endif
+}
+
+void IDevice::umount(const QString &path)
+{
+#ifdef Q_OS_LINUX
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Unmount");
+    QVariantMap args;
+    message << args;
+    QDBusConnection::systemBus().call(message);
+#endif
+}
+
 
 QString IDevice::getName() const
 {

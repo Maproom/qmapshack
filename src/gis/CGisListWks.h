@@ -69,6 +69,7 @@ private slots:
     void slotSaveAsProject();
     void slotEditPrj();
     void slotCloseProject();
+    void slotDeleteProject();
     void slotItemDoubleClicked(QTreeWidgetItem * item, int);
     void slotEditItem();
     void slotDeleteItem();
@@ -97,7 +98,8 @@ private:
     QAction  * actionSave;
     QAction  * actionSaveAs;
     QAction  * actionEditPrj;
-    QAction  * actionClose;
+    QAction  * actionCloseProj;
+    QAction  * actionDelProj;
 
     QMenu * menuItem;
     QMenu * menuItemTrk;

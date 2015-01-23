@@ -667,6 +667,74 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     deriveSecondaryData();
 }
 
+QString unifyColor(const QString& color)
+{
+
+    if(QColor(color) == Qt::black)
+    {
+        return "Blue";
+    }
+    else if(QColor(color) == Qt::darkRed)
+    {
+        return "DarkRed";
+    }
+    else if(QColor(color) == Qt::darkGreen)
+    {
+        return "DarkGreen";
+    }
+    else if(QColor(color) == Qt::darkYellow)
+    {
+        return "DarkYellow";
+    }
+    else if(QColor(color) == Qt::darkBlue)
+    {
+        return "DarkBlue";
+    }
+    else if(QColor(color) == Qt::darkMagenta)
+    {
+        return "DarkMagenta";
+    }
+    else if(QColor(color) == Qt::darkCyan)
+    {
+        return "DarkCyan";
+    }
+    else if(QColor(color) == Qt::gray)
+    {
+        return "Gray";
+    }
+    else if(QColor(color) == Qt::darkGray)
+    {
+        return "DarkGray";
+    }
+    else if(QColor(color) == Qt::green)
+    {
+        return "Green";
+    }
+    else if(QColor(color) == Qt::yellow)
+    {
+        return "Yellow";
+    }
+    else if(QColor(color) == Qt::blue)
+    {
+        return "Blue";
+    }
+    else if(QColor(color) == Qt::magenta)
+    {
+        return "Magenta";
+    }
+    else if(QColor(color) == Qt::cyan)
+    {
+        return "Cyan";
+    }
+    else if(QColor(color) == Qt::white)
+    {
+        return "White";
+    }
+
+
+    return "Black";
+}
+
 void CGisItemTrk::save(QDomNode& gpx)
 {
     QDomDocument doc = gpx.ownerDocument();
@@ -692,7 +760,7 @@ void CGisItemTrk::save(QDomNode& gpx)
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
     xmlExt.appendChild(gpxx);
-    writeXml(gpxx, "gpxx:DisplayColor", trk.color);
+    writeXml(gpxx, "gpxx:DisplayColor", unifyColor(trk.color));
 
     foreach(const trkseg_t &seg, trk.segs)
     {

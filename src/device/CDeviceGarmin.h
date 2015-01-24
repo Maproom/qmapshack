@@ -27,6 +27,7 @@ public:
     CDeviceGarmin(const QString &path, const QString &key, const QString& model, QTreeWidget * parent);
     virtual ~CDeviceGarmin();
 
+    void insertCopyOfProject(IGisProject * project);
 
 private:
     QString id;

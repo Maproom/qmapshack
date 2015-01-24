@@ -559,6 +559,17 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
             }
         }
     }
+
+    IDevice * device = dynamic_cast<IDevice*>(itemAt(e->pos()));
+    if(device)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+        if(project)
+        {
+            device->insertCopyOfProject(project);
+        }
+    }
+
     emit sigChanged();
 }
 

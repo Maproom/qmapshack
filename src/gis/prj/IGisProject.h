@@ -79,6 +79,13 @@ public:
     IGisProject(type_e type, const QString &filename, IDevice *parent);
     virtual ~IGisProject();
 
+    IGisProject& operator=(const IGisProject& p)
+    {
+        key      = p.key;
+        metadata = p.metadata;
+        return *this;
+    }
+
     void edit();
 
     /**

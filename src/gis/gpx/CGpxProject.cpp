@@ -26,6 +26,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
+#include "helpers/CSelectCopyAction.h"
 
 
 #include <QtWidgets>
@@ -42,6 +43,29 @@ CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
 {
     setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
     loadGpx(filename);
+}
+
+CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent)
+    : IGisProject(eTypeGpx, filename, parent)
+{
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
+    *(IGisProject*)this = *project;
+
+    const int N = project->childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+        if(item)
+        {
+            int res = CSelectCopyAction::eResultNone;
+            insertCopyOfItem(item, -1, res);
+        }
+    }
+
+
+    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setToolTip(CGisListWks::eColumnName, getInfo());
+    valid = true;
 }
 
 CGpxProject::~CGpxProject()

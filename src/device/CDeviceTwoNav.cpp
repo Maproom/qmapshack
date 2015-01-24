@@ -30,3 +30,7 @@ CDeviceTwoNav::~CDeviceTwoNav()
 {
 }
 
+void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
+{
+
+}

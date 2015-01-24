@@ -113,3 +113,18 @@ CDeviceGarmin::~CDeviceGarmin()
 {
 }
 
+void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
+{
+
+    QString name = project->getName();
+    name = name.remove(QRegExp("[^A-Za-z0-9_]"));
+
+    QDir dirGpx = dir.absoluteFilePath(pathGpx);
+    QString filename = dirGpx.absoluteFilePath(name + ".gpx");
+
+    CGpxProject * gpx = new CGpxProject(filename, project, this);
+    if(!gpx->isValid())
+    {
+        delete gpx;
+    }
+}

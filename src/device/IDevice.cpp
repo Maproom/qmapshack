@@ -39,7 +39,7 @@ void IDevice::mount(const QString& path)
 #ifdef Q_OS_LINUX
     QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Mount");
     QVariantMap args;
-    args.insert("options", "flush");
+    args.insert("options", "sync");
     message << args;
     QDBusConnection::systemBus().call(message);
 #endif

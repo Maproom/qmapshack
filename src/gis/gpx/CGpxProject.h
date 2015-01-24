@@ -33,6 +33,7 @@ class CGpxProject : public IGisProject
 public:
     CGpxProject(const QString &filename, CGisListWks * parent);
     CGpxProject(const QString &filename, IDevice * parent);
+    CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent);
     virtual ~CGpxProject();
 
     bool save();

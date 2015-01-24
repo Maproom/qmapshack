@@ -261,7 +261,6 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
     QTreeWidgetItem * item1 = currentItem();
     QTreeWidgetItem * item2 = itemAt(e->pos());
 
-
     // changeing the item order is only valid for single selected items
     if(selectedItems().count() == 1)
     {
@@ -274,7 +273,7 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
             2.1) different parent -> copy
             3) go on with dragMoveEvent();
 
-         */
+        */
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(item1);
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(item2);
 
@@ -343,24 +342,60 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
             return;
         }
 
+        /*
+            Never move/copy projects on devices. Data has to be removed or changed
+            to store a project and it's items on a device. Moving it back to the
+            workspace would conflict with the original project. To much hassle to
+            reslove this properly.
+        */
         IGisProject * proj1 = dynamic_cast<IGisProject*>(item1);
-        if(proj1)
+        if(proj1 && proj1->isOnDevice())
         {
-            if(proj1->isOnDevice())
-            {
-                e->setDropAction(Qt::IgnoreAction);
-                QTreeWidget::dragMoveEvent(e);
-                return;
-            }
+            e->setDropAction(Qt::IgnoreAction);
+            QTreeWidget::dragMoveEvent(e);
+            return;
         }
     }
 
-    IGisProject * proj = dynamic_cast<IGisProject*>(item2);
-    if(proj && (proj != currentItem()->parent()))
+    /*
+        Test for other project, to change project order. But if other project
+        is on a device block the request. A project has to be copied to the
+        device via it's device item.
+    */
+    IGisProject * proj2 = dynamic_cast<IGisProject*>(item2);
+    if(proj2)
     {
-        e->setDropAction(Qt::CopyAction);
-        QTreeWidget::dragMoveEvent(e);
-        return;
+        IGisProject * proj1 = dynamic_cast<IGisProject*>(item1);
+        if(proj1)
+        {
+            e->setDropAction(proj2->isOnDevice() ? Qt::IgnoreAction : Qt::MoveAction);
+            QTreeWidget::dragMoveEvent(e);
+            return;
+        }
+
+        IGisItem * gisItem1 = dynamic_cast<IGisItem*>(item1);
+        if(gisItem1)
+        {
+            e->setDropAction(Qt::CopyAction);
+            QTreeWidget::dragMoveEvent(e);
+            return;
+        }
+    }
+
+    /*
+        Test for device as drop target. A device will copy the project into
+        it's own supported format.
+    */
+    IDevice * device = dynamic_cast<IDevice*>(item2);
+    if(device)
+    {
+        IGisProject * proj1 = dynamic_cast<IGisProject*>(item1);
+        if(proj1 && !proj1->isOnDevice())
+        {
+            e->setDropAction(Qt::CopyAction);
+            QTreeWidget::dragMoveEvent(e);
+            return;
+        }
     }
 
     e->setDropAction(Qt::IgnoreAction);

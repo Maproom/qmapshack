@@ -23,12 +23,14 @@
 #include <QDialog>
 
 class IGisItem;
+class IGisProject;
 
 class CSelectCopyAction : public QDialog, private Ui::ISelectCopyAction
 {
     Q_OBJECT
 public:
     CSelectCopyAction(const IGisItem * src, const IGisItem * tar, QWidget * parent);
+    CSelectCopyAction(const IGisProject * src, const IGisProject * tar, QWidget * parent);
     virtual ~CSelectCopyAction();
 
     enum result_e

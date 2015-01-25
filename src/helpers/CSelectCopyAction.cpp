@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/IGisItem.h"
+#include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
 
 #include <QtWidgets>
@@ -37,6 +38,27 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
     connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushClone, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+}
+
+CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject * tar, QWidget * parent)
+    : QDialog(parent)
+    , result(eResultNone)
+{
+    setupUi(this);
+
+    labelIcon1->setPixmap(src->getIcon());
+    labelInfo1->setText(src->getInfo());
+    labelIcon2->setPixmap(tar->getIcon());
+    labelInfo2->setText(tar->getInfo());
+
+    pushClone->setEnabled(false);
+
+    adjustSize();
+
+    connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+    connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+
+
 }
 
 CSelectCopyAction::~CSelectCopyAction()

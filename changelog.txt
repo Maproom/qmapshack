@@ -1,3 +1,9 @@
+V 0.12.0
+* Fix: Workspace is not saved on Windows.
+* Fix: Bad track color names
+* Add device watcher for Linux
+* Add basic device support for newer Garmin units.
+
 V 0.11.0
 * Auto-switch projection for pole caps in track plot
 * Fix several issues with elements derived from existing ones still having the same key.

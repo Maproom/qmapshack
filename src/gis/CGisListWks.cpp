@@ -875,7 +875,7 @@ void CGisListWks::slotDeleteProject()
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
-            int res = QMessageBox::question(0, QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
+            int res = QMessageBox::question(0, QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
             if(res != QMessageBox::Ok)
             {
                 continue;

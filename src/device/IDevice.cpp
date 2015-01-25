@@ -21,7 +21,9 @@
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
 
+#ifdef Q_OS_LINUX
 #include <QtDBus>
+#endif
 
 IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
     : QTreeWidgetItem(parent)

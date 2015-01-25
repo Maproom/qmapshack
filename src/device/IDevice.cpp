@@ -83,7 +83,6 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
         if(project)
         {
@@ -97,7 +96,6 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
             {
                 break;
             }
-
         }
     }
     return item;
@@ -108,7 +106,6 @@ IGisProject * IDevice::getProjectByKey(const QString& key)
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
         if(project)
         {
@@ -121,7 +118,6 @@ IGisProject * IDevice::getProjectByKey(const QString& key)
         }
     }
     return 0;
-
 }
 
 void IDevice::editItemByKey(const IGisItem::key_t& key)
@@ -172,7 +168,6 @@ void IDevice::insertCopyOfProject(IGisProject * project, int& lastResult)
         {
             return;
         }
-
     }
 
     insertCopyOfProject(project);

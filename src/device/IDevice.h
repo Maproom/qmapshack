@@ -35,8 +35,14 @@ public:
     static void mount(const QString& path);
     static void umount(const QString &path);
 
-    void mount(){mount(key);}
-    void umount(){umount(key);}
+    void mount()
+    {
+        mount(key);
+    }
+    void umount()
+    {
+        umount(key);
+    }
 
     const QString& getKey() const
     {
@@ -55,7 +61,7 @@ public:
 
     void insertCopyOfProject(IGisProject * project, int& lastResult);
 
-protected:    
+protected:
     virtual void insertCopyOfProject(IGisProject * project) = 0;
     IGisProject * getProjectByKey(const QString& key);
 

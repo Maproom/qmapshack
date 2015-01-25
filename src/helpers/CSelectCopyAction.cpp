@@ -57,8 +57,6 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject 
 
     connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
-
-
 }
 
 CSelectCopyAction::~CSelectCopyAction()

@@ -25,14 +25,13 @@ class IDevice;
 
 class CTwoNavProject : public IGisProject
 {
-    public:
-        CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent);
-        CTwoNavProject(const QString &filename, IDevice * parent);
-        virtual ~CTwoNavProject();
+public:
+    CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent);
+    CTwoNavProject(const QString &filename, IDevice * parent);
+    virtual ~CTwoNavProject();
 
-        bool save();
-        bool saveAs();
-
+    bool save();
+    bool saveAs();
 };
 
 #endif //CTWONAVPROJECT_H

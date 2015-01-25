@@ -50,7 +50,6 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
             delete project;
         }
     }
-
 }
 
 CDeviceTwoNav::~CDeviceTwoNav()
@@ -58,7 +57,7 @@ CDeviceTwoNav::~CDeviceTwoNav()
 }
 
 void CDeviceTwoNav::readReginfo(const QString& filename)
-{    
+{
     QString product, unittype;
     QRegExp re("(.*)=(.*)");
     QFile file(filename);
@@ -93,7 +92,6 @@ void CDeviceTwoNav::readReginfo(const QString& filename)
 
 void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
 {
-
     QString name = project->getName();
     name = name.remove(QRegExp("[^A-Za-z0-9_]"));
 
@@ -112,5 +110,4 @@ void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
         delete proj;
         return;
     }
-
 }

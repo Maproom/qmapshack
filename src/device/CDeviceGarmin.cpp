@@ -106,7 +106,6 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
             delete project;
         }
     }
-
 }
 
 CDeviceGarmin::~CDeviceGarmin()
@@ -115,7 +114,6 @@ CDeviceGarmin::~CDeviceGarmin()
 
 void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
 {
-
     QString name = project->getName();
     name = name.remove(QRegExp("[^A-Za-z0-9_]"));
 
@@ -134,5 +132,4 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
         delete gpx;
         return;
     }
-
 }

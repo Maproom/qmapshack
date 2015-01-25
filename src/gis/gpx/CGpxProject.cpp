@@ -25,8 +25,8 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CSettings.h"
 #include "helpers/CSelectCopyAction.h"
+#include "helpers/CSettings.h"
 
 
 #include <QtWidgets>

@@ -205,7 +205,7 @@ QString IGisItem::getNameEx() const
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project)
     {
-        str += " @ " + project->getName();               
+        str += " @ " + project->getName();
     }
     return str;
 }

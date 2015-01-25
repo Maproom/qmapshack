@@ -66,7 +66,7 @@ CGisWidget::~CGisWidget()
         Explicitely delete workspace here, as database projects use
         CGisWidget uppon destruction to signal the database their destruction.
 
-    */
+     */
     delete treeWks;
 }
 
@@ -204,7 +204,6 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
             device->getItemByPos(pos, items);
             continue;
         }
-
     }
 }
 

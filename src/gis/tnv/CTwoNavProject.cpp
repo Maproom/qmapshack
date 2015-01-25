@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "gis/tnv/CTwoNavProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/tnv/CTwoNavProject.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
@@ -26,29 +26,24 @@
 CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent)
     : IGisProject(eTypeTwoNav, filename, parent)
 {
-
 }
 
 CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
     : IGisProject(eTypeTwoNav, filename, parent)
 {
-
 }
 
 CTwoNavProject::~CTwoNavProject()
 {
-
 }
 
 bool CTwoNavProject::save()
 {
-
     return false;
 }
 
 bool CTwoNavProject::saveAs()
 {
-
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
@@ -78,6 +73,5 @@ bool CTwoNavProject::saveAs()
     path = QFileInfo(fn).absolutePath();
     cfg.setValue("Paths/lastGisPath", path);
     return res;
-
 }
 

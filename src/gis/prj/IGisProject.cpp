@@ -90,7 +90,7 @@ QPixmap IGisProject::getIcon() const
 bool IGisProject::isOnDevice() const
 {
     IDevice * device = dynamic_cast<IDevice*>(parent());
-    return (device != 0);
+    return device != 0;
 }
 
 void IGisProject::edit()

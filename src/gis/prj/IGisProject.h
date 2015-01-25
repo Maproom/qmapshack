@@ -124,7 +124,7 @@ public:
     /**
        @brief Get the unique key of the device the project is attached to
        @return If the project is not attached to a device the string is empty
-    */
+     */
     QString getDeviceKey() const;
 
 
@@ -218,7 +218,7 @@ public:
     /**
        @brief Test if this project is handled by a device
        @return True if handled by a device
-    */
+     */
     bool isOnDevice() const;
 
 
@@ -273,7 +273,7 @@ public:
 
        This is only valid for projects located on GPS devices.
        For all other projects the method does nothing.
-    */
+     */
     bool remove();
 
 protected:

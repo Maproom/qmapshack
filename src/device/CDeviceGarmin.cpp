@@ -126,5 +126,13 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
     if(!gpx->isValid())
     {
         delete gpx;
+        return;
     }
+
+    if(!gpx->save())
+    {
+        delete gpx;
+        return;
+    }
+
 }

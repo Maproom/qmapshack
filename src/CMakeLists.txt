@@ -108,6 +108,7 @@ set( SRCS
     gis/gpx/serialization.cpp
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
+    gis/tnv/CTwoNavProject.cpp
     gis/db/IDB.cpp
     gis/db/CSetupDatabase.cpp
     gis/db/CSetupWorkspace.cpp
@@ -278,7 +279,8 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
-    gis/qms/CQmsProject.cpp
+    gis/qms/CQmsProject.h
+    gis/tnv/CTwoNavProject.h
     gis/db/IDB.cpp
     gis/db/macros.h
     gis/db/CSetupDatabase.h

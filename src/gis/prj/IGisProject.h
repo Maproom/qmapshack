@@ -41,6 +41,7 @@ public:
         , eTypeGpx
         , eTypeDb
         , eTypeLostFound
+        , eTypeTwoNav
     };
 
     struct person_t

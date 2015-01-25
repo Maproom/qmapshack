@@ -18,6 +18,8 @@
 
 #include "device/CDeviceTwoNav.h"
 #include "gis/CGisListWks.h"
+#include "gis/gpx/CGpxProject.h"
+#include "gis/tnv/CTwoNavProject.h"
 
 #include <QtWidgets>
 
@@ -37,6 +39,18 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
     }
 
     pathGpx = "TwoNavData/Data/";
+
+    QDir dirGpx(dir.absoluteFilePath(pathGpx));
+    QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
+    foreach(const QString &entry, entries)
+    {
+        IGisProject * project =  new CGpxProject(dirGpx.absoluteFilePath(entry), this);
+        if(!project->isValid())
+        {
+            delete project;
+        }
+    }
+
 }
 
 CDeviceTwoNav::~CDeviceTwoNav()
@@ -79,5 +93,24 @@ void CDeviceTwoNav::readReginfo(const QString& filename)
 
 void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
 {
+
+    QString name = project->getName();
+    name = name.remove(QRegExp("[^A-Za-z0-9_]"));
+
+    QDir dirGpx = dir.absoluteFilePath(pathGpx);
+    QString filename = dirGpx.absoluteFilePath(name);
+
+    CTwoNavProject * proj = new CTwoNavProject(filename, project, this);
+    if(!proj->isValid())
+    {
+        delete proj;
+        return;
+    }
+
+    if(!proj->save())
+    {
+        delete proj;
+        return;
+    }
 
 }

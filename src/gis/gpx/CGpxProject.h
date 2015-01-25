@@ -42,9 +42,7 @@ public:
     static bool saveAs(const QString& fn, IGisProject& project);
 
 private:
-    void loadGpx(const QString& filename);
-
-    QDomElement xmlGpx;
+    void loadGpx(const QString& filename);    
 };
 
 #endif //CGPXPROJECT_H

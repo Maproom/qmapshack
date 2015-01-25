@@ -30,73 +30,76 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="CGisListWks" name="treeWks">
-     <property name="contextMenuPolicy">
-      <enum>Qt::CustomContextMenu</enum>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="dragEnabled">
-      <bool>true</bool>
-     </property>
-     <property name="dragDropMode">
-      <enum>QAbstractItemView::InternalMove</enum>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="indentation">
-      <number>14</number>
-     </property>
-     <attribute name="headerDefaultSectionSize">
-      <number>40</number>
-     </attribute>
-     <column>
-      <property name="text">
-       <string notr="true"/>
+     <widget class="CGisListWks" name="treeWks">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Name</string>
+      <property name="dragEnabled">
+       <bool>true</bool>
       </property>
-     </column>
-    </widget>
-   </item>
-   <item>
-    <widget class="CGisListDB" name="treeDB">
-     <property name="contextMenuPolicy">
-      <enum>Qt::CustomContextMenu</enum>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="indentation">
-      <number>10</number>
-     </property>
-     <column>
-      <property name="text">
-       <string notr="true">-</string>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::InternalMove</enum>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Name</string>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
       </property>
-     </column>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="indentation">
+       <number>14</number>
+      </property>
+      <attribute name="headerDefaultSectionSize">
+       <number>40</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="CGisListDB" name="treeDB">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="indentation">
+       <number>10</number>
+      </property>
+      <column>
+       <property name="text">
+        <string notr="true">-</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+     </widget>
     </widget>
    </item>
    <item>

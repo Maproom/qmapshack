@@ -108,7 +108,7 @@ void CGpxProject::loadGpx(const QString& filename)
     file.close();
 
     int N;
-    xmlGpx = xml.documentElement();
+    QDomElement xmlGpx = xml.documentElement();
     if(xmlGpx.tagName() != "gpx")
     {
         QMessageBox::critical(0, QObject::tr("Failed to read..."), QObject::tr("Not a GPX file: ") + filename, QMessageBox::Abort);

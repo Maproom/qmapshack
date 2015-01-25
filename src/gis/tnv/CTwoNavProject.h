@@ -32,6 +32,9 @@ public:
 
     bool save();
     bool saveAs();
+
+private:
+    void load(const QString& filename);
 };
 
 #endif //CTWONAVPROJECT_H

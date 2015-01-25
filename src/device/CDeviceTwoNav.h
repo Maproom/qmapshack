@@ -32,7 +32,7 @@ public:
 private:
     void readReginfo(const QString& filename);
 
-    QString pathGpx;
+    QString pathData;
 };
 
 #endif //CDEVICETWONAV_H

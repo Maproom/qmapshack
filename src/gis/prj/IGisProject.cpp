@@ -507,7 +507,17 @@ void IGisProject::umount()
 bool IGisProject::remove()
 {
     mount();
-    QFile::remove(filename);
+
+    QFileInfo fi(filename);
+    if(fi.isFile())
+    {
+        QFile::remove(filename);
+    }
+    else if(fi.isDir())
+    {
+        QDir(filename).removeRecursively();
+    }
+
     umount();
     return true;
 }

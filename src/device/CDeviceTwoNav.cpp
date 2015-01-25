@@ -38,18 +38,29 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
         readReginfo(dir.absoluteFilePath("TwoNavData/RegInfo.ini"));
     }
 
-    pathGpx = "TwoNavData/Data/";
+    pathData = "TwoNavData/Data/";
 
-    QDir dirGpx(dir.absoluteFilePath(pathGpx));
-    QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
+    QDir dirData(dir.absoluteFilePath(pathData));
+    QStringList entries = dirData.entryList(QStringList("*.gpx"));
     foreach(const QString &entry, entries)
     {
-        IGisProject * project =  new CGpxProject(dirGpx.absoluteFilePath(entry), this);
+        IGisProject * project =  new CGpxProject(dirData.absoluteFilePath(entry), this);
         if(!project->isValid())
         {
             delete project;
         }
     }
+
+    entries = dirData.entryList(QDir::NoDotAndDotDot|QDir::Dirs);
+    foreach(const QString &entry, entries)
+    {
+        IGisProject * project =  new CTwoNavProject(dirData.absoluteFilePath(entry), this);
+        if(!project->isValid())
+        {
+            delete project;
+        }
+    }
+
 }
 
 CDeviceTwoNav::~CDeviceTwoNav()
@@ -72,7 +83,6 @@ void CDeviceTwoNav::readReginfo(const QString& filename)
             QString tok = re.cap(1);
             QString val = re.cap(2);
 
-            qDebug() << tok << val;
             if(tok == "product")
             {
                 product = val;
@@ -95,8 +105,8 @@ void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
     QString name = project->getName();
     name = name.remove(QRegExp("[^A-Za-z0-9_]"));
 
-    QDir dirGpx = dir.absoluteFilePath(pathGpx);
-    QString filename = dirGpx.absoluteFilePath(name);
+    QDir dirData = dir.absoluteFilePath(pathData);
+    QString filename = dirData.absoluteFilePath(name);
 
     CTwoNavProject * proj = new CTwoNavProject(filename, project, this);
     if(!proj->isValid())

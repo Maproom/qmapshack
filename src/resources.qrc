@@ -132,6 +132,7 @@
         <file>icons/32x32/DelImage.png</file>
         <file>icons/32x32/Image.png</file>
         <file>icons/32x32/Device.png</file>
+        <file>icons/32x32/2NavProject.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -246,6 +247,7 @@
         <file>icons/48x48/DelImage.png</file>
         <file>icons/48x48/Image.png</file>
         <file>icons/48x48/Device.png</file>
+        <file>icons/48x48/2NavProject.png</file>
 
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>

@@ -16,21 +16,49 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/tnv/CTwoNavProject.h"
 #include "helpers/CSettings.h"
+#include "helpers/CSelectCopyAction.h"
 
 #include <QtWidgets>
 
-CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent)
-    : IGisProject(eTypeTwoNav, filename, parent)
-{
-}
 
 CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
     : IGisProject(eTypeTwoNav, filename, parent)
 {
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/2NavProject.png"));
+
+    load(filename);
+
+    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setToolTip(CGisListWks::eColumnName, getInfo());
+    valid = true;
+}
+
+CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent)
+    : IGisProject(eTypeTwoNav, filename, parent)
+{
+    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/2NavProject.png"));
+    *(IGisProject*)this = *project;
+
+    const int N = project->childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+        if(item)
+        {
+            int res = CSelectCopyAction::eResultNone;
+            insertCopyOfItem(item, -1, res);
+        }
+    }
+
+
+    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setToolTip(CGisListWks::eColumnName, getInfo());
+    valid = true;
 }
 
 CTwoNavProject::~CTwoNavProject()
@@ -39,7 +67,19 @@ CTwoNavProject::~CTwoNavProject()
 
 bool CTwoNavProject::save()
 {
-    return false;
+    bool res = true;
+    mount();
+    QDir().mkpath(filename);
+    QDir dir(filename);
+
+    QFile fileKey(dir.absoluteFilePath(QString("%1.key").arg(getKey())));
+    fileKey.open(QIODevice::WriteOnly);
+    fileKey.close();
+
+
+
+    umount();
+    return res;
 }
 
 bool CTwoNavProject::saveAs()
@@ -75,3 +115,15 @@ bool CTwoNavProject::saveAs()
     return res;
 }
 
+void CTwoNavProject::load(const QString& filename)
+{
+    QDir dir(filename);
+
+    QStringList entries = dir.entryList(QDir::NoDotAndDotDot|QDir::Dirs|QDir::Files);
+    foreach(const QString& entry, entries)
+    {
+        qDebug() << entry;
+    }
+
+
+}

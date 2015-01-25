@@ -115,6 +115,13 @@ void CGpxProject::loadGpx(const QString& filename)
         return;
     }
 
+    const QDomElement& xmlExtension = xmlGpx.namedItem("extensions").toElement();
+    if(xmlExtension.namedItem("ql:key").isElement())
+    {
+        key = xmlExtension.namedItem("ql:key").toElement().text();
+    }
+
+
     const QDomNode& xmlMetadata = xmlGpx.namedItem("metadata");
     if(xmlMetadata.isElement())
     {
@@ -149,18 +156,12 @@ void CGpxProject::loadGpx(const QString& filename)
         new CGisItemWpt(xmlWpt, this);
     }
 
-    const QDomElement& xmlExtension = xmlGpx.namedItem("extensions").toElement();
     const QDomNodeList& xmlAreas = xmlExtension.elementsByTagName("ql:area");
     N = xmlAreas.count();
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlArea = xmlAreas.item(n);
         new CGisItemOvlArea(xmlArea, this);
-    }
-
-    if(xmlExtension.namedItem("ql:key").isElement())
-    {
-        key = xmlExtension.namedItem("ql:key").toElement().text();
     }
 
 

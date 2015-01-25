@@ -158,6 +158,12 @@ void CGpxProject::loadGpx(const QString& filename)
         new CGisItemOvlArea(xmlArea, this);
     }
 
+    if(xmlExtension.namedItem("ql:key").isElement())
+    {
+        key = xmlExtension.namedItem("ql:key").toElement().text();
+    }
+
+
     setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
@@ -322,6 +328,14 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
             continue;
         }
         item->save(xmlExt);
+    }
+
+    if(!project.getKey().isEmpty())
+    {
+        QDomElement elem = xmlExt.ownerDocument().createElement("ql:key");
+        xmlExt.appendChild(elem);
+        QDomText text = xmlExt.ownerDocument().createTextNode(project.getKey());
+        elem.appendChild(text);
     }
 
 

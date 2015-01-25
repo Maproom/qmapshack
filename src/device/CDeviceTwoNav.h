@@ -28,6 +28,11 @@ public:
     virtual ~CDeviceTwoNav();
 
     void insertCopyOfProject(IGisProject * project);
+
+private:
+    void readReginfo(const QString& filename);
+
+    QString pathGpx;
 };
 
 #endif //CDEVICETWONAV_H

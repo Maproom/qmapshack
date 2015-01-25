@@ -19,6 +19,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
+#include "helpers/CSelectCopyAction.h"
 
 #include <QtDBus>
 
@@ -100,6 +101,27 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
     return item;
 }
 
+IGisProject * IDevice::getProjectByKey(const QString& key)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project)
+        {
+            if(project->getKey() != key)
+            {
+                continue;
+            }
+
+            return project;
+        }
+    }
+    return 0;
+
+}
+
 void IDevice::editItemByKey(const IGisItem::key_t& key)
 {
     const int N = childCount();
@@ -111,6 +133,47 @@ void IDevice::editItemByKey(const IGisItem::key_t& key)
             project->editItemByKey(key);
         }
     }
+}
+
+
+void IDevice::insertCopyOfProject(IGisProject * project, int& lastResult)
+{
+    IGisProject * project2 = getProjectByKey(project->getKey());
+    if(project2)
+    {
+        int result = lastResult;
+        if(lastResult == CSelectCopyAction::eResultNone)
+        {
+            CSelectCopyAction dlg(project, project2, 0);
+            dlg.exec();
+            result = dlg.getResult();
+            if(dlg.allOthersToo())
+            {
+                lastResult = result;
+            }
+        }
+
+        if(result == CSelectCopyAction::eResultSkip)
+        {
+            return;
+        }
+        if(result == CSelectCopyAction::eResultNone)
+        {
+            return;
+        }
+
+        if(project2->remove())
+        {
+            delete project2;
+        }
+        else
+        {
+            return;
+        }
+
+    }
+
+    insertCopyOfProject(project);
 }
 
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)

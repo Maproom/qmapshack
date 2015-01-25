@@ -71,7 +71,7 @@ void IGisProject::genKey()
     }
 }
 
-QString IGisProject::getDeviceKey()
+QString IGisProject::getDeviceKey() const
 {
     IDevice * device = dynamic_cast<IDevice*>(parent());
     if(device)
@@ -80,6 +80,11 @@ QString IGisProject::getDeviceKey()
     }
 
     return "";
+}
+
+QPixmap IGisProject::getIcon() const
+{
+    return icon(CGisListWks::eColumnName).pixmap(22,22);
 }
 
 bool IGisProject::isOnDevice() const
@@ -501,11 +506,6 @@ void IGisProject::umount()
 
 bool IGisProject::remove()
 {
-    int res = QMessageBox::question(0, QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1").arg(filename), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
-    if(res != QMessageBox::Ok)
-    {
-        return false;
-    }
     mount();
     QFile::remove(filename);
     umount();

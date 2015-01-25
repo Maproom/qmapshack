@@ -49,14 +49,15 @@ public:
     IGisItem * getItemByKey(const IGisItem::key_t& key);
     void editItemByKey(const IGisItem::key_t& key);
 
-    virtual void insertCopyOfProject(IGisProject * project) = 0;
-
     void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
     void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
+    void insertCopyOfProject(IGisProject * project, int& lastResult);
 
-protected:
+protected:    
+    virtual void insertCopyOfProject(IGisProject * project) = 0;
+    IGisProject * getProjectByKey(const QString& key);
 
     QDir dir;
     QString key;

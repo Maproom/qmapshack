@@ -566,7 +566,8 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
         if(project)
         {
-            device->insertCopyOfProject(project);
+            int lastResult = CSelectCopyAction::eResultNone;
+            device->insertCopyOfProject(project, lastResult);
         }
     }
 
@@ -874,6 +875,13 @@ void CGisListWks::slotDeleteProject()
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
+            int res = QMessageBox::question(0, QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
+            if(res != QMessageBox::Ok)
+            {
+                continue;
+            }
+
+
             if(project->remove())
             {
                 delete project;

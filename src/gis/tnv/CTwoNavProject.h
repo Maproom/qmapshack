@@ -22,6 +22,9 @@
 #include "gis/prj/IGisProject.h"
 
 class IDevice;
+class CGisItemTrk;
+class CGisItemWpt;
+class QDir;
 
 class CTwoNavProject : public IGisProject
 {
@@ -35,6 +38,9 @@ public:
 
 private:
     void load(const QString& filename);
+    void saveTrk(CGisItemTrk *trk, const QDir& dir);
+    void saveWpts(QList<CGisItemWpt *> &wpts, const QDir& dir);
+    void saveGeoCaches(QList<CGisItemWpt *> &wpts, const QDir& dir);
 };
 
 #endif //CTWONAVPROJECT_H

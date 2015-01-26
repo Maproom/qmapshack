@@ -388,7 +388,12 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk != 0)
         {
-            new CGisItemTrk(*trk, this, off, clone);
+            CGisItemTrk * newTrk = new CGisItemTrk(*trk, this, off, clone);
+            // if the track is on a device, remove hidden trackpoints
+            if(isOnDevice())
+            {
+                newTrk->filterDelete();
+            }
         }
         break;
     }

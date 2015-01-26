@@ -113,15 +113,21 @@ public:
     {
         return trk.name;
     }
-    int getColorIdx()
+    int getColorIdx() const
     {
         return colorIdx;
     }
+
+    const QColor& getColor() const
+    {
+        return color;
+    }
+
     QString getInfo() const;
     QString getInfoRange();
     QString getInfoTrkPt(const trkpt_t& pt);
     QString getInfoProgress(const trkpt_t& pt);
-    quint32 getTotalElapsedSeconds()
+    quint32 getTotalElapsedSeconds() const
     {
         return totalElapsedSeconds;
     }

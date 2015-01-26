@@ -88,7 +88,11 @@ bool CTwoNavProject::save()
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk)
         {
-            trk->saveTwoNav(dir);
+            QString fn = getName();
+            fn = fn.remove(QRegExp("[^A-Za-z0-9_]"));
+            fn = dir.absoluteFilePath(fn + ".trk");
+
+            trk->saveTwoNav(fn);
         }
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
         if(wpt)
@@ -186,7 +190,6 @@ void CTwoNavProject::load(const QString& filename)
         }
         else if(fi.suffix().toLower() == "wpt")
         {
-
         }
     }
 }

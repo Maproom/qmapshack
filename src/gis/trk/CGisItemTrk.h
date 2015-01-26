@@ -177,10 +177,17 @@ public:
     void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
     void drawHighlight(QPainter& p);
     void drawRange(QPainter& p);
+
+    /**
+       @brief Save track to GPX tree
+       @param gpx   The <gpx> node to append by the track
+     */
     void save(QDomNode& gpx);
-    void saveTwoNav(const QDir& dir);
-
-
+    /**
+       @brief Save track to TwoNav track file
+       @param dir   the path to store the file
+     */
+    void saveTwoNav(const QString& filename);
     /**
        @brief Switch user focus on and off.
 

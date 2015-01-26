@@ -179,12 +179,8 @@ static QDateTime readCompeTime(QString str, bool isTrack)
     return timestamp;
 }
 
-void CGisItemTrk::saveTwoNav(const QDir& dir)
+void CGisItemTrk::saveTwoNav(const QString &filename)
 {
-    QString filename = getName();
-    filename = filename.remove(QRegExp("[^A-Za-z0-9_]"));
-    filename = dir.absoluteFilePath(filename + ".trk");
-
     QFile file(filename);
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
@@ -240,7 +236,6 @@ void CGisItemTrk::saveTwoNav(const QDir& dir)
             out << list.join(" ") << endl;
         }
     }
-
 }
 
 void CGisItemTrk::readTowNav(const QString& filename)

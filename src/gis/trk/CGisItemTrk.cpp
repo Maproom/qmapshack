@@ -204,6 +204,22 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
+CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
+    : IGisItem(project, eTypeTrk, project->childCount())
+    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , drawMode(eDrawNormal)
+    , mouseMoveFocus(0)
+    , mouseClickFocus(0)
+{
+    // --- start read and process data ----
+    setColor(penForeground.color());
+    readTowNav(filename);
+    // --- stop read and process data ----
+
+    setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
 CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)

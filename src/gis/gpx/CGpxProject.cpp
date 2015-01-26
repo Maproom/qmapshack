@@ -233,7 +233,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
     QFileInfo fi(_fn_);
-    if(fi.suffix() != "gpx")
+    if(fi.suffix().toLower() != "gpx")
     {
         _fn_ += ".gpx";
     }

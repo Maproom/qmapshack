@@ -38,7 +38,7 @@ public:
 
 private:
     void load(const QString& filename);
-    void saveTrk(CGisItemTrk *trk, const QDir& dir);
+
     void saveWpts(QList<CGisItemWpt *> &wpts, const QDir& dir);
     void saveGeoCaches(QList<CGisItemWpt *> &wpts, const QDir& dir);
 };

@@ -32,6 +32,7 @@ class CDetailsTrk;
 class CScrOptTrk;
 class QSqlDatabase;
 class CQlgtTrack;
+class QDir;
 
 #define TRK_N_COLORS 17
 
@@ -100,10 +101,17 @@ public:
      */
     CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project);
     /**
-       @brief CGisItemTrk
+       @brief Clone QLandkarte GT track
        @param trk1
      */
     CGisItemTrk(const CQlgtTrack& trk1);
+    /**
+       @brief Load track from file (e.g. TwoNav *trk)
+       @param filename
+       @param project
+     */
+    CGisItemTrk(const QString& filename, IGisProject * project);
+
     virtual ~CGisItemTrk();
 
     QDataStream& operator<<(QDataStream& stream);
@@ -170,6 +178,7 @@ public:
     void drawHighlight(QPainter& p);
     void drawRange(QPainter& p);
     void save(QDomNode& gpx);
+    void saveTwoNav(const QDir& dir);
 
 
     /**
@@ -379,6 +388,12 @@ private:
        @param trk   The track structure to fill
      */
     void readTrk(const QDomNode& xml, trk_t& trk);
+
+    /**
+       @brief Restore track from TwoNav *trk file
+       @param filename
+     */
+    void readTowNav(const QString& filename);
     /**
        @brief Derive secondary data from the track data
 

@@ -22,81 +22,11 @@
 #include "gis/tnv/CTwoNavProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CSettings.h"
 #include "helpers/CSelectCopyAction.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-QStringList writeCompeTime( const QDateTime& t, bool isTrack)
-{
-    QStringList result;
-    QString dateFormat;
-    QString monthStr;
-
-    QDateTime timestamp = t.toTimeSpec(Qt::UTC);
-
-    switch(timestamp.date().month())
-    {
-        case 1:
-            monthStr = "Jan";
-            break;
-        case 2:
-            monthStr = "Feb";
-            break;
-        case 3:
-            monthStr = "Mar";
-            break;
-        case 4:
-            monthStr = "Apr";
-            break;
-        case 5:
-            monthStr = "May";
-            break;
-        case 6:
-            monthStr = "Jun";
-            break;
-        case 7:
-            monthStr = "Jul";
-            break;
-        case 8:
-            monthStr = "Aug";
-            break;
-        case 9:
-            monthStr = "Sep";
-            break;
-        case 10:
-            monthStr = "Oct";
-            break;
-        case 11:
-            monthStr = "Nov";
-            break;
-        case 12:
-            monthStr = "Dec";
-            break;
-    }
-
-    if(isTrack)
-    {
-        dateFormat = QString("dd-'%1'-yy").arg(monthStr);
-    }
-    else
-    {
-        dateFormat = QString("dd-'%1'-yyyy").arg(monthStr);
-    }
-
-    result << timestamp.toString(dateFormat);
-
-    if(isTrack)
-    {
-        result << timestamp.toString("hh:mm:ss.000");
-    }
-    else
-    {
-        result << timestamp.toString("hh:mm:ss");
-    }
-
-    return result;
-}
 
 
 CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
@@ -158,7 +88,7 @@ bool CTwoNavProject::save()
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk)
         {
-            saveTrk(trk, dir);
+            trk->saveTwoNav(dir);
         }
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
         if(wpt)
@@ -220,78 +150,13 @@ bool CTwoNavProject::saveAs()
     return res;
 }
 
-void CTwoNavProject::saveTrk(CGisItemTrk * trk, const QDir &dir)
-{
-    QString filename = trk->getName();
-    filename = filename.remove(QRegExp("[^A-Za-z0-9_]"));
-    filename = dir.absoluteFilePath(filename + ".trk");
-
-    QFile file(filename);
-    file.open(QIODevice::WriteOnly);
-    QTextStream out(&file);
-    out.setCodec(QTextCodec::codecForName("UTF-8"));
-    out << "B  UTF-8" << endl;
-    out << "G  WGS 84" << endl;
-    out << "U  1" << endl;
-
-    QString name = trk->getName();
-    name = name.replace(" ","_");
-
-    QColor color = trk->getColor();
-
-    QStringList list;
-    list << "C";
-    list << QString::number(color.red());
-    list << QString::number(color.green());
-    list << QString::number(color.blue());
-    list << "5";                 // ???
-    list << "1";                 // ???
-    out << list.join(" ") << endl;
-
-    out << "s " << name << endl;
-    out << "k " << trk->getKey().item << endl;
-
-    const CGisItemTrk::trk_t& tTrk = trk->getTrackData();
-    foreach(const CGisItemTrk::trkseg_t& seg, tTrk.segs)
-    {
-        foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
-        {
-            list.clear();
-
-            list << "T";
-            list << "A";
-            list << (trkpt.lat > 0 ? QString("%1%2N") : QString("%1%2S")).arg(trkpt.lat,0,'f').arg(QChar(0272));
-            list << (trkpt.lon > 0 ? QString("%1%2E") : QString("%1%2W")).arg(trkpt.lon,0,'f').arg(QChar(0272));
-            list << writeCompeTime(trkpt.time, true);
-            list << "s";
-            list << QString("%1").arg(trkpt.ele == NOINT ? 0 : trkpt.ele);
-            list << "0.000000";
-            list << "0.000000";
-            list << "0.000000";
-            list << "0";
-            list << "-1000.000000";
-            list << "-1.000000";
-            list << "-1";
-            list << "-1.000000";
-            list << "-1";
-            list << "-1";
-            list << "-1";
-            list << "-1.000000";
-
-            out << list.join(" ") << endl;
-        }
-    }
-
-}
 
 void CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QDir& dir)
 {
-
 }
 
 void CTwoNavProject::saveGeoCaches(QList<CGisItemWpt*>& wpts, const QDir& dir)
 {
-
 }
 
 
@@ -300,15 +165,32 @@ void CTwoNavProject::load(const QString& filename)
     QDir dir(filename);
 
     QStringList entries = dir.entryList(QDir::NoDotAndDotDot|QDir::Dirs|QDir::Files);
-    foreach(const QString& entry, entries)
+    foreach(const QString &entry, entries)
     {
         QFileInfo fi(entry);
 
-        if(fi.suffix() == "key")
+        if(fi.suffix().toLower() == "key")
         {
             key = fi.baseName();
+            break;
         }
     }
 
+    foreach(const QString &entry, entries)
+    {
+        QFileInfo fi(entry);
 
+        if(fi.suffix().toLower() == "trk")
+        {
+            new CGisItemTrk(dir.absoluteFilePath(entry), this);
+        }
+        else if(fi.suffix().toLower() == "wpt")
+        {
+
+        }
+    }
 }
+
+
+
+

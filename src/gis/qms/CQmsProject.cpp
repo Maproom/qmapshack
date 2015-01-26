@@ -130,7 +130,7 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
     QFileInfo fi(_fn_);
-    if(fi.suffix() != "qms")
+    if(fi.suffix().toLower() != "qms")
     {
         _fn_ += ".qms";
     }

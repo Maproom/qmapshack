@@ -109,6 +109,7 @@ set( SRCS
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
     gis/tnv/CTwoNavProject.cpp
+    gis/tnv/serialization.cpp
     gis/db/IDB.cpp
     gis/db/CSetupDatabase.cpp
     gis/db/CSetupWorkspace.cpp

@@ -18,8 +18,49 @@
 
 #include "GeoMath.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 
 #include <QtWidgets>
+
+struct twonav_icon_t
+{
+    const char * twonav;
+    const char * qlgt;
+};
+
+static const twonav_icon_t TwoNavIcons[] =
+{
+    {"City (Capitol)","City (Capitol)"}
+    ,{"City (Large)","City (Large)"}
+    ,{"City (Medium)","City (Medium)"}
+    ,{"City (Small)","City (Small)"}
+    ,{"City (Small)","Small City"}
+    ,{"Closed Box","Geocache"}
+    ,{"Open Box","Geocache Found"}
+    ,{"Red Flag","Flag, Red"}
+    ,{"Blue Flag","Flag, Blue"}
+    ,{"Green Flag","Flag, Green"}
+    ,{"Red Booble","Pin, Red"}
+    ,{"Blue Booble","Pin, Blue"}
+    ,{"Green Booble","Pin, Green"}
+    ,{"Red Cube","Block, Red"}
+    ,{"Blue Cube","Block, Blue"}
+    ,{"Green Cube","Block, Green"}
+    ,{"Blue Diamond","Blue Diamond"}
+    ,{"Green Diamond","Green Diamond"}
+    ,{"Red Diamond","Red Diamond"}
+    ,{"Traditional Cache","Traditional Cache"}
+    ,{"Multi-cache","Multi-cache"}
+    ,{"Unknown Cache","Unknown Cache"}
+    ,{"Wherigo","Wherigo Cache"}
+    ,{"Event Cache","Event Cache"}
+    ,{"Earthcache","Earthcache"}
+    ,{"Letterbox","Letterbox Hybrid"}
+    ,{"Virtual Cache","Virtual Cache"}
+    ,{"Webcam Cache","Webcam Cache"}
+    ,{0,0}
+};
+
 
 static QStringList writeCompeTime( const QDateTime& t, bool isTrack)
 {
@@ -179,6 +220,56 @@ static QDateTime readCompeTime(QString str, bool isTrack)
     return timestamp;
 }
 
+static QString iconTwoNav2QlGt(const QString& sym)
+{
+    int i = 0;
+    while(TwoNavIcons[i].qlgt)
+    {
+        if(sym == TwoNavIcons[i].twonav)
+        {
+            return TwoNavIcons[i].qlgt;
+        }
+
+        i++;
+    }
+
+    return sym;
+}
+
+
+static QString iconQlGt2TwoNav(const QString& sym)
+{
+    int i = 0;
+    while(TwoNavIcons[i].qlgt)
+    {
+        if(sym == TwoNavIcons[i].qlgt)
+        {
+            return TwoNavIcons[i].twonav;
+        }
+
+        i++;
+    }
+
+    return sym;
+}
+
+static QString makeUniqueName(const QString& name, const QDir& dir)
+{
+    int cnt = 0;
+
+    QFileInfo fi(name);
+    QString tmp(name);
+
+    while(dir.exists(tmp))
+    {
+        tmp = QString("%1_%2.%3").arg(fi.baseName()).arg(cnt++).arg(fi.completeSuffix());
+    }
+
+    return tmp;
+}
+
+
+
 void CGisItemTrk::saveTwoNav(const QString &filename)
 {
     QFile file(filename);
@@ -238,7 +329,7 @@ void CGisItemTrk::saveTwoNav(const QString &filename)
     }
 }
 
-void CGisItemTrk::readTowNav(const QString& filename)
+void CGisItemTrk::readTwoNav(const QString& filename)
 {
     QString line("start");
 
@@ -302,7 +393,6 @@ void CGisItemTrk::readTowNav(const QString& filename)
 
             QString lat = values[2].replace(QChar(186),"");
             QString lon = values[3].replace(QChar(186),"");
-
             GPS_Math_Str_To_Deg(lat + " " + lon, pt.lon, pt.lat);
 
             pt.time = readCompeTime(values[4] + " " + values[5], true);
@@ -326,6 +416,7 @@ void CGisItemTrk::readTowNav(const QString& filename)
         }
         }
     }
+    file.close();
 
     trk.segs << seg;
 
@@ -336,4 +427,270 @@ void CGisItemTrk::readTowNav(const QString& filename)
     }
 
     deriveSecondaryData();
+}
+
+
+void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
+{
+    QString name = getName();
+    name = name.replace(" ","_");
+
+    QString comment = getComment();
+    comment = removeHtml(comment);
+    if(comment.isEmpty())
+    {
+        comment = getDescription();
+        comment = removeHtml(comment);
+    }
+    comment = comment.replace("\n","%0A%0D");
+
+    QStringList list;
+    list << "W";
+    list << name;
+    list << "A";
+    list << (wpt.lat > 0 ? QString("%1%2N") : QString("%1%2S")).arg(wpt.lat,0,'f').arg(QChar(186));
+    list << (wpt.lon > 0 ? QString("%1%2E") : QString("%1%2W")).arg(wpt.lon,0,'f').arg(QChar(186));
+    list << writeCompeTime(wpt.time, false);
+    list << QString("%1").arg(wpt.ele == NOINT ? 0 : wpt.ele);
+
+    out << list.join(" ") << " ";
+    out << comment << endl;
+
+    list.clear();
+    list << iconQlGt2TwoNav(getIconName());
+    list << "0";                 //test position
+    list << "-1.0";
+    list << "0";
+    list << QString("%1").arg(QColor(Qt::darkBlue).value());
+    list << "1";
+    list << "37";                // 1 Name 2 Beschreibung 4 Symbol 8 Hhe 16 URL 32 Radius
+    list << "";                  //wpt->link;
+    list << QString("%1").arg(proximity == NOFLOAT ? 0 : proximity,0,'f');
+    list << getKey().item;
+
+    out << "w ";
+    out << list.join(",");
+    out << endl;
+
+    foreach(const image_t &img, images)
+    {
+        QString fn = img.info;
+        if(fn.isEmpty())
+        {
+            fn = QString("picture.png");
+        }
+
+        QFileInfo fi(fn);
+
+        if(!(fi.completeSuffix().toLower() == "png"))
+        {
+            fn = fi.baseName() + ".png";
+        }
+
+        fn = makeUniqueName(fn, dir);
+        img.pixmap.save(dir.absoluteFilePath(fn));
+        out << "a " << ".\\" << fn << endl;
+    }
+
+    if(isGeocache())
+    {
+        // write geocache data
+        QDomDocument doc;
+        QDomElement gpxCache = doc.createElement("groundspeak:cache");
+        writeGcExt(gpxCache);
+        doc.appendChild(gpxCache);
+
+        out << "e" << endl;
+        out << doc.toString();
+        out << "ee" << endl;
+    }
+}
+
+void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
+{
+    wpt_t wpt;
+    QString line("start");
+    QFile file(filename);
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    in.setCodec(QTextCodec::codecForName("UTF-8"));
+
+    while(!line.isEmpty())
+    {
+        line = in.readLine();
+
+        switch(line[0].toLatin1())
+        {
+        case 'B':
+        {
+            QString name        = line.mid(1).simplified();
+            QTextCodec * codec  = QTextCodec::codecForName(name.toLatin1());
+            if(codec)
+            {
+                in.setCodec(codec);
+            }
+            break;
+        }
+
+        case 'G':
+        {
+            QString name  = line.mid(1).simplified();
+            if(name != "WGS 84")
+            {
+                QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                return;
+            }
+            break;
+        }
+
+        case 'U':
+        {
+            QString name  = line.mid(1).simplified();
+            if(name != "1")
+            {
+                QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                return;
+            }
+            break;
+        }
+
+        case 'W':
+        {
+            if(wpt.valid)
+            {
+                new CGisItemWpt(wpt, this);
+            }
+
+            wpt = wpt_t();
+            QStringList values = line.split(' ', QString::SkipEmptyParts);
+
+            wpt.name = values[1];
+
+            QString lat = values[3].replace(QChar(186),"");
+            QString lon = values[4].replace(QChar(186),"");
+            GPS_Math_Str_To_Deg(lat + " " + lon, wpt.lon, wpt.lat);
+
+            wpt.time = readCompeTime(values[5] + " " + values[6], false);
+            wpt.ele  = values[7].toFloat();
+
+            if(values.size() > 7)
+            {
+                QStringList list = values.mid(8);
+                wpt.comment = list.join(" ");
+            }
+
+            break;
+        }
+
+        case 'w':
+        {
+            QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
+
+            wpt.symbol  = iconTwoNav2QlGt(values[0]);
+
+            wpt.url     = values[7];
+            wpt.prox    = values[8].toFloat();
+            wpt.key     = values[9];
+
+            if(wpt.prox == 0)
+            {
+                wpt.prox = NOFLOAT;
+            }
+            if(wpt.ele == 0)
+            {
+                wpt.ele = NOINT;
+            }
+            if(wpt.key == "0")
+            {
+                wpt.key.clear();
+            }
+
+            wpt.name = wpt.name.replace("_", " ");
+
+            wpt.valid = true;
+            //            qDebug() << tmpwpt.name << tmpwpt.symbol << tmpwpt.time << tmpwpt.lon << tmpwpt.lat << tmpwpt.ele << tmpwpt.prox << tmpwpt.comment << tmpwpt.key;
+            break;
+        }
+
+        case 'e':
+        {
+            QString str;
+
+            while(!in.atEnd())
+            {
+                line = in.readLine();
+                if(line == "ee")
+                {
+                    break;
+                }
+
+                str += line;
+            }
+
+
+            QString errorMsg;
+            int errorLine = 0;
+            int errorColumn = 0;
+            wpt.gpx.setContent(str, &errorMsg, &errorLine, &errorColumn);
+            break;
+        }
+
+        case 'a':
+        {
+            img_t img;
+            QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
+            QString fn = values[0].simplified();
+
+#ifndef WIN32
+            fn = fn.replace("\\","/");
+#endif
+            QFileInfo fi(dir.absoluteFilePath(fn));
+            img.image.load(dir.absoluteFilePath(fn));
+            if(!img.image.isNull())
+            {
+                img.filename    = fi.fileName();
+                img.info        = fi.baseName();
+                wpt.images << img;
+            }
+
+            break;
+        }
+        }
+    }
+
+    if(wpt.valid)
+    {
+        new CGisItemWpt(wpt, this);
+    }
+}
+
+void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t &tnvWpt)
+{
+    wpt.lon     = tnvWpt.lon;
+    wpt.lat     = tnvWpt.lat;
+    wpt.ele     = tnvWpt.ele;
+    proximity   = tnvWpt.prox;
+    wpt.time    = tnvWpt.time;
+    wpt.name    = tnvWpt.name;
+    wpt.cmt     = tnvWpt.comment;
+    wpt.sym     = tnvWpt.symbol;
+    key.item    = tnvWpt.key;
+
+    foreach(const CTwoNavProject::img_t& img, tnvWpt.images)
+    {
+        CGisItemWpt::image_t image;
+        image.fileName = img.filename;
+        image.info = img.info;
+        image.pixmap = img.image;
+        images << image;
+    }
+
+    const QDomNode& xmlCache = tnvWpt.gpx.namedItem("groundspeak:cache");
+    if(!xmlCache.isNull())
+    {
+        readGcExt(xmlCache);
+    }
+
+
+    setIcon();
 }

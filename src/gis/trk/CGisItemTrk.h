@@ -114,7 +114,27 @@ public:
 
     virtual ~CGisItemTrk();
 
+    /**
+       @brief Save track to GPX tree
+       @param gpx   The <gpx> node to append by the track
+     */
+    void save(QDomNode& gpx);
+    /**
+       @brief Save track to TwoNav track file
+       @param dir   the path to store the file
+     */
+    void saveTwoNav(const QString& filename);
+    /**
+       @brief Read serialized track from a binary data stream
+       @param stream  the data stream to read from
+       @return A reference to the stream
+     */
     QDataStream& operator<<(QDataStream& stream);
+    /**
+       @brief Serialize track into a binary data stream
+       @param stream  the data stream to write to.
+       @return A reference to the stream
+     */
     QDataStream& operator>>(QDataStream& stream);
 
     const QString& getName() const
@@ -178,16 +198,6 @@ public:
     void drawHighlight(QPainter& p);
     void drawRange(QPainter& p);
 
-    /**
-       @brief Save track to GPX tree
-       @param gpx   The <gpx> node to append by the track
-     */
-    void save(QDomNode& gpx);
-    /**
-       @brief Save track to TwoNav track file
-       @param dir   the path to store the file
-     */
-    void saveTwoNav(const QString& filename);
     /**
        @brief Switch user focus on and off.
 
@@ -400,7 +410,7 @@ private:
        @brief Restore track from TwoNav *trk file
        @param filename
      */
-    void readTowNav(const QString& filename);
+    void readTwoNav(const QString& filename);
     /**
        @brief Derive secondary data from the track data
 

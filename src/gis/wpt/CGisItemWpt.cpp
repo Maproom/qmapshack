@@ -141,6 +141,19 @@ CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 }
 
+CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * project)
+    : IGisItem(project, eTypeWpt, -1)
+    , proximity(NOFLOAT)
+    , posScreen(NOPOINTF)
+{
+    readTwoNav(tnvWpt);
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
+    genKey();
+    setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
 CGisItemWpt::~CGisItemWpt()
 {
 }

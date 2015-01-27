@@ -621,6 +621,8 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.hasData = true;
 }
 
+
+
 void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
 {
     QString str;

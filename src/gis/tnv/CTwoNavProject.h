@@ -33,14 +33,44 @@ public:
     CTwoNavProject(const QString &filename, IDevice * parent);
     virtual ~CTwoNavProject();
 
+    struct img_t
+    {
+        QString filename;
+        QString info;
+        QImage image;
+    };
+
+    struct wpt_t
+    {
+        wpt_t() : valid(false), lon(0), lat(0), ele(0), prox(0)
+        {
+        }
+        bool valid;
+        QDateTime time;
+        QString name;
+        QString comment;
+        QString symbol;
+        QString key;
+        QString url;
+
+        qreal lon;
+        qreal lat;
+        qreal ele;
+        qreal prox;
+
+        QDomDocument gpx;
+
+        QList<img_t> images;
+    };
+
+
     bool save();
     bool saveAs();
 
 private:
     void load(const QString& filename);
-
-    void saveWpts(QList<CGisItemWpt *> &wpts, const QDir& dir);
-    void saveGeoCaches(QList<CGisItemWpt *> &wpts, const QDir& dir);
+    void loadWpts(const QString& filename, const QDir& dir);
+    void saveWpts(QList<CGisItemWpt *> &wpts, const QString &filename, const QDir& dir);
 };
 
 #endif //CTWONAVPROJECT_H

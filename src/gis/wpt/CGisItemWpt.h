@@ -20,6 +20,7 @@
 #define CGISITEMWPT_H
 
 #include "gis/IGisItem.h"
+#include "gis/tnv/CTwoNavProject.h"
 
 #include <QPointer>
 
@@ -28,6 +29,8 @@ class QDomNode;
 class CScrOptWpt;
 class QSqlDatabase;
 class CQlgtWpt;
+class QTextEdit;
+class QDir;
 
 class CGisItemWpt : public IGisItem
 {
@@ -130,12 +133,38 @@ public:
      */
     CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project);
 
+    /**
+       @brief Read item from text stream with TwoNav encoding
+       @param tnvWpt
+       @param project
+     */
+    CGisItemWpt(const CTwoNavProject::wpt_t& tnvWpt, IGisProject * project);
+
     CGisItemWpt(const CQlgtWpt& wpt1);
 
     virtual ~CGisItemWpt();
 
+    /**
+       @brief Save waypoint to GPX tree
+       @param gpx   The <gpx> node to append by the waypoint
+     */
     void save(QDomNode& gpx);
+    /**
+       @brief Save waypoint to TwoNav waypoint file
+       @param out   the text stream to write to
+     */
+    void saveTwoNav(QTextStream &out, const QDir &dir);
+    /**
+       @brief Read serialized waypoint from a binary data stream
+       @param stream  the data stream to read from
+       @return A reference to the stream
+     */
     QDataStream& operator<<(QDataStream& stream);
+    /**
+       @brief Serialize waypoint into a binary data stream
+       @param stream  the data stream to write to.
+       @return A reference to the stream
+     */
     QDataStream& operator>>(QDataStream& stream);
 
     void setName(const QString& str);
@@ -217,11 +246,13 @@ public:
     static void getNewPosition(QPointF &pos);
 
 private:
+    void setIcon();
     void setSymbol();
     void readGpx(const QDomNode& xml);
-    void setIcon();
+    void readTwoNav(const CTwoNavProject::wpt_t &tnvWpt);
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
+
 
     static key_t keyUserFocus;
     static QString lastName;

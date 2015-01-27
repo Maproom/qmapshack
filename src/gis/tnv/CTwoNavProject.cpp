@@ -26,6 +26,7 @@
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
+#include <proj_api.h>
 
 
 
@@ -88,7 +89,7 @@ bool CTwoNavProject::save()
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk)
         {
-            QString fn = getName();
+            QString fn = trk->getName();
             fn = fn.remove(QRegExp("[^A-Za-z0-9_]"));
             fn = dir.absoluteFilePath(fn + ".trk");
 
@@ -110,11 +111,11 @@ bool CTwoNavProject::save()
 
     if(!wpts.isEmpty())
     {
-        saveWpts(wpts, dir);
+        saveWpts(wpts, dir.absoluteFilePath("waypoints.wpt"), dir);
     }
     if(!geocaches.isEmpty())
     {
-        saveGeoCaches(geocaches, dir);
+        saveWpts(geocaches, dir.absoluteFilePath("geocaches.wpt"), dir);
     }
 
     umount();
@@ -155,13 +156,53 @@ bool CTwoNavProject::saveAs()
 }
 
 
-void CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QDir& dir)
+void CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename, const QDir& dir)
 {
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out.setCodec(QTextCodec::codecForName("UTF-8"));
+
+    qreal north = -90.0;
+    qreal south = 90.0;
+    qreal west = 180.0;
+    qreal east = -180.0;
+
+    foreach(CGisItemWpt * wpt, wpts)
+    {
+        QPointF pt = wpt->getPosition();
+
+        if(north < pt.y())
+        {
+            north = pt.y();
+        }
+        if(south > pt.y())
+        {
+            south = pt.y();
+        }
+        if(west >  pt.x())
+        {
+            west  = pt.x();
+        }
+        if(east <  pt.x())
+        {
+            east  = pt.x();
+        }
+    }
+
+    out << "B  UTF-8" << endl;
+    out << "G  WGS 84" << endl;
+    out << "U  1" << endl;
+    out << "z " << west << ", " << south << ", " << east << ", " << north << endl;
+
+    foreach(CGisItemWpt * wpt, wpts)
+    {
+        wpt->saveTwoNav(out, dir);
+    }
+
+    file.close();
 }
 
-void CTwoNavProject::saveGeoCaches(QList<CGisItemWpt*>& wpts, const QDir& dir)
-{
-}
 
 
 void CTwoNavProject::load(const QString& filename)
@@ -190,10 +231,9 @@ void CTwoNavProject::load(const QString& filename)
         }
         else if(fi.suffix().toLower() == "wpt")
         {
+            loadWpts(dir.absoluteFilePath(entry), dir);
         }
     }
 }
-
-
 
 

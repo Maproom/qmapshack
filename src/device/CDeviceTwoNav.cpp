@@ -116,6 +116,7 @@ void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
 
     if(!proj->save())
     {
+        proj->remove();
         delete proj;
         return;
     }

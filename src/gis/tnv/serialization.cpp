@@ -68,6 +68,19 @@ static QStringList writeCompeTime( const QDateTime& t, bool isTrack)
     QString dateFormat;
     QString monthStr;
 
+    if(!t.isValid())
+    {
+        if(isTrack)
+        {
+            result << "01-Jan-1970" << "00:00:00.000";
+        }
+        else
+        {
+            result << "01-Jan-1970" << "00:00:00";
+        }
+        return result;
+    }
+
     QDateTime timestamp = t.toTimeSpec(Qt::UTC);
 
     switch(timestamp.date().month())
@@ -270,10 +283,15 @@ static QString makeUniqueName(const QString& name, const QDir& dir)
 
 
 
-void CGisItemTrk::saveTwoNav(const QString &filename)
+bool CGisItemTrk::saveTwoNav(const QString &filename)
 {
     QFile file(filename);
-    file.open(QIODevice::WriteOnly);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        QMessageBox::critical(0, QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename), QMessageBox::Abort);
+        return false;
+    }
+
     QTextStream out(&file);
     out.setCodec(QTextCodec::codecForName("UTF-8"));
     out << "B  UTF-8" << endl;
@@ -327,14 +345,20 @@ void CGisItemTrk::saveTwoNav(const QString &filename)
             out << list.join(" ") << endl;
         }
     }
+
+    return true;
 }
 
-void CGisItemTrk::readTwoNav(const QString& filename)
+bool CGisItemTrk::readTwoNav(const QString& filename)
 {
     QString line("start");
 
     QFile file(filename);
-    file.open(QIODevice::ReadOnly);
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
+        return false;
+    }
     QTextStream in(&file);
     in.setCodec(QTextCodec::codecForName("UTF-8"));
 
@@ -362,7 +386,7 @@ void CGisItemTrk::readTwoNav(const QString& filename)
             if(name != "WGS 84")
             {
                 QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
-                return;
+                return false;
             }
             break;
         }
@@ -373,7 +397,7 @@ void CGisItemTrk::readTwoNav(const QString& filename)
             if(name != "1")
             {
                 QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
-                return;
+                return false;
             }
             break;
         }
@@ -390,6 +414,12 @@ void CGisItemTrk::readTwoNav(const QString& filename)
         {
             trkpt_t pt;
             QStringList values = line.split(' ', QString::SkipEmptyParts);
+
+            if(values.size() < 8)
+            {
+                QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                return false;
+            }
 
             QString lat = values[2].replace(QChar(186),"");
             QString lon = values[3].replace(QChar(186),"");
@@ -427,6 +457,8 @@ void CGisItemTrk::readTwoNav(const QString& filename)
     }
 
     deriveSecondaryData();
+
+    return true;
 }
 
 
@@ -506,12 +538,16 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     }
 }
 
-void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
+bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 {
     wpt_t wpt;
     QString line("start");
     QFile file(filename);
-    file.open(QIODevice::ReadOnly);
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
+        return false;
+    }
     QTextStream in(&file);
     in.setCodec(QTextCodec::codecForName("UTF-8"));
 
@@ -538,7 +574,7 @@ void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             if(name != "WGS 84")
             {
                 QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
-                return;
+                return false;
             }
             break;
         }
@@ -549,7 +585,7 @@ void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             if(name != "1")
             {
                 QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
-                return;
+                return false;
             }
             break;
         }
@@ -563,6 +599,12 @@ void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             wpt = wpt_t();
             QStringList values = line.split(' ', QString::SkipEmptyParts);
+
+            if(values.size() < 8)
+            {
+                QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                return false;
+            }
 
             wpt.name = values[1];
 
@@ -586,6 +628,13 @@ void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
         {
             QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
 
+            if(values.size() < 10)
+            {
+                QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                return false;
+            }
+
+
             wpt.symbol  = iconTwoNav2QlGt(values[0]);
 
             wpt.url     = values[7];
@@ -608,7 +657,6 @@ void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             wpt.name = wpt.name.replace("_", " ");
 
             wpt.valid = true;
-            //            qDebug() << tmpwpt.name << tmpwpt.symbol << tmpwpt.time << tmpwpt.lon << tmpwpt.lat << tmpwpt.ele << tmpwpt.prox << tmpwpt.comment << tmpwpt.key;
             break;
         }
 
@@ -639,6 +687,12 @@ void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
         {
             img_t img;
             QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
+            if(values.size() < 1)
+            {
+                QMessageBox::information(0,QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                return false;
+            }
+
             QString fn = values[0].simplified();
 
 #ifndef WIN32
@@ -662,6 +716,8 @@ void CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
     {
         new CGisItemWpt(wpt, this);
     }
+
+    return true;
 }
 
 void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t &tnvWpt)
@@ -679,9 +735,9 @@ void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t &tnvWpt)
     foreach(const CTwoNavProject::img_t& img, tnvWpt.images)
     {
         CGisItemWpt::image_t image;
-        image.fileName = img.filename;
-        image.info = img.info;
-        image.pixmap = img.image;
+        image.fileName  = img.filename;
+        image.info      = img.info;
+        image.pixmap    = img.image;
         images << image;
     }
 

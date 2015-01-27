@@ -4002,7 +4002,7 @@ Název souboru: %1</translation>
         <location filename="../gis/db/CDBProject.cpp" line="125"/>
         <location filename="../gis/gpx/CGpxProject.cpp" line="196"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="93"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="130"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="156"/>
         <source>Save GIS data to...</source>
         <translation>Uložit data GIS do...</translation>
     </message>
@@ -4281,7 +4281,7 @@ Název souboru: %1</translation>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="520"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="139"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1444"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="360"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="373"/>
         <source>Changed links</source>
         <translation>Změněné odkazy</translation>
     </message>
@@ -4292,18 +4292,18 @@ Název souboru: %1</translation>
         <translation>Změněná barva</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="229"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="242"/>
         <source>Elevation: %1 %2</source>
         <translation>Výška: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="240"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="253"/>
         <source>Proximity: %1 %2</source>
         <translation>Blízkost: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1426"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="311"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="324"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
@@ -4313,53 +4313,53 @@ Název souboru: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="959"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1018"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1164"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="190"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Edit name...</source>
         <translation>Upravit název...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="190"/>
         <source>Enter new waypoint name.</source>
         <translation>Zadat nový název pro cestovní bod.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="318"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="331"/>
         <source>Changed position</source>
         <translation>Změněná poloha</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="324"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
         <source>Changed elevation</source>
         <translation>Změněná výška</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="343"/>
         <source>Changed proximity</source>
         <translation>Změněná blízkost</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="342"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="355"/>
         <source>Changed icon</source>
         <translation>Změněná ikona</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="366"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="379"/>
         <source>Changed images</source>
         <translation>Změněné obrázky</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="127"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1432"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="361"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="133"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1438"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="354"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="367"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
@@ -4516,14 +4516,28 @@ Název souboru: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="273"/>
-        <location filename="../gis/tnv/serialization.cpp" line="284"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="84"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="189"/>
+        <location filename="../gis/tnv/serialization.cpp" line="291"/>
+        <location filename="../gis/tnv/serialization.cpp" line="384"/>
+        <location filename="../gis/tnv/serialization.cpp" line="395"/>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
+        <location filename="../gis/tnv/serialization.cpp" line="571"/>
         <source>Error...</source>
         <translation type="unfinished">Chyba...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="273"/>
-        <location filename="../gis/tnv/serialization.cpp" line="284"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="84"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="189"/>
+        <location filename="../gis/tnv/serialization.cpp" line="291"/>
+        <source>Failed to open %1.</source>
+        <translation type="unfinished">Nepodařilo se otevřít %1.</translation>
+    </message>
+    <message>
+        <location filename="../gis/tnv/serialization.cpp" line="384"/>
+        <location filename="../gis/tnv/serialization.cpp" line="395"/>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
+        <location filename="../gis/tnv/serialization.cpp" line="571"/>
         <source>Only support lon/lat WGS 84 format.</source>
         <translation type="unfinished"></translation>
     </message>

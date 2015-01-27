@@ -213,7 +213,10 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
-    readTwoNav(filename);
+    if(!readTwoNav(filename))
+    {
+        throw -1;
+    }
     // --- stop read and process data ----
 
     setupHistory();

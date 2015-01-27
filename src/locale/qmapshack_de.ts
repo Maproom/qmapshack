@@ -4112,7 +4112,7 @@ Dateiname: %1</translation>
         <location filename="../gis/db/CDBProject.cpp" line="125"/>
         <location filename="../gis/gpx/CGpxProject.cpp" line="196"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="93"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="130"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="156"/>
         <source>Save GIS data to...</source>
         <translation>GIS Daten speichern in...</translation>
     </message>
@@ -4342,7 +4342,7 @@ Dateiname: %1</translation>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="520"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="139"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1444"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="360"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="373"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
@@ -4358,69 +4358,69 @@ Dateiname: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="959"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1018"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1164"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="190"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="106"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="190"/>
         <source>Enter new waypoint name.</source>
         <translation>Name eingeben.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="229"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="242"/>
         <source>Elevation: %1 %2</source>
         <translation>Höhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="240"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="253"/>
         <source>Proximity: %1 %2</source>
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1426"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="311"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="324"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="318"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="331"/>
         <source>Changed position</source>
         <translation>Position geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="324"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
         <source>Changed elevation</source>
         <translation>Höhe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="343"/>
         <source>Changed proximity</source>
         <translation>Abstandsalarm geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="342"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="355"/>
         <source>Changed icon</source>
         <translation>Symbol geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="366"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="379"/>
         <source>Changed images</source>
         <translation>Bilder geändert</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="127"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1432"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="361"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="133"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1438"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="354"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="367"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
@@ -4634,14 +4634,28 @@ Dateiname: %1</translation>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="273"/>
-        <location filename="../gis/tnv/serialization.cpp" line="284"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="84"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="189"/>
+        <location filename="../gis/tnv/serialization.cpp" line="291"/>
+        <location filename="../gis/tnv/serialization.cpp" line="384"/>
+        <location filename="../gis/tnv/serialization.cpp" line="395"/>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
+        <location filename="../gis/tnv/serialization.cpp" line="571"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="273"/>
-        <location filename="../gis/tnv/serialization.cpp" line="284"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="84"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="189"/>
+        <location filename="../gis/tnv/serialization.cpp" line="291"/>
+        <source>Failed to open %1.</source>
+        <translation>Die Datei %1 konnte nicht geöffnet werden.</translation>
+    </message>
+    <message>
+        <location filename="../gis/tnv/serialization.cpp" line="384"/>
+        <location filename="../gis/tnv/serialization.cpp" line="395"/>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
+        <location filename="../gis/tnv/serialization.cpp" line="571"/>
         <source>Only support lon/lat WGS 84 format.</source>
         <translation>Es wird nur lon/lat WGS 84 als Format unterstützt.</translation>
     </message>

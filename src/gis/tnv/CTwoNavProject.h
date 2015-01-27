@@ -68,9 +68,9 @@ public:
     bool saveAs();
 
 private:
-    void load(const QString& filename);
-    void loadWpts(const QString& filename, const QDir& dir);
-    void saveWpts(QList<CGisItemWpt *> &wpts, const QString &filename, const QDir& dir);
+    bool load(const QString& filename);
+    bool loadWpts(const QString& filename, const QDir& dir);
+    bool saveWpts(QList<CGisItemWpt *> &wpts, const QString &filename, const QDir& dir);
 };
 
 #endif //CTWONAVPROJECT_H

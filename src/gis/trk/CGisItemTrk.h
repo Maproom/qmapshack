@@ -123,7 +123,7 @@ public:
        @brief Save track to TwoNav track file
        @param dir   the path to store the file
      */
-    void saveTwoNav(const QString& filename);
+    bool saveTwoNav(const QString& filename);
     /**
        @brief Read serialized track from a binary data stream
        @param stream  the data stream to read from
@@ -410,7 +410,7 @@ private:
        @brief Restore track from TwoNav *trk file
        @param filename
      */
-    void readTwoNav(const QString& filename);
+    bool readTwoNav(const QString& filename);
     /**
        @brief Derive secondary data from the track data
 

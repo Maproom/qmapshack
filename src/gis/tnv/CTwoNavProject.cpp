@@ -76,48 +76,73 @@ bool CTwoNavProject::save()
     QDir().mkpath(filename);
     QDir dir(filename);
 
-    QFile fileKey(dir.absoluteFilePath(QString("%1.key").arg(getKey())));
-    fileKey.open(QIODevice::WriteOnly);
-    fileKey.close();
-
-    QList<CGisItemWpt*> wpts;
-    QList<CGisItemWpt*> geocaches;
-    const int N = childCount();
-    for(int n = 0; n < N; n++)
+    try
     {
-        QTreeWidgetItem * item = child(n);
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
-        if(trk)
+        QFile fileKey(dir.absoluteFilePath(QString("%1.key").arg(getKey())));
+        if(!fileKey.open(QIODevice::WriteOnly))
         {
-            QString fn = trk->getName();
-            fn = fn.remove(QRegExp("[^A-Za-z0-9_]"));
-            fn = dir.absoluteFilePath(fn + ".trk");
-
-            trk->saveTwoNav(fn);
+            QMessageBox::critical(0, QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(fileKey.fileName()), QMessageBox::Abort);
+            throw -1;
         }
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-        if(wpt)
+        fileKey.close();
+
+        QList<CGisItemWpt*> wpts;
+        QList<CGisItemWpt*> geocaches;
+        const int N = childCount();
+        for(int n = 0; n < N; n++)
         {
-            if(wpt->isGeocache())
+            QTreeWidgetItem * item = child(n);
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+            if(trk)
             {
-                geocaches << wpt;
+                QString fn = trk->getName();
+                fn = fn.remove(QRegExp("[^A-Za-z0-9_]"));
+                fn = dir.absoluteFilePath(fn + ".trk");
+
+                if(!trk->saveTwoNav(fn))
+                {
+                    throw -1;
+                }
             }
-            else
+            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+            if(wpt)
             {
-                wpts << wpt;
+                if(wpt->isGeocache())
+                {
+                    geocaches << wpt;
+                }
+                else
+                {
+                    wpts << wpt;
+                }
+            }
+        }
+
+        if(!wpts.isEmpty())
+        {
+            if(!saveWpts(wpts, dir.absoluteFilePath("waypoints.wpt"), dir))
+            {
+                throw -1;
+            }
+        }
+
+        if(!geocaches.isEmpty())
+        {
+            if(!saveWpts(geocaches, dir.absoluteFilePath("geocaches.wpt"), dir))
+            {
+                throw -1;
             }
         }
     }
-
-    if(!wpts.isEmpty())
+    catch(int)
     {
-        saveWpts(wpts, dir.absoluteFilePath("waypoints.wpt"), dir);
-    }
-    if(!geocaches.isEmpty())
-    {
-        saveWpts(geocaches, dir.absoluteFilePath("geocaches.wpt"), dir);
+        res = false;
     }
 
+    if(res)
+    {
+        markAsSaved();
+    }
     umount();
     return res;
 }
@@ -134,7 +159,6 @@ bool CTwoNavProject::saveAs()
     {
         return false;
     }
-
 
     bool res = false;
     if(filter == "*.gpx")
@@ -156,10 +180,14 @@ bool CTwoNavProject::saveAs()
 }
 
 
-void CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename, const QDir& dir)
+bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename, const QDir& dir)
 {
     QFile file(filename);
-    file.open(QIODevice::WriteOnly);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        QMessageBox::critical(0, QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename), QMessageBox::Abort);
+        return false;
+    }
     QTextStream out(&file);
     out.setCodec(QTextCodec::codecForName("UTF-8"));
 
@@ -201,11 +229,13 @@ void CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
     }
 
     file.close();
+
+    return true;
 }
 
 
 
-void CTwoNavProject::load(const QString& filename)
+bool CTwoNavProject::load(const QString& filename)
 {
     QDir dir(filename);
 
@@ -227,13 +257,25 @@ void CTwoNavProject::load(const QString& filename)
 
         if(fi.suffix().toLower() == "trk")
         {
-            new CGisItemTrk(dir.absoluteFilePath(entry), this);
+            try
+            {
+                new CGisItemTrk(dir.absoluteFilePath(entry), this);
+            }
+            catch(int)
+            {
+                return false;
+            }
         }
         else if(fi.suffix().toLower() == "wpt")
         {
-            loadWpts(dir.absoluteFilePath(entry), dir);
+            if(!loadWpts(dir.absoluteFilePath(entry), dir))
+            {
+                return false;
+            }
         }
     }
+
+    return true;
 }
 
 

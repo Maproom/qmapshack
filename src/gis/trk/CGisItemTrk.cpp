@@ -1308,7 +1308,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         // create info box
         int w = rectText.width()  + 5 + 5;
-        int h = rectText.height() + 5 + 5 + 2*(fm.height() + 8);
+        int h = rectText.height() + 5 + (fm.height() + 8);
+        if(totalElapsedSeconds != 0)
+        {
+            h += 5 + fm.height() + 8;
+        }
 
 
         QRect box(0, 0, w, h);
@@ -1333,40 +1337,54 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         p.save();
         p.translate(box.topLeft());
+
         // draw progress bar distance
         p.translate(5,5);
-        QRect rectBar1(0,0,rectText.width(), 5);
-        p.setPen(Qt::black);
-        p.setBrush(Qt::NoBrush);
+        QRect rectBar1(0,0,rectText.width(), fm.height());
+        p.setPen(QColor(150,150,255));
+        p.setBrush(QColor(150,150,255));
         p.drawRect(rectBar1);
         qreal d = mouseMoveFocus->distance * rectBar1.width() / totalDistance;
-        p.drawRect(d-1,-1, 3, 7);
+        p.setPen(QColor(150,255,150));
+        p.setBrush(QColor(150,255,150));
+        p.drawRect(0,0,d,fm.height());
+
 
         IUnit::self().meter2distance(mouseMoveFocus->distance, val1, unit1);
         IUnit::self().meter2distance(totalDistance - mouseMoveFocus->distance, val2, unit2);
         p.setPen(Qt::darkBlue);
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->distance * 100 / totalDistance, 0, 'f', 0));
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+        p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+        p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->distance * 100 / totalDistance, 0, 'f', 0));
+        p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
 
         // draw progress bar time
-        p.translate(0,fm.height() + 8);
-        QRect rectBar2(0,0,rectText.width(), 5);
-        p.setPen(Qt::black);
-        p.setBrush(Qt::NoBrush);
-        p.drawRect(rectBar2);
-        qreal t = mouseMoveFocus->elapsedSecondsMoving * rectBar2.width() / totalElapsedSecondsMoving;
-        p.drawRect(t-1,-1, 3, 7);
+        if(totalElapsedSeconds != 0)
+        {
+            p.translate(0,fm.height() + 5);
+            QRect rectBar2(0,0,rectText.width(), fm.height());
+            p.setPen(QColor(150,150,255));
+            p.setBrush(QColor(150,150,255));
+            p.drawRect(rectBar2);
+            qreal t = mouseMoveFocus->elapsedSecondsMoving * rectBar2.width() / totalElapsedSecondsMoving;
+            p.setPen(QColor(150,255,150));
+            p.setBrush(QColor(150,255,150));
+            p.drawRect(0,0,t,fm.height());
 
-        IUnit::self().seconds2time(mouseMoveFocus->elapsedSecondsMoving, val1, unit1);
-        IUnit::self().seconds2time(totalElapsedSecondsMoving - mouseMoveFocus->elapsedSecondsMoving, val2, unit2);
-        p.setPen(Qt::darkBlue);
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
-        p.drawText(QRect(0,7,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+            IUnit::self().seconds2time(mouseMoveFocus->elapsedSecondsMoving, val1, unit1);
+            IUnit::self().seconds2time(totalElapsedSecondsMoving - mouseMoveFocus->elapsedSecondsMoving, val2, unit2);
+            p.setPen(Qt::darkBlue);
+            p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+            p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
+            p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
 
+            p.translate(0,fm.height() + 5);
+        }
+        else
+        {
+            p.translate(0, 5);
+        }
         // draw text
-        p.translate(0,fm.height() + 8);
+        p.translate(0, 3);
         p.setPen(Qt::darkBlue);
         p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap,str);
 

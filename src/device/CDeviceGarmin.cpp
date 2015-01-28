@@ -19,6 +19,7 @@
 #include "device/CDeviceGarmin.h"
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/wpt/CGisItemWpt.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -131,5 +132,72 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
     {
         delete gpx;
         return;
+    }
+}
+
+void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
+{
+    if(wpt.isGeocache())
+    {
+
+    }
+    else
+    {
+        const QDir dirImages(dir.absoluteFilePath(pathPictures));
+        const QString& key = wpt.getKey().item;
+        const QList<CGisItemWpt::image_t>& images = wpt.getImages();
+        QList<IGisItem::link_t> links;
+
+        int cnt = 0;
+        QString filename;
+        foreach(const CGisItemWpt::image_t& image, images)
+        {
+            filename = QString("%1.%2.jpg").arg(key).arg(cnt);
+            image.pixmap.save(dirImages.absoluteFilePath(filename));
+
+            IGisItem::link_t link;
+            link.uri  = pathPictures + "/" + filename;
+            link.text = QObject::tr("Picture%1").arg(cnt);
+            link.type = "Garmin";
+
+            links << link;
+
+            cnt++;
+        }
+
+        wpt.appendLinks(links);
+    }
+}
+
+void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
+{
+    if(wpt.isGeocache())
+    {
+
+    }
+    else
+    {
+        const QList<IGisItem::link_t>& links = wpt.getLinks();
+        QList<CGisItemWpt::image_t> images;
+
+        foreach(const IGisItem::link_t& link, links)
+        {
+            if(link.type != "Garmin")
+            {
+                continue;
+            }
+            CGisItemWpt::image_t image;
+            image.fileName = link.text;
+            image.pixmap.load(dir.absoluteFilePath(link.uri.toString()));
+
+            images << image;
+        }
+
+        if(!images.isEmpty())
+        {
+            wpt.appendImages(images);
+            wpt.removeLinksByType("Garmin");
+        }
+
     }
 }

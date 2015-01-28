@@ -21,6 +21,8 @@
 
 #include "device/IDevice.h"
 
+class CGisItemWpt;
+
 class CDeviceGarmin : public IDevice
 {
 public:
@@ -28,6 +30,9 @@ public:
     virtual ~CDeviceGarmin();
 
     void insertCopyOfProject(IGisProject * project);
+
+    void saveImages(CGisItemWpt& wpt);
+    void loadImages(CGisItemWpt& wpt);
 
 private:
     QString id;

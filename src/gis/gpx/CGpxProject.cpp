@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "device/IDevice.h"
+#include "device/CDeviceGarmin.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
@@ -153,7 +154,19 @@ void CGpxProject::loadGpx(const QString& filename)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlWpt = xmlWpts.item(n);
-        new CGisItemWpt(xmlWpt, this);
+        CGisItemWpt * wpt = new CGisItemWpt(xmlWpt, this);
+
+        /*
+            Special care for waypoints stored on Garmin devices. Images attached
+            to the waypoint are stored in the file system of the device and written
+            as links to the waypoint. Let the device object take care of this.
+        */
+        CDeviceGarmin * garmin = dynamic_cast<CDeviceGarmin*>(parent());
+        if(garmin)
+        {
+            garmin->loadImages(*wpt);
+        }
+
     }
 
     const QDomNodeList& xmlAreas = xmlExtension.elementsByTagName("ql:area");
@@ -298,6 +311,18 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         {
             continue;
         }
+
+        /*
+            Special care for waypoints stored on Garmin devices. Images attached
+            to the waypoint are stored in the file system of the device and written
+            as links to the waypoint. Let the device object take care of this.
+        */
+        CDeviceGarmin * garmin = dynamic_cast<CDeviceGarmin*>(project.parent());
+        if(garmin)
+        {
+            garmin->saveImages(*item);
+        }
+
         item->save(gpx);
     }
     for(int i = 0; i < project.childCount(); i++)

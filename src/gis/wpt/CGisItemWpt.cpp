@@ -379,6 +379,7 @@ void CGisItemWpt::setImages(const QList<image_t>& imgs)
     changed(QObject::tr("Changed images"), "://icons/48x48/Image.png");
 }
 
+
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {
     if(posScreen == NOPOINTF)
@@ -486,4 +487,20 @@ void CGisItemWpt::drawHighlight(QPainter& p)
     }
 
     p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
+}
+
+void CGisItemWpt::removeLinksByType(const QString& type)
+{
+    QList<IGisItem::link_t>::iterator link = wpt.links.begin();
+
+    while(link != wpt.links.end())
+    {
+        if(link->type == type)
+        {
+            link = wpt.links.erase(link);
+            continue;
+        }
+
+        link++;
+    }
 }

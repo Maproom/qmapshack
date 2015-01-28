@@ -177,6 +177,35 @@ public:
     void setLinks(const QList<link_t>& links);
     void setImages(const QList<image_t>& imgs);
 
+    /**
+       @brief Silently append list of links
+
+       Devices uses links to reference multimedia content attached to the waypoint.
+       These links have to be added to the list of normal links. See removeLinksByType()
+       on how to remove these links again.
+
+       @param links  list of links.
+    */
+    void appendLinks(const QList<link_t>& links)
+    {
+        wpt.links = links + wpt.links;
+    }
+
+    /**
+       @brief Silently append list of images
+
+       This is used to restore images from a device. As these images where part of the waypoint
+       object in the first place they have to be added to the waypoint again without creating
+       a new history entry.
+
+       @param imgs  list of images
+    */
+    void appendImages(const QList<image_t>& imgs)
+    {
+        images += imgs;
+    }
+
+
     const QString& getName() const
     {
         return wpt.name;
@@ -241,9 +270,21 @@ public:
 
     void edit();
 
+    /**
+       @brief Remove all links from the waypoint's link list with a given type
+
+       This is used by devices that use links to attach multimedia items to a waypoint like images.
+       These links only make sense on the device. Therefor the links have to be removed after the
+       waypoint has been loaded from the device.
+
+       @param type
+    */
+    void removeLinksByType(const QString& type);
+
     static const QString &getNewName();
     static const QString &getNewIcon();
     static void getNewPosition(QPointF &pos);
+
 
 private:
     void setIcon();

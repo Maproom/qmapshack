@@ -26,6 +26,9 @@
 
 CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, QTreeWidget *parent)
     : IDevice(path, key, parent)
+    , pathGpx("Garmin/GPX")
+    , pathPictures("Garmin/JPEG")
+    , pathSpoilers("Garmin/GeocachePhotos")
 {
     setText(CGisListWks::eColumnName, "Garmin");
 
@@ -72,6 +75,10 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
             pathSpoilers = xmlPath.toElement().text();
         }
     }
+
+    qDebug() << dir.absoluteFilePath(pathGpx);
+    qDebug() << dir.absoluteFilePath(pathPictures);
+    qDebug() << dir.absoluteFilePath(pathSpoilers);
 
     if(!dir.exists(pathGpx))
     {
@@ -144,7 +151,7 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
     else
     {
         const QDir dirImages(dir.absoluteFilePath(pathPictures));
-        const QString& key = wpt.getKey().item;
+        const QString& key = wpt.getKey().project;
         const QList<CGisItemWpt::image_t>& images = wpt.getImages();
         QList<IGisItem::link_t> links;
 
@@ -200,4 +207,23 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
         }
 
     }
+}
+
+
+void CDeviceGarmin::removeProject(IGisProject * project)
+{
+    const QString& key = project->getKey();
+    const QDir dirImages(dir.absoluteFilePath(pathPictures));
+    QStringList entries = dirImages.entryList(QStringList("*.jpg"), QDir::Files);
+    foreach(const QString& entry, entries)
+    {
+        QString filename = dirImages.absoluteFilePath(entry);
+        QFileInfo fi(filename);
+
+        if(fi.baseName() == key)
+        {
+            QFile::remove(filename);
+        }
+    }
+
 }

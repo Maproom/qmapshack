@@ -513,6 +513,17 @@ bool IGisProject::remove()
 {
     mount();
 
+    /*
+       Check if parent is a device and give it a chance to take care of data.
+
+       e.g. Garmin devices remove images attached to the project.
+    */
+    IDevice * device = dynamic_cast<IDevice*>(parent());
+    if(device)
+    {
+        device->removeProject(this);
+    }
+
     QFileInfo fi(filename);
     if(fi.isFile())
     {

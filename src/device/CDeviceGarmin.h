@@ -34,12 +34,14 @@ public:
     void saveImages(CGisItemWpt& wpt);
     void loadImages(CGisItemWpt& wpt);
 
+    void removeProject(IGisProject * project);
+
 private:
     QString id;
     QString partno;
     QString description;
-    QString pathPictures;
     QString pathGpx;
+    QString pathPictures;    
     QString pathSpoilers;
 };
 

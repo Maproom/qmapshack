@@ -61,6 +61,8 @@ public:
 
     void insertCopyOfProject(IGisProject * project, int& lastResult);
 
+    virtual void removeProject(IGisProject * project){}
+
 protected:
     virtual void insertCopyOfProject(IGisProject * project) = 0;
     IGisProject * getProjectByKey(const QString& key);

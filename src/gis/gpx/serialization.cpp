@@ -920,7 +920,7 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     readXml(xml, "geoidheight", wpt.geoidheight);
     readXml(xml, "name", wpt.name);
     readXml(xml, "cmt", wpt.cmt);
-    readXml(xml, "desc", wpt.desc);
+    readXml(xml, "desc", wpt.desc);    
     readXml(xml, "src", wpt.src);
     readXml(xml, "link", wpt.links);
     readXml(xml, "sym", wpt.sym);

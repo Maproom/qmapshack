@@ -23,6 +23,7 @@
 #include <QDialog>
 
 class CGisItemWpt;
+class QNetworkAccessManager;
 
 class CDetailsGeoCache : public QDialog, private Ui::IDetailsGeoCache
 {
@@ -34,9 +35,13 @@ public:
 private slots:
     void slotHintChanged(bool on);
     void slotLinkClicked(const QUrl& url);
+    void slotCollectSpoiler();
+    void slotRequestFinished(QNetworkReply * reply);
 
 private:
     CGisItemWpt& wpt;
+
+    QNetworkAccessManager * networkManager;
 };
 
 #endif //CDETAILSGEOCACHE_H

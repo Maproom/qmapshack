@@ -22,6 +22,7 @@
 
 #include <QtWebKitWidgets>
 #include <QtWidgets>
+#include <QtNetwork>
 
 
 CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
@@ -85,6 +86,11 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     connect(checkHint, SIGNAL(toggled(bool)), this, SLOT(slotHintChanged(bool)));
     connect(webDesc, SIGNAL(linkClicked(QUrl)), this, SLOT(slotLinkClicked(QUrl)));
+
+    networkManager = new QNetworkAccessManager(this);
+    connect(networkManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+
+    slotCollectSpoiler();
 }
 
 CDetailsGeoCache::~CDetailsGeoCache()
@@ -106,4 +112,90 @@ void CDetailsGeoCache::slotHintChanged(bool on)
 void CDetailsGeoCache::slotLinkClicked(const QUrl& url)
 {
     QDesktopServices::openUrl(url);
+}
+
+void CDetailsGeoCache::slotCollectSpoiler()
+{
+    const QList<IGisItem::link_t>& links = wpt.getLinks();
+    if(links.isEmpty())
+    {
+        return;
+    }
+
+    QNetworkRequest request;
+    request.setUrl(links.first().uri);
+    networkManager->get(request);
+}
+
+void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
+{
+    if(reply->error() != QNetworkReply::NoError)
+    {
+        qDebug() << reply->errorString();
+        return;
+    }
+
+    QString asw = reply->readAll();
+    reply->deleteLater();
+
+    if(asw.isEmpty())
+    {
+        return;
+    }
+
+    qDebug() << asw;
+
+    static int cnt = 0;
+    QFile f(QString("page%1,html").arg(cnt++));
+    f.open(QIODevice::WriteOnly);
+    f.write(asw.toUtf8(), asw.size());
+    f.close();
+
+    QRegExp re0(".*Object moved to <a href=\"(.*)\".*");
+    QRegExp re1(".*CachePageImages.*");
+    QRegExp re2("(http://.*\\.jpg).*>(.*)</a>");
+    re2.setMinimal(true);
+
+    bool watchOut       = false;
+    bool spoilerFound   = false;
+    QStringList lines   = asw.split("\n");
+    foreach(const QString& line, lines)
+    {
+        if(re0.exactMatch(line))
+        {
+            QUrl url(re0.cap(1));
+
+            QNetworkRequest request;
+            request.setUrl(url);
+            networkManager->get(request);
+            return;
+        }
+        else if(!watchOut && re1.exactMatch(line))
+        {
+            watchOut = true;
+        }
+        else if(watchOut)
+        {
+            int pos = 0;
+            while ((pos = re2.indexIn(line, pos)) != -1)
+            {
+                spoilerFound = true;
+
+                QString url  = re2.cap(1);
+                QString text = re2.cap(2);
+
+                qDebug() << url;
+                qDebug() << text;
+//                QNetworkRequest request;
+//                request.setUrl(url);
+//                pendingRequests[networkAccessManager->get(request)] = text;
+
+                pos += re2.matchedLength();
+            }
+
+            watchOut = false;
+        }
+
+    }
+
 }

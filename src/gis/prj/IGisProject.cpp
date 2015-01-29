@@ -520,8 +520,8 @@ bool IGisProject::remove()
     */
     IDevice * device = dynamic_cast<IDevice*>(parent());
     if(device)
-    {
-        device->removeProject(this);
+    {        
+        device->aboutToRemoveProject(this);
     }
 
     QFileInfo fi(filename);

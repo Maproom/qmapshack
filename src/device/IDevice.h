@@ -24,7 +24,7 @@
 
 #include "gis/IGisItem.h"
 class CGisDraw;
-
+class CGisItemWpt;
 
 class IDevice : public QTreeWidgetItem
 {
@@ -61,7 +61,11 @@ public:
 
     void insertCopyOfProject(IGisProject * project, int& lastResult);
 
-    virtual void removeProject(IGisProject * project){}
+    virtual void startSavingProject(IGisProject * project){}
+    virtual void saveImages(CGisItemWpt& wpt){}
+    virtual void loadImages(CGisItemWpt& wpt){}
+    virtual void aboutToRemoveProject(IGisProject * project){}
+
 
 protected:
     virtual void insertCopyOfProject(IGisProject * project) = 0;

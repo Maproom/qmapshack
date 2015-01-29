@@ -29,6 +29,7 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     , pathGpx("Garmin/GPX")
     , pathPictures("Garmin/JPEG")
     , pathSpoilers("Garmin/GeocachePhotos")
+    , cntImages(0)
 {
     setText(CGisListWks::eColumnName, "Garmin");
 
@@ -155,21 +156,20 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
         const QList<CGisItemWpt::image_t>& images = wpt.getImages();
         QList<IGisItem::link_t> links;
 
-        int cnt = 0;
         QString filename;
         foreach(const CGisItemWpt::image_t& image, images)
         {
-            filename = QString("%1.%2.jpg").arg(key).arg(cnt);
+            filename = QString("%1.%2.jpg").arg(key).arg(cntImages);
             image.pixmap.save(dirImages.absoluteFilePath(filename));
 
             IGisItem::link_t link;
             link.uri  = pathPictures + "/" + filename;
-            link.text = QObject::tr("Picture%1").arg(cnt);
+            link.text = QObject::tr("Picture%1").arg(cntImages);
             link.type = "Garmin";
 
             links << link;
 
-            cnt++;
+            cntImages++;
         }
 
         wpt.appendLinks(links);
@@ -205,12 +205,15 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
             wpt.appendImages(images);
             wpt.removeLinksByType("Garmin");
         }
-
     }
 }
 
+void CDeviceGarmin::startSavingProject(IGisProject * project)
+{
+    cntImages = 0;
+}
 
-void CDeviceGarmin::removeProject(IGisProject * project)
+void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
 {
     const QString& key = project->getKey();
     const QDir dirImages(dir.absoluteFilePath(pathPictures));

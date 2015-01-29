@@ -161,10 +161,10 @@ void CGpxProject::loadGpx(const QString& filename)
             to the waypoint are stored in the file system of the device and written
             as links to the waypoint. Let the device object take care of this.
         */
-        CDeviceGarmin * garmin = dynamic_cast<CDeviceGarmin*>(parent());
-        if(garmin)
+        IDevice * device = dynamic_cast<IDevice*>(parent());
+        if(device)
         {
-            garmin->loadImages(*wpt);
+            device->loadImages(*wpt);
         }
 
     }
@@ -304,6 +304,12 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     QDomDocument doc;
     QDomNode gpx = project.writeMetadata(doc);
 
+    IDevice * device = dynamic_cast<IDevice*>(project.parent());
+    if(device)
+    {
+        device->startSavingProject(&project);
+    }
+
     for(int i = 0; i < project.childCount(); i++)
     {
         CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(project.child(i));
@@ -316,11 +322,10 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
             Special care for waypoints stored on Garmin devices. Images attached
             to the waypoint are stored in the file system of the device and written
             as links to the waypoint. Let the device object take care of this.
-        */
-        CDeviceGarmin * garmin = dynamic_cast<CDeviceGarmin*>(project.parent());
-        if(garmin)
+        */        
+        if(device)
         {
-            garmin->saveImages(*item);
+            device->saveImages(*item);
         }
 
         item->save(gpx);

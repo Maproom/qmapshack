@@ -147,7 +147,31 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
 {
     if(wpt.isGeocache())
     {
+        QString name = wpt.getName();
+        quint32 size = name.size();
+        QString path = QString("%1/%2/%3").arg(name.at(size-1)).arg(name.at(size -2)).arg(name);
 
+        const QDir dirSpoilers(dir.absoluteFilePath(pathSpoilers));
+        const QDir dirCache(dirSpoilers.absoluteFilePath(path));
+        const QList<CGisItemWpt::image_t>& images = wpt.getImages();
+
+        if(!dirCache.exists())
+        {
+            dirCache.mkpath(dirCache.absolutePath());
+        }
+
+        QString filename;
+        foreach(const CGisItemWpt::image_t& image, images)
+        {
+            filename = image.info;
+            filename = filename.remove(QRegExp("[^A-Za-z0-9_]"));
+
+            if(!filename.endsWith("jpg"))
+            {
+                filename += ".jpg";
+            }
+            image.pixmap.save(dirCache.absoluteFilePath(filename));
+        }
     }
     else
     {
@@ -180,7 +204,32 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
 {
     if(wpt.isGeocache())
     {
+        QString name = wpt.getName();
+        quint32 size = name.size();
+        QString path = QString("%1/%2/%3").arg(name.at(size-1)).arg(name.at(size -2)).arg(name);
 
+        const QDir dirSpoilers(dir.absoluteFilePath(pathSpoilers));
+        const QDir dirCache(dirSpoilers.absoluteFilePath(path));
+
+        QList<CGisItemWpt::image_t> images;
+        QStringList entries = dirCache.entryList(QStringList("*.jpg"), QDir::Files);
+        foreach(const QString& file, entries)
+        {
+            CGisItemWpt::image_t image;
+            image.pixmap.load(dirCache.absoluteFilePath(file));
+
+            if(!image.pixmap.isNull())
+            {
+                image.fileName  = file;
+                image.info      = QFileInfo(file).baseName();
+                images << image;
+            }
+        }
+
+        if(!images.isEmpty())
+        {
+            wpt.appendImages(images);
+        }
     }
     else
     {
@@ -215,6 +264,7 @@ void CDeviceGarmin::startSavingProject(IGisProject * project)
 
 void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
 {
+    // remove images attached to project
     const QString& key = project->getKey();
     const QDir dirImages(dir.absoluteFilePath(pathPictures));
     QStringList entries = dirImages.entryList(QStringList("*.jpg"), QDir::Files);
@@ -229,4 +279,21 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
         }
     }
 
+    // remove geo cache spoiler images
+    const int N = project->childCount();
+    for(int n = 0; n < N; n++)
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->child(n));
+        if(wpt && wpt->isGeocache())
+        {
+            QString name = wpt->getName();
+            quint32 size = name.size();
+            QString path = QString("%1/%2/%3").arg(name.at(size-1)).arg(name.at(size -2)).arg(name);
+
+            QDir dirSpoilers(dir.absoluteFilePath(pathSpoilers));
+            QDir dirCache(dirSpoilers.absoluteFilePath(path));
+
+            dirCache.removeRecursively();
+        }
+    }
 }

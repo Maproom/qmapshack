@@ -103,7 +103,10 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     {
         toolUpdateSpoiler->setEnabled(true);
     }
-
+    if(wpt.isOnDevice())
+    {
+        toolUpdateSpoiler->setEnabled(false);
+    }
 
     listHistory->setEnabled(false);
     listHistory->setupHistory(wpt);

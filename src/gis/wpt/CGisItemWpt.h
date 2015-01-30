@@ -205,6 +205,12 @@ public:
         images += imgs;
     }
 
+    /**
+       @brief Append the list of images by a single image.
+       @param img   a single image
+    */
+    void addImage(const image_t& img);
+
 
     const QString& getName() const
     {

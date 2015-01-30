@@ -379,6 +379,12 @@ void CGisItemWpt::setImages(const QList<image_t>& imgs)
     changed(QObject::tr("Changed images"), "://icons/48x48/Image.png");
 }
 
+void CGisItemWpt::addImage(const image_t& img)
+{
+    images.append(img);
+    changed(QObject::tr("Add image"), "://icons/48x48/Image.png");
+}
+
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {

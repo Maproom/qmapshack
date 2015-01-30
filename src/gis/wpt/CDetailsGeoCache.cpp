@@ -24,6 +24,9 @@
 #include <QtWidgets>
 #include <QtNetwork>
 
+#define HTTP_ATTR_WHAT      QNetworkRequest::Attribute(QNetworkRequest::User + 1)
+#define HTTP_ATTR_INFO      QNetworkRequest::Attribute(QNetworkRequest::User + 2)
+
 
 CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     : QDialog(parent)
@@ -82,15 +85,28 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     webDesc->setHtml(desc);
     webDesc->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
-    photoAlbum->reload(wpt.getImages());
-
     connect(checkHint, SIGNAL(toggled(bool)), this, SLOT(slotHintChanged(bool)));
     connect(webDesc, SIGNAL(linkClicked(QUrl)), this, SLOT(slotLinkClicked(QUrl)));
+    connect(toolUpdateSpoiler, SIGNAL(clicked()), this, SLOT(slotCollectSpoiler()));
 
     networkManager = new QNetworkAccessManager(this);
     connect(networkManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
 
-    slotCollectSpoiler();
+    const QList<CGisItemWpt::image_t>& images = wpt.getImages();
+    photoAlbum->reload(images);
+    if(images.isEmpty())
+    {
+        slotCollectSpoiler();
+        toolUpdateSpoiler->setEnabled(false);
+    }
+    else
+    {
+        toolUpdateSpoiler->setEnabled(true);
+    }
+
+
+    listHistory->setEnabled(false);
+    listHistory->setupHistory(wpt);
 }
 
 CDetailsGeoCache::~CDetailsGeoCache()
@@ -122,6 +138,10 @@ void CDetailsGeoCache::slotCollectSpoiler()
         return;
     }
 
+    wpt.loadHistory(0);
+    photoAlbum->reload(wpt.getImages());
+    listHistory->setupHistory(wpt);
+
     QNetworkRequest request;
     request.setUrl(links.first().uri);
     networkManager->get(request);
@@ -132,8 +152,47 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
     if(reply->error() != QNetworkReply::NoError)
     {
         qDebug() << reply->errorString();
+        reply->deleteLater();
         return;
     }
+
+    //qDebug() << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    //qDebug() << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute);
+    //qDebug() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+
+    if(reply->property("whatfor") == "image")
+    {
+        QString info = reply->property("info").toString();
+
+        if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 301)
+        {
+            QNetworkRequest request;
+            request.setUrl(reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
+            QNetworkReply * reply = networkManager->get(request);
+            reply->setProperty("whatfor", "image");
+            reply->setProperty("info", info);
+        }
+        if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200)
+        {
+            CGisItemWpt::image_t image;
+            image.info = info;
+            image.pixmap.loadFromData(reply->readAll());
+            wpt.addImage(image);
+
+            photoAlbum->reload(wpt.getImages());
+            listHistory->setupHistory(wpt);
+        }
+    }
+    else
+    {
+        if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 301)
+        {
+            QNetworkRequest request;
+            request.setUrl(reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
+            networkManager->get(request);
+        }
+    }
+
 
     QString asw = reply->readAll();
     reply->deleteLater();
@@ -143,34 +202,21 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
         return;
     }
 
-    qDebug() << asw;
-
     static int cnt = 0;
     QFile f(QString("page%1,html").arg(cnt++));
     f.open(QIODevice::WriteOnly);
     f.write(asw.toUtf8(), asw.size());
     f.close();
 
-    QRegExp re0(".*Object moved to <a href=\"(.*)\".*");
     QRegExp re1(".*CachePageImages.*");
     QRegExp re2("(http://.*\\.jpg).*>(.*)</a>");
     re2.setMinimal(true);
 
     bool watchOut       = false;
-    bool spoilerFound   = false;
     QStringList lines   = asw.split("\n");
     foreach(const QString& line, lines)
     {
-        if(re0.exactMatch(line))
-        {
-            QUrl url(re0.cap(1));
-
-            QNetworkRequest request;
-            request.setUrl(url);
-            networkManager->get(request);
-            return;
-        }
-        else if(!watchOut && re1.exactMatch(line))
+        if(!watchOut && re1.exactMatch(line))
         {
             watchOut = true;
         }
@@ -179,23 +225,19 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
             int pos = 0;
             while ((pos = re2.indexIn(line, pos)) != -1)
             {
-                spoilerFound = true;
-
                 QString url  = re2.cap(1);
-                QString text = re2.cap(2);
+                QString info = re2.cap(2);
 
-                qDebug() << url;
-                qDebug() << text;
-//                QNetworkRequest request;
-//                request.setUrl(url);
-//                pendingRequests[networkAccessManager->get(request)] = text;
+                QNetworkRequest request;
+                request.setUrl(url);
+                QNetworkReply * reply = networkManager->get(request);
+                reply->setProperty("whatfor", "image");
+                reply->setProperty("info", info);
 
                 pos += re2.matchedLength();
             }
 
             watchOut = false;
         }
-
     }
-
 }

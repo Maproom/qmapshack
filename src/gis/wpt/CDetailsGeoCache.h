@@ -40,7 +40,6 @@ private slots:
 
 private:
     CGisItemWpt& wpt;
-
     QNetworkAccessManager * networkManager;
 };
 

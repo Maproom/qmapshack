@@ -73,6 +73,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
     connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
+    connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotItemDoubleClicked(QListWidgetItem*)));
     connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotProjectChanged(QString)));
     connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(slotProjectEdited(QString)));
     connect(radioQms, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
@@ -99,6 +100,15 @@ void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
     key = item->data(Qt::UserRole).toString();
     lineEdit->setText(item->text());
     frameType->setEnabled(false);
+}
+
+void CSelectProjectDialog::slotItemDoubleClicked(QListWidgetItem * item)
+{
+    key = item->data(Qt::UserRole).toString();
+    lineEdit->setText(item->text());
+    frameType->setEnabled(false);
+
+    QDialog::accept();
 }
 
 void CSelectProjectDialog::slotProjectChanged(const QString& text)

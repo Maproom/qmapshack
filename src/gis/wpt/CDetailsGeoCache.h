@@ -24,6 +24,7 @@
 
 class CGisItemWpt;
 class QNetworkAccessManager;
+class QTimer;
 
 class CDetailsGeoCache : public QDialog, private Ui::IDetailsGeoCache
 {
@@ -37,10 +38,13 @@ private slots:
     void slotLinkClicked(const QUrl& url);
     void slotCollectSpoiler();
     void slotRequestFinished(QNetworkReply * reply);
+    void slotDownloadDone();
 
 private:
     CGisItemWpt& wpt;
     QNetworkAccessManager * networkManager;
+    int cntSpoiler;
+    QTimer * timerDownload;
 };
 
 #endif //CDETAILSGEOCACHE_H

@@ -31,6 +31,7 @@
 CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     : QDialog(parent)
     , wpt(wpt)
+    , cntSpoiler(0)
 {
     setupUi(this);
     setWindowTitle(wpt.getName());
@@ -61,6 +62,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     checkHint->setEnabled(!geocache.hint.isEmpty());
     labelHint->setText(geocache.hint.isEmpty() ? tr("none") : tr("???"));
     toolIcon->setIcon(wpt.getIcon());
+    labelStatus->hide();
 
     QString desc;
     if(geocache.shortDescIsHtml)
@@ -84,6 +86,10 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     }
     webDesc->setHtml(desc);
     webDesc->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+
+    timerDownload = new QTimer(this);
+    timerDownload->setSingleShot(true);
+    connect(timerDownload, SIGNAL(timeout()), this, SLOT(slotDownloadDone()));
 
     connect(checkHint, SIGNAL(toggled(bool)), this, SLOT(slotHintChanged(bool)));
     connect(webDesc, SIGNAL(linkClicked(QUrl)), this, SLOT(slotLinkClicked(QUrl)));
@@ -110,6 +116,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     listHistory->setEnabled(false);
     listHistory->setupHistory(wpt);
+
 }
 
 CDetailsGeoCache::~CDetailsGeoCache()
@@ -148,6 +155,11 @@ void CDetailsGeoCache::slotCollectSpoiler()
     QNetworkRequest request;
     request.setUrl(links.first().uri);
     networkManager->get(request);
+
+    timerDownload->start(10000);
+    labelStatus->show();
+    labelStatus->setText(tr("Searching for images..."));
+
 }
 
 void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
@@ -184,6 +196,12 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
 
             photoAlbum->reload(wpt.getImages());
             listHistory->setupHistory(wpt);
+
+            cntSpoiler--;
+            if(cntSpoiler == 0)
+            {
+                slotDownloadDone();
+            }
         }
     }
     else
@@ -236,11 +254,26 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
                 QNetworkReply * reply = networkManager->get(request);
                 reply->setProperty("whatfor", "image");
                 reply->setProperty("info", info);
+                cntSpoiler++;
 
                 pos += re2.matchedLength();
             }
 
             watchOut = false;
         }
+    }
+}
+
+void CDetailsGeoCache::slotDownloadDone()
+{
+    timerDownload->stop();
+    cntSpoiler = 0;
+    if(wpt.getImages().isEmpty())
+    {
+        labelStatus->setText(tr("No images found"));
+    }
+    else
+    {
+        labelStatus->hide();
     }
 }

@@ -29,6 +29,7 @@
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "map/CMapList.h"
+#include "map/CMapVrtBuilder.h"
 #include "qlgt/CImportDatabase.h"
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
@@ -92,6 +93,7 @@ CMainWindow::CMainWindow()
     connect(actionImportDatabase, SIGNAL(triggered()), this, SLOT(slotImportDatabase()));
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
+    connect(actionVrtBuilder, SIGNAL(triggered()), this, SLOT(slotBuildVrt()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
 
@@ -549,6 +551,13 @@ void CMainWindow::slotImportDatabase()
     addWidgetToTab(widget);
 }
 
+void CMainWindow::slotBuildVrt()
+{
+    CMapVrtBuilder * widget = new CMapVrtBuilder(this);
+    addWidgetToTab(widget);
+}
+
+
 void CMainWindow::slotLoadGISData()
 {
     SETTINGS;
@@ -569,6 +578,7 @@ void CMainWindow::slotLoadGISData()
     cfg.setValue("Paths/lastGisPath", path);
     cfg.setValue("Paths/lastGisFilter", filter);
 }
+
 
 void CMainWindow::loadGISData(const QStringList& filenames)
 {

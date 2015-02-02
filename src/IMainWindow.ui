@@ -111,6 +111,7 @@
      <string>Tool</string>
     </property>
     <addaction name="actionImportDatabase"/>
+    <addaction name="actionVrtBuilder"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuProject"/>
@@ -467,6 +468,18 @@
    </property>
    <property name="toolTip">
     <string>Import QLandkarte GT database</string>
+   </property>
+  </action>
+  <action name="actionVrtBuilder">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/VrtBuilder.png</normaloff>:/icons/32x32/VrtBuilder.png</iconset>
+   </property>
+   <property name="text">
+    <string>VRT Builder</string>
+   </property>
+   <property name="toolTip">
+    <string>GUI front end to gdalbuildvrt</string>
    </property>
   </action>
  </widget>

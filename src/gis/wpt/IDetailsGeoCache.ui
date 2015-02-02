@@ -26,13 +26,6 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="6" column="0" colspan="2">
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
@@ -213,6 +206,69 @@
        </item>
       </layout>
      </item>
+     <item row="7" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QToolButton" name="toolUpdateSpoiler">
+         <property name="toolTip">
+          <string>Update spoilers</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="8" column="1">
+      <widget class="CHistoryListWidget" name="listHistory"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="labelName">
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QWebView" name="webDesc">
+       <property name="url">
+        <url>
+         <string>about:blank</string>
+        </url>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="0">
       <widget class="QToolButton" name="toolIcon">
        <property name="text">
@@ -226,23 +282,6 @@
        </property>
        <property name="autoRaise">
         <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="labelName">
-       <property name="text">
-        <string>-</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="CPhotoAlbum" name="photoAlbum" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>150</height>
-        </size>
        </property>
       </widget>
      </item>
@@ -277,59 +316,17 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="1">
-      <widget class="QWebView" name="webDesc">
-       <property name="url">
-        <url>
-         <string>about:blank</string>
-        </url>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLabel" name="labelStatus">
-       <property name="text">
-        <string>-</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <widget class="CHistoryListWidget" name="listHistory"/>
-     </item>
-     <item row="8" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item row="7" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QToolButton" name="toolUpdateSpoiler">
-         <property name="toolTip">
-          <string>Update spoilers</string>
-         </property>
+        <widget class="QLabel" name="labelStatus">
          <property name="text">
-          <string>...</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../../resources.qrc">
-           <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+        <widget class="CPhotoAlbum" name="photoAlbum" native="true"/>
        </item>
       </layout>
      </item>

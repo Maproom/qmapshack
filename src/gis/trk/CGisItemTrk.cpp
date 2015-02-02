@@ -455,7 +455,14 @@ QString CGisItemTrk::getInfoRange()
 QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
 {
     QString str, val1, unit1;
-    str += IUnit::datetime2string(pt.time, false, QPointF(pt.lon, pt.lat) * DEG_TO_RAD) + "\n";
+    if(totalElapsedSeconds != 0)
+    {
+        str += IUnit::datetime2string(pt.time, false, QPointF(pt.lon, pt.lat) * DEG_TO_RAD) + "\n";
+    }
+    else
+    {
+        str += "\n";
+    }
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
     str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
     if(pt.slope1 != NOFLOAT)

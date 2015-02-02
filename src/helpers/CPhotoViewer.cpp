@@ -97,7 +97,9 @@ void CPhotoViewer::setImageAtIdx(int i)
     }
 
     rectClose.moveCenter(rectImage.topRight());
+    rectPrev.setHeight(rectImage.height());
     rectPrev.moveBottomLeft(rectImage.bottomLeft());
+    rectNext.setHeight(rectImage.height());
     rectNext.moveBottomRight(rectImage.bottomRight());
 }
 
@@ -116,22 +118,23 @@ void CPhotoViewer::paintEvent(QPaintEvent * e)
     p.drawRect(rectImage);
 
     p.drawImage(rectImage, images[idx].pixmap.scaled(rectImage.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-    p.drawPixmap(rectClose, QPixmap("://icons/32x32/Close.png"));
 
     if(idx != (images.size() - 1))
     {
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,128));
         p.drawRect(rectNext);
-        p.drawPixmap(rectNext, QPixmap("://icons/32x32/Right.png"));
+        p.drawPixmap(rectNext.left(),rectNext.bottom() - 32, 32, 32 , QPixmap("://icons/32x32/Right.png"));
     }
     if(idx != 0)
     {
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,128));
         p.drawRect(rectPrev);
-        p.drawPixmap(rectPrev, QPixmap("://icons/32x32/Left.png"));
+        p.drawPixmap(rectPrev.left(), rectPrev.bottom() - 32, 32, 32, QPixmap("://icons/32x32/Left.png"));
     }
+
+    p.drawPixmap(rectClose, QPixmap("://icons/32x32/Close.png"));
 }
 
 

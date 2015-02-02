@@ -27,6 +27,7 @@ CPhotoAlbum::CPhotoAlbum(QWidget *parent)
     , idxSelected(0)
 {
     setupUi(this);
+    setFocusPolicy(Qt::WheelFocus);
     connect(toolLeft, SIGNAL(clicked()), this, SLOT(slotLeft()));
     connect(toolRight, SIGNAL(clicked()), this, SLOT(slotRight()));
 }
@@ -41,10 +42,13 @@ void CPhotoAlbum::resizeEvent(QResizeEvent * e)
     updateView();
 }
 
-void CPhotoAlbum::mouseDoubleClickEvent(QMouseEvent * e)
+
+void CPhotoAlbum::mouseReleaseEvent(QMouseEvent * e)
 {
     CPhotoViewer dlg(images, 0,this);
     dlg.exec();
+
+    e->accept();
 }
 
 void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)

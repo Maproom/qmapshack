@@ -43,6 +43,7 @@ public slots:
 
 private slots:
     void slotItemClicked(QListWidgetItem * item);
+    void slotItemDoubleClicked(QListWidgetItem * item);
     void slotProjectChanged(const QString& text);
     void slotProjectEdited(const QString& text);
     void slotTypeChanged();

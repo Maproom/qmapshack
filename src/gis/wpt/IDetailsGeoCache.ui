@@ -326,7 +326,14 @@
         </widget>
        </item>
        <item>
-        <widget class="CPhotoAlbum" name="photoAlbum" native="true"/>
+        <widget class="CPhotoAlbum" name="photoAlbum" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>150</height>
+          </size>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

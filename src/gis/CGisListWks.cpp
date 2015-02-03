@@ -85,12 +85,23 @@ CGisListWks::CGisListWks(QWidget *parent)
     db.open();
     configDB();
 
-    menuProject     = new QMenu(this);
-    actionEditPrj   = menuProject->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
-    actionSaveAs    = menuProject->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
-    actionSave      = menuProject->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
-    actionCloseProj = menuProject->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
-    actionDelProj   = menuProject->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
+    menuProjectWks  = new QMenu(this);
+    actionEditPrj   = menuProjectWks->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
+    actionSaveAs    = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
+    actionSave      = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
+    actionSyncWksDev= menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Devices"), this, SLOT(slotSyncWksDev()));
+    actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
+
+    menuProjectDev  = new QMenu(this);
+    menuProjectDev->addAction(actionEditPrj);
+    menuProjectDev->addAction(actionSaveAs);
+    menuProjectDev->addAction(actionSave);
+    actionSyncWksDev= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Sync. With Workspace"), this, SLOT(slotSyncDevWks()));
+    actionDelProj   = menuProjectDev->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
+
+    menuProjectTrash= new QMenu(this);
+    menuProjectTrash->addAction(actionSaveAs);
+    menuProjectTrash->addAction(actionCloseProj);
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
@@ -776,11 +787,14 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
         if(project != 0)
         {
-            bool isOnDevice = project->isOnDevice();
-            actionCloseProj->setVisible(!isOnDevice);
-            actionDelProj->setVisible(isOnDevice);
-            actionEditPrj->setVisible(false);
-            menuProject->exec(p);
+            if(project->isOnDevice())
+            {
+                menuProjectDev->exec(p);
+            }
+            else
+            {
+                menuProjectWks->exec(p);
+            }
             return;
         }
 
@@ -800,19 +814,19 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         {
             if(project->getType() == IGisProject::eTypeLostFound)
             {
-                actionDelProj->setVisible(false);
-                actionSave->setVisible(false);
-                actionEditPrj->setVisible(false);
+                menuProjectTrash->exec(p);
             }
             else
             {
-                bool isOnDevice = project->isOnDevice();
-                actionCloseProj->setVisible(!isOnDevice);
-                actionDelProj->setVisible(isOnDevice);
-                actionSave->setVisible(true);
-                actionEditPrj->setVisible(true);
+                if(project->isOnDevice())
+                {
+                    menuProjectDev->exec(p);
+                }
+                else
+                {
+                    menuProjectWks->exec(p);
+                }
             }
-            menuProject->exec(p);
             return;
         }
 
@@ -1162,6 +1176,31 @@ void CGisListWks::slotSearchGoogle(bool on)
         searchGoogle = new CSearchGoogle(this);
     }
 }
+
+void CGisListWks::slotSyncWksDev()
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
+        if(device == 0)
+        {
+            continue;
+        }
+
+
+    }
+
+}
+
+void CGisListWks::slotSyncDevWks()
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+}
+
 
 bool CGisListWks::event(QEvent * e)
 {

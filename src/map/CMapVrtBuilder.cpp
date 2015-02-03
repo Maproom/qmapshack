@@ -125,25 +125,6 @@ void CMapVrtBuilder::slotStart()
     cmd.start("gdalbuildvrt", args);
 }
 
-void CMapVrtBuilder::progress(const QString& str)
-{
-    QRegExp re("^(0[0-9\\.]*).*$");
-
-    output += str;
-    QStringList lines = output.split("\n");
-
-    if(re.exactMatch(lines.last()))
-    {
-        QString prog    = re.cap(1);
-        int points      = prog.count('.');
-        int zeros       = prog.count('0');
-        int p = (zeros - 1) * 10 + (points%3) * 2.5 + ((points/3) == zeros ? 7.5 : 0);
-        if(p > 100) p = 100;
-
-        progressBar->setValue(p);
-    }
-
-}
 
 void CMapVrtBuilder::slotStderr()
 {
@@ -187,8 +168,6 @@ void CMapVrtBuilder::slotStdout()
         str = str.split("\r").last();
     }
 #endif
-
-    progress(str);
 
     textBrowser->insertPlainText(str);
     textBrowser->verticalScrollBar()->setValue(textBrowser->verticalScrollBar()->maximum());

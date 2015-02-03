@@ -42,7 +42,6 @@ class CMapVrtBuilder : public QWidget, private Ui::IMapVrtBuilder
 
     private:
         void enabelStartButton();
-        void progress(const QString& str);
         void stdOut(const QString& str, bool gui = false);
         void stdErr(const QString& str, bool gui = false);
 

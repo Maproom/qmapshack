@@ -85,6 +85,8 @@ private slots:
     void slotCloseAllProjects();
     void slotSearchGoogle(bool on);
     void slotCopyItem();
+    void slotSyncWksDev();
+    void slotSyncDevWks();
 
 
 private:
@@ -94,12 +96,19 @@ private:
 
     QSqlDatabase db;
 
-    QMenu * menuProject;
+    QMenu * menuProjectWks;
     QAction  * actionSave;
     QAction  * actionSaveAs;
     QAction  * actionEditPrj;
     QAction  * actionCloseProj;
+    QAction  * actionSyncWksDev;
+
+
+    QMenu * menuProjectDev;
     QAction  * actionDelProj;
+    QAction  * actionSyncDevWks;
+
+    QMenu * menuProjectTrash;
 
     QMenu * menuItem;
     QMenu * menuItemTrk;

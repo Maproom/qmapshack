@@ -130,6 +130,7 @@
         <file>icons/32x32/Print.png</file>
         <file>icons/32x32/AddImage.png</file>
         <file>icons/32x32/DelImage.png</file>
+        <file>icons/32x32/ReloadImage.png</file>
         <file>icons/32x32/Image.png</file>
         <file>icons/32x32/Device.png</file>
         <file>icons/32x32/2NavProject.png</file>
@@ -246,6 +247,7 @@
         <file>icons/48x48/Print.png</file>
         <file>icons/48x48/AddImage.png</file>
         <file>icons/48x48/DelImage.png</file>
+        <file>icons/48x48/ReloadImage.png</file>
         <file>icons/48x48/Image.png</file>
         <file>icons/48x48/Device.png</file>
         <file>icons/48x48/2NavProject.png</file>

@@ -101,7 +101,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     checkProfile->setChecked(cfg.value("showProfile", true).toBool());
     checkSpeed->setChecked(cfg.value("showSpeed", true).toBool());
     checkProgress->setChecked(cfg.value("showProgress", true).toBool());
-    splitter->restoreState(cfg.value("splitterSizes").toByteArray());
+    splitter->restoreState(cfg.value("splitterSizes").toByteArray());    
+    treeWidget->header()->restoreState(cfg.value("trackPointListState").toByteArray());
     cfg.endGroup();
 
     connect(checkProfile, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
@@ -129,6 +130,7 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("showSpeed", checkSpeed->isChecked());
     cfg.setValue("showProgress", checkProgress->isChecked());
     cfg.setValue("splitterSizes", splitter->saveState());
+    cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.endGroup();
 }
 

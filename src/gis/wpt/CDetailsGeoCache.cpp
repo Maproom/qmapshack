@@ -187,7 +187,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
             reply->setProperty("whatfor", "image");
             reply->setProperty("info", info);
         }
-        if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200)
+        else if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200)
         {
             CGisItemWpt::image_t image;
             image.info = info;

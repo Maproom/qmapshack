@@ -156,6 +156,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     *this = parentTrk;
     key.project = project->getKey();
     key.device  = project->getDeviceKey();
+    registeredPlots.clear();
 
     if(clone)
     {

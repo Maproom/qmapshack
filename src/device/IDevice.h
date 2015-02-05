@@ -60,6 +60,7 @@ public:
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
 
     void insertCopyOfProject(IGisProject * project, int& lastResult);
+    void updateProject(IGisProject * project);
 
     virtual void startSavingProject(IGisProject * project){}
     virtual void saveImages(CGisItemWpt& wpt){}

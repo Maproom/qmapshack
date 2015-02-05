@@ -173,6 +173,25 @@ void IDevice::insertCopyOfProject(IGisProject * project, int& lastResult)
     insertCopyOfProject(project);
 }
 
+void IDevice::updateProject(IGisProject * project)
+{
+    IGisProject * project2 = getProjectByKey(project->getKey());
+    if(project2)
+    {
+        if(project2->remove())
+        {
+            delete project2;
+        }
+        else
+        {
+            return;
+        }
+
+        insertCopyOfProject(project);
+    }
+
+}
+
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
     const int N = childCount();

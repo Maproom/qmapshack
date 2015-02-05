@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "config.h"
+#include "canvas/CCanvas.h"
 #ifdef Q_OS_LINUX
 #include "device/CDeviceWatcherLinux.h"
 #endif
@@ -45,6 +46,7 @@
 
 #include <QtSql>
 #include <QtWidgets>
+#include <QApplication>
 
 #define DB_VERSION 1
 
@@ -96,7 +98,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProjectDev->addAction(actionEditPrj);
     menuProjectDev->addAction(actionSaveAs);
     menuProjectDev->addAction(actionSave);
-    actionSyncWksDev= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Sync. With Workspace"), this, SLOT(slotSyncDevWks()));
+    actionSyncWksDev= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
     actionDelProj   = menuProjectDev->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
 
     menuProjectTrash= new QMenu(this);
@@ -1181,6 +1183,13 @@ void CGisListWks::slotSyncWksDev()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project == 0)
+    {
+        return;
+    }
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
@@ -1189,15 +1198,59 @@ void CGisListWks::slotSyncWksDev()
         {
             continue;
         }
+        if(canvas)
+        {
+            canvas->reportStatus("device", tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
+            canvas->update();
+            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        }
 
-
+        device->updateProject(project);
     }
-
+    if(canvas)
+    {
+        canvas->reportStatus("device", "");
+    }
+    emit sigChanged();
 }
 
 void CGisListWks::slotSyncDevWks()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project == 0)
+    {
+        return;
+    }
+
+    IDevice * device = dynamic_cast<IDevice*>(project->parent());
+    if(device == 0)
+    {
+        return;
+    }
+
+    QString key = project->getKey();
+
+    project = getProjectByKey(key);
+    if(project)
+    {
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas)
+        {
+            canvas->reportStatus("device", tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
+            canvas->update();
+            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        }
+
+        device->updateProject(project);
+
+        if(canvas)
+        {
+            canvas->reportStatus("device", "");
+        }
+        emit sigChanged();
+    }
 
 }
 

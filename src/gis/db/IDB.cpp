@@ -20,6 +20,7 @@
 #include "gis/db/macros.h"
 
 #include <QtSql>
+#include <QApplication>
 
 IDB::IDB()
 {
@@ -33,33 +34,23 @@ bool IDB::setupDB(const QString& filename, const QString& connectionName)
 {
     db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
     db.setDatabaseName(filename);
-    db.open();
+    if(!db.open())
+    {
+        qDebug() << "failed to open database" << db.lastError();
+    }
 
     QSqlQuery query(db);
-    if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
-    {
-        return false;
-    }
 
-    if(!query.exec("PRAGMA synchronous=OFF"))
-    {
-        return false;
-    }
-
-    if(!query.exec("PRAGMA temp_store=MEMORY"))
-    {
-        return false;
-    }
-
-    if(!query.exec("PRAGMA default_cache_size=50"))
-    {
-        return false;
-    }
-
-    if(!query.exec("PRAGMA page_size=8192"))
-    {
-        return false;
-    }
+    query.prepare("PRAGMA locking_mode=EXCLUSIVE");
+    QUERY_EXEC(return false);
+    query.prepare("PRAGMA temp_store=MEMORY");
+    QUERY_EXEC(return false);
+    query.prepare("PRAGMA default_cache_size=50");
+    QUERY_EXEC(return false);
+    query.prepare("PRAGMA page_size=8192");
+    QUERY_EXEC(return false);
+    query.prepare("PRAGMA synchronous=OFF");
+    QUERY_EXEC(return false);
 
     if(!query.exec("SELECT version FROM versioninfo"))
     {

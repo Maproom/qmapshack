@@ -20,7 +20,6 @@
 #include "gis/db/macros.h"
 
 #include <QtSql>
-#include <QApplication>
 
 IDB::IDB()
 {
@@ -28,12 +27,16 @@ IDB::IDB()
 
 IDB::~IDB()
 {
+    if(db.isOpen())
+    {
+        db.close();
+    }
 }
 
 bool IDB::setupDB(const QString& filename, const QString& connectionName)
 {
     db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName(filename);
+    db.setDatabaseName(filename);   
     if(!db.open())
     {
         qDebug() << "failed to open database" << db.lastError();

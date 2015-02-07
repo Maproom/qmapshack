@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>CCanvas</name>
     <message>
@@ -85,17 +85,17 @@
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="63"/>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="134"/>
         <source>???</source>
-        <translation>???</translation>
+        <translation>?</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="161"/>
         <source>Searching for images...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledají se obrázky...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="273"/>
         <source>No images found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nebyly nalezeny žádné obrázky</translation>
     </message>
 </context>
 <context>
@@ -387,7 +387,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="94"/>
         <source>Update Project on Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovat projekt na zařízeních</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="95"/>
@@ -397,7 +397,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="101"/>
         <source>Update Project on Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovat projekt na zařízení</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="112"/>
@@ -423,7 +423,7 @@
         <location filename="../gis/CGisListWks.cpp" line="1203"/>
         <location filename="../gis/CGisListWks.cpp" line="1241"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Aktualizovat zařízení&lt;/b&gt;&lt;p&gt;Aktualizovat %1&lt;br/&gt;Počkejte, prosím...&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="114"/>
@@ -1343,23 +1343,23 @@ line %2, column %3:
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="29"/>
         <source>Build GDAL VRT</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestavit GDAL VRT</translation>
     </message>
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="52"/>
         <source>Select files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat soubory...</translation>
     </message>
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="76"/>
         <source>Select target file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat cílový soubor...</translation>
     </message>
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="198"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se!</translation>
     </message>
 </context>
 <context>
@@ -2019,7 +2019,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
         <source>Update spoilers</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrát spoiler znovu</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
@@ -2035,7 +2035,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="324"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Textový štítek</translation>
+        <translation>Textový štítek</translation>
     </message>
 </context>
 <context>
@@ -2950,12 +2950,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="479"/>
         <source>VRT Builder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestavovač VRT</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="482"/>
         <source>GUI front end to gdalbuildvrt</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozhraní pro gdalbuildvrt</translation>
     </message>
     <message>
         <source>Setup Database</source>
@@ -3078,33 +3078,33 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="22"/>
         <location filename="../map/IMapVrtBuilder.ui" line="50"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat zdrojové soubory:</translation>
     </message>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="73"/>
         <source>Target Filename:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název cílového souboru:</translation>
     </message>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="80"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="89"/>
         <source>Start</source>
-        <translation type="unfinished">Spustit</translation>
+        <translation>Spustit</translation>
     </message>
 </context>
 <context>
@@ -3985,16 +3985,16 @@ nebo
     <message>
         <location filename="../GeoMath.cpp" line="160"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Špatný polohový formát. Musí být: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; nebo &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
     <message>
         <location filename="../GeoMath.cpp" line="166"/>
         <source>Position values out of bounds. </source>
-        <translation type="unfinished"></translation>
+        <translation>Polohy mimo platné hodnoty. </translation>
     </message>
     <message>
         <source>Bad position format. Must be: [N|S] ddd mm.sss [W|E] ddd mm.sss</source>
-        <translation type="vanished">Špatný polohový formát. Musí být: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;</translation>
+        <translation>Špatný polohový formát. Musí být: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="106"/>
@@ -4457,7 +4457,7 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="385"/>
         <source>Add image</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat obrázek</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="127"/>
@@ -4618,12 +4618,12 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="894"/>
         <source>Delete project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat projekt...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="894"/>
         <source>Do you really want to delete %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat %1?</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="84"/>
@@ -4640,7 +4640,7 @@ Název souboru: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="633"/>
         <location filename="../gis/tnv/serialization.cpp" line="692"/>
         <source>Error...</source>
-        <translation type="unfinished">Chyba...</translation>
+        <translation>Chyba...</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="84"/>
@@ -4649,7 +4649,7 @@ Název souboru: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="359"/>
         <location filename="../gis/tnv/serialization.cpp" line="548"/>
         <source>Failed to open %1.</source>
-        <translation type="unfinished">Nepodařilo se otevřít %1.</translation>
+        <translation>Nepodařilo se otevřít %1.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="388"/>
@@ -4657,7 +4657,7 @@ Název souboru: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="576"/>
         <location filename="../gis/tnv/serialization.cpp" line="587"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jako formát je podporován jen lon/lat WGS 84.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="420"/>
@@ -4665,12 +4665,12 @@ Název souboru: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="633"/>
         <location filename="../gis/tnv/serialization.cpp" line="692"/>
         <source>Failed to read data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se přečíst data.</translation>
     </message>
     <message>
         <location filename="../device/CDeviceGarmin.cpp" line="191"/>
         <source>Picture%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázek %1</translation>
     </message>
 </context>
 </TS>

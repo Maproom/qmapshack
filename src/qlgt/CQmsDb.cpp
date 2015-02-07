@@ -67,6 +67,7 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
 
 CQmsDb::~CQmsDb()
 {
+     db.close();
 }
 
 

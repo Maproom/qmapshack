@@ -126,10 +126,12 @@ int main(int argc, char ** argv)
     QTranslator *qtTranslator = new QTranslator(&a);
     if (qtTranslator->load(QLatin1String("qt_") + locale,resourceDir))
     {
+        qDebug() << QLatin1String("qt_") + locale;
         a.installTranslator(qtTranslator);
     }
     else if (qtTranslator->load(QLatin1String("qt_") + locale,QCoreApplication::applicationDirPath()))
     {
+        qDebug() << QLatin1String("qt_") + locale;
         a.installTranslator(qtTranslator);
     }
 
@@ -137,12 +139,14 @@ int main(int argc, char ** argv)
     QStringList dirList;
     dirList << QCoreApplication::applicationDirPath().replace(QRegExp("bin$"), "share/qmapshack/translations");
 //    dirList << "./src";
+
+    QTranslator *qlandkartegtTranslator = new QTranslator(0);
     foreach(QString dir, dirList)
     {
         QString transName = QLatin1String("qmapshack_") + locale;
-        if (qtTranslator->load( transName, dir))
+        if (qlandkartegtTranslator->load( transName, dir))
         {
-            a.installTranslator(qtTranslator);
+            a.installTranslator(qlandkartegtTranslator);
             qDebug() << "using file '"+ QDir(dir).canonicalPath() + "/" + transName + ".qm' for translations.";
             break;
         }

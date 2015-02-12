@@ -20,9 +20,9 @@
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CGisItemWpt.h"
 
+#include <QtNetwork>
 #include <QtWebKitWidgets>
 #include <QtWidgets>
-#include <QtNetwork>
 
 #define HTTP_ATTR_WHAT      QNetworkRequest::Attribute(QNetworkRequest::User + 1)
 #define HTTP_ATTR_INFO      QNetworkRequest::Attribute(QNetworkRequest::User + 2)
@@ -116,7 +116,6 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     listHistory->setEnabled(false);
     listHistory->setupHistory(wpt);
-
 }
 
 CDetailsGeoCache::~CDetailsGeoCache()
@@ -159,7 +158,6 @@ void CDetailsGeoCache::slotCollectSpoiler()
     timerDownload->start(10000);
     labelStatus->show();
     labelStatus->setText(tr("Searching for images..."));
-
 }
 
 void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
@@ -235,7 +233,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
 
     bool watchOut       = false;
     QStringList lines   = asw.split("\n");
-    foreach(const QString& line, lines)
+    foreach(const QString &line, lines)
     {
         if(!watchOut && re1.exactMatch(line))
         {

@@ -213,7 +213,7 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
 
         QList<CGisItemWpt::image_t> images;
         QStringList entries = dirCache.entryList(QStringList("*.jpg"), QDir::Files);
-        foreach(const QString& file, entries)
+        foreach(const QString &file, entries)
         {
             CGisItemWpt::image_t image;
             image.pixmap.load(dirCache.absoluteFilePath(file));
@@ -268,7 +268,7 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
     const QString& key = project->getKey();
     const QDir dirImages(dir.absoluteFilePath(pathPictures));
     QStringList entries = dirImages.entryList(QStringList("*.jpg"), QDir::Files);
-    foreach(const QString& entry, entries)
+    foreach(const QString &entry, entries)
     {
         QString filename = dirImages.absoluteFilePath(entry);
         QFileInfo fi(filename);

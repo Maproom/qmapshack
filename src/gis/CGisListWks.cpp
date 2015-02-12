@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "config.h"
 #include "canvas/CCanvas.h"
+#include "config.h"
 #ifdef Q_OS_LINUX
 #include "device/CDeviceWatcherLinux.h"
 #endif
@@ -44,9 +44,9 @@
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
 
+#include <QApplication>
 #include <QtSql>
 #include <QtWidgets>
-#include <QApplication>
 
 #define DB_VERSION 1
 
@@ -1251,7 +1251,6 @@ void CGisListWks::slotSyncDevWks()
         }
         emit sigChanged();
     }
-
 }
 
 

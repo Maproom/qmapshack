@@ -185,7 +185,7 @@ public:
        on how to remove these links again.
 
        @param links  list of links.
-    */
+     */
     void appendLinks(const QList<link_t>& links)
     {
         wpt.links = links + wpt.links;
@@ -199,7 +199,7 @@ public:
        a new history entry.
 
        @param imgs  list of images
-    */
+     */
     void appendImages(const QList<image_t>& imgs)
     {
         images += imgs;
@@ -208,7 +208,7 @@ public:
     /**
        @brief Append the list of images by a single image.
        @param img   a single image
-    */
+     */
     void addImage(const image_t& img);
 
 
@@ -284,7 +284,7 @@ public:
        waypoint has been loaded from the device.
 
        @param type
-    */
+     */
     void removeLinksByType(const QString& type);
 
     static const QString &getNewName();

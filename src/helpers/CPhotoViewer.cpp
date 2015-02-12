@@ -124,7 +124,7 @@ void CPhotoViewer::paintEvent(QPaintEvent * e)
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,128));
         p.drawRect(rectNext);
-        p.drawPixmap(rectNext.left(),rectNext.bottom() - 32, 32, 32 , QPixmap("://icons/32x32/Right.png"));
+        p.drawPixmap(rectNext.left(),rectNext.bottom() - 32, 32, 32, QPixmap("://icons/32x32/Right.png"));
     }
     if(idx != 0)
     {

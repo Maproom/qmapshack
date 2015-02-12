@@ -41,7 +41,6 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
 
 CMapVrtBuilder::~CMapVrtBuilder()
 {
-
 }
 
 void CMapVrtBuilder::slotSelectSourceFiles()
@@ -60,7 +59,7 @@ void CMapVrtBuilder::slotSelectSourceFiles()
     cfg.setValue("VrtBuilder/sourcePath", path);
 
     listWidget->clear();
-    foreach(const QString& file, files)
+    foreach(const QString &file, files)
     {
         new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
     }
@@ -193,7 +192,6 @@ void CMapVrtBuilder::slotFinished(int exitCode, QProcess::ExitStatus status)
 
     if(exitCode || status)
     {
-
         textBrowser->setTextColor(Qt::red);
         textBrowser->append(tr("!!! failed !!!\n"));
     }

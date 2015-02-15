@@ -328,6 +328,9 @@ void CGisItemWpt::setPosition(const QPointF& pos)
 {
     wpt.lon = pos.x();
     wpt.lat = pos.y();
+
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
     changed(QObject::tr("Changed position"),"://icons/48x48/WptMove.png");
 }
 

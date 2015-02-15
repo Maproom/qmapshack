@@ -189,7 +189,6 @@ void IDevice::updateProject(IGisProject * project)
 
         insertCopyOfProject(project);
     }
-
 }
 
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)

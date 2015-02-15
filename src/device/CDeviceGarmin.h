@@ -41,7 +41,7 @@ private:
     QString partno;
     QString description;
     QString pathGpx;
-    QString pathPictures;    
+    QString pathPictures;
     QString pathSpoilers;
 
     int cntImages;

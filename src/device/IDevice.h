@@ -62,10 +62,18 @@ public:
     void insertCopyOfProject(IGisProject * project, int& lastResult);
     void updateProject(IGisProject * project);
 
-    virtual void startSavingProject(IGisProject * project){}
-    virtual void saveImages(CGisItemWpt& wpt){}
-    virtual void loadImages(CGisItemWpt& wpt){}
-    virtual void aboutToRemoveProject(IGisProject * project){}
+    virtual void startSavingProject(IGisProject * project)
+    {
+    }
+    virtual void saveImages(CGisItemWpt& wpt)
+    {
+    }
+    virtual void loadImages(CGisItemWpt& wpt)
+    {
+    }
+    virtual void aboutToRemoveProject(IGisProject * project)
+    {
+    }
 
 
 protected:

@@ -19,37 +19,37 @@
 #ifndef CMAPVRTBUILDER_H
 #define CMAPVRTBUILDER_H
 
-#include <QWidget>
-#include <QProcess>
 #include "ui_IMapVrtBuilder.h"
+#include <QProcess>
+#include <QWidget>
 
 class CMapVrtBuilder : public QWidget, private Ui::IMapVrtBuilder
 {
     Q_OBJECT;
-    public:
-        CMapVrtBuilder(QWidget * parent);
-        virtual ~CMapVrtBuilder();
+public:
+    CMapVrtBuilder(QWidget * parent);
+    virtual ~CMapVrtBuilder();
 
-    private slots:
-        void slotSelectSourceFiles();
-        void slotSelectTargetFile();
-        void slotStart();
+private slots:
+    void slotSelectSourceFiles();
+    void slotSelectTargetFile();
+    void slotStart();
 
-        void slotStderr();
-        void slotStdout();
-        void slotFinished(int exitCode, QProcess::ExitStatus status);
-
-
-    private:
-        void enabelStartButton();
-        void stdOut(const QString& str, bool gui = false);
-        void stdErr(const QString& str, bool gui = false);
+    void slotStderr();
+    void slotStdout();
+    void slotFinished(int exitCode, QProcess::ExitStatus status);
 
 
-        bool tainted;
-        QString output;
+private:
+    void enabelStartButton();
+    void stdOut(const QString& str, bool gui = false);
+    void stdErr(const QString& str, bool gui = false);
 
-        QProcess cmd;
+
+    bool tainted;
+    QString output;
+
+    QProcess cmd;
 };
 
 #endif //CMAPVRTBUILDER_H

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=QMapShack
-Exec=qmapshack
+Exec=qmapshack %F
 Icon=QMapShack
 Terminal=false
 Type=Application

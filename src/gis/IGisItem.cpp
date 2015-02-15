@@ -451,6 +451,11 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
     QPolygonF subline;
     const int size = line.size();
 
+    if(line.isEmpty())
+    {
+        return;
+    }
+
     pt = line[0];
     subline << pt;
 

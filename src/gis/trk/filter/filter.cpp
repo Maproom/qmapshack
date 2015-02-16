@@ -247,7 +247,7 @@ void CGisItemTrk::filterOffsetElevation(int offset)
 
 void CGisItemTrk::filterNewDate(const QDateTime& date)
 {
-    qint64 delta = date.toTime_t() - timeStart.toUTC().toTime_t();
+    qint64 delta = qint64(date.toTime_t()) - qint64(timeStart.toUTC().toTime_t());
 
     for(int i = 0; i < trk.segs.size(); i++)
     {

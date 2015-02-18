@@ -18,6 +18,7 @@
 
 #include "CProjWizard.h"
 #include "grid/mitab.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -30,7 +31,8 @@ static bool mitabLessThan(const mitab_entry_t &s1, const mitab_entry_t &s2)
 }
 
 CProjWizard::CProjWizard(QLineEdit &line)
-    : line(line)
+    : QDialog(&CMainWindow::self())
+    , line(line)
 {
     setupUi(this);
     mitab_entry_t entry;

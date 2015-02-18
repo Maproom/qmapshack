@@ -18,11 +18,13 @@
 
 #include "map/CMapDraw.h"
 #include "map/CMapPathSetup.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
 CMapPathSetup::CMapPathSetup(QStringList &paths)
-    : paths(paths)
+    : QDialog(&CMainWindow::self())
+    , paths(paths)
 {
     setupUi(this);
 

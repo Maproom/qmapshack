@@ -20,11 +20,13 @@
 #include "grid/CGridSetup.h"
 #include "grid/CProjWizard.h"
 #include "map/CMapDraw.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
 CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
-    : grid(grid)
+    : QDialog(&CMainWindow::self())
+    , grid(grid)
     , map(map)
 {
     setupUi(this);
@@ -68,7 +70,7 @@ void CGridSetup::slotSelectGridColor()
     QPalette palette = labelGridColor->palette();
     QColor color = palette.color(labelGridColor->foregroundRole());
 
-    color = QColorDialog::getColor(color);
+    color = QColorDialog::getColor(color, this);
 
     if(color.isValid())
     {

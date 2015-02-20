@@ -22,9 +22,10 @@
 
 #include <QtWidgets>
 
-CMapPathSetup::CMapPathSetup(QStringList &paths)
+CMapPathSetup::CMapPathSetup(QStringList &paths, QString& pathCache)
     : QDialog(&CMainWindow::self())
     , paths(paths)
+    , pathCache(pathCache)
 {
     setupUi(this);
 
@@ -37,6 +38,9 @@ CMapPathSetup::CMapPathSetup(QStringList &paths)
         QListWidgetItem * item = new QListWidgetItem(listWidget);
         item->setText(path);
     }
+
+    labelCacheRoot->setText(pathCache);
+    connect(toolCacheRoot, SIGNAL(clicked()), this, SLOT(slotChangeCachePath()));
 
     labelHelp->setText(tr("Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1").arg(CMapDraw::getSupportedFormats().join(", ")));
 }
@@ -67,6 +71,18 @@ void CMapPathSetup::slotDelPath()
     qDeleteAll(items);
 }
 
+void CMapPathSetup::slotChangeCachePath()
+{
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select root path..."), labelCacheRoot->text());
+    if(path.isEmpty())
+    {
+        return;
+    }
+
+    labelCacheRoot->setText(path);
+
+}
+
 void CMapPathSetup::accept()
 {
     paths.clear();
@@ -75,6 +91,8 @@ void CMapPathSetup::accept()
         QListWidgetItem *item = listWidget->item(i);
         paths << item->text();
     }
+
+    pathCache = labelCacheRoot->text() + "/";
 
     QDialog::accept();
 }

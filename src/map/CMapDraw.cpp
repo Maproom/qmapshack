@@ -30,6 +30,7 @@
 
 
 QList<CMapDraw*> CMapDraw::maps;
+QString CMapDraw::cachePath = QDir::home().absoluteFilePath(".QMapShack/");
 QStringList CMapDraw::mapPaths;
 QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms").split('|');
 
@@ -67,7 +68,7 @@ void CMapDraw::setProjection(const QString& proj)
 
 void CMapDraw::setupMapPath()
 {
-    CMapPathSetup dlg(mapPaths);
+    CMapPathSetup dlg(mapPaths, cachePath);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;
@@ -85,11 +86,13 @@ void CMapDraw::setupMapPath()
 void CMapDraw::saveMapPath(QSettings& cfg)
 {
     cfg.setValue("mapPath", mapPaths);
+    cfg.setValue("cachePath", cachePath);
 }
 
 void CMapDraw::loadMapPath(QSettings& cfg)
 {
-    mapPaths = cfg.value("mapPath", mapPaths).toStringList();
+    mapPaths    = cfg.value("mapPath", mapPaths).toStringList();
+    cachePath   = cfg.value("cachePath", cachePath).toString();
 }
 
 

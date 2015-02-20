@@ -26,7 +26,7 @@ class CMapPathSetup : public QDialog, private Ui::IMapPathSetup
 {
     Q_OBJECT
 public:
-    CMapPathSetup(QStringList& paths);
+    CMapPathSetup(QStringList& paths, QString &pathCache);
     virtual ~CMapPathSetup();
 
 public slots:
@@ -36,10 +36,12 @@ private slots:
     void slotAddPath();
     void slotDelPath();
     void slotItemSelectionChanged();
+    void slotChangeCachePath();
 
 
 private:
     QStringList& paths;
+    QString& pathCache;
 };
 
 #endif //CMAPPATHSETUP_H

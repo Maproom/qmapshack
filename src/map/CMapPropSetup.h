@@ -41,8 +41,6 @@ private slots:
     void slotSetMinScale(bool checked);
     void slotSetMaxScale(bool checked);
 
-    void slotSetCachePath();
-
 private:
     void updateScaleLabel();
 

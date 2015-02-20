@@ -44,7 +44,6 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     connect(checkPolylines, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
     connect(checkPoints, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
 
-    connect(toolCachePath, SIGNAL(clicked()), this, SLOT(slotSetCachePath()));
     connect(spinCacheSize, SIGNAL(valueChanged(int)), mapfile, SLOT(slotSetCacheSize(qint32)));
     connect(spinCacheExpiration, SIGNAL(valueChanged(int)), mapfile, SLOT(slotSetCacheExpiration(qint32)));
 
@@ -110,7 +109,10 @@ void CMapPropSetup::slotPropertiesChanged()
     checkPolylines->setChecked(mapfile->getShowPolylines());
     checkPoints->setChecked(mapfile->getShowPOIs());
 
-    labelCachePath->setText(mapfile->getCachePath());
+    QString lbl = mapfile->getCachePath();
+    labelCachePath->setText(lbl);
+    labelCachePath->setToolTip(lbl);
+
     spinCacheSize->setValue(mapfile->getCacheSize());
     spinCacheExpiration->setValue(mapfile->getCacheExpiration());
 
@@ -142,16 +144,6 @@ void CMapPropSetup::slotSetMaxScale(bool checked)
     slotPropertiesChanged();
 }
 
-void CMapPropSetup::slotSetCachePath()
-{
-    QString path = QFileDialog::getExistingDirectory(this, tr("Cache path..."), labelCachePath->text());
-    if(path.isEmpty())
-    {
-        return;
-    }
-    mapfile->slotSetCachePath(path);
-    slotPropertiesChanged();
-}
 
 #define BAR_HEIGHT 6
 #define HOR_MARGIN 3

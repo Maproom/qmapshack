@@ -81,6 +81,10 @@ public:
     {
         return supportedFormats;
     }
+    static const QString& getCacheRoot()
+    {
+        return cachePath;
+    }
 
     /**
        @brief Forward messages to CCanvas::reportStatus()
@@ -150,6 +154,8 @@ private:
 
     /// the list of paths to serach maps
     static QStringList mapPaths;
+
+    static QString cachePath;
 
     /// all existing CMapDraw instances
     static QList<CMapDraw*> maps;

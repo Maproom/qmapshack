@@ -61,7 +61,7 @@ class CCanvas : public QWidget
 {
     Q_OBJECT
 public:
-    CCanvas(QWidget * parent);
+    CCanvas(QWidget * parent, const QString& name);
     virtual ~CCanvas();
 
     void saveConfig(QSettings& cfg);

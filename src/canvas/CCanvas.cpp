@@ -46,23 +46,30 @@ QBrush CCanvas::brushBackWhite(QColor(255,255,255,255));
 QBrush CCanvas::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
 
-CCanvas::CCanvas(QWidget *parent)
+CCanvas::CCanvas(QWidget *parent, const QString &name)
     : QWidget(parent)
     , posFocus(12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD)
     , plotTrackProfile(0)
 {
     setFocusPolicy(Qt::WheelFocus);
 
-    int count = 1;
-    while(1)
+    if(name.isEmpty())
     {
-        QString name = tr("View %1").arg(count);
-        if(CMainWindow::self().findChild<CCanvas*>(name) == 0)
+        int count = 1;
+        while(1)
         {
-            setObjectName(name);
-            break;
+            QString name = tr("View %1").arg(count);
+            if(CMainWindow::self().findChild<CCanvas*>(name) == 0)
+            {
+                setObjectName(name);
+                break;
+            }
+            count++;
         }
-        count++;
+    }
+    else
+    {
+        setObjectName(name);
     }
 
     setMouseTracking(true);

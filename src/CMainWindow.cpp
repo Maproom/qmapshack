@@ -104,23 +104,27 @@ CMainWindow::CMainWindow()
     cfg.beginGroup("Canvas");
     CMapDraw::loadMapPath(cfg);
     CDemDraw::loadDemPath(cfg);
-    int N = cfg.value("numberOfCanvas").toInt();
-    for(int i = 0; i < N; i++)
-    {
-        CCanvas * canvas = new CCanvas(tabWidget);
-        tabWidget->addTab(canvas, canvas->objectName());
-        connect(canvas, SIGNAL(sigMousePosition(QPointF,qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
 
-        cfg.beginGroup(QString("Canvas%1").arg(i));
-        canvas->loadConfig(cfg);
-        cfg.endGroup();
-    }
-    if(N == 0)
+    cfg.beginGroup("Views");
+    QStringList names = cfg.childGroups();
+
+    foreach(const QString& name, names)
     {
-        CCanvas * canvas = new CCanvas(tabWidget);
-        tabWidget->addTab(canvas, canvas->objectName());
-        connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+        CCanvas * view = new CCanvas(tabWidget, name);
+        tabWidget->addTab(view, view->objectName());
+        connect(view, SIGNAL(sigMousePosition(QPointF,qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+
+        cfg.beginGroup(name);
+        view->loadConfig(cfg);
+        cfg.endGroup(); // name
     }
+    if(names.isEmpty())
+    {
+        CCanvas * view = new CCanvas(tabWidget,"");
+        tabWidget->addTab(view, view->objectName());
+        connect(view, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+    }
+    cfg.endGroup(); // Views
 
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
@@ -166,25 +170,36 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MainWindow/units", IUnit::self().type);
 
 
+    /*
+      The "Canvas" section will holf all settings global to all views
+      and "Views" section containing a subsection for each view.
+    */
     cfg.beginGroup("Canvas");
-    QList<CCanvas*> allCanvas;
+    QList<CCanvas*> allViews;
+
+    // save setup of all views
+    cfg.beginGroup("Views");
+    // remove all previous setups in this section first
+    cfg.remove("");
+
     for(int i = 0; i < tabWidget->count(); i++)
     {
-        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(canvas == 0)
+        CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+        if(view == 0)
         {
             continue;
         }
         cnt++;
-        cfg.beginGroup(QString("Canvas%1").arg(i));
-        canvas->saveConfig(cfg);
+        // save views
+        cfg.beginGroup(view->objectName());
+        view->saveConfig(cfg);
         cfg.endGroup();
 
-        allCanvas << canvas;
+        allViews << view;
     }
+    cfg.endGroup(); // Views
 
     cfg.setValue("visibleCanvas", tabWidget->currentIndex());
-    cfg.setValue("numberOfCanvas", cnt);
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
     cfg.setValue("POIText", actionPOIText->isChecked());
@@ -202,7 +217,7 @@ CMainWindow::~CMainWindow()
         like CGisWidget safely uppon their destruction. (e.g. CMouseRangeTrk to reset
         it's track's draw mode by key)
      */
-    qDeleteAll(allCanvas);
+    qDeleteAll(allViews);
 
     QByteArray tz;
     IUnit::tz_mode_e tzmode;
@@ -332,14 +347,9 @@ void CMainWindow::slotAddCanvas()
         cnt++;
     }
 
-    CCanvas * canvas = new CCanvas(tabWidget);
+    CCanvas * canvas = new CCanvas(tabWidget,"");
     tabWidget->addTab(canvas, canvas->objectName());
     connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
-
-    SETTINGS;
-    cfg.beginGroup(QString("Canvas%1").arg(cnt));
-    canvas->loadConfig(cfg);
-    cfg.endGroup();
 
     tabWidget->setCurrentWidget(canvas);
 }
@@ -347,7 +357,7 @@ void CMainWindow::slotAddCanvas()
 void CMainWindow::slotTabCloseRequest(int i)
 {
     QWidget * w = tabWidget->widget(i);
-    tabWidget->removeTab(i);
+
     delete w;
 }
 

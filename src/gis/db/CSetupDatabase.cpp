@@ -78,7 +78,7 @@ void CSetupDatabase::accept()
 void CSetupDatabase::slotNewDB()
 {
     SETTINGS;
-    QString path = cfg.value("Paths/lastDatabasePath", QDir::homePath()).toString();
+    QString path = cfg.value("Database/lastDatabasePath", QDir::homePath()).toString();
 
     QString filename = QFileDialog::getSaveFileName(this, tr("New database..."), path, "Database (*.db)");
     if(filename.isEmpty())
@@ -93,7 +93,7 @@ void CSetupDatabase::slotNewDB()
     }
 
 
-    cfg.setValue("Paths/lastDatabasePath", fi.absolutePath());
+    cfg.setValue("Database/lastDatabasePath", fi.absolutePath());
 
     labelFilename->setText(filename);
 
@@ -103,7 +103,7 @@ void CSetupDatabase::slotNewDB()
 void CSetupDatabase::slotOpenDB()
 {
     SETTINGS;
-    QString path = cfg.value("Paths/lastDatabasePath", QDir::homePath()).toString();
+    QString path = cfg.value("Database/lastDatabasePath", QDir::homePath()).toString();
 
     QString filename = QFileDialog::getOpenFileName(this, tr("Open database..."), path, "Database (*.db)");
     if(filename.isEmpty())
@@ -118,7 +118,7 @@ void CSetupDatabase::slotOpenDB()
     }
 
 
-    cfg.setValue("Paths/lastDatabasePath", fi.absolutePath());
+    cfg.setValue("Database/lastDatabasePath", fi.absolutePath());
 
     labelFilename->setText(filename);
 

@@ -69,7 +69,7 @@ void CImportDatabase::stdErr(const QString& str)
 void CImportDatabase::slotSelectSource()
 {
     SETTINGS;
-    QString path = cfg.value("Path/source",QDir::homePath()).toString();
+    QString path = cfg.value("ConvertDB/sourcePath",QDir::homePath()).toString();
     QString filename = QFileDialog::getOpenFileName(this, tr("Select source database..."), path, "*.db");
     if(filename.isEmpty())
     {
@@ -77,7 +77,7 @@ void CImportDatabase::slotSelectSource()
     }
 
     QFileInfo fi(filename);
-    cfg.setValue("Path/source", fi.absolutePath());
+    cfg.setValue("ConvertDB/sourcePath", fi.absolutePath());
 
     labelSource->setText(filename);
 

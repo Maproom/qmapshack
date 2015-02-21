@@ -38,6 +38,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , filename(filename)
     , valid(false)
 {
+    setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 }
 
 IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
@@ -46,6 +47,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , filename(filename)
     , valid(false)
 {
+    setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 }
 
 IGisProject::~IGisProject()
@@ -432,6 +434,11 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
 
 void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
+    if(checkState(CGisListWks::eColumnDecoration) != Qt::Checked)
+    {
+        return;
+    }
+
     for(int i = 0; i < childCount(); i++)
     {
         if(gis->needsRedraw())
@@ -451,6 +458,11 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
+    if(checkState(CGisListWks::eColumnDecoration) != Qt::Checked)
+    {
+        return;
+    }
+
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
@@ -466,6 +478,11 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
+    if(checkState(CGisListWks::eColumnDecoration) != Qt::Checked)
+    {
+        return;
+    }
+
     for(int i = 0; i < childCount(); i++)
     {
         if(gis->needsRedraw())

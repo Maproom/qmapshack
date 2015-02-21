@@ -71,6 +71,7 @@ private slots:
     void slotCloseProject();
     void slotDeleteProject();
     void slotItemDoubleClicked(QTreeWidgetItem * item, int);
+    void slotItemChanged(QTreeWidgetItem * item, int column);
     void slotEditItem();
     void slotDeleteItem();
     void slotProjWpt();

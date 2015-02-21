@@ -107,6 +107,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
+    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
 
     menuItemTrk     = new QMenu(this);
     actionEditDetails = menuItemTrk->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
@@ -956,6 +957,15 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     {
         CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
         CGisWidget::self().focusTrkByKey(true, gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotItemChanged(QTreeWidgetItem * item, int column)
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    if(column == CGisListDB::eColumnCheckbox)
+    {
+        emit sigChanged();
     }
 }
 

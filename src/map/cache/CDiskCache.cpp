@@ -125,6 +125,7 @@ void CDiskCache::slotCleanup()
             table.remove(hash);
             cache.remove(hash);
             QFile::remove(fileinfo.absoluteFilePath());
+            qDebug() << "remove old tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath();
         }
         else
         {
@@ -142,11 +143,11 @@ void CDiskCache::slotCleanup()
             cache.remove(hash);
             QFile::remove(fileinfo.absoluteFilePath());
 
-            qDebug() << "remove" << fileinfo.absoluteFilePath();
+            qDebug() << "remove" << fileinfo.lastModified() << fileinfo.absoluteFilePath();
 
-            size -= fileinfo.size();
+            tmpSize -= fileinfo.size();
 
-            if(size < maxSize)
+            if(tmpSize < maxSize)
             {
                 break;
             }

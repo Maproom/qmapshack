@@ -88,6 +88,7 @@ void CMapPropSetup::resizeEvent(QResizeEvent * e)
 
 void CMapPropSetup::slotPropertiesChanged()
 {
+    // block all signals to avoid retrigger
     sliderOpacity->blockSignals(true);
     toolSetMaxScale->blockSignals(true);
     toolSetMinScale->blockSignals(true);
@@ -97,25 +98,27 @@ void CMapPropSetup::slotPropertiesChanged()
     spinCacheSize->blockSignals(true);
     spinCacheExpiration->blockSignals(true);
 
+    // opacity and visibility settings
     sliderOpacity->setValue(mapfile->getOpacity());
     qreal minScale = mapfile->getMinScale();
     toolSetMinScale->setChecked(minScale != NOFLOAT);
     qreal maxScale = mapfile->getMaxScale();
     toolSetMaxScale->setChecked(maxScale != NOFLOAT);
-
     updateScaleLabel();
 
+    // vector maps properties
     checkPolygons->setChecked(mapfile->getShowPolygons());
     checkPolylines->setChecked(mapfile->getShowPolylines());
     checkPoints->setChecked(mapfile->getShowPOIs());
 
+    // streaming map properties
     QString lbl = mapfile->getCachePath();
     labelCachePath->setText(lbl);
     labelCachePath->setToolTip(lbl);
-
     spinCacheSize->setValue(mapfile->getCacheSize());
     spinCacheExpiration->setValue(mapfile->getCacheExpiration());
 
+    // unblock all signals
     sliderOpacity->blockSignals(false);
     toolSetMaxScale->blockSignals(false);
     toolSetMinScale->blockSignals(false);
@@ -194,8 +197,6 @@ void CMapPropSetup::updateScaleLabel()
     p.setPen(Qt::darkBlue);
     p.setBrush(Qt::NoBrush);
     p.drawRect(ind);
-
-
 
     labelScale->setPixmap(pix);
 }

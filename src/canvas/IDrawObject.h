@@ -71,35 +71,6 @@ public:
      */
     void setMaxScale(qreal s);
 
-    bool getShowPolygons()
-    {
-        return showPolygons;
-    }
-
-    bool getShowPolylines()
-    {
-        return showPolylines;
-    }
-
-    bool getShowPOIs()
-    {
-        return showPOIs;
-    }
-
-    const QString& getCachePath()
-    {
-        return cachePath;
-    }
-
-    qint32 getCacheSize()
-    {
-        return cacheSizeMB;
-    }
-
-    qint32 getCacheExpiration()
-    {
-        return cacheExpiration;
-    }
 
     /**
        @brief Get QListWidgetItems to enable/disable map layers.
@@ -129,31 +100,6 @@ public slots:
         opacity = value;
     }
 
-    void slotSetShowPolygons(bool yes)
-    {
-        showPolygons = yes;
-    }
-    void slotSetShowPolylines(bool yes)
-    {
-        showPolylines = yes;
-    }
-    void slotSetShowPOIs(bool yes)
-    {
-        showPOIs = yes;
-    }
-
-    void slotSetCachePath(const QString& path)
-    {
-        cachePath = path; configureCache();
-    }
-    void slotSetCacheSize(qint32 size)
-    {
-        cacheSizeMB = size; configureCache();
-    }
-    void slotSetCacheExpiration(qint32 days)
-    {
-        cacheExpiration = days; configureCache();
-    }
 
 signals:
     /**
@@ -187,19 +133,6 @@ private:
     qreal minScale;
     /// the maximum scale a map is visible
     qreal maxScale;
-    /// vector maps only: hide/show polygons
-    bool showPolygons;
-    /// vector maps only: hide/show polylines
-    bool showPolylines;
-    /// vector maps only: hide/show point of interest
-    bool showPOIs;
-
-    /// streaming map only: path to cached tiles
-    QString cachePath;
-    /// streaming map only: maximum size of all tiles in cache [MByte]
-    qint32 cacheSizeMB;
-    /// streaming map only: maximum age of tiles in cache [days]
-    qint32 cacheExpiration;
 };
 
 #endif //IDRAWOBJECT_H

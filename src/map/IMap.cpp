@@ -29,6 +29,12 @@ IMap::IMap(quint32 features, CMapDraw *parent)
     , pjsrc(0)
     , isActivated(false)
     , flagsFeature(features)
+    , showPolygons(true)
+    , showPolylines(true)
+    , showPOIs(true)
+    , cacheSizeMB(100)
+    , cacheExpiration(8)
+
 {
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }
@@ -38,6 +44,36 @@ IMap::~IMap()
     pj_free(pjtar);
     pj_free(pjsrc);
     delete setup;
+}
+
+void IMap::saveConfig(QSettings& cfg)
+{
+    IDrawObject::saveConfig(cfg);
+
+    if(hasFeatureVectorItems())
+    {
+        cfg.setValue("showPolygons", getShowPolygons());
+        cfg.setValue("showPolylines", getShowPolylines());
+        cfg.setValue("showPOIs", getShowPOIs());
+    }
+
+    if(hasFeatureTileCache())
+    {
+        cfg.setValue("cacheSizeMB", cacheSizeMB);
+        cfg.setValue("cacheExpiration", cacheExpiration);
+    }
+}
+
+void IMap::loadConfig(QSettings& cfg)
+{
+    IDrawObject::loadConfig(cfg);
+
+    slotSetShowPolygons(cfg.value("showPolygons", getShowPolygons()).toBool());
+    slotSetShowPolylines(cfg.value("showPolylines", getShowPolylines()).toBool());
+    slotSetShowPOIs(cfg.value("showPOIs", getShowPOIs()).toBool());
+    slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
+    slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
+
 }
 
 IMapProp *IMap::getSetup()

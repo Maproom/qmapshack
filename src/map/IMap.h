@@ -35,6 +35,10 @@ public:
     IMap(quint32 features, CMapDraw * parent);
     virtual ~IMap();
 
+    void saveConfig(QSettings& cfg);
+
+    void loadConfig(QSettings& cfg);
+
     enum features_e
     {
         eFeatVisibility  = 0x00000001
@@ -109,6 +113,37 @@ public:
         return flagsFeature & eFeatLayers;
     }
 
+    bool getShowPolygons()
+    {
+        return showPolygons;
+    }
+
+    bool getShowPolylines()
+    {
+        return showPolylines;
+    }
+
+    bool getShowPOIs()
+    {
+        return showPOIs;
+    }
+
+    const QString& getCachePath()
+    {
+        return cachePath;
+    }
+
+    qint32 getCacheSize()
+    {
+        return cacheSizeMB;
+    }
+
+    qint32 getCacheExpiration()
+    {
+        return cacheExpiration;
+    }
+
+
     /**
        @brief Find a matching street polyline
 
@@ -122,6 +157,34 @@ public:
        @return              Return true if a line has been found.
      */
     virtual bool findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+
+public slots:
+    void slotSetShowPolygons(bool yes)
+    {
+        showPolygons = yes;
+    }
+    void slotSetShowPolylines(bool yes)
+    {
+        showPolylines = yes;
+    }
+    void slotSetShowPOIs(bool yes)
+    {
+        showPOIs = yes;
+    }
+
+    void slotSetCachePath(const QString& path)
+    {
+        cachePath = path; configureCache();
+    }
+    void slotSetCacheSize(qint32 size)
+    {
+        cacheSizeMB = size; configureCache();
+    }
+    void slotSetCacheExpiration(qint32 days)
+    {
+        cacheExpiration = days; configureCache();
+    }
+
 
 protected:
     void convertRad2M(QPointF &p);
@@ -162,7 +225,21 @@ protected:
     /// flag field for features defined in features_e
     quint32 flagsFeature;
 
+    /// vector maps only: hide/show polygons
+    bool showPolygons;
+    /// vector maps only: hide/show polylines
+    bool showPolylines;
+    /// vector maps only: hide/show point of interest
+    bool showPOIs;
 
+    /// streaming map only: path to cached tiles
+    QString cachePath;
+    /// streaming map only: maximum size of all tiles in cache [MByte]
+    qint32 cacheSizeMB;
+    /// streaming map only: maximum age of tiles in cache [days]
+    qint32 cacheExpiration;
+
+    /// a copyright string to be displayed as tool tip
     QString copyright;
 };
 

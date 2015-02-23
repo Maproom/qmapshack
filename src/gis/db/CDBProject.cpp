@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/CGisWidget.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/macros.h"
@@ -122,7 +123,7 @@ bool CDBProject::saveAs()
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
     QString filter = "*.qms";
-    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+    QString fn = QFileDialog::getSaveFileName(&CMainWindow::self(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
 
     if(fn.isEmpty())
     {

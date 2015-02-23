@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "mouse/CMouseEditArea.h"
-
 
 #include <QtWidgets>
 
@@ -97,7 +97,7 @@ void CMouseEditArea::slotCopyToNew()
         name = area->getName();
     }
 
-    name = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new area name."), QLineEdit::Normal, name);
+    name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new area name."), QLineEdit::Normal, name);
 
     if(name.isEmpty())
     {

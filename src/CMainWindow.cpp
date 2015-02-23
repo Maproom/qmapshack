@@ -108,7 +108,7 @@ CMainWindow::CMainWindow()
     cfg.beginGroup("Views");
     QStringList names = cfg.childGroups();
 
-    foreach(const QString& name, names)
+    foreach(const QString &name, names)
     {
         CCanvas * view = new CCanvas(tabWidget, name);
         tabWidget->addTab(view, view->objectName());
@@ -171,9 +171,9 @@ CMainWindow::~CMainWindow()
 
 
     /*
-      The "Canvas" section will holf all settings global to all views
-      and "Views" section containing a subsection for each view.
-    */
+       The "Canvas" section will holf all settings global to all views
+       and "Views" section containing a subsection for each view.
+     */
     cfg.beginGroup("Canvas");
     QList<CCanvas*> allViews;
 

@@ -289,7 +289,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
             if(last != QMessageBox::YesToAll)
             {
                 QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
-                last = QMessageBox::question(0, QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+                last = QMessageBox::question(&CMainWindow::self(), QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
                     // as each item in the project has to be unique, we can stop searching.
@@ -345,7 +345,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
-            CSelectCopyAction dlg(item, item2, 0);
+            CSelectCopyAction dlg(item, item2, &CMainWindow::self());
             dlg.exec();
             result = dlg.getResult();
             if(dlg.allOthersToo())

@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "helpers/CFileExt.h"
 #include "map/CMapDraw.h"
 #include "map/CMapMAP.h"
@@ -42,7 +43,7 @@ CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
     }
     catch(const exce_t& e)
     {
-        QMessageBox::critical(0, tr("Failed ..."), e.msg, QMessageBox::Abort);
+        QMessageBox::critical(&CMainWindow::self(), tr("Failed ..."), e.msg, QMessageBox::Abort);
         return;
     }
 

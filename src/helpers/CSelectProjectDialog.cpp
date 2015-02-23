@@ -16,16 +16,16 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
 
-
 #include <QtWidgets>
 
 CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& type, QTreeWidget * parent)
-    : QDialog(parent)
+    : QDialog(&CMainWindow::self())
     , key(key)
     , name(name)
     , type(type)

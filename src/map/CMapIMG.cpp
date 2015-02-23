@@ -148,7 +148,7 @@ CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
     }
     catch(const exce_t& e)
     {
-        QMessageBox::critical(0, tr("Failed ..."), e.msg, QMessageBox::Abort);
+        QMessageBox::critical(&CMainWindow::self(), tr("Failed ..."), e.msg, QMessageBox::Abort);
         return;
     }
 

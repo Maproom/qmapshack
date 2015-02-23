@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "grid/CProjWizard.h"
 #include "map/CMapDraw.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 

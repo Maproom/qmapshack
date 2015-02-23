@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -103,7 +104,7 @@ void CMouseEditTrk::slotCopyToNew()
         name = trk->getName();
     }
 
-    name = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name);
+    name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name);
 
     if(name.isEmpty())
     {

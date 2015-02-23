@@ -59,7 +59,7 @@ void CProjWpt::slotChangeIcon()
 
 void CProjWpt::slotChangeName()
 {
-    QString n = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
+    QString n = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
     if(n.isEmpty())
     {
         return;

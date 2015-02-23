@@ -127,7 +127,7 @@ void CDetailsOvlArea::slotLinkActivated(const QString& link)
 {
     if(link == "name")
     {
-        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, area.getName());
+        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, area.getName());
         if(name.isEmpty())
         {
             return;
@@ -163,7 +163,7 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
     else if(url.toString() == "links")
     {
         QList<IGisItem::link_t> links = area.getLinks();
-        CLinksDialog dlg(links, 0);
+        CLinksDialog dlg(links, this);
         if(dlg.exec() == QDialog::Accepted)
         {
             area.setLinks(links);

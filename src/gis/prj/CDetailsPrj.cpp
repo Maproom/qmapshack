@@ -363,7 +363,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
 {
     if(link == "name")
     {
-        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
+        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
         if(name.isEmpty())
         {
             return;
@@ -372,7 +372,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
     }
     else if(link == "keywords")
     {
-        QString keywords = QInputDialog::getText(0, tr("Edit keywords..."), tr("Enter keywords."), QLineEdit::Normal, prj.getKeywords());
+        QString keywords = QInputDialog::getText(this, tr("Edit keywords..."), tr("Enter keywords."), QLineEdit::Normal, prj.getKeywords());
         if(keywords.isEmpty())
         {
             return;
@@ -390,7 +390,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
 {
     if(url.path() == "name")
     {
-        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
+        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
         if(!name.isEmpty())
         {
             prj.setName(name);
@@ -475,7 +475,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
             if(item)
             {
                 QList<IGisItem::link_t> links = item->getLinks();
-                CLinksDialog dlg(links, 0);
+                CLinksDialog dlg(links, this);
                 if(dlg.exec() == QDialog::Accepted)
                 {
                     item->setLinks(links);
@@ -485,7 +485,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         else
         {
             QList<IGisItem::link_t> links = prj.getLinks();
-            CLinksDialog dlg(links, 0);
+            CLinksDialog dlg(links, this);
             if(dlg.exec() == QDialog::Accepted)
             {
                 prj.setLinks(links);

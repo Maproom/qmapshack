@@ -147,7 +147,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <property name="spacing">
         <number>3</number>
@@ -384,30 +384,6 @@
            <number>3</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QComboBox" name="comboColor">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineName">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QToolButton" name="toolLock">
@@ -476,6 +452,30 @@
            </layout>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QComboBox" name="comboColor">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineName">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QLabel" name="labelInfo">
             <property name="text">
              <string>-</string>
@@ -506,9 +506,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>splitter</zorder>
-  <zorder>labelInfo</zorder>
-  <zorder></zorder>
  </widget>
  <customwidgets>
   <customwidget>

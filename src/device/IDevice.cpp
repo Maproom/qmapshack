@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
-
+#include "CMainWindow.h"
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
@@ -142,7 +142,7 @@ void IDevice::insertCopyOfProject(IGisProject * project, int& lastResult)
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
-            CSelectCopyAction dlg(project, project2, 0);
+            CSelectCopyAction dlg(project, project2, &CMainWindow::self());
             dlg.exec();
             result = dlg.getResult();
             if(dlg.allOthersToo())

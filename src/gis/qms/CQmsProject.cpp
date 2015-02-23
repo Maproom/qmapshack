@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "helpers/CSettings.h"
-
 
 #include <QtWidgets>
 
@@ -45,7 +45,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+        QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
         return;
     }
 
@@ -90,7 +90,7 @@ bool CQmsProject::saveAs()
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
     QString filter = "*.qms";
-    QString fn = QFileDialog::getSaveFileName(0, QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+    QString fn = QFileDialog::getSaveFileName(&CMainWindow::self(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
 
     if(fn.isEmpty())
     {
@@ -140,7 +140,7 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(0, QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
+        QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
         return false;
     }
     QDataStream out(&file);

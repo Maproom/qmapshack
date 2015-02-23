@@ -19,7 +19,8 @@
 
 **********************************************************************************************/
 
-#include "CGarminTyp.h"
+#include "CMainWindow.h"
+#include "map/garmin/CGarminTyp.h"
 #include <QMessageBox>
 #include <QtCore>
 
@@ -460,7 +461,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         default:
             if(!tainted)
             {
-                QMessageBox::warning(0, QObject::tr("Warning..."), QObject::tr("This is a typ file with unknown polygon encoding. Please report!"), QMessageBox::Abort, QMessageBox::Abort);
+                QMessageBox::warning(&CMainWindow::self(), QObject::tr("Warning..."), QObject::tr("This is a typ file with unknown polygon encoding. Please report!"), QMessageBox::Abort, QMessageBox::Abort);
                 tainted = true;
             }
             qDebug() << "Failed polygon:" << typ << subtyp << hex << typ << subtyp << ctyp;
@@ -841,7 +842,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
         default:
             if(!tainted)
             {
-                QMessageBox::warning(0, QObject::tr("Warning..."), QObject::tr("This is a typ file with unknown polyline encoding. Please report!"), QMessageBox::Abort, QMessageBox::Abort);
+                QMessageBox::warning(&CMainWindow::self(), QObject::tr("Warning..."), QObject::tr("This is a typ file with unknown polyline encoding. Please report!"), QMessageBox::Abort, QMessageBox::Abort);
                 tainted = true;
             }
 

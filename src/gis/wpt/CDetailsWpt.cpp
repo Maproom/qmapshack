@@ -148,7 +148,7 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
 {
     if(link == "name")
     {
-        QString name = QInputDialog::getText(0, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
+        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
         if(name.isEmpty())
         {
             return;
@@ -158,7 +158,7 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     else if(link == "elevation")
     {
         QVariant var(wpt.getElevation());
-        CElevationDialog dlg(0, var, QVariant(NOINT), wpt.getPosition());
+        CElevationDialog dlg(this, var, QVariant(NOINT), wpt.getPosition());
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setElevation(var.toInt());
@@ -167,7 +167,7 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     else if(link == "proximity")
     {
         QVariant var(wpt.getProximity());
-        CInputDialog dlg(0, tr("Enter new proximity range."), var, QVariant(NOFLOAT));
+        CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT));
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setProximity(var.toDouble());
@@ -176,7 +176,7 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     else if(link == "position")
     {
         QPointF pos = wpt.getPosition();
-        CPositionDialog dlg(0, pos);
+        CPositionDialog dlg(this, pos);
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setPosition(pos);
@@ -190,7 +190,7 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
 {
     if(url.toString() == "comment")
     {
-        CTextEditWidget dlg(0);
+        CTextEditWidget dlg(this);
         dlg.setHtml(wpt.getComment());
         if(dlg.exec() == QDialog::Accepted)
         {
@@ -200,7 +200,7 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
     }
     else if(url.toString() == "description")
     {
-        CTextEditWidget dlg(0);
+        CTextEditWidget dlg(this);
         dlg.setHtml(wpt.getDescription());
         if(dlg.exec() == QDialog::Accepted)
         {
@@ -211,7 +211,7 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
     else if(url.toString() == "links")
     {
         QList<IGisItem::link_t> links = wpt.getLinks();
-        CLinksDialog dlg(links, 0);
+        CLinksDialog dlg(links, this);
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setLinks(links);

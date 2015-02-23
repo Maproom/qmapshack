@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "map/CMapDraw.h"
 #include "map/CMapPathSetup.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 

@@ -415,7 +415,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
     else if(url.toString() == "links")
     {
         QList<IGisItem::link_t> links = trk.getLinks();
-        CLinksDialog dlg(links, 0);
+        CLinksDialog dlg(links, this);
         if(dlg.exec() == QDialog::Accepted)
         {
             trk.setLinks(links);

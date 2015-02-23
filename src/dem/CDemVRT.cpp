@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "dem/CDemDraw.h"
@@ -41,14 +42,14 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
     if(dataset == 0)
     {
-        QMessageBox::warning(0, tr("Error..."), tr("Failed to load file: %1").arg(filename));
+        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
         return;
     }
 
     if(dataset->GetRasterCount() != 1)
     {
         delete dataset; dataset = 0;
-        QMessageBox::warning(0, tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
+        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
 
@@ -57,7 +58,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(pBand == 0)
     {
         delete dataset; dataset = 0;
-        QMessageBox::warning(0, tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
+        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
 

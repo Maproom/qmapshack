@@ -187,7 +187,7 @@ const QString& CGisItemWpt::getNewName()
             lastName = lastName.left(idx) + QString::number(lastName.mid(idx).toInt() + 1);
         }
     }
-    lastName = QInputDialog::getText(0, QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
+    lastName = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
     return lastName;
 }
 
@@ -204,7 +204,7 @@ const QString& CGisItemWpt::getNewIcon()
 
 void CGisItemWpt::getNewPosition(QPointF& pos)
 {
-    CPositionDialog dlg(0, pos);
+    CPositionDialog dlg(&CMainWindow::self(), pos);
     if(dlg.exec() == QDialog::Rejected)
     {
         pos = NOPOINTF;
@@ -408,12 +408,12 @@ void CGisItemWpt::edit()
 {
     if(geocache.hasData)
     {
-        CDetailsGeoCache dlg(*this, 0);
+        CDetailsGeoCache dlg(*this, &CMainWindow::self());
         dlg.exec();
     }
     else
     {
-        CDetailsWpt dlg(*this, 0);
+        CDetailsWpt dlg(*this, &CMainWindow::self());
         dlg.exec();
     }
 }

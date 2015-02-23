@@ -109,6 +109,9 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_2">
+     <property name="spacing">
+      <number>3</number>
+     </property>
      <item row="0" column="0">
       <widget class="QCheckBox" name="checkHillshading">
        <property name="text">

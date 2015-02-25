@@ -339,10 +339,19 @@ void CGisItemTrk::unregisterPlot(IPlot * plot)
 
 
 
-QString CGisItemTrk::getInfo() const
+QString CGisItemTrk::getInfo(bool allowEdit) const
 {
     QString val1, unit1, val2, unit2;
-    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
+    QString str = "<div>";
+
+    if(allowEdit)
+    {
+        str += "<b>" + toLink(isReadOnly(), "name", getName(), "") + "</b>";
+    }
+    else
+    {
+        str += "<div style='font-weight: bold;'>" + getName() + "</div>";
+    }
 
     if(cntVisiblePoints == 0)
     {
@@ -396,7 +405,7 @@ QString CGisItemTrk::getInfo() const
     str += "<br/>\n";
     str += QObject::tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
 
-
+    str += "</div>";
     return str;
 }
 

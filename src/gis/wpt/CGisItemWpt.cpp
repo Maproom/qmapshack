@@ -212,7 +212,7 @@ void CGisItemWpt::getNewPosition(QPointF& pos)
 }
 
 
-QString CGisItemWpt::getInfo() const
+QString CGisItemWpt::getInfo(bool allowEdit) const
 {
     QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 

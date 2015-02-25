@@ -141,7 +141,7 @@ void CGisItemRte::setLinks(const QList<link_t>& links)
 
 
 
-QString CGisItemRte::getInfo() const
+QString CGisItemRte::getInfo(bool allowEdit) const
 {
     QString str = getName();
 

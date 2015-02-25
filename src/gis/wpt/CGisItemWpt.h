@@ -216,7 +216,7 @@ public:
     {
         return wpt.name;
     }
-    QString getInfo() const;
+    QString getInfo(bool allowEdit = false) const;
     QPointF getPosition() const
     {
         return QPointF(wpt.lon, wpt.lat);

@@ -109,11 +109,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(checkSpeed, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
     connect(checkProgress, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
     connect(comboColor, SIGNAL(currentIndexChanged(int)), this, SLOT(slotColorChanged(int)));
-    connect(lineName, SIGNAL(returnPressed()), this, SLOT(slotNameChanged()));
-    connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotNameChanged(QString)));
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
     connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
+    connect(labelInfo, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
@@ -159,8 +158,7 @@ void CDetailsTrk::setupGui()
         labelTainted->hide();
     }
 
-    labelInfo->setText(trk.getInfo());
-    lineName->setEnabled(!isReadOnly);
+    labelInfo->setText(trk.getInfo(true));
     comboColor->setCurrentIndex(trk.getColorIdx());
     comboColor->setEnabled(!isReadOnly);
     toolLock->setChecked(isReadOnly);
@@ -262,8 +260,6 @@ void CDetailsTrk::setupGui()
     treeWidget->addTopLevelItems(items);
     treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
 
-    lineName->setText(trk.getName());
-
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, trk.getComment(), trk.getDescription(), trk.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start);
@@ -349,36 +345,6 @@ void CDetailsTrk::slotChangeReadOnlyMode(bool on)
     setupGui();
 }
 
-void CDetailsTrk::slotNameChanged(const QString& name)
-{
-    QPalette palette = lineName->palette();
-    if(trk.getName() != name)
-    {
-        palette.setColor(QPalette::Base, QColor(255, 128, 128));
-    }
-    else
-    {
-        palette.setColor(QPalette::Base, QColor(255, 255, 255));
-    }
-    lineName->setPalette(palette);
-}
-
-
-void CDetailsTrk::slotNameChanged()
-{
-    QString name  = lineName->text();
-    QString _name_ = trk.getName();
-
-    QPalette palette = lineName->palette();
-
-    if(_name_ != name)
-    {
-        trk.setName(name);
-        palette.setColor(QPalette::Base, QColor(128, 255, 128));
-    }
-
-    lineName->setPalette(palette);
-}
 
 void CDetailsTrk::slotItemSelectionChanged()
 {
@@ -387,6 +353,20 @@ void CDetailsTrk::slotItemSelectionChanged()
     {
         quint32 idx = item->text(eColNum).toUInt();
         trk.setMouseFocusByIndex(idx, CGisItemTrk::eFocusMouseMove);
+    }
+}
+
+void CDetailsTrk::slotLinkActivated(const QString& url)
+{
+    if(url == "name")
+    {
+        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, trk.getName());
+        if(name.isEmpty())
+        {
+            return;
+        }
+        trk.setName(name);
+        setupGui();
     }
 }
 

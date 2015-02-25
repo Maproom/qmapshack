@@ -69,7 +69,7 @@ public:
     {
         return rte.name;
     }
-    QString getInfo() const;
+    QString getInfo(bool allowEdit = false) const;
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& screenPos);
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);

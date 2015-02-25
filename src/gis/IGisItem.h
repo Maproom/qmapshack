@@ -195,7 +195,7 @@ public:
        @brief Get a short string with the items properties to be displayed in tool tips or similar
        @return A string object.
      */
-    virtual QString getInfo() const = 0;
+    virtual QString getInfo(bool allowEdit = false) const = 0;
 
     virtual const QString& getComment() const = 0;
     virtual const QString& getDescription() const = 0;

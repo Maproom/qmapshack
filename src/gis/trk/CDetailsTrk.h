@@ -41,10 +41,9 @@ private slots:
     void slotShowPlots();
     void slotColorChanged(int idx);
     void slotChangeReadOnlyMode(bool on);
-    void slotNameChanged();
-    void slotNameChanged(const QString& name);
     void slotItemSelectionChanged();
     void slotLinkActivated(const QUrl& url);
+    void slotLinkActivated(const QString& url);
 
 private:
     enum columns_t

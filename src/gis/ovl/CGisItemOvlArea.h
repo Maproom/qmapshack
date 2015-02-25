@@ -52,7 +52,7 @@ public:
     {
         return colorIdx;
     }
-    QString getInfo() const;
+    QString getInfo(bool allowEdit = false) const;
     void getPolylineFromData(QPolygonF& line);
     const QString& getComment() const
     {

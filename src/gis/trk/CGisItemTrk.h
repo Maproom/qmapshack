@@ -151,7 +151,7 @@ public:
         return color;
     }
 
-    QString getInfo() const;
+    QString getInfo(bool allowEdit = false) const;
     QString getInfoRange();
     QString getInfoTrkPt(const trkpt_t& pt);
     QString getInfoProgress(const trkpt_t& pt);

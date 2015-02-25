@@ -409,7 +409,7 @@ const QString& CGisItemOvlArea::getName() const
     return area.name;
 }
 
-QString CGisItemOvlArea::getInfo() const
+QString CGisItemOvlArea::getInfo(bool allowEdit) const
 {
     QString unit, val;
     QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";

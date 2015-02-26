@@ -31,6 +31,7 @@ class IMapProp;
 
 class IMap : public IDrawObject
 {
+    Q_OBJECT
 public:
     IMap(quint32 features, CMapDraw * parent);
     virtual ~IMap();

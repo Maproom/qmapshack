@@ -18,11 +18,13 @@
 
 #include "dem/CDemDraw.h"
 #include "dem/CDemPathSetup.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
 CDemPathSetup::CDemPathSetup(QStringList &paths)
-    : paths(paths)
+    : QDialog(&CMainWindow::self())
+    , paths(paths)
 {
     setupUi(this);
 

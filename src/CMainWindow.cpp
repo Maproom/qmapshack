@@ -41,12 +41,12 @@
 #include <QtWidgets>
 
 #ifdef WIN32
-#include <windows.h>
+#include "device/CDeviceWatcherWindows.h"
+#include <dbt.h>
 #include <guiddef.h>
 #include <initguid.h>
-#include <dbt.h>
 #include <usbiodef.h>
-#include "device/CDeviceWatcherWindows.h"
+#include <windows.h>
 #endif // WIN32
 
 CMainWindow * CMainWindow::pSelf = 0;
@@ -611,61 +611,61 @@ void CMainWindow::loadGISData(const QStringList& filenames)
 
 static void sendDeviceEvent(DWORD unitmask, bool add)
 {
-	for (char i = 0; i < 26; ++i)
-	{
-		if (unitmask & 0x1)
-		{
-			QString path = QString(i + 'A') + ":/";
-			qDebug() << "sendDeviceEvent" << path << add;
-			CEventDevice * event = new CEventDevice(path, add);
-			QCoreApplication::postEvent(CDeviceWatcherWindows::self(), event);
-			//qDebug() << "postEvent";
-		}
-		unitmask = unitmask >> 1;
-	}
-
+    for (char i = 0; i < 26; ++i)
+    {
+        if (unitmask & 0x1)
+        {
+            QString path = QString(i + 'A') + ":/";
+            qDebug() << "sendDeviceEvent" << path << add;
+            CEventDevice * event = new CEventDevice(path, add);
+            QCoreApplication::postEvent(CDeviceWatcherWindows::self(), event);
+            //qDebug() << "postEvent";
+        }
+        unitmask = unitmask >> 1;
+    }
 }
 
 
 bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result)
 {
-	MSG* msg = (MSG*)message;
-	//qDebug() << "nativeEvent" << eventType << msg->message << msg->lParam << msg->wParam;
+    MSG* msg = (MSG*)message;
+    //qDebug() << "nativeEvent" << eventType << msg->message << msg->lParam << msg->wParam;
 
-	if (WM_DEVICECHANGE == msg->message)
-	{
-		//qDebug() << "WM_DEVICECHANGE";
-		PDEV_BROADCAST_HDR pHdr = (PDEV_BROADCAST_HDR)msg->lParam;
-		switch (msg->wParam)
-		{
-		case DBT_DEVICEARRIVAL:
-		{
-			qDebug() << "DBT_DEVICEARRIVAL"<< pHdr->dbch_devicetype;
-			if (pHdr->dbch_devicetype == DBT_DEVTYP_VOLUME)
-			{
-				PDEV_BROADCAST_VOLUME pHdrv = (PDEV_BROADCAST_VOLUME)pHdr;
-				sendDeviceEvent(pHdrv->dbcv_unitmask, true);
-			}
-			break;
-		}
-		case  DBT_DEVICEREMOVECOMPLETE:
-		{
-			qDebug() << "DBT_DEVICEREMOVECOMPLETE" << pHdr->dbch_devicetype;
-			if (pHdr->dbch_devicetype == DBT_DEVTYP_VOLUME)
-			{
-				PDEV_BROADCAST_VOLUME pHdrv = (PDEV_BROADCAST_VOLUME)pHdr;
-				sendDeviceEvent(pHdrv->dbcv_unitmask, false);
-			}
-			break;
-		}
-		default:
-		{
-				   break;
-		}
-		}
-	}
+    if (WM_DEVICECHANGE == msg->message)
+    {
+        //qDebug() << "WM_DEVICECHANGE";
+        PDEV_BROADCAST_HDR pHdr = (PDEV_BROADCAST_HDR)msg->lParam;
+        switch (msg->wParam)
+        {
+        case DBT_DEVICEARRIVAL:
+        {
+            qDebug() << "DBT_DEVICEARRIVAL"<< pHdr->dbch_devicetype;
+            if (pHdr->dbch_devicetype == DBT_DEVTYP_VOLUME)
+            {
+                PDEV_BROADCAST_VOLUME pHdrv = (PDEV_BROADCAST_VOLUME)pHdr;
+                sendDeviceEvent(pHdrv->dbcv_unitmask, true);
+            }
+            break;
+        }
 
-	return QWidget::nativeEvent(eventType, message, result);
+        case  DBT_DEVICEREMOVECOMPLETE:
+        {
+            qDebug() << "DBT_DEVICEREMOVECOMPLETE" << pHdr->dbch_devicetype;
+            if (pHdr->dbch_devicetype == DBT_DEVTYP_VOLUME)
+            {
+                PDEV_BROADCAST_VOLUME pHdrv = (PDEV_BROADCAST_VOLUME)pHdr;
+                sendDeviceEvent(pHdrv->dbcv_unitmask, false);
+            }
+            break;
+        }
 
+        default:
+        {
+            break;
+        }
+        }
+    }
+
+    return QWidget::nativeEvent(eventType, message, result);
 }
 #endif // WIN32

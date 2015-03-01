@@ -69,7 +69,7 @@ public:
 
 #ifdef WIN32
 protected:
-	bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
+    bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
 #endif // WIN32
 
 private slots:

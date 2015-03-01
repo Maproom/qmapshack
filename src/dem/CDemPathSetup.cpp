@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemPathSetup.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 

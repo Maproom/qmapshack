@@ -73,7 +73,6 @@ void IMap::loadConfig(QSettings& cfg)
     slotSetShowPOIs(cfg.value("showPOIs", getShowPOIs()).toBool());
     slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
     slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
-
 }
 
 IMapProp *IMap::getSetup()

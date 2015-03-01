@@ -80,7 +80,6 @@ void CMapPathSetup::slotChangeCachePath()
     }
 
     labelCacheRoot->setText(path);
-
 }
 
 void CMapPathSetup::accept()

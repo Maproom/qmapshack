@@ -63,7 +63,7 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         const QDomNode& xmlPath     = xmlLocation.namedItem("Path");
 
         QString name = xmlName.toElement().text();
-        if(name == "UserDataSync")
+        if(name == "GPSData")
         {
             pathGpx = xmlPath.toElement().text();
         }

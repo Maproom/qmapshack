@@ -92,7 +92,7 @@ void CMapPathSetup::accept()
         paths << item->text();
     }
 
-    pathCache = labelCacheRoot->text() + "/";
+    pathCache = QDir(labelCacheRoot->text()).absolutePath();
 
     QDialog::accept();
 }

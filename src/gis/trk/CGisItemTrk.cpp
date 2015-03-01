@@ -1191,6 +1191,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         return;
     }
 
+    if(trk.segs.isEmpty())
+    {
+        return;
+    }
+
     QPointF pt1;
     QPointF p1 = viewport[0];
     QPointF p2 = viewport[2];

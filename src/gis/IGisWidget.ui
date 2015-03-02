@@ -57,7 +57,7 @@
        <number>14</number>
       </property>
       <attribute name="headerDefaultSectionSize">
-       <number>50</number>
+       <number>100</number>
       </attribute>
       <column>
        <property name="text">

@@ -42,7 +42,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
                 continue;
             }
 
-            QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnName), project->text(CGisListWks::eColumnName),listWidget);
+            QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnIcon), project->text(CGisListWks::eColumnName),listWidget);
             item->setData(Qt::UserRole, project->getKey());
         }
     }

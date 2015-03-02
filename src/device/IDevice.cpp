@@ -30,7 +30,7 @@ IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
     , dir(path)
     , key(key)
 {
-    setIcon(CGisListWks::eColumnName, QIcon("://icons/32x32/Device.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Device.png"));
 }
 
 IDevice::~IDevice()

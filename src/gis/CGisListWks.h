@@ -40,6 +40,7 @@ public:
     enum column_e
     {
         eColumnDecoration = 0
+        ,eColumnIcon = 0
         ,eColumnName = 1
     };
 

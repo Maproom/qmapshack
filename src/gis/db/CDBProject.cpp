@@ -34,14 +34,14 @@ CDBProject::CDBProject(CGisListWks * parent)
     : IGisProject(eTypeDb, "", parent)
     , id(0)
 {
-    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/DBProject.png"));
+    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/DBProject.png"));
 }
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, dbName, parent)
     , id(id)
 {
-    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/DBProject.png"));
+    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/DBProject.png"));
     db = QSqlDatabase::database(dbName);
 
     QSqlQuery query(db);

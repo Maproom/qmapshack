@@ -119,7 +119,7 @@ void CSearchGoogle::slotRequestFinished(QNetworkReply* reply)
         status = tr("Unknown response");
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
         item->setText(CGisListWks::eColumnName, status);
-        item->setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/Error.png"));
+        item->setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/Error.png"));
         return;
     }
 
@@ -130,7 +130,7 @@ void CSearchGoogle::slotRequestFinished(QNetworkReply* reply)
         status += root.namedItem("error_message").toElement().text();
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
         item->setText(CGisListWks::eColumnName, status);
-        item->setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/Error.png"));
+        item->setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/Error.png"));
         return;
     }
 

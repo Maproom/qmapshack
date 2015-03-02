@@ -28,7 +28,7 @@
 CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeQms, filename, parent)
 {
-    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/QmsProject.png"));
+    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/QmsProject.png"));
 
     // cerate file instance
     QFile file(filename);

@@ -86,7 +86,7 @@ QString IGisProject::getDeviceKey() const
 
 QPixmap IGisProject::getIcon() const
 {
-    return icon(CGisListWks::eColumnName).pixmap(22,22);
+    return icon(CGisListWks::eColumnIcon).pixmap(22,22);
 }
 
 bool IGisProject::isOnDevice() const

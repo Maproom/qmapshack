@@ -568,5 +568,5 @@ void CGisItemOvlArea::setIcon(const QString& c)
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
     icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnName,icon);
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }

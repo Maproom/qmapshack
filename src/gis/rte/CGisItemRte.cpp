@@ -118,7 +118,7 @@ void CGisItemRte::deriveSecondaryData()
 void CGisItemRte::setSymbol()
 {
     icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    setIcon(CGisListWks::eColumnName, icon);
+    setIcon(CGisListWks::eColumnIcon, icon);
 }
 
 void CGisItemRte::setComment(const QString& str)

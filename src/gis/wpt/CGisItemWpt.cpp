@@ -313,7 +313,7 @@ void CGisItemWpt::setIcon()
         icon = getWptIconByName(wpt.sym, focus);
     }
 
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnName,icon);
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
 void CGisItemWpt::setName(const QString& str)

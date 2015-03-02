@@ -35,21 +35,21 @@
 CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
-    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
+    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
     loadGpx(filename);
 }
 
 CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
-    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
+    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
     loadGpx(filename);
 }
 
 CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
-    setIcon(CGisListWks::eColumnName,QIcon("://icons/32x32/GpxProject.png"));
+    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
     *(IGisProject*)this = *project;
 
     const int N = project->childCount();

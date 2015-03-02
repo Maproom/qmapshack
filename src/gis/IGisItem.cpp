@@ -281,6 +281,24 @@ void IGisItem::changed(const QString &what, const QString &icon)
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
+void IGisItem::updateHistory()
+{
+    history_event_t& event = history.events[history.histIdxCurrent];
+    event.data.clear();
+
+    QDataStream stream(&event.data, QIODevice::WriteOnly);
+    stream.setByteOrder(QDataStream::LittleEndian);
+    stream.setVersion(QDataStream::Qt_5_2);
+
+    *this >> stream;
+
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(event.data);
+    event.hash = md5.result().toHex();
+
+    updateDecoration(eMarkChanged, eMarkNone);
+}
+
 void IGisItem::setupHistory()
 {
     history.histIdxInitial = -1;
@@ -402,6 +420,8 @@ void IGisItem::setReadOnlyMode(bool readOnly)
     {
         flags |= eFlagWriteAllowed;
     }
+
+    updateHistory();
 }
 
 

@@ -1313,6 +1313,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
+    if(trk.segs.isEmpty())
+    {
+        return;
+    }
+
     if(hasUserFocus() && mouseMoveFocus)
     {
         // derive anchor

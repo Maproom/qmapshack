@@ -590,6 +590,8 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
 
 void CGisListWks::removeDevice(const QString& key)
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     for(int i = 0; i < topLevelItemCount(); i++)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(i));

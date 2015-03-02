@@ -221,12 +221,6 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
         return;
     }
 
-    static int cnt = 0;
-    QFile f(QString("page%1,html").arg(cnt++));
-    f.open(QIODevice::WriteOnly);
-    f.write(asw.toUtf8(), asw.size());
-    f.close();
-
     QRegExp re1(".*CachePageImages.*");
     QRegExp re2("(http://.*\\.jpg).*>(.*)</a>");
     re2.setMinimal(true);

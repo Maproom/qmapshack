@@ -2659,7 +2659,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
         <source>Make all trackpoints visible again.</source>
-        <translation type="unfinished">Alle Trackpunkte werden wieder sichtbar.</translation>
+        <translation>Alle Trackpunkte werden wieder sichtbar.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="54"/>

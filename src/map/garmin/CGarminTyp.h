@@ -52,7 +52,7 @@ public:
             , known(false)
 
         {
-        };
+        }
 
         polyline_property(quint16 type, const QPen& penLineDay,  const QPen& penLineNight,  const QPen& penBorderDay,  const QPen& penBorderNight)
             : type(type)

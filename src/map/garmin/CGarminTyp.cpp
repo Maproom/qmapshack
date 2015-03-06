@@ -915,8 +915,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 
         if(property.hasPixmap)
         {
-            property.imgDay     = property.imgDay.mirrored(true);
-            property.imgNight   = property.imgNight.mirrored(true);
+            property.imgDay     = property.imgDay.mirrored(false,true);
+            property.imgNight   = property.imgNight.mirrored(false,true);
         }
     }
     return true;

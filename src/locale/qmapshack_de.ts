@@ -520,7 +520,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1163"/>
         <source>Close all projects...</source>
-        <translation>Alle Projkete schließen...</translation>
+        <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1163"/>

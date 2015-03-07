@@ -1,3 +1,12 @@
+V 1.0.0
+* Update Czech, French, German and Spanish translation
+* Fix dialogs hiding behind main window
+* Fix various application crashes
+* Fix tile cache growing too large
+* Fix cliff polylines in Garmin maps
+* Add device support on Windows
+* Various little GUI optimizations
+
 V 1.0.beta1
 * Add support for TwoNav units
 * Load/Restore images attached to waypoints on devices

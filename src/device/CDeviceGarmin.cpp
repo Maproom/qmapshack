@@ -115,6 +115,17 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
             delete project;
         }
     }
+
+    QDir dirGpxArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
+    entries = dirGpxArchive.entryList(QStringList("*.gpx"));
+    foreach(const QString &entry, entries)
+    {
+        IGisProject * project =  new CGpxProject(dirGpxArchive.absoluteFilePath(entry), this);
+        if(!project->isValid())
+        {
+            delete project;
+        }
+    }
 }
 
 CDeviceGarmin::~CDeviceGarmin()

@@ -56,7 +56,7 @@ OutFile "QMapShack_Install32.exe"
 ; Page welcome description
 !define MUI_WELCOMEPAGE_TITLE "QMapShack"
 !define MUI_WELCOMEPAGE_TITLE_3LINES
-!define MUI_WELCOMEPAGE_TEXT "QMapShack provides a versatile and fast display of raster and vector maps with visualization of GIS data such as tracks and waypoints. It allows the use of several workspaces and of several maps on a workspace. GIS data is handled project-oriented and can be exchanged with the device by drag-n-drop."
+!define MUI_WELCOMEPAGE_TEXT "QMapShack is a consumer grade software to work with data aquired by GPS devices. The data can be displayed on a variety of maps and stored in a database. Additionally new data can be created to plan tours."
 
 !define MUI_LICENSEPAGE_CHECKBOX
 
@@ -190,8 +190,8 @@ Section "QMapShack" QMapShack
 
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd
-LangString DESC_QMapShack ${LANG_ENGLISH} "View GeoTiff and Garmin Maps. Visualize and analyze GPX files and much more!"
-LangString DESC_QMapShack ${LANG_GERMAN}  "Landkarten im GeoTiff und Garmin Format betrachten. GPX Dateien visualisieren und analysieren und vieles mehr!"
+LangString DESC_QMapShack ${LANG_ENGLISH} "View Raster, Garmin and Online Maps combined with elevation data. Work with GIS data. Synchronize your GPS device."
+LangString DESC_QMapShack ${LANG_GERMAN}  "Raster-, Garmin- und Online Karten mit Höheninformation anzeigen. GIS Daten bearbeiten. GPS Geräte synchronisieren"
 
 
 Section "StartMenue" StartMenue

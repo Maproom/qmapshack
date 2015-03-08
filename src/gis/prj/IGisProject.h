@@ -215,6 +215,9 @@ public:
         return valid;
     }
 
+    bool isVisible() const;
+
+
     /**
        @brief Test if this project is handled by a device
        @return True if handled by a device

@@ -49,11 +49,6 @@ void CPlotProfile::setTrack(CGisItemTrk * track)
 
 void CPlotProfile::updateData()
 {
-    if(isHidden())
-    {
-        return;
-    }
-
     CPlotData::axistype_e type = data->axisType;
 
     if(mode == eModeIcon)

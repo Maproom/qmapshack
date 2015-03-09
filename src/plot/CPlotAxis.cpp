@@ -29,6 +29,7 @@ CPlotAxis::CPlotAxis( QObject * parent )
     : QObject( parent )
     , initialized( false )
     , autoscale( false )
+    , valid(false)
     , scale( 1.0 )
     , usedMin( 0.0 )
     , usedMax( 0.0 )
@@ -146,6 +147,8 @@ void CPlotAxis::calc()
     {
         ticStart += interval;
     }
+
+    valid = true;
 }
 
 
@@ -268,6 +271,11 @@ const QString CPlotAxis::fmtdbl( qreal val )
 
 int CPlotAxis::getScaleWidth( const QFontMetrics& m )
 {
+    if(!valid)
+    {
+        return 0;
+    }
+
     if ( scaleWidth > 0 )
     {
         return scaleWidth * m.width( " " );

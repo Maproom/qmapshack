@@ -37,7 +37,13 @@ void CPlotAxisTime::calc()
     ticStart    = usedMin;
     strFormat   = "hh:mm:ss";
 
-    if(dSec < 20)
+    if(dSec < 0)
+    {
+        qDebug() << "ouch";
+        valid = false;
+        return;
+    }
+    else if(dSec < 20)
     {
         interval = 1;
         ticStart = usedMin;
@@ -90,6 +96,8 @@ void CPlotAxisTime::calc()
     else
     {
         qDebug() << "ouch";
+        valid = false;
+        return;
     }
 
     if ( autoscale )
@@ -109,6 +117,8 @@ void CPlotAxisTime::calc()
     {
         ticStart += interval;
     }
+
+    valid = true;
 }
 
 

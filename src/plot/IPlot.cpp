@@ -179,9 +179,6 @@ void IPlot::resetZoom()
     data->y().resetZoom();
     setSizes();
 
-//    initialYMin = data->y().min();
-//    initialYMax = data->y().max();
-
     needsRedraw = true;
     update();
 }
@@ -196,9 +193,6 @@ void IPlot::paintEvent(QPaintEvent * e)
 void IPlot::resizeEvent(QResizeEvent * e)
 {
     setSizes();
-
-//    initialYMin = data->y().min();
-//    initialYMax = data->y().max();
 
     buffer = QImage(e->size(), QImage::Format_ARGB32);
 
@@ -320,6 +314,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
 void IPlot::setSizes()
 {
+
     fm = QFontMetrics(CMainWindow::self().getMapFont());
     left = 0;
 
@@ -476,7 +471,7 @@ void IPlot::draw()
         PAINT_ROUNDED_RECT(p,r);
     }
 
-    if(data->lines.isEmpty() || data->badData)
+    if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
     {
         p.drawText(rect(), Qt::AlignCenter, tr("No or bad data."));
         return;
@@ -554,11 +549,7 @@ void IPlot::drawData(QPainter& p)
         background << QPointF(right,pty);
         background << QPointF(right,bottom);
 
-//        QLinearGradient gradient(0, bottom - yaxis.val2pt(initialYMin), 0, bottom - yaxis.val2pt(initialYMax));
-//        gradient.setColorAt(0, colors[penIdx]);
-//        gradient.setColorAt(1, QColor(0,0,0,0));
         p.setPen(Qt::NoPen);
-//        p.setBrush(gradient);
         p.setBrush(colors[penIdx]);
         p.drawPolygon(background);
 
@@ -632,7 +623,6 @@ void IPlot::drawXScale( QPainter &p )
     }
 
     qreal scale = (right - left) / (limMax - limMin);
-    //     qreal val   = data->x().pt2val(0);
 
     int x = left + (useMin - limMin) * scale;
     int y = bottom + 5;
@@ -707,7 +697,6 @@ void IPlot::drawYScale( QPainter &p )
     }
 
     qreal scale = (top - bottom) / (limMax - limMin);
-    //     qreal val   = data->y().pt2val(0);
 
     int x = left - 5;
     int y = bottom + (useMin - limMin) * scale;

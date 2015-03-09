@@ -38,6 +38,11 @@ void CPlotSpeed::setTrack(CGisItemTrk * track)
 
 void CPlotSpeed::updateData()
 {
+    if(isHidden())
+    {
+        return;
+    }
+
     CPlotData::axistype_e type = data->axisType;
 
     if(mode == eModeIcon)
@@ -61,6 +66,8 @@ void CPlotSpeed::updateData()
     clear();
     if(trk->getTotalElapsedSeconds() == 0)
     {
+        resetZoom();
+        update();
         return;
     }
 

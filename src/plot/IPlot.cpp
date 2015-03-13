@@ -873,7 +873,7 @@ void IPlot::slotContextMenu(const QPoint & point)
 void IPlot::slotSave()
 {
     SETTINGS;
-    QString path = cfg.value("Path/lastGraphPath", QDir::homePath()).toString();
+    QString path = cfg.value("Paths/lastGraphPath", QDir::homePath()).toString();
     QString filename = QFileDialog::getSaveFileName( 0, tr("Select output file"), path,"Bitmap (*.png)");
 
     if(filename.isEmpty()) return;
@@ -894,6 +894,6 @@ void IPlot::slotSave()
     img.save(filename);
 
     path = fi.absolutePath();
-    cfg.setValue("Path/lastGraphPath", path);
+    cfg.setValue("Paths/lastGraphPath", path);
 
 }

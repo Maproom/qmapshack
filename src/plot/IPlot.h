@@ -23,6 +23,8 @@
 #include "plot/CPlotData.h"
 #include <QWidget>
 
+class QMenu;
+
 class IPlot : public QWidget
 {
     Q_OBJECT
@@ -40,6 +42,10 @@ public:
     {
         solid = yes;
     }
+
+private slots:
+    void slotContextMenu(const QPoint & point);
+    void slotSave();
 
 protected:
     void setYLabel(const QString& str);
@@ -127,6 +133,9 @@ protected:
     static QPen pens[];
     static QPen pensThin[];
     static QColor colors[];
+
+    QMenu * menu;
+    QAction * actionPrint;
 };
 
 #endif //IPLOT_H

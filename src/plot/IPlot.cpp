@@ -21,6 +21,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -71,6 +72,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , scaleWidthY1(0)
 
 {
+    setContextMenuPolicy(Qt::CustomContextMenu);
     setMouseTracking(true);
 
     if(trk)
@@ -85,6 +87,11 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
         showScale = false;
         thinLine = true;
     }
+
+    menu = new QMenu(this);
+    actionPrint = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
+
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
 }
 
 IPlot::~IPlot()
@@ -853,4 +860,40 @@ void IPlot::save(QImage& image)
     buffer = QImage(image.size(), QImage::Format_ARGB32);
     draw();
     image = buffer;
+}
+
+void IPlot::slotContextMenu(const QPoint & point)
+{
+    QPoint p = mapToGlobal(point);
+
+    menu->exec(p);
+
+}
+
+void IPlot::slotSave()
+{
+    SETTINGS;
+    QString path = cfg.value("Path/lastGraphPath", QDir::homePath()).toString();
+    QString filename = QFileDialog::getSaveFileName( 0, tr("Select output file"), path,"Bitmap (*.png)");
+
+    if(filename.isEmpty()) return;
+
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() != "png")
+    {
+        filename += ".png";
+    }
+
+    QImage img(size(), QImage::Format_ARGB32);
+    QPainter p;
+    p.begin(&img);
+    p.fillRect(rect(), QBrush(Qt::white));
+    draw(p);
+    p.end();
+
+    img.save(filename);
+
+    path = fi.absolutePath();
+    cfg.setValue("Path/lastGraphPath", path);
+
 }

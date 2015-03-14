@@ -321,7 +321,6 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
 void IPlot::setSizes()
 {
-
     fm = QFontMetrics(CMainWindow::self().getMapFont());
     left = 0;
 
@@ -867,7 +866,6 @@ void IPlot::slotContextMenu(const QPoint & point)
     QPoint p = mapToGlobal(point);
 
     menu->exec(p);
-
 }
 
 void IPlot::slotSave()
@@ -876,7 +874,10 @@ void IPlot::slotSave()
     QString path = cfg.value("Paths/lastGraphPath", QDir::homePath()).toString();
     QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path,"Bitmap (*.png)");
 
-    if(filename.isEmpty()) return;
+    if(filename.isEmpty())
+    {
+        return;
+    }
 
     QFileInfo fi(filename);
     if(fi.suffix().toLower() != "png")
@@ -895,5 +896,4 @@ void IPlot::slotSave()
 
     path = fi.absolutePath();
     cfg.setValue("Paths/lastGraphPath", path);
-
 }

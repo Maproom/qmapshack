@@ -203,7 +203,14 @@ void CMapDraw::loadConfig(QSettings& cfg)
     cfgGroup = cfg.group();
     // -------------------
     cfg.beginGroup("map");
-    restoreActiveMapsList(cfg.value("active", "").toStringList());
+    if(cfgGroup.isEmpty())
+    {
+        restoreActiveMapsList(cfg.value("active", "").toStringList(), cfg);
+    }
+    else
+    {
+        restoreActiveMapsList(cfg.value("active", "").toStringList());
+    }
     int idx = cfg.value("zoomIndex",zoomIndex).toInt();
     cfg.endGroup();
 
@@ -272,6 +279,11 @@ void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
 
 void CMapDraw::loadConfigForMapItem(CMapItem * item)
 {
+    if(cfgGroup.isEmpty())
+    {
+        return;
+    }
+
     SETTINGS;
     cfg.beginGroup(cfgGroup);
     cfg.beginGroup("map");
@@ -304,6 +316,31 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
 
     mapList->updateHelpText();
 }
+
+void CMapDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
+{
+    QMutexLocker lock(&CMapItem::mutexActiveMaps);
+
+    foreach(const QString &key, keys)
+    {
+        for(int i = 0; i < mapList->count(); i++)
+        {
+            CMapItem * item = mapList->item(i);
+
+            if(item && item->key == key)
+            {
+                if(item->activate())
+                {
+                    item->loadConfig(cfg);
+                }
+                break;
+            }
+        }
+    }
+
+    mapList->updateHelpText();
+}
+
 
 void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg)
 {

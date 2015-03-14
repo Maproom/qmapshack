@@ -28,6 +28,7 @@
 #include "gis/db/CSetupWorkspace.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
+#include "map/CMapItem.h"
 #include "map/CMapList.h"
 #include "map/CMapVrtBuilder.h"
 #include "qlgt/CImportDatabase.h"
@@ -103,6 +104,8 @@ CMainWindow::CMainWindow()
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
     connect(actionVrtBuilder, SIGNAL(triggered()), this, SLOT(slotBuildVrt()));
+    connect(actionStoreView, SIGNAL(triggered()), this, SLOT(slotStoreView()));
+    connect(actionLoadView, SIGNAL(triggered()), this, SLOT(slotLoadView()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
 
@@ -365,6 +368,8 @@ void CMainWindow::slotAddCanvas()
 
 void CMainWindow::slotTabCloseRequest(int i)
 {
+    QMutexLocker lock(&CMapItem::mutexActiveMaps);
+
     QWidget * w = tabWidget->widget(i);
 
     delete w;
@@ -606,6 +611,61 @@ void CMainWindow::loadGISData(const QStringList& filenames)
         gisWidget->loadGisProject(filename);
     }
 }
+
+
+void CMainWindow::slotStoreView()
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas == 0)
+    {
+        return;
+    }
+
+    SETTINGS;
+    QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
+    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path,"QMapShack View (*.view)");
+
+    if(filename.isEmpty()) return;
+
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() != "view")
+    {
+        filename += ".view";
+    }
+
+    QSettings view(filename, QSettings::IniFormat);
+    view.clear();
+
+    canvas->saveConfig(view);
+
+    path = fi.absolutePath();
+    cfg.setValue("Paths/lastViewPath", path);
+}
+
+void CMainWindow::slotLoadView()
+{
+    SETTINGS;
+    QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select file to load"), path, "QMapShack View (*.view)");
+
+    if(filename.isEmpty()) return;
+
+    slotAddCanvas();
+
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas == 0)
+    {
+        return;
+    }
+
+    QSettings view(filename, QSettings::IniFormat);
+    canvas->loadConfig(view);
+
+    QFileInfo fi(filename);
+    path = fi.absolutePath();
+    cfg.setValue("Paths/lastViewPath", path);
+}
+
 
 #ifdef WIN32
 

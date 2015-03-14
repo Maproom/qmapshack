@@ -62,6 +62,9 @@
     <addaction name="actionLoadGISData"/>
     <addaction name="actionSaveGISData"/>
     <addaction name="separator"/>
+    <addaction name="actionLoadView"/>
+    <addaction name="actionStoreView"/>
+    <addaction name="separator"/>
     <addaction name="actionSetupMapPaths"/>
     <addaction name="actionSetupDEMPaths"/>
    </widget>
@@ -102,9 +105,9 @@
     </property>
     <addaction name="actionAddEmptyProject"/>
     <addaction name="actionSearchGoogle"/>
+    <addaction name="actionCloseAllProjects"/>
     <addaction name="separator"/>
     <addaction name="actionSetupWorkspace"/>
-    <addaction name="actionCloseAllProjects"/>
    </widget>
    <widget class="QMenu" name="menuExtra">
     <property name="title">
@@ -480,6 +483,30 @@
    </property>
    <property name="toolTip">
     <string>GUI front end to gdalbuildvrt</string>
+   </property>
+  </action>
+  <action name="actionStoreView">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/SaveView.png</normaloff>:/icons/32x32/SaveView.png</iconset>
+   </property>
+   <property name="text">
+    <string>Store Map View</string>
+   </property>
+   <property name="toolTip">
+    <string>Write current active map and DEM list including the properties to a file</string>
+   </property>
+  </action>
+  <action name="actionLoadView">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/LoadView.png</normaloff>:/icons/32x32/LoadView.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load Map View</string>
+   </property>
+   <property name="toolTip">
+    <string>Restore view with active map and DEM list including the properties from a file</string>
    </property>
   </action>
  </widget>

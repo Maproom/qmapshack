@@ -144,6 +144,8 @@ private:
      */
     void restoreActiveMapsList(const QStringList &keys);
 
+    void restoreActiveMapsList(const QStringList& keys, QSettings& cfg);
+
 
 
     /// the treewidget holding all active and inactive map items

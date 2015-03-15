@@ -667,6 +667,14 @@ void CMainWindow::slotLoadView()
     QSettings view(filename, QSettings::IniFormat);
     canvas->loadConfig(view);
 
+    cfg.beginGroup("Canvas");
+    cfg.beginGroup("Views");
+    cfg.beginGroup(canvas->objectName());
+    canvas->saveConfig(cfg);
+    cfg.endGroup();
+    cfg.endGroup();
+    cfg.endGroup();
+
     QFileInfo fi(filename);
     path = fi.absolutePath();
     cfg.setValue("Paths/lastViewPath", path);

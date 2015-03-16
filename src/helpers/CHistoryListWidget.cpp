@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisWidget.h"
+#include "gis/prj/IGisProject.h"
 #include "helpers/CHistoryListWidget.h"
 
 #include <QtWidgets>
@@ -114,7 +115,11 @@ void CHistoryListWidget::slotCutHistory()
 
     item->cutHistory();
     item->setText(CGisListWks::eColumnDecoration,"*");
-    item->parent()->setText(CGisListWks::eColumnDecoration,"*");
+    IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
+    if(project)
+    {
+        project->setChanged();
+    }
 
     emit sigChanged();
 }

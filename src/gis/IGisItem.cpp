@@ -223,7 +223,7 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project && (enable & eMarkChanged))
     {
-        project->setText(CGisListWks::eColumnDecoration,"*");
+        project->setChanged();
     }
 
     // set marks in column 1

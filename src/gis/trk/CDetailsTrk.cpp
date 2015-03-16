@@ -49,7 +49,12 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         comboColor->addItem(icon,"",CGisItemTrk::lineColors[i]);
     }
 
-    setupGui();
+    setupGui();    
+
+    if(trk.isOnDevice())
+    {
+        toolLock->setDisabled(true);
+    }
 
     QTreeWidgetItem * item, * item0;
     item0 = new QTreeWidgetItem(treeFilter);

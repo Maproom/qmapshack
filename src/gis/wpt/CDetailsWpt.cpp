@@ -42,6 +42,12 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     photoAlbum->hide();
 
     setupGui();
+
+    if(wpt.isOnDevice())
+    {
+        toolLock->setDisabled(true);
+    }
+
     connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelPositon, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));

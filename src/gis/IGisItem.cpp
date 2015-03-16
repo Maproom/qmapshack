@@ -400,6 +400,11 @@ bool IGisItem::isOnDevice() const
 
 void IGisItem::setReadOnlyMode(bool readOnly)
 {
+    if(isOnDevice())
+    {
+        return;
+    }
+
     if(!(flags & (eFlagCreatedInQms|eFlagTainted)))
     {
         if(isReadOnly() && !readOnly)

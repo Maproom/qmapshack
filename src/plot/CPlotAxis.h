@@ -107,13 +107,18 @@ public:
         return old;
     }
 
-    qreal min()
+    qreal min() const
     {
         return usedMin;
     }
-    qreal max()
+    qreal max() const
     {
         return usedMax;
+    }
+
+    bool isValid() const
+    {
+        return valid;
     }
 
 protected:
@@ -123,6 +128,8 @@ protected:
     bool initialized;
     ///true if autoscaling
     bool autoscale;
+
+    bool valid;
 
     ///scalefactor
     qreal scale;

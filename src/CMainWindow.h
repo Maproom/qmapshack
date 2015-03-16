@@ -93,6 +93,8 @@ private slots:
     void slotImportDatabase();
     void slotLoadGISData();
     void slotBuildVrt();
+    void slotStoreView();
+    void slotLoadView();
 
 private:
     friend int main(int argc, char ** argv);

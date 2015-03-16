@@ -440,8 +440,9 @@ QColor IGisItem::str2color(const QString& name)
     const color_t * p = colorMap;
     while(p->name)
     {
-        if(p->color == ref)
+        if((p->name == name) || (ref == p->color))
         {
+            qDebug() << p->name << p->color;
             return p->color;
         }
         p++;

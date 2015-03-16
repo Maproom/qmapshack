@@ -79,6 +79,7 @@ private:
        @brief Restore list of active maps from configuration file
      */
     void restoreActiveMapsList(const QStringList &keys);
+    void restoreActiveMapsList(const QStringList& keys, QSettings &cfg);
 
     CDemList * demList;
 

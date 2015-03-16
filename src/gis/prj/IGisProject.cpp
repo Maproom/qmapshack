@@ -56,6 +56,11 @@ IGisProject::~IGisProject()
 }
 
 
+bool IGisProject::isVisible() const
+{
+    return checkState(CGisListWks::eColumnDecoration) == Qt::Checked;
+}
+
 void IGisProject::genKey()
 {
     if(key.isEmpty())
@@ -260,6 +265,11 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
 
 void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
 {
+    if(!isVisible())
+    {
+        return;
+    }
+
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
@@ -434,7 +444,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
 
 void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
-    if(checkState(CGisListWks::eColumnDecoration) != Qt::Checked)
+    if(!isVisible())
     {
         return;
     }
@@ -458,7 +468,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
-    if(checkState(CGisListWks::eColumnDecoration) != Qt::Checked)
+    if(!isVisible())
     {
         return;
     }
@@ -478,7 +488,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
-    if(checkState(CGisListWks::eColumnDecoration) != Qt::Checked)
+    if(!isVisible())
     {
         return;
     }

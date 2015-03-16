@@ -21,6 +21,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -71,6 +72,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , scaleWidthY1(0)
 
 {
+    setContextMenuPolicy(Qt::CustomContextMenu);
     setMouseTracking(true);
 
     if(trk)
@@ -85,6 +87,11 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
         showScale = false;
         thinLine = true;
     }
+
+    menu = new QMenu(this);
+    actionPrint = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
+
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
 }
 
 IPlot::~IPlot()
@@ -179,9 +186,6 @@ void IPlot::resetZoom()
     data->y().resetZoom();
     setSizes();
 
-//    initialYMin = data->y().min();
-//    initialYMax = data->y().max();
-
     needsRedraw = true;
     update();
 }
@@ -196,9 +200,6 @@ void IPlot::paintEvent(QPaintEvent * e)
 void IPlot::resizeEvent(QResizeEvent * e)
 {
     setSizes();
-
-//    initialYMin = data->y().min();
-//    initialYMax = data->y().max();
 
     buffer = QImage(e->size(), QImage::Format_ARGB32);
 
@@ -476,7 +477,7 @@ void IPlot::draw()
         PAINT_ROUNDED_RECT(p,r);
     }
 
-    if(data->lines.isEmpty() || data->badData)
+    if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
     {
         p.drawText(rect(), Qt::AlignCenter, tr("No or bad data."));
         return;
@@ -554,11 +555,7 @@ void IPlot::drawData(QPainter& p)
         background << QPointF(right,pty);
         background << QPointF(right,bottom);
 
-//        QLinearGradient gradient(0, bottom - yaxis.val2pt(initialYMin), 0, bottom - yaxis.val2pt(initialYMax));
-//        gradient.setColorAt(0, colors[penIdx]);
-//        gradient.setColorAt(1, QColor(0,0,0,0));
         p.setPen(Qt::NoPen);
-//        p.setBrush(gradient);
         p.setBrush(colors[penIdx]);
         p.drawPolygon(background);
 
@@ -632,7 +629,6 @@ void IPlot::drawXScale( QPainter &p )
     }
 
     qreal scale = (right - left) / (limMax - limMin);
-    //     qreal val   = data->x().pt2val(0);
 
     int x = left + (useMin - limMin) * scale;
     int y = bottom + 5;
@@ -707,7 +703,6 @@ void IPlot::drawYScale( QPainter &p )
     }
 
     qreal scale = (top - bottom) / (limMax - limMin);
-    //     qreal val   = data->y().pt2val(0);
 
     int x = left - 5;
     int y = bottom + (useMin - limMin) * scale;
@@ -864,4 +859,41 @@ void IPlot::save(QImage& image)
     buffer = QImage(image.size(), QImage::Format_ARGB32);
     draw();
     image = buffer;
+}
+
+void IPlot::slotContextMenu(const QPoint & point)
+{
+    QPoint p = mapToGlobal(point);
+
+    menu->exec(p);
+}
+
+void IPlot::slotSave()
+{
+    SETTINGS;
+    QString path = cfg.value("Paths/lastGraphPath", QDir::homePath()).toString();
+    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path,"Bitmap (*.png)");
+
+    if(filename.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() != "png")
+    {
+        filename += ".png";
+    }
+
+    QImage img(size(), QImage::Format_ARGB32);
+    QPainter p;
+    p.begin(&img);
+    p.fillRect(rect(), QBrush(Qt::white));
+    draw(p);
+    p.end();
+
+    img.save(filename);
+
+    path = fi.absolutePath();
+    cfg.setValue("Paths/lastGraphPath", path);
 }

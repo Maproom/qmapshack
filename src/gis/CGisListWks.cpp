@@ -155,16 +155,15 @@ CGisListWks::CGisListWks(QWidget *parent)
     {
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
+
 #ifdef Q_OS_LINUX
     deviceWatcher = new CDeviceWatcherLinux(this);
+    connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 #endif
 #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);
+    connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 #endif
-    if(deviceWatcher)
-    {
-        connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
-    }
 
     QTimer::singleShot(500, this, SLOT(slotLoadWorkspace()));
 }

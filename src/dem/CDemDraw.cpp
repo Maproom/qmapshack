@@ -110,7 +110,15 @@ void CDemDraw::loadConfig(QSettings& cfg)
     cfgGroup = cfg.group();
     // -------------------
     cfg.beginGroup("dem");
-    restoreActiveMapsList(cfg.value("active", "").toStringList());
+    if(cfgGroup.isEmpty())
+    {
+        restoreActiveMapsList(cfg.value("active", "").toStringList(), cfg);
+    }
+    else
+    {
+        restoreActiveMapsList(cfg.value("active", "").toStringList());
+    }
+
     cfg.endGroup();
 }
 
@@ -175,6 +183,11 @@ void CDemDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
 
 void CDemDraw::loadConfigForDemItem(CDemItem * item)
 {
+    if(cfgGroup.isEmpty())
+    {
+        return;
+    }
+
     SETTINGS;
     cfg.beginGroup(cfgGroup);
     cfg.beginGroup("dem");
@@ -200,6 +213,30 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
                             by calling loadConfigForDemItem().
                  */
                 item->activate();
+                break;
+            }
+        }
+    }
+
+    demList->updateHelpText();
+}
+
+void CDemDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
+{
+    QMutexLocker lock(&CDemItem::mutexActiveDems);
+
+    foreach(const QString &key, keys)
+    {
+        for(int i = 0; i < demList->count(); i++)
+        {
+            CDemItem * item = demList->item(i);
+
+            if(item && item->key == key)
+            {
+                if(item->activate())
+                {
+                    item->loadConfig(cfg);
+                }
                 break;
             }
         }

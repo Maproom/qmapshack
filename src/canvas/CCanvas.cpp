@@ -133,11 +133,12 @@ void CCanvas::saveConfig(QSettings& cfg)
 
 void CCanvas::loadConfig(QSettings& cfg)
 {
+    posFocus = cfg.value("posFocus", posFocus).toPointF();
+    setProjection(cfg.value("proj", map->getProjection()).toString());
+
     map->loadConfig(cfg);
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
-    posFocus = cfg.value("posFocus", posFocus).toPointF();
-    setProjection(cfg.value("proj", map->getProjection()).toString());
 
     dem->zoom(map->zoom());
     gis->zoom(map->zoom());

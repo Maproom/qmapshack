@@ -445,14 +445,14 @@ QString CGisItemTrk::getInfoRange()
         str += QString("%4 %1:%2:%3\n").arg(hh,2,10,QChar('0')).arg(mm,2,10,QChar('0')).arg(ss,2,10,QChar('0')).arg(QChar(0x231a));
     }
 
-    tmp       = atan((pt2->ascend - pt1->ascend)/d);
+    tmp       = qAtan((pt2->ascend - pt1->ascend)/d);
     slope1    = qAbs(tmp * 360.0/(2 * M_PI));
     slope2    = qTan(slope1 * DEG_TO_RAD) * 100;
 
     IUnit::self().meter2elevation(pt2->ascend - pt1->ascend, val, unit);
     str += QString("%3 %1%2 (%4%5, %6%)\n").arg(val).arg(unit).arg(QChar(0x2197)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
 
-    tmp       = atan((pt2->descend - pt1->descend)/d);
+    tmp       = qAtan((pt2->descend - pt1->descend)/d);
     slope1    = qAbs(tmp * 360.0/(2 * M_PI));
     slope2    = qTan(slope1 * DEG_TO_RAD) * 100;
 
@@ -772,7 +772,7 @@ void CGisItemTrk::deriveSecondaryData()
                 n++;
             }
 
-            qreal a         = atan((e2 - e1)/(d2 - d1));
+            qreal a         = qAtan((e2 - e1)/(d2 - d1));
             trkpt.slope1    = qAbs(a * 360.0/(2 * M_PI));
             trkpt.slope2    = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
 
@@ -869,8 +869,8 @@ void CGisItemTrk::findWaypointsCloseBy()
         qreal a1, a2;
         qreal d = GPS_Math_Distance(pt0.x, pt0.y, trkwpt.x, trkwpt.y, a1, a2);
 
-        trkwpt.x = cos(a1 * DEG_TO_RAD) * d;
-        trkwpt.y = sin(a1 * DEG_TO_RAD) * d;
+        trkwpt.x = qCos(a1 * DEG_TO_RAD) * d;
+        trkwpt.y = qSin(a1 * DEG_TO_RAD) * d;
 
         trkwpts << trkwpt;
     }
@@ -889,8 +889,8 @@ void CGisItemTrk::findWaypointsCloseBy()
 
         pt0 = pt2;
 
-        pt2.x = pt1.x + cos(a1 * DEG_TO_RAD) * d;
-        pt2.y = pt1.y + sin(a1 * DEG_TO_RAD) * d;
+        pt2.x = pt1.x + qCos(a1 * DEG_TO_RAD) * d;
+        pt2.y = pt1.y + qSin(a1 * DEG_TO_RAD) * d;
 
         // test for waypoint close by
         for(int n = 0; n < trkwpts.size(); n++)

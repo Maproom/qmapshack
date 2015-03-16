@@ -111,7 +111,7 @@ typedef unsigned __int16 uint16_t;
 typedef unsigned __int32 uint32_t;
 typedef unsigned __int64 uint64_t;
 
-#define isnan(x) _isnan(x)
+#define qIsNaN(x) _isnan(x)
 
 #else
 #  error neither inttypes.h nor stdint.h are available

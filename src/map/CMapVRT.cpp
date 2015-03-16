@@ -142,7 +142,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     if(adfGeoTransform[4] != 0.0)
     {
-        trFwd.rotate(atan(adfGeoTransform[2]/adfGeoTransform[4]));
+        trFwd.rotate(qAtan(adfGeoTransform[2]/adfGeoTransform[4]));
     }
 
     if(pj_is_latlong(pjsrc))

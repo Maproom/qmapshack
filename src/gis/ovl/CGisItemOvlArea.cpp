@@ -296,8 +296,8 @@ void CGisItemOvlArea::deriveSecondaryData()
 
         d = GPS_Math_Distance(pt11.lon * DEG_TO_RAD, pt11.lat * DEG_TO_RAD, pt12.lon * DEG_TO_RAD, pt12.lat * DEG_TO_RAD, a1, a2);
 
-        pt22.rx() = pt21.x() + cos(a1 * DEG_TO_RAD) * d;
-        pt22.ry() = pt21.y() + sin(a1 * DEG_TO_RAD) * d;
+        pt22.rx() = pt21.x() + qCos(a1 * DEG_TO_RAD) * d;
+        pt22.ry() = pt21.y() + qSin(a1 * DEG_TO_RAD) * d;
     }
 
     area.area = 0;

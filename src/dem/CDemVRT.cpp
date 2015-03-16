@@ -103,7 +103,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(adfGeoTransform[4] != 0.0)
     {
-        trFwd.rotate(atan(adfGeoTransform[2]/adfGeoTransform[4]));
+        trFwd.rotate(qAtan(adfGeoTransform[2]/adfGeoTransform[4]));
     }
 
     if(pj_is_latlong(pjsrc))
@@ -154,11 +154,11 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
 
     pt = trInv.map(pt);
 
-    qreal x    = pt.x() - floor(pt.x());
-    qreal y    = pt.y() - floor(pt.y());
+    qreal x    = pt.x() - qFloor(pt.x());
+    qreal y    = pt.y() - qFloor(pt.y());
 
     mutex.lock();
-    CPLErr err = dataset->RasterIO(GF_Read, floor(pt.x()), floor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
+    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
     mutex.unlock();
     if(err == CE_Failure)
     {

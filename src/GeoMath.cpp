@@ -19,7 +19,6 @@
 
 #include "GeoMath.h"
 #include "canvas/IDrawContext.h"
-#include <math.h>
 #include <proj_api.h>
 #include <stdlib.h>
 
@@ -185,18 +184,18 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
     qreal a = 6378137.0, b = 6356752.3142,  f = 1.0/298.257223563;  // WGS-84 ellipsiod
     qreal L = u2 - u1;
 
-    qreal U1 = atan((1-f) * tan(v1));
-    qreal U2 = atan((1-f) * tan(v2));
-    qreal sinU1 = sin(U1), cosU1 = cos(U1);
-    qreal sinU2 = sin(U2), cosU2 = cos(U2);
+    qreal U1 = qAtan((1-f) * qTan(v1));
+    qreal U2 = qAtan((1-f) * qTan(v2));
+    qreal sinU1 = qSin(U1), cosU1 = qCos(U1);
+    qreal sinU2 = qSin(U2), cosU2 = qCos(U2);
     qreal lambda = L, lambdaP = 2*PI;
     unsigned iterLimit = 20;
 
     while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0))
     {
-        sinLambda = sin(lambda);
-        cosLambda = cos(lambda);
-        sinSigma = sqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
+        sinLambda = qSin(lambda);
+        cosLambda = qCos(lambda);
+        sinSigma = qSqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
 
         if (sinSigma==0)
         {
@@ -204,12 +203,12 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         }
 
         cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
-        sigma = atan2(sinSigma, cosSigma);
+        sigma = qAtan2(sinSigma, cosSigma);
         sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma;
         cosSqAlpha = 1 - sinAlpha * sinAlpha;
         cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
 
-        if (isnan(cos2SigmaM))
+        if (qIsNaN(cos2SigmaM))
         {
             cos2SigmaM = 0;  // equatorial line: cosSqAlpha=0 (§6)
         }
@@ -228,8 +227,8 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
     qreal deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)));
     qreal s = b*A*(sigma-deltaSigma);
 
-    a1 = atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * 360 / TWOPI;
-    a2 = atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda) * 360 / TWOPI;
+    a1 = qAtan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * 360 / TWOPI;
+    a2 = qAtan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda) * 360 / TWOPI;
     return s;
 }
 
@@ -247,18 +246,18 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
     qreal a = 6378137.0, b = 6356752.3142,  f = 1.0/298.257223563;  // WGS-84 ellipsiod
     qreal L = u2 - u1;
 
-    qreal U1 = atan((1-f) * tan(v1));
-    qreal U2 = atan((1-f) * tan(v2));
-    qreal sinU1 = sin(U1), cosU1 = cos(U1);
-    qreal sinU2 = sin(U2), cosU2 = cos(U2);
+    qreal U1 = qAtan((1-f) * qTan(v1));
+    qreal U2 = qAtan((1-f) * qTan(v2));
+    qreal sinU1 = qSin(U1), cosU1 = qCos(U1);
+    qreal sinU2 = qSin(U2), cosU2 = qCos(U2);
     qreal lambda = L, lambdaP = 2*PI;
     unsigned iterLimit = 20;
 
     while ((qAbs(lambda - lambdaP) > 1e-12) && (--iterLimit > 0))
     {
-        sinLambda = sin(lambda);
-        cosLambda = cos(lambda);
-        sinSigma = sqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
+        sinLambda = qSin(lambda);
+        cosLambda = qCos(lambda);
+        sinSigma = qSqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
 
         if (sinSigma==0)
         {
@@ -266,12 +265,12 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         }
 
         cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
-        sigma = atan2(sinSigma, cosSigma);
+        sigma = qAtan2(sinSigma, cosSigma);
         sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma;
         cosSqAlpha = 1 - sinAlpha * sinAlpha;
         cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
 
-        if (isnan(cos2SigmaM))
+        if (qIsNaN(cos2SigmaM))
         {
             cos2SigmaM = 0;  // equatorial line: cosSqAlpha=0 (§6)
         }
@@ -298,7 +297,7 @@ qreal GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, con
     qreal dU = u2 - u1; // lambda
     qreal dV = v2 - v1; // roh
 
-    qreal d = 2*asin(sqrt(sin(dV/2) * sin(dV/2) + cos(v1) * cos(v2) * sin(dU/2) * sin(dU/2)));
+    qreal d = 2*qAsin(qSqrt(qSin(dV/2) * qSin(dV/2) + qCos(v1) * qCos(v2) * qSin(dU/2) * qSin(dU/2)));
 
     return 6371010 * d;
 }
@@ -306,8 +305,8 @@ qreal GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, con
 void GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal distance, const qreal bearing, qreal& lon2, qreal& lat2)
 {
     qreal d    = distance / 6378130.0;
-    lat2 = asin(sin(lat1) * cos(d) + cos(lat1) * sin(d) * cos(-bearing));
-    lon2 = cos(lat1) == 0 ? lon1 : fmod(lon1 - asin(sin(-bearing) * sin(d) / cos(lat1)) + PI, TWOPI) - PI;
+    lat2 = qAsin(qSin(lat1) * qCos(d) + qCos(lat1) * qSin(d) * qCos(-bearing));
+    lon2 = qCos(lat1) == 0 ? lon1 : fmod(lon1 - qAsin(qSin(-bearing) * qSin(d) / qCos(lat1)) + PI, TWOPI) - PI;
 }
 
 qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
@@ -341,7 +340,7 @@ qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
     // |(x2 - x1)|
     a3      = v3.x*v3.x + v3.y*v3.y + v3.z*v3.z;
 
-    return sqrt(a1x2/a3);
+    return qSqrt(a1x2/a3);
 }
 
 
@@ -408,8 +407,8 @@ QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearin
     qreal lon1 = pt1.x();
     qreal lat1 = pt1.y();
 
-    qreal lat2 = asin(sin(lat1) * cos(d) + cos(lat1) * sin(d) * cos(-bearing));
-    qreal lon2 = cos(lat1) == 0 ? lon1 : fmod(lon1 - asin(sin(-bearing) * sin(d) / cos(lat1)) + M_PI, (2*M_PI)) - M_PI;
+    qreal lat2 = qAsin(qSin(lat1) * qCos(d) + qCos(lat1) * qSin(d) * qCos(-bearing));
+    qreal lon2 = qCos(lat1) == 0 ? lon1 : fmod(lon1 - qAsin(qSin(-bearing) * qSin(d) / qCos(lat1)) + M_PI, (2*M_PI)) - M_PI;
 
     pt2.rx() = lon2;
     pt2.ry() = lat2;
@@ -471,7 +470,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
 
         dx = p2.u - p1.u;
         dy = p2.v - p1.v;
-        d_p1_p2 = sqrt(dx * dx + dy * dy);
+        d_p1_p2 = qSqrt(dx * dx + dy * dy);
 
         // find point on line closest to pt1
         u = ((pt1.x() - p1.u) * dx + (pt1.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
@@ -481,7 +480,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
             x = p1.u + u * dx;
             y = p1.v + u * dy;
 
-            distance = sqrt((x - pt1.x())*(x - pt1.x()) + (y - pt1.y())*(y - pt1.y()));
+            distance = qSqrt((x - pt1.x())*(x - pt1.x()) + (y - pt1.y())*(y - pt1.y()));
 
             if(distance < shortest1)
             {
@@ -501,7 +500,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
             x = p1.u + u * dx;
             y = p1.v + u * dy;
 
-            distance = sqrt((x - pt2.x())*(x - pt2.x()) + (y - pt2.y())*(y - pt2.y()));
+            distance = qSqrt((x - pt2.x())*(x - pt2.x()) + (y - pt2.y())*(y - pt2.y()));
 
             if(distance < shortest2)
             {
@@ -517,7 +516,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     if(idx11 == -1)
     {
         QPointF px = pixel.first();
-        distance = sqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
+        distance = qSqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
         if(distance < (threshold<<1))
         {
             idx11 = 0;
@@ -527,7 +526,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
         else
         {
             px = pixel.last();
-            distance = sqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
+            distance = qSqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
             if(distance < (threshold<<1))
             {
                 idx11 = pixel.size() - 2;
@@ -541,7 +540,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     if(idx21 == -1)
     {
         QPointF px = pixel.first();
-        distance = sqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
+        distance = qSqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
 
         if(distance < (threshold<<1))
         {
@@ -551,7 +550,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
         else
         {
             px = pixel.last();
-            distance = sqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
+            distance = qSqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
             if(distance < (threshold<<1))
             {
                 idx21 = pixel.size() - 2;

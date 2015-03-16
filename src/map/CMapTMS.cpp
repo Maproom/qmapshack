@@ -31,23 +31,23 @@
 
 inline int lon2tile(double lon, int z)
 {
-    return (int)(qRound(256*(lon + 180.0) / 360.0 * pow(2.0, z)));
+    return (int)(qRound(256*(lon + 180.0) / 360.0 * qPow(2.0, z)));
 }
 
 inline int lat2tile(double lat, int z)
 {
-    return (int)(qRound(256*(1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * pow(2.0, z)));
+    return (int)(qRound(256*(1.0 - log( qTan(lat * M_PI/180.0) + 1.0 / qCos(lat * M_PI/180.0)) / M_PI) / 2.0 * qPow(2.0, z)));
 }
 
 inline double tile2lon(int x, int z)
 {
-    return x / pow(2.0, z) * 360.0 - 180;
+    return x / qPow(2.0, z) * 360.0 - 180;
 }
 
 inline double tile2lat(int y, int z)
 {
-    double n = M_PI - 2.0 * M_PI * y / pow(2.0, z);
-    return 180.0 / M_PI * atan(0.5 * (exp(n) - exp(-n)));
+    double n = M_PI - 2.0 * M_PI * y / qPow(2.0, z);
+    return 180.0 / M_PI * qAtan(0.5 * (exp(n) - exp(-n)));
 }
 
 CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)

@@ -153,6 +153,7 @@ public:
     void setKeywords(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<IGisItem::link_t>& links);
+    void setChanged();
 
     /**
        @brief Get a short metadata summary
@@ -224,6 +225,7 @@ public:
      */
     bool isOnDevice() const;
 
+    bool isChanged() const;
 
     void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
     void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
@@ -284,7 +286,7 @@ protected:
     void setupName(const QString& defaultName);
     void markAsSaved();
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
-    void changed();
+
 
     // Those are the URIs of the GPX extensions we support
     static const QString gpxx_ns;

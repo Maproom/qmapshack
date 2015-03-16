@@ -100,6 +100,11 @@ bool IGisProject::isOnDevice() const
     return device != 0;
 }
 
+bool IGisProject::isChanged() const
+{
+    return text(CGisListWks::eColumnDecoration) == "*";
+}
+
 void IGisProject::edit()
 {
     if(dlgDetails.isNull())
@@ -115,28 +120,28 @@ void IGisProject::setName(const QString& str)
 {
     metadata.name = str;
     setText(CGisListWks::eColumnName, str);
-    changed();
+    setChanged();
 }
 
 void IGisProject::setKeywords(const QString& str)
 {
     metadata.keywords = str;
-    changed();
+    setChanged();
 }
 
 void IGisProject::setDescription(const QString& str)
 {
     metadata.desc = str;
-    changed();
+    setChanged();
 }
 
 void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
 {
     metadata.links = links;
-    changed();
+    setChanged();
 }
 
-void IGisProject::changed()
+void IGisProject::setChanged()
 {
     setText(CGisListWks::eColumnDecoration,"*");
 }
@@ -316,7 +321,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
              */
             if(type != eTypeDb)
             {
-                changed();
+                setChanged();
             }
 
             // as each item in the project has to be unique, we can stop searching.

@@ -692,7 +692,7 @@ void CGisListWks::slotSaveWorkspace()
         query.bindValue(":type", project->getType());
         query.bindValue(":key", project->getKey());
         query.bindValue(":name", project->getName());
-        query.bindValue(":changed", project->text(1) == "*");
+        query.bindValue(":changed", project->isChanged());
         query.bindValue(":data", data);
         QUERY_EXEC(continue);
     }
@@ -770,7 +770,7 @@ void CGisListWks::slotLoadWorkspace()
         project->setToolTip(eColumnName,project->getInfo());
         if(changed)
         {
-            project->setText(eColumnDecoration, "*");
+            project->setChanged();
         }
     }
 

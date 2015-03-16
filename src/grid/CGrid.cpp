@@ -249,8 +249,8 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     qreal yGridSpace = 1000;
     findGridSpace(leftMin, rightMax, xGridSpace, yGridSpace);
 
-    qreal xStart = floor(leftMin / xGridSpace) * xGridSpace;
-    qreal yStart = ceil(topMax / yGridSpace) * yGridSpace;
+    qreal xStart = qFloor(leftMin / xGridSpace) * xGridSpace;
+    qreal yStart = qCeil(topMax / yGridSpace) * yGridSpace;
 
     qreal x = xStart - xGridSpace;
     qreal y = yStart + yGridSpace;

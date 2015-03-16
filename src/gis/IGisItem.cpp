@@ -567,7 +567,7 @@ void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPai
             {
                 if(0 != pt.x() - pt1.x() && (pt.y() - pt1.y()))
                 {
-                    heading = ( atan2((qreal)(pt.y() - pt1.y()), (qreal)(pt.x() - pt1.x())) * 180.) / M_PI;
+                    heading = ( qAtan2((qreal)(pt.y() - pt1.y()), (qreal)(pt.x() - pt1.x())) * 180.) / M_PI;
 
                     p.save();
                     // draw arrow between bullets

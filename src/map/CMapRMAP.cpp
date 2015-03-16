@@ -449,10 +449,10 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf)
     convertRad2M(p2);
 
     // find indices into tile buffer
-    int idxx1 = floor((p1.x() - xref1) / (level.xscale * tileSizeX));
-    int idxy1 = floor((p1.y() - yref1) / (level.yscale * tileSizeY));
-    int idxx2 =  ceil((p2.x() - xref1) / (level.xscale * tileSizeX));
-    int idxy2 =  ceil((p2.y() - yref1) / (level.yscale * tileSizeY));
+    int idxx1 = qFloor((p1.x() - xref1) / (level.xscale * tileSizeX));
+    int idxy1 = qFloor((p1.y() - yref1) / (level.yscale * tileSizeY));
+    int idxx2 =  qCeil((p2.x() - xref1) / (level.xscale * tileSizeX));
+    int idxy2 =  qCeil((p2.y() - yref1) / (level.yscale * tileSizeY));
 
     if(idxx1 < 0)
     {

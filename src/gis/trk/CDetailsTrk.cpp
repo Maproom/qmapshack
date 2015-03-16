@@ -49,7 +49,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         comboColor->addItem(icon,"",CGisItemTrk::lineColors[i]);
     }
 
-    setupGui();    
+    setupGui();
 
     if(trk.isOnDevice())
     {

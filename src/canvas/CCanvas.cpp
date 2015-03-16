@@ -543,15 +543,15 @@ void CCanvas::drawScale(QPainter& p)
 
     if(0 <= b && b < log10(3.0f))
     {
-        d = 1 * pow(10,a);
+        d = 1 * qPow(10,a);
     }
     else if(log10(3.0f) < b && b < log10(5.0f))
     {
-        d = 3 * pow(10,a);
+        d = 3 * qPow(10,a);
     }
     else
     {
-        d = 5 * pow(10,a);
+        d = 5 * qPow(10,a);
     }
 
     // step III: convert the scale length from [m] into [px]

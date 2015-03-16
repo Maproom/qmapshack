@@ -1813,7 +1813,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                         u2 = poly[i].x();
                         v2 = poly[i].y();
 
-                        segLength    = sqrt((u2 - u1) * (u2 - u1) + (v2 - v1) * (v2 - v1));
+                        segLength    = qSqrt((u2 - u1) * (u2 - u1) + (v2 - v1) * (v2 - v1));
                         totalLength += segLength;
                         lengths << segLength;
 
@@ -1839,7 +1839,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
                         QPointF p1      = p2;
                         p2              = path.pointAtPercent((curLength + segLength) / totalLength);
-                        qreal angle    = atan((p2.y() - p1.y()) / (p2.x() - p1.x())) * 180 / M_PI;
+                        qreal angle    = qAtan((p2.y() - p1.y()) / (p2.x() - p1.x())) * 180 / M_PI;
 
                         if(p2.x() - p1.x() < 0)
                         {
@@ -2004,7 +2004,7 @@ void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, con
         const QPointF &p2 = line[i];
         qreal dx    = p2.x() - p1.x();
         qreal dy    = p2.y() - p1.y();
-        tp.lengths << sqrt(dx * dx + dy * dy);
+        tp.lengths << qSqrt(dx * dx + dy * dy);
     }
 
     textpaths << tp;
@@ -2309,7 +2309,7 @@ void CMapIMG::drawText(QPainter& p)
 
         QPointF point2  = path.pointAtPercent(percent2);
 
-        qreal angle     = atan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
+        qreal angle     = qAtan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
 
         // flip path if string start is E->W direction
         // this helps, sometimes, in 50 % of the cases :)
@@ -2331,7 +2331,7 @@ void CMapIMG::drawText(QPainter& p)
             point1  = point2;
             point2  = path.pointAtPercent(percent2);
 
-            angle   = atan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
+            angle   = qAtan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
 
             if(point2.x() - point1.x() < 0)
             {
@@ -2594,7 +2594,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
             dx = p2.u - p1.u;
             dy = p2.v - p1.v;
 
-            d_p1_p2 = sqrt(dx * dx + dy * dy);
+            d_p1_p2 = qSqrt(dx * dx + dy * dy);
 
             u = ((pt.x() - p1.u) * dx + (pt.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
 
@@ -2606,7 +2606,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
             x = p1.u + u * dx;
             y = p1.v + u * dy;
 
-            distance = sqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
+            distance = qSqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
 
             if(distance < shortest)
             {
@@ -2766,7 +2766,7 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
         dx = p2.x() - p1.x();
         dy = p2.y() - p1.y();
 
-        d_p1_p2 = sqrt(dx * dx + dy * dy);
+        d_p1_p2 = qSqrt(dx * dx + dy * dy);
 
         u = ((pt.x() - p1.x()) * dx + (pt.y() - p1.y()) * dy) / (d_p1_p2 * d_p1_p2);
 
@@ -2778,7 +2778,7 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
         x = p1.x() + u * dx;
         y = p1.y() + u * dy;
 
-        distance = sqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
+        distance = qSqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
 
         if(distance < threshold)
         {

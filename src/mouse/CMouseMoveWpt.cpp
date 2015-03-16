@@ -56,8 +56,8 @@ void CMouseMoveWpt::draw(QPainter& p,  bool needsRedraw, const QRect &rect)
     gis->convertRad2Px(p2);
 
 
-    QPointF p11 = p1 + QPoint(17 * cos((a1 - 90) * DEG_TO_RAD), 17 * sin((a1 - 90) * DEG_TO_RAD));
-    QPointF p22 = p2 + QPoint(21 * cos((a2 + 90) * DEG_TO_RAD), 21 * sin((a2 + 90) * DEG_TO_RAD));
+    QPointF p11 = p1 + QPoint(17 * qCos((a1 - 90) * DEG_TO_RAD), 17 * qSin((a1 - 90) * DEG_TO_RAD));
+    QPointF p22 = p2 + QPoint(21 * qCos((a2 + 90) * DEG_TO_RAD), 21 * qSin((a2 + 90) * DEG_TO_RAD));
 
 
     QPen pen(Qt::darkBlue, 3);

@@ -20,6 +20,7 @@
 #include "GeoMath.h"
 #include "gis/trk/CGisItemTrk.h"
 
+#include <QtMath>
 #include <proj_api.h>
 
 void CGisItemTrk::filterReducePoints(qreal dist)
@@ -59,8 +60,8 @@ void CGisItemTrk::filterReducePoints(qreal dist)
 
         pt0 = pt2;
 
-        pt2.x = pt1.x + cos(a1 * DEG_TO_RAD) * d;
-        pt2.y = pt1.y + sin(a1 * DEG_TO_RAD) * d;
+        pt2.x = pt1.x + qCos(a1 * DEG_TO_RAD) * d;
+        pt2.y = pt1.y + qSin(a1 * DEG_TO_RAD) * d;
     }
 
     GPS_Math_DouglasPeucker(line, dist);

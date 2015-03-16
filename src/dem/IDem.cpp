@@ -162,8 +162,8 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
 
 #define ZFACT           0.125
 #define ZFACT_BY_ZFACT  (ZFACT*ZFACT)
-#define SIN_ALT         (sin(45*DEG_TO_RAD))
-#define ZFACT_COS_ALT   (ZFACT*cos(45*DEG_TO_RAD))
+#define SIN_ALT         (qSin(45*DEG_TO_RAD))
+#define ZFACT_COS_ALT   (ZFACT*qCos(45*DEG_TO_RAD))
 #define AZ              (315 * DEG_TO_RAD)
     for(int m = 1; m <= h; m++)
     {
@@ -179,9 +179,9 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
 
             dx          = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale*factorHillshading);
             dy          = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale*factorHillshading);
-            aspect      = atan2(dy, dx);
+            aspect      = qAtan2(dy, dx);
             xx_plus_yy  = dx * dx + dy * dy;
-            cang        = (SIN_ALT - ZFACT_COS_ALT * sqrt(xx_plus_yy) * sin(aspect - AZ)) / sqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
+            cang        = (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
 
             if (cang <= 0.0)
             {
@@ -211,7 +211,7 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
             dx  = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
             dy  = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
             k   = (dx * dx + dy * dy);
-            slope =  atan(sqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
+            slope =  qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
 
             if(slope > tblGrade[gradeSlopeColor][5])
             {
@@ -251,11 +251,11 @@ void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p)
     qreal dy1   = l[0].y() - l[1].y();
     qreal dx2   = l[0].x() - l[3].x();
     qreal dy2   = l[0].y() - l[3].y();
-    qreal w    = ceil( sqrt(dx1*dx1 + dy1*dy1));
-    qreal h    = ceil( sqrt(dx2*dx2 + dy2*dy2));
+    qreal w    = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
+    qreal h    = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
 
     // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-    qreal a = atan(dy1/dx1) * RAD_TO_DEG;
+    qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
 
     // finally translate, scale, rotate and draw tile
     p.save();

@@ -922,7 +922,6 @@ void CGisItemTrk::findWaypointsCloseBy()
         if(pt)
         {
             pt->keyWpt = trkwpt.key;
-            qDebug() << pt->idxTotal << pt->keyWpt.item;
         }
     }
 }
@@ -1233,8 +1232,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
-    QPolygonF lineMarks;
-
     if(drawMode == eDrawNormal)
     {
         // in normal mode the trackline without points marked as deleted is drawn
@@ -1251,11 +1248,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
                 pt1.setY(pt.lat);
                 pt1 *= DEG_TO_RAD;
                 lineSimple << pt1;
-
-                if(!pt.keyWpt.item.isEmpty())
-                {
-                    lineMarks << pt1;
-                }
             }
         }
     }
@@ -1285,7 +1277,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
     gis->convertRad2Px(lineSimple);
     gis->convertRad2Px(lineFull);
-    gis->convertRad2Px(lineMarks);
 
     // draw the full line first
     if(drawMode == eDrawRange)
@@ -1338,13 +1329,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         p.drawPolyline(l);
     }
     // -------------------------
-
-    p.setPen(QPen(Qt::red, 3));
-    p.setBrush(Qt::NoBrush);
-    foreach(const QPointF& pt, lineMarks)
-    {
-        p.drawEllipse(pt,4,4);
-    }
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)

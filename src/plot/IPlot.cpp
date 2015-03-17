@@ -357,8 +357,7 @@ void IPlot::setLRTB()
     top = 0;
     if(!data->tags.isEmpty())
     {
-        top += fontHeight;
-        top += 16;
+        top += 9;
     }
     top += deadAreaY;
 
@@ -484,7 +483,7 @@ void IPlot::draw()
     }
 
     p.setFont(CMainWindow::self().getMapFont());
-//    drawTags(p);
+    drawTags(p);
     p.setClipping(true);
     p.setClipRect(rectGraphArea);
     drawData(p);
@@ -850,6 +849,44 @@ void IPlot::drawDecoration( QPainter &p )
         p.setPen(QPen(Qt::red,2));
         p.drawLine(posMouse.x(), top, posMouse.x(), bottom);
     }
+}
+
+void IPlot::drawTags(QPainter& p)
+{
+    if(data->tags.isEmpty()) return;
+
+    int ptx, pty;
+    CPlotAxis& xaxis = data->x();
+    CPlotAxis& yaxis = data->y();
+
+    QVector<CPlotData::point_t>::const_iterator tag = data->tags.begin();
+    while(tag != data->tags.end())
+    {
+        ptx = left   + xaxis.val2pt( tag->point.x() );
+        pty = bottom - yaxis.val2pt( tag->point.y() );
+
+        if (left < ptx &&  ptx < right)
+        {
+
+            QPixmap icon = tag->icon.scaled(8,8, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            p.drawPixmap(ptx - icon.width() / 2, 4, icon);
+
+            p.setPen(QPen(Qt::white, 3));
+            if( 9 < pty)
+            {
+                if (pty > bottom)
+                {
+                    pty = bottom;
+                }
+
+                p.drawLine(ptx, top, ptx, pty);
+                p.setPen(QPen(Qt::black, 1));
+                p.drawLine(ptx, top, ptx, pty);
+            }
+        }
+        ++tag;
+    }
+
 }
 
 void IPlot::save(QImage& image)

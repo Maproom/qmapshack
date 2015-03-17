@@ -296,6 +296,8 @@ protected:
     void setupName(const QString& defaultName);
     void markAsSaved();
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
+    void updateItems();
+
 
 
     // Those are the URIs of the GPX extensions we support

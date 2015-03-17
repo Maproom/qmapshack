@@ -74,7 +74,8 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     }
 
     setText(CGisListWks::eColumnName, name);
-    setToolTip(CGisListWks::eColumnName, getInfo());
+    setToolTip(CGisListWks::eColumnName, getInfo());    
+    updateItems();
     valid = true;
 }
 
@@ -96,7 +97,9 @@ void CDBProject::restoreDBLink()
     {
         id = query.value(0).toULongLong();
         setupName("----");
+        updateItems();
         valid = true;
+
     }
 }
 
@@ -324,6 +327,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
 
     setToolTip(CGisListWks::eColumnName, getInfo());
     postStatus();
+    updateItems();
 }
 
 void CDBProject::hideItems(CEvtD2WHideItems * evt)
@@ -340,5 +344,6 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
     }
     setToolTip(CGisListWks::eColumnName, getInfo());
     postStatus();
+    updateItems();
 }
 

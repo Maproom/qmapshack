@@ -809,7 +809,7 @@ void CGisItemTrk::deriveSecondaryData()
 
 struct trkwpt_t
 {
-    trkwpt_t() : x(0), y(0), idx(-1), lastDistance(20*20)
+    trkwpt_t() : x(0), y(0), idx(-1), lastDistance(50*50)
     {
     }
 
@@ -831,10 +831,16 @@ void CGisItemTrk::findWaypointsCloseBy()
     QVector<pointDP> line;
 
     // combine all segments to a single line
-    foreach (const trkseg_t &seg, trk.segs)
+    const int M = trk.segs.size();
+    for(int m = 0; m < M; m++)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        trkseg_t& seg = trk.segs[m];
+
+        const int N = seg.pts.size();
+        for(int n = 0; n < N; n++)
         {
+            trkpt_t& pt = seg.pts[n];
+            pt.keyWpt.clear();
             if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
             {
                 continue;
@@ -842,7 +848,7 @@ void CGisItemTrk::findWaypointsCloseBy()
             pointDP dp;
             dp.x    = pt.lon * DEG_TO_RAD;
             dp.y    = pt.lat * DEG_TO_RAD;
-            dp.idx  = pt.idxTotal;
+            dp.idx  = pt.idxVisible;
             line << dp;
         }
     }
@@ -902,6 +908,21 @@ void CGisItemTrk::findWaypointsCloseBy()
                 trkwpt.idx = pt2.idx;
                 trkwpt.lastDistance = d;
             }
+        }
+    }
+
+    foreach(const trkwpt_t& trkwpt, trkwpts)
+    {
+        if(trkwpt.idx < 0)
+        {
+            continue;
+        }
+
+        trkpt_t * pt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(trkwpt.idx));
+        if(pt)
+        {
+            pt->keyWpt = trkwpt.key;
+            qDebug() << pt->idxTotal << pt->keyWpt.item;
         }
     }
 }
@@ -1212,6 +1233,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
+    QPolygonF lineMarks;
+
     if(drawMode == eDrawNormal)
     {
         // in normal mode the trackline without points marked as deleted is drawn
@@ -1228,6 +1251,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
                 pt1.setY(pt.lat);
                 pt1 *= DEG_TO_RAD;
                 lineSimple << pt1;
+
+                if(!pt.keyWpt.item.isEmpty())
+                {
+                    lineMarks << pt1;
+                }
             }
         }
     }
@@ -1257,6 +1285,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
     gis->convertRad2Px(lineSimple);
     gis->convertRad2Px(lineFull);
+    gis->convertRad2Px(lineMarks);
 
     // draw the full line first
     if(drawMode == eDrawRange)
@@ -1309,6 +1338,13 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         p.drawPolyline(l);
     }
     // -------------------------
+
+    p.setPen(QPen(Qt::red, 3));
+    p.setBrush(Qt::NoBrush);
+    foreach(const QPointF& pt, lineMarks)
+    {
+        p.drawEllipse(pt,4,4);
+    }
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)

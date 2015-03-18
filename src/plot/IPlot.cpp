@@ -374,11 +374,6 @@ void IPlot::setLRTB()
     {
         bottom -= deadAreaY;
     }
-
-    if(!data->tags.isEmpty() /*&& CResources::self().showTrackProfileEleInfo()*/)
-    {
-        bottom -= fontHeight;
-    }
 }
 
 
@@ -399,10 +394,6 @@ void IPlot::setSizeXLabel()
         rectX1Label.setWidth( right - left );
         rectX1Label.setHeight( fontHeight );
         y = ( size().height() - rectX1Label.height()) - deadAreaY;
-        if(!data->tags.isEmpty() /*&& CResources::self().showTrackProfileEleInfo()*/)
-        {
-            y -= fontHeight;
-        }
 
         rectX1Label.moveTopLeft( QPoint( left, y ) );
     }
@@ -868,8 +859,8 @@ void IPlot::drawTags(QPainter& p)
         if (left < ptx &&  ptx < right)
         {
 
-            QPixmap icon = tag->icon.scaled(8,8, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-            p.drawPixmap(ptx - icon.width() / 2, 4, icon);
+            QPixmap icon = tag->icon.scaled(10,10, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            p.drawPixmap(ptx - icon.width() / 2, 2, icon);
 
             p.setPen(QPen(Qt::white, 3));
             if( 9 < pty)

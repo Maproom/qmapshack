@@ -99,7 +99,7 @@ void CPlotProfile::updateData()
             coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
             lineDem << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), NOFLOAT);
 
-            if(project == 0 || trkpt.keyWpt.item.isEmpty())
+            if(project == 0 || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
             {
                 continue;
             }

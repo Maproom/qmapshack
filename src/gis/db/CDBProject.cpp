@@ -117,6 +117,8 @@ void CDBProject::postStatus()
         }
     }
 
+    updateItems();
+
     CGisWidget::self().postEventForDb(info);
 }
 
@@ -326,8 +328,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
     }
 
     setToolTip(CGisListWks::eColumnName, getInfo());
-    postStatus();
-    updateItems();
+    postStatus();    
 }
 
 void CDBProject::hideItems(CEvtD2WHideItems * evt)
@@ -344,6 +345,5 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
     }
     setToolTip(CGisListWks::eColumnName, getInfo());
     postStatus();
-    updateItems();
 }
 

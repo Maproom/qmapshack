@@ -924,6 +924,12 @@ void CGisItemTrk::findWaypointsCloseBy()
             pt->keyWpt = trkwpt.key;
         }
     }
+
+    if(!dlgDetails.isNull())
+    {
+        dlgDetails->setupGui();
+    }
+
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -105,18 +105,18 @@
 <context>
     <name>CDetailsOvlArea</name>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="130"/>
+        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="136"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="130"/>
+        <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="136"/>
         <source>Enter new area name.</source>
         <translation>Geben Sie einen neuen Namen für das Gebiet ein.</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
-        <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
     <message>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
@@ -217,42 +217,42 @@
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="57"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="62"/>
         <source>Reduce visible track points</source>
         <translation>Sichtbare Trackpunkte reduzieren</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="70"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="75"/>
         <source>Change elevation of track points</source>
         <translation>Höhe von Trackpunkten ändern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="83"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="88"/>
         <source>Change timestamp of track points</source>
         <translation>Zeitstempel von Trackpunkten ändern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="96"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="101"/>
         <source>Cut track into pieces</source>
         <translation>Track in Stücke teilen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="210"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="219"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="222"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="228"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="247"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="249"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="215"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="224"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="227"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="233"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="252"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="254"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="363"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="368"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="363"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="368"/>
         <source>Enter new track name.</source>
         <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
@@ -300,12 +300,12 @@
         <translation type="obsolete">&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="151"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="157"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="151"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="157"/>
         <source>Enter new waypoint name.</source>
         <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
@@ -314,7 +314,7 @@
         <translation type="obsolete">Geben Sie eine neue Höhe ein.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="170"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="176"/>
         <source>Enter new proximity range.</source>
         <translation>Geben Sie einen neuen Abstandsalarm ein.</translation>
     </message>
@@ -569,7 +569,7 @@
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../helpers/CHistoryListWidget.cpp" line="33"/>
+        <location filename="../helpers/CHistoryListWidget.cpp" line="34"/>
         <source>Cut history</source>
         <translation>Historie kürzen</translation>
     </message>
@@ -1308,7 +1308,7 @@
     <name>CMapPropSetup</name>
     <message>
         <source>Cache path...</source>
-        <translation>Cache Pfad...</translation>
+        <translation type="vanished">Cache Pfad...</translation>
     </message>
 </context>
 <context>
@@ -2320,7 +2320,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="451"/>
         <source>Slope</source>
-        <translation>Hangneigung</translation>
+        <translation>Steigung</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="456"/>
@@ -4171,24 +4171,24 @@ sein</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../GeoMath.cpp" line="160"/>
-        <location filename="../GeoMath.cpp" line="166"/>
+        <location filename="../GeoMath.cpp" line="159"/>
+        <location filename="../GeoMath.cpp" line="165"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../GeoMath.cpp" line="160"/>
+        <location filename="../GeoMath.cpp" line="159"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Falsches Positionsformat. Muss entweder &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; oder &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; sein.</translation>
     </message>
     <message>
-        <location filename="../GeoMath.cpp" line="166"/>
+        <location filename="../GeoMath.cpp" line="165"/>
         <source>Position values out of bounds. </source>
         <translation>Position außerhalb der gültigen Werte.</translation>
     </message>
     <message>
         <source>Bad position format. Must be: [N|S] ddd mm.sss [W|E] ddd mm.sss</source>
-        <translation>Falsches Positionsformat. Richtig: [N|S] ddd mm.sss [W|E] ddd mm.sss </translation>
+        <translation type="vanished">Falsches Positionsformat. Richtig: [N|S] ddd mm.sss [W|E] ddd mm.sss </translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="106"/>
@@ -4236,34 +4236,34 @@ Areas: %1</source>
         <translation type="obsolete">Fläche: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="213"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="218"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Dateiname: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="230"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="235"/>
         <source>Waypoints: %1</source>
         <translation>Wegpunkte: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="234"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="239"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="238"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="243"/>
         <source>Routes: %1</source>
         <translation>Routen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="242"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="247"/>
         <source>Areas: %1</source>
         <translation>Gebiete: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="303"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="308"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
@@ -4274,7 +4274,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="408"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="304"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="309"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
@@ -4389,7 +4389,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="481"/>
         <source> slope: %1%3 (%2%)</source>
-        <translation>, Hangneigung: %1%3 (%2%)</translation>
+        <translation>, Steigung: %1%3 (%2%)</translation>
     </message>
     <message>
         <source> slope: %1° (%2%)</source>
@@ -4650,46 +4650,46 @@ Dateiname: %1</translation>
         <translation>Erstversion.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="407"/>
+        <location filename="../gis/IGisItem.cpp" line="412"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
         <translation>Diese Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="408"/>
+        <location filename="../gis/IGisItem.cpp" line="413"/>
         <source>Read Only Mode...</source>
         <translation>Schreibgeschützt...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="614"/>
+        <location filename="../gis/IGisItem.cpp" line="619"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="617"/>
+        <location filename="../gis/IGisItem.cpp" line="622"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- kein ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="628"/>
-        <location filename="../gis/IGisItem.cpp" line="673"/>
+        <location filename="../gis/IGisItem.cpp" line="633"/>
+        <location filename="../gis/IGisItem.cpp" line="678"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="631"/>
-        <location filename="../gis/IGisItem.cpp" line="676"/>
+        <location filename="../gis/IGisItem.cpp" line="636"/>
+        <location filename="../gis/IGisItem.cpp" line="681"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="642"/>
-        <location filename="../gis/IGisItem.cpp" line="687"/>
+        <location filename="../gis/IGisItem.cpp" line="647"/>
+        <location filename="../gis/IGisItem.cpp" line="692"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Verknüpfungen:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="645"/>
-        <location filename="../gis/IGisItem.cpp" line="690"/>
+        <location filename="../gis/IGisItem.cpp" line="650"/>
+        <location filename="../gis/IGisItem.cpp" line="695"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine ---&lt;/p&gt;</translation>
     </message>
@@ -4759,52 +4759,52 @@ Dateiname: %1</translation>
         <translation>Anzahl der Trackpunkte entspricht nicht der Anzahl der ausgeblendeten Trackpunkte.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="95"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="96"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
         <translation>Punkte ausblenden mit dem Douglas-Peuker Algorithmus (%1 %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="111"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="112"/>
         <source>Reset all hidden track points to visible</source>
         <translation>Alle verborgenen Trackpunkte zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="136"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="137"/>
         <source>Permanently removed all hidden track points</source>
         <translation>Alle verborgenen Trackpunkte wurden dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="186"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="187"/>
         <source>Smoothed profile with a Median filter of size %1</source>
         <translation>Mit einem Median-Filter der Größe %1 geglättetes Profil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="222"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="223"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Höhendaten durch Daten von DEM Dateien ersetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="245"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="246"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Versatz der Höhendaten um %1 %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="264"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="265"/>
         <source>Changed start of track to %1.</source>
         <translation>Trackanfang auf %1 verschoben.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="283"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="284"/>
         <source>Remove timestamps.</source>
         <translation>Zeitstempel entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="306"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="307"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="339"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="340"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
@@ -4820,7 +4820,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>Do you really want to delete %1</source>
-        <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
+        <translation type="vanished">Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="85"/>

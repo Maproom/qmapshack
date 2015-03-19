@@ -97,6 +97,7 @@ protected:
 
     QImage buffer;
     QPoint posMouse;
+    QPoint posXXX;
 
     /**
        @brief The track this plot is attached to

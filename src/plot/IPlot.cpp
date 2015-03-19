@@ -248,6 +248,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
     if(rectGraphArea.contains(e->pos()))
     {
         posMouse = e->pos();
+        posXXX   = posMouse;
 
         // set point of focus at track object
         qreal x = data->x().pt2val(posMouse.x() - left);
@@ -837,8 +838,33 @@ void IPlot::drawDecoration( QPainter &p )
 {
     if(posMouse != NOPOINT)
     {
+        int x = posMouse.x();
         p.setPen(QPen(Qt::red,2));
-        p.drawLine(posMouse.x(), top, posMouse.x(), bottom);
+        p.drawLine(x, top, x, bottom);
+
+        foreach(const CPlotData::point_t& tag, data->tags)
+        {
+            int ptx = left + data->x().val2pt( tag.point.x() );
+
+            if(qAbs(x - ptx) < 10)
+            {
+                p.setFont(CMainWindow::self().getMapFont());
+                QFontMetrics fm(p.font());
+                QRect r = fm.boundingRect(tag.label);
+                r.moveCenter(QPoint(ptx, top - fontHeight/2 - fm.descent()));
+                r.adjust(-1,-1,1,1);
+
+                p.setPen(Qt::NoPen);
+                p.setBrush(Qt::white);
+                p.drawRect(r);
+
+                p.setPen(Qt::darkBlue);
+                p.drawText(r, Qt::AlignCenter, tag.label);
+
+                break;
+            }
+        }
+
     }
 }
 
@@ -877,7 +903,6 @@ void IPlot::drawTags(QPainter& p)
         }
         ++tag;
     }
-
 }
 
 void IPlot::save(QImage& image)

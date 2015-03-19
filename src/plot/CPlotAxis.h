@@ -73,7 +73,7 @@ public:
     /// get the total limits and the used ones
     virtual void getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& useMax);
 
-    inline int val2pt( qreal val )
+    inline int val2pt( qreal val ) const
     {
         if ( scale == 0 )
         {
@@ -82,7 +82,7 @@ public:
         return ( int ) ( ( val - usedMin ) * scale + 0.5 );
     }
 
-    inline qreal pt2val( int pt )
+    inline qreal pt2val( int pt ) const
     {
         if ( scale == 0 )
         {

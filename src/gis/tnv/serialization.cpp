@@ -293,8 +293,12 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
         return false;
     }
 
+    QDir dir(QFileInfo(filename).absoluteDir());
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+
     QTextStream out(&file);
     out.setCodec(QTextCodec::codecForName("UTF-8"));
+    out << bom;
     out << "B  UTF-8" << endl;
     out << "G  WGS 84" << endl;
     out << "U  1" << endl;
@@ -344,6 +348,56 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
             list << "-1.000000";
 
             out << list.join(" ") << endl;
+
+            if(!trkpt.keyWpt.item.isEmpty() && project)
+            {
+                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+                if(wpt)
+                {
+                    QString iconName    = wpt->getIconName();
+                    QPixmap icon        = wpt->getIcon();
+                    icon                = icon.scaledToWidth(15, Qt::SmoothTransformation);
+                    iconName            = iconQlGt2TwoNav(iconName);
+                    iconName            = iconName.replace(" ", "_");
+
+                    icon.save(dir.absoluteFilePath(iconName + ".png"));
+
+                    list.clear();
+                    list << (iconName + ".png");
+                    list << "1";
+                    list << "3";
+                    list << "0";
+                    list << wpt->getName();
+                    out << "a " << list.join(",") << endl;
+
+                    foreach(const CGisItemWpt::image_t& img, wpt->getImages())
+                    {
+                        QString fn = img.info;
+                        if(fn.isEmpty())
+                        {
+                            fn = QString("picture.png");
+                        }
+
+                        QFileInfo fi(fn);
+
+                        if(!(fi.completeSuffix() == "png"))
+                        {
+                            fn = fi.baseName() + ".png";
+                        }
+
+                        fn = makeUniqueName(fn, dir);
+                        img.pixmap.save(dir.absoluteFilePath(fn));
+
+                        list.clear();
+                        list << fn;
+                        list << "1";
+                        list << "8";
+                        list << "0";
+                        out << "a " << list.join(",") << endl;
+                    }
+
+                }
+            }
         }
     }
 

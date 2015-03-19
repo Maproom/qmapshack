@@ -447,7 +447,6 @@ QColor IGisItem::str2color(const QString& name)
     {
         if((p->name == name) || (ref == p->color))
         {
-            qDebug() << p->name << p->color;
             return p->color;
         }
         p++;

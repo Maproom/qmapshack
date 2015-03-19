@@ -144,8 +144,20 @@ void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
 void IGisProject::setChanged()
 {
     setText(CGisListWks::eColumnDecoration,"*");
+    updateItems();
 }
 
+void IGisProject::updateItems()
+{
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(child(i));
+        if(trk)
+        {
+            trk->findWaypointsCloseBy();
+        }
+    }
+}
 
 void IGisProject::setupName(const QString &defaultName)
 {

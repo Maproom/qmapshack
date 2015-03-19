@@ -153,6 +153,9 @@ public:
     void setKeywords(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<IGisItem::link_t>& links);
+    /**
+       @brief Set change mark
+     */
     void setChanged();
 
     /**
@@ -216,8 +219,11 @@ public:
         return valid;
     }
 
+    /**
+       @brief Test if visibility check mark is set
+       @return True if project is visible
+     */
     bool isVisible() const;
-
 
     /**
        @brief Test if this project is handled by a device
@@ -225,6 +231,10 @@ public:
      */
     bool isOnDevice() const;
 
+    /**
+       @brief Test if project has been changed
+       @return True if changed.
+     */
     bool isChanged() const;
 
     void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
@@ -286,6 +296,8 @@ protected:
     void setupName(const QString& defaultName);
     void markAsSaved();
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
+    void updateItems();
+
 
 
     // Those are the URIs of the GPX extensions we support

@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
@@ -69,9 +70,14 @@ void CPlotProfile::updateData()
         setYLabel(tr("alt. [%1]").arg(IUnit::self().baseunit));
     }
 
+
+    clear();
+
     QPolygonF lineEle;
     QPolygonF lineDem;
     QPolygonF coords;
+
+    IGisProject * project = dynamic_cast<IGisProject*>(trk->parent());
 
     qreal basefactor = IUnit::self().basefactor;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
@@ -84,18 +90,34 @@ void CPlotProfile::updateData()
                 continue;
             }
 
-            if(trkpt.ele != NOINT)
+            if(trkpt.ele == NOINT)
             {
-                lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.ele * basefactor);
-                coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-                lineDem << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), NOFLOAT);
+                continue;
+            }
+
+            lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.ele * basefactor);
+            coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+            lineDem << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), NOFLOAT);
+
+            if(project == 0 || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
+            {
+                continue;
+            }
+
+            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+            if(wpt)
+            {
+                CPlotData::point_t tag;
+                tag.point = lineEle.last();
+                tag.icon  = wpt->getIcon();
+                tag.label = wpt->getName();
+                data->tags << tag;
             }
         }
     }
 
     CMainWindow::self().getEelevationAt(coords, lineDem);
 
-    clear();
     newLine(lineEle, "GPS");
     if(!lineDem.isEmpty())
     {

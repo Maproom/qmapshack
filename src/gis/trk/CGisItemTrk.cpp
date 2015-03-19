@@ -809,7 +809,7 @@ void CGisItemTrk::deriveSecondaryData()
 
 struct trkwpt_t
 {
-    trkwpt_t() : x(0), y(0), idx(-1), lastDistance(20*20)
+    trkwpt_t() : x(0), y(0), idx(-1), lastDistance(50*50)
     {
     }
 
@@ -831,10 +831,16 @@ void CGisItemTrk::findWaypointsCloseBy()
     QVector<pointDP> line;
 
     // combine all segments to a single line
-    foreach (const trkseg_t &seg, trk.segs)
+    const int M = trk.segs.size();
+    for(int m = 0; m < M; m++)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        trkseg_t& seg = trk.segs[m];
+
+        const int N = seg.pts.size();
+        for(int n = 0; n < N; n++)
         {
+            trkpt_t& pt = seg.pts[n];
+            pt.keyWpt.clear();
             if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
             {
                 continue;
@@ -842,7 +848,7 @@ void CGisItemTrk::findWaypointsCloseBy()
             pointDP dp;
             dp.x    = pt.lon * DEG_TO_RAD;
             dp.y    = pt.lat * DEG_TO_RAD;
-            dp.idx  = pt.idxTotal;
+            dp.idx  = pt.idxVisible;
             line << dp;
         }
     }
@@ -904,6 +910,26 @@ void CGisItemTrk::findWaypointsCloseBy()
             }
         }
     }
+
+    foreach(const trkwpt_t& trkwpt, trkwpts)
+    {
+        if(trkwpt.idx < 0)
+        {
+            continue;
+        }
+
+        trkpt_t * pt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(trkwpt.idx));
+        if(pt)
+        {
+            pt->keyWpt = trkwpt.key;
+        }
+    }
+
+    if(!dlgDetails.isNull())
+    {
+        dlgDetails->setupGui();
+    }
+
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)

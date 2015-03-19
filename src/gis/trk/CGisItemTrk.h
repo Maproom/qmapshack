@@ -513,6 +513,8 @@ public:
         qreal elapsedSeconds;
         /// the seconds since the start of the track with moving speed
         qreal elapsedSecondsMoving;
+        /// the key of an attached waypoint
+        key_t keyWpt;
     };
 
     struct trkseg_t

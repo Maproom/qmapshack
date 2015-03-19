@@ -84,6 +84,7 @@ protected:
     void drawYTic( QPainter &p );
     void drawLegend(QPainter& p);
     void drawDecoration( QPainter &p );
+    void drawTags(QPainter& p);
 
     // different draw modes
     mode_e mode;
@@ -96,6 +97,7 @@ protected:
 
     QImage buffer;
     QPoint posMouse;
+    QPoint posXXX;
 
     /**
        @brief The track this plot is attached to

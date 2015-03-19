@@ -248,6 +248,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
     if(rectGraphArea.contains(e->pos()))
     {
         posMouse = e->pos();
+        posXXX   = posMouse;
 
         // set point of focus at track object
         qreal x = data->x().pt2val(posMouse.x() - left);
@@ -357,8 +358,7 @@ void IPlot::setLRTB()
     top = 0;
     if(!data->tags.isEmpty())
     {
-        top += fontHeight;
-        top += 16;
+        top += 9;
     }
     top += deadAreaY;
 
@@ -374,11 +374,6 @@ void IPlot::setLRTB()
     if(!data->xlabel.isEmpty())
     {
         bottom -= deadAreaY;
-    }
-
-    if(!data->tags.isEmpty() /*&& CResources::self().showTrackProfileEleInfo()*/)
-    {
-        bottom -= fontHeight;
     }
 }
 
@@ -400,10 +395,6 @@ void IPlot::setSizeXLabel()
         rectX1Label.setWidth( right - left );
         rectX1Label.setHeight( fontHeight );
         y = ( size().height() - rectX1Label.height()) - deadAreaY;
-        if(!data->tags.isEmpty() /*&& CResources::self().showTrackProfileEleInfo()*/)
-        {
-            y -= fontHeight;
-        }
 
         rectX1Label.moveTopLeft( QPoint( left, y ) );
     }
@@ -484,7 +475,7 @@ void IPlot::draw()
     }
 
     p.setFont(CMainWindow::self().getMapFont());
-//    drawTags(p);
+    drawTags(p);
     p.setClipping(true);
     p.setClipRect(rectGraphArea);
     drawData(p);
@@ -847,8 +838,70 @@ void IPlot::drawDecoration( QPainter &p )
 {
     if(posMouse != NOPOINT)
     {
+        int x = posMouse.x();
         p.setPen(QPen(Qt::red,2));
-        p.drawLine(posMouse.x(), top, posMouse.x(), bottom);
+        p.drawLine(x, top, x, bottom);
+
+        foreach(const CPlotData::point_t& tag, data->tags)
+        {
+            int ptx = left + data->x().val2pt( tag.point.x() );
+
+            if(qAbs(x - ptx) < 10)
+            {
+                p.setFont(CMainWindow::self().getMapFont());
+                QFontMetrics fm(p.font());
+                QRect r = fm.boundingRect(tag.label);
+                r.moveCenter(QPoint(ptx, top - fontHeight/2 - fm.descent()));
+                r.adjust(-1,-1,1,1);
+
+                p.setPen(Qt::NoPen);
+                p.setBrush(Qt::white);
+                p.drawRect(r);
+
+                p.setPen(Qt::darkBlue);
+                p.drawText(r, Qt::AlignCenter, tag.label);
+
+                break;
+            }
+        }
+
+    }
+}
+
+void IPlot::drawTags(QPainter& p)
+{
+    if(data->tags.isEmpty()) return;
+
+    int ptx, pty;
+    CPlotAxis& xaxis = data->x();
+    CPlotAxis& yaxis = data->y();
+
+    QVector<CPlotData::point_t>::const_iterator tag = data->tags.begin();
+    while(tag != data->tags.end())
+    {
+        ptx = left   + xaxis.val2pt( tag->point.x() );
+        pty = bottom - yaxis.val2pt( tag->point.y() );
+
+        if (left < ptx &&  ptx < right)
+        {
+
+            QPixmap icon = tag->icon.scaled(10,10, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            p.drawPixmap(ptx - icon.width() / 2, 2, icon);
+
+            p.setPen(QPen(Qt::white, 3));
+            if( 9 < pty)
+            {
+                if (pty > bottom)
+                {
+                    pty = bottom;
+                }
+
+                p.drawLine(ptx, top, ptx, pty);
+                p.setPen(QPen(Qt::black, 1));
+                p.drawLine(ptx, top, ptx, pty);
+            }
+        }
+        ++tag;
     }
 }
 

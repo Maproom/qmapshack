@@ -37,6 +37,7 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
 {
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
     loadGpx(filename);
+    updateItems();
 }
 
 CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
@@ -44,6 +45,7 @@ CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
 {
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
     loadGpx(filename);
+    updateItems();
 }
 
 CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent)
@@ -65,7 +67,8 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
 
 
     setupName(QFileInfo(filename).baseName().replace("_", " "));
-    setToolTip(CGisListWks::eColumnName, getInfo());
+    setToolTip(CGisListWks::eColumnName, getInfo());    
+    updateItems();
     valid = true;
 }
 

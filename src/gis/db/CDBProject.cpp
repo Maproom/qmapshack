@@ -97,7 +97,6 @@ void CDBProject::restoreDBLink()
     {
         id = query.value(0).toULongLong();
         setupName("----");
-        updateItems();
         valid = true;
 
     }

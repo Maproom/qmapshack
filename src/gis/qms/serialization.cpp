@@ -715,6 +715,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         }
     }
 
+    updateItems();
     return stream;
 }
 

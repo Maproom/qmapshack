@@ -38,6 +38,9 @@
 #define MIN_DIST_CLOSE_TO   10
 #define MIN_DIST_FOCUS      40
 
+#define WPT_FOCUS_DIST_IN   (50*50)
+#define WPT_FOCUS_DIST_OUT  (200*200)
+
 const QColor CGisItemTrk::lineColors[TRK_N_COLORS] =
 {
     Qt::black                     // 0
@@ -96,6 +99,16 @@ const QString CGisItemTrk::bulletColors[TRK_N_COLORS] =
     ,QString("")                 // 16
 };
 
+struct trkwpt_t
+{
+    trkwpt_t() : x(0), y(0)
+    {
+    }
+
+    qreal x;
+    qreal y;
+    IGisItem::key_t key;
+};
 
 
 const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
@@ -807,18 +820,6 @@ void CGisItemTrk::deriveSecondaryData()
 //    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 }
 
-struct trkwpt_t
-{
-    trkwpt_t() : x(0), y(0), idx(-1), lastDistance(50*50)
-    {
-    }
-
-    qreal x;
-    qreal y;
-    IGisItem::key_t key;
-    qint32 idx;
-    qreal lastDistance;
-};
 
 void CGisItemTrk::findWaypointsCloseBy()
 {
@@ -898,31 +899,47 @@ void CGisItemTrk::findWaypointsCloseBy()
         pt2.x = pt1.x + qCos(a1 * DEG_TO_RAD) * d;
         pt2.y = pt1.y + qSin(a1 * DEG_TO_RAD) * d;
 
-        // test for waypoint close by
-        for(int n = 0; n < trkwpts.size(); n++)
-        {
-            trkwpt_t& trkwpt = trkwpts[n];
-            qreal d = (trkwpt.x - pt2.x)*(trkwpt.x - pt2.x) + (trkwpt.y - pt2.y)*(trkwpt.y - pt2.y);
-            if(d < trkwpt.lastDistance)
-            {
-                trkwpt.idx = pt2.idx;
-                trkwpt.lastDistance = d;
-            }
-        }
     }
 
     foreach(const trkwpt_t& trkwpt, trkwpts)
     {
-        if(trkwpt.idx < 0)
+        qreal   minD  = WPT_FOCUS_DIST_IN;
+        qint32  index = -1;
+
+        foreach(const pointDP& pt, line)
         {
-            continue;
+            qreal d = (trkwpt.x - pt.x)*(trkwpt.x - pt.x) + (trkwpt.y - pt.y)*(trkwpt.y - pt.y);
+
+            if(d < WPT_FOCUS_DIST_IN)
+            {
+                if(d < minD)
+                {
+                    index = pt.idx;
+                    minD  = d;
+                }
+            }
+            else if(d > WPT_FOCUS_DIST_OUT)
+            {
+                trkpt_t * trkpt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(index));
+                if(trkpt)
+                {
+                    trkpt->keyWpt = trkwpt.key;
+                }
+
+                index = -1;
+                minD  = WPT_FOCUS_DIST_IN;
+            }
         }
 
-        trkpt_t * pt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(trkwpt.idx));
-        if(pt)
+        if(index != -1)
         {
-            pt->keyWpt = trkwpt.key;
+            trkpt_t * trkpt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(index));
+            if(trkpt)
+            {
+                trkpt->keyWpt = trkwpt.key;
+            }
         }
+
     }
 
     if(!dlgDetails.isNull())

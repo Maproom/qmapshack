@@ -2375,15 +2375,14 @@ void CMapIMG::getInfo(const QPoint& px, QString& str)
 void CMapIMG::getToolTip(const QPoint& px, QString& infotext)
 {
     bool first = true;
+    QString str;
+
     QMultiMap<QString, QString> dict;
     getInfoPoints(px, dict);
     getInfoPois(px, dict);
     getInfoPolylines(px, dict);
 
     QList<QString> values = dict.values();
-
-    QString str;
-
     foreach(const QString &value, values)
     {
         if(value == "-")
@@ -2404,7 +2403,9 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext)
 
     if(str.isEmpty())
     {
+        dict.clear();
         getInfoPolygons(px, dict);
+        QList<QString> values = dict.values();
         foreach(const QString &value, values)
         {
             if(value == "-")
@@ -2424,7 +2425,14 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext)
         }
     }
 
-    infotext += str;
+    if(!infotext.isEmpty() && !str.isEmpty())
+    {
+        infotext += "\n" + str;
+    }
+    else
+    {
+        infotext += str;
+    }
 }
 
 void CMapIMG::getInfoPoints(const QPoint& pt, QMultiMap<QString, QString>& dict)

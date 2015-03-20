@@ -579,8 +579,21 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
         if(project)
         {
+            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+            if(canvas)
+            {
+                canvas->reportStatus("device", tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
+                canvas->update();
+                qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+            }
+
             int lastResult = CSelectCopyAction::eResultNone;
             device->insertCopyOfProject(project, lastResult);
+
+            if(canvas)
+            {
+                canvas->reportStatus("device", "");
+            }
         }
     }
 

@@ -848,16 +848,18 @@ void IPlot::drawDecoration( QPainter &p )
 
             if(qAbs(x - ptx) < 10)
             {
-                p.setFont(CMainWindow::self().getMapFont());
-                QFontMetrics fm(p.font());
+                QFont f = CMainWindow::self().getMapFont();
+                f.setBold(true);
+                QFontMetrics fm(f);
                 QRect r = fm.boundingRect(tag.label);
-                r.moveCenter(QPoint(ptx, top - fontHeight/2 - fm.descent()));
+                r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
                 r.adjust(-1,-1,1,1);
 
                 p.setPen(Qt::NoPen);
                 p.setBrush(Qt::white);
                 p.drawRect(r);
 
+                p.setFont(f);
                 p.setPen(Qt::darkBlue);
                 p.drawText(r, Qt::AlignCenter, tag.label);
 

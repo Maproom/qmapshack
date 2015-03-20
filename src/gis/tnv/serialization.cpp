@@ -318,7 +318,7 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     out << list.join(" ") << endl;
 
     out << "s " << name << endl;
-    out << "k " << getKey().item << endl;
+    out << "y " << getKey().item << endl;
 
 
     foreach(const CGisItemTrk::trkseg_t& seg, trk.segs)
@@ -494,7 +494,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             break;
         }
 
-        case 'k':
+        case 'y':
         {
             key.item = line.mid(1).simplified();
             break;

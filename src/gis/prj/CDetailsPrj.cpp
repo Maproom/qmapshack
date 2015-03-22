@@ -40,8 +40,10 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     connect(textDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(toolPrint, SIGNAL(clicked()), this, SLOT(slotPrint()));
     connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
-    connect(radioSortByTime, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
-    connect(radioOrderAsProject, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
+    connect(radioSortByTime, SIGNAL(clicked()), this, SLOT(slotSortMode()));
+    connect(radioOrderAsProject, SIGNAL(clicked()), this, SLOT(slotSortMode()));
+    connect(radioSortAlongTrack, SIGNAL(clicked()), this, SLOT(slotSortMode()));
+    connect(toolLock, SIGNAL(clicked(bool)), this, SLOT(slotLock(bool)));
 
     slotSetupGui();
 }
@@ -74,6 +76,40 @@ void CDetailsPrj::slotSetupGui()
 {
     textDesc->document()->setTextWidth(textDesc->size().width() - 20);
     draw(*textDesc->document(), false);
+
+    radioOrderAsProject->blockSignals(true);
+    radioSortByTime->blockSignals(true);
+    radioSortAlongTrack->blockSignals(true);
+    switch(prj.getSorting())
+    {
+    case IGisProject::eSortNone:
+        radioOrderAsProject->setChecked(true);
+        break;
+    case IGisProject::eSortTime:
+        radioSortByTime->setChecked(true);
+        break;
+    case IGisProject::eSortTrack:
+        radioSortAlongTrack->setChecked(true);
+        break;
+    }
+    radioOrderAsProject->blockSignals(false);
+    radioSortByTime->blockSignals(false);
+    radioSortAlongTrack->blockSignals(false);
+
+    toolLock->blockSignals(true);
+    toolLock->setChecked(true);
+    const int N = prj.childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(prj.child(n));
+        if(item && !item->isReadOnly())
+        {
+            toolLock->setChecked(false);
+            break;
+        }
+    }
+    toolLock->blockSignals(false);
+
 }
 
 #define ROOT_FRAME_MARGIN 5
@@ -107,26 +143,21 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     f.setPointSize(pointSize);
     textDesc->setFont(f);
 
-    QTextFrameFormat fmtFrameStandard;
     fmtFrameStandard.setTopMargin(5);
     fmtFrameStandard.setBottomMargin(5);
     fmtFrameStandard.setWidth(w - 2 * ROOT_FRAME_MARGIN);
 
-    QTextCharFormat fmtCharStandard;
     fmtCharStandard.setFont(f);
 
-    QTextBlockFormat fmtBlockStandard;
     fmtBlockStandard.setTopMargin(10);
     fmtBlockStandard.setBottomMargin(10);
     fmtBlockStandard.setAlignment(Qt::AlignJustify);
 
-    QTextFrameFormat fmtFrameRoot;
     fmtFrameRoot.setTopMargin(0);
     fmtFrameRoot.setBottomMargin(ROOT_FRAME_MARGIN);
     fmtFrameRoot.setLeftMargin(ROOT_FRAME_MARGIN);
     fmtFrameRoot.setRightMargin(ROOT_FRAME_MARGIN);
 
-    QTextTableFormat fmtTableStandard;
     fmtTableStandard.setBorder(1);
     fmtTableStandard.setBorderBrush(Qt::black);
     fmtTableStandard.setCellPadding(4);
@@ -142,11 +173,8 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     constraints << QTextLength(QTextLength::VariableLength, 100);
     fmtTableStandard.setColumnWidthConstraints(constraints);
 
-    QTextTableFormat fmtTableInfo;
     fmtTableInfo.setBorder(0);
 
-
-    QTextCharFormat fmtCharHeader;
     fmtCharHeader.setFont(f);
     fmtCharHeader.setBackground(Qt::darkBlue);
     fmtCharHeader.setFontWeight(QFont::Bold);
@@ -219,15 +247,63 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         }
     }
 
+
+    int n=1;
+    QProgressDialog progress(tr("Build diary..."), tr("Abort"), 0, 100, this);
+    progress.setWindowModality(Qt::WindowModal);
+
+    if(radioSortAlongTrack->isChecked())
+    {
+        drawByTrack(cursor, trks, wpts, progress, n, nItems, printable);
+    }
+    else
+    {
+        drawByGroup(cursor, trks, wpts, progress, n, nItems, printable);
+    }
+
+    if(!areas.isEmpty())
+    {
+        cursor.insertHtml(tr("<h2>Areas</h2>"));
+        QTextTable * table = cursor.insertTable(areas.count()+1, eMax, fmtTableStandard);
+
+        table->cellAt(0,eSym).setFormat(fmtCharHeader);
+        table->cellAt(0,eInfo).setFormat(fmtCharHeader);
+        table->cellAt(0,eComment).setFormat(fmtCharHeader);
+
+        table->cellAt(0,eInfo).firstCursorPosition().insertText(tr("Info"));
+        table->cellAt(0,eComment).firstCursorPosition().insertText(tr("Comment"));
+
+        cnt = 1;
+        foreach(CGisItemOvlArea * area, areas)
+        {
+            progress.setValue(n++ *100.0/nItems);
+            if(progress.wasCanceled())
+            {
+                return;
+            }
+
+
+            table->cellAt(cnt,eSym).firstCursorPosition().insertImage(area->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+            table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(area->getInfo());
+            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
+            cnt++;
+        }
+
+        cursor.setPosition(table->lastPosition() + 1);
+    }
+
+    textDesc->verticalScrollBar()->setValue(scrollVal);
+}
+
+void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QList<CGisItemWpt*>& wpts, QProgressDialog& progress, int& n, int nItems, bool printable)
+{
+    int cnt, w = cursor.document()->textWidth();
+
     if(radioSortByTime->isChecked())
     {
         qSort(trks.begin(), trks.end(), sortTrkByTime);
         qSort(wpts.begin(), wpts.end(), sortWptByTime);
     }
-
-    int n=1;
-    QProgressDialog progress(tr("Build diary..."), tr("Abort"), 0, 100, this);
-    progress.setWindowModality(Qt::WindowModal);
 
     if(!wpts.isEmpty())
     {
@@ -325,10 +401,36 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         cursor.setPosition(table->lastPosition() + 1);
     }
 
-    if(!areas.isEmpty())
+}
+
+void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable)
+{
+    int cnt, w = cursor.document()->textWidth();
+
+    if(radioSortByTime->isChecked())
     {
-        cursor.insertHtml(tr("<h2>Areas</h2>"));
-        QTextTable * table = cursor.insertTable(areas.count()+1, eMax, fmtTableStandard);
+        qSort(trks.begin(), trks.end(), sortTrkByTime);
+    }
+
+    foreach(CGisItemTrk * trk, trks)
+    {
+        QList<IGisItem::key_t> keys;
+        const CGisItemTrk::trk_t& t = trk->getTrackData();
+        foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
+        {
+            foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+            {
+                if((trkpt.flags & CGisItemTrk::trkpt_t::eHidden) || trkpt.keyWpt.item.isEmpty())
+                {
+                    continue;
+                }
+
+                keys << trkpt.keyWpt;
+            }
+        }
+
+        cursor.insertHtml(QString("<h2>%1</h2>").arg(trk->getName()));
+        QTextTable * table = cursor.insertTable(keys.count()+2, eMax, fmtTableStandard);
 
         table->cellAt(0,eSym).setFormat(fmtCharHeader);
         table->cellAt(0,eInfo).setFormat(fmtCharHeader);
@@ -338,7 +440,8 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         table->cellAt(0,eComment).firstCursorPosition().insertText(tr("Comment"));
 
         cnt = 1;
-        foreach(CGisItemOvlArea * area, areas)
+
+        foreach(const IGisItem::key_t& key, keys)
         {
             progress.setValue(n++ *100.0/nItems);
             if(progress.wasCanceled())
@@ -346,17 +449,54 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
                 return;
             }
 
-
-            table->cellAt(cnt,eSym).firstCursorPosition().insertImage(area->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
-            table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(area->getInfo());
-            table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
+            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(key));
+            if(wpt != 0)
+            {
+                table->cellAt(cnt,eSym).firstCursorPosition().insertImage(wpt->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+                table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(wpt->getInfo());
+                table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly()||printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
+            }
             cnt++;
         }
 
+        table->cellAt(cnt,eSym).firstCursorPosition().insertImage(trk->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+
+        int w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
+        int h1 = qRound(w1/2.0);
+
+        if(w1 < 300)
+        {
+            table->cellAt(cnt,eInfo).firstCursorPosition().insertHtml(trk->getInfo());
+
+            QTextTable * table1 = table->cellAt(cnt,eInfo).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+
+            QImage profile(w1,h1,QImage::Format_ARGB32);
+            getTrackProfile(trk, profile);
+            table1->cellAt(0,0).firstCursorPosition().insertImage(profile);
+
+            QImage overview(h1,h1,QImage::Format_ARGB32);
+            getTrackOverview(trk, overview);
+            table1->cellAt(0,1).firstCursorPosition().insertImage(overview);
+        }
+        else
+        {
+            QTextTable * table1 = table->cellAt(cnt,eInfo).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
+
+            table1->cellAt(0,0).firstCursorPosition().insertHtml(trk->getInfo());
+
+            QImage profile(w1,h1,QImage::Format_ARGB32);
+            getTrackProfile(trk, profile);
+            table1->cellAt(0,1).firstCursorPosition().insertImage(profile);
+
+            QImage overview(h1,h1,QImage::Format_ARGB32);
+            getTrackOverview(trk, overview);
+            table1->cellAt(0,2).firstCursorPosition().insertImage(overview);
+        }
+
+        table->cellAt(cnt,eComment).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly()||printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
+
         cursor.setPosition(table->lastPosition() + 1);
     }
-
-    textDesc->verticalScrollBar()->setValue(scrollVal);
 }
 
 void CDetailsPrj::slotLinkActivated(const QString& link)
@@ -521,3 +661,35 @@ void CDetailsPrj::slotPrint()
     slotSetupGui();
 }
 
+void CDetailsPrj::slotLock(bool on)
+{
+    const int N = prj.childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(prj.child(n));
+        if(item && (item->isReadOnly() != on))
+        {
+            item->setReadOnlyMode(on);
+        }
+    }
+
+    slotSetupGui();
+}
+
+void CDetailsPrj::slotSortMode()
+{
+    if(radioOrderAsProject->isChecked())
+    {
+        prj.setSorting(IGisProject::eSortNone);
+    }
+    else if(radioSortAlongTrack->isChecked())
+    {
+        prj.setSorting(IGisProject::eSortTrack);
+    }
+    else if(radioSortByTime->isChecked())
+    {
+        prj.setSorting(IGisProject::eSortTime);
+    }
+
+    slotSetupGui();
+}

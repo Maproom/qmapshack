@@ -125,6 +125,11 @@ void CGpxProject::loadGpx(const QString& filename)
         key = xmlExtension.namedItem("ql:key").toElement().text();
     }
 
+    if(xmlExtension.namedItem("ql:sorting").isElement())
+    {
+        sorting = sorting_e(xmlExtension.namedItem("ql:sorting").toElement().text().toInt());
+    }
+
 
     const QDomNode& xmlMetadata = xmlGpx.namedItem("metadata");
     if(xmlMetadata.isElement())
@@ -371,6 +376,12 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         elem.appendChild(text);
     }
 
+    {
+        QDomElement elem = xmlExt.ownerDocument().createElement("ql:sorting");
+        xmlExt.appendChild(elem);
+        QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSorting()));
+        elem.appendChild(text);
+    }
 
     //  ---- stop  content of gpx
 

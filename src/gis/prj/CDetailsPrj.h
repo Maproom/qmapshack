@@ -26,6 +26,8 @@
 class CDetailsPrj;
 class IGisProject;
 class CGisItemTrk;
+class CGisItemWpt;
+class QProgressDialog;
 
 class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
 {
@@ -41,16 +43,30 @@ private slots:
     void slotLinkActivated(const QString& link);
     void slotLinkActivated(const QUrl& url);
     void slotPrint();
+    void slotLock(bool on);
+    void slotSortMode();
     void slotSetupGui();
 
 private:
     void getTrackProfile(CGisItemTrk * trk, QImage& image);
     void getTrackOverview(CGisItemTrk * trk, QImage& image);
     void draw(QTextDocument& doc, bool printable);
+    void drawByGroup(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable);
+    void drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable);
 
     enum eTblCol {eSym, eInfo, eComment, eMax};
 
     IGisProject& prj;
+    QTextFrameFormat fmtFrameStandard;
+    QTextCharFormat fmtCharStandard;
+    QTextBlockFormat fmtBlockStandard;
+    QTextFrameFormat fmtFrameRoot;
+    QTextTableFormat fmtTableStandard;
+    QTextTableFormat fmtTableInfo;
+    QTextCharFormat fmtCharHeader;
+
+
+
 };
 
 #endif //CDETAILSPRJ_H

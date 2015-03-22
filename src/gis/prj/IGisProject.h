@@ -44,6 +44,13 @@ public:
         , eTypeTwoNav
     };
 
+    enum sorting_e
+    {
+        eSortNone
+        , eSortTime
+        , eSortTrack
+    };
+
     struct person_t
     {
         QString name;
@@ -149,6 +156,11 @@ public:
         return metadata.links;
     }
 
+    sorting_e getSorting() const
+    {
+        return sorting;
+    }
+
     void setName(const QString& str);
     void setKeywords(const QString& str);
     void setDescription(const QString& str);
@@ -157,6 +169,8 @@ public:
        @brief Set change mark
      */
     void setChanged();
+
+    void setSorting(sorting_e s);
 
     /**
        @brief Get a short metadata summary
@@ -319,6 +333,8 @@ protected:
     metadata_t metadata;
 
     QPointer<CDetailsPrj> dlgDetails;
+
+    sorting_e sorting;
 };
 
 #endif //IGISPROJECT_H

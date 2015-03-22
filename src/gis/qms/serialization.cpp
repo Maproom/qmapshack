@@ -38,7 +38,7 @@
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
 #define VER_IMAGE       quint8(1)
-#define VER_PROJECT     quint8(2)
+#define VER_PROJECT     quint8(3)
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
@@ -674,6 +674,12 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     {
         stream >> key;
     }
+    if(version > 2)
+    {
+        qint32 tmp;
+        stream >> tmp;
+        sorting = (sorting_e)tmp;
+    }
 
     while(!stream.atEnd())
     {
@@ -734,6 +740,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     stream << metadata.keywords;
     stream << metadata.bounds;
     stream << key;
+    stream << qint32(sorting);
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -816,6 +823,12 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     {
         stream >> key;
     }
+    if(version > 2)
+    {
+        qint32 tmp;
+        stream >> tmp;
+        sorting = (sorting_e)tmp;
+    }
 
     return stream;
 }
@@ -835,6 +848,7 @@ QDataStream& CDBProject::operator>>(QDataStream& stream)
     stream << metadata.keywords;
     stream << metadata.bounds;
     stream << key;
+    stream << qint32(sorting);
 
     return stream;
 }

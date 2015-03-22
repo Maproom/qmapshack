@@ -37,6 +37,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , type(type)
     , filename(filename)
     , valid(false)
+    , sorting(eSortNone)
 {
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 }
@@ -46,6 +47,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , type(type)
     , filename(filename)
     , valid(false)
+    , sorting(eSortNone)
 {
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 }
@@ -141,11 +143,18 @@ void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
     setChanged();
 }
 
+void IGisProject::setSorting(sorting_e s)
+{
+    sorting = s;
+    setChanged();
+}
+
 void IGisProject::setChanged()
 {
     setText(CGisListWks::eColumnDecoration,"*");
     updateItems();
 }
+
 
 void IGisProject::updateItems()
 {

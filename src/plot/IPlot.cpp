@@ -70,6 +70,9 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , fontHeight(0)
     , scaleWidthX1(0)
     , scaleWidthY1(0)
+    , rectResizeGrip(0,0,10,10)
+    , isResizeGrip(false)
+    , isResizeGripActive(false)
 
 {
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -217,7 +220,12 @@ void IPlot::leaveEvent(QEvent * e)
         trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, this);
     }
 
+    if(isResizeGrip)
+    {
+        QApplication::restoreOverrideCursor();
+    }
     QApplication::restoreOverrideCursor();
+
     update();
 }
 
@@ -225,7 +233,13 @@ void IPlot::leaveEvent(QEvent * e)
 void IPlot::enterEvent(QEvent * e)
 {
     needsRedraw = true;
+
     QApplication::setOverrideCursor(Qt::PointingHandCursor);
+    if(isResizeGrip)
+    {
+        QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
+    }
+
     update();
 }
 
@@ -242,69 +256,54 @@ void IPlot::draw(QPainter& p)
     drawDecoration(p);
 }
 
+
 void IPlot::mouseMoveEvent(QMouseEvent * e)
 {
     posMouse = NOPOINT;
-    if(rectGraphArea.contains(e->pos()))
+
+    if(isResizeGripActive)
     {
-        posMouse = e->pos();
-        posXXX   = posMouse;
+        QPoint pos1 = mapToGlobal(e->pos());
+        QPoint pos2 = mapToGlobal(posXXX);
 
-        // set point of focus at track object
-        qreal x = data->x().pt2val(posMouse.x() - left);
-        if(data->axisType == CPlotData::eAxisLinear)
-        {
-            if(trk)
-            {
-                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, this);
-            }
-        }
-        else if(data->axisType == CPlotData::eAxisTime)
-        {
-            if(trk)
-            {
-                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, this);
-            }
-        }
+        int w = width()  + pos1.x() - pos2.x();
+        int h = height() - pos1.y() + pos2.y();
 
-        // update canvas if visible
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas)
-        {
-            canvas->update();
-        }
+        resize(w,h);
+        move(x(),y() + pos1.y() - pos2.y());
         e->accept();
     }
-    update();
-}
-
-void IPlot::mousePressEvent(QMouseEvent * e)
-{
-    posMouse = NOPOINT;
-    if((e->button() == Qt::LeftButton) && rectGraphArea.contains(e->pos()))
+    else
     {
-        posMouse = e->pos();
-
-        if(mode == eModeIcon)
+        if(!isResizeGrip && rectResizeGrip.contains(e->pos()))
         {
-            trk->edit();
+            isResizeGrip = true;
+            QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
         }
-        else
+        else if(isResizeGrip && !rectResizeGrip.contains(e->pos()))
         {
+            isResizeGrip = false;
+            QApplication::restoreOverrideCursor();
+        }
+
+        if(rectGraphArea.contains(e->pos()))
+        {
+            posMouse = e->pos();
+
             // set point of focus at track object
             qreal x = data->x().pt2val(posMouse.x() - left);
             if(data->axisType == CPlotData::eAxisLinear)
             {
                 if(trk)
                 {
-                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, this);
+                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, this);
                 }
             }
             else if(data->axisType == CPlotData::eAxisTime)
             {
                 if(trk)
                 {
-                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, this);
+                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, this);
                 }
             }
 
@@ -314,10 +313,67 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             {
                 canvas->update();
             }
+            e->accept();
         }
-        e->accept();
+    }
+    posXXX = e->pos();
+    update();
+}
+
+void IPlot::mousePressEvent(QMouseEvent * e)
+{
+    posMouse = NOPOINT;
+    if((e->button() == Qt::LeftButton))
+    {
+        if(rectResizeGrip.contains(e->pos()))
+        {
+            posMouse = e->pos();
+            isResizeGripActive = true;
+            e->accept();
+        }
+        else if(rectGraphArea.contains(e->pos()))
+        {
+            posMouse = e->pos();
+
+            if(mode == eModeIcon)
+            {
+                trk->edit();
+            }
+            else
+            {
+                // set point of focus at track object
+                qreal x = data->x().pt2val(posMouse.x() - left);
+                if(data->axisType == CPlotData::eAxisLinear)
+                {
+                    if(trk)
+                    {
+                        trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, this);
+                    }
+                }
+                else if(data->axisType == CPlotData::eAxisTime)
+                {
+                    if(trk)
+                    {
+                        trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, this);
+                    }
+                }
+
+                // update canvas if visible
+                CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+                if(canvas)
+                {
+                    canvas->update();
+                }
+            }
+            e->accept();
+        }
     }
     update();
+}
+
+void IPlot::mouseReleaseEvent(QMouseEvent * e)
+{
+    isResizeGripActive = false;
 }
 
 void IPlot::setSizes()
@@ -341,6 +397,8 @@ void IPlot::setSizes()
     setSizeYLabel();
     setSizeTrackInfo();
     setSizeDrawArea();
+
+    rectResizeGrip.moveTopRight(rect().topRight());
 }
 
 void IPlot::setLRTB()

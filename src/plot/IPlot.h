@@ -62,6 +62,7 @@ protected:
     void enterEvent(QEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
     void mousePressEvent(QMouseEvent * e);
+    void mouseReleaseEvent(QMouseEvent * e);
 
 
     void setSizes();
@@ -138,6 +139,10 @@ protected:
 
     QMenu * menu;
     QAction * actionPrint;
+
+    QRect rectResizeGrip;
+    bool isResizeGrip;
+    bool isResizeGripActive;
 };
 
 #endif //IPLOT_H

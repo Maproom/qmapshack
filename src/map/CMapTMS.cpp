@@ -53,7 +53,7 @@ inline double tile2lat(int y, int z)
 CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility|eFeatTileCache, parent)
     , minZoomLevel(1)
-    , maxZoomLevel(18)
+    , maxZoomLevel(21)
     , diskCache(0)
     , lastRequest(false)
 {
@@ -439,13 +439,13 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
             continue;
         }
 
-        qint32 z    = 17;
+        qint32 z    = 20;
         QPointF s1  = buf.scale * buf.zoomFactor;
         qreal d     = NOFLOAT;
 
-        for(qint32 i = layer.minZoomLevel; i < 18; i++)
+        for(qint32 i = layer.minZoomLevel; i < 21; i++)
         {
-            qreal s2 = 0.6 * (1<<i);
+            qreal s2 = 0.055 * (1<<i);
             if(qAbs(s2 - s1.x()) < d)
             {
                 z = i;
@@ -458,7 +458,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
             continue;
         }
 
-        z = 18 - z;
+        z = 21 - z;
 
 
         qint32 row1, row2, col1, col2;

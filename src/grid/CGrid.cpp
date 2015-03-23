@@ -62,7 +62,7 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info)
     }
     else
     {
-        info += tr("[Grid: N %1m, E %2m] ").arg(pt.x(),0,'f',0).arg(pt.y(),0,'f',0);
+        info += tr("[Grid: N %1m, E %2m] ").arg(pt.y(),0,'f',0).arg(pt.x(),0,'f',0);
     }
 }
 

@@ -812,57 +812,57 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="257"/>
         <source>Major highway</source>
-        <translation></translation>
+        <translation>Autobahn</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="258"/>
         <source>Principal highway</source>
-        <translation></translation>
+        <translation>Bundesstraße</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="259"/>
         <source>Other highway</source>
-        <translation></translation>
+        <translation>Schnellstraße</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="260"/>
         <source>Arterial road</source>
-        <translation></translation>
+        <translation>Fernstraße</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="261"/>
         <source>Collector road</source>
-        <translation></translation>
+        <translation>Sammelstraße</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="262"/>
         <source>Residential street</source>
-        <translation></translation>
+        <translation>Wohnstraße</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="263"/>
         <source>Alley/Private road</source>
-        <translation></translation>
+        <translation>Allee/Privatstraße</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="264"/>
         <source>Highway ramp, low speed</source>
-        <translation></translation>
+        <translation>Auffahrt (langsam)</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="265"/>
         <source>Highway ramp, high speed</source>
-        <translation></translation>
+        <translation>Auffahrt (schnell)</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="266"/>
         <source>Unpaved road</source>
-        <translation></translation>
+        <translation>Unbefestigte Straße</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="267"/>
         <source>Major highway connector</source>
-        <translation></translation>
+        <translation>Autobahnzubringer</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="268"/>
@@ -887,7 +887,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="272"/>
         <source>Stream</source>
-        <translation></translation>
+        <translation>Bach</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="273"/>
@@ -903,17 +903,17 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="276"/>
         <source>State/province border</source>
-        <translation></translation>
+        <translation>Staats-/Landesgrenze</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="277"/>
         <source>County/parish border</source>
-        <translation></translation>
+        <translation>Kreis-/Gemeindegrenze</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="278"/>
         <source>International border</source>
-        <translation></translation>
+        <translation>Internationale Grenze</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="279"/>
@@ -953,7 +953,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="286"/>
         <source>Intermittent stream</source>
-        <translation></translation>
+        <translation>Intermittierender Bach</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="287"/>
@@ -964,22 +964,22 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="288"/>
         <source>Pipeline</source>
-        <translation></translation>
+        <translation>Pipeline</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="289"/>
         <source>Powerline</source>
-        <translation></translation>
+        <translation>Stromleitung</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="290"/>
         <source>Marine boundary</source>
-        <translation></translation>
+        <translation>Meeresgrenze</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="291"/>
         <source>Hazard boundary</source>
-        <translation></translation>
+        <translation>Gefahrbereichgrenze</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="356"/>
@@ -1112,50 +1112,50 @@
         <location filename="../map/CMapIMG.cpp" line="387"/>
         <location filename="../map/CMapIMG.cpp" line="394"/>
         <source>Large lake</source>
-        <translation></translation>
+        <translation>See</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="388"/>
         <location filename="../map/CMapIMG.cpp" line="389"/>
         <source>Medium lake</source>
-        <translation></translation>
+        <translation>See</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="390"/>
         <location filename="../map/CMapIMG.cpp" line="391"/>
         <source>Small lake</source>
-        <translation></translation>
+        <translation>See</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="392"/>
         <location filename="../map/CMapIMG.cpp" line="393"/>
         <source>Major lake</source>
-        <translation></translation>
+        <translation>See</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="396"/>
         <source>Major River</source>
-        <translation></translation>
+        <translation>Strom</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="397"/>
         <source>Large River</source>
-        <translation></translation>
+        <translation>Fluss</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="398"/>
         <source>Medium River</source>
-        <translation></translation>
+        <translation>Fluss</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="399"/>
         <source>Small River</source>
-        <translation></translation>
+        <translation>Fluss</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="402"/>
         <source>Intermittent water</source>
-        <translation></translation>
+        <translation>Gewässer</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="403"/>
@@ -1907,7 +1907,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IAbout.ui" line="14"/>
         <source>About....</source>
-        <translation>Über...</translation>
+        <translation>Über....</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="43"/>
@@ -1940,47 +1940,47 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IAbout.ui" line="140"/>
         <source>Rainer Unseld </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="147"/>
         <source>French</source>
-        <translation type="unfinished">Französisch</translation>
+        <translation>Französisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="154"/>
         <source>Czech</source>
-        <translation type="unfinished">Tschechisch</translation>
+        <translation>Tschechisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="161"/>
         <source>Pavel Fric</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="168"/>
         <source>German</source>
-        <translation type="unfinished">Deutsch</translation>
+        <translation>Deutsch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="175"/>
         <source>Translation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Übersetzung:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="182"/>
         <source>Josef Latt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="189"/>
         <source>Spanish</source>
-        <translation type="unfinished">Spanisch</translation>
+        <translation>Spanisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="196"/>
         <source>Jose Luis Domingo Lopez</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="212"/>
@@ -2091,7 +2091,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="144"/>
         <source>Slope </source>
-        <translation>Hangneigung</translation>
+        <translation>Hangneigung </translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="186"/>
@@ -2247,7 +2247,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="222"/>
         <source>Hist.</source>
-        <translation>Hist.</translation>
+        <translation>History</translation>
     </message>
 </context>
 <context>
@@ -2409,7 +2409,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="512"/>
         <source>Hist.</source>
-        <translation>Hist.</translation>
+        <translation>History</translation>
     </message>
     <message>
         <source>TextLabel</source>

@@ -64,9 +64,6 @@ private:
     QTextTableFormat fmtTableStandard;
     QTextTableFormat fmtTableInfo;
     QTextCharFormat fmtCharHeader;
-
-
-
 };
 
 #endif //CDETAILSPRJ_H

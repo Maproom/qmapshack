@@ -898,15 +898,14 @@ void CGisItemTrk::findWaypointsCloseBy()
 
         pt2.x = pt1.x + qCos(a1 * DEG_TO_RAD) * d;
         pt2.y = pt1.y + qSin(a1 * DEG_TO_RAD) * d;
-
     }
 
-    foreach(const trkwpt_t& trkwpt, trkwpts)
+    foreach(const trkwpt_t &trkwpt, trkwpts)
     {
-        qreal   minD  = WPT_FOCUS_DIST_IN;
-        qint32  index = -1;
+        qreal minD  = WPT_FOCUS_DIST_IN;
+        qint32 index = -1;
 
-        foreach(const pointDP& pt, line)
+        foreach(const pointDP &pt, line)
         {
             qreal d = (trkwpt.x - pt.x)*(trkwpt.x - pt.x) + (trkwpt.y - pt.y)*(trkwpt.y - pt.y);
 
@@ -939,14 +938,12 @@ void CGisItemTrk::findWaypointsCloseBy()
                 trkpt->keyWpt = trkwpt.key;
             }
         }
-
     }
 
     if(!dlgDetails.isNull())
     {
         dlgDetails->setupGui();
     }
-
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)

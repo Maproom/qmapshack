@@ -21,8 +21,8 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "helpers/CSettings.h"
 #include "gis/CGisWidget.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -482,7 +482,7 @@ void IPlot::draw()
         p.setBrush(QColor(255,255,255,255));
 
         PAINT_ROUNDED_RECT(p,r);
-    }    
+    }
     else if(mode == eModeWindow)
     {
         if(underMouse() || posMouse != NOPOINT || solid)
@@ -893,13 +893,15 @@ void IPlot::drawDecoration( QPainter &p )
                 break;
             }
         }
-
     }
 }
 
 void IPlot::drawTags(QPainter& p)
 {
-    if(data->tags.isEmpty()) return;
+    if(data->tags.isEmpty())
+    {
+        return;
+    }
 
     int ptx, pty;
     CPlotAxis& xaxis = data->x();
@@ -913,7 +915,6 @@ void IPlot::drawTags(QPainter& p)
 
         if (left < ptx &&  ptx < right)
         {
-
             QPixmap icon = tag->icon.scaled(10,10, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
             p.drawPixmap(ptx - icon.width() / 2, 2, icon);
 

@@ -211,7 +211,7 @@ public:
 
        If the track has the focus, keyUserFocus will be reset. In all other cases nothing will be done.
 
-    */
+     */
     void looseUserFocus();
 
     /**

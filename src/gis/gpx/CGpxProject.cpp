@@ -67,7 +67,7 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
 
 
     setupName(QFileInfo(filename).baseName().replace("_", " "));
-    setToolTip(CGisListWks::eColumnName, getInfo());    
+    setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
     valid = true;
 }

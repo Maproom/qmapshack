@@ -130,7 +130,7 @@ void CCanvas::saveConfig(QSettings& cfg)
     dem->saveConfig(cfg);
     grid->saveConfig(cfg);
     cfg.setValue("posFocus", posFocus);
-    cfg.setValue("proj", map->getProjection());    
+    cfg.setValue("proj", map->getProjection());
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
@@ -599,7 +599,7 @@ void CCanvas::slotCheckTrackOnFocus()
 
     // any changes?
     if(key != keyTrackOnFocus)
-    {        
+    {
         saveSizeTrackProfile();
         // get access to current track object
         delete plotTrackProfile;
@@ -722,7 +722,6 @@ void CCanvas::saveSizeTrackProfile()
         cfg.endGroup(); // Profile
         cfg.endGroup(); // Canvas
     }
-
 }
 
 void CCanvas::setSizeTrackProfile()
@@ -765,7 +764,6 @@ void CCanvas::setSizeTrackProfile()
 
         plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
     }
-
 }
 
 void CCanvas::showProfileAsWindow(bool yes)

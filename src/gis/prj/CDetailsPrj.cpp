@@ -85,9 +85,11 @@ void CDetailsPrj::slotSetupGui()
     case IGisProject::eSortNone:
         radioOrderAsProject->setChecked(true);
         break;
+
     case IGisProject::eSortTime:
         radioSortByTime->setChecked(true);
         break;
+
     case IGisProject::eSortTrack:
         radioSortAlongTrack->setChecked(true);
         break;
@@ -109,7 +111,6 @@ void CDetailsPrj::slotSetupGui()
         }
     }
     toolLock->blockSignals(false);
-
 }
 
 #define ROOT_FRAME_MARGIN 5
@@ -400,7 +401,6 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 
         cursor.setPosition(table->lastPosition() + 1);
     }
-
 }
 
 void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable)

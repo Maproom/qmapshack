@@ -395,7 +395,6 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
                         list << "0";
                         out << "a " << list.join(",") << endl;
                     }
-
                 }
             }
         }

@@ -487,11 +487,11 @@ void IPlot::draw()
     {
         if(underMouse() || posMouse != NOPOINT || solid)
         {
-            setWindowOpacity(1.0);
+//            setWindowOpacity(1.0);
         }
         else
         {
-            setWindowOpacity(0.6);
+//            setWindowOpacity(0.6);
         }
     }
 
@@ -880,11 +880,11 @@ void IPlot::drawDecoration( QPainter &p )
                 QFontMetrics fm(f);
                 QRect r = fm.boundingRect(tag.label);
                 r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
-                r.adjust(-1,-1,1,1);
+                r.adjust(-2,-2,2,0);
 
                 p.setPen(Qt::NoPen);
                 p.setBrush(Qt::white);
-                p.drawRect(r);
+                p.drawRoundedRect(r,3,3);
 
                 p.setFont(f);
                 p.setPen(Qt::darkBlue);

@@ -29,7 +29,7 @@ class IPlot : public QWidget
 {
     Q_OBJECT
 public:
-    enum mode_e {eModeNormal, eModeIcon};
+    enum mode_e {eModeNormal, eModeIcon, eModeWindow};
 
     IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
     virtual ~IPlot();

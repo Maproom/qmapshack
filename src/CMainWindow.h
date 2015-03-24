@@ -48,6 +48,7 @@ public:
     bool isPOIText();
     bool isMapToolTip();
     bool flipMouseWheel();
+    bool profileIsWindow();
     const QFont& getMapFont()
     {
         return mapFont;
@@ -95,6 +96,7 @@ private slots:
     void slotBuildVrt();
     void slotStoreView();
     void slotLoadView();
+    void slotSetProfileMode(bool on);
 
 private:
     friend int main(int argc, char ** argv);

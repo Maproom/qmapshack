@@ -92,6 +92,7 @@ CMainWindow::CMainWindow()
     connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionMapToolTip, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionNightDay, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
+    connect(actionProfileIsWindow, SIGNAL(toggled(bool)), this, SLOT(slotSetProfileMode(bool)));
     connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
     connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
     connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
@@ -144,6 +145,7 @@ CMainWindow::CMainWindow()
     actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
     actionNightDay->setChecked(cfg.value("isNight", false).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
+    actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
     cfg.endGroup(); // Canvas
@@ -218,6 +220,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
     cfg.setValue("isNight", actionNightDay->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
+    cfg.setValue("profileIsWindow",actionProfileIsWindow->isChecked());
     cfg.setValue("mapFont", mapFont);
     CMapDraw::saveMapPath(cfg);
     CDemDraw::saveDemPath(cfg);
@@ -267,6 +270,11 @@ bool CMainWindow::isMapToolTip()
 bool CMainWindow::flipMouseWheel()
 {
     return actionFlipMouseWheel->isChecked();
+}
+
+bool CMainWindow::profileIsWindow()
+{
+    return actionProfileIsWindow->isChecked();
 }
 
 void CMainWindow::addMapList(CMapList * list, const QString &name)
@@ -680,6 +688,19 @@ void CMainWindow::slotLoadView()
     cfg.setValue("Paths/lastViewPath", path);
 }
 
+void CMainWindow::slotSetProfileMode(bool on)
+{
+    for(int i = 0; i < tabWidget->count(); i++)
+    {
+        CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+        if(view == 0)
+        {
+            continue;
+        }
+
+        view->showProfileAsWindow(on);
+    }
+}
 
 #ifdef WIN32
 

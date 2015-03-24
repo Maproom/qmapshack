@@ -206,6 +206,13 @@ public:
        @param yes   set true to gain focus.
      */
     void gainUserFocus(bool yes);
+    /**
+       @brief Make sure the track has lost focus.
+
+       If the track has the focus, keyUserFocus will be reset. In all other cases nothing will be done.
+
+    */
+    void looseUserFocus();
 
     /**
        @brief Make sure a CDetailsTrk widget is registered with the main tab widget

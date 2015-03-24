@@ -966,6 +966,15 @@ void CGisItemTrk::gainUserFocus(bool yes)
     keyUserFocus    = yes ? key : key_t();
 }
 
+void CGisItemTrk::looseUserFocus()
+{
+    if(keyUserFocus == key)
+    {
+        keyUserFocus.clear();
+    }
+}
+
+
 void CGisItemTrk::edit()
 {
     if(dlgDetails.isNull())

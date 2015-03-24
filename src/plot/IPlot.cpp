@@ -22,6 +22,7 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "helpers/CSettings.h"
+#include "gis/CGisWidget.h"
 
 #include <QtWidgets>
 
@@ -88,6 +89,12 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
         thinLine = true;
     }
 
+    if(mode == eModeWindow)
+    {
+        overrideWindowFlags(Qt::Window);
+        setAttribute(Qt::WA_DeleteOnClose, true);
+    }
+
     menu = new QMenu(this);
     actionPrint = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
 
@@ -99,6 +106,15 @@ IPlot::~IPlot()
     if(trk)
     {
         trk->unregisterPlot(this);
+        if(mode == eModeWindow)
+        {
+            trk->looseUserFocus();
+            CCanvas * canvas = dynamic_cast<CCanvas*>(parent());
+            if(canvas)
+            {
+                canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+            }
+        }
     }
 }
 
@@ -466,6 +482,17 @@ void IPlot::draw()
         p.setBrush(QColor(255,255,255,255));
 
         PAINT_ROUNDED_RECT(p,r);
+    }    
+    else if(mode == eModeWindow)
+    {
+        if(underMouse() || posMouse != NOPOINT || solid)
+        {
+            setWindowOpacity(1.0);
+        }
+        else
+        {
+            setWindowOpacity(0.6);
+        }
     }
 
     if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())

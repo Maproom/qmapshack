@@ -107,6 +107,8 @@ public:
     void setMouseEditArea(CGisItemOvlArea& area);
     void setMouseEditArea(const QPointF& pt);
 
+    void showProfileAsWindow(bool yes);
+
 
     /**
        @brief Add a message by key to be reported on the canvas
@@ -162,6 +164,8 @@ private:
     void drawStatusMessages(QPainter& p);
     void drawScale(QPainter& p);
     void setZoom(bool in, redraw_e &needsRedraw);
+    void setSizeTrackProfile();
+    void saveSizeTrackProfile();
 
     /// set true to initiate a complete redraw of the screen content
     redraw_e needsRedraw;

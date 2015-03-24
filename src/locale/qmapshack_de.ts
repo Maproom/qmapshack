@@ -2276,7 +2276,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="99"/>
         <source>Sort Along Track</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sortieren entlang eines Tracks</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="127"/>
@@ -3368,17 +3368,17 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="92"/>
+        <location filename="../plot/IPlot.cpp" line="95"/>
         <source>Save...</source>
         <translation>Speichern ...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="473"/>
+        <location filename="../plot/IPlot.cpp" line="531"/>
         <source>No or bad data.</source>
         <translation>Keine oder schlechte Daten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="930"/>
+        <location filename="../plot/IPlot.cpp" line="988"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>

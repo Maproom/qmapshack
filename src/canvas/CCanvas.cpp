@@ -27,6 +27,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
+#include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "mouse/CMouseEditArea.h"
 #include "mouse/CMouseEditTrk.h"
@@ -120,6 +121,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
 CCanvas::~CCanvas()
 {
+    saveSizeTrackProfile();
 }
 
 void CCanvas::saveConfig(QSettings& cfg)
@@ -128,7 +130,7 @@ void CCanvas::saveConfig(QSettings& cfg)
     dem->saveConfig(cfg);
     grid->saveConfig(cfg);
     cfg.setValue("posFocus", posFocus);
-    cfg.setValue("proj", map->getProjection());
+    cfg.setValue("proj", map->getProjection());    
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
@@ -284,19 +286,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     labelStatusMessages->move(20,50);
 
-    if(plotTrackProfile)
-    {
-        if(s.height() < 700)
-        {
-            plotTrackProfile->resize(200,80);
-        }
-        else
-        {
-            plotTrackProfile->resize(300,120);
-        }
-
-        plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
-    }
+    setSizeTrackProfile();
 }
 
 void CCanvas::paintEvent(QPaintEvent * e)
@@ -609,7 +599,8 @@ void CCanvas::slotCheckTrackOnFocus()
 
     // any changes?
     if(key != keyTrackOnFocus)
-    {
+    {        
+        saveSizeTrackProfile();
         // get access to current track object
         delete plotTrackProfile;
         keyTrackOnFocus.clear();
@@ -622,16 +613,8 @@ void CCanvas::slotCheckTrackOnFocus()
         }
 
         // create new profile plot, the plot will register itself at the track
-        plotTrackProfile = new CPlotProfile(trk2, IPlot::eModeIcon, this);
-        if(height() < 700)
-        {
-            plotTrackProfile->resize(200,80);
-        }
-        else
-        {
-            plotTrackProfile->resize(300,120);
-        }
-        plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
+        plotTrackProfile = new CPlotProfile(trk2, CMainWindow::self().profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
+        setSizeTrackProfile();
         plotTrackProfile->show();
 
         // finally store the new key as track on focus
@@ -719,4 +702,81 @@ void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 bool CCanvas::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
 {
     return map->findPolylineCloseBy(pt1, pt2, threshold, polyline);
+}
+
+void CCanvas::saveSizeTrackProfile()
+{
+    if(plotTrackProfile == 0)
+    {
+        return;
+    }
+
+    if(plotTrackProfile->windowFlags() & Qt::Window)
+    {
+        SETTINGS;
+        cfg.beginGroup("Canvas");
+        cfg.beginGroup("Profile");
+
+        cfg.setValue("geometry", plotTrackProfile->saveGeometry());
+
+        cfg.endGroup(); // Profile
+        cfg.endGroup(); // Canvas
+    }
+
+}
+
+void CCanvas::setSizeTrackProfile()
+{
+    if(plotTrackProfile == 0)
+    {
+        return;
+    }
+
+    if(plotTrackProfile->windowFlags() & Qt::Window)
+    {
+        SETTINGS;
+        cfg.beginGroup("Canvas");
+        cfg.beginGroup("Profile");
+
+        if(cfg.contains("geometry"))
+        {
+            //cfg.setValue("geometry", plotTrackProfile->saveGeometry());
+            plotTrackProfile->restoreGeometry(cfg.value("geometry").toByteArray());
+        }
+        else
+        {
+            plotTrackProfile->resize(300,200);
+            plotTrackProfile->move(100,100);
+        }
+
+        cfg.endGroup(); // Profile
+        cfg.endGroup(); // Canvas
+    }
+    else
+    {
+        if(size().height() < 700)
+        {
+            plotTrackProfile->resize(200,80);
+        }
+        else
+        {
+            plotTrackProfile->resize(300,120);
+        }
+
+        plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
+    }
+
+}
+
+void CCanvas::showProfileAsWindow(bool yes)
+{
+    if(plotTrackProfile)
+    {
+        const IGisItem::key_t key = CGisItemTrk::getKeyUserFocus();
+
+        delete plotTrackProfile;
+        keyTrackOnFocus.clear();
+
+        CGisWidget::self().focusTrkByKey(true, key);
+    }
 }

@@ -54,7 +54,8 @@ private:
     void drawByGroup(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable);
     void drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable);
 
-    enum eTblCol {eSym, eInfo, eComment, eMax};
+    enum eTblCol1 {eSym1, eInfo1, eComment1, eMax1};
+    enum eTblCol2 {eSym2, eInfo2, eData2, eComment2, eMax2};
 
     IGisProject& prj;
     QTextFrameFormat fmtFrameStandard;

@@ -880,7 +880,7 @@ void IPlot::drawDecoration( QPainter &p )
                 QFontMetrics fm(f);
                 QRect r = fm.boundingRect(tag.label);
                 r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
-                r.adjust(-2,-2,2,0);
+                r.adjust(-3,-2,3,0);
 
                 p.setPen(Qt::NoPen);
                 p.setBrush(Qt::white);

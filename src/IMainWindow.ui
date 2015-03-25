@@ -522,7 +522,7 @@
     <string>Ext. Profile</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+P</string>
+    <string>Ctrl+E</string>
    </property>
   </action>
  </widget>

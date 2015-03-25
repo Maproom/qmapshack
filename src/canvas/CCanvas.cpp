@@ -741,7 +741,7 @@ void CCanvas::setSizeTrackProfile()
         SETTINGS;
         cfg.beginGroup("Canvas");
         cfg.beginGroup(objectName());
-        cfg.beginGroup("Profile");        
+        cfg.beginGroup("Profile");
 
         if(cfg.contains("geometry"))
         {

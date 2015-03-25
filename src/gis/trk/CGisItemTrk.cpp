@@ -829,8 +829,9 @@ void CGisItemTrk::findWaypointsCloseBy()
         return;
     }
 
-    QVector<pointDP> line;
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
+    QVector<pointDP> line;
     // combine all segments to a single line
     const int M = trk.segs.size();
     for(int m = 0; m < M; m++)
@@ -944,6 +945,8 @@ void CGisItemTrk::findWaypointsCloseBy()
     {
         dlgDetails->setupGui();
     }
+
+    QApplication::restoreOverrideCursor();
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)

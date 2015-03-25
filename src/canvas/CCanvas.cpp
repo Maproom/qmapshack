@@ -615,7 +615,10 @@ void CCanvas::slotCheckTrackOnFocus()
         // create new profile plot, the plot will register itself at the track
         plotTrackProfile = new CPlotProfile(trk2, CMainWindow::self().profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
         setSizeTrackProfile();
-        plotTrackProfile->show();
+        if(isVisible())
+        {
+            plotTrackProfile->show();
+        }
 
         // finally store the new key as track on focus
         keyTrackOnFocus = key;
@@ -715,11 +718,13 @@ void CCanvas::saveSizeTrackProfile()
     {
         SETTINGS;
         cfg.beginGroup("Canvas");
+        cfg.beginGroup(objectName());
         cfg.beginGroup("Profile");
 
         cfg.setValue("geometry", plotTrackProfile->saveGeometry());
 
         cfg.endGroup(); // Profile
+        cfg.endGroup(); // objectName()
         cfg.endGroup(); // Canvas
     }
 }
@@ -735,11 +740,11 @@ void CCanvas::setSizeTrackProfile()
     {
         SETTINGS;
         cfg.beginGroup("Canvas");
-        cfg.beginGroup("Profile");
+        cfg.beginGroup(objectName());
+        cfg.beginGroup("Profile");        
 
         if(cfg.contains("geometry"))
         {
-            //cfg.setValue("geometry", plotTrackProfile->saveGeometry());
             plotTrackProfile->restoreGeometry(cfg.value("geometry").toByteArray());
         }
         else
@@ -749,6 +754,7 @@ void CCanvas::setSizeTrackProfile()
         }
 
         cfg.endGroup(); // Profile
+        cfg.endGroup(); // objectName()
         cfg.endGroup(); // Canvas
     }
     else
@@ -776,5 +782,20 @@ void CCanvas::showProfileAsWindow(bool yes)
         keyTrackOnFocus.clear();
 
         CGisWidget::self().focusTrkByKey(true, key);
+    }
+}
+
+void CCanvas::showProfile(bool yes)
+{
+    if(plotTrackProfile)
+    {
+        if(yes)
+        {
+            plotTrackProfile->show();
+        }
+        else
+        {
+            plotTrackProfile->hide();
+        }
     }
 }

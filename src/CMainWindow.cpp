@@ -402,10 +402,22 @@ void CMainWindow::slotCurrentTabCanvas(int i)
             break;
         }
     }
-    CCanvas * canvas = getVisibleCanvas();
-    if(canvas)
+
+    for(int n = 0; n < tabWidget->count(); n++)
     {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+        if(canvas)
+        {
+            if(n == i)
+            {
+                canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+                canvas->showProfile(true);
+            }
+            else
+            {
+                canvas->showProfile(false);
+            }
+        }
     }
 }
 
@@ -428,11 +440,6 @@ void CMainWindow::slotCurrentTabMaps(int i)
             break;
         }
     }
-    CCanvas * canvas = getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
 }
 
 void CMainWindow::slotCurrentTabDem(int i)
@@ -453,11 +460,6 @@ void CMainWindow::slotCurrentTabDem(int i)
             tabMaps->setCurrentIndex(n);
             break;
         }
-    }
-    CCanvas * canvas = getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 }
 

@@ -108,6 +108,7 @@ public:
     void setMouseEditArea(const QPointF& pt);
 
     void showProfileAsWindow(bool yes);
+    void showProfile(bool yes);
 
 
     /**

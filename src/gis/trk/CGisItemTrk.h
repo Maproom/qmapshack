@@ -434,8 +434,11 @@ private:
        @param idx The index into all visible points
        @return A null pointer of no point is found.
      */
-    const trkpt_t *getVisibleTrkPtByIndex(quint32 idx);
+    const trkpt_t *getVisibleTrkPtByIndex(qint32 idx);
+    const trkpt_t *getTrkPtByIndex(qint32 idx);
 
+    bool isTrkPtLastVisible(trkpt_t *pt);
+    bool isTrkPtFirstVisible(trkpt_t *pt);
     /**
        @brief Tell the point of focus to all plots and the detail dialog
 

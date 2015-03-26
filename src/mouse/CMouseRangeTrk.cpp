@@ -37,10 +37,6 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     // reset user focus if the track has it
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick);
-    if(trk.hasUserFocus())
-    {
-        trk.gainUserFocus(false);
-    }
 
     // switch to full mode to show deleted (hidden) track points, too
     trk.setDrawMode(CGisItemTrk::eDrawRange);

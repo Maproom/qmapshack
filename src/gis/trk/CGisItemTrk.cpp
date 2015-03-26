@@ -1142,6 +1142,7 @@ void CGisItemTrk::hideSelectedPoints()
     // read start/stop indices
     qint32 idx1 = mouseClickFocus->idxTotal;
     qint32 idx2 = mouseMoveFocus->idxTotal;
+
     if(idx1 > idx2)
     {
         qSwap(idx1,idx2);
@@ -1501,19 +1502,20 @@ void CGisItemTrk::drawRange(QPainter& p)
 {
     if((mouseClickFocus != 0) && (mouseMoveFocus != 0))
     {
-        int idx1 = mouseClickFocus->idxVisible;
-        int idx2 = mouseMoveFocus->idxVisible;
+        const QPolygonF& line = (drawMode == eDrawRange) ? lineFull : lineSimple;
+        int idx1 = (drawMode == eDrawRange) ? mouseClickFocus->idxTotal : mouseClickFocus->idxVisible;
+        int idx2 = (drawMode == eDrawRange) ? mouseMoveFocus->idxTotal : mouseMoveFocus->idxVisible;
 
         if(idx1 > idx2)
         {
             qSwap(idx1,idx2);
         }
 
-        QPolygonF line = lineSimple.mid(idx1, idx2 - idx1 + 1);
+        QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
 
         p.setPen(QPen(Qt::red, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        p.drawPolyline(line);
-        foreach(const QPointF &pt, line)
+        p.drawPolyline(seg);
+        foreach(const QPointF &pt, seg)
         {
             p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
         }
@@ -1674,21 +1676,22 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 {
     const trkpt_t * newPointOfFocus = 0;
     quint32 idx = 0;
+    const QPolygonF& line = (drawMode == eDrawRange) ? lineFull : lineSimple;
 
     if((hasUserFocus() || (drawMode == eDrawRange)) && (pt != NOPOINT))
     {
         /*
             Iterate over the polyline used to draw the track as it contains screen
-            coordinates. The polyline has all visible track points. But there are
-            invisible points, those marked as deleted, too. That is why the index
-            into the polyline cant't be used directly. In a second step we have
-            to iterate over all segments and visible points of the trk_t object
-            until the visible index is reached. This is done by getVisibleTrkPtByIndex().
+            coordinates. The polyline is a linear representation of the segments in the
+            track. That is why the index into the polyline cant't be used directly.
+            In a second step we have to iterate over all segments and points of the trk_t object
+            until the index is reached. This is done by either getVisibleTrkPtByIndex(), or
+            getTrkPtByIndex(). Depending on the current mode.
          */
 
         quint32 i = 0;
         qint32 d  = NOINT;
-        foreach(const QPointF &point, lineSimple)
+        foreach(const QPointF &point, line)
         {
             int tmp = (pt - point).manhattanLength();
             if(tmp < d)
@@ -1701,12 +1704,12 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 
         if(d < MIN_DIST_FOCUS)
         {
-            newPointOfFocus = getVisibleTrkPtByIndex(idx);
+            newPointOfFocus = (drawMode == eDrawRange) ? getTrkPtByIndex(idx) : getVisibleTrkPtByIndex(idx);
         }
     }
     publishMouseFocus(newPointOfFocus, mode, 0);
 
-    return newPointOfFocus ? lineSimple[idx] : NOPOINTF;
+    return newPointOfFocus ? line[idx] : NOPOINTF;
 }
 
 
@@ -1728,27 +1731,73 @@ void CGisItemTrk::setMouseFocusByIndex(qint32 idx, focusmode_e mode)
     }
 }
 
-const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(quint32 idx)
+const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(qint32 idx)
 {
-    quint32 i = 0;
+
     foreach (const trkseg_t &seg, trk.segs)
     {
         foreach(const trkpt_t &pt, seg.pts)
         {
-            if(pt.flags & trkpt_t::eHidden)
-            {
-                continue;
-            }
-            if(i == idx)
+            if(pt.idxVisible == idx)
             {
                 return &pt;
             }
-            i++;
         }
     }
     return 0;
 }
 
+const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByIndex(qint32 idx)
+{
+    foreach (const trkseg_t &seg, trk.segs)
+    {
+        foreach(const trkpt_t &pt, seg.pts)
+        {
+            if(pt.idxTotal == idx)
+            {
+                return &pt;
+            }
+        }
+    }
+    return 0;
+}
+
+bool CGisItemTrk::isTrkPtLastVisible(trkpt_t * pt)
+{
+    foreach (const trkseg_t &seg, trk.segs)
+    {
+        foreach(const trkpt_t &pt1, seg.pts)
+        {
+            if((pt1.idxTotal > pt->idxTotal) && !(pt1.flags & trkpt_t::eHidden))
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool CGisItemTrk::isTrkPtFirstVisible(trkpt_t * pt)
+{
+    foreach (const trkseg_t &seg, trk.segs)
+    {
+        foreach(const trkpt_t &pt1, seg.pts)
+        {
+            if((pt1.idxTotal < pt->idxTotal))
+            {
+                if(!(pt1.flags & trkpt_t::eHidden))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+    return true;
+}
 
 
 void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot * initiator)

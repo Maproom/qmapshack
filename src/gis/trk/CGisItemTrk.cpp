@@ -812,6 +812,11 @@ void CGisItemTrk::deriveSecondaryData()
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
 
+    foreach(IPlot * plot, registeredPlots)
+    {
+        plot->updateData();
+    }
+
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "totalDistance" << totalDistance;
 //    qDebug() << "totalAscend" << totalAscend;
@@ -1149,14 +1154,14 @@ void CGisItemTrk::hideSelectedPoints()
     }
 
     // if first index is the first point adjust index to hide it, too
-    if(idx1 == 0)
+    if(isTrkPtFirstVisible(idx1))
     {
-        idx1 = -1;
+        idx1--;
     }
     // if second index is the last point adjust index to hide it, too
-    if(idx2 == cntTotalPoints - 1)
+    if(isTrkPtLastVisible(idx2))
     {
-        idx2 = cntTotalPoints;
+        idx2++;
     }
 
     // iterate over all segments and delete points between idx1 and idx2
@@ -1192,6 +1197,17 @@ void CGisItemTrk::showSelectedPoints()
     if(idx1 > idx2)
     {
         qSwap(idx1,idx2);
+    }
+
+    // if first index is the first point adjust index to hide it, too
+    if(isTrkPtFirstVisible(idx1))
+    {
+        idx1--;
+    }
+    // if second index is the last point adjust index to hide it, too
+    if(isTrkPtLastVisible(idx2))
+    {
+        idx2++;
     }
 
     for(int s = 0; s < trk.segs.size(); s++)
@@ -1762,13 +1778,13 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByIndex(qint32 idx)
     return 0;
 }
 
-bool CGisItemTrk::isTrkPtLastVisible(trkpt_t * pt)
+bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal)
 {
     foreach (const trkseg_t &seg, trk.segs)
     {
         foreach(const trkpt_t &pt1, seg.pts)
         {
-            if((pt1.idxTotal > pt->idxTotal) && !(pt1.flags & trkpt_t::eHidden))
+            if((pt1.idxTotal > idxTotal) && !(pt1.flags & trkpt_t::eHidden))
             {
                 return false;
             }
@@ -1777,13 +1793,13 @@ bool CGisItemTrk::isTrkPtLastVisible(trkpt_t * pt)
     return true;
 }
 
-bool CGisItemTrk::isTrkPtFirstVisible(trkpt_t * pt)
+bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 {
     foreach (const trkseg_t &seg, trk.segs)
     {
         foreach(const trkpt_t &pt1, seg.pts)
         {
-            if((pt1.idxTotal < pt->idxTotal))
+            if((pt1.idxTotal < idxTotal))
             {
                 if(!(pt1.flags & trkpt_t::eHidden))
                 {

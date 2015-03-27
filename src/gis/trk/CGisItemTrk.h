@@ -437,8 +437,8 @@ private:
     const trkpt_t *getVisibleTrkPtByIndex(qint32 idx);
     const trkpt_t *getTrkPtByIndex(qint32 idx);
 
-    bool isTrkPtLastVisible(trkpt_t *pt);
-    bool isTrkPtFirstVisible(trkpt_t *pt);
+    bool isTrkPtLastVisible(qint32 idxTotal);
+    bool isTrkPtFirstVisible(qint32 idxTotal);
     /**
        @brief Tell the point of focus to all plots and the detail dialog
 
@@ -492,6 +492,7 @@ public:
             slope1          = NOFLOAT;
             slope2          = NOFLOAT;
             speed           = NOFLOAT;
+            idxVisible      = -1;
         }
 
         enum flag_e

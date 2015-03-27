@@ -51,6 +51,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
+    plotElevation->setTrack(&trk);
+    plotDistance->setTrack(&trk);
+    plotSpeed->setTrack(&trk);
+
+
     if(trk.isOnDevice())
     {
         toolLock->setDisabled(true);
@@ -268,11 +273,8 @@ void CDetailsTrk::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
 
-    plotElevation->setTrack(&trk);
-    plotDistance->setTrack(&trk);
-    plotSpeed->setTrack(&trk);
-    plotTrack->setTrack(&trk);
 
+    plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
 
     originator = false;

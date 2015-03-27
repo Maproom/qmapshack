@@ -177,6 +177,16 @@ public:
         return timeStart;
     }
 
+    /**
+       @brief Get the indeces of visible points for a selected range
+
+       If no range is selected both indeces will be NOIDX.
+
+       @param idx1 a reference to receive the first index
+       @param idx2 a reference to receive the second index
+     */
+    void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
+
     void setName(const QString& str);
     void setColor(int idx);
     void setDrawMode(drawmode_e mode)

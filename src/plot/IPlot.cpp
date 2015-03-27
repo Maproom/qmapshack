@@ -47,7 +47,7 @@ QColor IPlot::colors[] =
     QColor(Qt::blue)
     , QColor(0,0,0,0)
     , QColor(0,0,0,0)
-    , QColor(0,0,0,0)
+    , QColor(Qt::green)
 };
 
 
@@ -71,6 +71,8 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , fontHeight(0)
     , scaleWidthX1(0)
     , scaleWidthY1(0)
+    , idxSel1(NOIDX)
+    , idxSel2(NOIDX)
 
 {
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -121,7 +123,6 @@ IPlot::~IPlot()
 void IPlot::clear()
 {
     data->lines.clear();
-    data->marks.points.clear();
     data->tags.clear();
     data->badData = true;
     update();
@@ -264,7 +265,6 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
     if(rectGraphArea.contains(e->pos()))
     {
         posMouse = e->pos();
-        posXXX   = posMouse;
 
         // set point of focus at track object
         qreal x = data->x().pt2val(posMouse.x() - left);
@@ -585,6 +585,7 @@ void IPlot::drawData(QPainter& p)
     }
 }
 
+
 void IPlot::drawLabels( QPainter &p )
 {
     p.setPen(Qt::darkBlue);
@@ -894,6 +895,64 @@ void IPlot::drawDecoration( QPainter &p )
             }
         }
     }
+
+    if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
+    {
+
+        int penIdx = 3;
+        int ptx, pty, oldPtx;
+
+
+        QPolygonF background;
+        QPolygonF foreground;
+
+        CPlotAxis& xaxis = data->x();
+        CPlotAxis& yaxis = data->y();
+
+        const QPolygonF& polyline       = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1);
+        QPolygonF::const_iterator point = polyline.begin();
+
+        ptx = left   + xaxis.val2pt( point->x() );
+        pty = bottom - yaxis.val2pt( point->y() );
+        oldPtx = ptx;
+
+        background << QPointF(ptx,bottom);
+        background << QPointF(ptx,pty);
+
+        foreground << QPointF(ptx,pty);
+
+        while(point != polyline.end())
+        {
+            ptx = left   + xaxis.val2pt( point->x() );
+            pty = bottom - yaxis.val2pt( point->y() );
+
+            if(oldPtx == ptx)
+            {
+                ++point;
+                continue;
+            }
+            oldPtx = ptx;
+
+            if(ptx >= left && ptx <= right)
+            {
+                background << QPointF(ptx,pty);
+                foreground << QPointF(ptx,pty);
+            }
+            ++point;
+        }
+
+        background << QPointF(ptx,pty);
+        background << QPointF(ptx,bottom);
+
+        p.setPen(Qt::NoPen);
+        p.setBrush(colors[penIdx]);
+        p.drawPolygon(background);
+
+        p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
+        p.setBrush(Qt::NoBrush);
+        p.drawPolyline(foreground);
+    }
+
 }
 
 void IPlot::drawTags(QPainter& p)

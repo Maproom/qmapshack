@@ -31,7 +31,7 @@ public:
     CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
     virtual ~CDetailsTrk();
 
-    void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
+    void setMouseFocus(const CGisItemTrk::trkpt_t * pt);
     void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
 
 public slots:

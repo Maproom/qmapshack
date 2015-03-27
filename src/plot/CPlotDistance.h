@@ -30,7 +30,7 @@ public:
 
     void setTrack(CGisItemTrk * track);
     void updateData();
-    void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt);
+    void setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGisItemTrk::trkpt_t * ptMove);
 };
 
 #endif //CPLOTDISTANCE_H

@@ -579,13 +579,26 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
         return NOPOINTF;
     }
 
-    const trkpt_t * newPointOfFocus = getTrkPtByVisibleIndex(idx);
-    publishMouseFocus(newPointOfFocus, eFocusMouseClick, 0);
-
     return lineSimple[idx];
 }
 
+void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2)
+{
+    if((mouseClickFocus == 0) || (mouseMoveFocus == 0))
+    {
+        idx1 = NOIDX;
+        idx2 = NOIDX;
+        return;
+    }
 
+    idx1 = mouseClickFocus->idxVisible;
+    idx2 = mouseMoveFocus->idxVisible;
+
+    if(idx1 > idx2)
+    {
+        qSwap(idx1,idx2);
+    }
+}
 
 void CGisItemTrk::deriveSecondaryData()
 {
@@ -1649,7 +1662,7 @@ void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot *i
         }
     }
 
-    publishMouseFocus(newPointOfFocus, mode, initiator);
+    publishMouseFocus(newPointOfFocus, mode, initiator);   
 }
 
 void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * initiator)
@@ -1685,7 +1698,7 @@ void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * in
         }
     }
 
-    publishMouseFocus(newPointOfFocus, mode, initiator);
+    publishMouseFocus(newPointOfFocus, mode, initiator);   
 }
 
 QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
@@ -1825,15 +1838,15 @@ void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot
             mouseMoveFocus = pt;
             foreach(IPlot * plot, registeredPlots)
             {
-                if(plot != initiator)
+//                if(plot != initiator)
                 {
-                    plot->setMouseMoveFocus(mouseMoveFocus);
+                    plot->setMouseFocus(mouseClickFocus, mouseMoveFocus);
                 }
             }
 
             if(!dlgDetails.isNull())
             {
-                dlgDetails->setMouseMoveFocus(mouseMoveFocus);
+                dlgDetails->setMouseFocus(mouseMoveFocus);
             }
         }
         break;
@@ -1841,7 +1854,7 @@ void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot
     case eFocusMouseClick:
         if(pt != mouseClickFocus)
         {
-            mouseClickFocus = pt;
+            mouseClickFocus = mouseClickFocus == 0 ? pt : 0;
             if(!dlgDetails.isNull())
             {
                 dlgDetails->setMouseClickFocus(mouseClickFocus);

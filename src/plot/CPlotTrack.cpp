@@ -38,7 +38,7 @@ CPlotTrack::~CPlotTrack()
 {
 }
 
-void CPlotTrack::setMouseMoveFocus(qreal lon, qreal lat)
+void CPlotTrack::setMouseFocus(qreal lon, qreal lat)
 {
     pos.rx() = lon * DEG_TO_RAD;
     pos.ry() = lat * DEG_TO_RAD;

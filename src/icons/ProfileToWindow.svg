@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.7781745"
-     inkscape:cx="13.575885"
-     inkscape:cy="24.457409"
+     inkscape:zoom="15.556349"
+     inkscape:cx="1.1138673"
+     inkscape:cy="30.654351"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
@@ -76,7 +76,7 @@
        inkscape:connector-curvature="0" />
     <path
        sodipodi:type="arc"
-       style="fill:none;stroke:#000080;stroke-width:1.55000007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#000080;stroke-width:1.55000004000000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3778"
        sodipodi:cx="28.5"
        sodipodi:cy="23.5"
@@ -89,8 +89,8 @@
        transform="matrix(1.2903225,0,0,1.2903226,-28.248385,-9.935484)" />
     <g
        id="g3010"
-       style="stroke-width:2.47346592;stroke-miterlimit:4;stroke-dasharray:none"
-       transform="matrix(0.8,0,0,0.817256,2.3722945,5.6764896)">
+       style="stroke-width:2.47346592;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(0.8,0,0,0.817256,2.3722955,5.6764896)">
       <path
          inkscape:connector-curvature="0"
          id="path3780"
@@ -109,5 +109,10 @@
        height="40"
        x="1"
        y="12" />
+    <path
+       style="fill:#000080;stroke:#000080;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 16.025807,24 10,0"
+       id="path2990"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>

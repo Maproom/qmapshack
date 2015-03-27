@@ -35,7 +35,7 @@ public:
     virtual ~IPlot();
 
     virtual void updateData() = 0;
-    virtual void setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt) = 0;
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGisItemTrk::trkpt_t * ptMove) = 0;
 
     void save(QImage& image);
     void setSolid(bool yes)
@@ -97,7 +97,6 @@ protected:
 
     QImage buffer;
     QPoint posMouse;
-    QPoint posXXX;
 
     /**
        @brief The track this plot is attached to
@@ -138,6 +137,9 @@ protected:
 
     QMenu * menu;
     QAction * actionPrint;
+
+    qint32 idxSel1;
+    qint32 idxSel2;
 };
 
 #endif //IPLOT_H

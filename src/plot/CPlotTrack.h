@@ -31,7 +31,7 @@ public:
     CPlotTrack(CGisItemTrk * trk, QWidget * parent);
     virtual ~CPlotTrack();
 
-    void setMouseMoveFocus(qreal lon, qreal lat);
+    void setMouseFocus(qreal lon, qreal lat);
 
 protected:
     void resizeEvent(QResizeEvent * e);

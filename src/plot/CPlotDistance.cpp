@@ -99,9 +99,9 @@ void CPlotDistance::updateData()
     resetZoom();
 }
 
-void CPlotDistance::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
+void CPlotDistance::setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGisItemTrk::trkpt_t *ptMove)
 {
-    if(pt == 0)
+    if(ptMove == 0)
     {
         if(posMouse != NOPOINT)
         {
@@ -116,8 +116,9 @@ void CPlotDistance::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(pt->time.toTime_t());
-        posMouse.ry() = top  +  data->y().val2pt(pt->distance);
+        posMouse.rx() = left  + data->x().val2pt(ptMove->time.toTime_t());
+        posMouse.ry() = top  +  data->y().val2pt(ptMove->distance);
     }
+
     update();
 }

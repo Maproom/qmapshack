@@ -128,9 +128,9 @@ void CPlotProfile::updateData()
     resetZoom();
 }
 
-void CPlotProfile::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
+void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGisItemTrk::trkpt_t *ptMove)
 {
-    if(pt == 0)
+    if(ptMove == 0)
     {
         if(posMouse != NOPOINT)
         {
@@ -145,8 +145,17 @@ void CPlotProfile::setMouseMoveFocus(const CGisItemTrk::trkpt_t * pt)
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(pt->distance);
-        posMouse.ry() = top  +  data->y().val2pt(pt->ele);
+        posMouse.rx() = left  + data->x().val2pt(ptMove->distance);
+        posMouse.ry() = top  +  data->y().val2pt(ptMove->ele);
     }
+
+    idxSel1 = ptClick ? ptClick->idxVisible : NOIDX;
+    idxSel2 = ptMove  ? ptMove->idxVisible  : NOIDX;
+
+    if(idxSel2 < idxSel1)
+    {
+        qSwap(idxSel1, idxSel2);
+    }
+
     update();
 }

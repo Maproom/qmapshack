@@ -65,8 +65,6 @@ public:
 
     /// list of plot lines
     QList<line_t> lines;
-    /// marks on line1
-    line_t marks;
 
     struct point_t
     {

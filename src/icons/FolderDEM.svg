@@ -13,7 +13,7 @@
    height="64px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="FolderDEM.svg">
   <defs
      id="defs2987" />
@@ -32,7 +32,7 @@
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="996"
+     inkscape:window-height="1012"
      inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
@@ -71,25 +71,13 @@
        y="10.600393" />
     <path
        style="fill:#009cff;fill-opacity:1;stroke:none"
-       d="m 1.8975662,49.925253 0,-8.665498 4.8729651,-4.332749 4.8729667,4.332749 9.745933,-12.998247 9.745932,8.665498 4.872965,-4.332749 4.872967,8.665498 0,8.665498 z"
+       d="m 1.8975662,49.925253 0,-11.170101 4.8729651,-5.585051 4.8729667,5.585051 L 21.389431,22 l 9.745932,11.170101 4.872965,-5.58505 4.872967,11.170101 0,11.170101 z"
        id="path3799"
        inkscape:connector-curvature="0" />
     <path
        style="fill:#000080;stroke:none"
-       d="m 1.6267696,50.444261 0,-5.302204 4.977424,0 4.9774264,-5.302203 4.977426,5.302203 9.95485,-10.604407 9.954849,5.302204 4.977424,5.302203 0,5.302204 z"
+       d="m 1.6267696,50.444261 0,-6.481421 4.977424,0 L 11.58162,37.481421 16.559046,43.96284 26.513896,31 l 9.954849,6.481421 4.977424,6.481419 0,6.481421 z"
        id="path3815"
        inkscape:connector-curvature="0" />
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-       x="4.5142612"
-       y="23.128567"
-       id="text3009"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3011"
-         x="4.5142612"
-         y="23.128567"
-         style="font-size:16px">c://</tspan></text>
   </g>
 </svg>

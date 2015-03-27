@@ -579,7 +579,7 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
         return NOPOINTF;
     }
 
-    const trkpt_t * newPointOfFocus = getVisibleTrkPtByIndex(idx);
+    const trkpt_t * newPointOfFocus = getTrkPtByVisibleIndex(idx);
     publishMouseFocus(newPointOfFocus, eFocusMouseClick, 0);
 
     return lineSimple[idx];
@@ -925,7 +925,7 @@ void CGisItemTrk::findWaypointsCloseBy()
             }
             else if(d > WPT_FOCUS_DIST_OUT)
             {
-                trkpt_t * trkpt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(index));
+                trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
                 if(trkpt)
                 {
                     trkpt->keyWpt = trkwpt.key;
@@ -938,7 +938,7 @@ void CGisItemTrk::findWaypointsCloseBy()
 
         if(index != NOIDX)
         {
-            trkpt_t * trkpt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(index));
+            trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
             if(trkpt)
             {
                 trkpt->keyWpt = trkwpt.key;
@@ -1701,8 +1701,8 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
             coordinates. The polyline is a linear representation of the segments in the
             track. That is why the index into the polyline cant't be used directly.
             In a second step we have to iterate over all segments and points of the trk_t object
-            until the index is reached. This is done by either getVisibleTrkPtByIndex(), or
-            getTrkPtByIndex(). Depending on the current mode.
+            until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
+            getTrkPtByTotalIndex(). Depending on the current mode.
          */
 
         quint32 i = 0;
@@ -1720,7 +1720,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 
         if(d < MIN_DIST_FOCUS)
         {
-            newPointOfFocus = (drawMode == eDrawRange) ? getTrkPtByIndex(idx) : getVisibleTrkPtByIndex(idx);
+            newPointOfFocus = (drawMode == eDrawRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
         }
     }
     publishMouseFocus(newPointOfFocus, mode, 0);
@@ -1747,7 +1747,7 @@ void CGisItemTrk::setMouseFocusByIndex(qint32 idx, focusmode_e mode)
     }
 }
 
-const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(qint32 idx)
+const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx)
 {
     foreach (const trkseg_t &seg, trk.segs)
     {
@@ -1762,7 +1762,7 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(qint32 idx)
     return 0;
 }
 
-const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByIndex(qint32 idx)
+const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByTotalIndex(qint32 idx)
 {
     foreach (const trkseg_t &seg, trk.segs)
     {

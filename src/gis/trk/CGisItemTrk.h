@@ -429,15 +429,35 @@ private:
        @brief Try to get access Nth visible point matching the idx
 
        This will iterate over all segments and count the visible points. If the
-       count matches idx a pointer to the track point is passed
+       count matches idx a pointer to the track point is returned.
 
        @param idx The index into all visible points
        @return A null pointer of no point is found.
      */
-    const trkpt_t *getVisibleTrkPtByIndex(qint32 idx);
-    const trkpt_t *getTrkPtByIndex(qint32 idx);
+    const trkpt_t *getTrkPtByVisibleIndex(qint32 idx);
+    /**
+       @brief Try to get access Nth point
 
+       This will iterate over all segments. If the index matches
+       a pointer to the track point is returned.
+
+       @param idx The index into all points
+       @return A null pointer of no point is found.
+     */
+    const trkpt_t *getTrkPtByTotalIndex(qint32 idx);
+
+    /**
+       @brief Check if the track point at index it the last one visible
+       @param idxTotal  The point's index
+       @return True if it is the last one visible
+     */
     bool isTrkPtLastVisible(qint32 idxTotal);
+
+    /**
+       @brief Check if the track point at index it the first one visible
+       @param idxTotal  The point's index
+       @return True if it is the first one visible
+     */
     bool isTrkPtFirstVisible(qint32 idxTotal);
     /**
        @brief Tell the point of focus to all plots and the detail dialog

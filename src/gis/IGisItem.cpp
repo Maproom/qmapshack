@@ -301,8 +301,8 @@ void IGisItem::updateHistory()
 
 void IGisItem::setupHistory()
 {
-    history.histIdxInitial = -1;
-    history.histIdxCurrent = -1;
+    history.histIdxInitial = NOIDX;
+    history.histIdxCurrent = NOIDX;
 
     // if history is empty setup an initial item
     if(history.events.isEmpty())
@@ -326,7 +326,7 @@ void IGisItem::setupHistory()
 
     // if no initial item can be found fill the last item with data
     // and make it the initial item
-    if(history.histIdxInitial == -1)
+    if(history.histIdxInitial == NOIDX)
     {
         history_event_t& event = history.events.last();
 

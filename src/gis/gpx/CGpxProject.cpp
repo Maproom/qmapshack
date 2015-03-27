@@ -61,7 +61,7 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
         if(item)
         {
             int res = CSelectCopyAction::eResultNone;
-            insertCopyOfItem(item, -1, res);
+            insertCopyOfItem(item, NOIDX, res);
         }
     }
 

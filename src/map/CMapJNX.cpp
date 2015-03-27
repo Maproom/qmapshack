@@ -262,7 +262,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
 
 qint32 CMapJNX::scale2level(qreal s, const file_t& file)
 {
-    qint32 idxLvl    = -1;
+    qint32 idxLvl    = NOIDX;
     quint32 actScale = scale2jnx(s);
 
     for(int i = 0; i < file.levels.size(); i++)

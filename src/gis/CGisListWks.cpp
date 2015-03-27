@@ -568,7 +568,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
             IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
             if(gisItem)
             {
-                project->insertCopyOfItem(gisItem, -1, lastResult);
+                project->insertCopyOfItem(gisItem, NOIDX, lastResult);
             }
         }
     }
@@ -1062,7 +1062,7 @@ void CGisListWks::slotCopyItem()
             continue;
         }
 
-        project->insertCopyOfItem(gisItem, -1, lastResult);
+        project->insertCopyOfItem(gisItem, NOIDX, lastResult);
     }
 }
 

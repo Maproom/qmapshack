@@ -236,7 +236,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
         else if(watchOut)
         {
             int pos = 0;
-            while ((pos = re2.indexIn(line, pos)) != -1)
+            while ((pos = re2.indexIn(line, pos)) != NOIDX)
             {
                 QString url  = re2.cap(1);
                 QString info = re2.cap(2);

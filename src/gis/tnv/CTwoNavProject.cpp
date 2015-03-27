@@ -57,7 +57,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * proj
         if(item)
         {
             int res = CSelectCopyAction::eResultNone;
-            insertCopyOfItem(item, -1, res);
+            insertCopyOfItem(item, NOIDX, res);
         }
     }
 

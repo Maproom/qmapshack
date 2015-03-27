@@ -21,6 +21,7 @@
 
 #include "CMainWindow.h"
 #include "map/garmin/CGarminTyp.h"
+#include "units/IUnit.h"
 #include <QMessageBox>
 #include <QtCore>
 
@@ -177,7 +178,7 @@ bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
             qDebug() << QString("Type 0x%1 is priority %2").arg(typ,0,16).arg(count);
 #endif
             int idx = drawOrder.indexOf(typ);
-            if(idx != -1)
+            if(idx != NOIDX)
             {
                 drawOrder.move(idx,0);
             }

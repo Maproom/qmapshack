@@ -75,7 +75,7 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
 }
 
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
-    : IGisItem(project, eTypeRte, -1)
+    : IGisItem(project, eTypeRte, NOIDX)
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     loadFromDb(id, db);

@@ -47,7 +47,7 @@ CDBProject::CDBProject(CQlgtFolder& folder)
 }
 
 CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
-    : IGisItem(0, eTypeWpt, -1)
+    : IGisItem(0, eTypeWpt, NOIDX)
 {
     qreal direction;
     QDateTime time = QDateTime::fromTime_t(wpt1.timestamp,QTimeZone("UTC"));
@@ -134,7 +134,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
 
 
 CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
-    : IGisItem(0, eTypeTrk, -1)
+    : IGisItem(0, eTypeTrk, NOIDX)
 {
     trk.name        = trk1.name;
     trk.cmt         = trk1.comment;
@@ -210,7 +210,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
 
 
 CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
-    : IGisItem(0, eTypeOvl, -1)
+    : IGisItem(0, eTypeOvl, NOIDX)
 {
     area.name       = ovl.name;
     area.cmt        = ovl.comment;
@@ -238,7 +238,7 @@ CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
 
 
 CGisItemRte::CGisItemRte(const CQlgtRoute& rte1)
-    : IGisItem(0, eTypeRte, -1)
+    : IGisItem(0, eTypeRte, NOIDX)
 {
     rte.name        = rte1.name;
     rte.cmt         = rte1.comment;

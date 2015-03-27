@@ -172,7 +172,7 @@ CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
 }
 
 CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project)
-    : IGisItem(project, eTypeOvl, -1)
+    : IGisItem(project, eTypeOvl, NOIDX)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
@@ -208,8 +208,8 @@ bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
 QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 {
     qint32 i    = 0;
-    qint32 idx  = -1;
-    qint32 d   = NOINT;
+    qint32 idx  = NOIDX;
+    qint32 d    = NOINT;
     foreach(const QPointF &point, line)
     {
         int tmp = (screenPos - point).manhattanLength();

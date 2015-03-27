@@ -289,7 +289,7 @@ void CMainWindow::addDemList(CDemList * list, const QString &name)
 
 void CMainWindow::addWidgetToTab(QWidget * w)
 {
-    if(tabWidget->indexOf(w) == -1)
+    if(tabWidget->indexOf(w) == NOIDX)
     {
         tabWidget->addTab(w, w->objectName());
     }

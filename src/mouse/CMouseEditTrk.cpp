@@ -108,7 +108,7 @@ void CMouseEditTrk::slotCopyToNew()
         return;
     }
 
-    new CGisItemTrk(coords1,name, project, -1);
+    new CGisItemTrk(coords1,name, project, NOIDX);
 
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

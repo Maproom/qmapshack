@@ -25,6 +25,7 @@
 #define NOFLOAT 1000000000000.0
 #define NOINT   0x7FFFFFFF
 #define NOTIME  0xFFFFFFFF
+#define NOIDX   (-1)
 
 extern const QPointF NOPOINTF;
 extern const QPoint NOPOINT;

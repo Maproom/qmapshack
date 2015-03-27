@@ -492,7 +492,7 @@ public:
             slope1          = NOFLOAT;
             slope2          = NOFLOAT;
             speed           = NOFLOAT;
-            idxVisible      = -1;
+            idxVisible      = NOIDX;
         }
 
         enum flag_e

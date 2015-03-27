@@ -25,6 +25,8 @@
 
 #include <stdint.h>
 
+#include "units/IUnit.h"
+
 class QPolygonF;
 class IDrawContext;
 
@@ -40,7 +42,7 @@ struct point3D
 
 struct pointDP : public point3D
 {
-    pointDP() : used(true), idx(-1)
+    pointDP() : used(true), idx(NOIDX)
     {
     }
     bool used;
@@ -49,7 +51,7 @@ struct pointDP : public point3D
 
 struct segment_t
 {
-    segment_t() : idx11(-1), idx12(-1), idx21(-1)
+    segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX)
     {
     }
 

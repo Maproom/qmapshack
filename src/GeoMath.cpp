@@ -368,7 +368,7 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
 
     while(!stack.isEmpty())
     {
-        qint32 idx = -1;
+        qint32 idx = NOIDX;
         segment seg = stack.pop();
 
         pointDP& x1 = line[seg.idx1];
@@ -453,7 +453,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     qreal distance;             // the distance to the polyline
     qreal shortest1 = threshold;
     qreal shortest2 = threshold;
-    qint32 idx11 = -1, idx21 = -1, idx12 = -1;
+    qint32 idx11 = NOIDX, idx21 = NOIDX, idx12 = NOIDX;
 
     QPointF pt11;
     QPointF pt21;
@@ -513,7 +513,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     }
 
     // if 1st point can't be found test for distance to both ends
-    if(idx11 == -1)
+    if(idx11 == NOIDX)
     {
         QPointF px = pixel.first();
         distance = qSqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
@@ -537,7 +537,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     }
 
     // if 2nd point can't be found test for distance to both ends
-    if(idx21 == -1)
+    if(idx21 == NOIDX)
     {
         QPointF px = pixel.first();
         distance = qSqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
@@ -576,7 +576,7 @@ void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF
     context->convertPx2Rad(pt1);
     context->convertPx2Rad(pt2);
 
-    if(idx11 != -1 && idx21 != -1)
+    if(idx11 != NOIDX && idx21 != NOIDX)
     {
         if(idx11 == idx21)
         {

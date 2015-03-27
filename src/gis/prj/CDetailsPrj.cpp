@@ -459,7 +459,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
         cnt = 1;
 
-        foreach(const wpt_info_t& info, wptInfo)
+        foreach(const wpt_info_t &info, wptInfo)
         {
             progress.setValue(n++ *100.0/nItems);
             if(progress.wasCanceled())
@@ -470,7 +470,6 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
             CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(info.key));
             if(wpt != 0)
             {
-
                 table->cellAt(cnt,eSym2).firstCursorPosition().insertImage(wpt->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
                 table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(wpt->getInfo());
 
@@ -510,7 +509,6 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
 
                     table1->cellAt(0,1).firstCursorPosition().insertImage(image);
-
                 }
 
                 table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly()||printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));

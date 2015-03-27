@@ -510,7 +510,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     QString format = "yyyy-MM-dd'T'hh:mm:ss";
 
     i = timetext.indexOf(".");
-    if (i != -1)
+    if (i != NOIDX)
     {
         if(timetext[i+1] == '0')
         {
@@ -523,11 +523,11 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     }
 
     // trailing "Z" explicitly declares the timestamp to be UTC
-    if (timetext.indexOf("Z") != -1)
+    if (timetext.indexOf("Z") != NOIDX)
     {
         format += "'Z'";
     }
-    else if ((i = tzRE.indexIn(timetext)) != -1)
+    else if ((i = tzRE.indexIn(timetext)) != NOIDX)
     {
         // trailing timezone offset [-+]HH:MM present
         // This does not match the original intentions of the GPX

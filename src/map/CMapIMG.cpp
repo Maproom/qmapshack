@@ -135,7 +135,7 @@ CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
     , filename(filename)
     , transparent(false)
     , fm(CMainWindow::self().getMapFont())
-    , selectedLanguage(-1)
+    , selectedLanguage(NOIDX)
 {
     qDebug() << "------------------------------";
     qDebug() << "IMG: try to open" << filename;
@@ -2478,7 +2478,7 @@ void CMapIMG::getInfoPoints(const QPoint& pt, QMultiMap<QString, QString>& dict)
             {
                 if(pointProperties.contains(point->type))
                 {
-                    if(selectedLanguage != -1)
+                    if(selectedLanguage != NOIDX)
                     {
                         dict.insert(tr("Point of Interest"),pointProperties[point->type].strings[selectedLanguage]);
                     }
@@ -2541,7 +2541,7 @@ void CMapIMG::getInfoPois(const QPoint& pt, QMultiMap<QString, QString>& dict)
             {
                 if(pointProperties.contains(point->type))
                 {
-                    if(selectedLanguage != -1)
+                    if(selectedLanguage != NOIDX)
                     {
                         dict.insert(tr("Point of Interest"),pointProperties[point->type].strings[selectedLanguage]);
                     }
@@ -2666,7 +2666,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
         return;
     }
 
-    if(selectedLanguage != -1)
+    if(selectedLanguage != NOIDX)
     {
         key =  polylineProperties[type].strings[selectedLanguage];
     }
@@ -2729,7 +2729,7 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
                 }
                 else
                 {
-                    if(selectedLanguage != -1)
+                    if(selectedLanguage != NOIDX)
                     {
                         if(polygonProperties[line->type].strings[selectedLanguage].size())
                         {

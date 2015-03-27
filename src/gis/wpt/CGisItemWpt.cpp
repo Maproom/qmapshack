@@ -43,7 +43,7 @@ QString CGisItemWpt::lastIcon;
 
 /// used to add a new waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
-    : IGisItem(project, eTypeWpt, -1)
+    : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
@@ -65,7 +65,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
 
 /// used to move a copy of waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisProject *project)
-    : IGisItem(project, eTypeWpt, -1)
+    : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
@@ -133,7 +133,7 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
 }
 
 CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
-    : IGisItem(project, eTypeWpt, -1)
+    : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
@@ -142,7 +142,7 @@ CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
 }
 
 CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * project)
-    : IGisItem(project, eTypeWpt, -1)
+    : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {

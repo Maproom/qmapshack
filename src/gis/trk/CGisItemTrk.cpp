@@ -116,7 +116,7 @@ const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap,
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
-    : IGisItem(project, eTypeTrk, -1)
+    : IGisItem(project, eTypeTrk, NOIDX)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
     , mouseMoveFocus(0)
@@ -250,7 +250,7 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
 }
 
 CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
-    : IGisItem(project, eTypeTrk, -1)
+    : IGisItem(project, eTypeTrk, NOIDX)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , drawMode(eDrawNormal)
     , mouseMoveFocus(0)
@@ -561,8 +561,8 @@ IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 {
     qint32 i    = 0;
-    qint32 idx  = -1;
-    qint32 d   = NOINT;
+    qint32 idx  = NOIDX;
+    qint32 d    = NOINT;
     foreach(const QPointF &point, lineSimple)
     {
         int tmp = (screenPos - point).manhattanLength();
@@ -908,8 +908,8 @@ void CGisItemTrk::findWaypointsCloseBy()
 
     foreach(const trkwpt_t &trkwpt, trkwpts)
     {
-        qreal minD  = WPT_FOCUS_DIST_IN;
-        qint32 index = -1;
+        qreal minD      = WPT_FOCUS_DIST_IN;
+        qint32 index    = NOIDX;
 
         foreach(const pointDP &pt, line)
         {
@@ -931,12 +931,12 @@ void CGisItemTrk::findWaypointsCloseBy()
                     trkpt->keyWpt = trkwpt.key;
                 }
 
-                index = -1;
+                index = NOIDX;
                 minD  = WPT_FOCUS_DIST_IN;
             }
         }
 
-        if(index != -1)
+        if(index != NOIDX)
         {
             trkpt_t * trkpt = const_cast<trkpt_t*>(getVisibleTrkPtByIndex(index));
             if(trkpt)
@@ -1047,7 +1047,7 @@ void CGisItemTrk::reverse()
     }
 
     // start with a 1:1 copy of the first track
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, -1, false);
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, NOIDX, false);
     trk1->trk.name = name1;
     /*
         clear track data, item key and history. To clear the history is important as
@@ -1106,7 +1106,7 @@ void CGisItemTrk::combine()
     }
 
     // start with a 1:1 copy of the first track
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, -1, false);
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
     // replace name
     trk1->trk.name = name1;
 
@@ -1749,7 +1749,6 @@ void CGisItemTrk::setMouseFocusByIndex(qint32 idx, focusmode_e mode)
 
 const CGisItemTrk::trkpt_t * CGisItemTrk::getVisibleTrkPtByIndex(qint32 idx)
 {
-
     foreach (const trkseg_t &seg, trk.segs)
     {
         foreach(const trkpt_t &pt, seg.pts)

@@ -34,8 +34,8 @@ IMouseEditLine::IMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * p
     : IMouse(gis, parent)
     , state(eStateAddPointFwd)
     , idxFocus(0)
-    , idxStart(-1)
-    , idxStop(-1)
+    , idxStart(NOIDX)
+    , idxStop(NOIDX)
 {
     // create a single point line
     coords1 << point;
@@ -55,9 +55,9 @@ IMouseEditLine::IMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * p
 IMouseEditLine::IMouseEditLine(IGisLine &src, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
     , state(eStateIdle)
-    , idxFocus(-1)
-    , idxStart(-1)
-    , idxStop(-1)
+    , idxFocus(NOIDX)
+    , idxStart(NOIDX)
+    , idxStop(NOIDX)
 {
     src.getPolylineFromData(coords1);
     // calculate a pixel polyline from track coordinates
@@ -320,14 +320,14 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
             delete scrOptRange;
 
             state       = eStateIdle;
-            idxFocus    = -1;
-            idxStart    = -1;
-            idxStop     = -1;
+            idxFocus    = NOIDX;
+            idxStart    = NOIDX;
+            idxStop     = NOIDX;
             break;
 
         case eStateMovePoint:
             state       = eStateIdle;
-            idxFocus    = -1;
+            idxFocus    = NOIDX;
             coords1     = save;
             line        = coords1;
             gis->convertRad2Px(line);
@@ -358,9 +358,9 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
             }
 
             state       = eStateIdle;
-            idxFocus    = -1;
-            idxStart    = -1;
-            idxStop     = -1;
+            idxFocus    = NOIDX;
+            idxStart    = NOIDX;
+            idxStop     = NOIDX;
 
             cursor  = cursor1;
             QApplication::restoreOverrideCursor();
@@ -372,9 +372,9 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
             delete scrOptRange;
 
             state       = eStateIdle;
-            idxFocus    = -1;
-            idxStart    = -1;
-            idxStop     = -1;
+            idxFocus    = NOIDX;
+            idxStart    = NOIDX;
+            idxStop     = NOIDX;
         }
     }
     else if(e->button() == Qt::LeftButton)
@@ -547,9 +547,9 @@ void IMouseEditLine::mousePressEvent(QMouseEvent * e)
             delete scrOptRange;
 
             state       = eStateIdle;
-            idxFocus    = -1;
-            idxStart    = -1;
-            idxStop     = -1;
+            idxFocus    = NOIDX;
+            idxStart    = NOIDX;
+            idxStop     = NOIDX;
         }
         }
     }
@@ -698,8 +698,8 @@ void IMouseEditLine::wheelEvent(QWheelEvent * e)
 int IMouseEditLine::getPointCloseBy(const QPoint& screenPos)
 {
     qint32 i    = 0;
-    qint32 idx  = -1;
-    qint32 d   = NOINT;
+    qint32 idx  = NOIDX;
+    qint32 d    = NOINT;
     foreach(const QPointF &point, line)
     {
         int tmp = (screenPos - point).manhattanLength();
@@ -713,7 +713,7 @@ int IMouseEditLine::getPointCloseBy(const QPoint& screenPos)
 
     if(d > 40)
     {
-        idx = -1;
+        idx = NOIDX;
     }
 
     return idx;
@@ -730,7 +730,7 @@ void IMouseEditLine::slotDeletePoint()
     coords1.remove(idxFocus);
     line.remove(idxFocus);
 
-    idxFocus  = -1;
+    idxFocus    = NOIDX;
     state       = eStateIdle;
 
     canvas->update();
@@ -768,9 +768,9 @@ void IMouseEditLine::slotDeleteRange()
     gis->convertRad2Px(line);
 
     state = eStateIdle;
-    idxFocus  = -1;
-    idxStart    = -1;
-    idxStop     = -1;
+    idxFocus    = NOIDX;
+    idxStart    = NOIDX;
+    idxStop     = NOIDX;
 
     canvas->update();
 }

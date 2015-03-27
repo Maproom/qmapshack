@@ -1217,7 +1217,7 @@ void CGisItemTrk::showSelectedPoints()
         {
             trkpt_t& trkpt = seg.pts[i];
 
-            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+            if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
             {
                 trkpt.flags &= ~trkpt_t::eHidden;
             }

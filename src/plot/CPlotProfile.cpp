@@ -149,13 +149,38 @@ void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGi
         posMouse.ry() = top  +  data->y().val2pt(ptMove->ele);
     }
 
-    idxSel1 = ptClick ? ptClick->idxVisible : NOIDX;
-    idxSel2 = ptMove  ? ptMove->idxVisible  : NOIDX;
-
-    if(idxSel2 < idxSel1)
+    if(ptClick == 0 || ptMove == 0)
     {
-        qSwap(idxSel1, idxSel2);
+        idxSel1 = idxSel2 = NOIDX;
     }
-
+    else
+    {
+        if(ptClick->idxTotal < ptMove->idxTotal)
+        {
+            while(ptClick->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptClick++;
+            }
+            while(ptMove->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptMove--;
+            }
+            idxSel1 = ptClick->idxVisible;
+            idxSel2 = ptMove->idxVisible;
+        }
+        else
+        {
+            while(ptClick->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptClick--;
+            }
+            while(ptMove->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptMove++;
+            }
+            idxSel1 = ptMove->idxVisible;
+            idxSel2 = ptClick->idxVisible;
+        }
+    }
     update();
 }

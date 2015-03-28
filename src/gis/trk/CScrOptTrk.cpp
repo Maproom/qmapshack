@@ -56,6 +56,10 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolReverse, SIGNAL(clicked()), this, SLOT(slotReverse()));
     connect(toolCombine, SIGNAL(clicked()), this, SLOT(slotCombine()));
     connect(toolRange, SIGNAL(clicked()), this, SLOT(slotRange()));
+
+    // reset user focus if the track has it
+    trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
+    trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick);
 }
 
 CScrOptTrk::~CScrOptTrk()

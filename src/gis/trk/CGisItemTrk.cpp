@@ -445,6 +445,17 @@ QString CGisItemTrk::getInfoRange()
         pt2 = mouseClickFocus;
     }
 
+    while(pt1->flags & trkpt_t::eHidden)
+    {
+        pt1++;
+    }
+
+    while(pt2->flags & trkpt_t::eHidden)
+    {
+        pt2--;
+    }
+
+
     d = tmp = pt2->distance - pt1->distance;
     IUnit::self().meter2distance(tmp, val, unit);
     str += QString("%3 %1%2\n").arg(val).arg(unit).arg(QChar(0x21A6));
@@ -1400,7 +1411,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         return;
     }
 
-    if(hasUserFocus() && mouseMoveFocus)
+    if(hasUserFocus() && mouseMoveFocus && (drawMode != eDrawRange))
     {
         // derive anchor
         QPointF anchor(mouseMoveFocus->lon, mouseMoveFocus->lat);
@@ -1662,7 +1673,7 @@ void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot *i
         }
     }
 
-    publishMouseFocus(newPointOfFocus, mode, initiator);   
+    publishMouseFocus(newPointOfFocus, mode, initiator);
 }
 
 void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * initiator)
@@ -1698,7 +1709,7 @@ void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * in
         }
     }
 
-    publishMouseFocus(newPointOfFocus, mode, initiator);   
+    publishMouseFocus(newPointOfFocus, mode, initiator);
 }
 
 QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
@@ -1838,10 +1849,7 @@ void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot
             mouseMoveFocus = pt;
             foreach(IPlot * plot, registeredPlots)
             {
-//                if(plot != initiator)
-                {
-                    plot->setMouseFocus(mouseClickFocus, mouseMoveFocus);
-                }
+                plot->setMouseFocus(mouseClickFocus, mouseMoveFocus);
             }
 
             if(!dlgDetails.isNull())

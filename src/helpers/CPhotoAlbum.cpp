@@ -18,6 +18,7 @@
 
 #include "helpers/CPhotoAlbum.h"
 #include "helpers/CPhotoViewer.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -66,7 +67,9 @@ void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)
 
 void CPhotoAlbum::slotAddImage()
 {
-    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), "./");
+    SETTINGS;
+    QString path = cfg.value("Paths/lastWptImagePath", QDir::homePath()).toString();
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), path);
     if(filenames.isEmpty())
     {
         return;
@@ -94,6 +97,10 @@ void CPhotoAlbum::slotAddImage()
 
         images << image;
     }
+
+    QFileInfo fi(filenames.first());
+    path = fi.absolutePath();
+    cfg.setValue("Paths/lastWptImagePath", path);
 
     emit sigChanged(images);
 }

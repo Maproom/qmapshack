@@ -31,7 +31,7 @@ QPen IPlot::pens[] =
     QPen(Qt::darkBlue,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(QColor("#C00000"),3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::yellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::green,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkYellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
 QPen IPlot::pensThin[] =
@@ -47,7 +47,7 @@ QColor IPlot::colors[] =
     QColor(Qt::blue)
     , QColor(0,0,0,0)
     , QColor(0,0,0,0)
-    , QColor(Qt::green)
+    , QColor(Qt::darkGreen)
 };
 
 
@@ -898,7 +898,6 @@ void IPlot::drawDecoration( QPainter &p )
 
     if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
     {
-
         int penIdx = 3;
         int ptx, pty, oldPtx;
 
@@ -952,7 +951,6 @@ void IPlot::drawDecoration( QPainter &p )
         p.setBrush(Qt::NoBrush);
         p.drawPolyline(foreground);
     }
-
 }
 
 void IPlot::drawTags(QPainter& p)

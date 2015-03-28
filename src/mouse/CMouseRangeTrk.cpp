@@ -183,7 +183,7 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
         if(trk != 0)
         {
-            anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick);
+            anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove);
             canvas->update();
         }
         break;

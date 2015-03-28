@@ -105,6 +105,7 @@ void CWptIconDialog::setupList(QObject * obj)
     }
 
     connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
+    connect(listWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
 }
 
 CWptIconDialog::~CWptIconDialog()

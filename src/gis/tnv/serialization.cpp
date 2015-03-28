@@ -523,12 +523,20 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
 
     QString comment = getComment();
     comment = removeHtml(comment);
-    if(comment.isEmpty())
+
+    QString filenameDesc;
+    QString description = getDescription();
+    if(!description.isEmpty())
     {
-        comment = getDescription();
-        comment = removeHtml(comment);
+        filenameDesc = QString("%1.html").arg(getKey().item);
+        QFile fileDesc(dir.absoluteFilePath(filenameDesc));
+        fileDesc.open(QIODevice::WriteOnly);
+
+        QTextStream stream(&fileDesc);
+        stream << bom << description;
+
+        fileDesc.close();
     }
-    comment = comment.replace("\n","%0A%0D");
 
     QStringList list;
     list << "W";
@@ -557,6 +565,11 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     out << "w ";
     out << list.join(",");
     out << endl;
+
+    if(!filenameDesc.isEmpty())
+    {
+        out << "a " << ".\\" << filenameDesc << endl;
+    }
 
     foreach(const image_t &img, images)
     {

@@ -723,6 +723,21 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             wpt.name = wpt.name.replace("_", " ");
 
+            if(!wpt.key.isEmpty())
+            {
+                QString filenameDesc = QString("%1.html").arg(wpt.key);
+                if(QFile::exists(dir.absoluteFilePath(filenameDesc)))
+                {
+                    QFile fileDesc(dir.absoluteFilePath(filenameDesc));
+                    if(fileDesc.open(QIODevice::ReadOnly))
+                    {
+                        wpt.description = QTextStream(&fileDesc).readAll();
+                        fileDesc.close();
+                    }
+                }
+            }
+
+
             wpt.valid = true;
             break;
         }
@@ -796,6 +811,7 @@ void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t &tnvWpt)
     wpt.time    = tnvWpt.time;
     wpt.name    = tnvWpt.name;
     wpt.cmt     = tnvWpt.comment;
+    wpt.desc    = tnvWpt.description;
     wpt.sym     = tnvWpt.symbol;
     key.item    = tnvWpt.key;
 
@@ -813,7 +829,6 @@ void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t &tnvWpt)
     {
         readGcExt(xmlCache);
     }
-
 
     setIcon();
 }

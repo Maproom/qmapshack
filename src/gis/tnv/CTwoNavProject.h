@@ -49,6 +49,7 @@ public:
         QDateTime time;
         QString name;
         QString comment;
+        QString description;
         QString symbol;
         QString key;
         QString url;

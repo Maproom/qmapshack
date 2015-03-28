@@ -75,10 +75,10 @@ public:
     {
     }
 
+    IGisProject * getProjectByKey(const QString& key);
 
 protected:
     virtual void insertCopyOfProject(IGisProject * project) = 0;
-    IGisProject * getProjectByKey(const QString& key);
 
     QDir dir;
     QString key;

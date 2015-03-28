@@ -718,6 +718,7 @@ void CCanvas::saveSizeTrackProfile()
     {
         SETTINGS;
         cfg.beginGroup("Canvas");
+        cfg.beginGroup("Views");
         cfg.beginGroup(objectName());
         cfg.beginGroup("Profile");
 
@@ -725,6 +726,7 @@ void CCanvas::saveSizeTrackProfile()
 
         cfg.endGroup(); // Profile
         cfg.endGroup(); // objectName()
+        cfg.endGroup(); // Views
         cfg.endGroup(); // Canvas
     }
 }
@@ -740,6 +742,7 @@ void CCanvas::setSizeTrackProfile()
     {
         SETTINGS;
         cfg.beginGroup("Canvas");
+        cfg.beginGroup("Views");
         cfg.beginGroup(objectName());
         cfg.beginGroup("Profile");
 
@@ -755,6 +758,7 @@ void CCanvas::setSizeTrackProfile()
 
         cfg.endGroup(); // Profile
         cfg.endGroup(); // objectName()
+        cfg.endGroup(); // Views
         cfg.endGroup(); // Canvas
     }
     else

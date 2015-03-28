@@ -28,6 +28,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
+#include "gis/CSelDevices.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CLostFoundProject.h"
@@ -91,7 +92,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditPrj   = menuProjectWks->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
     actionSaveAs    = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
     actionSave      = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
-    actionSyncWksDev= menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Devices"), this, SLOT(slotSyncWksDev()));
+    actionSyncWksDev= menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"),tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
     actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     menuProjectDev  = new QMenu(this);
@@ -1205,7 +1206,7 @@ void CGisListWks::slotSearchGoogle(bool on)
 
 void CGisListWks::slotSyncWksDev()
 {
-    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
     if(project == 0)
@@ -1213,12 +1214,21 @@ void CGisListWks::slotSyncWksDev()
         return;
     }
 
+    QSet<QString> keys;
+    CSelDevices dlg(project, this);
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+    dlg.getSlectedDevices(keys);
+
+
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
-        if(device == 0)
+        if(device == 0 || !keys.contains(device->getKey()))
         {
             continue;
         }

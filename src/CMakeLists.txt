@@ -103,6 +103,7 @@ set( SRCS
     gis/CGisWidget.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
+    gis/CSelDevices.cpp
     gis/prj/IGisProject.cpp
     gis/prj/CDetailsPrj.cpp
     gis/gpx/CGpxProject.cpp
@@ -282,6 +283,7 @@ set( HDRS
     gis/CGisWidget.h
     gis/CGisListDB.h
     gis/CGisListWks.h
+    gis/CSelDevices.h
     gis/qms/CQmsProject.h
     gis/tnv/CTwoNavProject.h
     gis/db/IDB.cpp
@@ -390,6 +392,7 @@ set( UIS
     mouse/IScrOptRange.ui
     mouse/IScrOptRangeTrk.ui
     gis/IGisWidget.ui
+    gis/ISelDevices.ui
     gis/prj/IDetailsPrj.ui
     gis/db/ISetupDatabase.ui
     gis/db/ISetupWorkspace.ui

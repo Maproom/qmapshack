@@ -1,3 +1,12 @@
+V 1.1.0
+* Garmin Mpas: fix line breaks of tooltips
+* Project summary: Add roadbook mode
+* TwoNav: export tracks and waypoints as roadbook
+* Grid: Fixed swaped numbers for northing and easting
+* Tracks: Toggle between small OSD profile and extended profile
+* Tracks: Several fixes for range selection
+* Tracks: Show waypoints along track in profile plot
+
 V 1.0.1
 * [Issue #11]Exclude items not visible from highlighting
 * Fix track edit hangup for tracks with corrupted timestamps

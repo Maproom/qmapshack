@@ -896,61 +896,61 @@ void IPlot::drawDecoration( QPainter &p )
         }
     }
 
-    if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
-    {
-        int penIdx = 3;
-        int ptx, pty, oldPtx;
+//    if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
+//    {
+//        int penIdx = 3;
+//        int ptx, pty, oldPtx;
 
 
-        QPolygonF background;
-        QPolygonF foreground;
+//        QPolygonF background;
+//        QPolygonF foreground;
 
-        CPlotAxis& xaxis = data->x();
-        CPlotAxis& yaxis = data->y();
+//        CPlotAxis& xaxis = data->x();
+//        CPlotAxis& yaxis = data->y();
 
-        const QPolygonF& polyline       = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1);
-        QPolygonF::const_iterator point = polyline.begin();
+//        const QPolygonF& polyline       = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1);
+//        QPolygonF::const_iterator point = polyline.begin();
 
-        ptx = left   + xaxis.val2pt( point->x() );
-        pty = bottom - yaxis.val2pt( point->y() );
-        oldPtx = ptx;
+//        ptx = left   + xaxis.val2pt( point->x() );
+//        pty = bottom - yaxis.val2pt( point->y() );
+//        oldPtx = ptx;
 
-        background << QPointF(ptx,bottom);
-        background << QPointF(ptx,pty);
+//        background << QPointF(ptx,bottom);
+//        background << QPointF(ptx,pty);
 
-        foreground << QPointF(ptx,pty);
+//        foreground << QPointF(ptx,pty);
 
-        while(point != polyline.end())
-        {
-            ptx = left   + xaxis.val2pt( point->x() );
-            pty = bottom - yaxis.val2pt( point->y() );
+//        while(point != polyline.end())
+//        {
+//            ptx = left   + xaxis.val2pt( point->x() );
+//            pty = bottom - yaxis.val2pt( point->y() );
 
-            if(oldPtx == ptx)
-            {
-                ++point;
-                continue;
-            }
-            oldPtx = ptx;
+//            if(oldPtx == ptx)
+//            {
+//                ++point;
+//                continue;
+//            }
+//            oldPtx = ptx;
 
-            if(ptx >= left && ptx <= right)
-            {
-                background << QPointF(ptx,pty);
-                foreground << QPointF(ptx,pty);
-            }
-            ++point;
-        }
+//            if(ptx >= left && ptx <= right)
+//            {
+//                background << QPointF(ptx,pty);
+//                foreground << QPointF(ptx,pty);
+//            }
+//            ++point;
+//        }
 
-        background << QPointF(ptx,pty);
-        background << QPointF(ptx,bottom);
+//        background << QPointF(ptx,pty);
+//        background << QPointF(ptx,bottom);
 
-        p.setPen(Qt::NoPen);
-        p.setBrush(colors[penIdx]);
-        p.drawPolygon(background);
+//        p.setPen(Qt::NoPen);
+//        p.setBrush(colors[penIdx]);
+//        p.drawPolygon(background);
 
-        p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
-        p.setBrush(Qt::NoBrush);
-        p.drawPolyline(foreground);
-    }
+//        p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
+//        p.setBrush(Qt::NoBrush);
+//        p.drawPolyline(foreground);
+//    }
 }
 
 void IPlot::drawTags(QPainter& p)

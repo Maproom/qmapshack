@@ -4599,23 +4599,23 @@ Filename: %1</source>
         <translation>Modo Sólo Lectura...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="618"/>
+        <location filename="../gis/IGisItem.cpp" line="632"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Comentario:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="621"/>
+        <location filename="../gis/IGisItem.cpp" line="635"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---sin comentario---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="632"/>
+        <location filename="../gis/IGisItem.cpp" line="618"/>
         <location filename="../gis/IGisItem.cpp" line="677"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Descripción:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="635"/>
+        <location filename="../gis/IGisItem.cpp" line="621"/>
         <location filename="../gis/IGisItem.cpp" line="680"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---sin descripción---&lt;/p&gt;</translation>
@@ -4756,42 +4756,42 @@ Filename: %1</source>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="292"/>
-        <location filename="../gis/tnv/serialization.cpp" line="413"/>
-        <location filename="../gis/tnv/serialization.cpp" line="442"/>
-        <location filename="../gis/tnv/serialization.cpp" line="453"/>
-        <location filename="../gis/tnv/serialization.cpp" line="474"/>
-        <location filename="../gis/tnv/serialization.cpp" line="615"/>
-        <location filename="../gis/tnv/serialization.cpp" line="643"/>
-        <location filename="../gis/tnv/serialization.cpp" line="654"/>
-        <location filename="../gis/tnv/serialization.cpp" line="672"/>
-        <location filename="../gis/tnv/serialization.cpp" line="700"/>
-        <location filename="../gis/tnv/serialization.cpp" line="774"/>
+        <location filename="../gis/tnv/serialization.cpp" line="295"/>
+        <location filename="../gis/tnv/serialization.cpp" line="416"/>
+        <location filename="../gis/tnv/serialization.cpp" line="445"/>
+        <location filename="../gis/tnv/serialization.cpp" line="456"/>
+        <location filename="../gis/tnv/serialization.cpp" line="477"/>
+        <location filename="../gis/tnv/serialization.cpp" line="618"/>
+        <location filename="../gis/tnv/serialization.cpp" line="646"/>
+        <location filename="../gis/tnv/serialization.cpp" line="657"/>
+        <location filename="../gis/tnv/serialization.cpp" line="675"/>
+        <location filename="../gis/tnv/serialization.cpp" line="703"/>
+        <location filename="../gis/tnv/serialization.cpp" line="777"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="292"/>
-        <location filename="../gis/tnv/serialization.cpp" line="413"/>
-        <location filename="../gis/tnv/serialization.cpp" line="615"/>
+        <location filename="../gis/tnv/serialization.cpp" line="295"/>
+        <location filename="../gis/tnv/serialization.cpp" line="416"/>
+        <location filename="../gis/tnv/serialization.cpp" line="618"/>
         <source>Failed to open %1.</source>
         <translation>Fallo al abrir %1.</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="442"/>
-        <location filename="../gis/tnv/serialization.cpp" line="453"/>
-        <location filename="../gis/tnv/serialization.cpp" line="643"/>
-        <location filename="../gis/tnv/serialization.cpp" line="654"/>
+        <location filename="../gis/tnv/serialization.cpp" line="445"/>
+        <location filename="../gis/tnv/serialization.cpp" line="456"/>
+        <location filename="../gis/tnv/serialization.cpp" line="646"/>
+        <location filename="../gis/tnv/serialization.cpp" line="657"/>
         <source>Only support lon/lat WGS 84 format.</source>
         <translation type="unfinished">Solamente soporta formato lon/lat WGS84.</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="474"/>
-        <location filename="../gis/tnv/serialization.cpp" line="672"/>
-        <location filename="../gis/tnv/serialization.cpp" line="700"/>
-        <location filename="../gis/tnv/serialization.cpp" line="774"/>
+        <location filename="../gis/tnv/serialization.cpp" line="477"/>
+        <location filename="../gis/tnv/serialization.cpp" line="675"/>
+        <location filename="../gis/tnv/serialization.cpp" line="703"/>
+        <location filename="../gis/tnv/serialization.cpp" line="777"/>
         <source>Failed to read data.</source>
         <translation>Fallo al leer los datos.</translation>
     </message>

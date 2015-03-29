@@ -612,20 +612,6 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     QString str;
     bool isEmpty;
 
-    isEmpty = removeHtml(cmt).simplified().isEmpty();
-    if(!isReadOnly || !isEmpty)
-    {
-        str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
-        if(isEmpty)
-        {
-            str += QObject::tr("<p>--- no comment ---</p>");
-        }
-        else
-        {
-            str += cmt;
-        }
-    }
-
     isEmpty = removeHtml(desc).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
@@ -637,6 +623,20 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         else
         {
             str += desc;
+        }
+    }
+
+    isEmpty = removeHtml(cmt).simplified().isEmpty();
+    if(!isReadOnly || !isEmpty)
+    {
+        str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
+        if(isEmpty)
+        {
+            str += QObject::tr("<p>--- no comment ---</p>");
+        }
+        else
+        {
+            str += cmt;
         }
     }
 

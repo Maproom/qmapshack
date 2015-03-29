@@ -961,8 +961,8 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt)
     writeXml(xml, "magvar", wpt.magvar);
     writeXml(xml, "geoidheight", wpt.geoidheight);
     writeXml(xml, "name", wpt.name);
-    writeXml(xml, "cmt", wpt.cmt);
-    writeXml(xml, "desc", wpt.desc);
+    writeXml(xml, "cmt", IGisItem::removeHtml(wpt.cmt));
+    writeXml(xml, "desc", IGisItem::removeHtml(wpt.desc));
     writeXml(xml, "src", wpt.src);
     writeXml(xml, "link", wpt.links);
     writeXml(xml, "sym", wpt.sym);

@@ -222,7 +222,10 @@ static QDateTime readCompeTime(QString str, bool isTrack)
         if(isTrack)
         {
             timestamp = QDateTime::fromString(str, "dd-MM-yy hh:mm:ss.zzz");
-            timestamp = timestamp.addYears(100);
+            if(timestamp.isValid())
+            {
+                timestamp = timestamp.addYears(100);
+            }
         }
         else
         {
@@ -521,21 +524,21 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     QString name = getName();
     name = name.replace(" ","_");
 
-    QString comment = getComment();
-    comment = removeHtml(comment);
-
-    QString filenameDesc;
     QString description = getDescription();
-    if(!description.isEmpty())
+    description = removeHtml(description);
+
+    QString filenameCmt;
+    QString comment = getComment();
+    if(!comment.isEmpty())
     {
-        filenameDesc = QString("%1.html").arg(getKey().item);
-        QFile fileDesc(dir.absoluteFilePath(filenameDesc));
-        fileDesc.open(QIODevice::WriteOnly);
+        filenameCmt = QString("%1.html").arg(getKey().item);
+        QFile fileCmt(dir.absoluteFilePath(filenameCmt));
+        fileCmt.open(QIODevice::WriteOnly);
 
-        QTextStream stream(&fileDesc);
-        stream << bom << description;
+        QTextStream stream(&fileCmt);
+        stream << bom << comment;
 
-        fileDesc.close();
+        fileCmt.close();
     }
 
     QStringList list;
@@ -548,7 +551,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     list << QString("%1").arg(wpt.ele == NOINT ? 0 : wpt.ele);
 
     out << list.join(" ") << " ";
-    out << comment << endl;
+    out << description << endl;
 
     list.clear();
     list << iconQlGt2TwoNav(getIconName());
@@ -566,9 +569,9 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     out << list.join(",");
     out << endl;
 
-    if(!filenameDesc.isEmpty())
+    if(!filenameCmt.isEmpty())
     {
-        out << "a " << ".\\" << filenameDesc << endl;
+        out << "a " << ".\\" << filenameCmt << endl;
     }
 
     foreach(const image_t &img, images)
@@ -685,7 +688,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             if(values.size() > 7)
             {
                 QStringList list = values.mid(8);
-                wpt.comment = list.join(" ");
+                wpt.description = list.join(" ");
             }
 
             break;
@@ -725,14 +728,14 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             if(!wpt.key.isEmpty())
             {
-                QString filenameDesc = QString("%1.html").arg(wpt.key);
-                if(QFile::exists(dir.absoluteFilePath(filenameDesc)))
+                QString filenameCmt = QString("%1.html").arg(wpt.key);
+                if(QFile::exists(dir.absoluteFilePath(filenameCmt)))
                 {
-                    QFile fileDesc(dir.absoluteFilePath(filenameDesc));
-                    if(fileDesc.open(QIODevice::ReadOnly))
+                    QFile fileCmt(dir.absoluteFilePath(filenameCmt));
+                    if(fileCmt.open(QIODevice::ReadOnly))
                     {
-                        wpt.description = QTextStream(&fileDesc).readAll();
-                        fileDesc.close();
+                        wpt.comment = QTextStream(&fileCmt).readAll();
+                        fileCmt.close();
                     }
                 }
             }

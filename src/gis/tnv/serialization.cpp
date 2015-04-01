@@ -531,7 +531,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     QString comment = getComment();
     if(!comment.isEmpty())
     {
-        filenameCmt = QString("%1.html").arg(getKey().item);
+        filenameCmt = QString("QMS_CMT%1.html").arg(getKey().item);
         QFile fileCmt(dir.absoluteFilePath(filenameCmt));
         fileCmt.open(QIODevice::WriteOnly);
 
@@ -728,7 +728,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             if(!wpt.key.isEmpty())
             {
-                QString filenameCmt = QString("%1.html").arg(wpt.key);
+                QString filenameCmt = QString("QMS_CMT%1.html").arg(wpt.key);
                 if(QFile::exists(dir.absoluteFilePath(filenameCmt)))
                 {
                     QFile fileCmt(dir.absoluteFilePath(filenameCmt));

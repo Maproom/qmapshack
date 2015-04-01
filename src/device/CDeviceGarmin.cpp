@@ -140,6 +140,11 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
     QDir dirGpx = dir.absoluteFilePath(pathGpx);
     QString filename = dirGpx.absoluteFilePath(name + ".gpx");
 
+    if(testForExternalProject(filename))
+    {
+        return;
+    }
+
     CGpxProject * gpx = new CGpxProject(filename, project, this);
     if(!gpx->isValid())
     {

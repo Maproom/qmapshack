@@ -79,6 +79,16 @@ public:
 
 protected:
     virtual void insertCopyOfProject(IGisProject * project) = 0;
+    /**
+       @brief Test if a project's filename/path is already used
+
+       This can happen if there is already a project with the same name
+       but different or no key.
+
+       @param filename
+       @return If the current operation should be aborted return true.
+     */
+    bool testForExternalProject(const QString& filename);
 
     QDir dir;
     QString key;

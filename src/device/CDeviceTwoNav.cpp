@@ -119,6 +119,12 @@ void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
     QDir dirData = dir.absoluteFilePath(pathData);
     QString filename = dirData.absoluteFilePath(name);
 
+    if(testForExternalProject(filename))
+    {
+        return;
+    }
+
+
     CTwoNavProject * proj = new CTwoNavProject(filename, project, this);
     if(!proj->isValid())
     {

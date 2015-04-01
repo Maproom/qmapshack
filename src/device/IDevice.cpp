@@ -191,6 +191,45 @@ void IDevice::updateProject(IGisProject * project)
     insertCopyOfProject(project);
 }
 
+bool IDevice::testForExternalProject(const QString& filename)
+{
+    if(QDir(filename).exists() || QFile::exists(filename))
+    {
+        QString msg = QObject::tr("There is another project with the same name. If you press 'ok' it will be removed and replaced.");
+        int res = QMessageBox::warning(&CMainWindow::self(), getName(), msg, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        if(res != QMessageBox::Ok)
+        {
+            return true;
+        }
+
+        if(QDir(filename).exists())
+        {
+            QDir(filename).removeRecursively();
+        }
+        else if(QFile::exists(filename))
+        {
+            QFile(filename).remove();
+        }
+
+        QFileInfo fi(filename);
+
+        const int N = childCount();
+        for(int n = 0; n < N; n++)
+        {
+            QTreeWidgetItem * item = child(n);
+            if(item->text(CGisListWks::eColumnName) == fi.fileName())
+            {
+                delete item;
+                break;
+            }
+        }
+
+    }
+
+
+    return false;
+}
+
 void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
     const int N = childCount();

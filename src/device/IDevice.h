@@ -34,6 +34,7 @@ public:
 
     static void mount(const QString& path);
     static void umount(const QString &path);
+    static int count(){return cnt;}
 
     void mount()
     {
@@ -89,6 +90,8 @@ protected:
        @return If the current operation should be aborted return true.
      */
     bool testForExternalProject(const QString& filename);
+
+    static int cnt;
 
     QDir dir;
     QString key;

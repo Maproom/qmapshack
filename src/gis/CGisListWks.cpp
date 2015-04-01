@@ -99,7 +99,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProjectDev->addAction(actionEditPrj);
     menuProjectDev->addAction(actionSaveAs);
     menuProjectDev->addAction(actionSave);
-    actionSyncWksDev= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
+    actionSyncDevWks= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
     actionDelProj   = menuProjectDev->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
 
     menuProjectTrash= new QMenu(this);
@@ -811,6 +811,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             }
             else
             {
+                actionSyncWksDev->setEnabled(IDevice::count());
                 menuProjectWks->exec(p);
             }
             return;
@@ -842,6 +843,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 }
                 else
                 {
+                    actionSyncWksDev->setEnabled(IDevice::count());
                     menuProjectWks->exec(p);
                 }
             }
@@ -1215,20 +1217,22 @@ void CGisListWks::slotSyncWksDev()
     }
 
     QSet<QString> keys;
-    CSelDevices dlg(project, this);
-    if(dlg.exec() != QDialog::Accepted)
+    if(IDevice::count() > 1)
     {
-        return;
+        CSelDevices dlg(project, this);
+        if(dlg.exec() != QDialog::Accepted)
+        {
+            return;
+        }
+        dlg.getSlectedDevices(keys);
     }
-    dlg.getSlectedDevices(keys);
-
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
-        if(device == 0 || !keys.contains(device->getKey()))
+        if(device == 0 || (!keys.isEmpty() && !keys.contains(device->getKey())))
         {
             continue;
         }

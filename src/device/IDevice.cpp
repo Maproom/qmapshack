@@ -25,16 +25,20 @@
 #include <QtDBus>
 #endif
 
+int IDevice::cnt = 0;
+
 IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
     : QTreeWidgetItem(parent)
     , dir(path)
     , key(key)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Device.png"));
+    cnt++;
 }
 
 IDevice::~IDevice()
 {
+    cnt--;
 }
 
 void IDevice::mount(const QString& path)

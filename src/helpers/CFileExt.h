@@ -20,27 +20,33 @@
 #define CFILEEXT_H
 
 #include <QFile>
+#include <QtCore>
 
 class CFileExt : public QFile
 {
 public:
     CFileExt(const QString &filename)
         : QFile(filename)
-        , mapped(NULL)
     {
+        cnt++;
+    }
+
+    ~CFileExt()
+    {
+        cnt--;
     }
 
     // data access function
-    const char *data(qint64 offset)
+    const char *data(qint64 offset, qint64 s)
     {
-        if(!mapped)
-        {
-            mapped = reinterpret_cast<const char*>(map(0, size()));
-        }
-        return mapped + offset;
+        uchar * p = map(offset,s);
+        return (const char *)p;
     }
+
 private:
-    const char *mapped;
+
+    static int cnt;
+
 };
 
 

@@ -87,7 +87,7 @@ void IGarminStrTbl::readFile(CFileExt &file, quint32 offset, quint32 size, QByte
         return;
     }
 
-    data = QByteArray::fromRawData(file.data(offset), size);
+    data = QByteArray::fromRawData(file.data(offset,size), size);
     // wenn mask == 0 ist kein xor noetig
     if(mask == 0)
     {

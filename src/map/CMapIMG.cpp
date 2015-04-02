@@ -39,6 +39,8 @@
 
 #define STREETNAME_THRESHOLD 5.0
 
+int CFileExt::cnt = 0;
+
 static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewport)
 {
     qreal north =  -90.0 * DEG_TO_RAD;
@@ -445,7 +447,7 @@ void CMapIMG::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray&
         throw exce_t(eErrOpen, tr("Failed to read: ") + filename);
     }
 
-    data = QByteArray::fromRawData(file.data(offset), size);
+    data = QByteArray::fromRawData(file.data(offset, size), size);
     // wenn mask == 0 ist kein xor noetig
     if(mask == 0)
     {
@@ -488,7 +490,7 @@ void CMapIMG::readBasics()
         throw exce_t(eErrOpen, tr("Failed to open: ") + filename);
     }
 
-    mask = (quint8)*file.data(0);
+    mask = (quint8)*file.data(0,1);
 
     mask32   = mask;
     mask32 <<= 8;
@@ -690,7 +692,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     qDebug() << "TRE2 size          :" << dec << gar_load(uint32_t, pTreHdr->tre2_size);
 #endif                       // DEBUG_SHOW_TRE_DATA
 
-    copyrights << QString(file.data(subfile.parts["TRE"].offset + gar_load(uint16_t, pTreHdr->length)));
+    copyrights << QString(file.data(subfile.parts["TRE"].offset + gar_load(uint16_t, pTreHdr->length),0x7FFF));
 
     // read map boundaries from header
     qint32 i32;

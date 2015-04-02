@@ -1227,6 +1227,7 @@ void CGisListWks::slotSyncWksDev()
         dlg.getSlectedDevices(keys);
     }
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
@@ -1250,6 +1251,7 @@ void CGisListWks::slotSyncWksDev()
         canvas->reportStatus("device", "");
     }
     emit sigChanged();
+    QApplication::restoreOverrideCursor();
 }
 
 void CGisListWks::slotSyncDevWks()

@@ -398,6 +398,22 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
                         list << "0";
                         out << "a " << list.join(",") << endl;
                     }
+
+                    QString comment = wpt->getComment();
+                    if(!IGisItem::removeHtml(comment).isEmpty())
+                    {
+                        QString filenameCmt = QString("QMS_CMT%1.html").arg(wpt->getKey().item);
+                        QFile fileCmt(dir.absoluteFilePath(filenameCmt));
+                        fileCmt.open(QIODevice::WriteOnly);
+
+                        QTextStream stream(&fileCmt);
+                        stream << bom << comment;
+
+                        fileCmt.close();
+
+                        out << "a .\\" << filenameCmt << ",0" << endl;
+                    }
+
                 }
             }
         }
@@ -527,20 +543,6 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     QString description = getDescription();
     description = removeHtml(description);
 
-    QString filenameCmt;
-    QString comment = getComment();
-    if(!comment.isEmpty())
-    {
-        filenameCmt = QString("QMS_CMT%1.html").arg(getKey().item);
-        QFile fileCmt(dir.absoluteFilePath(filenameCmt));
-        fileCmt.open(QIODevice::WriteOnly);
-
-        QTextStream stream(&fileCmt);
-        stream << bom << comment;
-
-        fileCmt.close();
-    }
-
     QStringList list;
     list << "W";
     list << name;
@@ -569,10 +571,23 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     out << list.join(",");
     out << endl;
 
-    if(!filenameCmt.isEmpty())
+
+
+    QString comment = getComment();
+    if(!IGisItem::removeHtml(comment).isEmpty())
     {
-        out << "a " << ".\\" << filenameCmt << endl;
+        QString filenameCmt = QString("QMS_CMT%1.html").arg(getKey().item);
+        QFile fileCmt(dir.absoluteFilePath(filenameCmt));
+        fileCmt.open(QIODevice::WriteOnly);
+
+        QTextStream stream(&fileCmt);
+        stream << bom << comment;
+
+        fileCmt.close();
+
+        out << "a .\\" << filenameCmt << ",0" << endl;
     }
+
 
     foreach(const image_t &img, images)
     {
@@ -591,7 +606,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
 
         fn = makeUniqueName(fn, dir);
         img.pixmap.save(dir.absoluteFilePath(fn));
-        out << "a " << ".\\" << fn << endl;
+        out << "a .\\" << fn << endl;
     }
 
     if(isGeocache())

@@ -103,7 +103,7 @@ private:
     QAction  * actionSaveAs;
     QAction  * actionEditPrj;
     QAction  * actionCloseProj;
-    QAction  * actionSyncWksDev;
+    QAction  * actionSyncWksDev;    
 
 
     QMenu * menuProjectDev;

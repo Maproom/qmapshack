@@ -140,7 +140,7 @@ int main(int argc, char ** argv)
     dirList << QCoreApplication::applicationDirPath().replace(QRegExp("bin$"), "share/qmapshack/translations");
 //    dirList << "./src";
 
-    QTranslator *qlandkartegtTranslator = new QTranslator(0);
+    QTranslator *qlandkartegtTranslator = new QTranslator(&a);
     foreach(QString dir, dirList)
     {
         QString transName = QLatin1String("qmapshack_") + locale;

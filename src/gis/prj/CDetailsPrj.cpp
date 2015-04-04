@@ -133,7 +133,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     int cnt, w = doc.textWidth();
     int nItems = 0;
 
-    QFontMetrics fm(QFont(font().family(),10));
+    QFontMetrics fm(QFont(font().family(),12));
     int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE *  fm.width("X")));
     if(pointSize == 0)
     {
@@ -679,7 +679,7 @@ void CDetailsPrj::slotPrint()
 {
     QPrinter printer;
 
-    printer.setResolution(150);
+    printer.setResolution(200);
     printer.setPageSize(QPrinter::A4);
     QPrintDialog dialog(&printer, this);
     dialog.setWindowTitle(tr("Print Diary"));

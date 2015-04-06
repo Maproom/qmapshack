@@ -34,7 +34,10 @@ public:
 
     static void mount(const QString& path);
     static void umount(const QString &path);
-    static int count(){return cnt;}
+    static int count()
+    {
+        return cnt;
+    }
 
     void mount()
     {

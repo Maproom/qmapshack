@@ -717,14 +717,14 @@ void CCanvas::saveSizeTrackProfile()
     if(plotTrackProfile->windowFlags() & Qt::Window)
     {
         SETTINGS;
-        cfg.beginGroup("Canvas");        
+        cfg.beginGroup("Canvas");
         cfg.beginGroup("Profile");
         cfg.beginGroup(objectName());
 
         cfg.setValue("geometry", plotTrackProfile->saveGeometry());
 
         cfg.endGroup(); // objectName()
-        cfg.endGroup(); // Profile        
+        cfg.endGroup(); // Profile
         cfg.endGroup(); // Canvas
     }
 }
@@ -754,7 +754,7 @@ void CCanvas::setSizeTrackProfile()
         }
 
         cfg.endGroup(); // objectName()
-        cfg.endGroup(); // Profile        
+        cfg.endGroup(); // Profile
         cfg.endGroup(); // Canvas
     }
     else

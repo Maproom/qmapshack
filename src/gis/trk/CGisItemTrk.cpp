@@ -118,7 +118,7 @@ IGisItem::key_t CGisItemTrk::keyUserFocus;
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , drawMode(eDrawNormal)
+    , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -163,7 +163,7 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
 CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , drawMode(eDrawNormal)
+    , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -188,7 +188,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
 CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , drawMode(eDrawNormal)
+    , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -206,7 +206,7 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , drawMode(eDrawNormal)
+    , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -222,7 +222,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
 CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , drawMode(eDrawNormal)
+    , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -241,7 +241,7 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
 CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , drawMode(eDrawNormal)
+    , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -252,7 +252,7 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
 CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , drawMode(eDrawNormal)
+    , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
 {
@@ -1305,7 +1305,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
-    if(drawMode == eDrawNormal)
+    if(mode == eModeNormal)
     {
         // in normal mode the trackline without points marked as deleted is drawn
         foreach (const trkseg_t &seg, trk.segs)
@@ -1352,7 +1352,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     gis->convertRad2Px(lineFull);
 
     // draw the full line first
-    if(drawMode == eDrawRange)
+    if(mode == eModeRange)
     {
         QList<QPolygonF> lines;
         splitLineToViewport(lineFull, extViewport, lines);
@@ -1411,7 +1411,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         return;
     }
 
-    if(hasUserFocus() && mouseMoveFocus && (drawMode != eDrawRange))
+    if(hasUserFocus() && mouseMoveFocus && (mode != eModeRange))
     {
         // derive anchor
         QPointF anchor(mouseMoveFocus->lon, mouseMoveFocus->lat);
@@ -1542,9 +1542,9 @@ void CGisItemTrk::drawRange(QPainter& p)
 {
     if((mouseClickFocus != 0) && (mouseMoveFocus != 0))
     {
-        const QPolygonF& line = (drawMode == eDrawRange) ? lineFull : lineSimple;
-        int idx1 = (drawMode == eDrawRange) ? mouseClickFocus->idxTotal : mouseClickFocus->idxVisible;
-        int idx2 = (drawMode == eDrawRange) ? mouseMoveFocus->idxTotal : mouseMoveFocus->idxVisible;
+        const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
+        int idx1 = (mode == eModeRange) ? mouseClickFocus->idxTotal : mouseClickFocus->idxVisible;
+        int idx2 = (mode == eModeRange) ? mouseMoveFocus->idxTotal : mouseMoveFocus->idxVisible;
 
         if(idx1 > idx2)
         {
@@ -1640,7 +1640,7 @@ void CGisItemTrk::setIcon(const QString& c)
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
-void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot *initiator)
+void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, IPlot *initiator)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1673,10 +1673,10 @@ void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot *i
         }
     }
 
-    publishMouseFocus(newPointOfFocus, mode, initiator);
+    publishMouseFocus(newPointOfFocus, fmode, initiator);
 }
 
-void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * initiator)
+void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, IPlot * initiator)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1709,16 +1709,16 @@ void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * in
         }
     }
 
-    publishMouseFocus(newPointOfFocus, mode, initiator);
+    publishMouseFocus(newPointOfFocus, fmode, initiator);
 }
 
-QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
+QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode)
 {
     const trkpt_t * newPointOfFocus = 0;
     quint32 idx = 0;
-    const QPolygonF& line = (drawMode == eDrawRange) ? lineFull : lineSimple;
+    const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
 
-    if((hasUserFocus() || (drawMode == eDrawRange)) && (pt != NOPOINT))
+    if((hasUserFocus() || (mode == eModeRange)) && (pt != NOPOINT))
     {
         /*
             Iterate over the polyline used to draw the track as it contains screen
@@ -1744,16 +1744,16 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e mode)
 
         if(d < MIN_DIST_FOCUS)
         {
-            newPointOfFocus = (drawMode == eDrawRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
+            newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
         }
     }
-    publishMouseFocus(newPointOfFocus, mode, 0);
+    publishMouseFocus(newPointOfFocus, fmode, 0);
 
     return newPointOfFocus ? line[idx] : NOPOINTF;
 }
 
 
-void CGisItemTrk::setMouseFocusByIndex(qint32 idx, focusmode_e mode)
+void CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1764,7 +1764,7 @@ void CGisItemTrk::setMouseFocusByIndex(qint32 idx, focusmode_e mode)
             if(pt.idxTotal == idx)
             {
                 newPointOfFocus = &pt;
-                publishMouseFocus(newPointOfFocus, mode, 0);
+                publishMouseFocus(newPointOfFocus, fmode, 0);
                 return;
             }
         }
@@ -1839,9 +1839,9 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 }
 
 
-void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot * initiator)
+void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode,  IPlot * initiator)
 {
-    switch(mode)
+    switch(fmode)
     {
     case eFocusMouseMove:
         if(pt != mouseMoveFocus)
@@ -1862,7 +1862,7 @@ void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e mode,  IPlot
     case eFocusMouseClick:
         if(pt != mouseClickFocus)
         {
-            mouseClickFocus = mouseClickFocus == 0 ? pt : 0;
+            mouseClickFocus =  pt;
             if(!dlgDetails.isNull())
             {
                 dlgDetails->setMouseClickFocus(mouseClickFocus);

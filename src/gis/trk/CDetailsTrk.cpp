@@ -359,7 +359,7 @@ void CDetailsTrk::slotItemSelectionChanged()
     if(item != 0)
     {
         quint32 idx = item->text(eColNum).toUInt();
-        trk.setMouseFocusByIndex(idx, CGisItemTrk::eFocusMouseMove);
+        trk.setMouseFocusByTotalIndex(idx, CGisItemTrk::eFocusMouseMove);
     }
 }
 

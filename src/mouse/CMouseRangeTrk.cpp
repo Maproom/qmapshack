@@ -39,7 +39,7 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick);
 
     // switch to full mode to show deleted (hidden) track points, too
-    trk.setDrawMode(CGisItemTrk::eDrawRange);
+    trk.setMode(CGisItemTrk::eModeRange);
 
     canvas->reportStatus(key.item, tr("<b>Select Range</b><br/>Select first track point. And then a second one.<br/>"));
     /*
@@ -56,7 +56,7 @@ CMouseRangeTrk::~CMouseRangeTrk()
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk)
     {
-        trk->setDrawMode(CGisItemTrk::eDrawNormal);
+        trk->setMode(CGisItemTrk::eModeRange);
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 

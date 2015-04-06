@@ -46,7 +46,6 @@ public:
 private:
 
     static int cnt;
-
 };
 
 

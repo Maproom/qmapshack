@@ -413,7 +413,6 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
 
                         out << "a .\\" << filenameCmt << ",0" << endl;
                     }
-
                 }
             }
         }

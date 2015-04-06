@@ -227,7 +227,6 @@ bool IDevice::testForExternalProject(const QString& filename)
                 break;
             }
         }
-
     }
 
 

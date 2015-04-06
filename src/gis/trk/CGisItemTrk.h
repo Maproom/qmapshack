@@ -50,10 +50,10 @@ public:
         ,eFocusMouseClick
     };
 
-    enum drawmode_e
+    enum mode_e
     {
-        eDrawNormal
-        , eDrawRange
+        eModeNormal
+        , eModeRange
     };
 
     /**
@@ -189,9 +189,9 @@ public:
 
     void setName(const QString& str);
     void setColor(int idx);
-    void setDrawMode(drawmode_e mode)
+    void setMode(mode_e m)
     {
-        drawMode = mode;
+        mode = m;
     }
     void setComment(const QString& str);
     void setDescription(const QString& str);
@@ -321,7 +321,7 @@ public:
        @param dist      the distance in [m]
        @param initiator a pointer to an initiating IPlot object, or 0
      */
-    void setMouseFocusByDistance(qreal dist, focusmode_e mode, IPlot * initiator);
+    void setMouseFocusByDistance(qreal dist, focusmode_e fmode, IPlot * initiator);
 
     /**
        @brief Use point with time from start matching best the given time delta
@@ -329,20 +329,20 @@ public:
        @param time      a time delta in [s] relative to the start time
        @param initiator a pointer to an initiating IPlot object, or 0
      */
-    void setMouseFocusByTime(quint32 time, focusmode_e mode, IPlot * initiator);
+    void setMouseFocusByTime(quint32 time, focusmode_e fmode, IPlot * initiator);
 
     /**
        @brief Use the point that is closest to the given point on the screen.
 
        @param pt        a point on the screen in pixel.
      */
-    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e mode);
+    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode);
 
     /**
        @brief Use point with given index counter
        @param idx
      */
-    void setMouseFocusByIndex(qint32 idx, focusmode_e mode);
+    void setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode);
 
     /**
        @brief Reduce the amount of visible track points with the help of the Douglas Peuker algorithm
@@ -476,7 +476,7 @@ private:
        @param mode      The reason for the focus
        @param initiator A pointer to an IPlot object that has set the point of focus. Can be 0.
      */
-    void publishMouseFocus(const trkpt_t * pt, focusmode_e mode, IPlot *initiator);
+    void publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, IPlot *initiator);
     /**
        @brief Replace all trackpoints by the coordinates stored in the polyline
 
@@ -601,7 +601,7 @@ private:
 
     QPen penForeground;
 
-    drawmode_e drawMode;
+    mode_e mode;
 
     qint32 cntTotalPoints;
     qint32 cntVisiblePoints;

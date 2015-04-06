@@ -35,7 +35,7 @@ public:
     CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseRangeTrk();
 
-    void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
+    void draw(QPainter& p, bool, const QRect &);
     void mousePressEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent *e);

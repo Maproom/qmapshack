@@ -121,6 +121,9 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
     , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
+    , mouseRange1(0)
+    , mouseRange2(0)
+    , rangeState(eRangeStateIdle)
 {
     flags = eFlagCreatedInQms;
 
@@ -166,6 +169,9 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
+    , mouseRange1(0)
+    , mouseRange2(0)
+    , rangeState(eRangeStateIdle)
 {
     *this = parentTrk;
     key.project = project->getKey();
@@ -191,6 +197,9 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
     , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
+    , mouseRange1(0)
+    , mouseRange2(0)
+    , rangeState(eRangeStateIdle)
 {
     trk.name = name;
     readTrackDataFromPolyLine(l);
@@ -209,6 +218,9 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
+    , mouseRange1(0)
+    , mouseRange2(0)
+    , rangeState(eRangeStateIdle)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -225,6 +237,9 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
     , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
+    , mouseRange1(0)
+    , mouseRange2(0)
+    , rangeState(eRangeStateIdle)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -244,6 +259,9 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
+    , mouseRange1(0)
+    , mouseRange2(0)
+    , rangeState(eRangeStateIdle)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -255,6 +273,9 @@ CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
     , mode(eModeNormal)
     , mouseMoveFocus(0)
     , mouseClickFocus(0)
+    , mouseRange1(0)
+    , mouseRange2(0)
+    , rangeState(eRangeStateIdle)
 {
     loadFromDb(id, db);
 }
@@ -292,6 +313,10 @@ void CGisItemTrk::setDataFromPolyline(const QPolygonF &l)
      */
     mouseClickFocus = 0;
     mouseMoveFocus  = 0;
+    mouseRange1     = 0;
+    mouseRange2     = 0;
+    rangeState      = eRangeStateIdle;
+
     delete dlgDetails;
 
     readTrackDataFromPolyLine(l);
@@ -426,23 +451,23 @@ QString CGisItemTrk::getInfoRange()
 {
     qreal tmp, d, slope1, slope2;
     QString str, val, unit;
-    if(mouseClickFocus == 0 || mouseMoveFocus == 0)
+    if(mouseRange1 == 0 || mouseRange2 == 0)
     {
         return str;
     }
 
-    int idx1 = mouseClickFocus->idxTotal;
-    int idx2 = mouseMoveFocus->idxTotal;
+    int idx1 = mouseRange1->idxTotal;
+    int idx2 = mouseRange2->idxTotal;
     const trkpt_t * pt1, * pt2;
     if(idx1 < idx2)
     {
-        pt1 = mouseClickFocus;
-        pt2 = mouseMoveFocus;
+        pt1 = mouseRange1;
+        pt2 = mouseRange2;
     }
     else
     {
-        pt1 = mouseMoveFocus;
-        pt2 = mouseClickFocus;
+        pt1 = mouseRange2;
+        pt2 = mouseRange1;
     }
 
     while(pt1->flags & trkpt_t::eHidden)
@@ -595,15 +620,15 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 
 void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2)
 {
-    if((mouseClickFocus == 0) || (mouseMoveFocus == 0))
+    if((mouseRange1 == 0) || (mouseRange2 == 0))
     {
         idx1 = NOIDX;
         idx2 = NOIDX;
         return;
     }
 
-    idx1 = mouseClickFocus->idxVisible;
-    idx2 = mouseMoveFocus->idxVisible;
+    idx1 = mouseRange1->idxVisible;
+    idx2 = mouseRange2->idxVisible;
 
     if(idx1 > idx2)
     {
@@ -1163,14 +1188,14 @@ void CGisItemTrk::combine()
 
 void CGisItemTrk::hideSelectedPoints()
 {
-    if((mouseClickFocus == 0) && (mouseMoveFocus == 0))
+    if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
     }
 
     // read start/stop indices
-    qint32 idx1 = mouseClickFocus->idxTotal;
-    qint32 idx2 = mouseMoveFocus->idxTotal;
+    qint32 idx1 = mouseRange1->idxTotal;
+    qint32 idx2 = mouseRange2->idxTotal;
 
     if(idx1 > idx2)
     {
@@ -1202,21 +1227,22 @@ void CGisItemTrk::hideSelectedPoints()
             }
         }
     }
-    mouseClickFocus = 0;
-    mouseMoveFocus  = 0;
+    mouseRange1 = 0;
+    mouseRange2 = 0;
+    rangeState  = eRangeStateIdle;
     deriveSecondaryData();
     changed(QObject::tr("Hide points."), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::showSelectedPoints()
 {
-    if((mouseClickFocus == 0) && (mouseMoveFocus == 0))
+    if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
     }
 
-    qint32 idx1 = mouseClickFocus->idxTotal;
-    qint32 idx2 = mouseMoveFocus->idxTotal;
+    qint32 idx1 = mouseRange1->idxTotal;
+    qint32 idx2 = mouseRange2->idxTotal;
 
     if(idx1 > idx2)
     {
@@ -1247,21 +1273,22 @@ void CGisItemTrk::showSelectedPoints()
             }
         }
     }
-    mouseClickFocus = 0;
-    mouseMoveFocus  = 0;
+    mouseRange1 = 0;
+    mouseRange2 = 0;
+    rangeState  = eRangeStateIdle;
     deriveSecondaryData();
     changed(QObject::tr("Show points."), "://icons/48x48/PointShow.png");
 }
 
 void CGisItemTrk::copySelectedPoints()
 {
-    if((mouseClickFocus == 0) && (mouseMoveFocus == 0))
+    if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
     }
 
-    quint32 idx1 = mouseClickFocus->idxTotal;
-    quint32 idx2 = mouseMoveFocus->idxTotal;
+    quint32 idx1 = mouseRange1->idxTotal;
+    quint32 idx2 = mouseRange2->idxTotal;
 
     if(idx1 > idx2)
     {
@@ -1540,11 +1567,11 @@ void CGisItemTrk::drawHighlight(QPainter& p)
 
 void CGisItemTrk::drawRange(QPainter& p)
 {
-    if((mouseClickFocus != 0) && (mouseMoveFocus != 0))
+    if((mouseRange1 != 0) && (mouseRange2 != 0))
     {
         const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
-        int idx1 = (mode == eModeRange) ? mouseClickFocus->idxTotal : mouseClickFocus->idxVisible;
-        int idx2 = (mode == eModeRange) ? mouseMoveFocus->idxTotal : mouseMoveFocus->idxVisible;
+        int idx1 = (mode == eModeRange) ? mouseRange1->idxTotal : mouseRange1->idxVisible;
+        int idx2 = (mode == eModeRange) ? mouseRange2->idxTotal : mouseRange2->idxVisible;
 
         if(idx1 > idx2)
         {
@@ -1560,6 +1587,21 @@ void CGisItemTrk::drawRange(QPainter& p)
             p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
         }
     }
+}
+
+void CGisItemTrk::setMode(mode_e m)
+{
+    mode        = m;
+    // always reset the range statemachine
+    rangeState  = eRangeStateIdle;
+    mouseRange1 = 0;
+    mouseRange2 = 0;
+
+    foreach(IPlot * plot, registeredPlots)
+    {
+        plot->setMouseFocus(mouseRange1, mouseRange2);
+    }
+
 }
 
 void CGisItemTrk::setName(const QString& str)
@@ -1841,35 +1883,87 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 
 void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode,  IPlot * initiator)
 {
-    switch(fmode)
+    if(mode == eModeRange)
     {
-    case eFocusMouseMove:
-        if(pt != mouseMoveFocus)
+        switch(rangeState)
         {
-            mouseMoveFocus = pt;
+        case eRangeStateIdle:
+        {
             foreach(IPlot * plot, registeredPlots)
             {
-                plot->setMouseFocus(mouseClickFocus, mouseMoveFocus);
+                plot->setMouseFocus(pt);
             }
 
-            if(!dlgDetails.isNull())
+            if((fmode == eFocusMouseClick) && (pt != 0))
             {
-                dlgDetails->setMouseFocus(mouseMoveFocus);
+                mouseRange1 = pt;
+                rangeState  = eRangeState1st;
             }
-        }
-        break;
 
-    case eFocusMouseClick:
-        if(pt != mouseClickFocus)
+            break;
+        }
+
+        case eRangeState1st:
         {
-            mouseClickFocus =  pt;
-            if(!dlgDetails.isNull())
+            mouseRange2 = pt;
+            if((fmode == eFocusMouseClick) && (pt != 0))
             {
-                dlgDetails->setMouseClickFocus(mouseClickFocus);
-            }
+                rangeState  = eRangeState2nd;
+            }           
+            break;
         }
 
-    default:;
+        case eRangeState2nd:
+        {
+            if(fmode == eFocusMouseClick)
+            {
+                mouseRange1 = 0;
+                mouseRange2 = 0;
+                rangeState  = eRangeStateIdle;
+            }
+            break;
+        }
+        }
+
+        foreach(IPlot * plot, registeredPlots)
+        {
+            plot->setMouseFocus(mouseRange1, mouseRange2);
+        }
+
+    }
+    else
+    {
+        switch(fmode)
+        {
+        case eFocusMouseMove:
+            if(pt != mouseMoveFocus)
+            {
+                mouseMoveFocus = pt;
+
+                foreach(IPlot * plot, registeredPlots)
+                {
+                    plot->setMouseFocus(mouseMoveFocus);
+                }
+
+                if(!dlgDetails.isNull())
+                {
+                    dlgDetails->setMouseFocus(mouseMoveFocus);
+                }
+            }
+            break;
+
+        case eFocusMouseClick:
+            if(pt != mouseClickFocus)
+            {
+                mouseClickFocus =  pt;
+                if(!dlgDetails.isNull())
+                {
+                    dlgDetails->setMouseClickFocus(mouseClickFocus);
+                }
+            }
+
+        default:;
+        }
     }
 }
 

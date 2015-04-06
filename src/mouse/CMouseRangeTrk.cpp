@@ -56,48 +56,29 @@ CMouseRangeTrk::~CMouseRangeTrk()
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk)
     {
-        trk->setMode(CGisItemTrk::eModeRange);
+        trk->setMode(CGisItemTrk::eModeNormal);
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 
     delete scrOptRange;
 }
 
-void CMouseRangeTrk::draw(QPainter& p,  bool needsRedraw, const QRect &rect)
+void CMouseRangeTrk::draw(QPainter& p,  bool , const QRect &)
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk)
     {
-        switch(state)
+        trk->drawRange(p);
+        if(anchor != NOPOINTF)
         {
-        case eStateIdle:
-        case eStateMoveMap:
-            if(anchor != NOPOINTF)
-            {
-                p.setPen(Qt::darkBlue);
-                p.setBrush(QColor(255,255,255,200));
-                p.drawEllipse(anchor, 6, 6);
+            p.setPen(Qt::darkBlue);
+            p.setBrush(QColor(255,255,255,200));
+            p.drawEllipse(anchor, 6, 6);
 
-                QPixmap bullet("://icons/8x8/bullet_magenta.png");
-                p.drawPixmap(anchor.x() - 3, anchor.y() - 3, bullet);
-            }
-            break;
-
-        case eStateSelectRange:
-        case eStateRangeSelected:
-            trk->drawRange(p);
-            if(anchor != NOPOINTF)
-            {
-                p.setPen(Qt::darkBlue);
-                p.setBrush(QColor(255,255,255,200));
-                p.drawEllipse(anchor, 6, 6);
-
-                QPixmap bullet("://icons/8x8/bullet_magenta.png");
-                p.drawPixmap(anchor.x() - 3, anchor.y() - 3, bullet);
-            }
-
-            break;
+            QPixmap bullet("://icons/8x8/bullet_magenta.png");
+            p.drawPixmap(anchor.x() - 3, anchor.y() - 3, bullet);
         }
+
     }
 
     if(!scrOptRange.isNull())
@@ -140,7 +121,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
             if(trk != 0 && anchor != NOPOINTF)
             {
-                QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove);
+                QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick);
                 scrOptRange = new CScrOptRangeTrk(pt, trk, canvas);
                 connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
                 connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));

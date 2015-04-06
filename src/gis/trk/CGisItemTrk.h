@@ -189,10 +189,7 @@ public:
 
     void setName(const QString& str);
     void setColor(int idx);
-    void setMode(mode_e m)
-    {
-        mode = m;
-    }
+    void setMode(mode_e m);
     void setComment(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
@@ -647,9 +644,21 @@ private:
 
     const trkpt_t * mouseMoveFocus;
     const trkpt_t * mouseClickFocus;
+    const trkpt_t * mouseRange1;
+    const trkpt_t * mouseRange2;
 
     QPointer<CDetailsTrk> dlgDetails;
     QPointer<CScrOptTrk>  scrOpt;
+
+    enum rangestate_e
+    {
+          eRangeStateIdle
+        , eRangeState1st
+        , eRangeState2nd
+    };
+
+    rangestate_e rangeState;
+
 };
 
 #endif //CGISITEMTRK_H

@@ -30,7 +30,8 @@ public:
 
     void setTrack(CGisItemTrk * track);
     void updateData();
-    void setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGisItemTrk::trkpt_t * ptMove);
+    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove);
+    void setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2);
 };
 
 #endif //CPLOTSPEED_H

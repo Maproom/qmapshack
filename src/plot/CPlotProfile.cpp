@@ -128,9 +128,9 @@ void CPlotProfile::updateData()
     resetZoom();
 }
 
-void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGisItemTrk::trkpt_t *ptMove)
+void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
-    if(ptMove == 0)
+    if(ptMouseMove == 0)
     {
         if(posMouse != NOPOINT)
         {
@@ -145,41 +145,47 @@ void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGi
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(ptMove->distance);
-        posMouse.ry() = top  +  data->y().val2pt(ptMove->ele);
+        posMouse.rx() = left  + data->x().val2pt(ptMouseMove->distance);
+        posMouse.ry() = top  +  data->y().val2pt(ptMouseMove->ele);
     }
+    update();
 
-    if(ptClick == 0 || ptMove == 0)
+}
+
+void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
+{
+
+    if(ptRange1 == 0 || ptRange2 == 0)
     {
         idxSel1 = idxSel2 = NOIDX;
     }
     else
     {
-        if(ptClick->idxTotal < ptMove->idxTotal)
+        if(ptRange1->idxTotal < ptRange2->idxTotal)
         {
-            while(ptClick->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
             {
-                ptClick++;
+                ptRange1++;
             }
-            while(ptMove->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
             {
-                ptMove--;
+                ptRange2--;
             }
-            idxSel1 = ptClick->idxVisible;
-            idxSel2 = ptMove->idxVisible;
+            idxSel1 = ptRange1->idxVisible;
+            idxSel2 = ptRange2->idxVisible;
         }
         else
         {
-            while(ptClick->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
             {
-                ptClick--;
+                ptRange1--;
             }
-            while(ptMove->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
             {
-                ptMove++;
+                ptRange2++;
             }
-            idxSel1 = ptMove->idxVisible;
-            idxSel2 = ptClick->idxVisible;
+            idxSel1 = ptRange2->idxVisible;
+            idxSel2 = ptRange1->idxVisible;
         }
     }
     update();

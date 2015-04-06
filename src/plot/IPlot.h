@@ -35,7 +35,8 @@ public:
     virtual ~IPlot();
 
     virtual void updateData() = 0;
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptClick, const CGisItemTrk::trkpt_t * ptMove) = 0;
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) = 0;
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2) = 0;
 
     void save(QImage& image);
     void setSolid(bool yes)

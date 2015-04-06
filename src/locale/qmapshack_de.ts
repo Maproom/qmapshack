@@ -187,17 +187,17 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="480"/>
         <source>distance: %1%2</source>
-        <translation>Entfernung: %1%2</translation>
+        <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="482"/>
         <source>ascent: %1%2</source>
-        <translation>Anstieg: %1%2</translation>
+        <translation>Anstieg: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="484"/>
         <source>descend: %1%2</source>
-        <translation>Abstieg: %1%2</translation>
+        <translation>Abstieg: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="542"/>

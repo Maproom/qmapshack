@@ -116,8 +116,8 @@ void CPlotDistance::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(ptMouseMove->distance);
-        posMouse.ry() = top  +  data->y().val2pt(ptMouseMove->speed);
+        posMouse.rx() = left  + data->x().val2pt(ptMouseMove->time.toTime_t());
+        posMouse.ry() = top  +  data->y().val2pt(ptMouseMove->distance);
     }
     update();
 }

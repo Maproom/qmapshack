@@ -1580,8 +1580,10 @@ void CGisItemTrk::drawRange(QPainter& p)
 
         QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
 
-        p.setPen(QPen(Qt::red, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::darkGreen, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(seg);
+
+        QPixmap bullet("://icons/8x8/bullet_dark_green.png");
         foreach(const QPointF &pt, seg)
         {
             p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
@@ -1682,7 +1684,7 @@ void CGisItemTrk::setIcon(const QString& c)
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
-void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, IPlot *initiator)
+void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1715,10 +1717,10 @@ void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, IPlot *
         }
     }
 
-    publishMouseFocus(newPointOfFocus, fmode, initiator);
+    publishMouseFocus(newPointOfFocus, fmode);
 }
 
-void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, IPlot * initiator)
+void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1751,7 +1753,7 @@ void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, IPlot * i
         }
     }
 
-    publishMouseFocus(newPointOfFocus, fmode, initiator);
+    publishMouseFocus(newPointOfFocus, fmode);
 }
 
 QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode)
@@ -1789,7 +1791,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode)
             newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
         }
     }
-    publishMouseFocus(newPointOfFocus, fmode, 0);
+    publishMouseFocus(newPointOfFocus, fmode);
 
     return newPointOfFocus ? line[idx] : NOPOINTF;
 }
@@ -1806,7 +1808,7 @@ void CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode)
             if(pt.idxTotal == idx)
             {
                 newPointOfFocus = &pt;
-                publishMouseFocus(newPointOfFocus, fmode, 0);
+                publishMouseFocus(newPointOfFocus, fmode);
                 return;
             }
         }
@@ -1881,89 +1883,98 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 }
 
 
-void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode,  IPlot * initiator)
+void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode)
 {
     if(mode == eModeRange)
     {
-        switch(rangeState)
-        {
-        case eRangeStateIdle:
-        {
-            foreach(IPlot * plot, registeredPlots)
-            {
-                plot->setMouseFocus(pt);
-            }
-
-            if((fmode == eFocusMouseClick) && (pt != 0))
-            {
-                mouseRange1 = pt;
-                rangeState  = eRangeState1st;
-            }
-
-            break;
-        }
-
-        case eRangeState1st:
-        {
-            mouseRange2 = pt;
-            if((fmode == eFocusMouseClick) && (pt != 0))
-            {
-                rangeState  = eRangeState2nd;
-            }           
-            break;
-        }
-
-        case eRangeState2nd:
-        {
-            if(fmode == eFocusMouseClick)
-            {
-                mouseRange1 = 0;
-                mouseRange2 = 0;
-                rangeState  = eRangeStateIdle;
-            }
-            break;
-        }
-        }
-
-        foreach(IPlot * plot, registeredPlots)
-        {
-            plot->setMouseFocus(mouseRange1, mouseRange2);
-        }
-
+        publishMouseFocusRangeMode(pt, fmode);
     }
     else
     {
-        switch(fmode)
+        publishMouseFocusNormalMode(pt, fmode);
+    }
+}
+
+void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode)
+{
+    switch(rangeState)
+    {
+    case eRangeStateIdle:
+    {
+        foreach(IPlot * plot, registeredPlots)
         {
-        case eFocusMouseMove:
-            if(pt != mouseMoveFocus)
-            {
-                mouseMoveFocus = pt;
-
-                foreach(IPlot * plot, registeredPlots)
-                {
-                    plot->setMouseFocus(mouseMoveFocus);
-                }
-
-                if(!dlgDetails.isNull())
-                {
-                    dlgDetails->setMouseFocus(mouseMoveFocus);
-                }
-            }
-            break;
-
-        case eFocusMouseClick:
-            if(pt != mouseClickFocus)
-            {
-                mouseClickFocus =  pt;
-                if(!dlgDetails.isNull())
-                {
-                    dlgDetails->setMouseClickFocus(mouseClickFocus);
-                }
-            }
-
-        default:;
+            plot->setMouseFocus(pt);
         }
+
+        if((fmode == eFocusMouseClick) && (pt != 0))
+        {
+            mouseRange1 = pt;
+            rangeState  = eRangeState1st;
+        }
+
+        break;
+    }
+
+    case eRangeState1st:
+    {
+        mouseRange2 = pt;
+        if((fmode == eFocusMouseClick) && (pt != 0))
+        {
+            rangeState  = eRangeState2nd;
+        }
+        break;
+    }
+
+    case eRangeState2nd:
+    {
+        if(fmode == eFocusMouseClick)
+        {
+            mouseRange1 = 0;
+            mouseRange2 = 0;
+            rangeState  = eRangeStateIdle;
+        }
+        break;
+    }
+    }
+
+    foreach(IPlot * plot, registeredPlots)
+    {
+        plot->setMouseFocus(mouseRange1, mouseRange2);
+    }
+}
+
+void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode)
+{
+    switch(fmode)
+    {
+    case eFocusMouseMove:
+        if(pt != mouseMoveFocus)
+        {
+            mouseMoveFocus = pt;
+
+            foreach(IPlot * plot, registeredPlots)
+            {
+                plot->setMouseFocus(mouseMoveFocus);
+            }
+
+            if(!dlgDetails.isNull())
+            {
+                dlgDetails->setMouseFocus(mouseMoveFocus);
+            }
+        }
+        break;
+
+    case eFocusMouseClick:
+        if(pt != mouseClickFocus)
+        {
+            mouseClickFocus =  pt;
+            if(!dlgDetails.isNull())
+            {
+                dlgDetails->setMouseClickFocus(mouseClickFocus);
+            }
+        }
+
+    default:;
     }
 }
 

@@ -318,7 +318,7 @@ public:
        @param dist      the distance in [m]
        @param initiator a pointer to an initiating IPlot object, or 0
      */
-    void setMouseFocusByDistance(qreal dist, focusmode_e fmode, IPlot * initiator);
+    void setMouseFocusByDistance(qreal dist, focusmode_e fmode);
 
     /**
        @brief Use point with time from start matching best the given time delta
@@ -326,7 +326,7 @@ public:
        @param time      a time delta in [s] relative to the start time
        @param initiator a pointer to an initiating IPlot object, or 0
      */
-    void setMouseFocusByTime(quint32 time, focusmode_e fmode, IPlot * initiator);
+    void setMouseFocusByTime(quint32 time, focusmode_e fmode);
 
     /**
        @brief Use the point that is closest to the given point on the screen.
@@ -473,7 +473,9 @@ private:
        @param mode      The reason for the focus
        @param initiator A pointer to an IPlot object that has set the point of focus. Can be 0.
      */
-    void publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, IPlot *initiator);
+    void publishMouseFocus(const trkpt_t * pt, focusmode_e fmode);
+    void publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode);
+    void publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode);
     /**
        @brief Replace all trackpoints by the coordinates stored in the polyline
 

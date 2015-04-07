@@ -231,7 +231,7 @@ void IPlot::leaveEvent(QEvent * e)
 
     if(trk)
     {
-        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, this);
+        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove);
     }
 
     QApplication::restoreOverrideCursor();
@@ -272,14 +272,14 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         {
             if(trk)
             {
-                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, this);
+                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove);
             }
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {
             if(trk)
             {
-                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, this);
+                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove);
             }
         }
 
@@ -313,14 +313,14 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             {
                 if(trk)
                 {
-                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, this);
+                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick);
                 }
             }
             else if(data->axisType == CPlotData::eAxisTime)
             {
                 if(trk)
                 {
-                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, this);
+                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick);
                 }
             }
 

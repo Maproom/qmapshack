@@ -114,8 +114,8 @@ void IMap::drawTile(QImage& img, QPolygonF& l, QPainter& p)
     qreal dy1   = l[0].y() - l[1].y();
     qreal dx2   = l[0].x() - l[3].x();
     qreal dy2   = l[0].y() - l[3].y();
-    qreal w    = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
-    qreal h    = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
+    qreal w     = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
+    qreal h     = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
 
     // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
     qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;

@@ -149,12 +149,10 @@ void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
         posMouse.ry() = top  +  data->y().val2pt(ptMouseMove->ele);
     }
     update();
-
 }
 
 void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
 {
-
     if(ptRange1 == 0 || ptRange2 == 0)
     {
         idxSel1 = idxSel2 = NOIDX;

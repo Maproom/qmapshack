@@ -1547,6 +1547,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         p.drawPixmap(anchor - QPointF(4,4), QPixmap(bulletColors[colorIdx]));
     }
+
+    drawRange(p);
 }
 
 void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
@@ -1591,19 +1593,32 @@ void CGisItemTrk::drawRange(QPainter& p)
     }
 }
 
-void CGisItemTrk::setMode(mode_e m)
+bool CGisItemTrk::setMode(mode_e m, const QString& owner)
 {
-    mode        = m;
+    if(!mouseFocusOwner.isEmpty() && owner != mouseFocusOwner)
+    {
+        return false;
+    }
+
+    mode            = m;
     // always reset the range statemachine
-    rangeState  = eRangeStateIdle;
-    mouseRange1 = 0;
-    mouseRange2 = 0;
+    rangeState      = eRangeStateIdle;
+    mouseRange1     = 0;
+    mouseRange2     = 0;
+    mouseFocusOwner = mode == eModeRange ? owner : "";
 
     foreach(IPlot * plot, registeredPlots)
     {
         plot->setMouseFocus(mouseRange1, mouseRange2);
     }
 
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
+    return true;
 }
 
 void CGisItemTrk::setName(const QString& str)
@@ -1684,7 +1699,7 @@ void CGisItemTrk::setIcon(const QString& c)
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
-void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode)
+bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1717,10 +1732,10 @@ void CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode)
         }
     }
 
-    publishMouseFocus(newPointOfFocus, fmode);
+    return publishMouseFocus(newPointOfFocus, fmode, owner);
 }
 
-void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode)
+bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QString &owner)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1753,10 +1768,10 @@ void CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode)
         }
     }
 
-    publishMouseFocus(newPointOfFocus, fmode);
+    return publishMouseFocus(newPointOfFocus, fmode, owner);
 }
 
-QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode)
+QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner)
 {
     const trkpt_t * newPointOfFocus = 0;
     quint32 idx = 0;
@@ -1791,13 +1806,16 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode)
             newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
         }
     }
-    publishMouseFocus(newPointOfFocus, fmode);
+    if(!publishMouseFocus(newPointOfFocus, fmode, owner))
+    {
+        newPointOfFocus = 0;
+    }
 
     return newPointOfFocus ? line[idx] : NOPOINTF;
 }
 
 
-void CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode)
+bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString &owner)
 {
     const trkpt_t * newPointOfFocus = 0;
 
@@ -1808,11 +1826,11 @@ void CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode)
             if(pt.idxTotal == idx)
             {
                 newPointOfFocus = &pt;
-                publishMouseFocus(newPointOfFocus, fmode);
-                return;
+                return publishMouseFocus(newPointOfFocus, fmode, owner);
             }
         }
     }
+    return false;
 }
 
 const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx)
@@ -1883,16 +1901,23 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 }
 
 
-void CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode)
+bool CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString& owner)
 {
     if(mode == eModeRange)
     {
+        if(mouseFocusOwner != owner)
+        {
+            return false;
+        }
+
         publishMouseFocusRangeMode(pt, fmode);
     }
     else
     {
         publishMouseFocusNormalMode(pt, fmode);
     }
+
+    return true;
 }
 
 void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode)

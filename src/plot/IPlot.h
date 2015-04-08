@@ -141,6 +141,15 @@ protected:
 
     qint32 idxSel1;
     qint32 idxSel2;
+
+    enum mouse_click_state_e
+    {
+        eMouseClickIdle
+        , eMouseClick1st
+        , eMouseClick2nd
+    };
+
+    mouse_click_state_e mouseClickState;
 };
 
 #endif //IPLOT_H

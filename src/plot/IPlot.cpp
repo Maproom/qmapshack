@@ -73,6 +73,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , scaleWidthY1(0)
     , idxSel1(NOIDX)
     , idxSel2(NOIDX)
+    , mouseClickState(eMouseClickIdle)
 
 {
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -108,6 +109,8 @@ IPlot::~IPlot()
     if(trk)
     {
         trk->unregisterPlot(this);
+        trk->setMode(CGisItemTrk::eModeNormal, "IPlot");
+
         if(mode == eModeWindow)
         {
             trk->looseUserFocus();
@@ -231,7 +234,7 @@ void IPlot::leaveEvent(QEvent * e)
 
     if(trk)
     {
-        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove);
+        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, "IPlot");
     }
 
     QApplication::restoreOverrideCursor();
@@ -272,14 +275,14 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         {
             if(trk)
             {
-                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove);
+                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, "IPlot");
             }
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {
             if(trk)
             {
-                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove);
+                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, "IPlot");
             }
         }
 
@@ -309,20 +312,49 @@ void IPlot::mousePressEvent(QMouseEvent * e)
         {
             // set point of focus at track object
             qreal x = data->x().pt2val(posMouse.x() - left);
-            if(data->axisType == CPlotData::eAxisLinear)
+
+            switch(mouseClickState)
             {
-                if(trk)
-                {
-                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick);
-                }
-            }
-            else if(data->axisType == CPlotData::eAxisTime)
+            case eMouseClickIdle:
             {
-                if(trk)
+                if(trk->setMode(CGisItemTrk::eModeRange, "IPlot"))
                 {
-                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick);
+
+                    if(data->axisType == CPlotData::eAxisLinear)
+                    {
+                        trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                    }
+                    else if(data->axisType == CPlotData::eAxisTime)
+                    {
+                        trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                    }
+
+                    mouseClickState = eMouseClick1st;
                 }
+                break;
             }
+            case eMouseClick1st:
+            {
+                if(data->axisType == CPlotData::eAxisLinear)
+                {
+                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                }
+                else if(data->axisType == CPlotData::eAxisTime)
+                {
+                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                }
+
+                mouseClickState = eMouseClick2nd;
+                break;
+            }
+            case eMouseClick2nd:
+            {
+                trk->setMode(CGisItemTrk::eModeNormal, "IPlot");
+                mouseClickState = eMouseClickIdle;
+                break;
+            }
+            }
+
 
             // update canvas if visible
             CCanvas * canvas = CMainWindow::self().getVisibleCanvas();

@@ -189,7 +189,7 @@ public:
 
     void setName(const QString& str);
     void setColor(int idx);
-    void setMode(mode_e m);
+    bool setMode(mode_e m, const QString &owner);
     void setComment(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
@@ -318,7 +318,7 @@ public:
        @param dist      the distance in [m]
        @param initiator a pointer to an initiating IPlot object, or 0
      */
-    void setMouseFocusByDistance(qreal dist, focusmode_e fmode);
+    bool setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString& owner);
 
     /**
        @brief Use point with time from start matching best the given time delta
@@ -326,20 +326,20 @@ public:
        @param time      a time delta in [s] relative to the start time
        @param initiator a pointer to an initiating IPlot object, or 0
      */
-    void setMouseFocusByTime(quint32 time, focusmode_e fmode);
+    bool setMouseFocusByTime(quint32 time, focusmode_e fmode, const QString& owner);
 
     /**
        @brief Use the point that is closest to the given point on the screen.
 
        @param pt        a point on the screen in pixel.
      */
-    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode);
+    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString& owner);
 
     /**
        @brief Use point with given index counter
        @param idx
      */
-    void setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode);
+    bool setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString& owner);
 
     /**
        @brief Reduce the amount of visible track points with the help of the Douglas Peuker algorithm
@@ -473,7 +473,7 @@ private:
        @param mode      The reason for the focus
        @param initiator A pointer to an IPlot object that has set the point of focus. Can be 0.
      */
-    void publishMouseFocus(const trkpt_t * pt, focusmode_e fmode);
+    bool publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString &owner);
     void publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode);
     void publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode);
     /**
@@ -654,13 +654,14 @@ private:
 
     enum rangestate_e
     {
-          eRangeStateIdle
+        eRangeStateIdle
         , eRangeState1st
         , eRangeState2nd
     };
 
     rangestate_e rangeState;
 
+    QString mouseFocusOwner;
 };
 
 #endif //CGISITEMTRK_H

@@ -37,8 +37,8 @@ CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
     key         = trk.getKey();
 
     // reset any focus the track might have.
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick);
+    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseEditTrk");
+    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseEditTrk");
     trk.looseUserFocus();
 
     canvas->reportStatus(key.item, tr("<b>Edit Track Points</b><br/>Select a track point for more options.<br/>"));

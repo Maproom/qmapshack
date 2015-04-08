@@ -58,7 +58,7 @@ void CMouseNormal::stopTracking()
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
         if(trk != 0)
         {
-            trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove);
+            trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
         }
     }
 }
@@ -115,7 +115,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
                 CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
                 if(trk != 0)
                 {
-                    trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove);
+                    trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
                 }
             }
             break;

@@ -131,12 +131,14 @@ void CCanvas::saveConfig(QSettings& cfg)
     grid->saveConfig(cfg);
     cfg.setValue("posFocus", posFocus);
     cfg.setValue("proj", map->getProjection());
+    cfg.setValue("scales", map->getScalesType());
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
 {
     posFocus = cfg.value("posFocus", posFocus).toPointF();
     setProjection(cfg.value("proj", map->getProjection()).toString());
+    setScales((CCanvas::scales_type_e)cfg.value("scales",  map->getScalesType()).toInt());
 
     map->loadConfig(cfg);
     dem->loadConfig(cfg);
@@ -684,6 +686,18 @@ void CCanvas::setProjection(const QString& proj)
     dem->setProjection(proj);
     gis->setProjection(proj);
 }
+void CCanvas::setScales(const scales_type_e type)
+{
+    map->setScales(type);
+    dem->setScales(type);
+    gis->setScales(type);
+}
+
+CCanvas::scales_type_e CCanvas::getScalesType()
+{
+    return map->getScalesType();
+}
+
 
 qreal CCanvas::getElevationAt(const QPointF& pos)
 {

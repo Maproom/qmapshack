@@ -29,6 +29,8 @@
 
 #include "canvas/CCanvas.h"
 
+#define CANVAS_MAX_ZOOM_LEVELS 31
+
 class IDrawContext : public QThread
 {
     Q_OBJECT
@@ -50,6 +52,8 @@ public:
         projPJ pjsrc;
         /// the zoomfactor used to draw the canvas
         QPointF zoomFactor;
+        /// the number of zoom levels
+        int zoomLevels;
         /// the scale of the global viewport
         QPointF scale;
         /// top left corner
@@ -125,6 +129,7 @@ public:
        @return A proj4 string.
      */
     QString getProjection();
+    CCanvas::scales_type_e getScalesType();
 
     /**
        @brief Set the projection of the draw context
@@ -139,6 +144,8 @@ public:
        @param proj a Proj4 projection string
      */
     virtual void setProjection(const QString& proj);
+
+    virtual void setScales(const CCanvas::scales_type_e type);
 
 signals:
     void sigCanvasUpdate(CCanvas::redraw_e flags);
@@ -163,7 +170,8 @@ protected:
     /**
        @brief The global list of available scale factors
      */
-    static const qreal scales[];
+    static const qreal scalesDefault[];
+    static const qreal scalesSquare[];
 
     /// the mutex to serialize access
     QMutex mutex;
@@ -194,6 +202,11 @@ protected:
     projPJ pjsrc;
     /// target projection is always WGS84
     projPJ pjtar;
+    /// the used scales and the type of scale levels
+    qreal scales[CANVAS_MAX_ZOOM_LEVELS];
+    CCanvas::scales_type_e scalesType;
+    /// the number of zoom levels
+    int zoomLevels;
 
     /// the basic scale of the map canvas
     QPointF scale;

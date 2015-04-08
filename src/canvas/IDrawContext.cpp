@@ -21,34 +21,12 @@
 
 #include <QtWidgets>
 
-//#define N_ZOOM_LEVELS 20
-//const qreal CMapDraw::scales[N_ZOOM_LEVELS] =
-//{
-//     0.10
-//    ,0.20
-//    ,0.40
-//    ,0.80
-//    ,1.60
-//    ,3.20
-//    ,6.40
-//    ,12.8
-//    ,25.6
-//    ,51.2
-//    ,102.4
-//    ,204.8
-//    ,409.6
-//    ,819.2
-//    ,1638.4
-//    ,3276.8
-//    ,6553.6
-//    ,13107.2
-//    ,26214.4
-//    ,52428.8
-//};
 
 #define BUFFER_BORDER 50
-#define N_ZOOM_LEVELS 31
-const qreal IDrawContext::scales[N_ZOOM_LEVELS] =
+
+
+#define N_DEFAULT_ZOOM_LEVELS 31
+const qreal IDrawContext::scalesDefault[N_DEFAULT_ZOOM_LEVELS] =
 {
     0.10
     , 0.15
@@ -88,6 +66,28 @@ const qreal IDrawContext::scales[N_ZOOM_LEVELS] =
 //    , 70000.0
 };
 
+#define N_SQUARE_ZOOM_LEVELS 17
+const qreal IDrawContext::scalesSquare[N_SQUARE_ZOOM_LEVELS] =
+{
+    0.1492910709
+    , 0.2985821417
+    , 0.5971642834
+    , 1.1943285668
+    , 2.3886571336
+    , 4.7773142672
+    , 9.5546285344
+    , 19.1092570688
+    , 38.2185141376
+    , 76.4370282752
+    , 152.8740565504
+    , 305.7481131008
+    , 611.4962262016
+    , 1222.9924524032
+    , 2445.9849048064
+    , 4891.9698096128
+    , 9783.9396192256
+};
+
 QPointF operator*(const QPointF& p1, const QPointF& p2)
 {
     return QPointF(p1.x() * p2.x(), p1.y() * p2.y());
@@ -117,6 +117,7 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
     pjsrc = pj_init_plus("+proj=merc +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
     pjtar = pj_init_plus("+proj=longlat +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
 
+    setScales(CCanvas::eScalesDefault);
 
     zoom(5);
 
@@ -175,6 +176,40 @@ void IDrawContext::setProjection(const QString& proj)
     pjsrc = pj_init_plus(proj.toLatin1());
 }
 
+CCanvas::scales_type_e IDrawContext::getScalesType()
+{
+    return scalesType;
+}
+
+void IDrawContext::setScales(const CCanvas::scales_type_e type)
+{
+    int i;
+
+    switch (type)
+    {
+    case CCanvas::eScalesDefault:
+        for (i=0; i < N_DEFAULT_ZOOM_LEVELS; i++)
+        {
+            scales[i] = scalesDefault[i];
+        }
+        zoomLevels = N_DEFAULT_ZOOM_LEVELS;
+        scalesType = type;
+        break;
+
+    case CCanvas::eScalesSquare:
+        for (i=0; i < N_SQUARE_ZOOM_LEVELS; i++)
+        {
+            scales[i] = scalesSquare[i];
+        }
+        zoomLevels = N_SQUARE_ZOOM_LEVELS;
+        scalesType = type;
+        break;
+
+    default:
+        qDebug() << "Invalid type of scales table" << scalesType;
+    }
+}
+
 bool IDrawContext::needsRedraw()
 {
     bool res = false;
@@ -199,7 +234,7 @@ void IDrawContext::zoom(const QRectF& rect)
     }
 
     // zoom out from closest zoom level until a match is found
-    for(int i = 0; i < N_ZOOM_LEVELS; i++)
+    for(int i = 0; i < zoomLevels; i++)
     {
         zoom(i);
         QPointF pt1 = rect.topLeft();
@@ -233,9 +268,9 @@ void IDrawContext::zoom(int idx)
         idx = 0;
     }
 
-    if(idx == N_ZOOM_LEVELS)
+    if(idx >= zoomLevels)
     {
-        idx = N_ZOOM_LEVELS -1;
+        idx = zoomLevels -1;
     }
 
     mutex.lock(); // --------- start serialize with thread

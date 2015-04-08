@@ -73,6 +73,16 @@ public:
     void setup();
     QString getProjection();
     void  setProjection(const QString& proj);
+
+    enum scales_type_e
+    {
+        eScalesDefault
+        , eScalesSquare
+    };
+
+    void  setScales(const scales_type_e type);
+    scales_type_e getScalesType();
+
     qreal getElevationAt(const QPointF &pos);
     void  getElevationAt(const QPolygonF& pos, QPolygonF &ele);
 

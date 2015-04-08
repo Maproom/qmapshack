@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>98</height>
+    <height>179</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Setup Map View...</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
@@ -41,6 +41,33 @@
          <height>22</height>
         </size>
        </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Scales</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QRadioButton" name="radioScalesDefault">
+          <property name="text">
+           <string>Logarithmic</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioScalesSquare">
+          <property name="text">
+           <string>Square (optimized for TMS and WTMS tiles)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>

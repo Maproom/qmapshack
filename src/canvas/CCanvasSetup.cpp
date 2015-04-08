@@ -29,6 +29,17 @@ CCanvasSetup::CCanvasSetup(CCanvas * canvas)
     lineProjection->setText(canvas->getProjection());
     lineProjection->setCursorPosition(0);
 
+    switch(canvas->getScalesType())
+    {
+    case CCanvas::eScalesDefault:
+        radioScalesDefault->setChecked(true);
+        break;
+
+    case CCanvas::eScalesSquare:
+        radioScalesSquare->setChecked(true);
+        break;
+    }
+
     connect(toolWizard, SIGNAL(clicked()), this, SLOT(slotProjWizard()));
 }
 
@@ -50,6 +61,14 @@ void CCanvasSetup::accept()
         return;
     }
     canvas->setProjection(lineProjection->text());
+    if(radioScalesDefault->isChecked())
+    {
+        canvas->setScales(CCanvas::eScalesDefault);
+    }
+    else if(radioScalesSquare->isChecked())
+    {
+        canvas->setScales(CCanvas::eScalesSquare);
+    }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
     QDialog::accept();
 }

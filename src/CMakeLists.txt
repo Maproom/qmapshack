@@ -36,6 +36,7 @@ set( SRCS
     helpers/CLinksDialog.cpp
     helpers/CPhotoAlbum.cpp
     helpers/CPhotoViewer.cpp
+    helpers/CFadingIcon.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -213,6 +214,7 @@ set( HDRS
     helpers/CLinksDialog.h
     helpers/CPhotoAlbum.h
     helpers/CPhotoViewer.h
+    helpers/CFadingIcon.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h

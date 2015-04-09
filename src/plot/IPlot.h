@@ -24,6 +24,7 @@
 #include <QWidget>
 
 class QMenu;
+class CScrOptRangeTrk;
 
 class IPlot : public QWidget
 {
@@ -36,7 +37,7 @@ public:
 
     virtual void updateData() = 0;
     virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) = 0;
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2) = 0;
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2);
 
     void save(QImage& image);
     void setSolid(bool yes)
@@ -47,6 +48,10 @@ public:
 private slots:
     void slotContextMenu(const QPoint & point);
     void slotSave();
+    void slotHidePoints();
+    void slotShowPoints();
+    void slotCopy();
+
 
 protected:
     void setYLabel(const QString& str);
@@ -86,6 +91,8 @@ protected:
     void drawLegend(QPainter& p);
     void drawDecoration( QPainter &p );
     void drawTags(QPainter& p);
+
+    static int cnt;
 
     // different draw modes
     mode_e mode;
@@ -150,6 +157,8 @@ protected:
     };
 
     mouse_click_state_e mouseClickState;
+
+    QPointer<CScrOptRangeTrk> scrOptRange;
 };
 
 #endif //IPLOT_H

@@ -123,6 +123,3 @@ void CPlotDistance::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 }
 
 
-void CPlotDistance::setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
-{
-}

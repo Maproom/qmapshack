@@ -22,8 +22,9 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
-#include "helpers/CSettings.h"
 #include "helpers/CFadingIcon.h"
+#include "helpers/CSettings.h"
+#include "mouse/CScrOptRangeTrk.h"
 
 #include <QtWidgets>
 
@@ -32,7 +33,7 @@ QPen IPlot::pens[] =
     QPen(Qt::darkBlue,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(QColor("#C00000"),3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::yellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkYellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::green,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
 QPen IPlot::pensThin[] =
@@ -51,6 +52,7 @@ QColor IPlot::colors[] =
     , QColor(Qt::darkGreen)
 };
 
+int IPlot::cnt = 0;
 
 IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : QWidget(parent)
@@ -77,6 +79,9 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     , mouseClickState(eMouseClickIdle)
 
 {
+    cnt++;
+    setObjectName(QString("IPlot%1").arg(cnt));
+
     setContextMenuPolicy(Qt::CustomContextMenu);
     setMouseTracking(true);
 
@@ -107,10 +112,12 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
 IPlot::~IPlot()
 {
+    cnt--;
+
     if(trk)
     {
         trk->unregisterPlot(this);
-        trk->setMode(CGisItemTrk::eModeNormal, "IPlot");
+        trk->setMode(CGisItemTrk::eModeNormal, objectName());
 
         if(mode == eModeWindow)
         {
@@ -235,7 +242,7 @@ void IPlot::leaveEvent(QEvent * e)
 
     if(trk)
     {
-        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, "IPlot");
+        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, objectName());
     }
 
     QApplication::restoreOverrideCursor();
@@ -276,14 +283,14 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         {
             if(trk)
             {
-                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, "IPlot");
+                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, objectName());
             }
         }
         else if(data->axisType == CPlotData::eAxisTime)
         {
             if(trk)
             {
-                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, "IPlot");
+                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, objectName());
             }
         }
 
@@ -318,15 +325,15 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             {
             case eMouseClickIdle:
             {
-                if(trk->setMode(CGisItemTrk::eModeRange, "IPlot"))
+                if(trk->setMode(CGisItemTrk::eModeRange, objectName()))
                 {
                     if(data->axisType == CPlotData::eAxisLinear)
                     {
-                        trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                        trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, objectName());
                     }
                     else if(data->axisType == CPlotData::eAxisTime)
                     {
-                        trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                        trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, objectName());
                     }
 
                     mouseClickState = eMouseClick1st;
@@ -337,23 +344,56 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 }
                 break;
             }
+
             case eMouseClick1st:
             {
                 if(data->axisType == CPlotData::eAxisLinear)
                 {
-                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, objectName());
                 }
                 else if(data->axisType == CPlotData::eAxisTime)
                 {
-                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, "IPlot");
+                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, objectName());
+                }
+
+                delete scrOptRange;
+                scrOptRange = new CScrOptRangeTrk(posMouse, trk, this);
+                connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
+                connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
+                connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
+
+                QRect r1 = scrOptRange->geometry();
+                QRect r2 = geometry();
+
+                r1.moveTopLeft(mapToParent(r1.topLeft()));
+
+                if(!r2.contains(r1))
+                {
+                    if(!r2.contains(r1.topRight()))
+                    {
+                        QPoint pt = QPoint(r2.width(), r2.height()) - QPoint(r1.width(), r1.height());
+                        scrOptRange->move(pt);
+                    }
+                    else if(!r2.contains(r1.topLeft()))
+                    {
+                        QPoint pt = QPoint(0, r2.height()) - QPoint(0, r1.height());
+                        scrOptRange->move(pt);
+                    }
+                    else if(!r2.contains(r1.bottomLeft()))
+                    {
+                        QPoint pt = QPoint(r1.left(), r2.height()) - QPoint(r2.left(), r1.height());
+                        scrOptRange->move(pt);
+                    }
                 }
 
                 mouseClickState = eMouseClick2nd;
                 break;
             }
+
             case eMouseClick2nd:
             {
-                trk->setMode(CGisItemTrk::eModeNormal, "IPlot");
+                delete scrOptRange;
+                trk->setMode(CGisItemTrk::eModeNormal, objectName());
                 mouseClickState = eMouseClickIdle;
                 break;
             }
@@ -935,8 +975,7 @@ void IPlot::drawDecoration( QPainter &p )
     if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
     {
         int penIdx = 3;
-        int ptx, pty, oldPtx;
-
+        int ptx, pty, oldPtx, ptx1;
 
         QPolygonF background;
         QPolygonF foreground;
@@ -949,7 +988,7 @@ void IPlot::drawDecoration( QPainter &p )
 
         ptx = left   + xaxis.val2pt( point->x() );
         pty = bottom - yaxis.val2pt( point->y() );
-        oldPtx = ptx;
+        ptx1 = oldPtx = ptx;
 
         background << QPointF(ptx,bottom);
         background << QPointF(ptx,pty);
@@ -983,9 +1022,18 @@ void IPlot::drawDecoration( QPainter &p )
         p.setBrush(colors[penIdx]);
         p.drawPolygon(background);
 
-        p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
+        p.setPen(thinLine ? pensThin[penIdx] : pens[penIdx]);
         p.setBrush(Qt::NoBrush);
         p.drawPolyline(foreground);
+
+        p.setPen(QPen(Qt::darkBlue, 2));
+        p.drawLine(ptx1, top, ptx1, bottom);
+        p.drawLine(ptx, top, ptx, bottom);
+    }
+
+    if(!scrOptRange.isNull())
+    {
+        scrOptRange->draw(p);
     }
 }
 
@@ -1072,4 +1120,88 @@ void IPlot::slotSave()
 
     path = fi.absolutePath();
     cfg.setValue("Paths/lastGraphPath", path);
+}
+
+
+void IPlot::slotHidePoints()
+{
+    trk->hideSelectedPoints();
+    scrOptRange->deleteLater();
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
+    trk->setMode(CGisItemTrk::eModeNormal, objectName());
+    mouseClickState = eMouseClickIdle;
+}
+
+void IPlot::slotShowPoints()
+{
+    trk->showSelectedPoints();
+    scrOptRange->deleteLater();
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
+    trk->setMode(CGisItemTrk::eModeNormal, objectName());
+    mouseClickState = eMouseClickIdle;
+}
+
+void IPlot::slotCopy()
+{
+    trk->copySelectedPoints();
+    scrOptRange->deleteLater();
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
+    trk->setMode(CGisItemTrk::eModeNormal, objectName());
+    mouseClickState = eMouseClickIdle;
+}
+
+void IPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
+{
+    if(ptRange1 == 0 || ptRange2 == 0)
+    {
+        idxSel1 = idxSel2 = NOIDX;
+    }
+    else
+    {
+        if(ptRange1->idxTotal < ptRange2->idxTotal)
+        {
+            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptRange1++;
+            }
+            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptRange2--;
+            }
+            idxSel1 = ptRange1->idxVisible;
+            idxSel2 = ptRange2->idxVisible;
+        }
+        else
+        {
+            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptRange1--;
+            }
+            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                ptRange2++;
+            }
+            idxSel1 = ptRange2->idxVisible;
+            idxSel2 = ptRange1->idxVisible;
+        }
+    }
+    update();
 }

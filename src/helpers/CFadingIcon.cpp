@@ -39,7 +39,6 @@ CFadingIcon::CFadingIcon(const QPoint& pt, const QString &resource, QWidget *par
 
 CFadingIcon::~CFadingIcon()
 {
-
 }
 
 void CFadingIcon::slotTimeout()

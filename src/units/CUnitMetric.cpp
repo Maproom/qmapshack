@@ -86,15 +86,21 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit)
         val  = "-";
         unit = "";
     }
+    else if (meter < 0.27)
+    {
+        val.sprintf("%1.0f",meter * speedfactor * 1000);
+        unit = "m/h";
+    }
     else if (meter < 10.0)
     {
         val.sprintf("%1.1f",meter * speedfactor);
+        unit = speedunit;
     }
     else
     {
         val.sprintf("%1.0f",meter * speedfactor);
+        unit = speedunit;
     }
-    unit = speedunit;
 }
 
 void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit)

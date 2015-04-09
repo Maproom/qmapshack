@@ -480,11 +480,12 @@ QString CGisItemTrk::getInfoRange()
         pt2--;
     }
 
+    bool timeIsValid = pt1->time.isValid() && pt2->time.isValid();
 
     d = tmp = pt2->distance - pt1->distance;
     IUnit::self().meter2distance(tmp, val, unit);
-    str += QString("%3 %1%2\n").arg(val).arg(unit).arg(QChar(0x21A6));
-    if(pt1->time.isValid() && pt2->time.isValid())
+    str += QString("%3 %1%2 ").arg(val).arg(unit).arg(QChar(0x21A6));
+    if(timeIsValid)
     {
         quint32 t  = pt2->time.toTime_t() - pt1->time.toTime_t();
         quint32 hh = t / 3600;
@@ -493,20 +494,46 @@ QString CGisItemTrk::getInfoRange()
 
         str += QString("%4 %1:%2:%3\n").arg(hh,2,10,QChar('0')).arg(mm,2,10,QChar('0')).arg(ss,2,10,QChar('0')).arg(QChar(0x231a));
     }
+    else
+    {
+        str += "\n";
+    }
 
-    tmp       = qAtan((pt2->ascend - pt1->ascend)/d);
+    qreal deltaAscend   = pt2->ascend  - pt1->ascend;
+    qreal deltaDescend  = pt2->descend - pt1->descend;
+    qreal deltaTime     = pt2->time.toTime_t() - pt1->time.toTime_t();
+
+    tmp       = qAtan(deltaAscend/d);
     slope1    = qAbs(tmp * 360.0/(2 * M_PI));
     slope2    = qTan(slope1 * DEG_TO_RAD) * 100;
 
-    IUnit::self().meter2elevation(pt2->ascend - pt1->ascend, val, unit);
-    str += QString("%3 %1%2 (%4%5, %6%)\n").arg(val).arg(unit).arg(QChar(0x2197)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+    IUnit::self().meter2elevation(deltaAscend, val, unit);
+    str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2197)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+    if(timeIsValid)
+    {
+        IUnit::self().meter2speed(deltaAscend/deltaTime, val, unit);
+        str += QString(", %1%2\n").arg(val).arg(unit);
+    }
+    else
+    {
+        str += "\n";
+    }
 
-    tmp       = qAtan((pt2->descend - pt1->descend)/d);
+    tmp       = qAtan(deltaDescend/d);
     slope1    = qAbs(tmp * 360.0/(2 * M_PI));
     slope2    = qTan(slope1 * DEG_TO_RAD) * 100;
 
-    IUnit::self().meter2elevation(pt2->descend - pt1->descend, val, unit);
+    IUnit::self().meter2elevation(deltaDescend, val, unit);
     str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2198)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+    if(timeIsValid)
+    {
+        IUnit::self().meter2speed(deltaDescend/deltaTime, val, unit);
+        str += QString(", %1%2\n").arg(val).arg(unit);
+    }
+    else
+    {
+        str += "\n";
+    }
 
 
     return str;
@@ -1924,11 +1951,6 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     {
     case eRangeStateIdle:
     {
-        foreach(IPlot * plot, registeredPlots)
-        {
-            plot->setMouseFocus(pt);
-        }
-
         if((fmode == eFocusMouseClick) && (pt != 0))
         {
             mouseRange1 = pt;
@@ -1962,7 +1984,12 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
 
     foreach(IPlot * plot, registeredPlots)
     {
+        plot->setMouseFocus(pt);
         plot->setMouseFocus(mouseRange1, mouseRange2);
+    }
+    if(!dlgDetails.isNull())
+    {
+        dlgDetails->setMouseFocus(pt);
     }
 }
 

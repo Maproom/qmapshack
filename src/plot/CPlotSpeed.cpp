@@ -121,6 +121,3 @@ void CPlotSpeed::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
     update();
 }
 
-void CPlotSpeed::setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
-{
-}

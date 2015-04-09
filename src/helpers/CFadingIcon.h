@@ -25,17 +25,16 @@
 class CFadingIcon : public QLabel
 {
     Q_OBJECT
-    public:
-        CFadingIcon(const QPoint &pt, const QString& resource, QWidget * parent);
-        virtual ~CFadingIcon();
+public:
+    CFadingIcon(const QPoint &pt, const QString& resource, QWidget * parent);
+    virtual ~CFadingIcon();
 
-    private slots:
-        void slotTimeout();
+private slots:
+    void slotTimeout();
 
-    private:
-        qreal o;
-        QPixmap icon;
-
+private:
+    qreal o;
+    QPixmap icon;
 };
 
 #endif //CFADINGICON_H

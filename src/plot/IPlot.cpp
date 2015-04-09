@@ -983,7 +983,7 @@ void IPlot::drawDecoration( QPainter &p )
         CPlotAxis& xaxis = data->x();
         CPlotAxis& yaxis = data->y();
 
-        const QPolygonF& polyline       = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1);
+        const QPolygonF& polyline       = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1 + 1);
         QPolygonF::const_iterator point = polyline.begin();
 
         ptx = left   + xaxis.val2pt( point->x() );

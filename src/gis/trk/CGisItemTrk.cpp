@@ -472,11 +472,19 @@ QString CGisItemTrk::getInfoRange()
 
     while(pt1->flags & trkpt_t::eHidden)
     {
-        pt1++;
+        if(pt1->idxTotal == (cntTotalPoints - 1))
+        {
+            break;
+        }
+        pt1++;        
     }
 
     while(pt2->flags & trkpt_t::eHidden)
     {
+        if(pt2->idxTotal == 0)
+        {
+            break;
+        }
         pt2--;
     }
 
@@ -964,6 +972,10 @@ void CGisItemTrk::findWaypointsCloseBy()
         trkwpts << trkwpt;
     }
 
+    if(line.isEmpty())
+    {
+        return;
+    }
 
     // convert all coordinates into meter relative to the first track point.
     line[0].x = 0;

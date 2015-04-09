@@ -25,6 +25,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CFadingIcon.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CScrOptUnclutter.h"
 
@@ -66,6 +67,7 @@ void CMouseNormal::stopTracking()
 void CMouseNormal::mousePressEvent(QMouseEvent * e)
 {
     point = e->pos();
+
     if(e->button() == Qt::LeftButton)
     {
         lastPos     = e->pos();
@@ -148,10 +150,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                     item->treeWidget()->setCurrentItem(item);
                     item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
 
-                    delete screenItemOption;
-                    screenItemOption = item->getScreenOptions(point, this);
-
-                    if(!screenItemOption.isNull())
+                    if(setScreenOption(point, item))
                     {
                         stateItemSel = eStateShowItemOptions;
                     }
@@ -182,10 +181,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                         item->treeWidget()->setCurrentItem(item);
                         item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
 
-                        delete screenItemOption;
-                        screenItemOption = item->getScreenOptions(screenUnclutter->getOrigin(), this);
-
-                        if(!screenItemOption.isNull())
+                        if(setScreenOption(screenUnclutter->getOrigin(), item))
                         {
                             stateItemSel = eStateShowItemOptions;
                             break;
@@ -229,6 +225,20 @@ void CMouseNormal::wheelEvent(QWheelEvent * e)
     stateItemSel = eStateIdle;
 }
 
+bool CMouseNormal::setScreenOption(const QPoint& pt, IGisItem * item)
+{
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+    if(trk && trk->setMouseFocusByPoint(pt, CGisItemTrk::eFocusMouseClick, "CMouseNormal") == NOPOINTF)
+    {
+        new CFadingIcon(pt, "://icons/48x48/NoGo.png", canvas);
+        return false;
+    }
+
+    delete screenItemOption;
+    screenItemOption = item->getScreenOptions(pt, this);
+
+    return !screenItemOption.isNull();
+}
 
 void CMouseNormal::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 {

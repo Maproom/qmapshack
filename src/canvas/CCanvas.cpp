@@ -320,8 +320,9 @@ void CCanvas::paintEvent(QPaintEvent * e)
     // ----- start to draw fast content -----
 
     grid->draw(p, rect());
-    mouse->draw(p, needsRedraw, rect());
     gis->draw(p, rect());
+    mouse->draw(p, needsRedraw, rect());
+
 
     drawStatusMessages(p);
     drawScale(p);

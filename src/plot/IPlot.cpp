@@ -23,6 +23,7 @@
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "helpers/CSettings.h"
+#include "helpers/CFadingIcon.h"
 
 #include <QtWidgets>
 
@@ -319,7 +320,6 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             {
                 if(trk->setMode(CGisItemTrk::eModeRange, "IPlot"))
                 {
-
                     if(data->axisType == CPlotData::eAxisLinear)
                     {
                         trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, "IPlot");
@@ -330,6 +330,10 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                     }
 
                     mouseClickState = eMouseClick1st;
+                }
+                else
+                {
+                    new CFadingIcon(posMouse, "://icons/48x48/NoGo.png", this);
                 }
                 break;
             }

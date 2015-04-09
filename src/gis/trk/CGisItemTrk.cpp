@@ -1582,14 +1582,11 @@ void CGisItemTrk::drawRange(QPainter& p)
 
         QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
 
-        p.setPen(QPen(Qt::darkGreen, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::darkGreen, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(seg);
 
-        QPixmap bullet("://icons/8x8/bullet_dark_green.png");
-        foreach(const QPointF &pt, seg)
-        {
-            p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
-        }
+        p.setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.drawPolyline(seg);
     }
 }
 
@@ -1903,7 +1900,7 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 
 bool CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString& owner)
 {
-    qDebug() << pt << fmode << owner;
+//    qDebug() << pt << fmode << owner;
     if(mode == eModeRange)
     {
         if(mouseFocusOwner != owner)

@@ -51,6 +51,9 @@ private slots:
     void slotAddArea();
     void slotCopyPosition();
 
+private:
+    bool setScreenOption(const QPoint& pt, IGisItem * item);
+
 protected:
     void stopTracking();
 

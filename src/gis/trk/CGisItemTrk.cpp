@@ -1777,7 +1777,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
     quint32 idx = 0;
     const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
 
-    if((hasUserFocus() || (mode == eModeRange)) && (pt != NOPOINT))
+    if(pt != NOPOINT)
     {
         /*
             Iterate over the polyline used to draw the track as it contains screen
@@ -1903,6 +1903,7 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 
 bool CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString& owner)
 {
+    qDebug() << pt << fmode << owner;
     if(mode == eModeRange)
     {
         if(mouseFocusOwner != owner)

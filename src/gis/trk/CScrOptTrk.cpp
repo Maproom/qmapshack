@@ -59,7 +59,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
 
     // reset user focus if the track has it
     trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CScrOptTrk");
-    trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CScrOptTrk");
+    trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CScrOptTrk");
 }
 
 CScrOptTrk::~CScrOptTrk()

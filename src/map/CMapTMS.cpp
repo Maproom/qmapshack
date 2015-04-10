@@ -405,6 +405,13 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf)
         return;
     }
 
+    QPointF bufferScale = buf.scale * buf.zoomFactor;
+
+    if(isOutOfScale(bufferScale))
+    {
+        return;
+    }
+
     // get pixel offset of top left buffer corner
     QPointF pp = buf.ref1;
     map->convertRad2Px(pp);

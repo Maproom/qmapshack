@@ -75,6 +75,7 @@ public:
     void setProjection(const QString& proj);
 
     static void setupMapPath();
+    static void setupMapPath(const QStringList& paths);
     static void saveMapPath(QSettings &cfg);
     static void loadMapPath(QSettings &cfg);
     static const QStringList& getSupportedFormats()

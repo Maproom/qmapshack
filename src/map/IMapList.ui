@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>622</height>
+    <height>443</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -120,6 +120,14 @@
          </property>
          <property name="wordWrap">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushMapHonk">
+         <property name="text">
+          <string>Help! I want maps!
+I don't want to read the documentation!</string>
          </property>
         </widget>
        </item>

@@ -18,6 +18,8 @@
 
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "map/CMapDraw.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -66,9 +68,10 @@ CMapList::CMapList(QWidget *parent)
     setupUi(this);
 
     connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
-    connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
-
     connect(treeWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
+    connect(pushMapHonk, SIGNAL(clicked()), this, SLOT(slotMapHonk()));
+
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -97,12 +100,15 @@ void CMapList::updateHelpText()
 {
     if(treeWidget->topLevelItemCount() == 0)
     {
+
         labelIcon->show();
+        pushMapHonk->show();
         labelHelpFillMapList->show();
         labelHelpActivateMap->hide();
     }
     else
     {
+        pushMapHonk->hide();
         labelHelpFillMapList->hide();
 
         CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(0));
@@ -151,4 +157,39 @@ void CMapList::slotContextMenu(const QPoint& point)
 
     QPoint p = treeWidget->mapToGlobal(point);
     menu->exec(p);
+}
+
+void saveResource(const QString& name, QDir& dir)
+{
+    QFile resource1(QString("://map/%1").arg(name));
+    resource1.open(QIODevice::ReadOnly);
+
+    QFile file(dir.absoluteFilePath(name));
+    file.open(QIODevice::WriteOnly);
+    file.write(resource1.readAll());
+    file.close();
+}
+
+void CMapList::slotMapHonk()
+{
+    QString path = QFileDialog::getExistingDirectory(this, tr("Where do you wnat to store maps?"), QDir::homePath());
+    if(path.isEmpty())
+    {
+        return;
+    }
+
+    QDir dir(path);
+
+    saveResource("WorldSat.wmts", dir);
+    saveResource("WorldTopo.wmts", dir);
+    saveResource("OpenStreetMap.tms", dir);
+    saveResource("OSM_Topo.tms", dir);
+
+    CMapDraw::setupMapPath(QStringList(QStringList(path)));
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->setScales(CCanvas::eScalesSquare);
+    }
 }

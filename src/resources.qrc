@@ -333,5 +333,10 @@
         <file>pics/about.png</file>
         <file>pics/noMap256x256.png</file>
 
+        <file>map/WorldTopo.wmts</file>
+        <file>map/WorldSat.wmts</file>
+        <file>map/OpenStreetMap.tms</file>
+        <file>map/OSM_Topo.tms</file>
+
     </qresource>
 </RCC>

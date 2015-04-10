@@ -68,11 +68,19 @@ void CMapDraw::setProjection(const QString& proj)
 
 void CMapDraw::setupMapPath()
 {
-    CMapPathSetup dlg(mapPaths, cachePath);
+    QStringList paths;
+    CMapPathSetup dlg(paths, cachePath);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;
     }
+
+    setupMapPath(paths);
+}
+
+void CMapDraw::setupMapPath(const QStringList& paths)
+{
+    mapPaths = paths;
 
     foreach(CMapDraw * map, maps)
     {

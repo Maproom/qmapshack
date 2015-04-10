@@ -1,0 +1,21 @@
+<TMS>
+ <Title>OSM D-Land TK 50</Title>
+ <MinZoomLevel>3</MinZoomLevel>
+ <MaxZoomLevel>18</MaxZoomLevel>
+ <Layer idx="0">
+  <Title>Open Topo Map</Title>
+  <ServerUrl>http://a.tile.opentopomap.org/%1/%2/%3.png</ServerUrl>
+  <MinZoomLevel>3</MinZoomLevel>
+  <MaxZoomLevel>11</MaxZoomLevel>
+ </Layer>
+ <Layer idx="1">
+  <Title>Trails</Title>
+  <ServerUrl>http://tile.waymarkedtrails.org/hiking/%1/%2/%3.png</ServerUrl>
+  <MinZoomLevel>3</MinZoomLevel>
+  <MaxZoomLevel>9</MaxZoomLevel>
+ </Layer>
+ <RawHeader>
+   <Value name="User-Agent">Whatever</Value>
+ </RawHeader>
+ <Copyright>Map data: (c) OpenStreetMap contributors, ODbL | Rendering: (c) OpenTopoMap, CC-BY-SA | Trails by tile.waymarkedtrails.org </Copyright>
+</TMS>

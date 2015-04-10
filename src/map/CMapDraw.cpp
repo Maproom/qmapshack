@@ -68,7 +68,7 @@ void CMapDraw::setProjection(const QString& proj)
 
 void CMapDraw::setupMapPath()
 {
-    QStringList paths;
+    QStringList paths = mapPaths;
     CMapPathSetup dlg(paths, cachePath);
     if(dlg.exec() != QDialog::Accepted)
     {

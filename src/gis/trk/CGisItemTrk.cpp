@@ -105,6 +105,7 @@ struct trkwpt_t
     {
     }
 
+    QString name;
     qreal x;
     qreal y;
     IGisItem::key_t key;
@@ -968,6 +969,7 @@ void CGisItemTrk::findWaypointsCloseBy()
 
         trkwpt.x = qCos(a1 * DEG_TO_RAD) * d;
         trkwpt.y = qSin(a1 * DEG_TO_RAD) * d;
+        trkwpt.name = wpt->getName();
 
         trkwpts << trkwpt;
     }
@@ -978,20 +980,15 @@ void CGisItemTrk::findWaypointsCloseBy()
     }
 
     // convert all coordinates into meter relative to the first track point.
-    line[0].x = 0;
-    line[0].y = 0;
-    for(int i = 1; i < line.size(); i++)
+    for(int i = 0; i < line.size(); i++)
     {
         qreal d, a1, a2;
-        pointDP& pt1 = line[i - 1];
-        pointDP& pt2 = line[i];
+        pointDP& pt1 = line[i];
 
-        d = GPS_Math_Distance(pt0.x, pt0.y, pt2.x, pt2.y, a1, a2);
+        d = GPS_Math_Distance(pt0.x, pt0.y, pt1.x, pt1.y, a1, a2);
 
-        pt0 = pt2;
-
-        pt2.x = pt1.x + qCos(a1 * DEG_TO_RAD) * d;
-        pt2.y = pt1.y + qSin(a1 * DEG_TO_RAD) * d;
+        pt1.x = qCos(a1 * DEG_TO_RAD) * d;
+        pt1.y = qSin(a1 * DEG_TO_RAD) * d;
     }
 
     foreach(const trkwpt_t &trkwpt, trkwpts)
@@ -1008,16 +1005,17 @@ void CGisItemTrk::findWaypointsCloseBy()
                 if(d < minD)
                 {
                     index = pt.idx;
-                    minD  = d;
+                    minD  = d;                    
                 }
             }
             else if(d > WPT_FOCUS_DIST_OUT)
-            {
+            {                
                 trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
                 if(trkpt)
                 {
                     trkpt->keyWpt = trkwpt.key;
                 }
+
 
                 index = NOIDX;
                 minD  = WPT_FOCUS_DIST_IN;
@@ -1038,6 +1036,12 @@ void CGisItemTrk::findWaypointsCloseBy()
     {
         dlgDetails->setupGui();
     }
+
+    foreach(IPlot * plot, registeredPlots)
+    {
+        plot->updateData();
+    }
+
 
     QApplication::restoreOverrideCursor();
 }

@@ -1706,13 +1706,14 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
     mouseRange2     = 0;
     mouseFocusOwner = mode == eModeRange ? owner : "";
 
+//    if(!dlgDetails.isNull())
+//    {
+//        dlgDetails->setMouseRangeFocus(mouseRange1, mouseRange2);
+//    }
+
     foreach(IPlot * plot, registeredPlots)
     {
         plot->setMouseRangeFocus(mouseRange1, mouseRange2);
-    }
-    if(!dlgDetails.isNull())
-    {
-        dlgDetails->setMouseRangeFocus(mouseRange1, mouseRange2);
     }
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();

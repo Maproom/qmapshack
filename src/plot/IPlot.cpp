@@ -272,6 +272,11 @@ void IPlot::draw(QPainter& p)
 
 void IPlot::mouseMoveEvent(QMouseEvent * e)
 {
+    if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
+    {
+        return;
+    }
+
     posMouse = NOPOINT;
     if(rectGraphArea.contains(e->pos()))
     {
@@ -307,6 +312,11 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
 
 void IPlot::mousePressEvent(QMouseEvent * e)
 {
+    if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
+    {
+        return;
+    }
+
     posMouse = NOPOINT;
     if((e->button() == Qt::LeftButton) && rectGraphArea.contains(e->pos()))
     {
@@ -558,17 +568,6 @@ void IPlot::draw()
         p.setBrush(QColor(255,255,255,255));
 
         PAINT_ROUNDED_RECT(p,r);
-    }
-    else if(mode == eModeWindow)
-    {
-        if(underMouse() || posMouse != NOPOINT || solid)
-        {
-//            setWindowOpacity(1.0);
-        }
-        else
-        {
-//            setWindowOpacity(0.6);
-        }
     }
 
     if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
@@ -1168,7 +1167,7 @@ void IPlot::slotCopy()
     mouseClickState = eMouseClickIdle;
 }
 
-void IPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
+void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
 {
     if(ptRange1 == 0 || ptRange2 == 0)
     {

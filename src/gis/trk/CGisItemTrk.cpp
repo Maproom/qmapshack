@@ -621,6 +621,65 @@ QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
     return str;
 }
 
+QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2)
+{
+    QString str, val, unit;
+    qreal dt = NOFLOAT;
+
+    if(pt1.time.isValid() && pt2.time.isValid())
+    {
+        dt = pt2.time.toTime_t() - pt1.time.toTime_t();
+    }
+
+    if((pt1.ascend != NOFLOAT) && (pt2.ascend != NOFLOAT))
+    {
+        IUnit::self().meter2elevation(pt2.ascend - pt1.ascend, val, unit);
+        str += QObject::tr("Ascend: %1%2").arg(val).arg(unit);
+
+        if(dt != NOFLOAT)
+        {
+            IUnit::self().meter2speed((pt2.ascend - pt1.ascend)/dt, val, unit);
+            str += QObject::tr(", %1%2").arg(val).arg(unit);
+        }
+
+    }
+    else
+    {
+        str += QObject::tr("Ascend: -");
+    }
+
+
+    if((pt1.descend != NOFLOAT) && (pt2.descend != NOFLOAT))
+    {
+        IUnit::self().meter2elevation(pt2.descend - pt1.descend, val, unit);
+        str += QObject::tr(" Descend: %1%2").arg(val).arg(unit);
+
+        if(dt != NOFLOAT)
+        {
+            IUnit::self().meter2speed((pt2.descend - pt1.descend)/dt, val, unit);
+            str += QObject::tr(", %1%2").arg(val).arg(unit);
+        }
+
+    }
+    else
+    {
+        str += QObject::tr("Descend: -");
+    }
+
+    str += "\n";
+
+    IUnit::self().meter2distance(pt2.distance - pt1.distance, val, unit);
+    str += QObject::tr("Dist.: %1%2").arg(val).arg(unit);
+
+    if(dt != NOFLOAT)
+    {
+        IUnit::self().seconds2time(dt, val, unit);
+        str += QObject::tr(" Time: %1%2").arg(val).arg(unit);
+    }
+
+    return str;
+}
+
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
     if(scrOpt.isNull())
@@ -1649,7 +1708,11 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
 
     foreach(IPlot * plot, registeredPlots)
     {
-        plot->setMouseFocus(mouseRange1, mouseRange2);
+        plot->setMouseRangeFocus(mouseRange1, mouseRange2);
+    }
+    if(!dlgDetails.isNull())
+    {
+        dlgDetails->setMouseRangeFocus(mouseRange1, mouseRange2);
     }
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -1943,7 +2006,6 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
 
 bool CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString& owner)
 {
-//    qDebug() << pt << fmode << owner;
     if(mode == eModeRange)
     {
         if(mouseFocusOwner != owner)
@@ -2001,11 +2063,12 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     foreach(IPlot * plot, registeredPlots)
     {
         plot->setMouseFocus(pt);
-        plot->setMouseFocus(mouseRange1, mouseRange2);
+        plot->setMouseRangeFocus(mouseRange1, mouseRange2);
     }
     if(!dlgDetails.isNull())
     {
         dlgDetails->setMouseFocus(pt);
+        dlgDetails->setMouseRangeFocus(mouseRange1, mouseRange2);
     }
 }
 

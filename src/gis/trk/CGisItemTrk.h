@@ -155,6 +155,7 @@ public:
     QString getInfoRange();
     QString getInfoTrkPt(const trkpt_t& pt);
     QString getInfoProgress(const trkpt_t& pt);
+    QString getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2);
     quint32 getTotalElapsedSeconds() const
     {
         return totalElapsedSeconds;

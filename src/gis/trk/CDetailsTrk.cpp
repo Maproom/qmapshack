@@ -296,6 +296,19 @@ void CDetailsTrk::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
     }
 }
 
+void CDetailsTrk::setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2)
+{
+    if(pt1 && pt2)
+    {
+        labelInfoRange->setText(trk.getInfoRange(*pt1, *pt2));
+    }
+    else
+    {
+        labelInfoRange->setText("-\n-");
+    }
+
+}
+
 void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t * pt)
 {
     if(pt != 0)

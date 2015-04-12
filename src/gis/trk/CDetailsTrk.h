@@ -45,6 +45,7 @@ private slots:
     void slotItemSelectionChanged();
     void slotLinkActivated(const QUrl& url);
     void slotLinkActivated(const QString& url);
+    void slotMouseClickState(int);
 
 private:
     enum columns_t

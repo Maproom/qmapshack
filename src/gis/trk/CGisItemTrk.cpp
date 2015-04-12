@@ -1706,15 +1706,6 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
     mouseRange2     = 0;
     mouseFocusOwner = mode == eModeRange ? owner : "";
 
-//    if(!dlgDetails.isNull())
-//    {
-//        dlgDetails->setMouseRangeFocus(mouseRange1, mouseRange2);
-//    }
-
-    foreach(IPlot * plot, registeredPlots)
-    {
-        plot->setMouseRangeFocus(mouseRange1, mouseRange2);
-    }
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
@@ -2085,11 +2076,13 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
             foreach(IPlot * plot, registeredPlots)
             {
                 plot->setMouseFocus(mouseMoveFocus);
+                plot->setMouseRangeFocus(0, 0);
             }
 
             if(!dlgDetails.isNull())
             {
                 dlgDetails->setMouseFocus(mouseMoveFocus);
+                dlgDetails->setMouseRangeFocus(0, 0);
             }
         }
         break;

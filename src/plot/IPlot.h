@@ -31,6 +31,12 @@ class IPlot : public QWidget
     Q_OBJECT
 public:
     enum mode_e {eModeNormal, eModeIcon, eModeWindow};
+    enum mouse_click_state_e
+    {
+        eMouseClickIdle
+        , eMouseClick1st
+        , eMouseClick2nd
+    };
 
     IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
     virtual ~IPlot();
@@ -45,12 +51,16 @@ public:
         solid = yes;
     }
 
+signals:
+    void sigMouseClickState(int);
+
 private slots:
     void slotContextMenu(const QPoint & point);
     void slotSave();
     void slotHidePoints();
     void slotShowPoints();
     void slotCopy();
+    void slotStopRange();
 
 
 protected:
@@ -145,16 +155,11 @@ protected:
 
     QMenu * menu;
     QAction * actionPrint;
+    QAction * actionStopRange;
 
     qint32 idxSel1;
     qint32 idxSel2;
 
-    enum mouse_click_state_e
-    {
-        eMouseClickIdle
-        , eMouseClick1st
-        , eMouseClick2nd
-    };
 
     mouse_click_state_e mouseClickState;
 

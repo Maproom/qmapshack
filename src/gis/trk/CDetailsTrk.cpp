@@ -124,6 +124,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(labelInfo, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
 
+    connect(plotDistance, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(plotElevation, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(plotSpeed, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
     slotShowPlots();
@@ -316,6 +320,17 @@ void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t * pt)
         treeWidget->blockSignals(true);
         treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idxTotal));
         treeWidget->blockSignals(false);
+    }
+}
+
+void CDetailsTrk::slotMouseClickState(int s)
+{
+    if(s == IPlot::eMouseClickIdle)
+    {
+        labelInfoRange->setText("-\n-");
+        plotDistance->setMouseRangeFocus(0,0);
+        plotElevation->setMouseRangeFocus(0,0);
+        plotSpeed->setMouseRangeFocus(0,0);
     }
 }
 

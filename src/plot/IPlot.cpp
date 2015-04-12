@@ -105,7 +105,9 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     }
 
     menu = new QMenu(this);
-    actionPrint = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
+    actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
+    actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
+
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
 }
@@ -242,7 +244,7 @@ void IPlot::leaveEvent(QEvent * e)
 
     if(trk)
     {
-        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, objectName());
+//        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, objectName());
     }
 
     QApplication::restoreOverrideCursor();
@@ -404,11 +406,13 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             {
                 delete scrOptRange;
                 trk->setMode(CGisItemTrk::eModeNormal, objectName());
+                idxSel1 = idxSel2 = NOIDX;
                 mouseClickState = eMouseClickIdle;
                 break;
             }
             }
 
+            emit sigMouseClickState(mouseClickState);
 
             // update canvas if visible
             CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -1088,6 +1092,9 @@ void IPlot::slotContextMenu(const QPoint & point)
 {
     QPoint p = mapToGlobal(point);
 
+    actionStopRange->setEnabled(!(idxSel1 == NOIDX || idxSel2 == NOIDX));
+    actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
+
     menu->exec(p);
 }
 
@@ -1165,6 +1172,23 @@ void IPlot::slotCopy()
 
     trk->setMode(CGisItemTrk::eModeNormal, objectName());
     mouseClickState = eMouseClickIdle;
+}
+
+void IPlot::slotStopRange()
+{
+    delete scrOptRange;
+    trk->setMode(CGisItemTrk::eModeNormal, objectName());
+    idxSel1 = idxSel2 = NOIDX;
+    mouseClickState = eMouseClickIdle;
+
+    emit sigMouseClickState(mouseClickState);
+
+    // update canvas if visible
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->update();
+    }
 }
 
 void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)

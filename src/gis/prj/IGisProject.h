@@ -87,6 +87,8 @@ public:
     IGisProject(type_e type, const QString &filename, IDevice *parent);
     virtual ~IGisProject();
 
+    bool askBeforClose();
+
     IGisProject& operator=(const IGisProject& p)
     {
         key      = p.key;

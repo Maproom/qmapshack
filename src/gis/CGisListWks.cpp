@@ -894,11 +894,43 @@ void CGisListWks::slotCloseProject()
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
+            if(project->askBeforClose())
+            {
+                break;
+            }
             delete project;
         }
     }
     emit sigChanged();
 }
+
+void CGisListWks::slotCloseAllProjects()
+{
+    int res = QMessageBox::question(this, tr("Close all projects..."), tr("This will remove all projects from the workspace."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
+
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard);
+    foreach(QTreeWidgetItem * item, items)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project != 0)
+        {
+            if(project->askBeforClose())
+            {
+                break;
+            }
+            delete project;
+        }
+    }
+    emit sigChanged();
+}
+
+
 
 void CGisListWks::slotDeleteProject()
 {
@@ -1173,27 +1205,6 @@ void CGisListWks::slotAddEmptyProject()
     }
 }
 
-void CGisListWks::slotCloseAllProjects()
-{
-    int res = QMessageBox::question(this, tr("Close all projects..."), tr("This will remove all projects from the workspace."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
-    if(res != QMessageBox::Ok)
-    {
-        return;
-    }
-
-
-    CGisListWksEditLock lock(true, IGisItem::mutexItems);
-    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard);
-    foreach(QTreeWidgetItem * item, items)
-    {
-        IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
-        {
-            delete project;
-        }
-    }
-    emit sigChanged();
-}
 
 void CGisListWks::slotSearchGoogle(bool on)
 {

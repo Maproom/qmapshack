@@ -58,6 +58,22 @@ IGisProject::~IGisProject()
 }
 
 
+bool IGisProject::askBeforClose()
+{
+    int res = QMessageBox::Ok;
+    if(isChanged())
+    {
+        res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Save project?"), QObject::tr("The project \"%1\" was changed. Save befor closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::Save);
+        if(res == QMessageBox::Save)
+        {
+            save();
+        }
+    }
+
+    return res == QMessageBox::Abort;
+}
+
+
 bool IGisProject::isVisible() const
 {
     return checkState(CGisListWks::eColumnDecoration) == Qt::Checked;
@@ -590,3 +606,5 @@ bool IGisProject::remove()
     umount();
     return true;
 }
+
+

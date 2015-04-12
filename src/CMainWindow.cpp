@@ -190,6 +190,7 @@ CMainWindow::~CMainWindow()
      */
     cfg.beginGroup("Canvas");
     QList<CCanvas*> allViews;
+    QList<QWidget*> allOtherTabs;
 
     // save setup of all views
     cfg.beginGroup("Views");
@@ -201,6 +202,7 @@ CMainWindow::~CMainWindow()
         CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
         if(view == 0)
         {
+            allOtherTabs << tabWidget->widget(i);
             continue;
         }
         cnt++;
@@ -226,6 +228,13 @@ CMainWindow::~CMainWindow()
     CDemDraw::saveDemPath(cfg);
     cfg.endGroup(); // Canvas
 
+
+    /*
+        Delete all widgets in the tab widget other than views. The IPlot objects
+        in a track detail dialog send update events to the view on destruction.
+        So it is important that these are destroyed first.
+     */
+    qDeleteAll(allOtherTabs);
     /*
         Delete all canvas objects now to make sure they are destroyed before all
         other objects. This allows children of the canvas to access central objects

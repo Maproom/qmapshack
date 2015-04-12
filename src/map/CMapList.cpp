@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
+#include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
-#include "map/CMapDraw.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -100,7 +100,6 @@ void CMapList::updateHelpText()
 {
     if(treeWidget->topLevelItemCount() == 0)
     {
-
         labelIcon->show();
         pushMapHonk->show();
         labelHelpFillMapList->show();

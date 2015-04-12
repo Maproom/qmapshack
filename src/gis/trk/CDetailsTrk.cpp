@@ -310,7 +310,6 @@ void CDetailsTrk::setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGi
     {
         labelInfoRange->setText("-\n-");
     }
-
 }
 
 void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t * pt)

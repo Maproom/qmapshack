@@ -319,6 +319,8 @@ void IPlot::mousePressEvent(QMouseEvent * e)
         return;
     }
 
+    bool wasProcessed = true;
+
     posMouse = NOPOINT;
     if((e->button() == Qt::LeftButton) && rectGraphArea.contains(e->pos()))
     {
@@ -353,6 +355,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 else
                 {
                     new CFadingIcon(posMouse, "://icons/48x48/NoGo.png", this);
+                    wasProcessed = false;
                 }
                 break;
             }
@@ -412,13 +415,16 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             }
             }
 
-            emit sigMouseClickState(mouseClickState);
-
-            // update canvas if visible
-            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-            if(canvas)
+            if(wasProcessed)
             {
-                canvas->update();
+                emit sigMouseClickState(mouseClickState);
+
+                // update canvas if visible
+                CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+                if(canvas)
+                {
+                    canvas->update();
+                }
             }
         }
         e->accept();

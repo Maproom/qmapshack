@@ -477,7 +477,7 @@ QString CGisItemTrk::getInfoRange()
         {
             break;
         }
-        pt1++;        
+        pt1++;
     }
 
     while(pt2->flags & trkpt_t::eHidden)
@@ -641,7 +641,6 @@ QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2)
             IUnit::self().meter2speed((pt2.ascend - pt1.ascend)/dt, val, unit);
             str += QObject::tr(", %1%2").arg(val).arg(unit);
         }
-
     }
     else
     {
@@ -659,7 +658,6 @@ QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2)
             IUnit::self().meter2speed((pt2.descend - pt1.descend)/dt, val, unit);
             str += QObject::tr(", %1%2").arg(val).arg(unit);
         }
-
     }
     else
     {
@@ -1064,11 +1062,11 @@ void CGisItemTrk::findWaypointsCloseBy()
                 if(d < minD)
                 {
                     index = pt.idx;
-                    minD  = d;                    
+                    minD  = d;
                 }
             }
             else if(d > WPT_FOCUS_DIST_OUT)
-            {                
+            {
                 trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
                 if(trkpt)
                 {

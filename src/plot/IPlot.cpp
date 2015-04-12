@@ -369,7 +369,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 }
 
                 delete scrOptRange;
-                scrOptRange = new CScrOptRangeTrk(posMouse, trk, this);
+                scrOptRange = new CScrOptRangeTrk(e->pos(), trk, this);
                 connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
                 connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
                 connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
@@ -1092,7 +1092,7 @@ void IPlot::slotContextMenu(const QPoint & point)
 {
     QPoint p = mapToGlobal(point);
 
-    actionStopRange->setEnabled(!(idxSel1 == NOIDX || idxSel2 == NOIDX));
+    actionStopRange->setEnabled((mouseClickState != eMouseClickIdle) && !(idxSel1 == NOIDX || idxSel2 == NOIDX));
     actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
 
     menu->exec(p);

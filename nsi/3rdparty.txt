@@ -1,17 +1,26 @@
-QMapShack for Windows (short: QMS) is build with Visual Studio 2013 as 64bit application
-It depends on the 3rd party software listed below
+#############################################################
+#			QMapShack for Windows (short: QMS)				#
+#############################################################
+QMS is build with Visual Studio 2013 as 64bit application.
+
+It can be build with Visual Studio 2013 Community-Edition, too.
+
+Required Dependencies
+=====================
+QMS depends on the 3rd party software listed below:
 
 1.) Microsoft Visual C++ 2013 Redistributable Package
   The installer vcredist_x64.exe (ca 7MB size) as downloaded from
     http://www.microsoft.com/en-us/download/details.aspx?id=40784
-  is contained in the QLGT Installer package and may be executed if selected by the user.
-  Note: Those runtime libraries may already be contained in Windows 7 or WIndows 8 installations.
+  is already contained in the QMS Installer package and will be executed if selected by the user.
+  
+  Note: Those runtime libraries may already be contained in Windows 7 or Windows 8 installations.
 
 2.) Qt5 runtime libraries
-  The Qt DLL's are deployed in the QLGT installation directory. 
-  They are part of the "Qt libraries for Windows (VS 2008)" package.
-  This can be retrieved from http://qt.nokia.com/downloads/windows-cpp-vs2008.
-
+  The Qt DLL's are deployed in the QMS installation directory. 
+  They are part of Qt which you can download here:
+ 	http://qt-project.org/downloads
+	
 3.) The GDAL library, http://www.gdal.org/
 
 4.) The PROJ library http://trac.osgeo.org/proj/
@@ -23,38 +32,50 @@ It depends on the 3rd party software listed below
 
 Additional tools for building and installing
 ============================================
-- CMake 2.8, available at http://www.cmake.org/
+- CMake 3.0 or later, available at http://www.cmake.org/
 - NSIS, available at http://nsis.sourceforge.net/Main_Page
 
 
 Compile instructions - to be verified
-====================
+=====================================
 
 1.) Compile the GDAL library, http://www.gdal.org/
-[Build instructions inspired by http://trac.osgeo.org/gdal/wiki/BuildingOnWindows, http://dominoc925.blogspot.de/2013/03/build-64-bit-gdal-for-windows.html]
+
+[Build instructions inspired by http://trac.osgeo.org/gdal/wiki/BuildingOnWindows, http://dominoc925.blogspot.de/2013/03/build-64-bit-gdal-for-windows.html,]
+
 - Download the source code of the version 1.11 (or latest) from http://trac.osgeo.org/gdal/wiki/DownloadSource and unzip
 - In nmake.opt, adapt the following lines, according to your build environment [my settings are given as example]
   MSVC_VER=1800
-  GDAL_HOME = "M:\lib\gdal"
+  GDAL_HOME = "M:\lib\gdal"	
   PYDIR   =	"C:\Python34"
-  SWIG = D:\gdal111\swig.exe
+  SWIG = D:\gdal111\swig.exe # NOTE: swig.exe is part of precompiled binaries for Windows supplied by http://www.gisinternals.com/
   WIN64=YES
-- From the start menu, enter the VS2013, x64 native command prompt
-- nmake /f makefile.vc
-- nmake /f makefile.vc devinstall
-
+   
+- On the Windows Desktop:
+	=> select Start | All Programs | Microsoft Visual Studio 2013 | Visual Studio Tools | VS 2013 x64 Native Tools Command Prompt.
+- in the command prompt:
+	=> change directory to the extracted GDAL source code root folder
+	=> nmake /f makefile.vc
+	=> nmake /f makefile.vc devinstall
+	
 2.) Compile the PROJ library http://trac.osgeo.org/proj/
-- Download the source code of the version 4.8 (or latest) from http://trac.osgeo.org/proj/ and unzip
+
+- Download the source code of the version 4.8 (or latest) from http://trac.osgeo.org/proj/ and unzip it
 - In nmake.opt, adapt the following lines, according to your build environment [my settings are given as example]
   INSTDIR=M:\lib\PROJ
-- From the start menu, enter the VS2013, x64 native command prompt
-- nmake /f makefile.vc
-- nmake /f makefile.vc install-all
+- On the Windows Desktop:
+	=> select Start | All Programs | Microsoft Visual Studio 2013 | Visual Studio Tools | VS 2013 x64 Native Tools Command Prompt.
+- in the command prompt:
+	=> change directory to the extracted PROJ4 source code root folder
+	=> nmake /f makefile.vc
+	=> nmake /f makefile.vc install-all
 
-3.) Install QT5.3 or later 
+3.) Install QT5.4 or later 
 - Download and run the Qt5 Windows Online Installer from http://qt-project.org/downloads
   Install for VS2013, x64
-
+  
+  Note: if you prefer offline installation you can choose the right package in OFFLINE INSTALLERS section of that page
+  
 4.) Get the QMapshack source from the repository, e.g. 
    hg clone https://bitbucket.org/maproom/qmapshack QMapShack  
 Note: you might have to install TortoiseHG   
@@ -63,7 +84,8 @@ Note: you might have to install TortoiseHG
 - Configure 
   In the first run there will be errors. 
   Now enter the directories where you have installed Qt5, GDAL and PROJ.4 to the respective variables.
-  After that, Configure again.  
+  After that, Configure again.
+Note: in case that you only get some warnings, you anyway can try to GENERATE
 - Generate
 
 6.) Open the generated QMapShack.sln with VS2013
@@ -71,14 +93,11 @@ Note: you might have to install TortoiseHG
 
 7.) Download the VC redistributable installer 
   from http://www.microsoft.com/en-us/download/details.aspx?id=40784
+Note: in case the restributable files are already installed in your system, this step is not necessary.
 
-8.) Create the installer by executing
-- nsi/copyfiles.bat
-  Note: In copyfiles.bat, you may have to adapt the directories where you have installed Qt5, GDAL and PROJ.4.
-- nsi/QMapShack_Installer.nsi
+8.) Create the installer with NSIS(3.0b1)
+-  Execute the copyfiles.bat which you can find in \nsi directory of your QMS source directory
+  Note: In copyfiles.bat, you may have to adapt the directories where you have installed Qt5, GDAL and PROJ4.
   
-
-
-
-
-
+- Run the QMapShack_Installer.nsi script e.g via right click on script file and choosing "Compile NSIS Script" from contextual menu.
+  Note: there also are the options to run the script on command prompt with commandline version(makensis.exe). Or you can start windows version (makensisw.exe) to run the script.

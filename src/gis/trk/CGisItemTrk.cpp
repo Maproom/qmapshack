@@ -1904,6 +1904,10 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         newPointOfFocus = 0;
     }
 
+    /*
+       Test for line size befor applying index. This fixes random assertions because
+       of an invalid index. The reason for this is unknown.
+     */
     return newPointOfFocus ? ((int)idx < line.size() ? line[idx] : NOPOINTF) : NOPOINTF;
 }
 
@@ -2073,13 +2077,13 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
 
             foreach(IPlot * plot, registeredPlots)
             {
-                plot->setMouseFocus(mouseMoveFocus);
+                plot->setMouseFocus(pt);
                 plot->setMouseRangeFocus(0, 0);
             }
 
             if(!dlgDetails.isNull())
             {
-                dlgDetails->setMouseFocus(mouseMoveFocus);
+                dlgDetails->setMouseFocus(pt);
                 dlgDetails->setMouseRangeFocus(0, 0);
             }
         }
@@ -2091,7 +2095,7 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
             mouseClickFocus =  pt;
             if(!dlgDetails.isNull())
             {
-                dlgDetails->setMouseClickFocus(mouseClickFocus);
+                dlgDetails->setMouseClickFocus(pt);
             }
         }
 

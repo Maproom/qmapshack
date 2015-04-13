@@ -121,6 +121,11 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
 CCanvas::~CCanvas()
 {
+    /*
+        Some mouse objects call methods from their canvas on destruction.
+        So they are better deleted now explicitely befor any other object
+        in CCanvas is destroyed.
+     */
     delete mouse;
     saveSizeTrackProfile();
 }

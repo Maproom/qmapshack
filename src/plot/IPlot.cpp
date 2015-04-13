@@ -108,7 +108,6 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
     actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
 
-
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
 }
 
@@ -119,8 +118,16 @@ IPlot::~IPlot()
     if(trk)
     {
         trk->unregisterPlot(this);
+        /*
+            Always set the mode to normal. If the object is not owner
+            of the current mode, the request will be ignored.
+         */
         trk->setMode(CGisItemTrk::eModeNormal, objectName());
 
+        /*
+            As having the user focus will always display an on screen plot, closing
+            the plot has to result into the track loosing the focus.
+         */
         if(mode == eModeWindow)
         {
             trk->looseUserFocus();
@@ -242,11 +249,6 @@ void IPlot::leaveEvent(QEvent * e)
     needsRedraw = true;
     posMouse    = NOPOINT;
 
-    if(trk)
-    {
-//        trk->setMouseFocusByDistance(NOFLOAT, CGisItemTrk::eFocusMouseMove, objectName());
-    }
-
     QApplication::restoreOverrideCursor();
     update();
 }
@@ -339,6 +341,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             {
             case eMouseClickIdle:
             {
+                // In idle state a mouse click will select the first point of a range
                 if(trk->setMode(CGisItemTrk::eModeRange, objectName()))
                 {
                     if(data->axisType == CPlotData::eAxisLinear)
@@ -354,6 +357,10 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 }
                 else
                 {
+                    /*
+                        If the object is not the owner of the range selection, no action has to be taken.
+                        However the user has to be informed, that he clicked on the wrong widget.
+                     */
                     new CFadingIcon(posMouse, "://icons/48x48/NoGo.png", this);
                     wasProcessed = false;
                 }
@@ -362,6 +369,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
             case eMouseClick1st:
             {
+                // In 1st click state a mouse click will select the second point of a range and display options
                 if(data->axisType == CPlotData::eAxisLinear)
                 {
                     trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, objectName());
@@ -371,29 +379,35 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                     trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, objectName());
                 }
 
+                /*
+                    As the screen option is created on the fly it has to be connected to all slots,too.
+                    Later, when destroyed the slots will be disconnected automatically.
+                 */
                 delete scrOptRange;
                 scrOptRange = new CScrOptRangeTrk(e->pos(), trk, this);
                 connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
                 connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
                 connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
 
+                /* Adjust posiion of screen option widget if the widget is out of the visible area*/
                 QRect r1 = scrOptRange->geometry();
                 QRect r2 = geometry();
-
                 r1.moveTopLeft(mapToParent(r1.topLeft()));
-
                 if(!r2.contains(r1))
                 {
+                    // test if screen option is out of area on the right side
                     if(!r2.contains(r1.topRight()))
                     {
                         QPoint pt = QPoint(r2.width(), r2.height()) - QPoint(r1.width(), r1.height());
                         scrOptRange->move(pt);
                     }
+                    // test if screen option is out of area on the left side
                     else if(!r2.contains(r1.topLeft()))
                     {
                         QPoint pt = QPoint(0, r2.height()) - QPoint(0, r1.height());
                         scrOptRange->move(pt);
                     }
+                    // test if screen option is out of area on the bottom
                     else if(!r2.contains(r1.bottomLeft()))
                     {
                         QPoint pt = QPoint(r1.left(), r2.height()) - QPoint(r2.left(), r1.height());
@@ -407,6 +421,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
             case eMouseClick2nd:
             {
+                // In second click state a mouse click will reset the range selection
                 delete scrOptRange;
                 trk->setMode(CGisItemTrk::eModeNormal, objectName());
                 idxSel1 = idxSel2 = NOIDX;
@@ -415,6 +430,8 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             }
             }
 
+
+            // Update canvas only if the object ist the owener of the range selection
             if(wasProcessed)
             {
                 emit sigMouseClickState(mouseClickState);

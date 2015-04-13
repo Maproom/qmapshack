@@ -121,6 +121,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
 CCanvas::~CCanvas()
 {
+    delete mouse;
     saveSizeTrackProfile();
 }
 

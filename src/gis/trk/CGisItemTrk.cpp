@@ -1904,7 +1904,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         newPointOfFocus = 0;
     }
 
-    return newPointOfFocus ? line[idx] : NOPOINTF;
+    return newPointOfFocus ? ((int)idx < line.size() ? line[idx] : NOPOINTF) : NOPOINTF;
 }
 
 

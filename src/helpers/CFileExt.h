@@ -27,6 +27,7 @@ class CFileExt : public QFile
 public:
     CFileExt(const QString &filename)
         : QFile(filename)
+        , mapped(NULL)
     {
         cnt++;
     }
@@ -36,16 +37,30 @@ public:
         cnt--;
     }
 
+#ifndef Q_OS_WIN32
+    // data access function
+    const char *data(qint64 offset, qint64 s)
+    {
+        if(!mapped)
+        {
+            mapped = reinterpret_cast<const char*>(map(0, size()));
+        }
+        return mapped + offset;
+    }
+#else
     // data access function
     const char *data(qint64 offset, qint64 s)
     {
         uchar * p = map(offset,s);
         return (const char *)p;
     }
+#endif
 
 private:
-
     static int cnt;
+
+    const char *mapped;
+
 };
 
 

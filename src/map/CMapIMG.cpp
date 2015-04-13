@@ -1335,11 +1335,13 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf)
 
 void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois, unsigned level, const QRectF& viewport, QPainter& p)
 {
+#ifndef Q_OS_WIN32
     CFileExt file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
         return;
     }
+#endif
 
     QMap<QString,subfile_desc_t>::const_iterator subfile = subfiles.constBegin();
     while(subfile != subfiles.constEnd())
@@ -1348,6 +1350,7 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 //        qDebug() << (viewport.topLeft() * RAD_TO_DEG) << (viewport.bottomRight() * RAD_TO_DEG);
 //        qDebug() << (subfile->area.topLeft() * RAD_TO_DEG) << (subfile->area.bottomRight() * RAD_TO_DEG);
 //        qDebug() << subfile->area.intersects(viewport);
+
         if(!subfile->area.intersects(viewport))
         {
             ++subfile;
@@ -1358,6 +1361,14 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
         {
             break;
         }
+
+#ifdef Q_OS_WIN32
+        CFileExt file(filename);
+        if(!file.open(QIODevice::ReadOnly))
+        {
+            return;
+        }
+#endif
 
         QByteArray rgndata;
         readFile(file, subfile->parts["RGN"].offset, subfile->parts["RGN"].size, rgndata);
@@ -1416,9 +1427,15 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 #endif // DEBUG_SHOW_SUBDIV_BORDERS
 
         ++subfile;
+
+#ifdef Q_OS_WIN32
+        file.close();
+#endif
     }
 
+#ifndef Q_OS_WIN32
     file.close();
+#endif
 }
 
 void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStrTbl * strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois)

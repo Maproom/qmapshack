@@ -1,0 +1,9 @@
+<TMS>
+ <Title>Opencyclemap</Title>
+ <MinZoomLevel>1</MinZoomLevel>
+ <MaxZoomLevel>1024</MaxZoomLevel>
+ <Layer idx="0">
+  <ServerUrl>http://a.tile.thunderforest.com/cycle/%1/%2/%3.png</ServerUrl>
+ </Layer>
+ <Copyright>Openstreetmap contributors | Rendering:Â© Opencyclemap, CC-BY-SA</Copyright>
+</TMS>

@@ -183,6 +183,7 @@ void CMapList::slotMapHonk()
     saveResource("WorldTopo.wmts", dir);
     saveResource("OpenStreetMap.tms", dir);
     saveResource("OSM_Topo.tms", dir);
+    saveResource("OpenCycleMap.tms", dir);
 
     CMapDraw::setupMapPath(QStringList(QStringList(path)));
 

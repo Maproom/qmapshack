@@ -326,7 +326,10 @@ void CCanvas::paintEvent(QPaintEvent * e)
     // ----- start to draw fast content -----
 
     grid->draw(p, rect());
-    gis->draw(p, rect());
+    if(map->isFinished() && dem->isFinished() && gis->isFinished())
+    {
+        gis->draw(p, rect());
+    }
     mouse->draw(p, needsRedraw, rect());
 
 

@@ -80,7 +80,9 @@ IMouseEditLine::~IMouseEditLine()
 
 void IMouseEditLine::drawLine(const QPolygonF &l, QPainter& p)
 {
-    p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(Qt::magenta, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(l);
+    p.setPen(QPen(Qt::white, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(l);
 }
 
@@ -122,7 +124,9 @@ void IMouseEditLine::drawHighlight1(QPainter& p)
 
     QPolygonF highlight = line.mid(pos,len);
 
-    p.setPen(QPen(Qt::red, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(Qt::darkGreen, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(highlight);
+    p.setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(highlight);
 }
 
@@ -138,7 +142,9 @@ void IMouseEditLine::drawHighlight2(QPainter& p)
 
     QPolygonF highlight = line.mid(pos,len);
 
-    p.setPen(QPen(Qt::red, 12, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(Qt::darkGreen, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(highlight);
+    p.setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(highlight);
 }
 
@@ -224,31 +230,31 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
     case eStateMoveMap:
     case eStateIdle:
     case eStatePointSelected:
-        drawArrows(line, p);
         drawLine(line, p);
+        drawArrows(line, p);
         drawBullets(line, p);
         drawPointOfFocus(p);
         break;
 
     case eStateSelectRange:
-        drawArrows(line, p);
         drawLine(line, p);
+        drawArrows(line, p);
         drawHighlight1(p);
         drawBullets(line, p);
         drawPointOfFocus(p);
         break;
 
-    case eStateRangeSelected:
-        drawArrows(line, p);
+    case eStateRangeSelected:      
         drawLine(line, p);
+        drawArrows(line, p);
         drawHighlight2(p);
         drawBullets(line, p);
         drawPointOfFocus(p);
         break;
 
-    case eStateMovePoint:
-        drawArrows(line, p);
+    case eStateMovePoint:        
         drawLine(line, p);
+        drawArrows(line, p);
         drawBullets(line, p);
         drawPointOfFocus(p);
         break;
@@ -264,9 +270,9 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         {
             l = line.mid(0, idxStart) + newLine.mid(0, newLine.size() - 2) + subLinePixel + line.mid(idxStop, -1);
         }
-        drawLeadLine(leadLinePixel, p);
-        drawArrows(l, p);
+        drawLeadLine(leadLinePixel, p);        
         drawLine(l, p);
+        drawArrows(l, p);
         drawBullets(l, p);
         break;
     }
@@ -282,9 +288,9 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         {
             l = line.mid(0, idxStart + 1) + subLinePixel + newLine.mid(2, -1) + line.mid(idxStop + 1, -1);
         }
-        drawLeadLine(leadLinePixel, p);
-        drawArrows(l, p);
+        drawLeadLine(leadLinePixel, p);        
         drawLine(l, p);
+        drawArrows(l, p);
         drawBullets(l, p);
         break;
     }

@@ -1204,26 +1204,26 @@
         <translation>Soubor obsahuje zamknutá/zašifrovaná data. Garmin nechce, aby byl tento soubor použit s jiným programem než dodaným Garminem.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2477"/>
-        <location filename="../map/CMapIMG.cpp" line="2485"/>
-        <location filename="../map/CMapIMG.cpp" line="2489"/>
         <location filename="../map/CMapIMG.cpp" line="2494"/>
-        <location filename="../map/CMapIMG.cpp" line="2540"/>
-        <location filename="../map/CMapIMG.cpp" line="2548"/>
-        <location filename="../map/CMapIMG.cpp" line="2552"/>
+        <location filename="../map/CMapIMG.cpp" line="2502"/>
+        <location filename="../map/CMapIMG.cpp" line="2506"/>
+        <location filename="../map/CMapIMG.cpp" line="2511"/>
         <location filename="../map/CMapIMG.cpp" line="2557"/>
+        <location filename="../map/CMapIMG.cpp" line="2565"/>
+        <location filename="../map/CMapIMG.cpp" line="2569"/>
+        <location filename="../map/CMapIMG.cpp" line="2574"/>
         <source>Point of Interest</source>
         <translation>Podivuhodnost</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2684"/>
+        <location filename="../map/CMapIMG.cpp" line="2701"/>
         <source>Unknown</source>
         <translation>Neznámý</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2730"/>
-        <location filename="../map/CMapIMG.cpp" line="2738"/>
-        <location filename="../map/CMapIMG.cpp" line="2745"/>
+        <location filename="../map/CMapIMG.cpp" line="2747"/>
+        <location filename="../map/CMapIMG.cpp" line="2755"/>
+        <location filename="../map/CMapIMG.cpp" line="2762"/>
         <source>Area</source>
         <translation>Oblast</translation>
     </message>
@@ -1267,17 +1267,17 @@
 <context>
     <name>CMapPathSetup</name>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="45"/>
+        <location filename="../map/CMapPathSetup.cpp" line="47"/>
         <source>Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1</source>
         <translation>Přidat nebo odstranit cesty obsahující mapy. V cestě může být více map, ale žádná podcesta není zpracována. Podporovanými formáty jsou: %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="60"/>
+        <location filename="../map/CMapPathSetup.cpp" line="62"/>
         <source>Select map path...</source>
         <translation>Vybrat cestu k mapě...</translation>
     </message>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="76"/>
+        <location filename="../map/CMapPathSetup.cpp" line="78"/>
         <source>Select root path...</source>
         <translation>Vybrat cestu ke kořeni...</translation>
     </message>
@@ -3177,6 +3177,12 @@ I don&apos;t want to read the documentation!</source>
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../map/IMapPathSetup.ui" line="185"/>
+        <source>Help! I want maps!
+I don&apos;t want to read the documentation!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../map/IMapPathSetup.ui" line="29"/>
         <location filename="../map/IMapPathSetup.ui" line="135"/>
         <source>-</source>
@@ -3289,22 +3295,22 @@ I don&apos;t want to read the documentation!</source>
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="344"/>
         <source>Add points?</source>
         <translation>Přidat body?</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="344"/>
         <source>Add points to temporary line?</source>
         <translation>Přidat body do dočasné čáry?</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="881"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="887"/>
         <source>Warning!</source>
         <translation>Varování!</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="881"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="887"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
@@ -3336,12 +3342,12 @@ I don&apos;t want to read the documentation!</source>
         <translation>Uložit...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="585"/>
+        <location filename="../plot/IPlot.cpp" line="602"/>
         <source>No or bad data.</source>
         <translation>Žádné nebo špatné údaje.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1111"/>
+        <location filename="../plot/IPlot.cpp" line="1128"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>

@@ -1145,26 +1145,26 @@
         <translation>Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas d&apos;utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2477"/>
-        <location filename="../map/CMapIMG.cpp" line="2485"/>
-        <location filename="../map/CMapIMG.cpp" line="2489"/>
         <location filename="../map/CMapIMG.cpp" line="2494"/>
-        <location filename="../map/CMapIMG.cpp" line="2540"/>
-        <location filename="../map/CMapIMG.cpp" line="2548"/>
-        <location filename="../map/CMapIMG.cpp" line="2552"/>
+        <location filename="../map/CMapIMG.cpp" line="2502"/>
+        <location filename="../map/CMapIMG.cpp" line="2506"/>
+        <location filename="../map/CMapIMG.cpp" line="2511"/>
         <location filename="../map/CMapIMG.cpp" line="2557"/>
+        <location filename="../map/CMapIMG.cpp" line="2565"/>
+        <location filename="../map/CMapIMG.cpp" line="2569"/>
+        <location filename="../map/CMapIMG.cpp" line="2574"/>
         <source>Point of Interest</source>
         <translation>Point d&apos;intérêt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2684"/>
+        <location filename="../map/CMapIMG.cpp" line="2701"/>
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2730"/>
-        <location filename="../map/CMapIMG.cpp" line="2738"/>
-        <location filename="../map/CMapIMG.cpp" line="2745"/>
+        <location filename="../map/CMapIMG.cpp" line="2747"/>
+        <location filename="../map/CMapIMG.cpp" line="2755"/>
+        <location filename="../map/CMapIMG.cpp" line="2762"/>
         <source>Area</source>
         <translation>Surface</translation>
     </message>
@@ -1208,17 +1208,17 @@
 <context>
     <name>CMapPathSetup</name>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="45"/>
+        <location filename="../map/CMapPathSetup.cpp" line="47"/>
         <source>Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1</source>
         <translation>Ajoutez ou retirez des répertoires qui contiennent des cartes. Il peut y avoir plusieurs cartes dans un répertoire mais les sous-répertoires ne sont pas prises en compte. Les formats acceptés sont : %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="60"/>
+        <location filename="../map/CMapPathSetup.cpp" line="62"/>
         <source>Select map path...</source>
         <translation>Choisissez un répertoire...</translation>
     </message>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="76"/>
+        <location filename="../map/CMapPathSetup.cpp" line="78"/>
         <source>Select root path...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3069,6 +3069,12 @@ I don&apos;t want to read the documentation!</source>
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../map/IMapPathSetup.ui" line="185"/>
+        <source>Help! I want maps!
+I don&apos;t want to read the documentation!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../map/IMapPathSetup.ui" line="29"/>
         <location filename="../map/IMapPathSetup.ui" line="135"/>
         <source>-</source>
@@ -3181,22 +3187,22 @@ I don&apos;t want to read the documentation!</source>
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="344"/>
         <source>Add points?</source>
         <translation>Ajouter les points ?</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="344"/>
         <source>Add points to temporary line?</source>
         <translation>Ajouter les points à la ligne temporaire ?</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="881"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="887"/>
         <source>Warning!</source>
         <translation>Avertissement !</translation>
     </message>
     <message>
-        <location filename="../mouse/IMouseEditLine.cpp" line="881"/>
+        <location filename="../mouse/IMouseEditLine.cpp" line="887"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation>Ceci remplacera les données de l&apos;original par une ligne simple de coordonnées. Toutes les autres données seront définitivement perdues.</translation>
     </message>
@@ -3228,12 +3234,12 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="585"/>
+        <location filename="../plot/IPlot.cpp" line="602"/>
         <source>No or bad data.</source>
         <translation>Aucune donnée ou données invalides.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1111"/>
+        <location filename="../plot/IPlot.cpp" line="1128"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>

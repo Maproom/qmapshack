@@ -1,3 +1,14 @@
+V 1.2.0
+* TwoNav: prepend HTML file for waypoint comment with QMS_CMT
+* Devices: Warn if there is a file/path with the same name, but different key
+* TwoNav: Link comment file to roadbook waypoints.
+* Track: Enhance range selection
+* Track: Add range selection to plots
+* Canvas: Add option to choose between logarithmic and square scale.
+* Add button to add a selection online maps
+* Fix: Some waypoints do not snap on track
+* [Issue #14] Issue a warning when closing an unsaved project
+
 V 1.1.0
 * Garmin Mpas: fix line breaks of tooltips
 * Project summary: Add roadbook mode

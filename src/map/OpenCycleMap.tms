@@ -5,5 +5,5 @@
  <Layer idx="0">
   <ServerUrl>http://a.tile.thunderforest.com/cycle/%1/%2/%3.png</ServerUrl>
  </Layer>
- <Copyright>Openstreetmap contributors | Rendering:Â© Opencyclemap, CC-BY-SA</Copyright>
+ <Copyright>Map data: (c) OpenStreetMap contributors, ODbL | Rendering: (c) OpenCycleMap , CC-BY-SA</Copyright>
 </TMS>

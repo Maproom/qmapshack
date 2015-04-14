@@ -37,7 +37,7 @@ private slots:
     void slotDelPath();
     void slotItemSelectionChanged();
     void slotChangeCachePath();
-
+    void slotMapHonk();
 
 private:
     QStringList& paths;

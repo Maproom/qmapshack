@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "map/CMapDraw.h"
 #include "map/CMapPathSetup.h"
+#include "map/CMapList.h"
 
 #include <QtWidgets>
 
@@ -32,6 +33,7 @@ CMapPathSetup::CMapPathSetup(QStringList &paths, QString& pathCache)
     connect(toolAdd, SIGNAL(clicked()), this, SLOT(slotAddPath()));
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelPath()));
     connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+    connect(pushMapHonk, SIGNAL(clicked()), this, SLOT(slotMapHonk()));
 
     foreach(const QString &path, paths)
     {
@@ -80,6 +82,12 @@ void CMapPathSetup::slotChangeCachePath()
     }
 
     labelCacheRoot->setText(path);
+}
+
+void CMapPathSetup::slotMapHonk()
+{
+    CMapList::slotMapHonk();
+    close();
 }
 
 void CMapPathSetup::accept()

@@ -64,10 +64,12 @@ public:
 signals:
     void sigChanged();
 
+public slots:
+    static void slotMapHonk();
+
 private slots:
     void slotActivate();
     void slotContextMenu(const QPoint &point);
-    void slotMapHonk();
 
 private:
     QMenu * menu;

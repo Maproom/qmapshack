@@ -775,3 +775,36 @@ bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long
     return QWidget::nativeEvent(eventType, message, result);
 }
 #endif // WIN32
+
+void CMainWindow::CMainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    if(event->mimeData()->hasUrls())
+    {
+        QList<QUrl> urls = event->mimeData()->urls();
+        QFileInfo fi(urls[0].path());
+        QString ext = fi.suffix().toUpper();
+
+        if ( (ext == "QMS") || (ext == "GPX"))
+        {
+            event->acceptProposedAction();
+        }
+
+    }
+}
+
+
+void CMainWindow::CMainWindow::dropEvent(QDropEvent *event)
+{
+    QList<QUrl> urls = event->mimeData()->urls();
+    QUrl url;
+
+    QStringList filenames;
+    foreach(url, urls)
+    {
+        filenames << url.toLocalFile();
+    }
+
+    loadGISData(filenames);
+
+    event->acceptProposedAction();
+}

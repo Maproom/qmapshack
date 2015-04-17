@@ -53,6 +53,7 @@ public:
         {
             unmap(p);
         }
+        mappedSections.clear();
     }
 
 #else

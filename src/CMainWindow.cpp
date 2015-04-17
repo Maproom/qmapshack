@@ -776,7 +776,7 @@ bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long
 }
 #endif // WIN32
 
-void CMainWindow::CMainWindow::dragEnterEvent(QDragEnterEvent *event)
+void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
     if(event->mimeData()->hasUrls())
     {
@@ -793,7 +793,7 @@ void CMainWindow::CMainWindow::dragEnterEvent(QDragEnterEvent *event)
 }
 
 
-void CMainWindow::CMainWindow::dropEvent(QDropEvent *event)
+void CMainWindow::dropEvent(QDropEvent *event)
 {
     QList<QUrl> urls = event->mimeData()->urls();
     QUrl url;

@@ -49,7 +49,7 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     }
 
     connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelPositon, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(labelPosition, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
@@ -88,7 +88,7 @@ void CDetailsWpt::setupGui()
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());
     labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName(), ""));
-    labelPositon->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));
+    labelPosition->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));
 
     if(wpt.isTainted())
     {

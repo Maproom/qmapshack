@@ -1430,6 +1430,8 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
 #ifdef Q_OS_WIN32
         file.close();
+#else
+        file.free();
 #endif
     }
 

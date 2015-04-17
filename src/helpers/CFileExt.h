@@ -41,12 +41,20 @@ public:
     // data access function
     const char *data(qint64 offset, qint64 s)
     {
-        if(!mapped)
-        {
-            mapped = reinterpret_cast<const char*>(map(0, size()));
-        }
-        return mapped + offset;
+
+        mapped = map(offset, s);
+        mappedSections << mapped;
+        return (const char*)mapped;
     }
+
+    void free()
+    {
+        foreach(uchar * p, mappedSections)
+        {
+            unmap(p);
+        }
+    }
+
 #else
     // data access function
     const char *data(qint64 offset, qint64 s)
@@ -59,7 +67,8 @@ public:
 private:
     static int cnt;
 
-    const char *mapped;
+    uchar *mapped;
+    QSet<uchar*> mappedSections;
 
 };
 

@@ -63,11 +63,13 @@ bool IGisProject::askBeforClose()
     int res = QMessageBox::Ok;
     if(isChanged())
     {
+        QApplication::setOverrideCursor(Qt::ArrowCursor);
         res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Save project?"), QObject::tr("The project \"%1\" was changed. Save befor closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::Save);
         if(res == QMessageBox::Save)
         {
             save();
         }
+        QApplication::restoreOverrideCursor();
     }
 
     return res == QMessageBox::Abort;

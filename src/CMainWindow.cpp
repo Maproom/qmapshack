@@ -107,7 +107,9 @@ CMainWindow::CMainWindow()
     connect(actionVrtBuilder, SIGNAL(triggered()), this, SLOT(slotBuildVrt()));
     connect(actionStoreView, SIGNAL(triggered()), this, SLOT(slotStoreView()));
     connect(actionLoadView, SIGNAL(triggered()), this, SLOT(slotLoadView()));
+    connect(actionClose, SIGNAL(triggered()), this, SLOT(close()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
+
 
 
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));

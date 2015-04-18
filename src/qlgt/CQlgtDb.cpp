@@ -571,7 +571,9 @@ void CQlgtDb::printStatistic()
     if(query.next())
     {
         nItems += query.value(0).toInt();
-        gui->stdErr(tr("Overlays:         %1 (only area overlays will be converted to QMapShack)").arg(query.value(0).toInt()));
+        gui->stdErr(tr("Overlays:         %1 (areas will be converted as areas").arg(query.value(0).toInt()));
+        gui->stdErr(tr("                      distance lines will be converted to tracks"));
+        gui->stdErr(tr("                      all other overlay times will be lost)"));
     }
     query.prepare("SELECT COUNT() FROM diarys");
     query.bindValue(":type", eDry);
@@ -743,13 +745,24 @@ void CQlgtDb::xferItem(quint64 id)
         {
             IQlgtOverlay ovl1(id, 0);
             stream >> ovl1;
-            if(ovl1.type != "Area")
+            if(ovl1.type == "Area")
+            {
+                dbQms->addArea(ovl1);
+                nOvl++;
+            }
+            else if(ovl1.type == "Distance")
+            {
+                dbQms->addTrk(ovl1);
+                nTrk++;
+            }
+            else
             {
                 gui->stdErr(tr("Overlay of type '%1' cant be converted").arg(ovl1.type));
+                nOvl++;
                 break;
             }
-            dbQms->addArea(ovl1);
-            nOvl++;
+
+
             break;
         }
         }

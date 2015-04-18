@@ -43,6 +43,7 @@ public:
     void addFolder(CQlgtFolder &folder);
     void addWpt(CQlgtWpt &wpt1);
     void addTrk(CQlgtTrack &trk1);
+    void addTrk(IQlgtOverlay &trk1);
     void addRte(CQlgtRoute& rte1);
     void addArea(IQlgtOverlay& ovl1);
 

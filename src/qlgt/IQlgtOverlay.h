@@ -43,6 +43,7 @@ public:
     qint32 style;
     quint32 width;
     quint8 opacity;
+    float speed;
 };
 
 QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl);

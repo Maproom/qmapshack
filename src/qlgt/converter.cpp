@@ -208,6 +208,38 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     }
 }
 
+CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl)
+    : IGisItem(0, eTypeTrk, NOIDX)
+{
+    trk.name    = ovl.name;
+    trk.cmt     = ovl.comment;
+    trk.desc    = ovl.description;
+    trk.color   = ovl.color.name();
+
+    trkseg_t seg;
+    foreach(const IQlgtOverlay::pt_t& pt1, ovl.points)
+    {
+        trkpt_t pt;
+        pt.lon = pt1.u * RAD_TO_DEG;
+        pt.lat = pt1.v * RAD_TO_DEG;
+
+        seg.pts << pt;
+    }
+    trk.segs << seg;
+    setColor(str2color(trk.color));
+    deriveSecondaryData();
+
+    filterReplaceElevation();
+    if(ovl.speed != 0)
+    {
+        filterSpeed(ovl.speed);
+    }
+
+    genKey();
+    setupHistory();
+}
+
+
 
 CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
     : IGisItem(0, eTypeOvl, NOIDX)

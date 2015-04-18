@@ -32,6 +32,7 @@ class CDetailsTrk;
 class CScrOptTrk;
 class QSqlDatabase;
 class CQlgtTrack;
+class IQlgtOverlay;
 class QDir;
 
 #define TRK_N_COLORS 17
@@ -111,6 +112,8 @@ public:
        @param project
      */
     CGisItemTrk(const QString& filename, IGisProject * project);
+
+    CGisItemTrk(const IQlgtOverlay& ovl);
 
     virtual ~CGisItemTrk();
 

@@ -87,19 +87,16 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
             }
             else if(ovl.type == "Distance")
             {
-                float speed;
-                QString name;
-                QString comment;
-                QString parentWpt;
                 int size, idx = 0;
                 IQlgtOverlay::pt_t pt;
-                s1 >> name >> comment >> size;
+                s1 >> ovl.name >> ovl.comment >> size;
                 for(int i = 0; i < size; ++i)
                 {
                     s1 >> pt.u >> pt.v;
                     pt.idx = idx++;
+                    ovl.points << pt;
                 }
-                s1 >> speed >> ovl.key >> parentWpt;
+                s1 >> ovl.speed >> ovl.key >> ovl.parentWpt;
             }
             else if(ovl.type == "Area")
             {
@@ -188,6 +185,7 @@ QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
 
 IQlgtOverlay::IQlgtOverlay(quint64 id, QObject *parent)
     : IItem(id)
+    , speed(0)
 {
 }
 

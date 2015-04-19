@@ -1002,6 +1002,11 @@ void CGisItemTrk::findWaypointsCloseBy()
         }
     }
 
+    if(line.isEmpty())
+    {
+        return;
+    }
+
     // convert coodinates of all waypoints into meter coordinates relative to the first track point
     point3D pt0 = line[0];
     QList<trkwpt_t> trkwpts;
@@ -1029,11 +1034,6 @@ void CGisItemTrk::findWaypointsCloseBy()
         trkwpt.name = wpt->getName();
 
         trkwpts << trkwpt;
-    }
-
-    if(line.isEmpty())
-    {
-        return;
     }
 
     // convert all coordinates into meter relative to the first track point.
@@ -1313,17 +1313,37 @@ void CGisItemTrk::hideSelectedPoints()
         idx2++;
     }
 
-    // iterate over all segments and delete points between idx1 and idx2
-    for(int s = 0; s < trk.segs.size(); s++)
+    // special case for a single point
+    if(idx1 == idx2)
     {
-        trkseg_t& seg = trk.segs[s];
-        for(int i = 0; i < seg.pts.size(); i++)
+        for(int s = 0; s < trk.segs.size(); s++)
         {
-            trkpt_t& trkpt = seg.pts[i];
-
-            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+            trkseg_t& seg = trk.segs[s];
+            for(int i = 0; i < seg.pts.size(); i++)
             {
-                trkpt.flags |= trkpt_t::eHidden;
+                trkpt_t& trkpt = seg.pts[i];
+
+                if((idx1 == trkpt.idxTotal))
+                {
+                    trkpt.flags |= trkpt_t::eHidden;
+                }
+            }
+        }
+    }
+    else
+    {
+        // iterate over all segments and delete points between idx1 and idx2
+        for(int s = 0; s < trk.segs.size(); s++)
+        {
+            trkseg_t& seg = trk.segs[s];
+            for(int i = 0; i < seg.pts.size(); i++)
+            {
+                trkpt_t& trkpt = seg.pts[i];
+
+                if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+                {
+                    trkpt.flags |= trkpt_t::eHidden;
+                }
             }
         }
     }
@@ -1349,16 +1369,16 @@ void CGisItemTrk::showSelectedPoints()
         qSwap(idx1,idx2);
     }
 
-    // if first index is the first point adjust index to hide it, too
-    if(isTrkPtFirstVisible(idx1))
-    {
-        idx1--;
-    }
-    // if second index is the last point adjust index to hide it, too
-    if(isTrkPtLastVisible(idx2))
-    {
-        idx2++;
-    }
+//    // if first index is the first point adjust index to hide it, too
+//    if(isTrkPtFirstVisible(idx1))
+//    {
+//        idx1--;
+//    }
+//    // if second index is the last point adjust index to hide it, too
+//    if(isTrkPtLastVisible(idx2))
+//    {
+//        idx2++;
+//    }
 
     for(int s = 0; s < trk.segs.size(); s++)
     {

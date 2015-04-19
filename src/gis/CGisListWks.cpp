@@ -113,19 +113,23 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemTrk     = new QMenu(this);
     actionEditDetails = menuItemTrk->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
     actionCopyItem  = menuItemTrk->addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
+    menuItemTrk->addSeparator();
     actionFocusTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
     actionFocusTrk->setCheckable(true);
     actionRangeTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/SelectRange.png"),tr("Select Range"), this, SLOT(slotRangeTrk()));
     actionEditTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/LineMove.png"),tr("Edit Track Points"), this, SLOT(slotEditTrk()));
     actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),tr("Reverse Track"), this, SLOT(slotReverseTrk()));
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),tr("Combine Tracks"), this, SLOT(slotCombineTrk()));
+    menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
     menuItemWpt     = new QMenu(this);
     menuItemWpt->addAction(actionEditDetails);
     menuItemWpt->addAction(actionCopyItem);
+    menuItemWpt->addSeparator();
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
 
     menuItemRte     = new QMenu(this);
@@ -137,7 +141,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemOvl     = new QMenu(this);
     menuItemOvl->addAction(actionEditDetails);
     menuItemOvl->addAction(actionCopyItem);
+    menuItemOvl->addSeparator();
     actionEditArea  = menuItemOvl->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
+    menuItemOvl->addSeparator();
     menuItemOvl->addAction(actionDelete);
 
 
@@ -854,19 +860,21 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         if(gisItem != 0)
         {
             bool isOnDevice = gisItem->isOnDevice();
+            bool isReadOnly = gisItem->isReadOnly();
+
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
                 actionCombineTrk->setDisabled(isOnDevice);
                 actionRangeTrk->setDisabled(isOnDevice);
                 actionReverseTrk->setDisabled(isOnDevice);
-                actionEditTrk->setDisabled(isOnDevice);
+                actionEditTrk->setDisabled(isOnDevice || isReadOnly);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 menuItemTrk->exec(p);
                 break;
 
             case IGisItem::eTypeWpt:
-                actionMoveWpt->setDisabled(isOnDevice);
+                actionMoveWpt->setDisabled(isOnDevice || isReadOnly);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
                 break;
@@ -876,7 +884,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 break;
 
             case IGisItem::eTypeOvl:
-                actionEditArea->setDisabled(isOnDevice);
+                actionEditArea->setDisabled(isOnDevice | isReadOnly);
                 menuItemOvl->exec(p);
                 break;
             }

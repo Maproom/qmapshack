@@ -571,9 +571,7 @@ void CQlgtDb::printStatistic()
     if(query.next())
     {
         nItems += query.value(0).toInt();
-        gui->stdErr(tr("Overlays:         %1 (areas will be converted as areas").arg(query.value(0).toInt()));
-        gui->stdErr(tr("                      distance lines will be converted to tracks"));
-        gui->stdErr(tr("                      all other overlay times will be lost)"));
+        gui->stdErr(tr("Overlays:         %1 (areas will be converted as areas, distance lines will be converted to tracks, all other overlay items will be lost)").arg(query.value(0).toInt()));
     }
     query.prepare("SELECT COUNT() FROM diarys");
     query.bindValue(":type", eDry);

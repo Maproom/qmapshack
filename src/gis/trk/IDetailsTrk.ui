@@ -270,6 +270,9 @@
                </property>
                <item>
                 <widget class="QToolButton" name="toolLock">
+                 <property name="toolTip">
+                  <string>Toggle read only mode. You have to open the lock to edit the item.</string>
+                 </property>
                  <property name="text">
                   <string>...</string>
                  </property>
@@ -299,6 +302,9 @@
                    <width>25</width>
                    <height>25</height>
                   </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -573,6 +579,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>CHistoryListWidget</class>
+   <extends>QListWidget</extends>
+   <header>helpers/CHistoryListWidget.h</header>
+  </customwidget>
+  <customwidget>
    <class>CPlotTrack</class>
    <extends>QWidget</extends>
    <header>plot/CPlotTrack.h</header>
@@ -595,11 +606,6 @@
    <extends>QWidget</extends>
    <header>plot/CPlotSpeed.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CHistoryListWidget</class>
-   <extends>QListWidget</extends>
-   <header>helpers/CHistoryListWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

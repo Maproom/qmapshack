@@ -201,7 +201,7 @@
        <item>
         <widget class="QToolButton" name="toolLock">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read Only Mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Toggle read only mode. You have to open the lock to edit the item.</string>
          </property>
          <property name="text">
           <string>...</string>

@@ -375,6 +375,7 @@ void CDetailsTrk::slotChangeReadOnlyMode(bool on)
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
     trk.setReadOnlyMode(on);
+    setupGui();
     QApplication::restoreOverrideCursor();
 }
 

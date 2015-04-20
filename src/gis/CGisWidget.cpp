@@ -328,21 +328,6 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
     emit sigChanged();
 }
 
-void CGisWidget::setReadOnly(bool yes, IGisItem::key_t &key)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
-
-    IGisItem * item = getItemByKey(key);
-    if(item == 0)
-    {
-        return;
-    }
-
-    item->setReadOnlyMode(yes);
-
-    emit sigChanged();
-}
-
 void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

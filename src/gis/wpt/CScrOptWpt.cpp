@@ -38,12 +38,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     label->setText(wpt->getInfo());
     adjustSize();
 
-    bool isReadOnly = wpt->isReadOnly();
-    bool isOnDevice = wpt->isOnDevice();
-    toolLock->setChecked(isReadOnly);
-    toolLock->setDisabled(isOnDevice);
-    toolMove->setDisabled(isReadOnly);
-    toolProj->setDisabled(wpt->isGeocache() || isOnDevice);
+    toolMove->setDisabled(wpt->isReadOnly());
+    toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
     photoAlbum->reload(wpt->getImages());
 
     anchor = wpt->getPointCloseBy(point);
@@ -55,7 +51,6 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolMove, SIGNAL(clicked()), this, SLOT(slotMove()));
     connect(toolProj, SIGNAL(clicked()), this, SLOT(slotProj()));
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotLock(bool)));
 
     adjustSize();
 }
@@ -91,12 +86,6 @@ void CScrOptWpt::slotMove()
 void CScrOptWpt::slotProj()
 {
     CGisWidget::self().projWptByKey(key);
-    deleteLater();
-}
-
-void CScrOptWpt::slotLock(bool yes)
-{
-    CGisWidget::self().setReadOnly(yes, key);
     deleteLater();
 }
 

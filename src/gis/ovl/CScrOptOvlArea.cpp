@@ -34,9 +34,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     label->setText(area->getInfo());
     adjustSize();
 
-    bool isReadOnly = area->isReadOnly();
-    toolEdit->setDisabled(isReadOnly);
-    toolLock->setChecked(isReadOnly);
+    toolEdit->setDisabled(area->isReadOnly());
 
     anchor = area->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
@@ -46,7 +44,6 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotLock(bool)));
 }
 
 CScrOptOvlArea::~CScrOptOvlArea()
@@ -75,12 +72,6 @@ void CScrOptOvlArea::slotDelete()
 void CScrOptOvlArea::slotEdit()
 {
     CGisWidget::self().editAreaByKey(key);
-    deleteLater();
-}
-
-void CScrOptOvlArea::slotLock(bool yes)
-{
-    CGisWidget::self().setReadOnly(yes, key);
     deleteLater();
 }
 

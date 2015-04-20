@@ -40,12 +40,9 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    bool isReadOnly = trk->isReadOnly();
     bool isOnDevice = trk->isOnDevice();
-    toolLock->setChecked(isReadOnly);
-    toolLock->setDisabled(isOnDevice);
     toolCut->setDisabled(isOnDevice);
-    toolEdit->setDisabled(isReadOnly);
+    toolEdit->setDisabled(trk->isReadOnly());
     toolReverse->setDisabled(isOnDevice);
     toolCombine->setDisabled(isOnDevice);
     toolRange->setDisabled(isOnDevice);
@@ -59,7 +56,6 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolReverse, SIGNAL(clicked()), this, SLOT(slotReverse()));
     connect(toolCombine, SIGNAL(clicked()), this, SLOT(slotCombine()));
     connect(toolRange, SIGNAL(clicked()), this, SLOT(slotRange()));
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotLock(bool)));
 
     // reset user focus if the track has it
     trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CScrOptTrk");
@@ -121,12 +117,6 @@ void CScrOptTrk::slotCombine()
 void CScrOptTrk::slotRange()
 {
     CGisWidget::self().rangeTrkByKey(key);
-    deleteLater();
-}
-
-void CScrOptTrk::slotLock(bool yes)
-{
-    CGisWidget::self().setReadOnly(yes, key);
     deleteLater();
 }
 

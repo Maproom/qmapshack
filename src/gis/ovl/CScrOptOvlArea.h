@@ -41,7 +41,6 @@ private slots:
     void slotCopy();
     void slotDelete();
     void slotEdit();
-    void slotLock(bool yes);
 
 private:
     IGisItem::key_t key;

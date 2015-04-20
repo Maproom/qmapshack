@@ -88,11 +88,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     db.open();
     configDB();
 
-    QIcon iconLock;
-    iconLock.addFile(QStringLiteral(":/icons/32x32/UnLock.png"), QSize(), QIcon::Normal, QIcon::Off);
-    iconLock.addFile(QStringLiteral(":/icons/32x32/Lock.png"), QSize(), QIcon::Normal, QIcon::On);
-
-
     menuProjectWks  = new QMenu(this);
     actionEditPrj   = menuProjectWks->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
     actionSaveAs    = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
@@ -118,8 +113,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemTrk     = new QMenu(this);
     actionEditDetails = menuItemTrk->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
     actionCopyItem  = menuItemTrk->addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
-    actionLockItem  = menuItemTrk->addAction(iconLock,tr("Lock/Unlock"), this, SLOT(slotLockItem(bool)));
-    actionLockItem->setCheckable(true);
     menuItemTrk->addSeparator();
     actionFocusTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
     actionFocusTrk->setCheckable(true);
@@ -133,7 +126,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemWpt     = new QMenu(this);
     menuItemWpt->addAction(actionEditDetails);
     menuItemWpt->addAction(actionCopyItem);
-    menuItemWpt->addAction(actionLockItem);
     menuItemWpt->addSeparator();
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
@@ -143,14 +135,12 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemRte     = new QMenu(this);
     menuItemRte->addAction(actionEditDetails);
     menuItemRte->addAction(actionCopyItem);
-    menuItemRte->addAction(actionLockItem);
     menuItemRte->addAction(actionDelete);
 
 
     menuItemOvl     = new QMenu(this);
     menuItemOvl->addAction(actionEditDetails);
     menuItemOvl->addAction(actionCopyItem);
-    menuItemOvl->addAction(actionLockItem);
     menuItemOvl->addSeparator();
     actionEditArea  = menuItemOvl->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     menuItemOvl->addSeparator();
@@ -159,7 +149,6 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
-    menuItem->addAction(actionLockItem);
     menuItem->addAction(actionDelete);
 
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
@@ -873,8 +862,6 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             bool isOnDevice = gisItem->isOnDevice();
             bool isReadOnly = gisItem->isReadOnly();
 
-            actionLockItem->setChecked(isReadOnly);
-
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
@@ -1093,21 +1080,6 @@ void CGisListWks::slotDeleteItem()
         if(project)
         {
             project->postStatus();
-        }
-    }
-}
-
-void CGisListWks::slotLockItem(bool yes)
-{
-    CGisListWksEditLock lock(false, IGisItem::mutexItems);
-
-    QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
-    {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem != 0)
-        {
-            gisItem->setReadOnlyMode(yes);
         }
     }
 }

@@ -38,7 +38,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     label->setText(wpt->getInfo());
     adjustSize();
 
-    toolMove->setDisabled(wpt->isReadOnly());
+
     toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
     photoAlbum->reload(wpt->getImages());
 

@@ -398,25 +398,37 @@ bool IGisItem::isOnDevice() const
     return project->isOnDevice();
 }
 
-void IGisItem::setReadOnlyMode(bool readOnly)
+bool IGisItem::setReadOnlyMode(bool readOnly)
 {
+    // if the item is on a device no change is allowed
     if(isOnDevice())
     {
-        return;
+        return false;
     }
 
+    // test if it is a change at all
+    if(isReadOnly() == readOnly)
+    {
+        return true;
+    }
+
+    // warn if item is external and read only
     if(!(flags & (eFlagCreatedInQms|eFlagTainted)))
     {
         if(isReadOnly() && !readOnly)
         {
+            QApplication::setOverrideCursor(Qt::ArrowCursor);
             QString str = QObject::tr("This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.");
             if(QMessageBox::warning(&CMainWindow::self(), QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok) != QMessageBox::Ok)
             {
-                return;
+                QApplication::restoreOverrideCursor();
+                return false;
             }
+            QApplication::restoreOverrideCursor();
         }
     }
 
+    // finally change falg
     if(readOnly)
     {
         flags &= ~eFlagWriteAllowed;
@@ -427,6 +439,7 @@ void IGisItem::setReadOnlyMode(bool readOnly)
     }
 
     updateHistory();
+    return true;
 }
 
 

@@ -30,13 +30,8 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, QWidge
     label->setText(trk->getInfoRange());
     adjustSize();
 
-    bool isReadOnly = trk->isReadOnly();
-    toolHidePoints->setEnabled(!isReadOnly);
-    toolShowPoints->setEnabled(!isReadOnly);
-
     setOrigin(point.toPoint());
 
-    qDebug() << point << (point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 }

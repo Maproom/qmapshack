@@ -349,6 +349,11 @@ void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
     if(wpt != 0)
     {
+        if(!wpt->setReadOnlyMode(false))
+        {
+            return;
+        }
+
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas != 0)
         {
@@ -421,6 +426,11 @@ void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(trk != 0)
     {
+        if(!trk->setReadOnlyMode(false))
+        {
+            return;
+        }
+
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas != 0)
         {
@@ -451,6 +461,11 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
     CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(getItemByKey(key));
     if(area != 0)
     {
+        if(!area->setReadOnlyMode(false))
+        {
+            return;
+        }
+
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas != 0)
         {

@@ -269,6 +269,10 @@ public:
      */
     bool isTainted() const;
 
+    /**
+       @brief Check if item is on a GPS device
+       @return True if the item is stored on a device
+     */
     bool isOnDevice() const;
 
     /**
@@ -278,8 +282,10 @@ public:
        message box with a warning and ask the user to confirm.
 
        @param readOnly      set true to make item read only
+
+       @return Return true if the mode change has been accepted.
      */
-    virtual void setReadOnlyMode(bool readOnly);
+    virtual bool setReadOnlyMode(bool readOnly);
 
     virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
     virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)

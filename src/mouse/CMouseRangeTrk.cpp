@@ -217,6 +217,10 @@ void CMouseRangeTrk::slotHidePoints()
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk != 0)
     {
+        if(!trk->setReadOnlyMode(false))
+        {
+            return;
+        }
         trk->hideSelectedPoints();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
@@ -230,6 +234,11 @@ void CMouseRangeTrk::slotShowPoints()
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk != 0)
     {
+        if(!trk->setReadOnlyMode(false))
+        {
+            return;
+        }
+
         trk->showSelectedPoints();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }

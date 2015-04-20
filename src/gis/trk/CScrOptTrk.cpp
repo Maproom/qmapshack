@@ -42,7 +42,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
 
     bool isOnDevice = trk->isOnDevice();
     toolCut->setDisabled(isOnDevice);
-    toolEdit->setDisabled(trk->isReadOnly());
+    toolEdit->setDisabled(isOnDevice);
     toolReverse->setDisabled(isOnDevice);
     toolCombine->setDisabled(isOnDevice);
     toolRange->setDisabled(isOnDevice);

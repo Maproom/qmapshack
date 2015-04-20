@@ -860,7 +860,6 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         if(gisItem != 0)
         {
             bool isOnDevice = gisItem->isOnDevice();
-            bool isReadOnly = gisItem->isReadOnly();
 
             switch(gisItem->type())
             {
@@ -868,13 +867,13 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionCombineTrk->setDisabled(isOnDevice);
                 actionRangeTrk->setDisabled(isOnDevice);
                 actionReverseTrk->setDisabled(isOnDevice);
-                actionEditTrk->setDisabled(isOnDevice || isReadOnly);
+                actionEditTrk->setDisabled(isOnDevice);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 menuItemTrk->exec(p);
                 break;
 
             case IGisItem::eTypeWpt:
-                actionMoveWpt->setDisabled(isOnDevice || isReadOnly);
+                actionMoveWpt->setDisabled(isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
                 break;
@@ -884,7 +883,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 break;
 
             case IGisItem::eTypeOvl:
-                actionEditArea->setDisabled(isOnDevice | isReadOnly);
+                actionEditArea->setDisabled(isOnDevice);
                 menuItemOvl->exec(p);
                 break;
             }

@@ -40,6 +40,7 @@ public:
 private slots:
     void slotDelete();
     void slotCopy();
+    void slotLock(bool yes);
 
 private:
     IGisItem::key_t key;

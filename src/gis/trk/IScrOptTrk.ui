@@ -77,6 +77,24 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolLock">
+       <property name="toolTip">
+        <string>Unlock item to change it's properties.</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources.qrc">
+         <normaloff>:/icons/32x32/UnLock.png</normaloff>
+         <normalon>:/icons/32x32/Lock.png</normalon>:/icons/32x32/UnLock.png</iconset>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="Line" name="line">
        <property name="orientation">
         <enum>Qt::Vertical</enum>

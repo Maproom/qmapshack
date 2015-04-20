@@ -35,12 +35,19 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     label->setText(rte->getInfo());
     adjustSize();
 
+    bool isReadOnly = rte->isReadOnly();
+    bool isOnDevice = rte->isOnDevice();
+    toolLock->setChecked(isReadOnly);
+    toolLock->setDisabled(isOnDevice);
+
+
     anchor = rte->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
+    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotLock(bool)));
 }
 
 CScrOptRte::~CScrOptRte()
@@ -57,6 +64,13 @@ void CScrOptRte::slotCopy()
     CGisWidget::self().copyItemByKey(key);
     deleteLater();
 }
+
+void CScrOptRte::slotLock(bool yes)
+{
+    CGisWidget::self().setReadOnly(yes, key);
+    deleteLater();
+}
+
 
 void CScrOptRte::draw(QPainter& p)
 {

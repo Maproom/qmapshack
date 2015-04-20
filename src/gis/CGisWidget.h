@@ -238,6 +238,8 @@ public:
 
     void editAreaByKey(const IGisItem::key_t &key);
 
+    void setReadOnly(bool yes, IGisItem::key_t &key);
+
     /**
        @brief Select a project via dialog
 

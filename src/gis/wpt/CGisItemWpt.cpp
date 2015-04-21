@@ -104,6 +104,19 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
         history.events.clear();
     }
 
+    if(parentWpt.isOnDevice())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else if(!parentWpt.isReadOnly())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else
+    {
+        flags &= ~eFlagWriteAllowed;
+    }
+
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

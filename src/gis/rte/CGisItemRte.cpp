@@ -47,6 +47,21 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
         history.events.clear();
     }
 
+    if(parentRte.isOnDevice())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else if(!parentRte.isReadOnly())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else
+    {
+        flags &= ~eFlagWriteAllowed;
+    }
+
+
+
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

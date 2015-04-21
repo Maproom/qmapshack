@@ -186,6 +186,20 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
         history.events.clear();
     }
 
+    if(parentTrk.isOnDevice())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else if(!parentTrk.isReadOnly())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else
+    {
+        flags &= ~eFlagWriteAllowed;
+    }
+
+
     deriveSecondaryData();
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);

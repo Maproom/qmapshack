@@ -144,6 +144,21 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
         history.events.clear();
     }
 
+    if(parentArea.isOnDevice())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else if(!parentArea.isReadOnly())
+    {
+        flags |= eFlagWriteAllowed;
+    }
+    else
+    {
+        flags &= ~eFlagWriteAllowed;
+    }
+
+
+
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }

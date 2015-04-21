@@ -87,6 +87,13 @@ public:
     IGisProject(type_e type, const QString &filename, IDevice *parent);
     virtual ~IGisProject();
 
+    /**
+       @brief Ask to save the project befor it is closed.
+
+       If the project is closed, the user is asked if the project should be saved and saved on user request.
+
+       @return True if the operation is aborted. False on "save" and "no".
+    */
     bool askBeforClose();
 
     IGisProject& operator=(const IGisProject& p)
@@ -96,6 +103,9 @@ public:
         return *this;
     }
 
+    /**
+       @brief Summon the project details dialog.
+    */
     void edit();
 
     /**
@@ -111,11 +121,20 @@ public:
     {
         filename = fn;
     }
+
     virtual QString getFilename() const
     {
         return filename;
     }
 
+    /**
+       @brief Get the project type enumeration.
+
+       @Note: usually dynamic_cast should be used to get a pointer of correct type.
+              However if the project is serialized, a type id is needed.
+
+       @return One of type_e
+    */
     type_e getType() const
     {
         return type;
@@ -139,7 +158,15 @@ public:
 
     QPixmap getIcon() const;
 
+    /**
+       @brief Get the project's name
+       @return The name from metadata.name
+     */
     QString getName() const;
+    /**
+       @brief Get the project's name extended with the parent's name.
+       @return The name from metadata.nam appended with either the device name or the database parent folder's name.
+    */
     QString getNameEx() const;
 
     const QDateTime& getTime() const
@@ -159,6 +186,10 @@ public:
         return metadata.links;
     }
 
+    /**
+       @brief Get the sorting mode
+       @return One of sorting_e
+    */
     sorting_e getSorting() const
     {
         return sorting;
@@ -173,6 +204,13 @@ public:
      */
     void setChanged();
 
+    /**
+       @brief Set the sorting mode_t
+
+       This will mark the project as changed.
+
+       @param s the mode
+    */
     void setSorting(sorting_e s);
 
     /**

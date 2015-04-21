@@ -342,13 +342,56 @@ public:
      */
     void loadHistory(int idx);
 
+    /**
+       @brief Remove all history entries younger than the current selected one.
+    */
     void cutHistory();
 
+    /**
+       @brief Remove all HTML tags from a string
+       @param str the string
+       @return A string without HTML tags
+    */
     static QString removeHtml(const QString &str);
+    /**
+       @brief Create a HTML formated text with comment, description and link section.
+
+       Depending on the isReadOnly flag the section headers are links to trigger a function
+
+       @param isReadOnly    true if the text should have no active links
+       @param cmt           the comment string
+       @param desc          the description string
+       @param links         a list of links
+       @param key           some key to be sent with the header links
+       @return The formated text ready to be used.
+    */
     static QString createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString& key = "");
+    /**
+       @brief Create a HTML formated text with description and link section.
+
+       Depending on the isReadOnly flag the section headers are links to trigger a function
+
+       @param isReadOnly    true if the text should have no active links
+       @param desc          the description string
+       @param links         a list of links
+       @param key           some key to be sent with the header links
+       @return The formated text ready to be used.
+    */
     static QString createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key = "");
+    /**
+       @brief Create a HTML formated text with a link.
+
+       Depending on the isReadOnly flag the section headers are links to trigger a function
+
+       @param isReadOnly    true if the text should have no active links
+       @param href          the link address
+       @param str           the link's string
+       @param key           some key to be sent with the link
+       @return The formated text ready to be used.
+    */
     static QString toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key);
 
+    /// a no key value that can be used to nullify references.
     static QString noKey;
 
 protected:

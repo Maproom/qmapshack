@@ -81,6 +81,7 @@ public:
     void hideItems(CEvtD2WHideItems * evt);
 
 protected:
+    void setupName(const QString &defaultName);
     QSqlDatabase db;
     quint64 id;
 };

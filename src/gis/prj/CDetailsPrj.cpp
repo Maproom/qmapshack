@@ -182,7 +182,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtCharHeader.setForeground(Qt::white);
 
 
-    bool isReadOnly = printable;
+    bool isReadOnly = printable || prj.isOnDevice();
 
     setWindowTitle(prj.getName());
 
@@ -202,7 +202,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     doc.rootFrame()->setFrameFormat(fmtFrameRoot);
     QTextCursor cursor = doc.rootFrame()->firstCursorPosition();
 
-    cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getName()), ""));
+    cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getNameEx()), ""));
 
 
     QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);

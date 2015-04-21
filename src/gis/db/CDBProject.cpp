@@ -73,7 +73,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         filename = dbName;
     }
 
-    setText(CGisListWks::eColumnName, name);
+    setupName(name);
     setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
     valid = true;
@@ -100,6 +100,24 @@ void CDBProject::restoreDBLink()
         valid = true;
     }
 }
+
+void CDBProject::setupName(const QString &defaultName)
+{
+    IGisProject::setupName(defaultName);
+
+    QSqlQuery query(db);
+    query.prepare("SELECT t1.name FROM folders AS t1 WHERE id=(SELECT parent FROM folder2folder WHERE child=:id) AND (t1.type=:type1 OR t1.type=:type2)");
+    query.bindValue(":id", id);
+    query.bindValue(":type1", IDBFolder::eTypeGroup);
+    query.bindValue(":type2", IDBFolder::eTypeProject);
+    QUERY_EXEC( );
+    if(query.next())
+    {
+        nameSuffix   = query.value(0).toString();
+    }
+    setText(CGisListWks::eColumnName, getNameEx());
+}
+
 
 void CDBProject::postStatus()
 {

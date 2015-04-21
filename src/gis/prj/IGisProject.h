@@ -140,6 +140,7 @@ public:
     QPixmap getIcon() const;
 
     QString getName() const;
+    QString getNameEx() const;
 
     const QDateTime& getTime() const
     {
@@ -309,7 +310,7 @@ public:
 
 protected:
     void genKey();
-    void setupName(const QString& defaultName);
+    virtual void setupName(const QString& defaultName);
     void markAsSaved();
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
     void updateItems();
@@ -333,6 +334,7 @@ protected:
     bool valid;
 
     metadata_t metadata;
+    QString nameSuffix;
 
     QPointer<CDetailsPrj> dlgDetails;
 

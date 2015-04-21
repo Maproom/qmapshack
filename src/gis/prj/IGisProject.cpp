@@ -50,6 +50,8 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , sorting(eSortNone)
 {
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
+
+    nameSuffix = parent->getName();
 }
 
 IGisProject::~IGisProject()
@@ -215,13 +217,19 @@ void IGisProject::markAsSaved()
 
 QString IGisProject::getName() const
 {
-    IDevice * device = dynamic_cast<IDevice*>(parent());
-    if(device == 0)
+    return metadata.name;
+}
+
+QString IGisProject::getNameEx() const
+{
+    if(nameSuffix.isEmpty())
     {
         return metadata.name;
     }
-
-    return metadata.name + " @ " + device->getName();
+    else
+    {
+        return metadata.name + " @ " + nameSuffix;
+    }
 }
 
 

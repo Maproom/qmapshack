@@ -40,6 +40,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
 
 
     toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
+    toolMove->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
     photoAlbum->reload(wpt->getImages());
 
     anchor = wpt->getPointCloseBy(point);

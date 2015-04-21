@@ -141,7 +141,7 @@ void IGisProject::edit()
 void IGisProject::setName(const QString& str)
 {
     metadata.name = str;
-    setText(CGisListWks::eColumnName, str);
+    setText(CGisListWks::eColumnName, getNameEx());
     setChanged();
 }
 
@@ -192,13 +192,9 @@ void IGisProject::setupName(const QString &defaultName)
 {
     if(metadata.name.isEmpty())
     {
-        setText(CGisListWks::eColumnName, defaultName);
         metadata.name = defaultName;
     }
-    else
-    {
-        setText(CGisListWks::eColumnName,metadata.name);
-    }
+    setText(CGisListWks::eColumnName, getNameEx());
 }
 
 void IGisProject::markAsSaved()

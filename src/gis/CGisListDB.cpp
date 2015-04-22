@@ -300,7 +300,7 @@ void CGisListDB::slotAddFolder()
 
     IDBFolder::type_e type = IDBFolder::eTypeProject;
     QString name;
-    CSetupFolder dlg(type, name, this);
+    CSetupFolder dlg(type, name, true, this);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;

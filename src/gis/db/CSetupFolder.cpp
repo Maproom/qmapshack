@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, QWidget *parent)
+CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, bool groupAllowed, QWidget *parent)
     : QDialog(parent)
     , type(type)
     , name(name)
@@ -46,6 +46,8 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, QWidget *pare
 
     default:;
     }
+
+    radioGroup->setEnabled(groupAllowed);
 
     slotNameChanged(name);
 }

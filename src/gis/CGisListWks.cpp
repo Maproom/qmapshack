@@ -1224,7 +1224,7 @@ void CGisListWks::slotAddEmptyProject()
             return;
         }
 
-        CSetupFolder dlg2(type, name, this);
+        CSetupFolder dlg2(type, name, false, this);
         if(dlg2.exec() == QDialog::Rejected)
         {
             return;

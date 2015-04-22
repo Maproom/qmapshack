@@ -184,12 +184,13 @@ IGisProject * CGisWidget::selectProject()
             return 0;
         }
 
-        CSetupFolder dlg2(type, name, this);
+        CSetupFolder dlg2(type, name, false, this);
         if(dlg2.exec() == QDialog::Rejected)
         {
             return 0;
         }
 
+        QMutexLocker lock(&IGisItem::mutexItems);
         CEvtW2DCreate evt(name, type, idParent, db);
         QApplication::sendEvent(treeDB, &evt);
 

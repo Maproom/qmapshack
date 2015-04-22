@@ -173,8 +173,78 @@ bool CDBProject::saveAs()
     return res;
 }
 
+void CDBProject::updateItem(IGisItem * item, quint64 idItem)
+{
+    QSqlQuery query(db);
+
+    // serialize complete history of item
+    QByteArray data;
+    QDataStream in(&data, QIODevice::WriteOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_2);
+    in << item->getHistory();
+
+    // prepare icon to be saved
+    QBuffer buffer;
+    buffer.open(QIODevice::ReadWrite);
+    QPixmap pixmap = item->getIcon();
+    pixmap.save(&buffer, "PNG");
+    buffer.seek(0);
+
+    query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
+    query.bindValue(":type",    item->type());
+    query.bindValue(":key",     item->getKey().item);
+    query.bindValue(":icon",    buffer.data());
+    query.bindValue(":name",    item->getName());
+    query.bindValue(":comment", item->getInfo());
+    query.bindValue(":data", data);
+    query.bindValue(":id", idItem);
+    QUERY_EXEC(throw -1);
+}
+
+quint64 CDBProject::insertItem(IGisItem * item)
+{
+    QSqlQuery query(db);
+
+    // serialize complete history of item
+    QByteArray data;
+    QDataStream in(&data, QIODevice::WriteOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_2);
+    in << item->getHistory();
+
+    // prepare icon to be saved
+    QBuffer buffer;
+    buffer.open(QIODevice::ReadWrite);
+    QPixmap pixmap = item->getIcon();
+    pixmap.save(&buffer, "PNG");
+    buffer.seek(0);
+
+    query.prepare("INSERT INTO items (type, key, icon, name, comment, data) VALUES (:type, :key, :icon, :name, :comment, :data)");
+    query.bindValue(":type",    item->type());
+    query.bindValue(":key",     item->getKey().item);
+    query.bindValue(":icon",    buffer.data());
+    query.bindValue(":name",    item->getName());
+    query.bindValue(":comment", item->getInfo());
+    query.bindValue(":data", data);
+    QUERY_EXEC(throw -1);
+
+    query.prepare("SELECT last_insert_rowid() from items");
+    QUERY_EXEC(throw -1);
+    query.next();
+    quint64 idItem = query.value(0).toULongLong();
+    if(idItem == 0)
+    {
+        qDebug() << "childId equals 0. bad.";
+        throw -1;
+    }
+
+    return idItem;
+}
+
 bool CDBProject::save()
 {
+    bool clearProjectChangeFlag = true;
     int lastResult = CSelectSaveAction::eResultNone;
 
     QSqlQuery query(db);
@@ -209,20 +279,6 @@ bool CDBProject::save()
                 continue;
             }
 
-            // serialize complete history of item
-            QByteArray data;
-            QDataStream in(&data, QIODevice::WriteOnly);
-            in.setByteOrder(QDataStream::LittleEndian);
-            in.setVersion(QDataStream::Qt_5_2);
-            in << item->getHistory();
-
-            // prepare icon to be saved
-            QBuffer buffer;
-            buffer.open(QIODevice::ReadWrite);
-            QPixmap pixmap = item->getIcon();
-            pixmap.save(&buffer, "PNG");
-            buffer.seek(0);
-
             // test if item exists in database
             quint64 idItem      = 0;
             quint32 typeItem    = 0;
@@ -235,105 +291,93 @@ bool CDBProject::save()
                 idItem      = query.value(0).toULongLong();
                 typeItem    = query.value(1).toUInt();
 
-                int result  = lastResult;
+                // check if relation already exists.
+                query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
+                query.bindValue(":parent", id);
+                query.bindValue(":child", idItem);
+                QUERY_EXEC(; );
 
-                if(lastResult == CSelectSaveAction::eResultNone)
+                if(!query.next())
                 {
-                    IGisItem * item1 = 0;                    
+                    // update dialog
+                    int result  = lastResult;
 
-                    // load item from database for a compare
-                    switch(typeItem)
+                    if(lastResult == CSelectSaveAction::eResultNone)
                     {
-                    case IGisItem::eTypeWpt:
-                        item1 = new CGisItemWpt(idItem, db, 0);
-                        break;
+                        IGisItem * item1 = 0;
 
-                    case IGisItem::eTypeTrk:
-                        item1 = new CGisItemTrk(idItem, db, 0);
-                        break;
+                        // load item from database for a compare
+                        switch(typeItem)
+                        {
+                        case IGisItem::eTypeWpt:
+                            item1 = new CGisItemWpt(idItem, db, 0);
+                            break;
 
-                    case IGisItem::eTypeRte:
-                        item1 = new CGisItemRte(idItem, db, 0);
-                        break;
+                        case IGisItem::eTypeTrk:
+                            item1 = new CGisItemTrk(idItem, db, 0);
+                            break;
 
-                    case IGisItem::eTypeOvl:
-                        item1 = new CGisItemOvlArea(idItem, db, 0);
-                        break;
+                        case IGisItem::eTypeRte:
+                            item1 = new CGisItemRte(idItem, db, 0);
+                            break;
 
-                    default:;
+                        case IGisItem::eTypeOvl:
+                            item1 = new CGisItemOvlArea(idItem, db, 0);
+                            break;
+
+                        default:;
+                        }
+
+                        if(item1 == 0)
+                        {
+                            qDebug() << "no item to compare!?.";
+                            throw -1;
+                        }
+
+                        QApplication::setOverrideCursor(Qt::ArrowCursor);
+                        CSelectSaveAction dlg(item, item1, &progress);
+                        dlg.exec();
+                        QApplication::restoreOverrideCursor();
+
+                        result = dlg.getResult();
+                        if(dlg.allOthersToo())
+                        {
+                            lastResult = result;
+                        }
+                    }
+                    if(result == CSelectSaveAction::eResultNone)
+                    {
+                        // no decision by user, cancel operation.
+                        // this is different to a skip as a skip will
+                        // just skip saving the data, but the item to folder
+                        // link will be still processed.
+                        clearProjectChangeFlag = false;
+                        continue;
                     }
 
-                    if(item1 == 0)
-                    {
-                        qDebug() << "no item to compare!?.";
-                        throw -1;
-                    }
-
-                    CSelectSaveAction dlg(item, item1, &progress);
-                    QApplication::setOverrideCursor(Qt::ArrowCursor);
-                    dlg.exec();
-                    QApplication::restoreOverrideCursor();
-                    result = dlg.getResult();
-                    if(dlg.allOthersToo())
-                    {
-                        lastResult = result;
-                    }
-                }
-
-                if(result == CSelectSaveAction::eResultNone)
-                {
-                    // no decision by user, cancel operation.
-                    // this is different to a skip as a skip will
-                    // just skip saving the data, but the item to folder
-                    // link will be still processed.
-                    continue;
-                }
-
-                if(result == CSelectSaveAction::eResultSave)
-                {
-                    // item exits -> update item data in database
-                    query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
-                    query.bindValue(":type",    item->type());
-                    query.bindValue(":key",     item->getKey().item);
-                    query.bindValue(":icon",    buffer.data());
-                    query.bindValue(":name",    item->getName());
-                    query.bindValue(":comment", item->getInfo());
-                    query.bindValue(":data", data);
-                    query.bindValue(":id", idItem);
+                    // create relation
+                    query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
+                    query.bindValue(":parent", id);
+                    query.bindValue(":child", idItem);
                     QUERY_EXEC(throw -1);
+
+                    if(result == CSelectSaveAction::eResultSave)
+                    {
+                        // the item is in the database and has no relation to the folder -> update only if the user confirms.
+                        updateItem(item, idItem);
+                    }
+                }
+                else
+                {
+                    // the item is in the database and has a relation to the folder -> simply update item
+                    updateItem(item, idItem);
                 }
             }
             else
             {
-                // item is unknown to database -> create item in database
-                query.prepare("INSERT INTO items (type, key, icon, name, comment, data) VALUES (:type, :key, :icon, :name, :comment, :data)");
-                query.bindValue(":type",    item->type());
-                query.bindValue(":key",     item->getKey().item);
-                query.bindValue(":icon",    buffer.data());
-                query.bindValue(":name",    item->getName());
-                query.bindValue(":comment", item->getInfo());
-                query.bindValue(":data", data);
-                QUERY_EXEC(throw -1);
+                // the item is not in the database -> insert item and create relation to folder
+                idItem = insertItem(item);
 
-                query.prepare("SELECT last_insert_rowid() from items");
-                QUERY_EXEC(throw -1);
-                query.next();
-                idItem = query.value(0).toULongLong();
-                if(idItem == 0)
-                {
-                    qDebug() << "childId equals 0. bad.";
-                    throw -1;
-                }
-            }
-
-            // check if relation already exists.
-            query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
-            query.bindValue(":parent", id);
-            query.bindValue(":child", idItem);
-            QUERY_EXEC(; );
-
-            if(!query.next())
-            {
                 // create relation
                 query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
                 query.bindValue(":parent", id);
@@ -362,7 +406,10 @@ bool CDBProject::save()
 
         info->updateLostFound = true;
         CGisWidget::self().postEventForDb(info);
-        setText(CGisListWks::eColumnDecoration,"");
+        if(clearProjectChangeFlag)
+        {
+            setText(CGisListWks::eColumnDecoration,"");
+        }
     }
     catch(int n)
     {
@@ -375,11 +422,8 @@ bool CDBProject::save()
             info->updateLostFound = true;
             CGisWidget::self().postEventForDb(info);
         }
-
-        progress.setValue(100);
         return false;
     }
-    progress.setValue(100);
     return true;
 }
 

@@ -82,6 +82,9 @@ public:
 
 protected:
     void setupName(const QString &defaultName);
+    void updateItem(IGisItem * item, quint64 idItem);
+    quint64 insertItem(IGisItem * item);
+
     QSqlDatabase db;
     quint64 id;
 };

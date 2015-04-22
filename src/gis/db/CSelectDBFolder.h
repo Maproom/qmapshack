@@ -16,44 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CSELECTPROJECTDIALOG_H
-#define CSELECTPROJECTDIALOG_H
+#ifndef CSELECTDBFOLDER_H
+#define CSELECTDBFOLDER_H
 
-#include "ui_ISelectProjectDialog.h"
+#include "ui_ISelectDBFolder.h"
 #include <QDialog>
 
-class QTreeWidget;
-
-class CSelectProjectDialog : public QDialog, private Ui::ISelectProjectDialog
+class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder
 {
     Q_OBJECT
 public:
-    enum type_e
-    {
-        eTypeNone
-        ,eTypeQms
-        ,eTypeGpx
-        ,eTypeDb
-    };
-
-    CSelectProjectDialog(QString& key, QString& name, type_e& type, QTreeWidget *parent);
-    virtual ~CSelectProjectDialog();
-
-public slots:
-    void reject();
+    CSelectDBFolder(quint64& id, QString& db, QWidget * parent);
+    virtual ~CSelectDBFolder();
 
 private slots:
-    void slotItemClicked(QListWidgetItem * item);
-    void slotItemDoubleClicked(QListWidgetItem * item);
-    void slotProjectChanged(const QString& text);
-    void slotProjectEdited(const QString& text);
-    void slotTypeChanged();
+    void slotItemExpanded(QTreeWidgetItem * item);
+    void slotItemSelectionChanged();
 
 private:
-    QString& key;
-    QString& name;
-    type_e& type;
+    quint64& id;
+    QString& db;
 };
 
-#endif //CSELECTPROJECTDIALOG_H
+#endif //CSELECTDBFOLDER_H
 

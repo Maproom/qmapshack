@@ -170,6 +170,17 @@ bool CGisListDB::event(QEvent * e)
         e->accept();
         return true;
     }
+    case eEvtW2DCreate:
+    {
+        CEvtW2DCreate * evt         = (CEvtW2DCreate*)e;
+        CDBFolderDatabase * folder  = getDataBase(evt->db);
+        if(folder)
+        {
+            //folder->addFolder(type, name);
+        }
+        e->accept();
+        return true;
+    }
     }
 
     return QTreeWidget::event(e);

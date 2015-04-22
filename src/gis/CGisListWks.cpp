@@ -32,6 +32,7 @@
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CLostFoundProject.h"
+#include "gis/db/CSelectDBFolder.h"
 #include "gis/db/macros.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
@@ -41,6 +42,7 @@
 #include "gis/search/CSearchGoogle.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/db/CSetupFolder.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
@@ -1191,7 +1193,7 @@ void CGisListWks::slotEditArea()
 
 void CGisListWks::slotAddEmptyProject()
 {
-    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     QString key, name;
     CSelectProjectDialog::type_e type;
@@ -1209,6 +1211,27 @@ void CGisListWks::slotAddEmptyProject()
     else if(type == CSelectProjectDialog::eTypeQms)
     {
         new CQmsProject(name, this);
+    }
+    else if(type == CSelectProjectDialog::eTypeDb)
+    {
+        quint64 id;
+        QString db;
+        IDBFolder::type_e type;
+
+        CSelectDBFolder dlg1(id, db, this);
+        if(dlg1.exec() == QDialog::Rejected)
+        {
+            return;
+        }
+
+        CSetupFolder dlg2(type, name, this);
+        if(dlg2.exec() == QDialog::Rejected)
+        {
+            return;
+        }
+
+        CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, id, db);
+        CGisWidget::self().postEventForDb(evt);
     }
 }
 

@@ -39,6 +39,7 @@ enum event_types_e
     ,eEvtD2WUpdateLnF   = QEvent::User + 6
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
+    ,eEvtW2DCreate      = QEvent::User + 101
 };
 
 struct evt_item_t
@@ -132,6 +133,18 @@ public:
     QString db;
 };
 
+class CEvtW2DCreate : public QEvent
+{
+public:
+    CEvtW2DCreate(const QString& name, IDBFolder::type_e type, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DCreate)), name(name), type(type), id(id), db(db)
+    {
+    }
+
+    QString name;
+    IDBFolder::type_e type;
+    quint64 id;
+    QString db;
+};
 
 
 class CGisWidget : public QWidget, private Ui::IGisWidget

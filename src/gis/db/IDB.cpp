@@ -35,11 +35,18 @@ IDB::~IDB()
 
 bool IDB::setupDB(const QString& filename, const QString& connectionName)
 {
-    db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName(filename);
-    if(!db.open())
+    if(!QSqlDatabase::contains(connectionName))
     {
-        qDebug() << "failed to open database" << db.lastError();
+        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+        db.setDatabaseName(filename);
+        if(!db.open())
+        {
+            qDebug() << "failed to open database" << db.lastError();
+        }
+    }
+    else
+    {
+        db = QSqlDatabase::database(connectionName);
     }
 
     QSqlQuery query(db);

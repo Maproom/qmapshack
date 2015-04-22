@@ -99,32 +99,67 @@ CDBFolderDatabase * IDBFolder::getDBFolder()
     return 0;
 }
 
-void IDBFolder::addFolder(type_e type, const QString& name)
+IDBFolder * IDBFolder::getFolder(quint64 idFolder)
+{
+    if(id == idFolder)
+    {
+        return this;
+    }
+
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IDBFolder * folder1 = dynamic_cast<IDBFolder*>(child(n));
+        if(folder1 == 0)
+        {
+            return 0;
+        }
+
+        IDBFolder * folder2 = folder1->getFolder(idFolder);
+        if(folder2)
+        {
+            return folder2;
+        }
+    }
+
+    return 0;
+}
+
+quint64 IDBFolder::addFolder(type_e type, const QString& name)
+{
+    quint64 idChild = IDBFolder::addFolderToDb(type, name, id, db);
+    if(idChild != 0)
+    {
+        IDBFolder::createFolderByType(db, type, idChild, this);
+        expanding();
+    }
+    return idChild;
+}
+
+quint64 IDBFolder::addFolderToDb(type_e type, const QString& name, quint64 idParent, QSqlDatabase& db)
 {
     QSqlQuery query(db);
     query.prepare("INSERT INTO folders (name, type) VALUES (:name, :type)");
     query.bindValue(":name", name);
     query.bindValue(":type", type);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return 0);
 
     query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return );
+    QUERY_EXEC(return 0);
     query.next();
     quint64 idChild = query.value(0).toULongLong();
     if(idChild == 0)
     {
         qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
-        return;
+        return 0;
     }
 
     query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
-    query.bindValue(":parent", id);
+    query.bindValue(":parent", idParent);
     query.bindValue(":child", idChild);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return 0);
 
-    IDBFolder::createFolderByType(db, type, idChild, this);
-
-    expanding();
+    return idChild;
 }
 
 void IDBFolder::expanding()

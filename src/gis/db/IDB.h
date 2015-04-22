@@ -19,6 +19,7 @@
 #ifndef IDB_H
 #define IDB_H
 
+#include <QMap>
 #include <QSqlDatabase>
 
 class IDB
@@ -33,6 +34,8 @@ protected:
     bool migrateDB(int version);
 
     QSqlDatabase db;
+
+    static QMap<QString,int> references;
 };
 
 #endif //IDB_H

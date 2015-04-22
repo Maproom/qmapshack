@@ -45,11 +45,13 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
             QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnIcon), project->text(CGisListWks::eColumnName),listWidget);
             item->setData(Qt::UserRole, project->getKey());
         }
+//        radioDatabase->hide();
     }
     else
     {
         listWidget->hide();
         label1->hide();
+//        radioDatabase->show();
     }
     frameType->setEnabled(listWidget->count() == 0);
 
@@ -139,5 +141,6 @@ void CSelectProjectDialog::slotTypeChanged()
     else if(radioDatabase->isChecked())
     {
         type = eTypeDb;
+        QDialog::accept();
     }
 }

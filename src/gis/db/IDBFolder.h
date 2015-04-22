@@ -49,14 +49,16 @@ public:
     }
     QString getDBName();
     CDBFolderDatabase * getDBFolder();
+    IDBFolder * getFolder(quint64 idFolder);
 
-    virtual void addFolder(type_e type, const QString &name);
+    virtual quint64 addFolder(type_e type, const QString &name);
     virtual void expanding();
     virtual void update(CEvtW2DAckInfo * info);
     virtual void toggle();
     virtual void remove();
 
     static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
+    static quint64 addFolderToDb(type_e type, const QString& name, quint64 idParent, QSqlDatabase& db);
 
     bool operator<(const QTreeWidgetItem &other) const;
 

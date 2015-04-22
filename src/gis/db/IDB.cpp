@@ -21,20 +21,26 @@
 
 #include <QtSql>
 
+QMap<QString,int> IDB::references;
+
 IDB::IDB()
 {
 }
 
 IDB::~IDB()
 {
-    if(db.isOpen())
+    references[db.connectionName()]--;
+    if(references[db.connectionName()] == 0 && db.isOpen())
     {
+        qDebug() << "close database" << db.connectionName();
         db.close();
     }
 }
 
 bool IDB::setupDB(const QString& filename, const QString& connectionName)
 {
+    references[connectionName]++;
+
     if(!QSqlDatabase::contains(connectionName))
     {
         db = QSqlDatabase::addDatabase("QSQLITE", connectionName);

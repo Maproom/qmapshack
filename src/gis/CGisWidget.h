@@ -136,13 +136,14 @@ public:
 class CEvtW2DCreate : public QEvent
 {
 public:
-    CEvtW2DCreate(const QString& name, IDBFolder::type_e type, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DCreate)), name(name), type(type), id(id), db(db)
+    CEvtW2DCreate(const QString& name, IDBFolder::type_e type, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DCreate)), name(name), type(type), idParent(id), idChild(0), db(db)
     {
     }
 
     QString name;
     IDBFolder::type_e type;
-    quint64 id;
+    quint64 idParent;
+    quint64 idChild;
     QString db;
 };
 

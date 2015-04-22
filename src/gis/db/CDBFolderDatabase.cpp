@@ -53,3 +53,4 @@ void CDBFolderDatabase::updateLostFound()
         folderLostFound->update();
     }
 }
+

@@ -22,6 +22,8 @@
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
+#include "gis/db/CSelectDBFolder.h"
+#include "gis/db/CSetupFolder.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
@@ -167,6 +169,36 @@ IGisProject * CGisWidget::selectProject()
             if(key == project->getKey())
             {
                 break;
+            }
+        }
+    }
+    else if(type == CSelectProjectDialog::eTypeDb)
+    {
+        quint64 idParent;
+        QString db;
+        IDBFolder::type_e type;
+
+        CSelectDBFolder dlg1(idParent, db, this);
+        if(dlg1.exec() == QDialog::Rejected)
+        {
+            return 0;
+        }
+
+        CSetupFolder dlg2(type, name, this);
+        if(dlg2.exec() == QDialog::Rejected)
+        {
+            return 0;
+        }
+
+        CEvtW2DCreate evt(name, type, idParent, db);
+        QApplication::sendEvent(treeDB, &evt);
+
+        if(evt.idChild)
+        {
+            while(project == 0)
+            {
+                QApplication::processEvents(QEventLoop::WaitForMoreEvents|QEventLoop::ExcludeUserInputEvents, 100);
+                project = treeWks->getProjectById(evt.idChild, db);
             }
         }
     }

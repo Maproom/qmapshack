@@ -36,6 +36,12 @@ public:
     {
         return filename;
     }
+
+    QSqlDatabase& getDb()
+    {
+        return IDB::db;
+    }
+
 private:
     QString filename;
     CDBFolderLostFound * folderLostFound;

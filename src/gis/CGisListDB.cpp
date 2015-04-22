@@ -170,13 +170,30 @@ bool CGisListDB::event(QEvent * e)
         e->accept();
         return true;
     }
+
     case eEvtW2DCreate:
     {
         CEvtW2DCreate * evt         = (CEvtW2DCreate*)e;
-        CDBFolderDatabase * folder  = getDataBase(evt->db);
-        if(folder)
+        CDBFolderDatabase * db  = getDataBase(evt->db);
+        if(db)
         {
-            //folder->addFolder(type, name);
+            quint64 idChild = 0;
+            IDBFolder * folder = db->getFolder(evt->idParent);
+            if(folder)
+            {
+                idChild = folder->addFolder(evt->type, evt->name);
+            }
+            else
+            {
+                idChild = IDBFolder::addFolderToDb(evt->type, evt->name, evt->idParent, db->getDb());
+            }
+
+            if(idChild)
+            {
+                evt->idChild = idChild;
+                CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(idChild, evt->db);
+                CGisWidget::self().postEventForWks(evt1);
+            }
         }
         e->accept();
         return true;

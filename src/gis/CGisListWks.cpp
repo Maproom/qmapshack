@@ -33,6 +33,7 @@
 #include "gis/db/CDBProject.h"
 #include "gis/db/CLostFoundProject.h"
 #include "gis/db/CSelectDBFolder.h"
+#include "gis/db/CSetupFolder.h"
 #include "gis/db/macros.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
@@ -42,7 +43,6 @@
 #include "gis/search/CSearchGoogle.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/db/CSetupFolder.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
@@ -1199,7 +1199,7 @@ void CGisListWks::slotAddEmptyProject()
     CSelectProjectDialog::type_e type;
     CSelectProjectDialog dlg(key, name, type, 0);
     dlg.exec();
-    if(name.isEmpty())
+    if(name.isEmpty() && (type != CSelectProjectDialog::eTypeDb))
     {
         return;
     }
@@ -1214,11 +1214,11 @@ void CGisListWks::slotAddEmptyProject()
     }
     else if(type == CSelectProjectDialog::eTypeDb)
     {
-        quint64 id;
+        quint64 idParent;
         QString db;
         IDBFolder::type_e type;
 
-        CSelectDBFolder dlg1(id, db, this);
+        CSelectDBFolder dlg1(idParent, db, this);
         if(dlg1.exec() == QDialog::Rejected)
         {
             return;
@@ -1230,7 +1230,7 @@ void CGisListWks::slotAddEmptyProject()
             return;
         }
 
-        CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, id, db);
+        CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, idParent, db);
         CGisWidget::self().postEventForDb(evt);
     }
 }

@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/CGisWidget.h"
 #include "gis/db/CDBProject.h"
+#include "gis/db/CSelectSaveAction.h"
 #include "gis/db/macros.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
@@ -27,6 +28,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
+
 
 #include <QtSql>
 #include <QtWidgets>
@@ -173,10 +175,12 @@ bool CDBProject::saveAs()
 
 bool CDBProject::save()
 {
+    int lastResult = CSelectSaveAction::eResultNone;
+
     QSqlQuery query(db);
 
     int N = childCount();
-    QProgressDialog progress(QObject::tr("Save ..."), QObject::tr("Abort save"), 0, 100);
+    QProgressDialog progress(QObject::tr("Save ..."), QObject::tr("Abort save"), 0, 100, &CMainWindow::self());
     progress.setWindowModality(Qt::WindowModal);
 
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
@@ -198,13 +202,12 @@ bool CDBProject::save()
                 continue;
             }
 
+            // skip unchanged items
             if(item->text(CGisListWks::eColumnDecoration).isEmpty())
             {
                 info->keysChildren << item->getKey().item;
                 continue;
             }
-
-            quint64 idItem = 0;
 
             // serialize complete history of item
             QByteArray data;
@@ -213,31 +216,92 @@ bool CDBProject::save()
             in.setVersion(QDataStream::Qt_5_2);
             in << item->getHistory();
 
-            // test if item exists in database
-            query.prepare("SELECT id FROM items WHERE key=:key");
-            query.bindValue(":key", item->getKey().item);
-            QUERY_EXEC(throw -1);
-
+            // prepare icon to be saved
             QBuffer buffer;
             buffer.open(QIODevice::ReadWrite);
             QPixmap pixmap = item->getIcon();
             pixmap.save(&buffer, "PNG");
             buffer.seek(0);
 
+            // test if item exists in database
+            quint64 idItem      = 0;
+            quint32 typeItem    = 0;
+            query.prepare("SELECT id, type FROM items WHERE key=:key");
+            query.bindValue(":key", item->getKey().item);
+            QUERY_EXEC(throw -1);
 
             if(query.next())
             {
-                // item exits -> update item data in database
-                idItem = query.value(0).toULongLong();
-                query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
-                query.bindValue(":type",    item->type());
-                query.bindValue(":key",     item->getKey().item);
-                query.bindValue(":icon",    buffer.data());
-                query.bindValue(":name",    item->getName());
-                query.bindValue(":comment", item->getInfo());
-                query.bindValue(":data", data);
-                query.bindValue(":id", idItem);
-                QUERY_EXEC(throw -1);
+                idItem      = query.value(0).toULongLong();
+                typeItem    = query.value(1).toUInt();
+
+                int result  = lastResult;
+
+                if(lastResult == CSelectSaveAction::eResultNone)
+                {
+                    IGisItem * item1 = 0;                    
+
+                    // load item from database for a compare
+                    switch(typeItem)
+                    {
+                    case IGisItem::eTypeWpt:
+                        item1 = new CGisItemWpt(idItem, db, 0);
+                        break;
+
+                    case IGisItem::eTypeTrk:
+                        item1 = new CGisItemTrk(idItem, db, 0);
+                        break;
+
+                    case IGisItem::eTypeRte:
+                        item1 = new CGisItemRte(idItem, db, 0);
+                        break;
+
+                    case IGisItem::eTypeOvl:
+                        item1 = new CGisItemOvlArea(idItem, db, 0);
+                        break;
+
+                    default:;
+                    }
+
+                    if(item1 == 0)
+                    {
+                        qDebug() << "no item to compare!?.";
+                        throw -1;
+                    }
+
+                    CSelectSaveAction dlg(item, item1, &progress);
+                    QApplication::setOverrideCursor(Qt::ArrowCursor);
+                    dlg.exec();
+                    QApplication::restoreOverrideCursor();
+                    result = dlg.getResult();
+                    if(dlg.allOthersToo())
+                    {
+                        lastResult = result;
+                    }
+                }
+
+                if(result == CSelectSaveAction::eResultNone)
+                {
+                    // no decision by user, cancel operation.
+                    // this is different to a skip as a skip will
+                    // just skip saving the data, but the item to folder
+                    // link will be still processed.
+                    continue;
+                }
+
+                if(result == CSelectSaveAction::eResultSave)
+                {
+                    // item exits -> update item data in database
+                    query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
+                    query.bindValue(":type",    item->type());
+                    query.bindValue(":key",     item->getKey().item);
+                    query.bindValue(":icon",    buffer.data());
+                    query.bindValue(":name",    item->getName());
+                    query.bindValue(":comment", item->getInfo());
+                    query.bindValue(":data", data);
+                    query.bindValue(":id", idItem);
+                    QUERY_EXEC(throw -1);
+                }
             }
             else
             {
@@ -312,8 +376,10 @@ bool CDBProject::save()
             CGisWidget::self().postEventForDb(info);
         }
 
+        progress.setValue(100);
         return false;
     }
+    progress.setValue(100);
     return true;
 }
 

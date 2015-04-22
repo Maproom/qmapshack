@@ -123,6 +123,8 @@ void IDBFolder::addFolder(type_e type, const QString& name)
     QUERY_EXEC(return );
 
     IDBFolder::createFolderByType(db, type, idChild, this);
+
+    expanding();
 }
 
 void IDBFolder::expanding()
@@ -303,7 +305,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren)
         IDBFolder::createFolderByType(db, typeChild, idChild, this);
     }
 
-    sortChildren(1, Qt::AscendingOrder);
+    sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
 
     // tracks 2nd
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");

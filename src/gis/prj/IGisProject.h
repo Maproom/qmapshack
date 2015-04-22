@@ -93,7 +93,7 @@ public:
        If the project is closed, the user is asked if the project should be saved and saved on user request.
 
        @return True if the operation is aborted. False on "save" and "no".
-    */
+     */
     bool askBeforClose();
 
     IGisProject& operator=(const IGisProject& p)
@@ -105,7 +105,7 @@ public:
 
     /**
        @brief Summon the project details dialog.
-    */
+     */
     void edit();
 
     /**
@@ -134,7 +134,7 @@ public:
               However if the project is serialized, a type id is needed.
 
        @return One of type_e
-    */
+     */
     type_e getType() const
     {
         return type;
@@ -166,7 +166,7 @@ public:
     /**
        @brief Get the project's name extended with the parent's name.
        @return The name from metadata.nam appended with either the device name or the database parent folder's name.
-    */
+     */
     QString getNameEx() const;
 
     const QDateTime& getTime() const
@@ -189,7 +189,7 @@ public:
     /**
        @brief Get the sorting mode
        @return One of sorting_e
-    */
+     */
     sorting_e getSorting() const
     {
         return sorting;
@@ -210,7 +210,7 @@ public:
        This will mark the project as changed.
 
        @param s the mode
-    */
+     */
     void setSorting(sorting_e s);
 
     /**

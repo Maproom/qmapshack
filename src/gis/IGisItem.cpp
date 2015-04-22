@@ -151,7 +151,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
             parent->removeChild(this);
             parent->insertChild(0, this);
         }
-    }    
+    }
 }
 
 IGisItem::~IGisItem()

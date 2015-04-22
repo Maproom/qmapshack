@@ -16,61 +16,45 @@
 
 **********************************************************************************************/
 
-#ifndef CFILEEXT_H
-#define CFILEEXT_H
+#include "gis/IGisItem.h"
+#include "gis/db/CSelectSaveAction.h"
 
-#include <QFile>
-#include <QtCore>
-
-class CFileExt : public QFile
+CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, QWidget *parent)
+    : QDialog(parent)
+    , result(eResultNone)
 {
-public:
-    CFileExt(const QString &filename)
-        : QFile(filename)
-        , mapped(NULL)
+    setupUi(this);
+
+    labelIcon1->setPixmap(src->getIcon());
+    labelInfo1->setText(src->getInfo());
+    labelIcon2->setPixmap(tar->getIcon());
+    labelInfo2->setText(tar->getInfo());
+
+    adjustSize();
+
+    connect(pushSave, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+    connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+}
+
+CSelectSaveAction::~CSelectSaveAction()
+{
+}
+
+bool CSelectSaveAction::allOthersToo()
+{
+    return checkAllOtherToo->isChecked();
+}
+
+void CSelectSaveAction::slotSelectResult()
+{
+    if(sender() == pushSave)
     {
-        cnt++;
+        result = eResultSave;
+    }
+    else if(sender() == pushSkip)
+    {
+        result = eResultSkip;
     }
 
-    ~CFileExt()
-    {
-        cnt--;
-    }
-
-#ifndef Q_OS_WIN32
-    // data access function
-    const char *data(qint64 offset, qint64 s)
-    {
-        mapped = map(offset, s);
-        mappedSections << mapped;
-        return (const char*)mapped;
-    }
-
-    void free()
-    {
-        foreach(uchar * p, mappedSections)
-        {
-            unmap(p);
-        }
-        mappedSections.clear();
-    }
-
-#else
-    // data access function
-    const char *data(qint64 offset, qint64 s)
-    {
-        uchar * p = map(offset,s);
-        return (const char *)p;
-    }
-#endif
-
-private:
-    static int cnt;
-
-    uchar *mapped;
-    QSet<uchar*> mappedSections;
-};
-
-
-#endif //CFILEEXT_H
-
+    accept();
+}

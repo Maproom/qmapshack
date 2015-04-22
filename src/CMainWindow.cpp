@@ -790,7 +790,6 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
         {
             event->acceptProposedAction();
         }
-
     }
 }
 

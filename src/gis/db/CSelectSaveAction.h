@@ -16,61 +16,40 @@
 
 **********************************************************************************************/
 
-#ifndef CFILEEXT_H
-#define CFILEEXT_H
+#ifndef CSELECTSAVEACTION_H
+#define CSELECTSAVEACTION_H
 
-#include <QFile>
-#include <QtCore>
+#include "ui_ISelectSaveAction.h"
+#include <QDialog>
 
-class CFileExt : public QFile
+class IGisItem;
+
+class CSelectSaveAction : public QDialog, private Ui::ISelectSaveAction
 {
+    Q_OBJECT
 public:
-    CFileExt(const QString &filename)
-        : QFile(filename)
-        , mapped(NULL)
-    {
-        cnt++;
-    }
+    CSelectSaveAction(const IGisItem * src, const IGisItem * tar, QWidget * parent);
+    virtual ~CSelectSaveAction();
 
-    ~CFileExt()
+    enum result_e
     {
-        cnt--;
-    }
+        eResultNone,
+        eResultSave,
+        eResultSkip,
+    };
 
-#ifndef Q_OS_WIN32
-    // data access function
-    const char *data(qint64 offset, qint64 s)
+    result_e getResult()
     {
-        mapped = map(offset, s);
-        mappedSections << mapped;
-        return (const char*)mapped;
+        return result;
     }
+    bool allOthersToo();
 
-    void free()
-    {
-        foreach(uchar * p, mappedSections)
-        {
-            unmap(p);
-        }
-        mappedSections.clear();
-    }
-
-#else
-    // data access function
-    const char *data(qint64 offset, qint64 s)
-    {
-        uchar * p = map(offset,s);
-        return (const char *)p;
-    }
-#endif
+private slots:
+    void slotSelectResult();
 
 private:
-    static int cnt;
-
-    uchar *mapped;
-    QSet<uchar*> mappedSections;
+    result_e result;
 };
 
-
-#endif //CFILEEXT_H
+#endif //CSELECTSAVEACTION_H
 

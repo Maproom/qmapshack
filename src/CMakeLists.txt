@@ -126,6 +126,7 @@ set( SRCS
     gis/db/CDBItem.cpp
     gis/db/CDBProject.cpp
     gis/db/CLostFoundProject.cpp
+    gis/db/CSelectSaveAction.cpp
     gis/search/CSearchGoogle.cpp
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CScrOptWpt.cpp
@@ -302,6 +303,7 @@ set( HDRS
     gis/db/CDBItem.h
     gis/db/CDBProject.h
     gis/db/CLostFoundProject.h
+    gis/db/CSelectSaveAction.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CDetailsWpt.h
@@ -399,6 +401,7 @@ set( UIS
     gis/db/ISetupDatabase.ui
     gis/db/ISetupWorkspace.ui
     gis/db/ISetupFolder.ui
+    gis/db/ISelectSaveAction.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui

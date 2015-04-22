@@ -244,7 +244,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         drawPointOfFocus(p);
         break;
 
-    case eStateRangeSelected:      
+    case eStateRangeSelected:
         drawLine(line, p);
         drawArrows(line, p);
         drawHighlight2(p);
@@ -252,7 +252,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         drawPointOfFocus(p);
         break;
 
-    case eStateMovePoint:        
+    case eStateMovePoint:
         drawLine(line, p);
         drawArrows(line, p);
         drawBullets(line, p);
@@ -270,7 +270,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         {
             l = line.mid(0, idxStart) + newLine.mid(0, newLine.size() - 2) + subLinePixel + line.mid(idxStop, -1);
         }
-        drawLeadLine(leadLinePixel, p);        
+        drawLeadLine(leadLinePixel, p);
         drawLine(l, p);
         drawArrows(l, p);
         drawBullets(l, p);
@@ -288,7 +288,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         {
             l = line.mid(0, idxStart + 1) + subLinePixel + newLine.mid(2, -1) + line.mid(idxStop + 1, -1);
         }
-        drawLeadLine(leadLinePixel, p);        
+        drawLeadLine(leadLinePixel, p);
         drawLine(l, p);
         drawArrows(l, p);
         drawBullets(l, p);

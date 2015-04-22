@@ -18,8 +18,8 @@
 
 #include "CMainWindow.h"
 #include "map/CMapDraw.h"
-#include "map/CMapPathSetup.h"
 #include "map/CMapList.h"
+#include "map/CMapPathSetup.h"
 
 #include <QtWidgets>
 

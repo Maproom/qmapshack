@@ -1571,22 +1571,22 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
         <source>Add Waypoint</source>
         <translation>Wegpunkt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Track</source>
         <translation>Track hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Area</source>
         <translation>Gebiet hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="47"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
         <source>Copy position</source>
         <translation>Position kopieren</translation>
     </message>
@@ -4035,7 +4035,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
         <source>Select a project...</source>
-        <translation>Ein Projekt wählen...</translation>
+        <translation>Ein Projekt auswählen...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
@@ -4043,22 +4043,27 @@ sein</translation>
         <translation>Wähle ein Projekt aus der Liste oder gib einen neuen Projektnamen ein.</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="36"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
+        <source>New project&apos;s name</source>
+        <translation>Neuer Projektname</translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="43"/>
         <source>New project is created as:</source>
         <translation>Das neue Projekt wird erstellt als:</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="73"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="82"/>
         <source>*.qms</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="83"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="92"/>
         <source>*.gpx</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="90"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="115"/>
         <source>Database</source>
         <translation>Datenbank</translation>
     </message>
@@ -4165,29 +4170,77 @@ sein</translation>
 <context>
     <name>ISetupFolder</name>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="14"/>
         <source>Folder...</source>
         <translation>Ordner...</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="22"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="34"/>
+        <location filename="../gis/db/ISetupFolder.ui" line="14"/>
+        <source>Database Folder...</source>
+        <translation>Datenbankordner...</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupFolder.ui" line="20"/>
+        <source>Folder name</source>
+        <translation>Ordnername</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupFolder.ui" line="30"/>
         <source>Group</source>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="45"/>
+        <location filename="../gis/db/ISetupFolder.ui" line="41"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="59"/>
+        <location filename="../gis/db/ISetupFolder.ui" line="55"/>
         <source>Other</source>
         <translation>Sonstige</translation>
+    </message>
+</context>
+<context>
+    <name>ISetupNewWpt</name>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="14"/>
+        <source>New Waypoint...</source>
+        <translation>Neuer Wegpunkt...</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="22"/>
+        <source>Symbol</source>
+        <translation>Symbol</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="29"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="39"/>
+        <source>Position</source>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="49"/>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="59"/>
+        <source>Bad position format. Must be: 
+&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
+or
+&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
+        <translation>Falsches Positionsformat. Muss entweder 
+&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
+oder
+&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;
+sein</translation>
     </message>
 </context>
 <context>
@@ -4767,7 +4820,7 @@ Dateiname: %1</translation>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="142"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="45"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="102"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="101"/>
         <source>_Clone</source>
         <translation>_Klon</translation>
     </message>
@@ -4815,7 +4868,7 @@ Dateiname: %1</translation>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="535"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="154"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1773"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="389"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="378"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
@@ -4831,74 +4884,72 @@ Dateiname: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1200"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1259"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1439"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="203"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="104"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="203"/>
         <source>Enter new waypoint name.</source>
         <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="255"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="244"/>
         <source>Elevation: %1 %2</source>
         <translation>Höhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="266"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="255"/>
         <source>Proximity: %1 %2</source>
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1755"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="326"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="336"/>
         <source>Changed position</source>
         <translation>Position geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="353"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="342"/>
         <source>Changed elevation</source>
         <translation>Höhe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="359"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>
         <source>Changed proximity</source>
         <translation>Abstandsalarm geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="371"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="360"/>
         <source>Changed icon</source>
         <translation>Symbol geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="395"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="384"/>
         <source>Changed images</source>
         <translation>Bilder geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="401"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="390"/>
         <source>Add image</source>
         <translation>Bild hinzufügen</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="142"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1761"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="377"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="366"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="148"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1767"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="383"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="372"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>

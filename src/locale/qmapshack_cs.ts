@@ -1488,22 +1488,22 @@ Neznámá stavba.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
         <source>Add Waypoint</source>
         <translation>Přidat cestovní bod</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Track</source>
         <translation>Přidat stopu</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Area</source>
         <translation>Přidat oblast</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="47"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
         <source>Copy position</source>
         <translation>Kopírovat polohu</translation>
     </message>
@@ -3894,22 +3894,27 @@ nebo
         <translation>Vybrat projekt ze seznamu nebo zadat nový název projektu.</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="36"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
+        <source>New project&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="43"/>
         <source>New project is created as:</source>
         <translation>Nový projekt je vytvořen jako:</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="73"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="82"/>
         <source>*.qms</source>
         <translation>*.qms</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="83"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="92"/>
         <source>*.gpx</source>
         <translation>*.gpx</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectProjectDialog.ui" line="90"/>
+        <location filename="../helpers/ISelectProjectDialog.ui" line="115"/>
         <source>Database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4024,29 +4029,76 @@ nebo
 <context>
     <name>ISetupFolder</name>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="14"/>
         <source>Folder...</source>
-        <translation>Složka...</translation>
+        <translation type="vanished">Složka...</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="22"/>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation type="vanished">Název</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="34"/>
+        <location filename="../gis/db/ISetupFolder.ui" line="14"/>
+        <source>Database Folder...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupFolder.ui" line="20"/>
+        <source>Folder name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupFolder.ui" line="30"/>
         <source>Group</source>
         <translation>Skupina</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="45"/>
+        <location filename="../gis/db/ISetupFolder.ui" line="41"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupFolder.ui" line="59"/>
+        <location filename="../gis/db/ISetupFolder.ui" line="55"/>
         <source>Other</source>
         <translation>Jiné</translation>
+    </message>
+</context>
+<context>
+    <name>ISetupNewWpt</name>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="14"/>
+        <source>New Waypoint...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="22"/>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="29"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="39"/>
+        <source>Position</source>
+        <translation type="unfinished">Poloha</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="49"/>
+        <source>Name</source>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/ISetupNewWpt.ui" line="59"/>
+        <source>Bad position format. Must be: 
+&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
+or
+&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
+        <translation type="unfinished">Špatný polohový formát. Musí být: 
+&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
+nebo
+&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
 </context>
 <context>
@@ -4684,7 +4736,7 @@ Název souboru: %1</translation>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="142"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="45"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="102"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="101"/>
         <source>_Clone</source>
         <translation>_Klon</translation>
     </message>
@@ -4732,7 +4784,7 @@ Název souboru: %1</translation>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="535"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="154"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1773"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="389"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="378"/>
         <source>Changed links</source>
         <translation>Změněné odkazy</translation>
     </message>
@@ -4743,18 +4795,18 @@ Název souboru: %1</translation>
         <translation>Změněná barva</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="255"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="244"/>
         <source>Elevation: %1 %2</source>
         <translation>Výška: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="266"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="255"/>
         <source>Proximity: %1 %2</source>
         <translation>Blízkost: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1755"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="326"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
@@ -4764,58 +4816,56 @@ Název souboru: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1200"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1259"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1439"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="203"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="104"/>
         <source>Edit name...</source>
         <translation>Upravit název...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="203"/>
         <source>Enter new waypoint name.</source>
-        <translation>Zadat nový název pro cestovní bod.</translation>
+        <translation type="vanished">Zadat nový název pro cestovní bod.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="336"/>
         <source>Changed position</source>
         <translation>Změněná poloha</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="353"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="342"/>
         <source>Changed elevation</source>
         <translation>Změněná výška</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="359"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>
         <source>Changed proximity</source>
         <translation>Změněná blízkost</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="371"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="360"/>
         <source>Changed icon</source>
         <translation>Změněná ikona</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="395"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="384"/>
         <source>Changed images</source>
         <translation>Změněné obrázky</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="401"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="390"/>
         <source>Add image</source>
         <translation>Přidat obrázek</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="142"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1761"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="377"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="366"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="148"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1767"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="383"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="372"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>

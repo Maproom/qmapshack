@@ -287,9 +287,7 @@ public:
      */
     void removeLinksByType(const QString& type);
 
-    static const QString &getNewName();
-    static const QString &getNewIcon();
-    static void getNewPosition(QPointF &pos);
+    static bool getNewWptData(QPointF& pt, QString& icon, QString& name);
 
 
 private:

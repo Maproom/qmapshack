@@ -27,8 +27,7 @@
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
-#include "helpers/CPositionDialog.h"
-#include "helpers/CWptIconDialog.h"
+#include "gis/wpt/CSetupNewWpt.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
 
@@ -176,8 +175,7 @@ void CGisItemWpt::setSymbol()
     setIcon();
 }
 
-
-const QString& CGisItemWpt::getNewName()
+bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
 {
     const int s = lastName.size();
     if(s != 0)
@@ -200,30 +198,21 @@ const QString& CGisItemWpt::getNewName()
             lastName = lastName.left(idx) + QString::number(lastName.mid(idx).toInt() + 1);
         }
     }
-    lastName = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new waypoint name."), QLineEdit::Normal, lastName);
-    return lastName;
-}
 
-const QString& CGisItemWpt::getNewIcon()
-{
-    QToolButton but;
-    but.setObjectName(lastIcon);
-    CWptIconDialog dlg(&but);
-    dlg.exec();
-    lastIcon = but.objectName();
+    name = lastName;
+    icon = lastIcon;
 
-    return lastIcon;
-}
-
-void CGisItemWpt::getNewPosition(QPointF& pos)
-{
-    CPositionDialog dlg(&CMainWindow::self(), pos);
-    if(dlg.exec() == QDialog::Rejected)
+    CSetupNewWpt dlg(pt, icon, name, &CMainWindow::self());
+    if(dlg.exec() != QDialog::Accepted)
     {
-        pos = NOPOINTF;
+        return false;
     }
-}
 
+    lastName = name;
+    lastIcon = icon;
+
+    return true;
+}
 
 QString CGisItemWpt::getInfo(bool allowEdit) const
 {

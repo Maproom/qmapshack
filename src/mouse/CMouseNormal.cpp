@@ -20,7 +20,6 @@
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
-#include "gis/CGisWidget.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -314,24 +313,13 @@ void CMouseNormal::draw(QPainter& p, bool needsRedraw, const QRect &rect)
 
 void CMouseNormal::slotAddWpt()
 {
+    QString name;
+    QString icon;
     QPointF pt = point;
     gis->convertPx2Rad(pt);
     pt *= RAD_TO_DEG;
 
-    CGisItemWpt::getNewPosition(pt);
-    if(pt == NOPOINTF)
-    {
-        return;
-    }
-
-    QString name = CGisItemWpt::getNewName();
-    if(name.isEmpty())
-    {
-        return;
-    }
-
-    QString icon = CGisItemWpt::getNewIcon();
-    if(icon.isEmpty())
+    if(!CGisItemWpt::getNewWptData(pt, icon, name))
     {
         return;
     }

@@ -31,6 +31,14 @@ public:
     CPositionDialog(QWidget * parent, QPointF &pos);
     virtual ~CPositionDialog();
 
+    static QRegExp reCoord1;
+    static QRegExp reCoord2;
+    static QRegExp reCoord3;
+    static QRegExp reCoord4;
+    static QRegExp reCoord5;
+
+    static void getPosition(QPointF& pt, const QString &str);
+
 public slots:
     void accept();
 

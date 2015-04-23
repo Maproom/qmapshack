@@ -80,7 +80,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
     connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(slotProjectEdited(QString)));
     connect(radioQms, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
     connect(radioGpx, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
-    connect(radioDatabase, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
+    connect(radioDatabase, SIGNAL(toggled(bool)), this, SLOT(slotDatabase()));
 
     adjustSize();
 }
@@ -138,9 +138,10 @@ void CSelectProjectDialog::slotTypeChanged()
     {
         type = eTypeGpx;
     }
-    else if(radioDatabase->isChecked())
-    {
-        type = eTypeDb;
-        QDialog::accept();
-    }
+}
+
+void CSelectProjectDialog::slotDatabase()
+{
+    type = eTypeDb;
+    QDialog::accept();
 }

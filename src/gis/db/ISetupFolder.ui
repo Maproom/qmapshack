@@ -7,26 +7,22 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>168</height>
+    <height>170</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Folder...</string>
+   <string>Database Folder...</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="lineName"/>
-     </item>
-    </layout>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Folder name</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="lineName"/>
    </item>
    <item>
     <widget class="QRadioButton" name="radioGroup">

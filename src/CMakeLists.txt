@@ -134,6 +134,7 @@ set( SRCS
     gis/wpt/CDetailsWpt.cpp
     gis/wpt/CDetailsGeoCache.cpp
     gis/wpt/CProjWpt.cpp
+    gis/wpt/CSetupNewWpt.cpp
     gis/trk/CGisItemTrk.cpp
     gis/trk/CScrOptTrk.cpp
     gis/trk/CDetailsTrk.cpp
@@ -311,6 +312,7 @@ set( HDRS
     gis/wpt/CDetailsWpt.h
     gis/wpt/CDetailsGeoCache.h
     gis/wpt/CProjWpt.h
+    gis/wpt/CSetupNewWpt.h
     gis/trk/CGisItemTrk.h
     gis/trk/CScrOptTrk.h
     gis/trk/CDetailsTrk.h
@@ -409,6 +411,7 @@ set( UIS
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui
     gis/wpt/IProjWpt.ui
+    gis/wpt/ISetupNewWpt.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/IDetailsTrk.ui
     gis/trk/ICombineTrk.ui

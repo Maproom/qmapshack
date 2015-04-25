@@ -1,3 +1,17 @@
+V 1.2.1
+* Add drag-n-drop of gpx and qms files to QMapShack
+* Fix wait cursor when asking to save project
+* [Issue #15] Using Garmin IMG files crashes on machines with small memory
+* [Issue #16] In Title-bar no Shutdown (Close QMapShack) entry
+* QlgtDB: Convert distance overlays to tracks
+* Fix several issues with range selection
+* Unlock items automatically on edit functions
+* Database projects: Append name with name of parent database folder or device name
+* Set write flag for items copied from devices.
+* Database: Ask before updating items in database
+* Add project  to database directly from workspace
+* Wpt: Simplyfy adding new waypoints
+
 V 1.2.0
 * TwoNav: prepend HTML file for waypoint comment with QMS_CMT
 * Devices: Warn if there is a file/path with the same name, but different key

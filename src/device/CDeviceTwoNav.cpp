@@ -40,7 +40,17 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
 
     pathData = "TwoNavData/Data/";
 
+
     QDir dirData(dir.absoluteFilePath(pathData));
+
+    {
+        IGisProject * project =  new CTwoNavProject(dirData.absolutePath(), this);
+        if(!project->isValid())
+        {
+            delete project;
+        }
+    }
+
     QStringList entries = dirData.entryList(QStringList("*.gpx"));
     foreach(const QString &entry, entries)
     {
@@ -72,6 +82,8 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
             delete project;
         }
     }
+
+
 }
 
 CDeviceTwoNav::~CDeviceTwoNav()

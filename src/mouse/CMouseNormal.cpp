@@ -330,7 +330,10 @@ void CMouseNormal::slotAddWpt()
         return;
     }
 
-    new CGisItemWpt(pt, name, icon, project);
+    CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
+    wpt->edit();
+
+
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 

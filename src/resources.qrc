@@ -140,6 +140,7 @@
         <file>icons/32x32/Save.png</file>
         <file>icons/32x32/ProfileToWindow.png</file>
         <file>icons/32x32/NoGo.png</file>
+        <file>icons/32x32/Bubble.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -262,6 +263,7 @@
         <file>icons/48x48/Save.png</file>
         <file>icons/48x48/ProfileToWindow.png</file>
         <file>icons/48x48/NoGo.png</file>
+        <file>icons/48x48/Bubble.png</file>
 
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>

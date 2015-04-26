@@ -395,6 +395,16 @@ void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
     }
 }
 
+void CGisWidget::toggleWptBubble(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(wpt != 0)
+    {
+        wpt->toggleBubble();
+    }
+}
+
 void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

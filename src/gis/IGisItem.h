@@ -448,9 +448,10 @@ protected:
 
     enum flags_e
     {
-        eFlagCreatedInQms  = 0x00000001
+        eFlagCreatedInQms   = 0x00000001
         ,eFlagWriteAllowed  = 0x00000002
         ,eFlagTainted       = 0x00000004
+        ,eFlagWptBubble     = 0x00000100
     };
 
 

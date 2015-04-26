@@ -287,7 +287,11 @@ public:
      */
     void removeLinksByType(const QString& type);
 
+    void toggleBubble();
+    bool hasBubble(){return bool(flags & eFlagWptBubble);}
+
     static bool getNewWptData(QPointF& pt, QString& icon, QString& name);
+
 
 
 private:
@@ -297,6 +301,7 @@ private:
     void readTwoNav(const CTwoNavProject::wpt_t &tnvWpt);
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
+    void drawBubble(QPainter& p);
 
 
     static key_t keyUserFocus;
@@ -318,6 +323,9 @@ private:
     // --- stop all waypoint data ----
 
     QPointer<CScrOptWpt> scrOpt;
+
+    bool doBubble;
+
 };
 
 #endif //CGISITEMWPT_H

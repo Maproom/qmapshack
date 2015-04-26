@@ -45,6 +45,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
+    , doBubble(false)
 {
     wpt.name    = name;
     wpt.sym     = icon;
@@ -67,6 +68,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
+    , doBubble(false)
 {
     *this = parentWpt;
     wpt.lon     = pos.x();
@@ -91,6 +93,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     : IGisItem(project, eTypeWpt, idx)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
+    , doBubble(false)
 {
     *this = parentWpt;
     key.project = project->getKey();
@@ -125,6 +128,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     : IGisItem(project, eTypeWpt, project->childCount())
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
+    , doBubble(false)
 {
     readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -138,6 +142,7 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeWpt, project->childCount())
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
+    , doBubble(false)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -148,6 +153,7 @@ CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
+    , doBubble(false)
 {
     loadFromDb(id, db);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -157,6 +163,7 @@ CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * proj
     : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
+    , doBubble(false)
 {
     readTwoNav(tnvWpt);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -449,6 +456,8 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 
     blockedAreas << QRectF(posScreen - focus, icon.size());
+
+    drawBubble(p);
 }
 
 void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
@@ -500,6 +509,24 @@ void CGisItemWpt::drawHighlight(QPainter& p)
     p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
 }
 
+void CGisItemWpt::drawBubble(QPainter& p)
+{
+    if(!(flags & eFlagWptBubble))
+    {
+        return;
+    }
+
+    QString str = createText(true, getComment(), getDescription(), getLinks());
+
+    QTextDocument doc;
+    doc.setHtml(str);
+    doc.setTextWidth(300);
+
+    qDebug() << "xxxxxxxxx" << doc.size() << doc.idealWidth();
+
+    doc.drawContents(&p);
+}
+
 void CGisItemWpt::removeLinksByType(const QString& type)
 {
     QList<IGisItem::link_t>::iterator link = wpt.links.begin();
@@ -514,4 +541,17 @@ void CGisItemWpt::removeLinksByType(const QString& type)
 
         link++;
     }
+}
+
+void CGisItemWpt::toggleBubble()
+{
+    if(flags & eFlagWptBubble)
+    {
+        flags &= ~eFlagWptBubble;
+    }
+    else
+    {
+        flags |= eFlagWptBubble;
+    }
+    updateHistory();
 }

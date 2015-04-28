@@ -34,6 +34,7 @@
 #include "mouse/CMouseMoveWpt.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CMouseRangeTrk.h"
+#include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 
@@ -231,7 +232,16 @@ void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
     }
 }
 
-
+void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
+{
+    mouse->deleteLater();
+    mouse = new CMouseWptBubble(key, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
 
 void CCanvas::reportStatus(const QString& key, const QString& msg)
 {

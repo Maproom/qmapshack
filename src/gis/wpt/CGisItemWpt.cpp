@@ -46,6 +46,15 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
     , doBubble(false)
+    , doSpecialCursor(false)
+    , doBubbleMove(false)
+    , doBubbleSize(false)
+    , mouseIsOverBubble(false)
+    , rectBubbleMove(0,0,16,16)
+    , rectBubbleEdit(0,0,16,16)
+    , rectBubbleSize(0,0,16,16)
+    , offsetBubble(-320, -150)
+    , widthBubble(300)
 {
     wpt.name    = name;
     wpt.sym     = icon;
@@ -69,6 +78,15 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
     , doBubble(false)
+    , doSpecialCursor(false)
+    , doBubbleMove(false)
+    , doBubbleSize(false)
+    , mouseIsOverBubble(false)
+    , rectBubbleMove(0,0,16,16)
+    , rectBubbleEdit(0,0,16,16)
+    , rectBubbleSize(0,0,16,16)
+    , offsetBubble(-320, -150)
+    , widthBubble(300)
 {
     *this = parentWpt;
     wpt.lon     = pos.x();
@@ -94,6 +112,15 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
     , doBubble(false)
+    , doSpecialCursor(false)
+    , doBubbleMove(false)
+    , doBubbleSize(false)
+    , mouseIsOverBubble(false)
+    , rectBubbleMove(0,0,16,16)
+    , rectBubbleEdit(0,0,16,16)
+    , rectBubbleSize(0,0,16,16)
+    , offsetBubble(-320, -150)
+    , widthBubble(300)
 {
     *this = parentWpt;
     key.project = project->getKey();
@@ -129,6 +156,15 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
     , doBubble(false)
+    , doSpecialCursor(false)
+    , doBubbleMove(false)
+    , doBubbleSize(false)
+    , mouseIsOverBubble(false)
+    , rectBubbleMove(0,0,16,16)
+    , rectBubbleEdit(0,0,16,16)
+    , rectBubbleSize(0,0,16,16)
+    , offsetBubble(-320, -150)
+    , widthBubble(300)
 {
     readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -143,6 +179,15 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
     , doBubble(false)
+    , doSpecialCursor(false)
+    , doBubbleMove(false)
+    , doBubbleSize(false)
+    , mouseIsOverBubble(false)
+    , rectBubbleMove(0,0,16,16)
+    , rectBubbleEdit(0,0,16,16)
+    , rectBubbleSize(0,0,16,16)
+    , offsetBubble(-320, -150)
+    , widthBubble(300)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -154,6 +199,15 @@ CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
     , doBubble(false)
+    , doSpecialCursor(false)
+    , doBubbleMove(false)
+    , doBubbleSize(false)
+    , mouseIsOverBubble(false)
+    , rectBubbleMove(0,0,16,16)
+    , rectBubbleEdit(0,0,16,16)
+    , rectBubbleSize(0,0,16,16)
+    , offsetBubble(-320, -150)
+    , widthBubble(300)
 {
     loadFromDb(id, db);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -164,6 +218,15 @@ CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * proj
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
     , doBubble(false)
+    , doSpecialCursor(false)
+    , doBubbleMove(false)
+    , doBubbleSize(false)
+    , mouseIsOverBubble(false)
+    , rectBubbleMove(0,0,16,16)
+    , rectBubbleEdit(0,0,16,16)
+    , rectBubbleSize(0,0,16,16)    
+    , offsetBubble(-320, -150)
+    , widthBubble(300)
 {
     readTwoNav(tnvWpt);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -436,6 +499,9 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         return;
     }
     gis->convertRad2Px(posScreen);
+
+    drawBubble(p);
+
     p.drawPixmap(posScreen - focus, icon);
 
     if(proximity != NOFLOAT)
@@ -456,9 +522,33 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 
     blockedAreas << QRectF(posScreen - focus, icon.size());
-
-    drawBubble(p);
 }
+
+void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+{
+    if(mouseIsOverBubble)
+    {
+        QPainterPath clip;
+        clip.addRoundedRect(rectBubble, 5, 5);
+        p.setClipPath(clip);
+
+        QRect barTop(rectBubble.topLeft(), QSize(rectBubble.width(), 21));
+        QRect barBottom(barTop);
+        barBottom.moveBottomLeft(rectBubble.bottomLeft());
+        barBottom.adjust(1,0,-1,-1);
+        barTop.adjust(1,1,-1,0);
+
+        p.setPen(Qt::NoPen);
+        p.setBrush(QColor(200,200,255,150));
+        p.drawRect(barTop);
+        p.drawRect(barBottom);
+
+        p.drawPixmap(rectBubbleMove, QPixmap("://cursors/cursorMove.png"));
+        p.drawPixmap(rectBubbleEdit, QPixmap("://icons/32x32/EditDetails.png"));
+        p.drawPixmap(rectBubbleSize, QPixmap("://icons/32x32/EditDetails.png"));
+    }
+}
+
 
 void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
@@ -520,12 +610,77 @@ void CGisItemWpt::drawBubble(QPainter& p)
 
     QTextDocument doc;
     doc.setHtml(str);
-    doc.setTextWidth(300);
+    doc.setTextWidth(widthBubble);
 
-    qDebug() << "xxxxxxxxx" << doc.size() << doc.idealWidth();
+    rectBubble.setWidth(widthBubble);
+    rectBubble.setHeight(doc.size().height());
 
+    QPoint posBubble = posScreen.toPoint() + offsetBubble;
+    rectBubble.moveTopLeft(posBubble);
+
+    rectBubbleMove.moveTopLeft(rectBubble.topLeft() + QPoint(2,2));
+    rectBubbleEdit.moveTopLeft(rectBubbleMove.topRight() + QPoint(2,0));
+    rectBubbleSize.moveBottomRight(rectBubble.bottomRight() - QPoint(2,2));
+
+    QPolygonF frame = makePolyline(posScreen, rectBubble);
+    p.setPen(CCanvas::penBorderGray);
+    p.setBrush(CCanvas::brushBackWhite);
+    p.drawPolygon(frame);
+
+    p.save();
+    p.translate(posBubble);
+    p.setPen(Qt::black);
     doc.drawContents(&p);
+    p.restore();
+
 }
+
+QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
+{
+    QPolygonF poly1, poly2;
+    poly1 << r.topLeft() << r.topRight() << r.bottomRight() << r.bottomLeft();
+
+    if(!r.contains(anchor))
+    {
+        qreal w = (r.width()/2) - 50;
+        qreal h = (r.height()/2) - 50;
+
+        w = w > 100 ? 100 : w;
+        h = h > 100 ? 100 : h;
+
+        w = w < 20 ? 20 : w;
+        h = h < 20 ? 20 : h;
+
+        if(anchor.x() < r.left())
+        {
+            poly2 << anchor << (r.center() + QPoint(0,-h)) << (r.center() + QPoint(0,h)) << anchor;
+        }
+        else if(r.right() < anchor.x())
+        {
+            poly2 << anchor << (r.center() + QPoint(0,-h)) << (r.center() + QPoint(0,h)) << anchor;
+        }
+        else if(anchor.y() < r.top())
+        {
+            poly2 << anchor << (r.center() + QPoint(-w,0)) << (r.center() + QPoint(w,0)) << anchor;
+        }
+        else if(r.bottom() < anchor.y())
+        {
+            poly2 << anchor << (r.center() + QPoint(-w,0)) << (r.center() + QPoint(w,0)) << anchor;
+        }
+
+        QPainterPath path1;
+        path1.addRoundedRect(r,5,5);
+        QPainterPath path2;
+        path2.addPolygon(poly2);
+
+        path1 = path1.united(path2);
+
+        poly1 = path1.toFillPolygon();
+    }
+
+    return poly1;
+}
+
 
 void CGisItemWpt::removeLinksByType(const QString& type)
 {
@@ -543,6 +698,77 @@ void CGisItemWpt::removeLinksByType(const QString& type)
     }
 }
 
+void CGisItemWpt::mouseMove(const QPointF& pos)
+{
+    if(!hasBubble())
+    {
+        return;
+    }
+
+    if(!processMouseOverBubble(pos.toPoint()))
+    {
+        if(mouseIsOverBubble)
+        {
+            if(!rectBubble.contains(pos.toPoint()))
+            {
+                CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+                if(canvas)
+                {
+                    doBubbleMove = doBubbleSize = false;
+                    canvas->resetMouse();
+                }
+                mouseIsOverBubble = false;
+            }
+        }
+        else
+        {
+            if(rectBubble.contains(pos.toPoint()))
+            {
+                CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+                if(canvas)
+                {
+                    doBubbleMove = doBubbleSize = false;
+                    canvas->setMouseWptBubble(getKey());
+                }
+                mouseIsOverBubble = true;
+            }
+        }
+    }
+}
+
+void CGisItemWpt::mousePress(const QPointF& pos)
+{
+    if(!mouseIsOverBubble)
+    {
+        return;
+    }
+
+    QPoint pos1 = pos.toPoint();
+    if(rectBubbleMove.contains(pos1))
+    {
+        doBubbleMove = true;
+    }
+    else if(rectBubbleEdit.contains(pos1))
+    {
+        edit();
+    }
+    else if(rectBubbleSize.contains(pos1))
+    {
+        doBubbleSize = true;
+    }
+}
+
+void CGisItemWpt::mouseRelease(const QPointF& pos)
+{
+    if(!mouseIsOverBubble)
+    {
+        return;
+    }
+
+    updateHistory();
+    doBubbleMove = doBubbleSize = false;
+}
+
 void CGisItemWpt::toggleBubble()
 {
     if(flags & eFlagWptBubble)
@@ -554,4 +780,48 @@ void CGisItemWpt::toggleBubble()
         flags |= eFlagWptBubble;
     }
     updateHistory();
+}
+
+bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
+{
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(!canvas || !mouseIsOverBubble)
+    {
+        return false;
+    }
+
+    if(doBubbleMove)
+    {
+        offsetBubble = pos - posScreen.toPoint();
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+        return true;
+    }
+    else if(doBubbleSize)
+    {
+        int width = pos.x() - rectBubble.left();
+        if(width > 50)
+        {
+            widthBubble = width;
+        }
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+        return true;
+    }
+    else if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))
+    {
+        if(!doSpecialCursor)
+        {
+            QApplication::setOverrideCursor(Qt::PointingHandCursor);
+            doSpecialCursor = true;
+        }
+    }
+    else
+    {
+        if(doSpecialCursor)
+        {
+            QApplication::restoreOverrideCursor();
+            doSpecialCursor = false;
+        }
+    }
+
+    return false;
 }

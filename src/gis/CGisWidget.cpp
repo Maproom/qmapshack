@@ -228,13 +228,28 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project)
         {
-            project->getItemByPos(pos, items);
+            project->getItemsByPos(pos, items);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
         if(device)
         {
-            device->getItemByPos(pos, items);
+            device->getItemsByPos(pos, items);
+            continue;
+        }
+    }
+}
+
+void CGisWidget::mouseMove(const QPointF& pos)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
+        {
+            project->mouseMove(pos);
             continue;
         }
     }

@@ -258,6 +258,27 @@ public:
     virtual bool isCloseTo(const QPointF& pos) = 0;
 
     /**
+       @brief Receive the current mouse position
+
+       The default does nothing. Override if needed.
+
+       @param pos   the mouse position on the screen in pixel
+     */
+    virtual void mouseMove(const QPointF& pos)    
+    {
+        Q_UNUSED(pos);
+    }
+    void mousePress(const QPointF& pos)
+    {
+        Q_UNUSED(pos);
+    }
+    void mouseRelease(const QPointF& pos)
+    {
+        Q_UNUSED(pos);
+    }
+
+
+    /**
        @brief Query if this item is read only
        @return True if it is read only.
      */

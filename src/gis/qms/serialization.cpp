@@ -27,7 +27,7 @@
 #include <QtWidgets>
 
 #define VER_TRK         quint8(1)
-#define VER_WPT         quint8(1)
+#define VER_WPT         quint8(2)
 #define VER_RTE         quint8(1)
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)
@@ -471,6 +471,11 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     in >> wpt;
     in >> geocache;
     in >> images;
+    if(version > 1)
+    {
+        in >> offsetBubble;
+        in >> widthBubble;
+    }
 
     setIcon();
     setText(CGisListWks::eColumnName, wpt.name);
@@ -492,6 +497,8 @@ QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
     out << wpt;
     out << geocache;
     out << images;
+    out << offsetBubble;
+    out << widthBubble;
 
     stream.writeRawData(MAGIC_WPT, MAGIC_SIZE);
     stream << VER_WPT;

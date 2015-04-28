@@ -92,11 +92,12 @@ set( SRCS
     mouse/CMouseEditTrk.cpp
     mouse/CMouseEditArea.cpp
     mouse/CMouseRangeTrk.cpp
+    mouse/CMouseWptBubble.cpp
     mouse/CScrOptUnclutter.cpp    
     mouse/CScrOptPoint.cpp
     mouse/CScrOptEditLine.cpp
     mouse/CScrOptRange.cpp
-    mouse/CScrOptRangeTrk.cpp
+    mouse/CScrOptRangeTrk.cpp    
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
@@ -274,6 +275,7 @@ set( HDRS
     mouse/CMouseEditTrk.h
     mouse/CMouseEditArea.h
     mouse/CMouseRangeTrk.h
+    mouse/CMouseWptBubble.h
     mouse/CScrOptUnclutter.h
     mouse/CScrOptPoint.h
     mouse/CScrOptEditLine.h

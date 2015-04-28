@@ -265,9 +265,13 @@ public:
     }
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
     void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
     void drawHighlight(QPainter& p);
     bool isCloseTo(const QPointF& pos);
+    void mouseMove(const QPointF& pos);
+    void mousePress(const QPointF& pos);
+    void mouseRelease(const QPointF& pos);
     bool isGeocache()
     {
         return geocache.hasData;
@@ -288,7 +292,10 @@ public:
     void removeLinksByType(const QString& type);
 
     void toggleBubble();
-    bool hasBubble(){return bool(flags & eFlagWptBubble);}
+    bool hasBubble()
+    {
+        return bool(flags & eFlagWptBubble);
+    }
 
     static bool getNewWptData(QPointF& pt, QString& icon, QString& name);
 
@@ -302,6 +309,8 @@ private:
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
     void drawBubble(QPainter& p);
+    QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
+    bool processMouseOverBubble(const QPoint &pos);
 
 
     static key_t keyUserFocus;
@@ -325,6 +334,17 @@ private:
     QPointer<CScrOptWpt> scrOpt;
 
     bool doBubble;
+    bool doSpecialCursor;
+    bool doBubbleMove;
+    bool doBubbleSize;
+    bool mouseIsOverBubble;
+    QRect rectBubble;
+    QRect rectBubbleMove;
+    QRect rectBubbleEdit;
+    QRect rectBubbleSize;
+
+    QPoint  offsetBubble;
+    quint32 widthBubble;
 
 };
 

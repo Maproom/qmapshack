@@ -233,7 +233,16 @@ public:
        @param pos       the coordinate on the screen in pixel
        @param items     a list the item's pointer is stored to.
      */
-    void getItemByPos(const QPointF& pos, QList<IGisItem*>& items);
+    void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
+
+    /**
+       @brief Receive the current mouse position
+
+       Iterate over all items and pass the position
+
+       @param pos   the mouse position on the screen in pixel
+     */
+    virtual void mouseMove(const QPointF& pos);
 
     /**
        @brief Delete items with matching key

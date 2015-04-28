@@ -16,55 +16,33 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSERANGETRK_H
-#define CMOUSERANGETRK_H
+#ifndef CMOUSEWPTBUBBLE_H
+#define CMOUSEWPTBUBBLE_H
 
 #include "gis/IGisItem.h"
 #include "mouse/IMouse.h"
-#include <QPointer>
 
-class CGisItemTrk;
+class CGisItemWpt;
 class CGisDraw;
 class CCanvas;
-class CScrOptRangeTrk;
 
-class CMouseRangeTrk : public IMouse
+
+class CMouseWptBubble : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * parent);
-    virtual ~CMouseRangeTrk();
+    CMouseWptBubble(const IGisItem::key_t& key, CGisDraw * gis, CCanvas * parent);
+    virtual ~CMouseWptBubble();
 
-    void draw(QPainter& p, bool, const QRect &);
-    void mousePressEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void wheelEvent(QWheelEvent * e);
-
-private slots:
-    void slotHidePoints();
-    void slotShowPoints();
-    void slotCopy();
+    virtual void draw(QPainter& p, bool needsRedraw, const QRect &rect);
+    virtual void mousePressEvent(QMouseEvent * e);
+    virtual void mouseMoveEvent(QMouseEvent * e);
+    virtual void mouseReleaseEvent(QMouseEvent *e);
+    virtual void wheelEvent(QWheelEvent * e);
 
 private:
-    IGisItem::key_t key;
-
-    enum state_e
-    {
-        eStateIdle
-        ,eStateMoveMap
-        ,eStateSelectRange
-        ,eStateRangeSelected
-    };
-
-    state_e state;
-
-    QPointF anchor;
-
-    QPoint lastPoint;
-
-    QPointer<CScrOptRangeTrk> scrOptRange;
+    const IGisItem::key_t& key;
 };
 
-#endif //CMOUSERANGETRK_H
+#endif //CMOUSEWPTBUBBLE_H
 

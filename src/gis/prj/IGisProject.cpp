@@ -311,7 +311,7 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
     return 0;
 }
 
-void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
+void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
 {
     if(!isVisible())
     {
@@ -330,6 +330,25 @@ void IGisProject::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
         {
             items << item;
         }
+    }
+}
+
+void IGisProject::mouseMove(const QPointF& pos)
+{
+    if(!isVisible())
+    {
+        return;
+    }
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        item->mouseMove(pos);
     }
 }
 

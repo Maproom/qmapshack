@@ -68,7 +68,7 @@ QString IDevice::getName() const
     return text(CGisListWks::eColumnName);
 }
 
-void IDevice::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
+void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
@@ -76,7 +76,7 @@ void IDevice::getItemByPos(const QPointF& pos, QList<IGisItem *> &items)
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
         if(project)
         {
-            project->getItemByPos(pos, items);
+            project->getItemsByPos(pos, items);
         }
     }
 }

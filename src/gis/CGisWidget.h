@@ -171,7 +171,14 @@ public:
      */
     void draw(QPainter& p, const QPolygonF &viewport, CGisDraw *gis);
 
+    /**
+       @brief Receive the current mouse position
 
+       Iterate over all projects and pass the position
+
+       @param pos   the mouse position on the screen in pixel
+     */
+    void mouseMove(const QPointF& pos);
     /**
        @brief Draw all data that is time variant and can't wait for a full update
 

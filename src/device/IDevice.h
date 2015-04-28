@@ -55,7 +55,7 @@ public:
 
     QString getName() const;
 
-    void getItemByPos(const QPointF& pos, QList<IGisItem *> &items);
+    void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
     IGisItem * getItemByKey(const IGisItem::key_t& key);
     void editItemByKey(const IGisItem::key_t& key);
 

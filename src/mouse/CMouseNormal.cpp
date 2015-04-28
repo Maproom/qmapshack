@@ -107,6 +107,8 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         switch(stateItemSel)
         {
         case eStateIdle:
+            CGisWidget::self().mouseMove(point);
+
         case eStateHooverSingle:
         case eStateHooverMultiple:
         {

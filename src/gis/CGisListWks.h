@@ -75,6 +75,7 @@ private slots:
     void slotItemChanged(QTreeWidgetItem * item, int column);
     void slotEditItem();
     void slotDeleteItem();
+    void slotBubbleWpt();
     void slotProjWpt();
     void slotMoveWpt();
     void slotFocusTrk(bool on);
@@ -120,6 +121,7 @@ private:
     QAction * actionEditDetails;
     QAction * actionCopyItem;
     QAction * actionDelete;
+    QAction * actionBubbleWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
     QAction * actionFocusTrk;

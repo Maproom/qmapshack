@@ -495,7 +495,8 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     posScreen = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
     if(!isVisible(posScreen, viewport, gis))
     {
-        posScreen = NOPOINTF;
+        rectBubble  = QRect();
+        posScreen   = NOPOINTF;
         return;
     }
     gis->convertRad2Px(posScreen);
@@ -526,7 +527,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
-    if(mouseIsOverBubble && !doBubbleMove && !doBubbleSize)
+    if(mouseIsOverBubble && !doBubbleMove && !doBubbleSize && rectBubble.isValid() && !isReadOnly())
     {
         QPainterPath clip;
         clip.addRoundedRect(rectBubble, 5, 5);
@@ -611,7 +612,17 @@ void CGisItemWpt::drawBubble(QPainter& p)
         return;
     }
 
-    QString str = createText(true, getComment(), getDescription(), getLinks());
+    QString str = QString("<b>%1</b>").arg(getName());
+
+    if(!removeHtml(wpt.desc).simplified().isEmpty())
+    {
+        str += QString("<p>%1</p>").arg(wpt.desc);
+    }
+
+    if(!removeHtml(wpt.cmt).simplified().isEmpty())
+    {
+        str += QString("<p>%1</p>").arg(wpt.cmt);
+    }
 
     QTextDocument doc;
     doc.setHtml(str);
@@ -647,14 +658,8 @@ QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
 
     if(!r.contains(anchor))
     {
-        qreal w = (r.width()/2) - 50;
-        qreal h = (r.height()/2) - 50;
-
-        w = w > 50 ? 50 : w;
-        h = h > 50 ? 50 : h;
-
-        w = w < 30 ? 30 : w;
-        h = h < 30 ? 30 : h;
+        qreal w = 30;
+        qreal h = 30;
 
         if(anchor.x() < r.left())
         {
@@ -705,7 +710,7 @@ void CGisItemWpt::removeLinksByType(const QString& type)
 
 void CGisItemWpt::mouseMove(const QPointF& pos)
 {
-    if(!hasBubble())
+    if(!hasBubble() || isReadOnly())
     {
         return;
     }

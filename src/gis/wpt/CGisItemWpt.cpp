@@ -526,13 +526,13 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
-    if(mouseIsOverBubble)
+    if(mouseIsOverBubble && !doBubbleMove && !doBubbleSize)
     {
         QPainterPath clip;
         clip.addRoundedRect(rectBubble, 5, 5);
         p.setClipPath(clip);
 
-        QRect barTop(rectBubble.topLeft(), QSize(rectBubble.width(), 21));
+        QRect barTop(rectBubble.topLeft(), QSize(rectBubble.width(), 26));
         QRect barBottom(barTop);
         barBottom.moveBottomLeft(rectBubble.bottomLeft());
         barBottom.adjust(1,0,-1,-1);
@@ -543,9 +543,14 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.drawRect(barTop);
         p.drawRect(barBottom);
 
-        p.drawPixmap(rectBubbleMove, QPixmap("://cursors/cursorMove.png"));
+        p.setBrush(Qt::white);
+        p.drawRoundedRect(rectBubbleMove.adjusted(-2,-2,2,2), 3,3);
+        p.drawRoundedRect(rectBubbleEdit.adjusted(-2,-2,2,2), 3,3);
+        p.drawRoundedRect(rectBubbleSize.adjusted(-2,-2,2,2), 3,3);
+
+        p.drawPixmap(rectBubbleMove, QPixmap("://icons/32x32/MoveArrow.png"));
         p.drawPixmap(rectBubbleEdit, QPixmap("://icons/32x32/EditDetails.png"));
-        p.drawPixmap(rectBubbleSize, QPixmap("://icons/32x32/EditDetails.png"));
+        p.drawPixmap(rectBubbleSize, QPixmap("://icons/32x32/SizeArrow.png"));
     }
 }
 
@@ -618,9 +623,9 @@ void CGisItemWpt::drawBubble(QPainter& p)
     QPoint posBubble = posScreen.toPoint() + offsetBubble;
     rectBubble.moveTopLeft(posBubble);
 
-    rectBubbleMove.moveTopLeft(rectBubble.topLeft() + QPoint(2,2));
-    rectBubbleEdit.moveTopLeft(rectBubbleMove.topRight() + QPoint(2,0));
-    rectBubbleSize.moveBottomRight(rectBubble.bottomRight() - QPoint(2,2));
+    rectBubbleMove.moveTopLeft(rectBubble.topLeft() + QPoint(5,5));
+    rectBubbleEdit.moveTopLeft(rectBubbleMove.topRight() + QPoint(7,0));
+    rectBubbleSize.moveBottomRight(rectBubble.bottomRight() - QPoint(5,5));
 
     QPolygonF frame = makePolyline(posScreen, rectBubble);
     p.setPen(CCanvas::penBorderGray);
@@ -645,11 +650,11 @@ QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
         qreal w = (r.width()/2) - 50;
         qreal h = (r.height()/2) - 50;
 
-        w = w > 100 ? 100 : w;
-        h = h > 100 ? 100 : h;
+        w = w > 50 ? 50 : w;
+        h = h > 50 ? 50 : h;
 
-        w = w < 20 ? 20 : w;
-        h = h < 20 ? 20 : h;
+        w = w < 30 ? 30 : w;
+        h = h < 30 ? 30 : h;
 
         if(anchor.x() < r.left())
         {

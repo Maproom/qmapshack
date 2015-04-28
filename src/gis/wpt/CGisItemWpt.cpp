@@ -748,9 +748,11 @@ void CGisItemWpt::mousePress(const QPointF& pos)
         return;
     }
 
-    QPoint pos1 = pos.toPoint();
+    QPoint pos1 = pos.toPoint();    
+
     if(rectBubbleMove.contains(pos1))
     {
+        offsetMouse = pos1 - rectBubble.topLeft();
         doBubbleMove = true;
     }
     else if(rectBubbleEdit.contains(pos1))
@@ -759,6 +761,7 @@ void CGisItemWpt::mousePress(const QPointF& pos)
     }
     else if(rectBubbleSize.contains(pos1))
     {
+        offsetMouse = pos1 - rectBubble.bottomRight();
         doBubbleSize = true;
     }
 }
@@ -797,13 +800,15 @@ bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 
     if(doBubbleMove)
     {
-        offsetBubble = pos - posScreen.toPoint();
+        offsetBubble  = pos - posScreen.toPoint();
+        offsetBubble -= offsetMouse;
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
         return true;
     }
     else if(doBubbleSize)
     {
-        int width = pos.x() - rectBubble.left();
+        qDebug() << offsetMouse;
+        int width  = pos.x() - rectBubble.left() - offsetMouse.x();
         if(width > 50)
         {
             widthBubble = width;

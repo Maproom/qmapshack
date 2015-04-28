@@ -258,6 +258,18 @@ static void readXml(const QDomNode& xml, IGisItem::history_t& history)
     }
 }
 
+static void readXml(const QDomNode& xml, const QString& tag, QPoint& offsetBubble, quint32& widthBubble)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        const QDomElement& xmlBubble = xml.namedItem(tag).toElement();
+        int x = xmlBubble.attributes().namedItem("xoff").nodeValue().toInt();
+        int y = xmlBubble.attributes().namedItem("yoff").nodeValue().toInt();
+        offsetBubble = QPoint(x,y);
+        widthBubble = xmlBubble.attributes().namedItem("width").nodeValue().toInt();
+    }
+}
+
 
 static void writeXml(QDomNode& xml, const QString& tag, qint32 val)
 {
@@ -370,6 +382,16 @@ static void writeXml(QDomNode& xml, const IGisItem::history_t& history)
             writeXml(xmlEvent,"ql:comment", event.comment);
         }
     }
+}
+
+static void writeXml(QDomNode& xml, const QString& tag, const QPoint& offsetBubble, quint32 widthBubble)
+{
+    QDomElement elem = xml.ownerDocument().createElement(tag);
+    xml.appendChild(elem);
+
+    elem.setAttribute("xoff", offsetBubble.x());
+    elem.setAttribute("yoff", offsetBubble.y());
+    elem.setAttribute("width", widthBubble);
 }
 
 
@@ -515,6 +537,7 @@ void CGisItemWpt::readGpx(const QDomNode& xml)
         const QDomNode& ext = xml.namedItem("extensions");
         readXml(ext, "ql:key", key.item);
         readXml(ext, "ql:flags", flags);
+        readXml(ext, "ql:bubble", offsetBubble, widthBubble);
         readXml(ext, history);
 
         const QDomNode& wptx1 = ext.namedItem("wptx1:WaypointExtension");
@@ -547,6 +570,7 @@ void CGisItemWpt::save(QDomNode& gpx)
     xmlWpt.appendChild(xmlExt);
     writeXml(xmlExt, "ql:key", key.item);
     writeXml(xmlExt, "ql:flags", flags);
+    writeXml(xmlExt, "ql:bubble", offsetBubble, widthBubble);
     writeXml(xmlExt, history);
 
     // write other well known extensions

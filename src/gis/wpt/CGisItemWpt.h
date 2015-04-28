@@ -343,6 +343,7 @@ private:
     QRect rectBubbleEdit;
     QRect rectBubbleSize;
 
+    QPoint  offsetMouse;
     QPoint  offsetBubble;
     quint32 widthBubble;
 

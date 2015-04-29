@@ -990,6 +990,8 @@ void CGisItemTrk::findWaypointsCloseBy()
         return;
     }
 
+    bool withDoubles = project->getSorting() != IGisProject::eSortTrackWithoutDouble;
+
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     QVector<pointDP> line;
@@ -1079,7 +1081,7 @@ void CGisItemTrk::findWaypointsCloseBy()
                     minD  = d;
                 }
             }
-            else if(d > WPT_FOCUS_DIST_OUT)
+            else if(withDoubles && (d > WPT_FOCUS_DIST_OUT))
             {
                 trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
                 if(trkpt)

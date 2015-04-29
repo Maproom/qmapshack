@@ -44,7 +44,7 @@ private slots:
     void slotLinkActivated(const QUrl& url);
     void slotPrint();
     void slotLock(bool on);
-    void slotSortMode();
+    void slotSortMode(int idx);
     void slotSetupGui();
 
 private:

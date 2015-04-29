@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>795</width>
+    <width>873</width>
     <height>511</height>
    </rect>
   </property>
@@ -59,45 +59,33 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="radioOrderAsProject">
+      <widget class="QComboBox" name="comboSort">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text">
-        <string>Keep Order of Project</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioSortByTime">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Sort By Time</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioSortAlongTrack">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Sort Along Track</string>
-       </property>
+       <item>
+        <property name="text">
+         <string>Keep order of project</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sort by time</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sort along track (with doubles)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sort along track (without doubles)</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>

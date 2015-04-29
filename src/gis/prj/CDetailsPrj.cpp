@@ -39,10 +39,8 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     connect(labelKeywords, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(textDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(toolPrint, SIGNAL(clicked()), this, SLOT(slotPrint()));
-    connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
-    connect(radioSortByTime, SIGNAL(clicked()), this, SLOT(slotSortMode()));
-    connect(radioOrderAsProject, SIGNAL(clicked()), this, SLOT(slotSortMode()));
-    connect(radioSortAlongTrack, SIGNAL(clicked()), this, SLOT(slotSortMode()));
+    connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));    
+    connect(comboSort, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSortMode(int)));
     connect(toolLock, SIGNAL(clicked(bool)), this, SLOT(slotLock(bool)));
 
     slotSetupGui();
@@ -77,26 +75,9 @@ void CDetailsPrj::slotSetupGui()
     textDesc->document()->setTextWidth(textDesc->size().width() - 20);
     draw(*textDesc->document(), false);
 
-    radioOrderAsProject->blockSignals(true);
-    radioSortByTime->blockSignals(true);
-    radioSortAlongTrack->blockSignals(true);
-    switch(prj.getSorting())
-    {
-    case IGisProject::eSortNone:
-        radioOrderAsProject->setChecked(true);
-        break;
-
-    case IGisProject::eSortTime:
-        radioSortByTime->setChecked(true);
-        break;
-
-    case IGisProject::eSortTrack:
-        radioSortAlongTrack->setChecked(true);
-        break;
-    }
-    radioOrderAsProject->blockSignals(false);
-    radioSortByTime->blockSignals(false);
-    radioSortAlongTrack->blockSignals(false);
+    comboSort->blockSignals(true);
+    comboSort->setCurrentIndex(prj.getSorting());
+    comboSort->blockSignals(false);
 
     toolLock->blockSignals(true);
     toolLock->setChecked(true);
@@ -253,7 +234,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     QProgressDialog progress(tr("Build diary..."), tr("Abort"), 0, 100, this);
     progress.setWindowModality(Qt::WindowModal);
 
-    if(radioSortAlongTrack->isChecked())
+    if(comboSort->currentIndex() > IGisProject::eSortTime)
     {
         drawByTrack(cursor, trks, wpts, progress, n, nItems, printable);
     }
@@ -300,7 +281,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 {
     int cnt, w = cursor.document()->textWidth();
 
-    if(radioSortByTime->isChecked())
+    if(comboSort->currentIndex() == IGisProject::eSortTime)
     {
         qSort(trks.begin(), trks.end(), sortTrkByTime);
         qSort(wpts.begin(), wpts.end(), sortWptByTime);
@@ -415,7 +396,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 {
     int cnt, w = cursor.document()->textWidth();
 
-    if(radioSortByTime->isChecked())
+    if(comboSort->currentIndex() == IGisProject::eSortTime)
     {
         qSort(trks.begin(), trks.end(), sortTrkByTime);
     }
@@ -712,20 +693,9 @@ void CDetailsPrj::slotLock(bool on)
     slotSetupGui();
 }
 
-void CDetailsPrj::slotSortMode()
-{
-    if(radioOrderAsProject->isChecked())
-    {
-        prj.setSorting(IGisProject::eSortNone);
-    }
-    else if(radioSortAlongTrack->isChecked())
-    {
-        prj.setSorting(IGisProject::eSortTrack);
-    }
-    else if(radioSortByTime->isChecked())
-    {
-        prj.setSorting(IGisProject::eSortTime);
-    }
 
+void CDetailsPrj::slotSortMode(int idx)
+{
+    prj.setSorting(IGisProject::sorting_e(idx));
     slotSetupGui();
 }

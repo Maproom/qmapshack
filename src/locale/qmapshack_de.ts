@@ -138,81 +138,81 @@
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="194"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="556"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="175"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="537"/>
         <source>none</source>
         <translation>keine</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="253"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="234"/>
         <source>Build diary...</source>
         <translation>Tagebuch erstellen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="253"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="234"/>
         <source>Abort</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="311"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="292"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Wegpunkte&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="274"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="318"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="349"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="457"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="255"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="299"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="330"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="438"/>
         <source>Info</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="275"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="319"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="350"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="458"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="256"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="300"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="331"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="439"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="342"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="323"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="248"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Gebiete&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="480"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="461"/>
         <source>distance: %1%2</source>
         <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="482"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="463"/>
         <source>ascent: %1%2</source>
         <translation>Anstieg: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="484"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="465"/>
         <source>descend: %1%2</source>
         <translation>Abstieg: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="542"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="569"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="523"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="550"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="542"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="569"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="523"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="550"/>
         <source>Enter new project name.</source>
         <translation>Geben Sie einen neuen Namen für das Projekt ein.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="685"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="666"/>
         <source>Print Diary</source>
         <translation>Tagebuch drucken</translation>
     </message>
@@ -221,12 +221,12 @@
         <translation type="obsolete">Name eingeben.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="551"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="532"/>
         <source>Edit keywords...</source>
         <translation>Stichwörter bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="551"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="532"/>
         <source>Enter keywords.</source>
         <translation>Stichwörter eingeben.</translation>
     </message>
@@ -2326,34 +2326,51 @@ ist keine gültige Koordinatensystemdefinition:
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="83"/>
         <source>Sort By Time</source>
         <translation>Sortieren nach Zeit</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="70"/>
         <source>Keep Order of Project</source>
         <translation>Reihenfolge beibehalten</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="99"/>
         <source>Sort Along Track</source>
         <translation>Sort. entl. d. Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="127"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="115"/>
         <source>Print diary</source>
         <translation>Tagebuch drucken</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="106"/>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="130"/>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="150"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="94"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="118"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="138"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="147"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="71"/>
+        <source>Keep order of project</source>
+        <translation>Reihenfolge beibehalten</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
+        <source>Sort by time</source>
+        <translation>Sortieren nach Zeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
+        <source>Sort along track (with doubles)</source>
+        <translation>Sort. entl. d. Tracks (mehrfach)</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
+        <source>Sort along track (without doubles)</source>
+        <translation>Sort. entl. d. Tracks (einmalig)</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
         <source>Rebuild diary.</source>
         <translation>Tagebuch aktualisieren.</translation>
     </message>
@@ -4759,12 +4776,12 @@ Dateiname: %1</translation>
         <translation type="obsolete"> Neigung: %1° (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1368"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1370"/>
         <source>Hide points.</source>
         <translation>Punkte ausblenden.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1414"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1416"/>
         <source>Show points.</source>
         <translation>Punkte einblenden.</translation>
     </message>
@@ -4888,23 +4905,23 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="535"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="154"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1773"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1775"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="448"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="547"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1785"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1787"/>
         <source>Changed color</source>
         <translation>Farbe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1166"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1181"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1200"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1259"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1439"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1168"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1183"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1202"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1261"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1441"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="104"/>
         <source>Edit name...</source>
@@ -4925,7 +4942,7 @@ Dateiname: %1</translation>
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1755"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1757"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="396"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
@@ -4962,14 +4979,14 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="142"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1761"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1763"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="436"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="148"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1767"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1769"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
@@ -5055,11 +5072,11 @@ Dateiname: %1</translation>
         <translation>&lt;p&gt;--- keine ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1166"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1181"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1200"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1259"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1439"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1168"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1183"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1202"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1261"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1441"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="104"/>
         <source>Enter new track name.</source>
         <translation>Geben Sie einen neuen Namen für den Track ein.</translation>

@@ -48,7 +48,8 @@ public:
     {
         eSortNone
         , eSortTime
-        , eSortTrack
+        , eSortTrackWithDouble
+        , eSortTrackWithoutDouble
     };
 
     struct person_t

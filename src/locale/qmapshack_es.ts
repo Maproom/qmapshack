@@ -8,7 +8,7 @@
         <translation type="obsolete">Espacio de Trabajo %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="62"/>
+        <location filename="../canvas/CCanvas.cpp" line="63"/>
         <source>View %1</source>
         <translation>Vista %1</translation>
     </message>
@@ -437,18 +437,23 @@
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <source>Show Bubble</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="134"/>
         <source>Move Waypoint</source>
         <translation>Mover Waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="133"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
         <source>Proj. Waypoint...</source>
         <translation>Proyectar Waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="594"/>
-        <location filename="../gis/CGisListWks.cpp" line="1283"/>
-        <location filename="../gis/CGisListWks.cpp" line="1322"/>
+        <location filename="../gis/CGisListWks.cpp" line="596"/>
+        <location filename="../gis/CGisListWks.cpp" line="1296"/>
+        <location filename="../gis/CGisListWks.cpp" line="1335"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished">&lt;b&gt;Actualizar dispositivos&lt;/b&gt;&lt;p&gt;Actualizar %1&lt;br/&gt;Por favor espere...&lt;/p&gt;</translation>
     </message>
@@ -483,7 +488,7 @@
         <translation>Combinar Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="147"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Edit Area Points</source>
         <translation>Editar Puntos del Área</translation>
     </message>
@@ -494,22 +499,22 @@
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="694"/>
+        <location filename="../gis/CGisListWks.cpp" line="696"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Guardando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="735"/>
+        <location filename="../gis/CGisListWks.cpp" line="737"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Cargando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="918"/>
+        <location filename="../gis/CGisListWks.cpp" line="921"/>
         <source>Close all projects...</source>
         <translation>Cerrar todos los proyectos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="918"/>
+        <location filename="../gis/CGisListWks.cpp" line="921"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Esto quitará.todos los proyectos.del espacio de trabajo.</translation>
     </message>
@@ -517,12 +522,12 @@
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="419"/>
+        <location filename="../gis/CGisWidget.cpp" line="444"/>
         <source>Cut Track...</source>
         <translation>Partir Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="419"/>
+        <location filename="../gis/CGisWidget.cpp" line="444"/>
         <source>Do you want to delete the original track?</source>
         <translation>¿Desea borrar el track original?</translation>
     </message>
@@ -573,22 +578,22 @@
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="487"/>
+        <location filename="../CMainWindow.cpp" line="492"/>
         <source>Ele: %1%2</source>
         <translation>Alt: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="613"/>
+        <location filename="../CMainWindow.cpp" line="618"/>
         <source>Load GIS Data...</source>
         <translation>Cargar Datos GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="647"/>
+        <location filename="../CMainWindow.cpp" line="652"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="673"/>
+        <location filename="../CMainWindow.cpp" line="678"/>
         <source>Select file to load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3749,8 +3754,9 @@ o
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="80"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="101"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -3765,17 +3771,17 @@ o
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move waypoint to a new location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mover el waypoint a una nueva ubicación.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="126"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clone waypoint and move clone a given distance and angle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clonar el waypoibt y moverlo una cierta distancia y ángulo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="159"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="173"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4252,14 +4258,29 @@ o
         <translation>UTC</translation>
     </message>
     <message>
-        <location filename="../units/ITimeZoneSetup.ui" line="29"/>
+        <location filename="../units/ITimeZoneSetup.ui" line="32"/>
         <source>Local</source>
         <translation>Local</translation>
     </message>
     <message>
-        <location filename="../units/ITimeZoneSetup.ui" line="36"/>
+        <location filename="../units/ITimeZoneSetup.ui" line="42"/>
         <source>Automatic</source>
         <translation>Automático</translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="75"/>
+        <source>Print date/time in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="82"/>
+        <source>long format, or</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="92"/>
+        <source>short format</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4402,7 +4423,7 @@ Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="351"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="370"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>¿Desea realmente eleiminar &apos;%1&apos; del proyecto &apos;%2&apos;?</translation>
     </message>
@@ -4413,7 +4434,7 @@ Filename: %1</source>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="436"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="352"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="371"/>
         <source>Delete...</source>
         <translation>Borrar...</translation>
     </message>
@@ -4645,7 +4666,7 @@ Filename: %1</source>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="142"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="45"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="101"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="131"/>
         <source>_Clone</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4693,7 +4714,7 @@ Filename: %1</source>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="535"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="154"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1773"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="378"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="448"/>
         <source>Changed links</source>
         <translation>Se cambió el enlace</translation>
     </message>
@@ -4704,18 +4725,18 @@ Filename: %1</source>
         <translation>Se cambió el color</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="244"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="314"/>
         <source>Elevation: %1 %2</source>
         <translation>Altitud: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="255"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="325"/>
         <source>Proximity: %1 %2</source>
         <translation>Proximidad: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1755"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="326"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="396"/>
         <source>Changed name</source>
         <translation>Se cambió el nombre</translation>
     </message>
@@ -4735,61 +4756,61 @@ Filename: %1</source>
         <translation type="vanished">Introduzca el nuevo nombre del waypoint.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="336"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="406"/>
         <source>Changed position</source>
         <translation>Se cambió la posición</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="342"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="412"/>
         <source>Changed elevation</source>
         <translation>Se cambió la altitud</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="418"/>
         <source>Changed proximity</source>
         <translation>Se cambió la proximidad</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="360"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="430"/>
         <source>Changed icon</source>
         <translation>Se cambió el icono</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="384"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="454"/>
         <source>Changed images</source>
         <translation>Se cambió la imagen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="390"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="460"/>
         <source>Add image</source>
         <translation>Añadir Imagen</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="142"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1761"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="366"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="436"/>
         <source>Changed comment</source>
         <translation>Se cambió el comentario</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="148"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1767"/>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="372"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed description</source>
         <translation>Se cambió la descripción</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="575"/>
+        <location filename="../gis/gpx/serialization.cpp" line="599"/>
         <source>Archived</source>
         <translation>Archivado</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="579"/>
+        <location filename="../gis/gpx/serialization.cpp" line="603"/>
         <source>Available</source>
         <translation>Disponible</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="583"/>
+        <location filename="../gis/gpx/serialization.cpp" line="607"/>
         <source>Not Available</source>
         <translation>No Disponible</translation>
     </message>
@@ -4970,12 +4991,12 @@ Filename: %1</source>
         <translation>Velocidad modificada a %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="953"/>
+        <location filename="../gis/CGisListWks.cpp" line="956"/>
         <source>Delete project...</source>
         <translation>Eliminar Proyecto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="953"/>
+        <location filename="../gis/CGisListWks.cpp" line="956"/>
         <source>Do you really want to delete %1?</source>
         <translation>¿Desea realmente eliminar %1?</translation>
     </message>

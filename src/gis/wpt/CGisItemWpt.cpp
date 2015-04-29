@@ -658,8 +658,19 @@ QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
 
     if(!r.contains(anchor))
     {
-        qreal w = 30;
-        qreal h = 30;
+        qreal w = rectBubble.width()>>1;
+        qreal h = rectBubble.height()>>1;
+
+        if(w > 30)
+        {
+            w = 30;
+        }
+        if(h > 30)
+        {
+            h = 30;
+        }
+
+        w = h = qMin(w,h);
 
         if(anchor.x() < r.left())
         {
@@ -762,7 +773,15 @@ void CGisItemWpt::mousePress(const QPointF& pos)
     }
     else if(rectBubbleEdit.contains(pos1))
     {
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas)
+        {
+            doBubbleMove = doBubbleSize = false;
+            canvas->resetMouse();
+        }
+        mouseIsOverBubble = false;
         edit();
+
     }
     else if(rectBubbleSize.contains(pos1))
     {

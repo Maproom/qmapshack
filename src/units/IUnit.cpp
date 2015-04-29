@@ -29,6 +29,7 @@ const QPoint NOPOINT (NOINT, NOINT);
 
 IUnit::tz_mode_e IUnit::timeZoneMode = IUnit::eTZUtc;
 QByteArray IUnit::timeZone = "UTC";
+bool IUnit::useShortFormat = false;
 
 const char * IUnit::tblTimezone[] =
 {
@@ -587,7 +588,7 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return tmp.toString(shortDate ? Qt::ISODate : Qt::SystemLocaleLongDate);
+    return tmp.toString((shortDate|useShortFormat) ? Qt::ISODate : Qt::SystemLocaleLongDate);
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)

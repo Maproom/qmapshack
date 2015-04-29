@@ -84,13 +84,13 @@ public:
         ,eTZSelected
     };
 
-    static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone)
+    static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone, bool& format)
     {
-        mode = timeZoneMode; zone = timeZone;
+        mode = timeZoneMode; zone = timeZone; format = useShortFormat;
     }
-    static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone)
+    static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone, bool format)
     {
-        timeZoneMode = mode; timeZone = zone;
+        timeZoneMode = mode; timeZone = zone; useShortFormat = format;
     }
 
 protected:
@@ -100,6 +100,7 @@ protected:
 
     static tz_mode_e timeZoneMode;
     static QByteArray timeZone;
+    static bool useShortFormat;
 
 
 private:

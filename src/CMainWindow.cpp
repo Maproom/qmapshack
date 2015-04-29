@@ -154,9 +154,12 @@ CMainWindow::CMainWindow()
 
     QByteArray tz;
     IUnit::tz_mode_e tzmode;
+    bool useShortFormat;
     tz = cfg.value("Units/timezone", "UTC").toByteArray();
     tzmode = (IUnit::tz_mode_e)cfg.value("Units/timezone/mode", IUnit::eTZUtc).toInt();
-    IUnit::setTimeZoneSetup(tzmode, tz);
+    useShortFormat = cfg.value("Units/time/useShortFormat", false).toBool();
+
+    IUnit::setTimeZoneSetup(tzmode, tz, useShortFormat);
 
 
     QStatusBar * status = statusBar();
@@ -247,10 +250,12 @@ CMainWindow::~CMainWindow()
 
     QByteArray tz;
     IUnit::tz_mode_e tzmode;
-    IUnit::getTimeZoneSetup(tzmode, tz);
+    bool useShortFormat;
+    IUnit::getTimeZoneSetup(tzmode, tz, useShortFormat);
 
     cfg.setValue("Units/timezone", tz);
     cfg.setValue("Units/timezone/mode", tzmode);
+    cfg.setValue("Units/time/useShortFormat", useShortFormat);
 }
 
 bool CMainWindow::isScaleVisible()

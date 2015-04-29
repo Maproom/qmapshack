@@ -26,7 +26,9 @@ CTimeZoneSetup::CTimeZoneSetup(QWidget *parent)
 
     QByteArray zone;
     IUnit::tz_mode_e mode;
-    IUnit::getTimeZoneSetup(mode, zone);
+    bool useShortFormat;
+
+    IUnit::getTimeZoneSetup(mode, zone, useShortFormat);
 
     switch(mode)
     {
@@ -54,6 +56,15 @@ CTimeZoneSetup::CTimeZoneSetup(QWidget *parent)
         tz++;
     }
 
+    if(useShortFormat)
+    {
+        radioShortFormat->setChecked(true);
+    }
+    else
+    {
+        radioLongFormat->setChecked(true);
+    }
+
     comboTimeZone->setCurrentIndex(comboTimeZone->findText(QString(zone)));
 }
 
@@ -65,6 +76,7 @@ void CTimeZoneSetup::accept()
 {
     QByteArray zone = comboTimeZone->currentText().toLatin1();
     IUnit::tz_mode_e mode = IUnit::eTZUtc;
+    bool useShortFormat = false;
 
     if(radioUtc->isChecked())
     {
@@ -83,7 +95,11 @@ void CTimeZoneSetup::accept()
         mode = IUnit::eTZSelected;
     }
 
+    if(radioShortFormat->isChecked())
+    {
+        useShortFormat = true;
+    }
 
-    IUnit::setTimeZoneSetup(mode, zone);
+    IUnit::setTimeZoneSetup(mode, zone, useShortFormat);
     QDialog::accept();
 }

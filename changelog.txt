@@ -1,3 +1,9 @@
+V 1.2.2
+* TwoNav: Find wpt files created from device in the TwoNavData folder
+* Wpt: Display waypoint description/comment as bubble
+* Add option to choose between long and short date/time format
+* Proj/Trk: Add new sort mode to attach waypoints only once to a track
+
 V 1.2.1
 * Add drag-n-drop of gpx and qms files to QMapShack
 * Fix wait cursor when asking to save project

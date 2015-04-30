@@ -2157,6 +2157,16 @@ n&apos;est pas une définition de système de coordonnées:
         <translation></translation>
     </message>
     <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
+        <source>Sort along track (multiple)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
+        <source>Sort along track (single)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Sort By Time</source>
         <translation type="vanished">Trier par date</translation>
     </message>
@@ -2184,16 +2194,6 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
         <source>Sort by time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
-        <source>Sort along track (with doubles)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
-        <source>Sort along track (without doubles)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

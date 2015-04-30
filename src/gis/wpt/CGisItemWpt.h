@@ -343,10 +343,9 @@ private:
     QRect rectBubbleEdit;
     QRect rectBubbleSize;
 
-    QPoint  offsetMouse;
-    QPoint  offsetBubble;
+    QPoint offsetMouse;
+    QPoint offsetBubble;
     quint32 widthBubble;
-
 };
 
 #endif //CGISITEMWPT_H

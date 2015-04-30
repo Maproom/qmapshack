@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>Enter new waypoint name.</source>
-        <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
     <message>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
@@ -445,7 +445,7 @@
     </message>
     <message>
         <source>Update Project on Devices</source>
-        <translation>Aktualisiere das Projekt auf allen Geräten </translation>
+        <translation type="vanished">Aktualisiere das Projekt auf allen Geräten </translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="98"/>
@@ -505,7 +505,7 @@
     </message>
     <message>
         <source>Lock/Unlock</source>
-        <translation>Sperren/Entsperren</translation>
+        <translation type="vanished">Sperren/Entsperren</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="121"/>
@@ -1344,7 +1344,7 @@
     <name>CMapPropSetup</name>
     <message>
         <source>Cache path...</source>
-        <translation>Cache Pfad...</translation>
+        <translation type="vanished">Cache Pfad...</translation>
     </message>
 </context>
 <context>
@@ -1770,7 +1770,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>Overlays:         %1 (only area overlays will be converted to QMapShack)</source>
-        <translation>Overlays:         %1 (Es werden nur Gebietsoverlays nach QMapShack konvertiert)</translation>
+        <translation type="vanished">Overlays:         %1 (Es werden nur Gebietsoverlays nach QMapShack konvertiert)</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="574"/>
@@ -2327,15 +2327,15 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>Sort By Time</source>
-        <translation>Sortieren nach Zeit</translation>
+        <translation type="vanished">Sortieren nach Zeit</translation>
     </message>
     <message>
         <source>Keep Order of Project</source>
-        <translation>Reihenfolge beibehalten</translation>
+        <translation type="vanished">Reihenfolge beibehalten</translation>
     </message>
     <message>
         <source>Sort Along Track</source>
-        <translation>Sort. entl. d. Tracks</translation>
+        <translation type="vanished">Sort. entl. d. Tracks</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="115"/>
@@ -2361,13 +2361,21 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
-        <source>Sort along track (with doubles)</source>
+        <source>Sort along track (multiple)</source>
         <translation>Sort. entl. d. Tracks (mehrfach)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
-        <source>Sort along track (without doubles)</source>
+        <source>Sort along track (single)</source>
         <translation>Sort. entl. d. Tracks (einmalig)</translation>
+    </message>
+    <message>
+        <source>Sort along track (with doubles)</source>
+        <translation type="vanished">Sort. entl. d. Tracks (mehrfach)</translation>
+    </message>
+    <message>
+        <source>Sort along track (without doubles)</source>
+        <translation type="vanished">Sort. entl. d. Tracks (einmalig)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
@@ -2565,7 +2573,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read Only Mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Schreibschutz&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Schreibschutz&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="270"/>
@@ -3672,7 +3680,7 @@ sein</translation>
     </message>
     <message>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
+        <translation type="vanished">Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="112"/>
@@ -3818,7 +3826,7 @@ sein</translation>
     </message>
     <message>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
+        <translation type="vanished">Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="85"/>
@@ -3865,7 +3873,7 @@ sein</translation>
     </message>
     <message>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
+        <translation type="vanished">Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
@@ -3959,7 +3967,7 @@ sein</translation>
     </message>
     <message>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
+        <translation type="vanished">Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
@@ -4194,11 +4202,11 @@ sein</translation>
     <name>ISetupFolder</name>
     <message>
         <source>Folder...</source>
-        <translation>Ordner...</translation>
+        <translation type="vanished">Ordner...</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="vanished">Name</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
@@ -4522,7 +4530,7 @@ sein</translation>
     </message>
     <message>
         <source>Bad position format. Must be: [N|S] ddd mm.sss [W|E] ddd mm.sss</source>
-        <translation>Falsches Positionsformat. Richtig: [N|S] ddd mm.sss [W|E] ddd mm.sss </translation>
+        <translation type="vanished">Falsches Positionsformat. Richtig: [N|S] ddd mm.sss [W|E] ddd mm.sss </translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="109"/>
@@ -4929,7 +4937,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
-        <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="314"/>
@@ -5198,7 +5206,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>Do you really want to delete %1</source>
-        <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
+        <translation type="vanished">Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>

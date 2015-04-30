@@ -2270,12 +2270,12 @@ není platným vymezením soustavy souřadnic
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
-        <source>Sort along track (with doubles)</source>
+        <source>Sort along track (multiple)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
-        <source>Sort along track (without doubles)</source>
+        <source>Sort along track (single)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

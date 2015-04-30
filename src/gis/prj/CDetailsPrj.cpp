@@ -39,7 +39,7 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     connect(labelKeywords, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(textDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(toolPrint, SIGNAL(clicked()), this, SLOT(slotPrint()));
-    connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));    
+    connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
     connect(comboSort, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSortMode(int)));
     connect(toolLock, SIGNAL(clicked(bool)), this, SLOT(slotLock(bool)));
 

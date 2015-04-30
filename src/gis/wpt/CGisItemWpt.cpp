@@ -224,7 +224,7 @@ CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * proj
     , mouseIsOverBubble(false)
     , rectBubbleMove(0,0,16,16)
     , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)    
+    , rectBubbleSize(0,0,16,16)
     , offsetBubble(-320, -150)
     , widthBubble(300)
 {
@@ -648,7 +648,6 @@ void CGisItemWpt::drawBubble(QPainter& p)
     p.setPen(Qt::black);
     doc.drawContents(&p);
     p.restore();
-
 }
 
 QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
@@ -764,7 +763,7 @@ void CGisItemWpt::mousePress(const QPointF& pos)
         return;
     }
 
-    QPoint pos1 = pos.toPoint();    
+    QPoint pos1 = pos.toPoint();
 
     if(rectBubbleMove.contains(pos1))
     {
@@ -781,7 +780,6 @@ void CGisItemWpt::mousePress(const QPointF& pos)
         }
         mouseIsOverBubble = false;
         edit();
-
     }
     else if(rectBubbleSize.contains(pos1))
     {

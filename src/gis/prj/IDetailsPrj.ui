@@ -78,12 +78,12 @@
        </item>
        <item>
         <property name="text">
-         <string>Sort along track (with doubles)</string>
+         <string>Sort along track (multiple)</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Sort along track (without doubles)</string>
+         <string>Sort along track (single)</string>
         </property>
        </item>
       </widget>

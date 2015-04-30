@@ -264,7 +264,7 @@ public:
 
        @param pos   the mouse position on the screen in pixel
      */
-    virtual void mouseMove(const QPointF& pos)    
+    virtual void mouseMove(const QPointF& pos)
     {
         Q_UNUSED(pos);
     }

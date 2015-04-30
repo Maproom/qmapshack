@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "mouse/CMouseWptBubble.h"
 #include "gis/CGisWidget.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "mouse/CMouseWptBubble.h"
 
 #include <QtWidgets>
 

@@ -65,9 +65,8 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(3rdparty/CGetOpt)
-#add_subdirectory(3rdparty/DBConverter)
 add_subdirectory(src)
-
+add_subdirectory(3rdparty/Routino)
 
 if (UNIX AND NOT WIN32 AND NOT APPLE)
   install(
@@ -99,4 +98,5 @@ CONFIGURE_FILE(
 
 ADD_CUSTOM_TARGET(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+
 

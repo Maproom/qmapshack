@@ -117,7 +117,7 @@ void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
 
     foreach(const item_t &item, items)
     {
-        if(item.active.contains(mousePos))
+        if(item.active.contains(mousePos) || item.text.contains(mousePos))
         {
             if(!doSpecialCursor)
             {
@@ -162,7 +162,7 @@ const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& poin
 {
     foreach(const item_t &item, items)
     {
-        if(item.active.contains(point))
+        if(item.active.contains(point) || item.text.contains(point))
         {
             return &item;
         }

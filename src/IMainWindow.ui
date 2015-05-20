@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -78,6 +78,7 @@
      <string>View</string>
     </property>
     <addaction name="actionAddMapView"/>
+    <addaction name="actionCloneMapView"/>
     <addaction name="separator"/>
     <addaction name="actionShowScale"/>
     <addaction name="actionShowGrid"/>
@@ -537,6 +538,18 @@
    </property>
    <property name="text">
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionCloneMapView">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/CloneMapWorkspace.png</normaloff>:/icons/32x32/CloneMapWorkspace.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clone Map View</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+T</string>
    </property>
   </action>
  </widget>

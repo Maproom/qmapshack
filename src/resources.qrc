@@ -23,6 +23,7 @@
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
         <file>icons/32x32/AddMapWorkspace.png</file>
+        <file>icons/32x32/CloneMapWorkspace.png</file>
         <file>icons/32x32/Cancel.png</file>
         <file>icons/32x32/Check.png</file>
         <file>icons/32x32/DeleteMultiple.png</file>
@@ -148,6 +149,7 @@
         <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
         <file>icons/48x48/AddMapWorkspace.png</file>
+        <file>icons/48x48/CloneMapWorkspace.png</file>
         <file>icons/48x48/Cancel.png</file>
         <file>icons/48x48/Check.png</file>
         <file>icons/48x48/DeleteMultiple.png</file>

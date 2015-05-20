@@ -87,6 +87,7 @@ CMainWindow::CMainWindow()
     connect(actionAbout, SIGNAL(triggered()), this, SLOT(slotAbout()));
     connect(actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
     connect(actionAddMapView, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
+    connect(actionCloneMapView, SIGNAL(triggered()), this, SLOT(slotCloneCanvas()));
     connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
     connect(actionShowGrid, SIGNAL(changed()), this, SLOT(update()));
     connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
@@ -388,6 +389,44 @@ void CMainWindow::slotAddCanvas()
     connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
 
     tabWidget->setCurrentWidget(canvas);
+}
+
+void CMainWindow::slotCloneCanvas()
+{
+    CCanvas * source = getVisibleCanvas();
+    if(source == 0)
+    {
+        return;
+    }
+
+    QTemporaryFile temp;
+    temp.open();
+    temp.close();
+
+    QSettings view(temp.fileName(), QSettings::IniFormat);
+    view.clear();
+
+    source->saveConfig(view);
+
+    slotAddCanvas();
+
+    CCanvas * target = getVisibleCanvas();
+    if(target == 0)
+    {
+        return;
+    }
+
+    target->loadConfig(view);
+
+    SETTINGS;
+    cfg.beginGroup("Canvas");
+    cfg.beginGroup("Views");
+    cfg.beginGroup(target->objectName());
+    target->saveConfig(cfg);
+    cfg.endGroup();
+    cfg.endGroup();
+    cfg.endGroup();
+
 }
 
 void CMainWindow::slotTabCloseRequest(int i)

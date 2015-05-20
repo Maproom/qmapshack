@@ -80,6 +80,7 @@ private slots:
     void slotAbout();
     void slotHelp();
     void slotAddCanvas();
+    void slotCloneCanvas();
     void slotTabCloseRequest(int i);
     void slotCurrentTabCanvas(int i);
     void slotCurrentTabMaps(int i);

@@ -19,6 +19,9 @@ endif(UNIX)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 
+file(GLOB XML_FILES "${CMAKE_SOURCE_DIR}/3rdparty/Routino/xml/*.xml")
+file(COPY ${XML_FILES} DESTINATION ${CMAKE_SOURCE_DIR}/src/xml/routino)
+
 set( SRCS
 
     main.cpp
@@ -445,6 +448,7 @@ set( UIS
     qlgt/IImportDatabase.ui
 )
 
+
 set( RCS
     resources.qrc
 )
@@ -485,22 +489,16 @@ include_directories(
 )
 
 
-
-# Tell CMake to create the helloworld executable
 add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
 
+
+
 if(UNIX)
-set(DBUS_LIB
-    Qt5::DBus
-)
+    set(DBUS_LIB Qt5::DBus)
 else(UNIX)
-set(DBUS_LIB
-)
+    set(DBUS_LIB)
 endif(UNIX)
 
-
-
-# Use the Widgets module from Qt 5.
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     Qt5::Xml

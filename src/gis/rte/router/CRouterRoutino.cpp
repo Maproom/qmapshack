@@ -36,6 +36,15 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
 
     comboMode->addItem(tr("Shortest"));
     comboMode->addItem(tr("Quickest"));
+
+    QFile internal("://xml/routino/routino-profiles.xml");
+    internal.open(QIODevice::ReadOnly);
+    QTemporaryFile temp;
+    temp.open();
+    temp.write(internal.readAll());
+    temp.seek(0);
+
+    qDebug() <<temp.fileName() << temp.handle();
 }
 
 CRouterRoutino::~CRouterRoutino()

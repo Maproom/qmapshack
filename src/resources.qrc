@@ -348,5 +348,7 @@
         <file>map/OSM_Topo.tms</file>
         <file>map/OpenCycleMap.tms</file>
 
+        <file>xml/routino/routino-profiles.xml</file>
+
     </qresource>
 </RCC>

@@ -152,6 +152,10 @@ set( SRCS
     gis/trk/filter/CFilterSpeed.cpp
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
+    gis/rte/router/IRouter.cpp
+    gis/rte/router/CRouterSetup.cpp
+    gis/rte/router/CRouterRoutino.cpp
+    gis/rte/router/CRouterMapQuest.cpp
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
     gis/ovl/CDetailsOvlArea.cpp    
@@ -330,6 +334,10 @@ set( HDRS
     gis/trk/filter/CFilterSpeed.h
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
+    gis/rte/router/IRouter.h
+    gis/rte/router/CRouterSetup.h
+    gis/rte/router/CRouterRoutino.h
+    gis/rte/router/CRouterMapQuest.h
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
     gis/ovl/CDetailsOvlArea.h    
@@ -427,6 +435,9 @@ set( UIS
     gis/trk/filter/IFilterObscureDate.ui
     gis/trk/filter/IFilterSpeed.ui
     gis/rte/IScrOptRte.ui
+    gis/rte/router/IRouterSetup.ui
+    gis/rte/router/IRouterRoutino.ui
+    gis/rte/router/IRouterMapQuest.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
@@ -467,6 +478,7 @@ set(ALLINP
 include_directories(
     ${CMAKE_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/3rdparty/CGetOpt
+    ${CMAKE_SOURCE_DIR}/3rdparty/Routino/src
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
 
@@ -497,7 +509,8 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::WebKitWidgets
     Qt5::PrintSupport
     CGetOpt
-	${DBUS_LIB}
+    routino
+    ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
 )

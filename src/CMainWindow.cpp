@@ -426,7 +426,6 @@ void CMainWindow::slotCloneCanvas()
     cfg.endGroup();
     cfg.endGroup();
     cfg.endGroup();
-
 }
 
 void CMainWindow::slotTabCloseRequest(int i)

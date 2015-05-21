@@ -1395,6 +1395,10 @@ bool CGisListWks::event(QEvent * e)
     {
         CEvtD2WHideFolder * evt = (CEvtD2WHideFolder*)e;
         CDBProject * project =  getProjectById(evt->id, evt->db);
+        if(project->askBeforClose())
+        {
+            return false;
+        }
         delete project;
 
         e->accept();

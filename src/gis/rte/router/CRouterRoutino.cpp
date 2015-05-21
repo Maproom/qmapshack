@@ -19,13 +19,27 @@
 #include "gis/rte/router/CRouterRoutino.h"
 #include <QtWidgets>
 
+
 CRouterRoutino::CRouterRoutino(QWidget *parent)
     : IRouter(parent)
 {
     setupUi(this);
+
+    comboProfile->addItem(tr("Foot"));
+    comboProfile->addItem(tr("Horse"));
+    comboProfile->addItem(tr("Wheelchair"));
+    comboProfile->addItem(tr("Bicycle"));
+    comboProfile->addItem(tr("Moped"));
+    comboProfile->addItem(tr("Motorcycle"));
+    comboProfile->addItem(tr("Motorcar"));
+    comboProfile->addItem(tr("Goods"));
+
+    comboMode->addItem(tr("Shortest"));
+    comboMode->addItem(tr("Quickest"));
 }
 
 CRouterRoutino::~CRouterRoutino()
 {
 }
+
 

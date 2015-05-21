@@ -19,6 +19,7 @@
 #include "gis/rte/router/CRouterMapQuest.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterSetup.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -34,10 +35,15 @@ CRouterSetup::CRouterSetup(QWidget * parent)
     stackedWidget->addWidget(new CRouterMapQuest(this));
 
     connect(comboRouter, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSelectRouter(int)));
+
+    SETTINGS;
+    comboRouter->setCurrentIndex(cfg.value("Route/current",0).toInt());
 }
 
 CRouterSetup::~CRouterSetup()
 {
+    SETTINGS;
+    cfg.setValue("Route/current", comboRouter->currentIndex());
 }
 
 void CRouterSetup::slotSelectRouter(int i)

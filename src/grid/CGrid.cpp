@@ -40,6 +40,8 @@ CGrid::CGrid(CMapDraw *map)
 
 CGrid::~CGrid()
 {
+    pj_free(pjWGS84);
+    pj_free(pjGrid);
 }
 
 void CGrid::convertPos2Str(const QPointF& pos, QString& info)

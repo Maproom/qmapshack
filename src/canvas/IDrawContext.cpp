@@ -163,7 +163,11 @@ QString IDrawContext::getProjection()
     {
         return QString::Null();
     }
-    return pj_get_def(pjsrc,0);
+    char * p = pj_get_def(pjsrc,0);
+    QString str(p);
+    free(p);
+
+    return str;
 }
 
 void IDrawContext::setProjection(const QString& proj)

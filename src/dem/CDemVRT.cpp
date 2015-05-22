@@ -82,6 +82,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qDebug() << ptr;
 
     pjsrc = pj_init_plus(ptr);
+    free(ptr);
     if(pjsrc == 0)
     {
         delete dataset; dataset = 0;

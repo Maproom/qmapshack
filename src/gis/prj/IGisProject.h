@@ -368,6 +368,7 @@ public:
        @param yes set true to block update
      */
     void blockUpdate(bool yes);
+    bool blockUpdate()const{return noUpdate;}
 
 protected:
     void genKey();

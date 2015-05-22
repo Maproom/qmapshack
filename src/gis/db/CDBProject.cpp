@@ -453,8 +453,9 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
         }
     }
 
-    setToolTip(CGisListWks::eColumnName, getInfo());
     postStatus();
+    setToolTip(CGisListWks::eColumnName, getInfo());
+
 }
 
 void CDBProject::hideItems(CEvtD2WHideItems * evt)
@@ -469,7 +470,9 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
         key.item = k;
         delItemByKey(key, last);
     }
-    setToolTip(CGisListWks::eColumnName, getInfo());
+
     postStatus();
+    setToolTip(CGisListWks::eColumnName, getInfo());
+
 }
 

@@ -192,7 +192,9 @@ void IDevice::updateProject(IGisProject * project)
         }
     }
 
+    project->blockUpdate(true);
     insertCopyOfProject(project);
+    project->blockUpdate(false);
 }
 
 bool IDevice::testForExternalProject(const QString& filename)

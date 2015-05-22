@@ -969,7 +969,9 @@ void CGisListWks::slotDeleteProject()
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
+            QApplication::setOverrideCursor(Qt::ArrowCursor);
             int res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
+            QApplication::restoreOverrideCursor();
             if(res != QMessageBox::Ok)
             {
                 continue;

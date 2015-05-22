@@ -53,6 +53,7 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
 {
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
     *(IGisProject*)this = *project;
+    blockUpdate(project->blockUpdate());
 
     const int N = project->childCount();
     for(int n = 0; n < N; n++)
@@ -65,10 +66,9 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
         }
     }
 
-
     setupName(QFileInfo(filename).baseName().replace("_", " "));
+    blockUpdate(false);
     setToolTip(CGisListWks::eColumnName, getInfo());
-    updateItems();
     valid = true;
 }
 

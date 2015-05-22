@@ -16,15 +16,5 @@
 
 **********************************************************************************************/
 
-#ifndef CLASSNAME_H
-#define CLASSNAME_H
-
-class CLASSNAME
-{
-    public:
-        CLASSNAME();
-        virtual ~CLASSNAME();
-};
-
-#endif //CLASSNAME_H
+#include "CLASSNAME.h"
 

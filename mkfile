@@ -22,6 +22,8 @@ if ext == ".h":
     template = os.path.join(pathTemplates, "header.h")
 elif ext == ".cpp":
     template = os.path.join(pathTemplates, "source.cpp")
+elif ext == ".c":
+    template = os.path.join(pathTemplates, "source.c")    
 else:
     print "unknown file type"
     sys.exit(-1)

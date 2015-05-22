@@ -1055,7 +1055,7 @@ void CGisItemTrk::findWaypointsCloseBy()
     // convert all coordinates into meter relative to the first track point.
     for(int i = 0; i < line.size(); i++)
     {
-        qreal d, a1, a2;
+        qreal d, a1 = 0, a2 = 0;
         pointDP& pt1 = line[i];
 
         d = GPS_Math_Distance(pt0.x, pt0.y, pt1.x, pt1.y, a1, a2);

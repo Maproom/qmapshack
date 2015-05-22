@@ -990,6 +990,11 @@ void CGisItemTrk::findWaypointsCloseBy()
         return;
     }
 
+    if(project->childCount() > 40)
+    {
+        return;
+    }
+
     bool withDoubles = project->getSorting() != IGisProject::eSortTrackWithoutDouble;
 
     QApplication::setOverrideCursor(Qt::WaitCursor);

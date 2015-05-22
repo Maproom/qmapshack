@@ -1219,9 +1219,8 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf)
         return;
     }
 
-    const float opacity = getOpacity();
     QPainter p(&buf.image);
-    p.setOpacity(opacity/100.0);
+    p.setOpacity(getOpacity()/100.0);
     USE_ANTI_ALIASING(p,true);
 
     QFont f = CMainWindow::self().getMapFont();
@@ -1294,17 +1293,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf)
         p.restore();
         return;
     }
-    if(opacity < 99)
-    {
-        p.setOpacity(0.5*opacity/100.0);
-        drawPolygons(p, polygons);
-    }
-    else
-    {
-        drawPolygons(p, polygons);
-    }
-
-
+    drawPolygons(p, polygons);
 
     if(map->needsRedraw())
     {

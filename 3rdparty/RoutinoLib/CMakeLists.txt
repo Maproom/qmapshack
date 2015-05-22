@@ -4,7 +4,7 @@ option(ROUTINO_BUILD_SLIM_VERSION "Routino: Build slim version" OFF)
 include_directories(
   ${CMAKE_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
-  ${CMAKE_SOURCE_DIR}/include
+  ${CMAKE_SOURCE_DIR}/3rdparty/Routino/src
 )
 
 if(MSVC)
@@ -27,6 +27,7 @@ endif(ROUTINO_BUILD_SLIM_VERSION)
 set(APPNAME routino)
 
 set(SRCS_${APPNAME}
+    routino.c
     #errorlog.c
     #errorlogx.c
     ../Routino/src/fakes.c
@@ -69,6 +70,7 @@ set(SRCS_${APPNAME}
 endif(MSVC)
 
 set(HDRS_${APPNAME}
+    routino.h
     ../Routino/src/cache.h
     #errorlog.h
     #errorlogx.h
@@ -153,6 +155,6 @@ set(ALLINP_${APPNAME}
     ${HDRS_${APPNAME}}
 )
 
-add_executable(${APPNAME} ${ALLINP_${APPNAME}})
-target_link_libraries(${APPNAME} routino)
+#add_executable(${APPNAME} ${ALLINP_${APPNAME}})
+#target_link_libraries(${APPNAME} routino)
 

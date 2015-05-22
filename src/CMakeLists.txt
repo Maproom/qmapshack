@@ -482,7 +482,7 @@ set(ALLINP
 include_directories(
     ${CMAKE_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/3rdparty/CGetOpt
-    ${CMAKE_SOURCE_DIR}/3rdparty/Routino/src
+    ${CMAKE_SOURCE_DIR}/3rdparty/RoutinoLib
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
 

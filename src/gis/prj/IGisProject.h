@@ -236,6 +236,9 @@ public:
      */
     void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
 
+
+    int getItemCountByType(IGisItem::type_e type){return cntItemsByType[type];}
+
     /**
        @brief Receive the current mouse position
 
@@ -356,12 +359,23 @@ public:
      */
     bool remove();
 
+    /**
+       @brief Block update of items.
+
+        Use this to speed actions with many items, e.g. copy actions.
+        If the blocking is stopped
+
+       @param yes set true to block update
+     */
+    void blockUpdate(bool yes);
+
 protected:
     void genKey();
     virtual void setupName(const QString& defaultName);
     void markAsSaved();
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
     void updateItems();
+    void updateItemCounters();
 
 
 
@@ -380,6 +394,7 @@ protected:
     QString key;
     QString filename;
     bool valid;
+    bool noUpdate;
 
     metadata_t metadata;
     QString nameSuffix;
@@ -387,6 +402,8 @@ protected:
     QPointer<CDetailsPrj> dlgDetails;
 
     sorting_e sorting;
+
+    int cntItemsByType[IGisItem::eTypeMax];
 };
 
 #endif //IGISPROJECT_H

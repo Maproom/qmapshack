@@ -563,6 +563,8 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
     IGisProject * project = dynamic_cast<IGisProject*>(itemAt(e->pos()));
     if(project)
     {
+        project->blockUpdate(true);
+
         int cnt = 1;
         int N   = items.size();
         QProgressDialog progress("Drop items...", "Abort drop", 0, 100, this);
@@ -582,6 +584,8 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 project->insertCopyOfItem(gisItem, NOIDX, lastResult);
             }
         }
+
+        project->blockUpdate(false);
     }
 
     IDevice * device = dynamic_cast<IDevice*>(itemAt(e->pos()));
@@ -756,14 +760,22 @@ void CGisListWks::slotLoadWorkspace()
         case IGisProject::eTypeQms:
         {
             project = new CQmsProject(name, this);
+
+            project->blockUpdate(true);
             *project << stream;
+            project->blockUpdate(false);
+
             break;
         }
 
         case IGisProject::eTypeGpx:
         {
             project = new CGpxProject(name, this);
+
+            project->blockUpdate(true);
             *project << stream;
+            project->blockUpdate(false);
+
             break;
         }
 
@@ -771,8 +783,12 @@ void CGisListWks::slotLoadWorkspace()
         {
             CDBProject * dbProject;
             project = dbProject = new CDBProject(this);
+
+            project->blockUpdate(true);
             project->IGisProject::operator<<(stream);
             dbProject->restoreDBLink();
+            project->blockUpdate(false);
+
             if(!project->isValid())
             {
                 delete project;
@@ -1100,6 +1116,7 @@ void CGisListWks::slotCopyItem()
 
     int lastResult = CSelectCopyAction::eResultNone;
 
+    project->blockUpdate(true);
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -1111,6 +1128,7 @@ void CGisListWks::slotCopyItem()
 
         project->insertCopyOfItem(gisItem, NOIDX, lastResult);
     }
+    project->blockUpdate(false);
 }
 
 void CGisListWks::slotProjWpt()

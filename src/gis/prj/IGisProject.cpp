@@ -37,6 +37,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , type(type)
     , filename(filename)
     , valid(false)
+    , noUpdate(false)
     , sorting(eSortNone)
 {
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
@@ -47,6 +48,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , type(type)
     , filename(filename)
     , valid(false)
+    , noUpdate(false)
     , sorting(eSortNone)
 {
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
@@ -178,6 +180,13 @@ void IGisProject::setChanged()
 
 void IGisProject::updateItems()
 {
+    if(noUpdate)
+    {
+        return;
+    }
+
+    updateItemCounters();
+
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(child(i));
@@ -261,33 +270,21 @@ QString IGisProject::getInfo() const
         str += QObject::tr("<br/>\nFilename: %1").arg(filename);
     }
 
-    // count number of items by type
-    int counter[IGisItem::eTypeMax] = {0};
-    for(int i = 0; i < childCount(); i++)
+    if(cntItemsByType[IGisItem::eTypeWpt])
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-
-        counter[item->type()]++;
+        str += "<br/>\n" + QObject::tr("Waypoints: %1").arg(cntItemsByType[IGisItem::eTypeWpt]);
     }
-    if(counter[IGisItem::eTypeWpt])
+    if(cntItemsByType[IGisItem::eTypeTrk])
     {
-        str += "<br/>\n" + QObject::tr("Waypoints: %1").arg(counter[IGisItem::eTypeWpt]);
+        str += "<br/>\n" + QObject::tr("Tracks: %1").arg(cntItemsByType[IGisItem::eTypeTrk]);
     }
-    if(counter[IGisItem::eTypeTrk])
+    if(cntItemsByType[IGisItem::eTypeRte])
     {
-        str += "<br/>\n" + QObject::tr("Tracks: %1").arg(counter[IGisItem::eTypeTrk]);
+        str += "<br/>\n" + QObject::tr("Routes: %1").arg(cntItemsByType[IGisItem::eTypeRte]);
     }
-    if(counter[IGisItem::eTypeRte])
+    if(cntItemsByType[IGisItem::eTypeOvl])
     {
-        str += "<br/>\n" + QObject::tr("Routes: %1").arg(counter[IGisItem::eTypeRte]);
-    }
-    if(counter[IGisItem::eTypeOvl])
-    {
-        str += "<br/>\n" + QObject::tr("Areas: %1").arg(counter[IGisItem::eTypeOvl]);
+        str += "<br/>\n" + QObject::tr("Areas: %1").arg(cntItemsByType[IGisItem::eTypeOvl]);
     }
 
     return str;
@@ -632,4 +629,28 @@ bool IGisProject::remove()
     return true;
 }
 
+void IGisProject::updateItemCounters()
+{
+    // count number of items by type
+    memset(cntItemsByType, 0, sizeof(cntItemsByType));
 
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+
+        cntItemsByType[item->type()]++;
+    }
+}
+
+void IGisProject::blockUpdate(bool yes)
+{
+    noUpdate = yes;
+    if(noUpdate == false)
+    {
+        updateItems();
+    }
+}

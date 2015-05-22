@@ -990,7 +990,7 @@ void CGisItemTrk::findWaypointsCloseBy()
         return;
     }
 
-    if(project->childCount() > 40)
+    if(project->getItemCountByType(IGisItem::eTypeWpt) > 30 && project->getItemCountByType(IGisItem::eTypeTrk) > 10)
     {
         return;
     }

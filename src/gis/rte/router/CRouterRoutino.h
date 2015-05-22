@@ -19,6 +19,7 @@
 #ifndef CROUTERROUTINO_H
 #define CROUTERROUTINO_H
 
+#include <routino.h>
 #include "gis/rte/router/IRouter.h"
 #include "ui_IRouterRoutino.h"
 
@@ -28,6 +29,10 @@ class CRouterRoutino : public IRouter, private Ui::IRouterRoutino
 public:
     CRouterRoutino(QWidget * parent);
     virtual ~CRouterRoutino();
+
+private:
+
+
 };
 
 #endif //CROUTERROUTINO_H

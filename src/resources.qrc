@@ -349,6 +349,7 @@
         <file>map/OpenCycleMap.tms</file>
 
         <file>xml/routino/routino-profiles.xml</file>
+        <file>xml/routino/routino-translations.xml</file>
 
     </qresource>
 </RCC>

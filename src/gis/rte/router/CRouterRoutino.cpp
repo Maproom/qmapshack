@@ -37,18 +37,26 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboMode->addItem(tr("Shortest"));
     comboMode->addItem(tr("Quickest"));
 
-    QFile internal("://xml/routino/routino-profiles.xml");
-    internal.open(QIODevice::ReadOnly);
-    QTemporaryFile temp;
-    temp.open();
-    temp.write(internal.readAll());
-    temp.seek(0);
+    QFile _profiles("://xml/routino/routino-profiles.xml");
+    _profiles.open(QIODevice::ReadOnly);
+    QTemporaryFile profiles;
+    profiles.open();
+    profiles.write(_profiles.readAll());
+    profiles.close();
 
-    qDebug() <<temp.fileName() << temp.handle();
+    QFile _translations("://xml/routino/routino-translations.xml");
+    _translations.open(QIODevice::ReadOnly);
+    QTemporaryFile translations;
+    translations.open();
+    translations.write(_translations.readAll());
+    translations.close();
+
+    RoutinoInit(profiles.fileName().toUtf8(), translations.fileName().toUtf8());
 }
 
 CRouterRoutino::~CRouterRoutino()
 {
+    RoutinoRelease();
 }
 
 

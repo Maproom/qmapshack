@@ -1074,6 +1074,7 @@ void CGisListWks::slotDeleteItem()
             IGisProject * project = dynamic_cast<IGisProject*>(gisItem->parent());
             if(project)
             {
+                project->blockUpdate(true);
                 yes = project->delItemByKey(gisItem->getKey(), last);
             }
 
@@ -1099,6 +1100,7 @@ void CGisListWks::slotDeleteItem()
     {
         if(project)
         {
+            project->blockUpdate(false);
             project->postStatus();
         }
     }

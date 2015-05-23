@@ -36,16 +36,18 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
+    blockUpdateItems(true);
     loadGpx(filename);
-    updateItems();
+    blockUpdateItems(false);
 }
 
 CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/GpxProject.png"));
+    blockUpdateItems(true);
     loadGpx(filename);
-    updateItems();
+    blockUpdateItems(false);
 }
 
 CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent)

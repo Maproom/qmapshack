@@ -29,8 +29,8 @@
         cmd; \
     } \
 
-#define PROGRESS_SETUP(lbl, max) \
-    QProgressDialog progress(lbl, "Abort", 0, max, 0); \
+#define PROGRESS_SETUP(lbl, max, parent) \
+    QProgressDialog progress(lbl, "Abort", 0, max, parent); \
     progress.setWindowModality(Qt::WindowModal); \
 
 #define PROGRESS(x, cmd) \

@@ -46,8 +46,8 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
     p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
 }
 
-#define PROGRESS_SETUP(lbl, max) \
-    QProgressDialog progress(lbl, "Abort", 0, max, 0); \
+#define PROGRESS_SETUP(lbl, max, parent) \
+    QProgressDialog progress(lbl, "Abort", 0, max, parent); \
     progress.setWindowModality(Qt::WindowModal); \
 
 #define PROGRESS(x, cmd) \

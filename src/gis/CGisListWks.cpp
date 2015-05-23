@@ -697,7 +697,7 @@ void CGisListWks::slotSaveWorkspace()
     qDebug() << "slotSaveWorkspace()";
 
     const int total = topLevelItemCount();
-    PROGRESS_SETUP(tr("Saving workspace. Please wait."), total);
+    PROGRESS_SETUP(tr("Saving workspace. Please wait."), total, this);
 
     for(int i = 0; i < total; i++)
     {
@@ -738,7 +738,7 @@ void CGisListWks::slotLoadWorkspace()
     query.prepare("SELECT type, key, name, changed, data FROM workspace");
     QUERY_EXEC(return );
 
-    PROGRESS_SETUP(tr("Loading workspace. Please wait."), query.size());
+    PROGRESS_SETUP(tr("Loading workspace. Please wait."), query.size(), this);
     quint32 progCnt = 0;
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -762,22 +762,14 @@ void CGisListWks::slotLoadWorkspace()
         case IGisProject::eTypeQms:
         {
             project = new CQmsProject(name, this);
-
-            project->blockUpdateItems(true);
             *project << stream;
-            project->blockUpdateItems(false);
-
             break;
         }
 
         case IGisProject::eTypeGpx:
         {
             project = new CGpxProject(name, this);
-
-            project->blockUpdateItems(true);
             *project << stream;
-            project->blockUpdateItems(false);
-
             break;
         }
 
@@ -786,10 +778,8 @@ void CGisListWks::slotLoadWorkspace()
             CDBProject * dbProject;
             project = dbProject = new CDBProject(this);
 
-            project->blockUpdateItems(true);
             project->IGisProject::operator<<(stream);
             dbProject->restoreDBLink();
-            project->blockUpdateItems(false);
 
             if(!project->isValid())
             {

@@ -990,14 +990,7 @@ void CGisItemTrk::findWaypointsCloseBy()
         return;
     }
 
-    if(project->getItemCountByType(IGisItem::eTypeWpt) > 30 && project->getItemCountByType(IGisItem::eTypeTrk) > 10)
-    {
-        return;
-    }
-
     bool withDoubles = project->getSorting() != IGisProject::eSortTrackWithoutDouble;
-
-    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     QVector<pointDP> line;
     // combine all segments to a single line
@@ -1027,6 +1020,14 @@ void CGisItemTrk::findWaypointsCloseBy()
     {
         return;
     }
+
+    /// @todo find a better limit
+    if(project->getItemCountByType(IGisItem::eTypeWpt) > 30 && project->getItemCountByType(IGisItem::eTypeTrk) > 10)
+    {
+        return;
+    }
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     // convert coodinates of all waypoints into meter coordinates relative to the first track point
     point3D pt0 = line[0];

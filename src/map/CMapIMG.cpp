@@ -637,7 +637,7 @@ void CMapIMG::readBasics()
 #endif                       //DEBUG_SHOW_SECT_DESC
 
     int cnt = 1;
-    PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), subfiles.count());
+    PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), subfiles.count(), &CMainWindow::self());
     maparea = QRectF();
     QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
     while(subfile != subfiles.end())

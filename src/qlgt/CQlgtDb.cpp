@@ -33,6 +33,8 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 
+#include "CMainWindow.h"
+
 #include <QtSql>
 #include <QtWidgets>
 
@@ -301,7 +303,7 @@ void CQlgtDb::migrateDB(int version)
             }
 
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 4 to 5."), query.size());
+            PROGRESS_SETUP(tr("Migrating database from version 4 to 5."), query.size(), &CMainWindow::self());
 
             while(query.next())
             {
@@ -354,7 +356,7 @@ void CQlgtDb::migrateDB(int version)
             }
 
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 5 to 6."), query.size());
+            PROGRESS_SETUP(tr("Migrating database from version 5 to 6."), query.size(), &CMainWindow::self());
 
             while(query.next())
             {
@@ -411,7 +413,7 @@ void CQlgtDb::migrateDB(int version)
             }
 
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 6 to 7."), query.size());
+            PROGRESS_SETUP(tr("Migrating database from version 6 to 7."), query.size(), &CMainWindow::self());
 
             while(query.next())
             {
@@ -477,7 +479,7 @@ void CQlgtDb::migrateDB(int version)
 
         case 8:
         {
-            PROGRESS_SETUP(tr("Migrating database from version 7 to 8."), 1);
+            PROGRESS_SETUP(tr("Migrating database from version 7 to 8."), 1, &CMainWindow::self());
 
             if(!query.exec( "CREATE TABLE diarys ("
                             "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -506,7 +508,7 @@ void CQlgtDb::migrateDB(int version)
             QFile f(path.absoluteFilePath(name));
             f.copy(path.absoluteFilePath("qlgt_save_v4.db"));
 
-            PROGRESS_SETUP(tr("Migrating database from version 8 to 9."), 1);
+            PROGRESS_SETUP(tr("Migrating database from version 8 to 9."), 1, &CMainWindow::self());
 
             if(!query.exec("ALTER TABLE folders ADD COLUMN locked BOOLEAN DEFAULT FALSE"))
             {

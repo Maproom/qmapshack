@@ -667,6 +667,8 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         return stream;
     }
 
+    blockUpdateItems(true);
+
     stream >> version;
     stream >> filename;
     stream >> metadata.name;
@@ -728,7 +730,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         }
     }
 
-    updateItems();
+    blockUpdateItems(false);
     return stream;
 }
 

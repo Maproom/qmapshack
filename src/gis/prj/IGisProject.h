@@ -362,13 +362,18 @@ public:
     /**
        @brief Block update of items.
 
-        Use this to speed actions with many items, e.g. copy actions.
-        If the blocking is stopped
+        Use this to speed up actions with many items, e.g. copy actions.
+        If the blocking is stopped (yes == false) updateItems() is called.
 
-       @param yes set true to block update
+       @param yes set true to block updateing items
      */
-    void blockUpdate(bool yes);
-    bool blockUpdate()const{return noUpdate;}
+    void blockUpdateItems(bool yes);
+
+    /**
+       @brief  Return state of current update block
+       @return True if updates are blocked.
+     */
+    bool blockUpdateItems()const{return noUpdate;}
 
 protected:
     void genKey();

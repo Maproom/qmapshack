@@ -38,6 +38,8 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
     connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushClone, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+
+    QApplication::setOverrideCursor(Qt::ArrowCursor);
 }
 
 CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject * tar, QWidget * parent)
@@ -57,10 +59,13 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject 
 
     connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+
+    QApplication::setOverrideCursor(Qt::ArrowCursor);
 }
 
 CSelectCopyAction::~CSelectCopyAction()
 {
+    QApplication::restoreOverrideCursor();
 }
 
 bool CSelectCopyAction::allOthersToo()

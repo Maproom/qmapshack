@@ -419,12 +419,12 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
         {
             QApplication::setOverrideCursor(Qt::ArrowCursor);
             QString str = QObject::tr("This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.");
-            if(QMessageBox::warning(&CMainWindow::self(), QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok) != QMessageBox::Ok)
+            int res = QMessageBox::warning(&CMainWindow::self(), QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+            QApplication::restoreOverrideCursor();
+            if(res != QMessageBox::Ok)
             {
-                QApplication::restoreOverrideCursor();
                 return false;
             }
-            QApplication::restoreOverrideCursor();
         }
     }
 

@@ -34,10 +34,13 @@ CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, Q
 
     connect(pushSave, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+
+    QApplication::setOverrideCursor(Qt::ArrowCursor);
 }
 
 CSelectSaveAction::~CSelectSaveAction()
 {
+    QApplication::restoreOverrideCursor();
 }
 
 bool CSelectSaveAction::allOthersToo()

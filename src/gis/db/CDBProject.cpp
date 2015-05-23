@@ -334,10 +334,9 @@ bool CDBProject::save()
                             throw -1;
                         }
 
-                        QApplication::setOverrideCursor(Qt::ArrowCursor);
+
                         CSelectSaveAction dlg(item, item1, &progress);
                         dlg.exec();
-                        QApplication::restoreOverrideCursor();
 
                         result = dlg.getResult();
                         if(dlg.allOthersToo())

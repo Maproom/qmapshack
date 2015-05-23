@@ -563,7 +563,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
     IGisProject * project = dynamic_cast<IGisProject*>(itemAt(e->pos()));
     if(project)
     {
-        project->blockUpdate(true);
+        project->blockUpdateItems(true);
 
         int cnt = 1;
         int N   = items.size();
@@ -585,7 +585,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
             }
         }
 
-        project->blockUpdate(false);
+        project->blockUpdateItems(false);
     }
 
     IDevice * device = dynamic_cast<IDevice*>(itemAt(e->pos()));
@@ -741,6 +741,8 @@ void CGisListWks::slotLoadWorkspace()
     PROGRESS_SETUP(tr("Loading workspace. Please wait."), query.size());
     quint32 progCnt = 0;
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
     while(query.next())
     {
         PROGRESS(progCnt++, return );
@@ -761,9 +763,9 @@ void CGisListWks::slotLoadWorkspace()
         {
             project = new CQmsProject(name, this);
 
-            project->blockUpdate(true);
+            project->blockUpdateItems(true);
             *project << stream;
-            project->blockUpdate(false);
+            project->blockUpdateItems(false);
 
             break;
         }
@@ -772,9 +774,9 @@ void CGisListWks::slotLoadWorkspace()
         {
             project = new CGpxProject(name, this);
 
-            project->blockUpdate(true);
+            project->blockUpdateItems(true);
             *project << stream;
-            project->blockUpdate(false);
+            project->blockUpdateItems(false);
 
             break;
         }
@@ -784,10 +786,10 @@ void CGisListWks::slotLoadWorkspace()
             CDBProject * dbProject;
             project = dbProject = new CDBProject(this);
 
-            project->blockUpdate(true);
+            project->blockUpdateItems(true);
             project->IGisProject::operator<<(stream);
             dbProject->restoreDBLink();
-            project->blockUpdate(false);
+            project->blockUpdateItems(false);
 
             if(!project->isValid())
             {
@@ -815,6 +817,7 @@ void CGisListWks::slotLoadWorkspace()
     }
 
     emit sigChanged();
+    QApplication::restoreOverrideCursor();
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)
@@ -1065,7 +1068,8 @@ void CGisListWks::slotDeleteItem()
     QList<QTreeWidgetItem*> items       = selectedItems();
     QMessageBox::StandardButtons last   = QMessageBox::NoButton;
 
-    QSet<CDBProject*> projects;
+    QSet<CDBProject*>   projects;
+    QSet<IGisProject*>  projectsAll;
 
     foreach(QTreeWidgetItem * item, items)
     {
@@ -1076,17 +1080,23 @@ void CGisListWks::slotDeleteItem()
             IGisProject * project = dynamic_cast<IGisProject*>(gisItem->parent());
             if(project)
             {
-                project->blockUpdate(true);
+                project->blockUpdateItems(true);
                 yes = project->delItemByKey(gisItem->getKey(), last);
-            }
 
-            /*
-                collect database projects to update their counterpart in
-                the database view, after all operations are done.
-             */
-            if(yes && project->getType() == IGisProject::eTypeDb)
-            {
-                projects << dynamic_cast<CDBProject*>(project);
+
+                /*
+                    collect database projects to update their counterpart in
+                    the database view, after all operations are done.
+                */
+                if(yes && project->getType() == IGisProject::eTypeDb)
+                {
+                    projects << dynamic_cast<CDBProject*>(project);
+                }
+
+                /*
+                    Collect all projects to unblock update later on.
+                */
+                projectsAll << project;
             }
 
             if(last == QMessageBox::Cancel)
@@ -1100,17 +1110,18 @@ void CGisListWks::slotDeleteItem()
     // this will update the database view.
     foreach(CDBProject * project, projects)
     {
-        if(project)
-        {
-            project->blockUpdate(false);
-            project->postStatus();
-        }
+        project->postStatus();
+    }
+    // unblock update for all projects seen
+    foreach(IGisProject * project, projectsAll)
+    {
+        project->blockUpdateItems(false);
     }
 }
 
 void CGisListWks::slotCopyItem()
 {
-    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     IGisProject * project = CGisWidget::self().selectProject();
     if(project == 0)
@@ -1120,7 +1131,7 @@ void CGisListWks::slotCopyItem()
 
     int lastResult = CSelectCopyAction::eResultNone;
 
-    project->blockUpdate(true);
+    project->blockUpdateItems(true);
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -1132,7 +1143,7 @@ void CGisListWks::slotCopyItem()
 
         project->insertCopyOfItem(gisItem, NOIDX, lastResult);
     }
-    project->blockUpdate(false);
+    project->blockUpdateItems(false);
 }
 
 void CGisListWks::slotProjWpt()
@@ -1284,7 +1295,7 @@ void CGisListWks::slotSearchGoogle(bool on)
 
 void CGisListWks::slotSyncWksDev()
 {
-    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
     if(project == 0)
@@ -1303,7 +1314,6 @@ void CGisListWks::slotSyncWksDev()
         dlg.getSlectedDevices(keys);
     }
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
@@ -1327,7 +1337,6 @@ void CGisListWks::slotSyncWksDev()
         canvas->reportStatus("device", "");
     }
     emit sigChanged();
-    QApplication::restoreOverrideCursor();
 }
 
 void CGisListWks::slotSyncDevWks()
@@ -1417,7 +1426,7 @@ bool CGisListWks::event(QEvent * e)
     {
         CEvtD2WHideFolder * evt = (CEvtD2WHideFolder*)e;
         CDBProject * project =  getProjectById(evt->id, evt->db);
-        if(project->askBeforClose())
+        if(project && project->askBeforClose())
         {
             return false;
         }

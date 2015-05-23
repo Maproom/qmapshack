@@ -53,10 +53,13 @@ CSelDevices::CSelDevices(IGisProject * project, QTreeWidget *wks)
             item->setCheckState(Qt::Unchecked);
         }
     }
+
+    QApplication::setOverrideCursor(Qt::ArrowCursor);
 }
 
 CSelDevices::~CSelDevices()
 {
+    QApplication::restoreOverrideCursor();
 }
 
 

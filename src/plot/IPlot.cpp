@@ -170,7 +170,7 @@ void IPlot::newLine(const QPolygonF& line, const QString& label)
     data->lines.clear();
 
     QRectF r = line.boundingRect();
-    if((r.height() < 0) || (r.width() < 0))
+    if((r.height() < 0) || (r.width() < 0) || line.isEmpty())
     {
         data->badData = true;
         return;
@@ -193,7 +193,7 @@ void IPlot::newLine(const QPolygonF& line, const QString& label)
 void IPlot::addLine(const QPolygonF& line, const QString& label)
 {
     QRectF r = line.boundingRect();
-    if(!r.isValid())
+    if(!r.isValid() || line.isEmpty())
     {
         return;
     }

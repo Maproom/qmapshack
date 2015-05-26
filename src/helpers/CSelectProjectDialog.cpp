@@ -83,10 +83,13 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
     connect(radioDatabase, SIGNAL(toggled(bool)), this, SLOT(slotDatabase()));
 
     adjustSize();
+
+    QApplication::setOverrideCursor(Qt::ArrowCursor);
 }
 
 CSelectProjectDialog::~CSelectProjectDialog()
 {
+    QApplication::restoreOverrideCursor();
 }
 
 void CSelectProjectDialog::reject()

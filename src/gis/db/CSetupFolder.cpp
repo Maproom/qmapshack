@@ -50,10 +50,13 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, bool groupAll
     radioGroup->setEnabled(groupAllowed);
 
     slotNameChanged(name);
+
+    QApplication::setOverrideCursor(Qt::ArrowCursor);
 }
 
 CSetupFolder::~CSetupFolder()
 {
+    QApplication::restoreOverrideCursor();
 }
 
 void CSetupFolder::accept()

@@ -177,7 +177,11 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
         // read projection string
         QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
-        char * ptr = str.toLatin1().data();
+
+        char * ptr1 = (char*)malloc(str.toLatin1().size() + 1);
+        char * ptr2 = 0;
+
+        strncpy(ptr1,str.toLatin1().data(), str.toLatin1().size() + 1);
         OGRSpatialReference oSRS;
 
         if(str.startsWith("EPSG"))
@@ -187,12 +191,16 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         }
         else
         {
-            oSRS.importFromURN(ptr);
+            oSRS.importFromURN(ptr1);
         }
-        oSRS.exportToProj4(&ptr);
+        oSRS.exportToProj4(&ptr2);
 
-        qDebug() << ptr;
-        tileset.pjsrc = pj_init_plus(ptr);
+        qDebug() << ptr1 << ptr2;
+        tileset.pjsrc = pj_init_plus(ptr2);
+
+        free(ptr1);
+        free(ptr2);
+
         if(tileset.pjsrc == 0)
         {
             QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("No georeference information found."));

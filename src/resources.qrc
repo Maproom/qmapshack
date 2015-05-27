@@ -72,6 +72,7 @@
         <file>icons/32x32/QmsProject.png</file>
         <file>icons/32x32/DBProject.png</file>
         <file>icons/32x32/Route.png</file>
+        <file>icons/32x32/RouteSetup.png</file>        
         <file>icons/32x32/Close.png</file>
         <file>icons/32x32/Track.png</file>
         <file>icons/32x32/EditDetails.png</file>
@@ -102,6 +103,7 @@
         <file>icons/32x32/Tainted.png</file>
         <file>icons/32x32/AddWpt.png</file>
         <file>icons/32x32/AddTrk.png</file>
+        <file>icons/32x32/AddRte.png</file>
         <file>icons/32x32/AddArea.png</file>
         <file>icons/32x32/AddProject.png</file>
         <file>icons/32x32/LineMove.png</file>
@@ -198,6 +200,7 @@
         <file>icons/48x48/QmsProject.png</file>
         <file>icons/48x48/DBProject.png</file>
         <file>icons/48x48/Route.png</file>
+        <file>icons/48x48/RouteSetup.png</file>        
         <file>icons/48x48/Close.png</file>
         <file>icons/48x48/Track.png</file>
         <file>icons/48x48/EditDetails.png</file>
@@ -228,6 +231,7 @@
         <file>icons/48x48/Tainted.png</file>
         <file>icons/48x48/AddWpt.png</file>
         <file>icons/48x48/AddTrk.png</file>
+        <file>icons/48x48/AddRte.png</file>
         <file>icons/48x48/AddArea.png</file>
         <file>icons/48x48/AddProject.png</file>
         <file>icons/48x48/LineMove.png</file>

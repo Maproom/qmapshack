@@ -1077,7 +1077,7 @@ void CGisListWks::slotDeleteItem()
                 /*
                     collect database projects to update their counterpart in
                     the database view, after all operations are done.
-                */
+                 */
                 if(yes && project->getType() == IGisProject::eTypeDb)
                 {
                     projects << dynamic_cast<CDBProject*>(project);
@@ -1085,7 +1085,7 @@ void CGisListWks::slotDeleteItem()
 
                 /*
                     Collect all projects to unblock update later on.
-                */
+                 */
                 projectsAll << project;
             }
 

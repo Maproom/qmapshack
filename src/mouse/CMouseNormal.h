@@ -48,6 +48,7 @@ public:
 private slots:
     void slotAddWpt();
     void slotAddTrk();
+    void slotAddRte();
     void slotAddArea();
     void slotCopyPosition();
 

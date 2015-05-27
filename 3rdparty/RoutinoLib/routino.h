@@ -23,8 +23,40 @@ extern "C"
 {
 #endif
 
+typedef struct T_DataSet * H_RoutinoDataSet;
+
+/**
+   @brief Initialize Routino library.
+
+   This has to be called once on program startup.
+
+   @param profiles      a string pointer to the XML file defining the profiles
+   @param translations  a string pointer to the XML file defining the translation tables
+   @return Returns 0 on success and -1 on failure
+ */
 extern int RoutinoInit(const char * profiles, const char *translations);
 
+/**
+   @brief RoutinoRegisterData
+   @param dirname
+   @param prefix
+   @return
+ */
+extern H_RoutinoDataSet RoutinoRegisterData(const char *dirname, const char * prefix);
+
+/**
+   @brief RoutinoFreeData
+   @param data
+ */
+extern void RoutinoFreeData(H_RoutinoDataSet data);
+
+/**
+   @brief Release Routino library
+
+   This has to be called once when releasing the library.
+
+   @return Return 0.
+ */
 extern int RoutinoRelease();
 
 #ifdef __cplusplus

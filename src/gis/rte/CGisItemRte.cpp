@@ -23,6 +23,7 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -94,6 +95,19 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     loadFromDb(id, db);
+}
+
+CGisItemRte::CGisItemRte(const QPolygonF& l, const QString &name, IGisProject *project, int idx)
+    : IGisItem(project, eTypeRte, idx)
+    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+{
+    rte.name = name;
+    readRouteDataFromPolyLine(l);
+
+    flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
+
+    setupHistory();
+    updateDecoration(eMarkChanged, eMarkNone);
 }
 
 CGisItemRte::~CGisItemRte()
@@ -310,4 +324,26 @@ void CGisItemRte::drawHighlight(QPainter& p)
     {
         p.drawImage(pt - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
     }
+}
+
+void CGisItemRte::readRouteDataFromPolyLine(const QPolygonF &l)
+{
+    rte.pts.clear();
+    rte.pts.resize(l.size());
+
+    QPolygonF ele(l.size());
+    CMainWindow::self().getEelevationAt(l, ele);
+
+    for(int i = 0; i < l.size(); i++)
+    {
+        rtept_t& rtept      = rte.pts[i];
+        const QPointF& pt   = l[i];
+
+        rtept.lon = pt.x() * RAD_TO_DEG;
+        rtept.lat = pt.y() * RAD_TO_DEG;
+        rtept.ele = ele[i].y();
+    }
+
+    deriveSecondaryData();
+
 }

@@ -30,6 +30,7 @@
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "mouse/CMouseEditArea.h"
+#include "mouse/CMouseEditRte.h"
 #include "mouse/CMouseEditTrk.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "mouse/CMouseNormal.h"
@@ -181,6 +182,17 @@ void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditTrk(pt, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
+void CCanvas::setMouseEditRte(const QPointF &pt)
+{
+    mouse->deleteLater();
+    mouse = new CMouseEditRte(pt, gis, this);
     if(underMouse())
     {
         QApplication::restoreOverrideCursor();

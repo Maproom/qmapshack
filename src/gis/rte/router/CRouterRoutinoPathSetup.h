@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,30 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERROUTINO_H
-#define CROUTERROUTINO_H
+#ifndef CROUTERROUTINOPATHSETUP_H
+#define CROUTERROUTINOPATHSETUP_H
 
-#include "gis/rte/router/IRouter.h"
-#include "ui_IRouterRoutino.h"
-#include <routino.h>
+#include "ui_IRouterRoutinoPathSetup.h"
+#include <QDialog>
 
-class CRouterRoutino : public IRouter, private Ui::IRouterRoutino
+class CRouterRoutinoPathSetup : public QDialog, private Ui::IRouterRoutinoPathSetup
 {
     Q_OBJECT
 public:
-    CRouterRoutino(QWidget * parent);
-    virtual ~CRouterRoutino();
+    CRouterRoutinoPathSetup(QStringList& paths);
+    virtual ~CRouterRoutinoPathSetup();
+
+public slots:
+    void accept();
 
 private slots:
-    void slotSetupPaths();
+    void slotAddPath();
+    void slotDelPath();
+    void slotItemSelectionChanged();
 
 
 private:
-    void buildDatabaseList();
-    void freeDatabaseList();
-    void updateHelpText();
-    QStringList dbPaths;
+    QStringList& paths;
 };
 
-#endif //CROUTERROUTINO_H
+#endif //CROUTERROUTINOPATHSETUP_H
 

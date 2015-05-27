@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,30 +16,34 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERROUTINO_H
-#define CROUTERROUTINO_H
+#ifndef CMOUSEEDITRTE_H
+#define CMOUSEEDITRTE_H
 
-#include "gis/rte/router/IRouter.h"
-#include "ui_IRouterRoutino.h"
-#include <routino.h>
+#include "gis/IGisItem.h"
+#include "mouse/IMouseEditLine.h"
 
-class CRouterRoutino : public IRouter, private Ui::IRouterRoutino
+class CGisItemRte;
+
+class CMouseEditRte : public IMouseEditLine
 {
-    Q_OBJECT
 public:
-    CRouterRoutino(QWidget * parent);
-    virtual ~CRouterRoutino();
+    CMouseEditRte(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+    virtual ~CMouseEditRte();
 
-private slots:
-    void slotSetupPaths();
+    void mousePressEvent(QMouseEvent * e);
 
+protected slots:
+    void slotAbort();
+    void slotCopyToNew();
+    void slotCopyToOrig();
+
+
+protected:
+    IGisLine * getGisLine();
 
 private:
-    void buildDatabaseList();
-    void freeDatabaseList();
-    void updateHelpText();
-    QStringList dbPaths;
+    IGisItem::key_t key;
 };
 
-#endif //CROUTERROUTINO_H
+#endif //CMOUSEEDITRTE_H
 

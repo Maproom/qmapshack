@@ -17,7 +17,10 @@
 **********************************************************************************************/
 
 #include "gis/rte/router/CRouterRoutino.h"
+#include "gis/rte/router/CRouterRoutinoPathSetup.h"
+#include "helpers/CSettings.h"
 #include <QtWidgets>
+#include <routino.h>
 
 
 CRouterRoutino::CRouterRoutino(QWidget *parent)
@@ -52,11 +55,84 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     translations.close();
 
     RoutinoInit(profiles.fileName().toUtf8(), translations.fileName().toUtf8());
+
+    connect(toolSetupPaths, SIGNAL(clicked()), this, SLOT(slotSetupPaths()));
+
+    SETTINGS;
+    dbPaths = cfg.value("Route/routino/paths", dbPaths).toStringList();
+
+    buildDatabaseList();
+    updateHelpText();
 }
 
 CRouterRoutino::~CRouterRoutino()
 {
+    SETTINGS;
+    cfg.setValue("Route/routino/paths", dbPaths);
+
+    freeDatabaseList();
     RoutinoRelease();
 }
 
 
+void CRouterRoutino::slotSetupPaths()
+{
+    CRouterRoutinoPathSetup dlg(dbPaths);
+    dlg.exec();
+
+    buildDatabaseList();
+    updateHelpText();
+}
+
+void CRouterRoutino::buildDatabaseList()
+{
+    QRegExp re("(.*)-nodes.mem");
+    freeDatabaseList();
+
+    foreach(const QString &path, dbPaths)
+    {
+        QDir dir(path);
+        foreach(const QString &filename, dir.entryList(QStringList("*nodes.mem"), QDir::Files|QDir::Readable, QDir::Name))
+        {
+            QString prefix;
+            if(re.exactMatch(filename))
+            {
+                prefix = re.cap(1);
+            }
+            else
+            {
+                continue;
+            }
+
+            H_RoutinoDataSet data = RoutinoRegisterData(dir.absolutePath().toUtf8(), prefix.toUtf8());
+            if(data)
+            {
+                comboDatabase->addItem(prefix.replace("_", " "), quint64(data));
+            }
+        }
+    }
+}
+
+void CRouterRoutino::freeDatabaseList()
+{
+    for(int i = 0; i < comboDatabase->count(); i++)
+    {
+        H_RoutinoDataSet data = H_RoutinoDataSet(comboDatabase->itemData(i, Qt::UserRole).toULongLong());
+        RoutinoFreeData(data);
+    }
+    comboDatabase->clear();
+}
+
+void CRouterRoutino::updateHelpText()
+{
+    if(comboDatabase->count() != 0)
+    {
+        frameHelp->hide();
+        comboDatabase->setEnabled(true);
+    }
+    else
+    {
+        frameHelp->show();
+        comboDatabase->setEnabled(false);
+    }
+}

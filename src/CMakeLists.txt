@@ -93,6 +93,7 @@ set( SRCS
     mouse/CMouseNormal.cpp
     mouse/CMouseMoveWpt.cpp
     mouse/CMouseEditTrk.cpp
+    mouse/CMouseEditRte.cpp
     mouse/CMouseEditArea.cpp
     mouse/CMouseRangeTrk.cpp
     mouse/CMouseWptBubble.cpp
@@ -159,6 +160,7 @@ set( SRCS
     gis/rte/router/CRouterSetup.cpp
     gis/rte/router/CRouterRoutino.cpp
     gis/rte/router/CRouterMapQuest.cpp
+    gis/rte/router/CRouterRoutinoPathSetup.cpp
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
     gis/ovl/CDetailsOvlArea.cpp    
@@ -280,6 +282,7 @@ set( HDRS
     mouse/CMouseNormal.h
     mouse/CMouseMoveWpt.h
     mouse/CMouseEditTrk.h
+    mouse/CMouseEditRte.h
     mouse/CMouseEditArea.h
     mouse/CMouseRangeTrk.h
     mouse/CMouseWptBubble.h
@@ -341,6 +344,7 @@ set( HDRS
     gis/rte/router/CRouterSetup.h
     gis/rte/router/CRouterRoutino.h
     gis/rte/router/CRouterMapQuest.h
+    gis/rte/router/CRouterRoutinoPathSetup.h
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
     gis/ovl/CDetailsOvlArea.h    
@@ -441,6 +445,7 @@ set( UIS
     gis/rte/router/IRouterSetup.ui
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterMapQuest.ui
+    gis/rte/router/IRouterRoutinoPathSetup.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui

@@ -75,7 +75,6 @@ bool IGisProject::askBeforClose()
         {
             save();
         }
-
     }
 
     return res == QMessageBox::Abort;

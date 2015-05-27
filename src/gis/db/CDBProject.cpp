@@ -454,7 +454,6 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
 
     postStatus();
     setToolTip(CGisListWks::eColumnName, getInfo());
-
 }
 
 void CDBProject::hideItems(CEvtD2WHideItems * evt)
@@ -472,6 +471,5 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
 
     postStatus();
     setToolTip(CGisListWks::eColumnName, getInfo());
-
 }
 

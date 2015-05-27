@@ -60,6 +60,7 @@ public:
     CGisItemRte(const history_t& hist, IGisProject * project);
     CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
     CGisItemRte(const CQlgtRoute& rte1);
+    CGisItemRte(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
     virtual ~CGisItemRte();
 
     QDataStream& operator<<(QDataStream& stream);
@@ -107,6 +108,7 @@ private:
     void deriveSecondaryData();
     void setSymbol();
     void readRte(const QDomNode& xml, rte_t& rte);
+    void readRouteDataFromPolyLine(const QPolygonF &l);
 
     static key_t keyUserFocus;
 

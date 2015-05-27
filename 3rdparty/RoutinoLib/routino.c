@@ -21,8 +21,22 @@
 #include "routino.h"
 #include "profiles.h"
 #include "translations.h"
+#include "files.h"
+#include "nodes.h"
+#include "segments.h"
+#include "ways.h"
+#include "relations.h"
 
 static int isInitialized = 0;
+
+struct T_DataSet
+{
+    Nodes     *OSMNodes;
+    Segments  *OSMSegments;
+    Ways      *OSMWays;
+    Relations *OSMRelations;
+};
+
 
 int RoutinoInit(const char *profiles, const char *translations)
 {
@@ -53,5 +67,72 @@ int RoutinoRelease()
     }
 
     return 0;
+}
+
+extern H_RoutinoDataSet RoutinoRegisterData(const char * dirname, const char * prefix)
+{
+    char * filename;
+    Nodes     *OSMNodes;
+    Segments  *OSMSegments;
+    Ways      *OSMWays;
+    Relations *OSMRelations;
+
+    filename = FileName(dirname,prefix,"nodes.mem");
+    OSMNodes = LoadNodeList(filename);
+    free(filename);
+    if(OSMNodes == NULL)
+    {
+        goto RegisterDataErrorNodes;
+    }
+
+    filename = FileName(dirname,prefix,"segments.mem");
+    OSMSegments = LoadSegmentList(filename);
+    free(filename);
+    if(OSMSegments == NULL)
+    {
+        goto RegisterDataErrorSegments;
+    }
+
+    filename = FileName(dirname,prefix,"ways.mem");
+    OSMWays = LoadWayList(filename);
+    free(filename);
+    if(OSMWays == NULL)
+    {
+        goto RegisterDataErrorWays;
+    }
+
+    filename = FileName(dirname,prefix,"relations.mem");
+    OSMRelations = LoadRelationList(filename);
+    free(filename);
+    if(OSMNodes == NULL)
+    {
+        goto RegisterDataErrorRelations;
+    }
+
+    H_RoutinoDataSet dataset = malloc(sizeof(struct T_DataSet));
+    dataset->OSMNodes       = OSMNodes;
+    dataset->OSMSegments    = OSMSegments;
+    dataset->OSMWays        = OSMWays;
+    dataset->OSMRelations   = OSMRelations;
+    return dataset;
+
+RegisterDataErrorRelations:
+    DestroyWayList(OSMWays);
+RegisterDataErrorWays:
+    DestroySegmentList(OSMSegments);
+RegisterDataErrorSegments:
+    DestroyNodeList(OSMNodes);
+RegisterDataErrorNodes:
+    return 0;
+}
+
+extern void RoutinoFreeData(H_RoutinoDataSet data)
+{
+    DestroyNodeList(data->OSMNodes);
+    DestroySegmentList(data->OSMSegments);
+    DestroyWayList(data->OSMWays);
+    DestroyRelationList(data->OSMRelations);
+
+    free(data);
 }
 

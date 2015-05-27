@@ -237,7 +237,10 @@ public:
     void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
 
 
-    int getItemCountByType(IGisItem::type_e type){return cntItemsByType[type];}
+    int getItemCountByType(IGisItem::type_e type)
+    {
+        return cntItemsByType[type];
+    }
 
     /**
        @brief Receive the current mouse position
@@ -373,7 +376,10 @@ public:
        @brief  Return state of current update block
        @return True if updates are blocked.
      */
-    bool blockUpdateItems()const{return noUpdate;}
+    bool blockUpdateItems() const
+    {
+        return noUpdate;
+    }
 
 protected:
     void genKey();

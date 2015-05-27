@@ -14,7 +14,7 @@
    inkscape:version="0.48.5 r10040"
    width="64"
    height="67"
-   sodipodi:docname="Route.svg">
+   sodipodi:docname="RouteSetup.svg">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,8 +43,8 @@
      id="namedview4"
      showgrid="true"
      inkscape:zoom="3.5223881"
-     inkscape:cx="-33.154661"
-     inkscape:cy="33.5"
+     inkscape:cx="90.831686"
+     inkscape:cy="45.751543"
      inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
@@ -54,7 +54,7 @@
        id="grid2982" />
   </sodipodi:namedview>
   <path
-     style="fill:none;stroke:#000080;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+     style="fill:none;stroke:#ff0000;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
      d="M 15,12 50,32 20,52"
      id="path3036"
      inkscape:connector-curvature="0" />
@@ -97,4 +97,12 @@
      sodipodi:end="6.2789689"
      sodipodi:open="true"
      transform="matrix(1.3333333,0,0,1.3333333,3.3333338,32.666667)" />
+  <path
+     style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.04187739;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 26.004259,52 12.925791,1e-5 0,12.89322 11.06995,0 L 50,52 l 12.92578,0 0,-11.102503 -12.92578,0 -1e-5,-12.893231 -11.06994,0 -1e-5,12.893241 -12.925781,-10e-6 0,11.102503 z"
+     id="rect3117-7"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/add.png"
+     inkscape:export-xdpi="75.913841"
+     inkscape:export-ydpi="75.913841" />
 </svg>

@@ -45,7 +45,6 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QWidget *parent)
     connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
 
     QApplication::setOverrideCursor(Qt::ArrowCursor);
-
 }
 
 CSelectDBFolder::~CSelectDBFolder()

@@ -244,6 +244,17 @@ void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
     }
 }
 
+void CCanvas::setMouseEditRte(CGisItemRte& rte)
+{
+    mouse->deleteLater();
+    mouse = new CMouseEditRte(rte, gis, this);
+    if(underMouse())
+    {
+        QApplication::restoreOverrideCursor();
+        QApplication::setOverrideCursor(*mouse);
+    }
+}
+
 void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
 {
     mouse->deleteLater();

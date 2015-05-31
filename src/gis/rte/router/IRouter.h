@@ -20,6 +20,7 @@
 #define IROUTER_H
 
 #include <QWidget>
+#include "gis/IGisItem.h"
 
 class IRouter : public QWidget
 {
@@ -27,6 +28,8 @@ class IRouter : public QWidget
 public:
     IRouter(QWidget * parent);
     virtual ~IRouter();
+
+    virtual void calcRoute(const IGisItem::key_t& key) = 0;
 };
 
 #endif //IROUTER_H

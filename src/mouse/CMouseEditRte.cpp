@@ -31,6 +31,22 @@ CMouseEditRte::CMouseEditRte(const QPointF &point, CGisDraw *gis, CCanvas *paren
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
 }
 
+CMouseEditRte::CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent)
+    : IMouseEditLine(rte, gis, parent)
+{
+    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
+    key         = rte.getKey();
+
+
+    canvas->reportStatus(key.item, tr("<b>Edit Route Points</b><br/>Select a route point for more options.<br/>"));
+    /*
+        trigger complete update of GIS components to make sure all changes to
+        the originating object are reflected on the canvas
+     */
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+
 CMouseEditRte::~CMouseEditRte()
 {
 }

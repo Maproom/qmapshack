@@ -41,6 +41,8 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
+    connect(toolCalc, SIGNAL(clicked()), this, SLOT(slotCalc()));
+    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
 }
 
 CScrOptRte::~CScrOptRte()
@@ -58,6 +60,19 @@ void CScrOptRte::slotCopy()
     deleteLater();
 }
 
+void CScrOptRte::slotCalc()
+{
+    CGisWidget::self().calcRteByKey(key);
+    deleteLater();
+}
+
+void CScrOptRte::slotEdit()
+{
+    CGisWidget::self().editRteByKey(key);
+    deleteLater();
+}
+
+
 void CScrOptRte::draw(QPainter& p)
 {
     IGisItem * item = CGisWidget::self().getItemByKey(key);
@@ -70,3 +85,4 @@ void CScrOptRte::draw(QPainter& p)
 
     drawBubble2(anchor, p);
 }
+

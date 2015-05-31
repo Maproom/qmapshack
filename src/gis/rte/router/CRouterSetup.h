@@ -20,17 +20,26 @@
 #define CROUTERSETUP_H
 
 #include "ui_IRouterSetup.h"
+#include "gis/IGisItem.h"
 #include <QWidget>
 
 class CRouterSetup : public QWidget, private Ui::IRouterSetup
 {
     Q_OBJECT
-public:
-    CRouterSetup(QWidget * parent);
+public:    
+    static CRouterSetup& self(){return *pSelf;}
     virtual ~CRouterSetup();
+
+    void calcRoute(const IGisItem::key_t &key);
 
 private slots:
     void slotSelectRouter(int i);
+
+private:
+    friend class Ui_IMainWindow;
+    CRouterSetup(QWidget * parent);
+
+    static CRouterSetup * pSelf;
 };
 
 #endif //CROUTERSETUP_H

@@ -259,6 +259,10 @@ public:
 
     void rangeTrkByKey(const IGisItem::key_t &key);
 
+    void editRteByKey(const IGisItem::key_t& key);
+
+    void calcRteByKey(const IGisItem::key_t& key);
+
     void editAreaByKey(const IGisItem::key_t &key);
 
     /**

@@ -28,3 +28,7 @@ CRouterMapQuest::~CRouterMapQuest()
 {
 }
 
+void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
+{
+
+}

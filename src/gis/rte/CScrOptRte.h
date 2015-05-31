@@ -40,6 +40,8 @@ public:
 private slots:
     void slotDelete();
     void slotCopy();
+    void slotCalc();
+    void slotEdit();
 
 private:
     IGisItem::key_t key;

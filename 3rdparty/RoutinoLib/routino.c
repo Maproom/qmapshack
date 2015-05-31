@@ -27,6 +27,8 @@
 #include "ways.h"
 #include "relations.h"
 
+#define MAXSEARCH 1
+
 static int isInitialized = 0;
 
 struct T_DataSet
@@ -136,3 +138,50 @@ extern void RoutinoFreeData(H_RoutinoDataSet data)
     free(data);
 }
 
+extern int RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord)
+{
+    if(nCoord < 2)
+    {
+        return -1;
+    }
+
+    Profile * profile = GetProfile(profilename);
+    if(profile == NULL)
+    {
+        return -1;
+    }
+
+
+    if(UpdateProfile(profile,data->OSMWays))
+    {
+        return -1;
+    }
+
+    for(int i = 0; i < nCoord; i++)
+    {
+        distance_t distmax  = km_to_distance(MAXSEARCH);
+        index_t segment     = NO_SEGMENT;
+        distance_t distmin;
+        distance_t dist1;
+        distance_t dist2;
+        index_t node1;
+        index_t node2;
+        index_t finish_node = NO_NODE;
+
+
+        segment = FindClosestSegment(data->OSMNodes, data->OSMSegments, data->OSMWays, lat[i], lon[i], distmax, profile, &distmin, &node1, &node2, &dist1, &dist2);
+
+        if(segment!=NO_SEGMENT)
+        {
+           finish_node = CreateFakes(data->OSMNodes, data->OSMSegments, i, LookupSegment(data->OSMSegments, segment, 1), node1, node2, dist1, dist2);
+        }
+        else
+        {
+           finish_node=NO_NODE;
+        }
+
+
+    }
+
+    return 0;
+}

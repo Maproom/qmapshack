@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
@@ -23,7 +24,6 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -345,5 +345,28 @@ void CGisItemRte::readRouteDataFromPolyLine(const QPolygonF &l)
     }
 
     deriveSecondaryData();
+}
 
+void CGisItemRte::setDataFromPolyline(const QPolygonF& l)
+{
+//    delete dlgDetails;
+
+    readRouteDataFromPolyLine(l);
+
+    flags |= eFlagTainted;
+    changed(QObject::tr("Changed route points."), "://icons/48x48/LineMove.png");
+}
+
+void CGisItemRte::getPolylineFromData(QPolygonF& l)
+{
+    l.clear();
+    foreach(const rtept_t &pt, rte.pts)
+    {
+        l << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
+    }
+}
+
+void CGisItemRte::calc()
+{
+    CRouterSetup::self().calcRoute(getKey());
 }

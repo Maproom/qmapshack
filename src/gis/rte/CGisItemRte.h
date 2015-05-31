@@ -80,12 +80,9 @@ public:
     bool isCloseTo(const QPointF& pos);
     void gainUserFocus(bool yes);
 
-    void setDataFromPolyline(const QPolygonF& line)
-    {
-    }
-    void getPolylineFromData(QPolygonF& line)
-    {
-    }
+    void setDataFromPolyline(const QPolygonF& l);
+
+    void getPolylineFromData(QPolygonF& l);
 
     const QString& getComment() const
     {
@@ -103,6 +100,8 @@ public:
     void setComment(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
+
+    void calc();
 
 private:
     void deriveSecondaryData();

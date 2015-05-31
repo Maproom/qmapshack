@@ -32,6 +32,7 @@ class CDemDraw;
 class CGisDraw;
 class CGisItemWpt;
 class CGisItemTrk;
+class CGisItemRte;
 class CGisItemOvlArea;
 class QSettings;
 class QPointF;
@@ -115,6 +116,7 @@ public:
     void setMouseRangeTrk(CGisItemTrk& trk);
     void setMouseEditTrk(const QPointF& pt);
     void setMouseEditRte(const QPointF& pt);
+    void setMouseEditRte(CGisItemRte& rte);
     void setMouseEditArea(CGisItemOvlArea& area);
     void setMouseEditArea(const QPointF& pt);
     void setMouseWptBubble(const IGisItem::key_t& key);

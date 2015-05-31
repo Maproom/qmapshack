@@ -28,6 +28,7 @@ class CMouseEditRte : public IMouseEditLine
 {
 public:
     CMouseEditRte(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+    CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseEditRte();
 
     void mousePressEvent(QMouseEvent * e);

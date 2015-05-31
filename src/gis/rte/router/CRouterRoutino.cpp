@@ -18,9 +18,12 @@
 
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterRoutinoPathSetup.h"
+#include "gis/CGisWidget.h"
+#include "gis/rte/CGisItemRte.h"
 #include "helpers/CSettings.h"
 #include <QtWidgets>
 #include <routino.h>
+#include <proj_api.h>
 
 
 CRouterRoutino::CRouterRoutino(QWidget *parent)
@@ -28,14 +31,14 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
 {
     setupUi(this);
 
-    comboProfile->addItem(tr("Foot"));
-    comboProfile->addItem(tr("Horse"));
-    comboProfile->addItem(tr("Wheelchair"));
-    comboProfile->addItem(tr("Bicycle"));
-    comboProfile->addItem(tr("Moped"));
-    comboProfile->addItem(tr("Motorcycle"));
-    comboProfile->addItem(tr("Motorcar"));
-    comboProfile->addItem(tr("Goods"));
+    comboProfile->addItem(tr("Foot"), "foot");
+    comboProfile->addItem(tr("Horse"), "horse");
+    comboProfile->addItem(tr("Wheelchair"), "wheelchair");
+    comboProfile->addItem(tr("Bicycle"), "bicycle");
+    comboProfile->addItem(tr("Moped"), "moped");
+    comboProfile->addItem(tr("Motorcycle"), "motorcycle");
+    comboProfile->addItem(tr("Motorcar"), "motorcar");
+    comboProfile->addItem(tr("Goods"), "goods");
 
     comboMode->addItem(tr("Shortest"));
     comboMode->addItem(tr("Quickest"));
@@ -135,4 +138,27 @@ void CRouterRoutino::updateHelpText()
         frameHelp->show();
         comboDatabase->setEnabled(false);
     }
+}
+
+void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
+{
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+    if(rte == 0)
+    {
+        return;
+    }
+
+    H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
+    QString profile         = comboProfile->currentData(Qt::UserRole).toString();
+
+    QPolygonF line;
+    QVector<float> lon,lat;
+    rte->getPolylineFromData(line);
+    foreach(const QPointF& pt, line)
+    {
+        lon << pt.x() * RAD_TO_DEG;
+        lat << pt.y() * RAD_TO_DEG;
+    }
+
+    RoutinoCalculate(data, profile.toUtf8(), lon.data(), lat.data(), line.size());
 }

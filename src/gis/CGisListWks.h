@@ -83,6 +83,8 @@ private slots:
     void slotReverseTrk();
     void slotCombineTrk();
     void slotRangeTrk();
+    void slotCalcRte();
+    void slotEditRte();
     void slotEditArea();
     void slotAddEmptyProject();
     void slotCloseAllProjects();
@@ -129,6 +131,8 @@ private:
     QAction * actionReverseTrk;
     QAction * actionCombineTrk;
     QAction * actionRangeTrk;
+    QAction * actionCalcRte;
+    QAction * actionEditRte;
     QAction * actionEditArea;
 
     QMenu * menuNone;

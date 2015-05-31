@@ -44,6 +44,9 @@ extern int RoutinoInit(const char * profiles, const char *translations);
  */
 extern H_RoutinoDataSet RoutinoRegisterData(const char *dirname, const char * prefix);
 
+
+extern int RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord);
+
 /**
    @brief RoutinoFreeData
    @param data

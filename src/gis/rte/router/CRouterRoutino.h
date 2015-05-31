@@ -30,6 +30,8 @@ public:
     CRouterRoutino(QWidget * parent);
     virtual ~CRouterRoutino();
 
+    void calcRoute(const IGisItem::key_t& key);
+
 private slots:
     void slotSetupPaths();
 

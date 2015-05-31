@@ -28,6 +28,8 @@ class CRouterMapQuest : public IRouter, private Ui::IRouterMapQuest
 public:
     CRouterMapQuest(QWidget * parent);
     virtual ~CRouterMapQuest();
+
+    void calcRoute(const IGisItem::key_t& key);
 };
 
 #endif //CROUTERMAPQUEST_H

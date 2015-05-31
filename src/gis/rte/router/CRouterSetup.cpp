@@ -19,14 +19,19 @@
 #include "gis/rte/router/CRouterMapQuest.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterSetup.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/CGisWidget.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
+CRouterSetup * CRouterSetup::pSelf = 0;
+
 CRouterSetup::CRouterSetup(QWidget * parent)
     : QWidget(parent)
-{
+{    
     setupUi(this);
+    pSelf = this;
 
     comboRouter->addItem(tr("Routino (offline)"));
     comboRouter->addItem(tr("MapQuest (online)"));
@@ -49,4 +54,13 @@ CRouterSetup::~CRouterSetup()
 void CRouterSetup::slotSelectRouter(int i)
 {
     stackedWidget->setCurrentIndex(i);
+}
+
+void CRouterSetup::calcRoute(const IGisItem::key_t& key)
+{
+    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    if(router)
+    {
+        router->calcRoute(key);
+    }
 }

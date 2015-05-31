@@ -28,6 +28,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
@@ -511,6 +512,38 @@ void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
         }
     }
 }
+
+void CGisWidget::editRteByKey(const IGisItem::key_t& key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
+    if(rte != 0)
+    {
+        if(!rte->setReadOnlyMode(false))
+        {
+            return;
+        }
+
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas != 0)
+        {
+            canvas->setMouseEditRte(*rte);
+        }
+    }
+}
+
+void CGisWidget::calcRteByKey(const IGisItem::key_t& key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
+    if(rte != 0)
+    {
+        rte->calc();
+    }
+}
+
 
 void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
 {

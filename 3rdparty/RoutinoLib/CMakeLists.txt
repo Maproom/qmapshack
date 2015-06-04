@@ -28,6 +28,7 @@ set(APPNAME routino)
 
 set(SRCS_${APPNAME}
     routino.c
+    binout.c
     #errorlog.c
     #errorlogx.c
     ../Routino/src/fakes.c
@@ -41,7 +42,7 @@ set(SRCS_${APPNAME}
     #osmparser.c
     #osmpbfparse.c
     #osmxmlparse.c
-    ../Routino/src/output.c
+    #../Routino/src/output.c
     ../Routino/src/profiles.c
     #prunex.c
     ../Routino/src/queue.c
@@ -71,12 +72,13 @@ endif(MSVC)
 
 set(HDRS_${APPNAME}
     routino.h
+    binout.h
     ../Routino/src/cache.h
     #errorlog.h
     #errorlogx.h
     ../Routino/src/fakes.h
     ../Routino/src/files.h
-    #functions.h
+    ../Routino/src/functions.h
     ../Routino/src/logging.h
     ../Routino/src/nodes.h
     #nodesx.h
@@ -145,6 +147,7 @@ set(APPNAME router)
 
 set(SRCS_${APPNAME}
     ../Routino/src/router.c
+    ../Routino/src/output.c
 )
 
 set(HDRS_${APPNAME}

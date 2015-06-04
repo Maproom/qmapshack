@@ -52,7 +52,7 @@ void CRouterRoutinoPathSetup::slotItemSelectionChanged()
 
 void CRouterRoutinoPathSetup::slotAddPath()
 {
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select DEM file path..."), QDir::homePath(), 0);
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select routing data file path..."), QDir::homePath(), 0);
     if(!path.isEmpty())
     {
         QListWidgetItem * item = new QListWidgetItem(listWidget);

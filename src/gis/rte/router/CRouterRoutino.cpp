@@ -156,8 +156,8 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     rte->getPolylineFromData(line);
     foreach(const QPointF& pt, line)
     {
-        lon << pt.x() * RAD_TO_DEG;
-        lat << pt.y() * RAD_TO_DEG;
+        lon << pt.x();
+        lat << pt.y();
     }
 
     RoutinoCalculate(data, profile.toUtf8(), lon.data(), lat.data(), line.size());

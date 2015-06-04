@@ -480,12 +480,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="143"/>
         <source>Calculate Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Route berechnen</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Edit Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Route bearbeiten</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="604"/>
@@ -1580,7 +1580,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="41"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a route point for more options.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Routenpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie einen Routenpunkt für mehr Optionen.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1952,8 +1952,12 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
+        <source>Select routing data file path...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select DEM file path...</source>
-        <translation>Pfad für DEM Dateien wählen...</translation>
+        <translation type="vanished">Pfad für DEM Dateien wählen...</translation>
     </message>
 </context>
 <context>
@@ -3790,7 +3794,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="52"/>
         <source>Add paths with Routino database.</source>
-        <translation>Fügt Pfade mit Routino Datenbank hinzu.</translation>
+        <translation>Fügt Pfade mit Routino Datenbanken hinzu.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="55"/>
@@ -4024,12 +4028,12 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="77"/>
         <source>Calculate route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Route berechnen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
         <source>Move route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Routenpunkte verschieben.</translation>
     </message>
     <message>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
@@ -5210,7 +5214,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="357"/>
         <source>Changed route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geänderte Routenpukte.</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="599"/>

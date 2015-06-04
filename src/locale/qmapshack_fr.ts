@@ -1797,8 +1797,12 @@ n&apos;est pas une définition de système de coordonnées:
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
+        <source>Select routing data file path...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select DEM file path...</source>
-        <translation type="unfinished">Sélectionnez le répertoire qui contient les fichiers DEM</translation>
+        <translation type="obsolete">Sélectionnez le répertoire qui contient les fichiers DEM</translation>
     </message>
 </context>
 <context>

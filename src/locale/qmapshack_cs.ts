@@ -1865,8 +1865,12 @@ není platným vymezením soustavy souřadnic
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
+        <source>Select routing data file path...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select DEM file path...</source>
-        <translation type="unfinished">Vybrat cestu k souboru DEM...</translation>
+        <translation type="obsolete">Vybrat cestu k souboru DEM...</translation>
     </message>
 </context>
 <context>

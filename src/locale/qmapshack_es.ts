@@ -1856,8 +1856,12 @@ no es una definición de sistema de coordenadas válido:
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
+        <source>Select routing data file path...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select DEM file path...</source>
-        <translation type="unfinished">Seleccione la ruta al archivo DEM...</translation>
+        <translation type="obsolete">Seleccione la ruta al archivo DEM...</translation>
     </message>
 </context>
 <context>

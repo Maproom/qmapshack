@@ -40,6 +40,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , noUpdate(false)
     , sorting(eSortNone)
 {
+    memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 }
 

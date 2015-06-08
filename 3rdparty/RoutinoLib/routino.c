@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "binout.h"
 #include "fakes.h"
 #include "files.h"
 #include "functions.h"
@@ -27,7 +28,6 @@
 #include "segments.h"
 #include "translations.h"
 #include "ways.h"
-#include "binout.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -149,33 +149,35 @@ extern void RoutinoFreeData(H_RoutinoDataSet data)
     free(data);
 }
 
-extern int RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord)
+extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord)
 {
     if(nCoord < 2)
     {
-        return -1;
+        return 0;
     }
 
     Profile * profile = GetProfile(profilename);
     if(profile == NULL)
     {
-        return -1;
+        return 0;
     }
 
     if(UpdateProfile(profile,data->OSMWays))
     {
-        return -1;
+        return 0;
     }
 
+    printf("\n");
     int i;
-    int res = -1;
+    T_RoutinoRoute * route         = 0;
+    int nResults                    = 0;    
     Results * results[NWAYPOINTS+1] = {NULL};
     index_t start_node              = NO_NODE;
     index_t finish_node             = NO_NODE;
-    for(i = 0; i < nCoord; i++)
+    waypoint_t start_waypoint       = NO_WAYPOINT;
+    waypoint_t finish_waypoint      = NO_WAYPOINT;
+    for(i = 1; i <= nCoord; i++)
     {
-        waypoint_t start_waypoint   = NO_WAYPOINT;
-        waypoint_t finish_waypoint  = NO_WAYPOINT;
         distance_t distmax          = km_to_distance(MAXSEARCH);
         index_t segment             = NO_SEGMENT;
         index_t join_segment        = NO_SEGMENT;
@@ -183,11 +185,12 @@ extern int RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, con
         distance_t dist1;
         distance_t dist2;
         index_t node1;
-        index_t node2;       
+        index_t node2;
 
         start_node = finish_node;
+        start_waypoint=finish_waypoint;
 
-        segment = FindClosestSegment(data->OSMNodes, data->OSMSegments, data->OSMWays, lat[i], lon[i], distmax, profile, &distmin, &node1, &node2, &dist1, &dist2);
+        segment = FindClosestSegment(data->OSMNodes, data->OSMSegments, data->OSMWays, lat[i-1], lon[i-1], distmax, profile, &distmin, &node1, &node2, &dist1, &dist2);
 
         if(segment!=NO_SEGMENT)
         {
@@ -205,19 +208,24 @@ extern int RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, con
             goto RoutinoCalculate_end;
         }
 
+
+        finish_waypoint = i;
+
         if(start_node == NO_NODE)
         {
             continue;
         }
 
 
-        results[i -1] = CalculateRoute(data->OSMNodes, data->OSMSegments, data->OSMWays, data->OSMRelations, profile, start_node, join_segment, finish_node, start_waypoint, finish_waypoint);
+        results[nResults] = CalculateRoute(data->OSMNodes, data->OSMSegments, data->OSMWays, data->OSMRelations, profile, start_node, join_segment, finish_node, start_waypoint, finish_waypoint);
 
+        join_segment = results[nResults]->last_segment;
+
+        nResults++;
     }
 
-    SimplifyResult(results, nCoord-1, data->OSMNodes, data->OSMSegments, data->OSMWays, profile);
+    route = SimplifyResult(results, nResults, data->OSMNodes, data->OSMSegments, data->OSMWays, profile);
 
-    res = 0;
 RoutinoCalculate_end:
 
     for(int n = 0; results[n] != NULL; n++)
@@ -225,9 +233,18 @@ RoutinoCalculate_end:
         FreeResultsList(results[n]);
     }
 
-    return res;
+    return route;
 }
 
+extern void RoutinoFreeRoute(T_RoutinoRoute * route)
+{
+    while(route)
+    {
+        T_RoutinoRoute * next = route->next;
+        free(route);
+        route = next;
+    }
+}
 
 static Results *CalculateRoute(Nodes *nodes,Segments *segments,Ways *ways,Relations *relations,Profile *profile,
                                index_t start_node,index_t prev_segment,index_t finish_node,

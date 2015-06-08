@@ -35,7 +35,7 @@ IGisItem::key_t CGisItemRte::keyUserFocus;
 /// used to create a copy of route with new parent
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
-    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentRte;
     key.project = project->getKey();
@@ -70,7 +70,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 /// used to create route from GPX file
 CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     : IGisItem(parent, eTypeRte, parent->childCount())
-    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     // --- start read and process data ----
     readRte(xml, rte);
@@ -83,7 +83,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
 
 CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
-    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -92,14 +92,14 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
 
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeRte, NOIDX)
-    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     loadFromDb(id, db);
 }
 
 CGisItemRte::CGisItemRte(const QPolygonF& l, const QString &name, IGisProject *project, int idx)
     : IGisItem(project, eTypeRte, idx)
-    , penForeground(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     rte.name = name;
     readRouteDataFromPolyLine(l);
@@ -235,31 +235,71 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
+    QVector<qint32> points;
+
     foreach(const rtept_t &rtept, rte.pts)
     {
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
         gis->convertRad2Px(pt);
 
-        line << pt;
+        line    << pt;
+        points  << 1;
 
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
+        foreach(const subpt_t& subpt, rtept.subpts)
+        {
+            QPointF pt(subpt.lon, subpt.lat);
+            gis->convertRad2Px(pt);
+            line    << pt;
+            if(subpt.type != subpt_t::eTypeNone)
+            {
+                points << 2;
+            }
+            else
+            {
+                points << 0;
+            }
+        }
     }
-
-    QList<QPolygonF> lines;
-    splitLineToViewport(line, extViewport, lines);
 
     p.setPen(penBackground);
-    foreach(const QPolygonF &line, lines)
+    p.drawPolyline(line);
+
+    p.setPen(Qt::NoPen);
+    p.setBrush(Qt::white);
+    for(int i = 0; i < line.size(); i++)
     {
-        p.drawPolyline(line);
+        switch(points[i])
+        {
+        case 1:
+            p.drawEllipse(line[i],7,7);
+            break;
+        case 2:
+            p.drawEllipse(line[i],4,4);
+            break;
+        }
     }
+
     p.setPen(penForeground);
     p.setBrush(penForeground.color());
-    foreach(const QPolygonF &line, lines)
+    drawArrows(line, extViewport, p);
+    p.drawPolyline(line);
+
+    p.setPen(Qt::NoPen);
+    for(int i = 0; i < line.size(); i++)
     {
-        p.drawPolyline(line);
-        drawArrows(line, extViewport, p);
+        switch(points[i])
+        {
+        case 1:
+            p.setBrush(Qt::red);
+            p.drawEllipse(line[i],5,5);
+            break;
+        case 2:
+            p.setBrush(Qt::cyan);
+            p.drawEllipse(line[i],2,2);
+            break;
+        }
     }
 }
 
@@ -319,11 +359,6 @@ void CGisItemRte::drawHighlight(QPainter& p)
 
     p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(line);
-
-    foreach(const QPointF &pt, line)
-    {
-        p.drawImage(pt - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
-    }
 }
 
 void CGisItemRte::readRouteDataFromPolyLine(const QPolygonF &l)
@@ -369,4 +404,41 @@ void CGisItemRte::getPolylineFromData(QPolygonF& l)
 void CGisItemRte::calc()
 {
     CRouterSetup::self().calcRoute(getKey());
+}
+
+void CGisItemRte::setResult(T_RoutinoRoute * route)
+{
+    qint32 idxRtept = -1;
+    rtept_t * rtept = 0;
+
+    T_RoutinoRoute * next = route;
+    while(next)
+    {
+        if(next->type == IMP_WAYPOINT)
+        {
+            idxRtept++;
+            rtept = &rte.pts[idxRtept];
+            rtept->subpts.clear();
+        }
+
+        if(rtept != 0)
+        {
+            rtept->subpts << subpt_t();
+            subpt_t& subpt = rtept->subpts.last();
+            subpt.lon = next->lon;
+            subpt.lat = next->lat;
+            if(next->type > IMP_JUNCT_CONT)
+            {
+                subpt.type = subpt_t::eTypeJunct;
+            }
+            else
+            {
+                subpt.type = subpt_t::eTypeNone;
+            }
+        }
+
+        next = next->next;
+    }
+
+    updateHistory();
 }

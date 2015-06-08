@@ -19,11 +19,12 @@
 #ifndef BINOUT_H
 #define BINOUT_H
 
-#include "types.h"
 #include "profiles.h"
 #include "results.h"
+#include "types.h"
+#include "routino.h"
 
-extern void SimplifyResult(Results ** results, int nresults, Nodes *nodes, Segments *segments, Ways *ways, Profile *profile);
+extern T_RoutinoRoute *SimplifyResult(Results ** results, int nresults, Nodes *nodes, Segments *segments, Ways *ways, Profile *profile);
 
 #endif //BINOUT_H
 

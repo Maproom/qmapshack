@@ -21,6 +21,7 @@
 
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
+#include <routino.h>
 
 #include <QPen>
 
@@ -31,10 +32,26 @@ class CQlgtRoute;
 class CGisItemRte : public IGisItem, public IGisLine
 {
 public:
+    struct subpt_t
+    {
+        subpt_t() : lon(NOFLOAT), lat(NOFLOAT){}
+
+        enum type_e
+        {
+              eTypeNone
+            , eTypeJunct
+        };
+
+        qreal lon;
+        qreal lat;
+        quint8 type;
+    };
+
     struct rtept_t : public wpt_t
     {
         QPixmap icon;
         QPointF focus;
+        QVector<subpt_t> subpts;
     };
 
     struct rte_t
@@ -102,6 +119,8 @@ public:
     void setLinks(const QList<link_t>& links);
 
     void calc();
+
+    void setResult(T_RoutinoRoute * route);
 
 private:
     void deriveSecondaryData();

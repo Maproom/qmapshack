@@ -18,12 +18,40 @@
 
 #ifndef ROUTINO_H
 #define ROUTINO_H
+
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+#define IMP_IGNORE      -1      /*+ Ignore this point. +*/
+#define IMP_UNIMPORTANT  0      /*+ An unimportant, intermediate, node. +*/
+#define IMP_RB_NOT_EXIT  1      /*+ A roundabout exit that is not taken. +*/
+#define IMP_JUNCT_CONT   2      /*+ An un-interesting junction where the route continues without comment. +*/
+#define IMP_CHANGE       3      /*+ The highway changes type but nothing else happens. +*/
+#define IMP_JUNCT_IMPORT 4      /*+ An interesting junction to be described. +*/
+#define IMP_RB_ENTRY     5      /*+ The entrance to a roundabout. +*/
+#define IMP_RB_EXIT      6      /*+ The exit from a roundabout. +*/
+#define IMP_MINI_RB      7      /*+ The location of a mini-roundabout. +*/
+#define IMP_UTURN        8      /*+ The location of a U-turn. +*/
+#define IMP_WAYPOINT     9      /*+ A waypoint. +*/
+
 typedef struct T_DataSet * H_RoutinoDataSet;
+
+typedef struct _T_RoutinoRoute
+{
+    struct _T_RoutinoRoute * next;
+    float lon;
+    float lat;
+    float dist;
+    float time;
+    uint32_t type;
+    uint32_t turn;
+    uint32_t bearing;
+
+}T_RoutinoRoute;
 
 /**
    @brief Initialize Routino library.
@@ -45,7 +73,9 @@ extern int RoutinoInit(const char * profiles, const char *translations);
 extern H_RoutinoDataSet RoutinoRegisterData(const char *dirname, const char * prefix);
 
 
-extern int RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord);
+extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord);
+
+extern void RoutinoFreeRoute(T_RoutinoRoute * route);
 
 /**
    @brief RoutinoFreeData

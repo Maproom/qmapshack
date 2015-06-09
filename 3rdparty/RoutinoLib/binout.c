@@ -425,6 +425,13 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
 
             if(next_result && important>IMP_JUNCT_CONT)
             {
+
+                next_waynameraw=WayName(ways,next_resultwayp);
+                if(!*next_waynameraw)
+                {
+                   next_waynameraw=translate_raw_highway[HIGHWAY(next_resultwayp->type)];
+                }
+
                 if(!first && textfile)
                 {
                     if(DISTANCE(resultsegmentp->distance)==0 || DISTANCE(next_resultsegmentp->distance)==0)
@@ -489,6 +496,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                         route_first->type = important;
                         route_first->turn = -1;
                         route_first->bearing = next_bearing_int;
+                        route_first->string = next_waynameraw;
 
                         route_next = route_first;
 
@@ -510,6 +518,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                         temp->type = important;
                         temp->turn = turn_int;
                         temp->bearing = next_bearing_int;
+                        route_first->string = next_waynameraw;
 
                         route_next->next = temp;
                         route_next = temp;
@@ -535,6 +544,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                         temp->type = important;
                         temp->turn = turn_int;
                         temp->bearing = next_bearing_int;
+                        route_first->string = next_waynameraw;
 
                         route_next->next = temp;
                         route_next = temp;

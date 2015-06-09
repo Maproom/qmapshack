@@ -42,15 +42,24 @@ typedef struct T_DataSet * H_RoutinoDataSet;
 
 typedef struct _T_RoutinoRoute
 {
+    /// pointer to next point. 0 if last point
     struct _T_RoutinoRoute * next;
+    /// the longitude in [rad]
     float lon;
+    /// the latitude in [rad]
     float lat;
+    /// the total distance in [m]
     float dist;
+    /// the total time in [s]
     float time;
+    /// the type of the point. one of IMP_*
     uint32_t type;
+    ///
     uint32_t turn;
+    ///
     uint32_t bearing;
-
+    /// string attached to point
+    const char * string;
 }T_RoutinoRoute;
 
 /**
@@ -60,26 +69,48 @@ typedef struct _T_RoutinoRoute
 
    @param profiles      a string pointer to the XML file defining the profiles
    @param translations  a string pointer to the XML file defining the translation tables
+
    @return Returns 0 on success and -1 on failure
  */
 extern int RoutinoInit(const char * profiles, const char *translations);
 
 /**
-   @brief RoutinoRegisterData
+   @brief Register a routing database and obtain a handle
+
    @param dirname
    @param prefix
-   @return
+
+   @return A handle to the data. This has to be used with RoutinoCalculate.
  */
 extern H_RoutinoDataSet RoutinoRegisterData(const char *dirname, const char * prefix);
 
+/**
+   @brief Calcualte a route.
 
-extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord);
+   The result will be a linked list of intermediate route points. The original route points will be included with type IMP_WAYPOINT.
 
+   @param data          a handle to a routing database
+   @param profilename   the profile name to use. Valid names are: "foot", "horse", "wheelchair", "bicycle", "moped", "motorcycle", "motorcar", "goods"
+   @param quickest      set to 0 for shortest and 1 for quickest
+   @param lon           pointer to an array of longitude coordinates
+   @param lat           pointer to an array of latitude coordinates
+   @param nCoord        number off coordinates
+
+   @return A linked list of routepoints.
+ */
+extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, int quickest, const float * lon, const float * lat, int nCoord);
+
+/**
+   @brief Free the memory of the route information allocated by RoutinoCalculate
+
+   @param route         ointer to linked list of routepoints.
+ */
 extern void RoutinoFreeRoute(T_RoutinoRoute * route);
 
 /**
-   @brief RoutinoFreeData
-   @param data
+   @brief Free a routing database.
+
+   @param data  the handle to the database
  */
 extern void RoutinoFreeData(H_RoutinoDataSet data);
 

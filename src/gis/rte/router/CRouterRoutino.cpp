@@ -167,7 +167,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         lat << pt.y();
     }
 
-    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), lon.data(), lat.data(), line.size());
+    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());
 
     rte->setResult(route);
 

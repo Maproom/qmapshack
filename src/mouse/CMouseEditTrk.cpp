@@ -74,6 +74,14 @@ void CMouseEditTrk::slotAbort()
 void CMouseEditTrk::slotCopyToOrig()
 {
     canvas->reportStatus(key.item,"");
+
+    int res = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+
+    if(res != QMessageBox::Ok)
+    {
+        return;
+    }
+
     IMouseEditLine::slotCopyToOrig();
 }
 

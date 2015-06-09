@@ -34,9 +34,8 @@
 #define MAXSEARCH 1
 
 static int isInitialized    = 0;
-
-int option_quickest  = 0;
-int option_quiet    = 0;
+int option_quickest         = 0;
+int option_quiet            = 0;
 
 
 struct T_DataSet
@@ -79,11 +78,19 @@ int RoutinoRelease()
         return 0;
     }
 
+    ///@todo free memory from profiles and translations
+
+    isInitialized = 0;
     return 0;
 }
 
 extern H_RoutinoDataSet RoutinoRegisterData(const char * dirname, const char * prefix)
 {
+    if(!isInitialized)
+    {
+        return 0;
+    }
+
     char * filename;
     Nodes     *OSMNodes;
     Segments  *OSMSegments;
@@ -141,16 +148,23 @@ RegisterDataErrorNodes:
 
 extern void RoutinoFreeData(H_RoutinoDataSet data)
 {
-    DestroyNodeList(data->OSMNodes);
-    DestroySegmentList(data->OSMSegments);
-    DestroyWayList(data->OSMWays);
-    DestroyRelationList(data->OSMRelations);
-
-    free(data);
+    if(data)
+    {
+        DestroyNodeList(data->OSMNodes);
+        DestroySegmentList(data->OSMSegments);
+        DestroyWayList(data->OSMWays);
+        DestroyRelationList(data->OSMRelations);
+        free(data);
+    }
 }
 
-extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, const float * lon, const float * lat, int nCoord)
+extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, int quickest, const float * lon, const float * lat, int nCoord)
 {
+    if(!isInitialized)
+    {
+        return 0;
+    }
+
     if(nCoord < 2)
     {
         return 0;
@@ -167,7 +181,8 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
         return 0;
     }
 
-    printf("\n");
+    option_quickest = quickest;
+
     int i;
     T_RoutinoRoute * route         = 0;
     int nResults                    = 0;    
@@ -201,7 +216,6 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
             finish_node=NO_NODE;
         }
 
-        printf("%i %i %i %i %i\n", node1, node2, finish_node, dist1, dist2);
 
         if(finish_node == NO_NODE)
         {
@@ -245,6 +259,8 @@ extern void RoutinoFreeRoute(T_RoutinoRoute * route)
         route = next;
     }
 }
+
+// ---------------------- stop API ------------------------------
 
 static Results *CalculateRoute(Nodes *nodes,Segments *segments,Ways *ways,Relations *relations,Profile *profile,
                                index_t start_node,index_t prev_segment,index_t finish_node,

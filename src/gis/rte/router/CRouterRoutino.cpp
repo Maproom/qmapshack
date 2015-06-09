@@ -63,8 +63,12 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
 
     SETTINGS;
     dbPaths = cfg.value("Route/routino/paths", dbPaths).toStringList();
-
     buildDatabaseList();
+
+    comboProfile->setCurrentIndex(cfg.value("Route/routino/profile",0).toInt());
+    comboMode->setCurrentIndex(cfg.value("Route/routino/mode",0).toInt());
+    comboDatabase->setCurrentIndex(cfg.value("Route/routino/database",0).toInt());
+
     updateHelpText();
 }
 
@@ -72,6 +76,9 @@ CRouterRoutino::~CRouterRoutino()
 {
     SETTINGS;
     cfg.setValue("Route/routino/paths", dbPaths);
+    cfg.setValue("Route/routino/profile", comboProfile->currentIndex());
+    cfg.setValue("Route/routino/mode", comboMode->currentIndex());
+    cfg.setValue("Route/routino/database", comboDatabase->currentIndex());
 
     freeDatabaseList();
     RoutinoRelease();

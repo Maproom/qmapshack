@@ -403,6 +403,10 @@ void CGisItemRte::getPolylineFromData(QPolygonF& l)
 
 void CGisItemRte::calc()
 {
+    for(int i = 0; i < rte.pts.size(); i++)
+    {
+        rte.pts[i].subpts.clear();
+    }
     CRouterSetup::self().calcRoute(getKey());
 }
 

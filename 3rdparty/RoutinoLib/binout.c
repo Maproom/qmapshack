@@ -463,7 +463,6 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
             }
 
             /* Print out the important points (junctions / waypoints) */
-
             if(important>IMP_IGNORE)
             {
                 if(textfile)
@@ -518,7 +517,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                         temp->type = important;
                         temp->turn = turn_int;
                         temp->bearing = next_bearing_int;
-                        route_first->string = next_waynameraw;
+                        temp->string = next_waynameraw;
 
                         route_next->next = temp;
                         route_next = temp;
@@ -544,7 +543,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                         temp->type = important;
                         temp->turn = turn_int;
                         temp->bearing = next_bearing_int;
-                        route_first->string = next_waynameraw;
+                        temp->string = next_waynameraw;
 
                         route_next->next = temp;
                         route_next = temp;

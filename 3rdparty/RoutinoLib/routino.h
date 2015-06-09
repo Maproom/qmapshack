@@ -55,9 +55,9 @@ typedef struct _T_RoutinoRoute
     /// the type of the point. one of IMP_*
     uint32_t type;
     ///
-    uint32_t turn;
+    int32_t turn;
     ///
-    uint32_t bearing;
+    int32_t bearing;
     /// string attached to point
     const char * string;
 }T_RoutinoRoute;

@@ -273,10 +273,10 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         switch(points[i])
         {
         case 1:
-            p.drawEllipse(line[i],7,7);
+            p.drawEllipse(line[i],9,9);
             break;
         case 2:
-            p.drawEllipse(line[i],4,4);
+            p.drawEllipse(line[i],5,5);
             break;
         }
     }
@@ -293,11 +293,11 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         {
         case 1:
             p.setBrush(Qt::red);
-            p.drawEllipse(line[i],5,5);
+            p.drawEllipse(line[i],7,7);
             break;
         case 2:
             p.setBrush(Qt::cyan);
-            p.drawEllipse(line[i],2,2);
+            p.drawEllipse(line[i],3,3);
             break;
         }
     }
@@ -316,8 +316,8 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
         gis->convertRad2Px(pt);
-        pt = pt - rtept.focus;
-        p.drawPixmap(pt, rtept.icon);
+        //pt = pt - rtept.focus;
+        //p.drawPixmap(pt, rtept.icon);
 
         QRectF rect = fm.boundingRect(rtept.name);
         rect.adjust(-2,-2,2,2);
@@ -431,7 +431,17 @@ void CGisItemRte::setResult(T_RoutinoRoute * route)
             subpt_t& subpt = rtept->subpts.last();
             subpt.lon = next->lon;
             subpt.lat = next->lat;
-            if(next->type > IMP_JUNCT_CONT)
+
+            if(next->string != 0)
+            {
+                qDebug() << next->type << next->string << next->turn << next->bearing;
+            }
+            else
+            {
+                qDebug() << next->type << next->turn << next->bearing;
+            }
+
+            if(next->type > IMP_CHANGE)
             {
                 subpt.type = subpt_t::eTypeJunct;
             }

@@ -19,7 +19,7 @@
 #include "CRouterMapQuest.h"
 
 CRouterMapQuest::CRouterMapQuest(QWidget *parent)
-    : IRouter(parent)
+    : IRouter(false, parent)
 {
     setupUi(this);
 }
@@ -30,5 +30,4 @@ CRouterMapQuest::~CRouterMapQuest()
 
 void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
 {
-
 }

@@ -21,6 +21,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
+#include "gis/rte/router/CRouterSetup.h"
 #include "mouse/CScrOptEditLine.h"
 #include "mouse/CScrOptPoint.h"
 #include "mouse/CScrOptRange.h"
@@ -30,8 +31,9 @@
 
 #include <QtWidgets>
 
-IMouseEditLine::IMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * parent)
+IMouseEditLine::IMouseEditLine(quint32 features, const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
+    , features(features)
     , state(eStateAddPointFwd)
     , idxFocus(0)
     , idxStart(NOIDX)
@@ -52,8 +54,9 @@ IMouseEditLine::IMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * p
     connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
 }
 
-IMouseEditLine::IMouseEditLine(IGisLine &src, CGisDraw *gis, CCanvas *parent)
+IMouseEditLine::IMouseEditLine(quint32 features, IGisLine &src, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
+    , features(features)
     , state(eStateIdle)
     , idxFocus(NOIDX)
     , idxStart(NOIDX)
@@ -80,7 +83,7 @@ IMouseEditLine::~IMouseEditLine()
 
 void IMouseEditLine::drawLine(const QPolygonF &l, QPainter& p)
 {
-    p.setPen(QPen(Qt::magenta, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(Qt::magenta, 9, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(l);
     p.setPen(QPen(Qt::white, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(l);
@@ -640,29 +643,45 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
             px2 = newLine[idxFocus];
         }
 
-        if(canvas->findPolylineCloseBy(px2, px2, 10, leadLineCoord))
+        bool done = false;
+        if(CRouterSetup::self().hasFastRouting() && (features & eFeatureRouting))
         {
-            leadLinePixel = leadLineCoord;
-            gis->convertRad2Px(leadLinePixel);
+            QPointF coord1 = px1;
+            QPointF coord2 = px2;
 
-            segment_t result;
-            GPS_Math_SubPolyline(px1, px2, 10, leadLinePixel, result);
-            result.apply(leadLineCoord, leadLinePixel, subLineCoord, subLinePixel, gis);
+            gis->convertPx2Rad(coord1);
+            gis->convertPx2Rad(coord2);
 
-            if(state == eStateAddPointBwd)
-            {
-                QPolygonF tmp1;
-                QPolygonF tmp2;
-                for(int i = 0; i < subLineCoord.size(); i++)
-                {
-                    tmp1.push_front(subLineCoord[i]);
-                    tmp2.push_front(subLinePixel[i]);
-                }
-                subLineCoord = tmp1;
-                subLinePixel = tmp2;
-            }
+            done = CRouterSetup::self().calcRoute(coord1, coord2, subLineCoord);
+            subLinePixel = subLineCoord;
+            gis->convertRad2Px(subLinePixel);
         }
 
+        if(!done && (features & eFeatureSnapToLines))
+        {
+            if(canvas->findPolylineCloseBy(px2, px2, 10, leadLineCoord))
+            {
+                leadLinePixel = leadLineCoord;
+                gis->convertRad2Px(leadLinePixel);
+
+                segment_t result;
+                GPS_Math_SubPolyline(px1, px2, 10, leadLinePixel, result);
+                result.apply(leadLineCoord, leadLinePixel, subLineCoord, subLinePixel, gis);
+
+                if(state == eStateAddPointBwd)
+                {
+                    QPolygonF tmp1;
+                    QPolygonF tmp2;
+                    for(int i = 0; i < subLineCoord.size(); i++)
+                    {
+                        tmp1.push_front(subLineCoord[i]);
+                        tmp2.push_front(subLinePixel[i]);
+                    }
+                    subLineCoord = tmp1;
+                    subLinePixel = tmp2;
+                }
+            }
+        }
 
         canvas->update();
         break;

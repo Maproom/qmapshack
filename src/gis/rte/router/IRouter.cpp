@@ -18,8 +18,9 @@
 
 #include "gis/rte/router/IRouter.h"
 
-IRouter::IRouter(QWidget *parent)
+IRouter::IRouter(bool fastRouting, QWidget *parent)
     : QWidget(parent)
+    , fastRouting(fastRouting)
 {
 }
 

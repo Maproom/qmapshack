@@ -34,20 +34,26 @@ class IMouseEditLine : public IMouse
 {
     Q_OBJECT
 public:
+    enum features_e
+    {
+        eFeatureSnapToLines    = 0x01
+        ,eFeatureRouting        = 0x02
+    };
+
     /**
        @brief Start to create a new track with given point as first track point
        @param point     the starting point
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(const QPointF& point, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(quint32 faetures, const QPointF& point, CGisDraw * gis, CCanvas * parent);
     /**
        @brief Edit an existing track
        @param trk       the track to edit
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(IGisLine &src, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(quint32 features, IGisLine &src, CGisDraw * gis, CCanvas * parent);
     virtual ~IMouseEditLine();
 
     void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
@@ -107,6 +113,8 @@ private:
     void drawArrows(const QPolygonF &l, QPainter& p);
     void drawLeadLine(const QPolygonF &l, QPainter& p);
     int getPointCloseBy(const QPoint& screenPos);
+
+    quint32 features;
 
     /// backup for coord1
     QPolygonF save;

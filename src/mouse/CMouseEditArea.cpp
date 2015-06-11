@@ -25,13 +25,13 @@
 #include <QtWidgets>
 
 CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(point, gis, parent)
+    : IMouseEditLine(eFeatureSnapToLines, point, gis, parent)
 {
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
 }
 
 CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(area, gis, parent)
+    : IMouseEditLine(eFeatureSnapToLines, area, gis, parent)
 {
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveArea.png"),0,0);
     key         = area.getKey();

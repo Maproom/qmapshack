@@ -26,13 +26,13 @@
 
 
 CMouseEditRte::CMouseEditRte(const QPointF &point, CGisDraw *gis, CCanvas *parent)
-    : IMouseEditLine(point, gis, parent)
+    : IMouseEditLine(eFeatureRouting, point, gis, parent)
 {
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
 }
 
 CMouseEditRte::CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(rte, gis, parent)
+    : IMouseEditLine(eFeatureRouting, rte, gis, parent)
 {
     cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
     key         = rte.getKey();

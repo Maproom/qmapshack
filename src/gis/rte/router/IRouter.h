@@ -19,17 +19,25 @@
 #ifndef IROUTER_H
 #define IROUTER_H
 
-#include <QWidget>
 #include "gis/IGisItem.h"
+#include <QWidget>
 
 class IRouter : public QWidget
 {
     Q_OBJECT
 public:
-    IRouter(QWidget * parent);
+    IRouter(bool fastRouting, QWidget * parent);
     virtual ~IRouter();
 
     virtual void calcRoute(const IGisItem::key_t& key) = 0;
+    virtual bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) = 0;
+    bool hasFastRouting()
+    {
+        return fastRouting;
+    }
+
+private:
+    bool fastRouting;
 };
 
 #endif //IROUTER_H

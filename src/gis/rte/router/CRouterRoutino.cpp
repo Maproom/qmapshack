@@ -16,18 +16,18 @@
 
 **********************************************************************************************/
 
-#include "gis/rte/router/CRouterRoutino.h"
-#include "gis/rte/router/CRouterRoutinoPathSetup.h"
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/CRouterRoutino.h"
+#include "gis/rte/router/CRouterRoutinoPathSetup.h"
 #include "helpers/CSettings.h"
 #include <QtWidgets>
-#include <routino.h>
 #include <proj_api.h>
+#include <routino.h>
 
 
 CRouterRoutino::CRouterRoutino(QWidget *parent)
-    : IRouter(parent)
+    : IRouter(true, parent)
 {
     setupUi(this);
 
@@ -161,7 +161,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     QPolygonF line;
     QVector<float> lon,lat;
     rte->getPolylineFromData(line);
-    foreach(const QPointF& pt, line)
+    foreach(const QPointF &pt, line)
     {
         lon << pt.x();
         lat << pt.y();
@@ -172,4 +172,33 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     rte->setResult(route);
 
     RoutinoFreeRoute(route);
+}
+
+
+bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+{
+    H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
+    QString profile         = comboProfile->currentData(Qt::UserRole).toString();
+
+
+    float lon[2];
+    float lat[2];
+
+    lon[0] = p1.x();
+    lon[1] = p2.x();
+
+    lat[0] = p1.y();
+    lat[1] = p2.y();
+
+    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon, lat, 2);
+
+    T_RoutinoRoute * next = route;
+    while(next)
+    {
+        coords << QPointF(next->lon, next->lat);
+        next = next->next;
+    }
+
+    RoutinoFreeRoute(route);
+    return !coords.isEmpty();
 }

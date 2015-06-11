@@ -19,18 +19,24 @@
 #ifndef CROUTERSETUP_H
 #define CROUTERSETUP_H
 
-#include "ui_IRouterSetup.h"
 #include "gis/IGisItem.h"
+#include "ui_IRouterSetup.h"
 #include <QWidget>
 
 class CRouterSetup : public QWidget, private Ui::IRouterSetup
 {
     Q_OBJECT
-public:    
-    static CRouterSetup& self(){return *pSelf;}
+public:
+    static CRouterSetup& self()
+    {
+        return *pSelf;
+    }
     virtual ~CRouterSetup();
 
     void calcRoute(const IGisItem::key_t &key);
+    bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
+
+    bool hasFastRouting();
 
 private slots:
     void slotSelectRouter(int i);

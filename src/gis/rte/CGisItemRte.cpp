@@ -243,15 +243,15 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         gis->convertRad2Px(pt);
 
-        line    << pt;
-        points  << 1;
+        line << pt;
+        points << 1;
 
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
-        foreach(const subpt_t& subpt, rtept.subpts)
+        foreach(const subpt_t &subpt, rtept.subpts)
         {
             QPointF pt(subpt.lon, subpt.lat);
             gis->convertRad2Px(pt);
-            line    << pt;
+            line << pt;
             if(subpt.type != subpt_t::eTypeNone)
             {
                 points << 2;
@@ -275,6 +275,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         case 1:
             p.drawEllipse(line[i],9,9);
             break;
+
         case 2:
             p.drawEllipse(line[i],5,5);
             break;
@@ -295,6 +296,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             p.setBrush(Qt::red);
             p.drawEllipse(line[i],7,7);
             break;
+
         case 2:
             p.setBrush(Qt::cyan);
             p.drawEllipse(line[i],3,3);

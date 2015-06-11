@@ -34,11 +34,13 @@ class CGisItemRte : public IGisItem, public IGisLine
 public:
     struct subpt_t
     {
-        subpt_t() : lon(NOFLOAT), lat(NOFLOAT){}
+        subpt_t() : lon(NOFLOAT), lat(NOFLOAT)
+        {
+        }
 
         enum type_e
         {
-              eTypeNone
+            eTypeNone
             , eTypeJunct
         };
 

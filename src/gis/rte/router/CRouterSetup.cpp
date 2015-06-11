@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisWidget.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterMapQuest.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterSetup.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/CGisWidget.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
@@ -29,7 +29,7 @@ CRouterSetup * CRouterSetup::pSelf = 0;
 
 CRouterSetup::CRouterSetup(QWidget * parent)
     : QWidget(parent)
-{    
+{
     setupUi(this);
     pSelf = this;
 
@@ -51,6 +51,16 @@ CRouterSetup::~CRouterSetup()
     cfg.setValue("Route/current", comboRouter->currentIndex());
 }
 
+bool CRouterSetup::hasFastRouting()
+{
+    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    if(router)
+    {
+        return router->hasFastRouting();
+    }
+    return false;
+}
+
 void CRouterSetup::slotSelectRouter(int i)
 {
     stackedWidget->setCurrentIndex(i);
@@ -63,4 +73,15 @@ void CRouterSetup::calcRoute(const IGisItem::key_t& key)
     {
         router->calcRoute(key);
     }
+}
+
+bool CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+{
+    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    if(router)
+    {
+        return router->calcRoute(p1, p2, coords);
+    }
+
+    return false;
 }

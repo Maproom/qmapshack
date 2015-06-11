@@ -31,6 +31,7 @@ public:
     virtual ~CRouterRoutino();
 
     void calcRoute(const IGisItem::key_t& key);
+    bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
 
 private slots:
     void slotSetupPaths();

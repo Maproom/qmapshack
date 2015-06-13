@@ -156,6 +156,11 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     }
 
     H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
+    if(data == 0)
+    {
+        return;
+    }
+
     QString profile         = comboProfile->currentData(Qt::UserRole).toString();
 
     QPolygonF line;
@@ -178,6 +183,10 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
     H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
+    if(data == 0)
+    {
+        return -1;
+    }
     QString profile         = comboProfile->currentData(Qt::UserRole).toString();
 
 

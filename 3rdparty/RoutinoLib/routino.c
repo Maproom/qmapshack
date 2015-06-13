@@ -193,7 +193,7 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
     waypoint_t finish_waypoint      = NO_WAYPOINT;
     for(i = 1; i <= nCoord; i++)
     {
-        distance_t distmax          = km_to_distance(MAXSEARCH);
+        distance_t distmax          = 300;//km_to_distance(MAXSEARCH);
         index_t segment             = NO_SEGMENT;
         index_t join_segment        = NO_SEGMENT;
         distance_t distmin;

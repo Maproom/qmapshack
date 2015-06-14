@@ -79,7 +79,7 @@ void CMouseEditRte::slotCopyToNew()
 {
     canvas->reportStatus(key.item,"");
 
-    if(coords1.size() < 2)
+    if(points.size() < 2)
     {
         return;
     }
@@ -105,7 +105,7 @@ void CMouseEditRte::slotCopyToNew()
         return;
     }
 
-    new CGisItemRte(coords1,name, project, NOIDX);
+    new CGisItemRte(points,name, project, NOIDX);
 
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

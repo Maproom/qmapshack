@@ -79,7 +79,7 @@ public:
     CGisItemRte(const history_t& hist, IGisProject * project);
     CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
     CGisItemRte(const CQlgtRoute& rte1);
-    CGisItemRte(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
+    CGisItemRte(const SGisLine& l, const QString &name, IGisProject *project, int idx);
     virtual ~CGisItemRte();
 
     QDataStream& operator<<(QDataStream& stream);
@@ -99,9 +99,9 @@ public:
     bool isCloseTo(const QPointF& pos);
     void gainUserFocus(bool yes);
 
-    void setDataFromPolyline(const QPolygonF& l);
+    void setDataFromPolyline(const SGisLine& l);
 
-    void getPolylineFromData(QPolygonF& l);
+    void getPolylineFromData(SGisLine &l);
 
     const QString& getComment() const
     {
@@ -128,7 +128,7 @@ private:
     void deriveSecondaryData();
     void setSymbol();
     void readRte(const QDomNode& xml, rte_t& rte);
-    void readRouteDataFromPolyLine(const QPolygonF &l);
+    void readRouteDataFromGisLine(const SGisLine &l);
 
     static key_t keyUserFocus;
 

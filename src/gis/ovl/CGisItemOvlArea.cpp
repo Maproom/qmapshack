@@ -113,13 +113,13 @@ const Qt::BrushStyle CGisItemOvlArea::brushStyles[OVL_N_STYLES] =
 
 IGisItem::key_t CGisItemOvlArea::keyUserFocus;
 
-CGisItemOvlArea::CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx)
+CGisItemOvlArea::CGisItemOvlArea(const SGisLine &line, const QString &name, IGisProject * project, int idx)
     : IGisItem(project, eTypeOvl, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     area.name = name;
-    readLine(line);
+    readAreaDataFromGisLine(line);
 
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
 
@@ -244,18 +244,19 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
     return line[idx];
 }
 
-void CGisItemOvlArea::readLine(const QPolygonF &line)
+void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
 {
-    area.pts.clear();
-    area.pts.resize(line.size());
+    area.pts.clear();    
 
-    for(int i = 0; i < line.size(); i++)
+    for(int i = 0; i < l.size(); i++)
     {
-        pt_t& areapt        = area.pts[i];
-        const QPointF& pt   = line[i];
+        area.pts << pt_t();
 
-        areapt.lon = pt.x() * RAD_TO_DEG;
-        areapt.lat = pt.y() * RAD_TO_DEG;
+        pt_t& areapt        = area.pts.last();
+        const point_t& pt   = l[i];
+
+        areapt.lon = pt.coord.x() * RAD_TO_DEG;
+        areapt.lat = pt.coord.y() * RAD_TO_DEG;
     }
 
     deriveSecondaryData();
@@ -473,18 +474,18 @@ QString CGisItemOvlArea::getInfo(bool allowEdit) const
     return str;
 }
 
-void CGisItemOvlArea::getPolylineFromData(QPolygonF& line)
+void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
 {
-    line.clear();
+    l.clear();
     foreach(const pt_t &pt, area.pts)
     {
-        line << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
+        l << point_t(QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD));
     }
 }
 
-void CGisItemOvlArea::setDataFromPolyline(const QPolygonF& line)
+void CGisItemOvlArea::setDataFromPolyline(const SGisLine& l)
 {
-    readLine(line);
+    readAreaDataFromGisLine(l);
 
     flags |= eFlagTainted;
 

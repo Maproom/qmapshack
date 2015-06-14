@@ -206,7 +206,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
 }
 
 
-CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * project, int idx)
+CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
     , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , mode(eModeNormal)
@@ -217,7 +217,7 @@ CGisItemTrk::CGisItemTrk(const QPolygonF& l, const QString& name, IGisProject * 
     , rangeState(eRangeStateIdle)
 {
     trk.name = name;
-    readTrackDataFromPolyLine(l);
+    readTrackDataFromGisLine(l);
 
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
     setColor(str2color(""));
@@ -320,7 +320,7 @@ void CGisItemTrk::setSymbol()
     setColor(str2color(trk.color));
 }
 
-void CGisItemTrk::setDataFromPolyline(const QPolygonF &l)
+void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
 {
     /*
         as this will change the line significantly we better stop
@@ -334,7 +334,7 @@ void CGisItemTrk::setDataFromPolyline(const QPolygonF &l)
 
     delete dlgDetails;
 
-    readTrackDataFromPolyLine(l);
+    readTrackDataFromGisLine(l);
 
     flags |= eFlagTainted;
     changed(QObject::tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
@@ -356,25 +356,50 @@ void CGisItemTrk::getPolylineFromData(QPolygonF &l)
     }
 }
 
-void CGisItemTrk::readTrackDataFromPolyLine(const QPolygonF &l)
+void CGisItemTrk::getPolylineFromData(SGisLine &l)
+{
+    l.clear();
+    foreach (const trkseg_t &seg, trk.segs)
+    {
+        foreach(const trkpt_t &pt, seg.pts)
+        {
+            if(pt.flags & trkpt_t::eHidden)
+            {
+                continue;
+            }
+            l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+        }
+    }
+}
+
+void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
 {
     trk.segs.clear();
     trk.segs.resize(1);
     trkseg_t& seg = trk.segs.first();
 
-    seg.pts.resize(l.size());
-
-    QPolygonF ele(l.size());
-    CMainWindow::self().getEelevationAt(l, ele);
-
     for(int i = 0; i < l.size(); i++)
     {
-        trkpt_t& trkpt      = seg.pts[i];
-        const QPointF& pt   = l[i];
+        seg.pts << trkpt_t();
 
-        trkpt.lon = pt.x() * RAD_TO_DEG;
-        trkpt.lat = pt.y() * RAD_TO_DEG;
-        trkpt.ele = ele[i].y();
+        trkpt_t& trkpt      = seg.pts.last();
+        const point_t& pt   = l[i];
+
+        trkpt.lon = pt.coord.x() * RAD_TO_DEG;
+        trkpt.lat = pt.coord.y() * RAD_TO_DEG;
+        trkpt.ele = pt.ele;
+
+        for(int n = 0; n < pt.subpts.size(); n++)
+        {
+            seg.pts << trkpt_t();
+
+            trkpt_t& trkpt      = seg.pts.last();
+            const subpt_t& sub  = pt.subpts[n];
+
+            trkpt.lon = sub.coord.x() * RAD_TO_DEG;
+            trkpt.lat = sub.coord.y() * RAD_TO_DEG;
+            trkpt.ele = sub.ele;
+        }
     }
 
     deriveSecondaryData();

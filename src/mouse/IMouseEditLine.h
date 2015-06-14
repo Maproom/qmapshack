@@ -20,6 +20,7 @@
 #define IMOUSEEDITLINE_H
 
 #include "mouse/IMouse.h"
+#include "gis/IGisLine.h"
 #include <QPointer>
 #include <QPolygonF>
 
@@ -102,11 +103,16 @@ protected:
     virtual IGisLine * getGisLine() = 0;
     /// shadow cursor needed to restore cursor after some actions providing their own cursor.
     QCursor cursor1;
-    /// the line's coordinates in [rad]
-    QPolygonF coords1;
+
+    SGisLine points;
 
 private:
+    void commonSetup();
     quint32 features;
+
+    CScrOptEditLine * scrOptEditLine;
+
+
 };
 
 #endif //IMOUSEEDITLINE_H

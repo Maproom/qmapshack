@@ -97,12 +97,12 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     loadFromDb(id, db);
 }
 
-CGisItemRte::CGisItemRte(const QPolygonF& l, const QString &name, IGisProject *project, int idx)
+CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *project, int idx)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     rte.name = name;
-    readRouteDataFromPolyLine(l);
+    readRouteDataFromGisLine(l);
 
     flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
 
@@ -363,43 +363,43 @@ void CGisItemRte::drawHighlight(QPainter& p)
     p.drawPolyline(line);
 }
 
-void CGisItemRte::readRouteDataFromPolyLine(const QPolygonF &l)
+void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 {
     rte.pts.clear();
-    rte.pts.resize(l.size());
-
-    QPolygonF ele(l.size());
-    CMainWindow::self().getEelevationAt(l, ele);
 
     for(int i = 0; i < l.size(); i++)
     {
-        rtept_t& rtept      = rte.pts[i];
-        const QPointF& pt   = l[i];
+        rte.pts << rtept_t();
 
-        rtept.lon = pt.x() * RAD_TO_DEG;
-        rtept.lat = pt.y() * RAD_TO_DEG;
-        rtept.ele = ele[i].y();
+        rtept_t& rtept      = rte.pts.last();
+        const point_t& pt   = l[i];
+
+        rtept.lon = pt.coord.x() * RAD_TO_DEG;
+        rtept.lat = pt.coord.y() * RAD_TO_DEG;
+        rtept.ele = pt.ele;
+
+        rtept.subpts.clear();
     }
 
     deriveSecondaryData();
 }
 
-void CGisItemRte::setDataFromPolyline(const QPolygonF& l)
+void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 {
 //    delete dlgDetails;
 
-    readRouteDataFromPolyLine(l);
+    readRouteDataFromGisLine(l);
 
     flags |= eFlagTainted;
     changed(QObject::tr("Changed route points."), "://icons/48x48/LineMove.png");
 }
 
-void CGisItemRte::getPolylineFromData(QPolygonF& l)
+void CGisItemRte::getPolylineFromData(SGisLine& l)
 {
     l.clear();
     foreach(const rtept_t &pt, rte.pts)
     {
-        l << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
+        l << point_t(QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD));
     }
 }
 

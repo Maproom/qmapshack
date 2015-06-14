@@ -16,7 +16,45 @@
 
 **********************************************************************************************/
 
-#include "IGisLine.h"
+#include "gis/IGisLine.h"
+#include "gis/CGisDraw.h"
+#include "dem/CDemDraw.h"
+
+IGisLine::subpt_t::subpt_t()
+    : ele(NOINT)
+{
+
+}
+
+IGisLine::point_t::point_t(const QPointF& pt)
+{
+    coord = pt;
+    pixel = pt;
+}
+
+void IGisLine::point_t::resetElevation()
+{
+    ele = NOINT;
+    for(int i = 0; i < subpts.size(); i++)
+    {
+        subpts[i].ele = NOINT;
+    }
+}
+
+void SGisLine::updateElevation(CDemDraw * dem)
+{
+    for(int i = 0; i < size(); i++)
+    {
+        IGisLine::point_t& pt = (*this)[i];
+        pt.ele = dem->getElevationAt(pt.coord);
+
+        for(int n = 0; n < pt.subpts.size(); n++)
+        {
+            IGisLine::subpt_t& sub = pt.subpts[n];
+            sub.ele = dem->getElevationAt(sub.coord);
+        }
+    }
+}
 
 IGisLine::IGisLine()
 {

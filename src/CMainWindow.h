@@ -20,6 +20,7 @@
 #define CMAINWINDOW_H
 
 #include "ui_IMainWindow.h"
+#include "gis/IGisLine.h"
 #include <QMainWindow>
 
 class CMapList;
@@ -62,6 +63,7 @@ public:
      */
     qreal getEelevationAt(const QPointF &pos);
     void  getEelevationAt(const QPolygonF& pos, QPolygonF &ele);
+    void  getEelevationAt(SGisLine &line);
     /**
        @brief Get pointer to the currently visibale canvas object.
        @return If the currently visible tab does not contain a CCanvas object 0 is returned.

@@ -81,7 +81,7 @@ public:
        @param project
        @param idx
      */
-    CGisItemTrk(const QPolygonF& l, const QString &name, IGisProject *project, int idx);
+    CGisItemTrk(const SGisLine &l, const QString &name, IGisProject *project, int idx);
     /**
        @brief Used to create track from GPX file
        @param xml
@@ -175,7 +175,8 @@ public:
     {
         return trk.links;
     }
-    void getPolylineFromData(QPolygonF& l);
+    void getPolylineFromData(QPolygonF &l);
+    void getPolylineFromData(SGisLine& l);
     const QDateTime& getTimeStart() const
     {
         return timeStart;
@@ -197,7 +198,7 @@ public:
     void setComment(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
-    void setDataFromPolyline(const QPolygonF& l);
+    void setDataFromPolyline(const SGisLine &l);
 
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& screenPos);
@@ -487,7 +488,7 @@ private:
 
        @param l     A polyline with coordinates [rad]
      */
-    void readTrackDataFromPolyLine(const QPolygonF &l);
+    void readTrackDataFromGisLine(const SGisLine &l);
     /**
        @brief Overide IGisItem::changed() method
 

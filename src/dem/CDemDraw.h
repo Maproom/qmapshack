@@ -49,6 +49,7 @@ public:
 
     qreal getElevationAt(const QPointF& pos);
     void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
+    void  getElevationAt(SGisLine& line);
 
     void setProjection(const QString& proj);
 

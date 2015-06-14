@@ -90,7 +90,7 @@ void CMouseEditTrk::slotCopyToNew()
 {
     canvas->reportStatus(key.item,"");
 
-    if(coords1.size() < 2)
+    if(points.size() < 2)
     {
         return;
     }
@@ -116,7 +116,9 @@ void CMouseEditTrk::slotCopyToNew()
         return;
     }
 
-    new CGisItemTrk(coords1,name, project, NOIDX);
+    CMainWindow::self().getEelevationAt(points);
+
+    new CGisItemTrk(points,name, project, NOIDX);
 
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

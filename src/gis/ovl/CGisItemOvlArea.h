@@ -36,7 +36,7 @@ class IQlgtOverlay;
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
 public:
-    CGisItemOvlArea(const QPolygonF& line, const QString &name, IGisProject * project, int idx);
+    CGisItemOvlArea(const SGisLine& line, const QString &name, IGisProject * project, int idx);
     CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);
     CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
     CGisItemOvlArea(const history_t& hist, IGisProject * project);
@@ -53,7 +53,7 @@ public:
         return colorIdx;
     }
     QString getInfo(bool allowEdit = false) const;
-    void getPolylineFromData(QPolygonF& line);
+    void getPolylineFromData(SGisLine& l);
     const QString& getComment() const
     {
         return area.cmt;
@@ -81,7 +81,7 @@ public:
 
     void setName(const QString& str);
     void setColor(int idx);
-    void setDataFromPolyline(const QPolygonF& line);
+    void setDataFromPolyline(const SGisLine& l);
     void setWidth(qint32 w);
     void setStyle(qint32 s);
     void setOpacity(bool yes);
@@ -157,7 +157,7 @@ private:
     void readArea(const QDomNode& xml, area_t& area);
     void setColor(const QColor& c);
     void setIcon(const QString& c);
-    void readLine(const QPolygonF &line);
+    void readAreaDataFromGisLine(const SGisLine &line);
     void deriveSecondaryData();
     QPointF getPolygonCentroid(const QPolygonF& polygon);
 

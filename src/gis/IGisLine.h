@@ -19,7 +19,13 @@
 #ifndef IGISLINE_H
 #define IGISLINE_H
 
+#include <QVector>
+#include <QPointF>
+
 class QPolygonF;
+class CGisDraw;
+class CDemDraw;
+struct SGisLine;
 
 class IGisLine
 {
@@ -27,9 +33,31 @@ public:
     IGisLine();
     virtual ~IGisLine();
 
-    virtual void setDataFromPolyline(const QPolygonF& line) = 0;
-    virtual void getPolylineFromData(QPolygonF& line) = 0;
+    struct subpt_t
+    {
+        subpt_t();
+        QPointF coord;
+        QPointF pixel;
+        qint32 ele;
+    };
+
+    struct point_t : public subpt_t
+    {
+        point_t(){}
+        point_t(const QPointF &pt);
+        void resetElevation();
+        QVector<subpt_t> subpts;
+    };
+
+    virtual void setDataFromPolyline(const SGisLine& line) = 0;
+    virtual void getPolylineFromData(SGisLine& line) = 0;
 };
+
+struct SGisLine : public QVector<IGisLine::point_t>
+{
+    void updateElevation(CDemDraw * dem);
+};
+
 
 #endif //IGISLINE_H
 

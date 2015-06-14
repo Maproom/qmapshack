@@ -285,6 +285,11 @@ void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
     }
 }
 
+void CDemDraw::getElevationAt(SGisLine& line)
+{    
+    line.updateElevation(this);
+}
+
 void CDemDraw::drawt(buffer_t& currentBuffer)
 {
     // iterate over all active maps and call the draw method

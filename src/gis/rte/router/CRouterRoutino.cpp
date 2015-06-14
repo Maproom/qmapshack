@@ -163,13 +163,13 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     QString profile         = comboProfile->currentData(Qt::UserRole).toString();
 
-    QPolygonF line;
+    SGisLine line;
     QVector<float> lon,lat;
     rte->getPolylineFromData(line);
-    foreach(const QPointF &pt, line)
+    foreach(const IGisLine::point_t &pt, line)
     {
-        lon << pt.x();
-        lat << pt.y();
+        lon << pt.coord.x();
+        lat << pt.coord.y();
     }
 
     T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());

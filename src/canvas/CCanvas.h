@@ -25,6 +25,7 @@
 #include <QWidget>
 
 #include "gis/IGisItem.h"
+#include "gis/IGisLine.h"
 
 class CMapDraw;
 class CGrid;
@@ -86,6 +87,7 @@ public:
 
     qreal getElevationAt(const QPointF &pos);
     void  getElevationAt(const QPolygonF& pos, QPolygonF &ele);
+    void  getElevationAt(SGisLine line);
 
     void moveMap(const QPointF &delta);
     void zoomTo(const QRectF& rect);

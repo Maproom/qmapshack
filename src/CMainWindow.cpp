@@ -338,6 +338,33 @@ qreal CMainWindow::getEelevationAt(const QPointF& pos)
     return NOFLOAT;
 }
 
+
+void CMainWindow::getEelevationAt(SGisLine &line)
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->getElevationAt(line);
+    }
+    else
+    {
+        for(int i = 0; i < tabWidget->count(); i++)
+        {
+            canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+            if(canvas)
+            {
+                canvas->getElevationAt(line);
+                return;
+            }
+        }
+
+        for(int i = 0; i < line.size(); i++)
+        {
+            line[i].resetElevation();
+        }
+    }
+}
+
 void CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)
 {
     CCanvas * canvas = getVisibleCanvas();

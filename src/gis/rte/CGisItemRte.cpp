@@ -249,7 +249,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
         foreach(const subpt_t &subpt, rtept.subpts)
         {
-            QPointF pt(subpt.lon, subpt.lat);
+            QPointF pt(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD);
             gis->convertRad2Px(pt);
             line << pt;
             if(subpt.type != subpt_t::eTypeNone)
@@ -397,9 +397,17 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 void CGisItemRte::getPolylineFromData(SGisLine& l)
 {
     l.clear();
-    foreach(const rtept_t &pt, rte.pts)
+    foreach(const rtept_t &rtept, rte.pts)
     {
-        l << point_t(QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+        l << point_t(QPointF(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD));
+
+        point_t& pt = l.last();
+
+        pt.subpts.clear();
+        foreach(const subpt_t& subpt, rtept.subpts)
+        {
+            pt.subpts << IGisLine::subpt_t(QPointF(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD));
+        }
     }
 }
 
@@ -431,8 +439,8 @@ void CGisItemRte::setResult(T_RoutinoRoute * route)
         {
             rtept->subpts << subpt_t();
             subpt_t& subpt = rtept->subpts.last();
-            subpt.lon = next->lon;
-            subpt.lat = next->lat;
+            subpt.lon = next->lon * RAD_TO_DEG;
+            subpt.lat = next->lat * RAD_TO_DEG;
 
             if(next->string != 0)
             {

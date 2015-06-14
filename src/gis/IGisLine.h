@@ -36,6 +36,7 @@ public:
     struct subpt_t
     {
         subpt_t();
+        subpt_t(const QPointF& pt);
         QPointF coord;
         QPointF pixel;
         qint32 ele;
@@ -56,6 +57,7 @@ public:
 struct SGisLine : public QVector<IGisLine::point_t>
 {
     void updateElevation(CDemDraw * dem);
+    void updatePixel(CGisDraw * gis);
 };
 
 

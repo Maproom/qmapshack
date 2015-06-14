@@ -73,21 +73,13 @@ protected slots:
      */
     void slotSelectRange();
     /**
-       @brief Delete selected range of points
-     */
-    void slotDeleteRange();
-    /**
        @brief Move selected point
      */
     void slotMovePoint();
     /**
        @brief Add points in direction start of track (eStateAddPointBwd)
      */
-    void slotAddPoint1();
-    /**
-       @brief Add points in direction end of track (eStateAddPointFwd)
-     */
-    void slotAddPoint2();
+    void slotAddPoint();
 
 
     virtual void slotAbort();
@@ -112,6 +104,16 @@ private:
 
     CScrOptEditLine * scrOptEditLine;
 
+    enum state_e
+    {
+         eStateIdle
+        ,eStateMoveMap
+    };
+
+    state_e state;
+
+    qint32 idxFocus;
+    QPoint lastPoint;
 
 };
 

@@ -26,6 +26,13 @@ IGisLine::subpt_t::subpt_t()
 
 }
 
+IGisLine::subpt_t::subpt_t(const QPointF& pt)
+    : ele(NOINT)
+    , coord(pt)
+{
+
+}
+
 IGisLine::point_t::point_t(const QPointF& pt)
 {
     coord = pt;
@@ -52,6 +59,27 @@ void SGisLine::updateElevation(CDemDraw * dem)
         {
             IGisLine::subpt_t& sub = pt.subpts[n];
             sub.ele = dem->getElevationAt(sub.coord);
+        }
+    }
+}
+
+
+void SGisLine::updatePixel(CGisDraw * gis)
+{
+    for(int i = 0; i < size(); i++)
+    {
+        IGisLine::point_t& pt = (*this)[i];
+
+        pt.pixel = pt.coord;
+        gis->convertRad2Px(pt.pixel);
+
+        for(int n = 0; n < pt.subpts.size(); n++)
+        {
+            IGisLine::subpt_t& sub = pt.subpts[n];
+
+            sub.pixel = sub.coord;
+            gis->convertRad2Px(sub.pixel);
+
         }
     }
 }

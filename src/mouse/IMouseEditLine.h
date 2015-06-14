@@ -106,53 +106,7 @@ protected:
     QPolygonF coords1;
 
 private:
-    void drawPointOfFocus(QPainter& p);
-    void drawBullets(const QPolygonF& l, QPainter& p);
-    void drawHighlight1(QPainter& p);
-    void drawHighlight2(QPainter& p);
-    void drawArrows(const QPolygonF &l, QPainter& p);
-    void drawLeadLine(const QPolygonF &l, QPainter& p);
-    int getPointCloseBy(const QPoint& screenPos);
-
     quint32 features;
-
-    /// backup for coord1
-    QPolygonF save;
-    /// the line's coordinates in [pixel]
-    QPolygonF line;
-
-    /// the temporary line of new point to add [rad]
-    QPolygonF newCoords;
-    /// the temporary line of new point to add [pixel]
-    QPolygonF newLine;
-
-    enum state_e
-    {
-        eStateIdle
-        ,eStatePointSelected
-        ,eStateSelectRange
-        ,eStateRangeSelected
-        ,eStateMovePoint
-        ,eStateAddPointBwd
-        ,eStateAddPointFwd
-        ,eStateMoveMap
-    };
-
-    state_e state;
-    qint32 idxFocus;
-    qint32 idxStart;
-    qint32 idxStop;
-
-    QPointer<CScrOptPoint> scrOptPoint;
-    QPointer<CScrOptRange> scrOptRange;
-    CScrOptEditLine * scrOptEditLine;
-
-    QPoint lastPoint;
-
-    QPolygonF leadLineCoord;
-    QPolygonF leadLinePixel;
-    QPolygonF subLineCoord;
-    QPolygonF subLinePixel;
 };
 
 #endif //IMOUSEEDITLINE_H

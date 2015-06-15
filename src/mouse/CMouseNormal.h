@@ -38,7 +38,7 @@ public:
     CMouseNormal(CGisDraw * gis, CCanvas *canvas);
     virtual ~CMouseNormal();
 
-    void draw(QPainter& p,  bool needsRedraw,  const QRect &rect);
+    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw,  const QRect &rect);
     void mousePressEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent *e);

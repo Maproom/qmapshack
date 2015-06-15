@@ -21,10 +21,11 @@
 
 #include <QtWidgets>
 
-ILineOp::ILineOp(SGisLine& points, CCanvas& canvas, QObject *parent)
+ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject *parent)
     : QObject(parent)
     , points(points)
     , canvas(canvas)
+    , gis(gis)
     , mapMove(false)
     , mapDidMove(false)
 {
@@ -55,7 +56,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
         if(pos != lastPos)
         {
             QPoint delta = pos - lastPos;
-            canvas.moveMap(delta);
+            canvas->moveMap(delta);
             mapDidMove  = true;
         }
     }

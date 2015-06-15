@@ -34,7 +34,7 @@ public:
     CMouseWptBubble(const IGisItem::key_t& key, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseWptBubble();
 
-    virtual void draw(QPainter& p, bool needsRedraw, const QRect &rect);
+    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect);
     virtual void mousePressEvent(QMouseEvent * e);
     virtual void mouseMoveEvent(QMouseEvent * e);
     virtual void mouseReleaseEvent(QMouseEvent *e);

@@ -19,12 +19,14 @@
 #include "canvas/CCanvas.h"
 #include "mouse/line/CLineOpMovePoint.h"
 #include "units/IUnit.h"
+#include "gis/CGisDraw.h"
 
 #include <QtWidgets>
 
-CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CCanvas& canvas, QObject *parent)
-    : ILineOp(points, canvas, parent)
+CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CGisDraw *gis, CCanvas * canvas, QObject *parent)
+    : ILineOp(points, gis, canvas, parent)
     , idxFocus(NOIDX)
+    , movePoint(false)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMovePoint.png"),0,0);
 }
@@ -41,6 +43,20 @@ void CLineOpMovePoint::mousePressEvent(QMouseEvent * e)
         return;
     }
 
+    QPointF pos = e->pos();
+    gis->convertPx2Rad(pos);
+
+    IGisLine::point_t& pt = points[idxFocus];
+    pt.subpts.clear();
+    pt.coord = pos;
+
+    if(idxFocus != 0)
+    {
+        points[idxFocus - 1].subpts.clear();
+    }
+
+    movePoint = true;
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 void CLineOpMovePoint::mouseMoveEvent(QMouseEvent * e)
@@ -51,16 +67,25 @@ void CLineOpMovePoint::mouseMoveEvent(QMouseEvent * e)
         return;
     }
 
-    const QPoint& pos = e->pos();
-    idxFocus = isCloseTo(pos);
+    if(movePoint)
+    {
+        QPointF pos = e->pos();
+        gis->convertPx2Rad(pos);
 
-
-    canvas.update();
+        points[idxFocus].coord = pos;
+    }
+    else
+    {
+        idxFocus = isCloseTo(e->pos());
+    }
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 void CLineOpMovePoint::mouseReleaseEvent(QMouseEvent *e)
 {
     ILineOp::mouseReleaseEvent(e);
+    movePoint = false;
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 void CLineOpMovePoint::draw(QPainter& p)
@@ -75,7 +100,7 @@ void CLineOpMovePoint::draw(QPainter& p)
     QRect r(0,0,9,9);
     r.moveCenter(pt.pixel.toPoint());
 
-    p.setPen(Qt::red);
+    p.setPen(QPen(Qt::red,2));
     p.setBrush(Qt::NoBrush);
     p.drawRect(r);
 
@@ -83,15 +108,20 @@ void CLineOpMovePoint::draw(QPainter& p)
 
 qint32 CLineOpMovePoint::isCloseTo(const QPoint& pos)
 {
+    qint32 min = NOINT;
+    qint32 idx = NOIDX;
     const int N = points.size();
     for(int i = 0; i < N; i++)
     {
         const IGisLine::point_t& pt = points[i];
-        if((pos - pt.pixel).manhattanLength() < 20)
+
+        qint32 d = (pos - pt.pixel).manhattanLength();
+        if((d < 20) && (d < min))
         {
-            return i;
+            min = d;
+            idx = i;
         }
     }
 
-    return NOIDX;
+    return idx;
 }

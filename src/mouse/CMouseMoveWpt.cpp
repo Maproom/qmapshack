@@ -41,7 +41,7 @@ CMouseMoveWpt::~CMouseMoveWpt()
 {
 }
 
-void CMouseMoveWpt::draw(QPainter& p,  bool needsRedraw, const QRect &rect)
+void CMouseMoveWpt::draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect)
 {
     QString val, unit, str;
     qreal d, a1 = 0, a2 = 0;

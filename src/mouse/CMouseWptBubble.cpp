@@ -34,7 +34,7 @@ CMouseWptBubble::~CMouseWptBubble()
 {
 }
 
-void CMouseWptBubble::draw(QPainter& p, bool needsRedraw, const QRect &rect)
+void CMouseWptBubble::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
 {
 }
 

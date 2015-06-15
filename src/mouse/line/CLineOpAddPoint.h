@@ -24,7 +24,7 @@
 class CLineOpAddPoint : public ILineOp
 {
 public:
-    CLineOpAddPoint(SGisLine& points, CCanvas &canvas, QObject * parent);
+    CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject * parent);
     virtual ~CLineOpAddPoint();
 
     void draw(QPainter& p){}

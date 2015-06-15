@@ -20,8 +20,8 @@
 
 #include <QtWidgets>
 
-CLineOpSelectRange::CLineOpSelectRange(SGisLine& points, CCanvas& canvas, QObject * parent)
-    : ILineOp(points, canvas, parent)
+CLineOpSelectRange::CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas * canvas, QObject * parent)
+    : ILineOp(points, gis, canvas, parent)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorSelectRange.png"),0,0);
 }

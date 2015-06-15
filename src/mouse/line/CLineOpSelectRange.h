@@ -24,7 +24,7 @@
 class CLineOpSelectRange : public ILineOp
 {
 public:
-    CLineOpSelectRange(SGisLine& points, CCanvas &canvas, QObject * parent);
+    CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject * parent);
     virtual ~CLineOpSelectRange();
 
     void draw(QPainter& p){}

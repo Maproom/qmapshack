@@ -63,7 +63,7 @@ CMouseRangeTrk::~CMouseRangeTrk()
     delete scrOptRange;
 }
 
-void CMouseRangeTrk::draw(QPainter& p,  bool, const QRect &)
+void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk)

@@ -34,6 +34,8 @@ CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * 
 {
     key         = area.getKey();
     canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a corner point for more options.<br/>"));
+
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditArea::~CMouseEditArea()
@@ -47,14 +49,12 @@ void CMouseEditArea::mousePressEvent(QMouseEvent * e)
     IMouseEditLine::mousePressEvent(e);
 }
 
-
-void CMouseEditArea::drawLine(const QPolygonF &l, QPainter& p)
+void CMouseEditArea::drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p)
 {
-    p.setPen(QPen(Qt::magenta, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.setBrush(QBrush(Qt::magenta, Qt::BDiagPattern));
     p.drawPolygon(l);
 }
-
 
 IGisLine * CMouseEditArea::getGisLine()
 {

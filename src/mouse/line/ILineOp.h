@@ -30,7 +30,7 @@ class QPainter;
 class ILineOp : public QObject
 {
 public:
-    ILineOp(SGisLine &points, CCanvas &canvas, QObject * parent);
+    ILineOp(SGisLine &points, CGisDraw * gis, CCanvas * canvas, QObject * parent);
     virtual ~ILineOp();
 
     virtual void mousePressEvent(QMouseEvent * e);
@@ -46,7 +46,8 @@ public:
 
 protected:
     SGisLine& points;
-    CCanvas& canvas;
+    CCanvas * canvas;
+    CGisDraw * gis;
 
     QCursor cursor;
 

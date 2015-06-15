@@ -20,8 +20,8 @@
 
 #include <QtWidgets>
 
-CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CCanvas& canvas, QObject * parent)
-    : ILineOp(points, canvas, parent)
+CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, QObject * parent)
+    : ILineOp(points, gis, canvas, parent)
 {
     cursor  = QCursor(QPixmap(":/cursors/cursorDelete.png"),0,0);
 }

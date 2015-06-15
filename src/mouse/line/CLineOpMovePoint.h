@@ -24,7 +24,7 @@
 class CLineOpMovePoint : public ILineOp
 {
 public:
-    CLineOpMovePoint(SGisLine& points, CCanvas &canvas, QObject * parent);
+    CLineOpMovePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject * parent);
     virtual ~CLineOpMovePoint();
 
     void mousePressEvent(QMouseEvent * e);
@@ -36,6 +36,8 @@ public:
 private:
     qint32 isCloseTo(const QPoint& pos);
     qint32 idxFocus;
+
+    bool movePoint;
 };
 
 #endif //CLINEOPMOVEPOINT_H

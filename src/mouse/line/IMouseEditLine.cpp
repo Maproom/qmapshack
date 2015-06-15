@@ -81,14 +81,16 @@ void IMouseEditLine::commonSetup()
     slotMovePoint();
 }
 
-void IMouseEditLine::drawLine(const QPolygonF &l, QPainter& p)
+void IMouseEditLine::drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p)
 {
+    p.setPen(QPen(color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(l);
 }
 
 
-void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
+void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
 {
-    if(needsRedraw)
+    if(needsRedraw & (CCanvas::eRedrawMouse|CCanvas::eRedrawGis))
     {
         points.updatePixel(gis);
 
@@ -111,8 +113,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         }
     }
 
-    p.setPen(QPen(Qt::white, 5));
-    p.drawPolyline(pixelLine);
+    drawLine(pixelLine, Qt::white, 5, p);
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);
@@ -123,8 +124,7 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
         p.drawRect(r1);
     }
 
-    p.setPen(QPen(Qt::magenta, 3));
-    p.drawPolyline(pixelLine);
+    drawLine(pixelLine, Qt::magenta, 3, p);
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::black);
@@ -161,28 +161,28 @@ void IMouseEditLine::wheelEvent(QWheelEvent * e)
 void IMouseEditLine::slotDeletePoint()
 {
     delete lineOp;
-    lineOp = new CLineOpDeletePoint(points, *canvas, this);
+    lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
 }
 
 void IMouseEditLine::slotSelectRange()
 {
     delete lineOp;
-    lineOp = new CLineOpSelectRange(points, *canvas, this);
+    lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();
 }
 
 void IMouseEditLine::slotMovePoint()
 {
     delete lineOp;
-    lineOp = new CLineOpMovePoint(points, *canvas, this);
+    lineOp = new CLineOpMovePoint(points, gis, canvas, this);
     changeCursor();
 }
 
 void IMouseEditLine::slotAddPoint()
 {
     delete lineOp;
-    lineOp = new CLineOpAddPoint(points, *canvas, this);
+    lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();
 }
 

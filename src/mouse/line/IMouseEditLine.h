@@ -58,7 +58,7 @@ public:
     IMouseEditLine(quint32 features, IGisLine &src, CGisDraw * gis, CCanvas * parent);
     virtual ~IMouseEditLine();
 
-    void draw(QPainter& p,  bool needsRedraw, const QRect &rect);
+    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect);
     void mousePressEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent *e);
@@ -88,7 +88,7 @@ protected slots:
     virtual void slotCopyToNew() = 0;
 
 protected:
-    virtual void drawLine(const QPolygonF& l, QPainter& p);
+    virtual void drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p);
     /**
        @brief Get access to the IGisLine object a subclass of IMouseEditLine is handling.
        @return A valid pointer or 0.

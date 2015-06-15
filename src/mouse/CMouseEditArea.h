@@ -40,7 +40,8 @@ protected slots:
     void slotCopyToOrig();
 
 protected:
-    virtual void drawLine(const QPolygonF& l, QPainter& p);
+    void drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p);
+
     IGisLine * getGisLine();
 
 private:

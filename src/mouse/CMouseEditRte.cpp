@@ -41,7 +41,7 @@ CMouseEditRte::CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent)
         trigger complete update of GIS components to make sure all changes to
         the originating object are reflected on the canvas
      */
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 

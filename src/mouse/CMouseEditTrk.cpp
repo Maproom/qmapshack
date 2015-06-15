@@ -27,13 +27,11 @@
 CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(eFeatureSnapToLines|eFeatureRouting, point, gis, parent)
 {
-    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
 }
 
 CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(eFeatureSnapToLines|eFeatureRouting, trk, gis, parent)
 {
-    cursor = cursor1 = QCursor(QPixmap(":/cursors/cursorMoveLine.png"),0,0);
     key         = trk.getKey();
 
     // reset any focus the track might have.

@@ -87,8 +87,7 @@ set( SRCS
     grid/CGridSetup.cpp
     grid/CProjWizard.cpp
     grid/mitab.cpp
-    mouse/IMouse.cpp
-    mouse/IMouseEditLine.cpp
+    mouse/IMouse.cpp    
     mouse/IScrOpt.cpp
     mouse/CMouseNormal.cpp
     mouse/CMouseMoveWpt.cpp
@@ -98,10 +97,16 @@ set( SRCS
     mouse/CMouseRangeTrk.cpp
     mouse/CMouseWptBubble.cpp
     mouse/CScrOptUnclutter.cpp    
-    mouse/CScrOptPoint.cpp
-    mouse/CScrOptEditLine.cpp
+    mouse/CScrOptPoint.cpp    
     mouse/CScrOptRange.cpp
     mouse/CScrOptRangeTrk.cpp    
+    mouse/line/IMouseEditLine.cpp
+    mouse/line/CScrOptEditLine.cpp
+    mouse/line/ILineOp.cpp
+    mouse/line/CLineOpMovePoint.cpp
+    mouse/line/CLineOpAddPoint.cpp
+    mouse/line/CLineOpDeletePoint.cpp
+    mouse/line/CLineOpSelectRange.cpp
     gis/WptIcons.cpp
     gis/CGisDraw.cpp
     gis/IGisItem.cpp
@@ -276,8 +281,7 @@ set( HDRS
     grid/CGridSetup.h
     grid/CProjWizard.h
     grid/mitab.h
-    mouse/IMouse.h
-    mouse/IMouseEditLine.h
+    mouse/IMouse.h    
     mouse/IScrOpt.h
     mouse/CMouseNormal.h
     mouse/CMouseMoveWpt.h
@@ -287,10 +291,16 @@ set( HDRS
     mouse/CMouseRangeTrk.h
     mouse/CMouseWptBubble.h
     mouse/CScrOptUnclutter.h
-    mouse/CScrOptPoint.h
-    mouse/CScrOptEditLine.h
+    mouse/CScrOptPoint.h    
     mouse/CScrOptRange.h
     mouse/CScrOptRangeTrk.h
+    mouse/line/CScrOptEditLine.h
+    mouse/line/IMouseEditLine.h
+    mouse/line/ILineOp.h
+    mouse/line/CLineOpMovePoint.h
+    mouse/line/CLineOpAddPoint.h
+    mouse/line/CLineOpDeletePoint.h
+    mouse/line/CLineOpSelectRange.h
     gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h
@@ -412,10 +422,10 @@ set( UIS
     map/IMapVrtBuilder.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
-    mouse/IScrOptPoint.ui
-    mouse/IScrOptEditLine.ui
+    mouse/IScrOptPoint.ui    
     mouse/IScrOptRange.ui
     mouse/IScrOptRangeTrk.ui
+    mouse/line/IScrOptEditLine.ui
     gis/IGisWidget.ui
     gis/ISelDevices.ui
     gis/prj/IDetailsPrj.ui

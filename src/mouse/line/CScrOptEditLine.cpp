@@ -16,36 +16,21 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEEDITTRK_H
-#define CMOUSEEDITTRK_H
+#include "mouse/line/CScrOptEditLine.h"
 
-#include "gis/IGisItem.h"
-#include "mouse/line/IMouseEditLine.h"
+#include <QtWidgets>
 
-class CGisItemTrk;
-
-class CMouseEditTrk : public IMouseEditLine
+CScrOptEditLine::CScrOptEditLine(QWidget *parent)
+    : IScrOpt(parent)
 {
-    Q_OBJECT
-public:
-    CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-    CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
-    virtual ~CMouseEditTrk();
+    setupUi(this);
 
-    void mousePressEvent(QMouseEvent * e);
+    move(0,0);
+    adjustSize();
+    show();
+}
 
-protected slots:
-    void slotAbort();
-    void slotCopyToNew();
-    void slotCopyToOrig();
-
-
-protected:
-    IGisLine * getGisLine();
-
-private:
-    IGisItem::key_t key;
-};
-
-#endif //CMOUSEEDITTRK_H
+CScrOptEditLine::~CScrOptEditLine()
+{
+}
 

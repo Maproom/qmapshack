@@ -16,21 +16,19 @@
 
 **********************************************************************************************/
 
-#include "gis/IGisLine.h"
-#include "gis/CGisDraw.h"
 #include "dem/CDemDraw.h"
+#include "gis/CGisDraw.h"
+#include "gis/IGisLine.h"
 
 IGisLine::subpt_t::subpt_t()
     : ele(NOINT)
 {
-
 }
 
 IGisLine::subpt_t::subpt_t(const QPointF& pt)
-    : ele(NOINT)
-    , coord(pt)
+    : coord(pt)
+    , ele(NOINT)
 {
-
 }
 
 IGisLine::point_t::point_t(const QPointF& pt)
@@ -79,7 +77,6 @@ void SGisLine::updatePixel(CGisDraw * gis)
 
             sub.pixel = sub.coord;
             gis->convertRad2Px(sub.pixel);
-
         }
     }
 }

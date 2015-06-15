@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,45 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEEDITTRK_H
-#define CMOUSEEDITTRK_H
+#ifndef ILINEOP_H
+#define ILINEOP_H
 
-#include "gis/IGisItem.h"
-#include "mouse/line/IMouseEditLine.h"
+#include "gis/IGisLine.h"
+#include <QCursor>
+#include <QObject>
 
-class CGisItemTrk;
+class QMouseEvent;
+class CCanvas;
+class QPainter;
 
-class CMouseEditTrk : public IMouseEditLine
+class ILineOp : public QObject
 {
-    Q_OBJECT
 public:
-    CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-    CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
-    virtual ~CMouseEditTrk();
+    ILineOp(SGisLine &points, CCanvas &canvas, QObject * parent);
+    virtual ~ILineOp();
 
-    void mousePressEvent(QMouseEvent * e);
+    virtual void mousePressEvent(QMouseEvent * e);
+    virtual void mouseMoveEvent(QMouseEvent * e);
+    virtual void mouseReleaseEvent(QMouseEvent *e);
 
-protected slots:
-    void slotAbort();
-    void slotCopyToNew();
-    void slotCopyToOrig();
+    virtual void draw(QPainter& p) = 0;
 
+    const QCursor& getCursor()
+    {
+        return cursor;
+    }
 
 protected:
-    IGisLine * getGisLine();
+    SGisLine& points;
+    CCanvas& canvas;
 
-private:
-    IGisItem::key_t key;
+    QCursor cursor;
+
+    bool mapMove;
+    bool mapDidMove;
+
+    QPoint lastPos;
 };
 
-#endif //CMOUSEEDITTRK_H
+#endif //ILINEOP_H
 

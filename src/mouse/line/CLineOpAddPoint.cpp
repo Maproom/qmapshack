@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,17 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEEDITTRK_H
-#define CMOUSEEDITTRK_H
+#include "mouse/line/CLineOpAddPoint.h"
 
-#include "gis/IGisItem.h"
-#include "mouse/line/IMouseEditLine.h"
+#include <QtWidgets>
 
-class CGisItemTrk;
-
-class CMouseEditTrk : public IMouseEditLine
+CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CCanvas& canvas, QObject * parent)
+    : ILineOp(points, canvas, parent)
 {
-    Q_OBJECT
-public:
-    CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-    CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
-    virtual ~CMouseEditTrk();
+    cursor = QCursor(QPixmap(":/cursors/cursorAdd.png"),0,0);
+}
 
-    void mousePressEvent(QMouseEvent * e);
-
-protected slots:
-    void slotAbort();
-    void slotCopyToNew();
-    void slotCopyToOrig();
-
-
-protected:
-    IGisLine * getGisLine();
-
-private:
-    IGisItem::key_t key;
-};
-
-#endif //CMOUSEEDITTRK_H
+CLineOpAddPoint::~CLineOpAddPoint()
+{
+}
 

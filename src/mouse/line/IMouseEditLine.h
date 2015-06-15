@@ -19,8 +19,8 @@
 #ifndef IMOUSEEDITLINE_H
 #define IMOUSEEDITLINE_H
 
-#include "mouse/IMouse.h"
 #include "gis/IGisLine.h"
+#include "mouse/IMouse.h"
 #include <QPointer>
 #include <QPolygonF>
 
@@ -30,6 +30,7 @@ class IGisLine;
 class CScrOptPoint;
 class CScrOptEditLine;
 class CScrOptRange;
+class ILineOp;
 
 class IMouseEditLine : public IMouse
 {
@@ -100,21 +101,17 @@ protected:
 
 private:
     void commonSetup();
+    void changeCursor();
     quint32 features;
+
+    QPolygonF pixelLine;
+    QPolygonF pixelPts;
+    QPolygonF pixelSubs;
+
 
     CScrOptEditLine * scrOptEditLine;
 
-    enum state_e
-    {
-         eStateIdle
-        ,eStateMoveMap
-    };
-
-    state_e state;
-
-    qint32 idxFocus;
-    QPoint lastPoint;
-
+    ILineOp  * lineOp;
 };
 
 #endif //IMOUSEEDITLINE_H

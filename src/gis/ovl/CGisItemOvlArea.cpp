@@ -246,7 +246,7 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 
 void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
 {
-    area.pts.clear();    
+    area.pts.clear();
 
     for(int i = 0; i < l.size(); i++)
     {

@@ -286,7 +286,7 @@ void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 }
 
 void CDemDraw::getElevationAt(SGisLine& line)
-{    
+{
     line.updateElevation(this);
 }
 

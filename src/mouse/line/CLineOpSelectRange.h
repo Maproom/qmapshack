@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEEDITTRK_H
-#define CMOUSEEDITTRK_H
+#ifndef CLINEOPSELECTRANGE_H
+#define CLINEOPSELECTRANGE_H
 
-#include "gis/IGisItem.h"
-#include "mouse/line/IMouseEditLine.h"
+#include "mouse/line/ILineOp.h"
 
-class CGisItemTrk;
-
-class CMouseEditTrk : public IMouseEditLine
+class CLineOpSelectRange : public ILineOp
 {
-    Q_OBJECT
 public:
-    CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-    CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
-    virtual ~CMouseEditTrk();
+    CLineOpSelectRange(SGisLine& points, CCanvas &canvas, QObject * parent);
+    virtual ~CLineOpSelectRange();
 
-    void mousePressEvent(QMouseEvent * e);
-
-protected slots:
-    void slotAbort();
-    void slotCopyToNew();
-    void slotCopyToOrig();
-
-
-protected:
-    IGisLine * getGisLine();
-
-private:
-    IGisItem::key_t key;
+    void draw(QPainter& p){}
 };
 
-#endif //CMOUSEEDITTRK_H
+#endif //CLINEOPSELECTRANGE_H
 

@@ -16,35 +16,55 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEEDITRTE_H
-#define CMOUSEEDITRTE_H
+#include "canvas/CCanvas.h"
+#include "mouse/line/ILineOp.h"
 
-#include "gis/IGisItem.h"
-#include "mouse/line/IMouseEditLine.h"
+#include <QtWidgets>
 
-class CGisItemRte;
-
-class CMouseEditRte : public IMouseEditLine
+ILineOp::ILineOp(SGisLine& points, CCanvas& canvas, QObject *parent)
+    : QObject(parent)
+    , points(points)
+    , canvas(canvas)
+    , mapMove(false)
+    , mapDidMove(false)
 {
-public:
-    CMouseEditRte(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-    CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent);
-    virtual ~CMouseEditRte();
+}
 
-    void mousePressEvent(QMouseEvent * e);
+ILineOp::~ILineOp()
+{
+}
 
-protected slots:
-    void slotAbort();
-    void slotCopyToNew();
-    void slotCopyToOrig();
+void ILineOp::mousePressEvent(QMouseEvent * e)
+{
+    const QPoint& pos = e->pos();
 
+    if(e->button() == Qt::LeftButton)
+    {
+        lastPos     = pos;
+        mapMove     = true;
+        mapDidMove  = false;
+    }
+}
 
-protected:
-    IGisLine * getGisLine();
+void ILineOp::mouseMoveEvent(QMouseEvent * e)
+{
+    const QPoint& pos = e->pos();
 
-private:
-    IGisItem::key_t key;
-};
+    if(mapMove)
+    {
+        if(pos != lastPos)
+        {
+            QPoint delta = pos - lastPos;
+            canvas.moveMap(delta);
+            mapDidMove  = true;
+        }
+    }
 
-#endif //CMOUSEEDITRTE_H
+    lastPos = pos;
+}
 
+void ILineOp::mouseReleaseEvent(QMouseEvent *e)
+{
+    mapMove     = false;
+    mapDidMove  = false;
+}

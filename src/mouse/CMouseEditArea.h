@@ -20,7 +20,7 @@
 #define CMOUSEEDITAREA_H
 
 #include "gis/IGisItem.h"
-#include "mouse/IMouseEditLine.h"
+#include "mouse/line/IMouseEditLine.h"
 
 class CGisItemOvlArea;
 

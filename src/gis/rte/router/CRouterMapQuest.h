@@ -30,7 +30,10 @@ public:
     virtual ~CRouterMapQuest();
 
     void calcRoute(const IGisItem::key_t& key);
-    bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords){return false;}
+    bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+    {
+        return false;
+    }
 };
 
 #endif //CROUTERMAPQUEST_H

@@ -331,10 +331,12 @@
         <file>icons/waypoints/32x32/Waypoint.png</file>
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
+        <file>cursors/cursorMovePoint.png</file>
         <file>cursors/cursorMoveMap.png</file>
         <file>cursors/cursorMoveWpt.png</file>
         <file>cursors/cursorMoveLine.png</file>
         <file>cursors/cursorMoveArea.png</file>
+        <file>cursors/cursorDelete.png</file>
         <file>cursors/cursorSelectRange.png</file>
         <file>cursors/cursorAdd.png</file>
         <file>cursors/wptHighlight.png</file>

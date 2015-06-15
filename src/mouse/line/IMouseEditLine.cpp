@@ -16,18 +16,22 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
 #include "gis/rte/router/CRouterSetup.h"
-#include "mouse/CScrOptEditLine.h"
 #include "mouse/CScrOptPoint.h"
 #include "mouse/CScrOptRange.h"
-#include "mouse/IMouseEditLine.h"
+#include "mouse/line/CLineOpAddPoint.h"
+#include "mouse/line/CLineOpDeletePoint.h"
+#include "mouse/line/CLineOpMovePoint.h"
+#include "mouse/line/CLineOpSelectRange.h"
+#include "mouse/line/CScrOptEditLine.h"
+#include "mouse/line/IMouseEditLine.h"
 #include "units/IUnit.h"
-#include "CMainWindow.h"
 
 
 #include <QtWidgets>
@@ -35,8 +39,7 @@
 IMouseEditLine::IMouseEditLine(quint32 features, const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
     , features(features)
-    , state(eStateIdle)
-    , idxFocus(NOIDX)
+    , lineOp(0)
 {
     commonSetup();
     scrOptEditLine->pushSaveOrig->hide(); // hide as there is no original
@@ -48,8 +51,7 @@ IMouseEditLine::IMouseEditLine(quint32 features, const QPointF& point, CGisDraw 
 IMouseEditLine::IMouseEditLine(quint32 features, IGisLine &src, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
     , features(features)
-    , state(eStateIdle)
-    , idxFocus(NOIDX)
+    , lineOp(0)
 {
     commonSetup();
 
@@ -75,6 +77,8 @@ void IMouseEditLine::commonSetup()
     connect(scrOptEditLine->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()));
     connect(scrOptEditLine->toolAddPoint, SIGNAL(clicked()), this, SLOT(slotAddPoint()));
     connect(scrOptEditLine->toolDeletePoint, SIGNAL(clicked()), this, SLOT(slotDeletePoint()));
+
+    slotMovePoint();
 }
 
 void IMouseEditLine::drawLine(const QPolygonF &l, QPainter& p)
@@ -87,91 +91,66 @@ void IMouseEditLine::draw(QPainter& p, bool needsRedraw, const QRect &rect)
     if(needsRedraw)
     {
         points.updatePixel(gis);
-    }
 
-    QPolygonF line;
-    QPolygonF pts;
-    QPolygonF subs;
+        pixelLine.clear();
+        pixelPts.clear();
+        pixelSubs.clear();
 
-    for(int i = 0; i < points.size(); i++)
-    {
-        IGisLine::point_t& pt = points[i];
-        line << pt.pixel;
-        pts  << pt.pixel;
-
-        for(int n = 0; n < pt.subpts.size(); n++)
+        for(int i = 0; i < points.size(); i++)
         {
-            IGisLine::subpt_t& sub = pt.subpts[n];
-            line << sub.pixel;
-            subs << sub.pixel;
+            IGisLine::point_t& pt = points[i];
+            pixelLine << pt.pixel;
+            pixelPts << pt.pixel;
+
+            for(int n = 0; n < pt.subpts.size(); n++)
+            {
+                IGisLine::subpt_t& sub = pt.subpts[n];
+                pixelLine << sub.pixel;
+                pixelSubs << sub.pixel;
+            }
         }
     }
 
-    p.setPen(QPen(Qt::white, 7));
-    p.drawPolyline(line);
-
-    p.setPen(QPen(Qt::magenta, 5));
-    p.drawPolyline(line);
+    p.setPen(QPen(Qt::white, 5));
+    p.drawPolyline(pixelLine);
 
     p.setPen(Qt::NoPen);
-    p.setBrush(Qt::red);
-    foreach(const QPointF& pt, pts)
+    p.setBrush(Qt::white);
+    QRect r1(0,0,9,9);
+    foreach(const QPointF &pt, pixelPts)
     {
-        p.drawEllipse(pt, 3, 3);
+        r1.moveCenter(pt.toPoint());
+        p.drawRect(r1);
     }
 
+    p.setPen(QPen(Qt::magenta, 3));
+    p.drawPolyline(pixelLine);
+
+    p.setPen(Qt::NoPen);
+    p.setBrush(Qt::black);
+    QRect r2(0,0,7,7);
+    foreach(const QPointF &pt, pixelPts)
+    {
+        r2.moveCenter(pt.toPoint());
+        p.drawRect(r2);
+    }
+
+    lineOp->draw(p);
 }
 
 void IMouseEditLine::mousePressEvent(QMouseEvent * e)
 {
-    if(e->button() == Qt::LeftButton)
-    {
-        switch(state)
-        {
-        case eStateIdle:
-        {
-            if(idxFocus == NOIDX)
-            {
-                state = eStateMoveMap;
-            }
-            break;
-        }
-        }
-    }
+    lineOp->mousePressEvent(e);
 }
 
 void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
 {
-    QPoint point = e->pos();
-
-    switch(state)
-    {
-    case eStateIdle:
-        break;
-
-    case eStateMoveMap:
-    {
-        if(point != lastPoint)
-        {
-            QPoint delta = point - lastPoint;
-            canvas->moveMap(delta);
-        }
-        break;
-    }
-    }
-
-    lastPoint = point;
+    lineOp->mouseMoveEvent(e);
 }
 
 void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
 {
-    if(e->button() == Qt::LeftButton)
-    {
-        if(state == eStateMoveMap)
-        {
-            state = eStateIdle;
-        }
-    }
+    lineOp->mouseReleaseEvent(e);
 }
 
 void IMouseEditLine::wheelEvent(QWheelEvent * e)
@@ -181,22 +160,37 @@ void IMouseEditLine::wheelEvent(QWheelEvent * e)
 
 void IMouseEditLine::slotDeletePoint()
 {
-
+    delete lineOp;
+    lineOp = new CLineOpDeletePoint(points, *canvas, this);
+    changeCursor();
 }
 
 void IMouseEditLine::slotSelectRange()
 {
-
+    delete lineOp;
+    lineOp = new CLineOpSelectRange(points, *canvas, this);
+    changeCursor();
 }
 
 void IMouseEditLine::slotMovePoint()
 {
-
+    delete lineOp;
+    lineOp = new CLineOpMovePoint(points, *canvas, this);
+    changeCursor();
 }
 
 void IMouseEditLine::slotAddPoint()
 {
+    delete lineOp;
+    lineOp = new CLineOpAddPoint(points, *canvas, this);
+    changeCursor();
+}
 
+void IMouseEditLine::changeCursor()
+{
+    cursor = lineOp->getCursor();
+    QApplication::restoreOverrideCursor();
+    QApplication::setOverrideCursor(cursor);
 }
 
 void IMouseEditLine::slotAbort()
@@ -206,7 +200,7 @@ void IMouseEditLine::slotAbort()
 }
 
 void IMouseEditLine::slotCopyToOrig()
-{      
+{
     IGisLine * l = getGisLine();
     if(l != 0)
     {
@@ -218,5 +212,6 @@ void IMouseEditLine::slotCopyToOrig()
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
+
 
 

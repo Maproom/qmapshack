@@ -19,8 +19,8 @@
 #ifndef CMAINWINDOW_H
 #define CMAINWINDOW_H
 
-#include "ui_IMainWindow.h"
 #include "gis/IGisLine.h"
+#include "ui_IMainWindow.h"
 #include <QMainWindow>
 
 class CMapList;

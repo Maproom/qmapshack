@@ -19,8 +19,8 @@
 #ifndef IGISLINE_H
 #define IGISLINE_H
 
-#include <QVector>
 #include <QPointF>
+#include <QVector>
 
 class QPolygonF;
 class CGisDraw;
@@ -44,7 +44,9 @@ public:
 
     struct point_t : public subpt_t
     {
-        point_t(){}
+        point_t()
+        {
+        }
         point_t(const QPointF &pt);
         void resetElevation();
         QVector<subpt_t> subpts;

@@ -404,7 +404,7 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
         point_t& pt = l.last();
 
         pt.subpts.clear();
-        foreach(const subpt_t& subpt, rtept.subpts)
+        foreach(const subpt_t &subpt, rtept.subpts)
         {
             pt.subpts << IGisLine::subpt_t(QPointF(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD));
         }

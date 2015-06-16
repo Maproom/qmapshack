@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, QObject * parent)
+CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorAdd.png"),0,0);

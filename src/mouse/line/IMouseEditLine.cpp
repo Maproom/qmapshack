@@ -23,6 +23,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
 #include "gis/rte/router/CRouterSetup.h"
+#include "helpers/CSettings.h"
 #include "mouse/CScrOptPoint.h"
 #include "mouse/CScrOptRange.h"
 #include "mouse/line/CLineOpAddPoint.h"
@@ -62,6 +63,23 @@ IMouseEditLine::IMouseEditLine(quint32 features, IGisLine &src, CGisDraw *gis, C
 
 IMouseEditLine::~IMouseEditLine()
 {
+    int mode = 0;
+    if(scrOptEditLine->toolNoRoute->isChecked())
+    {
+        mode = 0;
+    }
+    else if(scrOptEditLine->toolAutoRoute->isChecked())
+    {
+        mode = 1;
+    }
+    else if(scrOptEditLine->toolVectorRoute->isChecked())
+    {
+        mode = 2;
+    }
+
+    SETTINGS;
+    cfg.setValue("Route/drawMode", mode);
+
     delete scrOptEditLine;
 }
 
@@ -78,7 +96,34 @@ void IMouseEditLine::commonSetup()
     connect(scrOptEditLine->toolAddPoint, SIGNAL(clicked()), this, SLOT(slotAddPoint()));
     connect(scrOptEditLine->toolDeletePoint, SIGNAL(clicked()), this, SLOT(slotDeletePoint()));
 
+    SETTINGS;
+    int mode = cfg.value("Route/drawMode",0).toInt();
+    switch(mode)
+    {
+    case 0:
+        scrOptEditLine->toolNoRoute->setChecked(true);
+        break;
+
+    case 1:
+        scrOptEditLine->toolAutoRoute->setChecked(true);
+        break;
+
+    case 2:
+        scrOptEditLine->toolVectorRoute->setChecked(true);
+        break;
+    }
+
     slotMovePoint();
+}
+
+bool IMouseEditLine::useAutoRouting()
+{
+    return scrOptEditLine->toolAutoRoute->isChecked();
+}
+
+bool IMouseEditLine::useVectorRouting()
+{
+    return scrOptEditLine->toolVectorRoute->isChecked();
 }
 
 void IMouseEditLine::drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p)
@@ -137,6 +182,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
     lineOp->draw(p);
 }
+
 
 void IMouseEditLine::mousePressEvent(QMouseEvent * e)
 {

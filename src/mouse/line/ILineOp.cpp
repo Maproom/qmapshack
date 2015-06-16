@@ -17,12 +17,15 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
+#include "gis/rte/router/CRouterSetup.h"
 #include "mouse/line/ILineOp.h"
+#include "mouse/line/IMouseEditLine.h"
 
 #include <QtWidgets>
 
-ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject *parent)
+ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent)
     : QObject(parent)
+    , parentHandler(parent)
     , points(points)
     , canvas(canvas)
     , gis(gis)
@@ -68,4 +71,43 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
     mapMove     = false;
     mapDidMove  = false;
+}
+
+void ILineOp::finalizeOperation(qint32 idx)
+{
+    if(!parentHandler->useAutoRouting())
+    {
+        return;
+    }
+
+    if(idx != NOIDX)
+    {
+        if(idx > 0)
+        {
+            QPolygonF subs;
+            IGisLine::point_t& pt1 = points[idx - 1];
+            IGisLine::point_t& pt2 = points[idx];
+            CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs);
+
+            pt1.subpts.clear();
+            foreach(const QPointF &sub, subs)
+            {
+                pt1.subpts << IGisLine::subpt_t(sub);
+            }
+        }
+
+        if(idx < (points.size() - 1))
+        {
+            QPolygonF subs;
+            IGisLine::point_t& pt1 = points[idx];
+            IGisLine::point_t& pt2 = points[idx + 1];
+            CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs);
+
+            pt1.subpts.clear();
+            foreach(const QPointF &sub, subs)
+            {
+                pt1.subpts << IGisLine::subpt_t(sub);
+            }
+        }
+    }
 }

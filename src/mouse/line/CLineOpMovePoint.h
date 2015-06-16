@@ -24,7 +24,7 @@
 class CLineOpMovePoint : public ILineOp
 {
 public:
-    CLineOpMovePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject * parent);
+    CLineOpMovePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpMovePoint();
 
     void mousePressEvent(QMouseEvent * e);

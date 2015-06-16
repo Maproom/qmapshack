@@ -252,11 +252,21 @@ void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
     {
         area.pts << pt_t();
 
-        pt_t& areapt        = area.pts.last();
-        const point_t& pt   = l[i];
+        pt_t& areapt      = area.pts.last();
+        const point_t& pt = l[i];
 
         areapt.lon = pt.coord.x() * RAD_TO_DEG;
         areapt.lat = pt.coord.y() * RAD_TO_DEG;
+
+        for(int n = 0; n < pt.subpts.size(); n++)
+        {
+            area.pts << pt_t();
+            pt_t& areapt       = area.pts.last();
+            const subpt_t& sub = pt.subpts[n];
+
+            areapt.lon = sub.coord.x() * RAD_TO_DEG;
+            areapt.lat = sub.coord.y() * RAD_TO_DEG;
+        }
     }
 
     deriveSecondaryData();

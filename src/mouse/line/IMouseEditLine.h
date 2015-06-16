@@ -64,6 +64,9 @@ public:
     void mouseReleaseEvent(QMouseEvent *e);
     void wheelEvent(QWheelEvent * e);
 
+    bool useAutoRouting();
+    bool useVectorRouting();
+
 protected slots:
     /**
        @brief Delete the selected point
@@ -94,11 +97,14 @@ protected:
        @return A valid pointer or 0.
      */
     virtual IGisLine * getGisLine() = 0;
+
     /// shadow cursor needed to restore cursor after some actions providing their own cursor.
     QCursor cursor1;
 
+    /// the abstract line object to edit
     SGisLine points;
 
+    CScrOptEditLine * scrOptEditLine;
 private:
     void commonSetup();
     void changeCursor();
@@ -107,9 +113,6 @@ private:
     QPolygonF pixelLine;
     QPolygonF pixelPts;
     QPolygonF pixelSubs;
-
-
-    CScrOptEditLine * scrOptEditLine;
 
     ILineOp  * lineOp;
 };

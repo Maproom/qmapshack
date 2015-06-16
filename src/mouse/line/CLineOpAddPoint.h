@@ -24,10 +24,12 @@
 class CLineOpAddPoint : public ILineOp
 {
 public:
-    CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject * parent);
+    CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpAddPoint();
 
-    void draw(QPainter& p){}
+    void draw(QPainter& p)
+    {
+    }
 };
 
 #endif //CLINEOPADDPOINT_H

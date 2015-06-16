@@ -26,11 +26,12 @@
 class QMouseEvent;
 class CCanvas;
 class QPainter;
+class IMouseEditLine;
 
 class ILineOp : public QObject
 {
 public:
-    ILineOp(SGisLine &points, CGisDraw * gis, CCanvas * canvas, QObject * parent);
+    ILineOp(SGisLine &points, CGisDraw * gis, CCanvas * canvas, IMouseEditLine * parent);
     virtual ~ILineOp();
 
     virtual void mousePressEvent(QMouseEvent * e);
@@ -45,6 +46,10 @@ public:
     }
 
 protected:
+    virtual void finalizeOperation(qint32 idx);
+
+
+    IMouseEditLine * parentHandler;
     SGisLine& points;
     CCanvas * canvas;
     CGisDraw * gis;

@@ -24,10 +24,12 @@
 class CLineOpDeletePoint : public ILineOp
 {
 public:
-    CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject * parent);
+    CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpDeletePoint();
 
-    void draw(QPainter& p){}
+    void draw(QPainter& p)
+    {
+    }
 };
 
 #endif //CLINEOPDELETEPOINT_H

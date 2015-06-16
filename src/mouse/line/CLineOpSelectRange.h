@@ -24,10 +24,12 @@
 class CLineOpSelectRange : public ILineOp
 {
 public:
-    CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, QObject * parent);
+    CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpSelectRange();
 
-    void draw(QPainter& p){}
+    void draw(QPainter& p)
+    {
+    }
 };
 
 #endif //CLINEOPSELECTRANGE_H

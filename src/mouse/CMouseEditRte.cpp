@@ -21,6 +21,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "mouse/CMouseEditRte.h"
+#include "mouse/line/CScrOptEditLine.h"
 
 #include <QtWidgets>
 
@@ -35,8 +36,18 @@ CMouseEditRte::CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent)
 {
     key         = rte.getKey();
 
-
     canvas->reportStatus(key.item, tr("<b>Edit Route Points</b><br/>Select a route point for more options.<br/>"));
+
+
+    if(!points.first().subpts.isEmpty())
+    {
+        scrOptEditLine->toolAutoRoute->setChecked(true);
+    }
+    else
+    {
+        scrOptEditLine->toolNoRoute->setChecked(true);
+    }
+
     /*
         trigger complete update of GIS components to make sure all changes to
         the originating object are reflected on the canvas

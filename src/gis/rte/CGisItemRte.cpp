@@ -365,6 +365,7 @@ void CGisItemRte::drawHighlight(QPainter& p)
 
 void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 {
+    bool doAutoRouting = !l.first().subpts.isEmpty();
     rte.pts.clear();
 
     for(int i = 0; i < l.size(); i++)
@@ -377,10 +378,12 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
         rtept.lon = pt.coord.x() * RAD_TO_DEG;
         rtept.lat = pt.coord.y() * RAD_TO_DEG;
         rtept.ele = pt.ele;
-
-        rtept.subpts.clear();
     }
 
+    if(doAutoRouting)
+    {
+        calc();
+    }
     deriveSecondaryData();
 }
 

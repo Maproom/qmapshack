@@ -17,13 +17,13 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
+#include "gis/CGisDraw.h"
 #include "mouse/line/CLineOpMovePoint.h"
 #include "units/IUnit.h"
-#include "gis/CGisDraw.h"
 
 #include <QtWidgets>
 
-CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CGisDraw *gis, CCanvas * canvas, QObject *parent)
+CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine *parent)
     : ILineOp(points, gis, canvas, parent)
     , idxFocus(NOIDX)
     , movePoint(false)
@@ -84,7 +84,11 @@ void CLineOpMovePoint::mouseMoveEvent(QMouseEvent * e)
 void CLineOpMovePoint::mouseReleaseEvent(QMouseEvent *e)
 {
     ILineOp::mouseReleaseEvent(e);
-    movePoint = false;
+
+    finalizeOperation(idxFocus);
+
+    idxFocus    = NOIDX;
+    movePoint   = false;
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -103,7 +107,6 @@ void CLineOpMovePoint::draw(QPainter& p)
     p.setPen(QPen(Qt::red,2));
     p.setBrush(Qt::NoBrush);
     p.drawRect(r);
-
 }
 
 qint32 CLineOpMovePoint::isCloseTo(const QPoint& pos)

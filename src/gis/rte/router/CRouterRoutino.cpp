@@ -204,7 +204,10 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
     T_RoutinoRoute * next = route;
     while(next)
     {
-        coords << QPointF(next->lon, next->lat);
+        if(next->type != IMP_WAYPOINT)
+        {
+            coords << QPointF(next->lon, next->lat);
+        }
         next = next->next;
     }
 

@@ -158,6 +158,11 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         }
     }
 
+    if(pixelPts.isEmpty())
+    {
+        return;
+    }
+
     drawLine(pixelLine, Qt::white, 5, p);
 
     p.setPen(Qt::NoPen);
@@ -179,6 +184,22 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         r2.moveCenter(pt.toPoint());
         p.drawRect(r2);
     }
+
+    foreach(const QPointF &pt, pixelSubs)
+    {
+        p.drawEllipse(pt, 2, 2);
+    }
+
+    QRect r3(0,0,9,9);
+    p.setBrush(Qt::NoBrush);
+
+    p.setPen(QPen(Qt::yellow,2));
+    r3.moveCenter(pixelPts.first().toPoint());
+    p.drawRect(r3);
+
+    p.setPen(QPen(Qt::green,2));
+    r3.moveCenter(pixelPts.last().toPoint());
+    p.drawRect(r3);
 
     lineOp->draw(p);
 }

@@ -34,7 +34,6 @@ public:
 
 private:
     qint32 idxFocus;
-
 };
 
 #endif //CLINEOPDELETEPOINT_H

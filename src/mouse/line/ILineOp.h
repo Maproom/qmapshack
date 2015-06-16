@@ -48,6 +48,7 @@ public:
 protected:
     virtual void finalizeOperation(qint32 idx);
     qint32 isCloseTo(const QPoint& pos);
+    qint32 isCloseToLine(const QPoint& pos);
 
 
     IMouseEditLine * parentHandler;

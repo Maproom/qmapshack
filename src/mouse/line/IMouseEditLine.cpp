@@ -163,7 +163,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         return;
     }
 
-    drawLine(pixelLine, Qt::white, 5, p);
+    drawLine(pixelLine, Qt::white, 7, p);
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);
@@ -174,7 +174,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         p.drawRect(r1);
     }
 
-    drawLine(pixelLine, Qt::magenta, 3, p);
+    drawLine(pixelLine, Qt::magenta, 5, p);
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::black);

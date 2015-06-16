@@ -273,7 +273,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         switch(points[i])
         {
         case 1:
-            p.drawEllipse(line[i],9,9);
+            p.drawEllipse(line[i],7,7);
             break;
 
         case 2:
@@ -294,7 +294,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         {
         case 1:
             p.setBrush(Qt::red);
-            p.drawEllipse(line[i],7,7);
+            p.drawEllipse(line[i],5,5);
             break;
 
         case 2:

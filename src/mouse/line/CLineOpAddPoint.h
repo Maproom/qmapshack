@@ -31,9 +31,10 @@ public:
     void mouseMoveEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent *e);
 
-    void draw(QPainter& p)
-    {
-    }
+    void draw(QPainter& p);
+
+private:
+    int idxFocus;
 };
 
 #endif //CLINEOPADDPOINT_H

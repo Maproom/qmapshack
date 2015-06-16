@@ -72,7 +72,11 @@ void CLineOpDeletePoint::draw(QPainter& p)
     QRect r(0,0,9,9);
     r.moveCenter(pt.pixel.toPoint());
 
+    p.setPen(QPen(Qt::white,4));
+    p.setBrush(Qt::red);
+    p.drawRect(r);
+
     p.setPen(QPen(Qt::red,2));
-    p.setBrush(Qt::NoBrush);
+    p.setBrush(Qt::red);
     p.drawRect(r);
 }

@@ -33,7 +33,7 @@ public:
 
     void draw(QPainter& p);
 
-private:    
+private:
     qint32 idxFocus;
 
     bool movePoint;

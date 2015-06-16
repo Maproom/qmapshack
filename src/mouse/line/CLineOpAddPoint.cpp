@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "mouse/line/CLineOpAddPoint.h"
+#include "canvas/CCanvas.h"
 
 #include <QtWidgets>
 
@@ -30,3 +31,31 @@ CLineOpAddPoint::~CLineOpAddPoint()
 {
 }
 
+void CLineOpAddPoint::mousePressEvent(QMouseEvent * e)
+{
+    //if(idxFocus == NOIDX)
+    {
+        ILineOp::mousePressEvent(e);
+        return;
+    }
+
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void CLineOpAddPoint::mouseMoveEvent(QMouseEvent * e)
+{
+    if(mapMove)
+    {
+        ILineOp::mouseMoveEvent(e);
+        return;
+    }
+
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void CLineOpAddPoint::mouseReleaseEvent(QMouseEvent *e)
+{
+
+    ILineOp::mouseReleaseEvent(e);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}

@@ -33,8 +33,7 @@ public:
 
     void draw(QPainter& p);
 
-private:
-    qint32 isCloseTo(const QPoint& pos);
+private:    
     qint32 idxFocus;
 
     bool movePoint;

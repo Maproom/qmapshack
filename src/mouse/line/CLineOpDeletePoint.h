@@ -27,9 +27,14 @@ public:
     CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpDeletePoint();
 
-    void draw(QPainter& p)
-    {
-    }
+    void mouseMoveEvent(QMouseEvent * e);
+    void mouseReleaseEvent(QMouseEvent *e);
+
+    void draw(QPainter& p);
+
+private:
+    qint32 idxFocus;
+
 };
 
 #endif //CLINEOPDELETEPOINT_H

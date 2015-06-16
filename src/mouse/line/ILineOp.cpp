@@ -75,12 +75,12 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 
 void ILineOp::finalizeOperation(qint32 idx)
 {
-    if(!parentHandler->useAutoRouting())
+    if(idx == NOIDX)
     {
         return;
     }
 
-    if(idx != NOIDX)
+    if(parentHandler->useAutoRouting())
     {
         if(idx > 0)
         {
@@ -111,3 +111,24 @@ void ILineOp::finalizeOperation(qint32 idx)
         }
     }
 }
+
+qint32 ILineOp::isCloseTo(const QPoint& pos)
+{
+    qint32 min = NOINT;
+    qint32 idx = NOIDX;
+    const int N = points.size();
+    for(int i = 0; i < N; i++)
+    {
+        const IGisLine::point_t& pt = points[i];
+
+        qint32 d = (pos - pt.pixel).manhattanLength();
+        if((d < 20) && (d < min))
+        {
+            min = d;
+            idx = i;
+        }
+    }
+
+    return idx;
+}
+

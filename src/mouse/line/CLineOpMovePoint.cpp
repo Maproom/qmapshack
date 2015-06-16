@@ -109,22 +109,3 @@ void CLineOpMovePoint::draw(QPainter& p)
     p.drawRect(r);
 }
 
-qint32 CLineOpMovePoint::isCloseTo(const QPoint& pos)
-{
-    qint32 min = NOINT;
-    qint32 idx = NOIDX;
-    const int N = points.size();
-    for(int i = 0; i < N; i++)
-    {
-        const IGisLine::point_t& pt = points[i];
-
-        qint32 d = (pos - pt.pixel).manhattanLength();
-        if((d < 20) && (d < min))
-        {
-            min = d;
-            idx = i;
-        }
-    }
-
-    return idx;
-}

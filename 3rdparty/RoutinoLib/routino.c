@@ -242,6 +242,7 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
 
 RoutinoCalculate_end:
 
+    DeleteFakeNodes();
     for(int n = 0; results[n] != NULL; n++)
     {
         FreeResultsList(results[n]);

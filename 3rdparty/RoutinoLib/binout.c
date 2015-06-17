@@ -90,33 +90,6 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
     T_RoutinoRoute * route_first   = 0;
     T_RoutinoRoute * route_next    = 0;
 
-    /* Print the head of the files */
-    if(textfile)
-    {
-        if(translate_raw_copyright_creator[0] && translate_raw_copyright_creator[1])
-        {
-            fprintf(textfile,"# %s : %s\n",translate_raw_copyright_creator[0],translate_raw_copyright_creator[1]);
-        }
-        if(translate_raw_copyright_source[0] && translate_raw_copyright_source[1])
-        {
-            fprintf(textfile,"# %s : %s\n",translate_raw_copyright_source[0],translate_raw_copyright_source[1]);
-        }
-        if(translate_raw_copyright_license[0] && translate_raw_copyright_license[1])
-        {
-            fprintf(textfile,"# %s : %s\n",translate_raw_copyright_license[0],translate_raw_copyright_license[1]);
-        }
-        if((translate_raw_copyright_creator[0] && translate_raw_copyright_creator[1]) ||
-           (translate_raw_copyright_source[0]  && translate_raw_copyright_source[1]) ||
-           (translate_raw_copyright_license[0] && translate_raw_copyright_license[1]))
-        {
-            fprintf(textfile,"#\n");
-        }
-
-        fprintf(textfile,"#Latitude\tLongitude\tSection \tSection \tTotal   \tTotal   \tPoint\tTurn\tBearing\tHighway\n");
-        fprintf(textfile,"#        \t         \tDistance\tDuration\tDistance\tDuration\tType \t    \t       \t       \n");
-        /* "%10.6f\t%11.6f\t%6.3f km\t%4.1f min\t%5.1f km\t%4.0f min\t%s\t %+d\t %+d\t%s\n" */
-    }
-
 
     /* Loop through all the sections of the route and print them */
 
@@ -429,7 +402,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                 next_waynameraw=WayName(ways,next_resultwayp);
                 if(!*next_waynameraw)
                 {
-                   next_waynameraw=translate_raw_highway[HIGHWAY(next_resultwayp->type)];
+                   //next_waynameraw=translate_raw_highway[HIGHWAY(next_resultwayp->type)];
                 }
 
                 if(!first && textfile)
@@ -443,7 +416,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                         turn_int=(int)TurnAngle(nodes,resultsegmentp,next_resultsegmentp,result->node);
                     }
 
-                    turn=translate_xml_turn[((202+turn_int)/45)%8];
+                    //turn=translate_xml_turn[((202+turn_int)/45)%8];
                 }
 
 
@@ -458,7 +431,7 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
                         next_bearing_int=(int)BearingAngle(nodes,next_resultsegmentp,next_result->node);
                     }
 
-                    next_bearing=translate_xml_heading[(4+(22+next_bearing_int)/45)%8];
+                    //next_bearing=translate_xml_heading[(4+(22+next_bearing_int)/45)%8];
                 }
             }
 

@@ -29,6 +29,11 @@ CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CGisDraw *gis, CCanvas * ca
     , movePoint(false)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMovePoint.png"),0,0);
+
+    timerRouting = new QTimer(this);
+    timerRouting->setSingleShot(true);
+    timerRouting->setInterval(400);
+    connect(timerRouting, SIGNAL(timeout()), this, SLOT(slotTimeoutRouting()));
 }
 
 CLineOpMovePoint::~CLineOpMovePoint()
@@ -43,20 +48,48 @@ void CLineOpMovePoint::mousePressEvent(QMouseEvent * e)
         return;
     }
 
-    QPointF pos = e->pos();
-    gis->convertPx2Rad(pos);
-
-    IGisLine::point_t& pt = points[idxFocus];
-    pt.subpts.clear();
-    pt.coord = pos;
-
-    if(idxFocus != 0)
+    if(e->button() == Qt::LeftButton)
     {
-        points[idxFocus - 1].subpts.clear();
-    }
 
-    movePoint = true;
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+        if(movePoint)
+        {
+            timerRouting->stop();
+            slotTimeoutRouting();
+            movePoint = false;
+        }
+        else
+        {
+            QPointF pos = e->pos();
+            gis->convertPx2Rad(pos);
+
+            IGisLine::point_t& pt = points[idxFocus];
+            pt.subpts.clear();
+
+            posOrig     = pt.coord;
+            pt.coord    = pos;
+
+            if(idxFocus != 0)
+            {
+                points[idxFocus - 1].subpts.clear();
+            }
+
+            movePoint = true;
+        }
+    }
+    else if(e->button() == Qt::RightButton)
+    {
+        if(movePoint)
+        {
+            IGisLine::point_t& pt = points[idxFocus];
+            pt.coord = posOrig;
+
+            timerRouting->stop();
+            slotTimeoutRouting();
+            movePoint = false;
+            idxFocus  = NOIDX;
+        }
+    }
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);    
 }
 
 void CLineOpMovePoint::mouseMoveEvent(QMouseEvent * e)
@@ -71,8 +104,9 @@ void CLineOpMovePoint::mouseMoveEvent(QMouseEvent * e)
     {
         QPointF pos = e->pos();
         gis->convertPx2Rad(pos);
-
         points[idxFocus].coord = pos;
+
+        timerRouting->start();
     }
     else
     {
@@ -81,16 +115,6 @@ void CLineOpMovePoint::mouseMoveEvent(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpMovePoint::mouseReleaseEvent(QMouseEvent *e)
-{
-    ILineOp::mouseReleaseEvent(e);
-
-    finalizeOperation(idxFocus);
-
-    idxFocus    = NOIDX;
-    movePoint   = false;
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}
 
 void CLineOpMovePoint::draw(QPainter& p)
 {
@@ -113,3 +137,9 @@ void CLineOpMovePoint::draw(QPainter& p)
     p.drawRect(r);
 }
 
+
+void CLineOpMovePoint::slotTimeoutRouting()
+{
+    finalizeOperation(idxFocus);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}

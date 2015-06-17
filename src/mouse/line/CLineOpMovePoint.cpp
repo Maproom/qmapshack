@@ -59,14 +59,14 @@ void CLineOpMovePoint::mousePressEvent(QMouseEvent * e)
         }
         else
         {
-            QPointF pos = e->pos();
-            gis->convertPx2Rad(pos);
+            QPointF coord = e->pos();
+            gis->convertPx2Rad(coord);
 
             IGisLine::point_t& pt = points[idxFocus];
             pt.subpts.clear();
 
             posOrig     = pt.coord;
-            pt.coord    = pos;
+            pt.coord    = coord;
 
             if(idxFocus != 0)
             {
@@ -102,9 +102,9 @@ void CLineOpMovePoint::mouseMoveEvent(QMouseEvent * e)
 
     if(movePoint)
     {
-        QPointF pos = e->pos();
-        gis->convertPx2Rad(pos);
-        points[idxFocus].coord = pos;
+        QPointF coord = e->pos();
+        gis->convertPx2Rad(coord);
+        points[idxFocus].coord = coord;
 
         timerRouting->start();
     }

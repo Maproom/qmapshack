@@ -18,14 +18,21 @@
 
 #include "canvas/CCanvas.h"
 #include "mouse/line/CLineOpAddPoint.h"
+#include "gis/CGisDraw.h"
 
 #include <QtWidgets>
 
 CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
     , idxFocus(NOIDX)
+    , addPoint(false)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorAdd.png"),0,0);
+
+    timerRouting = new QTimer(this);
+    timerRouting->setSingleShot(true);
+    timerRouting->setInterval(400);
+    connect(timerRouting, SIGNAL(timeout()), this, SLOT(slotTimeoutRouting()));
 }
 
 CLineOpAddPoint::~CLineOpAddPoint()
@@ -40,6 +47,33 @@ void CLineOpAddPoint::mousePressEvent(QMouseEvent * e)
         return;
     }
 
+    if(e->button() == Qt::LeftButton)
+    {
+        if(addPoint)
+        {
+            timerRouting->stop();
+            slotTimeoutRouting();
+            addPoint = false;
+            idxFocus = NOIDX;
+        }
+        else
+        {
+            QPointF coord = e->pos();
+            gis->convertPx2Rad(coord);
+
+            idxFocus++;
+            points.insert(idxFocus, IGisLine::point_t(coord));
+
+            addPoint = true;
+        }
+    }
+    else if(e->button() == Qt::RightButton)
+    {
+        points.remove(idxFocus);
+        addPoint = false;
+        idxFocus = NOIDX;
+    }
+
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -51,7 +85,19 @@ void CLineOpAddPoint::mouseMoveEvent(QMouseEvent * e)
         return;
     }
 
-    idxFocus = isCloseToLine(e->pos());
+    if(addPoint)
+    {
+        QPointF coord = e->pos();
+        gis->convertPx2Rad(coord);
+
+        points[idxFocus].coord = coord;
+
+        timerRouting->start();
+    }
+    else
+    {
+        idxFocus = isCloseToLine(e->pos());
+    }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -68,7 +114,24 @@ void CLineOpAddPoint::draw(QPainter& p)
         return;
     }
 
-    if(idxFocus < (points.size() - 1))
+    if(addPoint)
+    {
+        const IGisLine::point_t& pt1 = points[idxFocus];
+        QRect r(0,0,9,9);
+
+        p.setPen(QPen(Qt::white,4));
+        p.setBrush(Qt::red);
+
+        r.moveCenter(pt1.pixel.toPoint());
+        p.drawRect(r);
+
+        p.setPen(QPen(Qt::red,2));
+        p.setBrush(Qt::red);
+
+        r.moveCenter(pt1.pixel.toPoint());
+        p.drawRect(r);
+    }
+    else if(idxFocus < (points.size() - 1))
     {
         QPolygonF line;
         const IGisLine::point_t& pt1 = points[idxFocus];
@@ -90,7 +153,7 @@ void CLineOpAddPoint::draw(QPainter& p)
         QRect r(0,0,9,9);
 
         p.setPen(QPen(Qt::white,4));
-        p.setBrush(Qt::red);
+        p.setBrush(Qt::white);
 
         r.moveCenter(pt1.pixel.toPoint());
         p.drawRect(r);
@@ -112,4 +175,10 @@ void CLineOpAddPoint::draw(QPainter& p)
         p.setPen(QPen(Qt::red, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(line);
     }
+}
+
+void CLineOpAddPoint::slotTimeoutRouting()
+{
+    finalizeOperation(idxFocus);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }

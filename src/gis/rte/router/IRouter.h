@@ -31,7 +31,7 @@ public:
 
     virtual void calcRoute(const IGisItem::key_t& key) = 0;
     virtual bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) = 0;
-    bool hasFastRouting()
+    virtual bool hasFastRouting()
     {
         return fastRouting;
     }

@@ -42,8 +42,6 @@ protected slots:
 protected:
     IGisLine * getGisLine();
 
-private:
-    IGisItem::key_t key;
 };
 
 #endif //CMOUSEEDITRTE_H

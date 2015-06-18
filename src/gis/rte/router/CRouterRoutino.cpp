@@ -84,6 +84,10 @@ CRouterRoutino::~CRouterRoutino()
     RoutinoRelease();
 }
 
+bool CRouterRoutino::hasFastRouting()
+{
+    return IRouter::hasFastRouting() && (comboDatabase->count() != 0);
+}
 
 void CRouterRoutino::slotSetupPaths()
 {

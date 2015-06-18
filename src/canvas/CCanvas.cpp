@@ -106,6 +106,9 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     demLoadIndicator->show();
 
     labelStatusMessages = new QLabel(this);
+    labelStatusMessages->setWordWrap(true);
+    labelStatusMessages->setMinimumWidth(300);
+    labelStatusMessages->setAlignment(Qt::AlignJustify);
     labelStatusMessages->hide();
 
     connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));

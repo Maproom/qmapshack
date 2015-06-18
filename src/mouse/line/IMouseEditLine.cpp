@@ -37,9 +37,9 @@
 
 #include <QtWidgets>
 
-IMouseEditLine::IMouseEditLine(quint32 features, const QPointF& point, CGisDraw * gis, CCanvas * parent)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
-    , features(features)
+    , key(key)
     , lineOp(0)
 {
     commonSetup();
@@ -49,9 +49,9 @@ IMouseEditLine::IMouseEditLine(quint32 features, const QPointF& point, CGisDraw 
     points.updatePixel(gis);
 }
 
-IMouseEditLine::IMouseEditLine(quint32 features, IGisLine &src, CGisDraw *gis, CCanvas *parent)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
-    , features(features)
+    , key(key)
     , lineOp(0)
 {
     commonSetup();
@@ -95,6 +95,10 @@ void IMouseEditLine::commonSetup()
     connect(scrOptEditLine->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()));
     connect(scrOptEditLine->toolAddPoint, SIGNAL(clicked()), this, SLOT(slotAddPoint()));
     connect(scrOptEditLine->toolDeletePoint, SIGNAL(clicked()), this, SLOT(slotDeletePoint()));
+
+    connect(scrOptEditLine->toolNoRoute, SIGNAL(clicked()), this, SLOT(slotNoRouting()));
+    connect(scrOptEditLine->toolAutoRoute, SIGNAL(clicked()), this, SLOT(slotAutoRouting()));
+    connect(scrOptEditLine->toolVectorRoute, SIGNAL(clicked()), this, SLOT(slotVectorRouting()));
 
     SETTINGS;
     int mode = cfg.value("Route/drawMode",0).toInt();
@@ -227,6 +231,8 @@ void IMouseEditLine::wheelEvent(QWheelEvent * e)
 
 void IMouseEditLine::slotDeletePoint()
 {
+    canvas->reportStatus(key.item, tr("<b>Delete Point</b><br/>Move the mouse close to a point and press the left button to delete it.<br/>"));
+
     delete lineOp;
     lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
@@ -241,6 +247,7 @@ void IMouseEditLine::slotSelectRange()
 
 void IMouseEditLine::slotMovePoint()
 {
+    canvas->reportStatus(key.item, tr("<b>Move Point</b><br/>Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.<br/>"));
     delete lineOp;
     lineOp = new CLineOpMovePoint(points, gis, canvas, this);
     changeCursor();
@@ -248,10 +255,28 @@ void IMouseEditLine::slotMovePoint()
 
 void IMouseEditLine::slotAddPoint()
 {
+    canvas->reportStatus(key.item, tr("<b>Add Point</b><br/>Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.<br/>"));
+
     delete lineOp;
     lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();
 }
+
+void IMouseEditLine::slotNoRouting()
+{
+    canvas->reportStatus(key.item, tr("<b>No Routing</b><br/>All points will be connected with a straight line.<br/>"));
+}
+
+void IMouseEditLine::slotAutoRouting()
+{
+    canvas->reportStatus(key.item, tr("<b>Auto Routing</b><br/>The current router setup is used to derive a route between points. <b>Note:</b> The selected router must be able to route on-the-fly. Offline routers can, online routers can't.<br/>"));
+}
+
+void IMouseEditLine::slotVectorRouting()
+{
+    canvas->reportStatus(key.item, tr("<b>No Routing</b><br/>Connect points with a line from a loaded vector map if possible.<br/>"));
+}
+
 
 void IMouseEditLine::changeCursor()
 {

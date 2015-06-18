@@ -25,15 +25,14 @@
 #include <QtWidgets>
 
 CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(eFeatureSnapToLines, point, gis, parent)
+    : IMouseEditLine(IGisItem::key_t(), point, gis, parent)
 {
 }
 
 CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(eFeatureSnapToLines, area, gis, parent)
+    : IMouseEditLine(area.getKey(), area, gis, parent)
 {
-    key         = area.getKey();
-    canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a corner point for more options.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>"));
 
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }

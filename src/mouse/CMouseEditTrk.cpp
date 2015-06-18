@@ -25,21 +25,20 @@
 #include <QtWidgets>
 
 CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(eFeatureSnapToLines|eFeatureRouting, point, gis, parent)
+    : IMouseEditLine(IGisItem::key_t(), point, gis, parent)
 {
 }
 
 CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(eFeatureSnapToLines|eFeatureRouting, trk, gis, parent)
+    : IMouseEditLine(trk.getKey(), trk, gis, parent)
 {
-    key         = trk.getKey();
+    canvas->reportStatus(key.item, tr("<b>Edit Track Points</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>"));
 
     // reset any focus the track might have.
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseEditTrk");
     trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseEditTrk");
     trk.looseUserFocus();
 
-    canvas->reportStatus(key.item, tr("<b>Edit Track Points</b><br/>Select a track point for more options.<br/>"));
     /*
         trigger complete update of GIS components to make sure all changes to
         the originating object are reflected on the canvas

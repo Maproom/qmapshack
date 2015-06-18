@@ -19,7 +19,6 @@
 #ifndef CMOUSEEDITTRK_H
 #define CMOUSEEDITTRK_H
 
-#include "gis/IGisItem.h"
 #include "mouse/line/IMouseEditLine.h"
 
 class CGisItemTrk;
@@ -43,8 +42,6 @@ protected slots:
 protected:
     IGisLine * getGisLine();
 
-private:
-    IGisItem::key_t key;
 };
 
 #endif //CMOUSEEDITTRK_H

@@ -44,8 +44,6 @@ protected:
 
     IGisLine * getGisLine();
 
-private:
-    IGisItem::key_t key;
 };
 
 #endif //CMOUSEEDITAREA_H

@@ -20,6 +20,7 @@
 #define IMOUSEEDITLINE_H
 
 #include "gis/IGisLine.h"
+#include "gis/IGisItem.h"
 #include "mouse/IMouse.h"
 #include <QPointer>
 #include <QPolygonF>
@@ -48,14 +49,14 @@ public:
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(quint32 faetures, const QPointF& point, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, CGisDraw * gis, CCanvas * parent);
     /**
        @brief Edit an existing track
        @param trk       the track to edit
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(quint32 features, IGisLine &src, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDraw * gis, CCanvas * parent);
     virtual ~IMouseEditLine();
 
     void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect);
@@ -85,6 +86,10 @@ protected slots:
      */
     void slotAddPoint();
 
+    void slotNoRouting();
+    void slotAutoRouting();
+    void slotVectorRouting();
+
 
     virtual void slotAbort();
     virtual void slotCopyToOrig();
@@ -105,10 +110,11 @@ protected:
     SGisLine points;
 
     CScrOptEditLine * scrOptEditLine;
+
+    IGisItem::key_t key;
 private:
     void commonSetup();
     void changeCursor();
-    quint32 features;
 
     QPolygonF pixelLine;
     QPolygonF pixelPts;

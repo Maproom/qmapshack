@@ -37,9 +37,10 @@ public:
     {
     }
 
-    void draw(QPainter& p)
+    void drawFg(QPainter& p)
     {
     }
+
 };
 
 #endif //CLINEOPSELECTRANGE_H

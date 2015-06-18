@@ -2820,7 +2820,7 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
 
 
 
-bool CMapIMG::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
 {
     foreach(const CGarminPolygon &line, polylines)
     {

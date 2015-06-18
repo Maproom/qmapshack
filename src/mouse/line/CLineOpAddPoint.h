@@ -33,7 +33,7 @@ public:
     {
     }
 
-    void draw(QPainter& p);
+    void drawFg(QPainter& p);
 
     void canvasPanned(QPointF pos);
 

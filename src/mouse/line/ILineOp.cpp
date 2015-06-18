@@ -17,9 +17,11 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
+#include "gis/CGisDraw.h"
 #include "gis/rte/router/CRouterSetup.h"
 #include "mouse/line/ILineOp.h"
 #include "mouse/line/IMouseEditLine.h"
+#include "GeoMath.h"
 
 #include <QtWidgets>
 
@@ -55,6 +57,15 @@ void ILineOp::slotTimeoutRouting()
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
+void ILineOp::needsRedraw()
+{
+}
+
+void ILineOp::drawBg(QPainter& p)
+{
+    drawLeadLine(leadLinePixel1,p);
+    drawLeadLine(leadLinePixel1,p);
+}
 
 void ILineOp::drawSinglePoint(const QPointF &pt, QPainter& p)
 {
@@ -67,6 +78,12 @@ void ILineOp::drawSinglePoint(const QPointF &pt, QPainter& p)
     p.setPen(penFgPoint);
     p.setBrush(brushFgPoint);
     p.drawRect(rectPoint);
+}
+
+void ILineOp::drawLeadLine(const QPolygonF& line, QPainter& p)
+{
+    p.setPen(QPen(Qt::yellow, 7, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(line);
 }
 
 void ILineOp::mousePressEvent(QMouseEvent * e)
@@ -103,6 +120,49 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
     }
     else
     {
+        leadLinePixel1.clear();
+        leadLinePixel2.clear();
+        subLinePixel1.clear();
+        subLinePixel2.clear();
+
+        if(parentHandler->useVectorRouting() && (idxFocus != NOIDX))
+        {
+            leadLineCoord1.clear();
+            leadLineCoord2.clear();
+            subLineCoord1.clear();
+            subLineCoord2.clear();
+
+            if(idxFocus > 0)
+            {
+                const IGisLine::point_t& pt1 = points[idxFocus - 1];
+                const IGisLine::point_t& pt2 = points[idxFocus];
+                if(canvas->findPolylineCloseBy(pt2.pixel, pt2.pixel, 10, leadLineCoord1))
+                {
+                    leadLinePixel1 = leadLineCoord1;
+                    gis->convertRad2Px(leadLinePixel1);
+
+                    segment_t result;
+                    GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel1, result);
+                    result.apply(leadLineCoord1, leadLinePixel1, subLineCoord1, subLinePixel1, gis);
+                }
+            }
+
+            if(idxFocus < points.size() - 1)
+            {
+                const IGisLine::point_t& pt1 = points[idxFocus];
+                const IGisLine::point_t& pt2 = points[idxFocus + 1];
+                if(canvas->findPolylineCloseBy(pt1.pixel, pt1.pixel, 10, leadLineCoord2))
+                {
+                    leadLinePixel2 = leadLineCoord2;
+                    gis->convertRad2Px(leadLinePixel2);
+
+                    segment_t result;
+                    GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel2, result);
+                    result.apply(leadLineCoord2, leadLinePixel2, subLineCoord2, subLinePixel2, gis);
+                }
+            }
+        }
+
         mouseMoveEventEx(e);
     }
 
@@ -150,6 +210,28 @@ void ILineOp::finalizeOperation(qint32 idx)
             foreach(const QPointF &sub, subs)
             {
                 pt1.subpts << IGisLine::subpt_t(sub);
+            }
+        }
+    }
+    else if(parentHandler->useVectorRouting())
+    {
+        if(idx > 0)
+        {
+            IGisLine::point_t& pt1 = points[idx - 1];
+            pt1.subpts.clear();
+            foreach(const QPointF& pt, subLineCoord1)
+            {
+                pt1.subpts << IGisLine::subpt_t(pt);
+            }
+        }
+
+        if(idx < (points.size() - 1))
+        {
+            IGisLine::point_t& pt1 = points[idx];
+            pt1.subpts.clear();
+            foreach(const QPointF& pt, subLineCoord2)
+            {
+                pt1.subpts << IGisLine::subpt_t(pt);
             }
         }
     }

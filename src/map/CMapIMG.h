@@ -164,7 +164,7 @@ public:
        @param polyline      the resulting polyline, if any, in [rad]
        @return              Return true if a line has been found.
      */
-    bool findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+    bool findPolylineCloseBy(const QPointF &pt1, const QPointF &pt2, qint32 threshold, QPolygonF& polyline);
 
 
 private:

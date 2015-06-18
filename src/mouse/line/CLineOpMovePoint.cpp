@@ -85,7 +85,16 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
     {
         QPointF coord = e->pos();
         gis->convertPx2Rad(coord);
-        points[idxFocus].coord = coord;
+
+        IGisLine::point_t& pt = points[idxFocus];
+
+        pt.coord = coord;
+        pt.subpts.clear();
+
+        if(idxFocus > 0)
+        {
+            points[idxFocus - 1].subpts.clear();
+        }
 
         timerRouting->start();
     }
@@ -106,7 +115,7 @@ void CLineOpMovePoint::canvasPanned(QPointF pos)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpMovePoint::draw(QPainter& p)
+void CLineOpMovePoint::drawFg(QPainter& p)
 {
     if(idxFocus == NOIDX)
     {

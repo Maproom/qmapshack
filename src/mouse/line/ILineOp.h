@@ -46,7 +46,10 @@ public:
     virtual void mouseMoveEventEx(QMouseEvent * e) = 0;
     virtual void mouseReleaseEventEx(QMouseEvent *e) = 0;
 
-    virtual void draw(QPainter& p) = 0;
+    virtual void drawFg(QPainter& p) = 0;
+    virtual void drawBg(QPainter& p);
+
+    virtual void needsRedraw();
 
     const QCursor& getCursor()
     {
@@ -66,6 +69,7 @@ protected:
     qint32 isCloseToLine(const QPoint& pos);
 
     void drawSinglePoint(const QPointF& pt, QPainter& p);
+    void drawLeadLine(const QPolygonF& line, QPainter& p);
 
     IMouseEditLine * parentHandler;
     SGisLine& points;
@@ -86,6 +90,16 @@ protected:
     const QPen penFgPoint;
     const QBrush brushBgPoint;
     const QBrush brushFgPoint;
+
+    QPolygonF leadLineCoord1;
+    QPolygonF leadLineCoord2;
+    QPolygonF leadLinePixel1;
+    QPolygonF leadLinePixel2;
+
+    QPolygonF subLineCoord1;
+    QPolygonF subLineCoord2;
+    QPolygonF subLinePixel1;
+    QPolygonF subLinePixel2;
 };
 
 #endif //ILINEOP_H

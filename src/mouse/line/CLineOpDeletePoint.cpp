@@ -50,7 +50,7 @@ void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
 }
 
 
-void CLineOpDeletePoint::draw(QPainter& p)
+void CLineOpDeletePoint::drawFg(QPainter& p)
 {
     if(idxFocus == NOIDX)
     {

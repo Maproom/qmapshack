@@ -162,12 +162,16 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
                 pixelSubs << sub.pixel;
             }
         }
+
+        lineOp->needsRedraw();
     }
 
     if(pixelPts.isEmpty())
     {
         return;
     }
+
+    lineOp->drawBg(p);
 
     drawLine(pixelLine, Qt::white, 7, p);
 
@@ -207,7 +211,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
     r3.moveCenter(pixelPts.last().toPoint());
     p.drawRect(r3);
 
-    lineOp->draw(p);
+    lineOp->drawFg(p);
 }
 
 

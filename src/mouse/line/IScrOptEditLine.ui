@@ -247,9 +247,6 @@
         </item>
         <item>
          <widget class="QToolButton" name="toolVectorRoute">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
           <property name="toolTip">
            <string>Snap line along lines of a vector map.</string>
           </property>

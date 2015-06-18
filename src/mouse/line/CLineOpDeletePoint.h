@@ -33,7 +33,7 @@ public:
     void mouseMoveEventEx(QMouseEvent * e);
     void mouseReleaseEventEx(QMouseEvent *e);
 
-    void draw(QPainter& p);
+    void drawFg(QPainter& p);
 
 private:
 };

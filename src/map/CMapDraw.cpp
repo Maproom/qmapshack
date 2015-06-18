@@ -159,7 +159,7 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
     CMapItem::mutexActiveMaps.unlock();
 }
 
-bool CMapDraw::findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
 {
     if(isRunning())
     {

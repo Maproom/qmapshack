@@ -580,45 +580,45 @@ void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF
     {
         if(idx11 == idx21)
         {
-            segPixel.push_back(px1);
-            segPixel.push_back(px2);
+//            segPixel.push_back(px1);
+//            segPixel.push_back(px2);
 
-            segCoord.push_back(pt1);
-            segCoord.push_back(pt2);
+//            segCoord.push_back(pt1);
+//            segCoord.push_back(pt2);
         }
         else if(idx12 == idx21)
         {
-            segPixel.push_back(px1);
+//            segPixel.push_back(px1);
             segPixel.push_back(pixel[idx12]);
-            segPixel.push_back(px2);
+//            segPixel.push_back(px2);
 
-            segCoord.push_back(pt1);
+//            segCoord.push_back(pt1);
             segCoord.push_back(coords[idx12]);
-            segCoord.push_back(pt2);
+//            segCoord.push_back(pt2);
         }
         else if(idx11 < idx21)
         {
-            segPixel.push_back(px1);
-            segCoord.push_back(pt1);
+//            segPixel.push_back(px1);
+//            segCoord.push_back(pt1);
             for(int i = idx12; i <= idx21; i++)
             {
                 segPixel.push_back(pixel[i]);
                 segCoord.push_back(coords[i]);
             }
-            segPixel.push_back(px2);
-            segCoord.push_back(pt2);
+//            segPixel.push_back(px2);
+//            segCoord.push_back(pt2);
         }
         else if(idx11 > idx21)
         {
-            segPixel.push_back(px1);
-            segCoord.push_back(pt1);
+//            segPixel.push_back(px1);
+//            segCoord.push_back(pt1);
             for(int i = idx11; i > idx21; i--)
             {
                 segPixel.push_back(pixel[i]);
                 segCoord.push_back(coords[i]);
             }
-            segPixel.push_back(px2);
-            segCoord.push_back(pt2);
+//            segPixel.push_back(px2);
+//            segCoord.push_back(pt2);
         }
     }
 }

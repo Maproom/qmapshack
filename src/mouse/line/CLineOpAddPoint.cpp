@@ -42,8 +42,23 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
         if(addPoint)
         {
             slotTimeoutRouting();
-            addPoint = false;
-            idxFocus = NOIDX;
+
+            if(isPoint)
+            {
+                if(idxFocus == (points.size() - 1))
+                {
+                    idxFocus++;
+                }
+
+                QPointF coord = e->pos();
+                gis->convertPx2Rad(coord);
+                points.insert(idxFocus, IGisLine::point_t(coord));
+            }
+            else
+            {
+                addPoint = false;
+                idxFocus = NOIDX;
+            }
         }
         else if(isPoint)
         {
@@ -95,7 +110,15 @@ void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
         QPointF coord = e->pos();
         gis->convertPx2Rad(coord);
 
-        points[idxFocus].coord = coord;
+        IGisLine::point_t& pt = points[idxFocus];
+
+        pt.coord = coord;
+        pt.subpts.clear();
+
+        if(idxFocus > 0)
+        {
+            points[idxFocus - 1].subpts.clear();
+        }
 
         timerRouting->start();
     }
@@ -123,7 +146,7 @@ void CLineOpAddPoint::canvasPanned(QPointF pos)
 }
 
 
-void CLineOpAddPoint::draw(QPainter& p)
+void CLineOpAddPoint::drawFg(QPainter& p)
 {
     if(idxFocus == NOIDX)
     {

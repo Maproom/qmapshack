@@ -157,7 +157,7 @@ public:
        @param polyline      the resulting polyline, if any, in [rad]
        @return              Return true if a line has been found.
      */
-    virtual bool findPolylineCloseBy(QPointF& pt1, QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+    virtual bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
 public slots:
     void slotSetShowPolygons(bool yes)

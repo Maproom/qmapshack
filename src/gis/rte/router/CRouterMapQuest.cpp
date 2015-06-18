@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CRouterMapQuest.h"
+#include "gis/rte/router/CRouterMapQuest.h"
 
 CRouterMapQuest::CRouterMapQuest(QWidget *parent)
     : IRouter(false, parent)

@@ -64,7 +64,7 @@ void ILineOp::needsRedraw()
 void ILineOp::drawBg(QPainter& p)
 {
     drawLeadLine(leadLinePixel1,p);
-    drawLeadLine(leadLinePixel1,p);
+    drawLeadLine(leadLinePixel2,p);
 }
 
 void ILineOp::drawSinglePoint(const QPointF &pt, QPainter& p)

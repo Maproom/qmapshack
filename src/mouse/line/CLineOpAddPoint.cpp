@@ -95,6 +95,12 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
         points.remove(idxFocus);
         idxFocus--;
 
+        if(idxFocus == (points.size() - 1))
+        {
+            subLineCoord1.clear();
+            subLineCoord2.clear();
+        }
+
         slotTimeoutRouting();
         idxFocus = NOIDX;
     }

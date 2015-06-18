@@ -215,6 +215,18 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 }
 
 
+void IMouseEditLine::startNewLine(const QPointF& point)
+{
+    points << IGisLine::point_t(point);
+
+    delete lineOp;
+    CLineOpAddPoint * lineOpAddPoint =  new CLineOpAddPoint(points, gis, canvas, this);
+    lineOp = lineOpAddPoint;
+
+    changeCursor();
+    lineOpAddPoint->append();
+}
+
 void IMouseEditLine::mousePressEvent(QMouseEvent * e)
 {
     point  = e->pos();

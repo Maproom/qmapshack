@@ -29,6 +29,8 @@
 CMouseEditRte::CMouseEditRte(const QPointF &point, CGisDraw *gis, CCanvas *parent)
     : IMouseEditLine(IGisItem::key_t(), point, gis, parent)
 {
+    startNewLine(point);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditRte::CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent)

@@ -37,6 +37,8 @@ public:
 
     void canvasPanned(QPointF pos);
 
+    void append();
+
 private:
     bool addPoint;
     bool isPoint;

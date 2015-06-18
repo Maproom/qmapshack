@@ -110,6 +110,8 @@ protected:
      */
     virtual IGisLine * getGisLine() = 0;
 
+    virtual void startNewLine(const QPointF &point);
+
     /// shadow cursor needed to restore cursor after some actions providing their own cursor.
     QCursor cursor1;
 

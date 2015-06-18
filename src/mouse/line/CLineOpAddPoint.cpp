@@ -35,6 +35,14 @@ CLineOpAddPoint::~CLineOpAddPoint()
 {
 }
 
+void CLineOpAddPoint::append()
+{
+    idxFocus = points.size();
+    points.insert(idxFocus, IGisLine::point_t(points.last()));
+    addPoint = true;
+    isPoint  = true;
+}
+
 void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)

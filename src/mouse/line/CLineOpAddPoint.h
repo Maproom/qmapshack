@@ -23,23 +23,19 @@
 
 class CLineOpAddPoint : public ILineOp
 {
-    Q_OBJECT
 public:
     CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpAddPoint();
 
-    void mousePressEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent *e);
+    void mousePressEventEx(QMouseEvent * e);
+    void mouseMoveEventEx(QMouseEvent * e);
+    void mouseReleaseEventEx(QMouseEvent *e){}
 
     void draw(QPainter& p);
-private slots:
-    void slotTimeoutRouting();
 
 private:
-    int idxFocus;
     bool addPoint;
-    QTimer * timerRouting;
+    bool isPoint;
 };
 
 #endif //CLINEOPADDPOINT_H

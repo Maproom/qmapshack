@@ -23,23 +23,18 @@
 
 class CLineOpMovePoint : public ILineOp
 {
-    Q_OBJECT
 public:
     CLineOpMovePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpMovePoint();
 
-    void mousePressEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
+    void mousePressEventEx(QMouseEvent * e);
+    void mouseMoveEventEx(QMouseEvent * e);
+    void mouseReleaseEventEx(QMouseEvent * e){}
 
     void draw(QPainter& p);
 
-private slots:
-    void slotTimeoutRouting();
-
-private:        
-    qint32 idxFocus;
-    bool movePoint;
-    QTimer * timerRouting;
+private:            
+    bool movePoint;    
     QPointF posOrig;
 };
 

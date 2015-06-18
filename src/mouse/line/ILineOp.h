@@ -22,6 +22,9 @@
 #include "gis/IGisLine.h"
 #include <QCursor>
 #include <QObject>
+#include <QRect>
+#include <QPen>
+#include <QBrush>
 
 class QMouseEvent;
 class CCanvas;
@@ -30,6 +33,7 @@ class IMouseEditLine;
 
 class ILineOp : public QObject
 {
+    Q_OBJECT
 public:
     ILineOp(SGisLine &points, CGisDraw * gis, CCanvas * canvas, IMouseEditLine * parent);
     virtual ~ILineOp();
@@ -38,6 +42,10 @@ public:
     virtual void mouseMoveEvent(QMouseEvent * e);
     virtual void mouseReleaseEvent(QMouseEvent *e);
 
+    virtual void mousePressEventEx(QMouseEvent * e) = 0;
+    virtual void mouseMoveEventEx(QMouseEvent * e) = 0;
+    virtual void mouseReleaseEventEx(QMouseEvent *e) = 0;
+
     virtual void draw(QPainter& p) = 0;
 
     const QCursor& getCursor()
@@ -45,23 +53,35 @@ public:
         return cursor;
     }
 
+protected slots:
+    void slotTimeoutRouting();
+
 protected:
     virtual void finalizeOperation(qint32 idx);
     qint32 isCloseTo(const QPoint& pos);
     qint32 isCloseToLine(const QPoint& pos);
 
+    void drawSinglePoint(const QPointF& pt, QPainter& p);
 
     IMouseEditLine * parentHandler;
     SGisLine& points;
     CCanvas * canvas;
     CGisDraw * gis;
+    QTimer * timerRouting;
 
     QCursor cursor;
 
+    qint32 idxFocus;
     bool mapMove;
     bool mapDidMove;
 
     QPoint lastPos;
+
+    QRect rectPoint;
+    const QPen penBgPoint;
+    const QPen penFgPoint;
+    const QBrush brushBgPoint;
+    const QBrush brushFgPoint;
 };
 
 #endif //ILINEOP_H

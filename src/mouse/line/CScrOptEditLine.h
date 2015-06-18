@@ -32,6 +32,7 @@ public:
     void draw(QPainter& p)
     {
     }
+
 };
 
 #endif //CSCROPTEDITLINE_H

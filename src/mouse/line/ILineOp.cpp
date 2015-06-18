@@ -29,29 +29,67 @@ ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLin
     , points(points)
     , canvas(canvas)
     , gis(gis)
+    , idxFocus(NOIDX)
     , mapMove(false)
     , mapDidMove(false)
+    , rectPoint(0,0,9,9)
+    , penBgPoint(Qt::white, 4)
+    , penFgPoint(Qt::red, 2)
+    , brushBgPoint(Qt::white)
+    , brushFgPoint(Qt::red)
 {
+    timerRouting = new QTimer(this);
+    timerRouting->setSingleShot(true);
+    timerRouting->setInterval(400);
+    connect(timerRouting, SIGNAL(timeout()), this, SLOT(slotTimeoutRouting()));
 }
 
 ILineOp::~ILineOp()
 {
 }
 
+void ILineOp::slotTimeoutRouting()
+{
+    timerRouting->stop();
+    finalizeOperation(idxFocus);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+
+void ILineOp::drawSinglePoint(const QPointF &pt, QPainter& p)
+{
+    rectPoint.moveCenter(pt.toPoint());
+
+    p.setPen(penBgPoint);
+    p.setBrush(brushBgPoint);
+    p.drawRect(rectPoint);
+
+    p.setPen(penFgPoint);
+    p.setBrush(brushFgPoint);
+    p.drawRect(rectPoint);
+}
+
 void ILineOp::mousePressEvent(QMouseEvent * e)
 {
-    const QPoint& pos = e->pos();
-
-    if(e->button() == Qt::LeftButton)
+    if(idxFocus != NOIDX)
     {
-        lastPos     = pos;
-        mapMove     = true;
-        mapDidMove  = false;
+        mousePressEventEx(e);
+    }
+    else
+    {
+        const QPoint& pos = e->pos();
+
+        if(e->button() == Qt::LeftButton)
+        {
+            lastPos     = pos;
+            mapMove     = true;
+            mapDidMove  = false;
+        }
     }
 }
 
 void ILineOp::mouseMoveEvent(QMouseEvent * e)
-{
+{      
     const QPoint& pos = e->pos();
 
     if(mapMove)
@@ -63,14 +101,19 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
             mapDidMove  = true;
         }
     }
+    else
+    {
+        mouseMoveEventEx(e);
+    }
 
     lastPos = pos;
 }
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
+    mouseReleaseEventEx(e);
     mapMove     = false;
-    mapDidMove  = false;
+    mapDidMove  = false;    
 }
 
 void ILineOp::finalizeOperation(qint32 idx)
@@ -114,7 +157,7 @@ void ILineOp::finalizeOperation(qint32 idx)
 
 qint32 ILineOp::isCloseTo(const QPoint& pos)
 {
-    qint32 min = NOINT;
+    qint32 min = 30;
     qint32 idx = NOIDX;
     const int N = points.size();
     for(int i = 0; i < N; i++)
@@ -122,7 +165,7 @@ qint32 ILineOp::isCloseTo(const QPoint& pos)
         const IGisLine::point_t& pt = points[i];
 
         qint32 d = (pos - pt.pixel).manhattanLength();
-        if((d < 20) && (d < min))
+        if(d < min)
         {
             min = d;
             idx = i;

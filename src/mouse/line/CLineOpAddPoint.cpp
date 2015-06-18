@@ -24,37 +24,39 @@
 
 CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
-    , idxFocus(NOIDX)
     , addPoint(false)
+    , isPoint(false)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorAdd.png"),0,0);
-
-    timerRouting = new QTimer(this);
-    timerRouting->setSingleShot(true);
-    timerRouting->setInterval(400);
-    connect(timerRouting, SIGNAL(timeout()), this, SLOT(slotTimeoutRouting()));
 }
 
 CLineOpAddPoint::~CLineOpAddPoint()
 {
 }
 
-void CLineOpAddPoint::mousePressEvent(QMouseEvent * e)
+void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
 {
-    if(idxFocus == NOIDX)
-    {
-        ILineOp::mousePressEvent(e);
-        return;
-    }
-
     if(e->button() == Qt::LeftButton)
     {
         if(addPoint)
-        {
-            timerRouting->stop();
+        {            
             slotTimeoutRouting();
             addPoint = false;
             idxFocus = NOIDX;
+        }
+        else if(isPoint)
+        {
+            if(idxFocus == (points.size() - 1))
+            {
+                idxFocus++;
+            }
+
+            QPointF coord = e->pos();
+            gis->convertPx2Rad(coord);
+            points.insert(idxFocus, IGisLine::point_t(coord));
+
+            addPoint = true;
+
         }
         else
         {
@@ -69,22 +71,24 @@ void CLineOpAddPoint::mousePressEvent(QMouseEvent * e)
     }
     else if(e->button() == Qt::RightButton)
     {
-        points.remove(idxFocus);
         addPoint = false;
+
+        if(idxFocus > 0)
+        {
+            points[idxFocus - 1].subpts.clear();
+        }
+        points.remove(idxFocus);
+        idxFocus--;
+
+        slotTimeoutRouting();
         idxFocus = NOIDX;
     }
 
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpAddPoint::mouseMoveEvent(QMouseEvent * e)
+void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
 {
-    if(mapMove)
-    {
-        ILineOp::mouseMoveEvent(e);
-        return;
-    }
-
     if(addPoint)
     {
         QPointF coord = e->pos();
@@ -96,14 +100,14 @@ void CLineOpAddPoint::mouseMoveEvent(QMouseEvent * e)
     }
     else
     {
+        isPoint  = false;
         idxFocus = isCloseToLine(e->pos());
+        if(idxFocus == NOIDX)
+        {
+            idxFocus = isCloseTo(e->pos());
+            isPoint  = true;
+        }
     }
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}
-
-void CLineOpAddPoint::mouseReleaseEvent(QMouseEvent *e)
-{
-    ILineOp::mouseReleaseEvent(e);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -116,20 +120,13 @@ void CLineOpAddPoint::draw(QPainter& p)
 
     if(addPoint)
     {
-        const IGisLine::point_t& pt1 = points[idxFocus];
-        QRect r(0,0,9,9);
-
-        p.setPen(QPen(Qt::white,4));
-        p.setBrush(Qt::red);
-
-        r.moveCenter(pt1.pixel.toPoint());
-        p.drawRect(r);
-
-        p.setPen(QPen(Qt::red,2));
-        p.setBrush(Qt::red);
-
-        r.moveCenter(pt1.pixel.toPoint());
-        p.drawRect(r);
+        const IGisLine::point_t& pt = points[idxFocus];
+        drawSinglePoint(pt.pixel, p);
+    }
+    else if(isPoint)
+    {
+        const IGisLine::point_t& pt = points[idxFocus];
+        drawSinglePoint(pt.pixel, p);
     }
     else if(idxFocus < (points.size() - 1))
     {
@@ -143,6 +140,7 @@ void CLineOpAddPoint::draw(QPainter& p)
         }
         else
         {
+            line << pt1.pixel;
             foreach(const IGisLine::subpt_t& pt, pt1.subpts)
             {
                 line << pt.pixel;
@@ -150,35 +148,28 @@ void CLineOpAddPoint::draw(QPainter& p)
             line << pt2.pixel;
         }
 
-        QRect r(0,0,9,9);
+        p.setPen(penBgPoint);
+        p.setBrush(brushBgPoint);
 
-        p.setPen(QPen(Qt::white,4));
-        p.setBrush(Qt::white);
-
-        r.moveCenter(pt1.pixel.toPoint());
-        p.drawRect(r);
-        r.moveCenter(pt2.pixel.toPoint());
-        p.drawRect(r);
+        rectPoint.moveCenter(pt1.pixel.toPoint());
+        p.drawRect(rectPoint);
+        rectPoint.moveCenter(pt2.pixel.toPoint());
+        p.drawRect(rectPoint);
 
         p.setPen(QPen(Qt::white, 7, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(line);
 
 
-        p.setPen(QPen(Qt::red,2));
-        p.setBrush(Qt::red);
+        p.setPen(penFgPoint);
+        p.setBrush(brushFgPoint);
 
-        r.moveCenter(pt1.pixel.toPoint());
-        p.drawRect(r);
-        r.moveCenter(pt2.pixel.toPoint());
-        p.drawRect(r);
+        rectPoint.moveCenter(pt1.pixel.toPoint());
+        p.drawRect(rectPoint);
+        rectPoint.moveCenter(pt2.pixel.toPoint());
+        p.drawRect(rectPoint);
 
         p.setPen(QPen(Qt::red, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(line);
     }
 }
 
-void CLineOpAddPoint::slotTimeoutRouting()
-{
-    finalizeOperation(idxFocus);
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}

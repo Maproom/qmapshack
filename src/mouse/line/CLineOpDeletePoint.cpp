@@ -24,7 +24,6 @@
 
 CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
-    , idxFocus(NOIDX)
 {
     cursor  = QCursor(QPixmap(":/cursors/cursorDelete.png"),0,0);
 }
@@ -33,29 +32,20 @@ CLineOpDeletePoint::~CLineOpDeletePoint()
 {
 }
 
-void CLineOpDeletePoint::mouseMoveEvent(QMouseEvent * e)
+void CLineOpDeletePoint::mouseMoveEventEx(QMouseEvent * e)
 {
-    if(mapMove)
-    {
-        ILineOp::mouseMoveEvent(e);
-        return;
-    }
-
     idxFocus = isCloseTo(e->pos());
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpDeletePoint::mouseReleaseEvent(QMouseEvent *e)
+void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
 {
     if(!mapDidMove && idxFocus != NOIDX)
     {
         points.remove(idxFocus);
-
         finalizeOperation(idxFocus - 1);
     }
     idxFocus    = NOIDX;
-
-    ILineOp::mouseReleaseEvent(e);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -68,15 +58,5 @@ void CLineOpDeletePoint::draw(QPainter& p)
     }
 
     const IGisLine::point_t& pt = points[idxFocus];
-
-    QRect r(0,0,9,9);
-    r.moveCenter(pt.pixel.toPoint());
-
-    p.setPen(QPen(Qt::white,4));
-    p.setBrush(Qt::red);
-    p.drawRect(r);
-
-    p.setPen(QPen(Qt::red,2));
-    p.setBrush(Qt::red);
-    p.drawRect(r);
+    drawSinglePoint(pt.pixel, p);
 }

@@ -27,6 +27,10 @@ public:
     CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpSelectRange();
 
+    void mousePressEventEx(QMouseEvent * e){}
+    void mouseMoveEventEx(QMouseEvent * e){}
+    void mouseReleaseEventEx(QMouseEvent *e){}
+
     void draw(QPainter& p)
     {
     }

@@ -19,8 +19,8 @@
 #ifndef IMOUSEEDITLINE_H
 #define IMOUSEEDITLINE_H
 
-#include "gis/IGisLine.h"
 #include "gis/IGisItem.h"
+#include "gis/IGisLine.h"
 #include "mouse/IMouse.h"
 #include <QPointer>
 #include <QPolygonF>
@@ -68,6 +68,11 @@ public:
     bool useAutoRouting();
     bool useVectorRouting();
 
+    void setCanvasPanning(bool enable)
+    {
+        doCanvasPanning = enable;
+    }
+
 protected slots:
     /**
        @brief Delete the selected point
@@ -95,6 +100,8 @@ protected slots:
     virtual void slotCopyToOrig();
     virtual void slotCopyToNew() = 0;
 
+    void slotPanCanvas();
+
 protected:
     virtual void drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p);
     /**
@@ -115,6 +122,8 @@ protected:
 private:
     void commonSetup();
     void changeCursor();
+
+    bool doCanvasPanning;
 
     QPolygonF pixelLine;
     QPolygonF pixelPts;

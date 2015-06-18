@@ -17,8 +17,9 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "mouse/line/CLineOpAddPoint.h"
 #include "gis/CGisDraw.h"
+#include "mouse/line/CLineOpAddPoint.h"
+#include "mouse/line/IMouseEditLine.h"
 
 #include <QtWidgets>
 
@@ -39,7 +40,7 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         if(addPoint)
-        {            
+        {
             slotTimeoutRouting();
             addPoint = false;
             idxFocus = NOIDX;
@@ -56,7 +57,6 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
             points.insert(idxFocus, IGisLine::point_t(coord));
 
             addPoint = true;
-
         }
         else
         {
@@ -84,6 +84,7 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
         idxFocus = NOIDX;
     }
 
+    parentHandler->setCanvasPanning(addPoint);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -110,6 +111,17 @@ void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
     }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
+
+void CLineOpAddPoint::canvasPanned(QPointF pos)
+{
+    if(addPoint)
+    {
+        gis->convertPx2Rad(pos);
+        points[idxFocus].coord = pos;
+    }
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
 
 void CLineOpAddPoint::draw(QPainter& p)
 {

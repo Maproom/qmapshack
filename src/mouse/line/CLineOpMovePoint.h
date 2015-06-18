@@ -29,12 +29,16 @@ public:
 
     void mousePressEventEx(QMouseEvent * e);
     void mouseMoveEventEx(QMouseEvent * e);
-    void mouseReleaseEventEx(QMouseEvent * e){}
+    void mouseReleaseEventEx(QMouseEvent * e)
+    {
+    }
 
     void draw(QPainter& p);
 
-private:            
-    bool movePoint;    
+    void canvasPanned(QPointF pos);
+
+private:
+    bool movePoint;
     QPointF posOrig;
 };
 

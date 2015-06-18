@@ -20,11 +20,11 @@
 #define ILINEOP_H
 
 #include "gis/IGisLine.h"
+#include <QBrush>
 #include <QCursor>
 #include <QObject>
-#include <QRect>
 #include <QPen>
-#include <QBrush>
+#include <QRect>
 
 class QMouseEvent;
 class CCanvas;
@@ -51,6 +51,10 @@ public:
     const QCursor& getCursor()
     {
         return cursor;
+    }
+
+    virtual void canvasPanned(QPointF pos)
+    {
     }
 
 protected slots:

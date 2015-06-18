@@ -19,6 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "mouse/line/CLineOpMovePoint.h"
+#include "mouse/line/IMouseEditLine.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -38,7 +39,6 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {
-
         if(movePoint)
         {
             slotTimeoutRouting();
@@ -75,7 +75,8 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
             idxFocus  = NOIDX;
         }
     }
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);    
+    parentHandler->setCanvasPanning(movePoint);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
@@ -95,6 +96,15 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
+void CLineOpMovePoint::canvasPanned(QPointF pos)
+{
+    if(movePoint)
+    {
+        gis->convertPx2Rad(pos);
+        points[idxFocus].coord = pos;
+    }
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
 
 void CLineOpMovePoint::draw(QPainter& p)
 {

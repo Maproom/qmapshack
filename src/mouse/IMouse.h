@@ -59,10 +59,13 @@ public:
     {
         return cursor;
     }
+
     CCanvas * getCanvas()
     {
         return canvas;
     }
+
+    void panCanvas(const QPoint& pos);
 
     virtual void setMouseTracking(bool enabled);
 
@@ -70,7 +73,6 @@ protected slots:
     virtual void slotPanCanvas();
 
 protected:
-    void panCanvas(const QPoint& pos);
     /// the functions mouse icon
     QCursor cursor;
 

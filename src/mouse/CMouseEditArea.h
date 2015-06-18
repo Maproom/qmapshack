@@ -43,7 +43,6 @@ protected:
     void drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p);
 
     IGisLine * getGisLine();
-
 };
 
 #endif //CMOUSEEDITAREA_H

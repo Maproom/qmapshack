@@ -89,7 +89,7 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
 }
 
 void ILineOp::mouseMoveEvent(QMouseEvent * e)
-{      
+{
     const QPoint& pos = e->pos();
 
     if(mapMove)
@@ -113,7 +113,7 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
     mouseReleaseEventEx(e);
     mapMove     = false;
-    mapDidMove  = false;    
+    mapDidMove  = false;
 }
 
 void ILineOp::finalizeOperation(qint32 idx)

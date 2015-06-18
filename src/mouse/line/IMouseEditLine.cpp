@@ -40,6 +40,7 @@
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
     , key(key)
+    , doCanvasPanning(false)
     , lineOp(0)
 {
     commonSetup();
@@ -52,6 +53,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
     , key(key)
+    , doCanvasPanning(false)
     , lineOp(0)
 {
     commonSetup();
@@ -211,22 +213,38 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
 void IMouseEditLine::mousePressEvent(QMouseEvent * e)
 {
+    point  = e->pos();
     lineOp->mousePressEvent(e);
 }
 
 void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
 {
+    point  = e->pos();
+
+    if(doCanvasPanning)
+    {
+        panCanvas(e->pos());
+    }
+
     lineOp->mouseMoveEvent(e);
 }
 
 void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
 {
+    point  = e->pos();
     lineOp->mouseReleaseEvent(e);
 }
 
 void IMouseEditLine::wheelEvent(QWheelEvent * e)
 {
     canvas->update();
+}
+
+
+void IMouseEditLine::slotPanCanvas()
+{
+    IMouse::slotPanCanvas();
+    lineOp->canvasPanned(point);
 }
 
 void IMouseEditLine::slotDeletePoint()
@@ -269,7 +287,7 @@ void IMouseEditLine::slotNoRouting()
 
 void IMouseEditLine::slotAutoRouting()
 {
-    canvas->reportStatus(key.item, tr("<b>Auto Routing</b><br/>The current router setup is used to derive a route between points. <b>Note:</b> The selected router must be able to route on-the-fly. Offline routers can, online routers can't.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Auto Routing</b><br/>The current router setup is used to derive a route between points. <b>Note:</b> The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can't.<br/>"));
 }
 
 void IMouseEditLine::slotVectorRouting()

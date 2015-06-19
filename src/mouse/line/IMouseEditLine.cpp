@@ -236,6 +236,8 @@ void IMouseEditLine::startNewLine(const QPointF& point)
     {
         lineOpAddPoint->append();
     }
+
+    canvas->reportStatus(key.item, tr("<b>New Line</b><br/>Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.<br/>"));
 }
 
 void IMouseEditLine::mousePressEvent(QMouseEvent * e)

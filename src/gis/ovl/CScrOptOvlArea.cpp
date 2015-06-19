@@ -24,7 +24,7 @@
 #include "mouse/IMouse.h"
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
-    : IScrOpt(parent->getCanvas())
+    : IScrOpt(parent)
 {
     key = area->getKey();
 

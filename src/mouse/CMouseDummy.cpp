@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,20 +16,16 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTPOINT_H
-#define CSCROPTPOINT_H
+#include "CMouseDummy.h"
 
-#include "mouse/IScrOpt.h"
-#include "ui_IScrOptPoint.h"
-
-class CScrOptPoint : public IScrOpt, public Ui::IScrOptPoint
+CMouseDummy::CMouseDummy()
+    : IMouse(0,0)
 {
-public:
-    CScrOptPoint(const QPointF& point, IMouse *mouse);
-    virtual ~CScrOptPoint();
+    cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"),0,0);
+}
 
-    void draw(QPainter& p);
-};
+CMouseDummy::~CMouseDummy()
+{
 
-#endif //CSCROPTPOINT_H
+}
 

@@ -22,8 +22,8 @@
 
 #include <QtWidgets>
 
-CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, QWidget *parent)
-    : IScrOpt(parent)
+CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse *mouse)
+    : IScrOpt(mouse)
 {
     setupUi(this);
     label->setFont(CMainWindow::self().getMapFont());

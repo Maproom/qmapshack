@@ -26,7 +26,7 @@ class CScrOptEditLine : public IScrOpt, public Ui::IScrOptEditLine
 {
     Q_OBJECT
 public:
-    CScrOptEditLine(QWidget * parent);
+    CScrOptEditLine(IMouse *mouse);
     virtual ~CScrOptEditLine();
 
     void draw(QPainter& p)

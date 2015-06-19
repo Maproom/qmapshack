@@ -24,7 +24,7 @@
 #include "mouse/IMouse.h"
 
 CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
-    : IScrOpt(parent->getCanvas())
+    : IScrOpt(parent)
 {
     key         = trk->getKey();
 

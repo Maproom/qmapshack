@@ -21,6 +21,7 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "plot/CPlotData.h"
+#include "mouse/CMouseDummy.h"
 #include <QWidget>
 
 class QMenu;
@@ -164,6 +165,8 @@ protected:
     mouse_click_state_e mouseClickState;
 
     QPointer<CScrOptRangeTrk> scrOptRange;
+
+    CMouseDummy dummyMouse;
 };
 
 #endif //IPLOT_H

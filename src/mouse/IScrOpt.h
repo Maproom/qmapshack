@@ -22,15 +22,17 @@
 #include <QPixmap>
 #include <QRect>
 #include <QWidget>
+#include <QPointer>
 
 class QMouseEvent;
+class IMouse;
 
 #define SCR_OPT_OFFSET 15
 
 class IScrOpt : public QWidget
 {
 public:
-    IScrOpt(QWidget * parent);
+    IScrOpt(IMouse *mouse);
     virtual ~IScrOpt();
 
 
@@ -44,15 +46,20 @@ public:
     }
 
     virtual void draw(QPainter& p) = 0;
-    virtual void mouseMoveEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
 
 protected:
+    void enterEvent(QEvent * e);
+    void leaveEvent(QEvent * e);
+
     void drawBubble1(const QPointF &pt, QPainter& p);
     void drawBubble2(const QPointF &pt, QPainter& p);
 
     QPoint origin;
-
     QPoint mousePos;
+
+    QPointer<IMouse> mouse;
+
 };
 
 #endif //ISCROPT_H

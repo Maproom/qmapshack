@@ -36,7 +36,7 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     , stateItemSel(eStateIdle)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
-    screenUnclutter = new CScrOptUnclutter(canvas);
+    screenUnclutter = new CScrOptUnclutter(this);
 
     menu = new QMenu(canvas);
     menu->addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, SLOT(slotAddWpt()));

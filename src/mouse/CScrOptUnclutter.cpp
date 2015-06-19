@@ -91,8 +91,8 @@ const QPoint CScrOptUnclutter::positions[9][8] =
 };
 
 
-CScrOptUnclutter::CScrOptUnclutter(QWidget *parent)
-    : IScrOpt(parent)
+CScrOptUnclutter::CScrOptUnclutter(IMouse *mouse)
+    : IScrOpt(mouse)
     , doSpecialCursor(false)
 {
 }

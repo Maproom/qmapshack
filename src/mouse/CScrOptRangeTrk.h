@@ -27,7 +27,7 @@ class CGisItemTrk;
 class CScrOptRangeTrk : public IScrOpt, public Ui::IScrOptRangeTrk
 {
 public:
-    CScrOptRangeTrk(const QPointF& point, CGisItemTrk *trk, QWidget * parent);
+    CScrOptRangeTrk(const QPointF& point, CGisItemTrk *trk, IMouse *mouse);
     virtual ~CScrOptRangeTrk();
 
     void draw(QPainter& p);

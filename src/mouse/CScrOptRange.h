@@ -25,7 +25,7 @@
 class CScrOptRange : public IScrOpt, public Ui::IScrOptRange
 {
 public:
-    CScrOptRange(const QPointF& point, QWidget * parent);
+    CScrOptRange(const QPointF& point, IMouse *mouse);
     virtual ~CScrOptRange();
 
     void draw(QPainter& p);

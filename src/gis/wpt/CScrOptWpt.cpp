@@ -28,7 +28,7 @@
 #include <QtWidgets>
 
 CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
-    : IScrOpt(parent->getCanvas())
+    : IScrOpt(parent)
 {
     key         = wpt->getKey();
 

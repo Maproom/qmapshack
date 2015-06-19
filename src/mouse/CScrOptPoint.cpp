@@ -21,8 +21,8 @@
 
 #include <QtWidgets>
 
-CScrOptPoint::CScrOptPoint(const QPointF &point, QWidget *parent)
-    : IScrOpt(parent)
+CScrOptPoint::CScrOptPoint(const QPointF &point, IMouse * mouse)
+    : IScrOpt(mouse)
 {
     setupUi(this);
     adjustSize();

@@ -92,7 +92,7 @@ IMouseEditLine::~IMouseEditLine()
 void IMouseEditLine::commonSetup()
 {
     // create permanent line edit on screen options
-    scrOptEditLine = new CScrOptEditLine(canvas);
+    scrOptEditLine = new CScrOptEditLine(this);
     connect(scrOptEditLine->pushSaveOrig, SIGNAL(clicked()), this, SLOT(slotCopyToOrig()));
     connect(scrOptEditLine->pushSaveNew, SIGNAL(clicked()), this, SLOT(slotCopyToNew()));
     connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
@@ -324,8 +324,7 @@ void IMouseEditLine::slotVectorRouting()
 void IMouseEditLine::changeCursor()
 {
     cursor = lineOp->getCursor();
-    QApplication::restoreOverrideCursor();
-    QApplication::setOverrideCursor(cursor);
+    QApplication::changeOverrideCursor(cursor);
 }
 
 void IMouseEditLine::slotAbort()

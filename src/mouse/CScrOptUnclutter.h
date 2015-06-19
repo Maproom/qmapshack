@@ -26,7 +26,7 @@
 class CScrOptUnclutter : public IScrOpt
 {
 public:
-    CScrOptUnclutter(QWidget *parent);
+    CScrOptUnclutter(IMouse *mouse);
     virtual ~CScrOptUnclutter();
 
     struct item_t

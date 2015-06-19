@@ -20,8 +20,8 @@
 
 #include <QtWidgets>
 
-CScrOptRange::CScrOptRange(const QPointF &point, QWidget *parent)
-    : IScrOpt(parent)
+CScrOptRange::CScrOptRange(const QPointF &point, IMouse *mouse)
+    : IScrOpt(mouse)
 {
     setupUi(this);
     adjustSize();

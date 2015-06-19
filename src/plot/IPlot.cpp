@@ -384,7 +384,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                     Later, when destroyed the slots will be disconnected automatically.
                  */
                 delete scrOptRange;
-                scrOptRange = new CScrOptRangeTrk(e->pos(), trk, this);
+                scrOptRange = new CScrOptRangeTrk(e->pos(), trk, &dummyMouse);
                 connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
                 connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
                 connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));

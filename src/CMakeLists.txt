@@ -89,6 +89,7 @@ set( SRCS
     grid/mitab.cpp
     mouse/IMouse.cpp    
     mouse/IScrOpt.cpp
+    mouse/CMouseDummy.cpp
     mouse/CMouseNormal.cpp
     mouse/CMouseMoveWpt.cpp
     mouse/CMouseEditTrk.cpp
@@ -283,6 +284,7 @@ set( HDRS
     grid/mitab.h
     mouse/IMouse.h    
     mouse/IScrOpt.h
+    mouse/CMouseDummy.h
     mouse/CMouseNormal.h
     mouse/CMouseMoveWpt.h
     mouse/CMouseEditTrk.h

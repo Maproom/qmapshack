@@ -18,17 +18,24 @@
 
 #include "canvas/CCanvas.h"
 #include "mouse/IScrOpt.h"
+#include "mouse/IMouse.h"
 #include "units/IUnit.h"
 #include <QtWidgets>
 
 
-IScrOpt::IScrOpt(QWidget *parent)
-    : QWidget(parent)
+IScrOpt::IScrOpt(IMouse *mouse)
+    : QWidget(mouse->getCanvas())
+    , mouse(mouse)
 {
+    setFocusPolicy(Qt::WheelFocus);
 }
 
 IScrOpt::~IScrOpt()
 {
+    if(!mouse.isNull() && hasFocus())
+    {
+        QApplication::changeOverrideCursor(*mouse);
+    }
 }
 
 
@@ -36,6 +43,20 @@ void IScrOpt::mouseMoveEvent(QMouseEvent * e)
 {
     mousePos = e->pos();
 }
+
+void IScrOpt::enterEvent(QEvent * e)
+{
+    QWidget::enterEvent(e);
+    QApplication::changeOverrideCursor(Qt::ArrowCursor);
+}
+
+
+void IScrOpt::leaveEvent(QEvent * e)
+{
+    QWidget::leaveEvent(e);
+    QApplication::changeOverrideCursor(*mouse);
+}
+
 
 void IScrOpt::drawBubble1(const QPointF& pt, QPainter& p)
 {

@@ -43,7 +43,8 @@ void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
     if(!mapDidMove && idxFocus != NOIDX)
     {
         points.remove(idxFocus);
-        finalizeOperation(idxFocus - 1);
+        updateLeadLines(idxFocus);
+        finalizeOperation(idxFocus);
     }
     idxFocus    = NOIDX;
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);

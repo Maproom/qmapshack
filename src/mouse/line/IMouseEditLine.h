@@ -24,6 +24,7 @@
 #include "mouse/IMouse.h"
 #include <QPointer>
 #include <QPolygonF>
+#include <QDebug>
 
 class CGisDraw;
 class CCanvas;
@@ -71,6 +72,7 @@ public:
     void setCanvasPanning(bool enable)
     {
         doCanvasPanning = enable;
+        qDebug() << doCanvasPanning;
     }
 
 protected slots:

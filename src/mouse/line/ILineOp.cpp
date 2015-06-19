@@ -120,49 +120,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
     }
     else
     {
-        leadLinePixel1.clear();
-        leadLinePixel2.clear();
-        subLinePixel1.clear();
-        subLinePixel2.clear();
-
-        if(parentHandler->useVectorRouting() && (idxFocus != NOIDX))
-        {
-            leadLineCoord1.clear();
-            leadLineCoord2.clear();
-            subLineCoord1.clear();
-            subLineCoord2.clear();
-
-            if(idxFocus > 0)
-            {
-                const IGisLine::point_t& pt1 = points[idxFocus - 1];
-                const IGisLine::point_t& pt2 = points[idxFocus];
-                if(canvas->findPolylineCloseBy(pt2.pixel, pt2.pixel, 10, leadLineCoord1))
-                {
-                    leadLinePixel1 = leadLineCoord1;
-                    gis->convertRad2Px(leadLinePixel1);
-
-                    segment_t result;
-                    GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel1, result);
-                    result.apply(leadLineCoord1, leadLinePixel1, subLineCoord1, subLinePixel1, gis);
-                }
-            }
-
-            if(idxFocus < points.size() - 1)
-            {
-                const IGisLine::point_t& pt1 = points[idxFocus];
-                const IGisLine::point_t& pt2 = points[idxFocus + 1];
-                if(canvas->findPolylineCloseBy(pt1.pixel, pt1.pixel, 10, leadLineCoord2))
-                {
-                    leadLinePixel2 = leadLineCoord2;
-                    gis->convertRad2Px(leadLinePixel2);
-
-                    segment_t result;
-                    GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel2, result);
-                    result.apply(leadLineCoord2, leadLinePixel2, subLineCoord2, subLinePixel2, gis);
-                }
-            }
-        }
-
+        updateLeadLines(idxFocus);
         mouseMoveEventEx(e);
     }
 
@@ -174,6 +132,52 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
     mouseReleaseEventEx(e);
     mapMove     = false;
     mapDidMove  = false;
+}
+
+void ILineOp::updateLeadLines(qint32 idx)
+{
+    leadLinePixel1.clear();
+    leadLinePixel2.clear();
+    subLinePixel1.clear();
+    subLinePixel2.clear();
+
+    if(parentHandler->useVectorRouting() && (idx != NOIDX))
+    {
+        leadLineCoord1.clear();
+        leadLineCoord2.clear();
+        subLineCoord1.clear();
+        subLineCoord2.clear();
+
+        if(idx > 0)
+        {
+            const IGisLine::point_t& pt1 = points[idx - 1];
+            const IGisLine::point_t& pt2 = points[idx];
+            if(canvas->findPolylineCloseBy(pt2.pixel, pt2.pixel, 10, leadLineCoord1))
+            {
+                leadLinePixel1 = leadLineCoord1;
+                gis->convertRad2Px(leadLinePixel1);
+
+                segment_t result;
+                GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel1, result);
+                result.apply(leadLineCoord1, leadLinePixel1, subLineCoord1, subLinePixel1, gis);
+            }
+        }
+
+        if(idx < points.size() - 1)
+        {
+            const IGisLine::point_t& pt1 = points[idx];
+            const IGisLine::point_t& pt2 = points[idx + 1];
+            if(canvas->findPolylineCloseBy(pt1.pixel, pt1.pixel, 10, leadLineCoord2))
+            {
+                leadLinePixel2 = leadLineCoord2;
+                gis->convertRad2Px(leadLinePixel2);
+
+                segment_t result;
+                GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel2, result);
+                result.apply(leadLineCoord2, leadLinePixel2, subLineCoord2, subLinePixel2, gis);
+            }
+        }
+    }
 }
 
 void ILineOp::finalizeOperation(qint32 idx)

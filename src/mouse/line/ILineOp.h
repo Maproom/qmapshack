@@ -71,6 +71,8 @@ protected:
     void drawSinglePoint(const QPointF& pt, QPainter& p);
     void drawLeadLine(const QPolygonF& line, QPainter& p);
 
+    void updateLeadLines(qint32 idx);
+
     IMouseEditLine * parentHandler;
     SGisLine& points;
     CCanvas * canvas;

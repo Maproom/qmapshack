@@ -219,12 +219,14 @@ void IMouseEditLine::startNewLine(const QPointF& point)
 {
     points << IGisLine::point_t(point);
 
-    delete lineOp;
-    CLineOpAddPoint * lineOpAddPoint =  new CLineOpAddPoint(points, gis, canvas, this);
-    lineOp = lineOpAddPoint;
+    scrOptEditLine->toolAddPoint->setChecked(true);
+    slotAddPoint();
 
-    changeCursor();
-    lineOpAddPoint->append();
+    CLineOpAddPoint * lineOpAddPoint = dynamic_cast<CLineOpAddPoint*>(lineOp);
+    if(lineOpAddPoint)
+    {
+        lineOpAddPoint->append();
+    }
 }
 
 void IMouseEditLine::mousePressEvent(QMouseEvent * e)

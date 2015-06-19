@@ -41,6 +41,7 @@ void CLineOpAddPoint::append()
     points.insert(idxFocus, IGisLine::point_t(points.last()));
     addPoint = true;
     isPoint  = true;
+    parentHandler->setCanvasPanning(addPoint);
 }
 
 void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
@@ -96,6 +97,8 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
     {
         addPoint = false;
 
+        slotTimeoutRouting();
+
         if(idxFocus > 0)
         {
             points[idxFocus - 1].subpts.clear();
@@ -109,7 +112,6 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
             subLineCoord2.clear();
         }
 
-        slotTimeoutRouting();
         idxFocus = NOIDX;
     }
 

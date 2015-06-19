@@ -49,6 +49,8 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
 
     points << IGisLine::point_t(point);
     points.updatePixel(gis);
+
+    storeToHistory(points);
 }
 
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDraw *gis, CCanvas *parent)

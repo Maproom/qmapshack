@@ -66,12 +66,17 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
                     idxFocus++;
                 }
 
+                // store current state of line to undo/redo history
+                parentHandler->storeToHistory(points);
+
                 QPointF coord = e->pos();
                 gis->convertPx2Rad(coord);
                 points.insert(idxFocus, IGisLine::point_t(coord));
             }
             else
             {
+                // store current state of line to undo/redo history
+                parentHandler->storeToHistory(points);
                 // terminate operation if the new point was inbetween a line segment.
                 addPoint = false;
                 idxFocus = NOIDX;
@@ -109,19 +114,13 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
     else if(e->button() == Qt::RightButton)
     {
         if(addPoint)
-        {
-            // abort current  operation
+        {            
+            // cancel action and restore last state of line
+            timerRouting->stop();
+            parentHandler->restoreFromHistory(points);
+
             addPoint = false;
-
-
-            if(idxFocus > 0)
-            {
-                points[idxFocus - 1].subpts.clear();
-            }
-            points.remove(idxFocus--);
-
-            updateLeadLines(idxFocus);
-            slotTimeoutRouting();
+            idxFocus = NOIDX;
         }
         idxFocus = NOIDX;
     }
@@ -138,23 +137,30 @@ void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
         gis->convertPx2Rad(coord);
 
         IGisLine::point_t& pt = points[idxFocus];
-
+        // update position of point
         pt.coord = coord;
-        pt.subpts.clear();
 
+        // clear subpoints, as they have to be recalulated
+        // by the routing, if any
+        pt.subpts.clear();
         if(idxFocus > 0)
         {
             points[idxFocus - 1].subpts.clear();
         }
 
+        // retrigger delayed routing
         timerRouting->start();
     }
     else
     {
         isPoint  = false;
+        // find line segment close to cursor
         idxFocus = isCloseToLine(e->pos());
+        // if none is found try to find point
         if(idxFocus == NOIDX)
         {
+            // if no line segment is found but a point
+            // it is either first or the last point in the line
             idxFocus = isCloseTo(e->pos());
             isPoint  = true;
         }

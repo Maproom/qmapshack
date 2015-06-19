@@ -39,7 +39,6 @@ public:
 
 private:
     bool movePoint;
-    QPointF posOrig;
 };
 
 #endif //CLINEOPMOVEPOINT_H

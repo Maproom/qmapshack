@@ -72,8 +72,10 @@ public:
     void setCanvasPanning(bool enable)
     {
         doCanvasPanning = enable;
-        qDebug() << doCanvasPanning;
     }
+
+    void storeToHistory(const SGisLine& line);
+    void restoreFromHistory(SGisLine& line);
 
 protected slots:
     /**
@@ -102,6 +104,9 @@ protected slots:
     virtual void slotCopyToOrig();
     virtual void slotCopyToNew() = 0;
 
+    void slotUndo();
+    void slotRedo();
+
     void slotPanCanvas();
 
 protected:
@@ -120,19 +125,28 @@ protected:
     /// the abstract line object to edit
     SGisLine points;
 
+    /// undo/redo history
+    QList<SGisLine> history;
+    qint32 idxHistory;
+
+
+    /// the on screen buttons
     CScrOptEditLine * scrOptEditLine;
 
+    /// the key of the GIS item to edit
     IGisItem::key_t key;
 private:
     void commonSetup();
     void changeCursor();
 
+    /// flag to enable/disable canvas/map panning
     bool doCanvasPanning;
 
     QPolygonF pixelLine;
     QPolygonF pixelPts;
     QPolygonF pixelSubs;
 
+    /// the current active line operation (move, add, delete...)
     ILineOp  * lineOp;
 };
 

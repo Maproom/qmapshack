@@ -18,6 +18,7 @@
 
 #include "canvas/CCanvas.h"
 #include "mouse/line/CLineOpDeletePoint.h"
+#include "mouse/line/IMouseEditLine.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -51,6 +52,9 @@ void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
         updateLeadLines(idxFocus);
 
         slotTimeoutRouting();
+
+        // store to undo/redo history
+        parentHandler->storeToHistory(points);
     }
     idxFocus    = NOIDX;
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);

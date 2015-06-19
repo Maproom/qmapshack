@@ -39,6 +39,7 @@
 
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
+    , idxHistory(NOIDX)
     , key(key)
     , doCanvasPanning(false)
     , lineOp(0)
@@ -52,6 +53,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
 
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
+    , idxHistory(NOIDX)
     , key(key)
     , doCanvasPanning(false)
     , lineOp(0)
@@ -60,6 +62,8 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDr
 
     src.getPolylineFromData(points);
     points.updatePixel(gis);
+
+    storeToHistory(points);
 }
 
 
@@ -101,6 +105,9 @@ void IMouseEditLine::commonSetup()
     connect(scrOptEditLine->toolNoRoute, SIGNAL(clicked()), this, SLOT(slotNoRouting()));
     connect(scrOptEditLine->toolAutoRoute, SIGNAL(clicked()), this, SLOT(slotAutoRouting()));
     connect(scrOptEditLine->toolVectorRoute, SIGNAL(clicked()), this, SLOT(slotVectorRouting()));
+
+    connect(scrOptEditLine->toolUndo, SIGNAL(clicked()), this, SLOT(slotUndo()));
+    connect(scrOptEditLine->toolRedo, SIGNAL(clicked()), this, SLOT(slotRedo()));
 
     SETTINGS;
     int mode = cfg.value("Route/drawMode",0).toInt();
@@ -341,5 +348,55 @@ void IMouseEditLine::slotCopyToOrig()
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
+void IMouseEditLine::restoreFromHistory(SGisLine& line)
+{
+    line = history[idxHistory];
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void IMouseEditLine::storeToHistory(const SGisLine& line)
+{
+    // crop history if necessary
+    if(idxHistory != NOIDX)
+    {
+        while(history.size() > (idxHistory + 1))
+        {
+            history.pop_back();
+        }
+    }
+
+    history << line;
+    idxHistory = history.size() - 1;
+
+    scrOptEditLine->toolRedo->setEnabled(false);
+    scrOptEditLine->toolUndo->setEnabled(idxHistory > 0);
+}
+
+void IMouseEditLine::slotUndo()
+{
+    if(idxHistory > 0)
+    {
+        idxHistory--;
+    }
+
+    points = history[idxHistory];
+
+    scrOptEditLine->toolRedo->setEnabled(true);
+    scrOptEditLine->toolUndo->setEnabled(idxHistory > 0);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void IMouseEditLine::slotRedo()
+{
+    if(idxHistory < (history.size() - 1))
+    {
+        idxHistory++;
+    }
 
 
+    points = history[idxHistory];
+
+    scrOptEditLine->toolRedo->setEnabled(idxHistory < (history.size() - 1));
+    scrOptEditLine->toolUndo->setEnabled(true);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}

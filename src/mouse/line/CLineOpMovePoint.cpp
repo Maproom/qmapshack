@@ -45,6 +45,8 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
             slotTimeoutRouting();
             // terminate moving the point
             movePoint = false;
+            // store new state of line to undo/redo history
+            parentHandler->storeToHistory(points);
         }
         else
         {
@@ -53,9 +55,7 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
 
             // start moving the point
             IGisLine::point_t& pt = points[idxFocus];
-            // store original position to restore it on abort
-            posOrig     = pt.coord;
-            pt.coord    = coord;
+            pt.coord = coord;
             // clear the subpoints from this point to the next
             pt.subpts.clear();
 
@@ -73,13 +73,10 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
     {
         if(movePoint)
         {
-            // abort moving the point and restore old position.
-            IGisLine::point_t& pt = points[idxFocus];
-            pt.coord = posOrig;
+            // cancel action and restore last state of line
+            timerRouting->stop();
+            parentHandler->restoreFromHistory(points);
 
-            // restore subpoints via routing, if selected.
-            updateLeadLines(idxFocus);
-            slotTimeoutRouting();
             movePoint = false;
             idxFocus  = NOIDX;
         }
@@ -102,7 +99,8 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
         // update position of point
         pt.coord = coord;
 
-        // no subpoints while the point is actively moving
+        // clear subpoints, as they have to be recalulated
+        // by the routing, if any
         pt.subpts.clear();
         if(idxFocus > 0)
         {

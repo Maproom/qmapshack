@@ -37,7 +37,7 @@
      <item>
       <widget class="QToolButton" name="toolEditDetails">
        <property name="toolTip">
-        <string>View details &amp;amp; Edit properties of track.</string>
+        <string>View details and edit properties of track.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -65,7 +65,7 @@
      <item>
       <widget class="QToolButton" name="toolDelete">
        <property name="toolTip">
-        <string>Delete</string>
+        <string>Delete track from project.</string>
        </property>
        <property name="text">
         <string>...</string>

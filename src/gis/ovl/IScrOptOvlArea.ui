@@ -36,6 +36,9 @@
      </property>
      <item>
       <widget class="QToolButton" name="toolEditDetails">
+       <property name="toolTip">
+        <string>View details and edit.</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
@@ -61,6 +64,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolDelete">
+       <property name="toolTip">
+        <string>Delete area from project.</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
@@ -79,6 +85,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolEdit">
+       <property name="toolTip">
+        <string>Edit shape of the area.</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>

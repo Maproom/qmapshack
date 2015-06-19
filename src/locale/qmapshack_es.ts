@@ -1482,7 +1482,7 @@ Estructura desconocida.</translation>
         <translation type="obsolete">&lt;b&gt;Editar Área&lt;/b&gt;&lt;br/&gt;Seleccione un punto de las esquinas para más información.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="35"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1490,7 +1490,7 @@ Estructura desconocida.</translation>
 <context>
     <name>CMouseEditRte</name>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="37"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1502,17 +1502,17 @@ Estructura desconocida.</translation>
         <translation type="obsolete">&lt;b&gt;Editar Puntos del Track&lt;/b&gt;&lt;br/&gt;Selecciones un punto del track para más opciones.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="35"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="37"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="75"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="77"/>
         <source>Warning!</source>
         <translation type="unfinished">¡Cuidado!</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="75"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="77"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="unfinished">Esto sustituirá todos los datos del original con una simple línea de coordenadas. Todos los demás datos se perderán definitivamente.</translation>
     </message>
@@ -3484,32 +3484,32 @@ I don&apos;t want to read the documentation!</source>
         <translation type="obsolete">Esto sustituirá todos los datos del original con una simple línea de coordenadas. Todos los demás datos se perderán definitivamente.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="252"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="277"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="268"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="293"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="276"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="301"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="285"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="310"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="290"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="315"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="295"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="320"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3776,6 +3776,8 @@ o
         <location filename="../mouse/line/IScrOptEditLine.ui" line="128"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="151"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="283"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="300"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -3815,13 +3817,23 @@ o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="254"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="251"/>
         <source>Snap line along lines of a vector map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="257"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="254"/>
         <source>V</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="280"/>
+        <source>Undo last change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
+        <source>Redo next change</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3834,19 +3846,34 @@ o
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="65"/>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="83"/>
+        <source>View details and edit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="43"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="57"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="71"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="92"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="51"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
         <source>Copy area into another project.</source>
         <translation>Copiar área en otro proyecto.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="112"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
+        <source>Delete area from project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="89"/>
+        <source>Edit shape of the area.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="121"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3954,9 +3981,8 @@ o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="28"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ver detalles &amp;amp; Editar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ver detalles &amp;amp; Editar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="31"/>
@@ -3973,9 +3999,18 @@ o
         <translation>Copiar ruta en otro proyecto.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Borrar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Borrar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="28"/>
+        <source>View details and edit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
+        <source>Delete route from project.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="77"/>
@@ -4001,14 +4036,12 @@ o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details &amp;amp; Edit properties of track.</source>
-        <translation>Ver detalles / Editar las propiedades del track.</translation>
+        <translation type="obsolete">Ver detalles / Editar las propiedades del track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
         <source>Delete</source>
-        <translation>Eliminar</translation>
+        <translation type="obsolete">Eliminar</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="89"/>
@@ -4024,6 +4057,11 @@ o
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
         <source>Edit position of track points.</source>
         <translation>Editar la posición de los puntos del track.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
+        <source>View details and edit properties of track.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
@@ -4042,6 +4080,11 @@ o
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
         <source>Copy track into another project.</source>
         <translation>Copiar track en otro proyecto.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
+        <source>Delete track from project.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
@@ -4072,17 +4115,21 @@ o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Ver detalles / Editar</translation>
+        <translation type="obsolete">Ver detalles / Editar</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
+        <source>View details and edit.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="80"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="101"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="118"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="132"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -4093,21 +4140,38 @@ o
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
+        <source>Delete waypoint from project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
+        <source>Show content as static bubble.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
+        <source>Move waypoint to a new location.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
+        <source>Clone waypoint and move clone a given distance and angle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Eliminar</translation>
+        <translation type="obsolete">Eliminar</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move waypoint to a new location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mover el waypoint a una nueva ubicación.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mover el waypoint a una nueva ubicación.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="126"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clone waypoint and move clone a given distance and angle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clonar el waypoibt y moverlo una cierta distancia y ángulo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clonar el waypoibt y moverlo una cierta distancia y ángulo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="173"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="176"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5072,9 +5136,9 @@ Filename: %1</source>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1233"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1292"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1472"/>
-        <location filename="../mouse/CMouseEditArea.cpp" line="97"/>
-        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="109"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="99"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="111"/>
         <source>Edit name...</source>
         <translation>Editar nombre...</translation>
     </message>
@@ -5217,12 +5281,12 @@ Filename: %1</source>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1233"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1292"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1472"/>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="109"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="111"/>
         <source>Enter new track name.</source>
         <translation>Introduzca el nombre del nuevo track.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="97"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="99"/>
         <source>Enter new area name.</source>
         <translation>Introduzca el nombre del nuevo área.</translation>
     </message>
@@ -5385,7 +5449,7 @@ Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <source>Enter new route name.</source>
         <translation type="unfinished"></translation>
     </message>

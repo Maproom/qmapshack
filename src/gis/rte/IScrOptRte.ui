@@ -25,7 +25,7 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>View details and edit.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -53,7 +53,7 @@
      <item>
       <widget class="QToolButton" name="toolDelete">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Delete route from project.</string>
        </property>
        <property name="text">
         <string>...</string>

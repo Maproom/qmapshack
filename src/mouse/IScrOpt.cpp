@@ -54,7 +54,10 @@ void IScrOpt::enterEvent(QEvent * e)
 void IScrOpt::leaveEvent(QEvent * e)
 {
     QWidget::leaveEvent(e);
-    QApplication::changeOverrideCursor(*mouse);
+    if(!mouse.isNull())
+    {
+        QApplication::changeOverrideCursor(*mouse);
+    }
 }
 
 

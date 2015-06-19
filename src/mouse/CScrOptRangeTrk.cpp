@@ -22,9 +22,13 @@
 
 #include <QtWidgets>
 
-CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse *mouse)
+CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse *mouse, QWidget *parent)
     : IScrOpt(mouse)
 {
+    if(parent != 0)
+    {
+        setParent(parent);
+    }
     setupUi(this);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(trk->getInfoRange());

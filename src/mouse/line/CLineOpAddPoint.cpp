@@ -37,6 +37,9 @@ CLineOpAddPoint::~CLineOpAddPoint()
 
 void CLineOpAddPoint::append()
 {
+    // this is called on construction when creating a complete new line
+    // A new point is appended to what ever line already exists,
+    // and add point mode is enetred imediately.
     idxFocus = points.size();
     points.insert(idxFocus, IGisLine::point_t(points.last()));
     addPoint = true;
@@ -50,8 +53,12 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
     {
         if(addPoint)
         {
+            // drop the new point at current position
+            // update subpoints of previous and this point
             slotTimeoutRouting();
 
+            // if isPoint is true the line has been appended/prepended
+            // in this case go on with adding another point
             if(isPoint)
             {
                 if(idxFocus == (points.size() - 1))
@@ -65,12 +72,14 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
             }
             else
             {
+                // terminate operation if the new point was inbetween a line segment.
                 addPoint = false;
                 idxFocus = NOIDX;
             }
         }
         else if(isPoint)
         {
+            // as isPoint is set, add a new point either at the start or end of the line
             if(idxFocus == (points.size() - 1))
             {
                 idxFocus++;
@@ -84,6 +93,10 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
         }
         else
         {
+            // clear current line segment
+            points[idxFocus].subpts.clear();
+
+            // add a new point to line segment
             QPointF coord = e->pos();
             gis->convertPx2Rad(coord);
 
@@ -95,23 +108,21 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
     }
     else if(e->button() == Qt::RightButton)
     {
-        addPoint = false;
-
-        slotTimeoutRouting();
-
-        if(idxFocus > 0)
+        if(addPoint)
         {
-            points[idxFocus - 1].subpts.clear();
-        }
-        points.remove(idxFocus);
-        idxFocus--;
+            // abort current  operation
+            addPoint = false;
 
-        if(idxFocus == (points.size() - 1))
-        {
-            subLineCoord1.clear();
-            subLineCoord2.clear();
-        }
 
+            if(idxFocus > 0)
+            {
+                points[idxFocus - 1].subpts.clear();
+            }
+            points.remove(idxFocus--);
+
+            updateLeadLines(idxFocus);
+            slotTimeoutRouting();
+        }
         idxFocus = NOIDX;
     }
 

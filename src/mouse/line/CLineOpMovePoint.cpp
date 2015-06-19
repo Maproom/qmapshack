@@ -40,8 +40,10 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         if(movePoint)
-        {
+        {            
+            // update subpoints by triggering the routing, if any.
             slotTimeoutRouting();
+            // terminate moving the point
             movePoint = false;
         }
         else
@@ -49,12 +51,16 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
             QPointF coord = e->pos();
             gis->convertPx2Rad(coord);
 
+            // start moving the point
             IGisLine::point_t& pt = points[idxFocus];
-            pt.subpts.clear();
-
+            // store original position to restore it on abort
             posOrig     = pt.coord;
             pt.coord    = coord;
+            // clear the subpoints from this point to the next
+            pt.subpts.clear();
 
+
+            // clear the subpoints from the previous point to this point
             if(idxFocus != 0)
             {
                 points[idxFocus - 1].subpts.clear();
@@ -67,14 +73,19 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
     {
         if(movePoint)
         {
+            // abort moving the point and restore old position.
             IGisLine::point_t& pt = points[idxFocus];
             pt.coord = posOrig;
 
+            // restore subpoints via routing, if selected.
+            updateLeadLines(idxFocus);
             slotTimeoutRouting();
             movePoint = false;
             idxFocus  = NOIDX;
         }
     }
+
+    // switch on map panning if move operation is in progress
     parentHandler->setCanvasPanning(movePoint);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
@@ -88,18 +99,22 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
 
         IGisLine::point_t& pt = points[idxFocus];
 
+        // update position of point
         pt.coord = coord;
-        pt.subpts.clear();
 
+        // no subpoints while the point is actively moving
+        pt.subpts.clear();
         if(idxFocus > 0)
         {
             points[idxFocus - 1].subpts.clear();
         }
 
+        // retrigger delayed routing
         timerRouting->start();
     }
     else
     {
+        // no point selected yet, find point to highlight
         idxFocus = isCloseTo(e->pos());
     }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
@@ -107,6 +122,7 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
 
 void CLineOpMovePoint::canvasPanned(QPointF pos)
 {
+    // update point position after canvas/map panning
     if(movePoint)
     {
         gis->convertPx2Rad(pos);

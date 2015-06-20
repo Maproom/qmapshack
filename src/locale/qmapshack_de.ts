@@ -1557,7 +1557,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Gebiet bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der LInie. E können nur Punkte geändert werden, die mit einem großen Rechteck markiert sind.  Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1588,7 +1588,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Routenpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der LInie. E können nur Punkte geändert werden, die mit einem großen Rechteck markiert sind.  Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1600,17 +1600,17 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="37"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Trackpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der LInie. E können nur Punkte geändert werden, die mit einem großen Rechteck markiert sind.  Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="77"/>
         <source>Warning!</source>
-        <translation type="unfinished">Warnung!</translation>
+        <translation>Warnung!</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="77"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
+        <translation>Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
 </context>
 <context>
@@ -1975,7 +1975,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
         <source>Select routing data file path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad für Routingdatendatei wählen...</translation>
     </message>
     <message>
         <source>Select DEM file path...</source>
@@ -3623,37 +3623,37 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="240"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Neue Linie&lt;/b&gt;&lt;br/&gt;Erzeugen Sie Punkte durch Verschieben des Mauscursors und Drücken der linken Maustaste. Mit der rechten Maustaste beenden Sie den Vorgang.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="281"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Punkt löschen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an einen Punkt und drücken Sie die linke Maustaste um ihn zu löschen. &lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="297"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Punkt verschieben&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an einen Punkt und drücken die linke Maustaste, um ihn mit dem Cursor zu fangen. Verschieben Sie den Punkt mit der Maus. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="305"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Punkt hinzufügen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an ein Liniensegmant und drücken die linke Maustaste, um einen Punkt hinzuzufügen. Der Punkt wird durch den Cursor gefangenund kann verschoben werden. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="314"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Kein Routing&lt;/b&gt;&lt;br/&gt;Alle Punkte werden mittles einer geraden Linie verbunden.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="319"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;Die aktuellen Router Einstellungen erzeugen eine Route zwischen Punkten. &lt;b&gt;Hinweis:&lt;br/&gt; Der gewählte Router muss spontan routen können. Offline Router können dies gewöhnlich, Online Router nicht.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Keun Routing&lt;/b&gt;&lt;br/&gt;Verbindet Punkte mit einer Linie einer geladenen Vektorkarte, soweit möglich.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3857,7 +3857,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="127"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation>Um Offline Routing zu nutzen, müssen Pfade zu lokalen Routendaten definiert sein. Benutzen Sie den Werkzeugbutton, um einen Pfad zu registrieren.</translation>
+        <translation>Um Offline-Routing zu nutzen, müssen Pfade zu lokalen Routendaten definiert sein. Benutzen Sie den Werkzeugbutton, um einen Pfad zu registrieren.</translation>
     </message>
 </context>
 <context>
@@ -3912,7 +3912,7 @@ sein</translation>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="102"/>
         <source>Move points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte verschieben.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="105"/>
@@ -3922,62 +3922,66 @@ sein</translation>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="283"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="300"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="125"/>
         <source>Add new points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte hinzufügen.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="148"/>
         <source>Select a range of points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen Punktebereich wählen.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="168"/>
         <source>Delete a point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen Punkt löschen.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="219"/>
         <source>No auto-routing or line snapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Auto-Routing oder Fangen an Linie</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="222"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="235"/>
         <source>Use auto-routing to between points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-Routing zwischen Punkten benutzen.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="251"/>
         <source>Snap line along lines of a vector map.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fängt die Linie längs Linien einer Vektorkarte.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="254"/>
         <source>V</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="280"/>
         <source>Undo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzte Änderung rückgängig machen</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
         <source>Redo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzte Änderung wiederherstellen</translation>
+    </message>
+    <message>
+        <source>Redo next change</source>
+        <translation type="vanished">Letzte Änderung wiederherstellen</translation>
     </message>
 </context>
 <context>
@@ -3990,7 +3994,7 @@ sein</translation>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Details anzeigen und bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="43"/>
@@ -4008,12 +4012,12 @@ sein</translation>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
         <source>Delete area from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebiet aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="89"/>
         <source>Edit shape of the area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Form eines Gebietes ändern.</translation>
     </message>
     <message>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
@@ -4146,7 +4150,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="28"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Details anzeigen und bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="31"/>
@@ -4165,7 +4169,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
         <source>Delete route from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Route aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4233,12 +4237,12 @@ sein</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details and edit properties of track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Details anzeigen und Trackeigenschaften bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
         <source>Delete track from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Track aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
@@ -4312,7 +4316,7 @@ sein</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Details anzeigen und editieren.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
@@ -4332,22 +4336,22 @@ sein</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
         <source>Delete waypoint from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wegpunkt aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
         <source>Show content as static bubble.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalt als statische Legende zeigen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
         <source>Move waypoint to a new location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wegpunkt an einen neuen Ort verschieben.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wegpunkt klonen und um eine bestimmte Entfernung und einen bestimmten Winkel verschieben.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>

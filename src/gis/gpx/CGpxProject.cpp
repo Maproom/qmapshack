@@ -213,6 +213,7 @@ bool CGpxProject::saveAs()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+    path += "/" + getName() + ".gpx";
 
     QString filter = "*.gpx";
     QString fn = QFileDialog::getSaveFileName(&CMainWindow::self(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);

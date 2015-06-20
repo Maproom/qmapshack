@@ -26,6 +26,7 @@
 
 CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(IGisItem::key_t(), point, gis, parent)
+    , isNewLine(true)
 {
     startNewLine(point);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
@@ -33,6 +34,7 @@ CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * par
 
 CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(trk.getKey(), trk, gis, parent)
+    , isNewLine(false)
 {
     canvas->reportStatus(key.item, tr("<b>Edit Track Points</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>"));
 
@@ -74,13 +76,15 @@ void CMouseEditTrk::slotCopyToOrig()
 {
     canvas->reportStatus(key.item,"");
 
-    int res = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
-
-    if(res != QMessageBox::Ok)
+    if(!isNewLine)
     {
-        return;
-    }
+        int res = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
 
+        if(res != QMessageBox::Ok)
+        {
+            return;
+        }
+    }
     IMouseEditLine::slotCopyToOrig();
 }
 

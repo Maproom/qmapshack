@@ -89,6 +89,7 @@ bool CQmsProject::saveAs()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+    path += "/" + getName() + ".qms";
 
     QString filter = "*.qms";
     QString fn = QFileDialog::getSaveFileName(&CMainWindow::self(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);

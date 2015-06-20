@@ -41,6 +41,7 @@ protected slots:
 
 protected:
     IGisLine * getGisLine();
+    bool isNewLine;
 };
 
 #endif //CMOUSEEDITTRK_H

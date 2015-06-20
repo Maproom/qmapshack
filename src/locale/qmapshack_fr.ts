@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr">
+<TS version="2.1" language="fr">
 <context>
     <name>CCanvas</name>
     <message>
@@ -1978,7 +1978,7 @@ n&apos;est pas une définition de système de coordonnées:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Ce logiciel est distribué sous les termes de la licence GPL3 ou toute version utérieure</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="219"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -3571,7 +3571,7 @@ or
         <source>m</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -3744,7 +3744,7 @@ or
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
-        <source>Redo next change</source>
+        <source>Redo last change</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

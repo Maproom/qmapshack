@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -2152,7 +2152,7 @@ ist keine gültige Koordinatensystemdefinition:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="219"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -3803,7 +3803,7 @@ sein</translation>
         <source>m</source>
         <translation> m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -3976,7 +3976,7 @@ sein</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
-        <source>Redo next change</source>
+        <source>Redo last change</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

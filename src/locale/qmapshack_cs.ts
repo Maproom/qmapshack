@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>CCanvas</name>
     <message>
@@ -2061,7 +2061,7 @@ není platným vymezením soustavy souřadnic
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Tento program je licencován pod GPL3 nebo kteroukoli pozdější verzí</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="219"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</translation>
@@ -3684,7 +3684,7 @@ nebo
         <source>m</source>
         <translation>m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation>°</translation>
@@ -3857,7 +3857,7 @@ nebo
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
-        <source>Redo next change</source>
+        <source>Redo last change</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

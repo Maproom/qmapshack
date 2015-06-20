@@ -319,7 +319,7 @@ void IMouseEditLine::slotAutoRouting()
 
 void IMouseEditLine::slotVectorRouting()
 {
-    canvas->reportStatus(key.item, tr("<b>No Routing</b><br/>Connect points with a line from a loaded vector map if possible.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Vector Routing</b><br/>Connect points with a line from a loaded vector map if possible.<br/>"));
 }
 
 

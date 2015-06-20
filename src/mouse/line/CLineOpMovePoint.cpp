@@ -74,7 +74,7 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
         if(movePoint)
         {
             // cancel action and restore last state of line
-            timerRouting->stop();
+            cancelDelayedRouting();
             parentHandler->restoreFromHistory(points);
 
             movePoint = false;
@@ -108,7 +108,7 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
         }
 
         // retrigger delayed routing
-        timerRouting->start();
+        startDelayedRouting();
     }
     else
     {

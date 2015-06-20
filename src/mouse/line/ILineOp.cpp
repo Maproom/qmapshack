@@ -50,6 +50,23 @@ ILineOp::~ILineOp()
 {
 }
 
+void ILineOp::cancelDelayedRouting()
+{
+    timerRouting->stop();
+}
+
+void ILineOp::startDelayedRouting()
+{
+    if(parentHandler->useAutoRouting())
+    {
+        timerRouting->start();
+    }
+    else if(parentHandler->useVectorRouting())
+    {
+        slotTimeoutRouting();
+    }
+}
+
 void ILineOp::slotTimeoutRouting()
 {
     timerRouting->stop();
@@ -57,9 +74,6 @@ void ILineOp::slotTimeoutRouting()
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void ILineOp::needsRedraw()
-{
-}
 
 void ILineOp::drawBg(QPainter& p)
 {

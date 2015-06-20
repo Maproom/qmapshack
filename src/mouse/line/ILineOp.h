@@ -49,8 +49,6 @@ public:
     virtual void drawFg(QPainter& p) = 0;
     virtual void drawBg(QPainter& p);
 
-    virtual void needsRedraw();
-
     const QCursor& getCursor()
     {
         return cursor;
@@ -64,6 +62,8 @@ protected slots:
     void slotTimeoutRouting();
 
 protected:
+    virtual void cancelDelayedRouting();
+    virtual void startDelayedRouting();
     virtual void finalizeOperation(qint32 idx);
     qint32 isCloseTo(const QPoint& pos);
     qint32 isCloseToLine(const QPoint& pos);
@@ -76,8 +76,7 @@ protected:
     IMouseEditLine * parentHandler;
     SGisLine& points;
     CCanvas * canvas;
-    CGisDraw * gis;
-    QTimer * timerRouting;
+    CGisDraw * gis;    
 
     QCursor cursor;
 
@@ -102,6 +101,9 @@ protected:
     QPolygonF subLineCoord2;
     QPolygonF subLinePixel1;
     QPolygonF subLinePixel2;
+
+private:
+    QTimer * timerRouting;
 };
 
 #endif //ILINEOP_H

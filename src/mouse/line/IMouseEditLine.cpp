@@ -170,9 +170,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
                 pixelLine << sub.pixel;
                 pixelSubs << sub.pixel;
             }
-        }
-
-        lineOp->needsRedraw();
+        }        
     }
 
     if(pixelPts.isEmpty())

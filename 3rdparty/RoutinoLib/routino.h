@@ -72,7 +72,7 @@ typedef struct _T_RoutinoRoute
 
    @return Returns 0 on success and -1 on failure
  */
-extern int RoutinoInit(const char * profiles, const char *translations);
+extern int RoutinoInit(const char *translations);
 
 /**
    @brief Register a routing database and obtain a handle
@@ -98,7 +98,7 @@ extern H_RoutinoDataSet RoutinoRegisterData(const char *dirname, const char * pr
 
    @return A linked list of routepoints.
  */
-extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, int quickest, const float * lon, const float * lat, int nCoord);
+extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char *profiles, const char * profilename, int quickest, const float * lon, const float * lat, int nCoord);
 
 /**
    @brief Free the memory of the route information allocated by RoutinoCalculate

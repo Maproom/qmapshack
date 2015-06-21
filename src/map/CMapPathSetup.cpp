@@ -62,8 +62,11 @@ void CMapPathSetup::slotAddPath()
     QString path = QFileDialog::getExistingDirectory(this, tr("Select map path..."), QDir::homePath(), 0);
     if(!path.isEmpty())
     {
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
-        item->setText(path);
+        if(!paths.contains(path))
+        {
+            QListWidgetItem * item = new QListWidgetItem(listWidget);
+            item->setText(path);
+        }
     }
 }
 

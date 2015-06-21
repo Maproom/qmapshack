@@ -185,7 +185,7 @@ void CMapList::slotMapHonk()
     saveResource("OSM_Topo.tms", dir);
     saveResource("OpenCycleMap.tms", dir);
 
-    CMapDraw::setupMapPath(QStringList(QStringList(path)));
+    CMapDraw::setupMapPath(path);
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)

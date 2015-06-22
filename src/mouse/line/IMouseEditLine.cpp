@@ -277,7 +277,6 @@ void IMouseEditLine::slotPanCanvas()
 void IMouseEditLine::slotDeletePoint()
 {
     canvas->reportStatus(key.item, tr("<b>Delete Point</b><br/>Move the mouse close to a point and press the left button to delete it.<br/>"));
-
     delete lineOp;
     lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
@@ -285,8 +284,7 @@ void IMouseEditLine::slotDeletePoint()
 
 void IMouseEditLine::slotSelectRange()
 {
-    canvas->reportStatus(key.item, tr("<b>Select Range ofPoints</b><br/>Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.<br/>"));
-
+    canvas->reportStatus(key.item, tr("<b>Select Range of Points</b><br/>Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.<br/>"));
     delete lineOp;
     lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();
@@ -303,7 +301,6 @@ void IMouseEditLine::slotMovePoint()
 void IMouseEditLine::slotAddPoint()
 {
     canvas->reportStatus(key.item, tr("<b>Add Point</b><br/>Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.<br/>"));
-
     delete lineOp;
     lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();

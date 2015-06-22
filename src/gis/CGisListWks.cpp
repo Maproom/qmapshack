@@ -140,8 +140,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemRte->addAction(actionEditDetails);
     menuItemRte->addAction(actionCopyItem);
     menuItemRte->addSeparator();
-    actionCalcRte = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"), tr("Calculate Route"), this, SLOT(slotCalcRte()));
-    actionEditRte = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"), this, SLOT(slotEditRte()));
+    actionCalcRte   = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"), tr("Calculate Route"), this, SLOT(slotCalcRte()));
+    actionResetRte  = menuItemRte->addAction(QIcon("://icons/32x32/Reset.png"), tr("Reset Route"), this, SLOT(slotResetRte()));
+    actionEditRte   = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"), this, SLOT(slotEditRte()));
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
 
@@ -1229,6 +1230,17 @@ void CGisListWks::slotCalcRte()
         CGisWidget::self().calcRteByKey(gisItem->getKey());
     }
 }
+
+void CGisListWks::slotResetRte()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+    CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
+    if(gisItem != 0)
+    {
+        CGisWidget::self().resetRteByKey(gisItem->getKey());
+    }
+}
+
 
 void CGisListWks::slotEditRte()
 {

@@ -28,6 +28,12 @@ CRouterMapQuest::~CRouterMapQuest()
 {
 }
 
+QString CRouterMapQuest::getOptions()
+{
+    return QString();
+}
+
 void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
 {
 }
+

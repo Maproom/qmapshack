@@ -89,6 +89,16 @@ bool CRouterRoutino::hasFastRouting()
     return IRouter::hasFastRouting() && (comboDatabase->count() != 0);
 }
 
+QString CRouterRoutino::getOptions()
+{
+    QString str;
+
+    str  = tr("profile \"%1\"").arg(comboProfile->currentText());
+    str += tr(", mode \"%1\"").arg(comboMode->currentText());
+
+    return str;
+}
+
 void CRouterRoutino::slotSetupPaths()
 {
     CRouterRoutinoPathSetup dlg(dbPaths);
@@ -178,7 +188,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());
 
-    rte->setResult(route);
+    rte->setResult(route, getOptions());
 
     RoutinoFreeRoute(route);
 }

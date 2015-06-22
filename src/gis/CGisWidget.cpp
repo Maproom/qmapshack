@@ -540,7 +540,22 @@ void CGisWidget::calcRteByKey(const IGisItem::key_t& key)
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
     if(rte != 0)
     {
+        QApplication::setOverrideCursor(Qt::WaitCursor);
         rte->calc();
+        QApplication::restoreOverrideCursor();
+    }
+}
+
+void CGisWidget::resetRteByKey(const IGisItem::key_t& key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
+    if(rte != 0)
+    {
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        rte->reset();
+        QApplication::restoreOverrideCursor();
     }
 }
 

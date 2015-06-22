@@ -263,6 +263,8 @@ public:
 
     void calcRteByKey(const IGisItem::key_t& key);
 
+    void resetRteByKey(const IGisItem::key_t& key);
+
     void editAreaByKey(const IGisItem::key_t &key);
 
     /**

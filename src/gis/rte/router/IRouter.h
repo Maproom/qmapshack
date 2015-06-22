@@ -36,6 +36,8 @@ public:
         return fastRouting;
     }
 
+    virtual QString getOptions() = 0;
+
 private:
     bool fastRouting;
 };

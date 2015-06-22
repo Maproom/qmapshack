@@ -35,6 +35,8 @@ public:
 
     bool hasFastRouting();
 
+    QString getOptions();
+
 private slots:
     void slotSetupPaths();
 

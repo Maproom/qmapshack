@@ -34,6 +34,8 @@ public:
     {
         return false;
     }
+
+    QString getOptions();
 };
 
 #endif //CROUTERMAPQUEST_H

@@ -41,6 +41,7 @@ private slots:
     void slotDelete();
     void slotCopy();
     void slotCalc();
+    void slotReset();
     void slotEdit();
 
 private:

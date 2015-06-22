@@ -42,6 +42,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolCalc, SIGNAL(clicked()), this, SLOT(slotCalc()));
+    connect(toolReset, SIGNAL(clicked()), this, SLOT(slotReset()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
 }
 
@@ -63,6 +64,12 @@ void CScrOptRte::slotCopy()
 void CScrOptRte::slotCalc()
 {
     CGisWidget::self().calcRteByKey(key);
+    deleteLater();
+}
+
+void CScrOptRte::slotReset()
+{
+    CGisWidget::self().resetRteByKey(key);
     deleteLater();
 }
 

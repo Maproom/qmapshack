@@ -34,7 +34,7 @@ class CGisItemRte : public IGisItem, public IGisLine
 public:
     struct subpt_t
     {
-        subpt_t() : lon(NOFLOAT), lat(NOFLOAT)
+        subpt_t() : lon(NOFLOAT), lat(NOFLOAT), time(0,0)
         {
         }
 
@@ -47,6 +47,13 @@ public:
         qreal lon;
         qreal lat;
         quint8 type;
+
+        qreal turn;
+        qreal bearing;
+        QStringList names;
+
+        qreal distance;
+        QTime time;
     };
 
     struct rtept_t : public wpt_t
@@ -122,7 +129,9 @@ public:
 
     void calc();
 
-    void setResult(T_RoutinoRoute * route);
+    void reset();
+
+    void setResult(T_RoutinoRoute * route, const QString &options);
 
 private:
     void deriveSecondaryData();
@@ -132,13 +141,20 @@ private:
 
     static key_t keyUserFocus;
 
-
-
     static const QPen penBackground;
     QPen penForeground;
 
     rte_t rte;
     QPolygonF line;
+
+    QString     lastRoutedWith;
+    QDateTime   lastRoutedTime;
+
+    qreal   totalDistance;
+    QTime   totalTime;
+    quint32 totalDays;
+
+
 };
 
 #endif //CGISITEMRTE_H

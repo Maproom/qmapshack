@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "mouse/IScrOpt.h"
 #include "mouse/IMouse.h"
+#include "mouse/IScrOpt.h"
 #include "units/IUnit.h"
 #include <QtWidgets>
 

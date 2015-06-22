@@ -147,14 +147,12 @@ private:
     rte_t rte;
     QPolygonF line;
 
-    QString     lastRoutedWith;
-    QDateTime   lastRoutedTime;
+    QString lastRoutedWith;
+    QDateTime lastRoutedTime;
 
-    qreal   totalDistance;
-    QTime   totalTime;
+    qreal totalDistance;
+    QTime totalTime;
     quint32 totalDays;
-
-
 };
 
 #endif //CGISITEMRTE_H

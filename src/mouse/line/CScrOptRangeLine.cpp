@@ -16,15 +16,32 @@
 
 **********************************************************************************************/
 
-#include "CMouseDummy.h"
+#include "CScrOptRangeLine.h"
 
-CMouseDummy::CMouseDummy()
-    : IMouse(0,0)
+CScrOptRangeLine::CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget * parent)
+    : IScrOpt(mouse)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"),0,0);
+    if(parent != 0)
+    {
+        setParent(parent);
+    }
+
+    setupUi(this);
+//    label->setFont(CMainWindow::self().getMapFont());
+//    label->setText(trk->getInfoRange());
+    adjustSize();
+
+    setOrigin(point.toPoint());
+
+    move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    show();
 }
 
-CMouseDummy::~CMouseDummy()
+CScrOptRangeLine::~CScrOptRangeLine()
 {
 }
 
+void CScrOptRangeLine::draw(QPainter& p)
+{
+    drawBubble2(origin, p);
+}

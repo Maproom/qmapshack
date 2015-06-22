@@ -22,9 +22,9 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "mouse/IMouse.h"
+#include <QDebug>
 #include <QPointer>
 #include <QPolygonF>
-#include <QDebug>
 
 class CGisDraw;
 class CCanvas;

@@ -141,9 +141,6 @@
         </item>
         <item>
          <widget class="QToolButton" name="toolSelectRange">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
           <property name="toolTip">
            <string>Select a range of points.</string>
           </property>

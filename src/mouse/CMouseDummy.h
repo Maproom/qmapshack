@@ -24,26 +24,25 @@
 
 class CMouseDummy : public IMouse
 {
-    public:
-        CMouseDummy();
-        virtual ~CMouseDummy();
+public:
+    CMouseDummy();
+    virtual ~CMouseDummy();
 
-        void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
-        {
-        }
-        void mousePressEvent(QMouseEvent * e)
-        {
-        }
-        void mouseMoveEvent(QMouseEvent * e)
-        {
-        }
-        void mouseReleaseEvent(QMouseEvent *e)
-        {
-        }
-        virtual void wheelEvent(QWheelEvent * e)
-        {
-        }
-
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+    {
+    }
+    void mousePressEvent(QMouseEvent * e)
+    {
+    }
+    void mouseMoveEvent(QMouseEvent * e)
+    {
+    }
+    void mouseReleaseEvent(QMouseEvent *e)
+    {
+    }
+    virtual void wheelEvent(QWheelEvent * e)
+    {
+    }
 };
 
 #endif //CMOUSEDUMMY_H

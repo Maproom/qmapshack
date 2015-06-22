@@ -170,7 +170,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
                 pixelLine << sub.pixel;
                 pixelSubs << sub.pixel;
             }
-        }        
+        }
     }
 
     if(pixelPts.isEmpty())
@@ -285,6 +285,8 @@ void IMouseEditLine::slotDeletePoint()
 
 void IMouseEditLine::slotSelectRange()
 {
+    canvas->reportStatus(key.item, tr("<b>Select Range ofPoints</b><br/>Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.<br/>"));
+
     delete lineOp;
     lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();

@@ -40,7 +40,7 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         if(movePoint)
-        {            
+        {
             // update subpoints by triggering the routing, if any.
             slotTimeoutRouting();
             // terminate moving the point
@@ -145,7 +145,6 @@ void CLineOpMovePoint::drawFg(QPainter& p)
     {
         drawSinglePointLarge(pt.pixel, p);
     }
-
 }
 
 

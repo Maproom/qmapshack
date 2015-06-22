@@ -146,7 +146,7 @@ void CGisItemRte::deriveSecondaryData()
             north   = rtept.lat;
         }
 
-        foreach(const subpt_t& subpt, rtept.subpts)
+        foreach(const subpt_t &subpt, rtept.subpts)
         {
             if(subpt.lon < west)
             {

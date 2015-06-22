@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
+#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/rte/router/CRouterSetup.h"
 #include "mouse/line/ILineOp.h"
 #include "mouse/line/IMouseEditLine.h"
-#include "GeoMath.h"
 
 #include <QtWidgets>
 
@@ -93,7 +93,6 @@ void ILineOp::drawSinglePointSmall(const QPointF& pt, QPainter& p)
     p.setPen(Qt::black);
     p.setBrush(Qt::black);
     p.drawRect(r);
-
 }
 
 void ILineOp::drawSinglePointLarge(const QPointF &pt, QPainter& p)
@@ -252,7 +251,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             IGisLine::point_t& pt1 = points[idx - 1];
             pt1.subpts.clear();
-            foreach(const QPointF& pt, subLineCoord1)
+            foreach(const QPointF &pt, subLineCoord1)
             {
                 pt1.subpts << IGisLine::subpt_t(pt);
             }
@@ -262,7 +261,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             IGisLine::point_t& pt1 = points[idx];
             pt1.subpts.clear();
-            foreach(const QPointF& pt, subLineCoord2)
+            foreach(const QPointF &pt, subLineCoord2)
             {
                 pt1.subpts << IGisLine::subpt_t(pt);
             }

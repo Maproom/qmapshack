@@ -16,15 +16,21 @@
 
 **********************************************************************************************/
 
-#include "CMouseDummy.h"
+#ifndef CSCROPTRANGELINE_H
+#define CSCROPTRANGELINE_H
 
-CMouseDummy::CMouseDummy()
-    : IMouse(0,0)
-{
-    cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"),0,0);
-}
+#include "mouse/IScrOpt.h"
+#include "ui_IScrOptRangeLine.h"
 
-CMouseDummy::~CMouseDummy()
+class CScrOptRangeLine : public IScrOpt, public Ui::IScrOptRangeLine
 {
-}
+    Q_OBJECT
+public:
+    CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget *parent);
+    virtual ~CScrOptRangeLine();
+
+    void draw(QPainter& p);
+};
+
+#endif //CSCROPTRANGELINE_H
 

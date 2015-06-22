@@ -114,7 +114,7 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
     else if(e->button() == Qt::RightButton)
     {
         if(addPoint)
-        {            
+        {
             // cancel action and restore last state of line
             cancelDelayedRouting();
             parentHandler->restoreFromHistory(points);

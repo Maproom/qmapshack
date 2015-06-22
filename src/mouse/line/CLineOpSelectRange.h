@@ -21,26 +21,43 @@
 
 #include "mouse/line/ILineOp.h"
 
+#include <QPointer>
+
+class CScrOptRangeLine;
+
 class CLineOpSelectRange : public ILineOp
 {
+    Q_OBJECT
 public:
     CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpSelectRange();
 
-    void mousePressEventEx(QMouseEvent * e)
-    {
-    }
-    void mouseMoveEventEx(QMouseEvent * e)
-    {
-    }
+    void mousePressEventEx(QMouseEvent * e);
+    void mouseMoveEventEx(QMouseEvent * e);
     void mouseReleaseEventEx(QMouseEvent *e)
     {
     }
 
-    void drawFg(QPainter& p)
-    {
-    }
+    void drawFg(QPainter& p);
 
+private slots:
+    void slotDelete();
+    void slotCalc();
+
+private:
+    void resetState();
+    enum state_e
+    {
+        eStateIdle
+        , eState1st
+        , eState2nd
+    };
+
+    state_e state;
+
+    qint32 idx2nd;
+
+    QPointer<CScrOptRangeLine>  scrOptRangeLine;
 };
 
 #endif //CLINEOPSELECTRANGE_H

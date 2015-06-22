@@ -77,7 +77,7 @@ protected:
     IMouseEditLine * parentHandler;
     SGisLine& points;
     CCanvas * canvas;
-    CGisDraw * gis;    
+    CGisDraw * gis;
 
     QCursor cursor;
 

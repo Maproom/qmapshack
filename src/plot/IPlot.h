@@ -20,8 +20,8 @@
 #define IPLOT_H
 
 #include "gis/trk/CGisItemTrk.h"
-#include "plot/CPlotData.h"
 #include "mouse/CMouseDummy.h"
+#include "plot/CPlotData.h"
 #include <QWidget>
 
 class QMenu;

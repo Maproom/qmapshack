@@ -20,9 +20,9 @@
 #define ISCROPT_H
 
 #include <QPixmap>
+#include <QPointer>
 #include <QRect>
 #include <QWidget>
-#include <QPointer>
 
 class QMouseEvent;
 class IMouse;
@@ -59,7 +59,6 @@ protected:
     QPoint mousePos;
 
     QPointer<IMouse> mouse;
-
 };
 
 #endif //ISCROPT_H

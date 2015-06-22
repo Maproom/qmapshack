@@ -103,6 +103,7 @@ set( SRCS
     mouse/CScrOptRangeTrk.cpp    
     mouse/line/IMouseEditLine.cpp
     mouse/line/CScrOptEditLine.cpp
+    mouse/line/CScrOptRangeLine.cpp
     mouse/line/ILineOp.cpp
     mouse/line/CLineOpMovePoint.cpp
     mouse/line/CLineOpAddPoint.cpp
@@ -297,6 +298,7 @@ set( HDRS
     mouse/CScrOptRange.h
     mouse/CScrOptRangeTrk.h
     mouse/line/CScrOptEditLine.h
+    mouse/line/CScrOptRangeLine.h
     mouse/line/IMouseEditLine.h
     mouse/line/ILineOp.h
     mouse/line/CLineOpMovePoint.h
@@ -428,6 +430,7 @@ set( UIS
     mouse/IScrOptRange.ui
     mouse/IScrOptRangeTrk.ui
     mouse/line/IScrOptEditLine.ui
+    mouse/line/IScrOptRangeLine.ui
     gis/IGisWidget.ui
     gis/ISelDevices.ui
     gis/prj/IDetailsPrj.ui

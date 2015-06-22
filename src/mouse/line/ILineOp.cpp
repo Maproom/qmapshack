@@ -81,7 +81,22 @@ void ILineOp::drawBg(QPainter& p)
     drawLeadLine(leadLinePixel2,p);
 }
 
-void ILineOp::drawSinglePoint(const QPointF &pt, QPainter& p)
+void ILineOp::drawSinglePointSmall(const QPointF& pt, QPainter& p)
+{
+    QRect r(0,0,3,3);
+    r.moveCenter(pt.toPoint());
+
+    p.setPen(QPen(Qt::white, 2));
+    p.setBrush(Qt::white);
+    p.drawRect(r);
+
+    p.setPen(Qt::black);
+    p.setBrush(Qt::black);
+    p.drawRect(r);
+
+}
+
+void ILineOp::drawSinglePointLarge(const QPointF &pt, QPainter& p)
 {
     rectPoint.moveCenter(pt.toPoint());
 

@@ -137,7 +137,15 @@ void CLineOpMovePoint::drawFg(QPainter& p)
     }
 
     const IGisLine::point_t& pt = points[idxFocus];
-    drawSinglePoint(pt.pixel, p);
+    if(movePoint)
+    {
+        drawSinglePointSmall(pt.pixel, p);
+    }
+    else
+    {
+        drawSinglePointLarge(pt.pixel, p);
+    }
+
 }
 
 

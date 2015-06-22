@@ -189,12 +189,12 @@ void CLineOpAddPoint::drawFg(QPainter& p)
     if(addPoint)
     {
         const IGisLine::point_t& pt = points[idxFocus];
-        drawSinglePoint(pt.pixel, p);
+        drawSinglePointSmall(pt.pixel, p);
     }
     else if(isPoint)
     {
         const IGisLine::point_t& pt = points[idxFocus];
-        drawSinglePoint(pt.pixel, p);
+        drawSinglePointLarge(pt.pixel, p);
     }
     else if(idxFocus < (points.size() - 1))
     {

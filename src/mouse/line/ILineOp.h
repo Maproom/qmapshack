@@ -68,7 +68,8 @@ protected:
     qint32 isCloseTo(const QPoint& pos);
     qint32 isCloseToLine(const QPoint& pos);
 
-    void drawSinglePoint(const QPointF& pt, QPainter& p);
+    void drawSinglePointSmall(const QPointF& pt, QPainter& p);
+    void drawSinglePointLarge(const QPointF &pt, QPainter& p);
     void drawLeadLine(const QPolygonF& line, QPainter& p);
 
     void updateLeadLines(qint32 idx);

@@ -87,7 +87,7 @@ public:
 
     qreal getElevationAt(const QPointF &pos);
     void  getElevationAt(const QPolygonF& pos, QPolygonF &ele);
-    void  getElevationAt(SGisLine line);
+    void  getElevationAt(SGisLine &line);
 
     void moveMap(const QPointF &delta);
     void zoomTo(const QRectF& rect);

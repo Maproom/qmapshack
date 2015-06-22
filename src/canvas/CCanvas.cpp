@@ -755,7 +755,7 @@ void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
     return dem->getElevationAt(pos, ele);
 }
 
-void CCanvas::getElevationAt(SGisLine line)
+void CCanvas::getElevationAt(SGisLine& line)
 {
     return dem->getElevationAt(line);
 }

@@ -65,6 +65,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 
 
     setupHistory();
+    deriveSecondaryData();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -144,11 +145,29 @@ void CGisItemRte::deriveSecondaryData()
         {
             north   = rtept.lat;
         }
+
+        foreach(const subpt_t& subpt, rtept.subpts)
+        {
+            if(subpt.lon < west)
+            {
+                west    = subpt.lon;
+            }
+            if(subpt.lon > east)
+            {
+                east    = subpt.lon;
+            }
+            if(subpt.lat < south)
+            {
+                south   = subpt.lat;
+            }
+            if(subpt.lat > north)
+            {
+                north   = subpt.lat;
+            }
+        }
     }
 
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
-
-    totalDistance = NOFLOAT;
 }
 
 void CGisItemRte::setSymbol()
@@ -491,6 +510,7 @@ void CGisItemRte::reset()
     lastRoutedTime  = QDateTime();
     lastRoutedWith  = "";
 
+    deriveSecondaryData();
     updateHistory();
 }
 
@@ -546,5 +566,6 @@ void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
     lastRoutedTime = QDateTime::currentDateTimeUtc();
     lastRoutedWith = "Routino, " + options;
 
+    deriveSecondaryData();
     updateHistory();
 }

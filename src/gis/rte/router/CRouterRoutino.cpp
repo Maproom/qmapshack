@@ -43,6 +43,13 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboMode->addItem(tr("Shortest"));
     comboMode->addItem(tr("Quickest"));
 
+    QFile _profiles("://xml/routino/routino-profiles.xml");
+    _profiles.open(QIODevice::ReadOnly);
+    QTemporaryFile profiles;
+    profiles.open();
+    profiles.write(_profiles.readAll());
+    profiles.close();
+
     QFile _translations("://xml/routino/routino-translations.xml");
     _translations.open(QIODevice::ReadOnly);
     QTemporaryFile translations;
@@ -50,7 +57,7 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     translations.write(_translations.readAll());
     translations.close();
 
-    RoutinoInit(translations.fileName().toUtf8());
+    RoutinoInit(profiles.fileName().toUtf8(), translations.fileName().toUtf8());
 
     connect(toolSetupPaths, SIGNAL(clicked()), this, SLOT(slotSetupPaths()));
 
@@ -169,14 +176,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         lat << pt.coord.y();
     }
 
-    QFile _profiles("://xml/routino/routino-profiles.xml");
-    _profiles.open(QIODevice::ReadOnly);
-    QTemporaryFile profiles;
-    profiles.open();
-    profiles.write(_profiles.readAll());
-    profiles.close();
-
-    T_RoutinoRoute * route = RoutinoCalculate(data, profiles.fileName().toUtf8(), profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());
+    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());
 
     rte->setResult(route);
 
@@ -203,15 +203,7 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
     lat[0] = p1.y();
     lat[1] = p2.y();
 
-    QFile _profiles("://xml/routino/routino-profiles.xml");
-    _profiles.open(QIODevice::ReadOnly);
-    QTemporaryFile profiles;
-    profiles.open();
-    profiles.write(_profiles.readAll());
-    profiles.close();
-
-
-    T_RoutinoRoute * route = RoutinoCalculate(data, profiles.fileName().toUtf8(), profile.toUtf8(), comboMode->currentIndex(), lon, lat, 2);
+    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon, lat, 2);
 
     T_RoutinoRoute * next = route;
     while(next)

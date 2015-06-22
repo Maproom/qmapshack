@@ -50,13 +50,17 @@ static Results *CalculateRoute(Nodes *nodes,Segments *segments,Ways *ways,Relati
                                index_t start_node,index_t prev_segment,index_t finish_node,
                                int start_waypoint,int finish_waypoint);
 
-int RoutinoInit(const char *translations)
+int RoutinoInit(const char *profiles, const char *translations)
 {
     if(isInitialized)
     {
         return 0;
     }
 
+    if(ParseXMLProfiles(profiles))
+    {
+        return -1;
+    }
 
     if(ParseXMLTranslations(translations, NULL))
     {
@@ -151,15 +155,11 @@ extern void RoutinoFreeData(H_RoutinoDataSet data)
         DestroyWayList(data->OSMWays);
         DestroyRelationList(data->OSMRelations);
         free(data);
-
-        FreeXMLTranslations();
     }
 }
 
-extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char *profiles, const char * profilename, int quickest, const float * lon, const float * lat, int nCoord)
+extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, int quickest, const float * lon, const float * lat, int nCoord)
 {
-    T_RoutinoRoute * route = 0;
-
     if(!isInitialized)
     {
         return 0;
@@ -170,26 +170,21 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char *prof
         return 0;
     }
 
-    if(ParseXMLProfiles(profiles))
-    {
-        goto RoutinoCalculate_NoProfile;
-    }
-
-
     Profile * profile = GetProfile(profilename);
     if(profile == NULL)
     {
-        goto RoutinoCalculate_NoProfile;
+        return 0;
     }
 
     if(UpdateProfile(profile,data->OSMWays))
     {
-        goto RoutinoCalculate_NoProfile;
+        return 0;
     }
 
     option_quickest = quickest;
 
-    int i;    
+    int i;
+    T_RoutinoRoute * route         = 0;
     int nResults                    = 0;    
     Results * results[NWAYPOINTS+1] = {NULL};
     index_t start_node              = NO_NODE;
@@ -252,9 +247,6 @@ RoutinoCalculate_end:
     {
         FreeResultsList(results[n]);
     }
-
-RoutinoCalculate_NoProfile:
-    FreeXMLProfiles();
 
     return route;
 }

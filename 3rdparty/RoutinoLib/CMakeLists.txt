@@ -29,37 +29,19 @@ set(APPNAME routino)
 set(SRCS_${APPNAME}
     routino.c
     binout.c
-    #errorlog.c
-    #errorlogx.c
     ../Routino/src/fakes.c
     ../Routino/src/files.c
-    #logerror.c
     ../Routino/src/logging.c
     ../Routino/src/nodes.c
-    #nodesx.c
     ../Routino/src/optimiser.c
-    #osmo5mparse.c
-    #osmparser.c
-    #osmpbfparse.c
-    #osmxmlparse.c
-    #../Routino/src/output.c
     ../Routino/src/profiles.c
-    #prunex.c
     ../Routino/src/queue.c
-    ../Routino/src/relations.c
-    #relationsx.c
+    ../Routino/src/relations.c   
     ../Routino/src/results.c
     ../Routino/src/segments.c
-    #segmentsx.c
-    #sorting.c
-    #superx.c
-    #tagging.c
     ../Routino/src/translations.c
     ../Routino/src/types.c
-    #uncompress.c
-    #visualiser.c
     ../Routino/src/ways.c
-    #waysx.c
     ../Routino/src/xmlparse.c
 )
 
@@ -74,32 +56,18 @@ set(HDRS_${APPNAME}
     routino.h
     binout.h
     ../Routino/src/cache.h
-    #errorlog.h
-    #errorlogx.h
     ../Routino/src/fakes.h
     ../Routino/src/files.h
     ../Routino/src/functions.h
     ../Routino/src/logging.h
     ../Routino/src/nodes.h
-    #nodesx.h
-    #osmparser.h
-    ../Routino/src/profiles.h
-    #prunex.h
-    ../Routino/src/relations.h
-    #relationsx.h
+    ../Routino/src/profiles.h    
+    ../Routino/src/relations.h    
     ../Routino/src/results.h
     ../Routino/src/segments.h
-    #segmentsx.h
-    #sorting.h
-    #superx.h
-    #tagging.h
     ../Routino/src/translations.h
     ../Routino/src/types.h
-    #typesx.h
-    #uncompress.h
-    #visualiser.h
     ../Routino/src/ways.h
-    #waysx.h
     ../Routino/src/xmlparse.h
 )
 
@@ -128,9 +96,40 @@ set(APPNAME planetsplitter)
 
 set(SRCS_${APPNAME}
     ../Routino/src/planetsplitter.c
+    ../Routino/src/errorlog.c
+    ../Routino/src/errorlogx.c
+    ../Routino/src/logerror.c
+    ../Routino/src/nodesx.c
+    ../Routino/src/osmo5mparse.c
+    ../Routino/src/osmparser.c
+    ../Routino/src/osmpbfparse.c
+    ../Routino/src/osmxmlparse.c
+    ../Routino/src/prunex.c
+    ../Routino/src/relationsx.c
+    ../Routino/src/segmentsx.c
+    ../Routino/src/sorting.c
+    ../Routino/src/superx.c
+    ../Routino/src/tagging.c
+    ../Routino/src/uncompress.c
+    ../Routino/src/visualiser.c
+    ../Routino/src/waysx.c
 )
 
 set(HDRS_${APPNAME}
+    ../Routino/src/errorlog.h
+    ../Routino/src/errorlogx.h
+    ../Routino/src/nodesx.h
+    ../Routino/src/osmparser.h
+    ../Routino/src/prunex.h
+    ../Routino/src/relationsx.h
+    ../Routino/src/segmentsx.h
+    ../Routino/src/sorting.h
+    ../Routino/src/superx.h
+    ../Routino/src/tagging.h
+    ../Routino/src/typesx.h
+    ../Routino/src/uncompress.h
+    ../Routino/src/visualiser.h
+    ../Routino/src/waysx.h
 )
 
 set(ALLINP_${APPNAME}
@@ -138,8 +137,16 @@ set(ALLINP_${APPNAME}
     ${HDRS_${APPNAME}}
 )
 
-#add_executable(${APPNAME} ${ALLINP_${APPNAME}})
-#target_link_libraries(${APPNAME} routino)
+add_executable(${APPNAME} ${ALLINP_${APPNAME}})
+target_link_libraries(${APPNAME} routino)
+
+install(
+    TARGETS
+      ${APPNAME}
+    DESTINATION
+      ${BIN_INSTALL_DIR}
+)
+
 
 ########### router ###########
 

@@ -445,14 +445,14 @@ void CGisItemRte::setResult(T_RoutinoRoute * route)
             subpt.lon = next->lon * RAD_TO_DEG;
             subpt.lat = next->lat * RAD_TO_DEG;
 
-            if(next->string != 0)
-            {
-                qDebug() << next->type << next->string << next->turn << next->bearing;
-            }
-            else
-            {
-                qDebug() << next->type << next->turn << next->bearing;
-            }
+//            if(next->string != 0)
+//            {
+//                qDebug() << next->type << next->string << next->turn << next->bearing;
+//            }
+//            else
+//            {
+//                qDebug() << next->type << next->turn << next->bearing;
+//            }
 
             if(next->type > IMP_CHANGE)
             {

@@ -288,8 +288,6 @@ void IDrawContext::zoom(int idx)
         emit sigScaleChanged(scale*zoomFactor);
     }
     mutex.unlock(); // --------- stop serialize with thread
-
-    qDebug() << zoomIndex << zoomFactor;
 }
 
 void IDrawContext::convertRad2M(QPointF &p)

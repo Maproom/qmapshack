@@ -15,7 +15,7 @@ if(UNIX)
 add_definitions(-Wall -std=c99 -ffast-math -D_FILE_OFFSET_BITS=64 -D_POSIX_C_SOURCE=200809L -pedantic)
 endif(UNIX)
 
-add_definitions(-DROUTINO_DATADIR="./")
+add_definitions(-DROUTINO_DATADIR="./" -DLIBROUTINO)
 
 if(ROUTINO_BUILD_SLIM_VERSION)
     add_definitions(-DSLIM=1)

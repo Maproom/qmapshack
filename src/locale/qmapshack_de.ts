@@ -484,13 +484,18 @@
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="144"/>
+        <source>Reset Route</source>
+        <translation>Route zurücksetzen</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Edit Route</source>
         <translation>Route bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="604"/>
-        <location filename="../gis/CGisListWks.cpp" line="1342"/>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="605"/>
+        <location filename="../gis/CGisListWks.cpp" line="1354"/>
+        <location filename="../gis/CGisListWks.cpp" line="1392"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
@@ -538,7 +543,7 @@
         <translation>Tracks verbinden</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <location filename="../gis/CGisListWks.cpp" line="154"/>
         <source>Edit Area Points</source>
         <translation>Gebietspunkte bearbeiten</translation>
     </message>
@@ -549,22 +554,22 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="704"/>
+        <location filename="../gis/CGisListWks.cpp" line="705"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Ansicht speichern. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="745"/>
+        <location filename="../gis/CGisListWks.cpp" line="746"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Ansicht laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="934"/>
+        <location filename="../gis/CGisListWks.cpp" line="935"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="934"/>
+        <location filename="../gis/CGisListWks.cpp" line="935"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus der Ansicht entfernen.</translation>
     </message>
@@ -1345,7 +1350,7 @@
         <translation>Kartenpfad wählen...</translation>
     </message>
     <message>
-        <location filename="../map/CMapPathSetup.cpp" line="78"/>
+        <location filename="../map/CMapPathSetup.cpp" line="81"/>
         <source>Select root path...</source>
         <translation>Hauptverzeichnis auswählen...</translation>
     </message>
@@ -1557,7 +1562,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Gebiet bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der LInie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Gebiet bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1588,7 +1593,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Routenpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der LInie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Routenpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1600,7 +1605,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="39"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Trackpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der LInie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Trackpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="81"/>
@@ -1964,6 +1969,16 @@ ist keine gültige Koordinatensystemdefinition:
         <source>Quickest</source>
         <translation>Schnellste</translation>
     </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
+        <source>profile &quot;%1&quot;</source>
+        <translation>Profil &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
+        <source>, mode &quot;%1&quot;</source>
+        <translation>, Mode &quot;%1&quot;</translation>
+    </message>
 </context>
 <context>
     <name>CRouterRoutinoPathSetup</name>
@@ -2152,7 +2167,7 @@ ist keine gültige Koordinatensystemdefinition:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../IAbout.ui" line="219"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -3638,7 +3653,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="303"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Punkt hinzufügen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an ein Liniensegment und drücken die linke Maustaste, um einen Punkt hinzuzufügen. Der Punkt wird durch den Cursor gefangenund kann verschoben werden. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Punkt hinzufügen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an ein Liniensegment und drücken die linke Maustaste, um einen Punkt hinzuzufügen. Der Punkt wird durch den Cursor gefangen und kann verschoben werden. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="312"/>
@@ -3648,7 +3663,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="317"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;Die aktuellen Router Einstellungen erzeugen eine Route zwischen Punkten. &lt;b&gt;Hinweis:&lt;/b&gt; Der gewählte Router muss schnell routen können. Offline Router können dies gewöhnlich, Online Router nicht.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;Die aktuellen Router Einstellungen erzeugen eine Route zwischen Punkten. &lt;b&gt;Hinweis:&lt;/b&gt; Der gewählte Router muss schnell routen können. Offline Router können dies gewöhnlich, Online Router nicht.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="322"/>
@@ -3657,7 +3672,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Keun Routing&lt;/b&gt;&lt;br/&gt;Verbindet Punkte mit einer Linie einer geladenen Vektorkarte, soweit möglich.&lt;br/&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Keun Routing&lt;/b&gt;&lt;br/&gt;Verbindet Punkte mit einer Linie einer geladenen Vektorkarte, soweit möglich.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3807,7 +3822,7 @@ sein</translation>
         <source>m</source>
         <translation> m</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -3859,7 +3874,7 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="127"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="121"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
         <translation>Um Offline-Routing zu nutzen, müssen Pfade zu lokalen Routendaten definiert sein. Benutzen Sie den Werkzeugbutton, um einen Pfad zu registrieren.</translation>
     </message>
@@ -3985,7 +4000,7 @@ sein</translation>
     </message>
     <message>
         <source>Redo next change</source>
-        <translation>Letzte Änderung wiederherstellen</translation>
+        <translation type="obsolete">Letzte Änderung wiederherstellen</translation>
     </message>
 </context>
 <context>
@@ -4162,6 +4177,7 @@ sein</translation>
         <location filename="../gis/rte/IScrOptRte.ui" line="59"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="80"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="94"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="108"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -4186,6 +4202,11 @@ sein</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
+        <source>Reset route caclulation.</source>
+        <translation>Routenberechnung zurücksetzen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="105"/>
         <source>Move route points.</source>
         <translation>Routenpunkte verschieben.</translation>
     </message>
@@ -4194,7 +4215,7 @@ sein</translation>
         <translation type="obsolete">Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -5087,6 +5108,7 @@ Dateiname: %1</translation>
         <translation>Wegpunkte geändert, alle vorherigen Daten sind verloren.</translation>
     </message>
     <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="198"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="441"/>
         <source>Length: %1 %2</source>
         <translation>Länge: %1 %2</translation>
@@ -5097,6 +5119,7 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="214"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
         <source>Time: %1</source>
         <translation>Gesamtzeit: %1</translation>
@@ -5258,7 +5281,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="142"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="46"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="47"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="131"/>
         <source>_Clone</source>
@@ -5306,7 +5329,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="546"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="168"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="175"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1806"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="448"/>
         <source>Changed links</source>
@@ -5381,21 +5404,46 @@ Dateiname: %1</translation>
         <translation>Bild hinzufügen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="156"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="163"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1794"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="436"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="162"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="169"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1800"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="397"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="202"/>
+        <source>Length: -</source>
+        <translation>Länge: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="210"/>
+        <source>Time: %2 days %1</source>
+        <translation>Gesamtzeit: %2 days %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="219"/>
+        <source>Time: -</source>
+        <translation>Gesamtzeit: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="225"/>
+        <source>Last time routed:&lt;br/&gt;%1</source>
+        <translation>Letzte Routenberechnung: &lt;br/&gt;%1</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="227"/>
+        <source>with %1</source>
+        <translation>mit %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="452"/>
         <source>Changed route points.</source>
         <translation>Geänderte Routenpukte.</translation>
     </message>
@@ -5595,12 +5643,12 @@ Dateiname: %1</translation>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="970"/>
+        <location filename="../gis/CGisListWks.cpp" line="971"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="970"/>
+        <location filename="../gis/CGisListWks.cpp" line="971"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1? löschen wollen?</translation>
     </message>

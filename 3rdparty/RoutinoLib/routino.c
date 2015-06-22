@@ -160,6 +160,8 @@ extern void RoutinoFreeData(H_RoutinoDataSet data)
 
 extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * profilename, int quickest, const float * lon, const float * lat, int nCoord)
 {
+    Profile profile;
+
     if(!isInitialized)
     {
         return 0;
@@ -170,13 +172,15 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
         return 0;
     }
 
-    Profile * profile = GetProfile(profilename);
-    if(profile == NULL)
+    Profile * pProfile = GetProfile(profilename);
+    if(pProfile == NULL)
     {
         return 0;
     }
 
-    if(UpdateProfile(profile,data->OSMWays))
+    profile = *pProfile;
+
+    if(UpdateProfile(&profile,data->OSMWays))
     {
         return 0;
     }
@@ -205,7 +209,7 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
         start_node = finish_node;
         start_waypoint=finish_waypoint;
 
-        segment = FindClosestSegment(data->OSMNodes, data->OSMSegments, data->OSMWays, lat[i-1], lon[i-1], distmax, profile, &distmin, &node1, &node2, &dist1, &dist2);
+        segment = FindClosestSegment(data->OSMNodes, data->OSMSegments, data->OSMWays, lat[i-1], lon[i-1], distmax, &profile, &distmin, &node1, &node2, &dist1, &dist2);
 
         if(segment!=NO_SEGMENT)
         {
@@ -231,14 +235,14 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
         }
 
 
-        results[nResults] = CalculateRoute(data->OSMNodes, data->OSMSegments, data->OSMWays, data->OSMRelations, profile, start_node, join_segment, finish_node, start_waypoint, finish_waypoint);
+        results[nResults] = CalculateRoute(data->OSMNodes, data->OSMSegments, data->OSMWays, data->OSMRelations, &profile, start_node, join_segment, finish_node, start_waypoint, finish_waypoint);
 
         join_segment = results[nResults]->last_segment;
 
         nResults++;
     }
 
-    route = SimplifyResult(results, nResults, data->OSMNodes, data->OSMSegments, data->OSMWays, profile);
+    route = SimplifyResult(results, nResults, data->OSMNodes, data->OSMSegments, data->OSMWays, &profile);
 
 RoutinoCalculate_end:
 

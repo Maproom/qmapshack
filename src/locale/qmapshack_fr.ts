@@ -14,7 +14,7 @@
     <message>
         <location filename="../dem/CDemList.cpp" line="145"/>
         <source>Deactivate</source>
-        <translation>D√©sactiver</translation>
+        <translation>DÈsactiver</translation>
     </message>
     <message>
         <location filename="../dem/CDemList.cpp" line="145"/>
@@ -27,12 +27,12 @@
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="41"/>
         <source>Add or remove paths containing DEM data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Ajoutez ou retirez des r√©pertoires qui contiennent des donn√©es DEM. Il peut y avoir plusieurs fichiers dans un r√©pertoire mais les sous-r√©pertoires ne sont pas prises en compte.</translation>
+        <translation>Ajoutez ou retirez des rÈpertoires qui contiennent des donnÈes DEM. Il peut y avoir plusieurs fichiers dans un rÈpertoire mais les sous-rÈpertoires ne sont pas prises en compte.</translation>
     </message>
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="56"/>
         <source>Select DEM file path...</source>
-        <translation>S√©lectionnez le r√©pertoire qui contient les fichiers DEM</translation>
+        <translation>SÈlectionnez le rÈpertoire qui contient les fichiers DEM</translation>
     </message>
 </context>
 <context>
@@ -62,12 +62,12 @@
         <location filename="../dem/CDemVRT.cpp" line="52"/>
         <location filename="../dem/CDemVRT.cpp" line="61"/>
         <source>DEM must have one band with 16bit or 32bit data.</source>
-        <translation>Le DEM doit contenir un seule bande avec des donn√©es en 16 ou 32 bits.</translation>
+        <translation>Le DEM doit contenir un seule bande avec des donnÈes en 16 ou 32 bits.</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="89"/>
         <source>No georeference information found.</source>
-        <translation>Aucune information de g√©or√©f√©rencement trouv√©</translation>
+        <translation>Aucune information de gÈorÈfÈrencement trouvÈ</translation>
     </message>
 </context>
 <context>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
         <source>No images found</source>
-        <translation>Aucune image trouv√©e</translation>
+        <translation>Aucune image trouvÈe</translation>
     </message>
 </context>
 <context>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="136"/>
         <source>Edit name...</source>
-        <translation>√âditer le nom...</translation>
+        <translation>…diter le nom...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="136"/>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="234"/>
         <source>Build diary...</source>
-        <translation>Cr√©er le journal...</translation>
+        <translation>CrÈer le journal...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="234"/>
@@ -180,7 +180,7 @@
         <location filename="../gis/prj/CDetailsPrj.cpp" line="523"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="550"/>
         <source>Edit name...</source>
-        <translation>√âditer le nom...</translation>
+        <translation>…diter le nom...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="523"/>
@@ -191,12 +191,12 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="532"/>
         <source>Edit keywords...</source>
-        <translation>√âditer les mots-cl√©s...</translation>
+        <translation>…diter les mots-clÈs...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="532"/>
         <source>Enter keywords.</source>
-        <translation>Saisir les mots-cl√©s.</translation>
+        <translation>Saisir les mots-clÈs.</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="666"/>
@@ -209,7 +209,7 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="67"/>
         <source>Reduce visible track points</source>
-        <translation>R√©duire les points visibles de la trace</translation>
+        <translation>RÈduire les points visibles de la trace</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="80"/>
@@ -224,7 +224,7 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="106"/>
         <source>Cut track into pieces</source>
-        <translation>D√©couper la trace</translation>
+        <translation>DÈcouper la trace</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="222"/>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="395"/>
         <source>Edit name...</source>
-        <translation type="unfinished">√âditer le nom...</translation>
+        <translation type="unfinished">…diter le nom...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="395"/>
@@ -252,7 +252,7 @@
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="157"/>
         <source>Edit name...</source>
-        <translation>√âditer le nom...</translation>
+        <translation>…diter le nom...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="157"/>
@@ -262,7 +262,7 @@
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="176"/>
         <source>Enter new proximity range.</source>
-        <translation>Saisir le rayon de l&apos;alarme de proximit√©</translation>
+        <translation>Saisir le rayon de l&apos;alarme de proximitÈ</translation>
     </message>
 </context>
 <context>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="83"/>
         <source>No DEM data found for that point.</source>
-        <translation>Pas de donn√©es DEM disponibles pour ce point</translation>
+        <translation>Pas de donnÈes DEM disponibles pour ce point</translation>
     </message>
 </context>
 <context>
@@ -278,7 +278,7 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="74"/>
         <source>Add Database</source>
-        <translation>Ajouter une base de donn√©es</translation>
+        <translation>Ajouter une base de donnÈes</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="77"/>
@@ -294,12 +294,12 @@
         <location filename="../gis/CGisListDB.cpp" line="81"/>
         <location filename="../gis/CGisListDB.cpp" line="91"/>
         <source>Delete Item</source>
-        <translation>Supprimer un √©l√©ment</translation>
+        <translation>Supprimer un ÈlÈment</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="85"/>
         <source>Remove Database</source>
-        <translation>Enlever la base de donn√©es</translation>
+        <translation>Enlever la base de donnÈes</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="88"/>
@@ -309,38 +309,38 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="280"/>
         <source>Remove database...</source>
-        <translation>Enlever la base de donn√©es</translation>
+        <translation>Enlever la base de donnÈes</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="280"/>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
-        <translation>√ätes-vous s√ªr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
+        <translation> tes-vous s˚r de vouloir enlever &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="321"/>
         <source>Delete database folder...</source>
-        <translation>Supprimer la base de donn√©es...</translation>
+        <translation>Supprimer la base de donnÈes...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="321"/>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation>√ätes-vous s√ªr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
+        <translation> tes-vous s˚r de vouloir enlever &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="347"/>
         <location filename="../gis/CGisListDB.cpp" line="362"/>
         <source>Remove items...</source>
-        <translation>Supprimer les √©l√©ments...</translation>
+        <translation>Supprimer les ÈlÈments...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="347"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>√ätes-vous s√ªr de vouloir supprimer tous les √©l√©ments dans Perdu &amp; Trouv√© ? Les √©l√©ments seront supprim√©s d√©finitivement.</translation>
+        <translation> tes-vous s˚r de vouloir supprimer tous les ÈlÈments dans Perdu &amp; TrouvÈ ? Les ÈlÈments seront supprimÈs dÈfinitivement.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="362"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>√ätes-vous s√ªr de vouloir supprimer les √©l√©ments s√©lectionn√©s dans Perdu &amp; Trouv√© ? Les √©l√©ments seront supprim√©s d√©finitivement.</translation>
+        <translation> tes-vous s˚r de vouloir supprimer les ÈlÈments sÈlectionnÈs dans Perdu &amp; TrouvÈ ? Les ÈlÈments seront supprimÈs dÈfinitivement.</translation>
     </message>
 </context>
 <context>
@@ -348,7 +348,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="94"/>
         <source>Edit..</source>
-        <translation>√âditer..</translation>
+        <translation>…diter..</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="95"/>
@@ -362,7 +362,7 @@
     </message>
     <message>
         <source>Update Project on Devices</source>
-        <translation type="obsolete">Mettre √† jour le projet sur tous les appareils</translation>
+        <translation type="obsolete">Mettre ‡ jour le projet sur tous les appareils</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="97"/>
@@ -377,7 +377,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="104"/>
         <source>Update Project on Device</source>
-        <translation>Mettre √† jour le projet sur l&apos;appareil</translation>
+        <translation>Mettre ‡ jour le projet sur l&apos;appareil</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="105"/>
@@ -388,7 +388,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="116"/>
         <source>Edit...</source>
-        <translation>√âditer..</translation>
+        <translation>…diter..</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
@@ -403,12 +403,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="121"/>
         <source>Select Range</source>
-        <translation>S√©lectionner des points</translation>
+        <translation>SÈlectionner des points</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="122"/>
         <source>Edit Track Points</source>
-        <translation>√âditer les points de la trace</translation>
+        <translation>…diter les points de la trace</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="123"/>
@@ -428,7 +428,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="134"/>
         <source>Move Waypoint</source>
-        <translation>D√©placer le waypoint</translation>
+        <translation>DÈplacer le waypoint</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="135"/>
@@ -453,7 +453,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="154"/>
         <source>Edit Area Points</source>
-        <translation>√âditer les points de la surface</translation>
+        <translation>…diter les points de la surface</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="705"/>
@@ -480,7 +480,7 @@
         <location filename="../gis/CGisListWks.cpp" line="1354"/>
         <location filename="../gis/CGisListWks.cpp" line="1392"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
-        <translation>&lt;b&gt;Mise √† jour des appareils&lt;/b&gt;&lt;p&gt;Mise √† jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
+        <translation>&lt;b&gt;Mise ‡ jour des appareils&lt;/b&gt;&lt;p&gt;Mise ‡ jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -493,7 +493,7 @@
     <message>
         <location filename="../gis/CGisWidget.cpp" line="445"/>
         <source>Do you want to delete the original track?</source>
-        <translation>Voulez-vous garder la trace originale ?</translation>
+        <translation>Voulez-vous supprimer la trace originale ?</translation>
     </message>
 </context>
 <context>
@@ -522,17 +522,17 @@
     <message>
         <location filename="../qlgt/CImportDatabase.cpp" line="29"/>
         <source>Import QLandkarte Database</source>
-        <translation>Importer une base de donn√©es QLandkarte</translation>
+        <translation>Importer une base de donnÈes QLandkarte</translation>
     </message>
     <message>
         <location filename="../qlgt/CImportDatabase.cpp" line="73"/>
         <source>Select source database...</source>
-        <translation>Choisissez la base de donn√©es √† importer...</translation>
+        <translation>Choisissez la base de donnÈes ‡ importer...</translation>
     </message>
     <message>
         <location filename="../qlgt/CImportDatabase.cpp" line="93"/>
         <source>Select target database...</source>
-        <translation>Choisissez la base de donn√©es cible...</translation>
+        <translation>Choisissez la base de donnÈes cible...</translation>
     </message>
 </context>
 <context>
@@ -545,7 +545,7 @@
     <message>
         <location filename="../CMainWindow.cpp" line="684"/>
         <source>Load GIS Data...</source>
-        <translation>Charger des donn√©es SIG...</translation>
+        <translation>Charger des donnÈes SIG...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="718"/>
@@ -563,17 +563,17 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="153"/>
         <source>Failed ...</source>
-        <translation>√âchec...</translation>
+        <translation>…chec...</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="168"/>
         <source>Unspecified</source>
-        <translation>Non d√©fini</translation>
+        <translation>Non dÈfini</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="169"/>
         <source>French</source>
-        <translation>Fran√ßais</translation>
+        <translation>FranÁais</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="170"/>
@@ -583,7 +583,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="171"/>
         <source>Dutch</source>
-        <translation>N√©erlandais</translation>
+        <translation>NÈerlandais</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="172"/>
@@ -603,7 +603,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="175"/>
         <source>Swedish</source>
-        <translation>Su√©dois</translation>
+        <translation>SuÈdois</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="176"/>
@@ -633,7 +633,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="181"/>
         <source>Gaelic</source>
-        <translation>Ga√´lic</translation>
+        <translation>GaÎlic</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="182"/>
@@ -643,7 +643,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="183"/>
         <source>Norwegian</source>
-        <translation>Norv√©gien</translation>
+        <translation>NorvÈgien</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="184"/>
@@ -658,7 +658,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="186"/>
         <source>Czech</source>
-        <translation>Tch√®que</translation>
+        <translation>TchËque</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="187"/>
@@ -683,12 +683,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="191"/>
         <source>Greek</source>
-        <translation>Gr√®c</translation>
+        <translation>GrËc</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="192"/>
         <source>Slovenian</source>
-        <translation>Slov√®ne</translation>
+        <translation>SlovËne</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="193"/>
@@ -733,7 +733,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="201"/>
         <source>Macedonian</source>
-        <translation>Mac√©donien</translation>
+        <translation>MacÈdonien</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="202"/>
@@ -758,7 +758,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="262"/>
         <source>Arterial road</source>
-        <translation>Art√®re urbaine</translation>
+        <translation>ArtËre urbaine</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="263"/>
@@ -768,27 +768,27 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="264"/>
         <source>Residential street</source>
-        <translation>Rue r√©sidentielle</translation>
+        <translation>Rue rÈsidentielle</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="265"/>
         <source>Alley/Private road</source>
-        <translation>Ruelle/Route priv√©e</translation>
+        <translation>Ruelle/Route privÈe</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="266"/>
         <source>Highway ramp, low speed</source>
-        <translation>Bretelle d&apos;acc√®s, basse vitesse</translation>
+        <translation>Bretelle d&apos;accËs, basse vitesse</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="267"/>
         <source>Highway ramp, high speed</source>
-        <translation>Bretelle d&apos;acc√®s, grande vitesse</translation>
+        <translation>Bretelle d&apos;accËs, grande vitesse</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="268"/>
         <source>Unpaved road</source>
-        <translation>Route non bitum√©</translation>
+        <translation>Route non bitumÈ</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="269"/>
@@ -803,12 +803,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="271"/>
         <source>Railroad</source>
-        <translation>Voie ferr√©e</translation>
+        <translation>Voie ferrÈe</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="272"/>
         <source>Shoreline</source>
-        <translation>Ligne c√¥ti√®re</translation>
+        <translation>Ligne cÙtiËre</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="273"/>
@@ -834,22 +834,22 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="278"/>
         <source>State/province border</source>
-        <translation>Fronti√®re de province</translation>
+        <translation>FrontiËre de province</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="279"/>
         <source>County/parish border</source>
-        <translation>Fronti√®re de canton</translation>
+        <translation>FrontiËre de canton</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="280"/>
         <source>International border</source>
-        <translation>Fronti√®re internationale</translation>
+        <translation>FrontiËre internationale</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="281"/>
         <source>River</source>
-        <translation>Rivi√®re</translation>
+        <translation>RiviËre</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="282"/>
@@ -859,7 +859,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="283"/>
         <source>Intermediate land contour</source>
-        <translation>Courbe de niveau interm√©diaire</translation>
+        <translation>Courbe de niveau intermÈdiaire</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="284"/>
@@ -874,7 +874,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="286"/>
         <source>Intermediate depth contour</source>
-        <translation>Courbe isobathe interm√©diaire</translation>
+        <translation>Courbe isobathe intermÈdiaire</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="287"/>
@@ -895,37 +895,37 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="290"/>
         <source>Pipeline</source>
-        <translation>Ol√©oduc</translation>
+        <translation>OlÈoduc</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="291"/>
         <source>Powerline</source>
-        <translation>Ligne √† haute tension</translation>
+        <translation>Ligne ‡ haute tension</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="292"/>
         <source>Marine boundary</source>
-        <translation>Fronti√®re maritime</translation>
+        <translation>FrontiËre maritime</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="293"/>
         <source>Hazard boundary</source>
-        <translation>Limite de zone √† risque</translation>
+        <translation>Limite de zone ‡ risque</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="358"/>
         <source>Large urban area (&amp;gt;200K)</source>
-        <translation>Grande agglom√©ration urbaine (&amp;gt;200K)</translation>
+        <translation>Grande agglomÈration urbaine (&amp;gt;200K)</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="359"/>
         <source>Small urban area (&amp;lt;200K)</source>
-        <translation>Petite agglom√©ration urbaine (&amp;lt;200K)</translation>
+        <translation>Petite agglomÈration urbaine (&amp;lt;200K)</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="360"/>
         <source>Rural housing area</source>
-        <translation>Zone r√©sidentielle rurale</translation>
+        <translation>Zone rÈsidentielle rurale</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="361"/>
@@ -945,7 +945,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="364"/>
         <source>Airport</source>
-        <translation>A√©roport</translation>
+        <translation>AÈroport</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="365"/>
@@ -960,12 +960,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="367"/>
         <source>University/College</source>
-        <translation>Universit√©</translation>
+        <translation>UniversitÈ</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="368"/>
         <source>Hospital</source>
-        <translation>H√¥pital</translation>
+        <translation>HÙpital</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="369"/>
@@ -995,7 +995,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="375"/>
         <source>Cemetery</source>
-        <translation>Cimeti√®re</translation>
+        <translation>CimetiËre</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="376"/>
@@ -1014,17 +1014,17 @@
         <location filename="../map/CMapIMG.cpp" line="381"/>
         <location filename="../map/CMapIMG.cpp" line="382"/>
         <source>State park</source>
-        <translation>Parc r√©gional</translation>
+        <translation>Parc rÈgional</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="383"/>
         <source>Forest</source>
-        <translation>For√™t</translation>
+        <translation>ForÍt</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="384"/>
         <source>Ocean</source>
-        <translation>Oc√©an</translation>
+        <translation>OcÈan</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="385"/>
@@ -1066,22 +1066,22 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="398"/>
         <source>Major River</source>
-        <translation>Rivi√®re majeure</translation>
+        <translation>RiviËre majeure</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="399"/>
         <source>Large River</source>
-        <translation>Grande rivi√®re</translation>
+        <translation>Grande riviËre</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="400"/>
         <source>Medium River</source>
-        <translation>Rivi√®re moyenne</translation>
+        <translation>RiviËre moyenne</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="401"/>
         <source>Small River</source>
-        <translation>Petite rivi√®re</translation>
+        <translation>Petite riviËre</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="404"/>
@@ -1131,7 +1131,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="490"/>
         <source>Failed to open: </source>
-        <translation>√âchec d&apos;ouverture : </translation>
+        <translation>…chec d&apos;ouverture : </translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="514"/>
@@ -1162,7 +1162,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="740"/>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>Le fichier contient des donn√©es verrouill√©es / crypt√©es. Garmin ne vous autorise pas d&apos;utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
+        <translation>Le fichier contient des donnÈes verrouillÈes / cryptÈes. Garmin ne vous autorise pas d&apos;utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2496"/>
@@ -1174,7 +1174,7 @@
         <location filename="../map/CMapIMG.cpp" line="2571"/>
         <location filename="../map/CMapIMG.cpp" line="2576"/>
         <source>Point of Interest</source>
-        <translation>Point d&apos;int√©r√™t</translation>
+        <translation>Point d&apos;intÈrÍt</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2703"/>
@@ -1194,7 +1194,7 @@
     <message>
         <location filename="../map/CMapList.cpp" line="155"/>
         <source>Deactivate</source>
-        <translation>D√©sactiver</translation>
+        <translation>DÈsactiver</translation>
     </message>
     <message>
         <location filename="../map/CMapList.cpp" line="155"/>
@@ -1212,12 +1212,12 @@
     <message>
         <location filename="../map/CMapMAP.cpp" line="46"/>
         <source>Failed ...</source>
-        <translation>√âchec...</translation>
+        <translation>…chec...</translation>
     </message>
     <message>
         <location filename="../map/CMapMAP.cpp" line="63"/>
         <source>Failed to open: </source>
-        <translation>√âchec d&apos;ouverture : </translation>
+        <translation>…chec d&apos;ouverture : </translation>
     </message>
     <message>
         <location filename="../map/CMapMAP.cpp" line="73"/>
@@ -1230,12 +1230,12 @@
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="47"/>
         <source>Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Ajoutez ou retirez des r√©pertoires qui contiennent des cartes. Il peut y avoir plusieurs cartes dans un r√©pertoire mais les sous-r√©pertoires ne sont pas prises en compte. Les formats accept√©s sont : %1</translation>
+        <translation>Ajoutez ou retirez des rÈpertoires qui contiennent des cartes. Il peut y avoir plusieurs cartes dans un rÈpertoire mais les sous-rÈpertoires ne sont pas prises en compte. Les formats acceptÈs sont : %1</translation>
     </message>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="62"/>
         <source>Select map path...</source>
-        <translation>Choisissez un r√©pertoire...</translation>
+        <translation>Choisissez un rÈpertoire...</translation>
     </message>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="81"/>
@@ -1247,7 +1247,7 @@
     <name>CMapPropSetup</name>
     <message>
         <source>Cache path...</source>
-        <translation type="obsolete">R√©pertoire de cache...</translation>
+        <translation type="obsolete">RÈpertoire de cache...</translation>
     </message>
 </context>
 <context>
@@ -1285,7 +1285,7 @@
         <location filename="../map/CMapRMAP.cpp" line="187"/>
         <location filename="../map/CMapRMAP.cpp" line="209"/>
         <source>Failed to read reference point.</source>
-        <translation>Impossible de lire les points de r√©f√©rence.</translation>
+        <translation>Impossible de lire les points de rÈfÈrence.</translation>
     </message>
     <message>
         <location filename="../map/CMapRMAP.cpp" line="237"/>
@@ -1323,7 +1323,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="289"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 tuiles √† charger&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 tuiles ‡ charger&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1345,12 +1345,12 @@ ligne %2, colonne %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="89"/>
         <source>File must be 8 bit palette or gray indexed.</source>
-        <translation>Le fichier doit avoir une palette √† 8 bits ou √™tre en niveaux de gris.</translation>
+        <translation>Le fichier doit avoir une palette ‡ 8 bits ou Ítre en niveaux de gris.</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="125"/>
         <source>No georeference information found.</source>
-        <translation>Aucune information de g√©or√©f√©rencement trouv√©</translation>
+        <translation>Aucune information de gÈorÈfÈrencement trouvÈ</translation>
     </message>
 </context>
 <context>
@@ -1358,23 +1358,23 @@ ligne %2, colonne %3:
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="29"/>
         <source>Build GDAL VRT</source>
-        <translation>G√©n√©rer le VRT GDAL</translation>
+        <translation>GÈnÈrer le VRT GDAL</translation>
     </message>
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="51"/>
         <source>Select files...</source>
-        <translation>S√©lectionnez les fichiers...</translation>
+        <translation>SÈlectionnez les fichiers...</translation>
     </message>
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="75"/>
         <source>Select target file...</source>
-        <translation>S√©lectionnez le fichier √† cr√©er...</translation>
+        <translation>SÈlectionnez le fichier ‡ crÈer...</translation>
     </message>
     <message>
         <location filename="../map/CMapVrtBuilder.cpp" line="196"/>
         <source>!!! failed !!!
 </source>
-        <translation>!!! √©chec !!!</translation>
+        <translation>!!! Èchec !!!</translation>
     </message>
 </context>
 <context>
@@ -1417,19 +1417,19 @@ Structure inconnue.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="206"/>
         <source>No georeference information found.</source>
-        <translation>Aucune information de g√©or√©f√©rencement trouv√©</translation>
+        <translation>Aucune information de gÈorÈfÈrencement trouvÈ</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="392"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 tuiles √† charger&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 tuiles ‡ charger&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
     <name>CMouseEditArea</name>
     <message>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a corner point for more options.&lt;br/&gt;</source>
-        <translation type="obsolete">&lt;b&gt;√âditez la surface&lt;/b&gt;&lt;br/&gt;S√©lectionnez un point d&apos;angle pour voir plus d&apos;options.</translation>
+        <translation type="obsolete">&lt;b&gt;…ditez la surface&lt;/b&gt;&lt;br/&gt;SÈlectionnez un point d&apos;angle pour voir plus d&apos;options.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
@@ -1449,7 +1449,7 @@ Structure inconnue.</translation>
     <name>CMouseEditTrk</name>
     <message>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a track point for more options.&lt;br/&gt;</source>
-        <translation type="obsolete">&lt;b&gt;√âditer les points de la trace&lt;/b&gt;&lt;br/&gt;S√©lectionner un point de la trace pour voir plus d&apos;options.&lt;br/&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;…diter les points de la trace&lt;/b&gt;&lt;br/&gt;SÈlectionner un point de la trace pour voir plus d&apos;options.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="39"/>
@@ -1464,7 +1464,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="81"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished">Ceci remplacera les donn√©es de l&apos;original par une ligne simple de coordonn√©es. Toutes les autres donn√©es seront d√©finitivement perdues.</translation>
+        <translation type="unfinished">Ceci remplacera les donnÈes de l&apos;original par une ligne simple de coordonnÈes. Toutes les autres donnÈes seront dÈfinitivement perdues.</translation>
     </message>
 </context>
 <context>
@@ -1500,7 +1500,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="44"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point. And then a second one.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;S√©lectionner une s√©quence de points&lt;/b&gt;&lt;br/&gt;S√©lectionner le premier point, puis un deuxi√®me.</translation>
+        <translation>&lt;b&gt;SÈlectionner une sÈquence de points&lt;/b&gt;&lt;br/&gt;SÈlectionner le premier point, puis un deuxiËme.</translation>
     </message>
 </context>
 <context>
@@ -1508,7 +1508,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../helpers/CPhotoAlbum.cpp" line="72"/>
         <source>Select images...</source>
-        <translation>S√©lectionner les images...</translation>
+        <translation>SÈlectionner les images...</translation>
     </message>
 </context>
 <context>
@@ -1521,7 +1521,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="62"/>
         <source>time</source>
-        <translation>dur√©e</translation>
+        <translation>durÈe</translation>
     </message>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="64"/>
@@ -1539,7 +1539,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="69"/>
         <source>time [h]</source>
-        <translation>dur√©e [h]</translation>
+        <translation>durÈe [h]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="71"/>
@@ -1557,7 +1557,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../plot/CPlotSpeed.cpp" line="61"/>
         <source>time [h]</source>
-        <translation>dur√©e [h]</translation>
+        <translation>durÈe [h]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotSpeed.cpp" line="63"/>
@@ -1590,7 +1590,7 @@ is not a valid coordinate system definition:
 %2</source>
         <translation>La valeur
 &apos;%1&apos;
-n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
+n&apos;est pas une dÈfinition de systËme de coordonnÈes:
 %2</translation>
     </message>
 </context>
@@ -1599,7 +1599,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
         <source>Edit name...</source>
-        <translation>√âditer le nom...</translation>
+        <translation>…diter le nom...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
@@ -1612,37 +1612,37 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="306"/>
         <source>Migrating database from version 4 to 5.</source>
-        <translation>Migration de la base de donn√©es de version 4 en version 5.</translation>
+        <translation>Migration de la base de donnÈes de version 4 en version 5.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="359"/>
         <source>Migrating database from version 5 to 6.</source>
-        <translation>Migration de la base de donn√©es de version 5 en version 6.</translation>
+        <translation>Migration de la base de donnÈes de version 5 en version 6.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="416"/>
         <source>Migrating database from version 6 to 7.</source>
-        <translation>Migration de la base de donn√©es de version 6 en version 7.</translation>
+        <translation>Migration de la base de donnÈes de version 6 en version 7.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="482"/>
         <source>Migrating database from version 7 to 8.</source>
-        <translation>Migration de la base de donn√©es de version 7 en version 8.</translation>
+        <translation>Migration de la base de donnÈes de version 7 en version 8.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="511"/>
         <source>Migrating database from version 8 to 9.</source>
-        <translation>Migration de la base de donn√©es de version 8 en version 9.</translation>
+        <translation>Migration de la base de donnÈes de version 8 en version 9.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="534"/>
         <source>Open database: %1</source>
-        <translation>Ouvrir la base de donn√©es: %1</translation>
+        <translation>Ouvrir la base de donnÈes: %1</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="543"/>
         <source>Folders:          %1</source>
-        <translation>R√©pertoires: %1</translation>
+        <translation>RÈpertoires: %1</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="552"/>
@@ -1652,7 +1652,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="560"/>
         <source>Routes:           %1 (Only the basic route will be copied)</source>
-        <translation>Routes:           %1 (seulement la route de base sera copi√©e)</translation>
+        <translation>Routes:           %1 (seulement la route de base sera copiÈe)</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="568"/>
@@ -1676,17 +1676,17 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="590"/>
         <source>Map selections:   %1 (can&apos;t be converted to QMapShack)</source>
-        <translation>S√©lections de carte:   %1 (ne peuvent pas √™tre convertis)</translation>
+        <translation>SÈlections de carte:   %1 (ne peuvent pas Ítre convertis)</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="596"/>
         <source>------ Start to convert database to %1------</source>
-        <translation>------ La conversion de base de donn√©e vers %1 commence ------</translation>
+        <translation>------ La conversion de base de donnÈe vers %1 commence ------</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="600"/>
         <source>Failed to create target database.</source>
-        <translation>Erreur lors de la cr√©ation de la base de donn√©es cible.</translation>
+        <translation>Erreur lors de la crÈation de la base de donnÈes cible.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="601"/>
@@ -1696,7 +1696,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="629"/>
         <source>------ Done ------</source>
-        <translation>------ Termin√© ------</translation>
+        <translation>------ TerminÈ ------</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="637"/>
@@ -1712,17 +1712,17 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="664"/>
         <source>Imported %1 folders and %2 diaries</source>
-        <translation>%1 dossiers et %2 journaux ont √©t√© import√©s</translation>
+        <translation>%1 dossiers et %2 journaux ont ÈtÈ importÈs</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="670"/>
         <source>Copy items...</source>
-        <translation>Copier les √©l√©ments...</translation>
+        <translation>Copier les ÈlÈments...</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="694"/>
         <source>Imported %1 tracks, %2 waypoints, %3 routes, %4 areas</source>
-        <translation>%1 traces, %2 waypoints, %3 routes et %4 surfaces ont √©t√© import√©s</translation>
+        <translation>%1 traces, %2 waypoints, %3 routes et %4 surfaces ont ÈtÈ importÈs</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="695"/>
@@ -1732,7 +1732,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="760"/>
         <source>Overlay of type &apos;%1&apos; cant be converted</source>
-        <translation>Overlay de type &apos;%1&apos; ne peut pas √™tre converti</translation>
+        <translation>Overlay de type &apos;%1&apos; ne peut pas Ítre converti</translation>
     </message>
 </context>
 <context>
@@ -1755,7 +1755,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/CQmsDb.cpp" line="162"/>
         <source>%1: drop item with QLGT DB ID %2</source>
-        <translation>%1: poubellise l&apos;√©l√©ment avec l&apos;identifiant QLGT DB %2</translation>
+        <translation>%1: poubellise l&apos;ÈlÈment avec l&apos;identifiant QLGT DB %2</translation>
     </message>
 </context>
 <context>
@@ -1835,7 +1835,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     </message>
     <message>
         <source>Select DEM file path...</source>
-        <translation type="obsolete">S√©lectionnez le r√©pertoire qui contient les fichiers DEM</translation>
+        <translation type="obsolete">SÈlectionnez le rÈpertoire qui contient les fichiers DEM</translation>
     </message>
 </context>
 <context>
@@ -1856,7 +1856,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/search/CSearchGoogle.cpp" line="119"/>
         <source>Unknown response</source>
-        <translation>R√©ponse inconnue</translation>
+        <translation>RÈponse inconnue</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchGoogle.cpp" line="129"/>
@@ -1874,17 +1874,17 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="70"/>
         <source>There is already a database with name &apos;%1&apos;</source>
-        <translation>Une database de ce nom existe d√©j√† : %1</translation>
+        <translation>Une database de ce nom existe dÈj‡ : %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="84"/>
         <source>New database...</source>
-        <translation>Nouvelle base de donn√©es...</translation>
+        <translation>Nouvelle base de donnÈes...</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="109"/>
         <source>Open database...</source>
-        <translation>Ouvrir la base de donn√©es...</translation>
+        <translation>Ouvrir la base de donnÈes...</translation>
     </message>
 </context>
 <context>
@@ -1892,12 +1892,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/db/CSetupWorkspace.cpp" line="51"/>
         <source>Setup database...</source>
-        <translation>Mise en place la base de donn√©es...</translation>
+        <translation>Mise en place la base de donnÈes...</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupWorkspace.cpp" line="51"/>
         <source>Changes will become active after an application&apos;s restart.</source>
-        <translation>Les modifications prennent effet apr√®s un red√©marrage de l&apos;application.</translation>
+        <translation>Les modifications prennent effet aprËs un redÈmarrage de l&apos;application.</translation>
     </message>
 </context>
 <context>
@@ -1913,7 +1913,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IAbout.ui" line="14"/>
         <source>About....</source>
-        <translation>√Ä propos...</translation>
+        <translation>¿ propos...</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="43"/>
@@ -1926,7 +1926,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
         <location filename="../IAbout.ui" line="108"/>
         <location filename="../IAbout.ui" line="122"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="87"/>
@@ -1951,12 +1951,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IAbout.ui" line="147"/>
         <source>French</source>
-        <translation type="unfinished">Fran√ßais</translation>
+        <translation type="unfinished">FranÁais</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="154"/>
         <source>Czech</source>
-        <translation type="unfinished">Tch√®que</translation>
+        <translation type="unfinished">TchËque</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="161"/>
@@ -1991,11 +1991,11 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IAbout.ui" line="212"/>
         <source>This software is licensed under GPL3 or any later version</source>
-        <translation>Ce logiciel est distribu√© sous les termes de la licence GPL3 ou toute version ut√©rieure</translation>
+        <translation>Ce logiciel est distribuÈ sous les termes de la licence GPL3 ou toute version utÈrieure</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="219"/>
-        <source>¬© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
+        <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
     </message>
 </context>
@@ -2053,7 +2053,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
         <source>Setup DEM file pathss</source>
-        <translation>Configurer les r√©pertoires DEM</translation>
+        <translation>Configurer les rÈpertoires DEM</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
@@ -2077,12 +2077,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R√©gler la transparence du calque DEM&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;RÈgler la transparence du calque DEM&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;√©chelle courante comme √©chelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;Èchelle courante comme Èchelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="53"/>
@@ -2093,17 +2093,17 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;D√©finissez la plage d&apos;√©chelle pour l&apos;affichage de la carte. Utilisez les deux boutons √† droite et √† gauche pour d√©finir l&apos;√©chelle courante comme √©chelle maximale ou minimale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DÈfinissez la plage d&apos;Èchelle pour l&apos;affichage de la carte. Utilisez les deux boutons ‡ droite et ‡ gauche pour dÈfinir l&apos;Èchelle courante comme Èchelle maximale ou minimale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;√©chelle courante comme √©chelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;Èchelle courante comme Èchelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="118"/>
         <source>Hillshading</source>
-        <translation>Relief ombr√©</translation>
+        <translation>Relief ombrÈ</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="144"/>
@@ -2123,7 +2123,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
         <location filename="../dem/IDemPropSetup.ui" line="297"/>
         <location filename="../dem/IDemPropSetup.ui" line="304"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -2136,12 +2136,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation>Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les r√©pertoires DEM.</translation>
+        <translation>Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les rÈpertoires DEM.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
-        <translation>Utiliser le menu de contexte (clic droite sur le fichier) pour activer un fichier. Utilisez glisser-d√©poser pour changer la position du fichier dans la liste.</translation>
+        <translation>Utiliser le menu de contexte (clic droite sur le fichier) pour activer un fichier. Utilisez glisser-dÈposer pour changer la position du fichier dans la liste.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="156"/>
@@ -2180,7 +2180,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="60"/>
         <source>Difficulty</source>
-        <translation>Difficult√©</translation>
+        <translation>DifficultÈ</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="138"/>
@@ -2190,7 +2190,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
         <source>Update spoilers</source>
-        <translation>Mise √† jour des spoilers</translation>
+        <translation>Mise ‡ jour des spoilers</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
@@ -2211,7 +2211,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="324"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -2229,7 +2229,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="69"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a √©t√© import√© dans QMapShack et a √©t√© modifi√©. Il ne repr√©sente plus les donn√©es originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a ÈtÈ importÈ dans QMapShack et a ÈtÈ modifiÈ. Il ne reprÈsente plus les donnÈes originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="85"/>
@@ -2259,7 +2259,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="172"/>
         <source>Opacity</source>
-        <translation>Opacit√©</translation>
+        <translation>OpacitÈ</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="192"/>
@@ -2287,7 +2287,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="43"/>
         <source>Keywords:</source>
-        <translation>Mots-cl√©s:</translation>
+        <translation>Mots-clÈs:</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="50"/>
@@ -2385,7 +2385,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="238"/>
         <source>Progress</source>
-        <translation>Progr√®s</translation>
+        <translation>ProgrËs</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="248"/>
@@ -2400,7 +2400,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="307"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a √©t√© import√© dans QMapShack et a √©t√© modifi√©. Il ne repr√©sente plus les donn√©es originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a ÈtÈ importÈ dans QMapShack et a ÈtÈ modifiÈ. Il ne reprÈsente plus les donnÈes originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="335"/>
@@ -2415,7 +2415,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="453"/>
         <source>Time</source>
-        <translation>Dur√©e</translation>
+        <translation>DurÈe</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="458"/>
@@ -2440,7 +2440,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="483"/>
         <source>Ascend</source>
-        <translation>Mont√©e</translation>
+        <translation>MontÈe</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="488"/>
@@ -2492,7 +2492,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="98"/>
         <source>Proximity:</source>
-        <translation>Proximit√©:</translation>
+        <translation>ProximitÈ:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="144"/>
@@ -2502,7 +2502,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="188"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a √©t√© import√© dans QMapShack et a √©t√© modifi√©. Il ne repr√©sente plus les donn√©es originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a ÈtÈ importÈ dans QMapShack et a ÈtÈ modifiÈ. Il ne reprÈsente plus les donnÈes originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="204"/>
@@ -2529,7 +2529,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="290"/>
         <source>Delete selected image.</source>
-        <translation>Supprimer l&apos;image s√©lectionn√©e</translation>
+        <translation>Supprimer l&apos;image sÈlectionnÈe</translation>
     </message>
 </context>
 <context>
@@ -2552,7 +2552,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="39"/>
         <source>Get elevation from active digital elevation model.</source>
-        <translation>Prendre l&apos;altitude du mod√®le num√©rique de terrain (DEM)</translation>
+        <translation>Prendre l&apos;altitude du modËle numÈrique de terrain (DEM)</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="42"/>
@@ -2575,7 +2575,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="63"/>
         <source>Remove all hidden track points permanently.</source>
-        <translation>Supprimer d√©finitivement tous les points cach√©s.</translation>
+        <translation>Supprimer dÈfinitivement tous les points cachÈs.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
@@ -2598,7 +2598,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
-        <translation>Cacher les points dont la distance de la ligne entre les points voisinants est inf√©rieur √†</translation>
+        <translation>Cacher les points dont la distance de la ligne entre les points voisinants est infÈrieur ‡</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
@@ -2626,12 +2626,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
         <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Lisser le profile (m√©thode m√©dian)&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Lisser le profile (mÈthode mÈdian)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
-        <translation>Lisse le profile avec un filtre m√©dian de dimension</translation>
+        <translation>Lisse le profile avec un filtre mÈdian de dimension</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
@@ -2659,7 +2659,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>
         <source>Change start of track to </source>
-        <translation>Date et heure du d√©but de la trace</translation>
+        <translation>Date et heure du dÈbut de la trace</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="71"/>
@@ -2710,17 +2710,17 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="51"/>
         <source>&lt;b&gt;Offset Elevation&lt;/b&gt;</source>
-        <translation>&lt;b&gt;D√©calage de l&apos;altitude&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;DÈcalage de l&apos;altitude&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="69"/>
         <source>Add offset of</source>
-        <translation>Ajouter un d√©calage de</translation>
+        <translation>Ajouter un dÈcalage de</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="95"/>
         <source>to track points elevation.</source>
-        <translation>√† l&apos;altitude des points</translation>
+        <translation>‡ l&apos;altitude des points</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="115"/>
@@ -2743,7 +2743,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation>Remplacer l&apos;altitude des points par les donn√©es DEM</translation>
+        <translation>Remplacer l&apos;altitude des points par les donnÈes DEM</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="70"/>
@@ -2761,12 +2761,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
         <source>&lt;b&gt;Reset Hidden Track Points&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Restaurer les points cach√©s&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Restaurer les points cachÈs&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
         <source>Make all trackpoints visible again.</source>
-        <translation>Rendre visible les points cach√©s</translation>
+        <translation>Rendre visible les points cachÈs</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="54"/>
@@ -2789,7 +2789,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
         <source>Set speed to </source>
-        <translation>Mettre la vitesse √† </translation>
+        <translation>Mettre la vitesse ‡ </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
@@ -2818,7 +2818,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../gis/IGisWidget.ui" line="133"/>
         <source>To add a database do a right click on the database list above.</source>
-        <translation>Pour ajouter une base de donn√©es cliquez droit sur la liste ci-dessus</translation>
+        <translation>Pour ajouter une base de donnÈes cliquez droit sur la liste ci-dessus</translation>
     </message>
 </context>
 <context>
@@ -2836,7 +2836,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../grid/IGridSetup.ui" line="37"/>
         <source>restore default</source>
-        <translation>Remise √† z√©ro</translation>
+        <translation>Remise ‡ zÈro</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="40"/>
@@ -2883,7 +2883,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/IImportDatabase.ui" line="45"/>
         <source>Source Database:</source>
-        <translation>Base de donn√©e source</translation>
+        <translation>Base de donnÈe source</translation>
     </message>
     <message>
         <location filename="../qlgt/IImportDatabase.ui" line="52"/>
@@ -2894,12 +2894,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../qlgt/IImportDatabase.ui" line="86"/>
         <source>Target Database:</source>
-        <translation>Base de donn√©e cible</translation>
+        <translation>Base de donnÈe cible</translation>
     </message>
     <message>
         <location filename="../qlgt/IImportDatabase.ui" line="102"/>
         <source>Start</source>
-        <translation>D√©marrer</translation>
+        <translation>DÈmarrer</translation>
     </message>
 </context>
 <context>
@@ -2907,12 +2907,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../helpers/IInputDialog.ui" line="14"/>
         <source>Edit...</source>
-        <translation>√âditer...</translation>
+        <translation>…diter...</translation>
     </message>
     <message>
         <location filename="../helpers/IInputDialog.ui" line="20"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -2964,7 +2964,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="99"/>
         <source>Window</source>
-        <translation>Fen√™tre</translation>
+        <translation>FenÍtre</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="104"/>
@@ -2989,12 +2989,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="176"/>
         <source>Dig. Elev. Model (DEM)</source>
-        <translation type="unfinished">Mod√®le num√©rique de terrain (DEM)</translation>
+        <translation type="unfinished">ModËle numÈrique de terrain (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="209"/>
         <source>Data</source>
-        <translation>Donn√©es</translation>
+        <translation>DonnÈes</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="221"/>
@@ -3015,7 +3015,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="273"/>
         <source>Show Scale</source>
-        <translation>Afficher l&apos;√©chelle</translation>
+        <translation>Afficher l&apos;Èchelle</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="282"/>
@@ -3051,12 +3051,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
         <location filename="../IMainWindow.ui" line="330"/>
         <location filename="../IMainWindow.ui" line="333"/>
         <source>Setup Map Paths</source>
-        <translation>Configurer les r√©pertoires des cartes</translation>
+        <translation>Configurer les rÈpertoires des cartes</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="345"/>
         <source>POI Text</source>
-        <translation>Libell√©s des points d&apos;inter√™t</translation>
+        <translation>LibellÈs des points d&apos;interÍt</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="357"/>
@@ -3071,12 +3071,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="378"/>
         <source>Setup DEM Paths</source>
-        <translation>Configurer les r√©pertoires DEM</translation>
+        <translation>Configurer les rÈpertoires DEM</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="387"/>
         <source>About</source>
-        <translation>√Ä propos</translation>
+        <translation>¿ propos</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="396"/>
@@ -3092,7 +3092,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="417"/>
         <source>Load GIS Data</source>
-        <translation>Charger des donn√©es SIG...</translation>
+        <translation>Charger des donnÈes SIG...</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="420"/>
@@ -3107,7 +3107,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="432"/>
         <source>Save All GIS Data</source>
-        <translation>Enregistrer toutes les donn√©es SIG</translation>
+        <translation>Enregistrer toutes les donnÈes SIG</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="435"/>
@@ -3147,7 +3147,7 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="489"/>
         <source>Setup Units</source>
-        <translation>Configurer les unit√©s</translation>
+        <translation>Configurer les unitÈs</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="498"/>
@@ -3162,17 +3162,17 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../IMainWindow.ui" line="510"/>
         <source>Import Database from QLandkarte</source>
-        <translation>Importer une base de donn√©es QLandkarte</translation>
+        <translation>Importer une base de donnÈes QLandkarte</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="513"/>
         <source>Import QLandkarte GT database</source>
-        <translation>Importer une base de donn√©es QLandkarte GT</translation>
+        <translation>Importer une base de donnÈes QLandkarte GT</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="522"/>
         <source>VRT Builder</source>
-        <translation>G√©n√©rateur de VRT</translation>
+        <translation>GÈnÈrateur de VRT</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="525"/>
@@ -3235,12 +3235,12 @@ n&apos;est pas une d√©finition de syst√®me de coordonn√©es:
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation>Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les r√©pertoires des cartes.</translation>
+        <translation>Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les rÈpertoires des cartes.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
-        <translation>Utiliser le menu de contexte (clic droite sur la carte) pour activer une carte. Utilisez glisser-d√©poser pour changer la position de la carte dans la liste.</translation>
+        <translation>Utiliser le menu de contexte (clic droite sur la carte) pour activer une carte. Utilisez glisser-dÈposer pour changer la position de la carte dans la liste.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="129"/>
@@ -3259,7 +3259,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="14"/>
         <source>Setup map paths</source>
-        <translation>Configurer les r√©pertoires des cartes</translation>
+        <translation>Configurer les rÈpertoires des cartes</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="20"/>
@@ -3296,12 +3296,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R√©gler la transparence de la carte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;RÈgler la transparence de la carte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;√©chelle courante comme √©chelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;Èchelle courante comme Èchelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="53"/>
@@ -3312,12 +3312,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;D√©finissez la plage d&apos;√©chelle pour l&apos;affichage de la carte. Utilisez les deux boutons √† droite et √† gauche pour d√©finir l&apos;√©chelle courante comme √©chelle maximale ou minimale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DÈfinissez la plage d&apos;Èchelle pour l&apos;affichage de la carte. Utilisez les deux boutons ‡ droite et ‡ gauche pour dÈfinir l&apos;Èchelle courante comme Èchelle maximale ou minimale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;√©chelle courante comme √©chelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;Èchelle courante comme Èchelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="137"/>
@@ -3352,7 +3352,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="216"/>
         <source>Expiration (Days)</source>
-        <translation>Dur√©e du cache (jours)</translation>
+        <translation>DurÈe du cache (jours)</translation>
     </message>
 </context>
 <context>
@@ -3371,7 +3371,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
-        <translation>S√©lectionnez les fichiers source:</translation>
+        <translation>SÈlectionnez les fichiers source:</translation>
     </message>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="79"/>
@@ -3386,7 +3386,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapVrtBuilder.ui" line="95"/>
         <source>Start</source>
-        <translation>D√©marrer</translation>
+        <translation>DÈmarrer</translation>
     </message>
 </context>
 <context>
@@ -3397,7 +3397,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>Add points to temporary line?</source>
-        <translation type="obsolete">Ajouter les points √† la ligne temporaire ?</translation>
+        <translation type="obsolete">Ajouter les points ‡ la ligne temporaire ?</translation>
     </message>
     <message>
         <source>Warning!</source>
@@ -3405,7 +3405,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="obsolete">Ceci remplacera les donn√©es de l&apos;original par une ligne simple de coordonn√©es. Toutes les autres donn√©es seront d√©finitivement perdues.</translation>
+        <translation type="obsolete">Ceci remplacera les donnÈes de l&apos;original par une ligne simple de coordonnÈes. Toutes les autres donnÈes seront dÈfinitivement perdues.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="238"/>
@@ -3477,7 +3477,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../plot/IPlot.cpp" line="602"/>
         <source>No or bad data.</source>
-        <translation>Aucune donn√©e ou donn√©es invalides.</translation>
+        <translation>Aucune donnÈe ou donnÈes invalides.</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="1128"/>
@@ -3531,7 +3531,7 @@ or
     <message>
         <location filename="../grid/IProjWizard.ui" line="82"/>
         <source>user defined</source>
-        <translation>personnalis√©</translation>
+        <translation>personnalisÈ</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="94"/>
@@ -3551,12 +3551,12 @@ or
     <message>
         <location filename="../grid/IProjWizard.ui" line="138"/>
         <source>UPS North (North Pole)</source>
-        <translation>UPS Nord (p√¥le nord)</translation>
+        <translation>UPS Nord (pÙle nord)</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="145"/>
         <source>UPS South (South Pole)</source>
-        <translation>UPS Sud (p√¥le sud)</translation>
+        <translation>UPS Sud (pÙle sud)</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="152"/>
@@ -3584,7 +3584,7 @@ or
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="54"/>
         <source>Clone waypoint and move by:</source>
-        <translation>Dupliquer le waypoint et d√©placer de:</translation>
+        <translation>Dupliquer le waypoint et dÈplacer de:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="66"/>
@@ -3593,7 +3593,7 @@ or
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
-        <source>¬∞</source>
+        <source>∞</source>
         <translation></translation>
     </message>
 </context>
@@ -3806,7 +3806,7 @@ or
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="121"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -3833,22 +3833,22 @@ or
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="49"/>
         <source>Select a range of points.</source>
-        <translation>S√©lectionner une s√©quence de points</translation>
+        <translation>SÈlectionner une sÈquence de points</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="63"/>
         <source>Move selected point.</source>
-        <translation>D√©placer le point</translation>
+        <translation>DÈplacer le point</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="77"/>
         <source>Add points before the selected point.</source>
-        <translation>Ajouter des points avant le point s√©lectionn√©</translation>
+        <translation>Ajouter des points avant le point sÈlectionnÈ</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPoint.ui" line="91"/>
         <source>Add points after the selected point.</source>
-        <translation>Ajouter des points apr√®s le point s√©lectionn√©</translation>
+        <translation>Ajouter des points aprËs le point sÈlectionnÈ</translation>
     </message>
 </context>
 <context>
@@ -3861,7 +3861,7 @@ or
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="32"/>
         <source>Delete selected range of points.</source>
-        <translation>Supprimer une s√©quence de points</translation>
+        <translation>Supprimer une sÈquence de points</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRange.ui" line="35"/>
@@ -3920,12 +3920,12 @@ or
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
         <source>Copy track points as new track.</source>
-        <translation>Cr√©er une nouvelle trace √† partir des points s√©lectionn√©s</translation>
+        <translation>CrÈer une nouvelle trace ‡ partir des points sÈlectionnÈs</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="103"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -3937,7 +3937,7 @@ or
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Afficher et √©diter les d√©tails&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Afficher et Èditer les dÈtails&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="31"/>
@@ -3986,7 +3986,7 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -3998,7 +3998,7 @@ or
     </message>
     <message>
         <source>View details &amp;amp; Edit properties of track.</source>
-        <translation type="obsolete">Afficher et √©diter les caract√©ristiques de la trace.</translation>
+        <translation type="obsolete">Afficher et Èditer les caractÈristiques de la trace.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
@@ -4035,12 +4035,12 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="89"/>
         <source>Show on-screen profile and detailed information about points.</source>
-        <translation>Afficher le profile d&apos;altitude et des informations detaill√©es sur les points</translation>
+        <translation>Afficher le profile d&apos;altitude et des informations detaillÈes sur les points</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
         <source>Select a range of points.</source>
-        <translation>S√©lectionner une s√©quence de points.</translation>
+        <translation>SÈlectionner une sÈquence de points.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
@@ -4060,12 +4060,12 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="162"/>
         <source>Cut track at selected point into two tracks.</source>
-        <translation>Couper la trace en deux au point s√©lectionn√©</translation>
+        <translation>Couper la trace en deux au point sÈlectionnÈ</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="191"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -4077,7 +4077,7 @@ or
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Afficher et √©diter les d√©tails&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Afficher et Èditer les dÈtails&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
@@ -4125,16 +4125,16 @@ or
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move waypoint to a new location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;D√©placer le waypoint √† une nouvelle position.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DÈplacer le waypoint ‡ une nouvelle position.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clone waypoint and move clone a given distance and angle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dupliquer le waypoint et d√©placer la copie par une distance et un angle donn√©s .&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dupliquer le waypoint et dÈplacer la copie par une distance et un angle donnÈs .&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="176"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
 </context>
 <context>
@@ -4150,12 +4150,12 @@ or
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="14"/>
         <source>Copy item...</source>
-        <translation>Copier un √©l√©ment...</translation>
+        <translation>Copier un ÈlÈment...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="23"/>
         <source>Replace existing item</source>
-        <translation>Remplacer l&apos;√©l√©ment existant</translation>
+        <translation>Remplacer l&apos;ÈlÈment existant</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="30"/>
@@ -4163,17 +4163,17 @@ or
         <location filename="../helpers/ISelectCopyAction.ui" line="67"/>
         <location filename="../helpers/ISelectCopyAction.ui" line="77"/>
         <source>TextLabel</source>
-        <translation>Libell√©</translation>
+        <translation>LibellÈ</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="60"/>
         <source>Do not copy item</source>
-        <translation>Ne pas copier l&apos;√©l√©ment</translation>
+        <translation>Ne pas copier l&apos;ÈlÈment</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="97"/>
         <source>Create a clone</source>
-        <translation>Dupliquer l&apos;√©l√©ment</translation>
+        <translation>Dupliquer l&apos;ÈlÈment</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="104"/>
@@ -4183,7 +4183,7 @@ or
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="111"/>
         <source>Keep item:</source>
-        <translation>Conserver l&apos;√©l√©ment:</translation>
+        <translation>Conserver l&apos;ÈlÈment:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="118"/>
@@ -4193,7 +4193,7 @@ or
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="132"/>
         <source>And for all other items, too.</source>
-        <translation>et pour tous les autres √©l√©ments</translation>
+        <translation>et pour tous les autres ÈlÈments</translation>
     </message>
 </context>
 <context>
@@ -4252,12 +4252,12 @@ or
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="14"/>
         <source>Copy item...</source>
-        <translation type="unfinished">Copier un √©l√©ment...</translation>
+        <translation type="unfinished">Copier un ÈlÈment...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="23"/>
         <source>Replace existing item</source>
-        <translation type="unfinished">Remplacer l&apos;√©l√©ment existant</translation>
+        <translation type="unfinished">Remplacer l&apos;ÈlÈment existant</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="30"/>
@@ -4270,7 +4270,7 @@ or
         <location filename="../gis/db/ISelectSaveAction.ui" line="81"/>
         <location filename="../gis/db/ISelectSaveAction.ui" line="91"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Libell√©</translation>
+        <translation type="unfinished">LibellÈ</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="67"/>
@@ -4285,7 +4285,7 @@ or
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="111"/>
         <source>And for all other items, too.</source>
-        <translation type="unfinished">et pour tous les autres √©l√©ments</translation>
+        <translation type="unfinished">et pour tous les autres ÈlÈments</translation>
     </message>
 </context>
 <context>
@@ -4293,7 +4293,7 @@ or
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="14"/>
         <source>Add database...</source>
-        <translation>Ajouter une base de donn√©es...</translation>
+        <translation>Ajouter une base de donnÈes...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="25"/>
@@ -4313,7 +4313,7 @@ or
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="46"/>
         <source>Add new database.</source>
-        <translation>Ajouter une nouvelle base de donn√©es.</translation>
+        <translation>Ajouter une nouvelle base de donnÈes.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="49"/>
@@ -4324,7 +4324,7 @@ or
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="60"/>
         <source>Open existing database.</source>
-        <translation>Ouvrir une base de donn√©es existante.</translation>
+        <translation>Ouvrir une base de donnÈes existante.</translation>
     </message>
 </context>
 <context>
@@ -4422,7 +4422,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="14"/>
         <source>Edit text...</source>
-        <translation>√âditer le texte...</translation>
+        <translation>…diter le texte...</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="25"/>
@@ -4454,7 +4454,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="268"/>
         <source>Redo</source>
-        <translation>R√©p√©ter</translation>
+        <translation>RÈpÈter</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="271"/>
@@ -4494,7 +4494,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="319"/>
         <source>Align Left</source>
-        <translation>Align√© √† gauche</translation>
+        <translation>AlignÈ ‡ gauche</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="322"/>
@@ -4504,7 +4504,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="334"/>
         <source>Align Right</source>
-        <translation>Align√© √† droite</translation>
+        <translation>AlignÈ ‡ droite</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="337"/>
@@ -4514,7 +4514,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="349"/>
         <source>Align Center</source>
-        <translation>Centr√©</translation>
+        <translation>CentrÈ</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="352"/>
@@ -4524,7 +4524,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="364"/>
         <source>Align Block</source>
-        <translation>Justifi√©</translation>
+        <translation>JustifiÈ</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="367"/>
@@ -4605,17 +4605,17 @@ or
     <message>
         <location filename="../units/IUnitsSetup.ui" line="14"/>
         <source>Setup units...</source>
-        <translation>Configurer les unit√©s</translation>
+        <translation>Configurer les unitÈs</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="22"/>
         <source>Metric</source>
-        <translation>M√©trique</translation>
+        <translation>MÈtrique</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="29"/>
         <source>Imperial</source>
-        <translation>Imp√©rial</translation>
+        <translation>ImpÈrial</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="36"/>
@@ -4628,7 +4628,7 @@ or
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="14"/>
         <source>Icons...</source>
-        <translation>Ic√¥nes</translation>
+        <translation>IcÙnes</translation>
     </message>
 </context>
 <context>
@@ -4652,12 +4652,12 @@ or
     <message>
         <location filename="../GeoMath.cpp" line="165"/>
         <source>Position values out of bounds. </source>
-        <translation>Valeurs de la position hors de la plage autoris√©e.</translation>
+        <translation>Valeurs de la position hors de la plage autorisÈe.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="435"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
-        <translation>√ätes-vous s√ªr de vouloir supprimer %1 du dossier %2?</translation>
+        <translation> tes-vous s˚r de vouloir supprimer %1 du dossier %2?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="436"/>
@@ -4673,24 +4673,24 @@ or
     <message>
         <location filename="../gis/CGisListWks.cpp" line="971"/>
         <source>Do you really want to delete %1?</source>
-        <translation>√ätes-vous s√ªr de vouloir supprimer %1?</translation>
+        <translation> tes-vous s˚r de vouloir supprimer %1?</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderDatabase.cpp" line="28"/>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <source>All your data grouped by folders.</source>
-        <translation>Vos donn√©es group√©es par dossiers.</translation>
+        <translation>Vos donnÈes groupÈes par dossiers.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="61"/>
         <source>Lost &amp; Found (%1)</source>
-        <translation>Perdu &amp; Trouv√© (%1)</translation>
+        <translation>Perdu &amp; TrouvÈ (%1)</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="66"/>
         <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
         <source>Lost &amp; Found</source>
-        <translation>Perdu &amp; Trouv√©</translation>
+        <translation>Perdu &amp; TrouvÈ</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="149"/>
@@ -4698,7 +4698,7 @@ or
         <location filename="../gis/qms/CQmsProject.cpp" line="95"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="159"/>
         <source>Save GIS data to...</source>
-        <translation>Enregistrer les donn√©es SIG dans...</translation>
+        <translation>Enregistrer les donnÈes SIG dans...</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="253"/>
@@ -4752,27 +4752,27 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="295"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation>Le fichier existe et n&apos;a pas √©t√© cr√©√© par QMapShack. Si vous cliquez sur &apos;oui&apos; tous les donn√©es de ce fichier seront perdues. M√™me si ce fichier contient des donn√©es GPX et sera ouvert par QMapShack certains √©l√©ments de ce fichier ne pourront pas √™tre lus ou enregistr√©s. Ces √©lements seront perdus. Il est conseill√© d&apos;utiliser un autre fichier.&lt;b&gt;Voulez-vous vraiment √©craser ce fichier ?&lt;/b&gt; </translation>
+        <translation>Le fichier existe et n&apos;a pas ÈtÈ crÈÈ par QMapShack. Si vous cliquez sur &apos;oui&apos; tous les donnÈes de ce fichier seront perdues. MÍme si ce fichier contient des donnÈes GPX et sera ouvert par QMapShack certains ÈlÈments de ce fichier ne pourront pas Ítre lus ou enregistrÈs. Ces Èlements seront perdus. Il est conseillÈ d&apos;utiliser un autre fichier.&lt;b&gt;Voulez-vous vraiment Ècraser ce fichier ?&lt;/b&gt; </translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="396"/>
         <source>Failed to create file &apos;%1&apos;</source>
-        <translation>Impossible de cr√©er le fichier: &apos;%1&apos;</translation>
+        <translation>Impossible de crÈer le fichier: &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="405"/>
         <source>Failed to write file &apos;%1&apos;</source>
-        <translation>Impossible d&apos;√©crire le fichier: &apos;%1&apos;</translation>
+        <translation>Impossible d&apos;Ècrire le fichier: &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="410"/>
         <source>Saveing GIS data failed...</source>
-        <translation>Impossible d&apos;enregistrer les donn√©es SIG...</translation>
+        <translation>Impossible d&apos;enregistrer les donnÈes SIG...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="599"/>
         <source>Archived</source>
-        <translation>Archiv√©</translation>
+        <translation>ArchivÈ</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="603"/>
@@ -4792,7 +4792,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/IGisItem.cpp" line="421"/>
         <source>This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
-        <translation>Cet √©l√©ment est probablement en lecture seule parce qu&apos;il n&apos;a pas √©t√© cr√©√© avec QMapShack. Normelement, vous ne devriez pas modifier des donn√©es import√©es. Mais si vous √™tes s√ªr de ce que vous faites, cliquez sur &apos;OK&apos;</translation>
+        <translation>Cet ÈlÈment est probablement en lecture seule parce qu&apos;il n&apos;a pas ÈtÈ crÈÈ avec QMapShack. Normelement, vous ne devriez pas modifier des donnÈes importÈes. Mais si vous Ítes s˚r de ce que vous faites, cliquez sur &apos;OK&apos;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="422"/>
@@ -4851,7 +4851,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="98"/>
         <source>strong</source>
-        <translation>√©paisse</translation>
+        <translation>Èpaisse</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="142"/>
@@ -4874,32 +4874,32 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="510"/>
         <source>Changed name.</source>
-        <translation>Nom modifi√©...</translation>
+        <translation>Nom modifiÈ...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="516"/>
         <source>Changed border width.</source>
-        <translation>Largeur de la bordure modifi√©e...</translation>
+        <translation>Largeur de la bordure modifiÈe...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="522"/>
         <source>Changed fill pattern.</source>
-        <translation>Remplissage modifi√©...</translation>
+        <translation>Remplissage modifiÈ...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="528"/>
         <source>Changed opacity.</source>
-        <translation>Opacit√© modifi√©e...</translation>
+        <translation>OpacitÈ modifiÈe...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="534"/>
         <source>Changed comment.</source>
-        <translation>Commentaire modifi√©...</translation>
+        <translation>Commentaire modifiÈ...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="540"/>
         <source>Changed description.</source>
-        <translation>Description modifi√©e...</translation>
+        <translation>Description modifiÈe...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="546"/>
@@ -4907,13 +4907,13 @@ ligne %2, colonne %3:
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1806"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="448"/>
         <source>Changed links</source>
-        <translation>Liens modifi√©s...</translation>
+        <translation>Liens modifiÈs...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="558"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1818"/>
         <source>Changed color</source>
-        <translation>Couleur modifi√©e...</translation>
+        <translation>Couleur modifiÈe...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="72"/>
@@ -4955,21 +4955,21 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="369"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
-        <translation>√ätes-vous s√ªr de vouloir supprimer %1 du projet &apos;%2&apos;?</translation>
+        <translation> tes-vous s˚r de vouloir supprimer %1 du projet &apos;%2&apos;?</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="182"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1794"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="436"/>
         <source>Changed comment</source>
-        <translation>Commentaire modifi√©</translation>
+        <translation>Commentaire modifiÈ</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="188"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1800"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed description</source>
-        <translation>Description modifi√©e</translation>
+        <translation>Description modifiÈe</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="221"/>
@@ -5033,7 +5033,7 @@ Nom de fichier: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="672"/>
         <location filename="../gis/tnv/serialization.cpp" line="683"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation>Le seul format lon/lat autoris√© est WGS 84</translation>
+        <translation>Le seul format lon/lat autorisÈ est WGS 84</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="504"/>
@@ -5041,12 +5041,12 @@ Nom de fichier: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="729"/>
         <location filename="../gis/tnv/serialization.cpp" line="803"/>
         <source>Failed to read data.</source>
-        <translation>Impossible de lire les donn√©es.</translation>
+        <translation>Impossible de lire les donnÈes.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="340"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
-        <translation>Points de la trace modifi√©s, Les donn√©es ant√©rieures sont perdues.</translation>
+        <translation>Points de la trace modifiÈs, Les donnÈes antÈrieures sont perdues.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="217"/>
@@ -5063,7 +5063,7 @@ Nom de fichier: %1</translation>
         <location filename="../gis/rte/CGisItemRte.cpp" line="233"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
         <source>Time: %1</source>
-        <translation>Dur√©e: %1</translation>
+        <translation>DurÈe: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="459"/>
@@ -5074,12 +5074,12 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="466"/>
         <source>Moving: %1</source>
-        <translation>D√©placement: %1</translation>
+        <translation>DÈplacement: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="475"/>
         <source>Start: %1</source>
-        <translation>D√©but: %1</translation>
+        <translation>DÈbut: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="480"/>
@@ -5109,12 +5109,12 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="622"/>
         <source>Ascend: %1%2 (%3%)</source>
-        <translation>Mont√©e: %1%2 (%3%)</translation>
+        <translation>MontÈe: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
         <source>Ascend: - (-)</source>
-        <translation>Mont√©es: - (-)</translation>
+        <translation>MontÈes: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="632"/>
@@ -5192,7 +5192,7 @@ Nom de fichier: %1</translation>
         <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="115"/>
         <source>Edit name...</source>
-        <translation>√âditer le nom...</translation>
+        <translation>…diter le nom...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1199"/>
@@ -5218,7 +5218,7 @@ Nom de fichier: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1788"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="396"/>
         <source>Changed name</source>
-        <translation>Nom modifi√©</translation>
+        <translation>Nom modifiÈ</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="96"/>
@@ -5228,47 +5228,47 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="112"/>
         <source>Reset all hidden track points to visible</source>
-        <translation>Restaurer les points cach√©s</translation>
+        <translation>Restaurer les points cachÈs</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="137"/>
         <source>Permanently removed all hidden track points</source>
-        <translation>Supprimer d√©finitivement tous les points cach√©s</translation>
+        <translation>Supprimer dÈfinitivement tous les points cachÈs</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="187"/>
         <source>Smoothed profile with a Median filter of size %1</source>
-        <translation>Profile liss√© avec un filtre m√©dian de dimension %1</translation>
+        <translation>Profile lissÈ avec un filtre mÈdian de dimension %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="223"/>
         <source>Replaced elevation data with data from DEM files.</source>
-        <translation>Les altitudes ont √©t√© remplac√©es  par les donn√©es DEM</translation>
+        <translation>Les altitudes ont ÈtÈ remplacÈes  par les donnÈes DEM</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="246"/>
         <source>Offset elevation data by %1%2.</source>
-        <translation>D√©caler les altitudes de %1%2.</translation>
+        <translation>DÈcaler les altitudes de %1%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="265"/>
         <source>Changed start of track to %1.</source>
-        <translation>D√©but de la trace modifi√© √† %1.</translation>
+        <translation>DÈbut de la trace modifiÈ ‡ %1.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="284"/>
         <source>Remove timestamps.</source>
-        <translation>Horodatage Supprim√©.</translation>
+        <translation>Horodatage SupprimÈ.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="307"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
-        <translation>Horodatage artificiel ajout√© avec un d√©calage de %1 sec.</translation>
+        <translation>Horodatage artificiel ajoutÈ avec un dÈcalage de %1 sec.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="340"/>
         <source>Changed speed to %1%2.</source>
-        <translation>Vitesse modifi√©e √† %1%2.</translation>
+        <translation>Vitesse modifiÈe ‡ %1%2.</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
@@ -5282,32 +5282,32 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="325"/>
         <source>Proximity: %1 %2</source>
-        <translation>Proximit√©: %1 %2</translation>
+        <translation>ProximitÈ: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="406"/>
         <source>Changed position</source>
-        <translation>Position modifi√©e</translation>
+        <translation>Position modifiÈe</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="412"/>
         <source>Changed elevation</source>
-        <translation>Altitude modifi√©e</translation>
+        <translation>Altitude modifiÈe</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="418"/>
         <source>Changed proximity</source>
-        <translation>Rayon de proximit√© modifi√©</translation>
+        <translation>Rayon de proximitÈ modifiÈ</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="430"/>
         <source>Changed icon</source>
-        <translation>Ic√¥ne modifi√©</translation>
+        <translation>IcÙne modifiÈ</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="454"/>
         <source>Changed images</source>
-        <translation>Images modifi√©es</translation>
+        <translation>Images modifiÈes</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="460"/>
@@ -5323,12 +5323,12 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="465"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
-        <translation>Ceci est un fichier type avec un encodage de polygone inconnu. Veuillez signaler ce probl√®me.</translation>
+        <translation>Ceci est un fichier type avec un encodage de polygone inconnu. Veuillez signaler ce problËme.</translation>
     </message>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="846"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
-        <translation>Ceci est un fichier type avec un encodage de polyligne inconnu. Veuillez signaler ce probl√®me.</translation>
+        <translation>Ceci est un fichier type avec un encodage de polyligne inconnu. Veuillez signaler ce problËme.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="99"/>
@@ -5356,13 +5356,13 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../qlgt/CQlgtTrack.cpp" line="217"/>
         <source>Number of trackpoints is not equal the number of extended data trackpoints.</source>
-        <translation>Le nombre de points de trace ne correspond pas au nombre de points de trace √©tendus.</translation>
+        <translation>Le nombre de points de trace ne correspond pas au nombre de points de trace Ètendus.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtTrack.cpp" line="264"/>
         <location filename="../qlgt/CQlgtTrack.cpp" line="290"/>
         <source>Number of trackpoints is not equal the number of shadow data trackpoints.</source>
-        <translation>Le nombre de points de trace ne correspond pas au nombre des points cach√©s</translation>
+        <translation>Le nombre de points de trace ne correspond pas au nombre des points cachÈs</translation>
     </message>
     <message>
         <location filename="../device/IDevice.cpp" line="204"/>

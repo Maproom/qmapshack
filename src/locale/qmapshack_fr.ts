@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.0" language="fr">
 <context>
     <name>CCanvas</name>
     <message>
@@ -493,7 +493,7 @@
     <message>
         <location filename="../gis/CGisWidget.cpp" line="445"/>
         <source>Do you want to delete the original track?</source>
-        <translation>Voulez-vous garder la trace originale ?</translation>
+        <translation>Voulez-vous supprimer la trace originale?</translation>
     </message>
 </context>
 <context>

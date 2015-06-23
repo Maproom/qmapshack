@@ -288,7 +288,7 @@ void CGisItemTrk::filterObscureDate(int delta)
         QDateTime timestamp = timeStart;
         if(!timestamp.isValid())
         {
-            timestamp = QDateTime::currentDateTime();
+            timestamp = QDateTime::currentDateTime().toUTC();
         }
 
         for(int i = 0; i < trk.segs.size(); i++)
@@ -313,7 +313,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {
-        timestamp = QDateTime::currentDateTime();
+        timestamp = QDateTime::currentDateTime().toUTC();
     }
 
     for(int i = 0; i < trk.segs.size(); i++)

@@ -25,6 +25,7 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
+    labelTimeZone->setText(QDateTime::currentDateTime().timeZone().abbreviation(QDateTime::currentDateTime()));
     dateTimeEdit->setDateTime(QDateTime::currentDateTime());
 
     connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));

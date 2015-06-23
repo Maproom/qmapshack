@@ -36,6 +36,7 @@ IGisItem::key_t CGisItemRte::keyUserFocus;
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
     *this = parentRte;
@@ -73,6 +74,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     : IGisItem(parent, eTypeRte, parent->childCount())
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
     // --- start read and process data ----
@@ -87,6 +89,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
 CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
     history = hist;
@@ -97,6 +100,7 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeRte, NOIDX)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
     loadFromDb(id, db);
@@ -105,6 +109,7 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
 CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *project, int idx)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
     rte.name = name;

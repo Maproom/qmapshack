@@ -109,6 +109,8 @@ void CGisWidget::loadGisProject(const QString& filename)
     // skip if project is already loaded
     if(item && treeWks->hasProject(item))
     {
+        QMessageBox::information(this, tr("Load project..."), tr("The project \"%1\" is already in the workspace.").arg(item->getName()), QMessageBox::Abort);
+
         delete item;
         item = 0;
     }

@@ -39,6 +39,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -159,6 +160,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
     menuItem->addAction(actionDelete);
+    actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
 
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));
@@ -844,6 +846,19 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
         if(gisItem != 0)
         {
+            bool onlyWpts = true;
+            foreach(QTreeWidgetItem * item, selectedItems())
+            {
+                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+                if(wpt == 0)
+                {
+                    onlyWpts = false;
+                    break;
+                }
+            }
+
+            actionRteFromWpt->setEnabled(onlyWpts);
+
             menuItem->exec(p);
             return;
         }
@@ -1505,8 +1520,26 @@ bool CGisListWks::event(QEvent * e)
             return true;
         }
         }
-
     }
     return QTreeWidget::event(e);
 }
 
+
+
+void CGisListWks::slotRteFromWpt()
+{
+    QList<IGisItem::key_t> keys;
+    foreach(QTreeWidgetItem * item, selectedItems())
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(wpt == 0)
+        {
+            continue;
+        }
+
+        keys << wpt->getKey();
+    }
+
+    CCreateRouteFromWpt dlg(keys, this);
+    dlg.exec();
+}

@@ -1149,7 +1149,7 @@ void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& curre
     foreach(IPlot * plot, registeredPlots)
     {
         plot->updateData();
-    }    
+    }
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)

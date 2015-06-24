@@ -425,7 +425,6 @@ protected:
 
     qint32 cntTrkPts;
     qint32 cntWpts;
-
 };
 
 #endif //IGISPROJECT_H

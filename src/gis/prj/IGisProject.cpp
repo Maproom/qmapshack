@@ -227,7 +227,6 @@ void IGisProject::updateItems()
             }
         }
     }
-
 }
 
 void IGisProject::setupName(const QString &defaultName)
@@ -690,7 +689,6 @@ void IGisProject::updateItemCounters()
         {
             cntWpts++;
         }
-
     }
 }
 

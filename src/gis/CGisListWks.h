@@ -93,6 +93,7 @@ private slots:
     void slotCopyItem();
     void slotSyncWksDev();
     void slotSyncDevWks();
+    void slotRteFromWpt();
 
 
 private:
@@ -136,6 +137,7 @@ private:
     QAction * actionResetRte;
     QAction * actionEditRte;
     QAction * actionEditArea;
+    QAction * actionRteFromWpt;
 
     QMenu * menuNone;
 

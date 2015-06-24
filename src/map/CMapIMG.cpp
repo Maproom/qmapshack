@@ -637,14 +637,16 @@ void CMapIMG::readBasics()
 #endif                       //DEBUG_SHOW_SECT_DESC
 
     int cnt = 1;
-    PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), subfiles.count(), &CMainWindow::self());
+    int tot = subfiles.count();
+
+    PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), 100, &CMainWindow::self());
     progress.setMinimumDuration(1000);
 
     maparea = QRectF();
     QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
     while(subfile != subfiles.end())
     {
-        PROGRESS(cnt++, throw exce_t(errAbort,tr("User abort: ") + filename));
+        PROGRESS(qRound(cnt++ *100.0/tot), throw exce_t(errAbort,tr("User abort: ") + filename));
         if((*subfile).parts.contains("GMP"))
         {
             throw exce_t(errFormat,tr("File is NT format. QMapShack is unable to read map files with NT format: ") + filename);

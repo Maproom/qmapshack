@@ -40,7 +40,7 @@
     <message>
         <location filename="../dem/CDemPropSetup.cpp" line="183"/>
         <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Niveau %1&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Niveau %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -105,7 +105,7 @@
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="136"/>
         <source>Enter new area name.</source>
-        <translation type="unfinished">Saisir le nouveau nom de la surface.</translation>
+        <translation>Saisir le nouveau nom de la surface.</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
@@ -164,17 +164,17 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="461"/>
         <source>distance: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>distance : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="463"/>
         <source>ascent: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>montée : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="465"/>
         <source>descend: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>descente : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="523"/>
@@ -239,12 +239,12 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="395"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Éditer le nom...</translation>
+        <translation>Éditer le nom...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="395"/>
         <source>Enter new track name.</source>
-        <translation type="unfinished">Saisir le nouveau nom de la trace.</translation>
+        <translation>Saisir le nouveau nom de la trace.</translation>
     </message>
 </context>
 <context>
@@ -262,7 +262,7 @@
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="176"/>
         <source>Enter new proximity range.</source>
-        <translation>Saisir le rayon de l&apos;alarme de proximité</translation>
+        <translation>Saisir le rayon de l&apos;alarme de proximité.</translation>
     </message>
 </context>
 <context>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="83"/>
         <source>No DEM data found for that point.</source>
-        <translation>Pas de données DEM disponibles pour ce point</translation>
+        <translation>Pas de données DEM disponibles pour ce point.</translation>
     </message>
 </context>
 <context>
@@ -367,7 +367,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="97"/>
         <source>Send to Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer vers les appareils</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="98"/>
@@ -388,7 +388,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="116"/>
         <source>Edit...</source>
-        <translation>Éditer..</translation>
+        <translation>Éditer...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
@@ -423,7 +423,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="132"/>
         <source>Show Bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la bulle</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="134"/>
@@ -438,17 +438,17 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="143"/>
         <source>Calculate Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculer l&apos;itinéraire</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Reset Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser la route</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Edit Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer la route</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="154"/>
@@ -550,12 +550,12 @@
     <message>
         <location filename="../CMainWindow.cpp" line="718"/>
         <source>Select output file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="744"/>
         <source>Select file to load</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le fichier à charger</translation>
     </message>
 </context>
 <context>
@@ -1204,7 +1204,7 @@
     <message>
         <location filename="../map/CMapList.cpp" line="174"/>
         <source>Where do you want to store maps?</source>
-        <translation type="unfinished"></translation>
+        <translation>Où voulez vous enregistrer les cartes ?</translation>
     </message>
 </context>
 <context>
@@ -1240,7 +1240,7 @@
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="81"/>
         <source>Select root path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le répertoire racine...</translation>
     </message>
 </context>
 <context>
@@ -1434,7 +1434,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Éditer la surface&lt;/b&gt;&lt;br/&gt;Choisissez und fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seulement les points marqués d&apos;un carré large peuvet être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1442,7 +1442,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Éditer les points de la route&lt;/b&gt;&lt;br/&gt;Choisissez une fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seul les points marqués d&apos;un carré large peuvent être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1454,17 +1454,17 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="39"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Éditer les points de la trace&lt;/b&gt;&lt;br/&gt;Choisissez une fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seul les points marqués d&apos;un carré large peuvent être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="81"/>
         <source>Warning!</source>
-        <translation type="unfinished">Avertissement !</translation>
+        <translation>Avertissement !</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="81"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished">Ceci remplacera les données de l&apos;original par une ligne simple de coordonnées. Toutes les autres données seront définitivement perdues.</translation>
+        <translation>Ceci remplacera les données de l&apos;original par une ligne simple de coordonnées. Toutes les autres données seront définitivement perdues.</translation>
     </message>
 </context>
 <context>
@@ -1482,7 +1482,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une route</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="45"/>
@@ -1666,7 +1666,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="576"/>
         <source>Overlays:         %1 (areas will be converted as areas, distance lines will be converted to tracks, all other overlay items will be lost)</source>
-        <translation type="unfinished"></translation>
+        <translation>Overlays :        %1 (les surfaces seront convertis en surfaces, les lignes de distance en traces, tous les autres overlays seront perdus)</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="583"/>
@@ -1763,62 +1763,62 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="34"/>
         <source>Foot</source>
-        <translation type="unfinished"></translation>
+        <translation>à pied</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="35"/>
         <source>Horse</source>
-        <translation type="unfinished"></translation>
+        <translation>à cheval</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="36"/>
         <source>Wheelchair</source>
-        <translation type="unfinished"></translation>
+        <translation>en fauteuil roulant</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="37"/>
         <source>Bicycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Vélo</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="38"/>
         <source>Moped</source>
-        <translation type="unfinished"></translation>
+        <translation>Cyclomoteur</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="39"/>
         <source>Motorcycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Moto</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="40"/>
         <source>Motorcar</source>
-        <translation type="unfinished"></translation>
+        <translation>Voiture</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="41"/>
         <source>Goods</source>
-        <translation type="unfinished"></translation>
+        <translation>Camion</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="43"/>
         <source>Shortest</source>
-        <translation type="unfinished"></translation>
+        <translation>le plus court</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="44"/>
         <source>Quickest</source>
-        <translation type="unfinished"></translation>
+        <translation>le plus rapide</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
         <source>profile &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>profile &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
         <source>, mode &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>, mode &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -1826,12 +1826,12 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="40"/>
         <source>Add or remove paths containing Routino data. There can be multiple databases in a path but no sub-path is parsed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter ou enlever des répertoires contenant des données Routino. Il peut y avoir plusieurs bases de données dans un répertoire mais les sous-répertoires ne sont pas pris en compte.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
         <source>Select routing data file path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner un répertoire de données de calcul d&apos;itinéraire...</translation>
     </message>
     <message>
         <source>Select DEM file path...</source>
@@ -1843,12 +1843,12 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="36"/>
         <source>Routino (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino (hors ligne)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="37"/>
         <source>MapQuest (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>MapQuest (en ligne)</translation>
     </message>
 </context>
 <context>
@@ -1946,47 +1946,47 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../IAbout.ui" line="140"/>
         <source>Rainer Unseld </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="147"/>
         <source>French</source>
-        <translation type="unfinished">Français</translation>
+        <translation>Français</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="154"/>
         <source>Czech</source>
-        <translation type="unfinished">Tchèque</translation>
+        <translation>Tchèque</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="161"/>
         <source>Pavel Fric</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="168"/>
         <source>German</source>
-        <translation type="unfinished">Deutsch</translation>
+        <translation>Deutsch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="175"/>
         <source>Translation:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="182"/>
         <source>Josef Latt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="189"/>
         <source>Spanish</source>
-        <translation type="unfinished">Espagnol</translation>
+        <translation>Espagnol</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="196"/>
         <source>Jose Luis Domingo Lopez</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="212"/>
@@ -2019,17 +2019,17 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="53"/>
         <source>Scales</source>
-        <translation type="unfinished"></translation>
+        <translation>Échelles</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="59"/>
         <source>Logarithmic</source>
-        <translation type="unfinished"></translation>
+        <translation>Logarithmique</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
         <source>Square (optimized for TMS and WTMS tiles)</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrée (optimisée pour tuiles TMS et WTMS)</translation>
     </message>
 </context>
 <context>
@@ -2229,12 +2229,12 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="69"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a été importé dans QMapShack et a été modifié. Il ne représente plus les données originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a été importé dans QMapShack et a été modifié. Il ne représente plus les données originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="85"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverser le mode lecture seule. Ouvrez le cadenas pour pouvoir éditer l&apos;objet.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="88"/>
@@ -2298,12 +2298,12 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
         <source>Sort along track (multiple)</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier le long de la trace (multiple)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
         <source>Sort along track (single)</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier le long de la trace (individuel)</translation>
     </message>
     <message>
         <source>Sort By Time</source>
@@ -2328,12 +2328,12 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="71"/>
         <source>Keep order of project</source>
-        <translation type="unfinished"></translation>
+        <translation>Garder l&apos;ordre du projet</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
         <source>Sort by time</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier par ordre chronolgique</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
@@ -2369,7 +2369,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="203"/>
         <source>Graph Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle du graphe</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="224"/>
@@ -2390,17 +2390,17 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="248"/>
         <source>Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Trace</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="274"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverser le mode lecture seule. Ouvrez le cadenas pour pouvoir éditer l&apos;objet.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="307"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a été importé dans QMapShack et a été modifié. Il ne représente plus les données originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a été importé dans QMapShack et a été modifié. Il ne représente plus les données originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="335"/>
@@ -2507,7 +2507,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="204"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverser le mode lecture seule. Ouvrez le cadenas pour pouvoir éditer l&apos;objet.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read Only Mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2989,7 +2989,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../IMainWindow.ui" line="176"/>
         <source>Dig. Elev. Model (DEM)</source>
-        <translation type="unfinished">Modèle numérique de terrain (DEM)</translation>
+        <translation>Modèle numérique de terrain (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="209"/>
@@ -2999,7 +2999,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcul d&apos;itinéraire</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="255"/>
@@ -3182,47 +3182,47 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../IMainWindow.ui" line="534"/>
         <source>Store Map View</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer une vue cartographique</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="537"/>
         <source>Write current active map and DEM list including the properties to a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder les cartes et calques DEM actives et leurs paramètres dans un fichier</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="546"/>
         <source>Load Map View</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger une vue cartographique</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="549"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Rétablir une vue avec les cartes et calques DEM et leurs paramètres à partir d&apos;un fichier</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="561"/>
         <source>Ext. Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profile externe</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="564"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="573"/>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="582"/>
         <source>Clone Map View</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer une vue cartographique</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="585"/>
         <source>Ctrl+Shift+T</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3246,7 +3246,8 @@ n&apos;est pas une définition de système de coordonnées:
         <location filename="../map/IMapList.ui" line="129"/>
         <source>Help! I want maps!
 I don&apos;t want to read the documentation!</source>
-        <translation type="unfinished"></translation>
+        <translation>Au secours ! Je veux des cartes !
+Je n&apos;ai pas envie de lire la documentation !</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="149"/>
@@ -3264,7 +3265,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="20"/>
         <source>Root path of tile cache for online maps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire racine du cache de tuiles pour les cartes en ligne :</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="36"/>
@@ -3277,7 +3278,8 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../map/IMapPathSetup.ui" line="185"/>
         <source>Help! I want maps!
 I don&apos;t want to read the documentation!</source>
-        <translation type="unfinished"></translation>
+        <translation>Au secours ! Je veux des cartes !
+Je n&apos;ai pas envie de lire la documentation !</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="29"/>
@@ -3342,7 +3344,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="240"/>
         <source>Cache Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire du cache</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="196"/>
@@ -3410,42 +3412,42 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="238"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Nouvelle ligne&lt;/b&gt;&lt;br/&gt;Déplacez la souris et utilisez le bouton gauche pour ajouter des points. Cliquez droit pour terminer.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="279"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Supprimer un point&lt;/b&gt;&lt;br/&gt;Approchez le pointeur du point et cliquez gauche pour le supprimer.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="288"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sélectionner une série de points&lt;/b&gt;&lt;br/&gt; Pour commencer la sélection, cliquez gauche sur le premier point. Cliquez gauche sur le sur le deuxième point pour terminer la sélection et choisissez une option. Utilisez le bouton droit pour annuler.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="297"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Déplacer un point&lt;/b&gt;&lt;br/&gt;Approchez le pointeur près d&apos;un point et cliquez gauche pour le coller au pointeur. Déplacez le point avec la souris. Déposez le point avec un clic gauche. Utilisez le bouton droit pour annuler.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="305"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ajouter un point&lt;/b&gt;&lt;br/&gt;Placez le pointeur de la souris près d&apos;un segment de ligne et cliquez gauche pour ajouter un point. Le nouveau point va coller au pointeur et vous pouvez le déplacer. Déposez le point par un clic gauche. Utilisez le clic droit pour annuler.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="314"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Aucun calcul d&apos;itinéraire&lt;/b&gt;&lt;br/&gt;Les points seront connectés par une ligne droite.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="319"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Calcul d&apos;itinéraire automatique&lt;/b&gt;&lt;br/&gt;Les paramètres de calcul d&apos;itinéraire actuels serviront pour calculer un tracé entre les points. &lt;b&gt;Remarque :&lt;/b&gt;Le routeur sélectionné doit être capable de faire le calcul à la volée. Généralement, les routeurs hors ligne en sont capables, les routeurs en ligne ne le sont pas.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Calcul d&apos;itinéraire vecteur&lt;/b&gt;&lt;br/&gt;Connecter les points avec une ligne basée sur une carte vecteur active, si possible.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3467,12 +3469,13 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../plot/IPlot.cpp" line="108"/>
         <source>Stop Range</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>tbc: range</translatorcomment>
+        <translation>Terminer la série</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="109"/>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer...</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="602"/>
@@ -3482,7 +3485,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../plot/IPlot.cpp" line="1128"/>
         <source>Select output file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le fichier de sortie</translation>
     </message>
 </context>
 <context>
@@ -3602,12 +3605,12 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="20"/>
         <source>t.b.d</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3615,37 +3618,38 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="31"/>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profile</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="38"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="45"/>
         <source>Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Base de données</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="52"/>
         <source>Add paths with Routino database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des répertoires qui contiennent des bases de données Routino.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="55"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="121"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>tbc: setup tool button</translatorcomment>
+        <translation>Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données de calcul d&apos;itinéraire locales. Utilisez le bouton de configuration pour ajouter des répertoires.</translation>
     </message>
 </context>
 <context>
@@ -3653,18 +3657,18 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="14"/>
         <source>Setup Routino database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurez la base de données Routino...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="27"/>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="47"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="99"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -3672,7 +3676,7 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3700,7 +3704,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="102"/>
         <source>Move points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer des points.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="105"/>
@@ -3710,62 +3714,63 @@ or
         <location filename="../mouse/line/IScrOptEditLine.ui" line="280"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="125"/>
         <source>Add new points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des points.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="145"/>
         <source>Select a range of points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner une série de points.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="165"/>
         <source>Delete a point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer un point.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="216"/>
         <source>No auto-routing or line snapping</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>tbc: snapping -&gt; verrouillage (used in Garmin device UI) </translatorcomment>
+        <translation>Aucun calcul d&apos;itinéraire automatique ou verrouillage </translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="219"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="232"/>
         <source>Use auto-routing to between points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le calcul d&apos;itinéraire automatique entre deux points.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="235"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>Snap line along lines of a vector map.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrouiller la ligne aux lignes d&apos;une carte vecteur.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="251"/>
         <source>V</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="277"/>
         <source>Undo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler la dernière modification</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
         <source>Redo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Rétablir la dernière modification</translation>
     </message>
 </context>
 <context>
@@ -3778,7 +3783,7 @@ or
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir les détails et éditer.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="43"/>
@@ -3791,17 +3796,17 @@ or
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
         <source>Copy area into another project.</source>
-        <translation>Copier la surface dans un autre projet</translation>
+        <translation>Copier la surface dans un autre projet.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
         <source>Delete area from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la surface du projet.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="89"/>
         <source>Edit shape of the area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier la forme de la surface.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="121"/>
@@ -3874,23 +3879,23 @@ or
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="20"/>
         <source>Delete all points between the first and last one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer tous les points entre le premier et le dernier point.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="23"/>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="37"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="34"/>
         <source>Caclculate a route between the first and last selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcluler un itinéraire entre le premier et le dernier point sélectionné.</translation>
     </message>
 </context>
 <context>
@@ -3952,7 +3957,7 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="42"/>
         <source>Copy route into another project.</source>
-        <translation>Copier la route dans un autre projet</translation>
+        <translation>Copier la route dans un autre projet.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3961,27 +3966,27 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="28"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir les détails et éditer.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
         <source>Delete route from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la route du projet.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="77"/>
         <source>Calculate route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculer la route.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
         <source>Reset route caclulation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser la route.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="105"/>
         <source>Move route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer les points de la route.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
@@ -4025,12 +4030,12 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details and edit properties of track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir les détails et éditer les paramètres de la trace.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
         <source>Delete track from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la trace du projet.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="89"/>
@@ -4082,7 +4087,7 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir les détails et éditer.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
@@ -4102,22 +4107,23 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
         <source>Delete waypoint from project.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>tbc: waypoint</translatorcomment>
+        <translation>Supprimer le waypoint du projet.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
         <source>Show content as static bubble.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le contenu comme bulle statique.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
         <source>Move waypoint to a new location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer le waypoint.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer le waypoint et déplacer la copie d&apos;une distance et d&apos;un angle défini.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4142,7 +4148,7 @@ or
     <message>
         <location filename="../gis/ISelDevices.ui" line="14"/>
         <source>Select devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner les appareils...</translation>
     </message>
 </context>
 <context>
@@ -4201,12 +4207,12 @@ or
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
         <source>Select Parent Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le répertoire parent...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="26"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
 </context>
 <context>
@@ -4224,7 +4230,7 @@ or
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
         <source>New project&apos;s name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du nouveau projet</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="43"/>
@@ -4244,7 +4250,7 @@ or
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="115"/>
         <source>Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Base de données</translation>
     </message>
 </context>
 <context>
@@ -4252,17 +4258,17 @@ or
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="14"/>
         <source>Copy item...</source>
-        <translation type="unfinished">Copier un élément...</translation>
+        <translation>Copier un élément...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="23"/>
         <source>Replace existing item</source>
-        <translation type="unfinished">Remplacer l&apos;élément existant</translation>
+        <translation>Remplacer l&apos;élément existant</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="30"/>
         <source>Replace with:</source>
-        <translation type="unfinished">Remplacer par:</translation>
+        <translation>Remplacer par:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="37"/>
@@ -4270,22 +4276,22 @@ or
         <location filename="../gis/db/ISelectSaveAction.ui" line="81"/>
         <location filename="../gis/db/ISelectSaveAction.ui" line="91"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Libellé</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="67"/>
         <source>Do not replace item</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas remplacer l&apos;élément</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="74"/>
         <source>Use item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser l&apos;élément:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="111"/>
         <source>And for all other items, too.</source>
-        <translation type="unfinished">et pour tous les autres éléments</translation>
+        <translation>et pour tous les autres éléments</translation>
     </message>
 </context>
 <context>
@@ -4340,12 +4346,12 @@ or
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
         <source>Database Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier de base donnée...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="20"/>
         <source>Folder name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du dossier</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="30"/>
@@ -4368,27 +4374,27 @@ or
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="14"/>
         <source>New Waypoint...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau waypoint...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="22"/>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="29"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="39"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Position</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="49"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="59"/>
@@ -4396,7 +4402,7 @@ or
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 or
 &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="unfinished">Mauvais format de position. Formats valides: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; ou &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; </translation>
+        <translation>Mauvais format de position. Formats valides: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; ou &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; </translation>
     </message>
 </context>
 <context>
@@ -4587,17 +4593,17 @@ or
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="75"/>
         <source>Print date/time in </source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la date au format</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="82"/>
         <source>long format, or</source>
-        <translation type="unfinished"></translation>
+        <translation>long</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="92"/>
         <source>short format</source>
-        <translation type="unfinished"></translation>
+        <translation>court</translation>
     </message>
 </context>
 <context>
@@ -4918,12 +4924,12 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="72"/>
         <source>Save project?</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer le projet ?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="72"/>
         <source>The project &quot;%1&quot; was changed. Save befor closing it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le projet &quot;%1&quot; a été modifié. Enregistrer avant de le fermer ?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="272"/>
@@ -4974,32 +4980,34 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="221"/>
         <source>Length: -</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="229"/>
         <source>Time: %2 days %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée : %2 jours %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="238"/>
         <source>Time: -</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>tbc: heure/temps/durée</translatorcomment>
+        <translation>Heure : -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="244"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>tbc</translatorcomment>
+        <translation>Date du dernier calcul d&apos;itinéraire : &lt;br/&gt;%1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="246"/>
         <source>with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>avec %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="471"/>
         <source>Changed route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Points de route modifiés.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
@@ -5149,38 +5157,38 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="676"/>
         <source>Ascend: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Montée : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="681"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="698"/>
         <source>, %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="686"/>
         <source>Ascend: -</source>
-        <translation type="unfinished"></translation>
+        <translation>Montée : -</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="693"/>
         <source> Descend: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Descente : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="703"/>
         <source>Descend: -</source>
-        <translation type="unfinished"></translation>
+        <translation>Descente : -</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="709"/>
         <source>Dist.: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dist.: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="714"/>
         <source> Time: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation> Temps : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1199"/>
@@ -5367,12 +5375,12 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../device/IDevice.cpp" line="204"/>
         <source>There is another project with the same name. If you press &apos;ok&apos; it will be removed and replaced.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un autre projet du même nom existe déjà. Si vous confirmez, il sera supprimé et remplacé.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <source>Enter new route name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez le nouveau nom du projet.</translation>
     </message>
 </context>
 </TS>

@@ -1015,6 +1015,8 @@ void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& curre
         return;
     }
 
+    quint32 lastCurrent = current;
+
     bool withDoubles = project->getSorting() != IGisProject::eSortTrackWithoutDouble;
 
     QVector<pointDP> line;
@@ -1118,10 +1120,14 @@ void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& curre
                 minD  = WPT_FOCUS_DIST_IN;
             }
 
-            progress.setValue(qRound(current * 100.0/total));
-            if(progress.wasCanceled())
+            if(current  - lastCurrent > 100)
             {
-                return;
+                lastCurrent = current;
+                progress.setValue(qRound(current * 100.0/total));
+                if(progress.wasCanceled())
+                {
+                    return;
+                }
             }
         }
 

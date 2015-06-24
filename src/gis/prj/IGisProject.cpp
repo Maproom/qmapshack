@@ -206,7 +206,7 @@ void IGisProject::updateItems()
     }
 
     quint32 total = cntTrkPts * cntWpts;
-    quint32 current;
+    quint32 current = 0;
 
     QProgressDialog progress(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), QObject::tr("Abort"), 0, 100, &CMainWindow::self());
     progress.setWindowModality(Qt::WindowModal);

@@ -159,8 +159,9 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
-    menuItem->addAction(actionDelete);
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
+    menuItem->addAction(actionDelete);
+
 
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
     connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));

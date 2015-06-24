@@ -439,17 +439,17 @@
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="96"/>
+        <location filename="../gis/CGisListWks.cpp" line="97"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="95"/>
+        <location filename="../gis/CGisListWks.cpp" line="96"/>
         <source>Save As...</source>
         <translation>Speichern unter...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="94"/>
+        <location filename="../gis/CGisListWks.cpp" line="95"/>
         <source>Edit..</source>
         <translation>Bearbeiten..</translation>
     </message>
@@ -458,54 +458,59 @@
         <translation type="obsolete">Aktualisiere das Projekt auf allen Geräten </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="98"/>
+        <location filename="../gis/CGisListWks.cpp" line="99"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="104"/>
+        <location filename="../gis/CGisListWks.cpp" line="105"/>
         <source>Update Project on Device</source>
         <translation>Aktualisiere das Projekt auf dem Gerät</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="116"/>
+        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Edit...</source>
         <translation>Bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="117"/>
+        <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Copy to...</source>
         <translation>Kopieren nach...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="133"/>
         <source>Show Bubble</source>
         <translation>Infoblase anzeigen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="134"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
         <source>Move Waypoint</source>
         <translation>Wegpunkt verschieben</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="143"/>
+        <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Calculate Route</source>
         <translation>Route berechnen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="144"/>
+        <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Reset Route</source>
         <translation>Route zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="145"/>
+        <location filename="../gis/CGisListWks.cpp" line="146"/>
         <source>Edit Route</source>
         <translation>Route bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="605"/>
-        <location filename="../gis/CGisListWks.cpp" line="1354"/>
-        <location filename="../gis/CGisListWks.cpp" line="1392"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <source>Create Route</source>
+        <translation>Route erstellen</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="607"/>
+        <location filename="../gis/CGisListWks.cpp" line="1369"/>
+        <location filename="../gis/CGisListWks.cpp" line="1407"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
@@ -514,17 +519,17 @@
         <translation type="obsolete">Wegpunkt verschieben...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="135"/>
+        <location filename="../gis/CGisListWks.cpp" line="136"/>
         <source>Proj. Waypoint...</source>
         <translation>Wegpunkt Projektion...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="120"/>
         <source>Track Profile</source>
         <translation>Trackprofil</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="97"/>
+        <location filename="../gis/CGisListWks.cpp" line="98"/>
         <source>Send to Devices</source>
         <translation>Ans Gerät senden</translation>
     </message>
@@ -533,53 +538,53 @@
         <translation type="obsolete">Sperren/Entsperren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="121"/>
+        <location filename="../gis/CGisListWks.cpp" line="122"/>
         <source>Select Range</source>
         <translation>Bereich wählen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="122"/>
+        <location filename="../gis/CGisListWks.cpp" line="123"/>
         <source>Edit Track Points</source>
         <translation>Trackpunkte bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="123"/>
+        <location filename="../gis/CGisListWks.cpp" line="124"/>
         <source>Reverse Track</source>
         <translation>Track umkehren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="124"/>
+        <location filename="../gis/CGisListWks.cpp" line="125"/>
         <source>Combine Tracks</source>
         <translation>Tracks verbinden</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Edit Area Points</source>
         <translation>Gebietspunkte bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="105"/>
-        <location filename="../gis/CGisListWks.cpp" line="126"/>
+        <location filename="../gis/CGisListWks.cpp" line="106"/>
+        <location filename="../gis/CGisListWks.cpp" line="127"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="705"/>
+        <location filename="../gis/CGisListWks.cpp" line="707"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Ansicht speichern. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="746"/>
+        <location filename="../gis/CGisListWks.cpp" line="748"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Ansicht laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="935"/>
+        <location filename="../gis/CGisListWks.cpp" line="950"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="935"/>
+        <location filename="../gis/CGisListWks.cpp" line="950"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus der Ansicht entfernen.</translation>
     </message>
@@ -1277,46 +1282,46 @@
         <translation>Lesen der Dateistruktur fehlgeschlagen:</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="640"/>
+        <location filename="../map/CMapIMG.cpp" line="642"/>
         <source>Loading %1</source>
         <translation>Lädt %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="647"/>
+        <location filename="../map/CMapIMG.cpp" line="649"/>
         <source>User abort: </source>
         <translation>Benutzerabbruch:</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="650"/>
+        <location filename="../map/CMapIMG.cpp" line="652"/>
         <source>File is NT format. QMapShack is unable to read map files with NT format: </source>
         <translation>Die Datei hat das NT Format. QMapShack kann dieses Format nicht lesen:</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="742"/>
+        <location filename="../map/CMapIMG.cpp" line="744"/>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
         <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2498"/>
-        <location filename="../map/CMapIMG.cpp" line="2506"/>
-        <location filename="../map/CMapIMG.cpp" line="2510"/>
-        <location filename="../map/CMapIMG.cpp" line="2515"/>
-        <location filename="../map/CMapIMG.cpp" line="2561"/>
-        <location filename="../map/CMapIMG.cpp" line="2569"/>
-        <location filename="../map/CMapIMG.cpp" line="2573"/>
-        <location filename="../map/CMapIMG.cpp" line="2578"/>
+        <location filename="../map/CMapIMG.cpp" line="2500"/>
+        <location filename="../map/CMapIMG.cpp" line="2508"/>
+        <location filename="../map/CMapIMG.cpp" line="2512"/>
+        <location filename="../map/CMapIMG.cpp" line="2517"/>
+        <location filename="../map/CMapIMG.cpp" line="2563"/>
+        <location filename="../map/CMapIMG.cpp" line="2571"/>
+        <location filename="../map/CMapIMG.cpp" line="2575"/>
+        <location filename="../map/CMapIMG.cpp" line="2580"/>
         <source>Point of Interest</source>
         <translation>Ort von Interesse</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2705"/>
+        <location filename="../map/CMapIMG.cpp" line="2707"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2751"/>
-        <location filename="../map/CMapIMG.cpp" line="2759"/>
-        <location filename="../map/CMapIMG.cpp" line="2766"/>
+        <location filename="../map/CMapIMG.cpp" line="2753"/>
+        <location filename="../map/CMapIMG.cpp" line="2761"/>
+        <location filename="../map/CMapIMG.cpp" line="2768"/>
         <source>Area</source>
         <translation>Gebiet</translation>
     </message>
@@ -2242,6 +2247,20 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/trk/ICombineTrk.ui" line="70"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="117"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="144"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>ICreateRouteFromWpt</name>
+    <message>
+        <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="14"/>
+        <source>Create Route from Waypoints</source>
+        <translation>Route aus Wegpunkten erstellen</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="30"/>
+        <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="50"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -5082,34 +5101,34 @@ Areas: %1</source>
         <translation>Verknüpfung abgebrochen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="303"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="302"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Dateiname: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="308"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="307"/>
         <source>Waypoints: %1</source>
         <translation>Wegpunkte: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="312"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="311"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="316"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="315"/>
         <source>Routes: %1</source>
         <translation>Routen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="320"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="319"/>
         <source>Areas: %1</source>
         <translation>Gebiete: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="400"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="399"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
@@ -5120,7 +5139,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="436"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="401"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="400"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
@@ -5421,6 +5440,7 @@ Dateiname: %1</translation>
         <translation>Farbe geändert</translation>
     </message>
     <message>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="63"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1201"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1216"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1235"/>
@@ -5722,12 +5742,12 @@ Dateiname: %1</translation>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="971"/>
+        <location filename="../gis/CGisListWks.cpp" line="986"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="971"/>
+        <location filename="../gis/CGisListWks.cpp" line="986"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1? löschen wollen?</translation>
     </message>
@@ -5788,6 +5808,7 @@ Dateiname: %1</translation>
         <translation>Es gibt schon ein Projekt mit dem selben Namen. Wenn Sie &apos;ok&apos; drücken wird dieses entfernt und ersetzt.</translation>
     </message>
     <message>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="63"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <source>Enter new route name.</source>
         <translation>Geben Sie einen Namen für die Route ein.</translation>

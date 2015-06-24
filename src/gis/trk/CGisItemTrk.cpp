@@ -1007,7 +1007,7 @@ void CGisItemTrk::deriveSecondaryData()
 }
 
 
-void CGisItemTrk::findWaypointsCloseBy()
+void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& current, quint32 total)
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project == 0)
@@ -1045,14 +1045,6 @@ void CGisItemTrk::findWaypointsCloseBy()
     {
         return;
     }
-
-    /// @todo find a better limit
-    if(project->getItemCountByType(IGisItem::eTypeWpt) > 30 && project->getItemCountByType(IGisItem::eTypeTrk) > 10)
-    {
-        return;
-    }
-
-    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     // convert coodinates of all waypoints into meter coordinates relative to the first track point
     point3D pt0 = line[0];
@@ -1102,6 +1094,7 @@ void CGisItemTrk::findWaypointsCloseBy()
 
         foreach(const pointDP &pt, line)
         {
+            current++;
             qreal d = (trkwpt.x - pt.x)*(trkwpt.x - pt.x) + (trkwpt.y - pt.y)*(trkwpt.y - pt.y);
 
             if(d < WPT_FOCUS_DIST_IN)
@@ -1124,6 +1117,12 @@ void CGisItemTrk::findWaypointsCloseBy()
                 index = NOIDX;
                 minD  = WPT_FOCUS_DIST_IN;
             }
+
+            progress.setValue(qRound(current * 100.0/total));
+            if(progress.wasCanceled())
+            {
+                return;
+            }
         }
 
         if(index != NOIDX)
@@ -1144,10 +1143,7 @@ void CGisItemTrk::findWaypointsCloseBy()
     foreach(IPlot * plot, registeredPlots)
     {
         plot->updateData();
-    }
-
-
-    QApplication::restoreOverrideCursor();
+    }    
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)

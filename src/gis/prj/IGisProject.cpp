@@ -38,7 +38,10 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , filename(filename)
     , valid(false)
     , noUpdate(false)
+    , noCorrelation(false)
     , sorting(eSortNone)
+    , cntTrkPts(0)
+    , cntWpts(0)
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
@@ -50,7 +53,10 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , filename(filename)
     , valid(false)
     , noUpdate(false)
+    , noCorrelation(false)
     , sorting(eSortNone)
+    , cntTrkPts(0)
+    , cntWpts(0)
 {
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 
@@ -179,6 +185,11 @@ void IGisProject::setChanged()
     updateItems();
 }
 
+void IGisProject::switchOnCorrelation()
+{
+    noCorrelation = false;
+    updateItems();
+}
 
 void IGisProject::updateItems()
 {
@@ -189,12 +200,30 @@ void IGisProject::updateItems()
 
     updateItemCounters();
 
+    if(noCorrelation)
+    {
+        return;
+    }
+
+    quint32 total = cntTrkPts * cntWpts;
+    quint32 current;
+
+    QProgressDialog progress(QObject::tr("Correlate tracks and waypoints."), QObject::tr("Abort"), 0, 100, &CMainWindow::self());
+    progress.setWindowModality(Qt::WindowModal);
+
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(child(i));
         if(trk)
         {
-            trk->findWaypointsCloseBy();
+            trk->findWaypointsCloseBy(progress, current, total);
+            if(progress.wasCanceled())
+            {
+                QString msg = QObject::tr("Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project (%1) in the future?").arg(getNameEx());
+                int res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Cancelled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                noCorrelation = res == QMessageBox::Yes;
+                break;
+            }
         }
     }
 }
@@ -635,6 +664,8 @@ void IGisProject::updateItemCounters()
 {
     // count number of items by type
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
+    cntTrkPts = 0;
+    cntWpts = 0;
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -645,6 +676,19 @@ void IGisProject::updateItemCounters()
         }
 
         cntItemsByType[item->type()]++;
+
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+        if(trk)
+        {
+            cntTrkPts += trk->getNumberOfVisiblePoints();
+        }
+
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(wpt)
+        {
+            cntWpts++;
+        }
+
     }
 }
 

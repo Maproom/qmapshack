@@ -132,6 +132,10 @@ void CGpxProject::loadGpx(const QString& filename)
         sorting = sorting_e(xmlExtension.namedItem("ql:sorting").toElement().text().toInt());
     }
 
+    if(xmlExtension.namedItem("ql:correlation").isElement())
+    {
+        noCorrelation = bool(xmlExtension.namedItem("ql:correlation").toElement().text().toInt() == 0);
+    }
 
     const QDomNode& xmlMetadata = xmlGpx.namedItem("metadata");
     if(xmlMetadata.isElement())
@@ -383,6 +387,13 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         QDomElement elem = xmlExt.ownerDocument().createElement("ql:sorting");
         xmlExt.appendChild(elem);
         QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSorting()));
+        elem.appendChild(text);
+    }
+
+    {
+        QDomElement elem = xmlExt.ownerDocument().createElement("ql:correlation");
+        xmlExt.appendChild(elem);
+        QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.doCorrelation()));
         elem.appendChild(text);
     }
 

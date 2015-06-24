@@ -242,6 +242,13 @@ public:
         return cntItemsByType[type];
     }
 
+    bool doCorrelation()
+    {
+        return !noCorrelation;
+    }
+
+    void switchOnCorrelation();
+
     /**
        @brief Receive the current mouse position
 
@@ -389,8 +396,6 @@ protected:
     void updateItems();
     void updateItemCounters();
 
-
-
     // Those are the URIs of the GPX extensions we support
     static const QString gpxx_ns;
     static const QString gpxtpx_ns;
@@ -407,6 +412,7 @@ protected:
     QString filename;
     bool valid;
     bool noUpdate;
+    bool noCorrelation;
 
     metadata_t metadata;
     QString nameSuffix;
@@ -415,7 +421,11 @@ protected:
 
     sorting_e sorting;
 
-    int cntItemsByType[IGisItem::eTypeMax];
+    qint32 cntItemsByType[IGisItem::eTypeMax];
+
+    qint32 cntTrkPts;
+    qint32 cntWpts;
+
 };
 
 #endif //IGISPROJECT_H

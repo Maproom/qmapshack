@@ -34,6 +34,7 @@ class QSqlDatabase;
 class CQlgtTrack;
 class IQlgtOverlay;
 class QDir;
+class QProgressDialog;
 
 #define TRK_N_COLORS 17
 
@@ -180,6 +181,11 @@ public:
     const QDateTime& getTimeStart() const
     {
         return timeStart;
+    }
+
+    qint32 getNumberOfVisiblePoints() const
+    {
+        return cntVisiblePoints;
     }
 
     /**
@@ -411,7 +417,7 @@ public:
      */
     void filterSpeed(qreal speed);
 
-    void findWaypointsCloseBy();
+    void findWaypointsCloseBy(QProgressDialog &progress, quint32 &current, quint32 total);
 
     static const QColor lineColors[TRK_N_COLORS];
     static const QString bulletColors[TRK_N_COLORS];

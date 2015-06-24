@@ -1123,6 +1123,7 @@ void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& curre
             {
                 return;
             }
+            QApplication::processEvents(QEventLoop::AllEvents);
         }
 
         if(index != NOIDX)

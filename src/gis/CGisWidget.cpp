@@ -87,7 +87,9 @@ void CGisWidget::postEventForDb(QEvent * event)
 void CGisWidget::loadGisProject(const QString& filename)
 {
     // add project to workspace
-    //QApplication::setOverrideCursor(Qt::WaitCursor);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    treeWks->blockSignals(true);
+
     QMutexLocker lock(&IGisItem::mutexItems);
     IGisProject * item = 0;
     QString suffix = QFileInfo(filename).suffix().toLower();
@@ -115,8 +117,8 @@ void CGisWidget::loadGisProject(const QString& filename)
         item = 0;
     }
 
-
-    //QApplication::restoreOverrideCursor();
+    treeWks->blockSignals(false);
+    QApplication::restoreOverrideCursor();
 
     emit sigChanged();
 }

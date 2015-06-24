@@ -1407,102 +1407,106 @@ void CGisListWks::slotSyncDevWks()
 
 bool CGisListWks::event(QEvent * e)
 {
-    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    if(e->type() > QEvent::User)
+    {
+        CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    switch(e->type())
-    {
-    case eEvtD2WReqInfo:
-    {
-        CEvtD2WReqInfo * evt = (CEvtD2WReqInfo*)e;
-        CDBProject * project =  getProjectById(evt->id, evt->db);
-        if(project)
-        {
-            project->postStatus();
-        }
-        e->accept();
-        emit sigChanged();
-        return true;
-    }
 
-    case eEvtD2WShowFolder:
-    {
-        CEvtD2WShowFolder * evt = (CEvtD2WShowFolder*)e;
-        CDBProject * project =  getProjectById(evt->id, evt->db);
-        if(project == 0)
+        switch(e->type())
         {
-            if(evt->id == 0)
+        case eEvtD2WReqInfo:
+        {
+            CEvtD2WReqInfo * evt = (CEvtD2WReqInfo*)e;
+            CDBProject * project =  getProjectById(evt->id, evt->db);
+            if(project)
             {
-                project = new CLostFoundProject(evt->db, this);
+                project->postStatus();
             }
-            else
+            e->accept();
+            emit sigChanged();
+            return true;
+        }
+
+        case eEvtD2WShowFolder:
+        {
+            CEvtD2WShowFolder * evt = (CEvtD2WShowFolder*)e;
+            CDBProject * project =  getProjectById(evt->id, evt->db);
+            if(project == 0)
             {
-                project = new CDBProject(evt->db, evt->id, this);
+                if(evt->id == 0)
+                {
+                    project = new CLostFoundProject(evt->db, this);
+                }
+                else
+                {
+                    project = new CDBProject(evt->db, evt->id, this);
+                }
+                if(!project->isValid())
+                {
+                    delete project;
+                }
             }
-            if(!project->isValid())
+            e->accept();
+            emit sigChanged();
+            return true;
+        }
+
+        case eEvtD2WHideFolder:
+        {
+            CEvtD2WHideFolder * evt = (CEvtD2WHideFolder*)e;
+            CDBProject * project =  getProjectById(evt->id, evt->db);
+            if(project && project->askBeforClose())
             {
-                delete project;
+                return false;
             }
-        }
-        e->accept();
-        emit sigChanged();
-        return true;
-    }
+            delete project;
 
-    case eEvtD2WHideFolder:
-    {
-        CEvtD2WHideFolder * evt = (CEvtD2WHideFolder*)e;
-        CDBProject * project =  getProjectById(evt->id, evt->db);
-        if(project && project->askBeforClose())
+            e->accept();
+            emit sigChanged();
+            return true;
+        }
+
+        case eEvtD2WShowItems:
         {
-            return false;
+            CEvtD2WShowItems * evt = (CEvtD2WShowItems*)e;
+            CDBProject * project =  getProjectById(evt->id, evt->db);
+            if(project)
+            {
+                project->showItems(evt);
+            }
+            e->accept();
+            emit sigChanged();
+            return true;
         }
-        delete project;
 
-        e->accept();
-        emit sigChanged();
-        return true;
-    }
-
-    case eEvtD2WShowItems:
-    {
-        CEvtD2WShowItems * evt = (CEvtD2WShowItems*)e;
-        CDBProject * project =  getProjectById(evt->id, evt->db);
-        if(project)
+        case eEvtD2WHideItems:
         {
-            project->showItems(evt);
+            CEvtD2WHideItems * evt = (CEvtD2WHideItems*)e;
+            CDBProject * project =  getProjectById(evt->id, evt->db);
+            if(project)
+            {
+                project->hideItems(evt);
+            }
+            e->accept();
+            emit sigChanged();
+            return true;
         }
-        e->accept();
-        emit sigChanged();
-        return true;
-    }
 
-    case eEvtD2WHideItems:
-    {
-        CEvtD2WHideItems * evt = (CEvtD2WHideItems*)e;
-        CDBProject * project =  getProjectById(evt->id, evt->db);
-        if(project)
+        case eEvtD2WUpdateLnF:
         {
-            project->hideItems(evt);
+            CEvtD2WUpdateLnF * evt = (CEvtD2WUpdateLnF*)e;
+            CLostFoundProject * project = dynamic_cast<CLostFoundProject*>(getProjectById(evt->id, evt->db));
+            if(project)
+            {
+                project->updateFromDb();
+            }
+            e->accept();
+            emit sigChanged();
+            return true;
         }
-        e->accept();
-        emit sigChanged();
-        return true;
-    }
-
-    case eEvtD2WUpdateLnF:
-    {
-        CEvtD2WUpdateLnF * evt = (CEvtD2WUpdateLnF*)e;
-        CLostFoundProject * project = dynamic_cast<CLostFoundProject*>(getProjectById(evt->id, evt->db));
-        if(project)
-        {
-            project->updateFromDb();
         }
-        e->accept();
-        emit sigChanged();
-        return true;
-    }
-    }
 
+    }
     return QTreeWidget::event(e);
 }
 

@@ -200,7 +200,7 @@ void IGisProject::updateItems()
 
     updateItemCounters();
 
-    if(noCorrelation)
+    if(noCorrelation || getItemCountByType(IGisItem::eTypeTrk) == 0 || getItemCountByType(IGisItem::eTypeWpt) == 0)
     {
         return;
     }
@@ -210,7 +210,7 @@ void IGisProject::updateItems()
 
     QProgressDialog progress(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), QObject::tr("Abort"), 0, 100, &CMainWindow::self());
     progress.setWindowModality(Qt::WindowModal);
-    progress.show();
+    progress.setMinimumDuration(1000);
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -227,6 +227,7 @@ void IGisProject::updateItems()
             }
         }
     }
+
 }
 
 void IGisProject::setupName(const QString &defaultName)

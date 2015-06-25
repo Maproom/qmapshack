@@ -476,14 +476,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Create Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="607"/>
-        <location filename="../gis/CGisListWks.cpp" line="1369"/>
-        <location filename="../gis/CGisListWks.cpp" line="1407"/>
+        <location filename="../gis/CGisListWks.cpp" line="608"/>
+        <location filename="../gis/CGisListWks.cpp" line="1371"/>
+        <location filename="../gis/CGisListWks.cpp" line="1409"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished">&lt;b&gt;Actualizar dispositivos&lt;/b&gt;&lt;p&gt;Actualizar %1&lt;br/&gt;Por favor espere...&lt;/p&gt;</translation>
     </message>
@@ -529,22 +529,22 @@
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="707"/>
+        <location filename="../gis/CGisListWks.cpp" line="708"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Guardando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="748"/>
+        <location filename="../gis/CGisListWks.cpp" line="750"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Cargando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="950"/>
+        <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>Close all projects...</source>
         <translation>Cerrar todos los proyectos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="950"/>
+        <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Esto quitará.todos los proyectos.del espacio de trabajo.</translation>
     </message>
@@ -1694,52 +1694,52 @@ no es una definición de sistema de coordenadas válido:
 <context>
     <name>CQlgtDb</name>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="306"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="307"/>
         <source>Migrating database from version 4 to 5.</source>
         <translation>Convirtiendo base de datos de version 4 a 5.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="359"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="361"/>
         <source>Migrating database from version 5 to 6.</source>
         <translation>Convirtiendo base de datos de version 5 a 6.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="416"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="419"/>
         <source>Migrating database from version 6 to 7.</source>
         <translation>Convirtiendo base de datos de version 6 a 7.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="482"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="485"/>
         <source>Migrating database from version 7 to 8.</source>
         <translation>Convirtiendo base de datos de version 7 a 8.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="511"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="514"/>
         <source>Migrating database from version 8 to 9.</source>
         <translation>Convirtiendo base de datos de version 8 a 9.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="534"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="537"/>
         <source>Open database: %1</source>
         <translation>Abrir base de datos:%1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="543"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="546"/>
         <source>Folders:          %1</source>
         <translation>Carpetas:          %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="552"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="555"/>
         <source>Tracks:           %1</source>
         <translation>Tracks:           %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="560"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="563"/>
         <source>Routes:           %1 (Only the basic route will be copied)</source>
         <translation>Routes:           %1 (Only the basic route will be copied)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="568"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="571"/>
         <source>Waypoints:        %1</source>
         <translation>Waypoints:        %1</translation>
     </message>
@@ -1748,73 +1748,73 @@ no es una definición de sistema de coordenadas válido:
         <translation type="obsolete">Superposiciones:         %1 (solo las superposiciones de área se copiaran a QMapShack)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="576"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="579"/>
         <source>Overlays:         %1 (areas will be converted as areas, distance lines will be converted to tracks, all other overlay items will be lost)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="583"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="586"/>
         <source>Diaries:          %1</source>
         <translation>Diarios:          %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="590"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="593"/>
         <source>Map selections:   %1 (can&apos;t be converted to QMapShack)</source>
         <translation>Selecciones de mapa:   %1 (NO pueden convertirse a QMapShack)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="596"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="599"/>
         <source>------ Start to convert database to %1------</source>
         <translation>------ Comenzar a convertir base de datos a %1------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="600"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="603"/>
         <source>Failed to create target database.</source>
         <translation>Fallo al crear la base de datos de destino.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="601"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="604"/>
         <source>------ Abort ------</source>
         <translation>------ Abortar ------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="629"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="632"/>
         <source>------ Done ------</source>
         <translation>------ Hecho ------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="637"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="640"/>
         <source>Restore folders...</source>
         <translation>Restaurar carpetas...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="637"/>
-        <location filename="../qlgt/CQlgtDb.cpp" line="670"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="640"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="673"/>
         <source>Abort</source>
         <translation>Abortar</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="664"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="667"/>
         <source>Imported %1 folders and %2 diaries</source>
         <translation>Importadas %1 carpetas y %2 diarios</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="670"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="673"/>
         <source>Copy items...</source>
         <translation>Copia elementos....</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="694"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="697"/>
         <source>Imported %1 tracks, %2 waypoints, %3 routes, %4 areas</source>
         <translation>Importado: %1 tracks, %2 waypoints, %3 routes, %4 areas</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="695"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="698"/>
         <source>Import folders...</source>
         <translation>Importar carpetas...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="760"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="763"/>
         <source>Overlay of type &apos;%1&apos; cant be converted</source>
         <translation>No puede convertirse superposición del tipo &apos;%1&apos; </translation>
     </message>
@@ -4118,7 +4118,7 @@ o
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
-        <source>Reset route caclulation.</source>
+        <source>Reset route calculation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5539,12 +5539,12 @@ Filename: %1</source>
         <translation>Velocidad modificada a %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="986"/>
+        <location filename="../gis/CGisListWks.cpp" line="988"/>
         <source>Delete project...</source>
         <translation>Eliminar Proyecto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="986"/>
+        <location filename="../gis/CGisListWks.cpp" line="988"/>
         <source>Do you really want to delete %1?</source>
         <translation>¿Desea realmente eliminar %1?</translation>
     </message>

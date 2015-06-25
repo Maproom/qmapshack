@@ -95,5 +95,5 @@ void CDBItem::remove()
     query.prepare("DELETE FROM folder2item WHERE parent=:parent AND child=:child");
     query.bindValue(":parent", folder->getId());
     query.bindValue(":child", id);
-    QUERY_EXEC();
+    QUERY_EXEC(;);
 }

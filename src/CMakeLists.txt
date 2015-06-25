@@ -484,6 +484,9 @@ if(UNIX)
     add_definitions(-Wall -Wno-switch -Wno-strict-aliasing)
 endif(UNIX)
 
+if(WIN32)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif(WIN32)
 
 file(GLOB TRANSLATIONS_FILES locale/*.ts)
 

@@ -199,7 +199,7 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
     H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
     if(data == 0)
     {
-        return -1;
+        return 0;
     }
     QString profile         = comboProfile->currentData(Qt::UserRole).toString();
 

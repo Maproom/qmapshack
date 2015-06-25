@@ -60,9 +60,9 @@ private:
     QString filename;
 
     /// total width in number of px
-    quint32 xsize_px;
+    qint32 xsize_px;
     /// total height in number of px
-    quint32 ysize_px;
+    qint32 ysize_px;
     /// width of a tile in number of px
     quint32 tileSizeX;
     /// height of a tile in number of px

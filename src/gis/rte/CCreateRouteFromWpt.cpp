@@ -60,7 +60,7 @@ CCreateRouteFromWpt::~CCreateRouteFromWpt()
 
 void CCreateRouteFromWpt::accept()
 {
-    QString name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, name);
+    QString name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, "");
     if(name.isEmpty())
     {
         return;
@@ -79,7 +79,8 @@ void CCreateRouteFromWpt::accept()
         points << IGisLine::point_t(item->data(Qt::UserRole).toPointF());
     }
 
-    new CGisItemRte(points,name, project, NOIDX);
+    CGisItemRte* rte = new CGisItemRte(points,name, project, NOIDX);
+    rte->calc();
 
     QDialog::accept();
 }

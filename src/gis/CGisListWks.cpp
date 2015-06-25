@@ -580,7 +580,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
 
         foreach(QTreeWidgetItem * item, items)
         {
-            progress.setValue((100 * cnt++) / N);
+            progress.setValue(qRound(100.0 * cnt++ / N));
             if (progress.wasCanceled())
             {
                 break;
@@ -705,11 +705,11 @@ void CGisListWks::slotSaveWorkspace()
     qDebug() << "slotSaveWorkspace()";
 
     const int total = topLevelItemCount();
-    PROGRESS_SETUP(tr("Saving workspace. Please wait."), total, this);
+    PROGRESS_SETUP(tr("Saving workspace. Please wait."), this);
 
     for(int i = 0; i < total; i++)
     {
-        PROGRESS(i, return );
+        PROGRESS(i, total, return );
 
         IGisProject * project = dynamic_cast<IGisProject*>(topLevelItem(i));
         if(project == 0)
@@ -746,14 +746,15 @@ void CGisListWks::slotLoadWorkspace()
     query.prepare("SELECT type, key, name, changed, data FROM workspace");
     QUERY_EXEC(return );
 
-    PROGRESS_SETUP(tr("Loading workspace. Please wait."), query.size(), this);
+    const int total = query.size();
+    PROGRESS_SETUP(tr("Loading workspace. Please wait."), this);
     quint32 progCnt = 0;
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     while(query.next())
     {
-        PROGRESS(progCnt++, return );
+        PROGRESS(progCnt++, total, return );
 
         int type        = query.value(0).toInt();
         QString name    = query.value(2).toString();

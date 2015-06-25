@@ -302,8 +302,9 @@ void CQlgtDb::migrateDB(int version)
                 return;
             }
 
+            const int total = query.size();
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 4 to 5."), query.size(), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 4 to 5."), &CMainWindow::self());
 
             while(query.next())
             {
@@ -339,7 +340,7 @@ void CQlgtDb::migrateDB(int version)
                     return;
                 }
 
-                PROGRESS(progCnt++, continue);
+                PROGRESS(progCnt++, total, continue);
             }
             break;
         }
@@ -355,8 +356,9 @@ void CQlgtDb::migrateDB(int version)
                 return;
             }
 
+            const int total = query.size();
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 5 to 6."), query.size(), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 5 to 6."), &CMainWindow::self());
 
             while(query.next())
             {
@@ -395,7 +397,7 @@ void CQlgtDb::migrateDB(int version)
                     return;
                 }
 
-                PROGRESS(progCnt++, continue);
+                PROGRESS(progCnt++, total, continue);
             }
 
             break;
@@ -412,8 +414,9 @@ void CQlgtDb::migrateDB(int version)
                 return;
             }
 
+            const int total = query.size();
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 6 to 7."), query.size(), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 6 to 7."), &CMainWindow::self());
 
             while(query.next())
             {
@@ -471,15 +474,15 @@ void CQlgtDb::migrateDB(int version)
                     return;
                 }
 
-                PROGRESS(progCnt++, continue);
+                PROGRESS(progCnt++, total, continue);
             }
 
             break;
         }
 
         case 8:
-        {
-            PROGRESS_SETUP(tr("Migrating database from version 7 to 8."), 1, &CMainWindow::self());
+        {            
+            PROGRESS_SETUP(tr("Migrating database from version 7 to 8."), &CMainWindow::self());
 
             if(!query.exec( "CREATE TABLE diarys ("
                             "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -495,7 +498,7 @@ void CQlgtDb::migrateDB(int version)
                 return;
             }
 
-            PROGRESS(1, return );
+            PROGRESS(1, 1, return );
             break;
         }
 
@@ -508,7 +511,7 @@ void CQlgtDb::migrateDB(int version)
             QFile f(path.absoluteFilePath(name));
             f.copy(path.absoluteFilePath("qlgt_save_v4.db"));
 
-            PROGRESS_SETUP(tr("Migrating database from version 8 to 9."), 1, &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 8 to 9."), &CMainWindow::self());
 
             if(!query.exec("ALTER TABLE folders ADD COLUMN locked BOOLEAN DEFAULT FALSE"))
             {
@@ -517,7 +520,7 @@ void CQlgtDb::migrateDB(int version)
                 return;
             }
 
-            PROGRESS(1, return );
+            PROGRESS(1, 1, return );
             break;
         }
         }

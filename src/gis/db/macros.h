@@ -29,12 +29,12 @@
         cmd; \
     } \
 
-#define PROGRESS_SETUP(lbl, max, parent) \
-    QProgressDialog progress(lbl, "Abort", 0, max, parent); \
+#define PROGRESS_SETUP(lbl, parent) \
+    QProgressDialog progress(lbl, "Abort", 0, 100, parent); \
     progress.setWindowModality(Qt::WindowModal); \
 
-#define PROGRESS(x, cmd) \
-    progress.setValue(x); \
+#define PROGRESS(x, total, cmd) \
+    progress.setValue(qRound(x * 100.0 / total)); \
     if (progress.wasCanceled()) { cmd; } \
 
 

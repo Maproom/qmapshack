@@ -48,12 +48,12 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
     p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
 }
 
-#define PROGRESS_SETUP(lbl, max, parent) \
-    QProgressDialog progress(lbl, "Abort", 0, max, parent); \
+#define PROGRESS_SETUP(lbl, parent) \
+    QProgressDialog progress(lbl, "Abort", 0, 100, parent); \
     progress.setWindowModality(Qt::WindowModal); \
 
-#define PROGRESS(x, cmd) \
-    progress.setValue(x); \
+#define PROGRESS(x, total, cmd) \
+    progress.setValue(qRound(x * 100.0 / total)); \
     if (progress.wasCanceled()) { cmd; } \
 
 #define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,5,5)

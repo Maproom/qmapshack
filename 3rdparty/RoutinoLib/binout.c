@@ -461,8 +461,8 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
 //                                next_waynameraw);
 
                         route_first = malloc(sizeof(T_RoutinoRoute));
-                        route_first->lat = latitude;
-                        route_first->lon = longitude;
+                        route_first->lat = (float)latitude;
+                        route_first->lon = (float)longitude;
                         route_first->dist = 0;
                         route_first->time = 0;
                         route_first->type = important;
@@ -483,10 +483,10 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
 
                         T_RoutinoRoute * temp = malloc(sizeof(T_RoutinoRoute));
 
-                        temp->lat = latitude;
-                        temp->lon = longitude;
-                        temp->dist = cum_distance;
-                        temp->time = cum_duration;
+                        temp->lat = (float)latitude;
+                        temp->lon = (float)longitude;
+                        temp->dist = (float)cum_distance;
+                        temp->time = (float)cum_duration;
                         temp->type = important;
                         temp->turn = turn_int;
                         temp->bearing = next_bearing_int;
@@ -509,10 +509,10 @@ T_RoutinoRoute * SimplifyResult(Results ** results, int nresults, Nodes *nodes, 
 
                         T_RoutinoRoute * temp = malloc(sizeof(T_RoutinoRoute));
 
-                        temp->lat = latitude;
-                        temp->lon = longitude;
-                        temp->dist = cum_distance;
-                        temp->time = cum_duration;
+                        temp->lat = (float)latitude;
+                        temp->lon = (float)longitude;
+                        temp->dist = (float)cum_distance;
+                        temp->time = (float)cum_duration;
                         temp->type = important;
                         temp->turn = turn_int;
                         temp->bearing = next_bearing_int;

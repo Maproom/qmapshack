@@ -174,12 +174,12 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
             {
                 const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
                 if(scrOpt != 0)
-                {
-                    screenUnclutter->clear();
-
-                    IGisItem * item = CGisWidget::self().getItemByKey(scrOpt->key);
+                {                    
+                    IGisItem * item = CGisWidget::self().getItemByKey(scrOpt->key);                    
+                    screenUnclutter->clear(); // CAUTION!! this will delete the object scrOpt is pointing to.
+                    scrOpt = 0;
                     if(item)
-                    {
+                    {                        
                         item->treeWidget()->collapseAll();
                         item->treeWidget()->setCurrentItem(item);
                         item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);

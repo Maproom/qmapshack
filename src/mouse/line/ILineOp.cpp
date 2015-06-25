@@ -301,13 +301,13 @@ inline qreal sqrlen(const QPointF &a)
 
 qreal sqr_distance(const QPolygonF &points, const QPointF &q)
 {
-    const size_t count = points.size();
+    const qint32 count = points.size();
 
     QPointF b = points[0];
     QPointF dbq = b - q;
     qreal dist = sqrlen(dbq);
 
-    for (size_t i = 1; i<count; ++i)
+    for (qint32 i = 1; i<count; ++i)
     {
         const QPointF a = b;
         const QPointF daq = dbq;

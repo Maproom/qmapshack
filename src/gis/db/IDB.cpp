@@ -173,9 +173,10 @@ bool IDB::migrateDB(int version)
 
     for(version++; version <= DB_VERSION; version++)
     {
-        switch(version)
-        {
-        }
+//        switch(version)
+//        {
+//        default:;
+//        }
     }
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", version - 1);

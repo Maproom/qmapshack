@@ -539,7 +539,7 @@ void CMapIMG::readBasics()
             break;
         }
         dataoffset += sizeof(FATblock_t);
-        readFile(file, dataoffset, sizeof(FATblock_t), FATblock);
+        readFile(file, quint32(dataoffset), quint32(sizeof(FATblock_t)), FATblock);
         pFATBlock = (const FATblock_t * )FATblock.data();
     }
 
@@ -593,12 +593,12 @@ void CMapIMG::readBasics()
 
                 subfile_part_t& part = subfile.parts[tmpstr];
                 part.size   = gar_load(uint32_t, pFATBlock->size);
-                part.offset = gar_load(uint16_t, pFATBlock->blocks[0]) * blocksize;
+                part.offset = quint32(gar_load(uint16_t, pFATBlock->blocks[0]) * blocksize);
             }
         }
 
         dataoffset += sizeof(FATblock_t);
-        readFile(file, dataoffset, sizeof(FATblock_t), FATblock);
+        readFile(file, quint32(dataoffset), quint32(sizeof(FATblock_t)), FATblock);
         pFATBlock = (const FATblock_t * )FATblock.data();
     }
 

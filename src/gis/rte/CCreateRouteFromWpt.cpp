@@ -60,6 +60,8 @@ CCreateRouteFromWpt::~CCreateRouteFromWpt()
 
 void CCreateRouteFromWpt::accept()
 {
+    QDialog::accept();
+
     QString name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, "");
     if(name.isEmpty())
     {
@@ -80,9 +82,9 @@ void CCreateRouteFromWpt::accept()
     }
 
     CGisItemRte* rte = new CGisItemRte(points,name, project, NOIDX);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     rte->calc();
-
-    QDialog::accept();
+    QApplication::restoreOverrideCursor();
 }
 
 void CCreateRouteFromWpt::slotSelectionChanged()

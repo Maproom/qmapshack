@@ -36,8 +36,9 @@ IGisItem::key_t CGisItemRte::keyUserFocus;
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalDays(NOINT)    
 {
     *this = parentRte;
     key.project = project->getKey();
@@ -74,8 +75,9 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     : IGisItem(parent, eTypeRte, parent->childCount())
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalDays(NOINT)    
 {
     // --- start read and process data ----
     readRte(xml, rte);
@@ -89,6 +91,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
 CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
@@ -100,8 +103,9 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeRte, NOIDX)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalDays(NOINT)    
 {
     loadFromDb(id, db);
 }
@@ -109,8 +113,9 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
 CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *project, int idx)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalDays(NOINT)    
 {
     rte.name = name;
     readRouteDataFromGisLine(l);
@@ -249,11 +254,9 @@ QString CGisItemRte::getInfo(bool allowEdit) const
         str += QObject::tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(lastRoutedTime, false, boundingRect.center()));
         str += "<br/>\n";
         str += QObject::tr("with %1").arg(lastRoutedWith);
+        str += "<br/>\n";
+        str += QObject::tr("Calculation took %1 sec.").arg(lastRoutedCalcTime/1000.0, 0, 'f', 2);
     }
-
-
-
-
     return str;
 }
 
@@ -499,7 +502,10 @@ void CGisItemRte::calc()
     {
         rte.pts[i].subpts.clear();
     }
+    QTime time;
+    time.start();
     CRouterSetup::self().calcRoute(getKey());
+    lastRoutedCalcTime = time.elapsed();
 }
 
 void CGisItemRte::reset()
@@ -514,6 +520,7 @@ void CGisItemRte::reset()
     totalTime       = QTime();
     lastRoutedTime  = QDateTime();
     lastRoutedWith  = "";
+    lastRoutedCalcTime = 0;
 
     deriveSecondaryData();
     updateHistory();

@@ -15,7 +15,7 @@ if(UNIX)
 add_definitions(-Wall -std=c99 -ffast-math -D_FILE_OFFSET_BITS=64 -D_POSIX_C_SOURCE=200809L -pedantic)
 endif(UNIX)
 
-add_definitions(-DROUTINO_DATADIR="./" -DLIBROUTINO)
+add_definitions(-DROUTINO_DATADIR="./" -DLIBROUTINO -DUSE_GZIP)
 
 if(ROUTINO_BUILD_SLIM_VERSION)
     add_definitions(-DSLIM=1)
@@ -137,8 +137,24 @@ set(ALLINP_${APPNAME}
     ${HDRS_${APPNAME}}
 )
 
+INCLUDE_DIRECTORIES(
+    ${ZLIB_DEV_PATH}
+)
+
+LINK_DIRECTORIES(
+    ${ZLIB_DEV_PATH}
+)
+
 add_executable(${APPNAME} ${ALLINP_${APPNAME}})
-target_link_libraries(${APPNAME} routino)
+
+if(MSVC)
+target_link_libraries(${APPNAME} routino zlibstat)
+endif(MSVC)
+
+if(UNIX)
+target_link_libraries(${APPNAME} routino z)
+endif(UNIX)
+
 
 install(
     TARGETS

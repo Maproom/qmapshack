@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -2192,7 +2192,7 @@ ist keine gültige Koordinatensystemdefinition:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../IAbout.ui" line="219"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -3876,7 +3876,7 @@ sein</translation>
         <source>m</source>
         <translation> m</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -4286,7 +4286,7 @@ sein</translation>
     <message>
         <source>Reset route caclulation.</source>
         <translatorcomment>??? calculation statt caclulation - ja :)</translatorcomment>
-        <translation type="vanished">Routenberechnung zurücksetzen.</translation>
+        <translation type="obsolete">Routenberechnung zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="105"/>

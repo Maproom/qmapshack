@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="83"/>
         <source>Correlation...</source>
-        <translation>Verknüpfunge...</translation>
+        <translation>Verknüpfungen...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="474"/>
@@ -428,7 +428,7 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="347"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaftentfernt.</translation>
+        <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="362"/>
@@ -503,14 +503,14 @@
         <translation>Route bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Create Route</source>
         <translation>Route erstellen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="607"/>
-        <location filename="../gis/CGisListWks.cpp" line="1369"/>
-        <location filename="../gis/CGisListWks.cpp" line="1407"/>
+        <location filename="../gis/CGisListWks.cpp" line="608"/>
+        <location filename="../gis/CGisListWks.cpp" line="1371"/>
+        <location filename="../gis/CGisListWks.cpp" line="1409"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
@@ -569,24 +569,24 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="707"/>
+        <location filename="../gis/CGisListWks.cpp" line="708"/>
         <source>Saving workspace. Please wait.</source>
-        <translation>Ansicht speichern. Bitte warten.</translation>
+        <translation>Arbeitsplatz speichern. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="748"/>
+        <location filename="../gis/CGisListWks.cpp" line="750"/>
         <source>Loading workspace. Please wait.</source>
-        <translation>Ansicht laden. Bitte warten.</translation>
+        <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="950"/>
+        <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="950"/>
+        <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>This will remove all projects from the workspace.</source>
-        <translation>Dies wird alle Projekte aus der Ansicht entfernen.</translation>
+        <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
     <message>
         <source>Add Empty Project</source>
@@ -1790,42 +1790,42 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CQlgtDb</name>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="306"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="307"/>
         <source>Migrating database from version 4 to 5.</source>
         <translation>Datenbank von Version 4 nach 5 migrieren.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="359"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="361"/>
         <source>Migrating database from version 5 to 6.</source>
         <translation>Datenbank von Version 5 nach 6 migrieren.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="416"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="419"/>
         <source>Migrating database from version 6 to 7.</source>
         <translation>Datenbank von Version 6 nach 7 migrieren.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="482"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="485"/>
         <source>Migrating database from version 7 to 8.</source>
         <translation>Datenbank von Version 7 nach 8 migrieren.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="511"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="514"/>
         <source>Migrating database from version 8 to 9.</source>
         <translation>Datenbank von Version 8 nach 9 migrieren.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="534"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="537"/>
         <source>Open database: %1</source>
         <translation>Öffne Datenbank: %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="543"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="546"/>
         <source>Folders:          %1</source>
         <translation>Ordner: %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="552"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="555"/>
         <source>Tracks:           %1</source>
         <translation>Tracks: %1</translation>
     </message>
@@ -1834,12 +1834,12 @@ ist keine gültige Koordinatensystemdefinition:
         <translation type="obsolete">Routen: %1 (noch nicht unterstützt)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="560"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="563"/>
         <source>Routes:           %1 (Only the basic route will be copied)</source>
         <translation>Routen:           %1 (Es wird nur die Basisroute kopiert)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="568"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="571"/>
         <source>Waypoints:        %1</source>
         <translation>Wegpunkte: %1</translation>
     </message>
@@ -1848,73 +1848,73 @@ ist keine gültige Koordinatensystemdefinition:
         <translation type="obsolete">Overlays:         %1 (Es werden nur Gebietsoverlays nach QMapShack konvertiert)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="576"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="579"/>
         <source>Overlays:         %1 (areas will be converted as areas, distance lines will be converted to tracks, all other overlay items will be lost)</source>
         <translation>Overlays:         %1 (Flächen werden als Flächen übernommen, Distanzlinien werden als Tracks übernommen, alle anderen Overlays gehen verloren)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="583"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="586"/>
         <source>Diaries:          %1</source>
         <translation>Tagebücher:          %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="590"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="593"/>
         <source>Map selections:   %1 (can&apos;t be converted to QMapShack)</source>
         <translation>Kartenselektionen:   %1 (können nicht nach QMapShack konvertiert werden)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="596"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="599"/>
         <source>------ Start to convert database to %1------</source>
         <translation>------ Konvertierung der Datenbank %1 beginnt ------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="600"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="603"/>
         <source>Failed to create target database.</source>
         <translation>Erstellen der Zieldatenbank fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="601"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="604"/>
         <source>------ Abort ------</source>
         <translation>------ Abbrechen ------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="629"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="632"/>
         <source>------ Done ------</source>
         <translation>------ Fertig ------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="637"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="640"/>
         <source>Restore folders...</source>
         <translation>Ordner wiederherstellen...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="637"/>
-        <location filename="../qlgt/CQlgtDb.cpp" line="670"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="640"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="673"/>
         <source>Abort</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="664"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="667"/>
         <source>Imported %1 folders and %2 diaries</source>
         <translation>Importiert wurden %1 Ordner und %2 Tagebücher</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="670"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="673"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="694"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="697"/>
         <source>Imported %1 tracks, %2 waypoints, %3 routes, %4 areas</source>
         <translation>Importiert wurden %1 Tracks, %2 Wegpunkte, %3 Routen, %4 Gebiete</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="695"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="698"/>
         <source>Import folders...</source>
         <translation>Importiere Ordner...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="760"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="763"/>
         <source>Overlay of type &apos;%1&apos; cant be converted</source>
         <translation>Das Overlay vom Typ &apos;%1&apos; kann nicht konvertiert werden</translation>
     </message>
@@ -2002,7 +2002,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
         <source>, mode &quot;%1&quot;</source>
-        <translation>, Mode &quot;%1&quot;</translation>
+        <translation>, Modus &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3430,7 +3430,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="435"/>
         <source>Save all projects in the workspace</source>
-        <translation>Alle Projekte im Arbeitsplatz speichern</translation>
+        <translation>Alle Projekte die sich auf dem Arbeitsplatz befinden, speichern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="438"/>
@@ -3470,7 +3470,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="498"/>
         <source>Setup Workspace</source>
-        <translation>Arbeitsplatz einstellen</translation>
+        <translation>Arbeitsplatz konfigurieren</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="501"/>
@@ -3687,7 +3687,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="238"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Neue Linie&lt;/b&gt;&lt;br/&gt;Erzeugen Sie Punkte durch Verschieben des Mauscursors und Drücken der linken Maustaste. Mit der rechten Maustaste beenden Sie den Vorgang.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Neue Linie&lt;/b&gt;&lt;br/&gt;Erstellen Sie Punkte durch Verschieben des Mauscursors und Drücken der linken Maustaste. Mit der rechten Maustaste beenden Sie den Vorgang.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="279"/>
@@ -3717,7 +3717,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;Die aktuellen Router Einstellungen erzeugen eine Route zwischen Punkten. &lt;b&gt;Hinweis:&lt;/b&gt; Der gewählte Router muss schnell routen können. Offline Router können dies gewöhnlich, Online Router nicht.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;Die aktuellen Router Einstellungen erstellen eine Route zwischen Punkten. &lt;b&gt;Hinweis:&lt;/b&gt; Der gewählte Router muss schnell routen können. Offline Router können dies gewöhnlich, Online Router nicht.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="321"/>
@@ -4270,6 +4270,11 @@ sein</translation>
         <translation>Route aus einem Projekt entfernen.</translation>
     </message>
     <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
+        <source>Reset route calculation.</source>
+        <translation>Routenberechnung zurücksetzen.</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löschen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -4279,9 +4284,9 @@ sein</translation>
         <translation>Route berechnen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
         <source>Reset route caclulation.</source>
-        <translation>Routenberechnung zurücksetzen.</translation>
+        <translatorcomment>??? calculation statt caclulation - ja :)</translatorcomment>
+        <translation type="vanished">Routenberechnung zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="105"/>
@@ -4776,7 +4781,7 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="14"/>
         <source>Setup workspace...</source>
-        <translation>Arbeitsplatz einstellen...</translation>
+        <translation>Arbeitsplatz konfigurieren...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="35"/>
@@ -5742,12 +5747,12 @@ Dateiname: %1</translation>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="986"/>
+        <location filename="../gis/CGisListWks.cpp" line="988"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="986"/>
+        <location filename="../gis/CGisListWks.cpp" line="988"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1? löschen wollen?</translation>
     </message>

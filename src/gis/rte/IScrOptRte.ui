@@ -88,7 +88,7 @@
      <item>
       <widget class="QToolButton" name="toolReset">
        <property name="toolTip">
-        <string>Reset route caclulation.</string>
+        <string>Reset route calculation.</string>
        </property>
        <property name="text">
         <string>...</string>

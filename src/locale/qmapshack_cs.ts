@@ -480,14 +480,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Create Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="607"/>
-        <location filename="../gis/CGisListWks.cpp" line="1369"/>
-        <location filename="../gis/CGisListWks.cpp" line="1407"/>
+        <location filename="../gis/CGisListWks.cpp" line="608"/>
+        <location filename="../gis/CGisListWks.cpp" line="1371"/>
+        <location filename="../gis/CGisListWks.cpp" line="1409"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualizovat zařízení&lt;/b&gt;&lt;p&gt;Aktualizovat %1&lt;br/&gt;Počkejte, prosím...&lt;/p&gt;</translation>
     </message>
@@ -533,22 +533,22 @@
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="707"/>
+        <location filename="../gis/CGisListWks.cpp" line="708"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Ukládá se pohled. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="748"/>
+        <location filename="../gis/CGisListWks.cpp" line="750"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Nahrává se pohled. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="950"/>
+        <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>Close all projects...</source>
         <translation>Zavřít všechny projekty...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="950"/>
+        <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Tímto budou všechny projekty odstraněny z pohledu.</translation>
     </message>
@@ -1703,52 +1703,52 @@ není platným vymezením soustavy souřadnic
 <context>
     <name>CQlgtDb</name>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="306"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="307"/>
         <source>Migrating database from version 4 to 5.</source>
         <translation>Přestěhovat databázi z verze 4 na verzi 5.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="359"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="361"/>
         <source>Migrating database from version 5 to 6.</source>
         <translation>Přestěhovat databázi z verze 5 na verzi 6.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="416"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="419"/>
         <source>Migrating database from version 6 to 7.</source>
         <translation>Přestěhovat databázi z verze 6 na verzi 7.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="482"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="485"/>
         <source>Migrating database from version 7 to 8.</source>
         <translation>Přestěhovat databázi z verze 7 na verzi 8.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="511"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="514"/>
         <source>Migrating database from version 8 to 9.</source>
         <translation>Přestěhovat databázi z verze 8 na verzi 9.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="534"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="537"/>
         <source>Open database: %1</source>
         <translation>Otevřít databázi: %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="543"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="546"/>
         <source>Folders:          %1</source>
         <translation>Složky: %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="552"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="555"/>
         <source>Tracks:           %1</source>
         <translation>Stopy: %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="560"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="563"/>
         <source>Routes:           %1 (Only the basic route will be copied)</source>
         <translation>Cesty: %1 (Bude koírována pouze základní cesta)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="568"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="571"/>
         <source>Waypoints:        %1</source>
         <translation>Cestovní body: %1</translation>
     </message>
@@ -1757,73 +1757,73 @@ není platným vymezením soustavy souřadnic
         <translation type="obsolete">Překrytí:         %1 (pouze překrytí oblasti budou převedena do QMapShack)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="576"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="579"/>
         <source>Overlays:         %1 (areas will be converted as areas, distance lines will be converted to tracks, all other overlay items will be lost)</source>
         <translation>Překrytí:         %1 (oblasti budou převáděny jako oblasti, vzdálenostní čáry budou převedeny do stop, všechny ostatní překrývající prvky budou ztraceny)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="583"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="586"/>
         <source>Diaries:          %1</source>
         <translation>Deníky:          %1</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="590"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="593"/>
         <source>Map selections:   %1 (can&apos;t be converted to QMapShack)</source>
         <translation>Výběry map:       %1 (nelze převést do QMapShack)</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="596"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="599"/>
         <source>------ Start to convert database to %1------</source>
         <translation>------ Začít převádět databázi do %1------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="600"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="603"/>
         <source>Failed to create target database.</source>
         <translation>Nepodařilo se vytvořit cílovou databázi.</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="601"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="604"/>
         <source>------ Abort ------</source>
         <translation>------ Zrušit ------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="629"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="632"/>
         <source>------ Done ------</source>
         <translation>------ Hotovo ------</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="637"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="640"/>
         <source>Restore folders...</source>
         <translation>Obnovit složky...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="637"/>
-        <location filename="../qlgt/CQlgtDb.cpp" line="670"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="640"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="673"/>
         <source>Abort</source>
         <translation>Zrušit</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="664"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="667"/>
         <source>Imported %1 folders and %2 diaries</source>
         <translation>Zavedeno %1 složek a %2 deníků</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="670"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="673"/>
         <source>Copy items...</source>
         <translation>Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="694"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="697"/>
         <source>Imported %1 tracks, %2 waypoints, %3 routes, %4 areas</source>
         <translation>Zavedeno %1 stop, %2 cestovních bodů, %3 cest, %4 oblastí</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="695"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="698"/>
         <source>Import folders...</source>
         <translation>Zavést složky...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtDb.cpp" line="760"/>
+        <location filename="../qlgt/CQlgtDb.cpp" line="763"/>
         <source>Overlay of type &apos;%1&apos; cant be converted</source>
         <translation>Překrytí typu &apos;%1&apos; nelze převést</translation>
     </message>
@@ -4137,7 +4137,7 @@ nebo
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
-        <source>Reset route caclulation.</source>
+        <source>Reset route calculation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5583,12 +5583,12 @@ Název souboru: %1</translation>
         <translation>Rychlost změněna na %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="986"/>
+        <location filename="../gis/CGisListWks.cpp" line="988"/>
         <source>Delete project...</source>
         <translation>Smazat projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="986"/>
+        <location filename="../gis/CGisListWks.cpp" line="988"/>
         <source>Do you really want to delete %1?</source>
         <translation>Opravdu chcete smazat %1?</translation>
     </message>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.0" language="fr">
 <context>
     <name>CCanvas</name>
     <message>
@@ -2018,7 +2018,7 @@ n&apos;est pas une définition de système de coordonnées:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Ce logiciel est distribué sous les termes de la licence GPL3 ou toute version utérieure</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../IAbout.ui" line="219"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -3643,7 +3643,7 @@ or
         <source>m</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -4034,7 +4034,7 @@ or
     </message>
     <message>
         <source>Reset route caclulation.</source>
-        <translation type="vanished">Réinitialiser la route.</translation>
+        <translation type="obsolete">Réinitialiser la route.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="105"/>

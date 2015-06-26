@@ -571,14 +571,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="708"/>
         <source>Saving workspace. Please wait.</source>
-        <translatorcomment>??? workspace ersetzen durch view - Nein hier ist geht es wirklich um den Arbeitsplatz</translatorcomment>
-        <translation>Ansicht speichern. Bitte warten.</translation>
+        <translation>Arbeitsplatz speichern. Bitte warten.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="750"/>
         <source>Loading workspace. Please wait.</source>
-        <translatorcomment>??? workspace ersetzen durch view -nein hier geht es wirklich um den Arbeitsplatz</translatorcomment>
-        <translation>Ansicht laden. Bitte warten.</translation>
+        <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="952"/>
@@ -588,8 +586,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>This will remove all projects from the workspace.</source>
-        <translatorcomment>??? workspace ersetzen durch view - nein hier geht es wirklich um den Arbeitsplatz</translatorcomment>
-        <translation>Dies wird alle Projekte aus der Ansicht entfernen.</translation>
+        <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
     <message>
         <source>Add Empty Project</source>
@@ -610,7 +607,6 @@
     <message>
         <location filename="../gis/CGisWidget.cpp" line="114"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
-        <translatorcomment>??? finde nirgendwo &quot;Projekt laden&quot;, unabhängig davon: workspace (Arbeitsplatz) oder view (Ansicht) - arbeitsplatz. Projekt == Datei mit GIS Daten</translatorcomment>
         <translation>Das Projekt &quot;%1&quot; ist schon im Arbeitsplatz geladen.</translation>
     </message>
     <message>
@@ -2006,8 +2002,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
         <source>, mode &quot;%1&quot;</source>
-        <translatorcomment>??? IMO sollte dies Modus heißen - richtig</translatorcomment>
-        <translation type="unfinished">, Modus &quot;%1&quot;</translation>
+        <translation>, Modus &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3435,8 +3430,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="435"/>
         <source>Save all projects in the workspace</source>
-        <translatorcomment>??? IMO ok. Übersetzung so richtig? - So sollte es passen</translatorcomment>
-        <translation type="unfinished">Alle Projekte die sich auf dem Arbeitsplatz befinden, speichern</translation>
+        <translation>Alle Projekte die sich auf dem Arbeitsplatz befinden, speichern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="438"/>
@@ -3476,8 +3470,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="498"/>
         <source>Setup Workspace</source>
-        <translatorcomment>??? IMO ok - ich glaube konfigurieren ist besser, oder?</translatorcomment>
-        <translation type="unfinished">Arbeitsplatz konfigurieren</translation>
+        <translation>Arbeitsplatz konfigurieren</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="501"/>
@@ -4279,7 +4272,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
         <source>Reset route calculation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Routenberechnung zurücksetzen.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4788,13 +4781,11 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="14"/>
         <source>Setup workspace...</source>
-        <translatorcomment>??? IMO ok- konfigurieren ist eigentlich besser, oder </translatorcomment>
-        <translation type="unfinished">Arbeitsplatz konfigurieren...</translation>
+        <translation>Arbeitsplatz konfigurieren...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="35"/>
         <source>save workspace on exit, and every</source>
-        <translatorcomment>??? IMO ok - ok</translatorcomment>
         <translation>Arbeitsplatz beim Beenden speichern, und alle</translation>
     </message>
     <message>

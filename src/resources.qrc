@@ -356,6 +356,7 @@
 
         <file>xml/routino/routino-profiles.xml</file>
         <file>xml/routino/routino-translations.xml</file>
+        <file>xml/routino/routino-tagging.xml</file>
 
     </qresource>
 </RCC>

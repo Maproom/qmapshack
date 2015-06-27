@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-#include "qlgt/CImportDatabase.h"
 #include "qlgt/CQlb.h"
 #include "qlgt/CQlgtDb.h"
 #include "qlgt/CQlgtFolder.h"
@@ -25,6 +24,7 @@
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQmsDb.h"
 #include "qlgt/IQlgtOverlay.h"
+#include "tool/CImportDatabase.h"
 
 #include "gis/WptIcons.h"
 #include "gis/db/macros.h"
@@ -481,7 +481,7 @@ void CQlgtDb::migrateDB(int version)
         }
 
         case 8:
-        {            
+        {
             PROGRESS_SETUP(tr("Migrating database from version 7 to 8."), &CMainWindow::self());
 
             if(!query.exec( "CREATE TABLE diarys ("

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>CCanvas</name>
     <message>
@@ -604,17 +604,17 @@
 <context>
     <name>CImportDatabase</name>
     <message>
-        <location filename="../qlgt/CImportDatabase.cpp" line="29"/>
+        <location filename="../tool/CImportDatabase.cpp" line="29"/>
         <source>Import QLandkarte Database</source>
         <translation>Zavést databázi QLandkarte</translation>
     </message>
     <message>
-        <location filename="../qlgt/CImportDatabase.cpp" line="73"/>
+        <location filename="../tool/CImportDatabase.cpp" line="73"/>
         <source>Select source database...</source>
         <translation>Vybrat zdrojovou databázi...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CImportDatabase.cpp" line="93"/>
+        <location filename="../tool/CImportDatabase.cpp" line="93"/>
         <source>Select target database...</source>
         <translation>Vybrat cílovou databázi...</translation>
     </message>
@@ -622,22 +622,22 @@
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="558"/>
+        <location filename="../CMainWindow.cpp" line="560"/>
         <source>Ele: %1%2</source>
         <translation>Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="684"/>
+        <location filename="../CMainWindow.cpp" line="691"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="718"/>
+        <location filename="../CMainWindow.cpp" line="725"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="744"/>
+        <location filename="../CMainWindow.cpp" line="751"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
@@ -1441,22 +1441,22 @@ line %2, column %3:
 <context>
     <name>CMapVrtBuilder</name>
     <message>
-        <location filename="../map/CMapVrtBuilder.cpp" line="29"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="29"/>
         <source>Build GDAL VRT</source>
         <translation>Sestavit GDAL VRT</translation>
     </message>
     <message>
-        <location filename="../map/CMapVrtBuilder.cpp" line="51"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="51"/>
         <source>Select files...</source>
         <translation>Vybrat soubory...</translation>
     </message>
     <message>
-        <location filename="../map/CMapVrtBuilder.cpp" line="75"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="75"/>
         <source>Select target file...</source>
         <translation>Vybrat cílový soubor...</translation>
     </message>
     <message>
-        <location filename="../map/CMapVrtBuilder.cpp" line="196"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="196"/>
         <source>!!! failed !!!
 </source>
         <translation>Nepodařilo se!</translation>
@@ -1945,6 +1945,30 @@ není platným vymezením soustavy souřadnic
     </message>
 </context>
 <context>
+    <name>CRoutinoDatabaseBuilder</name>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="30"/>
+        <source>Create Routino Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="61"/>
+        <source>Select files...</source>
+        <translation type="unfinished">Vybrat soubory...</translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="85"/>
+        <source>Select target path...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="206"/>
+        <source>!!! failed !!!
+</source>
+        <translation type="unfinished">Nepodařilo se!</translation>
+    </message>
+</context>
+<context>
     <name>CSearchGoogle</name>
     <message>
         <location filename="../gis/search/CSearchGoogle.cpp" line="119"/>
@@ -2101,7 +2125,7 @@ není platným vymezením soustavy souřadnic
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Tento program je licencován pod GPL3 nebo kteroukoli pozdější verzí</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="219"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</translation>
@@ -3011,34 +3035,34 @@ není platným vymezením soustavy souřadnic
 <context>
     <name>IImportDatabase</name>
     <message>
-        <location filename="../qlgt/IImportDatabase.ui" line="14"/>
+        <location filename="../tool/IImportDatabase.ui" line="14"/>
         <source>Form</source>
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../qlgt/IImportDatabase.ui" line="45"/>
+        <location filename="../tool/IImportDatabase.ui" line="45"/>
         <source>Source Database:</source>
         <translation>Zdrojová databáze:</translation>
     </message>
     <message>
-        <location filename="../qlgt/IImportDatabase.ui" line="52"/>
-        <location filename="../qlgt/IImportDatabase.ui" line="93"/>
+        <location filename="../tool/IImportDatabase.ui" line="52"/>
+        <location filename="../tool/IImportDatabase.ui" line="93"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../qlgt/IImportDatabase.ui" line="22"/>
-        <location filename="../qlgt/IImportDatabase.ui" line="63"/>
+        <location filename="../tool/IImportDatabase.ui" line="22"/>
+        <location filename="../tool/IImportDatabase.ui" line="63"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../qlgt/IImportDatabase.ui" line="86"/>
+        <location filename="../tool/IImportDatabase.ui" line="86"/>
         <source>Target Database:</source>
         <translation>Cílová databáze:</translation>
     </message>
     <message>
-        <location filename="../qlgt/IImportDatabase.ui" line="102"/>
+        <location filename="../tool/IImportDatabase.ui" line="102"/>
         <source>Start</source>
         <translation>Spustit</translation>
     </message>
@@ -3123,17 +3147,17 @@ není platným vymezením soustavy souřadnic
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="139"/>
+        <location filename="../IMainWindow.ui" line="140"/>
         <source>Maps</source>
         <translation>Mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="176"/>
+        <location filename="../IMainWindow.ui" line="177"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Digitální výškový model (DEM)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="209"/>
+        <location filename="../IMainWindow.ui" line="210"/>
         <source>Data</source>
         <translation>Data</translation>
     </message>
@@ -3142,78 +3166,78 @@ není platným vymezením soustavy souřadnic
         <translation type="obsolete">Přidat pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="261"/>
+        <location filename="../IMainWindow.ui" line="262"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="273"/>
+        <location filename="../IMainWindow.ui" line="274"/>
         <source>Show Scale</source>
         <translation>Ukázat měřítko</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="282"/>
+        <location filename="../IMainWindow.ui" line="283"/>
         <source>Setup Map Font</source>
         <translation>Nastavit písmo mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="294"/>
+        <location filename="../IMainWindow.ui" line="295"/>
         <source>Show Grid</source>
         <translation>Ukázat mřížku</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="297"/>
+        <location filename="../IMainWindow.ui" line="298"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="306"/>
+        <location filename="../IMainWindow.ui" line="307"/>
         <source>Setup Grid</source>
         <translation>Nastavit mřížku</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="309"/>
+        <location filename="../IMainWindow.ui" line="310"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="321"/>
+        <location filename="../IMainWindow.ui" line="322"/>
         <source>Flip Mouse Wheel</source>
         <translation>Obrátit kolečko myši</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="330"/>
-        <location filename="../IMainWindow.ui" line="333"/>
+        <location filename="../IMainWindow.ui" line="331"/>
+        <location filename="../IMainWindow.ui" line="334"/>
         <source>Setup Map Paths</source>
         <translation>Nastavit cesty k mapám</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="345"/>
+        <location filename="../IMainWindow.ui" line="346"/>
         <source>POI Text</source>
         <translation>Text POI</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="357"/>
+        <location filename="../IMainWindow.ui" line="358"/>
         <source>Night / Day</source>
         <translation>Noc/Den</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="369"/>
+        <location filename="../IMainWindow.ui" line="370"/>
         <source>Map Tool Tip</source>
         <translation>Rada k nástroji pro mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="378"/>
+        <location filename="../IMainWindow.ui" line="379"/>
         <source>Setup DEM Paths</source>
         <translation>Nastavit cesty k DEM</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="387"/>
+        <location filename="../IMainWindow.ui" line="388"/>
         <source>About</source>
         <translation>O programu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="396"/>
+        <location filename="../IMainWindow.ui" line="397"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
@@ -3222,155 +3246,160 @@ není platným vymezením soustavy souřadnic
         <translation type="obsolete">Nastavit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="221"/>
+        <location filename="../IMainWindow.ui" line="222"/>
         <source>Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="255"/>
-        <location filename="../IMainWindow.ui" line="258"/>
+        <location filename="../IMainWindow.ui" line="256"/>
+        <location filename="../IMainWindow.ui" line="259"/>
         <source>Add Map View</source>
         <translation>Přidat pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="405"/>
-        <location filename="../IMainWindow.ui" line="408"/>
+        <location filename="../IMainWindow.ui" line="406"/>
+        <location filename="../IMainWindow.ui" line="409"/>
         <source>Setup Map View</source>
         <translation>Nastavit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="417"/>
+        <location filename="../IMainWindow.ui" line="418"/>
         <source>Load GIS Data</source>
         <translation>Nahrát data GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="420"/>
+        <location filename="../IMainWindow.ui" line="421"/>
         <source>Load projects from file</source>
         <translation>Nahrát projekty ze souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="423"/>
+        <location filename="../IMainWindow.ui" line="424"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="432"/>
+        <location filename="../IMainWindow.ui" line="433"/>
         <source>Save All GIS Data</source>
         <translation>Uložit všechna data GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="435"/>
+        <location filename="../IMainWindow.ui" line="436"/>
         <source>Save all projects in the workspace</source>
         <translation>Uložit všechny projekty na pracovním místě</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="438"/>
+        <location filename="../IMainWindow.ui" line="439"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="447"/>
+        <location filename="../IMainWindow.ui" line="448"/>
         <source>Setup Time Zone</source>
         <translation>Nastavit časové pásmo</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="456"/>
+        <location filename="../IMainWindow.ui" line="457"/>
         <source>Add empty project</source>
         <translation>Přidat prázdný projekt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="468"/>
+        <location filename="../IMainWindow.ui" line="469"/>
         <source>Search Google</source>
         <translation>Hledat pomocí Google</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="477"/>
+        <location filename="../IMainWindow.ui" line="478"/>
         <source>Close all projects</source>
         <translation>Zavřít všechny projekty</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="480"/>
+        <location filename="../IMainWindow.ui" line="481"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="489"/>
+        <location filename="../IMainWindow.ui" line="490"/>
         <source>Setup Units</source>
         <translation>Nastavit jednotky</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="498"/>
+        <location filename="../IMainWindow.ui" line="499"/>
         <source>Setup Workspace</source>
         <translation>Nastavit pohled</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="501"/>
+        <location filename="../IMainWindow.ui" line="502"/>
         <source>Setup save on exit.</source>
         <translation>Nastavit uložení při ukončení.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="510"/>
+        <location filename="../IMainWindow.ui" line="511"/>
         <source>Import Database from QLandkarte</source>
         <translation>Zavést databázi z QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="513"/>
+        <location filename="../IMainWindow.ui" line="514"/>
         <source>Import QLandkarte GT database</source>
         <translation>Zavést databázi GT QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="522"/>
+        <location filename="../IMainWindow.ui" line="523"/>
         <source>VRT Builder</source>
         <translation>Sestavovač VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="525"/>
+        <location filename="../IMainWindow.ui" line="526"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Rozhraní pro gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="534"/>
+        <location filename="../IMainWindow.ui" line="535"/>
         <source>Store Map View</source>
         <translation>Uložit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="537"/>
+        <location filename="../IMainWindow.ui" line="538"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Zapsat nynější činnou mapu a seznam DEM včetně vlastností do souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="546"/>
+        <location filename="../IMainWindow.ui" line="547"/>
         <source>Load Map View</source>
         <translation>Nahrát pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="549"/>
+        <location filename="../IMainWindow.ui" line="550"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Obnovit pohled s činnou mapou a seznam DEM včetně vlastností ze souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="561"/>
+        <location filename="../IMainWindow.ui" line="562"/>
         <source>Ext. Profile</source>
         <translation>Ext. Profil</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="564"/>
+        <location filename="../IMainWindow.ui" line="565"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="573"/>
+        <location filename="../IMainWindow.ui" line="574"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="582"/>
+        <location filename="../IMainWindow.ui" line="583"/>
         <source>Clone Map View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="585"/>
+        <location filename="../IMainWindow.ui" line="586"/>
         <source>Ctrl+Shift+T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="595"/>
+        <source>Create Routino Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3517,33 +3546,33 @@ Nechce se mi číst dokumentaci!</translation>
 <context>
     <name>IMapVrtBuilder</name>
     <message>
-        <location filename="../map/IMapVrtBuilder.ui" line="14"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="14"/>
         <source>Form</source>
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../map/IMapVrtBuilder.ui" line="22"/>
-        <location filename="../map/IMapVrtBuilder.ui" line="56"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../map/IMapVrtBuilder.ui" line="39"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
         <translation>Vybrat zdrojové soubory:</translation>
     </message>
     <message>
-        <location filename="../map/IMapVrtBuilder.ui" line="79"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="79"/>
         <source>Target Filename:</source>
         <translation>Název cílového souboru:</translation>
     </message>
     <message>
-        <location filename="../map/IMapVrtBuilder.ui" line="86"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="86"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../map/IMapVrtBuilder.ui" line="95"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="95"/>
         <source>Start</source>
         <translation>Spustit</translation>
     </message>
@@ -3753,7 +3782,7 @@ nebo
         <source>m</source>
         <translation>m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation>°</translation>
@@ -3835,6 +3864,45 @@ nebo
         <location filename="../gis/rte/router/IRouterSetup.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished">Formulář</translation>
+    </message>
+</context>
+<context>
+    <name>IRoutinoDatabaseBuilder</name>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulář</translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="22"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="39"/>
+        <source>Select source files:</source>
+        <translation type="unfinished">Vybrat zdrojové soubory:</translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="54"/>
+        <source>Start</source>
+        <translation type="unfinished">Spustit</translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="86"/>
+        <source>Target Path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="93"/>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
+        <source>File Prefix</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5095,7 +5163,7 @@ Název souboru: %1</translation>
         <translation>&lt;p&gt;--- žádné odkazy ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="222"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="227"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="441"/>
         <source>Length: %1 %2</source>
         <translation>Délka: %1 %2</translation>
@@ -5106,7 +5174,7 @@ Název souboru: %1</translation>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="238"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="243"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
         <source>Time: %1</source>
         <translation>Čas: %1</translation>
@@ -5273,7 +5341,7 @@ Název souboru: %1</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="142"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="48"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="49"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="131"/>
         <source>_Clone</source>
@@ -5321,7 +5389,7 @@ Název souboru: %1</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="546"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="199"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="204"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1808"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="448"/>
         <source>Changed links</source>
@@ -5350,7 +5418,7 @@ Název souboru: %1</translation>
         <translation>Změněný název</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="63"/>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1201"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1216"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1235"/>
@@ -5397,46 +5465,51 @@ Název souboru: %1</translation>
         <translation>Přidat obrázek</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="187"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="192"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1796"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="436"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="193"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="198"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1802"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="226"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="231"/>
         <source>Length: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="234"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="239"/>
         <source>Time: %2 days %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="243"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="248"/>
         <source>Time: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="249"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="254"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="251"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="256"/>
         <source>with %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="476"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="258"/>
+        <source>Calculation took %1 sec.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="479"/>
         <source>Changed route points.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5645,7 +5718,7 @@ Název souboru: %1</translation>
         <translation>Je jiný projekt se stejným názvem. Pokud stisknete OK, bude odstraněn a nahrazen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="63"/>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <source>Enter new route name.</source>
         <translation type="unfinished"></translation>

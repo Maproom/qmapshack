@@ -30,8 +30,9 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
-#include "map/CMapVrtBuilder.h"
-#include "qlgt/CImportDatabase.h"
+#include "tool/CImportDatabase.h"
+#include "tool/CMapVrtBuilder.h"
+#include "tool/CRoutinoDatabaseBuilder.h"
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
@@ -109,6 +110,7 @@ CMainWindow::CMainWindow()
     connect(actionStoreView, SIGNAL(triggered()), this, SLOT(slotStoreView()));
     connect(actionLoadView, SIGNAL(triggered()), this, SLOT(slotLoadView()));
     connect(actionClose, SIGNAL(triggered()), this, SLOT(close()));
+    connect(actionCreateRoutinoDatabase, SIGNAL(triggered()), this, SLOT(slotCreateRoutinoDatabase()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
 
@@ -673,6 +675,11 @@ void CMainWindow::slotBuildVrt()
     addWidgetToTab(widget);
 }
 
+void CMainWindow::slotCreateRoutinoDatabase()
+{
+    CRoutinoDatabaseBuilder * widget = new CRoutinoDatabaseBuilder(this);
+    addWidgetToTab(widget);
+}
 
 void CMainWindow::slotLoadGISData()
 {

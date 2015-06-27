@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "helpers/CSettings.h"
-#include "qlgt/CImportDatabase.h"
 #include "qlgt/CQlgtDb.h"
+#include "tool/CImportDatabase.h"
 
 #include <QtWidgets>
 

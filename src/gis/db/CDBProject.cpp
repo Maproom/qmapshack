@@ -112,7 +112,7 @@ void CDBProject::setupName(const QString &defaultName)
     query.bindValue(":id", id);
     query.bindValue(":type1", IDBFolder::eTypeGroup);
     query.bindValue(":type2", IDBFolder::eTypeProject);
-    QUERY_EXEC(;);
+    QUERY_EXEC(; );
     if(query.next())
     {
         nameSuffix   = query.value(0).toString();

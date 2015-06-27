@@ -52,8 +52,7 @@ set( SRCS
     dem/CDemList.cpp
     dem/CDemItem.cpp
     dem/CDemPathSetup.cpp
-    dem/CDemPropSetup.cpp
-    map/CMapVrtBuilder.cpp
+    dem/CDemPropSetup.cpp    
     map/IMap.cpp
     map/CMapDraw.cpp
     map/CMapItem.cpp
@@ -189,14 +188,16 @@ set( SRCS
     qlgt/CQlgtTrack.cpp
     qlgt/CQlgtRoute.cpp
     qlgt/CQlgtDiary.cpp
-    qlgt/IQlgtOverlay.cpp
-    qlgt/CImportDatabase.cpp
+    qlgt/IQlgtOverlay.cpp    
     qlgt/CQlgtDb.cpp
     qlgt/CQmsDb.cpp
     device/IDeviceWatcher.cpp
     device/IDevice.cpp
     device/CDeviceGarmin.cpp
     device/CDeviceTwoNav.cpp
+    tool/CMapVrtBuilder.cpp
+    tool/CImportDatabase.cpp
+    tool/CRoutinoDatabaseBuilder.cpp
 )
 
 if(UNIX)
@@ -248,7 +249,6 @@ set( HDRS
     dem/CDemItem.h
     dem/CDemPathSetup.h
     dem/CDemPropSetup.h
-    map/CMapVrtBuilder.h
     map/IMap.h
     map/IMapProp.h
     map/CMapDraw.h
@@ -383,13 +383,15 @@ set( HDRS
     qlgt/CQlgtRoute.h
     qlgt/CQlgtDiary.h
     qlgt/IQlgtOverlay.h
-    qlgt/CImportDatabase.h
     qlgt/CQlgtDb.h
     qlgt/CQmsDb.h
     device/IDeviceWatcher.h    
     device/IDevice.h
     device/CDeviceGarmin.h
     device/CDeviceTwoNav.h
+    tool/CMapVrtBuilder.h
+    tool/CImportDatabase.h
+    tool/CRoutinoDatabaseBuilder.h
 )
 
 if(UNIX)
@@ -424,8 +426,7 @@ set( UIS
     dem/IDemPropSetup.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
-    map/IMapPropSetup.ui
-    map/IMapVrtBuilder.ui
+    map/IMapPropSetup.ui    
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     mouse/IScrOptPoint.ui    
@@ -468,7 +469,9 @@ set( UIS
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
     units/IUnitsSetup.ui
-    qlgt/IImportDatabase.ui
+    tool/IImportDatabase.ui
+    tool/IMapVrtBuilder.ui
+    tool/IRoutinoDatabaseBuilder.ui
 )
 
 

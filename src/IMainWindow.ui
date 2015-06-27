@@ -122,6 +122,7 @@
     </property>
     <addaction name="actionImportDatabase"/>
     <addaction name="actionVrtBuilder"/>
+    <addaction name="actionCreateRoutinoDatabase"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuProject"/>
@@ -583,6 +584,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
+   </property>
+  </action>
+  <action name="actionCreateRoutinoDatabase">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/RouteSetup.png</normaloff>:/icons/32x32/RouteSetup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Create Routino Database</string>
    </property>
   </action>
  </widget>

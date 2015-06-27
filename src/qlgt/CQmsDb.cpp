@@ -24,7 +24,6 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "qlgt/CImportDatabase.h"
 #include "qlgt/CQlgtDb.h"
 #include "qlgt/CQlgtFolder.h"
 #include "qlgt/CQlgtRoute.h"
@@ -32,6 +31,7 @@
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/CQmsDb.h"
 #include "qlgt/IQlgtOverlay.h"
+#include "tool/CImportDatabase.h"
 
 #include <QtSql>
 #include <QtWidgets>

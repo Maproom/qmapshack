@@ -38,7 +38,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)    
+    , totalDays(NOINT)
 {
     *this = parentRte;
     key.project = project->getKey();
@@ -77,7 +77,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)    
+    , totalDays(NOINT)
 {
     // --- start read and process data ----
     readRte(xml, rte);
@@ -105,7 +105,7 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)    
+    , totalDays(NOINT)
 {
     loadFromDb(id, db);
 }
@@ -115,7 +115,7 @@ CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *pr
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , lastRoutedCalcTime(0)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)    
+    , totalDays(NOINT)
 {
     rte.name = name;
     readRouteDataFromGisLine(l);

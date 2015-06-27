@@ -147,9 +147,9 @@ private:
     rte_t rte;
     QPolygonF line;
 
-    QString     lastRoutedWith;
-    QDateTime   lastRoutedTime;
-    quint32     lastRoutedCalcTime;
+    QString lastRoutedWith;
+    QDateTime lastRoutedTime;
+    quint32 lastRoutedCalcTime;
 
     qreal totalDistance;
     QTime totalTime;

@@ -2038,25 +2038,31 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRoutinoDatabaseBuilder</name>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="30"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="32"/>
         <source>Create Routino Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino Datenbank erstellen</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="61"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="63"/>
         <source>Select files...</source>
-        <translation type="unfinished">Dateien auswählen...</translation>
+        <translation>Dateien auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="85"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="87"/>
         <source>Select target path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zielpfad auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="206"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="211"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished">!!! fehlgeschlagen !!!</translation>
+        <translation>!!! fehlgeschlagen !!!</translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="218"/>
+        <source>!!! done !!!
+</source>
+        <translation>!!! erledigt !!!</translation>
     </message>
 </context>
 <context>
@@ -3165,6 +3171,11 @@ ist keine gültige Koordinatensystemdefinition:
         <translation></translation>
     </message>
     <message>
+        <location filename="../tool/IImportDatabase.ui" line="102"/>
+        <source>Start</source>
+        <translation>Starten</translation>
+    </message>
+    <message>
         <location filename="../tool/IImportDatabase.ui" line="22"/>
         <location filename="../tool/IImportDatabase.ui" line="63"/>
         <source>...</source>
@@ -3174,11 +3185,6 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../tool/IImportDatabase.ui" line="86"/>
         <source>Target Database:</source>
         <translation>Zieldatenbank:</translation>
-    </message>
-    <message>
-        <location filename="../tool/IImportDatabase.ui" line="102"/>
-        <source>Start</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -3430,7 +3436,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="595"/>
         <source>Create Routino Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino Datenbank erstellen</translation>
     </message>
     <message>
         <source>Setup Map Workspace</source>
@@ -3994,38 +4000,38 @@ sein</translation>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="22"/>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="39"/>
         <source>Select source files:</source>
-        <translation type="unfinished">Quelldateien auswählen:</translation>
+        <translation>Quelldateien auswählen:</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="54"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="86"/>
         <source>Target Path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zielpfad:</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="93"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
         <source>File Prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateipräfix</translation>
     </message>
 </context>
 <context>
@@ -5617,7 +5623,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="258"/>
         <source>Calculation took %1 sec.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Berechnung dauerte %1 Sek.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="479"/>

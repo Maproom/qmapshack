@@ -110,13 +110,13 @@ void CRouterRoutino::slotSetupPaths()
 
 void CRouterRoutino::buildDatabaseList()
 {
-    QRegExp re("(.*)-nodes.mem");
+    QRegExp re("(.*)-segments.mem");
     freeDatabaseList();
 
     foreach(const QString &path, dbPaths)
     {
         QDir dir(path);
-        foreach(const QString &filename, dir.entryList(QStringList("*nodes.mem"), QDir::Files|QDir::Readable, QDir::Name))
+        foreach(const QString &filename, dir.entryList(QStringList("*segments.mem"), QDir::Files|QDir::Readable, QDir::Name))
         {
             QString prefix;
             if(re.exactMatch(filename))
@@ -128,6 +128,14 @@ void CRouterRoutino::buildDatabaseList()
                 continue;
             }
 
+#ifdef OS_WIN
+            QFileInfo fi(dir.absoluteFilePath(filename));
+            if(fi.size() > 0x0FFFFFFFFLL)
+            {
+                QMessageBox::warning(this, tr("Warning..."), tr("%1: Due to limitations in the Windows POSIX API Routino can't handle files larger than 4GB.").arg(prefix), QMessageBox::Ok);
+                continue;
+            }
+#endif
             H_RoutinoDataSet data = RoutinoRegisterData(dir.absolutePath().toUtf8(), prefix.toUtf8());
             if(data)
             {

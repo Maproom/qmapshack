@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.0" language="fr">
 <context>
     <name>CCanvas</name>
     <message>
@@ -105,7 +105,7 @@
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="136"/>
         <source>Enter new area name.</source>
-        <translation>Saisir le nouveau nom de la surface.</translation>
+        <translation type="unfinished">Entrez le nom de la nouvelle surface.</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
@@ -196,7 +196,7 @@
         <location filename="../gis/prj/CDetailsPrj.cpp" line="536"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="563"/>
         <source>Enter new project name.</source>
-        <translation>Saisir le nom du projet.</translation>
+        <translation type="unfinished">Entrez le nom du nouveau projet.</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="545"/>
@@ -254,7 +254,7 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="395"/>
         <source>Enter new track name.</source>
-        <translation>Saisir le nouveau nom de la trace.</translation>
+        <translation type="unfinished">Entrez le nom de la nouvelle trace.</translation>
     </message>
 </context>
 <context>
@@ -267,12 +267,12 @@
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="157"/>
         <source>Enter new waypoint name.</source>
-        <translation>Saisir le nouveau nom du waypoint.</translation>
+        <translation type="unfinished">Entrez le nom du nouveau waypoint.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="176"/>
         <source>Enter new proximity range.</source>
-        <translation>Saisir le rayon de l&apos;alarme de proximité.</translation>
+        <translation type="unfinished">Entrez le rayon de l&apos;alarme de proximité.</translation>
     </message>
 </context>
 <context>
@@ -1629,7 +1629,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
         <source>Enter new waypoint name.</source>
-        <translation>Saisir le nouveau nom du waypoint.</translation>
+        <translation type="unfinished">Entrez le nom du nouveau waypoint.</translation>
     </message>
 </context>
 <context>
@@ -4346,7 +4346,7 @@ or
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
         <source>Select project from list or enter new project name.</source>
-        <translation>Choisissez le projet dans la liste ou entrez un nouveau nom de projet.</translation>
+        <translation type="unfinished">Choisissez un projet dans la liste ou entrez le nom d&apos;un nouveau projet.</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
@@ -5357,7 +5357,7 @@ Nom de fichier: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1474"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="115"/>
         <source>Enter new track name.</source>
-        <translation>Saisir le nouveau nom de la trace.</translation>
+        <translation type="unfinished">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1403"/>
@@ -5488,7 +5488,7 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="99"/>
         <source>Enter new area name.</source>
-        <translation>Saisir le nouveau nom de la surface.</translation>
+        <translation type="unfinished">Entrez le nom de la nouvelle surface.</translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="194"/>
@@ -5528,7 +5528,7 @@ Nom de fichier: %1</translation>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <source>Enter new route name.</source>
-        <translation>Entrez le nouveau nom du projet.</translation>
+        <translation type="unfinished">Entrez le nom de la nouvelle route.</translation>
     </message>
 </context>
 </TS>

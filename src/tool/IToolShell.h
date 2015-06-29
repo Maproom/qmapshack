@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,29 +16,37 @@
 
 **********************************************************************************************/
 
-#ifndef CMAPVRTBUILDER_H
-#define CMAPVRTBUILDER_H
+#ifndef ITOOLSHELL_H
+#define ITOOLSHELL_H
 
-#include "tool/IToolShell.h"
-#include "ui_IMapVrtBuilder.h"
+#include <QProcess>
 #include <QWidget>
 
-class CMapVrtBuilder : public IToolShell, private Ui::IMapVrtBuilder
+class QTextBrowser;
+
+class IToolShell : public QWidget
 {
     Q_OBJECT
 public:
-    CMapVrtBuilder(QWidget * parent);
-    virtual ~CMapVrtBuilder();
+    IToolShell(QTextBrowser *&textBrowser, QWidget *parent);
+    virtual ~IToolShell();
 
-private slots:
-    void slotSelectSourceFiles();
-    void slotSelectTargetFile();
-    void slotStart();
+protected slots:
+    void slotStderr();
+    void slotStdout();
+    virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
 
-private:
-    void finished(int exitCode, QProcess::ExitStatus status);
-    void enabelStartButton();
+protected:
+    virtual void finished(int exitCode, QProcess::ExitStatus status) = 0;
+
+    void setOutputBrowser(QTextBrowser * textBrowser);
+    void stdOut(const QString& str, bool gui = false);
+    void stdErr(const QString& str, bool gui = false);
+
+    QProcess cmd;
+
+    QTextBrowser *& text;
 };
 
-#endif //CMAPVRTBUILDER_H
+#endif //ITOOLSHELL_H
 

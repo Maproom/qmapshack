@@ -16,13 +16,13 @@
 
 **********************************************************************************************/
 
-#include "tool/CRoutinoDatabaseBuilder.h"
 #include "helpers/CSettings.h"
+#include "tool/CRoutinoDatabaseBuilder.h"
 
 #include <QtWidgets>
 
 CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
-    : QWidget(parent)
+    : IToolShell(textBrowser, parent)
     , first(true)
     , tainted(false)
     , last(false)
@@ -35,10 +35,6 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     connect(toolTargetPath, SIGNAL(clicked()), this, SLOT(slotSelectTargetPath()));
     connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
     connect(lineTargetPrefix, SIGNAL(editingFinished()), this, SLOT(enabelStartButton()));
-
-    connect(&cmd, SIGNAL(readyReadStandardError()), this, SLOT(slotStderr()));
-    connect(&cmd, SIGNAL(readyReadStandardOutput()), this, SLOT(slotStdout()));
-    connect(&cmd, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotFinished(int,QProcess::ExitStatus)));
 
     pushStart->setDisabled(true);
 
@@ -126,7 +122,7 @@ void CRoutinoDatabaseBuilder::enabelStartButton()
 
 void CRoutinoDatabaseBuilder::slotStart()
 {
-    output.clear();
+
     pushStart->setDisabled(true);
 
     sourceFiles.clear();
@@ -145,95 +141,8 @@ void CRoutinoDatabaseBuilder::slotStart()
     slotFinished(0,QProcess::NormalExit);
 }
 
-
-void CRoutinoDatabaseBuilder::slotStderr()
+void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status)
 {
-    QString str;
-    textBrowser->setTextColor(Qt::red);
-
-    str = cmd.readAllStandardError();
-
-#ifndef WIN32
-    if(str[0] == '\r')
-    {
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
-        textBrowser->textCursor().removeSelectedText();
-
-        str = str.split("\r").last();
-    }
-#endif
-
-    textBrowser->insertPlainText(str);
-    textBrowser->verticalScrollBar()->setValue(textBrowser->verticalScrollBar()->maximum());
-
-    tainted = true;
-}
-
-void CRoutinoDatabaseBuilder::slotStdout()
-{
-    QString str;
-    textBrowser->setTextColor(Qt::blue);
-    str = cmd.readAllStandardOutput();
-
-#ifndef WIN32
-    if(str[0] == '\r')
-    {
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
-        textBrowser->textCursor().removeSelectedText();
-
-        str = str.split("\r").last();
-    }
-#else
-    if(str[0] == '\r')
-    {
-        if(str.contains("\n"))
-        {
-            textBrowser->insertPlainText("\n");
-        }
-        else
-        {
-            textBrowser->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
-            textBrowser->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
-            textBrowser->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
-            textBrowser->textCursor().removeSelectedText();
-        }
-
-
-        str = str.split("\r").last().remove("\r").remove("\n");
-    }
-#endif
-
-    textBrowser->insertPlainText(str);
-    textBrowser->verticalScrollBar()->setValue(textBrowser->verticalScrollBar()->maximum());
-}
-
-void CRoutinoDatabaseBuilder::stdOut(const QString& str, bool gui)
-{
-    textBrowser->setTextColor(Qt::black);
-    textBrowser->append(str);
-}
-
-
-void CRoutinoDatabaseBuilder::stdErr(const QString& str, bool gui)
-{
-    textBrowser->setTextColor(Qt::red);
-    textBrowser->append(str);
-}
-
-
-void CRoutinoDatabaseBuilder::slotFinished(int exitCode, QProcess::ExitStatus status)
-{
-    if(exitCode || status)
-    {
-        textBrowser->setTextColor(Qt::red);
-        textBrowser->append(tr("!!! failed !!!\n"));
-        return;
-    }
-
     if(last)
     {
         textBrowser->setTextColor(Qt::darkGreen);
@@ -258,7 +167,6 @@ void CRoutinoDatabaseBuilder::slotFinished(int exitCode, QProcess::ExitStatus st
     }
     else
     {
-
         QStringList args;
 
         args << QString("--dir=%1").arg(targetPath);
@@ -281,7 +189,5 @@ void CRoutinoDatabaseBuilder::slotFinished(int exitCode, QProcess::ExitStatus st
 
         stdOut("planetsplitter " +  args.join(" ") + "\n");
         cmd.start("planetsplitter", args);
-
     }
-
 }

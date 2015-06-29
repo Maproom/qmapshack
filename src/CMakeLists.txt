@@ -195,6 +195,7 @@ set( SRCS
     device/IDevice.cpp
     device/CDeviceGarmin.cpp
     device/CDeviceTwoNav.cpp
+    tool/IToolShell.cpp
     tool/CMapVrtBuilder.cpp
     tool/CImportDatabase.cpp
     tool/CRoutinoDatabaseBuilder.cpp
@@ -389,6 +390,7 @@ set( HDRS
     device/IDevice.h
     device/CDeviceGarmin.h
     device/CDeviceTwoNav.h
+    tool/IToolShell.h
     tool/CMapVrtBuilder.h
     tool/CImportDatabase.h
     tool/CRoutinoDatabaseBuilder.h

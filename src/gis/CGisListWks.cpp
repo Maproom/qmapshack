@@ -921,7 +921,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             case IGisItem::eTypeWpt:
                 actionBubbleWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->hasBubble());
                 actionMoveWpt->setDisabled(isOnDevice);
-                actionProjWpt->setDisabled(isOnDevice);                
+                actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
                 break;
 

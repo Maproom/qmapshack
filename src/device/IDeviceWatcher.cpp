@@ -21,8 +21,8 @@
 #include "device/IDeviceWatcher.h"
 #include "gis/CGisListWks.h"
 
-#include <QtCore>
 #include <QApplication>
+#include <QtCore>
 
 IDeviceWatcher::IDeviceWatcher(CGisListWks *parent)
     : QObject(parent)

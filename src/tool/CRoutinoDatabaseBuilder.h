@@ -19,12 +19,12 @@
 #ifndef CROUTINODATABASEBUILDER_H
 #define CROUTINODATABASEBUILDER_H
 
+#include "tool/IToolShell.h"
 #include "ui_IRoutinoDatabaseBuilder.h"
-#include <QWidget>
-#include <QProcess>
 #include <QTemporaryFile>
 
-class CRoutinoDatabaseBuilder : public QWidget, private Ui::IRoutinoDatabaseBuilder
+
+class CRoutinoDatabaseBuilder : public IToolShell, private Ui::IRoutinoDatabaseBuilder
 {
     Q_OBJECT
 public:
@@ -36,29 +36,20 @@ private slots:
     void slotSelectTargetPath();
     void slotStart();
 
-    void slotStderr();
-    void slotStdout();
-    void slotFinished(int exitCode, QProcess::ExitStatus status);
     void enabelStartButton();
 
 private:
-    void stdOut(const QString& str, bool gui = false);
-    void stdErr(const QString& str, bool gui = false);
-
+    void finished(int exitCode, QProcess::ExitStatus status);
 
     bool first;
     bool tainted;
     bool last;
-    QString output;
-
-    QProcess cmd;
 
     QStringList sourceFiles;
     QString targetPrefix;
     QString targetPath;
 
     QTemporaryFile xmlTagging;
-
 };
 
 #endif //CROUTINODATABASEBUILDER_H

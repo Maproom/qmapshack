@@ -22,8 +22,7 @@
 #include <QtWidgets>
 
 CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
-    : QWidget(parent)
-    , tainted(false)
+    : IToolShell(textBrowser, parent)
 {
     setupUi(this);
     setObjectName(tr("Build GDAL VRT"));
@@ -31,10 +30,6 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     connect(toolSourceFiles, SIGNAL(clicked()), this, SLOT(slotSelectSourceFiles()));
     connect(toolTargetFile, SIGNAL(clicked()), this, SLOT(slotSelectTargetFile()));
     connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
-
-    connect(&cmd, SIGNAL(readyReadStandardError()), this, SLOT(slotStderr()));
-    connect(&cmd, SIGNAL(readyReadStandardOutput()), this, SLOT(slotStdout()));
-    connect(&cmd, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotFinished(int,QProcess::ExitStatus)));
 
     pushStart->setDisabled(true);
 }
@@ -124,75 +119,10 @@ void CMapVrtBuilder::slotStart()
     cmd.start("gdalbuildvrt", args);
 }
 
-
-void CMapVrtBuilder::slotStderr()
+void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status)
 {
-    QString str;
-    textBrowser->setTextColor(Qt::red);
-
-    str = cmd.readAllStandardError();
-
-#ifndef WIN32
-    if(str[0] == '\r')
-    {
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
-        textBrowser->textCursor().removeSelectedText();
-
-        str = str.split("\r").last();
-    }
-#endif
-
-    textBrowser->insertPlainText(str);
-    textBrowser->verticalScrollBar()->setValue(textBrowser->verticalScrollBar()->maximum());
-
-    tainted = true;
-}
-
-void CMapVrtBuilder::slotStdout()
-{
-    QString str;
-    textBrowser->setTextColor(Qt::blue);
-    str = cmd.readAllStandardOutput();
-
-#ifndef WIN32
-    if(str[0] == '\r')
-    {
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
-        textBrowser->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
-        textBrowser->textCursor().removeSelectedText();
-
-        str = str.split("\r").last();
-    }
-#endif
-
-    textBrowser->insertPlainText(str);
-    textBrowser->verticalScrollBar()->setValue(textBrowser->verticalScrollBar()->maximum());
-}
-
-void CMapVrtBuilder::stdOut(const QString& str, bool gui)
-{
-    textBrowser->setTextColor(Qt::black);
-    textBrowser->append(str);
-}
-
-
-void CMapVrtBuilder::stdErr(const QString& str, bool gui)
-{
-    textBrowser->setTextColor(Qt::red);
-    textBrowser->append(str);
-}
-
-
-void CMapVrtBuilder::slotFinished(int exitCode, QProcess::ExitStatus status)
-{
-    output.clear();
-
-    if(exitCode || status)
-    {
-        textBrowser->setTextColor(Qt::red);
-        textBrowser->append(tr("!!! failed !!!\n"));
-    }
+    textBrowser->setTextColor(Qt::darkGreen);
+    textBrowser->append(tr("!!! done !!!\n"));
+    pushStart->setEnabled(true);
+    return;
 }

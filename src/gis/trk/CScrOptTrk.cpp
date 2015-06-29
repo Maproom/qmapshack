@@ -44,7 +44,6 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     toolCut->setDisabled(isOnDevice);
     toolEdit->setDisabled(isOnDevice);
     toolReverse->setDisabled(isOnDevice);
-    toolCombine->setDisabled(isOnDevice);
     toolRange->setDisabled(isOnDevice);
 
     connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));

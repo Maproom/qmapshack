@@ -160,6 +160,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
+    menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionDelete);
 
 
@@ -849,17 +850,27 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         if(gisItem != 0)
         {
             bool onlyWpts = true;
+            bool onlyTrks = true;
             foreach(QTreeWidgetItem * item, selectedItems())
             {
-                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-                if(wpt == 0)
+                if(item->type() != IGisItem::eTypeWpt)
                 {
                     onlyWpts = false;
+                }
+
+                if(item->type() != IGisItem::eTypeTrk)
+                {
+                    onlyTrks = false;
+                }
+
+                if(!onlyTrks && !onlyWpts)
+                {
                     break;
                 }
             }
 
             actionRteFromWpt->setEnabled(onlyWpts);
+            actionCombineTrk->setEnabled(onlyTrks);
 
             menuItem->exec(p);
             return;
@@ -899,7 +910,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
-                actionCombineTrk->setDisabled(isOnDevice);
+                actionCombineTrk->setEnabled(true); // might be disabled by menuItem
                 actionRangeTrk->setDisabled(isOnDevice);
                 actionReverseTrk->setDisabled(isOnDevice);
                 actionEditTrk->setDisabled(isOnDevice);
@@ -910,7 +921,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             case IGisItem::eTypeWpt:
                 actionBubbleWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->hasBubble());
                 actionMoveWpt->setDisabled(isOnDevice);
-                actionProjWpt->setDisabled(isOnDevice);
+                actionProjWpt->setDisabled(isOnDevice);                
                 menuItemWpt->exec(p);
                 break;
 
@@ -1221,10 +1232,22 @@ void CGisListWks::slotReverseTrk()
 void CGisListWks::slotCombineTrk()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
-    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
-    if(gisItem != 0)
+
+    QList<IGisItem::key_t> keys;
+
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
     {
-        CGisWidget::self().combineTrkByKey(gisItem->getKey());
+        CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(item);
+        if(gisItem)
+        {
+            keys << gisItem->getKey();
+        }
+    }
+
+    if(!keys.isEmpty())
+    {
+        CGisWidget::self().combineTrkByKey(keys);
     }
 }
 

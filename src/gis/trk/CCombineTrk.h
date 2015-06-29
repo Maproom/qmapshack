@@ -30,7 +30,7 @@ class CCombineTrk : public QDialog, private Ui::ICombineTrk
 {
     Q_OBJECT
 public:
-    CCombineTrk(CGisItemTrk& trk, IGisProject &project, QWidget * parent);
+    CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t>& keysPreSel, IGisProject &project, QWidget * parent);
     virtual ~CCombineTrk();
 
     const QList<IGisItem::key_t>& getTrackKeys()

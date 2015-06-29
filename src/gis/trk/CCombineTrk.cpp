@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CCombineTrk::CCombineTrk(CGisItemTrk& trk, IGisProject& project, QWidget * parent)
+CCombineTrk::CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t> &keysPreSel, IGisProject& project, QWidget * parent)
     : QDialog(parent)
     , trk(trk)
     , project(project)
@@ -39,7 +39,7 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, IGisProject& project, QWidget * paren
             continue;
         }
 
-        if(trk.getKey() == trk1->getKey())
+        if(keysPreSel.contains(trk1->getKey()))
         {
             continue;
         }
@@ -50,14 +50,24 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, IGisProject& project, QWidget * paren
         item->setIcon(trk1->getIcon());
         item->setData(Qt::UserRole + 1, key.item);
         item->setData(Qt::UserRole + 2, key.project);
+        item->setData(Qt::UserRole + 3, key.device);
     }
 
-    const IGisItem::key_t& key = trk.getKey();
-    QListWidgetItem * item = new QListWidgetItem(listSelected);
-    item->setText(trk.getName());
-    item->setIcon(trk.getIcon());
-    item->setData(Qt::UserRole + 1, key.item);
-    item->setData(Qt::UserRole + 2, key.project);
+    foreach(const IGisItem::key_t& key, keysPreSel)
+    {
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(project.getItemByKey(key));
+        if(gisItem == 0)
+        {
+            continue;
+        }
+
+        QListWidgetItem * item = new QListWidgetItem(listSelected);
+        item->setText(gisItem->getName());
+        item->setIcon(gisItem->getIcon());
+        item->setData(Qt::UserRole + 1, key.item);
+        item->setData(Qt::UserRole + 2, key.project);
+        item->setData(Qt::UserRole + 3, key.device);
+    }
 
     connect(listAvailable, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
     connect(listSelected, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
@@ -84,6 +94,7 @@ void CCombineTrk::accept()
         IGisItem::key_t key;
         key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
         key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
+        key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
         if(trk1 == 0)
         {
@@ -151,6 +162,7 @@ void CCombineTrk::slotRemove()
     IGisItem::key_t key;
     key.item    = item->data(Qt::UserRole + 1).toString();
     key.project = item->data(Qt::UserRole + 2).toString();
+    key.device  = item->data(Qt::UserRole + 3).toString();
 
     if(key == trk.getKey())
     {
@@ -210,6 +222,7 @@ void CCombineTrk::updatePreview()
         IGisItem::key_t key;
         key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
         key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
+        key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
 
 
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));

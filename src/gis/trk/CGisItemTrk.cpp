@@ -1274,7 +1274,7 @@ void CGisItemTrk::reverse()
     trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
-void CGisItemTrk::combine()
+void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project == 0)
@@ -1282,7 +1282,7 @@ void CGisItemTrk::combine()
         return;
     }
 
-    CCombineTrk dlg(*this, *project, &CMainWindow::self());
+    CCombineTrk dlg(*this, keysPreSel, *project, &CMainWindow::self());
     dlg.exec();
 
     QList<IGisItem::key_t> keys = dlg.getTrackKeys();

@@ -22,6 +22,7 @@
 #include "gis/CGisListWks.h"
 
 #include <QtCore>
+#include <QApplication>
 
 IDeviceWatcher::IDeviceWatcher(CGisListWks *parent)
     : QObject(parent)
@@ -45,6 +46,7 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
     qDebug() << "Probe device at" << mountPoint << path << label;
     QStringList entries = dir.entryList();
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     if(entries.contains("Garmin"))
     {
         if(dir.exists("Garmin/GarminDevice.xml"))
@@ -62,4 +64,5 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
     {
         qDebug() << "Don't know it :(";
     }
+    QApplication::restoreOverrideCursor();
 }

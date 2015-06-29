@@ -253,10 +253,12 @@ public:
     /**
        @brief Combine this track with several others.
 
+       @param keysPreSel list of pre-selected track item keys
+
        Handle the complete process of selecting tracks, choosing the order and
        the final name with dialogs.
      */
-    void combine();
+    void combine(const QList<key_t> &keysPreSel);
 
     /**
        @brief Set the trkpt_t::eHidden flag

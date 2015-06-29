@@ -471,12 +471,24 @@ void CGisWidget::reverseTrkByKey(const IGisItem::key_t& key)
 
 void CGisWidget::combineTrkByKey(const IGisItem::key_t& key)
 {
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    combineTrkByKey(keys);
+}
+
+void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys)
+{
+    if(keys.isEmpty())
+    {
+        return;
+    }
+
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(keys.first()));
     if(trk)
     {
-        trk->combine();
+        trk->combine(keys);
     }
 
     emit sigChanged();

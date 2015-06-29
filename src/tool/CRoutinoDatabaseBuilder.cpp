@@ -34,7 +34,7 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     connect(toolSourceFiles, SIGNAL(clicked()), this, SLOT(slotSelectSourceFiles()));
     connect(toolTargetPath, SIGNAL(clicked()), this, SLOT(slotSelectTargetPath()));
     connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
-    connect(lineTargetPrefix, SIGNAL(editingFinished()), this, SLOT(enabelStartButton()));
+    connect(lineTargetPrefix, SIGNAL(textChanged(QString)), this, SLOT(enabelStartButton()));
 
     pushStart->setDisabled(true);
 

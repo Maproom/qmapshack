@@ -218,6 +218,10 @@
           <property name="text">
            <string>0</string>
           </property>
+          <property name="icon">
+           <iconset resource="../../resources.qrc">
+            <normaloff>:/icons/32x32/O.png</normaloff>:/icons/32x32/O.png</iconset>
+          </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
@@ -234,6 +238,10 @@
           <property name="text">
            <string>A</string>
           </property>
+          <property name="icon">
+           <iconset resource="../../resources.qrc">
+            <normaloff>:/icons/32x32/A.png</normaloff>:/icons/32x32/A.png</iconset>
+          </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
@@ -249,6 +257,10 @@
           </property>
           <property name="text">
            <string>V</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../resources.qrc">
+            <normaloff>:/icons/32x32/V.png</normaloff>:/icons/32x32/V.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>

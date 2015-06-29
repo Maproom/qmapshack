@@ -13,7 +13,7 @@
    height="64px"
    id="svg3377"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="AddTrk.svg">
   <defs
      id="defs3379" />
@@ -25,7 +25,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.5"
-     inkscape:cx="-20.727273"
+     inkscape:cx="-45.636364"
      inkscape:cy="32"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -181,8 +181,8 @@
       </g>
     </g>
     <path
-       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.94174314;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 17.412331,39.012396 11.673383,9e-6 0,11.664162 9.997357,0 0,-11.664171 11.673372,0 0,-10.044146 -11.673372,0 -10e-6,-11.66417 -9.997347,0 -1.1e-5,11.664179 -11.673372,-9e-6 0,10.044146 z"
+       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.54912072;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 31.501877,44.074513 6.809525,5e-6 0,6.798361 5.831837,0 0,-6.798366 6.809518,0 0,-5.854148 -6.809518,0 -6e-6,-6.798366 -5.831831,0 -5e-6,6.798371 -6.80952,-5e-6 0,5.854148 z"
        id="rect3117-7"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/add.png"

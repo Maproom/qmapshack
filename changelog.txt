@@ -1,3 +1,23 @@
+V 1.3.0
+* Cluttered items select: make text sensitive, too
+* TwoNav: Fix problems with decoding records created with old firmware.
+* [Issue #20] Add command "Duplicate View"
+* Ask for saving chnages when closing db project via db folder check box
+* Rework user interface to edit line items (tracks, routes, areas)
+* Add Routino as offline auto-router
+* Add GUI tool to create Routino database files
+* Rte: Create route from selected waypoints
+* Complete lines via router in line edit mode
+* View: Fix bad scaling on startup when using square scale
+* [Issue #25] Saved tracks get wrong timestamps
+* [Issue #23] Update French translation and fix missleading translation
+* Trk/Wpt: Make track/waypoint correlation an option if it takes too long.
+* Workspace: Add warning when loading a project twice
+* Speed up project file loading
+* Trk: Allow combining tracks for tracks on devices. 
+* Trk: Allow pre-selection of several tracks for combining tracks
+* Many GUI fixes and code cleanup.
+
 V 1.2.2
 * TwoNav: Find wpt files created from device in the TwoNavData folder
 * Wpt: Display waypoint description/comment as bubble

@@ -49,6 +49,10 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     xmlTagging.write(_translations.readAll());
     xmlTagging.close();
 
+    SETTINGS;
+    QString path = cfg.value("RoutinoDatabaseBuilder/targetPath",QDir::homePath()).toString();
+
+    labelTargetPath->setText(path);
 }
 
 CRoutinoDatabaseBuilder::~CRoutinoDatabaseBuilder()
@@ -182,6 +186,24 @@ void CRoutinoDatabaseBuilder::slotStdout()
         textBrowser->textCursor().removeSelectedText();
 
         str = str.split("\r").last();
+    }
+#else
+    if(str[0] == '\r')
+    {
+        if(str.contains("\n"))
+        {
+            textBrowser->insertPlainText("\n");
+        }
+        else
+        {
+            textBrowser->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
+            textBrowser->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
+            textBrowser->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
+            textBrowser->textCursor().removeSelectedText();
+        }
+
+
+        str = str.split("\r").last().remove("\r").remove("\n");
     }
 #endif
 

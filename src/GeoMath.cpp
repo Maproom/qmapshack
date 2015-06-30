@@ -343,6 +343,57 @@ qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
     return qSqrt(a1x2/a3);
 }
 
+static inline qreal sqr(qreal a)
+{
+    return a*a;
+}
+static inline qreal sqrlen(const QPointF &a)
+{
+    return sqr(a.x()) + sqr(a.y());
+}
+
+
+qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
+{
+    const qint32 count = points.size();
+
+    QPointF b = points[0];
+    QPointF dbq = b - q;
+    qreal dist = sqrlen(dbq);
+
+    for (qint32 i = 1; i<count; ++i)
+    {
+        const QPointF a = b;
+        const QPointF daq = dbq;
+        b = points[i];
+        dbq = b - q;
+
+        const QPointF dab = a - b;
+
+        const qreal inv_sqrlen = 1./sqrlen(dab);
+        const qreal t = (dab.x()*daq.x() + dab.y()*daq.y())*inv_sqrlen;
+        if (t < 0.)
+        {
+            continue;
+        }
+        qreal current_dist;
+        if (t<=1.)
+        {
+            current_dist = sqr(dab.x()*dbq.y() - dab.y()*dbq.x())*inv_sqrlen;
+        }
+        else//t>1.
+        {
+            current_dist = sqrlen(dbq);
+        }
+        if (current_dist<dist)
+        {
+            dist = current_dist;
+        }
+    }
+    return dist;
+}
+
+
 
 struct segment
 {

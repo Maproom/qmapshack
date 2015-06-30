@@ -1154,14 +1154,8 @@ void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& curre
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {
-    foreach(const QPointF &pt, lineSimple)
-    {
-        if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
-        {
-            return true;
-        }
-    }
-    return false;
+    qreal dist = GPS_Math_DistPointPolyline(lineSimple, pos);
+    return dist < 20;
 }
 
 void CGisItemTrk::gainUserFocus(bool yes)
@@ -1963,7 +1957,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
             i++;
         }
 
-        if(d < MIN_DIST_FOCUS)
+        if(mode == eModeNormal || d < MIN_DIST_FOCUS)
         {
             newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
         }

@@ -292,54 +292,6 @@ qint32 ILineOp::isCloseTo(const QPoint& pos)
 }
 
 
-inline qreal sqr(qreal a)
-{
-    return a*a;
-}
-inline qreal sqrlen(const QPointF &a)
-{
-    return sqr(a.x()) + sqr(a.y());
-}
-
-qreal sqr_distance(const QPolygonF &points, const QPointF &q)
-{
-    const qint32 count = points.size();
-
-    QPointF b = points[0];
-    QPointF dbq = b - q;
-    qreal dist = sqrlen(dbq);
-
-    for (qint32 i = 1; i<count; ++i)
-    {
-        const QPointF a = b;
-        const QPointF daq = dbq;
-        b = points[i];
-        dbq = b - q;
-
-        const QPointF dab = a - b;
-
-        const qreal inv_sqrlen = 1./sqrlen(dab);
-        const qreal t = (dab.x()*daq.x() + dab.y()*daq.y())*inv_sqrlen;
-        if (t < 0.)
-        {
-            continue;
-        }
-        qreal current_dist;
-        if (t<=1.)
-        {
-            current_dist = sqr(dab.x()*dbq.y() - dab.y()*dbq.x())*inv_sqrlen;
-        }
-        else//t>1.
-        {
-            current_dist = sqrlen(dbq);
-        }
-        if (current_dist<dist)
-        {
-            dist = current_dist;
-        }
-    }
-    return dist;
-}
 qint32 ILineOp::isCloseToLine(const QPoint& pos)
 {
     qint32 idx = NOIDX;
@@ -364,7 +316,7 @@ qint32 ILineOp::isCloseToLine(const QPoint& pos)
             line << pt2.pixel;
         }
 
-        qreal d = sqr_distance(line, pos);
+        qreal d = GPS_Math_DistPointPolyline(line, pos);
         if(d < dist)
         {
             dist = d;

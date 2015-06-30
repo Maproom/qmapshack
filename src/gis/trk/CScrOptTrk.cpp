@@ -36,15 +36,21 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
 
     toolProfile->setChecked(trk->hasUserFocus());
 
-    anchor = trk->getPointCloseBy(point);
-    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
-    show();
-
     bool isOnDevice = trk->isOnDevice();
     toolCut->setDisabled(isOnDevice);
     toolEdit->setDisabled(isOnDevice);
     toolReverse->setDisabled(isOnDevice);
     toolRange->setDisabled(isOnDevice);
+
+    anchor = trk->getPointCloseBy(point);
+    if((anchor - point).manhattanLength() > 50)
+    {
+        anchor = point;
+        toolCut->setEnabled(false);
+    }
+
+    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    show();
 
     connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));

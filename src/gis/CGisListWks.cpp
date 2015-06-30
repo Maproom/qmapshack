@@ -1140,6 +1140,12 @@ void CGisListWks::slotDeleteItem()
     {
         project->blockUpdateItems(false);
     }
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
 }
 
 void CGisListWks::slotCopyItem()
@@ -1167,6 +1173,13 @@ void CGisListWks::slotCopyItem()
         project->insertCopyOfItem(gisItem, NOIDX, lastResult);
     }
     project->blockUpdateItems(false);
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
 }
 
 void CGisListWks::slotProjWpt()

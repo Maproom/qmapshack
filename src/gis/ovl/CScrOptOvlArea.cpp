@@ -35,6 +35,10 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     adjustSize();
 
     anchor = area->getPointCloseBy(point);
+    if((anchor - point).manhattanLength() > 50)
+    {
+        anchor = point;
+    }
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 

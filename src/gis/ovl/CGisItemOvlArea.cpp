@@ -210,14 +210,17 @@ void CGisItemOvlArea::setSymbol()
 
 bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
 {
-    foreach(const QPointF &pt, line)
-    {
-        if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
-        {
-            return true;
-        }
-    }
-    return false;
+//    foreach(const QPointF &pt, line)
+//    {
+//        if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
+//        {
+//            return true;
+//        }
+//    }
+//    return false;
+
+    qreal dist = GPS_Math_DistPointPolyline(line, pos);
+    return dist < 20;
 }
 
 QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)

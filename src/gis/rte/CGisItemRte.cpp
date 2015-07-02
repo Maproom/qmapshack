@@ -16,8 +16,10 @@
 
 **********************************************************************************************/
 
+
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "GeoMath.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/WptIcons.h"
@@ -286,15 +288,18 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 
 bool CGisItemRte::isCloseTo(const QPointF& pos)
 {
-    foreach(const QPointF &pt, line)
-    {
-        if((pt - pos).manhattanLength() < 10)
-        {
-            return true;
-        }
-    }
+//    foreach(const QPointF &pt, line)
+//    {
+//        if((pt - pos).manhattanLength() < 10)
+//        {
+//            return true;
+//        }
+//    }
 
-    return false;
+//    return false;
+
+    qreal dist = GPS_Math_DistPointPolyline(line, pos);
+    return dist < 20;
 }
 
 void CGisItemRte::gainUserFocus(bool yes)

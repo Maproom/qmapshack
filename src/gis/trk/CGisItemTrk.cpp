@@ -1412,17 +1412,6 @@ void CGisItemTrk::showSelectedPoints()
         qSwap(idx1,idx2);
     }
 
-//    // if first index is the first point adjust index to hide it, too
-//    if(isTrkPtFirstVisible(idx1))
-//    {
-//        idx1--;
-//    }
-//    // if second index is the last point adjust index to hide it, too
-//    if(isTrkPtLastVisible(idx2))
-//    {
-//        idx2++;
-//    }
-
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];

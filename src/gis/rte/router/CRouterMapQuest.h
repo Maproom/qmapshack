@@ -22,6 +22,10 @@
 #include "gis/rte/router/IRouter.h"
 #include "ui_IRouterMapQuest.h"
 
+class QNetworkAccessManager;
+class CGisItemRte;
+class QNetworkReply;
+
 class CRouterMapQuest : public IRouter, private Ui::IRouterMapQuest
 {
     Q_OBJECT
@@ -36,6 +40,16 @@ public:
     }
 
     QString getOptions();
+
+private slots:
+    void slotRequestFinished(QNetworkReply* reply);
+
+private:
+    void addMapQuestLocations(QDomDocument& xml, QDomElement& locations, CGisItemRte& rte);
+
+    static const QByteArray keyMapQuest;
+
+    QNetworkAccessManager * networkAccessManager;
 };
 
 #endif //CROUTERMAPQUEST_H

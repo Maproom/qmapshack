@@ -81,7 +81,6 @@ void CSearchGoogle::slotStartSearch()
     url.setQuery(urlQuery);
 
     QNetworkRequest request;
-
     request.setUrl(url);
     networkAccessManager.get(request);
 

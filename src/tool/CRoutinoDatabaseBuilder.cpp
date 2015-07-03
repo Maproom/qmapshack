@@ -122,7 +122,6 @@ void CRoutinoDatabaseBuilder::enabelStartButton()
 
 void CRoutinoDatabaseBuilder::slotStart()
 {
-
     pushStart->setDisabled(true);
 
     sourceFiles.clear();

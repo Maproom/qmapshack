@@ -95,7 +95,6 @@ QString CRouterRoutino::getOptions()
 
     str  = tr("profile \"%1\"").arg(comboProfile->currentText());
     str += tr(", mode \"%1\"").arg(comboMode->currentText());
-
     return str;
 }
 
@@ -171,6 +170,9 @@ void CRouterRoutino::updateHelpText()
 
 void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 {
+    QTime time;
+    time.start();
+
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
     if(rte == 0)
     {
@@ -195,9 +197,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     }
 
     T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());
-
-    rte->setResult(route, getOptions());
-
+    rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
     RoutinoFreeRoute(route);
 }
 

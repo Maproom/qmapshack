@@ -132,6 +132,7 @@ public:
     void reset();
 
     void setResult(T_RoutinoRoute * route, const QString &options);
+    void setResult(const QDomDocument& xml, const QString &options);
 
 private:
     void deriveSecondaryData();
@@ -149,7 +150,6 @@ private:
 
     QString lastRoutedWith;
     QDateTime lastRoutedTime;
-    quint32 lastRoutedCalcTime;
 
     qreal totalDistance;
     QTime totalTime;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -508,9 +508,9 @@
         <translation>Route erstellen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="608"/>
-        <location filename="../gis/CGisListWks.cpp" line="1371"/>
-        <location filename="../gis/CGisListWks.cpp" line="1409"/>
+        <location filename="../gis/CGisListWks.cpp" line="609"/>
+        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1444"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
@@ -569,22 +569,22 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="708"/>
+        <location filename="../gis/CGisListWks.cpp" line="709"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Arbeitsplatz speichern. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="750"/>
+        <location filename="../gis/CGisListWks.cpp" line="751"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="952"/>
+        <location filename="../gis/CGisListWks.cpp" line="963"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="952"/>
+        <location filename="../gis/CGisListWks.cpp" line="963"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -1497,22 +1497,27 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMapVrtBuilder</name>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="29"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="28"/>
         <source>Build GDAL VRT</source>
         <translation>GDAL VRT erstellen</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="51"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="46"/>
         <source>Select files...</source>
         <translation>Dateien auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="75"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="70"/>
         <source>Select target file...</source>
         <translation>Zieldatei auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="196"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="125"/>
+        <source>!!! done !!!
+</source>
+        <translation>!!! erledigt !!!</translation>
+    </message>
+    <message>
         <source>!!! failed !!!
 </source>
         <translation>!!! fehlgeschlagen !!!</translation>
@@ -1943,6 +1948,100 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
 </context>
 <context>
+    <name>CRouterMapQuest</name>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="37"/>
+        <source>Fastest</source>
+        <translation>Schnellste</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="38"/>
+        <source>Shortest</source>
+        <translation>Kürzeste</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="39"/>
+        <source>Bicycle</source>
+        <translation>Fahrrad</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="40"/>
+        <source>Pedestrian/pub. transp.</source>
+        <translation>Fußgänger/öffentl. Transport</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="41"/>
+        <source>Pedestrian</source>
+        <translation>Fußgänger</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="43"/>
+        <source>US English</source>
+        <translation>Englisch (USA)</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="44"/>
+        <source>British English</source>
+        <translation>Englisch (Britisch)</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="45"/>
+        <source>Danish</source>
+        <translation>Dänisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="46"/>
+        <source>Dutch</source>
+        <translation>Niederländisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="47"/>
+        <source>French</source>
+        <translation>Französisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="48"/>
+        <source>German</source>
+        <translation>Deutsch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="49"/>
+        <source>Italian</source>
+        <translation>Italienisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="50"/>
+        <source>Norwegian</source>
+        <translation>Norwegisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="51"/>
+        <source>Spanish</source>
+        <translation>Spanisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="52"/>
+        <source>Swedish</source>
+        <translation>Schwedisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="232"/>
+        <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
+        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Routinganforderung an den Server gesendet. Bitte warten...</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="243"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="274"/>
+        <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
+        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Schlechte Antwort vom Server:&lt;br/&gt;%1</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="291"/>
+        <source>&lt;br/&gt;Calculation time: %1s</source>
+        <translation>&lt;br/&gt;Berechnungszeit: %1 s</translation>
+    </message>
+</context>
+<context>
     <name>CRouterRoutino</name>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="34"/>
@@ -2004,6 +2103,21 @@ ist keine gültige Koordinatensystemdefinition:
         <source>, mode &quot;%1&quot;</source>
         <translation>, Modus &quot;%1&quot;</translation>
     </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="134"/>
+        <source>Warning...</source>
+        <translation>Warnung...</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="134"/>
+        <source>%1: Due to limitations in the Windows POSIX API Routino can&apos;t handle files larger than 4GB.</source>
+        <translation>%1: Aufgrund der Einschränkungen der Windows POSIX API können Dateien, die größer als 4GB sind, nicht bearbeitet werden.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="200"/>
+        <source>&lt;br/&gt;Calculation time: %1s</source>
+        <translation>&lt;br/&gt;Berechnungszeit: %1 s</translation>
+    </message>
 </context>
 <context>
     <name>CRouterRoutinoPathSetup</name>
@@ -2053,13 +2167,12 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Zielpfad auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="211"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! fehlgeschlagen !!!</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="218"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="148"/>
         <source>!!! done !!!
 </source>
         <translation>!!! erledigt !!!</translation>
@@ -2068,12 +2181,12 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CSearchGoogle</name>
     <message>
-        <location filename="../gis/search/CSearchGoogle.cpp" line="119"/>
+        <location filename="../gis/search/CSearchGoogle.cpp" line="118"/>
         <source>Unknown response</source>
         <translation>Unbekannte Antwort</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchGoogle.cpp" line="129"/>
+        <location filename="../gis/search/CSearchGoogle.cpp" line="128"/>
         <source>Error: </source>
         <translation>Fehler:</translation>
     </message>
@@ -3925,9 +4038,40 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="20"/>
-        <source>t.b.d</source>
-        <translation></translation>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="25"/>
+        <source>Lim. Access</source>
+        <translation>Eingeschr. Zugang</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="32"/>
+        <source>Toll Road</source>
+        <translation>Mautstraße</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="39"/>
+        <source>Seasonal</source>
+        <translation>jahreszeitlich bedingt</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="46"/>
+        <source>Unpaved</source>
+        <translation>unbefestigt</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="53"/>
+        <source>Ferry</source>
+        <translation>Fähre</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="60"/>
+        <source>Country Border</source>
+        <translation>Landesgrenze</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="85"/>
+        <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</source>
+        <translatorcomment>??? sehr frei übersetzt. passt schon ;)</translatorcomment>
+        <translation>&lt;p&gt;Mit freundlicher Genehmigung von &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -4066,8 +4210,8 @@ sein</translation>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="128"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="148"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="168"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="280"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="292"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="309"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -4097,32 +4241,32 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="232"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="236"/>
         <source>Use auto-routing to between points.</source>
         <translation>Auto-Routing zwischen Punkten benutzen.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="235"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="239"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="256"/>
         <source>Snap line along lines of a vector map.</source>
         <translation>Fängt die Linie längs Linien einer Vektorkarte.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="251"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="259"/>
         <source>V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="277"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="289"/>
         <source>Undo last change</source>
         <translation>Letzte Änderung rückgängig machen</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="306"/>
         <source>Redo last change</source>
         <translation>Letzte Änderung wiederherstellen</translation>
     </message>
@@ -5052,6 +5196,15 @@ sein</translation>
     </message>
 </context>
 <context>
+    <name>IToolShell</name>
+    <message>
+        <location filename="../tool/IToolShell.cpp" line="127"/>
+        <source>!!! failed !!!
+</source>
+        <translation>!!! fehlgeschlagen !!!</translation>
+    </message>
+</context>
+<context>
     <name>IUnitsSetup</name>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="14"/>
@@ -5285,7 +5438,7 @@ Dateiname: %1</translation>
         <translation>Wegpunkte geändert, alle vorherigen Daten sind verloren.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="227"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="224"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="441"/>
         <source>Length: %1 %2</source>
         <translation>Länge: %1 %2</translation>
@@ -5296,7 +5449,7 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="243"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="240"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
         <source>Time: %1</source>
         <translation>Gesamtzeit: %1</translation>
@@ -5378,12 +5531,12 @@ Dateiname: %1</translation>
         <translation type="obsolete"> Neigung: %1° (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1403"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1397"/>
         <source>Hide points.</source>
         <translation>Punkte ausblenden.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1449"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1432"/>
         <source>Show points.</source>
         <translation>Punkte einblenden.</translation>
     </message>
@@ -5458,73 +5611,73 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="142"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="49"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="50"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="184"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="131"/>
         <source>_Clone</source>
         <translation>_Klon</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="444"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="447"/>
         <source>Area: %1%2</source>
         <translation>Gebiet: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="502"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="505"/>
         <source>Changed area shape.</source>
         <translation>Gebietsform geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="510"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="513"/>
         <source>Changed name.</source>
         <translation>Name geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="516"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="519"/>
         <source>Changed border width.</source>
         <translation>Umrandungsbreite geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="522"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="525"/>
         <source>Changed fill pattern.</source>
         <translation>Füllung geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="528"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="531"/>
         <source>Changed opacity.</source>
         <translation>Durchsichtigkeit geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="534"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="537"/>
         <source>Changed comment.</source>
         <translation>Kommentar geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="540"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="543"/>
         <source>Changed description.</source>
         <translation>Beschreibung geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="546"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="204"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1808"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="549"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="201"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1791"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="448"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="558"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1820"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="561"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1803"/>
         <source>Changed color</source>
         <translation>Farbe geändert</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1201"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1216"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1235"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1294"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1195"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1210"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1229"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1288"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1457"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="99"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="115"/>
@@ -5546,7 +5699,7 @@ Dateiname: %1</translation>
         <translation>Abstand: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1790"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1773"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="396"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
@@ -5582,51 +5735,50 @@ Dateiname: %1</translation>
         <translation>Bild hinzufügen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="192"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1796"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="189"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1779"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="436"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="198"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1802"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="195"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1785"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="231"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="228"/>
         <source>Length: -</source>
         <translation>Länge: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="239"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="236"/>
         <source>Time: %2 days %1</source>
         <translation>Gesamtzeit: %2 days %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="248"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="245"/>
         <source>Time: -</source>
         <translation>Gesamtzeit: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="254"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="251"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
         <translation>Letzte Routenberechnung: &lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="256"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="253"/>
         <source>with %1</source>
         <translation>mit %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="258"/>
         <source>Calculation took %1 sec.</source>
         <translation>Die Berechnung dauerte %1 Sek.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="479"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="477"/>
         <source>Changed route points.</source>
         <translation>Geänderte Routenpukte.</translation>
     </message>
@@ -5711,11 +5863,11 @@ Dateiname: %1</translation>
         <translation>&lt;p&gt;--- keine ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1201"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1216"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1235"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1294"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1195"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1210"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1229"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1288"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1457"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="115"/>
         <source>Enter new track name.</source>
         <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
@@ -5826,12 +5978,12 @@ Dateiname: %1</translation>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="988"/>
+        <location filename="../gis/CGisListWks.cpp" line="999"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="988"/>
+        <location filename="../gis/CGisListWks.cpp" line="999"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1? löschen wollen?</translation>
     </message>

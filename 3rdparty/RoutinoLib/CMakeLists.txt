@@ -181,6 +181,6 @@ set(ALLINP_${APPNAME}
     ${HDRS_${APPNAME}}
 )
 
-add_executable(${APPNAME} ${ALLINP_${APPNAME}})
-target_link_libraries(${APPNAME} routino)
+#add_executable(${APPNAME} ${ALLINP_${APPNAME}})
+#target_link_libraries(${APPNAME} routino)
 

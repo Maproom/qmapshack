@@ -35,7 +35,6 @@ IToolShell::~IToolShell()
 
 void IToolShell::setOutputBrowser(QTextBrowser * text)
 {
-
 }
 
 
@@ -67,7 +66,6 @@ void IToolShell::slotStderr()
 #else
         str = str.split("\r").last();
 #endif
-
     }
 
     text->insertPlainText(str);

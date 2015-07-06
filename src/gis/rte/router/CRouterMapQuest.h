@@ -25,6 +25,7 @@
 class QNetworkAccessManager;
 class CGisItemRte;
 class QNetworkReply;
+class QTimer;
 
 class CRouterMapQuest : public IRouter, private Ui::IRouterMapQuest
 {
@@ -43,6 +44,7 @@ public:
 
 private slots:
     void slotRequestFinished(QNetworkReply* reply);
+    void slotCloseStatusMsg();
 
 private:
     void addMapQuestLocations(QDomDocument& xml, QDomElement& locations, CGisItemRte& rte);
@@ -50,6 +52,8 @@ private:
     static const QByteArray keyMapQuest;
 
     QNetworkAccessManager * networkAccessManager;
+
+    QTimer * timerCloseStatusMsg;
 };
 
 #endif //CROUTERMAPQUEST_H

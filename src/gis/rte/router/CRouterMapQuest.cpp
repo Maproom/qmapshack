@@ -16,16 +16,16 @@
 
 **********************************************************************************************/
 
-#include "gis/rte/router/CRouterMapQuest.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/CGisWidget.h"
-#include "helpers/CSettings.h"
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/CRouterMapQuest.h"
+#include "helpers/CSettings.h"
 
 
-#include <QtWidgets>
 #include <QtNetwork>
+#include <QtWidgets>
 #include <proj_api.h>
 const QByteArray CRouterMapQuest::keyMapQuest = "Fmjtd%7Cluu2n16t2h%2Crw%3Do5-haya0";
 
@@ -70,6 +70,10 @@ CRouterMapQuest::CRouterMapQuest(QWidget *parent)
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotRequestFinished(QNetworkReply*)));
 
+    timerCloseStatusMsg = new QTimer(this);
+    timerCloseStatusMsg->setSingleShot(true);
+    timerCloseStatusMsg->setInterval(5000);
+    connect(timerCloseStatusMsg, SIGNAL(timeout()), this, SLOT(slotCloseStatusMsg()));
 }
 
 CRouterMapQuest::~CRouterMapQuest()
@@ -85,7 +89,16 @@ CRouterMapQuest::~CRouterMapQuest()
     cfg.setValue("avoidCountryBorder", checkMQAvoidCountryBorder->isChecked());
     cfg.setValue("language", comboMQLanguage->currentIndex());
     cfg.endGroup();
+}
 
+void CRouterMapQuest::slotCloseStatusMsg()
+{
+    timerCloseStatusMsg->stop();
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->reportStatus("MapQuest", "");
+    }
 }
 
 QString CRouterMapQuest::getOptions()
@@ -113,6 +126,8 @@ void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
     {
         return;
     }
+
+    slotCloseStatusMsg();
 
     QDomDocument xml;
 
@@ -208,7 +223,14 @@ void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
     reply->setProperty("key.item", key.item);
     reply->setProperty("key.project", key.project);
     reply->setProperty("key.device", key.device);
+    reply->setProperty("options", getOptions());
+    reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->reportStatus("MapQuest", tr("<b>MapQuest</b><br/>Routing request sent to server. Please wait..."));
+    }
 }
 
 void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
@@ -219,6 +241,7 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
         if(canvas)
         {
             canvas->reportStatus("MapQuest", tr("<b>MapQuest</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
+            timerCloseStatusMsg->start();
         }
         reply->deleteLater();
         return;
@@ -235,6 +258,11 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
     QDomDocument xml;
     xml.setContent(res);
 
+    QFile f("test.xml");
+    f.open(QIODevice::WriteOnly);
+    f.write(xml.toString().toUtf8());
+    f.close();
+
     QDomElement response    = xml.firstChildElement("response");
     QDomElement info        = response.firstChildElement("info");
     QDomElement statusCode  = info.firstChildElement("statusCode");
@@ -244,11 +272,28 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
         {
-            canvas->reportStatus("MapQuest", tr("<b>MapQuest</b><br/>Bad response from server:<br/>%1").arg(xml.toString()));
+            QDomElement messages  = info.firstChildElement("messages");
+            QDomElement message   = messages.firstChildElement("message");
+            canvas->reportStatus("MapQuest", tr("<b>MapQuest</b><br/>Bad response from server:<br/>%1").arg(message.text()));
+            timerCloseStatusMsg->start();
         }
         return;
     }
 
+    IGisItem::key_t key;
+    key.item    = reply->property("key.item").toString();
+    key.project = reply->property("key.project").toString();
+    key.device  = reply->property("key.device").toString();
+    qint64 time = reply->property("time").toLongLong();
 
+    time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
+
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+    if(rte != 0)
+    {
+        rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));
+    }
+
+    slotCloseStatusMsg();
 }
 

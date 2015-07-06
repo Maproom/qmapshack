@@ -1179,7 +1179,6 @@ void CGisListWks::slotCopyItem()
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
-
 }
 
 void CGisListWks::slotProjWpt()

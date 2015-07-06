@@ -19,45 +19,52 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QCheckBox" name="checkMQAvoidLimAccess">
        <property name="text">
-        <string>Lim. Access</string>
+        <string>Highways</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="1" column="1">
       <widget class="QCheckBox" name="checkMQAvoidTollRoads">
        <property name="text">
         <string>Toll Road</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QCheckBox" name="checkMQAvoidSeasonal">
        <property name="text">
         <string>Seasonal</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="2" column="1">
       <widget class="QCheckBox" name="checkMQAvoidUnpaved">
        <property name="text">
         <string>Unpaved</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QCheckBox" name="checkMQAvoidFerry">
        <property name="text">
         <string>Ferry</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QCheckBox" name="checkMQAvoidCountryBorder">
        <property name="text">
         <string>Country Border</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Avoid:</string>
        </property>
       </widget>
      </item>

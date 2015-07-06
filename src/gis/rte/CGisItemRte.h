@@ -56,7 +56,7 @@ public:
 
         qreal turn;
         qreal bearing;
-        QStringList names;
+        QStringList streets;
 
         QString instruction;
         qreal distance;

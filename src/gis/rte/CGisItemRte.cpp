@@ -549,7 +549,7 @@ void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
 
             if(next->string != 0)
             {
-                subpt.names << next->string;
+                subpt.streets << next->string;
             }
 
             if(next->type > IMP_CHANGE)
@@ -578,13 +578,16 @@ void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
 
 struct maneuver_t
 {
+    QStringList streets;
     QString instruction;
+    quint32 time;
+    qreal   dist;
 };
 
 void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 {    
     lastRoutedTime = QDateTime::currentDateTimeUtc();
-    lastRoutedWith = "MapQuest, " + options;
+    lastRoutedWith = "MapQuest" + options;
 
     QDomElement response    = xml.firstChildElement("response");
     QDomElement route       = response.firstChildElement("route");
@@ -608,9 +611,19 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         for(int m = 0; m < M; m++)
         {
             maneuvers << maneuver_t();
-            maneuver_t& maneuver = maneuvers.last();
-            QDomNode xmlManeuver = xmlManeuvers.item(m);
-            maneuver.instruction = xmlManeuver.firstChildElement("narrative").text();
+            maneuver_t& maneuver    = maneuvers.last();
+            QDomNode xmlManeuver    = xmlManeuvers.item(m);
+            maneuver.instruction    = xmlManeuver.firstChildElement("narrative").text();
+            maneuver.time           = xmlManeuver.firstChildElement("time").text().toUInt();
+            maneuver.dist           = xmlManeuver.firstChildElement("distance").text().toFloat();
+
+            QDomNodeList xmlStreets = xmlManeuver.toElement().elementsByTagName("streets");
+            const int S = xmlStreets.size();
+            for(int s = 0; s < S; s++)
+            {
+                QDomNode xmlStreet = xmlStreets.item(s);
+                maneuver.streets << xmlStreet.toElement().text();
+            }
         }
     }
 
@@ -644,7 +657,6 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         idxLegs << elem.toElement().text().toUInt();
     }
 
-
     QDomElement xmlManeuverIndexes = xmlShape.firstChildElement("maneuverIndexes");
     xmlIndex                       = xmlManeuverIndexes.elementsByTagName("index");
     qint32 M = xmlIndex.size();
@@ -656,6 +668,9 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         maneuver_t& maneuver    = maneuvers[m];
         subpt.type              = subpt_t::eTypeJunct;
         subpt.instruction       = maneuver.instruction;
+        subpt.time              = QTime(0,0).addSecs(maneuver.time);
+        subpt.distance          = maneuver.dist;
+        subpt.streets           = maneuver.streets;
     }
 
     for(int i = 0; i < rte.pts.size() - 1; i++ )

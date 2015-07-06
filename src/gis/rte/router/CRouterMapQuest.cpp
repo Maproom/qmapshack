@@ -103,7 +103,72 @@ void CRouterMapQuest::slotCloseStatusMsg()
 
 QString CRouterMapQuest::getOptions()
 {
-    return QString();
+    QString str;
+    int times = 1;
+
+    str += ", " + tr("mode \"%1\"").arg(comboMQPreference->currentText());
+
+    if(checkMQAvoidLimAccess->isChecked())
+    {
+        str += ", " + tr("no highways");
+    }
+
+    if(str.size() > 40 * times)
+    {
+        str += "<br/>";
+        times++;
+    }
+
+    if(checkMQAvoidTollRoads->isChecked())
+    {
+        str += ", " + tr("no toll roads");
+    }
+
+    if(str.size() > 40 * times)
+    {
+        str += "<br/>";
+        times++;
+    }
+
+    if(checkMQAvoidSeasonal->isChecked())
+    {
+        str += ", " + tr("no seasonal");
+    }
+
+    if(str.size() > 40 * times)
+    {
+        str += "<br/>";
+        times++;
+    }
+
+    if(checkMQAvoidUnpaved->isChecked())
+    {
+        str += ", " + tr("no unpaved");
+    }
+
+    if(str.size() > 40 * times)
+    {
+        str += "<br/>";
+        times++;
+    }
+
+    if(checkMQAvoidFerry->isChecked())
+    {
+        str += ", " + tr("no ferry");
+    }
+
+    if(str.size() > 40 * times)
+    {
+        str += "<br/>";
+        times++;
+    }
+
+    if(checkMQAvoidCountryBorder->isChecked())
+    {
+        str += ", " + tr("no crossing of country borders");
+    }
+
+    return str;
 }
 
 void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locations, CGisItemRte &rte)

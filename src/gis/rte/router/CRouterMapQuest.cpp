@@ -255,10 +255,13 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
         return;
     }
 
-    qDebug() << res;
-
     QDomDocument xml;
     xml.setContent(res);
+
+    QFile f("test.xml");
+    f.open(QIODevice::WriteOnly);
+    f.write(xml.toString().toUtf8());
+    f.close();
 
     QDomElement response    = xml.firstChildElement("response");
     QDomElement info        = response.firstChildElement("info");

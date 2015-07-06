@@ -576,10 +576,96 @@ void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
     updateHistory();
 }
 
-void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
+struct maneuver_t
 {
+    QString instruction;
+};
+
+void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
+{    
     lastRoutedTime = QDateTime::currentDateTimeUtc();
     lastRoutedWith = "MapQuest, " + options;
+
+    QDomElement response    = xml.firstChildElement("response");
+    QDomElement route       = response.firstChildElement("route");
+
+    // get time of travel
+    QDomElement time        = route.firstChildElement("time");
+    totalTime = QTime(0,0).addSecs(time.text().toUInt());
+
+
+    // build list of maneuvers
+    QDomNodeList xmlLegs       = route.firstChildElement("legs").elementsByTagName("leg");
+    const qint32 L = xmlLegs.size();
+
+    QList<maneuver_t> maneuvers;
+
+    for(int l = 0; l < L; l++)
+    {
+        QDomNode xmlLeg = xmlLegs.item(l);
+        QDomNodeList xmlManeuvers = xmlLeg.firstChildElement("maneuvers").elementsByTagName("maneuver");
+        const qint32 M = xmlManeuvers.size();
+        for(int m = 0; m < M; m++)
+        {
+            maneuvers << maneuver_t();
+            maneuver_t& maneuver = maneuvers.last();
+            QDomNode xmlManeuver = xmlManeuvers.item(m);
+            maneuver.instruction = xmlManeuver.firstChildElement("narrative").text();
+        }
+    }
+
+    QVector<subpt_t> shape;
+
+    // read the shape
+    QDomElement xmlShape        = route.firstChildElement("shape");
+    QDomElement xmlShapePoints  = xmlShape.firstChildElement("shapePoints");
+    QDomNodeList xmlLatLng      = xmlShapePoints.elementsByTagName("latLng");
+    const qint32 N = xmlLatLng.size();
+    for(int n = 0; n < N; n++)
+    {
+        QDomNode elem   = xmlLatLng.item(n);
+        QDomElement lat = elem.firstChildElement("lat");
+        QDomElement lng = elem.firstChildElement("lng");
+
+        shape << subpt_t();
+        subpt_t& subpt = shape.last();
+        subpt.lon = lng.text().toFloat();
+        subpt.lat = lat.text().toFloat();
+    }
+
+
+    QVector<quint32> idxLegs;
+    QDomElement xmlLegIndexes = xmlShape.firstChildElement("legIndexes");
+    QDomNodeList xmlIndex     = xmlLegIndexes.elementsByTagName("index");
+    const qint32 I = xmlIndex.size();
+    for(int i = 0; i < I; i++)
+    {
+        QDomNode elem = xmlIndex.item(i);
+        idxLegs << elem.toElement().text().toUInt();
+    }
+
+
+    QDomElement xmlManeuverIndexes = xmlShape.firstChildElement("maneuverIndexes");
+    xmlIndex                       = xmlManeuverIndexes.elementsByTagName("index");
+    qint32 M = xmlIndex.size();
+    for(int m = 0; m < M; m++)
+    {
+        QDomNode elem           = xmlIndex.item(m);
+        quint32 idx             = elem.toElement().text().toUInt();
+        subpt_t& subpt          = shape[idx];
+        maneuver_t& maneuver    = maneuvers[m];
+        subpt.type              = subpt_t::eTypeJunct;
+        subpt.instruction       = maneuver.instruction;
+    }
+
+    for(int i = 0; i < rte.pts.size() - 1; i++ )
+    {
+        quint32 idx1 = idxLegs[i];
+        quint32 idx2 = idxLegs[i+1];
+
+        rtept_t& rtept = rte.pts[i];
+        rtept.subpts = shape.mid(idx1, idx2 - idx1 + 1);
+    }
 
     deriveSecondaryData();
     updateHistory();

@@ -34,7 +34,13 @@ class CGisItemRte : public IGisItem, public IGisLine
 public:
     struct subpt_t
     {
-        subpt_t() : lon(NOFLOAT), lat(NOFLOAT), time(0,0)
+        subpt_t()
+            : lon(NOFLOAT)
+            , lat(NOFLOAT)
+            , type(eTypeNone)
+            , turn(NOFLOAT)
+            , bearing(NOFLOAT)
+            , time(0,0)
         {
         }
 
@@ -52,6 +58,7 @@ public:
         qreal bearing;
         QStringList names;
 
+        QString instruction;
         qreal distance;
         QTime time;
     };

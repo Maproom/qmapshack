@@ -130,6 +130,7 @@ public:
         return rte.links;
     }
 
+    void setName(const QString& str);
     void setComment(const QString& str);
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
@@ -137,6 +138,8 @@ public:
     void calc();
 
     void reset();
+
+    void edit();
 
     void setResult(T_RoutinoRoute * route, const QString &options);
     void setResult(const QDomDocument& xml, const QString &options);

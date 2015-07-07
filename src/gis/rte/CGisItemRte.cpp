@@ -24,6 +24,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/WptIcons.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 
@@ -177,10 +178,23 @@ void CGisItemRte::deriveSecondaryData()
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 }
 
+void CGisItemRte::edit()
+{
+    CDetailsRte dlg(*this, &CMainWindow::self());
+    dlg.exec();
+}
+
 void CGisItemRte::setSymbol()
 {
     icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     setIcon(CGisListWks::eColumnIcon, icon);
+}
+
+void CGisItemRte::setName(const QString& str)
+{
+    setText(CGisListWks::eColumnName, str);
+    rte.name = str;
+    changed(QObject::tr("Changed name."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemRte::setComment(const QString& str)
@@ -581,11 +595,11 @@ struct maneuver_t
     QStringList streets;
     QString instruction;
     quint32 time;
-    qreal   dist;
+    qreal dist;
 };
 
 void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
-{    
+{
     lastRoutedTime = QDateTime::currentDateTimeUtc();
     lastRoutedWith = "MapQuest" + options;
 

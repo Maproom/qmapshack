@@ -21,9 +21,6 @@
      </property>
      <item>
       <widget class="QToolButton" name="toolEditDetails">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
        <property name="toolTip">
         <string>View details and edit.</string>
        </property>

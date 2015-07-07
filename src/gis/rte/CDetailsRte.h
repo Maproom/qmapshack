@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,39 +16,32 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTRTE_H
-#define CSCROPTRTE_H
+#ifndef CDETAILSRTE_H
+#define CDETAILSRTE_H
 
-#include "gis/IGisItem.h"
-#include "mouse/IScrOpt.h"
-
-#include "ui_IScrOptRte.h"
-#include <QWidget>
+#include "ui_IDetailsRte.h"
+#include <QDialog>
 
 class CGisItemRte;
-class IMouse;
 
-class CScrOptRte : public IScrOpt, private Ui::IScrOptRte
+class CDetailsRte : public QDialog, private Ui::IDetailsRte
 {
     Q_OBJECT
 public:
-    CScrOptRte(CGisItemRte * rte, const QPoint &point, IMouse *parent);
-    virtual ~CScrOptRte();
-
-    void draw(QPainter& p);
+    CDetailsRte(CGisItemRte& rte, QWidget * parent);
+    virtual ~CDetailsRte();
 
 private slots:
-    void slotEditDetails();
-    void slotDelete();
-    void slotCopy();
-    void slotCalc();
-    void slotReset();
-    void slotEdit();
+    void slotChangeReadOnlyMode(bool on);
+    void slotLinkActivated(const QUrl& url);
+    void slotLinkActivated(const QString& link);
+    void setupGui();
 
 private:
-    IGisItem::key_t key;
-    QPointF anchor;
+    CGisItemRte& rte;
+
+    bool originator;
 };
 
-#endif //CSCROPTRTE_H
+#endif //CDETAILSRTE_H
 

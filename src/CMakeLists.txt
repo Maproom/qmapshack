@@ -163,11 +163,12 @@ set( SRCS
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
     gis/rte/CCreateRouteFromWpt.cpp
+    gis/rte/CDetailsRte.cpp
     gis/rte/router/IRouter.cpp
     gis/rte/router/CRouterSetup.cpp
     gis/rte/router/CRouterRoutino.cpp
     gis/rte/router/CRouterMapQuest.cpp
-    gis/rte/router/CRouterRoutinoPathSetup.cpp    
+    gis/rte/router/CRouterRoutinoPathSetup.cpp        
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
     gis/ovl/CDetailsOvlArea.cpp    
@@ -357,11 +358,12 @@ set( HDRS
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
     gis/rte/CCreateRouteFromWpt.h
+    gis/rte/CDetailsRte.h
     gis/rte/router/IRouter.h
     gis/rte/router/CRouterSetup.h
     gis/rte/router/CRouterRoutino.h
     gis/rte/router/CRouterMapQuest.h
-    gis/rte/router/CRouterRoutinoPathSetup.h
+    gis/rte/router/CRouterRoutinoPathSetup.h    
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
     gis/ovl/CDetailsOvlArea.h    
@@ -463,10 +465,11 @@ set( UIS
     gis/trk/filter/IFilterSpeed.ui
     gis/rte/IScrOptRte.ui
     gis/rte/ICreateRouteFromWpt.ui
+    gis/rte/IDetailsRte.ui
     gis/rte/router/IRouterSetup.ui
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterMapQuest.ui
-    gis/rte/router/IRouterRoutinoPathSetup.ui
+    gis/rte/router/IRouterRoutinoPathSetup.ui    
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui

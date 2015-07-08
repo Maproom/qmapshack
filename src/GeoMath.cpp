@@ -357,9 +357,14 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
 {
     const qint32 count = points.size();
 
-    QPointF b = points[0];
+    if(count == 0)
+    {
+        return NOFLOAT;
+    }
+
+    QPointF b   = points[0];
     QPointF dbq = b - q;
-    qreal dist = sqrlen(dbq);
+    qreal dist  = sqrlen(dbq);
 
     for (qint32 i = 1; i<count; ++i)
     {

@@ -1922,7 +1922,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
     quint32 idx = 0;
     const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
 
-    if(pt != NOPOINT)
+    if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)
     {
         /*
             Iterate over the polyline used to draw the track as it contains screen
@@ -1931,11 +1931,10 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
             In a second step we have to iterate over all segments and points of the trk_t object
             until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
             getTrkPtByTotalIndex(). Depending on the current mode.
-        */
-        qreal d = GPS_Math_DistPointPolyline(line, pt);
+         */
 
-        quint32 i = 0;
-        qint32 d1 = NOINT;
+        quint32 i   = 0;
+        qint32 d1   = NOINT;
         foreach(const QPointF &point, line)
         {
             int tmp = (pt - point).manhattanLength();
@@ -1947,10 +1946,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
             i++;
         }
 
-        if(mode == eModeNormal && d < MIN_DIST_FOCUS)
-        {
-            newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
-        }
+        newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
     }
     if(!publishMouseFocus(newPointOfFocus, fmode, owner))
     {

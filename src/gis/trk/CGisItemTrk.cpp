@@ -36,7 +36,7 @@
 #define ASCEND_THRESHOLD    5
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
-#define MIN_DIST_FOCUS      40
+#define MIN_DIST_FOCUS      200
 
 #define WPT_FOCUS_DIST_IN   (50*50)
 #define WPT_FOCUS_DIST_OUT  (200*200)
@@ -1932,21 +1932,42 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
             until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
             getTrkPtByTotalIndex(). Depending on the current mode.
          */
-
-        quint32 i = 0;
-        qint32 d  = NOINT;
-        foreach(const QPointF &point, line)
+        qreal d = MIN_DIST_FOCUS;
+        const int N = line.size() - 1;
+        for(qint32 i = 0; i < N; i++)
         {
-            int tmp = (pt - point).manhattanLength();
-            if(tmp < d)
+            qreal d1 = GPS_Math_DistPointPolyline(line.mid(i,2), pt);
+            if(d1 < d)
             {
+                const QPointF& pt1 = line[i];
+                const QPointF& pt2 = line[i+1];
+
+                qreal x1 = pt1.x();
+                qreal y1 = pt1.y();
+                qreal x2 = pt2.x();
+                qreal y2 = pt2.y();
+
+                d = d1;
                 idx = i;
-                d   = tmp;
+
+                if(qAbs(x2 - x1) > qAbs(y2 - y1))
+                {
+                    if(qAbs(pt1.x() - pt.x()) > qAbs(pt2.x() - pt.x()))
+                    {
+                        idx++;
+                    }
+                }
+                else
+                {
+                    if(qAbs(pt1.y() - pt.y()) > qAbs(pt2.y() - pt.y()))
+                    {
+                        idx++;
+                    }
+                }
             }
-            i++;
         }
 
-        if(mode == eModeNormal || d < MIN_DIST_FOCUS)
+        if(mode == eModeNormal && d < MIN_DIST_FOCUS)
         {
             newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
         }

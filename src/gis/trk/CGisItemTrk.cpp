@@ -1931,40 +1931,20 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
             In a second step we have to iterate over all segments and points of the trk_t object
             until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
             getTrkPtByTotalIndex(). Depending on the current mode.
-         */
-        qreal d = MIN_DIST_FOCUS;
-        const int N = line.size() - 1;
-        for(qint32 i = 0; i < N; i++)
+        */
+        qreal d = GPS_Math_DistPointPolyline(line, pt);
+
+        quint32 i = 0;
+        qint32 d1 = NOINT;
+        foreach(const QPointF &point, line)
         {
-            qreal d1 = GPS_Math_DistPointPolyline(line.mid(i,2), pt);
-            if(d1 < d)
+            int tmp = (pt - point).manhattanLength();
+            if(tmp < d1)
             {
-                const QPointF& pt1 = line[i];
-                const QPointF& pt2 = line[i+1];
-
-                qreal x1 = pt1.x();
-                qreal y1 = pt1.y();
-                qreal x2 = pt2.x();
-                qreal y2 = pt2.y();
-
-                d = d1;
                 idx = i;
-
-                if(qAbs(x2 - x1) > qAbs(y2 - y1))
-                {
-                    if(qAbs(pt1.x() - pt.x()) > qAbs(pt2.x() - pt.x()))
-                    {
-                        idx++;
-                    }
-                }
-                else
-                {
-                    if(qAbs(pt1.y() - pt.y()) > qAbs(pt2.y() - pt.y()))
-                    {
-                        idx++;
-                    }
-                }
+                d1  = tmp;
             }
+            i++;
         }
 
         if(mode == eModeNormal && d < MIN_DIST_FOCUS)

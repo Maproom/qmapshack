@@ -46,9 +46,6 @@ struct T_DataSet
     Relations *OSMRelations;
 };
 
-static Results *CalculateRoute(Nodes *nodes,Segments *segments,Ways *ways,Relations *relations,Profile *profile,
-                               index_t start_node,index_t prev_segment,index_t finish_node,
-                               int start_waypoint,int finish_waypoint);
 
 int RoutinoInit(const char *profiles, const char *translations)
 {
@@ -57,12 +54,12 @@ int RoutinoInit(const char *profiles, const char *translations)
         return 0;
     }
 
-    if(ParseXMLProfiles(profiles))
+    if(ParseXMLProfiles(profiles, NULL, 1))
     {
         return -1;
     }
 
-    if(ParseXMLTranslations(translations, NULL))
+    if(ParseXMLTranslations(translations, NULL, 1))
     {
         return -1;
     }
@@ -267,160 +264,3 @@ extern void RoutinoFreeRoute(T_RoutinoRoute * route)
 
 // ---------------------- stop API ------------------------------
 
-static Results *CalculateRoute(Nodes *nodes,Segments *segments,Ways *ways,Relations *relations,Profile *profile,
-                               index_t start_node,index_t prev_segment,index_t finish_node,
-                               int start_waypoint,int finish_waypoint)
-{
-    Results *complete=NULL;
-
-    /* A special case if the first and last nodes are the same */
-
-    if(start_node==finish_node)
-    {
-        index_t fake_segment;
-        Result *result1,*result2;
-
-        complete=NewResultsList(8);
-
-        if(prev_segment==NO_SEGMENT)
-        {
-            double lat,lon;
-            distance_t distmin,dist1,dist2;
-            index_t node1,node2;
-
-            GetLatLong(nodes,start_node,NULL,&lat,&lon);
-
-            prev_segment=FindClosestSegment(nodes,segments,ways,lat,lon,1,profile,&distmin,&node1,&node2,&dist1,&dist2);
-        }
-
-        fake_segment=CreateFakeNullSegment(segments,start_node,prev_segment,finish_waypoint);
-
-        result1=InsertResult(complete,start_node,prev_segment);
-        result2=InsertResult(complete,finish_node,fake_segment);
-
-        result1->next=result2;
-
-        complete->start_node=start_node;
-        complete->prev_segment=prev_segment;
-
-        complete->finish_node=finish_node;
-        complete->last_segment=fake_segment;
-    }
-    else
-    {
-        Results *begin;
-
-        /* Calculate the beginning of the route */
-
-        begin=FindStartRoutes(nodes,segments,ways,relations,profile,start_node,prev_segment,finish_node);
-
-        if(begin)
-        {
-            /* Check if the end of the route was reached */
-
-            if(begin->finish_node!=NO_NODE)
-            {
-                complete=begin;
-            }
-        }
-        else
-        {
-            if(prev_segment!=NO_SEGMENT)
-            {
-                /* Try again but allow a U-turn at the start waypoint -
-                   this solves the problem of facing a dead-end that contains no super-nodes. */
-
-                prev_segment=NO_SEGMENT;
-
-                begin=FindStartRoutes(nodes,segments,ways,relations,profile,start_node,prev_segment,finish_node);
-            }
-
-            if(begin)
-            {
-                /* Check if the end of the route was reached */
-
-                if(begin->finish_node!=NO_NODE)
-                {
-                    complete=begin;
-                }
-            }
-            else
-            {
-                fprintf(stderr,"Error: Cannot find initial section of route compatible with profile.\n");
-                exit(EXIT_FAILURE);
-            }
-        }
-
-        /* Calculate the rest of the route */
-
-        if(!complete)
-        {
-            Results *middle,*end;
-
-            /* Calculate the end of the route */
-
-            end=FindFinishRoutes(nodes,segments,ways,relations,profile,finish_node);
-
-            if(!end)
-            {
-                fprintf(stderr,"Error: Cannot find final section of route compatible with profile.\n");
-                exit(EXIT_FAILURE);
-            }
-
-            /* Calculate the middle of the route */
-
-            middle=FindMiddleRoute(nodes,segments,ways,relations,profile,begin,end);
-
-            if(!middle && prev_segment!=NO_SEGMENT)
-            {
-                /* Try again but allow a U-turn at the start waypoint -
-                   this solves the problem of facing a dead-end that contains some super-nodes. */
-
-                FreeResultsList(begin);
-
-                begin=FindStartRoutes(nodes,segments,ways,relations,profile,start_node,NO_SEGMENT,finish_node);
-
-                if(begin)
-                {
-                    middle=FindMiddleRoute(nodes,segments,ways,relations,profile,begin,end);
-                }
-            }
-
-            if(!middle)
-            {
-                fprintf(stderr,"Error: Cannot find super-route compatible with profile.\n");
-                exit(EXIT_FAILURE);
-            }
-
-            complete=CombineRoutes(nodes,segments,ways,relations,profile,begin,middle,end);
-
-            if(!complete)
-            {
-                fprintf(stderr,"Error: Cannot create combined route following super-route.\n");
-                exit(EXIT_FAILURE);
-            }
-
-            FreeResultsList(begin);
-            FreeResultsList(middle);
-            FreeResultsList(end);
-        }
-    }
-
-    complete->start_waypoint=start_waypoint;
-    complete->finish_waypoint=finish_waypoint;
-
-#if DEBUG
-    Result *r=FindResult(complete,complete->start_node,complete->prev_segment);
-
-    printf("The final route is:\n");
-
-    while(r)
-    {
-        printf("  node=%"Pindex_t " segment=%"Pindex_t " score=%f\n",r->node,r->segment,r->score);
-
-        r=r->next;
-    }
-#endif
-
-    return complete;
-}

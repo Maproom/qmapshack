@@ -1010,7 +1010,7 @@ void CGisItemTrk::deriveSecondaryData()
 void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& current, quint32 total)
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project == 0)
+    if((project == 0) || (total > 20000000))
     {
         return;
     }

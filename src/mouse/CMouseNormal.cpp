@@ -306,7 +306,11 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
             break;
         }
 
-        screenItemOption->draw(p);
+        // the screen option might not be destroyed yet, but already hidden
+        if(screenItemOption->isVisible())
+        {
+            screenItemOption->draw(p);
+        }
         break;
     }
 

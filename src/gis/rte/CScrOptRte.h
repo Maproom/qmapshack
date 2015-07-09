@@ -44,6 +44,7 @@ private slots:
     void slotCalc();
     void slotReset();
     void slotEdit();
+    void slotInstruction(bool on);
 
 private:
     IGisItem::key_t key;

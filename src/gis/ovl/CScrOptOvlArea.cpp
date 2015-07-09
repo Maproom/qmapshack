@@ -54,6 +54,7 @@ CScrOptOvlArea::~CScrOptOvlArea()
 
 void CScrOptOvlArea::slotEditDetails()
 {
+    hide();
     CGisWidget::self().editItemByKey(key);
     deleteLater();
 }

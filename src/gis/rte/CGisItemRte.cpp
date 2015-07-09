@@ -39,6 +39,7 @@ IGisItem::key_t CGisItemRte::keyUserFocus;
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
@@ -77,6 +78,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     : IGisItem(parent, eTypeRte, parent->childCount())
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
@@ -92,6 +94,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
 CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
@@ -103,6 +106,7 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeRte, NOIDX)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
@@ -112,6 +116,7 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
 CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *project, int idx)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
 {
@@ -126,6 +131,11 @@ CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *pr
 
 CGisItemRte::~CGisItemRte()
 {
+    // reset user focus if focused on this track
+    if(key == keyUserFocus)
+    {
+        keyUserFocus.clear();
+    }
 }
 
 void CGisItemRte::deriveSecondaryData()
@@ -295,16 +305,6 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 
 bool CGisItemRte::isCloseTo(const QPointF& pos)
 {
-//    foreach(const QPointF &pt, line)
-//    {
-//        if((pt - pos).manhattanLength() < 10)
-//        {
-//            return true;
-//        }
-//    }
-
-//    return false;
-
     qreal dist = GPS_Math_DistPointPolyline(line, pos);
     return dist < 20;
 }
@@ -313,6 +313,16 @@ void CGisItemRte::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : key_t();
 }
+
+
+void CGisItemRte::looseUserFocus()
+{
+    if(keyUserFocus == key)
+    {
+        keyUserFocus.clear();
+    }
+}
+
 
 
 void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
@@ -376,8 +386,8 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
     }
 
-    p.setPen(penForeground);
-    p.setBrush(penForeground.color());
+    p.setPen(hasUserFocus() ? penForegroundFocus : penForeground);
+    p.setBrush(hasUserFocus() ? penForegroundFocus.color() : penForeground.color());
     drawArrows(line, extViewport, p);
     p.drawPolyline(line);
 
@@ -448,7 +458,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
 
 void CGisItemRte::drawHighlight(QPainter& p)
 {
-    if(line.isEmpty())
+    if(line.isEmpty() || hasUserFocus())
     {
         return;
     }

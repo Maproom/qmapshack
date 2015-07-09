@@ -137,10 +137,12 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
 
-    menuItemRte     = new QMenu(this);
+    menuItemRte     = new QMenu(this);    
     menuItemRte->addAction(actionEditDetails);
     menuItemRte->addAction(actionCopyItem);
     menuItemRte->addSeparator();
+    actionFocusRte  = menuItemRte->addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"));
+    actionFocusRte->setCheckable(true);
     actionCalcRte   = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"), tr("Calculate Route"), this, SLOT(slotCalcRte()));
     actionResetRte  = menuItemRte->addAction(QIcon("://icons/32x32/Reset.png"), tr("Reset Route"), this, SLOT(slotResetRte()));
     actionEditRte   = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"), this, SLOT(slotEditRte()));
@@ -165,6 +167,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
 
     connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
+    connect(actionFocusRte, SIGNAL(triggered(bool)), this, SLOT(slotFocusRte(bool)));
     connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));
 
     SETTINGS;
@@ -926,6 +929,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 break;
 
             case IGisItem::eTypeRte:
+                actionFocusRte->setChecked(gisItem->hasUserFocus());
                 menuItemRte->exec(p);
                 break;
 
@@ -1270,6 +1274,16 @@ void CGisListWks::slotRangeTrk()
     if(gisItem != 0)
     {
         CGisWidget::self().rangeTrkByKey(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotFocusRte(bool on)
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
+    if(gisItem != 0)
+    {
+        CGisWidget::self().focusRteByKey(on, gisItem->getKey());
     }
 }
 

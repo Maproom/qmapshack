@@ -70,6 +70,7 @@ void CScrOptWpt::slotDelete()
 
 void CScrOptWpt::slotEdit()
 {
+    hide();
     CGisWidget::self().editItemByKey(key);
     deleteLater();
 }

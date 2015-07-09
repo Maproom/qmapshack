@@ -111,7 +111,41 @@ public:
     void drawHighlight(QPainter& p);
     void save(QDomNode& gpx);
     bool isCloseTo(const QPointF& pos);
+    /**
+       @brief Switch user focus on and off.
+
+       If the focus is switched on any other route having the focus will loose it.
+
+       @param yes   set true to gain focus.
+     */
     void gainUserFocus(bool yes);
+    /**
+       @brief Make sure the route has lost focus.
+
+       If the route has the focus, keyUserFocus will be reset. In all other cases nothing will be done.
+
+     */
+    void looseUserFocus();
+    /**
+       @brief Check for user focus
+
+       @return True if the route has user focus
+     */
+    bool hasUserFocus() const
+    {
+        return key == keyUserFocus;
+    }
+
+    /**
+       @brief Get the key of the current track with user focus
+
+       @return If no route has the focus an empty string is returned
+     */
+    static const key_t& getKeyUserFocus()
+    {
+        return keyUserFocus;
+    }
+
 
     void setDataFromPolyline(const SGisLine& l);
 
@@ -154,6 +188,7 @@ private:
 
     static const QPen penBackground;
     QPen penForeground;
+    QPen penForegroundFocus;
 
     rte_t rte;
     QPolygonF line;

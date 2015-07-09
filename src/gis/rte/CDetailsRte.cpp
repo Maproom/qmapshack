@@ -39,7 +39,7 @@ CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget *parent)
 
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(labelInfo, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 }
@@ -69,7 +69,7 @@ void CDetailsRte::setupGui()
     }
 
 
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", rte.getName(), ""));
+    labelInfo->setText(rte.getInfo(true));
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, rte.getComment(), rte.getDescription(), rte.getLinks()));

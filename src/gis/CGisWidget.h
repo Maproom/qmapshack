@@ -248,6 +248,8 @@ public:
      */
     void focusTrkByKey(bool yes, const IGisItem::key_t &key);
 
+    void focusRteByKey(bool yes, const IGisItem::key_t &key);
+
 
     void cutTrkByKey(const IGisItem::key_t &key);
 

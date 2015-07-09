@@ -35,6 +35,8 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     label->setText(rte->getInfo());
     adjustSize();
 
+    toolInstruction->setChecked(rte->hasUserFocus());
+
     anchor = rte->getPointCloseBy(point);
     if((anchor - point).manhattanLength() > 50)
     {
@@ -49,6 +51,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     connect(toolCalc, SIGNAL(clicked()), this, SLOT(slotCalc()));
     connect(toolReset, SIGNAL(clicked()), this, SLOT(slotReset()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
+    connect(toolInstruction, SIGNAL(toggled(bool)), this, SLOT(slotInstruction(bool)));
 }
 
 CScrOptRte::~CScrOptRte()
@@ -57,6 +60,7 @@ CScrOptRte::~CScrOptRte()
 
 void CScrOptRte::slotEditDetails()
 {
+    hide();
     CGisWidget::self().editItemByKey(key);
     deleteLater();
 }
@@ -90,6 +94,11 @@ void CScrOptRte::slotEdit()
     deleteLater();
 }
 
+void CScrOptRte::slotInstruction(bool on)
+{
+    CGisWidget::self().focusRteByKey(on, key);
+    deleteLater();
+}
 
 void CScrOptRte::draw(QPainter& p)
 {

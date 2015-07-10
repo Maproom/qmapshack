@@ -32,6 +32,13 @@ class CQlgtRoute;
 class CGisItemRte : public IGisItem, public IGisLine
 {
 public:
+
+    enum focusmode_e
+    {
+        eFocusMouseMove
+        ,eFocusMouseClick
+    };
+
     struct subpt_t
     {
         subpt_t()
@@ -175,6 +182,8 @@ public:
 
     void edit();
 
+    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner);
+
     void setResult(T_RoutinoRoute * route, const QString &options);
     void setResult(const QDomDocument& xml, const QString &options);
 
@@ -199,6 +208,8 @@ private:
     qreal totalDistance;
     QTime totalTime;
     quint32 totalDays;
+
+    const subpt_t * mouseMoveFocus;
 };
 
 #endif //CGISITEMRTE_H

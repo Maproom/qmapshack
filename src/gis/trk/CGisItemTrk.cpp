@@ -1711,7 +1711,7 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
 
 void CGisItemTrk::drawHighlight(QPainter& p)
 {
-    if(lineSimple.isEmpty() || (key == keyUserFocus))
+    if(lineSimple.isEmpty() || hasUserFocus())
     {
         return;
     }

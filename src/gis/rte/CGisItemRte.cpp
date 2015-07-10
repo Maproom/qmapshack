@@ -42,6 +42,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
+    , mouseMoveFocus(0)
 {
     *this = parentRte;
     key.project = project->getKey();
@@ -81,6 +82,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
+    , mouseMoveFocus(0)
 {
     // --- start read and process data ----
     readRte(xml, rte);
@@ -97,6 +99,7 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
+    , mouseMoveFocus(0)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -109,6 +112,7 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
+    , mouseMoveFocus(0)
 {
     loadFromDb(id, db);
 }
@@ -119,6 +123,7 @@ CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *pr
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
     , totalDays(NOINT)
+    , mouseMoveFocus(0)
 {
     rte.name = name;
     readRouteDataFromGisLine(l);
@@ -493,8 +498,6 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 
 void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 {
-//    delete dlgDetails;
-
     readRouteDataFromGisLine(l);
 
     flags |= eFlagTainted;
@@ -542,6 +545,51 @@ void CGisItemRte::reset()
 
     deriveSecondaryData();
     updateHistory();
+}
+
+
+QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner)
+{
+//    const trkpt_t * newPointOfFocus = 0;
+//    quint32 idx = 0;
+//    const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
+
+//    if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)
+//    {
+//        /*
+//            Iterate over the polyline used to draw the track as it contains screen
+//            coordinates. The polyline is a linear representation of the segments in the
+//            track. That is why the index into the polyline cant't be used directly.
+//            In a second step we have to iterate over all segments and points of the trk_t object
+//            until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
+//            getTrkPtByTotalIndex(). Depending on the current mode.
+//         */
+
+//        quint32 i   = 0;
+//        qint32 d1   = NOINT;
+//        foreach(const QPointF &point, line)
+//        {
+//            int tmp = (pt - point).manhattanLength();
+//            if(tmp < d1)
+//            {
+//                idx = i;
+//                d1  = tmp;
+//            }
+//            i++;
+//        }
+
+//        newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
+//    }
+//    if(!publishMouseFocus(newPointOfFocus, fmode, owner))
+//    {
+//        newPointOfFocus = 0;
+//    }
+
+//    /*
+//       Test for line size befor applying index. This fixes random assertions because
+//       of an invalid index. The reason for this is unknown.
+//     */
+//    return newPointOfFocus ? ((int)idx < line.size() ? line[idx] : NOPOINTF) : NOPOINTF;
 }
 
 void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
@@ -709,3 +757,5 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     deriveSecondaryData();
     updateHistory();
 }
+
+

@@ -122,6 +122,12 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
                 {
                     trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
                 }
+
+                CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+                if(rte != 0)
+                {
+                    rte->setMouseFocusByPoint(point, CGisItemRte::eFocusMouseMove, "CMouseNormal");
+                }
             }
             break;
         }
@@ -216,8 +222,11 @@ void CMouseNormal::mouseDoubleClickEvent(QMouseEvent *e)
 {
     if(stateItemSel == eStateIdle)
     {
-        const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
-        CGisWidget::self().focusTrkByKey(false, key);
+        const IGisItem::key_t& keyTrk = CGisItemTrk::getKeyUserFocus();
+        CGisWidget::self().focusTrkByKey(false, keyTrk);
+
+        const IGisItem::key_t& keyRte = CGisItemRte::getKeyUserFocus();
+        CGisWidget::self().focusRteByKey(false, keyRte);
     }
 }
 

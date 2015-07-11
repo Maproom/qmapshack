@@ -113,7 +113,7 @@ void CDetailsRte::slotLinkActivated(const QString& link)
 {
     if(link == "name")
     {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new ret name."), QLineEdit::Normal, rte.getName());
+        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new route name."), QLineEdit::Normal, rte.getName());
         if(name.isEmpty())
         {
             return;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>CCanvas</name>
     <message>
@@ -183,12 +183,12 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="82"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcete třídit cestovní body podél cesty, ale vypnul jste svázání cestovních bodů a cest (dání do vzájemného vztahu). Chcete je opět zapnout?</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="83"/>
         <source>Correlation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Svázání...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="474"/>
@@ -452,7 +452,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="133"/>
         <source>Show Bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat bublinu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="135"/>
@@ -467,22 +467,22 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Calculate Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Spočítat cestu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Reset Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit cestu znovu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="146"/>
         <source>Edit Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit cestu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Create Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit cestu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="608"/>
@@ -535,12 +535,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="708"/>
         <source>Saving workspace. Please wait.</source>
-        <translation>Ukládá se pohled. Počkejte, prosím.</translation>
+        <translation>Ukládá se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="750"/>
         <source>Loading workspace. Please wait.</source>
-        <translation>Nahrává se pohled. Počkejte, prosím.</translation>
+        <translation>Nahrává se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="952"/>
@@ -550,7 +550,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="952"/>
         <source>This will remove all projects from the workspace.</source>
-        <translation>Tímto budou všechny projekty odstraněny z pohledu.</translation>
+        <translation>Tímto budou všechny projekty odstraněny z pracovního prostoru.</translation>
     </message>
 </context>
 <context>
@@ -558,12 +558,12 @@
     <message>
         <location filename="../gis/CGisWidget.cpp" line="114"/>
         <source>Load project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrát projekt...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="114"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekt &quot;%1&quot; je již náhrán do pracovního prostoru.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="449"/>
@@ -1523,7 +1523,7 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Upravit oblast&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1531,7 +1531,7 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Upravit body cesty&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1543,17 +1543,17 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="39"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Upravit body cesty&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="81"/>
         <source>Warning!</source>
-        <translation type="unfinished">Varování!</translation>
+        <translation>Varování!</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="81"/>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished">Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
+        <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
 </context>
 <context>
@@ -1571,7 +1571,7 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat cestu</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="45"/>
@@ -1856,62 +1856,62 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="34"/>
         <source>Foot</source>
-        <translation type="unfinished"></translation>
+        <translation>Chodec</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="35"/>
         <source>Horse</source>
-        <translation type="unfinished"></translation>
+        <translation>Jezdec</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="36"/>
         <source>Wheelchair</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalidní vozík</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="37"/>
         <source>Bicycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Jízdní kolo</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="38"/>
         <source>Moped</source>
-        <translation type="unfinished"></translation>
+        <translation>Moped</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="39"/>
         <source>Motorcycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorka</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="40"/>
         <source>Motorcar</source>
-        <translation type="unfinished"></translation>
+        <translation>Automobil</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="41"/>
         <source>Goods</source>
-        <translation type="unfinished"></translation>
+        <translation>Nákladní automobil</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="43"/>
         <source>Shortest</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejkratší</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="44"/>
         <source>Quickest</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejrychlejší</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
         <source>profile &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
         <source>, mode &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>, režim &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -1919,12 +1919,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="40"/>
         <source>Add or remove paths containing Routino data. There can be multiple databases in a path but no sub-path is parsed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat nebo odstranit cesty obsahující data Routino. V cestě může být více databází, ale žádná podcesta není zpracována.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
         <source>Select routing data file path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat cestu k souboru s daty se stanovením cesty...</translation>
     </message>
     <message>
         <source>Select DEM file path...</source>
@@ -1936,12 +1936,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="36"/>
         <source>Routino (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino (nepřipojeno)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="37"/>
         <source>MapQuest (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>MapQuest (nepřipojeno)</translation>
     </message>
 </context>
 <context>
@@ -1949,23 +1949,23 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="30"/>
         <source>Create Routino Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit databázi Routino</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="61"/>
         <source>Select files...</source>
-        <translation type="unfinished">Vybrat soubory...</translation>
+        <translation>Vybrat soubory...</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="85"/>
         <source>Select target path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat cílovou cestu...</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="206"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished">Nepodařilo se!</translation>
+        <translation>Nepodařilo se!</translation>
     </message>
 </context>
 <context>
@@ -2189,13 +2189,13 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="14"/>
         <source>Create Route from Waypoints</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit cestu z cestovních bodů</translation>
     </message>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="30"/>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="50"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2463,22 +2463,22 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="71"/>
         <source>Keep order of project</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachovat pořadí projektu</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
         <source>Sort by time</source>
-        <translation type="unfinished"></translation>
+        <translation>Třídit podle času</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
         <source>Sort along track (multiple)</source>
-        <translation type="unfinished"></translation>
+        <translation>Třídit podle stopy (vícenásobně)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
         <source>Sort along track (single)</source>
-        <translation type="unfinished"></translation>
+        <translation>Třídit podle stopy (jednorázový)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
@@ -2815,12 +2815,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="51"/>
         <source>dd.MM.yy HH:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation>dd.MM.yy HH:mm:ss</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="61"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="81"/>
@@ -3248,7 +3248,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="222"/>
         <source>Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="256"/>
@@ -3285,7 +3285,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="436"/>
         <source>Save all projects in the workspace</source>
-        <translation>Uložit všechny projekty na pracovním místě</translation>
+        <translation>Uložit všechny projekty nacházející se v pracovním prostoru</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="439"/>
@@ -3325,7 +3325,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="499"/>
         <source>Setup Workspace</source>
-        <translation>Nastavit pohled</translation>
+        <translation>Nastavit pracovní prostor</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="502"/>
@@ -3390,17 +3390,17 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="583"/>
         <source>Clone Map View</source>
-        <translation type="unfinished"></translation>
+        <translation>Klonovat pohled na mapu</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="586"/>
         <source>Ctrl+Shift+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="595"/>
         <source>Create Routino Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit databázi Routino</translation>
     </message>
     <message>
         <source>Setup Database</source>
@@ -3793,12 +3793,12 @@ nebo
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="20"/>
         <source>t.b.d</source>
-        <translation type="unfinished"></translation>
+        <translation>t.b.d</translation>
     </message>
 </context>
 <context>
@@ -3806,37 +3806,37 @@ nebo
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="31"/>
         <source>Profile</source>
-        <translation type="unfinished">Profil</translation>
+        <translation>Profil</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="38"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="45"/>
         <source>Database</source>
-        <translation type="unfinished">Databáze</translation>
+        <translation>Databáze</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="52"/>
         <source>Add paths with Routino database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat cestu pomocí databáze Routino.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="55"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="121"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro použití stanovení cesty bez připojení k internetu je potřeba stanovit cesty k místním datům se stanovením cest. Použijte nástrojové tlačítko pro nastavení k zaregistrování cesty.</translation>
     </message>
 </context>
 <context>
@@ -3844,18 +3844,18 @@ nebo
     <message>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="14"/>
         <source>Setup Routino database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit databázi Routino...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="27"/>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="47"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="99"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -3863,7 +3863,7 @@ nebo
     <message>
         <location filename="../gis/rte/router/IRouterSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
 </context>
 <context>
@@ -3871,38 +3871,38 @@ nebo
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="22"/>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="39"/>
         <source>Select source files:</source>
-        <translation type="unfinished">Vybrat zdrojové soubory:</translation>
+        <translation>Vybrat zdrojové soubory:</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="54"/>
         <source>Start</source>
-        <translation type="unfinished">Spustit</translation>
+        <translation>Spustit</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="86"/>
         <source>Target Path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cílová cesta:</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="93"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
         <source>File Prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>Předpona souboru</translation>
     </message>
 </context>
 <context>
@@ -3930,7 +3930,7 @@ nebo
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="102"/>
         <source>Move points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout body.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="105"/>
@@ -3940,62 +3940,62 @@ nebo
         <location filename="../mouse/line/IScrOptEditLine.ui" line="280"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="125"/>
         <source>Add new points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat nové body.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="145"/>
         <source>Select a range of points.</source>
-        <translation type="unfinished">Vybrat rozsah bodů.</translation>
+        <translation>Vybrat rozsah bodů.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="165"/>
         <source>Delete a point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat bod.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="216"/>
         <source>No auto-routing or line snapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádné automatické stanovení cesty nebo přichycení k čáře</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="219"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="232"/>
         <source>Use auto-routing to between points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít automatické stanovení cesty mezi body.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="235"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>Snap line along lines of a vector map.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přichytit čáru podél čáry vektorové mapy.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="251"/>
         <source>V</source>
-        <translation type="unfinished"></translation>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="277"/>
         <source>Undo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrátit poslední změnu zpět</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
         <source>Redo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit poslední změnu</translation>
     </message>
 </context>
 <context>
@@ -4008,7 +4008,7 @@ nebo
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit podrobnosti a upravit.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="43"/>
@@ -4026,12 +4026,12 @@ nebo
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
         <source>Delete area from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat oblast z projektu.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="89"/>
         <source>Edit shape of the area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit tvar oblasti.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="121"/>
@@ -4104,23 +4104,23 @@ nebo
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="20"/>
         <source>Delete all points between the first and last one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat všechny body mezi prvním a posledním bodem.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="23"/>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="37"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="34"/>
         <source>Caclculate a route between the first and last selected point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypočítat cestu mezi prvním a posledním vybraným bodem.</translation>
     </message>
 </context>
 <context>
@@ -4191,27 +4191,27 @@ nebo
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="28"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit podrobnosti a upravit.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
         <source>Delete route from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat cestu z projektu.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="77"/>
         <source>Calculate route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spočítat cestu.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
         <source>Reset route calculation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vynulovat spočítání cesty.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="105"/>
         <source>Move route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout body cesty.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
@@ -4257,12 +4257,12 @@ nebo
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details and edit properties of track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit podrobnosti a upravit vlastnosti stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
         <source>Delete track from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat stopu z projektu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
@@ -4320,7 +4320,7 @@ nebo
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
         <source>View details and edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit podrobnosti a upravit.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
@@ -4340,22 +4340,22 @@ nebo
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
         <source>Delete waypoint from project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat cestovní bod z projektu.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
         <source>Show content as static bubble.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat obsah stálé vysvětlivky.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
         <source>Move waypoint to a new location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout cestovní bod do nového umístění.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klonovat cestovní bod a kopii přesunout o danou vzdálenost a ve stanoveném úhlu.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4680,12 +4680,12 @@ nebo
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="14"/>
         <source>Setup workspace...</source>
-        <translation>Nastavit pracovní oblast...</translation>
+        <translation>Nastavit pracovní prostor...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="35"/>
         <source>save workspace on exit, and every</source>
-        <translation>Uložit pracovní oblast při ukončení, a každých</translation>
+        <translation>Uložit pracovní prostor při ukončení, a každých</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="45"/>
@@ -4867,17 +4867,17 @@ nebo
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="75"/>
         <source>Print date/time in </source>
-        <translation type="unfinished"></translation>
+        <translation>Datum/Čas v </translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="82"/>
         <source>long format, or</source>
-        <translation type="unfinished"></translation>
+        <translation>dlouhém formátu nebo</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="92"/>
         <source>short format</source>
-        <translation type="unfinished"></translation>
+        <translation>v krátkém formátu</translation>
     </message>
 </context>
 <context>
@@ -4996,22 +4996,22 @@ Oblasti: %1</translation>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="211"/>
         <source>%1: Correlate tracks and waypoints.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Svázat stopy a cestovní body.</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="211"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Přerušit</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="223"/>
         <source>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project (%1) in the future?</source>
-        <translation type="unfinished"></translation>
+        <translation>Trvalo to moc dlouho? Chcete svázání stop a cestovních bodů pro tento projekt (%1) přeskočit i v budoucnu?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="224"/>
         <source>Cancelled correlation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Svázání zrušeno...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="302"/>
@@ -5481,37 +5481,37 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="231"/>
         <source>Length: -</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="239"/>
         <source>Time: %2 days %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Výsledný čas: %2 dnů %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="248"/>
         <source>Time: -</source>
-        <translation type="unfinished"></translation>
+        <translation>Výsledný čas: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="254"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslední spočítání cesty:&lt;br/&gt;%1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="256"/>
         <source>with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>s %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="258"/>
         <source>Calculation took %1 sec.</source>
-        <translation type="unfinished"></translation>
+        <translation>Výpočet trval %1 s.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="479"/>
         <source>Changed route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněné body cesty.</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="599"/>
@@ -5721,7 +5721,7 @@ Název souboru: %1</translation>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="109"/>
         <source>Enter new route name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadat název nové cesty.</translation>
     </message>
 </context>
 </TS>

@@ -54,6 +54,7 @@ public:
         enum type_e
         {
             eTypeNone
+            , eTypeWpt
             , eTypeJunct
         };
 
@@ -72,9 +73,17 @@ public:
 
     struct rtept_t : public wpt_t
     {
+        rtept_t()
+        {
+            fakeSubpt.type = subpt_t::eTypeWpt;
+        }
+
+
         QPixmap icon;
         QPointF focus;
         QVector<subpt_t> subpts;
+
+        subpt_t fakeSubpt;
     };
 
     struct rte_t

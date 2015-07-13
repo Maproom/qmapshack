@@ -354,8 +354,8 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         gis->convertRad2Px(pt);
 
-        line << pt;
-        points << 1;
+        line    << pt;
+        points  << 1;
 
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
         foreach(const subpt_t &subpt, rtept.subpts)
@@ -425,14 +425,10 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
     if(hasUserFocus() && mouseMoveFocus)
     {
-
         QPointF anchor(mouseMoveFocus->lon, mouseMoveFocus->lat);
         anchor *= DEG_TO_RAD;
         gis->convertRad2Px(anchor);
-
         p.drawEllipse(anchor, 5, 5);
-
-
     }
 }
 
@@ -585,7 +581,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         foreach(const QPointF &point, line)
         {
             int tmp = (pt - point).manhattanLength();
-            if(tmp < d1)
+            if(tmp <= d1)
             {
                 idx = i;
                 d1  = tmp;
@@ -596,10 +592,11 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         newPointOfFocus = getSubPtByIndex(idx);
     }
 
-    if(newPointOfFocus && (newPointOfFocus->type != subpt_t::eTypeJunct))
+    if(newPointOfFocus && (newPointOfFocus->type == subpt_t::eTypeNone))
     {
         newPointOfFocus = 0;
     }
+
 
     mouseMoveFocus = newPointOfFocus;
 
@@ -616,10 +613,15 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
             continue;
         }
 
-        if(idx >= (cnt + rtept.subpts.size()))
+        if(idx > (cnt + rtept.subpts.size()))
         {
-            cnt += rtept.subpts.size();
+            cnt += rtept.subpts.size() + 1;
             continue;
+        }
+
+        if(idx == cnt)
+        {
+            return &rtept.fakeSubpt;
         }
 
         return &rtept.subpts[idx - cnt - 1];
@@ -641,9 +643,16 @@ void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
             idxRtept++;
             rtept = &rte.pts[idxRtept];
             rtept->subpts.clear();
-        }
+            rtept->fakeSubpt.lon       = next->lon * RAD_TO_DEG;
+            rtept->fakeSubpt.lat       = next->lat * RAD_TO_DEG;
 
-        if(rtept != 0)
+            rtept->fakeSubpt.turn      = next->turn;
+            rtept->fakeSubpt.bearing   = next->bearing;
+            rtept->fakeSubpt.distance  = next->dist;
+            rtept->fakeSubpt.time      = QTime(0,0).addSecs(next->time/10);
+            rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
+        }
+        else if(rtept != 0)
         {
             rtept->subpts << subpt_t();
             subpt_t& subpt  = rtept->subpts.last();
@@ -786,9 +795,16 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         quint32 idx1 = idxLegs[i];
         quint32 idx2 = idxLegs[i+1];
 
-        rtept_t& rtept = rte.pts[i];
-        rtept.subpts = shape.mid(idx1, idx2 - idx1 + 1);
+        rtept_t& rtept      = rte.pts[i];
+        rtept.subpts        = shape.mid(idx1, idx2 - idx1 + 1);
+        rtept.fakeSubpt.lon = rtept.lon;
+        rtept.fakeSubpt.lat = rtept.lat;
     }
+
+    rtept_t& rtept = rte.pts.last();
+    rtept.fakeSubpt.lon = rtept.lon;
+    rtept.fakeSubpt.lat = rtept.lat;
+
 
     deriveSecondaryData();
     updateHistory();

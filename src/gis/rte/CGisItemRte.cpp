@@ -35,6 +35,8 @@
 const QPen CGisItemRte::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 IGisItem::key_t CGisItemRte::keyUserFocus;
 
+#define MIN_DIST_FOCUS 200
+
 /// used to create a copy of route with new parent
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
@@ -414,6 +416,26 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 }
 
+void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+{
+    if(rte.pts.isEmpty())
+    {
+        return;
+    }
+
+    if(hasUserFocus() && mouseMoveFocus)
+    {
+
+        QPointF anchor(mouseMoveFocus->lon, mouseMoveFocus->lat);
+        anchor *= DEG_TO_RAD;
+        gis->convertRad2Px(anchor);
+
+        p.drawEllipse(anchor, 5, 5);
+
+
+    }
+}
+
 void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
     if(!isVisible(boundingRect, viewport, gis))
@@ -498,6 +520,8 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 
 void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 {
+    mouseMoveFocus = 0;
+
     readRouteDataFromGisLine(l);
 
     flags |= eFlagTainted;
@@ -505,7 +529,7 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 }
 
 void CGisItemRte::getPolylineFromData(SGisLine& l)
-{
+{        
     l.clear();
     foreach(const rtept_t &rtept, rte.pts)
     {
@@ -550,46 +574,58 @@ void CGisItemRte::reset()
 
 QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner)
 {
-//    const trkpt_t * newPointOfFocus = 0;
-//    quint32 idx = 0;
-//    const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
+    const subpt_t * newPointOfFocus = 0;
+    quint32 idx = 0;
 
-//    if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)
-//    {
-//        /*
-//            Iterate over the polyline used to draw the track as it contains screen
-//            coordinates. The polyline is a linear representation of the segments in the
-//            track. That is why the index into the polyline cant't be used directly.
-//            In a second step we have to iterate over all segments and points of the trk_t object
-//            until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
-//            getTrkPtByTotalIndex(). Depending on the current mode.
-//         */
+    if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)
+    {
+        quint32 i = 0;
+        qint32 d1 = NOINT;
 
-//        quint32 i   = 0;
-//        qint32 d1   = NOINT;
-//        foreach(const QPointF &point, line)
-//        {
-//            int tmp = (pt - point).manhattanLength();
-//            if(tmp < d1)
-//            {
-//                idx = i;
-//                d1  = tmp;
-//            }
-//            i++;
-//        }
+        foreach(const QPointF &point, line)
+        {
+            int tmp = (pt - point).manhattanLength();
+            if(tmp < d1)
+            {
+                idx = i;
+                d1  = tmp;
+            }
+            i++;
+        }
 
-//        newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
-//    }
-//    if(!publishMouseFocus(newPointOfFocus, fmode, owner))
-//    {
-//        newPointOfFocus = 0;
-//    }
+        newPointOfFocus = getSubPtByIndex(idx);
+    }
 
-//    /*
-//       Test for line size befor applying index. This fixes random assertions because
-//       of an invalid index. The reason for this is unknown.
-//     */
-//    return newPointOfFocus ? ((int)idx < line.size() ? line[idx] : NOPOINTF) : NOPOINTF;
+    if(newPointOfFocus && (newPointOfFocus->type != subpt_t::eTypeJunct))
+    {
+        newPointOfFocus = 0;
+    }
+
+    mouseMoveFocus = newPointOfFocus;
+
+    return newPointOfFocus ? ((int)idx < line.size() ? line[idx] : NOPOINTF) : NOPOINTF;
+}
+
+const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
+{
+    quint32 cnt = 0;
+    foreach(const rtept_t& rtept, rte.pts)
+    {
+        if(rtept.subpts.isEmpty())
+        {
+            continue;
+        }
+
+        if(idx >= (cnt + rtept.subpts.size()))
+        {
+            cnt += rtept.subpts.size();
+            continue;
+        }
+
+        return &rtept.subpts[idx - cnt - 1];
+    }
+
+    return 0;
 }
 
 void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)

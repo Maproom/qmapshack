@@ -114,16 +114,20 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         case eStateHooverSingle:
         case eStateHooverMultiple:
         {
-            const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
-            if(!key.item.isEmpty())
+            const IGisItem::key_t& keyTrk = CGisItemTrk::getKeyUserFocus();
+            if(!keyTrk.item.isEmpty())
             {
-                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(keyTrk));
                 if(trk != 0)
                 {
                     trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
                 }
+            }
 
-                CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+            const IGisItem::key_t& keyRte = CGisItemRte::getKeyUserFocus();
+            if(!keyRte.item.isEmpty())
+            {
+                CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(keyRte));
                 if(rte != 0)
                 {
                     rte->setMouseFocusByPoint(point, CGisItemRte::eFocusMouseMove, "CMouseNormal");

@@ -114,6 +114,7 @@ public:
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& screenPos);
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
     void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
     void drawHighlight(QPainter& p);
     void save(QDomNode& gpx);
@@ -192,6 +193,7 @@ private:
     void setSymbol();
     void readRte(const QDomNode& xml, rte_t& rte);
     void readRouteDataFromGisLine(const SGisLine &l);
+    const subpt_t * getSubPtByIndex(quint32 idx);
 
     static key_t keyUserFocus;
 

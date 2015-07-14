@@ -429,6 +429,27 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         anchor *= DEG_TO_RAD;
         gis->convertRad2Px(anchor);
         p.drawEllipse(anchor, 5, 5);
+
+
+        QString str;
+        str += QObject::tr("Time: %1 Distance: %2").arg(mouseMoveFocus->time.toString()).arg(mouseMoveFocus->distance);
+
+        // calculate bounding box of text
+        QFont f = CMainWindow::self().getMapFont();
+        QFontMetrics fm(f);
+        QRect rectText = fm.boundingRect(QRect(0,0,500,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+        rectText.adjust(-5, -5, 5, 5);
+        rectText.moveTopLeft(anchor.toPoint() + QPoint(5, -(10 + rectText.height())));
+
+        p.setFont(f);
+        p.setPen(CCanvas::penBorderGray);
+        p.setBrush(CCanvas::brushBackWhite);
+
+        PAINT_ROUNDED_RECT(p, rectText);
+
+        p.translate(5,5);
+        p.setPen(Qt::darkBlue);
+        p.drawText(rectText, str);
     }
 }
 
@@ -608,23 +629,20 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
     quint32 cnt = 0;
     foreach(const rtept_t& rtept, rte.pts)
     {
-        if(rtept.subpts.isEmpty())
-        {
-            continue;
-        }
-
-        if(idx > (cnt + rtept.subpts.size()))
-        {
-            cnt += rtept.subpts.size() + 1;
-            continue;
-        }
-
-        if(idx == cnt)
+        if(cnt == idx)
         {
             return &rtept.fakeSubpt;
         }
 
-        return &rtept.subpts[idx - cnt - 1];
+        foreach(const subpt_t& subpt, rtept.subpts)
+        {
+            cnt++;
+            if(cnt == idx)
+            {
+                return &subpt;
+            }
+        }
+        cnt++;
     }
 
     return 0;
@@ -675,7 +693,7 @@ void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
             }
             else
             {
-                subpt.type = subpt_t::eTypeNone;
+                subpt.type = subpt_t::eTypeJunct;
             }
 
             totalDistance = subpt.distance;
@@ -703,8 +721,6 @@ struct maneuver_t
 
 void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 {
-    lastRoutedTime = QDateTime::currentDateTimeUtc();
-    lastRoutedWith = "MapQuest" + options;
 
     QDomElement response    = xml.firstChildElement("response");
     QDomElement route       = response.firstChildElement("route");
@@ -805,6 +821,9 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     rtept.fakeSubpt.lon = rtept.lon;
     rtept.fakeSubpt.lat = rtept.lat;
 
+
+    lastRoutedTime = QDateTime::currentDateTimeUtc();
+    lastRoutedWith = "MapQuest" + options;
 
     deriveSecondaryData();
     updateHistory();

@@ -433,6 +433,9 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         QString str;
         str += QObject::tr("Time: %1 Distance: %2").arg(mouseMoveFocus->time.toString()).arg(mouseMoveFocus->distance);
+        str += QObject::tr("\nTurn: %1 Bearing: %2").arg(mouseMoveFocus->turn).arg(mouseMoveFocus->bearing);
+        str += "\n" + mouseMoveFocus->instruction;
+        str += "\n" + mouseMoveFocus->streets.join(", ");
 
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
@@ -447,9 +450,11 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         PAINT_ROUNDED_RECT(p, rectText);
 
+        p.save();
         p.translate(5,5);
         p.setPen(Qt::darkBlue);
         p.drawText(rectText, str);
+        p.restore();
     }
 }
 
@@ -564,6 +569,7 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
 
 void CGisItemRte::calc()
 {
+    mouseMoveFocus = 0;
     for(int i = 0; i < rte.pts.size(); i++)
     {
         rte.pts[i].subpts.clear();
@@ -578,6 +584,7 @@ void CGisItemRte::reset()
         rte.pts[i].subpts.clear();
     }
 
+    mouseMoveFocus  = 0;
     totalDays       = NOINT;
     totalDistance   = NOFLOAT;
     totalTime       = QTime();
@@ -650,6 +657,8 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
 
 void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
 {
+    reset();
+
     qint32 idxRtept = -1;
     rtept_t * rtept = 0;
 
@@ -693,7 +702,7 @@ void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
             }
             else
             {
-                subpt.type = subpt_t::eTypeJunct;
+                subpt.type = subpt_t::eTypeNone;
             }
 
             totalDistance = subpt.distance;
@@ -717,17 +726,34 @@ struct maneuver_t
     QString instruction;
     quint32 time;
     qreal dist;
+    qint32 bearing;
+    qint32 turn;
 };
+
+static const qint32 idx2bearing[] =
+{
+      NOINT
+    , 0
+    , -45
+    , 45
+    , 180
+    , 135
+    , -135
+    , -90
+    , 90
+};
+
 
 void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 {
+    reset();
 
     QDomElement response    = xml.firstChildElement("response");
     QDomElement route       = response.firstChildElement("route");
 
     // get time of travel
-    QDomElement time        = route.firstChildElement("time");
-    totalTime = QTime(0,0).addSecs(time.text().toUInt());
+    QDomElement xmlTime     = route.firstChildElement("time");
+    totalTime = QTime(0,0).addSecs(xmlTime.text().toUInt());
 
 
     // build list of maneuvers
@@ -749,6 +775,9 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
             maneuver.instruction    = xmlManeuver.firstChildElement("narrative").text();
             maneuver.time           = xmlManeuver.firstChildElement("time").text().toUInt();
             maneuver.dist           = xmlManeuver.firstChildElement("distance").text().toFloat();
+
+            maneuver.bearing        = idx2bearing[xmlManeuver.firstChildElement("direction").text().toUInt()];
+            maneuver.turn           = xmlManeuver.firstChildElement("turnType").text().toInt();
 
             QDomNodeList xmlStreets = xmlManeuver.toElement().elementsByTagName("streets");
             const int S = xmlStreets.size();
@@ -790,6 +819,8 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         idxLegs << elem.toElement().text().toUInt();
     }
 
+    quint32 time = 0;
+    quint32 dist = 0;
     QDomElement xmlManeuverIndexes = xmlShape.firstChildElement("maneuverIndexes");
     xmlIndex                       = xmlManeuverIndexes.elementsByTagName("index");
     qint32 M = xmlIndex.size();
@@ -801,8 +832,16 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         maneuver_t& maneuver    = maneuvers[m];
         subpt.type              = subpt_t::eTypeJunct;
         subpt.instruction       = maneuver.instruction;
-        subpt.time              = QTime(0,0).addSecs(maneuver.time);
-        subpt.distance          = maneuver.dist;
+
+        subpt.time              = QTime(0,0).addSecs(time);
+        time += maneuver.time;
+
+        subpt.distance          = dist;
+        dist += maneuver.dist * 1000;
+
+        subpt.bearing           = maneuver.bearing;
+        subpt.turn              = maneuver.turn;
+
         subpt.streets           = maneuver.streets;
     }
 
@@ -821,7 +860,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     rtept.fakeSubpt.lon = rtept.lon;
     rtept.fakeSubpt.lat = rtept.lat;
 
-
+    totalDistance  = dist;
     lastRoutedTime = QDateTime::currentDateTimeUtc();
     lastRoutedWith = "MapQuest" + options;
 

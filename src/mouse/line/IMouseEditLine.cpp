@@ -224,8 +224,6 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
 void IMouseEditLine::startNewLine(const QPointF& point)
 {
-    points << IGisLine::point_t(point);
-
     scrOptEditLine->toolAddPoint->setChecked(true);
     slotAddPoint();
 

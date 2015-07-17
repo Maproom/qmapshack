@@ -44,7 +44,7 @@ public:
         subpt_t()
             : lon(NOFLOAT)
             , lat(NOFLOAT)
-            , type(eTypeJunct)
+            , type(eTypeNone)
             , turn(NOFLOAT)
             , bearing(NOFLOAT)
             , time(0,0)

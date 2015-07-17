@@ -447,9 +447,11 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         PAINT_ROUNDED_RECT(p, rectText);
 
+        p.save();
         p.translate(5,5);
         p.setPen(Qt::darkBlue);
         p.drawText(rectText, str);
+        p.restore();
     }
 }
 

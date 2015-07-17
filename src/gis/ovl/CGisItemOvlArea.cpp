@@ -397,6 +397,7 @@ void CGisItemOvlArea::drawHighlight(QPainter& p)
     {
         return;
     }
+    p.setBrush(Qt::NoBrush);
     p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolygon(line);
 }

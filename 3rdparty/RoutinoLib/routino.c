@@ -234,6 +234,11 @@ extern T_RoutinoRoute * RoutinoCalculate(H_RoutinoDataSet data, const char * pro
 
         results[nResults] = CalculateRoute(data->OSMNodes, data->OSMSegments, data->OSMWays, data->OSMRelations, &profile, start_node, join_segment, finish_node, start_waypoint, finish_waypoint);
 
+        if(results[nResults] == 0)
+        {
+            goto RoutinoCalculate_end;
+        }
+
         join_segment = results[nResults]->last_segment;
 
         nResults++;

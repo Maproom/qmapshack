@@ -698,9 +698,9 @@ void CCanvas::setupGrid()
     update();
 }
 
-void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str)
+void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)
 {
-    grid->convertPos2Str(pos, str);
+    grid->convertPos2Str(pos, str, simple);
 }
 
 void CCanvas::displayInfo(const QPoint& px)

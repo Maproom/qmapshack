@@ -572,8 +572,8 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
         {
             QString str;
             lblPosGrid->show();
-            canvas->convertGridPos2Str(pos, str);
-            lblPosGrid->setText(str);
+            canvas->convertGridPos2Str(pos, str, false);
+            lblPosGrid->setText(tr("[Grid: %1]").arg(str));
         }
     }
     else

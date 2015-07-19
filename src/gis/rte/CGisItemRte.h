@@ -181,6 +181,11 @@ public:
         return rte.links;
     }
 
+    const rte_t& getRoute() const
+    {
+        return rte;
+    }
+
     void setName(const QString& str);
     void setComment(const QString& str);
     void setDescription(const QString& str);

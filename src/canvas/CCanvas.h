@@ -70,7 +70,7 @@ public:
     void loadConfig(QSettings& cfg);
 
     void setupGrid();
-    void convertGridPos2Str(const QPointF& pos, QString& str);
+    void convertGridPos2Str(const QPointF& pos, QString& str, bool simple);
 
     void setup();
     QString getProjection();

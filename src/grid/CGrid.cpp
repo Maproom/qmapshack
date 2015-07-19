@@ -44,7 +44,7 @@ CGrid::~CGrid()
     pj_free(pjGrid);
 }
 
-void CGrid::convertPos2Str(const QPointF& pos, QString& info)
+void CGrid::convertPos2Str(const QPointF& pos, QString& info, bool simple)
 {
     if(pjGrid == 0)
     {
@@ -60,11 +60,25 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info)
         pt *= RAD_TO_DEG;
         lat = pt.y() < 0 ? "S" : "N";
         lng = pt.x() < 0 ? "W" : "E";
-        info += tr("[Grid: %1%2%5 %3%4%5] ").arg(lat).arg(qAbs(pt.y()), 0, 'f', 6).arg(lng).arg(qAbs(pt.x()), 0, 'f', 6).arg(QChar('\260'));
+        if(simple)
+        {
+            info += tr("%1 %2 ").arg(pt.y(), 0, 'f', 6).arg(pt.x(), 0, 'f', 6);
+        }
+        else
+        {
+            info += tr("%1%2%5 %3%4%5 ").arg(lat).arg(qAbs(pt.y()), 0, 'f', 6).arg(lng).arg(qAbs(pt.x()), 0, 'f', 6).arg(QChar('\260'));
+        }
     }
     else
     {
-        info += tr("[Grid: N %1m, E %2m] ").arg(pt.y(),0,'f',0).arg(pt.x(),0,'f',0);
+        if(simple)
+        {
+            info += tr("%1m, %2m ").arg(pt.y(),0,'f',0).arg(pt.x(),0,'f',0);
+        }
+        else
+        {
+            info += tr("N %1m, E %2m ").arg(pt.y(),0,'f',0).arg(pt.x(),0,'f',0);
+        }
     }
 }
 

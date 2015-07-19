@@ -51,6 +51,7 @@ private slots:
     void slotAddRte();
     void slotAddArea();
     void slotCopyPosition();
+    void slotCopyPositionGrid();
 
 private:
     bool setScreenOption(const QPoint& pt, IGisItem * item);

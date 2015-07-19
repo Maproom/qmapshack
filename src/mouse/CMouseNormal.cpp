@@ -46,6 +46,7 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
 
     menu->addSeparator();
     menu->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
+    menu->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
 }
 
 CMouseNormal::~CMouseNormal()
@@ -395,4 +396,17 @@ void CMouseNormal::slotCopyPosition()
 
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(position);
+}
+
+void CMouseNormal::slotCopyPositionGrid()
+{
+    QString position;
+    QPointF pt = point;
+    gis->convertPx2Rad(pt);
+
+    canvas->convertGridPos2Str(pt * RAD_TO_DEG, position, true);
+
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(position);
+
 }

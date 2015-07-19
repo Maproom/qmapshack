@@ -37,7 +37,6 @@ CRouterMapQuest::CRouterMapQuest(QWidget *parent)
     comboMQPreference->addItem(tr("Fastest"), "fastest");
     comboMQPreference->addItem(tr("Shortest"), "shortest");
     comboMQPreference->addItem(tr("Bicycle"), "bicycle");
-    comboMQPreference->addItem(tr("Pedestrian/pub. transp."), "multimodal");
     comboMQPreference->addItem(tr("Pedestrian"), "pedestrian");
 
     comboMQLanguage->addItem(tr("US English"), "en_US");
@@ -74,6 +73,7 @@ CRouterMapQuest::CRouterMapQuest(QWidget *parent)
     timerCloseStatusMsg->setSingleShot(true);
     timerCloseStatusMsg->setInterval(5000);
     connect(timerCloseStatusMsg, SIGNAL(timeout()), this, SLOT(slotCloseStatusMsg()));
+
 }
 
 CRouterMapQuest::~CRouterMapQuest()
@@ -100,6 +100,7 @@ void CRouterMapQuest::slotCloseStatusMsg()
         canvas->reportStatus("MapQuest", "");
     }
 }
+
 
 QString CRouterMapQuest::getOptions()
 {

@@ -40,7 +40,7 @@ public:
 
     void setProjAndColor(const QString& proj, const QColor& c);
 
-    void convertPos2Str(const QPointF& pos, QString& info);
+    void convertPos2Str(const QPointF& pos, QString& info, bool simple);
 
 private:
     friend class CGridSetup;

@@ -76,30 +76,29 @@ void CDetailsRte::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
 
-    int idx = 0;
-    QList<QTreeWidgetItem*> items;
-//    const CGisItemOvlrte::rte_t& a = rte.getrteData();
-//    foreach(const CGisItemOvlrte::pt_t& pt, a.pts)
-//    {
-//        QString str;
-//        QTreeWidgetItem * item = new QTreeWidgetItem();
 
-//        item->setText(eColNum,QString::number(idx++));
+    listWidget->clear();
 
-//        // position
-//        GPS_Math_Deg_To_Str(pt.lon, pt.lat, str);
-//        item->setText(eColPosition,str);
-//        items << item;
-//    }
+    foreach(const CGisItemRte::rtept_t& rtept, rte.getRoute().pts)
+    {
+        QListWidgetItem * item = new QListWidgetItem(listWidget);
 
-//    treeWidget->clear();
-//    treeWidget->addTopLevelItems(items);
-//    treeWidget->header()->resizeSections(QHeaderView::ResizeToContents);
+        item->setText(tr("Route waypoint"));
+        item->setIcon(QIcon("://icons/waypoints/32x32/FlagBlue.png"));
+
+        foreach(const CGisItemRte::subpt_t& subpt, rtept.subpts)
+        {
+            if(subpt.type != CGisItemRte::subpt_t::eTypeJunct)
+            {
+                continue;
+            }
+            QListWidgetItem * item = new QListWidgetItem(listWidget);
+            item->setText(subpt.instruction);
+        }
+    }
 
     toolLock->setChecked(isReadOnly);
-
     listHistory->setupHistory(rte);
-
     originator = false;
 }
 

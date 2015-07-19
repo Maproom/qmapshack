@@ -16,10 +16,10 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="1">
-      <widget class="QCheckBox" name="checkMQAvoidUnpaved">
+     <item row="3" column="0">
+      <widget class="QCheckBox" name="checkMQAvoidLimAccess">
        <property name="text">
-        <string>Unpaved</string>
+        <string>Highways</string>
        </property>
       </widget>
      </item>
@@ -30,31 +30,10 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QCheckBox" name="checkMQAvoidLimAccess">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Highways</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="checkMQAvoidTollRoads">
-       <property name="text">
-        <string>Toll Road</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QCheckBox" name="checkMQAvoidFerry">
-       <property name="text">
-        <string>Ferry</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Avoid:</string>
+        <string>Language</string>
        </property>
       </widget>
      </item>
@@ -68,13 +47,6 @@
      <item row="1" column="1">
       <widget class="QComboBox" name="comboMQLanguage"/>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Language</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -82,8 +54,36 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Avoid:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QCheckBox" name="checkMQAvoidFerry">
+       <property name="text">
+        <string>Ferry</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="checkMQAvoidTollRoads">
+       <property name="text">
+        <string>Toll Road</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QComboBox" name="comboMQPreference"/>
+     </item>
+     <item row="4" column="1">
+      <widget class="QCheckBox" name="checkMQAvoidUnpaved">
+       <property name="text">
+        <string>Unpaved</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

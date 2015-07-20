@@ -20,6 +20,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CTextEditWidget.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 
@@ -77,25 +78,29 @@ void CDetailsRte::setupGui()
     textCmtDesc->ensureCursorVisible();
 
 
-    listWidget->clear();
+//    treeWidget->clear();
+//    QString val, unit;
+//    foreach(const CGisItemRte::rtept_t& rtept, rte.getRoute().pts)
+//    {
+//        QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
 
-    foreach(const CGisItemRte::rtept_t& rtept, rte.getRoute().pts)
-    {
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+//        item->setText(0, tr("Route waypoint"));
 
-        item->setText(tr("Route waypoint"));
-        item->setIcon(QIcon("://icons/waypoints/32x32/FlagBlue.png"));
+//        foreach(const CGisItemRte::subpt_t& subpt, rtept.subpts)
+//        {
+//            if(subpt.type != CGisItemRte::subpt_t::eTypeJunct)
+//            {
+//                continue;
+//            }
+//            QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
 
-        foreach(const CGisItemRte::subpt_t& subpt, rtept.subpts)
-        {
-            if(subpt.type != CGisItemRte::subpt_t::eTypeJunct)
-            {
-                continue;
-            }
-            QListWidgetItem * item = new QListWidgetItem(listWidget);
-            item->setText(subpt.instruction);
-        }
-    }
+//            IUnit::self().meter2distance(subpt.distance, val, unit);
+//            QString str = QString("Time: %1 Dist.: %2 %3").arg(subpt.time.toString()).arg(val).arg(unit);
+//            str += "\n" + subpt.instruction;
+
+//            item->setText(0,str);
+//        }
+//    }
 
     toolLock->setChecked(isReadOnly);
     listHistory->setupHistory(rte);

@@ -52,6 +52,11 @@ void CLineOpSelectRange::mousePressEventEx(QMouseEvent * e)
 
         case eState1st:
         {
+            if(idx2nd < 0 || points.size() <= idx2nd)
+            {
+                break;
+            }
+
             qint32 d = qAbs(idxFocus - idx2nd);
             if(d < 1)
             {
@@ -76,7 +81,7 @@ void CLineOpSelectRange::mousePressEventEx(QMouseEvent * e)
     else if(e->button() == Qt::RightButton)
     {
         resetState();
-    }
+    }        
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
@@ -105,6 +110,8 @@ void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
     }
     }
 
+    // switch on map panning if move operation is in progress
+    parentHandler->setCanvasPanning(state != eStateIdle);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 

@@ -413,7 +413,9 @@ public:
     static QString toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key);
 
     /// a no key value that can be used to nullify references.
-    static QString noKey;
+    const static QString noKey;
+
+    const static QString noName;
 
 protected:
     struct color_t;
@@ -459,7 +461,6 @@ protected:
 
     static const color_t colorMap[];
 
-
     struct color_t
     {
         const char * name;
@@ -488,6 +489,7 @@ protected:
         }
         return false;
     }
+
 };
 
 QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h);

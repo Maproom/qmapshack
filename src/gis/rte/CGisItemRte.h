@@ -117,8 +117,9 @@ public:
 
     const QString& getName() const
     {
-        return rte.name;
+        return rte.name.isEmpty() ? noName : rte.name;
     }
+
     QString getInfo(bool allowEdit = false) const;
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& screenPos);

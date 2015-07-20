@@ -354,8 +354,8 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         gis->convertRad2Px(pt);
 
-        line    << pt;
-        points  << 1;
+        line << pt;
+        points << 1;
 
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
         foreach(const subpt_t &subpt, rtept.subpts)
@@ -551,7 +551,7 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 }
 
 void CGisItemRte::getPolylineFromData(SGisLine& l)
-{        
+{
     l.clear();
     foreach(const rtept_t &rtept, rte.pts)
     {
@@ -634,14 +634,14 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
 {
     quint32 cnt = 0;
-    foreach(const rtept_t& rtept, rte.pts)
+    foreach(const rtept_t &rtept, rte.pts)
     {
         if(cnt == idx)
         {
             return &rtept.fakeSubpt;
         }
 
-        foreach(const subpt_t& subpt, rtept.subpts)
+        foreach(const subpt_t &subpt, rtept.subpts)
         {
             cnt++;
             if(cnt == idx)
@@ -732,7 +732,7 @@ struct maneuver_t
 
 static const qint32 idx2bearing[] =
 {
-      NOINT
+    NOINT
     , 0
     , -45
     , 45

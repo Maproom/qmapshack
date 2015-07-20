@@ -137,7 +137,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
 
-    menuItemRte     = new QMenu(this);    
+    menuItemRte     = new QMenu(this);
     menuItemRte->addAction(actionEditDetails);
     menuItemRte->addAction(actionCopyItem);
     menuItemRte->addSeparator();

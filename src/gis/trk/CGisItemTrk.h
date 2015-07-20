@@ -143,8 +143,9 @@ public:
 
     const QString& getName() const
     {
-        return trk.name;
+        return trk.name.isEmpty() ? noName : trk.name;
     }
+
     int getColorIdx() const
     {
         return colorIdx;

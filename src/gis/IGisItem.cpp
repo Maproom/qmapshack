@@ -35,7 +35,9 @@
 
 QMutex IGisItem::mutexItems(QMutex::Recursive);
 
-QString IGisItem::noKey;
+const QString IGisItem::noKey;
+
+const QString IGisItem::noName = QObject::tr("[no name]");
 
 const IGisItem::color_t IGisItem::colorMap[] =
 {

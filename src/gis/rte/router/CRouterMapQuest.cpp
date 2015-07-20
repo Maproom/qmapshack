@@ -73,7 +73,6 @@ CRouterMapQuest::CRouterMapQuest(QWidget *parent)
     timerCloseStatusMsg->setSingleShot(true);
     timerCloseStatusMsg->setInterval(5000);
     connect(timerCloseStatusMsg, SIGNAL(timeout()), this, SLOT(slotCloseStatusMsg()));
-
 }
 
 CRouterMapQuest::~CRouterMapQuest()

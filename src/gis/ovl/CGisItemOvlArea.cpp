@@ -434,11 +434,6 @@ IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse
     return scrOpt;
 }
 
-const QString& CGisItemOvlArea::getName() const
-{
-    return area.name;
-}
-
 QString CGisItemOvlArea::getInfo(bool allowEdit) const
 {
     QString unit, val;

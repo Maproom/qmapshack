@@ -81,7 +81,7 @@ void CLineOpSelectRange::mousePressEventEx(QMouseEvent * e)
     else if(e->button() == Qt::RightButton)
     {
         resetState();
-    }        
+    }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)

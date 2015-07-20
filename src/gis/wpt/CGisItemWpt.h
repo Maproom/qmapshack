@@ -214,13 +214,15 @@ public:
 
     const QString& getName() const
     {
-        return wpt.name;
+        return wpt.name.isEmpty() ? noName : wpt.name;
     }
+
     QString getInfo(bool allowEdit = false) const;
     QPointF getPosition() const
     {
         return QPointF(wpt.lon, wpt.lat);
     }
+
     qint32 getElevation() const
     {
         return wpt.ele;

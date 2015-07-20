@@ -47,7 +47,11 @@ public:
     QDataStream& operator<<(QDataStream& stream);
     QDataStream& operator>>(QDataStream& stream);
 
-    const QString& getName() const;
+    const QString& getName() const
+    {
+        return area.name.isEmpty() ? noName : area.name;
+    }
+
     int getColorIdx() const
     {
         return colorIdx;

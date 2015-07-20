@@ -408,5 +408,4 @@ void CMouseNormal::slotCopyPositionGrid()
 
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(position);
-
 }

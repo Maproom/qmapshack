@@ -162,11 +162,23 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtTableStandard.setBottomMargin(20);
     fmtTableStandard.setWidth(w - 4 * ROOT_FRAME_MARGIN);
 
-    QVector<QTextLength> constraints;
-    constraints << QTextLength(QTextLength::FixedLength, 32);
-    constraints << QTextLength(QTextLength::VariableLength, 50);
-    constraints << QTextLength(QTextLength::VariableLength, 100);
-    fmtTableStandard.setColumnWidthConstraints(constraints);
+    QVector<QTextLength> constraints1;
+    constraints1 << QTextLength(QTextLength::FixedLength, 32);
+    constraints1 << QTextLength(QTextLength::VariableLength, 50);
+    constraints1 << QTextLength(QTextLength::VariableLength, 100);
+    fmtTableStandard.setColumnWidthConstraints(constraints1);
+
+    fmtTableHidden.setBorder(0);
+    fmtTableHidden.setCellPadding(4);
+    fmtTableHidden.setCellSpacing(0);
+    fmtTableHidden.setHeaderRowCount(1);
+    fmtTableHidden.setTopMargin(10);
+    fmtTableHidden.setBottomMargin(20);
+
+    QVector<QTextLength> constraints2;
+    constraints2 << QTextLength(QTextLength::PercentageLength, 70);
+    constraints2 << QTextLength(QTextLength::PercentageLength, 30);
+    fmtTableHidden.setColumnWidthConstraints(constraints2);
 
     fmtTableInfo.setBorder(0);
 
@@ -196,19 +208,50 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     doc.rootFrame()->setFrameFormat(fmtFrameRoot);
     QTextCursor cursor = doc.rootFrame()->firstCursorPosition();
 
-    cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getNameEx()), ""));
+    QTextTable * table = cursor.insertTable(1, 2, fmtTableHidden);
+    { // first cell with project info
+        QTextCursor cursor = table->cellAt(0,0).firstCursorPosition();
 
+        cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getNameEx()), ""));
 
-    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
-    {
-        QTextCursor cursor1(diaryFrame);
+        QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+        {
+            QTextCursor cursor1(diaryFrame);
 
-        cursor1.setCharFormat(fmtCharStandard);
-        cursor1.setBlockFormat(fmtBlockStandard);
-        cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
-
-        cursor.setPosition(cursor1.position()+1);
+            cursor1.setCharFormat(fmtCharStandard);
+            cursor1.setBlockFormat(fmtBlockStandard);
+            cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
+        }
     }
+    { // second cell with track summary
+        QTextCursor cursor = table->cellAt(0,1).firstCursorPosition();
+
+        QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+        {
+            QTextCursor cursor1(diaryFrame);
+
+            cursor1.setCharFormat(fmtCharStandard);
+            cursor1.setBlockFormat(fmtBlockStandard);
+
+            QString str, val, unit;
+
+            str += tr("<h3>Summary over all tracks in project</h3>");
+            str += "<table>";
+            IUnit::self().meter2distance(prj.getTotalDistance(), val, unit);
+            str += "<tr><td>" + tr("Total Distance:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+            IUnit::self().meter2elevation(prj.getTotalAscend(), val, unit);
+            str += "<tr><td>" + tr("Total Ascend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+            IUnit::self().meter2elevation(prj.getTotalDescend(), val, unit);
+            str += "<tr><td>" + tr("Total Descend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+            IUnit::self().seconds2time(prj.getTotalElapsedSeconds(), val, unit);
+            str += "<tr><td>" + tr("Total Time:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+            IUnit::self().seconds2time(prj.getTotalElapsedSecondsMoving(), val, unit);
+            str += "<tr><td>" + tr("Total Time Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+            str += "</table>";
+            cursor1.insertHtml(str);
+        }
+    }
+    cursor.setPosition(table->lastPosition() + 1);
 
 
     QList<CGisItemTrk*> trks;

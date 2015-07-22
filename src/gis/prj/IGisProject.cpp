@@ -42,6 +42,11 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , sorting(eSortNone)
     , cntTrkPts(0)
     , cntWpts(0)
+    , totalDistance(0)
+    , totalAscend(0)
+    , totalDescend(0)
+    , totalElapsedSeconds(0)
+    , totalElapsedSecondsMoving(0)
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
@@ -57,6 +62,11 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , sorting(eSortNone)
     , cntTrkPts(0)
     , cntWpts(0)
+    , totalDistance(0)
+    , totalAscend(0)
+    , totalDescend(0)
+    , totalElapsedSeconds(0)
+    , totalElapsedSecondsMoving(0)
 {
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 
@@ -666,6 +676,12 @@ void IGisProject::updateItemCounters()
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     cntTrkPts = 0;
     cntWpts = 0;
+    totalDistance = 0;
+    totalAscend = 0;
+    totalDescend = 0;
+    totalElapsedSeconds = 0;
+    totalElapsedSecondsMoving = 0;
+
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -680,7 +696,12 @@ void IGisProject::updateItemCounters()
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk)
         {
-            cntTrkPts += trk->getNumberOfVisiblePoints();
+            cntTrkPts       += trk->getNumberOfVisiblePoints();
+            totalDistance   += trk->getTotalDistance();
+            totalAscend     += trk->getTotalAscend();
+            totalDescend    += trk->getTotalDescend();
+            totalElapsedSeconds += trk->getTotalElapsedSeconds();
+            totalElapsedSecondsMoving += trk->getTotalElapsedSecondsMoving();
         }
 
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);

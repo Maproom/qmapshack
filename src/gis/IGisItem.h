@@ -489,7 +489,6 @@ protected:
         }
         return false;
     }
-
 };
 
 QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h);

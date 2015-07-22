@@ -165,6 +165,27 @@ public:
     {
         return totalElapsedSeconds;
     }
+
+    quint32 getTotalElapsedSecondsMoving()
+    {
+        return totalElapsedSecondsMoving;
+    }
+
+    qreal getTotalAscend() const
+    {
+        return totalAscend;
+    }
+
+    qreal getTotalDescend() const
+    {
+        return totalDescend;
+    }
+
+    qreal getTotalDistance() const
+    {
+        return totalDistance;
+    }
+
     const QString& getComment() const
     {
         return trk.cmt;

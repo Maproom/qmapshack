@@ -63,6 +63,7 @@ private:
     QTextBlockFormat fmtBlockStandard;
     QTextFrameFormat fmtFrameRoot;
     QTextTableFormat fmtTableStandard;
+    QTextTableFormat fmtTableHidden;
     QTextTableFormat fmtTableInfo;
     QTextCharFormat fmtCharHeader;
 };

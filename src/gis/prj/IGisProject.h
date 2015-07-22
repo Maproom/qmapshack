@@ -242,6 +242,27 @@ public:
         return cntItemsByType[type];
     }
 
+    qreal getTotalDistance() const
+    {
+        return totalDistance;
+    }
+    qreal getTotalAscend() const
+    {
+        return totalAscend;
+    }
+    qreal getTotalDescend() const
+    {
+        return totalDescend;
+    }
+    qreal getTotalElapsedSeconds() const
+    {
+        return totalElapsedSeconds;
+    }
+    qreal getTotalElapsedSecondsMoving() const
+    {
+        return totalElapsedSecondsMoving;
+    }
+
     bool doCorrelation()
     {
         return !noCorrelation;
@@ -425,6 +446,12 @@ protected:
 
     qint32 cntTrkPts;
     qint32 cntWpts;
+
+    qreal totalDistance;
+    qreal totalAscend;
+    qreal totalDescend;
+    quint32 totalElapsedSeconds;
+    quint32 totalElapsedSecondsMoving;
 };
 
 #endif //IGISPROJECT_H

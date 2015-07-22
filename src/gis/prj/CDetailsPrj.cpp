@@ -120,8 +120,6 @@ bool sortWptByTime(const CGisItemWpt * wpt1, const CGisItemWpt * wpt2)
     return wpt1->getTime() < wpt2->getTime();
 }
 
-
-
 void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 {
     int cnt, w = doc.textWidth();
@@ -187,7 +185,6 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtCharHeader.setFontWeight(QFont::Bold);
     fmtCharHeader.setForeground(Qt::white);
 
-
     bool isReadOnly = printable || prj.isOnDevice();
 
     setWindowTitle(prj.getName());
@@ -209,48 +206,13 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     QTextCursor cursor = doc.rootFrame()->firstCursorPosition();
 
     QTextTable * table = cursor.insertTable(1, 2, fmtTableHidden);
-    { // first cell with project info
-        QTextCursor cursor = table->cellAt(0,0).firstCursorPosition();
 
-        cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getNameEx()), ""));
+    cursor = table->cellAt(0,0).firstCursorPosition();
+    drawInfo(cursor, isReadOnly);
 
-        QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
-        {
-            QTextCursor cursor1(diaryFrame);
+    cursor = table->cellAt(0,1).firstCursorPosition();
+    drawTrackSummary(cursor, isReadOnly);
 
-            cursor1.setCharFormat(fmtCharStandard);
-            cursor1.setBlockFormat(fmtBlockStandard);
-            cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
-        }
-    }
-    { // second cell with track summary
-        QTextCursor cursor = table->cellAt(0,1).firstCursorPosition();
-
-        QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
-        {
-            QTextCursor cursor1(diaryFrame);
-
-            cursor1.setCharFormat(fmtCharStandard);
-            cursor1.setBlockFormat(fmtBlockStandard);
-
-            QString str, val, unit;
-
-            str += tr("<h3>Summary over all tracks in project</h3>");
-            str += "<table>";
-            IUnit::self().meter2distance(prj.getTotalDistance(), val, unit);
-            str += "<tr><td>" + tr("Total Distance:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
-            IUnit::self().meter2elevation(prj.getTotalAscend(), val, unit);
-            str += "<tr><td>" + tr("Total Ascend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
-            IUnit::self().meter2elevation(prj.getTotalDescend(), val, unit);
-            str += "<tr><td>" + tr("Total Descend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
-            IUnit::self().seconds2time(prj.getTotalElapsedSeconds(), val, unit);
-            str += "<tr><td>" + tr("Total Time:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
-            IUnit::self().seconds2time(prj.getTotalElapsedSecondsMoving(), val, unit);
-            str += "<tr><td>" + tr("Total Time Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
-            str += "</table>";
-            cursor1.insertHtml(str);
-        }
-    }
     cursor.setPosition(table->lastPosition() + 1);
 
 
@@ -292,11 +254,11 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     if(comboSort->currentIndex() > IGisProject::eSortTime)
     {
-        drawByTrack(cursor, trks, wpts, progress, n, nItems, printable);
+        drawByTrack(cursor, trks, wpts, progress, n, nItems, isReadOnly);
     }
     else
     {
-        drawByGroup(cursor, trks, wpts, progress, n, nItems, printable);
+        drawByGroup(cursor, trks, wpts, progress, n, nItems, isReadOnly);
     }
 
     if(!areas.isEmpty())
@@ -323,7 +285,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
             table->cellAt(cnt,eSym1).firstCursorPosition().insertImage(area->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
             table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(area->getInfo());
-            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
+            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||isReadOnly, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
             cnt++;
         }
 
@@ -332,6 +294,48 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     textDesc->verticalScrollBar()->setValue(scrollVal);
 }
+
+void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
+{
+    cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getNameEx()), ""));
+
+    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+
+    QTextCursor cursor1(diaryFrame);
+
+    cursor1.setCharFormat(fmtCharStandard);
+    cursor1.setBlockFormat(fmtBlockStandard);
+    cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
+
+}
+
+void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, bool isReadOnly)
+{
+    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+
+    QTextCursor cursor1(diaryFrame);
+
+    cursor1.setCharFormat(fmtCharStandard);
+    cursor1.setBlockFormat(fmtBlockStandard);
+
+    QString str, val, unit;
+
+    str += tr("<h3>Summary over all tracks in project</h3>");
+    str += "<table>";
+    IUnit::self().meter2distance(prj.getTotalDistance(), val, unit);
+    str += "<tr><td>" + tr("Total Distance:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+    IUnit::self().meter2elevation(prj.getTotalAscend(), val, unit);
+    str += "<tr><td>" + tr("Total Ascend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+    IUnit::self().meter2elevation(prj.getTotalDescend(), val, unit);
+    str += "<tr><td>" + tr("Total Descend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+    IUnit::self().seconds2time(prj.getTotalElapsedSeconds(), val, unit);
+    str += "<tr><td>" + tr("Total Time:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+    IUnit::self().seconds2time(prj.getTotalElapsedSecondsMoving(), val, unit);
+    str += "<tr><td>" + tr("Total Time Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+    str += "</table>";
+    cursor1.insertHtml(str);
+}
+
 
 void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QList<CGisItemWpt*>& wpts, QProgressDialog& progress, int& n, int nItems, bool printable)
 {

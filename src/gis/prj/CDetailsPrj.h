@@ -51,6 +51,8 @@ private:
     void getTrackProfile(CGisItemTrk * trk, QImage& image);
     void getTrackOverview(CGisItemTrk * trk, QImage& image);
     void draw(QTextDocument& doc, bool printable);
+    void drawInfo(QTextCursor& cursor, bool isReadOnly);
+    void drawTrackSummary(QTextCursor& cursor, bool isReadOnly);
     void drawByGroup(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable);
     void drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable);
 

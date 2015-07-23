@@ -141,6 +141,10 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtFrameStandard.setBottomMargin(5);
     fmtFrameStandard.setWidth(w - 2 * ROOT_FRAME_MARGIN);
 
+    fmtFrameTrackSummary.setBackground(Qt::white);
+    fmtFrameTrackSummary.setBorder(1);
+    fmtFrameTrackSummary.setPadding(10);
+
     fmtCharStandard.setFont(f);
 
     fmtBlockStandard.setTopMargin(10);
@@ -170,9 +174,8 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtTableHidden.setBorder(0);
     fmtTableHidden.setCellPadding(4);
     fmtTableHidden.setCellSpacing(0);
-    fmtTableHidden.setHeaderRowCount(1);
-    fmtTableHidden.setTopMargin(10);
-    fmtTableHidden.setBottomMargin(20);
+    fmtTableHidden.setTopMargin(0);
+    fmtTableHidden.setBottomMargin(0);
 
     QVector<QTextLength> constraints2;
     constraints2 << QTextLength(QTextLength::PercentageLength, 70);
@@ -323,7 +326,7 @@ void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
 
 void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, bool isReadOnly)
 {
-    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameTrackSummary);
 
     QTextCursor cursor1(diaryFrame);
 

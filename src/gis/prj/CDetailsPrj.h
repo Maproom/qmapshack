@@ -62,6 +62,7 @@ private:
 
     IGisProject& prj;
     QTextFrameFormat fmtFrameStandard;
+    QTextFrameFormat fmtFrameTrackSummary;
     QTextCharFormat fmtCharStandard;
     QTextBlockFormat fmtBlockStandard;
     QTextFrameFormat fmtFrameRoot;

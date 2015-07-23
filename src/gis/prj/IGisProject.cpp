@@ -50,6 +50,21 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
+
+    // move project up the list until there a re only projects, no devices
+    const int myIdx = parent->topLevelItemCount() - 1;
+    for(int i = myIdx - 1; i >= 0; i--)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(parent->topLevelItem(i));
+        if(device != 0)
+        {
+            parent->takeTopLevelItem(myIdx);
+            parent->insertTopLevelItem(i, this);
+            break;
+        }
+        break;
+    }
+
 }
 
 IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
@@ -68,8 +83,8 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , totalElapsedSeconds(0)
     , totalElapsedSecondsMoving(0)
 {
+    memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
-
     nameSuffix = parent->getName();
 }
 

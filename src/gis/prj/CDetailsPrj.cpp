@@ -222,8 +222,11 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         QTextCursor cursor2 = table->cellAt(0,0).firstCursorPosition();
         drawInfo(cursor2, isReadOnly);
 
-        QTextCursor cursor3 = table->cellAt(0,1).firstCursorPosition();
-        drawTrackSummary(cursor3, isReadOnly);
+        if(prj.getItemCountByType(IGisItem::eTypeTrk) != 0)
+        {
+            QTextCursor cursor3 = table->cellAt(0,1).firstCursorPosition();
+            drawTrackSummary(cursor3, isReadOnly);
+        }
 
     }
 
@@ -335,7 +338,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, bool isReadOnly)
 
     QString str, val, unit;
 
-    str += tr("<h3>Summary over all tracks in project</h3>");
+    str += tr("<b>Summary over all tracks in project</b><br/>");
     str += "<table>";
     IUnit::self().meter2distance(prj.getTotalDistance(), val, unit);
     str += "<tr><td>" + tr("Total Distance:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);

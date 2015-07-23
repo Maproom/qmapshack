@@ -431,24 +431,36 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.drawEllipse(anchor, 5, 5);
 
 
-        QString str;
-        str += QObject::tr("Time: %1 Distance: %2").arg(mouseMoveFocus->time.toString()).arg(mouseMoveFocus->distance);
-        str += QObject::tr("\nTurn: %1 Bearing: %2").arg(mouseMoveFocus->turn).arg(mouseMoveFocus->bearing);
+        QString str, val, unit;
+        str += QObject::tr("Time: %1 ").arg(mouseMoveFocus->time.toString());
+        IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
+        str += QObject::tr("Distance: %1 %2").arg(val).arg(unit);
         str += "\n" + mouseMoveFocus->instruction;
-        str += "\n" + mouseMoveFocus->streets.join(", ");
 
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
         QRect rectText = fm.boundingRect(QRect(0,0,500,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
         rectText.adjust(-5, -5, 5, 5);
-        rectText.moveTopLeft(anchor.toPoint() + QPoint(5, -(10 + rectText.height())));
+        rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
+
+
+        // create bubble path
+        QPainterPath path1;
+        path1.addRoundedRect(rectText,5,5);
+
+        QPolygonF poly2;
+        poly2 << anchor << (rectText.bottomLeft() + QPointF(10,-5)) << (rectText.bottomLeft() + QPointF(30,-5)) << anchor;
+        QPainterPath path2;
+        path2.addPolygon(poly2);
+
+        path1 = path1.united(path2);
+
 
         p.setFont(f);
         p.setPen(CCanvas::penBorderGray);
         p.setBrush(CCanvas::brushBackWhite);
-
-        PAINT_ROUNDED_RECT(p, rectText);
+        p.drawPolygon(path1.toFillPolygon());
 
         p.save();
         p.translate(5,5);

@@ -46,6 +46,7 @@ private slots:
     void slotLock(bool on);
     void slotSortMode(int idx);
     void slotSetupGui();
+    void slotSetScrollbar();
 
 private:
     void getTrackProfile(CGisItemTrk * trk, QImage& image);
@@ -68,6 +69,8 @@ private:
     QTextTableFormat fmtTableHidden;
     QTextTableFormat fmtTableInfo;
     QTextCharFormat fmtCharHeader;
+
+    int scrollVal;
 };
 
 #endif //CDETAILSPRJ_H

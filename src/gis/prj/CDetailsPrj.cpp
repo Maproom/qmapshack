@@ -33,6 +33,7 @@
 CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     : QWidget(parent)
     , prj(prj)
+    , scrollVal(0)
 {
     setupUi(this);
 
@@ -199,22 +200,29 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     labelKeywords->setText(IGisItem::toLink(isReadOnly, "keywords", keywords, ""));
 
 
-    int scrollVal = textDesc->verticalScrollBar()->value();
+    scrollVal = textDesc->verticalScrollBar()->value();
 
     doc.clear();
     doc.rootFrame()->setFrameFormat(fmtFrameRoot);
     QTextCursor cursor = doc.rootFrame()->firstCursorPosition();
+    cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getNameEx()), ""));
 
-    QTextTable * table = cursor.insertTable(1, 2, fmtTableHidden);
+    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+    {
 
-    cursor = table->cellAt(0,0).firstCursorPosition();
-    drawInfo(cursor, isReadOnly);
+        QTextCursor cursor1(diaryFrame);
+        cursor1.setCharFormat(fmtCharStandard);
+        cursor1.setBlockFormat(fmtBlockStandard);
 
-    cursor = table->cellAt(0,1).firstCursorPosition();
-    drawTrackSummary(cursor, isReadOnly);
+        QTextTable * table = cursor1.insertTable(1, 2, fmtTableHidden);
 
-    cursor.setPosition(table->lastPosition() + 1);
+        QTextCursor cursor2 = table->cellAt(0,0).firstCursorPosition();
+        drawInfo(cursor2, isReadOnly);
 
+        QTextCursor cursor3 = table->cellAt(0,1).firstCursorPosition();
+        drawTrackSummary(cursor3, isReadOnly);
+
+    }
 
     QList<CGisItemTrk*> trks;
     QList<CGisItemWpt*> wpts;
@@ -292,13 +300,17 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         cursor.setPosition(table->lastPosition() + 1);
     }
 
+
+    QTimer::singleShot(1, this, SLOT(slotSetScrollbar()));
+}
+
+void CDetailsPrj::slotSetScrollbar()
+{
     textDesc->verticalScrollBar()->setValue(scrollVal);
 }
 
 void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
 {
-    cursor.insertHtml(IGisItem::toLink(isReadOnly, "name", QString("<h1>%1</h1>").arg(prj.getNameEx()), ""));
-
     QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
 
     QTextCursor cursor1(diaryFrame);

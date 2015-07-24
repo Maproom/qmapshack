@@ -210,25 +210,20 @@ void CGisItemOvlArea::setSymbol()
 
 bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
 {
-//    foreach(const QPointF &pt, line)
-//    {
-//        if((pt - pos).manhattanLength() < MIN_DIST_CLOSE_TO)
-//        {
-//            return true;
-//        }
-//    }
-//    return false;
+    QMutexLocker lock(&mutexItems);
 
-    qreal dist = GPS_Math_DistPointPolyline(line, pos);
+    qreal dist = GPS_Math_DistPointPolyline(polygonArea, pos);
     return dist < 20;
 }
 
 QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 {
+    QMutexLocker lock(&mutexItems);
+
     qint32 i    = 0;
     qint32 idx  = NOIDX;
     qint32 d    = NOINT;
-    foreach(const QPointF &point, line)
+    foreach(const QPointF &point, polygonArea)
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
@@ -244,7 +239,7 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
         return NOPOINTF;
     }
 
-    return line[idx];
+    return polygonArea[idx];
 }
 
 void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
@@ -285,7 +280,7 @@ void CGisItemOvlArea::edit()
 }
 
 void CGisItemOvlArea::deriveSecondaryData()
-{
+{  
     qreal north = -90;
     qreal east  = -180;
     qreal south =  90;
@@ -342,7 +337,9 @@ void CGisItemOvlArea::deriveSecondaryData()
 
 void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
 {
-    line.clear();
+    QMutexLocker lock(&mutexItems);
+
+    polygonArea.clear();
     if(!isVisible(boundingRect, viewport, gis))
     {
         return;
@@ -355,10 +352,10 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
         pt1.setX(pt.lon);
         pt1.setY(pt.lat);
         pt1 *= DEG_TO_RAD;
-        line << pt1;
+        polygonArea << pt1;
     }
 
-    gis->convertRad2Px(line);
+    gis->convertRad2Px(polygonArea);
 
     p.save();
     p.setOpacity(area.opacity ? 0.3 : 1.0);
@@ -366,23 +363,25 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
     penBackground.setWidth(area.width + 2);
     p.setBrush(Qt::NoBrush);
     p.setPen(penBackground);
-    p.drawPolygon(line);
+    p.drawPolygon(polygonArea);
 
     penForeground.setColor(color);
     penForeground.setWidth(area.width);
     p.setBrush(QBrush(color, (Qt::BrushStyle)area.style));
     p.setPen(penForeground);
-    p.drawPolygon(line);
+    p.drawPolygon(polygonArea);
     p.restore();
 }
 
 void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
 {
-    if(line.isEmpty())
+    QMutexLocker lock(&mutexItems);
+
+    if(polygonArea.isEmpty())
     {
         return;
     }
-    QPointF pt  = getPolygonCentroid(line);
+    QPointF pt  = getPolygonCentroid(polygonArea);
     QRectF rect = fm.boundingRect(area.name);
     rect.adjust(-2,-2,2,2);
     rect.moveCenter(pt);
@@ -393,13 +392,15 @@ void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QR
 
 void CGisItemOvlArea::drawHighlight(QPainter& p)
 {
-    if(line.isEmpty() || key == keyUserFocus)
+    QMutexLocker lock(&mutexItems);
+
+    if(polygonArea.isEmpty() || key == keyUserFocus)
     {
         return;
     }
     p.setBrush(Qt::NoBrush);
     p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    p.drawPolygon(line);
+    p.drawPolygon(polygonArea);
 }
 
 void CGisItemOvlArea::gainUserFocus(bool yes)

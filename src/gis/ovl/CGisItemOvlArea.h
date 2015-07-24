@@ -180,7 +180,7 @@ private:
     /// the track line color by index
     unsigned colorIdx;
 
-    QPolygonF line;
+    QPolygonF polygonArea;
 
     QPointer<CScrOptOvlArea>  scrOpt;
 };

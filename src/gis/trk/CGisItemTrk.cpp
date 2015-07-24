@@ -728,6 +728,8 @@ IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 {
+    QMutexLocker lock(&mutexItems);
+
     qint32 i    = 0;
     qint32 idx  = NOIDX;
     qint32 d    = NOINT;
@@ -1154,6 +1156,8 @@ void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& curre
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {
+    QMutexLocker lock(&mutexItems);
+
     qreal dist = GPS_Math_DistPointPolyline(lineSimple, pos);
     return dist < 20;
 }
@@ -1464,6 +1468,8 @@ void CGisItemTrk::copySelectedPoints()
 
 void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
+    QMutexLocker lock(&mutexItems);
+
     lineSimple.clear();
     lineFull.clear();
 
@@ -1711,6 +1717,8 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
 
 void CGisItemTrk::drawHighlight(QPainter& p)
 {
+    QMutexLocker lock(&mutexItems);
+
     if(lineSimple.isEmpty() || hasUserFocus())
     {
         return;
@@ -1721,6 +1729,8 @@ void CGisItemTrk::drawHighlight(QPainter& p)
 
 void CGisItemTrk::drawRange(QPainter& p)
 {
+    QMutexLocker lock(&mutexItems);
+
     if((mouseRange1 != 0) && (mouseRange2 != 0))
     {
         const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
@@ -1918,8 +1928,11 @@ bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QSt
 
 QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner)
 {
+    QMutexLocker lock(&mutexItems);
+
     const trkpt_t * newPointOfFocus = 0;
     quint32 idx = 0;
+
     const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
 
     if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)

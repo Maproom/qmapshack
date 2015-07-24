@@ -293,6 +293,8 @@ IScrOpt * CGisItemRte::getScreenOptions(const QPoint& origin, IMouse * mouse)
 
 QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 {
+    QMutexLocker lock(&mutexItems);
+
     qint32 d    = NOINT;
     QPointF pt  = NOPOINTF;
     foreach(const QPointF &point, line)
@@ -312,6 +314,8 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 
 bool CGisItemRte::isCloseTo(const QPointF& pos)
 {
+    QMutexLocker lock(&mutexItems);
+
     qreal dist = GPS_Math_DistPointPolyline(line, pos);
     return dist < 20;
 }
@@ -334,6 +338,8 @@ void CGisItemRte::looseUserFocus()
 
 void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
+    QMutexLocker lock(&mutexItems);
+
     line.clear();
     if(!isVisible(boundingRect, viewport, gis))
     {
@@ -519,6 +525,8 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
 
 void CGisItemRte::drawHighlight(QPainter& p)
 {
+    QMutexLocker lock(&mutexItems);
+
     if(line.isEmpty() || hasUserFocus())
     {
         return;
@@ -610,6 +618,8 @@ void CGisItemRte::reset()
 
 QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner)
 {
+    QMutexLocker lock(&mutexItems);
+
     const subpt_t * newPointOfFocus = 0;
     quint32 idx = 0;
 

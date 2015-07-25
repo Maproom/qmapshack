@@ -28,6 +28,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "units/IUnit.h"
+#include "device/IDevice.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -210,6 +211,12 @@ QString IGisItem::getNameEx() const
     {
         str += " @ " + project->getName();
     }
+    IDevice * device = dynamic_cast<IDevice*>(parent()->parent());
+    if(device)
+    {
+        str += " @ " + device->getName();
+    }
+
     return str;
 }
 

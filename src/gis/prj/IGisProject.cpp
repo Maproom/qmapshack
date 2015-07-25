@@ -259,7 +259,7 @@ void IGisProject::setupName(const QString &defaultName)
     {
         metadata.name = defaultName;
     }
-    setText(CGisListWks::eColumnName, getNameEx());
+    setText(CGisListWks::eColumnName, getName());
 }
 
 void IGisProject::markAsSaved()

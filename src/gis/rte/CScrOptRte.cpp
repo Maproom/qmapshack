@@ -37,6 +37,9 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
 
     toolInstruction->setChecked(rte->hasUserFocus());
 
+    bool isOnDevice = rte->isOnDevice();
+    toolEdit->setDisabled(isOnDevice);
+
     anchor = rte->getPointCloseBy(point);
     if((anchor - point).manhattanLength() > 50)
     {

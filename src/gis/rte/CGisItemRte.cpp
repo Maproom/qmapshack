@@ -429,7 +429,7 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         return;
     }
 
-    if(hasUserFocus() && mouseMoveFocus)
+    if(hasUserFocus() && mouseMoveFocus && mouseMoveFocus->lon != NOFLOAT && mouseMoveFocus->lat != NOFLOAT)
     {
         QPointF anchor(mouseMoveFocus->lon, mouseMoveFocus->lat);
         anchor *= DEG_TO_RAD;

@@ -52,17 +52,23 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
 
     // move project up the list until there a re only projects, no devices
+    int newIdx      = NOIDX;
     const int myIdx = parent->topLevelItemCount() - 1;
     for(int i = myIdx - 1; i >= 0; i--)
     {
         IDevice * device = dynamic_cast<IDevice*>(parent->topLevelItem(i));
         if(device != 0)
         {
-            parent->takeTopLevelItem(myIdx);
-            parent->insertTopLevelItem(i, this);
-            break;
+            newIdx = i;
+            continue;
         }
         break;
+    }
+
+    if(newIdx != NOIDX)
+    {
+        parent->takeTopLevelItem(myIdx);
+        parent->insertTopLevelItem(newIdx, this);
     }
 
 }

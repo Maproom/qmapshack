@@ -278,6 +278,7 @@ void IMouseEditLine::slotDeletePoint()
     delete lineOp;
     lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
+    doCanvasPanning = false;
 }
 
 void IMouseEditLine::slotSelectRange()
@@ -286,6 +287,7 @@ void IMouseEditLine::slotSelectRange()
     delete lineOp;
     lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();
+    doCanvasPanning = false;
 }
 
 void IMouseEditLine::slotMovePoint()
@@ -294,6 +296,7 @@ void IMouseEditLine::slotMovePoint()
     delete lineOp;
     lineOp = new CLineOpMovePoint(points, gis, canvas, this);
     changeCursor();
+    doCanvasPanning = false;
 }
 
 void IMouseEditLine::slotAddPoint()
@@ -302,6 +305,7 @@ void IMouseEditLine::slotAddPoint()
     delete lineOp;
     lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();
+    doCanvasPanning = false;
 }
 
 void IMouseEditLine::slotNoRouting()

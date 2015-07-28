@@ -99,7 +99,7 @@
         <item>
          <widget class="QToolButton" name="toolMovePoint">
           <property name="toolTip">
-           <string>Move points.</string>
+           <string>Move points. (Ctrl+M)</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -107,6 +107,9 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/PointMove.png</normaloff>:/icons/32x32/PointMove.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+M</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -122,7 +125,7 @@
         <item>
          <widget class="QToolButton" name="toolAddPoint">
           <property name="toolTip">
-           <string>Add new points.</string>
+           <string>Add new points. (Ctrl++)</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -130,6 +133,9 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/Add.png</normaloff>:/icons/32x32/Add.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl++</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -142,7 +148,7 @@
         <item>
          <widget class="QToolButton" name="toolSelectRange">
           <property name="toolTip">
-           <string>Select a range of points.</string>
+           <string>Select a range of points. (Ctrl+R)</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -150,6 +156,9 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/SelectRange.png</normaloff>:/icons/32x32/SelectRange.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+R</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -162,7 +171,7 @@
         <item>
          <widget class="QToolButton" name="toolDeletePoint">
           <property name="toolTip">
-           <string>Delete a point.</string>
+           <string>Delete a point. (Ctrl+D)</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -170,6 +179,9 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+D</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -213,7 +225,7 @@
         <item>
          <widget class="QToolButton" name="toolNoRoute">
           <property name="toolTip">
-           <string>No auto-routing or line snapping</string>
+           <string>No auto-routing or line snapping (Ctrl+O)</string>
           </property>
           <property name="text">
            <string>0</string>
@@ -221,6 +233,9 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/O.png</normaloff>:/icons/32x32/O.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+O</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -233,7 +248,7 @@
         <item>
          <widget class="QToolButton" name="toolAutoRoute">
           <property name="toolTip">
-           <string>Use auto-routing to between points.</string>
+           <string>Use auto-routing to between points. (Ctrl+A)</string>
           </property>
           <property name="text">
            <string>A</string>
@@ -241,6 +256,9 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/A.png</normaloff>:/icons/32x32/A.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+A</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -253,7 +271,7 @@
         <item>
          <widget class="QToolButton" name="toolVectorRoute">
           <property name="toolTip">
-           <string>Snap line along lines of a vector map.</string>
+           <string>Snap line along lines of a vector map. (Ctrl+V)</string>
           </property>
           <property name="text">
            <string>V</string>
@@ -261,6 +279,9 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/V.png</normaloff>:/icons/32x32/V.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+V</string>
           </property>
           <property name="checkable">
            <bool>true</bool>

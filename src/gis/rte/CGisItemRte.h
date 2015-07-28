@@ -164,7 +164,6 @@ public:
         return keyUserFocus;
     }
 
-
     void setDataFromPolyline(const SGisLine& l);
 
     void getPolylineFromData(SGisLine &l);
@@ -202,6 +201,8 @@ public:
 
     void setResult(T_RoutinoRoute * route, const QString &options);
     void setResult(const QDomDocument& xml, const QString &options);
+
+    bool isCalculated();
 
 private:
     void deriveSecondaryData();

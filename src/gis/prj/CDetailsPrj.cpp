@@ -189,7 +189,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtCharHeader.setFontWeight(QFont::Bold);
     fmtCharHeader.setForeground(Qt::white);
 
-    bool isReadOnly = printable || prj.isOnDevice();
+    bool isReadOnly = printable || prj.isOnDevice() || toolLock->isChecked();
 
     setWindowTitle(prj.getName());
 

@@ -35,6 +35,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     label->setText(rte->getInfo());
     adjustSize();
 
+    toolInstruction->setEnabled(rte->isCalculated());
     toolInstruction->setChecked(rte->hasUserFocus());
 
     bool isOnDevice = rte->isOnDevice();

@@ -145,6 +145,20 @@ CGisItemRte::~CGisItemRte()
     }
 }
 
+bool CGisItemRte::isCalculated()
+{
+    bool yes = true;
+    foreach(const rtept_t& pt, rte.pts)
+    {
+        if((pt.fakeSubpt.lat == NOFLOAT) || (pt.fakeSubpt.lon == NOFLOAT))
+        {
+            yes = false;
+        }
+    }
+
+    return yes;
+}
+
 void CGisItemRte::deriveSecondaryData()
 {
     qreal north = -90;
@@ -601,7 +615,9 @@ void CGisItemRte::reset()
 {
     for(int i = 0; i < rte.pts.size(); i++)
     {
-        rte.pts[i].subpts.clear();
+        rtept_t& pt = rte.pts[i];
+        pt.subpts.clear();
+        pt.fakeSubpt = subpt_t();
     }
 
     mouseMoveFocus  = 0;
@@ -613,6 +629,11 @@ void CGisItemRte::reset()
 
     deriveSecondaryData();
     updateHistory();
+
+    if(key == keyUserFocus)
+    {
+        gainUserFocus(false);
+    }
 }
 
 

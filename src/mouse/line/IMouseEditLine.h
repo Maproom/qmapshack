@@ -29,7 +29,6 @@
 class CGisDraw;
 class CCanvas;
 class IGisLine;
-class CScrOptPoint;
 class CScrOptEditLine;
 class CScrOptRange;
 class ILineOp;

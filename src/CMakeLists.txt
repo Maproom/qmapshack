@@ -97,7 +97,6 @@ set( SRCS
     mouse/CMouseRangeTrk.cpp
     mouse/CMouseWptBubble.cpp
     mouse/CScrOptUnclutter.cpp    
-    mouse/CScrOptPoint.cpp    
     mouse/CScrOptRange.cpp
     mouse/CScrOptRangeTrk.cpp    
     mouse/line/IMouseEditLine.cpp
@@ -297,7 +296,6 @@ set( HDRS
     mouse/CMouseRangeTrk.h
     mouse/CMouseWptBubble.h
     mouse/CScrOptUnclutter.h
-    mouse/CScrOptPoint.h    
     mouse/CScrOptRange.h
     mouse/CScrOptRangeTrk.h
     mouse/line/CScrOptEditLine.h
@@ -433,7 +431,6 @@ set( UIS
     map/IMapPropSetup.ui    
     grid/IGridSetup.ui
     grid/IProjWizard.ui
-    mouse/IScrOptPoint.ui    
     mouse/IScrOptRange.ui
     mouse/IScrOptRangeTrk.ui
     mouse/line/IScrOptEditLine.ui

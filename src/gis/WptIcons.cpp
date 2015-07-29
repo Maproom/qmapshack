@@ -28,11 +28,11 @@ static QMap<QString, icon_t> wptIcons;
 
 void initWptIcons()
 {
-    wptIcons["Default"]            = icon_t(wptDefault, 16, 16);
-//    wptIcons["City (Capitol)"]      = ":/icons/wpt/capitol_city15x15.png";
-//    wptIcons["City (Large)"]        = ":/icons/wpt/large_city15x15.png";
-//    wptIcons["City (Medium)"]       = ":/icons/wpt/medium_city15x15.png";
-//    wptIcons["City (Small)"]        = ":/icons/wpt/small_city15x15.png";
+    wptIcons["Default"]             = icon_t(wptDefault, 16, 16);
+    wptIcons["City (Capitol)"]      = icon_t("://icons/waypoints/32x32/CityCapitol.png", 16, 16);
+    wptIcons["City (Large)"]        = icon_t("://icons/waypoints/32x32/CityLarge.png", 16, 16);
+    wptIcons["City (Medium)"]       = icon_t("://icons/waypoints/32x32/CityMedium.png", 16, 16);
+    wptIcons["City (Small)"]        = icon_t("://icons/waypoints/32x32/CitySmall.png", 16, 16);
 //    wptIcons["Small City"]          = ":/icons/wpt/small_city15x15.png";
 //    wptIcons["Geocache"]            = ":/icons/wpt/geocache15x15.png";
 //    wptIcons["Geocache Found"]      = ":/icons/wpt/geocache_fnd15x15.png";

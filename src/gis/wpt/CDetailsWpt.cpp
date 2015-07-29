@@ -85,6 +85,7 @@ void CDetailsWpt::setupGui()
 
     bool isReadOnly = wpt.isReadOnly();
 
+    toolIcon->setEnabled(!isReadOnly);
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());
     labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName(), ""));

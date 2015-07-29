@@ -336,6 +336,10 @@
         <file>icons/waypoints/32x32/DiamondBlue.png</file>
         <file>icons/waypoints/32x32/Residence.png</file>
         <file>icons/waypoints/32x32/Waypoint.png</file>
+        <file>icons/waypoints/32x32/CityCapitol.png</file>
+        <file>icons/waypoints/32x32/CityLarge.png</file>
+        <file>icons/waypoints/32x32/CityMedium.png</file>
+        <file>icons/waypoints/32x32/CitySmall.png</file>
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMovePoint.png</file>

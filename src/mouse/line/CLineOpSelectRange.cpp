@@ -147,7 +147,7 @@ void CLineOpSelectRange::drawFg(QPainter& p)
             qint32 idx2 = qMax(idxFocus, idx2nd);
 
             QPolygonF seg;
-            for(int i = idx1; i <= idx2; i++)
+            for(int i = idx1; i < idx2; i++)
             {
                 const IGisLine::point_t& point = points[i];
                 seg << point.pixel;
@@ -156,6 +156,8 @@ void CLineOpSelectRange::drawFg(QPainter& p)
                     seg << subpt.pixel;
                 }
             }
+
+            seg << points[idx2].pixel;
 
             p.setPen(QPen(Qt::darkGreen, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
             p.drawPolyline(seg);

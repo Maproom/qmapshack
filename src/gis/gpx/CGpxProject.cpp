@@ -57,13 +57,13 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
     *(IGisProject*)this = *project;
     blockUpdateItems(project->blockUpdateItems());
 
+    int res     = CSelectCopyAction::eResultNone;
     const int N = project->childCount();
     for(int n = 0; n < N; n++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
         if(item)
-        {
-            int res = CSelectCopyAction::eResultNone;
+        {            
             insertCopyOfItem(item, NOIDX, res);
         }
     }

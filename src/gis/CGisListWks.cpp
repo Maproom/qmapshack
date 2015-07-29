@@ -1418,7 +1418,7 @@ void CGisListWks::slotSyncWksDev()
     for(int n = 0; n < N; n++)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
-        if(device == 0 || (!keys.isEmpty() && !keys.contains(device->getKey())))
+        if(device == 0 || keys.isEmpty() || !keys.contains(device->getKey()))
         {
             continue;
         }

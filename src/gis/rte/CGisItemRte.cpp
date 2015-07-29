@@ -148,7 +148,7 @@ CGisItemRte::~CGisItemRte()
 bool CGisItemRte::isCalculated()
 {
     bool yes = true;
-    foreach(const rtept_t& pt, rte.pts)
+    foreach(const rtept_t &pt, rte.pts)
     {
         if((pt.fakeSubpt.lat == NOFLOAT) || (pt.fakeSubpt.lon == NOFLOAT))
         {

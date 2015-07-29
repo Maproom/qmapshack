@@ -70,7 +70,6 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
         parent->takeTopLevelItem(myIdx);
         parent->insertTopLevelItem(newIdx, this);
     }
-
 }
 
 IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)

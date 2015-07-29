@@ -63,7 +63,7 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
     {
         IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
         if(item)
-        {            
+        {
             insertCopyOfItem(item, NOIDX, res);
         }
     }

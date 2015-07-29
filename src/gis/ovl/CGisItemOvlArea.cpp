@@ -280,7 +280,7 @@ void CGisItemOvlArea::edit()
 }
 
 void CGisItemOvlArea::deriveSecondaryData()
-{  
+{
     qreal north = -90;
     qreal east  = -180;
     qreal south =  90;

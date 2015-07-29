@@ -56,7 +56,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * proj
     {
         IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
         if(item)
-        {            
+        {
             insertCopyOfItem(item, NOIDX, res);
         }
     }

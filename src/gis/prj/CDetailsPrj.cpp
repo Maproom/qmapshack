@@ -212,7 +212,6 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
     {
-
         QTextCursor cursor1(diaryFrame);
         cursor1.setCharFormat(fmtCharStandard);
         cursor1.setBlockFormat(fmtBlockStandard);
@@ -227,7 +226,6 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
             QTextCursor cursor3 = table->cellAt(0,1).firstCursorPosition();
             drawTrackSummary(cursor3, isReadOnly);
         }
-
     }
 
     QList<CGisItemTrk*> trks;
@@ -324,7 +322,6 @@ void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
     cursor1.setCharFormat(fmtCharStandard);
     cursor1.setBlockFormat(fmtBlockStandard);
     cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
-
 }
 
 void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, bool isReadOnly)

@@ -30,7 +30,6 @@ class CGisDraw;
 class CCanvas;
 class IGisLine;
 class CScrOptEditLine;
-class CScrOptRange;
 class ILineOp;
 
 class IMouseEditLine : public IMouse

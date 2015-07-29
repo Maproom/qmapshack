@@ -24,7 +24,6 @@
 #include "gis/IGisLine.h"
 #include "gis/rte/router/CRouterSetup.h"
 #include "helpers/CSettings.h"
-#include "mouse/CScrOptRange.h"
 #include "mouse/line/CLineOpAddPoint.h"
 #include "mouse/line/CLineOpDeletePoint.h"
 #include "mouse/line/CLineOpMovePoint.h"

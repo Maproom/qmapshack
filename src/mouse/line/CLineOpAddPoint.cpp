@@ -162,7 +162,11 @@ void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
             // if no line segment is found but a point
             // it is either first or the last point in the line
             idxFocus = isCloseTo(e->pos());
-            isPoint  = true;
+
+            if((idxFocus == 0) || (idxFocus == (points.size() - 1)))
+            {
+                isPoint  = true;
+            }
         }
     }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);

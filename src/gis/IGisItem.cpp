@@ -292,6 +292,11 @@ void IGisItem::changed(const QString &what, const QString &icon)
 
 void IGisItem::updateHistory()
 {
+    if(history.histIdxCurrent == NOIDX)
+    {
+        return;
+    }
+
     history_event_t& event = history.events[history.histIdxCurrent];
     event.data.clear();
 

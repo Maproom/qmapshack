@@ -54,6 +54,11 @@ public:
 
     struct history_t
     {
+        history_t() : histIdxInitial(NOIDX), histIdxCurrent(NOIDX)
+        {
+
+        }
+
         qint32 histIdxInitial;
         qint32 histIdxCurrent;
         QList<history_event_t> events;

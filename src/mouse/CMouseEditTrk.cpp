@@ -91,6 +91,8 @@ void CMouseEditTrk::slotCopyToOrig()
 
 void CMouseEditTrk::slotCopyToNew()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     canvas->reportStatus(key.item,"");
 
     if(points.size() < 2)

@@ -336,6 +336,8 @@ void IMouseEditLine::slotAbort()
 
 void IMouseEditLine::slotCopyToOrig()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     IGisLine * l = getGisLine();
     if(l != 0)
     {

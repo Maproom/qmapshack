@@ -352,6 +352,7 @@ void CMouseNormal::slotAddWpt()
         return;
     }
 
+    QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
     wpt->edit();
 

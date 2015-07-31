@@ -28,6 +28,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CSetupNewWpt.h"
+#include "helpers/CSettings.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
 
@@ -37,8 +38,6 @@
 #include <QtXml>
 
 IGisItem::key_t CGisItemWpt::keyUserFocus;
-QString CGisItemWpt::lastName;
-QString CGisItemWpt::lastIcon;
 
 /// used to add a new waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
@@ -247,6 +246,10 @@ void CGisItemWpt::setSymbol()
 
 bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
 {
+    SETTINGS;
+    QString lastName = cfg.value("Waypoint/lastName", "wpt").toString();
+    QString lastIcon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
+
     const int s = lastName.size();
     if(s != 0)
     {
@@ -278,8 +281,8 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
         return false;
     }
 
-    lastName = name;
-    lastIcon = icon;
+    cfg.setValue("Waypoint/lastName", name);
+    cfg.setValue("Waypoint/lastIcon", icon);
 
     return true;
 }
@@ -390,8 +393,11 @@ void CGisItemWpt::setIcon()
 
 void CGisItemWpt::setName(const QString& str)
 {
+    SETTINGS;
+    cfg.setValue("Waypoint/lastName", str);
+
     setText(CGisListWks::eColumnName, str);
-    lastName = str;
+
     wpt.name = str;
     changed(QObject::tr("Changed name"),"://icons/48x48/EditText.png");
 }
@@ -420,7 +426,9 @@ void CGisItemWpt::setProximity(qreal val)
 
 void CGisItemWpt::setIcon(const QString& name)
 {
-    lastIcon = name;
+    SETTINGS;
+    cfg.setValue("Waypoint/lastIcon", name);
+
     wpt.sym  = name;
 
     QPointF focus;

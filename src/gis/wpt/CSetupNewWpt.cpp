@@ -32,8 +32,6 @@ CSetupNewWpt::CSetupNewWpt(QPointF &pt, QString &icon, QString &name, QWidget *p
     , icon(icon)
     , name(name)
 {
-    qDebug() << pt << icon << name;
-
     QPointF focus;
 
     setupUi(this);

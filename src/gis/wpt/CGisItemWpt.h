@@ -314,11 +314,7 @@ private:
     QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
     bool processMouseOverBubble(const QPoint &pos);
 
-
     static key_t keyUserFocus;
-    static QString lastName;
-    static QString lastIcon;
-
 
     // --- start all waypoint data ----
     wpt_t wpt;

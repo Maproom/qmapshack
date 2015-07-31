@@ -24,6 +24,9 @@
 
 #include <QtWidgets>
 
+QString CSelectProjectDialog::lastkey;
+
+
 CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& type, QTreeWidget * parent)
     : QDialog(&CMainWindow::self())
     , key(key)
@@ -32,8 +35,10 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 {
     setupUi(this);
 
+    QListWidgetItem * lastSelectedItem = 0;
+
     if(parent)
-    {
+    {                
         for(int i = 0; i < parent->topLevelItemCount(); i++)
         {
             IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
@@ -43,36 +48,48 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
             }
 
             QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnIcon), project->text(CGisListWks::eColumnName),listWidget);
-            item->setData(Qt::UserRole, project->getKey());
-        }
-//        radioDatabase->hide();
+            item->setData(Qt::UserRole+0, project->getKey());
+            item->setData(Qt::UserRole+1, project->getType());
+
+            if(project->getKey() == lastkey)
+            {
+                lastSelectedItem = item;
+            }
+        }        
     }
     else
     {
         listWidget->hide();
         label1->hide();
-//        radioDatabase->show();
     }
+
     frameType->setEnabled(listWidget->count() == 0);
 
-    SETTINGS;
-    QString filter = cfg.value("Paths/lastGisFilter", "GPS Exchange Format (*.qms)").toString();
-    if(filter.contains("qms"))
+    if(lastSelectedItem == 0)
     {
-        radioQms->setChecked(true);
-        type = eTypeQms;
-    }
-    else if(filter.contains("gpx"))
-    {
-        radioGpx->setChecked(true);
-        type = eTypeGpx;
+        SETTINGS;
+        QString filter = cfg.value("Paths/lastGisFilter", "GPS Exchange Format (*.qms)").toString();
+        if(filter.contains("qms"))
+        {
+            radioQms->setChecked(true);
+            type = eTypeQms;
+        }
+        else if(filter.contains("gpx"))
+        {
+            radioGpx->setChecked(true);
+            type = eTypeGpx;
+        }
+        else
+        {
+            radioQms->setChecked(true);
+        }
+        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     }
     else
     {
-        radioQms->setChecked(true);
+        slotItemClicked(lastSelectedItem);
+        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
-
-    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
     connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
     connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotItemDoubleClicked(QListWidgetItem*)));
@@ -80,7 +97,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
     connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(slotProjectEdited(QString)));
     connect(radioQms, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
     connect(radioGpx, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
-    connect(radioDatabase, SIGNAL(toggled(bool)), this, SLOT(slotDatabase()));
+    connect(radioDatabase, SIGNAL(toggled(bool)), this, SLOT(slotTypeChanged()));
 
     adjustSize();
 
@@ -90,6 +107,12 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 CSelectProjectDialog::~CSelectProjectDialog()
 {
     QApplication::restoreOverrideCursor();
+}
+
+void CSelectProjectDialog::accept()
+{
+    lastkey = key;
+    QDialog::accept();
 }
 
 void CSelectProjectDialog::reject()
@@ -106,6 +129,19 @@ void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
     key = item->data(Qt::UserRole).toString();
     lineEdit->setText(item->text());
     frameType->setEnabled(false);
+
+    switch(item->data(Qt::UserRole+1).toInt())
+    {
+    case IGisProject::eTypeQms:
+        radioQms->setChecked(true);
+        break;
+    case IGisProject::eTypeGpx:
+        radioGpx->setChecked(true);
+        break;
+    case IGisProject::eTypeDb:
+        radioDatabase->setChecked(true);
+        break;
+    }
 }
 
 void CSelectProjectDialog::slotItemDoubleClicked(QListWidgetItem * item)
@@ -141,10 +177,9 @@ void CSelectProjectDialog::slotTypeChanged()
     {
         type = eTypeGpx;
     }
+    else if(radioDatabase->isChecked())
+    {
+        type = eTypeDb;
+    }
 }
 
-void CSelectProjectDialog::slotDatabase()
-{
-    type = eTypeDb;
-    QDialog::accept();
-}

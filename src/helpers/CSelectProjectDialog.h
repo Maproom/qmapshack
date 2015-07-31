@@ -40,6 +40,7 @@ public:
     virtual ~CSelectProjectDialog();
 
 public slots:
+    void accept();
     void reject();
 
 private slots:
@@ -48,9 +49,9 @@ private slots:
     void slotProjectChanged(const QString& text);
     void slotProjectEdited(const QString& text);
     void slotTypeChanged();
-    void slotDatabase();
 
 private:
+    static QString lastkey;
     QString& key;
     QString& name;
     type_e& type;

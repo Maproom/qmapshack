@@ -244,6 +244,8 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 
 void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
 {
+    QMutexLocker lock(&mutexItems);
+
     area.pts.clear();
 
     for(int i = 0; i < l.size(); i++)
@@ -486,6 +488,8 @@ QString CGisItemOvlArea::getInfo(bool allowEdit) const
 
 void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
 {
+    QMutexLocker lock(&mutexItems);
+
     l.clear();
     foreach(const pt_t &pt, area.pts)
     {
@@ -495,6 +499,8 @@ void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
 
 void CGisItemOvlArea::setDataFromPolyline(const SGisLine& l)
 {
+    QMutexLocker lock(&mutexItems);
+
     readAreaDataFromGisLine(l);
 
     flags |= eFlagTainted;

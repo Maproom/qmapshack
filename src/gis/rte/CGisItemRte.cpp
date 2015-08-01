@@ -710,72 +710,72 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
     return 0;
 }
 
-//void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
-//{
-//    QMutexLocker lock(&mutexItems);
+void CGisItemRte::setResult(Routino_Output * route, const QString& options)
+{
+    QMutexLocker lock(&mutexItems);
 
-//    reset();
+    reset();
 
-//    qint32 idxRtept = -1;
-//    rtept_t * rtept = 0;
+    qint32 idxRtept = -1;
+    rtept_t * rtept = 0;
 
-//    T_RoutinoRoute * next = route;
-//    while(next)
-//    {
-//        if(next->type == IMP_WAYPOINT)
-//        {
-//            idxRtept++;
-//            rtept = &rte.pts[idxRtept];
-//            rtept->subpts.clear();
-//            rtept->fakeSubpt.lon       = next->lon * RAD_TO_DEG;
-//            rtept->fakeSubpt.lat       = next->lat * RAD_TO_DEG;
+    Routino_Output * next = route;
+    while(next)
+    {
+        if(next->type == ROUTINO_POINT_WAYPOINT)
+        {
+            idxRtept++;
+            rtept = &rte.pts[idxRtept];
+            rtept->subpts.clear();
+            rtept->fakeSubpt.lon       = next->lon * RAD_TO_DEG;
+            rtept->fakeSubpt.lat       = next->lat * RAD_TO_DEG;
 
-//            rtept->fakeSubpt.turn      = next->turn;
-//            rtept->fakeSubpt.bearing   = next->bearing;
-//            rtept->fakeSubpt.distance  = next->dist;
-//            rtept->fakeSubpt.time      = QTime(0,0).addSecs(next->time/10);
-//            rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
-//        }
-//        else if(rtept != 0)
-//        {
-//            rtept->subpts << subpt_t();
-//            subpt_t& subpt  = rtept->subpts.last();
-//            subpt.lon       = next->lon * RAD_TO_DEG;
-//            subpt.lat       = next->lat * RAD_TO_DEG;
+            rtept->fakeSubpt.turn      = next->turn;
+            rtept->fakeSubpt.bearing   = next->bearing;
+            rtept->fakeSubpt.distance  = next->dist;
+            rtept->fakeSubpt.time      = QTime(0,0).addSecs(next->time/10);
+            rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
+        }
+        else if(rtept != 0)
+        {
+            rtept->subpts << subpt_t();
+            subpt_t& subpt  = rtept->subpts.last();
+            subpt.lon       = next->lon * RAD_TO_DEG;
+            subpt.lat       = next->lat * RAD_TO_DEG;
 
-//            subpt.turn      = next->turn;
-//            subpt.bearing   = next->bearing;
-//            subpt.distance  = next->dist;
-//            subpt.time      = subpt.time.addSecs(next->time/10);
+            subpt.turn      = next->turn;
+            subpt.bearing   = next->bearing;
+            subpt.distance  = next->dist;
+            subpt.time      = subpt.time.addSecs(next->time/10);
 
-//            if(next->string != 0)
-//            {
-//                subpt.streets << next->string;
-//            }
+            if(next->string != 0)
+            {
+                subpt.streets << next->string;
+            }
 
-//            if(next->type > IMP_CHANGE)
-//            {
-//                subpt.type = subpt_t::eTypeJunct;
-//            }
-//            else
-//            {
-//                subpt.type = subpt_t::eTypeNone;
-//            }
+            if(next->type > ROUTINO_POINT_CHANGE)
+            {
+                subpt.type = subpt_t::eTypeJunct;
+            }
+            else
+            {
+                subpt.type = subpt_t::eTypeNone;
+            }
 
-//            totalDistance = subpt.distance;
-//            totalTime     = subpt.time;
-//            totalDays     = qFloor(next->time/864000);
-//        }
+            totalDistance = subpt.distance;
+            totalTime     = subpt.time;
+            totalDays     = qFloor(next->time/864000);
+        }
 
-//        next = next->next;
-//    }
+        next = next->next;
+    }
 
-//    lastRoutedTime = QDateTime::currentDateTimeUtc();
-//    lastRoutedWith = "Routino, " + options;
+    lastRoutedTime = QDateTime::currentDateTimeUtc();
+    lastRoutedWith = "Routino, " + options;
 
-//    deriveSecondaryData();
-//    updateHistory();
-//}
+    deriveSecondaryData();
+    updateHistory();
+}
 
 struct maneuver_t
 {

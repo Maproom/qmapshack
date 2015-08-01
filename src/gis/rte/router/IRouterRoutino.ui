@@ -16,13 +16,13 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QComboBox" name="comboDatabase"/>
      </item>
      <item row="0" column="1">
       <widget class="QComboBox" name="comboProfile"/>
      </item>
-     <item row="1" column="1">
+     <item row="2" column="1">
       <widget class="QComboBox" name="comboMode"/>
      </item>
      <item row="0" column="0">
@@ -32,21 +32,21 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Mode</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Database</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
+     <item row="3" column="2">
       <widget class="QToolButton" name="toolSetupPaths">
        <property name="toolTip">
         <string>Add paths with Routino database.</string>
@@ -59,6 +59,16 @@
          <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
        </property>
       </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Language</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="comboLanguage"/>
      </item>
     </layout>
    </item>

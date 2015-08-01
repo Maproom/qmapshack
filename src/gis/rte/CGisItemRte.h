@@ -199,7 +199,7 @@ public:
 
     QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner);
 
-//    void setResult(T_RoutinoRoute * route, const QString &options);
+    void setResult(Routino_Output * route, const QString &options);
     void setResult(const QDomDocument& xml, const QString &options);
 
     bool isCalculated();

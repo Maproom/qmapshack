@@ -18,6 +18,7 @@ find_package(Qt5DBus)
 endif(UNIX)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
+find_package(ROUTINO REQUIRED)
 
 file(GLOB XML_FILES "${CMAKE_SOURCE_DIR}/3rdparty/Routino/xml/*.xml")
 file(COPY ${XML_FILES} DESTINATION ${CMAKE_SOURCE_DIR}/src/xml/routino)
@@ -513,6 +514,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/3rdparty/RoutinoLib
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
+    ${ROUTINO_INCLUDE_DIRS}
 
 )
 
@@ -534,11 +536,11 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Sql
     Qt5::WebKitWidgets
     Qt5::PrintSupport
-    CGetOpt
-    routino
+    CGetOpt    
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
+    ${ROUTINO_LIBRARIES}
 )
 
 install(

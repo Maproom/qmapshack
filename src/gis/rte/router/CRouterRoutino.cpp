@@ -232,7 +232,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     }
 
 
-    Routino_Output * route = Routino_Calci ulateRoute(data,profile,translation,waypoints.data(),waypoints.size(),options);
+    Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints.data(),waypoints.size(),options);
     if(route != NULL)
     {
         rte->setResult(route, getOptions());

@@ -438,6 +438,8 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
+    QMutexLocker lock(&mutexItems);
+
     if(rte.pts.isEmpty())
     {
         return;
@@ -492,6 +494,8 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
+    QMutexLocker lock(&mutexItems);
+
     if(!isVisible(boundingRect, viewport, gis))
     {
         return;
@@ -576,6 +580,8 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 
 void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 {
+    QMutexLocker lock(&mutexItems);
+
     mouseMoveFocus = 0;
 
     readRouteDataFromGisLine(l);
@@ -586,6 +592,8 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 
 void CGisItemRte::getPolylineFromData(SGisLine& l)
 {
+    QMutexLocker lock(&mutexItems);
+
     l.clear();
     foreach(const rtept_t &rtept, rte.pts)
     {
@@ -603,6 +611,8 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
 
 void CGisItemRte::calc()
 {
+    QMutexLocker lock(&mutexItems);
+
     mouseMoveFocus = 0;
     for(int i = 0; i < rte.pts.size(); i++)
     {
@@ -613,6 +623,8 @@ void CGisItemRte::calc()
 
 void CGisItemRte::reset()
 {
+    QMutexLocker lock(&mutexItems);
+
     for(int i = 0; i < rte.pts.size(); i++)
     {
         rtept_t& pt = rte.pts[i];
@@ -700,6 +712,8 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
 
 void CGisItemRte::setResult(T_RoutinoRoute * route, const QString& options)
 {
+    QMutexLocker lock(&mutexItems);
+
     reset();
 
     qint32 idxRtept = -1;
@@ -789,6 +803,8 @@ static const qint32 idx2bearing[] =
 
 void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 {
+    QMutexLocker lock(&mutexItems);
+
     reset();
 
     QDomElement response    = xml.firstChildElement("response");

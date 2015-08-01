@@ -322,6 +322,8 @@ void CGisItemTrk::setSymbol()
 
 void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
 {
+    QMutexLocker lock(&mutexItems);
+
     /*
         as this will change the line significantly we better stop
         all focus operations and close the detail dialog.
@@ -342,6 +344,8 @@ void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
 
 void CGisItemTrk::getPolylineFromData(QPolygonF &l)
 {
+    QMutexLocker lock(&mutexItems);
+
     l.clear();
     foreach (const trkseg_t &seg, trk.segs)
     {
@@ -358,6 +362,8 @@ void CGisItemTrk::getPolylineFromData(QPolygonF &l)
 
 void CGisItemTrk::getPolylineFromData(SGisLine &l)
 {
+    QMutexLocker lock(&mutexItems);
+
     l.clear();
     foreach (const trkseg_t &seg, trk.segs)
     {
@@ -374,6 +380,8 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
 
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
 {
+    QMutexLocker lock(&mutexItems);
+
     trk.segs.clear();
     trk.segs.resize(1);
     trkseg_t& seg = trk.segs.first();
@@ -1591,6 +1599,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
+    QMutexLocker lock(&mutexItems);
+
     if(trk.segs.isEmpty())
     {
         return;

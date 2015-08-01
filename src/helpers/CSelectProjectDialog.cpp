@@ -50,6 +50,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
             QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnIcon), project->text(CGisListWks::eColumnName),listWidget);
             item->setData(Qt::UserRole+0, project->getKey());
             item->setData(Qt::UserRole+1, project->getType());
+            item->setData(Qt::UserRole+2, project->getName());
 
             if(project->getKey() == lastkey)
             {
@@ -127,7 +128,7 @@ void CSelectProjectDialog::reject()
 void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
 {
     key = item->data(Qt::UserRole).toString();
-    lineEdit->setText(item->text());
+    lineEdit->setText(item->data(Qt::UserRole+2).toString());
     frameType->setEnabled(false);
 
     switch(item->data(Qt::UserRole+1).toInt())
@@ -147,7 +148,7 @@ void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
 void CSelectProjectDialog::slotItemDoubleClicked(QListWidgetItem * item)
 {
     key = item->data(Qt::UserRole).toString();
-    lineEdit->setText(item->text());
+    lineEdit->setText(item->data(Qt::UserRole+2).toString());
     frameType->setEnabled(false);
 
     QDialog::accept();

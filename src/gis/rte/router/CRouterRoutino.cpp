@@ -57,7 +57,7 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     translations.write(_translations.readAll());
     translations.close();
 
-    RoutinoInit(profiles.fileName().toUtf8(), translations.fileName().toUtf8());
+//    RoutinoInit(profiles.fileName().toUtf8(), translations.fileName().toUtf8());
 
     connect(toolSetupPaths, SIGNAL(clicked()), this, SLOT(slotSetupPaths()));
 
@@ -81,7 +81,7 @@ CRouterRoutino::~CRouterRoutino()
     cfg.setValue("Route/routino/database", comboDatabase->currentIndex());
 
     freeDatabaseList();
-    RoutinoRelease();
+//    RoutinoRelease();
 }
 
 bool CRouterRoutino::hasFastRouting()
@@ -135,22 +135,22 @@ void CRouterRoutino::buildDatabaseList()
                 continue;
             }
 #endif
-            H_RoutinoDataSet data = RoutinoRegisterData(dir.absolutePath().toUtf8(), prefix.toUtf8());
-            if(data)
-            {
-                comboDatabase->addItem(prefix.replace("_", " "), quint64(data));
-            }
+//            H_RoutinoDataSet data = RoutinoRegisterData(dir.absolutePath().toUtf8(), prefix.toUtf8());
+//            if(data)
+//            {
+//                comboDatabase->addItem(prefix.replace("_", " "), quint64(data));
+//            }
         }
     }
 }
 
 void CRouterRoutino::freeDatabaseList()
 {
-    for(int i = 0; i < comboDatabase->count(); i++)
-    {
-        H_RoutinoDataSet data = H_RoutinoDataSet(comboDatabase->itemData(i, Qt::UserRole).toULongLong());
-        RoutinoFreeData(data);
-    }
+//    for(int i = 0; i < comboDatabase->count(); i++)
+//    {
+//        H_RoutinoDataSet data = H_RoutinoDataSet(comboDatabase->itemData(i, Qt::UserRole).toULongLong());
+//        RoutinoFreeData(data);
+//    }
     comboDatabase->clear();
 }
 
@@ -179,60 +179,60 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         return;
     }
 
-    H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
-    if(data == 0)
-    {
-        return;
-    }
+//    H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
+//    if(data == 0)
+//    {
+//        return;
+//    }
 
-    QString profile         = comboProfile->currentData(Qt::UserRole).toString();
+//    QString profile         = comboProfile->currentData(Qt::UserRole).toString();
 
-    SGisLine line;
-    QVector<float> lon,lat;
-    rte->getPolylineFromData(line);
-    foreach(const IGisLine::point_t &pt, line)
-    {
-        lon << pt.coord.x();
-        lat << pt.coord.y();
-    }
+//    SGisLine line;
+//    QVector<float> lon,lat;
+//    rte->getPolylineFromData(line);
+//    foreach(const IGisLine::point_t &pt, line)
+//    {
+//        lon << pt.coord.x();
+//        lat << pt.coord.y();
+//    }
 
-    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());
-    rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
-    RoutinoFreeRoute(route);
+//    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon.data(), lat.data(), line.size());
+//    rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
+//    RoutinoFreeRoute(route);
 }
 
 
 bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
-    H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
-    if(data == 0)
-    {
-        return 0;
-    }
-    QString profile         = comboProfile->currentData(Qt::UserRole).toString();
+//    H_RoutinoDataSet data   = H_RoutinoDataSet(comboDatabase->currentData(Qt::UserRole).toULongLong());
+//    if(data == 0)
+//    {
+//        return 0;
+//    }
+//    QString profile         = comboProfile->currentData(Qt::UserRole).toString();
 
 
-    float lon[2];
-    float lat[2];
+//    float lon[2];
+//    float lat[2];
 
-    lon[0] = p1.x();
-    lon[1] = p2.x();
+//    lon[0] = p1.x();
+//    lon[1] = p2.x();
 
-    lat[0] = p1.y();
-    lat[1] = p2.y();
+//    lat[0] = p1.y();
+//    lat[1] = p2.y();
 
-    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon, lat, 2);
+//    T_RoutinoRoute * route = RoutinoCalculate(data, profile.toUtf8(), comboMode->currentIndex(), lon, lat, 2);
 
-    T_RoutinoRoute * next = route;
-    while(next)
-    {
-        if(next->type != IMP_WAYPOINT)
-        {
-            coords << QPointF(next->lon, next->lat);
-        }
-        next = next->next;
-    }
+//    T_RoutinoRoute * next = route;
+//    while(next)
+//    {
+//        if(next->type != IMP_WAYPOINT)
+//        {
+//            coords << QPointF(next->lon, next->lat);
+//        }
+//        next = next->next;
+//    }
 
-    RoutinoFreeRoute(route);
+//    RoutinoFreeRoute(route);
     return !coords.isEmpty();
 }

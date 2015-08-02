@@ -732,8 +732,8 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
 
             rtept->fakeSubpt.turn      = next->turn;
             rtept->fakeSubpt.bearing   = next->bearing;
-            rtept->fakeSubpt.distance  = next->dist;
-            rtept->fakeSubpt.time      = QTime(0,0).addSecs(next->time/10);
+            rtept->fakeSubpt.distance  = next->dist * 1000;
+            rtept->fakeSubpt.time      = QTime(0,0).addSecs(next->time*60);
             rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
         }
         else if(rtept != 0)
@@ -745,8 +745,8 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
 
             subpt.turn      = next->turn;
             subpt.bearing   = next->bearing;
-            subpt.distance  = next->dist;
-            subpt.time      = subpt.time.addSecs(next->time/10);
+            subpt.distance  = next->dist * 1000;
+            subpt.time      = subpt.time.addSecs(next->time*60);
 
             if(next->string != 0)
             {

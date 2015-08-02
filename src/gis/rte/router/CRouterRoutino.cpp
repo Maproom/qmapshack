@@ -267,8 +267,6 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
         return false;
     }
 
-
-    qDebug() << comboMode->currentIndex();
     int options = ROUTINO_ROUTE_LIST_TEXT_ALL;
     if(comboMode->currentIndex() == 0)
     {
@@ -293,7 +291,6 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
     }
 
     Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints,2,options);
-    qDebug() << Routino_errno;
     if(route != NULL)
     {
         Routino_Output * next = route;

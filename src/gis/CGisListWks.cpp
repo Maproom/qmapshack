@@ -1395,12 +1395,18 @@ void CGisListWks::slotSyncWksDev()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
+    if(IDevice::count() == 0)
+    {
+        return;
+    }
+
     IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
     if(project == 0)
     {
         return;
     }
 
+    const int N = topLevelItemCount();
     QSet<QString> keys;
     if(IDevice::count() > 1)
     {
@@ -1411,9 +1417,22 @@ void CGisListWks::slotSyncWksDev()
         }
         dlg.getSlectedDevices(keys);
     }
+    else
+    {
+        for(int n = 0; n < N; n++)
+        {
+            IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
+            if(device == 0)
+            {
+                continue;
+            }
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    const int N = topLevelItemCount();
+            keys << device->getKey();
+            break;
+        }
+    }
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();    
     for(int n = 0; n < N; n++)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));

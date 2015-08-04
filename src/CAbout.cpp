@@ -22,6 +22,7 @@
 #include <QtWidgets>
 #include <gdal.h>
 #include <proj_api.h>
+#include <routino.h>
 
 CAbout::CAbout(QWidget *parent)
     : QDialog(parent)
@@ -32,6 +33,7 @@ CAbout::CAbout(QWidget *parent)
     labelQtVersion->setText(qVersion());
     labelGDALVersion->setText(GDALVersionInfo("--version"));
     labelProj4Version->setText(QString::number(PJ_VERSION));
+    labelRoutinoVersion->setText(tr("API Version %1 (expected %2)").arg(ROUTINO_API_VERSION).arg(Routino_APIVersion));
 }
 
 CAbout::~CAbout()

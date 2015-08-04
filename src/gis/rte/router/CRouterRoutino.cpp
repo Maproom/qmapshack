@@ -36,6 +36,12 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
 {
     setupUi(this);
 
+    if(Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE)
+    {
+        QMessageBox::warning(this, tr("Warning..."), tr("Found Routino with a wrong version. Expected %1 found %2").arg(ROUTINO_API_VERSION).arg(Routino_APIVersion), QMessageBox::Ok);
+        return;
+    }
+
     comboMode->addItem(tr("Shortest"));
     comboMode->addItem(tr("Quickest"));
 

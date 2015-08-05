@@ -44,6 +44,7 @@
 #include "gis/search/CSearchGoogle.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
@@ -579,8 +580,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
 
         int cnt = 1;
         int N   = items.size();
-        QProgressDialog progress("Drop items...", "Abort drop", 0, 100, this);
-        progress.setWindowModality(Qt::WindowModal);
+        CProgressDialog progress("Drop items...", 0, 100, this);
 
         foreach(QTreeWidgetItem * item, items)
         {

@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "helpers/CFileExt.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/Platform.h"
 #include "map/CMapDraw.h"
 #include "map/CMapIMG.h"
@@ -640,7 +641,6 @@ void CMapIMG::readBasics()
     int tot = subfiles.count();
 
     PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), &CMainWindow::self());
-    progress.setMinimumDuration(1000);
 
     maparea = QRectF();
     QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();

@@ -32,6 +32,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CProgressDialog.h"
 
 #include "CMainWindow.h"
 
@@ -637,8 +638,7 @@ void CQlgtDb::xferFolders()
     nDiary = 0;
 
     quint32 cnt = 1;
-    QProgressDialog progress(tr("Restore folders..."),tr("Abort"), 0, 100, gui);
-    progress.setWindowModality(Qt::WindowModal);
+    CProgressDialog progress(tr("Restore folders..."), 0, 100, gui);
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM folders");
@@ -670,8 +670,7 @@ void CQlgtDb::xferFolders()
 void CQlgtDb::xferItems()
 {
     quint32 cnt = 1;
-    QProgressDialog progress(tr("Copy items..."),tr("Abort"), 0, 100, gui);
-    progress.setWindowModality(Qt::WindowModal);
+    CProgressDialog progress(tr("Copy items..."), 0, 100, gui);
 
     nWpt = 0;
     nTrk = 0;

@@ -56,7 +56,6 @@ public:
     {
         history_t() : histIdxInitial(NOIDX), histIdxCurrent(NOIDX)
         {
-
         }
 
         qint32 histIdxInitial;

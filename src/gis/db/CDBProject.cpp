@@ -27,7 +27,9 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+
 
 
 #include <QtSql>
@@ -250,8 +252,7 @@ bool CDBProject::save()
     QSqlQuery query(db);
 
     int N = childCount();
-    QProgressDialog progress(QObject::tr("Save ..."), QObject::tr("Abort save"), 0, 100, &CMainWindow::self());
-    progress.setWindowModality(Qt::WindowModal);
+    CProgressDialog progress(QObject::tr("Save ..."), 0, 100, &CMainWindow::self());
 
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
 

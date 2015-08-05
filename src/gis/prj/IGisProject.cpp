@@ -27,6 +27,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 
 #include <QtWidgets>
@@ -238,8 +239,7 @@ void IGisProject::updateItems()
     quint32 total = cntTrkPts * cntWpts;
     quint32 current = 0;
 
-    QProgressDialog progress(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), QObject::tr("Abort"), 0, 100, &CMainWindow::self());
-    progress.setWindowModality(Qt::WindowModal);
+    CProgressDialog progress(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, 100, &CMainWindow::self());
 
     for(int i = 0; i < childCount(); i++)
     {

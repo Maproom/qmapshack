@@ -49,8 +49,8 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 }
 
 #define PROGRESS_SETUP(lbl, parent) \
-    QProgressDialog progress(lbl, "Abort", 0, 100, parent); \
-    progress.setWindowModality(Qt::WindowModal); \
+    CProgressDialog progress(lbl, 0, 100, parent);
+
 
 #define PROGRESS(x, total, cmd) \
     progress.setValue(qRound(x * 100.0 / total)); \

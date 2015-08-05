@@ -27,6 +27,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CProgressDialog.h"
 #include "plot/IPlot.h"
 
 #include <QtWidgets>
@@ -1017,7 +1018,7 @@ void CGisItemTrk::deriveSecondaryData()
 }
 
 
-void CGisItemTrk::findWaypointsCloseBy(QProgressDialog& progress, quint32& current, quint32 total)
+void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& current, quint32 total)
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if((project == 0) || (total > 20000000))

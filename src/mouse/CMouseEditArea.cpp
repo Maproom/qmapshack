@@ -75,7 +75,7 @@ void CMouseEditArea::slotCopyToOrig()
 }
 
 void CMouseEditArea::slotCopyToNew()
-{    
+{
     QMutexLocker lock(&IGisItem::mutexItems);
 
     canvas->reportStatus(key.item,"");

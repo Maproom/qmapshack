@@ -23,6 +23,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CLinksDialog.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CTextEditWidget.h"
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
@@ -261,8 +262,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
 
     int n=1;
-    QProgressDialog progress(tr("Build diary..."), tr("Abort"), 0, 100, this);
-    progress.setWindowModality(Qt::WindowModal);
+    CProgressDialog progress(tr("Build diary..."), 0, 100, this);
 
     if(comboSort->currentIndex() > IGisProject::eSortTime)
     {
@@ -352,7 +352,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, bool isReadOnly)
 }
 
 
-void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QList<CGisItemWpt*>& wpts, QProgressDialog& progress, int& n, int nItems, bool printable)
+void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QList<CGisItemWpt*>& wpts, CProgressDialog& progress, int& n, int nItems, bool printable)
 {
     int cnt, w = cursor.document()->textWidth();
 
@@ -467,7 +467,7 @@ struct wpt_info_t
     qreal descend;
 };
 
-void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, QProgressDialog &progress, int &n, int nItems, bool printable)
+void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, int nItems, bool printable)
 {
     int cnt, w = cursor.document()->textWidth();
 

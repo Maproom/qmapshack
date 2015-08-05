@@ -76,19 +76,21 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
         return;
     }
 
-    char ** profiles = Routino_GetProfileNames();
-    while(*profiles != NULL)
-    {
-        comboProfile->addItem(*profiles, *profiles);
-        profiles++;
-    }
+    comboProfile->addItem(tr("Foot"), "foot");
+    comboProfile->addItem(tr("Horse"), "horse");
+    comboProfile->addItem(tr("Wheelchair"), "wheelchair");
+    comboProfile->addItem(tr("Bicycle"), "bicycle");
+    comboProfile->addItem(tr("Moped"), "moped");
+    comboProfile->addItem(tr("Motorcycle"), "motorcycle");
+    comboProfile->addItem(tr("Motorcar"), "motorcar");
+    comboProfile->addItem(tr("Goods"), "goods");
 
-    char ** languages = Routino_GetTranslationLanguages();
-    while(*languages != NULL)
-    {
-        comboLanguage->addItem(*languages, *languages);
-        languages++;
-    }
+    comboLanguage->addItem(tr("English"), "en");
+    comboLanguage->addItem(tr("German"), "de");
+    comboLanguage->addItem(tr("French"), "fr");
+    comboLanguage->addItem(tr("Hungarian"), "hu");
+    comboLanguage->addItem(tr("Dutch"), "nl");
+    comboLanguage->addItem(tr("Russian"), "ru");
 
     connect(toolSetupPaths, SIGNAL(clicked()), this, SLOT(slotSetupPaths()));
 

@@ -20,9 +20,6 @@ find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
 
-file(GLOB XML_FILES "${CMAKE_SOURCE_DIR}/3rdparty/Routino/xml/*.xml")
-file(COPY ${XML_FILES} DESTINATION ${CMAKE_SOURCE_DIR}/src/xml/routino)
-
 set( SRCS
 
     main.cpp

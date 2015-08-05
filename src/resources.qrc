@@ -18,7 +18,6 @@
         <file>icons/8x8/bullet_red.png</file>
         <file>icons/8x8/bullet_white.png</file>
         <file>icons/8x8/bullet_yellow.png</file>
-
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
@@ -72,7 +71,7 @@
         <file>icons/32x32/QmsProject.png</file>
         <file>icons/32x32/DBProject.png</file>
         <file>icons/32x32/Route.png</file>
-        <file>icons/32x32/RouteSetup.png</file>        
+        <file>icons/32x32/RouteSetup.png</file>
         <file>icons/32x32/Close.png</file>
         <file>icons/32x32/Track.png</file>
         <file>icons/32x32/EditDetails.png</file>
@@ -150,7 +149,6 @@
         <file>icons/32x32/V.png</file>
         <file>icons/32x32/O.png</file>
         <file>icons/32x32/RteInstr.png</file>
-
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
@@ -204,7 +202,7 @@
         <file>icons/48x48/QmsProject.png</file>
         <file>icons/48x48/DBProject.png</file>
         <file>icons/48x48/Route.png</file>
-        <file>icons/48x48/RouteSetup.png</file>        
+        <file>icons/48x48/RouteSetup.png</file>
         <file>icons/48x48/Close.png</file>
         <file>icons/48x48/Track.png</file>
         <file>icons/48x48/EditDetails.png</file>
@@ -282,7 +280,6 @@
         <file>icons/48x48/V.png</file>
         <file>icons/48x48/O.png</file>
         <file>icons/48x48/RteInstr.png</file>
-
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>
@@ -358,16 +355,10 @@
         <file>pics/compass.png</file>
         <file>pics/about.png</file>
         <file>pics/noMap256x256.png</file>
-
         <file>map/WorldTopo.wmts</file>
         <file>map/WorldSat.wmts</file>
         <file>map/OpenStreetMap.tms</file>
         <file>map/OSM_Topo.tms</file>
         <file>map/OpenCycleMap.tms</file>
-
-        <file>xml/routino/routino-profiles.xml</file>
-        <file>xml/routino/routino-translations.xml</file>
-        <file>xml/routino/routino-tagging.xml</file>
-
     </qresource>
 </RCC>

@@ -51,6 +51,7 @@ private:
     void buildDatabaseList();
     void freeDatabaseList();
     void updateHelpText();
+    QString xlateRoutinoError(int err);
     QStringList dbPaths;
 };
 

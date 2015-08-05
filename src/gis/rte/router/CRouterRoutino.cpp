@@ -63,11 +63,18 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     int res = 0;
     QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
     res = Routino_ParseXMLProfiles(dirXml.absoluteFilePath("profiles.xml").toUtf8());
-    /// @todo error messages
-    qDebug() << "Routino_ParseXMLProfiles" << res;
+    if(res)
+    {
+        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+        return;
+    }
+
     res = Routino_ParseXMLTranslations(dirXml.absoluteFilePath("translations.xml").toUtf8());
-    /// @todo error messages
-    qDebug() << "Routino_ParseXMLTranslations" << res;
+    if(res)
+    {
+        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+        return;
+    }
 
     char ** profiles = Routino_GetProfileNames();
     while(*profiles != NULL)
@@ -109,6 +116,57 @@ CRouterRoutino::~CRouterRoutino()
     freeDatabaseList();
     Routino_FreeXMLProfiles();
     Routino_FreeXMLTranslations();
+}
+
+QString CRouterRoutino::xlateRoutinoError(int err)
+{
+    switch(err)
+    {
+    case ROUTINO_ERROR_NO_DATABASE:
+        return tr("A function was called without the database variable set.");
+    case ROUTINO_ERROR_NO_PROFILE:
+        return tr("A function was called without the profile variable set.");
+    case ROUTINO_ERROR_NO_TRANSLATION:
+        return tr("A function was called without the translation variable set.");
+    case ROUTINO_ERROR_NO_DATABASE_FILES:
+        return tr("The specified database to load did not exist.");
+    case ROUTINO_ERROR_BAD_DATABASE_FILES:
+        return tr("The specified database could not be loaded.");
+    case ROUTINO_ERROR_NO_PROFILES_XML:
+        return tr("The specified profiles XML file did not exist.");
+    case ROUTINO_ERROR_BAD_PROFILES_XML:
+        return tr("The specified profiles XML file could not be loaded.");
+    case ROUTINO_ERROR_NO_TRANSLATIONS_XML:
+        return tr("The specified translations XML file did not exist.");
+    case ROUTINO_ERROR_BAD_TRANSLATIONS_XML:
+        return tr("The specified translations XML file could not be loaded.");
+    case ROUTINO_ERROR_NO_SUCH_PROFILE:
+        return tr("The requested profile name does not exist in the loaded XML file.");
+    case ROUTINO_ERROR_NO_SUCH_TRANSLATION:
+        return tr("The requested translation language does not exist in the loaded XML file.");
+    case ROUTINO_ERROR_NO_NEARBY_HIGHWAY:
+        return tr("There is no highway near the coordinates to place a waypoint.");
+    case ROUTINO_ERROR_PROFILE_DATABASE_ERR:
+        return tr("The profile and database do not work together.");
+    case ROUTINO_ERROR_NOTVALID_PROFILE:
+        return tr("The profile being used has not been validated.");
+    case ROUTINO_ERROR_BAD_USER_PROFILE:
+        return tr("The user specified profile contained invalid data.");
+    case ROUTINO_ERROR_BAD_OPTIONS:
+        return tr("The routing options specified are not consistent with each other.");
+    case ROUTINO_ERROR_WRONG_API_VERSION:
+        return tr("There is a mismatch between the library and caller API version.");
+    case ROUTINO_ERROR_PROGRESS_ABORTED:
+        return tr("Route calculation was aborted by user.");
+    }
+
+    if(ROUTINO_ERROR_NO_ROUTE_1 <= err)
+    {
+        int n = err - 1000;
+        return tr("A route could not be found to waypoint %1.").arg(n);
+    }
+
+    return tr("Unknown error: %1").arg(err);
 }
 
 bool CRouterRoutino::hasFastRouting()
@@ -167,7 +225,10 @@ void CRouterRoutino::buildDatabaseList()
             {
                 comboDatabase->addItem(prefix.replace("_", " "), quint64(data));
             }
-            /// @todo error messages
+            else
+            {
+                QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+            }
         }
     }
 }
@@ -221,8 +282,8 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     int res = Routino_ValidateProfile(data,profile);
     if(res != 0)
-    {
-        QMessageBox::critical(this, tr("Error..."), tr("The database has not been created for the selected profile."), QMessageBox::Abort);
+    {        
+        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         return;
     }
 
@@ -246,7 +307,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y()*RAD_TO_DEG, pt.coord.x()*RAD_TO_DEG);
         if(waypoints[idx] == NULL)
         {
-            QMessageBox::critical(this, tr("Error..."), tr("Failed to find point in database close to route point."), QMessageBox::Abort);
+            QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
             return;
         }
         idx++;
@@ -265,7 +326,10 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     }
     else
     {
-        QMessageBox::critical(this, tr("Error..."), tr("Failed to calculate route."), QMessageBox::Abort);
+        if(Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED)
+        {
+            QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+        }
     }
 }
 
@@ -287,7 +351,7 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
     int res = Routino_ValidateProfile(data,profile);
     if(res != 0)
     {
-        QMessageBox::critical(this, tr("Error..."), tr("The database has not been created for the selected profile."), QMessageBox::Abort);
+        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         return false;
     }
 
@@ -305,12 +369,14 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
     waypoints[0] = Routino_FindWaypoint(data, profile, p1.y()*RAD_TO_DEG, p1.x()*RAD_TO_DEG);
     if(waypoints[0] == NULL)
     {
+        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         return false;
     }
 
     waypoints[1] = Routino_FindWaypoint(data, profile, p2.y()*RAD_TO_DEG, p2.x()*RAD_TO_DEG);
     if(waypoints[1] == NULL)
     {
+        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         return false;
     }
 
@@ -335,6 +401,10 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
     }
     else
     {
+        if(Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED)
+        {
+            QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+        }
         return false;
     }
 

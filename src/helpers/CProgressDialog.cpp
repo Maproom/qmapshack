@@ -41,6 +41,7 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     }
 
     hide();
+    QTimer::singleShot(1000, this, SLOT(show()));
 }
 
 CProgressDialog::~CProgressDialog()
@@ -57,11 +58,6 @@ void CProgressDialog::setValue(int val)
     QApplication::processEvents();
     progressBar->setValue(val);
     labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed()/1000.0, 0,'f',1));
-
-    if(time.elapsed() > 2000)
-    {
-        show();
-    }
 }
 
 bool CProgressDialog::wasCanceled()

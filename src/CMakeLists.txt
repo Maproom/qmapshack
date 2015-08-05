@@ -41,6 +41,7 @@ set( SRCS
     helpers/CPhotoAlbum.cpp
     helpers/CPhotoViewer.cpp
     helpers/CFadingIcon.cpp
+    helpers/CProgressDialog.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -238,6 +239,7 @@ set( HDRS
     helpers/CPhotoAlbum.h
     helpers/CPhotoViewer.h
     helpers/CFadingIcon.h
+    helpers/CProgressDialog.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h
@@ -421,6 +423,7 @@ set( UIS
     helpers/IElevationDialog.ui
     helpers/ILinksDialog.ui
     helpers/IPhotoAlbum.ui
+    helpers/IProgressDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui

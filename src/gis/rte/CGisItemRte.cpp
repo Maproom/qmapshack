@@ -722,6 +722,8 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
     Routino_Output * next = route;
     while(next)
     {
+        qDebug() << next->type;
+
         if(next->type == ROUTINO_POINT_WAYPOINT)
         {
             idxRtept++;
@@ -748,9 +750,9 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             subpt.distance  = next->dist * 1000;
             subpt.time      = subpt.time.addSecs(next->time*60);
 
-            if(next->string != 0)
+            if(next->name != 0)
             {
-                subpt.streets << next->string;
+                subpt.streets << next->name;
             }
 
             if(next->type > ROUTINO_POINT_CHANGE)

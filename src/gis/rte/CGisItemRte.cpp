@@ -722,8 +722,6 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
     Routino_Output * next = route;
     while(next)
     {
-        qDebug() << next->type;
-
         if(next->type == ROUTINO_POINT_WAYPOINT)
         {
             idxRtept++;

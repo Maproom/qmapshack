@@ -20,6 +20,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterRoutinoPathSetup.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtWidgets>
 #include <proj_api.h>
@@ -30,9 +31,8 @@
 #define _MKSTR(x)      _MKSTR_1(x)
 #endif
 
-QPointer<QProgressDialog> CRouterRoutino::progress;
+QPointer<CProgressDialog> CRouterRoutino::progress;
 
-int cnt = 0;
 
 int ProgressFunc(double complete)
 {
@@ -41,7 +41,7 @@ int ProgressFunc(double complete)
         return true;
     }
 
-    CRouterRoutino::progress->setValue(cnt++);
+    CRouterRoutino::progress->setValue(complete*100);
 
     return !CRouterRoutino::progress->wasCanceled();
 }
@@ -252,9 +252,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         idx++;
     }
 
-    progress = new QProgressDialog("Calculate route...", "Abort", 0, 100, this);
-    progress->setWindowModality(Qt::WindowModal);
-    cnt = 0;
+    progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
     Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints.data(),waypoints.size(),options, ProgressFunc);
 
@@ -269,7 +267,6 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
     {
         QMessageBox::critical(this, tr("Error..."), tr("Failed to calculate route."), QMessageBox::Abort);
     }
-
 }
 
 
@@ -317,7 +314,12 @@ bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& 
         return false;
     }
 
+    progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+
     Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints,2,options, ProgressFunc);
+
+    delete progress;
+
     if(route != NULL)
     {
         Routino_Output * next = route;

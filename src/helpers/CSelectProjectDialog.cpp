@@ -38,7 +38,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
     QListWidgetItem * lastSelectedItem = 0;
 
     if(parent)
-    {                
+    {
         for(int i = 0; i < parent->topLevelItemCount(); i++)
         {
             IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
@@ -56,7 +56,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
             {
                 lastSelectedItem = item;
             }
-        }        
+        }
     }
     else
     {
@@ -136,9 +136,11 @@ void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
     case IGisProject::eTypeQms:
         radioQms->setChecked(true);
         break;
+
     case IGisProject::eTypeGpx:
         radioGpx->setChecked(true);
         break;
+
     case IGisProject::eTypeDb:
         radioDatabase->setChecked(true);
         break;

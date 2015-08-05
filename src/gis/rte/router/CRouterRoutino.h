@@ -25,7 +25,7 @@
 
 #include <QPoint>
 
-class QProgressDialog;
+class CProgressDialog;
 
 class CRouterRoutino : public IRouter, private Ui::IRouterRoutino
 {
@@ -41,7 +41,7 @@ public:
 
     QString getOptions();
 
-    static QPointer<QProgressDialog> progress;
+    static QPointer<CProgressDialog> progress;
 
 private slots:
     void slotSetupPaths();
@@ -52,8 +52,6 @@ private:
     void freeDatabaseList();
     void updateHelpText();
     QStringList dbPaths;
-
-
 };
 
 #endif //CROUTERROUTINO_H

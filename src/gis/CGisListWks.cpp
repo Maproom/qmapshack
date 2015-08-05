@@ -1432,7 +1432,7 @@ void CGisListWks::slotSyncWksDev()
         }
     }
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();    
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     for(int n = 0; n < N; n++)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));

@@ -321,7 +321,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     if(route != NULL)
     {
-        rte->setResult(route, getOptions());
+        rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
         Routino_DeleteRoute(route);
     }
     else

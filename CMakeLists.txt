@@ -8,6 +8,7 @@ set(QT_DEV_PATH   "C:\\Qt\\5.4\\msvc2013_64" CACHE PATH "Path to directory conta
 set(GDAL_DEV_PATH "C:\\GDAL" CACHE PATH "Path to directory containing GDAL include and lib, e.g. M:\\lib\\gdal")
 set(PROJ_DEV_PATH "C:\\PROJ" CACHE PATH "Path to directory containing PROJ.4 include and lib, e.g. M:\\lib\\PROJ")
 set(ZLIB_DEV_PATH "C:\\zlib" CACHE PATH "Path to directory containing zlib include and lib, e.g. M:\\lib\\zlib")
+set(ROUTINO_DEV_PATH "C:\\temp\\routino" CACHE PATH "Path to directory containing zlib include and lib, e.g. M:\\lib\\zlib")
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT_DEV_PATH})
 endif(WIN32)
 

@@ -25,7 +25,7 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
             routino.h
         PATHS
             if(WIN32)
-            ${ROUTINO_DEV_PATH}/include
+            ${ROUTINO_DEV_PATH}
             endif(WIN32)
             /usr/include
             /usr/local/include
@@ -40,7 +40,7 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
             routino
         PATHS
             if(WIN32)
-            ${ROUTINO_DEV_PATH}/lib
+            ${ROUTINO_DEV_PATH}
             endif(WIN32)
             /usr/lib
             /usr/local/lib
@@ -58,6 +58,7 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
             /usr/share
             /usr/local/share
             /opt/local/share
+            ${ROUTINO_DEV_PATH}
         PATH_SUFFIXES
             routino
     )

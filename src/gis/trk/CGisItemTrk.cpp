@@ -1018,10 +1018,10 @@ void CGisItemTrk::deriveSecondaryData()
 }
 
 
-void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& current, quint32 total)
+void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& current)
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if((project == 0) || (total > 20000000))
+    if(project == 0)
     {
         return;
     }
@@ -1134,11 +1134,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             if(current  - lastCurrent > 100)
             {
                 lastCurrent = current;
-                progress.setValue(qRound(current * 100.0/total));
-                if(progress.wasCanceled())
-                {
-                    return;
-                }
+                PROGRESS(current, return );
             }
         }
 

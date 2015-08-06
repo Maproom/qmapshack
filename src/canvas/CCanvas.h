@@ -48,13 +48,6 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
     p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
 }
 
-#define PROGRESS_SETUP(lbl, parent) \
-    CProgressDialog progress(lbl, 0, 100, parent);
-
-
-#define PROGRESS(x, total, cmd) \
-    progress.setValue(qRound(x * 100.0 / total)); \
-    if (progress.wasCanceled()) { cmd; } \
 
 #define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,5,5)
 

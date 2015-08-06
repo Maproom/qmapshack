@@ -24,6 +24,13 @@
 #include <QTime>
 
 
+#define PROGRESS_SETUP(lbl, min, max, parent) \
+    CProgressDialog progress(lbl, min, max, parent);
+
+
+#define PROGRESS(x, cmd) \
+    progress.setValue(x); \
+    if (progress.wasCanceled()) { cmd; } \
 
 class CProgressDialog : public QDialog, private Ui::IProgressDialog
 {

@@ -237,16 +237,22 @@ void IGisProject::updateItems()
     }
 
     quint32 total = cntTrkPts * cntWpts;
+
+    if(total > 2000000)
+    {
+        return;
+    }
+
     quint32 current = 0;
 
-    CProgressDialog progress(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, 100, &CMainWindow::self());
+    PROGRESS_SETUP(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, &CMainWindow::self());
 
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(child(i));
         if(trk)
         {
-            trk->findWaypointsCloseBy(progress, current, total);
+            trk->findWaypointsCloseBy(progress, current);
             if(progress.wasCanceled())
             {
                 QString msg = QObject::tr("Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project (%1) in the future?").arg(getNameEx());

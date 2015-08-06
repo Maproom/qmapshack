@@ -262,15 +262,15 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
 
     int n=1;
-    CProgressDialog progress(tr("Build diary..."), 0, 100, this);
+    PROGRESS_SETUP(tr("Build diary..."), 0, nItems, this);
 
     if(comboSort->currentIndex() > IGisProject::eSortTime)
     {
-        drawByTrack(cursor, trks, wpts, progress, n, nItems, isReadOnly);
+        drawByTrack(cursor, trks, wpts, progress, n, isReadOnly);
     }
     else
     {
-        drawByGroup(cursor, trks, wpts, progress, n, nItems, isReadOnly);
+        drawByGroup(cursor, trks, wpts, progress, n, isReadOnly);
     }
 
     if(!areas.isEmpty())
@@ -352,7 +352,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, bool isReadOnly)
 }
 
 
-void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QList<CGisItemWpt*>& wpts, CProgressDialog& progress, int& n, int nItems, bool printable)
+void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QList<CGisItemWpt*>& wpts, CProgressDialog& progress, int& n, bool printable)
 {
     int cnt, w = cursor.document()->textWidth();
 
@@ -377,12 +377,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
         cnt = 1;
         foreach(CGisItemWpt * wpt, wpts)
         {
-            progress.setValue(n++ *100.0/nItems);
-            if(progress.wasCanceled())
-            {
-                return;
-            }
-
+            PROGRESS(n++, return );
 
             table->cellAt(cnt,eSym1).firstCursorPosition().insertImage(wpt->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
             table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(wpt->getInfo());
@@ -409,11 +404,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 
         foreach(CGisItemTrk * trk, trks)
         {
-            progress.setValue(n++ *100.0/nItems);
-            if(progress.wasCanceled())
-            {
-                return;
-            }
+            PROGRESS(n++, return );
 
             table->cellAt(cnt,eSym1).firstCursorPosition().insertImage(trk->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
@@ -467,7 +458,7 @@ struct wpt_info_t
     qreal descend;
 };
 
-void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, int nItems, bool printable)
+void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable)
 {
     int cnt, w = cursor.document()->textWidth();
 
@@ -517,11 +508,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
         foreach(const wpt_info_t &info, wptInfo)
         {
-            progress.setValue(n++ *100.0/nItems);
-            if(progress.wasCanceled())
-            {
-                return;
-            }
+            PROGRESS(n++, return );
 
             CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(info.key));
             if(wpt != 0)

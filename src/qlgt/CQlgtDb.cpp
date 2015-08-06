@@ -305,7 +305,7 @@ void CQlgtDb::migrateDB(int version)
 
             const int total = query.size();
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 4 to 5."), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 4 to 5."), 0, total, &CMainWindow::self());
 
             while(query.next())
             {
@@ -341,7 +341,7 @@ void CQlgtDb::migrateDB(int version)
                     return;
                 }
 
-                PROGRESS(progCnt++, total, continue);
+                PROGRESS(progCnt++, continue);
             }
             break;
         }
@@ -359,7 +359,7 @@ void CQlgtDb::migrateDB(int version)
 
             const int total = query.size();
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 5 to 6."), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 5 to 6."), 0, total, &CMainWindow::self());
 
             while(query.next())
             {
@@ -398,7 +398,7 @@ void CQlgtDb::migrateDB(int version)
                     return;
                 }
 
-                PROGRESS(progCnt++, total, continue);
+                PROGRESS(progCnt++, continue);
             }
 
             break;
@@ -417,7 +417,7 @@ void CQlgtDb::migrateDB(int version)
 
             const int total = query.size();
             quint32 progCnt = 0;
-            PROGRESS_SETUP(tr("Migrating database from version 6 to 7."), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 6 to 7."), 0, total, &CMainWindow::self());
 
             while(query.next())
             {
@@ -475,7 +475,7 @@ void CQlgtDb::migrateDB(int version)
                     return;
                 }
 
-                PROGRESS(progCnt++, total, continue);
+                PROGRESS(progCnt++, continue);
             }
 
             break;
@@ -483,7 +483,7 @@ void CQlgtDb::migrateDB(int version)
 
         case 8:
         {
-            PROGRESS_SETUP(tr("Migrating database from version 7 to 8."), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 7 to 8."), 0, 1, &CMainWindow::self());
 
             if(!query.exec( "CREATE TABLE diarys ("
                             "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -499,7 +499,7 @@ void CQlgtDb::migrateDB(int version)
                 return;
             }
 
-            PROGRESS(1, 1, return );
+            PROGRESS(1, return );
             break;
         }
 
@@ -512,7 +512,7 @@ void CQlgtDb::migrateDB(int version)
             QFile f(path.absoluteFilePath(name));
             f.copy(path.absoluteFilePath("qlgt_save_v4.db"));
 
-            PROGRESS_SETUP(tr("Migrating database from version 8 to 9."), &CMainWindow::self());
+            PROGRESS_SETUP(tr("Migrating database from version 8 to 9."), 0, 1, &CMainWindow::self());
 
             if(!query.exec("ALTER TABLE folders ADD COLUMN locked BOOLEAN DEFAULT FALSE"))
             {
@@ -521,7 +521,7 @@ void CQlgtDb::migrateDB(int version)
                 return;
             }
 
-            PROGRESS(1, 1, return );
+            PROGRESS(1, return );
             break;
         }
         }
@@ -638,18 +638,14 @@ void CQlgtDb::xferFolders()
     nDiary = 0;
 
     quint32 cnt = 1;
-    CProgressDialog progress(tr("Restore folders..."), 0, 100, gui);
+    PROGRESS_SETUP(tr("Restore folders..."), 0, nFolders, gui);
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM folders");
     QUERY_EXEC(return; );
     while(query.next())
     {
-        progress.setValue(cnt++ *100 / nFolders);
-        if (progress.wasCanceled())
-        {
-            break;
-        }
+        PROGRESS(cnt++, break);
 
         quint64 idFolder = query.value(0).toULongLong();
 
@@ -660,8 +656,6 @@ void CQlgtDb::xferFolders()
         }
 
         dbQms->addFolder(folder1);
-
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
     progress.setValue(100);
     gui->stdOut(tr("Imported %1 folders and %2 diaries").arg(nFolders).arg(nDiary));
@@ -670,7 +664,7 @@ void CQlgtDb::xferFolders()
 void CQlgtDb::xferItems()
 {
     quint32 cnt = 1;
-    CProgressDialog progress(tr("Copy items..."), 0, 100, gui);
+    PROGRESS_SETUP(tr("Copy items..."), 0, nItems, gui);
 
     nWpt = 0;
     nTrk = 0;
@@ -683,12 +677,7 @@ void CQlgtDb::xferItems()
     QUERY_EXEC(return; );
     while(query.next())
     {
-        progress.setValue(cnt++ *100 / nItems);
-        if (progress.wasCanceled())
-        {
-            break;
-        }
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        PROGRESS(cnt++, break);
         xferItem(query.value(0).toULongLong());
     }
     progress.setValue(100);

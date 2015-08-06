@@ -441,7 +441,7 @@ public:
      */
     void filterSpeed(qreal speed);
 
-    void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current, quint32 total);
+    void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
     static const QColor lineColors[TRK_N_COLORS];
     static const QString bulletColors[TRK_N_COLORS];

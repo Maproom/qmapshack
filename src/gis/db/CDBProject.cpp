@@ -252,7 +252,7 @@ bool CDBProject::save()
     QSqlQuery query(db);
 
     int N = childCount();
-    CProgressDialog progress(QObject::tr("Save ..."), 0, 100, &CMainWindow::self());
+    PROGRESS_SETUP(QObject::tr("Save ..."), 0, N, &CMainWindow::self());
 
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
 
@@ -260,12 +260,7 @@ bool CDBProject::save()
     {
         for(int i = 0; i < N; i++)
         {
-            progress.setValue(i * 100 / N);
-            if (progress.wasCanceled())
-            {
-                throw 0;
-            }
-
+            PROGRESS(i, throw 0);
 
             IGisItem * item = dynamic_cast<IGisItem*>(child(i));
             if(item == 0)

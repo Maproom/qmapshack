@@ -29,13 +29,6 @@
         cmd; \
     } \
 
-#define PROGRESS_SETUP(lbl, parent) \
-    CProgressDialog progress(lbl, 0, 100, parent);
-
-#define PROGRESS(x, total, cmd) \
-    progress.setValue(qRound(x * 100.0 / total)); \
-    if (progress.wasCanceled()) { cmd; } \
-
 
 #endif //MACROS_H
 

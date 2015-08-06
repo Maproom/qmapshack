@@ -126,38 +126,55 @@ QString CRouterRoutino::xlateRoutinoError(int err)
     {
     case ROUTINO_ERROR_NO_DATABASE:
         return tr("A function was called without the database variable set.");
+
     case ROUTINO_ERROR_NO_PROFILE:
         return tr("A function was called without the profile variable set.");
+
     case ROUTINO_ERROR_NO_TRANSLATION:
         return tr("A function was called without the translation variable set.");
+
     case ROUTINO_ERROR_NO_DATABASE_FILES:
         return tr("The specified database to load did not exist.");
+
     case ROUTINO_ERROR_BAD_DATABASE_FILES:
         return tr("The specified database could not be loaded.");
+
     case ROUTINO_ERROR_NO_PROFILES_XML:
         return tr("The specified profiles XML file did not exist.");
+
     case ROUTINO_ERROR_BAD_PROFILES_XML:
         return tr("The specified profiles XML file could not be loaded.");
+
     case ROUTINO_ERROR_NO_TRANSLATIONS_XML:
         return tr("The specified translations XML file did not exist.");
+
     case ROUTINO_ERROR_BAD_TRANSLATIONS_XML:
         return tr("The specified translations XML file could not be loaded.");
+
     case ROUTINO_ERROR_NO_SUCH_PROFILE:
         return tr("The requested profile name does not exist in the loaded XML file.");
+
     case ROUTINO_ERROR_NO_SUCH_TRANSLATION:
         return tr("The requested translation language does not exist in the loaded XML file.");
+
     case ROUTINO_ERROR_NO_NEARBY_HIGHWAY:
         return tr("There is no highway near the coordinates to place a waypoint.");
+
     case ROUTINO_ERROR_PROFILE_DATABASE_ERR:
         return tr("The profile and database do not work together.");
+
     case ROUTINO_ERROR_NOTVALID_PROFILE:
         return tr("The profile being used has not been validated.");
+
     case ROUTINO_ERROR_BAD_USER_PROFILE:
         return tr("The user specified profile contained invalid data.");
+
     case ROUTINO_ERROR_BAD_OPTIONS:
         return tr("The routing options specified are not consistent with each other.");
+
     case ROUTINO_ERROR_WRONG_API_VERSION:
         return tr("There is a mismatch between the library and caller API version.");
+
     case ROUTINO_ERROR_PROGRESS_ABORTED:
         return tr("Route calculation was aborted by user.");
     }
@@ -284,7 +301,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     int res = Routino_ValidateProfile(data,profile);
     if(res != 0)
-    {        
+    {
         QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         return;
     }

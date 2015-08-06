@@ -20,6 +20,7 @@
 #include "dem/CDemPropSetup.h"
 #include "dem/IDem.h"
 
+
 #include <QtWidgets>
 
 inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)

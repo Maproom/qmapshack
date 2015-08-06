@@ -19,7 +19,6 @@
 #ifndef IDEM_H
 #define IDEM_H
 
-#include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
 #include <QObject>
 #include <QPointer>

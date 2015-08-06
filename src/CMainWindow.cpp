@@ -24,6 +24,7 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
 #include "gis/CGisWidget.h"
+#include "gis/IGisLine.h"
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "helpers/CSettings.h"

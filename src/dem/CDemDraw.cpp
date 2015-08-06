@@ -23,6 +23,7 @@
 #include "dem/CDemList.h"
 #include "dem/CDemPathSetup.h"
 #include "dem/IDem.h"
+#include "gis/IGisLine.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 

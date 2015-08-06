@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
+
 #include "canvas/IDrawContext.h"
 
 #include <QtWidgets>

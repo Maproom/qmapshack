@@ -238,7 +238,7 @@ void IGisProject::updateItems()
 
     quint32 total = cntTrkPts * cntWpts;
 
-    if(total > 2000000)
+    if(total > 20000000)
     {
         return;
     }

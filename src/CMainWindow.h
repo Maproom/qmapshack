@@ -19,7 +19,6 @@
 #ifndef CMAINWINDOW_H
 #define CMAINWINDOW_H
 
-#include "gis/IGisLine.h"
 #include "ui_IMainWindow.h"
 #include <QMainWindow>
 
@@ -28,6 +27,7 @@ class CDemList;
 class QLabel;
 class CGisWidget;
 class CCanvas;
+struct SGisLine;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {

@@ -25,7 +25,6 @@
 #include <QWidget>
 
 #include "gis/IGisItem.h"
-#include "gis/IGisLine.h"
 
 class CMapDraw;
 class CGrid;
@@ -42,6 +41,7 @@ class QTimer;
 class QMovie;
 class QLabel;
 class IPlot;
+struct SGisLine;
 
 inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 {

@@ -23,6 +23,7 @@
 #include "dem/CDemDraw.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
+#include "gis/IGisLine.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "grid/CGrid.h"

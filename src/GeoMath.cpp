@@ -19,6 +19,7 @@
 
 #include "GeoMath.h"
 #include "canvas/IDrawContext.h"
+#include "units/IUnit.h"
 #include <proj_api.h>
 #include <stdlib.h>
 
@@ -27,6 +28,15 @@
 
 #define PI M_PI
 #define TWOPI (2*PI)
+
+pointDP::pointDP() : used(true), idx(NOIDX)
+{
+}
+
+segment_t::segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX)
+{
+}
+
 
 void GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, const int32_t s, qreal &deg)
 {

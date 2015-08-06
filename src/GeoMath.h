@@ -25,8 +25,6 @@
 
 #include <stdint.h>
 
-#include "units/IUnit.h"
-
 class QPolygonF;
 class IDrawContext;
 
@@ -42,18 +40,14 @@ struct point3D
 
 struct pointDP : public point3D
 {
-    pointDP() : used(true), idx(NOIDX)
-    {
-    }
+    pointDP();
     bool used;
     qint32 idx;
 };
 
 struct segment_t
 {
-    segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX)
-    {
-    }
+    segment_t();
 
     void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext * context);
 

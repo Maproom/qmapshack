@@ -82,6 +82,7 @@ void CScrOptRte::slotCopy()
 
 void CScrOptRte::slotCalc()
 {
+    hide();
     CGisWidget::self().calcRteByKey(key);
     deleteLater();
 }

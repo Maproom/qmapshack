@@ -16,6 +16,8 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
@@ -293,6 +295,8 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         return;
     }
 
+    rte->reset();
+
     QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
     QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
 
@@ -349,6 +353,12 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         {
             QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         }
+    }
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 }
 

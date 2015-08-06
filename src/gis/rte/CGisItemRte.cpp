@@ -714,8 +714,6 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
 {
     QMutexLocker lock(&mutexItems);
 
-    reset();
-
     qint32 idxRtept = -1;
     rtept_t * rtept = 0;
 
@@ -804,8 +802,6 @@ static const qint32 idx2bearing[] =
 void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 {
     QMutexLocker lock(&mutexItems);
-
-    reset();
 
     QDomElement response    = xml.firstChildElement("response");
     QDomElement route       = response.firstChildElement("route");

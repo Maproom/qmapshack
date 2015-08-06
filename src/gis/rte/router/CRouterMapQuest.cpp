@@ -96,6 +96,7 @@ void CRouterMapQuest::slotCloseStatusMsg()
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
         canvas->reportStatus("MapQuest", "");
     }
 }
@@ -191,6 +192,8 @@ void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
     {
         return;
     }
+
+    rte->reset();
 
     slotCloseStatusMsg();
 
@@ -294,6 +297,7 @@ void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
         canvas->reportStatus("MapQuest", tr("<b>MapQuest</b><br/>Routing request sent to server. Please wait..."));
     }
 }

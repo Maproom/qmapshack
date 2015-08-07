@@ -23,3 +23,4 @@ Next to QT5 you will need the development packages of::
 
 * Proj4
 * GDAL
+* Routino

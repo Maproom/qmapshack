@@ -27,6 +27,8 @@ class CDetailsPrj;
 class IGisProject;
 class CGisItemTrk;
 class CGisItemWpt;
+class CGisItemOvlArea;
+class CGisItemRte;
 class CProgressDialog;
 
 class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
@@ -56,6 +58,8 @@ private:
     void drawTrackSummary(QTextCursor& cursor, bool isReadOnly);
     void drawByGroup(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable);
     void drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable);
+    void drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas, CProgressDialog &progress, int &n, bool printable);
+    void drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CProgressDialog &progress, int &n, bool printable);
 
     enum eTblCol1 {eSym1, eInfo1, eComment1, eMax1};
     enum eTblCol2 {eSym2, eInfo2, eData2, eComment2, eMax2};

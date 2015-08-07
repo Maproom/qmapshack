@@ -20,6 +20,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/CDetailsPrj.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CLinksDialog.h"
@@ -124,7 +125,7 @@ bool sortWptByTime(const CGisItemWpt * wpt1, const CGisItemWpt * wpt2)
 
 void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 {
-    int cnt, w = doc.textWidth();
+    int w = doc.textWidth();
     int nItems = 0;
 
     QFontMetrics fm(QFont(font().family(),12));
@@ -230,6 +231,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     }
 
     QList<CGisItemTrk*> trks;
+    QList<CGisItemRte*> rtes;
     QList<CGisItemWpt*> wpts;
     QList<CGisItemOvlArea*> areas;
     const int N = prj.childCount();
@@ -239,6 +241,14 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         if(trk != 0)
         {
             trks << trk;
+            nItems++;
+            continue;
+        }
+
+        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(prj.child(i));
+        if(rte != 0)
+        {
+            rtes << rte;
             nItems++;
             continue;
         }
@@ -273,37 +283,9 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         drawByGroup(cursor, trks, wpts, progress, n, isReadOnly);
     }
 
-    if(!areas.isEmpty())
-    {
-        cursor.insertHtml(tr("<h2>Areas</h2>"));
-        QTextTable * table = cursor.insertTable(areas.count()+1, eMax1, fmtTableStandard);
+    drawRoute(cursor, rtes, progress, n, isReadOnly);
 
-        table->cellAt(0,eSym1).setFormat(fmtCharHeader);
-        table->cellAt(0,eInfo1).setFormat(fmtCharHeader);
-        table->cellAt(0,eComment1).setFormat(fmtCharHeader);
-
-        table->cellAt(0,eInfo1).firstCursorPosition().insertText(tr("Info"));
-        table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
-
-        cnt = 1;
-        foreach(CGisItemOvlArea * area, areas)
-        {
-            progress.setValue(n++ *100.0/nItems);
-            if(progress.wasCanceled())
-            {
-                return;
-            }
-
-
-            table->cellAt(cnt,eSym1).firstCursorPosition().insertImage(area->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
-            table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(area->getInfo());
-            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||isReadOnly, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
-            cnt++;
-        }
-
-        cursor.setPosition(table->lastPosition() + 1);
-    }
-
+    drawArea(cursor, areas, progress, n, isReadOnly);
 
     QTimer::singleShot(1, this, SLOT(slotSetScrollbar()));
 }
@@ -576,6 +558,66 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
         cursor.setPosition(table->lastPosition() + 1);
     }
+}
+
+void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas, CProgressDialog &progress, int &n, bool printable)
+{
+    if(areas.isEmpty())
+    {
+        return;
+    }
+    cursor.insertHtml(tr("<h2>Areas</h2>"));
+    QTextTable * table = cursor.insertTable(areas.count()+1, eMax1, fmtTableStandard);
+
+    table->cellAt(0,eSym1).setFormat(fmtCharHeader);
+    table->cellAt(0,eInfo1).setFormat(fmtCharHeader);
+    table->cellAt(0,eComment1).setFormat(fmtCharHeader);
+
+    table->cellAt(0,eInfo1).firstCursorPosition().insertText(tr("Info"));
+    table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
+
+    int cnt = 1;
+    foreach(CGisItemOvlArea * area, areas)
+    {
+        PROGRESS(n++, return );
+
+        table->cellAt(cnt,eSym1).firstCursorPosition().insertImage(area->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+        table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(area->getInfo());
+        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
+        cnt++;
+    }
+
+    cursor.setPosition(table->lastPosition() + 1);
+}
+
+void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CProgressDialog &progress, int &n, bool printable)
+{
+    if(rtes.isEmpty())
+    {
+        return;
+    }
+    cursor.insertHtml(tr("<h2>Routes</h2>"));
+    QTextTable * table = cursor.insertTable(rtes.count()+1, eMax1, fmtTableStandard);
+
+    table->cellAt(0,eSym1).setFormat(fmtCharHeader);
+    table->cellAt(0,eInfo1).setFormat(fmtCharHeader);
+    table->cellAt(0,eComment1).setFormat(fmtCharHeader);
+
+    table->cellAt(0,eInfo1).firstCursorPosition().insertText(tr("Info"));
+    table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
+
+    int cnt = 1;
+    foreach(CGisItemRte * rte, rtes)
+    {
+        PROGRESS(n++, return );
+
+        table->cellAt(cnt,eSym1).firstCursorPosition().insertImage(rte->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+        table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(rte->getInfo());
+        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(rte->isReadOnly()||printable, rte->getComment(), rte->getDescription(), rte->getLinks(), rte->getKey().item));
+        cnt++;
+    }
+
+    cursor.setPosition(table->lastPosition() + 1);
 }
 
 void CDetailsPrj::slotLinkActivated(const QString& link)

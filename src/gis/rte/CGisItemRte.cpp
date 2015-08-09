@@ -733,6 +733,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             rtept->fakeSubpt.distance  = next->dist * 1000;
             rtept->fakeSubpt.time      = QTime(0,0).addSecs(next->time*60);
             rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
+            rtept->fakeSubpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
         else if(rtept != 0)
         {
@@ -763,6 +764,9 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             totalDistance = subpt.distance;
             totalTime     = subpt.time;
             totalDays     = qFloor(next->time/864000);
+
+            subpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
+
         }
 
         next = next->next;

@@ -310,7 +310,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         return;
     }
 
-    int options = ROUTINO_ROUTE_LIST_TEXT_ALL;
+    int options = ROUTINO_ROUTE_LIST_HTML;
     if(comboMode->currentIndex() == 0)
     {
         options |= ROUTINO_ROUTE_SHORTEST;

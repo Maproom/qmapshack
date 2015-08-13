@@ -311,6 +311,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 void CDetailsPrj::slotSetScrollbar()
 {
     textDesc->verticalScrollBar()->setValue(scrollVal);
+    comboSort->setEnabled(true);
 }
 
 void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
@@ -759,6 +760,7 @@ void CDetailsPrj::slotLock(bool on)
 
 void CDetailsPrj::slotSortMode(int idx)
 {
+    comboSort->setEnabled(false);
     prj.setSorting(IGisProject::sorting_e(idx));
     slotSetupGui();
 }

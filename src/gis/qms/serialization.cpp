@@ -28,12 +28,13 @@
 
 #define VER_TRK         quint8(1)
 #define VER_WPT         quint8(2)
-#define VER_RTE         quint8(1)
+#define VER_RTE         quint8(2)
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)
 #define VER_TRKSEG      quint8(1)
 #define VER_TRKPT       quint8(1)
-#define VER_RTEPT       quint8(1)
+#define VER_RTEPT       quint8(2)
+#define VER_RTESUBPT    quint8(1)
 #define VER_WPT_T       quint8(1)
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
@@ -325,10 +326,50 @@ QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkpt_t& pt)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CGisItemRte::subpt_t& pt)
+{
+    stream << VER_RTESUBPT;
+    stream << pt.lon;
+    stream << pt.lat;
+    stream << pt.type;
+
+    stream << pt.turn;
+    stream << pt.bearing;
+    stream << pt.streets;
+
+    stream << pt.instruction;
+    stream << pt.distance;
+    stream << pt.time;
+
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CGisItemRte::subpt_t& pt)
+{
+    quint8 version;
+
+    stream >> version;
+    stream >> pt.lon;
+    stream >> pt.lat;
+    stream >> pt.type;
+
+    stream >> pt.turn;
+    stream >> pt.bearing;
+    stream >> pt.streets;
+
+    stream >> pt.instruction;
+    stream >> pt.distance;
+    stream >> pt.time;
+
+    return stream;
+}
+
 QDataStream& operator<<(QDataStream& stream, const CGisItemRte::rtept_t& pt)
 {
     stream << VER_RTEPT << pt.focus << pt.icon;
     stream << (const IGisItem::wpt_t&)pt;
+    stream << pt.fakeSubpt;
+    stream << pt.subpts;
     return stream;
 }
 
@@ -337,6 +378,11 @@ QDataStream& operator>>(QDataStream& stream, CGisItemRte::rtept_t& pt)
     quint8 version;
     stream >> version >> pt.focus >> pt.icon;
     stream >> (IGisItem::wpt_t&)pt;
+    if(version > 1)
+    {
+        stream >> pt.fakeSubpt;
+        stream >> pt.subpts;
+    }
     return stream;
 }
 
@@ -541,6 +587,14 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
     in >> rte.number;
     in >> rte.type;
     in >> rte.pts;
+    if(version > 1)
+    {
+        in >> lastRoutedWith;
+        in >> lastRoutedTime;
+        in >> totalDistance;
+        in >> totalTime;
+    }
+
 
     setSymbol();
     deriveSecondaryData();
@@ -567,6 +621,10 @@ QDataStream& CGisItemRte::operator>>(QDataStream& stream)
     out << rte.number;
     out << rte.type;
     out << rte.pts;
+    out << lastRoutedWith;
+    out << lastRoutedTime;
+    out << totalDistance;
+    out << totalTime;
 
     stream.writeRawData(MAGIC_RTE, MAGIC_SIZE);
     stream << VER_RTE;

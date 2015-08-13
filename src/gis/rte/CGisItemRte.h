@@ -47,7 +47,7 @@ public:
             , type(eTypeNone)
             , turn(NOFLOAT)
             , bearing(NOFLOAT)
-            , time(0,0)
+            , time(0)
         {
         }
 
@@ -68,7 +68,7 @@ public:
 
         QString instruction;
         qreal distance;
-        QTime time;
+        quint32 time;
     };
 
     struct rtept_t : public wpt_t
@@ -78,12 +78,13 @@ public:
             fakeSubpt.type = subpt_t::eTypeWpt;
         }
 
+        void updateIcon();
 
         QPixmap icon;
         QPointF focus;
-        QVector<subpt_t> subpts;
 
         subpt_t fakeSubpt;
+        QVector<subpt_t> subpts;
     };
 
     struct rte_t
@@ -101,7 +102,6 @@ public:
         QString type;
         QVector<rtept_t> pts;
         // -- all gpx tags - stop
-        QMap<QString, QVariant> extensions;
     };
 
     CGisItemRte(const QDomNode &xml, IGisProject *parent);
@@ -224,8 +224,7 @@ private:
     QDateTime lastRoutedTime;
 
     qreal totalDistance;
-    QTime totalTime;
-    quint32 totalDays;
+    quint32 totalTime;
 
     const subpt_t * mouseMoveFocus;
 };

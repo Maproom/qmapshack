@@ -46,7 +46,7 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
         item->setText(wpt->getName());
         item->setIcon(wpt->getIcon());
         item->setToolTip(wpt->getInfo());
-        item->setData(Qt::UserRole, QPointF(wpt->getPosition()*DEG_TO_RAD));
+        item->setData(Qt::UserRole + 0, QPointF(wpt->getPosition()*DEG_TO_RAD));
     }
 
     connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
@@ -78,7 +78,7 @@ void CCreateRouteFromWpt::accept()
     for(int i = 0; i < listWidget->count(); i++)
     {
         QListWidgetItem * item = listWidget->item(i);
-        points << IGisLine::point_t(item->data(Qt::UserRole).toPointF());
+        points << IGisLine::point_t(item->data(Qt::UserRole + 0).toPointF());
     }
 
     CGisItemRte* rte = new CGisItemRte(points,name, project, NOIDX);

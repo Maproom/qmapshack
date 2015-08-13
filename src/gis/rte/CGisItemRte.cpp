@@ -37,13 +37,26 @@ IGisItem::key_t CGisItemRte::keyUserFocus;
 
 #define MIN_DIST_FOCUS 200
 
+void CGisItemRte::rtept_t::updateIcon()
+{
+    if(sym.isEmpty())
+    {
+        icon  = QPixmap();
+        focus = NOPOINTF;
+    }
+    else
+    {
+        icon = getWptIconByName(sym, focus);
+    }
+}
+
 /// used to create a copy of route with new parent
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalTime(0)
     , mouseMoveFocus(0)
 {
     *this = parentRte;
@@ -70,8 +83,6 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
         flags &= ~eFlagWriteAllowed;
     }
 
-
-
     setupHistory();
     deriveSecondaryData();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -83,7 +94,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalTime(0)
     , mouseMoveFocus(0)
 {
     // --- start read and process data ----
@@ -100,7 +111,7 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalTime(0)
     , mouseMoveFocus(0)
 {
     history = hist;
@@ -113,7 +124,7 @@ CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalTime(0)
     , mouseMoveFocus(0)
 {
     loadFromDb(id, db);
@@ -124,7 +135,7 @@ CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *pr
     , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , totalDistance(NOFLOAT)
-    , totalDays(NOINT)
+    , totalTime(0)
     , mouseMoveFocus(0)
 {
     rte.name = name;
@@ -166,8 +177,13 @@ void CGisItemRte::deriveSecondaryData()
     qreal south =  90;
     qreal west  =  180;
 
-    foreach(const rtept_t &rtept, rte.pts)
+    //foreach(const rtept_t &rtept, rte.pts)
+    const int N = rte.pts.count();
+
+    for(int i = 0; i < N; i++)
     {
+        rtept_t &rtept = rte.pts[i];
+
         if(rtept.lon < west)
         {
             west    = rtept.lon;
@@ -204,6 +220,8 @@ void CGisItemRte::deriveSecondaryData()
                 north   = subpt.lat;
             }
         }
+
+        rtept.updateIcon();
     }
 
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
@@ -274,16 +292,11 @@ QString CGisItemRte::getInfo(bool allowEdit) const
     }
 
     str += "<br/>\n";
-    if(totalTime.isValid())
+
+    if(totalTime != 0)
     {
-        if(totalDays != 0 && totalDays != NOINT)
-        {
-            str += QObject::tr("Time: %2 days %1").arg(totalTime.toString()).arg(totalDays);
-        }
-        else
-        {
-            str += QObject::tr("Time: %1").arg(totalTime.toString());
-        }
+        IUnit::self().seconds2time(totalTime, val1, unit1);
+        str += QObject::tr("Time: %1 %2").arg(val1).arg(unit1);
     }
     else
     {
@@ -366,7 +379,9 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     gis->convertRad2Px(p2);
     QRectF extViewport(p1,p2);
 
-    QVector<qint32> points;
+    QVector<qint32>  points;
+    QVector<QPixmap> icons;
+    QVector<QPointF> focus;
 
     foreach(const rtept_t &rtept, rte.pts)
     {
@@ -376,6 +391,8 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         line << pt;
         points << 1;
+        icons << rtept.icon;
+        focus << rtept.focus;
 
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
         foreach(const subpt_t &subpt, rtept.subpts)
@@ -419,13 +436,18 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     p.drawPolyline(line);
 
     p.setPen(Qt::NoPen);
-    for(int i = 0; i < line.size(); i++)
+    for(int i = 0, n = 0; i < line.size(); i++)
     {
         switch(points[i])
         {
         case 1:
             p.setBrush(Qt::red);
             p.drawEllipse(line[i],5,5);
+            if(focus[n] != NOPOINTF)
+            {
+                p.drawPixmap(line[i] - focus[n], icons[n]);
+            }
+            n++;
             break;
 
         case 2:
@@ -454,7 +476,8 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 
         QString str, val, unit;
-        str += QObject::tr("Time: %1 ").arg(mouseMoveFocus->time.toString());
+        IUnit::self().seconds2time(mouseMoveFocus->time, val, unit);
+        str += QObject::tr("Time: %1 %2").arg(val).arg(unit) + " ";
         IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
         str += QObject::tr("Distance: %1 %2").arg(val).arg(unit);
         str += "\n" + mouseMoveFocus->instruction;
@@ -633,9 +656,8 @@ void CGisItemRte::reset()
     }
 
     mouseMoveFocus  = 0;
-    totalDays       = NOINT;
     totalDistance   = NOFLOAT;
-    totalTime       = QTime();
+    totalTime       = 0;
     lastRoutedTime  = QDateTime();
     lastRoutedWith  = "";
 
@@ -731,7 +753,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             rtept->fakeSubpt.turn      = next->turn;
             rtept->fakeSubpt.bearing   = next->bearing;
             rtept->fakeSubpt.distance  = next->dist * 1000;
-            rtept->fakeSubpt.time      = QTime(0,0).addSecs(next->time*60);
+            rtept->fakeSubpt.time      = next->time * 60;
             rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
             rtept->fakeSubpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
@@ -745,7 +767,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             subpt.turn      = next->turn;
             subpt.bearing   = next->bearing;
             subpt.distance  = next->dist * 1000;
-            subpt.time      = subpt.time.addSecs(next->time*60);
+            subpt.time      = next->time * 60;
 
             if(next->name != 0)
             {
@@ -763,10 +785,8 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
 
             totalDistance = subpt.distance;
             totalTime     = subpt.time;
-            totalDays     = qFloor(next->time/864000);
 
             subpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
-
         }
 
         next = next->next;
@@ -812,7 +832,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 
     // get time of travel
     QDomElement xmlTime     = route.firstChildElement("time");
-    totalTime = QTime(0,0).addSecs(xmlTime.text().toUInt());
+    totalTime = xmlTime.text().toUInt();
 
 
     // build list of maneuvers
@@ -892,7 +912,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         subpt.type              = subpt_t::eTypeJunct;
         subpt.instruction       = maneuver.instruction;
 
-        subpt.time              = QTime(0,0).addSecs(time);
+        subpt.time              = time;
         time += maneuver.time;
 
         subpt.distance          = dist;

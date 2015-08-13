@@ -174,6 +174,17 @@ public:
      */
     const key_t& getKey();
 
+    /**
+       @brief Get a hash over the items data.
+
+       Every entry in the history has a hash over the item's serialized data. If the
+       data changes a new history entry is created and a new hash calculated. Thus the
+       has can be used to detect if an item has been changed between the last time the
+       hash was read.
+
+       @return The hash as a string reference.
+    */
+    const QString& getHash();
 
     /**
        @brief Get the icon attached to object
@@ -456,7 +467,6 @@ protected:
 
     quint32 flags;
     key_t key;
-    QString hash;
     QPixmap icon;
     QRectF boundingRect;
 

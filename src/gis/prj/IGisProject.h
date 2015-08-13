@@ -452,6 +452,8 @@ protected:
     qreal totalDescend;
     quint32 totalElapsedSeconds;
     quint32 totalElapsedSecondsMoving;
+
+    QString hashTrkWpt[2];
 };
 
 #endif //IGISPROJECT_H

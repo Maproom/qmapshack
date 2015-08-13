@@ -784,6 +784,7 @@ void CDetailsPrj::slotPrint()
 
 void CDetailsPrj::slotLock(bool on)
 {
+    prj.blockUpdateItems(true);
     const int N = prj.childCount();
     for(int n = 0; n < N; n++)
     {
@@ -793,7 +794,7 @@ void CDetailsPrj::slotLock(bool on)
             item->setReadOnlyMode(on);
         }
     }
-
+    prj.blockUpdateItems(false);
     slotSetupGui();
 }
 

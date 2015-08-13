@@ -432,7 +432,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
         if(isReadOnly() && !readOnly)
         {
             QApplication::setOverrideCursor(Qt::ArrowCursor);
-            QString str = QObject::tr("This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.");
+            QString str = QObject::tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.").arg(getName());
             int res = QMessageBox::warning(&CMainWindow::self(), QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
             QApplication::restoreOverrideCursor();
             if(res != QMessageBox::Ok)
@@ -442,7 +442,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
         }
     }
 
-    // finally change falg
+    // finally change flag
     if(readOnly)
     {
         flags &= ~eFlagWriteAllowed;
@@ -464,6 +464,15 @@ const IGisItem::key_t &IGisItem::getKey()
         genKey();
     }
     return key;
+}
+
+const QString& IGisItem::getHash()
+{
+    if(history.histIdxCurrent == NOIDX)
+    {
+        return noKey;
+    }
+    return history.events[history.histIdxCurrent].hash;
 }
 
 QColor IGisItem::str2color(const QString& name)

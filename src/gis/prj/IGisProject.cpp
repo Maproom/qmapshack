@@ -236,13 +236,12 @@ void IGisProject::updateItems()
         return;
     }
 
-    quint32 total = cntTrkPts * cntWpts;
-
-    if(total > 2000000)
+    if(hashTrkWpt[0] == hashTrkWpt[1])
     {
         return;
     }
 
+    quint32 total   = cntTrkPts * cntWpts;
     quint32 current = 0;
 
     PROGRESS_SETUP(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, &CMainWindow::self());

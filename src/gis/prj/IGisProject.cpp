@@ -219,6 +219,8 @@ void IGisProject::setChanged()
 void IGisProject::switchOnCorrelation()
 {
     noCorrelation = false;
+    hashTrkWpt[0].clear();
+    hashTrkWpt[1].clear();
     updateItems();
 }
 

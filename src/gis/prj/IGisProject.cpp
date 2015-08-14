@@ -243,6 +243,7 @@ void IGisProject::updateItems()
 
     quint32 total   = cntTrkPts * cntWpts;
     quint32 current = 0;
+
     PROGRESS_SETUP(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, &CMainWindow::self());
 
     for(int i = 0; i < childCount(); i++)
@@ -725,13 +726,11 @@ void IGisProject::updateItemCounters()
         if(trk)
         {
             cntTrkPts       += trk->getNumberOfVisiblePoints();
-
             totalDistance   += trk->getTotalDistance();
             totalAscend     += trk->getTotalAscend();
             totalDescend    += trk->getTotalDescend();
             totalElapsedSeconds += trk->getTotalElapsedSeconds();
             totalElapsedSecondsMoving += trk->getTotalElapsedSecondsMoving();
-
             stream << trk->getHash();
         }
 
@@ -742,13 +741,11 @@ void IGisProject::updateItemCounters()
             stream << wpt->getHash();
         }
     }
-
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(buffer);
 
     hashTrkWpt[1] = hashTrkWpt[0];
     hashTrkWpt[0] = md5.result().toHex();
-
 }
 
 void IGisProject::blockUpdateItems(bool yes)

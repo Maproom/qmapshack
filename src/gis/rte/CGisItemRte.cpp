@@ -49,7 +49,6 @@ void CGisItemRte::rtept_t::updateIcon()
         icon = getWptIconByName(sym, focus);
     }
 }
-
 /// used to create a copy of route with new parent
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
@@ -82,6 +81,8 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
     {
         flags &= ~eFlagWriteAllowed;
     }
+
+
 
     setupHistory();
     deriveSecondaryData();
@@ -183,7 +184,6 @@ void CGisItemRte::deriveSecondaryData()
     for(int i = 0; i < N; i++)
     {
         rtept_t &rtept = rte.pts[i];
-
         if(rtept.lon < west)
         {
             west    = rtept.lon;
@@ -220,7 +220,6 @@ void CGisItemRte::deriveSecondaryData()
                 north   = subpt.lat;
             }
         }
-
         rtept.updateIcon();
     }
 
@@ -292,7 +291,6 @@ QString CGisItemRte::getInfo(bool allowEdit) const
     }
 
     str += "<br/>\n";
-
     if(totalTime != 0)
     {
         IUnit::self().seconds2time(totalTime, val1, unit1);
@@ -461,7 +459,6 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QMutexLocker lock(&mutexItems);
-
     if(rte.pts.isEmpty())
     {
         return;
@@ -518,7 +515,6 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
     QMutexLocker lock(&mutexItems);
-
     if(!isVisible(boundingRect, viewport, gis))
     {
         return;
@@ -604,7 +600,6 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 {
     QMutexLocker lock(&mutexItems);
-
     mouseMoveFocus = 0;
 
     readRouteDataFromGisLine(l);
@@ -616,7 +611,6 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 void CGisItemRte::getPolylineFromData(SGisLine& l)
 {
     QMutexLocker lock(&mutexItems);
-
     l.clear();
     foreach(const rtept_t &rtept, rte.pts)
     {
@@ -635,7 +629,6 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
 void CGisItemRte::calc()
 {
     QMutexLocker lock(&mutexItems);
-
     mouseMoveFocus = 0;
     for(int i = 0; i < rte.pts.size(); i++)
     {
@@ -647,7 +640,6 @@ void CGisItemRte::calc()
 void CGisItemRte::reset()
 {
     QMutexLocker lock(&mutexItems);
-
     for(int i = 0; i < rte.pts.size(); i++)
     {
         rtept_t& pt = rte.pts[i];
@@ -785,7 +777,6 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
 
             totalDistance = subpt.distance;
             totalTime     = subpt.time;
-
             subpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
 

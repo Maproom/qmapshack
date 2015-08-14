@@ -5713,9 +5713,8 @@ Areas: %1</source>
         <translation>Projekt speichern?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
         <source>The project &quot;%1&quot; was changed. Save befor closing it?</source>
-        <translation>Das Projekt &quot;%1&quot; wurde geändert. Speichern bevor es geschlossen wird?</translation>
+        <translation type="obsolete">Das Projekt &quot;%1&quot; wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="247"/>
@@ -5727,9 +5726,18 @@ Areas: %1</source>
         <translation type="obsolete">Abbrechen</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="257"/>
         <source>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project (%1) in the future?</source>
-        <translation>Hat das zu lange gedauert? Wollen Sie die Verknüpfung von Tracks und Wegpunkten auch in Zukunft für das Projekt (%1) überspringen?</translation>
+        <translation type="obsolete">Hat das zu lange gedauert? Wollen Sie die Verknüpfung von Tracks und Wegpunkten auch in Zukunft für das Projekt (%1) überspringen?</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IGisProject.cpp" line="257"/>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="258"/>

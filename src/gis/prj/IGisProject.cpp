@@ -106,7 +106,7 @@ bool IGisProject::askBeforClose()
     if(isChanged())
     {
         QApplication::setOverrideCursor(Qt::ArrowCursor);
-        res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Save project?"), QObject::tr("The project \"%1\" was changed. Save befor closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+        res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save befor closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
         QApplication::restoreOverrideCursor();
 
         if(res == QMessageBox::Save)
@@ -254,7 +254,7 @@ void IGisProject::updateItems()
             trk->findWaypointsCloseBy(progress, current);
             if(progress.wasCanceled())
             {
-                QString msg = QObject::tr("Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project (%1) in the future?").arg(getNameEx());
+                QString msg = QObject::tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
                 int res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Cancelled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
                 noCorrelation = res == QMessageBox::Yes;
                 break;

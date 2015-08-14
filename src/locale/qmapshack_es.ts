@@ -5482,18 +5482,18 @@ Areas: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
-        <source>The project &quot;%1&quot; was changed. Save befor closing it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/prj/IGisProject.cpp" line="247"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/prj/IGisProject.cpp" line="257"/>
-        <source>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project (%1) in the future?</source>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

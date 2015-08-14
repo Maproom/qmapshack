@@ -5557,9 +5557,8 @@ Oblasti: %1</translation>
         <translation>Uložit projekt?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
         <source>The project &quot;%1&quot; was changed. Save befor closing it?</source>
-        <translation>Projekt &quot;%1&quot; byl změněn. Uložit jej před zavřením?</translation>
+        <translation type="obsolete">Projekt &quot;%1&quot; byl změněn. Uložit jej před zavřením?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="247"/>
@@ -5571,9 +5570,18 @@ Oblasti: %1</translation>
         <translation type="obsolete">Přerušit</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="257"/>
         <source>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project (%1) in the future?</source>
-        <translation>Trvalo to moc dlouho? Chcete svázání stop a cestovních bodů pro tento projekt (%1) přeskočit i v budoucnu?</translation>
+        <translation type="obsolete">Trvalo to moc dlouho? Chcete svázání stop a cestovních bodů pro tento projekt (%1) přeskočit i v budoucnu?</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IGisProject.cpp" line="257"/>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="258"/>

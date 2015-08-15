@@ -40,6 +40,8 @@ void CMouseWptBubble::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRe
 
 void CMouseWptBubble::mousePressEvent(QMouseEvent * e)
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     QPointF pos = e->pos();
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
@@ -55,6 +57,8 @@ void CMouseWptBubble::mousePressEvent(QMouseEvent * e)
 
 void CMouseWptBubble::mouseMoveEvent(QMouseEvent * e)
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     QPointF pos = e->pos();
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
@@ -70,6 +74,8 @@ void CMouseWptBubble::mouseMoveEvent(QMouseEvent * e)
 
 void CMouseWptBubble::mouseReleaseEvent(QMouseEvent *e)
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     QPointF pos = e->pos();
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));

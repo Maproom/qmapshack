@@ -214,6 +214,8 @@ void CMouseRangeTrk::wheelEvent(QWheelEvent * e)
 
 void CMouseRangeTrk::slotHidePoints()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk != 0)
     {
@@ -231,6 +233,8 @@ void CMouseRangeTrk::slotHidePoints()
 
 void CMouseRangeTrk::slotShowPoints()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk != 0)
     {
@@ -249,6 +253,8 @@ void CMouseRangeTrk::slotShowPoints()
 
 void CMouseRangeTrk::slotCopy()
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk != 0)
     {

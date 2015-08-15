@@ -94,7 +94,7 @@ void CMouseMoveWpt::slotPanCanvas()
 }
 
 void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
-{
+{       
     point  = e->pos();
     if(e->button() == Qt::RightButton)
     {
@@ -103,6 +103,8 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
     }
     else if(e->button() == Qt::LeftButton)
     {
+        QMutexLocker lock(&IGisItem::mutexItems);
+
         QPointF pos = e->pos();
         gis->convertPx2Rad(pos);
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));

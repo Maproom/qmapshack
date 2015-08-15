@@ -48,12 +48,20 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
+    connect(toolDelete, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolEdit, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolMove, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolProj, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolBubble, SIGNAL(clicked()), this, SLOT(hide()));
+
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
     connect(toolMove, SIGNAL(clicked()), this, SLOT(slotMove()));
     connect(toolProj, SIGNAL(clicked()), this, SLOT(slotProj()));
     connect(toolBubble, SIGNAL(clicked()), this, SLOT(slotBubble()));
+
 
     adjustSize();
 }
@@ -70,7 +78,6 @@ void CScrOptWpt::slotDelete()
 
 void CScrOptWpt::slotEdit()
 {
-    hide();
     CGisWidget::self().editItemByKey(key);
     deleteLater();
 }

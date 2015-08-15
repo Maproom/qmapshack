@@ -52,6 +52,16 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
+    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolDelete, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolProfile, SIGNAL(toggled(bool)), this, SLOT(hide()));
+    connect(toolCut, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolEdit, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolReverse, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolCombine, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolRange, SIGNAL(clicked()), this, SLOT(hide()));
+
     connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
@@ -61,6 +71,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolReverse, SIGNAL(clicked()), this, SLOT(slotReverse()));
     connect(toolCombine, SIGNAL(clicked()), this, SLOT(slotCombine()));
     connect(toolRange, SIGNAL(clicked()), this, SLOT(slotRange()));
+
 
     // reset user focus if the track has it
     trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CScrOptTrk");

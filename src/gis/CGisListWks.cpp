@@ -691,6 +691,8 @@ CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
 
 void CGisListWks::slotSaveWorkspace()
 {
+    CGisListWksEditLock lock(true,IGisItem::mutexItems);
+
     if(!saveOnExit)
     {
         return;
@@ -740,7 +742,9 @@ void CGisListWks::slotSaveWorkspace()
 }
 
 void CGisListWks::slotLoadWorkspace()
-{
+{   
+    CGisListWksEditLock lock(true,IGisItem::mutexItems);
+
     QSqlQuery query(db);
 
     query.prepare("SELECT type, key, name, changed, data FROM workspace");
@@ -749,8 +753,6 @@ void CGisListWks::slotLoadWorkspace()
     const int total = query.size();
     PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);
     quint32 progCnt = 0;
-
-    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     while(query.next())
     {
@@ -816,7 +818,6 @@ void CGisListWks::slotLoadWorkspace()
     }
 
     emit sigChanged();
-    QApplication::restoreOverrideCursor();
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)

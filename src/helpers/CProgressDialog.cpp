@@ -55,6 +55,11 @@ void CProgressDialog::reject()
 
 void CProgressDialog::setValue(int val)
 {
+    if(!isVisible())
+    {
+        return;
+    }
+
     QApplication::processEvents();
     progressBar->setValue(val);
     labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed()/1000.0, 0,'f',1));

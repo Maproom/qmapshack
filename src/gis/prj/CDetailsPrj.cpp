@@ -36,6 +36,7 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     : QWidget(parent)
     , prj(prj)
     , scrollVal(0)
+    , mutex(QMutex::NonRecursive)
 {
     setupUi(this);
 
@@ -50,6 +51,8 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     timerUpdateTime->setSingleShot(true);
     timerUpdateTime->setInterval(20);
     connect(timerUpdateTime, SIGNAL(timeout()), this, SLOT(slotSetupGui()));
+
+
 
     timerUpdateTime->start();
 }
@@ -80,8 +83,20 @@ void CDetailsPrj::getTrackOverview(CGisItemTrk * trk, QImage& image)
 
 void CDetailsPrj::slotSetupGui()
 {
-    textDesc->document()->setTextWidth(textDesc->size().width() - 20);
-    draw(*textDesc->document(), false);
+    if(!mutex.tryLock())
+    {
+        /*
+            What is this about?
+
+            When drawing the diary a progress dialog is used. This dialog is operating the event loop.
+            Consequently new events resulting into drawing the diary can be processed. But slotSetupGui()
+            is not reentrant. That is why we have to block these calls with a mutex. However as something
+            has changed the diary has to be redrawn again. That is why the timer is restarted.
+
+        */
+        timerUpdateTime->start(1000);
+        return;
+    }
 
     comboSort->blockSignals(true);
     comboSort->setCurrentIndex(prj.getSorting());
@@ -91,12 +106,14 @@ void CDetailsPrj::slotSetupGui()
         int res = QMessageBox::question(this, tr("Correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
         if(res == QMessageBox::Yes)
         {
-            prj.switchOnCorrelation();
+            prj.switchOnCorrelation();            
         }
         else
         {
             comboSort->setCurrentIndex(IGisProject::eSortNone);
         }
+        timerUpdateTime->start();
+        return;
     }
     comboSort->blockSignals(false);
 
@@ -113,6 +130,11 @@ void CDetailsPrj::slotSetupGui()
         }
     }
     toolLock->blockSignals(false);
+
+    textDesc->document()->setTextWidth(textDesc->size().width() - 20);
+    draw(*textDesc->document(), false);
+
+    mutex.unlock();
 }
 
 #define ROOT_FRAME_MARGIN 5
@@ -650,7 +672,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
         }
         prj.setKeywords(keywords);
     }
-    slotSetupGui();
+    timerUpdateTime->start();
 }
 
 void CDetailsPrj::slotLinkActivated(const QUrl& url)
@@ -662,7 +684,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         {
             prj.setName(name);
         }
-        slotSetupGui();
+        timerUpdateTime->start();
     }
     else if(url.path() == "description")
     {
@@ -697,7 +719,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 prj.setDescription(dlg.getHtml());
             }
         }
-        slotSetupGui();
+        timerUpdateTime->start();
     }
     else if(url.path() == "comment")
     {
@@ -723,7 +745,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 }
             }
         }
-        slotSetupGui();
+        timerUpdateTime->start();
     }
     else if(url.path() == "links")
     {
@@ -758,7 +780,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 prj.setLinks(links);
             }
         }
-        slotSetupGui();
+        timerUpdateTime->start();
     }
     else
     {
@@ -785,7 +807,7 @@ void CDetailsPrj::slotPrint()
     draw(doc, true);
     doc.print(&printer);
 
-    slotSetupGui();
+    timerUpdateTime->start();
 }
 
 void CDetailsPrj::slotLock(bool on)
@@ -801,7 +823,7 @@ void CDetailsPrj::slotLock(bool on)
         }
     }
     prj.blockUpdateItems(false);
-    slotSetupGui();
+    timerUpdateTime->start();
 }
 
 
@@ -809,5 +831,5 @@ void CDetailsPrj::slotSortMode(int idx)
 {
     comboSort->setEnabled(false);
     prj.setSorting(IGisProject::sorting_e(idx));
-    slotSetupGui();
+    timerUpdateTime->start();
 }

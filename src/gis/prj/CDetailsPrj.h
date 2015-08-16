@@ -22,6 +22,7 @@
 #include "ui_IDetailsPrj.h"
 #include <QPointer>
 #include <QWidget>
+#include <QMutex>
 
 class CDetailsPrj;
 class IGisProject;
@@ -79,6 +80,8 @@ private:
     int scrollVal;
 
     QTimer * timerUpdateTime;
+
+    QMutex mutex;
 };
 
 #endif //CDETAILSPRJ_H

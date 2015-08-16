@@ -30,6 +30,7 @@ class CGisItemWpt;
 class CGisItemOvlArea;
 class CGisItemRte;
 class CProgressDialog;
+class QTimer;
 
 class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
 {
@@ -76,6 +77,8 @@ private:
     QTextCharFormat fmtCharHeader;
 
     int scrollVal;
+
+    QTimer * timerUpdateTime;
 };
 
 #endif //CDETAILSPRJ_H

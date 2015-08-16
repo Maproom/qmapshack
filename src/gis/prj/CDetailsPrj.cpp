@@ -46,7 +46,12 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     connect(comboSort, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSortMode(int)));
     connect(toolLock, SIGNAL(clicked(bool)), this, SLOT(slotLock(bool)));
 
-    slotSetupGui();
+    timerUpdateTime = new QTimer(this);
+    timerUpdateTime->setSingleShot(true);
+    timerUpdateTime->setInterval(20);
+    connect(timerUpdateTime, SIGNAL(timeout()), this, SLOT(slotSetupGui()));
+
+    timerUpdateTime->start();
 }
 
 CDetailsPrj::~CDetailsPrj()
@@ -56,7 +61,7 @@ CDetailsPrj::~CDetailsPrj()
 void CDetailsPrj::resizeEvent(QResizeEvent * e)
 {
     QWidget::resizeEvent(e);
-    slotSetupGui();
+    timerUpdateTime->start();
 }
 
 void CDetailsPrj::getTrackProfile(CGisItemTrk * trk, QImage& image)

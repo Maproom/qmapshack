@@ -6,7 +6,7 @@
     <message>
         <location filename="../CAbout.cpp" line="36"/>
         <source>API Version %1 (expected %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>API Version %1</translation>
     </message>
 </context>
 <context>
@@ -251,7 +251,7 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="600"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Routen&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="628"/>
@@ -576,8 +576,8 @@
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="608"/>
-        <location filename="../gis/CGisListWks.cpp" line="1441"/>
-        <location filename="../gis/CGisListWks.cpp" line="1479"/>
+        <location filename="../gis/CGisListWks.cpp" line="1442"/>
+        <location filename="../gis/CGisListWks.cpp" line="1480"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
@@ -636,22 +636,22 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="708"/>
+        <location filename="../gis/CGisListWks.cpp" line="710"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Arbeitsplatz speichern. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="750"/>
+        <location filename="../gis/CGisListWks.cpp" line="754"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="963"/>
+        <location filename="../gis/CGisListWks.cpp" line="964"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="963"/>
+        <location filename="../gis/CGisListWks.cpp" line="964"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -2231,7 +2231,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="58"/>
         <source>Found Routino with a wrong version. Expected %1 found %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Falsche Routino Version gefunden. Erwartet wird %1, gefunden wurde %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="63"/>
@@ -2241,132 +2241,132 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
         <source>English</source>
-        <translation type="unfinished">Englisch</translation>
+        <translation>Englisch</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="91"/>
         <source>German</source>
-        <translation type="unfinished">Deutsch</translation>
+        <translation>Deutsch</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
         <source>French</source>
-        <translation type="unfinished">Französisch</translation>
+        <translation>Französisch</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
         <source>Hungarian</source>
-        <translation type="unfinished">Ungarisch</translation>
+        <translation>Ungarisch</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="94"/>
         <source>Dutch</source>
-        <translation type="unfinished">Niederländisch</translation>
+        <translation>Niederländisch</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="95"/>
         <source>Russian</source>
-        <translation type="unfinished">Russisch</translation>
+        <translation>Russisch</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="130"/>
         <source>A function was called without the database variable set.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Funktion wurde ohne gesetzte Datenbank aufgerufen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="133"/>
         <source>A function was called without the profile variable set.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Funktion wurde ohne gesetztes Profil aufgerufen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="136"/>
         <source>A function was called without the translation variable set.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Funktion wurde ohne gesetzte Sprache aufgerufen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="139"/>
         <source>The specified database to load did not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die zu ladende vorgegebene Datenbank existiert nicht.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="142"/>
         <source>The specified database could not be loaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die vorgegebene Datenbank konnte nicht geladen werden.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="145"/>
         <source>The specified profiles XML file did not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die vorgegebene XML Profildatei existiert nicht.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="148"/>
         <source>The specified profiles XML file could not be loaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die vorgegebene XML Profildatei konnte nicht geladen werden.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="151"/>
         <source>The specified translations XML file did not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die vorgegebene XML Sprachdatei existiert nicht.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="154"/>
         <source>The specified translations XML file could not be loaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die vorgegebene XML Profildatei konnte nicht geladen werden.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="157"/>
         <source>The requested profile name does not exist in the loaded XML file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Den geforderten Profilnamen gibt es in der geladenen XML Datei nicht.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="160"/>
         <source>The requested translation language does not exist in the loaded XML file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die geforderte Sprache gibt es in der geladenen XML Datei nicht.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="163"/>
         <source>There is no highway near the coordinates to place a waypoint.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es gibt keine Straße in der Nähe der Koordinaten des zu plazierenden Wegpunktes.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
         <source>The profile and database do not work together.</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil und Datenbank funktionieren nicht zusammen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
         <source>The profile being used has not been validated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das zu benutzende Profil wurde nicht validiert.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
         <source>The user specified profile contained invalid data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das vorgegebene Profil enthält ungültige Daten.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="175"/>
         <source>The routing options specified are not consistent with each other.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die vorgebenen Routingoptionen passen nicht zusammen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="178"/>
         <source>There is a mismatch between the library and caller API version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Library und die API Version passen nicht zusammen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="181"/>
         <source>Route calculation was aborted by user.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Routenberechnung wurde vom Benutzer abgebrochen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="187"/>
         <source>A route could not be found to waypoint %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es konnte keine Route zum Wegpunkt %1 gefunden werden.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="190"/>
         <source>Unknown error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Fehler: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="202"/>
@@ -2393,7 +2393,7 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="339"/>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="412"/>
         <source>Calculate route with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Berechne Route mit %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="347"/>
@@ -2571,7 +2571,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IAbout.ui" line="129"/>
         <source>Routino</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="154"/>
@@ -2623,7 +2623,7 @@ ist keine gültige Koordinatensystemdefinition:
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="233"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -4372,7 +4372,7 @@ sein</translation>
         <source>m</source>
         <translation> m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -4475,7 +4475,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="66"/>
         <source>Language</source>
-        <translation type="unfinished">Sprache</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="131"/>
@@ -5717,7 +5717,7 @@ Areas: %1</source>
         <translation type="obsolete">Das Projekt &quot;%1&quot; wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="247"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="249"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Tracks und Wegpunkte verknüpfen.</translation>
     </message>
@@ -5732,47 +5732,47 @@ Areas: %1</source>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="109"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="257"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="259"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;Hat das zu lange gedauert? Wollen Sie die Verknüpfung von Tracks und Wegpunkten auch in Zukunft für dieses Projekt überspringen?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="258"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="260"/>
         <source>Cancelled correlation...</source>
         <translation>Verknüpfung abgebrochen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="336"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="338"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Dateiname: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="341"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="343"/>
         <source>Waypoints: %1</source>
         <translation>Wegpunkte: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="345"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="347"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="349"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="351"/>
         <source>Routes: %1</source>
         <translation>Routen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="353"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="355"/>
         <source>Areas: %1</source>
         <translation>Gebiete: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="433"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="435"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
@@ -5783,7 +5783,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="436"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="434"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="436"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
@@ -6168,7 +6168,7 @@ Dateiname: %1</translation>
         <location filename="../gis/rte/CGisItemRte.cpp" line="297"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="477"/>
         <source>Time: %1 %2</source>
-        <translation type="unfinished">Gesamtzeit: %1  {1 %2?}</translation>
+        <translation>Gesamtzeit: %1 %2</translation>
     </message>
     <message>
         <source>Time: %2 days %1</source>
@@ -6285,7 +6285,7 @@ Turn: %1 Bearing: %2</source>
     <message>
         <location filename="../gis/IGisItem.cpp" line="435"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt; Dieses Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="657"/>
@@ -6421,12 +6421,12 @@ Turn: %1 Bearing: %2</source>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="999"/>
+        <location filename="../gis/CGisListWks.cpp" line="1000"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="999"/>
+        <location filename="../gis/CGisListWks.cpp" line="1000"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1? löschen wollen?</translation>
     </message>

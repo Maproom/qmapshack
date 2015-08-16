@@ -21,6 +21,12 @@
 
 #include <QtWidgets>
 
+#ifndef _MKSTR_1
+#define _MKSTR_1(x)    #x
+#define _MKSTR(x)      _MKSTR_1(x)
+#endif
+
+
 CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     : IToolShell(textBrowser, parent)
     , first(true)
@@ -34,16 +40,9 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     connect(toolSourceFiles, SIGNAL(clicked()), this, SLOT(slotSelectSourceFiles()));
     connect(toolTargetPath, SIGNAL(clicked()), this, SLOT(slotSelectTargetPath()));
     connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
-    connect(lineTargetPrefix, SIGNAL(textChanged(QString)), this, SLOT(enabelStartButton()));
+    connect(lineTargetPrefix, SIGNAL(textChanged(QString)), this, SLOT(enabelStartButton()));    
 
     pushStart->setDisabled(true);
-
-    QFile _translations("://xml/routino/routino-tagging.xml");
-    _translations.open(QIODevice::ReadOnly);
-
-    xmlTagging.open();
-    xmlTagging.write(_translations.readAll());
-    xmlTagging.close();
 
     SETTINGS;
     QString path = cfg.value("RoutinoDatabaseBuilder/targetPath",QDir::homePath()).toString();
@@ -152,11 +151,12 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
 
     if(sourceFiles.isEmpty())
     {
+        QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
         QStringList args;
 
         args << QString("--dir=%1").arg(targetPath);
         args << QString("--prefix=%1").arg(targetPrefix);
-        args << QString("--tagging=%1").arg(xmlTagging.fileName());
+        args << QString("--tagging=%1").arg(dirXml.absoluteFilePath("tagging.xml"));
         args << "--process-only";
 
         stdOut("planetsplitter " +  args.join(" ") + "\n");
@@ -166,11 +166,12 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
     }
     else
     {
+        QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
         QStringList args;
 
         args << QString("--dir=%1").arg(targetPath);
         args << QString("--prefix=%1").arg(targetPrefix);
-        args << QString("--tagging=%1").arg(xmlTagging.fileName());
+        args << QString("--tagging=%1").arg(dirXml.absoluteFilePath("tagging.xml"));
 
         if(first)
         {

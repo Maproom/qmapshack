@@ -54,6 +54,7 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
         NAMES
             profiles.xml
             translations.xml
+            tagging.xml
         PATHS
             /usr/share
             /usr/local/share

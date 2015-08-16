@@ -48,8 +48,6 @@ private:
     QStringList sourceFiles;
     QString targetPrefix;
     QString targetPath;
-
-    QTemporaryFile xmlTagging;
 };
 
 #endif //CROUTINODATABASEBUILDER_H

@@ -93,6 +93,7 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboLanguage->addItem(tr("Hungarian"), "hu");
     comboLanguage->addItem(tr("Dutch"), "nl");
     comboLanguage->addItem(tr("Russian"), "ru");
+    comboLanguage->addItem(tr("Polish"), "pl");
 
     connect(toolSetupPaths, SIGNAL(clicked()), this, SLOT(slotSetupPaths()));
 

@@ -52,8 +52,6 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     timerUpdateTime->setInterval(20);
     connect(timerUpdateTime, SIGNAL(timeout()), this, SLOT(slotSetupGui()));
 
-
-
     timerUpdateTime->start();
 }
 

@@ -6,7 +6,7 @@
     <message>
         <location filename="../CAbout.cpp" line="36"/>
         <source>API Version %1 (expected %2)</source>
-        <translation>API Version %1</translation>
+        <translation>API Version %1 (erwartet wird %2)</translation>
     </message>
 </context>
 <context>
@@ -422,12 +422,12 @@
         <translation type="obsolete">Datenbank</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="77"/>
+        <location filename="../gis/CGisListDB.cpp" line="78"/>
         <source>Add Folder</source>
         <translation>Ordner hinzufügen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="78"/>
+        <location filename="../gis/CGisListDB.cpp" line="79"/>
         <source>Delete Folder</source>
         <translation>Ordner löschen</translation>
     </message>
@@ -436,59 +436,59 @@
         <translation type="obsolete">Löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="74"/>
+        <location filename="../gis/CGisListDB.cpp" line="75"/>
         <source>Add Database</source>
         <translation>Datenbank hinzufügen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="81"/>
-        <location filename="../gis/CGisListDB.cpp" line="91"/>
+        <location filename="../gis/CGisListDB.cpp" line="82"/>
+        <location filename="../gis/CGisListDB.cpp" line="92"/>
         <source>Delete Item</source>
         <translation>Element löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="85"/>
+        <location filename="../gis/CGisListDB.cpp" line="86"/>
         <source>Remove Database</source>
         <translation>Datenbank entfernen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="88"/>
+        <location filename="../gis/CGisListDB.cpp" line="89"/>
         <source>Empty</source>
         <translation>Leer</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="280"/>
+        <location filename="../gis/CGisListDB.cpp" line="281"/>
         <source>Remove database...</source>
         <translation>Datenbank entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="280"/>
+        <location filename="../gis/CGisListDB.cpp" line="281"/>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
         <translation>Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="321"/>
+        <location filename="../gis/CGisListDB.cpp" line="322"/>
         <source>Delete database folder...</source>
         <translation>Datenbankordner löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="321"/>
+        <location filename="../gis/CGisListDB.cpp" line="322"/>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
         <translation>Sind Sie sicher, dass Sie &quot;%1&quot; aus der Datenbank löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="347"/>
-        <location filename="../gis/CGisListDB.cpp" line="362"/>
+        <location filename="../gis/CGisListDB.cpp" line="348"/>
+        <location filename="../gis/CGisListDB.cpp" line="363"/>
         <source>Remove items...</source>
         <translation>Element entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="347"/>
+        <location filename="../gis/CGisListDB.cpp" line="348"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="362"/>
+        <location filename="../gis/CGisListDB.cpp" line="363"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle ausgewählten Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
@@ -2326,7 +2326,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="163"/>
         <source>There is no highway near the coordinates to place a waypoint.</source>
-        <translation>Es gibt keine Straße in der Nähe der Koordinaten des zu plazierenden Wegpunktes.</translation>
+        <translation>Es gibt keine Straße in der Nähe des zu plazierenden Wegpunktes.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
@@ -2434,17 +2434,17 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRoutinoDatabaseBuilder</name>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="32"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="38"/>
         <source>Create Routino Database</source>
         <translation>Routino Datenbank erstellen</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="63"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="62"/>
         <source>Select files...</source>
         <translation>Dateien auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="87"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="86"/>
         <source>Select target path...</source>
         <translation>Zielpfad auswählen...</translation>
     </message>
@@ -2454,7 +2454,7 @@ ist keine gültige Koordinatensystemdefinition:
         <translation type="obsolete">!!! fehlgeschlagen !!!</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="148"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="147"/>
         <source>!!! done !!!
 </source>
         <translation>!!! erledigt !!!</translation>
@@ -5777,12 +5777,12 @@ Dateiname: %1</translation>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="435"/>
+        <location filename="../gis/CGisListDB.cpp" line="436"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Ordner &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="436"/>
+        <location filename="../gis/CGisListDB.cpp" line="437"/>
         <location filename="../gis/prj/IGisProject.cpp" line="436"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>

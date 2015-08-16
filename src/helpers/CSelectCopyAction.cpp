@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
@@ -39,7 +40,7 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushClone, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
 
-    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
 }
 
 CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject * tar, QWidget * parent)
@@ -60,12 +61,12 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject 
     connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
 
-    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
 }
 
 CSelectCopyAction::~CSelectCopyAction()
 {
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("~CSelectCopyAction");
 }
 
 bool CSelectCopyAction::allOthersToo()

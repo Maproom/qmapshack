@@ -136,6 +136,24 @@ CCanvas::~CCanvas()
     saveSizeTrackProfile();
 }
 
+void CCanvas::setOverrideCursor(const QCursor& cursor, const QString& src)
+{
+//    qDebug() << "setOverrideCursor" << src;
+    QApplication::setOverrideCursor(cursor);
+}
+
+void CCanvas::restoreOverrideCursor(const QString& src)
+{
+//    qDebug() << "restoreOverrideCursor" << src;
+    QApplication::restoreOverrideCursor();
+}
+
+void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
+{
+//    qDebug() << "changeOverrideCursor" << src;
+    QApplication::changeOverrideCursor(cursor);
+}
+
 void CCanvas::saveConfig(QSettings& cfg)
 {
     map->saveConfig(cfg);
@@ -166,8 +184,11 @@ void CCanvas::resetMouse()
     mouse = new CMouseNormal(gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        while(QApplication::overrideCursor())
+        {
+            CCanvas::restoreOverrideCursor("resetMouse");
+        }
+        CCanvas::setOverrideCursor(*mouse, "resetMouse");
     }
 }
 
@@ -177,8 +198,8 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     mouse = new CMouseMoveWpt(wpt, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseMoveWpt");
+        CCanvas::setOverrideCursor(*mouse, "setMouseMoveWpt");
     }
 }
 
@@ -188,8 +209,8 @@ void CCanvas::setMouseEditTrk(const QPointF &pt)
     mouse = new CMouseEditTrk(pt, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseEditTrk");
+        CCanvas::setOverrideCursor(*mouse, "setMouseEditTrk");
     }
 }
 
@@ -199,8 +220,8 @@ void CCanvas::setMouseEditRte(const QPointF &pt)
     mouse = new CMouseEditRte(pt, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseEditRte");
+        CCanvas::setOverrideCursor(*mouse, "setMouseEditRte");
     }
 }
 
@@ -210,8 +231,8 @@ void CCanvas::setMouseEditTrk(CGisItemTrk& trk)
     mouse = new CMouseEditTrk(trk, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseEditTrk");
+        CCanvas::setOverrideCursor(*mouse, "setMouseEditTrk");
     }
 }
 
@@ -221,8 +242,8 @@ void CCanvas::setMouseRangeTrk(CGisItemTrk& trk)
     mouse = new CMouseRangeTrk(trk, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseRangeTrk");
+        CCanvas::setOverrideCursor(*mouse, "setMouseRangeTrk");
     }
 }
 
@@ -232,8 +253,8 @@ void CCanvas::setMouseEditArea(const QPointF& pt)
     mouse = new CMouseEditArea(pt, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseEditArea");
+        CCanvas::setOverrideCursor(*mouse, "setMouseEditArea");
     }
 }
 
@@ -243,8 +264,8 @@ void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
     mouse = new CMouseEditArea(area, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseEditArea");
+        CCanvas::setOverrideCursor(*mouse, "setMouseEditArea");
     }
 }
 
@@ -254,8 +275,8 @@ void CCanvas::setMouseEditRte(CGisItemRte& rte)
     mouse = new CMouseEditRte(rte, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseEditRte");
+        CCanvas::setOverrideCursor(*mouse, "setMouseEditRte");
     }
 }
 
@@ -265,8 +286,8 @@ void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
     mouse = new CMouseWptBubble(key, gis, this);
     if(underMouse())
     {
-        QApplication::restoreOverrideCursor();
-        QApplication::setOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("setMouseWptBubble");
+        CCanvas::setOverrideCursor(*mouse, "setMouseWptBubble");
     }
 }
 
@@ -429,7 +450,7 @@ void CCanvas::wheelEvent(QWheelEvent * e)
 void CCanvas::enterEvent(QEvent * e)
 {
     Q_UNUSED(e);
-    QApplication::setOverrideCursor(*mouse);
+    CCanvas::setOverrideCursor(*mouse, "enterEvent");
 
     mouse->setMouseTracking(true);
 }
@@ -439,11 +460,10 @@ void CCanvas::leaveEvent(QEvent * e)
 {
     Q_UNUSED(e);
     // bad hack to stop bad number of overide cursors.
-    QApplication::restoreOverrideCursor();
-    QApplication::restoreOverrideCursor();
-    QApplication::restoreOverrideCursor();
-    QApplication::restoreOverrideCursor();
-
+    while(QApplication::overrideCursor())
+    {
+        CCanvas::restoreOverrideCursor("leaveEvent");
+    }
 
     mouse->setMouseTracking(false);
 }

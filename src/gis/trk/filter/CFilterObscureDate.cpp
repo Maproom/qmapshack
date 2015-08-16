@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterObscureDate.h"
 #include "helpers/CSettings.h"
@@ -40,8 +41,8 @@ CFilterObscureDate::~CFilterObscureDate()
 
 void CFilterObscureDate::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterObscureDate");
     trk.filterObscureDate(spinBox->value());
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterObscureDate");
 }
 

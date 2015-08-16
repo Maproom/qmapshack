@@ -82,9 +82,7 @@ void CCreateRouteFromWpt::accept()
     }
 
     CGisItemRte* rte = new CGisItemRte(points,name, project, NOIDX);
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     rte->calc();
-    QApplication::restoreOverrideCursor();
 }
 
 void CCreateRouteFromWpt::slotSelectionChanged()

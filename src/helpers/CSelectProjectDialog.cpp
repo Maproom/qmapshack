@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -102,12 +103,12 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 
     adjustSize();
 
-    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectProjectDialog");
 }
 
 CSelectProjectDialog::~CSelectProjectDialog()
 {
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("~CSelectProjectDialog");
 }
 
 void CSelectProjectDialog::accept()

@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterDelete.h"
 
@@ -34,7 +35,7 @@ CFilterDelete::~CFilterDelete()
 
 void CFilterDelete::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterDelete");
     trk.filterDelete();
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterDelete");
 }

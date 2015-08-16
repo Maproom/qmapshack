@@ -94,7 +94,7 @@ void CMouseMoveWpt::slotPanCanvas()
 }
 
 void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
-{       
+{
     point  = e->pos();
     if(e->button() == Qt::RightButton)
     {

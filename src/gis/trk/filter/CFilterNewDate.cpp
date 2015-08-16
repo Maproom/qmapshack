@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterNewDate.h"
 
@@ -38,8 +39,8 @@ CFilterNewDate::~CFilterNewDate()
 
 void CFilterNewDate::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterNewDate");
     trk.filterNewDate(dateTimeEdit->dateTime().toUTC());
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterNewDate");
 }
 

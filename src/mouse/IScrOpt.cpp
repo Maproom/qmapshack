@@ -32,10 +32,6 @@ IScrOpt::IScrOpt(IMouse *mouse)
 
 IScrOpt::~IScrOpt()
 {
-    if(!mouse.isNull() && hasFocus())
-    {
-        QApplication::changeOverrideCursor(*mouse);
-    }
 }
 
 
@@ -47,7 +43,7 @@ void IScrOpt::mouseMoveEvent(QMouseEvent * e)
 void IScrOpt::enterEvent(QEvent * e)
 {
     QWidget::enterEvent(e);
-    QApplication::changeOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor,"IScrOpt::enterEvent");
 }
 
 
@@ -56,7 +52,7 @@ void IScrOpt::leaveEvent(QEvent * e)
     QWidget::leaveEvent(e);
     if(!mouse.isNull())
     {
-        QApplication::changeOverrideCursor(*mouse);
+        CCanvas::restoreOverrideCursor("IScrOpt::leaveEvent");
     }
 }
 

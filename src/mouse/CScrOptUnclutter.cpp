@@ -105,7 +105,7 @@ void CScrOptUnclutter::clear()
 {
     if(doSpecialCursor)
     {
-        QApplication::restoreOverrideCursor();
+        CCanvas::restoreOverrideCursor("CScrOptUnclutter::clear()");
         doSpecialCursor = false;
     }
     items.clear();
@@ -121,7 +121,7 @@ void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
         {
             if(!doSpecialCursor)
             {
-                QApplication::setOverrideCursor(Qt::PointingHandCursor);
+                CCanvas::setOverrideCursor(Qt::PointingHandCursor,"CScrOptUnclutter::mouseMoveEvent");
                 doSpecialCursor = true;
             }
             return;
@@ -130,7 +130,7 @@ void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
 
     if(doSpecialCursor)
     {
-        QApplication::restoreOverrideCursor();
+        CCanvas::restoreOverrideCursor("CScrOptUnclutter::mouseMoveEvent");
         doSpecialCursor = false;
         return;
     }

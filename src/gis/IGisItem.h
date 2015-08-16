@@ -183,7 +183,7 @@ public:
        hash was read.
 
        @return The hash as a string reference.
-    */
+     */
     const QString& getHash();
 
     /**

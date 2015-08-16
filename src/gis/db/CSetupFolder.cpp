@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/db/CSetupFolder.h"
 
 #include <QtWidgets>
@@ -51,12 +52,12 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, bool groupAll
 
     slotNameChanged(name);
 
-    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSetupFolder");
 }
 
 CSetupFolder::~CSetupFolder()
 {
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("~CSetupFolder");
 }
 
 void CSetupFolder::accept()

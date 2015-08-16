@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReset.h"
 
@@ -35,7 +36,7 @@ CFilterReset::~CFilterReset()
 
 void CFilterReset::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterReset");
     trk.filterReset();
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterReset");
 }

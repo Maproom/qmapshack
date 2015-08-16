@@ -153,7 +153,7 @@ void CDetailsTrk::setupGui()
     {
         return;
     }
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDetailsTrk::setupGui");
     originator = true;
 
     QString str, val, unit;
@@ -282,7 +282,7 @@ void CDetailsTrk::setupGui()
     listHistory->setupHistory(trk);
 
     originator = false;
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CDetailsTrk::setupGui");
 }
 
 void CDetailsTrk::setMouseFocus(const CGisItemTrk::trkpt_t * pt)

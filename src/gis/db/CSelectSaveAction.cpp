@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CSelectSaveAction.h"
 
@@ -35,12 +36,12 @@ CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, Q
     connect(pushSave, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
     connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
 
-    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectSaveAction");
 }
 
 CSelectSaveAction::~CSelectSaveAction()
 {
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("~CSelectSaveAction");
 }
 
 bool CSelectSaveAction::allOthersToo()

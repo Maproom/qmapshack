@@ -62,7 +62,7 @@ public:
     {
         if(waitCursor)
         {
-            QApplication::setOverrideCursor(Qt::WaitCursor);
+            CCanvas::setOverrideCursor(Qt::WaitCursor, "CGisListWksEditLock");
         }
         mutex.lock();
     }
@@ -70,7 +70,7 @@ public:
     {
         if(waitCursor)
         {
-            QApplication::restoreOverrideCursor();
+            CCanvas::restoreOverrideCursor("~CGisListWksEditLock");
         }
         mutex.unlock();
     }
@@ -742,7 +742,7 @@ void CGisListWks::slotSaveWorkspace()
 }
 
 void CGisListWks::slotLoadWorkspace()
-{   
+{
     CGisListWksEditLock lock(true,IGisItem::mutexItems);
 
     QSqlQuery query(db);
@@ -996,9 +996,9 @@ void CGisListWks::slotDeleteProject()
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
-            QApplication::setOverrideCursor(Qt::ArrowCursor);
+            CCanvas::setOverrideCursor(Qt::ArrowCursor, "slotDeleteProject");
             int res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
-            QApplication::restoreOverrideCursor();
+            CCanvas::restoreOverrideCursor("slotDeleteProject");
             if(res != QMessageBox::Ok)
             {
                 continue;

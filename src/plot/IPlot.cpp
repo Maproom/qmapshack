@@ -249,7 +249,7 @@ void IPlot::leaveEvent(QEvent * e)
     needsRedraw = true;
     posMouse    = NOPOINT;
 
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("IPlot::leaveEvent");
     update();
 }
 
@@ -257,7 +257,7 @@ void IPlot::leaveEvent(QEvent * e)
 void IPlot::enterEvent(QEvent * e)
 {
     needsRedraw = true;
-    QApplication::setOverrideCursor(Qt::PointingHandCursor);
+    CCanvas::setOverrideCursor(Qt::PointingHandCursor,"IPlot::enterEvent");
     update();
 }
 

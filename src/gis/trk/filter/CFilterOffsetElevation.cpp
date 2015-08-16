@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "helpers/CSettings.h"
@@ -43,7 +44,7 @@ CFilterOffsetElevation::~CFilterOffsetElevation()
 
 void CFilterOffsetElevation::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterOffsetElevation");
     trk.filterOffsetElevation(spinBox->value()/IUnit::self().basefactor);
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterOffsetElevation");
 }

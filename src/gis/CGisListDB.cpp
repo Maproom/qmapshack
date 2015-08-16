@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 #include "config.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
@@ -38,7 +39,7 @@ public:
     {
         if(waitCursor)
         {
-            QApplication::setOverrideCursor(Qt::WaitCursor);
+            CCanvas::setOverrideCursor(Qt::WaitCursor, "CGisListDBEditLock");
         }
         widget->isInternalEdit += 1;
     }
@@ -46,7 +47,7 @@ public:
     {
         if(waitCursor)
         {
-            QApplication::restoreOverrideCursor();
+            CCanvas::restoreOverrideCursor("~CGisListDBEditLock");
         }
         widget->isInternalEdit -= 1;
     }
@@ -350,9 +351,9 @@ void CGisListDB::slotDelLostFound()
         return;
     }
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotDelLostFound");
     folder->clear();
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("slotDelLostFound");
 }
 
 void CGisListDB::slotDelLostFoundItem()
@@ -365,7 +366,7 @@ void CGisListDB::slotDelLostFoundItem()
         return;
     }
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotDelLostFoundItem");
     QSet<CDBFolderLostFound*> folders;
     QList<QTreeWidgetItem*> delItems;
     QList<QTreeWidgetItem*> items = selectedItems();
@@ -389,7 +390,7 @@ void CGisListDB::slotDelLostFoundItem()
     {
         folder->update();
     }
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("slotDelLostFoundItem");
 }
 
 

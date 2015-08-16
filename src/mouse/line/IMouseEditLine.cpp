@@ -325,7 +325,7 @@ void IMouseEditLine::slotVectorRouting()
 void IMouseEditLine::changeCursor()
 {
     cursor = lineOp->getCursor();
-    QApplication::changeOverrideCursor(cursor);
+    CCanvas::changeOverrideCursor(cursor,"IMouseEditLine::changeCursor");
 }
 
 void IMouseEditLine::slotAbort()

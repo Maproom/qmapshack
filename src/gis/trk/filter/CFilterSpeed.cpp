@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CSettings.h"
@@ -44,7 +45,7 @@ CFilterSpeed::~CFilterSpeed()
 
 void CFilterSpeed::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSpeed");
     trk.filterSpeed(doubleSpinBox->value()/IUnit::self().speedfactor);
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterSpeed");
 }

@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/CSelDevices.h"
@@ -54,12 +55,12 @@ CSelDevices::CSelDevices(IGisProject * project, QTreeWidget *wks)
         }
     }
 
-    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelDevices");
 }
 
 CSelDevices::~CSelDevices()
 {
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("~CSelDevices");
 }
 
 

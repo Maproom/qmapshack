@@ -217,7 +217,7 @@ void ILineOp::finalizeOperation(qint32 idx)
 
     if(parentHandler->useAutoRouting())
     {
-        QApplication::setOverrideCursor(Qt::WaitCursor);
+        CCanvas::setOverrideCursor(Qt::WaitCursor,"ILineOp::finalizeOperation");
         if(idx > 0)
         {
             QPolygonF subs;
@@ -245,7 +245,7 @@ void ILineOp::finalizeOperation(qint32 idx)
                 pt1.subpts << IGisLine::subpt_t(sub);
             }
         }
-        QApplication::restoreOverrideCursor();
+        CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
     else if(parentHandler->useVectorRouting())
     {

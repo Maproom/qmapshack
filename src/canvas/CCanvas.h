@@ -59,6 +59,10 @@ public:
     CCanvas(QWidget * parent, const QString& name);
     virtual ~CCanvas();
 
+    static void setOverrideCursor(const QCursor& cursor, const QString &src);
+    static void restoreOverrideCursor(const QString &src);
+    static void changeOverrideCursor(const QCursor& cursor, const QString &src);
+
     void saveConfig(QSettings& cfg);
     void loadConfig(QSettings& cfg);
 

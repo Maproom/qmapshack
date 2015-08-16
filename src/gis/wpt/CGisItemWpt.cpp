@@ -850,7 +850,7 @@ bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
     {
         if(!doSpecialCursor)
         {
-            QApplication::setOverrideCursor(Qt::PointingHandCursor);
+            CCanvas::setOverrideCursor(Qt::PointingHandCursor, "processMouseOverBubble");
             doSpecialCursor = true;
         }
     }
@@ -858,7 +858,7 @@ bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
     {
         if(doSpecialCursor)
         {
-            QApplication::restoreOverrideCursor();
+            CCanvas::restoreOverrideCursor("processMouseOverBubble");
             doSpecialCursor = false;
         }
     }

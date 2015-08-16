@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 
@@ -34,7 +35,7 @@ CFilterReplaceElevation::~CFilterReplaceElevation()
 
 void CFilterReplaceElevation::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterMedian");
     trk.filterReplaceElevation();
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterMedian");
 }

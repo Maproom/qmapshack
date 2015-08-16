@@ -87,7 +87,7 @@ void CGisWidget::postEventForDb(QEvent * event)
 void CGisWidget::loadGisProject(const QString& filename)
 {
     // add project to workspace
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "loadGisProject");
     treeWks->blockSignals(true);
 
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -118,7 +118,7 @@ void CGisWidget::loadGisProject(const QString& filename)
     }
 
     treeWks->blockSignals(false);
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("loadGisProject");
 
     emit sigChanged();
 }
@@ -137,7 +137,7 @@ void CGisWidget::slotHelpText()
 
 void CGisWidget::slotSaveAll()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotSaveAll");
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
@@ -149,7 +149,7 @@ void CGisWidget::slotSaveAll()
         item->save();
     }
 
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("slotSaveAll");
 }
 
 IGisProject * CGisWidget::selectProject()
@@ -568,9 +568,7 @@ void CGisWidget::calcRteByKey(const IGisItem::key_t& key)
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
     if(rte != 0)
     {
-        QApplication::setOverrideCursor(Qt::WaitCursor);
         rte->calc();
-        QApplication::restoreOverrideCursor();
     }
 }
 
@@ -581,9 +579,7 @@ void CGisWidget::resetRteByKey(const IGisItem::key_t& key)
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
     if(rte != 0)
     {
-        QApplication::setOverrideCursor(Qt::WaitCursor);
         rte->reset();
-        QApplication::restoreOverrideCursor();
     }
 }
 

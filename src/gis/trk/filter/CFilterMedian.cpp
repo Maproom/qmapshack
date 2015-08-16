@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterMedian.h"
 #include "helpers/CSettings.h"
@@ -41,7 +42,7 @@ CFilterMedian::~CFilterMedian()
 
 void CFilterMedian::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterMedian");
     trk.filterSmoothProfile(spinBox->value());
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterMedian");
 }

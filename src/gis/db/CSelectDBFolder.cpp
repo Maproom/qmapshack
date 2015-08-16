@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "helpers/CSettings.h"
@@ -44,12 +45,12 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QWidget *parent)
     connect(treeWidget, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
     connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
 
-    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectDBFolder");
 }
 
 CSelectDBFolder::~CSelectDBFolder()
 {
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("~CSelectDBFolder");
 }
 
 void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem * item)

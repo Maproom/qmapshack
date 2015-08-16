@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "helpers/CSettings.h"
@@ -45,7 +46,7 @@ CFilterDouglasPeuker::~CFilterDouglasPeuker()
 
 void CFilterDouglasPeuker::slotApply()
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterDouglasPeuker");
     trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("CFilterDouglasPeuker");
 }

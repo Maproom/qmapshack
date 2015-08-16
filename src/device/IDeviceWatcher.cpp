@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "device/CDeviceGarmin.h"
 #include "device/CDeviceTwoNav.h"
 #include "device/IDeviceWatcher.h"
@@ -46,7 +47,7 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
     qDebug() << "Probe device at" << mountPoint << path << label;
     QStringList entries = dir.entryList();
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"probeForDevice");
     if(entries.contains("Garmin"))
     {
         if(dir.exists("Garmin/GarminDevice.xml"))
@@ -64,5 +65,5 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
     {
         qDebug() << "Don't know it :(";
     }
-    QApplication::restoreOverrideCursor();
+    CCanvas::restoreOverrideCursor("probeForDevice");
 }

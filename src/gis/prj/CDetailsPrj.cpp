@@ -111,6 +111,7 @@ void CDetailsPrj::slotSetupGui()
             comboSort->setCurrentIndex(IGisProject::eSortNone);
         }
         timerUpdateTime->start();
+        mutex.unlock();
         return;
     }
     comboSort->blockSignals(false);
@@ -670,7 +671,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
         }
         prj.setKeywords(keywords);
     }
-    timerUpdateTime->start();
+    slotSetupGui();
 }
 
 void CDetailsPrj::slotLinkActivated(const QUrl& url)
@@ -682,7 +683,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         {
             prj.setName(name);
         }
-        timerUpdateTime->start();
+        slotSetupGui();
     }
     else if(url.path() == "description")
     {
@@ -717,7 +718,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 prj.setDescription(dlg.getHtml());
             }
         }
-        timerUpdateTime->start();
+        slotSetupGui();
     }
     else if(url.path() == "comment")
     {
@@ -743,7 +744,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 }
             }
         }
-        timerUpdateTime->start();
+        slotSetupGui();
     }
     else if(url.path() == "links")
     {
@@ -778,7 +779,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 prj.setLinks(links);
             }
         }
-        timerUpdateTime->start();
+        slotSetupGui();
     }
     else
     {
@@ -805,7 +806,7 @@ void CDetailsPrj::slotPrint()
     draw(doc, true);
     doc.print(&printer);
 
-    timerUpdateTime->start();
+    slotSetupGui();
 }
 
 void CDetailsPrj::slotLock(bool on)
@@ -821,7 +822,7 @@ void CDetailsPrj::slotLock(bool on)
         }
     }
     prj.blockUpdateItems(false);
-    timerUpdateTime->start();
+    slotSetupGui();
 }
 
 
@@ -829,5 +830,5 @@ void CDetailsPrj::slotSortMode(int idx)
 {
     comboSort->setEnabled(false);
     prj.setSorting(IGisProject::sorting_e(idx));
-    timerUpdateTime->start();
+    slotSetupGui();
 }

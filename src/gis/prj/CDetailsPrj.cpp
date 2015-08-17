@@ -91,7 +91,7 @@ void CDetailsPrj::slotSetupGui()
             is not reentrant. That is why we have to block these calls with a mutex. However as something
             has changed the diary has to be redrawn again. That is why the timer is restarted.
 
-        */
+         */
         timerUpdateTime->start(1000);
         return;
     }
@@ -104,7 +104,7 @@ void CDetailsPrj::slotSetupGui()
         int res = QMessageBox::question(this, tr("Correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
         if(res == QMessageBox::Yes)
         {
-            prj.switchOnCorrelation();            
+            prj.switchOnCorrelation();
         }
         else
         {

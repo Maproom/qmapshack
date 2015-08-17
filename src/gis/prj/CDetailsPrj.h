@@ -20,9 +20,9 @@
 #define CDETAILSPRJ_H
 
 #include "ui_IDetailsPrj.h"
+#include <QMutex>
 #include <QPointer>
 #include <QWidget>
-#include <QMutex>
 
 class CDetailsPrj;
 class IGisProject;

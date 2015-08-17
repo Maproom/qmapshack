@@ -35,7 +35,7 @@ public:
     virtual ~CRouterRoutino();
 
     void calcRoute(const IGisItem::key_t& key);
-    bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
 
     bool hasFastRouting();
 
@@ -53,6 +53,8 @@ private:
     void updateHelpText();
     QString xlateRoutinoError(int err);
     QStringList dbPaths;
+
+    QMutex mutex;
 };
 
 #endif //CROUTERROUTINO_H

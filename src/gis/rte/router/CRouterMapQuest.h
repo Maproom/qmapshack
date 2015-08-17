@@ -35,9 +35,9 @@ public:
     virtual ~CRouterMapQuest();
 
     void calcRoute(const IGisItem::key_t& key);
-    bool calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
     {
-        return false;
+        return -1;
     }
 
     QString getOptions();

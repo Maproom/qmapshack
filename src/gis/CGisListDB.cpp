@@ -35,11 +35,11 @@
 class CGisListDBEditLock
 {
 public:
-    CGisListDBEditLock(bool waitCursor, CGisListDB * widget) : widget(widget), waitCursor(waitCursor)
+    CGisListDBEditLock(bool waitCursor, CGisListDB * widget, const QString& src) : widget(widget), waitCursor(waitCursor), src(src)
     {
         if(waitCursor)
         {
-            CCanvas::setOverrideCursor(Qt::WaitCursor, "CGisListDBEditLock");
+            CCanvas::setOverrideCursor(Qt::WaitCursor, "CGisListDBEditLock: " + src);
         }
         widget->isInternalEdit += 1;
     }
@@ -47,13 +47,14 @@ public:
     {
         if(waitCursor)
         {
-            CCanvas::restoreOverrideCursor("~CGisListDBEditLock");
+            CCanvas::restoreOverrideCursor("~CGisListDBEditLock: " + src);
         }
         widget->isInternalEdit -= 1;
     }
 private:
     CGisListDB * widget;
     bool waitCursor;
+    QString src;
 };
 
 
@@ -121,7 +122,7 @@ CGisListDB::~CGisListDB()
 
 CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
 {
-    CGisListDBEditLock lock(true, this);
+    CGisListDBEditLock lock(true, this, "getDataBase");
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
@@ -136,7 +137,7 @@ CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
 
 bool CGisListDB::hasDatabase(const QString& name)
 {
-    CGisListDBEditLock lock(true, this);
+    CGisListDBEditLock lock(true, this, "hasDatabase");
     const int N = topLevelItemCount();
     for(int i = 0; i < N; i++)
     {
@@ -152,12 +153,11 @@ bool CGisListDB::hasDatabase(const QString& name)
 
 bool CGisListDB::event(QEvent * e)
 {
-    CGisListDBEditLock lock(true, this);
-
     switch(e->type())
     {
     case eEvtW2DAckInfo:
     {
+        CGisListDBEditLock lock(true, this, "event");
         CEvtW2DAckInfo * evt        = (CEvtW2DAckInfo*)e;
         CDBFolderDatabase * folder  = getDataBase(evt->db);
         if(folder)
@@ -174,6 +174,7 @@ bool CGisListDB::event(QEvent * e)
 
     case eEvtW2DCreate:
     {
+        CGisListDBEditLock lock(true, this, "event");
         CEvtW2DCreate * evt         = (CEvtW2DCreate*)e;
         CDBFolderDatabase * db  = getDataBase(evt->db);
         if(db)
@@ -291,7 +292,7 @@ void CGisListDB::slotDelDatabase()
 
 void CGisListDB::slotAddFolder()
 {
-    CGisListDBEditLock lock(false, this);
+    CGisListDBEditLock lock(false, this, "slotAddFolder");
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == 0)
@@ -312,7 +313,7 @@ void CGisListDB::slotAddFolder()
 
 void CGisListDB::slotDelFolder()
 {
-    CGisListDBEditLock lock(false, this);
+    CGisListDBEditLock lock(false, this, "slotDelFolder");
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == 0)
     {
@@ -338,7 +339,7 @@ void CGisListDB::slotDelFolder()
 
 void CGisListDB::slotDelLostFound()
 {
-    CGisListDBEditLock lock(false, this);
+    CGisListDBEditLock lock(false, this, "slotDelLostFound");
     CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(currentItem());
     if(folder == 0)
     {
@@ -358,7 +359,7 @@ void CGisListDB::slotDelLostFound()
 
 void CGisListDB::slotDelLostFoundItem()
 {
-    CGisListDBEditLock lock(false, this);
+    CGisListDBEditLock lock(false, this, "slotDelLostFoundItem");
 
     int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all selected items from Lost&Found? This will remove them permanently."), QMessageBox::Ok|QMessageBox::No);
     if(res != QMessageBox::Ok)
@@ -396,7 +397,7 @@ void CGisListDB::slotDelLostFoundItem()
 
 void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
 {
-    CGisListDBEditLock lock(true, this);
+    CGisListDBEditLock lock(true, this, "slotItemExpanded");
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
     if(folder == 0)
@@ -409,7 +410,7 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
 
 void CGisListDB::slotDelItem()
 {
-    CGisListDBEditLock lock(false, this);
+    CGisListDBEditLock lock(false, this, "slotDelItem");
 
     int last = QMessageBox::NoButton;
 
@@ -463,7 +464,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
     {
         return;
     }
-    CGisListDBEditLock lock(true, this);
+    CGisListDBEditLock lock(true, this, "slotItemChanged");
 
     if(column == CGisListDB::eColumnCheckbox)
     {

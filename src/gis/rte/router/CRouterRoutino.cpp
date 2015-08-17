@@ -50,6 +50,7 @@ int ProgressFunc(double complete)
 
 CRouterRoutino::CRouterRoutino(QWidget *parent)
     : IRouter(true, parent)
+    , mutex(QMutex::NonRecursive)
 {
     setupUi(this);
 
@@ -281,80 +282,95 @@ void CRouterRoutino::updateHelpText()
 
 void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 {
-    QTime time;
-    time.start();
-
-    CGisItemRte * rte       = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-    if(rte == 0)
+    if(!mutex.tryLock())
     {
         return;
     }
 
-    Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
-    if(data == 0)
+    try
     {
-        return;
-    }
+        QTime time;
+        time.start();
 
-    rte->reset();
-
-    QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
-    QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
-
-    Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
-    Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
-
-    int res = Routino_ValidateProfile(data,profile);
-    if(res != 0)
-    {
-        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
-        return;
-    }
-
-    int options = ROUTINO_ROUTE_LIST_TEXT_ALL;
-    if(comboMode->currentIndex() == 0)
-    {
-        options |= ROUTINO_ROUTE_SHORTEST;
-    }
-    if(comboMode->currentIndex() == 1)
-    {
-        options |= ROUTINO_ROUTE_QUICKEST;
-    }
-
-    SGisLine line;
-    rte->getPolylineFromData(line);
-
-    int idx = 0;
-    QVector<Routino_Waypoint*> waypoints(line.size(), 0);
-    foreach(const IGisLine::point_t &pt, line)
-    {
-        waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y()*RAD_TO_DEG, pt.coord.x()*RAD_TO_DEG);
-        if(waypoints[idx] == NULL)
+        CGisItemRte * rte       = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+        if(rte == 0)
         {
-            QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
-            return;
+            throw QString();
         }
-        idx++;
-    }
 
-    progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
-
-    Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints.data(),waypoints.size(),options, ProgressFunc);
-
-    delete progress;
-
-    if(route != NULL)
-    {
-        rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
-        Routino_DeleteRoute(route);
-    }
-    else
-    {
-        if(Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED)
+        Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
+        if(data == 0)
         {
-            QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+            throw QString();
+        }
+
+        rte->reset();
+
+        QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
+        QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
+
+        Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
+        Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
+
+        int res = Routino_ValidateProfile(data,profile);
+        if(res != 0)
+        {
+            throw xlateRoutinoError(Routino_errno);
+        }
+
+        int options = ROUTINO_ROUTE_LIST_TEXT_ALL;
+        if(comboMode->currentIndex() == 0)
+        {
+            options |= ROUTINO_ROUTE_SHORTEST;
+        }
+        if(comboMode->currentIndex() == 1)
+        {
+            options |= ROUTINO_ROUTE_QUICKEST;
+        }
+
+        SGisLine line;
+        rte->getPolylineFromData(line);
+
+        int idx = 0;
+        QVector<Routino_Waypoint*> waypoints(line.size(), 0);
+        foreach(const IGisLine::point_t &pt, line)
+        {
+            waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y()*RAD_TO_DEG, pt.coord.x()*RAD_TO_DEG);
+            if(waypoints[idx] == NULL)
+            {
+                throw xlateRoutinoError(Routino_errno);
+            }
+            idx++;
+        }
+
+        progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+
+        Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints.data(),waypoints.size(),options, ProgressFunc);
+
+        delete progress;
+
+        if(route != NULL)
+        {
+            rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
+            Routino_DeleteRoute(route);
+        }
+        else
+        {
+            if(Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED)
+            {
+                throw xlateRoutinoError(Routino_errno);
+            }
         }
     }
+    catch(const QString& msg)
+    {
+        if(!msg.isEmpty())
+        {
+            QMessageBox::critical(this, "Routino...", msg, QMessageBox::Abort);
+        }
+    }
+
+    mutex.unlock();
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
@@ -364,79 +380,96 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 }
 
 
-bool CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
-    Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
-    if(data == 0)
+    if(!mutex.tryLock())
     {
-        return false;
+        return -1;
     }
 
-    QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
-    QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
-
-    Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
-    Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
-
-    int res = Routino_ValidateProfile(data,profile);
-    if(res != 0)
+    try
     {
-        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
-        return false;
-    }
-
-    int options = ROUTINO_ROUTE_LIST_TEXT_ALL;
-    if(comboMode->currentIndex() == 0)
-    {
-        options |= ROUTINO_ROUTE_SHORTEST;
-    }
-    if(comboMode->currentIndex() == 1)
-    {
-        options |= ROUTINO_ROUTE_QUICKEST;
-    }
-
-    Routino_Waypoint* waypoints[2] = {0};
-    waypoints[0] = Routino_FindWaypoint(data, profile, p1.y()*RAD_TO_DEG, p1.x()*RAD_TO_DEG);
-    if(waypoints[0] == NULL)
-    {
-        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
-        return false;
-    }
-
-    waypoints[1] = Routino_FindWaypoint(data, profile, p2.y()*RAD_TO_DEG, p2.x()*RAD_TO_DEG);
-    if(waypoints[1] == NULL)
-    {
-        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
-        return false;
-    }
-
-    progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
-
-    Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints,2,options, ProgressFunc);
-
-    delete progress;
-
-    if(route != NULL)
-    {
-        Routino_Output * next = route;
-        while(next)
+        Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
+        if(data == 0)
         {
-            if(next->type != ROUTINO_POINT_WAYPOINT)
+            throw QString();
+        }
+
+        QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
+        QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
+
+        Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
+        Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
+
+        int res = Routino_ValidateProfile(data,profile);
+        if(res != 0)
+        {
+            throw xlateRoutinoError(Routino_errno);
+        }
+
+        int options = ROUTINO_ROUTE_LIST_TEXT_ALL;
+        if(comboMode->currentIndex() == 0)
+        {
+            options |= ROUTINO_ROUTE_SHORTEST;
+        }
+        if(comboMode->currentIndex() == 1)
+        {
+            options |= ROUTINO_ROUTE_QUICKEST;
+        }
+
+        Routino_Waypoint* waypoints[2] = {0};
+        waypoints[0] = Routino_FindWaypoint(data, profile, p1.y()*RAD_TO_DEG, p1.x()*RAD_TO_DEG);
+        if(waypoints[0] == NULL)
+        {
+            throw xlateRoutinoError(Routino_errno);
+        }
+
+        waypoints[1] = Routino_FindWaypoint(data, profile, p2.y()*RAD_TO_DEG, p2.x()*RAD_TO_DEG);
+        if(waypoints[1] == NULL)
+        {
+            throw xlateRoutinoError(Routino_errno);
+        }
+
+        progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+
+        Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints,2,options, ProgressFunc);
+
+        delete progress;
+
+        if(route != NULL)
+        {
+            Routino_Output * next = route;
+            while(next)
             {
-                coords << QPointF(next->lon, next->lat);
+                if(next->type != ROUTINO_POINT_WAYPOINT)
+                {
+                    coords << QPointF(next->lon, next->lat);
+                }
+                next = next->next;
             }
-            next = next->next;
+            Routino_DeleteRoute(route);
         }
-        Routino_DeleteRoute(route);
-    }
-    else
-    {
-        if(Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED)
+        else
         {
-            QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+            if(Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED)
+            {
+                throw xlateRoutinoError(Routino_errno);
+            }
+            else
+            {
+                throw QString();
+            }
         }
-        return false;
+    }
+    catch(const QString& msg)
+    {
+        if(!msg.isEmpty())
+        {
+            QMessageBox::critical(this, "Routino...", msg, QMessageBox::Abort);
+        }
+        coords.clear();
     }
 
-    return !coords.isEmpty();
+    mutex.unlock();
+    return coords.size();
 }

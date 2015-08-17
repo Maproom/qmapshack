@@ -223,12 +223,13 @@ void ILineOp::finalizeOperation(qint32 idx)
             QPolygonF subs;
             IGisLine::point_t& pt1 = points[idx - 1];
             IGisLine::point_t& pt2 = points[idx];
-            CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs);
-
-            pt1.subpts.clear();
-            foreach(const QPointF &sub, subs)
+            if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
             {
-                pt1.subpts << IGisLine::subpt_t(sub);
+                pt1.subpts.clear();
+                foreach(const QPointF &sub, subs)
+                {
+                    pt1.subpts << IGisLine::subpt_t(sub);
+                }
             }
         }
 
@@ -237,12 +238,13 @@ void ILineOp::finalizeOperation(qint32 idx)
             QPolygonF subs;
             IGisLine::point_t& pt1 = points[idx];
             IGisLine::point_t& pt2 = points[idx + 1];
-            CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs);
-
-            pt1.subpts.clear();
-            foreach(const QPointF &sub, subs)
+            if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
             {
-                pt1.subpts << IGisLine::subpt_t(sub);
+                pt1.subpts.clear();
+                foreach(const QPointF &sub, subs)
+                {
+                    pt1.subpts << IGisLine::subpt_t(sub);
+                }
             }
         }
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");

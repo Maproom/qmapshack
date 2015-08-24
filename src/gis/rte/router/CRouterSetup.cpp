@@ -75,7 +75,7 @@ void CRouterSetup::calcRoute(const IGisItem::key_t& key)
     }
 }
 
-bool CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
     IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
     if(router)

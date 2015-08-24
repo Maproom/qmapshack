@@ -23,30 +23,24 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
     find_path(ROUTINO_INCLUDE_DIR
         NAMES
             routino.h
-        PATHS
-            if(WIN32)
-            ${ROUTINO_DEV_PATH}
-            endif(WIN32)
+        PATHS            
             /usr/include
             /usr/local/include
             /opt/local/include
             /sw/include
-            ${CMAKE_SOURCE_DIR}/Win32/Routino/include
+            ${ROUTINO_DEV_PATH}/include/
     )
     mark_as_advanced(ROUTINO_INCLUDE_DIR)
 
     find_library(LIBROUTINO_LIBRARY
         NAMES
             routino
-        PATHS
-            if(WIN32)
-            ${ROUTINO_DEV_PATH}
-            endif(WIN32)
+        PATHS            
             /usr/lib
             /usr/local/lib
             /opt/local/lib
             /sw/lib
-            ${CMAKE_SOURCE_DIR}/Win32/Routino/lib
+            ${ROUTINO_DEV_PATH}/lib
     )
     mark_as_advanced(LIBROUTINO_LIBRARY)
 
@@ -56,12 +50,10 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
             translations.xml
             tagging.xml
         PATHS
-            /usr/share
-            /usr/local/share
-            /opt/local/share
-            ${ROUTINO_DEV_PATH}
-        PATH_SUFFIXES
-            routino
+            /usr/share/routino
+            /usr/local/share/routino
+            /opt/local/share/routino
+            ${ROUTINO_DEV_PATH}/xml/
     )
     mark_as_advanced(ROUTINO_XML_PATH)
 
@@ -84,6 +76,8 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
     if (ROUTINO_FOUND)
         if (NOT ROUTINO_FIND_QUIETLY)
             message(STATUS "Found ROUTINO: ${ROUTINO_LIBRARIES}")
+            message(STATUS "Found ROUTINO: ${ROUTINO_INCLUDE_DIR}")
+            message(STATUS "Found ROUTINO: ${ROUTINO_XML_PATH}")
         endif (NOT ROUTINO_FIND_QUIETLY)
     else (ROUTINO_FOUND)
         if (ROUTINO_FIND_REQUIRED)

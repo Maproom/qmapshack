@@ -25,6 +25,9 @@
 #ifdef Q_OS_WIN
 #include "device/CDeviceWatcherWindows.h"
 #endif
+#ifdef Q_OS_MAC
+#include "device/CDeviceWatcherMac.h"
+#endif
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWidget.h"
@@ -183,6 +186,12 @@ CGisListWks::CGisListWks(QWidget *parent)
 #ifdef Q_OS_LINUX
     deviceWatcher = new CDeviceWatcherLinux(this);
     connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+#endif
+#ifdef Q_OS_MAC
+    CDeviceWatcherMac* pWatcher = new CDeviceWatcherMac(this);
+    deviceWatcher = pWatcher;
+    connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(qApp, SIGNAL(aboutToQuit()), deviceWatcher, SLOT(slotEndListing()));
 #endif
 #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);

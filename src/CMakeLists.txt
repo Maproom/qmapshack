@@ -20,6 +20,17 @@ find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
 
+if (APPLE)
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -framework Foundation -framework DiskArbitration")
+     SET(LINK_FLAGS "${LINK_FLAGS} -framework Foundation -framework DiskArbitration")
+endif(APPLE)
+
+if(APPLE)
+     FIND_LIBRARY(DiskArbitration_LIBRARY DiskArbitration)
+     FIND_LIBRARY(Foundation_LIBRARY Foundation)
+endif(APPLE)
+
+
 set( SRCS
 
     main.cpp
@@ -199,12 +210,19 @@ set( SRCS
     tool/CRoutinoDatabaseBuilder.cpp
 )
 
-if(UNIX)
+if(UNIX AND NOT APPLE)
 set( SRCS
     ${SRCS}
     device/CDeviceWatcherLinux.cpp
 )
-endif(UNIX)
+endif(UNIX AND NOT APPLE)
+
+if (APPLE)
+set( SRCS
+    ${SRCS}
+    device/CDeviceWatcherMac.cpp
+)
+endif(APPLE)
 
 if(WIN32)
 set( SRCS
@@ -394,12 +412,19 @@ set( HDRS
     tool/CRoutinoDatabaseBuilder.h
 )
 
-if(UNIX)
+if(UNIX AND NOT APPLE)
 set( HDRS
     ${HDRS}
     device/CDeviceWatcherLinux.h
 )
-endif(UNIX)
+endif(UNIX AND NOT APPLE)
+
+if(APPLE)
+set( HDRS
+    ${HDRS}
+    device/CDeviceWatcherMac.h
+    )
+endif(APPLE)
 
 if(WIN32)
 set( HDRS
@@ -513,12 +538,17 @@ set(ALLINP
 include_directories(
     ${CMAKE_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/3rdparty/CGetOpt
-    ${CMAKE_SOURCE_DIR}/3rdparty/RoutinoLib
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
 
 )
+
+if(APPLE)
+     INCLUDE_DIRECTORIES(/System/Library/Frameworks/Foundation.framework)
+     INCLUDE_DIRECTORIES(/System/Library/Frameworks/DiskArbitration.framework)
+endif(APPLE)
+
 
 
 add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
@@ -545,6 +575,13 @@ target_link_libraries(${APPLICATION_NAME}
     ${ROUTINO_LIBRARIES}
 )
 
+if(APPLE)
+     target_link_libraries(${APPLICATION_NAME}
+     ${Foundation_LIBRARY}
+     ${DiskArbitration_LIBRARY}
+    )
+endif(APPLE)
+
 install(
     TARGETS
       ${APPLICATION_NAME}
@@ -559,10 +596,3 @@ install(
     DESTINATION
         ${DATA_INSTALL_PREFIX}/${APPLICATION_NAME}/translations)
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
-
-if (APPLE)
-add_custom_target(locversion.plist ALL
-    COMMAND
-        ${CMAKE_SOURCE_DIR}/MacOSX/mklocversion.sh ${MAC_BUNDLE_PATH} ${${APPLICATION_NAME}_QM_FILES}
-)
-endif (APPLE)

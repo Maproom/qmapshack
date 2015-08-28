@@ -1,20 +1,20 @@
 /**********************************************************************************************
- Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
- 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
- 
- **********************************************************************************************/
+   Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
 
 #include "device/CDeviceWatcherMac.h"
 #include "device/IDevice.h"
@@ -29,23 +29,23 @@
 
 
 CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks *parent)
-: IDeviceWatcher(parent), worker()
+    : IDeviceWatcher(parent), worker()
 {
-    connect(&worker, SIGNAL(sigDeviceAdded(const QString&, const QString&)), this, SLOT(slotDeviceAdded(const QString&, const QString&)));
-    connect(&worker, SIGNAL(sigDeviceRemoved(const QString&, const QString&)), this, SLOT(slotDeviceRemoved(const QString&, const QString&)));
+    connect(&worker, SIGNAL(sigDeviceAdded(const QString &, const QString &)), this, SLOT(slotDeviceAdded(const QString &, const QString &)));
+    connect(&worker, SIGNAL(sigDeviceRemoved(const QString &, const QString &)), this, SLOT(slotDeviceRemoved(const QString &, const QString &)));
 }
-    
-    
+
+
 CDeviceWatcherMac::~CDeviceWatcherMac()
 {
 }
-    
+
 
 void CDeviceWatcherMac::slotEndListing()
 {
     worker.stop();
 }
-    
+
 
 // Aufruf 1s. nach instanzierung
 void CDeviceWatcherMac::slotUpdate()
@@ -55,7 +55,7 @@ void CDeviceWatcherMac::slotUpdate()
         addDevice(storage);
     }
 }
-    
+
 void CDeviceWatcherMac::slotDeviceAdded(const QString& dev, const QString& path)
 {
     qDebug() << "slotDeviceAdded" << dev << " " << path;
@@ -65,7 +65,7 @@ void CDeviceWatcherMac::slotDeviceAdded(const QString& dev, const QString& path)
 }
 
 
-void  CDeviceWatcherMac::addDevice(QStorageInfo storage)
+void CDeviceWatcherMac::addDevice(QStorageInfo storage)
 {
     if (storage.isValid() && storage.isReady())
     {
@@ -79,11 +79,11 @@ void  CDeviceWatcherMac::addDevice(QStorageInfo storage)
             QString device = storage.device();
             QString label = storage.name();
             QString name = storage.displayName();
-            
+
             qDebug() << "name: " << storage.name() << " display name: " << name << " root path: " << path << " label (name): " << label << " device: " <<device << " " << dev;
             //probeForDevice(path, path, storage.name());
             probeForDevice(path, dev, label);
-            
+
             // beim senden von *.gpx Dateien an Device:
             // 1. wird im Ordner Garmin/NewFiles als gpx abgelegt.
             // danach (z.B. wenn device abgehängt wird) übernimmt das GPS diese als *.fit im Ordner Garmin/Courses
@@ -95,7 +95,7 @@ void  CDeviceWatcherMac::addDevice(QStorageInfo storage)
 void CDeviceWatcherMac::slotDeviceRemoved(const QString& dev, const QString& path)
 {
     qDebug() << "slotDeviceRemoved" << dev;
-    
+
     sDevices.removeAll(dev); //erase?
     listWks->removeDevice(dev);
 }
@@ -120,11 +120,13 @@ void CDeviceWorker::eventDiskAppear(DADiskRef disk)
 {
     QString disk_name = DADiskGetBSDName(disk);
     QString path = getMountPoint(disk);
-    
-     qDebug() << "onDiskAppear " << path << " " << disk_name;
-    
+
+    qDebug() << "onDiskAppear " << path << " " << disk_name;
+
     if (!QMetaObject::invokeMethod(this, "sigDeviceAdded", Qt::QueuedConnection, Q_ARG(QString, disk_name), Q_ARG(QString, path)))
+    {
         qWarning("invoke deviceAdded failed");
+    }
 }
 
 
@@ -132,9 +134,11 @@ void CDeviceWorker::eventDiskDisappear(DADiskRef disk)
 {
     QString disk_name = DADiskGetBSDName(disk);
     qDebug() << "onDiskDisappear " << disk_name;
-    
+
     if (!QMetaObject::invokeMethod(this, "sigDeviceRemoved", Qt::QueuedConnection, Q_ARG(QString, disk_name), Q_ARG(QString, "")))
+    {
         qWarning("invoke deviceRemoved failed");
+    }
 }
 
 
@@ -142,14 +146,16 @@ QString CDeviceWorker::getMountPoint(DADiskRef disk)
 {
     //QString path = getMountPoint(disk);
     CFDictionaryRef dict = DADiskCopyDescription(disk);
-    
+
     QString path;
     CFURLRef fspath = (CFURLRef) CFDictionaryGetValue(dict, kDADiskDescriptionVolumePathKey);
-    if(fspath) {
+    if(fspath)
+    {
         char buf[512];
         CFURLGetFileSystemRepresentation(fspath, false, (UInt8 *)buf, sizeof(buf));
         path = buf;
-    } else
+    }
+    else
     {
         // wieso braucht es diesen Workaround für gewisse Devices?
         // bei manchen Devices ist der Volumen Path Key (fspath) nicht gesetzt.
@@ -164,7 +170,7 @@ QString CDeviceWorker::getMountPoint(DADiskRef disk)
             }
         }
     }
-    
+
     CFRelease(dict);
     return path;
 }
@@ -186,10 +192,10 @@ void CDeviceWorker::stop()
 {
     mStop = true;
     wait();
-    
+
     DAUnregisterCallback(mSession, (void*)onDiskAppear, this);
     DAUnregisterCallback(mSession, (void*)onDiskDisappear, this);
-    
+
     qDebug() << "Thread.stop";
 }
 
@@ -198,21 +204,23 @@ void CDeviceWorker::run()
 {
     qDebug() << "Thread.run";
     mStop = false;
-        
+
     DASessionScheduleWithRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     SInt32 result;
-    do {
+    do
+    {
         result = CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1, true);
-    } while (!mStop && result);
-        
+    }
+    while (!mStop && result);
+
     DASessionUnscheduleFromRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 }
 
-                                                                                 
+
 void CDeviceWorker::init()
 {
     mSession = DASessionCreate(kCFAllocatorDefault);
-                                                                                     
+
     DARegisterDiskAppearedCallback(mSession, NULL, onDiskAppear, this);
     DARegisterDiskDisappearedCallback(mSession, NULL, onDiskDisappear, this);
 }

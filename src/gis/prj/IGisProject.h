@@ -304,7 +304,7 @@ public:
        @param off           the offset into the tree widget, -1 for none
        @param lastResult    a reference to hold the last result of the copy option dialog
      */
-    void insertCopyOfItem(IGisItem *item, int off, int &lastResult);
+    void insertCopyOfItem(IGisItem *item, int off, int &lastResult, QWidget *parent);
 
     /**
        @brief Check if the project was initialized correctly.

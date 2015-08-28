@@ -476,7 +476,7 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
 }
 
 
-void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
+void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult, QWidget * parent)
 {
     bool clone = false;
     IGisItem::key_t key = item->getKey();
@@ -489,7 +489,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
-            CSelectCopyAction dlg(item, item2, &CMainWindow::self());
+            CSelectCopyAction dlg(item, item2, parent);
             dlg.exec();
             result = dlg.getResult();
             if(dlg.allOthersToo())

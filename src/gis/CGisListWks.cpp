@@ -510,7 +510,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(wpt2->parent());
                 if(project)
                 {
-                    project->insertCopyOfItem(wpt1, off, lastResult);
+                    project->insertCopyOfItem(wpt1, off, lastResult, &CMainWindow::self());
                 }
             }
             emit sigChanged();
@@ -531,7 +531,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(trk2->parent());
                 if(project)
                 {
-                    project->insertCopyOfItem(trk1, off, lastResult);
+                    project->insertCopyOfItem(trk1, off, lastResult, &CMainWindow::self());
                 }
             }
             emit sigChanged();
@@ -552,7 +552,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(rte2->parent());
                 if(project)
                 {
-                    project->insertCopyOfItem(rte1, off, lastResult);
+                    project->insertCopyOfItem(rte1, off, lastResult, &CMainWindow::self());
                 }
             }
             emit sigChanged();
@@ -573,7 +573,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
                 IGisProject * project = dynamic_cast<IGisProject*>(area2->parent());
                 if(project)
                 {
-                    project->insertCopyOfItem(area1, off, lastResult);
+                    project->insertCopyOfItem(area1, off, lastResult, &CMainWindow::self());
                 }
             }
             emit sigChanged();
@@ -598,7 +598,7 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
             IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
             if(gisItem)
             {
-                project->insertCopyOfItem(gisItem, NOIDX, lastResult);
+                project->insertCopyOfItem(gisItem, NOIDX, lastResult, &progress);
             }
         }
 
@@ -1171,16 +1171,20 @@ void CGisListWks::slotCopyItem()
     int lastResult = CSelectCopyAction::eResultNone;
 
     project->blockUpdateItems(true);
+
     QList<QTreeWidgetItem*> items = selectedItems();
+    int cnt = 1;
+    PROGRESS_SETUP(tr("Copy items..."), 0, items.count(), this);
     foreach(QTreeWidgetItem * item, items)
     {
+        PROGRESS(cnt++, break);
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem == 0)
         {
             continue;
         }
 
-        project->insertCopyOfItem(gisItem, NOIDX, lastResult);
+        project->insertCopyOfItem(gisItem, NOIDX, lastResult, &progress);
     }
     project->blockUpdateItems(false);
 

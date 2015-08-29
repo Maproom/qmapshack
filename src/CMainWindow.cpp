@@ -27,6 +27,7 @@
 #include "gis/IGisLine.h"
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
@@ -261,6 +262,23 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/timezone", tz);
     cfg.setValue("Units/timezone/mode", tzmode);
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
+}
+
+QWidget * CMainWindow::getBestWidgetForParent()
+{
+    QWidget * w = CProgressDialog::self();
+    if(w)
+    {
+        return w;
+    }
+
+    w = self().getVisibleCanvas();
+    if(w)
+    {
+        return w;
+    }
+
+    return &self();
 }
 
 bool CMainWindow::isScaleVisible()

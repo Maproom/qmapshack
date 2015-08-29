@@ -57,7 +57,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * proj
         IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
         if(item)
         {
-            insertCopyOfItem(item, NOIDX, res, &CMainWindow::self());
+            insertCopyOfItem(item, NOIDX, res);
         }
     }
 
@@ -84,7 +84,7 @@ bool CTwoNavProject::save()
         QFile fileKey(dir.absoluteFilePath(QString("%1.key").arg(getKey())));
         if(!fileKey.open(QIODevice::WriteOnly))
         {
-            QMessageBox::critical(&CMainWindow::self(), QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(fileKey.fileName()), QMessageBox::Abort);
+            QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(fileKey.fileName()), QMessageBox::Abort);
             throw -1;
         }
         fileKey.close();
@@ -156,7 +156,7 @@ bool CTwoNavProject::saveAs()
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
 
     QString filter = "*.gpx";
-    QString fn = QFileDialog::getSaveFileName(&CMainWindow::self(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
 
     if(fn.isEmpty())
     {
@@ -188,7 +188,7 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
     QFile file(filename);
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(&CMainWindow::self(), QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename), QMessageBox::Abort);
         return false;
     }
     QTextStream out(&file);

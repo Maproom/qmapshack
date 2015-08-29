@@ -21,9 +21,13 @@
 
 #include <QtWidgets>
 
+QStack<CProgressDialog*> CProgressDialog::stackSelf;
+
 CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *parent)
     : QDialog(parent)
 {
+    stackSelf.push(this);
+
     setupUi(this);
     setWindowModality(Qt::WindowModal);
 
@@ -44,8 +48,18 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     QTimer::singleShot(1000, this, SLOT(show()));
 }
 
+CProgressDialog * CProgressDialog::self()
+{
+    if(stackSelf.isEmpty())
+    {
+        return 0;
+    }
+    return stackSelf.top();
+}
+
 CProgressDialog::~CProgressDialog()
 {
+    stackSelf.pop();
 }
 
 void CProgressDialog::reject()

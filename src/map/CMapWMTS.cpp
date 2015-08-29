@@ -42,7 +42,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::critical(&CMainWindow::self(), tr("Error..."), tr("Failed to open %1").arg(filename), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to open %1").arg(filename), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -52,7 +52,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     if(!dom.setContent(&file, true, &msg, &line, &column))
     {
         file.close();
-        QMessageBox::critical(&CMainWindow::self(), tr("Error..."), tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
     file.close();
@@ -62,7 +62,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     const QDomElement& xmlCapabilities = dom.documentElement();
     if(xmlCapabilities.tagName() != "Capabilities")
     {
-        QMessageBox::critical(&CMainWindow::self(), tr("Error..."), tr("Failed to read: %1\nUnknown structure.").arg(filename), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read: %1\nUnknown structure.").arg(filename), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
     const QDomNode& xmlServiceIdentification = xmlCapabilities.namedItem("ServiceIdentification");
@@ -71,7 +71,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     if(!ServiceType.contains("WMTS", Qt::CaseInsensitive) || ServiceTypeVersion != "1.0.0")
     {
-        QMessageBox::critical(&CMainWindow::self(), tr("Error..."), tr("Unexpexted service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unexpexted service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -203,7 +203,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
         if(tileset.pjsrc == 0)
         {
-            QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("No georeference information found."));
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("No georeference information found."));
             return;
         }
 

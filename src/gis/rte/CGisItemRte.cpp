@@ -228,7 +228,7 @@ void CGisItemRte::deriveSecondaryData()
 
 void CGisItemRte::edit()
 {
-    CDetailsRte dlg(*this, &CMainWindow::self());
+    CDetailsRte dlg(*this, CMainWindow::getBestWidgetForParent());
     dlg.exec();
 }
 

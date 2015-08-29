@@ -160,7 +160,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(&CMainWindow::self(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of training data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of training data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 
@@ -214,7 +214,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(&CMainWindow::self(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of extended data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of extended data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 
@@ -261,7 +261,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(&CMainWindow::self(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 
@@ -287,7 +287,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(&CMainWindow::self(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Corrupt track ..."), QObject::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
                 break;
             }
 

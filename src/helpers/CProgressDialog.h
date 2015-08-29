@@ -21,6 +21,7 @@
 
 #include "ui_IProgressDialog.h"
 #include <QDialog>
+#include <QStack>
 #include <QTime>
 
 
@@ -39,6 +40,8 @@ public:
     CProgressDialog(const QString text, int min, int max, QWidget * parent);
     virtual ~CProgressDialog();
 
+    static CProgressDialog * self();
+
     void setValue(int val);
 
     bool wasCanceled();
@@ -48,6 +51,7 @@ public slots:
 
 private:
     QTime time;
+    static QStack<CProgressDialog*> stackSelf;
 };
 
 #endif //CPROGRESSDIALOG_H

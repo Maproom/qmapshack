@@ -45,7 +45,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
 
     if("CompeGPSRasterImage" != QString(charbuf))
     {
-        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("This is not a TwoNav RMAP file."), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("This is not a TwoNav RMAP file."), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -54,7 +54,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
 
     if(tag1 != 10 || tag2 != 7)
     {
-        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Unknown sub-format."), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unknown sub-format."), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -124,7 +124,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
         {
             if(line.split("=")[1] != "2")
             {
-                QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Unknown version."), QMessageBox::Abort, QMessageBox::Abort);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unknown version."), QMessageBox::Abort, QMessageBox::Abort);
                 return;
             }
         }
@@ -141,7 +141,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
             QStringList vals = line.split("=")[1].split(",");
             if(vals.size() < 5)
             {
-                QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
                 return;
             }
 
@@ -162,7 +162,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
             QStringList vals = line.split("=")[1].split(",");
             if(vals.size() < 5)
             {
-                QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
                 return;
             }
 
@@ -184,7 +184,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
             QStringList vals = line.split("=")[1].split(",");
             if(vals.size() < 5)
             {
-                QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
                 return;
             }
 
@@ -206,7 +206,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
             QStringList vals = line.split("=")[1].split(",");
             if(vals.size() < 5)
             {
-                QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read reference point."), QMessageBox::Abort, QMessageBox::Abort);
                 return;
             }
 
@@ -234,7 +234,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     {
         if(!setProjection(projection, datum))
         {
-            QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Unknown projection and datum (%1%2).").arg(projection).arg(datum), QMessageBox::Abort, QMessageBox::Abort);
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unknown projection and datum (%1%2).").arg(projection).arg(datum), QMessageBox::Abort, QMessageBox::Abort);
             return;
         }
     }

@@ -106,7 +106,7 @@ bool IGisProject::askBeforClose()
     if(isChanged())
     {
         CCanvas::setOverrideCursor(Qt::ArrowCursor, "askBeforClose");
-        res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save befor closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save befor closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
         CCanvas::restoreOverrideCursor("askBeforClose");
 
         if(res == QMessageBox::Save)
@@ -246,7 +246,7 @@ void IGisProject::updateItems()
     quint32 total   = cntTrkPts * cntWpts;
     quint32 current = 0;
 
-    PROGRESS_SETUP(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, &CMainWindow::self());
+    PROGRESS_SETUP(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, CMainWindow::getBestWidgetForParent());
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -257,7 +257,7 @@ void IGisProject::updateItems()
             if(progress.wasCanceled())
             {
                 QString msg = QObject::tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
-                int res = QMessageBox::question(&CMainWindow::self(), QObject::tr("Cancelled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                int res = QMessageBox::question(&progress, QObject::tr("Cancelled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
                 noCorrelation = res == QMessageBox::Yes;
                 break;
             }
@@ -433,7 +433,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
             if(last != QMessageBox::YesToAll)
             {
                 QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
-                last = QMessageBox::question(&CMainWindow::self(), QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+                last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
                     // as each item in the project has to be unique, we can stop searching.
@@ -476,7 +476,7 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
 }
 
 
-void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult, QWidget * parent)
+void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
 {
     bool clone = false;
     IGisItem::key_t key = item->getKey();
@@ -489,7 +489,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult, QW
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
-            CSelectCopyAction dlg(item, item2, parent);
+            CSelectCopyAction dlg(item, item2, CMainWindow::getBestWidgetForParent());
             dlg.exec();
             result = dlg.getResult();
             if(dlg.allOthersToo())

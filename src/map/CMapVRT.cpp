@@ -44,7 +44,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     if(dataset == 0)
     {
-        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
         return;
     }
 
@@ -58,7 +58,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         if(pBand == 0)
         {
             delete dataset; dataset = 0;
-            QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
             return;
         }
 
@@ -86,7 +86,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         else
         {
             delete dataset; dataset = 0;
-            QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("File must be 8 bit palette or gray indexed."));
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("File must be 8 bit palette or gray indexed."));
             return;
         }
 
@@ -122,7 +122,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     if(pjsrc == 0)
     {
         delete dataset; dataset = 0;
-        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("No georeference information found."));
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("No georeference information found."));
         return;
     }
 

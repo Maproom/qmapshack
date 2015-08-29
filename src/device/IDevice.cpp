@@ -146,7 +146,7 @@ void IDevice::insertCopyOfProject(IGisProject * project, int& lastResult)
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
-            CSelectCopyAction dlg(project, project2, &CMainWindow::self());
+            CSelectCopyAction dlg(project, project2, CMainWindow::getBestWidgetForParent());
             dlg.exec();
             result = dlg.getResult();
             if(dlg.allOthersToo())
@@ -202,7 +202,7 @@ bool IDevice::testForExternalProject(const QString& filename)
     if(QDir(filename).exists() || QFile::exists(filename))
     {
         QString msg = QObject::tr("There is another project with the same name. If you press 'ok' it will be removed and replaced.");
-        int res = QMessageBox::warning(&CMainWindow::self(), getName(), msg, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), getName(), msg, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
         if(res != QMessageBox::Ok)
         {
             return true;

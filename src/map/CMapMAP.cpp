@@ -43,7 +43,7 @@ CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
     }
     catch(const exce_t& e)
     {
-        QMessageBox::critical(&CMainWindow::self(), tr("Failed ..."), e.msg, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed ..."), e.msg, QMessageBox::Abort);
         return;
     }
 

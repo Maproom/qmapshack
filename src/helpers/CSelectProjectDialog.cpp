@@ -29,7 +29,7 @@ QString CSelectProjectDialog::lastkey;
 
 
 CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& type, QTreeWidget * parent)
-    : QDialog(&CMainWindow::self())
+    : QDialog(CMainWindow::getBestWidgetForParent())
     , key(key)
     , name(name)
     , type(type)

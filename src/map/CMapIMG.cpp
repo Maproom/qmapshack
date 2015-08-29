@@ -151,7 +151,7 @@ CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
     }
     catch(const exce_t& e)
     {
-        QMessageBox::critical(&CMainWindow::self(), tr("Failed ..."), e.msg, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed ..."), e.msg, QMessageBox::Abort);
         return;
     }
 
@@ -640,7 +640,7 @@ void CMapIMG::readBasics()
     int cnt = 1;
     int tot = subfiles.count();
 
-    PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), 0, tot, &CMainWindow::self());
+    PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), 0, tot, CMainWindow::getBestWidgetForParent());
 
     maparea = QRectF();
     QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();

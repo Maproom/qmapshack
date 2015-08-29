@@ -171,7 +171,7 @@ void saveResource(const QString& name, QDir& dir)
 
 void CMapList::slotMapHonk()
 {
-    QString path = QFileDialog::getExistingDirectory(&CMainWindow::self(), tr("Where do you want to store maps?"), QDir::homePath());
+    QString path = QFileDialog::getExistingDirectory(CMainWindow::getBestWidgetForParent(), tr("Where do you want to store maps?"), QDir::homePath());
     if(path.isEmpty())
     {
         return;

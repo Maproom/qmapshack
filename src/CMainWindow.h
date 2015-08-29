@@ -29,6 +29,7 @@ class CGisWidget;
 class CCanvas;
 struct SGisLine;
 
+
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
     Q_OBJECT
@@ -37,6 +38,9 @@ public:
     {
         return *pSelf;
     }
+
+    static QWidget * getBestWidgetForParent();
+
     virtual ~CMainWindow();
 
     void addMapList(CMapList *list, const QString& name);

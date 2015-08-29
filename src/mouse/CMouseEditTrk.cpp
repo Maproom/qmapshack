@@ -114,7 +114,7 @@ void CMouseEditTrk::slotCopyToNew()
         name = trk->getName();
     }
 
-    name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name);
+    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name);
 
     if(name.isEmpty())
     {

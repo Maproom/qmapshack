@@ -98,7 +98,7 @@ void CMouseEditArea::slotCopyToNew()
         name = area->getName();
     }
 
-    name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new area name."), QLineEdit::Normal, name);
+    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new area name."), QLineEdit::Normal, name);
 
     if(name.isEmpty())
     {

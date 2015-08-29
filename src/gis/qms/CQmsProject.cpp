@@ -45,7 +45,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
         return;
     }
 
@@ -92,7 +92,7 @@ bool CQmsProject::saveAs()
     path += "/" + getName() + ".qms";
 
     QString filter = "*.qms";
-    QString fn = QFileDialog::getSaveFileName(&CMainWindow::self(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
 
     if(fn.isEmpty())
     {
@@ -142,7 +142,7 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
         return false;
     }
     QDataStream out(&file);

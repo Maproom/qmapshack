@@ -435,7 +435,7 @@ void CGisListDB::slotDelItem()
         if(last != QMessageBox::YesToAll)
         {
             QString msg = QObject::tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->text(CGisListDB::eColumnName)).arg(folder->text(CGisListDB::eColumnName));
-            last = QMessageBox::question(&CMainWindow::self(), QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+            last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
         }
         if(last == QMessageBox::No)
         {

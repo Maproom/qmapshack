@@ -62,7 +62,7 @@ void CCreateRouteFromWpt::accept()
 {
     QDialog::accept();
 
-    QString name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, "");
+    QString name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, "");
     if(name.isEmpty())
     {
         return;

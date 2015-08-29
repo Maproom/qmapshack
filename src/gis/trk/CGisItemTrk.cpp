@@ -1201,7 +1201,7 @@ bool CGisItemTrk::cut()
     }
 
     QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
-    name1 = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
         return false;
@@ -1216,7 +1216,7 @@ bool CGisItemTrk::cut()
     new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
 
     name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idxTotal).arg(cntTotalPoints-1);
-    name1 = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
         return false;
@@ -1235,7 +1235,7 @@ bool CGisItemTrk::cut()
 
 void CGisItemTrk::reverse()
 {
-    QString name1 = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
+    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
     if(name1.isEmpty())
     {
         return;
@@ -1285,7 +1285,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
         return;
     }
 
-    CCombineTrk dlg(*this, keysPreSel, *project, &CMainWindow::self());
+    CCombineTrk dlg(*this, keysPreSel, *project, CMainWindow::getBestWidgetForParent());
     dlg.exec();
 
     QList<IGisItem::key_t> keys = dlg.getTrackKeys();
@@ -1294,7 +1294,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
         return;
     }
 
-    QString name1 = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + " & other");
+    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + " & other");
     if(name1.isEmpty())
     {
         return;
@@ -1463,7 +1463,7 @@ void CGisItemTrk::copySelectedPoints()
     }
 
     QString name1 = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
-    name1 = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
         return;

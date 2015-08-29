@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 CMapPathSetup::CMapPathSetup(QStringList &paths, QString& pathCache)
-    : QDialog(&CMainWindow::self())
+    : QDialog(CMainWindow::getBestWidgetForParent())
     , paths(paths)
     , pathCache(pathCache)
 {

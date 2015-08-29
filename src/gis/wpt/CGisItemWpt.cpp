@@ -275,7 +275,7 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
     name = lastName;
     icon = lastIcon;
 
-    CSetupNewWpt dlg(pt, icon, name, &CMainWindow::self());
+    CSetupNewWpt dlg(pt, icon, name, CMainWindow::getBestWidgetForParent());
     if(dlg.exec() != QDialog::Accepted)
     {
         return false;
@@ -488,12 +488,12 @@ void CGisItemWpt::edit()
 {
     if(geocache.hasData)
     {
-        CDetailsGeoCache dlg(*this, &CMainWindow::self());
+        CDetailsGeoCache dlg(*this, CMainWindow::getBestWidgetForParent());
         dlg.exec();
     }
     else
     {
-        CDetailsWpt dlg(*this, &CMainWindow::self());
+        CDetailsWpt dlg(*this, CMainWindow::getBestWidgetForParent());
         dlg.exec();
     }
 }

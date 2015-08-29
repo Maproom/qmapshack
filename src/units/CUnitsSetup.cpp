@@ -49,15 +49,15 @@ void CUnitsSetup::accept()
 {
     if(radioMetric->isChecked())
     {
-        IUnit::setUnitType(IUnit::eTypeMetric, &CMainWindow::self());
+        IUnit::setUnitType(IUnit::eTypeMetric, CMainWindow::getBestWidgetForParent());
     }
     else if(radioImperial->isChecked())
     {
-        IUnit::setUnitType(IUnit::eTypeImperial, &CMainWindow::self());
+        IUnit::setUnitType(IUnit::eTypeImperial, CMainWindow::getBestWidgetForParent());
     }
     else if(radioNautic->isChecked())
     {
-        IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
+        IUnit::setUnitType(IUnit::eTypeNautic, CMainWindow::getBestWidgetForParent());
     }
     QDialog::accept();
 }

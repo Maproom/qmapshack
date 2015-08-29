@@ -22,7 +22,7 @@
 #include <QtWidgets>
 
 CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList &paths)
-    : QDialog(&CMainWindow::self())
+    : QDialog(CMainWindow::getBestWidgetForParent())
     , paths(paths)
 {
     setupUi(this);

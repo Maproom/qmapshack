@@ -44,7 +44,7 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
 {
     if(QFile::exists(filename))
     {
-        int res = QMessageBox::question(&CMainWindow::self(), tr("Existing file..."), tr("Remove existing %1?").arg(filename), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Existing file..."), tr("Remove existing %1?").arg(filename), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
         if(res != QMessageBox::Ok)
         {
             return;

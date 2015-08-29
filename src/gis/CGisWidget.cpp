@@ -375,7 +375,7 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
     }
 
     int lastResult = CSelectCopyAction::eResultNone;
-    project->insertCopyOfItem(item, NOIDX, lastResult, &CMainWindow::self());
+    project->insertCopyOfItem(item, NOIDX, lastResult);
 
 
     emit sigChanged();

@@ -31,7 +31,7 @@ static bool mitabLessThan(const mitab_entry_t &s1, const mitab_entry_t &s2)
 }
 
 CProjWizard::CProjWizard(QLineEdit &line)
-    : QDialog(&CMainWindow::self())
+    : QDialog(CMainWindow::getBestWidgetForParent())
     , line(line)
 {
     setupUi(this);
@@ -212,7 +212,7 @@ bool CProjWizard::validProjStr(const QString projStr)
 
     if (!projCheck)
     {
-        QMessageBox::warning(&CMainWindow::self(), tr("Error..."),tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(pj_errno)),QMessageBox::Abort,QMessageBox::Abort);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(pj_errno)),QMessageBox::Abort,QMessageBox::Abort);
         return false;
     }
     else

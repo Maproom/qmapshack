@@ -25,7 +25,7 @@
 #include <QtWidgets>
 
 CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
-    : QDialog(&CMainWindow::self())
+    : QDialog(CMainWindow::getBestWidgetForParent())
     , grid(grid)
     , map(map)
 {

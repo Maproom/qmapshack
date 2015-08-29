@@ -67,7 +67,7 @@ void CSetupDatabase::accept()
     name = lineName->text();
     if(list.hasDatabase(name))
     {
-        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("There is already a database with name '%1'").arg(name), QMessageBox::Abort);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("There is already a database with name '%1'").arg(name), QMessageBox::Abort);
         return;
     }
     filename = labelFilename->text();

@@ -23,7 +23,7 @@
 #include <QtWidgets>
 
 CDemPathSetup::CDemPathSetup(QStringList &paths)
-    : QDialog(&CMainWindow::self())
+    : QDialog(CMainWindow::getBestWidgetForParent())
     , paths(paths)
 {
     setupUi(this);

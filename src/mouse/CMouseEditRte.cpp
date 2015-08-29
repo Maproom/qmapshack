@@ -108,7 +108,7 @@ void CMouseEditRte::slotCopyToNew()
         name = rte->getName();
     }
 
-    name = QInputDialog::getText(&CMainWindow::self(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, name);
+    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, name);
 
     if(name.isEmpty())
     {

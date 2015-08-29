@@ -280,9 +280,11 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
 
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 {
+    qreal basefactor = IUnit::self().basefactor;
+
     for(int i = 0; i < pos.size(); i++)
     {
-        ele[i].ry() = getElevationAt(pos[i]);
+        ele[i].ry() = getElevationAt(pos[i]) * basefactor;
     }
 }
 

@@ -4247,7 +4247,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="485"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
-        <translation>&lt;b&gt;%1 Maße&lt;/b&gt;</translation>
+        <translation type="unfinished">&lt;b&gt;%1maße&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="488"/>

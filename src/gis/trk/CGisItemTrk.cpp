@@ -34,7 +34,6 @@
 #include <QtXml>
 #include <proj_api.h>
 
-#define ASCEND_THRESHOLD    5
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
 #define MIN_DIST_FOCUS      200

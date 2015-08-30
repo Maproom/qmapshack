@@ -27,14 +27,14 @@
 
 
 CMouseEditRte::CMouseEditRte(const QPointF &point, CGisDraw *gis, CCanvas *parent)
-    : IMouseEditLine(IGisItem::key_t(), point, gis, parent)
+    : IMouseEditLine(IGisItem::key_t(), point, true, tr("Route"), gis, parent)
 {
     startNewLine(point);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditRte::CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent)
-    : IMouseEditLine(rte.getKey(), rte, gis, parent)
+    : IMouseEditLine(rte.getKey(), rte, true, tr("Route"), gis, parent)
 {
     canvas->reportStatus(key.item, tr("<b>Edit Route Points</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>"));
 

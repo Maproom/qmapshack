@@ -430,11 +430,11 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
             throw xlateRoutinoError(Routino_errno);
         }
 
-        //progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+        progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
         Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints,2,options, ProgressFunc);
 
-        //delete progress;
+        delete progress;
 
         if(route != NULL)
         {

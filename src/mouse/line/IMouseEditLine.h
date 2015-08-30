@@ -48,14 +48,14 @@ public:
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * parent);
     /**
        @brief Edit an existing track
        @param trk       the track to edit
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * parent);
     virtual ~IMouseEditLine();
 
     void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect);
@@ -74,6 +74,8 @@ public:
 
     void storeToHistory(const SGisLine& line);
     void restoreFromHistory(SGisLine& line);
+
+    virtual void updateStatus();
 
 protected slots:
     /**
@@ -133,6 +135,7 @@ protected:
 
     /// the key of the GIS item to edit
     IGisItem::key_t key;
+
 private:
     void commonSetup();
     void changeCursor();
@@ -146,6 +149,10 @@ private:
 
     /// the current active line operation (move, add, delete...)
     ILineOp  * lineOp;
+
+    bool enableStatus;
+
+    QString type;
 };
 
 #endif //IMOUSEEDITLINE_H

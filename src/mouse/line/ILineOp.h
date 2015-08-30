@@ -58,6 +58,8 @@ public:
     {
     }
 
+    void updateStatus();
+
 protected slots:
     void slotTimeoutRouting();
 

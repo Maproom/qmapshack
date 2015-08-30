@@ -36,7 +36,8 @@ class IQlgtOverlay;
 class QDir;
 class CProgressDialog;
 
-#define TRK_N_COLORS 17
+#define TRK_N_COLORS        17
+#define ASCEND_THRESHOLD    5
 
 #include <QDebug>
 

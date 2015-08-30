@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
@@ -271,7 +272,10 @@ void ILineOp::finalizeOperation(qint32 idx)
             }
         }
     }
+
+    parentHandler->updateStatus();
 }
+
 
 qint32 ILineOp::isCloseTo(const QPoint& pos)
 {

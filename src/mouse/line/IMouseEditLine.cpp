@@ -18,11 +18,13 @@
 
 #include "CMainWindow.h"
 #include "GeoMath.h"
+#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
 #include "gis/rte/router/CRouterSetup.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
 #include "mouse/line/CLineOpAddPoint.h"
 #include "mouse/line/CLineOpDeletePoint.h"
@@ -35,12 +37,14 @@
 
 #include <QtWidgets>
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, CGisDraw * gis, CCanvas * parent)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, bool enableStatus, const QString &type, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
     , idxHistory(NOIDX)
     , key(key)
     , doCanvasPanning(false)
     , lineOp(0)
+    , enableStatus(enableStatus)
+    , type(type)
 {
     commonSetup();
     scrOptEditLine->pushSaveOrig->hide(); // hide as there is no original
@@ -51,12 +55,14 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
     storeToHistory(points);
 }
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDraw *gis, CCanvas *parent)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString &type, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
     , idxHistory(NOIDX)
     , key(key)
     , doCanvasPanning(false)
     , lineOp(0)
+    , enableStatus(enableStatus)
+    , type(type)
 {
     commonSetup();
 
@@ -69,6 +75,8 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, CGisDr
 
 IMouseEditLine::~IMouseEditLine()
 {
+    canvas->reportStatus("IMouseEditLine","");
+
     int mode = 0;
     if(scrOptEditLine->toolNoRoute->isChecked())
     {
@@ -354,6 +362,8 @@ void IMouseEditLine::restoreFromHistory(SGisLine& line)
 {
     line = history[idxHistory];
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+
+    updateStatus();
 }
 
 void IMouseEditLine::storeToHistory(const SGisLine& line)
@@ -372,6 +382,8 @@ void IMouseEditLine::storeToHistory(const SGisLine& line)
 
     scrOptEditLine->toolRedo->setEnabled(false);
     scrOptEditLine->toolUndo->setEnabled(idxHistory > 0);
+
+    updateStatus();
 }
 
 void IMouseEditLine::slotUndo()
@@ -401,4 +413,84 @@ void IMouseEditLine::slotRedo()
     scrOptEditLine->toolRedo->setEnabled(idxHistory < (history.size() - 1));
     scrOptEditLine->toolUndo->setEnabled(true);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void IMouseEditLine::updateStatus()
+{
+    if(!enableStatus || points.isEmpty())
+    {
+        canvas->reportStatus("IMouseEditLine","");
+        return;
+    }
+
+    canvas->getElevationAt(points);
+
+    qreal asc   = 0;
+    qreal dsc   = 0;
+    qreal dist  = 0;
+
+    qreal lastEle = points[0].ele;
+    qreal absDelta;
+    qreal delta;
+
+
+    QPointF lastPos = points[0].coord;
+
+    for(int i = 0; i < points.size(); i++)
+    {
+        const IGisLine::point_t& pt1 = points[i];
+
+        delta       = pt1.ele - lastEle;
+        absDelta    = qAbs(delta);
+        if(absDelta > ASCEND_THRESHOLD)
+        {
+            if(delta > 0)
+            {
+                asc += delta;
+            }
+            if(delta < 0)
+            {
+                dsc -= delta;
+            }
+            lastEle = pt1.ele;
+        }
+
+        dist += GPS_Math_Distance(lastPos.x(), lastPos.y(), pt1.coord.x(), pt1.coord.y());
+        lastPos = pt1.coord;
+
+        foreach(const IGisLine::subpt_t& pt, pt1.subpts)
+        {
+            delta       = pt.ele - lastEle;
+            absDelta    = qAbs(delta);
+            if(absDelta > ASCEND_THRESHOLD)
+            {
+                if(delta > 0)
+                {
+                    asc += delta;
+                }
+                if(delta < 0)
+                {
+                    dsc -= delta;
+                }
+                lastEle = pt.ele;
+            }
+
+            dist += GPS_Math_Distance(lastPos.x(), lastPos.y(), pt.coord.x(), pt.coord.y());
+            lastPos = pt.coord;
+        }
+    }
+
+    QString msg, val, unit;
+
+    msg += tr("<b>%1 Metrics</b>").arg(type);
+    msg += "<table>";
+    IUnit::self().meter2distance(dist, val, unit);
+    msg += "<tr><td>" + tr("Distance:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    IUnit::self().meter2elevation(asc, val, unit);
+    msg += "<tr><td>" + tr("Ascend:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    IUnit::self().meter2elevation(dsc, val, unit);
+    msg += "<tr><td>" + tr("Descend:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    msg += "</table>";
+
+    canvas->reportStatus("IMouseEditLine",msg);
 }

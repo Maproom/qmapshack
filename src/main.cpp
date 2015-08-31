@@ -38,6 +38,9 @@ static void usage(std::ostream &s)
         "\n";
 }
 
+/*
+    just a small test
+*/
 
 static void processOptions()
 {

@@ -38,10 +38,6 @@ static void usage(std::ostream &s)
         "\n";
 }
 
-/*
-    just a small test
-*/
-
 static void processOptions()
 {
     CGetOpt opts;                // uses qApp->argc() and qApp->argv()

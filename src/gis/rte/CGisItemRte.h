@@ -24,10 +24,12 @@
 #include <routino.h>
 
 #include <QPen>
+#include <QPointer>
 
 class QDomNode;
 class IGisProject;
 class CQlgtRoute;
+class CScrOptRte;
 
 class CGisItemRte : public IGisItem, public IGisLine
 {
@@ -227,6 +229,8 @@ private:
     quint32 totalTime;
 
     const subpt_t * mouseMoveFocus;
+
+    QPointer<CScrOptRte>  scrOpt;
 };
 
 #endif //CGISITEMRTE_H

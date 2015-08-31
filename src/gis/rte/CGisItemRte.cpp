@@ -313,7 +313,11 @@ QString CGisItemRte::getInfo(bool allowEdit) const
 
 IScrOpt * CGisItemRte::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    return new CScrOptRte(this, origin, mouse);
+    if(scrOpt.isNull())
+    {
+        scrOpt = new CScrOptRte(this, origin, mouse);
+    }
+    return scrOpt;
 }
 
 QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)

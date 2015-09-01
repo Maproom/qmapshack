@@ -333,7 +333,7 @@ void IMouseEditLine::slotVectorRouting()
 void IMouseEditLine::changeCursor()
 {
     cursor = lineOp->getCursor();
-    CCanvas::changeOverrideCursor(cursor,"IMouseEditLine::changeCursor");
+    //CCanvas::changeOverrideCursor(cursor,"IMouseEditLine::changeCursor");
 }
 
 void IMouseEditLine::slotAbort()

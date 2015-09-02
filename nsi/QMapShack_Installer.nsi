@@ -175,7 +175,13 @@ Section "QMapShack" QMapShack
   SetOutPath "$INSTDIR\share\"
 	File /r Files\share\*.*
   ;END PROJ.4 Files        
-
+  
+  ;BEGIN Routino Files    
+  SetOutPath $INSTDIR
+    File Files\routino.dll
+  SetOutPath "$INSTDIR\routino-xml\"
+	File /r Files\routino-xml\*.*
+  ;END Routino Files     
   
   ;BEGIN additional Files    
   SetOutPath $INSTDIR

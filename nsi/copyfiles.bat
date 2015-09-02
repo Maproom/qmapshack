@@ -12,6 +12,7 @@ set QMSI_VCREDIST_PATH="M:\deploy"
 rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
 set QMSI_GDAL_PATH="M:\lib\gdal"
 set QMSI_PROJ_PATH="M:\lib\PROJ"
+set QMSI_ROUT_PATH="M:\lib\routino"
 
 rem Section 2.) Copy Files
 del /s/q Files
@@ -77,6 +78,10 @@ rem section 2.2.4) PROJ.4
 xcopy %QMSI_PROJ_PATH%\share share /s /i
 copy %QMSI_PROJ_PATH%\bin\*.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
+rem section 2.2.5) Routino
+copy %QMSI_ROUT_PATH%\lib\routino.dll
+xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
+
 
 rem section 2.3) Copy MSVC Redist Files
 copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe

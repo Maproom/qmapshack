@@ -151,7 +151,14 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
 
     if(sourceFiles.isEmpty())
     {
+
+#ifdef WIN32
+		QString apppath = QCoreApplication::applicationDirPath();
+		apppath = apppath.replace("/", "\\");
+		QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
+#else
         QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
+#endif
         QStringList args;
 
         args << QString("--dir=%1").arg(targetPath);
@@ -166,7 +173,13 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
     }
     else
     {
-        QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
+#ifdef WIN32
+		QString apppath = QCoreApplication::applicationDirPath();
+		apppath = apppath.replace("/", "\\");
+		QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
+#else
+		QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
+#endif
         QStringList args;
 
         args << QString("--dir=%1").arg(targetPath);

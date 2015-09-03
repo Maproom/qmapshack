@@ -35,6 +35,7 @@
 #include "mouse/CMouseEditTrk.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "mouse/CMouseNormal.h"
+#include "mouse/CMousePrint.h"
 #include "mouse/CMouseRangeTrk.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
@@ -288,6 +289,17 @@ void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
     {
         CCanvas::restoreOverrideCursor("setMouseWptBubble");
         CCanvas::setOverrideCursor(*mouse, "setMouseWptBubble");
+    }
+}
+
+void CCanvas::setMousePrint()
+{
+    mouse->deleteLater();
+    mouse = new CMousePrint(gis, this);
+    if(underMouse())
+    {
+        CCanvas::restoreOverrideCursor("setMousePrint");
+        CCanvas::setOverrideCursor(*mouse, "setMousePrint");
     }
 }
 

@@ -120,6 +120,7 @@ public:
     void setMouseEditArea(CGisItemOvlArea& area);
     void setMouseEditArea(const QPointF& pt);
     void setMouseWptBubble(const IGisItem::key_t& key);
+    void setMousePrint();
 
     void showProfileAsWindow(bool yes);
     void showProfile(bool yes);

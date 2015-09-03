@@ -164,6 +164,30 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h)
     stream >> h.histIdxInitial;
     stream >> h.histIdxCurrent;
     stream >> h.events;
+
+    if(h.histIdxCurrent >= h.events.size())
+    {
+        h.histIdxCurrent = h.events.size() - 1;
+    }
+
+    if(h.histIdxInitial >= h.events.size())
+    {
+        h.histIdxInitial = h.events.size() - 1;
+    }
+
+    if(h.histIdxCurrent < 0)
+    {
+        h.histIdxInitial = NOIDX;
+        h.histIdxCurrent = NOIDX;
+        h.events.clear();
+    }
+    if(h.histIdxInitial < 0)
+    {
+        h.histIdxInitial = NOIDX;
+        h.histIdxCurrent = NOIDX;
+        h.events.clear();
+    }
+
     return stream;
 }
 

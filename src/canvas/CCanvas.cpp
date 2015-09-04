@@ -456,6 +456,8 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     map->convertPx2Rad(posFocus);
 
     update();
+
+    emit sigZoom();
 }
 
 
@@ -736,6 +738,11 @@ void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)
     grid->convertPos2Str(pos, str, simple);
 }
 
+void CCanvas::convertRad2Px(QPointF& pos)
+{
+    map->convertRad2Px(pos);
+}
+
 void CCanvas::displayInfo(const QPoint& px)
 {
     if(CMainWindow::self().isMapToolTip())
@@ -798,6 +805,8 @@ void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
     map->zoom(in, needsRedraw);
     dem->zoom(map->zoom());
     gis->zoom(map->zoom());
+
+
 }
 
 bool CCanvas::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)

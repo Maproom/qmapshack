@@ -28,6 +28,25 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
     , area(area)
 {
     setupUi(this);
+
+    QTemporaryFile temp;
+    temp.open();
+    temp.close();
+
+    QSettings view(temp.fileName(), QSettings::IniFormat);
+    view.clear();
+
+    canvas->saveConfig(view);
+
+    preview = new CCanvas(this, "preview");
+    preview->loadConfig(view);
+    preview->show();
+
+    QLayout * layout = new QVBoxLayout(frameCanvas);
+    layout->addWidget(preview);
+    layout->setSpacing(0);
+    layout->setContentsMargins(0,0,0,0);
+
 }
 
 CPrintDialog::~CPrintDialog()
@@ -35,3 +54,7 @@ CPrintDialog::~CPrintDialog()
 
 }
 
+void CPrintDialog::slotZoom()
+{
+
+}

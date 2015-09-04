@@ -31,8 +31,12 @@ public:
     CPrintDialog(const QRectF &area, CCanvas * canvas);
     virtual ~CPrintDialog();
 
+private slots:
+    void slotZoom();
+
 private:
     CCanvas * canvas;
+    CCanvas * preview;
     QRectF area;
 };
 

@@ -129,8 +129,8 @@ int main(int argc, char ** argv)
     resourcesDir.cd("Resources");
     appResourceDir = resourcesDir.absolutePath();
 #endif
-    
-    
+
+
     QTranslator *qtTranslator = new QTranslator(&a);
     if (qtTranslator->load(QLatin1String("qt_") + locale,resourceDir))
     {
@@ -150,7 +150,7 @@ int main(int argc, char ** argv)
 #ifdef Q_OS_MAC
     dirList << appResourceDir;
 #endif
-    
+
     QTranslator *qlandkartegtTranslator = new QTranslator(&a);
     foreach(QString dir, dirList)
     {

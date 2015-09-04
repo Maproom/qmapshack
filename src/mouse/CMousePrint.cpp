@@ -106,8 +106,6 @@ void CMousePrint::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         p.drawRect(rectPrintButton.adjusted(-3,-3,3,3));
         p.drawPixmap(rectPrintButton.topLeft(), QPixmap("://icons/48x48/Print.png"));
     }
-
-
 }
 
 void CMousePrint::mousePressEvent(QMouseEvent * e)

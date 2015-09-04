@@ -38,7 +38,7 @@ public:
     void wheelEvent(QWheelEvent * e);
 
 private:
-    QPoint  lastPos;
+    QPoint lastPos;
     QPointF offset;
 
     QRectF rectSelection;

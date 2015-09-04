@@ -805,8 +805,6 @@ void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
     map->zoom(in, needsRedraw);
     dem->zoom(map->zoom());
     gis->zoom(map->zoom());
-
-
 }
 
 bool CCanvas::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)

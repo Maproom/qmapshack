@@ -16,9 +16,10 @@
 
 **********************************************************************************************/
 
-#include "print/CPrintDialog.h"
-#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
+#include "GeoMath.h"
+#include "canvas/CCanvas.h"
+#include "print/CPrintDialog.h"
 
 #include <QtWidgets>
 
@@ -47,14 +48,29 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
     layout->setSpacing(0);
     layout->setContentsMargins(0,0,0,0);
 
+    connect(preview, SIGNAL(sigZoom()), this, SLOT(slotZoom()));
+    slotZoom();
 }
 
 CPrintDialog::~CPrintDialog()
 {
-
 }
 
 void CPrintDialog::slotZoom()
 {
+    QPointF pt1 = area.topLeft();
+    QPointF pt2 = area.bottomRight();
 
+    qreal mWidth    = GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt1.y());
+    qreal mHeight   = GPS_Math_Distance(pt1.x(), pt1.y(), pt1.x(), pt2.y());
+
+    preview->convertRad2Px(pt1);
+    preview->convertRad2Px(pt2);
+
+    qint32 pxWidth  = qRound(pt2.x() - pt1.x());
+    qint32 pxHeight = qRound(pt2.y() - pt1.y());
+
+
+
+    labelMapInfo->setText(tr("zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(pxWidth).arg(pxHeight).arg(mWidth/pxWidth,0,'f',1).arg(mHeight/pxHeight,0,'f',1));
 }

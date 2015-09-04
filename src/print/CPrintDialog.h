@@ -19,8 +19,8 @@
 #ifndef CPRINTDIALOG_H
 #define CPRINTDIALOG_H
 
-#include <QDialog>
 #include "ui_IPrintDialog.h"
+#include <QDialog>
 
 class CCanvas;
 

@@ -122,13 +122,22 @@ int main(int argc, char ** argv)
     // find Qt's transaltions first
     QString locale = QLocale::system().name();
     QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    QString appResourceDir = QCoreApplication::applicationDirPath();
+#ifdef Q_OS_MAC
+    QDir resourcesDir(appResourceDir);
+    resourcesDir.cdUp();
+    resourcesDir.cd("Resources");
+    appResourceDir = resourcesDir.absolutePath();
+#endif
+    
+    
     QTranslator *qtTranslator = new QTranslator(&a);
     if (qtTranslator->load(QLatin1String("qt_") + locale,resourceDir))
     {
         qDebug() << QLatin1String("qt_") + locale;
         a.installTranslator(qtTranslator);
     }
-    else if (qtTranslator->load(QLatin1String("qt_") + locale,QCoreApplication::applicationDirPath()))
+    else if (qtTranslator->load(QLatin1String("qt_") + locale, appResourceDir))
     {
         qDebug() << QLatin1String("qt_") + locale;
         a.installTranslator(qtTranslator);
@@ -136,9 +145,12 @@ int main(int argc, char ** argv)
 
     // find MapShack's translations
     QStringList dirList;
-    dirList << QCoreApplication::applicationDirPath().replace(QRegExp("bin$"), "share/qmapshack/translations");
+    dirList << appResourceDir.replace(QRegExp("bin$"), "share/qmapshack/translations");
 //    dirList << "./src";
-
+#ifdef Q_OS_MAC
+    dirList << appResourceDir;
+#endif
+    
     QTranslator *qlandkartegtTranslator = new QTranslator(&a);
     foreach(QString dir, dirList)
     {

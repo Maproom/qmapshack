@@ -113,6 +113,7 @@ CMainWindow::CMainWindow()
     connect(actionLoadView, SIGNAL(triggered()), this, SLOT(slotLoadView()));
     connect(actionClose, SIGNAL(triggered()), this, SLOT(close()));
     connect(actionCreateRoutinoDatabase, SIGNAL(triggered()), this, SLOT(slotCreateRoutinoDatabase()));
+    connect(actionPrintMap, SIGNAL(triggered()), this, SLOT(slotPrintMap()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
 
 
@@ -810,6 +811,17 @@ void CMainWindow::slotSetProfileMode(bool on)
 
         view->showProfileAsWindow(on);
     }
+}
+
+void CMainWindow::slotPrintMap()
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas == 0)
+    {
+        return;
+    }
+
+    canvas->setMousePrint();
 }
 
 #ifdef WIN32

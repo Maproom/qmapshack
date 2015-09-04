@@ -31,20 +31,22 @@ public:
     CMousePrint(CGisDraw * gis, CCanvas * parent);
     virtual ~CMousePrint();
 
-    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect);
-    virtual void mousePressEvent(QMouseEvent * e);
-    virtual void mouseMoveEvent(QMouseEvent * e);
-    virtual void mouseReleaseEvent(QMouseEvent *e);
-    virtual void wheelEvent(QWheelEvent * e);
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect);
+    void mousePressEvent(QMouseEvent * e);
+    void mouseMoveEvent(QMouseEvent * e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void wheelEvent(QWheelEvent * e);
 
 private:
-    QPoint lastPos;
+    QPoint  lastPos;
+    QPointF offset;
 
     QRectF rectSelection;
     QRectF rectTopLeft;
     QRectF rectTopRight;
     QRectF rectBottomLeft;
     QRectF rectBottomRight;
+    QRectF rectPrintButton;
 
     enum state_e
     {
@@ -64,6 +66,7 @@ private:
         , eCornerTopRight
         , eCornerBottomLeft
         , eCornerBottomRight
+        , eCornerPrint
     };
 
     corner_e corner;

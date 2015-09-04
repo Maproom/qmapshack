@@ -16,13 +16,22 @@
 
 **********************************************************************************************/
 
-#include "CPrintDialog.h"
+#include "print/CPrintDialog.h"
+#include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 
-CPrintDialog::CPrintDialog()
+#include <QtWidgets>
+
+CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
+    : QDialog(&CMainWindow::self())
+    , canvas(canvas)
+    , area(area)
 {
+    setupUi(this);
 }
 
 CPrintDialog::~CPrintDialog()
 {
+
 }
 

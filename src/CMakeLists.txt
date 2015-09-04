@@ -503,6 +503,7 @@ set( UIS
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui
+    print/IPrintDialog.ui
 )
 
 

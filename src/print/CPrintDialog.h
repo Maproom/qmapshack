@@ -19,11 +19,21 @@
 #ifndef CPRINTDIALOG_H
 #define CPRINTDIALOG_H
 
-class CPrintDialog
+#include <QDialog>
+#include "ui_IPrintDialog.h"
+
+class CCanvas;
+
+class CPrintDialog : public QDialog, private Ui::IPrintDialog
 {
+    Q_OBJECT
 public:
-    CPrintDialog();
+    CPrintDialog(const QRectF &area, CCanvas * canvas);
     virtual ~CPrintDialog();
+
+private:
+    CCanvas * canvas;
+    QRectF area;
 };
 
 #endif //CPRINTDIALOG_H

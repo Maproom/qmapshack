@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CPrintBuffer.h"
+#include "print/CPrintBuffer.h"
 
 CPrintBuffer::CPrintBuffer()
 {

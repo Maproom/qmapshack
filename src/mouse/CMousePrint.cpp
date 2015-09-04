@@ -18,6 +18,7 @@
 
 #include "gis/CGisDraw.h"
 #include "mouse/CMousePrint.h"
+#include "print/CPrintDialog.h"
 
 #include <QtWidgets>
 
@@ -27,12 +28,13 @@ CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *parent)
     , rectTopRight(0,0,20,20)
     , rectBottomLeft(0,0,20,20)
     , rectBottomRight(0,0,20,20)
+    , rectPrintButton(0,0,48,48)
     , state(eStateIdle)
     , corner(eCornerNone)
 {
     cursor      = QCursor(QPixmap("://cursors/cursorPrint.png"),0,0);
 
-    canvas->reportStatus("CMousePrint", tr("<b>Print Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Proceed with a double click."));
+    canvas->reportStatus("CMousePrint", tr("<b>Print Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Print the selection by a left click on the printer icon in the center of the selection."));
 }
 
 CMousePrint::~CMousePrint()
@@ -60,6 +62,7 @@ void CMousePrint::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
     rectTopRight.moveTopRight(rectSel.topRight());
     rectBottomLeft.moveBottomLeft(rectSel.bottomLeft());
     rectBottomRight.moveBottomRight(rectSel.bottomRight());
+
 
     QPainterPath path;
     path.addRect(rectScr);
@@ -94,10 +97,23 @@ void CMousePrint::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         p.drawRect(rectBottomRight);
         break;
     }
+
+    if(rectSel.width() > 50 && rectSel.height() > 50)
+    {
+        rectPrintButton.moveCenter(rectSel.center());
+        p.setPen(corner == eCornerPrint ? QPen(Qt::red,3) : QPen(Qt::darkBlue,2));
+        p.setBrush(Qt::white);
+        p.drawRect(rectPrintButton.adjusted(-3,-3,3,3));
+        p.drawPixmap(rectPrintButton.topLeft(), QPixmap("://icons/48x48/Print.png"));
+    }
+
+
 }
 
 void CMousePrint::mousePressEvent(QMouseEvent * e)
 {
+    e->accept();
+
     canvas->reportStatus("CMousePrint", "");
 
     if(e->button() == Qt::RightButton)
@@ -123,7 +139,16 @@ void CMousePrint::mousePressEvent(QMouseEvent * e)
         {
             if(corner != eCornerNone)
             {
-                state = eStateResize;
+                if(corner == eCornerPrint)
+                {
+                    CPrintDialog dlg(rectSelection, canvas);
+                    dlg.exec();
+                    canvas->resetMouse();
+                }
+                else
+                {
+                    state = eStateResize;
+                }
             }
             else
             {
@@ -138,6 +163,8 @@ void CMousePrint::mousePressEvent(QMouseEvent * e)
 
 void CMousePrint::mouseMoveEvent(QMouseEvent * e)
 {
+    e->accept();
+
     switch(state)
     {
     case eStateInitial:
@@ -155,24 +182,33 @@ void CMousePrint::mouseMoveEvent(QMouseEvent * e)
         QPoint pos = e->pos();
         if(rectTopLeft.contains(pos))
         {
+            offset = pos - rectTopLeft.topLeft();
             corner = eCornerTopLeft;
         }
         else if(rectTopRight.contains(pos))
         {
+            offset = pos - rectTopRight.topRight();
             corner = eCornerTopRight;
         }
         else if(rectBottomLeft.contains(pos))
         {
+            offset = pos - rectBottomLeft.bottomLeft();
             corner = eCornerBottomLeft;
         }
         else if(rectBottomRight.contains(pos))
         {
+            offset = pos - rectBottomRight.bottomRight();
             corner = eCornerBottomRight;
+        }
+        else if(rectPrintButton.contains(pos))
+        {
+            corner = eCornerPrint;
         }
         else
         {
             corner = eCornerNone;
         }
+
         if(corner != _corner)
         {
             canvas->update();
@@ -195,7 +231,7 @@ void CMousePrint::mouseMoveEvent(QMouseEvent * e)
 
     case eStateResize:
     {
-        QPointF pos = e->pos();
+        QPointF pos = e->pos() - offset;
         gis->convertPx2Rad(pos);
         switch(corner)
         {
@@ -223,6 +259,8 @@ void CMousePrint::mouseMoveEvent(QMouseEvent * e)
 
 void CMousePrint::mouseReleaseEvent(QMouseEvent *e)
 {
+    e->accept();
+
     if(!rectSelection.isNull())
     {
         QPointF pt1 = rectSelection.topLeft();
@@ -247,4 +285,5 @@ void CMousePrint::mouseReleaseEvent(QMouseEvent *e)
 void CMousePrint::wheelEvent(QWheelEvent * e)
 {
 }
+
 

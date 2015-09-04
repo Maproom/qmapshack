@@ -38,6 +38,11 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
 
     move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
+
+    connect(toolHidePoints, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolShowPoints, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
+
 }
 
 CScrOptRangeTrk::~CScrOptRangeTrk()
@@ -46,6 +51,9 @@ CScrOptRangeTrk::~CScrOptRangeTrk()
 
 void CScrOptRangeTrk::draw(QPainter& p)
 {
-    drawBubble2(origin, p);
+    if(isVisible())
+    {
+        drawBubble2(origin, p);
+    }
 }
 

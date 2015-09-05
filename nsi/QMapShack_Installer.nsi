@@ -107,10 +107,10 @@ Section "QMapShack" QMapShack
   ;BEGIN QMapShack Files    
   SetOutPath $INSTDIR
     File Files\qmapshack.exe
-    File Files\qmapshack_*.qm
 	File Files\*.ico
 	;File Files\*.png
-    File Files\qt_??.qm
+  SetOutPath "$INSTDIR\translations"
+    File Files\translations\qmapshack_*.qm  
   ;END QMapShack Files    
    
   ;BEGIN Qt Files
@@ -154,8 +154,10 @@ Section "QMapShack" QMapShack
 
   SetOutPath "$INSTDIR\platforms\"
     File Files\platforms\qwindows.dll	
-	
-	;END Qt Files
+
+  SetOutPath "$INSTDIR\translations"
+    File Files\translations\qt*.qm	
+  ;END Qt Files
     
   ;BEGIN GDAL and PROJ.4 Files    
   SetOutPath $INSTDIR

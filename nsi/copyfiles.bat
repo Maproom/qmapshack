@@ -62,11 +62,10 @@ mkdir platforms
 cd platforms
 copy %QMSI_QT_PATH%\plugins\platforms\qwindows.dll
 cd ..
-rem The qt_??.qm files must have been created before by
-rem opening a qt shell, going to the translations directory and running
-rem for %f in (qt_??.ts) do lrelease %f
-rem Oops, probably they are already preinstalled for Qt5
-copy %QMSI_QT_PATH%\translations\qt_??.qm
+rem Qt translations
+rem Qt5: see http://doc.qt.io/qt-5/linguist-programmers.html
+mkdir translations
+copy %QMSI_QT_PATH%\translations\qtbase_??.qm translations
 
 rem section 2.2) Copy GDAL and PROJ.4 Files 
 rem   put them in the same directory as the .exe for better testing
@@ -89,9 +88,9 @@ rem section 2.3) Copy MSVC Redist Files
 copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe
 rem section 2.4) Copy libexif Files
 rem copy %QLGTI_LIBEXIF_PATH%\libexif-12.dll
-rem section 2.5) Copy QMapShack GT Files
+rem section 2.5) Copy QMapShack Files
 copy ..\..\build\bin\Release\qmapshack.exe
-copy ..\..\build\src\*.qm
+copy ..\..\build\src\*.qm translations
 copy ..\*.ico
 rem section 2.6) 3rd party SW description
 copy ..\3rdparty.txt

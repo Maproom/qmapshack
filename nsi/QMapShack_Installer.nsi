@@ -179,6 +179,8 @@ Section "QMapShack" QMapShack
   ;BEGIN Routino Files    
   SetOutPath $INSTDIR
     File Files\routino.dll
+    File Files\planetsplitter.exe
+    File Files\libwinpthread-1.dll
   SetOutPath "$INSTDIR\routino-xml\"
 	File /r Files\routino-xml\*.*
   ;END Routino Files     

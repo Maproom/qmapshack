@@ -80,6 +80,8 @@ copy %QMSI_PROJ_PATH%\bin\*.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
 rem section 2.2.5) Routino
 copy %QMSI_ROUT_PATH%\lib\routino.dll
+copy %QMSI_ROUT_PATH%\bin\planetsplitter.exe
+copy %QMSI_ROUT_PATH%\bin\libwinpthread-1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 
 

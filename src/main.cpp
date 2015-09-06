@@ -119,7 +119,7 @@ int main(int argc, char ** argv)
 #endif
 
 
-    // find Qt's transaltions first
+    // find Qt's translations first
     QString locale = QLocale::system().name();
     QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     QString appResourceDir = QCoreApplication::applicationDirPath();
@@ -129,9 +129,20 @@ int main(int argc, char ** argv)
     resourcesDir.cd("Resources");
     appResourceDir = resourcesDir.absolutePath();
 #endif
+#ifdef WIN32
+	appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
+	qDebug() << appResourceDir;
+#endif
     
     
     QTranslator *qtTranslator = new QTranslator(&a);
+#ifdef WIN32
+	if (qtTranslator->load(QLatin1String("qtbase_") + locale, appResourceDir))
+	{
+		qDebug() << QLatin1String("qtbase_") + locale;
+		a.installTranslator(qtTranslator);
+	}
+#else
     if (qtTranslator->load(QLatin1String("qt_") + locale,resourceDir))
     {
         qDebug() << QLatin1String("qt_") + locale;
@@ -142,12 +153,13 @@ int main(int argc, char ** argv)
         qDebug() << QLatin1String("qt_") + locale;
         a.installTranslator(qtTranslator);
     }
+#endif
 
     // find MapShack's translations
     QStringList dirList;
     dirList << appResourceDir.replace(QRegExp("bin$"), "share/qmapshack/translations");
 //    dirList << "./src";
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC) || defined(WIN32)
     dirList << appResourceDir;
 #endif
     

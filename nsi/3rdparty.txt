@@ -28,6 +28,10 @@ QMS depends on the 3rd party software listed below:
 5.) Icons for the Windows Start Menu ==> We should get rid of them and use own icons
     kfm_home.ico has been created from the Nuvola 1.0 icon set (http://www.icon-king.com/projects/nuvola/)
 	gdalicon.ico has been converted from gdalicon.png from the GDAL package
+
+6.) The routino library
+  Source coude is available http://www.routino.org/
+  This QMapShack installation uses a routino library which is precompiled with mingw64 to reduce porting efforts
  
 
 Additional tools for building and installing

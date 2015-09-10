@@ -19,6 +19,9 @@
 #include "CMainWindow.h"
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "gis/CGisWidget.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "print/CPrintDialog.h"
 
 #include <QtWidgets>

@@ -129,6 +129,7 @@ void CMousePrint::mousePressEvent(QMouseEvent * e)
             gis->convertPx2Rad(pos);
             rectSelection.setTopLeft(pos);
             rectSelection.setBottomRight(pos);
+            posInitial = pos;
             state = eStateInitial;
             break;
         }
@@ -169,7 +170,25 @@ void CMousePrint::mouseMoveEvent(QMouseEvent * e)
     {
         QPointF pos = e->pos();
         gis->convertPx2Rad(pos);
-        rectSelection.setBottomRight(pos);
+
+        if(pos.x() < posInitial.x())
+        {
+            rectSelection.setLeft(pos.x());
+        }
+        else
+        {
+            rectSelection.setRight(pos.x());
+        }
+
+        if(pos.y() < posInitial.y())
+        {
+            rectSelection.setBottom(pos.y());
+        }
+        else
+        {
+            rectSelection.setTop(pos.y());
+        }
+
         canvas->update();
         break;
     }

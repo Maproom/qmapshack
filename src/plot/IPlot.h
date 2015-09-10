@@ -52,6 +52,8 @@ public:
         solid = yes;
     }
 
+    bool isZoomed();
+
 signals:
     void sigMouseClickState(int);
 
@@ -62,6 +64,7 @@ private slots:
     void slotShowPoints();
     void slotCopy();
     void slotStopRange();
+    void slotResetZoom();
 
 
 protected:
@@ -79,6 +82,7 @@ protected:
     void enterEvent(QEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
     void mousePressEvent(QMouseEvent * e);
+    void wheelEvent( QWheelEvent * e);
 
 
     void setSizes();
@@ -155,12 +159,12 @@ protected:
     static QColor colors[];
 
     QMenu * menu;
+    QAction * actionResetZoom;
     QAction * actionPrint;
     QAction * actionStopRange;
 
     qint32 idxSel1;
     qint32 idxSel2;
-
 
     mouse_click_state_e mouseClickState;
 

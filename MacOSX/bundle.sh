@@ -210,7 +210,7 @@ function printLinking {
 }
 
 function archiveBundle {
-    ARCHIVE=$(printf "%s/%s_%s.tar.gz" "$BUILD_RELEASE_DIR" "$APP_NAME" "$APP_VERSION")
+    ARCHIVE=$(printf "%s/%s-MacOSX_%s.tar.gz" "$BUILD_RELEASE_DIR" "$APP_NAME" "$APP_VERSION")
     echo $ARCHIVE
     rm $ARCHIVE
 

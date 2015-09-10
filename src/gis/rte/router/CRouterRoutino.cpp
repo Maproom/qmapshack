@@ -325,7 +325,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
             throw xlateRoutinoError(Routino_errno);
         }
 
-        int options = ROUTINO_ROUTE_LIST_HTML_ALL;
+        int options = ROUTINO_ROUTE_LIST_HTML;
         if(comboMode->currentIndex() == 0)
         {
             options |= ROUTINO_ROUTE_SHORTEST;
@@ -414,7 +414,7 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
             throw xlateRoutinoError(Routino_errno);
         }
 
-        int options = ROUTINO_ROUTE_LIST_HTML_ALL;
+        int options = ROUTINO_ROUTE_LIST_HTML;
         if(comboMode->currentIndex() == 0)
         {
             options |= ROUTINO_ROUTE_SHORTEST;

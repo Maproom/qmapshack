@@ -105,6 +105,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     }
 
     menu = new QMenu(this);
+    actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Reset Zoom"), this, SLOT(slotResetZoom()));
     actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
     actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
 
@@ -449,6 +450,18 @@ void IPlot::mousePressEvent(QMouseEvent * e)
     update();
 }
 
+void IPlot::wheelEvent( QWheelEvent * e)
+{
+    bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() > 0) : (e->delta() < 0);
+
+    data->x().zoom(in, e->pos().x() - left);
+    setSizes();
+    data->x().setScale(rectGraphArea.width());
+
+    needsRedraw = true;
+    update();
+}
+
 void IPlot::setSizes()
 {
     fm = QFontMetrics(CMainWindow::self().getMapFont());
@@ -744,7 +757,7 @@ void IPlot::drawXScale( QPainter &p )
     qreal limMin, limMax, useMin, useMax;
     data->x().getLimits(limMin, limMax, useMin, useMax);
 
-    if((limMax - limMin) <= (useMax - useMin))
+    if(!isZoomed())
     {
         return;
     }
@@ -818,7 +831,7 @@ void IPlot::drawYScale( QPainter &p )
         t = data->y().ticmark( t );
     }
 
-    if((limMax - limMin) <= (useMax - useMin))
+    if(!isZoomed())
     {
         return;
     }
@@ -1115,6 +1128,7 @@ void IPlot::slotContextMenu(const QPoint & point)
 {
     QPoint p = mapToGlobal(point);
 
+    actionResetZoom->setEnabled(isZoomed());
     actionStopRange->setEnabled((mouseClickState != eMouseClickIdle) && !(idxSel1 == NOIDX || idxSel2 == NOIDX));
     actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
 
@@ -1214,6 +1228,16 @@ void IPlot::slotStopRange()
     }
 }
 
+void IPlot::slotResetZoom()
+{
+    data->x().resetZoom();
+    setSizes();
+
+    needsRedraw = true;
+    update();
+}
+
+
 void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
 {
     if(ptRange1 == 0 || ptRange2 == 0)
@@ -1250,4 +1274,12 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
         }
     }
     update();
+}
+
+bool IPlot::isZoomed()
+{
+    qreal limMin, limMax, useMin, useMax;
+    data->x().getLimits(limMin, limMax, useMin, useMax);
+
+    return !((limMax - limMin) <= (useMax - useMin));
 }

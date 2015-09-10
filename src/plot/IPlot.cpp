@@ -452,7 +452,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
 void IPlot::wheelEvent( QWheelEvent * e)
 {
-    bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() > 0) : (e->delta() < 0);
+    bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0);
 
     data->x().zoom(in, e->pos().x() - left);
     setSizes();

@@ -406,7 +406,7 @@ void CPlotAxis::resetZoom()
 
 void CPlotAxis::zoom(bool in, int point)
 {
-    qreal min, p, d, factor;
+    qreal min, max, p, d, factor;
     if (in)
     {
         factor = 1/1.1;
@@ -419,9 +419,15 @@ void CPlotAxis::zoom(bool in, int point)
     p = pt2val(point);
     min = (p - usedMin) * (1 - factor) + usedMin;
     d = min - usedMin * factor;
+    max = usedMax * factor + d;
 
-    setMinMax(min, usedMax * factor + d);
-    move(0);
+
+    if(qRound(max - min) <= qRound(limitMax - limitMin))
+    {
+        setMinMax(min, max);
+        move(0);
+    }
+
 }
 
 

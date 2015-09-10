@@ -68,6 +68,7 @@ public:
 
     void setupGrid();
     void convertGridPos2Str(const QPointF& pos, QString& str, bool simple);
+    void convertRad2Px(QPointF &pos);
 
     void setup();
     QString getProjection();
@@ -120,6 +121,7 @@ public:
     void setMouseEditArea(CGisItemOvlArea& area);
     void setMouseEditArea(const QPointF& pt);
     void setMouseWptBubble(const IGisItem::key_t& key);
+    void setMousePrint();
 
     void showProfileAsWindow(bool yes);
     void showProfile(bool yes);
@@ -154,6 +156,7 @@ public:
 
 signals:
     void sigMousePosition(const QPointF& pos, qreal ele);
+    void sigZoom();
 
 public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);

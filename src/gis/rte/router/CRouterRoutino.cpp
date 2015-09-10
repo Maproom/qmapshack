@@ -65,11 +65,11 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
 
     int res = 0;
 #ifdef WIN32
-	QString apppath = QCoreApplication::applicationDirPath();
-	apppath = apppath.replace("/", "\\");
-	QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
+    QString apppath = QCoreApplication::applicationDirPath();
+    apppath = apppath.replace("/", "\\");
+    QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
 #else
-	QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
+    QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
 #endif
 
     res = Routino_ParseXMLProfiles(dirXml.absoluteFilePath("profiles.xml").toUtf8());

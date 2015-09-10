@@ -130,18 +130,18 @@ int main(int argc, char ** argv)
     appResourceDir = resourcesDir.absolutePath();
 #endif
 #ifdef WIN32
-	appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
-	qDebug() << appResourceDir;
+    appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
+    qDebug() << appResourceDir;
 #endif
-    
-    
+
+
     QTranslator *qtTranslator = new QTranslator(&a);
 #ifdef WIN32
-	if (qtTranslator->load(QLatin1String("qtbase_") + locale, appResourceDir))
-	{
-		qDebug() << QLatin1String("qtbase_") + locale;
-		a.installTranslator(qtTranslator);
-	}
+    if (qtTranslator->load(QLatin1String("qtbase_") + locale, appResourceDir))
+    {
+        qDebug() << QLatin1String("qtbase_") + locale;
+        a.installTranslator(qtTranslator);
+    }
 #else
     if (qtTranslator->load(QLatin1String("qt_") + locale,resourceDir))
     {
@@ -162,7 +162,7 @@ int main(int argc, char ** argv)
 #if defined(Q_OS_MAC) || defined(WIN32)
     dirList << appResourceDir;
 #endif
-    
+
     QTranslator *qlandkartegtTranslator = new QTranslator(&a);
     foreach(QString dir, dirList)
     {

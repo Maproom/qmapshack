@@ -87,10 +87,11 @@ void CAppSetup::printToConsole(QtMsgType type, QString formatedMsg)
             }
             break;
             
+#if QT_VERSION >= 0x050500
         case QtInfoMsg:
             std::cout << formatedMsg.toUtf8().constData() << std::endl;
             break;
-            
+#endif
         case QtWarningMsg:
             std::cerr << formatedMsg.toUtf8().constData() << std::endl;
             break;

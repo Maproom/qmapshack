@@ -17,172 +17,34 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "helpers/CAppOpts.h"
+#include "helpers/CCommandProcessor.h"
+#include "helpers/CAppSetup.h"
 #include "version.h"
 
-#include <CGetOpt.h>
 #include <QtCore>
 #include <QtWidgets>
-#include <gdal.h>
 #include <iostream>
 
 CAppOpts *qlOpts;
 
-static void usage(std::ostream &s)
-{
-    s << "usage: qmapshack [-d | --debug]\n"
-        "                 [-h | --help]\n"
-        "                 [-n | --no-splash]\n"
-        "                 [-c | --config=file]\n"
-        "                 [files...]\n"
-        "\n";
-}
-
-static void processOptions()
-{
-    CGetOpt opts;                // uses qApp->argc() and qApp->argv()
-    bool doDebugOut;
-    opts.addSwitch('d', "debug", &doDebugOut);
-    bool doHelp;
-    opts.addSwitch('h', "help", &doHelp);
-    bool noSplash;
-    opts.addSwitch('n', "no-splash", &noSplash);
-    QStringList args;
-    opts.addOptionalArguments("files", &args);
-    QString config;
-    opts.addOptionalOption('c', "config", &config, "");
-
-    if (!opts.parse())
-    {
-        usage(std::cerr);
-        exit(1);
-    }
-
-    if (doHelp)
-    {
-        usage(std::cout);
-        exit(0);
-    }
-
-    qlOpts = new CAppOpts(doDebugOut, noSplash, config, args);
-}
-
-
-static void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    switch (type)
-    {
-    case QtDebugMsg:
-        if (qlOpts->debug)
-        {
-            std::cout << msg.toUtf8().constData() << std::endl;
-        }
-        break;
-
-    case QtWarningMsg:
-        std::cerr << "Warning: " << msg.toUtf8().constData() << std::endl;
-        break;
-
-    case QtCriticalMsg:
-        std::cerr << "Critical: " <<  msg.toUtf8().constData() << std::endl;
-        break;
-
-    case QtFatalMsg:
-        std::cerr << "Fatal: " << msg.toUtf8().constData() << std::endl;
-        abort();
-        break;
-    }
-}
-
-
-
 int main(int argc, char ** argv)
 {
-    QApplication a(argc, argv);
-    processOptions();
-
-#ifndef Q_OS_WIN32
-    qInstallMessageHandler(myMessageOutput);
-#endif
-
-#ifdef WIN32
-    // setup environment variables for GDAL/Proj4
-    QString apppath = QCoreApplication::applicationDirPath();
-    apppath = apppath.replace("/", "\\");
-
-    //QString env_path = qgetenv("PATH");
-    //env_path += QString(";%1;%1\\proj\\apps;%1\\gdal\\apps;%1\\curl;").arg(apppath);
-    //qputenv("PATH", env_path.toUtf8());
-
-    qputenv("GDAL_DATA", QString("%1\\data").arg(apppath).toUtf8());
-    qputenv("PROJ_LIB", QString("%1\\share").arg(apppath).toUtf8());
-#endif
-
-
-    // find Qt's translations first
-    QString locale = QLocale::system().name();
-    QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-    QString appResourceDir = QCoreApplication::applicationDirPath();
-#ifdef Q_OS_MAC
-    QDir resourcesDir(appResourceDir);
-    resourcesDir.cdUp();
-    resourcesDir.cd("Resources");
-    appResourceDir = resourcesDir.absolutePath();
-#endif
-#ifdef WIN32
-	appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
-	qDebug() << appResourceDir;
-#endif
+    QApplication app(argc, argv);
     
-    
-    QTranslator *qtTranslator = new QTranslator(&a);
-#ifdef WIN32
-	if (qtTranslator->load(QLatin1String("qtbase_") + locale, appResourceDir))
-	{
-		qDebug() << QLatin1String("qtbase_") + locale;
-		a.installTranslator(qtTranslator);
-	}
-#else
-    if (qtTranslator->load(QLatin1String("qt_") + locale,resourceDir))
-    {
-        qDebug() << QLatin1String("qt_") + locale;
-        a.installTranslator(qtTranslator);
-    }
-    else if (qtTranslator->load(QLatin1String("qt_") + locale, appResourceDir))
-    {
-        qDebug() << QLatin1String("qt_") + locale;
-        a.installTranslator(qtTranslator);
-    }
-#endif
-
-    // find MapShack's translations
-    QStringList dirList;
-    dirList << appResourceDir.replace(QRegExp("bin$"), "share/qmapshack/translations");
-//    dirList << "./src";
-#if defined(Q_OS_MAC) || defined(WIN32)
-    dirList << appResourceDir;
-#endif
-    
-    QTranslator *qlandkartegtTranslator = new QTranslator(&a);
-    foreach(QString dir, dirList)
-    {
-        QString transName = QLatin1String("qmapshack_") + locale;
-        if (qlandkartegtTranslator->load( transName, dir))
-        {
-            a.installTranslator(qlandkartegtTranslator);
-            qDebug() << "using file '"+ QDir(dir).canonicalPath() + "/" + transName + ".qm' for translations.";
-            break;
-        }
-    }
-
-
-
-    GDALAllRegister();
-
     QCoreApplication::setApplicationName("QMapShack");
     QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
-
+    
+    CAppSetup* env = CAppSetup::getPlattformInstance();
+    env->installMessageHandler();
+    
+    CCommandProcessor cmdParse;
+    qlOpts = cmdParse.processOptions();
+    
+    env->prepareConfig();
+    env->prepareTranslators(&app);
+    env->prepareGdal();
+    
     QSplashScreen *splash = 0;
     if (!qlOpts->nosplash)
     {
@@ -208,11 +70,5 @@ int main(int argc, char ** argv)
         delete splash;
     }
 
-    QDir dir = QDir::home();
-    if(!dir.exists(".config/QLandkarte"))
-    {
-        dir.mkpath(".config/QLandkarte");
-    }
-
-    return a.exec();
+    return app.exec();
 }

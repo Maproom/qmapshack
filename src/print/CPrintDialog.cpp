@@ -25,6 +25,7 @@
 #include "print/CPrintDialog.h"
 
 #include <QtWidgets>
+#include <QtPrintSupport>
 
 CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
     : QDialog(&CMainWindow::self())
@@ -32,6 +33,8 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
     , area(area)
 {
     setupUi(this);
+
+    printer.setOrientation(QPrinter::Landscape);
 
     QTemporaryFile temp;
     temp.open();
@@ -55,10 +58,33 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
     slotZoom();
 
     connect(pushButton, SIGNAL(pressed()), this, SLOT(slot()));
+    connect(pushProperties, SIGNAL(pressed()), this, SLOT(slotProperties()));
+
+    updateMetrics();
 }
 
 CPrintDialog::~CPrintDialog()
 {
+}
+
+void CPrintDialog::updateMetrics()
+{
+    qDebug() << "printer resolution" << printer.resolution();
+    qDebug() << "printer size" << printer.pageRect();
+
+    QPointF pt1 = area.topLeft();
+    QPointF pt2 = area.bottomRight();
+
+    preview->convertRad2Px(pt1);
+    preview->convertRad2Px(pt2);
+
+    QRectF rectArea(pt1, pt2);
+    QRectF rectPage = printer.pageRect();
+
+    qreal xPages = rectArea.width() / rectPage.width();
+    qreal yPages = rectArea.height() / rectPage.height();
+
+    qDebug() << xPages << yPages << labelPages->size();
 }
 
 void CPrintDialog::slotZoom()
@@ -76,6 +102,17 @@ void CPrintDialog::slotZoom()
     qint32 pxHeight = qRound(pt2.y() - pt1.y());
 
     labelMapInfo->setText(tr("zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(pxWidth).arg(pxHeight).arg(mWidth/pxWidth,0,'f',1).arg(mHeight/pxHeight,0,'f',1));
+
+    updateMetrics();
+}
+
+void CPrintDialog::slotProperties()
+{
+    QPrintDialog dlg(&printer, this);
+    dlg.setWindowTitle(tr("Printer Properties..."));
+    dlg.exec();
+
+    updateMetrics();
 }
 
 void CPrintDialog::slot()

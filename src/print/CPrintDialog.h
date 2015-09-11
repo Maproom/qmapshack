@@ -21,6 +21,7 @@
 
 #include "ui_IPrintDialog.h"
 #include <QDialog>
+#include <QPrinter>
 
 class CCanvas;
 
@@ -33,12 +34,17 @@ public:
 
 private slots:
     void slotZoom();
+    void slotProperties();
     void slot();
 
 private:
+    void updateMetrics();
+
     CCanvas * canvas;
     CCanvas * preview;
+
     QRectF area;
+    QPrinter printer;
 };
 
 #endif //CPRINTDIALOG_H

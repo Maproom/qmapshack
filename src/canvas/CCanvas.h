@@ -154,6 +154,8 @@ public:
      */
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
+    void print(QPainter &p, const QRectF& area);
+
 signals:
     void sigMousePosition(const QPointF& pos, qreal ele);
     void sigZoom();
@@ -184,6 +186,7 @@ private:
     void setZoom(bool in, redraw_e &needsRedraw);
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
+    void setDrawContextSize(const QSize& s);
 
     /// set true to initiate a complete redraw of the screen content
     redraw_e needsRedraw;

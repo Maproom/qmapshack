@@ -53,6 +53,8 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
 
     connect(preview, SIGNAL(sigZoom()), this, SLOT(slotZoom()));
     slotZoom();
+
+    connect(pushButton, SIGNAL(pressed()), this, SLOT(slot()));
 }
 
 CPrintDialog::~CPrintDialog()
@@ -73,7 +75,25 @@ void CPrintDialog::slotZoom()
     qint32 pxWidth  = qRound(pt2.x() - pt1.x());
     qint32 pxHeight = qRound(pt2.y() - pt1.y());
 
-
-
     labelMapInfo->setText(tr("zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(pxWidth).arg(pxHeight).arg(mWidth/pxWidth,0,'f',1).arg(mHeight/pxHeight,0,'f',1));
+}
+
+void CPrintDialog::slot()
+{
+    QPointF pt1 = area.topLeft();
+    QPointF pt2 = area.bottomRight();
+
+    preview->convertRad2Px(pt1);
+    preview->convertRad2Px(pt2);
+
+    QImage img(pt2.x() - pt1.x(), pt2.y() - pt1.y(), QImage::Format_ARGB32);
+
+    QPainter p(&img);
+    USE_ANTI_ALIASING(p,true);
+
+    preview->print(p, area);
+
+    img.save("test.png", "PNG");
+
+    QDialog::accept();
 }

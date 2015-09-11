@@ -33,6 +33,7 @@ public:
 
 private slots:
     void slotZoom();
+    void slot();
 
 private:
     CCanvas * canvas;

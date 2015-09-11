@@ -14,6 +14,8 @@ BUILD_DIR=$ROOT_DIR/build_xcode_osx
 LIB_ROUTINO_DIR=$ROOT_DIR/routino-lib
 LIB_BREW_DIR=/usr/local/Cellar
 QT_DIR=$LIB_BREW_DIR/qt5/5.5.0
+GDAL_DIR=$LIB_BREW_DIR/gdal/1.11.2_2
+PROJ_DIR=$LIB_BREW_DIR/proj/4.9.1
 
 HG_BIN=/Applications/Dev/MacHg.app/Contents/Resources/localhg
 # ---------------------------------------------
@@ -35,6 +37,10 @@ BUILD_BUNDLE_RES_DIR=$BUILD_BUNDLE_DIR/Contents/Resources
 BUILD_BUNDLE_FRW_DIR=$BUILD_BUNDLE_DIR/Contents/Frameworks
 BUILD_BUNDLE_PLUGIN_DIR=$BUILD_BUNDLE_DIR/Contents/PlugIns
 BUILD_BUNDLE_APP_FILE=$BUILD_BUNDLE_APP_DIR/$APP_NAME
+
+BUILD_BUNDLE_RES_QM_DIR=$BUILD_BUNDLE_RES_DIR/translations
+BUILD_BUNDLE_RES_GDAL_DIR=$BUILD_BUNDLE_RES_DIR/gdal
+BUILD_BUNDLE_RES_PROJ_DIR=$BUILD_BUNDLE_RES_DIR/proj
 
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
@@ -87,7 +93,11 @@ function buildAppStructure {
     fi
     
     cp $BUILD_RELEASE_DIR/$APP_NAME  $BUILD_BUNDLE_APP_DIR
-    cp $BUILD_DIR/src/*.qm $BUILD_BUNDLE_RES_DIR
+    
+    mkdir $BUILD_BUNDLE_RES_QM_DIR
+    mkdir $BUILD_BUNDLE_RES_GDAL_DIR
+    mkdir $BUILD_BUNDLE_RES_PROJ_DIR
+    cp $BUILD_DIR/src/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
 function qtDeploy {
@@ -195,10 +205,13 @@ function copyAdditionalLibraries {
     cp -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
 }
 
-function copyQtTranslations {
-    cp $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_DIR
-    cp $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_DIR
-    cp $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_DIR
+function copyExternalFiles {
+    cp $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_QM_DIR
+    
+    cp $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
+    cp $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
 }
 
 
@@ -263,7 +276,7 @@ function buildBinary {
     cp $BUILD_BUNDLE_APP_DIR/$APP_NAME  $BUILD_RELEASE_DIR
 }
 
-
+    
 if [[ "$1" == "icon" ]]; then
     buildIcon
 fi
@@ -284,8 +297,8 @@ if [[ "$1" == "bundle" ]]; then
     copyAdditionalLibraries
     echo "---adjust linking ------------------"
     adjustLinking
-    echo "---copy translations ---------------"
-    copyQtTranslations
+    echo "---copy external files ---------------"
+    copyExternalFiles
     echo "------------------------------------"
     # chmod a+x $BUILD_BUNDLE_DIR/Contents/Frameworks/*
 fi
@@ -298,4 +311,7 @@ if [[ "$1" == "archive" ]]; then
 fi
 if [[ "$1" == "run" ]]; then
     $BUILD_BUNDLE_APP_FILE
+fi
+if [[ "$1" == "run-debug" ]]; then
+    $BUILD_BUNDLE_APP_FILE -d
 fi

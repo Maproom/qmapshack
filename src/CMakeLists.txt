@@ -50,6 +50,8 @@ set( SRCS
     helpers/CPhotoViewer.cpp
     helpers/CFadingIcon.cpp
     helpers/CProgressDialog.cpp
+    helpers/CCommandProcessor.cpp
+    helpers/CAppSetup.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -258,6 +260,8 @@ set( HDRS
     helpers/CPhotoViewer.h
     helpers/CFadingIcon.h
     helpers/CProgressDialog.h
+    helpers/CCommandProcessor.h
+    helpers/CAppSetup.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h

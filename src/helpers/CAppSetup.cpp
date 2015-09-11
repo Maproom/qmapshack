@@ -1,23 +1,23 @@
 /**********************************************************************************************
- Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
- 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
- 
- **********************************************************************************************/
+   Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
 
-#include "helpers/CAppSetup.h"
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
 #include "helpers/CAppOpts.h"
+#include "helpers/CAppSetup.h"
 
 #include <QtCore>
 #include <gdal.h>
@@ -32,13 +32,13 @@ CAppSetup* CAppSetup::getPlattformInstance()
     if(instance == 0)
     {
 #ifdef Q_OS_MAC
-    instance = new CAppSetupMac();
+        instance = new CAppSetupMac();
 #endif
 #ifdef Q_OS_LINUX
-    instance = new CAppSetupLinux();
+        instance = new CAppSetupLinux();
 #endif
 #ifdef Q_OS_WIN32
-    instance = new CAppSetupWin();
+        instance = new CAppSetupWin();
 #endif
     }
     return instance;
@@ -80,30 +80,31 @@ void CAppSetup::printToConsole(QtMsgType type, QString formatedMsg)
 {
     switch (type)
     {
-        case QtDebugMsg:
-            if (qlOpts->debug)
-            {
-                std::cout << formatedMsg.toUtf8().constData() << std::endl;
-            }
-            break;
-            
-#if QT_VERSION >= 0x050500
-        case QtInfoMsg:
+    case QtDebugMsg:
+        if (qlOpts->debug)
+        {
             std::cout << formatedMsg.toUtf8().constData() << std::endl;
-            break;
+        }
+        break;
+
+#if QT_VERSION >= 0x050500
+    case QtInfoMsg:
+        std::cout << formatedMsg.toUtf8().constData() << std::endl;
+        break;
+
 #endif
-        case QtWarningMsg:
-            std::cerr << formatedMsg.toUtf8().constData() << std::endl;
-            break;
-            
-        case QtCriticalMsg:
-            std::cerr <<  formatedMsg.toUtf8().constData() << std::endl;
-            break;
-            
-        case QtFatalMsg:
-            std::cerr << formatedMsg.toUtf8().constData() << std::endl;
-            abort();
-            break;
+    case QtWarningMsg:
+        std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+        break;
+
+    case QtCriticalMsg:
+        std::cerr <<  formatedMsg.toUtf8().constData() << std::endl;
+        break;
+
+    case QtFatalMsg:
+        std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+        abort();
+        break;
     }
 }
 
@@ -131,7 +132,8 @@ void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, 
 {
     QString locale = QLocale::system().name();
 
-    if (qtTranslator->load(translationPrefix + locale, translationPath)) {
+    if (qtTranslator->load(translationPrefix + locale, translationPath))
+    {
         app->installTranslator(qtTranslator);
         qDebug() << "using file '"+ translationPath + "/" + translationPrefix + locale + ".qm' for translations.";
     }
@@ -209,7 +211,7 @@ QString CAppSetupMac::logFilename()
     QDir dir = QDir::home();
     dir.cd("Library");
     dir.cd("Logs");
-    
+
     return dir.absoluteFilePath(logName());
 }
 
@@ -223,14 +225,14 @@ void CAppSetupLinux::prepareTranslators(QApplication* app)
 {
     QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     QString appResourceDir = QCoreApplication::applicationDirPath();
-    
+
     QString translationPath = QCoreApplication::applicationDirPath();
     translationPath.replace(QRegExp("bin$"), "share/qmapshack/translations");
-    
+
     QTranslator *qtTranslator = new QTranslator(app);
     prepareTranslator(app, qtTranslator, resourceDir, "qt_");
     prepareTranslator(app, qtTranslator, appResourceDir, "qt_");
-    
+
     QTranslator *qlandkartegtTranslator = new QTranslator(app);
     prepareTranslator(app, qlandkartegtTranslator, translationPath, "qmapshack_");
 }
@@ -241,29 +243,30 @@ CAppSetupWin::CAppSetupWin()
 }
 
 
-void CAppSetupWin::prepareGdal() {
-        
-        // setup environment variables for GDAL/Proj4
-        QString apppath = QCoreApplication::applicationDirPath();
-        apppath = apppath.replace("/", "\\");
-        QString gdalDir = QString("%1\\data").arg(apppath);
-        QString projDir = QString("%1\\share").arg(apppath);
-        
-        qputenv("GDAL_DATA", gdalDir.toUtf8());
-        qputenv("PROJ_LIB", projDir.toUtf8());
-        
-        CAppSetup::prepareGdal();
+void CAppSetupWin::prepareGdal()
+{
+    // setup environment variables for GDAL/Proj4
+    QString apppath = QCoreApplication::applicationDirPath();
+    apppath = apppath.replace("/", "\\");
+    QString gdalDir = QString("%1\\data").arg(apppath);
+    QString projDir = QString("%1\\share").arg(apppath);
+
+    qputenv("GDAL_DATA", gdalDir.toUtf8());
+    qputenv("PROJ_LIB", projDir.toUtf8());
+
+    CAppSetup::prepareGdal();
 }
-    
-    
-void CAppSetupWin::prepareTranslators(QApplication* app) {
+
+
+void CAppSetupWin::prepareTranslators(QApplication* app)
+{
     QString apppath = QCoreApplication::applicationDirPath();
     apppath = apppath.replace("/", "\\");
     QString appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
-    
+
     QTranslator *qtTranslator = new QTranslator(app);
     prepareTranslator(app, qtTranslator, appResourceDir, "qtbase_");
-    
+
     QTranslator *qlandkartegtTranslator = new QTranslator(app);
     prepareTranslator(app, qlandkartegtTranslator, appResourceDir, "qmapshack_");
 }

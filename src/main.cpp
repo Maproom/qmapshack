@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "helpers/CCommandProcessor.h"
 #include "helpers/CAppSetup.h"
+#include "helpers/CCommandProcessor.h"
 #include "version.h"
 
 #include <QtCore>
@@ -30,21 +30,21 @@ CAppOpts *qlOpts;
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
-    
+
     QCoreApplication::setApplicationName("QMapShack");
     QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
-    
+
     CAppSetup* env = CAppSetup::getPlattformInstance();
     env->installMessageHandler();
-    
+
     CCommandProcessor cmdParse;
     qlOpts = cmdParse.processOptions();
-    
+
     env->prepareConfig();
     env->prepareTranslators(&app);
     env->prepareGdal();
-    
+
     QSplashScreen *splash = 0;
     if (!qlOpts->nosplash)
     {

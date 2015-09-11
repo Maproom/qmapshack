@@ -427,7 +427,6 @@ void CPlotAxis::zoom(bool in, int point)
         setMinMax(min, max);
         move(0);
     }
-
 }
 
 

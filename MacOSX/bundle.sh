@@ -1,17 +1,24 @@
 #!/bin/bash
 
-CDIR=$(pwd)
-cd ..
-SRC_DIR=$(pwd)
-cd ..
-ROOT_DIR=$(pwd)
-cd $CDIR
 
+
+if [ ! -n "$ROOT_DIR" ]; then
+    CDIR=$(pwd)
+    cd ..
+    SRC_DIR=$(pwd)
+    cd ..
+    ROOT_DIR=$(pwd)
+    cd $CDIR
+fi
+echo "root dir: $ROOT_DIR"
+echo "src dir:  $SRC_DIR"
+
+set -a
 # Set this pathes according to your environment
 # ---------------------------------------------
 BUILD_DIR=$ROOT_DIR/build_xcode_osx
 
-LIB_ROUTINO_DIR=$ROOT_DIR/routino-lib
+LIB_ROUTINO_DIR=$ROOT_DIR/routino-lib/lib
 LIB_BREW_DIR=/usr/local/Cellar
 QT_DIR=$LIB_BREW_DIR/qt5/5.5.0
 GDAL_DIR=$LIB_BREW_DIR/gdal/1.11.2_2
@@ -41,6 +48,7 @@ BUILD_BUNDLE_APP_FILE=$BUILD_BUNDLE_APP_DIR/$APP_NAME
 BUILD_BUNDLE_RES_QM_DIR=$BUILD_BUNDLE_RES_DIR/translations
 BUILD_BUNDLE_RES_GDAL_DIR=$BUILD_BUNDLE_RES_DIR/gdal
 BUILD_BUNDLE_RES_PROJ_DIR=$BUILD_BUNDLE_RES_DIR/proj
+set +a
 
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
@@ -102,7 +110,7 @@ function buildAppStructure {
 
 function qtDeploy {
     # -no-strip 
-    sudo $QT_DIR/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=3
+    $QT_DIR/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=3
 }
 
 function printLinkingApp {
@@ -157,7 +165,7 @@ function adjustLinkQt {
         #  replace doubel slashes
         if [[ "$P" == *//* ]]; then 
             PSLASH=$(echo $P | sed 's,//,/,g')
-            sudo install_name_tool -change $P $PSLASH $F
+            install_name_tool -change $P $PSLASH $F
         fi
     
         if [[ "$P" == *$L* ]]; then
@@ -180,9 +188,9 @@ function adjustLinkQt {
             fi
             
             if [[ "$LIB" == *$FREL* ]]; then
-                sudo install_name_tool -id $PREL $F
+                install_name_tool -id $PREL $F
             else 
-                sudo install_name_tool -change $P $PREL $F
+                install_name_tool -change $P $PREL $F
             fi
         
             echo "$FREL > $P - $PREL"
@@ -247,6 +255,7 @@ function extractVersion {
 }
 
 function readRevisionHash {
+    cd $SRC_DIR
     BUILD_HASH_KEY=$($HG_BIN --debug id -i)
     
     if [[ "$BUILD_HASH_KEY" == *"+"* ]]; then
@@ -256,10 +265,6 @@ function readRevisionHash {
 
 
 function updateInfoPlist {
-    # sed -i -e "s/APP_VERSION/$APP_VERSION/g" $BUILD_BUNDLE_CONTENTS_DIR/Info.plist
-    # sed -i -e "s/BUNDLE_VERSION/$BUNDLE_VERSION/g" $BUILD_BUNDLE_CONTENTS_DIR/Info.plist
-    # rm $BUILD_BUNDLE_CONTENTS_DIR/Info.plist-e
-    
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $APP_VERSION" "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $APP_VERSION"            "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
     /usr/libexec/PlistBuddy -c "Set :BuildHashKey $BUILD_HASH_KEY"            "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
@@ -295,10 +300,10 @@ if [[ "$1" == "bundle" ]]; then
     qtDeploy
     echo "---copy libraries ------------------"
     copyAdditionalLibraries
-    echo "---adjust linking ------------------"
-    adjustLinking
     echo "---copy external files ---------------"
     copyExternalFiles
+    echo "---adjust linking ------------------"
+    adjustLinking
     echo "------------------------------------"
     # chmod a+x $BUILD_BUNDLE_DIR/Contents/Frameworks/*
 fi
@@ -308,10 +313,4 @@ fi
 if [[ "$1" == "archive" ]]; then
     extractVersion
     archiveBundle
-fi
-if [[ "$1" == "run" ]]; then
-    $BUILD_BUNDLE_APP_FILE
-fi
-if [[ "$1" == "run-debug" ]]; then
-    $BUILD_BUNDLE_APP_FILE -d
 fi

@@ -39,7 +39,7 @@ int main(int argc, char ** argv)
     env->installMessageHandler();
     
     CCommandProcessor cmdParse;
-    qlOpts = cmdParse.processOptions();
+    qlOpts = cmdParse.processOptions(app.arguments());
     
     env->prepareConfig();
     env->prepareTranslators(&app);

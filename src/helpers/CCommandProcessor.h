@@ -25,10 +25,7 @@
 class CCommandProcessor
 {
 public:
-    CAppOpts* processOptions();
-    
-private:
-    void usage(std::ostream &s);
+    CAppOpts* processOptions(const QStringList &arguments);
 };
 
 

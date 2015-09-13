@@ -35,6 +35,7 @@
 #include "mouse/CMouseEditTrk.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "mouse/CMouseNormal.h"
+#include "mouse/CMousePrint.h"
 #include "mouse/CMouseRangeTrk.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
@@ -291,6 +292,17 @@ void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
     }
 }
 
+void CCanvas::setMousePrint()
+{
+    mouse->deleteLater();
+    mouse = new CMousePrint(gis, this);
+    if(underMouse())
+    {
+        CCanvas::restoreOverrideCursor("setMousePrint");
+        CCanvas::setOverrideCursor(*mouse, "setMousePrint");
+    }
+}
+
 void CCanvas::reportStatus(const QString& key, const QString& msg)
 {
     if(msg.isEmpty())
@@ -327,20 +339,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 {
     needsRedraw = eRedrawAll;
 
-    QSize s = e->size();
-    if(map)
-    {
-        map->resize(s);
-    }
-    if(dem)
-    {
-        dem->resize(s);
-    }
-    if(gis)
-    {
-        gis->resize(s);
-    }
-
+    setDrawContextSize(e->size());
     QWidget::resizeEvent(e);
 
     // move map loading indicator to new center of canvas
@@ -444,6 +443,8 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     map->convertPx2Rad(posFocus);
 
     update();
+
+    emit sigZoom();
 }
 
 
@@ -724,6 +725,11 @@ void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)
     grid->convertPos2Str(pos, str, simple);
 }
 
+void CCanvas::convertRad2Px(QPointF& pos)
+{
+    map->convertRad2Px(pos);
+}
+
 void CCanvas::displayInfo(const QPoint& px)
 {
     if(CMainWindow::self().isMapToolTip())
@@ -884,4 +890,62 @@ void CCanvas::showProfile(bool yes)
             plotTrackProfile->hide();
         }
     }
+}
+
+void CCanvas::setDrawContextSize(const QSize& s)
+{
+    if(map)
+    {
+        map->resize(s);
+    }
+    if(dem)
+    {
+        dem->resize(s);
+    }
+    if(gis)
+    {
+        gis->resize(s);
+    }
+}
+
+void CCanvas::print(QPainter& p, const QRectF& area)
+{
+    QPointF pt1 = area.topLeft();
+    QPointF pt2 = area.bottomRight();
+
+    convertRad2Px(pt1);
+    convertRad2Px(pt2);
+
+    const QSize oldSize = size();
+    const QSize newSize(pt2.x() - pt1.x(), pt2.y() - pt1.y());
+    const QRect viewport(QPoint(0,0),newSize);
+
+    setDrawContextSize(newSize);
+
+    // ----- start to draw thread based content -----
+    // move coordinate system to center of the screen
+    p.translate(newSize.width() >> 1, newSize.height() >> 1);
+
+    redraw_e redraw = eRedrawAll;
+
+    map->draw(p, redraw, area.center());
+    dem->draw(p, redraw, area.center());
+    gis->draw(p, redraw, area.center());
+
+    map->wait();
+    dem->wait();
+    gis->wait();
+
+    map->draw(p, redraw, area.center());
+    dem->draw(p, redraw, area.center());
+    gis->draw(p, redraw, area.center());
+
+    // restore coordinate system to default
+    p.resetTransform();
+    // ----- start to draw fast content -----
+
+    grid->draw(p, viewport);
+    gis->draw(p, viewport);
+
+    setDrawContextSize(oldSize);
 }

@@ -108,6 +108,7 @@ set( SRCS
     mouse/CMouseEditArea.cpp
     mouse/CMouseRangeTrk.cpp
     mouse/CMouseWptBubble.cpp
+    mouse/CMousePrint.cpp
     mouse/CScrOptUnclutter.cpp    
     mouse/CScrOptRangeTrk.cpp    
     mouse/line/IMouseEditLine.cpp
@@ -210,6 +211,8 @@ set( SRCS
     tool/CMapVrtBuilder.cpp
     tool/CImportDatabase.cpp
     tool/CRoutinoDatabaseBuilder.cpp
+    print/CPrintBuffer.cpp
+    print/CPrintDialog.cpp
 )
 
 if(UNIX AND NOT APPLE)
@@ -316,8 +319,9 @@ set( HDRS
     mouse/CMouseEditArea.h
     mouse/CMouseRangeTrk.h
     mouse/CMouseWptBubble.h
+    mouse/CMousePrint.h
     mouse/CScrOptUnclutter.h
-    mouse/CScrOptRangeTrk.h
+    mouse/CScrOptRangeTrk.h    
     mouse/line/CScrOptEditLine.h
     mouse/line/CScrOptRangeLine.h
     mouse/line/IMouseEditLine.h
@@ -325,7 +329,7 @@ set( HDRS
     mouse/line/CLineOpMovePoint.h
     mouse/line/CLineOpAddPoint.h
     mouse/line/CLineOpDeletePoint.h
-    mouse/line/CLineOpSelectRange.h
+    mouse/line/CLineOpSelectRange.h    
     gis/WptIcons.h
     gis/CGisDraw.h
     gis/IGisItem.h
@@ -414,6 +418,8 @@ set( HDRS
     tool/CMapVrtBuilder.h
     tool/CImportDatabase.h
     tool/CRoutinoDatabaseBuilder.h
+    print/CPrintBuffer.h
+    print/CPrintDialog.h
 )
 
 if(UNIX AND NOT APPLE)
@@ -501,6 +507,7 @@ set( UIS
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui
+    print/IPrintDialog.ui
 )
 
 

@@ -1,3 +1,38 @@
+V 1.3.1
+* Add OS X support.
+* Moved to libRoutiono provided by the offcial Routino release
+* Add MapQuest as online routing service
+* Add edit details dialog for routes
+* Display instructions on highlighted routes.
+* Speed up projects with many tracks and waypoints
+* Add all tracks summary to project details
+* Insert new projects on top of device entries in the workspace
+* Fix random crashes due to multi threaded data access
+* Add device name to extended item name.
+* Add "City" waypoint icons
+* Fix race condition when creating new items
+* Optimize creating new waypoints in a row
+* Add a new progress dialog and fix many problems with displaying progress
+* Add routes to project details (diary)
+* Avoid crash in project details page when switching the sort mode to fast
+* Fix random crash when restoring the workspace
+* Fix some crashes due to lack of thread serialization
+* Project details: Fix crash on resize and other reentrant problems.
+* Fix crash when route on-the-fly
+* Waypoint details: Move history to tab
+* Track profile: Fix DEM line for units other than metric
+* History: Add sanity checks when restored from database.
+* Plot: Add zoom for x axis
+* Replaced CGetOpts with Qt QCommandLineParser
+* [Issue #33] Add a summary table (distance, ascent, descent) when editing tracks
+* [Issue #34] First point of edited track does not behave as next ones
+* [Issue #35] Routing using Routino : crash when route is too long
+* [Issue #37] "Select" tool issue when editing tracks
+* [Issue #39] Not possible to change names of objects with no name
+* [Issue #31] Add hotkeys for track editor buttons
+* [Issue #49] Hide screen option when buttons are pressed.
+* And many other small fixes...
+
 V 1.3.0
 * Cluttered items select: make text sensitive, too
 * TwoNav: Fix problems with decoding records created with old firmware.

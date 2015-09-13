@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>550</width>
     <height>550</height>
    </rect>
   </property>
@@ -16,6 +16,12 @@
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <widget class="QLabel" name="label_3">
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="text">
       <string/>
      </property>
@@ -222,41 +228,51 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="1">
+       <item row="2" column="1">
         <widget class="QLabel" name="label_22">
          <property name="text">
           <string>Ivo Kronenberg</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="1" column="1">
         <widget class="QLabel" name="label_20">
          <property name="text">
           <string>Helmut Schmidt</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
+       <item row="1" column="0">
         <widget class="QLabel" name="label_19">
          <property name="text">
-          <string>Win64 binary</string>
+          <string>Win64</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="label_21">
          <property name="text">
-          <string>OS X binary</string>
+          <string>OS X</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0" colspan="2">
+       <item row="3" column="0" colspan="2">
         <widget class="QLabel" name="label_23">
          <property name="text">
-          <string>...and thanks to all Linux binary maintainers for doing a great job. Special thanks Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</string>
+          <string>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_24">
+         <property name="text">
+          <string>Binaries:</string>
          </property>
         </widget>
        </item>

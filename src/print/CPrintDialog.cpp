@@ -24,8 +24,8 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "print/CPrintDialog.h"
 
-#include <QtWidgets>
 #include <QtPrintSupport>
+#include <QtWidgets>
 
 CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
     : QDialog(&CMainWindow::self())
@@ -36,6 +36,7 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
 
     printer.setOrientation(QPrinter::Landscape);
 
+    // clone canvas by a temporary configuration file
     QTemporaryFile temp;
     temp.open();
     temp.close();
@@ -49,46 +50,101 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *canvas)
     preview->loadConfig(view);
     preview->show();
 
+    // add preview canvas to dialog
     QLayout * layout = new QVBoxLayout(frameCanvas);
     layout->addWidget(preview);
     layout->setSpacing(0);
     layout->setContentsMargins(0,0,0,0);
 
-    connect(preview, SIGNAL(sigZoom()), this, SLOT(slotZoom()));
-    slotZoom();
-
-    connect(pushButton, SIGNAL(pressed()), this, SLOT(slot()));
+    connect(preview, SIGNAL(sigZoom()), this, SLOT(slotZoom()));    
     connect(pushProperties, SIGNAL(pressed()), this, SLOT(slotProperties()));
+    connect(pushPrint, SIGNAL(pressed()), this, SLOT(slotPrint()));
 
-    updateMetrics();
+    // update zoom info and print metrics
+    QTimer::singleShot(100, this, SLOT(slotZoom()));
+
 }
 
 CPrintDialog::~CPrintDialog()
 {
 }
 
+void CPrintDialog::resizeEvent(QResizeEvent * e)
+{
+    QDialog::resizeEvent(e);
+    slotZoom();
+}
+
 void CPrintDialog::updateMetrics()
 {
-    qDebug() << "printer resolution" << printer.resolution();
-    qDebug() << "printer size" << printer.pageRect();
-
+    // get pixel coordinates
     QPointF pt1 = area.topLeft();
     QPointF pt2 = area.bottomRight();
-
     preview->convertRad2Px(pt1);
     preview->convertRad2Px(pt2);
 
+    // the map area in [pixel]
     QRectF rectArea(pt1, pt2);
-    QRectF rectPage = printer.pageRect();
+    // the printer page in [pixel]
+    QRectF rectPage     = printer.pageRect(QPrinter::DevicePixel);
+    // the label to show the page matrix in [pixel]
+    QRectF rectLabel    = labelPages->rect();
 
-    qreal xPages = rectArea.width() / rectPage.width();
+    // calculate number of pages
+    qreal xPages = rectArea.width()  / rectPage.width();
     qreal yPages = rectArea.height() / rectPage.height();
 
-    qDebug() << xPages << yPages << labelPages->size();
+    qreal wPages = rectPage.width()  * qCeil(xPages);
+    qreal hPages = rectPage.height() * qCeil(yPages);
+
+    // derive scale for map area to page preview either from x axis or
+    // y axis. What ever fits better
+    qreal scale = rectLabel.width() / wPages;
+    if(hPages * scale > rectLabel.height())
+    {
+        scale = rectLabel.height() / hPages;
+    }
+
+    // create the preview image
+    QPixmap img(wPages * scale, hPages * scale);
+    img.fill(Qt::lightGray);
+
+    // scaled page preview width and height
+    qreal w = rectPage.width() * scale;
+    qreal h = rectPage.height() * scale;
+
+    // the page rectangle
+    QRectF rectTile(1,1, w-2, h-2);
+
+    // paint page matrix
+    QPainter p(&img);
+    p.setPen(Qt::black);
+    p.setBrush(Qt::white);
+
+    for(int y  = 0; y < qCeil(yPages); y++)
+    {
+        for(int x = 0; x < qCeil(xPages); x++)
+        {
+            rectTile.moveCenter(QPointF(w/2 + x * w, h/2 + y * h));
+            p.drawRect(rectTile);
+        }
+    }
+    p.setBrush(Qt::NoBrush);
+    p.drawRect(img.rect().adjusted(0,0,-1,-1));
+
+    p.setPen(QPen(Qt::darkGreen,2));
+    p.setBrush(Qt::BDiagPattern);
+    p.drawRect(0,0, rectArea.width() * scale, rectArea.height() * scale);
+
+    labelPages->setPixmap(img);
+
+    // update page matrix status
+    labelPagesText->setText(tr("Pages: %1 x %2").arg(xPages,0,'f',1).arg(yPages,0,'f',1));
 }
 
 void CPrintDialog::slotZoom()
 {
+    // update map resolution information
     QPointF pt1 = area.topLeft();
     QPointF pt2 = area.bottomRight();
 
@@ -103,6 +159,7 @@ void CPrintDialog::slotZoom()
 
     labelMapInfo->setText(tr("zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(pxWidth).arg(pxHeight).arg(mWidth/pxWidth,0,'f',1).arg(mHeight/pxHeight,0,'f',1));
 
+    // and the printer page metrics
     updateMetrics();
 }
 
@@ -113,6 +170,60 @@ void CPrintDialog::slotProperties()
     dlg.exec();
 
     updateMetrics();
+}
+
+void CPrintDialog::slotPrint()
+{
+    // get pixel coordinates
+    QPointF pt1 = area.topLeft();
+    QPointF pt2 = area.bottomRight();
+    preview->convertRad2Px(pt1);
+    preview->convertRad2Px(pt2);
+
+    // the map area in [pixel]
+    QRectF rectArea(pt1, pt2);
+    // the printer page in [pixel]
+    QRectF rectPage     = printer.pageRect(QPrinter::DevicePixel);
+
+    // calculate number of pages
+    qreal xPages = rectArea.width()  / rectPage.width();
+    qreal yPages = rectArea.height() / rectPage.height();
+
+    qreal wPage = rectPage.width();
+    qreal hPage = rectPage.height();
+
+    QPainter p;
+    p.begin(&printer);    
+    p.setClipRect(QRectF(QPointF(0,0),rectPage.size()));
+
+    USE_ANTI_ALIASING(p,true);
+
+    qreal yoff = pt1.y();
+    for(int y = 0; y < qCeil(yPages); y++)
+    {
+        qint32 xoff = pt1.x();
+        for(int x = 0; x < qCeil(xPages); x++)
+        {            
+            printer.newPage();
+
+            QPointF p11 = QPointF(xoff, yoff);
+            QPointF p22 = QPointF(xoff + wPage, yoff + hPage);
+
+            qDebug() << p11 << p22;
+
+            preview->convertPx2Rad(p11);
+            preview->convertPx2Rad(p22);
+
+            preview->print(p, QRectF(p11,p22));
+
+            xoff += wPage;
+        }
+
+        yoff += hPage;
+    }
+    p.end();
+
+    QDialog::accept();
 }
 
 void CPrintDialog::slot()

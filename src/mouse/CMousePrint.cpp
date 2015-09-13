@@ -104,7 +104,7 @@ void CMousePrint::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         p.setPen(corner == eCornerPrint ? QPen(Qt::red,3) : QPen(Qt::darkBlue,2));
         p.setBrush(Qt::white);
         p.drawRect(rectPrintButton.adjusted(-3,-3,3,3));
-        p.drawPixmap(rectPrintButton.topLeft(), QPixmap("://icons/48x48/Print.png"));
+        p.drawPixmap(rectPrintButton.topLeft(), QPixmap("://icons/48x48/PrintSave.png"));
     }
 }
 

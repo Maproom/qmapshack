@@ -150,6 +150,7 @@
         <file>icons/32x32/O.png</file>
         <file>icons/32x32/RteInstr.png</file>
         <file>icons/32x32/Zoom.png</file>
+        <file>icons/32x32/PrintSave.png</file>
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
@@ -282,6 +283,7 @@
         <file>icons/48x48/O.png</file>
         <file>icons/48x48/RteInstr.png</file>
         <file>icons/48x48/Zoom.png</file>
+        <file>icons/48x48/PrintSave.png</file>
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>

@@ -730,6 +730,11 @@ void CCanvas::convertRad2Px(QPointF& pos)
     map->convertRad2Px(pos);
 }
 
+void CCanvas::convertPx2Rad(QPointF& pos)
+{
+    map->convertPx2Rad(pos);
+}
+
 void CCanvas::displayInfo(const QPoint& px)
 {
     if(CMainWindow::self().isMapToolTip())
@@ -920,6 +925,9 @@ void CCanvas::print(QPainter& p, const QRectF& area)
     const QSize newSize(pt2.x() - pt1.x(), pt2.y() - pt1.y());
     const QRect viewport(QPoint(0,0),newSize);
 
+    QPointF center = QRectF(pt1, pt2).center();
+    convertPx2Rad(center);
+
     setDrawContextSize(newSize);
 
     // ----- start to draw thread based content -----
@@ -928,17 +936,17 @@ void CCanvas::print(QPainter& p, const QRectF& area)
 
     redraw_e redraw = eRedrawAll;
 
-    map->draw(p, redraw, area.center());
-    dem->draw(p, redraw, area.center());
-    gis->draw(p, redraw, area.center());
+    map->draw(p, redraw, center);
+    dem->draw(p, redraw, center);
+    gis->draw(p, redraw, center);
 
     map->wait();
     dem->wait();
     gis->wait();
 
-    map->draw(p, redraw, area.center());
-    dem->draw(p, redraw, area.center());
-    gis->draw(p, redraw, area.center());
+    map->draw(p, redraw, center);
+    dem->draw(p, redraw, center);
+    gis->draw(p, redraw, center);
 
     // restore coordinate system to default
     p.resetTransform();

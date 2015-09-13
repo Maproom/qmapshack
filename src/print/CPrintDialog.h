@@ -32,9 +32,13 @@ public:
     CPrintDialog(const QRectF &area, CCanvas * canvas);
     virtual ~CPrintDialog();
 
+protected:
+    void resizeEvent(QResizeEvent * e);
+
 private slots:
     void slotZoom();
     void slotProperties();
+    void slotPrint();
     void slot();
 
 private:

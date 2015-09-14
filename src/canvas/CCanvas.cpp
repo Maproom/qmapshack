@@ -443,8 +443,6 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     map->convertPx2Rad(posFocus);
 
     update();
-
-    emit sigZoom();
 }
 
 
@@ -701,6 +699,8 @@ void CCanvas::moveMap(const QPointF& delta)
     posFocus -= delta;
     map->convertPx2Rad(posFocus);
 
+    emit sigMove();
+
     slotTriggerCompleteUpdate(eRedrawAll);
 }
 
@@ -797,6 +797,8 @@ void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
     map->zoom(in, needsRedraw);
     dem->zoom(map->zoom());
     gis->zoom(map->zoom());
+
+    emit sigZoom();
 }
 
 bool CCanvas::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
@@ -913,20 +915,11 @@ void CCanvas::setDrawContextSize(const QSize& s)
     }
 }
 
-void CCanvas::print(QPainter& p, const QRectF& area)
+void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
 {
-    QPointF pt1 = area.topLeft();
-    QPointF pt2 = area.bottomRight();
-
-    convertRad2Px(pt1);
-    convertRad2Px(pt2);
 
     const QSize oldSize = size();
-    const QSize newSize(pt2.x() - pt1.x(), pt2.y() - pt1.y());
-    const QRect viewport(QPoint(0,0),newSize);
-
-    QPointF center = QRectF(pt1, pt2).center();
-    convertPx2Rad(center);
+    const QSize newSize(area.size().toSize());
 
     setDrawContextSize(newSize);
 
@@ -936,24 +929,24 @@ void CCanvas::print(QPainter& p, const QRectF& area)
 
     redraw_e redraw = eRedrawAll;
 
-    map->draw(p, redraw, center);
-    dem->draw(p, redraw, center);
-    gis->draw(p, redraw, center);
+    map->draw(p, redraw, focus);
+    dem->draw(p, redraw, focus);
+    gis->draw(p, redraw, focus);
 
     map->wait();
     dem->wait();
     gis->wait();
 
-    map->draw(p, redraw, center);
-    dem->draw(p, redraw, center);
-    gis->draw(p, redraw, center);
+    map->draw(p, redraw, focus);
+    dem->draw(p, redraw, focus);
+    gis->draw(p, redraw, focus);
 
     // restore coordinate system to default
     p.resetTransform();
     // ----- start to draw fast content -----
 
-    grid->draw(p, viewport);
-    gis->draw(p, viewport);
+    grid->draw(p, area.toRect());
+    gis->draw(p, area.toRect());
 
     setDrawContextSize(oldSize);
 }

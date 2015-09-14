@@ -155,11 +155,12 @@ public:
      */
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
-    void print(QPainter &p, const QRectF& area);
+    void print(QPainter &p, const QRectF& area, const QPointF &focus);
 
 signals:
     void sigMousePosition(const QPointF& pos, qreal ele);
     void sigZoom();
+    void sigMove();
 
 public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);

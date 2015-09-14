@@ -29,15 +29,15 @@ class CPrintDialog : public QDialog, private Ui::IPrintDialog
 {
     Q_OBJECT
 public:
-    CPrintDialog(const QRectF &area, CCanvas * canvas);
+    CPrintDialog(const QRectF &area, CCanvas * source);
     virtual ~CPrintDialog();
 
 protected:
     void resizeEvent(QResizeEvent * e);
 
 private slots:
-    void slotZoom();
-    void slotProperties();
+    void slotGetPrinter();
+    void slotUpdateMetrics();
     void slotPrint();
     void slot();
 
@@ -45,10 +45,20 @@ private:
     void updateMetrics();
 
     CCanvas * canvas;
-    CCanvas * preview;
 
-    QRectF area;
+    /// the selected area in coordinated of lon/lat
+    QRectF rectSelArea;
+    /// the selected area in coordinated of pixel
+    QRectF rectSelAreaPixel;
+    /// the page rectangle in pixel
+    QRectF rectPrinterPage;
+
     QPrinter printer;
+
+    /// number of pages in x dimension
+    qreal xPages;
+    /// number of pages in y dimension
+    qreal yPages;
 };
 
 #endif //CPRINTDIALOG_H

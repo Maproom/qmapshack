@@ -139,19 +139,19 @@ CCanvas::~CCanvas()
 
 void CCanvas::setOverrideCursor(const QCursor& cursor, const QString& src)
 {
-    qDebug() << "setOverrideCursor" << src;
+//    qDebug() << "setOverrideCursor" << src;
     QApplication::setOverrideCursor(cursor);
 }
 
 void CCanvas::restoreOverrideCursor(const QString& src)
 {
-    qDebug() << "restoreOverrideCursor" << src;
+//    qDebug() << "restoreOverrideCursor" << src;
     QApplication::restoreOverrideCursor();
 }
 
 void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
 {
-    qDebug() << "changeOverrideCursor" << src;
+//    qDebug() << "changeOverrideCursor" << src;
     QApplication::changeOverrideCursor(cursor);
 }
 

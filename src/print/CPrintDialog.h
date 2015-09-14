@@ -29,8 +29,15 @@ class CPrintDialog : public QDialog, private Ui::IPrintDialog
 {
     Q_OBJECT
 public:
-    CPrintDialog(const QRectF &area, CCanvas * source);
+    enum type_e
+    {
+        eTypePrint
+        ,eTypeImage
+    };
+
+    CPrintDialog(type_e type, const QRectF &area, CCanvas * source);
     virtual ~CPrintDialog();
+
 
 protected:
     void resizeEvent(QResizeEvent * e);
@@ -39,10 +46,15 @@ private slots:
     void slotGetPrinter();
     void slotUpdateMetrics();
     void slotPrint();
-    void slot();
+    void slotSave();
+
+    void slotEditName(const QString& str);
+    void slotSelectPath();
 
 private:
     void updateMetrics();
+
+    type_e type;
 
     CCanvas * canvas;
 

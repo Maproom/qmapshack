@@ -48,6 +48,7 @@ private:
     QRectF rectBottomLeft;
     QRectF rectBottomRight;
     QRectF rectPrintButton;
+    QRectF rectImageButton;
 
     enum state_e
     {
@@ -68,6 +69,7 @@ private:
         , eCornerBottomLeft
         , eCornerBottomRight
         , eCornerPrint
+        , eCornerImage
     };
 
     corner_e corner;

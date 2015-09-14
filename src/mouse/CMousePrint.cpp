@@ -29,12 +29,13 @@ CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *parent)
     , rectBottomLeft(0,0,20,20)
     , rectBottomRight(0,0,20,20)
     , rectPrintButton(0,0,48,48)
+    , rectImageButton(0,0,48,48)
     , state(eStateIdle)
     , corner(eCornerNone)
 {
     cursor      = QCursor(QPixmap("://cursors/cursorPrint.png"),0,0);
 
-    canvas->reportStatus("CMousePrint", tr("<b>Print Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Print the selection by a left click on the printer icon in the center of the selection."));
+    canvas->reportStatus("CMousePrint", tr("<b>Print/Save Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Print or save the selection by a left click on the printer/disc icon in the center of the selection."));
 }
 
 CMousePrint::~CMousePrint()
@@ -98,13 +99,20 @@ void CMousePrint::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         break;
     }
 
-    if(rectSel.width() > 50 && rectSel.height() > 50)
+    if(rectSel.width() > 100 && rectSel.height() > 50)
     {
-        rectPrintButton.moveCenter(rectSel.center());
+        rectPrintButton.moveCenter(rectSel.center() + QPointF(-30,0));
         p.setPen(corner == eCornerPrint ? QPen(Qt::red,3) : QPen(Qt::darkBlue,2));
         p.setBrush(Qt::white);
         p.drawRect(rectPrintButton.adjusted(-3,-3,3,3));
-        p.drawPixmap(rectPrintButton.topLeft(), QPixmap("://icons/48x48/PrintSave.png"));
+        p.drawPixmap(rectPrintButton.topLeft(), QPixmap("://icons/48x48/Print.png"));
+
+        rectImageButton.moveCenter(rectSel.center() + QPointF(30,0));
+        p.setPen(corner == eCornerImage ? QPen(Qt::red,3) : QPen(Qt::darkBlue,2));
+        p.setBrush(Qt::white);
+        p.drawRect(rectImageButton.adjusted(-3,-3,3,3));
+        p.drawPixmap(rectImageButton.topLeft(), QPixmap("://icons/48x48/Save.png"));
+
     }
 }
 
@@ -140,7 +148,13 @@ void CMousePrint::mousePressEvent(QMouseEvent * e)
             {
                 if(corner == eCornerPrint)
                 {
-                    CPrintDialog dlg(rectSelection, canvas);
+                    CPrintDialog dlg(CPrintDialog::eTypePrint, rectSelection, canvas);
+                    dlg.exec();
+                    canvas->resetMouse();
+                }
+                else if(corner == eCornerImage)
+                {
+                    CPrintDialog dlg(CPrintDialog::eTypeImage, rectSelection, canvas);
                     dlg.exec();
                     canvas->resetMouse();
                 }
@@ -220,6 +234,10 @@ void CMousePrint::mouseMoveEvent(QMouseEvent * e)
         else if(rectPrintButton.contains(pos))
         {
             corner = eCornerPrint;
+        }
+        else if(rectImageButton.contains(pos))
+        {
+            corner = eCornerImage;
         }
         else
         {

@@ -23,19 +23,20 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "print/CPrintDialog.h"
+#include "helpers/CProgressDialog.h"
+#include "helpers/CSettings.h"
 
 #include <QtPrintSupport>
 #include <QtWidgets>
 
-CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *source)
+CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     : QDialog(&CMainWindow::self())
+    , type(type)
     , rectSelArea(area)
     , xPages(0.0)
     , yPages(0.0)
 {
     setupUi(this);
-
-    printer.setOrientation(QPrinter::Landscape);
 
     // clone canvas by a temporary configuration file
     QTemporaryFile temp;
@@ -61,13 +62,72 @@ CPrintDialog::CPrintDialog(const QRectF& area, CCanvas *source)
     connect(canvas, SIGNAL(sigMove()), this, SLOT(slotUpdateMetrics()));
     connect(pushPrint, SIGNAL(pressed()), this, SLOT(slotPrint()));
 
-    // update zoom info and print metrics
-    QTimer::singleShot(100, this, SLOT(slotGetPrinter()));
+    connect(lineName,SIGNAL(textChanged(QString)), this, SLOT(slotEditName(QString)));
+    connect(toolButton, SIGNAL(pressed()), this, SLOT(slotSelectPath()));
+    connect(pushSave, SIGNAL(pressed()), this, SLOT(slotSave()));
 
+    if(type == eTypePrint)
+    {
+        setWindowTitle(tr("Print Map..."));
+        frameImage->hide();
+        // update zoom info and print metrics
+        QTimer::singleShot(100, this, SLOT(slotGetPrinter()));
+    }
+    else
+    {
+        setWindowTitle(tr("Save Map as Image..."));
+        framePrint->hide();
+
+        SETTINGS;
+        labelPath->setText(cfg.value("Paths/lastImagePath", "./").toString());
+        lineName->setText(cfg.value("Paths/lastImageName","").toString());
+
+        QString name = lineName->text();
+        if(name.isEmpty())
+        {
+            pushSave->setEnabled(false);
+        }
+        else
+        {
+            pushSave->setEnabled(true);
+
+            QFileInfo fi(name);
+            QString basename = fi.baseName();
+            const int s = basename.size();
+            if(s != 0)
+            {
+                int idx;
+                for(idx = s; idx > 0; idx--)
+                {
+                    if(!basename[idx - 1].isDigit())
+                    {
+                        break;
+                    }
+                }
+
+                if(idx == 0)
+                {
+                    basename = QString::number(basename.toInt() + 1);
+                }
+                else
+                {
+                    basename = basename.left(idx) + QString::number(basename.mid(idx).toInt() + 1);
+                }
+            }
+
+            lineName->setText(basename + "." + fi.completeSuffix());
+        }
+    }
 }
 
 CPrintDialog::~CPrintDialog()
 {
+    if(type == eTypeImage)
+    {
+        SETTINGS;
+        cfg.setValue("Paths/lastImagePath", labelPath->text());
+        cfg.setValue("Paths/lastImageName", lineName->text());
+    }
 }
 
 void CPrintDialog::resizeEvent(QResizeEvent * e)
@@ -78,6 +138,8 @@ void CPrintDialog::resizeEvent(QResizeEvent * e)
 
 void CPrintDialog::slotGetPrinter()
 {
+    printer.setOrientation(QPrinter::Landscape);
+
     QPrintDialog dlg(&printer, this);
     dlg.setWindowTitle(tr("Printer Properties..."));
     dlg.exec();
@@ -200,6 +262,10 @@ void CPrintDialog::slotPrint()
     p.setClipRect(rectPage);
     USE_ANTI_ALIASING(p,true);
 
+    int N = centers.size();
+    int n = 0;
+    PROGRESS_SETUP(tr("Printing pages."), 0, N, this);
+
     foreach(const QPointF& pt, centers)
     {
         if(!first)
@@ -212,7 +278,7 @@ void CPrintDialog::slotPrint()
         }
 
         canvas->print(p, rectPage, pt);
-
+        PROGRESS(++n, break);
     }
 
     p.end();
@@ -220,7 +286,23 @@ void CPrintDialog::slotPrint()
     QDialog::accept();
 }
 
-void CPrintDialog::slot()
+
+void CPrintDialog::slotEditName(const QString& str)
+{
+    pushSave->setDisabled(str.isEmpty());
+}
+
+void CPrintDialog::slotSelectPath()
+{
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select path..."), labelPath->text());
+    if(path.isEmpty())
+    {
+        return;
+    }
+    labelPath->setText(path);
+}
+
+void CPrintDialog::slotSave()
 {
     QPointF pt1 = rectSelArea.topLeft();
     QPointF pt2 = rectSelArea.bottomRight();
@@ -228,14 +310,16 @@ void CPrintDialog::slot()
     canvas->convertRad2Px(pt1);
     canvas->convertRad2Px(pt2);
 
-    QImage img(pt2.x() - pt1.x(), pt2.y() - pt1.y(), QImage::Format_ARGB32);
+    QRectF rect(pt1, pt2);
+    QImage img(rect.size().toSize(), QImage::Format_ARGB32);
 
     QPainter p(&img);
     USE_ANTI_ALIASING(p,true);
 
+    canvas->print(p, rect, rectSelArea.center());
 
-
-    img.save("test.png", "PNG");
+    QDir dir(labelPath->text());
+    img.save(dir.absoluteFilePath(lineName->text()));
 
     QDialog::accept();
 }

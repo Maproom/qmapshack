@@ -211,7 +211,6 @@ set( SRCS
     tool/CMapVrtBuilder.cpp
     tool/CImportDatabase.cpp
     tool/CRoutinoDatabaseBuilder.cpp
-    print/CPrintBuffer.cpp
     print/CPrintDialog.cpp
 )
 
@@ -418,7 +417,6 @@ set( HDRS
     tool/CMapVrtBuilder.h
     tool/CImportDatabase.h
     tool/CRoutinoDatabaseBuilder.h
-    print/CPrintBuffer.h
     print/CPrintDialog.h
 )
 

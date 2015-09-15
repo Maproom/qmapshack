@@ -48,9 +48,6 @@ private slots:
     void slotPrint();
     void slotSave();
 
-    void slotEditName(const QString& str);
-    void slotSelectPath();
-
 private:
     void updateMetrics();
 

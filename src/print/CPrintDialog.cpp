@@ -61,9 +61,6 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     connect(canvas, SIGNAL(sigZoom()), this, SLOT(slotUpdateMetrics()));
     connect(canvas, SIGNAL(sigMove()), this, SLOT(slotUpdateMetrics()));
     connect(pushPrint, SIGNAL(pressed()), this, SLOT(slotPrint()));
-
-    connect(lineName,SIGNAL(textChanged(QString)), this, SLOT(slotEditName(QString)));
-    connect(toolButton, SIGNAL(pressed()), this, SLOT(slotSelectPath()));
     connect(pushSave, SIGNAL(pressed()), this, SLOT(slotSave()));
 
     if(type == eTypePrint)
@@ -78,56 +75,56 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
         setWindowTitle(tr("Save Map as Image..."));
         framePrint->hide();
 
-        SETTINGS;
-        labelPath->setText(cfg.value("Paths/lastImagePath", "./").toString());
-        lineName->setText(cfg.value("Paths/lastImageName","").toString());
+//        SETTINGS;
+//        labelPath->setText(cfg.value("Paths/lastImagePath", "./").toString());
+//        lineName->setText(cfg.value("Paths/lastImageName","").toString());
 
-        QString name = lineName->text();
-        if(name.isEmpty())
-        {
-            pushSave->setEnabled(false);
-        }
-        else
-        {
-            pushSave->setEnabled(true);
+//        QString name = lineName->text();
+//        if(name.isEmpty())
+//        {
+//            pushSave->setEnabled(false);
+//        }
+//        else
+//        {
+//            pushSave->setEnabled(true);
 
-            QFileInfo fi(name);
-            QString basename = fi.baseName();
-            const int s = basename.size();
-            if(s != 0)
-            {
-                int idx;
-                for(idx = s; idx > 0; idx--)
-                {
-                    if(!basename[idx - 1].isDigit())
-                    {
-                        break;
-                    }
-                }
+//            QFileInfo fi(name);
+//            QString basename = fi.baseName();
+//            const int s = basename.size();
+//            if(s != 0)
+//            {
+//                int idx;
+//                for(idx = s; idx > 0; idx--)
+//                {
+//                    if(!basename[idx - 1].isDigit())
+//                    {
+//                        break;
+//                    }
+//                }
 
-                if(idx == 0)
-                {
-                    basename = QString::number(basename.toInt() + 1);
-                }
-                else
-                {
-                    basename = basename.left(idx) + QString::number(basename.mid(idx).toInt() + 1);
-                }
-            }
+//                if(idx == 0)
+//                {
+//                    basename = QString::number(basename.toInt() + 1);
+//                }
+//                else
+//                {
+//                    basename = basename.left(idx) + QString::number(basename.mid(idx).toInt() + 1);
+//                }
+//            }
 
-            lineName->setText(basename + "." + fi.completeSuffix());
-        }
+//            lineName->setText(basename + "." + fi.completeSuffix());
+//        }
     }
 }
 
 CPrintDialog::~CPrintDialog()
 {
-    if(type == eTypeImage)
-    {
-        SETTINGS;
-        cfg.setValue("Paths/lastImagePath", labelPath->text());
-        cfg.setValue("Paths/lastImageName", lineName->text());
-    }
+//    if(type == eTypeImage)
+//    {
+//        SETTINGS;
+//        cfg.setValue("Paths/lastImagePath", labelPath->text());
+//        cfg.setValue("Paths/lastImageName", lineName->text());
+//    }
 }
 
 void CPrintDialog::resizeEvent(QResizeEvent * e)
@@ -286,22 +283,6 @@ void CPrintDialog::slotPrint()
     QDialog::accept();
 }
 
-
-void CPrintDialog::slotEditName(const QString& str)
-{
-    pushSave->setDisabled(str.isEmpty());
-}
-
-void CPrintDialog::slotSelectPath()
-{
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select path..."), labelPath->text());
-    if(path.isEmpty())
-    {
-        return;
-    }
-    labelPath->setText(path);
-}
-
 void CPrintDialog::slotSave()
 {
     QPointF pt1 = rectSelArea.topLeft();
@@ -318,8 +299,25 @@ void CPrintDialog::slotSave()
 
     canvas->print(p, rect, rectSelArea.center());
 
-    QDir dir(labelPath->text());
-    img.save(dir.absoluteFilePath(lineName->text()));
+    SETTINGS;
+    QString path = cfg.value("Paths/lastImagePath", "./").toString();
+
+    QString filter = "*.png";
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save map..."), path, "*.png;;*.jpg", &filter);
+    if(filename.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() != filter.mid(2))
+    {
+        filename += filter.mid(1);
+    }
+
+    img.save(filename);
+
+    cfg.setValue("Paths/lastImagePath", fi.absolutePath());
 
     QDialog::accept();
 }

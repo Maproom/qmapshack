@@ -33,9 +33,9 @@ CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *parent)
     , state(eStateIdle)
     , corner(eCornerNone)
 {
-    cursor      = QCursor(QPixmap("://cursors/cursorPrint.png"),0,0);
+    cursor      = QCursor(QPixmap("://cursors/cursorSave.png"),0,0);
 
-    canvas->reportStatus("CMousePrint", tr("<b>Print/Save Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Print or save the selection by a left click on the printer/disc icon in the center of the selection."));
+    canvas->reportStatus("CMousePrint", tr("<b>Save(Print) Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Save/print the selection by a left click on the disc/printer icon in the center of the selection."));
 }
 
 CMousePrint::~CMousePrint()
@@ -101,13 +101,13 @@ void CMousePrint::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
 
     if(rectSel.width() > 100 && rectSel.height() > 50)
     {
-        rectPrintButton.moveCenter(rectSel.center() + QPointF(-30,0));
+        rectPrintButton.moveCenter(rectSel.center() + QPointF(30,0));
         p.setPen(corner == eCornerPrint ? QPen(Qt::red,3) : QPen(Qt::darkBlue,2));
         p.setBrush(Qt::white);
         p.drawRect(rectPrintButton.adjusted(-3,-3,3,3));
         p.drawPixmap(rectPrintButton.topLeft(), QPixmap("://icons/48x48/Print.png"));
 
-        rectImageButton.moveCenter(rectSel.center() + QPointF(30,0));
+        rectImageButton.moveCenter(rectSel.center() - QPointF(30,0));
         p.setPen(corner == eCornerImage ? QPen(Qt::red,3) : QPen(Qt::darkBlue,2));
         p.setBrush(Qt::white);
         p.drawRect(rectImageButton.adjusted(-3,-3,3,3));

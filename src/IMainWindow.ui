@@ -633,7 +633,7 @@
      <normaloff>:/icons/32x32/PrintSave.png</normaloff>:/icons/32x32/PrintSave.png</iconset>
    </property>
    <property name="text">
-    <string>Print/Save Map Screenshot</string>
+    <string>Save(Print) Map Screenshot</string>
    </property>
    <property name="toolTip">
     <string>Print a selected area of the map</string>

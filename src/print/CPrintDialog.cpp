@@ -74,57 +74,12 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     {
         setWindowTitle(tr("Save Map as Image..."));
         framePrint->hide();
-
-//        SETTINGS;
-//        labelPath->setText(cfg.value("Paths/lastImagePath", "./").toString());
-//        lineName->setText(cfg.value("Paths/lastImageName","").toString());
-
-//        QString name = lineName->text();
-//        if(name.isEmpty())
-//        {
-//            pushSave->setEnabled(false);
-//        }
-//        else
-//        {
-//            pushSave->setEnabled(true);
-
-//            QFileInfo fi(name);
-//            QString basename = fi.baseName();
-//            const int s = basename.size();
-//            if(s != 0)
-//            {
-//                int idx;
-//                for(idx = s; idx > 0; idx--)
-//                {
-//                    if(!basename[idx - 1].isDigit())
-//                    {
-//                        break;
-//                    }
-//                }
-
-//                if(idx == 0)
-//                {
-//                    basename = QString::number(basename.toInt() + 1);
-//                }
-//                else
-//                {
-//                    basename = basename.left(idx) + QString::number(basename.mid(idx).toInt() + 1);
-//                }
-//            }
-
-//            lineName->setText(basename + "." + fi.completeSuffix());
-//        }
     }
 }
 
 CPrintDialog::~CPrintDialog()
 {
-//    if(type == eTypeImage)
-//    {
-//        SETTINGS;
-//        cfg.setValue("Paths/lastImagePath", labelPath->text());
-//        cfg.setValue("Paths/lastImageName", lineName->text());
-//    }
+
 }
 
 void CPrintDialog::resizeEvent(QResizeEvent * e)

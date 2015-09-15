@@ -917,7 +917,6 @@ void CCanvas::setDrawContextSize(const QSize& s)
 
 void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
 {
-
     const QSize oldSize = size();
     const QSize newSize(area.size().toSize());
 

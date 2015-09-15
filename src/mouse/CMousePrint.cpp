@@ -112,7 +112,6 @@ void CMousePrint::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         p.setBrush(Qt::white);
         p.drawRect(rectImageButton.adjusted(-3,-3,3,3));
         p.drawPixmap(rectImageButton.topLeft(), QPixmap("://icons/48x48/Save.png"));
-
     }
 }
 

@@ -22,9 +22,9 @@
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "print/CPrintDialog.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+#include "print/CPrintDialog.h"
 
 #include <QtPrintSupport>
 #include <QtWidgets>
@@ -145,7 +145,7 @@ void CPrintDialog::slotGetPrinter()
 }
 
 void CPrintDialog::slotUpdateMetrics()
-{    
+{
     // get corner points of selected area
     QPointF pt1 = rectSelArea.topLeft();
     QPointF pt2 = rectSelArea.bottomRight();
@@ -213,13 +213,12 @@ void CPrintDialog::slotUpdateMetrics()
     p.drawRect(0,0, rectSelAreaPixel.width() * scale, rectSelAreaPixel.height() * scale);
 
     labelPages->setPixmap(img);
-    labelPagesText->setText(tr("Pages: %1 x %2").arg(xPages,0,'f',1).arg(yPages,0,'f',1));    
+    labelPagesText->setText(tr("Pages: %1 x %2").arg(xPages,0,'f',1).arg(yPages,0,'f',1));
     labelMapInfo->setText(tr("Zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(rectSelAreaPixel.width()).arg(rectSelAreaPixel.height()).arg(mWidth/rectSelAreaPixel.width(),0,'f',1).arg(mHeight/rectSelAreaPixel.height(),0,'f',1));
 }
 
 void CPrintDialog::slotPrint()
 {
-
     qreal wPage = rectPrinterPage.width();
     qreal hPage = rectPrinterPage.height();
 
@@ -240,7 +239,7 @@ void CPrintDialog::slotPrint()
     {
         qreal xoff = 0;
         for(int x = 0; x < qCeil(xPages); x++)
-        {            
+        {
             QPointF center = pxCenter0 + QPointF(xoff,yoff);
             canvas->convertPx2Rad(center);
             centers << center;
@@ -263,7 +262,7 @@ void CPrintDialog::slotPrint()
     int n = 0;
     PROGRESS_SETUP(tr("Printing pages."), 0, N, this);
 
-    foreach(const QPointF& pt, centers)
+    foreach(const QPointF &pt, centers)
     {
         if(!first)
         {

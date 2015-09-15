@@ -18,9 +18,9 @@
 
 #include "CCommandProcessor.h"
 
-#include <iostream>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <iostream>
 
 
 CAppOpts* CCommandProcessor::processOptions(const QStringList &arguments)

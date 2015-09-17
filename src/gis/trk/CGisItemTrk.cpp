@@ -805,6 +805,7 @@ void CGisItemTrk::deriveSecondaryData()
     totalElapsedSecondsMoving = NOTIME;
     allFlags                = 0;
 
+    memset(statByActivity, 0, sizeof(statByActivity));
 
     // remove empty segments
     QVector<trkseg_t>::iterator i = trk.segs.begin();
@@ -1002,7 +1003,57 @@ void CGisItemTrk::deriveSecondaryData()
         }
     }
 
+    stats_t start;
+    quint32  lastFlag = 0xFFFFFFFF;
+    foreach(const trkseg_t& seg, trk.segs)
+    {
+        foreach(const trkpt_t& pt, seg.pts)
+        {
+            if(pt.flags & trkpt_t::eHidden)
+            {
+                continue;
+            }
 
+            //qint32 idx = actFlagToIdx(pt.flags);
+            if(pt.flags != lastFlag)
+            {
+                if(lastFlag != 0xFFFFFFFF)
+                {
+                    stats_t& entry   = statByActivity[actFlagToIdx(lastFlag)];
+                    entry.distance   = pt.distance - start.distance;
+                    entry.ascend     = pt.ascend - start.ascend;
+                    entry.descend    = pt.descend - start.descend;
+                    entry.timeMoving = pt.elapsedSecondsMoving - start.timeMoving;
+                    entry.timeTotal  = pt.elapsedSeconds - start.timeTotal;
+                }
+
+                start.distance   = pt.distance;
+                start.ascend     = pt.ascend;
+                start.descend    = pt.descend;
+                start.timeMoving = pt.elapsedSecondsMoving;
+                start.timeTotal  = pt.elapsedSeconds;
+
+                lastFlag = pt.flags;
+            }
+        }
+    }
+    stats_t& stat   = statByActivity[actFlagToIdx(lastFlag)];
+    stat.distance   = lastTrkpt->distance - start.distance;
+    stat.ascend     = lastTrkpt->ascend - start.ascend;
+    stat.descend    = lastTrkpt->descend - start.descend;
+    stat.timeMoving = lastTrkpt->elapsedSecondsMoving - start.timeMoving;
+    stat.timeTotal  = lastTrkpt->elapsedSeconds - start.timeTotal;
+
+    for(int i = 0; i < 9; i++)
+    {
+        stats_t& stat   = statByActivity[i];
+        qDebug() << "--------------" << i << "--------------";
+        qDebug() << "stat.distance" << stat.distance;
+        qDebug() << "stat.ascend" << stat.ascend;
+        qDebug() << "stat.descend" << stat.descend;
+        qDebug() << "stat.timeMoving" << stat.timeMoving;
+        qDebug() << "stat.timeTotal" << stat.timeTotal;
+    }
 
     if(lastTrkpt != 0)
     {
@@ -1019,12 +1070,12 @@ void CGisItemTrk::deriveSecondaryData()
         plot->updateData();
     }
 
-//    qDebug() << "--------------" << getName() << "------------------";
-//    qDebug() << "totalDistance" << totalDistance;
-//    qDebug() << "totalAscend" << totalAscend;
-//    qDebug() << "totalDescend" << totalDescend;
-//    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
-//    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
+    qDebug() << "--------------" << getName() << "------------------";
+    qDebug() << "totalDistance" << totalDistance;
+    qDebug() << "totalAscend" << totalAscend;
+    qDebug() << "totalDescend" << totalDescend;
+    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
+    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 }
 
 
@@ -2291,4 +2342,18 @@ void CGisItemTrk::changed(const QString& what, const QString& icon)
     {
         dlgDetails->setupGui();
     }
+}
+
+qint32 CGisItemTrk::actFlagToIdx(quint32 flag)
+{
+    quint32  cnt = 0;
+    flag >>= 24;
+
+    while(((flag & 0x01) == 0) && (cnt < trkpt_t::eActMaxNum))
+    {
+        cnt++;
+        flag >>= 1;
+    }
+
+    return cnt;
 }

@@ -314,10 +314,8 @@ void CDetailsTrk::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
 
-
     quint32 flags = trk.getAllFlags() & CGisItemTrk::trkpt_t::eActMask;
 
-    qDebug() << "setupGui() flags" << hex << flags;
     checkActivityNone->setChecked(flags == 0);
     checkActivityFoot->setChecked(flags & CGisItemTrk::trkpt_t::eActFoot);
     checkActivityCycle->setChecked(flags & CGisItemTrk::trkpt_t::eActCycle);

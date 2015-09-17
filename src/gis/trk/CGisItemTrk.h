@@ -543,6 +543,7 @@ private:
 
     void setColor(const QColor& c);
     void setIcon(const QString& c);
+    qint32 actFlagToIdx(quint32 flag);
 
 public:
     struct trkpt_t : public wpt_t
@@ -579,6 +580,7 @@ public:
             ,eActCable  = 0x08000000
             ,eActShip   = 0x04000000
             ,eActMask   = 0xFF000000
+            ,eActMaxNum = 8
         };
 
         quint32 flags;
@@ -715,6 +717,24 @@ private:
     rangestate_e rangeState;
 
     QString mouseFocusOwner;
+
+
+    struct stats_t
+    {
+        stats_t() : distance(0), ascend(0), descend(0), timeMoving(0), timeTotal(0)
+        {
+
+        }
+
+        qreal distance;
+        qreal ascend;
+        qreal descend;
+        qreal timeMoving;
+        qreal timeTotal;
+    };
+
+    stats_t statByActivity[trkpt_t::eActMaxNum + 1];
+
 };
 
 #endif //CGISITEMTRK_H

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -26,27 +26,32 @@
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="32"/>
         <source>Print debug output to console.</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug-Ausgabe in die Konsole drucken.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="36"/>
         <source>Do not show splash screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Startbildschirm nicht anzeigen.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="40"/>
+        <source>File with QMapShack configuration.</source>
+        <translation>Datei mit QMapShack Einstellungen.</translation>
+    </message>
+    <message>
         <source>File with qmapshark configuration.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>??? qmapshack statt qmapshark im Ursprungstext, IMO</translatorcomment>
+        <translation>Datei mit QMapShak Einstellungen.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="41"/>
         <source>file</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="44"/>
         <source>Files for future use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien für den späteren Gebrauch.</translation>
     </message>
 </context>
 <context>
@@ -1753,7 +1758,7 @@ Unbekannte Struktur.</translation>
         <location filename="../mouse/CMouseEditRte.cpp" line="30"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="37"/>
         <source>Route</source>
-        <translation type="unfinished">Routen</translation>
+        <translation>Routen</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
@@ -1827,7 +1832,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMousePrint.cpp" line="38"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Save/print the selection by a left click on the disc/printer icon in the center of the selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
     </message>
 </context>
 <context>
@@ -1909,22 +1914,22 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="68"/>
         <source>Print Map...</source>
-        <translation type="unfinished"></translation>
+        <translation>Karte drucken...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="75"/>
         <source>Save Map as Image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Karte als Bild speichern...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="96"/>
         <source>Printer Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker Eigenschaften...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="171"/>
         <source>Pages: %1 x %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten: %1 x %2</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="172"/>
@@ -1933,17 +1938,21 @@ Unbekannte Struktur.</translation>
 %1x%2 pixel
 x: %3 m/px
 y: %4 m/px</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoomen Sie mit dem Mausrad auf der Karte unten, um die Auflösung zu ändern:
+
+%1x%2 Pixel
+x: %3 m/px
+y: %4 m/px</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="218"/>
         <source>Printing pages.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucke Seiten.</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="260"/>
         <source>Save map...</source>
-        <translation type="unfinished"></translation>
+        <translation>Karte speichern...</translation>
     </message>
 </context>
 <context>
@@ -2727,32 +2736,32 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IAbout.ui" line="234"/>
         <source>Ivo Kronenberg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="241"/>
         <source>Helmut Schmidt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="248"/>
         <source>Win64</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="255"/>
         <source>OS X</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="262"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
-        <translation type="unfinished"></translation>
+        <translation>... und Danke an alle Ersteller von ausführbaren Linux-Dateien für die gute Arbeit. Ganz besonderen Dank an Dan Horák und Bas Couwenberg für ihre Teilnahme an der Diskussion in der Mailingliste distributionsbezogene Punkte betreffend.</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="275"/>
         <source>Binaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführbare Dateien:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="291"/>
@@ -3953,7 +3962,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="399"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="408"/>
@@ -4024,7 +4033,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="606"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="615"/>
@@ -4044,17 +4053,17 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="636"/>
         <source>Save(Print) Map Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern (drucken) des Bildschirmfotos der Karte</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="639"/>
         <source>Print a selected area of the map</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen ausgewählten Bereich der Karte drucken</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="642"/>
         <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Setup Map Workspace</source>
@@ -4380,7 +4389,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="485"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;%1maße&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;%1maße&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="488"/>
@@ -4421,7 +4430,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../plot/IPlot.cpp" line="108"/>
         <source>Reset Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="109"/>
@@ -4474,24 +4483,24 @@ sein</translation>
     <message>
         <location filename="../print/IPrintDialog.ui" line="20"/>
         <source>Print map...</source>
-        <translation type="unfinished"></translation>
+        <translation>Karte drucken...</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="50"/>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="69"/>
         <location filename="../print/IPrintDialog.ui" line="82"/>
         <location filename="../print/IPrintDialog.ui" line="131"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Bezeichnung</translation>
+        <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="98"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucken</translation>
     </message>
 </context>
 <context>

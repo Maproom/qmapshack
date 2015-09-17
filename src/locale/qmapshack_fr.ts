@@ -31,7 +31,7 @@
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="40"/>
-        <source>File with qmapshark configuration.</source>
+        <source>File with QMapShack configuration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

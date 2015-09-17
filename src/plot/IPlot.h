@@ -62,6 +62,7 @@ private slots:
     void slotSave();
     void slotHidePoints();
     void slotShowPoints();
+    void slotActivity();
     void slotCopy();
     void slotStopRange();
     void slotResetZoom();

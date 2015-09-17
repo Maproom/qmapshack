@@ -504,6 +504,4 @@ void CDetailsTrk::slotActivitySelected(bool checked)
     {
         trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
     }
-
-
 }

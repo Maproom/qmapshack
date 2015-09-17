@@ -26,6 +26,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/trk/CSelectActivity.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 #include "plot/IPlot.h"
@@ -1349,6 +1350,11 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
 
 void CGisItemTrk::hideSelectedPoints()
 {
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
     if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
@@ -1417,6 +1423,11 @@ void CGisItemTrk::hideSelectedPoints()
 
 void CGisItemTrk::showSelectedPoints()
 {
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
     if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
@@ -1843,9 +1854,82 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
     }
 
     deriveSecondaryData();
-
-
     changed(QObject::tr("Changed activity to '%1' for complete track.").arg(name), icon);
+}
+
+void CGisItemTrk::setActivity()
+{
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
+    if((mouseRange1 == 0) && (mouseRange2 == 0))
+    {
+        return;
+    }
+
+    quint32 flag = 0;
+    QString name;
+    QString icon;
+
+    CSelectActivity dlg(flag, name, icon, CMainWindow::getBestWidgetForParent());
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    // read start/stop indices
+    qint32 idx1 = mouseRange1->idxTotal;
+    qint32 idx2 = mouseRange2->idxTotal;
+
+    if(idx1 > idx2)
+    {
+        qSwap(idx1,idx2);
+    }
+
+    // special case for a single point
+    if(idx1 == idx2)
+    {
+        for(int s = 0; s < trk.segs.size(); s++)
+        {
+            trkseg_t& seg = trk.segs[s];
+            for(int i = 0; i < seg.pts.size(); i++)
+            {
+                trkpt_t& trkpt = seg.pts[i];
+
+                if((idx1 == trkpt.idxTotal))
+                {
+                    trkpt.flags &= ~trkpt_t::eActMask;
+                    trkpt.flags |= flag;
+                }
+            }
+        }
+    }
+    else
+    {
+        // iterate over all segments and delete points between idx1 and idx2
+        for(int s = 0; s < trk.segs.size(); s++)
+        {
+            trkseg_t& seg = trk.segs[s];
+            for(int i = 0; i < seg.pts.size(); i++)
+            {
+                trkpt_t& trkpt = seg.pts[i];
+
+                if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+                {
+                    trkpt.flags &= ~trkpt_t::eActMask;
+                    trkpt.flags |= flag;
+                }
+            }
+        }
+    }
+    mouseRange1 = 0;
+    mouseRange2 = 0;
+    rangeState  = eRangeStateIdle;
+    deriveSecondaryData();
+    changed(QObject::tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
+
 }
 
 

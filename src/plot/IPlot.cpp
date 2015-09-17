@@ -388,6 +388,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 scrOptRange = new CScrOptRangeTrk(e->pos(), trk, &dummyMouse, this);
                 connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
                 connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
+                connect(scrOptRange->toolActivity, SIGNAL(clicked()), this, SLOT(slotActivity()));
                 connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
 
                 /* Adjust posiion of screen option widget if the widget is out of the visible area*/
@@ -1184,6 +1185,21 @@ void IPlot::slotHidePoints()
 void IPlot::slotShowPoints()
 {
     trk->showSelectedPoints();
+    scrOptRange->deleteLater();
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+
+    trk->setMode(CGisItemTrk::eModeNormal, objectName());
+    mouseClickState = eMouseClickIdle;
+}
+
+void IPlot::slotActivity()
+{
+    trk->setActivity();
     scrOptRange->deleteLater();
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();

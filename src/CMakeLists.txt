@@ -161,6 +161,7 @@ set( SRCS
     gis/trk/CScrOptTrk.cpp
     gis/trk/CDetailsTrk.cpp
     gis/trk/CCombineTrk.cpp
+    gis/trk/CSelectActivity.cpp
     gis/trk/filter/filter.cpp
     gis/trk/filter/CFilterDouglasPeuker.cpp
     gis/trk/filter/CFilterReset.cpp
@@ -367,6 +368,7 @@ set( HDRS
     gis/trk/CScrOptTrk.h
     gis/trk/CDetailsTrk.h
     gis/trk/CCombineTrk.h
+    gis/trk/CSelectActivity.h
     gis/trk/filter/CFilterDouglasPeuker.h
     gis/trk/filter/CFilterReset.h
     gis/trk/filter/CFilterDelete.h
@@ -482,6 +484,7 @@ set( UIS
     gis/trk/IScrOptTrk.ui
     gis/trk/IDetailsTrk.ui
     gis/trk/ICombineTrk.ui
+    gis/trk/ISelectActivity.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
     gis/trk/filter/IFilterReset.ui
     gis/trk/filter/IFilterDelete.ui

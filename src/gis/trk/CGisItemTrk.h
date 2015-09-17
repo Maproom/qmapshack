@@ -234,6 +234,7 @@ public:
     void setLinks(const QList<link_t>& links);
     void setDataFromPolyline(const SGisLine &l);
     void setActivity(quint32 flag, const QString &name, const QString &icon);
+    void setActivity();
 
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& screenPos);
@@ -662,7 +663,7 @@ private:
     qreal totalAscend;
     qreal totalDescend;
     qreal totalElapsedSeconds;
-    qreal totalElapsedSecondsMoving;        
+    qreal totalElapsedSecondsMoving;
 
     /// the track line color
     QColor color;

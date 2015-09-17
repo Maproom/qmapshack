@@ -37,7 +37,7 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList &arguments)
     parser.addOption(nosplashOption);
 
     QCommandLineOption configOption(QStringList() << "c" << "config",
-                                    QCoreApplication::translate("CCommandProcessor", "File with qmapshark configuration."),
+                                    QCoreApplication::translate("CCommandProcessor", "File with QMapShack configuration."),
                                     QCoreApplication::translate("CCommandProcessor", "file"));
     parser.addOption(configOption);
 

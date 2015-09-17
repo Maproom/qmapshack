@@ -111,6 +111,12 @@ struct trkwpt_t
     IGisItem::key_t key;
 };
 
+struct activity_t
+{
+    QString name;
+    QString icon;
+};
+
 
 const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
@@ -319,6 +325,7 @@ void CGisItemTrk::setSymbol()
 {
     setColor(str2color(trk.color));
 }
+
 
 void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
 {
@@ -795,6 +802,7 @@ void CGisItemTrk::deriveSecondaryData()
     totalDescend            = NOFLOAT;
     totalElapsedSeconds     = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
+    allFlags                = 0;
 
 
     // remove empty segments
@@ -826,6 +834,8 @@ void CGisItemTrk::deriveSecondaryData()
         for(int p = 0; p < seg.pts.size(); p++)
         {
             trkpt_t& trkpt = seg.pts[p];
+
+            allFlags |= trkpt.flags;
 
             trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.flags & trkpt_t::eHidden)
@@ -1819,6 +1829,26 @@ void CGisItemTrk::setColor(int idx)
     changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
 }
 
+void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& icon)
+{
+    for(int s = 0; s < trk.segs.size(); s++)
+    {
+        trkseg_t& seg = trk.segs[s];
+        for(int i = 0; i < seg.pts.size(); i++)
+        {
+            trkpt_t& trkpt = seg.pts[i];
+            trkpt.flags &= ~trkpt_t::eActMask;
+            trkpt.flags |= flag;
+        }
+    }
+
+    deriveSecondaryData();
+
+
+    changed(QObject::tr("Changed activity to '%1' for complete track.").arg(name), icon);
+}
+
+
 void CGisItemTrk::setColor(const QColor& c)
 {
     int n;
@@ -1844,7 +1874,6 @@ void CGisItemTrk::setColor(const QColor& c)
 
     setIcon(color.name());
 }
-
 
 
 void CGisItemTrk::setIcon(const QString& c)

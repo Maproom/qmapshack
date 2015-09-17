@@ -106,6 +106,35 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     item0->setText(0, tr("Cut track into pieces"));
 
 
+    checkActivityNone->setProperty("flag", CGisItemTrk::trkpt_t::eActNone);
+    checkActivityNone->setProperty("name", checkActivityNone->text());
+    checkActivityNone->setProperty("symbol", QString("://icons/48x48/ActNone.png"));
+
+    checkActivityFoot->setProperty("flag", CGisItemTrk::trkpt_t::eActFoot);
+    checkActivityFoot->setProperty("name", checkActivityFoot->text());
+    checkActivityFoot->setProperty("symbol", QString("://icons/48x48/ActFoot.png"));
+
+    checkActivityCycle->setProperty("flag", CGisItemTrk::trkpt_t::eActCycle);
+    checkActivityCycle->setProperty("name", checkActivityCycle->text());
+    checkActivityCycle->setProperty("symbol", QString("://icons/48x48/ActCycle.png"));
+
+    checkActivityBike->setProperty("flag", CGisItemTrk::trkpt_t::eActBike);
+    checkActivityBike->setProperty("name", checkActivityBike->text());
+    checkActivityBike->setProperty("symbol", QString("://icons/48x48/ActBike.png"));
+
+    checkActivityCar->setProperty("flag", CGisItemTrk::trkpt_t::eActCar);
+    checkActivityCar->setProperty("name", checkActivityCar->text());
+    checkActivityCar->setProperty("symbol", QString("://icons/48x48/ActCar.png"));
+
+    checkActivityCable->setProperty("flag", CGisItemTrk::trkpt_t::eActCable);
+    checkActivityCable->setProperty("name", checkActivityCable->text());
+    checkActivityCable->setProperty("symbol", QString("://icons/48x48/ActCable.png"));
+
+    checkActivityShip->setProperty("flag", CGisItemTrk::trkpt_t::eActShip);
+    checkActivityShip->setProperty("name", checkActivityShip->text());
+    checkActivityShip->setProperty("symbol", QString("://icons/48x48/ActShip.png"));
+
+
     SETTINGS;
     cfg.beginGroup("TrackDetails");
     checkProfile->setChecked(cfg.value("showProfile", true).toBool());
@@ -127,6 +156,14 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(plotDistance, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
     connect(plotElevation, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
     connect(plotSpeed, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+
+    connect(checkActivityNone, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+    connect(checkActivityFoot, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+    connect(checkActivityCycle, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+    connect(checkActivityBike, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+    connect(checkActivityCar, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+    connect(checkActivityCable, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+    connect(checkActivityShip, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
@@ -276,6 +313,18 @@ void CDetailsTrk::setupGui()
     textCmtDesc->append(IGisItem::createText(isReadOnly, trk.getComment(), trk.getDescription(), trk.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
+
+
+    quint32 flags = trk.getAllFlags() & CGisItemTrk::trkpt_t::eActMask;
+
+    qDebug() << "setupGui() flags" << hex << flags;
+    checkActivityNone->setChecked(flags == 0);
+    checkActivityFoot->setChecked(flags & CGisItemTrk::trkpt_t::eActFoot);
+    checkActivityCycle->setChecked(flags & CGisItemTrk::trkpt_t::eActCycle);
+    checkActivityBike->setChecked(flags & CGisItemTrk::trkpt_t::eActBike);
+    checkActivityCar->setChecked(flags & CGisItemTrk::trkpt_t::eActCar);
+    checkActivityCable->setChecked(flags & CGisItemTrk::trkpt_t::eActCable);
+    checkActivityShip->setChecked(flags & CGisItemTrk::trkpt_t::eActShip);
 
 
     plotTrack->setTrack(&trk);
@@ -438,4 +487,23 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
     {
         QDesktopServices::openUrl(url);
     }
+}
+
+void CDetailsTrk::slotActivitySelected(bool checked)
+{
+    if(!checked)
+    {
+        trk.setActivity(CGisItemTrk::trkpt_t::eActNone, tr("None"), "://icons/48x48/ActNone.png");
+        return;
+    }
+
+    QObject * s = sender();
+    bool ok = false;
+    quint32 flag = s->property("flag").toUInt(&ok);
+    if(ok)
+    {
+        trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
+    }
+
+
 }

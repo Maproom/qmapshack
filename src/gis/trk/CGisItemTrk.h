@@ -211,6 +211,11 @@ public:
         return cntVisiblePoints;
     }
 
+    quint32 getAllFlags()
+    {
+        return allFlags;
+    }
+
     /**
        @brief Get the indeces of visible points for a selected range
 
@@ -228,6 +233,7 @@ public:
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
     void setDataFromPolyline(const SGisLine &l);
+    void setActivity(quint32 flag, const QString &name, const QString &icon);
 
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& screenPos);
@@ -562,7 +568,16 @@ public:
 
         enum flag_e
         {
-            eHidden   = 0x00000004      ///< mark point as deleted
+            eHidden     = 0x00000004      ///< mark point as deleted
+
+            ,eActNone   = 0x00000000
+            ,eActFoot   = 0x80000000
+            ,eActCycle  = 0x40000000
+            ,eActBike   = 0x20000000
+            ,eActCar    = 0x10000000
+            ,eActCable  = 0x08000000
+            ,eActShip   = 0x04000000
+            ,eActMask   = 0xFF000000
         };
 
         quint32 flags;
@@ -638,6 +653,7 @@ private:
 
     mode_e mode;
 
+    quint32 allFlags;
     qint32 cntTotalPoints;
     qint32 cntVisiblePoints;
     QDateTime timeStart;
@@ -646,7 +662,7 @@ private:
     qreal totalAscend;
     qreal totalDescend;
     qreal totalElapsedSeconds;
-    qreal totalElapsedSecondsMoving;
+    qreal totalElapsedSecondsMoving;        
 
     /// the track line color
     QColor color;

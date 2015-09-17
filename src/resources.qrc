@@ -151,6 +151,14 @@
         <file>icons/32x32/RteInstr.png</file>
         <file>icons/32x32/Zoom.png</file>
         <file>icons/32x32/PrintSave.png</file>
+        <file>icons/32x32/ActNone.png</file>
+        <file>icons/32x32/ActFoot.png</file>
+        <file>icons/32x32/ActCycle.png</file>
+        <file>icons/32x32/ActBike.png</file>
+        <file>icons/32x32/ActCar.png</file>
+        <file>icons/32x32/ActCable.png</file>
+        <file>icons/32x32/ActShip.png</file>
+        <file>icons/32x32/Activity.png</file>
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
@@ -284,6 +292,14 @@
         <file>icons/48x48/RteInstr.png</file>
         <file>icons/48x48/Zoom.png</file>
         <file>icons/48x48/PrintSave.png</file>
+        <file>icons/48x48/ActNone.png</file>
+        <file>icons/48x48/ActFoot.png</file>
+        <file>icons/48x48/ActCycle.png</file>
+        <file>icons/48x48/ActBike.png</file>
+        <file>icons/48x48/ActCar.png</file>
+        <file>icons/48x48/ActCable.png</file>
+        <file>icons/48x48/ActShip.png</file>
+        <file>icons/48x48/Activity.png</file>
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>

@@ -1020,11 +1020,11 @@ void CGisItemTrk::deriveSecondaryData()
                 if(lastFlag != 0xFFFFFFFF)
                 {
                     stats_t& entry   = statByActivity[actFlagToIdx(lastFlag)];
-                    entry.distance   = pt.distance - start.distance;
-                    entry.ascend     = pt.ascend - start.ascend;
-                    entry.descend    = pt.descend - start.descend;
-                    entry.timeMoving = pt.elapsedSecondsMoving - start.timeMoving;
-                    entry.timeTotal  = pt.elapsedSeconds - start.timeTotal;
+                    entry.distance   += pt.distance - start.distance;
+                    entry.ascend     += pt.ascend - start.ascend;
+                    entry.descend    += pt.descend - start.descend;
+                    entry.timeMoving += pt.elapsedSecondsMoving - start.timeMoving;
+                    entry.timeTotal  += pt.elapsedSeconds - start.timeTotal;
                 }
 
                 start.distance   = pt.distance;
@@ -1038,11 +1038,11 @@ void CGisItemTrk::deriveSecondaryData()
         }
     }
     stats_t& stat   = statByActivity[actFlagToIdx(lastFlag)];
-    stat.distance   = lastTrkpt->distance - start.distance;
-    stat.ascend     = lastTrkpt->ascend - start.ascend;
-    stat.descend    = lastTrkpt->descend - start.descend;
-    stat.timeMoving = lastTrkpt->elapsedSecondsMoving - start.timeMoving;
-    stat.timeTotal  = lastTrkpt->elapsedSeconds - start.timeTotal;
+    stat.distance   += lastTrkpt->distance - start.distance;
+    stat.ascend     += lastTrkpt->ascend - start.ascend;
+    stat.descend    += lastTrkpt->descend - start.descend;
+    stat.timeMoving += lastTrkpt->elapsedSecondsMoving - start.timeMoving;
+    stat.timeTotal  += lastTrkpt->elapsedSeconds - start.timeTotal;
 
     for(int i = 0; i < 9; i++)
     {

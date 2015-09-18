@@ -142,26 +142,40 @@ public:
      */
     QDataStream& operator>>(QDataStream& stream);
 
+    /// get name of track
     const QString& getName() const
     {
         return trk.name.isEmpty() ? noName : trk.name;
     }
 
+    /// get the track color as index into the Garmin color table
     int getColorIdx() const
     {
         return colorIdx;
     }
 
+    /// get the track color a Qt color object
     const QColor& getColor() const
     {
         return color;
     }
 
+
+    /**
+       @brief get a summary of the track
+       @param allowEdit if true the track name is a link to allow interactions like edit
+       @return
+     */
     QString getInfo(bool allowEdit = false) const;
+    /// get a summary of a selected range
     QString getInfoRange();
-    QString getInfoTrkPt(const trkpt_t& pt);
-    QString getInfoProgress(const trkpt_t& pt);
+    /// get a summary of a selected range defined by two track points
     QString getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2);
+    /// get a summary for a track point
+    QString getInfoTrkPt(const trkpt_t& pt);
+    /// get a progress summary for a selected track point
+    QString getInfoProgress(const trkpt_t& pt);
+
     quint32 getTotalElapsedSeconds() const
     {
         return totalElapsedSeconds;
@@ -233,11 +247,26 @@ public:
     void setDescription(const QString& str);
     void setLinks(const QList<link_t>& links);
     void setDataFromPolyline(const SGisLine &l);
-    void setActivity(quint32 flag, const QString &name, const QString &icon);
-    void setActivity();
 
+    /**
+       @brief display the track screen options
+
+       @param origin    the point on screen to anchor the options
+       @param mouse     the mouse object causing the request
+       @return          a pointer to the screen option widget
+     */
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
+    /**
+       @brief Get a screen pixel of the track close to the given position on the screen
+       @param screenPos Screen position as pixel coordinate
+       @return The screen coordinates as pixel of a track point close by
+     */
     QPointF getPointCloseBy(const QPoint& screenPos);
+    /**
+       @brief isCloseTo
+       @param pos Screen position as pixel coordinate
+       @return True if point is considered clse enough
+     */
     bool isCloseTo(const QPointF& pos);
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
@@ -309,12 +338,29 @@ public:
     void showSelectedPoints();
 
     /**
+       @brief Set the activity flag for all track points
+       @param flag  one of trkpt_t::flag_e::eAct...
+       @param name  the name of the activity
+       @param icon  a resource icon string to display with the activity
+     */
+    void setActivity(quint32 flag, const QString &name, const QString &icon);
+
+    /**
+       @brief Sets the activity flag for a selected range of track points
+
+       The range has to be selected already. The activity will be selected by a dialog displayed
+       in this method.
+
+    */
+    void setActivity();
+
+    /**
        @brief Copy a section into a new track object
 
        The section is defined by mouseClickFocus and mouseMoveFocus, All points are copied,
        including the hidden (trkpt_t::eHidden) ones.
 
-     */
+    */
     void copySelectedPoints();
 
     /**
@@ -572,6 +618,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
 
+            // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -579,8 +626,8 @@ public:
             ,eActCar    = 0x10000000
             ,eActCable  = 0x08000000
             ,eActShip   = 0x04000000
-            ,eActMask   = 0xFF000000
-            ,eActMaxNum = 8
+            ,eActMask   = 0xFF000000    ///< mask for activity flags
+            ,eActMaxNum = 8             ///< maximum number of activity flags. this is defined by the mask
         };
 
         quint32 flags;
@@ -721,7 +768,7 @@ private:
 
     struct stats_t
     {
-        stats_t() : distance(0), ascend(0), descend(0), timeMoving(0), timeTotal(0)
+        stats_t() : distance(NOFLOAT), ascend(NOFLOAT), descend(NOFLOAT), timeMoving(NOFLOAT), timeTotal(NOFLOAT)
         {
 
         }

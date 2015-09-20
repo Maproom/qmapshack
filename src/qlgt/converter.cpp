@@ -135,6 +135,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
 
 CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     : IGisItem(0, eTypeTrk, NOIDX)
+    , activities(this)
 {
     trk.name        = trk1.name;
     trk.cmt         = trk1.comment;
@@ -210,6 +211,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
 
 CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl)
     : IGisItem(0, eTypeTrk, NOIDX)
+    , activities(this)
 {
     trk.name    = ovl.name;
     trk.cmt     = ovl.comment;

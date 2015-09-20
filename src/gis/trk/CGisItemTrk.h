@@ -21,6 +21,7 @@
 
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
+#include "gis/trk/CActivityTrk.h"
 
 #include <QPen>
 #include <QPointer>
@@ -351,7 +352,7 @@ public:
        The range has to be selected already. The activity will be selected by a dialog displayed
        in this method.
 
-    */
+     */
     void setActivity();
 
     /**
@@ -360,7 +361,7 @@ public:
        The section is defined by mouseClickFocus and mouseMoveFocus, All points are copied,
        including the hidden (trkpt_t::eHidden) ones.
 
-    */
+     */
     void copySelectedPoints();
 
     /**
@@ -589,7 +590,6 @@ private:
 
     void setColor(const QColor& c);
     void setIcon(const QString& c);
-    qint32 actFlagToIdx(quint32 flag);
 
 public:
     struct trkpt_t : public wpt_t
@@ -618,7 +618,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
 
-            // activity flags
+                          // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -765,24 +765,7 @@ private:
 
     QString mouseFocusOwner;
 
-
-    struct stats_t
-    {
-        stats_t() : distance(NOFLOAT), ascend(NOFLOAT), descend(NOFLOAT), timeMoving(NOFLOAT), timeTotal(NOFLOAT)
-        {
-
-        }
-
-        qreal distance;
-        qreal ascend;
-        qreal descend;
-        qreal timeMoving;
-        qreal timeTotal;
-    };
-
-    stats_t statByActivity[trkpt_t::eActMaxNum + 1];
-
+    CActivityTrk activities;
 };
 
 #endif //CGISITEMTRK_H
-

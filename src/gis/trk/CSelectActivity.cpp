@@ -64,7 +64,6 @@ CSelectActivity::CSelectActivity(quint32 &flag, QString &name, QString &icon, QW
     connect(checkActivityCar, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
     connect(checkActivityCable, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
     connect(checkActivityShip, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-
 }
 
 CSelectActivity::~CSelectActivity()

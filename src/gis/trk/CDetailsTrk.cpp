@@ -49,6 +49,27 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         comboColor->addItem(icon,"",CGisItemTrk::lineColors[i]);
     }
 
+    int i = 0;
+    while(!CActivityTrk::actDescriptor[i].name.isEmpty())
+    {
+        const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
+        QCheckBox * check = new QCheckBox(this);
+        check->setText(desc.name);
+        check->setIcon(QIcon(desc.icon));
+        check->setProperty("flag", desc.flag);
+        check->setProperty("name", desc.name);
+        check->setProperty("symbol", desc.icon);
+        check->setObjectName("check" + desc.objName);
+        check->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+
+        connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+
+        layoutActivities->addWidget(check);
+
+        i++;
+    }
+    layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
+
     setupGui();
 
     plotElevation->setTrack(&trk);
@@ -105,36 +126,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     item0->setIcon(0, QIcon("://icons/48x48/TrkCut.png"));
     item0->setText(0, tr("Cut track into pieces"));
 
-
-    checkActivityNone->setProperty("flag", CGisItemTrk::trkpt_t::eActNone);
-    checkActivityNone->setProperty("name", checkActivityNone->text());
-    checkActivityNone->setProperty("symbol", QString("://icons/48x48/ActNone.png"));
-
-    checkActivityFoot->setProperty("flag", CGisItemTrk::trkpt_t::eActFoot);
-    checkActivityFoot->setProperty("name", checkActivityFoot->text());
-    checkActivityFoot->setProperty("symbol", QString("://icons/48x48/ActFoot.png"));
-
-    checkActivityCycle->setProperty("flag", CGisItemTrk::trkpt_t::eActCycle);
-    checkActivityCycle->setProperty("name", checkActivityCycle->text());
-    checkActivityCycle->setProperty("symbol", QString("://icons/48x48/ActCycle.png"));
-
-    checkActivityBike->setProperty("flag", CGisItemTrk::trkpt_t::eActBike);
-    checkActivityBike->setProperty("name", checkActivityBike->text());
-    checkActivityBike->setProperty("symbol", QString("://icons/48x48/ActBike.png"));
-
-    checkActivityCar->setProperty("flag", CGisItemTrk::trkpt_t::eActCar);
-    checkActivityCar->setProperty("name", checkActivityCar->text());
-    checkActivityCar->setProperty("symbol", QString("://icons/48x48/ActCar.png"));
-
-    checkActivityCable->setProperty("flag", CGisItemTrk::trkpt_t::eActCable);
-    checkActivityCable->setProperty("name", checkActivityCable->text());
-    checkActivityCable->setProperty("symbol", QString("://icons/48x48/ActCable.png"));
-
-    checkActivityShip->setProperty("flag", CGisItemTrk::trkpt_t::eActShip);
-    checkActivityShip->setProperty("name", checkActivityShip->text());
-    checkActivityShip->setProperty("symbol", QString("://icons/48x48/ActShip.png"));
-
-
     SETTINGS;
     cfg.beginGroup("TrackDetails");
     checkProfile->setChecked(cfg.value("showProfile", true).toBool());
@@ -156,14 +147,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(plotDistance, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
     connect(plotElevation, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
     connect(plotSpeed, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-
-    connect(checkActivityNone, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityFoot, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityCycle, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityBike, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityCar, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityCable, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityShip, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
@@ -316,14 +299,19 @@ void CDetailsTrk::setupGui()
 
     quint32 flags = trk.getAllFlags() & CGisItemTrk::trkpt_t::eActMask;
 
-    checkActivityNone->setChecked(flags == 0);
-    checkActivityFoot->setChecked(flags & CGisItemTrk::trkpt_t::eActFoot);
-    checkActivityCycle->setChecked(flags & CGisItemTrk::trkpt_t::eActCycle);
-    checkActivityBike->setChecked(flags & CGisItemTrk::trkpt_t::eActBike);
-    checkActivityCar->setChecked(flags & CGisItemTrk::trkpt_t::eActCar);
-    checkActivityCable->setChecked(flags & CGisItemTrk::trkpt_t::eActCable);
-    checkActivityShip->setChecked(flags & CGisItemTrk::trkpt_t::eActShip);
+    int i = 0;
+    while(!CActivityTrk::actDescriptor[i].objName.isEmpty())
+    {
+        const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
 
+        QCheckBox * check = findChild<QCheckBox*>("check" + desc.objName);
+        if(check)
+        {
+            check->setChecked((flags & desc.flag) == desc.flag);
+        }
+
+        i++;
+    }
 
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);

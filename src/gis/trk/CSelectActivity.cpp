@@ -18,6 +18,7 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CSelectActivity.h"
+#include "gis/trk/CActivityTrk.h"
 
 #include <QtWidgets>
 
@@ -29,41 +30,28 @@ CSelectActivity::CSelectActivity(quint32 &flag, QString &name, QString &icon, QW
 {
     setupUi(this);
 
-    checkActivityNone->setProperty("flag", CGisItemTrk::trkpt_t::eActNone);
-    checkActivityNone->setProperty("name", checkActivityNone->text());
-    checkActivityNone->setProperty("symbol", QString("://icons/48x48/ActNone.png"));
+    int i = 0;
+    QLayout * l = layout();
 
-    checkActivityFoot->setProperty("flag", CGisItemTrk::trkpt_t::eActFoot);
-    checkActivityFoot->setProperty("name", checkActivityFoot->text());
-    checkActivityFoot->setProperty("symbol", QString("://icons/48x48/ActFoot.png"));
+    while(!CActivityTrk::actDescriptor[i].name.isEmpty())
+    {
+        const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
+        QCheckBox * check = new QCheckBox(this);
+        check->setText(desc.name);
+        check->setIcon(QIcon(desc.icon));
+        check->setProperty("flag", desc.flag);
+        check->setProperty("name", desc.name);
+        check->setProperty("symbol", desc.icon);
 
-    checkActivityCycle->setProperty("flag", CGisItemTrk::trkpt_t::eActCycle);
-    checkActivityCycle->setProperty("name", checkActivityCycle->text());
-    checkActivityCycle->setProperty("symbol", QString("://icons/48x48/ActCycle.png"));
+        connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
 
-    checkActivityBike->setProperty("flag", CGisItemTrk::trkpt_t::eActBike);
-    checkActivityBike->setProperty("name", checkActivityBike->text());
-    checkActivityBike->setProperty("symbol", QString("://icons/48x48/ActBike.png"));
+        l->addWidget(check);
 
-    checkActivityCar->setProperty("flag", CGisItemTrk::trkpt_t::eActCar);
-    checkActivityCar->setProperty("name", checkActivityCar->text());
-    checkActivityCar->setProperty("symbol", QString("://icons/48x48/ActCar.png"));
+        i++;
+    }
 
-    checkActivityCable->setProperty("flag", CGisItemTrk::trkpt_t::eActCable);
-    checkActivityCable->setProperty("name", checkActivityCable->text());
-    checkActivityCable->setProperty("symbol", QString("://icons/48x48/ActCable.png"));
+    l->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
 
-    checkActivityShip->setProperty("flag", CGisItemTrk::trkpt_t::eActShip);
-    checkActivityShip->setProperty("name", checkActivityShip->text());
-    checkActivityShip->setProperty("symbol", QString("://icons/48x48/ActShip.png"));
-
-    connect(checkActivityNone, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityFoot, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityCycle, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityBike, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityCar, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityCable, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
-    connect(checkActivityShip, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
 }
 
 CSelectActivity::~CSelectActivity()

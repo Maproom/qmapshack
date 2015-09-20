@@ -19,6 +19,54 @@
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 
+const CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
+{
+    {
+        "Foot"
+        , CGisItemTrk::trkpt_t::eActFoot
+        , QObject::tr("Foot")
+        , "://icons/48x48/ActFoot.png"
+    },
+    {
+        "Cycle"
+        , CGisItemTrk::trkpt_t::eActCycle
+        , QObject::tr("Bicycle")
+        , "://icons/48x48/ActCycle.png"
+    },
+    {
+        "Bike"
+        , CGisItemTrk::trkpt_t::eActBike
+        , QObject::tr("Motor Bike")
+        , "://icons/48x48/ActBike.png"
+    },
+    {
+        "Car"
+        , CGisItemTrk::trkpt_t::eActCar
+        , QObject::tr("Car")
+        , "://icons/48x48/ActCar.png"
+    },
+    {
+        "Cable"
+        , CGisItemTrk::trkpt_t::eActCable
+        , QObject::tr("Cable Car")
+        , "://icons/48x48/ActCable.png"
+    },
+    {
+        "Ship"
+        , CGisItemTrk::trkpt_t::eActShip
+        , QObject::tr("Ship")
+        , "://icons/48x48/ActShip.png"
+    },
+
+    {
+        ""
+        , 0
+        , ""
+        , ""
+    }
+
+};
+
 CActivityTrk::CActivityTrk(CGisItemTrk* trk)
     : trk(trk)
     , summaries(CGisItemTrk::trkpt_t::eActMaxNum + 1)

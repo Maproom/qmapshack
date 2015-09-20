@@ -31,6 +31,16 @@ public:
 
     void update();
 
+    struct desc_t
+    {
+        QString objName;
+        quint32 flag;
+        QString name;
+        QString icon;
+    };
+
+    static const desc_t actDescriptor[];
+
 private:
     struct summary_t;
     friend class CGisItemTrk;

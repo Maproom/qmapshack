@@ -297,7 +297,7 @@ void CDetailsTrk::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
 
-    quint32 flags = trk.getAllFlags() & CGisItemTrk::trkpt_t::eActMask;
+    quint32 flags = trk.getActivities().getAllFlags();
 
     int i = 0;
     while(!CActivityTrk::actDescriptor[i].objName.isEmpty())

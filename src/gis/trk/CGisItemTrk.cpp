@@ -810,7 +810,6 @@ void CGisItemTrk::deriveSecondaryData()
     totalDescend            = NOFLOAT;
     totalElapsedSeconds     = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
-    allFlags                = 0;
 
     // remove empty segments
     QVector<trkseg_t>::iterator i = trk.segs.begin();
@@ -841,8 +840,6 @@ void CGisItemTrk::deriveSecondaryData()
         for(int p = 0; p < seg.pts.size(); p++)
         {
             trkpt_t& trkpt = seg.pts[p];
-
-            allFlags |= trkpt.flags;
 
             trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.flags & trkpt_t::eHidden)

@@ -357,7 +357,10 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, bool isReadOnly)
     IUnit::self().seconds2time(prj.getTotalElapsedSecondsMoving(), val, unit);
     str += "<tr><td>" + tr("Total Time Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
     str += "</table>";
+
     cursor1.insertHtml(str);
+
+
 }
 
 
@@ -570,6 +573,12 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
         table->cellAt(cnt,eSym2).firstCursorPosition().insertImage(trk->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
         table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(trk->getInfo());
+
+        QString str;
+        trk->getActivities().printSummary(str);
+
+        qDebug() << str;
+        table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(str);
 
         QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 

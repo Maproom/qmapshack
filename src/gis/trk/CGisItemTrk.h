@@ -226,10 +226,12 @@ public:
         return cntVisiblePoints;
     }
 
-    quint32 getAllFlags()
+    const CActivityTrk& getActivities() const
     {
-        return allFlags;
+        return activities;
     }
+
+
 
     /**
        @brief Get the indeces of visible points for a selected range
@@ -703,7 +705,6 @@ private:
 
     mode_e mode;
 
-    quint32 allFlags;
     qint32 cntTotalPoints;
     qint32 cntVisiblePoints;
     QDateTime timeStart;

@@ -31,6 +31,13 @@ public:
 
     void update();
 
+    quint32 getAllFlags() const
+    {
+        return allFlags;
+    }
+
+    void printSummary(QString& str) const;
+
     struct desc_t
     {
         QString objName;
@@ -46,6 +53,7 @@ private:
     friend class CGisItemTrk;
     CActivityTrk(CGisItemTrk* trk);
     summary_t& getSummary(quint32 flag);
+    const summary_t& getSummary(quint32 flag) const;
 
     CGisItemTrk * trk;
 
@@ -79,6 +87,7 @@ private:
         qreal ellapsedSecondsMoving;
     };
 
+    quint32 allFlags;
     QList<activity_t>   activities;
     QVector<summary_t>  summaries;
 };

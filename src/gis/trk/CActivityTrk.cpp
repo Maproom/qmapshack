@@ -18,6 +18,7 @@
 
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "units/IUnit.h"
 
 const CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
 {
@@ -69,6 +70,7 @@ const CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
 
 CActivityTrk::CActivityTrk(CGisItemTrk* trk)
     : trk(trk)
+    , allFlags(0)
     , summaries(CGisItemTrk::trkpt_t::eActMaxNum + 1)
 {
 }
@@ -79,6 +81,7 @@ CActivityTrk::~CActivityTrk()
 
 void CActivityTrk::update()
 {
+    allFlags = 0;
     activities.clear();
     for(int i = 0; i < summaries.size(); i++)
     {
@@ -94,6 +97,8 @@ void CActivityTrk::update()
     {
         foreach(const CGisItemTrk::trkpt_t &pt, seg.pts)
         {
+            allFlags |= pt.flags;
+
             if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
             {
                 continue;
@@ -123,6 +128,8 @@ void CActivityTrk::update()
     summary.ellapsedSeconds += lastTrkpt->elapsedSeconds - startTrkpt->elapsedSeconds;
     summary.ellapsedSecondsMoving += lastTrkpt->elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
 
+    allFlags &= CGisItemTrk::trkpt_t::eActMask;
+
     for(int i = 0; i < 9; i++)
     {
         summary_t& stat   = summaries[i];
@@ -135,7 +142,117 @@ void CActivityTrk::update()
     }
 }
 
+void CActivityTrk::printSummary(QString& str) const
+{
+    quint32 mask;
+    QString val, unit;
+
+    str += "<table>";
+
+    // ############### build header ###############
+    str += "<tr>";
+    str += "<th></th>";
+    mask = 0x80000000;
+    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    {
+        if(actDescriptor[i].objName.isEmpty())
+        {
+            break;
+        }
+
+        if((allFlags & mask) != 0)
+        {
+            str += QString("<th><img src='%1'height='16' width='16'/></th>").arg(actDescriptor[i].icon);
+        }
+
+        mask >>= 1;
+    }
+    str += "</tr>";
+
+    // ############### build Distance row ###############
+    str += "<tr>";
+    str += "<td>" + QObject::tr("Distance:") + "</td>";
+    mask = 0x80000000;
+    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    {
+        if(actDescriptor[i].objName.isEmpty())
+        {
+            break;
+        }
+
+        if((allFlags & mask) != 0)
+        {
+            const summary_t& summary = getSummary(mask);
+            IUnit::self().meter2distance(summary.distance, val, unit);
+            str += QString("<td align='right'>%1 %2</td>").arg(val).arg(unit);
+        }
+
+        mask >>= 1;
+    }
+    str += "</tr>";
+
+    // ############### build Ascend row ###############
+    str += "<tr>";
+    str += "<td>" + QObject::tr("Ascend:") + "</td>";
+    mask = 0x80000000;
+    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    {
+        if(actDescriptor[i].objName.isEmpty())
+        {
+            break;
+        }
+
+        if((allFlags & mask) != 0)
+        {
+            const summary_t& summary = getSummary(mask);
+            IUnit::self().meter2elevation(summary.ascend, val, unit);
+            str += QString("<td align='right'>%1 %2</td>").arg(val).arg(unit);
+        }
+
+        mask >>= 1;
+    }
+    str += "</tr>";
+
+    // ############### build Descend row ###############
+    str += "<tr>";
+    str += "<td>" + QObject::tr("Descend:") + "</td>";
+    mask = 0x80000000;
+    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    {
+        if(actDescriptor[i].objName.isEmpty())
+        {
+            break;
+        }
+
+        if((allFlags & mask) != 0)
+        {
+            const summary_t& summary = getSummary(mask);
+            IUnit::self().meter2elevation(summary.descend, val, unit);
+            str += QString("<td align='right'>%1 %2</td>").arg(val).arg(unit);
+        }
+
+        mask >>= 1;
+    }
+    str += "</tr>";
+
+    str += "</table>";
+}
+
 CActivityTrk::summary_t &CActivityTrk::getSummary(quint32 flag)
+{
+    quint32 cnt = 0;
+    flag >>= 24;
+
+    while(((flag & 0x01) == 0) && (cnt < CGisItemTrk::trkpt_t::eActMaxNum))
+    {
+        cnt++;
+        flag >>= 1;
+    }
+
+    return summaries[cnt];
+}
+
+const CActivityTrk::summary_t &CActivityTrk::getSummary(quint32 flag) const
 {
     quint32 cnt = 0;
     flag >>= 24;

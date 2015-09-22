@@ -1170,66 +1170,30 @@ void IPlot::slotSave()
 void IPlot::slotHidePoints()
 {
     trk->hideSelectedPoints();
-    scrOptRange->deleteLater();
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
-
-    trk->setMode(CGisItemTrk::eModeNormal, objectName());
-    mouseClickState = eMouseClickIdle;
+    slotStopRange();
 }
 
 void IPlot::slotShowPoints()
 {
     trk->showSelectedPoints();
-    scrOptRange->deleteLater();
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
-
-    trk->setMode(CGisItemTrk::eModeNormal, objectName());
-    mouseClickState = eMouseClickIdle;
+    slotStopRange();
 }
 
 void IPlot::slotActivity()
 {
     trk->setActivity();
-    scrOptRange->deleteLater();
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
-
-    trk->setMode(CGisItemTrk::eModeNormal, objectName());
-    mouseClickState = eMouseClickIdle;
+    slotStopRange();
 }
 
 void IPlot::slotCopy()
 {
     trk->copySelectedPoints();
-    scrOptRange->deleteLater();
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
-
-    trk->setMode(CGisItemTrk::eModeNormal, objectName());
-    mouseClickState = eMouseClickIdle;
+    slotStopRange();
 }
 
 void IPlot::slotStopRange()
 {
-    delete scrOptRange;
+    scrOptRange->deleteLater();
     trk->setMode(CGisItemTrk::eModeNormal, objectName());
     idxSel1 = idxSel2 = NOIDX;
     mouseClickState = eMouseClickIdle;

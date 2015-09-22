@@ -60,7 +60,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         check->setProperty("name", desc.name);
         check->setProperty("symbol", desc.icon);
         check->setObjectName("check" + desc.objName);
-        check->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+        //check->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 
         connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
 
@@ -313,6 +313,15 @@ void CDetailsTrk::setupGui()
         i++;
     }
 
+    if((flags & CGisItemTrk::trkpt_t::eActMask) == 0)
+    {
+        labelActivityHelp->show();
+    }
+    else
+    {
+        labelActivityHelp->hide();
+    }
+
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
 
@@ -479,6 +488,12 @@ void CDetailsTrk::slotActivitySelected(bool checked)
 {
     if(!checked)
     {
+        if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) != QMessageBox::Ok)
+        {
+            setupGui();
+            return;
+        }
+
         trk.setActivity(CGisItemTrk::trkpt_t::eActNone, tr("None"), "://icons/48x48/ActNone.png");
         return;
     }

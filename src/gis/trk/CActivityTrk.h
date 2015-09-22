@@ -43,7 +43,8 @@ public:
         QString objName;
         quint32 flag;
         QString name;
-        QString icon;
+        QString iconLarge;
+        QString iconSmall;
     };
 
     static const desc_t actDescriptor[];

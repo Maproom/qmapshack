@@ -370,7 +370,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -426,6 +426,16 @@
               <number>3</number>
              </property>
             </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelActivityInfo">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="labelActivityHelp">

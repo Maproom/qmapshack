@@ -55,12 +55,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
         QCheckBox * check = new QCheckBox(this);
         check->setText(desc.name);
-        check->setIcon(QIcon(desc.icon));
+        check->setIcon(QIcon(desc.iconLarge));
         check->setProperty("flag", desc.flag);
         check->setProperty("name", desc.name);
-        check->setProperty("symbol", desc.icon);
+        check->setProperty("symbol", desc.iconLarge);
         check->setObjectName("check" + desc.objName);
-        //check->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 
         connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
 
@@ -313,13 +312,19 @@ void CDetailsTrk::setupGui()
         i++;
     }
 
+    str.clear();
+    trk.getActivities().printSummary(str);
+    labelActivityInfo->setText(str);
+
     if((flags & CGisItemTrk::trkpt_t::eActMask) == 0)
     {
         labelActivityHelp->show();
+        labelActivityInfo->hide();
     }
     else
     {
         labelActivityHelp->hide();
+        labelActivityInfo->show();
     }
 
     plotTrack->setTrack(&trk);

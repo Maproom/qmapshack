@@ -18,6 +18,13 @@
         <file>icons/8x8/bullet_red.png</file>
         <file>icons/8x8/bullet_white.png</file>
         <file>icons/8x8/bullet_yellow.png</file>
+        <file>icons/16x16/ActNone.png</file>
+        <file>icons/16x16/ActFoot.png</file>
+        <file>icons/16x16/ActCycle.png</file>
+        <file>icons/16x16/ActBike.png</file>
+        <file>icons/16x16/ActCar.png</file>
+        <file>icons/16x16/ActCable.png</file>
+        <file>icons/16x16/ActShip.png</file>
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>

@@ -38,10 +38,10 @@ CSelectActivity::CSelectActivity(quint32 &flag, QString &name, QString &icon, QW
         const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
         QCheckBox * check = new QCheckBox(this);
         check->setText(desc.name);
-        check->setIcon(QIcon(desc.icon));
+        check->setIcon(QIcon(desc.iconLarge));
         check->setProperty("flag", desc.flag);
         check->setProperty("name", desc.name);
-        check->setProperty("symbol", desc.icon);
+        check->setProperty("symbol", desc.iconLarge);
 
         connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
 

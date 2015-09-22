@@ -58,13 +58,26 @@ const CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActCable.png"
     },
     {
+        "Swim"
+        , CGisItemTrk::trkpt_t::eActSwim
+        , QObject::tr("Swim")
+        , "://icons/48x48/ActSwim.png"
+        , "://icons/16x16/ActSwim.png"
+    },
+    {
         "Ship"
         , CGisItemTrk::trkpt_t::eActShip
         , QObject::tr("Ship")
         , "://icons/48x48/ActShip.png"
         , "://icons/16x16/ActShip.png"
     },
-
+    {
+        "Aeronautik"
+        , CGisItemTrk::trkpt_t::eActAero
+        , QObject::tr("Aeronautik")
+        , "://icons/48x48/ActAero.png"
+        , "://icons/16x16/ActAero.png"
+    },
     {
         ""
         , 0

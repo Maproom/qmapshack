@@ -25,6 +25,8 @@
         <file>icons/16x16/ActCar.png</file>
         <file>icons/16x16/ActCable.png</file>
         <file>icons/16x16/ActShip.png</file>
+        <file>icons/16x16/ActSwim.png</file>
+        <file>icons/16x16/ActAero.png</file>
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
@@ -165,6 +167,8 @@
         <file>icons/32x32/ActCar.png</file>
         <file>icons/32x32/ActCable.png</file>
         <file>icons/32x32/ActShip.png</file>
+        <file>icons/32x32/ActSwim.png</file>
+        <file>icons/32x32/ActAero.png</file>
         <file>icons/32x32/Activity.png</file>
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -306,6 +310,8 @@
         <file>icons/48x48/ActCar.png</file>
         <file>icons/48x48/ActCable.png</file>
         <file>icons/48x48/ActShip.png</file>
+        <file>icons/48x48/ActSwim.png</file>
+        <file>icons/48x48/ActAero.png</file>
         <file>icons/48x48/Activity.png</file>
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>

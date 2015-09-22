@@ -627,7 +627,9 @@ public:
             ,eActBike   = 0x20000000
             ,eActCar    = 0x10000000
             ,eActCable  = 0x08000000
-            ,eActShip   = 0x04000000
+            ,eActSwim   = 0x04000000
+            ,eActShip   = 0x02000000
+            ,eActAero   = 0x01000000
             ,eActMask   = 0xFF000000    ///< mask for activity flags
             ,eActMaxNum = 8             ///< maximum number of activity flags. this is defined by the mask
         };

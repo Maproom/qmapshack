@@ -114,7 +114,7 @@ void CActivityTrk::update()
             {
                 if(startTrkpt != 0)
                 {
-                    summary_t& summary = getSummary(lastFlag);
+                    summary_t& summary = getSummary(summaries, lastFlag);
                     summary.distance += pt.distance - startTrkpt->distance;
                     summary.ascend += pt.ascend - startTrkpt->ascend;
                     summary.descend += pt.descend - startTrkpt->descend;
@@ -127,7 +127,7 @@ void CActivityTrk::update()
             }
         }
     }
-    summary_t& summary = getSummary(lastFlag);
+    summary_t& summary = getSummary(summaries, lastFlag);
     summary.distance += lastTrkpt->distance - startTrkpt->distance;
     summary.ascend += lastTrkpt->ascend - startTrkpt->ascend;
     summary.descend += lastTrkpt->descend - startTrkpt->descend;
@@ -136,22 +136,53 @@ void CActivityTrk::update()
 
     allFlags &= CGisItemTrk::trkpt_t::eActMask;
 
-    for(int i = 0; i < 9; i++)
-    {
-        summary_t& stat   = summaries[i];
-        qDebug() << "--------------" << i << "--------------";
-        qDebug() << "stat.distance" << stat.distance;
-        qDebug() << "stat.ascend" << stat.ascend;
-        qDebug() << "stat.descend" << stat.descend;
-        qDebug() << "stat.timeMoving" << stat.ellapsedSecondsMoving;
-        qDebug() << "stat.timeTotal" << stat.ellapsedSeconds;
-    }
+//    for(int i = 0; i < 9; i++)
+//    {
+//        summary_t& stat   = summaries[i];
+//        qDebug() << "--------------" << i << "--------------";
+//        qDebug() << "stat.distance" << stat.distance;
+//        qDebug() << "stat.ascend" << stat.ascend;
+//        qDebug() << "stat.descend" << stat.descend;
+//        qDebug() << "stat.timeMoving" << stat.ellapsedSecondsMoving;
+//        qDebug() << "stat.timeTotal" << stat.ellapsedSeconds;
+//    }
 }
 
 void CActivityTrk::printSummary(QString& str) const
 {
+    printSummary(summaries, allFlags, str);
+}
+
+void CActivityTrk::printSummary(const QVector<summary_t>& smry, quint32 flags, QString& str)
+{
     quint32 mask;
     QString val, unit;
+
+    if((flags == 0) && (smry.size() >= (int)CGisItemTrk::trkpt_t::eActMaxNum))
+    {
+        const summary_t& summary = smry[CGisItemTrk::trkpt_t::eActMaxNum];
+
+        str += "<table>";
+        IUnit::self().meter2distance(summary.distance, val, unit);
+        str += "<tr><td>" + QObject::tr("Distance:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        IUnit::self().meter2elevation(summary.ascend, val, unit);
+        str += "<tr><td>" + QObject::tr("Ascend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        IUnit::self().meter2elevation(summary.descend, val, unit);
+        str += "<tr><td>" + QObject::tr("Descend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        IUnit::self().meter2speed(summary.distance/summary.ellapsedSecondsMoving, val, unit);
+        str += "<tr><td>" + QObject::tr("Speed Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        IUnit::self().meter2speed(summary.distance/summary.ellapsedSeconds, val, unit);
+        str += "<tr><td>" + QObject::tr("Speed Total:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        IUnit::self().seconds2time(summary.ellapsedSecondsMoving, val, unit);
+        str += "<tr><td>" + QObject::tr("Time Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        IUnit::self().seconds2time(summary.ellapsedSeconds, val, unit);
+        str += "<tr><td>" + QObject::tr("Time Total:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "</table>";
+        return;
+    }
+
+
+    const int N = qMin((int)CGisItemTrk::trkpt_t::eActMaxNum, smry.size());
 
     str += "<table>";
 
@@ -159,14 +190,14 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<th></th>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
             str += QString("<th align='center'><img src='%1'/></th>").arg(actDescriptor[i].iconSmall);
         }
@@ -179,16 +210,16 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<td>" + QObject::tr("Distance:") + "</td>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
-            const summary_t& summary = getSummary(mask);
+            const summary_t& summary = getSummary(smry, mask);
             IUnit::self().meter2distance(summary.distance, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
@@ -201,16 +232,16 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<td>" + QObject::tr("Ascend:") + "</td>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
-            const summary_t& summary = getSummary(mask);
+            const summary_t& summary = getSummary(smry, mask);
             IUnit::self().meter2elevation(summary.ascend, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
@@ -223,16 +254,16 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<td>" + QObject::tr("Descend:") + "</td>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
-            const summary_t& summary = getSummary(mask);
+            const summary_t& summary = getSummary(smry, mask);
             IUnit::self().meter2elevation(summary.descend, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
@@ -245,16 +276,16 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<td>" + QObject::tr("Speed Moving:") + "</td>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
-            const summary_t& summary = getSummary(mask);
+            const summary_t& summary = getSummary(smry, mask);
             IUnit::self().meter2speed(summary.distance/summary.ellapsedSecondsMoving, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
@@ -267,16 +298,16 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<td>" + QObject::tr("Speed Total:") + "</td>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
-            const summary_t& summary = getSummary(mask);
+            const summary_t& summary = getSummary(smry, mask);
             IUnit::self().meter2speed(summary.distance/summary.ellapsedSeconds, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
@@ -289,16 +320,16 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<td>" + QObject::tr("Time Moving:") + "</td>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
-            const summary_t& summary = getSummary(mask);
+            const summary_t& summary = getSummary(smry, mask);
             IUnit::self().seconds2time(summary.ellapsedSecondsMoving, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
@@ -311,16 +342,16 @@ void CActivityTrk::printSummary(QString& str) const
     str += "<tr>";
     str += "<td>" + QObject::tr("Time Total:") + "</td>";
     mask = 0x80000000;
-    for(unsigned i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(int i = 0; i < N; i++)
     {
         if(actDescriptor[i].objName.isEmpty())
         {
             break;
         }
 
-        if((allFlags & mask) != 0)
+        if((flags & mask) != 0)
         {
-            const summary_t& summary = getSummary(mask);
+            const summary_t& summary = getSummary(smry, mask);
             IUnit::self().seconds2time(summary.ellapsedSeconds, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
@@ -332,30 +363,47 @@ void CActivityTrk::printSummary(QString& str) const
     str += "</table>";
 }
 
-CActivityTrk::summary_t &CActivityTrk::getSummary(quint32 flag)
+void CActivityTrk::sumUp(QVector<summary_t> &smry) const
 {
-    quint32 cnt = 0;
-    flag >>= 24;
-
-    while(((flag & 0x01) == 0) && (cnt < CGisItemTrk::trkpt_t::eActMaxNum))
+    const int N = qMin(summaries.size(), smry.size());
+    for(int i = 0; i < N; i++)
     {
-        cnt++;
-        flag >>= 1;
-    }
+        const summary_t& sum1 = summaries[i];
+        summary_t& sum2 = smry[i];
 
-    return summaries[cnt];
+        sum2.distance += sum1.distance;
+        sum2.ascend += sum1.ascend;
+        sum2.descend += sum1.descend;
+        sum2.ellapsedSeconds += sum1.ellapsedSeconds;
+        sum2.ellapsedSecondsMoving += sum1.ellapsedSecondsMoving;
+    }
 }
 
-const CActivityTrk::summary_t &CActivityTrk::getSummary(quint32 flag) const
+const CActivityTrk::summary_t &CActivityTrk::getSummary(const QVector<summary_t>& smry, quint32 flag)
 {
-    quint32 cnt = 0;
+    qint32 cnt = 0;
     flag >>= 24;
 
-    while(((flag & 0x01) == 0) && (cnt < CGisItemTrk::trkpt_t::eActMaxNum))
+    while(((flag & 0x01) == 0) && (cnt < qMin((int)CGisItemTrk::trkpt_t::eActMaxNum,smry.size())))
     {
         cnt++;
         flag >>= 1;
     }
 
-    return summaries[cnt];
+    return smry[cnt];
+}
+
+
+CActivityTrk::summary_t& CActivityTrk::getSummary(QVector<summary_t> &smry, quint32 flag)
+{
+    qint32 cnt = 0;
+    flag >>= 24;
+
+    while(((flag & 0x01) == 0) && (cnt < qMin((int)CGisItemTrk::trkpt_t::eActMaxNum,smry.size())))
+    {
+        cnt++;
+        flag >>= 1;
+    }
+
+    return smry[cnt];
 }

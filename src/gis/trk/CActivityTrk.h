@@ -29,43 +29,6 @@ class CActivityTrk
 public:
     virtual ~CActivityTrk();
 
-    void update();
-
-    quint32 getAllFlags() const
-    {
-        return allFlags;
-    }
-
-    void printSummary(QString& str) const;
-
-    struct desc_t
-    {
-        QString objName;
-        quint32 flag;
-        QString name;
-        QString iconLarge;
-        QString iconSmall;
-    };
-
-    static const desc_t actDescriptor[];
-
-private:
-    struct summary_t;
-    friend class CGisItemTrk;
-    CActivityTrk(CGisItemTrk* trk);
-    summary_t& getSummary(quint32 flag);
-    const summary_t& getSummary(quint32 flag) const;
-
-    CGisItemTrk * trk;
-
-    struct activity_t
-    {
-        qint32 idx1;
-        qint32 idx2;
-        QIcon icon;
-        QString name;
-    };
-
     struct summary_t
     {
         summary_t() : distance(0), ascend(0), descend(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
@@ -87,6 +50,70 @@ private:
         qreal ellapsedSeconds;
         qreal ellapsedSecondsMoving;
     };
+
+    /**
+       @brief Update internal summary array
+    */
+    void update();
+
+    /**
+       @brief Get sum of all flags seen in the track
+       @return A 32 bit field with all available activity falgs set.
+    */
+    quint32 getAllFlags() const
+    {
+        return allFlags;
+    }
+
+    /**
+       @brief Convert internal summary to HTML table
+       @param str   string to receive HTML
+    */
+    void printSummary(QString& str) const;
+
+    /**
+       @brief Convert array of summaries to HTML table
+       @param smry  The array of summaries
+       @param str   string to receive HTML
+    */
+    static void printSummary(const QVector<summary_t> &smry, quint32 flags, QString& str);
+
+    /**
+       @brief Add internal summary to given array of summaries
+       @param smry  an array of summaries to hold the sum
+    */
+    void sumUp(QVector<summary_t> &smry) const;
+
+
+    struct desc_t
+    {
+        QString objName;
+        quint32 flag;
+        QString name;
+        QString iconLarge;
+        QString iconSmall;
+    };
+
+    static const desc_t actDescriptor[];
+
+private:
+    friend class CGisItemTrk;
+    CActivityTrk(CGisItemTrk* trk);
+
+    static summary_t& getSummary(QVector<summary_t> &smry, quint32 flag);
+    static const summary_t& getSummary(const QVector<summary_t> &smry, quint32 flag);
+
+
+    CGisItemTrk * trk;
+
+    struct activity_t
+    {
+        qint32 idx1;
+        qint32 idx2;
+        QIcon icon;
+        QString name;
+    };
+
 
     quint32 allFlags;
     QList<activity_t>   activities;

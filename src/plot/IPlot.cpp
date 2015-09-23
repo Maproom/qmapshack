@@ -1127,7 +1127,7 @@ void IPlot::drawActivities(QPainter& p)
 
     const QList<CActivityTrk::activity_range_t>& ranges = trk->getActivities().getActivityRanges();
 
-    if(ranges.isEmpty())
+    if(ranges.size() < 2)
     {
         return;
     }

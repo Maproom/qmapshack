@@ -44,6 +44,7 @@ public:
 private slots:
     void slotHidePoints();
     void slotShowPoints();
+    void slotActivity();
     void slotCopy();
 
 private:

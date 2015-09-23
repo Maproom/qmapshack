@@ -62,6 +62,7 @@ private slots:
     void slotSave();
     void slotHidePoints();
     void slotShowPoints();
+    void slotActivity();
     void slotCopy();
     void slotStopRange();
     void slotResetZoom();
@@ -106,6 +107,7 @@ protected:
     void drawLegend(QPainter& p);
     void drawDecoration( QPainter &p );
     void drawTags(QPainter& p);
+    void drawActivities(QPainter& p);
 
     static int cnt;
 

@@ -41,6 +41,7 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
 
     connect(toolHidePoints, SIGNAL(clicked()), this, SLOT(hide()));
     connect(toolShowPoints, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolActivity, SIGNAL(clicked()), this, SLOT(hide()));
     connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
 }
 

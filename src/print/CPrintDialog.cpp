@@ -79,7 +79,6 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
 
 CPrintDialog::~CPrintDialog()
 {
-
 }
 
 void CPrintDialog::resizeEvent(QResizeEvent * e)

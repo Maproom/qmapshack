@@ -26,6 +26,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/trk/CSelectActivity.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 #include "plot/IPlot.h"
@@ -111,6 +112,12 @@ struct trkwpt_t
     IGisItem::key_t key;
 };
 
+struct activity_t
+{
+    QString name;
+    QString icon;
+};
+
 
 const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
@@ -125,6 +132,7 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
     , mouseRange1(0)
     , mouseRange2(0)
     , rangeState(eRangeStateIdle)
+    , activities(this)
 {
     flags = eFlagCreatedInQms;
 
@@ -173,6 +181,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     , mouseRange1(0)
     , mouseRange2(0)
     , rangeState(eRangeStateIdle)
+    , activities(this)
 {
     *this = parentTrk;
     key.project = project->getKey();
@@ -215,6 +224,7 @@ CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * p
     , mouseRange1(0)
     , mouseRange2(0)
     , rangeState(eRangeStateIdle)
+    , activities(this)
 {
     trk.name = name;
     readTrackDataFromGisLine(l);
@@ -236,6 +246,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     , mouseRange1(0)
     , mouseRange2(0)
     , rangeState(eRangeStateIdle)
+    , activities(this)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -255,6 +266,7 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
     , mouseRange1(0)
     , mouseRange2(0)
     , rangeState(eRangeStateIdle)
+    , activities(this)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -277,6 +289,7 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     , mouseRange1(0)
     , mouseRange2(0)
     , rangeState(eRangeStateIdle)
+    , activities(this)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -291,6 +304,7 @@ CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
     , mouseRange1(0)
     , mouseRange2(0)
     , rangeState(eRangeStateIdle)
+    , activities(this)
 {
     loadFromDb(id, db);
 }
@@ -319,6 +333,7 @@ void CGisItemTrk::setSymbol()
 {
     setColor(str2color(trk.color));
 }
+
 
 void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
 {
@@ -796,7 +811,6 @@ void CGisItemTrk::deriveSecondaryData()
     totalElapsedSeconds     = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
 
-
     // remove empty segments
     QVector<trkseg_t>::iterator i = trk.segs.begin();
     while(i != trk.segs.end())
@@ -991,8 +1005,6 @@ void CGisItemTrk::deriveSecondaryData()
         }
     }
 
-
-
     if(lastTrkpt != 0)
     {
         timeEnd                 = lastTrkpt->time;
@@ -1002,6 +1014,8 @@ void CGisItemTrk::deriveSecondaryData()
         totalElapsedSeconds     = lastTrkpt->elapsedSeconds;
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
+
+    activities.update();
 
     foreach(IPlot * plot, registeredPlots)
     {
@@ -1339,6 +1353,11 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
 
 void CGisItemTrk::hideSelectedPoints()
 {
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
     if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
@@ -1407,6 +1426,11 @@ void CGisItemTrk::hideSelectedPoints()
 
 void CGisItemTrk::showSelectedPoints()
 {
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
     if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
@@ -1819,6 +1843,98 @@ void CGisItemTrk::setColor(int idx)
     changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
 }
 
+void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& icon)
+{            
+    for(int s = 0; s < trk.segs.size(); s++)
+    {
+        trkseg_t& seg = trk.segs[s];
+        for(int i = 0; i < seg.pts.size(); i++)
+        {
+            trkpt_t& trkpt = seg.pts[i];
+            trkpt.flags &= ~trkpt_t::eActMask;
+            trkpt.flags |= flag;
+        }
+    }
+
+    deriveSecondaryData();
+    changed(QObject::tr("Changed activity to '%1' for complete track.").arg(name), icon);
+}
+
+void CGisItemTrk::setActivity()
+{
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
+    if((mouseRange1 == 0) && (mouseRange2 == 0))
+    {
+        return;
+    }
+
+    quint32 flag = 0;
+    QString name;
+    QString icon;
+
+    CSelectActivity dlg(flag, name, icon, CMainWindow::getBestWidgetForParent());
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    // read start/stop indices
+    qint32 idx1 = mouseRange1->idxTotal;
+    qint32 idx2 = mouseRange2->idxTotal;
+
+    if(idx1 > idx2)
+    {
+        qSwap(idx1,idx2);
+    }
+
+    // special case for a single point
+    if(idx1 == idx2)
+    {
+        for(int s = 0; s < trk.segs.size(); s++)
+        {
+            trkseg_t& seg = trk.segs[s];
+            for(int i = 0; i < seg.pts.size(); i++)
+            {
+                trkpt_t& trkpt = seg.pts[i];
+
+                if((idx1 == trkpt.idxTotal))
+                {
+                    trkpt.flags &= ~trkpt_t::eActMask;
+                    trkpt.flags |= flag;
+                }
+            }
+        }
+    }
+    else
+    {
+        // iterate over all segments and delete points between idx1 and idx2
+        for(int s = 0; s < trk.segs.size(); s++)
+        {
+            trkseg_t& seg = trk.segs[s];
+            for(int i = 0; i < seg.pts.size(); i++)
+            {
+                trkpt_t& trkpt = seg.pts[i];
+
+                if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+                {
+                    trkpt.flags &= ~trkpt_t::eActMask;
+                    trkpt.flags |= flag;
+                }
+            }
+        }
+    }
+    mouseRange1 = 0;
+    mouseRange2 = 0;
+    rangeState  = eRangeStateIdle;
+    deriveSecondaryData();
+    changed(QObject::tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
+}
+
+
 void CGisItemTrk::setColor(const QColor& c)
 {
     int n;
@@ -1844,7 +1960,6 @@ void CGisItemTrk::setColor(const QColor& c)
 
     setIcon(color.name());
 }
-
 
 
 void CGisItemTrk::setIcon(const QString& c)
@@ -2179,3 +2294,4 @@ void CGisItemTrk::changed(const QString& what, const QString& icon)
         dlgDetails->setupGui();
     }
 }
+

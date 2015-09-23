@@ -49,6 +49,26 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         comboColor->addItem(icon,"",CGisItemTrk::lineColors[i]);
     }
 
+    int i = 0;
+    while(!CActivityTrk::actDescriptor[i].name.isEmpty())
+    {
+        const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
+        QCheckBox * check = new QCheckBox(this);
+        check->setText(desc.name);
+        check->setIcon(QIcon(desc.iconLarge));
+        check->setProperty("flag", desc.flag);
+        check->setProperty("name", desc.name);
+        check->setProperty("symbol", desc.iconLarge);
+        check->setObjectName("check" + desc.objName);
+
+        connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+
+        layoutActivities->addWidget(check);
+
+        i++;
+    }
+    layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
+
     setupGui();
 
     plotElevation->setTrack(&trk);
@@ -104,7 +124,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     item0 = new QTreeWidgetItem(treeFilter);
     item0->setIcon(0, QIcon("://icons/48x48/TrkCut.png"));
     item0->setText(0, tr("Cut track into pieces"));
-
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");
@@ -277,6 +296,36 @@ void CDetailsTrk::setupGui()
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
 
+    quint32 flags = trk.getActivities().getAllFlags();
+
+    int i = 0;
+    while(!CActivityTrk::actDescriptor[i].objName.isEmpty())
+    {
+        const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
+
+        QCheckBox * check = findChild<QCheckBox*>("check" + desc.objName);
+        if(check)
+        {
+            check->setChecked((flags & desc.flag) == desc.flag);
+        }
+
+        i++;
+    }
+
+    str.clear();
+    trk.getActivities().printSummary(str);
+    labelActivityInfo->setText(str);
+
+    if((flags & CGisItemTrk::trkpt_t::eActMask) == 0)
+    {
+        labelActivityHelp->show();
+        labelActivityInfo->hide();
+    }
+    else
+    {
+        labelActivityHelp->hide();
+        labelActivityInfo->show();
+    }
 
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
@@ -437,5 +486,28 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
     else
     {
         QDesktopServices::openUrl(url);
+    }
+}
+
+void CDetailsTrk::slotActivitySelected(bool checked)
+{
+    if(!checked)
+    {
+        if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) != QMessageBox::Ok)
+        {
+            setupGui();
+            return;
+        }
+
+        trk.setActivity(CGisItemTrk::trkpt_t::eActNone, tr("None"), "://icons/48x48/ActNone.png");
+        return;
+    }
+
+    QObject * s = sender();
+    bool ok = false;
+    quint32 flag = s->property("flag").toUInt(&ok);
+    if(ok)
+    {
+        trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
     }
 }

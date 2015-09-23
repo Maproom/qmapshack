@@ -107,6 +107,7 @@ protected:
     void drawLegend(QPainter& p);
     void drawDecoration( QPainter &p );
     void drawTags(QPainter& p);
+    void drawActivities(QPainter& p);
 
     static int cnt;
 

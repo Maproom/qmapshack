@@ -86,13 +86,17 @@ public:
 
     struct activity_range_t
     {
-        qint32 idx1;
-        qint32 idx2;
+        qreal d1;
+        qreal d2;
+
+        qreal t1;
+        qreal t2;
+
         QString icon;
         QString name;
     };
 
-    const QList<activity_range_t>& getActivityRanges()
+    const QList<activity_range_t>& getActivityRanges() const
     {
         return activityRanges;
     }

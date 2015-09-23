@@ -137,8 +137,10 @@ void CActivityTrk::update()
                     activityRanges << activity_range_t();
                     activity_range_t& activity = activityRanges.last();
 
-                    activity.idx1 = startTrkpt->idxTotal;
-                    activity.idx2 = pt.idxTotal;
+                    activity.d1 = startTrkpt->distance;
+                    activity.d2 = pt.distance;
+                    activity.t1 = startTrkpt->time.toTime_t();
+                    activity.t2 = pt.time.toTime_t();
 
                     const desc_t& desc = getDescriptor(lastFlag);
                     activity.name = desc.name;
@@ -157,6 +159,20 @@ void CActivityTrk::update()
     summary.descend += lastTrkpt->descend - startTrkpt->descend;
     summary.ellapsedSeconds += lastTrkpt->elapsedSeconds - startTrkpt->elapsedSeconds;
     summary.ellapsedSecondsMoving += lastTrkpt->elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
+
+    activityRanges << activity_range_t();
+    activity_range_t& activity = activityRanges.last();
+
+    activity.d1 = startTrkpt->distance;
+    activity.d2 = lastTrkpt->distance;
+    activity.t1 = startTrkpt->time.toTime_t();
+    activity.t2 = lastTrkpt->time.toTime_t();
+
+    const desc_t& desc = getDescriptor(lastFlag);
+    activity.name = desc.name;
+    activity.icon = desc.iconSmall;
+
+
 
     allFlags &= CGisItemTrk::trkpt_t::eActMask;
 

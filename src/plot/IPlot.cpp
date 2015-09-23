@@ -22,6 +22,7 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
+#include "gis/trk/CActivityTrk.h"
 #include "helpers/CFadingIcon.h"
 #include "helpers/CSettings.h"
 #include "mouse/CScrOptRangeTrk.h"
@@ -622,7 +623,7 @@ void IPlot::draw()
     p.setClipping(true);
     p.setClipRect(rectGraphArea);
     drawData(p);
-    p.setClipping(false);
+    p.setClipping(false);    
     drawLabels(p);
     if(showScale)
     {
@@ -631,6 +632,7 @@ void IPlot::draw()
     }
     drawGridX(p);
     drawGridY(p);
+    drawActivities(p);
     drawXTic(p);
     drawYTic(p);
     p.setPen(QPen(Qt::black,2));
@@ -1114,6 +1116,69 @@ void IPlot::drawTags(QPainter& p)
         }
         ++tag;
     }
+}
+
+void IPlot::drawActivities(QPainter& p)
+{
+    if(mode == eModeIcon)
+    {
+        return;
+    }
+
+    const QList<CActivityTrk::activity_range_t>& ranges = trk->getActivities().getActivityRanges();
+
+    if(ranges.isEmpty())
+    {
+        return;
+    }
+
+    QRect rectClipping = QRect(0,0,right - left,22);
+    p.save();
+    p.translate(left, bottom - 22);
+    p.setClipRect(rectClipping);
+    p.setBrush(QColor(0,170,0,100));
+    p.setPen(Qt::NoPen);
+    p.drawRect(rectClipping);
+
+    QRect rectIconFrame(0,0,20,20);
+    QRect rectIcon(2,2,16,16);
+    foreach(const CActivityTrk::activity_range_t& range, ranges)
+    {
+        int x1, x2;
+        if(data->axisType == CPlotData::eAxisTime)
+        {
+            x1 = data->x().val2pt(range.t1);
+            x2 = data->x().val2pt(range.t2);
+        }
+        else
+        {
+            x1 = data->x().val2pt(range.d1);
+            x2 = data->x().val2pt(range.d2);
+        }
+
+
+
+        p.setPen(Qt::darkGreen);
+        p.drawLine(x1,0,x1,20);
+        p.drawLine(x2,0,x2,20);
+
+        int d = (x2 - x1);
+        if(d < 20)
+        {
+            continue;
+        }
+
+        int c = x1 + d/2;
+
+        rectIconFrame.moveCenter(QPoint(c,10));
+        p.setBrush(QColor(255,255,255,100));
+        p.drawRoundedRect(rectIconFrame,3,3);
+
+        rectIcon.moveCenter(QPoint(c,10));
+        p.drawPixmap(rectIcon, QPixmap(range.icon));
+    }
+
+    p.restore();
 }
 
 void IPlot::save(QImage& image)

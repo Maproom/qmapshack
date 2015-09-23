@@ -29,9 +29,9 @@ class CActivityTrk
 public:
     virtual ~CActivityTrk();
 
-    struct summary_t
+    struct activity_summary_t
     {
-        summary_t() : distance(0), ascend(0), descend(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
+        activity_summary_t() : distance(0), ascend(0), descend(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
         {
         }
 
@@ -73,17 +73,29 @@ public:
 
     /**
        @brief Convert array of summaries to HTML table
-       @param smry  The array of summaries
+       @param summary  The array of summaries
        @param str   string to receive HTML
     */
-    static void printSummary(const QVector<summary_t> &smry, quint32 flags, QString& str);
+    static void printSummary(const QVector<activity_summary_t> &summary, quint32 flags, QString& str);
 
     /**
        @brief Add internal summary to given array of summaries
-       @param smry  an array of summaries to hold the sum
+       @param summary  an array of summaries to hold the sum
     */
-    void sumUp(QVector<summary_t> &smry) const;
+    void sumUp(QVector<activity_summary_t> &summary) const;
 
+    struct activity_range_t
+    {
+        qint32 idx1;
+        qint32 idx2;
+        QString icon;
+        QString name;
+    };
+
+    const QList<activity_range_t>& getActivityRanges()
+    {
+        return activityRanges;
+    }
 
     struct desc_t
     {
@@ -98,26 +110,18 @@ public:
 
 private:
     friend class CGisItemTrk;
-    CActivityTrk(CGisItemTrk* trk);
+    CActivityTrk(CGisItemTrk * trk);
 
-    static summary_t& getSummary(QVector<summary_t> &smry, quint32 flag);
-    static const summary_t& getSummary(const QVector<summary_t> &smry, quint32 flag);
+    static activity_summary_t& getSummary(QVector<activity_summary_t> &summary, quint32 flag);
+    static const activity_summary_t& getSummary(const QVector<activity_summary_t> &summary, quint32 flag);
 
+    const desc_t& getDescriptor(quint32 flag);
 
     CGisItemTrk * trk;
 
-    struct activity_t
-    {
-        qint32 idx1;
-        qint32 idx2;
-        QIcon icon;
-        QString name;
-    };
-
-
     quint32 allFlags;
-    QList<activity_t>   activities;
-    QVector<summary_t>  summaries;
+    QList<activity_range_t> activityRanges;
+    QVector<activity_summary_t>  activitySummary;
 };
 
 #endif //CACTIVITYTRK_H

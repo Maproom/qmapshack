@@ -150,12 +150,14 @@ void CMousePrint::mousePressEvent(QMouseEvent * e)
                     CPrintDialog dlg(CPrintDialog::eTypePrint, rectSelection, canvas);
                     dlg.exec();
                     canvas->resetMouse();
+                    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
                 }
                 else if(corner == eCornerImage)
                 {
                     CPrintDialog dlg(CPrintDialog::eTypeImage, rectSelection, canvas);
                     dlg.exec();
                     canvas->resetMouse();
+                    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
                 }
                 else
                 {

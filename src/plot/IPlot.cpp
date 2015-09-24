@@ -1120,17 +1120,13 @@ void IPlot::drawTags(QPainter& p)
 
 void IPlot::drawActivities(QPainter& p)
 {
-    if(mode == eModeIcon)
+    if((mode == eModeIcon) || (trk->getActivities().getAllFlags() == 0))
     {
         return;
     }
 
     const QList<CActivityTrk::activity_range_t>& ranges = trk->getActivities().getActivityRanges();
 
-    if(ranges.size() < 2)
-    {
-        return;
-    }
 
     QRect rectClipping = QRect(0,0,right - left,22);
     p.save();
@@ -1156,9 +1152,7 @@ void IPlot::drawActivities(QPainter& p)
             x2 = data->x().val2pt(range.d2);
         }
 
-
-
-        p.setPen(Qt::darkGreen);
+        p.setPen(QPen(Qt::darkGreen,2));
         p.drawLine(x1,0,x1,20);
         p.drawLine(x2,0,x2,20);
 

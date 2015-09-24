@@ -178,7 +178,8 @@ void CDetailsTrk::setupGui()
     QString str, val, unit;
     bool isReadOnly = trk.isReadOnly();
 
-    tabWidget->widget(2)->setEnabled(!isReadOnly);
+    tabWidget->widget(3)->setEnabled(!isReadOnly);
+    tabWidget->widget(1)->setEnabled(!isReadOnly);
 
     if(trk.isTainted())
     {

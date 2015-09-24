@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -40,7 +40,8 @@
     </message>
     <message>
         <source>File with qmapshark configuration.</source>
-        <translation>Datei mit QMapShak Einstellungen.</translation>
+        <translatorcomment>??? qmapshack statt qmapshark im Ursprungstext, IMO</translatorcomment>
+        <translation type="vanished">Datei mit QMapShak Einstellungen.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="41"/>
@@ -242,23 +243,23 @@
     </message>
     <message>
         <source>Total Distance:</source>
-        <translation>Summe Entfernung:</translation>
+        <translation type="vanished">Summe Entfernung:</translation>
     </message>
     <message>
         <source>Total Ascend:</source>
-        <translation>Summe Anstieg:</translation>
+        <translation type="vanished">Summe Anstieg:</translation>
     </message>
     <message>
         <source>Total Descend:</source>
-        <translation>Summe Abstieg:</translation>
+        <translation type="vanished">Summe Abstieg:</translation>
     </message>
     <message>
         <source>Total Time:</source>
-        <translation>Summe Zeit:</translation>
+        <translation type="vanished">Summe Zeit:</translation>
     </message>
     <message>
         <source>Total Time Moving:</source>
-        <translation>Summe Zeit in Bewegung:</translation>
+        <translation type="vanished">Summe Zeit in Bewegung:</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="535"/>
@@ -348,39 +349,39 @@
         <translation>Track in Stücke teilen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="241"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="250"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="253"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="259"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="278"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="280"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="242"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="251"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="254"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="260"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="279"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="281"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="445"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="445"/>
         <source>Enter new track name.</source>
         <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="496"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="497"/>
         <source>Reset activities...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitäten zurücksetzen...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="496"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="497"/>
         <source>This will remove all activities from the track. Proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies wird alle Aktivitäten vom Track entfernen. Fortfahren?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="502"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="503"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
@@ -3260,12 +3261,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="405"/>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivität</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="450"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder wählen Sie einen Teil des Track aus und weisen diesem eine Aktivität zu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="477"/>
@@ -4467,7 +4468,7 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Keine oder schlechte Daten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1208"/>
+        <location filename="../plot/IPlot.cpp" line="1202"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
@@ -5077,7 +5078,7 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
         <source>Select an activity for the selected range.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie eine Aktivität für den ausgewählten Bereich.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="82"/>
@@ -5374,12 +5375,12 @@ sein</translation>
     <message>
         <location filename="../gis/trk/ISelectActivity.ui" line="14"/>
         <source>Activities...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitäten...</translation>
     </message>
     <message>
         <location filename="../gis/trk/ISelectActivity.ui" line="20"/>
         <source>Select one:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie eine aus:</translation>
     </message>
 </context>
 <context>
@@ -6207,12 +6208,12 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1860"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Aktivität wurde für den gesamten Track auf &apos;%1&apos; geändert.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1934"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Aktivität wurde für den Bereich (%2..%3) auf &apos;%1&apos; geändert.</translation>
     </message>
     <message>
         <source> slope: %1° (%2%)</source>
@@ -6773,84 +6774,84 @@ Turn: %1 Bearing: %2</source>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="28"/>
         <source>Foot</source>
-        <translation type="unfinished">Fußgänger</translation>
+        <translation>Fußgänger</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="35"/>
         <source>Bicycle</source>
-        <translation type="unfinished">Fahrrad</translation>
+        <translation>Fahrrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="42"/>
         <source>Motor Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="49"/>
         <source>Car</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
         <source>Cable Car</source>
-        <translation type="unfinished"></translation>
+        <translation>Seilbahn</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="63"/>
         <source>Swim</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwimmen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="70"/>
         <source>Ship</source>
-        <translation type="unfinished"></translation>
+        <translation>Schiff</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="77"/>
         <source>Aeronautik</source>
-        <translation type="unfinished"></translation>
+        <translation>Luftfahrt</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="207"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="251"/>
         <source>Distance:</source>
-        <translation type="unfinished">Entfernung:</translation>
+        <translation>Entfernung:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="209"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="273"/>
         <source>Ascend:</source>
-        <translation type="unfinished">Anstieg:</translation>
+        <translation>Anstieg:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="211"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="295"/>
         <source>Descend:</source>
-        <translation type="unfinished">Abstieg:</translation>
+        <translation>Abstieg:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="213"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="317"/>
         <source>Speed Moving:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschwindigkeit in Bewegung:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="215"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="339"/>
         <source>Speed Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschwindigkeit insgesamt:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="217"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="361"/>
         <source>Time Moving:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit in Bewegung:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="219"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="383"/>
         <source>Time Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit insgesamt:</translation>
     </message>
 </context>
 </TS>

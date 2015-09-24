@@ -110,11 +110,16 @@ public:
         QString iconSmall;
     };
 
-    static const desc_t actDescriptor[];
+    static const desc_t* getActivityDescriptors()
+    {
+        return actDescriptor;
+    }
 
 private:
     friend class CGisItemTrk;
     CActivityTrk(CGisItemTrk * trk);
+
+    static desc_t actDescriptor[];
 
     static activity_summary_t& getSummary(QVector<activity_summary_t> &summary, quint32 flag);
     static const activity_summary_t& getSummary(const QVector<activity_summary_t> &summary, quint32 flag);

@@ -50,9 +50,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     }
 
     int i = 0;
-    while(!CActivityTrk::actDescriptor[i].name.isEmpty())
+    const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
+    while(!actDesc[i].name.isEmpty())
     {
-        const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
+        const CActivityTrk::desc_t& desc = actDesc[i];
         QCheckBox * check = new QCheckBox(this);
         check->setText(desc.name);
         check->setIcon(QIcon(desc.iconLarge));
@@ -300,9 +301,10 @@ void CDetailsTrk::setupGui()
     quint32 flags = trk.getActivities().getAllFlags();
 
     int i = 0;
-    while(!CActivityTrk::actDescriptor[i].objName.isEmpty())
+    const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
+    while(!actDesc[i].objName.isEmpty())
     {
-        const CActivityTrk::desc_t& desc = CActivityTrk::actDescriptor[i];
+        const CActivityTrk::desc_t& desc = actDesc[i];
 
         QCheckBox * check = findChild<QCheckBox*>("check" + desc.objName);
         if(check)

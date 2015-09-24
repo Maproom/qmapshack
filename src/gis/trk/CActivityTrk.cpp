@@ -20,7 +20,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "units/IUnit.h"
 
-const CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
+CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
 {
     {
         "Foot"
@@ -92,6 +92,14 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     , allFlags(0)
     , activitySummary(CGisItemTrk::trkpt_t::eActMaxNum + 1)
 {
+    actDescriptor[0].name = QObject::tr("Foot");
+    actDescriptor[1].name = QObject::tr("Bicycle");
+    actDescriptor[2].name = QObject::tr("Motor Bike");
+    actDescriptor[3].name = QObject::tr("Car");
+    actDescriptor[4].name = QObject::tr("Cable Car");
+    actDescriptor[5].name = QObject::tr("Swim");
+    actDescriptor[6].name = QObject::tr("Ship");
+    actDescriptor[7].name = QObject::tr("Aeronautik");
 }
 
 CActivityTrk::~CActivityTrk()

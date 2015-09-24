@@ -1862,11 +1862,6 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
 
 void CGisItemTrk::setActivity()
 {
-    if(!setReadOnlyMode(false))
-    {
-        return;
-    }
-
     if((mouseRange1 == 0) && (mouseRange2 == 0))
     {
         return;
@@ -1878,6 +1873,11 @@ void CGisItemTrk::setActivity()
 
     CSelectActivity dlg(flag, name, icon, CMainWindow::getBestWidgetForParent());
     if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    if(!setReadOnlyMode(false))
     {
         return;
     }

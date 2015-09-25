@@ -132,6 +132,12 @@ void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, 
 {
     QString locale = QLocale::system().name();
 
+    QDir dir(translationPath);
+    if(!QFile::exists(dir.absoluteFilePath(translationPrefix + locale)))
+    {
+        locale = locale.left(2);
+    }
+
     if (qtTranslator->load(translationPrefix + locale, translationPath))
     {
         app->installTranslator(qtTranslator);
@@ -223,15 +229,12 @@ CAppSetupLinux::CAppSetupLinux()
 
 void CAppSetupLinux::prepareTranslators(QApplication* app)
 {
-    QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-    QString appResourceDir = QCoreApplication::applicationDirPath();
-
+    QString resourceDir     = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     QString translationPath = QCoreApplication::applicationDirPath();
     translationPath.replace(QRegExp("bin$"), "share/qmapshack/translations");
 
     QTranslator *qtTranslator = new QTranslator(app);
     prepareTranslator(app, qtTranslator, resourceDir, "qt_");
-    prepareTranslator(app, qtTranslator, appResourceDir, "qt_");
 
     QTranslator *qlandkartegtTranslator = new QTranslator(app);
     prepareTranslator(app, qlandkartegtTranslator, translationPath, "qmapshack_");

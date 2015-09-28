@@ -440,13 +440,14 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
         pointDP& x1 = line[seg.idx1];
         pointDP& x2 = line[seg.idx2];
 
+        qreal dmax = d;
         for(qint32 i = seg.idx1 + 1; i < seg.idx2; i++)
         {
             qreal distance = GPS_Math_distPointLine3D(x1, x2, line[i]);
-            if(distance > d)
+            if(distance > dmax)
             {
-                idx = i;
-                break;
+                idx  = i;
+                dmax = distance;
             }
         }
 

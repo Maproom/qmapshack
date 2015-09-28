@@ -51,10 +51,9 @@ inline double tile2lat(int y, int z)
 }
 
 CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatTileCache, parent)    
+    : IMap(eFeatVisibility|eFeatTileCache, parent)
     , minZoomLevel(1)
     , maxZoomLevel(21)
-    , mutex(QMutex::Recursive)
     , diskCache(0)
     , lastRequest(false)
 {
@@ -297,8 +296,6 @@ void CMapTMS::slotQueueChanged()
 
 void CMapTMS::slotRequestFinished(QNetworkReply* reply)
 {
-    QMutexLocker lock(&mutex);
-
     QString url = reply->url().toString();
     if(urlPending.contains(url))
     {

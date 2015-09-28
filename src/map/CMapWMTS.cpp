@@ -31,7 +31,6 @@
 
 CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility|eFeatTileCache, parent)
-    , mutex(QMutex::Recursive)
     , diskCache(0)
     , lastRequest(false)
 
@@ -400,8 +399,6 @@ void CMapWMTS::slotQueueChanged()
 
 void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
 {
-    QMutexLocker lock(&mutex);
-
     QString url = reply->url().toString();
     if(urlPending.contains(url))
     {

@@ -91,7 +91,6 @@ void CAppSetup::printToConsole(QtMsgType type, QString formatedMsg)
     case QtInfoMsg:
         std::cout << formatedMsg.toUtf8().constData() << std::endl;
         break;
-
 #endif
     case QtWarningMsg:
         std::cerr << formatedMsg.toUtf8().constData() << std::endl;
@@ -112,7 +111,11 @@ void CAppSetup::printToConsole(QtMsgType type, QString formatedMsg)
 
 void CAppSetup::consoleMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+#if QT_VERSION >= 0x050400
     QString txt = qFormatLogMessage(type, context, msg);
+#else
+    QString txt = msg;
+#endif
     CAppSetup::getPlattformInstance()->printToConsole(type, txt);
     CAppSetup::getPlattformInstance()->appendToFile(type, txt);
 }

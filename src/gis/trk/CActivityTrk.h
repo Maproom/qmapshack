@@ -53,13 +53,13 @@ public:
 
     /**
        @brief Update internal summary array
-    */
+     */
     void update();
 
     /**
        @brief Get sum of all flags seen in the track
        @return A 32 bit field with all available activity falgs set.
-    */
+     */
     quint32 getAllFlags() const
     {
         return allFlags;
@@ -68,20 +68,20 @@ public:
     /**
        @brief Convert internal summary to HTML table
        @param str   string to receive HTML
-    */
+     */
     void printSummary(QString& str) const;
 
     /**
        @brief Convert array of summaries to HTML table
        @param summary  The array of summaries
        @param str   string to receive HTML
-    */
+     */
     static void printSummary(const QVector<activity_summary_t> &summary, quint32 flags, QString& str);
 
     /**
        @brief Add internal summary to given array of summaries
        @param summary  an array of summaries to hold the sum
-    */
+     */
     void sumUp(QVector<activity_summary_t> &summary) const;
 
     struct activity_range_t

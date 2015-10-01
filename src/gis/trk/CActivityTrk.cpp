@@ -84,7 +84,6 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , ""
         , ""
     }
-
 };
 
 CActivityTrk::CActivityTrk(CGisItemTrk * trk)
@@ -153,7 +152,6 @@ void CActivityTrk::update()
                     const desc_t& desc = getDescriptor(lastFlag);
                     activity.name = desc.name;
                     activity.icon = desc.iconSmall;
-
                 }
 
                 startTrkpt  = &pt;

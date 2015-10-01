@@ -394,6 +394,48 @@ static void writeXml(QDomNode& xml, const QString& tag, const QPoint& offsetBubb
     elem.setAttribute("width", widthBubble);
 }
 
+static void readXml(const QDomNode& ext, QHash<QString, QVariant>& extensions)
+{
+    const QDomNodeList& list = ext.childNodes();
+    const int N = list.size();
+    for(int i = 0; i < N; i++)
+    {
+        const QDomNode& node = list.at(i);
+
+        if(!node.isElement())
+        {
+            continue;
+        }
+
+        const QString& tag = node.nodeName();
+        if(tag.left(3) != "ql:")
+        {
+            extensions[tag] = node.toElement().text();
+        }
+    }
+
+    extensions.squeeze();
+}
+
+static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
+{
+    if(extensions.isEmpty())
+    {
+        return;
+    }
+
+    QDomDocument doc = ext.ownerDocument();
+
+    QHashIterator<QString, QVariant> i(extensions);
+    while (i.hasNext())
+    {
+        i.next();
+        QDomElement elem = doc.createElement(i.key());
+        ext.appendChild(elem);
+        QDomText text = doc.createTextNode(i.value().toString());
+        elem.appendChild(text);
+    }
+}
 
 void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
 {
@@ -741,6 +783,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
             if(ext.isElement())
             {
                 readXml(ext, "ql:flags", trkpt.flags);
+                readXml(ext, trkpt.extensions);
             }
         }
     }
@@ -804,6 +847,7 @@ void CGisItemTrk::save(QDomNode& gpx)
             QDomElement xmlExt  = doc.createElement("extensions");
             xmlTrkpt.appendChild(xmlExt);
             writeXml(xmlExt, "ql:flags", pt.flags);
+            writeXml(xmlExt, pt.extensions);
         }
     }
 }

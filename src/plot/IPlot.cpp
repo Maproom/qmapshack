@@ -623,7 +623,7 @@ void IPlot::draw()
     p.setClipping(true);
     p.setClipRect(rectGraphArea);
     drawData(p);
-    p.setClipping(false);    
+    p.setClipping(false);
     drawLabels(p);
     if(showScale)
     {

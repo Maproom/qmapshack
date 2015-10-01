@@ -620,7 +620,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
 
-            // activity flags
+                          // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -660,6 +660,8 @@ public:
         qreal elapsedSecondsMoving;
         /// the key of an attached waypoint
         key_t keyWpt;
+
+        QHash<QString,QVariant> extensions;
     };
 
     struct trkseg_t

@@ -1844,7 +1844,7 @@ void CGisItemTrk::setColor(int idx)
 }
 
 void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& icon)
-{            
+{
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];

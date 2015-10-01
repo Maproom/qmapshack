@@ -91,6 +91,7 @@ void CAppSetup::printToConsole(QtMsgType type, QString formatedMsg)
     case QtInfoMsg:
         std::cout << formatedMsg.toUtf8().constData() << std::endl;
         break;
+
 #endif
     case QtWarningMsg:
         std::cerr << formatedMsg.toUtf8().constData() << std::endl;

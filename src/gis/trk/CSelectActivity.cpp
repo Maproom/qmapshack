@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CSelectActivity.h"
-#include "gis/trk/CActivityTrk.h"
 
 #include <QtWidgets>
 
@@ -52,7 +52,6 @@ CSelectActivity::CSelectActivity(quint32 &flag, QString &name, QString &icon, QW
     }
 
     l->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
-
 }
 
 CSelectActivity::~CSelectActivity()

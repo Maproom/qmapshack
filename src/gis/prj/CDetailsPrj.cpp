@@ -359,8 +359,6 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
 
 
     cursor1.insertHtml(str);
-
-
 }
 
 

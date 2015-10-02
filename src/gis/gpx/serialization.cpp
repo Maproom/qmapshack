@@ -394,24 +394,39 @@ static void writeXml(QDomNode& xml, const QString& tag, const QPoint& offsetBubb
     elem.setAttribute("width", widthBubble);
 }
 
+
+static void readXml(const QDomNode& node, const QString& parentTags, QHash<QString, QVariant>& extensions)
+{
+    QString tag = node.nodeName();
+    if(tag.left(3) == "ql:")
+    {
+        return;
+    }
+
+    QString tags = parentTags.isEmpty() ? tag : parentTags + "|" + tag;
+    const QDomNode& next = node.firstChild();
+    if(next.isText())
+    {
+        extensions[tags] = node.toElement().text();
+    }
+    else
+    {
+        const QDomNodeList& list = node.childNodes();
+        const int N = list.size();
+        for(int i = 0; i < N; i++)
+        {
+            readXml(list.at(i), tags, extensions);
+        }
+    }
+}
+
 static void readXml(const QDomNode& ext, QHash<QString, QVariant>& extensions)
 {
     const QDomNodeList& list = ext.childNodes();
     const int N = list.size();
     for(int i = 0; i < N; i++)
     {
-        const QDomNode& node = list.at(i);
-
-        if(!node.isElement())
-        {
-            continue;
-        }
-
-        const QString& tag = node.nodeName();
-        if(tag.left(3) != "ql:")
-        {
-            extensions[tag] = node.toElement().text();
-        }
+        readXml(list.at(i), "", extensions);
     }
 
     extensions.squeeze();
@@ -430,10 +445,42 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
     while (i.hasNext())
     {
         i.next();
-        QDomElement elem = doc.createElement(i.key());
-        ext.appendChild(elem);
-        QDomText text = doc.createTextNode(i.value().toString());
-        elem.appendChild(text);
+
+        QStringList tags = i.key().split('|', QString::SkipEmptyParts);
+
+        if(tags.size() == 1)
+        {
+            QDomElement elem = doc.createElement(tags.first());
+            ext.appendChild(elem);
+            QDomText text = doc.createTextNode(i.value().toString());
+            elem.appendChild(text);
+        }
+        else
+        {
+            QDomNode node = ext;
+
+            QString lastTag = tags.last();
+            tags.pop_back();
+            foreach(const QString& tag, tags)
+            {
+                QDomNode child = node.firstChildElement(tag);
+                if(child.isNull())
+                {
+                    QDomElement elem = doc.createElement(tags.first());
+                    node.appendChild(elem);
+                    node = elem;
+                }
+                else
+                {
+                    node = child;
+                }
+            }
+            QDomElement elem = doc.createElement(lastTag);
+            node.appendChild(elem);
+
+            QDomText text = doc.createTextNode(i.value().toString());
+            elem.appendChild(text);
+        }
     }
 }
 

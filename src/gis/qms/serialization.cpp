@@ -32,7 +32,7 @@
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)
 #define VER_TRKSEG      quint8(1)
-#define VER_TRKPT       quint8(1)
+#define VER_TRKPT       quint8(2)
 #define VER_RTEPT       quint8(2)
 #define VER_RTESUBPT    quint8(1)
 #define VER_WPT_T       quint8(1)
@@ -339,6 +339,7 @@ QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkpt_t& pt)
 {
     stream << VER_TRKPT << pt.flags;
     stream << (const IGisItem::wpt_t&)pt;
+    stream << pt.extensions;
     return stream;
 }
 
@@ -347,6 +348,10 @@ QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkpt_t& pt)
     quint8 version;
     stream >> version >> pt.flags;
     stream >> (IGisItem::wpt_t&)pt;
+    if(version > 1)
+    {
+        stream >> pt.extensions;
+    }
     return stream;
 }
 

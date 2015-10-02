@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "canvas/IDrawContext.h"
+#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "plot/ITrack.h"
 

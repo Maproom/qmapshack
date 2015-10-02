@@ -461,7 +461,7 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
 
             QString lastTag = tags.last();
             tags.pop_back();
-            foreach(const QString& tag, tags)
+            foreach(const QString &tag, tags)
             {
                 QDomNode child = node.firstChildElement(tag);
                 if(child.isNull())

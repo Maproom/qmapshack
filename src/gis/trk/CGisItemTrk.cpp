@@ -633,6 +633,14 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
         str += QObject::tr(" speed: %1%2").arg(val1).arg(unit1);
     }
 
+    QHashIterator<QString, QVariant> i(pt.extensions);
+    while (i.hasNext())
+    {
+        i.next();
+        QStringList tags = i.key().split("|");
+        str += "\n" + tags.last() + ": " + i.value().toString();
+    }
+
     return str;
 }
 

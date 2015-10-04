@@ -49,7 +49,7 @@ const IGisItem::color_t IGisItem::colorMap[] =
     ,{"DarkBlue",    QColor(Qt::darkBlue)}
     ,{"DarkMagenta", QColor(Qt::darkMagenta)}
     ,{"DarkCyan",    QColor(Qt::darkCyan)}
-    ,{"LightGray",   QColor(Qt::gray)}
+    ,{"Gray",        QColor(Qt::gray)}
     ,{"DarkGray",    QColor(Qt::darkGray)}
     ,{"Red",         QColor(Qt::red)}
     ,{"Green",       QColor(Qt::green)}
@@ -477,18 +477,17 @@ const QString& IGisItem::getHash()
 
 QColor IGisItem::str2color(const QString& name)
 {
-    QColor ref(name);
     const color_t * p = colorMap;
     while(p->name)
     {
-        if((p->name == name) || (ref == p->color))
+        if(QString(p->name).toUpper() == name.toUpper())
         {
             return p->color;
         }
         p++;
     }
 
-    return QColor();
+    return QColor(name);
 }
 
 QString IGisItem::color2str(const QColor& color)

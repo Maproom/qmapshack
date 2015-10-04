@@ -77,6 +77,10 @@ static QString unifyColor(const QString& color)
     {
         return "Red";
     }
+    else if(QColor(color) == Qt::green)
+    {
+        return "Green";
+    }
     else if(QColor(color) == Qt::yellow)
     {
         return "Yellow";

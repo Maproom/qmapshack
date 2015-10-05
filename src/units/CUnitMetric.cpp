@@ -16,7 +16,7 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111 USA
 
 **********************************************************************************************/
-#include "CUnitMetric.h"
+#include "units/CUnitMetric.h"
 
 CUnitMetric::CUnitMetric(QObject * parent)
     : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent)

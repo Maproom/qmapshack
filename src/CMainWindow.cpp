@@ -18,7 +18,6 @@
 
 #include "CAbout.h"
 #include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "config.h"
 #include "dem/CDemDraw.h"
@@ -570,7 +569,7 @@ void CMainWindow::slotCurrentTabDem(int i)
 void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
 {
     QString str;
-    GPS_Math_Deg_To_Str(pos.x(), pos.y(), str);
+    IUnit::degToStr(pos.x(), pos.y(), str);
     lblPosWGS84->setText(str);
 
     if(ele != NOFLOAT)

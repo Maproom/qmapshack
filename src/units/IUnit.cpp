@@ -16,9 +16,11 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111 USA
 
 **********************************************************************************************/
-#include "CUnitImperial.h"
-#include "CUnitMetric.h"
-#include "CUnitNautic.h"
+#include "CMainWindow.h"
+#include "GeoMath.h"
+#include "units/CUnitImperial.h"
+#include "units/CUnitMetric.h"
+#include "units/CUnitNautic.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -418,6 +420,16 @@ const char * IUnit::tblTimezone[] =
 
 const int N_TIMEZONES = sizeof(IUnit::tblTimezone)/sizeof(const char*);
 
+QRegExp IUnit::reCoord1("^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W|O]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$");
+
+QRegExp IUnit::reCoord2("^\\s*([N|S]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s+([E|W|O]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s*$");
+
+QRegExp IUnit::reCoord3("^\\s*([-0-9]+\\.[0-9]+)\\s+([-0-9]+\\.[0-9]+)\\s*$");
+
+QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+)\\W*([E|W|O]){1}\\W*([0-9]+)\\W+([0-9]+)\\W+([0-9]+)\\W*\\s*$");
+
+QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
+
 
 IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
     : QObject(parent)
@@ -612,4 +624,125 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
     }
 
     return tblTimezone[tz];
+}
+
+void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
+{
+    qint32 degN,degE;
+    qreal minN,minE;
+
+    bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
+
+    bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
+
+    QString lat,lng;
+    lat = signLat ? "S" : "N";
+    lng = signLon ? "W" : "E";
+    str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
+}
+
+bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat)
+{
+    if(reCoord2.exactMatch(str))
+    {
+        bool signLat    = reCoord2.cap(1) == "S";
+        qreal absLat    = reCoord2.cap(2).toDouble();
+        lat = signLat ? -absLat : absLat;
+
+        bool signLon    = reCoord2.cap(3) == "W";
+        qreal absLon    = reCoord2.cap(4).toDouble();
+        lon = signLon ? -absLon : absLon;
+    }
+    else if(reCoord1.exactMatch(str))
+    {
+        bool signLat    = reCoord1.cap(1) == "S";
+        int degLat      = reCoord1.cap(2).toInt();
+        qreal minLat    = reCoord1.cap(3).toDouble();
+
+        GPS_Math_DegMin_To_Deg(signLat, degLat, minLat, lat);
+
+        bool signLon    = reCoord1.cap(4) == "W";
+        int degLon      = reCoord1.cap(5).toInt();
+        qreal minLon    = reCoord1.cap(6).toDouble();
+
+        GPS_Math_DegMin_To_Deg(signLon, degLon, minLon, lon);
+    }
+    else if(reCoord3.exactMatch(str))
+    {
+        lat             = reCoord3.cap(1).toDouble();
+        lon             = reCoord3.cap(2).toDouble();
+    }
+    else if(reCoord4.exactMatch(str))
+    {
+        bool signLat    = reCoord4.cap(1) == "S";
+        int degLat    = reCoord4.cap(2).toInt();
+        int minLat    = reCoord4.cap(3).toInt();
+        int secLat    = reCoord4.cap(4).toInt();
+
+        GPS_Math_DegMinSec_To_Deg(signLat, degLat, minLat, secLat, lat);
+
+        bool signLon    = reCoord4.cap(5) == "W";
+        int degLon    = reCoord4.cap(6).toInt();
+        int minLon    = reCoord4.cap(7).toInt();
+        int secLon    = reCoord4.cap(8).toInt();
+
+        GPS_Math_DegMinSec_To_Deg(signLon, degLon, minLon, secLon, lon);
+    }
+    else if(reCoord5.exactMatch(str))
+    {
+        bool signLon    = reCoord4.cap(4) == "W";
+        bool signLat    = reCoord4.cap(2) == "S";
+        lat             = reCoord5.cap(1).toDouble();
+        lon             = reCoord5.cap(3).toDouble();
+
+        if(signLon)
+        {
+            lon = -lon;
+        }
+        if(signLat)
+        {
+            lat = -lat;
+        }
+    }
+    else
+    {
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),QObject::tr("Error"),QObject::tr("Bad position format. Must be: \"[N|S] ddd mm.sss [W|E] ddd mm.sss\" or \"[N|S] ddd.ddd [W|E] ddd.ddd\""),QMessageBox::Ok,QMessageBox::NoButton);
+        return false;
+    }
+
+    if(fabs(lon) > 180.0 || fabs(lat) > 90.0)
+    {
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),QObject::tr("Error"),QObject::tr("Position values out of bounds. "),QMessageBox::Ok,QMessageBox::NoButton);
+        return false;
+    }
+
+    return true;
+}
+
+bool IUnit::isValidCoordString(const QString& str)
+{
+    if(reCoord1.exactMatch(str))
+    {
+        return true;
+    }
+    else if(reCoord2.exactMatch(str))
+    {
+        return true;
+    }
+    else if(reCoord3.exactMatch(str))
+    {
+        return true;
+    }
+    else if(reCoord4.exactMatch(str))
+    {
+        return true;
+    }
+    else if(reCoord5.exactMatch(str))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

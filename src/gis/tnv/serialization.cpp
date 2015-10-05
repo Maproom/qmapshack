@@ -507,7 +507,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
 
             QString lat = values[2].replace(QChar(186),"").replace(QChar(-3),"");
             QString lon = values[3].replace(QChar(186),"").replace(QChar(-3),"");
-            GPS_Math_Str_To_Deg(lat + " " + lon, pt.lon, pt.lat);
+            IUnit::strToDeg(lat + " " + lon, pt.lon, pt.lat);
 
             pt.time = readCompeTime(values[4] + " " + values[5], true);
             pt.ele = values[7].toFloat();
@@ -706,7 +706,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             QString lat = values[3].replace(QChar(186),"").replace(QChar(-3),"");
             QString lon = values[4].replace(QChar(186),"").replace(QChar(-3),"");
-            GPS_Math_Str_To_Deg(lat + " " + lon, wpt.lon, wpt.lat);
+            IUnit::strToDeg(lat + " " + lon, wpt.lon, wpt.lat);
 
             wpt.time = readCompeTime(values[5] + " " + values[6], false);
             wpt.ele  = values[7].toFloat();

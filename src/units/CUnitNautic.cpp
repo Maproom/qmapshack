@@ -17,7 +17,7 @@
 
 **********************************************************************************************/
 
-#include "CUnitNautic.h"
+#include "units/CUnitNautic.h"
 
 CUnitNautic::CUnitNautic(QObject * parent)
     : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, parent)

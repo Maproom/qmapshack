@@ -100,6 +100,24 @@ public:
         timeZoneMode = mode; timeZone = zone; useShortFormat = format;
     }
 
+    enum coord_format_e
+    {
+        eCoordFormat1
+        ,eCoordFormat2
+        ,eCoordFormat3
+    };
+
+    static void getCoordFormat(coord_format_e& format)
+    {
+        format = coordFormat;
+    }
+
+    static void setCoordFormat(const coord_format_e format)
+    {
+        coordFormat = format;
+    }
+
+
     static void degToStr(const qreal& x, const qreal& y, QString& str);
 
     static bool strToDeg(const QString& str, qreal& lon, qreal& lat);
@@ -121,6 +139,7 @@ protected:
     static QByteArray timeZone;
     static bool useShortFormat;
 
+    static coord_format_e coordFormat;
 
 private:
     static IUnit * m_self;

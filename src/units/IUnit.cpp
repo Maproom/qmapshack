@@ -430,6 +430,7 @@ QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+)\\W*
 
 QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
 
+IUnit::coord_format_e IUnit::coordFormat = IUnit::eCoordFormat1;
 
 IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
     : QObject(parent)
@@ -628,17 +629,50 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
 
 void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 {
-    qint32 degN,degE;
-    qreal minN,minE;
+    switch(coordFormat)
+    {
+    case eCoordFormat1:
+    {
+        qint32 degN,degE;
+        qreal minN,minE;
 
-    bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
+        bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
+        bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
 
-    bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
+        QString lat,lng;
+        lat = signLat ? "S" : "N";
+        lng = signLon ? "W" : "E";
+        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
+        break;
+    }
 
-    QString lat,lng;
-    lat = signLat ? "S" : "N";
-    lng = signLon ? "W" : "E";
-    str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
+    case eCoordFormat2:
+    {
+        bool signLat = y < 0;
+        bool signLon = x < 0;
+
+        QString lat,lng;
+        lat = signLat ? "S" : "N";
+        lng = signLon ? "W" : "E";
+        str.sprintf("%s%02.6f° %s%03.6f°",lat.toUtf8().data(),qAbs(y),lng.toUtf8().data(),qAbs(x));
+        break;
+    }
+
+    case eCoordFormat3:
+    {
+        qint32 degN,degE;
+        qreal minN,minE;
+
+        bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
+        bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
+
+        QString lat,lng;
+        lat = signLat ? "S" : "N";
+        lng = signLon ? "W" : "E";
+        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
+        break;
+    }
+    }
 }
 
 bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat)

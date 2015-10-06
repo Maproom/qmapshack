@@ -101,6 +101,7 @@ private slots:
     void slotSetupTimeZone();
     void slotSetupUnits();
     void slotSetupWorkspace();
+    void slotSetupCoordFormat();
     void slotImportDatabase();
     void slotLoadGISData();
     void slotBuildVrt();

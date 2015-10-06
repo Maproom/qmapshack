@@ -60,7 +60,7 @@ struct segment_t
 };
 
 extern void     GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg);
-extern void     GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, const int32_t s, qreal& deg);
+extern void     GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal& deg);
 extern bool     GPS_Math_Deg_To_DegMin(qreal v, qint32 *d, qreal *m);
 /// use for long distances
 extern qreal    GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2, qreal& a1, qreal& a2);

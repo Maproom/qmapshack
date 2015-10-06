@@ -426,7 +426,7 @@ QRegExp IUnit::reCoord2("^\\s*([N|S]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s+([E|W|O]){1
 
 QRegExp IUnit::reCoord3("^\\s*([-0-9]+\\.[0-9]+)\\s+([-0-9]+\\.[0-9]+)\\s*$");
 
-QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+)\\W*([E|W|O]){1}\\W*([0-9]+)\\W+([0-9]+)\\W+([0-9]+)\\W*\\s*$");
+QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*([E|W|O]){1}\\W*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*\\s*$");
 
 QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
 
@@ -666,10 +666,13 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
         bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
         bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
 
+        qreal secN = (minN - qFloor(minN)) * 60;
+        qreal secE = (minE - qFloor(minE)) * 60;
+
         QString lat,lng;
         lat = signLat ? "S" : "N";
         lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
+        str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''",lat.toUtf8().data(),qAbs(degN),qFloor(minN),secN,lng.toUtf8().data(),qAbs(degE),qFloor(minE),secE);
         break;
     }
     }
@@ -709,16 +712,16 @@ bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat)
     else if(reCoord4.exactMatch(str))
     {
         bool signLat    = reCoord4.cap(1) == "S";
-        int degLat    = reCoord4.cap(2).toInt();
-        int minLat    = reCoord4.cap(3).toInt();
-        int secLat    = reCoord4.cap(4).toInt();
+        int degLat      = reCoord4.cap(2).toInt();
+        int minLat      = reCoord4.cap(3).toInt();
+        qreal secLat    = reCoord4.cap(4).toFloat();
 
         GPS_Math_DegMinSec_To_Deg(signLat, degLat, minLat, secLat, lat);
 
         bool signLon    = reCoord4.cap(5) == "W";
-        int degLon    = reCoord4.cap(6).toInt();
-        int minLon    = reCoord4.cap(7).toInt();
-        int secLon    = reCoord4.cap(8).toInt();
+        int degLon      = reCoord4.cap(6).toInt();
+        int minLon      = reCoord4.cap(7).toInt();
+        qreal secLon    = reCoord4.cap(8).toFloat();
 
         GPS_Math_DegMinSec_To_Deg(signLon, degLon, minLon, secLon, lon);
     }

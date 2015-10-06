@@ -38,9 +38,9 @@ segment_t::segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX)
 }
 
 
-void GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, const int32_t s, qreal &deg)
+void GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal &deg)
 {
-    deg = qAbs(d) + qreal(m) / 60.0 + qreal(s) / 3600;
+    deg = qAbs(d) + qreal(m) / 60.0 + s / 3600;
     if(sign)
     {
         deg = -deg;

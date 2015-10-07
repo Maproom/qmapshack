@@ -48,7 +48,7 @@ CCoordFormatSetup::~CCoordFormatSetup()
 
 void CCoordFormatSetup::accept()
 {
-    IUnit::coord_format_e coordFormat;
+    IUnit::coord_format_e coordFormat = IUnit::eCoordFormat1;
 
     if(radioFormat1->isChecked())
     {

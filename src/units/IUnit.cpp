@@ -30,6 +30,7 @@ const QPointF NOPOINTF(NOFLOAT, NOFLOAT);
 const QPoint NOPOINT (NOINT, NOINT);
 
 IUnit::tz_mode_e IUnit::timeZoneMode = IUnit::eTZUtc;
+IUnit::coord_format_e IUnit::coordFormat = IUnit::eCoordFormat1;
 QByteArray IUnit::timeZone = "UTC";
 bool IUnit::useShortFormat = false;
 
@@ -429,8 +430,6 @@ QRegExp IUnit::reCoord3("^\\s*([-0-9]+\\.[0-9]+)\\s+([-0-9]+\\.[0-9]+)\\s*$");
 QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*([E|W|O]){1}\\W*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*\\s*$");
 
 QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
-
-IUnit::coord_format_e IUnit::coordFormat = IUnit::eCoordFormat1;
 
 IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
     : QObject(parent)

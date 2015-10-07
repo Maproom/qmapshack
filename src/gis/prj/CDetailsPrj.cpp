@@ -142,6 +142,17 @@ void CDetailsPrj::slotSetupGui()
     textDesc->document()->setTextWidth(textDesc->size().width() - 20);
     draw(*textDesc->document(), false);
 
+    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : 0);
+    if(tabWidget)
+    {
+        int idx = tabWidget->indexOf(this);
+        if(idx != NOIDX)
+        {
+            setObjectName(prj.getName());
+            tabWidget->setTabText(idx, prj.getName());
+        }
+    }
+
     mutex.unlock();
 }
 

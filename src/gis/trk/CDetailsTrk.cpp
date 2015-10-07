@@ -332,6 +332,17 @@ void CDetailsTrk::setupGui()
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
 
+    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : 0);
+    if(tabWidget)
+    {
+        int idx = tabWidget->indexOf(this);
+        if(idx != NOIDX)
+        {
+            setObjectName(trk.getName());
+            tabWidget->setTabText(idx, trk.getName());
+        }
+    }
+
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::setupGui");
 }

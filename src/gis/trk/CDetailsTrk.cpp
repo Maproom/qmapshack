@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
@@ -282,7 +281,7 @@ void CDetailsTrk::setupGui()
             item->setText(eColDescend, tr("%1 %2").arg(val).arg(unit));
 
             // position
-            GPS_Math_Deg_To_Str(trkpt.lon, trkpt.lat, str);
+            IUnit::degToStr(trkpt.lon, trkpt.lat, str);
             item->setText(eColPosition,str);
 
             items << item;
@@ -332,6 +331,17 @@ void CDetailsTrk::setupGui()
 
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
+
+    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : 0);
+    if(tabWidget)
+    {
+        int idx = tabWidget->indexOf(this);
+        if(idx != NOIDX)
+        {
+            setObjectName(trk.getName());
+            tabWidget->setTabText(idx, trk.getName());
+        }
+    }
 
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::setupGui");

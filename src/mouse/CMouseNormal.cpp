@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
@@ -393,7 +392,7 @@ void CMouseNormal::slotCopyPosition()
     gis->convertPx2Rad(pt);
 
     QString position;
-    GPS_Math_Deg_To_Str(pt.x() * RAD_TO_DEG, pt.y() * RAD_TO_DEG, position);
+    IUnit::degToStr(pt.x() * RAD_TO_DEG, pt.y() * RAD_TO_DEG, position);
 
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(position);

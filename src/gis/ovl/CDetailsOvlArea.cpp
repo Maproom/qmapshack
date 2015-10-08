@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CLinksDialog.h"
@@ -231,7 +230,7 @@ void CDetailsOvlArea::setupGui()
         item->setText(eColNum,QString::number(idx++));
 
         // position
-        GPS_Math_Deg_To_Str(pt.lon, pt.lat, str);
+        IUnit::degToStr(pt.lon, pt.lat, str);
         item->setText(eColPosition,str);
         items << item;
     }

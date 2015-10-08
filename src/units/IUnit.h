@@ -46,14 +46,20 @@ public:
     virtual void meter2distance(qreal meter, QString& val, QString& unit) = 0;
     /// convert meter per second to a speed value string and unit label
     virtual void meter2speed(qreal meter, QString& val, QString& unit);
+    /// convert square meter to string and unit label
     virtual void meter2area(qreal meter, QString& val, QString& unit) = 0;
+    /// convert seconds to a timespan of days, hours, minutes and seconds
     virtual void seconds2time(quint32 ttime, QString& val, QString& unit);
+
+    /// convert an elevation string to a float
     virtual qreal elevation2meter(const QString& val) = 0;
 
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
+    /// instantiate the correct unit object
     static void setUnitType(type_e t, QObject *parent);
 
+    /// parse a string for a timestamp
     static bool parseTimestamp(const QString &time, QDateTime &datetime);
 
     /**
@@ -67,6 +73,7 @@ public:
      */
     static QString datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos = NOPOINTF);
 
+    /// find the timezone setup by position
     static QByteArray pos2timezone(const QPointF& pos);
 
     const type_e type;
@@ -93,6 +100,36 @@ public:
         timeZoneMode = mode; timeZone = zone; useShortFormat = format;
     }
 
+    enum coord_format_e
+    {
+        eCoordFormat1
+        ,eCoordFormat2
+        ,eCoordFormat3
+    };
+
+    static void getCoordFormat(coord_format_e& format)
+    {
+        format = coordFormat;
+    }
+
+    static void setCoordFormat(const coord_format_e format)
+    {
+        coordFormat = format;
+    }
+
+
+    static void degToStr(const qreal& x, const qreal& y, QString& str);
+
+    static bool strToDeg(const QString& str, qreal& lon, qreal& lat);
+
+    static bool isValidCoordString(const QString& str);
+
+    static QRegExp reCoord1;
+    static QRegExp reCoord2;
+    static QRegExp reCoord3;
+    static QRegExp reCoord4;
+    static QRegExp reCoord5;
+
 protected:
     IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent);
 
@@ -102,6 +139,7 @@ protected:
     static QByteArray timeZone;
     static bool useShortFormat;
 
+    static coord_format_e coordFormat;
 
 private:
     static IUnit * m_self;

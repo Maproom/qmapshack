@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,32 +16,22 @@
 
 **********************************************************************************************/
 
-#ifndef CPOSITIONDIALOG_H
-#define CPOSITIONDIALOG_H
+#ifndef CCOORDFORMATSETUP_H
+#define CCOORDFORMATSETUP_H
 
-#include "ui_IPositionDialog.h"
+#include "ui_ICoordFormatSetup.h"
 #include <QDialog>
 
-class QPointF;
-
-class CPositionDialog : public QDialog, private Ui::IPositionDialog
+class CCoordFormatSetup : public QDialog, private Ui::ICoordFormatSetup
 {
     Q_OBJECT
 public:
-    CPositionDialog(QWidget * parent, QPointF &pos);
-    virtual ~CPositionDialog();
-
-    static bool getPosition(QPointF& pt, const QString &str);
+    CCoordFormatSetup(QWidget * parent);
+    virtual ~CCoordFormatSetup();
 
 public slots:
     void accept();
-
-private slots:
-    void slotEdit(const QString& str);
-
-private:
-    QPointF& pos;
 };
 
-#endif //CPOSITIONDIALOG_H
+#endif //CCOORDFORMATSETUP_H
 

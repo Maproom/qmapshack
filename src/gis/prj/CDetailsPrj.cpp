@@ -116,22 +116,42 @@ void CDetailsPrj::slotSetupGui()
     }
     comboSort->blockSignals(false);
 
-    toolLock->blockSignals(true);
-    toolLock->setChecked(true);
+    toolLock->blockSignals(true);    
     const int N = prj.childCount();
-    for(int n = 0; n < N; n++)
+    if(N == 0)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(prj.child(n));
-        if(item && !item->isReadOnly())
+        toolLock->setChecked(false);
+        toolLock->setEnabled(false);
+    }
+    else
+    {
+        toolLock->setChecked(true);
+        toolLock->setEnabled(true);
+        for(int n = 0; n < N; n++)
         {
-            toolLock->setChecked(false);
-            break;
+            IGisItem * item = dynamic_cast<IGisItem*>(prj.child(n));
+            if(item && !item->isReadOnly())
+            {
+                toolLock->setChecked(false);
+                break;
+            }
         }
     }
     toolLock->blockSignals(false);
 
     textDesc->document()->setTextWidth(textDesc->size().width() - 20);
     draw(*textDesc->document(), false);
+
+    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : 0);
+    if(tabWidget)
+    {
+        int idx = tabWidget->indexOf(this);
+        if(idx != NOIDX)
+        {
+            setObjectName(prj.getName());
+            tabWidget->setTabText(idx, prj.getName());
+        }
+    }
 
     mutex.unlock();
 }

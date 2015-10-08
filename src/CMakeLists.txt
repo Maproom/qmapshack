@@ -94,6 +94,7 @@ set( SRCS
     units/CUnitNautic.cpp
     units/CTimeZoneSetup.cpp
     units/CUnitsSetup.cpp
+    units/CCoordFormatSetup.cpp
     grid/CGrid.cpp
     grid/CGridSetup.cpp
     grid/CProjWizard.cpp
@@ -306,6 +307,7 @@ set( HDRS
     units/CUnitNautic.h
     units/CTimeZoneSetup.h
     units/CUnitsSetup.h
+    units/CCoordFormatSetup.h
     grid/CGrid.h
     grid/CGridSetup.h
     grid/CProjWizard.h
@@ -507,6 +509,7 @@ set( UIS
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
     units/IUnitsSetup.ui
+    units/ICoordFormatSetup.ui
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui

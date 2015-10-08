@@ -59,10 +59,9 @@ struct segment_t
     QPointF px2;
 };
 
-extern void     GPS_Math_Deg_To_Str(const qreal& x, const qreal& y, QString& str);
-extern bool     GPS_Math_Str_To_Deg(const QString& str, qreal& lon, qreal& lat);
 extern void     GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg);
-extern void     GPS_Math_DegMinSec_To_Deg(bool sign, const int32_t d, const int32_t m, const int32_t s, qreal& deg);
+extern void     GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal& deg);
+extern bool     GPS_Math_Deg_To_DegMin(qreal v, qint32 *d, qreal *m);
 /// use for long distances
 extern qreal    GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2, qreal& a1, qreal& a2);
 extern qreal    GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2);
@@ -74,5 +73,6 @@ extern QPointF  GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qrea
 extern bool     GPS_Math_LineCrossesRect(const QPointF& p1, const QPointF& p2, const QRectF& rect);
 extern void     GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t& result);
 extern qreal    GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q);
+
 #endif                           //GEOMATH_H
 

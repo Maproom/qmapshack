@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CGisItemWpt.h"
 
@@ -39,7 +38,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     QString val, unit;
     QString strPos;
     QPointF pos = wpt.getPosition();
-    GPS_Math_Deg_To_Str(pos.x(), pos.y(), strPos);
+    IUnit::degToStr(pos.x(), pos.y(), strPos);
 
     const CGisItemWpt::geocache_t& geocache = wpt.getGeoCache();
 

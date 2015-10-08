@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "inttypes.h"
 #include "map/CMapDraw.h"
@@ -159,8 +158,8 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
     qDebug() << hex << "Signature:" <<  hdr.signature << "Offset:" <<  hdr.signature_offset;
 
     QString strTopLeft, strBottomRight;
-    GPS_Math_Deg_To_Str(mapFile.lon1, mapFile.lat1, strTopLeft);
-    GPS_Math_Deg_To_Str(mapFile.lon2, mapFile.lat2, strBottomRight);
+    IUnit::degToStr(mapFile.lon1, mapFile.lat1, strTopLeft);
+    IUnit::degToStr(mapFile.lon2, mapFile.lat2, strBottomRight);
 
     qDebug() << "Levels:";
     mapFile.levels.resize(hdr.details);

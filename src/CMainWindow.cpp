@@ -18,7 +18,6 @@
 
 #include "CAbout.h"
 #include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "config.h"
 #include "dem/CDemDraw.h"
@@ -35,6 +34,7 @@
 #include "tool/CImportDatabase.h"
 #include "tool/CMapVrtBuilder.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
+#include "units/CCoordFormatSetup.h"
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
@@ -105,6 +105,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
     connect(actionSetupUnits, SIGNAL(triggered()), this, SLOT(slotSetupUnits()));
     connect(actionSetupWorkspace, SIGNAL(triggered()), this, SLOT(slotSetupWorkspace()));
+    connect(actionSetupCoordFormat, SIGNAL(triggered(bool)), this, SLOT(slotSetupCoordFormat()));
     connect(actionImportDatabase, SIGNAL(triggered()), this, SLOT(slotImportDatabase()));
     connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
     connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
@@ -166,6 +167,10 @@ CMainWindow::CMainWindow()
     useShortFormat = cfg.value("Units/time/useShortFormat", false).toBool();
 
     IUnit::setTimeZoneSetup(tzmode, tz, useShortFormat);
+
+    IUnit::coord_format_e coordFormat;
+    coordFormat = (IUnit::coord_format_e)cfg.value("Units/coordFormat", IUnit::eCoordFormat1).toInt();
+    IUnit::setCoordFormat(coordFormat);
 
 
     QStatusBar * status = statusBar();
@@ -263,6 +268,10 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/timezone", tz);
     cfg.setValue("Units/timezone/mode", tzmode);
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
+
+    IUnit::coord_format_e coordFormat;
+    IUnit::getCoordFormat(coordFormat);
+    cfg.setValue("Units/coordFormat", coordFormat);
 }
 
 QWidget * CMainWindow::getBestWidgetForParent()
@@ -570,7 +579,7 @@ void CMainWindow::slotCurrentTabDem(int i)
 void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
 {
     QString str;
-    GPS_Math_Deg_To_Str(pos.x(), pos.y(), str);
+    IUnit::degToStr(pos.x(), pos.y(), str);
     lblPosWGS84->setText(str);
 
     if(ele != NOFLOAT)
@@ -680,6 +689,12 @@ void CMainWindow::slotSetupUnits()
 void CMainWindow::slotSetupWorkspace()
 {
     CSetupWorkspace dlg(this);
+    dlg.exec();
+}
+
+void CMainWindow::slotSetupCoordFormat()
+{
+    CCoordFormatSetup dlg(this);
     dlg.exec();
 }
 

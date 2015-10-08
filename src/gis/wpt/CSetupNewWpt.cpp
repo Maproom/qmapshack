@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "gis/WptIcons.h"
 #include "gis/wpt/CSetupNewWpt.h"
 #include "helpers/CPositionDialog.h"
@@ -39,7 +38,7 @@ CSetupNewWpt::CSetupNewWpt(QPointF &pt, QString &icon, QString &name, QWidget *p
     toolIcon->setIcon(getWptIconByName(icon, focus));
 
     QString pos;
-    GPS_Math_Deg_To_Str(pt.x(), pt.y(), pos);
+    IUnit::degToStr(pt.x(), pt.y(), pos);
     linePosition->setText(pos);
     labelWarning->hide();
 
@@ -59,11 +58,13 @@ CSetupNewWpt::~CSetupNewWpt()
 
 void CSetupNewWpt::accept()
 {
-    CPositionDialog::getPosition(pt, linePosition->text());
-    icon = toolIcon->objectName();
-    name = lineName->text();
+    if(CPositionDialog::getPosition(pt, linePosition->text()))
+    {
+        icon = toolIcon->objectName();
+        name = lineName->text();
 
-    QDialog::accept();
+        QDialog::accept();
+    }
 }
 
 void CSetupNewWpt::reject()
@@ -77,23 +78,7 @@ void CSetupNewWpt::reject()
 
 void CSetupNewWpt::slotEditPosition(const QString& str)
 {
-    if(CPositionDialog::reCoord1.exactMatch(str))
-    {
-        labelWarning->hide();
-    }
-    else if(CPositionDialog::reCoord2.exactMatch(str))
-    {
-        labelWarning->hide();
-    }
-    else if(CPositionDialog::reCoord3.exactMatch(str))
-    {
-        labelWarning->hide();
-    }
-    else if(CPositionDialog::reCoord4.exactMatch(str))
-    {
-        labelWarning->hide();
-    }
-    else if(CPositionDialog::reCoord5.exactMatch(str))
+    if(IUnit::isValidCoordString(str))
     {
         labelWarning->hide();
     }
@@ -101,6 +86,7 @@ void CSetupNewWpt::slotEditPosition(const QString& str)
     {
         labelWarning->show();
     }
+
 
     checkInput();
 }

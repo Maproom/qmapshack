@@ -74,25 +74,28 @@ Compile instructions - to be verified
 	=> nmake /f makefile.vc
 	=> nmake /f makefile.vc install-all
 
-3.) Install QT5.4 or later 
+3.) Compile the routino library
+- Adapt and use the routino.bat file provided with QMapShack source
+    
+4.) Install QT5.4 or later 
 - Download and run the Qt5 Windows Online Installer from http://qt-project.org/downloads
   Install for VS2013, x64
   
   Note: if you prefer offline installation you can choose the right package in OFFLINE INSTALLERS section of that page
   
-4.) Get the QMapshack source from the repository, e.g. 
+5.) Get the QMapshack source from the repository, e.g. 
    hg clone https://bitbucket.org/maproom/qmapshack QMapShack  
 Note: you might have to install TortoiseHG   
    
-5.) Start the CMake GUI (you did install CMake before, didn't you)
+6.) Start the CMake GUI (you did install CMake before, didn't you)
 - Configure 
   In the first run there will be errors. 
-  Now enter the directories where you have installed Qt5, GDAL and PROJ.4 to the respective variables.
+  Now enter the directories where you have installed Qt5, GDAL and PROJ.4, routino to the respective variables.
   After that, Configure again.
 Note: in case that you only get some warnings, you anyway can try to GENERATE
 - Generate
 
-6.) Open the generated QMapShack.sln with VS2013
+7.) Open the generated QMapShack.sln with VS2013
 - Compile the Release Version
 
 7.) Download the VC redistributable installer 

@@ -12,7 +12,8 @@ set QMSI_VCREDIST_PATH="M:\deploy"
 rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
 set QMSI_GDAL_PATH="M:\lib\gdal"
 set QMSI_PROJ_PATH="M:\lib\PROJ"
-set QMSI_ROUT_PATH="M:\lib\routino"
+set QMSI_ROUT_PATH="M:\src\routino_pkg"
+set QMSI_MGW6_PATH="M:\lib\mingw64"
 
 rem Section 2.) Copy Files
 del /s/q Files
@@ -80,7 +81,7 @@ copy %QMSI_PROJ_PATH%\bin\proj.exe
 rem section 2.2.5) Routino
 copy %QMSI_ROUT_PATH%\lib\routino.dll
 copy %QMSI_ROUT_PATH%\bin\planetsplitter.exe
-copy %QMSI_ROUT_PATH%\bin\libwinpthread-1.dll
+copy %QMSI_MGW6_PATH%\libwinpthread-1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 
 

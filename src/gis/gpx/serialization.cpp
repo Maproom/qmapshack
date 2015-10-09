@@ -445,18 +445,17 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
 
     QDomDocument doc = ext.ownerDocument();
 
-    QHashIterator<QString, QVariant> i(extensions);
-    while (i.hasNext())
-    {
-        i.next();
-
-        QStringList tags = i.key().split('|', QString::SkipEmptyParts);
+    QStringList keys = extensions.keys();
+    keys.sort();
+    foreach(const QString& key, keys)
+    {        
+        QStringList tags = key.split('|', QString::SkipEmptyParts);
 
         if(tags.size() == 1)
         {
             QDomElement elem = doc.createElement(tags.first());
             ext.appendChild(elem);
-            QDomText text = doc.createTextNode(i.value().toString());
+            QDomText text = doc.createTextNode(extensions[key].toString());
             elem.appendChild(text);
         }
         else
@@ -482,7 +481,7 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
             QDomElement elem = doc.createElement(lastTag);
             node.appendChild(elem);
 
-            QDomText text = doc.createTextNode(i.value().toString());
+            QDomText text = doc.createTextNode(extensions[key].toString());
             elem.appendChild(text);
         }
     }

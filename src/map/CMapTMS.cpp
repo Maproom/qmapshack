@@ -54,6 +54,7 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility|eFeatTileCache, parent)
     , minZoomLevel(1)
     , maxZoomLevel(21)
+    , mutex(QMutex::Recursive)
     , diskCache(0)
     , lastRequest(false)
 {
@@ -168,6 +169,8 @@ CMapTMS::~CMapTMS()
 
 void CMapTMS::getLayers(QListWidget& list)
 {
+    QMutexLocker lock(&mutex);
+
     list.clear();
     if(layers.size() < 2)
     {
@@ -188,6 +191,8 @@ void CMapTMS::getLayers(QListWidget& list)
 
 void CMapTMS::saveConfig(QSettings& cfg)
 {
+    QMutexLocker lock(&mutex);
+
     IMap::saveConfig(cfg);
     if(layers.size() < 2)
     {
@@ -208,6 +213,8 @@ void CMapTMS::saveConfig(QSettings& cfg)
 
 void CMapTMS::loadConfig(QSettings& cfg)
 {
+    QMutexLocker lock(&mutex);
+
     IMap::loadConfig(cfg);
     if(layers.size() < 2)
     {
@@ -238,6 +245,8 @@ void CMapTMS::loadConfig(QSettings& cfg)
 
 void CMapTMS::configureCache()
 {
+    QMutexLocker lock(&mutex);
+
     delete diskCache;
     diskCache = new CDiskCache(getCachePath(), getCacheSize(), getCacheExpiration(), this);
 }
@@ -296,6 +305,8 @@ void CMapTMS::slotQueueChanged()
 
 void CMapTMS::slotRequestFinished(QNetworkReply* reply)
 {
+    QMutexLocker lock(&mutex);
+
     QString url = reply->url().toString();
     if(urlPending.contains(url))
     {
@@ -327,6 +338,8 @@ void CMapTMS::slotRequestFinished(QNetworkReply* reply)
 
 void CMapTMS::slotLayersChanged(QListWidgetItem * item)
 {
+    QMutexLocker lock(&mutex);
+
     bool isChecked = (item->checkState() == Qt::Checked);
     int idx = item->data(Qt::UserRole).toInt();
     if(idx < 0)
@@ -353,6 +366,8 @@ void CMapTMS::slotLayersChanged(QListWidgetItem * item)
 
 QString CMapTMS::createUrl(const layer_t& layer, int x, int y, int z)
 {
+    QMutexLocker lock(&mutex);
+
     if(layer.strUrl.startsWith("script"))
     {
         QString filename = layer.strUrl.mid(9);

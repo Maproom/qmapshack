@@ -31,6 +31,7 @@
 
 CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility|eFeatTileCache, parent)
+    , mutex(QMutex::Recursive)
     , diskCache(0)
     , lastRequest(false)
 
@@ -251,6 +252,8 @@ CMapWMTS::~CMapWMTS()
 
 void CMapWMTS::getLayers(QListWidget& list)
 {
+    QMutexLocker lock(&mutex);
+
     list.clear();
     if(layers.size() < 2)
     {
@@ -270,6 +273,8 @@ void CMapWMTS::getLayers(QListWidget& list)
 
 void CMapWMTS::saveConfig(QSettings& cfg)
 {
+    QMutexLocker lock(&mutex);
+
     IMap::saveConfig(cfg);
     if(layers.size() < 2)
     {
@@ -290,6 +295,8 @@ void CMapWMTS::saveConfig(QSettings& cfg)
 
 void CMapWMTS::loadConfig(QSettings& cfg)
 {
+    QMutexLocker lock(&mutex);
+
     IMap::loadConfig(cfg);
     if(layers.size() < 2)
     {
@@ -319,12 +326,16 @@ void CMapWMTS::loadConfig(QSettings& cfg)
 
 void CMapWMTS::configureCache()
 {
+    QMutexLocker lock(&mutex);
+
     delete diskCache;
     diskCache = new CDiskCache(getCachePath(), getCacheSize(), getCacheExpiration(), this);
 }
 
 void CMapWMTS::slotLayersChanged(QListWidgetItem * item)
 {
+    QMutexLocker lock(&mutex);
+
     bool isChecked = (item->checkState() == Qt::Checked);
     int idx = item->data(Qt::UserRole).toInt();
     if(idx < 0)
@@ -399,6 +410,8 @@ void CMapWMTS::slotQueueChanged()
 
 void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
 {
+    QMutexLocker lock(&mutex);
+
     QString url = reply->url().toString();
     if(urlPending.contains(url))
     {

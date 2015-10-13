@@ -26,14 +26,16 @@
 
 class CAppOpts
 {
-public:
+public:  
     const bool debug;            // -d, print debug messages
+    const bool logfile;          // -f, print debug messages to logfile
     const bool nosplash;         // -n, do not display splash screen
     const QString configfile;
     const QStringList arguments;
 
-    CAppOpts(bool doDebug, bool noSplash, const QString& config, const QStringList& args)
+    CAppOpts(bool doDebug, bool doLogfile, bool noSplash, const QString& config, const QStringList& args)
         : debug(doDebug)
+        , logfile(doLogfile)
         , nosplash(noSplash)
         , configfile(config)
         , arguments(args)

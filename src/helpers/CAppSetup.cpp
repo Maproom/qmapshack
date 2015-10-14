@@ -66,7 +66,8 @@ QString CAppSetup::logFilename()
 
 void CAppSetup::appendToFile(QtMsgType type, QString formatedMsg)
 {
-    if(type != QtDebugMsg)
+    Q_UNUSED(type);
+    if(qlOpts->logfile)
     {
         QFile outFile(logFilename());
         outFile.open(QIODevice::WriteOnly | QIODevice::Append);

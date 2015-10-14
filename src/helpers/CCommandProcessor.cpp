@@ -28,17 +28,16 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList &arguments)
     QCommandLineParser parser;
     QCommandLineOption helpOption = parser.addHelpOption(); // h help
 
-    QCommandLineOption debugOption(QStringList() << "d" << "debug",
-                                   QCoreApplication::translate("CCommandProcessor", "Print debug output to console."));
+    QCommandLineOption debugOption(QStringList() << "d" << "debug", QCoreApplication::translate("CCommandProcessor", "Print debug output to console."));
     parser.addOption(debugOption);
 
-    QCommandLineOption nosplashOption(QStringList() << "n" << "no-splash",
-                                      QCoreApplication::translate("CCommandProcessor", "Do not show splash screen."));
+    QCommandLineOption logfileOption(QStringList() << "f" << "logfile", QCoreApplication::translate("CCommandProcessor", "Print debug output to logfile (temp. path)."));
+    parser.addOption(logfileOption);
+
+    QCommandLineOption nosplashOption(QStringList() << "n" << "no-splash", QCoreApplication::translate("CCommandProcessor", "Do not show splash screen."));
     parser.addOption(nosplashOption);
 
-    QCommandLineOption configOption(QStringList() << "c" << "config",
-                                    QCoreApplication::translate("CCommandProcessor", "File with QMapShack configuration."),
-                                    QCoreApplication::translate("CCommandProcessor", "file"));
+    QCommandLineOption configOption(QStringList() << "c" << "config", QCoreApplication::translate("CCommandProcessor", "File with QMapShack configuration."), QCoreApplication::translate("CCommandProcessor", "file"));
     parser.addOption(configOption);
 
     parser.addPositionalArgument("files", QCoreApplication::translate("CCommandProcessor", "Files for future use."));
@@ -55,5 +54,5 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList &arguments)
         exit(0);
     }
 
-    return new CAppOpts(parser.isSet(debugOption), parser.isSet(nosplashOption), parser.value(configOption), parser.positionalArguments());
+    return new CAppOpts(parser.isSet(debugOption), parser.isSet(logfileOption), parser.isSet(nosplashOption), parser.value(configOption), parser.positionalArguments());
 }

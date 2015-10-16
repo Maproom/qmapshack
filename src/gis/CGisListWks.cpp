@@ -312,7 +312,7 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
     QTreeWidgetItem * item1 = currentItem();
     QTreeWidgetItem * item2 = itemAt(e->pos());
 
-    // changeing the item order is only valid for single selected items
+    // changing the item order is only valid for single selected items
     if(selectedItems().count() == 1)
     {
         /*
@@ -397,7 +397,7 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
             Never move/copy projects on devices. Data has to be removed or changed
             to store a project and it's items on a device. Moving it back to the
             workspace would conflict with the original project. To much hassle to
-            reslove this properly.
+            resolve this properly.
          */
         IGisProject * proj1 = dynamic_cast<IGisProject*>(item1);
         if(proj1 && proj1->isOnDevice())
@@ -843,7 +843,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         return;
     }
 
-    // check weather all projects are checked or unchecked...
+    // check whether all projects are checked or unchecked...
     bool allChecked   = true;
     bool allUnchecked = true;
 

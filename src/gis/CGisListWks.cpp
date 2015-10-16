@@ -955,9 +955,13 @@ void CGisListWks::setVisibilityOnMap(bool visible)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
+    foreach(QTreeWidgetItem *item, items)
     {
-        item->setCheckState(CGisListDB::eColumnCheckbox, visible ? Qt::Checked : Qt::Unchecked);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project != 0)
+        {
+            item->setCheckState(CGisListDB::eColumnCheckbox, visible ? Qt::Checked : Qt::Unchecked);
+        }
     }
     emit sigChanged();
 }
@@ -966,7 +970,6 @@ void CGisListWks::slotShowOnMap()
 {
     setVisibilityOnMap(true);
 }
-
 
 void CGisListWks::slotHideFrMap()
 {

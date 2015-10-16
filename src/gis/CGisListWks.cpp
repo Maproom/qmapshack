@@ -840,6 +840,36 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         return;
     }
 
+    // check weather all projects are checked or unchecked...
+    bool allChecked   = true;
+    bool allUnchecked = true;
+
+    foreach(QTreeWidgetItem *item, selectedItems())
+    {
+        IGisProject *project = dynamic_cast<IGisProject*>(item);
+        if(project != 0)
+        {
+            // as soon as we find an unchecked element, not all elements are checked (and vice versa)
+            if(project->checkState(CGisListDB::eColumnCheckbox) == Qt::Unchecked)
+            {
+                allChecked = false;
+            }
+            else
+            {
+                allUnchecked = false;
+            }
+        }
+
+        if(!allChecked && !allUnchecked)
+        {
+            break;
+        }
+    }
+
+    // ...and disable entries without any effect
+    actionShowOnMap->setEnabled(!allChecked);
+    actionHideFrMap->setEnabled(!allUnchecked);
+
     if(selectedItems().count() > 1)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(currentItem());

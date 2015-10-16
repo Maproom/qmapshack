@@ -83,6 +83,8 @@
         <file>icons/32x32/Route.png</file>
         <file>icons/32x32/RouteSetup.png</file>
         <file>icons/32x32/Close.png</file>
+        <file>icons/32x32/ShowAll.png</file>
+        <file>icons/32x32/ShowNone.png</file>
         <file>icons/32x32/Track.png</file>
         <file>icons/32x32/EditDetails.png</file>
         <file>icons/32x32/EditText.png</file>
@@ -227,6 +229,8 @@
         <file>icons/48x48/Route.png</file>
         <file>icons/48x48/RouteSetup.png</file>
         <file>icons/48x48/Close.png</file>
+        <file>icons/48x48/ShowAll.png</file>
+        <file>icons/48x48/ShowNone.png</file>
         <file>icons/48x48/Track.png</file>
         <file>icons/48x48/EditDetails.png</file>
         <file>icons/48x48/EditText.png</file>

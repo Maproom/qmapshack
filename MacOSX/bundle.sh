@@ -1,54 +1,7 @@
 #!/bin/bash
 
-
-
-if [ ! -n "$ROOT_DIR" ]; then
-    CDIR=$(pwd)
-    cd ..
-    SRC_DIR=$(pwd)
-    cd ..
-    ROOT_DIR=$(pwd)
-    cd $CDIR
-fi
-echo "root dir: $ROOT_DIR"
-echo "src dir:  $SRC_DIR"
-
-set -a
-# Set this pathes according to your environment
-# ---------------------------------------------
-BUILD_DIR=$ROOT_DIR/build_xcode_osx
-
-LIB_ROUTINO_DIR=$ROOT_DIR/routino-lib/lib
-LIB_BREW_DIR=/usr/local/Cellar
-QT_DIR=$LIB_BREW_DIR/qt5/5.5.0
-GDAL_DIR=$LIB_BREW_DIR/gdal/1.11.2_2
-PROJ_DIR=$LIB_BREW_DIR/proj/4.9.1
-
-HG_BIN=/Applications/Dev/MacHg.app/Contents/Resources/localhg
-# ---------------------------------------------
-
-APP_NAME=QMapShack
-APP_BUNDLE=$APP_NAME.app
-
-SRC_CHECKOUT_DIR=$SRC_DIR
-SRC_OSX_DIR=$SRC_CHECKOUT_DIR/MacOSX
-SRC_RESOURCES_DIR=$SRC_OSX_DIR/resources
-
-BUILD_BIN_DIR=$BUILD_DIR/bin
-BUILD_RELEASE_DIR=$BUILD_DIR/bin/Release
-
-BUILD_BUNDLE_DIR=$BUILD_RELEASE_DIR/$APP_BUNDLE
-BUILD_BUNDLE_CONTENTS_DIR=$BUILD_BUNDLE_DIR/Contents
-BUILD_BUNDLE_APP_DIR=$BUILD_BUNDLE_DIR/Contents/MacOS
-BUILD_BUNDLE_RES_DIR=$BUILD_BUNDLE_DIR/Contents/Resources
-BUILD_BUNDLE_FRW_DIR=$BUILD_BUNDLE_DIR/Contents/Frameworks
-BUILD_BUNDLE_PLUGIN_DIR=$BUILD_BUNDLE_DIR/Contents/PlugIns
-BUILD_BUNDLE_APP_FILE=$BUILD_BUNDLE_APP_DIR/$APP_NAME
-
-BUILD_BUNDLE_RES_QM_DIR=$BUILD_BUNDLE_RES_DIR/translations
-BUILD_BUNDLE_RES_GDAL_DIR=$BUILD_BUNDLE_RES_DIR/gdal
-BUILD_BUNDLE_RES_PROJ_DIR=$BUILD_BUNDLE_RES_DIR/proj
-set +a
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $DIR/env-path.sh
 
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
@@ -165,7 +118,7 @@ function adjustLinkQt {
         #  replace doubel slashes
         if [[ "$P" == *//* ]]; then 
             PSLASH=$(echo $P | sed 's,//,/,g')
-            install_name_tool -change $P $PSLASH $F
+            sudo install_name_tool -change $P $PSLASH $F
         fi
     
         if [[ "$P" == *$L* ]]; then
@@ -188,9 +141,9 @@ function adjustLinkQt {
             fi
             
             if [[ "$LIB" == *$FREL* ]]; then
-                install_name_tool -id $PREL $F
+                sudo install_name_tool -id $PREL $F
             else 
-                install_name_tool -change $P $PREL $F
+                sudo install_name_tool -change $P $PREL $F
             fi
         
             echo "$FREL > $P - $PREL"
@@ -201,7 +154,7 @@ function adjustLinkQt {
 
 
 function copyAdditionalLibraries {
-    cp $LIB_ROUTINO_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
+    cp $LIB_ROUTINO_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtSensors.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtPositioning.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtMultimediaWidgets.framework $BUILD_BUNDLE_FRW_DIR
@@ -247,9 +200,9 @@ function extractVersion {
     # set(APPLICATION_VERSION_MINOR "3")
     # set(APPLICATION_VERSION_PATCH "0.libroutino")
     
-    MAJOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MAJOR.*\"\(.*\)\".*/\1/p' $SRC_CHECKOUT_DIR/CMakeLists.txt)
-    MINOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MINOR.*\"\(.*\)\".*/\1/p' $SRC_CHECKOUT_DIR/CMakeLists.txt)
-    PATCH_VERSION=$(sed -n 's/.*APPLICATION_VERSION_PATCH.*\"\(.*\).libroutino\".*/\1/p' $SRC_CHECKOUT_DIR/CMakeLists.txt)
+    MAJOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MAJOR.*\"\(.*\)\".*/\1/p' $SRC_QMAPSHACK_DIR/CMakeLists.txt)
+    MINOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MINOR.*\"\(.*\)\".*/\1/p' $SRC_QMAPSHACK_DIR/CMakeLists.txt)
+    PATCH_VERSION=$(sed -n 's/.*APPLICATION_VERSION_PATCH.*\"\(.*\)\".*/\1/p' $SRC_QMAPSHACK_DIR/CMakeLists.txt)
     echo "$MAJOR_VERSION $MINOR_VERSION $PATCH_VERSION"
     APP_VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
 }
@@ -277,8 +230,6 @@ function buildBinary {
     
     xcodebuild -list -project $BUILD_DIR/$APP_NAME.xcodeproj
     xcodebuild -project $BUILD_DIR/$APP_NAME.xcodeproj -scheme qmapshack -configuration Release build
-    
-    cp $BUILD_BUNDLE_APP_DIR/$APP_NAME  $BUILD_RELEASE_DIR
 }
 
     

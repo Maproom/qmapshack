@@ -71,6 +71,8 @@ private slots:
     void slotEditPrj();
     void slotCloseProject();
     void slotDeleteProject();
+    void slotShowOnMap();
+    void slotHideFrMap();
     void slotItemDoubleClicked(QTreeWidgetItem * item, int);
     void slotItemChanged(QTreeWidgetItem * item, int column);
     void slotEditItem();
@@ -101,6 +103,7 @@ private:
     void configDB();
     void initDB();
     void migrateDB(int version);
+    void setVisibilityOnMap(bool visible);
 
     QSqlDatabase db;
 
@@ -109,6 +112,8 @@ private:
     QAction  * actionSaveAs;
     QAction  * actionEditPrj;
     QAction  * actionCloseProj;
+    QAction  * actionShowOnMap;
+    QAction  * actionHideFrMap;
     QAction  * actionSyncWksDev;
 
 

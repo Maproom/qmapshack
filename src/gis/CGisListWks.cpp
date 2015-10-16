@@ -100,6 +100,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSaveAs    = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
     actionSave      = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
     actionSyncWksDev= menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"),tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
+    actionShowOnMap = menuProjectWks->addAction(QIcon("://icons/32x32/ShowAll.png"),tr("Show on Map"), this, SLOT(slotShowOnMap()));
+    actionHideFrMap = menuProjectWks->addAction(QIcon("://icons/32x32/ShowNone.png"),tr("Hide from Map"), this, SLOT(slotHideFrMap()));
     actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     menuProjectDev  = new QMenu(this);
@@ -947,6 +949,28 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             return;
         }
     }
+}
+
+void CGisListWks::setVisibilityOnMap(bool visible)
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem * item, items)
+    {
+        item->setCheckState(CGisListDB::eColumnCheckbox, visible ? Qt::Checked : Qt::Unchecked);
+    }
+    emit sigChanged();
+}
+
+void CGisListWks::slotShowOnMap()
+{
+    setVisibilityOnMap(true);
+}
+
+
+void CGisListWks::slotHideFrMap()
+{
+    setVisibilityOnMap(false);
 }
 
 void CGisListWks::slotCloseProject()

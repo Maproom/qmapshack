@@ -97,11 +97,14 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectWks  = new QMenu(this);
     actionEditPrj   = menuProjectWks->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
-    actionSaveAs    = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
-    actionSave      = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
-    actionSyncWksDev= menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"),tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
     actionShowOnMap = menuProjectWks->addAction(QIcon("://icons/32x32/ShowAll.png"),tr("Show on Map"), this, SLOT(slotShowOnMap()));
     actionHideFrMap = menuProjectWks->addAction(QIcon("://icons/32x32/ShowNone.png"),tr("Hide from Map"), this, SLOT(slotHideFrMap()));
+    menuProjectWks->addSeparator();
+    actionSave      = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
+    actionSaveAs    = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
+    menuProjectWks->addSeparator();
+    actionSyncWksDev= menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"),tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
+    menuProjectWks->addSeparator();
     actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
 
     menuProjectDev  = new QMenu(this);

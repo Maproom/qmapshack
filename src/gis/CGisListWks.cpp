@@ -56,7 +56,8 @@
 #include <QtSql>
 #include <QtWidgets>
 
-#define DB_VERSION 1
+#undef  DB_VERSION
+#define DB_VERSION 2
 
 class CGisListWksEditLock
 {
@@ -273,6 +274,7 @@ void CGisListWks::initDB()
                     "name           TEXT NOT NULL,"
                     "key            TEXT NOT NULL,"
                     "changed        BOOLEAN DEFAULT FALSE,"
+                    "visible        BOOLEAN DEFAULT TRUE,"
                     "data           BLOB NOT NULL"
 
                     ")"))
@@ -284,17 +286,31 @@ void CGisListWks::initDB()
 
 void CGisListWks::migrateDB(int version)
 {
-    QSqlQuery query(db);
+    qDebug() << "workspace.db has version " << version << ", migration to version " << DB_VERSION << " required";
 
-    for(version++; version <= DB_VERSION; version++)
-    {
-//        switch(version)
-//        {
-//        }
-    }
+    // try to migrate between the database versions step by step (as soon as applicable)
+    if(version < 2) { migrateDB1to2(); }
+//  if(version < 3) { migrateDB2to3(); }
+
+    // save the new version to the database
+    QSqlQuery query(db);
     query.prepare( "UPDATE versioninfo set version=:version");
-    query.bindValue(":version", version - 1);
+    query.bindValue(":version", DB_VERSION);
     QUERY_EXEC(; );
+}
+
+void CGisListWks::migrateDB1to2()
+{
+    qDebug() << "migrating workspace.db from version 1 to version 2";
+    // add a new column `visible` to the database
+    // the default value is `true`, as - by default in older versions of QMS - all saved projects
+    // have been loaded and shown on the map directly after starting
+    QSqlQuery query(db);
+    if(!query.exec( "ALTER TABLE workspace ADD COLUMN visible BOOLEAN DEFAULT TRUE;" ))
+    {
+        qDebug() << query.lastQuery();
+        qDebug() << query.lastError();
+    }
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -740,11 +756,14 @@ void CGisListWks::slotSaveWorkspace()
 
         project->IGisProject::operator>>(stream);
 
-        query.prepare("INSERT INTO workspace (type, key, name, changed, data) VALUES (:type, :key, :name, :changed, :data)");
+        query.prepare("INSERT INTO workspace (type, key, name, changed, visible, data) VALUES (:type, :key, :name, :changed, :visible, :data)");
         query.bindValue(":type", project->getType());
         query.bindValue(":key", project->getKey());
         query.bindValue(":name", project->getName());
         query.bindValue(":changed", project->isChanged());
+
+	bool visible = (project->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked);
+        query.bindValue(":visible", visible);
         query.bindValue(":data", data);
         QUERY_EXEC(continue);
     }
@@ -761,7 +780,7 @@ void CGisListWks::slotLoadWorkspace()
 
     QSqlQuery query(db);
 
-    query.prepare("SELECT type, key, name, changed, data FROM workspace");
+    query.prepare("SELECT type, key, name, changed, visible, data FROM workspace");
     QUERY_EXEC(return );
 
     const int total = query.size();
@@ -772,10 +791,11 @@ void CGisListWks::slotLoadWorkspace()
     {
         PROGRESS(progCnt++, return );
 
-        int type        = query.value(0).toInt();
-        QString name    = query.value(2).toString();
-        bool changed    = query.value(3).toBool();
-        QByteArray data = query.value(4).toByteArray();
+        int type               = query.value(0).toInt();
+        QString name           = query.value(2).toString();
+        bool changed           = query.value(3).toBool();
+        Qt::CheckState visible = query.value(4).toBool() ? Qt::Checked : Qt::Unchecked;
+        QByteArray data        = query.value(5).toByteArray();
 
         QDataStream stream(&data, QIODevice::ReadOnly);
         stream.setVersion(QDataStream::Qt_5_2);
@@ -787,6 +807,7 @@ void CGisListWks::slotLoadWorkspace()
         case IGisProject::eTypeQms:
         {
             project = new CQmsProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1a)
             *project << stream;
             break;
         }
@@ -794,6 +815,7 @@ void CGisListWks::slotLoadWorkspace()
         case IGisProject::eTypeGpx:
         {
             project = new CGpxProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1b)
             *project << stream;
             break;
         }
@@ -802,6 +824,7 @@ void CGisListWks::slotLoadWorkspace()
         {
             CDBProject * dbProject;
             project = dbProject = new CDBProject(this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1c)
 
             project->IGisProject::operator<<(stream);
             dbProject->restoreDBLink();
@@ -823,6 +846,11 @@ void CGisListWks::slotLoadWorkspace()
         {
             continue;
         }
+
+	// Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
+        // but this results in a visible `the checkbox is being unchecked`, especially in case the project
+        // is large and takes some time to load.
+        // When done directly after construction there is no `blinking` of the check mark
 
         project->setToolTip(eColumnName,project->getInfo());
         if(changed)

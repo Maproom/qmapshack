@@ -103,6 +103,7 @@ private:
     void configDB();
     void initDB();
     void migrateDB(int version);
+    void migrateDB1to2();
     void setVisibilityOnMap(bool visible);
 
     QSqlDatabase db;

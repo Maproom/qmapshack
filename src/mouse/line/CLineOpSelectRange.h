@@ -40,6 +40,8 @@ public:
 
     void drawFg(QPainter& p);
 
+    bool abortStep();
+
 private slots:
     void slotDelete();
     void slotCalc();

@@ -39,6 +39,8 @@ public:
 
     void append();
 
+    bool abortStep();
+
 private:
     bool addPoint;
     bool isPoint;

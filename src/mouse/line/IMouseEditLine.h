@@ -64,6 +64,8 @@ public:
     void mouseReleaseEvent(QMouseEvent *e);
     void wheelEvent(QWheelEvent * e);
 
+    void abortStep();
+
     bool useAutoRouting();
     bool useVectorRouting();
 

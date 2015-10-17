@@ -86,6 +86,18 @@ void CLineOpSelectRange::mousePressEventEx(QMouseEvent * e)
     }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
+
+bool CLineOpSelectRange::abortStep()
+{
+    if(state != eStateIdle)
+    {
+        resetState();
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+        return true;
+    }
+    return false;
+}
+
 void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
 {
     switch(state)

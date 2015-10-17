@@ -128,6 +128,19 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
         {
             layers[idx].maxZoomLevel = xmlLayer.firstChildElement("MaxZoomLevel").text().toInt();
         }
+
+        if(layers[idx].strUrl.toLower().startsWith("https") && !QSslSocket::supportsSsl())
+        {
+            QString msg = tr(
+                        "This map requires OpenSSL support. However due to legal restrictions in some countries "
+                        "OpenSSL is not packaged with QMapShack. You can have a look at the "
+                        "<a href='https://www.openssl.org/community/binaries.html'>OpenSSL Homepage</a> "
+                        "for binaries."
+                        );
+            QMessageBox::critical(CMainWindow::getBestWidgetForParent(),tr("Error..."),msg,QMessageBox::Abort);
+            return;
+        }
+
     }
 
     const QDomElement& xmlRawHeader = xmlTms.firstChildElement("RawHeader");

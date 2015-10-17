@@ -149,6 +149,19 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             layer.resourceURL  = layer.resourceURL.replace("{" + Identifier + "}", Default, Qt::CaseInsensitive);
         }
 
+        if(layer.resourceURL.toLower().startsWith("https") && !QSslSocket::supportsSsl())
+        {
+            QString msg = tr(
+                        "This map requires OpenSSL support. However due to legal restrictions in some countries "
+                        "OpenSSL is not packaged with QMapShack. You can have a look at the "
+                        "<a href='https://www.openssl.org/community/binaries.html'>OpenSSL Homepage</a> "
+                        "for binaries."
+                        );
+            QMessageBox::critical(CMainWindow::getBestWidgetForParent(),tr("Error..."),msg,QMessageBox::Abort);
+            return;
+        }
+
+
         // enable layer by default
         layer.enabled     = true;
         layers << layer;

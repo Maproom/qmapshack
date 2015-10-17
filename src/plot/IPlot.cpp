@@ -283,8 +283,7 @@ void IPlot::keyPressEvent(QKeyEvent *e)
     if(Qt::Key_Escape == e->key())
     {
         e->accept();
-        // take care here: deleting this is not allowed if this was not allocated via `new`
-        delete this;
+        deleteLater();
     } else {
         QWidget::keyPressEvent(e);
     }

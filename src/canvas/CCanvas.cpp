@@ -472,33 +472,33 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
     qDebug() << hex << e->key();
     bool doUpdate = false;
 
-    if(e->key() == Qt::Key_Plus)
+    switch(e->key())
     {
+    case Qt::Key_Plus:
         setZoom(true, needsRedraw);
         doUpdate = true;
-    }
-    else if(e->key() == Qt::Key_Minus)
-    {
+        break;
+
+    case Qt::Key_Minus:
         setZoom(false, needsRedraw);
         doUpdate = true;
-    }
-    else if(e->key() == Qt::Key_Up)
-    {
-        moveMap(QPointF(0, height()/4));
-    }
-    else if(e->key() == Qt::Key_Down)
-    {
-        moveMap(QPointF(0, -height()/4));
-    }
-    else if(e->key() == Qt::Key_Left)
-    {
-        moveMap(QPointF(width()/4, 0));
-    }
-    else if(e->key() == Qt::Key_Right)
-    {
-        moveMap(QPointF(-width()/4, 0));
-    }
+        break;
 
+    /* move the map with keys up, down, left and right */
+    case Qt::Key_Up:    moveMap(QPointF(         0,  height()/4)); break;
+    case Qt::Key_Down:  moveMap(QPointF(         0, -height()/4)); break;
+    case Qt::Key_Left:  moveMap(QPointF( width()/4,           0)); break;
+    case Qt::Key_Right: moveMap(QPointF(-width()/4,           0)); break;
+
+    case Qt::Key_Escape:
+        IMouseEditLine *lineMouse = dynamic_cast<IMouseEditLine*>(mouse);
+        if(lineMouse != 0)
+        {
+            lineMouse->abortStep();
+            doUpdate = true;
+        }
+        break;
+    }
 
     if(doUpdate)
     {

@@ -71,20 +71,32 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
     }
     else if(e->button() == Qt::RightButton)
     {
-        if(movePoint)
-        {
-            // cancel action and restore last state of line
-            cancelDelayedRouting();
-            parentHandler->restoreFromHistory(points);
-
-            movePoint = false;
-            idxFocus  = NOIDX;
-        }
+        abortStep();
     }
 
     // switch on map panning if move operation is in progress
     parentHandler->setCanvasPanning(movePoint);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+bool CLineOpMovePoint::abortStep()
+{
+    if(movePoint)
+    {
+        // cancel action and restore last state of line
+        cancelDelayedRouting();
+        parentHandler->restoreFromHistory(points);
+
+        movePoint = false;
+        idxFocus  = NOIDX;
+
+        // switch on map panning if move operation is in progress
+        parentHandler->setCanvasPanning(movePoint);
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+
+        return true;
+    }
+    return false;
 }
 
 void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)

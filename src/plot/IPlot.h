@@ -81,6 +81,7 @@ protected:
     void resizeEvent(QResizeEvent * e);
     void leaveEvent(QEvent * e);
     void enterEvent(QEvent * e);
+    void keyPressEvent(QKeyEvent *e);
     void mouseMoveEvent(QMouseEvent * e);
     void mousePressEvent(QMouseEvent * e);
     void wheelEvent( QWheelEvent * e);

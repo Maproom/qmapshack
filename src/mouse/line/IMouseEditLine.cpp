@@ -137,6 +137,17 @@ void IMouseEditLine::commonSetup()
     slotMovePoint();
 }
 
+void IMouseEditLine::abortStep()
+{
+    // at first try to abort a step within the current operation (px. stop adding a new waypoint)
+    if(!lineOp->abortStep())
+    {
+        // if within operation nothing can be aborted, then abort the whole operation
+        // this equals clicking the `abort` button
+        slotAbort();
+    }
+}
+
 bool IMouseEditLine::useAutoRouting()
 {
     return scrOptEditLine->toolAutoRoute->isChecked();
@@ -270,7 +281,6 @@ void IMouseEditLine::wheelEvent(QWheelEvent * e)
 {
     canvas->update();
 }
-
 
 void IMouseEditLine::slotPanCanvas()
 {

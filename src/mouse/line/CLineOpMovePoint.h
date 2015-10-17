@@ -37,6 +37,8 @@ public:
 
     void canvasPanned(QPointF pos);
 
+    bool abortStep();
+
 private:
     bool movePoint;
 };

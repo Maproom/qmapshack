@@ -58,6 +58,17 @@ public:
     {
     }
 
+    /**
+       @brief   (try to) abort a step in the current operation
+
+       Method called, if a step in the current operation should be aborted, such as
+       adding or moving a(n already) selected waypoint.
+       This dummy implementation does not do anything and therefore always returns `false`.
+
+       @return  `true` if a step in the current operation was  successfully, `false` otherwise
+     */
+    virtual bool abortStep() { return false; }
+
     void updateStatus();
 
 protected slots:

@@ -28,6 +28,7 @@
 #include "mouse/CScrOptRangeTrk.h"
 
 #include <QtWidgets>
+#include <QKeyEvent>
 
 QPen IPlot::pens[] =
 {
@@ -274,6 +275,19 @@ void IPlot::draw(QPainter& p)
     p.drawImage(0,0,buffer);
 
     drawDecoration(p);
+}
+
+void IPlot::keyPressEvent(QKeyEvent *e)
+{
+    // close the current window if `Esc` was pressed
+    if(Qt::Key_Escape == e->key())
+    {
+        e->accept();
+        // take care here: deleting this is not allowed if this was not allocated via `new`
+        delete this;
+    } else {
+        QWidget::keyPressEvent(e);
+    }
 }
 
 void IPlot::mouseMoveEvent(QMouseEvent * e)

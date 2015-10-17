@@ -5801,7 +5801,7 @@ Oblasti: %1</translation>
         <translation>Uložit projekt?</translation>
     </message>
     <message>
-        <source>The project &quot;%1&quot; was changed. Save befor closing it?</source>
+        <source>The project &quot;%1&quot; was changed. Save before closing it?</source>
         <translation type="obsolete">Projekt &quot;%1&quot; byl změněn. Uložit jej před zavřením?</translation>
     </message>
     <message>
@@ -5819,7 +5819,7 @@ Oblasti: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="109"/>
-        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Projekt byl změněn. Uložit jej před zavřením?</translation>
     </message>
     <message>

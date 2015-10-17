@@ -89,7 +89,7 @@ public:
     virtual ~IGisProject();
 
     /**
-       @brief Ask to save the project befor it is closed.
+       @brief Ask to save the project before it is closed.
 
        If the project is closed, the user is asked if the project should be saved and saved on user request.
 
@@ -293,9 +293,9 @@ public:
     void editItemByKey(const IGisItem::key_t &key);
 
     /**
-       @brief Add a copy if the gven item to the project
+       @brief Add a copy if the given item to the project
 
-       Befor the item is inserted the method will use it's key to find a duplicat item.
+       Before the item is inserted the method will use it's key to find a duplicate item.
        If there is an item with the same item key a copy option dialog is shown. Depending
        the result the action is performed or aborted. The result will be copied into
        lastResult to repeat the same decision on subsequent items.
@@ -396,7 +396,7 @@ public:
         Use this to speed up actions with many items, e.g. copy actions.
         If the blocking is stopped (yes == false) updateItems() is called.
 
-       @param yes set true to block updateing items
+       @param yes set true to block updating items
      */
     void blockUpdateItems(bool yes);
 

@@ -202,7 +202,7 @@ CMainWindow::~CMainWindow()
 
 
     /*
-       The "Canvas" section will holf all settings global to all views
+       The "Canvas" section will hold all settings global to all views
        and "Views" section containing a subsection for each view.
      */
     cfg.beginGroup("Canvas");
@@ -255,7 +255,7 @@ CMainWindow::~CMainWindow()
     /*
         Delete all canvas objects now to make sure they are destroyed before all
         other objects. This allows children of the canvas to access central objects
-        like CGisWidget safely uppon their destruction. (e.g. CMouseRangeTrk to reset
+        like CGisWidget safely upon their destruction. (e.g. CMouseRangeTrk to reset
         it's track's draw mode by key)
      */
     qDeleteAll(allViews);

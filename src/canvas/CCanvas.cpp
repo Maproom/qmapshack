@@ -130,7 +130,7 @@ CCanvas::~CCanvas()
 {
     /*
         Some mouse objects call methods from their canvas on destruction.
-        So they are better deleted now explicitely befor any other object
+        So they are better deleted now explicitly before any other object
         in CCanvas is destroyed.
      */
     delete mouse;
@@ -367,7 +367,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     p.begin(this);
     USE_ANTI_ALIASING(p,true);
 
-    // fill the backbround with default pattern
+    // fill the background with default pattern
     p.fillRect(rect(), "#FFFFBF");
 
     // ----- start to draw thread based content -----
@@ -458,7 +458,7 @@ void CCanvas::enterEvent(QEvent * e)
 void CCanvas::leaveEvent(QEvent * e)
 {
     Q_UNUSED(e);
-    // bad hack to stop bad number of overide cursors.
+    // bad hack to stop bad number of override cursors.
     while(QApplication::overrideCursor())
     {
         CCanvas::restoreOverrideCursor("leaveEvent");

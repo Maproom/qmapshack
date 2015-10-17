@@ -66,8 +66,8 @@ CGisWidget::~CGisWidget()
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
 
     /*
-        Explicitely delete workspace here, as database projects use
-        CGisWidget uppon destruction to signal the database their destruction.
+        Explicitly delete workspace here, as database projects use
+        CGisWidget upon destruction to signal the database their destruction.
 
      */
     delete treeWks;

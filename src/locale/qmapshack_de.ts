@@ -5982,7 +5982,7 @@ Areas: %1</source>
         <translation>Projekt speichern?</translation>
     </message>
     <message>
-        <source>The project &quot;%1&quot; was changed. Save befor closing it?</source>
+        <source>The project &quot;%1&quot; was changed. Save before closing it?</source>
         <translation type="obsolete">Das Projekt &quot;%1&quot; wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
@@ -6000,7 +6000,7 @@ Areas: %1</source>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="109"/>
-        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>

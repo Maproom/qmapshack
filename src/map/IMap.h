@@ -149,7 +149,7 @@ public:
        @brief Find a matching street polyline
 
        The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
-       the threshold. The returned poylline uses lon/lat as coordinates.
+       the threshold. The returned polyline uses lon/lat as coordinates.
 
        @param pt1           first point in [rad]
        @param pt2           second point in [rad]
@@ -193,7 +193,7 @@ protected:
 
 
     /**
-       @brief Reproject (translate, rotate, scale) tile befor drwaing it.
+       @brief Reproject (translate, rotate, scale) tile before drwaing it.
        @param img   the tile as QImage
        @param l     a 4 point polygon to fit the tile in
        @param p     the QPainter used to paint the tile
@@ -206,7 +206,7 @@ protected:
     /// source projection of the current map file
     /**
         Has to be set by subclass. Destruction has to be
-        handeled by subclass.
+        handled by subclass.
      */
     projPJ pjsrc;
     /// target projection

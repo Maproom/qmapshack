@@ -106,7 +106,7 @@ protected:
     void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
     /**
-       @brief Reproject (translate, rotate, scale) tile befor drwaing it.
+       @brief Reproject (translate, rotate, scale) tile before drawing it.
        @param img   the tile as QImage
        @param l     a 4 point polygon to fit the tile in
        @param p     the QPainter used to paint the tile
@@ -118,7 +118,7 @@ protected:
     /// source projection of the current map file
     /**
         Has to be set by subclass. Destruction has to be
-        handeled by subclass.
+        handled by subclass.
      */
     projPJ pjsrc;
     /// target projection

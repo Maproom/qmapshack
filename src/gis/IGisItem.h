@@ -224,7 +224,7 @@ public:
     /**
         @brief Edit content of item.
 
-        This is quite dependent on the item. The default implemntation does nothing. It has to be
+        This is quite dependent on the item. The default implementation does nothing. It has to be
         overwritten and the item has to generate what ever is needed to edit/view it's details.
 
      */

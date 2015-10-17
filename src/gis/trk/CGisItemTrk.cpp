@@ -319,10 +319,10 @@ CGisItemTrk::~CGisItemTrk()
     }
 
     /**
-        Delete all registerd plot as they can't exist without the item.
+        Delete all registered plot as they can't exist without the item.
         As the plot objects will unregister via unregisterPlot() in their
         destructor things will get a bit complicated here. Better create
-        a copy of the list befor we start to delete.
+        a copy of the list before we start to delete.
      */
     qDeleteAll(registeredPlots.toList());
 
@@ -1080,7 +1080,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         return;
     }
 
-    // convert coodinates of all waypoints into meter coordinates relative to the first track point
+    // convert coordinates of all waypoints into meter coordinates relative to the first track point
     point3D pt0 = line[0];
     QList<trkwpt_t> trkwpts;
     for(int i=0; i < project->childCount(); i++)
@@ -1991,7 +1991,7 @@ bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const Q
     {
         qreal delta = totalDistance;
 
-        /// @todo: optimze search by single out segment and then do a binary search
+        /// @todo: optimize search by single out segment and then do a binary search
 
         foreach (const trkseg_t &seg, trk.segs)
         {
@@ -2069,7 +2069,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         /*
             Iterate over the polyline used to draw the track as it contains screen
             coordinates. The polyline is a linear representation of the segments in the
-            track. That is why the index into the polyline cant't be used directly.
+            track. That is why the index into the polyline can't be used directly.
             In a second step we have to iterate over all segments and points of the trk_t object
             until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
             getTrkPtByTotalIndex(). Depending on the current mode.
@@ -2096,7 +2096,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
     }
 
     /*
-       Test for line size befor applying index. This fixes random assertions because
+       Test for line size before applying index. This fixes random assertions because
        of an invalid index. The reason for this is unknown.
      */
     return newPointOfFocus ? ((int)idx < line.size() ? line[idx] : NOPOINTF) : NOPOINTF;

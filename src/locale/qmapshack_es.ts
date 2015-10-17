@@ -5728,7 +5728,7 @@ Areas: %1</source>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="109"/>
-        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

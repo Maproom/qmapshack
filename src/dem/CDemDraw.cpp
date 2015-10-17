@@ -58,7 +58,7 @@ void CDemDraw::setProjection(const QString& proj)
     // --- save the active maps
     QStringList keys;
     saveActiveMapsList(keys);
-    // --- neow set the new projection
+    // --- now set the new projection
     IDrawContext::setProjection(proj);
     // --- now build the map list from scratch. This will deactivate -> activate all maps
     //     By that everything is restored with the new projection
@@ -210,7 +210,7 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
             if(item && item->key == key)
             {
                 /**
-                    @Note   the item will load it's configuration uppon successful activation
+                    @Note   the item will load it's configuration upon successful activation
                             by calling loadConfigForDemItem().
                  */
                 item->activate();

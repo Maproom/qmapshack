@@ -105,7 +105,7 @@ public:
        @brief Find a matching street polyline
 
        The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
-       the threshold. The returned poylline uses lon/lat as coordinates.
+       the threshold. The returned polyline uses lon/lat as coordinates.
 
        @param pt1           first point in [rad]
        @param pt2           second point in [rad]
@@ -136,7 +136,7 @@ private:
     void saveActiveMapsList(QStringList &keys, QSettings &cfg);
 
     /**
-       @brief Open configuration befor saving list
+       @brief Open configuration before saving list
        @param keys the stored map's MD5 keys will be written to keys
      */
     void saveActiveMapsList(QStringList &keys);
@@ -156,7 +156,7 @@ private:
     /// the group label used in QSettings
     QString cfgGroup;
 
-    /// the list of paths to serach maps
+    /// the list of paths to search maps
     static QStringList mapPaths;
 
     static QString cachePath;

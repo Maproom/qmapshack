@@ -109,7 +109,7 @@ bool IGisProject::askBeforClose()
     if(isChanged())
     {
         CCanvas::setOverrideCursor(Qt::ArrowCursor, "askBeforClose");
-        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save befor closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
         CCanvas::restoreOverrideCursor("askBeforClose");
 
         if(res == QMessageBox::Save)

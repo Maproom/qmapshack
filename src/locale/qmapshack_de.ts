@@ -10,12 +10,12 @@
     <message>
         <location filename="../CAbout.cpp" line="38"/>
         <source>%1 (API V%2, expected V%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (API V%2, erwartet wird V%3)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="42"/>
         <source>%1 (API V%2)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="34"/>
         <source>Print debug output to logfile (temp. path).</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug-Ausgabe in Log-Datei drucken (Systemordner für temporäre Dateien).</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="37"/>
@@ -700,12 +700,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="101"/>
         <source>Show on Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf der Karte anzeigen.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="102"/>
         <source>Hide from Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf der Karte ausblenden.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="740"/>
@@ -1623,7 +1623,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="134"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
     <message>
         <source>--- All ---</source>
@@ -1732,7 +1732,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="154"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
     <message>
         <source>--- All ---</source>
@@ -2878,22 +2878,22 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="14"/>
         <source>Coordinate Format...</source>
-        <translation type="unfinished"></translation>
+        <translation>Koordinatenformat...</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53.660 E013° 31.113</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4147,12 +4147,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IMainWindow.ui" line="652"/>
         <source>Setup Coord. Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Koordinatenformat einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="655"/>
         <source>Change the format coordinates are displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändert das Format der angezeigten Koordianten</translation>
     </message>
     <message>
         <source>Setup Map Workspace</source>
@@ -6051,7 +6051,7 @@ Areas: %1</source>
         <translation>Projekt speichern?</translation>
     </message>
     <message>
-        <source>The project &quot;%1&quot; was changed. Save before closing it?</source>
+        <source>The project &quot;%1&quot; was changed. Save befor closing it?</source>
         <translation type="obsolete">Das Projekt &quot;%1&quot; wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
@@ -6068,9 +6068,13 @@ Areas: %1</source>
         <translation type="obsolete">Hat das zu lange gedauert? Wollen Sie die Verknüpfung von Tracks und Wegpunkten auch in Zukunft für das Projekt (%1) überspringen?</translation>
     </message>
     <message>
+        <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
+        <translation type="vanished">&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
+    </message>
+    <message>
         <location filename="../gis/prj/IGisProject.cpp" line="112"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
-        <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern, bevor es geschlossen wird?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="262"/>

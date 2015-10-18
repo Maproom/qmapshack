@@ -261,6 +261,11 @@ fi
 if [[ "$1" == "info" ]]; then
     printLinkingApp
 fi
+if [[ "$1" == "info-before" ]]; then
+    printLinking $BUILD_RELEASE_DIR/$APP_NAME
+    printLinking $LIB_ROUTINO_LIB_DIR/libroutino.so
+fi
+
 if [[ "$1" == "archive" ]]; then
     extractVersion
     archiveBundle

@@ -278,3 +278,9 @@ void CAppSetupWin::prepareTranslators(QApplication* app)
     QTranslator *qlandkartegtTranslator = new QTranslator(app);
     prepareTranslator(app, qlandkartegtTranslator, appResourceDir, "qmapshack_");
 }
+
+void CAppSetupWin::prepareConfig()
+{
+	//reset PATH to avoid that wrong .dll's are loaded
+	qputenv("PATH", "");
+}

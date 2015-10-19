@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
         <source>API Version %1 (expected %2)</source>
-        <translation type="vanished">API Version %1 (erwartet wird %2)</translation>
+        <translation>API Version %1 (erwartet wird %2)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="38"/>
@@ -55,7 +55,7 @@
     <message>
         <source>File with qmapshark configuration.</source>
         <translatorcomment>??? qmapshack statt qmapshark im Ursprungstext, IMO</translatorcomment>
-        <translation type="vanished">Datei mit QMapShak Einstellungen.</translation>
+        <translation>Datei mit QMapShak Einstellungen.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="40"/>
@@ -257,23 +257,23 @@
     </message>
     <message>
         <source>Total Distance:</source>
-        <translation type="vanished">Summe Entfernung:</translation>
+        <translation>Summe Entfernung:</translation>
     </message>
     <message>
         <source>Total Ascend:</source>
-        <translation type="vanished">Summe Anstieg:</translation>
+        <translation>Summe Anstieg:</translation>
     </message>
     <message>
         <source>Total Descend:</source>
-        <translation type="vanished">Summe Abstieg:</translation>
+        <translation>Summe Abstieg:</translation>
     </message>
     <message>
         <source>Total Time:</source>
-        <translation type="vanished">Summe Zeit:</translation>
+        <translation>Summe Zeit:</translation>
     </message>
     <message>
         <source>Total Time Moving:</source>
-        <translation type="vanished">Summe Zeit in Bewegung:</translation>
+        <translation>Summe Zeit in Bewegung:</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="553"/>
@@ -1622,6 +1622,10 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="134"/>
+        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen. Sie müssen die Dateien libeay32.dll and ssleay32.dll in das QMapShack Programmverzeichnis kopieren.</translation>
+    </message>
+    <message>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
         <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
@@ -1731,6 +1735,10 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="154"/>
+        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen. Sie müssen die Dateien libeay32.dll and ssleay32.dll in das QMapShack Programmverzeichnis kopieren.</translation>
+    </message>
+    <message>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
         <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
@@ -6069,7 +6077,7 @@ Areas: %1</source>
     </message>
     <message>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
-        <translation type="vanished">&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="112"/>

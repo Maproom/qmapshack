@@ -287,6 +287,7 @@ void CMousePrint::mouseMoveEvent(QMouseEvent * e)
             rectSelection.setBottomRight(pos);
             break;
         }
+
         canvas->update();
         break;
     }

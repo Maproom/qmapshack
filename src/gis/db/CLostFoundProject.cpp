@@ -78,7 +78,8 @@ void CLostFoundProject::updateFromDb()
             new CGisItemOvlArea(id, db, this);
             break;
 
-        default:;
+        default:
+            ;
         }
     }
 

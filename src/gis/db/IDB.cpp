@@ -87,7 +87,7 @@ bool IDB::setupDB(const QString& filename, const QString& connectionName)
 
     query.prepare( "UPDATE folders SET name=:name WHERE id=1");
     query.bindValue(":name", connectionName);
-    QUERY_EXEC(; )
+    QUERY_EXEC()
 
     return true;
 }
@@ -100,7 +100,7 @@ bool IDB::initDB()
     {
         query.prepare( "INSERT INTO versioninfo (version, type) VALUES(:version, 'QMapShack')");
         query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(return false;  );
+        QUERY_EXEC(return false);
     }
 
     if(!query.exec( "CREATE TABLE folders ("
@@ -137,7 +137,7 @@ bool IDB::initDB()
 
     query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
     query.bindValue(":name", db.connectionName());
-    QUERY_EXEC(return false;  );
+    QUERY_EXEC(return false);
 
     if(!query.exec( "CREATE TABLE folder2folder ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -180,7 +180,7 @@ bool IDB::migrateDB(int version)
     }
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", version - 1);
-    QUERY_EXEC(return false;  );
+    QUERY_EXEC(return false);
     return true;
 }
 

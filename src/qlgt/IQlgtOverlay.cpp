@@ -114,8 +114,10 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
             break;
         }
 
-        default:;
+        default:
+            ;
         }
+
         ++entry;
     }
 

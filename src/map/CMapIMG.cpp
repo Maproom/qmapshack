@@ -859,7 +859,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         subdiv->lengthPolygons2     = 0;
 
         subdiv_prev = subdiv;
-        ++pSubDivN; ++subdiv;
+        ++pSubDivN;
+        ++subdiv;
     }
 
     // switch to last map level
@@ -907,7 +908,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         subdiv->lengthPolygons2     = 0;
 
         subdiv_prev = subdiv;
-        ++pSubDivL; ++subdiv;
+        ++pSubDivL;
+        ++subdiv;
     }
     subdivs.last().rgn_end = gar_load(uint32_t, pRgnHdr->hdr_rgn_t::offset) + gar_load(uint32_t, pRgnHdr->hdr_rgn_t::length);
 
@@ -1066,7 +1068,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
             }
             break;
 
-        default:;
+        default:
+            ;
             qWarning() << "Unknown label coding" << hex << pLblHdr->coding;
         }
     }
@@ -1766,7 +1769,8 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
     font.setBold(false);
     QFontMetricsF metrics(font);
 
-    QVector<qreal> lengths; lengths.reserve(100);
+    QVector<qreal> lengths;
+    lengths.reserve(100);
 
     int pixmapCount = 0;
     int borderCount = 0;

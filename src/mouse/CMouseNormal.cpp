@@ -136,8 +136,10 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
             break;
         }
 
-        default:;
+        default:
+            ;
         }
+
         canvas->displayInfo(point);
         canvas->update();
     }
@@ -213,8 +215,10 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 break;
             }
 
-            default:;
+            default:
+                ;
             }
+
             canvas->update();
         }
         mapMove     = false;
@@ -327,7 +331,8 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         break;
     }
 
-    default:;
+    default:
+        ;
     }
 }
 

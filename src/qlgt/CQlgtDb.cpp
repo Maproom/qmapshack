@@ -119,7 +119,7 @@ void CQlgtDb::initDB()
     {
         query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
         query.bindValue(":version", DB_QLGT_VERSION);
-        QUERY_EXEC(; );
+        QUERY_EXEC();
     }
 
     if(!query.exec( "CREATE TABLE folders ("
@@ -528,7 +528,7 @@ void CQlgtDb::migrateDB(int version)
     }
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", version - 1);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
 }
 
 void CQlgtDb::printStatistic()
@@ -540,7 +540,7 @@ void CQlgtDb::printStatistic()
     nItems = 0;
 
     query.prepare("SELECT COUNT() FROM folders");
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         nFolders = query.value(0).toInt();
@@ -549,7 +549,7 @@ void CQlgtDb::printStatistic()
 
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
     query.bindValue(":type", eTrk);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         nItems += query.value(0).toInt();
@@ -557,7 +557,7 @@ void CQlgtDb::printStatistic()
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
     query.bindValue(":type", eRte);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         nItems += query.value(0).toInt();
@@ -565,7 +565,7 @@ void CQlgtDb::printStatistic()
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
     query.bindValue(":type", eWpt);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         nItems += query.value(0).toInt();
@@ -573,7 +573,7 @@ void CQlgtDb::printStatistic()
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
     query.bindValue(":type", eOvl);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         nItems += query.value(0).toInt();
@@ -581,14 +581,14 @@ void CQlgtDb::printStatistic()
     }
     query.prepare("SELECT COUNT() FROM diarys");
     query.bindValue(":type", eDry);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         gui->stdOut(tr("Diaries:          %1").arg(query.value(0).toInt()));
     }
     query.prepare("SELECT COUNT() FROM items WHERE type=:type");
     query.bindValue(":type", eMap);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         gui->stdErr(tr("Map selections:   %1 (can't be converted to QMapShack)").arg(query.value(0).toInt()));
@@ -612,7 +612,7 @@ void CQlgtDb::start(const QString& filename)
 
     QSqlQuery query(db);
     query.prepare("Select parent, child FROM folder2folder");
-    QUERY_EXEC(return; );
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 idParent    = query.value(0).toULongLong();
@@ -621,7 +621,7 @@ void CQlgtDb::start(const QString& filename)
     }
 
     query.prepare("Select parent, child FROM folder2item");
-    QUERY_EXEC(return; );
+    QUERY_EXEC(return );
     while(query.next())
     {
         quint64 idParent    = query.value(0).toULongLong();
@@ -642,7 +642,7 @@ void CQlgtDb::xferFolders()
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM folders");
-    QUERY_EXEC(return; );
+    QUERY_EXEC(return );
     while(query.next())
     {
         PROGRESS(cnt++, break);
@@ -674,7 +674,7 @@ void CQlgtDb::xferItems()
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM items");
-    QUERY_EXEC(return; );
+    QUERY_EXEC(return );
     while(query.next())
     {
         PROGRESS(cnt++, break);
@@ -686,7 +686,7 @@ void CQlgtDb::xferItems()
     gui->stdOut(tr("Import folders..."));
 
     query.prepare("SELECT id FROM folders");
-    QUERY_EXEC(return; );
+    QUERY_EXEC(return );
 }
 
 void CQlgtDb::xferItem(quint64 id)
@@ -694,7 +694,7 @@ void CQlgtDb::xferItem(quint64 id)
     QSqlQuery query(db);
     query.prepare("SELECT type, data FROM items WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return; );
+    QUERY_EXEC(return );
 
     if(query.next())
     {

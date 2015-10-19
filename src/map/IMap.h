@@ -76,7 +76,8 @@ public:
      */
     virtual void getInfo(const QPoint& px, QString& str)
     {
-        Q_UNUSED(px); Q_UNUSED(str);
+        Q_UNUSED(px);
+        Q_UNUSED(str);
     }
     /**
        @brief getToolTip
@@ -85,7 +86,8 @@ public:
      */
     virtual void getToolTip(const QPoint& px, QString& str)
     {
-        Q_UNUSED(px); Q_UNUSED(str);
+        Q_UNUSED(px);
+        Q_UNUSED(str);
     }
 
     /**
@@ -175,15 +177,18 @@ public slots:
 
     void slotSetCachePath(const QString& path)
     {
-        cachePath = path; configureCache();
+        cachePath = path;
+        configureCache();
     }
     void slotSetCacheSize(qint32 size)
     {
-        cacheSizeMB = size; configureCache();
+        cacheSizeMB = size;
+        configureCache();
     }
     void slotSetCacheExpiration(qint32 days)
     {
-        cacheExpiration = days; configureCache();
+        cacheExpiration = days;
+        configureCache();
     }
 
 

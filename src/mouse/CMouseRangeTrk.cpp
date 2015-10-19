@@ -148,7 +148,8 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
             break;
         }
 
-        default:;
+        default:
+            ;
         }
     }
 }
@@ -192,7 +193,8 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
         break;
     }
 
-    default:;
+    default:
+        ;
     }
 
     lastPoint = point;

@@ -265,7 +265,7 @@ void CGisListWks::initDB()
     {
         query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
         query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(; );
+        QUERY_EXEC();
     }
 
     if(!query.exec( "CREATE TABLE workspace ("
@@ -299,7 +299,7 @@ void CGisListWks::migrateDB(int version)
     QSqlQuery query(db);
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", DB_VERSION);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
 }
 
 void CGisListWks::migrateDB1to2()
@@ -1010,6 +1010,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 menuItemOvl->exec(p);
                 break;
             }
+
             return;
         }
     }

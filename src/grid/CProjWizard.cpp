@@ -23,7 +23,11 @@
 #include <QtWidgets>
 #include <proj_api.h>
 
-struct mitab_entry_t {QString name; int idx; };
+struct mitab_entry_t
+{
+    QString name;
+    int idx;
+};
 
 static bool mitabLessThan(const mitab_entry_t &s1, const mitab_entry_t &s2)
 {
@@ -45,7 +49,8 @@ CProjWizard::CProjWizard(QLineEdit &line)
         entry.name  = di->pszOGCDatumName;
         entry.idx   = idx;
         list << entry;
-        ++di; ++idx;
+        ++di;
+        ++idx;
     }
     qSort(list.begin(), list.end(), mitabLessThan);
 
@@ -137,7 +142,8 @@ void CProjWizard::findDatum(const QString& str)
             break;
         }
 
-        ++di; ++idx;
+        ++di;
+        ++idx;
     }
 }
 

@@ -981,7 +981,7 @@ void CGisItemTrk::deriveSecondaryData()
             n = p;
             while(n < seg.pts.size())
             {
-                trkpt_t & trkpt2 = seg.pts[n];;
+                trkpt_t & trkpt2 = seg.pts[n];
                 if((trkpt2.flags & trkpt_t::eHidden) || (trkpt2.ele == NOINT))
                 {
                     n++;
@@ -2290,7 +2290,8 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
             }
         }
 
-    default:;
+    default:
+        ;
     }
 }
 

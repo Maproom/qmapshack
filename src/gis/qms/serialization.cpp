@@ -815,8 +815,10 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
             item = new CGisItemOvlArea(history, this);
             break;
 
-        default:;
+        default:
+            ;
         }
+
         if(item && changed)
         {
             item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);

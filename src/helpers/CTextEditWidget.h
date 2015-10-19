@@ -59,7 +59,8 @@ public:
     QString getHtml();
     void  setHtml(const QString& text)
     {
-        textEdit->clear(); textEdit->insertHtml(text);
+        textEdit->clear();
+        textEdit->insertHtml(text);
     }
 
 private slots:

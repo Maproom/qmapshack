@@ -22,16 +22,13 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterRoutinoPathSetup.h"
+#include "helpers/CAppSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtWidgets>
 #include <proj_api.h>
 #include <routino.h>
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
 
 QPointer<CProgressDialog> CRouterRoutino::progress;
 
@@ -64,22 +61,15 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboMode->addItem(tr("Quickest"));
 
     int res = 0;
-#ifdef WIN32
-    QString apppath = QCoreApplication::applicationDirPath();
-    apppath = apppath.replace("/", "\\");
-    QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
-#else
-    QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
-#endif
-
-    res = Routino_ParseXMLProfiles(dirXml.absoluteFilePath("profiles.xml").toUtf8());
+    CAppSetup *setup = CAppSetup::getPlattformInstance();
+    res = Routino_ParseXMLProfiles(setup->routinoPath("profiles.xml").toUtf8());
     if(res)
     {
         QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         return;
     }
 
-    res = Routino_ParseXMLTranslations(dirXml.absoluteFilePath("translations.xml").toUtf8());
+    res = Routino_ParseXMLTranslations(setup->routinoPath("translations.xml").toUtf8());
     if(res)
     {
         QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);

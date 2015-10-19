@@ -25,6 +25,11 @@
 
 #include <qdebug.h>
 
+#ifndef _MKSTR_1
+#define _MKSTR_1(x)    #x
+#define _MKSTR(x)      _MKSTR_1(x)
+#endif
+
 CAppSetup* instance;
 
 CAppSetup* CAppSetup::getPlattformInstance()
@@ -184,6 +189,12 @@ void CAppSetupMac::prepareGdal()
     CAppSetup::prepareGdal();
 }
 
+QString CAppSetupMac::routinoPath(QString xmlFile)
+{
+    QDir dirXml(getResourceDir("routino"));
+    return dirXml.absoluteFilePath(xmlFile);
+}
+
 
 QString CAppSetupMac::getResourceDir(QString subdir)
 {
@@ -231,6 +242,12 @@ CAppSetupLinux::CAppSetupLinux()
 {
 }
 
+QString CAppSetupLinux::routinoPath(QString xmlFile)
+{
+    QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
+    return dirXml.absoluteFilePath(xmlFile);
+}
+
 
 void CAppSetupLinux::prepareTranslators(QApplication* app)
 {
@@ -265,6 +282,14 @@ void CAppSetupWin::prepareGdal()
     CAppSetup::prepareGdal();
 }
 
+
+QString CAppSetupWin::routinoPath(QString xmlFile)
+{
+    QString apppath = QCoreApplication::applicationDirPath();
+    apppath = apppath.replace("/", "\\");
+    QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
+    return dirXml.absoluteFilePath(xmlFile);
+}
 
 void CAppSetupWin::prepareTranslators(QApplication* app)
 {

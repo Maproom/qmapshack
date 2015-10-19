@@ -29,6 +29,7 @@ public:
     static void consoleMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
     virtual void prepareGdal();
+    virtual QString routinoPath(QString xmlFile) = 0;
     virtual void prepareTranslators(QApplication* app) = 0;
     virtual void prepareConfig();
     virtual void installMessageHandler();
@@ -47,6 +48,7 @@ class CAppSetupMac : public CAppSetup
 {
 public:
     virtual void prepareGdal();
+    virtual QString routinoPath(QString xmlFile);
     virtual void prepareTranslators(QApplication* app);
     virtual void prepareConfig();
 
@@ -62,6 +64,7 @@ protected:
 class CAppSetupLinux : public CAppSetup
 {
 public:
+    virtual QString routinoPath(QString xmlFile);
     virtual void prepareTranslators(QApplication* app);
 protected:
     CAppSetupLinux();
@@ -72,6 +75,7 @@ protected:
 class CAppSetupWin : public CAppSetup
 {
 public:
+    virtual QString routinoPath(QString xmlFile);
     virtual void prepareGdal();
     virtual void prepareTranslators(QApplication* app);
     virtual void prepareConfig();

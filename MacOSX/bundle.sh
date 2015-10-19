@@ -58,6 +58,7 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_RES_QM_DIR
     mkdir $BUILD_BUNDLE_RES_GDAL_DIR
     mkdir $BUILD_BUNDLE_RES_PROJ_DIR
+    mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp $BUILD_DIR/src/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
@@ -173,6 +174,10 @@ function copyExternalFiles {
     
     cp $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
     cp $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
+    
+    cp $LIB_ROUTINO_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp $LIB_ROUTINO_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp $LIB_ROUTINO_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
 }
 
 
@@ -227,9 +232,17 @@ function updateInfoPlist {
 function buildBinary {
     rm -rf $BUILD_BUNDLE_DIR
     rm -rf $BUILD_RELEASE_DIR/$APP_NAME
-    
+    #export MACOSX_DEPLOYMENT_TARGET=10.5
     xcodebuild -list -project $BUILD_DIR/$APP_NAME.xcodeproj
-    xcodebuild -project $BUILD_DIR/$APP_NAME.xcodeproj -scheme qmapshack -configuration Release build
+    xcodebuild -project $BUILD_DIR/$APP_NAME.xcodeproj -scheme qmapshack -configuration Release build MACOSX_DEPLOYMENT_TARGET=10.5
+}
+
+function replaceBinary {
+    if [ -d "$BUILD_BUNDLE_APP_DIR" ]; then
+        cp $BUILD_RELEASE_DIR/$APP_NAME  $BUILD_BUNDLE_APP_DIR
+        adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"
+        adjustLinkQt $BUILD_BUNDLE_APP_FILE "libroutino"
+    fi
 }
 
     
@@ -238,6 +251,7 @@ if [[ "$1" == "icon" ]]; then
 fi
 if [[ "$1" == "build" ]]; then
     buildBinary
+    replaceBinary
 fi
 if [[ "$1" == "bundle" ]]; then
     echo "---extract version -----------------"

@@ -282,6 +282,6 @@ void CAppSetupWin::prepareTranslators(QApplication* app)
 void CAppSetupWin::prepareConfig()
 {
     CAppSetup::prepareConfig();
-	//reset PATH to avoid that wrong .dll's are loaded
-	qputenv("PATH", "");
+    //reset PATH to avoid that wrong .dll's are loaded
+    qputenv("PATH", "");
 }

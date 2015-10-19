@@ -67,7 +67,10 @@ public:
 
        @return  `true` if a step in the current operation was  successfully, `false` otherwise
      */
-    virtual bool abortStep() { return false; }
+    virtual bool abortStep()
+    {
+        return false;
+    }
 
     void updateStatus();
 

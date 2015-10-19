@@ -74,7 +74,7 @@ class CAppSetupWin : public CAppSetup
 public:
     virtual void prepareGdal();
     virtual void prepareTranslators(QApplication* app);
-	virtual void prepareConfig();
+    virtual void prepareConfig();
 protected:
     CAppSetupWin();
     friend class CAppSetup;

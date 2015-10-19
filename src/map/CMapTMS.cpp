@@ -132,15 +132,14 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
         if(layers[idx].strUrl.toLower().startsWith("https") && !QSslSocket::supportsSsl())
         {
             QString msg = tr(
-                        "This map requires OpenSSL support. However due to legal restrictions in some countries "
-                        "OpenSSL is not packaged with QMapShack. You can have a look at the "
-                        "<a href='https://www.openssl.org/community/binaries.html'>OpenSSL Homepage</a> "
-                        "for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory."
-                        );
+                "This map requires OpenSSL support. However due to legal restrictions in some countries "
+                "OpenSSL is not packaged with QMapShack. You can have a look at the "
+                "<a href='https://www.openssl.org/community/binaries.html'>OpenSSL Homepage</a> "
+                "for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory."
+                );
             QMessageBox::critical(CMainWindow::getBestWidgetForParent(),tr("Error..."),msg,QMessageBox::Abort);
             return;
         }
-
     }
 
     const QDomElement& xmlRawHeader = xmlTms.firstChildElement("RawHeader");

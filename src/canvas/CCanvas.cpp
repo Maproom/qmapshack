@@ -486,8 +486,11 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     /* move the map with keys up, down, left and right */
     case Qt::Key_Up:    moveMap(QPointF(         0,  height()/4)); break;
+
     case Qt::Key_Down:  moveMap(QPointF(         0, -height()/4)); break;
+
     case Qt::Key_Left:  moveMap(QPointF( width()/4,           0)); break;
+
     case Qt::Key_Right: moveMap(QPointF(-width()/4,           0)); break;
 
     case Qt::Key_Escape:

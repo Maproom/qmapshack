@@ -635,7 +635,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
 
     QStringList keys = pt.extensions.keys();
     keys.sort();
-    foreach(const QString& key, keys)
+    foreach(const QString &key, keys)
     {
         QStringList tags = key.split("|");
         str += "\n" + tags.last() + ": " + pt.extensions[key].toString();

@@ -53,29 +53,30 @@ void IMouse::slotPanCanvas()
 }
 
 #define SENSITIVE_FRAME 100
+#define DAMPING_FACTOR  0.25
 void IMouse::panCanvas(const QPoint& pos)
 {
     if(pos.x() < SENSITIVE_FRAME)
     {
-        int d = SENSITIVE_FRAME - pos.x();
+        int d = (SENSITIVE_FRAME - pos.x()) * DAMPING_FACTOR;
         canvas->moveMap(QPointF(d/2, 0));
         timer->start();
     }
     else if(pos.x() > canvas->width() - SENSITIVE_FRAME)
     {
-        int d = canvas->width() - SENSITIVE_FRAME - pos.x();
+        int d = (canvas->width() - SENSITIVE_FRAME - pos.x()) * DAMPING_FACTOR;
         canvas->moveMap(QPointF(d/2, 0));
         timer->start();
     }
     else if(pos.y() < SENSITIVE_FRAME)
     {
-        int d = SENSITIVE_FRAME - pos.y();
+        int d = (SENSITIVE_FRAME - pos.y()) * DAMPING_FACTOR;
         canvas->moveMap(QPointF(0, d/2));
         timer->start();
     }
     else if(pos.y() > canvas->height() - SENSITIVE_FRAME)
     {
-        int d = canvas->height() - SENSITIVE_FRAME - pos.y();
+        int d = (canvas->height() - SENSITIVE_FRAME - pos.y()) * DAMPING_FACTOR;
         canvas->moveMap(QPointF(0, d/2));
         timer->start();
     }

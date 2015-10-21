@@ -34,6 +34,7 @@ public:
     virtual void prepareTranslators(QApplication* app) = 0;
     virtual void prepareConfig();
     virtual void installMessageHandler();
+    virtual QDir configDir(QString subdir = 0) = 0;
 
 protected:
     void prepareTranslator(QApplication* app, QTranslator *qtTranslator, QString translationPath, QString translationPrefix);
@@ -43,6 +44,7 @@ protected:
     void printToConsole(QtMsgType type, QString formatedMsg);
     void appendToFile(QtMsgType type, QString formatedMsg);
     QString routinoPath(QDir dirXml, QString xmlFile);
+    QDir path(QString path, QString subdir = 0, bool mkdir = false);
 };
 
 
@@ -53,6 +55,7 @@ public:
     virtual QString routinoPath(QString xmlFile);
     virtual void prepareTranslators(QApplication* app);
     virtual void prepareConfig();
+    virtual QDir configDir(QString subdir = 0);
 
 protected:
     virtual QString logFilename();
@@ -68,6 +71,8 @@ class CAppSetupLinux : public CAppSetup
 public:
     virtual QString routinoPath(QString xmlFile);
     virtual void prepareTranslators(QApplication* app);
+    virtual QDir configDir(QString subdir = 0);
+    
 protected:
     CAppSetupLinux();
     friend class CAppSetup;
@@ -81,6 +86,8 @@ public:
     virtual void prepareGdal();
     virtual void prepareTranslators(QApplication* app);
     virtual void prepareConfig();
+    virtual QDir configDir(QString subdir = 0);
+    
 protected:
     CAppSetupWin();
     friend class CAppSetup;

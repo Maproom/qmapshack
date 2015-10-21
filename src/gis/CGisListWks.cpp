@@ -18,7 +18,6 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "config.h"
 #ifdef Q_OS_LINUX
 #include "device/CDeviceWatcherLinux.h"
 #endif
@@ -47,6 +46,7 @@
 #include "gis/search/CSearchGoogle.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CAppSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -92,7 +92,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     , deviceWatcher(0)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
-    db.setDatabaseName(QDir::home().filePath(CONFIGDIR).append("/workspace.db"));
+    QString config = CAppSetup::getPlattformInstance()->configDir().filePath("workspace.db");
+    db.setDatabaseName(config);
     db.open();
     configDB();
 

@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "config.h"
 #include "helpers/CAppOpts.h"
 #include "helpers/CAppSetup.h"
 
@@ -145,6 +146,23 @@ QString CAppSetup::routinoPath(QDir dirXml, QString xmlFile)
     return file;
 }
 
+QDir CAppSetup::path(QString path, QString subdir, bool mkdir)
+{
+    QDir pathDir(path);
+    
+    if(subdir != 0)
+    {
+        pathDir = QDir(pathDir.absoluteFilePath(subdir));
+    }
+    if(mkdir && !pathDir.exists())
+    {
+        pathDir.mkpath(path);
+        qDebug() << "path created " << pathDir.absolutePath();
+    }
+    return pathDir;
+}
+
+
 
 void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, QString translationPath, QString translationPrefix)
 {
@@ -203,6 +221,14 @@ QString CAppSetupMac::routinoPath(QString xmlFile)
     return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
+QDir CAppSetupMac::configDir(QString subdir)
+{
+    
+    QDir configDir = CAppSetup::path(CONFIGDIR, subdir, true);
+    qDebug() << "config dir " << configDir.absolutePath();
+    return configDir;
+}
+
 
 QString CAppSetupMac::getResourceDir(QString subdir)
 {
@@ -257,6 +283,15 @@ QString CAppSetupLinux::routinoPath(QString xmlFile)
 }
 
 
+QDir CAppSetupLinux::configDir(QString subdir)
+{
+    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+    QDir configDir = CAppSetup::path(path, subdir, true);
+    qDebug() << "config dir " << configDir.absolutePath();
+    return configDir;
+}
+
+
 void CAppSetupLinux::prepareTranslators(QApplication* app)
 {
     QString resourceDir     = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
@@ -298,6 +333,16 @@ QString CAppSetupWin::routinoPath(QString xmlFile)
     QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
     return CAppSetup::routinoPath(dirXml, xmlFile);
 }
+
+
+QDir CAppSetupWin::configDir(QString subdir)
+{
+    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+    QDir configDir = CAppSetup::path(path, subdir, true);
+    qDebug() << "config dir " << configDir.absolutePath();
+    return configDir;
+}
+
 
 void CAppSetupWin::prepareTranslators(QApplication* app)
 {

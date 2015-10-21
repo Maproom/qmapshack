@@ -20,6 +20,7 @@
 #define CAPPSETUP_H
 
 #include <QApplication>
+#include <QtCore>
 
 
 class CAppSetup
@@ -41,6 +42,7 @@ protected:
     virtual QString logFilename();
     void printToConsole(QtMsgType type, QString formatedMsg);
     void appendToFile(QtMsgType type, QString formatedMsg);
+    QString routinoPath(QDir dirXml, QString xmlFile);
 };
 
 

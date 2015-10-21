@@ -230,7 +230,6 @@ function updateInfoPlist {
 }
 
 function buildBinary {
-    rm -rf $BUILD_BUNDLE_DIR
     rm -rf $BUILD_RELEASE_DIR/$APP_NAME
     #export MACOSX_DEPLOYMENT_TARGET=10.5
     xcodebuild -list -project $BUILD_DIR/$APP_NAME.xcodeproj

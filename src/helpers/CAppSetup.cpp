@@ -138,6 +138,14 @@ void CAppSetup::prepareGdal()
 }
 
 
+QString CAppSetup::routinoPath(QDir dirXml, QString xmlFile)
+{
+    QString file = dirXml.absoluteFilePath(xmlFile);
+    qDebug() << "ROUTINO file is " +file;
+    return file;
+}
+
+
 void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, QString translationPath, QString translationPrefix)
 {
     QString locale = QLocale::system().name();
@@ -192,7 +200,7 @@ void CAppSetupMac::prepareGdal()
 QString CAppSetupMac::routinoPath(QString xmlFile)
 {
     QDir dirXml(getResourceDir("routino"));
-    return dirXml.absoluteFilePath(xmlFile);
+    return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
 
@@ -245,7 +253,7 @@ CAppSetupLinux::CAppSetupLinux()
 QString CAppSetupLinux::routinoPath(QString xmlFile)
 {
     QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
-    return dirXml.absoluteFilePath(xmlFile);
+    return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
 
@@ -288,7 +296,7 @@ QString CAppSetupWin::routinoPath(QString xmlFile)
     QString apppath = QCoreApplication::applicationDirPath();
     apppath = apppath.replace("/", "\\");
     QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
-    return dirXml.absoluteFilePath(xmlFile);
+    return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
 void CAppSetupWin::prepareTranslators(QApplication* app)

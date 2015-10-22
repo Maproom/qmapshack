@@ -156,10 +156,19 @@ QDir CAppSetup::path(QString path, QString subdir, bool mkdir)
     }
     if(mkdir && !pathDir.exists())
     {
-        pathDir.mkpath(path);
+        pathDir.mkpath(pathDir.absolutePath());
         qDebug() << "path created " << pathDir.absolutePath();
     }
     return pathDir;
+}
+
+
+QDir CAppSetup::configDir(QString subdir)
+{
+    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+    QDir configDir = CAppSetup::path(path, subdir, false);
+    qDebug() << "config dir " << configDir.absolutePath();
+    return configDir;
 }
 
 
@@ -184,11 +193,8 @@ void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, 
 
 void CAppSetup::prepareConfig()
 {
-    QDir dir = QDir::home();
-    if(!dir.exists(".config/QLandkarte"))
-    {
-        dir.mkpath(".config/QLandkarte");
-    }
+    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+    CAppSetup::path(path, "WaypointIcons", true);
 }
 
 
@@ -221,13 +227,6 @@ QString CAppSetupMac::routinoPath(QString xmlFile)
     return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
-QDir CAppSetupMac::configDir(QString subdir)
-{
-    QDir configDir = CAppSetup::path(CONFIGDIR, subdir, true);
-    qDebug() << "config dir " << configDir.absolutePath();
-    return configDir;
-}
-
 
 QString CAppSetupMac::getResourceDir(QString subdir)
 {
@@ -255,11 +254,6 @@ void CAppSetupMac::prepareTranslators(QApplication* app)
 }
 
 
-void CAppSetupMac::prepareConfig()
-{
-    // nothing to do
-}
-
 
 QString CAppSetupMac::logFilename()
 {
@@ -279,15 +273,6 @@ QString CAppSetupLinux::routinoPath(QString xmlFile)
 {
     QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
     return CAppSetup::routinoPath(dirXml, xmlFile);
-}
-
-
-QDir CAppSetupLinux::configDir(QString subdir)
-{
-    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
-    QDir configDir = CAppSetup::path(path, subdir, true);
-    qDebug() << "config dir " << configDir.absolutePath();
-    return configDir;
 }
 
 
@@ -333,14 +318,6 @@ QString CAppSetupWin::routinoPath(QString xmlFile)
     return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
-
-QDir CAppSetupWin::configDir(QString subdir)
-{
-    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
-    QDir configDir = CAppSetup::path(path, subdir, true);
-    qDebug() << "config dir " << configDir.absolutePath();
-    return configDir;
-}
 
 
 void CAppSetupWin::prepareTranslators(QApplication* app)

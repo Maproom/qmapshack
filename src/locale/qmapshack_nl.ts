@@ -6,12 +6,12 @@
     <message>
         <location filename="../CAbout.cpp" line="38"/>
         <source>%1 (API V%2, expected V%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (API V%2, verwachte V%3)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="42"/>
         <source>%1 (API V%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (API V%2)</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="66"/>
         <source>View %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon %1</translation>
     </message>
 </context>
 <context>
@@ -27,32 +27,32 @@
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="31"/>
         <source>Print debug output to console.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon debug resultaat op scherm.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="34"/>
         <source>Print debug output to logfile (temp. path).</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla debug resultaat op als bestand (tijdelijk psd).</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="37"/>
         <source>Do not show splash screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon geen splash scherm.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="40"/>
         <source>File with QMapShack configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand met QMapShack. configuratie.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="40"/>
         <source>file</source>
-        <translation type="unfinished"></translation>
+        <translation>bestand</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="43"/>
         <source>Files for future use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestanden voor toekomstig gebruik.</translation>
     </message>
 </context>
 <context>
@@ -60,12 +60,12 @@
     <message>
         <location filename="../dem/CDemList.cpp" line="145"/>
         <source>Deactivate</source>
-        <translation type="unfinished"></translation>
+        <translation>Deactiveer</translation>
     </message>
     <message>
         <location filename="../dem/CDemList.cpp" line="145"/>
         <source>Activate</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer</translation>
     </message>
 </context>
 <context>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../dem/CDemPropSetup.cpp" line="183"/>
         <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Graad %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -97,7 +97,7 @@
         <location filename="../dem/CDemVRT.cpp" line="61"/>
         <location filename="../dem/CDemVRT.cpp" line="89"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="45"/>
@@ -121,23 +121,23 @@
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="62"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>geen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="62"/>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="132"/>
         <source>???</source>
-        <translation type="unfinished"></translation>
+        <translation>???</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="159"/>
         <source>Searching for images...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken naar afbeeldingen...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="264"/>
         <source>No images found</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen afbeeldingen gevonden</translation>
     </message>
 </context>
 <context>
@@ -145,7 +145,7 @@
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="135"/>
         <source>Edit name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CDetailsOvlArea.cpp" line="135"/>
@@ -169,7 +169,7 @@
         <location filename="../gis/prj/CDetailsPrj.cpp" line="249"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="689"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>geen</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="322"/>
@@ -179,12 +179,12 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="377"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Overzicht van alle tracks in project&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="397"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Waypoints&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="404"/>
@@ -193,7 +193,7 @@
         <location filename="../gis/prj/CDetailsPrj.cpp" line="624"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="654"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="405"/>
@@ -202,17 +202,17 @@
         <location filename="../gis/prj/CDetailsPrj.cpp" line="625"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="655"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Notitie</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="423"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="553"/>
         <source>distance: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>afstand:-%1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="555"/>
@@ -232,29 +232,29 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="647"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Routes&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="675"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
         <source>Edit name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="675"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
         <source>Enter new project name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef  project een nieuwe naam.</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
         <source>Edit keywords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerkt sleutelwoorden...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
         <source>Enter keywords.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef sleutelwoorden.</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="818"/>
@@ -267,7 +267,7 @@
     <message>
         <location filename="../gis/rte/CDetailsRte.cpp" line="120"/>
         <source>Edit name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/rte/CDetailsRte.cpp" line="120"/>
@@ -305,12 +305,12 @@
         <location filename="../gis/trk/CDetailsTrk.cpp" line="279"/>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="281"/>
         <source>%1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="457"/>
         <source>Edit name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="457"/>
@@ -330,7 +330,7 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="515"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen</translation>
     </message>
 </context>
 <context>
@@ -338,7 +338,7 @@
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="157"/>
         <source>Edit name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="157"/>
@@ -356,7 +356,7 @@
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="83"/>
         <source>No DEM data found for that point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen OEM gegevens gevonden voor dit punt.</translation>
     </message>
 </context>
 <context>
@@ -434,37 +434,37 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="100"/>
         <source>Edit..</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerken..</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="101"/>
         <source>Show on Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon op kaart</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="102"/>
         <source>Hide from Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon niet op kaart</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="104"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="105"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan als...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="107"/>
         <source>Send to Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzend naar GPS</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="109"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluiten</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="115"/>
@@ -475,17 +475,17 @@
         <location filename="../gis/CGisListWks.cpp" line="116"/>
         <location filename="../gis/CGisListWks.cpp" line="137"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="127"/>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerken...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="128"/>
         <source>Copy to...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer naar...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="130"/>
@@ -515,12 +515,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="143"/>
         <source>Show Bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon ballon</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Move Waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats waypoint</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="146"/>
@@ -530,22 +530,22 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="154"/>
         <source>Route Instructions</source>
-        <translation type="unfinished"></translation>
+        <translation>Route instructies</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Calculate Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Route berekenen</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="157"/>
         <source>Reset Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouet omkeren</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Edit Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk route</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="167"/>
@@ -555,7 +555,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Create Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak route</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="613"/>
@@ -582,7 +582,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1061"/>
         <source>Close all projects...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit alle projecten...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1061"/>
@@ -623,22 +623,22 @@
     <message>
         <location filename="../grid/CGrid.cpp" line="65"/>
         <source>%1 %2 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 </translation>
     </message>
     <message>
         <location filename="../grid/CGrid.cpp" line="69"/>
         <source>%1%2%5 %3%4%5 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1%2%5 %3%4%5 </translation>
     </message>
     <message>
         <location filename="../grid/CGrid.cpp" line="76"/>
         <source>%1m, %2m </source>
-        <translation type="unfinished"></translation>
+        <translation>%1m, %2m </translation>
     </message>
     <message>
         <location filename="../grid/CGrid.cpp" line="80"/>
         <source>N %1m, E %2m </source>
-        <translation type="unfinished"></translation>
+        <translation>N %1m, O %2m </translation>
     </message>
 </context>
 <context>
@@ -654,7 +654,7 @@
     <message>
         <location filename="../tool/CImportDatabase.cpp" line="29"/>
         <source>Import QLandkarte Database</source>
-        <translation type="unfinished"></translation>
+        <translation>QLandkarte database importeren</translation>
     </message>
     <message>
         <location filename="../tool/CImportDatabase.cpp" line="73"/>
@@ -710,42 +710,42 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="170"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="171"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Duits</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="172"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="173"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Engels</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="174"/>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>Italiaans</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="175"/>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <translation>Fins</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="176"/>
         <source>Swedish</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweeds</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="177"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaans</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="178"/>
@@ -775,7 +775,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="183"/>
         <source>Danish</source>
-        <translation type="unfinished"></translation>
+        <translation>Deens</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="184"/>
@@ -810,17 +810,17 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="190"/>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Pools</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="191"/>
         <source>Turkish</source>
-        <translation type="unfinished"></translation>
+        <translation>Turks</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="192"/>
         <source>Greek</source>
-        <translation type="unfinished"></translation>
+        <translation>Grieks</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="193"/>
@@ -955,12 +955,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="275"/>
         <source>Stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Stroom</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="276"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijdzone</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="277"/>
@@ -971,7 +971,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="279"/>
         <source>State/province border</source>
-        <translation type="unfinished"></translation>
+        <translation>Staat/provinciegrens</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="280"/>
@@ -981,12 +981,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="281"/>
         <source>International border</source>
-        <translation type="unfinished"></translation>
+        <translation>Internationale grens</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="282"/>
         <source>River</source>
-        <translation type="unfinished"></translation>
+        <translation>Rivier</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="283"/>
@@ -1032,7 +1032,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="291"/>
         <source>Pipeline</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijplijn</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="292"/>
@@ -1072,17 +1072,17 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="363"/>
         <source>Parking lot</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkeerterrein</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="364"/>
         <source>Parking garage</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkeergarage</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="365"/>
         <source>Airport</source>
-        <translation type="unfinished"></translation>
+        <translation>Vliegveld</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="366"/>
@@ -1102,7 +1102,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="369"/>
         <source>Hospital</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziekenhuis</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="370"/>
@@ -1112,7 +1112,7 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="371"/>
         <source>Reservation</source>
-        <translation type="unfinished"></translation>
+        <translation>Reservaat</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="373"/>
@@ -1132,19 +1132,19 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="376"/>
         <source>Cemetery</source>
-        <translation type="unfinished"></translation>
+        <translation>Begraafplaats</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="377"/>
         <location filename="../map/CMapIMG.cpp" line="378"/>
         <location filename="../map/CMapIMG.cpp" line="379"/>
         <source>National park</source>
-        <translation type="unfinished"></translation>
+        <translation>Nationaal park</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="380"/>
         <source>City park</source>
-        <translation type="unfinished"></translation>
+        <translation>Stadspark</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="381"/>
@@ -1156,12 +1156,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="384"/>
         <source>Forest</source>
-        <translation type="unfinished"></translation>
+        <translation>Bos</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="385"/>
         <source>Ocean</source>
-        <translation type="unfinished"></translation>
+        <translation>Oceaan</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="386"/>
@@ -1173,26 +1173,26 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="387"/>
         <source>Sea</source>
-        <translation type="unfinished"></translation>
+        <translation>Zee</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="389"/>
         <location filename="../map/CMapIMG.cpp" line="390"/>
         <location filename="../map/CMapIMG.cpp" line="397"/>
         <source>Large lake</source>
-        <translation type="unfinished"></translation>
+        <translation>Groot meer</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="391"/>
         <location filename="../map/CMapIMG.cpp" line="392"/>
         <source>Medium lake</source>
-        <translation type="unfinished"></translation>
+        <translation>Middelmatig meer</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="393"/>
         <location filename="../map/CMapIMG.cpp" line="394"/>
         <source>Small lake</source>
-        <translation type="unfinished"></translation>
+        <translation>Klein meer</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="395"/>
@@ -1253,12 +1253,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="411"/>
         <source>Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlak</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="412"/>
         <source>???</source>
-        <translation type="unfinished"></translation>
+        <translation>???</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="448"/>
@@ -1316,14 +1316,14 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="2707"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2753"/>
         <location filename="../map/CMapIMG.cpp" line="2761"/>
         <location filename="../map/CMapIMG.cpp" line="2768"/>
         <source>Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebied</translation>
     </message>
 </context>
 <context>
@@ -1331,12 +1331,12 @@
     <message>
         <location filename="../map/CMapList.cpp" line="155"/>
         <source>Deactivate</source>
-        <translation type="unfinished"></translation>
+        <translation>Deactiveer</translation>
     </message>
     <message>
         <location filename="../map/CMapList.cpp" line="155"/>
         <source>Activate</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer</translation>
     </message>
     <message>
         <location filename="../map/CMapList.cpp" line="174"/>
@@ -1392,7 +1392,7 @@
         <location filename="../map/CMapRMAP.cpp" line="209"/>
         <location filename="../map/CMapRMAP.cpp" line="237"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../map/CMapRMAP.cpp" line="48"/>
@@ -1430,7 +1430,7 @@
         <location filename="../map/CMapTMS.cpp" line="81"/>
         <location filename="../map/CMapTMS.cpp" line="140"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="71"/>
@@ -1468,7 +1468,7 @@ line %2, column %3:
         <location filename="../map/CMapVRT.cpp" line="89"/>
         <location filename="../map/CMapVRT.cpp" line="125"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="47"/>
@@ -1508,7 +1508,8 @@ line %2, column %3:
         <location filename="../tool/CMapVrtBuilder.cpp" line="125"/>
         <source>!!! done !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>!!! klaar !!!
+</translation>
     </message>
 </context>
 <context>
@@ -1521,7 +1522,7 @@ line %2, column %3:
         <location filename="../map/CMapWMTS.cpp" line="160"/>
         <location filename="../map/CMapWMTS.cpp" line="220"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="46"/>
@@ -1582,7 +1583,7 @@ Unknown structure.</source>
         <location filename="../mouse/CMouseEditRte.cpp" line="30"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="37"/>
         <source>Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Route</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
@@ -1596,7 +1597,7 @@ Unknown structure.</source>
         <location filename="../mouse/CMouseEditTrk.cpp" line="28"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="36"/>
         <source>Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Track</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="39"/>
@@ -1668,7 +1669,7 @@ Unknown structure.</source>
     <message>
         <location filename="../helpers/CPhotoAlbum.cpp" line="72"/>
         <source>Select images...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer afbeeldingen...</translation>
     </message>
 </context>
 <context>
@@ -1676,17 +1677,17 @@ Unknown structure.</source>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="58"/>
         <source>distance [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>afstand [%1]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="62"/>
         <source>time</source>
-        <translation type="unfinished"></translation>
+        <translation>tijd</translation>
     </message>
     <message>
         <location filename="../plot/CPlotDistance.cpp" line="64"/>
         <source>distance. [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>afstand. [%1]</translation>
     </message>
 </context>
 <context>
@@ -1694,17 +1695,17 @@ Unknown structure.</source>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="65"/>
         <source>distance [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>afstand [%1]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="69"/>
         <source>time [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>tijd [u]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="71"/>
         <source>alt. [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>hoogte [%1]</translation>
     </message>
 </context>
 <context>
@@ -1712,17 +1713,17 @@ Unknown structure.</source>
     <message>
         <location filename="../plot/CPlotSpeed.cpp" line="57"/>
         <source>distance [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>afstand [%1]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotSpeed.cpp" line="61"/>
         <source>time [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>tijd [u]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotSpeed.cpp" line="63"/>
         <source>speed. [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>snelheid. [%1]</translation>
     </message>
 </context>
 <context>
@@ -1730,22 +1731,22 @@ Unknown structure.</source>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="68"/>
         <source>Print Map...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaart afdrukken...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="75"/>
         <source>Save Map as Image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk kaar af als afbeelding...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="95"/>
         <source>Printer Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Printer instellingen...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="170"/>
         <source>Pages: %1 x %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina&apos;s: %1 x %2</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="171"/>
@@ -1754,17 +1755,21 @@ Unknown structure.</source>
 %1x%2 pixel
 x: %3 m/px
 y: %4 m/px</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom met muiswiel op kaart om resulotie te veranderen:
+
+%1x%2 pixel
+x: %3 m/px
+y: %4 m/px</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="217"/>
         <source>Printing pages.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina&apos;s afdrukken.</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="259"/>
         <source>Save map...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaart opslaan...</translation>
     </message>
 </context>
 <context>
@@ -1772,12 +1777,12 @@ y: %4 m/px</source>
     <message>
         <location filename="../helpers/CProgressDialog.cpp" line="40"/>
         <source>Elapsed time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstreken tijd: %1</translation>
     </message>
     <message>
         <location filename="../helpers/CProgressDialog.cpp" line="74"/>
         <source>Elapsed time: %1 seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstreken tijd: %1 seconden.</translation>
     </message>
 </context>
 <context>
@@ -1785,17 +1790,17 @@ y: %4 m/px</source>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="57"/>
         <source>north</source>
-        <translation type="unfinished"></translation>
+        <translation>noord</translation>
     </message>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="58"/>
         <source>south</source>
-        <translation type="unfinished"></translation>
+        <translation>zuid</translation>
     </message>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="215"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="215"/>
@@ -1803,7 +1808,10 @@ y: %4 m/px</source>
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>De waarde
+&apos;%1&apos;
+is geen geldig coordinaat definitie:
+%2</translation>
     </message>
 </context>
 <context>
@@ -1811,12 +1819,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
         <source>Edit name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
         <source>Enter new waypoint name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef  waypoint een nieuwe naam.</translation>
     </message>
 </context>
 <context>
@@ -1859,7 +1867,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="556"/>
         <source>Tracks:           %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tracks:           %1</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="564"/>
@@ -1869,7 +1877,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="572"/>
         <source>Waypoints:        %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Waypoints:        %1</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="580"/>
@@ -1965,72 +1973,72 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="37"/>
         <source>Fastest</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelst</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="38"/>
         <source>Shortest</source>
-        <translation type="unfinished"></translation>
+        <translation>Kortst</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="39"/>
         <source>Bicycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiets</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="40"/>
         <source>Pedestrian</source>
-        <translation type="unfinished"></translation>
+        <translation>Wandelen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="42"/>
         <source>US English</source>
-        <translation type="unfinished"></translation>
+        <translation>VS Engels</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="43"/>
         <source>British English</source>
-        <translation type="unfinished"></translation>
+        <translation>Brits Engels</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="44"/>
         <source>Danish</source>
-        <translation type="unfinished"></translation>
+        <translation>Deens</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="45"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="46"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="47"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Duits</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="48"/>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>Italiaans</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="49"/>
         <source>Norwegian</source>
-        <translation type="unfinished"></translation>
+        <translation>Noors</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="50"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaans</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="51"/>
         <source>Swedish</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweeds</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="110"/>
@@ -2040,48 +2048,48 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="114"/>
         <source>no highways</source>
-        <translation type="unfinished"></translation>
+        <translation>geen snelwegen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="125"/>
         <source>no toll roads</source>
-        <translation type="unfinished"></translation>
+        <translation>geen tolwegen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="136"/>
         <source>no seasonal</source>
-        <translation type="unfinished"></translation>
+        <translation>geen seizoenswegen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="147"/>
         <source>no unpaved</source>
-        <translation type="unfinished"></translation>
+        <translation>niet onverhard</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="158"/>
         <source>no ferry</source>
-        <translation type="unfinished"></translation>
+        <translation>geen veer</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="169"/>
         <source>no crossing of country borders</source>
-        <translation type="unfinished"></translation>
+        <translation>geen grensovergangen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="301"/>
         <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Route aanvraag naar server gezonden. Moment geduld...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="312"/>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="346"/>
         <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Geen reactie van server:&lt;br/&gt;%1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="363"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br/&gt;Berekenen tijd: %1s</translation>
     </message>
 </context>
 <context>
@@ -2090,97 +2098,97 @@ is not a valid coordinate system definition:
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="59"/>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="249"/>
         <source>Warning...</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="59"/>
         <source>Found Routino with a wrong version. Expected %1 found %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Routini gevonden met verkeerde versie. Verwachtte %1 gevonden %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="63"/>
         <source>Shortest</source>
-        <translation type="unfinished"></translation>
+        <translation>Kortst</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="64"/>
         <source>Quickest</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelst</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
         <source>Foot</source>
-        <translation type="unfinished"></translation>
+        <translation>Wandelend</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
         <source>Horse</source>
-        <translation type="unfinished"></translation>
+        <translation>Paard</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="91"/>
         <source>Wheelchair</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolstoel</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
         <source>Bicycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiets</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
         <source>Moped</source>
-        <translation type="unfinished"></translation>
+        <translation>Brommer</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="94"/>
         <source>Motorcycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorfiets</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="95"/>
         <source>Motorcar</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
         <source>Goods</source>
-        <translation type="unfinished"></translation>
+        <translation>Goederen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="98"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Engels</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="99"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Duits</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="100"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="101"/>
         <source>Hungarian</source>
-        <translation type="unfinished"></translation>
+        <translation>Hongaars</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="102"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="103"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Russisch</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="104"/>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Pools</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="139"/>
@@ -2280,7 +2288,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="199"/>
         <source>Unknown error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende fout: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="211"/>
@@ -2301,12 +2309,12 @@ is not a valid coordinate system definition:
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="353"/>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="440"/>
         <source>Calculate route with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereken route met %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="361"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br/&gt;Berekenen tijd: %1s</translation>
     </message>
 </context>
 <context>
@@ -2327,12 +2335,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="36"/>
         <source>Routino (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino (offline)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="37"/>
         <source>MapQuest (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>MapQuest (online)</translation>
     </message>
 </context>
 <context>
@@ -2356,7 +2364,8 @@ is not a valid coordinate system definition:
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="147"/>
         <source>!!! done !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>!!! klaar !!!
+</translation>
     </message>
 </context>
 <context>
@@ -2364,12 +2373,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/search/CSearchGoogle.cpp" line="118"/>
         <source>Unknown response</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende reactie</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchGoogle.cpp" line="128"/>
         <source>Error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fout: </translation>
     </message>
 </context>
 <context>
@@ -2377,22 +2386,22 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="70"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="70"/>
         <source>There is already a database with name &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is al een database met naam &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="84"/>
         <source>New database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe database...</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="109"/>
         <source>Open database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Open database...</translation>
     </message>
 </context>
 <context>
@@ -2413,7 +2422,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../helpers/CTextEditWidget.cpp" line="73"/>
         <source>&amp;Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kleur...</translation>
     </message>
 </context>
 <context>
@@ -2421,12 +2430,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IAbout.ui" line="14"/>
         <source>About....</source>
-        <translation type="unfinished"></translation>
+        <translation>Over...</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="49"/>
         <source>&lt;b&gt;QMapShack&lt;/b&gt;, Version</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;QMapShack&lt;b&gt;, Versie</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="56"/>
@@ -2435,92 +2444,92 @@ is not a valid coordinate system definition:
         <location filename="../IAbout.ui" line="128"/>
         <location filename="../IAbout.ui" line="142"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="93"/>
         <source>Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="107"/>
         <source>GDAL</source>
-        <translation type="unfinished"></translation>
+        <translation>GDAL</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="121"/>
         <source>Proj4</source>
-        <translation type="unfinished"></translation>
+        <translation>Proj4</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="135"/>
         <source>Routino</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="160"/>
         <source>Rainer Unseld </source>
-        <translation type="unfinished"></translation>
+        <translation>Rainer Unseld</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="167"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="174"/>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>Tsjechisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="181"/>
         <source>Pavel Fric</source>
-        <translation type="unfinished"></translation>
+        <translation>Pavel Fric</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="188"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Duits</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="195"/>
         <source>Translation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertaling:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="202"/>
         <source>Josef Latt</source>
-        <translation type="unfinished"></translation>
+        <translation>Josef Latt</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="209"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaans</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="216"/>
         <source>Jose Luis Domingo Lopez</source>
-        <translation type="unfinished"></translation>
+        <translation>Jose Luis Domingo Lopez</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="234"/>
         <source>Ivo Kronenberg</source>
-        <translation type="unfinished"></translation>
+        <translation>Ivo Kronenberg</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="241"/>
         <source>Helmut Schmidt</source>
-        <translation type="unfinished"></translation>
+        <translation>Helmut Schmidt</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="248"/>
         <source>Win64</source>
-        <translation type="unfinished"></translation>
+        <translation>Win64</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="255"/>
         <source>OS X</source>
-        <translation type="unfinished"></translation>
+        <translation>OS X</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="262"/>
@@ -2540,7 +2549,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IAbout.ui" line="298"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
-        <translation type="unfinished"></translation>
+        <translation>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
 </context>
 <context>
@@ -2558,7 +2567,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="32"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="53"/>
@@ -2581,7 +2590,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="14"/>
         <source>Combine Tracks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Combineer tracks...</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="43"/>
@@ -2589,7 +2598,7 @@ is not a valid coordinate system definition:
         <location filename="../gis/trk/ICombineTrk.ui" line="117"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="144"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2597,22 +2606,22 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="14"/>
         <source>Coordinate Format...</source>
-        <translation type="unfinished"></translation>
+        <translation>Coördinaat formaat...</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53.660 E013° 31.113</source>
-        <translation type="unfinished"></translation>
+        <translation>N48° 53.660 O013° 31.113</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
-        <translation type="unfinished"></translation>
+        <translation>N48.8943° O013.51855°</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>N48° 53&apos; 39.6&quot; O13° 31&apos; 6.78&quot;</translation>
     </message>
 </context>
 <context>
@@ -2620,13 +2629,13 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="14"/>
         <source>Create Route from Waypoints</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak route van waypoints</translation>
     </message>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="30"/>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="50"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2640,12 +2649,12 @@ is not a valid coordinate system definition:
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
         <location filename="../dem/IDemPathSetup.ui" line="51"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="112"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -2653,7 +2662,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
@@ -2669,7 +2678,7 @@ is not a valid coordinate system definition:
         <location filename="../dem/IDemPropSetup.ui" line="53"/>
         <location filename="../dem/IDemPropSetup.ui" line="90"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="74"/>
@@ -2704,7 +2713,7 @@ is not a valid coordinate system definition:
         <location filename="../dem/IDemPropSetup.ui" line="297"/>
         <location filename="../dem/IDemPropSetup.ui" line="304"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
 </context>
 <context>
@@ -2712,7 +2721,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../dem/IDemList.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -2735,12 +2744,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="20"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="40"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Positie:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="47"/>
@@ -2756,43 +2765,43 @@ is not a valid coordinate system definition:
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="252"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="60"/>
         <source>Difficulty</source>
-        <translation type="unfinished"></translation>
+        <translation>Moeilijkheid</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="138"/>
         <source>Terrain</source>
-        <translation type="unfinished"></translation>
+        <translation>Terrein</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
         <source>Update spoilers</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoilers bijwerken</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="275"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="267"/>
         <source>about:blank</source>
-        <translation type="unfinished"></translation>
+        <translation>Over:leeg</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="293"/>
         <source>Hint:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hint:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="324"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
 </context>
 <context>
@@ -2800,12 +2809,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="44"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="69"/>
@@ -2820,12 +2829,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="88"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="118"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="139"/>
@@ -2835,32 +2844,32 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="153"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stijl</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="172"/>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparantie</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="185"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="214"/>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="241"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Positie</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="250"/>
         <source>Hist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hist.</translation>
     </message>
 </context>
 <context>
@@ -2868,45 +2877,45 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="43"/>
         <source>Keywords:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutelwoorden:</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="50"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="57"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="71"/>
         <source>Keep order of project</source>
-        <translation type="unfinished"></translation>
+        <translation>Behoud volgorde van project</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
         <source>Sort by time</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteer op tijd</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
         <source>Sort along track (multiple)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteer langs route (multi)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
         <source>Sort along track (single)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteer langs route (enkel)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="94"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="118"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="138"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="115"/>
@@ -2924,12 +2933,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="36"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="65"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="97"/>
@@ -2944,12 +2953,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="116"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="173"/>
         <source>Hist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hist.</translation>
     </message>
 </context>
 <context>
@@ -2957,7 +2966,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="56"/>
@@ -2965,12 +2974,13 @@ is not a valid coordinate system definition:
         <location filename="../gis/trk/IDetailsTrk.ui" line="98"/>
         <source>-
 -</source>
-        <translation type="unfinished"></translation>
+        <translation>-
+-</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="203"/>
         <source>Graph Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafieken</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="224"/>
@@ -2981,7 +2991,7 @@ is not a valid coordinate system definition:
         <location filename="../gis/trk/IDetailsTrk.ui" line="231"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="545"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelheid</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="238"/>
@@ -2991,7 +3001,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="248"/>
         <source>Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="274"/>
@@ -3001,7 +3011,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="277"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="307"/>
@@ -3011,12 +3021,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="335"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="377"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="405"/>
@@ -3031,12 +3041,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="477"/>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="525"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="530"/>
@@ -3071,17 +3081,17 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="565"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Positie</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="574"/>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="611"/>
         <source>Hist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hist.</translation>
     </message>
 </context>
 <context>
@@ -3094,12 +3104,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="43"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="77"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Positie:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="84"/>
@@ -3108,7 +3118,7 @@ is not a valid coordinate system definition:
         <location filename="../gis/wpt/IDetailsWpt.ui" line="186"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="265"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="97"/>
@@ -3136,12 +3146,12 @@ is not a valid coordinate system definition:
         <location filename="../gis/wpt/IDetailsWpt.ui" line="299"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="331"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="258"/>
         <source>Date/Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum/Tijd:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="276"/>
@@ -3156,7 +3166,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="350"/>
         <source>Hist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hist.</translation>
     </message>
 </context>
 <context>
@@ -3174,7 +3184,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="32"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="39"/>
@@ -3184,7 +3194,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="42"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3192,7 +3202,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="51"/>
@@ -3207,7 +3217,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3215,7 +3225,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="45"/>
@@ -3230,7 +3240,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="93"/>
@@ -3240,7 +3250,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="96"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3248,7 +3258,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
@@ -3263,12 +3273,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
         <source>points</source>
-        <translation type="unfinished"></translation>
+        <translation>punten</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="105"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3276,7 +3286,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
@@ -3296,12 +3306,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="61"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="81"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3309,7 +3319,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
@@ -3324,7 +3334,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>
         <source> sec.</source>
-        <translation type="unfinished"></translation>
+        <translation> sec.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="68"/>
@@ -3334,7 +3344,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="88"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3342,7 +3352,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="51"/>
@@ -3362,7 +3372,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="115"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3370,7 +3380,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="51"/>
@@ -3385,7 +3395,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="70"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3393,7 +3403,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
@@ -3408,7 +3418,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="54"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3416,12 +3426,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="35"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Verander snelheid&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
@@ -3431,12 +3441,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
         <source> km/h</source>
-        <translation type="unfinished"></translation>
+        <translation> km/u</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3444,13 +3454,13 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/IGisWidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/IGisWidget.ui" line="69"/>
         <location filename="../gis/IGisWidget.ui" line="99"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../gis/IGisWidget.ui" line="133"/>
@@ -3481,7 +3491,7 @@ is not a valid coordinate system definition:
         <location filename="../grid/IGridSetup.ui" line="92"/>
         <location filename="../grid/IGridSetup.ui" line="146"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="63"/>
@@ -3509,13 +3519,13 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../tool/IImportDatabase.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="22"/>
         <location filename="../tool/IImportDatabase.ui" line="63"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="45"/>
@@ -3526,7 +3536,7 @@ is not a valid coordinate system definition:
         <location filename="../tool/IImportDatabase.ui" line="52"/>
         <location filename="../tool/IImportDatabase.ui" line="93"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="86"/>
@@ -3536,7 +3546,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../tool/IImportDatabase.ui" line="102"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
 </context>
 <context>
@@ -3544,12 +3554,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../helpers/IInputDialog.ui" line="14"/>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerken...</translation>
     </message>
     <message>
         <location filename="../helpers/IInputDialog.ui" line="20"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
 </context>
 <context>
@@ -3557,28 +3567,28 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="14"/>
         <source>Links...</source>
-        <translation type="unfinished"></translation>
+        <translation>Links...</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="23"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="28"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="33"/>
         <source>Uri</source>
-        <translation type="unfinished"></translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="43"/>
         <location filename="../helpers/ILinksDialog.ui" line="63"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3586,12 +3596,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="17"/>
         <source>QMapShack</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="63"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="80"/>
@@ -3606,12 +3616,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="107"/>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation>?</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="114"/>
         <source>Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Project</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="124"/>
@@ -3621,7 +3631,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="149"/>
         <source>Maps</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaarten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="192"/>
@@ -3636,7 +3646,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="249"/>
         <source>Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Route</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="283"/>
@@ -3647,12 +3657,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="289"/>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="301"/>
         <source>Show Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon schaal</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="310"/>
@@ -3667,7 +3677,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="325"/>
         <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+G</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="334"/>
@@ -3677,7 +3687,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="337"/>
         <source>Ctrl+Alt+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="349"/>
@@ -3708,7 +3718,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="400"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+I</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="409"/>
@@ -3718,12 +3728,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="418"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Over</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="427"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Help</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="436"/>
@@ -3744,7 +3754,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="454"/>
         <source>Ctrl+L</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+L</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="463"/>
@@ -3759,7 +3769,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="469"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="478"/>
@@ -3784,7 +3794,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="511"/>
         <source>F8</source>
-        <translation type="unfinished"></translation>
+        <translation>F8</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="520"/>
@@ -3849,17 +3859,17 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="595"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="604"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluiten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="607"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="616"/>
@@ -3869,7 +3879,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="619"/>
         <source>Ctrl+Shift+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="628"/>
@@ -3889,7 +3899,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../IMainWindow.ui" line="643"/>
         <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="652"/>
@@ -3907,7 +3917,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -3947,14 +3957,14 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../map/IMapPathSetup.ui" line="29"/>
         <location filename="../map/IMapPathSetup.ui" line="154"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="36"/>
         <location filename="../map/IMapPathSetup.ui" line="73"/>
         <location filename="../map/IMapPathSetup.ui" line="93"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="185"/>
@@ -3968,7 +3978,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="35"/>
@@ -3984,7 +3994,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../map/IMapPropSetup.ui" line="53"/>
         <location filename="../map/IMapPropSetup.ui" line="90"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="74"/>
@@ -4009,7 +4019,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="151"/>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="196"/>
@@ -4024,7 +4034,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="233"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="240"/>
@@ -4037,13 +4047,13 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
         <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
@@ -4058,12 +4068,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="86"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="95"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
 </context>
 <context>
@@ -4116,7 +4126,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="501"/>
         <source>Distance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Afstand:</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="503"/>
@@ -4134,13 +4144,13 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../helpers/IPhotoAlbum.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../helpers/IPhotoAlbum.ui" line="50"/>
         <location filename="../helpers/IPhotoAlbum.ui" line="77"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -4158,7 +4168,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../plot/IPlot.cpp" line="112"/>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan...</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="630"/>
@@ -4189,7 +4199,10 @@ I don&apos;t want to read the documentation!</source>
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 or
 &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Verkeerde invoer. Moet zijn: 
+&quot;[N|Z] ddd mm.sss [W|O] ddd mm.sss&quot;
+of
+&quot;[N|Z] ddd.ddd [W|O] ddd.ddd&quot;</translation>
     </message>
 </context>
 <context>
@@ -4197,24 +4210,24 @@ or
     <message>
         <location filename="../print/IPrintDialog.ui" line="20"/>
         <source>Print map...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaart afdrukken...</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="50"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="69"/>
         <location filename="../print/IPrintDialog.ui" line="82"/>
         <location filename="../print/IPrintDialog.ui" line="131"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="98"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Afdrukken</translation>
     </message>
 </context>
 <context>
@@ -4222,13 +4235,13 @@ or
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="14"/>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Moment geduld...</translation>
     </message>
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="20"/>
         <location filename="../helpers/IProgressDialog.ui" line="27"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
 </context>
 <context>
@@ -4246,7 +4259,7 @@ or
     <message>
         <location filename="../grid/IProjWizard.ui" line="38"/>
         <source>UTM</source>
-        <translation type="unfinished"></translation>
+        <translation>UTM</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="45"/>
@@ -4294,32 +4307,32 @@ or
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="14"/>
         <source>Waypoint Projection</source>
-        <translation type="unfinished"></translation>
+        <translation>Waypoint projectie</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="22"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="45"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="54"/>
         <source>Clone waypoint and move by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer waypoint en verplaats naar:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="66"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
 </context>
 <context>
@@ -4327,27 +4340,27 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="22"/>
         <source>Highways</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelwegen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="29"/>
         <source>Seasonal</source>
-        <translation type="unfinished"></translation>
+        <translation>Seizoenswegen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="36"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="43"/>
         <source>Country Border</source>
-        <translation type="unfinished"></translation>
+        <translation>Landgrenzen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="53"/>
@@ -4357,27 +4370,27 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="60"/>
         <source>Avoid:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermijd:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="67"/>
         <source>Ferry</source>
-        <translation type="unfinished"></translation>
+        <translation>Veerboten</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="74"/>
         <source>Toll Road</source>
-        <translation type="unfinished"></translation>
+        <translation>Tolwegen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="84"/>
         <source>Unpaved</source>
-        <translation type="unfinished"></translation>
+        <translation>Onverhard</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="106"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Routebeschrijving afkomstig van &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -4385,7 +4398,7 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="31"/>
@@ -4410,12 +4423,12 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="55"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="66"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="131"/>
@@ -4434,12 +4447,12 @@ or
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="27"/>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="47"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutinoPathSetup.ui" line="99"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -4447,7 +4460,7 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
 </context>
 <context>
@@ -4455,13 +4468,13 @@ or
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="22"/>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="39"/>
@@ -4471,7 +4484,7 @@ or
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="54"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="86"/>
@@ -4481,7 +4494,7 @@ or
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="93"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
@@ -4494,7 +4507,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="32"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="53"/>
@@ -4524,12 +4537,12 @@ or
         <location filename="../mouse/line/IScrOptEditLine.ui" line="313"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="330"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="112"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="128"/>
@@ -4539,7 +4552,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="138"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl++</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="151"/>
@@ -4549,7 +4562,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
         <source>Ctrl+R</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+R</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="174"/>
@@ -4559,7 +4572,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="184"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="228"/>
@@ -4574,7 +4587,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="251"/>
@@ -4589,7 +4602,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="274"/>
@@ -4604,7 +4617,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
         <source>Ctrl+V</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+V</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="310"/>
@@ -4622,7 +4635,7 @@ or
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
@@ -4635,7 +4648,7 @@ or
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="71"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="92"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
@@ -4655,7 +4668,7 @@ or
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="121"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>TextLabel</translation>
     </message>
 </context>
 <context>
@@ -4663,7 +4676,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="20"/>
@@ -4674,7 +4687,7 @@ or
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="23"/>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="37"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="34"/>
@@ -4687,7 +4700,7 @@ or
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="40"/>
@@ -4700,7 +4713,7 @@ or
         <location filename="../mouse/IScrOptRangeTrk.ui" line="71"/>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="85"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="54"/>
@@ -4728,7 +4741,7 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="25"/>
@@ -4744,7 +4757,7 @@ or
         <location filename="../gis/rte/IScrOptRte.ui" line="105"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="119"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="39"/>
@@ -4774,7 +4787,7 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
 </context>
 <context>
@@ -4782,7 +4795,7 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
@@ -4800,7 +4813,7 @@ or
         <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="165"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
@@ -4845,7 +4858,7 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="191"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
 </context>
 <context>
@@ -4853,7 +4866,7 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
@@ -4868,7 +4881,7 @@ or
         <location filename="../gis/wpt/IScrOptWpt.ui" line="118"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="132"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
@@ -4898,7 +4911,7 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="176"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
 </context>
 <context>
@@ -4906,7 +4919,7 @@ or
     <message>
         <location filename="../gis/ISelDevices.ui" line="14"/>
         <source>Select devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer GPS...</translation>
     </message>
 </context>
 <context>
@@ -4940,7 +4953,7 @@ or
         <location filename="../helpers/ISelectCopyAction.ui" line="67"/>
         <location filename="../helpers/ISelectCopyAction.ui" line="77"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="60"/>
@@ -4991,37 +5004,37 @@ or
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
         <source>Select a project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer een project...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
         <source>Select project from list or enter new project name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer project uit lijst of maak nieuw project.</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
         <source>New project&apos;s name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam nieuw project</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="43"/>
         <source>New project is created as:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw project wordt gemaakt als:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="93"/>
         <source>*.qms</source>
-        <translation type="unfinished"></translation>
+        <translation>*.qms</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="103"/>
         <source>*.gpx</source>
-        <translation type="unfinished"></translation>
+        <translation>*.gpx</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="110"/>
         <source>Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Database</translation>
     </message>
 </context>
 <context>
@@ -5047,7 +5060,7 @@ or
         <location filename="../gis/db/ISelectSaveAction.ui" line="81"/>
         <location filename="../gis/db/ISelectSaveAction.ui" line="91"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="67"/>
@@ -5075,17 +5088,17 @@ or
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="25"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="32"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="39"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam </translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="46"/>
@@ -5096,7 +5109,7 @@ or
         <location filename="../gis/db/ISetupDatabase.ui" line="49"/>
         <location filename="../gis/db/ISetupDatabase.ui" line="63"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="60"/>
@@ -5137,27 +5150,27 @@ or
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="14"/>
         <source>New Waypoint...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw waypoint...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="22"/>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbool</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="29"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="39"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Positie</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="49"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="59"/>
@@ -5165,7 +5178,10 @@ or
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 or
 &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Verkeerde invoer. Moet zijn: 
+&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
+of
+&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
 </context>
 <context>
@@ -5183,7 +5199,7 @@ or
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="45"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minuten</translation>
     </message>
 </context>
 <context>
@@ -5191,7 +5207,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="14"/>
         <source>Edit text...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk tekst...</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="25"/>
@@ -5208,7 +5224,7 @@ or
         <location filename="../helpers/ITextEditWidget.ui" line="195"/>
         <location filename="../helpers/ITextEditWidget.ui" line="208"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="256"/>
@@ -5218,7 +5234,7 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="259"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="268"/>
@@ -5228,107 +5244,107 @@ or
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="271"/>
         <source>Ctrl+Shift+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="280"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Knippen</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="283"/>
         <source>Ctrl+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+X</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="292"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëren</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="295"/>
         <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="304"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Plakken</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="307"/>
         <source>Ctrl+V</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+V</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="319"/>
         <source>Align Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links uitlijnen</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="322"/>
         <source>Ctrl+L</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+L</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="334"/>
         <source>Align Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts uitlijnen</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="337"/>
         <source>Ctrl+R</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+R</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="349"/>
         <source>Align Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecentreerd</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="352"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="364"/>
         <source>Align Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgevuld</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="367"/>
         <source>Ctrl+J</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+J</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="379"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderstrepen</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="382"/>
         <source>Ctrl+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+U</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="394"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Vet</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="397"/>
         <source>Ctrl+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+B</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="409"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Cursief</translation>
     </message>
     <message>
         <location filename="../helpers/ITextEditWidget.ui" line="412"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+I</translation>
     </message>
 </context>
 <context>
@@ -5341,17 +5357,17 @@ or
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="22"/>
         <source>UTC</source>
-        <translation type="unfinished"></translation>
+        <translation>UTC</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="32"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokaal</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="42"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="75"/>
@@ -5537,17 +5553,17 @@ line %2, column %3:
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="695"/>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschikbaar</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="699"/>
         <source>Not Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="41"/>
         <source>[no name]</source>
-        <translation type="unfinished"></translation>
+        <translation>[geen naam]</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="327"/>
@@ -5568,35 +5584,35 @@ line %2, column %3:
         <location filename="../gis/IGisItem.cpp" line="653"/>
         <location filename="../gis/IGisItem.cpp" line="712"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h4&gt;Beschrijving:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="656"/>
         <location filename="../gis/IGisItem.cpp" line="715"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;--- geen beschrijving ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="667"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h4&gt;Notitie:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="670"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;--- geen notitie ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="681"/>
         <location filename="../gis/IGisItem.cpp" line="726"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h4&gt;Links:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="684"/>
         <location filename="../gis/IGisItem.cpp" line="729"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;--- geen links ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="95"/>
@@ -5684,7 +5700,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="112"/>
         <source>Save project?</source>
-        <translation type="unfinished"></translation>
+        <translation>Project opslaan?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="112"/>
@@ -5710,22 +5726,23 @@ line %2, column %3:
         <location filename="../gis/prj/IGisProject.cpp" line="341"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br/&gt;
+Bestandsnaam: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="346"/>
         <source>Waypoints: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Waypoints: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="350"/>
         <source>Tracks: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tracks: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="354"/>
         <source>Routes: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Routes: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="358"/>
@@ -5748,7 +5765,7 @@ Filename: %1</source>
         <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="117"/>
         <source>Edit name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
@@ -5774,23 +5791,23 @@ Filename: %1</source>
         <location filename="../gis/rte/CGisItemRte.cpp" line="286"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
         <source>Length: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="290"/>
         <source>Length: -</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="297"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="481"/>
         <source>Time: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="301"/>
         <source>Time: -</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="307"/>
@@ -5800,12 +5817,12 @@ Filename: %1</source>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="309"/>
         <source>with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>met %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="483"/>
         <source>Distance: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Afstand: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="612"/>
@@ -5827,7 +5844,7 @@ Filename: %1</source>
         <location filename="../gis/tnv/serialization.cpp" line="729"/>
         <location filename="../gis/tnv/serialization.cpp" line="803"/>
         <source>Error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
@@ -5864,19 +5881,19 @@ Filename: %1</source>
         <location filename="../gis/trk/CActivityTrk.cpp" line="35"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="95"/>
         <source>Bicycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiets</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="42"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="96"/>
         <source>Motor Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorfiets</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="49"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="97"/>
         <source>Car</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
@@ -5888,13 +5905,13 @@ Filename: %1</source>
         <location filename="../gis/trk/CActivityTrk.cpp" line="63"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="99"/>
         <source>Swim</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwemmen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="70"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="100"/>
         <source>Ship</source>
-        <translation type="unfinished"></translation>
+        <translation>Boot</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="77"/>
@@ -5906,7 +5923,7 @@ Filename: %1</source>
         <location filename="../gis/trk/CActivityTrk.cpp" line="213"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="257"/>
         <source>Distance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Afstand:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="215"/>
@@ -5924,25 +5941,25 @@ Filename: %1</source>
         <location filename="../gis/trk/CActivityTrk.cpp" line="219"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="323"/>
         <source>Speed Moving:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewogen snelheid:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="221"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="345"/>
         <source>Speed Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Totale snelheid:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="223"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="367"/>
         <source>Time Moving:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewogen tijd:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="225"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="389"/>
         <source>Time Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Totale tijd:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="357"/>
@@ -5952,38 +5969,38 @@ Filename: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="471"/>
         <source>, %1%2 %3, %4%5 %6</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="479"/>
         <source>Time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="482"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="492"/>
         <source>, Speed: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>, Snelheid: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="489"/>
         <source>Moving: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Beweging: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="498"/>
         <source>Start: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Start: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="503"/>
         <source>End: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="507"/>
         <source>Points: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten: %1 (%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="625"/>
@@ -5998,7 +6015,7 @@ Filename: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="633"/>
         <source> speed: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation> snelheid: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
@@ -6049,7 +6066,7 @@ Filename: %1</source>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="712"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="729"/>
         <source>, %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="717"/>
@@ -6074,7 +6091,7 @@ Filename: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="745"/>
         <source> Time: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation> Tijd: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1225"/>
@@ -6089,12 +6106,12 @@ Filename: %1</source>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1432"/>
         <source>Hide points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg punten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1472"/>
         <source>Show points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon punten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1821"/>
@@ -6165,7 +6182,7 @@ Filename: %1</source>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="317"/>
         <source>Elevation: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoogte: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="328"/>
@@ -6206,7 +6223,7 @@ Filename: %1</source>
         <location filename="../map/garmin/CGarminTyp.cpp" line="465"/>
         <location filename="../map/garmin/CGarminTyp.cpp" line="846"/>
         <source>Warning...</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing...</translation>
     </message>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="465"/>
@@ -6256,7 +6273,7 @@ Filename: %1</source>
         <location filename="../units/IUnit.cpp" line="745"/>
         <location filename="../units/IUnit.cpp" line="751"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../units/IUnit.cpp" line="745"/>

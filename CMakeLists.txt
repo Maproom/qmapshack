@@ -24,7 +24,7 @@ add_definitions(-DVER_MAJOR=${APPLICATION_VERSION_MAJOR} -DVER_MINOR=${APPLICATI
 
 if (APPLE)
   set(PROGNAME "QMapShack")
-  set(CONFIGDIR "/Library/Application Support/${PROGNAME}/")
+  set(CONFIGDIR "Library/Application Support/${PROGNAME}/")
 else(APPLE)
   set(PROGNAME qmapshack)
   set(CONFIGDIR ".config/QLandkarte/")

@@ -149,7 +149,7 @@ QString CAppSetup::routinoPath(QDir dirXml, QString xmlFile)
 QDir CAppSetup::path(QString path, QString subdir, bool mkdir)
 {
     QDir pathDir(path);
-    
+
     if(subdir != 0)
     {
         pathDir = QDir(pathDir.absoluteFilePath(subdir));
@@ -223,7 +223,6 @@ QString CAppSetupMac::routinoPath(QString xmlFile)
 
 QDir CAppSetupMac::configDir(QString subdir)
 {
-    
     QDir configDir = CAppSetup::path(CONFIGDIR, subdir, true);
     qDebug() << "config dir " << configDir.absolutePath();
     return configDir;

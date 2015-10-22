@@ -63,9 +63,9 @@ void initWptIcons()
     setWptIconByName("Letterbox Hybrid", "://icons/cache/32x32/letterbox.png");
     setWptIconByName("Virtual Cache", "://icons/cache/32x32/virtual.png");
     setWptIconByName("Webcam Cache", "://icons/cache/32x32/webcam.png");
-    
+
     QDir dirIcon = CAppSetup::getPlattformInstance()->configDir("WaypointIcons");
-    
+
     QString filename;
     QStringList filenames = dirIcon.entryList(QDir::Files);
 

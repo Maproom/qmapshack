@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "helpers/CSettings.h"
 #include "helpers/CAppSetup.h"
+#include "helpers/CSettings.h"
 
 #include "tool/CRoutinoDatabaseBuilder.h"
 
@@ -145,11 +145,10 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         pushStart->setEnabled(true);
         return;
     }
-    
+
     CAppSetup* instance = CAppSetup::getPlattformInstance();
     if(sourceFiles.isEmpty())
     {
-        
         QStringList args;
         args << QString("--dir=%1").arg(targetPath);
         args << QString("--prefix=%1").arg(targetPrefix);

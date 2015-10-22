@@ -72,7 +72,7 @@ public:
     virtual QString routinoPath(QString xmlFile);
     virtual void prepareTranslators(QApplication* app);
     virtual QDir configDir(QString subdir = 0);
-    
+
 protected:
     CAppSetupLinux();
     friend class CAppSetup;
@@ -87,7 +87,7 @@ public:
     virtual void prepareTranslators(QApplication* app);
     virtual void prepareConfig();
     virtual QDir configDir(QString subdir = 0);
-    
+
 protected:
     CAppSetupWin();
     friend class CAppSetup;

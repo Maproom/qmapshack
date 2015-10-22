@@ -551,9 +551,11 @@ QString CGisItemTrk::getInfoRange()
         pt2--;
     }
 
-    bool timeIsValid = pt1->time.isValid() && pt2->time.isValid();
+    bool timeIsValid    = pt1->time.isValid() && pt2->time.isValid();
+    qreal deltaTime     = pt2->time.toTime_t() - pt1->time.toTime_t();
 
     d = tmp = pt2->distance - pt1->distance;
+
     IUnit::self().meter2distance(tmp, val, unit);
     str += QString("%3 %1%2 ").arg(val).arg(unit).arg(QChar(0x21A6));
     if(timeIsValid)
@@ -563,7 +565,11 @@ QString CGisItemTrk::getInfoRange()
         quint32 mm = (t - hh * 3600) / 60;
         quint32 ss = (t - hh * 3600 - mm * 60);
 
-        str += QString("%4 %1:%2:%3\n").arg(hh,2,10,QChar('0')).arg(mm,2,10,QChar('0')).arg(ss,2,10,QChar('0')).arg(QChar(0x231a));
+        str += QString("%4 %1:%2:%3").arg(hh,2,10,QChar('0')).arg(mm,2,10,QChar('0')).arg(ss,2,10,QChar('0')).arg(QChar(0x231a));
+
+        IUnit::self().meter2speed(d/deltaTime, val, unit);
+        str += QString(", %3 %1%2\n").arg(val).arg(unit).arg(QChar(0x21A3));
+
     }
     else
     {
@@ -572,7 +578,6 @@ QString CGisItemTrk::getInfoRange()
 
     qreal deltaAscend   = pt2->ascend  - pt1->ascend;
     qreal deltaDescend  = pt2->descend - pt1->descend;
-    qreal deltaTime     = pt2->time.toTime_t() - pt1->time.toTime_t();
 
     tmp       = qAtan(deltaAscend/d);
     slope1    = qAbs(tmp * 360.0/(2 * M_PI));

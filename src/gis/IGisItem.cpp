@@ -29,7 +29,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "units/IUnit.h"
-#include "helpers/CPainter.h"
+#include "helpers/CDraw.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -555,7 +555,7 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
 
 void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPainter& p)
 {
-    CPainter::drawArrows(line, extViewport, p, 10, 80);
+    CDraw::drawArrows(line, extViewport, p, 10, 80);
 }
 
 QString IGisItem::removeHtml(const QString &str)

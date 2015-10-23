@@ -33,7 +33,7 @@
 #include "mouse/line/CScrOptEditLine.h"
 #include "mouse/line/IMouseEditLine.h"
 #include "units/IUnit.h"
-#include "helpers/CPainter.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
@@ -201,7 +201,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
     // draw magenta arrows (with white background)
     p.setBrush(Qt::magenta);
-    CPainter::drawArrows(pixelLine, QRectF(), p, 10, 80);
+    CDraw::drawArrows(pixelLine, QRectF(), p, 10, 80);
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);

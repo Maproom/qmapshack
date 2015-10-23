@@ -24,7 +24,7 @@
 #include <QRectF>
 #include <QPainter>
 
-class CPainter
+class CDraw
 {
 public:
     /**

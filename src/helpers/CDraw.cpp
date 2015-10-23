@@ -17,14 +17,14 @@
 
 **********************************************************************************************/
 
-#include "CPainter.h"
+#include "CDraw.h"
 #include "../canvas/CCanvas.h"
 
 #include <QPointF>
 #include <QImage>
 #include <QtMath>
 
-QImage CPainter::createBasicArrow(const QBrush &brush)
+QImage CDraw::createBasicArrow(const QBrush &brush)
 {
     QImage arrow(21, 16, QImage::Format_ARGB32);
     arrow.fill(qRgba(0, 0, 0, 0));
@@ -59,7 +59,7 @@ static inline int pointDistance(T &p1, T &p2)
     return qSqrt(qPow(p2.x() - p1.x(), 2) + qPow(p2.y() - p1.y(), 2));
 }
 
-void CPainter::drawArrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist)
+void CDraw::drawArrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist)
 {
     QImage arrow = createBasicArrow(p.brush());
 

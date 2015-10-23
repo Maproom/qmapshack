@@ -17,7 +17,6 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "CMainWindow.h"
 #include "GeoMath.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
@@ -29,6 +28,7 @@
 #include "gis/trk/CSelectActivity.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
+#include "helpers/CDraw.h"
 #include "plot/IPlot.h"
 
 #include <QtWidgets>
@@ -1619,7 +1619,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     foreach(const QPolygonF &l, lines)
     {
         p.drawPolyline(l);
-        drawArrows(l, extViewport, p);
+        CDraw::arrows(l, extViewport, p, 10, 80);
     }
     penForeground.setColor(color);
     p.setPen(penForeground);

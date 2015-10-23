@@ -42,7 +42,7 @@ public:
        @param minPointDist  The minimum distance of two points (in px)
        @param minArrowDist  The minimum distance of two consecutive arrows (in px)
      */
-    static void drawArrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist);
+    static void arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist);
 
 private:
     /**

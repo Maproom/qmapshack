@@ -553,11 +553,6 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
     }
 }
 
-void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPainter& p)
-{
-    CDraw::drawArrows(line, extViewport, p, 10, 80);
-}
-
 QString IGisItem::removeHtml(const QString &str)
 {
     QTextDocument html;

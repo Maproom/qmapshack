@@ -27,6 +27,7 @@
 #include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -434,7 +435,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     p.setPen(hasUserFocus() ? penForegroundFocus : penForeground);
     p.setBrush(hasUserFocus() ? penForegroundFocus.color() : penForeground.color());
-    drawArrows(line, extViewport, p);
+    CDraw::arrows(line, extViewport, p, 10, 80);
     p.drawPolyline(line);
 
     p.setPen(Qt::NoPen);

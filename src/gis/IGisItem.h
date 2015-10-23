@@ -453,8 +453,6 @@ protected:
     QString color2str(const QColor &color);
     /// to optimize drawing of large polylines split the line into sections that are visible
     void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
-    /// ditribute arrows over a polyline
-    void drawArrows(const QPolygonF &line, const QRectF &extViewport, QPainter& p);
     /// call when ever you make a change to the item's data
     virtual void changed(const QString& what, const QString& icon);
 
@@ -481,7 +479,6 @@ protected:
         QColor color;
     };
 
-
     enum flags_e
     {
         eFlagCreatedInQms   = 0x00000001
@@ -489,8 +486,6 @@ protected:
         ,eFlagTainted       = 0x00000004
         ,eFlagWptBubble     = 0x00000100
     };
-
-
 
     static inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
     {

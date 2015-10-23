@@ -59,7 +59,7 @@ static inline int pointDistance(T &p1, T &p2)
     return qSqrt(qPow(p2.x() - p1.x(), 2) + qPow(p2.y() - p1.y(), 2));
 }
 
-void CDraw::drawArrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist)
+void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist)
 {
     QImage arrow = createBasicArrow(p.brush());
 

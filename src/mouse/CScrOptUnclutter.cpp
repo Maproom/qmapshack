@@ -21,6 +21,7 @@
 #include "gis/IGisItem.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "mouse/CScrOptUnclutter.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
@@ -208,7 +209,7 @@ void CScrOptUnclutter::draw(QPainter& p)
         p.drawEllipse(item.area.center(), 18,18);
 
         p.drawPixmap(item.area, item.icon);
-        CCanvas::drawText(item.name, p, item.text, Qt::darkBlue);
+        CDraw::text(item.name, p, item.text, Qt::darkBlue);
     }
 }
 

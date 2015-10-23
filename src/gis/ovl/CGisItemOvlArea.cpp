@@ -23,6 +23,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -388,7 +389,7 @@ void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QR
     rect.adjust(-2,-2,2,2);
     rect.moveCenter(pt);
 
-    CCanvas::drawText(getName(), p, pt.toPoint(), Qt::darkBlue);
+    CDraw::text(getName(), p, pt.toPoint(), Qt::darkBlue);
     blockedAreas << rect;
 }
 

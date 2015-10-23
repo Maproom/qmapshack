@@ -29,6 +29,7 @@
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "helpers/CSettings.h"
+#include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
 #include "mouse/CMouseEditArea.h"
 #include "mouse/CMouseEditRte.h"
@@ -40,7 +41,6 @@
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
-
 
 #include <QtWidgets>
 
@@ -522,59 +522,6 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
     }
 }
 
-
-void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color)
-{
-    CCanvas::drawText(str,p,center, color, CMainWindow::self().getMapFont());
-}
-
-
-void CCanvas::drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font)
-{
-    QFontMetrics fm(font);
-    QRect r = fm.boundingRect(str);
-
-    r.moveCenter(center);
-
-    p.setPen(Qt::white);
-    p.setFont(font);
-
-    p.drawText(r.topLeft() - QPoint(-1,-1), str);
-    p.drawText(r.topLeft() - QPoint( 0,-1), str);
-    p.drawText(r.topLeft() - QPoint(+1,-1), str);
-
-    p.drawText(r.topLeft() - QPoint(-1, 0), str);
-    p.drawText(r.topLeft() - QPoint(+1, 0), str);
-
-    p.drawText(r.topLeft() - QPoint(-1,+1), str);
-    p.drawText(r.topLeft() - QPoint( 0,+1), str);
-    p.drawText(r.topLeft() - QPoint(+1,+1), str);
-
-    p.setPen(color);
-    p.drawText(r.topLeft(),str);
-}
-
-
-void CCanvas::drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color)
-{
-    p.setPen(Qt::white);
-    p.setFont(CMainWindow::self().getMapFont());
-
-    p.drawText(r.adjusted(-1,-1,-1,-1),Qt::AlignCenter,str);
-    p.drawText(r.adjusted( 0,-1, 0,-1),Qt::AlignCenter,str);
-    p.drawText(r.adjusted(+1,-1,+1,-1),Qt::AlignCenter,str);
-
-    p.drawText(r.adjusted(-1, 0,-1, 0),Qt::AlignCenter,str);
-    p.drawText(r.adjusted(+1, 0,+1, 0),Qt::AlignCenter,str);
-
-    p.drawText(r.adjusted(-1,+1,-1,+1),Qt::AlignCenter,str);
-    p.drawText(r.adjusted( 0,+1, 0,+1),Qt::AlignCenter,str);
-    p.drawText(r.adjusted(+1,+1,+1,+1),Qt::AlignCenter,str);
-
-    p.setPen(color);
-    p.drawText(r,Qt::AlignCenter,str);
-}
-
 void CCanvas::drawStatusMessages(QPainter& p)
 {
     if(labelStatusMessages->isVisible())
@@ -650,7 +597,7 @@ void CCanvas::drawScale(QPainter& p)
 
     QString val, unit;
     IUnit::self().meter2distance(d,val,unit);
-    drawText(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
+    CDraw::text(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
 }
 
 void CCanvas::slotTriggerCompleteUpdate(CCanvas::redraw_e flags)

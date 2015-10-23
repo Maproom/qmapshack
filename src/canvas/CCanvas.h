@@ -92,10 +92,6 @@ public:
     void zoomTo(const QRectF& rect);
     void displayInfo(const QPoint& px);
 
-    static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color);
-    static void drawText(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font);
-    static void drawText(const QString& str, QPainter& p, const QRect& r, const QColor& color);
-
     enum redraw_e
     {
         eRedrawNone = 0

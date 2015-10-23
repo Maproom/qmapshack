@@ -560,7 +560,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
             }
         }
 
-        CCanvas::drawText(rtept.name, p, rect.toRect(), Qt::darkBlue);
+        CDraw::text(rtept.name, p, rect.toRect(), Qt::darkBlue);
         blockedAreas << rect;
     }
 }

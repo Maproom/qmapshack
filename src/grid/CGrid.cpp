@@ -21,6 +21,7 @@
 #include "canvas/CCanvas.h"
 #include "grid/CGrid.h"
 #include "helpers/CSettings.h"
+#include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
 
 #include <QtGui>
@@ -375,22 +376,22 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
         foreach(const val_t &val, horzTopTicks)
         {
-            CCanvas::drawText(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
+            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
         }
 
         foreach(const val_t &val, horzBtmTicks)
         {
-            CCanvas::drawText(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
+            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
         }
 
         foreach(const val_t &val, vertLftTicks)
         {
-            CCanvas::drawText(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
+            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
         }
 
         foreach(const val_t &val, vertRgtTicks)
         {
-            CCanvas::drawText(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
+            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
         }
     }
     else
@@ -401,22 +402,22 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
         foreach(const val_t &val, horzTopTicks)
         {
-            CCanvas::drawText(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, yoff), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, yoff), textColor);
         }
 
         foreach(const val_t &val, horzBtmTicks)
         {
-            CCanvas::drawText(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, h), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, h), textColor);
         }
 
         foreach(const val_t &val, vertLftTicks)
         {
-            CCanvas::drawText(QString("%1").arg(qint32(val.val/1000)), p, QPoint(xoff, val.pos), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(xoff, val.pos), textColor);
         }
 
         foreach(const val_t &val, vertRgtTicks)
         {
-            CCanvas::drawText(QString("%1").arg(qint32(val.val/1000)), p, QPoint(w - xoff, val.pos), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(w - xoff, val.pos), textColor);
         }
     }
 }

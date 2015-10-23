@@ -24,6 +24,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "units/IUnit.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -79,7 +80,7 @@ void CMouseMoveWpt::draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRec
     p.drawPolygon(arrow);
     p.restore();
 
-    CCanvas::drawText(str, p, (p2 + QPoint(0, -30)).toPoint(), Qt::darkBlue);
+    CDraw::text(str, p, (p2 + QPoint(0, -30)).toPoint(), Qt::darkBlue);
 
     p.drawPixmap(p1 - focus, icon);
     p.drawPixmap(p2 - focus, icon);

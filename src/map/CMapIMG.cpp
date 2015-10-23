@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "helpers/CFileExt.h"
+#include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/Platform.h"
 #include "map/CMapDraw.h"
@@ -2259,7 +2260,7 @@ void CMapIMG::drawLabels(QPainter& p, const QVector<strlbl_t> &lbls)
     QVector<strlbl_t>::const_iterator lbl = lbls.begin();
     while(lbl != lbls.end())
     {
-        CCanvas::drawText(lbl->str, p, lbl->pt, Qt::black, fonts[lbl->type]);
+        CDraw::text(lbl->str, p, lbl->pt, Qt::black, fonts[lbl->type]);
         ++lbl;
     }
 }

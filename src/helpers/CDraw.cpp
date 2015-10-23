@@ -95,3 +95,49 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
     }
 }
 
+void CDraw::text(const QString &str, QPainter &p, const QPoint &center, const QColor &color, const QFont &font)
+{
+    QFontMetrics fm(font);
+    QRect r = fm.boundingRect(str);
+
+    r.moveCenter(center);
+    p.setFont(font);
+
+    // draw the white `shadow`
+    p.setPen(Qt::white);
+    p.drawText(r.topLeft() - QPoint(-1, -1), str);
+    p.drawText(r.topLeft() - QPoint( 0, -1), str);
+    p.drawText(r.topLeft() - QPoint(+1, -1), str);
+
+    p.drawText(r.topLeft() - QPoint(-1,  0), str);
+    p.drawText(r.topLeft() - QPoint(+1,  0), str);
+
+    p.drawText(r.topLeft() - QPoint(-1, +1), str);
+    p.drawText(r.topLeft() - QPoint( 0, +1), str);
+    p.drawText(r.topLeft() - QPoint(+1, +1), str);
+
+    p.setPen(color);
+    p.drawText(r.topLeft(), str);
+}
+
+void CDraw::text(const QString &str, QPainter &p, const QRect &r, const QColor &color)
+{
+    p.setPen(Qt::white);
+    p.setFont(CMainWindow::self().getMapFont());
+
+    // draw the white `shadow`
+    p.drawText(r.adjusted(-1, -1, -1, -1), Qt::AlignCenter, str);
+    p.drawText(r.adjusted( 0, -1,  0, -1), Qt::AlignCenter, str);
+    p.drawText(r.adjusted(+1, -1, +1, -1), Qt::AlignCenter, str);
+
+    p.drawText(r.adjusted(-1,  0, -1,  0), Qt::AlignCenter, str);
+    p.drawText(r.adjusted(+1,  0, +1,  0), Qt::AlignCenter, str);
+
+    p.drawText(r.adjusted(-1, +1, -1, +1), Qt::AlignCenter, str);
+    p.drawText(r.adjusted( 0, +1,  0, +1), Qt::AlignCenter, str);
+    p.drawText(r.adjusted(+1, +1, +1, +1), Qt::AlignCenter, str);
+
+    p.setPen(color);
+    p.drawText(r, Qt::AlignCenter, str);
+}
+

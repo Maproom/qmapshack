@@ -29,10 +29,9 @@
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CSetupNewWpt.h"
 #include "helpers/CSettings.h"
+#include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
-
-
 
 #include <QtWidgets>
 #include <QtXml>
@@ -599,7 +598,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
         }
     }
 
-    CCanvas::drawText(wpt.name,p,rect.toRect(), Qt::darkBlue);
+    CDraw::text(wpt.name,p,rect.toRect(), Qt::darkBlue);
     blockedAreas << rect;
 }
 

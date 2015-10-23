@@ -52,6 +52,7 @@ set( SRCS
     helpers/CProgressDialog.cpp
     helpers/CCommandProcessor.cpp
     helpers/CAppSetup.cpp
+    helpers/CPainter.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/IDrawContext.cpp
@@ -264,6 +265,7 @@ set( HDRS
     helpers/CProgressDialog.h
     helpers/CCommandProcessor.h
     helpers/CAppSetup.h
+    helpers/CPainter.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h

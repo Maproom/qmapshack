@@ -29,6 +29,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "units/IUnit.h"
+#include "helpers/CPainter.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -554,68 +555,7 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
 
 void IGisItem::drawArrows(const QPolygonF& line, const QRectF& extViewport, QPainter& p)
 {
-    QPointF arrow[4] =
-    {
-        QPointF( 20.0, 7.0),     //front
-        QPointF( 0.0, 0.0),      //upper tail
-        QPointF( 5.0, 7.0),      //mid tail
-        QPointF( 0.0, 15.0)      //lower tail
-    };
-
-    QPointF pt, pt1, ptt;
-
-    // draw direction arrows
-    bool start = true;
-    qreal heading;
-
-    //generate arrow pic on-the-fly
-    QImage arrow_pic(21,16, QImage::Format_ARGB32);
-    arrow_pic.fill( qRgba(0,0,0,0));
-    QPainter t_paint(&arrow_pic);
-    USE_ANTI_ALIASING(t_paint, true);
-    t_paint.setPen(QPen(Qt::white, 2));
-    t_paint.setBrush(p.brush());
-    t_paint.drawPolygon(arrow, 4);
-    t_paint.end();
-
-    foreach(pt,line)
-    {
-        if(start)                // no arrow on  the first loop
-        {
-            start = false;
-        }
-        else
-        {
-            if(!extViewport.contains(pt))
-            {
-                pt1 = pt;
-                continue;
-            }
-            if((qAbs(pt.x() - pt1.x()) + qAbs(pt.y() - pt1.y())) < 7)
-            {
-                pt1 = pt;
-                continue;
-            }
-            // keep distance
-            if((qAbs(pt.x() - ptt.x()) + qAbs(pt.y() - ptt.y())) > 100)
-            {
-                if(0 != pt.x() - pt1.x() && (pt.y() - pt1.y()))
-                {
-                    heading = ( qAtan2((qreal)(pt.y() - pt1.y()), (qreal)(pt.x() - pt1.x())) * 180.) / M_PI;
-
-                    p.save();
-                    // draw arrow between bullets
-                    p.translate((pt.x() + pt1.x())/2,(pt.y() + pt1.y())/2);
-                    p.rotate(heading);
-                    p.drawImage(-11, -7, arrow_pic);
-                    p.restore();
-                    //remember last point
-                    ptt = pt;
-                }
-            }
-        }
-        pt1 = pt;
-    }
+    CPainter::drawArrows(line, extViewport, p, 10, 80);
 }
 
 QString IGisItem::removeHtml(const QString &str)

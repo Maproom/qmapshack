@@ -101,21 +101,21 @@ void IMouseEditLine::commonSetup()
 {
     // create permanent line edit on screen options
     scrOptEditLine = new CScrOptEditLine(this);
-    connect(scrOptEditLine->pushSaveOrig, SIGNAL(clicked()), this, SLOT(slotCopyToOrig()));
-    connect(scrOptEditLine->pushSaveNew, SIGNAL(clicked()), this, SLOT(slotCopyToNew()));
-    connect(scrOptEditLine->pushAbort, SIGNAL(clicked()), this, SLOT(slotAbort()));
+    connect(scrOptEditLine->pushSaveOrig,    SIGNAL(clicked()), this, SLOT(slotCopyToOrig()   ));
+    connect(scrOptEditLine->pushSaveNew,     SIGNAL(clicked()), this, SLOT(slotCopyToNew()    ));
+    connect(scrOptEditLine->pushAbort,       SIGNAL(clicked()), this, SLOT(slotAbort()        ));
 
-    connect(scrOptEditLine->toolMovePoint, SIGNAL(clicked()), this, SLOT(slotMovePoint()));
-    connect(scrOptEditLine->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()));
-    connect(scrOptEditLine->toolAddPoint, SIGNAL(clicked()), this, SLOT(slotAddPoint()));
-    connect(scrOptEditLine->toolDeletePoint, SIGNAL(clicked()), this, SLOT(slotDeletePoint()));
+    connect(scrOptEditLine->toolMovePoint,   SIGNAL(clicked()), this, SLOT(slotMovePoint()    ));
+    connect(scrOptEditLine->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()  ));
+    connect(scrOptEditLine->toolAddPoint,    SIGNAL(clicked()), this, SLOT(slotAddPoint()     ));
+    connect(scrOptEditLine->toolDeletePoint, SIGNAL(clicked()), this, SLOT(slotDeletePoint()  ));
 
-    connect(scrOptEditLine->toolNoRoute, SIGNAL(clicked()), this, SLOT(slotNoRouting()));
-    connect(scrOptEditLine->toolAutoRoute, SIGNAL(clicked()), this, SLOT(slotAutoRouting()));
+    connect(scrOptEditLine->toolNoRoute,     SIGNAL(clicked()), this, SLOT(slotNoRouting()    ));
+    connect(scrOptEditLine->toolAutoRoute,   SIGNAL(clicked()), this, SLOT(slotAutoRouting()  ));
     connect(scrOptEditLine->toolVectorRoute, SIGNAL(clicked()), this, SLOT(slotVectorRouting()));
 
-    connect(scrOptEditLine->toolUndo, SIGNAL(clicked()), this, SLOT(slotUndo()));
-    connect(scrOptEditLine->toolRedo, SIGNAL(clicked()), this, SLOT(slotRedo()));
+    connect(scrOptEditLine->toolUndo,        SIGNAL(clicked()), this, SLOT(slotUndo()         ));
+    connect(scrOptEditLine->toolRedo,        SIGNAL(clicked()), this, SLOT(slotRedo()         ));
 
     SETTINGS;
     int mode = cfg.value("Route/drawMode",0).toInt();
@@ -355,8 +355,18 @@ void IMouseEditLine::changeCursor()
 
 void IMouseEditLine::slotAbort()
 {
-    canvas->resetMouse();
-    canvas->update();
+    // ask if the current operation should be aborted (only in case there are things to be saved)
+    bool doAbort = ( idxHistory == 0 );
+    if(!doAbort)
+    {
+        doAbort = (QMessageBox::Yes == QMessageBox::question(NULL, "Abort", "Do you really want to abort?\nAny modifications done will be discarded.", QMessageBox::Yes | QMessageBox::No));
+    }
+
+    if(doAbort)
+    {
+        canvas->resetMouse();
+        canvas->update();
+    }
 }
 
 void IMouseEditLine::slotCopyToOrig()

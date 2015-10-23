@@ -111,7 +111,7 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
         // update position of point
         pt.coord = coord;
 
-        // clear subpoints, as they have to be recalulated
+        // clear subpoints, as they have to be recalculated
         // by the routing, if any
         pt.subpts.clear();
         if(idxFocus > 0)
@@ -158,5 +158,4 @@ void CLineOpMovePoint::drawFg(QPainter& p)
         drawSinglePointLarge(pt.pixel, p);
     }
 }
-
 

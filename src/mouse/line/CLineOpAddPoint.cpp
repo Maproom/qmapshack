@@ -39,7 +39,7 @@ void CLineOpAddPoint::append()
 {
     // this is called on construction when creating a complete new line
     // A new point is appended to what ever line already exists,
-    // and add point mode is enetred imediately.
+    // and add point mode is entered immediately.
     idxFocus = points.size();
     points.insert(idxFocus, IGisLine::point_t(points.last()));
     addPoint = true;
@@ -151,7 +151,7 @@ void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
         // update position of point
         pt.coord = coord;
 
-        // clear subpoints, as they have to be recalulated
+        // clear subpoints, as they have to be recalculated
         // by the routing, if any
         pt.subpts.clear();
         if(idxFocus > 0)

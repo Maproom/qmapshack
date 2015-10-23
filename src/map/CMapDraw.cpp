@@ -325,7 +325,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
             if(item && item->key == key)
             {
                 /**
-                    @Note   the item will load it's configuration uppon successful activation
+                    @Note   the item will load it's configuration upon successful activation
                             by calling loadConfigForMapItem().
                  */
                 item->activate();

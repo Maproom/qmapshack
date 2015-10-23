@@ -156,7 +156,7 @@ public:
        @brief Find a matching street polyline
 
        The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
-       the threshold. The returned poylline uses lon/lat as coordinates.
+       the threshold. The returned polyline uses lon/lat as coordinates.
 
        @param pt1           first point in [rad]
        @param pt2           second point in [rad]

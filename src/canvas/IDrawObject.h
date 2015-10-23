@@ -81,7 +81,7 @@ public:
        connect to the QListWidget's signals to be noticed by a change.
 
        Different to other properties, that will get queried when ever the property
-       widget think it needs an update, getLayers() will only be called once uppon
+       widget think it needs an update, getLayers() will only be called once upon
        property widget creation.
 
        The default implementation will simply clear the list.

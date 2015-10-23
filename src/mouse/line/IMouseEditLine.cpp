@@ -144,7 +144,7 @@ void IMouseEditLine::abortStep()
     {
         // if within operation nothing can be aborted, then abort the whole operation
         // this equals clicking the `abort` button
-        slotAbort();
+        slotAbort(true);
     }
 }
 
@@ -353,10 +353,10 @@ void IMouseEditLine::changeCursor()
     }
 }
 
-void IMouseEditLine::slotAbort()
+void IMouseEditLine::slotAbort(bool showMB)
 {
     // ask if the current operation should be aborted (only in case there are things to be saved)
-    bool doAbort = ( idxHistory == 0 );
+    bool doAbort = ( idxHistory == 0 ) || !showMB;
     if(!doAbort)
     {
         doAbort = (QMessageBox::Yes == QMessageBox::question(NULL, "Abort", "Do you really want to abort?\nAny modifications done will be discarded.", QMessageBox::Yes | QMessageBox::No));

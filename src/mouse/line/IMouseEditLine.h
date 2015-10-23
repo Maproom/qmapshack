@@ -102,7 +102,7 @@ protected slots:
     void slotVectorRouting();
 
 
-    virtual void slotAbort();
+    virtual void slotAbort(bool showMB = false);
     virtual void slotCopyToOrig();
     virtual void slotCopyToNew() = 0;
 

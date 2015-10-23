@@ -147,7 +147,8 @@ public:
      */
     const QString& getKey()
     {
-        genKey(); return key;
+        genKey();
+        return key;
     }
 
     /**

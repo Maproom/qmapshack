@@ -307,7 +307,8 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             break;
         }
 
-        default:;
+        default:
+            ;
         }
 
         ++entry;

@@ -29,7 +29,8 @@ class CFlags
 public:
     CFlags(quint32 f=0)
     {
-        flags = f; changed = true;
+        flags = f;
+        changed = true;
     }
     virtual ~CFlags()
     {
@@ -56,7 +57,8 @@ public:
         {
             changed = true;
         }
-        flags|=f; return flags;
+        flags|=f;
+        return flags;
     }
     quint32 operator &= (quint32 f)
     {
@@ -64,7 +66,8 @@ public:
         {
             changed = true;
         }
-        flags&=f; return flags;
+        flags&=f;
+        return flags;
     }
     quint32 operator >> (quint32 & f)
     {
@@ -72,7 +75,8 @@ public:
         {
             changed = true;
         }
-        flags = f; return flags;
+        flags = f;
+        return flags;
     }
     const bool isChanged() const
     {

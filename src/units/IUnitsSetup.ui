@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>92</height>
+    <width>201</width>
+    <height>126</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,11 +15,11 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QRadioButton" name="radioMetric">
+      <widget class="QRadioButton" name="radioNautic">
        <property name="text">
-        <string>Metric</string>
+        <string>Nautic</string>
        </property>
       </widget>
      </item>
@@ -31,9 +31,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="radioNautic">
+      <widget class="QRadioButton" name="radioMetric">
        <property name="text">
-        <string>Nautic</string>
+        <string>Metric</string>
        </property>
       </widget>
      </item>

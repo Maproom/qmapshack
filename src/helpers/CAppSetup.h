@@ -20,6 +20,7 @@
 #define CAPPSETUP_H
 
 #include <QApplication>
+#include <QtCore>
 
 
 class CAppSetup
@@ -29,9 +30,11 @@ public:
     static void consoleMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
     virtual void prepareGdal();
+    virtual QString routinoPath(QString xmlFile) = 0;
     virtual void prepareTranslators(QApplication* app) = 0;
     virtual void prepareConfig();
     virtual void installMessageHandler();
+    virtual QDir configDir(QString subdir = 0);
 
 protected:
     void prepareTranslator(QApplication* app, QTranslator *qtTranslator, QString translationPath, QString translationPrefix);
@@ -40,6 +43,8 @@ protected:
     virtual QString logFilename();
     void printToConsole(QtMsgType type, QString formatedMsg);
     void appendToFile(QtMsgType type, QString formatedMsg);
+    QString routinoPath(QDir dirXml, QString xmlFile);
+    QDir path(QString path, QString subdir = 0, bool mkdir = false);
 };
 
 
@@ -47,8 +52,8 @@ class CAppSetupMac : public CAppSetup
 {
 public:
     virtual void prepareGdal();
+    virtual QString routinoPath(QString xmlFile);
     virtual void prepareTranslators(QApplication* app);
-    virtual void prepareConfig();
 
 protected:
     virtual QString logFilename();
@@ -62,7 +67,9 @@ protected:
 class CAppSetupLinux : public CAppSetup
 {
 public:
+    virtual QString routinoPath(QString xmlFile);
     virtual void prepareTranslators(QApplication* app);
+
 protected:
     CAppSetupLinux();
     friend class CAppSetup;
@@ -72,8 +79,11 @@ protected:
 class CAppSetupWin : public CAppSetup
 {
 public:
+    virtual QString routinoPath(QString xmlFile);
     virtual void prepareGdal();
     virtual void prepareTranslators(QApplication* app);
+    virtual void prepareConfig();
+    
 protected:
     CAppSetupWin();
     friend class CAppSetup;

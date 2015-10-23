@@ -57,8 +57,10 @@ quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift
 
     pData += 3;
 
-    dLng = gar_ptr_load(int16_t, pData); pData += 2;
-    dLat = gar_ptr_load(int16_t, pData); pData += 2;
+    dLng = gar_ptr_load(int16_t, pData);
+    pData += 2;
+    dLat = gar_ptr_load(int16_t, pData);
+    pData += 2;
 
     qint32 x1,y1;
 
@@ -98,8 +100,10 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
         byte_size += 1;
     }
 
-    dLng = gar_ptr_load(int16_t, pData); pData += 2;
-    dLat = gar_ptr_load(int16_t, pData); pData += 2;
+    dLng = gar_ptr_load(int16_t, pData);
+    pData += 2;
+    dLat = gar_ptr_load(int16_t, pData);
+    pData += 2;
 
     qint32 x1,y1;
 

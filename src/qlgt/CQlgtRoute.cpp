@@ -133,7 +133,8 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
 //                }
 //                break;
 //            }
-        default:;
+        default:
+            ;
         }
 
         ++entry;

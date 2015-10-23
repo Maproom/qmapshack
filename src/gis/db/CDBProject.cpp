@@ -114,7 +114,7 @@ void CDBProject::setupName(const QString &defaultName)
     query.bindValue(":id", id);
     query.bindValue(":type1", IDBFolder::eTypeGroup);
     query.bindValue(":type2", IDBFolder::eTypeProject);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     if(query.next())
     {
         nameSuffix   = query.value(0).toString();
@@ -291,7 +291,7 @@ bool CDBProject::save()
                 query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
                 query.bindValue(":parent", id);
                 query.bindValue(":child", idItem);
-                QUERY_EXEC(; );
+                QUERY_EXEC();
 
                 if(!query.next())
                 {
@@ -321,7 +321,8 @@ bool CDBProject::save()
                             item1 = new CGisItemOvlArea(idItem, db, 0);
                             break;
 
-                        default:;
+                        default:
+                            ;
                         }
 
                         if(item1 == 0)
@@ -444,7 +445,8 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
             new CGisItemOvlArea(item.id, db, this);
             break;
 
-        default:;
+        default:
+            ;
         }
     }
 

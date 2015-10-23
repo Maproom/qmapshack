@@ -30,8 +30,13 @@ function buildRoutino {
     pimpMakefileConf
     
     make
+}
 
-
+function adjustLinking {
+     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/libroutino.so $LIB_ROUTINO_LIB_DIR/libroutino.so
+     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/routino.so $LIB_ROUTINO_LIB_DIR/routino.so
+     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/routino.a $LIB_ROUTINO_LIB_DIR/routino.a
+     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/libroutino.a $LIB_ROUTINO_LIB_DIR/libroutino.a
 }
 
 function pimpMakefileConf {
@@ -74,4 +79,5 @@ if [[ "$1" == "routino-build" ]]; then
     updateRoutino
     buildRoutino
     releaseRoutino
+    adjustLinking
 fi

@@ -45,7 +45,8 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, bool groupAll
         radioOther->setChecked(true);
         break;
 
-    default:;
+    default:
+        ;
     }
 
     radioGroup->setEnabled(groupAllowed);

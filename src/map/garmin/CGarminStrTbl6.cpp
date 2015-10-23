@@ -100,7 +100,10 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     fill();
     while(idx < sizeof(buffer))
     {
-        c1 = reg >> 26; reg <<= 6; bits -= 6; fill();
+        c1 = reg >> 26;
+        reg <<= 6;
+        bits -= 6;
+        fill();
         //terminator
         if(c1 > 0x2F)
         {
@@ -112,12 +115,18 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
         {
             if(c1 == 0x1C)
             {
-                c1 = reg >> 26; reg <<= 6; bits -= 6; fill();
+                c1 = reg >> 26;
+                reg <<= 6;
+                bits -= 6;
+                fill();
                 buffer[idx++] = str6tbl2[c1];
             }
             else if(c1 == 0x1B)
             {
-                c1 = reg >> 26; reg <<= 6; bits -= 6; fill();
+                c1 = reg >> 26;
+                reg <<= 6;
+                bits -= 6;
+                fill();
                 buffer[idx++] = str6tbl3[c1];
             }
             else if(c1 > 0x1C && c1 < 0x20)

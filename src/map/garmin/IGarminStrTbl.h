@@ -35,15 +35,20 @@ public:
 
     void registerLBL1(const quint32 offset, const quint32 size, const quint8 shift)
     {
-        offsetLBL1 = offset; sizeLBL1 = size; addrshift1 = shift;
+        offsetLBL1 = offset;
+        sizeLBL1 = size;
+        addrshift1 = shift;
     }
     void registerLBL6(const quint32 offset, const quint32 size)
     {
-        offsetLBL6 = offset; sizeLBL6 = size;
+        offsetLBL6 = offset;
+        sizeLBL6 = size;
     }
     void registerNET1(const quint32 offset, const quint32 size, const quint8 shift)
     {
-        offsetNET1 = offset; sizeNET1 = size; addrshift2 = shift;
+        offsetNET1 = offset;
+        sizeNET1 = size;
+        addrshift2 = shift;
     }
 
     virtual void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) = 0;

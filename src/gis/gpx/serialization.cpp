@@ -447,8 +447,8 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
 
     QStringList keys = extensions.keys();
     keys.sort();
-    foreach(const QString& key, keys)
-    {        
+    foreach(const QString &key, keys)
+    {
         QStringList tags = key.split('|', QString::SkipEmptyParts);
 
         if(tags.size() == 1)

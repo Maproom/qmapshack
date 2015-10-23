@@ -93,11 +93,15 @@ public:
 
     static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone, bool& format)
     {
-        mode = timeZoneMode; zone = timeZone; format = useShortFormat;
+        mode = timeZoneMode;
+        zone = timeZone;
+        format = useShortFormat;
     }
     static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone, bool format)
     {
-        timeZoneMode = mode; timeZone = zone; useShortFormat = format;
+        timeZoneMode = mode;
+        timeZone = zone;
+        useShortFormat = format;
     }
 
     enum coord_format_e

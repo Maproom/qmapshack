@@ -48,7 +48,8 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(dataset->GetRasterCount() != 1)
     {
-        delete dataset; dataset = 0;
+        delete dataset;
+        dataset = 0;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
@@ -57,7 +58,8 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     pBand = dataset->GetRasterBand(1);
     if(pBand == 0)
     {
-        delete dataset; dataset = 0;
+        delete dataset;
+        dataset = 0;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
@@ -85,7 +87,8 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     free(ptr);
     if(pjsrc == 0)
     {
-        delete dataset; dataset = 0;
+        delete dataset;
+        dataset = 0;
         QMessageBox::warning(0, tr("Error..."), tr("No georeference information found."));
         return;
     }

@@ -408,7 +408,8 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         }
         QTextStream out(&file);
         out.setCodec("UTF-8");
-        out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;;
+        out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
+
         out << doc.toString();
         file.close();
         if(file.error() != QFile::NoError)

@@ -26,7 +26,7 @@
 
 class CAppOpts
 {
-public:  
+public:
     const bool debug;            // -d, print debug messages
     const bool logfile;          // -f, print debug messages to logfile
     const bool nosplash;         // -n, do not display splash screen

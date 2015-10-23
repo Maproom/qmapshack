@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "config.h"
 #include "helpers/CAppOpts.h"
 #include "helpers/CAppSetup.h"
 
@@ -24,6 +25,11 @@
 #include <iostream>
 
 #include <qdebug.h>
+
+#ifndef _MKSTR_1
+#define _MKSTR_1(x)    #x
+#define _MKSTR(x)      _MKSTR_1(x)
+#endif
 
 CAppSetup* instance;
 
@@ -133,6 +139,40 @@ void CAppSetup::prepareGdal()
 }
 
 
+QString CAppSetup::routinoPath(QDir dirXml, QString xmlFile)
+{
+    QString file = dirXml.absoluteFilePath(xmlFile);
+    qDebug() << "ROUTINO file is " +file;
+    return file;
+}
+
+QDir CAppSetup::path(QString path, QString subdir, bool mkdir)
+{
+    QDir pathDir(path);
+
+    if(subdir != 0)
+    {
+        pathDir = QDir(pathDir.absoluteFilePath(subdir));
+    }
+    if(mkdir && !pathDir.exists())
+    {
+        pathDir.mkpath(pathDir.absolutePath());
+        qDebug() << "path created " << pathDir.absolutePath();
+    }
+    return pathDir;
+}
+
+
+QDir CAppSetup::configDir(QString subdir)
+{
+    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+    QDir configDir = CAppSetup::path(path, subdir, false);
+    qDebug() << "config dir " << configDir.absolutePath();
+    return configDir;
+}
+
+
+
 void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, QString translationPath, QString translationPrefix)
 {
     QString locale = QLocale::system().name();
@@ -153,11 +193,8 @@ void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, 
 
 void CAppSetup::prepareConfig()
 {
-    QDir dir = QDir::home();
-    if(!dir.exists(".config/QLandkarte"))
-    {
-        dir.mkpath(".config/QLandkarte");
-    }
+    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+    CAppSetup::path(path, "WaypointIcons", true);
 }
 
 
@@ -182,6 +219,12 @@ void CAppSetupMac::prepareGdal()
     qputenv("PROJ_LIB", projDir.toUtf8());
 
     CAppSetup::prepareGdal();
+}
+
+QString CAppSetupMac::routinoPath(QString xmlFile)
+{
+    QDir dirXml(getResourceDir("routino"));
+    return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
 
@@ -211,11 +254,6 @@ void CAppSetupMac::prepareTranslators(QApplication* app)
 }
 
 
-void CAppSetupMac::prepareConfig()
-{
-    // nothing to do
-}
-
 
 QString CAppSetupMac::logFilename()
 {
@@ -229,6 +267,12 @@ QString CAppSetupMac::logFilename()
 
 CAppSetupLinux::CAppSetupLinux()
 {
+}
+
+QString CAppSetupLinux::routinoPath(QString xmlFile)
+{
+    QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
+    return CAppSetup::routinoPath(dirXml, xmlFile);
 }
 
 
@@ -266,6 +310,16 @@ void CAppSetupWin::prepareGdal()
 }
 
 
+QString CAppSetupWin::routinoPath(QString xmlFile)
+{
+    QString apppath = QCoreApplication::applicationDirPath();
+    apppath = apppath.replace("/", "\\");
+    QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
+    return CAppSetup::routinoPath(dirXml, xmlFile);
+}
+
+
+
 void CAppSetupWin::prepareTranslators(QApplication* app)
 {
     QString apppath = QCoreApplication::applicationDirPath();
@@ -277,4 +331,11 @@ void CAppSetupWin::prepareTranslators(QApplication* app)
 
     QTranslator *qlandkartegtTranslator = new QTranslator(app);
     prepareTranslator(app, qlandkartegtTranslator, appResourceDir, "qmapshack_");
+}
+
+void CAppSetupWin::prepareConfig()
+{
+    CAppSetup::prepareConfig();
+    //reset PATH to avoid that wrong .dll's are loaded
+    qputenv("PATH", "");
 }

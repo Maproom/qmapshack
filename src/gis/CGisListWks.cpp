@@ -18,7 +18,6 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "config.h"
 #ifdef Q_OS_LINUX
 #include "device/CDeviceWatcherLinux.h"
 #endif
@@ -47,6 +46,7 @@
 #include "gis/search/CSearchGoogle.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CAppSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -92,7 +92,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     , deviceWatcher(0)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
-    db.setDatabaseName(QDir::home().filePath(CONFIGDIR).append("/workspace.db"));
+    QString config = CAppSetup::getPlattformInstance()->configDir().filePath("workspace.db");
+    db.setDatabaseName(config);
     db.open();
     configDB();
 
@@ -265,7 +266,7 @@ void CGisListWks::initDB()
     {
         query.prepare( "INSERT INTO versioninfo (version) VALUES(:version)");
         query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(; );
+        QUERY_EXEC();
     }
 
     if(!query.exec( "CREATE TABLE workspace ("
@@ -289,14 +290,17 @@ void CGisListWks::migrateDB(int version)
     qDebug() << "workspace.db has version " << version << ", migration to version " << DB_VERSION << " required";
 
     // try to migrate between the database versions step by step (as soon as applicable)
-    if(version < 2) { migrateDB1to2(); }
+    if(version < 2)
+    {
+        migrateDB1to2();
+    }
 //  if(version < 3) { migrateDB2to3(); }
 
     // save the new version to the database
     QSqlQuery query(db);
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", DB_VERSION);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
 }
 
 void CGisListWks::migrateDB1to2()
@@ -762,7 +766,7 @@ void CGisListWks::slotSaveWorkspace()
         query.bindValue(":name", project->getName());
         query.bindValue(":changed", project->isChanged());
 
-	bool visible = (project->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked);
+        bool visible = (project->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked);
         query.bindValue(":visible", visible);
         query.bindValue(":data", data);
         QUERY_EXEC(continue);
@@ -847,7 +851,7 @@ void CGisListWks::slotLoadWorkspace()
             continue;
         }
 
-	// Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
+        // Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
         // but this results in a visible `the checkbox is being unchecked`, especially in case the project
         // is large and takes some time to load.
         // When done directly after construction there is no `blinking` of the check mark
@@ -1007,6 +1011,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 menuItemOvl->exec(p);
                 break;
             }
+
             return;
         }
     }

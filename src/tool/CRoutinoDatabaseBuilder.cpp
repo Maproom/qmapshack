@@ -16,15 +16,12 @@
 
 **********************************************************************************************/
 
+#include "helpers/CAppSetup.h"
 #include "helpers/CSettings.h"
+
 #include "tool/CRoutinoDatabaseBuilder.h"
 
 #include <QtWidgets>
-
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
 
 
 CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
@@ -149,20 +146,13 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         return;
     }
 
+    CAppSetup* instance = CAppSetup::getPlattformInstance();
     if(sourceFiles.isEmpty())
     {
-#ifdef WIN32
-        QString apppath = QCoreApplication::applicationDirPath();
-        apppath = apppath.replace("/", "\\");
-        QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
-#else
-        QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
-#endif
         QStringList args;
-
         args << QString("--dir=%1").arg(targetPath);
         args << QString("--prefix=%1").arg(targetPrefix);
-        args << QString("--tagging=%1").arg(dirXml.absoluteFilePath("tagging.xml"));
+        args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
         args << "--process-only";
 
         stdOut("planetsplitter " +  args.join(" ") + "\n");
@@ -172,18 +162,10 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
     }
     else
     {
-#ifdef WIN32
-        QString apppath = QCoreApplication::applicationDirPath();
-        apppath = apppath.replace("/", "\\");
-        QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
-#else
-        QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
-#endif
         QStringList args;
-
         args << QString("--dir=%1").arg(targetPath);
         args << QString("--prefix=%1").arg(targetPrefix);
-        args << QString("--tagging=%1").arg(dirXml.absoluteFilePath("tagging.xml"));
+        args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
 
         if(first)
         {

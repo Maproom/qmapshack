@@ -127,7 +127,8 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
 //                break;
 
 //            }
-        default:;
+        default:
+            ;
         }
 
         ++entry;

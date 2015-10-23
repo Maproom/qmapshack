@@ -398,17 +398,17 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
     query.prepare("DELETE FROM folder2folder WHERE parent=:parent AND child=:child");
     query.bindValue(":parent", idParent);
     query.bindValue(":child", idFolder);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
 
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE child=:id LIMIT 1)");
     query.bindValue(":id", idFolder);
-    QUERY_EXEC(; );
+    QUERY_EXEC();
     // if there is no other relation delete the children, too.
     if(!query.next() || (query.value(0).toInt() == 0))
     {
         query.prepare("SELECT child FROM folder2folder WHERE parent=:id");
         query.bindValue(":id", idFolder);
-        QUERY_EXEC(; );
+        QUERY_EXEC();
         while(query.next())
         {
             remove(idFolder, query.value(0).toULongLong());
@@ -417,11 +417,11 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
         // remove the child items relations
         query.prepare("DELETE FROM folder2item WHERE parent=:id");
         query.bindValue(":id", idFolder);
-        QUERY_EXEC(; );
+        QUERY_EXEC();
 
         // and remove the folder
         query.prepare("DELETE FROM folders WHERE id=:id");
         query.bindValue(":id", idFolder);
-        QUERY_EXEC(; );
+        QUERY_EXEC()
     }
 }

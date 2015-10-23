@@ -48,5 +48,9 @@ fi
 
 # -d -h -c 
 if [[ "$1" == "run" ]]; then
-    $BUILD_BUNDLE_APP_FILE $2 $3$4 $5 $6
+    $BUILD_BUNDLE_APP_FILE $2 $3 $4 $5 $6
+fi
+
+if [[ "$1" == "run-bare" ]]; then
+    $BUILD_RELEASE_DIR/$APP_NAME $2 $3 $4 $5 $6
 fi

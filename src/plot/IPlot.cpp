@@ -27,8 +27,8 @@
 #include "helpers/CSettings.h"
 #include "mouse/CScrOptRangeTrk.h"
 
-#include <QtWidgets>
 #include <QKeyEvent>
+#include <QtWidgets>
 
 QPen IPlot::pens[] =
 {
@@ -284,7 +284,9 @@ void IPlot::keyPressEvent(QKeyEvent *e)
     {
         e->accept();
         deleteLater();
-    } else {
+    }
+    else
+    {
         QWidget::keyPressEvent(e);
     }
 }

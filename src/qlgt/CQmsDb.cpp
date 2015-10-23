@@ -154,7 +154,8 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
                 new CGisItemOvlArea(idChild, db, &project);
                 break;
 
-            default:;
+            default:
+                ;
             }
         }
         else

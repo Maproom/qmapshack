@@ -116,7 +116,7 @@ void CDetailsPrj::slotSetupGui()
     }
     comboSort->blockSignals(false);
 
-    toolLock->blockSignals(true);    
+    toolLock->blockSignals(true);
     const int N = prj.childCount();
     if(N == 0)
     {

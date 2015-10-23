@@ -35,7 +35,8 @@ public:
     {
         tic_t()
         {
-            val=0; lbl="";
+            val=0;
+            lbl="";
         }
         qreal val;
         QString lbl;

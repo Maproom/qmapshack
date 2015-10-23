@@ -183,7 +183,8 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
             break;
         }
 
-        default:;
+        default:
+            ;
         }
 
         ++entry;

@@ -76,6 +76,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool e
 IMouseEditLine::~IMouseEditLine()
 {
     canvas->reportStatus("IMouseEditLine","");
+    canvas->reportStatus(key.item,"");
 
     int mode = 0;
     if(scrOptEditLine->toolNoRoute->isChecked())

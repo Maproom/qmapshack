@@ -1,3 +1,29 @@
+V 1.4.0
+* Export selected map area to image or printer
+* Add activity to trackpoints to differentiate track statistic
+* Add dialog to setup coord. format
+* Add option to send console debug output to a logfile
+* Add `Show on/Hide from Map` in context menu of one or more projects
+* Add closing the `Track Profile` view via keypress ESC
+* Add stepwise aborting of current operation in `Add Track/Route/Area` (similar to using right mouse / button `Abort`)
+* Fix: Qt5 internal translations for Linux
+* Fix: Line Edit usage hint is not removed on abort
+* Fix: OS X, various path issues. (icon path, workspace not saved)
+* Map: Fix race conditions in WMTS/TMS map handler
+* Map: Add hint for missing SSL library when using WMTS/TMS maps
+* Map: Slowdown automatic map panning
+* Trk: Fix Douglas-Peuker filter
+* Trk: Read & write 3rd party track point extensions
+* Trk: extend track point info by extension values
+* [Issue #57] Trk: Fix color table for green and gray
+* [Issue #59] Not possible to change names of empty projects
+* [Issue #60] Tab label is not updated when track name is changed
+* [Issue #54] In tracks editor, mouse cursor does not change according to selected tool with keyboard shortcut
+* [Issue #64] Install QMapShack icon in hicolor theme too.
+* [Issue #65] loading routino XML files fixed (added to bundle and support for OS-X specific directory structure).
+* [Issue #61] Add average speed to selected area statistics popup
+* [Issue #32] Add arrows to indicate edited track direction
+
 V 1.3.1
 * Add OS X support.
 * Moved to libRoutiono provided by the offcial Routino release

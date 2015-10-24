@@ -30,14 +30,13 @@
 CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     : IScrOpt(parent)
 {
-    key         = wpt->getKey();
+    key = wpt->getKey();
 
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(wpt->getInfo());
     adjustSize();
-
 
     toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
     toolMove->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
@@ -49,19 +48,18 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     show();
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolMove, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolProj, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolEdit,   SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolCopy,   SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolMove,   SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolProj,   SIGNAL(clicked()), this, SLOT(hide()));
     connect(toolBubble, SIGNAL(clicked()), this, SLOT(hide()));
 
     connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
-    connect(toolMove, SIGNAL(clicked()), this, SLOT(slotMove()));
-    connect(toolProj, SIGNAL(clicked()), this, SLOT(slotProj()));
+    connect(toolEdit,   SIGNAL(clicked()), this, SLOT(slotEdit()));
+    connect(toolCopy,   SIGNAL(clicked()), this, SLOT(slotCopy()));
+    connect(toolMove,   SIGNAL(clicked()), this, SLOT(slotMove()));
+    connect(toolProj,   SIGNAL(clicked()), this, SLOT(slotProj()));
     connect(toolBubble, SIGNAL(clicked()), this, SLOT(slotBubble()));
-
 
     adjustSize();
 }
@@ -108,6 +106,7 @@ void CScrOptWpt::slotBubble()
 
 void CScrOptWpt::draw(QPainter& p)
 {
+    qDebug() << "CScrOptWpt::draw";
     IGisItem * item = CGisWidget::self().getItemByKey(key);
     if(item == 0)
     {
@@ -116,5 +115,5 @@ void CScrOptWpt::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble2(anchor, p);
+    drawBubble(anchor, p);
 }

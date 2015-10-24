@@ -91,5 +91,5 @@ void CScrOptOvlArea::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble2(anchor, p);
+    drawBubble(anchor, p);
 }

@@ -43,5 +43,5 @@ CScrOptRangeLine::~CScrOptRangeLine()
 
 void CScrOptRangeLine::draw(QPainter& p)
 {
-    drawBubble2(origin, p);
+    drawBubble(origin, p);
 }

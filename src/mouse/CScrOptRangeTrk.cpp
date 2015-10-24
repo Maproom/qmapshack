@@ -53,7 +53,7 @@ void CScrOptRangeTrk::draw(QPainter& p)
 {
     if(isVisible())
     {
-        drawBubble2(origin, p);
+        drawBubble(origin, p);
     }
 }
 

@@ -1602,6 +1602,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 
     // draw the reduced track line
+    qDebug() << "draw";
     QList<QPolygonF> lines;
     splitLineToViewport(lineSimple, extViewport, lines);
 
@@ -2030,7 +2031,7 @@ bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QSt
 
     if(time != NOTIME)
     {
-        /// @todo: optimze search by single out segment and then do a binary search
+        /// @todo: optimize search by single out segment and then do a binary search
 
         qreal delta = totalElapsedSeconds;
 

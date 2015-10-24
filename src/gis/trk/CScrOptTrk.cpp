@@ -22,6 +22,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "mouse/IMouse.h"
+#include "helpers/CDraw.h"
 
 CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     : IScrOpt(parent)
@@ -146,5 +147,5 @@ void CScrOptTrk::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble(anchor, p);
+    CDraw::bubble(p, geometry(), anchor.toPoint());
 }

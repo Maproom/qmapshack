@@ -476,7 +476,6 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         gis->convertRad2Px(anchor);
         p.drawEllipse(anchor, 5, 5);
 
-
         QString str, val, unit;
         IUnit::self().seconds2time(mouseMoveFocus->time, val, unit);
         str += QObject::tr("Time: %1 %2").arg(val).arg(unit) + " ";
@@ -491,23 +490,9 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         rectText.adjust(-5, -5, 5, 5);
         rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
 
-
         // create bubble path
-        QPainterPath path1;
-        path1.addRoundedRect(rectText,5,5);
-
-        QPolygonF poly2;
-        poly2 << anchor << (rectText.bottomLeft() + QPointF(10,-5)) << (rectText.bottomLeft() + QPointF(30,-5)) << anchor;
-        QPainterPath path2;
-        path2.addPolygon(poly2);
-
-        path1 = path1.united(path2);
-
-
         p.setFont(f);
-        p.setPen(CCanvas::penBorderGray);
-        p.setBrush(CCanvas::brushBackWhite);
-        p.drawPolygon(path1.toFillPolygon());
+        CDraw::bubble(p, rectText, anchor.toPoint(), 10, 25);
 
         p.save();
         p.translate(5,5);

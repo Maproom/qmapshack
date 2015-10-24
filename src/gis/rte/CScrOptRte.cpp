@@ -22,6 +22,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "mouse/IMouse.h"
+#include "helpers/CDraw.h"
 
 CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     : IScrOpt(parent)
@@ -122,6 +123,6 @@ void CScrOptRte::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble(anchor, p);
+    CDraw::bubble(p, geometry(), anchor.toPoint());
 }
 

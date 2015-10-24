@@ -24,6 +24,7 @@
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
 #include "mouse/IMouse.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
@@ -106,7 +107,6 @@ void CScrOptWpt::slotBubble()
 
 void CScrOptWpt::draw(QPainter& p)
 {
-    qDebug() << "CScrOptWpt::draw";
     IGisItem * item = CGisWidget::self().getItemByKey(key);
     if(item == 0)
     {
@@ -115,5 +115,5 @@ void CScrOptWpt::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble(anchor, p);
+    CDraw::bubble(p, geometry(), anchor.toPoint());
 }

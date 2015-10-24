@@ -23,6 +23,7 @@
 #include <QPointF>
 #include <QImage>
 #include <QtMath>
+#include <QDebug>
 
 QImage CDraw::createBasicArrow(const QBrush &brush)
 {
@@ -141,3 +142,34 @@ void CDraw::text(const QString &str, QPainter &p, const QRect &r, const QColor &
     p.drawText(r, Qt::AlignCenter, str);
 }
 
+QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth, int pointerBaseProc)
+{
+    QPainterPath bubblePath;
+    bubblePath.addRoundedRect(contentRect, 5, 5);
+
+    // draw the arrow
+    int pointerBaseCenterX = contentRect.left() + (pointerBaseProc * contentRect.width()) / 100;
+    int pointerHeight = 0;
+    if(pointerPos.y() < contentRect.top())         pointerHeight = contentRect.top() - pointerPos.y()    + 1;
+    else if(pointerPos.y() > contentRect.bottom()) pointerHeight = contentRect.bottom() - pointerPos.y() - 1;
+    else {
+        qDebug() << "cannot calculate pointerHeight/pointerBaseCenterX due to invalid parameters";
+        return QPoint(0, 0);
+    }
+
+    QPolygonF pointerPoly;
+    pointerPoly << pointerPos
+                << QPointF(pointerBaseCenterX - pointerBaseWidth / 2, pointerPos.y() + pointerHeight)
+                << QPointF(pointerBaseCenterX + pointerBaseWidth / 2, pointerPos.y() + pointerHeight)
+                << pointerPos;
+
+    QPainterPath pointerPath;
+    pointerPath.addPolygon(pointerPoly);
+
+    p.setPen  (CCanvas::penBorderGray);
+    p.setBrush(CCanvas::brushBackWhite);
+
+    p.drawPolygon(bubblePath.united(pointerPath).toFillPolygon());
+
+    return contentRect.topLeft();
+}

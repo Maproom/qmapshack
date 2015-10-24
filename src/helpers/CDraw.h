@@ -49,6 +49,21 @@ public:
     static void text(const QString& str, QPainter &p, const QPoint &center, const QColor &color, const QFont &font = CMainWindow::self().getMapFont());
     static void text(const QString& str, QPainter &p, const QRect  &r,      const QColor &color);
 
+    /**
+       @brief Draw a bubble
+
+       `pointerBaseProc` denotes the position of the pointer's base, where 0 is `at the very left of the content`, and 100 is `at the very right`.
+       Be careful with small values (near 0) or large values (near 100) for pointerBaseProc, this might lead to incorrect drawing,
+       especially if pointerBaseWidth is large.
+
+       @param p                 The painter to be used
+       @param contentRect       The area the actual content will be in
+       @param pointerPos        The position of the pointer's head
+       @param pointerBaseWidth  The width of the pointer
+       @param pointerBaseProc   The (relative) location of the pointer (in percent)
+     */
+    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, int pointerBaseProc = 50);
+
 private:
     /**
        @brief   Creates a new arrow using the brush specified

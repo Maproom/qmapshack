@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "mouse/CScrOptRangeTrk.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
@@ -41,8 +42,8 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
 
     connect(toolHidePoints, SIGNAL(clicked()), this, SLOT(hide()));
     connect(toolShowPoints, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolActivity, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolActivity,   SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolCopy,       SIGNAL(clicked()), this, SLOT(hide()));
 }
 
 CScrOptRangeTrk::~CScrOptRangeTrk()
@@ -53,7 +54,7 @@ void CScrOptRangeTrk::draw(QPainter& p)
 {
     if(isVisible())
     {
-        drawBubble(origin, p);
+        CDraw::bubble(p, geometry(), origin);
     }
 }
 

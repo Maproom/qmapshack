@@ -17,10 +17,10 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
+#include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 
 CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
@@ -122,6 +122,6 @@ void CScrOptRte::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble2(anchor, p);
+    CDraw::bubble2(*this, anchor, p);
 }
 

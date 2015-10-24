@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "helpers/CDraw.h"
 #include "mouse/CScrOptRangeTrk.h"
 
 #include <QtWidgets>
@@ -53,7 +54,7 @@ void CScrOptRangeTrk::draw(QPainter& p)
 {
     if(isVisible())
     {
-        drawBubble2(origin, p);
+        CDraw::bubble2(*this, origin, p);
     }
 }
 

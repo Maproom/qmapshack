@@ -17,10 +17,10 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
+#include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
@@ -91,5 +91,5 @@ void CScrOptOvlArea::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble2(anchor, p);
+    CDraw::bubble2(*this, anchor, p);
 }

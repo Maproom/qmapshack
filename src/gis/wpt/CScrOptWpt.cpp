@@ -18,11 +18,11 @@
 
 
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
+#include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 
 #include <QtWidgets>
@@ -116,5 +116,5 @@ void CScrOptWpt::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    drawBubble2(anchor, p);
+    CDraw::bubble2(*this, anchor, p);
 }

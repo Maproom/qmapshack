@@ -16,7 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CScrOptRangeLine.h"
+#include "helpers/CDraw.h"
+#include "mouse/line/CScrOptRangeLine.h"
 
 CScrOptRangeLine::CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget * parent)
     : IScrOpt(mouse)
@@ -43,5 +44,5 @@ CScrOptRangeLine::~CScrOptRangeLine()
 
 void CScrOptRangeLine::draw(QPainter& p)
 {
-    drawBubble2(origin, p);
+    CDraw::bubble2(*this, origin, p);
 }

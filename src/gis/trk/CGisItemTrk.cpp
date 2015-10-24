@@ -1665,25 +1665,10 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         QRect box(0, 0, w, h);
         box.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
-
-        // create bubble path
-        QPainterPath path1;
-        path1.addRoundedRect(box,5,5);
-
-        QPolygonF poly2;
-        poly2 << anchor << (box.bottomLeft() + QPointF(10,-5)) << (box.bottomLeft() + QPointF(30,-5)) << anchor;
-        QPainterPath path2;
-        path2.addPolygon(poly2);
-
-        path1 = path1.united(path2);
-
-        p.setFont(f);
-        // draw bubble
-        p.setPen(CDraw::penBorderGray);
-        p.setBrush(CDraw::brushBackWhite);
-        p.drawPolygon(path1.toFillPolygon());
+        CDraw::bubble1(box, anchor, p);
 
         p.save();
+        p.setFont(f);
         p.translate(box.topLeft());
 
         // draw progress bar distance

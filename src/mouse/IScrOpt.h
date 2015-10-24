@@ -52,7 +52,7 @@ protected:
     void enterEvent(QEvent * e);
     void leaveEvent(QEvent * e);
 
-    void drawBubble2(const QPointF &pt, QPainter& p);
+//    void drawBubble2(const QPointF &pt, QPainter& p);
 
     QPoint origin;
     QPoint mousePos;

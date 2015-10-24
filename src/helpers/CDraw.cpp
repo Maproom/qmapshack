@@ -148,3 +148,41 @@ void CDraw::text(const QString &str, QPainter &p, const QRect &r, const QColor &
     p.drawText(r, Qt::AlignCenter, str);
 }
 
+
+void CDraw::bubble1(const QRect& rect, const QPointF &anchor, QPainter& p)
+{
+    // create bubble path
+    QPainterPath path1;
+    path1.addRoundedRect(rect,5,5);
+
+    QPolygonF poly2;
+    poly2 << anchor << (rect.bottomLeft() + QPointF(10,-5)) << (rect.bottomLeft() + QPointF(30,-5)) << anchor;
+    QPainterPath path2;
+    path2.addPolygon(poly2);
+
+    path1 = path1.united(path2);
+
+    // draw bubble
+    p.setPen(CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
+    p.drawPolygon(path1.toFillPolygon());
+}
+
+void CDraw::bubble2(const QWidget& widget, const QPointF &anchor, QPainter& p)
+{
+    QRectF rect = widget.rect();
+    rect.moveTopLeft(QPoint(widget.x(), widget.y()));
+    QPainterPath path1;
+    path1.addRoundedRect(rect,5,5);
+
+    QPolygonF poly2;
+    poly2 << anchor << QPointF(anchor.x() - 10, rect.top() + 1) << QPointF(anchor.x() + 10, rect.top() + 1) << anchor;
+    QPainterPath path2;
+    path2.addPolygon(poly2);
+
+    path1 = path1.united(path2);
+
+    p.setPen(penBorderGray);
+    p.setBrush(brushBackWhite);
+    p.drawPolygon(path1.toFillPolygon());
+}

@@ -65,6 +65,22 @@ public:
     static void text(const QString& str, QPainter &p, const QPoint &center, const QColor &color, const QFont &font = CMainWindow::self().getMapFont());
     static void text(const QString& str, QPainter &p, const QRect  &r,      const QColor &color);
 
+    /**
+       @brief Draw a cartoon bubble around a rectangular with the anchor at the bottom
+       @param rect      the rectangle to draw the bubble around
+       @param anchor    the anchor point
+       @param p         an active QPainter
+     */
+    static void bubble1(const QRect& rect, const QPointF &anchor, QPainter& p);
+    /**
+       @brief Draw a cartoon bubble around a widget with the anchor top of the widget
+
+       @param widget    the widget to draw the bubble around
+       @param anchor    the anchor point
+       @param p         an active QPainter
+     */
+    static void bubble2(const QWidget &widget, const QPointF &anchor, QPainter& p);
+
 private:
     /**
        @brief   Creates a new arrow using the brush specified

@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 #include "plot/CPlotTrack.h"
 
 #include <QtWidgets>

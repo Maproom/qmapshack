@@ -28,8 +28,8 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CSetupNewWpt.h"
-#include "helpers/CSettings.h"
 #include "helpers/CDraw.h"
+#include "helpers/CSettings.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
 
@@ -646,8 +646,8 @@ void CGisItemWpt::drawBubble(QPainter& p)
     rectBubbleSize.moveBottomRight(rectBubble.bottomRight() - QPoint(5,5));
 
     QPolygonF frame = makePolyline(posScreen, rectBubble);
-    p.setPen(CCanvas::penBorderGray);
-    p.setBrush(CCanvas::brushBackWhite);
+    p.setPen(CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
     p.drawPolygon(frame);
 
     p.save();

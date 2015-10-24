@@ -20,24 +20,40 @@
 #ifndef CPAINTER_H
 #define CPAINTER_H
 
+#include <QPainter>
 #include <QPolygonF>
 #include <QRectF>
-#include <QPainter>
 
 #include "CMainWindow.h"
+
+inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
+{
+    p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
+}
+
+
+#define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,5,5)
+
 
 class CDraw
 {
 public:
+
+    static QPen penBorderBlue;
+    static QPen penBorderGray;
+    static QPen penBorderBlack;
+    static QBrush brushBackWhite;
+    static QBrush brushBackYellow;
+
     /**
        @brief Draw arrows along a line
 
        An arrow is drawn if all the following requirements are met:
-        * the position the new arrow would have been drawn is within viewport
+     * the position the new arrow would have been drawn is within viewport
           OR
           `viewport.height() == 0`
-        * the two points have a distance of at least `minPointDist`
-        * the (potential) position of the new arrow has at least a distance of `minArrowDist` from the previous arrow
+     * the two points have a distance of at least `minPointDist`
+     * the (potential) position of the new arrow has at least a distance of `minArrowDist` from the previous arrow
 
        @param line          The line to draw the arrows along
        @param viewport      Restrict drawing of arrows to this viewport (no limitation is applied if `viewport.height() == 0`)

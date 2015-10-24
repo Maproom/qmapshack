@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
 #include "map/CMapVRT.h"
 #include "units/IUnit.h"

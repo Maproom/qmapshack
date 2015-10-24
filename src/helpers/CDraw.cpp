@@ -17,12 +17,19 @@
 
 **********************************************************************************************/
 
-#include "CDraw.h"
-#include "../canvas/CCanvas.h"
+#include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 
-#include <QPointF>
 #include <QImage>
+#include <QPointF>
 #include <QtMath>
+
+QPen CDraw::penBorderBlue(QColor(10,10,150,220),2);
+QPen CDraw::penBorderGray(Qt::lightGray,2);
+QPen CDraw::penBorderBlack(QColor(0,0,0,200),2);
+QBrush CDraw::brushBackWhite(QColor(255,255,255,255));
+QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
+
 
 QImage CDraw::createBasicArrow(const QBrush &brush)
 {
@@ -71,12 +78,12 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
         const QPointF &prevPt = line[i - 1];
 
         // ensure there is enough space between two linepts
-	if( pointDistance(pt, prevPt) >= minPointDist )
+        if( pointDistance(pt, prevPt) >= minPointDist )
         {
             QPoint arrowPos((pt.x() + prevPt.x()) / 2, (pt.y() + prevPt.y()) / 2);
 
             if( (viewport.contains(pt) || 0 == viewport.height()) // ensure the point is visible
-            && (firstArrow || pointDistance(prevArrow, arrowPos) >= minArrowDist) )
+                && (firstArrow || pointDistance(prevArrow, arrowPos) >= minArrowDist) )
             {
                 p.save();
 

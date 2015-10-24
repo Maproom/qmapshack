@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 

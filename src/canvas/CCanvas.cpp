@@ -28,8 +28,8 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
-#include "helpers/CSettings.h"
 #include "helpers/CDraw.h"
+#include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "mouse/CMouseEditArea.h"
 #include "mouse/CMouseEditRte.h"
@@ -43,12 +43,6 @@
 #include "units/IUnit.h"
 
 #include <QtWidgets>
-
-QPen CCanvas::penBorderBlue(QColor(10,10,150,220),2);
-QPen CCanvas::penBorderGray(Qt::lightGray,2);
-QPen CCanvas::penBorderBlack(QColor(0,0,0,200),2);
-QBrush CCanvas::brushBackWhite(QColor(255,255,255,255));
-QBrush CCanvas::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
 
 CCanvas::CCanvas(QWidget *parent, const QString &name)
@@ -529,8 +523,8 @@ void CCanvas::drawStatusMessages(QPainter& p)
         QRect r = labelStatusMessages->rect();
         r.adjust(-5, -5, 5, 5);
         r.moveTopLeft(QPoint(15,45));
-        p.setPen(CCanvas::penBorderGray);
-        p.setBrush(CCanvas::brushBackWhite);
+        p.setPen(CDraw::penBorderGray);
+        p.setBrush(CDraw::brushBackWhite);
         p.drawRoundedRect(r, 5, 5);
     }
 }

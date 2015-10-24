@@ -27,8 +27,8 @@
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CSelectActivity.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CProgressDialog.h"
 #include "helpers/CDraw.h"
+#include "helpers/CProgressDialog.h"
 #include "plot/IPlot.h"
 
 #include <QtWidgets>
@@ -569,7 +569,6 @@ QString CGisItemTrk::getInfoRange()
 
         IUnit::self().meter2speed(d/deltaTime, val, unit);
         str += QString(", %3 %1%2\n").arg(val).arg(unit).arg(QChar(0x21A3));
-
     }
     else
     {
@@ -1680,8 +1679,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         p.setFont(f);
         // draw bubble
-        p.setPen(CCanvas::penBorderGray);
-        p.setBrush(CCanvas::brushBackWhite);
+        p.setPen(CDraw::penBorderGray);
+        p.setBrush(CDraw::brushBackWhite);
         p.drawPolygon(path1.toFillPolygon());
 
         p.save();

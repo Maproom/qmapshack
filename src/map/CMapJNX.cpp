@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 #include "inttypes.h"
 #include "map/CMapDraw.h"
 #include "map/CMapJNX.h"

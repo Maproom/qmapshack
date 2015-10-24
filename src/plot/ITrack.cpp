@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "helpers/CDraw.h"
 #include "plot/ITrack.h"
 
 #include <QtWidgets>
@@ -179,7 +179,7 @@ void ITrack::draw()
     USE_ANTI_ALIASING(p, true);
 
 
-    p.setPen(CCanvas::penBorderBlack);
+    p.setPen(CDraw::penBorderBlack);
     p.setBrush(QColor(255,255,255,255));
     PAINT_ROUNDED_RECT(p,buffer.rect().adjusted(1,1,-1,-1));
 

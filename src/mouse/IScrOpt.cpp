@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 #include "mouse/IScrOpt.h"
 #include "units/IUnit.h"
@@ -75,8 +75,8 @@ void IScrOpt::drawBubble1(const QPointF& pt, QPainter& p)
 
     path1 = path1.united(path2);
 
-    p.setPen(CCanvas::penBorderGray);
-    p.setBrush(CCanvas::brushBackWhite);
+    p.setPen(CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
     p.drawPolygon(path1.toFillPolygon());
 }
 
@@ -94,7 +94,7 @@ void IScrOpt::drawBubble2(const QPointF &pt, QPainter& p)
 
     path1 = path1.united(path2);
 
-    p.setPen(CCanvas::penBorderGray);
-    p.setBrush(CCanvas::brushBackWhite);
+    p.setPen(CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
     p.drawPolygon(path1.toFillPolygon());
 }

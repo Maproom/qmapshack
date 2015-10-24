@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
 #include "map/CMapTMS.h"
 #include "map/cache/CDiskCache.h"

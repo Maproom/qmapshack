@@ -505,8 +505,8 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 
         p.setFont(f);
-        p.setPen(CCanvas::penBorderGray);
-        p.setBrush(CCanvas::brushBackWhite);
+        p.setPen(CDraw::penBorderGray);
+        p.setBrush(CDraw::brushBackWhite);
         p.drawPolygon(path1.toFillPolygon());
 
         p.save();

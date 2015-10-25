@@ -46,6 +46,14 @@ public:
     virtual void mouseMoveEventEx(QMouseEvent * e) = 0;
     virtual void mouseReleaseEventEx(QMouseEvent *e) = 0;
 
+    virtual void wheelEvent(QWheelEvent * e)
+    {
+    }
+
+    virtual void keyPressEvent(QKeyEvent * e)
+    {
+    }
+
     virtual void drawFg(QPainter& p) = 0;
     virtual void drawBg(QPainter& p);
 

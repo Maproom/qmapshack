@@ -43,13 +43,6 @@ class QLabel;
 class IPlot;
 struct SGisLine;
 
-inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
-{
-    p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
-}
-
-
-#define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,5,5)
 
 
 class CCanvas : public QWidget
@@ -102,11 +95,6 @@ public:
         , eRedrawAll = 0xFFFFFFFF
     };
 
-    static QPen penBorderBlue;
-    static QPen penBorderGray;
-    static QPen penBorderBlack;
-    static QBrush brushBackWhite;
-    static QBrush brushBackYellow;
 
     void resetMouse();
     void setMouseMoveWpt(CGisItemWpt& wpt);

@@ -23,8 +23,8 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
-#include "mouse/IMouse.h"
 #include "helpers/CDraw.h"
+#include "mouse/IMouse.h"
 
 #include <QtWidgets>
 

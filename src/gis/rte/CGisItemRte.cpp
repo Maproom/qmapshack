@@ -490,7 +490,6 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         rectText.adjust(-5, -5, 5, 5);
         rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
 
-        // create bubble path
         p.setFont(f);
         CDraw::bubble(p, rectText, anchor.toPoint(), 10, 25);
 

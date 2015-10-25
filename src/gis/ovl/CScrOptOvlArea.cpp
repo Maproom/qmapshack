@@ -17,12 +17,11 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
-#include "mouse/IMouse.h"
 #include "helpers/CDraw.h"
+#include "mouse/IMouse.h"
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
     : IScrOpt(parent)

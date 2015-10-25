@@ -569,7 +569,6 @@ QString CGisItemTrk::getInfoRange()
 
         IUnit::self().meter2speed(d/deltaTime, val, unit);
         str += QString(", %3 %1%2\n").arg(val).arg(unit).arg(QChar(0x21A3));
-
     }
     else
     {

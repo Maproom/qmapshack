@@ -16,11 +16,10 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 #include "mouse/IScrOpt.h"
 #include "units/IUnit.h"
-#include "helpers/CDraw.h"
 #include <QtWidgets>
 
 

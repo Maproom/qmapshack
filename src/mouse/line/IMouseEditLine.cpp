@@ -25,6 +25,7 @@
 #include "gis/IGisLine.h"
 #include "gis/rte/router/CRouterSetup.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "mouse/line/CLineOpAddPoint.h"
 #include "mouse/line/CLineOpDeletePoint.h"
@@ -33,7 +34,6 @@
 #include "mouse/line/CScrOptEditLine.h"
 #include "mouse/line/IMouseEditLine.h"
 #include "units/IUnit.h"
-#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
@@ -76,6 +76,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool e
 IMouseEditLine::~IMouseEditLine()
 {
     canvas->reportStatus("IMouseEditLine","");
+    canvas->reportStatus(key.item,"");
 
     int mode = 0;
     if(scrOptEditLine->toolNoRoute->isChecked())

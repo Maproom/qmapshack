@@ -17,12 +17,11 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
-#include "mouse/IMouse.h"
 #include "helpers/CDraw.h"
+#include "mouse/IMouse.h"
 
 CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     : IScrOpt(parent)

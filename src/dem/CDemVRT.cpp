@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "GeoMath.h"
-#include "canvas/CCanvas.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemVRT.h"
+#include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>

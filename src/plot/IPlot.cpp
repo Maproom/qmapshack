@@ -20,9 +20,9 @@
 #include "plot/IPlot.h"
 
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/CDraw.h"
 #include "helpers/CFadingIcon.h"
 #include "helpers/CSettings.h"
 #include "mouse/CScrOptRangeTrk.h"
@@ -614,12 +614,12 @@ void IPlot::draw()
         r.adjust(2,2,-2,-2);
         if(underMouse() || posMouse != NOPOINT || solid)
         {
-            p.setPen(solid ? CCanvas::penBorderBlack : CCanvas::penBorderBlue);
+            p.setPen(solid ? CDraw::penBorderBlack : CDraw::penBorderBlue);
             p.setOpacity(1.0);
         }
         else
         {
-            p.setPen(CCanvas::penBorderBlack);
+            p.setPen(CDraw::penBorderBlack);
             p.setOpacity(0.6);
         }
         p.setBrush(QColor(255,255,255,255));

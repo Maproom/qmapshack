@@ -18,8 +18,8 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "helpers/CFileExt.h"
 #include "helpers/CDraw.h"
+#include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/Platform.h"
 #include "map/CMapDraw.h"

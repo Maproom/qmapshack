@@ -20,24 +20,39 @@
 #ifndef CPAINTER_H
 #define CPAINTER_H
 
+#include <QPainter>
 #include <QPolygonF>
 #include <QRectF>
-#include <QPainter>
 
 #include "CMainWindow.h"
+inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
+{
+    p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
+}
+
+
+#define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,5,5)
+
 
 class CDraw
 {
 public:
+
+    static QPen   penBorderBlue;
+    static QPen   penBorderGray;
+    static QPen   penBorderBlack;
+    static QBrush brushBackWhite;
+    static QBrush brushBackYellow;
+
     /**
        @brief Draw arrows along a line
 
        An arrow is drawn if all the following requirements are met:
-        * the position the new arrow would have been drawn is within viewport
+     * the position the new arrow would have been drawn is within viewport
           OR
           `viewport.height() == 0`
-        * the two points have a distance of at least `minPointDist`
-        * the (potential) position of the new arrow has at least a distance of `minArrowDist` from the previous arrow
+     * the two points have a distance of at least `minPointDist`
+     * the (potential) position of the new arrow has at least a distance of `minArrowDist` from the previous arrow
 
        @param line          The line to draw the arrows along
        @param viewport      Restrict drawing of arrows to this viewport (no limitation is applied if `viewport.height() == 0`)
@@ -50,13 +65,13 @@ public:
     static void text(const QString& str, QPainter &p, const QRect  &r,      const QColor &color);
 
     /**
-       @brief Draw a bubble
+       @brief Draw a cartoon bubble
 
        `pointerBaseProc` denotes the position of the pointer's base, where 0 is `at the very left of the content`, and 100 is `at the very right`.
        Be careful with small values (near 0) or large values (near 100) for pointerBaseProc, this might lead to incorrect drawing,
        especially if pointerBaseWidth is large.
 
-       @param p                 The painter to be used
+       @param p                 An active QPainter
        @param contentRect       The area the actual content will be in
        @param pointerPos        The position of the pointer's head
        @param pointerBaseWidth  The width of the pointer

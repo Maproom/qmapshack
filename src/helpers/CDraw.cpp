@@ -17,13 +17,20 @@
 
 **********************************************************************************************/
 
-#include "CDraw.h"
-#include "../canvas/CCanvas.h"
+#include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 
-#include <QPointF>
 #include <QImage>
+#include <QPointF>
 #include <QtMath>
 #include <QDebug>
+
+QPen   CDraw::penBorderBlue(QColor(10,10,150,220),2);
+QPen   CDraw::penBorderGray(Qt::lightGray,2);
+QPen   CDraw::penBorderBlack(QColor(0,0,0,200),2);
+QBrush CDraw::brushBackWhite(QColor(255,255,255,255));
+QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
+
 
 QImage CDraw::createBasicArrow(const QBrush &brush)
 {
@@ -51,20 +58,23 @@ QImage CDraw::createBasicArrow(const QBrush &brush)
 }
 
 /**
-   @brief   Calculates the distance between two points
-   @return  (int) ( (x2 - x1)^2 + (y2 - y1)^2 )^0.5
+   @brief   Calculates the square distance between two points
+   @return  (int) ( (x2 - x1)^2 + (y2 - y1)^2 )
  */
-template<typename T>
-static inline int pointDistance(T &p1, T &p2)
+
+static inline int pointDistanceSquare(const QPointF &p1, const QPointF &p2)
 {
-    return qSqrt(qPow(p2.x() - p1.x(), 2) + qPow(p2.y() - p1.y(), 2));
+    return (p2.x() - p1.x()) * (p2.x() - p1.x()) + (p2.y() - p1.y()) * (p2.y() - p1.y());
 }
 
 void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist)
 {
     QImage arrow = createBasicArrow(p.brush());
 
-    QPoint prevArrow;
+    const qreal minArrowDistSquare = minArrowDist * minArrowDist;
+    const qreal minPointDistSquare = minPointDist * minPointDist;
+
+    QPointF prevArrow;
     bool firstArrow = true;
     for(int i = 1; i < line.size(); i++)
     {
@@ -72,18 +82,18 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
         const QPointF &prevPt = line[i - 1];
 
         // ensure there is enough space between two linepts
-	if( pointDistance(pt, prevPt) >= minPointDist )
+        if( pointDistanceSquare(pt, prevPt) >= minPointDistSquare )
         {
-            QPoint arrowPos((pt.x() + prevPt.x()) / 2, (pt.y() + prevPt.y()) / 2);
+            QPointF arrowPos = prevPt + (pt - prevPt)/2;
 
             if( (viewport.contains(pt) || 0 == viewport.height()) // ensure the point is visible
-            && (firstArrow || pointDistance(prevArrow, arrowPos) >= minArrowDist) )
+                && (firstArrow || pointDistanceSquare(prevArrow, arrowPos) >= minArrowDistSquare) )
             {
                 p.save();
 
                 // rotate and draw the arrow (between bullets)
                 p.translate(arrowPos);
-                qreal direction = ( qAtan2((qreal)(pt.y() - prevPt.y()), (qreal)(pt.x() - prevPt.x())) * 180.) / M_PI;
+                qreal direction = ( qAtan2((pt.y() - prevPt.y()), (pt.x() - prevPt.x())) * 180.) / M_PI;
                 p.rotate(direction);
                 p.drawImage(-11, -7, arrow);
 
@@ -166,8 +176,8 @@ QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointe
     QPainterPath pointerPath;
     pointerPath.addPolygon(pointerPoly);
 
-    p.setPen  (CCanvas::penBorderGray);
-    p.setBrush(CCanvas::brushBackWhite);
+    p.setPen  (CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
 
     p.drawPolygon(bubblePath.united(pointerPath).toFillPolygon());
 

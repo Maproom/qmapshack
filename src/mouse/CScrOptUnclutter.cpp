@@ -20,8 +20,8 @@
 #include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "mouse/CScrOptUnclutter.h"
 #include "helpers/CDraw.h"
+#include "mouse/CScrOptUnclutter.h"
 
 #include <QtWidgets>
 

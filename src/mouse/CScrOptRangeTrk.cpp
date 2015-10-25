@@ -18,8 +18,8 @@
 
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "mouse/CScrOptRangeTrk.h"
 #include "helpers/CDraw.h"
+#include "mouse/CScrOptRangeTrk.h"
 
 #include <QtWidgets>
 

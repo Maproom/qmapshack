@@ -28,8 +28,8 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "units/IUnit.h"
 #include "helpers/CDraw.h"
+#include "units/IUnit.h"
 
 #include <QtSql>
 #include <QtWidgets>

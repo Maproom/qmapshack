@@ -22,9 +22,9 @@
 #include "gis/CGisWidget.h"
 #include "gis/WptIcons.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CDraw.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "units/IUnit.h"
-#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 #include <proj_api.h>

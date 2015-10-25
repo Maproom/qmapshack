@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Setup DEM file pathss</string>
+   <string>Setup DEM file paths</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

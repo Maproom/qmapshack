@@ -27,8 +27,8 @@
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CSelectActivity.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CProgressDialog.h"
 #include "helpers/CDraw.h"
+#include "helpers/CProgressDialog.h"
 #include "plot/IPlot.h"
 
 #include <QtWidgets>

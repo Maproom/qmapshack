@@ -38,9 +38,9 @@ class CDraw
 {
 public:
 
-    static QPen   penBorderBlue;
-    static QPen   penBorderGray;
-    static QPen   penBorderBlack;
+    static QPen penBorderBlue;
+    static QPen penBorderGray;
+    static QPen penBorderBlack;
     static QBrush brushBackWhite;
     static QBrush brushBackYellow;
 

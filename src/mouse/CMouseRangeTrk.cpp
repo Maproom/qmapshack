@@ -136,14 +136,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
 
         case eStateRangeSelected:
         {
-            scrOptRange->deleteLater();
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-            if(trk != 0)
-            {
-                trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
-                trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
-            }
-            state = eStateIdle;
+            resetState();
             canvas->update();
             break;
         }
@@ -213,6 +206,28 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
 
 void CMouseRangeTrk::wheelEvent(QWheelEvent * e)
 {
+    resetState();
+}
+
+void CMouseRangeTrk::keyPressEvent(QKeyEvent * e)
+{
+    resetState();
+}
+
+void CMouseRangeTrk::resetState()
+{
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    if(trk != 0)
+    {
+        trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
+        trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
+    }
+
+    if(!scrOptRange.isNull())
+    {
+        scrOptRange->deleteLater();
+    }
+    state = eStateIdle;
 }
 
 void CMouseRangeTrk::slotHidePoints()

@@ -37,6 +37,8 @@ public:
     void mouseReleaseEventEx(QMouseEvent *e)
     {
     }
+    void wheelEvent(QWheelEvent * e);
+    void keyPressEvent(QKeyEvent * e);
 
     void drawFg(QPainter& p);
 

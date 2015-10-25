@@ -21,8 +21,8 @@
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
-#include "mouse/IMouse.h"
 #include "helpers/CDraw.h"
+#include "mouse/IMouse.h"
 
 CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     : IScrOpt(parent)

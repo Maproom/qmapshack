@@ -129,6 +129,17 @@ void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
+void CLineOpSelectRange::wheelEvent(QWheelEvent * e)
+{
+    resetState();
+}
+
+void CLineOpSelectRange::keyPressEvent(QKeyEvent * e)
+{
+    resetState();
+}
+
+
 void CLineOpSelectRange::drawFg(QPainter& p)
 {
     if(idxFocus == NOIDX)
@@ -202,7 +213,10 @@ void CLineOpSelectRange::drawFg(QPainter& p)
 
 void CLineOpSelectRange::resetState()
 {
-    scrOptRangeLine->deleteLater();
+    if(!scrOptRangeLine.isNull())
+    {
+        scrOptRangeLine->deleteLater();
+    }
     idxFocus    = NOIDX;
     idx2nd      = NOIDX;
     state       = eStateIdle;

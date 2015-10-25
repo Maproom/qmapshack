@@ -1667,7 +1667,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // draw the bubble
         QRect box(0, 0, w, h);
         box.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
-        CDraw::bubble(p, box, anchor.toPoint(), 10, 25);
+        CDraw::bubble(p, box, anchor.toPoint(), 18 /* px */, 21 /* px */);
 
         p.save();
         p.translate(box.topLeft());

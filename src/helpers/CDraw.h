@@ -67,17 +67,18 @@ public:
     /**
        @brief Draw a cartoon bubble
 
-       `pointerBaseProc` denotes the position of the pointer's base, where 0 is `at the very left of the content`, and 100 is `at the very right`.
-       Be careful with small values (near 0) or large values (near 100) for pointerBaseProc, this might lead to incorrect drawing,
+       `pointerBasePos` denotes the position of the pointer's base, where 0 is `at the very left of the content`, and 1 is `at the very right`.
+       Be careful with small values (near 0) or large values (near 1) for pointerBasePos, this might lead to incorrect drawing,
        especially if pointerBaseWidth is large.
+       If is larger than 1, a value in pixels is assumed.
 
        @param p                 An active QPainter
        @param contentRect       The area the actual content will be in
        @param pointerPos        The position of the pointer's head
        @param pointerBaseWidth  The width of the pointer
-       @param pointerBaseProc   The (relative) location of the pointer (in percent)
+       @param pointerBasePos    The (relative) location of the pointer (in percent / pixels)
      */
-    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, int pointerBaseProc = 50);
+    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, float pointerBasePos = .5f);
 
 private:
     /**

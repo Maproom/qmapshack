@@ -903,8 +903,10 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
     p.resetTransform();
     // ----- start to draw fast content -----
 
-    grid->draw(p, area.toRect());
-    gis->draw(p, area.toRect());
+    QRect r(QPoint(0,0), area.size().toSize());
+
+    grid->draw(p, r);
+    gis->draw(p, r);
 
     setDrawContextSize(oldSize);
 }

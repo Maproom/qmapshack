@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>CAbout</name>
     <message>
         <source>API Version %1 (expected %2)</source>
-        <translation type="vanished">Verze API %1 (očekávána %2)     </translation>
+        <translation>Verze API %1 (očekávána %2)     </translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="38"/>
         <source>%1 (API V%2, expected V%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (API verze %2, očekávána verze %3)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="42"/>
         <source>%1 (API V%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (API verze %2)</translation>
     </message>
 </context>
 <context>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="34"/>
         <source>Print debug output to logfile (temp. path).</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit výstup ladění do souboru se zápisem (cesta temp).</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="37"/>
@@ -603,12 +603,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="101"/>
         <source>Show on Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat na mapě</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="102"/>
         <source>Hide from Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt v mapě</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="107"/>
@@ -1545,7 +1545,7 @@ line %2, column %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="134"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tato mapa vyžaduje podporu pro OpenSSL. Nicméně kvůli právním omezením v některých zemích není OpenSSL k QMapShack přibaleno. Můžete se podívat na &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;stránky OpenSSL&lt;/a&gt;, kde najdete spustitelné soubory. Musíte zkopírovat libeay32.dll a ssleay32.dll do adresáře s programem QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="311"/>
@@ -1651,7 +1651,7 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="154"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tato mapa vyžaduje podporu pro OpenSSL. Nicméně kvůli právním omezením v některých zemích není OpenSSL k QMapShack přibaleno. Můžete se podívat na &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;stránky OpenSSL&lt;/a&gt;, kde najdete spustitelné soubory. Musíte zkopírovat libeay32.dll a ssleay32.dll do adresáře s programem QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="220"/>
@@ -2758,22 +2758,22 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="14"/>
         <source>Coordinate Format...</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát souřadnic...</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53.660 E013° 31.113</source>
-        <translation type="unfinished"></translation>
+        <translation>N48° 53.660 E013° 31.113</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
-        <translation type="unfinished"></translation>
+        <translation>N48.8943° E013.51855°</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</translation>
     </message>
 </context>
 <context>
@@ -4080,12 +4080,12 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IMainWindow.ui" line="652"/>
         <source>Setup Coord. Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit formát souřadnic</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="655"/>
         <source>Change the format coordinates are displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit formát, v němž jsou souřadnice zobrazeny</translation>
     </message>
     <message>
         <source>Setup Database</source>
@@ -4283,27 +4283,27 @@ Nechce se mi číst dokumentaci!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="253"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Nová čára&lt;/b&gt;&lt;br/&gt;Posuňte ukazovátko myši a použijte levé tlačítko myši k upuštění bodů. Až to bude uděláno, použijte pravé tlačítko myši k zastavení.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="293"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Smazat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho smazání.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="302"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Upravit rozsah bodů&lt;/b&gt;&lt;br/&gt;Klepněte levým tlačítkem myši na první bod pro započetí výběru. Klepněte levým tlačítkem myši na druhý bod pro dokončení výběru a vyberte z voleb. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="311"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Přesunout bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho držení v blízkosti ukazovátka. Posuňte myší pro přesunutí bodu. Upustěte bod klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="320"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Přidat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k čáře a stiskněte levé tlačítko myši pro přidání bodu. Bod přilne k ukazovátku a vy jím budete moci pohnout. Bod upustěte klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="329"/>

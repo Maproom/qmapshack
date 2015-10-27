@@ -40,6 +40,7 @@ public:
     void mouseMoveEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent *e);
     void wheelEvent(QWheelEvent * e);
+    void keyPressEvent(QKeyEvent * e);
 
 private slots:
     void slotHidePoints();
@@ -48,6 +49,7 @@ private slots:
     void slotCopy();
 
 private:
+    void resetState();
     IGisItem::key_t key;
 
     enum state_e

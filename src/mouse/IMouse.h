@@ -52,6 +52,10 @@ public:
     {
     }
     virtual void wheelEvent(QWheelEvent * e) = 0;
+    virtual void keyPressEvent(QKeyEvent * e)
+    {
+    }
+
     /// the current mouse cursor
     /**
         Each mouse function is represented by a special cursor. The main

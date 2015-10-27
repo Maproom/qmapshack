@@ -203,15 +203,13 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                         }
                     }
                 }
-                screenUnclutter->clear();
-                stateItemSel = eStateIdle;
+                resetState();
                 break;
             }
 
             case eStateShowItemOptions:
             {
-                delete screenItemOption;
-                stateItemSel = eStateIdle;
+                resetState();
                 break;
             }
 
@@ -240,8 +238,21 @@ void CMouseNormal::mouseDoubleClickEvent(QMouseEvent *e)
 
 void CMouseNormal::wheelEvent(QWheelEvent * e)
 {
+    resetState();
+}
+
+void CMouseNormal::keyPressEvent(QKeyEvent * e)
+{
+    resetState();
+}
+
+void CMouseNormal::resetState()
+{
     screenUnclutter->clear();
-    delete screenItemOption;
+    if(!screenItemOption.isNull())
+    {
+        screenItemOption->deleteLater();
+    }
     stateItemSel = eStateIdle;
 }
 

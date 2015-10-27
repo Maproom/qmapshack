@@ -44,6 +44,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *e);
     void mouseDoubleClickEvent(QMouseEvent *e);
     void wheelEvent(QWheelEvent * e);
+    void keyPressEvent(QKeyEvent * e);
 
 private slots:
     void slotAddWpt();
@@ -58,6 +59,7 @@ private:
 
 protected:
     void stopTracking();
+    void resetState();
 
 
     /// the flag is true if the map moving is in progress

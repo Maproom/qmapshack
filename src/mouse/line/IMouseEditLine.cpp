@@ -285,6 +285,13 @@ void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
 void IMouseEditLine::wheelEvent(QWheelEvent * e)
 {
     canvas->update();
+    lineOp->wheelEvent(e);
+}
+
+void IMouseEditLine::keyPressEvent(QKeyEvent * e)
+{
+    canvas->update();
+    lineOp->keyPressEvent(e);
 }
 
 void IMouseEditLine::slotPanCanvas()

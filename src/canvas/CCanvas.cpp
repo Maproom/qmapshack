@@ -464,18 +464,16 @@ void CCanvas::leaveEvent(QEvent * e)
 void CCanvas::keyPressEvent(QKeyEvent * e)
 {
     qDebug() << hex << e->key();
-    bool doUpdate = false;
+    bool doUpdate = true;
 
     switch(e->key())
     {
     case Qt::Key_Plus:
         setZoom(true, needsRedraw);
-        doUpdate = true;
         break;
 
     case Qt::Key_Minus:
         setZoom(false, needsRedraw);
-        doUpdate = true;
         break;
 
     /* move the map with keys up, down, left and right */
@@ -496,17 +494,26 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
         break;
 
     case Qt::Key_Escape:
+    {
         IMouseEditLine *lineMouse = dynamic_cast<IMouseEditLine*>(mouse);
         if(lineMouse != 0)
         {
             lineMouse->abortStep();
-            doUpdate = true;
+        }
+        else
+        {
+            doUpdate = false;
         }
         break;
     }
 
+    default:
+        doUpdate = false;
+    }
+
     if(doUpdate)
     {
+        mouse->keyPressEvent(e);
         e->accept();
         update();
     }
@@ -896,8 +903,10 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
     p.resetTransform();
     // ----- start to draw fast content -----
 
-    grid->draw(p, area.toRect());
-    gis->draw(p, area.toRect());
+    QRect r(QPoint(0,0), area.size().toSize());
+
+    grid->draw(p, r);
+    gis->draw(p, r);
 
     setDrawContextSize(oldSize);
 }

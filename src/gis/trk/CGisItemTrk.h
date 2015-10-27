@@ -214,8 +214,11 @@ public:
     {
         return trk.links;
     }
+    /// get the track as a simple coordinate polyline
     void getPolylineFromData(QPolygonF &l);
+    /// get the track as polyline with elevation, pixel and GIS coordinates.
     void getPolylineFromData(SGisLine& l);
+
     const QDateTime& getTimeStart() const
     {
         return timeStart;
@@ -498,9 +501,20 @@ public:
      */
     void filterSpeed(qreal speed);
 
+    /**
+       @brief Correlate waypoints with the track points
+
+       If a waypoint correlates with a trackpoint it's key is written to
+       trkpt_t::keyWpt.
+
+       @param progress  a progress dialog as this operation can take quite some time
+       @param current   the current progress if the operaton is done for several tracks
+    */
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
+    /// available track line colors
     static const QColor lineColors[TRK_N_COLORS];
+    /// available bullet colors
     static const QString bulletColors[TRK_N_COLORS];
 
 private:
@@ -562,8 +576,8 @@ private:
        @brief Tell the point of focus to all plots and the detail dialog
 
        @param pt        A pointer to the point itself
-       @param mode      The reason for the focus
-       @param initiator A pointer to an IPlot object that has set the point of focus. Can be 0.
+       @param fmode     The reason for the focus
+       @param owner     A string to identify owner of the operation
      */
     bool publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString &owner);
     void publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode);
@@ -590,8 +604,10 @@ private:
      */
     void changed(const QString& what, const QString& icon);
 
+    /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);
-    void setIcon(const QString& c);
+    /// setup track icon by color
+    void setIcon(const QString& iconColor);
 
 public:
     struct trkpt_t : public wpt_t
@@ -620,7 +636,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
 
-                          // activity flags
+            // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -660,14 +676,13 @@ public:
         qreal elapsedSecondsMoving;
         /// the key of an attached waypoint
         key_t keyWpt;
-
+        /// track point extensions
         QHash<QString,QVariant> extensions;
     };
 
     struct trkseg_t
     {
         QVector<trkpt_t> pts;
-        QMap<QString, QVariant> extensions;
     };
 
     struct trk_t
@@ -685,7 +700,6 @@ public:
         QString type;
         QVector<trkseg_t> segs;
         // -- all gpx tags - stop
-        QMap<QString, QVariant> extensions;
 
         QString color;
     };
@@ -700,15 +714,20 @@ public:
     }
 
 private:
+    /// this is the GPX structure oriented data of the track
     trk_t trk;
 
-    static key_t keyUserFocus;
+    /// the key of the track having the user focus.
+    static key_t keyUserFocus;   
+    /// background (border) color of all tracks
     static const QPen penBackground;
-
-    QPen penForeground;
-
+    /// drawing and mouse interaction is dependent on the mode
     mode_e mode;
 
+    /**
+       \defgroup TrackStatistics Some statistical values over the complete track
+    */
+    /**@{*/
     qint32 cntTotalPoints;
     qint32 cntVisiblePoints;
     QDateTime timeStart;
@@ -718,17 +737,25 @@ private:
     qreal totalDescend;
     qreal totalElapsedSeconds;
     qreal totalElapsedSecondsMoving;
+    /**@}*/
 
-    /// the track line color
-    QColor color;
-    /// the trakpoint bullet icon
-    QPixmap bullet;
+    /**
+        \defgroup DrawUtilies Objects used to draw the track
+    */
+    /**@{*/
     /// the track line color by index
     unsigned colorIdx;
+    /// the track line color
+    QColor color;
+    /// the pen with the actual track color
+    QPen penForeground;
+    /// the trakpoint bullet icon
+    QPixmap bullet;
     /// the current track line as screen pixel coordinates
     QPolygonF lineSimple;
     /// visible and invisible points
     QPolygonF lineFull;
+    /**@}*/
 
     /**
         A list of plot objects that need to get informed on any change in data.
@@ -751,14 +778,10 @@ private:
      */
     QSet<IPlot*> registeredPlots;
 
-    const trkpt_t * mouseMoveFocus;
-    const trkpt_t * mouseClickFocus;
-    const trkpt_t * mouseRange1;
-    const trkpt_t * mouseRange2;
-
-    QPointer<CDetailsTrk> dlgDetails;
-    QPointer<CScrOptTrk>  scrOpt;
-
+    /**
+        \defgroup FocusRange Variables to handle mouse focus and range selection
+    */
+    /**@{*/
     enum rangestate_e
     {
         eRangeStateIdle
@@ -766,10 +789,35 @@ private:
         , eRangeState2nd
     };
 
+    /// state variable for range selection
     rangestate_e rangeState;
 
+    /**
+        @brief Identify source of current range selection
+
+        Each range selection operation has to provide an owner string.
+        If mouseFocusOwner is not empty and different to the passed
+        owner string the operation must be rejected.
+
+    */
     QString mouseFocusOwner;
 
+    /// the current track point selected by mouse movement
+    const trkpt_t * mouseMoveFocus;
+    /// the last track point the user clicked on
+    const trkpt_t * mouseClickFocus;
+    /// the first point of a range selection
+    const trkpt_t * mouseRange1;
+    /// the second point of a range selection
+    const trkpt_t * mouseRange2;
+    /**@}*/
+
+    /// the track's details dialog if any
+    QPointer<CDetailsTrk> dlgDetails;
+    /// the track's screen option if visible
+    QPointer<CScrOptTrk>  scrOpt;
+
+    /// all function concerning track activities have been moved to CActivityTrk
     CActivityTrk activities;
 };
 

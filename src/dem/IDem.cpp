@@ -44,10 +44,10 @@ inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
 const struct SlopePresets IDem::slopePresets[7]
 {
     /* http://www.alpenverein.de/bergsport/sicherheit/skitouren-schneeschuh-sicher-im-schnee/dav-snowcard_aid_10619.html */
-    { "DAV Snowcard Grade 1", {27.0, 31.0, 34.0, 39.0, 50.0} },
-    { "DAV Snowcard Grade 2", {27.0, 30.0, 32.0, 35.0, 39.0} },
-    { "DAV Snowcard Grade 3", {27.0, 29.0, 30.0, 31.0, 34.0} },
-    { "DAV Snowcard Grade 4", {23.0, 25.0, 27.0, 28.0, 30.0} },
+    { "Grade 1 (DAV Snowcard)", {27.0, 31.0, 34.0, 39.0, 50.0} },
+    { "Grade 2 (DAV Snowcard)", {27.0, 30.0, 32.0, 35.0, 39.0} },
+    { "Grade 3 (DAV Snowcard)", {27.0, 29.0, 30.0, 31.0, 34.0} },
+    { "Grade 4 (DAV Snowcard)", {23.0, 25.0, 27.0, 28.0, 30.0} },
 
     { "level country",        { 3.0,  6.0,  8.0, 12.0, 15.0} },
     { "secondary mountain",   { 4.0,  7.0, 10.0, 15.0, 20.0} },

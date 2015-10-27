@@ -37,6 +37,7 @@ set( SRCS
     GeoMath.cpp
     CMainWindow.cpp
     CAbout.cpp
+    widgets/CTinySpinBox.cpp
     helpers/CInputDialog.cpp
     helpers/CPositionDialog.cpp
     helpers/CWptIconDialog.cpp
@@ -246,7 +247,7 @@ set( HDRS
     GeoMath.h
     CMainWindow.h
     CAbout.h
-    widgets/QTinySpinBox.h
+    widgets/CTinySpinBox.h
     helpers/Platform.h
     helpers/CFileExt.h
     helpers/CAppOpts.h

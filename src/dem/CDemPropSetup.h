@@ -50,7 +50,7 @@ private:
 
     void updateScaleLabel();
 
-    QTinySpinBox* slopeSpins[SLOPE_LEVELS];
+    CTinySpinBox* slopeSpins[SLOPE_LEVELS];
 
     static QPointF scale;
 };

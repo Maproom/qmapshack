@@ -19,6 +19,7 @@
 #ifndef CDEMPROPSETUP_H
 #define CDEMPROPSETUP_H
 
+#define SLOPE_LEVELS 5
 
 #include "dem/IDemProp.h"
 #include "ui_IDemPropSetup.h"
@@ -40,10 +41,16 @@ private slots:
     void slotScaleChanged(const QPointF& s);
     void slotSetMinScale(bool checked);
     void slotSetMaxScale(bool checked);
-    void slotSetGradeSlopeColor(int val);
+
+    void slotGradeIndex(int idx);
+    void slotSlopeValiddateAfterEdit();
+    void slotSlopeChanged(int val);
 
 private:
+
     void updateScaleLabel();
+
+    QTinySpinBox* slopeSpins[SLOPE_LEVELS];
 
     static QPointF scale;
 };

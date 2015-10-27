@@ -29,27 +29,45 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
 {
     setupUi(this);
 
+    slopeSpins[0] = spinSlope0;
+    slopeSpins[1] = spinSlope1;
+    slopeSpins[2] = spinSlope2;
+    slopeSpins[3] = spinSlope3;
+    slopeSpins[4] = spinSlope4;
+
     slotPropertiesChanged();
 
-    connect(sliderOpacity, SIGNAL(valueChanged(int)), demfile, SLOT(slotSetOpacity(int)));
-    connect(sliderOpacity, SIGNAL(valueChanged(int)), dem, SLOT(emitSigCanvasUpdate()));
-    connect(dem, SIGNAL(sigScaleChanged(QPointF)), this, SLOT(slotScaleChanged(QPointF)));
-    connect(toolSetMinScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMinScale(bool)));
-    connect(toolSetMaxScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMaxScale(bool)));
+    connect(sliderOpacity,     SIGNAL(valueChanged(int)),        demfile, SLOT(slotSetOpacity(int)));
+    connect(sliderOpacity,     SIGNAL(valueChanged(int)),        dem,     SLOT(emitSigCanvasUpdate()));
+    connect(dem,               SIGNAL(sigScaleChanged(QPointF)), this,    SLOT(slotScaleChanged(QPointF)));
+    connect(toolSetMinScale,   SIGNAL(toggled(bool)),            this,    SLOT(slotSetMinScale(bool)));
+    connect(toolSetMaxScale,   SIGNAL(toggled(bool)),            this,    SLOT(slotSetMaxScale(bool)));
 
-    connect(checkHillshading, SIGNAL(toggled(bool)), demfile, SLOT(slotSetHillshading(bool)));
-    connect(checkHillshading, SIGNAL(clicked()), dem, SLOT(emitSigCanvasUpdate()));
-    connect(sliderHillshading, SIGNAL(valueChanged(int)), demfile, SLOT(slotSetFactorHillshade(int)));
-    connect(sliderHillshading, SIGNAL(valueChanged(int)), dem, SLOT(emitSigCanvasUpdate()));
+    connect(checkHillshading,  SIGNAL(toggled(bool)),            demfile, SLOT(slotSetHillshading(bool)));
+    connect(checkHillshading,  SIGNAL(clicked()),                dem,     SLOT(emitSigCanvasUpdate()));
+    connect(sliderHillshading, SIGNAL(valueChanged(int)),        demfile, SLOT(slotSetFactorHillshade(int)));
+    connect(sliderHillshading, SIGNAL(valueChanged(int)),        dem,     SLOT(emitSigCanvasUpdate()));
 
-    connect(checkSlopeColor, SIGNAL(toggled(bool)), demfile, SLOT(slotSetSlopeColor(bool)));
-    connect(checkSlopeColor, SIGNAL(clicked()), dem, SLOT(emitSigCanvasUpdate()));
-    connect(sliderSlopeColor, SIGNAL(valueChanged(int)), demfile, SLOT(slotSetGradeSlopeColor(int)));
-    connect(sliderSlopeColor, SIGNAL(valueChanged(int)), dem, SLOT(emitSigCanvasUpdate()));
-    connect(sliderSlopeColor, SIGNAL(valueChanged(int)), this, SLOT(slotSetGradeSlopeColor(int)));
+    connect(checkSlopeColor,   SIGNAL(toggled(bool)),            demfile, SLOT(slotSetSlopeColor(bool)));
+    connect(checkSlopeColor,   SIGNAL(clicked()),                dem,     SLOT(emitSigCanvasUpdate()));
+    connect(comboGrades,       SIGNAL(currentIndexChanged(int)), this,    SLOT(slotGradeIndex(int)));
+
+    for(size_t i = 0; i < SLOPE_LEVELS; i++)
+    {
+        slopeSpins[i]->setProperty("level", (uint) i);
+        connect(slopeSpins[i], SIGNAL(editingFinished()), this, SLOT(slotSlopeValiddateAfterEdit()));
+    }
+
+    comboGrades->blockSignals(true);
+    for(size_t i = 0; i < IDem::slopePresetCount; i++)
+    {
+        comboGrades->addItem(IDem::slopePresets[i].name);
+    }
+    comboGrades->addItem("custom");
+    comboGrades->blockSignals(false);
 
     const QVector<QRgb>& colortable = demfile->getSlopeColorTable();
-    QPixmap pixmap(20,10);
+    QPixmap pixmap(20, 10);
     pixmap.fill(colortable[5]);
     labelColor5->setPixmap(pixmap);
     pixmap.fill(colortable[4]);
@@ -74,36 +92,54 @@ void CDemPropSetup::resizeEvent(QResizeEvent * e)
 
 void CDemPropSetup::slotPropertiesChanged()
 {
-    sliderOpacity->blockSignals(true);
-    toolSetMaxScale->blockSignals(true);
-    toolSetMinScale->blockSignals(true);
-    checkHillshading->blockSignals(true);
+    sliderOpacity    ->blockSignals(true);
+    toolSetMaxScale  ->blockSignals(true);
+    toolSetMinScale  ->blockSignals(true);
+    checkHillshading ->blockSignals(true);
     sliderHillshading->blockSignals(true);
-    checkSlopeColor->blockSignals(true);
-    sliderSlopeColor->blockSignals(true);
+    checkSlopeColor  ->blockSignals(true);
+    comboGrades      ->blockSignals(true);
 
     sliderOpacity->setValue(demfile->getOpacity());
-    qreal minScale = demfile->getMinScale();
-    toolSetMinScale->setChecked(minScale != NOFLOAT);
-    qreal maxScale = demfile->getMaxScale();
-    toolSetMaxScale->setChecked(maxScale != NOFLOAT);
+
+    toolSetMinScale->setChecked( demfile->getMinScale() != NOFLOAT );
+    toolSetMaxScale->setChecked( demfile->getMaxScale() != NOFLOAT );
 
     updateScaleLabel();
 
-    checkHillshading->setChecked(demfile->doHillshading());
+    checkHillshading ->setChecked(demfile->doHillshading());
     sliderHillshading->setValue(demfile->getFactorHillshading());
-    checkSlopeColor->setChecked(demfile->doSlopeColor());
-    sliderSlopeColor->setValue(demfile->getGradeSlopeColor());
+    checkSlopeColor  ->setChecked(demfile->doSlopeColor());
 
-    slotSetGradeSlopeColor(sliderSlopeColor->value());
+    bool spinsReadonly = true;
+    if((-1 == comboGrades->currentIndex() || demfile->getSlopeStepTableIndex() != comboGrades->currentIndex()) || (-1 == demfile->getSlopeStepTableIndex() && comboGrades->count() - 1 != comboGrades->currentIndex()))
+    {
+        int idx = demfile->getSlopeStepTableIndex();
+        if(-1 == idx)
+        {
+            spinsReadonly = false;
+            idx = comboGrades->count() - 1;
+        }
+        comboGrades->setCurrentIndex(idx);
+    }
 
-    sliderOpacity->blockSignals(false);
-    toolSetMaxScale->blockSignals(false);
-    toolSetMinScale->blockSignals(false);
-    checkHillshading->blockSignals(false);
+    for(size_t i = 0; i < SLOPE_LEVELS; i++)
+    {
+        slopeSpins[i]->blockSignals(true);
+        slopeSpins[i]->setReadOnly(spinsReadonly);
+        slopeSpins[i]->setValue(demfile->getCurrentSlopeStepTable()[i]);
+        slopeSpins[i]->blockSignals(false);
+    }
+
+    dem->emitSigCanvasUpdate();
+
+    comboGrades      ->blockSignals(false);
+    sliderOpacity    ->blockSignals(false);
+    toolSetMaxScale  ->blockSignals(false);
+    toolSetMinScale  ->blockSignals(false);
+    checkHillshading ->blockSignals(false);
     sliderHillshading->blockSignals(false);
-    checkSlopeColor->blockSignals(false);
-    sliderSlopeColor->blockSignals(false);
+    checkSlopeColor  ->blockSignals(false);
 }
 
 void CDemPropSetup::slotScaleChanged(const QPointF& s)
@@ -178,15 +214,61 @@ void CDemPropSetup::updateScaleLabel()
     labelScale->setPixmap(pix);
 }
 
-void CDemPropSetup::slotSetGradeSlopeColor(int val)
+void CDemPropSetup::slotSlopeChanged(int val)
 {
-    labelGrade->setText(tr("<b>Grade %1</b>").arg(val));
-
-    const qreal * g = IDem::tblGrade[val];
-
-    labelValue1->setText(QString("> %1%2").arg(g[1]).arg(QChar(0260)));
-    labelValue2->setText(QString("> %1%2").arg(g[2]).arg(QChar(0260)));
-    labelValue3->setText(QString("> %1%2").arg(g[3]).arg(QChar(0260)));
-    labelValue4->setText(QString("> %1%2").arg(g[4]).arg(QChar(0260)));
-    labelValue5->setText(QString("> %1%2").arg(g[5]).arg(QChar(0260)));
+    uint level = QObject::sender()->property("level").toUInt();
+    demfile->setSlopeStepTableCustomValue(level, val);
 }
+
+void CDemPropSetup::slotSlopeValiddateAfterEdit()
+{
+    uint level = QObject::sender()->property("level").toUInt();
+    demfile->setSlopeStepTableCustomValue(level, slopeSpins[level]->value());
+
+    if(comboGrades->count() - 1 == comboGrades->currentIndex())
+    {
+        // ensure the levels below/above the current level are
+        // less/greater than the current level
+
+        for(uint l = level; l < SLOPE_LEVELS - 1; l++)
+        {
+            int val = slopeSpins[l]->value();
+            if(slopeSpins[l + 1]->value() <= val)
+            {
+                slopeSpins[l + 1]->setValue(val + 1);
+                demfile->setSlopeStepTableCustomValue(l + 1, val + 1);
+            }
+        }
+        for(uint l = level; l >= 1; l--)
+        {
+            int val = slopeSpins[l]->value();
+            if(slopeSpins[l - 1]->value() >= val)
+            {
+                slopeSpins[l - 1]->setValue(val - 1);
+                demfile->setSlopeStepTableCustomValue(l - 1, val - 1);
+            }
+        }
+    }
+
+    dem->emitSigCanvasUpdate();
+}
+
+void CDemPropSetup::slotGradeIndex(int idx)
+{
+    // enable the spins if the selected entry is `custom`
+    bool spinsReadonly = true;
+    if(idx == IDem::slopePresetCount)
+    {
+        idx = -1;
+        spinsReadonly = false;
+    }
+    demfile->setSlopeStepTable(idx);
+
+    for(int i = 0; i < 5; i++)
+    {
+        slopeSpins[i]->setReadOnly(spinsReadonly);
+    }
+
+    slotPropertiesChanged();
+}
+

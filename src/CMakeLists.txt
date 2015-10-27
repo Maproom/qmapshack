@@ -246,6 +246,7 @@ set( HDRS
     GeoMath.h
     CMainWindow.h
     CAbout.h
+    widgets/QTinySpinBox.h
     helpers/Platform.h
     helpers/CFileExt.h
     helpers/CAppOpts.h

@@ -163,9 +163,16 @@ QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointe
         : contentRect.left() + (int) pointerBasePos;
 
     int pointerHeight = 0;
-    if(pointerPos.y() < contentRect.top())         pointerHeight = contentRect.top() - pointerPos.y()    + 1;
-    else if(pointerPos.y() > contentRect.bottom()) pointerHeight = contentRect.bottom() - pointerPos.y() - 1;
-    else {
+    if(pointerPos.y() < contentRect.top())
+    {
+        pointerHeight = contentRect.top() - pointerPos.y() + 1;
+    }
+    else if(pointerPos.y() > contentRect.bottom())
+    {
+        pointerHeight = contentRect.bottom() - pointerPos.y() - 1;
+    }
+    else
+    {
         qDebug() << "cannot calculate pointerHeight/pointerBaseCenterX due to invalid parameters";
     }
 

@@ -92,13 +92,13 @@ void CDemPropSetup::resizeEvent(QResizeEvent * e)
 
 void CDemPropSetup::slotPropertiesChanged()
 {
-    sliderOpacity    ->blockSignals(true);
-    toolSetMaxScale  ->blockSignals(true);
-    toolSetMinScale  ->blockSignals(true);
-    checkHillshading ->blockSignals(true);
+    sliderOpacity->blockSignals(true);
+    toolSetMaxScale->blockSignals(true);
+    toolSetMinScale->blockSignals(true);
+    checkHillshading->blockSignals(true);
     sliderHillshading->blockSignals(true);
-    checkSlopeColor  ->blockSignals(true);
-    comboGrades      ->blockSignals(true);
+    checkSlopeColor->blockSignals(true);
+    comboGrades->blockSignals(true);
 
     sliderOpacity->setValue(demfile->getOpacity());
 
@@ -107,9 +107,9 @@ void CDemPropSetup::slotPropertiesChanged()
 
     updateScaleLabel();
 
-    checkHillshading ->setChecked(demfile->doHillshading());
+    checkHillshading->setChecked(demfile->doHillshading());
     sliderHillshading->setValue(demfile->getFactorHillshading());
-    checkSlopeColor  ->setChecked(demfile->doSlopeColor());
+    checkSlopeColor->setChecked(demfile->doSlopeColor());
 
     bool spinsReadonly = true;
     if((-1 == comboGrades->currentIndex() || demfile->getSlopeStepTableIndex() != comboGrades->currentIndex()) || (-1 == demfile->getSlopeStepTableIndex() && comboGrades->count() - 1 != comboGrades->currentIndex()))
@@ -133,13 +133,13 @@ void CDemPropSetup::slotPropertiesChanged()
 
     dem->emitSigCanvasUpdate();
 
-    comboGrades      ->blockSignals(false);
-    sliderOpacity    ->blockSignals(false);
-    toolSetMaxScale  ->blockSignals(false);
-    toolSetMinScale  ->blockSignals(false);
-    checkHillshading ->blockSignals(false);
+    comboGrades->blockSignals(false);
+    sliderOpacity->blockSignals(false);
+    toolSetMaxScale->blockSignals(false);
+    toolSetMinScale->blockSignals(false);
+    checkHillshading->blockSignals(false);
     sliderHillshading->blockSignals(false);
-    checkSlopeColor  ->blockSignals(false);
+    checkSlopeColor->blockSignals(false);
 }
 
 void CDemPropSetup::slotScaleChanged(const QPointF& s)

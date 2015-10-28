@@ -59,13 +59,18 @@ void CTinySpinBox::updateStyle()
     }
 }
 
-
 CTinySpinBox::CTinySpinBox(QWidget * parent)
     : QSpinBox(parent)
 {
     // initialization has to be done deferred,
     // as the correct palette is set after construction
     initialized = false;
+}
+
+void CTinySpinBox::stepBy(int steps)
+{
+    QSpinBox::stepBy(steps);
+    emit valueChangedByStep(value());
 }
 
 void CTinySpinBox::setReadOnly(bool r)

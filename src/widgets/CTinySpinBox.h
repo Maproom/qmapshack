@@ -55,10 +55,14 @@ private:
 public slots:
     void slotSelectAll() { selectAll(); }
 
+signals:
+    void valueChangedByStep(int val);
+
 public:
     CTinySpinBox(QWidget * parent = 0);
 
     void setReadOnly(bool r);
+    void stepBy(int steps);
 
 protected:
     void focusInEvent(QFocusEvent *event);

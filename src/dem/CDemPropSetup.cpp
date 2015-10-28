@@ -56,6 +56,7 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
     {
         slopeSpins[i]->setProperty("level", (uint) i);
         connect(slopeSpins[i], SIGNAL(editingFinished()), this, SLOT(slotSlopeValiddateAfterEdit()));
+        connect(slopeSpins[i], SIGNAL(valueChangedByStep(int)), this, SLOT(slotSlopeValiddateAfterEdit()));
     }
 
     comboGrades->blockSignals(true);

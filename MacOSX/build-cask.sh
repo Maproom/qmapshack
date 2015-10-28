@@ -9,8 +9,8 @@ CASK_SRC_DIR=/$ROOT_DIR/homebrew-cask
 CASK_QMS_FILE=Casks/qmapshack.rb
 CASK_QMS='qmapshack'
 
-
 function command {
+    echo "$CASK_DIR/"
     echo "CREATE BRANCH:" 
     echo "git checkout $CASK_QMS"
     echo "git pull"

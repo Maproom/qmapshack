@@ -24,10 +24,17 @@
 #include <QPointer>
 #include <proj_api.h>
 
+#define CUSTOM_SLOPE_COLORTABLE ( -1 )
+
 class CDemDraw;
 class IDemProp;
 class QSettings;
 
+struct SlopePresets
+{
+    const char  *name;
+    const qreal  steps[5];
+};
 
 class IDem : public IDrawObject
 {
@@ -71,18 +78,23 @@ public:
         return bSlopeColor;
     }
 
-    int getGradeSlopeColor()
-    {
-        return gradeSlopeColor;
-    }
-
-
     const QVector<QRgb> getSlopeColorTable()
     {
         return slopetable;
     }
 
-    static const qreal tblGrade[5][6];
+    static const struct SlopePresets slopePresets[7];
+    static const size_t slopePresetCount = sizeof(IDem::slopePresets) / sizeof(IDem::slopePresets[0]);
+
+    const qreal* getCurrentSlopeStepTable();
+
+    int getSlopeStepTableIndex()
+    {
+        return gradeSlopeColor;
+    }
+
+    void setSlopeStepTable(int idx);
+    void setSlopeStepTableCustomValue(int idx, int val);
 
 public slots:
     void slotSetHillshading(bool yes)
@@ -96,8 +108,6 @@ public slots:
     {
         bSlopeColor = yes;
     }
-
-    void slotSetGradeSlopeColor(int g);
 
 protected:
 
@@ -138,7 +148,6 @@ protected:
     qreal yscale;
 
 
-
     /**
        @brief True if map was loaded successfully
      */
@@ -157,12 +166,11 @@ protected:
 
 private:
     bool bHillshading;
-
     qreal factorHillshading;
 
-    bool bSlopeColor;
-
-    int gradeSlopeColor;
+    bool  bSlopeColor;
+    int   gradeSlopeColor;
+    qreal slopeCustomStepTable[5];
 };
 
 #endif //IDEM_H

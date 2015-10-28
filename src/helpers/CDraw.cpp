@@ -20,14 +20,14 @@
 #include "canvas/CCanvas.h"
 #include "helpers/CDraw.h"
 
-#include <QDebug>
 #include <QImage>
 #include <QPointF>
 #include <QtMath>
+#include <QDebug>
 
-QPen CDraw::penBorderBlue(QColor(10,10,150,220),2);
-QPen CDraw::penBorderGray(Qt::lightGray,2);
-QPen CDraw::penBorderBlack(QColor(0,0,0,200),2);
+QPen   CDraw::penBorderBlue(QColor(10,10,150,220),2);
+QPen   CDraw::penBorderGray(Qt::lightGray,2);
+QPen   CDraw::penBorderBlack(QColor(0,0,0,200),2);
 QBrush CDraw::brushBackWhite(QColor(255,255,255,255));
 QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
@@ -159,13 +159,13 @@ QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointe
 
     // draw the arrow
     int pointerBaseCenterX = (pointerBasePos <= 1)
-                             ? contentRect.left() + (pointerBasePos * contentRect.width())
-                             : contentRect.left() + (int) pointerBasePos;
+        ? contentRect.left() + (pointerBasePos * contentRect.width())
+        : contentRect.left() + (int) pointerBasePos;
 
     int pointerHeight = 0;
     if(pointerPos.y() < contentRect.top())
     {
-        pointerHeight = contentRect.top() - pointerPos.y()    + 1;
+        pointerHeight = contentRect.top() - pointerPos.y() + 1;
     }
     else if(pointerPos.y() > contentRect.bottom())
     {
@@ -174,22 +174,26 @@ QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointe
     else
     {
         qDebug() << "cannot calculate pointerHeight/pointerBaseCenterX due to invalid parameters";
-        return QPoint(0, 0);
     }
 
-    QPolygonF pointerPoly;
-    pointerPoly << pointerPos
-                << QPointF(pointerBaseCenterX - pointerBaseWidth / 2, pointerPos.y() + pointerHeight)
-                << QPointF(pointerBaseCenterX + pointerBaseWidth / 2, pointerPos.y() + pointerHeight)
-                << pointerPos;
+    if(0 != pointerHeight)
+    {
+        QPolygonF pointerPoly;
+        pointerPoly << pointerPos
+                    << QPointF(pointerBaseCenterX - pointerBaseWidth / 2, pointerPos.y() + pointerHeight)
+                    << QPointF(pointerBaseCenterX + pointerBaseWidth / 2, pointerPos.y() + pointerHeight)
+                    << pointerPos;
 
-    QPainterPath pointerPath;
-    pointerPath.addPolygon(pointerPoly);
+        QPainterPath pointerPath;
+        pointerPath.addPolygon(pointerPoly);
+
+        bubblePath = bubblePath.united(pointerPath);
+    }
 
     p.setPen  (CDraw::penBorderGray);
     p.setBrush(CDraw::brushBackWhite);
 
-    p.drawPolygon(bubblePath.united(pointerPath).toFillPolygon());
+    p.drawPolygon(bubblePath.toFillPolygon());
 
     return contentRect.topLeft();
 }

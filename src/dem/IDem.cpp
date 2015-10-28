@@ -41,13 +41,17 @@ inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
     w[8] = getValue(data, x + 1, y + 1, dx);
 }
 
-const qreal IDem::tblGrade[5][6] =
+const struct SlopePresets IDem::slopePresets[7]
 {
-    {0,0,0,0,0,0}
-    ,{0.0,27.0,31.0,34.0,39.0,50.0}
-    ,{0.0,27.0,30.0,32.0,35.0,39.0}
-    ,{0.0,27.0,29.0,30.0,31.0,34.0}
-    ,{0.0,23.0,25.0,27.0,28.0,30.0}
+    /* http://www.alpenverein.de/bergsport/sicherheit/skitouren-schneeschuh-sicher-im-schnee/dav-snowcard_aid_10619.html */
+    { "Grade 1 (DAV Snowcard)", {27.0, 31.0, 34.0, 39.0, 50.0} },
+    { "Grade 2 (DAV Snowcard)", {27.0, 30.0, 32.0, 35.0, 39.0} },
+    { "Grade 3 (DAV Snowcard)", {27.0, 29.0, 30.0, 31.0, 34.0} },
+    { "Grade 4 (DAV Snowcard)", {23.0, 25.0, 27.0, 28.0, 30.0} },
+
+    { "level country",        { 3.0,  6.0,  8.0, 12.0, 15.0} },
+    { "secondary mountain",   { 4.0,  7.0, 10.0, 15.0, 20.0} },
+    { "lofty mountain",       {10.0, 15.0, 20.0, 30.0, 50.0} }
 };
 
 IDem::IDem(CDemDraw *parent)
@@ -60,7 +64,7 @@ IDem::IDem(CDemDraw *parent)
     , bHillshading(false)
     , factorHillshading(1.0)
     , bSlopeColor(false)
-    , gradeSlopeColor(1)
+    , gradeSlopeColor(0)
 {
     slotSetOpacity(50);
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
@@ -90,22 +94,33 @@ void IDem::saveConfig(QSettings& cfg)
 {
     IDrawObject::saveConfig(cfg);
 
-    cfg.setValue("doHillshading",bHillshading);
+    cfg.setValue("doHillshading",     bHillshading);
     cfg.setValue("factorHillshading", factorHillshading);
-    cfg.setValue("doSlopeColor",bSlopeColor);
-    cfg.setValue("gradeSlopeColor", gradeSlopeColor);
+    cfg.setValue("doSlopeColor",      bSlopeColor);
+
+    cfg.setValue("gradeSlopeColor",   gradeSlopeColor);
+    cfg.setValue("slopeCustomValue0", slopeCustomStepTable[0]);
+    cfg.setValue("slopeCustomValue1", slopeCustomStepTable[1]);
+    cfg.setValue("slopeCustomValue2", slopeCustomStepTable[2]);
+    cfg.setValue("slopeCustomValue3", slopeCustomStepTable[3]);
+    cfg.setValue("slopeCustomValue4", slopeCustomStepTable[4]);
 }
 
 void IDem::loadConfig(QSettings& cfg)
 {
     IDrawObject::loadConfig(cfg);
 
-    bHillshading = cfg.value("doHillshading",bHillshading).toBool();
+    bHillshading      = cfg.value("doHillshading",     bHillshading     ).toBool();
     factorHillshading = cfg.value("factorHillshading", factorHillshading).toFloat();
-    bSlopeColor = cfg.value("doSlopeColor", bSlopeColor).toBool();
-    gradeSlopeColor = cfg.value("gradeSlopeColor", gradeSlopeColor).toInt();
-}
+    bSlopeColor       = cfg.value("doSlopeColor",      bSlopeColor      ).toBool();
+    gradeSlopeColor   = cfg.value("gradeSlopeColor",   gradeSlopeColor  ).toInt();
 
+    slopeCustomStepTable[0] = cfg.value("slopeCustomValue0",  5.).toFloat();
+    slopeCustomStepTable[1] = cfg.value("slopeCustomValue1", 10.).toFloat();
+    slopeCustomStepTable[2] = cfg.value("slopeCustomValue2", 15.).toFloat();
+    slopeCustomStepTable[3] = cfg.value("slopeCustomValue3", 20.).toFloat();
+    slopeCustomStepTable[4] = cfg.value("slopeCustomValue4", 25.).toFloat();
+}
 
 IDemProp * IDem::getSetup()
 {
@@ -133,10 +148,25 @@ void IDem::slotSetFactorHillshade(int f)
     }
 }
 
-void IDem::slotSetGradeSlopeColor(int g)
+void IDem::setSlopeStepTableCustomValue(int idx, int val)
 {
-    /// @todo check range
-    gradeSlopeColor = g;
+    slopeCustomStepTable[idx] = (qreal) val;
+}
+
+void IDem::setSlopeStepTable(int idx)
+{
+    gradeSlopeColor = idx;
+    dem->emitSigCanvasUpdate();
+}
+
+const qreal* IDem::getCurrentSlopeStepTable()
+{
+    if(CUSTOM_SLOPE_COLORTABLE == gradeSlopeColor)
+    {
+        return slopeCustomStepTable;
+    } else {
+        return slopePresets[gradeSlopeColor].steps;
+    }
 }
 
 int IDem::getFactorHillshading()
@@ -214,23 +244,25 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
             k   = (dx * dx + dy * dy);
             slope =  qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
 
-            if(slope > tblGrade[gradeSlopeColor][5])
+            const qreal *currentSlopeStepTable = getCurrentSlopeStepTable();
+
+            if(slope > currentSlopeStepTable[4])
             {
                 img.setPixel(n - 1, m - 1, 5);
             }
-            else if(slope > tblGrade[gradeSlopeColor][4])
+            else if(slope > currentSlopeStepTable[3])
             {
                 img.setPixel(n - 1, m - 1, 4);
             }
-            else if(slope > tblGrade[gradeSlopeColor][3])
+            else if(slope > currentSlopeStepTable[2])
             {
                 img.setPixel(n - 1, m - 1, 3);
             }
-            else if(slope > tblGrade[gradeSlopeColor][2])
+            else if(slope > currentSlopeStepTable[1])
             {
                 img.setPixel(n - 1, m - 1, 2);
             }
-            else if(slope > tblGrade[gradeSlopeColor][1])
+            else if(slope > currentSlopeStepTable[0])
             {
                 img.setPixel(n - 1, m - 1, 1);
             }

@@ -78,24 +78,29 @@ void CPhotoAlbum::slotAddImage()
     {
         CGisItemWpt::image_t image;
         image.fileName = filename;
-        image.pixmap.load(filename);
-
-        int w = image.pixmap.width();
-        int h = image.pixmap.height();
-
-        if(w < h)
+        if(image.pixmap.load(filename))
         {
-            h *= 400.0 / w;
-            w  = 400;
+            int w = image.pixmap.width();
+            int h = image.pixmap.height();
+
+            if(w < h)
+            {
+                h *= 400.0 / w;
+                w  = 400;
+            }
+            else
+            {
+                h *= 600.0 / w;
+                w  = 600;
+            }
+            image.pixmap = image.pixmap.scaled(w,h,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+            images << image;
         }
         else
         {
-            h *= 600.0 / w;
-            w  = 600;
+            qDebug() << "Cannot load image from file " << filename;
         }
-        image.pixmap = image.pixmap.scaled(w,h,Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-        images << image;
     }
 
     QFileInfo fi(filenames.first());

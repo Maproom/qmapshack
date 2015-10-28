@@ -20,6 +20,10 @@ find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
 
+if(UNIX)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif(UNIX)
+
 if (APPLE)
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -framework Foundation -framework DiskArbitration")
      SET(LINK_FLAGS "${LINK_FLAGS} -framework Foundation -framework DiskArbitration")

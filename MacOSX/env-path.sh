@@ -8,9 +8,10 @@ set -a
 # Set this pathes according to your environment
 # ---------------------------------------------
 LIB_BREW_DIR=/usr/local/Cellar
+# should use /usr/local/opt/qt5
 QT_DIR=$LIB_BREW_DIR/qt5/5.5.0
-GDAL_DIR=$LIB_BREW_DIR/gdal/1.11.2_2
-PROJ_DIR=$LIB_BREW_DIR/proj/4.9.1
+GDAL_DIR=$LIB_BREW_DIR/gdal/1.11.3
+PROJ_DIR=$LIB_BREW_DIR/proj/4.9.2
 
 HG_BIN=/Applications/Dev/MacHg.app/Contents/Resources/localhg
 # ---------------------------------------------

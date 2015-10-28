@@ -12,7 +12,22 @@ function installLibraies {
     
     brew install qt5
     brew install gdal
-    brew install proj4
+    brew install proj
+}
+
+function updateLibraies {
+    brew update
+    
+    brew upgrade caskroom/cask/brew-cask
+    brew info qt5
+    brew info gdal
+    brew info proj
+    
+    brew outdated
+    # brew upgrade
+    brew upgrade qt5
+    brew upgrade gdal
+    brew upgrade proj
 }
 
 
@@ -44,6 +59,7 @@ fi
 
 if [[ "$1" == "pre-install" ]]; then
     installLibraies
+    updateLibraies
 fi
 
 # -d -h -c 

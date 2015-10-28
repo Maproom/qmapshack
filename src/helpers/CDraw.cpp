@@ -176,7 +176,7 @@ QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointe
         qDebug() << "cannot calculate pointerHeight/pointerBaseCenterX due to invalid parameters";
     }
 
-    if(pointerHeight > 0)
+    if(0 != pointerHeight)
     {
         QPolygonF pointerPoly;
         pointerPoly << pointerPos

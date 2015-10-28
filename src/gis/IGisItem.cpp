@@ -50,7 +50,7 @@ const IGisItem::color_t IGisItem::colorMap[] =
     ,{"DarkBlue",    QColor(Qt::darkBlue)}
     ,{"DarkMagenta", QColor(Qt::darkMagenta)}
     ,{"DarkCyan",    QColor(Qt::darkCyan)}
-    ,{"Gray",        QColor(Qt::gray)}
+    ,{"LightGray",   QColor(Qt::lightGray)}
     ,{"DarkGray",    QColor(Qt::darkGray)}
     ,{"Red",         QColor(Qt::red)}
     ,{"Green",       QColor(Qt::green)}

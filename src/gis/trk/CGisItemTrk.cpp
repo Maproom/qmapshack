@@ -51,7 +51,7 @@ const QColor CGisItemTrk::lineColors[TRK_N_COLORS] =
     ,Qt::darkBlue                // 4
     ,Qt::darkMagenta             // 5
     ,Qt::darkCyan                // 6
-    ,Qt::gray                    // 7
+    ,Qt::lightGray               // 7
     ,Qt::darkGray                // 8
     ,Qt::red                     // 9
     ,Qt::green                   // 10

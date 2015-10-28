@@ -112,16 +112,16 @@ void CDemPropSetup::slotPropertiesChanged()
     checkSlopeColor->setChecked(demfile->doSlopeColor());
 
     bool spinsReadonly = true;
-    if((-1 == comboGrades->currentIndex() || demfile->getSlopeStepTableIndex() != comboGrades->currentIndex()) || (-1 == demfile->getSlopeStepTableIndex() && comboGrades->count() - 1 != comboGrades->currentIndex()))
+    // calculate the index of the element, that should be selected in comboGrades
+    // -1 indicates the `custom` entry (this allows adding DEM presets migration 
+    // of configuration during update
+    int expectedComboGradesIndex = demfile->getSlopeStepTableIndex();
+    if(-1 == expectedComboGradesIndex)
     {
-        int idx = demfile->getSlopeStepTableIndex();
-        if(-1 == idx)
-        {
-            spinsReadonly = false;
-            idx = comboGrades->count() - 1;
-        }
-        comboGrades->setCurrentIndex(idx);
+        spinsReadonly = false;
+        expectedComboGradesIndex = comboGrades->count() - 1;
     }
+    comboGrades->setCurrentIndex(expectedComboGradesIndex);
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {

@@ -256,19 +256,7 @@ void CDemPropSetup::slotSlopeValiddateAfterEdit()
 void CDemPropSetup::slotGradeIndex(int idx)
 {
     // enable the spins if the selected entry is `custom`
-    bool spinsReadonly = true;
-    if(idx == IDem::slopePresetCount)
-    {
-        idx = -1;
-        spinsReadonly = false;
-    }
-    demfile->setSlopeStepTable(idx);
-
-    for(int i = 0; i < 5; i++)
-    {
-        slopeSpins[i]->setReadOnly(spinsReadonly);
-    }
-
+    demfile->setSlopeStepTable(idx == IDem::slopePresetCount ? -1 : idx);
     slotPropertiesChanged();
 }
 

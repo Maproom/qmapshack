@@ -22,9 +22,9 @@
 #include "helpers/CInputDialog.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CPositionDialog.h"
-#include "helpers/CTextEditWidget.h"
 #include "helpers/CWptIconDialog.h"
 #include "units/IUnit.h"
+#include "widgets/CTextEditWidget.h"
 
 
 #include <QtWidgets>

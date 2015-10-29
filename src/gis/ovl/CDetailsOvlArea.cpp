@@ -19,7 +19,7 @@
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CLinksDialog.h"
-#include "helpers/CTextEditWidget.h"
+#include "widgets/CTextEditWidget.h"
 
 
 #include <QtWidgets>

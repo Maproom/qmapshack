@@ -18,12 +18,7 @@
 
 #include "widgets/CTinySpinBox.h"
 
-#include <QColor>
-#include <QPalette>
-#include <QFont>
-#include <QDebug>
-#include <QTimer>
-#include <QSpinBox>
+#include <QtWidgets>
 
 void CTinySpinBox::initialize()
 {
@@ -50,10 +45,14 @@ void CTinySpinBox::updateStyle()
     {
         setPalette(paletteRO);
         setFont(fontNoUnderline);
-    } else if(hasFocus()) {
+    }
+    else if(hasFocus())
+    {
         setPalette(paletteEdit);
         setFont(fontNoUnderline);
-    } else {
+    }
+    else
+    {
         setPalette(paletteRW);
         setFont(fontUnderline);
     }

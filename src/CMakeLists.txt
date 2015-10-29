@@ -42,18 +42,18 @@ set( SRCS
     CMainWindow.cpp
     CAbout.cpp
     widgets/CTinySpinBox.cpp
+    widgets/CFadingIcon.cpp
+    widgets/CTextEditWidget.cpp
+    widgets/CHistoryListWidget.cpp
+    widgets/CPhotoAlbum.cpp
     helpers/CInputDialog.cpp
     helpers/CPositionDialog.cpp
-    helpers/CWptIconDialog.cpp
-    helpers/CTextEditWidget.cpp
+    helpers/CWptIconDialog.cpp    
     helpers/CSelectProjectDialog.cpp
-    helpers/CSelectCopyAction.cpp
-    helpers/CHistoryListWidget.cpp
+    helpers/CSelectCopyAction.cpp    
     helpers/CElevationDialog.cpp
-    helpers/CLinksDialog.cpp
-    helpers/CPhotoAlbum.cpp
-    helpers/CPhotoViewer.cpp
-    helpers/CFadingIcon.cpp
+    helpers/CLinksDialog.cpp    
+    helpers/CPhotoViewer.cpp    
     helpers/CProgressDialog.cpp
     helpers/CCommandProcessor.cpp
     helpers/CAppSetup.cpp
@@ -252,6 +252,10 @@ set( HDRS
     CMainWindow.h
     CAbout.h
     widgets/CTinySpinBox.h
+    widgets/CFadingIcon.h
+    widgets/CHistoryListWidget.h
+    widgets/CTextEditWidget.h
+    widgets/CPhotoAlbum.h
     helpers/Platform.h
     helpers/CFileExt.h
     helpers/CAppOpts.h
@@ -260,14 +264,10 @@ set( HDRS
     helpers/CPositionDialog.h
     helpers/CSelectCopyAction.h
     helpers/CWptIconDialog.h
-    helpers/CTextEditWidget.h
     helpers/CSelectProjectDialog.h
-    helpers/CHistoryListWidget.h
     helpers/CElevationDialog.h
-    helpers/CLinksDialog.h
-    helpers/CPhotoAlbum.h
-    helpers/CPhotoViewer.h
-    helpers/CFadingIcon.h
+    helpers/CLinksDialog.h    
+    helpers/CPhotoViewer.h   
     helpers/CProgressDialog.h
     helpers/CCommandProcessor.h
     helpers/CAppSetup.h
@@ -458,15 +458,15 @@ endif(WIN32)
 set( UIS
     IMainWindow.ui
     IAbout.ui
+    widgets/ITextEditWidget.ui
+    widgets/IPhotoAlbum.ui
     helpers/IInputDialog.ui
     helpers/IPositionDialog.ui
-    helpers/IWptIconDialog.ui
-    helpers/ITextEditWidget.ui
+    helpers/IWptIconDialog.ui    
     helpers/ISelectProjectDialog.ui
     helpers/ISelectCopyAction.ui
     helpers/IElevationDialog.ui
-    helpers/ILinksDialog.ui
-    helpers/IPhotoAlbum.ui
+    helpers/ILinksDialog.ui    
     helpers/IProgressDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui

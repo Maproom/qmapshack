@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "helpers/CPhotoAlbum.h"
 #include "helpers/CPhotoViewer.h"
 #include "helpers/CSettings.h"
+#include "widgets/CPhotoAlbum.h"
 
 #include <QtWidgets>
 

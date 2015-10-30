@@ -64,14 +64,6 @@ const struct SlopePresets IDem::slopePresets[7]
 IDem::IDem(CDemDraw *parent)
     : IDrawObject(parent)
     , dem(parent)
-    , pjsrc(0)
-    , isActivated(false)
-    , hasNoData(0)
-    , noData(0)
-    , bHillshading(false)
-    , factorHillshading(1.0)
-    , bSlopeColor(false)
-    , gradeSlopeColor(0)
 {
     slotSetOpacity(50);
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");

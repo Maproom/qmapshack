@@ -130,28 +130,28 @@ protected:
         Has to be set by subclass. Destruction has to be
         handled by subclass.
      */
-    projPJ pjsrc;
+    projPJ pjsrc = 0;
     /// target projection
     /**
         Is set by IMap() to WGS84. Will be freed by ~IMap()
      */
-    projPJ pjtar;
+    projPJ pjtar = 0;
 
     /// width in number of px
-    quint32 xsize_px;
+    quint32 xsize_px = 0;
     /// height in number of px
-    quint32 ysize_px;
+    quint32 ysize_px = 0;
 
     /// scale [px/m]
-    qreal xscale;
+    qreal xscale = 1.0;
     /// scale [px/m]
-    qreal yscale;
+    qreal yscale = 1.0;
 
 
     /**
        @brief True if map was loaded successfully
      */
-    bool isActivated;
+    bool isActivated = false;
 
     /// the setup dialog. Use getSetup() for access
     QPointer<IDemProp> setup;
@@ -160,16 +160,16 @@ protected:
 
     QVector<QRgb> slopetable;
 
-    int hasNoData;
+    int hasNoData = 0;
 
-    double noData;
+    double noData = 0;
 
 private:
-    bool bHillshading;
-    qreal factorHillshading;
+    bool bHillshading = false;
+    qreal factorHillshading = 1.0;
 
-    bool bSlopeColor;
-    int gradeSlopeColor;
+    bool bSlopeColor = false;
+    int gradeSlopeColor = 0;
     qreal slopeCustomStepTable[5];
 };
 

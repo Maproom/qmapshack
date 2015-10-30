@@ -29,11 +29,6 @@
 CGrid::CGrid(CMapDraw *map)
     : QObject(map)
     , map(map)
-    , pjWGS84(0)
-    , pjGrid(0)
-    , projstr("+proj=longlat +datum=WGS84 +no_defs")
-    , color(Qt::magenta)
-
 {
     pjWGS84 = pj_init_plus("+proj=longlat +datum=WGS84 +no_defs");
     setProjAndColor(projstr, color);

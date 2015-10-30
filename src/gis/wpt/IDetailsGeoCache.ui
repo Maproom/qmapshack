@@ -350,13 +350,13 @@
   <customwidget>
    <class>CPhotoAlbum</class>
    <extends>QWidget</extends>
-   <header>helpers/CPhotoAlbum.h</header>
+   <header>widgets/CPhotoAlbum.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>CHistoryListWidget</class>
    <extends>QListWidget</extends>
-   <header>helpers/CHistoryListWidget.h</header>
+   <header>widgets/CHistoryListWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -23,9 +23,9 @@
 #include "gis/CGisWidget.h"
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/CDraw.h"
-#include "helpers/CFadingIcon.h"
 #include "helpers/CSettings.h"
 #include "mouse/CScrOptRangeTrk.h"
+#include "widgets/CFadingIcon.h"
 
 #include <QKeyEvent>
 #include <QtWidgets>

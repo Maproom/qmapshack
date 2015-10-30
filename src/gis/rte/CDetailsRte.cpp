@@ -19,8 +19,8 @@
 #include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CGisItemRte.h"
 #include "helpers/CLinksDialog.h"
-#include "helpers/CTextEditWidget.h"
 #include "units/IUnit.h"
+#include "widgets/CTextEditWidget.h"
 
 #include <QtWidgets>
 

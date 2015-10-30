@@ -24,10 +24,6 @@ CPhotoViewer::CPhotoViewer(QList<CGisItemWpt::image_t> &images, int idx, QWidget
     : QDialog(parent)
     , images(images)
     , idx(idx)
-    , rectImage(0,0,100,100)
-    , rectClose(0,0,32,32)
-    , rectPrev(0,0,32,32)
-    , rectNext(0,0,32,32)
 {
     setStyleSheet("background-color:black;");
     setAttribute(Qt::WA_TranslucentBackground);

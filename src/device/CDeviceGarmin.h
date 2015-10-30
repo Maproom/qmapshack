@@ -40,11 +40,11 @@ private:
     QString id;
     QString partno;
     QString description;
-    QString pathGpx;
-    QString pathPictures;
-    QString pathSpoilers;
+    QString pathGpx = "Garmin/GPX";
+    QString pathPictures = "Garmin/JPEG";
+    QString pathSpoilers = "Garmin/GeocachePhotos";
 
-    int cntImages;
+    int cntImages = 0;
 };
 
 #endif //CDEVICEGARMIN_H

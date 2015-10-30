@@ -112,17 +112,17 @@ private:
 
     QString name;
     /// Mutex to control access to url queue
-    QMutex mutex;
+    QMutex mutex {QMutex::Recursive};
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
-    IDiskCache * diskCache;
+    IDiskCache * diskCache = 0;
     /// access mangager to request tiles
     QNetworkAccessManager * accessManager;
 
     QList<QString> urlPending;
 
-    bool lastRequest;
+    bool lastRequest = false;
 
     QTime timeLastUpdate;
 };

@@ -24,8 +24,8 @@
 class CGarminTyp
 {
 public:
-    CGarminTyp();
-    virtual ~CGarminTyp();
+    CGarminTyp() = default;
+    virtual ~CGarminTyp() = default;
 
     enum label_type_e
     {

@@ -534,7 +534,7 @@ private:
      */
     QMap<QString,subfile_desc_t> subfiles;
     /// relay the transparent flags from the subfiles
-    bool transparent;
+    bool transparent = false;
 
     QRectF maparea;
 

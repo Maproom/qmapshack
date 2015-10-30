@@ -32,10 +32,6 @@
 
 CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility|eFeatTileCache, parent)
-    , mutex(QMutex::Recursive)
-    , diskCache(0)
-    , lastRequest(false)
-
 {
     qDebug() << "------------------------------";
     qDebug() << "WTMS: try to open" << filename;

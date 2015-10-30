@@ -34,21 +34,21 @@ class CGarminTile;
 class CGarminPoint
 {
 public:
-    CGarminPoint();
-    virtual ~CGarminPoint();
+    CGarminPoint() = default;
+    virtual ~CGarminPoint() = default;
 
     quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData);
     quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData, const quint8 * pEnd);
 
-    quint32 type;
-    bool isLbl6;
-    bool hasSubType;
+    quint32 type = 0;
+    bool isLbl6 = false;
+    bool hasSubType = false;
 
     //QString label;
     QPointF pos;
 
     QStringList labels;
 
-    quint32 lbl_ptr;
+    quint32 lbl_ptr = 0xFFFFFFFF;
 };
 #endif                           //CGARMINPOINT_H

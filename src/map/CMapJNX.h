@@ -99,10 +99,10 @@ private:
 
     QList<file_t> files;
 
-    qreal lon1;
-    qreal lat1;
-    qreal lon2;
-    qreal lat2;
+    qreal lon1 = 180.0;
+    qreal lat1 = -90;
+    qreal lon2 = -180;
+    qreal lat2 = 90;
 };
 
 #endif // CMAPJNX_H

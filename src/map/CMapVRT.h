@@ -41,7 +41,7 @@ private:
     /// instance of GDAL dataset
     GDALDataset * dataset;
     /// number of color bands used by the *vrt
-    int rasterBandCount;
+    int rasterBandCount = 0;
     /// QT representation of the vrt's color table
     QVector<QRgb> colortable;
 
@@ -66,7 +66,7 @@ private:
     QTransform trFwd;
     QTransform trInv;
 
-    bool hasOverviews;
+    bool hasOverviews = false;
 };
 
 #endif //CMAPVRT_H

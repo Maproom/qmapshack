@@ -34,8 +34,6 @@
 CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility,parent)
     , filename(filename)
-    , rasterBandCount(0)
-    , hasOverviews(false)
 {
     qDebug() << "------------------------------";
     qDebug() << "VRT: try to open" << filename;

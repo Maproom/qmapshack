@@ -25,7 +25,6 @@ CDiskCache::CDiskCache(const QString &path, qint32 size, qint32 days, QObject * 
     , dir(path)
     , size(size)
     , expiration(days)
-    , dummy(256,256, QImage::Format_ARGB32)
 {
     dummy.fill(Qt::transparent);
 

@@ -213,17 +213,17 @@ protected:
         Has to be set by subclass. Destruction has to be
         handled by subclass.
      */
-    projPJ pjsrc;
+    projPJ pjsrc = 0;
     /// target projection
     /**
         Is set by IMap() to WGS84. Will be freed by ~IMap()
      */
-    projPJ pjtar;
+    projPJ pjtar = 0;
 
     /**
        @brief True if map was loaded successfully
      */
-    bool isActivated;
+    bool isActivated = false;
 
     /// the setup dialog. Use getSetup() for access
     QPointer<IMapProp> setup;
@@ -232,18 +232,18 @@ protected:
     quint32 flagsFeature;
 
     /// vector maps only: hide/show polygons
-    bool showPolygons;
+    bool showPolygons = true;
     /// vector maps only: hide/show polylines
-    bool showPolylines;
+    bool showPolylines = true;
     /// vector maps only: hide/show point of interest
-    bool showPOIs;
+    bool showPOIs = true;
 
     /// streaming map only: path to cached tiles
     QString cachePath;
     /// streaming map only: maximum size of all tiles in cache [MByte]
-    qint32 cacheSizeMB;
+    qint32 cacheSizeMB = 100;
     /// streaming map only: maximum age of tiles in cache [days]
-    qint32 cacheExpiration;
+    qint32 cacheExpiration = 8;
 
     /// a copyright string to be displayed as tool tip
     QString copyright;

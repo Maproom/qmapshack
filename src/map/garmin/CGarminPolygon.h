@@ -38,25 +38,25 @@ struct sign_info_t;
 class CGarminPolygon
 {
 public:
-    CGarminPolygon();
-    virtual ~CGarminPolygon();
+    CGarminPolygon() = default;
+    virtual ~CGarminPolygon() = default;
 
     quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd);
     quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd);
 
-    quint32 type;
+    quint32 type = 0;
     /// direction of line (polyline, only)
-    bool direction;
+    bool direction = false;
     /// the label offset
-    quint32 lbl_info;
+    quint32 lbl_info = 0;
     /// true if label offset has to be used in NET section
-    bool lbl_in_NET;
+    bool lbl_in_NET = false;
     ///
-    bool hasV2Label;
+    bool hasV2Label = false;
     /// delta longitude from subdivision center
-    qint16 dLng;
+    qint16 dLng = 0;
     /// delta latitude from subdivision center
-    qint16 dLat;
+    qint16 dLat = 0;
     /** @brief the actual polyline points as [pixel]
        @note After decode() or decode2() the content will be the same as coords.
             It is up to the render object to convert it into pixel coordinates
@@ -65,7 +65,7 @@ public:
     /// the actual polyline points as longitude / latitude [rad]
     QPolygonF coords;
 
-    quint32 id;
+    quint32 id = 0;
 
     QStringList labels;
 

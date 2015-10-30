@@ -28,19 +28,6 @@
 
 #include <QtCore>
 
-CGarminPoint::CGarminPoint()
-    : type(0)
-    , isLbl6(false)
-    , hasSubType(false)
-    , lbl_ptr(0xFFFFFFFF)
-{
-}
-
-
-CGarminPoint::~CGarminPoint()
-{
-}
-
 
 quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData)
 {

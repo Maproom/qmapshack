@@ -40,10 +40,6 @@ public:
 
     struct buffer_t
     {
-        buffer_t() : zoomFactor(1.0,1.0), scale(1.0,1.0)
-        {
-        }
-
         /// @note: all coordinate values are long/lat WGS84 [rad]
 
         /// the canvas buffer
@@ -51,11 +47,11 @@ public:
         /// the used projection
         projPJ pjsrc;
         /// the zoomfactor used to draw the canvas
-        QPointF zoomFactor;
+        QPointF zoomFactor {1.0,1.0};
         /// the number of zoom levels
         int zoomLevels;
         /// the scale of the global viewport
-        QPointF scale;
+        QPointF scale {1.0,1.0};
         /// top left corner
         QPointF ref1;
         /// top right corner
@@ -186,15 +182,15 @@ protected:
     /// map canvas twin buffer
     buffer_t buffer[2];
     /// the main threads currently used map canvas buffer
-    bool bufIndex;
+    bool bufIndex = false;
     /// buffer width [px]
-    int bufWidth;
+    int bufWidth = 100;
     /// buffer height [px]
-    int bufHeight;
+    int bufHeight = 100;
     /// the viewports width [px]
-    int viewWidth;
+    int viewWidth = 100;
     /// the viewports height [px]
-    int viewHeight;
+    int viewHeight = 100;
     /// the center of the viewport
     QPointF center;
 
@@ -206,12 +202,12 @@ protected:
     qreal scales[CANVAS_MAX_ZOOM_LEVELS];
     CCanvas::scales_type_e scalesType;
     /// the number of zoom levels
-    int zoomLevels;
+    int zoomLevels = 0;
 
     /// the basic scale of the map canvas
-    QPointF scale;
+    QPointF scale {1.0,-1.0};
     /// index into scales table
-    int zoomIndex;
+    int zoomIndex = 0;
     /// the actual used scaleFactor
     QPointF zoomFactor;
 

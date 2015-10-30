@@ -20,6 +20,7 @@
 #define IDRAWOBJECT_H
 
 #include <QObject>
+#include "units/IUnit.h"
 
 class QSettings;
 class QListWidget;
@@ -128,11 +129,11 @@ protected:
 
 private:
     /// the opacity level of a map
-    qreal opacity;
+    qreal opacity = 0;
     /// the minimum scale a map is visible
-    qreal minScale;
+    qreal minScale = NOFLOAT;
     /// the maximum scale a map is visible
-    qreal maxScale;
+    qreal maxScale = NOFLOAT;
 };
 
 #endif //IDRAWOBJECT_H

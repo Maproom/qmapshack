@@ -23,9 +23,6 @@
 
 IDrawObject::IDrawObject(QObject *parent)
     : QObject(parent)
-    , opacity(100)
-    , minScale(NOFLOAT)
-    , maxScale(NOFLOAT)
 {
 }
 

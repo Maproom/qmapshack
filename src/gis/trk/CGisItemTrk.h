@@ -613,7 +613,6 @@ public:
     struct trkpt_t : public wpt_t
     {
         trkpt_t()
-            : flags(0)
         {
             reset();
         }
@@ -650,7 +649,7 @@ public:
             ,eActMaxNum = 8             ///< maximum number of activity flags. this is defined by the mask
         };
 
-        quint32 flags;
+        quint32 flags = 0;
         /// index within the complete track
         qint32 idxTotal;
         /// offset into lineSimple
@@ -687,7 +686,7 @@ public:
 
     struct trk_t
     {
-        trk_t() : number(0)
+        trk_t()
         {
         }
         // -- all gpx tags - start
@@ -696,7 +695,7 @@ public:
         QString desc;
         QString src;
         QList<link_t> links;
-        quint64 number;
+        quint64 number = 0;
         QString type;
         QVector<trkseg_t> segs;
         // -- all gpx tags - stop
@@ -722,21 +721,21 @@ private:
     /// background (border) color of all tracks
     static const QPen penBackground;
     /// drawing and mouse interaction is dependent on the mode
-    mode_e mode;
+    mode_e mode = eModeNormal;
 
     /**
        \defgroup TrackStatistics Some statistical values over the complete track
     */
     /**@{*/
-    qint32 cntTotalPoints;
-    qint32 cntVisiblePoints;
+    qint32 cntTotalPoints = 0;
+    qint32 cntVisiblePoints = 0;
     QDateTime timeStart;
     QDateTime timeEnd;
-    qreal totalDistance;
-    qreal totalAscend;
-    qreal totalDescend;
-    qreal totalElapsedSeconds;
-    qreal totalElapsedSecondsMoving;
+    qreal totalDistance = 0;
+    qreal totalAscend = 0;
+    qreal totalDescend = 0;
+    qreal totalElapsedSeconds = 0;
+    qreal totalElapsedSecondsMoving = 0;
     /**@}*/
 
     /**
@@ -744,11 +743,11 @@ private:
     */
     /**@{*/
     /// the track line color by index
-    unsigned colorIdx;
+    unsigned colorIdx = 4;
     /// the track line color
     QColor color;
     /// the pen with the actual track color
-    QPen penForeground;
+    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
     /// the trakpoint bullet icon
     QPixmap bullet;
     /// the current track line as screen pixel coordinates
@@ -790,7 +789,7 @@ private:
     };
 
     /// state variable for range selection
-    rangestate_e rangeState;
+    rangestate_e rangeState = eRangeStateIdle;
 
     /**
         @brief Identify source of current range selection
@@ -803,13 +802,13 @@ private:
     QString mouseFocusOwner;
 
     /// the current track point selected by mouse movement
-    const trkpt_t * mouseMoveFocus;
+    const trkpt_t * mouseMoveFocus = 0;
     /// the last track point the user clicked on
-    const trkpt_t * mouseClickFocus;
+    const trkpt_t * mouseClickFocus = 0;
     /// the first point of a range selection
-    const trkpt_t * mouseRange1;
+    const trkpt_t * mouseRange1 = 0;
     /// the second point of a range selection
-    const trkpt_t * mouseRange2;
+    const trkpt_t * mouseRange2 = 0;
     /**@}*/
 
     /// the track's details dialog if any
@@ -818,7 +817,7 @@ private:
     QPointer<CScrOptTrk>  scrOpt;
 
     /// all function concerning track activities have been moved to CActivityTrk
-    CActivityTrk activities;
+    CActivityTrk activities {this};
 };
 
 #endif //CGISITEMTRK_H

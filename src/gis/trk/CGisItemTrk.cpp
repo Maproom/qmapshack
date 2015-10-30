@@ -125,14 +125,6 @@ IGisItem::key_t CGisItemTrk::keyUserFocus;
 
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX)
-    , mode(eModeNormal)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)    
-    , rangeState(eRangeStateIdle)
-    , mouseMoveFocus(0)
-    , mouseClickFocus(0)
-    , mouseRange1(0)
-    , mouseRange2(0)    
-    , activities(this)
 {
     flags = eFlagCreatedInQms;
 
@@ -174,14 +166,6 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
 
 CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeTrk, idx)
-    , mode(eModeNormal)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , rangeState(eRangeStateIdle)
-    , mouseMoveFocus(0)
-    , mouseClickFocus(0)
-    , mouseRange1(0)
-    , mouseRange2(0)
-    , activities(this)
 {
     *this = parentTrk;
     key.project = project->getKey();
@@ -217,14 +201,6 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
 
 CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * project, int idx)
     : IGisItem(project, eTypeTrk, idx)
-    , mode(eModeNormal)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , rangeState(eRangeStateIdle)
-    , mouseMoveFocus(0)
-    , mouseClickFocus(0)
-    , mouseRange1(0)
-    , mouseRange2(0)
-    , activities(this)
 {
     trk.name = name;
     readTrackDataFromGisLine(l);
@@ -239,14 +215,6 @@ CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * p
 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     : IGisItem(project, eTypeTrk, project->childCount())
-    , mode(eModeNormal)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , rangeState(eRangeStateIdle)
-    , mouseMoveFocus(0)
-    , mouseClickFocus(0)
-    , mouseRange1(0)
-    , mouseRange2(0)
-    , activities(this)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -259,14 +227,6 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
 
 CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
-    , mode(eModeNormal)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , rangeState(eRangeStateIdle)
-    , mouseMoveFocus(0)
-    , mouseClickFocus(0)
-    , mouseRange1(0)
-    , mouseRange2(0)
-    , activities(this)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -282,14 +242,6 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
 
 CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
-    , mode(eModeNormal)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , rangeState(eRangeStateIdle)
-    , mouseMoveFocus(0)
-    , mouseClickFocus(0)
-    , mouseRange1(0)
-    , mouseRange2(0)
-    , activities(this)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -297,14 +249,6 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
 
 CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX)
-    , mode(eModeNormal)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , rangeState(eRangeStateIdle)
-    , mouseMoveFocus(0)
-    , mouseClickFocus(0)
-    , mouseRange1(0)
-    , mouseRange2(0)
-    , activities(this)
 {
     loadFromDb(id, db);
 }

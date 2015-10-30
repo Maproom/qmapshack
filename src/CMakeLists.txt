@@ -537,7 +537,7 @@ if(WIN32)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif(WIN32)
 
-add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
+add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH} -std=c++11)
 
 file(GLOB TRANSLATIONS_FILES locale/*.ts)
 

@@ -16,7 +16,8 @@
 
 **********************************************************************************************/
 
-#include "helpers/CPhotoViewer.h"
+#include "CPhotoViewer.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -36,12 +37,20 @@ CPhotoViewer::CPhotoViewer(QList<CGisItemWpt::image_t> &images, int idx, QWidget
     setWindowFlags(flags | Qt::CustomizeWindowHint);
     showMaximized();
 
-    if(images.isEmpty())
+    // check if showMaximized() worked correctly by comparing our size with the MainWindow's size
+    // if showMaximized() failed we change our size (manually) to match the MainWindow's size
+    // this is hack, but does its job on px i3-wm
+    QMainWindow &main = CMainWindow::self();
+    if(width() < main.width() && height() < main.height())
     {
-        return;
+        qDebug() << "showMaximized() failed, using MainWindow.frameGeometry()";
+        setGeometry(main.frameGeometry());
     }
 
-    setImageAtIdx(idx);
+    if(!images.isEmpty())
+    {
+        setImageAtIdx(idx);
+    }
 }
 
 CPhotoViewer::~CPhotoViewer()

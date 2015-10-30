@@ -33,7 +33,7 @@ class QSettings;
 struct SlopePresets
 {
     const char  *name;
-    const qreal  steps[5];
+    const qreal steps[5];
 };
 
 class IDem : public IDrawObject
@@ -168,8 +168,8 @@ private:
     bool bHillshading;
     qreal factorHillshading;
 
-    bool  bSlopeColor;
-    int   gradeSlopeColor;
+    bool bSlopeColor;
+    int gradeSlopeColor;
     qreal slopeCustomStepTable[5];
 };
 

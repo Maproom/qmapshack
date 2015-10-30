@@ -199,7 +199,7 @@
   <customwidget>
    <class>CPhotoAlbum</class>
    <extends>QWidget</extends>
-   <header>helpers/CPhotoAlbum.h</header>
+   <header>widgets/CPhotoAlbum.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

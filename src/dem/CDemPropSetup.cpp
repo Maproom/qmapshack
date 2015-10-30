@@ -114,7 +114,7 @@ void CDemPropSetup::slotPropertiesChanged()
 
     bool spinsReadonly = true;
     // calculate the index of the element, that should be selected in comboGrades
-    // -1 indicates the `custom` entry (this allows adding DEM presets migration 
+    // -1 indicates the `custom` entry (this allows adding DEM presets migration
     // of configuration during update
     int expectedComboGradesIndex = demfile->getSlopeStepTableIndex();
     if(-1 == expectedComboGradesIndex)

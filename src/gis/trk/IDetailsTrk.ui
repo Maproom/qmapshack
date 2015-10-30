@@ -650,7 +650,7 @@
   <customwidget>
    <class>CHistoryListWidget</class>
    <extends>QListWidget</extends>
-   <header>helpers/CHistoryListWidget.h</header>
+   <header>widgets/CHistoryListWidget.h</header>
   </customwidget>
   <customwidget>
    <class>CPlotTrack</class>

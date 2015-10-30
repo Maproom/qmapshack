@@ -23,9 +23,9 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CFadingIcon.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CScrOptUnclutter.h"
+#include "widgets/CFadingIcon.h"
 
 #include <QtWidgets>
 

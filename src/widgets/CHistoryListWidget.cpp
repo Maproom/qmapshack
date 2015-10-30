@@ -18,7 +18,7 @@
 
 #include "gis/CGisWidget.h"
 #include "gis/prj/IGisProject.h"
-#include "helpers/CHistoryListWidget.h"
+#include "widgets/CHistoryListWidget.h"
 
 #include <QtWidgets>
 

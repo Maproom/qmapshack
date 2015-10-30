@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-/** @brief A QWidget derived from QSpinBox, aiming to be tiny with regard to spaced consumed 
+/** @brief A QWidget derived from QSpinBox, aiming to be tiny with regard to spaced consumed
            on screen.
 
     By default, a readonly CTinySpinBox looks like an ordinary label, whereas a non-readonly
@@ -28,32 +28,32 @@
 #ifndef CTINYSPINBOX_H
 #define CTINYSPINBOX_H
 
-#include <QColor>
-#include <QPalette>
 #include <QFont>
-#include <QDebug>
-#include <QTimer>
+#include <QPalette>
 #include <QSpinBox>
 
 class CTinySpinBox : public QSpinBox
 {
-Q_OBJECT
+    Q_OBJECT
 
 private:
-    bool     initialized;
+    bool initialized;
 
     QPalette paletteEdit;
     QPalette paletteRO;
     QPalette paletteRW;
 
-    QFont    fontNoUnderline;
-    QFont    fontUnderline;
+    QFont fontNoUnderline;
+    QFont fontUnderline;
 
     void initialize();
     void updateStyle();
 
 public slots:
-    void slotSelectAll() { selectAll(); }
+    void slotSelectAll()
+    {
+        selectAll();
+    }
 
 signals:
     void valueChangedByStep(int val);

@@ -65,9 +65,9 @@ static QString unifyColor(const QString& color)
     {
         return "DarkCyan";
     }
-    else if(QColor(color) == Qt::gray)
+    else if(QColor(color) == Qt::lightGray)
     {
-        return "Gray";
+        return "LightGray";
     }
     else if(QColor(color) == Qt::darkGray)
     {

@@ -28,8 +28,8 @@
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
-#include "helpers/CTextEditWidget.h"
 #include "units/IUnit.h"
+#include "widgets/CTextEditWidget.h"
 
 #include <QtWidgets>
 #include <proj_api.h>

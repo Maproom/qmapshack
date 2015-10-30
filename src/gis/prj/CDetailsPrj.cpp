@@ -25,9 +25,9 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CProgressDialog.h"
-#include "helpers/CTextEditWidget.h"
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
+#include "widgets/CTextEditWidget.h"
 
 #include <QtPrintSupport>
 #include <QtWidgets>

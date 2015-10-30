@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CPhotoViewer.h"
+#include "helpers/CPhotoViewer.h"
 
 #include <QtWidgets>
 

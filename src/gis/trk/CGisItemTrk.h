@@ -23,6 +23,7 @@
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
 
+#include <functional>
 #include <QPen>
 #include <QPointer>
 
@@ -47,6 +48,14 @@ class CGisItemTrk : public IGisItem, public IGisLine
 public:
     struct trk_t;
     struct trkpt_t;
+
+    struct ColorizeSource
+    {
+        const char *name;
+        const std::function<float(const trkpt_t&, const trkpt_t&)> selector;
+    };
+
+    static const struct ColorizeSource colorizeSources[3];
 
     enum focusmode_e
     {
@@ -727,13 +736,13 @@ private:
        \defgroup TrackStatistics Some statistical values over the complete track
     */
     /**@{*/
-    qint32 cntTotalPoints = 0;
+    qint32 cntTotalPoints   = 0;
     qint32 cntVisiblePoints = 0;
     QDateTime timeStart;
     QDateTime timeEnd;
     qreal totalDistance = 0;
-    qreal totalAscend = 0;
-    qreal totalDescend = 0;
+    qreal totalAscend   = 0;
+    qreal totalDescend  = 0;
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     /**@}*/
@@ -754,6 +763,14 @@ private:
     QPolygonF lineSimple;
     /// visible and invisible points
     QPolygonF lineFull;
+
+
+    int slopeSource = -1; //< The index of the source to be used for (slope-)coloring tracks
+
+    // the low and high limit for (slope-)colored drawing of tracks
+    float limitLow  = -10.f; // TODO: change values via GUI
+    float limitHigh =  10.f;
+
     /**@}*/
 
     /**
@@ -810,6 +827,8 @@ private:
     /// the second point of a range selection
     const trkpt_t * mouseRange2 = 0;
     /**@}*/
+
+    void drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor);
 
     /// the track's details dialog if any
     QPointer<CDetailsTrk> dlgDetails;

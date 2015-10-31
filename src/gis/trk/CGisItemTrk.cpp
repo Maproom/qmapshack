@@ -382,8 +382,6 @@ void CGisItemTrk::unregisterPlot(IPlot * plot)
     registeredPlots.remove(plot);
 }
 
-
-
 QString CGisItemTrk::getInfo(bool allowEdit) const
 {
     QString val1, unit1, val2, unit2;
@@ -1564,13 +1562,78 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         p.drawPolyline(l);
         CDraw::arrows(l, extViewport, p, 10, 80);
     }
-    penForeground.setColor(color);
-    p.setPen(penForeground);
-    foreach(const QPolygonF &l, lines)
+
+    if(-1 == slopeSource)
     {
-        p.drawPolyline(l);
+        // use the track's ordinary color
+        penForeground.setColor(color);
+        p.setPen(penForeground);
+        foreach(const QPolygonF &l, lines)
+        {
+            p.drawPolyline(l);
+        }
+    }
+    else
+    {
+        drawColorized(p, colorizeSources[slopeSource].selector);
     }
     // -------------------------
+}
+
+const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSources[3]
+{
+    {"Slope (directed)", [](const trkpt_t &p1, const trkpt_t &p2) { return p2.ele < p1.ele ? p2.slope1 : -p2.slope1; }                            },
+    {"Heart Rate",       [](const trkpt_t &p1, const trkpt_t &p2) { return p1.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } },
+    {"Speed",            [](const trkpt_t &p1, const trkpt_t &p2) { return p2.speed; }                                                            },
+};
+
+void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor )
+{
+    QImage colors(1, 256, QImage::Format_RGB888);
+    QPainter colorsPainter(&colors);
+
+    QLinearGradient colorsGradient(colors.rect().topLeft(), colors.rect().bottomLeft());
+    colorsGradient.setColorAt(1.00, QColor(  0,   0, 255)); // blue
+    colorsGradient.setColorAt(0.60, QColor(  0, 255,   0)); // green
+    colorsGradient.setColorAt(0.40, QColor(255, 255,   0)); // yellow
+    colorsGradient.setColorAt(0.00, QColor(255,   0,   0)); // red
+    colorsPainter.fillRect(colors.rect(), colorsGradient);
+
+    penForeground.setWidth(3);
+
+    foreach(const trkseg_t &segment, trk.segs)
+    {
+        const trkpt_t *ptPrev = NULL;
+
+        foreach(const trkpt_t &pt, segment.pts)
+        {
+            if(pt.flags & trkpt_t::eHidden)
+            {
+                continue;
+            }
+            if(NULL == ptPrev)
+            {
+                ptPrev = &pt;
+                continue;
+            }
+
+            float colorAt = ( intersectColor(pt, *ptPrev) - limitLow) / (limitHigh - limitLow);
+            if(NAN != colorAt)
+            {
+                if(colorAt > 1.f) colorAt = 1.f;
+                if(colorAt < 0.f) colorAt = 0.f;
+
+                const int pxPos = (int) ((1.f - colorAt) * 255.f);
+                QColor lineColor( colors.pixel(0, pxPos) );
+                penForeground.setColor(lineColor);
+                p.setPen(penForeground);
+            }
+
+            p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
+
+            ptPrev = &pt;
+        }
+    }
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)

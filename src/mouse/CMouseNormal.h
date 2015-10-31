@@ -63,9 +63,9 @@ protected:
 
 
     /// the flag is true if the map moving is in progress
-    bool mapMove;
+    bool mapMove = false;
     /// the flag is true if the map has been moved actually
-    bool mapDidMove;
+    bool mapDidMove = false;
     /// always the last seen mouse cursor position
     QPoint lastPos;
 
@@ -84,7 +84,7 @@ protected:
         , eStateShowItemOptions = 4
     };
 
-    item_selection_states_e stateItemSel;
+    item_selection_states_e stateItemSel = eStateIdle;
 
     CScrOptUnclutter * screenUnclutter;
     QPointer<IScrOpt>  screenItemOption;

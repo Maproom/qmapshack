@@ -43,12 +43,12 @@ private:
     QPointF posInitial;
 
     QRectF rectSelection;
-    QRectF rectTopLeft;
-    QRectF rectTopRight;
-    QRectF rectBottomLeft;
-    QRectF rectBottomRight;
-    QRectF rectPrintButton;
-    QRectF rectImageButton;
+    QRectF rectTopLeft {0,0,20,20};
+    QRectF rectTopRight {0,0,20,20};
+    QRectF rectBottomLeft {0,0,20,20};
+    QRectF rectBottomRight {0,0,20,20};
+    QRectF rectPrintButton {0,0,48,48};
+    QRectF rectImageButton {0,0,48,48};
 
     enum state_e
     {
@@ -59,7 +59,7 @@ private:
         ,eStateResize
     };
 
-    state_e state;
+    state_e state = eStateIdle;
 
     enum corner_e
     {
@@ -72,7 +72,7 @@ private:
         , eCornerImage
     };
 
-    corner_e corner;
+    corner_e corner = eCornerNone;
 };
 
 #endif //CMOUSEPRINT_H

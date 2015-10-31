@@ -60,9 +60,9 @@ private:
         ,eStateRangeSelected
     };
 
-    state_e state;
+    state_e state = eStateIdle;
 
-    QPointF anchor;
+    QPointF anchor = NOPOINTF;
 
     QPoint lastPoint;
 

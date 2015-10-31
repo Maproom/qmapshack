@@ -57,9 +57,9 @@ private:
         , eState2nd
     };
 
-    state_e state;
+    state_e state = eStateIdle;
 
-    qint32 idx2nd;
+    qint32 idx2nd = NOIDX;
 
     QPointer<CScrOptRangeLine>  scrOptRangeLine;
 };

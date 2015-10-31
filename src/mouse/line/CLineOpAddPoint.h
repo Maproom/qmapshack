@@ -42,8 +42,8 @@ public:
     bool abortStep();
 
 private:
-    bool addPoint;
-    bool isPoint;
+    bool addPoint = false;
+    bool isPoint = false;
 };
 
 #endif //CLINEOPADDPOINT_H

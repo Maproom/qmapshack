@@ -40,7 +40,7 @@ public:
     bool abortStep();
 
 private:
-    bool movePoint;
+    bool movePoint = false;
 };
 
 #endif //CLINEOPMOVEPOINT_H

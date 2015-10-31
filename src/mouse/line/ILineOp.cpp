@@ -32,14 +32,6 @@ ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLin
     , points(points)
     , canvas(canvas)
     , gis(gis)
-    , idxFocus(NOIDX)
-    , mapMove(false)
-    , mapDidMove(false)
-    , rectPoint(0,0,9,9)
-    , penBgPoint(Qt::white, 4)
-    , penFgPoint(Qt::red, 2)
-    , brushBgPoint(Qt::white)
-    , brushFgPoint(Qt::red)
 {
     timerRouting = new QTimer(this);
     timerRouting->setSingleShot(true);

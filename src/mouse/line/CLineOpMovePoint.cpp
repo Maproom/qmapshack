@@ -26,7 +26,6 @@
 
 CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine *parent)
     : ILineOp(points, gis, canvas, parent)
-    , movePoint(false)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMovePoint.png"),0,0);
 }

@@ -105,17 +105,17 @@ protected:
 
     QCursor cursor;
 
-    qint32 idxFocus;
-    bool mapMove;
-    bool mapDidMove;
+    qint32 idxFocus = NOIDX;
+    bool mapMove = false;
+    bool mapDidMove = false;
 
     QPoint lastPos;
 
-    QRect rectPoint;
-    const QPen penBgPoint;
-    const QPen penFgPoint;
-    const QBrush brushBgPoint;
-    const QBrush brushFgPoint;
+    QRect rectPoint {0,0,9,9};
+    const QPen penBgPoint {Qt::white, 4};
+    const QPen penFgPoint {Qt::red, 2};
+    const QBrush brushBgPoint {Qt::white};
+    const QBrush brushFgPoint {Qt::red};
 
     QPolygonF leadLineCoord1;
     QPolygonF leadLineCoord2;

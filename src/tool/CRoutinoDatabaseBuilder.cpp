@@ -26,9 +26,6 @@
 
 CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     : IToolShell(textBrowser, parent)
-    , first(true)
-    , tainted(false)
-    , last(false)
 {
     setupUi(this);
 

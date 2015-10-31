@@ -47,7 +47,6 @@ int ProgressFunc(double complete)
 
 CRouterRoutino::CRouterRoutino(QWidget *parent)
     : IRouter(true, parent)
-    , mutex(QMutex::NonRecursive)
 {
     setupUi(this);
 

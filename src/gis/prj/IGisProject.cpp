@@ -37,17 +37,6 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
-    , valid(false)
-    , noUpdate(false)
-    , noCorrelation(false)
-    , sorting(eSortNone)
-    , cntTrkPts(0)
-    , cntWpts(0)
-    , totalDistance(0)
-    , totalAscend(0)
-    , totalDescend(0)
-    , totalElapsedSeconds(0)
-    , totalElapsedSecondsMoving(0)
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
@@ -80,17 +69,6 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
-    , valid(false)
-    , noUpdate(false)
-    , noCorrelation(false)
-    , sorting(eSortNone)
-    , cntTrkPts(0)
-    , cntWpts(0)
-    , totalDistance(0)
-    , totalAscend(0)
-    , totalDescend(0)
-    , totalElapsedSeconds(0)
-    , totalElapsedSecondsMoving(0)
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);

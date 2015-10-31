@@ -44,7 +44,7 @@ public:
 
 private:
     QString filename;
-    CDBFolderLostFound * folderLostFound;
+    CDBFolderLostFound * folderLostFound = 0;
 };
 
 #endif //CDBFOLDERDATABASE_H

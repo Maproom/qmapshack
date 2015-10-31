@@ -54,7 +54,7 @@ private:
     QString xlateRoutinoError(int err);
     QStringList dbPaths;
 
-    QMutex mutex;
+    QMutex mutex {QMutex::NonRecursive};
 };
 
 #endif //CROUTERROUTINO_H

@@ -43,7 +43,7 @@ private slots:
 private:
     CGisItemWpt& wpt;
     QNetworkAccessManager * networkManager;
-    int cntSpoiler;
+    int cntSpoiler = 0;
     QTimer * timerDownload;
 };
 

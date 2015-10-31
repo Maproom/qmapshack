@@ -33,7 +33,6 @@
 CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     : QDialog(parent)
     , wpt(wpt)
-    , originator(false)
 {
     setupUi(this);
     toolAddImage->hide();

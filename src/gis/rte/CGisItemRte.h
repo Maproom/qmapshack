@@ -43,15 +43,6 @@ public:
 
     struct subpt_t
     {
-        subpt_t()
-            : lon(NOFLOAT)
-            , lat(NOFLOAT)
-            , type(eTypeNone)
-            , turn(NOFLOAT)
-            , bearing(NOFLOAT)
-            , time(0)
-        {
-        }
 
         enum type_e
         {
@@ -60,17 +51,17 @@ public:
             , eTypeJunct
         };
 
-        qreal lon;
-        qreal lat;
-        quint8 type;
+        qreal lon = NOFLOAT;
+        qreal lat = NOFLOAT;
+        quint8 type = eTypeNone;
 
-        qreal turn;
-        qreal bearing;
+        qreal turn = NOFLOAT;
+        qreal bearing = NOFLOAT;
         QStringList streets;
 
         QString instruction;
-        qreal distance;
-        quint32 time;
+        qreal distance = 0;
+        quint32 time = 0;
     };
 
     struct rtept_t : public wpt_t
@@ -91,16 +82,13 @@ public:
 
     struct rte_t
     {
-        rte_t() : number(0)
-        {
-        }
         // -- all gpx tags - start
         QString name;
         QString cmt;
         QString desc;
         QString src;
         QList<link_t> links;
-        quint64 number;
+        quint64 number = 0;
         QString type;
         QVector<rtept_t> pts;
         // -- all gpx tags - stop
@@ -216,8 +204,8 @@ private:
     static key_t keyUserFocus;
 
     static const QPen penBackground;
-    QPen penForeground;
-    QPen penForegroundFocus;
+    QPen penForeground {Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penForegroundFocus {Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
     rte_t rte;
     QPolygonF line;
@@ -225,10 +213,10 @@ private:
     QString lastRoutedWith;
     QDateTime lastRoutedTime;
 
-    qreal totalDistance;
-    quint32 totalTime;
+    qreal totalDistance = NOFLOAT;
+    quint32 totalTime = 0;
 
-    const subpt_t * mouseMoveFocus;
+    const subpt_t * mouseMoveFocus = 0;
 
     QPointer<CScrOptRte>  scrOpt;
 };

@@ -53,11 +53,6 @@ void CGisItemRte::rtept_t::updateIcon()
 /// used to create a copy of route with new parent
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
-    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , totalDistance(NOFLOAT)
-    , totalTime(0)
-    , mouseMoveFocus(0)
 {
     *this = parentRte;
     key.project = project->getKey();
@@ -93,11 +88,6 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 /// used to create route from GPX file
 CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     : IGisItem(parent, eTypeRte, parent->childCount())
-    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , totalDistance(NOFLOAT)
-    , totalTime(0)
-    , mouseMoveFocus(0)
 {
     // --- start read and process data ----
     readRte(xml, rte);
@@ -110,11 +100,6 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
 
 CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
-    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , totalDistance(NOFLOAT)
-    , totalTime(0)
-    , mouseMoveFocus(0)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -123,22 +108,12 @@ CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
 
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeRte, NOIDX)
-    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , totalDistance(NOFLOAT)
-    , totalTime(0)
-    , mouseMoveFocus(0)
 {
     loadFromDb(id, db);
 }
 
 CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *project, int idx)
     : IGisItem(project, eTypeRte, idx)
-    , penForeground(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penForegroundFocus(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , totalDistance(NOFLOAT)
-    , totalTime(0)
-    , mouseMoveFocus(0)
 {
     rte.name = name;
     readRouteDataFromGisLine(l);

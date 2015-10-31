@@ -432,27 +432,27 @@ protected:
     type_e type;
     QString key;
     QString filename;
-    bool valid;
-    bool noUpdate;
-    bool noCorrelation;
+    bool valid = false;
+    bool noUpdate = false;
+    bool noCorrelation = false;
 
     metadata_t metadata;
     QString nameSuffix;
 
     QPointer<CDetailsPrj> dlgDetails;
 
-    sorting_e sorting;
+    sorting_e sorting = eSortNone;
 
     qint32 cntItemsByType[IGisItem::eTypeMax];
 
-    qint32 cntTrkPts;
-    qint32 cntWpts;
+    qint32 cntTrkPts = 0;
+    qint32 cntWpts = 0;
 
-    qreal totalDistance;
-    qreal totalAscend;
-    qreal totalDescend;
-    quint32 totalElapsedSeconds;
-    quint32 totalElapsedSecondsMoving;
+    qreal totalDistance = 0;
+    qreal totalAscend = 0;
+    qreal totalDescend = 0;
+    quint32 totalElapsedSeconds = 0;
+    quint32 totalElapsedSecondsMoving = 0;
 
     QString hashTrkWpt[2];
 };

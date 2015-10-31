@@ -72,7 +72,7 @@ private:
      */
     CGisItemTrk& trk;
 
-    bool originator;
+    bool originator = false;
 };
 
 #endif //CDETAILSTRK_H

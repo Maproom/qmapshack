@@ -51,7 +51,7 @@ private:
 
     CGisItemOvlArea& area;
 
-    bool originator;
+    bool originator = false;
 };
 
 #endif //CDETAILSOVLAREA_H

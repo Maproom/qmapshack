@@ -41,18 +41,6 @@ IGisItem::key_t CGisItemWpt::keyUserFocus;
 /// used to add a new waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
     : IGisItem(project, eTypeWpt, NOIDX)
-    , proximity(NOFLOAT)
-    , posScreen(NOPOINTF)
-    , doBubble(false)
-    , doSpecialCursor(false)
-    , doBubbleMove(false)
-    , doBubbleSize(false)
-    , mouseIsOverBubble(false)
-    , rectBubbleMove(0,0,16,16)
-    , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)
-    , offsetBubble(-320, -150)
-    , widthBubble(300)
 {
     wpt.name    = name;
     wpt.sym     = icon;
@@ -73,18 +61,6 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
 /// used to move a copy of waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisProject *project)
     : IGisItem(project, eTypeWpt, NOIDX)
-    , proximity(NOFLOAT)
-    , posScreen(NOPOINTF)
-    , doBubble(false)
-    , doSpecialCursor(false)
-    , doBubbleMove(false)
-    , doBubbleSize(false)
-    , mouseIsOverBubble(false)
-    , rectBubbleMove(0,0,16,16)
-    , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)
-    , offsetBubble(-320, -150)
-    , widthBubble(300)
 {
     *this = parentWpt;
     wpt.lon     = pos.x();
@@ -107,18 +83,6 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
 /// used to create a copy of waypoint with new parent
 CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeWpt, idx)
-    , proximity(NOFLOAT)
-    , posScreen(NOPOINTF)
-    , doBubble(false)
-    , doSpecialCursor(false)
-    , doBubbleMove(false)
-    , doBubbleSize(false)
-    , mouseIsOverBubble(false)
-    , rectBubbleMove(0,0,16,16)
-    , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)
-    , offsetBubble(-320, -150)
-    , widthBubble(300)
 {
     *this = parentWpt;
     key.project = project->getKey();
@@ -151,18 +115,6 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 /// used to create waypoint from GPX file
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     : IGisItem(project, eTypeWpt, project->childCount())
-    , proximity(NOFLOAT)
-    , posScreen(NOPOINTF)
-    , doBubble(false)
-    , doSpecialCursor(false)
-    , doBubbleMove(false)
-    , doBubbleSize(false)
-    , mouseIsOverBubble(false)
-    , rectBubbleMove(0,0,16,16)
-    , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)
-    , offsetBubble(-320, -150)
-    , widthBubble(300)
 {
     readGpx(xml);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -174,18 +126,6 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
 
 CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeWpt, project->childCount())
-    , proximity(NOFLOAT)
-    , posScreen(NOPOINTF)
-    , doBubble(false)
-    , doSpecialCursor(false)
-    , doBubbleMove(false)
-    , doBubbleSize(false)
-    , mouseIsOverBubble(false)
-    , rectBubbleMove(0,0,16,16)
-    , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)
-    , offsetBubble(-320, -150)
-    , widthBubble(300)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -194,18 +134,6 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
 
 CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeWpt, NOIDX)
-    , proximity(NOFLOAT)
-    , posScreen(NOPOINTF)
-    , doBubble(false)
-    , doSpecialCursor(false)
-    , doBubbleMove(false)
-    , doBubbleSize(false)
-    , mouseIsOverBubble(false)
-    , rectBubbleMove(0,0,16,16)
-    , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)
-    , offsetBubble(-320, -150)
-    , widthBubble(300)
 {
     loadFromDb(id, db);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -213,18 +141,6 @@ CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
 
 CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * project)
     : IGisItem(project, eTypeWpt, NOIDX)
-    , proximity(NOFLOAT)
-    , posScreen(NOPOINTF)
-    , doBubble(false)
-    , doSpecialCursor(false)
-    , doBubbleMove(false)
-    , doBubbleSize(false)
-    , mouseIsOverBubble(false)
-    , rectBubbleMove(0,0,16,16)
-    , rectBubbleEdit(0,0,16,16)
-    , rectBubbleSize(0,0,16,16)
-    , offsetBubble(-320, -150)
-    , widthBubble(300)
 {
     readTwoNav(tnvWpt);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);

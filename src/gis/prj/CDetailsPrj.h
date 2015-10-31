@@ -77,11 +77,11 @@ private:
     QTextTableFormat fmtTableInfo;
     QTextCharFormat fmtCharHeader;
 
-    int scrollVal;
+    int scrollVal = 0;
 
     QTimer * timerUpdateTime;
 
-    QMutex mutex;
+    QMutex mutex {QMutex::NonRecursive};
 };
 
 #endif //CDETAILSPRJ_H

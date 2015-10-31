@@ -56,7 +56,7 @@ const QColor CGisItemOvlArea::lineColors[OVL_N_COLORS] =
 const QString CGisItemOvlArea::bulletColors[OVL_N_COLORS] =
 {
     // 0
-    QString("://icons/8x8/bullet_black.png")
+    "://icons/8x8/bullet_black.png"
     // 1
     ,QString("://icons/8x8/bullet_dark_red.png")
     // 2
@@ -116,8 +116,6 @@ IGisItem::key_t CGisItemOvlArea::keyUserFocus;
 
 CGisItemOvlArea::CGisItemOvlArea(const SGisLine &line, const QString &name, IGisProject * project, int idx)
     : IGisItem(project, eTypeOvl, idx)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     area.name = name;
     readAreaDataFromGisLine(line);
@@ -131,8 +129,6 @@ CGisItemOvlArea::CGisItemOvlArea(const SGisLine &line, const QString &name, IGis
 
 CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeOvl, idx)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     *this = parentArea;
     key.project = project->getKey();
@@ -166,8 +162,6 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
 
 CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     : IGisItem(project, eTypeOvl, project->childCount())
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
@@ -180,8 +174,6 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
 
 CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeOvl, project->childCount())
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
@@ -189,8 +181,6 @@ CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
 
 CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeOvl, NOIDX)
-    , penForeground(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     loadFromDb(id, db);
 }

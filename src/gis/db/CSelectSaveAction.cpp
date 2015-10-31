@@ -22,7 +22,6 @@
 
 CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, QWidget *parent)
     : QDialog(parent)
-    , result(eResultNone)
 {
     setupUi(this);
 

@@ -27,7 +27,6 @@
 CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     : QDialog(parent)
     , area(area)
-    , originator(false)
 {
     setupUi(this);
 

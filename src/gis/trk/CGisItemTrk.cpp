@@ -1575,16 +1575,21 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
     else
     {
-        drawColorized(p, colorizeSources[slopeSource].selector);
+        drawColorized(p, colorizeSource[slopeSource].selector);
     }
     // -------------------------
 }
 
-const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSources[3]
+const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[3]
 {
-    {"Slope (directed)", [](const trkpt_t &p1, const trkpt_t &p2) { return p2.ele < p1.ele ? p2.slope1 : -p2.slope1; }                            },
-    {"Heart Rate",       [](const trkpt_t &p1, const trkpt_t &p2) { return p1.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } },
-    {"Speed",            [](const trkpt_t &p1, const trkpt_t &p2) { return p2.speed; }                                                            },
+    {"Slope (directed)", -10.f, 10.f, -90.f, 90.f, "°", "://icons/32x32/Slope.png",
+        [](const trkpt_t &p1, const trkpt_t &p2) { return p2.ele < p1.ele ? p2.slope1 : -p2.slope1; } },
+
+    {"Heart Rate", 100.f, 200.f, 0.f, 300.f, "bpm", "://icons/32x32/Heart.png",
+        [](const trkpt_t &p1, const trkpt_t &p2) { return p1.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } },
+
+    {"Speed", 1.f, 14.f, 0.f, 100.f, "m/s", "://icons/32x32/Speed.png",
+        [](const trkpt_t &p1, const trkpt_t &p2) { return p2.speed; } },
 };
 
 void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor )
@@ -2252,6 +2257,27 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
         dlgDetails->setMouseFocus(pt);
         dlgDetails->setMouseRangeFocus(mouseRange1, mouseRange2);
     }
+}
+
+void CGisItemTrk::setColorizeSource(int idx)
+{
+    if(idx != slopeSource)
+    {
+        slopeSource = idx;
+        limitLow  = colorizeSource[slopeSource].defLimitLow;
+        limitHigh = colorizeSource[slopeSource].defLimitHigh;
+        changed(QObject::tr("Changed slope source"), "://icons/48x48/SelectColor.png");
+    }
+}
+
+void CGisItemTrk::setColorizeLimitLow(float limit)
+{
+    limitLow = limit;
+}
+
+void CGisItemTrk::setColorizeLimitHigh(float limit)
+{
+    limitHigh = limit;
 }
 
 void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode)

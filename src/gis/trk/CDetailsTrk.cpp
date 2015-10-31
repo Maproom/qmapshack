@@ -75,6 +75,16 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     plotDistance->setTrack(&trk);
     plotSpeed->setTrack(&trk);
 
+    // add all available slope sources to the corresponding combobox
+    comboSlopeSource->addItem(QIcon("://icons/32x32/Tainted.png"), "static color");
+    for(size_t i = 0; i < CGisItemTrk::colorizeSourceCount; i++)
+    {
+        QIcon icon(CGisItemTrk::colorizeSource[i].icon);
+        comboSlopeSource->addItem(icon, CGisItemTrk::colorizeSource[i].name);
+    }
+
+    comboSlopeSource->setCurrentIndex(1 + trk.getColorizeSource());
+    slotSlopeSourceChanged(1 + trk.getColorizeSource(), trk.getColorizeLimitLow(), trk.getColorizeLimitHigh());
 
     if(trk.isOnDevice())
     {
@@ -134,20 +144,26 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     treeWidget->header()->restoreState(cfg.value("trackPointListState").toByteArray());
     cfg.endGroup();
 
-    connect(checkProfile, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(checkSpeed, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(checkProgress, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(comboColor, SIGNAL(currentIndexChanged(int)), this, SLOT(slotColorChanged(int)));
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
-    connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
-    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(labelInfo, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(checkProfile,     SIGNAL(clicked()),                  this, SLOT(slotShowPlots()));
+    connect(checkSpeed,       SIGNAL(clicked()),                  this, SLOT(slotShowPlots()));
+    connect(checkProgress,    SIGNAL(clicked()),                  this, SLOT(slotShowPlots()));
+    connect(comboColor,       SIGNAL(currentIndexChanged(int)),   this, SLOT(slotColorChanged(int)));
+    connect(toolLock,         SIGNAL(toggled(bool)),              this, SLOT(slotChangeReadOnlyMode(bool)));
+    connect(treeWidget,       SIGNAL(itemSelectionChanged()),     this, SLOT(slotItemSelectionChanged()));
+    connect(textCmtDesc,      SIGNAL(anchorClicked(QUrl)),        this, SLOT(slotLinkActivated(QUrl)));
+    connect(labelInfo,        SIGNAL(linkActivated(QString)),     this, SLOT(slotLinkActivated(QString)));
 
-    connect(plotDistance, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-    connect(plotElevation, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-    connect(plotSpeed, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(comboSlopeSource, SIGNAL(currentIndexChanged(int)),   this, SLOT(slotSlopeSourceChanged(int)));
+    connect(spinLimitHigh,    SIGNAL(valueChangedByStep(double)), this, SLOT(slotSlopeLimitHighChanged()));
+    connect(spinLimitHigh,    SIGNAL(editingFinished()),          this, SLOT(slotSlopeLimitHighChanged()));
+    connect(spinLimitLow,     SIGNAL(valueChangedByStep(double)), this, SLOT(slotSlopeLimitLowChanged()));
+    connect(spinLimitLow,     SIGNAL(editingFinished()),          this, SLOT(slotSlopeLimitLowChanged()));
 
-    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+    connect(plotDistance,     SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
+    connect(plotElevation,    SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
+    connect(plotSpeed,        SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
+
+    connect(listHistory,      SIGNAL(sigChanged()),               this, SLOT(setupGui()));
 
     slotShowPlots();
 }
@@ -163,8 +179,6 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.endGroup();
 }
-
-
 
 void CDetailsTrk::setupGui()
 {
@@ -430,6 +444,57 @@ void CDetailsTrk::slotColorChanged(int idx)
     if(trk.getColorIdx() != idx)
     {
         trk.setColor(idx);
+    }
+}
+
+void CDetailsTrk::slotSlopeSourceChanged(int idx, float valueLow, float valueHigh)
+{
+    // index 0 in the combobox: `static color`.
+    // the static color is only used if the colorizeSource is set to -1
+    // as soon as colorizeSource is set >= 0 the "real" source is used
+    const int idxInSource = idx - 1;
+
+    trk.setColorizeSource(idxInSource);
+
+    spinLimitLow->setEnabled (-1 != idxInSource);
+    spinLimitHigh->setEnabled(-1 != idxInSource);
+
+    // update the limits
+    if(-1 != idxInSource)
+    {
+        const struct CGisItemTrk::ColorizeSource &source = CGisItemTrk::colorizeSource[idxInSource];
+
+        spinLimitLow->setMinimum(source.minimum);
+        spinLimitLow->setMaximum(source.maximum);
+        spinLimitLow->setSuffix (source.unit);
+        spinLimitLow->setValue  (HUGE_VALF != valueLow ? valueLow : source.defLimitLow);
+
+        spinLimitHigh->setMinimum(source.minimum);
+        spinLimitHigh->setMaximum(source.maximum);
+        spinLimitHigh->setSuffix (source.unit);
+        spinLimitHigh->setValue  (HUGE_VALF != valueHigh ? valueHigh : source.defLimitHigh);
+    }
+}
+
+void CDetailsTrk::slotSlopeLimitHighChanged()
+{
+    const double val = spinLimitHigh->value();
+    trk.setColorizeLimitHigh(val);
+
+    if(spinLimitLow->value() >= val)
+    {
+        spinLimitLow->setValue(val - 1.f);
+    }
+}
+
+void CDetailsTrk::slotSlopeLimitLowChanged()
+{
+    const double val = spinLimitLow->value();
+    trk.setColorizeLimitLow(val);
+
+    if(spinLimitHigh->value() <= val)
+    {
+        spinLimitHigh->setValue(val + 1.f);
     }
 }
 

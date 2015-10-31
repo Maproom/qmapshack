@@ -48,6 +48,10 @@ private slots:
     void slotMouseClickState(int);
     void slotActivitySelected(bool checked);
 
+    void slotSlopeSourceChanged(int idx, float valueLow = HUGE_VALF, float valueHigh = HUGE_VALF);
+    void slotSlopeLimitHighChanged();
+    void slotSlopeLimitLowChanged();
+
 private:
     enum columns_t
     {

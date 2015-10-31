@@ -51,11 +51,18 @@ public:
 
     struct ColorizeSource
     {
-        const char *name;
+        const char  *name;
+        const float  defLimitLow;
+        const float  defLimitHigh;
+        const float  minimum;
+        const float  maximum;
+        const char  *unit;
+        const char  *icon;
         const std::function<float(const trkpt_t&, const trkpt_t&)> selector;
     };
 
-    static const struct ColorizeSource colorizeSources[3];
+    static const struct ColorizeSource colorizeSource[3];
+    static const size_t colorizeSourceCount = sizeof(CGisItemTrk::colorizeSource) / sizeof(CGisItemTrk::colorizeSource[0]);
 
     enum focusmode_e
     {
@@ -243,6 +250,23 @@ public:
         return activities;
     }
 
+    void setColorizeSource(int idx);
+    int getColorizeSource()
+    {
+        return slopeSource;
+    }
+
+    void setColorizeLimitLow(float limit);
+    float getColorizeLimitLow()
+    {
+        return limitLow;
+    }
+
+    void setColorizeLimitHigh(float limit);
+    float getColorizeLimitHigh()
+    {
+        return limitHigh;
+    }
 
 
     /**

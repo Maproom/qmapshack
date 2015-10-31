@@ -129,7 +129,7 @@ protected:
 
 private:
     /// the opacity level of a map
-    qreal opacity = 0;
+    qreal opacity = 100;
     /// the minimum scale a map is visible
     qreal minScale = NOFLOAT;
     /// the maximum scale a map is visible

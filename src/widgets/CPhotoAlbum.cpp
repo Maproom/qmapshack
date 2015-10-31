@@ -24,8 +24,6 @@
 
 CPhotoAlbum::CPhotoAlbum(QWidget *parent)
     : QWidget(parent)
-    , idx1stVisible(0)
-    , idxSelected(0)
 {
     setupUi(this);
     setFocusPolicy(Qt::WheelFocus);

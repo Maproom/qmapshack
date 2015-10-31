@@ -33,7 +33,7 @@ private slots:
     void slotTimeout();
 
 private:
-    qreal o;
+    qreal o = 1.0;
     QPixmap icon;
 };
 

@@ -21,7 +21,6 @@
 
 CFadingIcon::CFadingIcon(const QPoint& pt, const QString &resource, QWidget *parent)
     : QLabel(parent)
-    , o(1.0)
     , icon(resource)
 {
     setPixmap(icon);

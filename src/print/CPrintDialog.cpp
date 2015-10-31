@@ -34,8 +34,6 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     : QDialog(&CMainWindow::self())
     , type(type)
     , rectSelArea(area)
-    , xPages(0.0)
-    , yPages(0.0)
 {
     setupUi(this);
 

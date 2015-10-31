@@ -61,7 +61,7 @@ public:
     /// text shown left of the y axis
     QString ylabel;
     /// set true for grid
-    bool grid;
+    bool grid = true;
 
     /// list of plot lines
     QList<line_t> lines;
@@ -79,14 +79,14 @@ public:
     /// vector of plot tags such as waypoints
     QVector<point_t> tags;
 
-    bool badData;
+    bool badData = true;
 
     axistype_e axisType;
 
-    qreal xmin;
-    qreal xmax;
-    qreal ymin;
-    qreal ymax;
+    qreal xmin = 0;
+    qreal xmax = 0;
+    qreal ymin = 0;
+    qreal ymax = 0;
 
 protected:
     CPlotAxis * xaxis;

@@ -115,14 +115,14 @@ protected:
     // different draw modes
     mode_e mode;
     // buffer needs update
-    bool needsRedraw;
+    bool needsRedraw = true;
 
-    bool showScale;
-    bool thinLine;
-    bool solid;
+    bool showScale = true;
+    bool thinLine = false;
+    bool solid = false;
 
     QImage buffer;
-    QPoint posMouse;
+    QPoint posMouse = NOPOINT;
 
     /**
        @brief The track this plot is attached to
@@ -138,18 +138,18 @@ protected:
 
     QFontMetrics fm;
 
-    int left;
-    int right;
-    int top;
-    int bottom;
+    int left = 0;
+    int right = 0;
+    int top = 0;
+    int bottom = 0;
 
-    int deadAreaX;
-    int deadAreaY;
+    int deadAreaX = 0;
+    int deadAreaY = 0;
 
-    int fontWidth;
-    int fontHeight;
-    int scaleWidthX1;
-    int scaleWidthY1;
+    int fontWidth = 0;
+    int fontHeight = 0;
+    int scaleWidthX1 = 0;
+    int scaleWidthY1 = 0;
 
     QRect rectX1Label;
     QRect rectY1Label;
@@ -166,10 +166,10 @@ protected:
     QAction * actionPrint;
     QAction * actionStopRange;
 
-    qint32 idxSel1;
-    qint32 idxSel2;
+    qint32 idxSel1 = NOIDX;
+    qint32 idxSel2 = NOIDX;
 
-    mouse_click_state_e mouseClickState;
+    mouse_click_state_e mouseClickState = eMouseClickIdle;
 
     QPointer<CScrOptRangeTrk> scrOptRange;
 

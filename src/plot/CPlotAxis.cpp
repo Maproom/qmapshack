@@ -27,21 +27,6 @@ inline qreal qLog10(qreal x)
 
 CPlotAxis::CPlotAxis( QObject * parent )
     : QObject( parent )
-    , initialized( false )
-    , autoscale( false )
-    , valid(false)
-    , scale( 1.0 )
-    , usedMin( 0.0 )
-    , usedMax( 0.0 )
-    , limitMin( 0.0 )
-    , limitMax( 0.0 )
-    , interval( 0.0 )
-    , ticStart( 0 )
-    , scaleWidth( 0 )
-    , ticType( eTicNorm )
-    , firstTic( false )
-    , lastTic( false )
-    , points(0)
 {
 }
 

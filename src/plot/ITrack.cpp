@@ -23,12 +23,6 @@
 #include <QtWidgets>
 
 ITrack::ITrack()
-    : pjsrc(0)
-    , pjtar(0)
-    , needsRedraw(true)
-    , trk(0)
-    , xoff(0)
-    , yoff(0)
 {
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }

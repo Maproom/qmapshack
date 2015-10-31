@@ -23,7 +23,6 @@
 
 CPlotTrack::CPlotTrack(QWidget *parent)
     : QWidget(parent)
-    , pos(NOPOINTF)
 {
 }
 

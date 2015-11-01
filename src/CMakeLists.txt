@@ -47,6 +47,7 @@ set( SRCS
     widgets/CTextEditWidget.cpp
     widgets/CHistoryListWidget.cpp
     widgets/CPhotoAlbum.cpp
+    widgets/CColorLegend.cpp
     helpers/CInputDialog.cpp
     helpers/CPositionDialog.cpp
     helpers/CWptIconDialog.cpp    
@@ -258,6 +259,7 @@ set( HDRS
     widgets/CHistoryListWidget.h
     widgets/CTextEditWidget.h
     widgets/CPhotoAlbum.h
+    widgets/CColorLegend.h
     helpers/Platform.h
     helpers/CFileExt.h
     helpers/CAppOpts.h

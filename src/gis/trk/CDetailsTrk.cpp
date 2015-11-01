@@ -30,6 +30,7 @@
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
+#include "widgets/CColorLegend.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -456,8 +457,9 @@ void CDetailsTrk::slotSlopeSourceChanged(int idx, float valueLow, float valueHig
 
     trk.setColorizeSource(idxInSource);
 
-    spinLimitLow->setEnabled (-1 != idxInSource);
-    spinLimitHigh->setEnabled(-1 != idxInSource);
+    spinLimitLow->setEnabled    (-1 != idxInSource);
+    spinLimitHigh->setEnabled   (-1 != idxInSource);
+    widgetColorLabel->setEnabled(-1 != idxInSource);
 
     // update the limits
     if(-1 != idxInSource)
@@ -473,6 +475,10 @@ void CDetailsTrk::slotSlopeSourceChanged(int idx, float valueLow, float valueHig
         spinLimitHigh->setMaximum(source.maximum);
         spinLimitHigh->setSuffix (source.unit);
         spinLimitHigh->setValue  (HUGE_VALF != valueHigh ? valueHigh : source.defLimitHigh);
+
+        widgetColorLabel->setMinimum(spinLimitLow->value());
+        widgetColorLabel->setMaximum(spinLimitHigh->value());
+        widgetColorLabel->setUnit(source.unit);
     }
 }
 
@@ -480,6 +486,7 @@ void CDetailsTrk::slotSlopeLimitHighChanged()
 {
     const double val = spinLimitHigh->value();
     trk.setColorizeLimitHigh(val);
+    widgetColorLabel->setMaximum(val);
 
     if(spinLimitLow->value() >= val)
     {
@@ -491,6 +498,7 @@ void CDetailsTrk::slotSlopeLimitLowChanged()
 {
     const double val = spinLimitLow->value();
     trk.setColorizeLimitLow(val);
+    widgetColorLabel->setMinimum(val);
 
     if(spinLimitHigh->value() <= val)
     {

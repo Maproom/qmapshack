@@ -792,7 +792,7 @@ private:
     int slopeSource = -1; //< The index of the source to be used for (slope-)coloring tracks
 
     // the low and high limit for (slope-)colored drawing of tracks
-    float limitLow  = -10.f; // TODO: change values via GUI
+    float limitLow  = -10.f;
     float limitHigh =  10.f;
 
     /**@}*/

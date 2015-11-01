@@ -1583,13 +1583,13 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[3]
 {
     {"Slope (directed)", -10.f, 10.f, -90.f, 90.f, "°", "://icons/32x32/Slope.png",
-        [](const trkpt_t &p1, const trkpt_t &p2) { return p2.ele < p1.ele ? p2.slope1 : -p2.slope1; } },
+        [](const trkpt_t &pp, const trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; } },
 
     {"Heart Rate", 100.f, 200.f, 0.f, 300.f, "bpm", "://icons/32x32/Heart.png",
-        [](const trkpt_t &p1, const trkpt_t &p2) { return p1.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } },
+        [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } },
 
     {"Speed", 1.f, 14.f, 0.f, 100.f, "m/s", "://icons/32x32/Speed.png",
-        [](const trkpt_t &p1, const trkpt_t &p2) { return p2.speed; } },
+        [](const trkpt_t &pp, const trkpt_t &p) { return p.speed; } },
 };
 
 void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor )
@@ -1604,11 +1604,10 @@ void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&,
     colorsGradient.setColorAt(0.00, QColor(255,   0,   0)); // red
     colorsPainter.fillRect(colors.rect(), colorsGradient);
 
-    penForeground.setWidth(3);
-
     foreach(const trkseg_t &segment, trk.segs)
     {
         const trkpt_t *ptPrev = NULL;
+        QColor colorStart;
 
         foreach(const trkpt_t &pt, segment.pts)
         {
@@ -1622,21 +1621,29 @@ void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&,
                 continue;
             }
 
-            float colorAt = ( intersectColor(pt, *ptPrev) - limitLow) / (limitHigh - limitLow);
-            if(NAN != colorAt)
-            {
-                if(colorAt > 1.f) colorAt = 1.f;
-                if(colorAt < 0.f) colorAt = 0.f;
+            float colorAt = ( intersectColor(*ptPrev, pt) - limitLow ) / (limitHigh - limitLow);
+            if(colorAt > 1.f) colorAt = 1.f;
+            if(colorAt < 0.f) colorAt = 0.f;
 
-                const int pxPos = (int) ((1.f - colorAt) * 255.f);
-                QColor lineColor( colors.pixel(0, pxPos) );
-                penForeground.setColor(lineColor);
-                p.setPen(penForeground);
+            const QColor &colorEnd = colors.pixel(0, ((1.f - colorAt) * 255.f));
+            if(!colorStart.isValid())
+            {
+                colorStart = colorEnd;
             }
 
+            QLinearGradient grad(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
+            grad.setColorAt(0.f, colorStart);
+            grad.setColorAt(1.f, colorEnd);
+
+            QPen pen;
+            pen.setBrush(QBrush(grad));
+            pen.setWidth(3);
+
+            p.setPen(pen);
             p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
 
             ptPrev = &pt;
+            colorStart = colorEnd;
         }
     }
 }

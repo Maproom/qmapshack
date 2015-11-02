@@ -160,6 +160,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(spinLimitLow,     SIGNAL(valueChangedByStep(double)), this, SLOT(slotSlopeLimitLowChanged()));
     connect(spinLimitLow,     SIGNAL(editingFinished()),          this, SLOT(slotSlopeLimitLowChanged()));
 
+    connect(btnMaxFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitHighFromData()));
+    connect(btnMinFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitLowFromData()));
+
     connect(plotDistance,     SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
     connect(plotElevation,    SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
     connect(plotSpeed,        SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
@@ -179,6 +182,20 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("splitterSizes", splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.endGroup();
+}
+
+void CDetailsTrk::slotLimitLowFromData()
+{
+    float min = trk.getExtremum(false);
+    spinLimitLow->setValue(min);
+    slotSlopeLimitLowChanged();
+}
+
+void CDetailsTrk::slotLimitHighFromData()
+{
+    float max = trk.getExtremum(true);
+    spinLimitHigh->setValue(max);
+    slotSlopeLimitHighChanged();
 }
 
 void CDetailsTrk::setupGui()
@@ -460,6 +477,8 @@ void CDetailsTrk::slotSlopeSourceChanged(int idx, float valueLow, float valueHig
     spinLimitLow->setEnabled    (-1 != idxInSource);
     spinLimitHigh->setEnabled   (-1 != idxInSource);
     widgetColorLabel->setEnabled(-1 != idxInSource);
+    btnMinFromData->setEnabled  (-1 != idxInSource);
+    btnMaxFromData->setEnabled  (-1 != idxInSource);
 
     // update the limits
     if(-1 != idxInSource)

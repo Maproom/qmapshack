@@ -1648,6 +1648,39 @@ void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&,
     }
 }
 
+float CGisItemTrk::getExtremum(bool getMaximum)
+{
+    float min = std::numeric_limits<float>::max();
+    float max = std::numeric_limits<float>::lowest();
+    foreach(const trkseg_t &segment, trk.segs)
+    {
+        const trkpt_t *ptPrev = NULL;
+
+        foreach(const trkpt_t &pt, segment.pts)
+        {
+            if(NULL == ptPrev)
+            {
+                ptPrev = &pt;
+                continue;
+            }
+
+            float value = colorizeSource[slopeSource].selector(*ptPrev, pt);
+            if(min > value)
+            {
+                min = value;
+            }
+
+            if(max < value)
+            {
+                max = value;
+            }
+
+            ptPrev = &pt;
+        }
+    }
+    return getMaximum ? max : min;
+}
+
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QMutexLocker lock(&mutexItems);

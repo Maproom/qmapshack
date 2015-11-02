@@ -52,6 +52,9 @@ private slots:
     void slotSlopeLimitHighChanged();
     void slotSlopeLimitLowChanged();
 
+    void slotLimitLowFromData();
+    void slotLimitHighFromData();
+
 private:
     enum columns_t
     {

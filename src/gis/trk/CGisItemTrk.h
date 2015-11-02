@@ -268,6 +268,7 @@ public:
         return limitHigh;
     }
 
+    float getExtremum(bool getMaximum);
 
     /**
        @brief Get the indeces of visible points for a selected range

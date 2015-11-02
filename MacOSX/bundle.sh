@@ -234,9 +234,8 @@ function buildBinary {
     rm -rf $BUILD_RELEASE_DIR/$APP_NAME
     mkdir $BUILD_BIN_DIR
     mkdir $BUILD_RELEASE_DIR
-    #export MACOSX_DEPLOYMENT_TARGET=10.5
     xcodebuild -list -project $BUILD_DIR/$APP_NAME.xcodeproj
-    xcodebuild -project $BUILD_DIR/$APP_NAME.xcodeproj -scheme ALL_BUILD -configuration Release build MACOSX_DEPLOYMENT_TARGET=10.5
+    xcodebuild -project $BUILD_DIR/$APP_NAME.xcodeproj  -configuration Release build
 }
 
 function replaceBinary {

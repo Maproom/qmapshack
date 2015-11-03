@@ -1069,8 +1069,8 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
     foreach(const trkwpt_t &trkwpt, trkwpts)
     {
-        qreal minD      = WPT_FOCUS_DIST_IN;
-        qint32 index    = NOIDX;
+        qreal minD   = WPT_FOCUS_DIST_IN;
+        qint32 index = NOIDX;
 
         foreach(const pointDP &pt, line)
         {
@@ -1098,7 +1098,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
                 minD  = WPT_FOCUS_DIST_IN;
             }
 
-            if(current  - lastCurrent > 100)
+            if(current - lastCurrent > 100)
             {
                 lastCurrent = current;
                 PROGRESS(current, return );
@@ -1136,7 +1136,7 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
 
 void CGisItemTrk::gainUserFocus(bool yes)
 {
-    keyUserFocus    = yes ? key : key_t();
+    keyUserFocus = yes ? key : key_t();
 }
 
 void CGisItemTrk::looseUserFocus()
@@ -1585,14 +1585,14 @@ const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[4]
     {"Slope (directed)", -10.f, 10.f, -90.f, 90.f, "°", "://icons/32x32/Slope.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; } },
 
-    {"Heart Rate", 100.f, 200.f, 0.f, 300.f, "bpm", "://icons/32x32/Heart.png",
-        [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } },
-
     {"Speed", 1.f, 14.f, 0.f, 100.f, "m/s", "://icons/32x32/Speed.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.speed; } },
 
     {"Elevation", 200.f, 800.f, 0.f, 5000.f, "m", "://icons/32x32/Elevation.png",
-        [](const trkpt_t &pp, const trkpt_t &p) { return p.ele; } }
+        [](const trkpt_t &pp, const trkpt_t &p) { return p.ele; } },
+
+    {"Heart Rate", 100.f, 200.f, 0.f, 300.f, "bpm", "://icons/32x32/Heart.png",
+        [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } }
 };
 
 void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor )
@@ -1682,6 +1682,23 @@ float CGisItemTrk::getExtremum(bool getMaximum)
         }
     }
     return getMaximum ? max : min;
+}
+
+std::array<bool, 4> CGisItemTrk::getExistingKnownColorizeSources()
+{
+    qDebug() << "CGisItemTrk::getExistingColorizeSources()";
+
+    // even sources with some datapoints missing are assumed as 'existing'
+    const trkseg_t &seg = trk.segs[0];
+    const trkpt_t  &pt  = seg.pts[0];
+
+    std::array<bool, 4> existing;
+    existing[0] = NOFLOAT != pt.slope1;
+    existing[1] = NOFLOAT != pt.speed;
+    existing[2] = NOINT   != pt.ele;
+    existing[3] = pt.extensions.contains("gpxtpx:TrackPointExtension|gpxtpx:hr");
+
+    return existing;
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)

@@ -57,8 +57,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         QCheckBox * check = new QCheckBox(this);
         check->setText(desc.name);
         check->setIcon(QIcon(desc.iconLarge));
-        check->setProperty("flag", desc.flag);
-        check->setProperty("name", desc.name);
+        check->setProperty("flag",   desc.flag);
+        check->setProperty("name",   desc.name);
         check->setProperty("symbol", desc.iconLarge);
         check->setObjectName("check" + desc.objName);
 
@@ -77,11 +77,29 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     plotSpeed->setTrack(&trk);
 
     // add all available slope sources to the corresponding combobox
+    bool haveDisabledEntry = false;
+    std::array<bool, 4> existingSources = trk.getExistingKnownColorizeSources();
+
     comboSlopeSource->addItem(QIcon("://icons/32x32/Tainted.png"), "static color");
     for(size_t i = 0; i < CGisItemTrk::colorizeSourceCount; i++)
     {
         QIcon icon(CGisItemTrk::colorizeSource[i].icon);
         comboSlopeSource->addItem(icon, CGisItemTrk::colorizeSource[i].name);
+
+        // do never disable the first entry `static color`
+        qDebug() << "existingSources[" << i << "] = " << existingSources[i - 1];
+        if(!existingSources[i])
+        {
+            qDebug() << "disabling " << CGisItemTrk::colorizeSource[i].name << " " << i;
+            comboSlopeSource->setItemData(i + 1, false, Qt::UserRole - 1);
+            haveDisabledEntry = true;
+        }
+    }
+
+    // show a message as soon as entries have been disabled
+    if(haveDisabledEntry)
+    {
+        labelDisabledEntries->setText("Some sources are disabled due to missing data.");
     }
 
     comboSlopeSource->setCurrentIndex(1 + trk.getColorizeSource());
@@ -176,10 +194,10 @@ CDetailsTrk::~CDetailsTrk()
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    cfg.setValue("showProfile", checkProfile->isChecked());
-    cfg.setValue("showSpeed", checkSpeed->isChecked());
-    cfg.setValue("showProgress", checkProgress->isChecked());
-    cfg.setValue("splitterSizes", splitter->saveState());
+    cfg.setValue("showProfile",         checkProfile->isChecked());
+    cfg.setValue("showSpeed",           checkSpeed->isChecked());
+    cfg.setValue("showProgress",        checkProgress->isChecked());
+    cfg.setValue("splitterSizes",       splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.endGroup();
 }

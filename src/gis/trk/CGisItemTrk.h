@@ -746,6 +746,8 @@ public:
         return trk;
     }
 
+    std::array<bool, 4> getExistingKnownColorizeSources();
+
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;

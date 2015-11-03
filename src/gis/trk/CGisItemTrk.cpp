@@ -1580,7 +1580,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 }
 
-const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[3]
+const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[4]
 {
     {"Slope (directed)", -10.f, 10.f, -90.f, 90.f, "°", "://icons/32x32/Slope.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; } },
@@ -1590,6 +1590,9 @@ const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[3]
 
     {"Speed", 1.f, 14.f, 0.f, 100.f, "m/s", "://icons/32x32/Speed.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.speed; } },
+
+    {"Elevation", 200.f, 800.f, 0.f, 5000.f, "m", "://icons/32x32/Elevation.png",
+        [](const trkpt_t &pp, const trkpt_t &p) { return p.ele; } }
 };
 
 void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor )

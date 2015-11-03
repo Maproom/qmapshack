@@ -61,7 +61,7 @@ public:
         const std::function<float(const trkpt_t&, const trkpt_t&)> selector;
     };
 
-    static const struct ColorizeSource colorizeSource[3];
+    static const struct ColorizeSource colorizeSource[4];
     static const size_t colorizeSourceCount = sizeof(CGisItemTrk::colorizeSource) / sizeof(CGisItemTrk::colorizeSource[0]);
 
     enum focusmode_e

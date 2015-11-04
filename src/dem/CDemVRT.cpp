@@ -34,7 +34,6 @@
 CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     : IDem(parent)
     , filename(filename)
-    , hasOverviews(false)
 {
     qDebug() << "------------------------------";
     qDebug() << "VRT: try to open" << filename;

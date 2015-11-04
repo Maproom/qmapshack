@@ -23,13 +23,7 @@
 
 CPlotData::CPlotData(axistype_e type, QObject * parent)
     : QObject(parent)
-    , grid(true)
-    , badData(true)
     , axisType(type)
-    , xmin(0)
-    , xmax(0)
-    , ymin(0)
-    , ymax(0)
 {
     if(type == eAxisLinear)
     {

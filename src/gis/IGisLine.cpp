@@ -20,14 +20,9 @@
 #include "gis/CGisDraw.h"
 #include "gis/IGisLine.h"
 
-IGisLine::subpt_t::subpt_t()
-    : ele(NOINT)
-{
-}
 
 IGisLine::subpt_t::subpt_t(const QPointF& pt)
     : coord(pt)
-    , ele(NOINT)
 {
 }
 
@@ -79,13 +74,5 @@ void SGisLine::updatePixel(CGisDraw * gis)
             gis->convertRad2Px(sub.pixel);
         }
     }
-}
-
-IGisLine::IGisLine()
-{
-}
-
-IGisLine::~IGisLine()
-{
 }
 

@@ -38,7 +38,6 @@
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     : QWidget(parent)
     , trk(trk)
-    , originator(false)
 {
     setupUi(this);
 

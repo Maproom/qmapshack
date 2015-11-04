@@ -24,13 +24,7 @@
 
 IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject * parent)
     : QObject(parent)
-    , offsetLBL1(0)
-    , offsetLBL6(0)
-    , offsetNET1(0)
-    , addrshift1(0)
-    , addrshift2(0)
     , codepage(codepage)
-    , codec(0)
     , mask(mask)
 {
     if(codepage != 0)

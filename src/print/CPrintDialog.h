@@ -65,9 +65,9 @@ private:
     QPrinter printer;
 
     /// number of pages in x dimension
-    qreal xPages;
+    qreal xPages = 0.0;
     /// number of pages in y dimension
-    qreal yPages;
+    qreal yPages = 0.0;
 };
 
 #endif //CPRINTDIALOG_H

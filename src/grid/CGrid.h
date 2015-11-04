@@ -49,11 +49,11 @@ private:
 
     CMapDraw * map;
 
-    projPJ pjWGS84;
-    projPJ pjGrid;
+    projPJ pjWGS84 = 0;
+    projPJ pjGrid = 0;
 
-    QString projstr;
-    QColor color;
+    QString projstr = "+proj=longlat +datum=WGS84 +no_defs";
+    QColor color = Qt::magenta;
 };
 
 #endif //CGRID_H

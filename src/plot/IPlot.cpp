@@ -59,27 +59,8 @@ int IPlot::cnt = 0;
 IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : QWidget(parent)
     , mode(mode)
-    , needsRedraw(true)
-    , showScale(true)
-    , thinLine(false)
-    , solid(false)
-    , posMouse(NOPOINT)
     , trk(trk)
     , fm(font())
-    , left(0)
-    , right(0)
-    , top(0)
-    , bottom(0)
-    , deadAreaX(0)
-    , deadAreaY(0)
-    , fontWidth(0)
-    , fontHeight(0)
-    , scaleWidthX1(0)
-    , scaleWidthY1(0)
-    , idxSel1(NOIDX)
-    , idxSel2(NOIDX)
-    , mouseClickState(eMouseClickIdle)
-
 {
     cnt++;
     setObjectName(QString("IPlot%1").arg(cnt));

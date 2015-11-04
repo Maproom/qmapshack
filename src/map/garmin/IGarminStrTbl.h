@@ -56,19 +56,19 @@ protected:
     void readFile(CFileExt &file, quint32 offset, quint32 size, QByteArray& data);
     quint32 calcOffset(CFileExt& file, const quint32 offset, type_e t);
 
-    quint32 offsetLBL1;
-    quint32 sizeLBL1;
-    quint32 offsetLBL6;
-    quint32 sizeLBL6;
-    quint32 offsetNET1;
-    quint32 sizeNET1;
+    quint32 offsetLBL1 = 0;
+    quint32 sizeLBL1 = 0;
+    quint32 offsetLBL6 = 0;
+    quint32 sizeLBL6 = 0;
+    quint32 offsetNET1 = 0;
+    quint32 sizeNET1 = 0;
 
-    quint8 addrshift1;
-    quint8 addrshift2;
+    quint8 addrshift1 = 0;
+    quint8 addrshift2 = 0;
 
     // conversion of strings
     quint16 codepage;
-    QTextCodec * codec;
+    QTextCodec * codec = 0;
     const quint8 mask;
     quint32 mask32;
     quint64 mask64;

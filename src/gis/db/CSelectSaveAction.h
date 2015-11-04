@@ -48,7 +48,7 @@ private slots:
     void slotSelectResult();
 
 private:
-    result_e result;
+    result_e result = eResultNone;
 };
 
 #endif //CSELECTSAVEACTION_H

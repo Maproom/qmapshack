@@ -34,44 +34,17 @@
 
 struct sign_info_t
 {
-    sign_info_t();
-
-    quint32 sign_info_bits;
-    bool x_has_sign;
-    bool nx;
-    bool y_has_sign;
-    bool ny;
+    quint32 sign_info_bits = 2;
+    bool x_has_sign = true;
+    bool nx = false;
+    bool y_has_sign = true;
+    bool ny = false;
 };
-sign_info_t::sign_info_t()
-    : sign_info_bits(2)
-    , x_has_sign(true)
-    , nx(false)
-    , y_has_sign(true)
-    , ny(false)
-{
-}
 
 
 quint32 CGarminPolygon::cnt = 0;
 qint32 CGarminPolygon::maxVecSize = 0;
 
-CGarminPolygon::CGarminPolygon()
-    : type(0)
-    , direction(false)
-    , lbl_info(0)
-    , lbl_in_NET(false)
-    , hasV2Label(false)
-    , dLng(0)
-    , dLat(0)
-    , id(0)
-
-{
-}
-
-
-CGarminPolygon::~CGarminPolygon()
-{
-}
 
 
 quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd)

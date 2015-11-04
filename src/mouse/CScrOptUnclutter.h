@@ -56,7 +56,7 @@ public:
 private:
     static const QPoint positions[9][8];
     QList<item_t> items;
-    bool doSpecialCursor;
+    bool doSpecialCursor = false;
 };
 
 #endif //CSCROPTUNCLUTTER_H

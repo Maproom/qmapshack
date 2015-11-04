@@ -40,10 +40,10 @@ private:
 
     QList<CGisItemWpt::image_t> images;
     int idx;
-    QRect rectImage;
-    QRect rectClose;
-    QRect rectPrev;
-    QRect rectNext;
+    QRect rectImage {0,0,100,100};
+    QRect rectClose {0,0,32,32};
+    QRect rectPrev {0,0,32,32};
+    QRect rectNext {0,0,32,32};
 };
 
 #endif //CPHOTOVIEWER_H

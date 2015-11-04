@@ -39,39 +39,33 @@ public:
 
     struct geocachelog_t
     {
-        geocachelog_t() : id(0)
-        {
-        }
-        quint32 id;
+        quint32 id = 0;
         QDateTime date;
         QString type;
         QString finderId;
         QString finder;
-        bool textIsHtml;
+        bool textIsHtml = false;
         QString text;
     };
 
     struct geocache_t
     {
-        geocache_t() : service(eOC), hasData(false), id(0), available(true), archived(false), difficulty(0), terrain(0), shortDescIsHtml(false), longDescIsHtml(false)
-        {
-        }
-        geocacheservice_e service;
-        bool hasData;
-        quint32 id;
-        bool available;
-        bool archived;
-        qreal difficulty;
-        qreal terrain;
+        geocacheservice_e service = eOC;
+        bool hasData = false;
+        quint32 id = 0;
+        bool available = true;
+        bool archived = false;
+        qreal difficulty = 0;
+        qreal terrain = 0;
         QString status;
         QString name;
         QString owner;
         QString ownerId;
         QString type;
         QString container;
-        bool shortDescIsHtml;
+        bool shortDescIsHtml = false;
         QString shortDesc;
-        bool longDescIsHtml;
+        bool longDescIsHtml = false;
         QString longDesc;
         QString hint;
         QString country;
@@ -83,7 +77,7 @@ public:
     struct image_t
     {
         QImage pixmap;
-        qreal direction;
+        qreal direction = 0;
         QString info;
         QString filePath;
         QString fileName;
@@ -318,12 +312,12 @@ private:
 
     // --- start all waypoint data ----
     wpt_t wpt;
-    qreal proximity;
+    qreal proximity = NOFLOAT;
     geocache_t geocache;
     QList<image_t> images;
 
     QPointF focus;
-    QPointF posScreen;
+    QPointF posScreen = NOPOINTF;
 
     // additonal data, common to all IGisItems, is found in IItem //
 
@@ -331,19 +325,19 @@ private:
 
     QPointer<CScrOptWpt> scrOpt;
 
-    bool doBubble;
-    bool doSpecialCursor;
-    bool doBubbleMove;
-    bool doBubbleSize;
-    bool mouseIsOverBubble;
+    bool doBubble = false;
+    bool doSpecialCursor = false;
+    bool doBubbleMove = false;
+    bool doBubbleSize = false;
+    bool mouseIsOverBubble = false;
     QRect rectBubble;
-    QRect rectBubbleMove;
-    QRect rectBubbleEdit;
-    QRect rectBubbleSize;
+    QRect rectBubbleMove {0,0,16,16};
+    QRect rectBubbleEdit {0,0,16,16};
+    QRect rectBubbleSize {0,0,16,16};
 
     QPoint offsetMouse;
-    QPoint offsetBubble;
-    quint32 widthBubble;
+    QPoint offsetBubble {-320, -150};
+    quint32 widthBubble = 300;
 };
 
 #endif //CGISITEMWPT_H

@@ -42,7 +42,7 @@ private slots:
 private:
     CGisItemWpt& wpt;
 
-    bool originator;
+    bool originator = false;
 };
 
 #endif //CDETAILSWPT_H

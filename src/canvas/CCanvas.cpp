@@ -48,8 +48,6 @@
 
 CCanvas::CCanvas(QWidget *parent, const QString &name)
     : QWidget(parent)
-    , posFocus(12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD)
-    , plotTrackProfile(0)
 {
     setFocusPolicy(Qt::WheelFocus);
 

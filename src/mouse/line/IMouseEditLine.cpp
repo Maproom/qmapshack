@@ -39,10 +39,7 @@
 
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, bool enableStatus, const QString &type, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent)
-    , idxHistory(NOIDX)
     , key(key)
-    , doCanvasPanning(false)
-    , lineOp(0)
     , enableStatus(enableStatus)
     , type(type)
 {

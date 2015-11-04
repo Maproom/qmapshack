@@ -26,15 +26,7 @@
 IMap::IMap(quint32 features, CMapDraw *parent)
     : IDrawObject(parent)
     , map(parent)
-    , pjsrc(0)
-    , isActivated(false)
     , flagsFeature(features)
-    , showPolygons(true)
-    , showPolylines(true)
-    , showPOIs(true)
-    , cacheSizeMB(100)
-    , cacheExpiration(8)
-
 {
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }

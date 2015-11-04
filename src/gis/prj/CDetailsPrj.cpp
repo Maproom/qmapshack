@@ -35,8 +35,6 @@
 CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     : QWidget(parent)
     , prj(prj)
-    , scrollVal(0)
-    , mutex(QMutex::NonRecursive)
 {
     setupUi(this);
 

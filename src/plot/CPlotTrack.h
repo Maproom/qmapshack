@@ -39,7 +39,7 @@ protected:
 
 private:
 
-    QPointF pos;
+    QPointF pos = NOPOINTF;
 };
 
 #endif //CPLOTTRACK_H

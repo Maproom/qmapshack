@@ -86,10 +86,6 @@ private:
 
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
-    , menuNone(0)
-    , saveOnExit(true)
-    , saveEvery(5)
-    , deviceWatcher(0)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
     QString config = CAppSetup::getPlattformInstance()->configDir().filePath("workspace.db");

@@ -130,7 +130,7 @@ protected:
 
     /// undo/redo history
     QList<SGisLine> history;
-    qint32 idxHistory;
+    qint32 idxHistory = NOIDX;
 
 
     /// the on screen buttons
@@ -144,14 +144,14 @@ private:
     void changeCursor();
 
     /// flag to enable/disable canvas/map panning
-    bool doCanvasPanning;
+    bool doCanvasPanning = false;
 
     QPolygonF pixelLine;
     QPolygonF pixelPts;
     QPolygonF pixelSubs;
 
     /// the current active line operation (move, add, delete...)
-    ILineOp  * lineOp;
+    ILineOp  * lineOp = 0;
 
     bool enableStatus;
 

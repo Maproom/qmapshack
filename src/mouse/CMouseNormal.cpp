@@ -31,8 +31,6 @@
 
 CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     : IMouse(gis, canvas)
-    , mapMove(false)
-    , stateItemSel(eStateIdle)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
     screenUnclutter = new CScrOptUnclutter(this);

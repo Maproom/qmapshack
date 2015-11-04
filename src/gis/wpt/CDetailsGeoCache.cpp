@@ -30,7 +30,6 @@
 CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     : QDialog(parent)
     , wpt(wpt)
-    , cntSpoiler(0)
 {
     setupUi(this);
     setWindowTitle(wpt.getName());

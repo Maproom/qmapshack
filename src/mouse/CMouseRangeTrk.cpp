@@ -28,8 +28,6 @@
 
 CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
-    , state(eStateIdle)
-    , anchor(NOPOINTF)
 {
     cursor      = QCursor(QPixmap("://cursors/cursorSelectRange.png"),0,0);
     key         = trk.getKey();

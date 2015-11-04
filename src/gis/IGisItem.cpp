@@ -65,7 +65,6 @@ const IGisItem::color_t IGisItem::colorMap[] =
 
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
-    , flags(0)
 {
     int n = -1;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);

@@ -24,14 +24,6 @@
 
 CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
-    , rectTopLeft(0,0,20,20)
-    , rectTopRight(0,0,20,20)
-    , rectBottomLeft(0,0,20,20)
-    , rectBottomRight(0,0,20,20)
-    , rectPrintButton(0,0,48,48)
-    , rectImageButton(0,0,48,48)
-    , state(eStateIdle)
-    , corner(eCornerNone)
 {
     cursor      = QCursor(QPixmap("://cursors/cursorSave.png"),0,0);
 

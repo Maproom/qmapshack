@@ -41,9 +41,9 @@ private slots:
 private:
     void finished(int exitCode, QProcess::ExitStatus status);
 
-    bool first;
-    bool tainted;
-    bool last;
+    bool first = false;
+    bool tainted = false;
+    bool last = false;
 
     QStringList sourceFiles;
     QString targetPrefix;

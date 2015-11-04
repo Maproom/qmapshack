@@ -53,7 +53,7 @@ private:
     QTransform trFwd;
     QTransform trInv;
 
-    bool hasOverviews;
+    bool hasOverviews = false;
 
     QRectF boundingBox;
 };

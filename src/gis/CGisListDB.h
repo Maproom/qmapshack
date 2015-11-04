@@ -65,7 +65,7 @@ private:
     CDBFolderDatabase *getDataBase(const QString& name);
     void addDatabase(const QString& name, const QString& filename);
 
-    int isInternalEdit;
+    int isInternalEdit = 0;
 
     QMenu * menuNone;
     QAction * actionAddDatabase;

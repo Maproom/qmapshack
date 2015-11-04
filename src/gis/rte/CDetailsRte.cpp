@@ -27,7 +27,6 @@
 CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget *parent)
     : QDialog(parent)
     , rte(rte)
-    , originator(false)
 {
     setupUi(this);
 

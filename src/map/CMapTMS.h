@@ -82,24 +82,24 @@ private:
 
     QString name;
 
-    qint32 minZoomLevel;
+    qint32 minZoomLevel = 1;
 
-    qint32 maxZoomLevel;
+    qint32 maxZoomLevel = 21;
 
     QList<rawHeaderItem_t> rawHeaderItems;
 
     /// Mutex to control access to url queue
-    QMutex mutex;
+    QMutex mutex {QMutex::Recursive};
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
-    IDiskCache * diskCache;
+    IDiskCache * diskCache = 0;
     /// access mangager to request tiles
     QNetworkAccessManager * accessManager;
 
     QList<QString> urlPending;
 
-    bool lastRequest;
+    bool lastRequest = false;
 
     QTime timeLastUpdate;
 };

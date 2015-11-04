@@ -126,47 +126,47 @@ protected:
     virtual void calc();
 
     ///true if axis has been initialized
-    bool initialized;
+    bool initialized = false;
     ///true if autoscaling
-    bool autoscale;
+    bool autoscale = false;
 
-    bool valid;
+    bool valid = false;
 
     ///scalefactor
-    qreal scale;
+    qreal scale = 1.0;
 
     ///the actual applied min value
-    qreal usedMin;
+    qreal usedMin = 0.0;
     ///the actual applied max value
-    qreal usedMax;
+    qreal usedMax = 0.0;
 
-    qreal limitMin;
-    qreal limitMax;
+    qreal limitMin = 0.0;
+    qreal limitMax = 0.0;
 
     ///the intervall of the ticmarks
-    qreal interval;
+    qreal interval = 0.0;
 
     ///start value of the tic marks
-    qreal ticStart;
+    qreal ticStart = 0;
 
     /// this is set to -1 by default
     /**
         a value > 0 will override the dynamic value in getScaleWidth();
      */
-    qint32 scaleWidth;
+    qint32 scaleWidth = 0;
 
     ///the ticmark generation type
-    tictype_e ticType;
+    tictype_e ticType = eTicNorm;
     ///local copy of the last ticmark object
     tic_t tic;
 
     /// used by ticmark()
-    bool firstTic;
+    bool firstTic = false;
     /// used by ticmark()
-    bool lastTic;
+    bool lastTic = false;
 
     ///points of dimension
-    quint32 points;
+    quint32 points = 0;
 };
 
 #endif //CPLOTAXIS_H

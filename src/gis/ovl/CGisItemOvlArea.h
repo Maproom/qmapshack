@@ -124,29 +124,23 @@ public:
 
     struct pt_t : public wpt_t
     {
-        pt_t()
-        {
-        }
     };
 
     struct area_t
     {
-        area_t() : number(0), width(5), style(Qt::BDiagPattern), opacity(false)
-        {
-        }
         // -- all gpx tags - start
         QString name;
         QString cmt;
         QString desc;
         QString src;
         QList<link_t> links;
-        quint64 number;
+        quint64 number = 0;
         QString type;
         QVector<pt_t> pts;
         QString color;
-        qint32 width;
-        qint32 style;
-        bool opacity;
+        qint32 width = 5;
+        qint32 style = Qt::BDiagPattern;
+        bool opacity = false;
 
         // secondary data;
         qreal area;
@@ -170,8 +164,8 @@ private:
 
     static key_t keyUserFocus;
 
-    QPen penForeground;
-    QPen penBackground;
+    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penBackground {Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
     /// the track line color
     QColor color;

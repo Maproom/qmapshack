@@ -40,7 +40,7 @@ private slots:
 private:
     CGisItemRte& rte;
 
-    bool originator;
+    bool originator = false;
 };
 
 #endif //CDETAILSRTE_H

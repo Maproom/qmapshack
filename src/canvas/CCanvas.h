@@ -23,6 +23,7 @@
 #include <QPainter>
 #include <QPointer>
 #include <QWidget>
+#include <proj_api.h>
 
 #include "gis/IGisItem.h"
 
@@ -186,7 +187,7 @@ private:
     /// the grid attached to this canvas
     CGrid * grid;
     /// the current point of focus (usually the canvas center)
-    QPointF posFocus;
+    QPointF posFocus {12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD};
 
     /// the current mouse handler
     IMouse * mouse;

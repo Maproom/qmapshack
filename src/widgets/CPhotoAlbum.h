@@ -53,8 +53,8 @@ private:
     QList<CGisItemWpt::image_t> images;
     QList<QRect> rects;
 
-    qint32 idx1stVisible;
-    qint32 idxSelected;
+    qint32 idx1stVisible = 0;
+    qint32 idxSelected = 0;
 };
 
 #endif //CPHOTOALBUM_H

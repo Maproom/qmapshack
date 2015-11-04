@@ -30,23 +30,21 @@ struct SGisLine;
 class IGisLine
 {
 public:
-    IGisLine();
-    virtual ~IGisLine();
+    IGisLine() = default;
+    virtual ~IGisLine() = default;
 
     struct subpt_t
     {
-        subpt_t();
+        subpt_t() = default;
         subpt_t(const QPointF& pt);
         QPointF coord;
         QPointF pixel;
-        qint32 ele;
+        qint32 ele = NOINT;
     };
 
     struct point_t : public subpt_t
     {
-        point_t()
-        {
-        }
+        point_t() = default;
         point_t(const QPointF &pt);
         void resetElevation();
         QVector<subpt_t> subpts;

@@ -463,7 +463,7 @@ protected:
 
 
 
-    quint32 flags;
+    quint32 flags = 0;
     key_t key;
     QPixmap icon;
     QRectF boundingRect;

@@ -26,9 +26,6 @@
 
 CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, QTreeWidget *parent)
     : IDevice(path, key, parent)
-    , pathGpx("Garmin/GPX")
-    , pathPictures("Garmin/JPEG")
-    , pathSpoilers("Garmin/GeocachePhotos")
     , cntImages(0)
 {
     setText(CGisListWks::eColumnName, "Garmin");

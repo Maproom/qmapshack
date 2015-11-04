@@ -60,7 +60,6 @@ private:
 
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
-    , isInternalEdit(0)
 {
     SETTINGS;
     QStringList names = cfg.value("Database/names").toStringList();

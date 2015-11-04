@@ -45,19 +45,19 @@ protected:
     void draw(QPainter& p);
     void draw();
 
-    projPJ pjsrc;
-    projPJ pjtar;
+    projPJ pjsrc = 0;
+    projPJ pjtar = 0;
 
-    bool needsRedraw;
-    CGisItemTrk * trk;
+    bool needsRedraw =true;
+    CGisItemTrk * trk = 0;
     QPolygonF coords;
     QPolygonF line;
 
     QImage buffer;
 
     QPointF scale;
-    qint32 xoff;
-    qint32 yoff;
+    qint32 xoff = 0;
+    qint32 yoff = 0;
 };
 
 #endif //ITRACK_H

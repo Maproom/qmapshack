@@ -137,7 +137,6 @@ inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility|eFeatVectorItems,parent)
     , filename(filename)
-    , transparent(false)
     , fm(CMainWindow::self().getMapFont())
     , selectedLanguage(NOIDX)
 {

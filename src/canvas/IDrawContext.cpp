@@ -103,14 +103,6 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
     : QThread(parent)
     , canvas(parent)
     , maskRedraw(maskRedraw)
-    , bufIndex(false)
-    , bufWidth(100)
-    , bufHeight(100)
-    , viewWidth(100)
-    , viewHeight(100)
-    , scale(1.0,-1.0)
-    , zoomIndex(0)
-
 {
     setObjectName(name);
     // setup map parameters and connect to canvas

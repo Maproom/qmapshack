@@ -55,7 +55,7 @@ private:
 
     QTimer * timer;
 
-    QImage dummy;
+    QImage dummy {256,256, QImage::Format_ARGB32};
 };
 
 #endif //CDISKCACHE_H

@@ -117,7 +117,7 @@ private:
     QQueue<QString> urlQueue;
     /// the tile cache
     IDiskCache * diskCache = 0;
-    /// access mangager to request tiles
+    /// access manager to request tiles
     QNetworkAccessManager * accessManager;
 
     QList<QString> urlPending;

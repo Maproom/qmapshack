@@ -272,9 +272,9 @@ public:
     float getExtremum(bool getMaximum);
 
     /**
-       @brief Get the indeces of visible points for a selected range
+       @brief Get the indices of visible points for a selected range
 
-       If no range is selected both indeces will be NOIDX.
+       If no range is selected both indices will be NOIDX.
 
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
@@ -306,7 +306,7 @@ public:
     /**
        @brief isCloseTo
        @param pos Screen position as pixel coordinate
-       @return True if point is considered clse enough
+       @return True if point is considered close enough
      */
     bool isCloseTo(const QPointF& pos);
 
@@ -425,7 +425,7 @@ public:
     }
 
     /**
-       @brief Each plot widget that operates on the track must register during it's contruction
+       @brief Each plot widget that operates on the track must register during it's construction
 
        see registeredPlots for a detailed discussion
 
@@ -543,7 +543,7 @@ public:
        trkpt_t::keyWpt.
 
        @param progress  a progress dialog as this operation can take quite some time
-       @param current   the current progress if the operaton is done for several tracks
+       @param current   the current progress if the operation is done for several tracks
     */
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
@@ -629,8 +629,8 @@ private:
        @brief Overide IGisItem::changed() method
 
        As the CDetailsTrk is no modal dialog that blocks the GUI from any other input the track
-       can be changed while the widget is visible. Therfore it needs some feedback to update the
-       CDetailsTrk widget. Usualy this would be a signal. However CGisItemTrk is a QTreeWidgetItem
+       can be changed while the widget is visible. Therefore it needs some feedback to update the
+       CDetailsTrk widget. Usually this would be a signal. However CGisItemTrk is a QTreeWidgetItem
        and therefor no QObject. Fortunately there the dlgDetails pointer. So CDetailsTrk::setupGui()
        can be called from changed()
 
@@ -788,7 +788,7 @@ private:
     QColor color;
     /// the pen with the actual track color
     QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
-    /// the trakpoint bullet icon
+    /// the trackpoint bullet icon
     QPixmap bullet;
     /// the current track line as screen pixel coordinates
     QPolygonF lineSimple;

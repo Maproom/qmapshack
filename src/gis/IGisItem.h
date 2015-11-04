@@ -373,7 +373,7 @@ public:
     }
 
     /**
-       @brief Load a given state of chnage from the history
+       @brief Load a given state of change from the history
        @param idx
      */
     void loadHistory(int idx);
@@ -449,7 +449,7 @@ protected:
     void updateHistory();
     /// convert a color string from GPX to a QT color
     QColor str2color(const QString& name);
-    /// convertr a QT color to a string to be used in a GPX file
+    /// convert a QT color to a string to be used in a GPX file
     QString color2str(const QColor &color);
     /// to optimize drawing of large polylines split the line into sections that are visible
     void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);

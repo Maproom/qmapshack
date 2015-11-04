@@ -69,7 +69,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     if(!ServiceType.contains("WMTS", Qt::CaseInsensitive) || ServiceTypeVersion != "1.0.0")
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unexpexted service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unexpected service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -291,7 +291,7 @@ void CMapWMTS::saveConfig(QSettings& cfg)
         return;
     }
 
-    // save indices of enbaled layers
+    // save indices of enabled layers
     QStringList enabled;
     for(int i = 0; i< layers.size(); i++)
     {

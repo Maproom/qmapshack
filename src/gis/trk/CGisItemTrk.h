@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/INotifiable.h"
 
 #include <functional>
 #include <QPen>
@@ -748,6 +749,9 @@ public:
 
     std::array<bool, 4> getExistingKnownColorizeSources();
 
+    void registerNotification(INotifiable *obj);
+    void unregisterNotification(INotifiable *obj);
+
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;
@@ -820,6 +824,9 @@ private:
               easily communicate with each other.
      */
     QSet<IPlot*> registeredPlots;
+
+    QSet<INotifiable*> notifyOnChange;
+    void notifyChange();
 
     /**
         \defgroup FocusRange Variables to handle mouse focus and range selection

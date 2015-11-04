@@ -171,6 +171,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     key.project = project->getKey();
     key.device  = project->getDeviceKey();
     registeredPlots.clear();
+    notifyOnChange.clear();
 
     if(clone)
     {
@@ -269,6 +270,7 @@ CGisItemTrk::~CGisItemTrk()
         a copy of the list before we start to delete.
      */
     qDeleteAll(registeredPlots.toList());
+    qDeleteAll(notifyOnChange.toList());
 
     delete dlgDetails;
 }
@@ -276,6 +278,7 @@ CGisItemTrk::~CGisItemTrk()
 void CGisItemTrk::setSymbol()
 {
     setColor(str2color(trk.color));
+    notifyChange();
 }
 
 
@@ -370,6 +373,7 @@ void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
     }
 
     deriveSecondaryData();
+    notifyChange();
 }
 
 void CGisItemTrk::registerPlot(IPlot * plot)
@@ -380,6 +384,24 @@ void CGisItemTrk::registerPlot(IPlot * plot)
 void CGisItemTrk::unregisterPlot(IPlot * plot)
 {
     registeredPlots.remove(plot);
+}
+
+void CGisItemTrk::registerNotification(INotifiable *obj)
+{
+    notifyOnChange << obj;
+}
+
+void CGisItemTrk::unregisterNotification(INotifiable *obj)
+{
+    notifyOnChange.remove(obj);
+}
+
+void CGisItemTrk::notifyChange()
+{
+    foreach(INotifiable *obj, notifyOnChange)
+    {
+        obj->notify();
+    }
 }
 
 QString CGisItemTrk::getInfo(bool allowEdit) const
@@ -1911,6 +1933,7 @@ void CGisItemTrk::setColor(int idx)
     }
     setColor(lineColors[idx]);
     changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+    notifyChange();
 }
 
 void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& icon)
@@ -1928,6 +1951,7 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
 
     deriveSecondaryData();
     changed(QObject::tr("Changed activity to '%1' for complete track.").arg(name), icon);
+    notifyChange();
 }
 
 void CGisItemTrk::setActivity()
@@ -2002,6 +2026,7 @@ void CGisItemTrk::setActivity()
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
     changed(QObject::tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
+    notifyChange();
 }
 
 
@@ -2029,6 +2054,7 @@ void CGisItemTrk::setColor(const QColor& c)
     }
 
     setIcon(color.name());
+    notifyChange();
 }
 
 
@@ -2327,17 +2353,20 @@ void CGisItemTrk::setColorizeSource(int idx)
         limitLow  = colorizeSource[slopeSource].defLimitLow;
         limitHigh = colorizeSource[slopeSource].defLimitHigh;
         changed(QObject::tr("Changed slope source"), "://icons/48x48/SelectColor.png");
+        notifyChange();
     }
 }
 
 void CGisItemTrk::setColorizeLimitLow(float limit)
 {
     limitLow = limit;
+    notifyChange();
 }
 
 void CGisItemTrk::setColorizeLimitHigh(float limit)
 {
     limitHigh = limit;
+    notifyChange();
 }
 
 void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode)

@@ -34,6 +34,7 @@ class CGisItemWpt;
 class CGisItemTrk;
 class CGisItemRte;
 class CGisItemOvlArea;
+class CColorLegend;
 class QSettings;
 class QPointF;
 class IMouse;
@@ -180,7 +181,7 @@ private:
     CMapDraw * map;
     /// the elevation data layer attached to this canvas
     CDemDraw * dem;
-    /// the GIS data layer attached to this convas
+    /// the GIS data layer attached to this canvas
     CGisDraw * gis;
     /// the grid attached to this canvas
     CGrid * grid;
@@ -203,9 +204,11 @@ private:
     QMovie * loadIndicator2;
     QLabel * demLoadIndicator;
 
+    QPointer<CColorLegend> colorLegend;
+
     /// timer to poll for track gaining/loosing focus
     QTimer * timerTrackOnFocus;
-    /// the key of the currentl focused track
+    /// the key of the currently focused track
     IGisItem::key_t keyTrackOnFocus;
     /// the track profile plot
     QPointer<IPlot>  plotTrackProfile;

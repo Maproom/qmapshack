@@ -16,46 +16,15 @@
 
 **********************************************************************************************/
 
-#ifndef CCOLORLEGEND_H
-#define CCOLORLEGEND_H
+#ifndef INOTIFIABLE_H
+#define INOTIFIABLE_H
 
-#include <QWidget>
-#include "gis/trk/CGisItemTrk.h"
-#include "helpers/INotifiable.h"
-
-class CColorLegend : public QWidget, public INotifiable
+class INotifiable
 {
-    Q_OBJECT
 public:
-    CColorLegend(QWidget *parent);
-    CColorLegend(QWidget *parent, CGisItemTrk *trk);
-    ~CColorLegend();
+    virtual void notify() = 0;
 
-    void setMinimum(qreal min);
-    void setMaximum(qreal max);
-
-    void setUnit(const QString &unit);
-
-    void notify();
-
-protected:
-    void paintEvent(QPaintEvent *event);
-    void resizeEvent(QResizeEvent *event);
-
-private:
-    int paintLabel(QPainter &p, qreal value);
-
-    const int colorWidth  =  10;
-    const int colorHeight = 256;
-
-    QRect colorRect;
-    QString unit;
-    qreal minimum;
-    qreal maximum;
-    bool  background = false;
-    int   xOffset    = 0;
-    CGisItemTrk *trk = nullptr;
 };
 
-#endif // CCOLORLEGEND_H
+#endif // INOTIFIABLE_H
 

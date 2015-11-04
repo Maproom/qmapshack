@@ -24,11 +24,46 @@ CColorLegend::CColorLegend(QWidget *parent)
     : QWidget(parent)
 {
     colorRect = QRect(0, 0, colorWidth, colorHeight);
-    colorRect.moveCenter(QPoint(colorWidth / 2, height() / 2));
+    colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
+}
+
+CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
+    : QWidget(parent), trk(trk)
+{
+    background = true;
+    xOffset = 5;
+
+    colorRect = QRect(0, 0, colorWidth, colorHeight);
+    colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
+
+    trk->registerNotification(this);
+
+    // read data from trk
+    notify();
 }
 
 CColorLegend::~CColorLegend()
 {
+    if(trk)
+    {
+        trk->unregisterNotification(this);
+    }
+}
+
+void CColorLegend::notify()
+{
+    int colorizeSource = trk->getColorizeSource();
+    if(0 <= colorizeSource)
+    {
+        unit    = CGisItemTrk::colorizeSource[colorizeSource].unit;
+        minimum = trk->getColorizeLimitLow();
+        maximum = trk->getColorizeLimitHigh();
+
+        update();
+        show();
+    } else {
+        hide();
+    }
 }
 
 void CColorLegend::setMinimum(qreal min)
@@ -46,34 +81,45 @@ void CColorLegend::setMaximum(qreal max)
 void CColorLegend::setUnit(const QString &unit)
 {
     this->unit = unit;
+    update();
 }
 
-void CColorLegend::paintLabel(QPainter &p, qreal value)
+int CColorLegend::paintLabel(QPainter &p, qreal value)
 {
     const int fontHeight = QFontMetrics(p.font()).ascent() + 1;
     const int posY = colorRect.bottom() + fontHeight / 2 - colorHeight * (value - minimum) / (maximum - minimum);
 
-    if(value == minimum || value == maximum || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
+    int posX = 0;
+
+    if(value == minimum || value == maximum
+     || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
     {
-        p.drawText(colorWidth + 3, posY, QString("%1%2").arg(value).arg(unit));
+        QPen pen(p.pen());
+        pen.setWidth(3);
+        pen.setColor(Qt::black);
+        p.setPen(pen);
+        p.drawText(xOffset + colorWidth + 3, posY, QString("%1%2").arg(value).arg(unit));
+        posX = xOffset + colorWidth + 3 + QFontMetrics(p.font()).width(QString("%1%2").arg(value).arg(unit));
     }
 
     QPen pen(p.pen());
     pen.setWidth(3);
     pen.setColor(Qt::white);
     p.setPen(pen);
-    p.drawLine(colorWidth / 2 + 1, posY - fontHeight / 2, colorWidth + 1, posY - fontHeight / 2);
+    p.drawLine(xOffset + colorWidth / 2 + 1, posY - fontHeight / 2, xOffset + colorWidth + 1, posY - fontHeight / 2);
 
     pen.setColor(Qt::black);
     pen.setWidth(1);
     p.setPen(pen);
-    p.drawLine(colorWidth / 2, posY - fontHeight / 2, colorWidth + 1, posY - fontHeight / 2);
+    p.drawLine(xOffset + colorWidth / 2, posY - fontHeight / 2, xOffset + colorWidth + 1, posY - fontHeight / 2);
+
+    return posX;
 }
 
 void CColorLegend::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
-    colorRect.moveCenter(QPoint(colorWidth / 2, height() / 2));
+    colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
 }
 
 void CColorLegend::paintEvent(QPaintEvent *event)
@@ -81,6 +127,22 @@ void CColorLegend::paintEvent(QPaintEvent *event)
     if(isEnabled())
     {
         QPainter p(this);
+
+        if(background)
+        {
+            p.setRenderHint(QPainter::Antialiasing);
+            p.setOpacity(0.6);
+
+            QPen pen(p.pen());
+            pen.setWidth(2);
+            pen.setColor(Qt::darkGray);
+            p.setPen(pen);
+            p.setBrush(Qt::white);
+            p.drawRoundedRect(1, 1, width() - 2, height() - 2, 5.f, 5.f);
+
+            p.setOpacity(1.f);
+            p.setRenderHint(QPainter::Antialiasing, false);
+        }
 
         QLinearGradient grad(colorRect.topLeft(), colorRect.bottomLeft());
         grad.setColorAt(1.00, QColor(  0,   0, 255)); // blue
@@ -90,13 +152,21 @@ void CColorLegend::paintEvent(QPaintEvent *event)
     
         p.fillRect(colorRect, grad);
     
-        paintLabel(p, minimum);
-        paintLabel(p, maximum);
+        int reqWidth = 0;
+        reqWidth = std::max(paintLabel(p, minimum), reqWidth);
+        reqWidth = std::max(paintLabel(p, maximum), reqWidth);
     
         if(minimum < 0.f && maximum > 0.f)
         {
-            paintLabel(p, 0.f);
+            qDebug() << paintLabel(p, 0.f);
+            reqWidth = std::max(paintLabel(p, 0.f), reqWidth);
         }
+
+        if(reqWidth + 5 != width())
+        {
+            resize(reqWidth + 5, height());
+        }
+
         p.end();
     }
 }

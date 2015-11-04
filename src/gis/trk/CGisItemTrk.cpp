@@ -1604,16 +1604,16 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[4]
 {
-    {"Slope (directed)", -10.f, 10.f, -90.f, 90.f, "°", "://icons/32x32/Slope.png",
+    {"Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/Slope.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; } },
 
-    {"Speed", 1.f, 14.f, 0.f, 100.f, "m/s", "://icons/32x32/Speed.png",
+    {"Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/Speed.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.speed; } },
 
-    {"Elevation", 200.f, 800.f, 0.f, 5000.f, "m", "://icons/32x32/Elevation.png",
+    {"Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/Elevation.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.ele; } },
 
-    {"Heart Rate", 100.f, 200.f, 0.f, 300.f, "bpm", "://icons/32x32/Heart.png",
+    {"Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/Heart.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } }
 };
 
@@ -2357,15 +2357,17 @@ void CGisItemTrk::setColorizeSource(int idx)
     }
 }
 
-void CGisItemTrk::setColorizeLimitLow(float limit)
+void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
     limitLow = limit;
+    changed(QObject::tr("Changed limit low"), "://icons/48x48/SelectColor.png");
     notifyChange();
 }
 
-void CGisItemTrk::setColorizeLimitHigh(float limit)
+void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
     limitHigh = limit;
+    changed(QObject::tr("Changed limit high"), "://icons/48x48/SelectColor.png");
     notifyChange();
 }
 

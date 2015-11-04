@@ -26,7 +26,7 @@
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(1)
+#define VER_TRK         quint8(2)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(2)
 #define VER_AREA        quint8(1)
@@ -462,6 +462,12 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
     out << trk.number;
     out << trk.type;
     out << trk.color;
+
+    qDebug() << trk.name << " saving: " << slopeSource << limitLow << limitHigh;
+    out << slopeSource;
+    out << limitLow;
+    out << limitHigh;
+
     out << trk.segs;
 
     stream.writeRawData(MAGIC_TRK, MAGIC_SIZE);
@@ -504,6 +510,14 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.number;
     in >> trk.type;
     in >> trk.color;
+
+    if(version >= 2)
+    {
+        in >> slopeSource;
+        in >> limitLow;
+        in >> limitHigh;
+        qDebug() << trk.name << " got: " << slopeSource << limitLow << limitHigh;
+    }
 
     trk.segs.clear();
     in >> trk.segs;

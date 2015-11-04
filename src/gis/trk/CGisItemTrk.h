@@ -53,10 +53,10 @@ public:
     struct ColorizeSource
     {
         const char  *name;
-        const float  defLimitLow;
-        const float  defLimitHigh;
-        const float  minimum;
-        const float  maximum;
+        const qreal  defLimitLow;
+        const qreal  defLimitHigh;
+        const qreal  minimum;
+        const qreal  maximum;
         const char  *unit;
         const char  *icon;
         const std::function<float(const trkpt_t&, const trkpt_t&)> selector;
@@ -257,14 +257,14 @@ public:
         return slopeSource;
     }
 
-    void setColorizeLimitLow(float limit);
-    float getColorizeLimitLow()
+    void setColorizeLimitLow(qreal limit);
+    qreal getColorizeLimitLow()
     {
         return limitLow;
     }
 
-    void setColorizeLimitHigh(float limit);
-    float getColorizeLimitHigh()
+    void setColorizeLimitHigh(qreal limit);
+    qreal getColorizeLimitHigh()
     {
         return limitHigh;
     }
@@ -799,8 +799,8 @@ private:
     int slopeSource = -1; //< The index of the source to be used for (slope-)coloring tracks
 
     // the low and high limit for (slope-)colored drawing of tracks
-    float limitLow  = -10.f;
-    float limitHigh =  10.f;
+    qreal limitLow  = -10;
+    qreal limitHigh =  10;
 
     /**@}*/
 

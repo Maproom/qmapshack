@@ -189,7 +189,7 @@ void IGisItem::genKey()
 void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT data FROM items WHERE id=:id");
+    query.prepare("SELECT data, key FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     if(query.next())
@@ -200,6 +200,25 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
         in.setVersion(QDataStream::Qt_5_2);
         in >> history;
         loadHistory(history.histIdxCurrent);
+
+        if(key.item.isEmpty())
+        {
+            QString keyFromDB = query.value(1).toString();
+            /*[Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
+
+              The root cause is a missing key in the serialized data. This is fixed by calling getKey() in setupHistory().
+
+              As the database has a valid key the complete history data has to be fixed with that key.
+            */
+            const int N = history.events.size();
+            for(int i = 0; i < N; i++)
+            {
+                loadHistory(i);
+                key.item = keyFromDB;
+                updateHistory();
+            }
+        }
+
     }
 }
 
@@ -315,6 +334,7 @@ void IGisItem::updateHistory()
 
 void IGisItem::setupHistory()
 {
+    getKey();
     history.histIdxInitial = NOIDX;
     history.histIdxCurrent = NOIDX;
 

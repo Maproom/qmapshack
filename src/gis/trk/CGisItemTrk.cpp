@@ -42,64 +42,6 @@
 #define WPT_FOCUS_DIST_IN   (50*50)
 #define WPT_FOCUS_DIST_OUT  (200*200)
 
-const QColor CGisItemTrk::lineColors[TRK_N_COLORS] =
-{
-    Qt::black                     // 0
-    ,Qt::darkRed                 // 1
-    ,Qt::darkGreen               // 2
-    ,Qt::darkYellow              // 3
-    ,Qt::darkBlue                // 4
-    ,Qt::darkMagenta             // 5
-    ,Qt::darkCyan                // 6
-    ,Qt::lightGray               // 7
-    ,Qt::darkGray                // 8
-    ,Qt::red                     // 9
-    ,Qt::green                   // 10
-    ,Qt::yellow                  // 11
-    ,Qt::blue                    // 12
-    ,Qt::magenta                 // 13
-    ,Qt::cyan                    // 14
-    ,Qt::white                   // 15
-    ,Qt::transparent             // 16
-};
-
-const QString CGisItemTrk::bulletColors[TRK_N_COLORS] =
-{
-    // 0
-    QString("://icons/8x8/bullet_black.png")
-    // 1
-    ,QString("://icons/8x8/bullet_dark_red.png")
-    // 2
-    ,QString("://icons/8x8/bullet_dark_green.png")
-    // 3
-    ,QString("://icons/8x8/bullet_dark_yellow.png")
-    // 4
-    ,QString("://icons/8x8/bullet_dark_blue.png")
-    // 5
-    ,QString("://icons/8x8/bullet_dark_magenta.png")
-    // 6
-    ,QString("://icons/8x8/bullet_dark_cyan.png")
-    // 7
-    ,QString("://icons/8x8/bullet_gray.png")
-    // 8
-    ,QString("://icons/8x8/bullet_dark_gray.png")
-    // 9
-    ,QString("://icons/8x8/bullet_red.png")
-    // 10
-    ,QString("://icons/8x8/bullet_green.png")
-    // 11
-    ,QString("://icons/8x8/bullet_yellow.png")
-    // 12
-    ,QString("://icons/8x8/bullet_blue.png")
-    // 13
-    ,QString("://icons/8x8/bullet_magenta.png")
-    // 14
-    ,QString("://icons/8x8/bullet_cyan.png")
-    // 15
-    ,QString("://icons/8x8/bullet_white.png")
-    ,QString("")                 // 16
-};
-
 struct trkwpt_t
 {
     trkwpt_t() : x(0), y(0)
@@ -117,7 +59,6 @@ struct activity_t
     QString name;
     QString icon;
 };
-
 
 const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
@@ -192,7 +133,6 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     {
         flags &= ~eFlagWriteAllowed;
     }
-
 
     deriveSecondaryData();
     setupHistory();
@@ -1880,7 +1820,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         anchor *= DEG_TO_RAD;
         gis->convertRad2Px(anchor);
 
-        p.drawPixmap(anchor - QPointF(4,4), QPixmap(bulletColors[colorIdx]));
+        p.drawPixmap(anchor - QPointF(4,4), QPixmap(IGisItem::colorMap[colorIdx].bullet));
     }
 
     drawRange(p);
@@ -1981,14 +1921,12 @@ void CGisItemTrk::setLinks(const QList<link_t>& links)
 
 void CGisItemTrk::setColor(int idx)
 {
-    int N = sizeof(lineColors)/sizeof(QColor);
-    if(idx >= N)
+    if(idx < TRK_N_COLORS)
     {
-        return;
+        setColor(IGisItem::colorMap[idx].color);
+        changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+        notifyChange();
     }
-    setColor(lineColors[idx]);
-    changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
-    notifyChange();
 }
 
 void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& icon)
@@ -2087,31 +2025,22 @@ void CGisItemTrk::setActivity()
 
 void CGisItemTrk::setColor(const QColor& c)
 {
-    int n;
-    int N = sizeof(lineColors)/sizeof(QColor);
-
-    for(n = 0; n < N; n++)
+    colorIdx = DEFAULT_COLOR;
+    for(int n = 0; n < TRK_N_COLORS; n++)
     {
-        if(lineColors[n] == c)
+        if(c == IGisItem::colorMap[n].color)
         {
-            colorIdx    = n;
-            color       = lineColors[n];
-            bullet      = QPixmap(bulletColors[n]);
+            colorIdx = n;
             break;
         }
     }
 
-    if(n == N)
-    {
-        colorIdx    = DEFAULT_COLOR;
-        color       = lineColors[DEFAULT_COLOR];
-        bullet      = QPixmap(bulletColors[DEFAULT_COLOR]);
-    }
+    color  = IGisItem::colorMap[colorIdx].color;
+    bullet = QPixmap(IGisItem::colorMap[colorIdx].bullet);
 
-    setIcon(color.name());
+    setIcon(color2str(color));
     notifyChange();
 }
-
 
 void CGisItemTrk::setIcon(const QString& iconColor)
 {

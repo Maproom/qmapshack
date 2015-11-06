@@ -43,24 +43,23 @@ const QString IGisItem::noName = QObject::tr("[no name]");
 
 const IGisItem::color_t IGisItem::colorMap[] =
 {
-    {"Black",       QColor(Qt::black)}
-    ,{"DarkRed",     QColor(Qt::darkRed)}
-    ,{"DarkGreen",   QColor(Qt::darkGreen)}
-    ,{"DarkYellow",  QColor(Qt::darkYellow)}
-    ,{"DarkBlue",    QColor(Qt::darkBlue)}
-    ,{"DarkMagenta", QColor(Qt::darkMagenta)}
-    ,{"DarkCyan",    QColor(Qt::darkCyan)}
-    ,{"LightGray",   QColor(Qt::lightGray)}
-    ,{"DarkGray",    QColor(Qt::darkGray)}
-    ,{"Red",         QColor(Qt::red)}
-    ,{"Green",       QColor(Qt::green)}
-    ,{"Yellow",      QColor(Qt::yellow)}
-    ,{"Blue",        QColor(Qt::blue)}
-    ,{"Magenta",     QColor(Qt::magenta)}
-    ,{"Cyan",        QColor(Qt::cyan)}
-    ,{"White",       QColor(Qt::white)}
-    ,{"Transparent", QColor(Qt::transparent)}
-    ,{0, QColor()}
+    {"Black",        QColor(Qt::black),       QString("://icons/8x8/bullet_black.png")}
+    ,{"DarkRed",     QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png")}
+    ,{"DarkGreen",   QColor(Qt::darkGreen),   QString("://icons/8x8/bullet_dark_green.png")}
+    ,{"DarkYellow",  QColor(Qt::darkYellow),  QString("://icons/8x8/bullet_dark_yellow.png")}
+    ,{"DarkBlue",    QColor(Qt::darkBlue),    QString("://icons/8x8/bullet_dark_blue.png")}
+    ,{"DarkMagenta", QColor(Qt::darkMagenta), QString("://icons/8x8/bullet_dark_magenta.png")}
+    ,{"DarkCyan",    QColor(Qt::darkCyan),    QString("://icons/8x8/bullet_dark_cyan.png")}
+    ,{"LightGray",   QColor(Qt::lightGray),   QString("://icons/8x8/bullet_gray.png")}
+    ,{"DarkGray",    QColor(Qt::darkGray),    QString("://icons/8x8/bullet_dark_gray.png")}
+    ,{"Red",         QColor(Qt::red),         QString("://icons/8x8/bullet_red.png")}
+    ,{"Green",       QColor(Qt::green),       QString("://icons/8x8/bullet_green.png")}
+    ,{"Yellow",      QColor(Qt::yellow),      QString("://icons/8x8/bullet_yellow.png")}
+    ,{"Blue",        QColor(Qt::blue),        QString("://icons/8x8/bullet_blue.png")}
+    ,{"Magenta",     QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png")}
+    ,{"Cyan",        QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png")}
+    ,{"White",       QColor(Qt::white),       QString("://icons/8x8/bullet_white.png")}
+    ,{"Transparent", QColor(Qt::transparent), QString("")}
 };
 
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
@@ -477,14 +476,12 @@ const QString& IGisItem::getHash()
 
 QColor IGisItem::str2color(const QString& name)
 {
-    const color_t * p = colorMap;
-    while(p->name)
+    for(size_t i = 0; i < sizeof(colorMap) / sizeof(color_t); i++)
     {
-        if(QString(p->name).toUpper() == name.toUpper())
+        if(QString(colorMap[i].name).toUpper() == name.toUpper())
         {
-            return p->color;
+            return colorMap[i].color;
         }
-        p++;
     }
 
     return QColor(name);
@@ -492,14 +489,12 @@ QColor IGisItem::str2color(const QString& name)
 
 QString IGisItem::color2str(const QColor& color)
 {
-    const color_t * p = colorMap;
-    while(p->name)
+    for(size_t i = 0; i < sizeof(colorMap) / sizeof(color_t); i++)
     {
-        if(p->color == color)
+        if(colorMap[i].color == color)
         {
-            return p->name;
+            return colorMap[i].name;
         }
-        p++;
     }
 
     return "";

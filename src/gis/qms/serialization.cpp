@@ -524,7 +524,7 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.segs;
 
     deriveSecondaryData();
-    setColor(trk.color);
+    setColor(str2color(trk.color));
     setText(CGisListWks::eColumnName, trk.name);
     setToolTip(CGisListWks::eColumnName, getInfo());
 
@@ -718,6 +718,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     area.opacity = tmp8;
 
     deriveSecondaryData();
+
     setColor(str2color(area.color));
     setText(CGisListWks::eColumnName, area.name);
     setToolTip(CGisListWks::eColumnName, getInfo());

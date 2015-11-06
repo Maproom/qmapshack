@@ -583,11 +583,6 @@ public:
     */
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
-    /// available track line colors
-    static const QColor lineColors[TRK_N_COLORS];
-    /// available bullet colors
-    static const QString bulletColors[TRK_N_COLORS];
-
 private:
     void setSymbol();
     /**

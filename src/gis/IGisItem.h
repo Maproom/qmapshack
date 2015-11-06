@@ -432,9 +432,16 @@ public:
 
     const static QString noName;
 
-protected:
-    struct color_t;
+    struct color_t
+    {
+        const char   *name;
+        const QColor  color;
+        const QString bullet;
+    };
 
+    static const color_t colorMap[];
+
+protected:
     /// set icon of QTreeWidgetItem
     virtual void setSymbol() = 0;
     /// read waypoint data from an XML snippet
@@ -461,23 +468,12 @@ protected:
     bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
 
-
-
     quint32 flags = 0;
     key_t key;
     QPixmap icon;
     QRectF boundingRect;
 
     history_t history;
-
-
-    static const color_t colorMap[];
-
-    struct color_t
-    {
-        const char * name;
-        QColor color;
-    };
 
     enum flags_e
     {

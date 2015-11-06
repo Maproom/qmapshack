@@ -42,10 +42,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     setupUi(this);
 
     QPixmap icon(16,8);
+
     for(int i=0; i < TRK_N_COLORS; ++i)
     {
-        icon.fill(CGisItemTrk::lineColors[i]);
-        comboColor->addItem(icon,"",CGisItemTrk::lineColors[i]);
+        icon.fill(IGisItem::colorMap[i].color);
+        comboColor->addItem(icon, IGisItem::colorMap[i].name, IGisItem::colorMap[i].color);
     }
 
     int i = 0;

@@ -26,85 +26,15 @@
 
 #include <QtXml>
 #include <proj_api.h>
-const QString IGisProject::gpx_ns      = "http://www.topografix.com/GPX/1/1";
-const QString IGisProject::xsi_ns      = "http://www.w3.org/2001/XMLSchema-instance";
-const QString IGisProject::gpxx_ns     = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
-const QString IGisProject::gpxtpx_ns   = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
-const QString IGisProject::wptx1_ns    = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
-const QString IGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
-const QString IGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
-const QString IGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
-static QString unifyColor(const QString& color)
-{
-    if(QColor(color) == Qt::black)
-    {
-        return "Black";
-    }
-    else if(QColor(color) == Qt::darkRed)
-    {
-        return "DarkRed";
-    }
-    else if(QColor(color) == Qt::darkGreen)
-    {
-        return "DarkGreen";
-    }
-    else if(QColor(color) == Qt::darkYellow)
-    {
-        return "DarkYellow";
-    }
-    else if(QColor(color) == Qt::darkBlue)
-    {
-        return "DarkBlue";
-    }
-    else if(QColor(color) == Qt::darkMagenta)
-    {
-        return "DarkMagenta";
-    }
-    else if(QColor(color) == Qt::darkCyan)
-    {
-        return "DarkCyan";
-    }
-    else if(QColor(color) == Qt::lightGray)
-    {
-        return "LightGray";
-    }
-    else if(QColor(color) == Qt::darkGray)
-    {
-        return "DarkGray";
-    }
-    else if(QColor(color) == Qt::red)
-    {
-        return "Red";
-    }
-    else if(QColor(color) == Qt::green)
-    {
-        return "Green";
-    }
-    else if(QColor(color) == Qt::yellow)
-    {
-        return "Yellow";
-    }
-    else if(QColor(color) == Qt::blue)
-    {
-        return "Blue";
-    }
-    else if(QColor(color) == Qt::magenta)
-    {
-        return "Magenta";
-    }
-    else if(QColor(color) == Qt::cyan)
-    {
-        return "Cyan";
-    }
-    else if(QColor(color) == Qt::white)
-    {
-        return "White";
-    }
-
-    return "Blue";
-}
-
+const QString IGisProject::gpx_ns    = "http://www.topografix.com/GPX/1/1";
+const QString IGisProject::xsi_ns    = "http://www.w3.org/2001/XMLSchema-instance";
+const QString IGisProject::gpxx_ns   = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
+const QString IGisProject::gpxtpx_ns = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
+const QString IGisProject::wptx1_ns  = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
+const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
+const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
+const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
 
 static void readXml(const QDomNode& xml, const QString& tag, bool& value)
 {
@@ -869,13 +799,13 @@ void CGisItemTrk::save(QDomNode& gpx)
     QDomElement xmlTrk = doc.createElement("trk");
     gpx.appendChild(xmlTrk);
 
-    writeXml(xmlTrk, "name", trk.name);
-    writeXml(xmlTrk, "cmt", trk.cmt);
-    writeXml(xmlTrk, "desc", trk.desc);
-    writeXml(xmlTrk, "src", trk.src);
-    writeXml(xmlTrk, "link", trk.links);
+    writeXml(xmlTrk, "name",   trk.name);
+    writeXml(xmlTrk, "cmt",    trk.cmt);
+    writeXml(xmlTrk, "desc",   trk.desc);
+    writeXml(xmlTrk, "src",    trk.src);
+    writeXml(xmlTrk, "link",   trk.links);
     writeXml(xmlTrk, "number", trk.number);
-    writeXml(xmlTrk, "type", trk.type);
+    writeXml(xmlTrk, "type",   trk.type);
 
     // write the key as extension tag
     QDomElement xmlExt  = doc.createElement("extensions");
@@ -894,7 +824,7 @@ void CGisItemTrk::save(QDomNode& gpx)
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
     xmlExt.appendChild(gpxx);
-    writeXml(gpxx, "gpxx:DisplayColor", unifyColor(trk.color));
+    writeXml(gpxx, "gpxx:DisplayColor", trk.color);
 
     foreach(const trkseg_t &seg, trk.segs)
     {
@@ -975,22 +905,20 @@ void CGisItemRte::save(QDomNode& gpx)
 
 void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
 {
-    readXml(xml, "ql:name", area.name);
-    readXml(xml, "ql:cmt", area.cmt);
-    readXml(xml, "ql:desc", area.desc);
-    readXml(xml, "ql:src", area.src);
-    readXml(xml, "ql:link", area.links);
-    readXml(xml, "ql:number", area.number);
-    readXml(xml, "ql:type", area.type);
-    readXml(xml, "ql:color", area.color);
-    readXml(xml, "ql:width", area.width);
-    readXml(xml, "ql:style", area.style);
+    readXml(xml, "ql:name",    area.name);
+    readXml(xml, "ql:cmt",     area.cmt);
+    readXml(xml, "ql:desc",    area.desc);
+    readXml(xml, "ql:src",     area.src);
+    readXml(xml, "ql:link",    area.links);
+    readXml(xml, "ql:number",  area.number);
+    readXml(xml, "ql:type",    area.type);
+    readXml(xml, "ql:color",   area.color);
+    readXml(xml, "ql:width",   area.width);
+    readXml(xml, "ql:style",   area.style);
     readXml(xml, "ql:opacity", area.opacity);
-    readXml(xml, "ql:key", key.item);
-    readXml(xml, "ql:flags", flags);
+    readXml(xml, "ql:key",     key.item);
+    readXml(xml, "ql:flags",   flags);
     readXml(xml, history);
-
-
 
     const QDomNodeList& xmlPts = xml.toElement().elementsByTagName("ql:point");
     int M = xmlPts.count();
@@ -1001,7 +929,6 @@ void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
         const QDomNode& xmlPt = xmlPts.item(m);
         readWpt(xmlPt, pt);
     }
-
 
     setColor(str2color(area.color));
 

@@ -173,10 +173,10 @@
         <file>icons/32x32/ActSwim.png</file>
         <file>icons/32x32/ActAero.png</file>
         <file>icons/32x32/Activity.png</file>
-        <file>icons/32x32/Heart.png</file>
-        <file>icons/32x32/Slope.png</file>
-        <file>icons/32x32/Speed.png</file>
-        <file>icons/32x32/Elevation.png</file>
+        <file>icons/32x32/CSrcHR.png</file>
+        <file>icons/32x32/CSrcSlope.png</file>
+        <file>icons/32x32/CSrcSpeed.png</file>
+        <file>icons/32x32/CSrcElevation.png</file>
         <file>icons/32x32/CSrcUnknown.png</file>
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -324,10 +324,10 @@
         <file>icons/48x48/ActSwim.png</file>
         <file>icons/48x48/ActAero.png</file>
         <file>icons/48x48/Activity.png</file>
-        <file>icons/48x48/Heart.png</file>
-        <file>icons/48x48/Slope.png</file>
-        <file>icons/48x48/Speed.png</file>
-        <file>icons/48x48/Elevation.png</file>
+        <file>icons/48x48/CSrcHR.png</file>
+        <file>icons/48x48/CSrcSlope.png</file>
+        <file>icons/48x48/CSrcSpeed.png</file>
+        <file>icons/48x48/CSrcElevation.png</file>
         <file>icons/48x48/CSrcUnknown.png</file>
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>

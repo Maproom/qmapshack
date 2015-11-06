@@ -1544,16 +1544,16 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[TRK_N_COLORIZESOURCES]
 {
-    {"slope", "Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/Slope.png",
+    {"slope", "Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/CSrcSlope.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; } },
 
-    {"speed", "Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/Speed.png",
+    {"speed", "Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/CSrcSpeed.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.speed; } },
 
-    {"ele", "Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/Elevation.png",
+    {"ele", "Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/CSrcElevation.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.ele; } },
 
-    {"gpxtpx:TrackPointExtension|gpxtpx:hr", "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/Heart.png",
+    {"gpxtpx:TrackPointExtension|gpxtpx:hr", "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/CSrcHR.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); } }
 };
 

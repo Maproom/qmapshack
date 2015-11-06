@@ -227,6 +227,28 @@
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="labelTainted">
+              <property name="maximumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../../resources.qrc">:/icons/32x32/Tainted.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QGroupBox" name="groupBox">
               <property name="title">
                <string>Graph Control</string>
@@ -400,31 +422,22 @@ Keep in mind transfering the value based coloring to another application will mo
                 <number>3</number>
                </property>
                <item>
-                <widget class="QLabel" name="labelTainted">
-                 <property name="maximumSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <widget class="QLabel" name="label_4">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
                  </property>
                  <property name="text">
-                  <string/>
-                 </property>
-                 <property name="pixmap">
-                  <pixmap resource="../../resources.qrc">:/icons/32x32/Tainted.png</pixmap>
-                 </property>
-                 <property name="scaledContents">
-                  <bool>true</bool>
+                  <string>Static color: </string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QComboBox" name="comboColor">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>

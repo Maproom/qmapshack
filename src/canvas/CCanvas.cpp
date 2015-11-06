@@ -648,10 +648,7 @@ void CCanvas::slotCheckTrackOnFocus()
 
         colorLegend = new CColorLegend(this, trk2);
         colorLegend->setGeometry(20, 20, 40, 300);
-        if(0 <= trk2->getColorizeSource() && isVisible())
-        {
-            colorLegend->show();
-        }
+
         // finally store the new key as track on focus
         keyTrackOnFocus = key;
     }

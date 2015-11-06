@@ -52,10 +52,9 @@ CColorLegend::~CColorLegend()
 
 void CColorLegend::notify()
 {
-    int colorizeSource = trk->getColorizeSource();
-    if(0 <= colorizeSource)
+    if(!trk->getColorizeSource().isEmpty())
     {
-        unit    = CGisItemTrk::colorizeSource[colorizeSource].unit;
+        unit    = trk->getColorizeUnit();
         minimum = trk->getColorizeLimitLow();
         maximum = trk->getColorizeLimitHigh();
 

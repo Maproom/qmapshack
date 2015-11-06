@@ -102,7 +102,6 @@ static QString unifyColor(const QString& color)
         return "White";
     }
 
-
     return "Blue";
 }
 
@@ -851,7 +850,9 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         setColor(str2color(trk.color));
 
         const QDomNode &extColoring = ext.namedItem("ql:coloring");
-        readXml(extColoring, "ql:source",    slopeSource);
+        QString source;
+        readXml(extColoring, "ql:source",    source);
+        setColorizeSource(source);
         readXml(extColoring, "ql:limitLow",  limitLow);
         readXml(extColoring, "ql:limitHigh", limitHigh);
     }
@@ -886,7 +887,7 @@ void CGisItemTrk::save(QDomNode& gpx)
     // write source for coloring tracks
     QDomElement xmlExtColoring = doc.createElement("ql:coloring");
     xmlExt.appendChild(xmlExtColoring);
-    writeXml(xmlExtColoring, "ql:source",    slopeSource);
+    writeXml(xmlExtColoring, "ql:source",    customSlopeSource);
     writeXml(xmlExtColoring, "ql:limitLow",  limitLow);
     writeXml(xmlExtColoring, "ql:limitHigh", limitHigh);
 

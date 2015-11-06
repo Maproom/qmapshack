@@ -1585,7 +1585,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         CDraw::arrows(l, extViewport, p, 10, 80);
     }
 
-    if(-1 == slopeSource)
+    if(-1 == slopeSource && customSlopeSource.isEmpty())
     {
         // use the track's ordinary color
         penForeground.setColor(color);
@@ -1597,28 +1597,82 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
     else
     {
-        drawColorized(p, colorizeSource[slopeSource].selector);
+        drawColorized(p);
     }
     // -------------------------
 }
 
-const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[4]
+const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[TRK_N_COLORIZESOURCES]
 {
-    {"Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/Slope.png",
+    {"slope", "Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/Slope.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; } },
 
-    {"Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/Speed.png",
+    {"speed", "Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/Speed.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.speed; } },
 
-    {"Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/Elevation.png",
+    {"ele", "Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/Elevation.png",
         [](const trkpt_t &pp, const trkpt_t &p) { return p.ele; } },
 
-    {"Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/Heart.png",
-        [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toInt(); } }
+    {"gpxtpx:TrackPointExtension|gpxtpx:hr", "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/Heart.png",
+        [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); } }
 };
 
-void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor )
+const struct CGisItemTrk::ColorizeSource CGisItemTrk::unknownColorizeSource
+    {"", "", 0., 10., -10000, 10000, "", "://icons/32x32/CSrcUnknown.png", nullptr};
+
+QStringList CGisItemTrk::getExistingUnknownColorizeSources()
 {
+    const trkseg_t &seg = trk.segs[0];
+    const trkpt_t  &pt  = seg.pts[0];
+
+    QStringList list;
+    foreach(const QString &key, pt.extensions.keys())
+    {
+        // only offer numeric, unknown extensions
+        bool isReal = false;
+        (void) pt.extensions.value(key).toReal(&isReal);
+
+        bool isKnown = false;
+        for(size_t i = 0; i < TRK_N_COLORIZESOURCES && !isKnown; i++)
+        {
+            isKnown = (key == colorizeSource[i].intName);
+        }
+
+        if(isReal && !isKnown)
+        {
+            list << key;
+        }
+    }
+
+    qSort(list.begin(), list.end(), [] (const QString &s1, const QString &s2)
+        {
+            return s1.toLower() < s2.toLower();
+        }
+    );
+
+    return list;
+}
+
+CGisItemTrk::colorFunc_t CGisItemTrk::getColorizeFunction()
+{
+    if(-1 == slopeSource)
+    {
+        QString source = customSlopeSource;
+        return [source] (const trkpt_t &pp, const trkpt_t &p)
+        {
+            return p.extensions.value(source).toReal();
+        };
+    }
+    else
+    {
+        return colorizeSource[slopeSource].colorFunc;
+    }
+}
+
+void CGisItemTrk::drawColorized(QPainter &p)
+{
+    auto colorizeFunction = getColorizeFunction();
+
     QImage colors(1, 256, QImage::Format_RGB888);
     QPainter colorsPainter(&colors);
 
@@ -1646,7 +1700,7 @@ void CGisItemTrk::drawColorized(QPainter &p, std::function<float(const trkpt_t&,
                 continue;
             }
 
-            float colorAt = ( intersectColor(*ptPrev, pt) - limitLow ) / (limitHigh - limitLow);
+            float colorAt = ( colorizeFunction(*ptPrev, pt) - limitLow ) / (limitHigh - limitLow);
             if(colorAt > 1.f) colorAt = 1.f;
             if(colorAt < 0.f) colorAt = 0.f;
 
@@ -1677,6 +1731,9 @@ float CGisItemTrk::getExtremum(bool getMaximum)
 {
     float min = std::numeric_limits<float>::max();
     float max = std::numeric_limits<float>::lowest();
+
+    auto colorizeFunction = getColorizeFunction();
+
     foreach(const trkseg_t &segment, trk.segs)
     {
         const trkpt_t *ptPrev = NULL;
@@ -1689,7 +1746,7 @@ float CGisItemTrk::getExtremum(bool getMaximum)
                 continue;
             }
 
-            float value = colorizeSource[slopeSource].selector(*ptPrev, pt);
+            float value = colorizeFunction(*ptPrev, pt);
             if(min > value)
             {
                 min = value;
@@ -1706,15 +1763,13 @@ float CGisItemTrk::getExtremum(bool getMaximum)
     return getMaximum ? max : min;
 }
 
-std::array<bool, 4> CGisItemTrk::getExistingKnownColorizeSources()
+std::array<bool, TRK_N_COLORIZESOURCES> CGisItemTrk::getExistingKnownColorizeSources()
 {
-    qDebug() << "CGisItemTrk::getExistingColorizeSources()";
-
     // even sources with some datapoints missing are assumed as 'existing'
     const trkseg_t &seg = trk.segs[0];
     const trkpt_t  &pt  = seg.pts[0];
 
-    std::array<bool, 4> existing;
+    std::array<bool, TRK_N_COLORIZESOURCES> existing;
     existing[0] = NOFLOAT != pt.slope1;
     existing[1] = NOFLOAT != pt.speed;
     existing[2] = NOINT   != pt.ele;
@@ -2345,14 +2400,25 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     }
 }
 
-void CGisItemTrk::setColorizeSource(int idx)
+void CGisItemTrk::setColorizeSource(QString src)
 {
-    if(idx != slopeSource)
+    if(src != customSlopeSource)
     {
-        slopeSource = idx;
-        limitLow  = colorizeSource[slopeSource].defLimitLow;
-        limitHigh = colorizeSource[slopeSource].defLimitHigh;
-        changed(QObject::tr("Changed slope source"), "://icons/48x48/SelectColor.png");
+        customSlopeSource = src;
+
+        int colorizeIdx = -1;
+        for(size_t i = 0; i < TRK_N_COLORIZESOURCES && -1 == colorizeIdx; i++)
+        {
+            if(src == colorizeSource[i].intName)
+            {
+                colorizeIdx = i;
+            }
+        }
+
+        slopeSource = colorizeIdx;
+        limitLow    = colorizeSource[slopeSource].defLimitLow;
+        limitHigh   = colorizeSource[slopeSource].defLimitHigh;
+        //changed(QObject::tr("Changed slope source"), "://icons/48x48/SelectColor.png");
         notifyChange();
     }
 }
@@ -2360,15 +2426,24 @@ void CGisItemTrk::setColorizeSource(int idx)
 void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
     limitLow = limit;
-    changed(QObject::tr("Changed limit low"), "://icons/48x48/SelectColor.png");
+    changed(QString(QObject::tr("Changed lower colorization limit to %1")).arg(limit), "://icons/48x48/SelectColor.png");
     notifyChange();
 }
 
 void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
     limitHigh = limit;
-    changed(QObject::tr("Changed limit high"), "://icons/48x48/SelectColor.png");
+    changed(QString(QObject::tr("Changed higher colorization limit to %1")).arg(limit), "://icons/48x48/SelectColor.png");
     notifyChange();
+}
+
+const QString CGisItemTrk::getColorizeUnit() const
+{
+    if(-1 == slopeSource)
+    {
+        return "";
+    }
+    return colorizeSource[slopeSource].unit;
 }
 
 void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode)

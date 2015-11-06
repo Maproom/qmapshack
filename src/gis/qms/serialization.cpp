@@ -463,8 +463,7 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
     out << trk.type;
     out << trk.color;
 
-    qDebug() << trk.name << " saving: " << slopeSource << limitLow << limitHigh;
-    out << slopeSource;
+    out << customSlopeSource;
     out << limitLow;
     out << limitHigh;
 
@@ -511,12 +510,14 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.type;
     in >> trk.color;
 
+    // versions >= 2 contain colorized tracks
     if(version >= 2)
     {
-        in >> slopeSource;
+        QString source;
+        in >> source;
+        setColorizeSource(source);
         in >> limitLow;
         in >> limitHigh;
-        qDebug() << trk.name << " got: " << slopeSource << limitLow << limitHigh;
     }
 
     trk.segs.clear();

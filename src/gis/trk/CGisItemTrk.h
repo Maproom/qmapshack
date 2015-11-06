@@ -39,8 +39,10 @@ class IQlgtOverlay;
 class QDir;
 class CProgressDialog;
 
-#define TRK_N_COLORS        17
-#define ASCEND_THRESHOLD    5
+#define TRK_N_COLORS          17
+#define ASCEND_THRESHOLD       5
+
+#define TRK_N_COLORIZESOURCES  4
 
 #include <QDebug>
 
@@ -49,21 +51,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
 public:
     struct trk_t;
     struct trkpt_t;
-
-    struct ColorizeSource
-    {
-        const char  *name;
-        const qreal  defLimitLow;
-        const qreal  defLimitHigh;
-        const qreal  minimum;
-        const qreal  maximum;
-        const char  *unit;
-        const char  *icon;
-        const std::function<float(const trkpt_t&, const trkpt_t&)> selector;
-    };
-
-    static const struct ColorizeSource colorizeSource[4];
-    static const size_t colorizeSourceCount = sizeof(CGisItemTrk::colorizeSource) / sizeof(CGisItemTrk::colorizeSource[0]);
 
     enum focusmode_e
     {
@@ -251,10 +238,42 @@ public:
         return activities;
     }
 
-    void setColorizeSource(int idx);
-    int getColorizeSource()
+    /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
+
+        @{
+    */
+public:
+    using colorFunc_t = std::function<float(const trkpt_t&, const trkpt_t&)>;
+
+    struct ColorizeSource
     {
-        return slopeSource;
+        const char       *intName;      //< internal name for the specific source, for extensions the path
+        const char       *name;         //< userfriendly name ("Speed" "Heart Rate")
+        const qreal       defLimitLow;  //< the default lower limit
+        const qreal       defLimitHigh; //< the default high limit
+        const qreal       minimum;      //< hard (enforced) minimum, cannot go lower
+        const qreal       maximum;      //< hard (enforced) maximum, cannot go higher
+        const char       *unit;         //< the unit (to be displayed)
+        const char       *icon;         //< path to an icon
+        const colorFunc_t colorFunc;    //< the function used to retrieve the value
+    };
+
+    static const struct ColorizeSource colorizeSource[TRK_N_COLORIZESOURCES];
+    static const struct ColorizeSource unknownColorizeSource;
+
+    /** @brief Set the colorize source to the source specified.
+
+        @param src  The new source to use.
+    */
+    void setColorizeSource(QString src);
+
+    /** @brief Get the current colorize source.
+
+        @return  The new source to use.
+    */
+    QString getColorizeSource()
+    {
+        return customSlopeSource;
     }
 
     void setColorizeLimitLow(qreal limit);
@@ -269,7 +288,23 @@ public:
         return limitHigh;
     }
 
+    const QString getColorizeUnit() const;
+
     float getExtremum(bool getMaximum);
+
+private:
+    int     slopeSource       = -1; //< The index of the source to be used for (slope-)coloring tracks
+    QString customSlopeSource = "";
+
+    // the low and high limit for (slope-)colored drawing of tracks
+    qreal limitLow  = -10;
+    qreal limitHigh =  10;
+
+    colorFunc_t getColorizeFunction();
+
+    void drawColorized(QPainter &p);
+    /**@}*/
+
 
     /**
        @brief Get the indices of visible points for a selected range
@@ -279,6 +314,7 @@ public:
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
+public:
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
@@ -747,7 +783,8 @@ public:
         return trk;
     }
 
-    std::array<bool, 4> getExistingKnownColorizeSources();
+    std::array<bool, TRK_N_COLORIZESOURCES> getExistingKnownColorizeSources();
+    QStringList getExistingUnknownColorizeSources();
 
     void registerNotification(INotifiable *obj);
     void unregisterNotification(INotifiable *obj);
@@ -794,15 +831,8 @@ private:
     QPolygonF lineSimple;
     /// visible and invisible points
     QPolygonF lineFull;
-
-
-    int slopeSource = -1; //< The index of the source to be used for (slope-)coloring tracks
-
-    // the low and high limit for (slope-)colored drawing of tracks
-    qreal limitLow  = -10;
-    qreal limitHigh =  10;
-
     /**@}*/
+
 
     /**
         A list of plot objects that need to get informed on any change in data.
@@ -861,8 +891,6 @@ private:
     /// the second point of a range selection
     const trkpt_t * mouseRange2 = 0;
     /**@}*/
-
-    void drawColorized(QPainter &p, std::function<float(const trkpt_t&, const trkpt_t&)> intersectColor);
 
     /// the track's details dialog if any
     QPointer<CDetailsTrk> dlgDetails;

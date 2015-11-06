@@ -1525,7 +1525,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         CDraw::arrows(l, extViewport, p, 10, 80);
     }
 
-    if(-1 == slopeSource && customSlopeSource.isEmpty())
+    if(-1 == knownCSrcIdx && colorSource.isEmpty())
     {
         // use the track's ordinary color
         penForeground.setColor(color);
@@ -1595,9 +1595,9 @@ QStringList CGisItemTrk::getExistingUnknownColorizeSources()
 
 CGisItemTrk::colorFunc_t CGisItemTrk::getColorizeFunction()
 {
-    if(-1 == slopeSource)
+    if(-1 == knownCSrcIdx)
     {
-        QString source = customSlopeSource;
+        QString source = colorSource;
         return [source] (const trkpt_t &pp, const trkpt_t &p)
         {
             return p.extensions.value(source).toReal();
@@ -1605,7 +1605,7 @@ CGisItemTrk::colorFunc_t CGisItemTrk::getColorizeFunction()
     }
     else
     {
-        return colorizeSource[slopeSource].colorFunc;
+        return colorizeSource[knownCSrcIdx].colorFunc;
     }
 }
 
@@ -2331,9 +2331,9 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
 
 void CGisItemTrk::setColorizeSource(QString src)
 {
-    if(src != customSlopeSource)
+    if(src != colorSource)
     {
-        customSlopeSource = src;
+        colorSource = src;
 
         int colorizeIdx = -1;
         for(size_t i = 0; i < TRK_N_COLORIZESOURCES && -1 == colorizeIdx; i++)
@@ -2344,9 +2344,9 @@ void CGisItemTrk::setColorizeSource(QString src)
             }
         }
 
-        slopeSource = colorizeIdx;
-        limitLow    = colorizeSource[slopeSource].defLimitLow;
-        limitHigh   = colorizeSource[slopeSource].defLimitHigh;
+        knownCSrcIdx = colorizeIdx;
+        limitLow    = colorizeSource[knownCSrcIdx].defLimitLow;
+        limitHigh   = colorizeSource[knownCSrcIdx].defLimitHigh;
         //changed(QObject::tr("Changed slope source"), "://icons/48x48/SelectColor.png");
         notifyChange();
     }
@@ -2368,11 +2368,11 @@ void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 
 const QString CGisItemTrk::getColorizeUnit() const
 {
-    if(-1 == slopeSource)
+    if(-1 == knownCSrcIdx)
     {
         return "";
     }
-    return colorizeSource[slopeSource].unit;
+    return colorizeSource[knownCSrcIdx].unit;
 }
 
 void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode)

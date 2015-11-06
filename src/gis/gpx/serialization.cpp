@@ -817,7 +817,7 @@ void CGisItemTrk::save(QDomNode& gpx)
     // write source for coloring tracks
     QDomElement xmlExtColoring = doc.createElement("ql:coloring");
     xmlExt.appendChild(xmlExtColoring);
-    writeXml(xmlExtColoring, "ql:source",    customSlopeSource);
+    writeXml(xmlExtColoring, "ql:source",    colorSource);
     writeXml(xmlExtColoring, "ql:limitLow",  limitLow);
     writeXml(xmlExtColoring, "ql:limitHigh", limitHigh);
 

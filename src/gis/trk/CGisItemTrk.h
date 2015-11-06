@@ -273,7 +273,7 @@ public:
     */
     QString getColorizeSource()
     {
-        return customSlopeSource;
+        return colorSource;
     }
 
     void setColorizeLimitLow(qreal limit);
@@ -293,8 +293,8 @@ public:
     float getExtremum(bool getMaximum);
 
 private:
-    int     slopeSource       = -1; //< The index of the source to be used for (slope-)coloring tracks
-    QString customSlopeSource = "";
+    int     knownCSrcIdx = -1; //< The index of the source to be used for (slope-)coloring tracks
+    QString colorSource  = "";
 
     // the low and high limit for (slope-)colored drawing of tracks
     qreal limitLow  = -10;

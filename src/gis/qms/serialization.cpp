@@ -463,7 +463,7 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
     out << trk.type;
     out << trk.color;
 
-    out << customSlopeSource;
+    out << colorSource;
     out << limitLow;
     out << limitHigh;
 

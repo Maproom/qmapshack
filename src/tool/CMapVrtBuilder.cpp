@@ -59,7 +59,7 @@ void CMapVrtBuilder::slotSelectSourceFiles()
         new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
     }
 
-    enabelStartButton();
+    enableStartButton();
 }
 
 void CMapVrtBuilder::slotSelectTargetFile()
@@ -84,24 +84,13 @@ void CMapVrtBuilder::slotSelectTargetFile()
 
     labelTargetFilename->setText(file);
 
-    enabelStartButton();
+    enableStartButton();
 }
 
-
-void CMapVrtBuilder::enabelStartButton()
+void CMapVrtBuilder::enableStartButton()
 {
-    pushStart->setDisabled(true);
-    if(listWidget->count() == 0)
-    {
-        return;
-    }
-    if(labelTargetFilename->text() == "-")
-    {
-        return;
-    }
-    pushStart->setEnabled(true);
+    pushStart->setEnabled(listWidget->count() > 0 && labelTargetFilename->text() != "-");
 }
-
 
 void CMapVrtBuilder::slotStart()
 {

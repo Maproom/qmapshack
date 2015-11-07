@@ -37,10 +37,12 @@ CImportDatabase::CImportDatabase(QWidget *parent)
 
     connect(toolSelectSource, SIGNAL(clicked()), this, SLOT(slotSelectSource()));
     connect(toolSelectTarget, SIGNAL(clicked()), this, SLOT(slotSelectTarget()));
-    connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
+    connect(pushStart,        SIGNAL(clicked()), this, SLOT(slotStart()));
 
+    pushStart->setEnabled(false);
     if(QFile::exists(labelSource->text()))
     {
+        pushStart->setEnabled(true);
         dbQlgt = new CQlgtDb(labelSource->text(), this);
     }
 }
@@ -84,6 +86,8 @@ void CImportDatabase::slotSelectSource()
     delete dbQlgt;
     textBrowser->clear();
     dbQlgt = new CQlgtDb(filename, this);
+
+    pushStart->setEnabled(true);
 }
 
 void CImportDatabase::slotSelectTarget()

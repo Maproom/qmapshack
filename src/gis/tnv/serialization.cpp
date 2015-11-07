@@ -67,7 +67,6 @@ static QStringList writeCompeTime( const QDateTime& t, bool isTrack)
 {
     QStringList result;
     QString dateFormat;
-    QString monthStr;
 
     if(!t.isValid())
     {
@@ -84,56 +83,8 @@ static QStringList writeCompeTime( const QDateTime& t, bool isTrack)
 
     QDateTime timestamp = t.toTimeSpec(Qt::UTC);
 
-    switch(timestamp.date().month())
-    {
-    case 1:
-        monthStr = "Jan";
-        break;
-
-    case 2:
-        monthStr = "Feb";
-        break;
-
-    case 3:
-        monthStr = "Mar";
-        break;
-
-    case 4:
-        monthStr = "Apr";
-        break;
-
-    case 5:
-        monthStr = "May";
-        break;
-
-    case 6:
-        monthStr = "Jun";
-        break;
-
-    case 7:
-        monthStr = "Jul";
-        break;
-
-    case 8:
-        monthStr = "Aug";
-        break;
-
-    case 9:
-        monthStr = "Sep";
-        break;
-
-    case 10:
-        monthStr = "Oct";
-        break;
-
-    case 11:
-        monthStr = "Nov";
-        break;
-
-    case 12:
-        monthStr = "Dec";
-        break;
-    }
+    QString monthStrs[] = { "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    QString monthStr    = monthStrs[timestamp.date().month()];
 
     if(isTrack)
     {
@@ -165,59 +116,24 @@ static QDateTime readCompeTime(QString str, bool isTrack)
 
     if(re.exactMatch(str))
     {
-        QString monthNum;
         QString monthStr = re.cap(2);
 
-        if(monthStr.toUpper() == "JAN")
-        {
-            monthNum = "01";
-        }
-        else if(monthStr.toUpper() == "FEB")
-        {
-            monthNum = "02";
-        }
-        else if(monthStr.toUpper() == "MAR")
-        {
-            monthNum = "03";
-        }
-        else if(monthStr.toUpper() == "APR")
-        {
-            monthNum = "04";
-        }
-        else if(monthStr.toUpper() == "MAY")
-        {
-            monthNum = "05";
-        }
-        else if(monthStr.toUpper() == "JUN")
-        {
-            monthNum = "06";
-        }
-        else if(monthStr.toUpper() == "JUL")
-        {
-            monthNum = "07";
-        }
-        else if(monthStr.toUpper() == "AUG")
-        {
-            monthNum = "08";
-        }
-        else if(monthStr.toUpper() == "SEP")
-        {
-            monthNum = "09";
-        }
-        else if(monthStr.toUpper() == "OCT")
-        {
-            monthNum = "10";
-        }
-        else if(monthStr.toUpper() == "NOV")
-        {
-            monthNum = "11";
-        }
-        else if(monthStr.toUpper() == "DEC")
-        {
-            monthNum = "12";
-        }
+        QHash<QString, QString> monthStr2Num {
+             {"JAN", "01"}
+            ,{"FEB", "02"}
+            ,{"MAR", "03"}
+            ,{"APR", "04"}
+            ,{"MAY", "05"}
+            ,{"JUN", "06"}
+            ,{"JUL", "07"}
+            ,{"AUG", "08"}
+            ,{"SEP", "09"}
+            ,{"OCT", "10"}
+            ,{"NOV", "11"}
+            ,{"DEC", "12"}
+        };
 
-        str.replace(monthStr, monthNum);
+        str.replace(monthStr, monthStr2Num.value(monthStr.toUpper()));
 
         if(isTrack)
         {

@@ -22,8 +22,8 @@
 class INotifiable
 {
 public:
+    virtual ~INotifiable() {};
     virtual void notify() = 0;
-
 };
 
 #endif // INOTIFIABLE_H

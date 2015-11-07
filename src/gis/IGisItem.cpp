@@ -431,7 +431,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
         if(isReadOnly() && !readOnly)
         {
             CCanvas::setOverrideCursor(Qt::ArrowCursor, "setReadOnlyMode");
-            QString str = QObject::tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press'Ok'.").arg(getName());
+            QString str = QObject::tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
             int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
             CCanvas::restoreOverrideCursor("setReadOnlyMode");
             if(res != QMessageBox::Ok)

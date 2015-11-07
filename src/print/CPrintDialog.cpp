@@ -103,7 +103,7 @@ void CPrintDialog::slotUpdateMetrics()
     QPointF pt1 = rectSelArea.topLeft();
     QPointF pt2 = rectSelArea.bottomRight();
 
-    // calculate real meter dimensions from corenr points
+    // calculate real meter dimensions from corner points
     qreal mWidth    = GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt1.y());
     qreal mHeight   = GPS_Math_Distance(pt1.x(), pt1.y(), pt1.x(), pt2.y());
 

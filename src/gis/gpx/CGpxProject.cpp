@@ -419,7 +419,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     }
     catch(const QString& msg)
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Saveing GIS data failed..."), msg, QMessageBox::Abort);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         res = false;
     }
     project.umount();

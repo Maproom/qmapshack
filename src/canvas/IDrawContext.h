@@ -72,7 +72,7 @@ public:
     /**
        @brief Zoom in and out of the map by the scale factors defined in CMapDB::scales.
        @param in            set true to zoom in, and false to zoom out
-       @param needsRedraw   if the zoom action makes a redraw nesseccary needsRedraw is set true
+       @param needsRedraw   if the zoom action makes a redraw necessary needsRedraw is set true
      */
     void zoom(bool in, CCanvas::redraw_e &needsRedraw);
     void zoom(int idx);
@@ -84,13 +84,13 @@ public:
 
     /**
        @brief Convert a geo coordinate of format lon/lat WGS84 into the currently used coordinate/projection/datum system.
-       @note  The unit is dependent on the currently used projection and must not nesseccarily be meter
+       @note  The unit is dependent on the currently used projection and must not necessarily be meter
        @param p             the point to convert
      */
     void convertRad2M(QPointF &p);
     /**
        @brief Convert a geo coordinate of the currently used projection/datum to lon/lat WGS84
-       @note  The unit is dependent on the currently used projection and must not nesseccarily be meter
+       @note  The unit is dependent on the currently used projection and must not necessarily be meter
        @param p             the point to convert
      */
     void convertM2Rad(QPointF &p);
@@ -114,7 +114,7 @@ public:
 
     /**
         @brief Draw the active map buffer to the painter
-        @param p            the painte used to draw the map
+        @param p            the painter used to draw the map
         @param needsRedraw  set true to trigger a redraw in the background thread
         @param f            the point of focus in [°] that is drawn in the middle of the viewport.
      */
@@ -131,7 +131,7 @@ public:
        @brief Set the projection of the draw context
 
        This will just create a new source projection object (pjsrc). Most likely you want to
-       overide this method to:
+       override this method to:
 
        1) save what ever has to be saved
        2) call this method

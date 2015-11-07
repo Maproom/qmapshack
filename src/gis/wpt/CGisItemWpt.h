@@ -319,7 +319,7 @@ private:
     QPointF focus;
     QPointF posScreen = NOPOINTF;
 
-    // additonal data, common to all IGisItems, is found in IItem //
+    // additional data, common to all IGisItems, is found in IItem //
 
     // --- stop all waypoint data ----
 

@@ -133,8 +133,8 @@ void CAppSetup::prepareGdal()
 {
     QString gdal = qgetenv("GDAL_DATA");
     QString proj = qgetenv("PROJ_LIB");
-    qDebug() << "GDAL_DATA direcotry set to " + gdal;
-    qDebug() << "PROJ_LIB direcotry set to " + proj;
+    qDebug() << "GDAL_DATA directory set to " + gdal;
+    qDebug() << "PROJ_LIB directory set to " + proj;
     GDALAllRegister();
 }
 

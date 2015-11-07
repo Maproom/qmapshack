@@ -39,7 +39,7 @@ private slots:
     /**
        @brief Find all devices already connected
 
-       This slot is called only once at startup. All pathes to plug-n-play memory have
+       This slot is called only once at startup. All paths to plug-n-play memory have
        to be passed to probeForDevice().
 
      */
@@ -51,7 +51,7 @@ protected:
 
        @param mountPoint    This is the mount point in a Linux sense (e.g. "/run/media/GARMIN"). For Windows this will be the drive letter (e.g. "d:\")
        @param path          This is the device path in a Linux sense (e.g. "/org/freedesktop/UDisks2/block_devices/sdc1") For Windows this will be the drive letter, too (e.g. "d:\")
-       @param label         A name for the device. In Linux the last part of the mount point is used. In Windos it should be the name of the drive.
+       @param label         A name for the device. In Linux the last part of the mount point is used. In Windows it should be the name of the drive.
      */
     void probeForDevice(const QString &mountPoint, const QString& path, const QString &label);
 

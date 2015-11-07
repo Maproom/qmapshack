@@ -169,7 +169,7 @@ private:
 
     /// the track line color
     QColor color;
-    /// the trakpoint bullet icon
+    /// the trackpoint bullet icon
     QPixmap bullet;
     /// the track line color by index
     unsigned colorIdx;

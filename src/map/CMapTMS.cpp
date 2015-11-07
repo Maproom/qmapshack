@@ -207,7 +207,7 @@ void CMapTMS::saveConfig(QSettings& cfg)
         return;
     }
 
-    // save indices of enbaled layers
+    // save indices of enabled layers
     QStringList enabled;
     for(int i = 0; i< layers.size(); i++)
     {

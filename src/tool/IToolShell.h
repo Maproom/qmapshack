@@ -34,6 +34,7 @@ public:
 protected slots:
     void slotStderr();
     void slotStdout();
+    void slotError(QProcess::ProcessError error);
     virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
 
 protected:

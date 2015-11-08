@@ -506,22 +506,29 @@ void CDetailsTrk::slotColorSourceChanged(int idx, float valueLow, float valueHig
         -1 != idxInSource && idxInSource < TRK_N_COLORIZESOURCES ? CGisItemTrk::colorizeSource[idxInSource] : CGisItemTrk::unknownColorizeSource
     );
 
-    // update the limits
+    trk.setColorizeSource(comboColorSource->itemData(idx).toString());
+
     spinLimitLow->setMinimum(source.minimum);
     spinLimitLow->setMaximum(source.maximum);
-    spinLimitLow->setValue  (HUGE_VALF != valueLow  ? valueLow  : source.defLimitLow);
     spinLimitLow->setSuffix (source.unit);
 
     spinLimitHigh->setMinimum(source.minimum);
     spinLimitHigh->setMaximum(source.maximum);
-    spinLimitHigh->setValue  (HUGE_VALF != valueHigh ? valueHigh : source.defLimitHigh);
     spinLimitHigh->setSuffix (source.unit);
+
+    // update the limits
+    if(idxInSource >= TRK_N_COLORIZESOURCES)
+    {
+        spinLimitLow->setValue (trk.getExtremum(false));
+        spinLimitHigh->setValue(trk.getExtremum(true));
+    } else {
+        spinLimitLow->setValue (HUGE_VALF != valueLow  ? valueLow  : source.defLimitLow);
+        spinLimitHigh->setValue(HUGE_VALF != valueHigh ? valueHigh : source.defLimitHigh);
+    }
 
     widgetColorLabel->setMinimum(spinLimitLow->value());
     widgetColorLabel->setMaximum(spinLimitHigh->value());
     widgetColorLabel->setUnit(source.unit);
-
-    trk.setColorizeSource(comboColorSource->itemData(idx).toString());
 }
 
 void CDetailsTrk::slotColorLimitHighChanged()

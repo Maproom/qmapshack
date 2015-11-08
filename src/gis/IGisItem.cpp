@@ -727,3 +727,7 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
     return tmp2.boundingRect().contains(pt);
 }
 
+bool IGisItem::isChanged() const
+{
+    return text(CGisListWks::eColumnDecoration) == "*";
+}

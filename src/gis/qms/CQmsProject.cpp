@@ -91,25 +91,24 @@ bool CQmsProject::saveAs()
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
     path += "/" + getName() + ".qms";
 
-    QString filter = "*.qms";
-    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+    QString filter = filedialogFilterQMS;
+    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
 
     if(fn.isEmpty())
     {
         return false;
     }
 
-
     bool res = false;
-    if(filter == "*.gpx")
+    if(filter == filedialogFilterGPX)
     {
         res = CGpxProject::saveAs(fn, *this);
     }
-    else if(filter == "*.qms")
+    else if(filter == filedialogFilterQMS)
     {
         filename = fn;
         metadata.name.clear();
-        setupName(QFileInfo(filename).baseName().replace("_", " "));
+        setupName(QFileInfo(filename).baseName());
 
         res = saveAs(fn, *this);
         if(res)

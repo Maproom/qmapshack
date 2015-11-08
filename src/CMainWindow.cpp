@@ -25,6 +25,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
 #include "gis/WptIcons.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
@@ -87,41 +88,39 @@ CMainWindow::CMainWindow()
     // end ---- restore window geometry -----
 
 
-    connect(actionAbout, SIGNAL(triggered()), this, SLOT(slotAbout()));
-    connect(actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
-    connect(actionAddMapView, SIGNAL(triggered()), this, SLOT(slotAddCanvas()));
-    connect(actionCloneMapView, SIGNAL(triggered()), this, SLOT(slotCloneCanvas()));
-    connect(actionShowScale, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
-    connect(actionShowGrid, SIGNAL(changed()), this, SLOT(update()));
-    connect(actionPOIText, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
-    connect(actionMapToolTip, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
-    connect(actionNightDay, SIGNAL(changed()), this, SLOT(slotUpdateCurrentWidget()));
-    connect(actionProfileIsWindow, SIGNAL(toggled(bool)), this, SLOT(slotSetProfileMode(bool)));
-    connect(actionSetupMapFont, SIGNAL(triggered()), this, SLOT(slotSetupMapFont()));
-    connect(actionSetupGrid, SIGNAL(triggered()), this, SLOT(slotSetupGrid()));
-    connect(actionSetupMapPaths, SIGNAL(triggered()), this, SLOT(slotSetupMapPath()));
-    connect(actionSetupDEMPaths, SIGNAL(triggered()), this, SLOT(slotSetupDemPath()));
-    connect(actionSetupMapView, SIGNAL(triggered()), this, SLOT(slotSetupMapView()));
-    connect(actionSetupTimeZone, SIGNAL(triggered()), this, SLOT(slotSetupTimeZone()));
-    connect(actionSetupUnits, SIGNAL(triggered()), this, SLOT(slotSetupUnits()));
-    connect(actionSetupWorkspace, SIGNAL(triggered()), this, SLOT(slotSetupWorkspace()));
-    connect(actionSetupCoordFormat, SIGNAL(triggered(bool)), this, SLOT(slotSetupCoordFormat()));
-    connect(actionImportDatabase, SIGNAL(triggered()), this, SLOT(slotImportDatabase()));
-    connect(actionSaveGISData, SIGNAL(triggered()), gisWidget, SLOT(slotSaveAll()));
-    connect(actionLoadGISData, SIGNAL(triggered()), this, SLOT(slotLoadGISData()));
-    connect(actionVrtBuilder, SIGNAL(triggered()), this, SLOT(slotBuildVrt()));
-    connect(actionStoreView, SIGNAL(triggered()), this, SLOT(slotStoreView()));
-    connect(actionLoadView, SIGNAL(triggered()), this, SLOT(slotLoadView()));
-    connect(actionClose, SIGNAL(triggered()), this, SLOT(close()));
-    connect(actionCreateRoutinoDatabase, SIGNAL(triggered()), this, SLOT(slotCreateRoutinoDatabase()));
-    connect(actionPrintMap, SIGNAL(triggered()), this, SLOT(slotPrintMap()));
-    connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(slotTabCloseRequest(int)));
+    connect(actionAbout,                 SIGNAL(triggered()),            this,      SLOT(slotAbout()));
+    connect(actionHelp,                  SIGNAL(triggered()),            this,      SLOT(slotHelp()));
+    connect(actionAddMapView,            SIGNAL(triggered()),            this,      SLOT(slotAddCanvas()));
+    connect(actionCloneMapView,          SIGNAL(triggered()),            this,      SLOT(slotCloneCanvas()));
+    connect(actionShowScale,             SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
+    connect(actionShowGrid,              SIGNAL(changed()),              this,      SLOT(update()));
+    connect(actionPOIText,               SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
+    connect(actionMapToolTip,            SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
+    connect(actionNightDay,              SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
+    connect(actionProfileIsWindow,       SIGNAL(toggled(bool)),          this,      SLOT(slotSetProfileMode(bool)));
+    connect(actionSetupMapFont,          SIGNAL(triggered()),            this,      SLOT(slotSetupMapFont()));
+    connect(actionSetupGrid,             SIGNAL(triggered()),            this,      SLOT(slotSetupGrid()));
+    connect(actionSetupMapPaths,         SIGNAL(triggered()),            this,      SLOT(slotSetupMapPath()));
+    connect(actionSetupDEMPaths,         SIGNAL(triggered()),            this,      SLOT(slotSetupDemPath()));
+    connect(actionSetupMapView,          SIGNAL(triggered()),            this,      SLOT(slotSetupMapView()));
+    connect(actionSetupTimeZone,         SIGNAL(triggered()),            this,      SLOT(slotSetupTimeZone()));
+    connect(actionSetupUnits,            SIGNAL(triggered()),            this,      SLOT(slotSetupUnits()));
+    connect(actionSetupWorkspace,        SIGNAL(triggered()),            this,      SLOT(slotSetupWorkspace()));
+    connect(actionSetupCoordFormat,      SIGNAL(triggered(bool)),        this,      SLOT(slotSetupCoordFormat()));
+    connect(actionImportDatabase,        SIGNAL(triggered()),            this,      SLOT(slotImportDatabase()));
+    connect(actionSaveGISData,           SIGNAL(triggered()),            gisWidget, SLOT(slotSaveAll()));
+    connect(actionLoadGISData,           SIGNAL(triggered()),            this,      SLOT(slotLoadGISData()));
+    connect(actionVrtBuilder,            SIGNAL(triggered()),            this,      SLOT(slotBuildVrt()));
+    connect(actionStoreView,             SIGNAL(triggered()),            this,      SLOT(slotStoreView()));
+    connect(actionLoadView,              SIGNAL(triggered()),            this,      SLOT(slotLoadView()));
+    connect(actionClose,                 SIGNAL(triggered()),            this,      SLOT(close()));
+    connect(actionCreateRoutinoDatabase, SIGNAL(triggered()),            this,      SLOT(slotCreateRoutinoDatabase()));
+    connect(actionPrintMap,              SIGNAL(triggered()),            this,      SLOT(slotPrintMap()));
+    connect(tabWidget,                   SIGNAL(tabCloseRequested(int)), this,      SLOT(slotTabCloseRequest(int)));
 
-
-
-    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabCanvas(int)));
-    connect(tabMaps, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabMaps(int)));
-    connect(tabDem, SIGNAL(currentChanged(int)), this, SLOT(slotCurrentTabDem(int)));
+    connect(tabWidget,                   SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabCanvas(int)));
+    connect(tabMaps,                     SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabMaps(int)));
+    connect(tabDem,                      SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabDem(int)));
 
     cfg.beginGroup("Canvas");
     CMapDraw::loadMapPath(cfg);
@@ -719,11 +718,10 @@ void CMainWindow::slotCreateRoutinoDatabase()
 void CMainWindow::slotLoadGISData()
 {
     SETTINGS;
-    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
-    QString filter = cfg.value("Paths/lastGisFilter", "GPS Exchange Format (*.gpx)").toString();
+    QString path   = cfg.value("Paths/lastGisPath",   QDir::homePath()).toString();
+    QString filter = cfg.value("Paths/lastGisFilter", IGisProject::filedialogAllSupported).toString();
 
-
-    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, "GPS Exchange Format (*.gpx);; QMapShack Binary (*.qms)", &filter);
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, IGisProject::filedialogLoadFilters, &filter);
 
     if(filenames.isEmpty())
     {
@@ -733,7 +731,7 @@ void CMainWindow::slotLoadGISData()
     loadGISData(filenames);
 
     path = QFileInfo(filenames.first()).absolutePath();
-    cfg.setValue("Paths/lastGisPath", path);
+    cfg.setValue("Paths/lastGisPath",   path);
     cfg.setValue("Paths/lastGisFilter", filter);
 }
 

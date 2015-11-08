@@ -32,6 +32,13 @@
 
 #include <QtWidgets>
 
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.qms)";
+const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx)";
+const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
+const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
+const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS;
+
+
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)

@@ -20,6 +20,7 @@
 #define CPLOT_H
 
 #include "plot/IPlot.h"
+#include <functional>
 
 class CPlot : public IPlot
 {

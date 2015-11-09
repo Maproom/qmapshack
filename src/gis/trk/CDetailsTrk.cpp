@@ -161,16 +161,16 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    checkProfile->setChecked(cfg.value("showProfile", true).toBool());
-    checkSpeed->setChecked(cfg.value("showSpeed", true).toBool());
-    checkProgress->setChecked(cfg.value("showProgress", true).toBool());
+    checkGraph1->setChecked(cfg.value("showGraph1", true).toBool());
+    checkGraph2->setChecked(cfg.value("showGraph2", true).toBool());
+    checkGraph3->setChecked(cfg.value("showGraph3", true).toBool());
     splitter->restoreState(cfg.value("splitterSizes").toByteArray());
     treeWidget->header()->restoreState(cfg.value("trackPointListState").toByteArray());
     cfg.endGroup();
 
-    connect(checkProfile, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(checkSpeed, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(checkProgress, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
+    connect(checkGraph1, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
+    connect(checkGraph2, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
+    connect(checkGraph3, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
     connect(comboColor, SIGNAL(currentIndexChanged(int)), this, SLOT(slotColorChanged(int)));
     connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
     connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
@@ -190,9 +190,9 @@ CDetailsTrk::~CDetailsTrk()
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    cfg.setValue("showProfile", checkProfile->isChecked());
-    cfg.setValue("showSpeed", checkSpeed->isChecked());
-    cfg.setValue("showProgress", checkProgress->isChecked());
+    cfg.setValue("showGraph1", checkGraph1->isChecked());
+    cfg.setValue("showGraph2", checkGraph2->isChecked());
+    cfg.setValue("showGraph3", checkGraph3->isChecked());
     cfg.setValue("splitterSizes", splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.endGroup();
@@ -431,7 +431,7 @@ void CDetailsTrk::slotMouseClickState(int s)
 
 void CDetailsTrk::slotShowPlots()
 {
-    if(checkProfile->isChecked())
+    if(checkGraph1->isChecked())
     {
         plotElevation->show();
     }
@@ -440,7 +440,7 @@ void CDetailsTrk::slotShowPlots()
         plotElevation->hide();
     }
 
-    if(checkSpeed->isChecked())
+    if(checkGraph2->isChecked())
     {
         plotSpeed->show();
     }
@@ -449,7 +449,7 @@ void CDetailsTrk::slotShowPlots()
         plotSpeed->hide();
     }
 
-    if(checkProgress->isChecked())
+    if(checkGraph3->isChecked())
     {
         plotDistance->show();
     }

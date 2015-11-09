@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>803</width>
-    <height>592</height>
+    <height>495</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -117,54 +117,6 @@
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="CPlotProfile" name="plotElevation" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="CPlotSpeed" name="plotSpeed" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="CPlotDistance" name="plotDistance" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>
@@ -656,24 +608,6 @@
    <class>CPlotTrack</class>
    <extends>QWidget</extends>
    <header>plot/CPlotTrack.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CPlotProfile</class>
-   <extends>QWidget</extends>
-   <header>plot/CPlotProfile.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CPlotDistance</class>
-   <extends>QWidget</extends>
-   <header>plot/CPlotDistance.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CPlotSpeed</class>
-   <extends>QWidget</extends>
-   <header>plot/CPlotSpeed.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -19,10 +19,12 @@
 #ifndef CDETAILSTRK_H
 #define CDETAILSTRK_H
 
+#include "plot/CPlot.h"
 #include "ui_IDetailsTrk.h"
 #include <QWidget>
 
 class CGisItemTrk;
+class CPlotProfile;
 
 class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
 {
@@ -73,6 +75,10 @@ private:
     CGisItemTrk& trk;
 
     bool originator = false;
+
+    CPlotProfile * plotElevation;
+    CPlot * plotSpeed;
+    CPlot * plotDistance;
 };
 
 #endif //CDETAILSTRK_H

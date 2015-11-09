@@ -79,4 +79,23 @@ void CPlot::updateData()
 
 void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
+    if(ptMouseMove == 0)
+    {
+        if(posMouse != NOPOINT)
+        {
+            posMouse = NOPOINT;
+            needsRedraw = true;
+        }
+    }
+    else
+    {
+        if(posMouse == NOPOINT)
+        {
+            needsRedraw = true;
+        }
+
+        posMouse.rx() = left  + data->x().val2pt(getX(*ptMouseMove));
+        posMouse.ry() = top  +  data->y().val2pt(getY(*ptMouseMove));
+    }
+    update();
 }

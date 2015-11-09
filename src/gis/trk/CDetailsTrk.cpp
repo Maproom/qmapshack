@@ -28,7 +28,7 @@
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
-#include "plot/CPlot.h"
+#include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
@@ -71,18 +71,43 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
-    plotElevation->setTrack(&trk);
-    plotDistance->setTrack(&trk);
-    plotSpeed->setTrack(&trk);
+    plotElevation = new CPlotProfile(&trk, IPlot::eModeNormal, this);
+    plotElevation->setMinimumSize(QSize(0, 100));
+    plotElevation->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plotElevation->show();
+    layoutPlot->addWidget(plotElevation);
 
-//    CPlot * test = new CPlot(&trk, CPlotData::eAxisLinear, "xxx", "yyy", 1.0
-//                             , [](const CGisItemTrk::trkpt_t &p) { return p.distance;}
-//                             , [](const CGisItemTrk::trkpt_t &p) { return p.slope1;}
-//                             , this);
-//    test->setMinimumSize(QSize(0, 100));
-//    test->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-//    test->show();
-//    layoutPlot->addWidget(test);
+    plotSpeed = new CPlot(&trk, CPlotData::eAxisLinear
+                          , tr("distance [%1]").arg(IUnit::self().baseunit)
+                          , tr("speed. [%1]").arg(IUnit::self().speedunit)
+                          , IUnit::self().speedfactor
+                          , [](const CGisItemTrk::trkpt_t &p) {
+        return p.distance;
+    }
+                          , [](const CGisItemTrk::trkpt_t &p) {
+        return p.speed;
+    }
+                          , this);
+    plotSpeed->setMinimumSize(QSize(0, 100));
+    plotSpeed->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plotSpeed->show();
+    layoutPlot->addWidget(plotSpeed);
+
+    plotDistance = new CPlot(&trk, CPlotData::eAxisTime
+                             , tr("time")
+                             , tr("distance. [%1]").arg(IUnit::self().baseunit)
+                             , IUnit::self().basefactor
+                             , [](const CGisItemTrk::trkpt_t &p) {
+        return p.time.toTime_t();
+    }
+                             , [](const CGisItemTrk::trkpt_t &p) {
+        return p.distance;
+    }
+                             , this);
+    plotDistance->setMinimumSize(QSize(0, 100));
+    plotDistance->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plotDistance->show();
+    layoutPlot->addWidget(plotDistance);
 
     if(trk.isOnDevice())
     {

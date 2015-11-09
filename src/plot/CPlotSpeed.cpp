@@ -43,7 +43,13 @@ void CPlotSpeed::updateData()
         return;
     }
 
-    CPlotData::axistype_e type = data->axisType;
+    clear();
+    if(trk->getTotalElapsedSeconds() == 0)
+    {
+        resetZoom();
+        update();
+        return;
+    }
 
     if(mode == eModeIcon)
     {
@@ -52,24 +58,10 @@ void CPlotSpeed::updateData()
     }
     else
     {
-        if(type == CPlotData::eAxisLinear)
-        {
-            setXLabel(tr("distance [%1]").arg(IUnit::self().baseunit));
-        }
-        else
-        {
-            setXLabel(tr("time [h]"));
-        }
+        setXLabel(tr("distance [%1]").arg(IUnit::self().baseunit));
         setYLabel(tr("speed. [%1]").arg(IUnit::self().speedunit));
     }
 
-    clear();
-    if(trk->getTotalElapsedSeconds() == 0)
-    {
-        resetZoom();
-        update();
-        return;
-    }
 
     QPolygonF lineSpeed;
 
@@ -86,7 +78,7 @@ void CPlotSpeed::updateData()
 
             if(trkpt.speed != NOFLOAT)
             {
-                lineSpeed << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.speed * speedfactor);
+                lineSpeed << QPointF(trkpt.distance, trkpt.speed * speedfactor);
             }
         }
     }

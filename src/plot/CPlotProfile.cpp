@@ -51,7 +51,7 @@ void CPlotProfile::setTrack(CGisItemTrk * track)
 
 void CPlotProfile::updateData()
 {
-    CPlotData::axistype_e type = data->axisType;
+    clear();
 
     if(mode == eModeIcon)
     {
@@ -60,19 +60,9 @@ void CPlotProfile::updateData()
     }
     else
     {
-        if(type == CPlotData::eAxisLinear)
-        {
-            setXLabel(tr("distance [%1]").arg(IUnit::self().baseunit));
-        }
-        else
-        {
-            setXLabel(tr("time [h]"));
-        }
+        setXLabel(tr("distance [%1]").arg(IUnit::self().baseunit));
         setYLabel(tr("alt. [%1]").arg(IUnit::self().baseunit));
     }
-
-
-    clear();
 
     QPolygonF lineEle;
     QPolygonF lineDem;
@@ -96,9 +86,9 @@ void CPlotProfile::updateData()
                 continue;
             }
 
-            lineEle << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.ele * basefactor);
+            lineEle << QPointF(trkpt.distance, trkpt.ele * basefactor);
             coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-            lineDem << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), NOFLOAT);
+            lineDem << QPointF(trkpt.distance, NOFLOAT);
 
             if(project == 0 || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
             {

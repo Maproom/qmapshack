@@ -206,10 +206,10 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
             QString keyFromDB = query.value(1).toString();
             /*[Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
 
-              The root cause is a missing key in the serialized data. This is fixed by calling getKey() in setupHistory().
+               The root cause is a missing key in the serialized data. This is fixed by calling getKey() in setupHistory().
 
-              As the database has a valid key the complete history data has to be fixed with that key.
-            */
+               As the database has a valid key the complete history data has to be fixed with that key.
+             */
             const int N = history.events.size();
             for(int i = 0; i < N; i++)
             {
@@ -218,7 +218,6 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
                 updateHistory();
             }
         }
-
     }
 }
 

@@ -28,6 +28,7 @@
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
+#include "plot/CPlot.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
@@ -74,6 +75,14 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     plotDistance->setTrack(&trk);
     plotSpeed->setTrack(&trk);
 
+//    CPlot * test = new CPlot(&trk, CPlotData::eAxisLinear, "xxx", "yyy", 1.0
+//                             , [](const CGisItemTrk::trkpt_t &p) { return p.distance;}
+//                             , [](const CGisItemTrk::trkpt_t &p) { return p.slope1;}
+//                             , this);
+//    test->setMinimumSize(QSize(0, 100));
+//    test->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+//    test->show();
+//    layoutPlot->addWidget(test);
 
     if(trk.isOnDevice())
     {

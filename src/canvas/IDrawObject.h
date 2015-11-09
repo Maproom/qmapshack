@@ -19,8 +19,8 @@
 #ifndef IDRAWOBJECT_H
 #define IDRAWOBJECT_H
 
-#include <QObject>
 #include "units/IUnit.h"
+#include <QObject>
 
 class QSettings;
 class QListWidget;

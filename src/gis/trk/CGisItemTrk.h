@@ -509,7 +509,7 @@ public:
 
        @param progress  a progress dialog as this operation can take quite some time
        @param current   the current progress if the operaton is done for several tracks
-    */
+     */
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
     /// available track line colors
@@ -635,7 +635,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
 
-            // activity flags
+                          // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -717,7 +717,7 @@ private:
     trk_t trk;
 
     /// the key of the track having the user focus.
-    static key_t keyUserFocus;   
+    static key_t keyUserFocus;
     /// background (border) color of all tracks
     static const QPen penBackground;
     /// drawing and mouse interaction is dependent on the mode
@@ -725,7 +725,7 @@ private:
 
     /**
        \defgroup TrackStatistics Some statistical values over the complete track
-    */
+     */
     /**@{*/
     qint32 cntTotalPoints = 0;
     qint32 cntVisiblePoints = 0;
@@ -740,7 +740,7 @@ private:
 
     /**
         \defgroup DrawUtilies Objects used to draw the track
-    */
+     */
     /**@{*/
     /// the track line color by index
     unsigned colorIdx = 4;
@@ -779,7 +779,7 @@ private:
 
     /**
         \defgroup FocusRange Variables to handle mouse focus and range selection
-    */
+     */
     /**@{*/
     enum rangestate_e
     {
@@ -798,7 +798,7 @@ private:
         If mouseFocusOwner is not empty and different to the passed
         owner string the operation must be rejected.
 
-    */
+     */
     QString mouseFocusOwner;
 
     /// the current track point selected by mouse movement

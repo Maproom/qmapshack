@@ -35,7 +35,7 @@
       <enum>Qt::Vertical</enum>
      </property>
      <widget class="QWidget" name="layoutWidget">
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="layoutPlot">
        <property name="spacing">
         <number>0</number>
        </property>

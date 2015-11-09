@@ -43,7 +43,6 @@ public:
 
     struct subpt_t
     {
-
         enum type_e
         {
             eTypeNone

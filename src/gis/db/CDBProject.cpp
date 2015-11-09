@@ -138,7 +138,7 @@ void CDBProject::postStatus()
             info->keysChildren << item->getKey().item;
             changedItems |= item->isChanged();
         }
-    }    
+    }
 
     updateItems();
     if(!changedItems)
@@ -456,13 +456,14 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
         default:
             ;
         }
+
         /* [Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
 
-          When an item with no key is loaded it is "healed". The healing
-          will mark it as changed. To avoid this save all items that are
-          marked as changed right after loading from the database.
+           When an item with no key is loaded it is "healed". The healing
+           will mark it as changed. To avoid this save all items that are
+           marked as changed right after loading from the database.
 
-        */
+         */
         if(gisItem && gisItem->isChanged())
         {
             updateItem(gisItem, item.id);

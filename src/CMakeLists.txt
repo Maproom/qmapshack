@@ -201,6 +201,7 @@ set( SRCS
     plot/CPlotDistance.cpp
     plot/ITrack.cpp
     plot/CPlotTrack.cpp
+    plot/CPlot.cpp
     qlgt/converter.cpp
     qlgt/CQlb.cpp
     qlgt/IItem.cpp
@@ -413,6 +414,7 @@ set( HDRS
     plot/CPlotDistance.h
     plot/ITrack.h
     plot/CPlotTrack.h
+    plot/CPlot.h
     qlgt/CQlb.h
     qlgt/IItem.h
     qlgt/CQlgtFolder.h

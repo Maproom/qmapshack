@@ -88,6 +88,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         return p.speed;
     }
                           , this);
+    plotSpeed->setLimits(0, NOFLOAT);
     plotSpeed->setMinimumSize(QSize(0, 100));
     plotSpeed->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
     plotSpeed->show();

@@ -28,14 +28,19 @@ public:
     using funcGet = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
 
     CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY, QWidget *parent);
+    virtual ~CPlot() = default;
 
-    virtual ~CPlot();
+    void setLimits(qreal min, qreal max);
 
     void updateData();
 
     void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove);
 
 private:
+    void setLimitsOnData(qreal min, qreal max);
+
+    qreal maxLimit = NOFLOAT;
+    qreal minLimit = NOFLOAT;
     qreal factor = 1.0;
     funcGet getX = 0;
     funcGet getY = 0;

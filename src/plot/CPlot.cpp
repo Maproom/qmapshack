@@ -33,11 +33,13 @@ CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabe
     updateData();
 }
 
-
-CPlot::~CPlot()
+void CPlot::setLimits(qreal min, qreal max)
 {
-}
+    minLimit = min;
+    maxLimit = max;
 
+    setLimitsOnData(minLimit, maxLimit);
+}
 
 void CPlot::updateData()
 {
@@ -73,8 +75,7 @@ void CPlot::updateData()
     }
 
     newLine(line, "GPS");
-    setLimits();
-    resetZoom();
+    setLimitsOnData(minLimit, maxLimit);
 }
 
 void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
@@ -97,5 +98,16 @@ void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
         posMouse.rx() = left  + data->x().val2pt(getX(*ptMouseMove));
         posMouse.ry() = top  +  data->y().val2pt(getY(*ptMouseMove));
     }
+    update();
+}
+
+void CPlot::setLimitsOnData(qreal min, qreal max)
+{
+    IPlot::setLimits();
+    data->ymin = min == NOFLOAT ? data->ymin : min;
+    data->ymax = max == NOFLOAT ? data->ymax : max;
+
+    data->y().setLimits(data->ymin, data->ymax);
+    resetZoom();
     update();
 }

@@ -27,7 +27,7 @@ class CGisItemTrk;
 class CActivityTrk
 {
 public:
-    virtual ~CActivityTrk();
+    virtual ~CActivityTrk() = default;
 
     struct activity_summary_t
     {

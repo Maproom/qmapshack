@@ -26,6 +26,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CSelectActivity.h"
+#include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
@@ -1506,7 +1507,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         CDraw::arrows(l, extViewport, p, 10, 80);
     }
 
-    if(-1 == knownCSrcIdx && colorSource.isEmpty())
+    if(colorSource.isEmpty())
     {
         // use the track's ordinary color
         penForeground.setColor(color);
@@ -1523,85 +1524,9 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 }
 
-const struct CGisItemTrk::ColorizeSource CGisItemTrk::colorizeSource[TRK_N_COLORIZESOURCES]
-{
-    {"slope", "Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/CSrcSlope.png",
-        [](const trkpt_t &pp, const trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; } },
-
-    {"speed", "Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/CSrcSpeed.png",
-        [](const trkpt_t &pp, const trkpt_t &p) { return p.speed; } },
-
-    {"ele", "Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/CSrcElevation.png",
-        [](const trkpt_t &pp, const trkpt_t &p) { return p.ele; } },
-
-    {"gpxtpx:TrackPointExtension|gpxtpx:hr", "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/CSrcHR.png",
-        [](const trkpt_t &pp, const trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); } }
-};
-
-const struct CGisItemTrk::ColorizeSource CGisItemTrk::unknownColorizeSource
-    {"", "", 0., 10., -10000, 10000, "", "://icons/32x32/CSrcUnknown.png", nullptr};
-
-QStringList CGisItemTrk::getExistingUnknownColorizeSources()
-{
-    QStringList list;
-    if(trk.segs.isEmpty())
-    {
-        return list;
-    }
-    const trkseg_t &seg = trk.segs[0];
-
-    if(seg.pts.isEmpty())
-    {
-        return list;
-    }
-    const trkpt_t  &pt  = seg.pts[0];
-
-    foreach(const QString &key, pt.extensions.keys())
-    {
-        // only offer numeric, unknown extensions
-        bool isReal = false;
-        (void) pt.extensions.value(key).toReal(&isReal);
-
-        bool isKnown = false;
-        for(size_t i = 0; i < TRK_N_COLORIZESOURCES && !isKnown; i++)
-        {
-            isKnown = (key == colorizeSource[i].intName);
-        }
-
-        if(isReal && !isKnown)
-        {
-            list << key;
-        }
-    }
-
-    qSort(list.begin(), list.end(), [] (const QString &s1, const QString &s2)
-        {
-            return s1.toLower() < s2.toLower();
-        }
-    );
-
-    return list;
-}
-
-CGisItemTrk::colorFunc_t CGisItemTrk::getColorizeFunction()
-{
-    if(-1 == knownCSrcIdx)
-    {
-        QString source = colorSource;
-        return [source] (const trkpt_t &pp, const trkpt_t &p)
-        {
-            return p.extensions.value(source).toReal();
-        };
-    }
-    else
-    {
-        return colorizeSource[knownCSrcIdx].colorFunc;
-    }
-}
-
 void CGisItemTrk::drawColorized(QPainter &p)
 {
-    auto colorizeFunction = getColorizeFunction();
+    auto colorizeFunction = CKnownExtension::get(colorSource).colorFunc;
 
     QImage colors(1, 256, QImage::Format_RGB888);
     QPainter colorsPainter(&colors);
@@ -1657,12 +1582,17 @@ void CGisItemTrk::drawColorized(QPainter &p)
     }
 }
 
-float CGisItemTrk::getExtremum(bool getMaximum)
+void CGisItemTrk::getExtrema(qreal &min, qreal &max) const
 {
-    float min = std::numeric_limits<float>::max();
-    float max = std::numeric_limits<float>::lowest();
+    getExtrema(min, max, colorSource);
+}
 
-    auto colorizeFunction = getColorizeFunction();
+void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) const
+{
+    min = std::numeric_limits<float>::max();
+    max = std::numeric_limits<float>::lowest();
+
+    auto colorizeFunction = CKnownExtension::get(source).colorFunc;
 
     foreach(const trkseg_t &segment, trk.segs)
     {
@@ -1690,56 +1620,89 @@ float CGisItemTrk::getExtremum(bool getMaximum)
             ptPrev = &pt;
         }
     }
-    return getMaximum ? max : min;
 }
 
-std::array<bool, TRK_N_COLORIZESOURCES> CGisItemTrk::getExistingKnownColorizeSources()
+QStringList CGisItemTrk::getExistingColorizeSources() const
 {
-    std::array<bool, TRK_N_COLORIZESOURCES> existing;
-    for(int i = 0; i < TRK_N_COLORIZESOURCES; i++)
-    {
-        existing[i] = false;
-    }
+    QStringList known;
+    QStringList unknown;
 
     // even sources with some datapoints missing are assumed as 'existing'
     if(trk.segs.isEmpty())
     {
-        return existing;
+        return known;
     }
     const trkseg_t &seg = trk.segs[0];
 
     if(seg.pts.isEmpty())
     {
-        return existing;
+        return known;
     }
     const trkpt_t  &pt  = seg.pts[0];
 
-    existing[0] = NOFLOAT != pt.slope1;
-    existing[1] = NOFLOAT != pt.speed;
-    existing[2] = NOINT   != pt.ele;
-    existing[3] = pt.extensions.contains("gpxtpx:TrackPointExtension|gpxtpx:hr");
+    if(NOFLOAT != pt.slope1)
+    {
+        known << "slope";
+    }
 
-    return existing;
+    if(NOFLOAT != pt.speed)
+    {
+        known << "speed";
+    }
+
+    if(NOINT != pt.ele)
+    {
+        known << "ele";
+    }
+
+    foreach(const QString &key, pt.extensions.keys())
+    {
+        // only offer numeric extensions
+        bool isReal = false;
+        (void) pt.extensions.value(key).toReal(&isReal);
+
+        qreal min, max;
+        getExtrema(min, max, key);
+
+        qDebug() << key << isReal << max << min;
+        if(isReal && (max - min >= 0.1))
+        {
+            if(CKnownExtension::isKnown(key))
+            {
+                known   << key;
+            } else {
+                unknown << key;
+            }
+        }
+    }
+
+    auto stringSort = [] (const QString &s1, const QString &s2)
+    {
+        return s1.toLower() < s2.toLower();
+    };
+
+    qSort(known.begin(),   known.end(),   stringSort);
+    qSort(unknown.begin(), unknown.end(), stringSort);
+
+    return known + unknown;
 }
 
 void CGisItemTrk::setColorizeSource(QString src)
 {
     if(src != colorSource)
     {
+        qDebug() << src;
         colorSource = src;
 
-        int colorizeIdx = -1;
-        for(size_t i = 0; i < TRK_N_COLORIZESOURCES && -1 == colorizeIdx; i++)
+        const CKnownExtension ext = CKnownExtension::get(src);
+        if(ext.known)
         {
-            if(src == colorizeSource[i].intName)
-            {
-                colorizeIdx = i;
-            }
+            limitLow  = ext.defLimitLow;
+            limitHigh = ext.defLimitHigh;
+        } else {
+            getExtrema(limitLow, limitHigh);
         }
 
-        knownCSrcIdx = colorizeIdx;
-        limitLow    = colorizeSource[knownCSrcIdx].defLimitLow;
-        limitHigh   = colorizeSource[knownCSrcIdx].defLimitHigh;
         notifyChange();
         updateHistory();
     }
@@ -1761,11 +1724,7 @@ void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 
 const QString CGisItemTrk::getColorizeUnit() const
 {
-    if(-1 == knownCSrcIdx)
-    {
-        return "";
-    }
-    return colorizeSource[knownCSrcIdx].unit;
+    return CKnownExtension::get(colorSource).unit;
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
@@ -1973,6 +1932,7 @@ void CGisItemTrk::setColor(int idx)
 {
     if(idx < TRK_N_COLORS)
     {
+        qDebug() << "new fixed color: " << idx;
         setColor(IGisItem::colorMap[idx].color);
         changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
         notifyChange();
@@ -2086,6 +2046,7 @@ void CGisItemTrk::setColor(const QColor& c)
     }
 
     color  = IGisItem::colorMap[colorIdx].color;
+    qDebug() << color;
     bullet = QPixmap(IGisItem::colorMap[colorIdx].bullet);
 
     setIcon(color2str(color));

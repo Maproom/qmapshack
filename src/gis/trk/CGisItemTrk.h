@@ -42,8 +42,6 @@ class CProgressDialog;
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
 
-#define TRK_N_COLORIZESOURCES  4
-
 #include <QDebug>
 
 class CGisItemTrk : public IGisItem, public IGisLine
@@ -243,22 +241,6 @@ public:
         @{
     */
 public:
-    using colorFunc_t = std::function<float(const trkpt_t&, const trkpt_t&)>;
-
-    struct ColorizeSource
-    {
-        const char       *intName;      //< internal name for the specific source, for extensions the path
-        const char       *name;         //< userfriendly name ("Speed" "Heart Rate")
-        const qreal       defLimitLow;  //< the default lower limit
-        const qreal       defLimitHigh; //< the default high limit
-        const qreal       minimum;      //< hard (enforced) minimum, cannot go lower
-        const qreal       maximum;      //< hard (enforced) maximum, cannot go higher
-        const char       *unit;         //< the unit (to be displayed)
-        const char       *icon;         //< path to an icon
-        const colorFunc_t colorFunc;    //< the function used to retrieve the value
-    };
-
-    static const struct ColorizeSource colorizeSource[TRK_N_COLORIZESOURCES];
     static const struct ColorizeSource unknownColorizeSource;
 
     /** @brief Set the colorize source to the source specified.
@@ -276,31 +258,32 @@ public:
         return colorSource;
     }
 
+    QStringList getExistingColorizeSources() const;
+
     void setColorizeLimitLow(qreal limit);
-    qreal getColorizeLimitLow()
+    qreal getColorizeLimitLow() const
     {
         return limitLow;
     }
 
     void setColorizeLimitHigh(qreal limit);
-    qreal getColorizeLimitHigh()
+    qreal getColorizeLimitHigh() const
     {
         return limitHigh;
     }
 
     const QString getColorizeUnit() const;
 
-    float getExtremum(bool getMaximum);
+    void getExtrema(qreal &min, qreal &max) const;
 
 private:
-    int     knownCSrcIdx = -1; //< The index of the source to be used for (slope-)coloring tracks
+    void getExtrema(qreal &min, qreal &max, const QString &source) const;
+
     QString colorSource  = "";
 
     // the low and high limit for (slope-)colored drawing of tracks
     qreal limitLow  = -10;
     qreal limitHigh =  10;
-
-    colorFunc_t getColorizeFunction();
 
     void drawColorized(QPainter &p);
     /**@}*/
@@ -777,9 +760,6 @@ public:
     {
         return trk;
     }
-
-    std::array<bool, TRK_N_COLORIZESOURCES> getExistingKnownColorizeSources();
-    QStringList getExistingUnknownColorizeSources();
 
     void registerNotification(INotifiable *obj);
     void unregisterNotification(INotifiable *obj);

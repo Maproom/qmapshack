@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/trk/CDetailsTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/filter/CFilterMedian.h"
@@ -70,46 +71,20 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     }
     layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
 
+    // the first entry `static color`, it is always available
+    comboColorSource->addItem(QIcon("://icons/32x32/Tainted.png"), "Static color");
+    foreach(const QString &key, trk.getExistingColorizeSources())
+    {
+        const CKnownExtension &ext = CKnownExtension::get(key);
+        QIcon icon(ext.icon);
+        comboColorSource->addItem(icon, ext.known ? ext.name : key, key);
+    }
+
     setupGui();
 
     plotElevation->setTrack(&trk);
     plotDistance->setTrack(&trk);
     plotSpeed->setTrack(&trk);
-
-    // add all available slope sources to the corresponding combobox
-    bool haveDisabledEntry = false;
-    std::array<bool, TRK_N_COLORIZESOURCES> existingSources = trk.getExistingKnownColorizeSources();
-
-    // never disable the first entry `static color`, it is always available
-    comboColorSource->addItem(QIcon("://icons/32x32/Tainted.png"), "Static color");
-    for(size_t i = 0; i < TRK_N_COLORIZESOURCES; i++)
-    {
-        QIcon icon(CGisItemTrk::colorizeSource[i].icon);
-        comboColorSource->addItem(icon, CGisItemTrk::colorizeSource[i].name, CGisItemTrk::colorizeSource[i].intName);
-
-        if(!existingSources[i])
-        {
-            comboColorSource->setItemData(i + 1, false, Qt::UserRole - 1);
-            haveDisabledEntry = true;
-        }
-    }
-
-    foreach(const QString &key, trk.getExistingUnknownColorizeSources())
-    {
-        QIcon icon("://icons/32x32/CSrcUnknown.png");
-        comboColorSource->addItem(icon, key, key);
-    }
-
-    // show a message as soon as entries have been disabled
-    if(haveDisabledEntry)
-    {
-        labelDisabledEntries->setText("Some sources are disabled due to missing data.");
-    }
-
-    int currentIdx = comboColorSource->findData(trk.getColorizeSource());
-    if(-1 == currentIdx) currentIdx = 0;
-    comboColorSource->setCurrentIndex(currentIdx);
-    slotColorSourceChanged(currentIdx, trk.getColorizeLimitLow(), trk.getColorizeLimitHigh());
 
     if(trk.isOnDevice())
     {
@@ -210,14 +185,16 @@ CDetailsTrk::~CDetailsTrk()
 
 void CDetailsTrk::slotLimitLowFromData()
 {
-    float min = trk.getExtremum(false);
+    qreal min, max;
+    trk.getExtrema(min, max);
     spinLimitLow->setValue(min);
     slotColorLimitLowChanged();
 }
 
 void CDetailsTrk::slotLimitHighFromData()
 {
-    float max = trk.getExtremum(true);
+    qreal min, max;
+    trk.getExtrema(min, max);
     spinLimitHigh->setValue(max);
     slotColorLimitHighChanged();
 }
@@ -399,6 +376,46 @@ void CDetailsTrk::setupGui()
         }
     }
 
+    int currentIdx = comboColorSource->findData(trk.getColorizeSource());
+    if(-1 == currentIdx) {
+        currentIdx = 0;
+    }
+
+    bool enabled = (0 < currentIdx);
+
+    spinLimitLow->setEnabled    (enabled);
+    spinLimitHigh->setEnabled   (enabled);
+    widgetColorLabel->setEnabled(enabled);
+    btnMinFromData->setEnabled  (enabled);
+    btnMaxFromData->setEnabled  (enabled);
+
+    comboColorSource->blockSignals(true);
+    comboColorSource->setCurrentIndex(currentIdx);
+    comboColorSource->blockSignals(false);
+
+    if(currentIdx > 0)
+    {
+        const CKnownExtension &ext = CKnownExtension::get(comboColorSource->itemData(currentIdx).toString());
+
+        spinLimitLow->blockSignals(true);
+        spinLimitLow->setMinimum(ext.minimum);
+        spinLimitLow->setMaximum(ext.maximum);
+        spinLimitLow->setSuffix (ext.unit);
+        spinLimitLow->setValue  (trk.getColorizeLimitLow());
+        spinLimitLow->blockSignals(false);
+
+        spinLimitHigh->blockSignals(true);
+        spinLimitHigh->setMinimum(ext.minimum);
+        spinLimitHigh->setMaximum(ext.maximum);
+        spinLimitHigh->setSuffix (ext.unit);
+        spinLimitHigh->setValue  (trk.getColorizeLimitHigh());
+        spinLimitHigh->blockSignals(false);
+
+        widgetColorLabel->setMinimum(spinLimitLow->value());
+        widgetColorLabel->setMaximum(spinLimitHigh->value());
+        widgetColorLabel->setUnit(ext.unit);
+    } 
+
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::setupGui");
 }
@@ -491,44 +508,8 @@ void CDetailsTrk::slotColorChanged(int idx)
 
 void CDetailsTrk::slotColorSourceChanged(int idx, float valueLow, float valueHigh)
 {
-    // index 0 in the combobox: `static color`.
-    // the static color is only used if the colorizeSource is set to -1
-    // as soon as colorizeSource is set >= 0 the "real" source is used
-    const int idxInSource = idx - 1;
-
-    spinLimitLow->setEnabled    (-1 != idxInSource);
-    spinLimitHigh->setEnabled   (-1 != idxInSource);
-    widgetColorLabel->setEnabled(-1 != idxInSource);
-    btnMinFromData->setEnabled  (-1 != idxInSource);
-    btnMaxFromData->setEnabled  (-1 != idxInSource);
-
-    const struct CGisItemTrk::ColorizeSource &source = (
-        -1 != idxInSource && idxInSource < TRK_N_COLORIZESOURCES ? CGisItemTrk::colorizeSource[idxInSource] : CGisItemTrk::unknownColorizeSource
-    );
-
     trk.setColorizeSource(comboColorSource->itemData(idx).toString());
-
-    spinLimitLow->setMinimum(source.minimum);
-    spinLimitLow->setMaximum(source.maximum);
-    spinLimitLow->setSuffix (source.unit);
-
-    spinLimitHigh->setMinimum(source.minimum);
-    spinLimitHigh->setMaximum(source.maximum);
-    spinLimitHigh->setSuffix (source.unit);
-
-    // update the limits
-    if(idxInSource >= TRK_N_COLORIZESOURCES)
-    {
-        spinLimitLow->setValue (trk.getExtremum(false));
-        spinLimitHigh->setValue(trk.getExtremum(true));
-    } else {
-        spinLimitLow->setValue (HUGE_VALF != valueLow  ? valueLow  : source.defLimitLow);
-        spinLimitHigh->setValue(HUGE_VALF != valueHigh ? valueHigh : source.defLimitHigh);
-    }
-
-    widgetColorLabel->setMinimum(spinLimitLow->value());
-    widgetColorLabel->setMaximum(spinLimitHigh->value());
-    widgetColorLabel->setUnit(source.unit);
+    setupGui();
 }
 
 void CDetailsTrk::slotColorLimitHighChanged()

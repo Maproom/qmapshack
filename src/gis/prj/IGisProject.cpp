@@ -32,6 +32,13 @@
 
 #include <QtWidgets>
 
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.qms)";
+const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx)";
+const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
+const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
+const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS;
+
+
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
@@ -238,7 +245,7 @@ void IGisProject::updateItems()
             if(progress.wasCanceled())
             {
                 QString msg = QObject::tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
-                int res = QMessageBox::question(&progress, QObject::tr("Cancelled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                int res = QMessageBox::question(&progress, QObject::tr("Canceled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
                 noCorrelation = res == QMessageBox::Yes;
                 break;
             }
@@ -424,7 +431,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
             delete item;
 
             /*
-                Database projects are a bit different. Deleteing an item does not really
+                Database projects are a bit different. Deleting an item does not really
                 mean the project is changed as the item is still stored in the database.
              */
             if(type != eTypeDb)

@@ -268,7 +268,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf)
     qreal nTiles = ((right - left) * (bottom - top) / (dx*dy));
     if(hasOverviews)
     {
-        // if there are overviews tiles canbe reduced by reading
+        // if there are overviews tiles can be reduced by reading
         // with a scale factor from file. Increase amount of pixel
         // read until tile limit is met.
         while(nTiles > TILELIMIT)

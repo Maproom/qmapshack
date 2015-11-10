@@ -547,7 +547,7 @@ void CMapIMG::readBasics()
     // start of new subfile part
     /*
         It is taken for granted that the single subfile parts are not
-        fragmented within the file. Thus it is not really neccessary to
+        fragmented within the file. Thus it is not really necessary to
         store and handle all block sequence numbers. Just the first one
         will give us the offset. This also implies that it is not necessary
         to care about FAT blocks with a non-zero part number.
@@ -555,7 +555,7 @@ void CMapIMG::readBasics()
         2007-03-31: Garmin's world base map seems to be coded different.
                     The part field seems to be rather a bit field than
                     a part number. As the total subfile size is given
-                    for the first part only (for all otheres it's zero)
+                    for the first part only (for all others it's zero)
                     I use it to identify the 1st part of a subfile
 
         2007-05-26: Gmapsupp images by Sendmap code quite some bull shit,
@@ -1080,7 +1080,7 @@ void CMapIMG::processPrimaryMapData()
     QMap<QString,subfile_desc_t>::const_iterator subfile = subfiles.begin();
     /*
      * Query all subfiles for possible maplevels.
-     * Exclude basemap to avoid polution.
+     * Exclude basemap to avoid pollution.
      */
     while (subfile != subfiles.end())
     {
@@ -2088,7 +2088,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
             rect.adjust(0,0,4,4);
             rect.moveCenter(pt->pos.toPoint());
 
-            // test rectangle for intersection with existng labels
+            // test rectangle for intersection with existing labels
             QVector<strlbl_t>::const_iterator label = labels.constBegin();
             while(label != labels.constEnd())
             {
@@ -2191,7 +2191,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
             rect.adjust(0,0,4,4);
             rect.moveCenter(pt->pos.toPoint());
 
-            // test rectangle for intersection with existng labels
+            // test rectangle for intersection with existing labels
             QVector<strlbl_t>::const_iterator label = labels.begin();
             while(label != labels.end())
             {

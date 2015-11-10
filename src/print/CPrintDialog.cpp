@@ -103,7 +103,7 @@ void CPrintDialog::slotUpdateMetrics()
     QPointF pt1 = rectSelArea.topLeft();
     QPointF pt2 = rectSelArea.bottomRight();
 
-    // calculate real meter dimensions from corenr points
+    // calculate real meter dimensions from corner points
     qreal mWidth    = GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt1.y());
     qreal mHeight   = GPS_Math_Distance(pt1.x(), pt1.y(), pt1.x(), pt2.y());
 
@@ -254,17 +254,27 @@ void CPrintDialog::slotSave()
     SETTINGS;
     QString path = cfg.value("Paths/lastImagePath", "./").toString();
 
-    QString filter = "*.png";
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save map..."), path, "*.png;;*.jpg", &filter);
+    QString filterPNG = "PNG Image (*.png)";
+    QString filterJPG = "JPEG Image (*.jpg)";
+    QString filter    = filterPNG;
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save map..."), path, filterPNG + ";; " + filterJPG, &filter);
     if(filename.isEmpty())
     {
         return;
     }
 
-    QFileInfo fi(filename);
-    if(fi.suffix().toLower() != filter.mid(2))
+    QString expectedSuffix;
+    if(filter == filterPNG)
     {
-        filename += filter.mid(1);
+        expectedSuffix = "png";
+    } else if(filter == filterJPG) {
+        expectedSuffix = "jpg";
+    }
+
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() != expectedSuffix)
+    {
+        filename += "." + expectedSuffix;
     }
 
     img.save(filename);

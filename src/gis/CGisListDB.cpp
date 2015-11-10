@@ -278,7 +278,7 @@ void CGisListDB::slotDelDatabase()
         return;
     }
 
-    int res = QMessageBox::question(this, tr("Remove database..."), tr("Do you realy want to remove '%1' from the list?").arg(folder->text(CGisListDB::eColumnName)), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+    int res = QMessageBox::question(this, tr("Remove database..."), tr("Do you really want to remove '%1' from the list?").arg(folder->text(CGisListDB::eColumnName)), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
     if(res != QMessageBox::Ok)
     {
         return;

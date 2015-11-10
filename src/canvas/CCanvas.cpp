@@ -41,6 +41,7 @@
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
+#include "widgets/CColorLegend.h"
 
 #include <QtWidgets>
 
@@ -541,7 +542,6 @@ void CCanvas::drawScale(QPainter& p)
         return;
     }
 
-
     // step I: get the approximate distance for 200px in the bottom right corner
     QPointF brc(rect().bottomRight() - QPoint(50,30));
     QPointF pt1 = brc;
@@ -628,6 +628,7 @@ void CCanvas::slotCheckTrackOnFocus()
         saveSizeTrackProfile();
         // get access to current track object
         delete plotTrackProfile;
+        delete colorLegend;
         keyTrackOnFocus.clear();
 
         // get access to next track object
@@ -644,6 +645,9 @@ void CCanvas::slotCheckTrackOnFocus()
         {
             plotTrackProfile->show();
         }
+
+        colorLegend = new CColorLegend(this, trk2);
+        colorLegend->setGeometry(20, 20, 40, 300);
 
         // finally store the new key as track on focus
         keyTrackOnFocus = key;

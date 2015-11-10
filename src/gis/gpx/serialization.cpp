@@ -26,108 +26,22 @@
 
 #include <QtXml>
 #include <proj_api.h>
-const QString IGisProject::gpx_ns      = "http://www.topografix.com/GPX/1/1";
-const QString IGisProject::xsi_ns      = "http://www.w3.org/2001/XMLSchema-instance";
-const QString IGisProject::gpxx_ns     = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
-const QString IGisProject::gpxtpx_ns   = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
-const QString IGisProject::wptx1_ns    = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
-const QString IGisProject::rmc_ns      = "urn:net:trekbuddy:1.0:nmea:rmc";
-const QString IGisProject::ql_ns       = "http://www.qlandkarte.org/xmlschemas/v1.1";
-const QString IGisProject::gs_ns       = "http://www.groundspeak.com/cache/1/0";
 
-static QString unifyColor(const QString& color)
-{
-    if(QColor(color) == Qt::black)
-    {
-        return "Black";
-    }
-    else if(QColor(color) == Qt::darkRed)
-    {
-        return "DarkRed";
-    }
-    else if(QColor(color) == Qt::darkGreen)
-    {
-        return "DarkGreen";
-    }
-    else if(QColor(color) == Qt::darkYellow)
-    {
-        return "DarkYellow";
-    }
-    else if(QColor(color) == Qt::darkBlue)
-    {
-        return "DarkBlue";
-    }
-    else if(QColor(color) == Qt::darkMagenta)
-    {
-        return "DarkMagenta";
-    }
-    else if(QColor(color) == Qt::darkCyan)
-    {
-        return "DarkCyan";
-    }
-    else if(QColor(color) == Qt::lightGray)
-    {
-        return "LightGray";
-    }
-    else if(QColor(color) == Qt::darkGray)
-    {
-        return "DarkGray";
-    }
-    else if(QColor(color) == Qt::red)
-    {
-        return "Red";
-    }
-    else if(QColor(color) == Qt::green)
-    {
-        return "Green";
-    }
-    else if(QColor(color) == Qt::yellow)
-    {
-        return "Yellow";
-    }
-    else if(QColor(color) == Qt::blue)
-    {
-        return "Blue";
-    }
-    else if(QColor(color) == Qt::magenta)
-    {
-        return "Magenta";
-    }
-    else if(QColor(color) == Qt::cyan)
-    {
-        return "Cyan";
-    }
-    else if(QColor(color) == Qt::white)
-    {
-        return "White";
-    }
-
-
-    return "Blue";
-}
-
-
-static void readXml(const QDomNode& xml, const QString& tag, bool& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        bool tmp;
-        bool ok = false;
-        tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
-        if(ok)
-        {
-            value = tmp;
-        }
-    }
-}
+const QString IGisProject::gpx_ns    = "http://www.topografix.com/GPX/1/1";
+const QString IGisProject::xsi_ns    = "http://www.w3.org/2001/XMLSchema-instance";
+const QString IGisProject::gpxx_ns   = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
+const QString IGisProject::gpxtpx_ns = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
+const QString IGisProject::wptx1_ns  = "http://www.garmin.com/xmlschemas/WaypointExtension/v1";
+const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
+const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
+const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
 
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
 {
     if(xml.namedItem(tag).isElement())
     {
-        qint32 tmp;
         bool ok = false;
-        tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
+        qint32 tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
         if(!ok)
         {
             tmp = qRound(xml.namedItem(tag).toElement().text().toDouble(&ok));
@@ -139,41 +53,25 @@ static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
     }
 }
 
-static void readXml(const QDomNode& xml, const QString& tag, quint32& value)
+template<typename T>
+static void readXml(const QDomNode& xml, const QString& tag, T& value)
 {
     if(xml.namedItem(tag).isElement())
     {
-        quint32 tmp;
         bool ok = false;
-        tmp = xml.namedItem(tag).toElement().text().toUInt(&ok);
-        if(ok)
-        {
-            value = tmp;
-        }
-    }
-}
+        T tmp;
 
-static void readXml(const QDomNode& xml, const QString& tag, quint64& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        quint64 tmp;
-        bool ok = false;
-        tmp = xml.namedItem(tag).toElement().text().toULongLong(&ok);
-        if(ok)
+	if(std::is_same<T, quint32>::value)
         {
-            value = tmp;
+            tmp = xml.namedItem(tag).toElement().text().toUInt(&ok);
+        } else if(std::is_same<T, quint64>::value) {
+            tmp = xml.namedItem(tag).toElement().text().toULongLong(&ok);
+        } else if(std::is_same<T,   qreal>::value) {
+            tmp = xml.namedItem(tag).toElement().text().toDouble(&ok);
+        } else if(std::is_same<T,    bool>::value) {
+            tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
         }
-    }
-}
 
-static void readXml(const QDomNode& xml, const QString& tag, qreal& value)
-{
-    if(xml.namedItem(tag).isElement())
-    {
-        qreal tmp;
-        bool ok = false;
-        tmp = xml.namedItem(tag).toElement().text().toDouble(&ok);
         if(ok)
         {
             value = tmp;
@@ -194,18 +92,8 @@ static void readXml(const QDomNode& xml, const QString& tag, QString& value, boo
     if(xml.namedItem(tag).isElement())
     {
         const QDomNamedNodeMap& attr = xml.namedItem(tag).toElement().attributes();
-
-        if(attr.namedItem("html").nodeValue().toLocal8Bit().toLower() == "true")
-        {
-            isHtml = true;
-            value = xml.namedItem(tag).toElement().text();
-        }
-        else
-        {
-            isHtml = false;
-            value = "<pre>" + xml.namedItem(tag).toElement().text() + "</pre>";
-            value = xml.namedItem(tag).toElement().text();
-        }
+        isHtml = (attr.namedItem("html").nodeValue().toLocal8Bit().toLower() == "true");
+        value  = xml.namedItem(tag).toElement().text();
     }
 }
 
@@ -245,13 +133,12 @@ static void readXml(const QDomNode& xml, IGisItem::history_t& history)
         const QDomElement& xmlHistory = xml.namedItem("ql:history").toElement();
 
         const QDomNodeList& xmlEntries = xmlHistory.elementsByTagName("ql:event");
-        int N = xmlEntries.count();
-        for(int n = 0; n < N; ++n)
+        for(int n = 0; n < xmlEntries.count(); ++n)
         {
             const QDomNode& xmlEntry = xmlEntries.item(n);
             IGisItem::history_event_t entry;
-            readXml(xmlEntry, "ql:icon", entry.icon);
-            readXml(xmlEntry, "ql:time", entry.time);
+            readXml(xmlEntry, "ql:icon",    entry.icon);
+            readXml(xmlEntry, "ql:time",    entry.time);
             readXml(xmlEntry, "ql:comment", entry.comment);
 
             history.events << entry;
@@ -338,7 +225,7 @@ static void writeXml(QDomNode& xml, const QString& tag, const QString& val, bool
         xml.appendChild(elem);
         QDomText text = xml.ownerDocument().createCDATASection(val);
         elem.appendChild(text);
-        elem.setAttribute("html",isHtml ? "True" : "False");
+        elem.setAttribute("html", isHtml ? "True" : "False");
     }
 }
 
@@ -381,8 +268,8 @@ static void writeXml(QDomNode& xml, const IGisItem::history_t& history)
             const IGisItem::history_event_t& event = history.events[i];
             QDomElement xmlEvent = xml.ownerDocument().createElement("ql:event");
             xmlHistory.appendChild(xmlEvent);
-            writeXml(xmlEvent,"ql:icon", event.icon);
-            writeXml(xmlEvent,"ql:time", event.time);
+            writeXml(xmlEvent,"ql:icon",    event.icon);
+            writeXml(xmlEvent,"ql:time",    event.time);
             writeXml(xmlEvent,"ql:comment", event.comment);
         }
     }
@@ -393,8 +280,8 @@ static void writeXml(QDomNode& xml, const QString& tag, const QPoint& offsetBubb
     QDomElement elem = xml.ownerDocument().createElement(tag);
     xml.appendChild(elem);
 
-    elem.setAttribute("xoff", offsetBubble.x());
-    elem.setAttribute("yoff", offsetBubble.y());
+    elem.setAttribute("xoff",  offsetBubble.x());
+    elem.setAttribute("yoff",  offsetBubble.y());
     elem.setAttribute("width", widthBubble);
 }
 
@@ -416,8 +303,7 @@ static void readXml(const QDomNode& node, const QString& parentTags, QHash<QStri
     else
     {
         const QDomNodeList& list = node.childNodes();
-        const int N = list.size();
-        for(int i = 0; i < N; i++)
+        for(int i = 0; i < list.size(); i++)
         {
             readXml(list.at(i), tags, extensions);
         }
@@ -427,8 +313,7 @@ static void readXml(const QDomNode& node, const QString& parentTags, QHash<QStri
 static void readXml(const QDomNode& ext, QHash<QString, QVariant>& extensions)
 {
     const QDomNodeList& list = ext.childNodes();
-    const int N = list.size();
-    for(int i = 0; i < N; i++)
+    for(int i = 0; i < list.size(); i++)
     {
         readXml(list.at(i), "", extensions);
     }
@@ -438,11 +323,6 @@ static void readXml(const QDomNode& ext, QHash<QString, QVariant>& extensions)
 
 static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
 {
-    if(extensions.isEmpty())
-    {
-        return;
-    }
-
     QDomDocument doc = ext.ownerDocument();
 
     QStringList keys = extensions.keys();
@@ -518,21 +398,21 @@ void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
     if(xmlCopyright.isElement())
     {
         metadata.copyright.author = xmlCopyright.attributes().namedItem("author").nodeValue();
-        readXml(xmlCopyright, "year", metadata.copyright.year);
+        readXml(xmlCopyright, "year",    metadata.copyright.year);
         readXml(xmlCopyright, "license", metadata.copyright.license);
     }
 
-    readXml(xml,"link", metadata.links);
-    readXml(xml,"time", metadata.time);
+    readXml(xml,"link",     metadata.links);
+    readXml(xml,"time",     metadata.time);
     readXml(xml,"keywords", metadata.keywords);
 
     const QDomNode& xmlBounds = xml.namedItem("bounds");
     if(xmlBounds.isElement())
     {
         const QDomNamedNodeMap& attr = xmlBounds.attributes();
-        metadata.bounds.setLeft(attr.namedItem("minlon").nodeValue().toDouble());
-        metadata.bounds.setTop(attr.namedItem("maxlat").nodeValue().toDouble());
-        metadata.bounds.setRight(attr.namedItem("maxlon").nodeValue().toDouble());
+        metadata.bounds.setLeft(  attr.namedItem("minlon").nodeValue().toDouble());
+        metadata.bounds.setTop(   attr.namedItem("maxlat").nodeValue().toDouble());
+        metadata.bounds.setRight( attr.namedItem("maxlon").nodeValue().toDouble());
         metadata.bounds.setBottom(attr.namedItem("minlat").nodeValue().toDouble());
     }
 }
@@ -544,13 +424,13 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
 
     gpx.setAttribute("version","1.1");
     gpx.setAttribute("creator","QMapShack " VER_STR " http://www.qlandkarte.org/");
-    gpx.setAttribute("xmlns",gpx_ns);
-    gpx.setAttribute("xmlns:xsi",xsi_ns);
-    gpx.setAttribute("xmlns:gpxx",gpxx_ns);
-    gpx.setAttribute("xmlns:gpxtpx",gpxtpx_ns);
-    gpx.setAttribute("xmlns:wptx1",wptx1_ns);
-    gpx.setAttribute("xmlns:rmc",rmc_ns);
-    gpx.setAttribute("xmlns:ql",ql_ns);
+    gpx.setAttribute("xmlns",        gpx_ns);
+    gpx.setAttribute("xmlns:xsi",    xsi_ns);
+    gpx.setAttribute("xmlns:gpxx",   gpxx_ns);
+    gpx.setAttribute("xmlns:gpxtpx", gpxtpx_ns);
+    gpx.setAttribute("xmlns:wptx1",  wptx1_ns);
+    gpx.setAttribute("xmlns:rmc",    rmc_ns);
+    gpx.setAttribute("xmlns:ql",     ql_ns);
 
     QString schemaLocation = QString()
                              + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
@@ -578,7 +458,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
         {
             QDomElement xmlEmail = doc.createElement("email");
             xmlAuthor.appendChild(xmlEmail);
-            xmlEmail.setAttribute("id", metadata.author.id);
+            xmlEmail.setAttribute("id",     metadata.author.id);
             xmlEmail.setAttribute("domain", metadata.author.domain);
         }
 
@@ -599,11 +479,11 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
         xmlMetadata.appendChild(xmlCopyright);
 
         xmlCopyright.setAttribute("author", metadata.copyright.author);
-        writeXml(xmlCopyright, "year", metadata.copyright.year);
-        writeXml(xmlCopyright, "license", metadata.copyright.license);
+        writeXml(xmlCopyright, "year",      metadata.copyright.year);
+        writeXml(xmlCopyright, "license",   metadata.copyright.license);
     }
-    writeXml(xmlMetadata, "link", metadata.links);
-    writeXml(xmlMetadata, "time", metadata.time);
+    writeXml(xmlMetadata, "link",     metadata.links);
+    writeXml(xmlMetadata, "time",     metadata.time);
     writeXml(xmlMetadata, "keywords", metadata.keywords);
 
     if(metadata.bounds.isValid())
@@ -660,8 +540,8 @@ void CGisItemWpt::save(QDomNode& gpx)
     // write the key as extension tag
     QDomElement xmlExt  = doc.createElement("extensions");
     xmlWpt.appendChild(xmlExt);
-    writeXml(xmlExt, "ql:key", key.item);
-    writeXml(xmlExt, "ql:flags", flags);
+    writeXml(xmlExt, "ql:key",    key.item);
+    writeXml(xmlExt, "ql:flags",  flags);
     writeXml(xmlExt, "ql:bubble", offsetBubble, widthBubble);
     writeXml(xmlExt, history);
 
@@ -699,17 +579,17 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
         geocache.status = QObject::tr("Not Available");
     }
 
-    readXml(xmlCache, "groundspeak:name", geocache.name);
-    readXml(xmlCache, "groundspeak:placed_by", geocache.owner);
-    readXml(xmlCache, "groundspeak:type", geocache.type);
-    readXml(xmlCache, "groundspeak:container", geocache.container);
-    readXml(xmlCache, "groundspeak:difficulty", geocache.difficulty);
-    readXml(xmlCache, "groundspeak:terrain", geocache.terrain);
+    readXml(xmlCache, "groundspeak:name",              geocache.name);
+    readXml(xmlCache, "groundspeak:placed_by",         geocache.owner);
+    readXml(xmlCache, "groundspeak:type",              geocache.type);
+    readXml(xmlCache, "groundspeak:container",         geocache.container);
+    readXml(xmlCache, "groundspeak:difficulty",        geocache.difficulty);
+    readXml(xmlCache, "groundspeak:terrain",           geocache.terrain);
     readXml(xmlCache, "groundspeak:short_description", geocache.shortDesc, geocache.shortDescIsHtml);
-    readXml(xmlCache, "groundspeak:long_description", geocache.longDesc, geocache.longDescIsHtml);
-    readXml(xmlCache, "groundspeak:encoded_hints", geocache.hint);
-    readXml(xmlCache, "groundspeak:country", geocache.country);
-    readXml(xmlCache, "groundspeak:state", geocache.state);
+    readXml(xmlCache, "groundspeak:long_description",  geocache.longDesc,  geocache.longDescIsHtml);
+    readXml(xmlCache, "groundspeak:encoded_hints",     geocache.hint);
+    readXml(xmlCache, "groundspeak:country",           geocache.country);
+    readXml(xmlCache, "groundspeak:state",             geocache.state);
 
     const QDomNodeList& logs = xmlCache.toElement().elementsByTagName("groundspeak:log");
     uint N = logs.count();
@@ -730,7 +610,7 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
         }
 
         readXml(xmlLog, "groundspeak:finder", log.finder);
-        readXml(xmlLog, "groundspeak:text", log.text, log.textIsHtml);
+        readXml(xmlLog, "groundspeak:text",   log.text, log.textIsHtml);
 
         geocache.logs << log;
     }
@@ -804,13 +684,13 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
 
 void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
 {
-    readXml(xml, "name", trk.name);
-    readXml(xml, "cmt", trk.cmt);
-    readXml(xml, "desc", trk.desc);
-    readXml(xml, "src", trk.src);
-    readXml(xml, "link", trk.links);
+    readXml(xml, "name",   trk.name);
+    readXml(xml, "cmt",    trk.cmt);
+    readXml(xml, "desc",   trk.desc);
+    readXml(xml, "src",    trk.src);
+    readXml(xml, "link",   trk.links);
     readXml(xml, "number", trk.number);
-    readXml(xml, "type", trk.type);
+    readXml(xml, "type",   trk.type);
 
     const QDomNodeList& trksegs = xml.toElement().elementsByTagName("trkseg");
     int N = trksegs.count();
@@ -842,13 +722,20 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     const QDomNode& ext = xml.namedItem("extensions");
     if(ext.isElement())
     {
-        readXml(ext, "ql:key", key.item);
+        readXml(ext, "ql:key",   key.item);
         readXml(ext, "ql:flags", flags);
         readXml(ext, history);
 
         const QDomNode& gpxx = ext.namedItem("gpxx:TrackExtension");
         readXml(gpxx, "gpxx:DisplayColor", trk.color);
         setColor(str2color(trk.color));
+
+        const QDomNode &extColoring = ext.namedItem("ql:coloring");
+        QString source;
+        readXml(extColoring, "ql:source",    source);
+        setColorizeSource(source);
+        readXml(extColoring, "ql:limitLow",  limitLow);
+        readXml(extColoring, "ql:limitHigh", limitHigh);
     }
 
     deriveSecondaryData();
@@ -863,13 +750,13 @@ void CGisItemTrk::save(QDomNode& gpx)
     QDomElement xmlTrk = doc.createElement("trk");
     gpx.appendChild(xmlTrk);
 
-    writeXml(xmlTrk, "name", trk.name);
-    writeXml(xmlTrk, "cmt", trk.cmt);
-    writeXml(xmlTrk, "desc", trk.desc);
-    writeXml(xmlTrk, "src", trk.src);
-    writeXml(xmlTrk, "link", trk.links);
+    writeXml(xmlTrk, "name",   trk.name);
+    writeXml(xmlTrk, "cmt",    trk.cmt);
+    writeXml(xmlTrk, "desc",   trk.desc);
+    writeXml(xmlTrk, "src",    trk.src);
+    writeXml(xmlTrk, "link",   trk.links);
     writeXml(xmlTrk, "number", trk.number);
-    writeXml(xmlTrk, "type", trk.type);
+    writeXml(xmlTrk, "type",   trk.type);
 
     // write the key as extension tag
     QDomElement xmlExt  = doc.createElement("extensions");
@@ -878,10 +765,17 @@ void CGisItemTrk::save(QDomNode& gpx)
     writeXml(xmlExt, "ql:flags", flags);
     writeXml(xmlExt, history);
 
+    // write source for coloring tracks
+    QDomElement xmlExtColoring = doc.createElement("ql:coloring");
+    xmlExt.appendChild(xmlExtColoring);
+    writeXml(xmlExtColoring, "ql:source",    colorSource);
+    writeXml(xmlExtColoring, "ql:limitLow",  limitLow);
+    writeXml(xmlExtColoring, "ql:limitHigh", limitHigh);
+
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
     xmlExt.appendChild(gpxx);
-    writeXml(gpxx, "gpxx:DisplayColor", unifyColor(trk.color));
+    writeXml(gpxx, "gpxx:DisplayColor", trk.color);
 
     foreach(const trkseg_t &seg, trk.segs)
     {
@@ -904,13 +798,13 @@ void CGisItemTrk::save(QDomNode& gpx)
 
 void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
 {
-    readXml(xml, "name", rte.name);
-    readXml(xml, "cmt", rte.cmt);
-    readXml(xml, "desc", rte.desc);
-    readXml(xml, "src", rte.src);
-    readXml(xml, "link", rte.links);
+    readXml(xml, "name",   rte.name);
+    readXml(xml, "cmt",    rte.cmt);
+    readXml(xml, "desc",   rte.desc);
+    readXml(xml, "src",    rte.src);
+    readXml(xml, "link",   rte.links);
     readXml(xml, "number", rte.number);
-    readXml(xml, "type", rte.type);
+    readXml(xml, "type",   rte.type);
 
     const QDomNodeList& xmlRtepts = xml.toElement().elementsByTagName("rtept");
     int M = xmlRtepts.count();
@@ -939,13 +833,13 @@ void CGisItemRte::save(QDomNode& gpx)
     QDomElement xmlRte = doc.createElement("rte");
     gpx.appendChild(xmlRte);
 
-    writeXml(xmlRte, "name", rte.name);
-    writeXml(xmlRte, "cmt", rte.cmt);
-    writeXml(xmlRte, "desc", rte.desc);
-    writeXml(xmlRte, "src", rte.src);
-    writeXml(xmlRte, "link", rte.links);
+    writeXml(xmlRte, "name",   rte.name);
+    writeXml(xmlRte, "cmt",    rte.cmt);
+    writeXml(xmlRte, "desc",   rte.desc);
+    writeXml(xmlRte, "src",    rte.src);
+    writeXml(xmlRte, "link",   rte.links);
     writeXml(xmlRte, "number", rte.number);
-    writeXml(xmlRte, "type", rte.type);
+    writeXml(xmlRte, "type",   rte.type);
 
     // write the key as extension tag
     QDomElement xmlExt  = doc.createElement("extensions");
@@ -962,22 +856,20 @@ void CGisItemRte::save(QDomNode& gpx)
 
 void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
 {
-    readXml(xml, "ql:name", area.name);
-    readXml(xml, "ql:cmt", area.cmt);
-    readXml(xml, "ql:desc", area.desc);
-    readXml(xml, "ql:src", area.src);
-    readXml(xml, "ql:link", area.links);
-    readXml(xml, "ql:number", area.number);
-    readXml(xml, "ql:type", area.type);
-    readXml(xml, "ql:color", area.color);
-    readXml(xml, "ql:width", area.width);
-    readXml(xml, "ql:style", area.style);
+    readXml(xml, "ql:name",    area.name);
+    readXml(xml, "ql:cmt",     area.cmt);
+    readXml(xml, "ql:desc",    area.desc);
+    readXml(xml, "ql:src",     area.src);
+    readXml(xml, "ql:link",    area.links);
+    readXml(xml, "ql:number",  area.number);
+    readXml(xml, "ql:type",    area.type);
+    readXml(xml, "ql:color",   area.color);
+    readXml(xml, "ql:width",   area.width);
+    readXml(xml, "ql:style",   area.style);
     readXml(xml, "ql:opacity", area.opacity);
-    readXml(xml, "ql:key", key.item);
-    readXml(xml, "ql:flags", flags);
+    readXml(xml, "ql:key",     key.item);
+    readXml(xml, "ql:flags",   flags);
     readXml(xml, history);
-
-
 
     const QDomNodeList& xmlPts = xml.toElement().elementsByTagName("ql:point");
     int M = xmlPts.count();
@@ -988,7 +880,6 @@ void CGisItemOvlArea::readArea(const QDomNode& xml, area_t& area)
         const QDomNode& xmlPt = xmlPts.item(m);
         readWpt(xmlPt, pt);
     }
-
 
     setColor(str2color(area.color));
 
@@ -1002,19 +893,19 @@ void CGisItemOvlArea::save(QDomNode& gpx)
     QDomElement xmlArea = doc.createElement("ql:area");
     gpx.appendChild(xmlArea);
 
-    writeXml(xmlArea, "ql:name", area.name);
-    writeXml(xmlArea, "ql:cmt", area.cmt);
-    writeXml(xmlArea, "ql:desc", area.desc);
-    writeXml(xmlArea, "ql:src", area.src);
-    writeXml(xmlArea, "ql:link", area.links);
-    writeXml(xmlArea, "ql:number", area.number);
-    writeXml(xmlArea, "ql:type", area.type);
-    writeXml(xmlArea, "ql:color", area.color);
-    writeXml(xmlArea, "ql:width", area.width);
-    writeXml(xmlArea, "ql:style", area.style);
+    writeXml(xmlArea, "ql:name",    area.name);
+    writeXml(xmlArea, "ql:cmt",     area.cmt);
+    writeXml(xmlArea, "ql:desc",    area.desc);
+    writeXml(xmlArea, "ql:src",     area.src);
+    writeXml(xmlArea, "ql:link",    area.links);
+    writeXml(xmlArea, "ql:number",  area.number);
+    writeXml(xmlArea, "ql:type",    area.type);
+    writeXml(xmlArea, "ql:color",   area.color);
+    writeXml(xmlArea, "ql:width",   area.width);
+    writeXml(xmlArea, "ql:style",   area.style);
     writeXml(xmlArea, "ql:opacity", area.opacity);
-    writeXml(xmlArea, "ql:key", key.item);
-    writeXml(xmlArea, "ql:flags", flags);
+    writeXml(xmlArea, "ql:key",     key.item);
+    writeXml(xmlArea, "ql:flags",   flags);
     writeXml(xmlArea, history);
 
 
@@ -1032,24 +923,24 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
     wpt.lat = attr.namedItem("lat").nodeValue().toDouble();
     wpt.lon = attr.namedItem("lon").nodeValue().toDouble();
 
-    readXml(xml, "ele", wpt.ele);
-    readXml(xml, "time", wpt.time);
-    readXml(xml, "magvar", wpt.magvar);
-    readXml(xml, "geoidheight", wpt.geoidheight);
-    readXml(xml, "name", wpt.name);
-    readXml(xml, "cmt", wpt.cmt);
-    readXml(xml, "desc", wpt.desc);
-    readXml(xml, "src", wpt.src);
-    readXml(xml, "link", wpt.links);
-    readXml(xml, "sym", wpt.sym);
-    readXml(xml, "type", wpt.type);
-    readXml(xml, "fix", wpt.fix);
-    readXml(xml, "sat", wpt.sat);
-    readXml(xml, "hdop", wpt.hdop);
-    readXml(xml, "vdop", wpt.vdop);
-    readXml(xml, "pdop", wpt.pdop);
+    readXml(xml, "ele",           wpt.ele);
+    readXml(xml, "time",          wpt.time);
+    readXml(xml, "magvar",        wpt.magvar);
+    readXml(xml, "geoidheight",   wpt.geoidheight);
+    readXml(xml, "name",          wpt.name);
+    readXml(xml, "cmt",           wpt.cmt);
+    readXml(xml, "desc",          wpt.desc);
+    readXml(xml, "src",           wpt.src);
+    readXml(xml, "link",          wpt.links);
+    readXml(xml, "sym",           wpt.sym);
+    readXml(xml, "type",          wpt.type);
+    readXml(xml, "fix",           wpt.fix);
+    readXml(xml, "sat",           wpt.sat);
+    readXml(xml, "hdop",          wpt.hdop);
+    readXml(xml, "vdop",          wpt.vdop);
+    readXml(xml, "pdop",          wpt.pdop);
     readXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
-    readXml(xml, "dgpsid", wpt.dgpsid);
+    readXml(xml, "dgpsid",        wpt.dgpsid);
 
     // some GPX 1.0 backward compatibility
     QString url;
@@ -1070,26 +961,26 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt)
     QString str;
 
     str.sprintf("%1.8f", wpt.lat);
-    xml.setAttribute("lat",str);
+    xml.setAttribute("lat", str);
     str.sprintf("%1.8f", wpt.lon);
-    xml.setAttribute("lon",str);
+    xml.setAttribute("lon", str);
 
-    writeXml(xml, "ele", wpt.ele);
-    writeXml(xml, "time", wpt.time);
-    writeXml(xml, "magvar", wpt.magvar);
-    writeXml(xml, "geoidheight", wpt.geoidheight);
-    writeXml(xml, "name", wpt.name);
-    writeXml(xml, "cmt", IGisItem::removeHtml(wpt.cmt));
-    writeXml(xml, "desc", IGisItem::removeHtml(wpt.desc));
-    writeXml(xml, "src", wpt.src);
-    writeXml(xml, "link", wpt.links);
-    writeXml(xml, "sym", wpt.sym);
-    writeXml(xml, "type", wpt.type);
-    writeXml(xml, "fix", wpt.fix);
-    writeXml(xml, "sat", wpt.sat);
-    writeXml(xml, "hdop", wpt.hdop);
-    writeXml(xml, "vdop", wpt.vdop);
-    writeXml(xml, "pdop", wpt.pdop);
+    writeXml(xml, "ele",           wpt.ele);
+    writeXml(xml, "time",          wpt.time);
+    writeXml(xml, "magvar",        wpt.magvar);
+    writeXml(xml, "geoidheight",   wpt.geoidheight);
+    writeXml(xml, "name",          wpt.name);
+    writeXml(xml, "cmt",           IGisItem::removeHtml(wpt.cmt));
+    writeXml(xml, "desc",          IGisItem::removeHtml(wpt.desc));
+    writeXml(xml, "src",           wpt.src);
+    writeXml(xml, "link",          wpt.links);
+    writeXml(xml, "sym",           wpt.sym);
+    writeXml(xml, "type",          wpt.type);
+    writeXml(xml, "fix",           wpt.fix);
+    writeXml(xml, "sat",           wpt.sat);
+    writeXml(xml, "hdop",          wpt.hdop);
+    writeXml(xml, "vdop",          wpt.vdop);
+    writeXml(xml, "pdop",          wpt.pdop);
     writeXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
-    writeXml(xml, "dgpsid", wpt.dgpsid);
+    writeXml(xml, "dgpsid",        wpt.dgpsid);
 }

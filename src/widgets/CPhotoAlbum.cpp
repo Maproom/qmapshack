@@ -66,8 +66,11 @@ void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)
 void CPhotoAlbum::slotAddImage()
 {
     SETTINGS;
-    QString path = cfg.value("Paths/lastWptImagePath", QDir::homePath()).toString();
-    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), path);
+    QString path          = cfg.value("Paths/lastWptImagePath", QDir::homePath()).toString();
+    QString filters       = "All Files (*);; All Images (*.png *.jpg);; PNG Image (*.png);; JPEG Image (*.jpg)";
+    QString defaultFilter = "All Images (*.png *.jpg)";
+
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), path, filters, &defaultFilter);
     if(filenames.isEmpty())
     {
         return;

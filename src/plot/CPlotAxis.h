@@ -143,7 +143,7 @@ protected:
     qreal limitMin = 0.0;
     qreal limitMax = 0.0;
 
-    ///the intervall of the ticmarks
+    ///the interval of the ticmarks
     qreal interval = 0.0;
 
     ///start value of the tic marks

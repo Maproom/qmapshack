@@ -22,7 +22,9 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/INotifiable.h"
 
+#include <functional>
 #include <QPen>
 #include <QPointer>
 
@@ -37,8 +39,8 @@ class IQlgtOverlay;
 class QDir;
 class CProgressDialog;
 
-#define TRK_N_COLORS        17
-#define ASCEND_THRESHOLD    5
+#define TRK_N_COLORS          17
+#define ASCEND_THRESHOLD       5
 
 #include <QDebug>
 
@@ -234,16 +236,68 @@ public:
         return activities;
     }
 
+    /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
+
+        @{
+    */
+public:
+    static const struct ColorizeSource unknownColorizeSource;
+
+    /** @brief Set the colorize source to the source specified.
+
+        @param src  The new source to use.
+    */
+    void setColorizeSource(QString src);
+
+    /** @brief Get the current colorize source.
+
+        @return  The new source to use.
+    */
+    QString getColorizeSource()
+    {
+        return colorSource;
+    }
+
+    QStringList getExistingColorizeSources() const;
+
+    void setColorizeLimitLow(qreal limit);
+    qreal getColorizeLimitLow() const
+    {
+        return limitLow;
+    }
+
+    void setColorizeLimitHigh(qreal limit);
+    qreal getColorizeLimitHigh() const
+    {
+        return limitHigh;
+    }
+
+    const QString getColorizeUnit() const;
+
+    void getExtrema(qreal &min, qreal &max) const;
+
+private:
+    void getExtrema(qreal &min, qreal &max, const QString &source) const;
+
+    QString colorSource  = "";
+
+    // the low and high limit for (slope-)colored drawing of tracks
+    qreal limitLow  = -10;
+    qreal limitHigh =  10;
+
+    void drawColorized(QPainter &p);
+    /**@}*/
 
 
     /**
-       @brief Get the indeces of visible points for a selected range
+       @brief Get the indices of visible points for a selected range
 
-       If no range is selected both indeces will be NOIDX.
+       If no range is selected both indices will be NOIDX.
 
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
+public: // TODO
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
@@ -271,7 +325,7 @@ public:
     /**
        @brief isCloseTo
        @param pos Screen position as pixel coordinate
-       @return True if point is considered clse enough
+       @return True if point is considered close enough
      */
     bool isCloseTo(const QPointF& pos);
 
@@ -390,7 +444,7 @@ public:
     }
 
     /**
-       @brief Each plot widget that operates on the track must register during it's contruction
+       @brief Each plot widget that operates on the track must register during it's construction
 
        see registeredPlots for a detailed discussion
 
@@ -508,14 +562,9 @@ public:
        trkpt_t::keyWpt.
 
        @param progress  a progress dialog as this operation can take quite some time
-       @param current   the current progress if the operaton is done for several tracks
-     */
+       @param current   the current progress if the operation is done for several tracks
+    */
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
-
-    /// available track line colors
-    static const QColor lineColors[TRK_N_COLORS];
-    /// available bullet colors
-    static const QString bulletColors[TRK_N_COLORS];
 
 private:
     void setSymbol();
@@ -594,8 +643,8 @@ private:
        @brief Overide IGisItem::changed() method
 
        As the CDetailsTrk is no modal dialog that blocks the GUI from any other input the track
-       can be changed while the widget is visible. Therfore it needs some feedback to update the
-       CDetailsTrk widget. Usualy this would be a signal. However CGisItemTrk is a QTreeWidgetItem
+       can be changed while the widget is visible. Therefore it needs some feedback to update the
+       CDetailsTrk widget. Usually this would be a signal. However CGisItemTrk is a QTreeWidgetItem
        and therefor no QObject. Fortunately there the dlgDetails pointer. So CDetailsTrk::setupGui()
        can be called from changed()
 
@@ -635,7 +684,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
 
-                          // activity flags
+            // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -712,6 +761,9 @@ public:
         return trk;
     }
 
+    void registerNotification(INotifiable *obj);
+    void unregisterNotification(INotifiable *obj);
+
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;
@@ -725,15 +777,15 @@ private:
 
     /**
        \defgroup TrackStatistics Some statistical values over the complete track
-     */
+    */
     /**@{*/
-    qint32 cntTotalPoints = 0;
+    qint32 cntTotalPoints   = 0;
     qint32 cntVisiblePoints = 0;
     QDateTime timeStart;
     QDateTime timeEnd;
     qreal totalDistance = 0;
-    qreal totalAscend = 0;
-    qreal totalDescend = 0;
+    qreal totalAscend   = 0;
+    qreal totalDescend  = 0;
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     /**@}*/
@@ -748,13 +800,14 @@ private:
     QColor color;
     /// the pen with the actual track color
     QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
-    /// the trakpoint bullet icon
+    /// the trackpoint bullet icon
     QPixmap bullet;
     /// the current track line as screen pixel coordinates
     QPolygonF lineSimple;
     /// visible and invisible points
     QPolygonF lineFull;
     /**@}*/
+
 
     /**
         A list of plot objects that need to get informed on any change in data.
@@ -776,6 +829,9 @@ private:
               easily communicate with each other.
      */
     QSet<IPlot*> registeredPlots;
+
+    QSet<INotifiable*> notifyOnChange;
+    void notifyChange();
 
     /**
         \defgroup FocusRange Variables to handle mouse focus and range selection

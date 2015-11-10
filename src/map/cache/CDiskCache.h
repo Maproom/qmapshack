@@ -48,7 +48,7 @@ private:
 
     qint32 expiration;
 
-    /// hash table to cache images als files on disc
+    /// hash table to cache images as files on disc
     QHash<QString, QString> table;
     /// hash table to cache loaded images in memory
     QHash<QString, QImage>  cache;

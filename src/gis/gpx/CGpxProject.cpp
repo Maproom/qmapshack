@@ -190,7 +190,6 @@ void CGpxProject::loadGpx(const QString& filename)
         new CGisItemOvlArea(xmlArea, this);
     }
 
-
     setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
@@ -219,21 +218,20 @@ bool CGpxProject::saveAs()
     QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
     path += "/" + getName() + ".gpx";
 
-    QString filter = "*.gpx";
-    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, "*.gpx;; *.qms", &filter);
+    QString filter = filedialogFilterGPX;
+    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
 
     if(fn.isEmpty())
     {
         return false;
     }
 
-
     bool res = false;
-    if(filter == "*.gpx")
+    if(filter == filedialogFilterGPX)
     {
         filename = fn;
         metadata.name.clear();
-        setupName(QFileInfo(filename).baseName().replace("_", " "));
+        setupName(QFileInfo(filename).baseName());
 
         res = saveAs(fn, *this);
         if(res)
@@ -241,7 +239,7 @@ bool CGpxProject::saveAs()
             markAsSaved();
         }
     }
-    else if(filter == "*.qms")
+    else if(filter == filedialogFilterQMS)
     {
         res = CQmsProject::saveAs(fn, *this);
     }
@@ -272,28 +270,18 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     if(file.exists())
     {
         file.open(QIODevice::ReadOnly);
-        try
+        bool createdByQMS = false;
+
+        // load file content to xml document
+        QDomDocument xml;
+        if(xml.setContent(&file, false))
         {
-            // load file content to xml document
-            QDomDocument xml;
-            QString msg;
-            int line;
-            int column;
-            if(xml.setContent(&file, false, &msg, &line, &column))
-            {
-                const QDomElement& docElem = xml.documentElement();
-                const QDomNamedNodeMap& attr = docElem.attributes();
-                if(!attr.namedItem("creator").nodeValue().startsWith("QMapShack"))
-                {
-                    throw 0;
-                }
-            }
-            else
-            {
-                throw 0;
-            }
+            const QDomElement& docElem = xml.documentElement();
+            const QDomNamedNodeMap& attr = docElem.attributes();
+            createdByQMS = attr.namedItem("creator").nodeValue().startsWith("QMapShack");
         }
-        catch(int)
+
+        if(!createdByQMS)
         {
             int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(),QObject::tr("File exists ...")
                                            ,QObject::tr("The file exists and it has not been created by QMapShack. "
@@ -419,7 +407,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     }
     catch(const QString& msg)
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Saveing GIS data failed..."), msg, QMessageBox::Abort);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         res = false;
     }
     project.umount();

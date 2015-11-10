@@ -35,24 +35,19 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     , wpt(wpt)
 {
     setupUi(this);
-    toolAddImage->hide();
-    toolDelImage->hide();
     photoAlbum->hide();
 
     setupGui();
 
-    if(wpt.isOnDevice())
-    {
-        toolLock->setDisabled(true);
-    }
+    toolLock->setDisabled(wpt.isOnDevice());
 
-    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelPosition, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(labelName,      SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(labelPosition,  SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
     connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
+    connect(textCmtDesc,    SIGNAL(anchorClicked(QUrl)),    this, SLOT(slotLinkActivated(QUrl)));
+    connect(toolIcon,       SIGNAL(clicked()),              this, SLOT(slotChangeIcon()));
+    connect(toolLock,       SIGNAL(toggled(bool)),          this, SLOT(slotChangeReadOnlyMode(bool)));
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
@@ -89,34 +84,25 @@ void CDetailsWpt::setupGui()
     labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName(), ""));
     labelPosition->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));
 
-    if(wpt.isTainted())
-    {
-        labelTainted->show();
-    }
-    else
-    {
-        labelTainted->hide();
-    }
+    labelTainted->setVisible(wpt.isTainted());
 
+    QString elevationStr = "--";
     if(wpt.getElevation() != NOINT)
     {
         IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
-        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", QString("%1 %2").arg(val).arg(unit), ""));
+        elevationStr = QString("%1 %2").arg(val).arg(unit);
     }
-    else
-    {
-        labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", "--", ""));
-    }
+    labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", elevationStr, ""));
 
+
+    QString proxStr = "--";
     if(wpt.getProximity() != NOFLOAT)
     {
         IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
-        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", QString("%1 %2").arg(val).arg(unit), ""));
+        proxStr = QString("%1 %2").arg(val).arg(unit);
     }
-    else
-    {
-        labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", "--", ""));
-    }
+    labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", proxStr, ""));
+
 
     if(wpt.getTime().isValid())
     {
@@ -134,17 +120,9 @@ void CDetailsWpt::setupGui()
 
     const QList<CGisItemWpt::image_t>& images = wpt.getImages();
     photoAlbum->reload(images);
-    toolAddImage->hide();
-    toolDelImage->hide();
 
-    if(!isReadOnly)
-    {
-        toolAddImage->show();
-        if(!images.isEmpty())
-        {
-            toolDelImage->show();
-        }
-    }
+    toolAddImage->setVisible(!isReadOnly);
+    toolDelImage->setVisible(!isReadOnly && !images.isEmpty());
 
     originator = false;
 }
@@ -231,16 +209,14 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
 
 void CDetailsWpt::slotChangeIcon()
 {
-    if(wpt.isReadOnly())
+    if(!wpt.isReadOnly())
     {
-        return;
-    }
-
-    CWptIconDialog dlg(toolIcon);
-    if(dlg.exec() == QDialog::Accepted)
-    {
-        wpt.setIcon(toolIcon->objectName());
-        setupGui();
+	CWptIconDialog dlg(toolIcon);
+	if(dlg.exec() == QDialog::Accepted)
+	{
+	    wpt.setIcon(toolIcon->objectName());
+	    setupGui();
+	}
     }
 }
 

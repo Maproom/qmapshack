@@ -58,7 +58,7 @@ public:
 
     /**
        @brief Get sum of all flags seen in the track
-       @return A 32 bit field with all available activity falgs set.
+       @return A 32 bit field with all available activity flags set.
      */
     quint32 getAllFlags() const
     {

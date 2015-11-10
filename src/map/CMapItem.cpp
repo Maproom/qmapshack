@@ -209,7 +209,7 @@ bool CMapItem::activate()
         return false;
     }
 
-    // if map is activated sucessfully add to the list of map files
+    // if map is activated successfully add to the list of map files
     // else delete all previous loaded maps and abort
     if(!mapfile->activated())
     {

@@ -379,7 +379,7 @@ public:
     }
 
     /**
-       @brief Load a given state of chnage from the history
+       @brief Load a given state of change from the history
        @param idx
      */
     void loadHistory(int idx);
@@ -438,16 +438,23 @@ public:
 
     const static QString noName;
 
-protected:
-    struct color_t;
+    struct color_t
+    {
+        const char   *name;
+        const QColor  color;
+        const QString bullet;
+    };
 
+    static const color_t colorMap[];
+
+protected:
     /// set icon of QTreeWidgetItem
     virtual void setSymbol() = 0;
     /// read waypoint data from an XML snippet
     void readWpt(const QDomNode& xml, wpt_t &wpt);
     /// write waypoint data to an XML snippet
     void writeWpt(QDomElement &xml, const wpt_t &wpt);
-    /// gnerate a unique key from item's data
+    /// generate a unique key from item's data
     virtual void genKey();
     /// setup the history structure right after the creation of the item
     void setupHistory();
@@ -455,7 +462,7 @@ protected:
     void updateHistory();
     /// convert a color string from GPX to a QT color
     QColor str2color(const QString& name);
-    /// convertr a QT color to a string to be used in a GPX file
+    /// convert a QT color to a string to be used in a GPX file
     QString color2str(const QColor &color);
     /// to optimize drawing of large polylines split the line into sections that are visible
     void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
@@ -467,23 +474,12 @@ protected:
     bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
 
-
-
     quint32 flags = 0;
     key_t key;
     QPixmap icon;
     QRectF boundingRect;
 
     history_t history;
-
-
-    static const color_t colorMap[];
-
-    struct color_t
-    {
-        const char * name;
-        QColor color;
-    };
 
     enum flags_e
     {

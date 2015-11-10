@@ -84,6 +84,12 @@ public:
         QMap<QString, QVariant> extensions;
     };
 
+    static const QString filedialogAllSupported;
+    static const QString filedialogFilterGPX;
+    static const QString filedialogFilterQMS;
+    static const QString filedialogSaveFilters;
+    static const QString filedialogLoadFilters;
+
     IGisProject(type_e type, const QString& filename, CGisListWks * parent);
     IGisProject(type_e type, const QString &filename, IDevice *parent);
     virtual ~IGisProject();

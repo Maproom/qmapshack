@@ -38,7 +38,7 @@ public:
     void loadConfig(QSettings& cfg);
 
     /**
-       @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronised.
+       @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronized.
      */
     static QMutex mutexActiveMaps;
 
@@ -71,7 +71,7 @@ public:
     void moveToBottom();
 
     /**
-       @brief Set item's icon accorting to map type and state
+       @brief Set item's icon according to map type and state
      */
     void updateIcon();
 

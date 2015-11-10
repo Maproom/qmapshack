@@ -388,7 +388,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 connect(scrOptRange->toolActivity, SIGNAL(clicked()), this, SLOT(slotActivity()));
                 connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
 
-                /* Adjust posiion of screen option widget if the widget is out of the visible area*/
+                /* Adjust position of screen option widget if the widget is out of the visible area*/
                 QRect r1 = scrOptRange->geometry();
                 QRect r2 = geometry();
                 r1.moveTopLeft(mapToParent(r1.topLeft()));
@@ -430,7 +430,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             }
 
 
-            // Update canvas only if the object ist the owener of the range selection
+            // Update canvas only if the object is the owner of the range selection
             if(wasProcessed)
             {
                 emit sigMouseClickState(mouseClickState);
@@ -793,7 +793,7 @@ void IPlot::drawYScale( QPainter &p )
     qreal limMin, limMax, useMin, useMax;
     data->y().getLimits(limMin, limMax, useMin, useMax);
 
-    // draw min/max lables 1st;
+    // draw min/max labels 1st;
     QRect recTextMin;
     QRect recTextMax;
 
@@ -1195,7 +1195,7 @@ void IPlot::slotSave()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastGraphPath", QDir::homePath()).toString();
-    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path,"Bitmap (*.png)");
+    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path, "PNG Image (*.png)");
 
     if(filename.isEmpty())
     {

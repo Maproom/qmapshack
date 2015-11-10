@@ -509,7 +509,7 @@ bool CShiftReg::get(qint32& x, qint32& y)
     reg >>= bits_per_x;
     bits -= bits_per_x;
 
-    // take y coord., add sign if neccessary, shift register by bits per y coord.
+    // take y coord., add sign if necessary, shift register by bits per y coord.
     if(sinfo.y_has_sign)
     {
         qint32 tmp = 0;
@@ -545,7 +545,7 @@ bool CShiftReg::get(qint32& x, qint32& y)
     reg >>= bits_per_y;
     bits -= bits_per_y;
 
-    // fill register until it has enought bits for one coord. pair again
+    // fill register until it has enough bits for one coord. pair again
     fill(bits_per_coord);
     return true;
 }

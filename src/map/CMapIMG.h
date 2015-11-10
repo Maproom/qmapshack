@@ -83,7 +83,7 @@ public:
 
         /// the center longitude of the area covered by this subdivision
         qint32 iCenterLng;
-        /// the center latiude of the area covered by this subdivision
+        /// the center latitude of the area covered by this subdivision
         qint32 iCenterLat;
 
         /// north boundary of area covered by this subsection []

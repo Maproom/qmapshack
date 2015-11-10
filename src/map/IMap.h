@@ -198,7 +198,7 @@ protected:
 
 
     /**
-       @brief Reproject (translate, rotate, scale) tile before drwaing it.
+       @brief Reproject (translate, rotate, scale) tile before drawing it.
        @param img   the tile as QImage
        @param l     a 4 point polygon to fit the tile in
        @param p     the QPainter used to paint the tile

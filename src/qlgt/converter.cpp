@@ -143,8 +143,8 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     trk.name        = trk1.name;
     trk.cmt         = trk1.comment;
     trk.desc        = trk1.description;
-    trk.color       = lineColors[trk1.colorIdx].name();
-    setColor(lineColors[trk1.colorIdx]);
+    trk.color       = IGisItem::colorMap[trk1.colorIdx].color.name();
+    setColor(IGisItem::colorMap[trk1.colorIdx].color);
 
     bool hasExtData = trk1.hasExt1Data();
     trkseg_t seg;

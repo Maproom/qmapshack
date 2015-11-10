@@ -62,14 +62,14 @@ public:
     void zoomCanvasTo(const QRectF rect);
     /**
        @brief Read the elevation from DEM data attached to the currently visible canvas for a given location
-       @param pos   a poistion in units of [rad]
+       @param pos   a position in units of [rad]
        @return If no elevation value can be found for the position NOFLOAT is returned.
      */
     qreal getEelevationAt(const QPointF &pos);
     void  getEelevationAt(const QPolygonF& pos, QPolygonF &ele);
     void  getEelevationAt(SGisLine &line);
     /**
-       @brief Get pointer to the currently visibale canvas object.
+       @brief Get pointer to the currently visible canvas object.
        @return If the currently visible tab does not contain a CCanvas object 0 is returned.
      */
     CCanvas * getVisibleCanvas();

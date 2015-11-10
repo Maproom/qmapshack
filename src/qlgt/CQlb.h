@@ -27,10 +27,10 @@ class CQlgtTrack;
 class CQlgtRoute;
 class CQlgtDiary;
 class IQlgtOverlay;
-/// qlandkarte binary to store privat geo data
+/// qlandkarte binary to store private geo data
 /**
     The file will store data like waypoints, tracks, map selections. These elements will
-    be collected in a dedicated byte arra, e.g. all waypoints are serialized in wpts and so on.
+    be collected in a dedicated byte array, e.g. all waypoints are serialized in wpts and so on.
     These byte arrays a stored like:
 
     qint32 eWpt, QByteArray wpts
@@ -47,7 +47,7 @@ public:
 
     enum type_e {eEnd, eWpt, eTrack, eDiary, eOverlay, eRoute, eMapSel};
 
-    /// collect wapoint data
+    /// collect waypoint data
     /**
         This will serialize the waypoint object to wpts
      */

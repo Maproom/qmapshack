@@ -45,8 +45,8 @@ CSetupNewWpt::CSetupNewWpt(QPointF &pt, QString &icon, QString &name, QWidget *p
     lineName->setText(name);
 
     connect(linePosition, SIGNAL(textEdited(QString)), this, SLOT(slotEditPosition(QString)));
-    connect(lineName, SIGNAL(textEdited(QString)), this, SLOT(slotEditName(QString)));
-    connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
+    connect(lineName,     SIGNAL(textEdited(QString)), this, SLOT(slotEditName(QString)));
+    connect(toolIcon,     SIGNAL(clicked()),           this, SLOT(slotChangeIcon()));
 
     checkInput();
 }
@@ -78,16 +78,7 @@ void CSetupNewWpt::reject()
 
 void CSetupNewWpt::slotEditPosition(const QString& str)
 {
-    if(IUnit::isValidCoordString(str))
-    {
-        labelWarning->hide();
-    }
-    else
-    {
-        labelWarning->show();
-    }
-
-
+    labelWarning->setVisible(!IUnit::isValidCoordString(str));
     checkInput();
 }
 
@@ -105,12 +96,6 @@ void CSetupNewWpt::slotChangeIcon()
 
 void CSetupNewWpt::checkInput()
 {
-    if(labelWarning->isHidden() && !lineName->text().isEmpty())
-    {
-        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
-    }
-    else
-    {
-        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-    }
+    bool isEnabled = (labelWarning->isHidden() && !lineName->text().isEmpty());
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(isEnabled);
 }

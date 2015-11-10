@@ -381,7 +381,7 @@ QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearin
 
 bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF &rect)
 {
-    // the trival case
+    // the trivial case
     if(rect.contains(p1) || rect.contains(p2))
     {
         return true;

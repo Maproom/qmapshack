@@ -98,7 +98,7 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     actDescriptor[4].name = QObject::tr("Cable Car");
     actDescriptor[5].name = QObject::tr("Swim");
     actDescriptor[6].name = QObject::tr("Ship");
-    actDescriptor[7].name = QObject::tr("Aeronautik");
+    actDescriptor[7].name = QObject::tr("Aeronautics");
 }
 
 CActivityTrk::~CActivityTrk()

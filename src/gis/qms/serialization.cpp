@@ -26,7 +26,7 @@
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(1)
+#define VER_TRK         quint8(2)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(2)
 #define VER_AREA        quint8(1)
@@ -462,6 +462,11 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
     out << trk.number;
     out << trk.type;
     out << trk.color;
+
+    out << colorSource;
+    out << limitLow;
+    out << limitHigh;
+
     out << trk.segs;
 
     stream.writeRawData(MAGIC_TRK, MAGIC_SIZE);
@@ -505,13 +510,24 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.type;
     in >> trk.color;
 
+    // versions >= 2 contain colorized tracks
+    if(version >= 2)
+    {
+        QString source;
+        in >> colorSource;
+        in >> limitLow;
+        in >> limitHigh;
+    }
+
     trk.segs.clear();
     in >> trk.segs;
 
     deriveSecondaryData();
-    setColor(trk.color);
+    setColor(str2color(trk.color));
     setText(CGisListWks::eColumnName, trk.name);
     setToolTip(CGisListWks::eColumnName, getInfo());
+
+    notifyChange();
 
     return stream;
 }
@@ -703,6 +719,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     area.opacity = tmp8;
 
     deriveSecondaryData();
+
     setColor(str2color(area.color));
     setText(CGisListWks::eColumnName, area.name);
     setToolTip(CGisListWks::eColumnName, getInfo());

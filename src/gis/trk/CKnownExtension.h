@@ -22,7 +22,7 @@
 #include <functional>
 #include "gis/trk/CGisItemTrk.h"
 
-using colorFunc_t = std::function<float(const CGisItemTrk::trkpt_t&, const CGisItemTrk::trkpt_t&)>;
+using valueFunc_t = std::function<float(const CGisItemTrk::trkpt_t&, const CGisItemTrk::trkpt_t&)>;
 
 class CKnownExtension
 {
@@ -38,14 +38,14 @@ public:
     QString     unit;         //< the unit (to be displayed)
     QString     icon;         //< path to an icon
     bool        known;
-    colorFunc_t colorFunc;    //< the function used to retrieve the value
+    valueFunc_t valueFunc;    //< the function used to retrieve the value
 
 private:
     CKnownExtension(QString name,
         qreal defLimitLow, qreal defLimitHigh,
         qreal minimum, qreal maximum,
         QString unit, QString icon, bool known,
-        colorFunc_t colorFunc
+        valueFunc_t valueFunc
     );
 
     static QHash<QString, CKnownExtension> knownExtensions;

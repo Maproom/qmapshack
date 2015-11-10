@@ -22,9 +22,9 @@ CKnownExtension::CKnownExtension(QString name,
         qreal defLimitLow, qreal defLimitHigh,
         qreal minimum, qreal maximum,
         QString unit, QString icon, bool known,
-        colorFunc_t colorFunc
+        valueFunc_t valueFunc
     ) : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
-        minimum(minimum), maximum(maximum), unit(unit), icon(icon), known(known), colorFunc(colorFunc)
+        minimum(minimum), maximum(maximum), unit(unit), icon(icon), known(known), valueFunc(valueFunc)
 {
 }
 

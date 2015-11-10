@@ -1544,7 +1544,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemTrk::drawColorized(QPainter &p)
 {
-    auto colorizeFunction = CKnownExtension::get(colorSource).colorFunc;
+    auto valueFunc = CKnownExtension::get(colorSource).valueFunc;
 
     QImage colors(1, 256, QImage::Format_RGB888);
     QPainter colorsPainter(&colors);
@@ -1573,7 +1573,7 @@ void CGisItemTrk::drawColorized(QPainter &p)
                 continue;
             }
 
-            float colorAt = ( colorizeFunction(*ptPrev, pt) - limitLow ) / (limitHigh - limitLow);
+            float colorAt = ( valueFunc(*ptPrev, pt) - limitLow ) / (limitHigh - limitLow);
             if(colorAt > 1.f) colorAt = 1.f;
             if(colorAt < 0.f) colorAt = 0.f;
 
@@ -1610,7 +1610,7 @@ void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) cons
     min = std::numeric_limits<float>::max();
     max = std::numeric_limits<float>::lowest();
 
-    auto colorizeFunction = CKnownExtension::get(source).colorFunc;
+    auto valueFunc = CKnownExtension::get(source).valueFunc;
 
     foreach(const trkseg_t &segment, trk.segs)
     {
@@ -1624,7 +1624,7 @@ void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) cons
                 continue;
             }
 
-            float value = colorizeFunction(*ptPrev, pt);
+            float value = valueFunc(*ptPrev, pt);
             if(min > value)
             {
                 min = value;

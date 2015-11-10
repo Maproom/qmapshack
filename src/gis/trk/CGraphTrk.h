@@ -24,6 +24,8 @@
 
 #include <QObject>
 
+class QComboBox;
+
 class CGraphTrk
 {
 public:
@@ -53,13 +55,17 @@ public:
         CPlot::funcGet getY = nullptr;
     };
 
+    void fillComboBox(QComboBox * box) const;
+
+    void setupPlot(CPlot * plot, int idx) const;
+
 private:
     friend class CGisItemTrk;
     CGraphTrk(CGisItemTrk * trk);
 
     CGisItemTrk * trk;
 
-    QMap<QString, property_t> properties;
+    QList<property_t> properties;
 };
 
 #endif //CGRAPHTRK_H

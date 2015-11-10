@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/trk/CDetailsTrk.h"
+#include "gis/trk/CGraphTrk.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/filter/CFilterMedian.h"
@@ -71,36 +72,41 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
-    plotElevation = new CPlotProfile(&trk, IPlot::eModeNormal, this);
-    plotElevation->setMinimumSize(QSize(0, 100));
-    plotElevation->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plotElevation->show();
-    layoutPlot->addWidget(plotElevation);
+    plot1 = new CPlotProfile(&trk, IPlot::eModeNormal, this);
+    plot1->setMinimumSize(QSize(0, 100));
+    plot1->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plot1->show();
+    layoutPlot->addWidget(plot1);
 
-    plotSpeed = new CPlot(&trk, CPlotData::eAxisLinear
-                          , tr("distance [%1]").arg(IUnit::self().baseunit)
-                          , tr("speed. [%1]").arg(IUnit::self().speedunit)
-                          , IUnit::self().speedfactor
-                          , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
-                          , [](const CGisItemTrk::trkpt_t &p) {return p.speed; }
-                          , this);
-    plotSpeed->setLimits(0, NOFLOAT);
-    plotSpeed->setMinimumSize(QSize(0, 100));
-    plotSpeed->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plotSpeed->show();
-    layoutPlot->addWidget(plotSpeed);
+    plot2 = new CPlot(&trk, CPlotData::eAxisLinear
+                        , tr("distance [%1]").arg(IUnit::self().baseunit)
+                        , tr("speed. [%1]").arg(IUnit::self().speedunit)
+                        , IUnit::self().speedfactor
+                        , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
+                        , [](const CGisItemTrk::trkpt_t &p) {return p.speed; }
+                        , this);
+    plot2->setLimits(0, NOFLOAT);
+    plot2->setMinimumSize(QSize(0, 100));
+    plot2->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plot2->show();
+    layoutPlot->addWidget(plot2);
 
-    plotDistance = new CPlot(&trk, CPlotData::eAxisTime
-                             , tr("time")
-                             , tr("distance. [%1]").arg(IUnit::self().baseunit)
-                             , IUnit::self().basefactor
-                             , [](const CGisItemTrk::trkpt_t &p) {return p.time.toTime_t(); }
-                             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
-                             , this);
-    plotDistance->setMinimumSize(QSize(0, 100));
-    plotDistance->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plotDistance->show();
-    layoutPlot->addWidget(plotDistance);
+    plot3 = new CPlot(&trk, CPlotData::eAxisTime
+                        , tr("time")
+                        , tr("distance. [%1]").arg(IUnit::self().baseunit)
+                        , IUnit::self().basefactor
+                        , [](const CGisItemTrk::trkpt_t &p) {return p.time.toTime_t(); }
+                        , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
+                        , this);
+    plot3->setMinimumSize(QSize(0, 100));
+    plot3->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plot3->show();
+    layoutPlot->addWidget(plot3);
+
+    const CGraphTrk * graphProperties = trk.getGraphProperties();
+    graphProperties->fillComboBox(comboGraph2);
+    graphProperties->fillComboBox(comboGraph3);
+
 
     if(trk.isOnDevice())
     {
@@ -169,9 +175,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
     connect(labelInfo, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
 
-    connect(plotDistance, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-    connect(plotElevation, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-    connect(plotSpeed, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(plot3, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(plot1, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(plot2, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
 
     connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
 
@@ -415,9 +421,9 @@ void CDetailsTrk::slotMouseClickState(int s)
     if(s == IPlot::eMouseClickIdle)
     {
         labelInfoRange->setText("-\n-");
-        plotDistance->setMouseRangeFocus(0,0);
-        plotElevation->setMouseRangeFocus(0,0);
-        plotSpeed->setMouseRangeFocus(0,0);
+        plot3->setMouseRangeFocus(0,0);
+        plot1->setMouseRangeFocus(0,0);
+        plot2->setMouseRangeFocus(0,0);
     }
 }
 
@@ -425,29 +431,29 @@ void CDetailsTrk::slotShowPlots()
 {
     if(checkGraph1->isChecked())
     {
-        plotElevation->show();
+        plot1->show();
     }
     else
     {
-        plotElevation->hide();
+        plot1->hide();
     }
 
     if(checkGraph2->isChecked())
     {
-        plotSpeed->show();
+        plot2->show();
     }
     else
     {
-        plotSpeed->hide();
+        plot2->hide();
     }
 
     if(checkGraph3->isChecked())
     {
-        plotDistance->show();
+        plot3->show();
     }
     else
     {
-        plotDistance->hide();
+        plot3->hide();
     }
 }
 

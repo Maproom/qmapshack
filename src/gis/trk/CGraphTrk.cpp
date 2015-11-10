@@ -20,7 +20,7 @@
 #include "gis/trk/CGraphTrk.h"
 #include "units/IUnit.h"
 
-#include <QObject>
+#include <QtWidgets>
 
 CGraphTrk::CGraphTrk(CGisItemTrk *trk)
     : trk(trk)
@@ -62,8 +62,8 @@ CGraphTrk::CGraphTrk(CGisItemTrk *trk)
 
     };
 
-    properties["progress"]  = propProgress;
-    properties["speed"]     = propSpeed;
+    properties << propProgress;
+    properties << propSpeed;
 
 
     const QHash<QString,QVariant>& extensions = seg.pts.first().extensions;
@@ -91,10 +91,27 @@ CGraphTrk::CGraphTrk(CGisItemTrk *trk)
             ,[key](const CGisItemTrk::trkpt_t &p) {return p.extensions[key].toFloat();}
         };
 
-        properties[key] = property;
+        properties << property;
 
     }
 
 }
 
+void CGraphTrk::fillComboBox(QComboBox * box) const
+{
+    foreach(const property_t& property, properties)
+    {
+        box->addItem(property.name);
+    }
+}
 
+void CGraphTrk::setupPlot(CPlot * plot, int idx) const
+{
+    if(idx >= properties.size())
+    {
+        return;
+    }
+    const property_t& p = properties[idx];
+
+    plot->setup(p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
+}

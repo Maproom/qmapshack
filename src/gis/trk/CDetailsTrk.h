@@ -76,9 +76,9 @@ private:
 
     bool originator = false;
 
-    CPlotProfile * plotElevation;
-    CPlot * plotSpeed;
-    CPlot * plotDistance;
+    CPlotProfile * plot1;
+    CPlot * plot2;
+    CPlot * plot3;
 };
 
 #endif //CDETAILSTRK_H

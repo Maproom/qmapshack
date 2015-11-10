@@ -906,13 +906,13 @@ void CGisItemTrk::deriveSecondaryData()
                 n++;
             }
 
-            qreal a         = qAtan((e2 - e1)/(d2 - d1));
-            trkpt.slope1    = qAbs(a * 360.0/(2 * M_PI));
-            trkpt.slope2    = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
+            qreal a      = qAtan((e2 - e1)/(d2 - d1));
+            trkpt.slope1 = a * 360.0/(2 * M_PI);
+            trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
 
             if((t2 - t1) > 0)
             {
-                trkpt.speed    = (d2 - d1) / (t2 - t1);
+                trkpt.speed = (d2 - d1) / (t2 - t1);
             }
             else
             {
@@ -923,11 +923,11 @@ void CGisItemTrk::deriveSecondaryData()
 
     if(lastTrkpt != 0)
     {
-        timeEnd                 = lastTrkpt->time;
-        totalDistance           = lastTrkpt->distance;
-        totalAscend             = lastTrkpt->ascend;
-        totalDescend            = lastTrkpt->descend;
-        totalElapsedSeconds     = lastTrkpt->elapsedSeconds;
+        timeEnd                   = lastTrkpt->time;
+        totalDistance             = lastTrkpt->distance;
+        totalAscend               = lastTrkpt->ascend;
+        totalDescend              = lastTrkpt->descend;
+        totalElapsedSeconds       = lastTrkpt->elapsedSeconds;
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
 
@@ -1573,7 +1573,7 @@ void CGisItemTrk::drawColorized(QPainter &p)
                 continue;
             }
 
-            float colorAt = ( valueFunc(*ptPrev, pt) - limitLow ) / (limitHigh - limitLow);
+            float colorAt = ( valueFunc(pt) - limitLow ) / (limitHigh - limitLow);
             if(colorAt > 1.f) colorAt = 1.f;
             if(colorAt < 0.f) colorAt = 0.f;
 
@@ -1624,7 +1624,7 @@ void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) cons
                 continue;
             }
 
-            float value = valueFunc(*ptPrev, pt);
+            float value = valueFunc(pt);
             if(min > value)
             {
                 min = value;

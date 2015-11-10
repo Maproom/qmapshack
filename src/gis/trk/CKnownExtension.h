@@ -22,7 +22,7 @@
 #include <functional>
 #include "gis/trk/CGisItemTrk.h"
 
-using valueFunc_t = std::function<float(const CGisItemTrk::trkpt_t&, const CGisItemTrk::trkpt_t&)>;
+using valueFunc_t = std::function<float(const CGisItemTrk::trkpt_t&)>;
 
 class CKnownExtension
 {

@@ -32,39 +32,39 @@ QHash<QString, CKnownExtension> CKnownExtension::knownExtensions
 {
     {"slope",
         { "Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/CSrcSlope.png", true,
-            [](const CGisItemTrk::trkpt_t &pp, const CGisItemTrk::trkpt_t &p) { return pp.ele < p.ele ? p.slope1 : -p.slope1; }
+            [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }
         }
     },
 
     {"speed",
         { "Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/CSrcSpeed.png", true,
-            [](const CGisItemTrk::trkpt_t &pp, const CGisItemTrk::trkpt_t &p) { return p.speed; }
+            [](const CGisItemTrk::trkpt_t &p) { return p.speed; }
         }
     },
 
     {"ele",
         { "Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/CSrcElevation.png", true,
-            [](const CGisItemTrk::trkpt_t &pp, const CGisItemTrk::trkpt_t &p) { return p.ele; }
+            [](const CGisItemTrk::trkpt_t &p) { return p.ele; }
         }
     },
 
     {"gpxtpx:TrackPointExtension|gpxtpx:hr",
         { "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/CSrcHR.png", true,
-            [](const CGisItemTrk::trkpt_t &pp, const CGisItemTrk::trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); }
+            [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); }
         }
     },
 
     {"tp1:TrackPointExtension|tp1:hr",
         { "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/CSrcHR.png", true,
-            [](const CGisItemTrk::trkpt_t &pp, const CGisItemTrk::trkpt_t &p) { return p.extensions.value("tp1:TrackPointExtension|tp1:hr").toReal(); }
+            [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("tp1:TrackPointExtension|tp1:hr").toReal(); }
         }
     }
 };
 
 const CKnownExtension CKnownExtension::get(const QString &name)
 {
-    CKnownExtension def("", 0., 100., -100000., 100000, "", "://icons/32x32/CSrcUnknown.png", false,
-        [name] (const CGisItemTrk::trkpt_t &pp, const CGisItemTrk::trkpt_t &p) { return p.extensions.value(name).toReal(); }
+    CKnownExtension def("", 0., 100., -100000., 100000., "", "://icons/32x32/CSrcUnknown.png", false,
+        [name] (const CGisItemTrk::trkpt_t &p) { return p.extensions.value(name).toReal(); }
     );
     return knownExtensions.value(name, def);
 }

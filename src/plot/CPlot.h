@@ -19,6 +19,7 @@
 #ifndef CPLOT_H
 #define CPLOT_H
 
+#include "gis/trk/CGisItemTrk.h"
 #include "plot/IPlot.h"
 #include <functional>
 

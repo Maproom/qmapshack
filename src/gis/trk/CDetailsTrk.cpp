@@ -81,12 +81,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
                           , tr("distance [%1]").arg(IUnit::self().baseunit)
                           , tr("speed. [%1]").arg(IUnit::self().speedunit)
                           , IUnit::self().speedfactor
-                          , [](const CGisItemTrk::trkpt_t &p) {
-        return p.distance;
-    }
-                          , [](const CGisItemTrk::trkpt_t &p) {
-        return p.speed;
-    }
+                          , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
+                          , [](const CGisItemTrk::trkpt_t &p) {return p.speed; }
                           , this);
     plotSpeed->setLimits(0, NOFLOAT);
     plotSpeed->setMinimumSize(QSize(0, 100));
@@ -98,12 +94,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
                              , tr("time")
                              , tr("distance. [%1]").arg(IUnit::self().baseunit)
                              , IUnit::self().basefactor
-                             , [](const CGisItemTrk::trkpt_t &p) {
-        return p.time.toTime_t();
-    }
-                             , [](const CGisItemTrk::trkpt_t &p) {
-        return p.distance;
-    }
+                             , [](const CGisItemTrk::trkpt_t &p) {return p.time.toTime_t(); }
+                             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
                              , this);
     plotDistance->setMinimumSize(QSize(0, 100));
     plotDistance->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);

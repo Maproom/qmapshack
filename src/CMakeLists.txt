@@ -200,10 +200,9 @@ set( SRCS
     plot/CPlotAxisTime.cpp    
     plot/CPlotData.cpp
     plot/CPlotProfile.cpp
-    plot/CPlotSpeed.cpp
-    plot/CPlotDistance.cpp
     plot/ITrack.cpp
     plot/CPlotTrack.cpp
+    plot/CPlot.cpp
     qlgt/converter.cpp
     qlgt/CQlb.cpp
     qlgt/IItem.cpp
@@ -415,10 +414,9 @@ set( HDRS
     plot/CPlotAxisTime.h
     plot/CPlotData.h
     plot/CPlotProfile.h
-    plot/CPlotSpeed.h
-    plot/CPlotDistance.h
     plot/ITrack.h
     plot/CPlotTrack.h
+    plot/CPlot.h
     qlgt/CQlb.h
     qlgt/IItem.h
     qlgt/CQlgtFolder.h

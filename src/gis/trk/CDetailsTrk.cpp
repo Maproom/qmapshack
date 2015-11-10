@@ -29,6 +29,7 @@
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
+#include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 #include "widgets/CColorLegend.h"
@@ -82,9 +83,44 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
-    plotElevation->setTrack(&trk);
-    plotDistance->setTrack(&trk);
-    plotSpeed->setTrack(&trk);
+    plotElevation = new CPlotProfile(&trk, IPlot::eModeNormal, this);
+    plotElevation->setMinimumSize(QSize(0, 100));
+    plotElevation->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plotElevation->show();
+    layoutPlot->addWidget(plotElevation);
+
+    plotSpeed = new CPlot(&trk, CPlotData::eAxisLinear
+                          , tr("distance [%1]").arg(IUnit::self().baseunit)
+                          , tr("speed. [%1]").arg(IUnit::self().speedunit)
+                          , IUnit::self().speedfactor
+                          , [](const CGisItemTrk::trkpt_t &p) {
+        return p.distance;
+    }
+                          , [](const CGisItemTrk::trkpt_t &p) {
+        return p.speed;
+    }
+                          , this);
+    plotSpeed->setLimits(0, NOFLOAT);
+    plotSpeed->setMinimumSize(QSize(0, 100));
+    plotSpeed->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plotSpeed->show();
+    layoutPlot->addWidget(plotSpeed);
+
+    plotDistance = new CPlot(&trk, CPlotData::eAxisTime
+                             , tr("time")
+                             , tr("distance. [%1]").arg(IUnit::self().baseunit)
+                             , IUnit::self().basefactor
+                             , [](const CGisItemTrk::trkpt_t &p) {
+        return p.time.toTime_t();
+    }
+                             , [](const CGisItemTrk::trkpt_t &p) {
+        return p.distance;
+    }
+                             , this);
+    plotDistance->setMinimumSize(QSize(0, 100));
+    plotDistance->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plotDistance->show();
+    layoutPlot->addWidget(plotDistance);
 
     if(trk.isOnDevice())
     {
@@ -153,6 +189,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(textCmtDesc,      SIGNAL(anchorClicked(QUrl)),        this, SLOT(slotLinkActivated(QUrl)));
     connect(labelInfo,        SIGNAL(linkActivated(QString)),     this, SLOT(slotLinkActivated(QString)));
 
+    connect(plotDistance,     SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
+    connect(plotElevation,    SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
+    connect(plotSpeed,        SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
     connect(comboColorSource, SIGNAL(currentIndexChanged(int)),   this, SLOT(slotColorSourceChanged(int)));
     connect(spinLimitHigh,    SIGNAL(valueChangedByStep(double)), this, SLOT(slotColorLimitHighChanged()));
     connect(spinLimitHigh,    SIGNAL(editingFinished()),          this, SLOT(slotColorLimitHighChanged()));

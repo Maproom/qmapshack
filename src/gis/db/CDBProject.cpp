@@ -127,6 +127,8 @@ void CDBProject::postStatus()
 {
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
 
+    bool changedItems = false;
+
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
@@ -134,10 +136,15 @@ void CDBProject::postStatus()
         if(item)
         {
             info->keysChildren << item->getKey().item;
+            changedItems |= item->isChanged();
         }
     }
 
     updateItems();
+    if(!changedItems)
+    {
+        setText(CGisListWks::eColumnDecoration,"");
+    }
 
     CGisWidget::self().postEventForDb(info);
 }
@@ -269,7 +276,7 @@ bool CDBProject::save()
             }
 
             // skip unchanged items
-            if(item->text(CGisListWks::eColumnDecoration).isEmpty())
+            if(!item->isChanged())
             {
                 info->keysChildren << item->getKey().item;
                 continue;
@@ -427,26 +434,40 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
 {
     foreach(const evt_item_t &item, evt->items)
     {
+        IGisItem * gisItem = 0;
         switch(item.type)
         {
         case IGisItem::eTypeWpt:
-            new CGisItemWpt(item.id, db, this);
+            gisItem = new CGisItemWpt(item.id, db, this);
             break;
 
         case IGisItem::eTypeTrk:
-            new CGisItemTrk(item.id, db, this);
+            gisItem = new CGisItemTrk(item.id, db, this);
             break;
 
         case IGisItem::eTypeRte:
-            new CGisItemRte(item.id, db, this);
+            gisItem = new CGisItemRte(item.id, db, this);
             break;
 
         case IGisItem::eTypeOvl:
-            new CGisItemOvlArea(item.id, db, this);
+            gisItem = new CGisItemOvlArea(item.id, db, this);
             break;
 
         default:
             ;
+        }
+
+        /* [Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
+
+           When an item with no key is loaded it is "healed". The healing
+           will mark it as changed. To avoid this save all items that are
+           marked as changed right after loading from the database.
+
+         */
+        if(gisItem && gisItem->isChanged())
+        {
+            updateItem(gisItem, item.id);
+            gisItem->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
         }
     }
 

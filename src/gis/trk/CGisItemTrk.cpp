@@ -525,10 +525,22 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
 
     QStringList keys = pt.extensions.keys();
     keys.sort();
+
+    qint32 more = keys.size() - 10;
+    if(more > 0)
+    {
+        keys = keys.mid(0, 10);
+    }
+
     foreach(const QString &key, keys)
     {
         QStringList tags = key.split("|");
         str += "\n" + tags.last() + ": " + pt.extensions[key].toString();
+    }
+
+    if(more > 0)
+    {
+        str += "\n" + QObject::tr("... and %1 tags not displayed").arg(more);
     }
 
     return str;

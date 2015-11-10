@@ -297,7 +297,7 @@ private:
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
-public:
+public: // TODO
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
@@ -769,7 +769,7 @@ private:
     trk_t trk;
 
     /// the key of the track having the user focus.
-    static key_t keyUserFocus;   
+    static key_t keyUserFocus;
     /// background (border) color of all tracks
     static const QPen penBackground;
     /// drawing and mouse interaction is dependent on the mode
@@ -792,7 +792,7 @@ private:
 
     /**
         \defgroup DrawUtilies Objects used to draw the track
-    */
+     */
     /**@{*/
     /// the track line color by index
     unsigned colorIdx = 4;
@@ -835,7 +835,7 @@ private:
 
     /**
         \defgroup FocusRange Variables to handle mouse focus and range selection
-    */
+     */
     /**@{*/
     enum rangestate_e
     {
@@ -854,7 +854,7 @@ private:
         If mouseFocusOwner is not empty and different to the passed
         owner string the operation must be rejected.
 
-    */
+     */
     QString mouseFocusOwner;
 
     /// the current track point selected by mouse movement

@@ -312,6 +312,12 @@ public:
     bool isOnDevice() const;
 
     /**
+       @brief Check if there are any pending unsaved changes
+       @return True if the are changes to be safed
+     */
+    bool isChanged() const;
+
+    /**
        @brief Set the read only mode.
 
        This is quite dependent on the item. The default implementation will display a

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,51 +16,36 @@
 
 **********************************************************************************************/
 
+#include "plot/CPlot.h"
 #include "plot/CPlotAxis.h"
-#include "plot/CPlotSpeed.h"
 
-CPlotSpeed::CPlotSpeed(QWidget *parent)
-    : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
+CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, funcGet getX, funcGet getY, QWidget * parent)
+    : IPlot(trk, type, eModeNormal, parent)
+    , factor(factor)
+    , getX(getX)
+    , getY(getY)
 {
-}
+    setXLabel(xLabel);
+    setYLabel(yLabel);
 
-CPlotSpeed::~CPlotSpeed()
-{
-}
-
-void CPlotSpeed::setTrack(CGisItemTrk * track)
-{
-    trk = track;
     trk->registerPlot(this);
 
     updateData();
 }
 
-void CPlotSpeed::updateData()
+void CPlot::setLimits(qreal min, qreal max)
+{
+    minLimit = min;
+    maxLimit = max;
+
+    setLimitsOnData(minLimit, maxLimit);
+}
+
+void CPlot::updateData()
 {
     if(isHidden())
     {
         return;
-    }
-
-    CPlotData::axistype_e type = data->axisType;
-
-    if(mode == eModeIcon)
-    {
-        setXLabel(trk->getName());
-        setYLabel("");
-    }
-    else
-    {
-        if(type == CPlotData::eAxisLinear)
-        {
-            setXLabel(tr("distance [%1]").arg(IUnit::self().baseunit));
-        }
-        else
-        {
-            setXLabel(tr("time [h]"));
-        }
-        setYLabel(tr("speed. [%1]").arg(IUnit::self().speedunit));
     }
 
     clear();
@@ -71,9 +56,7 @@ void CPlotSpeed::updateData()
         return;
     }
 
-    QPolygonF lineSpeed;
-
-    qreal speedfactor = IUnit::self().speedfactor;
+    QPolygonF line;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
     foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
     {
@@ -86,19 +69,16 @@ void CPlotSpeed::updateData()
 
             if(trkpt.speed != NOFLOAT)
             {
-                lineSpeed << QPointF(type == CPlotData::eAxisLinear ? trkpt.distance : (qreal)trkpt.time.toTime_t(), trkpt.speed * speedfactor);
+                line << QPointF(getX(trkpt), getY(trkpt) * factor);
             }
         }
     }
 
-    newLine(lineSpeed, "GPS");
-    setLimits();
-    data->ymin = 0;
-    data->y().setLimits(0,data->ymax);
-    resetZoom();
+    newLine(line, "GPS");
+    setLimitsOnData(minLimit, maxLimit);
 }
 
-void CPlotSpeed::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
+void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
     if(ptMouseMove == 0)
     {
@@ -115,9 +95,19 @@ void CPlotSpeed::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(ptMouseMove->distance);
-        posMouse.ry() = top  +  data->y().val2pt(ptMouseMove->speed);
+        posMouse.rx() = left  + data->x().val2pt(getX(*ptMouseMove));
+        posMouse.ry() = top  +  data->y().val2pt(getY(*ptMouseMove));
     }
     update();
 }
 
+void CPlot::setLimitsOnData(qreal min, qreal max)
+{
+    IPlot::setLimits();
+    data->ymin = min == NOFLOAT ? data->ymin : min;
+    data->ymax = max == NOFLOAT ? data->ymax : max;
+
+    data->y().setLimits(data->ymin, data->ymax);
+    resetZoom();
+    update();
+}

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,22 +16,35 @@
 
 **********************************************************************************************/
 
-#ifndef CPLOTSPEED_H
-#define CPLOTSPEED_H
+#ifndef CPLOT_H
+#define CPLOT_H
 
 #include "plot/IPlot.h"
 
-class CPlotSpeed : public IPlot
+class CPlot : public IPlot
 {
     Q_OBJECT
 public:
-    CPlotSpeed(QWidget * parent);
-    virtual ~CPlotSpeed();
+    using funcGet = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
 
-    void setTrack(CGisItemTrk * track);
+    CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY, QWidget *parent);
+    virtual ~CPlot() = default;
+
+    void setLimits(qreal min, qreal max);
+
     void updateData();
+
     void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove);
+
+private:
+    void setLimitsOnData(qreal min, qreal max);
+
+    qreal maxLimit = NOFLOAT;
+    qreal minLimit = NOFLOAT;
+    qreal factor = 1.0;
+    funcGet getX = 0;
+    funcGet getY = 0;
 };
 
-#endif //CPLOTSPEED_H
+#endif //CPLOT_H
 

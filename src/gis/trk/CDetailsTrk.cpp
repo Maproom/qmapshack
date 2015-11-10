@@ -253,14 +253,7 @@ void CDetailsTrk::setupGui()
     tabWidget->widget(3)->setEnabled(!isReadOnly);
     tabWidget->widget(1)->setEnabled(!isReadOnly);
 
-    if(trk.isTainted())
-    {
-        labelTainted->show();
-    }
-    else
-    {
-        labelTainted->hide();
-    }
+    labelTainted->setVisible(trk.isTainted());
 
     labelInfo->setText(trk.getInfo(true));
     comboColor->setCurrentIndex(trk.getColorIdx());
@@ -274,28 +267,18 @@ void CDetailsTrk::setupGui()
         foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
         {
             QTreeWidgetItem * item = new QTreeWidgetItem();
-            item->setTextAlignment(eColNum,Qt::AlignLeft);
-            item->setTextAlignment(eColEle,Qt::AlignRight);
-            item->setTextAlignment(eColDelta,Qt::AlignRight);
-            item->setTextAlignment(eColDist,Qt::AlignRight);
-            item->setTextAlignment(eColAscend,Qt::AlignRight);
-            item->setTextAlignment(eColDescend,Qt::AlignRight);
-            item->setTextAlignment(eColSpeed,Qt::AlignRight);
+            item->setTextAlignment(eColNum,     Qt::AlignLeft);
+            item->setTextAlignment(eColEle,     Qt::AlignRight);
+            item->setTextAlignment(eColDelta,   Qt::AlignRight);
+            item->setTextAlignment(eColDist,    Qt::AlignRight);
+            item->setTextAlignment(eColAscend,  Qt::AlignRight);
+            item->setTextAlignment(eColDescend, Qt::AlignRight);
+            item->setTextAlignment(eColSpeed,   Qt::AlignRight);
 
-
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+            QBrush b( trkpt.flags & CGisItemTrk::trkpt_t::eHidden ? Qt::gray : Qt::black );
+            for(int i = 0; i < eColMax; i++)
             {
-                for(int i = 0; i < eColMax; i++)
-                {
-                    item->setForeground(i,QBrush(Qt::gray));
-                }
-            }
-            else
-            {
-                for(int i = 0; i < eColMax; i++)
-                {
-                    item->setForeground(i,QBrush(Qt::black));
-                }
+                item->setForeground(i, b);
             }
 
             item->setText(eColNum,QString::number(trkpt.idxTotal));
@@ -390,16 +373,9 @@ void CDetailsTrk::setupGui()
     trk.getActivities().printSummary(str);
     labelActivityInfo->setText(str);
 
-    if((flags & CGisItemTrk::trkpt_t::eActMask) == 0)
-    {
-        labelActivityHelp->show();
-        labelActivityInfo->hide();
-    }
-    else
-    {
-        labelActivityHelp->hide();
-        labelActivityInfo->show();
-    }
+    bool hasActivity = 0 != (flags & CGisItemTrk::trkpt_t::eActMask);
+    labelActivityHelp->setVisible(!hasActivity);
+    labelActivityInfo->setVisible(hasActivity);
 
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
@@ -432,7 +408,7 @@ void CDetailsTrk::setupGui()
     comboColorSource->setCurrentIndex(currentIdx);
     comboColorSource->blockSignals(false);
 
-    if(currentIdx > 0)
+    if(enabled)
     {
         const CKnownExtension &ext = CKnownExtension::get(comboColorSource->itemData(currentIdx).toString());
 
@@ -509,32 +485,9 @@ void CDetailsTrk::slotMouseClickState(int s)
 
 void CDetailsTrk::slotShowPlots()
 {
-    if(checkProfile->isChecked())
-    {
-        plotElevation->show();
-    }
-    else
-    {
-        plotElevation->hide();
-    }
-
-    if(checkSpeed->isChecked())
-    {
-        plotSpeed->show();
-    }
-    else
-    {
-        plotSpeed->hide();
-    }
-
-    if(checkProgress->isChecked())
-    {
-        plotDistance->show();
-    }
-    else
-    {
-        plotDistance->hide();
-    }
+    plotElevation->setVisible(checkProfile->isChecked());
+    plotSpeed->setVisible(checkSpeed->isChecked());
+    plotSpeed->setVisible(checkProgress->isChecked());
 }
 
 void CDetailsTrk::slotColorChanged(int idx)

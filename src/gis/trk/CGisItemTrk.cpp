@@ -534,8 +534,14 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
 
     foreach(const QString &key, keys)
     {
-        QStringList tags = key.split("|");
-        str += "\n" + tags.last() + ": " + pt.extensions[key].toString();
+        const CKnownExtension &ext = CKnownExtension::get(key);
+        if(ext.known)
+        {
+            str += "\n" + ext.name + ": " + pt.extensions[key].toString() + ext.unit;
+        } else {
+            QStringList tags = key.split("|");
+            str += "\n" + tags.last() + ": " + pt.extensions[key].toString();
+        }
     }
 
     if(more > 0)

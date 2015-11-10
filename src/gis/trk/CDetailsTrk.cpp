@@ -201,10 +201,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(btnMaxFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitHighFromData()));
     connect(btnMinFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitLowFromData()));
 
-    connect(plotDistance,     SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
-    connect(plotElevation,    SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
-    connect(plotSpeed,        SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
-
     connect(listHistory,      SIGNAL(sigChanged()),               this, SLOT(setupGui()));
 
     slotShowPlots();
@@ -250,7 +246,8 @@ void CDetailsTrk::setupGui()
     QString str, val, unit;
     bool isReadOnly = trk.isReadOnly();
 
-    tabWidget->widget(3)->setEnabled(!isReadOnly);
+    tabWidget->widget(4)->setEnabled(!isReadOnly);
+    tabWidget->widget(2)->setEnabled(!isReadOnly);
     tabWidget->widget(1)->setEnabled(!isReadOnly);
 
     labelTainted->setVisible(trk.isTainted());
@@ -487,7 +484,7 @@ void CDetailsTrk::slotShowPlots()
 {
     plotElevation->setVisible(checkProfile->isChecked());
     plotSpeed->setVisible(checkSpeed->isChecked());
-    plotSpeed->setVisible(checkProgress->isChecked());
+    plotDistance->setVisible(checkProgress->isChecked());
 }
 
 void CDetailsTrk::slotColorChanged(int idx)

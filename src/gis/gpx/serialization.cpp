@@ -766,11 +766,14 @@ void CGisItemTrk::save(QDomNode& gpx)
     writeXml(xmlExt, history);
 
     // write source for coloring tracks
-    QDomElement xmlExtColoring = doc.createElement("ql:coloring");
-    xmlExt.appendChild(xmlExtColoring);
-    writeXml(xmlExtColoring, "ql:source",    colorSource);
-    writeXml(xmlExtColoring, "ql:limitLow",  limitLow);
-    writeXml(xmlExtColoring, "ql:limitHigh", limitHigh);
+    if(!colorSource.isEmpty())
+    {
+        QDomElement xmlExtColoring = doc.createElement("ql:coloring");
+        xmlExt.appendChild(xmlExtColoring);
+        writeXml(xmlExtColoring, "ql:source",    colorSource);
+        writeXml(xmlExtColoring, "ql:limitLow",  limitLow);
+        writeXml(xmlExtColoring, "ql:limitHigh", limitHigh);
+    }
 
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");

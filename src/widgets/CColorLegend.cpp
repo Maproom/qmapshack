@@ -24,6 +24,7 @@
 CColorLegend::CColorLegend(QWidget *parent)
     : QWidget(parent)
 {
+    xOffset = 1;
     colorRect = QRect(0, 0, colorWidth, colorHeight);
     colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
 }
@@ -94,24 +95,13 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
     if(value == minimum || value == maximum
      || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
     {
-        QPen pen(p.pen());
-        pen.setWidth(3);
-        pen.setColor(Qt::black);
-        p.setPen(pen);
-        p.drawText(xOffset + colorWidth + 3, posY, QString("%1%2").arg(value).arg(unit));
-        posX = xOffset + colorWidth + 3 + QFontMetrics(p.font()).width(QString("%1%2").arg(value).arg(unit));
+        p.setPen( QPen(QBrush(Qt::black), 3.) );
+        p.drawText(xOffset + colorWidth + 8, posY, QString("%1%2").arg(value).arg(unit));
+        posX = xOffset + colorWidth + 8 + QFontMetrics(p.font()).width(QString("%1%2").arg(value).arg(unit));
     }
 
-    QPen pen(p.pen());
-    pen.setWidth(3);
-    pen.setColor(Qt::white);
-    p.setPen(pen);
-    p.drawLine(xOffset + colorWidth / 2 + 1, posY - fontHeight / 2, xOffset + colorWidth + 1, posY - fontHeight / 2);
-
-    pen.setColor(Qt::black);
-    pen.setWidth(1);
-    p.setPen(pen);
-    p.drawLine(xOffset + colorWidth / 2, posY - fontHeight / 2, xOffset + colorWidth + 1, posY - fontHeight / 2);
+    p.setPen( QPen(QBrush(Qt::black), 2.) );
+    p.drawLine(xOffset + colorWidth + 3, posY - fontHeight / 2 + 1, xOffset + colorWidth + 5, posY - fontHeight / 2 + 1);
 
     return posX;
 }
@@ -137,10 +127,7 @@ void CColorLegend::paintEvent(QPaintEvent *event)
             p.setRenderHint(QPainter::Antialiasing);
             p.setOpacity(0.6);
 
-            QPen pen(p.pen());
-            pen.setWidth(2);
-            pen.setColor(Qt::darkGray);
-            p.setPen(pen);
+            p.setPen( QPen(QBrush(Qt::darkGray), 2.) );
             p.setBrush(Qt::white);
             p.drawRoundedRect(1, 1, width() - 2, height() - 2, 5.f, 5.f);
 
@@ -148,6 +135,13 @@ void CColorLegend::paintEvent(QPaintEvent *event)
             p.setRenderHint(QPainter::Antialiasing, false);
         }
 
+        // draw the black frame
+        QRect borderRect(colorRect);
+        borderRect += QMargins(1, 1, 1, 1);
+        p.setPen( QPen(QBrush(Qt::SolidPattern), 2., Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin) );
+        p.drawRect(borderRect);
+
+        // draw the gradient
         QLinearGradient grad(colorRect.topLeft(), colorRect.bottomLeft());
         grad.setColorAt(1.00, QColor(  0,   0, 255)); // blue
         grad.setColorAt(0.60, QColor(  0, 255,   0)); // green
@@ -155,13 +149,13 @@ void CColorLegend::paintEvent(QPaintEvent *event)
         grad.setColorAt(0.00, QColor(255,   0,   0)); // red
         p.fillRect(colorRect, grad);
 
-        int reqWidth = 0;
-        reqWidth = std::max(paintLabel(p, minimum), reqWidth);
-        reqWidth = std::max(paintLabel(p, maximum), reqWidth);
-    
+        int reqWidth =  paintLabel(p, minimum);
+        reqWidth = qMax(paintLabel(p, maximum), reqWidth);
+
+        // draw values inbetween min/max
         if(minimum < 0.f && maximum > 0.f)
         {
-            reqWidth = std::max(paintLabel(p, 0.f), reqWidth);
+            reqWidth = qMax(paintLabel(p, 0.), reqWidth);
         }
 
         if(reqWidth + 5 != width())

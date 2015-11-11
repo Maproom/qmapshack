@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "widgets/CColorLegend.h"
 
 #include <QtWidgets>
@@ -125,9 +126,11 @@ void CColorLegend::resizeEvent(QResizeEvent *event)
 
 void CColorLegend::paintEvent(QPaintEvent *event)
 {
+    const QFont &font = CMainWindow::self().getMapFont();
     if(isEnabled())
     {
         QPainter p(this);
+        p.setFont(font);
 
         if(background)
         {
@@ -150,7 +153,6 @@ void CColorLegend::paintEvent(QPaintEvent *event)
         grad.setColorAt(0.60, QColor(  0, 255,   0)); // green
         grad.setColorAt(0.40, QColor(255, 255,   0)); // yellow
         grad.setColorAt(0.00, QColor(255,   0,   0)); // red
-    
         p.fillRect(colorRect, grad);
 
         int reqWidth = 0;

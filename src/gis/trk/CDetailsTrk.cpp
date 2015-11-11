@@ -72,8 +72,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     }
     layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
 
-    // the first entry `static color`, it is always available
-    comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), "Static color");
+    // the first entry `solid color`, it is always available
+    comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), "Solid color");
     foreach(const QString &key, trk.getExistingColorizeSources())
     {
         const CKnownExtension &ext = CKnownExtension::get(key);

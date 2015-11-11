@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>992</width>
-    <height>730</height>
+    <height>383</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -360,9 +360,9 @@
              </property>
              <property name="text">
               <string>Select style of Track here.
-When enabled, value based coloring of tracks overrides the static color.
+When enabled, value based coloring of tracks overrides the solid color.
 
-Keep in mind transfering the value based coloring to another application will most likely not work.</string>
+Keep in mind transferring the value based coloring to another application will most likely not work.</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -412,7 +412,7 @@ Keep in mind transfering the value based coloring to another application will mo
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Static color: </string>
+                  <string>Solid color: </string>
                  </property>
                 </widget>
                </item>

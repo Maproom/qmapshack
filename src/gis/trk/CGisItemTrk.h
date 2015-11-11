@@ -274,12 +274,12 @@ public:
 
     const QString getColorizeUnit() const;
 
-    void getExtrema(qreal &min, qreal &max) const;
-
-private:
     void getExtrema(qreal &min, qreal &max, const QString &source) const;
 
+private:
     QString colorSource  = "";
+    QSet<QString> existingExtensions;
+    QHash<QString, std::pair<qreal, qreal>> extrema;
 
     // the low and high limit for (slope-)colored drawing of tracks
     qreal limitLow  = -10;
@@ -297,7 +297,7 @@ private:
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
-public: // TODO
+public:
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);

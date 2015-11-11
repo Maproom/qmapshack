@@ -36,6 +36,11 @@
 #include <QtXml>
 #include <proj_api.h>
 
+using std::pair;
+using std::min;
+using std::max;
+using std::numeric_limits;
+
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
 #define MIN_DIST_FOCUS      200
@@ -709,6 +714,11 @@ void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2)
     }
 }
 
+static inline void updateExtrema(pair<qreal, qreal> &extrema, qreal val)
+{
+    extrema = { min(extrema.first, val), max(extrema.second, val) };
+}
+
 void CGisItemTrk::deriveSecondaryData()
 {
     qreal north = -90;
@@ -726,6 +736,8 @@ void CGisItemTrk::deriveSecondaryData()
     totalDescend            = NOFLOAT;
     totalElapsedSeconds     = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
+    existingExtensions      = QSet<QString>();
+    extrema                 = QHash<QString, pair<qreal, qreal>>();
 
     // remove empty segments
     QVector<trkseg_t>::iterator i = trk.segs.begin();
@@ -749,6 +761,8 @@ void CGisItemTrk::deriveSecondaryData()
     qreal timestampStart    = NOFLOAT;
     qreal lastEle           = NOFLOAT;
 
+    QSet<QString> nonRealExtensions;
+
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -764,6 +778,24 @@ void CGisItemTrk::deriveSecondaryData()
                 continue;
             }
             trkpt.idxVisible = cntVisiblePoints++;
+
+            existingExtensions.unite(trkpt.extensions.keys().toSet());
+
+            foreach(const QString &key, trkpt.extensions.keys())
+            {
+                bool isReal = false;
+                qreal val = trkpt.extensions.value(key).toReal(&isReal);
+
+                if(isReal)
+                {
+                    pair<qreal, qreal> current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
+                    extrema[key] = { min(current.first, val), max(current.second, val) };
+                }
+                else
+                {
+                    nonRealExtensions << key;
+                }
+            }
 
             if(trkpt.lon < west)
             {
@@ -784,9 +816,9 @@ void CGisItemTrk::deriveSecondaryData()
 
             if(lastTrkpt != 0)
             {
-                trkpt.deltaDistance     = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-                trkpt.distance          = lastTrkpt->distance + trkpt.deltaDistance;
-                trkpt.elapsedSeconds    = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
+                trkpt.deltaDistance  = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+                trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
+                trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
 
                 // ascend descend
                 if(lastEle != NOFLOAT)
@@ -794,24 +826,20 @@ void CGisItemTrk::deriveSecondaryData()
                     qreal delta     = trkpt.ele - lastEle;
                     qreal absDelta  = qAbs(delta);
 
+                    trkpt.ascend  = lastTrkpt->ascend;
+                    trkpt.descend = lastTrkpt->descend;
+
                     if(absDelta > ASCEND_THRESHOLD)
                     {
                         if(delta > 0)
                         {
-                            trkpt.ascend  = lastTrkpt->ascend + delta;
-                            trkpt.descend = lastTrkpt->descend;
+                            trkpt.ascend  += delta;
                         }
                         else
                         {
-                            trkpt.ascend  = lastTrkpt->ascend;
-                            trkpt.descend = lastTrkpt->descend - delta;
+                            trkpt.descend -= delta;
                         }
                         lastEle = trkpt.ele;
-                    }
-                    else
-                    {
-                        trkpt.ascend     = lastTrkpt->ascend;
-                        trkpt.descend    = lastTrkpt->descend;
                     }
                 }
 
@@ -832,12 +860,12 @@ void CGisItemTrk::deriveSecondaryData()
                 timestampStart  = timeStart.toMSecsSinceEpoch()/1000.0;
                 lastEle         = trkpt.ele;
 
-                trkpt.deltaDistance         = 0;
-                trkpt.distance              = 0;
-                trkpt.ascend                = 0;
-                trkpt.descend               = 0;
-                trkpt.elapsedSeconds        = 0;
-                trkpt.elapsedSecondsMoving  = 0;
+                trkpt.deltaDistance        = 0;
+                trkpt.distance             = 0;
+                trkpt.ascend               = 0;
+                trkpt.descend              = 0;
+                trkpt.elapsedSeconds       = 0;
+                trkpt.elapsedSecondsMoving = 0;
             }
 
             lastTrkpt = &trkpt;
@@ -847,6 +875,9 @@ void CGisItemTrk::deriveSecondaryData()
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
     // speed and slope (short average +-25m)
+    pair<qreal, qreal> extremaSpeed = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    pair<qreal, qreal> extremaSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    pair<qreal, qreal> extremaEle   = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -913,12 +944,45 @@ void CGisItemTrk::deriveSecondaryData()
             if((t2 - t1) > 0)
             {
                 trkpt.speed = (d2 - d1) / (t2 - t1);
+
+                updateExtrema(extremaSpeed, trkpt.speed);
             }
             else
             {
                 trkpt.speed = NOFLOAT;
             }
+
+            updateExtrema(extremaEle,   trkpt.ele);
+            updateExtrema(extremaSlope, trkpt.slope1);
         }
+    }
+
+    existingExtensions.subtract(nonRealExtensions);
+    foreach(const QString &key, existingExtensions)
+    {
+        const pair<qreal, qreal> &extr = extrema.value(key);
+        if(extr.second - extr.first < 0.1)
+        {
+            existingExtensions.remove(key);
+        }
+    }
+
+    if(extremaEle.first < extremaEle.second)
+    {
+        existingExtensions << "ele";
+        extrema["ele"] = extremaEle;
+    }
+
+    if(extremaEle.first < extremaEle.second)
+    {
+        existingExtensions << "slope";
+        extrema["slope"] = extremaSlope;
+    }
+
+    if(numeric_limits<qreal>::max() != extremaSpeed.first)
+    {
+        existingExtensions << "speed";
+        extrema["speed"] = extremaSpeed;
     }
 
     if(lastTrkpt != 0)
@@ -1600,44 +1664,10 @@ void CGisItemTrk::drawColorized(QPainter &p)
     }
 }
 
-void CGisItemTrk::getExtrema(qreal &min, qreal &max) const
-{
-    getExtrema(min, max, colorSource);
-}
-
 void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) const
 {
-    min = std::numeric_limits<float>::max();
-    max = std::numeric_limits<float>::lowest();
-
-    auto valueFunc = CKnownExtension::get(source).valueFunc;
-
-    foreach(const trkseg_t &segment, trk.segs)
-    {
-        const trkpt_t *ptPrev = NULL;
-
-        foreach(const trkpt_t &pt, segment.pts)
-        {
-            if(NULL == ptPrev)
-            {
-                ptPrev = &pt;
-                continue;
-            }
-
-            float value = valueFunc(pt);
-            if(min > value)
-            {
-                min = value;
-            }
-
-            if(max < value)
-            {
-                max = value;
-            }
-
-            ptPrev = &pt;
-        }
-    }
+    min = extrema.value(source).first;
+    max = extrema.value(source).second;
 }
 
 QStringList CGisItemTrk::getExistingColorizeSources() const
@@ -1645,52 +1675,13 @@ QStringList CGisItemTrk::getExistingColorizeSources() const
     QStringList known;
     QStringList unknown;
 
-    // even sources with some datapoints missing are assumed as 'existing'
-    if(trk.segs.isEmpty())
+    foreach(const QString &key, existingExtensions)
     {
-        return known;
-    }
-    const trkseg_t &seg = trk.segs[0];
-
-    if(seg.pts.isEmpty())
-    {
-        return known;
-    }
-    const trkpt_t  &pt  = seg.pts[0];
-
-    if(NOFLOAT != pt.slope1)
-    {
-        known << "slope";
-    }
-
-    if(NOFLOAT != pt.speed)
-    {
-        known << "speed";
-    }
-
-    if(NOINT != pt.ele)
-    {
-        known << "ele";
-    }
-
-    foreach(const QString &key, pt.extensions.keys())
-    {
-        // only offer numeric extensions
-        bool isReal = false;
-        (void) pt.extensions.value(key).toReal(&isReal);
-
-        qreal min, max;
-        getExtrema(min, max, key);
-
-        qDebug() << key << isReal << max << min;
-        if(isReal && (max - min >= 0.1))
+        if(CKnownExtension::isKnown(key))
         {
-            if(CKnownExtension::isKnown(key))
-            {
-                known   << key;
-            } else {
-                unknown << key;
-            }
+            known   << key;
+        } else {
+            unknown << key;
         }
     }
 
@@ -1709,7 +1700,6 @@ void CGisItemTrk::setColorizeSource(QString src)
 {
     if(src != colorSource)
     {
-        qDebug() << src;
         colorSource = src;
 
         const CKnownExtension ext = CKnownExtension::get(src);
@@ -1718,7 +1708,7 @@ void CGisItemTrk::setColorizeSource(QString src)
             limitLow  = ext.defLimitLow;
             limitHigh = ext.defLimitHigh;
         } else {
-            getExtrema(limitLow, limitHigh);
+            getExtrema(limitLow, limitHigh, src);
         }
 
         notifyChange();
@@ -1950,7 +1940,6 @@ void CGisItemTrk::setColor(int idx)
 {
     if(idx < TRK_N_COLORS)
     {
-        qDebug() << "new fixed color: " << idx;
         setColor(IGisItem::colorMap[idx].color);
         changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
         notifyChange();

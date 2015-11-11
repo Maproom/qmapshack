@@ -118,7 +118,9 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
 void CColorLegend::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
+
     colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
+    updateGeometry();
 }
 
 void CColorLegend::paintEvent(QPaintEvent *event)
@@ -150,19 +152,19 @@ void CColorLegend::paintEvent(QPaintEvent *event)
         grad.setColorAt(0.00, QColor(255,   0,   0)); // red
     
         p.fillRect(colorRect, grad);
-    
+
         int reqWidth = 0;
         reqWidth = std::max(paintLabel(p, minimum), reqWidth);
         reqWidth = std::max(paintLabel(p, maximum), reqWidth);
     
         if(minimum < 0.f && maximum > 0.f)
         {
-            qDebug() << paintLabel(p, 0.f);
             reqWidth = std::max(paintLabel(p, 0.f), reqWidth);
         }
 
         if(reqWidth + 5 != width())
         {
+            setMinimumWidth(reqWidth + 5);
             resize(reqWidth + 5, height());
         }
 

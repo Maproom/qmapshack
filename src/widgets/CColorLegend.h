@@ -45,7 +45,7 @@ protected:
 private:
     int paintLabel(QPainter &p, qreal value);
 
-    const int colorWidth  =  10;
+    const int colorWidth  =  18;
     const int colorHeight = 256;
 
     QRect colorRect;

@@ -112,6 +112,14 @@ void CColorLegend::resizeEvent(QResizeEvent *event)
     updateGeometry();
 }
 
+static qreal legendRound(qreal value, int powOffset)
+{
+    int l10 = (int) (value > 0) ? log10(value) : log10(-value);
+
+    qreal div = pow(10, l10 + powOffset);
+    return ceil(value / div) * div;
+}
+
 void CColorLegend::paintEvent(QPaintEvent *event)
 {
     const QFont &font = CMainWindow::self().getMapFont();
@@ -151,9 +159,13 @@ void CColorLegend::paintEvent(QPaintEvent *event)
         reqWidth = qMax(paintLabel(p, maximum), reqWidth);
 
         // draw values inbetween min/max
-        if(minimum < 0.f && maximum > 0.f)
+        const qreal delta = maximum - minimum;
+        qreal step           = legendRound(delta / 8, 0);
+        qreal roundedMinimum = legendRound(minimum, delta > 60 ? -1 : 0);
+
+        for(qreal v = roundedMinimum; v < maximum; v+= step)
         {
-            reqWidth = qMax(paintLabel(p, 0.), reqWidth);
+            reqWidth = qMax(paintLabel(p, v), reqWidth);
         }
 
         if(reqWidth + 5 != width())

@@ -32,7 +32,6 @@
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
-#include "widgets/CColorLegend.h"
 
 #include <QtWidgets>
 #include <proj_api.h>
@@ -50,6 +49,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         icon.fill(IGisItem::colorMap[i].color);
         comboColor->addItem(icon, IGisItem::colorMap[i].name, IGisItem::colorMap[i].color);
     }
+
+    widgetColorLayout->setAlignment(Qt::AlignTop);
 
     int i = 0;
     const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();

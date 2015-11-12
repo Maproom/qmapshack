@@ -27,8 +27,7 @@ class CColorLegend : public QWidget, public INotifiable
 {
     Q_OBJECT
 public:
-    CColorLegend(QWidget *parent);
-    CColorLegend(QWidget *parent, CGisItemTrk *trk);
+    CColorLegend(QWidget *parent, CGisItemTrk *trk = nullptr);
     ~CColorLegend();
 
     void setMinimum(qreal min);
@@ -53,7 +52,7 @@ private:
     qreal minimum;
     qreal maximum;
     bool  background = false;
-    int   xOffset    = 0;
+    int   xOffset    = 1;
     CGisItemTrk *trk = nullptr;
 };
 

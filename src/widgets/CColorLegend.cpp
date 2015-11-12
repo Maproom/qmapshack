@@ -21,27 +21,22 @@
 
 #include <QtWidgets>
 
-CColorLegend::CColorLegend(QWidget *parent)
-    : QWidget(parent)
-{
-    xOffset = 1;
-    colorRect = QRect(0, 0, colorWidth, colorHeight);
-    colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
-}
-
 CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
     : QWidget(parent), trk(trk)
 {
-    background = true;
-    xOffset = 5;
-
     colorRect = QRect(0, 0, colorWidth, colorHeight);
     colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
 
-    trk->registerNotification(this);
+    if(nullptr != trk)
+    {
+        background = true;
+        xOffset = 5;
 
-    // read data from trk
-    notify();
+        trk->registerNotification(this);
+    
+        // read data from trk
+        notify();
+    }
 }
 
 CColorLegend::~CColorLegend()
@@ -88,20 +83,22 @@ void CColorLegend::setUnit(const QString &unit)
 int CColorLegend::paintLabel(QPainter &p, qreal value)
 {
     const int fontHeight = QFontMetrics(p.font()).ascent() + 1;
-    const int posY = colorRect.bottom() + fontHeight / 2 - colorHeight * (value - minimum) / (maximum - minimum);
+    const int posY = colorRect.bottom() + fontHeight / 2 - colorRect.height() * (value - minimum) / (maximum - minimum);
 
-    int posX = 0;
+    int posX = xOffset + colorWidth + 3;
+
+    p.setPen( QPen(QBrush(Qt::black), 2.) );
+    p.drawLine(posX, posY - fontHeight / 2 + 1, posX + 2, posY - fontHeight / 2 + 1);
 
     if(value == minimum || value == maximum
      || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
     {
-        p.setPen( QPen(QBrush(Qt::black), 3.) );
-        p.drawText(xOffset + colorWidth + 8, posY, QString("%1%2").arg(value).arg(unit));
-        posX = xOffset + colorWidth + 8 + QFontMetrics(p.font()).width(QString("%1%2").arg(value).arg(unit));
-    }
+        posX += 5;
+        const QString &labelText = QString("%1%2").arg(value).arg(unit);
 
-    p.setPen( QPen(QBrush(Qt::black), 2.) );
-    p.drawLine(xOffset + colorWidth + 3, posY - fontHeight / 2 + 1, xOffset + colorWidth + 5, posY - fontHeight / 2 + 1);
+        p.drawText(posX, posY, labelText);
+        posX += QFontMetrics(p.font()).width(labelText);
+    }
 
     return posX;
 }
@@ -110,6 +107,7 @@ void CColorLegend::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
 
+    colorRect.setHeight(height() - 20);
     colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
     updateGeometry();
 }

@@ -62,12 +62,6 @@ public:
         , eModeRange
     };
 
-    struct limits_t
-    {
-        qreal min;
-        qreal max;
-    };
-
     /**
        @brief Used to create a new track from a part of an existing track
        @param name
@@ -284,8 +278,6 @@ public:
 
 private:
     QString colorSource  = "";
-    QSet<QString> existingExtensions;
-    QHash<QString, limits_t> extrema;
 
     // the low and high limit for (slope-)colored drawing of tracks
     qreal limitLow  = -10;
@@ -592,6 +584,24 @@ private:
        This has to be called each time the track data is changed.
      */
     void deriveSecondaryData();
+
+
+    /** @defgroup ExtremaExtensions Stuff related to calculation of extremas/extensions
+
+        @{
+    */
+public:
+    struct limits_t
+    {
+        qreal min;
+        qreal max;
+    };
+    /**@}*/
+
+private:
+    QSet<QString> existingExtensions;
+    QHash<QString, limits_t> extrema;
+    void updateExtremaAndExtensions();
 
     /**
        @brief Try to get access Nth visible point matching the idx

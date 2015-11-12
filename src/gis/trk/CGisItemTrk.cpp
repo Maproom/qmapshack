@@ -716,6 +716,83 @@ static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
     extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
 }
 
+void CGisItemTrk::updateExtremaAndExtensions()
+{
+    extrema = QHash<QString, limits_t>();
+    limits_t extremaSpeed = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaEle   = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+
+    existingExtensions = QSet<QString>();
+    QSet<QString> nonRealExtensions;
+
+    foreach(const trkseg_t &seg, trk.segs)
+    {
+        foreach(const trkpt_t &pt, seg.pts)
+        {
+            if(pt.flags & trkpt_t::eHidden)
+            {
+                continue;
+            }
+
+            existingExtensions.unite(pt.extensions.keys().toSet());
+
+            foreach(const QString &key, pt.extensions.keys())
+            {
+                bool isReal = false;
+                qreal val = pt.extensions.value(key).toReal(&isReal);
+
+                if(isReal)
+                {
+                    const limits_t &current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
+                    extrema[key] = { qMin(current.min, val), qMax(current.max, val) };
+                }
+                else
+                {
+                    nonRealExtensions << key;
+                }
+            }
+
+            if(NOFLOAT != pt.speed)
+            {
+                updateExtrema(extremaSpeed, pt.speed);
+            }
+
+            updateExtrema(extremaEle,   pt.ele);
+            updateExtrema(extremaSlope, pt.slope1);
+        }
+    }
+
+    if(extremaEle.min < extremaEle.max)
+    {
+        existingExtensions << "ele";
+        extrema["ele"] = extremaEle;
+    }
+
+    if(extremaSlope.min < extremaSlope.max)
+    {
+        existingExtensions << "slope";
+        extrema["slope"] = extremaSlope;
+    }
+
+    if(numeric_limits<qreal>::max() != extremaSpeed.min)
+    {
+        existingExtensions << "speed";
+        extrema["speed"] = extremaSpeed;
+    }
+
+    foreach(const QString &key, existingExtensions)
+    {
+        const limits_t &extr = extrema.value(key);
+        if(extr.max - extr.min < 0.1)
+        {
+            existingExtensions.remove(key);
+        }
+    }
+
+    existingExtensions.subtract(nonRealExtensions);
+}
+
 void CGisItemTrk::deriveSecondaryData()
 {
     qreal north = -90;
@@ -733,8 +810,7 @@ void CGisItemTrk::deriveSecondaryData()
     totalDescend            = NOFLOAT;
     totalElapsedSeconds     = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
-    existingExtensions      = QSet<QString>();
-    extrema                 = QHash<QString, limits_t>();
+
 
     // remove empty segments
     QVector<trkseg_t>::iterator i = trk.segs.begin();
@@ -758,8 +834,6 @@ void CGisItemTrk::deriveSecondaryData()
     qreal timestampStart    = NOFLOAT;
     qreal lastEle           = NOFLOAT;
 
-    QSet<QString> nonRealExtensions;
-
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -775,24 +849,6 @@ void CGisItemTrk::deriveSecondaryData()
                 continue;
             }
             trkpt.idxVisible = cntVisiblePoints++;
-
-            existingExtensions.unite(trkpt.extensions.keys().toSet());
-
-            foreach(const QString &key, trkpt.extensions.keys())
-            {
-                bool isReal = false;
-                qreal val = trkpt.extensions.value(key).toReal(&isReal);
-
-                if(isReal)
-                {
-                    const limits_t &current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
-                    extrema[key] = { qMin(current.min, val), qMax(current.max, val) };
-                }
-                else
-                {
-                    nonRealExtensions << key;
-                }
-            }
 
             if(trkpt.lon < west)
             {
@@ -841,14 +897,11 @@ void CGisItemTrk::deriveSecondaryData()
                 }
 
                 // time moving
+                trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
                 qreal dt = (trkpt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
                 if(dt > 0 && ((trkpt.deltaDistance / dt) > 0.2))
                 {
-                    trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving + dt;
-                }
-                else
-                {
-                    trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
+                    trkpt.elapsedSecondsMoving += dt;
                 }
             }
             else
@@ -872,9 +925,6 @@ void CGisItemTrk::deriveSecondaryData()
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
     // speed and slope (short average +-25m)
-    limits_t extremaSpeed = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaEle   = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -941,45 +991,12 @@ void CGisItemTrk::deriveSecondaryData()
             if((t2 - t1) > 0)
             {
                 trkpt.speed = (d2 - d1) / (t2 - t1);
-
-                updateExtrema(extremaSpeed, trkpt.speed);
             }
             else
             {
                 trkpt.speed = NOFLOAT;
             }
-
-            updateExtrema(extremaEle,   trkpt.ele);
-            updateExtrema(extremaSlope, trkpt.slope1);
         }
-    }
-
-    existingExtensions.subtract(nonRealExtensions);
-    foreach(const QString &key, existingExtensions)
-    {
-        const limits_t &extr = extrema.value(key);
-        if(extr.max - extr.min < 0.1)
-        {
-            existingExtensions.remove(key);
-        }
-    }
-
-    if(extremaEle.min < extremaEle.max)
-    {
-        existingExtensions << "ele";
-        extrema["ele"] = extremaEle;
-    }
-
-    if(extremaSlope.min < extremaSlope.max)
-    {
-        existingExtensions << "slope";
-        extrema["slope"] = extremaSlope;
-    }
-
-    if(numeric_limits<qreal>::max() != extremaSpeed.min)
-    {
-        existingExtensions << "speed";
-        extrema["speed"] = extremaSpeed;
     }
 
     if(lastTrkpt != 0)
@@ -993,6 +1010,7 @@ void CGisItemTrk::deriveSecondaryData()
     }
 
     activities.update();
+    updateExtremaAndExtensions();
 
     foreach(IPlot * plot, registeredPlots)
     {

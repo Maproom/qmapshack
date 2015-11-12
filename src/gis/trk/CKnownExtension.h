@@ -42,7 +42,6 @@ public:
     QString     icon;         //< path to an icon
     bool        known;
     valueFunc_t valueFunc;    //< the function used to retrieve the value
-    
 
 private:
     CKnownExtension(QString name,

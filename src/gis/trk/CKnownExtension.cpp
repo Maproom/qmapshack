@@ -33,6 +33,16 @@ CKnownExtension::CKnownExtension(QString name,
 {
 }
 
+static valueFunc_t getExtensionValueFunc(const QString ext)
+{
+    return [ext](const CGisItemTrk::trkpt_t &p)
+           {
+               bool ok;
+               qreal val = p.extensions.value(ext).toReal(&ok);
+               return ok ? val : NOFLOAT;
+           };
+}
+
 void CKnownExtension::init(IUnit &units)
 {
     const QString &speedunit   = units.speedunit;
@@ -56,19 +66,19 @@ void CKnownExtension::init(IUnit &units)
     
         {"ele",
             { "Elevation", 200., 800., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
-                [](const CGisItemTrk::trkpt_t &p) { return p.ele; }
+                [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }
             }
         },
     
         {"gpxtpx:TrackPointExtension|gpxtpx:hr",
             { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
-                [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); }
+                getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:hr")
             }
         },
     
         {"tp1:TrackPointExtension|tp1:hr",
             { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
-                [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("tp1:TrackPointExtension|tp1:hr").toReal(); }
+                getExtensionValueFunc("tp1:TrackPointExtension|tp1:hr")
             }
         }
     };
@@ -77,7 +87,7 @@ void CKnownExtension::init(IUnit &units)
 const CKnownExtension CKnownExtension::get(const QString &name)
 {
     CKnownExtension def("", 0., 100., -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false,
-        [name] (const CGisItemTrk::trkpt_t &p) { return p.extensions.value(name).toReal(); }
+        getExtensionValueFunc(name)
     );
     return knownExtensions.value(name, def);
 }

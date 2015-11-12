@@ -17,53 +17,66 @@
 **********************************************************************************************/
 
 #include "gis/trk/CKnownExtension.h"
+#include "units/IUnit.h"
+
+QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 
 CKnownExtension::CKnownExtension(QString name,
         qreal defLimitLow, qreal defLimitHigh,
         qreal minimum, qreal maximum,
-        QString unit, QString icon, bool known,
+        qreal factor, QString unit,
+        QString icon, bool known,
         valueFunc_t valueFunc
     ) : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
-        minimum(minimum), maximum(maximum), unit(unit), icon(icon), known(known), valueFunc(valueFunc)
+        minimum(minimum), maximum(maximum), factor(factor), unit(unit),
+        icon(icon), known(known), valueFunc(valueFunc)
 {
 }
 
-QHash<QString, CKnownExtension> CKnownExtension::knownExtensions
+void CKnownExtension::init(IUnit &units)
 {
-    {"slope",
-        { "Slope (directed)", -10., 10., -90., 90., "°", "://icons/32x32/CSrcSlope.png", true,
-            [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }
-        }
-    },
+    const QString &speedunit   = units.speedunit;
+    const qreal   &speedfactor = units.speedfactor;
 
-    {"speed",
-        { "Speed", 1., 14., 0., 100., "m/s", "://icons/32x32/CSrcSpeed.png", true,
-            [](const CGisItemTrk::trkpt_t &p) { return p.speed; }
-        }
-    },
+    const QString &baseunit    = units.baseunit;
+    const qreal   &basefactor  = units.basefactor;
 
-    {"ele",
-        { "Elevation", 200., 800., 0., 5000., "m", "://icons/32x32/CSrcElevation.png", true,
-            [](const CGisItemTrk::trkpt_t &p) { return p.ele; }
+    knownExtensions = {
+        {"slope",
+            { "Slope (directed)", -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
+                [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }
+            }
+        },
+    
+        {"speed",
+            { "Speed", 1., 14., 0., 100., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
+                [](const CGisItemTrk::trkpt_t &p) { return p.speed; }
+            }
+        },
+    
+        {"ele",
+            { "Elevation", 200., 800., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
+                [](const CGisItemTrk::trkpt_t &p) { return p.ele; }
+            }
+        },
+    
+        {"gpxtpx:TrackPointExtension|gpxtpx:hr",
+            { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+                [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); }
+            }
+        },
+    
+        {"tp1:TrackPointExtension|tp1:hr",
+            { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+                [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("tp1:TrackPointExtension|tp1:hr").toReal(); }
+            }
         }
-    },
-
-    {"gpxtpx:TrackPointExtension|gpxtpx:hr",
-        { "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/CSrcHR.png", true,
-            [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("gpxtpx:TrackPointExtension|gpxtpx:hr").toReal(); }
-        }
-    },
-
-    {"tp1:TrackPointExtension|tp1:hr",
-        { "Heart Rate", 100., 200., 0., 300., "bpm", "://icons/32x32/CSrcHR.png", true,
-            [](const CGisItemTrk::trkpt_t &p) { return p.extensions.value("tp1:TrackPointExtension|tp1:hr").toReal(); }
-        }
-    }
-};
+    };
+}
 
 const CKnownExtension CKnownExtension::get(const QString &name)
 {
-    CKnownExtension def("", 0., 100., -100000., 100000., "", "://icons/32x32/CSrcUnknown.png", false,
+    CKnownExtension def("", 0., 100., -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false,
         [name] (const CGisItemTrk::trkpt_t &p) { return p.extensions.value(name).toReal(); }
     );
     return knownExtensions.value(name, def);

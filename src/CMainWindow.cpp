@@ -39,6 +39,7 @@
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
+#include "gis/trk/CKnownExtension.h"
 #include "version.h"
 
 #include <QtGui>
@@ -67,6 +68,7 @@ CMainWindow::CMainWindow()
     initWptIcons();
 
     IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
+    CKnownExtension::init(IUnit::self());
 
     gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);
@@ -683,6 +685,11 @@ void CMainWindow::slotSetupUnits()
 {
     CUnitsSetup dlg(this);
     dlg.exec();
+
+    if(QDialog::Accepted == dlg.result())
+    {
+        CKnownExtension::init(IUnit::self());
+    }
 }
 
 void CMainWindow::slotSetupWorkspace()

@@ -1617,6 +1617,8 @@ void CGisItemTrk::drawColorized(QPainter &p)
     colorsGradient.setColorAt(0.00, QColor(255,   0,   0)); // red
     colorsPainter.fillRect(colors.rect(), colorsGradient);
 
+    const qreal factor = CKnownExtension::get(colorSource).factor;
+
     foreach(const trkseg_t &segment, trk.segs)
     {
         const trkpt_t *ptPrev = NULL;
@@ -1634,7 +1636,7 @@ void CGisItemTrk::drawColorized(QPainter &p)
                 continue;
             }
 
-            float colorAt = ( valueFunc(pt) - limitLow ) / (limitHigh - limitLow);
+            float colorAt = ( factor * valueFunc(pt) - limitLow ) / (limitHigh - limitLow);
             if(colorAt > 1.f) colorAt = 1.f;
             if(colorAt < 0.f) colorAt = 0.f;
 
@@ -1663,8 +1665,8 @@ void CGisItemTrk::drawColorized(QPainter &p)
 
 void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) const
 {
-    min = extrema.value(source).min;
-    max = extrema.value(source).max;
+    min = extrema.value(source).min * CKnownExtension::get(source).factor;
+    max = extrema.value(source).max * CKnownExtension::get(source).factor;
 }
 
 QStringList CGisItemTrk::getExistingColorizeSources() const

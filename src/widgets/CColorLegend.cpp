@@ -83,7 +83,8 @@ void CColorLegend::setUnit(const QString &unit)
 int CColorLegend::paintLabel(QPainter &p, qreal value)
 {
     const int fontHeight = QFontMetrics(p.font()).ascent() + 1;
-    const int posY = colorRect.bottom() + fontHeight / 2 - colorRect.height() * (value - minimum) / (maximum - minimum);
+    const qreal relativePos = (value - minimum) / (maximum - minimum);
+    const int posY = colorRect.bottom() + fontHeight / 2 - (2 + colorRect.height()) * relativePos + 1;
 
     int posX = xOffset + colorWidth + 3;
 

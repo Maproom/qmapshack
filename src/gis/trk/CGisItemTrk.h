@@ -62,6 +62,12 @@ public:
         , eModeRange
     };
 
+    struct limits_t
+    {
+        qreal min;
+        qreal max;
+    };
+
     /**
        @brief Used to create a new track from a part of an existing track
        @param name
@@ -279,7 +285,7 @@ public:
 private:
     QString colorSource  = "";
     QSet<QString> existingExtensions;
-    QHash<QString, std::pair<qreal, qreal>> extrema;
+    QHash<QString, limits_t> extrema;
 
     // the low and high limit for (slope-)colored drawing of tracks
     qreal limitLow  = -10;

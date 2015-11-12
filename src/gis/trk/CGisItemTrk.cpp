@@ -36,9 +36,6 @@
 #include <QtXml>
 #include <proj_api.h>
 
-using std::pair;
-using std::min;
-using std::max;
 using std::numeric_limits;
 
 #define DEFAULT_COLOR       4
@@ -714,9 +711,9 @@ void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2)
     }
 }
 
-static inline void updateExtrema(pair<qreal, qreal> &extrema, qreal val)
+static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
 {
-    extrema = { min(extrema.first, val), max(extrema.second, val) };
+    extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
 }
 
 void CGisItemTrk::deriveSecondaryData()
@@ -737,7 +734,7 @@ void CGisItemTrk::deriveSecondaryData()
     totalElapsedSeconds     = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
     existingExtensions      = QSet<QString>();
-    extrema                 = QHash<QString, pair<qreal, qreal>>();
+    extrema                 = QHash<QString, limits_t>();
 
     // remove empty segments
     QVector<trkseg_t>::iterator i = trk.segs.begin();
@@ -788,8 +785,8 @@ void CGisItemTrk::deriveSecondaryData()
 
                 if(isReal)
                 {
-                    pair<qreal, qreal> current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
-                    extrema[key] = { min(current.first, val), max(current.second, val) };
+                    const limits_t &current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
+                    extrema[key] = { qMin(current.min, val), qMax(current.max, val) };
                 }
                 else
                 {
@@ -875,9 +872,9 @@ void CGisItemTrk::deriveSecondaryData()
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
     // speed and slope (short average +-25m)
-    pair<qreal, qreal> extremaSpeed = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    pair<qreal, qreal> extremaSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    pair<qreal, qreal> extremaEle   = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaSpeed = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaEle   = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -960,26 +957,26 @@ void CGisItemTrk::deriveSecondaryData()
     existingExtensions.subtract(nonRealExtensions);
     foreach(const QString &key, existingExtensions)
     {
-        const pair<qreal, qreal> &extr = extrema.value(key);
-        if(extr.second - extr.first < 0.1)
+        const limits_t &extr = extrema.value(key);
+        if(extr.max - extr.min < 0.1)
         {
             existingExtensions.remove(key);
         }
     }
 
-    if(extremaEle.first < extremaEle.second)
+    if(extremaEle.min < extremaEle.max)
     {
         existingExtensions << "ele";
         extrema["ele"] = extremaEle;
     }
 
-    if(extremaEle.first < extremaEle.second)
+    if(extremaSlope.min < extremaSlope.max)
     {
         existingExtensions << "slope";
         extrema["slope"] = extremaSlope;
     }
 
-    if(numeric_limits<qreal>::max() != extremaSpeed.first)
+    if(numeric_limits<qreal>::max() != extremaSpeed.min)
     {
         existingExtensions << "speed";
         extrema["speed"] = extremaSpeed;
@@ -1666,8 +1663,8 @@ void CGisItemTrk::drawColorized(QPainter &p)
 
 void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) const
 {
-    min = extrema.value(source).first;
-    max = extrema.value(source).second;
+    min = extrema.value(source).min;
+    max = extrema.value(source).max;
 }
 
 QStringList CGisItemTrk::getExistingColorizeSources() const

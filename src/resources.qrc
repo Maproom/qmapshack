@@ -175,6 +175,10 @@
         <file>icons/32x32/Activity.png</file>
         <file>icons/32x32/CSrcSolid.png</file>
         <file>icons/32x32/CSrcHR.png</file>
+        <file>icons/32x32/CSrcCAD.png</file>
+        <file>icons/32x32/CSrcATemp.png</file>
+        <file>icons/32x32/CSrcWTemp.png</file>
+        <file>icons/32x32/CSrcDepth.png</file>
         <file>icons/32x32/CSrcSlope.png</file>
         <file>icons/32x32/CSrcSpeed.png</file>
         <file>icons/32x32/CSrcElevation.png</file>
@@ -327,6 +331,10 @@
         <file>icons/48x48/Activity.png</file>
         <file>icons/48x48/CSrcSolid.png</file>
         <file>icons/48x48/CSrcHR.png</file>
+        <file>icons/48x48/CSrcCAD.png</file>
+        <file>icons/48x48/CSrcATemp.png</file>
+        <file>icons/48x48/CSrcWTemp.png</file>
+        <file>icons/48x48/CSrcDepth.png</file>
         <file>icons/48x48/CSrcSlope.png</file>
         <file>icons/48x48/CSrcSpeed.png</file>
         <file>icons/48x48/CSrcElevation.png</file>

@@ -69,16 +69,67 @@ void CKnownExtension::init(IUnit &units)
                 [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }
             }
         },
-    
+
+        // support for the Garmin TrackPointExtension v1
+        //  https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
         {"gpxtpx:TrackPointExtension|gpxtpx:hr",
             { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
                 getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:hr")
             }
         },
-    
+
+        {"gpxtpx:TrackPointExtension|gpxtpx:cad",
+            { "Cadence", 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true,
+                getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:cad")
+            }
+        },
+
+        {"gpxtpx:TrackPointExtension|gpxtpx:atemp",
+            { "Air Temperature", 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true,
+                getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:atemp")
+            }
+        },
+
+        {"gpxtpx:TrackPointExtension|gpxtpx:wtemp",
+            { "Water Temperature", 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true,
+                getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:wtemp")
+            }
+        },
+
+        {"gpxtpx:TrackPointExtension|gpxtpx:depth",
+            { "Depth", 0., 200., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
+                getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:depth")
+            }
+        },
+
+
         {"tp1:TrackPointExtension|tp1:hr",
             { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
                 getExtensionValueFunc("tp1:TrackPointExtension|tp1:hr")
+            }
+        },
+
+        {"tp1:TrackPointExtension|tp1:cad",
+            { "Cadence", 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true,
+                getExtensionValueFunc("tp1:TrackPointExtension|tp1:cad")
+            }
+        },
+
+        {"tp1:TrackPointExtension|tp1:atemp",
+            { "Air Temperature", 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true,
+                getExtensionValueFunc("tp1:TrackPointExtension|tp1:atemp")
+            }
+        },
+
+        {"tp1:TrackPointExtension|tp1:wtemp",
+            { "Water Temperature", 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true,
+                getExtensionValueFunc("tp1:TrackPointExtension|tp1:wtemp")
+            }
+        },
+
+        {"tp1:TrackPointExtension|tp1:depth",
+            { "Depth", 0., 200., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
+                getExtensionValueFunc("tp1:TrackPointExtension|tp1:depth")
             }
         }
     };

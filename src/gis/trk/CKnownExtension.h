@@ -19,8 +19,8 @@
 #ifndef CKNOWNEXTENSION_H
 #define CKNOWNEXTENSION_H
 
-#include <functional>
 #include "gis/trk/CGisItemTrk.h"
+#include <functional>
 
 using valueFunc_t = std::function<float(const CGisItemTrk::trkpt_t&)>;
 
@@ -32,25 +32,25 @@ public:
     static const CKnownExtension get(const QString &name);
     static bool isKnown(const QString &name);
 
-    QString     name;         //< userfriendly name ("Speed" "Heart Rate")
-    qreal       defLimitLow;  //< the default lower limit
-    qreal       defLimitHigh; //< the default high limit
-    qreal       minimum;      //< hard (enforced) minimum, cannot go lower
-    qreal       maximum;      //< hard (enforced) maximum, cannot go higher
-    qreal       factor;       //< factor used to convert a value to match the users' units
-    QString     unit;         //< the unit (to be displayed)
-    QString     icon;         //< path to an icon
-    bool        known;
+    QString name;             //< userfriendly name ("Speed" "Heart Rate")
+    qreal defLimitLow;        //< the default lower limit
+    qreal defLimitHigh;       //< the default high limit
+    qreal minimum;            //< hard (enforced) minimum, cannot go lower
+    qreal maximum;            //< hard (enforced) maximum, cannot go higher
+    qreal factor;             //< factor used to convert a value to match the users' units
+    QString unit;             //< the unit (to be displayed)
+    QString icon;             //< path to an icon
+    bool known;
     valueFunc_t valueFunc;    //< the function used to retrieve the value
 
 private:
     CKnownExtension(QString name,
-        qreal defLimitLow, qreal defLimitHigh,
-        qreal minimum, qreal maximum,
-        qreal factor, QString unit,
-        QString icon, bool known,
-        valueFunc_t valueFunc
-    );
+                    qreal defLimitLow, qreal defLimitHigh,
+                    qreal minimum, qreal maximum,
+                    qreal factor, QString unit,
+                    QString icon, bool known,
+                    valueFunc_t valueFunc
+                    );
 
     static QHash<QString, CKnownExtension> knownExtensions;
 };

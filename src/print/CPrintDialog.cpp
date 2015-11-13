@@ -267,7 +267,9 @@ void CPrintDialog::slotSave()
     if(filter == filterPNG)
     {
         expectedSuffix = "png";
-    } else if(filter == filterJPG) {
+    }
+    else if(filter == filterJPG)
+    {
         expectedSuffix = "jpg";
     }
 

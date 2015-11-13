@@ -19,9 +19,9 @@
 #ifndef CCOLORLEGEND_H
 #define CCOLORLEGEND_H
 
-#include <QWidget>
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/INotifiable.h"
+#include <QWidget>
 
 class CColorLegend : public QWidget, public INotifiable
 {
@@ -51,8 +51,8 @@ private:
     QString unit;
     qreal minimum;
     qreal maximum;
-    bool  background = false;
-    int   xOffset    = 1;
+    bool background = false;
+    int xOffset    = 1;
     CGisItemTrk *trk = nullptr;
 };
 

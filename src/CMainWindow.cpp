@@ -25,8 +25,9 @@
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
 #include "gis/WptIcons.h"
-#include "gis/prj/IGisProject.h"
 #include "gis/db/CSetupWorkspace.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
@@ -39,7 +40,6 @@
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
-#include "gis/trk/CKnownExtension.h"
 #include "version.h"
 
 #include <QtGui>

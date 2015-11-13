@@ -211,12 +211,12 @@ void CDetailsWpt::slotChangeIcon()
 {
     if(!wpt.isReadOnly())
     {
-	CWptIconDialog dlg(toolIcon);
-	if(dlg.exec() == QDialog::Accepted)
-	{
-	    wpt.setIcon(toolIcon->objectName());
-	    setupGui();
-	}
+        CWptIconDialog dlg(toolIcon);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            wpt.setIcon(toolIcon->objectName());
+            setupGui();
+        }
     }
 }
 

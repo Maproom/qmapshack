@@ -120,7 +120,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget1">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <property name="spacing">
         <number>3</number>

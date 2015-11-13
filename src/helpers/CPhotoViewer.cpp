@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CPhotoViewer.h"
 #include "CMainWindow.h"
+#include "CPhotoViewer.h"
 
 #include <QtWidgets>
 

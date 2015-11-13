@@ -24,9 +24,9 @@
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CSelectActivity.h"
-#include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
@@ -540,7 +540,9 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
         if(ext.known)
         {
             str += "\n" + ext.name + ": " + pt.extensions[key].toString() + ext.unit;
-        } else {
+        }
+        else
+        {
             QStringList tags = key.split("|");
             str += "\n" + tags.last() + ": " + pt.extensions[key].toString();
         }
@@ -1655,8 +1657,14 @@ void CGisItemTrk::drawColorized(QPainter &p)
             }
 
             float colorAt = ( factor * valueFunc(pt) - limitLow ) / (limitHigh - limitLow);
-            if(colorAt > 1.f) colorAt = 1.f;
-            if(colorAt < 0.f) colorAt = 0.f;
+            if(colorAt > 1.f)
+            {
+                colorAt = 1.f;
+            }
+            if(colorAt < 0.f)
+            {
+                colorAt = 0.f;
+            }
 
             const QColor &colorEnd = colors.pixel(0, ((1.f - colorAt) * 255.f));
             if(!colorStart.isValid())
@@ -1696,16 +1704,18 @@ QStringList CGisItemTrk::getExistingColorizeSources() const
     {
         if(CKnownExtension::isKnown(key))
         {
-            known   << key;
-        } else {
+            known << key;
+        }
+        else
+        {
             unknown << key;
         }
     }
 
     auto stringSort = [] (const QString &s1, const QString &s2)
-    {
-        return s1.toLower() < s2.toLower();
-    };
+                      {
+                          return s1.toLower() < s2.toLower();
+                      };
 
     qSort(known.begin(),   known.end(),   stringSort);
     qSort(unknown.begin(), unknown.end(), stringSort);
@@ -1724,7 +1734,9 @@ void CGisItemTrk::setColorizeSource(QString src)
         {
             limitLow  = ext.defLimitLow;
             limitHigh = ext.defLimitHigh;
-        } else {
+        }
+        else
+        {
             getExtrema(limitLow, limitHigh, src);
         }
 

@@ -33,6 +33,11 @@ CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabe
     updateData();
 }
 
+void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY)
+{
+
+}
+
 void CPlot::setLimits(qreal min, qreal max)
 {
     minLimit = min;

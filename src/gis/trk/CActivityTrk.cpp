@@ -101,9 +101,6 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     actDescriptor[7].name = QObject::tr("Aeronautics");
 }
 
-CActivityTrk::~CActivityTrk()
-{
-}
 
 void CActivityTrk::update()
 {

@@ -24,6 +24,7 @@
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CGraphTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CSelectActivity.h"
@@ -212,6 +213,9 @@ CGisItemTrk::~CGisItemTrk()
     qDeleteAll(notifyOnChange.toList());
 
     delete dlgDetails;
+
+    // delete it after the detail dialog as it is used by the detail dialog
+    delete graphProperties;
 }
 
 void CGisItemTrk::setSymbol()
@@ -1012,7 +1016,14 @@ void CGisItemTrk::deriveSecondaryData()
     }
 
     activities.update();
+
     updateExtremaAndExtensions();
+    // make sure we have a graph properties object by now
+    if(graphProperties == nullptr)
+    {
+        graphProperties = new CGraphTrk(this);
+    }
+
 
     foreach(IPlot * plot, registeredPlots)
     {

@@ -19,7 +19,9 @@
 #ifndef CPLOT_H
 #define CPLOT_H
 
+#include "gis/trk/CGisItemTrk.h"
 #include "plot/IPlot.h"
+#include <functional>
 
 class CPlot : public IPlot
 {
@@ -29,6 +31,8 @@ public:
 
     CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY, QWidget *parent);
     virtual ~CPlot() = default;
+
+    void setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY);
 
     void setLimits(qreal min, qreal max);
 

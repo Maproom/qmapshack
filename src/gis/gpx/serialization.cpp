@@ -323,6 +323,11 @@ static void readXml(const QDomNode& ext, QHash<QString, QVariant>& extensions)
 
 static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
 {
+    if(extensions.isEmpty())
+    {
+        return;
+    }
+
     QDomDocument doc = ext.ownerDocument();
 
     QStringList keys = extensions.keys();

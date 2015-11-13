@@ -309,7 +309,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -843,7 +843,6 @@ Keep in mind transferring the value based coloring to another application will m
  </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
-  <include location="src/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

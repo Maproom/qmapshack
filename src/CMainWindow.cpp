@@ -477,6 +477,7 @@ void CMainWindow::slotCloneCanvas()
     }
 
     target->loadConfig(view);
+    target->slotTriggerCompleteUpdate(CCanvas::redraw_e::eRedrawGis);
 
     SETTINGS;
     cfg.beginGroup("Canvas");

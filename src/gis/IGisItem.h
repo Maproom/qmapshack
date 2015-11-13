@@ -441,7 +441,7 @@ public:
     struct color_t
     {
         const char   *name;
-        const QColor  color;
+        const QColor color;
         const QString bullet;
     };
 

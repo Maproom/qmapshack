@@ -33,7 +33,7 @@ CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
         xOffset = 5;
 
         trk->registerNotification(this);
-    
+
         // read data from trk
         notify();
     }
@@ -57,7 +57,9 @@ void CColorLegend::notify()
 
         update();
         show();
-    } else {
+    }
+    else
+    {
         hide();
     }
 }
@@ -92,7 +94,7 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
     p.drawLine(posX, posY - fontHeight / 2 + 1, posX + 2, posY - fontHeight / 2 + 1);
 
     if(value == minimum || value == maximum
-     || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
+       || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
     {
         posX += 5;
         const QString &labelText = QString("%1%2").arg(value).arg(unit);

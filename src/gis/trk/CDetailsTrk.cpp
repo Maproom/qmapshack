@@ -390,7 +390,8 @@ void CDetailsTrk::setupGui()
     }
 
     int currentIdx = comboColorSource->findData(trk.getColorizeSource());
-    if(-1 == currentIdx) {
+    if(-1 == currentIdx)
+    {
         currentIdx = 0;
     }
 
@@ -427,7 +428,7 @@ void CDetailsTrk::setupGui()
         widgetColorLabel->setMinimum(spinLimitLow->value());
         widgetColorLabel->setMaximum(spinLimitHigh->value());
         widgetColorLabel->setUnit(ext.unit);
-    } 
+    }
 
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::setupGui");

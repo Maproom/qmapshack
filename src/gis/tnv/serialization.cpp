@@ -119,7 +119,7 @@ static QDateTime readCompeTime(QString str, bool isTrack)
         QString monthStr = re.cap(2);
 
         QHash<QString, QString> monthStr2Num {
-             {"JAN", "01"}
+            {"JAN", "01"}
             ,{"FEB", "02"}
             ,{"MAR", "03"}
             ,{"APR", "04"}

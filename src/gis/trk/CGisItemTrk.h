@@ -24,9 +24,9 @@
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/INotifiable.h"
 
-#include <functional>
 #include <QPen>
 #include <QPointer>
+#include <functional>
 
 class QDomNode;
 class IGisProject;
@@ -239,20 +239,20 @@ public:
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
         @{
-    */
+     */
 public:
     static const struct ColorizeSource unknownColorizeSource;
 
     /** @brief Set the colorize source to the source specified.
 
         @param src  The new source to use.
-    */
+     */
     void setColorizeSource(QString src);
 
     /** @brief Get the current colorize source.
 
         @return  The new source to use.
-    */
+     */
     QString getColorizeSource()
     {
         return colorSource;
@@ -561,7 +561,7 @@ public:
 
        @param progress  a progress dialog as this operation can take quite some time
        @param current   the current progress if the operation is done for several tracks
-    */
+     */
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
 private:
@@ -589,7 +589,7 @@ private:
     /** @defgroup ExtremaExtensions Stuff related to calculation of extremas/extensions
 
         @{
-    */
+     */
 public:
     struct limits_t
     {
@@ -700,7 +700,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
 
-            // activity flags
+                          // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -793,7 +793,7 @@ private:
 
     /**
        \defgroup TrackStatistics Some statistical values over the complete track
-    */
+     */
     /**@{*/
     qint32 cntTotalPoints   = 0;
     qint32 cntVisiblePoints = 0;

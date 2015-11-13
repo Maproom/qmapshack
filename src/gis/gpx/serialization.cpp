@@ -61,14 +61,20 @@ static void readXml(const QDomNode& xml, const QString& tag, T& value)
         bool ok = false;
         T tmp;
 
-	if(std::is_same<T, quint32>::value)
+        if(std::is_same<T, quint32>::value)
         {
             tmp = xml.namedItem(tag).toElement().text().toUInt(&ok);
-        } else if(std::is_same<T, quint64>::value) {
+        }
+        else if(std::is_same<T, quint64>::value)
+        {
             tmp = xml.namedItem(tag).toElement().text().toULongLong(&ok);
-        } else if(std::is_same<T,   qreal>::value) {
+        }
+        else if(std::is_same<T,   qreal>::value)
+        {
             tmp = xml.namedItem(tag).toElement().text().toDouble(&ok);
-        } else if(std::is_same<T,    bool>::value) {
+        }
+        else if(std::is_same<T,    bool>::value)
+        {
             tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
         }
 

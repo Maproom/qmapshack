@@ -335,7 +335,11 @@
             <widget class="CPlotTrack" name="plotTrack" native="true"/>
            </item>
            <item>
-            <widget class="QTextBrowser" name="textCmtDesc"/>
+            <widget class="QTextBrowser" name="textCmtDesc">
+             <property name="openLinks">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

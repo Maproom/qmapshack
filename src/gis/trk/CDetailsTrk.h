@@ -73,6 +73,18 @@ private:
         ,eColMax
     };
 
+    enum tabs_t
+    {
+         eTabInfo
+        ,eTabStyle
+        ,eTabGraphs
+        ,eTabActivity
+        ,eTabPoints
+        ,eTabFilter
+        ,eTabHistory
+
+    };
+
     /**
        @brief Pointer to track item
 

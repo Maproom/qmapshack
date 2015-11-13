@@ -245,9 +245,9 @@ void CDetailsTrk::setupGui()
     QString str, val, unit;
     bool isReadOnly = trk.isReadOnly();
 
-    tabWidget->widget(4)->setEnabled(!isReadOnly);
-    tabWidget->widget(2)->setEnabled(!isReadOnly);
-    tabWidget->widget(1)->setEnabled(!isReadOnly);
+    tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
+    tabWidget->widget(eTabActivity)->setEnabled(!isReadOnly);
+    tabWidget->widget(eTabStyle)->setEnabled(!isReadOnly);
 
     labelTainted->setVisible(trk.isTainted());
 
@@ -482,9 +482,9 @@ void CDetailsTrk::slotMouseClickState(int s)
 
 void CDetailsTrk::slotShowPlots()
 {
-    plotElevation->setVisible(checkProfile->isChecked());
-    plotSpeed->setVisible(checkSpeed->isChecked());
-    plotDistance->setVisible(checkProgress->isChecked());
+    plot1->setVisible(checkGraph1->isChecked());
+    plot2->setVisible(checkGraph2->isChecked());
+    plot3->setVisible(checkGraph3->isChecked());
 }
 
 void CDetailsTrk::slotColorChanged(int idx)

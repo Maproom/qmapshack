@@ -496,6 +496,13 @@ public:
        @param dist the Douglas Peuker distance in meters
      */
     void filterReducePoints(qreal dist);
+
+    /**
+       @brief Remove track points without valid location at the beginning of the track
+
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
+    void filterRemoveNullPoints();
     /**
        @brief filterReset
 

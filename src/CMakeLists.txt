@@ -175,6 +175,7 @@ set( SRCS
     gis/trk/CKnownExtension.cpp
     gis/trk/filter/filter.cpp
     gis/trk/filter/CFilterDouglasPeuker.cpp
+    gis/trk/filter/CFilterSimple.cpp
     gis/trk/filter/CFilterReset.cpp
     gis/trk/filter/CFilterDelete.cpp
     gis/trk/filter/CFilterMedian.cpp
@@ -387,6 +388,7 @@ set( HDRS
     gis/trk/CActivityTrk.h
     gis/trk/CKnownExtension.h
     gis/trk/filter/CFilterDouglasPeuker.h
+    gis/trk/filter/CFilterSimple.h
     gis/trk/filter/CFilterReset.h
     gis/trk/filter/CFilterDelete.h
     gis/trk/filter/CFilterMedian.h
@@ -502,6 +504,7 @@ set( UIS
     gis/trk/ICombineTrk.ui
     gis/trk/ISelectActivity.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
+    gis/trk/filter/IFilterSimple.ui
     gis/trk/filter/IFilterReset.ui
     gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterMedian.ui

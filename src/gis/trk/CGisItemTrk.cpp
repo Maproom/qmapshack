@@ -95,13 +95,13 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
         }
     }
 
-    trk.name    = name;
-    trk.cmt     = srctrk.cmt;
-    trk.desc    = srctrk.desc;
-    trk.src     = srctrk.src;
-    trk.links   = srctrk.links;
-    trk.number  = srctrk.number;
-    trk.type    = srctrk.type;
+    trk.name   = name;
+    trk.cmt    = srctrk.cmt;
+    trk.desc   = srctrk.desc;
+    trk.src    = srctrk.src;
+    trk.links  = srctrk.links;
+    trk.number = srctrk.number;
+    trk.type   = srctrk.type;
 
     deriveSecondaryData();
     setupHistory();

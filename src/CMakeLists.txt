@@ -176,10 +176,7 @@ set( SRCS
     gis/trk/filter/filter.cpp
     gis/trk/filter/CFilterDouglasPeuker.cpp
     gis/trk/filter/CFilterSimple.cpp
-    gis/trk/filter/CFilterReset.cpp
-    gis/trk/filter/CFilterDelete.cpp
     gis/trk/filter/CFilterMedian.cpp
-    gis/trk/filter/CFilterReplaceElevation.cpp
     gis/trk/filter/CFilterOffsetElevation.cpp
     gis/trk/filter/CFilterNewDate.cpp
     gis/trk/filter/CFilterObscureDate.cpp
@@ -389,10 +386,7 @@ set( HDRS
     gis/trk/CKnownExtension.h
     gis/trk/filter/CFilterDouglasPeuker.h
     gis/trk/filter/CFilterSimple.h
-    gis/trk/filter/CFilterReset.h
-    gis/trk/filter/CFilterDelete.h
     gis/trk/filter/CFilterMedian.h
-    gis/trk/filter/CFilterReplaceElevation.h
     gis/trk/filter/CFilterOffsetElevation.h
     gis/trk/filter/CFilterNewDate.h
     gis/trk/filter/CFilterObscureDate.h
@@ -505,10 +499,7 @@ set( UIS
     gis/trk/ISelectActivity.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
     gis/trk/filter/IFilterSimple.ui
-    gis/trk/filter/IFilterReset.ui
-    gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterMedian.ui
-    gis/trk/filter/IFilterReplaceElevation.ui
     gis/trk/filter/IFilterOffsetElevation.ui
     gis/trk/filter/IFilterNewDate.ui
     gis/trk/filter/IFilterObscureDate.ui

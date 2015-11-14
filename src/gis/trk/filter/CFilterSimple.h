@@ -30,7 +30,7 @@ class CFilterSimple : public QWidget, private Ui::IFilterSimple
 {
     Q_OBJECT
 public:
-    CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func);
+    CFilterSimple(QWidget *parent, const QString &icon, const QString &title, const QString &desc, filterFunc_t func);
     virtual ~CFilterSimple();
 
 private slots:

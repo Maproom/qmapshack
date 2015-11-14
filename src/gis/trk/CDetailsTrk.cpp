@@ -19,14 +19,11 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/filter/CFilterSimple.h"
-#include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/filter/CFilterMedian.h"
 #include "gis/trk/filter/CFilterNewDate.h"
 #include "gis/trk/filter/CFilterObscureDate.h"
 #include "gis/trk/filter/CFilterOffsetElevation.h"
-#include "gis/trk/filter/CFilterReplaceElevation.h"
-#include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
@@ -36,6 +33,12 @@
 
 #include <QtWidgets>
 #include <proj_api.h>
+
+static inline void addSimpleFilter(QTreeWidget *widget, QTreeWidgetItem *parentItem, const QString &icon, const QString &title, const QString &desc, filterFunc_t func)
+{
+	QTreeWidgetItem *item = new QTreeWidgetItem(parentItem);
+	widget->setItemWidget(item, 0, new CFilterSimple(widget, icon, title, desc, func));
+}
 
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     : QWidget(parent)
@@ -137,18 +140,23 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterDouglasPeuker(trk, treeFilter));
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterSimple(treeFilter,
-        tr("Hide invalid points"),
-        tr("Hide points with invalid coordinates at the beginning of the track"),
-        [this]() mutable { this->trk.filterRemoveNullPoints(); } )
+    addSimpleFilter(treeFilter, item0, ":/icons/48x48/PointHide.png",
+        tr("Hide Invalid Points"),
+        tr("Hide track points with invalid coordinates at the beginning of the track"),
+        [this]() mutable { this->trk.filterRemoveNullPoints(); }
     );
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterReset(trk, treeFilter));
+    addSimpleFilter(treeFilter, item0, ":/icons/48x48/PointHide.png",
+        tr("Reset Hidden Track Points"),
+        tr("Make all trackpoints visible again."),
+        [this]() mutable { this->trk.filterReset(); }
+    );
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterDelete(trk, treeFilter));
+    addSimpleFilter(treeFilter, item0, ":/icons/48x48/PointHide.png",
+        tr("Remove Track Points"),
+        tr("Remove all hidden track points permanently."),
+        [this]() mutable { this->trk.filterDelete(); }
+    );
 
     item0 = new QTreeWidgetItem(treeFilter);
     item0->setIcon(0, QIcon("://icons/48x48/SetEle.png"));
@@ -157,8 +165,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterMedian(trk, treeFilter));
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterReplaceElevation(trk, treeFilter));
+    addSimpleFilter(treeFilter, item0, ":/icons/48x48/SetEle.png",
+        tr("Replace Elevation Data"),
+        tr("Replace elevation of track points with the values from loaded DEM files."),
+        [this]() mutable { this->trk.filterReplaceElevation(); }
+    );
 
     item = new QTreeWidgetItem(item0);
     treeFilter->setItemWidget(item,0, new CFilterOffsetElevation(trk, treeFilter));

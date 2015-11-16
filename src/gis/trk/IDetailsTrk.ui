@@ -295,22 +295,6 @@
           </attribute>
           <layout class="QHBoxLayout" name="tabStyleLayout">
            <item>
-            <widget class="QLabel" name="labelStyleHelp">
-             <property name="text">
-              <string>&lt;b&gt;&lt;nobr&gt;Setup the color style of the track&lt;/nobr&gt;&lt;/b&gt;
-&lt;p&gt;Next to the solid color you can select a track property to colorize the track by a value.&lt;/p&gt;
-
-&lt;p&gt;You can save your selection with the track data. But this will not work with any other application than QMapShack.&lt;/p&gt;</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
             <layout class="QVBoxLayout" name="widgetColorLayout">
              <item>
               <widget class="CColorLegend" name="widgetColorLabel" native="true">
@@ -486,6 +470,19 @@
               </spacer>
              </item>
             </layout>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>

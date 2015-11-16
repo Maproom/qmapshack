@@ -3178,12 +3178,12 @@ není platným vymezením soustavy souřadnic
         <translation type="vanished">Ovládání grafu</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="532"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="529"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="701"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="698"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
     </message>
@@ -3216,103 +3216,103 @@ není platným vymezením soustavy souřadnic
         <translation type="unfinished">Styl</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="352"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="446"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="336"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="430"/>
         <source>from Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="365"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="349"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="388"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="372"/>
         <source>Maximum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="417"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="401"/>
         <source>Minimum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="459"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="443"/>
         <source>Solid color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="494"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="491"/>
         <source>Graphs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="539"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="536"/>
         <source>Graph 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="546"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="543"/>
         <source>Graph 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="553"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="550"/>
         <source>Graph 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="561"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="558"/>
         <source>Activity</source>
         <translation>Činnost</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="606"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="603"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>K rozlišení statistik stop zvolte v seznamu činnost pro celou stopu. Nebo vyberte část stopy a přiřaďte jí činnost.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="633"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="630"/>
         <source>Points</source>
         <translation>Body</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="681"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="678"/>
         <source>Time</source>
         <translation>Čas</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="686"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="683"/>
         <source>Ele.</source>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="691"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="688"/>
         <source>Delta</source>
         <translation>Rozdíl</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="696"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="693"/>
         <source>Dist.</source>
         <translation>Vzdál.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="706"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="703"/>
         <source>Slope</source>
         <translation>Sklon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="711"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="708"/>
         <source>Ascend</source>
         <translation>Stoupání</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="716"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="713"/>
         <source>Descend</source>
         <translation>Klesání</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="721"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="718"/>
         <source>Position</source>
         <translation>Poloha</translation>
     </message>
@@ -3327,20 +3327,12 @@ není platným vymezením soustavy souřadnic
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="300"/>
-        <source>&lt;b&gt;&lt;nobr&gt;Setup the color style of the track&lt;/nobr&gt;&lt;/b&gt;
-&lt;p&gt;Next to the solid color you can select a track property to colorize the track by a value.&lt;/p&gt;
-
-&lt;p&gt;You can save your selection with the track data. But this will not work with any other application than QMapShack.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="730"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="727"/>
         <source>Filter</source>
         <translation>Filtr</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="767"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="764"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>

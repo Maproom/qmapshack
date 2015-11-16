@@ -206,7 +206,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     if(i != NOIDX)
     {
         comboGraph3->setCurrentIndex(i);
-    }    
+    }
     cfg.endGroup();
 
     slotShowPlots();

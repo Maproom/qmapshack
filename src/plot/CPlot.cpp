@@ -34,7 +34,6 @@ CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabe
 CPlot::CPlot(CGisItemTrk *trk, QWidget *parent)
     : IPlot(trk, CPlotData::eAxisLinear, eModeNormal, parent)
 {
-
 }
 
 void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, funcGet funcGetX, funcGet funcGetY)

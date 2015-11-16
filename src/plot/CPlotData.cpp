@@ -23,7 +23,7 @@
 
 CPlotData::CPlotData(axistype_e type, QObject * parent)
     : QObject(parent)
-    , axisType(type)  
+    , axisType(type)
 {
     setXAxisType(type);
     yaxis = new CPlotAxis(this);

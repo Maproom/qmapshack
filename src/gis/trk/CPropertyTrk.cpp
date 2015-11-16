@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/CPropertyTrk.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -26,7 +26,6 @@
 CPropertyTrk::CPropertyTrk(const CGisItemTrk& trk)
     : trk(trk)
 {
-
     property_t propNull
     {
         ""
@@ -76,7 +75,7 @@ CPropertyTrk::CPropertyTrk(const CGisItemTrk& trk)
             , QObject::tr("distance [%1]")
             , QString("%1 [%2]").arg(name).arg(ext.unit)
             , ext.factor
-            , [](const CGisItemTrk::trkpt_t &p) {return p.distance;}
+            , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
             , ext.valueFunc
         };
 
@@ -88,7 +87,7 @@ void CPropertyTrk::fillComboBox(QComboBox * box) const
 {
     box->clear();
 
-    foreach(const property_t& p, properties)
+    foreach(const property_t &p, properties)
     {
         box->addItem(p.icon, p.name, p.key);
     }

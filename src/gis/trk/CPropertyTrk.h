@@ -45,7 +45,6 @@ public:
             , getX(getX)
             , getY(getY)
         {
-
         }
 
         QString key;

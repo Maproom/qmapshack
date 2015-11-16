@@ -1981,7 +1981,8 @@ void CGisItemTrk::setColor(int idx)
     if(idx < TRK_N_COLORS)
     {
         setColor(IGisItem::colorMap[idx].color);
-        changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+        //changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+        updateHistory();
         notifyChange();
     }
 }

@@ -263,13 +263,11 @@ void CDetailsTrk::setupGui()
 
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
     tabWidget->widget(eTabActivity)->setEnabled(!isReadOnly);
-    tabWidget->widget(eTabStyle)->setEnabled(!isReadOnly);
 
     labelTainted->setVisible(trk.isTainted());
 
     labelInfo->setText(trk.getInfo(true));
     comboColor->setCurrentIndex(trk.getColorIdx());
-    comboColor->setEnabled(!isReadOnly);
     toolLock->setChecked(isReadOnly);
 
     QList<QTreeWidgetItem*> items;

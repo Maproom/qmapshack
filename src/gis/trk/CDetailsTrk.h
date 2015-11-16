@@ -57,6 +57,8 @@ private slots:
     void slotLimitLowFromData();
     void slotLimitHighFromData();
 
+    void slotSetupGraph(int idx);
+
 private:
     enum columns_t
     {

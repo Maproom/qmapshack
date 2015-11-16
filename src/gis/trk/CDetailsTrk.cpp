@@ -18,7 +18,7 @@
 
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
-#include "gis/trk/CGraphTrk.h"
+#include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/filter/CFilterMedian.h"
@@ -85,41 +85,27 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
+    const CPropertyTrk * graphProperties = trk.getGraphProperties();
+    graphProperties->fillComboBox(comboGraph2);
+    graphProperties->fillComboBox(comboGraph3);
+
     plot1 = new CPlotProfile(&trk, IPlot::eModeNormal, this);
     plot1->setMinimumSize(QSize(0, 100));
     plot1->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
     plot1->show();
     layoutPlot->addWidget(plot1);
 
-    plot2 = new CPlot(&trk, CPlotData::eAxisLinear
-                        , tr("distance [%1]").arg(IUnit::self().baseunit)
-                        , tr("speed. [%1]").arg(IUnit::self().speedunit)
-                        , IUnit::self().speedfactor
-                        , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
-                        , [](const CGisItemTrk::trkpt_t &p) {return p.speed; }
-                        , this);
-    plot2->setLimits(0, NOFLOAT);
+    plot2 = new CPlot(&trk, this);
     plot2->setMinimumSize(QSize(0, 100));
     plot2->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
     plot2->show();
     layoutPlot->addWidget(plot2);
 
-    plot3 = new CPlot(&trk, CPlotData::eAxisTime
-                        , tr("time")
-                        , tr("distance. [%1]").arg(IUnit::self().baseunit)
-                        , IUnit::self().basefactor
-                        , [](const CGisItemTrk::trkpt_t &p) {return p.time.toTime_t(); }
-                        , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
-                        , this);
+    plot3 = new CPlot(&trk, this);
     plot3->setMinimumSize(QSize(0, 100));
     plot3->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
     plot3->show();
     layoutPlot->addWidget(plot3);
-
-    const CGraphTrk * graphProperties = trk.getGraphProperties();
-    graphProperties->fillComboBox(comboGraph2);
-    graphProperties->fillComboBox(comboGraph3);
-
 
     if(trk.isOnDevice())
     {
@@ -202,6 +188,26 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     connect(listHistory,      SIGNAL(sigChanged()),               this, SLOT(setupGui()));
 
+    connect(comboGraph2, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
+    connect(comboGraph3, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
+
+    // setting up the graph properties will trigger the signals
+    // this is good because the signals are connected at this point
+    // invoking the slots
+    cfg.beginGroup("TrackDetails");
+    i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());
+    if(i != NOIDX)
+    {
+        comboGraph2->setCurrentIndex(i);
+    }
+
+    i = comboGraph3->findData(cfg.value("propGraph3","progress").toString());
+    if(i != NOIDX)
+    {
+        comboGraph3->setCurrentIndex(i);
+    }
+    cfg.endGroup();
+
     slotShowPlots();
 }
 
@@ -212,6 +218,16 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("showGraph1", checkGraph1->isChecked());
     cfg.setValue("showGraph2", checkGraph2->isChecked());
     cfg.setValue("showGraph3", checkGraph3->isChecked());
+
+    if(comboGraph2->currentIndex() != 0)
+    {
+        cfg.setValue("propGraph2", comboGraph2->currentData().toString());
+    }
+    if(comboGraph3->currentIndex() != 0)
+    {
+        cfg.setValue("propGraph3", comboGraph3->currentData().toString());
+    }
+
     cfg.setValue("splitterSizes",       splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.endGroup();
@@ -614,5 +630,26 @@ void CDetailsTrk::slotActivitySelected(bool checked)
     if(ok)
     {
         trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
+    }
+}
+
+void CDetailsTrk::slotSetupGraph(int idx)
+{
+    const CPropertyTrk * graphProperties = trk.getGraphProperties();
+    CPlot * plot = 0;
+    QObject * s = sender();
+
+    if(s == comboGraph2)
+    {
+        plot = plot2;
+    }
+    else if(s == comboGraph3)
+    {
+        plot = plot3;
+    }
+
+    if(plot)
+    {
+        graphProperties->setupPlot(plot, idx);
     }
 }

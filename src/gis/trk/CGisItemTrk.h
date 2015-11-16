@@ -38,7 +38,7 @@ class CQlgtTrack;
 class IQlgtOverlay;
 class QDir;
 class CProgressDialog;
-class CGraphTrk;
+class CPropertyTrk;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
@@ -237,7 +237,7 @@ public:
         return activities;
     }
 
-    const CGraphTrk * getGraphProperties() const
+    const CPropertyTrk * getGraphProperties() const
     {
         return graphProperties;
     }
@@ -897,7 +897,7 @@ private:
     CActivityTrk activities = {this};
 
     /// all functions and data concerning graphs
-    CGraphTrk * graphProperties = nullptr;
+    CPropertyTrk * graphProperties = nullptr;
 };
 
 #endif //CGISITEMTRK_H

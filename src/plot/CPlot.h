@@ -30,9 +30,10 @@ public:
     using funcGet = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
 
     CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY, QWidget *parent);
+    CPlot(CGisItemTrk *trk, QWidget *parent);
     virtual ~CPlot() = default;
 
-    void setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY);
+    void setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, funcGet funcGetX, funcGet funcGetY);
 
     void setLimits(qreal min, qreal max);
 

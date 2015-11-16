@@ -24,7 +24,7 @@
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/CGraphTrk.h"
+#include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CSelectActivity.h"
@@ -1021,7 +1021,7 @@ void CGisItemTrk::deriveSecondaryData()
     // make sure we have a graph properties object by now
     if(graphProperties == nullptr)
     {
-        graphProperties = new CGraphTrk(this);
+        graphProperties = new CPropertyTrk(*this);
     }
 
 

@@ -28,14 +28,24 @@ CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabe
     setXLabel(xLabel);
     setYLabel(yLabel);
 
-    trk->registerPlot(this);
-
     updateData();
 }
 
-void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY)
+CPlot::CPlot(CGisItemTrk *trk, QWidget *parent)
+    : IPlot(trk, CPlotData::eAxisLinear, eModeNormal, parent)
 {
 
+}
+
+void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, funcGet funcGetX, funcGet funcGetY)
+{
+    data->setXAxisType(type);
+    setXLabel(xLabel);
+    setYLabel(yLabel);
+    factor = f;
+    getX = funcGetX;
+    getY = funcGetY;
+    updateData();
 }
 
 void CPlot::setLimits(qreal min, qreal max)
@@ -48,13 +58,9 @@ void CPlot::setLimits(qreal min, qreal max)
 
 void CPlot::updateData()
 {
-    if(isHidden())
-    {
-        return;
-    }
-
     clear();
-    if(trk->getTotalElapsedSeconds() == 0)
+
+    if(isHidden() || (getX == nullptr) || (getY == nullptr) || trk->getTotalElapsedSeconds() == 0)
     {
         resetZoom();
         update();
@@ -85,7 +91,7 @@ void CPlot::updateData()
 
 void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
-    if(ptMouseMove == 0)
+    if(ptMouseMove == 0 ||  getX == nullptr || getY == nullptr)
     {
         if(posMouse != NOPOINT)
         {

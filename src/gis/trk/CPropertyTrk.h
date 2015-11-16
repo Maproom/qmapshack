@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#ifndef CGRAPHTRK_H
-#define CGRAPHTRK_H
+#ifndef CPROPERTYTRK_H
+#define CPROPERTYTRK_H
 
 #include "plot/CPlot.h"
 #include "plot/CPlotData.h"
@@ -26,16 +26,17 @@
 
 class QComboBox;
 
-class CGraphTrk
+class CPropertyTrk
 {
 public:
-    virtual ~CGraphTrk() = default;
+    virtual ~CPropertyTrk() = default;
 
     struct property_t
     {
         property_t() = default;
-        property_t(const QString& name, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, CPlot::funcGet getX, CPlot::funcGet getY)
-            : name(name)
+        property_t(const QString& key, const QString& name, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, CPlot::funcGet getX, CPlot::funcGet getY)
+            : key(key)
+            , name(name)
             , icon(icon)
             , axisType(axisType)
             , xLabel(xLabel)
@@ -47,6 +48,7 @@ public:
 
         }
 
+        QString key;
         QString name;
         QIcon icon;
         CPlotData::axistype_e axisType = CPlotData::eAxisLinear;
@@ -63,12 +65,12 @@ public:
 
 private:
     friend class CGisItemTrk;
-    CGraphTrk(CGisItemTrk * trk);
+    CPropertyTrk(const CGisItemTrk &trk);
 
-    CGisItemTrk * trk;
+    const CGisItemTrk& trk;
 
     QList<property_t> properties;
 };
 
-#endif //CGRAPHTRK_H
+#endif //CPROPERTYTRK_H
 

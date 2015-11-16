@@ -46,6 +46,9 @@ public:
         return *yaxis;
     }
 
+    /// create a new x axis
+    void setXAxisType(axistype_e type);
+
     /// setup all internal data to fit the dynamic range of all data points
     void setLimits();
 
@@ -81,7 +84,7 @@ public:
 
     bool badData = true;
 
-    axistype_e axisType;
+    axistype_e axisType = eAxisLinear;
 
     qreal xmin = 0;
     qreal xmax = 0;
@@ -89,8 +92,8 @@ public:
     qreal ymax = 0;
 
 protected:
-    CPlotAxis * xaxis;
-    CPlotAxis * yaxis;
+    CPlotAxis * xaxis = nullptr;
+    CPlotAxis * yaxis = nullptr;
 };
 
 #endif //CPLOTDATA_H

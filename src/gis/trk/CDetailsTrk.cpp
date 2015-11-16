@@ -76,7 +76,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     // the first entry `solid color`, it is always available
     comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), "Solid color");
-    foreach(const QString &key, trk.getExistingColorizeSources())
+    foreach(const QString &key, trk.getExistingDataSources())
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         QIcon icon(ext.icon);

@@ -1706,7 +1706,7 @@ void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) cons
     max = extrema.value(source).max * CKnownExtension::get(source).factor;
 }
 
-QStringList CGisItemTrk::getExistingColorizeSources() const
+QStringList CGisItemTrk::getExistingDataSources() const
 {
     QStringList known;
     QStringList unknown;

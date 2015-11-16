@@ -263,7 +263,7 @@ public:
         return colorSource;
     }
 
-    QStringList getExistingColorizeSources() const;
+    QStringList getExistingDataSources() const;
 
     void setColorizeLimitLow(qreal limit);
     qreal getColorizeLimitLow() const

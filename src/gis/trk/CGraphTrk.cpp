@@ -18,29 +18,20 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CGraphTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
+#include <QString>
 
 CGraphTrk::CGraphTrk(CGisItemTrk *trk)
     : trk(trk)
 {
 
-    const CGisItemTrk::trk_t& data = trk->getTrackData();
-    if(data.segs.isEmpty())
-    {
-        return;
-    }
-
-    const CGisItemTrk::trkseg_t& seg = data.segs[0];
-    if(seg.pts.isEmpty())
-    {
-        return;
-    }
-
     property_t propProgress
     {
          QObject::tr("Progress")
+        ,QIcon("://icons/32x32/Progress.png")
         ,CPlotData::eAxisTime
         ,QObject::tr("time")
         ,QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
@@ -48,60 +39,43 @@ CGraphTrk::CGraphTrk(CGisItemTrk *trk)
         ,[](const CGisItemTrk::trkpt_t &p) {return p.time.toTime_t(); }
         ,[](const CGisItemTrk::trkpt_t &p) {return p.distance; }
     };
-
-
-    property_t propSpeed
-    {
-        QObject::tr("Speed")
-        ,CPlotData::eAxisLinear
-        ,QObject::tr("distance [%1]")
-        ,QObject::tr("speed [%1]").arg(IUnit::self().speedunit)
-        ,IUnit::self().speedfactor
-        ,[](const CGisItemTrk::trkpt_t &p) {return p.distance; }
-        ,[](const CGisItemTrk::trkpt_t &p) {return p.speed; }
-
-    };
-
     properties << propProgress;
-    properties << propSpeed;
 
-
-    const QHash<QString,QVariant>& extensions = seg.pts.first().extensions;
-    QStringList keys = extensions.keys();
-    keys.sort();
-    foreach(const QString& key, keys)
+    foreach(const QString &key, trk->getExistingDataSources())
     {
-        bool ok = false;
-        extensions[key].toFloat(&ok);
-        if(!ok)
+        // skip elevation as it is covered by the profile plot
+        if(key == "ele")
         {
             continue;
         }
 
-        QString name = key.split(":").last();
+        const CKnownExtension &ext = CKnownExtension::get(key);
+
+        QString name = (ext.known ? ext.name : key);
+        qDebug() << "register" << name << QString("%1 [%2]").arg(name).arg(ext.unit) << ext.factor;
 
         property_t property
         {
             name
+            ,QIcon(ext.icon)
             ,CPlotData::eAxisLinear
             ,QObject::tr("distance [%1]")
-            ,name
-            ,1.0
+            ,QString("%1 [%2]").arg(name).arg(ext.unit)
+            ,ext.factor
             ,[](const CGisItemTrk::trkpt_t &p) {return p.distance;}
-            ,[key](const CGisItemTrk::trkpt_t &p) {return p.extensions[key].toFloat();}
+            ,ext.valueFunc
         };
 
         properties << property;
 
     }
-
 }
 
 void CGraphTrk::fillComboBox(QComboBox * box) const
 {
-    foreach(const property_t& property, properties)
+    foreach(const property_t& p, properties)
     {
-        box->addItem(property.name);
+        box->addItem(p.icon, p.name);
     }
 }
 

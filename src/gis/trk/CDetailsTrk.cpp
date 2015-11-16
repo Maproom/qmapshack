@@ -163,6 +163,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     checkGraph3->setChecked(cfg.value("showGraph3", true).toBool());
     splitter->restoreState   (cfg.value("splitterSizes").toByteArray());
     treeWidget->header()->restoreState(cfg.value("trackPointListState").toByteArray());
+    tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
     connect(checkGraph1, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
@@ -205,7 +206,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     if(i != NOIDX)
     {
         comboGraph3->setCurrentIndex(i);
-    }
+    }    
     cfg.endGroup();
 
     slotShowPlots();
@@ -230,6 +231,7 @@ CDetailsTrk::~CDetailsTrk()
 
     cfg.setValue("splitterSizes",       splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
+    cfg.setValue("visibleTab", tabWidget->currentIndex());
     cfg.endGroup();
 }
 

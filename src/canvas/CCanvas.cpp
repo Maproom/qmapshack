@@ -394,6 +394,7 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
 {
     mouse->mousePressEvent(e);
     QWidget::mousePressEvent(e);
+    e->accept();
 }
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)
@@ -406,12 +407,14 @@ void CCanvas::mouseMoveEvent(QMouseEvent * e)
 
     mouse->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
+    e->accept();
 }
 
 void CCanvas::mouseReleaseEvent(QMouseEvent *e)
 {
     mouse->mouseReleaseEvent(e);
     QWidget::mouseReleaseEvent(e);
+    e->accept();
 }
 
 void CCanvas::mouseDoubleClickEvent(QMouseEvent * e)

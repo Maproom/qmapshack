@@ -47,8 +47,8 @@ private:
     qreal maxLimit = NOFLOAT;
     qreal minLimit = NOFLOAT;
     qreal factor = 1.0;
-    funcGet getX = 0;
-    funcGet getY = 0;
+    funcGet getX = nullptr;
+    funcGet getY = nullptr;
 };
 
 #endif //CPLOT_H

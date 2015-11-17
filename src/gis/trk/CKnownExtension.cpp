@@ -26,14 +26,14 @@ CKnownExtension::CKnownExtension(QString name,
                                  qreal minimum, qreal maximum,
                                  qreal factor, QString unit,
                                  QString icon, bool known,
-                                 valueFunc_t valueFunc
+                                 fTrkPtGetVal valueFunc
                                  ) : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
     minimum(minimum), maximum(maximum), factor(factor), unit(unit),
     icon(icon), known(known), valueFunc(valueFunc)
 {
 }
 
-static valueFunc_t getExtensionValueFunc(const QString ext)
+static fTrkPtGetVal getExtensionValueFunc(const QString ext)
 {
     return [ext](const CGisItemTrk::trkpt_t &p)
            {

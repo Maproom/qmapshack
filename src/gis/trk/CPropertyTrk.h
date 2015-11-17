@@ -21,6 +21,7 @@
 
 #include "plot/CPlot.h"
 #include "plot/CPlotData.h"
+#include "gis/trk/CGisItemTrk.h"
 
 #include <QObject>
 
@@ -34,7 +35,7 @@ public:
     struct property_t
     {
         property_t() = default;
-        property_t(const QString& key, const QString& name, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, CPlot::funcGet getX, CPlot::funcGet getY)
+        property_t(const QString& key, const QString& name, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
             : key(key)
             , name(name)
             , icon(icon)
@@ -54,8 +55,8 @@ public:
         QString xLabel;
         QString yLabel;
         qreal factor = 1.0;
-        CPlot::funcGet getX = nullptr;
-        CPlot::funcGet getY = nullptr;
+        fTrkPtGetVal getX = nullptr;
+        fTrkPtGetVal getY = nullptr;
     };
 
     void fillComboBox(QComboBox * box) const;

@@ -19,7 +19,7 @@
 #include "plot/CPlot.h"
 #include "plot/CPlotAxis.h"
 
-CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, funcGet getX, funcGet getY, QWidget * parent)
+CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget * parent)
     : IPlot(trk, type, eModeNormal, parent)
     , factor(factor)
     , getX(getX)
@@ -36,7 +36,7 @@ CPlot::CPlot(CGisItemTrk *trk, QWidget *parent)
 {
 }
 
-void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, funcGet funcGetX, funcGet funcGetY)
+void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY)
 {
     data->setXAxisType(type);
     setXLabel(xLabel);

@@ -22,7 +22,6 @@
 #include "gis/trk/CGisItemTrk.h"
 #include <functional>
 
-using valueFunc_t = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
 
 class CKnownExtension
 {
@@ -41,7 +40,7 @@ public:
     QString unit;             //< the unit (to be displayed)
     QString icon;             //< path to an icon
     bool known;
-    valueFunc_t valueFunc;    //< the function used to retrieve the value
+    fTrkPtGetVal valueFunc;    //< the function used to retrieve the value
 
 private:
     CKnownExtension(QString name,
@@ -49,7 +48,7 @@ private:
                     qreal minimum, qreal maximum,
                     qreal factor, QString unit,
                     QString icon, bool known,
-                    valueFunc_t valueFunc
+                    fTrkPtGetVal valueFunc
                     );
 
     static QHash<QString, CKnownExtension> knownExtensions;

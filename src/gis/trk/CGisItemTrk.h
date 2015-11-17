@@ -45,6 +45,7 @@ class CPropertyTrk;
 
 #include <QDebug>
 
+
 class CGisItemTrk : public IGisItem, public IGisLine
 {
 public:
@@ -899,5 +900,7 @@ private:
     /// all functions and data concerning graphs
     CPropertyTrk * graphProperties = nullptr;
 };
+
+using fTrkPtGetVal = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
 
 #endif //CGISITEMTRK_H

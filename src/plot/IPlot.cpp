@@ -647,6 +647,8 @@ void IPlot::drawData(QPainter& p)
     CPlotAxis& xaxis = data->x();
     CPlotAxis& yaxis = data->y();
 
+    int zero = bottom - yaxis.val2pt(0);
+
     while(line != lines.end())
     {
         QPolygonF background;
@@ -659,7 +661,7 @@ void IPlot::drawData(QPainter& p)
         pty = bottom - yaxis.val2pt( point->y() );
         oldPtx = ptx;
 
-        background << QPointF(left,bottom);
+        background << QPointF(left,zero);
         background << QPointF(left,pty);
         background << QPointF(ptx,pty);
         foreground << QPointF(ptx,pty);
@@ -685,7 +687,7 @@ void IPlot::drawData(QPainter& p)
         }
 
         background << QPointF(right,pty);
-        background << QPointF(right,bottom);
+        background << QPointF(right,zero);
 
         p.setPen(Qt::NoPen);
         p.setBrush(colors[penIdx]);

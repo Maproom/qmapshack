@@ -16,29 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSIMPLE_H
-#define CFILTERSIMPLE_H
+#ifndef CFILTERRESET_H
+#define CFILTERRESET_H
 
-#include "ui_IFilterSimple.h"
+#include "ui_IFilterReset.h"
 #include <QWidget>
-#include <functional>
 
 class CGisItemTrk;
-using filterFunc_t = std::function<void(void)>;
 
-class CFilterSimple : public QWidget, private Ui::IFilterSimple
+class CFilterReset : public QWidget, private Ui::IFilterReset
 {
     Q_OBJECT
 public:
-    CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func);
-    virtual ~CFilterSimple();
+    CFilterReset(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterReset();
 
 private slots:
     void slotApply();
 
 private:
-    filterFunc_t func;
+    CGisItemTrk& trk;
 };
 
-#endif // CFILTERSIMPLE_H
+#endif //CFILTERRESET_H
 

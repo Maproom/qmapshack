@@ -16,29 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSIMPLE_H
-#define CFILTERSIMPLE_H
+#ifndef CFILTERREPLACEELEVATION_H
+#define CFILTERREPLACEELEVATION_H
 
-#include "ui_IFilterSimple.h"
+#include "ui_IFilterReplaceElevation.h"
 #include <QWidget>
-#include <functional>
 
 class CGisItemTrk;
-using filterFunc_t = std::function<void(void)>;
 
-class CFilterSimple : public QWidget, private Ui::IFilterSimple
+class CFilterReplaceElevation : public QWidget, private Ui::IFilterReplaceElevation
 {
     Q_OBJECT
 public:
-    CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func);
-    virtual ~CFilterSimple();
+    CFilterReplaceElevation(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterReplaceElevation();
 
 private slots:
     void slotApply();
 
 private:
-    filterFunc_t func;
+    CGisItemTrk& trk;
 };
 
-#endif // CFILTERSIMPLE_H
+#endif //CFILTERREPLACEELEVATION_H
 

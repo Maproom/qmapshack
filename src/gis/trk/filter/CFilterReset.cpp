@@ -16,29 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSIMPLE_H
-#define CFILTERSIMPLE_H
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterReset.h"
 
-#include "ui_IFilterSimple.h"
-#include <QWidget>
-#include <functional>
+CFilterReset::CFilterReset(CGisItemTrk &trk, QWidget *parent)
+    : QWidget(parent)
+    , trk(trk)
 
-class CGisItemTrk;
-using filterFunc_t = std::function<void(void)>;
-
-class CFilterSimple : public QWidget, private Ui::IFilterSimple
 {
-    Q_OBJECT
-public:
-    CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func);
-    virtual ~CFilterSimple();
+    setupUi(this);
 
-private slots:
-    void slotApply();
+    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+}
 
-private:
-    filterFunc_t func;
-};
+CFilterReset::~CFilterReset()
+{
+}
 
-#endif // CFILTERSIMPLE_H
-
+void CFilterReset::slotApply()
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterReset");
+    trk.filterReset();
+    CCanvas::restoreOverrideCursor("CFilterReset");
+}

@@ -16,29 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSIMPLE_H
-#define CFILTERSIMPLE_H
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterDelete.h"
 
-#include "ui_IFilterSimple.h"
-#include <QWidget>
-#include <functional>
-
-class CGisItemTrk;
-using filterFunc_t = std::function<void(void)>;
-
-class CFilterSimple : public QWidget, private Ui::IFilterSimple
+CFilterDelete::CFilterDelete(CGisItemTrk &trk, QWidget *parent)
+    : QWidget(parent)
+    , trk(trk)
 {
-    Q_OBJECT
-public:
-    CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func);
-    virtual ~CFilterSimple();
+    setupUi(this);
 
-private slots:
-    void slotApply();
+    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+}
 
-private:
-    filterFunc_t func;
-};
+CFilterDelete::~CFilterDelete()
+{
+}
 
-#endif // CFILTERSIMPLE_H
-
+void CFilterDelete::slotApply()
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterDelete");
+    trk.filterDelete();
+    CCanvas::restoreOverrideCursor("CFilterDelete");
+}

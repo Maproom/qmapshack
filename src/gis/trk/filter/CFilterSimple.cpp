@@ -19,14 +19,13 @@
 #include "gis/trk/filter/CFilterSimple.h"
 #include "canvas/CCanvas.h"
 
-CFilterSimple::CFilterSimple(QWidget *parent, const QString &icon, const QString &title, const QString &desc, filterFunc_t func)
+CFilterSimple::CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func)
     : QWidget(parent)
     , func(func)
 
 {
     setupUi(this);
 
-    labelIcon->setPixmap(QPixmap(icon));
     labelTitle->setText(title);
     labelDescription->setText(desc);
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>201</width>
-    <height>126</height>
+    <width>281</width>
+    <height>147</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,25 +15,42 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QRadioButton" name="radioNautic">
-       <property name="text">
-        <string>Nautic</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="radioNautic">
+         <property name="text">
+          <string>Nautic</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioImperial">
+         <property name="text">
+          <string>Imperial</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioMetric">
+         <property name="text">
+          <string>Metric</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QRadioButton" name="radioImperial">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Imperial</string>
+        <string>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioMetric">
-       <property name="text">
-        <string>Metric</string>
+       <property name="alignment">
+        <set>Qt::AlignJustify|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

@@ -544,7 +544,7 @@ if(UNIX)
 endif(UNIX)
 
 if(WIN32)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS -DQ_COMPILER_INITIALIZER_LISTS)
 endif(WIN32)
 
 add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})

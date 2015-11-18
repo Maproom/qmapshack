@@ -25,6 +25,19 @@ CPlotData::CPlotData(axistype_e type, QObject * parent)
     : QObject(parent)
     , axisType(type)
 {
+    setXAxisType(type);
+    yaxis = new CPlotAxis(this);
+}
+
+
+CPlotData::~CPlotData()
+{
+}
+
+void CPlotData::setXAxisType(axistype_e type)
+{
+    delete xaxis;
+
     if(type == eAxisLinear)
     {
         xaxis = new CPlotAxis(this);
@@ -34,14 +47,9 @@ CPlotData::CPlotData(axistype_e type, QObject * parent)
         xaxis = new CPlotAxisTime(this);
     }
     xaxis->setAutoscale(false);
-    yaxis = new CPlotAxis(this);
+
+    axisType = type;
 }
-
-
-CPlotData::~CPlotData()
-{
-}
-
 
 void CPlotData::setLimits()
 {

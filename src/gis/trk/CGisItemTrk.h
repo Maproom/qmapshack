@@ -38,11 +38,13 @@ class CQlgtTrack;
 class IQlgtOverlay;
 class QDir;
 class CProgressDialog;
+class CPropertyTrk;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
 
 #include <QDebug>
+
 
 class CGisItemTrk : public IGisItem, public IGisLine
 {
@@ -236,6 +238,10 @@ public:
         return activities;
     }
 
+    const CPropertyTrk * getGraphProperties() const
+    {
+        return graphProperties;
+    }
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
         @{
@@ -258,7 +264,7 @@ public:
         return colorSource;
     }
 
-    QStringList getExistingColorizeSources() const;
+    QStringList getExistingDataSources() const;
 
     void setColorizeLimitLow(qreal limit);
     qreal getColorizeLimitLow() const
@@ -896,7 +902,12 @@ private:
     QPointer<CScrOptTrk>  scrOpt;
 
     /// all function concerning track activities have been moved to CActivityTrk
-    CActivityTrk activities {this};
+    CActivityTrk activities = {this};
+
+    /// all functions and data concerning graphs
+    CPropertyTrk * graphProperties = nullptr;
 };
+
+using fTrkPtGetVal = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
 
 #endif //CGISITEMTRK_H

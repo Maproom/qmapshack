@@ -23,7 +23,7 @@ class CLASSNAME
 {
     public:
         CLASSNAME();
-        virtual ~CLASSNAME();
+        virtual ~CLASSNAME() = default;
 };
 
 #endif //CLASSNAME_H

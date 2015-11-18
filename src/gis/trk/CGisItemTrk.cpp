@@ -25,6 +25,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CSelectActivity.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -212,6 +213,9 @@ CGisItemTrk::~CGisItemTrk()
     qDeleteAll(notifyOnChange.toList());
 
     delete dlgDetails;
+
+    // delete it after the detail dialog as it is used by the detail dialog
+    delete graphProperties;
 }
 
 void CGisItemTrk::setSymbol()
@@ -1012,7 +1016,14 @@ void CGisItemTrk::deriveSecondaryData()
     }
 
     activities.update();
+
     updateExtremaAndExtensions();
+    // make sure we have a graph properties object by now
+    if(graphProperties == nullptr)
+    {
+        graphProperties = new CPropertyTrk(*this);
+    }
+
 
     foreach(IPlot * plot, registeredPlots)
     {
@@ -1695,7 +1706,7 @@ void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) cons
     max = extrema.value(source).max * CKnownExtension::get(source).factor;
 }
 
-QStringList CGisItemTrk::getExistingColorizeSources() const
+QStringList CGisItemTrk::getExistingDataSources() const
 {
     QStringList known;
     QStringList unknown;
@@ -1970,7 +1981,8 @@ void CGisItemTrk::setColor(int idx)
     if(idx < TRK_N_COLORS)
     {
         setColor(IGisItem::colorMap[idx].color);
-        changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+        //changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+        updateHistory();
         notifyChange();
     }
 }

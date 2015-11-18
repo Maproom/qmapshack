@@ -57,6 +57,8 @@ private slots:
     void slotLimitLowFromData();
     void slotLimitHighFromData();
 
+    void slotSetupGraph(int idx);
+
 private:
     enum columns_t
     {
@@ -73,6 +75,17 @@ private:
         ,eColMax
     };
 
+    enum tabs_t
+    {
+        eTabInfo
+        ,eTabStyle
+        ,eTabGraphs
+        ,eTabActivity
+        ,eTabPoints
+        ,eTabFilter
+        ,eTabHistory
+    };
+
     /**
        @brief Pointer to track item
 
@@ -83,9 +96,9 @@ private:
 
     bool originator = false;
 
-    CPlotProfile * plotElevation;
-    CPlot * plotSpeed;
-    CPlot * plotDistance;
+    CPlotProfile * plot1;
+    CPlot * plot2;
+    CPlot * plot3;
 };
 
 #endif //CDETAILSTRK_H

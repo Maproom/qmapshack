@@ -19,16 +19,19 @@
 #ifndef CPLOT_H
 #define CPLOT_H
 
+#include "gis/trk/CGisItemTrk.h"
 #include "plot/IPlot.h"
+#include <functional>
 
 class CPlot : public IPlot
 {
     Q_OBJECT
 public:
-    using funcGet = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
-
-    CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, funcGet getX, funcGet getY, QWidget *parent);
+    CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget *parent);
+    CPlot(CGisItemTrk *trk, QWidget *parent);
     virtual ~CPlot() = default;
+
+    void setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY);
 
     void setLimits(qreal min, qreal max);
 
@@ -42,8 +45,8 @@ private:
     qreal maxLimit = NOFLOAT;
     qreal minLimit = NOFLOAT;
     qreal factor = 1.0;
-    funcGet getX = 0;
-    funcGet getY = 0;
+    fTrkPtGetVal getX = nullptr;
+    fTrkPtGetVal getY = nullptr;
 };
 
 #endif //CPLOT_H

@@ -18,6 +18,7 @@
 
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/filter/CFilterSimple.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
@@ -76,7 +77,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     // the first entry `solid color`, it is always available
     comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), "Solid color");
-    foreach(const QString &key, trk.getExistingColorizeSources())
+    foreach(const QString &key, trk.getExistingDataSources())
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         QIcon icon(ext.icon);
@@ -85,44 +86,27 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
-    plotElevation = new CPlotProfile(&trk, IPlot::eModeNormal, this);
-    plotElevation->setMinimumSize(QSize(0, 100));
-    plotElevation->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plotElevation->show();
-    layoutPlot->addWidget(plotElevation);
+    const CPropertyTrk * graphProperties = trk.getGraphProperties();
+    graphProperties->fillComboBox(comboGraph2);
+    graphProperties->fillComboBox(comboGraph3);
 
-    plotSpeed = new CPlot(&trk, CPlotData::eAxisLinear
-                          , tr("distance [%1]").arg(IUnit::self().baseunit)
-                          , tr("speed. [%1]").arg(IUnit::self().speedunit)
-                          , IUnit::self().speedfactor
-                          , [](const CGisItemTrk::trkpt_t &p) {
-        return p.distance;
-    }
-                          , [](const CGisItemTrk::trkpt_t &p) {
-        return p.speed;
-    }
-                          , this);
-    plotSpeed->setLimits(0, NOFLOAT);
-    plotSpeed->setMinimumSize(QSize(0, 100));
-    plotSpeed->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plotSpeed->show();
-    layoutPlot->addWidget(plotSpeed);
+    plot1 = new CPlotProfile(&trk, IPlot::eModeNormal, this);
+    plot1->setMinimumSize(QSize(0, 100));
+    plot1->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plot1->show();
+    layoutPlot->addWidget(plot1);
 
-    plotDistance = new CPlot(&trk, CPlotData::eAxisTime
-                             , tr("time")
-                             , tr("distance. [%1]").arg(IUnit::self().baseunit)
-                             , IUnit::self().basefactor
-                             , [](const CGisItemTrk::trkpt_t &p) {
-        return p.time.toTime_t();
-    }
-                             , [](const CGisItemTrk::trkpt_t &p) {
-        return p.distance;
-    }
-                             , this);
-    plotDistance->setMinimumSize(QSize(0, 100));
-    plotDistance->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plotDistance->show();
-    layoutPlot->addWidget(plotDistance);
+    plot2 = new CPlot(&trk, this);
+    plot2->setMinimumSize(QSize(0, 100));
+    plot2->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plot2->show();
+    layoutPlot->addWidget(plot2);
+
+    plot3 = new CPlot(&trk, this);
+    plot3->setMinimumSize(QSize(0, 100));
+    plot3->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    plot3->show();
+    layoutPlot->addWidget(plot3);
 
     if(trk.isOnDevice())
     {
@@ -182,25 +166,26 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    checkProfile->setChecked (cfg.value("showProfile",  true).toBool());
-    checkSpeed->setChecked   (cfg.value("showSpeed",    true).toBool());
-    checkProgress->setChecked(cfg.value("showProgress", true).toBool());
+    checkGraph1->setChecked(cfg.value("showGraph1", true).toBool());
+    checkGraph2->setChecked(cfg.value("showGraph2", true).toBool());
+    checkGraph3->setChecked(cfg.value("showGraph3", true).toBool());
     splitter->restoreState   (cfg.value("splitterSizes").toByteArray());
     treeWidget->header()->restoreState(cfg.value("trackPointListState").toByteArray());
+    tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
-    connect(checkProfile,     SIGNAL(clicked()),                  this, SLOT(slotShowPlots()));
-    connect(checkSpeed,       SIGNAL(clicked()),                  this, SLOT(slotShowPlots()));
-    connect(checkProgress,    SIGNAL(clicked()),                  this, SLOT(slotShowPlots()));
+    connect(checkGraph1, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
+    connect(checkGraph2, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
+    connect(checkGraph3, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
     connect(comboColor,       SIGNAL(currentIndexChanged(int)),   this, SLOT(slotColorChanged(int)));
     connect(toolLock,         SIGNAL(toggled(bool)),              this, SLOT(slotChangeReadOnlyMode(bool)));
     connect(treeWidget,       SIGNAL(itemSelectionChanged()),     this, SLOT(slotItemSelectionChanged()));
     connect(textCmtDesc,      SIGNAL(anchorClicked(QUrl)),        this, SLOT(slotLinkActivated(QUrl)));
     connect(labelInfo,        SIGNAL(linkActivated(QString)),     this, SLOT(slotLinkActivated(QString)));
 
-    connect(plotDistance,     SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
-    connect(plotElevation,    SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
-    connect(plotSpeed,        SIGNAL(sigMouseClickState(int)),    this, SLOT(slotMouseClickState(int)));
+    connect(plot3, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(plot1, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
+    connect(plot2, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
     connect(comboColorSource, SIGNAL(currentIndexChanged(int)),   this, SLOT(slotColorSourceChanged(int)));
     connect(spinLimitHigh,    SIGNAL(valueChangedByStep(double)), this, SLOT(slotColorLimitHighChanged()));
     connect(spinLimitHigh,    SIGNAL(editingFinished()),          this, SLOT(slotColorLimitHighChanged()));
@@ -212,6 +197,27 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     connect(listHistory,      SIGNAL(sigChanged()),               this, SLOT(setupGui()));
 
+    connect(comboGraph2, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
+    connect(comboGraph3, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
+
+    // setting up the graph properties will trigger the signals
+    // this is good because the signals are connected at this point
+    // invoking the slots
+    cfg.beginGroup("TrackDetails");
+    i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());
+    if(i != NOIDX)
+    {
+        comboGraph2->setCurrentIndex(i);
+    }
+
+    i = comboGraph3->findData(cfg.value("propGraph3","progress").toString());
+    if(i != NOIDX)
+    {
+        comboGraph3->setCurrentIndex(i);
+    }
+    cfg.endGroup();
+
+
     slotShowPlots();
 }
 
@@ -219,11 +225,22 @@ CDetailsTrk::~CDetailsTrk()
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    cfg.setValue("showProfile",         checkProfile->isChecked());
-    cfg.setValue("showSpeed",           checkSpeed->isChecked());
-    cfg.setValue("showProgress",        checkProgress->isChecked());
+    cfg.setValue("showGraph1", checkGraph1->isChecked());
+    cfg.setValue("showGraph2", checkGraph2->isChecked());
+    cfg.setValue("showGraph3", checkGraph3->isChecked());
+
+    if(comboGraph2->currentIndex() != 0)
+    {
+        cfg.setValue("propGraph2", comboGraph2->currentData().toString());
+    }
+    if(comboGraph3->currentIndex() != 0)
+    {
+        cfg.setValue("propGraph3", comboGraph3->currentData().toString());
+    }
+
     cfg.setValue("splitterSizes",       splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
+    cfg.setValue("visibleTab", tabWidget->currentIndex());
     cfg.endGroup();
 }
 
@@ -255,15 +272,13 @@ void CDetailsTrk::setupGui()
     QString str, val, unit;
     bool isReadOnly = trk.isReadOnly();
 
-    tabWidget->widget(4)->setEnabled(!isReadOnly);
-    tabWidget->widget(2)->setEnabled(!isReadOnly);
-    tabWidget->widget(1)->setEnabled(!isReadOnly);
+    tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
+    tabWidget->widget(eTabActivity)->setEnabled(!isReadOnly);
 
     labelTainted->setVisible(trk.isTainted());
 
     labelInfo->setText(trk.getInfo(true));
     comboColor->setCurrentIndex(trk.getColorIdx());
-    comboColor->setEnabled(!isReadOnly);
     toolLock->setChecked(isReadOnly);
 
     QList<QTreeWidgetItem*> items;
@@ -484,17 +499,17 @@ void CDetailsTrk::slotMouseClickState(int s)
     if(s == IPlot::eMouseClickIdle)
     {
         labelInfoRange->setText("-\n-");
-        plotDistance->setMouseRangeFocus(0,0);
-        plotElevation->setMouseRangeFocus(0,0);
-        plotSpeed->setMouseRangeFocus(0,0);
+        plot3->setMouseRangeFocus(0,0);
+        plot1->setMouseRangeFocus(0,0);
+        plot2->setMouseRangeFocus(0,0);
     }
 }
 
 void CDetailsTrk::slotShowPlots()
 {
-    plotElevation->setVisible(checkProfile->isChecked());
-    plotSpeed->setVisible(checkSpeed->isChecked());
-    plotDistance->setVisible(checkProgress->isChecked());
+    plot1->setVisible(checkGraph1->isChecked());
+    plot2->setVisible(checkGraph2->isChecked());
+    plot3->setVisible(checkGraph3->isChecked());
 }
 
 void CDetailsTrk::slotColorChanged(int idx)
@@ -624,5 +639,26 @@ void CDetailsTrk::slotActivitySelected(bool checked)
     if(ok)
     {
         trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
+    }
+}
+
+void CDetailsTrk::slotSetupGraph(int idx)
+{
+    const CPropertyTrk * graphProperties = trk.getGraphProperties();
+    CPlot * plot = 0;
+    QObject * s = sender();
+
+    if(s == comboGraph2)
+    {
+        plot = plot2;
+    }
+    else if(s == comboGraph3)
+    {
+        plot = plot3;
+    }
+
+    if(plot)
+    {
+        graphProperties->setupPlot(plot, idx);
     }
 }

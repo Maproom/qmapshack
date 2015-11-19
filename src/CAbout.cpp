@@ -35,11 +35,11 @@ CAbout::CAbout(QWidget *parent)
     labelProj4Version->setText(QString::number(PJ_VERSION));
     if(Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE)
     {
-        labelRoutinoVersion->setText(tr("%1 (API V%2, expected V%3)").arg(Routino_Version).arg(ROUTINO_API_VERSION).arg(Routino_APIVersion));
+        //labelRoutinoVersion->setText(tr("%1 (API V%2, expected V%3)").arg(Routino_Version).arg(ROUTINO_API_VERSION).arg(Routino_APIVersion));
     }
     else
     {
-        labelRoutinoVersion->setText(tr("%1 (API V%2)").arg(Routino_Version).arg(Routino_APIVersion));
+        //labelRoutinoVersion->setText(tr("%1 (API V%2)").arg(Routino_Version).arg(Routino_APIVersion));
     }
 }
 

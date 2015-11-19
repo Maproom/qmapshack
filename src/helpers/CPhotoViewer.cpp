@@ -146,6 +146,7 @@ void CPhotoViewer::paintEvent(QPaintEvent * e)
 void CPhotoViewer::mousePressEvent(QMouseEvent * e)
 {
     QPoint pos  = e->pos();
+
     if(rectClose.contains(pos))
     {
         reject();
@@ -165,6 +166,10 @@ void CPhotoViewer::mousePressEvent(QMouseEvent * e)
             setImageAtIdx(--idx);
             update();
         }
+    }
+    else if(!rectImage.contains(pos))
+    {
+        reject();
     }
 
     e->accept();

@@ -34,8 +34,11 @@ protected:
     void paintEvent(QPaintEvent * e);
     void resizeEvent(QResizeEvent * e);
     void mousePressEvent(QMouseEvent * e);
+    void keyPressEvent(QKeyEvent *e);
 
 private:
+    void tryIdxStep(int delta);
+
     void setImageAtIdx(int i);
 
     QList<CGisItemWpt::image_t> images;

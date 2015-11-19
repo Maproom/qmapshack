@@ -2658,11 +2658,6 @@ no es una definición de sistema de coordenadas válido:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="304"/>
-        <source>Christian Eichler</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../IAbout.ui" line="208"/>
         <source>Josef Latt</source>
         <translation type="unfinished"></translation>
@@ -2700,6 +2695,11 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../IAbout.ui" line="268"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="304"/>
+        <source>Christian Eichler (qms@christian-eichler.de)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

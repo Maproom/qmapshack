@@ -2676,7 +2676,7 @@ není platným vymezením soustavy souřadnic
     </message>
     <message>
         <location filename="../IAbout.ui" line="304"/>
-        <source>Christian Eichler</source>
+        <source>Christian Eichler (qms@christian-eichler.de)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

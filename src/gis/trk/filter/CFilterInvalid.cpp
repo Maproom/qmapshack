@@ -16,29 +16,27 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterSimple.h"
+#include "gis/trk/filter/CFilterInvalid.h"
 #include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
 
-CFilterSimple::CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func)
+CFilterInvalid::CFilterInvalid(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
-    , func(func)
+    , trk(trk)
 
 {
     setupUi(this);
 
-    labelTitle->setText(title);
-    labelDescription->setText(desc);
-
     connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
 }
 
-CFilterSimple::~CFilterSimple()
+CFilterInvalid::~CFilterInvalid()
 {
 }
 
-void CFilterSimple::slotApply()
+void CFilterInvalid::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSimple");
-    func();
-    CCanvas::restoreOverrideCursor("CFilterSimple");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInvalid");
+    trk.filterRemoveNullPoints();
+    CCanvas::restoreOverrideCursor("CFilterInvalid");
 }

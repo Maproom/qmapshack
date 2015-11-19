@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IFilterSimple</class>
- <widget class="QWidget" name="IFilterSimple">
+ <class>IFilterInvalid</class>
+ <widget class="QWidget" name="IFilterInvalid">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -37,6 +37,9 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="text">
+      <string>Hide Invalid Points</string>
+     </property>
      <property name="textFormat">
       <enum>Qt::PlainText</enum>
      </property>
@@ -50,7 +53,7 @@
      <item>
       <widget class="QLabel" name="labelDescription">
        <property name="text">
-        <string/>
+        <string>Hide points with invalid coordinates at the beginning of the track.</string>
        </property>
       </widget>
      </item>

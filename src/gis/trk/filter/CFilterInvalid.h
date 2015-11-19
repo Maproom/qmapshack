@@ -16,29 +16,28 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSIMPLE_H
-#define CFILTERSIMPLE_H
+#ifndef CFILTERINVALID_H
+#define CFILTERINVALID_H
 
-#include "ui_IFilterSimple.h"
+#include "ui_IFilterInvalid.h"
 #include <QWidget>
 #include <functional>
 
 class CGisItemTrk;
-using filterFunc_t = std::function<void(void)>;
 
-class CFilterSimple : public QWidget, private Ui::IFilterSimple
+class CFilterInvalid : public QWidget, private Ui::IFilterInvalid
 {
     Q_OBJECT
 public:
-    CFilterSimple(QWidget *parent, const QString &title, const QString &desc, filterFunc_t func);
-    virtual ~CFilterSimple();
+    CFilterInvalid(CGisItemTrk& trk, QWidget *parent);
+    virtual ~CFilterInvalid();
 
 private slots:
     void slotApply();
 
 private:
-    filterFunc_t func;
+    CGisItemTrk& trk;
 };
 
-#endif // CFILTERSIMPLE_H
+#endif // CFILTERINVALID_H
 

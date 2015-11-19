@@ -342,62 +342,62 @@
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="78"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="79"/>
         <source>Solid color</source>
         <translation>Feste Farbe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="118"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="119"/>
         <source>Reduce visible track points</source>
         <translation>Sichtbare Trackpunkte reduzieren</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="131"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="135"/>
         <source>Change elevation of track points</source>
         <translation>Höhe von Trackpunkten ändern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="144"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="148"/>
         <source>Change timestamp of track points</source>
         <translation>Zeitstempel von Trackpunkten ändern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="157"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="161"/>
         <source>Cut track into pieces</source>
         <translation>Track in Stücke teilen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="309"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="318"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="321"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="327"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="346"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="348"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="314"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="323"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="326"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="332"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="351"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="353"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="565"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="570"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="565"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="570"/>
         <source>Enter new track name.</source>
         <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="617"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="622"/>
         <source>Reset activities...</source>
         <translation>Aktivitäten zurücksetzen...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="617"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="622"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Dies wird alle Aktivitäten vom Track entfernen. Fortfahren?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="623"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="628"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
@@ -839,27 +839,27 @@
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="590"/>
+        <location filename="../CMainWindow.cpp" line="591"/>
         <source>Ele: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="606"/>
+        <location filename="../CMainWindow.cpp" line="607"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="731"/>
+        <location filename="../CMainWindow.cpp" line="732"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="765"/>
+        <location filename="../CMainWindow.cpp" line="766"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="791"/>
+        <location filename="../CMainWindow.cpp" line="792"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
@@ -3335,7 +3335,7 @@ ist keine gültige Koordinatensystemdefinition:
         <translation type="obsolete">Position</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IDetailsRte.ui" line="173"/>
+        <location filename="../gis/rte/IDetailsRte.ui" line="176"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
@@ -3360,12 +3360,12 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Grafikeinstellungen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="529"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="533"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="698"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="702"/>
         <source>Speed</source>
         <translation>Geschw.</translation>
     </message>
@@ -3393,108 +3393,108 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Der Wegpunkt wurde in QMapShack importiert und geändert. Die ursprünglichen Daten werden nicht mehr angezeigt. Näheres siehe Änderungshistorie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="294"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="298"/>
         <source>Style</source>
         <translation>Stil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="336"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="430"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="340"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="434"/>
         <source>from Data</source>
         <translation>aus Daten</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="349"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="353"/>
         <source>Source</source>
         <translation>Quelle</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="372"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="376"/>
         <source>Maximum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="401"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="405"/>
         <source>Minimum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="443"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="447"/>
         <source>Solid color</source>
         <translation>Feste Farbe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="491"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="495"/>
         <source>Graphs</source>
         <translation>Grafiken</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="536"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="540"/>
         <source>Graph 3</source>
         <translation>Grafik 3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="543"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="547"/>
         <source>Graph 2</source>
         <translation>Grafik 2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="550"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="554"/>
         <source>Graph 1</source>
         <translation>Grafik 1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="558"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="562"/>
         <source>Activity</source>
         <translation>Aktivität</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="603"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="607"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder wählen Sie einen Teil des Track aus und weisen diesem eine Aktivität zu.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="630"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="634"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="678"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="682"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="683"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="687"/>
         <source>Ele.</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="688"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="692"/>
         <source>Delta</source>
         <translation>Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="693"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="697"/>
         <source>Dist.</source>
         <translation>Entf.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="703"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="707"/>
         <source>Slope</source>
         <translation>Neigung</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="708"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="712"/>
         <source>Ascend</source>
         <translation>Anstieg</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="713"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="717"/>
         <source>Descend</source>
         <translation>Abstieg</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="718"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="722"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
@@ -3509,12 +3509,12 @@ ist keine gültige Koordinatensystemdefinition:
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="727"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="731"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="764"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="768"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
@@ -3690,6 +3690,29 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="96"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterInvalid</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInvalid.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInvalid.ui" line="41"/>
+        <source>Hide Invalid Points</source>
+        <translation>Ungültige Punkte ausblenden</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInvalid.ui" line="56"/>
+        <source>Hide points with invalid coordinates at the beginning of the track.</source>
+        <translation>Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -5318,33 +5341,33 @@ sein</translation>
         <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Details anzeigen &amp; Bearbeiten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="25"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="40"/>
         <source>View details and edit.</source>
         <translation>Details anzeigen und bearbeiten.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="28"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="42"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="56"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="74"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="91"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="105"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="119"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="43"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="57"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="71"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="89"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="106"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="39"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="54"/>
         <source>Copy route into another project.</source>
         <translation>Kopiert die Route in ein anderes Projekt.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="53"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="68"/>
         <source>Delete route from project.</source>
         <translation>Route aus einem Projekt entfernen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="102"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="117"/>
         <source>Reset route calculation.</source>
         <translation>Routenberechnung zurücksetzen.</translation>
     </message>
@@ -5353,7 +5376,7 @@ sein</translation>
         <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löschen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="88"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
         <source>Calculate route.</source>
         <translation>Route berechnen.</translation>
     </message>
@@ -5363,7 +5386,7 @@ sein</translation>
         <translation type="obsolete">Routenberechnung zurücksetzen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="116"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="131"/>
         <source>Move route points.</source>
         <translation>Routenpunkte verschieben.</translation>
     </message>
@@ -5372,7 +5395,7 @@ sein</translation>
         <translation type="obsolete">Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="160"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -5624,7 +5647,7 @@ sein</translation>
         <translation>Der Name das Abbildes wird mit &apos;_Klon&apos; erweitert</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="132"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="135"/>
         <source>And for all other items, too.</source>
         <translation>Auch für alle anderen Elemente anwenden.</translation>
     </message>
@@ -6749,17 +6772,17 @@ Turn: %1 Bearing: %2</source>
         <translation>Geänderte Routenpukte.</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="577"/>
+        <location filename="../gis/gpx/serialization.cpp" line="582"/>
         <source>Archived</source>
         <translation>Archiviert</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="581"/>
+        <location filename="../gis/gpx/serialization.cpp" line="586"/>
         <source>Available</source>
         <translation>Verfügbar</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="585"/>
+        <location filename="../gis/gpx/serialization.cpp" line="590"/>
         <source>Not Available</source>
         <translation>Nicht verfügbar</translation>
     </message>
@@ -6914,47 +6937,52 @@ Turn: %1 Bearing: %2</source>
         <translation>Punkte ausblenden mit dem Douglas-Peuker Algorithmus (%1 %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="112"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="122"/>
+        <source>Hide points with invalid coordinates at the beginning of the track</source>
+        <translation>Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="138"/>
         <source>Reset all hidden track points to visible</source>
         <translation>Alle verborgenen Trackpunkte zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="137"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="163"/>
         <source>Permanently removed all hidden track points</source>
         <translation>Alle verborgenen Trackpunkte wurden dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="187"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="213"/>
         <source>Smoothed profile with a Median filter of size %1</source>
         <translation>Mit einem Median-Filter der Größe %1 geglättetes Profil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="223"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="249"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Höhendaten durch Daten von DEM Dateien ersetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="246"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="272"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Versatz der Höhendaten um %1 %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="265"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="291"/>
         <source>Changed start of track to %1.</source>
         <translation>Trackanfang auf %1 verschoben.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="284"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="310"/>
         <source>Remove timestamps.</source>
         <translation>Zeitstempel entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="307"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="333"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="340"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="366"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
@@ -7156,10 +7184,34 @@ Turn: %1 Bearing: %2</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="77"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="74"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
         <source>Heart Rate</source>
         <translation>Pulsrate</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="105"/>
+        <source>Cadence</source>
+        <translation>Trittfrequenz</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="110"/>
+        <source>Air Temperature</source>
+        <translation>Lufttemperatur</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="89"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
+        <source>Water Temperature</source>
+        <translation>Wassertemperatur</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="94"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="120"/>
+        <source>Depth</source>
+        <translation>Tiefe</translation>
     </message>
 </context>
 </TS>

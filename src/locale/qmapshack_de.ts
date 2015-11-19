@@ -520,7 +520,7 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="281"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
     <message>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
@@ -1734,7 +1734,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
         <source>Unexpected service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter Dienst. &apos;* WMTS 1.0.0&apos; wird erwartet. &apos;%1 %2&apos; wurde gelesen.</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
@@ -1852,7 +1852,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
         <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
@@ -2774,22 +2774,22 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../IAbout.ui" line="201"/>
         <source>&lt;b&gt;Translation:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Übersetzung:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="281"/>
         <source>&lt;b&gt;Binaries:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ausführbare Dateien:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="297"/>
         <source>&lt;b&gt;Contributors:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Mitwirkende:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="304"/>
         <source>Christian Eichler (qms@christian-eichler.de)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Translation:</source>
@@ -2945,27 +2945,27 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="14"/>
         <source>Cut Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Track teilen</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="20"/>
         <source>Delete first part of the track and keep second one</source>
-        <translation type="unfinished"></translation>
+        <translation>Löscht den ersten Teil des Tracks und behält den zweiten</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="27"/>
         <source>Keep both parts of the track</source>
-        <translation type="unfinished"></translation>
+        <translation>Behält beide Teile des Tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="37"/>
         <source>Keep first part of the track and delete second one</source>
-        <translation type="unfinished"></translation>
+        <translation>Behält den ersten Teil des Tracks und löscht den zweiten</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="60"/>
         <source>Create a clone</source>
-        <translation type="unfinished">Abbild erstellen</translation>
+        <translation>Ein Abbild erstellen</translation>
     </message>
 </context>
 <context>
@@ -2977,7 +2977,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
         <source>Setup DEM file paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad für DEM Dateien setzen</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
@@ -3035,27 +3035,27 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Hangneigung </translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="214"/>
-        <location filename="../dem/IDemPropSetup.ui" line="291"/>
-        <location filename="../dem/IDemPropSetup.ui" line="353"/>
+        <location filename="../dem/IDemPropSetup.ui" line="226"/>
+        <location filename="../dem/IDemPropSetup.ui" line="326"/>
+        <location filename="../dem/IDemPropSetup.ui" line="410"/>
         <location filename="../dem/IDemPropSetup.ui" line="494"/>
         <location filename="../dem/IDemPropSetup.ui" line="578"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="217"/>
-        <location filename="../dem/IDemPropSetup.ui" line="294"/>
-        <location filename="../dem/IDemPropSetup.ui" line="356"/>
+        <location filename="../dem/IDemPropSetup.ui" line="229"/>
+        <location filename="../dem/IDemPropSetup.ui" line="329"/>
+        <location filename="../dem/IDemPropSetup.ui" line="413"/>
         <location filename="../dem/IDemPropSetup.ui" line="497"/>
         <location filename="../dem/IDemPropSetup.ui" line="581"/>
         <source>&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="381"/>
-        <location filename="../dem/IDemPropSetup.ui" line="400"/>
-        <location filename="../dem/IDemPropSetup.ui" line="419"/>
+        <location filename="../dem/IDemPropSetup.ui" line="251"/>
+        <location filename="../dem/IDemPropSetup.ui" line="270"/>
+        <location filename="../dem/IDemPropSetup.ui" line="354"/>
         <location filename="../dem/IDemPropSetup.ui" line="438"/>
         <location filename="../dem/IDemPropSetup.ui" line="522"/>
         <source>TextLabel</source>
@@ -3390,53 +3390,53 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="294"/>
         <source>Style</source>
-        <translation type="unfinished">Stil</translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="336"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="430"/>
         <source>from Data</source>
-        <translation type="unfinished"></translation>
+        <translation>aus Daten</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="349"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Quelle</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="372"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="401"/>
         <source>Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="443"/>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Feste Farbe</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="491"/>
         <source>Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafiken</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="536"/>
         <source>Graph 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafik 3</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="543"/>
         <source>Graph 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafik 2</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="550"/>
         <source>Graph 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafik 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="558"/>
@@ -6064,31 +6064,31 @@ sein</translation>
     <message>
         <location filename="../tool/IToolShell.cpp" line="44"/>
         <source>Execution of external program `%1` failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführen des externen Programms `%1` ist fehlgeschlagen: </translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="48"/>
         <source>Process cannot be started.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Der Prozess konnte nicht gestartet werden.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="49"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Stellen Sie sicher, dass die erforderlichen Pakete installiert sind, `%1` existiert und ist ausführbar.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="53"/>
         <source>External process crashed.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Der externe Prozess ist abgestürzt.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="57"/>
         <source>An unknown error occurred.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="148"/>
@@ -6112,7 +6112,7 @@ sein</translation>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="47"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Anmerkung:&lt;/b&gt; Das Ändern der Einheiten mancher GUI-Elemente wird erst nach Neustart von QMapShack wirksam.</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="31"/>
@@ -6178,7 +6178,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="410"/>
         <source>Saving GIS data failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Speichern der GIS Daten ist fehlgeschlagen...</translation>
     </message>
     <message>
         <source>
@@ -6248,7 +6248,7 @@ Areas: %1</source>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="248"/>
         <source>Canceled correlation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verknüpfung abgebrochen...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="326"/>
@@ -6408,7 +6408,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="558"/>
         <source>... and %1 tags not displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>... und %1 Tags werden nicht angezeigt</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="624"/>
@@ -6450,7 +6450,7 @@ Dateiname: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1273"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1358"/>
         <source>Permanently removed points %1..%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dauerhaft entfernte Punkt %1..%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2118"/>
@@ -6786,7 +6786,7 @@ Turn: %1 Bearing: %2</source>
     <message>
         <location filename="../gis/IGisItem.cpp" line="453"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt; Diese Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="454"/>
@@ -7075,7 +7075,7 @@ Turn: %1 Bearing: %2</source>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
         <source>Aeronautics</source>
-        <translation type="unfinished"></translation>
+        <translation>Aeronautik</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="210"/>
@@ -7122,18 +7122,18 @@ Turn: %1 Bearing: %2</source>
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="46"/>
         <source>Progress</source>
-        <translation type="unfinished">Verlauf</translation>
+        <translation>Verlauf</translation>
     </message>
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="49"/>
         <source>time</source>
-        <translation type="unfinished">Uhrzeit</translation>
+        <translation>Uhrzeit</translation>
     </message>
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="50"/>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="75"/>
         <source>distance [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernung [%1]</translation>
     </message>
 </context>
 </TS>

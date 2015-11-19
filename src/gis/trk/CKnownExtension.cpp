@@ -54,27 +54,24 @@ void CKnownExtension::init(IUnit &units)
     knownExtensions =
     {
         {"slope",
-         { "Slope (directed)", -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
-           [] (const CGisItemTrk::trkpt_t &p) { return p.slope1; }
-         }
+         { QObject::tr("Slope (directed)"), -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
+           [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }}
         },
 
         {"speed",
-         { "Speed", 1., 14., 0., 100., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
-           [] (const CGisItemTrk::trkpt_t &p) { return p.speed; }
-         }
+         { QObject::tr("Speed"), 1., 14., 0., 100., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
+           [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
         },
 
         {"ele",
-         { "Elevation", 200., 800., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
-           [] (const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }
-         }
+         { QObject::tr("Elevation"), 200., 800., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
+           [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         // support for the Garmin TrackPointExtension v1
         //  https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
         {"gpxtpx:TrackPointExtension|gpxtpx:hr",
-         { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+         { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
            getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:hr")}
         },
 
@@ -100,7 +97,7 @@ void CKnownExtension::init(IUnit &units)
 
 
         {"tp1:TrackPointExtension|tp1:hr",
-         { "Heart Rate", 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+         { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
            getExtensionValueFunc("tp1:TrackPointExtension|tp1:hr")}
         },
 

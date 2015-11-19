@@ -22,6 +22,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CCombineTrk.h"
+#include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -1023,6 +1024,10 @@ void CGisItemTrk::deriveSecondaryData()
     {
         graphProperties = new CPropertyTrk(*this);
     }
+    else
+    {
+        graphProperties->setupData();
+    }
 
 
     foreach(IPlot * plot, registeredPlots)
@@ -1221,35 +1226,148 @@ bool CGisItemTrk::cut()
         return false;
     }
 
-    QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
-    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
-    if(name1.isEmpty())
+    CCutTrk dlg(CMainWindow::getBestWidgetForParent());
+    dlg.exec();
+
+    switch(dlg.getMode())
     {
-        return false;
+    case CCutTrk::eModeKeepFirst:
+    {
+        if(dlg.createClone())
+        {
+            QString name1;
+            name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
+            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+            if(name1.isEmpty())
+            {
+                return false;
+            }
+
+
+            IGisProject * project = CGisWidget::self().selectProject();
+            if(project == 0)
+            {
+                return false;
+            }
+
+            new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
+        }
+        else
+        {
+            for(int i = 0; i < trk.segs.size(); i++)
+            {
+                QVector<trkpt_t> pts;
+                trkseg_t& seg = trk.segs[i];
+
+                for(int n = 0; n < seg.pts.size(); n++)
+                {
+                    trkpt_t& pt = seg.pts[n];
+
+                    if(pt.idxTotal > mouseClickFocus->idxTotal)
+                    {
+                        continue;
+                    }
+
+                    pts << pt;
+                }
+
+                seg.pts = pts;
+            }
+            deriveSecondaryData();
+            changed(QObject::tr("Permanently removed points %1..%2").arg(mouseClickFocus->idxTotal+1).arg(cntTotalPoints-1), "://icons/48x48/Cut.png");
+            return false;
+        }
+
+        break;
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(project == 0)
+    case CCutTrk::eModeKeepBoth:
     {
-        return false;
+        QString name1;
+        name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
+        name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+        if(name1.isEmpty())
+        {
+            return false;
+        }
+
+        IGisProject * project = CGisWidget::self().selectProject();
+        if(project == 0)
+        {
+            return false;
+        }
+
+        new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
+
+        name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idxTotal).arg(cntTotalPoints-1);
+        name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+        if(name1.isEmpty())
+        {
+            return false;
+        }
+
+        project = CGisWidget::self().selectProject();
+        if(project == 0)
+        {
+            return false;
+        }
+
+        new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
+        break;
     }
 
-    new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
-
-    name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idxTotal).arg(cntTotalPoints-1);
-    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
-    if(name1.isEmpty())
+    case CCutTrk::eModeKeepSecond:
     {
-        return false;
+        if(dlg.createClone())
+        {
+            QString name1;
+            name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idxTotal).arg(cntTotalPoints-1);
+            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+            if(name1.isEmpty())
+            {
+                return false;
+            }
+
+
+            IGisProject * project = CGisWidget::self().selectProject();
+            if(project == 0)
+            {
+                return false;
+            }
+
+            new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
+        }
+        else
+        {
+            for(int i = 0; i < trk.segs.size(); i++)
+            {
+                QVector<trkpt_t> pts;
+                trkseg_t& seg = trk.segs[i];
+
+                for(int n = 0; n < seg.pts.size(); n++)
+                {
+                    trkpt_t& pt = seg.pts[n];
+
+                    if(pt.idxTotal < mouseClickFocus->idxTotal)
+                    {
+                        continue;
+                    }
+
+                    pts << pt;
+                }
+
+                seg.pts = pts;
+            }
+            deriveSecondaryData();
+            changed(QObject::tr("Permanently removed points %1..%2").arg(0).arg(mouseClickFocus->idxTotal-1), "://icons/48x48/Cut.png");
+            return false;
+        }
+        break;
     }
 
-    project = CGisWidget::self().selectProject();
-    if(project == 0)
-    {
+    default:
         return false;
     }
-
-    new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
 
     return true;
 }

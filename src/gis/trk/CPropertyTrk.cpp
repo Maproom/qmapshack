@@ -26,6 +26,13 @@
 CPropertyTrk::CPropertyTrk(const CGisItemTrk& trk)
     : trk(trk)
 {
+    setupData();
+}
+
+void CPropertyTrk::setupData()
+{
+    properties.clear();
+
     property_t propNull
     {
         ""

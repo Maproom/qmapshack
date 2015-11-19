@@ -788,15 +788,6 @@ void CGisItemTrk::updateExtremaAndExtensions()
         extrema["speed"] = extremaSpeed;
     }
 
-    foreach(const QString &key, existingExtensions)
-    {
-        const limits_t &extr = extrema.value(key);
-        if(extr.max - extr.min < 0.1)
-        {
-            existingExtensions.remove(key);
-        }
-    }
-
     existingExtensions.subtract(nonRealExtensions);
 }
 
@@ -1867,6 +1858,9 @@ void CGisItemTrk::setColorizeSource(QString src)
         else
         {
             getExtrema(limitLow, limitHigh, src);
+            if(limitHigh - limitLow < 0.1) {
+                limitHigh = limitLow + 0.1;
+            }
         }
 
         notifyChange();

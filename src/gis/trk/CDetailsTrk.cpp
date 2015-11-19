@@ -246,6 +246,7 @@ void CDetailsTrk::slotLimitLowFromData()
     trk.getExtrema(min, max, trk.getColorizeSource());
     spinLimitLow->setValue(min);
     slotColorLimitLowChanged();
+    slotColorLimitHighChanged();
 }
 
 void CDetailsTrk::slotLimitHighFromData()
@@ -254,6 +255,7 @@ void CDetailsTrk::slotLimitHighFromData()
     trk.getExtrema(min, max, trk.getColorizeSource());
     spinLimitHigh->setValue(max);
     slotColorLimitHighChanged();
+    slotColorLimitLowChanged();
 }
 
 void CDetailsTrk::setupGui()

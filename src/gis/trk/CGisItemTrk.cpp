@@ -114,6 +114,8 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     : IGisItem(project, eTypeTrk, idx)
 {
     *this = parentTrk;
+    graphProperties = nullptr;
+
     key.project = project->getKey();
     key.device  = project->getDeviceKey();
     registeredPlots.clear();

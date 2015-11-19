@@ -19,9 +19,9 @@
 #ifndef CPROPERTYTRK_H
 #define CPROPERTYTRK_H
 
+#include "gis/trk/CGisItemTrk.h"
 #include "plot/CPlot.h"
 #include "plot/CPlotData.h"
-#include "gis/trk/CGisItemTrk.h"
 
 #include <QObject>
 

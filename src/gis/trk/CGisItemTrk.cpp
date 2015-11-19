@@ -1024,6 +1024,10 @@ void CGisItemTrk::deriveSecondaryData()
     {
         graphProperties = new CPropertyTrk(*this);
     }
+    else
+    {
+        graphProperties->setupData();
+    }
 
 
     foreach(IPlot * plot, registeredPlots)

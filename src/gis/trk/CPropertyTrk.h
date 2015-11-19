@@ -61,6 +61,7 @@ public:
 
     void fillComboBox(QComboBox * box) const;
 
+    void setupData();
     void setupPlot(CPlot * plot, int idx) const;
 
 private:

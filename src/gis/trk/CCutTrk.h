@@ -42,9 +42,9 @@ public:
         return mode;
     }
 
-    bool replaceCurrentTrack()
+    bool createClone()
     {
-        return checkReplace->isChecked();
+        return checkCreateClone->isChecked();
     }
 
 public slots:

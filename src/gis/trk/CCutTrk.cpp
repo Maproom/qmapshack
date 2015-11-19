@@ -16,7 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CCutTrk.h"
+#include "gis/trk/CCutTrk.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -25,14 +26,40 @@ CCutTrk::CCutTrk(QWidget *parent)
 {
     setupUi(this);
 
-    connect(radioKeepFirst, SIGNAL(clicked(bool)), this, SLOT(slotClicked()));
-    connect(radioKeepBoth, SIGNAL(clicked(bool)), this, SLOT(slotClicked()));
-    connect(radioKeepSecond, SIGNAL(clicked(bool)), this, SLOT(slotClicked()));
+    connect(radioKeepFirst, SIGNAL(toggled(bool)), this, SLOT(slotClicked()));
+    connect(radioKeepBoth, SIGNAL(toggled(bool)), this, SLOT(slotClicked()));
+    connect(radioKeepSecond, SIGNAL(toggled(bool)), this, SLOT(slotClicked()));
+
+    SETTINGS;
+    cfg.beginGroup("TrackCut");
+    checkCreateClone->setChecked(cfg.value("checkCreateClone", true).toBool());
+    switch(cfg.value("mode", eModeKeepBoth).toInt())
+    {
+    case eModeKeepFirst:
+        radioKeepFirst->setChecked(true);
+        break;
+
+    case eModeKeepBoth:
+        radioKeepBoth->setChecked(true);
+        break;
+
+    case eModeKeepSecond:
+        radioKeepSecond->setChecked(true);
+        break;
+    }
+
+    cfg.endGroup();
 }
 
 
 void CCutTrk::accept()
 {
+    SETTINGS;
+    cfg.beginGroup("TrackCut");
+    cfg.setValue("checkCreateClone", checkCreateClone->isChecked());
+    cfg.setValue("mode", radioKeepFirst->isChecked() ? eModeKeepFirst : radioKeepBoth->isChecked() ? eModeKeepBoth : radioKeepSecond->isChecked() ? eModeKeepSecond : eModeNone);
+    cfg.endGroup();
+
     if(radioKeepFirst->isChecked())
     {
         mode = eModeKeepFirst;
@@ -51,5 +78,5 @@ void CCutTrk::accept()
 
 void CCutTrk::slotClicked()
 {
-    checkReplace->setEnabled(!radioKeepBoth->isChecked());
+    checkCreateClone->setEnabled(!radioKeepBoth->isChecked());
 }

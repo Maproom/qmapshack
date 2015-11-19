@@ -1225,19 +1225,13 @@ bool CGisItemTrk::cut()
     CCutTrk dlg(CMainWindow::getBestWidgetForParent());
     dlg.exec();
 
-    CCutTrk::mode_e mode = dlg.getMode();
-    QString name1;
-
-    switch(mode)
+    switch(dlg.getMode())
     {
-
     case CCutTrk::eModeKeepFirst:
     {
-        QString name1;
-        bool createNewTrack = !dlg.replaceCurrentTrack();
-
-        if(createNewTrack)
+        if(dlg.createClone())
         {
+            QString name1;
             name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
             name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
             if(name1.isEmpty())
@@ -1253,7 +1247,6 @@ bool CGisItemTrk::cut()
             }
 
             new CGisItemTrk(name1, 0, mouseClickFocus->idxTotal, trk, project);
-
         }
         else
         {
@@ -1286,6 +1279,7 @@ bool CGisItemTrk::cut()
 
     case CCutTrk::eModeKeepBoth:
     {
+        QString name1;
         name1 = getName() + QString(" (%1 - %2)").arg(0).arg(mouseClickFocus->idxTotal);
         name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
         if(name1.isEmpty())
@@ -1320,6 +1314,50 @@ bool CGisItemTrk::cut()
 
     case CCutTrk::eModeKeepSecond:
     {
+        if(dlg.createClone())
+        {
+            QString name1;
+            name1 = getName() + QString(" (%1 - %2)").arg(mouseClickFocus->idxTotal).arg(cntTotalPoints-1);
+            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+            if(name1.isEmpty())
+            {
+                return false;
+            }
+
+
+            IGisProject * project = CGisWidget::self().selectProject();
+            if(project == 0)
+            {
+                return false;
+            }
+
+            new CGisItemTrk(name1, mouseClickFocus->idxTotal, cntTotalPoints-1, trk, project);
+        }
+        else
+        {
+            for(int i = 0; i < trk.segs.size(); i++)
+            {
+                QVector<trkpt_t> pts;
+                trkseg_t& seg = trk.segs[i];
+
+                for(int n = 0; n < seg.pts.size(); n++)
+                {
+                    trkpt_t& pt = seg.pts[n];
+
+                    if(pt.idxTotal < mouseClickFocus->idxTotal)
+                    {
+                        continue;
+                    }
+
+                    pts << pt;
+                }
+
+                seg.pts = pts;
+            }
+            deriveSecondaryData();
+            changed(QObject::tr("Permanently removed points %1..%2").arg(0).arg(mouseClickFocus->idxTotal-1), "://icons/48x48/Cut.png");
+            return false;
+        }
         break;
     }
 

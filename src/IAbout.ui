@@ -160,14 +160,14 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="3" column="1">
+       <item row="4" column="1">
         <widget class="QLabel" name="label_15">
          <property name="text">
           <string>Rainer Unseld </string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="label_14">
          <property name="text">
           <string>French</string>
@@ -209,17 +209,31 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="label_16">
          <property name="text">
           <string>Spanish</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="QLabel" name="label_17">
          <property name="text">
           <string>Jose Luis Domingo Lopez</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_27">
+         <property name="text">
+          <string>Dutch</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="label_28">
+         <property name="text">
+          <string>Harrie Klomp</string>
          </property>
         </widget>
        </item>

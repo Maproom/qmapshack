@@ -59,12 +59,12 @@ void CKnownExtension::init(IUnit &units)
         },
 
         {"speed",
-         { QObject::tr("Speed"), 1., 14., 0., 100., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
+         { QObject::tr("Speed"), 1., 14., 0., 600., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
         },
 
         {"ele",
-         { QObject::tr("Elevation"), 200., 800., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
+         { QObject::tr("Elevation"), 200., 800., 0., 100000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
@@ -91,7 +91,7 @@ void CKnownExtension::init(IUnit &units)
         },
 
         {"gpxtpx:TrackPointExtension|gpxtpx:depth",
-         { QObject::tr("Depth"), 0., 200., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
+         { QObject::tr("Depth"), 0., 200., 0., 12000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
            getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:depth")}
         },
 
@@ -117,7 +117,7 @@ void CKnownExtension::init(IUnit &units)
         },
 
         {"tp1:TrackPointExtension|tp1:depth",
-         { QObject::tr("Depth"), 0., 200., 0., 5000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
+         { QObject::tr("Depth"), 0., 200., 0., 12000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
            getExtensionValueFunc("tp1:TrackPointExtension|tp1:depth")}
         }
     };

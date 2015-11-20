@@ -318,37 +318,37 @@
         <translation>Knip track in delen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="314"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="323"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="326"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="332"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="351"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="316"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="325"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="328"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="334"/>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="353"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="355"/>
         <source>%1 %2</source>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="570"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="572"/>
         <source>Edit name...</source>
         <translation>Bewerk naam...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="570"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="572"/>
         <source>Enter new track name.</source>
         <translation>Geef track nieuwe naam.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="622"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="624"/>
         <source>Reset activities...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="622"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="624"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="628"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="630"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>
@@ -2693,7 +2693,16 @@ is geen geldig coordinaat definitie:
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="60"/>
-        <source>Create a clone</source>
+        <source>Check this to store the result into a new track. 
+
+If you keep both parts of the track you have to create new ones. 
+
+If you want to keep just one half you can simply remove the points, or check this to create a new track.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICutTrk.ui" line="67"/>
+        <source>Create a new track</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4950,7 +4959,7 @@ of
         <location filename="../gis/trk/IScrOptTrk.ui" line="123"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="137"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="165"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="170"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -4991,11 +5000,20 @@ of
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="162"/>
-        <source>Cut track at selected point into two tracks.</source>
-        <translation>Knip track op geselecteerde punt in 2 tracks.</translation>
+        <source>Cut track at selected point. You can use this to:
+
+* remove bad points at the start or end of the track
+* use the track parts to plan a new tour
+* cut a long track into stages
+</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="191"/>
+        <source>Cut track at selected point into two tracks.</source>
+        <translation type="vanished">Knip track op geselecteerde punt in 2 tracks.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="196"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
@@ -5815,7 +5833,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="139"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="63"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="124"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="126"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="93"/>
         <source>_Clone</source>
         <translation type="unfinished"></translation>
@@ -5864,7 +5882,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="543"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="239"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2093"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2060"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="371"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
@@ -5933,13 +5951,11 @@ Bestandsnaam: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1240"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1288"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1303"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1325"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1377"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1436"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1615"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1246"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1265"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1341"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1400"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1579"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
@@ -5954,21 +5970,21 @@ Bestandsnaam: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="227"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2081"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2048"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="359"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="233"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2087"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2054"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="365"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="262"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="370"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="372"/>
         <source>Length: %1 %2</source>
         <translation>Lengte: %1 %2</translation>
     </message>
@@ -6145,183 +6161,181 @@ Bestandsnaam: %1</translation>
         <translation>Totale tijd:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="248"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="250"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="377"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="379"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="385"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="387"/>
         <source>Time: %1</source>
         <translation>Tijd: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="388"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="398"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="390"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="400"/>
         <source>, Speed: %1 %2</source>
         <translation>, Snelheid: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="395"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="397"/>
         <source>Moving: %1</source>
         <translation>Beweging: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="404"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="406"/>
         <source>Start: %1</source>
         <translation>Start: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="409"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="411"/>
         <source>End: %1</source>
         <translation>Einde: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="413"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="415"/>
         <source>Points: %1 (%2)</source>
         <translation>Punten: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="522"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="524"/>
         <source>Ele.: %1 %2</source>
         <translation>Hoogte.: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="525"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="527"/>
         <source> slope: %1%3 (%2%)</source>
         <translation> helling: %1%3 (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="530"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
         <source> speed: %1%2</source>
         <translation> snelheid: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="558"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="560"/>
         <source>... and %1 tags not displayed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="570"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="572"/>
         <source>Ascend: %1%2 (%3%)</source>
         <translation>Stijging: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="574"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
         <source>Ascend: - (-)</source>
         <translation>Stijging: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="580"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source> Descend: %1%2 (%3%)</source>
         <translation> Daling: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="584"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
         <source> Descend: - (-) </source>
         <translation> Daling: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="591"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
         <source>Dist.: %1%2 (%3%)</source>
         <translation>Afstand.: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="595"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="597"/>
         <source>Dist.: - (-)</source>
         <translation>Afstand.: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="601"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="603"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation> Beweging: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="607"/>
         <source> Moving: - (-) </source>
         <translation> Beweging: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="624"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
         <source>Ascend: %1%2</source>
         <translation>Stijging: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="629"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="646"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="634"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="636"/>
         <source>Ascend: -</source>
         <translation>Stijging: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="641"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
         <source> Descend: %1%2</source>
         <translation> Daling: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="651"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
         <source>Descend: -</source>
         <translation>Daling: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="657"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="659"/>
         <source>Dist.: %1%2</source>
         <translation>Afstand.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="662"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="664"/>
         <source> Time: %1%2</source>
         <translation> Tijd: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1240"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1288"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1303"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1325"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1377"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1436"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1615"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1246"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1265"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1341"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1400"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1579"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
         <source>Enter new track name.</source>
         <translation>Geef track nieuwe naam.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1277"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1362"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1308"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1332"/>
         <source>Permanently removed points %1..%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1550"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1514"/>
         <source>Hide points.</source>
         <translation>Verberg punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1590"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1554"/>
         <source>Show points.</source>
         <translation>Toon punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2075"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2042"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="317"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2122"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2089"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2197"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2164"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation type="unfinished"></translation>
     </message>

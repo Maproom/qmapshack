@@ -56,8 +56,15 @@
      <property name="enabled">
       <bool>false</bool>
      </property>
+     <property name="toolTip">
+      <string>Check this to store the result into a new track. 
+
+If you keep both parts of the track you have to create new ones. 
+
+If you want to keep just one half you can simply remove the points, or check this to create a new track.</string>
+     </property>
      <property name="text">
-      <string>Create a clone</string>
+      <string>Create a new track</string>
      </property>
      <property name="checked">
       <bool>true</bool>

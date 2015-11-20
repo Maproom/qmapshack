@@ -159,7 +159,12 @@
      <item>
       <widget class="QToolButton" name="toolCut">
        <property name="toolTip">
-        <string>Cut track at selected point into two tracks.</string>
+        <string>Cut track at selected point. You can use this to:
+
+* remove bad points at the start or end of the track
+* use the track parts to plan a new tour
+* cut a long track into stages
+</string>
        </property>
        <property name="text">
         <string>...</string>

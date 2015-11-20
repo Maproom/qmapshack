@@ -1219,18 +1219,29 @@ bool CGisItemTrk::cut()
         return false;
     }
 
-    qint32 idxMouse = mouseClickFocus->idxTotal;
-
     CCutTrk dlg(CMainWindow::getBestWidgetForParent());
-    dlg.exec();
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return false;
+    }
 
-    switch(dlg.getMode())
+    qint32 idxMouse             = mouseClickFocus->idxTotal;
+    CCutTrk::mode_e mode        = dlg.getMode();
+
+    // if the cut action results into cloning a track, the calling method should
+    // ask if the original track should be removed. As a track can't delete itself
+    // this has to be done from the outside of this method.
+    bool askToDeleteOriginal    = dlg.createClone() || (mode == CCutTrk::eModeKeepBoth);
+
+    // askToDeleteOriginal = store result as clone
+    if(askToDeleteOriginal)
     {
-    case CCutTrk::eModeKeepFirst:
-    {
-        if(dlg.createClone())
+        QString name1;
+        IGisProject * project;
+
+        // clone first part?
+        if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepFirst)) != 0)
         {
-            QString name1;
             name1 = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
             name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
             if(name1.isEmpty())
@@ -1238,8 +1249,7 @@ bool CGisItemTrk::cut()
                 return false;
             }
 
-
-            IGisProject * project = CGisWidget::self().selectProject();
+            project = CGisWidget::self().selectProject();
             if(project == 0)
             {
                 return false;
@@ -1247,7 +1257,33 @@ bool CGisItemTrk::cut()
 
             new CGisItemTrk(name1, 0, idxMouse, trk, project);
         }
-        else
+
+        // clone second part?
+        if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepSecond)) != 0)
+        {
+            name1 = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
+            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+            if(name1.isEmpty())
+            {
+                return false;
+            }
+
+            project = CGisWidget::self().selectProject();
+            if(project == 0)
+            {
+                return false;
+            }
+
+            new CGisItemTrk(name1, idxMouse, cntTotalPoints-1, trk, project);
+        }
+    }
+    else
+    {
+        // if the result is not a clone, the track's list of segments and trackpoints
+        // has to be reduced. This is done by copying points into a new trackpoint list
+        // that replaces the original one.
+
+        if((mode & CCutTrk::eModeKeepFirst) != 0)
         {
             for(int i = 0; i < trk.segs.size(); i++)
             {
@@ -1260,7 +1296,7 @@ bool CGisItemTrk::cut()
 
                     if(pt.idxTotal > idxMouse)
                     {
-                        continue;
+                        break;
                     }
 
                     pts << pt;
@@ -1270,69 +1306,8 @@ bool CGisItemTrk::cut()
             }
             deriveSecondaryData();
             changed(QObject::tr("Permanently removed points %1..%2").arg(idxMouse+1).arg(cntTotalPoints-1), "://icons/48x48/Cut.png");
-            return false;
         }
-
-        break;
-    }
-
-    case CCutTrk::eModeKeepBoth:
-    {
-        QString name1;
-        name1 = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
-        name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
-        if(name1.isEmpty())
-        {
-            return false;
-        }
-
-        IGisProject * project = CGisWidget::self().selectProject();
-        if(project == 0)
-        {
-            return false;
-        }
-
-        new CGisItemTrk(name1, 0, idxMouse, trk, project);
-
-        name1 = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
-        name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
-        if(name1.isEmpty())
-        {
-            return false;
-        }
-
-        project = CGisWidget::self().selectProject();
-        if(project == 0)
-        {
-            return false;
-        }
-
-        new CGisItemTrk(name1, idxMouse, cntTotalPoints-1, trk, project);
-        break;
-    }
-
-    case CCutTrk::eModeKeepSecond:
-    {
-        if(dlg.createClone())
-        {
-            QString name1;
-            name1 = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
-            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
-            if(name1.isEmpty())
-            {
-                return false;
-            }
-
-
-            IGisProject * project = CGisWidget::self().selectProject();
-            if(project == 0)
-            {
-                return false;
-            }
-
-            new CGisItemTrk(name1, idxMouse, cntTotalPoints-1, trk, project);
-        }
-        else
+        else if((mode & CCutTrk::eModeKeepSecond) != 0)
         {
             for(int i = 0; i < trk.segs.size(); i++)
             {
@@ -1355,16 +1330,10 @@ bool CGisItemTrk::cut()
             }
             deriveSecondaryData();
             changed(QObject::tr("Permanently removed points %1..%2").arg(0).arg(idxMouse-1), "://icons/48x48/Cut.png");
-            return false;
         }
-        break;
     }
 
-    default:
-        return false;
-    }
-
-    return true;
+    return askToDeleteOriginal;
 }
 
 void CGisItemTrk::reverse()

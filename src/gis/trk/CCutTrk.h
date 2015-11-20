@@ -31,10 +31,10 @@ public:
 
     enum mode_e
     {
-        eModeNone
-        , eModeKeepFirst
-        , eModeKeepBoth
-        , eModeKeepSecond
+        eModeNone           = 0
+        , eModeKeepFirst    = 1
+        , eModeKeepBoth     = 2
+        , eModeKeepSecond   = 4
     };
 
     mode_e getMode() const

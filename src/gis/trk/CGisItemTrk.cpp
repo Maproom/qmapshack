@@ -114,7 +114,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     : IGisItem(project, eTypeTrk, idx)
 {
     *this = parentTrk;
-    graphProperties = nullptr;
+    propHandler = nullptr;
 
     key.project = project->getKey();
     key.device  = project->getDeviceKey();
@@ -218,7 +218,7 @@ CGisItemTrk::~CGisItemTrk()
     delete dlgDetails;
 
     // delete it after the detail dialog as it is used by the detail dialog
-    delete graphProperties;
+    delete propHandler;
 }
 
 void CGisItemTrk::setSymbol()
@@ -1013,13 +1013,13 @@ void CGisItemTrk::deriveSecondaryData()
 
     updateExtremaAndExtensions();
     // make sure we have a graph properties object by now
-    if(graphProperties == nullptr)
+    if(propHandler == nullptr)
     {
-        graphProperties = new CPropertyTrk(*this);
+        propHandler = new CPropertyTrk(*this);
     }
     else
     {
-        graphProperties->setupData();
+        propHandler->setupData();
     }
 
 

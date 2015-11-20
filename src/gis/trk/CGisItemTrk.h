@@ -238,9 +238,9 @@ public:
         return activities;
     }
 
-    const CPropertyTrk * getGraphProperties() const
+    const CPropertyTrk * getPropertyHandler() const
     {
-        return graphProperties;
+        return propHandler;
     }
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -905,7 +905,7 @@ private:
     CActivityTrk activities = {this};
 
     /// all functions and data concerning graphs
-    CPropertyTrk * graphProperties = nullptr;
+    CPropertyTrk * propHandler = nullptr;
 };
 
 using fTrkPtGetVal = std::function<qreal(const CGisItemTrk::trkpt_t&)>;

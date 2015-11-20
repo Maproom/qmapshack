@@ -86,6 +86,12 @@ void CPropertyTrk::setupData()
             , ext.valueFunc
         };
 
+        // lame hack
+        if(key == "speed")
+        {
+            property.min = 0;
+        }
+
         properties << property;
     }
 }
@@ -109,4 +115,5 @@ void CPropertyTrk::setupPlot(CPlot * plot, int idx) const
     const property_t& p = properties[idx];
 
     plot->setup(p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
+    plot->setLimits(p.min, p.max);
 }

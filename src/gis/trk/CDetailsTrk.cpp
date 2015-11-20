@@ -86,9 +86,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     setupGui();
 
-    const CPropertyTrk * graphProperties = trk.getGraphProperties();
-    graphProperties->fillComboBox(comboGraph2);
-    graphProperties->fillComboBox(comboGraph3);
+    const CPropertyTrk * propHandler = trk.getPropertyHandler();
+    propHandler->fillComboBox(comboGraph2);
+    propHandler->fillComboBox(comboGraph3);
 
     plot1 = new CPlotProfile(&trk, IPlot::eModeNormal, this);
     plot1->setMinimumSize(QSize(0, 100));
@@ -451,6 +451,36 @@ void CDetailsTrk::setupGui()
         widgetColorLabel->setUnit(ext.unit);
     }
 
+
+    // refill comboboxes to select track property to be displayed by graphs
+    const CPropertyTrk * p = trk.getPropertyHandler();
+
+    comboGraph2->blockSignals(true);
+    p->fillComboBox(comboGraph2);
+    comboGraph2->blockSignals(false);
+
+    comboGraph3->blockSignals(true);
+    p->fillComboBox(comboGraph3);
+    comboGraph3->blockSignals(false);
+
+    // try to restore last graph setup
+    // signals are unblocked by now changeing the combobox will trigger a graph update
+    SETTINGS;
+    cfg.beginGroup("TrackDetails");
+    i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());
+    if(i != NOIDX)
+    {
+        comboGraph2->setCurrentIndex(i);
+    }
+
+    i = comboGraph3->findData(cfg.value("propGraph3","progress").toString());
+    if(i != NOIDX)
+    {
+        comboGraph3->setCurrentIndex(i);
+    }
+    cfg.endGroup();
+
+
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::setupGui");
 }
@@ -642,7 +672,7 @@ void CDetailsTrk::slotActivitySelected(bool checked)
 
 void CDetailsTrk::slotSetupGraph(int idx)
 {
-    const CPropertyTrk * graphProperties = trk.getGraphProperties();
+    const CPropertyTrk * propHandler = trk.getPropertyHandler();
     CPlot * plot = 0;
     QObject * s = sender();
 
@@ -657,6 +687,6 @@ void CDetailsTrk::slotSetupGraph(int idx)
 
     if(plot)
     {
-        graphProperties->setupPlot(plot, idx);
+        propHandler->setupPlot(plot, idx);
     }
 }

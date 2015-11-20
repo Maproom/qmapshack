@@ -54,6 +54,8 @@ public:
         CPlotData::axistype_e axisType = CPlotData::eAxisLinear;
         QString xLabel;
         QString yLabel;
+        qreal min = NOFLOAT;
+        qreal max = NOFLOAT;
         qreal factor = 1.0;
         fTrkPtGetVal getX = nullptr;
         fTrkPtGetVal getY = nullptr;

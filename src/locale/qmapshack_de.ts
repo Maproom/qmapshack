@@ -6508,7 +6508,7 @@ Dateiname: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1308"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1332"/>
         <source>Permanently removed points %1..%2</source>
-        <translation>Dauerhaft entfernte Punkt %1..%2</translation>
+        <translation>Punkte %1..%2 dauerhaft entfernt</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2089"/>

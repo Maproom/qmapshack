@@ -1305,7 +1305,7 @@ bool CGisItemTrk::cut()
                 seg.pts = pts;
             }
             deriveSecondaryData();
-            changed(QObject::tr("Permanently removed points %1..%2").arg(idxMouse+1).arg(cntTotalPoints-1), "://icons/48x48/Cut.png");
+            changed(QObject::tr("Permanently removed points %1..%2").arg(idxMouse+1).arg(cntTotalPoints-1), "://icons/48x48/TrkCut.png");
         }
         else if((mode & CCutTrk::eModeKeepSecond) != 0)
         {
@@ -1329,7 +1329,7 @@ bool CGisItemTrk::cut()
                 seg.pts = pts;
             }
             deriveSecondaryData();
-            changed(QObject::tr("Permanently removed points %1..%2").arg(0).arg(idxMouse-1), "://icons/48x48/Cut.png");
+            changed(QObject::tr("Permanently removed points %1..%2").arg(0).arg(idxMouse-1), "://icons/48x48/TrkCut.png");
         }
     }
 

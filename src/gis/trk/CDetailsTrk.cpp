@@ -75,14 +75,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     }
     layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
 
-    // the first entry `solid color`, it is always available
-    comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Solid color"));
-    foreach(const QString &key, trk.getExistingDataSources())
-    {
-        const CKnownExtension &ext = CKnownExtension::get(key);
-        QIcon icon(ext.icon);
-        comboColorSource->addItem(icon, ext.known ? ext.name : key, key);
-    }
+
 
     setupGui();
 
@@ -410,11 +403,23 @@ void CDetailsTrk::setupGui()
         }
     }
 
+    comboColorSource->blockSignals(true);
+    comboColorSource->clear();
+    // the first entry `solid color`, it is always available
+    comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Solid color"));
+    foreach(const QString &key, trk.getExistingDataSources())
+    {
+        const CKnownExtension &ext = CKnownExtension::get(key);
+        QIcon icon(ext.icon);
+        comboColorSource->addItem(icon, ext.known ? ext.name : key, key);
+    }
     int currentIdx = comboColorSource->findData(trk.getColorizeSource());
     if(-1 == currentIdx)
     {
         currentIdx = 0;
     }
+    comboColorSource->setCurrentIndex(currentIdx);
+    comboColorSource->blockSignals(false);
 
     bool enabled = (0 < currentIdx);
 
@@ -423,10 +428,6 @@ void CDetailsTrk::setupGui()
     widgetColorLabel->setEnabled(enabled);
     btnMinFromData->setEnabled  (enabled);
     btnMaxFromData->setEnabled  (enabled);
-
-    comboColorSource->blockSignals(true);
-    comboColorSource->setCurrentIndex(currentIdx);
-    comboColorSource->blockSignals(false);
 
     if(enabled)
     {
@@ -464,7 +465,7 @@ void CDetailsTrk::setupGui()
     comboGraph3->blockSignals(false);
 
     // try to restore last graph setup
-    // signals are unblocked by now changeing the combobox will trigger a graph update
+    // signals are unblocked by now changing the combobox will trigger a graph update
     SETTINGS;
     cfg.beginGroup("TrackDetails");
     i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());

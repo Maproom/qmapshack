@@ -152,7 +152,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     {
         trkpt_t pt;
         QDateTime time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
-        time.addMSecs(pt1._timestamp_msec);
+        time = time.addMSecs(pt1._timestamp_msec);
 
         pt.lon  = pt1._lon;
         pt.lat  = pt1._lat;

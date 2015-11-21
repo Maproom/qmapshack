@@ -227,7 +227,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
     const int N = sectPolygons.arraySize / sectPolygons.arrayModulo;
     for (int element = 0; element < N; element++)
     {
-        quint16 t16_1, t16_2, subtyp;
+        quint16 t16_1 = 0, t16_2, subtyp;
         quint8 t8;
         quint32 typ, offset=0;
         bool hasLocalization = false;
@@ -541,7 +541,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
     const int N = sectPolylines.arraySize / sectPolylines.arrayModulo;
     for (int element = 0; element < N; element++)
     {
-        quint16 t16_1, t16_2, subtyp;
+        quint16 t16_1 = 0, t16_2, subtyp;
         quint8 t8_1, t8_2;
         quint32 typ, offset=0;
         bool hasLocalization = false;
@@ -1129,7 +1129,7 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
     const int N = sectPoints.arraySize / sectPoints.arrayModulo;
     for (int element=0; element < N; element++)
     {
-        quint16 t16_1, t16_2, subtyp;
+        quint16 t16_1 = 0, t16_2, subtyp;
         quint8 t8_1;
         quint32 typ, offset=0;
         bool hasLocalization = false;

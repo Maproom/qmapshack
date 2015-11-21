@@ -1483,7 +1483,7 @@ void CGisItemTrk::hideSelectedPoints()
             {
                 trkpt_t& trkpt = seg.pts[i];
 
-                if((idx1 == trkpt.idxTotal))
+                if(idx1 == trkpt.idxTotal)
                 {
                     trkpt.flags |= trkpt_t::eHidden;
                 }
@@ -2131,7 +2131,7 @@ void CGisItemTrk::setActivity()
             {
                 trkpt_t& trkpt = seg.pts[i];
 
-                if((idx1 == trkpt.idxTotal))
+                if(idx1 == trkpt.idxTotal)
                 {
                     trkpt.flags &= ~trkpt_t::eActMask;
                     trkpt.flags |= flag;

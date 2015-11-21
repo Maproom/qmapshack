@@ -73,7 +73,7 @@ IGisLine * CMouseEditRte::getGisLine()
 void CMouseEditRte::slotAbort()
 {
     canvas->reportStatus(key.item,"");
-    IMouseEditLine::slotAbort();
+    IMouseEditLine::slotAbort(false);
 }
 
 void CMouseEditRte::slotCopyToOrig()

@@ -255,7 +255,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
     }
 
     // finally write image offset table
-    (quint32)s2.device()->seek(0);
+    s2.device()->seek(0);
     image = wpt.images.begin();
     while(image != wpt.images.end())
     {

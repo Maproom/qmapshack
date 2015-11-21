@@ -104,8 +104,6 @@ private:
     qint32 ysign2;
     /// total bits in register
     quint8 bits;
-    /// used bits of first byte;
-    quint8 bits_of_byte;
     /// bits per x coord.
     quint8 bits_per_x;
     /// bits per y   coord.

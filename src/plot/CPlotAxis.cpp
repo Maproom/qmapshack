@@ -120,11 +120,6 @@ void CPlotAxis::calc()
         usedMin = qFloor( usedMin / interval ) * interval;
         usedMax = qCeil( usedMax / interval ) * interval;
     }
-    else
-    {
-        usedMin = usedMin;
-        usedMax = usedMax;
-    }
 
     int t1 = ( int )( usedMin / interval + 0.5);
     ticStart = interval * t1;

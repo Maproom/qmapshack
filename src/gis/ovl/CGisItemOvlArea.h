@@ -45,7 +45,7 @@ public:
     virtual ~CGisItemOvlArea();
 
     QDataStream& operator<<(QDataStream& stream);
-    QDataStream& operator>>(QDataStream& stream);
+    QDataStream& operator>>(QDataStream& stream) const;
 
     const QString& getName() const
     {

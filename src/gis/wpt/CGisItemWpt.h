@@ -159,7 +159,7 @@ public:
        @param stream  the data stream to write to.
        @return A reference to the stream
      */
-    QDataStream& operator>>(QDataStream& stream);
+    QDataStream& operator>>(QDataStream& stream) const;
 
     void setName(const QString& str);
     void setPosition(const QPointF& pos);

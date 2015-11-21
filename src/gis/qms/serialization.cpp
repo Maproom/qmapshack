@@ -445,7 +445,7 @@ QDataStream& operator>>(QDataStream& stream, IGisProject::person_t& p)
 
 // ---------------- main objects ---------------------------------
 
-QDataStream& CGisItemTrk::operator>>(QDataStream& stream)
+QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
 {
     QByteArray buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);
@@ -575,7 +575,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     return stream;
 }
 
-QDataStream& CGisItemWpt::operator>>(QDataStream& stream)
+QDataStream& CGisItemWpt::operator>>(QDataStream& stream) const
 {
     QByteArray buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);
@@ -649,7 +649,7 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
     return stream;
 }
 
-QDataStream& CGisItemRte::operator>>(QDataStream& stream)
+QDataStream& CGisItemRte::operator>>(QDataStream& stream) const
 {
     QByteArray buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);
@@ -727,7 +727,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     return stream;
 }
 
-QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream)
+QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream) const
 {
     QByteArray buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);

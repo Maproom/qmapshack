@@ -366,7 +366,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    virtual QDataStream& operator>>(QDataStream& stream) = 0;
+    virtual QDataStream& operator>>(QDataStream& stream) const = 0;
 
     /**
        @brief Get read access to history of changes

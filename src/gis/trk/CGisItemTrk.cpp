@@ -113,20 +113,33 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
 CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeTrk, idx)
 {
-    *this = parentTrk;
-    propHandler = nullptr;
 
-    key.project = project->getKey();
-    key.device  = project->getDeviceKey();
-    registeredPlots.clear();
-    notifyOnChange.clear();
+    // copy track via serialization to make sure all track data is copied
+    // but no other other members of CGisItemTrk
+    //
+    QByteArray buffer;
+    QDataStream i(&buffer, QIODevice::WriteOnly);
+    i.setVersion(QDataStream::Qt_5_2);
+    i.setByteOrder(QDataStream::LittleEndian);
+    i << parentTrk.history;
 
+    QDataStream o(&buffer, QIODevice::ReadOnly);
+    o.setVersion(QDataStream::Qt_5_2);
+    o.setByteOrder(QDataStream::LittleEndian);
+    o >> history;
+
+    loadHistory(history.histIdxCurrent);
+
+    // if track should be a clone clear history and key and
+    // build new ones.
     if(clone)
     {
         trk.name += QObject::tr("_Clone");
         key.clear();
         history.events.clear();
+        setupHistory();
     }
+
 
     if(parentTrk.isOnDevice() || !parentTrk.isReadOnly())
     {
@@ -138,7 +151,6 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     }
 
     deriveSecondaryData();
-    setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -188,7 +200,7 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
     history = hist;
-    loadHistory(hist.histIdxCurrent);
+    loadHistory(hist.histIdxCurrent);    
 }
 
 CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)

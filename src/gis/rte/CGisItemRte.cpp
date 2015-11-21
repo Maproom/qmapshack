@@ -54,9 +54,9 @@ void CGisItemRte::rtept_t::updateIcon()
 CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
 {
-    *this = parentRte;
-    key.project = project->getKey();
-    key.device  = project->getDeviceKey();
+    history = parentRte.history;
+    loadHistory(history.histIdxCurrent);
+
 
     if(clone)
     {

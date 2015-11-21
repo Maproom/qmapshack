@@ -130,22 +130,18 @@ CGisItemOvlArea::CGisItemOvlArea(const SGisLine &line, const QString &name, IGis
 CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx, bool clone)
     : IGisItem(project, eTypeOvl, idx)
 {
-    *this = parentArea;
-    key.project = project->getKey();
-    key.device  = project->getDeviceKey();
+    history = parentArea.history;
+    loadHistory(history.histIdxCurrent);
 
     if(clone)
     {
         area.name += QObject::tr("_Clone");
         key.clear();
         history.events.clear();
+        setupHistory();
     }
 
-    if(parentArea.isOnDevice())
-    {
-        flags |= eFlagWriteAllowed;
-    }
-    else if(!parentArea.isReadOnly())
+    if(parentArea.isOnDevice() || !parentArea.isReadOnly())
     {
         flags |= eFlagWriteAllowed;
     }
@@ -154,9 +150,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
         flags &= ~eFlagWriteAllowed;
     }
 
-
-
-    setupHistory();
+    deriveSecondaryData();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 

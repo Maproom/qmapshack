@@ -84,22 +84,18 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
 CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone)
     : IGisItem(project, eTypeWpt, idx)
 {
-    *this = parentWpt;
-    key.project = project->getKey();
-    key.device  = project->getDeviceKey();
+    history = parentWpt.history;
+    loadHistory(history.histIdxCurrent);
 
     if(clone)
     {
         wpt.name += QObject::tr("_Clone");
         key.clear();
         history.events.clear();
+        setupHistory();
     }
 
-    if(parentWpt.isOnDevice())
-    {
-        flags |= eFlagWriteAllowed;
-    }
-    else if(!parentWpt.isReadOnly())
+    if(parentWpt.isOnDevice() || !parentWpt.isReadOnly())
     {
         flags |= eFlagWriteAllowed;
     }
@@ -108,7 +104,6 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
         flags &= ~eFlagWriteAllowed;
     }
 
-    setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 

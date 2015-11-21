@@ -26,6 +26,7 @@
 void CGisItemTrk::filterReducePoints(qreal dist)
 {
     QVector<pointDP> line;
+    bool nothingDone = true;
 
     foreach (const trkseg_t &seg, trk.segs)
     {
@@ -82,23 +83,34 @@ void CGisItemTrk::filterReducePoints(qreal dist)
             }
             else
             {
-                pt.flags |=  trkpt_t::eHidden;
+                if((pt.flags & trkpt_t::eHidden) == 0)
+                {
+                    nothingDone = false;
+                    pt.flags |=  trkpt_t::eHidden;
+                }
+
             }
 
             cnt++;
         }
     }
 
-    QString val, unit;
-    IUnit::self().meter2distance(dist, val, unit);
+    if(nothingDone)
+    {
+        return;
+    }
 
     deriveSecondaryData();
+    QString val, unit;
+    IUnit::self().meter2distance(dist, val, unit);
     changed(QObject::tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterRemoveNullPoints()
 {
-    bool done = false;
+    bool nothingDone    = true;
+    bool done           = false;
+
     for(int i = 0; i < trk.segs.size() && !done; i++)
     {
         trkseg_t& seg = trk.segs[i];
@@ -111,6 +123,7 @@ void CGisItemTrk::filterRemoveNullPoints()
              && (NOFLOAT == pt.lon || 0. == pt.lon) )
             {
                 pt.flags |= trkpt_t::eHidden;
+                nothingDone = false;
             }
             else
             {
@@ -118,6 +131,12 @@ void CGisItemTrk::filterRemoveNullPoints()
             }
         }
     }
+
+    if(nothingDone)
+    {
+        return;
+    }
+
     deriveSecondaryData();
     changed(QObject::tr("Hide points with invalid coordinates at the beginning of the track"), "://icons/48x48/PointHide.png");
 }
@@ -140,6 +159,8 @@ void CGisItemTrk::filterReset()
 
 void CGisItemTrk::filterDelete()
 {
+    bool nothingDone = true;
+
     for(int i = 0; i < trk.segs.size(); i++)
     {
         QVector<trkpt_t> pts;
@@ -151,6 +172,7 @@ void CGisItemTrk::filterDelete()
 
             if(pt.flags & trkpt_t::eHidden)
             {
+                nothingDone = false;
                 continue;
             }
 
@@ -159,6 +181,12 @@ void CGisItemTrk::filterDelete()
 
         seg.pts = pts;
     }
+
+    if(nothingDone)
+    {
+        return;
+    }
+
     deriveSecondaryData();
     changed(QObject::tr("Permanently removed all hidden track points"), "://icons/48x48/PointHide.png");
 }

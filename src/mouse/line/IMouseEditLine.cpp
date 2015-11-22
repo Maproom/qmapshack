@@ -142,7 +142,7 @@ void IMouseEditLine::abortStep()
     {
         // if within operation nothing can be aborted, then abort the whole operation
         // this equals clicking the `abort` button
-        slotAbort(true);
+        slotAbortEx(true);
     }
 }
 
@@ -358,7 +358,7 @@ void IMouseEditLine::changeCursor()
     }
 }
 
-void IMouseEditLine::slotAbort(bool showMB)
+void IMouseEditLine::slotAbortEx(bool showMB)
 {
     // ask if the current operation should be aborted (only in case there are things to be saved)
     bool doAbort = ( idxHistory == 0 ) || !showMB;

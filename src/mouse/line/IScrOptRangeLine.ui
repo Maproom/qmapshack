@@ -31,7 +31,7 @@
    <item>
     <widget class="QToolButton" name="toolCalcRoute">
      <property name="toolTip">
-      <string>Caclculate a route between the first and last selected point.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculate a route between the first and last selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>...</string>

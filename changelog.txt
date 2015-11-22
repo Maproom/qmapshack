@@ -1,3 +1,17 @@
+V 1.5.0
+* Add track filter to remove track points with invalid position
+* Add options to "cut track" function (keep only first or second, keep both)
+* Add Dutch translation (not finished yet)
+* Add selection of track properties as source for graphs
+* Add colorize track by track point properties
+* [Issue #68] Bubbles not moving when moving the map
+* [Issue #67] "Save Map Screenshot" does not save grid correctly
+* [Issue #69] "light gray" colored tracks are displayed in "dark blue" when imported from GPX file
+* [Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
+* [Issue #70] Removed maximumSize for comboGrades
+* [Issue #19] Map-drag resizes or moves window with KDE 5
+* Many little bugfixes, some of them causing random crashes
+
 V 1.4.0
 * Export selected map area to image or printer
 * Add activity to trackpoints to differentiate track statistic

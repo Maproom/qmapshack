@@ -1,3 +1,6 @@
+V 1.5.1
+Line edit: Fix broken abort button
+
 V 1.5.0
 * Add track filter to remove track points with invalid position
 * Add options to "cut track" function (keep only first or second, keep both)

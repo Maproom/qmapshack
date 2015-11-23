@@ -400,7 +400,7 @@
         <location filename="../gis/CGisListDB.cpp" line="82"/>
         <location filename="../gis/CGisListDB.cpp" line="92"/>
         <source>Delete Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Element verwijderen</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="86"/>
@@ -420,7 +420,7 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="281"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Moet &apos;%1&apos; werkelijk uit de lijst verwijderd worden?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="322"/>
@@ -430,23 +430,23 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="322"/>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation type="unfinished"></translation>
+        <translation>Moet &quot;%1&quot; werkelijk uit de database verwijderd worden?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="348"/>
         <location filename="../gis/CGisListDB.cpp" line="363"/>
         <source>Remove items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Elementen verwijderen...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="348"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>Moeten alle elementen worden verwijderd uit Verloren &amp; Gevonden? Dit zal pemanent zijn.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="363"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>Moeten alle geselecteerde elementen worden verwijderd uit Verloren &amp; Gevonden? Dit zal pemanent zijn.</translation>
     </message>
 </context>
 <context>
@@ -580,7 +580,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="613"/>
         <source>Drop items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Elementen wissen...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="638"/>
@@ -612,7 +612,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1266"/>
         <source>Copy items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer elementen...</translation>
     </message>
 </context>
 <context>
@@ -1011,32 +1011,32 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="283"/>
         <source>Minor land contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Klein hoogteverschil</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="284"/>
         <source>Intermediate land contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemiddeld hoogteverschil</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="285"/>
         <source>Major land contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Groot hoogteverschil</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="286"/>
         <source>Minor depth contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Klein diepteverschil</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="287"/>
         <source>Intermediate depth contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemiddeld diepteverschil</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="288"/>
         <source>Major depth contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Groot diepteverschil</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="289"/>
@@ -1294,7 +1294,7 @@
         <location filename="../map/CMapIMG.cpp" line="515"/>
         <location filename="../map/CMapIMG.cpp" line="519"/>
         <source>Bad file format: </source>
-        <translation type="unfinished">Verkeerd bestandsformaat:</translation>
+        <translation>Verkeerd bestandsformaat:</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="608"/>
@@ -1314,12 +1314,12 @@
     <message>
         <location filename="../map/CMapIMG.cpp" line="652"/>
         <source>File is NT format. QMapShack is unable to read map files with NT format: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand is in NT formaat. QMapShack kan geen kaarten lezen met NT formaat:</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="744"/>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand bevat geblokeerde / gecodeerde gegevens. Garmin staat niet toe dat deze gegeven door andere software gelezen kan worden.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2504"/>
@@ -1331,7 +1331,7 @@
         <location filename="../map/CMapIMG.cpp" line="2579"/>
         <location filename="../map/CMapIMG.cpp" line="2584"/>
         <source>Point of Interest</source>
-        <translation type="unfinished"></translation>
+        <translation>Interessant punt</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2711"/>
@@ -1392,12 +1392,12 @@
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="62"/>
         <source>Select map path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer kaartmap...</translation>
     </message>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="81"/>
         <source>Select root path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer hoofdmap...</translation>
     </message>
 </context>
 <context>
@@ -1474,12 +1474,12 @@ lijn %2, kolom %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="130"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze kaart heeft OpenSSL onderteuning nodig. Door restricte beperkingen in bepaalde landen kan QMapShack geen OpenSSL pakket aanbieden. Neem een kijkje op &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; voor binaries. Er kan wel libeay32.dll en ssleay32.dll in de QMapShack map gekopieerd worden.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="306"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 delen ontvangen&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1514,7 +1514,7 @@ lijn %2, kolom %3:
     <message>
         <location filename="../tool/CMapVrtBuilder.cpp" line="28"/>
         <source>Build GDAL VRT</source>
-        <translation type="unfinished"></translation>
+        <translation>GDAL VRT maken</translation>
     </message>
     <message>
         <location filename="../tool/CMapVrtBuilder.cpp" line="46"/>
@@ -1570,12 +1570,12 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
         <source>Unexpected service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Onverwachte service. &apos;*WMTS 1.0.0&apos; is verwacht. &apos;%1 %2&apos; is gelezen.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="151"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze kaart heeft OpenSSL onderteuning nodig. Door restricte beperkingen in bepaalde landen kan QMapShack geen OpenSSL pakket aanbieden. Neem een kijkje op &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; voor binaries. Er kan wel libeay32.dll en ssleay32.dll in de QMapShack map gekopieerd worden.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="217"/>
@@ -1585,7 +1585,7 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="413"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 delen ontvangen&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1637,7 +1637,7 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
         <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit zal alle gegevens overschrijven van het origineel door een simpele lijn met coördinaten. Alle andere gegevens zullen verloren gaan.</translation>
     </message>
 </context>
 <context>
@@ -1686,7 +1686,7 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="42"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point. And then a second one.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Selecteer afstand&lt;/b&gt;&lt;br/&gt;Selecteer eerste trackpunt en dan de volgende.&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -1754,7 +1754,7 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="74"/>
         <source>Save Map as Image...</source>
-        <translation>Sla kaart op  als afbeelding...</translation>
+        <translation>Sla kaart op als afbeelding...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="94"/>
@@ -1890,7 +1890,7 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="564"/>
         <source>Routes:           %1 (Only the basic route will be copied)</source>
-        <translation type="unfinished"></translation>
+        <translation>Routes:           %1 (Alleen de basis route zal gekopieerd worden)</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="572"/>
@@ -1905,22 +1905,22 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="587"/>
         <source>Diaries:          %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dagboeken:          %1</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="594"/>
         <source>Map selections:   %1 (can&apos;t be converted to QMapShack)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaarselecties: %1 Kunnen niet omgezet worden door QMapShack)</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="600"/>
         <source>------ Start to convert database to %1------</source>
-        <translation type="unfinished"></translation>
+        <translation>------ Start omzetten database naar %1------</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="604"/>
         <source>Failed to create target database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen database maken.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="605"/>
@@ -1935,17 +1935,17 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="641"/>
         <source>Restore folders...</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel mappen...</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="661"/>
         <source>Imported %1 folders and %2 diaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Geimporteerd %1 mappen en %2 dagboeken</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="667"/>
         <source>Copy items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer elementen...</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="685"/>
@@ -1955,7 +1955,7 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="686"/>
         <source>Import folders...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importeer mappen...</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="751"/>
@@ -1968,22 +1968,22 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../qlgt/CQmsDb.cpp" line="47"/>
         <source>Existing file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestaand bestand...</translation>
     </message>
     <message>
         <location filename="../qlgt/CQmsDb.cpp" line="47"/>
         <source>Remove existing %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder bestaand %1?</translation>
     </message>
     <message>
         <location filename="../qlgt/CQmsDb.cpp" line="52"/>
         <source>Remove existing file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder bestaand bestand %1</translation>
     </message>
     <message>
         <location filename="../qlgt/CQmsDb.cpp" line="163"/>
         <source>%1: drop item with QLGT DB ID %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: verwerp element met QLTG DB ID %2</translation>
     </message>
 </context>
 <context>
@@ -2061,7 +2061,7 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="110"/>
         <source>mode &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Modus &apos;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="114"/>
@@ -2316,7 +2316,7 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="201"/>
         <source>, mode &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>, modus &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="238"/>
@@ -2340,12 +2340,12 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="40"/>
         <source>Add or remove paths containing Routino data. There can be multiple databases in a path but no sub-path is parsed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak of verwijder mappen naar Routino gegevens.-Er kunnen meerdere bestanden in een map zijn maar geen submappen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutinoPathSetup.cpp" line="55"/>
         <source>Select routing data file path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer routing gegevensmap...</translation>
     </message>
 </context>
 <context>
@@ -2517,22 +2517,22 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../IAbout.ui" line="229"/>
         <source>Dutch</source>
-        <translation type="unfinished">Nederlands</translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="236"/>
         <source>Harrie Klomp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="295"/>
         <source>&lt;b&gt;Binaries:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Binaries::&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Binaries:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="311"/>
         <source>&lt;b&gt;Contributors:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Medewerkerss:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Medewerkers:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="318"/>
@@ -2713,7 +2713,11 @@ is geen geldig coordinaat definitie:
 If you keep both parts of the track you have to create new ones. 
 
 If you want to keep just one half you can simply remove the points, or check this to create a new track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Controleer eerst voordat dit in een nieuwe track opgelagen wordt. 
+
+Voor het opslaan van beide delen dienen er nieuwe tracks gemaakt te worden. 
+
+Als er alleen een halve track bewaard moet worden kunnen de overige punten verwijderd worden, of controleer dit bij het maken van de nieuwe track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="67"/>
@@ -4662,7 +4666,7 @@ of
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
         <source>File Prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsextentie</translation>
     </message>
 </context>
 <context>
@@ -4785,12 +4789,12 @@ of
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="310"/>
         <source>Undo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Wis laatste verandering</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="327"/>
         <source>Redo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Herplaats laatste verandering</translation>
     </message>
 </context>
 <context>
@@ -4855,7 +4859,7 @@ of
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="34"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculate a route between the first and last selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bereken een route tussen het eerste en laatst geselecteerde punt..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Caclculate a route between the first and last selected point.</source>
@@ -5121,12 +5125,12 @@ of
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="14"/>
         <source>Copy item...</source>
-        <translation type="unfinished"></translation>
+        <translation>Element kopiëren...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="23"/>
         <source>Replace existing item</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang bestand element</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="30"/>
@@ -5139,7 +5143,7 @@ of
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="60"/>
         <source>Do not copy item</source>
-        <translation type="unfinished"></translation>
+        <translation>Element niet kopiëren</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="97"/>
@@ -5149,12 +5153,12 @@ of
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="104"/>
         <source>Replace with:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang door:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="111"/>
         <source>Keep item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Behoud element:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="118"/>
@@ -5164,7 +5168,7 @@ of
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="135"/>
         <source>And for all other items, too.</source>
-        <translation type="unfinished"></translation>
+        <translation>En ook voor alle andere elementen.</translation>
     </message>
 </context>
 <context>
@@ -5172,7 +5176,7 @@ of
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
         <source>Select Parent Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer map...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="26"/>
@@ -5223,17 +5227,17 @@ of
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="14"/>
         <source>Copy item...</source>
-        <translation type="unfinished"></translation>
+        <translation>Element kopiëren...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="23"/>
         <source>Replace existing item</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang bestand element</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="30"/>
         <source>Replace with:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang door:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="37"/>
@@ -5246,17 +5250,17 @@ of
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="67"/>
         <source>Do not replace item</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang element niet</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="74"/>
         <source>Use item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik element:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="111"/>
         <source>And for all other items, too.</source>
-        <translation type="unfinished"></translation>
+        <translation>En ook voor alle andere elementen.</translation>
     </message>
 </context>
 <context>
@@ -5662,7 +5666,7 @@ of
         <location filename="../gis/CGisListDB.cpp" line="437"/>
         <location filename="../gis/prj/IGisProject.cpp" line="424"/>
         <source>Delete...</source>
-        <translation>Verwijder...</translation>
+        <translation>Verwijderen...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1098"/>
@@ -5746,7 +5750,7 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="287"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit bestand bestaat al en is niet in QMapShack gemaakt. Wanneer op &apos;Ja&apos; geklikt wordt zullen er gegevens verloren gaan. Alhoewel QMapShack dit GPX bestand kan openen is het mogelijk dat niet alle elementen opgeslagen kunnen worden. Geadviseerd wordt om een ander bestand te kiezen. &lt;b&gt;Moet dit bestand werkelijk overschreven worden?&lt;b/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="395"/>
@@ -5761,7 +5765,7 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="410"/>
         <source>Saving GIS data failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan GIS gegevens mislukt...</translation>
     </message>
     <message>
         <source>Saveing GIS data failed...</source>
@@ -5973,7 +5977,7 @@ Bestandsnaam: %1</translation>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="423"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Moet &apos;%1&apos; werkelijk verwijderd worden uit project &apos;%2&apos;?</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
@@ -6033,7 +6037,7 @@ Bestandsnaam: %1</translation>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="283"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Laatste routeberekening:&lt;br/&gt;%1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="285"/>
@@ -6428,7 +6432,7 @@ Bestandsnaam: %1</translation>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="238"/>
         <source>Proximity: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nabijheid: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="322"/>
@@ -6443,7 +6447,7 @@ Bestandsnaam: %1</translation>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="334"/>
         <source>Changed proximity</source>
-        <translation type="unfinished"></translation>
+        <translation>Nabijheid aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>

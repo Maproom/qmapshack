@@ -83,7 +83,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
     if(mode == eModeWindow)
     {
-        overrideWindowFlags(Qt::Window);
+        overrideWindowFlags(Qt::Tool);
         setAttribute(Qt::WA_DeleteOnClose, true);
     }
 

@@ -100,6 +100,13 @@ void CPlotData::setLimits()
         ++line;
     }
 
-    xaxis->setLimits(xmin,xmax);
-    yaxis->setLimits(ymin,ymax);
+    if(xmin == xmax)
+    {
+        badData = true;
+    }
+    else
+    {
+        xaxis->setLimits(xmin, xmax);
+        yaxis->setLimits(ymin, ymax);
+    }
 }

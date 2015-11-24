@@ -59,7 +59,7 @@ void CPlot::updateData()
 {
     clear();
 
-    if(isHidden() || (getX == nullptr) || (getY == nullptr) || trk->getTotalElapsedSeconds() == 0)
+    if(isHidden() || (getX == nullptr) || (getY == nullptr))
     {
         resetZoom();
         update();

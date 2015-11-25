@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>CAbout</name>
     <message>
         <source>API Version %1 (expected %2)</source>
-        <translation type="vanished">Verze API %1 (očekávána %2)     </translation>
+        <translation>Verze API %1 (očekávána %2)     </translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="38"/>
@@ -93,7 +93,7 @@
     <name>CDemPropSetup</name>
     <message>
         <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Stupeň %1&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Stupeň %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -327,7 +327,7 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="409"/>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Plná barva </translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="112"/>
@@ -488,11 +488,11 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="281"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete &apos;%1&apos; odstranit ze seznamu?</translation>
     </message>
     <message>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
-        <translation type="vanished">Opravdu chcete &apos;%1&apos; odstranit ze seznamu?</translation>
+        <translation>Opravdu chcete &apos;%1&apos; odstranit ze seznamu?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="322"/>
@@ -706,7 +706,7 @@
     <message>
         <location filename="../gis/CGisWidget.cpp" line="461"/>
         <source>Cut Track...</source>
-        <translation>Rozkrajet stopu...</translation>
+        <translation>Rozkrojit stopu...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="461"/>
@@ -1670,11 +1670,11 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
         <source>Unexpected service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neočekávaná služba. Očekáváno &apos;* WMTS 1.0.0&apos;. Přečteno &apos;%1 %2&apos;.</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="vanished">Neočekávaná služba. Očekáváno &apos;* WMTS 1.0.0&apos;. Přečteno &apos;%1 %2&apos;.</translation>
+        <translation>Neočekávaná služba. Očekáváno &apos;* WMTS 1.0.0&apos;. Přečteno &apos;%1 %2&apos;.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="151"/>
@@ -1753,11 +1753,11 @@ Neznámá stavba.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
         <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="vanished">Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
+        <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
 </context>
 <context>
@@ -1821,11 +1821,11 @@ Neznámá stavba.</translation>
     <name>CPlotDistance</name>
     <message>
         <source>distance [%1]</source>
-        <translation type="vanished">Vzdálenost [%1]</translation>
+        <translation>Vzdálenost [%1]</translation>
     </message>
     <message>
         <source>time</source>
-        <translation type="vanished">Čas</translation>
+        <translation>Čas</translation>
     </message>
     <message>
         <source>time [h]</source>
@@ -1833,7 +1833,7 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>distance. [%1]</source>
-        <translation type="vanished">Vzdálenost [%1]</translation>
+        <translation>Vzdálenost [%1]</translation>
     </message>
 </context>
 <context>
@@ -1845,7 +1845,7 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="vanished">Čas [h]</translation>
+        <translation>Čas [h]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="64"/>
@@ -1857,15 +1857,15 @@ Neznámá stavba.</translation>
     <name>CPlotSpeed</name>
     <message>
         <source>distance [%1]</source>
-        <translation type="vanished">Vzdálenost [%1]</translation>
+        <translation>Vzdálenost [%1]</translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="vanished">Čas [h]</translation>
+        <translation>Čas [h]</translation>
     </message>
     <message>
         <source>speed. [%1]</source>
-        <translation type="vanished">Rychlost [%1]</translation>
+        <translation>Rychlost [%1]</translation>
     </message>
 </context>
 <context>
@@ -2667,36 +2667,36 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../IAbout.ui" line="201"/>
         <source>&lt;b&gt;Translation:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Překlad&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="229"/>
         <source>Dutch</source>
-        <translation type="unfinished">Holandský</translation>
+        <translation>Nizozemština</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="236"/>
         <source>Harrie Klomp</source>
-        <translation type="unfinished"></translation>
+        <translation>Harrie Klomp</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="295"/>
         <source>&lt;b&gt;Binaries:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Spustitelné soubory:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="311"/>
         <source>&lt;b&gt;Contributors:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Přispěvatelé&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="318"/>
         <source>Christian Eichler (qms@christian-eichler.de)</source>
-        <translation type="unfinished"></translation>
+        <translation>Christian Eichler (qms@christian-eichler.de)</translation>
     </message>
     <message>
         <source>Translation:</source>
-        <translation type="vanished">Překlad:</translation>
+        <translation>Překlad:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="208"/>
@@ -2740,7 +2740,7 @@ není platným vymezením soustavy souřadnic
     </message>
     <message>
         <source>Binaries:</source>
-        <translation type="vanished">Spustitelné soubory:</translation>
+        <translation>Spustitelné soubory:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="332"/>
@@ -2848,22 +2848,22 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="14"/>
         <source>Cut Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozkrojit stopu</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="20"/>
         <source>Delete first part of the track and keep second one</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat první část stopy a zachovat druhou</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="27"/>
         <source>Keep both parts of the track</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachovat obě části stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="37"/>
         <source>Keep first part of the track and delete second one</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachovat první část stopy a smazat druhou</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="60"/>
@@ -2872,12 +2872,16 @@ není platným vymezením soustavy souřadnic
 If you keep both parts of the track you have to create new ones. 
 
 If you want to keep just one half you can simply remove the points, or check this to create a new track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto zaškrtněte pro uložení výsledku do nové stopy.
+
+Pokud zachováte obě části stopy, musíte vytvořit nové.
+
+Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, nebo toto zaškrtnout pro vytvoření nové stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="67"/>
         <source>Create a new track</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit novou stopu</translation>
     </message>
     <message>
         <source>Create a clone</source>
@@ -2888,12 +2892,12 @@ If you want to keep just one half you can simply remove the points, or check thi
     <name>IDemPathSetup</name>
     <message>
         <source>Setup DEM file pathss</source>
-        <translation type="vanished">Stanovit cesty k souborům DEM</translation>
+        <translation>Stanovit cesty k souborům DEM</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
         <source>Setup DEM file paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanovit cesty k souborům DEM</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
@@ -2957,7 +2961,7 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../dem/IDemPropSetup.ui" line="494"/>
         <location filename="../dem/IDemPropSetup.ui" line="578"/>
         <source>°</source>
-        <translation type="unfinished">°</translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="229"/>
@@ -2966,7 +2970,7 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../dem/IDemPropSetup.ui" line="497"/>
         <location filename="../dem/IDemPropSetup.ui" line="581"/>
         <source>&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; </translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="251"/>
@@ -3185,7 +3189,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
         <source>Sort along track (single)</source>
-        <translation>Třídit podle stopy (jednorázový)</translation>
+        <translation>Třídit podle stopy (jednorázově)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
@@ -3249,7 +3253,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     </message>
     <message>
         <source>Graph Control</source>
-        <translation type="vanished">Ovládání grafu</translation>
+        <translation>Ovládání grafu</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="533"/>
@@ -3263,11 +3267,11 @@ If you want to keep just one half you can simply remove the points, or check thi
     </message>
     <message>
         <source>Progress</source>
-        <translation type="vanished">Postup</translation>
+        <translation>Postup</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="vanished">Stopa</translation>
+        <translation>Stopa</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="163"/>
@@ -3287,53 +3291,53 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="298"/>
         <source>Style</source>
-        <translation type="unfinished">Styl</translation>
+        <translation>Styl</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="340"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="434"/>
         <source>from Data</source>
-        <translation type="unfinished"></translation>
+        <translation>z dat</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="353"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdroj</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="376"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejvyšší hodnota</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="405"/>
         <source>Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejnižší hodnota</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="447"/>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Plná barva </translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="495"/>
         <source>Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafy</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="540"/>
         <source>Graph 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Graf 3</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="547"/>
         <source>Graph 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Graf 2</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="554"/>
         <source>Graph 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Graf 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="562"/>
@@ -3487,7 +3491,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="258"/>
         <source>Date/Time:</source>
-        <translation>Datum/Čas</translation>
+        <translation>Datum/Čas:</translation>
     </message>
 </context>
 <context>
@@ -3579,22 +3583,22 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="41"/>
         <source>Hide Invalid Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt neplatné body</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="56"/>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt body s neplatnými souřadnicemi na začátku stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -5152,11 +5156,11 @@ nebo
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="34"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculate a route between the first and last selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Spočítat cestu mezi prvním a posledním vybraným bodem.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Caclculate a route between the first and last selected point.</source>
-        <translation type="vanished">Vypočítat cestu mezi prvním a posledním vybraným bodem.</translation>
+        <translation>Vypočítat cestu mezi prvním a posledním vybraným bodem.</translation>
     </message>
 </context>
 <context>
@@ -5289,7 +5293,7 @@ nebo
     </message>
     <message>
         <source>Cut track at selected point into two tracks.</source>
-        <translation type="vanished">Vyjmout stopu na vybraném bodu do dvou stop.</translation>
+        <translation>Rozkrojit stopu na vybraném bodu do dvou stop.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
@@ -5329,7 +5333,11 @@ nebo
 * use the track parts to plan a new tour
 * cut a long track into stages
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Rozkrojit stopu na vybraném bodu. Můžete to použít na:
+
+* odstranění špatných bodů na začátku nebo na konci stopy
+* použití částí stopy k plánování nového výletu
+* vyjmutí dlouhé stopy do úseků</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View details &amp;amp; Edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -5950,31 +5958,31 @@ nebo
     <message>
         <location filename="../tool/IToolShell.cpp" line="44"/>
         <source>Execution of external program `%1` failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se spustit vnější program `%1`: </translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="48"/>
         <source>Process cannot be started.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Proces nelze spustit.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="49"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ujistěte se, že jsou nainstalovány požadované balíčky, že `%1` existuje a je spustitelný.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="53"/>
         <source>External process crashed.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vnější proces spadl.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="57"/>
         <source>An unknown error occurred.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vyskytla se neznámá chyba.</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="148"/>
@@ -5998,7 +6006,7 @@ nebo
     <message>
         <location filename="../units/IUnitsSetup.ui" line="47"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Poznámka:&lt;/b&gt; Některé prvky uživatelského rozhraní změna jednotek neovlivní, dokud QMapShack nespustíte znovu.</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="31"/>
@@ -6064,7 +6072,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="410"/>
         <source>Saving GIS data failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se uložit data GIS...</translation>
     </message>
     <message>
         <source>
@@ -6130,12 +6138,12 @@ Oblasti: %1</translation>
     </message>
     <message>
         <source>Cancelled correlation...</source>
-        <translation type="vanished">Svázání zrušeno...</translation>
+        <translation>Svázání zrušeno...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="248"/>
         <source>Canceled correlation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Svázání zrušeno...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="326"/>
@@ -6223,7 +6231,7 @@ Název souboru: %1</translation>
     </message>
     <message>
         <source>Saveing GIS data failed...</source>
-        <translation type="vanished">Nepodařilo se uložit data GIS...</translation>
+        <translation>Nepodařilo se uložit data GIS...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="395"/>
@@ -6247,7 +6255,7 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/IGisItem.cpp" line="453"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt; Tento prvek je pravděpodobně pouze pro čtení, protože nebyl vytvořen v programu QMapShack. Obvykle nemáte zájem měnit zavedená data. Ale pokud si myslíte, že je to tentokrát na místě, stiskněte OK.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="454"/>
@@ -6277,7 +6285,7 @@ Název souboru: %1</translation>
     </message>
     <message>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
-        <translation type="vanished">&lt;h3&gt;%1&lt;/h3&gt; Tento prvek je pravděpodobně pouze pro čtení, protože nebyl vytvořen v programu QMapShack. Obvykle nemáte zájem měnit zavedená data. Ale pokud si myslíte, že je to tentokrát na místě, stiskněte OK.</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt; Tento prvek je pravděpodobně pouze pro čtení, protože nebyl vytvořen v programu QMapShack. Obvykle nemáte zájem měnit zavedená data. Ale pokud si myslíte, že je to tentokrát na místě, stiskněte OK.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="604"/>
@@ -6352,7 +6360,7 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="559"/>
         <source>... and %1 tags not displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>... a %1 značek nezobrazeno</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="625"/>
@@ -6394,7 +6402,7 @@ Název souboru: %1</translation>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1307"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1331"/>
         <source>Permanently removed points %1..%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Trvale odstraněné body %1 ... %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1513"/>
@@ -6777,7 +6785,7 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="141"/>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt body s neplatnými souřadnicemi na začátku stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="157"/>
@@ -6942,7 +6950,7 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
         <source>Aeronautics</source>
-        <translation type="unfinished"></translation>
+        <translation>Letectví</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="210"/>
@@ -6989,63 +6997,63 @@ Název souboru: %1</translation>
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="53"/>
         <source>Progress</source>
-        <translation type="unfinished">Postup</translation>
+        <translation>Postup</translation>
     </message>
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="56"/>
         <source>time</source>
-        <translation type="unfinished">Čas</translation>
+        <translation>Čas</translation>
     </message>
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="57"/>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="82"/>
         <source>distance [%1]</source>
-        <translation type="unfinished">Vzdálenost [%1]</translation>
+        <translation>Vzdálenost [%1]</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="57"/>
         <source>Slope (directed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sklon (doporučený)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="62"/>
         <source>Speed</source>
-        <translation type="unfinished">Rychlost</translation>
+        <translation>Rychlost</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
         <source>Elevation</source>
-        <translation type="unfinished">Výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="74"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
         <source>Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tep srdce</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="105"/>
         <source>Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Rychlost chůze</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="110"/>
         <source>Air Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Teplota vzduchu</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="89"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
         <source>Water Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Teplota vody</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="94"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="120"/>
         <source>Depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Hloubka</translation>
     </message>
 </context>
 </TS>

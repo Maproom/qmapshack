@@ -721,7 +721,10 @@ void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2)
 
 static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
 {
-    extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
+    if(NOFLOAT != val)
+    {
+        extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
+    }
 }
 
 void CGisItemTrk::updateExtremaAndExtensions()
@@ -761,11 +764,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
                 }
             }
 
-            if(NOFLOAT != pt.speed)
-            {
-                updateExtrema(extremaSpeed, pt.speed);
-            }
-
+            updateExtrema(extremaSpeed, pt.speed);
             updateExtrema(extremaEle,   pt.ele);
             updateExtrema(extremaSlope, pt.slope1);
         }
@@ -983,7 +982,7 @@ void CGisItemTrk::deriveSecondaryData()
                 n++;
             }
 
-            qreal a      = qAtan((e2 - e1)/(d2 - d1));
+            qreal a      = (d2 != d1) ? qAtan((e2 - e1)/(d2 - d1)) : 0;
             trkpt.slope1 = a * 360.0/(2 * M_PI);
             trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
 

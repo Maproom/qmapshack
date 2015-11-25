@@ -61,15 +61,18 @@ void CDBItem::toggle()
 
     if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
+        // make sure the project is shown on the workspace
         CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
         CGisWidget::self().postEventForWks(evt1);
 
+        // tell the project to load the item from the database
         CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(folder->getId(), folder->getDBName());
         evt2->items << evt_item_t(id, type);
         CGisWidget::self().postEventForWks(evt2);
     }
     else
     {
+        // tell the project to remove the item
         CEvtD2WHideItems * evt2 = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
         evt2->keys << key;
         CGisWidget::self().postEventForWks(evt2);

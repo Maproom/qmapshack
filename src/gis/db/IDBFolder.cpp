@@ -287,6 +287,7 @@ void IDBFolder::setupFromDB()
 
     QSqlQuery query(db);
 
+    // get basic properties like name and key
     query.prepare("SELECT key, name, comment FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
@@ -296,6 +297,7 @@ void IDBFolder::setupFromDB()
     setText(CGisListDB::eColumnName, query.value(1).toString());
     setToolTip(CGisListDB::eColumnName, query.value(2).toString());
 
+    // check if folder has child folders (to set expand indicator)
     query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
@@ -307,6 +309,7 @@ void IDBFolder::setupFromDB()
     }
     else
     {
+        // check for child items (to set expand indicator)
         query.prepare("SELECT EXISTS(SELECT 1 FROM folder2item WHERE parent=:id LIMIT 1)");
         query.bindValue(":id", id);
         QUERY_EXEC(return );
@@ -317,6 +320,8 @@ void IDBFolder::setupFromDB()
         }
     }
 
+    // if the folder is loadable the checkbox has to be displayed and
+    // an event to query the state has to be sent to the workspace
     if(isLoadable)
     {
         setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);

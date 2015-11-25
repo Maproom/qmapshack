@@ -129,8 +129,34 @@ public:
     bool operator<(const QTreeWidgetItem &other) const;
 
 protected:
+    /**
+       @brief Setup all item properties
+
+       This will read the database to setup the name, key and tooltip. Additionally it
+       will query for child elements (folders, gis items) and set the expand indicator
+       accordingly. If the folder is loadable the checkbox has to be displayed and the
+       workspace has to be queried for the folder.
+
+     */
     virtual void setupFromDB();
+
+    /**
+       @brief Add child items like folders, tracks, routes, waypoints and overlays
+
+       The checkbox of active items will be set checked.
+
+       @param activeChildren     a set of item keys that are active on the workspace
+    */
     virtual void addChildren(const QSet<QString> &activeChildren);
+
+    /**
+       @brief Remove a folder to folder realtion
+
+       If the folder has no other relation the folder's relation to it's children is removed, too.
+
+       @param idParent      the 64bit database key of the parent folder
+       @param idFolder      the 64bit database key of the child folder to be removed
+    */
     virtual void remove(quint64 idParent, quint64 idFolder);
 
     QSqlDatabase& db;

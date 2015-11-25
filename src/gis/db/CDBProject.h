@@ -74,13 +74,33 @@ public:
      */
     QDataStream& operator>>(QDataStream& stream);
 
-
+    /**
+       @brief Send a CEvtW2DAckInfo event to the database view
+     */
     void postStatus();
 
+    /**
+       @brief Load items from the database into the project
+
+       @param evt   the event sent by the database view
+     */
     void showItems(CEvtD2WShowItems * evt);
+    /**
+       @brief Remove items from the project
+
+       Note: This is not the same as for the other projects. The relation in the database
+       is still valid. The item is just not selected to be shown.
+
+       @param evt   the event sent by the database view
+     */
     void hideItems(CEvtD2WHideItems * evt);
 
 protected:
+    /**
+       @brief Setup the items text with the name and suffix
+
+       @param defaultName
+    */
     void setupName(const QString &defaultName);
 
     /**

@@ -38,7 +38,15 @@ public:
     {
         return key;
     }
+
+    /**
+       @brief Send show/hide events to the workspace
+     */
     void toggle();
+
+    /**
+       @brief Delete the folder/item relation in the database
+    */
     void remove();
 
 private:

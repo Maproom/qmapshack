@@ -109,6 +109,7 @@ void CDBProject::setupName(const QString &defaultName)
 {
     IGisProject::setupName(defaultName);
 
+    // look for a parent folder's name to be used as suffix
     QSqlQuery query(db);
     query.prepare("SELECT t1.name FROM folders AS t1 WHERE id=(SELECT parent FROM folder2folder WHERE child=:id) AND (t1.type=:type1 OR t1.type=:type2)");
     query.bindValue(":id", id);
@@ -125,11 +126,11 @@ void CDBProject::setupName(const QString &defaultName)
 
 void CDBProject::postStatus()
 {
+    // collect the keys of all child items and post them to the database view
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
 
-    bool changedItems = false;
-
-    const int N = childCount();
+    bool changedItems   = false;
+    const int N         = childCount();
     for(int n = 0; n < N; n++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(n));
@@ -140,6 +141,7 @@ void CDBProject::postStatus()
         }
     }
 
+    // update item counters and track/waypoint correlation
     updateItems();
     if(!changedItems)
     {

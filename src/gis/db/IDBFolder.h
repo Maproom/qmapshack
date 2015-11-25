@@ -27,6 +27,9 @@ class CEvtW2DAckInfo;
 class CDBFolderDatabase;
 class CDBItem;
 
+/**
+ * @brief Baseclass for all folders in the database view
+ */
 class IDBFolder : public QTreeWidgetItem
 {
 public:
@@ -43,22 +46,85 @@ public:
     IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
     virtual ~IDBFolder();
 
+    /**
+     * @brief Get the 64bit database key
+     * @return
+     */
     quint64 getId()
     {
         return id;
     }
     QString getDBName();
+    /**
+     * @brief Get the database folder that folder is stored in
+     *
+     * @return On success a pointer to the item holding the database is returned.
+     */
     CDBFolderDatabase * getDBFolder();
+
+    /**
+     * @brief Search and get access to a subfolder
+     * @param idFolder  the database key of the folder
+     * @return On success a pointer to the item is returned. Else 0.
+     */
     IDBFolder * getFolder(quint64 idFolder);
 
+    /**
+     * @brief Add a new folder to the database and the treewidget.
+     *
+     * This will call addFolderToDb() and createFolderByType()
+     *
+     * @param type      the type of the new folder
+     * @param name      the name of the new folder
+     * @return The 64bit database key of the new folder. 0 on failure.
+     */
     virtual quint64 addFolder(type_e type, const QString &name);
+    /**
+     * @brief Add children from database
+     */
     virtual void expanding();
+    /**
+     * @brief Update item all child items from database
+     *
+     * The event has a list of active items. The item list is created from
+     * scratch and the check state is updated by that list
+     *
+     * @param info  The event object posted by the workspace
+     */
     virtual void update(CEvtW2DAckInfo * info);
+
+    /**
+     * @brief Toggle check state of project and post event to workspace.
+     */
     virtual void toggle();
+    /**
+     * @brief Remove folder from database and post event to workspace
+     */
     virtual void remove();
 
-    static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
+    /**
+     * @brief Create a new folder entry into the database table
+     *
+     * The folder will be attached to it's parent folder
+     *
+     * @param type          the tye of the new folder
+     * @param name          the name of the new folder
+     * @param idParent      the 64bit database key of the parent
+     * @param db            the database to work on
+     * @return The 64bit database key of the new folder. 0 on failure.
+     */
     static quint64 addFolderToDb(type_e type, const QString& name, quint64 idParent, QSqlDatabase& db);
+
+    /**
+     * @brief Create a new treeWidgetItem from a folder in the database
+     *
+     * @param db        the database the item belongs to
+     * @param type      the folder type to create
+     * @param id        the database key of the folder
+     * @param parent    the items parent item
+     * @return A pointer to the new treewidgetitem.
+     */
+    static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
     bool operator<(const QTreeWidgetItem &other) const;
 

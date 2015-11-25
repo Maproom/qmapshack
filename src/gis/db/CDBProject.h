@@ -82,7 +82,20 @@ public:
 
 protected:
     void setupName(const QString &defaultName);
+
+    /**
+     * @brief Save item's data into an existing database entry
+     *
+     * @param item      the item itself
+     * @param idItem    the 64bit database key
+     */
     void updateItem(IGisItem * item, quint64 idItem);
+
+    /**
+     * @brief Add item to database
+     * @param item      the item itself
+     * @return The new 64bit database key
+     */
     quint64 insertItem(IGisItem * item);
 
     QSqlDatabase db;

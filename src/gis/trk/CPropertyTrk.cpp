@@ -56,7 +56,7 @@ void CPropertyTrk::setupData()
         , QObject::tr("time")
         , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
         , IUnit::self().basefactor
-        , [](const CGisItemTrk::trkpt_t &p) {return p.time.toTime_t(); }
+        , [](const CGisItemTrk::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; }
         , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
     };
     properties << propProgress;
@@ -79,7 +79,7 @@ void CPropertyTrk::setupData()
             , name
             , QIcon(ext.icon)
             , CPlotData::eAxisLinear
-            , QObject::tr("distance [%1]")
+            , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
             , QString("%1 [%2]").arg(name).arg(ext.unit)
             , ext.factor
             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }

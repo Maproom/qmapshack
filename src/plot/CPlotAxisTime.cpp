@@ -33,9 +33,16 @@ CPlotAxisTime::~CPlotAxisTime()
 
 void CPlotAxisTime::calc()
 {
-    int dSec    = usedMax - usedMin;
-    ticStart    = usedMin;
-    strFormat   = "hh:mm:ss";
+    int dSec  = usedMax - usedMin;
+    ticStart  = usedMin;
+    strFormat = "hh:mm:ss";
+
+    // abort if the xRange has a length of 0
+    if(0 == dSec)
+    {
+        valid = false;
+        return;
+    }
 
     if(dSec < 0)
     {
@@ -103,12 +110,7 @@ void CPlotAxisTime::calc()
     if ( autoscale )
     {
         usedMin = qFloor( usedMin / interval ) * interval;
-        usedMax = qCeil( usedMax / interval ) * interval;
-    }
-    else
-    {
-        usedMin = usedMin;
-        usedMax = usedMax;
+        usedMax = qCeil(  usedMax / interval ) * interval;
     }
 
     int t1 = ( int )( usedMin / interval + 0.5);

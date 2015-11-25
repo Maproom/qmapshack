@@ -119,6 +119,17 @@ void CKnownExtension::init(IUnit &units)
         {"tp1:TrackPointExtension|tp1:depth",
          { QObject::tr("Depth"), 0., 200., 0., 12000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
            getExtensionValueFunc("tp1:TrackPointExtension|tp1:depth")}
+        },
+
+        // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
+        {"heartrate",
+         { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+           getExtensionValueFunc("heartrate")}
+        },
+
+        {"cadence",
+         { QObject::tr("Cadence"), 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true,
+           getExtensionValueFunc("cadence")}
         }
     };
 }

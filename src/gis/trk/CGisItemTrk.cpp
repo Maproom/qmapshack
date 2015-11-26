@@ -833,21 +833,25 @@ void CGisItemTrk::deriveSecondaryData()
     qreal timestampStart    = NOFLOAT;
     qreal lastEle           = NOFLOAT;
 
+    // linear list of pointers to visible track points
+    QVector<trkpt_t*> lintrk;
+
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
 
         for(int p = 0; p < seg.pts.size(); p++)
-        {
-            trkpt_t& trkpt = seg.pts[p];
+        {            
+            trkpt_t& trkpt = seg.pts[p];            
 
             trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.flags & trkpt_t::eHidden)
             {
                 trkpt.reset();
                 continue;
-            }
+            }            
             trkpt.idxVisible = cntVisiblePoints++;
+            lintrk << &trkpt;
 
             if(trkpt.lon < west)
             {
@@ -923,80 +927,71 @@ void CGisItemTrk::deriveSecondaryData()
 
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 
-    // speed and slope (short average +-25m)
-    for(int s = 0; s < trk.segs.size(); s++)
+    for(int p = 0; p < lintrk.size(); p++)
     {
-        trkseg_t& seg = trk.segs[s];
+        trkpt_t& trkpt = *lintrk[p];
 
-        for(int p = 0; p < seg.pts.size(); p++)
+        qreal d1 = trkpt.distance;
+        qreal e1 = trkpt.ele;
+        qreal t1 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
+        int n = p;
+
+        while(n>0)
         {
-            trkpt_t& trkpt = seg.pts[p];
-            if(trkpt.flags & trkpt_t::eHidden)
+            trkpt_t & trkpt2 = *lintrk[n];
+            if(trkpt2.ele == NOINT)
             {
+                n--;
                 continue;
             }
 
-            qreal d1 = trkpt.distance;
-            qreal e1 = trkpt.ele;
-            qreal t1 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
-            int n = p;
-
-            while(n>0)
+            if(trkpt.distance - trkpt2.distance >= 25)
             {
-                trkpt_t & trkpt2 = seg.pts[n];
-                if((trkpt2.flags & trkpt_t::eHidden) || (trkpt2.ele == NOINT))
-                {
-                    n--;
-                    continue;
-                }
-
-                if(trkpt.distance - trkpt2.distance >= 25)
-                {
-                    d1 = trkpt2.distance;
-                    e1 = trkpt2.ele;
-                    t1 = trkpt2.time.toMSecsSinceEpoch()/1000.0;
-                    break;
-                }
-                n--;
+                d1 = trkpt2.distance;
+                e1 = trkpt2.ele;
+                t1 = trkpt2.time.toMSecsSinceEpoch()/1000.0;
+                break;
             }
+            n--;
+        }
 
-            qreal d2 = trkpt.distance;
-            qreal e2 = trkpt.ele;
-            qreal t2 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
-            n = p;
-            while(n < seg.pts.size())
+        qreal d2 = trkpt.distance;
+        qreal e2 = trkpt.ele;
+        qreal t2 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
+        n = p;
+        while(n < lintrk.size())
+        {
+            trkpt_t & trkpt2 = *lintrk[n];
+            if(trkpt2.ele == NOINT)
             {
-                trkpt_t & trkpt2 = seg.pts[n];
-                if((trkpt2.flags & trkpt_t::eHidden) || (trkpt2.ele == NOINT))
-                {
-                    n++;
-                    continue;
-                }
-
-                if(trkpt2.distance - trkpt.distance >= 25)
-                {
-                    d2 = trkpt2.distance;
-                    e2 = trkpt2.ele;
-                    t2 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
-                    break;
-                }
                 n++;
+                continue;
             }
 
-            qreal a      = qAtan((e2 - e1)/(d2 - d1));
-            trkpt.slope1 = a * 360.0/(2 * M_PI);
-            trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
+            if(trkpt2.distance - trkpt.distance >= 25)
+            {
+                d2 = trkpt2.distance;
+                e2 = trkpt2.ele;
+                t2 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
+                break;
+            }
+            n++;
+        }
 
-            if((t2 - t1) > 0)
-            {
-                trkpt.speed = (d2 - d1) / (t2 - t1);
-            }
-            else
-            {
-                trkpt.speed = NOFLOAT;
-            }
+        qreal a      = qAtan((e2 - e1)/(d2 - d1));
+        trkpt.slope1 = a * 360.0/(2 * M_PI);
+        trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
+
+        if((t2 - t1) > 0)
+        {
+            trkpt.speed = (d2 - d1) / (t2 - t1);
+        }
+        else
+        {
+            trkpt.speed = NOFLOAT;
         }
     }
+
 
     if(lastTrkpt != 0)
     {

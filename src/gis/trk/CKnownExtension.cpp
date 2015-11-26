@@ -134,6 +134,21 @@ void CKnownExtension::init(IUnit &units)
         {"cadence",
          { QObject::tr("Cadence"), 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true,
            getExtensionValueFunc("cadence")}
+        },
+
+        {"speed",
+         { QObject::tr("Speed"), 1., 14., 0., 600., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
+           getExtensionValueFunc("speed")}
+        },
+
+        {"acceleration",
+         { QObject::tr("Acceleration"), -9.82, 9.82, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), basefactor, baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true,
+           getExtensionValueFunc("acceleration")}
+        },
+
+        {"course",
+         { QObject::tr("Course"), -3.2, 3.2, -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true,
+           getExtensionValueFunc("course")}
         }
     };
 }

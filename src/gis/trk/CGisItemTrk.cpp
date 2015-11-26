@@ -772,20 +772,20 @@ void CGisItemTrk::updateExtremaAndExtensions()
 
     if(extremaEle.min < extremaEle.max)
     {
-        existingExtensions << "ele";
-        extrema["ele"] = extremaEle;
+        existingExtensions << CKnownExtension::internalEle;
+        extrema[CKnownExtension::internalEle] = extremaEle;
     }
 
     if(extremaSlope.min < extremaSlope.max)
     {
-        existingExtensions << "slope";
-        extrema["slope"] = extremaSlope;
+        existingExtensions << CKnownExtension::internalSlope;
+        extrema[CKnownExtension::internalSlope] = extremaSlope;
     }
 
     if(numeric_limits<qreal>::max() != extremaSpeed.min)
     {
-        existingExtensions << "speed";
-        extrema["speed"] = extremaSpeed;
+        existingExtensions << CKnownExtension::internalSpeed;
+        extrema[CKnownExtension::internalSpeed] = extremaSpeed;
     }
 
     existingExtensions.subtract(nonRealExtensions);

@@ -19,6 +19,10 @@
 #include "gis/trk/CKnownExtension.h"
 #include "units/IUnit.h"
 
+const QString CKnownExtension::internalSlope = "::ql:slope";
+const QString CKnownExtension::internalSpeed = "::ql:speed";
+const QString CKnownExtension::internalEle   = "::ql:ele";
+
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 
 CKnownExtension::CKnownExtension(QString name,
@@ -53,17 +57,17 @@ void CKnownExtension::init(IUnit &units)
 
     knownExtensions =
     {
-        {"slope",
-         { QObject::tr("Slope (directed)"), -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
+        {internalSlope,
+         { QObject::tr("Slope (directed, derived)"), -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }}
         },
 
-        {"speed",
-         { QObject::tr("Speed"), 1., 14., 0., 600., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
+        {internalSpeed,
+         { QObject::tr("Speed (derived)"), 1., 14., 0., 600., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
         },
 
-        {"ele",
+        {internalEle,
          { QObject::tr("Elevation"), 200., 800., 0., 100000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },

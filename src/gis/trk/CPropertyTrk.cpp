@@ -65,7 +65,7 @@ void CPropertyTrk::setupData()
     foreach(const QString &key, keys)
     {
         // skip elevation as it is covered by the profile plot
-        if(key == "ele")
+        if(key == CKnownExtension::internalEle)
         {
             continue;
         }
@@ -87,7 +87,7 @@ void CPropertyTrk::setupData()
         };
 
         // lame hack
-        if(key == "speed")
+        if(key == CKnownExtension::internalSpeed)
         {
             property.min = 0;
         }

@@ -56,7 +56,7 @@ void CPropertyTrk::setupData()
         , QObject::tr("time")
         , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
         , IUnit::self().basefactor
-        , [](const CGisItemTrk::trkpt_t &p) {return p.time.toTime_t(); }
+        , [](const CGisItemTrk::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; }
         , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
     };
     properties << propProgress;
@@ -65,7 +65,7 @@ void CPropertyTrk::setupData()
     foreach(const QString &key, keys)
     {
         // skip elevation as it is covered by the profile plot
-        if(key == "ele")
+        if(key == CKnownExtension::internalEle)
         {
             continue;
         }
@@ -79,15 +79,15 @@ void CPropertyTrk::setupData()
             , name
             , QIcon(ext.icon)
             , CPlotData::eAxisLinear
-            , QObject::tr("distance [%1]")
-            , QString("%1 [%2]").arg(name).arg(ext.unit)
+            , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
+            , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
             , ext.factor
             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
             , ext.valueFunc
         };
 
         // lame hack
-        if(key == "speed")
+        if(key == CKnownExtension::internalSpeed)
         {
             property.min = 0;
         }

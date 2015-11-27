@@ -203,7 +203,7 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
         if(key.item.isEmpty())
         {
             QString keyFromDB = query.value(1).toString();
-            /*[Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
+            /*[Issue #72] Database/Workspace inconsistency in QMS 1.4.0
 
                The root cause is a missing key in the serialized data. This is fixed by calling getKey() in setupHistory().
 

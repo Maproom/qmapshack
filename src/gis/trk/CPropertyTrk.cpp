@@ -80,7 +80,7 @@ void CPropertyTrk::setupData()
             , QIcon(ext.icon)
             , CPlotData::eAxisLinear
             , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
-            , QString("%1 [%2]").arg(name).arg(ext.unit)
+            , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
             , ext.factor
             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
             , ext.valueFunc

@@ -526,9 +526,6 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     setColor(str2color(trk.color));
     setText(CGisListWks::eColumnName, trk.name);
     setToolTip(CGisListWks::eColumnName, getInfo());
-
-    notifyChange();
-
     return stream;
 }
 

@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterInvalid.h"
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterInvalid.h"
 
 CFilterInvalid::CFilterInvalid(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)

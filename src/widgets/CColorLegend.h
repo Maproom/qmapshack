@@ -19,11 +19,12 @@
 #ifndef CCOLORLEGEND_H
 #define CCOLORLEGEND_H
 
-#include "gis/trk/CGisItemTrk.h"
-#include "helpers/INotifiable.h"
+
 #include <QWidget>
 
-class CColorLegend : public QWidget, public INotifiable
+class CGisItemTrk;
+
+class CColorLegend : public QWidget
 {
     Q_OBJECT
 public:
@@ -35,7 +36,7 @@ public:
 
     void setUnit(const QString &unit);
 
-    void notify();
+    void updateData();
 
 protected:
     void paintEvent(QPaintEvent *event);

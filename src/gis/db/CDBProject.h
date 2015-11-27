@@ -100,7 +100,7 @@ protected:
        @brief Setup the items text with the name and suffix
 
        @param defaultName
-    */
+     */
     void setupName(const QString &defaultName);
 
     /**

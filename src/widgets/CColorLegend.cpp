@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "widgets/CColorLegend.h"
 
 #include <QtWidgets>
@@ -32,10 +33,10 @@ CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
         background = true;
         xOffset = 5;
 
-        trk->registerNotification(this);
+        trk->registerColorLegend(this);
 
         // read data from trk
-        notify();
+        updateData();
     }
 }
 
@@ -43,11 +44,11 @@ CColorLegend::~CColorLegend()
 {
     if(trk)
     {
-        trk->unregisterNotification(this);
+        trk->unregisterColorLegend(this);
     }
 }
 
-void CColorLegend::notify()
+void CColorLegend::updateData()
 {
     if(!trk->getColorizeSource().isEmpty())
     {

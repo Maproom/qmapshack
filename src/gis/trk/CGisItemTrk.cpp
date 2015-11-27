@@ -187,7 +187,7 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
     history = hist;
-    loadHistory(hist.histIdxCurrent);    
+    loadHistory(hist.histIdxCurrent);
 }
 
 CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
@@ -212,7 +212,7 @@ CGisItemTrk::~CGisItemTrk()
         a copy of the list before we start to delete.
      */
     qDeleteAll(registeredPlots.toList());
-    qDeleteAll(notifyOnChange.toList());
+    qDeleteAll(registeredColorLegends.toList());
 
     delete dlgDetails;
 
@@ -223,7 +223,7 @@ CGisItemTrk::~CGisItemTrk()
 void CGisItemTrk::setSymbol()
 {
     setColor(str2color(trk.color));
-    notifyChange();
+    updateVisuals(eVisualColorLegend);
 }
 
 
@@ -316,7 +316,6 @@ void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
     }
 
     deriveSecondaryData();
-    notifyChange();
 }
 
 void CGisItemTrk::registerPlot(IPlot * plot)
@@ -329,23 +328,23 @@ void CGisItemTrk::unregisterPlot(IPlot * plot)
     registeredPlots.remove(plot);
 }
 
-void CGisItemTrk::registerNotification(INotifiable *obj)
+void CGisItemTrk::registerColorLegend(CColorLegend *obj)
 {
-    notifyOnChange << obj;
+    registeredColorLegends << obj;
 }
 
-void CGisItemTrk::unregisterNotification(INotifiable *obj)
+void CGisItemTrk::unregisterColorLegend(CColorLegend *obj)
 {
-    notifyOnChange.remove(obj);
+    registeredColorLegends.remove(obj);
 }
 
-void CGisItemTrk::notifyChange()
-{
-    foreach(INotifiable *obj, notifyOnChange)
-    {
-        obj->notify();
-    }
-}
+//void CGisItemTrk::notifyChange()
+//{
+//    foreach(INotifiable *obj, notifyOnChange)
+//    {
+//        obj->notify();
+//    }
+//}
 
 QString CGisItemTrk::getInfo(bool allowEdit) const
 {
@@ -1015,11 +1014,7 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-
-    foreach(IPlot * plot, registeredPlots)
-    {
-        plot->updateData();
-    }
+    updateVisuals(eVisualPlots|eVisualDetails);
 
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "totalDistance" << totalDistance;
@@ -1160,15 +1155,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         }
     }
 
-    if(!dlgDetails.isNull())
-    {
-        dlgDetails->setupGui();
-    }
-
-    foreach(IPlot * plot, registeredPlots)
-    {
-        plot->updateData();
-    }
+    updateVisuals(eVisualDetails|eVisualPlots);
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
@@ -1824,12 +1811,11 @@ void CGisItemTrk::setColorizeSource(QString src)
         else
         {
             getExtrema(limitLow, limitHigh, src);
-            if(limitHigh - limitLow < 0.1) {
+            if(limitHigh - limitLow < 0.1)
+            {
                 limitHigh = limitLow + 0.1;
             }
         }
-
-        notifyChange();
         updateHistory();
     }
 }
@@ -1837,14 +1823,12 @@ void CGisItemTrk::setColorizeSource(QString src)
 void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
     limitLow = limit;
-    notifyChange();
     updateHistory();
 }
 
 void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
     limitHigh = limit;
-    notifyChange();
     updateHistory();
 }
 
@@ -2059,9 +2043,7 @@ void CGisItemTrk::setColor(int idx)
     if(idx < TRK_N_COLORS)
     {
         setColor(IGisItem::colorMap[idx].color);
-        //changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
         updateHistory();
-        notifyChange();
     }
 }
 
@@ -2080,7 +2062,6 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
 
     deriveSecondaryData();
     changed(QObject::tr("Changed activity to '%1' for complete track.").arg(name), icon);
-    notifyChange();
 }
 
 void CGisItemTrk::setActivity()
@@ -2155,7 +2136,6 @@ void CGisItemTrk::setActivity()
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
     changed(QObject::tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
-    notifyChange();
 }
 
 
@@ -2176,7 +2156,7 @@ void CGisItemTrk::setColor(const QColor& c)
     bullet = QPixmap(IGisItem::colorMap[colorIdx].bullet);
 
     setIcon(color2str(color));
-    notifyChange();
+    updateVisuals(eVisualColorLegend);
 }
 
 void CGisItemTrk::setIcon(const QString& iconColor)
@@ -2506,9 +2486,36 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
 void CGisItemTrk::changed(const QString& what, const QString& icon)
 {
     IGisItem::changed(what, icon);
-    if(!dlgDetails.isNull())
+    updateVisuals(eVisualAll);
+}
+
+void CGisItemTrk::updateHistory()
+{
+    IGisItem::updateHistory();
+    updateVisuals(eVisualAll);
+}
+
+
+void CGisItemTrk::updateVisuals(quint32 visuals)
+{
+    if(!dlgDetails.isNull() && (visuals & eVisualDetails))
     {
         dlgDetails->setupGui();
     }
-}
 
+    if(visuals & eVisualPlots)
+    {
+        foreach(IPlot * plot, registeredPlots)
+        {
+            plot->updateData();
+        }
+    }
+
+    if(visuals & eVisualColorLegend)
+    {
+        foreach(CColorLegend * legend, registeredColorLegends)
+        {
+            legend->updateData();
+        }
+    }
+}

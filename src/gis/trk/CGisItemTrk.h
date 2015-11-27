@@ -22,7 +22,6 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
-#include "helpers/INotifiable.h"
 
 #include <QPen>
 #include <QPointer>
@@ -39,6 +38,7 @@ class IQlgtOverlay;
 class QDir;
 class CProgressDialog;
 class CPropertyTrk;
+class CColorLegend;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
@@ -681,11 +681,29 @@ private:
        @param icon  An icon string
      */
     void changed(const QString& what, const QString& icon);
+    /**
+       @brief Overide IGisItem::updateHistory() method
+
+        same as changed();
+
+     */
+    void updateHistory();
 
     /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);
     /// setup track icon by color
     void setIcon(const QString& iconColor);
+
+    enum visual_e
+    {
+        eVisualNone = 0
+        , eVisualColorLegend = 0x1
+        , eVisualPlots = 0x2
+        , eVisualDetails = 0x4
+        , eVisualAll = -1
+    };
+
+    void updateVisuals(quint32 visuals);
 
 public:
     struct trkpt_t : public wpt_t
@@ -790,8 +808,8 @@ public:
         return trk;
     }
 
-    void registerNotification(INotifiable *obj);
-    void unregisterNotification(INotifiable *obj);
+    void registerColorLegend(CColorLegend *obj);
+    void unregisterColorLegend(CColorLegend *obj);
 
 private:
     /// this is the GPX structure oriented data of the track
@@ -859,8 +877,8 @@ private:
      */
     QSet<IPlot*> registeredPlots;
 
-    QSet<INotifiable*> notifyOnChange;
-    void notifyChange();
+    QSet<CColorLegend*> registeredColorLegends;
+
 
     /**
         \defgroup FocusRange Variables to handle mouse focus and range selection
@@ -898,6 +916,7 @@ private:
 
     /// the track's details dialog if any
     QPointer<CDetailsTrk> dlgDetails;
+
     /// the track's screen option if visible
     QPointer<CScrOptTrk>  scrOpt;
 

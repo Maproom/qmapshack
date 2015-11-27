@@ -22,7 +22,7 @@
 class INotifiable
 {
 public:
-    virtual ~INotifiable() {};
+    virtual ~INotifiable() = default;
     virtual void notify() = 0;
 };
 

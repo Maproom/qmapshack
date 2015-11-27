@@ -251,7 +251,6 @@ endif(WIN32)
 
 
 set( HDRS
-
     version.h
     GeoMath.h
     CMainWindow.h
@@ -279,6 +278,7 @@ set( HDRS
     helpers/CCommandProcessor.h
     helpers/CAppSetup.h
     helpers/CDraw.h
+    helpers/INotifiable.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h

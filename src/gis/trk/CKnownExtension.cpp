@@ -19,6 +19,10 @@
 #include "gis/trk/CKnownExtension.h"
 #include "units/IUnit.h"
 
+const QString CKnownExtension::internalSlope = "::ql:slope";
+const QString CKnownExtension::internalSpeed = "::ql:speed";
+const QString CKnownExtension::internalEle   = "::ql:ele";
+
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 
 CKnownExtension::CKnownExtension(QString name,
@@ -53,17 +57,17 @@ void CKnownExtension::init(IUnit &units)
 
     knownExtensions =
     {
-        {"slope",
-         { QObject::tr("Slope (directed)"), -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
+        {internalSlope,
+         { QObject::tr("Slope (directed, derived)"), -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }}
         },
 
-        {"speed",
-         { QObject::tr("Speed"), 1., 14., 0., 600., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
+        {internalSpeed,
+         { QObject::tr("Speed (derived)"), 1., 14., 0., 600., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
         },
 
-        {"ele",
+        {internalEle,
          { QObject::tr("Elevation"), 200., 800., 0., 100000., basefactor, baseunit, "://icons/32x32/CSrcElevation.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
@@ -119,6 +123,32 @@ void CKnownExtension::init(IUnit &units)
         {"tp1:TrackPointExtension|tp1:depth",
          { QObject::tr("Depth"), 0., 200., 0., 12000., basefactor, baseunit, "://icons/32x32/CSrcDepth.png", true,
            getExtensionValueFunc("tp1:TrackPointExtension|tp1:depth")}
+        },
+
+        // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
+        {"heartrate",
+         { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+           getExtensionValueFunc("heartrate")}
+        },
+
+        {"cadence",
+         { QObject::tr("Cadence"), 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true,
+           getExtensionValueFunc("cadence")}
+        },
+
+        {"speed",
+         { QObject::tr("Speed"), 1., 14., 0., 600., speedfactor, speedunit, "://icons/32x32/CSrcSpeed.png", true,
+           getExtensionValueFunc("speed")}
+        },
+
+        {"acceleration",
+         { QObject::tr("Acceleration"), -9.82, 9.82, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), basefactor, baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true,
+           getExtensionValueFunc("acceleration")}
+        },
+
+        {"course",
+         { QObject::tr("Course"), -3.2, 3.2, -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true,
+           getExtensionValueFunc("course")}
         }
     };
 }

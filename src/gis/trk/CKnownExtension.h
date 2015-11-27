@@ -28,6 +28,10 @@ class CKnownExtension
 public:
     static void init(IUnit &units);
 
+    static const QString internalSlope;
+    static const QString internalSpeed;
+    static const QString internalEle;
+
     static const CKnownExtension get(const QString &name);
     static bool isKnown(const QString &name);
 

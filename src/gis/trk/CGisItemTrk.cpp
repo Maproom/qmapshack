@@ -721,7 +721,10 @@ void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2)
 
 static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
 {
-    extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
+    if(NOFLOAT != val)
+    {
+        extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
+    }
 }
 
 void CGisItemTrk::updateExtremaAndExtensions()
@@ -761,11 +764,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
                 }
             }
 
-            if(NOFLOAT != pt.speed)
-            {
-                updateExtrema(extremaSpeed, pt.speed);
-            }
-
+            updateExtrema(extremaSpeed, pt.speed);
             updateExtrema(extremaEle,   pt.ele);
             updateExtrema(extremaSlope, pt.slope1);
         }
@@ -773,20 +772,20 @@ void CGisItemTrk::updateExtremaAndExtensions()
 
     if(extremaEle.min < extremaEle.max)
     {
-        existingExtensions << "ele";
-        extrema["ele"] = extremaEle;
+        existingExtensions << CKnownExtension::internalEle;
+        extrema[CKnownExtension::internalEle] = extremaEle;
     }
 
     if(extremaSlope.min < extremaSlope.max)
     {
-        existingExtensions << "slope";
-        extrema["slope"] = extremaSlope;
+        existingExtensions << CKnownExtension::internalSlope;
+        extrema[CKnownExtension::internalSlope] = extremaSlope;
     }
 
     if(numeric_limits<qreal>::max() != extremaSpeed.min)
     {
-        existingExtensions << "speed";
-        extrema["speed"] = extremaSpeed;
+        existingExtensions << CKnownExtension::internalSpeed;
+        extrema[CKnownExtension::internalSpeed] = extremaSpeed;
     }
 
     existingExtensions.subtract(nonRealExtensions);
@@ -841,15 +840,15 @@ void CGisItemTrk::deriveSecondaryData()
         trkseg_t& seg = trk.segs[s];
 
         for(int p = 0; p < seg.pts.size(); p++)
-        {            
-            trkpt_t& trkpt = seg.pts[p];            
+        {
+            trkpt_t& trkpt = seg.pts[p];
 
             trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.flags & trkpt_t::eHidden)
             {
                 trkpt.reset();
                 continue;
-            }            
+            }
             trkpt.idxVisible = cntVisiblePoints++;
             lintrk << &trkpt;
 

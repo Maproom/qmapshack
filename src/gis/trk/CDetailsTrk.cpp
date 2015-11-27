@@ -193,7 +193,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     // this is good because the signals are connected at this point
     // invoking the slots
     cfg.beginGroup("TrackDetails");
-    i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());
+    i = comboGraph2->findData(cfg.value("propGraph2", CKnownExtension::internalSpeed).toString());
     if(i != NOIDX)
     {
         comboGraph2->setCurrentIndex(i);

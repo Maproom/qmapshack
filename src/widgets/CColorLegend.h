@@ -37,7 +37,7 @@ public:
     void setUnit(const QString &unit);
 
     void updateData();
-    void setMouseFocus(const CGisItemTrk::trkpt_t * pt){}
+    void setMouseFocus(const CGisItemTrk::trkpt_t * pt);
     void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2){}
     void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt){}
 
@@ -56,9 +56,10 @@ private:
     QString unit;
     qreal minimum;
     qreal maximum;
-    bool background = false;
-    int xOffset    = 1;
-    CGisItemTrk *trk = nullptr;
+    bool background     = false;
+    int xOffset         = 1;
+    CGisItemTrk *trk    = nullptr;
+    qreal val           = NOFLOAT;
 };
 
 #endif // CCOLORLEGEND_H

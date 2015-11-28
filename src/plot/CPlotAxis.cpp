@@ -164,7 +164,7 @@ const QString CPlotAxis::fmtsgl( qreal val )
         if ( exponent >= 0 )
         {
             f = "%" + QString( "%1" ).arg( ( int ) ( exponent + 1 ) );
-            if ( ( exponent == 0 ) && ( residue < 0 ) )
+            if ( ( exponent == 0 ) /*&& ( residue < 0 )*/ )
             {
                 f += ".1f";
             }

@@ -146,7 +146,7 @@ protected:
        The checkbox of active items will be set checked.
 
        @param activeChildren     a set of item keys that are active on the workspace
-    */
+     */
     virtual void addChildren(const QSet<QString> &activeChildren);
 
     /**
@@ -156,7 +156,7 @@ protected:
 
        @param idParent      the 64bit database key of the parent folder
        @param idFolder      the 64bit database key of the child folder to be removed
-    */
+     */
     virtual void remove(quint64 idParent, quint64 idFolder);
 
     QSqlDatabase& db;

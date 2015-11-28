@@ -459,7 +459,7 @@ protected:
     /// setup the history structure right after the creation of the item
     void setupHistory();
     /// update current history entry (e.g. to save the flags)
-    void updateHistory();
+    virtual void updateHistory();
     /// convert a color string from GPX to a QT color
     QColor str2color(const QString& name);
     /// convert a QT color to a string to be used in a GPX file

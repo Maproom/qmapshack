@@ -88,7 +88,6 @@ void CGisItemTrk::filterReducePoints(qreal dist)
                     nothingDone = false;
                     pt.flags |=  trkpt_t::eHidden;
                 }
-
             }
 
             cnt++;
@@ -120,7 +119,7 @@ void CGisItemTrk::filterRemoveNullPoints()
             trkpt_t& pt = seg.pts[n];
 
             if( (NOFLOAT == pt.lat || 0. == pt.lat)
-             && (NOFLOAT == pt.lon || 0. == pt.lon) )
+                && (NOFLOAT == pt.lon || 0. == pt.lon) )
             {
                 pt.flags |= trkpt_t::eHidden;
                 nothingDone = false;

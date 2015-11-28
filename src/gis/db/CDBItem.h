@@ -46,7 +46,7 @@ public:
 
     /**
        @brief Delete the folder/item relation in the database
-    */
+     */
     void remove();
 
 private:

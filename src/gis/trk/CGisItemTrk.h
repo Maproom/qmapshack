@@ -22,7 +22,6 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
-#include "helpers/INotifiable.h"
 
 #include <QPen>
 #include <QPointer>
@@ -39,12 +38,14 @@ class IQlgtOverlay;
 class QDir;
 class CProgressDialog;
 class CPropertyTrk;
+class CColorLegend;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
 
 #include <QDebug>
 
+class INotifyTrk;
 
 class CGisItemTrk : public IGisItem, public IGisLine
 {
@@ -62,6 +63,15 @@ public:
     {
         eModeNormal
         , eModeRange
+    };
+
+    enum visual_e
+    {
+        eVisualNone = 0
+        , eVisualColorLegend = 0x1
+        , eVisualPlot = 0x2
+        , eVisualDetails = 0x4
+        , eVisualAll = -1
     };
 
     /**
@@ -456,7 +466,7 @@ public:
 
        @param plot
      */
-    void registerPlot(IPlot * plot);
+    void registerVisual(INotifyTrk * visual);
 
     /**
        @brief Each plot widget that operates on the track must unregister during it's destruction
@@ -465,7 +475,7 @@ public:
 
        @param plot
      */
-    void unregisterPlot(IPlot * plot);
+    void unregisterVisual(INotifyTrk * visual);
 
     /**
        @brief Use point with the distance from start matching best the given distance.
@@ -693,11 +703,24 @@ private:
        @param icon  An icon string
      */
     void changed(const QString& what, const QString& icon);
+    /**
+       @brief Overide IGisItem::updateHistory() method
+
+        same as changed();
+
+     */
+    void updateHistory();
 
     /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);
     /// setup track icon by color
     void setIcon(const QString& iconColor);
+
+    void updateVisuals(quint32 visuals, const QString &who);
+    void setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt);
+    void setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
+    void setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt);
+
 
 public:
     struct trkpt_t : public wpt_t
@@ -802,9 +825,6 @@ public:
         return trk;
     }
 
-    void registerNotification(INotifiable *obj);
-    void unregisterNotification(INotifiable *obj);
-
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;
@@ -851,7 +871,7 @@ private:
 
 
     /**
-        A list of plot objects that need to get informed on any change in data.
+        A list of INotifyTrk objects that need to get informed on any change in data.
 
         @note This is necessary because QTreeWidgetItem is not derived from QObject.
               Thus no signals and slots can be handled. Probably this is because the
@@ -859,20 +879,21 @@ private:
               amount of items.
 
               Anyway we need some kind of signaling between the track object and the
-              plot objects displaying the data. And we have to keep in mind that
+              INotifyTrk objects displaying the data. And we have to keep in mind that
               the track can be delete by the user at any time. That is why no other
               object is allowed to save a pointer to the track. It must store the
               key. But accessing the track via key is expensive.
 
               That is why we make an exception here. As the track will delete all
-              registered plot objects upon destruction, it should be ok to store
-              the track object in the plot object, too. By that plot and track can
+              registered INotifyTrk objects upon destruction, it should be ok to store
+              the track object in the INotifyTrk object, too. By that INotifyTrk and track can
               easily communicate with each other.
-     */
-    QSet<IPlot*> registeredPlots;
 
-    QSet<INotifiable*> notifyOnChange;
-    void notifyChange();
+        @note CDetailsTrk is an INotifyTrk, too. But it is a bit special as it has to be destroyed
+              right after all other INotifyTrk have been destroyed. That is why it is not part of
+              that set.
+     */
+    QSet<INotifyTrk*> registeredVisuals;
 
     /**
         \defgroup FocusRange Variables to handle mouse focus and range selection
@@ -910,6 +931,7 @@ private:
 
     /// the track's details dialog if any
     QPointer<CDetailsTrk> dlgDetails;
+
     /// the track's screen option if visible
     QPointer<CScrOptTrk>  scrOpt;
 
@@ -920,6 +942,20 @@ private:
     CPropertyTrk * propHandler = nullptr;
 
     friend class CSlfReader;
+};
+
+class INotifyTrk
+{
+public:
+    INotifyTrk(CGisItemTrk::visual_e mask) : mask(mask){}
+    virtual ~INotifyTrk() = default;
+
+    virtual void updateData() = 0;
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * pt) = 0;
+    virtual void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2) = 0;
+    virtual void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) = 0;
+
+    const CGisItemTrk::visual_e mask;
 };
 
 using fTrkPtGetVal = std::function<qreal(const CGisItemTrk::trkpt_t&)>;

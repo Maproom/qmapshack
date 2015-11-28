@@ -19,14 +19,14 @@
 #ifndef CDETAILSTRK_H
 #define CDETAILSTRK_H
 
+#include "gis/trk/CGisItemTrk.h"
 #include "plot/CPlot.h"
 #include "ui_IDetailsTrk.h"
 #include <QWidget>
 
-class CGisItemTrk;
 class CPlotProfile;
 
-class CDetailsTrk : public QWidget, private Ui::IDetailsTrk
+class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk
 {
     Q_OBJECT
 public:
@@ -38,7 +38,7 @@ public:
     void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
 
 public slots:
-    void setupGui();
+    void updateData();
 
 private slots:
     void slotShowPlots();

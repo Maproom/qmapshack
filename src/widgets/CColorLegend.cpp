@@ -17,12 +17,16 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "widgets/CColorLegend.h"
 
 #include <QtWidgets>
 
 CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
-    : QWidget(parent), trk(trk)
+    : QWidget(parent)
+    , INotifyTrk(CGisItemTrk::eVisualColorLegend)
+    , trk(trk)
 {
     colorRect = QRect(0, 0, colorWidth, colorHeight);
     colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
@@ -32,10 +36,10 @@ CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
         background = true;
         xOffset = 5;
 
-        trk->registerNotification(this);
+        trk->registerVisual(this);
 
         // read data from trk
-        notify();
+        updateData();
     }
 }
 
@@ -43,11 +47,28 @@ CColorLegend::~CColorLegend()
 {
     if(trk)
     {
-        trk->unregisterNotification(this);
+        trk->unregisterVisual(this);
     }
 }
 
-void CColorLegend::notify()
+void CColorLegend::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
+{
+    if(pt == 0)
+    {
+        val = NOFLOAT;
+        return;
+    }
+
+    QString colorSource = trk->getColorizeSource();
+    auto valueFunc      = CKnownExtension::get(colorSource).valueFunc;
+    const qreal factor  = CKnownExtension::get(colorSource).factor;
+
+    val = factor * valueFunc(*pt);
+    val = qMin(val, maximum);
+    val = qMax(val, minimum);
+}
+
+void CColorLegend::updateData()
 {
     if(!trk->getColorizeSource().isEmpty())
     {
@@ -175,6 +196,13 @@ void CColorLegend::paintEvent(QPaintEvent *event)
         {
             setMinimumWidth(reqWidth + 5);
             resize(reqWidth + 5, height());
+        }
+
+        if(val != NOFLOAT)
+        {
+            qreal y = qFloor(colorRect.bottom() - (val - minimum) * (colorRect.height()-1)/(maximum - minimum));
+            p.setPen(QPen(Qt::darkGray, 2));
+            p.drawLine(colorRect.left() + 2, y, colorRect.right() - 2, y);
         }
 
         p.end();

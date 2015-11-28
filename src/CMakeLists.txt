@@ -280,7 +280,6 @@ set( HDRS
     helpers/CCommandProcessor.h
     helpers/CAppSetup.h
     helpers/CDraw.h
-    helpers/INotifiable.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/IDrawContext.h

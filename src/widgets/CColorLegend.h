@@ -19,11 +19,12 @@
 #ifndef CCOLORLEGEND_H
 #define CCOLORLEGEND_H
 
-#include "gis/trk/CGisItemTrk.h"
-#include "helpers/INotifiable.h"
+
 #include <QWidget>
 
-class CColorLegend : public QWidget, public INotifiable
+#include "gis/trk/CGisItemTrk.h"
+
+class CColorLegend : public QWidget, public INotifyTrk
 {
     Q_OBJECT
 public:
@@ -35,7 +36,11 @@ public:
 
     void setUnit(const QString &unit);
 
-    void notify();
+    void updateData();
+    void setMouseFocus(const CGisItemTrk::trkpt_t * pt);
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2){}
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt){}
+
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -51,9 +56,10 @@ private:
     QString unit;
     qreal minimum;
     qreal maximum;
-    bool background = false;
-    int xOffset    = 1;
-    CGisItemTrk *trk = nullptr;
+    bool background     = false;
+    int xOffset         = 1;
+    CGisItemTrk *trk    = nullptr;
+    qreal val           = NOFLOAT;
 };
 
 #endif // CCOLORLEGEND_H

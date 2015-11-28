@@ -934,6 +934,7 @@ class INotifyTrk
 {
 public:
     INotifyTrk(CGisItemTrk::visual_e mask) : mask(mask){}
+    virtual ~INotifyTrk() = default;
 
     virtual void updateData() = 0;
     virtual void setMouseFocus(const CGisItemTrk::trkpt_t * pt) = 0;

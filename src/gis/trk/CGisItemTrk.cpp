@@ -223,7 +223,6 @@ CGisItemTrk::~CGisItemTrk()
 void CGisItemTrk::setSymbol()
 {
     setColor(str2color(trk.color));
-    updateVisuals(eVisualColorLegend);
 }
 
 
@@ -1014,7 +1013,7 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    updateVisuals(eVisualPlots|eVisualDetails);
+    updateVisuals(eVisualPlots|eVisualDetails, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "totalDistance" << totalDistance;
@@ -1155,7 +1154,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         }
     }
 
-    updateVisuals(eVisualDetails|eVisualPlots);
+    updateVisuals(eVisualDetails|eVisualPlots, "findWaypointsCloseBy()");
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
@@ -2152,11 +2151,9 @@ void CGisItemTrk::setColor(const QColor& c)
     }
 
     color  = IGisItem::colorMap[colorIdx].color;
-    qDebug() << color;
     bullet = QPixmap(IGisItem::colorMap[colorIdx].bullet);
 
     setIcon(color2str(color));
-    updateVisuals(eVisualColorLegend);
 }
 
 void CGisItemTrk::setIcon(const QString& iconColor)
@@ -2486,18 +2483,20 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
 void CGisItemTrk::changed(const QString& what, const QString& icon)
 {
     IGisItem::changed(what, icon);
-    updateVisuals(eVisualAll);
+    updateVisuals(eVisualAll, "changed()");
 }
 
 void CGisItemTrk::updateHistory()
 {
     IGisItem::updateHistory();
-    updateVisuals(eVisualAll);
+    updateVisuals(eVisualAll, "updateHistory()");
 }
 
 
-void CGisItemTrk::updateVisuals(quint32 visuals)
+void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
 {
+    qDebug() << "CGisItemTrk::updateVisuals()" << who;
+
     if(!dlgDetails.isNull() && (visuals & eVisualDetails))
     {
         dlgDetails->setupGui();

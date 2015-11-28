@@ -703,7 +703,7 @@ private:
         , eVisualAll = -1
     };
 
-    void updateVisuals(quint32 visuals);
+    void updateVisuals(quint32 visuals, const QString &who);
 
 public:
     struct trkpt_t : public wpt_t

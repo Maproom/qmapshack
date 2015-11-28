@@ -327,15 +327,6 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
-
-//void CGisItemTrk::notifyChange()
-//{
-//    foreach(INotifiable *obj, notifyOnChange)
-//    {
-//        obj->notify();
-//    }
-//}
-
 QString CGisItemTrk::getInfo(bool allowEdit) const
 {
     QString val1, unit1, val2, unit2;

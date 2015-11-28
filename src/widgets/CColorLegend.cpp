@@ -23,7 +23,9 @@
 #include <QtWidgets>
 
 CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
-    : QWidget(parent), trk(trk)
+    : QWidget(parent)
+    , INotifyTrk(CGisItemTrk::eVisualColorLegend)
+    , trk(trk)
 {
     colorRect = QRect(0, 0, colorWidth, colorHeight);
     colorRect.moveCenter(QPoint(xOffset + colorWidth / 2, height() / 2));
@@ -33,7 +35,7 @@ CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
         background = true;
         xOffset = 5;
 
-        trk->registerColorLegend(this);
+        trk->registerVisual(this);
 
         // read data from trk
         updateData();
@@ -44,7 +46,7 @@ CColorLegend::~CColorLegend()
 {
     if(trk)
     {
-        trk->unregisterColorLegend(this);
+        trk->unregisterVisual(this);
     }
 }
 

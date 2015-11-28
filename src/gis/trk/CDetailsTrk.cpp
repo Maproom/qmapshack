@@ -40,6 +40,7 @@
 
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     : QWidget(parent)
+    , INotifyTrk(CGisItemTrk::eVisualDetails)
     , trk(trk)
 {
     setupUi(this);
@@ -77,7 +78,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
 
 
-    setupGui();
+    updateData();
 
     const CPropertyTrk * propHandler = trk.getPropertyHandler();
     propHandler->fillComboBox(comboGraph2);
@@ -184,7 +185,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(btnMaxFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitHighFromData()));
     connect(btnMinFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitLowFromData()));
 
-    connect(listHistory,      SIGNAL(sigChanged()),               this, SLOT(setupGui()));
+    connect(listHistory,      SIGNAL(sigChanged()),               this, SLOT(updateData()));
 
     connect(comboGraph2, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
     connect(comboGraph3, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
@@ -251,13 +252,13 @@ void CDetailsTrk::slotLimitHighFromData()
     slotColorLimitLowChanged();
 }
 
-void CDetailsTrk::setupGui()
+void CDetailsTrk::updateData()
 {
     if(originator)
     {
         return;
     }
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDetailsTrk::setupGui");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDetailsTrk::updateData");
     originator = true;
 
     QString str, val, unit;
@@ -483,7 +484,7 @@ void CDetailsTrk::setupGui()
 
 
     originator = false;
-    CCanvas::restoreOverrideCursor("CDetailsTrk::setupGui");
+    CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
 }
 
 void CDetailsTrk::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
@@ -552,7 +553,7 @@ void CDetailsTrk::slotColorChanged(int idx)
 void CDetailsTrk::slotColorSourceChanged(int idx, float valueLow, float valueHigh)
 {
     trk.setColorizeSource(comboColorSource->itemData(idx).toString());
-    setupGui();
+    updateData();
 }
 
 void CDetailsTrk::slotColorLimitHighChanged()
@@ -582,7 +583,7 @@ void CDetailsTrk::slotColorLimitLowChanged()
 void CDetailsTrk::slotChangeReadOnlyMode(bool on)
 {
     trk.setReadOnlyMode(on);
-    setupGui();
+    updateData();
 }
 
 
@@ -606,7 +607,7 @@ void CDetailsTrk::slotLinkActivated(const QString& url)
             return;
         }
         trk.setName(name);
-        setupGui();
+        updateData();
     }
 }
 
@@ -620,7 +621,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setComment(dlg.getHtml());
         }
-        setupGui();
+        updateData();
     }
     else if(url.toString() == "description")
     {
@@ -630,7 +631,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setDescription(dlg.getHtml());
         }
-        setupGui();
+        updateData();
     }
     else if(url.toString() == "links")
     {
@@ -640,7 +641,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
         {
             trk.setLinks(links);
         }
-        setupGui();
+        updateData();
     }
     else
     {
@@ -654,7 +655,7 @@ void CDetailsTrk::slotActivitySelected(bool checked)
     {
         if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) != QMessageBox::Ok)
         {
-            setupGui();
+            updateData();
             return;
         }
 

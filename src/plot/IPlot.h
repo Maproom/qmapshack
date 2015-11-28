@@ -27,7 +27,7 @@
 class QMenu;
 class CScrOptRangeTrk;
 
-class IPlot : public QWidget
+class IPlot : public QWidget, public INotifyTrk
 {
     Q_OBJECT
 public:
@@ -42,9 +42,8 @@ public:
     IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
     virtual ~IPlot();
 
-    virtual void updateData() = 0;
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) = 0;
-    virtual void setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2);
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2);
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt){}
 
     void save(QImage& image);
     void setSolid(bool yes)

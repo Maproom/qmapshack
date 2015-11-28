@@ -205,15 +205,15 @@ CGisItemTrk::~CGisItemTrk()
         keyUserFocus.clear();
     }
 
-    /**
-        Delete all registered plot as they can't exist without the item.
-        As the plot objects will unregister via unregisterPlot() in their
+    /*
+        Delete all registered INotifyTrk as they can't exist without the item.
+        As the INotifyTrk objects will unregister via unregisterVisual() in their
         destructor things will get a bit complicated here. Better create
         a copy of the list before we start to delete.
      */
-    qDeleteAll(registeredPlots.toList());
-    qDeleteAll(registeredColorLegends.toList());
+    qDeleteAll(registeredVisuals.toList());
 
+    // now it is save to destroy the details dialog
     delete dlgDetails;
 
     // delete it after the detail dialog as it is used by the detail dialog
@@ -317,25 +317,16 @@ void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
     deriveSecondaryData();
 }
 
-void CGisItemTrk::registerPlot(IPlot * plot)
+void CGisItemTrk::registerVisual(INotifyTrk * visual)
 {
-    registeredPlots << plot;
+    registeredVisuals << visual;
 }
 
-void CGisItemTrk::unregisterPlot(IPlot * plot)
+void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
 {
-    registeredPlots.remove(plot);
+    registeredVisuals.remove(visual);
 }
 
-void CGisItemTrk::registerColorLegend(CColorLegend *obj)
-{
-    registeredColorLegends << obj;
-}
-
-void CGisItemTrk::unregisterColorLegend(CColorLegend *obj)
-{
-    registeredColorLegends.remove(obj);
-}
 
 //void CGisItemTrk::notifyChange()
 //{
@@ -1013,7 +1004,7 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    updateVisuals(eVisualPlots|eVisualDetails, "deriveSecondaryData()");
+    updateVisuals(eVisualPlot|eVisualDetails, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "totalDistance" << totalDistance;
@@ -1154,7 +1145,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         }
     }
 
-    updateVisuals(eVisualDetails|eVisualPlots, "findWaypointsCloseBy()");
+    updateVisuals(eVisualDetails|eVisualPlot, "findWaypointsCloseBy()");
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
@@ -2431,16 +2422,8 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     }
     }
 
-    foreach(IPlot * plot, registeredPlots)
-    {
-        plot->setMouseFocus(pt);
-        plot->setMouseRangeFocus(mouseRange1, mouseRange2);
-    }
-    if(!dlgDetails.isNull())
-    {
-        dlgDetails->setMouseFocus(pt);
-        dlgDetails->setMouseRangeFocus(mouseRange1, mouseRange2);
-    }
+    setMouseFocusVisuals(pt);
+    setMouseRangeFocusVisuals(mouseRange1, mouseRange2);
 }
 void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode)
 {
@@ -2450,18 +2433,8 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
         if(pt != mouseMoveFocus)
         {
             mouseMoveFocus = pt;
-
-            foreach(IPlot * plot, registeredPlots)
-            {
-                plot->setMouseFocus(pt);
-                plot->setMouseRangeFocus(0, 0);
-            }
-
-            if(!dlgDetails.isNull())
-            {
-                dlgDetails->setMouseFocus(pt);
-                dlgDetails->setMouseRangeFocus(0, 0);
-            }
+            setMouseFocusVisuals(pt);
+            setMouseRangeFocusVisuals(0, 0);
         }
         break;
 
@@ -2469,10 +2442,7 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
         if(pt != mouseClickFocus)
         {
             mouseClickFocus =  pt;
-            if(!dlgDetails.isNull())
-            {
-                dlgDetails->setMouseClickFocus(pt);
-            }
+            setMouseClickFocusVisuals(pt);
         }
 
     default:
@@ -2499,22 +2469,53 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
 
     if(!dlgDetails.isNull() && (visuals & eVisualDetails))
     {
-        dlgDetails->setupGui();
+        dlgDetails->updateData();
     }
 
-    if(visuals & eVisualPlots)
+    foreach(INotifyTrk * visual, registeredVisuals)
     {
-        foreach(IPlot * plot, registeredPlots)
+        if(visuals & visual->mask)
         {
-            plot->updateData();
+            visual->updateData();
         }
     }
+}
 
-    if(visuals & eVisualColorLegend)
+void CGisItemTrk::setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt)
+{
+    if(!dlgDetails.isNull())
     {
-        foreach(CColorLegend * legend, registeredColorLegends)
-        {
-            legend->updateData();
-        }
+        dlgDetails->setMouseFocus(pt);
+    }
+
+    foreach(INotifyTrk * visual, registeredVisuals)
+    {
+        visual->setMouseFocus(pt);
+    }
+}
+
+void CGisItemTrk::setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2)
+{
+    if(!dlgDetails.isNull())
+    {
+        dlgDetails->setMouseRangeFocus(pt1, pt2);
+    }
+
+    foreach(INotifyTrk * visual, registeredVisuals)
+    {
+        visual->setMouseRangeFocus(pt1, pt2);
+    }
+}
+
+void CGisItemTrk::setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt)
+{
+    if(!dlgDetails.isNull())
+    {
+        dlgDetails->setMouseClickFocus(pt);
+    }
+
+    foreach(INotifyTrk * visual, registeredVisuals)
+    {
+        visual->setMouseClickFocus(pt);
     }
 }

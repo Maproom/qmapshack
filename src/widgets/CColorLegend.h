@@ -22,9 +22,9 @@
 
 #include <QWidget>
 
-class CGisItemTrk;
+#include "gis/trk/CGisItemTrk.h"
 
-class CColorLegend : public QWidget
+class CColorLegend : public QWidget, public INotifyTrk
 {
     Q_OBJECT
 public:
@@ -37,6 +37,10 @@ public:
     void setUnit(const QString &unit);
 
     void updateData();
+    void setMouseFocus(const CGisItemTrk::trkpt_t * pt){}
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2){}
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt){}
+
 
 protected:
     void paintEvent(QPaintEvent *event);

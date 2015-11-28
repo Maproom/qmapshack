@@ -44,7 +44,7 @@ CPlotProfile::~CPlotProfile()
 void CPlotProfile::setTrack(CGisItemTrk * track)
 {
     trk = track;
-    trk->registerPlot(this);
+    trk->registerVisual(this);
 
     updateData();
 }

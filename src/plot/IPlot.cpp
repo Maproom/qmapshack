@@ -58,6 +58,7 @@ int IPlot::cnt = 0;
 
 IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
     : QWidget(parent)
+    , INotifyTrk(CGisItemTrk::eVisualPlot)
     , mode(mode)
     , trk(trk)
     , fm(font())
@@ -70,7 +71,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
     if(trk)
     {
-        trk->registerPlot(this);
+        trk->registerVisual(this);
     }
 
     data = new CPlotData(type, this);
@@ -101,7 +102,7 @@ IPlot::~IPlot()
 
     if(trk)
     {
-        trk->unregisterPlot(this);
+        trk->unregisterVisual(this);
         /*
             Always set the mode to normal. If the object is not owner
             of the current mode, the request will be ignored.

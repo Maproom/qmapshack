@@ -25,6 +25,7 @@
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/slf/CSlfProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
@@ -100,6 +101,10 @@ void CGisWidget::loadGisProject(const QString& filename)
     else if(suffix == "qms")
     {
         item = new CQmsProject(filename, treeWks);
+    }
+    else if(suffix == "slf")
+    {
+        item = new CSlfProject(filename, treeWks);
     }
 
     if(item && !item->isValid())

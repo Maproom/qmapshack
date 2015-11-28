@@ -42,6 +42,7 @@ public:
         , eTypeDb
         , eTypeLostFound
         , eTypeTwoNav
+        , eTypeSlf       // the Sigma Log Format
     };
 
     enum sorting_e
@@ -87,6 +88,7 @@ public:
     static const QString filedialogAllSupported;
     static const QString filedialogFilterGPX;
     static const QString filedialogFilterQMS;
+    static const QString filedialogFilterSLF;
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 
@@ -452,15 +454,17 @@ protected:
     qint32 cntItemsByType[IGisItem::eTypeMax];
 
     qint32 cntTrkPts = 0;
-    qint32 cntWpts = 0;
+    qint32 cntWpts   = 0;
 
     qreal totalDistance = 0;
-    qreal totalAscend = 0;
-    qreal totalDescend = 0;
+    qreal totalAscend   = 0;
+    qreal totalDescend  = 0;
     quint32 totalElapsedSeconds = 0;
     quint32 totalElapsedSecondsMoving = 0;
 
     QString hashTrkWpt[2];
+
+    friend class CSlfReader;
 };
 
 #endif //IGISPROJECT_H

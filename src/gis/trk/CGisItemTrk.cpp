@@ -155,6 +155,14 @@ CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * p
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
+CGisItemTrk::CGisItemTrk(IGisProject *project)
+    : IGisItem(project, eTypeTrk, project->childCount())
+{
+    // --- start read and process data ----
+    setColor(penForeground.color());
+    // --- stop read and process data ----
+
+}
 
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     : IGisItem(project, eTypeTrk, project->childCount())

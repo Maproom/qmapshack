@@ -1,0 +1,239 @@
+/**********************************************************************************************
+    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
+#include "gis/slf/CSlfReader.h"
+
+#include <QTextStream>
+#include <QDateTime>
+#include <QFile>
+#include <QFileInfo>
+#include <QDebug>
+
+#include "CMainWindow.h"
+#include "gis/slf/CSlfProject.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+
+void CSlfReader::readFile(const QString &file, CSlfProject *proj)
+{
+    CSlfReader reader(file, proj);
+}
+
+static QDateTime parseSlfTimestamp(const QString &ts)
+{
+    int posOfGMT = ts.indexOf("GMT");
+    int deltaGMT = 0;
+    if(' ' != ts[posOfGMT + 3])
+    {
+        QString deltaGMTStr = ts.mid(posOfGMT + 3);
+        QTextStream(&deltaGMTStr) >> deltaGMT;
+    }
+
+    QString pts = ts.left(posOfGMT - 1) + ts.mid(posOfGMT + 8);
+    const QDateTime &baseTime = QDateTime::fromString(pts, "ddd MMM d HH:mm:ss yyyy");
+
+    return baseTime.addSecs( (deltaGMT / 100) * 60 * 60 );
+}
+
+CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj), filename(filename)
+{
+    QFile file(filename);
+
+    // if the file does not exist, the filename is assumed to be a name for a new project
+    if(!file.exists())
+    {
+        throw QObject::tr("%1 does not exist").arg(filename);
+    }
+
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        throw QObject::tr("Failed to open %1").arg(filename);
+    }
+
+    // load file content to xml document
+    QDomDocument xml;
+    QString msg;
+    int line;
+    int column;
+    if(!xml.setContent(&file, false, &msg, &line, &column))
+    {
+        file.close();
+        throw QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
+    }
+    file.close();
+
+    QDomElement xmlAct = xml.documentElement();
+    if(xmlAct.tagName() != "Activity")
+    {
+        throw QObject::tr("Not a SLF file: %1").arg(filename);
+    }
+
+    // Ensure we only open files with the correct version (only revision 400 supported atm)
+    const int revision = xmlAct.attributes().namedItem("revision").nodeValue().toInt();
+    if(400 != revision)
+    {
+        throw QObject::tr("Unsupported revision %1: %2").arg(revision).arg(filename);
+    }
+
+    // Parse the file's dateCode
+    // This is a crucial step, as all the other timestamps are relative to this one
+    const QString &dateCode = xmlAct.namedItem("Computer").attributes().namedItem("dateCode").nodeValue();
+    baseTime = parseSlfTimestamp(dateCode);
+
+    const QDomNode& xmlGI = xmlAct.namedItem("GeneralInformation");
+    if(xmlGI.isElement())
+    {
+        readMetadata(xmlGI, proj->metadata);
+    }
+
+    // Read all the Markers
+    // This needs to be done prior to reading the Entries, as they contain the
+    // locations at which we need to split the track into segments
+    //readMarkers(xmlAct.firstChildElement("Markers"));
+    readMarkers(xmlAct.namedItem("Markers"));
+
+    // Now read the "Entries"
+    // Entrys are the actual waypoints, which make up the track(s)
+    readEntries(xmlAct.namedItem("Entries"));
+}
+
+void CSlfReader::readMarkers(const QDomNode& xml)
+{
+    const QDomNodeList& xmlMrks = xml.childNodes();
+
+    for(int i = 0; i < xmlMrks.count(); i++)
+    {
+        const QDomNamedNodeMap& attr = xmlMrks.item(i).attributes();
+
+        // type="l" indicates a marker, which is used to separate two laps
+        const QString &type = attr.namedItem("type").nodeValue();
+        if("l" == type)
+        {
+            laps.append(attr.namedItem("distanceAbsolute").nodeValue().toDouble());
+        }
+        else
+        {
+            qreal lat = attr.namedItem("latitude" ).nodeValue().toDouble();
+            qreal lon = attr.namedItem("longitude").nodeValue().toDouble();
+
+            QString name = attr.namedItem("title").nodeValue();
+            if(name.isEmpty())
+            {
+                if("p" == type)
+                {
+                    name = QObject::tr("Break %1").arg(attr.namedItem("number").nodeValue());
+                }
+            }
+
+            qreal ele             = attr.namedItem("altitude"   ).nodeValue().toDouble() / 1000.;
+            const QString &desc   = attr.namedItem("description").nodeValue();
+            const QDateTime &time = baseTime.addSecs(attr.namedItem("timeAbsolute").nodeValue().toDouble() / 100.);
+
+            new CGisItemWpt(QPointF(lon, lat), ele, time, name, /* default icon */ "", proj);
+        }
+    }
+
+    laps.append(std::numeric_limits<qreal>::max());
+}
+
+void CSlfReader::readEntries(const QDomNode& xml)
+{
+    const QDomNodeList& xmlEntrs = xml.childNodes();
+
+    // .slf does not know extensions, but we are using them internally.
+    // This makes saving as .gpx easy and conforms to the internal way of doing
+    // things.
+    const QHash<QString, QString> attrToExt =
+    {
+        {"temperature", "gpxtpx:TrackPointExtension|gpxtpx:atemp"},
+        {"heartrate",   "gpxtpx:TrackPointExtension|gpxtpx:hr"   },
+        {"cadence",     "gpxtpx:TrackPointExtension|gpxtpx:cad"  },
+        {"speed",       "speed"}
+    };
+
+    // Iterate over all entries and search for 0-only attributes.
+    // Sigma Data Center seems to store even non-used values (as 0),
+    // but we do not want to include that within our extensions
+    QSet<QString> usedAttr;
+    for(int i = 0; i < xmlEntrs.count(); i++)
+    {
+        const QDomNamedNodeMap &attr = xmlEntrs.item(i).attributes();
+
+        foreach(const QString &key, attrToExt.keys())
+        {
+            if(attr.contains(key) && ("0" != attr.namedItem(key).nodeValue()))
+            {
+                usedAttr.insert(key);
+            }
+        }
+    }
+
+    // Now generate the track / segments
+    int lap = 0;
+    CGisItemTrk *trk = new CGisItemTrk(proj);
+    trk->trk.segs.resize(laps.count() + 1);
+    CGisItemTrk::trkseg_t *seg = &(trk->trk.segs[0]);
+
+    for(int i = 0; i < xmlEntrs.count(); i++)
+    {
+        CGisItemTrk::trkpt_t trkpt;
+
+        const QDomNamedNodeMap& attr = xmlEntrs.item(i).attributes();
+        trkpt.lat  = attr.namedItem("latitude" ).nodeValue().toDouble();
+        trkpt.lon  = attr.namedItem("longitude").nodeValue().toDouble();
+
+        if(0. == trkpt.lat && 0. == trkpt.lon)
+        {
+            continue;
+        }
+
+        trkpt.ele  = attr.namedItem("altitude" ).nodeValue().toDouble() / 1000.;
+        trkpt.time = baseTime.addSecs( attr.namedItem("trainingTimeAbsolute").nodeValue().toLong() / 100 );
+
+        foreach(const QString &key, usedAttr)
+        {
+            if(attr.contains(key))
+            {
+                trkpt.extensions[attrToExt[key]] = attr.namedItem(key).nodeValue().toDouble();
+            }
+        }
+
+        qreal dist = attr.namedItem("distanceAbsolute").nodeValue().toDouble();
+        if(dist > laps[lap])
+        {
+            lap++;
+            seg = &(trk->trk.segs[lap]);
+        }
+
+        seg->pts.append(trkpt);
+    }
+    trk->postInit();
+}
+
+void CSlfReader::readMetadata(const QDomNode& xml, IGisProject::metadata_t& metadata)
+{
+    metadata.name     = xml.namedItem("name"       ).firstChild().nodeValue();
+    metadata.desc     = xml.namedItem("description").firstChild().nodeValue();
+    metadata.keywords = xml.namedItem("sport"      ).firstChild().nodeValue();
+}
+
+CSlfProject* CSlfReader::getProject()
+{
+    return proj;
+}
+

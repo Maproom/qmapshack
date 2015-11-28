@@ -38,6 +38,22 @@
 
 IGisItem::key_t CGisItemWpt::keyUserFocus;
 
+CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project)
+    : IGisItem(project, eTypeWpt, NOIDX)
+{
+    wpt.name    = name;
+    wpt.sym     = icon;
+    wpt.lon     = pos.x();
+    wpt.lat     = pos.y();
+    wpt.ele     = (ele == NOFLOAT) ? NOINT : qRound(ele);
+    wpt.time    = time;
+
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
+    setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
 /// used to add a new waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
     : IGisItem(project, eTypeWpt, NOIDX)

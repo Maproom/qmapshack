@@ -80,7 +80,7 @@ CGpxProject::~CGpxProject()
 
 void CGpxProject::loadGpx(const QString& filename)
 {
-    // cerate file instance
+    // create file instance
     QFile file(filename);
 
     // if the file does not exist, the filename is assumed to be a name for a new project

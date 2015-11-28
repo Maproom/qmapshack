@@ -83,6 +83,8 @@ public:
         QString fileName;
     };
 
+    CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project);
+
     /**
        @brief Create a completely new waypoint
        @param pos       the waypoint's position [°]
@@ -325,10 +327,10 @@ private:
 
     QPointer<CScrOptWpt> scrOpt;
 
-    bool doBubble = false;
-    bool doSpecialCursor = false;
-    bool doBubbleMove = false;
-    bool doBubbleSize = false;
+    bool doBubble          = false;
+    bool doSpecialCursor   = false;
+    bool doBubbleMove      = false;
+    bool doBubbleSize      = false;
     bool mouseIsOverBubble = false;
     QRect rectBubble;
     QRect rectBubbleMove {0,0,16,16};
@@ -340,5 +342,5 @@ private:
     quint32 widthBubble = 300;
 };
 
-#endif //CGISITEMWPT_H
+#endif // CGISITEMWPT_H
 

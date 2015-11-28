@@ -142,6 +142,8 @@ set( SRCS
     gis/gpx/serialization.cpp
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
+    gis/slf/CSlfProject.cpp
+    gis/slf/CSlfReader.cpp
     gis/tnv/CTwoNavProject.cpp
     gis/tnv/serialization.cpp
     gis/db/IDB.cpp
@@ -414,6 +416,8 @@ set( HDRS
     gis/ovl/CScrOptOvlArea.h
     gis/ovl/CDetailsOvlArea.h    
     gis/gpx/CGpxProject.h
+    gis/slf/CSlfProject.h
+    gis/slf/CSlfReader.h
     gis/search/CSearchGoogle.h
     plot/IPlot.h
     plot/CPlotAxis.h

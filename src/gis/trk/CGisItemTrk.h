@@ -122,6 +122,8 @@ public:
 
     CGisItemTrk(const IQlgtOverlay& ovl);
 
+    CGisItemTrk(IGisProject *project);
+
     virtual ~CGisItemTrk();
 
     /**
@@ -591,6 +593,16 @@ private:
        @param filename
      */
     bool readTwoNav(const QString& filename);
+public:
+    void postInit()
+    {
+        setupHistory();
+        updateDecoration(eMarkNone, eMarkNone);
+        deriveSecondaryData();
+    }
+
+
+private:
     /**
        @brief Derive secondary data from the track data
 
@@ -906,6 +918,8 @@ private:
 
     /// all functions and data concerning graphs
     CPropertyTrk * propHandler = nullptr;
+
+    friend class CSlfReader;
 };
 
 using fTrkPtGetVal = std::function<qreal(const CGisItemTrk::trkpt_t&)>;

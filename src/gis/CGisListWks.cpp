@@ -40,6 +40,7 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/slf/CSlfProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -838,6 +839,14 @@ void CGisListWks::slotLoadWorkspace()
             {
                 dbProject->postStatus();
             }
+            break;
+        }
+
+        case IGisProject::eTypeSlf:
+        {
+            project = new CSlfProject(name, this, false);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1d)
+            *project << stream;
             break;
         }
         }

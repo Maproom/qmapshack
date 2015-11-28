@@ -21,23 +21,19 @@
 
 #include "gis/prj/IGisProject.h"
 
-#include <QDateTime>
-#include <QDomElement>
-#include <QUrl>
-
 class CGisListWks;
 class CGisDraw;
 
 class CSlfProject : public IGisProject
 {
 public:
-    CSlfProject(const QString &filename, CGisListWks * parent, bool readFile = true);
+    CSlfProject(const QString &filename, CGisListWks *parent, bool readFile = true);
     virtual ~CSlfProject();
 
-    bool save();
-    bool saveAs();
-
-    static bool saveAs(const QString& fn, IGisProject& project);
+    virtual bool canBeSaved()
+    {
+        return false;
+    }
 
 private:
     void loadSlf(const QString &filename);

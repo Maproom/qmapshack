@@ -94,17 +94,20 @@ CGisListWks::CGisListWks(QWidget *parent)
     db.open();
     configDB();
 
-    menuProjectWks  = new QMenu(this);
-    actionEditPrj   = menuProjectWks->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit.."), this, SLOT(slotEditPrj()));
-    actionShowOnMap = menuProjectWks->addAction(QIcon("://icons/32x32/ShowAll.png"),tr("Show on Map"), this, SLOT(slotShowOnMap()));
-    actionHideFrMap = menuProjectWks->addAction(QIcon("://icons/32x32/ShowNone.png"),tr("Hide from Map"), this, SLOT(slotHideFrMap()));
+    menuProjectWks   = new QMenu(this);
+    actionEditPrj    = menuProjectWks->addAction(QIcon("://icons/32x32/EditDetails.png"), tr("Edit.."         ), this, SLOT(slotEditPrj()));
+    actionShowOnMap  = menuProjectWks->addAction(QIcon("://icons/32x32/ShowAll.png"    ), tr("Show on Map"    ), this, SLOT(slotShowOnMap()));
+    actionHideFrMap  = menuProjectWks->addAction(QIcon("://icons/32x32/ShowNone.png"   ), tr("Hide from Map"  ), this, SLOT(slotHideFrMap()));
+
     menuProjectWks->addSeparator();
-    actionSave      = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"),tr("Save"), this, SLOT(slotSaveProject()));
-    actionSaveAs    = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"),tr("Save As..."), this, SLOT(slotSaveAsProject()));
+    actionSave       = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"    ), tr("Save"           ), this, SLOT(slotSaveProject()));
+    actionSaveAs     = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save As..."     ), this, SLOT(slotSaveAsProject()));
+
     menuProjectWks->addSeparator();
-    actionSyncWksDev= menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"),tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
+    actionSyncWksDev = menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"     ), tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
+
     menuProjectWks->addSeparator();
-    actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"),tr("Close"), this, SLOT(slotCloseProject()));
+    actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"       ), tr("Close"          ), this, SLOT(slotCloseProject()));
 
     menuProjectDev  = new QMenu(this);
     menuProjectDev->addAction(actionEditPrj);
@@ -883,6 +886,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
     // check whether all projects are checked or unchecked...
     bool allChecked   = true;
     bool allUnchecked = true;
+    bool allCantSave  = true;
 
     foreach(QTreeWidgetItem *item, selectedItems())
     {
@@ -898,9 +902,14 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             {
                 allUnchecked = false;
             }
+
+            if(project->canBeSaved())
+            {
+                allCantSave = false;
+            }
         }
 
-        if(!allChecked && !allUnchecked)
+        if(!allChecked && !allUnchecked && !allCantSave)
         {
             break;
         }
@@ -909,6 +918,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
     // ...and disable entries without any effect
     actionShowOnMap->setEnabled(!allChecked);
     actionHideFrMap->setEnabled(!allUnchecked);
+    qDebug() << "allCantSave:" << allCantSave;
+    actionSave->setEnabled(!allCantSave);
 
     if(selectedItems().count() > 1)
     {

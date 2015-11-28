@@ -64,25 +64,3 @@ CSlfProject::~CSlfProject()
 {
 }
 
-
-bool CSlfProject::save()
-{
-    /* TODO: not supported yet */
-    qCritical() << "cannot save to a .slf file, this is not supported yet!";
-    return false;
-}
-
-bool CSlfProject::saveAs()
-{
-    /* TODO: not supported yet */
-    qCritical() << "cannot save to a .slf file, this is not supported yet!";
-    return false;
-}
-
-bool CSlfProject::saveAs(const QString& fn, IGisProject& project)
-{
-    /* TODO: not supported yet */
-    qCritical() << "cannot save to a .slf file, this is not supported yet!";
-    return false;
-}
-

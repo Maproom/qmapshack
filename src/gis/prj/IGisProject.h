@@ -23,6 +23,7 @@
 #include <QMessageBox>
 #include <QPointer>
 #include <QTreeWidgetItem>
+#include <QDebug>
 
 class CGisListWks;
 class IGisItem;
@@ -118,13 +119,30 @@ public:
     void edit();
 
     /**
+       @brief Returns true if a project of given format can be saved, false if it cannot be saved (just as .slf atm)
+     */
+    virtual bool canBeSaved()
+    {
+        return true;
+    }
+
+    /**
        @brief Save the project using it's native format.
      */
-    virtual bool save() = 0;
+    virtual bool save()
+    {
+        qWarning() << "This should never be called!";
+        return false;
+    }
+
     /**
        @brief Save the project selecting one of the available formats.
      */
-    virtual bool saveAs() = 0;
+    virtual bool saveAs()
+    {
+        qWarning() << "This should never be called!";
+        return false;
+    }
 
     virtual void setFilename(const QString& fn)
     {

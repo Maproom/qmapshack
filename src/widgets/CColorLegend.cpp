@@ -200,7 +200,7 @@ void CColorLegend::paintEvent(QPaintEvent *event)
 
         if(val != NOFLOAT)
         {
-            qreal y = colorRect.bottom() - (val - minimum) * colorRect.height()/(maximum - minimum);
+            qreal y = qFloor(colorRect.bottom() - (val - minimum) * (colorRect.height()-1)/(maximum - minimum));
             p.setPen(QPen(Qt::darkGray, 2));
             p.drawLine(colorRect.left() + 2, y, colorRect.right() - 2, y);
         }

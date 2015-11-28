@@ -525,7 +525,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
         const CKnownExtension &ext = CKnownExtension::get(key);
         if(ext.known)
         {
-            str += "\n" + ext.name + ": " + QString("%1%2").arg(ext.valueFunc(pt),0,'f',1).arg(ext.unit);
+            str += "\n" + ext.name + ": " + QString("%1%2").arg(ext.valueFunc(pt)*ext.factor,0,'f',1).arg(ext.unit);
         }
         else
         {

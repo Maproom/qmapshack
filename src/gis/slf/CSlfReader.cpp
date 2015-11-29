@@ -222,6 +222,16 @@ void CSlfReader::readEntries(const QDomNode& xml)
 
         seg->pts.append(trkpt);
     }
+
+    // Remove empty segments
+    for(int i = 0; i < laps.count(); i++)
+    {
+        if(trk->trk.segs[i].pts.isEmpty())
+        {
+            trk->trk.segs.remove(i);
+        }
+    }
+
     trk->postInit();
 }
 

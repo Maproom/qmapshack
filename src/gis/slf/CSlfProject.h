@@ -27,9 +27,14 @@ public:
     CSlfProject(const QString &filename, bool readFile = true);
     virtual ~CSlfProject();
 
-    virtual bool canBeSaved()
+    virtual const QString getFileDialogFilter() override
     {
-        return false;
+        return IGisProject::filedialogFilterSLF;
+    }
+
+    virtual const QString getFileExtension() override
+    {
+        return "slf";
     }
 
 private:

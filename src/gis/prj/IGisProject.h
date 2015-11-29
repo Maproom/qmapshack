@@ -93,8 +93,8 @@ public:
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 
-    IGisProject(type_e type, const QString& filename, CGisListWks * parent);
-    IGisProject(type_e type, const QString &filename, IDevice *parent);
+    IGisProject(type_e type, const QString &filename, CGisListWks *parent);
+    IGisProject(type_e type, const QString &filename, IDevice     *parent);
     virtual ~IGisProject();
 
     /**
@@ -123,26 +123,28 @@ public:
      */
     virtual bool canBeSaved()
     {
-        return true;
+        return false;
+    }
+
+    virtual const QString getFileDialogFilter()
+    {
+        return QString();
+    }
+
+    virtual const QString getFileExtension()
+    {
+        return QString();
     }
 
     /**
        @brief Save the project using it's native format.
      */
-    virtual bool save()
-    {
-        qWarning() << "This should never be called!";
-        return false;
-    }
+    virtual bool save();
 
     /**
        @brief Save the project selecting one of the available formats.
      */
-    virtual bool saveAs()
-    {
-        qWarning() << "This should never be called!";
-        return false;
-    }
+    bool saveAs(QString fn = QString(), QString filter = QString());
 
     virtual void setFilename(const QString& fn)
     {

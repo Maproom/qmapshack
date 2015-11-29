@@ -195,65 +195,6 @@ void CGpxProject::loadGpx(const QString& filename)
     valid = true;
 }
 
-bool CGpxProject::save()
-{
-    if(filename.isEmpty())
-    {
-        return saveAs();
-    }
-    else
-    {
-        if(saveAs(filename, *this))
-        {
-            markAsSaved();
-        }
-    }
-
-    return true;
-}
-
-bool CGpxProject::saveAs()
-{
-    SETTINGS;
-    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
-    path += "/" + getName() + ".gpx";
-
-    QString filter = filedialogFilterGPX;
-    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
-
-    if(fn.isEmpty())
-    {
-        return false;
-    }
-
-    bool res = false;
-    if(filter == filedialogFilterGPX)
-    {
-        filename = fn;
-        metadata.name.clear();
-        setupName(QFileInfo(filename).baseName());
-
-        res = saveAs(fn, *this);
-        if(res)
-        {
-            markAsSaved();
-        }
-    }
-    else if(filter == filedialogFilterQMS)
-    {
-        res = CQmsProject::saveAs(fn, *this);
-    }
-    else
-    {
-        return false;
-    }
-
-    path = QFileInfo(fn).absolutePath();
-    cfg.setValue("Paths/lastGisPath", path);
-    return res;
-}
-
-
 bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;

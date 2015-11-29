@@ -27,8 +27,20 @@ public:
     CQmsProject(const QString& filename, CGisListWks * parent);
     virtual ~CQmsProject();
 
-    bool save();
-    bool saveAs();
+    virtual const QString getFileDialogFilter() override
+    {
+        return IGisProject::filedialogFilterQMS;
+    }
+
+    virtual const QString getFileExtension() override
+    {
+        return "qms";
+    }
+
+    virtual bool canBeSaved() override
+    {
+        return true;
+    }
 
     static bool saveAs(const QString& fn, IGisProject& project);
 };

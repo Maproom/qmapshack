@@ -36,8 +36,20 @@ public:
     CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent);
     virtual ~CGpxProject();
 
-    bool save();
-    bool saveAs();
+    virtual const QString getFileDialogFilter() override
+    {
+        return IGisProject::filedialogFilterGPX;
+    }
+
+    virtual const QString getFileExtension() override
+    {
+        return "gpx";
+    }
+
+    virtual bool canBeSaved() override
+    {
+        return true;
+    }
 
     static bool saveAs(const QString& fn, IGisProject& project);
 

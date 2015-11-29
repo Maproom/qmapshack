@@ -151,39 +151,6 @@ void CDBProject::postStatus()
     CGisWidget::self().postEventForDb(info);
 }
 
-bool CDBProject::saveAs()
-{
-    SETTINGS;
-    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
-
-    QString filter = filedialogFilterQMS;
-    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
-
-    if(fn.isEmpty())
-    {
-        return false;
-    }
-
-    bool res = false;
-    if(filter == filedialogFilterGPX)
-    {
-        res = CGpxProject::saveAs(fn, *this);
-    }
-    else if(filter == filedialogFilterQMS)
-    {
-        res = CQmsProject::saveAs(fn, *this);
-    }
-    else
-    {
-        return false;
-    }
-
-    path = QFileInfo(fn).absolutePath();
-    cfg.setValue("Paths/lastGisPath", path);
-
-    return res;
-}
-
 void CDBProject::updateItem(IGisItem * item, quint64 idItem)
 {
     QSqlQuery query(db);

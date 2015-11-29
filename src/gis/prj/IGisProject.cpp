@@ -27,8 +27,11 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/gpx/CGpxProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -95,12 +98,20 @@ bool IGisProject::askBeforClose()
     if(isChanged())
     {
         CCanvas::setOverrideCursor(Qt::ArrowCursor, "askBeforClose");
-        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
-        CCanvas::restoreOverrideCursor("askBeforClose");
 
-        if(res == QMessageBox::Save)
+        if(canBeSaved())
         {
-            save();
+            res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+            CCanvas::restoreOverrideCursor("askBeforClose");
+
+            if(res == QMessageBox::Save)
+            {
+                save();
+            }
+        }
+        else
+        {
+            res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
         }
     }
 
@@ -253,6 +264,74 @@ void IGisProject::updateItems()
         }
     }
 }
+
+bool IGisProject::save()
+{
+    if(!canBeSaved())
+    {
+        qWarning() << "This should never be called!";
+        return false;
+    }
+
+    return saveAs(filename, getFileDialogFilter());
+}
+
+bool IGisProject::saveAs(QString fn, QString filter)
+{
+    SETTINGS;
+
+    if(fn.isEmpty())
+    {
+        QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+
+        QString ext = getFileExtension();
+        if(ext.isEmpty())
+        {
+            ext = "gpx";
+        }
+        path += "/" + getName() + "." + ext;
+
+        filter = getFileDialogFilter();
+        fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
+
+        if(fn.isEmpty())
+        {
+            return false;
+        }
+    }
+
+    bool res = false;
+    if(filter == getFileDialogFilter())
+    {
+        filename = fn;
+        metadata.name.clear();
+        setupName(QFileInfo(fn).baseName());
+    }
+
+    if(filter == filedialogFilterGPX)
+    {
+        res = CGpxProject::saveAs(fn, *this);
+    }
+    else if(filter == filedialogFilterQMS)
+    {
+        res = CQmsProject::saveAs(fn, *this);
+    }
+    else
+    {
+        return false;
+    }
+
+    if(res && filter == getFileDialogFilter())
+    {
+        markAsSaved();
+    }
+
+    QString path = QFileInfo(fn).absolutePath();
+    cfg.setValue("Paths/lastGisPath", path);
+
+    return res;
+}
+
 
 void IGisProject::setupName(const QString &defaultName)
 {

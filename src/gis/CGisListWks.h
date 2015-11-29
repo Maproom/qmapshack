@@ -53,6 +53,8 @@ public:
 
     bool event(QEvent * e);
 
+    void addProject(IGisProject *proj);
+
     void removeDevice(const QString& key);
 
 signals:

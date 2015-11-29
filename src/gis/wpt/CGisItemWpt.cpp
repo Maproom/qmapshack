@@ -56,21 +56,12 @@ CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, c
 
 /// used to add a new waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
-    : IGisItem(project, eTypeWpt, NOIDX)
+    : CGisItemWpt(pos, NOFLOAT, QDateTime::currentDateTimeUtc(), name, icon, project)
 {
-    wpt.name    = name;
-    wpt.sym     = icon;
-    wpt.lon     = pos.x();
-    wpt.lat     = pos.y();
-    wpt.time    = QDateTime::currentDateTimeUtc();
-
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
     qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
-
-    setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 

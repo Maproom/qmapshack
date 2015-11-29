@@ -24,7 +24,6 @@
 #include <QFileInfo>
 #include <QDebug>
 
-#include "CMainWindow.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"

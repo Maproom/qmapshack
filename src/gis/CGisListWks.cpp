@@ -658,6 +658,36 @@ void CGisListWks::dropEvent ( QDropEvent  * e )
     emit sigChanged();
 }
 
+void CGisListWks::addProject(IGisProject *proj)
+{
+    if(!proj->isValid())
+    {
+        return;
+    }
+
+    addTopLevelItem(proj);
+
+    // move project up the list until there a re only projects, no devices
+    int newIdx      = NOIDX;
+    const int myIdx = topLevelItemCount() - 1;
+    for(int i = myIdx - 1; i >= 0; i--)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(topLevelItem(i));
+        if(0 == device)
+        {
+            break;
+        }
+
+        newIdx = i;
+    }
+
+    if(newIdx != NOIDX)
+    {
+        takeTopLevelItem(myIdx);
+        insertTopLevelItem(newIdx, proj);
+    }
+}
+
 void CGisListWks::removeDevice(const QString& key)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
@@ -848,9 +878,10 @@ void CGisListWks::slotLoadWorkspace()
 
         case IGisProject::eTypeSlf:
         {
-            project = new CSlfProject(name, this, false);
+            project = new CSlfProject(name, false);
             project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1d)
             *project << stream;
+            addProject(project);
             break;
         }
         }

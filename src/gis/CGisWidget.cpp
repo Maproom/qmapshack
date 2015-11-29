@@ -97,6 +97,7 @@ void CGisWidget::loadGisProject(const QString& filename)
     if(suffix == "gpx")
     {
         item = new CGpxProject(filename, treeWks);
+
     }
     else if(suffix == "qms")
     {
@@ -104,7 +105,8 @@ void CGisWidget::loadGisProject(const QString& filename)
     }
     else if(suffix == "slf")
     {
-        item = new CSlfProject(filename, treeWks);
+        item = new CSlfProject(filename);
+        treeWks->addProject(item);
     }
 
     if(item && !item->isValid())

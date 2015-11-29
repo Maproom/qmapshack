@@ -17,23 +17,14 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "device/CDeviceGarmin.h"
-#include "device/IDevice.h"
-#include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/slf/CSlfProject.h"
-#include "gis/qms/CQmsProject.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "gis/slf/CSlfReader.h"
-#include "helpers/CSelectCopyAction.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-CSlfProject::CSlfProject(const QString &filename, CGisListWks *parent, bool readFile)
-    : IGisProject(eTypeSlf, filename, parent)
+CSlfProject::CSlfProject(const QString &filename, bool readFile)
+    : IGisProject(eTypeSlf, filename, (CGisListWks*)nullptr)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/SlfProject.png"));
     blockUpdateItems(true);

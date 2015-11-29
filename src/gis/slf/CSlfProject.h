@@ -21,13 +21,10 @@
 
 #include "gis/prj/IGisProject.h"
 
-class CGisListWks;
-class CGisDraw;
-
 class CSlfProject : public IGisProject
 {
 public:
-    CSlfProject(const QString &filename, CGisListWks *parent, bool readFile = true);
+    CSlfProject(const QString &filename, bool readFile = true);
     virtual ~CSlfProject();
 
     virtual bool canBeSaved()

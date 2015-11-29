@@ -113,23 +113,45 @@ CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj),
 void CSlfReader::readMarkers(const QDomNode& xml)
 {
     const QDomNodeList& xmlMrks = xml.childNodes();
+    long markerTimeSum = 0;
 
+    // iterate over all markers and add them to a QMap (this will sort them by timeAbsolute)
+    QMap<long, QDomNode> markers;
     for(int i = 0; i < xmlMrks.count(); i++)
     {
-        const QDomNamedNodeMap& attr = xmlMrks.item(i).attributes();
+        const QDomNode &marker = xmlMrks.item(i);
+        const QDomNamedNodeMap& attr = marker.attributes();
+
+        long time = attr.namedItem("timeAbsolute").nodeValue().toLong();
+
+        markers.insert(time, marker);
+    }
+
+    offsetsTime.append(0);
+    foreach(const QDomNode &marker, markers)
+    {
+        const QDomNamedNodeMap& attr = marker.attributes();
+
+        bool ok;
+        long markerTime = attr.namedItem("duration").nodeValue().toLong(&ok);
+        if(ok)
+        {
+            markerTimeSum += markerTime;
+        }
 
         // type="l" indicates a marker, which is used to separate two laps
         const QString &type = attr.namedItem("type").nodeValue();
-        if("l" == type)
+        if("l" == type || "p" == type)
         {
             // filter out duplicate (and invalid) laps
-            qreal newLap = attr.namedItem("distanceAbsolute").nodeValue().toDouble();
-            if(laps.last() < newLap)
+            long time = attr.namedItem("timeAbsolute").nodeValue().toLong();
+            if(laps.last() < time)
             {
-                laps.append(newLap);
+                laps.append(time);
+                offsetsTime.append(markerTimeSum);
             }
         }
-        else
+        if("p" == type || "l" == type)
         {
             qreal lat = attr.namedItem("latitude" ).nodeValue().toDouble();
             qreal lon = attr.namedItem("longitude").nodeValue().toDouble();
@@ -141,17 +163,21 @@ void CSlfReader::readMarkers(const QDomNode& xml)
                 {
                     name = QObject::tr("Break %1").arg(attr.namedItem("number").nodeValue());
                 }
+                if("l" == type)
+                {
+                    name = QObject::tr("Lap %1").arg(attr.namedItem("number").nodeValue());
+                }
             }
 
             qreal ele             = attr.namedItem("altitude"   ).nodeValue().toDouble() / 1000.;
             const QString &desc   = attr.namedItem("description").nodeValue();
             const QDateTime &time = baseTime.addSecs(attr.namedItem("timeAbsolute").nodeValue().toDouble() / 100.);
-
-            new CGisItemWpt(QPointF(lon, lat), ele, time, name, /* default icon */ "", proj);
+            new CGisItemWpt(QPointF(lon, lat), ele, time, name, "", proj);
         }
     }
 
-    laps.append(std::numeric_limits<qreal>::max());
+    // the last lap ends at positive infinite
+    laps.append(std::numeric_limits<long>::max());
 }
 
 void CSlfReader::readEntries(const QDomNode& xml)
@@ -190,23 +216,28 @@ void CSlfReader::readEntries(const QDomNode& xml)
     int lap = 0;
     CGisItemTrk *trk = new CGisItemTrk(proj);
     trk->trk.segs.resize(laps.count() + 1);
-    CGisItemTrk::trkseg_t *seg = &(trk->trk.segs[0]);
 
+    CGisItemTrk::trkseg_t *seg = &(trk->trk.segs[0]);
+    long breakTime = offsetsTime[0];
+
+    qreal prevLon = NOFLOAT;
+    qreal prevLat = NOFLOAT;
     for(int i = 0; i < xmlEntrs.count(); i++)
     {
         CGisItemTrk::trkpt_t trkpt;
 
         const QDomNamedNodeMap& attr = xmlEntrs.item(i).attributes();
-        trkpt.lat  = attr.namedItem("latitude" ).nodeValue().toDouble();
-        trkpt.lon  = attr.namedItem("longitude").nodeValue().toDouble();
+        trkpt.lat = attr.namedItem("latitude" ).nodeValue().toDouble();
+        trkpt.lon = attr.namedItem("longitude").nodeValue().toDouble();
 
-        if(0. == trkpt.lat && 0. == trkpt.lon)
+        if((0. == trkpt.lat && 0. == trkpt.lon) || (prevLat == trkpt.lat && prevLon == trkpt.lon))
         {
             continue;
         }
+        prevLat = trkpt.lat;
+        prevLon = trkpt.lon;
 
         trkpt.ele  = attr.namedItem("altitude" ).nodeValue().toDouble() / 1000.;
-        trkpt.time = baseTime.addSecs( attr.namedItem("trainingTimeAbsolute").nodeValue().toLong() / 100 );
 
         foreach(const QString &key, usedAttr)
         {
@@ -216,22 +247,26 @@ void CSlfReader::readEntries(const QDomNode& xml)
             }
         }
 
-        qreal dist = attr.namedItem("distanceAbsolute").nodeValue().toDouble();
-        if(dist > laps[lap])
+        const long trainingTime = attr.namedItem("trainingTimeAbsolute").nodeValue().toLong();
+        while(trainingTime > laps[lap])
         {
             lap++;
-            seg = &(trk->trk.segs[lap]);
+            seg       = &(trk->trk.segs[lap]);
+            breakTime = offsetsTime[lap];
         }
+
+        trkpt.time = baseTime.addSecs( (breakTime + trainingTime) / 100.);
 
         seg->pts.append(trkpt);
     }
 
     // Remove empty segments
-    for(int i = 0; i < laps.count(); i++)
+    for(int i = 0; i < trk->trk.segs.count(); i++)
     {
         if(trk->trk.segs[i].pts.isEmpty())
         {
             trk->trk.segs.remove(i);
+            i--;
         }
     }
 

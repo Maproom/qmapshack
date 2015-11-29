@@ -29,6 +29,7 @@
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterSpeed.h"
+#include "gis/trk/filter/CFilterSplitSegment.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
 #include "plot/CPlotProfile.h"
@@ -153,6 +154,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     item0 = new QTreeWidgetItem(treeFilter);
     item0->setIcon(0, QIcon("://icons/48x48/TrkCut.png"));
     item0->setText(0, tr("Cut track into pieces"));
+
+    item = new QTreeWidgetItem(item0);
+    treeFilter->setItemWidget(item,0, new CFilterSplitSegment(trk, treeFilter));
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");

@@ -192,6 +192,7 @@ set( SRCS
     gis/trk/filter/CFilterNewDate.cpp
     gis/trk/filter/CFilterObscureDate.cpp
     gis/trk/filter/CFilterSpeed.cpp
+    gis/trk/filter/CFilterSplitSegment.cpp
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
     gis/rte/CCreateRouteFromWpt.cpp
@@ -406,6 +407,7 @@ set( HDRS
     gis/trk/filter/CFilterNewDate.h
     gis/trk/filter/CFilterObscureDate.h
     gis/trk/filter/CFilterSpeed.h
+    gis/trk/filter/CFilterSplitSegment.h
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
     gis/rte/CCreateRouteFromWpt.h
@@ -525,6 +527,7 @@ set( UIS
     gis/trk/filter/IFilterNewDate.ui
     gis/trk/filter/IFilterObscureDate.ui
     gis/trk/filter/IFilterSpeed.ui
+    gis/trk/filter/IFilterSplitSegment.ui
     gis/rte/IScrOptRte.ui
     gis/rte/ICreateRouteFromWpt.ui
     gis/rte/IDetailsRte.ui

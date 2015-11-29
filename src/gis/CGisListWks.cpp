@@ -134,7 +134,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/LineMove.png"),    tr("Edit Track Points"      ), this, SLOT(slotEditTrk()));
     actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),     tr("Reverse Track"          ), this, SLOT(slotReverseTrk()));
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
-    actionSplitTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Split Track at Segments"), this, SLOT(slotSplitTrk()));
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
@@ -1415,16 +1414,6 @@ void CGisListWks::slotCombineTrk()
     if(!keys.isEmpty())
     {
         CGisWidget::self().combineTrkByKey(keys);
-    }
-}
-
-void CGisListWks::slotSplitTrk()
-{
-    CGisListWksEditLock lock(false, IGisItem::mutexItems);
-    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
-    if(gisItem != 0)
-    {
-        CGisWidget::self().splitTrkByKey(gisItem->getKey());
     }
 }
 

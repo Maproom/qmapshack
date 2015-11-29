@@ -103,11 +103,10 @@ CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj),
     // Read all the Markers
     // This needs to be done prior to reading the Entries, as they contain the
     // locations at which we need to split the track into segments
-    //readMarkers(xmlAct.firstChildElement("Markers"));
     readMarkers(xmlAct.namedItem("Markers"));
 
     // Now read the "Entries"
-    // Entrys are the actual waypoints, which make up the track(s)
+    // Entries are the actual waypoints, which make up the track(s)
     readEntries(xmlAct.namedItem("Entries"));
 }
 

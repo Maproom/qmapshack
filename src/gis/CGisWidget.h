@@ -261,8 +261,6 @@ public:
 
     void combineTrkByKey(const QList<IGisItem::key_t>& keys);
 
-    void splitTrkByKey(const IGisItem::key_t &key);
-
     void rangeTrkByKey(const IGisItem::key_t &key);
 
     void editRteByKey(const IGisItem::key_t& key);

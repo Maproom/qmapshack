@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "GeoMath.h"
+#include "gis/CGisWidget.h"
 #include "gis/trk/CGisItemTrk.h"
 
 #include <QtMath>
@@ -392,3 +393,26 @@ void CGisItemTrk::filterSpeed(qreal speed)
     IUnit::self().meter2speed(speed, val, unit);
     changed(QObject::tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
+
+void CGisItemTrk::filterSplitSegment()
+{
+    IGisProject * project = CGisWidget::self().selectProject();
+    if(0 == project)
+    {
+        return;
+    }
+
+    int part = 0;
+    foreach(const trkseg_t &seg, trk.segs)
+    {
+        if(0 < seg.pts.count())
+        {
+            qint32 idx1 = seg.pts[                  0].idxTotal;
+            qint32 idx2 = seg.pts[seg.pts.count() - 1].idxTotal;
+
+            new CGisItemTrk(QObject::tr("%1 (Segment %2)").arg(trk.name).arg(part), idx1, idx2, trk, project);
+            part++;
+        }
+    }
+}
+

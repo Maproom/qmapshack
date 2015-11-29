@@ -378,8 +378,6 @@ public:
      */
     bool cut();
 
-    bool split();
-
     /**
        @brief Reverse the complete track
 
@@ -579,6 +577,12 @@ public:
        @param speed speed in meter per seconds
      */
     void filterSpeed(qreal speed);
+    /**
+       @brief filterSplitSegment
+
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
+    void filterSplitSegment();
 
     /**
        @brief Correlate waypoints with the track points

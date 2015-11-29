@@ -511,6 +511,18 @@ void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys)
     emit sigChanged();
 }
 
+void CGisWidget::splitTrkByKey(const IGisItem::key_t& key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+    if(trk != 0)
+    {
+        trk->split();
+    }
+}
+
+
 void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

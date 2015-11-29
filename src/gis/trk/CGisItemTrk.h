@@ -378,6 +378,8 @@ public:
      */
     bool cut();
 
+    bool split();
+
     /**
        @brief Reverse the complete track
 

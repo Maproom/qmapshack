@@ -1305,6 +1305,31 @@ bool CGisItemTrk::cut()
     return askToDeleteOriginal;
 }
 
+bool CGisItemTrk::split()
+{
+    IGisProject * project = CGisWidget::self().selectProject();
+    if(0 == project)
+    {
+        return false;
+    }
+
+    int part = 0;
+    foreach(const trkseg_t &seg, trk.segs)
+    {
+        if(0 < seg.pts.count())
+        {
+            qint32 idx1 = seg.pts[                  0].idxTotal;
+            qint32 idx2 = seg.pts[seg.pts.count() - 1].idxTotal;
+
+            new CGisItemTrk(QObject::tr("%1 (Segment %2)").arg(trk.name).arg(part), idx1, idx2, trk, project);
+            part++;
+        }
+    }
+
+    return true;
+}
+
+
 void CGisItemTrk::reverse()
 {
     QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");

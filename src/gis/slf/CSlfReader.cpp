@@ -122,7 +122,12 @@ void CSlfReader::readMarkers(const QDomNode& xml)
         const QString &type = attr.namedItem("type").nodeValue();
         if("l" == type)
         {
-            laps.append(attr.namedItem("distanceAbsolute").nodeValue().toDouble());
+            // filter out duplicate (and invalid) laps
+            qreal newLap = attr.namedItem("distanceAbsolute").nodeValue().toDouble();
+            if(laps.last() < newLap)
+            {
+                laps.append(newLap);
+            }
         }
         else
         {

@@ -20,6 +20,10 @@ find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
 
+if(UNIX AND NOT APPLE)
+find_package(Qt5Test)
+endif(UNIX AND NOT APPLE)
+
 if(UNIX)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif(UNIX)
@@ -37,7 +41,7 @@ endif(APPLE)
 
 set( SRCS
 
-    main.cpp
+#    main.cpp
     GeoMath.cpp
     CMainWindow.cpp
     CAbout.cpp
@@ -567,12 +571,17 @@ qt5_add_translation(
 )
 
 
-set(ALLINP
+set(LIBINP
     ${SRCS}
     ${HDRS}
     ${UI_HDRS}
     ${RC_SRCS}
     ${${APPLICATION_NAME}_QM_FILES}
+)
+
+set(MAININP
+    main.cpp
+    ${RC_SRCS}
 )
 
 include_directories(
@@ -589,9 +598,8 @@ if(APPLE)
 endif(APPLE)
 
 
-
-add_executable(${APPLICATION_NAME} WIN32 ${ALLINP})
-
+add_library(QMS ${LIBINP})
+add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
 
 if(UNIX)
@@ -600,6 +608,19 @@ else(UNIX)
     set(DBUS_LIB)
 endif(UNIX)
 
+target_link_libraries(QMS
+    Qt5::Widgets
+    Qt5::Xml
+    Qt5::Script
+    Qt5::Sql
+    Qt5::WebKitWidgets
+    Qt5::PrintSupport
+    ${DBUS_LIB}
+    ${GDAL_LIBRARIES}
+    ${PROJ_LIBRARIES}
+    ${ROUTINO_LIBRARIES}
+)
+
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     Qt5::Xml
@@ -607,6 +628,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Sql
     Qt5::WebKitWidgets
     Qt5::PrintSupport
+    QMS
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

@@ -10,6 +10,7 @@ It can be build with Visual Studio 2013 Community-Edition, too.
 Required tools for building and installing
 ============================================
 - Microsoft Visual Studio 2013 (short: VS2013)
+  Ensure that you have the latest update installed, see https://support.microsoft.com/en-us/kb/2829760
 - CMake 3.0 or later, available at http://www.cmake.org/
 - NSIS, available at http://nsis.sourceforge.net/Main_Page
 - The mingw64 toolchain (http://mingw-w64.org) is needed to 

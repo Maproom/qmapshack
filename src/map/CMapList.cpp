@@ -155,6 +155,7 @@ void CMapList::slotMoveUp()
     QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
     treeWidget->insertTopLevelItem(index-1, item);
     treeWidget->setCurrentItem(0);
+    emit treeWidget->sigChanged();
 }
 
 void CMapList::slotMoveDown()
@@ -167,6 +168,7 @@ void CMapList::slotMoveDown()
     QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
     treeWidget->insertTopLevelItem(index+1, item);
     treeWidget->setCurrentItem(0);
+    emit treeWidget->sigChanged();
 }
 
 void CMapList::slotContextMenu(const QPoint& point)

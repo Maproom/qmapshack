@@ -146,6 +146,7 @@ void CDemList::slotMoveUp()
     QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
     treeWidget->insertTopLevelItem(index-1, item);
     treeWidget->setCurrentItem(0);
+    emit treeWidget->sigChanged();
 }
 
 void CDemList::slotMoveDown()
@@ -158,6 +159,7 @@ void CDemList::slotMoveDown()
     QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
     treeWidget->insertTopLevelItem(index+1, item);
     treeWidget->setCurrentItem(0);
+    emit treeWidget->sigChanged();
 }
 
 

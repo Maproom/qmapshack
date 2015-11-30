@@ -37,7 +37,7 @@ public:
         return "qms";
     }
 
-    virtual bool canBeSaved() override
+    virtual bool canSave() override
     {
         return true;
     }

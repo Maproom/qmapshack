@@ -121,7 +121,7 @@ public:
     /**
        @brief Returns true if a project of given format can be saved, false if it cannot be saved (just as .slf atm)
      */
-    virtual bool canBeSaved()
+    virtual bool canSave()
     {
         return false;
     }

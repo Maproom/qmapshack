@@ -46,7 +46,7 @@ public:
         return "gpx";
     }
 
-    virtual bool canBeSaved() override
+    virtual bool canSave() override
     {
         return true;
     }

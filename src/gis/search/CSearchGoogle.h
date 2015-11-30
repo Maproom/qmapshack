@@ -34,15 +34,6 @@ public:
     CSearchGoogle(CGisListWks * parent);
     virtual ~CSearchGoogle();
 
-    bool save()
-    {
-        return false;
-    }
-    bool saveAs()
-    {
-        return false;
-    }
-
 private slots:
     void slotChangeSymbol();
     void slotStartSearch();

@@ -934,22 +934,16 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 allUnchecked = false;
             }
 
-            if(project->canBeSaved())
+            if(project->canSave())
             {
                 allCantSave = false;
             }
-        }
-
-        if(!allChecked && !allUnchecked && !allCantSave)
-        {
-            break;
         }
     }
 
     // ...and disable entries without any effect
     actionShowOnMap->setEnabled(!allChecked);
     actionHideFrMap->setEnabled(!allUnchecked);
-    qDebug() << "allCantSave:" << allCantSave;
     actionSave->setEnabled(!allCantSave);
 
     if(selectedItems().count() > 1)
@@ -1173,7 +1167,14 @@ void CGisListWks::slotSaveProject()
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project != 0)
         {
-            project->save();
+            if(project->canSave())
+            {
+                project->save();
+            }
+            else
+            {
+                project->saveAs();
+            }
         }
     }
 }

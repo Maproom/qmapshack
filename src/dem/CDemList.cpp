@@ -18,6 +18,7 @@
 
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 
@@ -61,12 +62,16 @@ CDemList::CDemList(QWidget *parent)
     setupUi(this);
 
     connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(actionMoveUp, SIGNAL(triggered()), this, SLOT(slotMoveUp()));
+    connect(actionMoveDown, SIGNAL(triggered()), this, SLOT(slotMoveDown()));
     connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
 
     connect(treeWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
+    menu->addAction(actionMoveUp);
+    menu->addAction(actionMoveDown);
 }
 
 CDemList::~CDemList()
@@ -131,6 +136,28 @@ void CDemList::slotActivate()
     updateHelpText();
 }
 
+void CDemList::slotMoveUp()
+{
+    int index = treeWidget->indexOfTopLevelItem(treeWidget->currentItem());
+    if(index == NOIDX)
+    {
+        return;
+    }
+    QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
+    treeWidget->insertTopLevelItem(index-1, item);
+}
+
+void CDemList::slotMoveDown()
+{
+    int index = treeWidget->indexOfTopLevelItem(treeWidget->currentItem());
+    if(index == NOIDX)
+    {
+        return;
+    }
+    QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
+    treeWidget->insertTopLevelItem(index+1, item);
+}
+
 
 void CDemList::slotContextMenu(const QPoint& point)
 {
@@ -143,6 +170,10 @@ void CDemList::slotContextMenu(const QPoint& point)
     bool activated = item->isActivated();
     actionActivate->setChecked(activated);
     actionActivate->setText(activated ? tr("Deactivate") : tr("Activate"));
+
+    CDemItem * item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));
+    actionMoveUp->setEnabled(activated && (treeWidget->itemAbove(item) != 0));
+    actionMoveDown->setEnabled(activated && item1 && item1->isActivated());
 
     QPoint p = treeWidget->mapToGlobal(point);
     menu->exec(p);

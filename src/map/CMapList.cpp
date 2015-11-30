@@ -70,11 +70,15 @@ CMapList::CMapList(QWidget *parent)
     connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
     connect(treeWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
     connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
+    connect(actionMoveUp, SIGNAL(triggered()), this, SLOT(slotMoveUp()));
+    connect(actionMoveDown, SIGNAL(triggered()), this, SLOT(slotMoveDown()));
     connect(pushMapHonk, SIGNAL(clicked()), this, SLOT(slotMapHonk()));
 
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
+    menu->addAction(actionMoveUp);
+    menu->addAction(actionMoveDown);
 }
 
 CMapList::~CMapList()
@@ -141,6 +145,27 @@ void CMapList::slotActivate()
     updateHelpText();
 }
 
+void CMapList::slotMoveUp()
+{
+    int index = treeWidget->indexOfTopLevelItem(treeWidget->currentItem());
+    if(index == NOIDX)
+    {
+        return;
+    }
+    QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
+    treeWidget->insertTopLevelItem(index-1, item);
+}
+
+void CMapList::slotMoveDown()
+{
+    int index = treeWidget->indexOfTopLevelItem(treeWidget->currentItem());
+    if(index == NOIDX)
+    {
+        return;
+    }
+    QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
+    treeWidget->insertTopLevelItem(index+1, item);
+}
 
 void CMapList::slotContextMenu(const QPoint& point)
 {
@@ -153,6 +178,10 @@ void CMapList::slotContextMenu(const QPoint& point)
     bool activated = item->isActivated();
     actionActivate->setChecked(activated);
     actionActivate->setText(activated ? tr("Deactivate") : tr("Activate"));
+
+    CMapItem * item1 = dynamic_cast<CMapItem*>(treeWidget->itemBelow(item));
+    actionMoveUp->setEnabled(activated && (treeWidget->itemAbove(item) != 0));
+    actionMoveDown->setEnabled(activated && item1 && item1->isActivated());
 
     QPoint p = treeWidget->mapToGlobal(point);
     menu->exec(p);

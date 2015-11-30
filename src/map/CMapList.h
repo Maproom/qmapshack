@@ -69,6 +69,8 @@ public slots:
 
 private slots:
     void slotActivate();
+    void slotMoveUp();
+    void slotMoveDown();
     void slotContextMenu(const QPoint &point);
 
 private:

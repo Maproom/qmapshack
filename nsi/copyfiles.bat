@@ -13,6 +13,7 @@ rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
 set QMSI_GDAL_PATH="M:\lib\gdal"
 set QMSI_PROJ_PATH="M:\lib\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
+rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
 set QMSI_MGW6_PATH="M:\lib\mingw64"
 
 rem Section 2.) Copy Files
@@ -82,6 +83,7 @@ rem section 2.2.5) Routino
 copy %QMSI_ROUT_PATH%\lib\routino.dll
 copy %QMSI_ROUT_PATH%\bin\planetsplitter.exe
 copy %QMSI_MGW6_PATH%\libwinpthread-1.dll
+copy %QMSI_MGW6_PATH%\libz-1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 
 

@@ -426,7 +426,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
             ;
         }
 
-        /* [Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
+        /* [Issue #72] Database/Workspace inconsistency in QMS 1.4.0
 
            When an item with no key is loaded it is "healed". The healing
            will mark it as changed. To avoid this save all items that are

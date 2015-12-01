@@ -145,7 +145,7 @@ void CSlfReader::readMarkers(const QDomNode& xml)
         {
             // filter out duplicate (and invalid) laps
             long time = attr.namedItem("timeAbsolute").nodeValue().toLong();
-            if(laps.last() < time)
+            if(laps.isEmpty() || (laps.last() < time))
             {
                 laps.append(time);
                 offsetsTime.append(markerTimeSum);

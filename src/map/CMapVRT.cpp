@@ -115,7 +115,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     char *wkt = str;
     oSRS.importFromWkt(&wkt);
 
-    char *proj4;
+    char *proj4 = nullptr;
     oSRS.exportToProj4(&proj4);
     pjsrc = pj_init_plus(proj4);
     free(proj4);

@@ -170,7 +170,6 @@ void CSlfReader::readMarkers(const QDomNode& xml)
             }
 
             qreal ele             = attr.namedItem("altitude"   ).nodeValue().toDouble() / 1000.;
-            const QString &desc   = attr.namedItem("description").nodeValue();
             const QDateTime &time = baseTime.addSecs(attr.namedItem("timeAbsolute").nodeValue().toDouble() / 100.);
             new CGisItemWpt(QPointF(lon, lat), ele, time, name, "", proj);
         }

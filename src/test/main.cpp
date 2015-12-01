@@ -9,11 +9,11 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 
-#include "units/IUnit.h"
 #include "gis/trk/CKnownExtension.h"
-#include "helpers/CSettings.h"
 #include "helpers/CAppSetup.h"
 #include "helpers/CCommandProcessor.h"
+#include "helpers/CSettings.h"
+#include "units/IUnit.h"
 
 
 CAppOpts *qlOpts;
@@ -24,7 +24,8 @@ static void VERIFY_EQUAL(const T &expected, const T &actual)
     QVERIFY2( (expected == actual), QTest::toString(QString("Expected `%1`, got `%2`").arg(expected).arg(actual)) );
 }
 
-class test_CSlfReader : public QObject {
+class test_CSlfReader : public QObject
+{
     Q_OBJECT
 
 private:
@@ -64,7 +65,7 @@ private slots:
         VERIFY_EQUAL(QString("qttest slf file 0"),        proj->getName());
         VERIFY_EQUAL(QString("QTTest .slf input file 0"), proj->getDescription());
 
-	QVERIFY( IGisProject::eTypeSlf == proj->getType() );
+        QVERIFY( IGisProject::eTypeSlf == proj->getType() );
 
         VERIFY_EQUAL(3, proj->getItemCountByType(IGisItem::eTypeWpt));
         VERIFY_EQUAL(1, proj->getItemCountByType(IGisItem::eTypeTrk)); // 2817 trkpts

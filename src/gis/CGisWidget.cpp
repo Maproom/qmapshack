@@ -25,11 +25,11 @@
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/gpx/CGpxProject.h"
-#include "gis/slf/CSlfProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
@@ -97,7 +97,6 @@ void CGisWidget::loadGisProject(const QString& filename)
     if(suffix == "gpx")
     {
         item = new CGpxProject(filename, treeWks);
-
     }
     else if(suffix == "qms")
     {

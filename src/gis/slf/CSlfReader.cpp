@@ -18,11 +18,11 @@
 
 #include "gis/slf/CSlfReader.h"
 
-#include <QTextStream>
 #include <QDateTime>
+#include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QDebug>
+#include <QTextStream>
 
 #include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"

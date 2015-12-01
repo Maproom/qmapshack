@@ -600,10 +600,8 @@ if(APPLE)
      INCLUDE_DIRECTORIES(/System/Library/Frameworks/DiskArbitration.framework)
 endif(APPLE)
 
-
 add_library(QMS ${LIBINP})
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
-
 
 if(UNIX)
     set(DBUS_LIB Qt5::DBus)
@@ -637,6 +635,41 @@ target_link_libraries(${APPLICATION_NAME}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
 )
+
+if(UNIX AND NOT APPLE)
+    add_executable(qttest test/main.cpp ${RC_SRCS})
+
+    # copy the input files required by the unittests to ./bin/input
+    file(COPY test/input DESTINATION ../bin)
+
+    target_link_libraries(qttest
+        Qt5::Widgets
+        Qt5::Xml
+        Qt5::Script
+        Qt5::Sql
+        Qt5::WebKitWidgets
+        Qt5::PrintSupport
+        Qt5::Test
+        QMS
+        ${DBUS_LIB}
+        ${GDAL_LIBRARIES}
+        ${PROJ_LIBRARIES}
+        ${ROUTINO_LIBRARIES}
+    )
+
+    add_custom_command(
+        OUTPUT tests_run.log
+        COMMAND qttest
+        DEPENDS qttest
+        COMMENT "Executing the Unittests"
+        VERBATIM
+    )
+
+    add_custom_target(
+        run_tests ALL
+        DEPENDS tests_run.log
+    )
+endif(UNIX AND NOT APPLE)
 
 if(APPLE)
      target_link_libraries(${APPLICATION_NAME}

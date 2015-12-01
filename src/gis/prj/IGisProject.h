@@ -483,8 +483,6 @@ protected:
     quint32 totalElapsedSecondsMoving = 0;
 
     QString hashTrkWpt[2];
-
-    friend class CSlfReader;
 };
 
 #endif //IGISPROJECT_H

@@ -39,6 +39,8 @@ public:
 
 private:
     void loadSlf(const QString &filename);
+
+    friend class CSlfReader;
 };
 
 #endif // CSLFPROJECT_H

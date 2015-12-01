@@ -105,20 +105,21 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
 
     // ------- setup projection ---------------
-    char str[1024] = {0};
+    char str[1025] = {0};
     if(dataset->GetProjectionRef())
     {
-        strncpy(str,dataset->GetProjectionRef(),sizeof(str));
+        strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
     }
-    char * ptr = str;
+
     OGRSpatialReference oSRS;
-    oSRS.importFromWkt(&ptr);
-    oSRS.exportToProj4(&ptr);
+    char *wkt = str;
+    oSRS.importFromWkt(&wkt);
 
-    qDebug() << ptr;
+    char *proj4;
+    oSRS.exportToProj4(&proj4);
+    pjsrc = pj_init_plus(proj4);
+    free(proj4);
 
-    pjsrc = pj_init_plus(ptr);
-    free(ptr);
     if(pjsrc == 0)
     {
         delete dataset;

@@ -767,7 +767,7 @@ public:
 
         quint32 flags = 0;
         /// index within the complete track
-        qint32 idxTotal;
+        qint32 idxTotal = NOIDX;
         /// offset into lineSimple
         qint32 idxVisible;
 

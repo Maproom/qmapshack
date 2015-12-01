@@ -107,10 +107,10 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     QPoint p1;
     QPoint p2;
     QPoint p3;
-    projXY c0;
-    projXY c1;
-    projXY c2;
-    projXY c3;
+    projXY c0 = {0,0};
+    projXY c1 = {0,0};
+    projXY c2 = {0,0};
+    projXY c3 = {0,0};
 
     bool pointsAreLongLat = true;
     QString projection;

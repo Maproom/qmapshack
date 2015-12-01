@@ -373,16 +373,23 @@ void CGisListDB::slotDelLostFoundItem()
     foreach(QTreeWidgetItem * item, items)
     {
         CDBItem * dbItem            = dynamic_cast<CDBItem*>(item);
-        CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(dbItem->parent());
-
-        if(folder && dbItem)
+        if(dbItem == 0)
         {
-            if(folder->delItem(dbItem))
-            {
-                delItems << dbItem;
-                folders << folder;
-            }
+            continue;
         }
+
+        CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(dbItem->parent());
+        if(folder == 0)
+        {
+            continue;
+        }
+
+        if(folder->delItem(dbItem))
+        {
+            delItems << dbItem;
+            folders << folder;
+        }
+
     }
 
     qDeleteAll(delItems);

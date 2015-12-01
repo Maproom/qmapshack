@@ -118,7 +118,7 @@ protected:
     quint64 insertItem(IGisItem * item);
 
     QSqlDatabase db;
-    quint64 id;
+    quint64 id = 0;
 };
 
 #endif //CDBPROJECT_H

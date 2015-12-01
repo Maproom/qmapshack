@@ -35,10 +35,10 @@ private:
 
     void fill();
     /// temp shift reg buffer
-    quint32 reg;
+    quint32 reg = 0;
     /// bits in buffer
-    quint32 bits;
+    quint32 bits = 0;
     /// pointer to current data;
-    const quint8 * p;
+    const quint8 * p = nullptr;
 };
 #endif                           //CGARMINSTRTBL6_H

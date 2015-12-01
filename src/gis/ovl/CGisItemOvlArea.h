@@ -172,7 +172,7 @@ private:
     /// the trackpoint bullet icon
     QPixmap bullet;
     /// the track line color by index
-    unsigned colorIdx;
+    unsigned colorIdx = 0;
 
     QPolygonF polygonArea;
 

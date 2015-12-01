@@ -112,8 +112,8 @@ void CActivityTrk::update()
     }
 
     const CGisItemTrk::trk_t&       data = trk->getTrackData();
-    const CGisItemTrk::trkpt_t *    lastTrkpt = 0;
-    const CGisItemTrk::trkpt_t *    startTrkpt = 0;
+    const CGisItemTrk::trkpt_t *    lastTrkpt = nullptr;
+    const CGisItemTrk::trkpt_t *    startTrkpt = nullptr;
 
     quint32 lastFlag = 0xFFFFFFFF;
     foreach(const CGisItemTrk::trkseg_t &seg, data.segs)
@@ -156,6 +156,12 @@ void CActivityTrk::update()
             }
         }
     }
+
+    if(lastTrkpt == nullptr)
+    {
+        return;
+    }
+
     activity_summary_t& summary = getSummary(activitySummary, lastFlag);
     summary.distance += lastTrkpt->distance - startTrkpt->distance;
     summary.ascend += lastTrkpt->ascend - startTrkpt->ascend;

@@ -54,8 +54,8 @@ private:
 
     QRect colorRect;
     QString unit;
-    qreal minimum;
-    qreal maximum;
+    qreal minimum       = 0;
+    qreal maximum       = 0;
     bool background     = false;
     int xOffset         = 1;
     CGisItemTrk *trk    = nullptr;

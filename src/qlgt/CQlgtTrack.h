@@ -171,20 +171,20 @@ public:
         // extended data 1
         QString fix;
         qint32 sat;
-        float altitude;          ///< [m] Altitude, Meters, above mean sea level
-        float height;            ///< [m] Height of geoid (mean sea level) above WGS84 ellipsoid
+        float altitude = 0;          ///< [m] Altitude, Meters, above mean sea level
+        float height = 0;            ///< [m] Height of geoid (mean sea level) above WGS84 ellipsoid
         float velocity;          ///< [m/s] Ground speed, meters per hour
         float heading;           ///< [] Track angle in degrees True
-        float magnetic;          ///< [] Magnetic Variation
+        float magnetic = 0;          ///< [] Magnetic Variation
         float vdop;              ///< Vertical dilution of precision (VDOP)
         float hdop;              ///< Horizontal dilution of precision (HDOP)
         float pdop;              ///< PDOP (dilution of precision)
-        float x;                 ///< [m] cartesian gps coordinate
-        float y;                 ///< [m] cartesian gps coordinate
-        float z;                 ///< [m] cartesian gps coordinate
-        float vx;                ///< [m/s] velocity
-        float vy;                ///< [m/s] velocity
-        float vz;                ///< [m/s] velocity
+        float x = 0;                 ///< [m] cartesian gps coordinate
+        float y = 0;                 ///< [m] cartesian gps coordinate
+        float z = 0;                 ///< [m] cartesian gps coordinate
+        float vx = 0;                ///< [m/s] velocity
+        float vy = 0;                ///< [m/s] velocity
+        float vz = 0;                ///< [m/s] velocity
 
 #ifdef GPX_EXTENSIONS
         CGpxExtPt gpx_exts;
@@ -236,56 +236,56 @@ public:
 
     QPixmap bullet;
     /// the track line color by index
-    unsigned colorIdx;
+    unsigned colorIdx = 0;
     /// the track points
     QList<pt_t> track;
 
     /// set true to draw track highlighted
-    bool highlight;
+    bool highlight = 0;
 
     /// total time covered by all track points
-    double totalTime;
+    double totalTime = 0;
     /// total time moving
-    double totalTimeMoving;
+    double totalTimeMoving = 0;
     /// total distance of track [m]
-    double totalDistance;
+    double totalDistance = 0;
 
     /// total ascend in [m]
-    double totalAscend;
+    double totalAscend = 0;
     /// total descend in [m]
-    double totalDescend;
+    double totalDescend = 0;
 
     /// the Qt polyline for faster processing
     QPolygon polyline;
     /// the color attached to each point in polyline (only used in multicolor mode)
     QVector<QColor> polylineColor;
 
-    float avgspeed0;
-    float avgspeed1;
+    float avgspeed0 = 0;
+    float avgspeed1 = 0;
 
     pt_t ptMaxEle;
     pt_t ptMinEle;
     pt_t ptMaxSpeed;
     pt_t ptMinSpeed;
 
-    bool traineeData;
-    bool ext1Data;
-    bool firstTime;
-    bool m_hide;
+    bool traineeData = 0;
+    bool ext1Data = 0;
+    bool firstTime = 0;
+    bool m_hide = 0;
 
-    quint32 doScaleWpt2Track;
+    quint32 doScaleWpt2Track = 0;
 
 
-    quint32 visiblePointCount;
+    quint32 visiblePointCount = 0;
 
-    quint32 cntMedianFilterApplied;
+    quint32 cntMedianFilterApplied = 0;
 
     QList<wpt_t> waypoints;
 
-    bool replaceOrigData;
+    bool replaceOrigData = 0;
 
     enum state_select_e {eNoSel, e1stSel, e2ndSel};
-    state_select_e stateSelect;
+    state_select_e stateSelect = eNoSel;
 
     QString timezone;
 
@@ -298,8 +298,8 @@ public:
         , eMultiColorMax
     };
 
-    quint32 useMultiColor;
-    qint32 idMultiColor;
+    quint32 useMultiColor = 0;
+    qint32 idMultiColor = 0;
 
     bool hasExt1Data() const
     {

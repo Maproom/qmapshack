@@ -76,13 +76,13 @@ public:
 
     geocache_t geocache;
 
-    quint32 selected;
-    quint32 sticky;
-    float lat;                   ///< [deg]
-    float lon;                   ///< [deg]
-    float ele;                   ///< [m]
-    float prx;                   ///< [m]
-    float dir;                   ///< [deg]
+    quint32 selected = 0;
+    quint32 sticky = 0;
+    float lat = 0;                   ///< [deg]
+    float lon = 0;                   ///< [deg]
+    float ele = 0;                   ///< [m]
+    float prx = 0;                   ///< [m]
+    float dir = 0;                   ///< [deg]
     QString link;
     QString urlname;
     QString type;

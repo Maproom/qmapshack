@@ -73,6 +73,6 @@ protected:
     quint32 mask32;
     quint64 mask64;
 
-    char buffer[1024];
+    char buffer[1025];
 };
 #endif                           //IGARMINSTRTBL_H

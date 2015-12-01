@@ -40,10 +40,10 @@ public:
     QString type;
     QColor color;
     QList<pt_t> points;
-    qint32 style;
-    quint32 width;
-    quint8 opacity;
-    float speed;
+    qint32 style = 0;
+    quint32 width = 0;
+    quint8 opacity = 0;
+    float speed = 0;
 };
 
 QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl);

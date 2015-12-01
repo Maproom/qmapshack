@@ -118,7 +118,7 @@ private:
     /// the tile cache
     IDiskCache * diskCache = 0;
     /// access manager to request tiles
-    QNetworkAccessManager * accessManager;
+    QNetworkAccessManager * accessManager = nullptr;
 
     QList<QString> urlPending;
 

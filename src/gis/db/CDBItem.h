@@ -53,7 +53,7 @@ private:
     QSqlDatabase& db;
     quint64 id;
 
-    int type;
+    int type = 0;
     QString key;
 };
 

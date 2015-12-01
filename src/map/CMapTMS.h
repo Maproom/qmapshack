@@ -93,9 +93,9 @@ private:
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
-    IDiskCache * diskCache = 0;
+    IDiskCache * diskCache = nullptr;
     /// access manager to request tiles
-    QNetworkAccessManager * accessManager;
+    QNetworkAccessManager * accessManager = nullptr;
 
     QList<QString> urlPending;
 

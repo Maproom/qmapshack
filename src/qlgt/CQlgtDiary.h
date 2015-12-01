@@ -30,7 +30,7 @@ public:
 
     enum type_e {eEnd,eBase, eWpt, eTrk, eRte};
 
-    quint64 keyProjectGeoDB;
+    quint64 keyProjectGeoDB = 0;
 };
 
 QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary);

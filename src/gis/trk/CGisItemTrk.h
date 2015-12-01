@@ -132,7 +132,12 @@ public:
 
     CGisItemTrk(const IQlgtOverlay& ovl);
 
-    CGisItemTrk(IGisProject *project);
+    /**
+       @brief Creates a new track via provided trkdata
+       @param trkdata  The track's new data (will be moved, don't use your "copy" after construction!
+       @param project  The project this track belongs to
+     */
+    CGisItemTrk(trk_t& trkdata, IGisProject *project);
 
     virtual ~CGisItemTrk();
 
@@ -938,8 +943,6 @@ private:
 
     /// all functions and data concerning graphs
     CPropertyTrk * propHandler = nullptr;
-
-    friend class CSlfReader;
 };
 
 class INotifyTrk

@@ -214,10 +214,11 @@ void CSlfReader::readEntries(const QDomNode& xml)
 
     // Now generate the track / segments
     int lap = 0;
-    CGisItemTrk *trk = new CGisItemTrk(proj);
-    trk->trk.segs.resize(laps.count() + 1);
 
-    CGisItemTrk::trkseg_t *seg = &(trk->trk.segs[0]);
+    CGisItemTrk::trk_t trk;
+    trk.segs.resize(laps.count() + 1);
+
+    CGisItemTrk::trkseg_t *seg = &(trk.segs[0]);
     long breakTime = offsetsTime[0];
 
     qreal prevLon = NOFLOAT;
@@ -251,7 +252,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
         while(trainingTime > laps[lap])
         {
             lap++;
-            seg       = &(trk->trk.segs[lap]);
+            seg       = &(trk.segs[lap]);
             breakTime = offsetsTime[lap];
         }
 
@@ -261,18 +262,16 @@ void CSlfReader::readEntries(const QDomNode& xml)
     }
 
     // Remove empty segments
-    for(int i = 0; i < trk->trk.segs.count(); i++)
+    for(int i = 0; i < trk.segs.count(); i++)
     {
-        if(trk->trk.segs[i].pts.isEmpty())
+        if(trk.segs[i].pts.isEmpty())
         {
-            trk->trk.segs.remove(i);
+            trk.segs.remove(i);
             i--;
         }
     }
 
-    trk->setupHistory();
-    trk->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkNone);
-    trk->deriveSecondaryData();
+    new CGisItemTrk(trk, proj);
     proj->updateItemCounters();
 }
 

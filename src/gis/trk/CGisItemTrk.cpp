@@ -155,15 +155,6 @@ CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * p
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemTrk::CGisItemTrk(IGisProject *project)
-    : IGisItem(project, eTypeTrk, project->childCount())
-{
-    // --- start read and process data ----
-    setColor(penForeground.color());
-    // --- stop read and process data ----
-
-}
-
 CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
@@ -202,6 +193,16 @@ CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX)
 {
     loadFromDb(id, db);
+}
+
+CGisItemTrk::CGisItemTrk(trk_t& trkdata, IGisProject *project)
+    : IGisItem(project, eTypeTrk, NOIDX)
+{
+    trk = std::move(trkdata);
+
+    setupHistory();
+    deriveSecondaryData();
+    updateDecoration(eMarkNone, eMarkNone);
 }
 
 

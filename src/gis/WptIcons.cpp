@@ -112,8 +112,6 @@ QPixmap loadIcon(const QString& path)
         img.setColor(0,qRgba(0,0,0,0));
         return QPixmap::fromImage(img);
     }
-
-    return QPixmap();
 }
 
 QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)

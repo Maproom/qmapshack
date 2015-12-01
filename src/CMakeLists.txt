@@ -666,7 +666,7 @@ if(UNIX AND NOT APPLE)
     )
 
     add_custom_target(
-        run_tests ALL
+        run_tests
         DEPENDS tests_run.log
     )
 endif(UNIX AND NOT APPLE)

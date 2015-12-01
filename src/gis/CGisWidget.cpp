@@ -106,6 +106,9 @@ void CGisWidget::loadGisProject(const QString& filename)
     else if(suffix == "slf")
     {
         item = new CSlfProject(filename);
+
+        // the CSlfProject does not - as the other C*Project - register itself in the list
+        // of currently opened projects. This is done manually here.
         treeWks->addProject(item);
     }
 

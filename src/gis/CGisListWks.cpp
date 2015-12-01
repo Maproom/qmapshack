@@ -880,6 +880,9 @@ void CGisListWks::slotLoadWorkspace()
             project = new CSlfProject(name, false);
             project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1d)
             *project << stream;
+
+            // the CSlfProject does not - as the other C*Project - register itself in the list
+            // of currently opened projects. This is done manually here.
             addProject(project);
             break;
         }

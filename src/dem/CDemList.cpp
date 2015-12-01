@@ -138,26 +138,44 @@ void CDemList::slotActivate()
 
 void CDemList::slotMoveUp()
 {
-    int index = treeWidget->indexOfTopLevelItem(treeWidget->currentItem());
+    CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
+    if(item == nullptr)
+    {
+        return;
+    }
+
+    int index = treeWidget->indexOfTopLevelItem(item);
     if(index == NOIDX)
     {
         return;
     }
-    QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
+
+    item->showChildren(false);
+    treeWidget->takeTopLevelItem(index);
     treeWidget->insertTopLevelItem(index-1, item);
+    item->showChildren(true);
     treeWidget->setCurrentItem(0);
     emit treeWidget->sigChanged();
 }
 
 void CDemList::slotMoveDown()
 {
-    int index = treeWidget->indexOfTopLevelItem(treeWidget->currentItem());
+    CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
+    if(item == nullptr)
+    {
+        return;
+    }
+
+    int index = treeWidget->indexOfTopLevelItem(item);
     if(index == NOIDX)
     {
         return;
     }
-    QTreeWidgetItem* item = treeWidget->takeTopLevelItem(index);
+
+    item->showChildren(false);
+    treeWidget->takeTopLevelItem(index);
     treeWidget->insertTopLevelItem(index+1, item);
+    item->showChildren(true);
     treeWidget->setCurrentItem(0);
     emit treeWidget->sigChanged();
 }

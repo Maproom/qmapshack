@@ -1417,7 +1417,7 @@ void CGisItemTrk::hideSelectedPoints()
         return;
     }
 
-    if((mouseRange1 == 0) && (mouseRange2 == 0))
+    if((mouseRange1 == 0) || (mouseRange2 == 0))
     {
         return;
     }
@@ -1490,7 +1490,7 @@ void CGisItemTrk::showSelectedPoints()
         return;
     }
 
-    if((mouseRange1 == 0) && (mouseRange2 == 0))
+    if((mouseRange1 == 0) || (mouseRange2 == 0))
     {
         return;
     }
@@ -1525,7 +1525,7 @@ void CGisItemTrk::showSelectedPoints()
 
 void CGisItemTrk::copySelectedPoints()
 {
-    if((mouseRange1 == 0) && (mouseRange2 == 0))
+    if((mouseRange1 == 0) || (mouseRange2 == 0))
     {
         return;
     }

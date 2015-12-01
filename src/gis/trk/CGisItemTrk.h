@@ -609,14 +609,6 @@ private:
        @param filename
      */
     bool readTwoNav(const QString& filename);
-public:
-    void postInit()
-    {
-        setupHistory();
-        updateDecoration(eMarkNone, eMarkNone);
-        deriveSecondaryData();
-    }
-
 
 private:
     /**

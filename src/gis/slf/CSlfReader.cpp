@@ -270,7 +270,10 @@ void CSlfReader::readEntries(const QDomNode& xml)
         }
     }
 
-    trk->postInit();
+    trk->setupHistory();
+    trk->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkNone);
+    trk->deriveSecondaryData();
+    proj->updateItemCounters();
 }
 
 void CSlfReader::readMetadata(const QDomNode& xml, IGisProject::metadata_t& metadata)

@@ -19,17 +19,9 @@
 #ifndef CSLFREADER_H
 #define CSLFREADER_H
 
-#include <QTreeWidgetItem>
-
-#include <QColor>
 #include <QDateTime>
 #include <QDomNode>
-#include <QMap>
-#include <QMutex>
 #include <QString>
-#include <QStringList>
-#include <QUrl>
-#include <QVariant>
 
 #include "gis/prj/IGisProject.h"
 

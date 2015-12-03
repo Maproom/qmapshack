@@ -24,3 +24,5 @@ Next to QT5 you will need the development packages of:
 * Proj4
 * GDAL
 * Routino
+
+If you want to compile QMapShack for Windows have a look at nsi/3rdparty.txt and nsi/HOWTO-BUILD.txt in the source tree.

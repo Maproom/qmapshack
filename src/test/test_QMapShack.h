@@ -16,28 +16,28 @@
 
 **********************************************************************************************/
 
-#include "test/test_QMapShack.h"
+#include <QTest>
 
-#include "helpers/CAppSetup.h"
-#include "helpers/CCommandProcessor.h"
-#include "helpers/CSettings.h"
-#include "units/IUnit.h"
+extern QString testInput;
 
-#include "gis/trk/CKnownExtension.h"
+#define VERIFY_EQUAL(EXP, ACT) \
+    QVERIFY2( (EXP == ACT), QTest::toString(QString("Expected `%1`, got `%2`").arg(EXP).arg(ACT)) );
 
-CAppOpts *qlOpts;
-QString testInput;
-
-void test_QMapShack::initTestCase()
+class test_QMapShack : public QObject
 {
-    CCommandProcessor cmdParse;
-    qlOpts = cmdParse.processOptions(QStringList(""));
+    Q_OBJECT
 
-    SETTINGS;
-    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
-    CKnownExtension::init(IUnit::self());
+private:
+    QString testInput;
 
-    testInput = QCoreApplication::applicationDirPath() + "/input/";
-}
+private slots:
 
-QTEST_MAIN(test_QMapShack)
+    void initTestCase();
+
+    /// CSlfReader
+    void readValidSLFFile();
+    void readNonExistingSLFFile();
+
+    // CGpxProject
+    void readValidGPXFile();
+};

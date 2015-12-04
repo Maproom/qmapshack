@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include <QTest>
+class IGisProject;
 
 extern QString testInput;
 
@@ -27,11 +28,11 @@ class test_QMapShack : public QObject
 {
     Q_OBJECT
 
-private:
     QString testInput;
 
-private slots:
+    void verify(const QString &expectFile, const IGisProject &proj);
 
+private slots:
     void initTestCase();
 
     /// CSlfReader

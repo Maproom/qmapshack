@@ -266,7 +266,7 @@ public:
     void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
 
 
-    int getItemCountByType(IGisItem::type_e type)
+    int getItemCountByType(IGisItem::type_e type) const
     {
         return cntItemsByType[type];
     }

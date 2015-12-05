@@ -1,0 +1,14 @@
+<expected>
+    <name>QTTest gpx file 0</name>
+    <desc>QTTest gpx input file 0</desc>
+
+    <waypoints></waypoints>
+
+    <tracks>
+        <track name="Track" colorIdx="4" colorName="DarkBlue" segcount="1" pointcount="521" />
+    </tracks>
+
+    <routes></routes>
+
+    <areas></areas>
+</expected>

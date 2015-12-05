@@ -39,6 +39,7 @@ struct expectedWaypoint
 struct expectedTrack
 {
     QString name;
+    int     colorIdx;
     int     segCount;
     int     ptCount;
 };
@@ -95,9 +96,10 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
         const QDomNode &node = trkList.item(i);
 
         expectedTrack trk;
-        trk.name     = node.attributes().namedItem("name").nodeValue();
-        trk.segCount = node.attributes().namedItem("segcount").nodeValue().toInt();
+        trk.name     = node.attributes().namedItem("name"      ).nodeValue();
+        trk.segCount = node.attributes().namedItem("segcount"  ).nodeValue().toInt();
         trk.ptCount  = node.attributes().namedItem("pointcount").nodeValue().toInt();
+        trk.colorIdx = node.attributes().namedItem("colorIdx"  ).nodeValue().toInt();
 
         expTrks.insert(trk.name, trk);
     }
@@ -143,7 +145,10 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
             {
                 const expectedTrack &expTrk = expTrks.take(itemTrk->getName());
 
+                VERIFY_EQUAL(expTrk.colorIdx, itemTrk->getColorIdx());
+
                 VERIFY_EQUAL(expTrk.segCount, trk.segs.count());
+
 
                 int trkptCount = 0;
                 foreach(const CGisItemTrk::trkseg_t &seg, trk.segs)

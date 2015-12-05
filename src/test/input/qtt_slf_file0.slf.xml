@@ -9,7 +9,15 @@
     </waypoints>
 
     <tracks>
-        <track name="[no name]" colorIdx="4" colorName="DarkBlue" segcount="2" pointcount="2764" />
+        <track name="[no name]" colorIdx="4" colorName="DarkBlue" segcount="2" pointcount="2764">
+            <colorSources>
+                <colorSource name="::ql:slope"                              />
+                <colorSource name="::ql:speed"                              />
+                <colorSource name="::ql:ele"                                />
+                <colorSource name="speed"                                   />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
+            </colorSources>
+        </track>
     </tracks>
 
     <routes></routes>

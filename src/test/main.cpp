@@ -38,10 +38,11 @@ struct expectedWaypoint
 
 struct expectedTrack
 {
-    QString name;
-    int     colorIdx;
-    int     segCount;
-    int     ptCount;
+    QString     name;
+    int         colorIdx;
+    int         segCount;
+    int         ptCount;
+    QStringList colorSources;
 };
 
 CAppOpts *qlOpts;
@@ -113,6 +114,15 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
         trk.ptCount  = getAttribute(node, "pointcount").toInt();
         trk.colorIdx = getAttribute(node, "colorIdx"  ).toInt();
 
+        QStringList colorSources;
+        const QDomNodeList &extList = node.namedItem("colorSources").childNodes();
+        for(int j = 0; j < extList.length(); j++)
+        {
+            colorSources << getAttribute(extList.item(j), "name");
+        }
+        colorSources.sort();
+        trk.colorSources = colorSources;
+
         expTrks.insert(trk.name, trk);
     }
 
@@ -171,6 +181,10 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
                 VERIFY_EQUAL(expTrk.segCount, trk.segs.count());
                 VERIFY_EQUAL(expTrk.ptCount,  trkptCount);
                 VERIFY_EQUAL(expTrk.colorIdx, itemTrk->getColorIdx());
+
+                QStringList existingSources = itemTrk->getExistingDataSources();
+                existingSources.sort();
+                QVERIFY(expTrk.colorSources == existingSources);
             }
         }
     }

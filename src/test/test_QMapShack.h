@@ -18,6 +18,7 @@
 
 #include <QTest>
 class IGisProject;
+class QDomNode;
 
 extern QString testInput;
 
@@ -31,6 +32,10 @@ class test_QMapShack : public QObject
     QString testInput;
 
     void verify(const QString &expectFile, const IGisProject &proj);
+
+
+    /// helper functions
+    QString getAttribute(const QDomNode &node, const QString &name);
 
 private slots:
     void initTestCase();

@@ -59,6 +59,18 @@ void test_QMapShack::initTestCase()
     testInput = QCoreApplication::applicationDirPath() + "/input/";
 }
 
+QString test_QMapShack::getAttribute(const QDomNode &node, const QString &name)
+{
+    const QDomNamedNodeMap &attrs = node.attributes();
+    if(!attrs.contains(name))
+    {
+        QWARN( QString("Attribute `%1` does not exist in DomNode `%2`").arg(name).arg(node.nodeName()).toStdString().c_str() );
+        return QString();
+    }
+
+    return attrs.namedItem(name).nodeValue();
+}
+
 void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
 {
     QFile file(expectFile);
@@ -96,10 +108,10 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
         const QDomNode &node = trkList.item(i);
 
         expectedTrack trk;
-        trk.name     = node.attributes().namedItem("name"      ).nodeValue();
-        trk.segCount = node.attributes().namedItem("segcount"  ).nodeValue().toInt();
-        trk.ptCount  = node.attributes().namedItem("pointcount").nodeValue().toInt();
-        trk.colorIdx = node.attributes().namedItem("colorIdx"  ).nodeValue().toInt();
+        trk.name     = getAttribute(node, "name");
+        trk.segCount = getAttribute(node, "segcount"  ).toInt();
+        trk.ptCount  = getAttribute(node, "pointcount").toInt();
+        trk.colorIdx = getAttribute(node, "colorIdx"  ).toInt();
 
         expTrks.insert(trk.name, trk);
     }
@@ -145,11 +157,6 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
             {
                 const expectedTrack &expTrk = expTrks.take(itemTrk->getName());
 
-                VERIFY_EQUAL(expTrk.colorIdx, itemTrk->getColorIdx());
-
-                VERIFY_EQUAL(expTrk.segCount, trk.segs.count());
-
-
                 int trkptCount = 0;
                 foreach(const CGisItemTrk::trkseg_t &seg, trk.segs)
                 {
@@ -161,7 +168,9 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
                     }
                 }
 
-                VERIFY_EQUAL(expTrk.ptCount, trkptCount);
+                VERIFY_EQUAL(expTrk.segCount, trk.segs.count());
+                VERIFY_EQUAL(expTrk.ptCount,  trkptCount);
+                VERIFY_EQUAL(expTrk.colorIdx, itemTrk->getColorIdx());
             }
         }
     }

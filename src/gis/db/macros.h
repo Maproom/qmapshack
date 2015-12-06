@@ -19,7 +19,7 @@
 #ifndef MACROS_H
 #define MACROS_H
 
-#define DB_VERSION 1
+#define DB_VERSION 2
 
 #define QUERY_EXEC(cmd) \
     if(!query.exec()) \

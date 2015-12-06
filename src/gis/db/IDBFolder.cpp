@@ -19,7 +19,7 @@
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
@@ -84,11 +84,11 @@ QString IDBFolder::getDBName()
     return db.connectionName();
 }
 
-CDBFolderDatabase * IDBFolder::getDBFolder()
+CDBFolderSqlite * IDBFolder::getDBFolder()
 {
     if(type() == eTypeDatabase)
     {
-        return dynamic_cast<CDBFolderDatabase*>(this);
+        return dynamic_cast<CDBFolderSqlite*>(this);
     }
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());

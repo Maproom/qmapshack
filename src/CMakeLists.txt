@@ -151,12 +151,13 @@ set( SRCS
     gis/tnv/CTwoNavProject.cpp
     gis/tnv/serialization.cpp
     gis/db/IDB.cpp
+    gis/db/IDBSqlite.cpp
     gis/db/CSetupDatabase.cpp
     gis/db/CSetupWorkspace.cpp
     gis/db/CSetupFolder.cpp
     gis/db/IDBFolder.cpp
-    gis/db/CDBFolderLostFound.cpp
-    gis/db/CDBFolderDatabase.cpp
+    gis/db/CDBFolderLostFound.cpp    
+    gis/db/CDBFolderSqlite.cpp
     gis/db/CDBFolderGroup.cpp
     gis/db/CDBFolderOther.cpp
     gis/db/CDBFolderProject.cpp
@@ -366,14 +367,15 @@ set( HDRS
     gis/CSelDevices.h
     gis/qms/CQmsProject.h
     gis/tnv/CTwoNavProject.h
-    gis/db/IDB.cpp
+    gis/db/IDB.h
+    gis/db/IDBSqlite.h
     gis/db/macros.h
     gis/db/CSetupDatabase.h
     gis/db/CSetupWorkspace.h
     gis/db/CSetupFolder.h
     gis/db/IDBFolder.h
     gis/db/CDBFolderLostFound.h
-    gis/db/CDBFolderDatabase.h
+    gis/db/CDBFolderSqlite.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderOther.h
     gis/db/CDBFolderProject.h

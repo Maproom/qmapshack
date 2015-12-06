@@ -24,7 +24,7 @@
 
 class QSqlDatabase;
 class CEvtW2DAckInfo;
-class CDBFolderDatabase;
+class CDBFolderSqlite;
 class CDBItem;
 
 /**
@@ -60,7 +60,7 @@ public:
      *
      * @return On success a pointer to the item holding the database is returned.
      */
-    CDBFolderDatabase * getDBFolder();
+    CDBFolderSqlite * getDBFolder();
 
     /**
      * @brief Search and get access to a subfolder

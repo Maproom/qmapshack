@@ -21,7 +21,7 @@
 #include "config.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
-#include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/CSetupDatabase.h"
@@ -106,7 +106,7 @@ CGisListDB::~CGisListDB()
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
+        CDBFolderSqlite * database = dynamic_cast<CDBFolderSqlite*>(topLevelItem(n));
         if(database)
         {
             names << database->text(CGisListDB::eColumnName);
@@ -119,13 +119,13 @@ CGisListDB::~CGisListDB()
 }
 
 
-CDBFolderDatabase * CGisListDB::getDataBase(const QString& name)
+CDBFolderSqlite * CGisListDB::getDataBase(const QString& name)
 {
     CGisListDBEditLock lock(true, this, "getDataBase");
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(topLevelItem(n));
+        CDBFolderSqlite * database = dynamic_cast<CDBFolderSqlite*>(topLevelItem(n));
         if(database && (database->getDBName() == name))
         {
             return database;
@@ -140,7 +140,7 @@ bool CGisListDB::hasDatabase(const QString& name)
     const int N = topLevelItemCount();
     for(int i = 0; i < N; i++)
     {
-        CDBFolderDatabase * folder = dynamic_cast<CDBFolderDatabase*>(topLevelItem(i));
+        CDBFolderSqlite * folder = dynamic_cast<CDBFolderSqlite*>(topLevelItem(i));
         if(folder && (folder->text(CGisListDB::eColumnName) == name))
         {
             return true;
@@ -158,7 +158,7 @@ bool CGisListDB::event(QEvent * e)
     {
         CGisListDBEditLock lock(true, this, "event");
         CEvtW2DAckInfo * evt        = (CEvtW2DAckInfo*)e;
-        CDBFolderDatabase * folder  = getDataBase(evt->db);
+        CDBFolderSqlite * folder  = getDataBase(evt->db);
         if(folder)
         {
             folder->update(evt);
@@ -175,7 +175,7 @@ bool CGisListDB::event(QEvent * e)
     {
         CGisListDBEditLock lock(true, this, "event");
         CEvtW2DCreate * evt         = (CEvtW2DCreate*)e;
-        CDBFolderDatabase * db  = getDataBase(evt->db);
+        CDBFolderSqlite * db  = getDataBase(evt->db);
         if(db)
         {
             quint64 idChild = 0;
@@ -214,7 +214,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         return;
     }
 
-    CDBFolderDatabase * database = dynamic_cast<CDBFolderDatabase*>(currentItem());
+    CDBFolderSqlite * database = dynamic_cast<CDBFolderSqlite*>(currentItem());
     if(database)
     {
         menuDatabase->exec(p);
@@ -267,12 +267,12 @@ void CGisListDB::slotAddDatabase()
 
 void CGisListDB::addDatabase(const QString& name, const QString& filename)
 {
-    new CDBFolderDatabase(filename, name, this);
+    new CDBFolderSqlite(filename, name, this);
 }
 
 void CGisListDB::slotDelDatabase()
 {
-    CDBFolderDatabase * folder = dynamic_cast<CDBFolderDatabase*>(currentItem());
+    CDBFolderSqlite * folder = dynamic_cast<CDBFolderSqlite*>(currentItem());
     if(folder == 0)
     {
         return;
@@ -325,7 +325,7 @@ void CGisListDB::slotDelFolder()
         return;
     }
 
-    CDBFolderDatabase * dbfolder = folder->getDBFolder();
+    CDBFolderSqlite * dbfolder = folder->getDBFolder();
 
     folder->remove();
     delete folder;
@@ -421,7 +421,7 @@ void CGisListDB::slotDelItem()
     int last = QMessageBox::NoButton;
 
     QList<QTreeWidgetItem*> dbItems;
-    QSet<CDBFolderDatabase*> dbFolders;
+    QSet<CDBFolderSqlite*> dbFolders;
 
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
@@ -458,7 +458,7 @@ void CGisListDB::slotDelItem()
     }
 
     qDeleteAll(dbItems);
-    foreach(CDBFolderDatabase * dbFolder, dbFolders)
+    foreach(CDBFolderSqlite * dbFolder, dbFolders)
     {
         dbFolder->updateLostFound();
     }

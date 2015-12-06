@@ -129,12 +129,18 @@ void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
 
 void CLineOpSelectRange::wheelEvent(QWheelEvent * e)
 {
-    resetState();
+    if(state == eState2nd)
+    {
+        resetState();
+    }
 }
 
 void CLineOpSelectRange::keyPressEvent(QKeyEvent * e)
 {
-    resetState();
+    if(state == eState2nd)
+    {
+        resetState();
+    }
 }
 
 

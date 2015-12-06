@@ -134,8 +134,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
 
         case eStateRangeSelected:
         {
-            resetState();
-            canvas->update();
+            resetState();            
             break;
         }
 
@@ -204,12 +203,18 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
 
 void CMouseRangeTrk::wheelEvent(QWheelEvent * e)
 {
-    resetState();
+    if(state == eStateRangeSelected)
+    {
+        resetState();
+    }
 }
 
 void CMouseRangeTrk::keyPressEvent(QKeyEvent * e)
 {
-    resetState();
+    if(state == eStateRangeSelected)
+    {
+        resetState();
+    }
 }
 
 void CMouseRangeTrk::resetState()
@@ -225,7 +230,9 @@ void CMouseRangeTrk::resetState()
     {
         scrOptRange->deleteLater();
     }
-    state = eStateIdle;
+    state   = eStateIdle;
+    anchor  = NOPOINTF;
+    canvas->update();
 }
 
 void CMouseRangeTrk::slotHidePoints()

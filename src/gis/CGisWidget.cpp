@@ -155,7 +155,14 @@ void CGisWidget::slotSaveAll()
         {
             continue;
         }
-        item->save();
+        if(item->canSave())
+        {
+            item->save();
+        }
+        else
+        {
+            item->saveAs();
+        }
     }
 
     CCanvas::restoreOverrideCursor("slotSaveAll");

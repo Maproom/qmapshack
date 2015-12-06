@@ -42,6 +42,11 @@ public:
      */
     void restoreDBLink();
 
+    virtual bool canSave() override
+    {
+        return true;
+    }
+
     virtual bool save() override;
 
     quint64 getId()

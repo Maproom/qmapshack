@@ -637,7 +637,7 @@ target_link_libraries(${APPLICATION_NAME}
 )
 
 if(UNIX AND NOT APPLE)
-    add_executable(qttest test/main.cpp ${RC_SRCS})
+    add_executable(qttest test/main.cpp test/test_QMapShack.h test/CGpxProject.cpp test/CSlfReader.cpp ${RC_SRCS})
 
     # copy the input files required by the unittests to ./bin/input
     file(COPY test/input DESTINATION ../bin)

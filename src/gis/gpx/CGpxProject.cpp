@@ -80,23 +80,36 @@ CGpxProject::~CGpxProject()
 
 void CGpxProject::loadGpx(const QString& filename)
 {
+    try
+    {
+        loadGpx(filename, this);
+    }
+    catch(QString &errormsg)
+    {
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
+                              QObject::tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
+        valid = false;
+    }
+}
+
+void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
+{
     // create file instance
     QFile file(filename);
 
     // if the file does not exist, the filename is assumed to be a name for a new project
     if(!file.exists())
     {
-        IGisProject::filename.clear();
-        setupName(filename);
-        setToolTip(CGisListWks::eColumnName, getInfo());
-        valid = true;
+        project->filename.clear();
+        project->setupName(filename);
+        project->setToolTip(CGisListWks::eColumnName, project->getInfo());
+        project->valid = true;
         return;
     }
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
-        return;
+        throw QObject::tr("Failed to open %1").arg(filename);
     }
 
 
@@ -108,8 +121,7 @@ void CGpxProject::loadGpx(const QString& filename)
     if(!xml.setContent(&file, false, &msg, &line, &column))
     {
         file.close();
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to read..."), QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg), QMessageBox::Abort);
-        return;
+        throw QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
     }
     file.close();
 
@@ -117,30 +129,29 @@ void CGpxProject::loadGpx(const QString& filename)
     QDomElement xmlGpx = xml.documentElement();
     if(xmlGpx.tagName() != "gpx")
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to read..."), QObject::tr("Not a GPX file: ") + filename, QMessageBox::Abort);
-        return;
+        throw QObject::tr("Not a GPX file: %1").arg(filename);
     }
 
     const QDomElement& xmlExtension = xmlGpx.namedItem("extensions").toElement();
     if(xmlExtension.namedItem("ql:key").isElement())
     {
-        key = xmlExtension.namedItem("ql:key").toElement().text();
+        project->key = xmlExtension.namedItem("ql:key").toElement().text();
     }
 
     if(xmlExtension.namedItem("ql:sorting").isElement())
     {
-        sorting = sorting_e(xmlExtension.namedItem("ql:sorting").toElement().text().toInt());
+        project->sorting = sorting_e(xmlExtension.namedItem("ql:sorting").toElement().text().toInt());
     }
 
     if(xmlExtension.namedItem("ql:correlation").isElement())
     {
-        noCorrelation = bool(xmlExtension.namedItem("ql:correlation").toElement().text().toInt() == 0);
+        project->noCorrelation = bool(xmlExtension.namedItem("ql:correlation").toElement().text().toInt() == 0);
     }
 
     const QDomNode& xmlMetadata = xmlGpx.namedItem("metadata");
     if(xmlMetadata.isElement())
     {
-        readMetadata(xmlMetadata, metadata);
+        project->readMetadata(xmlMetadata, project->metadata);
     }
 
 
@@ -152,7 +163,7 @@ void CGpxProject::loadGpx(const QString& filename)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlTrk = xmlTrks.item(n);
-        new CGisItemTrk(xmlTrk, this);
+        new CGisItemTrk(xmlTrk, project);
     }
 
     const QDomNodeList& xmlRtes = xmlGpx.elementsByTagName("rte");
@@ -160,7 +171,7 @@ void CGpxProject::loadGpx(const QString& filename)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlRte = xmlRtes.item(n);
-        new CGisItemRte(xmlRte, this);
+        new CGisItemRte(xmlRte, project);
     }
 
     const QDomNodeList& xmlWpts = xmlGpx.elementsByTagName("wpt");
@@ -168,14 +179,14 @@ void CGpxProject::loadGpx(const QString& filename)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlWpt = xmlWpts.item(n);
-        CGisItemWpt * wpt = new CGisItemWpt(xmlWpt, this);
+        CGisItemWpt * wpt = new CGisItemWpt(xmlWpt, project);
 
         /*
             Special care for waypoints stored on Garmin devices. Images attached
             to the waypoint are stored in the file system of the device and written
             as links to the waypoint. Let the device object take care of this.
          */
-        IDevice * device = dynamic_cast<IDevice*>(parent());
+        IDevice * device = dynamic_cast<IDevice*>(project->parent());
         if(device)
         {
             device->loadImages(*wpt);
@@ -187,12 +198,12 @@ void CGpxProject::loadGpx(const QString& filename)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlArea = xmlAreas.item(n);
-        new CGisItemOvlArea(xmlArea, this);
+        new CGisItemOvlArea(xmlArea, project);
     }
 
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
-    setToolTip(CGisListWks::eColumnName, getInfo());
-    valid = true;
+    project->setupName(QFileInfo(filename).baseName().replace("_", " "));
+    project->setToolTip(CGisListWks::eColumnName, project->getInfo());
+    project->valid = true;
 }
 
 bool CGpxProject::saveAs(const QString& fn, IGisProject& project)

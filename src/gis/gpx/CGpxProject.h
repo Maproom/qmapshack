@@ -53,6 +53,8 @@ public:
 
     static bool saveAs(const QString& fn, IGisProject& project);
 
+    static void loadGpx(const QString &filename, CGpxProject *project);
+
 private:
     void loadGpx(const QString& filename);
 };

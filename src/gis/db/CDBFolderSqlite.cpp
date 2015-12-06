@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,10 +17,10 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
-#include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBFolderLostFound.h"
 
-CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& name, QTreeWidget *parent)
+CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
     : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
     , filename(filename)
     , folderLostFound(0)
@@ -34,11 +34,11 @@ CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& nam
     setupFromDB();
 }
 
-CDBFolderDatabase::~CDBFolderDatabase()
+CDBFolderSqlite::~CDBFolderSqlite()
 {
 }
 
-void CDBFolderDatabase::expanding()
+void CDBFolderSqlite::expanding()
 {
     IDBFolder::expanding();
 
@@ -46,7 +46,7 @@ void CDBFolderDatabase::expanding()
     insertChild(0, folderLostFound);
 }
 
-void CDBFolderDatabase::updateLostFound()
+void CDBFolderSqlite::updateLostFound()
 {
     if(folderLostFound)
     {

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,19 +16,23 @@
 
 **********************************************************************************************/
 
-#ifndef MACROS_H
-#define MACROS_H
+#ifndef IDBSQLITE_H
+#define IDBSQLITE_H
 
-#define DB_VERSION 2
+#include "gis/db/IDB.h"
 
-#define QUERY_EXEC(cmd) \
-    if(!query.exec()) \
-    { \
-        qDebug() << query.lastQuery(); \
-        qDebug() << query.lastError(); \
-        cmd; \
-    } \
+class IDBSqlite : public IDB
+{
+    public:
+        IDBSqlite();
+        virtual ~IDBSqlite() = default;
 
+protected:
+    bool setupDB(const QString &filename, const QString &connectionName);
+    bool initDB();
+    bool migrateDB(int version);
 
-#endif //MACROS_H
+};
+
+#endif //IDBSQLITE_H
 

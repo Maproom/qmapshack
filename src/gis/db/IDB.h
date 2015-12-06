@@ -28,14 +28,11 @@ public:
     IDB();
     virtual ~IDB();
 
-protected:
-    bool setupDB(const QString &filename, const QString &connectionName);
-    bool initDB();
-    bool migrateDB(int version);
-
     QSqlDatabase db;
 
     static QMap<QString,int> references;
+protected:
+    void setup(const QString& connectionName);
 };
 
 #endif //IDB_H

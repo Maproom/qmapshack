@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,19 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CDBFOLDERDATABASE_H
-#define CDBFOLDERDATABASE_H
+#ifndef CDBFOLDERSQLITE_H
+#define CDBFOLDERSQLITE_H
 
 #include "gis/db/IDBFolder.h"
-#include <gis/db/IDB.h>
+#include <gis/db/IDBSqlite.h>
 
 class CDBFolderLostFound;
 
-class CDBFolderDatabase : public IDBFolder, private IDB
+class CDBFolderSqlite : public IDBFolder, private IDBSqlite
 {
 public:
-    CDBFolderDatabase(const QString &filename, const QString &name, QTreeWidget *parent);
-    virtual ~CDBFolderDatabase();
+    CDBFolderSqlite(const QString &filename, const QString &name, QTreeWidget *parent);
+    virtual ~CDBFolderSqlite();
 
     void expanding();
     void updateLostFound();
@@ -46,6 +46,5 @@ private:
     QString filename;
     CDBFolderLostFound * folderLostFound = 0;
 };
-
-#endif //CDBFOLDERDATABASE_H
+#endif //CDBFOLDERSQLITE_H
 

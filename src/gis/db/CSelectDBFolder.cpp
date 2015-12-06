@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "helpers/CSettings.h"
 
@@ -39,7 +39,7 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QWidget *parent)
     const int N = names.count();
     for(int i = 0; i < N; i++)
     {
-        new CDBFolderDatabase(files[i], names[i], treeWidget);
+        new CDBFolderSqlite(files[i], names[i], treeWidget);
     }
 
     connect(treeWidget, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));

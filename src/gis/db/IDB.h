@@ -28,10 +28,16 @@ public:
     IDB();
     virtual ~IDB();
 
-    QSqlDatabase db;
 
-    static QMap<QString,int> references;
+    QSqlDatabase& getDb()
+    {
+        return IDB::db;
+    }
+
+
 protected:
+    static QMap<QString,int> references;
+    QSqlDatabase db;
     void setup(const QString& connectionName);
 };
 

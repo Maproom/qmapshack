@@ -24,7 +24,7 @@
 
 class CDBFolderLostFound;
 
-class CDBFolderSqlite : public IDBFolder, private IDBSqlite
+class CDBFolderSqlite : public IDBFolder, public IDBSqlite
 {
 public:
     CDBFolderSqlite(const QString &filename, const QString &name, QTreeWidget *parent);
@@ -35,11 +35,6 @@ public:
     const QString& getFilename()
     {
         return filename;
-    }
-
-    QSqlDatabase& getDb()
-    {
-        return IDB::db;
     }
 
 private:

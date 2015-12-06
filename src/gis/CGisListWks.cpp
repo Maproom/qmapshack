@@ -294,7 +294,6 @@ void CGisListWks::migrateDB(int version)
     {
         migrateDB1to2();
     }
-//  if(version < 3) { migrateDB2to3(); }
 
     // save the new version to the database
     QSqlQuery query(db);

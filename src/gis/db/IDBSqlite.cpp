@@ -162,16 +162,39 @@ bool IDBSqlite::migrateDB(int version)
 {
     QSqlQuery query(db);
 
-    for(version++; version <= DB_VERSION; version++)
+    if(version < 2)
     {
-//        switch(version)
-//        {
-//        default:;
-//        }
+        migrateDB1to2();
     }
+
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", version - 1);
     QUERY_EXEC(return false);
     return true;
 }
 
+bool IDBSqlite::migrateDB1to2()
+{
+    QSqlQuery query(db);
+    query.prepare("BEGIN TRANSACTION;"
+                  "ALTER TABLE folders RENAME TO tmp_folders;"
+                  "CREATE TABLE folders ("
+                                      "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                                      "type           INTEGER NOT NULL,"
+                                      "keyqms         TEXT,"
+                                      "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                                      "name           TEXT NOT NULL,"
+                                      "comment        TEXT,"
+                                      "locked         BOOLEAN DEFAULT FALSE,"
+                                      "data           BLOB"
+                  ");"
+                  "INSERT INTO orig_table_name(id, type,keyqms,date,name,comment,locked,data)"
+                  "SELECT *"
+                  "FROM tmp_folders;"
+                  "DROP TABLE tmp_folders;"
+                  "COMMIT;"
+                  );
+    QUERY_EXEC(return false);
+
+    return true;
+}

@@ -31,6 +31,7 @@ protected:
     bool setupDB(const QString &filename, const QString &connectionName);
     bool initDB();
     bool migrateDB(int version);
+    bool migrateDB1to2();
 
 };
 

@@ -22,8 +22,13 @@ class QDomNode;
 
 extern QString testInput;
 
+#define SUBVERIFY(EXPR, MSG) \
+    { if(!(EXPR)) { throw QString("Verification of `%1` failed: %2").arg(#EXPR).arg(MSG); } }
+
 #define VERIFY_EQUAL(EXP, ACT) \
-    QVERIFY2( (EXP == ACT), QTest::toString(QString("Expected `%1`, got `%2`").arg(EXP).arg(ACT)) );
+    SUBVERIFY( (EXP == ACT), QTest::toString(QString("Expected `%1`, got `%2`").arg(EXP).arg(ACT)) );
+
+#define TCWRAPPER( CALL ) { try { CALL; } catch(QString &error) { QFAIL(error.toStdString().c_str()); } }
 
 class test_QMapShack : public QObject
 {
@@ -36,14 +41,19 @@ class test_QMapShack : public QObject
 
     /// helper functions
     QString getAttribute(const QDomNode &node, const QString &name);
-
-private slots:
-    void initTestCase();
+    QString getTempFileName(const QString &ext);
 
     /// CSlfReader
     void readValidSLFFile();
     void readNonExistingSLFFile();
 
     // CGpxProject
-    void readValidGPXFile();
+    void readWriteGPXFile();
+
+private slots:
+    void initTestCase();
+
+    void _readValidSLFFile()       { TCWRAPPER( readValidSLFFile()       ) }
+    void _readNonExistingSLFFile() { TCWRAPPER( readNonExistingSLFFile() ) }
+    void _readWriteGPXFile()       { TCWRAPPER( readWriteGPXFile()       ) }
 };

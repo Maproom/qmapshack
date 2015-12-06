@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include <QDebug>
+#include <QTemporaryFile>
 
 #include "test/test_QMapShack.h"
 
@@ -80,10 +81,7 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
     QString msg;
     int line;
     int column;
-    if(!xml.setContent(&file, false, &msg, &line, &column))
-    {
-        QFAIL( QString("[%1:%2] %3").arg(expectFile).arg(line).arg(msg).toStdString().c_str() );
-    }
+    SUBVERIFY(xml.setContent(&file, false, &msg, &line, &column), QString("[%1:%2] %3").arg(expectFile).arg(line).arg(msg));
 
     const QDomNode &exp = xml.namedItem("expected");
 
@@ -130,8 +128,8 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
     //const QDomNodeList &expOvls = exp.namedItem("areas"    ).childNodes(); TODO
 
 
-    QVERIFY(  proj.isValid()   );
-    QVERIFY( !proj.isChanged() );
+    VERIFY_EQUAL(true,  proj.isValid());
+    VERIFY_EQUAL(false, proj.isChanged());
 
     VERIFY_EQUAL(expName, proj.getName());
     VERIFY_EQUAL(expDesc, proj.getDescription());
@@ -151,7 +149,7 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
             VERIFY_EQUAL(true, expWpts.contains(wpt->getName()));
             expWpts.remove(wpt->getName());
 
-            QVERIFY( wpt->getPosition() != QPointF(0., 0.) );
+            SUBVERIFY(wpt->getPosition() != QPointF(0., 0.), "Waypoint has position 0/0");
         }
 
         CGisItemTrk *itemTrk = dynamic_cast<CGisItemTrk*>(item);
@@ -159,39 +157,45 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
         {
             const CGisItemTrk::trk_t &trk = itemTrk->getTrackData();
 
-            if(!expTrks.contains(itemTrk->getName()))
-            {
-                QFAIL( QString("Found track `%1`, there shouldn't be any track with that name").arg(itemTrk->getName()).toStdString().c_str() );
-            }
-            else
-            {
-                const expectedTrack &expTrk = expTrks.take(itemTrk->getName());
+            SUBVERIFY(expTrks.contains(itemTrk->getName()), QString("Found track `%1`, there shouldn't be any track with that name").arg(itemTrk->getName()));
 
-                int trkptCount = 0;
-                foreach(const CGisItemTrk::trkseg_t &seg, trk.segs)
+            const expectedTrack &expTrk = expTrks.take(itemTrk->getName());
+
+            int trkptCount = 0;
+            foreach(const CGisItemTrk::trkseg_t &seg, trk.segs)
+            {
+                trkptCount += seg.pts.count();
+
+                foreach(const CGisItemTrk::trkpt_t &trkpt, seg.pts)
                 {
-                    trkptCount += seg.pts.count();
-
-                    foreach(const CGisItemTrk::trkpt_t &trkpt, seg.pts)
-                    {
-                        QVERIFY( (0. != trkpt.lat) && (0. != trkpt.lon) );
-                    }
+                    SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
                 }
-
-                VERIFY_EQUAL(expTrk.segCount, trk.segs.count());
-                VERIFY_EQUAL(expTrk.ptCount,  trkptCount);
-                VERIFY_EQUAL(expTrk.colorIdx, itemTrk->getColorIdx());
-
-                QStringList existingSources = itemTrk->getExistingDataSources();
-                existingSources.sort();
-                QVERIFY(expTrk.colorSources == existingSources);
             }
+
+            VERIFY_EQUAL(expTrk.segCount, trk.segs.count());
+            VERIFY_EQUAL(expTrk.ptCount,  trkptCount);
+            VERIFY_EQUAL(expTrk.colorIdx, itemTrk->getColorIdx());
+
+            QStringList existingSources = itemTrk->getExistingDataSources();
+            existingSources.sort();
+            SUBVERIFY(expTrk.colorSources == existingSources, "Expected and existing list of colorSources do not match");
+            
         }
     }
 
     // ensure all expected waypoints/tracks actually exist
-    QVERIFY( expWpts.isEmpty() );
-    QVERIFY( expTrks.isEmpty() );
+    SUBVERIFY(expWpts.isEmpty(), "Not all expected waypoints found");
+    SUBVERIFY(expTrks.isEmpty(), "Not all expected tracks found");
+}
+
+QString test_QMapShack::getTempFileName(const QString &ext)
+{
+    QTemporaryFile tmp("qtt_XXXXXX." + ext);
+    tmp.open();
+    QString tempFile = tmp.fileName();
+    tmp.remove();
+
+    return tempFile;
 }
 
 QTEST_MAIN(test_QMapShack)

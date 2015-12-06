@@ -36,10 +36,10 @@ void test_QMapShack::readValidSLFFile()
     }
     catch(QString &errormsg)
     {
-        QFAIL(QString("Did not expect any error, but got: `%1`").arg(errormsg).toStdString().c_str());
+        SUBVERIFY(false, QString("Did not expect any error, but got: `%1`").arg(errormsg));
     }
 
-    QVERIFY( IGisProject::eTypeSlf == proj->getType() );
+    SUBVERIFY(IGisProject::eTypeSlf == proj->getType(), "Project has invalid type");
 
     verify(testInput + "qtt_slf_file0.slf.xml", *proj);
     delete proj;
@@ -57,10 +57,10 @@ void test_QMapShack::readNonExistingSLFFile()
     }
     catch(QString &errormsg)
     {
-        QVERIFY( errormsg.contains("does not exist") );
+        SUBVERIFY(errormsg.contains("does not exist"), "Wrong error message");
         hadException = true;
     }
-    QVERIFY( hadException );
+    SUBVERIFY(hadException, "File is neither valid, nor an exception was thrown");
 
     delete proj;
 }

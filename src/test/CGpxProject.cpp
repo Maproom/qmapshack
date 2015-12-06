@@ -24,25 +24,47 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CKnownExtension.h"
 
-void test_QMapShack::readValidGPXFile()
+static CGpxProject* readGpxFile(const QString &file, bool valid)
 {
     // this does not ready anything, a bare CSlfProject is created
-    CGpxProject *proj = new CGpxProject("qtt_gpx_file0.gpx", (CGisListWks*) nullptr);
+    CGpxProject *proj = new CGpxProject("a very random string to prevent loading via constructor", (CGisListWks*) nullptr);
 
+    bool hadExc = false;
     try
     {
         proj->blockUpdateItems(true);
-        CGpxProject::loadGpx(testInput + "qtt_gpx_file0.gpx", proj);
+        CGpxProject::loadGpx(file, proj);
         proj->blockUpdateItems(false);
     }
     catch(QString &errormsg)
     {
-        QFAIL(QString("Did not expect any error, but got: `%1`").arg(errormsg).toStdString().c_str());
+        SUBVERIFY(!valid, "Expected `" + file + "` to be valid, error while reading: " + errormsg);
+        hadExc = true;
     }
 
-    QVERIFY( IGisProject::eTypeGpx == proj->getType() );
+    SUBVERIFY(valid || hadExc, "File is neither valid, nor an exception was thrown")
+    SUBVERIFY(IGisProject::eTypeGpx == proj->getType(), "Project has invalid type");
 
+    return proj;
+}
+
+void test_QMapShack::readWriteGPXFile()
+{
+    // step 1: read .gpx file
+    CGpxProject *proj = readGpxFile(testInput + "qtt_gpx_file0.gpx", true);
+    verify(testInput + "qtt_gpx_file0.gpx.xml", *proj);
+
+    // step 2: write to new .gpx file
+    QString tmpFile = getTempFileName("gpx");
+    CGpxProject::saveAs(tmpFile, *proj);
+
+    delete proj;
+
+    // step 3: read .gpx file from step 2
+    proj = readGpxFile(tmpFile, true);
     verify(testInput + "qtt_gpx_file0.gpx.xml", *proj);
     delete proj;
+
+    QFile(tmpFile).remove();
 }
 

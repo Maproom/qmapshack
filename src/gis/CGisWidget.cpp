@@ -58,6 +58,8 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     connect(treeDB, SIGNAL(sigChanged()), SLOT(slotHelpText()));
 
     slotHelpText();
+
+    treeWks->slotLoadWorkspace();
 }
 
 CGisWidget::~CGisWidget()

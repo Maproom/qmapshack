@@ -31,7 +31,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
 {
 //    qDebug() << "CDBItem::CDBItem()";
     QSqlQuery query(db);
-    query.prepare("SELECT type, key, icon, name, comment FROM items WHERE id=:id");
+    query.prepare("SELECT type, keyqms, icon, name, comment FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     if(query.next())

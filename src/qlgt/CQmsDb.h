@@ -19,7 +19,7 @@
 #ifndef CQMSDB_H
 #define CQMSDB_H
 
-#include "gis/db/IDB.h"
+#include "gis/db/IDBSqlite.h"
 #include <QMap>
 #include <QObject>
 
@@ -31,7 +31,7 @@ class CQlgtTrack;
 class CQlgtRoute;
 class IQlgtOverlay;
 
-class CQmsDb : public QObject, private IDB
+class CQmsDb : public QObject, private IDBSqlite
 {
 public:
     CQmsDb(const QString& filename, CImportDatabase * parent);

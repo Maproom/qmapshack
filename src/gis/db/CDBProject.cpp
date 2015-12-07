@@ -63,8 +63,8 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         metadata.name = name;
         metadata.time = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
 
-        query.prepare("UPDATE folders SET key=:key WHERE id=:id");
-        query.bindValue(":key", getKey());
+        query.prepare("UPDATE folders SET keyqms=:keyqms WHERE id=:id");
+        query.bindValue(":keyqms", getKey());
         query.bindValue(":id", id);
         QUERY_EXEC(return );
     }
@@ -94,8 +94,8 @@ void CDBProject::restoreDBLink()
     db = QSqlDatabase::database(filename);
 
     QSqlQuery query(db);
-    query.prepare("SELECT id FROM folders WHERE key=:key");
-    query.bindValue(":key", getKey());
+    query.prepare("SELECT id FROM folders WHERE keyqms=:keyqms");
+    query.bindValue(":keyqms", getKey());
     QUERY_EXEC(return );
     if(query.next())
     {
@@ -169,9 +169,9 @@ void CDBProject::updateItem(IGisItem * item, quint64 idItem)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("UPDATE items SET type=:type, key=:key, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
+    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
     query.bindValue(":type",    item->type());
-    query.bindValue(":key",     item->getKey().item);
+    query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":comment", item->getInfo());
@@ -198,9 +198,9 @@ quint64 CDBProject::insertItem(IGisItem * item)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("INSERT INTO items (type, key, icon, name, comment, data) VALUES (:type, :key, :icon, :name, :comment, :data)");
+    query.prepare("INSERT INTO items (type, keyqms, icon, name, comment, data) VALUES (:type, :keyqms, :icon, :name, :comment, :data)");
     query.bindValue(":type",    item->type());
-    query.bindValue(":key",     item->getKey().item);
+    query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":comment", item->getInfo());
@@ -254,8 +254,8 @@ bool CDBProject::save()
             // test if item exists in database
             quint64 idItem      = 0;
             quint32 typeItem    = 0;
-            query.prepare("SELECT id, type FROM items WHERE key=:key");
-            query.bindValue(":key", item->getKey().item);
+            query.prepare("SELECT id, type FROM items WHERE keyqms=:keyqms");
+            query.bindValue(":keyqms", item->getKey().item);
             QUERY_EXEC(throw -1);
 
             if(query.next())

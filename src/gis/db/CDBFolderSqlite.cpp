@@ -26,7 +26,7 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
     , folderLostFound(0)
 {
     setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
+    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
     setText(CGisListDB::eColumnName, name);
 
     setupDB(filename, name);

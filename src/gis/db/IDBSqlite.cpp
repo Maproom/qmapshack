@@ -61,7 +61,10 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
     query.prepare("PRAGMA synchronous=off");
     QUERY_EXEC(return false);
 
-    //just to make sure
+    // When migrating the database these tables are used.
+    // Due to caching they can't be dropped right after the
+    // migration. That is why we look for them on startup.
+    // And delete them as a second chance.
     if(query.exec("select * from tmp_folders"))
     {
         query.prepare("DROP TABLE tmp_folders;");
@@ -212,14 +215,14 @@ bool IDBSqlite::migrateDB1to2()
     query.prepare("ALTER TABLE folders RENAME TO tmp_folders;");
     QUERY_EXEC(return false);
     query.prepare("CREATE TABLE folders ("
-                                      "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                      "type           INTEGER NOT NULL,"
-                                      "keyqms         TEXT,"
-                                      "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                                      "name           TEXT NOT NULL,"
-                                      "comment        TEXT,"
-                                      "locked         BOOLEAN DEFAULT FALSE,"
-                                      "data           BLOB"
+                      "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                      "type           INTEGER NOT NULL,"
+                      "keyqms         TEXT,"
+                      "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                      "name           TEXT NOT NULL,"
+                      "comment        TEXT,"
+                      "locked         BOOLEAN DEFAULT FALSE,"
+                      "data           BLOB"
                   ");");
     QUERY_EXEC(return false);
     query.prepare("INSERT INTO folders(id,type,keyqms,date,name,comment,locked,data) SELECT * FROM tmp_folders;");

@@ -238,6 +238,17 @@ void CGisListWks::configDB()
         return;
     }
 
+    // When migrating the database these tables are used.
+    // Due to caching they can't be dropped right after the
+    // migration. That is why we look for them on startup.
+    // And delete them as a second chance.
+    if(query.exec("select * from tmp_workspace"))
+    {
+        query.prepare("DROP TABLE tmp_workspace;");
+        QUERY_EXEC();
+    }
+
+
     if(!query.exec("SELECT version FROM versioninfo"))
     {
         initDB();

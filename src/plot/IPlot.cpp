@@ -641,7 +641,7 @@ void IPlot::draw()
 void IPlot::drawData(QPainter& p)
 {
     int penIdx = 0;
-    int ptx, pty, oldPtx;
+    int ptx, pty, oldPtx, oldPty;
     QList<CPlotData::line_t> lines                  = data->lines;
     QList<CPlotData::line_t>::const_iterator line   = lines.begin();
 
@@ -661,14 +661,17 @@ void IPlot::drawData(QPainter& p)
         ptx = left   + xaxis.val2pt( point->x() );
         pty = bottom - yaxis.val2pt( point->y() );
         oldPtx = ptx;
+        oldPty = pty;
 
         background << QPointF(left,zero);
         background << QPointF(left,pty);
         background << QPointF(ptx,pty);
         foreground << QPointF(ptx,pty);
 
-        while(point != polyline.end())
+        while(point != polyline.end() && ptx <= right)
         {
+            oldPtx = ptx;
+            oldPty = pty;
             ptx = left   + xaxis.val2pt( point->x() );
             pty = bottom - yaxis.val2pt( point->y() );
 
@@ -677,7 +680,6 @@ void IPlot::drawData(QPainter& p)
                 ++point;
                 continue;
             }
-            oldPtx = ptx;
 
             if(ptx >= left && ptx <= right)
             {
@@ -687,8 +689,14 @@ void IPlot::drawData(QPainter& p)
             ++point;
         }
 
-        background << QPointF(right,pty);
-        background << QPointF(right,zero);
+        if(point != polyline.end() && (ptx != oldPtx))
+        {
+            pty = oldPty + ((pty - oldPty) * (right - oldPtx)) / (ptx - oldPtx);
+        }
+
+        background << QPointF(right, pty);
+        background << QPointF(right, zero);
+        foreground << QPointF(right, pty);
 
         p.setPen(Qt::NoPen);
         p.setBrush(colors[penIdx]);

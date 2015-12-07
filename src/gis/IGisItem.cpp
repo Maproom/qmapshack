@@ -188,7 +188,7 @@ void IGisItem::genKey()
 void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT data, key FROM items WHERE id=:id");
+    query.prepare("SELECT data, keyqms FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     if(query.next())

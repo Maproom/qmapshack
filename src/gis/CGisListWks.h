@@ -57,6 +57,9 @@ public:
 
     void removeDevice(const QString& key);
 
+public slots:
+    void slotLoadWorkspace();
+
 signals:
     void sigChanged();
 
@@ -65,8 +68,7 @@ protected:
     void dropEvent ( QDropEvent  * e );
 
 private slots:
-    void slotSaveWorkspace();
-    void slotLoadWorkspace();
+    void slotSaveWorkspace();    
     void slotContextMenu(const QPoint& point);
     void slotSaveProject();
     void slotSaveAsProject();
@@ -106,6 +108,7 @@ private:
     void initDB();
     void migrateDB(int version);
     void migrateDB1to2();
+    void migrateDB2to3();
     void setVisibilityOnMap(bool visible);
 
     QSqlDatabase db;

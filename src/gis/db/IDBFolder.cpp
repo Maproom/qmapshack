@@ -288,7 +288,7 @@ void IDBFolder::setupFromDB()
     QSqlQuery query(db);
 
     // get basic properties like name and key
-    query.prepare("SELECT key, name, comment FROM folders WHERE id=:id");
+    query.prepare("SELECT keyqms, name, comment FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();

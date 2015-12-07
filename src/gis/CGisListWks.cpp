@@ -58,7 +58,7 @@
 #include <QtWidgets>
 
 #undef  DB_VERSION
-#define DB_VERSION 2
+#define DB_VERSION 3
 
 class CGisListWksEditLock
 {
@@ -204,8 +204,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     deviceWatcher = new CDeviceWatcherWindows(this);
     connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
 #endif
-
-    QTimer::singleShot(500, this, SLOT(slotLoadWorkspace()));
 }
 
 CGisListWks::~CGisListWks()
@@ -273,7 +271,7 @@ void CGisListWks::initDB()
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "type           INTEGER NOT NULL,"
                     "name           TEXT NOT NULL,"
-                    "key            TEXT NOT NULL,"
+                    "keyqms         TEXT NOT NULL,"
                     "changed        BOOLEAN DEFAULT FALSE,"
                     "visible        BOOLEAN DEFAULT TRUE,"
                     "data           BLOB NOT NULL"
@@ -293,6 +291,10 @@ void CGisListWks::migrateDB(int version)
     if(version < 2)
     {
         migrateDB1to2();
+    }
+    if(version < 3)
+    {
+        migrateDB2to3();
     }
 
     // save the new version to the database
@@ -314,6 +316,33 @@ void CGisListWks::migrateDB1to2()
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
     }
+}
+
+void CGisListWks::migrateDB2to3()
+{
+    QSqlQuery query(db);
+
+    query.prepare("BEGIN TRANSACTION;");
+    QUERY_EXEC(return);
+    query.prepare("ALTER TABLE workspace RENAME TO tmp_workspace;");
+    QUERY_EXEC(return);
+    query.prepare( "CREATE TABLE workspace ("
+                "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                "type           INTEGER NOT NULL,"
+                "name           TEXT NOT NULL,"
+                "keyqms         TEXT NOT NULL,"
+                "changed        BOOLEAN DEFAULT FALSE,"
+                "visible        BOOLEAN DEFAULT TRUE,"
+                "data           BLOB NOT NULL"
+                ")");
+    QUERY_EXEC(return);
+    query.prepare("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;");
+    QUERY_EXEC(return);
+    query.prepare("COMMIT;");
+    QUERY_EXEC(return);
+    query.prepare("DROP TABLE tmp_workspace;");
+    QUERY_EXEC(return);
+
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -789,9 +818,9 @@ void CGisListWks::slotSaveWorkspace()
 
         project->IGisProject::operator>>(stream);
 
-        query.prepare("INSERT INTO workspace (type, key, name, changed, visible, data) VALUES (:type, :key, :name, :changed, :visible, :data)");
+        query.prepare("INSERT INTO workspace (type, keyqms, name, changed, visible, data) VALUES (:type, :keyqms, :name, :changed, :visible, :data)");
         query.bindValue(":type", project->getType());
-        query.bindValue(":key", project->getKey());
+        query.bindValue(":keyqms", project->getKey());
         query.bindValue(":name", project->getName());
         query.bindValue(":changed", project->isChanged());
 
@@ -813,7 +842,7 @@ void CGisListWks::slotLoadWorkspace()
 
     QSqlQuery query(db);
 
-    query.prepare("SELECT type, key, name, changed, visible, data FROM workspace");
+    query.prepare("SELECT type, keyqms, name, changed, visible, data FROM workspace");
     QUERY_EXEC(return );
 
     const int total = query.size();

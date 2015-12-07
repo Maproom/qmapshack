@@ -18,8 +18,10 @@
 
 #include "gis/db/IDBSqlite.h"
 #include "gis/db/macros.h"
+#include "CMainWindow.h"
 
 #include <QtSql>
+#include <QtWidgets>
 
 IDBSqlite::IDBSqlite()
 {
@@ -56,8 +58,21 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
     QUERY_EXEC(return false);
     query.prepare("PRAGMA page_size=8192");
     QUERY_EXEC(return false);
-    query.prepare("PRAGMA synchronous=OFF");
+    query.prepare("PRAGMA synchronous=off");
     QUERY_EXEC(return false);
+
+    //just to make sure
+    if(query.exec("select * from tmp_folders"))
+    {
+        query.prepare("DROP TABLE tmp_folders;");
+        QUERY_EXEC();
+    }
+    if(query.exec("select * from tmp_items"))
+    {
+        query.prepare("DROP TABLE tmp_items;");
+        QUERY_EXEC();
+    }
+
 
     if(!query.exec("SELECT version FROM versioninfo"))
     {
@@ -97,7 +112,7 @@ bool IDBSqlite::initDB()
     if(!query.exec( "CREATE TABLE folders ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "type           INTEGER NOT NULL,"
-                    "key            TEXT,"
+                    "keyqms         TEXT,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
@@ -113,7 +128,7 @@ bool IDBSqlite::initDB()
     if(!query.exec( "CREATE TABLE items ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "type           INTEGER,"
-                    "key            TEXT NOT NULL,"
+                    "keyqms         TEXT NOT NULL,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "icon           BLOB NOT NULL,"
                     "name           TEXT NOT NULL,"
@@ -164,21 +179,39 @@ bool IDBSqlite::migrateDB(int version)
 
     if(version < 2)
     {
-        migrateDB1to2();
+        if(!migrateDB1to2())
+        {
+            return false;
+        }
     }
 
     query.prepare( "UPDATE versioninfo set version=:version");
-    query.bindValue(":version", version - 1);
+    query.bindValue(":version", DB_VERSION);
     QUERY_EXEC(return false);
     return true;
 }
 
 bool IDBSqlite::migrateDB1to2()
 {
+    QString msg = QObject::tr("The internal database format has changed. QMapShack will migrate your database, now. "
+                              "After the migration the database won't be usable with older versions of QMapShack. "
+                              "It is recommended to backup the database first.");
+    int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
+                                   QObject::tr("Migrate database..."),
+                                   msg,
+                                   QMessageBox::Ok|QMessageBox::Abort);
+    if(res != QMessageBox::Ok)
+    {
+        exit(0);
+    }
+
     QSqlQuery query(db);
-    query.prepare("BEGIN TRANSACTION;"
-                  "ALTER TABLE folders RENAME TO tmp_folders;"
-                  "CREATE TABLE folders ("
+
+    query.prepare("BEGIN TRANSACTION;");
+    QUERY_EXEC(return false);
+    query.prepare("ALTER TABLE folders RENAME TO tmp_folders;");
+    QUERY_EXEC(return false);
+    query.prepare("CREATE TABLE folders ("
                                       "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                                       "type           INTEGER NOT NULL,"
                                       "keyqms         TEXT,"
@@ -187,14 +220,33 @@ bool IDBSqlite::migrateDB1to2()
                                       "comment        TEXT,"
                                       "locked         BOOLEAN DEFAULT FALSE,"
                                       "data           BLOB"
-                  ");"
-                  "INSERT INTO orig_table_name(id, type,keyqms,date,name,comment,locked,data)"
-                  "SELECT *"
-                  "FROM tmp_folders;"
-                  "DROP TABLE tmp_folders;"
-                  "COMMIT;"
-                  );
+                  ");");
     QUERY_EXEC(return false);
+    query.prepare("INSERT INTO folders(id,type,keyqms,date,name,comment,locked,data) SELECT * FROM tmp_folders;");
+    QUERY_EXEC(return false);
+    query.prepare("COMMIT;");
+    QUERY_EXEC(return false);
+
+    query.prepare("BEGIN TRANSACTION;");
+    QUERY_EXEC(return false);
+    query.prepare("ALTER TABLE items RENAME TO tmp_items;");
+    QUERY_EXEC(return false);
+    query.prepare("CREATE TABLE items ("
+                      "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                      "type           INTEGER,"
+                      "keyqms         TEXT NOT NULL,"
+                      "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                      "icon           BLOB NOT NULL,"
+                      "name           TEXT NOT NULL,"
+                      "comment        TEXT,"
+                      "data           BLOB NOT NULL"
+                  ");");
+    QUERY_EXEC(return false);
+    query.prepare("INSERT INTO items(id,type,keyqms,date,icon,name,comment,data) SELECT * FROM tmp_items;");
+    QUERY_EXEC(return false);
+    query.prepare("COMMIT;");
+    QUERY_EXEC(return false);
+
 
     return true;
 }

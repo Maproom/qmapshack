@@ -147,7 +147,7 @@ void CDetailsPrj::slotSetupGui()
         if(idx != NOIDX)
         {
             setObjectName(prj.getName());
-            tabWidget->setTabText(idx, prj.getName());
+            tabWidget->setTabText(idx, prj.getName().replace("&", "&&"));
         }
     }
 

@@ -21,7 +21,7 @@
 
 #include "gis/db/IDB.h"
 
-class IDBMysql  : public IDB
+class IDBMysql : public IDB
 {
 public:
     IDBMysql();
@@ -31,7 +31,6 @@ protected:
     bool setupDB(const QString &server, const QString &user, const QString &passwd, const QString &name, const QString &connectionName);
     bool initDB();
     bool migrateDB(int version);
-
 };
 
 #endif //IDBMYSQL_H

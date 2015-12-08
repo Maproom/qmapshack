@@ -16,24 +16,25 @@
 
 **********************************************************************************************/
 
-#ifndef CDBFOLDERMYSQL_H
-#define CDBFOLDERMYSQL_H
+#ifndef IDBFOLDERSQL_H
+#define IDBFOLDERSQL_H
 
-#include "gis/db/IDBFolderSql.h"
-#include <gis/db/IDBMysql.h>
+#include "gis/db/IDBFolder.h"
 
+class CDBFolderLostFound;
 
-class CDBFolderMysql : public IDBFolderSql, public IDBMysql
+class IDBFolderSql : public IDBFolder
 {
 public:
-    CDBFolderMysql(const QString &server, const QString &user, const QString &passwd, const QString &name, QTreeWidget *parent);
-    virtual ~CDBFolderMysql() = default;
+    IDBFolderSql(QSqlDatabase& db, QTreeWidget * parent);
+    virtual ~IDBFolderSql() = default;
 
-private:
-    const QString server;
-    const QString user;
-    const QString passwd;
+    void expanding();
+    void updateLostFound();
+
+protected:
+    CDBFolderLostFound * folderLostFound = 0;
 };
 
-#endif //CDBFOLDERMYSQL_H
+#endif //IDBFOLDERSQL_H
 

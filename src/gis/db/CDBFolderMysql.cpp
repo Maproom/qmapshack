@@ -17,12 +17,11 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
-#include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBFolderMysql.h"
 
 
 CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const QString & passwd, const QString &name, QTreeWidget *parent)
-    : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
+    : IDBFolderSql(IDB::db, parent)
     , server(server)
     , user(user)
     , passwd(passwd)
@@ -36,19 +35,4 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const
     setupFromDB();
 }
 
-void CDBFolderMysql::expanding()
-{
-    IDBFolder::expanding();
-
-    folderLostFound  = new CDBFolderLostFound(IDB::db, 0);
-    insertChild(0, folderLostFound);
-}
-
-void CDBFolderMysql::updateLostFound()
-{
-    if(folderLostFound)
-    {
-        folderLostFound->update();
-    }
-}
 

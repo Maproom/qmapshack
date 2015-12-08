@@ -19,19 +19,16 @@
 #ifndef CDBFOLDERSQLITE_H
 #define CDBFOLDERSQLITE_H
 
-#include "gis/db/IDBFolder.h"
+#include "gis/db/IDBFolderSql.h"
 #include <gis/db/IDBSqlite.h>
 
-class CDBFolderLostFound;
 
-class CDBFolderSqlite : public IDBFolder, public IDBSqlite
+class CDBFolderSqlite : public IDBFolderSql, public IDBSqlite
 {
 public:
     CDBFolderSqlite(const QString &filename, const QString &name, QTreeWidget *parent);
     virtual ~CDBFolderSqlite();
 
-    void expanding();
-    void updateLostFound();
     const QString& getFilename()
     {
         return filename;
@@ -39,7 +36,6 @@ public:
 
 private:
     QString filename;
-    CDBFolderLostFound * folderLostFound = 0;
 };
 #endif //CDBFOLDERSQLITE_H
 

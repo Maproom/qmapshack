@@ -157,6 +157,7 @@ set( SRCS
     gis/db/CSetupWorkspace.cpp
     gis/db/CSetupFolder.cpp
     gis/db/IDBFolder.cpp
+    gis/db/IDBFolderSql.cpp
     gis/db/CDBFolderLostFound.cpp    
     gis/db/CDBFolderSqlite.cpp
     gis/db/CDBFolderMysql.cpp
@@ -377,6 +378,7 @@ set( HDRS
     gis/db/CSetupWorkspace.h
     gis/db/CSetupFolder.h
     gis/db/IDBFolder.h
+    gis/db/IDBFolderSql.h
     gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderSqlite.h
     gis/db/CDBFolderMysql.h

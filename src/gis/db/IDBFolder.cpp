@@ -22,9 +22,10 @@
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
-#include "gis/db/CDBFolderSqlite.h"
+#include "gis/db/IDBFolderSql.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/IDBFolder.h"
+#include "gis/db/IDB.h"
 #include "gis/db/macros.h"
 
 #include <QtSql>
@@ -84,11 +85,11 @@ QString IDBFolder::getDBName()
     return db.connectionName();
 }
 
-CDBFolderSqlite * IDBFolder::getDBFolder()
+IDBFolderSql *IDBFolder::getDBFolder()
 {
     if(type() == eTypeDatabase)
     {
-        return dynamic_cast<CDBFolderSqlite*>(this);
+        return dynamic_cast<IDBFolderSql*>(this);
     }
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
@@ -197,7 +198,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     setToolTip(CGisListDB::eColumnName, query.value(1).toString());
 
     // count folders linked to this folder
-    query.prepare("SELECT COUNT() FROM folder2folder WHERE parent=:id");
+    query.prepare("SELECT COUNT(*) FROM folder2folder WHERE parent=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();
@@ -205,7 +206,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     qint32 nFolders = query.value(0).toInt();
 
     // count items linked to this folder
-    query.prepare("SELECT COUNT() FROM folder2item WHERE parent=:id");
+    query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();

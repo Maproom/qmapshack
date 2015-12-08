@@ -1114,10 +1114,8 @@ void CGisListWks::slotHideFrMap()
     setVisibilityOnMap(false);
 }
 
-void CGisListWks::slotCloseProject()
+static void closeProjects(const QList<QTreeWidgetItem*> &items)
 {
-    CGisListWksEditLock lock(true, IGisItem::mutexItems);
-    QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
@@ -1127,9 +1125,21 @@ void CGisListWks::slotCloseProject()
             {
                 break;
             }
+
+            if(IGisProject::eTypeGoogle == project->getType())
+            {
+                CMainWindow::self().findChild<QAction*>("actionSearchGoogle")->setChecked(false);
+            }
             delete project;
         }
     }
+   
+}
+
+void CGisListWks::slotCloseProject()
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    closeProjects(selectedItems());
     emit sigChanged();
 }
 
@@ -1141,24 +1151,10 @@ void CGisListWks::slotCloseAllProjects()
         return;
     }
 
-
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
-    QList<QTreeWidgetItem*> items = findItems("*", Qt::MatchWildcard);
-    foreach(QTreeWidgetItem * item, items)
-    {
-        IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
-        {
-            if(project->askBeforClose())
-            {
-                break;
-            }
-            delete project;
-        }
-    }
+    closeProjects(findItems("*", Qt::MatchWildcard));
     emit sigChanged();
 }
-
 
 
 void CGisListWks::slotDeleteProject()

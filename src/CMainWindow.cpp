@@ -341,7 +341,7 @@ void CMainWindow::addWidgetToTab(QWidget * w)
 {
     if(tabWidget->indexOf(w) == NOIDX)
     {
-        tabWidget->addTab(w, w->objectName());
+        tabWidget->addTab(w, w->objectName().replace("&", "&&"));
     }
     tabWidget->setCurrentWidget(w);
 }

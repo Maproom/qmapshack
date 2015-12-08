@@ -742,9 +742,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         setColor(str2color(trk.color));
 
         const QDomNode &extColoring = ext.namedItem("ql:coloring");
-        QString source;
-        readXml(extColoring, "ql:source",    source);
-        setColorizeSource(source);
+        readXml(extColoring, "ql:source",    colorSource);
         readXml(extColoring, "ql:limitLow",  limitLow);
         readXml(extColoring, "ql:limitHigh", limitHigh);
     }

@@ -20,10 +20,10 @@
 #define IGISPROJECT_H
 
 #include "gis/IGisItem.h"
+#include <QDebug>
 #include <QMessageBox>
 #include <QPointer>
 #include <QTreeWidgetItem>
-#include <QDebug>
 
 class CGisListWks;
 class IGisItem;

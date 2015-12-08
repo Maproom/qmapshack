@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,32 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef IDB_H
-#define IDB_H
+#ifndef CDBFOLDERMYSQL_H
+#define CDBFOLDERMYSQL_H
 
-#include <QMap>
-#include <QSqlDatabase>
+#include "gis/db/IDBFolder.h"
+#include <gis/db/IDBMysql.h>
 
-class IDB
+class CDBFolderLostFound;
+
+class CDBFolderMysql : public IDBFolder, public IDBMysql
 {
 public:
-    IDB();
-    virtual ~IDB();
+    CDBFolderMysql(const QString &server, const QString &user, const QString &passwd, const QString &name, QTreeWidget *parent);
+    virtual ~CDBFolderMysql() = default;
+
+    void expanding();
+    void updateLostFound();
 
 
-    QSqlDatabase& getDb()
-    {
-        return IDB::db;
-    }
+private:
+    const QString server;
+    const QString user;
+    const QString passwd;
 
-    static quint64 getLastInsertID(QSqlDatabase& db, const QString& table);
-
-
-protected:
-    static QMap<QString,int> references;
-    QSqlDatabase db;
-    void setup(const QString& connectionName);
+    CDBFolderLostFound * folderLostFound = 0;
 };
 
-#endif //IDB_H
+#endif //CDBFOLDERMYSQL_H
 

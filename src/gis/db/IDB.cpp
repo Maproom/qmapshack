@@ -41,3 +41,27 @@ void IDB::setup(const QString &connectionName)
 {
     references[connectionName]++;
 }
+
+
+quint64 IDB::getLastInsertID(QSqlDatabase& db, const QString& table)
+{
+    quint64 idChild = 0;
+    QSqlQuery query(db);
+
+    if(db.driverName() == "QSQLITE")
+    {
+        query.prepare("SELECT last_insert_rowid() from " + table);
+        QUERY_EXEC(return 0);
+        query.next();
+        idChild = query.value(0).toULongLong();
+    }
+    else if(db.driverName() == "QMYSQL")
+    {
+        query.prepare("SELECT last_insert_id() from " + table);
+        QUERY_EXEC(return 0);
+        query.next();
+        idChild = query.value(0).toULongLong();
+    }
+
+    return idChild;
+}

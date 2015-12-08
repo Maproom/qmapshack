@@ -134,7 +134,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
 
         case eStateRangeSelected:
         {
-            resetState();            
+            resetState();
             break;
         }
 

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,32 +16,23 @@
 
 **********************************************************************************************/
 
-#ifndef IDB_H
-#define IDB_H
+#ifndef IDBMYSQL_H
+#define IDBMYSQL_H
 
-#include <QMap>
-#include <QSqlDatabase>
+#include "gis/db/IDB.h"
 
-class IDB
+class IDBMysql  : public IDB
 {
 public:
-    IDB();
-    virtual ~IDB();
-
-
-    QSqlDatabase& getDb()
-    {
-        return IDB::db;
-    }
-
-    static quint64 getLastInsertID(QSqlDatabase& db, const QString& table);
-
+    IDBMysql();
+    virtual ~IDBMysql() = default;
 
 protected:
-    static QMap<QString,int> references;
-    QSqlDatabase db;
-    void setup(const QString& connectionName);
+    bool setupDB(const QString &server, const QString &user, const QString &passwd, const QString &name, const QString &connectionName);
+    bool initDB();
+    bool migrateDB(int version);
+
 };
 
-#endif //IDB_H
+#endif //IDBMYSQL_H
 

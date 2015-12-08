@@ -22,8 +22,8 @@
 #include "gis/slf/CSlfReader.h"
 
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/wpt/CGisItemWpt.h"
 
 void test_QMapShack::readValidSLFFile()
 {

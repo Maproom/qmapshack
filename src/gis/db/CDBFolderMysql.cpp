@@ -18,27 +18,25 @@
 
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderLostFound.h"
-#include "gis/db/CDBFolderSqlite.h"
+#include "gis/db/CDBFolderMysql.h"
 
-CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
+
+CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const QString & passwd, const QString &name, QTreeWidget *parent)
     : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
-    , filename(filename)
-    , folderLostFound(0)
+    , server(server)
+    , user(user)
+    , passwd(passwd)
 {
     setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
+    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQL.png"));
     setText(CGisListDB::eColumnName, name);
 
-    setupDB(filename, name);
+    setupDB(server, user, passwd, name, name);
 
     setupFromDB();
 }
 
-CDBFolderSqlite::~CDBFolderSqlite()
-{
-}
-
-void CDBFolderSqlite::expanding()
+void CDBFolderMysql::expanding()
 {
     IDBFolder::expanding();
 
@@ -46,7 +44,7 @@ void CDBFolderSqlite::expanding()
     insertChild(0, folderLostFound);
 }
 
-void CDBFolderSqlite::updateLostFound()
+void CDBFolderMysql::updateLostFound()
 {
     if(folderLostFound)
     {

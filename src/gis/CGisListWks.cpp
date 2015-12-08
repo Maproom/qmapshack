@@ -334,26 +334,25 @@ void CGisListWks::migrateDB2to3()
     QSqlQuery query(db);
 
     query.prepare("BEGIN TRANSACTION;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare("ALTER TABLE workspace RENAME TO tmp_workspace;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare( "CREATE TABLE workspace ("
-                "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                "type           INTEGER NOT NULL,"
-                "name           TEXT NOT NULL,"
-                "keyqms         TEXT NOT NULL,"
-                "changed        BOOLEAN DEFAULT FALSE,"
-                "visible        BOOLEAN DEFAULT TRUE,"
-                "data           BLOB NOT NULL"
-                ")");
-    QUERY_EXEC(return);
+                   "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                   "type           INTEGER NOT NULL,"
+                   "name           TEXT NOT NULL,"
+                   "keyqms         TEXT NOT NULL,"
+                   "changed        BOOLEAN DEFAULT FALSE,"
+                   "visible        BOOLEAN DEFAULT TRUE,"
+                   "data           BLOB NOT NULL"
+                   ")");
+    QUERY_EXEC(return );
     query.prepare("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare("COMMIT;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare("DROP TABLE tmp_workspace;");
-    QUERY_EXEC(return);
-
+    QUERY_EXEC(return );
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -1144,7 +1143,6 @@ static void closeProjects(const QList<QTreeWidgetItem*> &items)
             delete project;
         }
     }
-   
 }
 
 void CGisListWks::slotCloseProject()

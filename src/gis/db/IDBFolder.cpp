@@ -19,10 +19,10 @@
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
+#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
@@ -144,10 +144,7 @@ quint64 IDBFolder::addFolderToDb(type_e type, const QString& name, quint64 idPar
     query.bindValue(":type", type);
     QUERY_EXEC(return 0);
 
-    query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return 0);
-    query.next();
-    quint64 idChild = query.value(0).toULongLong();
+    quint64 idChild = IDB::getLastInsertID(db, "folders");
     if(idChild == 0)
     {
         qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";

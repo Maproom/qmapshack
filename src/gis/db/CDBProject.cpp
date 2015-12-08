@@ -21,6 +21,7 @@
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectSaveAction.h"
 #include "gis/db/macros.h"
+#include "gis/db/IDB.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/qms/CQmsProject.h"
@@ -207,10 +208,7 @@ quint64 CDBProject::insertItem(IGisItem * item)
     query.bindValue(":data", data);
     QUERY_EXEC(throw -1);
 
-    query.prepare("SELECT last_insert_rowid() from items");
-    QUERY_EXEC(throw -1);
-    query.next();
-    quint64 idItem = query.value(0).toULongLong();
+    quint64 idItem = IDB::getLastInsertID(db, "items");
     if(idItem == 0)
     {
         qDebug() << "childId equals 0. bad.";

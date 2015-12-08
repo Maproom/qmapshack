@@ -21,8 +21,9 @@
 #include "config.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
-#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBFolderLostFound.h"
+#include "gis/db/CDBFolderSqlite.h"
+#include "gis/db/CDBFolderMysql.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/CSetupDatabase.h"
 #include "gis/db/CSetupFolder.h"
@@ -70,6 +71,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     {
         addDatabase(names[i], files[i]);
     }
+    new CDBFolderMysql("localhost", "django", "1234", "test", this);
 
     menuNone            = new QMenu(this);
     actionAddDatabase   = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, SLOT(slotAddDatabase()));
@@ -389,7 +391,6 @@ void CGisListDB::slotDelLostFoundItem()
             delItems << dbItem;
             folders << folder;
         }
-
     }
 
     qDeleteAll(delItems);

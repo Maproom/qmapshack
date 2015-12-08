@@ -16,27 +16,30 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "gis/db/IDBSqlite.h"
+#include "gis/db/IDBMysql.h"
 #include "gis/db/macros.h"
 
 #include <QtSql>
 #include <QtWidgets>
 
-IDBSqlite::IDBSqlite()
+
+IDBMysql::IDBMysql()
 {
 }
 
 
-bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
+bool IDBMysql::setupDB(const QString& server,const QString& user, const QString& passwd, const QString& name, const QString& connectionName)
 {
     // this is important!
     IDB::setup(connectionName);
 
     if(!QSqlDatabase::contains(connectionName))
     {
-        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-        db.setDatabaseName(filename);
+        db = QSqlDatabase::addDatabase("QMYSQL", connectionName);
+        db.setDatabaseName(name);
+        db.setHostName(server);
+        db.setUserName(user);
+        db.setPassword(passwd);
         if(!db.open())
         {
             qDebug() << "failed to open database" << db.lastError();
@@ -48,32 +51,6 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
     }
 
     QSqlQuery query(db);
-
-    query.prepare("PRAGMA locking_mode=EXCLUSIVE");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA temp_store=MEMORY");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA default_cache_size=50");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA page_size=8192");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA synchronous=off");
-    QUERY_EXEC(return false);
-
-    // When migrating the database these tables are used.
-    // Due to caching they can't be dropped right after the
-    // migration. That is why we look for them on startup.
-    // And delete them as a second chance.
-    if(query.exec("select * from tmp_folders"))
-    {
-        query.prepare("DROP TABLE tmp_folders;");
-        QUERY_EXEC();
-    }
-    if(query.exec("select * from tmp_items"))
-    {
-        query.prepare("DROP TABLE tmp_items;");
-        QUERY_EXEC();
-    }
 
 
     if(!query.exec("SELECT version FROM versioninfo"))
@@ -100,7 +77,7 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
     return true;
 }
 
-bool IDBSqlite::initDB()
+bool IDBMysql::initDB()
 {
     QSqlQuery query(db);
 
@@ -112,14 +89,14 @@ bool IDBSqlite::initDB()
     }
 
     if(!query.exec( "CREATE TABLE folders ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
                     "type           INTEGER NOT NULL,"
                     "keyqms         TEXT,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
                     "locked         BOOLEAN DEFAULT FALSE,"
-                    "data           BLOB"
+                    "data           LONGBLOB"
                     ")"))
     {
         qDebug() << query.lastQuery();
@@ -128,14 +105,14 @@ bool IDBSqlite::initDB()
     }
 
     if(!query.exec( "CREATE TABLE items ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
                     "type           INTEGER,"
                     "keyqms         TEXT NOT NULL,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "icon           BLOB NOT NULL,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
-                    "data           BLOB NOT NULL"
+                    "data           LONGBLOB NOT NULL"
                     ")"))
     {
         qDebug() << query.lastQuery();
@@ -148,7 +125,7 @@ bool IDBSqlite::initDB()
     QUERY_EXEC(return false);
 
     if(!query.exec( "CREATE TABLE folder2folder ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
                     "parent         INTEGER NOT NULL,"
                     "child          INTEGER NOT NULL,"
                     "FOREIGN KEY(parent) REFERENCES folders(id),"
@@ -161,7 +138,7 @@ bool IDBSqlite::initDB()
     }
 
     if(!query.exec( "CREATE TABLE folder2item ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
                     "parent         INTEGER NOT NULL,"
                     "child          INTEGER NOT NULL,"
                     "FOREIGN KEY(parent) REFERENCES folders(id),"
@@ -175,80 +152,14 @@ bool IDBSqlite::initDB()
     return true;
 }
 
-bool IDBSqlite::migrateDB(int version)
+bool IDBMysql::migrateDB(int version)
 {
     QSqlQuery query(db);
 
-    if(version < 2)
-    {
-        if(!migrateDB1to2())
-        {
-            return false;
-        }
-    }
+    return false;
 
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", DB_VERSION);
     QUERY_EXEC(return false);
-    return true;
-}
-
-bool IDBSqlite::migrateDB1to2()
-{
-    QString msg = QObject::tr("The internal database format has changed. QMapShack will migrate your database, now. "
-                              "After the migration the database won't be usable with older versions of QMapShack. "
-                              "It is recommended to backup the database first.");
-    int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
-                                   QObject::tr("Migrate database..."),
-                                   msg,
-                                   QMessageBox::Ok|QMessageBox::Abort);
-    if(res != QMessageBox::Ok)
-    {
-        exit(0);
-    }
-
-    QSqlQuery query(db);
-
-    query.prepare("BEGIN TRANSACTION;");
-    QUERY_EXEC(return false);
-    query.prepare("ALTER TABLE folders RENAME TO tmp_folders;");
-    QUERY_EXEC(return false);
-    query.prepare("CREATE TABLE folders ("
-                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                  "type           INTEGER NOT NULL,"
-                  "keyqms         TEXT,"
-                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                  "name           TEXT NOT NULL,"
-                  "comment        TEXT,"
-                  "locked         BOOLEAN DEFAULT FALSE,"
-                  "data           BLOB"
-                  ");");
-    QUERY_EXEC(return false);
-    query.prepare("INSERT INTO folders(id,type,keyqms,date,name,comment,locked,data) SELECT * FROM tmp_folders;");
-    QUERY_EXEC(return false);
-    query.prepare("COMMIT;");
-    QUERY_EXEC(return false);
-
-    query.prepare("BEGIN TRANSACTION;");
-    QUERY_EXEC(return false);
-    query.prepare("ALTER TABLE items RENAME TO tmp_items;");
-    QUERY_EXEC(return false);
-    query.prepare("CREATE TABLE items ("
-                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                  "type           INTEGER,"
-                  "keyqms         TEXT NOT NULL,"
-                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                  "icon           BLOB NOT NULL,"
-                  "name           TEXT NOT NULL,"
-                  "comment        TEXT,"
-                  "data           BLOB NOT NULL"
-                  ");");
-    QUERY_EXEC(return false);
-    query.prepare("INSERT INTO items(id,type,keyqms,date,icon,name,comment,data) SELECT * FROM tmp_items;");
-    QUERY_EXEC(return false);
-    query.prepare("COMMIT;");
-    QUERY_EXEC(return false);
-
-
     return true;
 }

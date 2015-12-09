@@ -428,3 +428,9 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
         QUERY_EXEC()
     }
 }
+
+void IDBFolder::updateItemsOnWks()
+{
+    CEvtD2WUpdateItems * evt = new CEvtD2WUpdateItems(getId(), getDBName());
+    CGisWidget::self().postEventForWks(evt);
+}

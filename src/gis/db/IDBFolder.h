@@ -131,6 +131,8 @@ public:
 
     bool operator<(const QTreeWidgetItem &other) const;
 
+    void updateItemsOnWks();
+
 protected:
     /**
        @brief Setup all item properties

@@ -423,6 +423,7 @@ void CGisListDB::slotDelItem()
 
     QList<QTreeWidgetItem*> dbItems;
     QSet<IDBFolderSql*> dbFolders;
+    QSet<IDBFolder*> folders;
 
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
@@ -454,14 +455,20 @@ void CGisListDB::slotDelItem()
         }
 
         dbItem->remove();
-        dbItems << dbItem;
-        dbFolders << folder->getDBFolder();
+        dbItems     << dbItem;
+        dbFolders   << folder->getDBFolder();
+        folders     << folder;
     }
 
     qDeleteAll(dbItems);
     foreach(IDBFolderSql * dbFolder, dbFolders)
     {
         dbFolder->updateLostFound();
+    }
+
+    foreach(IDBFolder * folder, folders)
+    {
+        folder->updateItemsOnWks();
     }
 }
 

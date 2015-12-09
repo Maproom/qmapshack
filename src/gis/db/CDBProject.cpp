@@ -143,7 +143,7 @@ void CDBProject::postStatus()
     }
 
     // update item counters and track/waypoint correlation
-    updateItems();
+    // updateItems(); <--- don't! this is causing a crash
     if(!changedItems)
     {
         setText(CGisListWks::eColumnDecoration,"");

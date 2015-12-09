@@ -1782,6 +1782,19 @@ bool CGisListWks::event(QEvent * e)
             emit sigChanged();
             return true;
         }
+
+        case eEvtD2WUpdateItems:
+        {
+            CEvtD2WUpdateItems * evt = (CEvtD2WUpdateItems*)e;
+            IGisProject * project = dynamic_cast<IGisProject*>(getProjectById(evt->id, evt->db));
+            if(project)
+            {
+                project->blockUpdateItems(false);
+            }
+            e->accept();
+            emit sigChanged();
+            return true;
+        }
         }
     }
     return QTreeWidget::event(e);

@@ -305,6 +305,7 @@ void CAppSetupWin::prepareGdal()
 
     qputenv("GDAL_DATA", gdalDir.toUtf8());
     qputenv("PROJ_LIB", projDir.toUtf8());
+    qunsetenv("GDAL_DRIVER_PATH");
 
     CAppSetup::prepareGdal();
 }

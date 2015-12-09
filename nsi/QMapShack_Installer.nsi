@@ -151,6 +151,9 @@ Section "QMapShack" QMapShack
 
   SetOutPath "$INSTDIR\sqldrivers\"
     File Files\sqldrivers\qsqlite.dll
+    File Files\sqldrivers\qsqlmysql.dll
+    File Files\sqldrivers\qsqlodbc.dll
+    File Files\sqldrivers\qsqlpsql.dll
 
   SetOutPath "$INSTDIR\platforms\"
     File Files\platforms\qwindows.dll	

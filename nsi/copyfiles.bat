@@ -59,6 +59,9 @@ cd ..
 mkdir sqldrivers
 cd sqldrivers
 copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlite.dll
+copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlmysql.dll
+copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlodbc.dll
+copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlpsql.dll
 cd ..
 mkdir platforms
 cd platforms

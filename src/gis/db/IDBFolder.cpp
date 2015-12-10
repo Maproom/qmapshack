@@ -269,7 +269,7 @@ void IDBFolder::remove()
     if(folder == 0)
     {
         return;
-    }
+    }    
     remove(folder->getId(), getId());
 
     CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());

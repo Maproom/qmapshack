@@ -71,7 +71,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     {
         addDatabase(names[i], files[i]);
     }
-    new CDBFolderMysql("localhost", "django", "1234", "test", this);
+    //new CDBFolderMysql("localhost", "django", "1234", "test", this);
 
     menuNone            = new QMenu(this);
     actionAddDatabase   = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, SLOT(slotAddDatabase()));
@@ -421,9 +421,10 @@ void CGisListDB::slotDelItem()
 
     int last = QMessageBox::NoButton;
 
+    QSet<IDBFolder*>        folders;
     QList<QTreeWidgetItem*> dbItems;
-    QSet<IDBFolderSql*> dbFolders;
-    QSet<IDBFolder*> folders;
+    QSet<IDBFolderSql*>     dbFolders;
+
 
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
@@ -455,9 +456,11 @@ void CGisListDB::slotDelItem()
         }
 
         dbItem->remove();
-        dbItems     << dbItem;
-        dbFolders   << folder->getDBFolder();
+
         folders     << folder;
+        dbItems     << dbItem;        
+        dbFolders   << folder->getDBFolder();
+
     }
 
     qDeleteAll(dbItems);
@@ -466,6 +469,7 @@ void CGisListDB::slotDelItem()
         dbFolder->updateLostFound();
     }
 
+    // tell all folders to update their statistics and waypoint/track correlations
     foreach(IDBFolder * folder, folders)
     {
         folder->updateItemsOnWks();
@@ -486,6 +490,9 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
         if(folder != 0)
         {
             folder->toggle();
+
+            // tell folder to update its statistics and waypoint/track correlations
+            folder->updateItemsOnWks();
             return;
         }
 
@@ -493,6 +500,13 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
         if(dbItem != 0)
         {
             dbItem->toggle();
+
+            // tell folder to update its statistics and waypoint/track correlations
+            folder = dynamic_cast<IDBFolder*>(dbItem->parent());
+            if(folder)
+            {
+                folder->updateItemsOnWks();
+            }
             return;
         }
     }

@@ -24,7 +24,7 @@
 
 class QSqlDatabase;
 class CEvtW2DAckInfo;
-class CDBFolderSqlite;
+class IDBFolderSql;
 class CDBItem;
 
 /**
@@ -55,12 +55,15 @@ public:
         return id;
     }
     QString getDBName();
+
+    QSqlDatabase& getDb(){return db;}
+
     /**
      * @brief Get the database folder that folder is stored in
      *
      * @return On success a pointer to the item holding the database is returned.
      */
-    CDBFolderSqlite * getDBFolder();
+    IDBFolderSql * getDBFolder();
 
     /**
      * @brief Search and get access to a subfolder
@@ -127,6 +130,8 @@ public:
     static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
     bool operator<(const QTreeWidgetItem &other) const;
+
+    void updateItemsOnWks();
 
 protected:
     /**

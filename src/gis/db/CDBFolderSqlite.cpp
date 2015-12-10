@@ -18,15 +18,13 @@
 
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderSqlite.h"
-#include "gis/db/CDBFolderLostFound.h"
 
 CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
-    : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
+    : IDBFolderSql(IDB::db, parent)
     , filename(filename)
-    , folderLostFound(0)
 {
     setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
+    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
     setText(CGisListDB::eColumnName, name);
 
     setupDB(filename, name);
@@ -36,21 +34,5 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
 
 CDBFolderSqlite::~CDBFolderSqlite()
 {
-}
-
-void CDBFolderSqlite::expanding()
-{
-    IDBFolder::expanding();
-
-    folderLostFound  = new CDBFolderLostFound(IDB::db, 0);
-    insertChild(0, folderLostFound);
-}
-
-void CDBFolderSqlite::updateLostFound()
-{
-    if(folderLostFound)
-    {
-        folderLostFound->update();
-    }
 }
 

@@ -238,6 +238,17 @@ void CGisListWks::configDB()
         return;
     }
 
+    // When migrating the database these tables are used.
+    // Due to caching they can't be dropped right after the
+    // migration. That is why we look for them on startup.
+    // And delete them as a second chance.
+    if(query.exec("select * from tmp_workspace"))
+    {
+        query.prepare("DROP TABLE tmp_workspace;");
+        QUERY_EXEC();
+    }
+
+
     if(!query.exec("SELECT version FROM versioninfo"))
     {
         initDB();
@@ -323,26 +334,25 @@ void CGisListWks::migrateDB2to3()
     QSqlQuery query(db);
 
     query.prepare("BEGIN TRANSACTION;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare("ALTER TABLE workspace RENAME TO tmp_workspace;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare( "CREATE TABLE workspace ("
-                "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                "type           INTEGER NOT NULL,"
-                "name           TEXT NOT NULL,"
-                "keyqms         TEXT NOT NULL,"
-                "changed        BOOLEAN DEFAULT FALSE,"
-                "visible        BOOLEAN DEFAULT TRUE,"
-                "data           BLOB NOT NULL"
-                ")");
-    QUERY_EXEC(return);
+                   "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                   "type           INTEGER NOT NULL,"
+                   "name           TEXT NOT NULL,"
+                   "keyqms         TEXT NOT NULL,"
+                   "changed        BOOLEAN DEFAULT FALSE,"
+                   "visible        BOOLEAN DEFAULT TRUE,"
+                   "data           BLOB NOT NULL"
+                   ")");
+    QUERY_EXEC(return );
     query.prepare("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare("COMMIT;");
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     query.prepare("DROP TABLE tmp_workspace;");
-    QUERY_EXEC(return);
-
+    QUERY_EXEC(return );
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -1133,7 +1143,6 @@ static void closeProjects(const QList<QTreeWidgetItem*> &items)
             delete project;
         }
     }
-   
 }
 
 void CGisListWks::slotCloseProject()
@@ -1768,6 +1777,19 @@ bool CGisListWks::event(QEvent * e)
             if(project)
             {
                 project->updateFromDb();
+            }
+            e->accept();
+            emit sigChanged();
+            return true;
+        }
+
+        case eEvtD2WUpdateItems:
+        {
+            CEvtD2WUpdateItems * evt = (CEvtD2WUpdateItems*)e;
+            IGisProject * project = dynamic_cast<IGisProject*>(getProjectById(evt->id, evt->db));
+            if(project)
+            {
+                project->blockUpdateItems(false);
             }
             e->accept();
             emit sigChanged();

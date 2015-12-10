@@ -108,7 +108,8 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         {
         case eStateIdle:
             CGisWidget::self().mouseMove(point);
-            //break; skip break intentionally
+
+        //break; skip break intentionally
         case eStateHooverSingle:
         case eStateHooverMultiple:
         {

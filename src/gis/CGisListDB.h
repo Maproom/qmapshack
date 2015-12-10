@@ -26,7 +26,7 @@
 
 struct action_t;
 class QMenu;
-class CDBFolderSqlite;
+class IDBFolderSql;
 
 class CGisListDB : public QTreeWidget
 {
@@ -62,7 +62,7 @@ private slots:
 private:
     friend class CGisListDBEditLock;
 
-    CDBFolderSqlite *getDataBase(const QString& name);
+    IDBFolderSql *getDataBase(const QString& name);
     void addDatabase(const QString& name, const QString& filename);
 
     int isInternalEdit = 0;
@@ -86,8 +86,6 @@ private:
     QMenu * menuLostFoundItem;
     QAction * actionDelLostFoundItem;
 
-
-//        CDBFolderSqlite *  folderDatabase;
 };
 
 #endif //CGISLISTDB_H

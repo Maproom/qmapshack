@@ -37,9 +37,10 @@ enum event_types_e
     ,eEvtD2WShowItems   = QEvent::User + 4
     ,eEvtD2WHideItems   = QEvent::User + 5
     ,eEvtD2WUpdateLnF   = QEvent::User + 6
+    ,eEvtD2WUpdateItems = QEvent::User + 7
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
-    ,eEvtW2DCreate      = QEvent::User + 101
+    ,eEvtW2DCreate      = QEvent::User + 101    
 };
 
 struct evt_item_t
@@ -144,6 +145,17 @@ public:
     IDBFolder::type_e type;
     quint64 idParent;
     quint64 idChild;
+    QString db;
+};
+
+class CEvtD2WUpdateItems : public QEvent
+{
+public:
+    CEvtD2WUpdateItems(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WUpdateItems)), id(id), db(db)
+    {
+    }
+
+    quint64 id;
     QString db;
 };
 

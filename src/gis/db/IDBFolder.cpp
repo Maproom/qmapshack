@@ -19,12 +19,13 @@
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
+#include "gis/db/IDBFolderSql.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/IDBFolder.h"
+#include "gis/db/IDB.h"
 #include "gis/db/macros.h"
 
 #include <QtSql>
@@ -84,11 +85,11 @@ QString IDBFolder::getDBName()
     return db.connectionName();
 }
 
-CDBFolderSqlite * IDBFolder::getDBFolder()
+IDBFolderSql *IDBFolder::getDBFolder()
 {
     if(type() == eTypeDatabase)
     {
-        return dynamic_cast<CDBFolderSqlite*>(this);
+        return dynamic_cast<IDBFolderSql*>(this);
     }
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
@@ -144,10 +145,7 @@ quint64 IDBFolder::addFolderToDb(type_e type, const QString& name, quint64 idPar
     query.bindValue(":type", type);
     QUERY_EXEC(return 0);
 
-    query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return 0);
-    query.next();
-    quint64 idChild = query.value(0).toULongLong();
+    quint64 idChild = IDB::getLastInsertID(db, "folders");
     if(idChild == 0)
     {
         qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
@@ -200,7 +198,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     setToolTip(CGisListDB::eColumnName, query.value(1).toString());
 
     // count folders linked to this folder
-    query.prepare("SELECT COUNT() FROM folder2folder WHERE parent=:id");
+    query.prepare("SELECT COUNT(*) FROM folder2folder WHERE parent=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();
@@ -208,7 +206,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     qint32 nFolders = query.value(0).toInt();
 
     // count items linked to this folder
-    query.prepare("SELECT COUNT() FROM folder2item WHERE parent=:id");
+    query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();
@@ -271,7 +269,7 @@ void IDBFolder::remove()
     if(folder == 0)
     {
         return;
-    }
+    }    
     remove(folder->getId(), getId());
 
     CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());
@@ -429,4 +427,10 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
         query.bindValue(":id", idFolder);
         QUERY_EXEC()
     }
+}
+
+void IDBFolder::updateItemsOnWks()
+{
+    CEvtD2WUpdateItems * evt = new CEvtD2WUpdateItems(getId(), getDBName());
+    CGisWidget::self().postEventForWks(evt);
 }

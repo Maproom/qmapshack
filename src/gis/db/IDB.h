@@ -29,10 +29,9 @@ public:
     virtual ~IDB();
 
 
-    QSqlDatabase& getDb()
-    {
-        return IDB::db;
-    }
+    QSqlDatabase& getDb(){return db;}
+
+    static quint64 getLastInsertID(QSqlDatabase& db, const QString& table);
 
 
 protected:

@@ -39,10 +39,10 @@ struct expectedWaypoint
 
 struct expectedTrack
 {
-    QString     name;
-    int         colorIdx;
-    int         segCount;
-    int         ptCount;
+    QString name;
+    int colorIdx;
+    int segCount;
+    int ptCount;
     QStringList colorSources;
 };
 
@@ -179,7 +179,6 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
             QStringList existingSources = itemTrk->getExistingDataSources();
             existingSources.sort();
             SUBVERIFY(expTrk.colorSources == existingSources, "Expected and existing list of colorSources do not match");
-            
         }
     }
 

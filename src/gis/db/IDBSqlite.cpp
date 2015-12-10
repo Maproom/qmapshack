@@ -16,16 +16,15 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/db/IDBSqlite.h"
 #include "gis/db/macros.h"
-#include "CMainWindow.h"
 
 #include <QtSql>
 #include <QtWidgets>
 
 IDBSqlite::IDBSqlite()
 {
-
 }
 
 
@@ -61,7 +60,10 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
     query.prepare("PRAGMA synchronous=off");
     QUERY_EXEC(return false);
 
-    //just to make sure
+    // When migrating the database these tables are used.
+    // Due to caching they can't be dropped right after the
+    // migration. That is why we look for them on startup.
+    // And delete them as a second chance.
     if(query.exec("select * from tmp_folders"))
     {
         query.prepare("DROP TABLE tmp_folders;");
@@ -212,14 +214,14 @@ bool IDBSqlite::migrateDB1to2()
     query.prepare("ALTER TABLE folders RENAME TO tmp_folders;");
     QUERY_EXEC(return false);
     query.prepare("CREATE TABLE folders ("
-                                      "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                      "type           INTEGER NOT NULL,"
-                                      "keyqms         TEXT,"
-                                      "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                                      "name           TEXT NOT NULL,"
-                                      "comment        TEXT,"
-                                      "locked         BOOLEAN DEFAULT FALSE,"
-                                      "data           BLOB"
+                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "type           INTEGER NOT NULL,"
+                  "keyqms         TEXT,"
+                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                  "name           TEXT NOT NULL,"
+                  "comment        TEXT,"
+                  "locked         BOOLEAN DEFAULT FALSE,"
+                  "data           BLOB"
                   ");");
     QUERY_EXEC(return false);
     query.prepare("INSERT INTO folders(id,type,keyqms,date,name,comment,locked,data) SELECT * FROM tmp_folders;");
@@ -232,14 +234,14 @@ bool IDBSqlite::migrateDB1to2()
     query.prepare("ALTER TABLE items RENAME TO tmp_items;");
     QUERY_EXEC(return false);
     query.prepare("CREATE TABLE items ("
-                      "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                      "type           INTEGER,"
-                      "keyqms         TEXT NOT NULL,"
-                      "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                      "icon           BLOB NOT NULL,"
-                      "name           TEXT NOT NULL,"
-                      "comment        TEXT,"
-                      "data           BLOB NOT NULL"
+                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "type           INTEGER,"
+                  "keyqms         TEXT NOT NULL,"
+                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                  "icon           BLOB NOT NULL,"
+                  "name           TEXT NOT NULL,"
+                  "comment        TEXT,"
+                  "data           BLOB NOT NULL"
                   ");");
     QUERY_EXEC(return false);
     query.prepare("INSERT INTO items(id,type,keyqms,date,icon,name,comment,data) SELECT * FROM tmp_items;");

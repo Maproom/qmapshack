@@ -21,8 +21,8 @@
 #include "gis/gpx/CGpxProject.h"
 
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/wpt/CGisItemWpt.h"
 
 static CGpxProject* readGpxFile(const QString &file, bool valid)
 {

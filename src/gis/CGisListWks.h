@@ -68,7 +68,7 @@ protected:
     void dropEvent ( QDropEvent  * e );
 
 private slots:
-    void slotSaveWorkspace();    
+    void slotSaveWorkspace();
     void slotContextMenu(const QPoint& point);
     void slotSaveProject();
     void slotSaveAsProject();

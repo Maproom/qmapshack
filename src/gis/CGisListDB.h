@@ -63,7 +63,6 @@ private:
     friend class CGisListDBEditLock;
 
     IDBFolderSql *getDataBase(const QString& name);
-    void addDatabase(const QString& name, const QString& filename);
 
     int isInternalEdit = 0;
 
@@ -85,7 +84,6 @@ private:
 
     QMenu * menuLostFoundItem;
     QAction * actionDelLostFoundItem;
-
 };
 
 #endif //CGISLISTDB_H

@@ -22,10 +22,10 @@
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
-#include "gis/db/IDBFolderSql.h"
 #include "gis/db/CDBItem.h"
-#include "gis/db/IDBFolder.h"
 #include "gis/db/IDB.h"
+#include "gis/db/IDBFolder.h"
+#include "gis/db/IDBFolderSql.h"
 #include "gis/db/macros.h"
 
 #include <QtSql>
@@ -269,7 +269,7 @@ void IDBFolder::remove()
     if(folder == 0)
     {
         return;
-    }    
+    }
     remove(folder->getId(), getId());
 
     CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());

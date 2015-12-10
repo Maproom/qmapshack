@@ -23,20 +23,19 @@
 
 #include <QtWidgets>
 
-CSetupDatabase::CSetupDatabase(QString& name, QString& filename, CGisListDB &parent)
+CSetupDatabase::CSetupDatabase(CGisListDB &parent)
     : QDialog(&parent)
     , list(parent)
-    , name(name)
-    , filename(filename)
 {
     setupUi(this);
-
-    lineName->setText(name);
-    labelFilename->setText(filename);
 
     connect(toolNewDB, SIGNAL(clicked()), this, SLOT(slotNewDB()));
     connect(toolAddDB, SIGNAL(clicked()), this, SLOT(slotOpenDB()));
     connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonBox()));
+    connect(lineServer, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonBox()));
+    connect(lineUser, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonBox()));
+    connect(radioSqlite, SIGNAL(clicked(bool)), this, SLOT(slotUpdateButtonBox()));
+    connect(radioMysql, SIGNAL(clicked(bool)), this, SLOT(slotUpdateButtonBox()));
 
     slotUpdateButtonBox();
 }
@@ -53,9 +52,28 @@ void CSetupDatabase::slotUpdateButtonBox()
     {
         enable = false;
     }
-    if(labelFilename->text() == "-")
+
+    if(radioSqlite->isChecked())
     {
-        enable = false;
+        if(labelFilename->text() == "-")
+        {
+            enable = false;
+        }
+        frameSqlite->setEnabled(true);
+        frameMysql->setEnabled(false);
+    }
+    else if(radioMysql->isChecked())
+    {
+        if(lineServer->text().isEmpty())
+        {
+            enable = false;
+        }
+        if(lineUser->text().isEmpty())
+        {
+            enable = false;
+        }
+        frameSqlite->setEnabled(false);
+        frameMysql->setEnabled(true);
     }
 
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(enable);
@@ -64,13 +82,12 @@ void CSetupDatabase::slotUpdateButtonBox()
 
 void CSetupDatabase::accept()
 {
-    name = lineName->text();
+    QString name = lineName->text();
     if(list.hasDatabase(name))
     {
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("There is already a database with name '%1'").arg(name), QMessageBox::Abort);
         return;
     }
-    filename = labelFilename->text();
 
     QDialog::accept();
 }

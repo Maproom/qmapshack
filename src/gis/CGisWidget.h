@@ -40,7 +40,7 @@ enum event_types_e
     ,eEvtD2WUpdateItems = QEvent::User + 7
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
-    ,eEvtW2DCreate      = QEvent::User + 101    
+    ,eEvtW2DCreate      = QEvent::User + 101
 };
 
 struct evt_item_t

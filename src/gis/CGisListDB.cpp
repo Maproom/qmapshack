@@ -63,15 +63,47 @@ CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
 {
     SETTINGS;
-    QStringList names = cfg.value("Database/names").toStringList();
-    QStringList files = cfg.value("Database/files").toStringList();
-
-    const int N = names.count();
-    for(int i = 0; i < N; i++)
+    cfg.beginGroup("Database");
+    QString path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
+    QStringList names = cfg.value("names").toStringList();
+    cfg.beginGroup("Entries");
+    foreach(const QString& name, names)
     {
-        addDatabase(names[i], files[i]);
+        cfg.beginGroup(name);
+        QString type = cfg.value("type", "SQLite").toString();
+        if(type == "SQLite")
+        {
+            QString filename = cfg.value("filename","").toString();
+            if(filename.isEmpty())
+            {
+                QMessageBox::information(this, tr("Help..."), tr("Due to changes in the database system QMapShack forgot about the filename of your database '%1'. You have to select it again in the next step.").arg(name), QMessageBox::Ok);
+                filename = QFileDialog::getOpenFileName(this, tr("Select database file."), path, "QMapShack Database (*.db)");
+                if(filename.isEmpty())
+                {
+                    cfg.endGroup(); // name;
+                    continue;
+                }
+            }
+            new CDBFolderSqlite(filename, name, this);
+        }
+        if(type == "MySQL")
+        {
+            QString server = cfg.value("server","").toString();
+            QString user = cfg.value("user","").toString();
+            QString passwd = cfg.value("passwd","").toString();
+
+            if(server.isEmpty() || user.isEmpty())
+            {
+                cfg.endGroup(); // name
+                continue;
+            }
+            new CDBFolderMysql(server, user, passwd, name, this);
+        }
+        cfg.endGroup(); // name
     }
-    //new CDBFolderMysql("localhost", "django", "1234", "test", this);
+    cfg.endGroup(); // Entries
+    cfg.endGroup(); // Database
+
 
     menuNone            = new QMenu(this);
     actionAddDatabase   = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, SLOT(slotAddDatabase()));
@@ -101,23 +133,46 @@ CGisListDB::CGisListDB(QWidget *parent)
 
 CGisListDB::~CGisListDB()
 {
-    SETTINGS;
     QStringList names;
-    QStringList files;
+
+    SETTINGS;
+    cfg.beginGroup("Database");
+
+    cfg.beginGroup("Entries");
+    cfg.remove("");
 
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        CDBFolderSqlite * database = dynamic_cast<CDBFolderSqlite*>(topLevelItem(n));
-        if(database)
+        CDBFolderSqlite * sqlite = dynamic_cast<CDBFolderSqlite*>(topLevelItem(n));
+        if(sqlite)
         {
-            names << database->text(CGisListDB::eColumnName);
-            files << database->getFilename();
+            QString name = sqlite->text(CGisListDB::eColumnName);
+            names << name;
+
+            cfg.beginGroup(name);
+            cfg.setValue("type", "SQLite");
+            cfg.setValue("filename", sqlite->getFilename());
+            cfg.endGroup(); // name
+        }
+        CDBFolderMysql * mysql = dynamic_cast<CDBFolderMysql*>(topLevelItem(n));
+        if(mysql)
+        {
+            QString name = mysql->text(CGisListDB::eColumnName);
+            names << name;
+
+            cfg.beginGroup(name);
+            cfg.setValue("type", "MySQL");
+            cfg.setValue("server", mysql->getServer());
+            cfg.setValue("user", mysql->getUser());
+            cfg.setValue("passwd", mysql->getPasswd());
+            cfg.endGroup(); // name
         }
     }
 
-    cfg.setValue("Database/names", names);
-    cfg.setValue("Database/files", files);
+    cfg.endGroup(); // Entries
+    cfg.setValue("names", names);
+    cfg.endGroup(); // Database
 }
 
 
@@ -256,20 +311,32 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 
 void CGisListDB::slotAddDatabase()
 {
-    QString name, filename("-");
-    CSetupDatabase dlg(name, filename, *this);
+    CSetupDatabase dlg(*this);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;
     }
 
-    addDatabase(name, filename);
-    emit sigChanged();
-}
+    QString name = dlg.getName();
 
-void CGisListDB::addDatabase(const QString& name, const QString& filename)
-{
-    new CDBFolderSqlite(filename, name, this);
+    if(dlg.isSqlite())
+    {
+        QString filename = dlg.getFilename();
+        new CDBFolderSqlite(filename, name, this);
+    }
+    else if(dlg.isMysql())
+    {
+        QString server  = dlg.getServer();
+        QString user    = dlg.getUser();
+        QString passwd  = dlg.getPasswd();
+        new CDBFolderMysql(server, user, passwd, name, this);
+    }
+    else
+    {
+        return;
+    }
+
+    emit sigChanged();
 }
 
 void CGisListDB::slotDelDatabase()
@@ -457,10 +524,9 @@ void CGisListDB::slotDelItem()
 
         dbItem->remove();
 
-        folders     << folder;
-        dbItems     << dbItem;        
-        dbFolders   << folder->getDBFolder();
-
+        folders << folder;
+        dbItems << dbItem;
+        dbFolders << folder->getDBFolder();
     }
 
     qDeleteAll(dbItems);

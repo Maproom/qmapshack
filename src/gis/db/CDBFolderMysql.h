@@ -29,6 +29,10 @@ public:
     CDBFolderMysql(const QString &server, const QString &user, const QString &passwd, const QString &name, QTreeWidget *parent);
     virtual ~CDBFolderMysql() = default;
 
+    const QString& getServer(){return server; }
+    const QString& getUser(){return user; }
+    const QString& getPasswd(){return passwd; }
+
 private:
     const QString server;
     const QString user;

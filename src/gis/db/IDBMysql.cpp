@@ -18,6 +18,7 @@
 
 #include "gis/db/IDBMysql.h"
 #include "gis/db/macros.h"
+#include "CMainWindow.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -39,7 +40,19 @@ bool IDBMysql::setupDB(const QString& server,const QString& user, const QString&
         db.setDatabaseName(name);
         db.setHostName(server);
         db.setUserName(user);
-        db.setPassword(passwd);
+
+        if(passwd.isEmpty())
+        {
+            QString p = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(), QObject::tr("Password..."), QObject::tr("Password for database '%1':").arg(name), QLineEdit::Password, "");
+            db.setPassword(p);
+        }
+        else
+        {
+            db.setPassword(passwd);
+        }
+
+
+
         if(!db.open())
         {
             qDebug() << "failed to open database" << db.lastError();

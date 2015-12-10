@@ -56,7 +56,7 @@ public:
     }
     QString getDBName();
 
-    QSqlDatabase& getDb(){return db;}
+    QSqlDatabase& getDb(){return db; }
 
     /**
      * @brief Get the database folder that folder is stored in

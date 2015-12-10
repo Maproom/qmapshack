@@ -25,7 +25,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.229447"
-     inkscape:cx="-15.925255"
+     inkscape:cx="-17.585133"
      inkscape:cy="18.171979"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -73,8 +73,8 @@
            y="2.2142856" /></flowRegion><flowPara
          id="flowPara3865" /></flowRoot>    <g
        id="g3856"
-       transform="matrix(0.69904187,0,0,0.76693067,14.186094,995.71659)"
-       style="stroke-width:3.38945651;stroke-miterlimit:4;stroke-dasharray:none;stroke:#80b3ff">
+       transform="matrix(0.69904187,0,0,0.76693067,9.7429075,993.52947)"
+       style="stroke:#80b3ff;stroke-width:3.38945651;stroke-miterlimit:4;stroke-dasharray:none">
       <path
          transform="matrix(0.97628959,0,0,0.90577639,0.75264714,41.745822)"
          sodipodi:open="true"
@@ -158,25 +158,18 @@
          d="m 49.545455,19 0,40"
          style="fill:#ffffff;stroke:#80b3ff;stroke-width:3.38945651;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
-    <rect
-       style="fill:none;stroke:none"
-       id="rect2997"
-       width="50"
-       height="50"
-       x="8.237051"
-       y="995.48077" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:13.30489063px;line-height:120.00000477%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="-708.21863"
-       y="737.57678"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.84499073px;line-height:120.00000477%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-706.11664"
+       y="732.60388"
        id="text3350"
        sodipodi:linespacing="120%"
-       transform="matrix(0.69212393,-0.72241398,0.69212393,0.72241398,0,0)"><tspan
+       transform="matrix(0.68925322,-0.7254228,0.68925322,0.7254228,0,0)"><tspan
          sodipodi:role="line"
          id="tspan3352"
-         x="-708.21863"
-         y="737.57678"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.30489063px;line-height:120.00000477%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000080;">SQLite</tspan></text>
+         x="-706.11664"
+         y="732.60388"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.84499073px;line-height:120.00000477%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000080">SQLite</tspan></text>
   </g>
 </svg>

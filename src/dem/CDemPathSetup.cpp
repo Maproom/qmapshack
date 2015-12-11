@@ -28,9 +28,9 @@ CDemPathSetup::CDemPathSetup(QStringList &paths)
 {
     setupUi(this);
 
-    connect(toolAdd, SIGNAL(clicked()), this, SLOT(slotAddPath()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelPath()));
-    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+    connect(toolAdd,    &QToolButton::clicked,              this, &CDemPathSetup::slotAddPath);
+    connect(toolDelete, &QToolButton::clicked,              this, &CDemPathSetup::slotDelPath);
+    connect(listWidget, &QListWidget::itemSelectionChanged, this, &CDemPathSetup::slotItemSelectionChanged);
 
     foreach(const QString &path, paths)
     {

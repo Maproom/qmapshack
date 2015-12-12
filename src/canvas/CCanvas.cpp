@@ -78,13 +78,13 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     gis     = new CGisDraw(this);
     mouse   = new CMouseNormal(gis, this);
 
-    connect(map, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
-    connect(dem, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
-    connect(gis, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
+    connect(map, &CMapDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(dem, &CDemDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(gis, &CGisDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
 
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);
-    connect(timerToolTip, SIGNAL(timeout()), this, SLOT(slotToolTip()));
+    connect(timerToolTip, &QTimer::timeout, this, &CCanvas::slotToolTip);
 
     loadIndicator1 = new QMovie(this);
     loadIndicator1->setFileName("://animation/loader.gif");
@@ -106,17 +106,17 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     labelStatusMessages->setAlignment(Qt::AlignJustify);
     labelStatusMessages->hide();
 
-    connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));
-    connect(map, SIGNAL(sigStopThread()), mapLoadIndicator, SLOT(hide()));
+    connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
+    connect(map, &CMapDraw::sigStopThread,  mapLoadIndicator, &QLabel::hide);
 
-    connect(dem, SIGNAL(sigStartThread()), demLoadIndicator, SLOT(show()));
-    connect(dem, SIGNAL(sigStopThread()), demLoadIndicator, SLOT(hide()));
+    connect(dem, &CDemDraw::sigStartThread, demLoadIndicator, &QLabel::show);
+    connect(dem, &CDemDraw::sigStopThread,  demLoadIndicator, &QLabel::hide);
 
     timerTrackOnFocus = new QTimer(this);
     timerTrackOnFocus->setSingleShot(false);
     timerTrackOnFocus->start(1000);
 
-    connect(timerTrackOnFocus, SIGNAL(timeout()), this, SLOT(slotCheckTrackOnFocus()));
+    connect(timerTrackOnFocus, &QTimer::timeout, this, &CCanvas::slotCheckTrackOnFocus);
 }
 
 CCanvas::~CCanvas()

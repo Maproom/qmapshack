@@ -40,7 +40,7 @@ CCanvasSetup::CCanvasSetup(CCanvas * canvas)
         break;
     }
 
-    connect(toolWizard, SIGNAL(clicked()), this, SLOT(slotProjWizard()));
+    connect(toolWizard, &QToolButton::clicked, this, &CCanvasSetup::slotProjWizard);
 }
 
 CCanvasSetup::~CCanvasSetup()

@@ -76,7 +76,7 @@ CGisListDB::CGisListDB(QWidget *parent)
             QString filename = cfg.value("filename","").toString();
             if(filename.isEmpty())
             {
-                QMessageBox::information(this, tr("Help..."), tr("Due to changes in the database system QMapShack forgot about the filename of your database '%1'. You have to select it again in the next step.").arg(name), QMessageBox::Ok);
+                QMessageBox::information(this, name, tr("Due to changes in the database system QMapShack forgot about the filename of your database '%1'. You have to select it again in the next step.").arg(name), QMessageBox::Ok);
                 filename = QFileDialog::getOpenFileName(this, tr("Select database file."), path, "QMapShack Database (*.db)");
                 if(filename.isEmpty())
                 {
@@ -88,9 +88,9 @@ CGisListDB::CGisListDB(QWidget *parent)
         }
         if(type == "MySQL")
         {
-            QString server = cfg.value("server","").toString();
-            QString user = cfg.value("user","").toString();
-            QString passwd = cfg.value("passwd","").toString();
+            QString server  = cfg.value("server","").toString();
+            QString user    = cfg.value("user","").toString();
+            QString passwd  = cfg.value("passwd","").toString();
 
             if(server.isEmpty() || user.isEmpty())
             {

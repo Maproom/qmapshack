@@ -161,9 +161,9 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     QFileInfo fi(filename);
     slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.baseName()));
 
-    accessManager   = new QNetworkAccessManager(parent->thread());
-    connect(this, SIGNAL(sigQueueChanged()), this, SLOT(slotQueueChanged()));
-    connect(accessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+    accessManager = new QNetworkAccessManager(parent->thread());
+    connect(this,          &CMapTMS::sigQueueChanged,        this, &CMapTMS::slotQueueChanged);
+    connect(accessManager, &QNetworkAccessManager::finished, this, &CMapTMS::slotRequestFinished);
 
     name = fi.baseName().replace("_", " ");
 
@@ -193,7 +193,7 @@ void CMapTMS::getLayers(QListWidget& list)
         item->setData(Qt::UserRole, i++);
     }
 
-    connect(&list, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotLayersChanged(QListWidgetItem*)));
+    connect(&list, &QListWidget::itemChanged, this, &CMapTMS::slotLayersChanged);
 }
 
 

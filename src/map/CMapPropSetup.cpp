@@ -31,21 +31,21 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
 
     slotPropertiesChanged();
 
-    connect(sliderOpacity, SIGNAL(valueChanged(int)), mapfile, SLOT(slotSetOpacity(int)));
-    connect(sliderOpacity, SIGNAL(valueChanged(int)), map, SLOT(emitSigCanvasUpdate()));
-    connect(map, SIGNAL(sigScaleChanged(QPointF)), this, SLOT(slotScaleChanged(QPointF)));
-    connect(toolSetMinScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMinScale(bool)));
-    connect(toolSetMaxScale, SIGNAL(toggled(bool)), this, SLOT(slotSetMaxScale(bool)));
+    connect(sliderOpacity,       &QSlider::valueChanged,     mapfile, &IMap::slotSetOpacity);
+    connect(sliderOpacity,       &QSlider::valueChanged,     map,     &CMapDraw::emitSigCanvasUpdate);
+    connect(map,                 &CMapDraw::sigScaleChanged, this,    &CMapPropSetup::slotScaleChanged);
+    connect(toolSetMinScale,     &QToolButton::toggled,      this,    &CMapPropSetup::slotSetMinScale);
+    connect(toolSetMaxScale,     &QToolButton::toggled,      this,    &CMapPropSetup::slotSetMaxScale);
 
-    connect(checkPolygons, SIGNAL(toggled(bool)), mapfile, SLOT(slotSetShowPolygons(bool)));
-    connect(checkPolylines, SIGNAL(toggled(bool)), mapfile, SLOT(slotSetShowPolylines(bool)));
-    connect(checkPoints, SIGNAL(toggled(bool)), mapfile, SLOT(slotSetShowPOIs(bool)));
-    connect(checkPolygons, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
-    connect(checkPolylines, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
-    connect(checkPoints, SIGNAL(clicked()), map, SLOT(emitSigCanvasUpdate()));
+    connect(checkPolygons,       &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPolygons);
+    connect(checkPolylines,      &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPolylines);
+    connect(checkPoints,         &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPOIs);
+    connect(checkPolygons,       &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
+    connect(checkPolylines,      &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
+    connect(checkPoints,         &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
 
-    connect(spinCacheSize, SIGNAL(valueChanged(int)), mapfile, SLOT(slotSetCacheSize(qint32)));
-    connect(spinCacheExpiration, SIGNAL(valueChanged(int)), mapfile, SLOT(slotSetCacheExpiration(qint32)));
+    connect(spinCacheSize,       static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheSize);
+    connect(spinCacheExpiration, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheExpiration);
 
     if(mapfile->hasFeatureVectorItems())
     {

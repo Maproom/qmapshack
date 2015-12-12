@@ -67,12 +67,12 @@ CMapList::CMapList(QWidget *parent)
 {
     setupUi(this);
 
-    connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
-    connect(treeWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
-    connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
-    connect(actionMoveUp, SIGNAL(triggered()), this, SLOT(slotMoveUp()));
-    connect(actionMoveDown, SIGNAL(triggered()), this, SLOT(slotMoveDown()));
-    connect(pushMapHonk, SIGNAL(clicked()), this, SLOT(slotMapHonk()));
+    connect(treeWidget,     &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
+    connect(treeWidget,     &CMapTreeWidget::sigChanged,                 this, &CMapList::sigChanged);
+    connect(actionActivate, &QAction::triggered,                         this, &CMapList::slotActivate);
+    connect(actionMoveUp,   &QAction::triggered,                         this, &CMapList::slotMoveUp);
+    connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
+    connect(pushMapHonk,    &QPushButton::clicked,                       this, &CMapList::slotMapHonk);
 
 
     menu = new QMenu(this);

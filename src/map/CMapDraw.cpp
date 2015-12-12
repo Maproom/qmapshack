@@ -40,8 +40,8 @@ CMapDraw::CMapDraw(CCanvas *parent)
 {
     mapList = new CMapList(canvas);
     CMainWindow::self().addMapList(mapList, canvas->objectName());
-    connect(canvas, SIGNAL(destroyed()), mapList, SLOT(deleteLater()));
-    connect(mapList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
+    connect(canvas,  &CCanvas::destroyed,   mapList, &CMapList::deleteLater);
+    connect(mapList, &CMapList::sigChanged, this,    &CMapDraw::emitSigCanvasUpdate);
 
     buildMapList();
 

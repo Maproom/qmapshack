@@ -28,7 +28,7 @@ CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, bool groupAll
 {
     setupUi(this);
 
-    connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotNameChanged(QString)));
+    connect(lineName, &QLineEdit::textChanged, this, &CSetupFolder::slotNameChanged);
 
     lineName->setText(name);
     switch(type)

@@ -69,7 +69,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         check->setProperty("symbol", desc.iconLarge);
         check->setObjectName("check" + desc.objName);
 
-        connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+        connect(check, &QCheckBox::clicked, this, &CDetailsTrk::slotActivitySelected);
 
         layoutActivities->addWidget(check);
 
@@ -168,31 +168,33 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
-    connect(checkGraph1, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(checkGraph2, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(checkGraph3, SIGNAL(clicked()), this, SLOT(slotShowPlots()));
-    connect(comboColor,       SIGNAL(currentIndexChanged(int)),   this, SLOT(slotColorChanged(int)));
-    connect(toolLock,         SIGNAL(toggled(bool)),              this, SLOT(slotChangeReadOnlyMode(bool)));
-    connect(treeWidget,       SIGNAL(itemSelectionChanged()),     this, SLOT(slotItemSelectionChanged()));
-    connect(textCmtDesc,      SIGNAL(anchorClicked(QUrl)),        this, SLOT(slotLinkActivated(QUrl)));
-    connect(labelInfo,        SIGNAL(linkActivated(QString)),     this, SLOT(slotLinkActivated(QString)));
+    connect(checkGraph1,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
+    connect(checkGraph2,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
+    connect(checkGraph3,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
 
-    connect(plot3, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-    connect(plot1, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-    connect(plot2, SIGNAL(sigMouseClickState(int)), this, SLOT(slotMouseClickState(int)));
-    connect(comboColorSource, SIGNAL(currentIndexChanged(int)),   this, SLOT(slotColorSourceChanged(int)));
-    connect(spinLimitHigh,    SIGNAL(valueChangedByStep(double)), this, SLOT(slotColorLimitHighChanged()));
-    connect(spinLimitHigh,    SIGNAL(editingFinished()),          this, SLOT(slotColorLimitHighChanged()));
-    connect(spinLimitLow,     SIGNAL(valueChangedByStep(double)), this, SLOT(slotColorLimitLowChanged()));
-    connect(spinLimitLow,     SIGNAL(editingFinished()),          this, SLOT(slotColorLimitLowChanged()));
+    connect(toolLock,         &QToolButton::toggled,               this, &CDetailsTrk::slotChangeReadOnlyMode);
+    connect(treeWidget,       &QTreeWidget::itemSelectionChanged,  this, &CDetailsTrk::slotItemSelectionChanged);
+    connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, static_cast<void (CDetailsTrk::*)(const QUrl&)   >(&CDetailsTrk::slotLinkActivated));
+    connect(labelInfo,        &QLabel::linkActivated,              this, static_cast<void (CDetailsTrk::*)(const QString&)>(&CDetailsTrk::slotLinkActivated));
 
-    connect(btnMaxFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitHighFromData()));
-    connect(btnMinFromData,   SIGNAL(clicked()),                  this, SLOT(slotLimitLowFromData()));
+    connect(plot1,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
+    connect(plot2,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
+    connect(plot3,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
 
-    connect(listHistory,      SIGNAL(sigChanged()),               this, SLOT(updateData()));
+    connect(spinLimitHigh,    &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
+    connect(spinLimitHigh,    &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitHighChanged);
+    connect(spinLimitLow,     &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
+    connect(spinLimitLow,     &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
-    connect(comboGraph2, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
-    connect(comboGraph3, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetupGraph(int)));
+    connect(btnMaxFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
+    connect(btnMinFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
+
+    connect(listHistory,      &CHistoryListWidget::sigChanged,     this, &CDetailsTrk::updateData);
+
+    connect(comboColor,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorChanged);
+    connect(comboColorSource, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorSourceChanged);
+    connect(comboGraph2,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
+    connect(comboGraph3,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
 
     // setting up the graph properties will trigger the signals
     // this is good because the signals are connected at this point
@@ -554,7 +556,7 @@ void CDetailsTrk::slotColorChanged(int idx)
     }
 }
 
-void CDetailsTrk::slotColorSourceChanged(int idx, float valueLow, float valueHigh)
+void CDetailsTrk::slotColorSourceChanged(int idx)
 {
     trk.setColorizeSource(comboColorSource->itemData(idx).toString());
     updateData();

@@ -92,7 +92,7 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboLanguage->addItem(tr("Russian"), "ru");
     comboLanguage->addItem(tr("Polish"), "pl");
 
-    connect(toolSetupPaths, SIGNAL(clicked()), this, SLOT(slotSetupPaths()));
+    connect(toolSetupPaths, &QToolButton::clicked, this, &CRouterRoutino::slotSetupPaths);
 
     SETTINGS;
     dbPaths = cfg.value("Route/routino/paths", dbPaths).toStringList();

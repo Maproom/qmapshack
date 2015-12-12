@@ -27,7 +27,7 @@ CFilterInvalid::CFilterInvalid(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterInvalid::slotApply);
 }
 
 CFilterInvalid::~CFilterInvalid()

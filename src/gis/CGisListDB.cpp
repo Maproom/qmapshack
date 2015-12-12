@@ -126,9 +126,9 @@ CGisListDB::CGisListDB(QWidget *parent)
     actionDelLostFoundItem  = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, SLOT(slotDelLostFoundItem()));
 
 
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
-    connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
+    connect(this, &CGisListDB::customContextMenuRequested, this, &CGisListDB::slotContextMenu);
+    connect(this, &CGisListDB::itemExpanded,               this, &CGisListDB::slotItemExpanded);
+    connect(this, &CGisListDB::itemChanged,                this, &CGisListDB::slotItemChanged);
 }
 
 CGisListDB::~CGisListDB()

@@ -69,12 +69,12 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t> &keysPre
         item->setData(Qt::UserRole + 3, key.device);
     }
 
-    connect(listAvailable, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(listSelected, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(toolSelect, SIGNAL(clicked()), this, SLOT(slotSelect()));
-    connect(toolRemove, SIGNAL(clicked()), this, SLOT(slotRemove()));
-    connect(toolUp, SIGNAL(clicked()), this, SLOT(slotUp()));
-    connect(toolDown, SIGNAL(clicked()), this, SLOT(slotDown()));
+    connect(listAvailable, &QListWidget::itemSelectionChanged, this, &CCombineTrk::slotSelectionChanged);
+    connect(listSelected,  &QListWidget::itemSelectionChanged, this, &CCombineTrk::slotSelectionChanged);
+    connect(toolSelect,    &QToolButton::clicked,              this, &CCombineTrk::slotSelect);
+    connect(toolRemove,    &QToolButton::clicked,              this, &CCombineTrk::slotRemove);
+    connect(toolUp,        &QToolButton::clicked,              this, &CCombineTrk::slotUp);
+    connect(toolDown,      &QToolButton::clicked,              this, &CCombineTrk::slotDown);
 
     listAvailable->setCurrentItem(0);
     listSelected->setCurrentItem(0);

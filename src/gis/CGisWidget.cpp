@@ -54,8 +54,8 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
     treeDB->header()->restoreState(cfg.value("Workspace/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
-    connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
-    connect(treeDB, SIGNAL(sigChanged()), SLOT(slotHelpText()));
+    connect(treeWks, &CGisListWks::sigChanged, this, &CGisWidget::sigChanged);
+    connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisWidget::slotHelpText);
 
     slotHelpText();
 

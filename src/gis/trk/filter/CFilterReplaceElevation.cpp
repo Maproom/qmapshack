@@ -26,7 +26,7 @@ CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *pare
 {
     setupUi(this);
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterReplaceElevation::slotApply);
 }
 
 CFilterReplaceElevation::~CFilterReplaceElevation()

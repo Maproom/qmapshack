@@ -33,7 +33,7 @@ CSetupWorkspace::CSetupWorkspace(QWidget *parent)
     spinSaveEvery->setValue(cfg.value("saveEvery",5).toInt());
     cfg.endGroup();
 
-    connect(checkSaveOnExit, SIGNAL(toggled(bool)), spinSaveEvery, SLOT(setEnabled(bool)));
+    connect(checkSaveOnExit, &QCheckBox::toggled, spinSaveEvery, &QSpinBox::setEnabled);
 }
 
 CSetupWorkspace::~CSetupWorkspace()

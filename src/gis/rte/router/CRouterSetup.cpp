@@ -39,7 +39,7 @@ CRouterSetup::CRouterSetup(QWidget * parent)
     stackedWidget->addWidget(new CRouterRoutino(this));
     stackedWidget->addWidget(new CRouterMapQuest(this));
 
-    connect(comboRouter, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSelectRouter(int)));
+    connect(comboRouter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CRouterSetup::slotSelectRouter);
 
     SETTINGS;
     comboRouter->setCurrentIndex(cfg.value("Route/current",0).toInt());

@@ -44,7 +44,7 @@ CSelectActivity::CSelectActivity(quint32 &flag, QString &name, QString &icon, QW
         check->setProperty("name", desc.name);
         check->setProperty("symbol", desc.iconLarge);
 
-        connect(check, SIGNAL(clicked(bool)), this, SLOT(slotActivitySelected(bool)));
+        connect(check, &QCheckBox::clicked, this, &CSelectActivity::slotActivitySelected);
 
         l->addWidget(check);
 

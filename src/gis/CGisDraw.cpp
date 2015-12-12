@@ -25,7 +25,7 @@
 CGisDraw::CGisDraw(CCanvas *parent)
     : IDrawContext("gis", CCanvas::eRedrawGis, parent)
 {
-    connect(&CGisWidget::self(), SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
+    connect(&CGisWidget::self(), &CGisWidget::sigChanged, this, &CGisDraw::emitSigCanvasUpdate);
 }
 
 CGisDraw::~CGisDraw()

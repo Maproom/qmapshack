@@ -50,7 +50,7 @@ private slots:
     void slotMouseClickState(int);
     void slotActivitySelected(bool checked);
 
-    void slotColorSourceChanged(int idx, float valueLow = HUGE_VALF, float valueHigh = HUGE_VALF);
+    void slotColorSourceChanged(int idx);
     void slotColorLimitHighChanged();
     void slotColorLimitLowChanged();
 

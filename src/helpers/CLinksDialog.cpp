@@ -26,9 +26,9 @@ CLinksDialog::CLinksDialog(QList<IGisItem::link_t> &links, QWidget *parent)
 {
     setupUi(this);
 
-    connect(toolAdd, SIGNAL(clicked()), this, SLOT(slotAddLink()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelLink()));
-    connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+    connect(toolAdd,    &QToolButton::clicked,              this, &CLinksDialog::slotAddLink);
+    connect(toolDelete, &QToolButton::clicked,              this, &CLinksDialog::slotDelLink);
+    connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CLinksDialog::slotItemSelectionChanged);
 
     foreach(const IGisItem::link_t& link, links)
     {

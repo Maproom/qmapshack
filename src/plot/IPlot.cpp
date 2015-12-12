@@ -93,7 +93,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
     actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
 
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
 
 IPlot::~IPlot()
@@ -384,10 +384,10 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                  */
                 delete scrOptRange;
                 scrOptRange = new CScrOptRangeTrk(e->pos(), trk, &dummyMouse, this);
-                connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
-                connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
-                connect(scrOptRange->toolActivity, SIGNAL(clicked()), this, SLOT(slotActivity()));
-                connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
+                connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &IPlot::slotHidePoints);
+                connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
+                connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &IPlot::slotActivity);
+                connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &IPlot::slotCopy);
 
                 /* Adjust position of screen option widget if the widget is out of the visible area*/
                 QRect r1 = scrOptRange->geometry();

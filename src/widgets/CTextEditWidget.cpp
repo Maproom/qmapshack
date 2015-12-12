@@ -48,19 +48,19 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
 {
     setupUi(this);
 
-    connect(actionTextBold, SIGNAL(triggered()), this, SLOT(textBold()));
-    toolBold->setDefaultAction(actionTextBold);
-    connect(actionTextItalic, SIGNAL(triggered()), this, SLOT(textItalic()));
+    connect(actionTextBold,      &QAction::triggered, this, &CTextEditWidget::textBold);
+    connect(actionTextItalic,    &QAction::triggered, this, &CTextEditWidget::textItalic);
+    connect(actionTextUnderline, &QAction::triggered, this, &CTextEditWidget::textUnderline);
+    toolBold->setDefaultAction  (actionTextBold);
     toolItalic->setDefaultAction(actionTextItalic);
-    connect(actionTextUnderline, SIGNAL(triggered()), this, SLOT(textUnderline()));
-    toolUnder->setDefaultAction(actionTextUnderline);
+    toolUnder->setDefaultAction (actionTextUnderline);
 
     QActionGroup *grp = new QActionGroup(this);
     grp->addAction(actionAlignLeft);
     grp->addAction(actionAlignRight);
     grp->addAction(actionAlignCenter);
     grp->addAction(actionAlignJustify);
-    connect(grp, SIGNAL(triggered(QAction *)), this, SLOT(textAlign(QAction *)));
+    connect(grp, &QActionGroup::triggered, this, &CTextEditWidget::textAlign);
 
     toolLeft->setDefaultAction(actionAlignLeft);
     toolCenter->setDefaultAction(actionAlignCenter);
@@ -71,7 +71,7 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     QPixmap pix(24, 24);
     pix.fill(Qt::black);
     actionTextColor = new QAction(pix, tr("&Color..."), this);
-    connect(actionTextColor, SIGNAL(triggered()), this, SLOT(textColor()));
+    connect(actionTextColor, &QAction::triggered, this, &CTextEditWidget::textColor);
     toolColor->setDefaultAction(actionTextColor);
 
     comboStyle->addItem("standard");
@@ -81,10 +81,10 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     comboStyle->addItem("Ordered List (Decimal)");
     comboStyle->addItem("Ordered List (Alpha lower)");
     comboStyle->addItem("Ordered List (Alpha upper)");
-    connect(comboStyle, SIGNAL(activated(int)), this, SLOT(textStyle(int)));
+    connect(comboStyle, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CTextEditWidget::textStyle);
 
-    connect(textEdit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)), this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
-    connect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorPositionChanged()));
+    connect(textEdit, &QTextEdit::currentCharFormatChanged, this, &CTextEditWidget::currentCharFormatChanged);
+    connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
 
     textEdit->setFocus();
 
@@ -102,23 +102,23 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     actionUndo->setEnabled(textEdit->document()->isUndoAvailable());
     actionRedo->setEnabled(textEdit->document()->isRedoAvailable());
 
-    connect(textEdit->document(), SIGNAL(undoAvailable(bool)), actionUndo, SLOT(setEnabled(bool)));
-    connect(textEdit->document(), SIGNAL(redoAvailable(bool)), actionRedo, SLOT(setEnabled(bool)));
+    connect(textEdit->document(), &QTextDocument::undoAvailable, actionUndo, &QAction::setEnabled);
+    connect(textEdit->document(), &QTextDocument::redoAvailable, actionRedo, &QAction::setEnabled);
 
-    connect(actionUndo, SIGNAL(triggered()), textEdit, SLOT(undo()));
-    connect(actionRedo, SIGNAL(triggered()), textEdit, SLOT(redo()));
+    connect(actionUndo, &QAction::triggered, textEdit, &QTextEdit::undo);
+    connect(actionRedo, &QAction::triggered, textEdit, &QTextEdit::redo);
 
     actionCut->setEnabled(false);
     actionCopy->setEnabled(false);
 
-    connect(actionCut, SIGNAL(triggered()), textEdit, SLOT(cut()));
-    connect(actionCopy, SIGNAL(triggered()), textEdit, SLOT(copy()));
-    connect(actionPaste, SIGNAL(triggered()), textEdit, SLOT(paste()));
+    connect(actionCut,                 &QAction::triggered,       textEdit,   &QTextEdit::cut);
+    connect(actionCopy,                &QAction::triggered,       textEdit,   &QTextEdit::copy);
+    connect(actionPaste,               &QAction::triggered,       textEdit,   &QTextEdit::paste);
 
-    connect(textEdit, SIGNAL(copyAvailable(bool)), actionCut, SLOT(setEnabled(bool)));
-    connect(textEdit, SIGNAL(copyAvailable(bool)), actionCopy, SLOT(setEnabled(bool)));
+    connect(textEdit,                  &QTextEdit::copyAvailable, actionCut,  &QAction::setEnabled);
+    connect(textEdit,                  &QTextEdit::copyAvailable, actionCopy, &QAction::setEnabled);
 
-    connect(QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
+    connect(QApplication::clipboard(), &QClipboard::dataChanged,  this,       &CTextEditWidget::clipboardDataChanged);
 }
 
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>570</height>
+    <width>700</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -160,24 +160,13 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="4" column="1">
-        <widget class="QLabel" name="label_15">
-         <property name="text">
-          <string>Rainer Unseld </string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_14">
-         <property name="text">
-          <string>French</string>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_12">
          <property name="text">
-          <string>Czech</string>
+          <string>Czech:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -191,7 +180,10 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_9">
          <property name="text">
-          <string>German</string>
+          <string>German:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -209,24 +201,13 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_16">
-         <property name="text">
-          <string>Spanish</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QLabel" name="label_17">
-         <property name="text">
-          <string>Jose Luis Domingo Lopez</string>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_27">
          <property name="text">
-          <string>Dutch</string>
+          <string>Dutch:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -234,6 +215,40 @@
         <widget class="QLabel" name="label_28">
          <property name="text">
           <string>Harrie Klomp</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>French:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string>Rainer Unseld </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>Jose Luis Domingo Lopez</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_16">
+         <property name="text">
+          <string>Spanish:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -247,45 +262,14 @@
       </widget>
      </item>
      <item>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="1">
-        <widget class="QLabel" name="label_22">
-         <property name="text">
-          <string>Ivo Kronenberg</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_20">
-         <property name="text">
-          <string>Helmut Schmidt</string>
-         </property>
-        </widget>
-       </item>
+      <layout class="QGridLayout" name="gridLayout_4">
        <item row="1" column="0">
         <widget class="QLabel" name="label_19">
          <property name="text">
-          <string>Win64</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_21">
-         <property name="text">
-          <string>OS X</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QLabel" name="label_23">
-         <property name="text">
-          <string>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</string>
+          <string>Win64:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -296,7 +280,44 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_21">
+         <property name="text">
+          <string>OS X:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Helmut Schmidt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_22">
+         <property name="text">
+          <string>Ivo Kronenberg</string>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_23">
+       <property name="text">
+        <string>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="Line" name="line_4">

@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/db/IDBMysql.h"
 #include "gis/db/macros.h"
-#include "CMainWindow.h"
 
 #include <QtSql>
 #include <QtWidgets>

@@ -67,7 +67,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     QString path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
     QStringList names = cfg.value("names").toStringList();
     cfg.beginGroup("Entries");
-    foreach(const QString& name, names)
+    foreach(const QString &name, names)
     {
         cfg.beginGroup(name);
         QString type = cfg.value("type", "SQLite").toString();

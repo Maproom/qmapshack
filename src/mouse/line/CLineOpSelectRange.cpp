@@ -65,8 +65,8 @@ void CLineOpSelectRange::mousePressEventEx(QMouseEvent * e)
             scrOptRangeLine = new CScrOptRangeLine(points[idx2nd].pixel, parentHandler, canvas);
             connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, this,            &CLineOpSelectRange::slotDelete);
             connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, this,            &CLineOpSelectRange::slotCalc);
-            connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, scrOptRangeLine, &CScrOptRangeLine::hide);
-            connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, scrOptRangeLine, &CScrOptRangeLine::hide);
+            connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
+            connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
 
             if(d < 2)
             {

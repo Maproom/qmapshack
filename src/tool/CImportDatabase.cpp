@@ -35,9 +35,9 @@ CImportDatabase::CImportDatabase(QWidget *parent)
 
     textBrowser->setFont(QFont("Courier",10));
 
-    connect(toolSelectSource, SIGNAL(clicked()), this, SLOT(slotSelectSource()));
-    connect(toolSelectTarget, SIGNAL(clicked()), this, SLOT(slotSelectTarget()));
-    connect(pushStart,        SIGNAL(clicked()), this, SLOT(slotStart()));
+    connect(toolSelectSource, &QToolButton::clicked, this, &CImportDatabase::slotSelectSource);
+    connect(toolSelectTarget, &QToolButton::clicked, this, &CImportDatabase::slotSelectTarget);
+    connect(pushStart,        &QPushButton::clicked, this, &CImportDatabase::slotStart);
 
     pushStart->setEnabled(false);
     if(QFile::exists(labelSource->text()))

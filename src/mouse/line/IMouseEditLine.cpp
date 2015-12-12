@@ -99,21 +99,21 @@ void IMouseEditLine::commonSetup()
 {
     // create permanent line edit on screen options
     scrOptEditLine = new CScrOptEditLine(this);
-    connect(scrOptEditLine->pushSaveOrig,    SIGNAL(clicked()), this, SLOT(slotCopyToOrig()   ));
-    connect(scrOptEditLine->pushSaveNew,     SIGNAL(clicked()), this, SLOT(slotCopyToNew()    ));
-    connect(scrOptEditLine->pushAbort,       SIGNAL(clicked()), this, SLOT(slotAbort()        ));
+    connect(scrOptEditLine->pushSaveOrig,    &QPushButton::clicked, this, &IMouseEditLine::slotCopyToOrig   );
+    connect(scrOptEditLine->pushSaveNew,     &QPushButton::clicked, this, &IMouseEditLine::slotCopyToNew    );
+    connect(scrOptEditLine->pushAbort,       &QPushButton::clicked, this, &IMouseEditLine::slotAbort        );
 
-    connect(scrOptEditLine->toolMovePoint,   SIGNAL(clicked()), this, SLOT(slotMovePoint()    ));
-    connect(scrOptEditLine->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()  ));
-    connect(scrOptEditLine->toolAddPoint,    SIGNAL(clicked()), this, SLOT(slotAddPoint()     ));
-    connect(scrOptEditLine->toolDeletePoint, SIGNAL(clicked()), this, SLOT(slotDeletePoint()  ));
+    connect(scrOptEditLine->toolMovePoint,   &QPushButton::clicked, this, &IMouseEditLine::slotMovePoint    );
+    connect(scrOptEditLine->toolSelectRange, &QPushButton::clicked, this, &IMouseEditLine::slotSelectRange  );
+    connect(scrOptEditLine->toolAddPoint,    &QPushButton::clicked, this, &IMouseEditLine::slotAddPoint     );
+    connect(scrOptEditLine->toolDeletePoint, &QPushButton::clicked, this, &IMouseEditLine::slotDeletePoint  );
 
-    connect(scrOptEditLine->toolNoRoute,     SIGNAL(clicked()), this, SLOT(slotNoRouting()    ));
-    connect(scrOptEditLine->toolAutoRoute,   SIGNAL(clicked()), this, SLOT(slotAutoRouting()  ));
-    connect(scrOptEditLine->toolVectorRoute, SIGNAL(clicked()), this, SLOT(slotVectorRouting()));
+    connect(scrOptEditLine->toolNoRoute,     &QPushButton::clicked, this, &IMouseEditLine::slotNoRouting    );
+    connect(scrOptEditLine->toolAutoRoute,   &QPushButton::clicked, this, &IMouseEditLine::slotAutoRouting  );
+    connect(scrOptEditLine->toolVectorRoute, &QPushButton::clicked, this, &IMouseEditLine::slotVectorRouting);
 
-    connect(scrOptEditLine->toolUndo,        SIGNAL(clicked()), this, SLOT(slotUndo()         ));
-    connect(scrOptEditLine->toolRedo,        SIGNAL(clicked()), this, SLOT(slotRedo()         ));
+    connect(scrOptEditLine->toolUndo,        &QPushButton::clicked, this, &IMouseEditLine::slotUndo         );
+    connect(scrOptEditLine->toolRedo,        &QPushButton::clicked, this, &IMouseEditLine::slotRedo         );
 
     SETTINGS;
     int mode = cfg.value("Route/drawMode",0).toInt();

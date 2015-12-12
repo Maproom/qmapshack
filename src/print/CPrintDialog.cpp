@@ -57,10 +57,10 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     layout->setSpacing(0);
     layout->setContentsMargins(0,0,0,0);
 
-    connect(canvas, SIGNAL(sigZoom()), this, SLOT(slotUpdateMetrics()));
-    connect(canvas, SIGNAL(sigMove()), this, SLOT(slotUpdateMetrics()));
-    connect(pushPrint, SIGNAL(pressed()), this, SLOT(slotPrint()));
-    connect(pushSave, SIGNAL(pressed()), this, SLOT(slotSave()));
+    connect(canvas,    &CCanvas::sigZoom,     this, &CPrintDialog::slotUpdateMetrics);
+    connect(canvas,    &CCanvas::sigMove,     this, &CPrintDialog::slotUpdateMetrics);
+    connect(pushPrint, &QPushButton::pressed, this, &CPrintDialog::slotPrint);
+    connect(pushSave,  &QPushButton::pressed, this, &CPrintDialog::slotSave);
 
     if(type == eTypePrint)
     {

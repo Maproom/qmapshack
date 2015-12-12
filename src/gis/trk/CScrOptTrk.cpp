@@ -52,25 +52,24 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolProfile, SIGNAL(toggled(bool)), this, SLOT(hide()));
-    connect(toolCut, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolReverse, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCombine, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolRange, SIGNAL(clicked()), this, SLOT(hide()));
-
-    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
-    connect(toolProfile, SIGNAL(toggled(bool)), this, SLOT(slotProfile(bool)));
-    connect(toolCut, SIGNAL(clicked()), this, SLOT(slotCut()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
-    connect(toolReverse, SIGNAL(clicked()), this, SLOT(slotReverse()));
-    connect(toolCombine, SIGNAL(clicked()), this, SLOT(slotCombine()));
-    connect(toolRange, SIGNAL(clicked()), this, SLOT(slotRange()));
+    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolProfile,     &QToolButton::toggled, this, &CScrOptTrk::hide);
+    connect(toolCut,         &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolReverse,     &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolCombine,     &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::hide);
+    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::slotEditDetails);
+    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptTrk::slotDelete);
+    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptTrk::slotCopy);
+    connect(toolProfile,     &QToolButton::toggled, this, &CScrOptTrk::slotProfile);
+    connect(toolCut,         &QToolButton::clicked, this, &CScrOptTrk::slotCut);
+    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptTrk::slotEdit);
+    connect(toolReverse,     &QToolButton::clicked, this, &CScrOptTrk::slotReverse);
+    connect(toolCombine,     &QToolButton::clicked, this, &CScrOptTrk::slotCombine);
+    connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::slotRange);
 
 
     // reset user focus if the track has it

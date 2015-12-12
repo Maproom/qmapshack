@@ -61,12 +61,12 @@ CDemList::CDemList(QWidget *parent)
 {
     setupUi(this);
 
-    connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
-    connect(actionMoveUp, SIGNAL(triggered()), this, SLOT(slotMoveUp()));
-    connect(actionMoveDown, SIGNAL(triggered()), this, SLOT(slotMoveDown()));
-    connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
+    connect(treeWidget,     &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
+    connect(actionMoveUp,   &QAction::triggered,                         this, &CDemList::slotMoveUp);
+    connect(actionMoveDown, &QAction::triggered,                         this, &CDemList::slotMoveDown);
+    connect(actionActivate, &QAction::triggered,                         this, &CDemList::slotActivate);
 
-    connect(treeWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(treeWidget,     &CDemTreeWidget::sigChanged,                 this, &CDemList::sigChanged);
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);

@@ -93,13 +93,13 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
 
-    connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
-    connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotItemDoubleClicked(QListWidgetItem*)));
-    connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotProjectChanged(QString)));
-    connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(slotProjectEdited(QString)));
-    connect(radioQms, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
-    connect(radioGpx, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
-    connect(radioDatabase, SIGNAL(toggled(bool)), this, SLOT(slotTypeChanged()));
+    connect(listWidget,    &QListWidget::itemClicked,       this, &CSelectProjectDialog::slotItemClicked);
+    connect(listWidget,    &QListWidget::itemDoubleClicked, this, &CSelectProjectDialog::slotItemDoubleClicked);
+    connect(lineEdit,      &QLineEdit::textChanged,         this, &CSelectProjectDialog::slotProjectChanged);
+    connect(lineEdit,      &QLineEdit::textEdited,          this, &CSelectProjectDialog::slotProjectEdited);
+    connect(radioQms,      &QRadioButton::clicked,          this, &CSelectProjectDialog::slotTypeChanged);
+    connect(radioGpx,      &QRadioButton::clicked,          this, &CSelectProjectDialog::slotTypeChanged);
+    connect(radioDatabase, &QRadioButton::toggled,          this, &CSelectProjectDialog::slotTypeChanged);
 
     adjustSize();
 

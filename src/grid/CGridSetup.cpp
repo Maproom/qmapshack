@@ -38,10 +38,10 @@ CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
     palette.setColor(labelGridColor->foregroundRole(), grid->color);
     labelGridColor->setPalette(palette);
 
-    connect(toolRestoreDefault, SIGNAL(clicked()), this, SLOT(slotRestoreDefault()));
-    connect(toolFromMap, SIGNAL(clicked()), this, SLOT(slotProjFromMap()));
-    connect(toolProjWizzard, SIGNAL(clicked()), this, SLOT(slotProjWizard()));
-    connect(toolGridColor,SIGNAL(clicked()),this,SLOT(slotSelectGridColor()));
+    connect(toolRestoreDefault, &QToolButton::clicked, this, &CGridSetup::slotRestoreDefault);
+    connect(toolFromMap,        &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
+    connect(toolProjWizzard,    &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
+    connect(toolGridColor,      &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
 }
 
 CGridSetup::~CGridSetup()

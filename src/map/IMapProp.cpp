@@ -24,7 +24,7 @@ IMapProp::IMapProp(IMap *mapfile, CMapDraw *map)
     : mapfile(mapfile)
     , map(map)
 {
-    connect(mapfile, SIGNAL(sigPropertiesChanged()), this, SLOT(slotPropertiesChanged()));
+    connect(mapfile, &IMap::sigPropertiesChanged, this, &IMapProp::slotPropertiesChanged);
 }
 
 IMapProp::~IMapProp()

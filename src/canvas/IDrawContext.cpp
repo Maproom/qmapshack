@@ -114,8 +114,8 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
     zoom(5);
 
     resize(canvas->size());
-    connect(this, SIGNAL(finished()), canvas, SLOT(update()));
-    connect(this, SIGNAL(finished()), SIGNAL(sigStopThread()));
+    connect(this, &IDrawContext::finished, canvas, static_cast<void (CCanvas::*)()>(&CCanvas::update));
+    connect(this, &IDrawContext::finished, this,   &IDrawContext::sigStopThread);
 }
 
 IDrawContext::~IDrawContext()

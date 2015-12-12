@@ -37,11 +37,10 @@ CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget *parent)
         toolLock->setDisabled(true);
     }
 
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
-    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(labelInfo, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-
-    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+    connect(toolLock,    &QToolButton::toggled,           this, &CDetailsRte::slotChangeReadOnlyMode);
+    connect(textCmtDesc, &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsRte::*)(const QUrl&)   >(&CDetailsRte::slotLinkActivated));
+    connect(labelInfo,   &QLabel::linkActivated,          this, static_cast<void (CDetailsRte::*)(const QString&)>(&CDetailsRte::slotLinkActivated));
+    connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsRte::setupGui);
 }
 
 CDetailsRte::~CDetailsRte()

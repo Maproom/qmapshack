@@ -34,7 +34,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     SETTINGS;
     doubleSpinBox->setValue(cfg.value("TrackDetails/Filter/Speed/speed",1).toDouble());
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
 }
 
 CFilterSpeed::~CFilterSpeed()

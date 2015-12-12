@@ -30,7 +30,7 @@ CFadingIcon::CFadingIcon(const QPoint& pt, const QString &resource, QWidget *par
     timer->setInterval(100);
     timer->start();
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
+    connect(timer, &QTimer::timeout, this, &CFadingIcon::slotTimeout);
 
     move(pt.x() - icon.width()/2, pt.y() - icon.height()/2);
     show();

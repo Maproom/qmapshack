@@ -42,8 +42,8 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QWidget *parent)
         new CDBFolderSqlite(files[i], names[i], treeWidget);
     }
 
-    connect(treeWidget, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
-    connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+    connect(treeWidget, &QTreeWidget::itemExpanded,         this, &CSelectDBFolder::slotItemExpanded);
+    connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CSelectDBFolder::slotItemSelectionChanged);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectDBFolder");
 }

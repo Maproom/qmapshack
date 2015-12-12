@@ -27,9 +27,9 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     setupUi(this);
     setObjectName(tr("Build GDAL VRT"));
 
-    connect(toolSourceFiles, SIGNAL(clicked()), this, SLOT(slotSelectSourceFiles()));
-    connect(toolTargetFile, SIGNAL(clicked()), this, SLOT(slotSelectTargetFile()));
-    connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
+    connect(toolSourceFiles, &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectSourceFiles);
+    connect(toolTargetFile,  &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectTargetFile);
+    connect(pushStart,       &QPushButton::clicked, this, &CMapVrtBuilder::slotStart);
 
     pushStart->setDisabled(true);
 }

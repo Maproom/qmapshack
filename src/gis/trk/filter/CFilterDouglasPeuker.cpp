@@ -35,7 +35,7 @@ CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
     SETTINGS;
     spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance",5).toInt());
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterDouglasPeuker::slotApply);
 }
 
 CFilterDouglasPeuker::~CFilterDouglasPeuker()

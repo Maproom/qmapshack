@@ -43,12 +43,12 @@ CSearchGoogle::CSearchGoogle(CGisListWks * parent)
     edit = new QLineEdit(parent);
     actSymbol = edit->addAction(getWptIconByName(symName, focus), QLineEdit::TrailingPosition);
     actSymbol->setObjectName(symName);
-    connect(actSymbol, SIGNAL(triggered()), this, SLOT(slotChangeSymbol()));
+    connect(actSymbol, &QAction::triggered, this, &CSearchGoogle::slotChangeSymbol);
 
     parent->setItemWidget(this, CGisListWks::eColumnName, edit);
 
-    connect(edit, SIGNAL(returnPressed()), this, SLOT(slotStartSearch()));
-    connect(&networkAccessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+    connect(edit, &QLineEdit::returnPressed, this, &CSearchGoogle::slotStartSearch);
+    connect(&networkAccessManager, &QNetworkAccessManager::finished, this, &CSearchGoogle::slotRequestFinished);
 
     setIcon(CGisListWks::eColumnDecoration, QIcon("://icons/32x32/SearchGoogle.png"));
 }

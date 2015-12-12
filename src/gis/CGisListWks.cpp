@@ -120,9 +120,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProjectTrash->addAction(actionSaveAs);
     menuProjectTrash->addAction(actionCloseProj);
 
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
-    connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
+    connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
+    connect(this, &CGisListWks::itemDoubleClicked,          this, &CGisListWks::slotItemDoubleClicked);
+    connect(this, &CGisListWks::itemChanged,                this, &CGisListWks::slotItemChanged);
 
     menuItemTrk      = new QMenu(this);
     actionEditDetails = menuItemTrk->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
@@ -177,9 +177,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem->addAction(actionDelete);
 
 
-    connect(actionFocusTrk, SIGNAL(triggered(bool)), this, SLOT(slotFocusTrk(bool)));
-    connect(actionFocusRte, SIGNAL(triggered(bool)), this, SLOT(slotFocusRte(bool)));
-    connect(qApp, SIGNAL(aboutToQuit ()), this, SLOT(slotSaveWorkspace()));
+    connect(actionFocusTrk, &QAction::triggered,        this, &CGisListWks::slotFocusTrk);
+    connect(actionFocusRte, &QAction::triggered,        this, &CGisListWks::slotFocusRte);
+    connect(qApp,           &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
 
     SETTINGS;
     saveOnExit  = cfg.value("Database/saveOnExit", saveOnExit).toBool();
@@ -192,17 +192,16 @@ CGisListWks::CGisListWks(QWidget *parent)
 
 #ifdef Q_OS_LINUX
     deviceWatcher = new CDeviceWatcherLinux(this);
-    connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
 #endif
 #ifdef Q_OS_MAC
-    CDeviceWatcherMac* pWatcher = new CDeviceWatcherMac(this);
-    deviceWatcher = pWatcher;
-    connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
-    connect(qApp, SIGNAL(aboutToQuit()), deviceWatcher, SLOT(slotEndListing()));
+    deviceWatcher = new CDeviceWatcherMac(this);
+    connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this,          &CGisListWks::sigChanged);
+    connect(qApp,          &QApplication::aboutToQuit,     deviceWatcher, &CDeviceWatcherMac::slotEndListing);
 #endif
 #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);
-    connect(deviceWatcher, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(deviceWatcher, &CDeviceWatcherWindows::sigChanged, this, &CGisListWks::sigChanged);
 #endif
 }
 
@@ -358,9 +357,9 @@ void CGisListWks::migrateDB2to3()
 void CGisListWks::setExternalMenu(QMenu * project)
 {
     menuNone = project;
-    connect(CMainWindow::self().findChild<QAction*>("actionAddEmptyProject"), SIGNAL(triggered()), this, SLOT(slotAddEmptyProject()));
-    connect(CMainWindow::self().findChild<QAction*>("actionCloseAllProjects"), SIGNAL(triggered(bool)), this, SLOT(slotCloseAllProjects()));
-    connect(CMainWindow::self().findChild<QAction*>("actionSearchGoogle"), SIGNAL(triggered(bool)), this, SLOT(slotSearchGoogle(bool)));
+    connect(CMainWindow::self().findChild<QAction*>("actionAddEmptyProject"),  &QAction::triggered, this, &CGisListWks::slotAddEmptyProject);
+    connect(CMainWindow::self().findChild<QAction*>("actionCloseAllProjects"), &QAction::triggered, this, &CGisListWks::slotCloseAllProjects);
+    connect(CMainWindow::self().findChild<QAction*>("actionSearchGoogle"),     &QAction::triggered, this, &CGisListWks::slotSearchGoogle);
 }
 
 void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )

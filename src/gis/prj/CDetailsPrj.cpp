@@ -38,17 +38,18 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
 {
     setupUi(this);
 
-    connect(labelKeywords, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(textDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(toolPrint, SIGNAL(clicked()), this, SLOT(slotPrint()));
-    connect(toolReload, SIGNAL(clicked()), this, SLOT(slotSetupGui()));
-    connect(comboSort, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSortMode(int)));
-    connect(toolLock, SIGNAL(clicked(bool)), this, SLOT(slotLock(bool)));
+    connect(labelKeywords, &QLabel::linkActivated,          this, static_cast<void (CDetailsPrj::*)(const QString&)>(&CDetailsPrj::slotLinkActivated));
+    connect(textDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsPrj::*)(const QUrl&)   >(&CDetailsPrj::slotLinkActivated));
+    connect(toolPrint,     &QToolButton::clicked,           this, &CDetailsPrj::slotPrint);
+    connect(toolReload,    &QToolButton::clicked,           this, &CDetailsPrj::slotSetupGui);
+    connect(toolLock,      &QToolButton::clicked,           this, &CDetailsPrj::slotLock);
+
+    connect(comboSort,     static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsPrj::slotSortMode);
 
     timerUpdateTime = new QTimer(this);
     timerUpdateTime->setSingleShot(true);
     timerUpdateTime->setInterval(20);
-    connect(timerUpdateTime, SIGNAL(timeout()), this, SLOT(slotSetupGui()));
+    connect(timerUpdateTime, &QTimer::timeout, this, &CDetailsPrj::slotSetupGui);
 
     timerUpdateTime->start();
 }

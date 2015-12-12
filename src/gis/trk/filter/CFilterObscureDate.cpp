@@ -30,7 +30,7 @@ CFilterObscureDate::CFilterObscureDate(CGisItemTrk &trk, QWidget *parent)
     SETTINGS;
     spinBox->setValue(cfg.value("TrackDetails/Filter/ObscureTimestamp/delta",0).toInt());
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterObscureDate::slotApply);
 }
 
 CFilterObscureDate::~CFilterObscureDate()

@@ -62,15 +62,15 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     }
 
 
-    connect(comboColor, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetColor(int)));
-    connect(comboBorderWidth, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetWidth(int)));
-    connect(comboStyle, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetStyle(int)));
-    connect(checkOpacity, SIGNAL(toggled(bool)), this, SLOT(slotOpyacity(bool)));
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
-    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(comboColor,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetColor);
+    connect(comboBorderWidth, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetWidth);
+    connect(comboStyle,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetStyle);
 
-    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+    connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpyacity);
+    connect(toolLock,         &QToolButton::toggled,           this, &CDetailsOvlArea::slotChangeReadOnlyMode);
+    connect(textCmtDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)   >(&CDetailsOvlArea::slotLinkActivated));
+    connect(labelName,        &QLabel::linkActivated,          this, static_cast<void (CDetailsOvlArea::*)(const QString&)>(&CDetailsOvlArea::slotLinkActivated));
+    connect(listHistory,      &CHistoryListWidget::sigChanged, this, &CDetailsOvlArea::setupGui);
 }
 
 CDetailsOvlArea::~CDetailsOvlArea()

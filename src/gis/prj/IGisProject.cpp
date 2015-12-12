@@ -298,7 +298,7 @@ bool IGisProject::saveAs(QString fn, QString filter)
         path += "/" + getName() + "." + ext;
 
 
-        fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
+        fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save \"%1\" to...").arg(getName()), path, filedialogSaveFilters, &filter);
 
         if(fn.isEmpty())
         {

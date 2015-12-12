@@ -31,7 +31,7 @@ IMouse::IMouse(CGisDraw *gis, CCanvas *canvas)
     timer->setSingleShot(true);
     timer->setInterval(50);
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(slotPanCanvas()));
+    connect(timer, &QTimer::timeout, this, &IMouse::slotPanCanvas);
 }
 
 IMouse::~IMouse()

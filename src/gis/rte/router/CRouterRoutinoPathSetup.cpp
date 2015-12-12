@@ -27,9 +27,9 @@ CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList &paths)
 {
     setupUi(this);
 
-    connect(toolAdd, SIGNAL(clicked()), this, SLOT(slotAddPath()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelPath()));
-    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+    connect(toolAdd,    &QToolButton::clicked,              this, &CRouterRoutinoPathSetup::slotAddPath);
+    connect(toolDelete, &QToolButton::clicked,              this, &CRouterRoutinoPathSetup::slotDelPath);
+    connect(listWidget, &QListWidget::itemSelectionChanged, this, &CRouterRoutinoPathSetup::slotItemSelectionChanged);
 
     foreach(const QString &path, paths)
     {

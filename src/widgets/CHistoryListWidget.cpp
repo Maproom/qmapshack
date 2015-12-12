@@ -27,8 +27,8 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
 {
     setIconSize(QSize(32,32));
     setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(this, &CHistoryListWidget::itemSelectionChanged,       this, &CHistoryListWidget::slotSelectionChanged);
+    connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
 
     menu = new QMenu(this);
     actionCutHistory = menu->addAction(QIcon("://icons/32x32/CutHistory.png"),tr("Cut history"), this, SLOT(slotCutHistory()));

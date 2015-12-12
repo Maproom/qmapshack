@@ -42,15 +42,15 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::hide);
+    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptOvlArea::hide);
+    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::hide);
+    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptOvlArea::hide);
 
-    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
+    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::slotEditDetails);
+    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
+    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
+    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
 }
 
 CScrOptOvlArea::~CScrOptOvlArea()

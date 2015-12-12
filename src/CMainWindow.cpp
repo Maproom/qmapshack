@@ -90,39 +90,39 @@ CMainWindow::CMainWindow()
     // end ---- restore window geometry -----
 
 
-    connect(actionAbout,                 SIGNAL(triggered()),            this,      SLOT(slotAbout()));
-    connect(actionHelp,                  SIGNAL(triggered()),            this,      SLOT(slotHelp()));
-    connect(actionAddMapView,            SIGNAL(triggered()),            this,      SLOT(slotAddCanvas()));
-    connect(actionCloneMapView,          SIGNAL(triggered()),            this,      SLOT(slotCloneCanvas()));
-    connect(actionShowScale,             SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionShowGrid,              SIGNAL(changed()),              this,      SLOT(update()));
-    connect(actionPOIText,               SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionMapToolTip,            SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionNightDay,              SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionProfileIsWindow,       SIGNAL(toggled(bool)),          this,      SLOT(slotSetProfileMode(bool)));
-    connect(actionSetupMapFont,          SIGNAL(triggered()),            this,      SLOT(slotSetupMapFont()));
-    connect(actionSetupGrid,             SIGNAL(triggered()),            this,      SLOT(slotSetupGrid()));
-    connect(actionSetupMapPaths,         SIGNAL(triggered()),            this,      SLOT(slotSetupMapPath()));
-    connect(actionSetupDEMPaths,         SIGNAL(triggered()),            this,      SLOT(slotSetupDemPath()));
-    connect(actionSetupMapView,          SIGNAL(triggered()),            this,      SLOT(slotSetupMapView()));
-    connect(actionSetupTimeZone,         SIGNAL(triggered()),            this,      SLOT(slotSetupTimeZone()));
-    connect(actionSetupUnits,            SIGNAL(triggered()),            this,      SLOT(slotSetupUnits()));
-    connect(actionSetupWorkspace,        SIGNAL(triggered()),            this,      SLOT(slotSetupWorkspace()));
-    connect(actionSetupCoordFormat,      SIGNAL(triggered(bool)),        this,      SLOT(slotSetupCoordFormat()));
-    connect(actionImportDatabase,        SIGNAL(triggered()),            this,      SLOT(slotImportDatabase()));
-    connect(actionSaveGISData,           SIGNAL(triggered()),            gisWidget, SLOT(slotSaveAll()));
-    connect(actionLoadGISData,           SIGNAL(triggered()),            this,      SLOT(slotLoadGISData()));
-    connect(actionVrtBuilder,            SIGNAL(triggered()),            this,      SLOT(slotBuildVrt()));
-    connect(actionStoreView,             SIGNAL(triggered()),            this,      SLOT(slotStoreView()));
-    connect(actionLoadView,              SIGNAL(triggered()),            this,      SLOT(slotLoadView()));
-    connect(actionClose,                 SIGNAL(triggered()),            this,      SLOT(close()));
-    connect(actionCreateRoutinoDatabase, SIGNAL(triggered()),            this,      SLOT(slotCreateRoutinoDatabase()));
-    connect(actionPrintMap,              SIGNAL(triggered()),            this,      SLOT(slotPrintMap()));
-    connect(tabWidget,                   SIGNAL(tabCloseRequested(int)), this,      SLOT(slotTabCloseRequest(int)));
+    connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
+    connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
+    connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
+    connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
+    connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowGrid,              &QAction::changed,              this,      static_cast<void (CMainWindow::*)()>(&CMainWindow::update));
+    connect(actionPOIText,               &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
+    connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
+    connect(actionSetupGrid,             &QAction::triggered,            this,      &CMainWindow::slotSetupGrid);
+    connect(actionSetupMapPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupMapPath);
+    connect(actionSetupDEMPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupDemPath);
+    connect(actionSetupMapView,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapView);
+    connect(actionSetupTimeZone,         &QAction::triggered,            this,      &CMainWindow::slotSetupTimeZone);
+    connect(actionSetupUnits,            &QAction::triggered,            this,      &CMainWindow::slotSetupUnits);
+    connect(actionSetupWorkspace,        &QAction::triggered,            this,      &CMainWindow::slotSetupWorkspace);
+    connect(actionSetupCoordFormat,      &QAction::triggered,            this,      &CMainWindow::slotSetupCoordFormat);
+    connect(actionImportDatabase,        &QAction::triggered,            this,      &CMainWindow::slotImportDatabase);
+    connect(actionSaveGISData,           &QAction::triggered,            gisWidget, &CGisWidget::slotSaveAll);
+    connect(actionLoadGISData,           &QAction::triggered,            this,      &CMainWindow::slotLoadGISData);
+    connect(actionVrtBuilder,            &QAction::triggered,            this,      &CMainWindow::slotBuildVrt);
+    connect(actionStoreView,             &QAction::triggered,            this,      &CMainWindow::slotStoreView);
+    connect(actionLoadView,              &QAction::triggered,            this,      &CMainWindow::slotLoadView);
+    connect(actionClose,                 &QAction::triggered,            this,      &CMainWindow::close);
+    connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
+    connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
+    connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
 
-    connect(tabWidget,                   SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabCanvas(int)));
-    connect(tabMaps,                     SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabMaps(int)));
-    connect(tabDem,                      SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabDem(int)));
+    connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
+    connect(tabMaps,                     &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabMaps);
+    connect(tabDem,                      &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabDem);
 
     cfg.beginGroup("Canvas");
     CMapDraw::loadMapPath(cfg);
@@ -135,7 +135,7 @@ CMainWindow::CMainWindow()
     {
         CCanvas * view = new CCanvas(tabWidget, name);
         tabWidget->addTab(view, view->objectName());
-        connect(view, SIGNAL(sigMousePosition(QPointF,qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
 
         cfg.beginGroup(name);
         view->loadConfig(cfg);
@@ -145,7 +145,7 @@ CMainWindow::CMainWindow()
     {
         CCanvas * view = new CCanvas(tabWidget,"");
         tabWidget->addTab(view, view->objectName());
-        connect(view, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     }
     cfg.endGroup(); // Views
 
@@ -446,7 +446,7 @@ void CMainWindow::slotAddCanvas()
 
     CCanvas * canvas = new CCanvas(tabWidget,"");
     tabWidget->addTab(canvas, canvas->objectName());
-    connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+    connect(canvas, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
 
     tabWidget->setCurrentWidget(canvas);
 }

@@ -120,10 +120,10 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
             {
                 QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
                 scrOptRange = new CScrOptRangeTrk(pt, trk, this);
-                connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
-                connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
-                connect(scrOptRange->toolActivity, SIGNAL(clicked()), this, SLOT(slotActivity()));
-                connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
+                connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
+                connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
+                connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &CMouseRangeTrk::slotActivity);
+                connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &CMouseRangeTrk::slotCopy);
 
                 state = eStateRangeSelected;
                 canvas->update();

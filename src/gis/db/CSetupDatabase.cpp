@@ -29,13 +29,13 @@ CSetupDatabase::CSetupDatabase(CGisListDB &parent)
 {
     setupUi(this);
 
-    connect(toolNewDB, SIGNAL(clicked()), this, SLOT(slotNewDB()));
-    connect(toolAddDB, SIGNAL(clicked()), this, SLOT(slotOpenDB()));
-    connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonBox()));
-    connect(lineServer, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonBox()));
-    connect(lineUser, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonBox()));
-    connect(radioSqlite, SIGNAL(clicked(bool)), this, SLOT(slotUpdateButtonBox()));
-    connect(radioMysql, SIGNAL(clicked(bool)), this, SLOT(slotUpdateButtonBox()));
+    connect(toolNewDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotNewDB);
+    connect(toolAddDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotOpenDB);
+    connect(lineName,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(lineServer,  &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(lineUser,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(radioSqlite, &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(radioMysql,  &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
 
     slotUpdateButtonBox();
 }

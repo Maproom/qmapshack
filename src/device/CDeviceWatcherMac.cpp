@@ -31,8 +31,8 @@
 CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks *parent)
     : IDeviceWatcher(parent), worker()
 {
-    connect(&worker, SIGNAL(sigDeviceAdded(const QString &, const QString &)), this, SLOT(slotDeviceAdded(const QString &, const QString &)));
-    connect(&worker, SIGNAL(sigDeviceRemoved(const QString &, const QString &)), this, SLOT(slotDeviceRemoved(const QString &, const QString &)));
+    connect(&worker, &CDeviceWorker::sigDeviceAdded,   this, &CDeviceWatcherMac::slotDeviceAdded);
+    connect(&worker, &CDeviceWorker::sigDeviceRemoved, this, &CDeviceWatcherMac::slotDeviceRemoved);
 }
 
 

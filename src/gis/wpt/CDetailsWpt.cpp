@@ -41,19 +41,19 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
 
     toolLock->setDisabled(wpt.isOnDevice());
 
-    connect(labelName,      SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelPosition,  SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(textCmtDesc,    SIGNAL(anchorClicked(QUrl)),    this, SLOT(slotLinkActivated(QUrl)));
-    connect(toolIcon,       SIGNAL(clicked()),              this, SLOT(slotChangeIcon()));
-    connect(toolLock,       SIGNAL(toggled(bool)),          this, SLOT(slotChangeReadOnlyMode(bool)));
+    connect(labelName,      &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelPosition,  &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelElevation, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelProximity, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(textCmtDesc,    &QTextBrowser::anchorClicked,    this,       static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
+    connect(toolIcon,       &QToolButton::clicked,           this,       &CDetailsWpt::slotChangeIcon);
+    connect(toolLock,       &QToolButton::toggled,           this,       &CDetailsWpt::slotChangeReadOnlyMode);
 
-    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+    connect(listHistory,    &CHistoryListWidget::sigChanged, this,       &CDetailsWpt::setupGui);
 
-    connect(toolAddImage, SIGNAL(clicked()), photoAlbum, SLOT(slotAddImage()));
-    connect(toolDelImage, SIGNAL(clicked()), photoAlbum, SLOT(slotDelImage()));
-    connect(photoAlbum, SIGNAL(sigChanged(QList<CGisItemWpt::image_t>)), this, SLOT(slotChangedImages(QList<CGisItemWpt::image_t>)));
+    connect(toolAddImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotAddImage);
+    connect(toolDelImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotDelImage);
+    connect(photoAlbum,     &CPhotoAlbum::sigChanged,        this,       &CDetailsWpt::slotChangedImages);
 }
 
 CDetailsWpt::~CDetailsWpt()

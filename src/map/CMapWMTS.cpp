@@ -247,8 +247,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.baseName()));
 
     accessManager   = new QNetworkAccessManager(parent->thread());
-    connect(this, SIGNAL(sigQueueChanged()), this, SLOT(slotQueueChanged()));
-    connect(accessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+    connect(this,          &CMapWMTS::sigQueueChanged,       this, &CMapWMTS::slotQueueChanged);
+    connect(accessManager, &QNetworkAccessManager::finished, this, &CMapWMTS::slotRequestFinished);
 
     name = fi.baseName().replace("_", " ");
 
@@ -278,7 +278,7 @@ void CMapWMTS::getLayers(QListWidget& list)
         item->setData(Qt::UserRole, i++);
     }
 
-    connect(&list, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotLayersChanged(QListWidgetItem*)));
+    connect(&list, &QListWidget::itemChanged, this, &CMapWMTS::slotLayersChanged);
 }
 
 void CMapWMTS::saveConfig(QSettings& cfg)

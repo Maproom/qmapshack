@@ -67,12 +67,12 @@ CRouterMapQuest::CRouterMapQuest(QWidget *parent)
     cfg.endGroup();
 
     networkAccessManager = new QNetworkAccessManager(this);
-    connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotRequestFinished(QNetworkReply*)));
+    connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterMapQuest::slotRequestFinished);
 
     timerCloseStatusMsg = new QTimer(this);
     timerCloseStatusMsg->setSingleShot(true);
     timerCloseStatusMsg->setInterval(5000);
-    connect(timerCloseStatusMsg, SIGNAL(timeout()), this, SLOT(slotCloseStatusMsg()));
+    connect(timerCloseStatusMsg, &QTimer::timeout, this, &CRouterMapQuest::slotCloseStatusMsg);
 }
 
 CRouterMapQuest::~CRouterMapQuest()

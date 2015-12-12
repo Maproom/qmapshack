@@ -49,9 +49,9 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
         item->setData(Qt::UserRole + 0, QPointF(wpt->getPosition()*DEG_TO_RAD));
     }
 
-    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(toolUp, SIGNAL(clicked()), this, SLOT(slotUp()));
-    connect(toolDown, SIGNAL(clicked()), this, SLOT(slotDown()));
+    connect(listWidget, &QListWidget::itemSelectionChanged, this, &CCreateRouteFromWpt::slotSelectionChanged);
+    connect(toolUp,     &QToolButton::clicked,              this, &CCreateRouteFromWpt::slotUp);
+    connect(toolDown,   &QToolButton::clicked,              this, &CCreateRouteFromWpt::slotDown);
 }
 
 CCreateRouteFromWpt::~CCreateRouteFromWpt()

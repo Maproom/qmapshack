@@ -170,13 +170,14 @@ void CDBProject::updateItem(IGisItem * item, quint64 idItem)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
+    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":comment", item->getInfo());
     query.bindValue(":data", data);
+    query.bindValue(":hash", item->getHash());
     query.bindValue(":id", idItem);
     QUERY_EXEC(throw -1);
 }
@@ -199,13 +200,14 @@ quint64 CDBProject::insertItem(IGisItem * item)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("INSERT INTO items (type, keyqms, icon, name, comment, data) VALUES (:type, :keyqms, :icon, :name, :comment, :data)");
+    query.prepare("INSERT INTO items (type, keyqms, icon, name, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :comment, :data, :hash)");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":comment", item->getInfo());
     query.bindValue(":data", data);
+    query.bindValue(":hash", item->getHash());
     QUERY_EXEC(throw -1);
 
     quint64 idItem = IDB::getLastInsertID(db, "items");

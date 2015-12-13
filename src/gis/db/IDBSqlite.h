@@ -32,6 +32,7 @@ protected:
     bool initDB();
     bool migrateDB(int version);
     bool migrateDB1to2();
+    bool migrateDB2to3();
 };
 
 #endif //IDBSQLITE_H

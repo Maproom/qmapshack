@@ -19,6 +19,11 @@
 #include "CMainWindow.h"
 #include "gis/db/IDBSqlite.h"
 #include "gis/db/macros.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "helpers/CProgressDialog.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -135,13 +140,27 @@ bool IDBSqlite::initDB()
                     "icon           BLOB NOT NULL,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
-                    "data           BLOB NOT NULL"
+                    "data           BLOB NOT NULL,"
+                    "hash           TEXT NOT NULL,"
+                    "last_user      TEXT DEFAULT 'n/a',"
+                    "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP"
                     ")"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();
         return false;
     }
+
+    if(!query.exec("CREATE TRIGGER items_update_last_change "
+                   "AFTER UPDATE ON items BEGIN "
+                   "UPDATE items SET last_change=CURRENT_TIMESTAMP WHERE id=NEW.id; "
+                   "END;"))
+    {
+        qDebug() << query.lastQuery();
+        qDebug() << query.lastError();
+        return false;
+    }
+
 
     query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
     query.bindValue(":name", db.connectionName());
@@ -177,11 +196,31 @@ bool IDBSqlite::initDB()
 
 bool IDBSqlite::migrateDB(int version)
 {
+    QString msg = QObject::tr("The internal database format has changed. QMapShack will migrate your database, now. "
+                              "After the migration the database won't be usable with older versions of QMapShack. "
+                              "It is recommended to backup the database first.");
+    int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
+                                   QObject::tr("Migrate database..."),
+                                   msg,
+                                   QMessageBox::Ok|QMessageBox::Abort);
+    if(res != QMessageBox::Ok)
+    {
+        exit(0);
+    }
+
     QSqlQuery query(db);
 
     if(version < 2)
     {
         if(!migrateDB1to2())
+        {
+            return false;
+        }
+    }
+
+    if(version < 3)
+    {
+        if(!migrateDB2to3())
         {
             return false;
         }
@@ -195,18 +234,6 @@ bool IDBSqlite::migrateDB(int version)
 
 bool IDBSqlite::migrateDB1to2()
 {
-    QString msg = QObject::tr("The internal database format has changed. QMapShack will migrate your database, now. "
-                              "After the migration the database won't be usable with older versions of QMapShack. "
-                              "It is recommended to backup the database first.");
-    int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
-                                   QObject::tr("Migrate database..."),
-                                   msg,
-                                   QMessageBox::Ok|QMessageBox::Abort);
-    if(res != QMessageBox::Ok)
-    {
-        exit(0);
-    }
-
     QSqlQuery query(db);
 
     query.prepare("BEGIN TRANSACTION;");
@@ -249,6 +276,89 @@ bool IDBSqlite::migrateDB1to2()
     query.prepare("COMMIT;");
     QUERY_EXEC(return false);
 
+
+    return true;
+}
+
+bool IDBSqlite::migrateDB2to3()
+{
+    QSqlQuery query(db);
+
+    query.prepare("ALTER TABLE items ADD COLUMN hash TEXT NOT NULL DEFAULT '-'");
+    QUERY_EXEC(return false);
+
+    query.prepare("ALTER TABLE items ADD COLUMN last_user TEXT NOT NULL DEFAULT 'n/a'");
+    QUERY_EXEC(return false);
+
+    query.prepare("ALTER TABLE items ADD COLUMN last_change DATETIME NOT NULL DEFAULT '-'");
+    QUERY_EXEC(return false);
+
+    query.prepare("CREATE TRIGGER items_update_last_change "
+                   "AFTER UPDATE ON items BEGIN "
+                   "UPDATE items SET last_change=datetime(CURRENT_TIMESTAMP, 'localtime') WHERE id=NEW.id; "
+                   "END;");
+    QUERY_EXEC(return false);
+
+    query.prepare("SELECT Count(*) FROM items");
+    QUERY_EXEC(return false);
+    query.next();
+    quint32 N = query.value(0).toUInt();
+
+    query.prepare("SELECT id, type FROM items WHERE hash='-'");
+    QUERY_EXEC(return false);
+
+    PROGRESS_SETUP("Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
+    progress.enableCancel(false);
+    quint32 cnt = 0;
+    while(query.next())
+    {
+        PROGRESS(cnt++, ;);
+
+        quint64 idItem      = query.value(0).toULongLong();
+        quint32 typeItem    = query.value(1).toUInt();
+
+        IGisItem * item = 0;
+
+        // load item from database for a compare
+        switch(typeItem)
+        {
+        case IGisItem::eTypeWpt:
+            item = new CGisItemWpt(idItem, db, 0);
+            break;
+
+        case IGisItem::eTypeTrk:
+            item = new CGisItemTrk(idItem, db, 0);
+            break;
+
+        case IGisItem::eTypeRte:
+            item = new CGisItemRte(idItem, db, 0);
+            break;
+
+        case IGisItem::eTypeOvl:
+            item = new CGisItemOvlArea(idItem, db, 0);
+            break;
+
+        default:
+            ;
+        }
+
+        if(item == 0)
+        {
+            continue;
+        }
+
+        QSqlQuery query2(db);
+        query2.prepare("UPDATE items SET hash=:hash, last_user='QMapShack' WHERE id=:id");
+        query2.bindValue(":hash", item->getHash());
+        query2.bindValue(":id", idItem);
+         if(!query2.exec())
+         {
+            qDebug() << query2.lastQuery();
+            qDebug() << query2.lastError();
+        }
+
+        delete item;
+    }
 
     return true;
 }

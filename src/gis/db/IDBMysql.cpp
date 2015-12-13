@@ -125,8 +125,25 @@ bool IDBMysql::initDB()
                     "icon           BLOB NOT NULL,"
                     "name           TEXT NOT NULL,"
                     "comment        TEXT,"
-                    "data           LONGBLOB NOT NULL"
+                    "data           LONGBLOB NOT NULL,"
+                    "hash           TEXT NOT NULL,"
+                    "last_user      TEXT DEFAULT NULL,"
+                    "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW()"
                     ")"))
+    {
+        qDebug() << query.lastQuery();
+        qDebug() << query.lastError();
+        return false;
+    }
+
+    if(!query.exec("CREATE TRIGGER items_insert_last_user BEFORE INSERT ON items FOR EACH ROW SET NEW.last_user = USER();"))
+    {
+        qDebug() << query.lastQuery();
+        qDebug() << query.lastError();
+        return false;
+    }
+
+    if(!query.exec("CREATE TRIGGER items_update_last_user BEFORE UPDATE ON items FOR EACH ROW SET NEW.last_user = USER();"))
     {
         qDebug() << query.lastQuery();
         qDebug() << query.lastError();

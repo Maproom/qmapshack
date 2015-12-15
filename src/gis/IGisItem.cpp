@@ -188,7 +188,7 @@ void IGisItem::genKey()
 void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT data, keyqms FROM items WHERE id=:id");
+    query.prepare("SELECT data, keyqms, hash FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     if(query.next())
@@ -208,7 +208,7 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
                The root cause is a missing key in the serialized data. This is fixed by calling getKey() in setupHistory().
 
                As the database has a valid key the complete history data has to be fixed with that key.
-             */
+            */
             const int N = history.events.size();
             for(int i = 0; i < N; i++)
             {
@@ -217,6 +217,8 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
                 updateHistory();
             }
         }
+
+        lastDatabaseHash = query.value(2).toString();
     }
 }
 

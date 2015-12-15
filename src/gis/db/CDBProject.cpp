@@ -170,7 +170,7 @@ void CDBProject::updateItem(IGisItem * item, quint64 idItem)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id");
+    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
@@ -179,7 +179,37 @@ void CDBProject::updateItem(IGisItem * item, quint64 idItem)
     query.bindValue(":data", data);
     query.bindValue(":hash", item->getHash());
     query.bindValue(":id", idItem);
+    query.bindValue(":oldhash", item->getLastDatabaseHash());
     QUERY_EXEC(throw -1);
+
+    if(query.numRowsAffected())
+    {
+        item->setLastDatabaseHash();
+    }
+    else
+    {
+        query.prepare("SELECT last_user, last_change FROM items WHERE id=:id");
+        query.bindValue(":id", id);
+        QUERY_EXEC();
+        if(query.next())
+        {
+            QString user = query.value(0).toString();
+            QString date = query.value(1).toString();
+
+            int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), QObject::tr("Item has been changed...")
+                                  ,QObject::tr("The item %1 has been changed by %2 (%3).").arg(item->getNameEx()).arg(user).arg(date)
+                                  ,QMessageBox::Abort);
+
+            throw -1;
+
+        }
+        else
+        {
+            //gee it's gone!
+        }
+
+    }
+
 }
 
 quint64 CDBProject::insertItem(IGisItem * item)
@@ -435,8 +465,21 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
          */
         if(gisItem && gisItem->isChanged())
         {
-            updateItem(gisItem, item.id);
-            gisItem->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+            bool success = true;
+            try
+            {
+                updateItem(gisItem, item.id);
+            }
+            catch(int)
+            {
+                success = false;
+            }
+
+            if(success)
+            {
+                gisItem->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+            }
+
         }
     }
 

@@ -120,7 +120,7 @@ void CProjWizard::findDatum(const QString& str)
     while(di->nMapInfoDatumID != -1)
     {
         cmp.clear();
-        if(di->pszOGCDatumName != QString(""))
+        if(di->pszOGCDatumName != QString())
         {
             const MapInfoSpheroidInfo * si = asSpheroidInfoList;
             while(si->nMapInfoId != -1)
@@ -181,7 +181,7 @@ void CProjWizard::slotChange()
 
     int idx = comboDatum->itemData(comboDatum->currentIndex()).toInt();
     const MapInfoDatumInfo di = asDatumInfoListQL[idx];
-    if(di.pszOGCDatumName != QString(""))
+    if(di.pszOGCDatumName != QString())
     {
         const MapInfoSpheroidInfo * si = asSpheroidInfoList;
         while(si->nMapInfoId != -1)

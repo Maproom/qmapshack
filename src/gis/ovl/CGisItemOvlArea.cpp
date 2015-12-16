@@ -87,7 +87,7 @@ const QString CGisItemOvlArea::bulletColors[OVL_N_COLORS] =
     ,QString("://icons/8x8/bullet_cyan.png")
     // 15
     ,QString("://icons/8x8/bullet_white.png")
-    ,QString("")                 // 16
+    ,QString()                 // 16
 };
 
 

@@ -156,6 +156,13 @@ CGisItemWpt::~CGisItemWpt()
 {
 }
 
+IGisItem * CGisItemWpt::createClone()
+{
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    return new CGisItemWpt(*this, project, -1, true);
+}
+
+
 void CGisItemWpt::setSymbol()
 {
     setIcon();

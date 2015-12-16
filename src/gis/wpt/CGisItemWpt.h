@@ -140,6 +140,8 @@ public:
 
     virtual ~CGisItemWpt();
 
+    IGisItem * createClone() override;
+
     /**
        @brief Save waypoint to GPX tree
        @param gpx   The <gpx> node to append by the waypoint

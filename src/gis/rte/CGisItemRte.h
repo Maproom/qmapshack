@@ -101,6 +101,8 @@ public:
     CGisItemRte(const SGisLine& l, const QString &name, IGisProject *project, int idx);
     virtual ~CGisItemRte();
 
+    IGisItem * createClone() override;
+
     QDataStream& operator<<(QDataStream& stream);
     QDataStream& operator>>(QDataStream& stream) const;
 

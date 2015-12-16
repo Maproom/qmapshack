@@ -170,15 +170,87 @@ void CDBProject::updateItem(IGisItem * item, quint64 idItem)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data WHERE id=:id");
+    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":comment", item->getInfo());
-    query.bindValue(":data", data);
-    query.bindValue(":id", idItem);
+    query.bindValue(":data",    data);
+    query.bindValue(":hash",    item->getHash());
+    query.bindValue(":id",      idItem);
+    query.bindValue(":oldhash", item->getLastDatabaseHash());
     QUERY_EXEC(throw -1);
+
+    if(query.numRowsAffected())
+    {
+        // the update has been successful.
+        // set current hash as database hash.
+        item->setLastDatabaseHash();
+    }
+    else
+    {
+        // there are two reasons why an update does not affect a row
+        // 1) the hash is different because another user changed the item
+        // 2) the id was not fond because another user removed the item
+        //
+        // Let's test for 1) and get the last user and timestamp of the change
+        query.prepare("SELECT last_user, last_change FROM items WHERE id=:id");
+        query.bindValue(":id", id);
+        QUERY_EXEC();
+        if(query.next())
+        {
+            QString user = query.value(0).toString();
+            QString date = query.value(1).toString();
+
+            QString msg = QObject::tr(
+                "The item %1 has been changed by %2 (%3). \n\n"
+                "To solve this conflict you can create and save a clone, force your version or drop "
+                "your version and take the one from the database"
+                ).arg(item->getNameEx()).arg(user).arg(date);
+
+            QMessageBox msgBox(QMessageBox::Question, QObject::tr("Conflict with database..."), msg, QMessageBox::NoButton, CMainWindow::self().getBestWidgetForParent());
+            QAbstractButton* pButClone  = msgBox.addButton(QObject::tr("Clone && Save"), QMessageBox::YesRole);
+            QAbstractButton* pButForce  = msgBox.addButton(QObject::tr("Force Save"), QMessageBox::ApplyRole);
+            QAbstractButton* pButUpdate = msgBox.addButton(QObject::tr("Take remote"), QMessageBox::DestructiveRole);
+            msgBox.addButton(QMessageBox::Abort);
+
+            msgBox.exec();
+
+            if(msgBox.clickedButton() == pButClone)
+            {
+                IGisItem * item2 = item->createClone();
+                insertItem(item2);
+            }
+            else if(msgBox.clickedButton() == pButForce)
+            {
+                query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id");
+                query.bindValue(":type",    item->type());
+                query.bindValue(":keyqms",  item->getKey().item);
+                query.bindValue(":icon",    buffer.data());
+                query.bindValue(":name",    item->getName());
+                query.bindValue(":comment", item->getInfo());
+                query.bindValue(":data",    data);
+                query.bindValue(":hash",    item->getHash());
+                query.bindValue(":id",      idItem);
+                QUERY_EXEC(throw -1);
+
+                item->setLastDatabaseHash();
+            }
+            else if(msgBox.clickedButton() == pButUpdate)
+            {
+            }
+            else // abort
+            {
+                throw -1;
+            }
+        }
+        else
+        {
+            // seems to be case 2)
+            //gee it's gone!
+        }
+    }
 }
 
 quint64 CDBProject::insertItem(IGisItem * item)
@@ -199,13 +271,14 @@ quint64 CDBProject::insertItem(IGisItem * item)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("INSERT INTO items (type, keyqms, icon, name, comment, data) VALUES (:type, :keyqms, :icon, :name, :comment, :data)");
+    query.prepare("INSERT INTO items (type, keyqms, icon, name, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :comment, :data, :hash)");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":comment", item->getInfo());
-    query.bindValue(":data", data);
+    query.bindValue(":data",    data);
+    query.bindValue(":hash",    item->getHash());
     QUERY_EXEC(throw -1);
 
     quint64 idItem = IDB::getLastInsertID(db, "items");
@@ -214,6 +287,8 @@ quint64 CDBProject::insertItem(IGisItem * item)
         qDebug() << "childId equals 0. bad.";
         throw -1;
     }
+
+    item->setLastDatabaseHash();
 
     return idItem;
 }
@@ -433,8 +508,20 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
          */
         if(gisItem && gisItem->isChanged())
         {
-            updateItem(gisItem, item.id);
-            gisItem->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+            bool success = true;
+            try
+            {
+                updateItem(gisItem, item.id);
+            }
+            catch(int)
+            {
+                success = false;
+            }
+
+            if(success)
+            {
+                gisItem->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+            }
         }
     }
 

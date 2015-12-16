@@ -186,6 +186,15 @@ public:
      */
     const QString& getHash();
 
+    const QString& getLastDatabaseHash()
+    {
+        return lastDatabaseHash;
+    }
+    void setLastDatabaseHash()
+    {
+        lastDatabaseHash = getHash();
+    }
+
     /**
        @brief Get the icon attached to object
        @return
@@ -390,6 +399,12 @@ public:
     void cutHistory();
 
     /**
+     * @brief Create a clone of itself and pass back the pointer
+     * @return The pointer of the cloned item
+     */
+    virtual IGisItem * createClone() = 0;
+
+    /**
        @brief Remove all HTML tags from a string
        @param str the string
        @return A string without HTML tags
@@ -474,12 +489,18 @@ protected:
     bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
 
+    /// see flags_e for possible flags
     quint32 flags = 0;
+    /// the item's unique key
     key_t key;
+    /// each item has an icon for the tree widget
     QPixmap icon;
+    /// the dimensions of the item
     QRectF boundingRect;
-
+    /// that's where the real data is. An item is completely defined by it's history
     history_t history;
+    /// the hash in the database when the item was loaded/saved
+    QString lastDatabaseHash;
 
     enum flags_e
     {

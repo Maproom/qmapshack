@@ -44,6 +44,8 @@ public:
     CGisItemOvlArea(const IQlgtOverlay& ovl);
     virtual ~CGisItemOvlArea();
 
+    IGisItem * createClone() override;
+
     QDataStream& operator<<(QDataStream& stream);
     QDataStream& operator>>(QDataStream& stream) const;
 

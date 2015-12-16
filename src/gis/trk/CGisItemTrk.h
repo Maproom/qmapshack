@@ -141,6 +141,8 @@ public:
 
     virtual ~CGisItemTrk();
 
+    IGisItem * createClone() override;
+
     /**
        @brief Save track to GPX tree
        @param gpx   The <gpx> node to append by the track

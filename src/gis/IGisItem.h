@@ -399,6 +399,12 @@ public:
     void cutHistory();
 
     /**
+     * @brief Create a clone of itself and pass back the pointer
+     * @return The pointer of the cloned item
+     */
+    virtual IGisItem * createClone() = 0;
+
+    /**
        @brief Remove all HTML tags from a string
        @param str the string
        @return A string without HTML tags

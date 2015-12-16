@@ -229,6 +229,13 @@ CGisItemTrk::~CGisItemTrk()
     delete propHandler;
 }
 
+IGisItem * CGisItemTrk::createClone()
+{
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    return new CGisItemTrk(*this, project, -1, true);
+}
+
+
 void CGisItemTrk::setSymbol()
 {
     setColor(str2color(trk.color));

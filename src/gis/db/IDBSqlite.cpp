@@ -19,10 +19,10 @@
 #include "CMainWindow.h"
 #include "gis/db/IDBSqlite.h"
 #include "gis/db/macros.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CProgressDialog.h"
 
 #include <QtSql>
@@ -294,9 +294,9 @@ bool IDBSqlite::migrateDB2to3()
     QUERY_EXEC(return false);
 
     query.prepare("CREATE TRIGGER items_update_last_change "
-                   "AFTER UPDATE ON items BEGIN "
-                   "UPDATE items SET last_change=datetime(CURRENT_TIMESTAMP, 'localtime') WHERE id=NEW.id; "
-                   "END;");
+                  "AFTER UPDATE ON items BEGIN "
+                  "UPDATE items SET last_change=datetime(CURRENT_TIMESTAMP, 'localtime') WHERE id=NEW.id; "
+                  "END;");
     QUERY_EXEC(return false);
 
     query.prepare("SELECT Count(*) FROM items");
@@ -312,7 +312,8 @@ bool IDBSqlite::migrateDB2to3()
     quint32 cnt = 0;
     while(query.next())
     {
-        PROGRESS(cnt++, ;);
+        PROGRESS(cnt++,;
+                 );
 
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();
@@ -351,8 +352,8 @@ bool IDBSqlite::migrateDB2to3()
         query2.prepare("UPDATE items SET hash=:hash, last_user='QMapShack' WHERE id=:id");
         query2.bindValue(":hash", item->getHash());
         query2.bindValue(":id", idItem);
-         if(!query2.exec())
-         {
+        if(!query2.exec())
+        {
             qDebug() << query2.lastQuery();
             qDebug() << query2.lastError();
         }

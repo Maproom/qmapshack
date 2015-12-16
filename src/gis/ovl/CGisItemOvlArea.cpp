@@ -188,6 +188,12 @@ CGisItemOvlArea::~CGisItemOvlArea()
     }
 }
 
+IGisItem * CGisItemOvlArea::createClone()
+{
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    return new CGisItemOvlArea(*this, project, -1, true);
+}
+
 void CGisItemOvlArea::setSymbol()
 {
     setColor(str2color(area.color));

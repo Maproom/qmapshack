@@ -1,0 +1,229 @@
+/**********************************************************************************************
+    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
+#ifndef CGISITEMRTE_H
+#define CGISITEMRTE_H
+
+#include "gis/IGisItem.h"
+#include "gis/IGisLine.h"
+#include <routino.h>
+
+#include "gis/fit/CFitStream.h"
+#include <QPen>
+#include <QPointer>
+
+class QDomNode;
+class IGisProject;
+class CQlgtRoute;
+class CScrOptRte;
+
+class CGisItemRte : public IGisItem, public IGisLine
+{
+public:
+
+    enum focusmode_e
+    {
+        eFocusMouseMove
+        ,eFocusMouseClick
+    };
+
+    struct subpt_t
+    {
+        enum type_e
+        {
+            eTypeNone
+            , eTypeWpt
+            , eTypeJunct
+        };
+
+        qreal lon = NOFLOAT;
+        qreal lat = NOFLOAT;
+        quint8 type = eTypeNone;
+
+        qreal turn = NOFLOAT;
+        qreal bearing = NOFLOAT;
+        QStringList streets;
+
+        QString instruction;
+        qreal distance = 0;
+        quint32 time = 0;
+    };
+
+    struct rtept_t : public wpt_t
+    {
+        rtept_t()
+        {
+            fakeSubpt.type = subpt_t::eTypeWpt;
+        }
+
+        void updateIcon();
+
+        QPixmap icon;
+        QPointF focus;
+
+        subpt_t fakeSubpt;
+        QVector<subpt_t> subpts;
+    };
+
+    struct rte_t
+    {
+        // -- all gpx tags - start
+        QString name;
+        QString cmt;
+        QString desc;
+        QString src;
+        QList<link_t> links;
+        quint64 number = 0;
+        QString type;
+        QVector<rtept_t> pts;
+        // -- all gpx tags - stop
+    };
+
+    CGisItemRte(const QDomNode &xml, IGisProject *parent);
+    CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
+    CGisItemRte(const history_t& hist, const QString& dbHash, IGisProject * project);
+    CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
+    CGisItemRte(const CQlgtRoute& rte1);
+    CGisItemRte(const SGisLine& l, const QString &name, IGisProject *project, int idx);
+    CGisItemRte(CFitStream& stream, IGisProject * project);
+    virtual ~CGisItemRte();
+
+    IGisItem * createClone() override;
+
+    virtual QDataStream& operator<<(QDataStream& stream) override;
+    virtual QDataStream& operator>>(QDataStream& stream) const override;
+
+    virtual const QString& getName() const override
+    {
+        return rte.name.isEmpty() ? noName : rte.name;
+    }
+
+    virtual QString getInfo(bool showName = true) const override;
+    virtual IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    virtual QPointF getPointCloseBy(const QPoint& screenPos) override;
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    virtual void drawHighlight(QPainter& p) override;
+    virtual void save(QDomNode& gpx) override;
+    virtual bool isCloseTo(const QPointF& pos) override;
+    /**
+       @brief Switch user focus on and off.
+
+       If the focus is switched on any other route having the focus will loose it.
+
+       @param yes   set true to gain focus.
+     */
+    virtual void gainUserFocus(bool yes) override;
+    /**
+       @brief Make sure the route has lost focus.
+
+       If the route has the focus, keyUserFocus will be reset. In all other cases nothing will be done.
+
+     */
+    void looseUserFocus();
+    /**
+       @brief Check for user focus
+
+       @return True if the route has user focus
+     */
+    virtual bool hasUserFocus() const override
+    {
+        return key == keyUserFocus;
+    }
+
+    /**
+       @brief Get the key of the current track with user focus
+
+       @return If no route has the focus an empty string is returned
+     */
+    static const key_t& getKeyUserFocus()
+    {
+        return keyUserFocus;
+    }
+
+    virtual void setDataFromPolyline(const SGisLine& l) override;
+
+    virtual void getPolylineFromData(SGisLine &l) override;
+
+    virtual const QString& getComment() const override
+    {
+        return rte.cmt;
+    }
+    virtual const QString& getDescription() const override
+    {
+        return rte.desc;
+    }
+    virtual const QList<link_t>& getLinks() const override
+    {
+        return rte.links;
+    }
+
+    const rte_t& getRoute() const
+    {
+        return rte;
+    }
+
+    void setName(const QString& str);
+    virtual void setComment(const QString& str)       override;
+    virtual void setDescription(const QString& str)   override;
+    virtual void setLinks(const QList<link_t>& links) override;
+
+    void calc();
+
+    void reset();
+
+    virtual void edit() override;
+
+    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner);
+
+    void setResult(Routino_Output * route, const QString &options);
+    void setResult(const QDomDocument& xml, const QString &options);
+
+    bool isCalculated();
+
+private:
+    void deriveSecondaryData();
+    virtual void setSymbol() override;
+    void readRte(const QDomNode& xml, rte_t& rte);
+    void readRteFromFit(CFitStream &stream);
+    void readRouteDataFromGisLine(const SGisLine &l);
+    const subpt_t * getSubPtByIndex(quint32 idx);
+
+    static key_t keyUserFocus;
+
+    static const QPen penBackground;
+    QPen penForeground {Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penForegroundFocus {Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
+    rte_t rte;
+    QPolygonF line;
+
+    QString lastRoutedWith;
+    QDateTime lastRoutedTime;
+
+    qreal totalDistance = NOFLOAT;
+    quint32 totalTime = 0;
+
+    const subpt_t * mouseMoveFocus = 0;
+
+    QPointer<CScrOptRte>  scrOpt;
+};
+
+#endif //CGISITEMRTE_H
+

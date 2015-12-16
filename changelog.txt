@@ -1,0 +1,254 @@
+V 1.5.1
+Line edit: Fix broken abort button
+
+V 1.5.0
+* Add track filter to remove track points with invalid position
+* Add options to "cut track" function (keep only first or second, keep both)
+* Add Dutch translation (not finished yet)
+* Add selection of track properties as source for graphs
+* Add colorize track by track point properties
+* [Issue #68] Bubbles not moving when moving the map
+* [Issue #67] "Save Map Screenshot" does not save grid correctly
+* [Issue #69] "light gray" colored tracks are displayed in "dark blue" when imported from GPX file
+* [Issue #72] Database/Workspace inconsisteny in QMS 1.4.0
+* [Issue #70] Removed maximumSize for comboGrades
+* [Issue #19] Map-drag resizes or moves window with KDE 5
+* Many little bugfixes, some of them causing random crashes
+
+V 1.4.0
+* Export selected map area to image or printer
+* Add activity to trackpoints to differentiate track statistic
+* Add dialog to setup coord. format
+* Add option to send console debug output to a logfile
+* Add `Show on/Hide from Map` in context menu of one or more projects
+* Add closing the `Track Profile` view via keypress ESC
+* Add stepwise aborting of current operation in `Add Track/Route/Area` (similar to using right mouse / button `Abort`)
+* Fix: Qt5 internal translations for Linux
+* Fix: Line Edit usage hint is not removed on abort
+* Fix: OS X, various path issues. (icon path, workspace not saved)
+* Map: Fix race conditions in WMTS/TMS map handler
+* Map: Add hint for missing SSL library when using WMTS/TMS maps
+* Map: Slowdown automatic map panning
+* Trk: Fix Douglas-Peuker filter
+* Trk: Read & write 3rd party track point extensions
+* Trk: extend track point info by extension values
+* [Issue #57] Trk: Fix color table for green and gray
+* [Issue #59] Not possible to change names of empty projects
+* [Issue #60] Tab label is not updated when track name is changed
+* [Issue #54] In tracks editor, mouse cursor does not change according to selected tool with keyboard shortcut
+* [Issue #64] Install QMapShack icon in hicolor theme too.
+* [Issue #65] loading routino XML files fixed (added to bundle and support for OS-X specific directory structure).
+* [Issue #61] Add average speed to selected area statistics popup
+* [Issue #32] Add arrows to indicate edited track direction
+
+V 1.3.1
+* Add OS X support.
+* Moved to libRoutiono provided by the offcial Routino release
+* Add MapQuest as online routing service
+* Add edit details dialog for routes
+* Display instructions on highlighted routes.
+* Speed up projects with many tracks and waypoints
+* Add all tracks summary to project details
+* Insert new projects on top of device entries in the workspace
+* Fix random crashes due to multi threaded data access
+* Add device name to extended item name.
+* Add "City" waypoint icons
+* Fix race condition when creating new items
+* Optimize creating new waypoints in a row
+* Add a new progress dialog and fix many problems with displaying progress
+* Add routes to project details (diary)
+* Avoid crash in project details page when switching the sort mode to fast
+* Fix random crash when restoring the workspace
+* Fix some crashes due to lack of thread serialization
+* Project details: Fix crash on resize and other reentrant problems.
+* Fix crash when route on-the-fly
+* Waypoint details: Move history to tab
+* Track profile: Fix DEM line for units other than metric
+* History: Add sanity checks when restored from database.
+* Plot: Add zoom for x axis
+* Replaced CGetOpts with Qt QCommandLineParser
+* [Issue #33] Add a summary table (distance, ascent, descent) when editing tracks
+* [Issue #34] First point of edited track does not behave as next ones
+* [Issue #35] Routing using Routino : crash when route is too long
+* [Issue #37] "Select" tool issue when editing tracks
+* [Issue #39] Not possible to change names of objects with no name
+* [Issue #31] Add hotkeys for track editor buttons
+* [Issue #49] Hide screen option when buttons are pressed.
+* And many other small fixes...
+
+V 1.3.0
+* Cluttered items select: make text sensitive, too
+* TwoNav: Fix problems with decoding records created with old firmware.
+* [Issue #20] Add command "Duplicate View"
+* Ask for saving chnages when closing db project via db folder check box
+* Rework user interface to edit line items (tracks, routes, areas)
+* Add Routino as offline auto-router
+* Add GUI tool to create Routino database files
+* Rte: Create route from selected waypoints
+* Complete lines via router in line edit mode
+* View: Fix bad scaling on startup when using square scale
+* [Issue #25] Saved tracks get wrong timestamps
+* [Issue #23] Update French translation and fix missleading translation
+* Trk/Wpt: Make track/waypoint correlation an option if it takes too long.
+* Workspace: Add warning when loading a project twice
+* Speed up project file loading
+* Trk: Allow combining tracks for tracks on devices. 
+* Trk: Allow pre-selection of several tracks for combining tracks
+* Many GUI fixes and code cleanup.
+
+V 1.2.2
+* TwoNav: Find wpt files created from device in the TwoNavData folder
+* Wpt: Display waypoint description/comment as bubble
+* Add option to choose between long and short date/time format
+* Proj/Trk: Add new sort mode to attach waypoints only once to a track
+
+V 1.2.1
+* Add drag-n-drop of gpx and qms files to QMapShack
+* Fix wait cursor when asking to save project
+* [Issue #15] Using Garmin IMG files crashes on machines with small memory
+* [Issue #16] In Title-bar no Shutdown (Close QMapShack) entry
+* QlgtDB: Convert distance overlays to tracks
+* Fix several issues with range selection
+* Unlock items automatically on edit functions
+* Database projects: Append name with name of parent database folder or device name
+* Set write flag for items copied from devices.
+* Database: Ask before updating items in database
+* Add project  to database directly from workspace
+* Wpt: Simplyfy adding new waypoints
+
+V 1.2.0
+* TwoNav: prepend HTML file for waypoint comment with QMS_CMT
+* Devices: Warn if there is a file/path with the same name, but different key
+* TwoNav: Link comment file to roadbook waypoints.
+* Track: Enhance range selection
+* Track: Add range selection to plots
+* Canvas: Add option to choose between logarithmic and square scale.
+* Add button to add a selection online maps
+* Fix: Some waypoints do not snap on track
+* [Issue #14] Issue a warning when closing an unsaved project
+
+V 1.1.0
+* Garmin Mpas: fix line breaks of tooltips
+* Project summary: Add roadbook mode
+* TwoNav: export tracks and waypoints as roadbook
+* Grid: Fixed swaped numbers for northing and easting
+* Tracks: Toggle between small OSD profile and extended profile
+* Tracks: Several fixes for range selection
+* Tracks: Show waypoints along track in profile plot
+
+V 1.0.1
+* [Issue #11]Exclude items not visible from highlighting
+* Fix track edit hangup for tracks with corrupted timestamps
+* GPX: fix bad loading of trak colors from GPX
+* Add menu to track graphs to save graph to PNG
+* [Issue #7] Store/restore list of active maps into/from a file
+* Disable lock button for items on devices
+
+V 1.0.0
+* Update Czech, French, German and Spanish translation
+* Fix dialogs hiding behind main window
+* Fix various application crashes
+* Fix tile cache growing too large
+* Fix cliff polylines in Garmin maps
+* Add device support on Windows
+* Various little GUI optimizations
+
+V 1.0.beta1
+* Add support for TwoNav units
+* Load/Restore images attached to waypoints on devices
+* Add spoiler download to geocaches.
+* Add group update for projects on devices.
+* GUI cleanup and little fixes
+
+V 0.12.0
+* Fix: Workspace is not saved on Windows.
+* Fix: Bad track color names
+* Add device watcher for Linux
+* Add basic device support for newer Garmin units.
+
+V 0.11.0
+* Auto-switch projection for pole caps in track plot
+* Fix several issues with elements derived from existing ones still having the same key.
+* Add project diary (project details)
+* Add track filter to reset hidden track points to visible
+* Save only changed items to database (speed up)
+* Add photo album and viewer to waypoint details
+
+V 0.10.0
+* Fix crash when saving a DB project before the database tree has been opened
+* Add track filters to hide trackpoints
+* Add track filters to change elevation
+* Add track filters to change timestamp
+* Add DEM layer to colorize the slope
+* Fix issue with duplicate key when reversing a track
+* Add project selection for all track operations
+
+V 0.9.1
+* Complete function of 'Lost & Found' folder
+* Add copy function to all items including dialog to select copy action.
+* Workspace: move status column to column 0
+
+V 0.9.0
+* Fix sign of area calculation
+* Mark item with user focus in item unclutter screen
+* Add support for multiple databases 
+* Add converter for QLandkarte GT to QMapShack database
+
+V 0.8.2
+* Calculate area covered by area overlays
+* Change coordinate format for long/lat grid from dd mm.mm to dd.dddddd
+* Add edit widget for project details
+* Add drag-n-drop for multiple GIS items
+* Enhance delete of multiple items
+
+V 0.8.1
+* Handle "no data" values in DEM files
+* Garmin maps: read copyright information 
+* Save/Restore workspace on exit/start
+
+V 0.8.0
+* Add unit setup (metric, imperial, nautical)
+* Add data serialization for track, waypoint, route and area
+* Add binary *.qms format to store projects without any loss of data
+* Enhance item history to perform full undo and redo
+* Many little fixes and enhancements
+
+V 0.7.0
+* Add Google GIS search
+* Add support for TMS maps
+* Snap to line for track and area edit
+
+V 0.6.0
+* Reverse tracks
+* Add dialog to combine tracks
+* Add range select to tracks
+* Add function to hide/show track points
+* Add function to copy selected track points as new track
+
+V 0.5.0
+* Add support for WMTS maps
+* Edit/create tracks
+* Edit/create area overlays
+* Add contrast factor to hillshading
+
+V 0.4.0
+* Add position dialog to "add waypoint"
+* Beautify waypoint edit dialog
+* Add on-screen information and detail dialog for tracks
+* Add drag-n-drop to workspace list to move items (draw order & copy between projects)
+
+V 0.3.1
+* another favour for Debian release
+* Added "Add Waypoint" to mouse context menu
+
+V 0.3.0.bureaucratic
+* Add copyright notice to GpxExamples to satisfy bureaucrats @ debian
+
+V 0.3.0
+* A lot of little fixes to prevent crashes and glitches due to multithreading
+* Take special care of the +-180 degree problem
+* Add RGB support to raster maps
+* Add a lot of cursor stuff to select items and to display on-screen-options
+* Add timezone support
+* Add dialog to view/edit waypoint data
+* Add 'moving waypoint' and 'project waypoint' as functions to on-screen-options

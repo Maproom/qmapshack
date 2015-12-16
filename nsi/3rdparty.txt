@@ -1,0 +1,38 @@
+#############################################################
+#			QMapShack for Windows (short: QMS)				#
+#############################################################
+QMS is build with Visual Studio 2013 as 64bit application.
+
+It can be build with Visual Studio 2013 Community-Edition, too.
+
+Dependencies
+============
+QMS depends on the 3rd party software listed below:
+
+1.) Microsoft Visual C++ 2013 Redistributable Package
+  The installer vcredist_x64.exe (ca 7MB size) as downloaded from
+    http://www.microsoft.com/en-us/download/details.aspx?id=40784
+  is already contained in the QMS Installer package and will be executed if selected by the user.
+  
+  Note: Those runtime libraries may already be contained in Windows 7 or Windows 8 installations.
+
+2.) Qt5 runtime libraries
+  The Qt DLL's are deployed in the QMS installation directory. 
+  They are part of Qt which you can download here:
+ 	http://qt-project.org/downloads
+	
+3.) The GDAL library, http://www.gdal.org/
+
+4.) The PROJ library http://trac.osgeo.org/proj/
+  
+5.) Icons for the Windows Start Menu ==> We should get rid of them and use own icons
+    kfm_home.ico has been created from the Nuvola 1.0 icon set (http://www.icon-king.com/projects/nuvola/)
+	gdalicon.ico has been converted from gdalicon.png from the GDAL package
+
+6.) The routino library
+  Source code is available http://www.routino.org/
+  This QMapShack installation uses a routino library which is precompiled with mingw64 to reduce porting efforts
+ 
+7.) MinGW64,  http://mingw-w64.org
+  The mingw64 compiler is used to compile the routino library.
+  This results in dependencies from mingw64 runtime libraries such as libwinpthread-1.dll

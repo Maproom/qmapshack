@@ -34,13 +34,15 @@
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
+#include <gis/fit/CFitProject.h>
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.qms *.slf)";
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.qms *.slf *.fit)";
 const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
+const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.slf)";
 const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
-const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF;
+const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
 
 
 
@@ -321,6 +323,10 @@ bool IGisProject::saveAs(QString fn, QString filter)
     else if(filter == filedialogFilterQMS)
     {
         res = CQmsProject::saveAs(fn, *this);
+    }
+    else if(filter == filedialogFilterFIT)
+    {
+        res = CFitProject::saveAs(fn, *this);
     }
     else
     {

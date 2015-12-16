@@ -237,6 +237,24 @@ set( SRCS
     tool/CImportDatabase.cpp
     tool/CRoutinoDatabaseBuilder.cpp
     print/CPrintDialog.cpp
+    gis/fit/CFitProject.cpp
+    gis/fit/CFitStream.cpp
+    gis/fit/serialization.cpp
+    gis/fit/decoder/CFitMessage.cpp
+    gis/fit/decoder/CFitField.cpp
+    gis/fit/decoder/CFitDefinitionMessage.cpp
+    gis/fit/decoder/CFitFieldDefinition.cpp
+    gis/fit/defs/CFitProfile.cpp
+    gis/fit/decoder/CFitDecoderState.cpp
+    gis/fit/decoder/CFitHeaderState.cpp
+    gis/fit/decoder/CFitRecordHeaderState.cpp
+    gis/fit/decoder/CFitFieldDataState.cpp
+    gis/fit/decoder/CFitFieldDefinitionState.cpp
+    gis/fit/decoder/CFitRecordContentState.cpp
+    gis/fit/decoder/CFitCrcState.cpp
+    gis/fit/defs/CFitBaseType.cpp
+    gis/fit/decoder/CFitDecoder.cpp
+    gis/fit/defs/CFitProfileLockup.cpp
 )
 
 if(UNIX AND NOT APPLE)
@@ -459,6 +477,26 @@ set( HDRS
     tool/CImportDatabase.h
     tool/CRoutinoDatabaseBuilder.h
     print/CPrintDialog.h
+    gis/fit/CFitProject.h
+    gis/fit/CFitStream.h
+    gis/fit/defs/fit_const.h
+    gis/fit/decoder/CFitMessage.h
+    gis/fit/decoder/CFitField.h
+    gis/fit/decoder/CFitDefinitionMessage.h
+    gis/fit/decoder/CFitFieldDefinition.h
+    gis/fit/defs/CFitProfile.h
+    gis/fit/defs/CFitBaseType.h
+    gis/fit/defs/fit_enums.h
+    gis/fit/defs/fit_fields.h
+    gis/fit/decoder/CFitDecoderState.h
+    gis/fit/decoder/CFitHeaderState.h
+    gis/fit/decoder/CFitRecordHeaderState.h
+    gis/fit/decoder/CFitFieldDataState.h
+    gis/fit/decoder/CFitFieldDefinitionState.h
+    gis/fit/decoder/CFitRecordContentState.h
+    gis/fit/decoder/CFitCrcState.h
+    gis/fit/decoder/CFitDecoder.h
+    gis/fit/defs/CFitProfileLockup.h
 )
 
 if(UNIX AND NOT APPLE)

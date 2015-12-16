@@ -196,8 +196,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 #endif
 #ifdef Q_OS_MAC
     deviceWatcher = new CDeviceWatcherMac(this);
-    connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this,          &CGisListWks::sigChanged);
-    connect(qApp,          &QApplication::aboutToQuit,     deviceWatcher, &CDeviceWatcherMac::slotEndListing);
+    connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this, &CGisListWks::sigChanged);
 #endif
 #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);

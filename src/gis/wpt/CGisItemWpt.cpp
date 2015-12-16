@@ -152,6 +152,19 @@ CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * proj
     updateDecoration(eMarkNone, eMarkNone);
 }
 
+CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject * project)
+    : IGisItem(project, eTypeWpt, NOIDX)
+    , proximity(NOFLOAT)
+    , posScreen(NOPOINTF)
+{
+    readFit(stream);
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
+    genKey();
+    setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
 CGisItemWpt::~CGisItemWpt()
 {
 }

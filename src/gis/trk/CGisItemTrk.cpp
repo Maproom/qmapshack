@@ -205,6 +205,18 @@ CGisItemTrk::CGisItemTrk(trk_t& trkdata, IGisProject *project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
+CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject * project)
+    : IGisItem(project, eTypeTrk, project->childCount())
+{
+    // --- start read and process data ----
+    setColor(penForeground.color());
+    readFit(stream);
+    // --- stop read and process data ----
+
+    setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
 
 CGisItemTrk::~CGisItemTrk()
 {

@@ -219,7 +219,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
     s1 << wpt.description;
     s1 << wpt.urlname;
     s1 << wpt.type;
-    s1 << QString("");
+    s1 << QString();
     s1 << wpt.selected;
     s1 << wpt.dir;
 

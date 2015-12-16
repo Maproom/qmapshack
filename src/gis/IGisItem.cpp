@@ -59,7 +59,7 @@ const IGisItem::color_t IGisItem::colorMap[] =
     ,{"Magenta",     QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png")}
     ,{"Cyan",        QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png")}
     ,{"White",       QColor(Qt::white),       QString("://icons/8x8/bullet_white.png")}
-    ,{"Transparent", QColor(Qt::transparent), QString("")}
+    ,{"Transparent", QColor(Qt::transparent), QString()}
 };
 
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)

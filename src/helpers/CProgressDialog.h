@@ -46,6 +46,8 @@ public:
 
     bool wasCanceled();
 
+    void enableCancel(bool yes);
+
 public slots:
     void reject();
 

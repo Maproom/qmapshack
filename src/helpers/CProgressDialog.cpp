@@ -62,6 +62,11 @@ CProgressDialog::~CProgressDialog()
     stackSelf.pop();
 }
 
+void CProgressDialog::enableCancel(bool yes)
+{
+    buttonBox->setEnabled(yes);
+}
+
 void CProgressDialog::reject()
 {
     setResult(QMessageBox::Abort);

@@ -20,6 +20,7 @@
 #define CFITPROFILE_H
 
 #include "gis/fit/defs/CFitBaseType.h"
+#include "fit_const.h"
 
 #include <QtCore>
 
@@ -30,7 +31,8 @@ class CFitFieldProfile
 public:
     CFitFieldProfile();
     CFitFieldProfile(const CFitFieldProfile& copy);
-    CFitFieldProfile(QString name, CFitBaseType* baseType, uint8_t fieldDefNr, float scale, uint16_t  offset, QString units);
+    CFitFieldProfile(QString name, CFitBaseType* baseType, uint8_t fieldDefNr, float scale, uint16_t  offset, QString units,
+                     uint8_t subRefFieldDefNr = FieldDefNrInvalid, uint8_t subRefFieldValue = 255);
 
     void addSubfield(CFitFieldProfile* subfield)
     {
@@ -41,7 +43,10 @@ public:
     bool hasSubfields();
     bool hasComponents();
     //bool isComponent();
-    //bool isSubfield();
+
+    bool isSubfield();
+    uint8_t getReferencedFieldDefNr();
+    uint8_t getReferencedFieldValue();
 
     QString getName();
     uint8_t getFieldDefNum();

@@ -16,6 +16,7 @@
 
  **********************************************************************************************/
 
+#include <gis/fit/defs/CFitProfileLockup.h>
 #include "gis/fit/decoder/CFitFieldDataState.h"
 #include "gis/fit/defs/fit_const.h"
 #include "gis/fit/defs/fit_fields.h"
@@ -24,6 +25,26 @@
 class CFitDataTransformer
 {
 public:
+    static CFitFieldProfile* evaluateFieldProfile(CFitFieldDefinition* defintion, CFitMessage* message)
+    {
+        CFitProfile* profile = CFitProfileLockup::getProfile(message->getGlobalMesgNr());
+        CFitFieldProfile* fieldProfile = profile->getField(defintion->getDefNr());
+
+        if(fieldProfile->hasSubfields())
+        {
+            for(CFitFieldProfile* subfieldProfile : fieldProfile->getSubfields())
+            {
+                // actually the referenced field is for all subfields the same
+                CFitField* referencedField = message->getField(subfieldProfile->getFieldDefNum());
+                if(referencedField->getUIntValue() == subfieldProfile->getReferencedFieldValue())
+                {
+                    return subfieldProfile;
+                }
+            }
+        }
+        return fieldProfile;
+    }
+
     static CFitField* buildField(CFitFieldDefinition* defintion, uint8_t* fieldData)
     {
         swapFieldData(defintion, fieldData);
@@ -221,17 +242,21 @@ void CFitFieldDataState::reset() {
     fieldIndex = 0;
 }
 
-/*
-if(fieldDef->profile()->hasComponents())
+CFitFieldDataState::expand()
 {
-    uint32_t bitPos = 0;
-    for(CFitFieldProfile& comp :  fieldDef->profile()->getComponents())
-    {
-        (fieldData >> bitPos) & comp.getBitmask();
-        bitPos += comp.getBits();
-    }
+  if(fieldDef->profile()->hasComponents())
+  {
+      uint32_t bitPos = 0;
+      for(CFitFieldProfile& comp :  fieldDef->profile()->getComponents())
+      {
+          (fieldData >> bitPos) & comp.getBitmask();
+          bitPos += comp.getBits();
+      }
+  }
+
+
 }
- */
+
 DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
     CFitFieldDefinition *fieldDef = defintion(latestMessage()->getLocalMesgNr())->getFieldByIndex(fieldIndex);
 

@@ -113,7 +113,7 @@ protected:
      * @param item      the item itself
      * @param idItem    the 64bit database key
      */
-    void updateItem(IGisItem * item, quint64 idItem);
+    void updateItem(IGisItem *&item, quint64 idItem);
 
     /**
      * @brief Add item to database

@@ -152,7 +152,7 @@ void CDBProject::postStatus()
     CGisWidget::self().postEventForDb(info);
 }
 
-void CDBProject::updateItem(IGisItem * item, quint64 idItem)
+void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
 {
     QSqlQuery query(db);
 
@@ -219,8 +219,17 @@ void CDBProject::updateItem(IGisItem * item, quint64 idItem)
 
             if(msgBox.clickedButton() == pButClone)
             {
-                IGisItem * item2 = item->createClone();
-                insertItem(item2);
+                IGisItem * item2    = item->createClone();
+                quint64 idItem      = insertItem(item2);
+
+                delete item;
+                item = item2;
+
+                query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
+                query.bindValue(":parent", id);
+                query.bindValue(":child", idItem);
+                QUERY_EXEC(throw -1);
+
             }
             else if(msgBox.clickedButton() == pButForce)
             {

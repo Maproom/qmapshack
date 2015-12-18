@@ -158,8 +158,13 @@ CGisItemWpt::~CGisItemWpt()
 
 IGisItem * CGisItemWpt::createClone()
 {
+    int idx = -1;
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    return new CGisItemWpt(*this, project, -1, true);
+    if(project)
+    {
+        idx = project->indexOfChild(this);
+    }
+    return new CGisItemWpt(*this, project, idx, true);
 }
 
 

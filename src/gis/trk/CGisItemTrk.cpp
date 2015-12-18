@@ -231,8 +231,13 @@ CGisItemTrk::~CGisItemTrk()
 
 IGisItem * CGisItemTrk::createClone()
 {
+    int idx = -1;
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    return new CGisItemTrk(*this, project, -1, true);
+    if(project)
+    {
+        idx = project->indexOfChild(this);
+    }
+    return new CGisItemTrk(*this, project, idx, true);
 }
 
 

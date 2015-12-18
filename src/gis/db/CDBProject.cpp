@@ -186,7 +186,7 @@ void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
     {
         // the update has been successful.
         // set current hash as database hash.
-        item->setLastDatabaseHash();
+        item->setLastDatabaseHash(idItem, db);
     }
     else
     {
@@ -197,7 +197,7 @@ void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
         // Let's test for 1) and get the last user and timestamp of the change
         query.prepare("SELECT last_user, last_change FROM items WHERE id=:id");
         query.bindValue(":id", id);
-        QUERY_EXEC();
+        QUERY_EXEC(throw -1);
         if(query.next())
         {
             QString user = query.value(0).toString();
@@ -244,10 +244,11 @@ void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
                 query.bindValue(":id",      idItem);
                 QUERY_EXEC(throw -1);
 
-                item->setLastDatabaseHash();
+                item->setLastDatabaseHash(idItem, db);
             }
             else if(msgBox.clickedButton() == pButUpdate)
             {
+                item->updateFromDB(idItem, db);
             }
             else // abort
             {
@@ -297,7 +298,7 @@ quint64 CDBProject::insertItem(IGisItem * item)
         throw -1;
     }
 
-    item->setLastDatabaseHash();
+    item->setLastDatabaseHash(idItem, db);
 
     return idItem;
 }
@@ -353,7 +354,7 @@ bool CDBProject::save()
 
                 if(!query.next())
                 {
-                    // update dialog
+                    // item is already in database but folder relation does not exit
                     int result  = lastResult;
 
                     if(lastResult == CSelectSaveAction::eResultNone)
@@ -458,6 +459,7 @@ bool CDBProject::save()
         query.bindValue(":id", getId());
         QUERY_EXEC(throw -1);
 
+        // report status to database view
         info->updateLostFound = true;
         CGisWidget::self().postEventForDb(info);
         if(clearProjectChangeFlag)
@@ -469,10 +471,12 @@ bool CDBProject::save()
     {
         if(n < 0)
         {
+            // ooch, failed queries, better quit without much reporting
             delete info;
         }
         else
         {
+            // abort by user, report status to database view
             info->updateLostFound = true;
             CGisWidget::self().postEventForDb(info);
         }

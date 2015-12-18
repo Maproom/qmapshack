@@ -58,6 +58,13 @@ public:
         {
         }
 
+        void reset()
+        {
+            histIdxInitial = NOIDX;
+            histIdxCurrent = NOIDX;
+            events.clear();
+        }
+
         qint32 histIdxInitial;
         qint32 histIdxCurrent;
         QList<history_event_t> events;
@@ -156,6 +163,11 @@ public:
     static QMutex mutexItems;
 
     /**
+       @brief If the item is part of a database project it will update itself with the database content
+     */
+    void updateFromDB(quint64 id, QSqlDatabase& db);
+
+    /**
        @brief Update the visual representation of the QTreeWidgetItem
        @param enable
        @param disable
@@ -186,14 +198,20 @@ public:
      */
     const QString& getHash();
 
+    /**
+       @brief Get the hash stored in the database when the item was loaded
+
+       @return The hash as a string
+     */
     const QString& getLastDatabaseHash()
     {
         return lastDatabaseHash;
     }
-    void setLastDatabaseHash()
-    {
-        lastDatabaseHash = getHash();
-    }
+
+    /**
+       @brief Read the hash stored in the database
+     */
+    void setLastDatabaseHash(quint64 id, QSqlDatabase& db);
 
     /**
        @brief Get the icon attached to object
@@ -399,10 +417,14 @@ public:
     void cutHistory();
 
     /**
-     * @brief Create a clone of itself and pass back the pointer
-     * @return The pointer of the cloned item
+       @brief Create a clone of itself and pass back the pointer
+
+       Add the cloned item to the project with the same index as the original
+
+       @return The pointer of the cloned item
      */
     virtual IGisItem * createClone() = 0;
+
 
     /**
        @brief Remove all HTML tags from a string
@@ -484,7 +506,8 @@ protected:
     /// call when ever you make a change to the item's data
     virtual void changed(const QString& what, const QString& icon);
 
-    virtual void loadFromDb(quint64 id, QSqlDatabase& db);
+
+    void loadFromDb(quint64 id, QSqlDatabase& db);
 
     bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);

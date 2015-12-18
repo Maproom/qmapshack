@@ -25,15 +25,6 @@ inline qreal qLog10(qreal x)
     return qLn(x)/qLn(10);
 }
 
-CPlotAxis::CPlotAxis( QObject * parent )
-    : QObject( parent )
-{
-}
-
-CPlotAxis::~CPlotAxis()
-{
-}
-
 void CPlotAxis::setLimits(qreal min, qreal max)
 {
     limitMin = min;
@@ -43,8 +34,6 @@ void CPlotAxis::setLimits(qreal min, qreal max)
 
 void CPlotAxis::setMinMax( qreal givenMin, qreal givenMax )
 {
-    qreal tmp;
-
     if ( givenMin == givenMax )
     {
         if ( givenMin != 0.0 )
@@ -61,9 +50,7 @@ void CPlotAxis::setMinMax( qreal givenMin, qreal givenMax )
 
     if ( givenMin > givenMax )
     {
-        tmp = givenMax;
-        givenMax = givenMin;
-        givenMin = tmp;
+        qSwap(givenMin, givenMax);
     }
 
     usedMin = givenMin;
@@ -77,39 +64,20 @@ void CPlotAxis::setMinMax( qreal givenMin, qreal givenMax )
 
 void CPlotAxis::calc()
 {
-    qreal tmpAbs = ( usedMax - usedMin ) < 0 ? -( usedMax - usedMin ) : ( usedMax - usedMin );
-    qreal tmp = qLog10( tmpAbs / 10.0 );
+    qreal tmpAbs = qFabs(usedMax - usedMin);
+    qreal tmp    = qLog10( tmpAbs / 10.0 );
 
     qreal exponent = ( int ) tmp;
-    qreal residue = tmp - exponent;
+    qreal residue  = tmp - exponent;
 
-    if ( residue < 0 && residue <= qLog10( 0.1 ) )
+    qreal resSteps[] = {qLog10(0.1), qLog10(0.2), qLog10(0.5), qLog10(1.0), qLog10(2.0), qLog10(5.0), qLog10(10.0)};
+    for(const qreal &step : resSteps)
     {
-        residue = qLog10( 0.1 );
-    }
-    else if ( residue > qLog10( 0.1 ) && residue <= qLog10( 0.2 ) )
-    {
-        residue = qLog10( 0.2 );
-    }
-    else if ( residue > qLog10( 0.2 ) && residue <= qLog10( 0.5 ) )
-    {
-        residue = qLog10( 0.5 );
-    }
-    else if ( residue > qLog10( 0.5 ) && residue <= qLog10( 1.0 ) )
-    {
-        residue = qLog10( 1.0 );
-    }
-    else if ( residue > qLog10( 1.0 ) && residue <= qLog10( 2.0 ) )
-    {
-        residue = qLog10( 2.0 );
-    }
-    else if ( residue > qLog10( 2.0 ) && residue <= qLog10( 5.0 ) )
-    {
-        residue = qLog10( 5.0 );
-    }
-    else if ( residue > qLog10( 5.0 ) && residue <= qLog10( 10. ) )
-    {
-        residue = qLog10( 10. );
+        if(residue < step)
+        {
+            residue = step;
+            break;
+        }
     }
 
     interval = exponent + residue;
@@ -118,7 +86,7 @@ void CPlotAxis::calc()
     if ( autoscale )
     {
         usedMin = qFloor( usedMin / interval ) * interval;
-        usedMax = qCeil( usedMax / interval ) * interval;
+        usedMax = qCeil(  usedMax / interval ) * interval;
     }
 
     int t1 = ( int )( usedMin / interval + 0.5);
@@ -134,46 +102,21 @@ void CPlotAxis::calc()
 
 const QString CPlotAxis::fmtsgl( qreal val )
 {
-    static QString f;
-    qreal tmp;
-    qreal exponent;
+    int exponent = (0. == val) ? 0 : (int) qLog10( qFabs(val) );
 
-    if ( val != 0 )
-    {
-        if ( val < 0 )
-        {
-            val = -val;
-        }
-        tmp = qLog10( val );
-        exponent = ( int ) tmp;
-    }
-    else
-    {
-        exponent = 0;
-    }
-
-    if ( abs( ( int ) exponent ) > 5 )
+    QString f;
+    if ( abs(exponent) > 5 )
     {
         f = "%1.2e";
     }
+    else if ( exponent >= 0 )
+    {
+        f = "%" + QString( "%1" ).arg(exponent + 1)
+          + ( (0 == exponent) ? ".1f" : ".0f" );
+    }
     else
     {
-        if ( exponent >= 0 )
-        {
-            f = "%" + QString( "%1" ).arg( ( int ) ( exponent + 1 ) );
-            if ( exponent == 0 )
-            {
-                f += ".1f";
-            }
-            else
-            {
-                f += ".0f";
-            }
-        }
-        else
-        {
-            f = "%1." + QString( "%1" ).arg( ( int ) ( -exponent + 1 ) ) + "f";
-        }
+        f = "%1." + QString( "%1" ).arg(-exponent + 1) + "f";
     }
 
     return f;
@@ -198,49 +141,29 @@ const QString CPlotAxis::fmtsgl( qreal val )
  */
 const QString CPlotAxis::fmtdbl( qreal val )
 {
-    static QString f;
-    qreal tmp;
-    qreal exponent;
-    qreal residue;
+    int   exponent = 0;
+    qreal residue  = 0;
 
     if ( val != 0 )
     {
-        if ( val < 0 )
-        {
-            val = -val;
-        }
-        tmp = qLog10( val );
-        exponent = ( int ) tmp;
-        residue = tmp - exponent;
-    }
-    else
-    {
-        exponent = 0;
-        residue = 0;
+        qreal tmp = qLog10( qFabs(val) );
+        exponent  = (int) tmp;
+        residue   = tmp - exponent;
     }
 
-    if ( abs( ( int ) exponent ) > 5 )
+    QString f;
+    if ( abs(exponent) > 5 )
     {
         f = "%1.3e";
     }
+    else if ( exponent >= 0 )
+    {
+        f = "%" + QString( "%1" ).arg(exponent + 1)
+          + ( ((0. == exponent) && (0 > residue)) ? ".2f" : ".1f" );
+    }
     else
     {
-        if ( exponent >= 0 )
-        {
-            f = "%" + QString( "%1" ).arg( ( int ) ( exponent + 1 ) );
-            if ( ( exponent == 0 ) && ( residue < 0 ) )
-            {
-                f += ".2f";
-            }
-            else
-            {
-                f += ".1f";
-            }
-        }
-        else
-        {
-            f = "%1." + QString( "%1" ).arg( ( int ) ( -exponent + 2 ) ) + "f";
-        }
+        f = "%1." + QString( "%1" ).arg(-exponent + 2) + "f";
     }
     return f;
 }
@@ -259,18 +182,15 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
     }
 
     int width = 0;
-    int tmp;
     QString format_single_prec = fmtsgl( interval );
 
     const tic_t * t = ticmark();
-    while ( t )
+    while (nullptr != t)
     {
-        tmp = m.width( QString().sprintf( format_single_prec.toLatin1().data(), t->val ) );
-        if ( tmp > width )
-        {
-            width = tmp;
-        }
-        t = ticmark( t );
+        int tmp = m.width( QString().sprintf( format_single_prec.toLatin1().data(), t->val ) );
+        width = qMax(width, tmp);
+
+        t = ticmark(t);
     }
     return width;
 }
@@ -292,11 +212,11 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
     switch ( ticType )
     {
     case eNoTic:
-        return 0;
+        return nullptr;
         break;
 
     case eTicMinMax:
-        if ( t == NULL )
+        if (nullptr == t)
         {
             tic.val = usedMin;
             firstTic = true;
@@ -308,17 +228,17 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
         }
         else
         {
-            return 0;
+            return nullptr;
         }
         break;
 
     case eTicNorm:
-        if ( interval == 0 )
+        if (0. == interval)
         {
             //qWarning() << "CPlotAxis::ticmark() mode 'norm': interval == 0";
-            return 0;
+            return nullptr;
         }
-        if ( t == NULL )
+        if (nullptr == t)
         {
             tic.val = ticStart;
         }
@@ -327,26 +247,26 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
             tic.val += interval;
             if ( ( tic.val - usedMax ) > interval / 20 )
             {
-                return 0;
+                return nullptr;
             }
         }
         break;
 
     case eTicFull:
-        if ( t == NULL )
+        if (nullptr == t)
         {
             tic.val = usedMin;
             firstTic = true;
         }
-        else if ( firstTic == true )
+        else if (firstTic)
         {
             tic.val = ticStart;
             firstTic = false;
         }
-        else if ( lastTic == true )
+        else if (lastTic)
         {
             lastTic = false;
-            return 0;
+            return nullptr;
         }
         else
         {
@@ -371,7 +291,7 @@ void CPlotAxis::setScale( const unsigned int pts )
     //if ( !initialized )
     //qWarning( "you try to set the scale before defining the min & max value. not very sensible." );
     points = pts;
-    scale = pts / ( usedMax - usedMin );
+    scale  = pts / ( usedMax - usedMin );
 }
 
 
@@ -383,21 +303,12 @@ void CPlotAxis::resetZoom()
 
 void CPlotAxis::zoom(bool in, int point)
 {
-    qreal min, max, p, d, factor;
-    if (in)
-    {
-        factor = 1/1.1;
-    }
-    else
-    {
-        factor = 1.1;
-    }
+    qreal factor = in ? (1 / 1.1) : 1.1;
 
-    p = pt2val(point);
-    min = (p - usedMin) * (1 - factor) + usedMin;
-    d = min - usedMin * factor;
-    max = usedMax * factor + d;
-
+    qreal p   = pt2val(point);
+    qreal min = (p - usedMin) * (1 - factor) + usedMin;
+    qreal d   = min - usedMin * factor;
+    qreal max = usedMax * factor + d;
 
     if(qRound(max - min) <= qRound(limitMax - limitMin))
     {

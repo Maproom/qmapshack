@@ -36,12 +36,12 @@ public:
     virtual ~CPlotData();
 
     ///get a reference to the x axis
-    CPlotAxis& x()
+    CPlotAxis& x() const
     {
         return *xaxis;
     }
     ///get a reference to the y axis
-    CPlotAxis& y()
+    CPlotAxis& y() const
     {
         return *yaxis;
     }
@@ -54,8 +54,8 @@ public:
 
     struct line_t
     {
-        QString label;
-        QColor color;
+        QString   label;
+        QColor    color;
         QPolygonF points;
     };
 

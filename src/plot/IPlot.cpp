@@ -30,27 +30,27 @@
 #include <QKeyEvent>
 #include <QtWidgets>
 
-QPen IPlot::pens[] =
+const QPen IPlot::pens[] =
 {
-    QPen(Qt::darkBlue,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(QColor("#C00000"),3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::yellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::green,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+      QPen(Qt::darkBlue,      3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(QColor("#C00000"), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::yellow,        3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::green,         3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
-QPen IPlot::pensThin[] =
+const QPen IPlot::pensThin[] =
 {
-    QPen(Qt::darkBlue,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkRed,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkYellow,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkGreen,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+      QPen(Qt::darkBlue,   2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkRed,    2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkYellow, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkGreen,  2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
-QColor IPlot::colors[] =
+const QColor IPlot::colors[] =
 {
-    QColor(Qt::blue)
-    , QColor(0,0,0,0)
-    , QColor(0,0,0,0)
+      QColor(Qt::blue)
+    , QColor(0, 0, 0, 0)
+    , QColor(0, 0, 0, 0)
     , QColor(Qt::darkGreen)
 };
 
@@ -89,9 +89,9 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     }
 
     menu = new QMenu(this);
-    actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Reset Zoom"), this, SLOT(slotResetZoom()));
+    actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, SLOT(slotResetZoom()));
     actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
-    actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
+    actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -287,20 +287,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
 
         // set point of focus at track object
         qreal x = data->x().pt2val(posMouse.x() - left);
-        if(data->axisType == CPlotData::eAxisLinear)
-        {
-            if(trk)
-            {
-                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, objectName());
-            }
-        }
-        else if(data->axisType == CPlotData::eAxisTime)
-        {
-            if(trk)
-            {
-                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, objectName());
-            }
-        }
+        setMouseFocus(x, CGisItemTrk::eFocusMouseMove);
 
         // update canvas if visible
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -311,6 +298,23 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         e->accept();
     }
     update();
+}
+
+void IPlot::setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm)
+{
+    if(nullptr == trk)
+    {
+        return;
+    }
+
+    if(data->axisType == CPlotData::eAxisLinear)
+    {
+        trk->setMouseFocusByDistance(pos, fm, objectName());
+    }
+    else if(data->axisType == CPlotData::eAxisTime)
+    {
+        trk->setMouseFocusByTime(pos, fm, objectName());
+    }   
 }
 
 void IPlot::mousePressEvent(QMouseEvent * e)
@@ -343,15 +347,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 // In idle state a mouse click will select the first point of a range
                 if(trk->setMode(CGisItemTrk::eModeRange, objectName()))
                 {
-                    if(data->axisType == CPlotData::eAxisLinear)
-                    {
-                        trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, objectName());
-                    }
-                    else if(data->axisType == CPlotData::eAxisTime)
-                    {
-                        trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, objectName());
-                    }
-
+                    setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
                     mouseClickState = eMouseClick1st;
                 }
                 else
@@ -369,15 +365,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             case eMouseClick1st:
             {
                 // In 1st click state a mouse click will select the second point of a range and display options
-                if(data->axisType == CPlotData::eAxisLinear)
-                {
-                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, objectName());
-                }
-                else if(data->axisType == CPlotData::eAxisTime)
-                {
-                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, objectName());
-                }
-
+                setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
                 /*
                     As the screen option is created on the fly it has to be connected to all slots,too.
                     Later, when destroyed the slots will be disconnected automatically.
@@ -466,15 +454,15 @@ void IPlot::setSizes()
     fm = QFontMetrics(CMainWindow::self().getMapFont());
     left = 0;
 
-    scaleWidthX1    = showScale ? data->x().getScaleWidth( fm ) : 0;
-    scaleWidthY1    = showScale ? data->y().getScaleWidth( fm ) : 0;
+    scaleWidthX1 = showScale ? data->x().getScaleWidth( fm ) : 0;
+    scaleWidthY1 = showScale ? data->y().getScaleWidth( fm ) : 0;
 
-    scaleWidthY1    = scaleWidthX1 > scaleWidthY1 ? scaleWidthX1 : scaleWidthY1;
+    scaleWidthY1 = scaleWidthX1 > scaleWidthY1 ? scaleWidthX1 : scaleWidthY1;
 
-    fontWidth       = fm.maxWidth();
-    fontHeight      = fm.height();
-    deadAreaX       = fontWidth >> 1;
-    deadAreaY       = ( fontHeight + 1 ) >> 1;
+    fontWidth    = fm.maxWidth();
+    fontHeight   = fm.height();
+    deadAreaX    = fontWidth >> 1;
+    deadAreaY    = ( fontHeight + 1 ) >> 1;
 
     setLRTB();
     setSizeIconArea();
@@ -1322,7 +1310,7 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
     update();
 }
 
-bool IPlot::isZoomed()
+bool IPlot::isZoomed() const
 {
     qreal limMin, limMax, useMin, useMax;
     data->x().getLimits(limMin, limMax, useMin, useMax);

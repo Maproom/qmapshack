@@ -29,16 +29,18 @@
 class CFitField
 {
 public:
-    CFitField(CFitFieldDefinition* fieldDefinition, bool valid);
-    CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, CFitBaseType* baseType, bool valid);
+    CFitField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, bool valid);
+    CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, CFitFieldProfile* profile, bool valid);
     CFitField(const CFitField& copy);
     CFitField();
 
+    void setProfile(CFitFieldProfile* profile) { fieldProfile = profile; }
     virtual QString fieldInfo();
 
     bool isValidBaseType() const;
     CFitBaseType* getBaseType() const;
     bool isBaseType(BaseTypeNr type) const;
+    uint16_t getGlobalMesgNr() const;
     uint8_t getFieldDefNr() const;
     CFitFieldProfile* profile() { return fieldProfile; }
 
@@ -51,7 +53,7 @@ public:
     virtual double getDoubleValue() { return 0; };
 
 protected:
-    CFitFieldProfile*fieldProfile;
+    CFitFieldProfile* fieldProfile;
     uint16_t globalMesgNr;
     uint8_t fieldDefNr;
     CFitBaseType* baseType;
@@ -62,8 +64,10 @@ template <class T>
 class CFitIntField : public CFitField
 {
 public:
-    CFitIntField(CFitFieldDefinition* fieldDefinition, T value, bool valid)
-            : CFitField(fieldDefinition, valid), value(value) {};
+    CFitIntField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, T value, bool valid)
+            : CFitField(fieldDefinition, profile, valid), value(value) {};
+    CFitIntField(CFitField* field, CFitFieldProfile* profile, T value, bool valid)
+            : CFitField(field->getGlobalMesgNr(), field->getFieldDefNr(), profile, valid), value(value) {}
     CFitIntField() : CFitField(), value(0) {};
 
     virtual QString fieldInfo();
@@ -119,8 +123,9 @@ double CFitIntField<T>::getDoubleValue()
 class CFitDoubleField : public CFitField
 {
 public:
-    CFitDoubleField(CFitFieldDefinition* fieldDefinition, double value, bool valid)
-            : CFitField(fieldDefinition, valid), value(value) {}
+    CFitDoubleField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, double value, bool valid)
+            : CFitField(fieldDefinition, profile, valid), value(value) {}
+
     CFitDoubleField() : CFitField(), value(0) {}
 
     QString getString();
@@ -136,8 +141,8 @@ private:
 class CFitStringField : public CFitField
 {
 public:
-    CFitStringField(CFitFieldDefinition* fieldDefinition, QString value, bool valid)
-            : CFitField(fieldDefinition, valid), value(value) {};
+    CFitStringField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, QString value, bool valid)
+            : CFitField(fieldDefinition, profile, valid), value(value) {};
     CFitStringField() :  CFitField(), value("") {}
 
     QString getString() {
@@ -155,8 +160,8 @@ private:
 class CFitByteField : public CFitField
 {
 public:
-    CFitByteField(CFitFieldDefinition* fieldDefinition, uint8_t* value, bool valid)
-            : CFitField(fieldDefinition, valid), value(value) {};
+    CFitByteField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, uint8_t* value, bool valid)
+            : CFitField(fieldDefinition, profile, valid), value(value) {};
     CFitByteField() :  CFitField(), value(nullptr) {}
 
     virtual QString getString();

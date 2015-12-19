@@ -25,58 +25,86 @@
 class CFitDataTransformer
 {
 public:
-    static CFitFieldProfile* evaluateFieldProfile(CFitFieldDefinition* defintion, CFitMessage* message)
+    static void evaluateFieldProfile(CFitMessage* message, CFitField* field)
     {
-        CFitProfile* profile = CFitProfileLockup::getProfile(message->getGlobalMesgNr());
-        CFitFieldProfile* fieldProfile = profile->getField(defintion->getDefNr());
-
+        CFitFieldProfile* fieldProfile = field->profile();
+        // case subfield
         if(fieldProfile->hasSubfields())
         {
-            for(CFitFieldProfile* subfieldProfile : fieldProfile->getSubfields())
+            for(CFitSubfieldProfile* subfieldProfile : fieldProfile->getSubfields())
             {
-                // actually the referenced field is for all subfields the same
-                CFitField* referencedField = message->getField(subfieldProfile->getFieldDefNum());
+                // the referenced field is for all subfields the same
+                CFitField* referencedField = message->getField(subfieldProfile->getReferencedFieldDefNr());
                 if(referencedField->getUIntValue() == subfieldProfile->getReferencedFieldValue())
                 {
-                    return subfieldProfile;
+                    // the value of the referenced field matches with the field profile reference-value
+                    field->setProfile(subfieldProfile);
                 }
             }
         }
-        return fieldProfile;
     }
 
-    static CFitField* buildField(CFitFieldDefinition* defintion, uint8_t* fieldData)
+    static void expandComponents(CFitMessage* message, CFitField* field)
     {
-        swapFieldData(defintion, fieldData);
-        CFitBaseType* baseType = defintion->getBaseType();
-        bool valid = isValidValue(defintion, fieldData);
+        // todo accumulated fields
+        CFitFieldProfile* fieldProfile = field->profile();
+        // case component
+        if(fieldProfile->hasComponents())
+        {
+            int offset = 0;
+            for(CFitComponentfieldProfile* compProfile : fieldProfile->getComponents())
+            {
+                if(field->getBaseType()->isSignedInt())
+                {
+                    int32_t value = (field->getSIntValue() >> offset) & compProfile->getBitmask();
+                    CFitIntField<int32_t>* f = new CFitIntField<int32_t>(field, compProfile, value, true);
+                    message->addField(f);
+
+                }
+                else
+                {
+                    uint32_t value = (field->getUIntValue() >> offset) & compProfile->getBitmask();
+                    CFitIntField<uint32_t>* f = new CFitIntField<uint32_t>(field, compProfile, value, true);
+                    message->addField(f);
+                }
+                offset += compProfile->getBits();
+            }
+        }
+    }
+
+    static CFitField* buildField(CFitFieldDefinition* def, uint8_t* fieldData, CFitMessage* message)
+    {
+        swapFieldData(def, fieldData);
+        CFitBaseType* baseType = def->getBaseType();
+        bool valid = isValidValue(fieldData, def->getSize(), baseType);
+        CFitFieldProfile* fieldProfile = CFitProfileLockup::getFieldForProfile(message->getGlobalMesgNr(), def->getDefNr());
         if(baseType->isSignedInt())
         {
             int ival = CFitDataTransformer::getIntValue(baseType, fieldData);
-            CFitIntField<int32_t>* f = new CFitIntField<int32_t>(defintion, ival, valid);
+            CFitIntField<int32_t>* f = new CFitIntField<int32_t>(def, fieldProfile, ival, valid);
             return f;
         }
         else if(baseType->isUnsignedInt())
         {
             unsigned  int uval = CFitDataTransformer::getUIntValue(baseType, fieldData);
-            CFitIntField<uint32_t>* f = new CFitIntField<uint32_t>(defintion, uval, valid);
+            CFitIntField<uint32_t>* f = new CFitIntField<uint32_t>(def, fieldProfile, uval, valid);
             return f;
         }
         else if(baseType->isFloat())
         {
             double dval = CFitDataTransformer::getDoubleValue(baseType, fieldData);
-            CFitDoubleField* f = new CFitDoubleField(defintion, dval, valid);
+            CFitDoubleField* f = new CFitDoubleField(def, fieldProfile, dval, valid);
             return f;
         }
         else if(baseType->nr() == TypeString)
         {
             QString str = CFitDataTransformer::getString(fieldData);
-            CFitStringField* f = new CFitStringField(defintion, str, valid);
+            CFitStringField* f = new CFitStringField(def, fieldProfile, str, valid);
             return f;
         }
         else if(baseType->nr() == TypeByte)
         {
-            CFitByteField* f = new CFitByteField(defintion, (uint8_t*)fieldData, valid);
+            CFitByteField* f = new CFitByteField(def, fieldProfile, (uint8_t*)fieldData, valid);
             return f;
         }
         else
@@ -105,28 +133,29 @@ private:
         }
     }
 
-    static bool isValidValue(CFitFieldDefinition* fieldDefinition, uint8_t* rawData)
+
+
+    static bool isValidValue(uint8_t* rawData, uint8_t size, CFitBaseType* baseType)
     {
-        CFitBaseType* baseType = fieldDefinition->getBaseType();
         char* invalidBytes = baseType->invalidValueBytes();
         if (baseType->nr() == TypeString || baseType->nr() == TypeByte)
         {
             // all byts set to invalid value
             uint8_t invalidCount = 0;
-            for(uint8_t i = 0; i < fieldDefinition->getSize(); i++)
+            for(uint8_t i = 0; i < size; i++)
             {
                 // string and enum specify one byte for invalid value
                 if((rawData[i] >> (i * 8)) == invalidBytes[0])
                     invalidCount++;
             }
-            return (invalidCount == fieldDefinition->getSize());
+            return (invalidCount == size);
         }
         else if (baseType->isNumber())
         {
-            if(fieldDefinition->getSize() != baseType->size())
+            if(size != baseType->size())
                 return false;
 
-            for(uint8_t i = 0; i < fieldDefinition->getSize(); i++)
+            for(uint8_t i = 0; i < size; i++)
             {
                 if((rawData[i] >> (i * 8)) != invalidBytes[i])
                     return true;
@@ -242,20 +271,6 @@ void CFitFieldDataState::reset() {
     fieldIndex = 0;
 }
 
-CFitFieldDataState::expand()
-{
-  if(fieldDef->profile()->hasComponents())
-  {
-      uint32_t bitPos = 0;
-      for(CFitFieldProfile& comp :  fieldDef->profile()->getComponents())
-      {
-          (fieldData >> bitPos) & comp.getBitmask();
-          bitPos += comp.getBits();
-      }
-  }
-
-
-}
 
 DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
     CFitFieldDefinition *fieldDef = defintion(latestMessage()->getLocalMesgNr())->getFieldByIndex(fieldIndex);
@@ -267,9 +282,7 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
         // all bytes are read for current field
 
         // new field with data
-        CFitField* field = CFitDataTransformer::buildField(fieldDef, fieldData);
-        // TODO case components
-
+        CFitField* field = CFitDataTransformer::buildField(fieldDef, fieldData, latestMessage());
         if (field->isValidBaseType())
         {
             // Ignore field of unknown base type.
@@ -287,7 +300,15 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
     }
 
     if (fieldIndex >= defintion(latestMessage()->getLocalMesgNr())->getNrOfFields()) {
-        // TODO Now that the entire message is decoded we may evaluate subfields and expand components
+        // Now that the entire message is decoded we may evaluate subfields and expand components
+        for (CFitField *field : latestMessage()->getFields())
+        {
+            CFitDataTransformer::evaluateFieldProfile(latestMessage(), field);
+        }
+        for (CFitField *field : latestMessage()->getFields())
+        {
+            CFitDataTransformer::expandComponents(latestMessage(), field);
+        }
         reset();
         // TODO macro
         // qDebug() << latestMessage()->messageInfo();
@@ -298,5 +319,3 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
     // there are more fields to read for the current message
     return StateFieldData;
 };
-
-

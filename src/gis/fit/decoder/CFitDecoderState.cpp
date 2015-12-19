@@ -22,7 +22,6 @@
 DecodeState CFitDecoderState::processByte(uint8_t &dataByte) {
     incFileBytesRead();
     buildCrc(dataByte);
-    //qDebug() << "entering FIT decoding state " << stateClass << " with data " << dataByte;
     DecodeState state = process(dataByte);
     if (bytesLeftToRead() == 2) {
         if (state != StateRecord)

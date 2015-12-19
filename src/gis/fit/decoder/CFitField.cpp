@@ -22,42 +22,48 @@
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 
 
-CFitField::CFitField(CFitFieldDefinition* fieldDefinition, bool valid)
+CFitField::CFitField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, bool valid)
 : valid(valid)
 {
     globalMesgNr = fieldDefinition->parent()->getGlobalMesgNr();
     fieldDefNr = fieldDefinition->getDefNr();
     baseType = fieldDefinition->getBaseType();
-    fieldProfile = fieldDefinition->profile();
-    //fieldProfile = CFitProfileLockup::getFieldForProfile(fieldDefinition->parent()->getGlobalMesgNr(), fieldDefinition->getDefNr());
-
+    fieldProfile = profile;
 }
 
 
 CFitField::CFitField(const CFitField& copy)
-: globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType), valid(copy.valid)
-{
-    fieldProfile = CFitProfileLockup::getFieldForProfile(globalMesgNr, fieldDefNr);
-}
+: globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType), fieldProfile(copy.fieldProfile),  valid(copy.valid)
+{ }
 
-CFitField::CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, CFitBaseType* baseType, bool valid)
-: globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr), baseType(baseType), valid(valid)
-{
-    fieldProfile = CFitProfileLockup::getFieldForProfile(globalMesgNr, fieldDefNr);
-}
+CFitField::CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, CFitFieldProfile* profile, bool valid)
+: globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr), baseType(profile->getBaseType()), fieldProfile(profile), valid(valid) { }
 
-CFitField::CFitField() : CFitField(GlobalMesgNrInvalid, FieldDefNrInvalid, &InvalidType, false) {}
+CFitField::CFitField()
+{
+    globalMesgNr = GlobalMesgNrInvalid;
+    fieldDefNr = FieldDefNrInvalid;
+    baseType = &InvalidType;
+    fieldProfile = CFitProfileLockup::getFieldForProfile(globalMesgNr, fieldDefNr);
+    valid = false;
+}
 
 QString CFitField::fieldInfo()
 {
         QString name = profile()->getName();
-        QString str = QString("field %1 (%2): %4 %5 %3")
+        QString str = QString(" %6 %1 (%2): %4 %5 %3")
                 .arg(name)
                 .arg(getFieldDefNr())
                 .arg(getBaseType()->str())
                 .arg(getString())
-                .arg(profile()->getUnits());
+                .arg(profile()->getUnits())
+                .arg(profile()->getTyp());
     return str;
+}
+
+uint16_t CFitField::getGlobalMesgNr() const
+{
+    return globalMesgNr;
 }
 
 uint8_t CFitField::getFieldDefNr() const

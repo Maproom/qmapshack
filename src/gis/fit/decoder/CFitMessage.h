@@ -32,7 +32,6 @@ public:
     CFitMessage();
     //CFitMessage(const CFitMessage &mesg);
 
-    CFitDefinitionMessage* getDefinition() const;
     uint16_t getGlobalMesgNr() const;
     uint8_t getLocalMesgNr() const;
 
@@ -49,6 +48,7 @@ public:
 
     CFitProfile* profile() { return messageProfile; }
     QString messageInfo();
+    QList<CFitField*> getFields() { return fields.values(); }
 
 
 private:

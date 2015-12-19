@@ -80,7 +80,6 @@ void CGisItemTrk::readFit(CFitStream& stream)
                     break;
                 case MesgNumRecord:
                 {
-                    qDebug() << mesg->messageInfo();
                     trkpt_t pt = trkpt_t();
 
                     pt.lon = FitTypeHandler::toDegree(mesg->getFieldIntValue(RecordPositionLong));

@@ -71,6 +71,15 @@ bool CFitDecoder::decode(QFile &file) {
         {
             state = stateMap[state]->processByte(dataByte);
             if (state == StateEnd) {
+
+                for(int i = 0; i < data.messages.size(); i++)
+                {
+                    qDebug() << data.messages.at(i)->messageInfo();
+                    if (i % 100 == 0)
+                    {
+                        qDebug() << "nop";
+                    }
+                }
                 return true;
             }
         } catch(QString exstr)

@@ -34,9 +34,9 @@ void CPlotAxis::setLimits(qreal min, qreal max)
 
 void CPlotAxis::setMinMax( qreal givenMin, qreal givenMax )
 {
-    if ( givenMin == givenMax )
+    if(givenMin == givenMax)
     {
-        if ( givenMin != 0.0 )
+        if(0.0 != givenMin)
         {
             givenMin -= givenMin / 10.0;
             givenMax += givenMax / 10.0;
@@ -67,13 +67,13 @@ void CPlotAxis::calc()
     qreal tmpAbs = qFabs(usedMax - usedMin);
     qreal tmp    = qLog10( tmpAbs / 10.0 );
 
-    qreal exponent = ( int ) tmp;
+    qreal exponent = (int) tmp;
     qreal residue  = tmp - exponent;
 
     qreal resSteps[] = {qLog10(0.1), qLog10(0.2), qLog10(0.5), qLog10(1.0), qLog10(2.0), qLog10(5.0), qLog10(10.0)};
     for(const qreal &step : resSteps)
     {
-        if(residue < step)
+        if(residue <= step)
         {
             residue = step;
             break;
@@ -221,7 +221,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
             tic.val = usedMin;
             firstTic = true;
         }
-        else if ( firstTic == true )
+        else if (firstTic)
         {
             tic.val = usedMax;
             firstTic = false;

@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -437,7 +438,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
     update();
 }
 
-void IPlot::wheelEvent( QWheelEvent * e)
+void IPlot::wheelEvent(QWheelEvent * e)
 {
     bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0);
 
@@ -626,78 +627,116 @@ void IPlot::draw()
     drawLegend(p);
 }
 
+QPointF IPlot::getBasePoint(int ptx) const
+{
+    CPlotAxis& yaxis = data->y();
+
+    if(0 >= data->ymin && 0 <= data->ymax)
+    {
+        return QPointF(ptx, bottom - yaxis.val2pt(0));
+    }
+    else if(data->ymin >= 0)
+    {
+        return QPointF(ptx, bottom - yaxis.val2pt(data->ymin));
+    }
+    else if(data->ymax <= 0)
+    {
+        return QPointF(ptx, bottom - yaxis.val2pt(data->ymax));
+    }
+
+    qWarning() << "Requesting basePoint for ptx = " << ptx << "; data->ymin/max = {" << data->ymin << ",  " << data->ymax << "}";
+    return QPointF(ptx, bottom);
+}
+
+QPolygonF IPlot::getVisiblePolygon(const QPolygonF &polyline) const
+{
+    const CPlotAxis &xaxis = data->x();
+    const CPlotAxis &yaxis = data->y();
+
+    int ptx = NOINT;
+    int pty = NOINT;
+
+    QPolygonF line;
+
+    foreach(const QPointF &pt, polyline)
+    {
+        int oldPtx = ptx;
+        int oldPty = pty;
+        ptx = left   + xaxis.val2pt( pt.x() );
+        pty = bottom - yaxis.val2pt( pt.y() );
+
+        if(ptx >= left && ptx <= right)
+        {
+            // if oldPtx is < left, then ptx is the first visible point
+            if(NOINT == oldPtx || oldPtx < left)
+            {
+                // we may need to interpolate things if we just found the first visible point
+                if(NOINT != oldPtx && ptx > left)
+                {
+                    line << getBasePoint(left);
+
+                    int intPty = oldPty + ((oldPty - pty) * (left - oldPtx)) / (oldPtx - ptx);
+                    line << QPointF(left, intPty);
+                }
+                else
+                {
+                    line << getBasePoint(ptx);
+                }
+            }
+
+            line << QPointF(ptx, pty);
+        }
+        else if(ptx > right)
+        {
+            // handle the special case `no point in the visible interval`
+            // -> add interpolated left point
+            if(oldPtx < left)
+            {
+                oldPty = oldPty + (pty - oldPty) / (left - oldPtx);
+                oldPtx = left;
+
+                line << getBasePoint(oldPtx);
+                line << QPointF(oldPtx, oldPty);
+            }
+
+            // interpolate the value at `right`
+            pty = oldPty + ((pty - oldPty) * (right - oldPtx)) / (ptx - oldPtx);
+            ptx = right;
+            line << QPointF(ptx, pty);
+        }
+
+        if(ptx >= right)
+        {
+            break;
+        }
+    }
+    line << getBasePoint(ptx);
+    return line;
+}
+
 void IPlot::drawData(QPainter& p)
 {
     int penIdx = 0;
-    int ptx, pty, oldPtx, oldPty;
-    QList<CPlotData::line_t> lines                  = data->lines;
-    QList<CPlotData::line_t>::const_iterator line   = lines.begin();
-
-    CPlotAxis& xaxis = data->x();
-    CPlotAxis& yaxis = data->y();
-
-    int zero = bottom - yaxis.val2pt(0);
+    QList<CPlotData::line_t> lines                = data->lines;
+    QList<CPlotData::line_t>::const_iterator line = lines.begin();
 
     while(line != lines.end())
     {
-        QPolygonF background;
-        QPolygonF foreground;
-
-        const QPolygonF& polyline       = line->points;
-        QPolygonF::const_iterator point = polyline.begin();
-
-        ptx = left   + xaxis.val2pt( point->x() );
-        pty = bottom - yaxis.val2pt( point->y() );
-        oldPtx = ptx;
-        oldPty = pty;
-
-        background << QPointF(left,zero);
-        background << QPointF(left,pty);
-        background << QPointF(ptx,pty);
-        foreground << QPointF(ptx,pty);
-
-        while(point != polyline.end() && ptx <= right)
-        {
-            oldPtx = ptx;
-            oldPty = pty;
-            ptx = left   + xaxis.val2pt( point->x() );
-            pty = bottom - yaxis.val2pt( point->y() );
-
-            if(oldPtx == ptx)
-            {
-                ++point;
-                continue;
-            }
-
-            if(ptx >= left && ptx <= right)
-            {
-                background << QPointF(ptx,pty);
-                foreground << QPointF(ptx,pty);
-            }
-            ++point;
-        }
-
-        if(point != polyline.end() && (ptx != oldPtx))
-        {
-            pty = oldPty + ((pty - oldPty) * (right - oldPtx)) / (ptx - oldPtx);
-        }
-
-        background << QPointF(right, pty);
-        background << QPointF(right, zero);
-        foreground << QPointF(right, pty);
+        QPolygonF poly = std::move(getVisiblePolygon(line->points));
 
         p.setPen(Qt::NoPen);
         p.setBrush(colors[penIdx]);
-        p.drawPolygon(background);
+        p.drawPolygon(poly);
 
         p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
         p.setBrush(Qt::NoBrush);
-        p.drawPolyline(foreground);
+        poly.pop_front();
+        poly.pop_back();
+        p.drawPolyline(poly);
 
         ++line;
     }
 }
-
 
 void IPlot::drawLabels( QPainter &p )
 {
@@ -979,32 +1018,37 @@ void IPlot::drawDecoration( QPainter &p )
 {
     if(posMouse != NOPOINT)
     {
+        // draw the vertical `you are here` line
         int x = posMouse.x();
-        p.setPen(QPen(Qt::red,2));
-        p.drawLine(x, top, x, bottom);
-
-        foreach(const CPlotData::point_t& tag, data->tags)
+        p.setPen(QPen(Qt::red, 2));
+        if(x >= left && x <= right)
         {
-            int ptx = left + data->x().val2pt( tag.point.x() );
+            p.drawLine(x, top, x, bottom);
 
-            if(qAbs(x - ptx) < 10)
+            // check if the mouse is near a waypoint
+            foreach(const CPlotData::point_t& tag, data->tags)
             {
-                QFont f = CMainWindow::self().getMapFont();
-                f.setBold(true);
-                QFontMetrics fm(f);
-                QRect r = fm.boundingRect(tag.label);
-                r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
-                r.adjust(-3,-2,3,0);
+                int ptx = left + data->x().val2pt( tag.point.x() );
 
-                p.setPen(Qt::NoPen);
-                p.setBrush(Qt::white);
-                p.drawRoundedRect(r,3,3);
+                if(qAbs(x - ptx) < 10)
+                {
+                    QFont f = CMainWindow::self().getMapFont();
+                    f.setBold(true);
+                    QFontMetrics fm(f);
+                    QRect r = fm.boundingRect(tag.label);
+                    r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
+                    r.adjust(-3,-2,3,0);
 
-                p.setFont(f);
-                p.setPen(Qt::darkBlue);
-                p.drawText(r, Qt::AlignCenter, tag.label);
+                    p.setPen(Qt::NoPen);
+                    p.setBrush(Qt::white);
+                    p.drawRoundedRect(r,3,3);
 
-                break;
+                    p.setFont(f);
+                    p.setPen(Qt::darkBlue);
+                    p.drawText(r, Qt::AlignCenter, tag.label);
+
+                    break;
+                }
             }
         }
     }
@@ -1012,60 +1056,29 @@ void IPlot::drawDecoration( QPainter &p )
     if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
     {
         int penIdx = 3;
-        int ptx, pty, oldPtx, ptx1;
 
-        QPolygonF background;
-        QPolygonF foreground;
+        const QPolygonF& polyline = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1 + 1);
+        QPolygonF line            = getVisiblePolygon(polyline);
 
-        CPlotAxis& xaxis = data->x();
-        CPlotAxis& yaxis = data->y();
-
-        const QPolygonF& polyline       = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1 + 1);
-        QPolygonF::const_iterator point = polyline.begin();
-
-        ptx = left   + xaxis.val2pt( point->x() );
-        pty = bottom - yaxis.val2pt( point->y() );
-        ptx1 = oldPtx = ptx;
-
-        background << QPointF(ptx,bottom);
-        background << QPointF(ptx,pty);
-
-        foreground << QPointF(ptx,pty);
-
-        while(point != polyline.end())
+        // avoid drawing if the whole interval is outside the visible range
+        if(!(line.first().x() >= right || line.last().x() <= left))
         {
-            ptx = left   + xaxis.val2pt( point->x() );
-            pty = bottom - yaxis.val2pt( point->y() );
+            // draw the background
+            p.setPen(Qt::NoPen);
+            p.setBrush(colors[penIdx]);
+            p.drawPolygon(line);
 
-            if(oldPtx == ptx)
-            {
-                ++point;
-                continue;
-            }
-            oldPtx = ptx;
+            // draw the foreground
+            p.setPen(thinLine ? pensThin[penIdx] : pens[penIdx]);
+            p.setBrush(Qt::NoBrush);
+            line.pop_front();
+            line.pop_back();
+            p.drawPolyline(line);
 
-            if(ptx >= left && ptx <= right)
-            {
-                background << QPointF(ptx,pty);
-                foreground << QPointF(ptx,pty);
-            }
-            ++point;
+            p.setPen(QPen(Qt::darkBlue, 2));
+            p.drawLine(line.first().x(), top, line.first().x(), bottom);
+            p.drawLine(line.last().x(),  top, line.last().x(),  bottom);
         }
-
-        background << QPointF(ptx,pty);
-        background << QPointF(ptx,bottom);
-
-        p.setPen(Qt::NoPen);
-        p.setBrush(colors[penIdx]);
-        p.drawPolygon(background);
-
-        p.setPen(thinLine ? pensThin[penIdx] : pens[penIdx]);
-        p.setBrush(Qt::NoBrush);
-        p.drawPolyline(foreground);
-
-        p.setPen(QPen(Qt::darkBlue, 2));
-        p.drawLine(ptx1, top, ptx1, bottom);
-        p.drawLine(ptx, top, ptx, bottom);
     }
 
     if(!scrOptRange.isNull())

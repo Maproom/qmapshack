@@ -94,6 +94,8 @@ protected:
     void setSizeTrackInfo();
     void setSizeDrawArea();
 
+    QPointF getBasePoint(int ptx) const;
+
     void draw(QPainter& p);
     void draw();
     void drawData(QPainter& p);
@@ -176,6 +178,7 @@ protected:
 
 private:
     void setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
+    QPolygonF getVisiblePolygon(const QPolygonF &polyline) const;
 };
 
 #endif //IPLOT_H

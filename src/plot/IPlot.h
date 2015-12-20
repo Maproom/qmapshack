@@ -178,7 +178,7 @@ protected:
 
 private:
     void setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
-    QPolygonF getVisiblePolygon(const QPolygonF &polyline) const;
+    QPolygonF getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) const;
 };
 
 #endif //IPLOT_H

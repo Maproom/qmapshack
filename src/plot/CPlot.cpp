@@ -72,12 +72,8 @@ void CPlot::updateData()
     {
         foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
         {
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
-            {
-                continue;
-            }
-
-            if(getY(trkpt) != NOFLOAT)
+            if(!(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+                && getY(trkpt) != NOFLOAT)
             {
                 line << QPointF(getX(trkpt), getY(trkpt) * factor);
             }

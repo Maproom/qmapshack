@@ -426,6 +426,9 @@
    <property name="text">
     <string>Help</string>
    </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
   </action>
   <action name="actionSetupMapView">
    <property name="icon">

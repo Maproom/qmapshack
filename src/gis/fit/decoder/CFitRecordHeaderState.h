@@ -24,6 +24,8 @@
 class CFitRecordHeaderState : public CFitDecoderState {
 public:
     CFitRecordHeaderState(shared_state_data& data) : CFitDecoderState(data, StateRecord) { reset(); };
+    virtual ~CFitRecordHeaderState() {};
+
     virtual DecodeState process(uint8_t &dataByte);
     virtual void reset() {};
 };

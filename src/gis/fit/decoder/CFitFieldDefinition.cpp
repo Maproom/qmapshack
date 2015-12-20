@@ -19,17 +19,15 @@
 #include "gis/fit/decoder/CFitFieldDefinition.h"
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
-#include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitProfileLockup.h"
-#include "gis/fit/defs/fit_enums.h"
-#include "gis/fit/defs/fit_const.h"
+
 
 
 static const uint8_t EndianFlagMask = 0x80;
 
 
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t defNr, uint8_t size, uint8_t type)
-        : parentDefintion(parent), defNr(defNr), size(size), type(type) {
+        : defNr(defNr), size(size), type(type), parentDefintion(parent) {
     baseType = CFitBaseTypeMap::get(type);
     if(parentDefintion)
         fieldProfile = CFitProfileLockup::getFieldForProfile(parentDefintion->getGlobalMesgNr(), defNr);
@@ -37,21 +35,8 @@ CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t 
         fieldProfile = nullptr;
 }
 
-CFitFieldDefinition::CFitFieldDefinition() : CFitFieldDefinition(nullptr, 0xff, 0, TypeInvalid) { }
+CFitFieldDefinition::CFitFieldDefinition() : CFitFieldDefinition(nullptr, LocalMesgNrInvalid, 0, TypeInvalid) { }
 
-/*
-CFitFieldDefinition::CFitFieldDefinition(const CFitFieldDefinition& copy)
-        : parentDefintion(copy.parentDefintion), defNr(copy.defNr), size(copy.size), type(copy.type)
-        //, baseType(copy.baseType), fieldProfile(copy.fieldProfile)
-{
-
-    baseType = CFitBaseTypeMap::get(type);
-    if(parentDefintion)
-        fieldProfile = CFitProfileLockup::getFieldForProfile(parentDefintion->getGlobalMesgNr(), defNr);
-    else
-        fieldProfile = nullptr;
-}
-*/
 uint8_t CFitFieldDefinition::getDefNr() const {
     return defNr;
 }
@@ -72,26 +57,3 @@ CFitBaseType* CFitFieldDefinition::getBaseType() const
 {
     return baseType;
 }
-
-
-bool CFitFieldDefinition::isValidBaseType() const {
-    return baseType != 0 && baseType->nr() != TypeInvalid;
-}
-/*
-bool CFitFieldDefinition::operator==(const CFitFieldDefinition &field) const {
-    if (defNr != field.defNr)
-        return false;
-
-    if (size != field.size)
-        return false;
-
-    if (type != field.type)
-        return false;
-
-    return true;
-}
-
-bool CFitFieldDefinition::operator!=(const CFitFieldDefinition &field) const {
-    return !(*this == field);
-}
- */

@@ -31,17 +31,12 @@ class CFitFieldDefinition {
 public:
     CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t defNr, uint8_t size, uint8_t type);
     CFitFieldDefinition();
-    //CFitFieldDefinition(const CFitFieldDefinition& copy);
 
     uint8_t getDefNr() const;
     uint8_t getSize() const;
     uint8_t getType() const;
     CFitBaseType* getBaseType() const;
     bool getEndianAbilityFlag() const;
-    bool isValidBaseType() const;
-
-    //bool operator==(const CFitFieldDefinition& field) const;
-    //bool operator!=(const CFitFieldDefinition& field) const;
 
     CFitDefinitionMessage* parent() { return parentDefintion; }
     CFitFieldProfile* profile() { return fieldProfile; }

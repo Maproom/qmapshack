@@ -51,7 +51,8 @@ public:
         QList<CFitMessage*> messages;
     };
 
-    CFitDecoderState(shared_state_data &data, DecodeState stateClass) : data(data), stateClass(stateClass) { };
+    CFitDecoderState(shared_state_data &data, DecodeState stateClass) : data(data) { };
+    virtual ~CFitDecoderState() {};
 
     virtual void reset() = 0;
     DecodeState processByte(uint8_t &dataByte);
@@ -80,7 +81,6 @@ private:
     void buildCrc(uint8_t byte);
 
     shared_state_data &data;
-    DecodeState stateClass;
 };
 
 

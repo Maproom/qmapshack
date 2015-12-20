@@ -105,7 +105,7 @@ QString CFitIntField<T>::getString()
 template <class T>
 uint8_t* CFitIntField<T>::getBytes()
 {
-    // TODO
+    return (uint8_t*) &value;
 }
 
 template <class T>
@@ -160,9 +160,9 @@ private:
 class CFitByteField : public CFitField
 {
 public:
-    CFitByteField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, uint8_t* value, bool valid)
-            : CFitField(fieldDefinition, profile, valid), value(value) {};
-    CFitByteField() :  CFitField(), value(nullptr) {}
+    CFitByteField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, uint8_t* value, uint8_t size, bool valid)
+            : CFitField(fieldDefinition, profile, valid), value(value), size(size) {};
+    CFitByteField() :  CFitField(), value(nullptr), size(0) {}
 
     virtual QString getString();
     virtual uint8_t* getBytes();
@@ -172,6 +172,7 @@ public:
 
 private:
     uint8_t* value;
+    uint8_t size;
 };
 
 #endif // CFITFIELD_H

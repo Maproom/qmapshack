@@ -24,20 +24,19 @@
 static const uint8_t ArchitecureEndianMask = 0x01;
 
 
-// TODO const invalid local and global mesg nr
 CFitDefinitionMessage::CFitDefinitionMessage()
-        : CFitDefinitionMessage(0xff) {}
+        : CFitDefinitionMessage(LocalMesgNrInvalid) {}
 
 CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
-: localMesgNr(copy.localMesgNr), globalMesgNr(copy.globalMesgNr), architecture(copy.architecture),
-  nrOfFields(copy.nrOfFields), fields(copy.fields)
+: globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields), localMesgNr(copy.localMesgNr),
+  fields(copy.fields)
         //, messageProfile(copy.messageProfile)
 {
     messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
 }
 
 CFitDefinitionMessage::CFitDefinitionMessage(uint8_t localMesgNr)
-        : localMesgNr(localMesgNr), globalMesgNr(0xffff), architecture(0), nrOfFields(0), fields(), messageProfile(nullptr) {}
+        : globalMesgNr(GlobalMesgNrInvalid),  architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields(), messageProfile(nullptr) {}
 
 
 void CFitDefinitionMessage::setArchiteture(uint8_t arch)
@@ -107,9 +106,10 @@ CFitFieldDefinition* CFitDefinitionMessage::getFieldByIndex(const uint16_t index
 }
 
 
-QString CFitDefinitionMessage::messageInfo()
+QStringList CFitDefinitionMessage::messageInfo()
 {
-    QString str = QString("Definition %1 (%2) %3 [loc] %4 [arch] %5 [#field]")
+    QStringList list;
+    list << QString("Definition %1 (%2) %3 [loc] %4 [arch] %5 [#field]")
             .arg(profile() ? profile()->getName() : "?")
             .arg(getGlobalMesgNr())
             .arg(getLocalMesgNr())
@@ -125,9 +125,9 @@ QString CFitDefinitionMessage::messageInfo()
                 .arg(field.getType())
         .arg(field.getSize())
         .arg(field.getEndianAbilityFlag());
-        str += fstr;
+        list << fstr;
     }
-    return str;
+    return list;
 }
 
 

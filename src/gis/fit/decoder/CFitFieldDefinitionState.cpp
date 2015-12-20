@@ -50,7 +50,6 @@ DecodeState CFitFieldDefinitionState::process(uint8_t &dataByte) {
             def->addField(CFitFieldDefinition(def, defNr, size, type));
             reset();
             if (def->getFields().size() >= def->getNrOfFields()) {
-                qDebug() << def->messageInfo();
                 return StateRecord;
             }
             else {

@@ -49,7 +49,7 @@ public:
     CFitFieldDefinition* getField(const uint8_t fieldNum);
     CFitFieldDefinition* getFieldByIndex(const uint16_t index);
 
-    QString messageInfo();
+    QStringList messageInfo();
 
 
 private:

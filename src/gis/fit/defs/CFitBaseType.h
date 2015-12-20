@@ -43,13 +43,13 @@ typedef enum
 class CFitBaseType
 {
 public:
-    CFitBaseType(BaseTypeNr baseTypeNr, char* invalidBytes, uint8_t size, QString str);
+    CFitBaseType(BaseTypeNr baseTypeNr, uint8_t* invalidBytes, uint8_t size, QString str);
     CFitBaseType();
-    CFitBaseType(const CFitBaseType& copy);
+    ~CFitBaseType();
 
     uint8_t size();
     BaseTypeNr nr();
-    char* invalidValueBytes();
+    uint8_t* invalidValueBytes();
     bool isInteger();
     bool isSignedInt();
     bool isUnsignedInt();
@@ -58,7 +58,7 @@ public:
     QString str();
 
 private:
-    char* invalidBytes;
+    uint8_t* invalidBytes;
     uint8_t typeSize;
     BaseTypeNr baseTypeNr;
     QString name;

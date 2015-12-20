@@ -58,6 +58,36 @@ void CFitDecoder::resetSharedData()
     data.crc = 0;
 }
 
+void printDefintions(QList<CFitDefinitionMessage*> defs)
+{
+    for(int i = 0; i < defs.size(); i++)
+    {
+        for(QString& s: defs.at(i)->messageInfo())
+        {
+            qDebug() << s;
+        }
+    }
+}
+
+void printMessages(QList<CFitMessage*> messages)
+{
+
+    for(int i = 0; i < messages.size(); i++)
+    {
+        for(QString& s: messages.at(i)->messageInfo())
+        {
+            qDebug() << s;
+        }
+    }
+}
+
+void CFitDecoder::printDebugInfo()
+{
+    // TODO move to better place and check for debug flag before entering loops
+    printDefintions(data.defintions.values());
+    printMessages(data.messages);
+
+}
 bool CFitDecoder::decode(QFile &file) {
     resetSharedData();
 
@@ -70,24 +100,19 @@ bool CFitDecoder::decode(QFile &file) {
         try
         {
             state = stateMap[state]->processByte(dataByte);
-            if (state == StateEnd) {
-
-                for(int i = 0; i < data.messages.size(); i++)
-                {
-                    qDebug() << data.messages.at(i)->messageInfo();
-                    if (i % 100 == 0)
-                    {
-                        qDebug() << "nop";
-                    }
-                }
+            if (state == StateEnd)
+            {
+                printDebugInfo();
                 return true;
             }
         } catch(QString exstr)
         {
+            printDebugInfo();
             qWarning() << exstr;
             return false;
         }
     }
+    printDebugInfo();
     // unexpected end of file
     return false;
 }

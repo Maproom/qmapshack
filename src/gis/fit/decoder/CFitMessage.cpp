@@ -38,20 +38,18 @@ CFitMessage::CFitMessage()  {
 //CFitMessage::CFitMessage(const CFitMessage &mesg) : definition(mesg.definition), fields(mesg.fields) { }
 
 
-QString CFitMessage::messageInfo()
+QStringList CFitMessage::messageInfo()
 {
-    QString str = QString("Message %1 (%3)  %4 [loc]")
+    QStringList list;
+    list << QString("Message %1 (%3) %4 [loc]")
     .arg(messageProfile->getName())
     .arg(getGlobalMesgNr())
     .arg(getLocalMesgNr());
-    qDebug() << str;
 
     for(CFitField* field: fields) {
-        QString fstr = field->fieldInfo();
-        qDebug() << fstr;
-        str += "{" + fstr + "}";
+        list << field->fieldInfo();
     }
-    return str;
+    return list;
 }
 uint16_t CFitMessage::getGlobalMesgNr() const
 {

@@ -49,8 +49,6 @@ static const uint8_t RecordHeaderMesgMask = ((uint8_t) 0x0F); // bit 0-3: 0000 1
 static const uint8_t RecordHeaderTypeBit =  ((uint8_t) 0x80); // bit 7: 1000 0000
 static const uint8_t RecordHeaderTimeMesgMask =  ((uint8_t) 0x60); // bit 5-6: 0110 0000
 static const uint8_t RecordHeaderTimeMesgShift = 5;
-static const uint8_t RecordHeaderTimeOffsetMask = 0x1F; // bit 0-4: 0001 1111
-
 
 
 DecodeState CFitRecordHeaderState::process(uint8_t &dataByte) {
@@ -90,9 +88,4 @@ DecodeState CFitRecordHeaderState::process(uint8_t &dataByte) {
             return StateFieldData;
         }
     }
-    // TODO wont work
-    //if (definition().getGlobalMesgNr() == FIT_MESG_NUM_INVALID) {
-    //    setException("Missing FIT message definition for local message number " + (localMessageType) + ".");
-    //    return StateError;
-    //}
 }

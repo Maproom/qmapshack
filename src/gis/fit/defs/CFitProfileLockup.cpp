@@ -1053,7 +1053,6 @@ CFitProfile* CFitProfileLockup::getProfile(uint16_t globalMesgNr)
 
 CFitFieldProfile * CFitProfileLockup::getFieldForProfile(uint16_t globalMesgNr, uint8_t fieldDefNr)
 {
-    CFitFieldProfile* f = nullptr;
     if (allProfiles.contains(globalMesgNr)) {
         return  allProfiles[globalMesgNr]->getField(fieldDefNr);
     }

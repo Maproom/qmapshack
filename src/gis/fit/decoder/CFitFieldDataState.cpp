@@ -16,13 +16,14 @@
 
  **********************************************************************************************/
 
-#include <gis/fit/defs/CFitProfileLockup.h>
+#include "gis/fit/defs/CFitProfileLockup.h"
 #include "gis/fit/decoder/CFitFieldDataState.h"
 #include "gis/fit/defs/fit_const.h"
 #include "gis/fit/defs/fit_fields.h"
+#include "CFitByteDataTransformer.h"
 
 
-class CFitDataTransformer
+class CFitFieldBuilder
 {
 public:
     static void evaluateFieldProfile(CFitMessage* message, CFitField* field)
@@ -80,31 +81,31 @@ public:
         CFitFieldProfile* fieldProfile = CFitProfileLockup::getFieldForProfile(message->getGlobalMesgNr(), def->getDefNr());
         if(baseType->isSignedInt())
         {
-            int ival = CFitDataTransformer::getIntValue(baseType, fieldData);
+            int ival = CFitByteDataTransformer::getIntValue(baseType, fieldData);
             CFitIntField<int32_t>* f = new CFitIntField<int32_t>(def, fieldProfile, ival, valid);
             return f;
         }
         else if(baseType->isUnsignedInt())
         {
-            unsigned  int uval = CFitDataTransformer::getUIntValue(baseType, fieldData);
+            unsigned  int uval = CFitByteDataTransformer::getUIntValue(baseType, fieldData);
             CFitIntField<uint32_t>* f = new CFitIntField<uint32_t>(def, fieldProfile, uval, valid);
             return f;
         }
         else if(baseType->isFloat())
         {
-            double dval = CFitDataTransformer::getDoubleValue(baseType, fieldData);
+            double dval = CFitByteDataTransformer::getDoubleValue(baseType, fieldData);
             CFitDoubleField* f = new CFitDoubleField(def, fieldProfile, dval, valid);
             return f;
         }
         else if(baseType->nr() == TypeString)
         {
-            QString str = CFitDataTransformer::getString(fieldData);
+            QString str = CFitByteDataTransformer::getString(fieldData);
             CFitStringField* f = new CFitStringField(def, fieldProfile, str, valid);
             return f;
         }
         else if(baseType->nr() == TypeByte)
         {
-            CFitByteField* f = new CFitByteField(def, fieldProfile, (uint8_t*)fieldData, valid);
+            CFitByteField* f = new CFitByteField(def, fieldProfile, (uint8_t*)fieldData, def->getSize(), valid);
             return f;
         }
         else
@@ -133,11 +134,9 @@ private:
         }
     }
 
-
-
     static bool isValidValue(uint8_t* rawData, uint8_t size, CFitBaseType* baseType)
     {
-        char* invalidBytes = baseType->invalidValueBytes();
+        uint8_t* invalidBytes = baseType->invalidValueBytes();
         if (baseType->nr() == TypeString || baseType->nr() == TypeByte)
         {
             // all byts set to invalid value
@@ -145,7 +144,7 @@ private:
             for(uint8_t i = 0; i < size; i++)
             {
                 // string and enum specify one byte for invalid value
-                if((rawData[i] >> (i * 8)) == invalidBytes[0])
+                if(rawData[i] == invalidBytes[0])
                     invalidCount++;
             }
             return (invalidCount == size);
@@ -157,111 +156,13 @@ private:
 
             for(uint8_t i = 0; i < size; i++)
             {
-                if((rawData[i] >> (i * 8)) != invalidBytes[i])
+                if(rawData[i] != invalidBytes[i])
                     return true;
             }
             return false;
         }
         // invalid type
         return false;
-    }
-
-
-    static unsigned int getUIntValue(CFitBaseType* baseType, uint8_t* rawData)
-    {
-        switch(baseType->nr()) {
-            case TypeUint8:
-            case TypeUint8z:
-            case TypeEnum:
-                return getUint8(rawData);
-            case TypeUint16:
-            case TypeUint16z:
-                return getUint16(rawData);
-            case TypeUint32:
-            case TypeUint32z:
-                return getUint32(rawData);
-        }
-    }
-
-    static int getIntValue(CFitBaseType* baseType, uint8_t* rawData)
-    {
-        switch(baseType->nr()) {
-            case TypeSint8:
-                return getSint8(rawData);
-            case TypeSint16:
-                return getSint16(rawData);
-            case TypeSint32:
-                return getSint32(rawData);
-        }
-    }
-
-    static double getDoubleValue(CFitBaseType* baseType, uint8_t* rawData)
-    {
-        switch(baseType->nr()) {
-            case TypeFloat32:
-                return getFloat32(rawData);
-            case TypeFloat64:
-                return getFloat64(rawData);
-        }
-    }
-
-    static uint8_t getUint8(uint8_t* rawData)
-    {
-        return (uint8_t) rawData[0];
-    }
-    static uint16_t getUint16(uint8_t* rawData)
-    {
-        return ((uint16_t)rawData[1] << 8) | (uint16_t)rawData[0];
-    }
-    static uint32_t getUint32(uint8_t* rawData)
-    {
-        return (((uint32_t)rawData[3] << 24) | ((uint32_t)rawData[2] << 16) | ((uint32_t)rawData[1] << 8) | (uint32_t)rawData[0]);
-    }
-    static int8_t getSint8(uint8_t* rawData)
-    {
-        return (int8_t) rawData[0];
-    }
-    static int16_t getSint16(uint8_t* rawData)
-    {
-        return ((int16_t)rawData[1] << 8) | (int16_t)rawData[0];
-    }
-    static int32_t getSint32(uint8_t* rawData)
-    {
-        return (((int32_t)rawData[3] << 24) | ((int32_t)rawData[2] << 16) | ((int32_t)rawData[1] << 8) | (int32_t)rawData[0]);
-    }
-    static float getFloat32(uint8_t* rawData)
-    {
-        int32_t fValue = (int32_t) (((int32_t)rawData[3] << 24) | ((int32_t)rawData[2] << 16) | ((int32_t)rawData[1] << 8) | rawData[0]);
-        float value;
-        memcpy(&value, &fValue, sizeof(float));
-        return value;
-    }
-    static double getFloat64(uint8_t* rawData)
-    {
-        unsigned long long dValue = ((unsigned long long) rawData[7] << 56) | ((unsigned long long) rawData[6] << 48)
-                                    | ((unsigned long long) rawData[5] << 40) | ((unsigned long long) rawData[4] << 32)
-                                    | ((unsigned long long) rawData[3] << 24) | ((unsigned long long) rawData[2] << 16)
-                                    | ((unsigned long long) rawData[1] << 8) | rawData[0];
-        double value;
-        memcpy(&value, &dValue, sizeof(double));
-        return value;
-    }
-
-    static QString getString(uint8_t* rawData)
-    {
-        QString str;
-        uint8_t i = 0;
-        while(rawData[i] != 0)
-        {
-            str = str.append(rawData[i]);
-            i++;
-        }
-        return str;
-    }
-    uint8_t* getBytes(uint8_t* rawData)
-    {
-        // TODO
-        return nullptr;
     }
 };
 
@@ -282,7 +183,7 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
         // all bytes are read for current field
 
         // new field with data
-        CFitField* field = CFitDataTransformer::buildField(fieldDef, fieldData, latestMessage());
+        CFitField* field = CFitFieldBuilder::buildField(fieldDef, fieldData, latestMessage());
         if (field->isValidBaseType())
         {
             // Ignore field of unknown base type.
@@ -303,11 +204,11 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
         // Now that the entire message is decoded we may evaluate subfields and expand components
         for (CFitField *field : latestMessage()->getFields())
         {
-            CFitDataTransformer::evaluateFieldProfile(latestMessage(), field);
+            CFitFieldBuilder::evaluateFieldProfile(latestMessage(), field);
         }
         for (CFitField *field : latestMessage()->getFields())
         {
-            CFitDataTransformer::expandComponents(latestMessage(), field);
+            CFitFieldBuilder::expandComponents(latestMessage(), field);
         }
         reset();
         // TODO macro

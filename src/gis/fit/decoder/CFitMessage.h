@@ -47,7 +47,7 @@ public:
     double getFieldDoubleValue(const uint8_t fieldDefNum);
 
     CFitProfile* profile() { return messageProfile; }
-    QString messageInfo();
+    QStringList messageInfo();
     QList<CFitField*> getFields() { return fields.values(); }
 
 

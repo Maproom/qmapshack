@@ -20,6 +20,7 @@
 #include "gis/fit/defs/CFitProfileLockup.h"
 #include "gis/fit/decoder/CFitField.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
+#include "CFitByteDataTransformer.h"
 
 
 CFitField::CFitField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, bool valid)
@@ -33,11 +34,11 @@ CFitField::CFitField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* pro
 
 
 CFitField::CFitField(const CFitField& copy)
-: globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType), fieldProfile(copy.fieldProfile),  valid(copy.valid)
+: globalMesgNr(copy.globalMesgNr), fieldProfile(copy.fieldProfile), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType),  valid(copy.valid)
 { }
 
 CFitField::CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, CFitFieldProfile* profile, bool valid)
-: globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr), baseType(profile->getBaseType()), fieldProfile(profile), valid(valid) { }
+: globalMesgNr(globalMesgNr), fieldProfile(profile), fieldDefNr(fieldDefNr),baseType(profile->getBaseType()), valid(valid) { }
 
 CFitField::CFitField()
 {
@@ -51,13 +52,14 @@ CFitField::CFitField()
 QString CFitField::fieldInfo()
 {
         QString name = profile()->getName();
-        QString str = QString(" %6 %1 (%2): %4 %5 %3")
+        QString str = QString("%1 %2 (%3): %4 %5 %6 %7")
+                .arg(profile()->getTyp())
                 .arg(name)
                 .arg(getFieldDefNr())
-                .arg(getBaseType()->str())
                 .arg(getString())
                 .arg(profile()->getUnits())
-                .arg(profile()->getTyp());
+                .arg(getBaseType()->str())
+                .arg(valid ? "" : "<invalid>");
     return str;
 }
 
@@ -96,24 +98,27 @@ QString CFitDoubleField::getString()
 
 uint8_t* CFitDoubleField::getBytes()
 {
-    // TODO
+    // accessing bytes from double does not make sense in most cases...
+    return reinterpret_cast<uint8_t*>(&value);
 }
 
 int CFitDoubleField::getSIntValue()
 {
-    return (value + 0.5);
+    return (int)(value + 0.5);
 }
 
 unsigned int CFitDoubleField::getUIntValue()
 {
-    return (value + 0.5);
+    return (unsigned int) (value + 0.5);
 }
 
 
 
 uint8_t* CFitStringField::getBytes()
 {
-    // TODO
+    QByteArray ba = value.toLatin1();
+    uint8_t *asciiData = reinterpret_cast<uint8_t*>(ba.data());
+    return asciiData;
 }
 
 int CFitStringField::getSIntValue()
@@ -135,26 +140,51 @@ double CFitStringField::getDoubleValue()
 
 QString CFitByteField::getString()
 {
-    return ""; // TODO
+    return CFitByteDataTransformer::getString(value, size);
 }
 
 uint8_t* CFitByteField::getBytes()
 {
-    // TODO
     return value;
 }
 
 int CFitByteField::getSIntValue()
 {
-// TODO
+    switch(size)
+    {
+        case 0:
+            return 0;
+        case 1:
+            return CFitByteDataTransformer::getSint8(value);
+        case 2:
+            return CFitByteDataTransformer::getSint16(value);
+        default:
+            return CFitByteDataTransformer::getSint32(value);
+    }
 }
 
 unsigned int CFitByteField::getUIntValue()
 {
-    // TODO
+
+    switch(size)
+    {
+        case 0:
+            return 0;
+        case 1:
+            return CFitByteDataTransformer::getUint8(value);
+        case 2:
+            return CFitByteDataTransformer::getUint16(value);
+        default:
+            return CFitByteDataTransformer::getUint32(value);
+    }
 }
 
 double CFitByteField::getDoubleValue()
 {
-    // TODO
+    if(size == 4)
+        return CFitByteDataTransformer::getFloat32(value);
+    if(size== 8)
+        return CFitByteDataTransformer::getFloat64(value);
+
+    return 0;
 }

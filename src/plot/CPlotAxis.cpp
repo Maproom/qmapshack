@@ -245,7 +245,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
         else
         {
             tic.val += interval;
-            if ( ( tic.val - usedMax ) > interval / 20 )
+            if(tic.val > usedMax)
             {
                 return nullptr;
             }
@@ -271,7 +271,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
         else
         {
             tic.val += interval;
-            if ( ( tic.val - usedMax ) > interval / 20 )
+            if(tic.val > usedMax)
             {
                 tic.val = usedMax;
                 lastTic = true;

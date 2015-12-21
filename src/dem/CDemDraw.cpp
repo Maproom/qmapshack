@@ -68,11 +68,19 @@ void CDemDraw::setProjection(const QString& proj)
 
 void CDemDraw::setupDemPath()
 {
-    CDemPathSetup dlg(demPaths);
+    QStringList paths = demPaths;
+    CDemPathSetup dlg(paths);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;
     }
+
+    setupDemPath(paths);
+}
+
+void CDemDraw::setupDemPath(const QStringList &paths)
+{
+    demPaths = paths;
 
     foreach(CDemDraw * dem, dems)
     {

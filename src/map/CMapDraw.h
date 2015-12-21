@@ -74,6 +74,11 @@ public:
      */
     void setProjection(const QString& proj);
 
+    static const QStringList& getMapPaths()
+    {
+        return mapPaths;
+    }
+
     static void setupMapPath();
     static void setupMapPath(const QString &path);
     static void setupMapPath(const QStringList &paths);

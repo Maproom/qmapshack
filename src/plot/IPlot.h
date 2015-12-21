@@ -51,7 +51,7 @@ public:
         solid = yes;
     }
 
-    bool isZoomed();
+    bool isZoomed() const;
 
 signals:
     void sigMouseClickState(int);
@@ -94,6 +94,8 @@ protected:
     void setSizeTrackInfo();
     void setSizeDrawArea();
 
+    QPointF getBasePoint(int ptx) const;
+
     void draw(QPainter& p);
     void draw();
     void drawData(QPainter& p);
@@ -117,8 +119,8 @@ protected:
     bool needsRedraw = true;
 
     bool showScale = true;
-    bool thinLine = false;
-    bool solid = false;
+    bool thinLine  = false;
+    bool solid     = false;
 
     QImage buffer;
     QPoint posMouse = NOPOINT;
@@ -137,16 +139,16 @@ protected:
 
     QFontMetrics fm;
 
-    int left = 0;
-    int right = 0;
-    int top = 0;
+    int left   = 0;
+    int right  = 0;
+    int top    = 0;
     int bottom = 0;
 
     int deadAreaX = 0;
     int deadAreaY = 0;
 
-    int fontWidth = 0;
-    int fontHeight = 0;
+    int fontWidth    = 0;
+    int fontHeight   = 0;
     int scaleWidthX1 = 0;
     int scaleWidthY1 = 0;
 
@@ -156,9 +158,9 @@ protected:
     QRect rectIconArea;
     QRect rectTrackInfo;
 
-    static QPen pens[];
-    static QPen pensThin[];
-    static QColor colors[];
+    static const QPen pens[];
+    static const QPen pensThin[];
+    static const QColor colors[];
 
     QMenu * menu;
     QAction * actionResetZoom;
@@ -173,6 +175,10 @@ protected:
     QPointer<CScrOptRangeTrk> scrOptRange;
 
     CMouseDummy dummyMouse;
+
+private:
+    void setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
+    QPolygonF getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) const;
 };
 
 #endif //IPLOT_H

@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,27 +31,27 @@
 #include <QKeyEvent>
 #include <QtWidgets>
 
-QPen IPlot::pens[] =
+const QPen IPlot::pens[] =
 {
-    QPen(Qt::darkBlue,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(QColor("#C00000"),3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::yellow,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::green,3,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    QPen(Qt::darkBlue,      3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(QColor("#C00000"), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::yellow,        3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::green,         3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
-QPen IPlot::pensThin[] =
+const QPen IPlot::pensThin[] =
 {
-    QPen(Qt::darkBlue,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkRed,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkYellow,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkGreen,2,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    QPen(Qt::darkBlue,   2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkRed,    2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkYellow, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkGreen,  2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
-QColor IPlot::colors[] =
+const QColor IPlot::colors[] =
 {
     QColor(Qt::blue)
-    , QColor(0,0,0,0)
-    , QColor(0,0,0,0)
+    , QColor(0, 0, 0, 0)
+    , QColor(0, 0, 0, 0)
     , QColor(Qt::darkGreen)
 };
 
@@ -89,9 +90,9 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     }
 
     menu = new QMenu(this);
-    actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Reset Zoom"), this, SLOT(slotResetZoom()));
+    actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, SLOT(slotResetZoom()));
     actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
-    actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, SLOT(slotSave()));
+    actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -287,20 +288,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
 
         // set point of focus at track object
         qreal x = data->x().pt2val(posMouse.x() - left);
-        if(data->axisType == CPlotData::eAxisLinear)
-        {
-            if(trk)
-            {
-                trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseMove, objectName());
-            }
-        }
-        else if(data->axisType == CPlotData::eAxisTime)
-        {
-            if(trk)
-            {
-                trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseMove, objectName());
-            }
-        }
+        setMouseFocus(x, CGisItemTrk::eFocusMouseMove);
 
         // update canvas if visible
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -311,6 +299,23 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         e->accept();
     }
     update();
+}
+
+void IPlot::setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm)
+{
+    if(nullptr == trk)
+    {
+        return;
+    }
+
+    if(data->axisType == CPlotData::eAxisLinear)
+    {
+        trk->setMouseFocusByDistance(pos, fm, objectName());
+    }
+    else if(data->axisType == CPlotData::eAxisTime)
+    {
+        trk->setMouseFocusByTime(pos, fm, objectName());
+    }
 }
 
 void IPlot::mousePressEvent(QMouseEvent * e)
@@ -343,15 +348,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 // In idle state a mouse click will select the first point of a range
                 if(trk->setMode(CGisItemTrk::eModeRange, objectName()))
                 {
-                    if(data->axisType == CPlotData::eAxisLinear)
-                    {
-                        trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, objectName());
-                    }
-                    else if(data->axisType == CPlotData::eAxisTime)
-                    {
-                        trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, objectName());
-                    }
-
+                    setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
                     mouseClickState = eMouseClick1st;
                 }
                 else
@@ -369,15 +366,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
             case eMouseClick1st:
             {
                 // In 1st click state a mouse click will select the second point of a range and display options
-                if(data->axisType == CPlotData::eAxisLinear)
-                {
-                    trk->setMouseFocusByDistance(x, CGisItemTrk::eFocusMouseClick, objectName());
-                }
-                else if(data->axisType == CPlotData::eAxisTime)
-                {
-                    trk->setMouseFocusByTime(x, CGisItemTrk::eFocusMouseClick, objectName());
-                }
-
+                setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
                 /*
                     As the screen option is created on the fly it has to be connected to all slots,too.
                     Later, when destroyed the slots will be disconnected automatically.
@@ -449,7 +438,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
     update();
 }
 
-void IPlot::wheelEvent( QWheelEvent * e)
+void IPlot::wheelEvent(QWheelEvent * e)
 {
     bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0);
 
@@ -466,15 +455,15 @@ void IPlot::setSizes()
     fm = QFontMetrics(CMainWindow::self().getMapFont());
     left = 0;
 
-    scaleWidthX1    = showScale ? data->x().getScaleWidth( fm ) : 0;
-    scaleWidthY1    = showScale ? data->y().getScaleWidth( fm ) : 0;
+    scaleWidthX1 = showScale ? data->x().getScaleWidth( fm ) : 0;
+    scaleWidthY1 = showScale ? data->y().getScaleWidth( fm ) : 0;
 
-    scaleWidthY1    = scaleWidthX1 > scaleWidthY1 ? scaleWidthX1 : scaleWidthY1;
+    scaleWidthY1 = scaleWidthX1 > scaleWidthY1 ? scaleWidthX1 : scaleWidthY1;
 
-    fontWidth       = fm.maxWidth();
-    fontHeight      = fm.height();
-    deadAreaX       = fontWidth >> 1;
-    deadAreaY       = ( fontHeight + 1 ) >> 1;
+    fontWidth    = fm.maxWidth();
+    fontHeight   = fm.height();
+    deadAreaX    = fontWidth >> 1;
+    deadAreaY    = ( fontHeight + 1 ) >> 1;
 
     setLRTB();
     setSizeIconArea();
@@ -638,78 +627,115 @@ void IPlot::draw()
     drawLegend(p);
 }
 
+QPointF IPlot::getBasePoint(int ptx) const
+{
+    CPlotAxis& yaxis = data->y();
+
+    if(0 >= data->ymin && 0 <= data->ymax)
+    {
+        return QPointF(ptx, bottom - yaxis.val2pt(0));
+    }
+    else if(data->ymin >= 0)
+    {
+        return QPointF(ptx, bottom - yaxis.val2pt(data->ymin));
+    }
+    else if(data->ymax <= 0)
+    {
+        return QPointF(ptx, bottom - yaxis.val2pt(data->ymax));
+    }
+
+    qWarning() << "Requesting basePoint for ptx = " << ptx << "; data->ymin/max = {" << data->ymin << ",  " << data->ymax << "}";
+    return QPointF(ptx, bottom);
+}
+
+QPolygonF IPlot::getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) const
+{
+    const CPlotAxis &xaxis = data->x();
+    const CPlotAxis &yaxis = data->y();
+
+    int ptx = NOINT;
+    int pty = NOINT;
+
+    foreach(const QPointF &pt, polyline)
+    {
+        int oldPtx = ptx;
+        int oldPty = pty;
+        ptx = left   + xaxis.val2pt( pt.x() );
+        pty = bottom - yaxis.val2pt( pt.y() );
+
+        if(ptx >= left && ptx <= right)
+        {
+            // if oldPtx is < left, then ptx is the first visible point
+            if(NOINT == oldPtx || oldPtx < left)
+            {
+                // we may need to interpolate things if we just found the first visible point
+                if(NOINT != oldPtx && ptx > left)
+                {
+                    line << getBasePoint(left);
+
+                    int intPty = oldPty + ((oldPty - pty) * (left - oldPtx)) / (oldPtx - ptx);
+                    line << QPointF(left, intPty);
+                }
+                else
+                {
+                    line << getBasePoint(ptx);
+                }
+            }
+
+            line << QPointF(ptx, pty);
+        }
+        else if(ptx > right)
+        {
+            // handle the special case `no point in the visible interval`
+            // -> add interpolated left point
+            if(oldPtx < left)
+            {
+                oldPty = oldPty + (pty - oldPty) / (left - oldPtx);
+                oldPtx = left;
+
+                line << getBasePoint(oldPtx);
+                line << QPointF(oldPtx, oldPty);
+            }
+
+            // interpolate the value at `right`
+            pty = oldPty + ((pty - oldPty) * (right - oldPtx)) / (ptx - oldPtx);
+            ptx = right;
+            line << QPointF(ptx, pty);
+        }
+
+        if(ptx >= right)
+        {
+            break;
+        }
+    }
+    line << getBasePoint(ptx);
+    return line;
+}
+
 void IPlot::drawData(QPainter& p)
 {
     int penIdx = 0;
-    int ptx, pty, oldPtx, oldPty;
-    QList<CPlotData::line_t> lines                  = data->lines;
-    QList<CPlotData::line_t>::const_iterator line   = lines.begin();
-
-    CPlotAxis& xaxis = data->x();
-    CPlotAxis& yaxis = data->y();
-
-    int zero = bottom - yaxis.val2pt(0);
+    QList<CPlotData::line_t> lines                = data->lines;
+    QList<CPlotData::line_t>::const_iterator line = lines.begin();
 
     while(line != lines.end())
     {
-        QPolygonF background;
-        QPolygonF foreground;
-
-        const QPolygonF& polyline       = line->points;
-        QPolygonF::const_iterator point = polyline.begin();
-
-        ptx = left   + xaxis.val2pt( point->x() );
-        pty = bottom - yaxis.val2pt( point->y() );
-        oldPtx = ptx;
-        oldPty = pty;
-
-        background << QPointF(left,zero);
-        background << QPointF(left,pty);
-        background << QPointF(ptx,pty);
-        foreground << QPointF(ptx,pty);
-
-        while(point != polyline.end() && ptx <= right)
-        {
-            oldPtx = ptx;
-            oldPty = pty;
-            ptx = left   + xaxis.val2pt( point->x() );
-            pty = bottom - yaxis.val2pt( point->y() );
-
-            if(oldPtx == ptx)
-            {
-                ++point;
-                continue;
-            }
-
-            if(ptx >= left && ptx <= right)
-            {
-                background << QPointF(ptx,pty);
-                foreground << QPointF(ptx,pty);
-            }
-            ++point;
-        }
-
-        if(point != polyline.end() && (ptx != oldPtx))
-        {
-            pty = oldPty + ((pty - oldPty) * (right - oldPtx)) / (ptx - oldPtx);
-        }
-
-        background << QPointF(right, pty);
-        background << QPointF(right, zero);
-        foreground << QPointF(right, pty);
+        QPolygonF poly;
+        getVisiblePolygon(line->points, poly);
 
         p.setPen(Qt::NoPen);
         p.setBrush(colors[penIdx]);
-        p.drawPolygon(background);
+        p.drawPolygon(poly);
 
         p.setPen(thinLine ? pensThin[penIdx++] : pens[penIdx++]);
         p.setBrush(Qt::NoBrush);
-        p.drawPolyline(foreground);
+        poly.pop_front();
+        poly.pop_back();
+        p.drawPolyline(poly);
 
         ++line;
     }
 }
-
 
 void IPlot::drawLabels( QPainter &p )
 {
@@ -746,15 +772,13 @@ void IPlot::drawXScale( QPainter &p )
     recText.setHeight( fontHeight );
     recText.setWidth( scaleWidthX1 );
 
-    int ix;
     int ix_ = -1;
-    int iy;
 
-    iy = bottom + deadAreaY;
+    const int iy = bottom + deadAreaY;
     const CPlotAxis::tic_t * t = data->x().ticmark();
     while ( t )
     {
-        ix = left + data->x().val2pt( t->val ) - ( scaleWidthX1 + 1 ) / 2;
+        int ix = left + data->x().val2pt( t->val ) - ( scaleWidthX1 + 1 ) / 2;
         if ( ( ( ix_ < 0 ) || ( ( ix - ix_ ) > scaleWidthX1 + 5 ) ) && !t->lbl.isEmpty() )
         {
             recText.moveTopLeft( QPoint( ix, iy ) );
@@ -796,10 +820,8 @@ void IPlot::drawYScale( QPainter &p )
     recText.setHeight( fontHeight );
     recText.setWidth( scaleWidthY1 );
 
-    int ix;
+    int ix = left - scaleWidthY1 - deadAreaX;
     int iy;
-
-    ix = left - scaleWidthY1 - deadAreaX;
 
     qreal limMin, limMax, useMin, useMax;
     data->y().getLimits(limMin, limMax, useMin, useMax);
@@ -859,21 +881,18 @@ void IPlot::drawYScale( QPainter &p )
 
 void IPlot::drawGridX( QPainter &p )
 {
-    int ix;
-    int iy, dy;
-
     CPlotAxis::tictype_e oldtic = data->x().setTicType( CPlotAxis::eTicNorm );
 
-    dy = rectGraphArea.height();
+    const int dy = rectGraphArea.height();
     const CPlotAxis::tic_t * t = data->x().ticmark();
 
     QPen oldpen = p.pen();
     p.setPen( QPen( QColor(0,150,0,128), 1, Qt::DotLine ) );
 
-    iy = rectGraphArea.top();
+    const int iy = rectGraphArea.top();
     while ( t )
     {
-        ix = left + data->x().val2pt( t->val );
+        int ix = left + data->x().val2pt( t->val );
         p.drawLine( ix, iy, ix, iy + dy );
         t = data->x().ticmark( t );
     }
@@ -884,20 +903,17 @@ void IPlot::drawGridX( QPainter &p )
 
 void IPlot::drawGridY( QPainter &p )
 {
-    int ix, dx;
-    int iy;
-
     CPlotAxis::tictype_e oldtic = data->y().setTicType( CPlotAxis::eTicNorm );
-    dx = rectGraphArea.width();
+    const int dx = rectGraphArea.width();
     const CPlotAxis::tic_t * t = data->y().ticmark();
 
     QPen oldpen = p.pen();
     p.setPen( QPen( QColor(0,150,0,128), 1, Qt::DotLine ) );
 
-    ix = rectGraphArea.left();
-    while ( t )
+    const int ix = rectGraphArea.left();
+    while(nullptr != t)
     {
-        iy = bottom - data->y().val2pt( t->val );
+        int iy = bottom - data->y().val2pt( t->val );
         p.drawLine( ix, iy, ix + dx, iy );
         t = data->y().ticmark( t );
     }
@@ -908,12 +924,12 @@ void IPlot::drawGridY( QPainter &p )
 
     if(data->ymin > useMin)
     {
-        iy = bottom - data->y().val2pt( data->ymin );
+        int iy = bottom - data->y().val2pt( data->ymin );
         p.drawLine( ix, iy, ix + dx, iy );
     }
     if(data->ymax < useMax)
     {
-        iy = bottom - data->y().val2pt( data->ymax );
+        int iy = bottom - data->y().val2pt( data->ymax );
         p.drawLine( ix, iy, ix + dx, iy );
     }
 
@@ -923,16 +939,14 @@ void IPlot::drawGridY( QPainter &p )
 
 void IPlot::drawXTic( QPainter & p )
 {
-    int ix;
-    int iyb, iyt;
     const CPlotAxis::tic_t * t = data->x().ticmark();
 
-    p.setPen(QPen(Qt::black,2));
-    iyb = rectGraphArea.bottom();
-    iyt = rectGraphArea.top();
-    while ( t )
+    p.setPen(QPen(Qt::black, 2));
+    const int iyb = rectGraphArea.bottom();
+    const int iyt = rectGraphArea.top();
+    while(nullptr != t)
     {
-        ix = left + data->x().val2pt( t->val );
+        const int ix = left + data->x().val2pt( t->val );
         p.drawLine( ix, iyb, ix, iyb - 5 );
         p.drawLine( ix, iyt, ix, iyt + 5 );
         t = data->x().ticmark( t );
@@ -942,16 +956,14 @@ void IPlot::drawXTic( QPainter & p )
 
 void IPlot::drawYTic( QPainter &p )
 {
-    int ixl, ixr;
-    int iy;
     const CPlotAxis::tic_t * t = data->y().ticmark();
 
-    p.setPen(QPen(Qt::black,2));
-    ixl = rectGraphArea.left();
-    ixr = rectGraphArea.right();
+    p.setPen(QPen(Qt::black, 2));
+    const int ixl = rectGraphArea.left();
+    const int ixr = rectGraphArea.right();
     while ( t )
     {
-        iy = bottom - data->y().val2pt( t->val );
+        const int iy = bottom - data->y().val2pt( t->val );
         p.drawLine( ixl, iy, ixl + 5, iy );
         p.drawLine( ixr, iy, ixr - 5, iy );
         t = data->y().ticmark( t );
@@ -991,32 +1003,37 @@ void IPlot::drawDecoration( QPainter &p )
 {
     if(posMouse != NOPOINT)
     {
+        // draw the vertical `you are here` line
         int x = posMouse.x();
-        p.setPen(QPen(Qt::red,2));
-        p.drawLine(x, top, x, bottom);
-
-        foreach(const CPlotData::point_t& tag, data->tags)
+        p.setPen(QPen(Qt::red, 2));
+        if(x >= left && x <= right)
         {
-            int ptx = left + data->x().val2pt( tag.point.x() );
+            p.drawLine(x, top, x, bottom);
 
-            if(qAbs(x - ptx) < 10)
+            // check if the mouse is near a waypoint
+            foreach(const CPlotData::point_t& tag, data->tags)
             {
-                QFont f = CMainWindow::self().getMapFont();
-                f.setBold(true);
-                QFontMetrics fm(f);
-                QRect r = fm.boundingRect(tag.label);
-                r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
-                r.adjust(-3,-2,3,0);
+                int ptx = left + data->x().val2pt( tag.point.x() );
 
-                p.setPen(Qt::NoPen);
-                p.setBrush(Qt::white);
-                p.drawRoundedRect(r,3,3);
+                if(qAbs(x - ptx) < 10)
+                {
+                    QFont f = CMainWindow::self().getMapFont();
+                    f.setBold(true);
+                    QFontMetrics fm(f);
+                    QRect r = fm.boundingRect(tag.label);
+                    r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
+                    r.adjust(-3,-2,3,0);
 
-                p.setFont(f);
-                p.setPen(Qt::darkBlue);
-                p.drawText(r, Qt::AlignCenter, tag.label);
+                    p.setPen(Qt::NoPen);
+                    p.setBrush(Qt::white);
+                    p.drawRoundedRect(r,3,3);
 
-                break;
+                    p.setFont(f);
+                    p.setPen(Qt::darkBlue);
+                    p.drawText(r, Qt::AlignCenter, tag.label);
+
+                    break;
+                }
             }
         }
     }
@@ -1024,60 +1041,30 @@ void IPlot::drawDecoration( QPainter &p )
     if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
     {
         int penIdx = 3;
-        int ptx, pty, oldPtx, ptx1;
 
-        QPolygonF background;
-        QPolygonF foreground;
+        const QPolygonF& polyline = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1 + 1);
+        QPolygonF line;
+        getVisiblePolygon(polyline, line);
 
-        CPlotAxis& xaxis = data->x();
-        CPlotAxis& yaxis = data->y();
-
-        const QPolygonF& polyline       = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1 + 1);
-        QPolygonF::const_iterator point = polyline.begin();
-
-        ptx = left   + xaxis.val2pt( point->x() );
-        pty = bottom - yaxis.val2pt( point->y() );
-        ptx1 = oldPtx = ptx;
-
-        background << QPointF(ptx,bottom);
-        background << QPointF(ptx,pty);
-
-        foreground << QPointF(ptx,pty);
-
-        while(point != polyline.end())
+        // avoid drawing if the whole interval is outside the visible range
+        if(!(line.first().x() >= right || line.last().x() <= left))
         {
-            ptx = left   + xaxis.val2pt( point->x() );
-            pty = bottom - yaxis.val2pt( point->y() );
+            // draw the background
+            p.setPen(Qt::NoPen);
+            p.setBrush(colors[penIdx]);
+            p.drawPolygon(line);
 
-            if(oldPtx == ptx)
-            {
-                ++point;
-                continue;
-            }
-            oldPtx = ptx;
+            // draw the foreground
+            p.setPen(thinLine ? pensThin[penIdx] : pens[penIdx]);
+            p.setBrush(Qt::NoBrush);
+            line.pop_front();
+            line.pop_back();
+            p.drawPolyline(line);
 
-            if(ptx >= left && ptx <= right)
-            {
-                background << QPointF(ptx,pty);
-                foreground << QPointF(ptx,pty);
-            }
-            ++point;
+            p.setPen(QPen(Qt::darkBlue, 2));
+            p.drawLine(line.first().x(), top, line.first().x(), bottom);
+            p.drawLine(line.last().x(),  top, line.last().x(),  bottom);
         }
-
-        background << QPointF(ptx,pty);
-        background << QPointF(ptx,bottom);
-
-        p.setPen(Qt::NoPen);
-        p.setBrush(colors[penIdx]);
-        p.drawPolygon(background);
-
-        p.setPen(thinLine ? pensThin[penIdx] : pens[penIdx]);
-        p.setBrush(Qt::NoBrush);
-        p.drawPolyline(foreground);
-
-        p.setPen(QPen(Qt::darkBlue, 2));
-        p.drawLine(ptx1, top, ptx1, bottom);
-        p.drawLine(ptx, top, ptx, bottom);
     }
 
     if(!scrOptRange.isNull())
@@ -1093,15 +1080,14 @@ void IPlot::drawTags(QPainter& p)
         return;
     }
 
-    int ptx, pty;
     CPlotAxis& xaxis = data->x();
     CPlotAxis& yaxis = data->y();
 
     QVector<CPlotData::point_t>::const_iterator tag = data->tags.begin();
     while(tag != data->tags.end())
     {
-        ptx = left   + xaxis.val2pt( tag->point.x() );
-        pty = bottom - yaxis.val2pt( tag->point.y() );
+        int ptx = left   + xaxis.val2pt( tag->point.x() );
+        int pty = bottom - yaxis.val2pt( tag->point.y() );
 
         if (left < ptx &&  ptx < right)
         {
@@ -1160,8 +1146,8 @@ void IPlot::drawActivities(QPainter& p)
         }
 
         p.setPen(QPen(Qt::darkGreen,2));
-        p.drawLine(x1,0,x1,20);
-        p.drawLine(x2,0,x2,20);
+        p.drawLine(x1, 0, x1, 20);
+        p.drawLine(x2, 0, x2, 20);
 
         int d = (x2 - x1);
         if(d < 20)
@@ -1172,10 +1158,10 @@ void IPlot::drawActivities(QPainter& p)
         int c = x1 + d/2;
 
         rectIconFrame.moveCenter(QPoint(c,10));
-        p.setBrush(QColor(255,255,255,100));
-        p.drawRoundedRect(rectIconFrame,3,3);
+        p.setBrush(QColor(255, 255, 255, 100));
+        p.drawRoundedRect(rectIconFrame, 3, 3);
 
-        rectIcon.moveCenter(QPoint(c,10));
+        rectIcon.moveCenter(QPoint(c, 10));
         p.drawPixmap(rectIcon, QPixmap(range.icon));
     }
 
@@ -1286,9 +1272,10 @@ void IPlot::slotResetZoom()
 
 void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
 {
-    if(ptRange1 == 0 || ptRange2 == 0)
+    if(nullptr == ptRange1 || nullptr == ptRange2)
     {
-        idxSel1 = idxSel2 = NOIDX;
+        idxSel1 = NOIDX;
+        idxSel2 = NOIDX;
     }
     else
     {
@@ -1322,7 +1309,7 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
     update();
 }
 
-bool IPlot::isZoomed()
+bool IPlot::isZoomed() const
 {
     qreal limMin, limMax, useMin, useMax;
     data->x().getLimits(limMin, limMax, useMin, useMax);

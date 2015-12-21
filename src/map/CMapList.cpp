@@ -72,6 +72,7 @@ CMapList::CMapList(QWidget *parent)
     connect(actionActivate, &QAction::triggered,                         this, &CMapList::slotActivate);
     connect(actionMoveUp,   &QAction::triggered,                         this, &CMapList::slotMoveUp);
     connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
+    connect(actionReloadMaps, &QAction::triggered,                       this, &CMapList::slotReloadMaps);
     connect(pushMapHonk,    &QPushButton::clicked,                       this, &CMapList::slotMapHonk);
 
 
@@ -79,6 +80,8 @@ CMapList::CMapList(QWidget *parent)
     menu->addAction(actionActivate);
     menu->addAction(actionMoveUp);
     menu->addAction(actionMoveDown);
+    menu->addSeparator();
+    menu->addAction(actionReloadMaps);
 }
 
 CMapList::~CMapList()
@@ -243,4 +246,9 @@ void CMapList::slotMapHonk()
     {
         canvas->setScales(CCanvas::eScalesSquare);
     }
+}
+
+void CMapList::slotReloadMaps()
+{
+    CMapDraw::setupMapPath(CMapDraw::getMapPaths());
 }

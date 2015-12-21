@@ -42,7 +42,7 @@ public:
      */
     void restoreDBLink();
 
-    virtual bool canSave() override
+    virtual bool canSave() const override
     {
         return true;
     }

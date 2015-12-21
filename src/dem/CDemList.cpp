@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
 #include "units/IUnit.h"
@@ -65,6 +66,7 @@ CDemList::CDemList(QWidget *parent)
     connect(actionMoveUp,   &QAction::triggered,                         this, &CDemList::slotMoveUp);
     connect(actionMoveDown, &QAction::triggered,                         this, &CDemList::slotMoveDown);
     connect(actionActivate, &QAction::triggered,                         this, &CDemList::slotActivate);
+    connect(actionReloadDem, &QAction::triggered,                        this, &CDemList::slotReloadDem);
 
     connect(treeWidget,     &CDemTreeWidget::sigChanged,                 this, &CDemList::sigChanged);
 
@@ -72,6 +74,8 @@ CDemList::CDemList(QWidget *parent)
     menu->addAction(actionActivate);
     menu->addAction(actionMoveUp);
     menu->addAction(actionMoveDown);
+    menu->addSeparator();
+    menu->addAction(actionReloadDem);
 }
 
 CDemList::~CDemList()
@@ -201,3 +205,7 @@ void CDemList::slotContextMenu(const QPoint& point)
     menu->exec(p);
 }
 
+void CDemList::slotReloadDem()
+{
+    CDemDraw::setupDemPath(CDemDraw::getDemPaths());
+}

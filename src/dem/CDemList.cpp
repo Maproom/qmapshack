@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
-#include "dem/CDemDraw.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>

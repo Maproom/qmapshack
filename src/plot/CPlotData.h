@@ -54,8 +54,8 @@ public:
 
     struct line_t
     {
-        QString   label;
-        QColor    color;
+        QString label;
+        QColor color;
         QPolygonF points;
     };
 

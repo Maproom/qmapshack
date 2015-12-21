@@ -33,7 +33,7 @@
 
 const QPen IPlot::pens[] =
 {
-      QPen(Qt::darkBlue,      3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    QPen(Qt::darkBlue,      3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(QColor("#C00000"), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::yellow,        3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::green,         3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -41,7 +41,7 @@ const QPen IPlot::pens[] =
 
 const QPen IPlot::pensThin[] =
 {
-      QPen(Qt::darkBlue,   2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    QPen(Qt::darkBlue,   2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::darkRed,    2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::darkYellow, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::darkGreen,  2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
@@ -49,7 +49,7 @@ const QPen IPlot::pensThin[] =
 
 const QColor IPlot::colors[] =
 {
-      QColor(Qt::blue)
+    QColor(Qt::blue)
     , QColor(0, 0, 0, 0)
     , QColor(0, 0, 0, 0)
     , QColor(Qt::darkGreen)
@@ -315,7 +315,7 @@ void IPlot::setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm)
     else if(data->axisType == CPlotData::eAxisTime)
     {
         trk->setMouseFocusByTime(pos, fm, objectName());
-    }   
+    }
 }
 
 void IPlot::mousePressEvent(QMouseEvent * e)

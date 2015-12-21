@@ -459,30 +459,30 @@ protected:
 
     QPointer<CDetailsPrj> dlgDetails;
 
-    type_e     type;
-    QString    key;
-    QString    filename;
-    bool       valid         = false;
-    bool       noUpdate      = false;
-    bool       noCorrelation = false;
+    type_e type;
+    QString key;
+    QString filename;
+    bool valid         = false;
+    bool noUpdate      = false;
+    bool noCorrelation = false;
 
     metadata_t metadata;
-    QString    nameSuffix;
+    QString nameSuffix;
 
-    sorting_e  sorting = eSortNone;
+    sorting_e sorting = eSortNone;
 
-    qint32     cntItemsByType[IGisItem::eTypeMax];
+    qint32 cntItemsByType[IGisItem::eTypeMax];
 
-    qint32     cntTrkPts                 = 0;
-    qint32     cntWpts                   = 0;
+    qint32 cntTrkPts                 = 0;
+    qint32 cntWpts                   = 0;
 
-    qreal      totalDistance             = 0;
-    qreal      totalAscend               = 0;
-    qreal      totalDescend              = 0;
-    quint32    totalElapsedSeconds       = 0;
-    quint32    totalElapsedSecondsMoving = 0;
+    qreal totalDistance             = 0;
+    qreal totalAscend               = 0;
+    qreal totalDescend              = 0;
+    quint32 totalElapsedSeconds       = 0;
+    quint32 totalElapsedSecondsMoving = 0;
 
-    QString    hashTrkWpt[2];
+    QString hashTrkWpt[2];
 };
 
 #endif //IGISPROJECT_H

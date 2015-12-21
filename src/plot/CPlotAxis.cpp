@@ -112,7 +112,7 @@ const QString CPlotAxis::fmtsgl( qreal val )
     else if ( exponent >= 0 )
     {
         f = "%" + QString( "%1" ).arg(exponent + 1)
-          + ( (0 == exponent) ? ".1f" : ".0f" );
+            + ( (0 == exponent) ? ".1f" : ".0f" );
     }
     else
     {
@@ -141,7 +141,7 @@ const QString CPlotAxis::fmtsgl( qreal val )
  */
 const QString CPlotAxis::fmtdbl( qreal val )
 {
-    int   exponent = 0;
+    int exponent = 0;
     qreal residue  = 0;
 
     if ( val != 0 )
@@ -159,7 +159,7 @@ const QString CPlotAxis::fmtdbl( qreal val )
     else if ( exponent >= 0 )
     {
         f = "%" + QString( "%1" ).arg(exponent + 1)
-          + ( ((0. == exponent) && (0 > residue)) ? ".2f" : ".1f" );
+            + ( ((0. == exponent) && (0 > residue)) ? ".2f" : ".1f" );
     }
     else
     {

@@ -41,7 +41,7 @@ public:
         tic_t()
         {
         }
-        qreal   val = 0;
+        qreal val = 0;
         QString lbl = "";
     };
 

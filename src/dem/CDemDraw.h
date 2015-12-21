@@ -53,7 +53,13 @@ public:
 
     void setProjection(const QString& proj);
 
+    static const QStringList& getDemPaths()
+    {
+        return demPaths;
+    }
+
     static void setupDemPath();
+    static void setupDemPath(const QStringList &paths);
     static void saveDemPath(QSettings &cfg);
     static void loadDemPath(QSettings &cfg);
     static const QStringList& getSupportedFormats()

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>471</width>
-    <height>300</height>
+    <height>251</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,10 +15,16 @@
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
-    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+    <enum>QFormLayout::ExpandingFieldsGrow</enum>
    </property>
    <item row="0" column="1">
     <widget class="QPushButton" name="pushCopy">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Replace existing item</string>
      </property>
@@ -56,6 +62,12 @@
    </item>
    <item row="4" column="1">
     <widget class="QPushButton" name="pushSkip">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Do not copy item</string>
      </property>
@@ -93,6 +105,12 @@
    </item>
    <item row="8" column="1">
     <widget class="QPushButton" name="pushClone">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Create a clone</string>
      </property>

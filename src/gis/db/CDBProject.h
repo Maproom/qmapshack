@@ -99,6 +99,8 @@ public:
      */
     void hideItems(CEvtD2WHideItems * evt);
 
+    void update();
+
 protected:
     /**
        @brief Setup the items text with the name and suffix

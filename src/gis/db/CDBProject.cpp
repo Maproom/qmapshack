@@ -672,3 +672,72 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
     setToolTip(CGisListWks::eColumnName, getInfo());
 }
 
+
+void CDBProject::update()
+{
+    if(isChanged())
+    {
+        QString msg = QObject::tr("The project '%1' is about to update itself from the database. However there are changes not saved.").arg(getName());
+        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), QObject::tr("Save changes?"), msg, QMessageBox::Save|QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Save);
+
+        if(res == QMessageBox::Abort)
+        {
+            return;
+        }
+        if(res == QMessageBox::Save)
+        {
+            if(!save())
+            {
+                return;
+            }
+        }
+    }
+
+
+    QSqlQuery query(db);
+    query.prepare("SELECT date, name, data FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return );
+    query.next();
+
+    QString name    = query.value(1).toString();
+    QByteArray data = query.value(2).toByteArray();
+
+    if(!data.isEmpty())
+    {
+        QDataStream in(&data, QIODevice::ReadOnly);
+        in.setByteOrder(QDataStream::LittleEndian);
+        in.setVersion(QDataStream::Qt_5_2);
+        *this << in;
+        filename = db.connectionName();
+    }
+
+    setupName(name);
+    setToolTip(CGisListWks::eColumnName, getInfo());
+
+    const int N = childCount();
+    for(int i = 0; i < N; i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == nullptr)
+        {
+            continue;
+        }
+
+        query.prepare("SELECT id FROM items WHERE keyqms=:keyqms");
+        query.bindValue(":keyqms", item->getKey().item);
+        QUERY_EXEC(return );
+
+        if(query.next())
+        {
+            quint64 idItem = query.value(0).toULongLong();
+            item->updateFromDB(idItem, db);
+            item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkNone);
+        }
+        else
+        {
+            item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+        }
+    }
+}
+

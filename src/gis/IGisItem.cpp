@@ -225,6 +225,7 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
 void IGisItem::updateFromDB(quint64 id, QSqlDatabase& db)
 {
     QSqlQuery query(db);
+
     query.prepare("SELECT hash FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );

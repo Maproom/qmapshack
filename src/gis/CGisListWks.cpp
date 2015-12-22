@@ -105,6 +105,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectWks->addSeparator();
     actionSyncWksDev = menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"     ), tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
+    actionSyncDB     = menuProjectWks->addAction(QIcon("://icons/32x32/Reset.png"      ), tr("Reload from Database"), this, SLOT(slotSyncDB()));
 
     menuProjectWks->addSeparator();
     actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"       ), tr("Close"          ), this, SLOT(slotCloseProject()));
@@ -998,6 +999,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             else
             {
                 actionSyncWksDev->setEnabled(IDevice::count());
+                actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                 menuProjectWks->exec(p);
             }
             return;
@@ -1053,6 +1055,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 else
                 {
                     actionSyncWksDev->setEnabled(IDevice::count());
+                    actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                     menuProjectWks->exec(p);
                 }
             }
@@ -1817,4 +1820,18 @@ void CGisListWks::slotRteFromWpt()
 
     CCreateRouteFromWpt dlg(keys, this);
     dlg.exec();
+}
+
+void CGisListWks::slotSyncDB()
+{
+    foreach(QTreeWidgetItem * item, selectedItems())
+    {
+        CDBProject * project = dynamic_cast<CDBProject*>(item);
+        if(project == nullptr)
+        {
+            continue;
+        }
+
+        project->update();
+    }
 }

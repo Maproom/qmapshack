@@ -527,16 +527,8 @@ const QString& IGisItem::getHash()
 
 void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
 {
-    lastDatabaseHash.clear();
 
-    QSqlQuery query(db);
-    query.prepare("SELECT hash FROM items WHERE id=:id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
-    if(query.next())
-    {
-        lastDatabaseHash = query.value(0).toString();
-    }
+    lastDatabaseHash = getHash();
 }
 
 QColor IGisItem::str2color(const QString& name)

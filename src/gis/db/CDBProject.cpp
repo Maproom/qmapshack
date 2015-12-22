@@ -152,10 +152,62 @@ void CDBProject::postStatus()
     CGisWidget::self().postEventForDb(info);
 }
 
-void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
-{
-    QSqlQuery query(db);
 
+int CDBProject::checkForAction2(IGisItem * item, quint64 &idItem, QString& hash, QSqlQuery &query)
+{
+    int action = eActionNone;
+
+    query.prepare("SELECT hash, last_user, last_change FROM items WHERE id=:id");
+    query.bindValue(":id", idItem);
+    QUERY_EXEC(throw eReasonQueryFail);
+
+    if(query.next())
+    {
+        hash            = query.value(0).toString();
+        QString user    = query.value(1).toString();
+        QString date    = query.value(2).toString();
+
+        QString msg = QObject::tr(
+            "The item %1 has been changed by %2 (%3). \n\n"
+            "To solve this conflict you can create and save a clone, force your version or drop "
+            "your version and take the one from the database"
+            ).arg(item->getNameEx()).arg(user).arg(date);
+
+        QMessageBox msgBox(QMessageBox::Question, QObject::tr("Conflict with database..."), msg, QMessageBox::NoButton, CMainWindow::self().getBestWidgetForParent());
+        QAbstractButton* pButClone  = msgBox.addButton(QObject::tr("Clone && Save"), QMessageBox::YesRole);
+        QAbstractButton* pButForce  = msgBox.addButton(QObject::tr("Force Save"), QMessageBox::ApplyRole);
+        QAbstractButton* pButUpdate = msgBox.addButton(QObject::tr("Take remote"), QMessageBox::DestructiveRole);
+        msgBox.addButton(QMessageBox::Abort);
+
+        msgBox.exec();
+
+        if(msgBox.clickedButton() == pButClone)
+        {
+            action = eActionClone;
+        }
+        else if(msgBox.clickedButton() == pButForce)
+        {
+            action = eActionUpdate;
+        }
+        else if(msgBox.clickedButton() == pButUpdate)
+        {
+            action = eActionReload;
+        }
+    }
+    else
+    {
+        // item has been removed. By throwing eReasonConflict
+        // the save procedure is restarted for the item and
+        // the item should be inserted into the database.
+        throw eReasonConflict;
+    }
+
+
+    return action;
+}
+
+void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
+{
     // serialize complete history of item
     QByteArray data;
     QDataStream in(&data, QIODevice::WriteOnly);
@@ -170,6 +222,8 @@ void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
+    QString hashInDb = item->getLastDatabaseHash();
+
     query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
@@ -179,8 +233,8 @@ void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
     query.bindValue(":id",      idItem);
-    query.bindValue(":oldhash", item->getLastDatabaseHash());
-    QUERY_EXEC(throw -1);
+    query.bindValue(":oldhash", hashInDb);
+    QUERY_EXEC(throw eReasonQueryFail);
 
     if(query.numRowsAffected())
     {
@@ -192,80 +246,67 @@ void CDBProject::updateItem(IGisItem *& item, quint64 idItem)
     {
         // there are two reasons why an update does not affect a row
         // 1) the hash is different because another user changed the item
-        // 2) the id was not fond because another user removed the item
-        //
-        // Let's test for 1) and get the last user and timestamp of the change
-        query.prepare("SELECT last_user, last_change FROM items WHERE id=:id");
-        query.bindValue(":id", id);
-        QUERY_EXEC(throw -1);
-        if(query.next())
+        // 2) the id was not found because another user removed the item
+        int action = checkForAction2(item, idItem, hashInDb, query);
+
+        switch(action)
         {
-            QString user = query.value(0).toString();
-            QString date = query.value(1).toString();
+        case eActionClone:
+        {
+            IGisItem * item2    = item->createClone();
+            quint64 idItem      = insertItem(item2, query);
 
-            QString msg = QObject::tr(
-                "The item %1 has been changed by %2 (%3). \n\n"
-                "To solve this conflict you can create and save a clone, force your version or drop "
-                "your version and take the one from the database"
-                ).arg(item->getNameEx()).arg(user).arg(date);
+            delete item;
+            item = item2;
 
-            QMessageBox msgBox(QMessageBox::Question, QObject::tr("Conflict with database..."), msg, QMessageBox::NoButton, CMainWindow::self().getBestWidgetForParent());
-            QAbstractButton* pButClone  = msgBox.addButton(QObject::tr("Clone && Save"), QMessageBox::YesRole);
-            QAbstractButton* pButForce  = msgBox.addButton(QObject::tr("Force Save"), QMessageBox::ApplyRole);
-            QAbstractButton* pButUpdate = msgBox.addButton(QObject::tr("Take remote"), QMessageBox::DestructiveRole);
-            msgBox.addButton(QMessageBox::Abort);
+            query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
+            query.bindValue(":parent", id);
+            query.bindValue(":child", idItem);
+            QUERY_EXEC(throw eReasonQueryFail);
+            break;
+        }
 
-            msgBox.exec();
+        case eActionUpdate:
+        {
+            // hashInDb has been updated by checkForAction2() by the one stored in the database
+            // therefore the update should succeed now.
+            query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
+            query.bindValue(":type",    item->type());
+            query.bindValue(":keyqms",  item->getKey().item);
+            query.bindValue(":icon",    buffer.data());
+            query.bindValue(":name",    item->getName());
+            query.bindValue(":comment", item->getInfo());
+            query.bindValue(":data",    data);
+            query.bindValue(":hash",    item->getHash());
+            query.bindValue(":id",      idItem);
+            query.bindValue(":oldhash", hashInDb);
+            QUERY_EXEC(throw eReasonQueryFail);
 
-            if(msgBox.clickedButton() == pButClone)
+            if(query.numRowsAffected())
             {
-                IGisItem * item2    = item->createClone();
-                quint64 idItem      = insertItem(item2);
-
-                delete item;
-                item = item2;
-
-                query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
-                query.bindValue(":parent", id);
-                query.bindValue(":child", idItem);
-                QUERY_EXEC(throw -1);
-
-            }
-            else if(msgBox.clickedButton() == pButForce)
-            {
-                query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id");
-                query.bindValue(":type",    item->type());
-                query.bindValue(":keyqms",  item->getKey().item);
-                query.bindValue(":icon",    buffer.data());
-                query.bindValue(":name",    item->getName());
-                query.bindValue(":comment", item->getInfo());
-                query.bindValue(":data",    data);
-                query.bindValue(":hash",    item->getHash());
-                query.bindValue(":id",      idItem);
-                QUERY_EXEC(throw -1);
-
                 item->setLastDatabaseHash(idItem, db);
             }
-            else if(msgBox.clickedButton() == pButUpdate)
+            else
             {
-                item->updateFromDB(idItem, db);
+                // in the case someone updated the item between calling
+                // checkForAction2() and this update our update fails.
+                // In this case we throw eReasonConflict to restart the
+                // save procedure for this item.
+                throw eReasonConflict;
             }
-            else // abort
-            {
-                throw -1;
-            }
+            break;
         }
-        else
-        {
-            // seems to be case 2)
-            //gee it's gone!
+
+        case eActionReload:
+            item->updateFromDB(idItem, db);
+            break;
         }
     }
 }
 
-quint64 CDBProject::insertItem(IGisItem * item)
+quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
 {
-    QSqlQuery query(db);
+    quint64 idItem = 0;
 
     // serialize complete history of item
     QByteArray data;
@@ -289,37 +330,158 @@ quint64 CDBProject::insertItem(IGisItem * item)
     query.bindValue(":comment", item->getInfo());
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
-    QUERY_EXEC(throw -1);
+    QUERY_EXEC(throw eReasonQueryFail);
 
-    quint64 idItem = IDB::getLastInsertID(db, "items");
-    if(idItem == 0)
+    if(query.numRowsAffected())
     {
-        qDebug() << "childId equals 0. bad.";
-        throw -1;
+        idItem = IDB::getLastInsertID(db, "items");
+        if(idItem == 0)
+        {
+            qDebug() << "childId equals 0. bad.";
+            throw eReasonUnexpected;
+        }
+        item->setLastDatabaseHash(idItem, db);
     }
-
-    item->setLastDatabaseHash(idItem, db);
+    else
+    {
+        throw eReasonConflict;
+    }
 
     return idItem;
 }
 
+int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResult, QSqlQuery &query)
+{
+    int action = eActionNone;
+
+    // test if item exists in database
+    quint32 typeItem = 0;
+    query.prepare("SELECT id, type FROM items WHERE keyqms=:keyqms");
+    query.bindValue(":keyqms", item->getKey().item);
+    QUERY_EXEC(throw eReasonQueryFail);
+
+
+    if(query.next())
+    {
+        idItem      = query.value(0).toULongLong();
+        typeItem    = query.value(1).toUInt();
+
+        // check if relation already exists.
+        query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
+        query.bindValue(":parent", id);
+        query.bindValue(":child", idItem);
+        QUERY_EXEC(throw eReasonQueryFail);
+
+        if(!query.next())
+        {
+            // item is already in database but folder relation does not exit
+            int result  = lastResult;
+
+            if(lastResult == CSelectSaveAction::eResultNone)
+            {
+                // Build the dialog to ask for user action
+
+                IGisItem * item1 = 0;
+
+                // load item from database for a compare
+                switch(typeItem)
+                {
+                case IGisItem::eTypeWpt:
+                    item1 = new CGisItemWpt(idItem, db, 0);
+                    break;
+
+                case IGisItem::eTypeTrk:
+                    item1 = new CGisItemTrk(idItem, db, 0);
+                    break;
+
+                case IGisItem::eTypeRte:
+                    item1 = new CGisItemRte(idItem, db, 0);
+                    break;
+
+                case IGisItem::eTypeOvl:
+                    item1 = new CGisItemOvlArea(idItem, db, 0);
+                    break;
+
+                default:
+                    ;
+                }
+
+                if(item1 == 0)
+                {
+                    qDebug() << "no item to compare!?.";
+                    throw eReasonUnexpected;
+                }
+
+                CSelectSaveAction dlg(item, item1, CMainWindow::self().getBestWidgetForParent());
+                dlg.exec();
+
+                result = dlg.getResult();
+                if(dlg.allOthersToo())
+                {
+                    lastResult = result;
+                }
+            }
+
+            if(result == CSelectSaveAction::eResultNone)
+            {
+                // no decision by user, cancel operation.
+                // this is different to a skip as a skip will
+                // just skip saving the data, but the item to folder
+                // link will be still processed.
+                return eActionNone;
+            }
+
+            // the item is in the database and has no relation to the folder -> update only if the user confirms.
+            action = eActionLink;
+
+            switch(result)
+            {
+            case CSelectSaveAction::eResultSave:
+                action |= eActionUpdate;
+                break;
+
+            case CSelectSaveAction::eResultSkip:
+                action |= eActionReload;
+                break;
+
+            case CSelectSaveAction::eResultClone:
+                action |= eActionClone;
+                break;
+            }
+        }
+        else
+        {
+            // the item is in the database and has a relation to the folder -> simply update item
+            action = eActionUpdate;
+        }
+    }
+    else
+    {
+        action = eActionInsert|eActionLink;
+    }
+
+    return action;
+}
+
+
 bool CDBProject::save()
 {
-    bool clearProjectChangeFlag = true;
-    int lastResult = CSelectSaveAction::eResultNone;
-
     QSqlQuery query(db);
+    bool stop       = false;
+    bool success    = true;
+    int lastResult  = CSelectSaveAction::eResultNone;
+
+
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
 
     int N = childCount();
     PROGRESS_SETUP(QObject::tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());
 
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
-
-    try
+    for(int i = 0; (i < N) && !stop; i++)
     {
-        for(int i = 0; i < N; i++)
+        try
         {
-            PROGRESS(i, throw 0);
+            PROGRESS(i, throw eReasonCancel);
 
             IGisItem * item = dynamic_cast<IGisItem*>(child(i));
             if(item == 0)
@@ -334,156 +496,106 @@ bool CDBProject::save()
                 continue;
             }
 
-            // test if item exists in database
-            quint64 idItem      = 0;
-            quint32 typeItem    = 0;
-            query.prepare("SELECT id, type FROM items WHERE keyqms=:keyqms");
-            query.bindValue(":keyqms", item->getKey().item);
-            QUERY_EXEC(throw -1);
+            quint64 idItem = 0;
 
-            if(query.next())
+            int action = checkForAction1(item, idItem, lastResult, query);
+
+            if(action & eActionInsert)
             {
-                idItem      = query.value(0).toULongLong();
-                typeItem    = query.value(1).toUInt();
-
-                // check if relation already exists.
-                query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
-                query.bindValue(":parent", id);
-                query.bindValue(":child", idItem);
-                QUERY_EXEC();
-
-                if(!query.next())
-                {
-                    // item is already in database but folder relation does not exit
-                    int result  = lastResult;
-
-                    if(lastResult == CSelectSaveAction::eResultNone)
-                    {
-                        IGisItem * item1 = 0;
-
-                        // load item from database for a compare
-                        switch(typeItem)
-                        {
-                        case IGisItem::eTypeWpt:
-                            item1 = new CGisItemWpt(idItem, db, 0);
-                            break;
-
-                        case IGisItem::eTypeTrk:
-                            item1 = new CGisItemTrk(idItem, db, 0);
-                            break;
-
-                        case IGisItem::eTypeRte:
-                            item1 = new CGisItemRte(idItem, db, 0);
-                            break;
-
-                        case IGisItem::eTypeOvl:
-                            item1 = new CGisItemOvlArea(idItem, db, 0);
-                            break;
-
-                        default:
-                            ;
-                        }
-
-                        if(item1 == 0)
-                        {
-                            qDebug() << "no item to compare!?.";
-                            throw -1;
-                        }
-
-
-                        CSelectSaveAction dlg(item, item1, &progress);
-                        dlg.exec();
-
-                        result = dlg.getResult();
-                        if(dlg.allOthersToo())
-                        {
-                            lastResult = result;
-                        }
-                    }
-                    if(result == CSelectSaveAction::eResultNone)
-                    {
-                        // no decision by user, cancel operation.
-                        // this is different to a skip as a skip will
-                        // just skip saving the data, but the item to folder
-                        // link will be still processed.
-                        clearProjectChangeFlag = false;
-                        continue;
-                    }
-
-                    // create relation
-                    query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
-                    query.bindValue(":parent", id);
-                    query.bindValue(":child", idItem);
-                    QUERY_EXEC(throw -1);
-
-                    if(result == CSelectSaveAction::eResultSave)
-                    {
-                        // the item is in the database and has no relation to the folder -> update only if the user confirms.
-                        updateItem(item, idItem);
-                    }
-                }
-                else
-                {
-                    // the item is in the database and has a relation to the folder -> simply update item
-                    updateItem(item, idItem);
-                }
+                idItem = insertItem(item, query);
             }
-            else
-            {
-                // the item is not in the database -> insert item and create relation to folder
-                idItem = insertItem(item);
 
-                // create relation
+            if(action & eActionUpdate)
+            {
+                updateItem(item, idItem, query);
+            }
+
+            if(action & eActionReload)
+            {
+                item->updateFromDB(idItem, db);
+            }
+
+
+            if(action & eActionClone)
+            {
+                IGisItem * item2 = item->createClone();
+                idItem = insertItem(item2, query);
+
+                delete item;
+                item = item2;
+            }
+
+            if((action & eActionLink) && (idItem != 0))
+            {
                 query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
                 query.bindValue(":parent", id);
                 query.bindValue(":child", idItem);
-                QUERY_EXEC(throw -1);
+                QUERY_EXEC(throw eReasonQueryFail);
             }
 
             info->keysChildren << item->getKey().item;
             item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
         }
-
-        // serialize metadata of project
-        QByteArray data;
-        QDataStream in(&data, QIODevice::WriteOnly);
-        in.setByteOrder(QDataStream::LittleEndian);
-        in.setVersion(QDataStream::Qt_5_2);
-        *this >> in;
-
-        // update folder entry in database
-        query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data WHERE id=:id");
-        query.bindValue(":name", getName());
-        query.bindValue(":comment", getInfo());
-        query.bindValue(":data", data);
-        query.bindValue(":id", getId());
-        QUERY_EXEC(throw -1);
-
-        // report status to database view
-        info->updateLostFound = true;
-        CGisWidget::self().postEventForDb(info);
-        if(clearProjectChangeFlag)
+        catch(reasons_e reason)
         {
-            setText(CGisListWks::eColumnDecoration,"");
+            switch(reason)
+            {
+            case eReasonQueryFail:
+                QMessageBox::critical(&progress, QObject::tr("Error"), QObject::tr("There was an unexpected database error:\n\n%1").arg(query.lastError().text()), QMessageBox::Abort);
+
+            case eReasonCancel:
+            case eReasonUnexpected:
+                stop    = true;
+                success = false;
+                break;
+
+            case eReasonConflict:
+                i--;
+                break;
+            }
         }
     }
-    catch(int n)
+
+    // serialize metadata of project
+    QByteArray data;
+    QDataStream in(&data, QIODevice::WriteOnly);
+    in.setByteOrder(QDataStream::LittleEndian);
+    in.setVersion(QDataStream::Qt_5_2);
+    *this >> in;
+
+    // update folder entry in database
+    query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data WHERE id=:id");
+    query.bindValue(":name", getName());
+    query.bindValue(":comment", getInfo());
+    query.bindValue(":data", data);
+    query.bindValue(":id", getId());
+    QUERY_EXEC(return false);
+
+    // update change flag
+    bool saved = true;
+    for(int i = 0; i < N; i++)
     {
-        if(n < 0)
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
         {
-            // ooch, failed queries, better quit without much reporting
-            delete info;
+            continue;
         }
-        else
+        if(item->isChanged())
         {
-            // abort by user, report status to database view
-            info->updateLostFound = true;
-            CGisWidget::self().postEventForDb(info);
+            saved = false;
+            break;
         }
-        return false;
     }
-    return true;
+
+    setText(CGisListWks::eColumnDecoration, saved ? "" : "*");
+
+    // report status to database view
+    info->updateLostFound = true;
+    CGisWidget::self().postEventForDb(info);
+
+    return success;
 }
+
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)
 {
@@ -524,7 +636,8 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
             bool success = true;
             try
             {
-                updateItem(gisItem, item.id);
+                QSqlQuery query(db);
+                updateItem(gisItem, item.id, query);
             }
             catch(int)
             {

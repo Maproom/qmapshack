@@ -36,6 +36,7 @@ public:
         eResultNone,
         eResultSave,
         eResultSkip,
+        eResultClone,
     };
 
     result_e getResult()

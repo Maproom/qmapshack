@@ -232,7 +232,7 @@ void IGisItem::updateFromDB(quint64 id, QSqlDatabase& db)
     /*
         Test on the hash stored in the database. If the hash is
         equal to the one stored in this item the item is up-to-date
-    */
+     */
 
     if(query.next())
     {
@@ -532,7 +532,7 @@ void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
     QSqlQuery query(db);
     query.prepare("SELECT hash FROM items WHERE id=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
     if(query.next())
     {
         lastDatabaseHash = query.value(0).toString();

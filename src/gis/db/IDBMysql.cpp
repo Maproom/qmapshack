@@ -120,7 +120,7 @@ bool IDBMysql::initDB()
     if(!query.exec( "CREATE TABLE items ("
                     "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
                     "type           INTEGER,"
-                    "keyqms         TEXT NOT NULL,"
+                    "keyqms         VARCHAR(64) NOT NULL,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "icon           BLOB NOT NULL,"
                     "name           TEXT NOT NULL,"
@@ -128,7 +128,8 @@ bool IDBMysql::initDB()
                     "data           LONGBLOB NOT NULL,"
                     "hash           TEXT NOT NULL,"
                     "last_user      TEXT DEFAULT NULL,"
-                    "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW()"
+                    "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW(),"
+                    "UNIQUE KEY (keyqms)"
                     ")"))
     {
         qDebug() << query.lastQuery();

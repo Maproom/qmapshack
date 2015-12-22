@@ -135,7 +135,7 @@ bool IDBSqlite::initDB()
     if(!query.exec( "CREATE TABLE items ("
                     "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "type           INTEGER,"
-                    "keyqms         TEXT NOT NULL,"
+                    "keyqms         TEXT NOT NULL UNIQUE,"
                     "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
                     "icon           BLOB NOT NULL,"
                     "name           TEXT NOT NULL,"

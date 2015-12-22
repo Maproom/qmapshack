@@ -62,6 +62,9 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
+    setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -111,6 +114,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
         flags &= ~eFlagWriteAllowed;
     }
 
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     updateDecoration(eMarkChanged, eMarkNone);
 }
 

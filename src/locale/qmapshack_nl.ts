@@ -384,12 +384,12 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="79"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
-        <translation type="unfinished"></translation>
+        <translation>Door  een aanpassing in het database systeem is QMapShack de bestandnaam van database &apos;&apos;%1&apos; vergeten. Selecteer dit weer in de volgende stap.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="80"/>
         <source>Select database file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer database bestand.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="109"/>
@@ -2497,22 +2497,22 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../IAbout.ui" line="172"/>
         <source>Czech:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tsjechisch:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="195"/>
         <source>German:</source>
-        <translation type="unfinished"></translation>
+        <translation>Duits:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="218"/>
         <source>Dutch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederlands:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="241"/>
         <source>French:</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="251"/>
@@ -2553,17 +2553,17 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../IAbout.ui" line="271"/>
         <source>Spanish:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaans:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="305"/>
         <source>Win64:</source>
-        <translation type="unfinished">Win64:</translation>
+        <translation>Win64:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="321"/>
         <source>OS X:</source>
-        <translation type="unfinished"></translation>
+        <translation>OS X:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="345"/>
@@ -2898,7 +2898,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../dem/IDemList.ui" line="189"/>
         <source>Reload DEM</source>
-        <translation type="unfinished"></translation>
+        <translation>DEM herladen</translation>
     </message>
 </context>
 <context>
@@ -3031,7 +3031,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="250"/>
         <source>Hist.</source>
-        <translation>Hist.</translation>
+        <translation>Historie</translation>
     </message>
 </context>
 <context>
@@ -3256,7 +3256,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="687"/>
         <source>Ele.</source>
-        <translation>Hoogte.</translation>
+        <translation>Hoogte</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="692"/>
@@ -3989,7 +3989,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../IMainWindow.ui" line="430"/>
         <source>F1</source>
-        <translation type="unfinished">F1</translation>
+        <translation>F1</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="439"/>
@@ -4220,7 +4220,7 @@ Ik wil de documentatie niet lezen!</translation>
     <message>
         <location filename="../map/IMapList.ui" line="182"/>
         <source>Reload Maps</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaarten herladen</translation>
     </message>
 </context>
 <context>
@@ -5353,12 +5353,12 @@ of
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="87"/>
         <source>Add a clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een kloon</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="100"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
-        <translation type="unfinished">De naam van de kloon zal aangeduid worden als &apos;_Kloon&apos;</translation>
+        <translation>De naam van de kloon zal aangeduid worden als &apos;_Kloon&apos;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="171"/>
@@ -5413,37 +5413,37 @@ of
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="46"/>
         <source>SQLite</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLite</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="56"/>
         <source>MySQL</source>
-        <translation type="unfinished"></translation>
+        <translation>MySQL</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="72"/>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="82"/>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiker</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="106"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt;Het is aanbevolen het wachtwoord leeg te laten, omdat dit als gewone tekst opgeslagen wordt.. Bij leeg laten van wachtwoord zal dit bij elke opstart gevraagd worden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="134"/>
         <source>File:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="148"/>
@@ -5870,27 +5870,29 @@ of
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
-        <translation type="unfinished"></translation>
+        <translation>Het item %1 is verand door %2 (%3). 
+
+Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer huidige versie of verwijder deze versie en kies een ander uit de database</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="176"/>
         <source>Conflict with database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Conflict met database...</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="177"/>
         <source>Clone &amp;&amp; Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Kloon &amp;&amp; Opslaan</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="178"/>
         <source>Force Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Forceer opslaan</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="179"/>
         <source>Take remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Neem huidige</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="478"/>
@@ -5902,7 +5904,9 @@ To solve this conflict you can create and save a clone, force your version or dr
         <source>There was an unexpected database error:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is een onverwachte database fout opgetreden:
+
+%1</translation>
     </message>
     <message>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
@@ -6155,7 +6159,7 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="301"/>
         <source>Save &quot;%1&quot; to...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan &quot;%1&quot; als...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="412"/>
@@ -6869,12 +6873,12 @@ of
     <message>
         <location filename="../gis/db/IDBMysql.cpp" line="46"/>
         <source>Password...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord...</translation>
     </message>
     <message>
         <location filename="../gis/db/IDBMysql.cpp" line="46"/>
         <source>Password for database &apos;%1&apos;:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord voor database &apos;%1&apos;:</translation>
     </message>
 </context>
 </TS>

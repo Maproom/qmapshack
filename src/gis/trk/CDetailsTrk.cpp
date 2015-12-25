@@ -39,6 +39,31 @@
 #include <QtWidgets>
 #include <proj_api.h>
 
+/* base case: add the filter specified in template parameter */
+template<typename filter>
+static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk)
+{
+    QTreeWidgetItem *item = new QTreeWidgetItem(itemGroup);
+    itemGroup->treeWidget()->setItemWidget(item, /* column = */ 0, new filter(trk, itemGroup->treeWidget()));
+}
+
+template<typename filter1, typename filter2, typename ... remainingFilters>
+static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk)
+{
+    addFilters<filter1>(itemGroup, trk);
+    addFilters<filter2, remainingFilters ...>(itemGroup, trk);
+}
+
+template<typename ... filters>
+static void addFilterGroup(QTreeWidget *widget, CGisItemTrk& trk, const QString &groupText, const QString &groupIcon)
+{
+    QTreeWidgetItem *itemGroup = new QTreeWidgetItem(widget);
+    itemGroup->setIcon(/* column = */ 0, QIcon(groupIcon));
+    itemGroup->setText(/* column = */ 0, groupText);
+
+    addFilters<filters ...>(itemGroup, trk);
+}
+
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     : QWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualDetails)
@@ -56,9 +81,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     widgetColorLayout->setAlignment(Qt::AlignTop);
 
-    int i = 0;
     const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
-    while(!actDesc[i].name.isEmpty())
+    for(int i = 0; !actDesc[i].name.isEmpty(); ++i)
     {
         const CActivityTrk::desc_t& desc = actDesc[i];
         QCheckBox * check = new QCheckBox(this);
@@ -72,12 +96,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         connect(check, &QCheckBox::clicked, this, &CDetailsTrk::slotActivitySelected);
 
         layoutActivities->addWidget(check);
-
-        i++;
     }
     layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
-
-
 
     updateData();
 
@@ -86,84 +106,41 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     propHandler->fillComboBox(comboGraph3);
 
     plot1 = new CPlotProfile(&trk, IPlot::eModeNormal, this);
-    plot1->setMinimumSize(QSize(0, 100));
-    plot1->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plot1->show();
-    layoutPlot->addWidget(plot1);
-
     plot2 = new CPlot(&trk, this);
-    plot2->setMinimumSize(QSize(0, 100));
-    plot2->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plot2->show();
-    layoutPlot->addWidget(plot2);
-
     plot3 = new CPlot(&trk, this);
-    plot3->setMinimumSize(QSize(0, 100));
-    plot3->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    plot3->show();
-    layoutPlot->addWidget(plot3);
+
+    for(IPlot *plot : { static_cast<IPlot*>(plot1), static_cast<IPlot*>(plot2), static_cast<IPlot*>(plot3) })
+    {
+        plot->setMinimumSize(QSize(0, 100));
+        plot->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+        plot->show();
+        layoutPlot->addWidget(plot);
+    }
 
     if(trk.isOnDevice())
     {
         toolLock->setDisabled(true);
     }
 
-    QTreeWidgetItem * item, * item0;
-    item0 = new QTreeWidgetItem(treeFilter);
-    item0->setIcon(0, QIcon("://icons/48x48/PointHide.png"));
-    item0->setText(0, tr("Reduce visible track points"));
+    addFilterGroup<CFilterDouglasPeuker, CFilterInvalid, CFilterReset, CFilterDelete>
+        (treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png");
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterDouglasPeuker(trk, treeFilter));
+    addFilterGroup<CFilterMedian, CFilterReplaceElevation, CFilterOffsetElevation>
+        (treeFilter, trk, tr("Change elevation of track points"), "://icons/48x48/SetEle.png");
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterInvalid(trk, treeFilter));
+    addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
+        (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterReset(trk, treeFilter));
+    addFilterGroup<CFilterSplitSegment>
+        (treeFilter, trk, tr("Cut track into pieces"), "://icons/48x48/TrkCut.png");
 
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterDelete(trk, treeFilter));
-
-    item0 = new QTreeWidgetItem(treeFilter);
-    item0->setIcon(0, QIcon("://icons/48x48/SetEle.png"));
-    item0->setText(0, tr("Change elevation of track points"));
-
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterMedian(trk, treeFilter));
-
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterReplaceElevation(trk, treeFilter));
-
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterOffsetElevation(trk, treeFilter));
-
-    item0 = new QTreeWidgetItem(treeFilter);
-    item0->setIcon(0, QIcon("://icons/48x48/Time.png"));
-    item0->setText(0, tr("Change timestamp of track points"));
-
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterNewDate(trk, treeFilter));
-
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterObscureDate(trk, treeFilter));
-
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterSpeed(trk, treeFilter));
-
-    item0 = new QTreeWidgetItem(treeFilter);
-    item0->setIcon(0, QIcon("://icons/48x48/TrkCut.png"));
-    item0->setText(0, tr("Cut track into pieces"));
-
-    item = new QTreeWidgetItem(item0);
-    treeFilter->setItemWidget(item,0, new CFilterSplitSegment(trk, treeFilter));
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");
     checkGraph1->setChecked(cfg.value("showGraph1", true).toBool());
     checkGraph2->setChecked(cfg.value("showGraph2", true).toBool());
     checkGraph3->setChecked(cfg.value("showGraph3", true).toBool());
-    splitter->restoreState   (cfg.value("splitterSizes").toByteArray());
+    splitter->restoreState (cfg.value("splitterSizes").toByteArray());
     treeWidget->header()->restoreState(cfg.value("trackPointListState").toByteArray());
     tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
@@ -200,7 +177,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     // this is good because the signals are connected at this point
     // invoking the slots
     cfg.beginGroup("TrackDetails");
-    i = comboGraph2->findData(cfg.value("propGraph2", CKnownExtension::internalSpeed).toString());
+    int i = comboGraph2->findData(cfg.value("propGraph2", CKnownExtension::internalSpeed).toString());
     if(i != NOIDX)
     {
         comboGraph2->setCurrentIndex(i);
@@ -236,7 +213,7 @@ CDetailsTrk::~CDetailsTrk()
 
     cfg.setValue("splitterSizes",       splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
-    cfg.setValue("visibleTab", tabWidget->currentIndex());
+    cfg.setValue("visibleTab",          tabWidget->currentIndex());
     cfg.endGroup();
 }
 
@@ -267,7 +244,6 @@ void CDetailsTrk::updateData()
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CDetailsTrk::updateData");
     originator = true;
 
-    QString str, val, unit;
     bool isReadOnly = trk.isReadOnly();
 
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
@@ -285,6 +261,8 @@ void CDetailsTrk::updateData()
     {
         foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
         {
+            QString val, unit;
+
             QTreeWidgetItem * item = new QTreeWidgetItem();
             item->setTextAlignment(eColNum,     Qt::AlignLeft);
             item->setTextAlignment(eColEle,     Qt::AlignRight);
@@ -301,25 +279,21 @@ void CDetailsTrk::updateData()
             }
 
             item->setText(eColNum,QString::number(trkpt.idxTotal));
-            if(trkpt.time.isValid())
-            {
-                item->setText(eColTime, IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD));
-            }
-            else
-            {
-                item->setText(eColTime, "-");
-            }
+
+            item->setText(eColTime, trkpt.time.isValid()
+                          ? IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD)
+                          : "-"
+                          );
 
             if(trkpt.ele != NOINT)
             {
                 IUnit::self().meter2elevation(trkpt.ele, val, unit);
-                str = tr("%1 %2").arg(val).arg(unit);
+                item->setText(eColEle, tr("%1 %2").arg(val).arg(unit));
             }
             else
             {
-                str = "-";
+                item->setText(eColEle, "-");
             }
-            item->setText(eColEle,str);
 
             IUnit::self().meter2distance(trkpt.deltaDistance, val, unit);
             item->setText(eColDelta, tr("%1 %2").arg(val).arg(unit));
@@ -327,27 +301,21 @@ void CDetailsTrk::updateData()
             IUnit::self().meter2distance(trkpt.distance, val, unit);
             item->setText(eColDist, tr("%1 %2").arg(val).arg(unit));
 
-            // speed
             if(trkpt.speed != NOFLOAT)
             {
                 IUnit::self().meter2speed(trkpt.speed, val, unit);
-                str = tr("%1 %2").arg(val).arg(unit);
+                item->setText(eColSpeed, tr("%1 %2").arg(val).arg(unit));
             }
             else
             {
-                str = "-";
+                item->setText(eColSpeed, "-");
             }
-            item->setText(eColSpeed,str);
 
-            if(trkpt.slope1 != NOFLOAT)
-            {
-                str = QString("%1°(%2%)").arg(trkpt.slope1,2,'f',0).arg(trkpt.slope2,2,'f',0);
-            }
-            else
-            {
-                str = "-";
-            }
-            item->setText(eColSlope,str);
+            item->setText(eColSlope,
+                          (trkpt.slope1 != NOFLOAT)
+                          ? QString("%1°(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0)
+                          : "-"
+                          );
 
             IUnit::self().meter2elevation(trkpt.ascend, val, unit);
             item->setText(eColAscend, tr("%1 %2").arg(val).arg(unit));
@@ -355,6 +323,7 @@ void CDetailsTrk::updateData()
             item->setText(eColDescend, tr("%1 %2").arg(val).arg(unit));
 
             // position
+            QString str;
             IUnit::degToStr(trkpt.lon, trkpt.lat, str);
             item->setText(eColPosition,str);
 
@@ -373,22 +342,18 @@ void CDetailsTrk::updateData()
 
     quint32 flags = trk.getActivities().getAllFlags();
 
-    int i = 0;
     const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
-    while(!actDesc[i].objName.isEmpty())
+    for(int i = 0; !actDesc[i].objName.isEmpty(); ++i)
     {
         const CActivityTrk::desc_t& desc = actDesc[i];
-
         QCheckBox * check = findChild<QCheckBox*>("check" + desc.objName);
-        if(check)
+        if(nullptr != check)
         {
             check->setChecked((flags & desc.flag) == desc.flag);
         }
-
-        i++;
     }
 
-    str.clear();
+    QString str;
     trk.getActivities().printSummary(str);
     labelActivityInfo->setText(str);
 
@@ -400,7 +365,7 @@ void CDetailsTrk::updateData()
     listHistory->setupHistory(trk);
 
     QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : 0);
-    if(tabWidget)
+    if(nullptr != tabWidget)
     {
         int idx = tabWidget->indexOf(this);
         if(idx != NOIDX)
@@ -475,7 +440,7 @@ void CDetailsTrk::updateData()
     // signals are unblocked by now changing the combobox will trigger a graph update
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());
+    int i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());
     if(i != NOIDX)
     {
         comboGraph2->setCurrentIndex(i);
@@ -495,7 +460,7 @@ void CDetailsTrk::updateData()
 
 void CDetailsTrk::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
 {
-    if(pt != 0)
+    if(nullptr != pt)
     {
         plotTrack->setMouseFocus(pt->lon, pt->lat);
         labelInfoTrkPt->setText(trk.getInfoTrkPt(*pt));
@@ -508,21 +473,14 @@ void CDetailsTrk::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
     }
 }
 
-void CDetailsTrk::setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2)
+void CDetailsTrk::setMouseRangeFocus(const CGisItemTrk::trkpt_t *pt1, const CGisItemTrk::trkpt_t *pt2)
 {
-    if(pt1 && pt2)
-    {
-        labelInfoRange->setText(trk.getInfoRange(*pt1, *pt2));
-    }
-    else
-    {
-        labelInfoRange->setText("-\n-");
-    }
+    labelInfoRange->setText( (pt1 && pt2) ? trk.getInfoRange(*pt1, *pt2) : "-\n-" );
 }
 
-void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t * pt)
+void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t *pt)
 {
-    if(pt != 0)
+    if(nullptr != pt)
     {
         treeWidget->blockSignals(true);
         treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idxTotal));
@@ -535,9 +493,9 @@ void CDetailsTrk::slotMouseClickState(int s)
     if(s == IPlot::eMouseClickIdle)
     {
         labelInfoRange->setText("-\n-");
-        plot3->setMouseRangeFocus(0,0);
-        plot1->setMouseRangeFocus(0,0);
-        plot2->setMouseRangeFocus(0,0);
+        plot3->setMouseRangeFocus(0, 0);
+        plot1->setMouseRangeFocus(0, 0);
+        plot2->setMouseRangeFocus(0, 0);
     }
 }
 
@@ -596,7 +554,7 @@ void CDetailsTrk::slotChangeReadOnlyMode(bool on)
 void CDetailsTrk::slotItemSelectionChanged()
 {
     QTreeWidgetItem * item = treeWidget->currentItem();
-    if(item != 0)
+    if(nullptr != item)
     {
         quint32 idx = item->text(eColNum).toUInt();
         trk.setMouseFocusByTotalIndex(idx, CGisItemTrk::eFocusMouseMove, "CDetailsTrk");
@@ -608,12 +566,11 @@ void CDetailsTrk::slotLinkActivated(const QString& url)
     if(url == "name")
     {
         QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, trk.getName());
-        if(name.isEmpty())
+        if(!name.isEmpty())
         {
-            return;
+            trk.setName(name);
+            updateData();
         }
-        trk.setName(name);
-        updateData();
     }
 }
 
@@ -662,27 +619,28 @@ void CDetailsTrk::slotActivitySelected(bool checked)
         if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) != QMessageBox::Ok)
         {
             updateData();
-            return;
         }
-
-        trk.setActivity(CGisItemTrk::trkpt_t::eActNone, tr("None"), "://icons/48x48/ActNone.png");
-        return;
+        else
+        {
+            trk.setActivity(CGisItemTrk::trkpt_t::eActNone, tr("None"), "://icons/48x48/ActNone.png");
+        }
     }
-
-    QObject * s = sender();
-    bool ok = false;
-    quint32 flag = s->property("flag").toUInt(&ok);
-    if(ok)
+    else
     {
-        trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
+        QObject *s = sender();
+        bool ok = false;
+        quint32 flag = s->property("flag").toUInt(&ok);
+        if(ok)
+        {
+            trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
+        }
     }
 }
 
 void CDetailsTrk::slotSetupGraph(int idx)
 {
-    const CPropertyTrk * propHandler = trk.getPropertyHandler();
-    CPlot * plot = 0;
-    QObject * s = sender();
+    CPlot   *plot = nullptr;
+    QObject *s    = sender();
 
     if(s == comboGraph2)
     {
@@ -695,6 +653,6 @@ void CDetailsTrk::slotSetupGraph(int idx)
 
     if(plot)
     {
-        propHandler->setupPlot(plot, idx);
+        trk.getPropertyHandler()->setupPlot(plot, idx);
     }
 }

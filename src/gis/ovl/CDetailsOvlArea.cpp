@@ -31,13 +31,13 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     setupUi(this);
 
     QPixmap icon(64,24);
-    for(int i=0; i < OVL_N_COLORS; ++i)
+    for(size_t i = 0; i < CGisItemOvlArea::colorMapSize; ++i)
     {
-        icon.fill(CGisItemOvlArea::lineColors[i]);
-        comboColor->addItem(icon,"",CGisItemOvlArea::lineColors[i]);
+        icon.fill(CGisItemOvlArea::colorMap[i].color);
+        comboColor->addItem(icon,"", CGisItemOvlArea::colorMap[i].color);
     }
 
-    for(int i = 0; i < OVL_N_STYLES; i++)
+    for(int i = 0; i < OVL_N_STYLES; ++i)
     {
         icon.fill(Qt::white);
         QPainter p(&icon);
@@ -49,7 +49,7 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     }
 
 
-    for(int i = 0; i < OVL_N_WIDTHS; i++)
+    for(int i = 0; i < OVL_N_WIDTHS; ++i)
     {
         comboBorderWidth->addItem(CGisItemOvlArea::lineWidths[i].string, CGisItemOvlArea::lineWidths[i].width);
     }
@@ -146,7 +146,7 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
 {
     if(url.toString() == "comment")
     {
-        CTextEditWidget dlg(0);
+        CTextEditWidget dlg(nullptr);
         dlg.setHtml(area.getComment());
         if(dlg.exec() == QDialog::Accepted)
         {
@@ -156,7 +156,7 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
     }
     else if(url.toString() == "description")
     {
-        CTextEditWidget dlg(0);
+        CTextEditWidget dlg(nullptr);
         dlg.setHtml(area.getDescription());
         if(dlg.exec() == QDialog::Accepted)
         {
@@ -192,26 +192,19 @@ void CDetailsOvlArea::setupGui()
     bool isReadOnly = area.isReadOnly();
     setWindowTitle(area.getName());
 
-    if(area.isTainted())
-    {
-        labelTainted->show();
-    }
-    else
-    {
-        labelTainted->hide();
-    }
-
-
+    labelTainted->setVisible(area.isTainted());
     labelName->setText(IGisItem::toLink(isReadOnly, "name", area.getName(), ""));
 
-    comboColor->setCurrentIndex(area.getColorIdx());
-    comboColor->setEnabled(!isReadOnly);
+    comboColor->setCurrentIndex      (area.getColorIdx());
     comboBorderWidth->setCurrentIndex(comboBorderWidth->findData(area.getWidth()));
+    comboStyle->setCurrentIndex      (comboStyle->findData      (area.getStyle()));
+
+    comboColor->setEnabled      (!isReadOnly);
     comboBorderWidth->setEnabled(!isReadOnly);
-    comboStyle->setCurrentIndex(comboStyle->findData(area.getStyle()));
-    comboStyle->setEnabled(!isReadOnly);
+    comboStyle->setEnabled      (!isReadOnly);
+    checkOpacity->setEnabled    (!isReadOnly);
+
     checkOpacity->setChecked(area.getOpacity());
-    checkOpacity->setEnabled(!isReadOnly);
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, area.getComment(), area.getDescription(), area.getLinks()));
@@ -223,12 +216,12 @@ void CDetailsOvlArea::setupGui()
     const CGisItemOvlArea::area_t& a = area.getAreaData();
     foreach(const CGisItemOvlArea::pt_t& pt, a.pts)
     {
-        QString str;
         QTreeWidgetItem * item = new QTreeWidgetItem();
 
         item->setText(eColNum,QString::number(idx++));
 
         // position
+        QString str;
         IUnit::degToStr(pt.lon, pt.lat, str);
         item->setText(eColPosition,str);
         items << item;

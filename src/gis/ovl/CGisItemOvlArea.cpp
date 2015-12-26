@@ -31,71 +31,11 @@
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
 
-
-const QColor CGisItemOvlArea::lineColors[OVL_N_COLORS] =
-{
-    Qt::black                     // 0
-    ,Qt::darkRed                 // 1
-    ,Qt::darkGreen               // 2
-    ,Qt::darkYellow              // 3
-    ,Qt::darkBlue                // 4
-    ,Qt::darkMagenta             // 5
-    ,Qt::darkCyan                // 6
-    ,Qt::gray                    // 7
-    ,Qt::darkGray                // 8
-    ,Qt::red                     // 9
-    ,Qt::green                   // 10
-    ,Qt::yellow                  // 11
-    ,Qt::blue                    // 12
-    ,Qt::magenta                 // 13
-    ,Qt::cyan                    // 14
-    ,Qt::white                   // 15
-    ,Qt::transparent             // 16
-};
-
-const QString CGisItemOvlArea::bulletColors[OVL_N_COLORS] =
-{
-    // 0
-    "://icons/8x8/bullet_black.png"
-    // 1
-    ,QString("://icons/8x8/bullet_dark_red.png")
-    // 2
-    ,QString("://icons/8x8/bullet_dark_green.png")
-    // 3
-    ,QString("://icons/8x8/bullet_dark_yellow.png")
-    // 4
-    ,QString("://icons/8x8/bullet_dark_blue.png")
-    // 5
-    ,QString("://icons/8x8/bullet_dark_magenta.png")
-    // 6
-    ,QString("://icons/8x8/bullet_dark_cyan.png")
-    // 7
-    ,QString("://icons/8x8/bullet_gray.png")
-    // 8
-    ,QString("://icons/8x8/bullet_dark_gray.png")
-    // 9
-    ,QString("://icons/8x8/bullet_red.png")
-    // 10
-    ,QString("://icons/8x8/bullet_green.png")
-    // 11
-    ,QString("://icons/8x8/bullet_yellow.png")
-    // 12
-    ,QString("://icons/8x8/bullet_blue.png")
-    // 13
-    ,QString("://icons/8x8/bullet_magenta.png")
-    // 14
-    ,QString("://icons/8x8/bullet_cyan.png")
-    // 15
-    ,QString("://icons/8x8/bullet_white.png")
-    ,QString()                 // 16
-};
-
-
 const CGisItemOvlArea::width_t CGisItemOvlArea::lineWidths[OVL_N_WIDTHS] =
 {
-    {3, QObject::tr("thin")}
-    ,{5, QObject::tr("normal")}
-    ,{9, QObject::tr("wide")}
+     {3,  QObject::tr("thin")}
+    ,{5,  QObject::tr("normal")}
+    ,{9,  QObject::tr("wide")}
     ,{13, QObject::tr("strong")}
 };
 
@@ -230,12 +170,7 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
         i++;
     }
 
-    if(idx < 0)
-    {
-        return NOPOINTF;
-    }
-
-    return polygonArea[idx];
+    return (idx < 0) ? NOPOINTF : polygonArea[idx];
 }
 
 void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
@@ -271,7 +206,7 @@ void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
 
 void CGisItemOvlArea::edit()
 {
-    CDetailsOvlArea dlg(*this, 0);
+    CDetailsOvlArea dlg(*this, nullptr);
     dlg.exec();
 
     deriveSecondaryData();
@@ -288,19 +223,19 @@ void CGisItemOvlArea::deriveSecondaryData()
     {
         if(pt.lon < west)
         {
-            west    = pt.lon;
+            west  = pt.lon;
         }
         if(pt.lon > east)
         {
-            east    = pt.lon;
+            east  = pt.lon;
         }
         if(pt.lat < south)
         {
-            south   = pt.lat;
+            south = pt.lat;
         }
         if(pt.lat > north)
         {
-            north   = pt.lat;
+            north = pt.lat;
         }
     }
 
@@ -408,12 +343,11 @@ void CGisItemOvlArea::gainUserFocus(bool yes)
 
 QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
 {
-    int i, len;
-    qreal x = 0, y = 0;
+    qreal x = 0;
+    qreal y = 0;
+    int len = polygon.size();
 
-    len = polygon.size();
-
-    for(i = 0; i < len; i++)
+    for(int i = 0; i < len; i++)
     {
         x = x + polygon[i].x();
         y = y + polygon[i].y();
@@ -549,38 +483,36 @@ void CGisItemOvlArea::setLinks(const QList<link_t>& links)
 }
 
 
-void CGisItemOvlArea::setColor(int idx)
+void CGisItemOvlArea::setColor(size_t idx)
 {
-    int N = sizeof(lineColors)/sizeof(QColor);
-    if(idx >= N)
+    if(idx >= colorMapSize)
     {
         return;
     }
-    setColor(lineColors[idx]);
+    setColor(colorMap[idx].color);
     changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
 }
 
 void CGisItemOvlArea::setColor(const QColor& c)
 {
-    int n;
-    int N = sizeof(lineColors)/sizeof(QColor);
+    size_t n;
 
-    for(n = 0; n < N; n++)
+    for(n = 0; n < colorMapSize; n++)
     {
-        if(lineColors[n] == c)
+        if(colorMap[n].color == c)
         {
             colorIdx    = n;
-            color       = lineColors[n];
-            bullet      = QPixmap(bulletColors[n]);
+            color       = colorMap[n].color;
+            bullet      = QPixmap(colorMap[n].bullet);
             break;
         }
     }
 
-    if(n == N)
+    if(n == colorMapSize)
     {
         colorIdx    = DEFAULT_COLOR;
-        color       = lineColors[DEFAULT_COLOR];
-        bullet      = QPixmap(bulletColors[DEFAULT_COLOR]);
+        color       = colorMap[DEFAULT_COLOR].color;
+        bullet      = QPixmap(colorMap[DEFAULT_COLOR].bullet);
     }
 
     setIcon(color.name());
@@ -588,7 +520,7 @@ void CGisItemOvlArea::setColor(const QColor& c)
 
 void CGisItemOvlArea::setIcon(const QString& c)
 {
-    area.color   = c;
+    area.color  = c;
     icon        = QPixmap("://icons/48x48/Area.png");
 
     QPixmap mask( icon.size() );

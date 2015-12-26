@@ -29,7 +29,6 @@ class IGisProject;
 class CScrOptOvlArea;
 class IQlgtOverlay;
 
-#define OVL_N_COLORS 17
 #define OVL_N_WIDTHS 4
 #define OVL_N_STYLES 8
 
@@ -86,7 +85,7 @@ public:
     }
 
     void setName(const QString& str);
-    void setColor(int idx);
+    void setColor(size_t idx);
     void setDataFromPolyline(const SGisLine& l);
     void setWidth(qint32 w);
     void setStyle(qint32 s);
@@ -114,8 +113,6 @@ public:
         QString string;
     };
 
-    static const QColor lineColors[OVL_N_COLORS];
-    static const QString bulletColors[OVL_N_COLORS];
     static const width_t lineWidths[OVL_N_WIDTHS];
     static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
 protected:
@@ -166,7 +163,7 @@ private:
 
     static key_t keyUserFocus;
 
-    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penForeground {Qt::blue,  3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
     QPen penBackground {Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
     /// the track line color

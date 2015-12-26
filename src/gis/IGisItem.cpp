@@ -62,13 +62,15 @@ const IGisItem::color_t IGisItem::colorMap[] =
     ,{"Transparent", QColor(Qt::transparent), QString()}
 };
 
+const size_t IGisItem::colorMapSize = sizeof(colorMap) / sizeof(color_t);
+
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
 {
     int n = -1;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 
-    if(parent == 0)
+    if(nullptr == parent)
     {
         return;
     }
@@ -533,7 +535,7 @@ void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
 
 QColor IGisItem::str2color(const QString& name)
 {
-    for(size_t i = 0; i < sizeof(colorMap) / sizeof(color_t); i++)
+    for(size_t i = 0; i < colorMapSize; i++)
     {
         if(QString(colorMap[i].name).toUpper() == name.toUpper())
         {
@@ -546,7 +548,7 @@ QColor IGisItem::str2color(const QString& name)
 
 QString IGisItem::color2str(const QColor& color)
 {
-    for(size_t i = 0; i < sizeof(colorMap) / sizeof(color_t); i++)
+    for(size_t i = 0; i < colorMapSize; i++)
     {
         if(colorMap[i].color == color)
         {
@@ -559,22 +561,21 @@ QString IGisItem::color2str(const QColor& color)
 
 void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines)
 {
-    int i;
-    QPointF pt, ptt, pt1;
-    QPolygonF subline;
-    const int size = line.size();
-
     if(line.isEmpty())
     {
         return;
     }
 
-    pt = line[0];
+    QPointF ptt;
+    QPointF pt = line[0];
+
+    QPolygonF subline;
     subline << pt;
 
-    for(i = 1; i < size; i++)
+    const int size = line.size();
+    for(int i = 1; i < size; i++)
     {
-        pt1 = line[i];
+        QPointF pt1 = line[i];
 
         if(!GPS_Math_LineCrossesRect(pt, pt1, extViewport))
         {
@@ -589,13 +590,11 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
         }
 
         ptt = pt1 - pt;
-        if(ptt.manhattanLength() < 5)
+        if(ptt.manhattanLength() >= 5)
         {
-            continue;
+            subline << pt1;
+            pt = pt1;
         }
-
-        subline << pt1;
-        pt = pt1;
     }
 
     if(subline.size() > 1)

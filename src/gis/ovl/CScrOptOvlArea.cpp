@@ -84,7 +84,7 @@ void CScrOptOvlArea::slotEdit()
 void CScrOptOvlArea::draw(QPainter& p)
 {
     IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    if(nullptr == item)
     {
         QWidget::deleteLater();
         return;

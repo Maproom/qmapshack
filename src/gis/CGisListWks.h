@@ -152,14 +152,14 @@ private:
     QAction * actionEditArea;
     QAction * actionRteFromWpt;
 
-    QMenu * menuNone = 0;
+    QMenu * menuNone = nullptr;
 
     QPointer<CSearchGoogle> searchGoogle;
 
     bool saveOnExit = true;
     qint32 saveEvery = 5;
 
-    IDeviceWatcher * deviceWatcher = 0;
+    IDeviceWatcher * deviceWatcher = nullptr;
 };
 
 #endif //CGISLISTWKS_H

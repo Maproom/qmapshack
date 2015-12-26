@@ -84,7 +84,6 @@ private:
     bool waitCursor;
 };
 
-
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
 {
@@ -114,7 +113,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProjectDev->addAction(actionSaveAs);
     menuProjectDev->addAction(actionSave);
     actionSyncDevWks= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
-    actionDelProj   = menuProjectDev->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
+    actionDelProj   = menuProjectDev->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"),                this, SLOT(slotDeleteProject()));
 
     menuProjectTrash= new QMenu(this);
     menuProjectTrash->addAction(actionSaveAs);
@@ -126,7 +125,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuItemTrk      = new QMenu(this);
     actionEditDetails = menuItemTrk->addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
-    actionCopyItem   = menuItemTrk->addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
+    actionCopyItem    = menuItemTrk->addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."),     this, SLOT(slotCopyItem()));
     menuItemTrk->addSeparator();
     actionFocusTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"));
     actionFocusTrk->setCheckable(true);
@@ -141,10 +140,10 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemWpt->addAction(actionEditDetails);
     menuItemWpt->addAction(actionCopyItem);
     menuItemWpt->addSeparator();
-    actionBubbleWpt = menuItemWpt->addAction(QIcon("://icons/32x32/Bubble.png"),tr("Show Bubble"), this, SLOT(slotBubbleWpt()));
+    actionBubbleWpt = menuItemWpt->addAction(QIcon("://icons/32x32/Bubble.png"),  tr("Show Bubble"),       this, SLOT(slotBubbleWpt()));
     actionBubbleWpt->setCheckable(true);
-    actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"),tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
-    actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"),tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
+    actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
 
@@ -154,9 +153,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemRte->addSeparator();
     actionFocusRte  = menuItemRte->addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"));
     actionFocusRte->setCheckable(true);
-    actionCalcRte   = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"), tr("Calculate Route"), this, SLOT(slotCalcRte()));
-    actionResetRte  = menuItemRte->addAction(QIcon("://icons/32x32/Reset.png"), tr("Reset Route"), this, SLOT(slotResetRte()));
-    actionEditRte   = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"), this, SLOT(slotEditRte()));
+    actionCalcRte   = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"),    tr("Calculate Route"), this, SLOT(slotCalcRte()));
+    actionResetRte  = menuItemRte->addAction(QIcon("://icons/32x32/Reset.png"),    tr("Reset Route"),     this, SLOT(slotResetRte()));
+    actionEditRte   = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"),      this, SLOT(slotEditRte()));
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
 
@@ -183,7 +182,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     SETTINGS;
     saveOnExit  = cfg.value("Database/saveOnExit", saveOnExit).toBool();
-    saveEvery   = cfg.value("Database/saveEvery", saveEvery).toInt();
+    saveEvery   = cfg.value("Database/saveEvery",  saveEvery).toInt();
 
     if(saveOnExit && (saveEvery > 0))
     {
@@ -212,30 +211,12 @@ CGisListWks::~CGisListWks()
 void CGisListWks::configDB()
 {
     QSqlQuery query(db);
-    if(!query.exec("PRAGMA locking_mode=EXCLUSIVE"))
-    {
-        return;
-    }
 
-    if(!query.exec("PRAGMA synchronous=OFF"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA temp_store=MEMORY"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA default_cache_size=50"))
-    {
-        return;
-    }
-
-    if(!query.exec("PRAGMA page_size=8192"))
-    {
-        return;
-    }
+    QUERY_RUN("PRAGMA locking_mode=EXCLUSIVE", return)
+    QUERY_RUN("PRAGMA synchronous=OFF",        return)
+    QUERY_RUN("PRAGMA temp_store=MEMORY",      return)
+    QUERY_RUN("PRAGMA default_cache_size=50",  return)
+    QUERY_RUN("PRAGMA page_size=8192",         return)
 
     // When migrating the database these tables are used.
     // Due to caching they can't be dropped right after the
@@ -277,20 +258,15 @@ void CGisListWks::initDB()
         QUERY_EXEC();
     }
 
-    if(!query.exec( "CREATE TABLE workspace ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "keyqms         TEXT NOT NULL,"
-                    "changed        BOOLEAN DEFAULT FALSE,"
-                    "visible        BOOLEAN DEFAULT TRUE,"
-                    "data           BLOB NOT NULL"
-
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
+    QUERY_RUN("CREATE TABLE workspace ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "type           INTEGER NOT NULL,"
+              "name           TEXT NOT NULL,"
+              "keyqms         TEXT NOT NULL,"
+              "changed        BOOLEAN DEFAULT FALSE,"
+              "visible        BOOLEAN DEFAULT TRUE,"
+              "data           BLOB NOT NULL"
+              ")", NO_CMD)
 }
 
 void CGisListWks::migrateDB(int version)
@@ -321,37 +297,27 @@ void CGisListWks::migrateDB1to2()
     // the default value is `true`, as - by default in older versions of QMS - all saved projects
     // have been loaded and shown on the map directly after starting
     QSqlQuery query(db);
-    if(!query.exec( "ALTER TABLE workspace ADD COLUMN visible BOOLEAN DEFAULT TRUE;" ))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-    }
+    QUERY_RUN("ALTER TABLE workspace ADD COLUMN visible BOOLEAN DEFAULT TRUE;", NO_CMD)
 }
 
 void CGisListWks::migrateDB2to3()
 {
     QSqlQuery query(db);
 
-    query.prepare("BEGIN TRANSACTION;");
-    QUERY_EXEC(return );
-    query.prepare("ALTER TABLE workspace RENAME TO tmp_workspace;");
-    QUERY_EXEC(return );
-    query.prepare( "CREATE TABLE workspace ("
-                   "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                   "type           INTEGER NOT NULL,"
-                   "name           TEXT NOT NULL,"
-                   "keyqms         TEXT NOT NULL,"
-                   "changed        BOOLEAN DEFAULT FALSE,"
-                   "visible        BOOLEAN DEFAULT TRUE,"
-                   "data           BLOB NOT NULL"
-                   ")");
-    QUERY_EXEC(return );
-    query.prepare("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;");
-    QUERY_EXEC(return );
-    query.prepare("COMMIT;");
-    QUERY_EXEC(return );
-    query.prepare("DROP TABLE tmp_workspace;");
-    QUERY_EXEC(return );
+    QUERY_RUN("BEGIN TRANSACTION;",                             return)
+    QUERY_RUN("ALTER TABLE workspace RENAME TO tmp_workspace;", return)
+    QUERY_RUN("CREATE TABLE workspace ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "type           INTEGER NOT NULL,"
+              "name           TEXT NOT NULL,"
+              "keyqms         TEXT NOT NULL,"
+              "changed        BOOLEAN DEFAULT FALSE,"
+              "visible        BOOLEAN DEFAULT TRUE,"
+              "data           BLOB NOT NULL"
+              ")", return);
+    QUERY_RUN("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;", return)
+    QUERY_RUN("COMMIT;",                                                                                      return)
+    QUERY_RUN("DROP TABLE tmp_workspace;",                                                                    return)
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -772,7 +738,7 @@ IGisProject * CGisListWks::getProjectByKey(const QString& key)
             return item;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
@@ -787,7 +753,7 @@ CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
             return item;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void CGisListWks::slotSaveWorkspace()
@@ -800,10 +766,7 @@ void CGisListWks::slotSaveWorkspace()
     }
 
     QSqlQuery query(db);
-    if(!query.exec("DELETE FROM workspace"))
-    {
-        QUERY_EXEC(return );
-    }
+    QUERY_RUN("DELETE FROM workspace", return)
 
     qDebug() << "slotSaveWorkspace()";
 
@@ -815,7 +778,7 @@ void CGisListWks::slotSaveWorkspace()
         PROGRESS(i, return );
 
         IGisProject * project = dynamic_cast<IGisProject*>(topLevelItem(i));
-        if(project == 0)
+        if(nullptr == project)
         {
             continue;
         }
@@ -828,14 +791,14 @@ void CGisListWks::slotSaveWorkspace()
         project->IGisProject::operator>>(stream);
 
         query.prepare("INSERT INTO workspace (type, keyqms, name, changed, visible, data) VALUES (:type, :keyqms, :name, :changed, :visible, :data)");
-        query.bindValue(":type", project->getType());
-        query.bindValue(":keyqms", project->getKey());
-        query.bindValue(":name", project->getName());
+        query.bindValue(":type",    project->getType());
+        query.bindValue(":keyqms",  project->getKey());
+        query.bindValue(":name",    project->getName());
         query.bindValue(":changed", project->isChanged());
 
         bool visible = (project->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked);
         query.bindValue(":visible", visible);
-        query.bindValue(":data", data);
+        query.bindValue(":data",    data);
         QUERY_EXEC(continue);
     }
 
@@ -851,8 +814,7 @@ void CGisListWks::slotLoadWorkspace()
 
     QSqlQuery query(db);
 
-    query.prepare("SELECT type, keyqms, name, changed, visible, data FROM workspace");
-    QUERY_EXEC(return );
+    QUERY_RUN("SELECT type, keyqms, name, changed, visible, data FROM workspace", return)
 
     const int total = query.size();
     PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);
@@ -872,7 +834,7 @@ void CGisListWks::slotLoadWorkspace()
         stream.setVersion(QDataStream::Qt_5_2);
         stream.setByteOrder(QDataStream::LittleEndian);
 
-        IGisProject * project = 0;
+        IGisProject *project = nullptr;
         switch(type)
         {
         case IGisProject::eTypeQms:
@@ -903,7 +865,7 @@ void CGisListWks::slotLoadWorkspace()
             if(!project->isValid())
             {
                 delete project;
-                project = 0;
+                project = nullptr;
             }
             else
             {
@@ -925,20 +887,18 @@ void CGisListWks::slotLoadWorkspace()
         }
         }
 
-        if(project == 0)
+        if(nullptr != project)
         {
-            continue;
-        }
+            // Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
+            // but this results in a visible `the checkbox is being unchecked`, especially in case the project
+            // is large and takes some time to load.
+            // When done directly after construction there is no `blinking` of the check mark
 
-        // Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
-        // but this results in a visible `the checkbox is being unchecked`, especially in case the project
-        // is large and takes some time to load.
-        // When done directly after construction there is no `blinking` of the check mark
-
-        project->setToolTip(eColumnName,project->getInfo());
-        if(changed)
-        {
-            project->setChanged();
+            project->setToolTip(eColumnName,project->getInfo());
+            if(changed)
+            {
+                project->setChanged();
+            }
         }
     }
 
@@ -962,7 +922,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
     foreach(QTreeWidgetItem *item, selectedItems())
     {
         IGisProject *project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
+        if(nullptr != project)
         {
             // as soon as we find an unchecked element, not all elements are checked (and vice versa)
             if(project->checkState(CGisListDB::eColumnCheckbox) == Qt::Unchecked)
@@ -988,8 +948,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
     if(selectedItems().count() > 1)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
-        if(project != 0)
+        IGisProject *project = dynamic_cast<IGisProject*>(currentItem());
+        if(nullptr != project)
         {
             if(project->isOnDevice())
             {
@@ -1003,12 +963,12 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             return;
         }
 
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
-        if(gisItem != 0)
+        IGisItem *gisItem = dynamic_cast<IGisItem*>(currentItem());
+        if(nullptr != gisItem)
         {
             bool onlyWpts = true;
             bool onlyTrks = true;
-            foreach(QTreeWidgetItem * item, selectedItems())
+            foreach(QTreeWidgetItem *item, selectedItems())
             {
                 if(item->type() != IGisItem::eTypeWpt)
                 {
@@ -1037,8 +997,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
     if(selectedItems().count() == 1)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
-        if(project != 0)
+        IGisProject *project = dynamic_cast<IGisProject*>(currentItem());
+        if(nullptr != project)
         {
             if(project->getType() == IGisProject::eTypeLostFound)
             {
@@ -1059,8 +1019,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             return;
         }
 
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
-        if(gisItem != 0)
+        IGisItem *gisItem = dynamic_cast<IGisItem*>(currentItem());
+        if(nullptr != gisItem)
         {
             bool isOnDevice = gisItem->isOnDevice();
 
@@ -1104,8 +1064,8 @@ void CGisListWks::setVisibilityOnMap(bool visible)
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem *item, items)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
+        IGisProject *project = dynamic_cast<IGisProject*>(item);
+        if(nullptr != project)
         {
             project->setCheckState(CGisListDB::eColumnCheckbox, visible ? Qt::Checked : Qt::Unchecked);
         }
@@ -1127,8 +1087,8 @@ static void closeProjects(const QList<QTreeWidgetItem*> &items)
 {
     foreach(QTreeWidgetItem * item, items)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
+        IGisProject *project = dynamic_cast<IGisProject*>(item);
+        if(nullptr != project)
         {
             if(project->askBeforClose())
             {
@@ -1172,7 +1132,7 @@ void CGisListWks::slotDeleteProject()
     foreach(QTreeWidgetItem * item, items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
+        if(nullptr != project)
         {
             CCanvas::setOverrideCursor(Qt::ArrowCursor, "slotDeleteProject");
             int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
@@ -1200,7 +1160,7 @@ void CGisListWks::slotSaveProject()
     foreach(QTreeWidgetItem * item, items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
+        if(nullptr != project)
         {
             if(project->canSave())
             {
@@ -1222,7 +1182,7 @@ void CGisListWks::slotSaveAsProject()
     foreach(QTreeWidgetItem * item, items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
+        if(nullptr != project)
         {
             project->saveAs();
         }
@@ -1283,11 +1243,11 @@ void CGisListWks::slotDeleteItem()
     foreach(QTreeWidgetItem * item, items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem != 0)
+        if(nullptr != gisItem)
         {
             bool yes = false;
-            IGisProject * project = dynamic_cast<IGisProject*>(gisItem->parent());
-            if(project)
+            IGisProject *project = dynamic_cast<IGisProject*>(gisItem->parent());
+            if(nullptr != project)
             {
                 project->blockUpdateItems(true);
                 yes = project->delItemByKey(gisItem->getKey(), last);
@@ -1339,7 +1299,7 @@ void CGisListWks::slotCopyItem()
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     IGisProject * project = CGisWidget::self().selectProject();
-    if(project == 0)
+    if(nullptr == project)
     {
         return;
     }
@@ -1355,17 +1315,15 @@ void CGisListWks::slotCopyItem()
     {
         PROGRESS(cnt++, break);
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem == 0)
+        if(nullptr != gisItem)
         {
-            continue;
+            project->insertCopyOfItem(gisItem, NOIDX, lastResult);
         }
-
-        project->insertCopyOfItem(gisItem, NOIDX, lastResult);
     }
     project->blockUpdateItems(false);
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
+    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+    if(nullptr != canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
@@ -1521,7 +1479,7 @@ void CGisListWks::slotAddEmptyProject()
 
     QString key, name;
     CSelectProjectDialog::type_e type;
-    CSelectProjectDialog dlg(key, name, type, 0);
+    CSelectProjectDialog dlg(key, name, type, nullptr);
     dlg.exec();
     if(name.isEmpty() && (type != CSelectProjectDialog::eTypeDb))
     {
@@ -1559,7 +1517,6 @@ void CGisListWks::slotAddEmptyProject()
     }
 }
 
-
 void CGisListWks::slotSearchGoogle(bool on)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
@@ -1570,8 +1527,8 @@ void CGisListWks::slotSearchGoogle(bool on)
         searchGoogle = new CSearchGoogle(this);
     }
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
+    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+    if(nullptr != canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
@@ -1587,7 +1544,7 @@ void CGisListWks::slotSyncWksDev()
     }
 
     IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
-    if(project == 0)
+    if(nullptr == project)
     {
         return;
     }
@@ -1607,22 +1564,20 @@ void CGisListWks::slotSyncWksDev()
     {
         for(int n = 0; n < N; n++)
         {
-            IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
-            if(device == 0)
+            IDevice *device = dynamic_cast<IDevice*>(topLevelItem(n));
+            if(nullptr != device)
             {
-                continue;
+                keys << device->getKey();
+                break;
             }
-
-            keys << device->getKey();
-            break;
         }
     }
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
     for(int n = 0; n < N; n++)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
-        if(device == 0 || keys.isEmpty() || !keys.contains(device->getKey()))
+        if(nullptr == device || keys.isEmpty() || !keys.contains(device->getKey()))
         {
             continue;
         }
@@ -1647,13 +1602,13 @@ void CGisListWks::slotSyncDevWks()
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
-    if(project == 0)
+    if(nullptr == project)
     {
         return;
     }
 
     IDevice * device = dynamic_cast<IDevice*>(project->parent());
-    if(device == 0)
+    if(nullptr == device)
     {
         return;
     }
@@ -1695,7 +1650,7 @@ bool CGisListWks::event(QEvent * e)
         {
             CEvtD2WReqInfo * evt = (CEvtD2WReqInfo*)e;
             CDBProject * project =  getProjectById(evt->id, evt->db);
-            if(project)
+            if(nullptr != project)
             {
                 project->postStatus();
             }
@@ -1708,7 +1663,7 @@ bool CGisListWks::event(QEvent * e)
         {
             CEvtD2WShowFolder * evt = (CEvtD2WShowFolder*)e;
             CDBProject * project =  getProjectById(evt->id, evt->db);
-            if(project == 0)
+            if(nullptr == project)
             {
                 if(evt->id == 0)
                 {
@@ -1807,12 +1762,10 @@ void CGisListWks::slotRteFromWpt()
     foreach(QTreeWidgetItem * item, selectedItems())
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-        if(wpt == 0)
+        if(nullptr != wpt)
         {
-            continue;
+            keys << wpt->getKey();
         }
-
-        keys << wpt->getKey();
     }
 
     CCreateRouteFromWpt dlg(keys, this);

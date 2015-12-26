@@ -56,14 +56,11 @@ CSelectDBFolder::~CSelectDBFolder()
 void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem * item)
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-    if(folder == 0)
+    if(nullptr != folder)
     {
-        return;
+        folder->expanding();
     }
-
-    folder->expanding();
 }
-
 
 void CSelectDBFolder::slotItemSelectionChanged()
 {

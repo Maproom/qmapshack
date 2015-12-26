@@ -50,15 +50,13 @@ quint64 IDB::getLastInsertID(QSqlDatabase& db, const QString& table)
 
     if(db.driverName() == "QSQLITE")
     {
-        query.prepare("SELECT last_insert_rowid() from " + table);
-        QUERY_EXEC(return 0);
+        QUERY_RUN("SELECT last_insert_rowid() from " + table, return 0)
         query.next();
         idChild = query.value(0).toULongLong();
     }
     else if(db.driverName() == "QMYSQL")
     {
-        query.prepare("SELECT last_insert_id() from " + table);
-        QUERY_EXEC(return 0);
+        QUERY_RUN("SELECT last_insert_id() from " + table, return 0)
         query.next();
         idChild = query.value(0).toULongLong();
     }

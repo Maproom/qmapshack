@@ -53,7 +53,7 @@ IDBFolder::~IDBFolder()
 bool IDBFolder::operator<(const QTreeWidgetItem &other) const
 {
     const IDBFolder * folder = dynamic_cast<const IDBFolder*>(&other);
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return false;
     }
@@ -76,7 +76,7 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
         return new CDBFolderOther(db, id, parent);
 
     default:
-        return 0;
+        return nullptr;
     }
 }
 
@@ -93,11 +93,11 @@ IDBFolderSql *IDBFolder::getDBFolder()
     }
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder != 0)
+    if(nullptr != folder)
     {
         return folder->getDBFolder();
     }
-    return 0;
+    return nullptr;
 }
 
 IDBFolder * IDBFolder::getFolder(quint64 idFolder)
@@ -111,19 +111,19 @@ IDBFolder * IDBFolder::getFolder(quint64 idFolder)
     for(int n = 0; n < N; n++)
     {
         IDBFolder * folder1 = dynamic_cast<IDBFolder*>(child(n));
-        if(folder1 == 0)
+        if(nullptr == folder1)
         {
-            return 0;
+            return nullptr;
         }
 
         IDBFolder * folder2 = folder1->getFolder(idFolder);
-        if(folder2)
+        if(nullptr != folder2)
         {
             return folder2;
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 quint64 IDBFolder::addFolder(type_e type, const QString& name)
@@ -214,14 +214,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     qint32 nItems = query.value(0).toInt();
 
     // set indicator according to items
-    if(nFolders || nItems)
-    {
-        setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-    }
-    else
-    {
-        setChildIndicatorPolicy(QTreeWidgetItem::DontShowIndicator);
-    }
+    setChildIndicatorPolicy( (nFolders || nItems) ? QTreeWidgetItem::ShowIndicator : QTreeWidgetItem::DontShowIndicator );
 
     if(isExpanded())
     {
@@ -266,7 +259,7 @@ void IDBFolder::toggle()
 void IDBFolder::remove()
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return;
     }

@@ -38,7 +38,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
     {
         QPixmap pixmap;
         type = query.value(0).toInt();
-        key = query.value(1).toString();
+        key  = query.value(1).toString();
         pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
         setIcon(CGisListDB::eColumnCheckbox, pixmap);
         setText(CGisListDB::eColumnName, query.value(3).toString());
@@ -54,7 +54,7 @@ CDBItem::~CDBItem()
 void CDBItem::toggle()
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return;
     }
@@ -82,7 +82,7 @@ void CDBItem::toggle()
 void CDBItem::remove()
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return;
     }

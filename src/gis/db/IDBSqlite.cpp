@@ -54,16 +54,11 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
 
     QSqlQuery query(db);
 
-    query.prepare("PRAGMA locking_mode=EXCLUSIVE");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA temp_store=MEMORY");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA default_cache_size=50");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA page_size=8192");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA synchronous=off");
-    QUERY_EXEC(return false);
+    QUERY_RUN("PRAGMA locking_mode=EXCLUSIVE", return false)
+    QUERY_RUN("PRAGMA temp_store=MEMORY",      return false)
+    QUERY_RUN("PRAGMA default_cache_size=50",  return false)
+    QUERY_RUN("PRAGMA page_size=8192",         return false)
+    QUERY_RUN("PRAGMA synchronous=off",        return false)
 
     // When migrating the database these tables are used.
     // Due to caching they can't be dropped right after the
@@ -71,13 +66,11 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
     // And delete them as a second chance.
     if(query.exec("select * from tmp_folders"))
     {
-        query.prepare("DROP TABLE tmp_folders;");
-        QUERY_EXEC();
+        QUERY_RUN("DROP TABLE tmp_folders;", NO_CMD)
     }
     if(query.exec("select * from tmp_items"))
     {
-        query.prepare("DROP TABLE tmp_items;");
-        QUERY_EXEC();
+        QUERY_RUN("DROP TABLE tmp_items;", NO_CMD)
     }
 
 
@@ -116,81 +109,57 @@ bool IDBSqlite::initDB()
         QUERY_EXEC(return false);
     }
 
-    if(!query.exec( "CREATE TABLE folders ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "keyqms         TEXT,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "locked         BOOLEAN DEFAULT FALSE,"
-                    "data           BLOB"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN("CREATE TABLE folders ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "type           INTEGER NOT NULL,"
+              "keyqms         TEXT,"
+              "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+              "name           TEXT NOT NULL,"
+              "comment        TEXT,"
+              "locked         BOOLEAN DEFAULT FALSE,"
+              "data           BLOB"
+              ")", return false)
 
-    if(!query.exec( "CREATE TABLE items ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER,"
-                    "keyqms         TEXT NOT NULL UNIQUE,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "icon           BLOB NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "data           BLOB NOT NULL,"
-                    "hash           TEXT NOT NULL,"
-                    "last_user      TEXT DEFAULT 'n/a',"
-                    "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN("CREATE TABLE items ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "type           INTEGER,"
+              "keyqms         TEXT NOT NULL UNIQUE,"
+              "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+              "icon           BLOB NOT NULL,"
+              "name           TEXT NOT NULL,"
+              "comment        TEXT,"
+              "data           BLOB NOT NULL,"
+              "hash           TEXT NOT NULL,"
+              "last_user      TEXT DEFAULT 'n/a',"
+              "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP"
+              ")", return false)
 
-    if(!query.exec("CREATE TRIGGER items_update_last_change "
-                   "AFTER UPDATE ON items BEGIN "
-                   "UPDATE items SET last_change=CURRENT_TIMESTAMP WHERE id=NEW.id; "
-                   "END;"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN("CREATE TRIGGER items_update_last_change "
+              "AFTER UPDATE ON items BEGIN "
+              "UPDATE items SET last_change=CURRENT_TIMESTAMP WHERE id=NEW.id; "
+              "END;", return false)
 
 
     query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
     query.bindValue(":name", db.connectionName());
     QUERY_EXEC(return false);
 
-    if(!query.exec( "CREATE TABLE folder2folder ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES folders(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN("CREATE TABLE folder2folder ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "parent         INTEGER NOT NULL,"
+              "child          INTEGER NOT NULL,"
+              "FOREIGN KEY(parent) REFERENCES folders(id),"
+              "FOREIGN KEY(child) REFERENCES folders(id)"
+              ")", return false)
 
-    if(!query.exec( "CREATE TABLE folder2item ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES items(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN("CREATE TABLE folder2item ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "parent         INTEGER NOT NULL,"
+              "child          INTEGER NOT NULL,"
+              "FOREIGN KEY(parent) REFERENCES folders(id),"
+              "FOREIGN KEY(child) REFERENCES items(id)"
+              ")", return false)
+
     return true;
 }
 
@@ -236,46 +205,37 @@ bool IDBSqlite::migrateDB1to2()
 {
     QSqlQuery query(db);
 
-    query.prepare("BEGIN TRANSACTION;");
-    QUERY_EXEC(return false);
-    query.prepare("ALTER TABLE folders RENAME TO tmp_folders;");
-    QUERY_EXEC(return false);
-    query.prepare("CREATE TABLE folders ("
-                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                  "type           INTEGER NOT NULL,"
-                  "keyqms         TEXT,"
-                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                  "name           TEXT NOT NULL,"
-                  "comment        TEXT,"
-                  "locked         BOOLEAN DEFAULT FALSE,"
-                  "data           BLOB"
-                  ");");
-    QUERY_EXEC(return false);
-    query.prepare("INSERT INTO folders(id,type,keyqms,date,name,comment,locked,data) SELECT * FROM tmp_folders;");
-    QUERY_EXEC(return false);
-    query.prepare("COMMIT;");
-    QUERY_EXEC(return false);
+    QUERY_RUN("BEGIN TRANSACTION;", return false)
+    QUERY_RUN("ALTER TABLE folders RENAME TO tmp_folders;", return false)
 
-    query.prepare("BEGIN TRANSACTION;");
-    QUERY_EXEC(return false);
-    query.prepare("ALTER TABLE items RENAME TO tmp_items;");
-    QUERY_EXEC(return false);
-    query.prepare("CREATE TABLE items ("
-                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                  "type           INTEGER,"
-                  "keyqms         TEXT NOT NULL,"
-                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                  "icon           BLOB NOT NULL,"
-                  "name           TEXT NOT NULL,"
-                  "comment        TEXT,"
-                  "data           BLOB NOT NULL"
-                  ");");
-    QUERY_EXEC(return false);
-    query.prepare("INSERT INTO items(id,type,keyqms,date,icon,name,comment,data) SELECT * FROM tmp_items;");
-    QUERY_EXEC(return false);
-    query.prepare("COMMIT;");
-    QUERY_EXEC(return false);
+    QUERY_RUN("CREATE TABLE folders ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "type           INTEGER NOT NULL,"
+              "keyqms         TEXT,"
+              "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+              "name           TEXT NOT NULL,"
+              "comment        TEXT,"
+              "locked         BOOLEAN DEFAULT FALSE,"
+              "data           BLOB"
+              ");", return false);
 
+    QUERY_RUN("INSERT INTO folders(id,type,keyqms,date,name,comment,locked,data) SELECT * FROM tmp_folders;", return false);
+    QUERY_RUN("COMMIT;", return false);
+
+    QUERY_RUN("BEGIN TRANSACTION;", return false);
+    QUERY_RUN("ALTER TABLE items RENAME TO tmp_items;", return false);
+    QUERY_RUN("CREATE TABLE items ("
+              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "type           INTEGER,"
+              "keyqms         TEXT NOT NULL,"
+              "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+              "icon           BLOB NOT NULL,"
+              "name           TEXT NOT NULL,"
+              "comment        TEXT,"
+              "data           BLOB NOT NULL"
+              ");", return false);
+    QUERY_RUN("INSERT INTO items(id,type,keyqms,date,icon,name,comment,data) SELECT * FROM tmp_items;", return false);
+    QUERY_RUN("COMMIT;", return false);
 
     return true;
 }
@@ -284,28 +244,20 @@ bool IDBSqlite::migrateDB2to3()
 {
     QSqlQuery query(db);
 
-    query.prepare("ALTER TABLE items ADD COLUMN hash TEXT NOT NULL DEFAULT '-'");
-    QUERY_EXEC(return false);
+    QUERY_RUN("ALTER TABLE items ADD COLUMN hash TEXT NOT NULL DEFAULT '-'",            return false);
+    QUERY_RUN("ALTER TABLE items ADD COLUMN last_user TEXT NOT NULL DEFAULT 'n/a'",     return false);
+    QUERY_RUN("ALTER TABLE items ADD COLUMN last_change DATETIME NOT NULL DEFAULT '-'", return false);
 
-    query.prepare("ALTER TABLE items ADD COLUMN last_user TEXT NOT NULL DEFAULT 'n/a'");
-    QUERY_EXEC(return false);
+    QUERY_RUN("CREATE TRIGGER items_update_last_change "
+              "AFTER UPDATE ON items BEGIN "
+              "UPDATE items SET last_change=datetime(CURRENT_TIMESTAMP, 'localtime') WHERE id=NEW.id; "
+              "END;", return false);
 
-    query.prepare("ALTER TABLE items ADD COLUMN last_change DATETIME NOT NULL DEFAULT '-'");
-    QUERY_EXEC(return false);
-
-    query.prepare("CREATE TRIGGER items_update_last_change "
-                  "AFTER UPDATE ON items BEGIN "
-                  "UPDATE items SET last_change=datetime(CURRENT_TIMESTAMP, 'localtime') WHERE id=NEW.id; "
-                  "END;");
-    QUERY_EXEC(return false);
-
-    query.prepare("SELECT Count(*) FROM items");
-    QUERY_EXEC(return false);
+    QUERY_RUN("SELECT Count(*) FROM items", return false);
     query.next();
     quint32 N = query.value(0).toUInt();
 
-    query.prepare("SELECT id, type FROM items WHERE hash='-'");
-    QUERY_EXEC(return false);
+    QUERY_RUN("SELECT id, type FROM items WHERE hash='-'", return false);
 
     PROGRESS_SETUP("Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
     progress.enableCancel(false);
@@ -354,8 +306,8 @@ bool IDBSqlite::migrateDB2to3()
         query2.bindValue(":id", idItem);
         if(!query2.exec())
         {
-            qDebug() << query2.lastQuery();
-            qDebug() << query2.lastError();
+            qWarning() << query2.lastQuery();
+            qWarning() << query2.lastError();
         }
 
         delete item;

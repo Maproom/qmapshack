@@ -175,8 +175,8 @@ int CDBProject::checkForAction2(IGisItem * item, quint64 &idItem, QString& hash,
 
         QMessageBox msgBox(QMessageBox::Question, QObject::tr("Conflict with database..."), msg, QMessageBox::NoButton, CMainWindow::self().getBestWidgetForParent());
         QAbstractButton* pButClone  = msgBox.addButton(QObject::tr("Clone && Save"), QMessageBox::YesRole);
-        QAbstractButton* pButForce  = msgBox.addButton(QObject::tr("Force Save"), QMessageBox::ApplyRole);
-        QAbstractButton* pButUpdate = msgBox.addButton(QObject::tr("Take remote"), QMessageBox::DestructiveRole);
+        QAbstractButton* pButForce  = msgBox.addButton(QObject::tr("Force Save"),    QMessageBox::ApplyRole);
+        QAbstractButton* pButUpdate = msgBox.addButton(QObject::tr("Take remote"),   QMessageBox::DestructiveRole);
         msgBox.addButton(QMessageBox::Abort);
 
         msgBox.exec();
@@ -381,7 +381,7 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResul
             {
                 // Build the dialog to ask for user action
 
-                IGisItem * item1 = 0;
+                IGisItem * item1 = nullptr;
 
                 // load item from database for a compare
                 switch(typeItem)
@@ -406,7 +406,7 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResul
                     ;
                 }
 
-                if(item1 == 0)
+                if(nullptr == item1)
                 {
                     qDebug() << "no item to compare!?.";
                     throw eReasonUnexpected;
@@ -484,7 +484,7 @@ bool CDBProject::save()
             PROGRESS(i, throw eReasonCancel);
 
             IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-            if(item == 0)
+            if(nullptr == item)
             {
                 continue;
             }
@@ -576,7 +576,7 @@ bool CDBProject::save()
     for(int i = 0; i < N; i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }

@@ -46,12 +46,7 @@ CSetupDatabase::~CSetupDatabase()
 
 void CSetupDatabase::slotUpdateButtonBox()
 {
-    bool enable = true;
-
-    if(lineName->text().isEmpty())
-    {
-        enable = false;
-    }
+    bool enable = !lineName->text().isEmpty();
 
     if(radioSqlite->isChecked())
     {

@@ -37,9 +37,9 @@ public:
     {
         eTypeLostFound = 1
         ,eTypeDatabase = 2
-        ,eTypeGroup = 3
-        ,eTypeProject = 4
-        ,eTypeOther = 5
+        ,eTypeGroup    = 3
+        ,eTypeProject  = 4
+        ,eTypeOther    = 5
     };
 
     IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);

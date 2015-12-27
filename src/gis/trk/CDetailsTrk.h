@@ -41,12 +41,13 @@ public slots:
     void updateData();
 
 private slots:
+    void slotNameChanged(const QString &name);
+    void slotNameChangeFinished();
     void slotShowPlots();
     void slotColorChanged(int idx);
     void slotChangeReadOnlyMode(bool on);
     void slotItemSelectionChanged();
     void slotLinkActivated(const QUrl& url);
-    void slotLinkActivated(const QString& url);
     void slotMouseClickState(int);
     void slotActivitySelected(bool checked);
 

@@ -151,8 +151,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     connect(toolLock,         &QToolButton::toggled,               this, &CDetailsTrk::slotChangeReadOnlyMode);
     connect(treeWidget,       &QTreeWidget::itemSelectionChanged,  this, &CDetailsTrk::slotItemSelectionChanged);
-    connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, static_cast<void (CDetailsTrk::*)(const QUrl&)   >(&CDetailsTrk::slotLinkActivated));
-    connect(labelInfo,        &QLabel::linkActivated,              this, static_cast<void (CDetailsTrk::*)(const QString&)>(&CDetailsTrk::slotLinkActivated));
+    connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, &CDetailsTrk::slotLinkActivated);
+
+    connect(lineName,         &QLineEdit::textEdited,              this, &CDetailsTrk::slotNameChanged);
+    connect(lineName,         &QLineEdit::editingFinished,         this, &CDetailsTrk::slotNameChangeFinished);
 
     connect(plot1,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
     connect(plot2,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
@@ -251,9 +253,12 @@ void CDetailsTrk::updateData()
 
     labelTainted->setVisible(trk.isTainted());
 
-    labelInfo->setText(trk.getInfo(true));
+    labelInfo->setText(trk.getInfo());
     comboColor->setCurrentIndex(trk.getColorIdx());
     toolLock->setChecked(isReadOnly);
+
+    lineName->setText(trk.getName());
+    lineName->setReadOnly(isReadOnly);
 
     QList<QTreeWidgetItem*> items;
     const CGisItemTrk::trk_t& t = trk.getTrackData();
@@ -499,6 +504,36 @@ void CDetailsTrk::slotMouseClickState(int s)
     }
 }
 
+void CDetailsTrk::slotNameChanged(const QString &name)
+{
+    QTabWidget *tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
+    if(nullptr != tabWidget)
+    {
+        int idx = tabWidget->indexOf(this);
+        if(idx != NOIDX)
+        {
+            const QString shownName = name.isEmpty() ? CGisItemTrk::noName : QString(name).replace('&', "&&");
+            setObjectName(shownName);
+            tabWidget->setTabText(idx, shownName);
+        }
+    }
+}
+
+void CDetailsTrk::slotNameChangeFinished()
+{
+    lineName->clearFocus();
+
+    const QString& name = lineName->text();
+    slotNameChanged(name);
+
+    if(name != trk.getName())
+    {
+        trk.setName(name);
+        updateData();
+    }
+}
+
+
 void CDetailsTrk::slotShowPlots()
 {
     plot1->setVisible(checkGraph1->isChecked());
@@ -558,19 +593,6 @@ void CDetailsTrk::slotItemSelectionChanged()
     {
         quint32 idx = item->text(eColNum).toUInt();
         trk.setMouseFocusByTotalIndex(idx, CGisItemTrk::eFocusMouseMove, "CDetailsTrk");
-    }
-}
-
-void CDetailsTrk::slotLinkActivated(const QString& url)
-{
-    if(url == "name")
-    {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, trk.getName());
-        if(!name.isEmpty())
-        {
-            trk.setName(name);
-            updateData();
-        }
     }
 }
 

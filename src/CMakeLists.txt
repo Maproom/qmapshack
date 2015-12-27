@@ -46,6 +46,7 @@ set( SRCS
     CMainWindow.cpp
     CAbout.cpp
     widgets/CTinySpinBox.cpp
+    widgets/CLineEdit.cpp
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
     widgets/CTextEditWidget.cpp
@@ -267,6 +268,7 @@ set( HDRS
     CMainWindow.h
     CAbout.h
     widgets/CTinySpinBox.h
+    widgets/CLineEdit.h
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
     widgets/CHistoryListWidget.h

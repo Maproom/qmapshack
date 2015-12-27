@@ -153,9 +153,6 @@
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
              <widget class="CLineEdit" name="lineName">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -889,6 +886,11 @@
    <header>widgets/CHistoryListWidget.h</header>
   </customwidget>
   <customwidget>
+   <class>CLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>widgets/CLineEdit.h</header>
+  </customwidget>
+  <customwidget>
    <class>CPlotTrack</class>
    <extends>QWidget</extends>
    <header>plot/CPlotTrack.h</header>
@@ -904,11 +906,6 @@
    <extends>QWidget</extends>
    <header>widgets/CColorLegend.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>widgets/CLineEdit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

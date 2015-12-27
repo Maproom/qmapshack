@@ -52,12 +52,12 @@ public:
      Get the next FIT message
      throws: fit::RuntimeException
      */
-    CFitMessage* nextMesg();
+    const CFitMessage& nextMesg();
     
     /**
      return: the last read message again
      */
-    CFitMessage* lastMesg();
+    const CFitMessage& lastMesg();
     
     /**
      return: true if there a further FIT message is available
@@ -67,13 +67,13 @@ public:
     /**
      return: the next message of the given message type (xx_MESG_NUM) beginning reading at the current position
      */
-    CFitMessage* nextMesgOf(uint16_t mesgNum);
+    const CFitMessage& nextMesgOf(uint16_t mesgNum);
     
     /**
      return: gets the first message of the given type (xx_MESG_NUM) beginning reading at start of stream. 
      Sets the strema to the beginning again.
      */
-    CFitMessage* firstMesgOf(uint16_t mesgNum);
+    const CFitMessage& firstMesgOf(uint16_t mesgNum);
     
     QString getFileName() { return file.fileName(); }
     

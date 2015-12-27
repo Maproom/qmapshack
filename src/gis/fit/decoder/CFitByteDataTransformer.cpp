@@ -37,7 +37,7 @@ unsigned int CFitByteDataTransformer::getUIntValue(CFitBaseType* baseType, uint8
     }
 }
 
-int CFitByteDataTransformer::getIntValue(CFitBaseType* baseType, uint8_t* rawData)
+int CFitByteDataTransformer::getSIntValue(CFitBaseType *baseType, uint8_t *rawData)
 {
     switch(baseType->nr()) {
         case TypeSint8:
@@ -51,7 +51,7 @@ int CFitByteDataTransformer::getIntValue(CFitBaseType* baseType, uint8_t* rawDat
     }
 }
 
-double CFitByteDataTransformer::getDoubleValue(CFitBaseType* baseType, uint8_t* rawData)
+double CFitByteDataTransformer::getFloatValue(CFitBaseType* baseType, uint8_t* rawData)
 {
     switch(baseType->nr()) {
         case TypeFloat32:
@@ -126,8 +126,7 @@ QString CFitByteDataTransformer::getString(uint8_t* rawData, uint8_t length)
     return str;
 }
 
-uint8_t* CFitByteDataTransformer::getBytes(uint8_t* rawData)
+QByteArray CFitByteDataTransformer::getBytes(uint8_t* rawData, uint8_t length)
 {
-    // TODO
-    return rawData;
+    return QByteArray((const char*)rawData, length);
 }

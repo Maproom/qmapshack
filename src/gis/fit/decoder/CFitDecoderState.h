@@ -47,8 +47,10 @@ public:
         uint32_t timestamp;
         CFitDefinitionMessage* lastDefintion;
         CFitMessage* lastMessage;
-        QMap<uint8_t, CFitDefinitionMessage*> defintions;
-        QList<CFitMessage*> messages;
+        // TODO here we have a problem wiht the map if a local message number is reused within the same file (which is allowed).
+        // the problem is not for the decoding but the overriden defintion is no longer available in the debug output.
+        QMap<uint8_t, CFitDefinitionMessage> defintions;
+        QList<CFitMessage> messages;
     };
 
     CFitDecoderState(shared_state_data &data, DecodeState stateClass) : data(data) { };
@@ -61,7 +63,7 @@ protected:
     virtual DecodeState process(uint8_t &dataByte) = 0;
 
     CFitMessage* latestMessage();
-    void addMessage(CFitDefinitionMessage* definition);
+    void addMessage(const CFitDefinitionMessage& definition);
 
     void setFileLength(uint32_t fileLength);
     void resetFileBytesRead();
@@ -70,7 +72,7 @@ protected:
 
     CFitDefinitionMessage* latestDefinition();
     CFitDefinitionMessage* defintion(uint32_t localMessageType);
-    void addDefinition(CFitDefinitionMessage* definition);
+    void addDefinition(CFitDefinitionMessage definition);
 
     void setTimestamp(uint32_t fullTimestamp);
     void setTimestampOffset(uint32_t offsetTimestamp);

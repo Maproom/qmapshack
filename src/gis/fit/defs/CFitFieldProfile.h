@@ -38,23 +38,23 @@ public:
     void addSubfield(CFitSubfieldProfile* subfield);
     void addComponent(CFitComponentfieldProfile* component);
 
-    bool hasSubfields();
-    bool hasComponents();
+    bool hasSubfields() const;
+    bool hasComponents() const;
 
-    virtual QString getName();
-    virtual uint8_t getFieldDefNum();
-    virtual float getScale();
-    virtual uint16_t getOffset();
-    virtual bool hasScaleAndOffset();
-    virtual QString getUnits();
-    virtual CFitBaseType* getBaseType();
+    virtual QString getName() const;
+    virtual uint8_t getFieldDefNum() const;
+    virtual float getScale() const;
+    virtual uint16_t getOffset() const;
+    virtual bool hasScaleAndOffset() const;
+    virtual QString getUnits()const ;
+    virtual CFitBaseType* getBaseType() const;
     virtual QString getTyp() const { return "field"; }
 
-    QList<CFitSubfieldProfile*> getSubfields();
-    CFitSubfieldProfile* getSubfieldByIndex(int idx);
-    QList<CFitComponentfieldProfile*> getComponents();
+    QList<CFitSubfieldProfile*> getSubfields() const;
+    CFitSubfieldProfile* getSubfieldByIndex(int idx) const;
+    QList<CFitComponentfieldProfile*> getComponents() const;
 
-    CFitProfile* getProfile();
+    const CFitProfile* getProfile() const;
     void setParent(CFitProfile* parent);
 private:
     QString name;
@@ -90,20 +90,20 @@ class CFitComponentfieldProfile: public CFitFieldProfile
 public:
     CFitComponentfieldProfile(QString name, CFitBaseType* baseType, uint8_t fieldDefNr, float scale, uint16_t  offset, QString units, uint8_t componentFieldDefNr, uint8_t bits);
 
-    virtual QString getName() { return getComponentField()->getName(); }
-    virtual uint8_t getFieldDefNum() { return getComponentField()->getFieldDefNum(); }
-    virtual float getScale() { return getComponentField()->getScale(); }
-    virtual uint16_t getOffset() { return getComponentField()->getOffset(); }
-    virtual bool hasScaleAndOffset() { return getComponentField()->hasScaleAndOffset(); }
-    virtual QString getUnits() { return getComponentField()->getUnits(); }
-    virtual CFitBaseType* getBaseType() { return getComponentField()->getBaseType(); }
+    virtual QString getName() const { return getComponentField()->getName(); }
+    virtual uint8_t getFieldDefNum() const { return getComponentField()->getFieldDefNum(); }
+    virtual float getScale() const { return getComponentField()->getScale(); }
+    virtual uint16_t getOffset()const { return getComponentField()->getOffset(); }
+    virtual bool hasScaleAndOffset() const { return getComponentField()->hasScaleAndOffset(); }
+    virtual QString getUnits() const { return getComponentField()->getUnits(); }
+    virtual CFitBaseType* getBaseType() const { return getComponentField()->getBaseType(); }
 
     virtual QString getTyp() const { return "component"; }
-    uint8_t getBits();
-    uint32_t getBitmask();
+    uint8_t getBits() const;
+    uint32_t getBitmask() const;
 
 private:
-    CFitFieldProfile* getComponentField();
+    const CFitFieldProfile* getComponentField() const;
 
     uint8_t nrOfBits;
     uint8_t componentFieldDefNr;

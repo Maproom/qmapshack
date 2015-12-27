@@ -28,27 +28,27 @@ class MesgDefinition;   // Forward declaration.
 
 class CFitMessage {
 public:
-    CFitMessage(CFitDefinitionMessage* def);
+    CFitMessage(const CFitDefinitionMessage& def);
     CFitMessage();
-    //CFitMessage(const CFitMessage &mesg);
+    virtual ~CFitMessage();
 
     uint16_t getGlobalMesgNr() const;
     uint8_t getLocalMesgNr() const;
 
-    bool hasField(const uint8_t fieldDefNum);
-    CFitField* getField(const uint8_t fieldDefNum);
-    bool isFieldValueValid(const uint8_t fieldDefNum);
+    bool hasField(const uint8_t fieldDefNum) const;
+    const CFitField* getField(const uint8_t fieldDefNum) const;
+    bool isFieldValueValid(const uint8_t fieldDefNum) const;
     void addField(CFitField* field);
 
-    QString getFieldString(const uint8_t fieldDefNum);
-    uint8_t* getFieldBytes(const uint8_t fieldDefNum);
-    int getFieldIntValue(const uint8_t fieldDefNum);
-    unsigned int getFieldUIntValue(const uint8_t fieldDefNum);
-    double getFieldDoubleValue(const uint8_t fieldDefNum);
+    QString getFieldString(const uint8_t fieldDefNum) const;
+    QByteArray getFieldBytes(const uint8_t fieldDefNum) const;
+    int getFieldIntValue(const uint8_t fieldDefNum) const;
+    unsigned int getFieldUIntValue(const uint8_t fieldDefNum) const;
+    double getFieldDoubleValue(const uint8_t fieldDefNum) const;
 
-    CFitProfile* profile() { return messageProfile; }
-    QStringList messageInfo();
-    QList<CFitField*> getFields() { return fields.values(); }
+    CFitProfile* profile() const { return messageProfile; }
+    QStringList messageInfo() const;
+    const QList<CFitField*> getFields() const { return fields.values(); }
 
 
 private:

@@ -32,17 +32,17 @@ void CFitStream::reset()
 }
 
 
-CFitMessage* CFitStream::nextMesg()
+const CFitMessage& CFitStream::nextMesg()
 {
-    return decode.getMessages()[readPos++];
+    return decode.getMessages().at(readPos++);
 }
 
 
-CFitMessage* CFitStream::lastMesg()
+const CFitMessage& CFitStream::lastMesg()
 {
     int pos = readPos-1;
     if(pos < 0) pos = 0;
-    return decode.getMessages()[pos];
+    return decode.getMessages().at(pos);
 }
 
 
@@ -52,24 +52,24 @@ bool CFitStream::hasMoreMesg()
 }
 
 
-CFitMessage* CFitStream::nextMesgOf(uint16_t mesgNum)
+const CFitMessage& CFitStream::nextMesgOf(uint16_t mesgNum)
 {
     while(hasMoreMesg())
     {
-        CFitMessage* mesg = nextMesg();
-        if (mesg->getGlobalMesgNr() == mesgNum)
+        const CFitMessage& mesg = nextMesg();
+        if (mesg.getGlobalMesgNr() == mesgNum)
         {
             return mesg;
         }
     }
-    return nullptr;
+    return CFitMessage();
 }
 
 
-CFitMessage* CFitStream::firstMesgOf(uint16_t mesgNum)
+const CFitMessage& CFitStream::firstMesgOf(uint16_t mesgNum)
 {
     reset();
-    CFitMessage* mesg = nextMesgOf(mesgNum);
+    const CFitMessage& mesg = nextMesgOf(mesgNum);
     reset();
     return mesg;
 }

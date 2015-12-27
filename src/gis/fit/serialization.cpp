@@ -38,8 +38,8 @@ public:
     static qreal toDegree(int32_t semicircles) {
         qreal degree = 0;
         degree = semicircles * twoPow31;
-
-        qDebug() << semicircles << " " << degree;
+// TODO
+//        qDebug() << semicircles << " " << degree;
         return degree;
     }
 
@@ -67,8 +67,8 @@ void CGisItemTrk::readFit(CFitStream& stream)
         trkseg_t seg = trkseg_t();
         do
         {
-            CFitMessage* mesg = stream.nextMesg();
-            switch (mesg->getGlobalMesgNr())
+            const CFitMessage& mesg = stream.nextMesg();
+            switch (mesg.getGlobalMesgNr())
             {
                 case MesgNumActivity:
                     break;
@@ -82,16 +82,17 @@ void CGisItemTrk::readFit(CFitStream& stream)
                 {
                     trkpt_t pt = trkpt_t();
 
-                    pt.lon = FitTypeHandler::toDegree(mesg->getFieldIntValue(RecordPositionLong));
-                    pt.lat = FitTypeHandler::toDegree(mesg->getFieldIntValue(RecordPositionLat));
-                    pt.ele = (int)mesg->getFieldDoubleValue(RecordAltitude);
-                    pt.speed = mesg->getFieldDoubleValue(RecordSpeed);
-                    pt.time = FitTypeHandler::toDateTime(mesg->getFieldUIntValue(RecordTimestamp));
+                    pt.lon = FitTypeHandler::toDegree(mesg.getFieldIntValue(RecordPositionLong));
+                    pt.lat = FitTypeHandler::toDegree(mesg.getFieldIntValue(RecordPositionLat));
+                    pt.ele = (int)mesg.getFieldDoubleValue(RecordAltitude);
+                    pt.speed = mesg.getFieldDoubleValue(RecordSpeed);
+                    pt.time = FitTypeHandler::toDateTime(mesg.getFieldUIntValue(RecordTimestamp));
 
-                    if(mesg->isFieldValueValid(RecordHeartRate))
-                        pt.extensions["heart_rate"] = QVariant(mesg->getFieldIntValue(RecordHeartRate));
-                    if(mesg->isFieldValueValid(RecordTemperature))
-                        pt.extensions["temperature"] = QVariant(mesg->getFieldIntValue(RecordTemperature));
+                    // see gis/trk/CKnownExtension for the keys of the extensions
+                    if(mesg.isFieldValueValid(RecordHeartRate))
+                        pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = QVariant(mesg.getFieldIntValue(RecordHeartRate));
+                    if(mesg.isFieldValueValid(RecordTemperature))
+                        pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = QVariant(mesg.getFieldIntValue(RecordTemperature));
                     pt.extensions.squeeze();
                     if (pt.lon != 0 && pt.lat != 0)
                     {
@@ -101,10 +102,10 @@ void CGisItemTrk::readFit(CFitStream& stream)
                 }
                 case MesgNumEvent:
                 {
-                    if(mesg->getFieldUIntValue(EventEvent) == EventTimer)
+                    if(mesg.getFieldUIntValue(EventEvent) == EventTimer)
                     {
-                        if(mesg->getFieldUIntValue(EventEventType) == EventTypeStop
-                           || mesg->getFieldUIntValue(EventEventType) == EventTypeStopAll)
+                        if(mesg.getFieldUIntValue(EventEventType) == EventTypeStop
+                           || mesg.getFieldUIntValue(EventEventType) == EventTypeStopAll)
                         {
                             trk.segs.append(seg);
                             seg = trkseg_t();
@@ -127,10 +128,10 @@ void CGisItemWpt::readFit(CFitStream& stream)
 {
     // TODO for a track we check if lon and lat are not null. Here we can not help, becuae the wpt is alredy created
     // but the gps postion could be invalid.
-    CFitMessage* mesg = stream.lastMesg();
-    wpt.name = mesg->profile()->getName();
-    wpt.lon = FitTypeHandler::toDegree(mesg->getFieldIntValue(RecordPositionLong));
-    wpt.lat = FitTypeHandler::toDegree(mesg->getFieldIntValue(RecordPositionLat));
-    wpt.time = FitTypeHandler::toDateTime(mesg->getFieldUIntValue(RecordTimestamp));
+    const CFitMessage& mesg = stream.lastMesg();
+    wpt.name = mesg.profile()->getName();
+    wpt.lon = FitTypeHandler::toDegree(mesg.getFieldIntValue(RecordPositionLong));
+    wpt.lat = FitTypeHandler::toDegree(mesg.getFieldIntValue(RecordPositionLat));
+    wpt.time = FitTypeHandler::toDateTime(mesg.getFieldUIntValue(RecordTimestamp));
 }
 

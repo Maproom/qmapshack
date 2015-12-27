@@ -30,13 +30,19 @@ CFitDefinitionMessage::CFitDefinitionMessage()
 CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
 : globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields), localMesgNr(copy.localMesgNr),
   fields(copy.fields)
-        //, messageProfile(copy.messageProfile)
 {
     messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
+    for(CFitFieldDefinition& field : fields)
+    {
+        field.setParent(this);
+    }
 }
 
 CFitDefinitionMessage::CFitDefinitionMessage(uint8_t localMesgNr)
-        : globalMesgNr(GlobalMesgNrInvalid),  architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields(), messageProfile(nullptr) {}
+        : architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields()
+{
+    setGlobalMesgNr(GlobalMesgNrInvalid);
+}
 
 
 void CFitDefinitionMessage::setArchiteture(uint8_t arch)
@@ -79,53 +85,56 @@ void CFitDefinitionMessage::addField(CFitFieldDefinition fieldDef)
     fields.append(fieldDef);
 }
 
-QList<CFitFieldDefinition>&CFitDefinitionMessage::getFields()
+const QList<CFitFieldDefinition>&CFitDefinitionMessage::getFields() const
 {
     return fields;
 }
 
-CFitFieldDefinition* CFitDefinitionMessage::getField(const uint8_t fieldNum)
+bool CFitDefinitionMessage::hasField(const uint8_t fieldNum) const
 {
     for (int i=0; i< fields.size(); i++)
     {
         if (fieldNum == fields[i].getDefNr())
-            return &(fields[i]);
+            return true;
     }
+    return false;
+}
 
-    return nullptr;
+CFitFieldDefinition& CFitDefinitionMessage::getField(const uint8_t fieldNum)
+{
+    for (int i=0; i< fields.size(); i++)
+    {
+        if (fieldNum == fields[i].getDefNr())
+            return (fields[i]);
+    }
+    //return nullptr;
 }
 
 
 
-CFitFieldDefinition* CFitDefinitionMessage::getFieldByIndex(const uint16_t index)
+CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const uint16_t index)
 {
     if (index < fields.size())
-        return &(fields[index]);
-
-    return nullptr;
+    {
+        return (fields[index]);
+    }
+    //return nullptr;
 }
 
 
-QStringList CFitDefinitionMessage::messageInfo()
+QStringList CFitDefinitionMessage::messageInfo() const
 {
     QStringList list;
-    list << QString("Definition %1 (%2) %3 [loc] %4 [arch] %5 [#field]")
-            .arg(profile() ? profile()->getName() : "?")
+    list << QString("Definition %1 (%2) local nr %3, arch %4, # fields %5")
+            .arg(profile()->getName())
             .arg(getGlobalMesgNr())
             .arg(getLocalMesgNr())
             .arg(getArchitectureBit())
             .arg(getNrOfFields());
 
-    for(CFitFieldDefinition& field: fields)
+    for(const CFitFieldDefinition& field: fields)
     {
-            QString fstr = QString("{ field %1 (%2): %3 %4 [type] %5 [size] %6 }")
-                .arg(field.profile() ? field.profile()->getName() : "?")
-                .arg(field.getDefNr())
-                .arg(field.getBaseType()->str())
-                .arg(field.getType())
-        .arg(field.getSize())
-        .arg(field.getEndianAbilityFlag());
-        list << fstr;
+        list << field.fieldInfo();
     }
     return list;
 }

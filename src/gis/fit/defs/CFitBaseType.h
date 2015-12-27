@@ -47,15 +47,17 @@ public:
     CFitBaseType();
     ~CFitBaseType();
 
-    uint8_t size();
-    BaseTypeNr nr();
-    uint8_t* invalidValueBytes();
-    bool isInteger();
-    bool isSignedInt();
-    bool isUnsignedInt();
-    bool isFloat();
-    bool isNumber();
-    QString str();
+    uint8_t size() const;
+    BaseTypeNr nr() const;
+    uint8_t* invalidValueBytes() const;
+    bool isInteger() const;
+    bool isSignedInt() const;
+    bool isUnsignedInt() const;
+    bool isFloat() const;
+    bool isNumber() const;
+    bool isString() const;
+    bool isByte() const;
+    QString str() const;
 
 private:
     uint8_t* invalidBytes;

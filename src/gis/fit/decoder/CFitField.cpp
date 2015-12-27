@@ -23,12 +23,12 @@
 #include "CFitByteDataTransformer.h"
 
 
-CFitField::CFitField(CFitFieldDefinition* fieldDefinition, CFitFieldProfile* profile, bool valid)
+CFitField::CFitField(const CFitFieldDefinition& fieldDefinition, CFitFieldProfile* profile, bool valid)
 : valid(valid)
 {
-    globalMesgNr = fieldDefinition->parent()->getGlobalMesgNr();
-    fieldDefNr = fieldDefinition->getDefNr();
-    baseType = fieldDefinition->getBaseType();
+    globalMesgNr = fieldDefinition.parent()->getGlobalMesgNr();
+    fieldDefNr = fieldDefinition.getDefNr();
+    baseType = fieldDefinition.getBaseType();
     fieldProfile = profile;
 }
 
@@ -49,7 +49,7 @@ CFitField::CFitField()
     valid = false;
 }
 
-QString CFitField::fieldInfo()
+QString CFitField::fieldInfo() const
 {
         QString name = profile()->getName();
         QString str = QString("%1 %2 (%3): %4 %5 %6 %7")
@@ -72,7 +72,7 @@ uint8_t CFitField::getFieldDefNr() const
 {
     return fieldDefNr;
 }
-bool CFitField::isValidValue() {
+bool CFitField::isValidValue() const {
     return valid;
 }
 
@@ -91,81 +91,82 @@ bool CFitField::isBaseType(BaseTypeNr type) const
 }
 
 
-QString CFitDoubleField::getString()
+QString CFitFloatField::getString() const
 {
     return QString("%1").arg(value, 0, 'f', 3);
 }
 
-uint8_t* CFitDoubleField::getBytes()
+QByteArray CFitFloatField::getBytes() const
 {
-    // accessing bytes from double does not make sense in most cases...
-    return reinterpret_cast<uint8_t*>(&value);
+    return QByteArray((const char*)&value, sizeof(double));
 }
 
-int CFitDoubleField::getSIntValue()
+int CFitFloatField::getSIntValue() const
 {
     return (int)(value + 0.5);
 }
 
-unsigned int CFitDoubleField::getUIntValue()
+unsigned int CFitFloatField::getUIntValue() const
 {
     return (unsigned int) (value + 0.5);
 }
 
 
 
-uint8_t* CFitStringField::getBytes()
+QByteArray CFitStringField::getBytes() const
 {
-    QByteArray ba = value.toLatin1();
-    uint8_t *asciiData = reinterpret_cast<uint8_t*>(ba.data());
-    return asciiData;
+    return value.toLatin1();
 }
 
-int CFitStringField::getSIntValue()
+int CFitStringField::getSIntValue() const
 {
     return value.toInt();
 }
 
-unsigned int CFitStringField::getUIntValue()
+unsigned int CFitStringField::getUIntValue() const
 {
     return value.toUInt();
 }
 
-double CFitStringField::getDoubleValue()
+double CFitStringField::getDoubleValue() const
 {
     return value.toDouble();
 }
 
 
 
-QString CFitByteField::getString()
+QString CFitByteField::getString() const
 {
-    return CFitByteDataTransformer::getString(value, size);
+    return QString(value);
 }
 
-uint8_t* CFitByteField::getBytes()
+QByteArray CFitByteField::getBytes() const
 {
     return value;
 }
 
-int CFitByteField::getSIntValue()
+int CFitByteField::getSIntValue() const
 {
+    return value.toInt();
+    /*
     switch(size)
     {
         case 0:
             return 0;
         case 1:
-            return CFitByteDataTransformer::getSint8(value);
+            return CFitByteDataTransformer::getSint8(value.t);
         case 2:
             return CFitByteDataTransformer::getSint16(value);
         default:
             return CFitByteDataTransformer::getSint32(value);
     }
+     */
 }
 
-unsigned int CFitByteField::getUIntValue()
+unsigned int CFitByteField::getUIntValue() const
 {
-
+     return value.toUInt();
+     /*
     switch(size)
     {
         case 0:
@@ -177,14 +178,18 @@ unsigned int CFitByteField::getUIntValue()
         default:
             return CFitByteDataTransformer::getUint32(value);
     }
+     */
 }
 
-double CFitByteField::getDoubleValue()
+double CFitByteField::getDoubleValue() const
 {
+    return value.toDouble();
+    /*
     if(size == 4)
         return CFitByteDataTransformer::getFloat32(value);
     if(size== 8)
         return CFitByteDataTransformer::getFloat64(value);
 
     return 0;
+     */
 }

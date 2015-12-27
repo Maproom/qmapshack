@@ -34,9 +34,9 @@ void CFitProfile::addField(CFitFieldProfile* field)
 
 
 // dummy field profile for unkown definitions
-CFitFieldProfile dummyFieldProfile = CFitFieldProfile();
+static CFitFieldProfile dummyFieldProfile = CFitFieldProfile();
 
-CFitFieldProfile * CFitProfile::getField(uint8_t fieldDefNr)
+CFitFieldProfile * CFitProfile::getField(uint8_t fieldDefNr) const
 {
     if (fields.contains(fieldDefNr))
     {

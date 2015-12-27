@@ -92,18 +92,18 @@ uint32_t CFitDecoderState::getTimestamp()
     return data.timestamp;
 }
 
-void CFitDecoderState::addMessage(CFitDefinitionMessage* definition) {
-    data.messages.append(new CFitMessage(definition));
-    data.lastMessage = data.messages.last();
+void CFitDecoderState::addMessage(const CFitDefinitionMessage& definition) {
+    data.messages.append(CFitMessage(definition));
+    data.lastMessage = &data.messages.last();
 }
 
-void CFitDecoderState::addDefinition(CFitDefinitionMessage* definition) {
-    data.defintions[definition->getLocalMesgNr()] = definition;
-    data.lastDefintion = data.defintions[definition->getLocalMesgNr()];
+void CFitDecoderState::addDefinition(CFitDefinitionMessage definition) {
+    data.defintions[definition.getLocalMesgNr()] = definition;
+    data.lastDefintion = &data.defintions[definition.getLocalMesgNr()] ;
 }
 
 CFitDefinitionMessage* CFitDecoderState::defintion(uint32_t localMessageType) {
-    return data.defintions[localMessageType];
+    return &(data.defintions[localMessageType]);
 }
 
 void CFitDecoderState::setFileLength(uint32_t fileLength) {

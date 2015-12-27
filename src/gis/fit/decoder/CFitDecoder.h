@@ -33,7 +33,7 @@ public:
     ~CFitDecoder();
 
     bool decode(QFile& file);
-    QList<CFitMessage*> getMessages();
+    const QList<CFitMessage>& getMessages() const;
 
 private:
     void resetSharedData();

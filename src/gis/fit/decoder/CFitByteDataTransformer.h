@@ -26,8 +26,12 @@
 class CFitByteDataTransformer {
 public:
     static unsigned int getUIntValue(CFitBaseType* baseType, uint8_t* rawData);
-    static int getIntValue(CFitBaseType* baseType, uint8_t* rawData);
-    static double getDoubleValue(CFitBaseType* baseType, uint8_t* rawData);
+    static int getSIntValue(CFitBaseType *baseType, uint8_t *rawData);
+    static double getFloatValue(CFitBaseType* baseType, uint8_t* rawData);
+    static QString getString(uint8_t* rawData, uint8_t length=0);
+    static QByteArray getBytes(uint8_t* rawData, uint8_t length);
+
+private:
     static uint8_t getUint8(uint8_t* rawData);
     static uint16_t getUint16(uint8_t* rawData);
     static uint32_t getUint32(uint8_t* rawData);
@@ -36,8 +40,6 @@ public:
     static int32_t getSint32(uint8_t* rawData);
     static float getFloat32(uint8_t* rawData);
     static double getFloat64(uint8_t* rawData);
-    static QString getString(uint8_t* rawData, uint8_t length=0);
-    uint8_t* getBytes(uint8_t* rawData);
 };
 
 #endif //CFITBYTEDATATRANSFORMER_H

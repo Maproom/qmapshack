@@ -42,52 +42,52 @@ void CFitFieldProfile::addComponent(CFitComponentfieldProfile* component)
     component->setParent(profile);
 }
 
-bool CFitFieldProfile::hasSubfields()
+bool CFitFieldProfile::hasSubfields() const
 {
     return subfields.size() > 0;
 }
 
-bool CFitFieldProfile::hasComponents()
+bool CFitFieldProfile::hasComponents() const
 {
     return components.size() > 0;
 }
 
 
-QString CFitFieldProfile::getName()
+QString CFitFieldProfile::getName() const
 {
     return name;
 }
 
-uint8_t CFitFieldProfile::getFieldDefNum()
+uint8_t CFitFieldProfile::getFieldDefNum() const
 {
     return fieldDefNr;
 }
-float CFitFieldProfile::getScale()
+float CFitFieldProfile::getScale() const
 {
     if (scale == 0)
         return 1;
     return scale;
 }
-uint16_t CFitFieldProfile::getOffset()
+uint16_t CFitFieldProfile::getOffset() const
 {
     return offset;
 }
-bool CFitFieldProfile::hasScaleAndOffset()
+bool CFitFieldProfile::hasScaleAndOffset() const
 {
     return scale != 0 || offset != 0;
 }
-QString CFitFieldProfile::getUnits()
+QString CFitFieldProfile::getUnits() const
 {
     return units;
 }
 
 
-CFitBaseType* CFitFieldProfile::getBaseType()
+CFitBaseType* CFitFieldProfile::getBaseType() const
 {
     return baseType;
 }
 
-CFitProfile* CFitFieldProfile::getProfile()
+const CFitProfile* CFitFieldProfile::getProfile() const
 {
     return profile;
 }
@@ -97,17 +97,17 @@ void CFitFieldProfile::setParent(CFitProfile* parent)
     this->profile = parent;
 }
 
-CFitSubfieldProfile* CFitFieldProfile::getSubfieldByIndex(int idx)
+CFitSubfieldProfile* CFitFieldProfile::getSubfieldByIndex(int idx) const
 {
     return subfields.at(idx);
 }
 
-QList<CFitSubfieldProfile*> CFitFieldProfile::getSubfields()
+QList<CFitSubfieldProfile*> CFitFieldProfile::getSubfields() const
 {
     return subfields;
 }
 
-QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents()
+QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
 {
     return components;
 }
@@ -134,16 +134,16 @@ CFitComponentfieldProfile::CFitComponentfieldProfile(QString name, CFitBaseType*
         : CFitFieldProfile(name, baseType, fieldDefNr, scale, offset, units), nrOfBits(bits), componentFieldDefNr(componentFieldDefNr) {}
 
 
-CFitFieldProfile* CFitComponentfieldProfile::getComponentField()
+const CFitFieldProfile* CFitComponentfieldProfile::getComponentField() const
 {
     return getProfile()->getField(componentFieldDefNr);
 }
 
-uint8_t CFitComponentfieldProfile::getBits()
+uint8_t CFitComponentfieldProfile::getBits() const
 {
     return nrOfBits;
 }
-uint32_t CFitComponentfieldProfile::getBitmask()
+uint32_t CFitComponentfieldProfile::getBitmask() const
 {
     uint32_t bitmask = 0;
     for (int i = 0; i < nrOfBits; i++)

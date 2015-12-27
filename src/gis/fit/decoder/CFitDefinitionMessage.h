@@ -42,14 +42,15 @@ public:
     uint8_t getNrOfFields() const;
     uint8_t getLocalMesgNr() const;
 
-    CFitProfile* profile() { return messageProfile; }
+    const CFitProfile* profile() const { return messageProfile; }
 
-    QList<CFitFieldDefinition>& getFields();
+    const QList<CFitFieldDefinition>& getFields() const;
     void addField(CFitFieldDefinition field);
-    CFitFieldDefinition* getField(const uint8_t fieldNum);
-    CFitFieldDefinition* getFieldByIndex(const uint16_t index);
+    bool hasField(const uint8_t fieldNum) const;
+    CFitFieldDefinition& getField(const uint8_t fieldNum);
+    CFitFieldDefinition& getFieldByIndex(const uint16_t index);
 
-    QStringList messageInfo();
+    QStringList messageInfo() const;
 
 
 private:

@@ -47,8 +47,8 @@ CFitDecoder::~CFitDecoder()
 
 void CFitDecoder::resetSharedData()
 {
-    data.defintions = QMap<uint8_t, CFitDefinitionMessage*>();
-    data.messages = QList<CFitMessage*>();
+    data.defintions = QMap<uint8_t, CFitDefinitionMessage>();
+    data.messages = QList<CFitMessage>();
     data.lastDefintion = nullptr;
     data.lastMessage = nullptr;
     data.timestamp = 0;
@@ -58,23 +58,23 @@ void CFitDecoder::resetSharedData()
     data.crc = 0;
 }
 
-void printDefintions(QList<CFitDefinitionMessage*> defs)
+void printDefintions(const QList<CFitDefinitionMessage>& defs)
 {
     for(int i = 0; i < defs.size(); i++)
     {
-        for(QString& s: defs.at(i)->messageInfo())
+        for(QString& s: defs[i].messageInfo())
         {
             qDebug() << s;
         }
     }
 }
 
-void printMessages(QList<CFitMessage*> messages)
+void printMessages(const QList<CFitMessage>& messages)
 {
 
     for(int i = 0; i < messages.size(); i++)
     {
-        for(QString& s: messages.at(i)->messageInfo())
+        for(QString& s: messages[i].messageInfo())
         {
             qDebug() << s;
         }
@@ -117,6 +117,6 @@ bool CFitDecoder::decode(QFile &file) {
     return false;
 }
 
-QList<CFitMessage*> CFitDecoder::getMessages() {
+const QList<CFitMessage>& CFitDecoder::getMessages() const {
     return data.messages;
 }

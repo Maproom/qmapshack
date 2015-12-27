@@ -31,53 +31,64 @@ CFitBaseType::CFitBaseType(BaseTypeNr baseTypeNr, uint8_t* invalidBytes, uint8_t
 
 CFitBaseType::~CFitBaseType()
 {
-    delete invalidBytes;
+    // delete of the invalidBytes not necessary as it is only destroyed on app exit
 }
 
-uint8_t CFitBaseType::size()
+uint8_t CFitBaseType::size() const
 {
     return typeSize;
 }
 
-BaseTypeNr  CFitBaseType::nr()
+BaseTypeNr  CFitBaseType::nr() const
 {
     return baseTypeNr;
 }
 
-uint8_t* CFitBaseType::invalidValueBytes()
+uint8_t* CFitBaseType::invalidValueBytes() const
 {
     return invalidBytes;
 }
 
-bool CFitBaseType::isInteger()
+bool CFitBaseType::isInteger() const
 {
     return isSignedInt() || isUnsignedInt();
 }
 
-bool CFitBaseType::isSignedInt()
+bool CFitBaseType::isSignedInt() const
 {
     return baseTypeNr == TypeSint8 || baseTypeNr == TypeSint16 || baseTypeNr == TypeSint32;
 }
 
-bool CFitBaseType::isUnsignedInt()
+bool CFitBaseType::isUnsignedInt() const
 {
     return baseTypeNr == TypeUint8 || baseTypeNr == TypeUint8z
            || baseTypeNr == TypeUint16 || baseTypeNr == TypeUint16z
            || baseTypeNr == TypeUint32 || baseTypeNr == TypeUint32z
-           || baseTypeNr == TypeEnum ;
+           || baseTypeNr == TypeEnum;
 }
 
-bool CFitBaseType::isFloat()
+bool CFitBaseType::isFloat() const
 {
     return baseTypeNr == TypeFloat32 || baseTypeNr == TypeFloat64;
 }
 
-bool CFitBaseType::isNumber()
+bool CFitBaseType::isNumber() const
 {
     return isInteger() ||isFloat();
 }
 
-QString CFitBaseType::str()
+
+bool CFitBaseType::isString() const
+{
+    return baseTypeNr == TypeString;
+}
+
+bool CFitBaseType::isByte() const
+{
+    return baseTypeNr == TypeByte;
+}
+
+QString CFitBaseType::str() const
 {
      return name;
 }

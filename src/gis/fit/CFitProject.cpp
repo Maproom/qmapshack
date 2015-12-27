@@ -75,14 +75,16 @@ void CFitProject::loadFit(const QString & filename)
     CFitStream in(file);
         if(in.decodeFile())
         {
-            CFitMessage* mesg = in.firstMesgOf(MesgNumFileId);
+            const CFitMessage& mesg = in.firstMesgOf(MesgNumFileId);
+            qDebug() << mesg.messageInfo();
+            qDebug() << mesg.getFieldUIntValue(FileIdType);
 
-            if(mesg->getFieldUIntValue(FileIdType) == FileActivity || mesg->getFieldUIntValue(FileIdType) == FileCourse)
+            if(mesg.getFieldUIntValue(FileIdType) == FileActivity || mesg.getFieldUIntValue(FileIdType) == FileCourse)
             {
                 new CGisItemTrk(in, this);
             }
             in.reset();
-            while(in.nextMesgOf(MesgNumCoursePoint) != 0)
+            while(in.nextMesgOf(MesgNumCoursePoint).getGlobalMesgNr() != GlobalMesgNrInvalid)
             {
                 new CGisItemWpt(in, this);
             }

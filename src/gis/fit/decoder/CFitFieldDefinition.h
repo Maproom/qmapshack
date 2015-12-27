@@ -32,14 +32,18 @@ public:
     CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t defNr, uint8_t size, uint8_t type);
     CFitFieldDefinition();
 
+    QString fieldInfo() const;
+
     uint8_t getDefNr() const;
     uint8_t getSize() const;
     uint8_t getType() const;
     CFitBaseType* getBaseType() const;
     bool getEndianAbilityFlag() const;
 
-    CFitDefinitionMessage* parent() { return parentDefintion; }
-    CFitFieldProfile* profile() { return fieldProfile; }
+    CFitDefinitionMessage* parent() const { return parentDefintion; }
+    CFitFieldProfile* profile() const { return fieldProfile; }
+
+    void setParent(CFitDefinitionMessage* parent) { parentDefintion = parent; }
 
 private:
     uint8_t defNr;

@@ -57,7 +57,7 @@ DecodeState CFitRecordHeaderState::process(uint8_t &dataByte) {
         uint8_t localMessageType = (dataByte & RecordHeaderTimeMesgMask) >> RecordHeaderTimeMesgShift;
         CFitDefinitionMessage* def = defintion(localMessageType);
 
-        if (def->getField(RecordTimestamp) == nullptr) {
+        if (! def->hasField(RecordTimestamp)) {
             // create dummy definition field for timestamp
             // later on passed timestamp is a uint32, therefore a 4 byte type is created.
             // remark on enum for timestamp (RecordTimestamp:
@@ -67,10 +67,9 @@ DecodeState CFitRecordHeaderState::process(uint8_t &dataByte) {
         }
         setTimestampOffset(dataByte);
 
-        addMessage(def);
-        CFitFieldDefinition* fieldDef = def->getField(RecordTimestamp);
-        CFitIntField<uint32_t>* timestampField = new CFitIntField<uint32_t>(fieldDef, fieldDef->profile(), getTimestamp(), true);
-        latestMessage()->addField(timestampField);
+        addMessage(*def);
+        CFitFieldDefinition& fieldDef = def->getField(RecordTimestamp);
+        latestMessage()->addField(new CFitIntField<uint32_t>(fieldDef, fieldDef.profile(), getTimestamp(), true));
 
         return StateFieldData;
     }
@@ -78,12 +77,12 @@ DecodeState CFitRecordHeaderState::process(uint8_t &dataByte) {
         uint8_t localMessageType = dataByte & RecordHeaderMesgMask;
         if ((dataByte & RecordHeaderDefBit) != 0) {
             // this is a definition message
-            addDefinition(new CFitDefinitionMessage(localMessageType));
+            addDefinition(CFitDefinitionMessage(localMessageType));
             return StateRecordContent;
         }
         else {
             // this is a data message
-            addMessage(defintion(localMessageType));
+            addMessage(*defintion(localMessageType));
             // go to StateFieldData
             return StateFieldData;
         }

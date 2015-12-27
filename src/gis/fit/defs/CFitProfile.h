@@ -31,7 +31,7 @@ public:
     CFitProfile(const CFitProfile& copy);
     CFitProfile(QString name, uint16_t globalMesgNr);
     void addField(CFitFieldProfile* field);
-    CFitFieldProfile * getField(uint8_t fieldDefNr);
+    CFitFieldProfile * getField(uint8_t fieldDefNr) const;
 
     QString getName() const { return name; }
     uint16_t getGlobalMesgNr() const { return globalMesgNr; }

@@ -19,6 +19,7 @@
 #include "gis/fit/decoder/CFitFieldDefinition.h"
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
+#include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitProfileLockup.h"
 
 
@@ -27,15 +28,27 @@ static const uint8_t EndianFlagMask = 0x80;
 
 
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t defNr, uint8_t size, uint8_t type)
-        : defNr(defNr), size(size), type(type), parentDefintion(parent) {
+        : defNr(defNr), size(size), type(type), parentDefintion(parent)
+{
     baseType = CFitBaseTypeMap::get(type);
-    if(parentDefintion)
-        fieldProfile = CFitProfileLockup::getFieldForProfile(parentDefintion->getGlobalMesgNr(), defNr);
-    else
-        fieldProfile = nullptr;
+    fieldProfile = CFitProfileLockup::getFieldForProfile(parentDefintion ? parentDefintion->getGlobalMesgNr() : GlobalMesgNrInvalid, defNr);
 }
 
-CFitFieldDefinition::CFitFieldDefinition() : CFitFieldDefinition(nullptr, LocalMesgNrInvalid, 0, TypeInvalid) { }
+CFitFieldDefinition::CFitFieldDefinition()
+        : CFitFieldDefinition(nullptr, LocalMesgNrInvalid, 0, TypeInvalid) { }
+
+QString CFitFieldDefinition::fieldInfo() const
+{
+    QString fstr = QString("%1 %2 (%3): %4, type %5, size %6, endian %7")
+            .arg(profile()->hasSubfields() ? "dynamic" : profile()->hasComponents() ? "component" : "field")
+            .arg(profile()->getName())
+            .arg(getDefNr())
+            .arg(getBaseType()->str())
+            .arg(getType())
+            .arg(getSize())
+            .arg(getEndianAbilityFlag());
+    return fstr;
+}
 
 uint8_t CFitFieldDefinition::getDefNr() const {
     return defNr;

@@ -22,23 +22,29 @@
 #include "gis/fit/defs/fit_const.h"
 
 
-CFitMessage::CFitMessage(CFitDefinitionMessage* def) : fields()
+CFitMessage::CFitMessage(const CFitDefinitionMessage& def) : fields()
 {
-    localMesgNr = def->getLocalMesgNr();
-    globalMesgNr = def->getGlobalMesgNr();
+    localMesgNr = def.getLocalMesgNr();
+    globalMesgNr = def.getGlobalMesgNr();
     messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
 }
 
-CFitMessage::CFitMessage()  {
+CFitMessage::CFitMessage() : fields()  {
     localMesgNr = LocalMesgNrInvalid;
     globalMesgNr = GlobalMesgNrInvalid;
     messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
 }
 
-//CFitMessage::CFitMessage(const CFitMessage &mesg) : definition(mesg.definition), fields(mesg.fields) { }
+CFitMessage::~CFitMessage()
+{
+    for(CFitField* field : fields)
+    {
+        delete field;
+    }
+}
 
 
-QStringList CFitMessage::messageInfo()
+QStringList CFitMessage::messageInfo() const
 {
     QStringList list;
     list << QString("Message %1 (%3) %4 [loc]")
@@ -46,7 +52,7 @@ QStringList CFitMessage::messageInfo()
     .arg(getGlobalMesgNr())
     .arg(getLocalMesgNr());
 
-    for(CFitField* field: fields) {
+    for(const CFitField* field: fields) {
         list << field->fieldInfo();
     }
     return list;
@@ -61,7 +67,7 @@ uint8_t CFitMessage::getLocalMesgNr() const
     return localMesgNr;
 }
 
-bool CFitMessage::hasField(const uint8_t fieldDefNum)
+bool CFitMessage::hasField(const uint8_t fieldDefNum) const
 {
     return fields.contains(fieldDefNum);
 }
@@ -69,16 +75,20 @@ bool CFitMessage::hasField(const uint8_t fieldDefNum)
 // dummy field for unknown field defintion nr.
 // lazy initialized because profiles are not created at that point
 CFitField* dummyField = nullptr;
+CFitField* invalidField()
+{
+    if(!dummyField)
+    {
+        dummyField = new CFitField();
+    }
+    return dummyField;
+}
 
-CFitField* CFitMessage::getField(const uint8_t fieldDefNum)
+const CFitField* CFitMessage::getField(const uint8_t fieldDefNum) const
 {
     if(hasField(fieldDefNum))
         return fields[fieldDefNum];
-
-    if (! dummyField)
-        dummyField = new CFitField();
-
-    return dummyField;
+    return invalidField();
 }
 
 void CFitMessage::addField(CFitField* field)
@@ -86,29 +96,29 @@ void CFitMessage::addField(CFitField* field)
     fields.insert(field->getFieldDefNr(), field);
 }
 
-bool CFitMessage::isFieldValueValid(const uint8_t fieldDefNum)
+bool CFitMessage::isFieldValueValid(const uint8_t fieldDefNum) const
 {
     return getField(fieldDefNum)->isValidValue();
 }
 
-int CFitMessage::getFieldIntValue(const uint8_t fieldDefNum)
+int CFitMessage::getFieldIntValue(const uint8_t fieldDefNum) const
 {
     return getField(fieldDefNum)->getSIntValue();
 }
-unsigned int CFitMessage::getFieldUIntValue(const uint8_t fieldDefNum)
+unsigned int CFitMessage::getFieldUIntValue(const uint8_t fieldDefNum) const
 {
         return getField(fieldDefNum)->getUIntValue();
 }
-double CFitMessage::getFieldDoubleValue(const uint8_t fieldDefNum)
+double CFitMessage::getFieldDoubleValue(const uint8_t fieldDefNum) const
 {
     return getField(fieldDefNum)->getDoubleValue();
 }
 
-QString CFitMessage::getFieldString(const uint8_t fieldDefNum)
+QString CFitMessage::getFieldString(const uint8_t fieldDefNum) const
 {
     return getField(fieldDefNum)->getString();
 }
-uint8_t* CFitMessage::getFieldBytes(const uint8_t fieldDefNum)
+QByteArray CFitMessage::getFieldBytes(const uint8_t fieldDefNum) const
 {
     return getField(fieldDefNum)->getBytes();
 }

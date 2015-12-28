@@ -306,7 +306,7 @@ private:
     void setSymbol();
     void readGpx(const QDomNode& xml);
     void readTwoNav(const CTwoNavProject::wpt_t &tnvWpt);
-    void readFit(CFitStream& stream);
+    void readWptFromFit(CFitStream &stream);
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
     void drawBubble(QPainter& p);

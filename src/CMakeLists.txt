@@ -256,7 +256,8 @@ set( SRCS
         gis/fit/decoder/CFitDecoder.cpp
         gis/fit/defs/CFitProfileLockup.cpp
         gis/fit/defs/CFitFieldProfile.cpp
-        gis/fit/decoder/CFitByteDataTransformer.cpp)
+        gis/fit/decoder/CFitByteDataTransformer.cpp
+        gis/fit/decoder/CFitFieldBuilder.cpp)
 
 if(UNIX AND NOT APPLE)
 set( SRCS
@@ -499,7 +500,8 @@ set( HDRS
         gis/fit/decoder/CFitDecoder.h
         gis/fit/defs/CFitProfileLockup.h
         gis/fit/defs/CFitFieldProfile.h
-        gis/fit/decoder/CFitByteDataTransformer.h)
+        gis/fit/decoder/CFitByteDataTransformer.h
+        gis/fit/decoder/CFitFieldBuilder.h)
 
 if(UNIX AND NOT APPLE)
 set( HDRS
@@ -623,12 +625,12 @@ qt5_add_translation(
 
 
 set(LIBINP
-    ${SRCS}
-    ${HDRS}
-    ${UI_HDRS}
-    ${RC_SRCS}
-    ${${APPLICATION_NAME}_QM_FILES}
-)
+        ${SRCS}
+        ${HDRS}
+        ${UI_HDRS}
+        ${RC_SRCS}
+        ${${APPLICATION_NAME}_QM_FILES}
+        gis/fit/decoder/CFitFieldBuilder.cpp gis/fit/decoder/CFitFieldBuilder.h)
 
 set(MAININP
     main.cpp

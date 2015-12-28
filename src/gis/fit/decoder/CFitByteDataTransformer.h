@@ -20,6 +20,7 @@
 #define CFITBYTEDATATRANSFORMER_H
 
 #include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/decoder/CFitFieldDefinition.h"
 
 #include <QtCore>
 
@@ -28,8 +29,12 @@ public:
     static unsigned int getUIntValue(CFitBaseType* baseType, uint8_t* rawData);
     static int getSIntValue(CFitBaseType *baseType, uint8_t *rawData);
     static double getFloatValue(CFitBaseType* baseType, uint8_t* rawData);
+    /*
+     * param rawData: the fit utf-8 string, 0 terminated.
+     */
     static QString getString(uint8_t* rawData, uint8_t length=0);
     static QByteArray getBytes(uint8_t* rawData, uint8_t length);
+    static void swapFieldData(const CFitFieldDefinition& fieldDef, uint8_t* fieldData);
 
 private:
     static uint8_t getUint8(uint8_t* rawData);

@@ -74,5 +74,16 @@ const CFitMessage& CFitStream::firstMesgOf(uint16_t mesgNum)
     return mesg;
 }
 
+int CFitStream::countMesgOf(uint16_t mesgNr)
+{
+    reset();
+    int c = 0;
+    while(nextMesgOf(mesgNr).getGlobalMesgNr() != GlobalMesgNrInvalid)
+    {
+        c++;
+    }
+    reset();
+    return c;
+}
 
 

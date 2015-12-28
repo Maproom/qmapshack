@@ -210,10 +210,11 @@ CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject * project)
 {
     // --- start read and process data ----
     setColor(penForeground.color());
-    readFit(stream);
+    readTrkFromFit(stream);
     // --- stop read and process data ----
 
     setupHistory();
+    deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);
 }
 

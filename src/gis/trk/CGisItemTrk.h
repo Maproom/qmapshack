@@ -621,7 +621,7 @@ private:
      @brief Read serialized track data from a FIT file stream
      @param stream
      */
-    void readFit(CFitStream& stream);
+    void readTrkFromFit(CFitStream &stream);
 
 private:
     /**

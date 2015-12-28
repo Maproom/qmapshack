@@ -38,7 +38,6 @@ CFitDecoder::CFitDecoder() {
 
 CFitDecoder::~CFitDecoder()
 {
-    // TODO destructor
     for(CFitDecoderState* state: stateMap)
     {
         delete state;
@@ -48,6 +47,7 @@ CFitDecoder::~CFitDecoder()
 void CFitDecoder::resetSharedData()
 {
     data.defintions = QMap<uint8_t, CFitDefinitionMessage>();
+    data.defintionHistory = QList<CFitDefinitionMessage>();
     data.messages = QList<CFitMessage>();
     data.lastDefintion = nullptr;
     data.lastMessage = nullptr;
@@ -83,9 +83,8 @@ void printMessages(const QList<CFitMessage>& messages)
 
 void CFitDecoder::printDebugInfo()
 {
-    // TODO move to better place and check for debug flag before entering loops
-    printDefintions(data.defintions.values());
-    printMessages(data.messages);
+    FITDEBUG(1, printDefintions(data.defintionHistory))
+    FITDEBUG(1, printMessages(data.messages))
 
 }
 bool CFitDecoder::decode(QFile &file) {

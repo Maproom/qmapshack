@@ -102,6 +102,11 @@ void CFitDecoderState::addDefinition(CFitDefinitionMessage definition) {
     data.lastDefintion = &data.defintions[definition.getLocalMesgNr()] ;
 }
 
+void CFitDecoderState::endDefintion()
+{
+    data.defintionHistory.append(*data.lastDefintion);
+}
+
 CFitDefinitionMessage* CFitDecoderState::defintion(uint32_t localMessageType) {
     return &(data.defintions[localMessageType]);
 }

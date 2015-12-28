@@ -43,6 +43,10 @@ CFitMessage::~CFitMessage()
     }
 }
 
+bool CFitMessage::isValid() const
+{
+    return getGlobalMesgNr() != GlobalMesgNrInvalid;
+}
 
 QStringList CFitMessage::messageInfo() const
 {

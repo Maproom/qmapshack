@@ -25,6 +25,7 @@
 
 #include <QPen>
 #include <QPointer>
+#include "gis/fit/CFitStream.h"
 
 class QDomNode;
 class IGisProject;
@@ -99,6 +100,7 @@ public:
     CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
     CGisItemRte(const CQlgtRoute& rte1);
     CGisItemRte(const SGisLine& l, const QString &name, IGisProject *project, int idx);
+    CGisItemRte(CFitStream& stream, IGisProject * project);
     virtual ~CGisItemRte();
 
     QDataStream& operator<<(QDataStream& stream);
@@ -197,6 +199,7 @@ private:
     void deriveSecondaryData();
     void setSymbol();
     void readRte(const QDomNode& xml, rte_t& rte);
+    void readRteFromFit(CFitStream &stream);
     void readRouteDataFromGisLine(const SGisLine &l);
     const subpt_t * getSubPtByIndex(quint32 idx);
 

@@ -29,6 +29,7 @@
 #include <helpers/CSettings.h>
 #include <gis/gpx/CGpxProject.h>
 #include <gis/qms/CQmsProject.h>
+#include <gis/rte/CGisItemRte.h>
 
 
 CFitProject::CFitProject(const QString &filename, CGisListWks *parent)
@@ -73,28 +74,28 @@ void CFitProject::loadFit(const QString & filename)
     }
     
     CFitStream in(file);
-        if(in.decodeFile())
+    if(in.decodeFile())
+    {
+        const CFitMessage& mesg = in.firstMesgOf(MesgNumFileId);
+        if(mesg.getFieldUIntValue(FileIdType) == FileActivity || mesg.getFieldUIntValue(FileIdType) == FileCourse)
         {
-            const CFitMessage& mesg = in.firstMesgOf(MesgNumFileId);
-            qDebug() << mesg.messageInfo();
-            qDebug() << mesg.getFieldUIntValue(FileIdType);
+            new CGisItemTrk(in, this);
+        }
+        // fit does not have routes
+        // new CGisItemRte(in, this);
 
-            if(mesg.getFieldUIntValue(FileIdType) == FileActivity || mesg.getFieldUIntValue(FileIdType) == FileCourse)
-            {
-                new CGisItemTrk(in, this);
-            }
-            in.reset();
-            while(in.nextMesgOf(MesgNumCoursePoint).getGlobalMesgNr() != GlobalMesgNrInvalid)
-            {
-                new CGisItemWpt(in, this);
-            }
-             // TODO other types
-        }
-        else
+        in.reset();
+        while(in.nextMesgOf(MesgNumCoursePoint).isValid())
         {
-            qWarning() << "FIT decoding error for "<< filename;
-            QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+            new CGisItemWpt(in, this);
         }
+         // ql:area is not directly available in FIT (could be calculated)
+    }
+    else
+    {
+        qWarning() << "FIT decoding error for "<< filename;
+        QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+    }
     
     file.close();
     

@@ -74,6 +74,9 @@ public:
      Sets the strema to the beginning again.
      */
     const CFitMessage& firstMesgOf(uint16_t mesgNum);
+
+    int countMesgOf(uint16_t mesgNr);
+
     
     QString getFileName() { return file.fileName(); }
     

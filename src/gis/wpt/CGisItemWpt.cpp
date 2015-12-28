@@ -157,7 +157,7 @@ CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject * project)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
 {
-    readFit(stream);
+    readWptFromFit(stream);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 
     genKey();

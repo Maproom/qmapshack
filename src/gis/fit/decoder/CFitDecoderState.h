@@ -24,6 +24,16 @@
 
 #include <QtCore>
 
+/*
+ * 0: does not print any decoded fit messages and defintions
+ * 1: prints fit messages and defintions after finishing decoding
+ * 2: 1 + prints fit messages and defintions during decoing (just after finshing one)
+ */
+#define FITDEBUGLVL 1
+
+#define FITDEBUG(level, cmd) \
+    if(FITDEBUGLVL >= level) { cmd; } \
+
 
 typedef enum {
     StateFileHeader, // 0
@@ -32,8 +42,7 @@ typedef enum {
     StateFieldDef, // 3
     StateFieldData, // 4
     StateFileCrc, // 5
-    //StateError, // 6
-    StateEnd // 7
+    StateEnd // 6
 } DecodeState;
 
 class CFitDecoderState {
@@ -47,9 +56,8 @@ public:
         uint32_t timestamp;
         CFitDefinitionMessage* lastDefintion;
         CFitMessage* lastMessage;
-        // TODO here we have a problem wiht the map if a local message number is reused within the same file (which is allowed).
-        // the problem is not for the decoding but the overriden defintion is no longer available in the debug output.
         QMap<uint8_t, CFitDefinitionMessage> defintions;
+        QList<CFitDefinitionMessage> defintionHistory;
         QList<CFitMessage> messages;
     };
 
@@ -73,6 +81,7 @@ protected:
     CFitDefinitionMessage* latestDefinition();
     CFitDefinitionMessage* defintion(uint32_t localMessageType);
     void addDefinition(CFitDefinitionMessage definition);
+    void endDefintion();
 
     void setTimestamp(uint32_t fullTimestamp);
     void setTimestampOffset(uint32_t offsetTimestamp);

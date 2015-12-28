@@ -17,7 +17,7 @@
  **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitByteDataTransformer.h"
-
+#include "gis/fit/decoder/CFitDefinitionMessage.h"
 
 unsigned int CFitByteDataTransformer::getUIntValue(CFitBaseType* baseType, uint8_t* rawData)
 {
@@ -114,19 +114,37 @@ double CFitByteDataTransformer::getFloat64(uint8_t* rawData)
 
 QString CFitByteDataTransformer::getString(uint8_t* rawData, uint8_t length)
 {
-    QString str;
+    // find the 0 termination
     uint8_t i = 0;
     while(rawData[i] != 0 )
     {
-        str = str.append(rawData[i]);
         i++;
         if(length > 0 && i > length)
             break;
     }
-    return str;
+    length = i;
+
+    return QString::fromUtf8((const char*)rawData, length);
 }
 
 QByteArray CFitByteDataTransformer::getBytes(uint8_t* rawData, uint8_t length)
 {
     return QByteArray((const char*)rawData, length);
+}
+
+void CFitByteDataTransformer::swapFieldData(const CFitFieldDefinition& fieldDef, uint8_t* fieldData)
+{
+    if (fieldDef.getEndianAbilityFlag() && (fieldDef.parent()->getArchitectureBit() != ArchEndianLittle)) {
+        // Swap the bytes for each element.
+        int typeSize = fieldDef.getBaseType()->size();
+        int elements = fieldDef.getSize() / typeSize;
+
+        for (int element = 0; element < elements; element++) {
+            for (int i = 0; i < (typeSize / 2); i++) {
+                uint8_t tmp = (uint8_t)fieldData[element * typeSize + i];
+                fieldData[element * typeSize + i] = fieldData[element * typeSize + typeSize - i - 1];
+                fieldData[element * typeSize + typeSize - i - 1] = tmp;
+            }
+        }
+    }
 }

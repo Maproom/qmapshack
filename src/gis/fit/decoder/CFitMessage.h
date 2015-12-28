@@ -32,6 +32,7 @@ public:
     CFitMessage();
     virtual ~CFitMessage();
 
+    bool isValid() const;
     uint16_t getGlobalMesgNr() const;
     uint8_t getLocalMesgNr() const;
 

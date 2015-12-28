@@ -105,7 +105,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectWks->addSeparator();
     actionSyncWksDev = menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"     ), tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
-    actionSyncDB     = menuProjectWks->addAction(QIcon("://icons/32x32/Reset.png"      ), tr("Reload from Database"), this, SLOT(slotSyncDB()));
+    actionSyncDB     = menuProjectWks->addAction(QIcon("://icons/32x32/DatabaseSync.png"      ), tr("Sync. with Database"), this, SLOT(slotSyncDB()));
 
     menuProjectWks->addSeparator();
     actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"       ), tr("Close"          ), this, SLOT(slotCloseProject()));

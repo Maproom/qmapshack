@@ -94,7 +94,4 @@ private:
     shared_state_data &data;
 };
 
-
-
-
 #endif // CFITSTATE_H

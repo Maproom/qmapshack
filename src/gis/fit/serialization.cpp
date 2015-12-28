@@ -59,7 +59,6 @@ public:
 };
 
 
-
 bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
 {
     if(mesg.isFieldValueValid(RecordPositionLong) && mesg.isFieldValueValid(RecordPositionLat))
@@ -81,6 +80,23 @@ bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     return false;
 }
 
+bool readFitRecord(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt)
+{
+    if(readFitRecord(mesg, (IGisItem::wpt_t &)pt))
+    {
+        pt.speed = mesg.getFieldDoubleValue(RecordSpeed);
+
+        // see gis/trk/CKnownExtension for the keys of the extensions
+        if(mesg.isFieldValueValid(RecordHeartRate))
+            pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = QVariant(mesg.getFieldIntValue(RecordHeartRate));
+        if(mesg.isFieldValueValid(RecordTemperature))
+            pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = QVariant(mesg.getFieldIntValue(RecordTemperature));
+
+        pt.extensions.squeeze();
+        return true;
+    }
+    return false;
+}
 
 void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 {
@@ -131,8 +147,6 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
                 CGisItemTrk::trkpt_t pt = CGisItemTrk::trkpt_t();
                 if(readFitRecord(mesg, pt))
                 {
-                    pt.speed = mesg.getFieldDoubleValue(RecordSpeed);
-                    pt.extensions.squeeze();
                     seg.pts.append(pt);
                 }
         }

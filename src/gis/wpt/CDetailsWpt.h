@@ -32,6 +32,8 @@ public:
     virtual ~CDetailsWpt();
 
 private slots:
+    void slotNameChanged(const QString &name);
+    void slotNameChangeFinished();
     void slotLinkActivated(const QString& link);
     void slotLinkActivated(const QUrl& url);
     void slotChangeIcon();

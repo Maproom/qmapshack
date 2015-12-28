@@ -41,11 +41,13 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
 
     toolLock->setDisabled(wpt.isOnDevice());
 
-    connect(labelName,      &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
     connect(labelPosition,  &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
     connect(labelElevation, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
     connect(labelProximity, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
     connect(textCmtDesc,    &QTextBrowser::anchorClicked,    this,       static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
+
+    connect(lineName,       &CLineEdit::textEdited,          this,       &CDetailsWpt::slotNameChanged);
+    connect(lineName,       &CLineEdit::editingFinished,     this,       &CDetailsWpt::slotNameChangeFinished);
     connect(toolIcon,       &QToolButton::clicked,           this,       &CDetailsWpt::slotChangeIcon);
     connect(toolLock,       &QToolButton::toggled,           this,       &CDetailsWpt::slotChangeReadOnlyMode);
 
@@ -81,7 +83,8 @@ void CDetailsWpt::setupGui()
     toolIcon->setEnabled(!isReadOnly);
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName(), ""));
+    lineName->setReadOnly(isReadOnly);
+    lineName->setText(wpt.getName());
     labelPosition->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));
 
     labelTainted->setVisible(wpt.isTainted());
@@ -127,18 +130,27 @@ void CDetailsWpt::setupGui()
     originator = false;
 }
 
-void CDetailsWpt::slotLinkActivated(const QString& link)
+void CDetailsWpt::slotNameChanged(const QString &name)
 {
-    if(link == "name")
+    setWindowTitle(name);
+}
+
+void CDetailsWpt::slotNameChangeFinished()
+{
+    lineName->clearFocus();
+
+    const QString& name = lineName->text();
+    slotNameChanged(name);
+
+    if(name != wpt.getName())
     {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
-        if(name.isEmpty())
-        {
-            return;
-        }
         wpt.setName(name);
     }
-    else if(link == "elevation")
+}
+
+void CDetailsWpt::slotLinkActivated(const QString& link)
+{
+    if(link == "elevation")
     {
         QVariant var(wpt.getElevation());
         CElevationDialog dlg(this, var, QVariant(NOINT), wpt.getPosition());

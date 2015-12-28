@@ -44,6 +44,7 @@ public:
         , eTypeLostFound
         , eTypeTwoNav
         , eTypeSlf       // the Sigma Log Format
+        , eTypeFit
     };
 
     enum sorting_e
@@ -90,6 +91,7 @@ public:
     static const QString filedialogFilterGPX;
     static const QString filedialogFilterQMS;
     static const QString filedialogFilterSLF;
+    static const QString filedialogFilterFIT;
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 

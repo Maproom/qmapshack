@@ -16,38 +16,45 @@
 
 **********************************************************************************************/
 
-#ifndef CDEVICEGARMIN_H
-#define CDEVICEGARMIN_H
+#ifndef CFITPROJECT_H
+#define CFITPROJECT_H
 
-#include "device/IDevice.h"
+#include "gis/prj/IGisProject.h"
 
-class CDeviceGarmin : public IDevice
+#include <QtCore>
+
+
+class CFitProject : public IGisProject
 {
 public:
-    CDeviceGarmin(const QString &path, const QString &key, const QString& model, QTreeWidget * parent);
-    virtual ~CDeviceGarmin();
-
-    void insertCopyOfProject(IGisProject * project);
-
-
-    void startSavingProject(IGisProject * project);
-    void saveImages(CGisItemWpt& wpt);
-    void loadImages(CGisItemWpt& wpt);
-    void aboutToRemoveProject(IGisProject * project);
+    CFitProject(const QString& filename, CGisListWks * parent);
+    CFitProject(const QString& filename, IDevice * parent);
+    virtual ~CFitProject();
 
 
-private:
-    void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
+    virtual const QString getFileDialogFilter() override
+    {
+        return IGisProject::filedialogFilterFIT;
+    }
+
+    virtual const QString getFileExtension() override
+    {
+        return "fit";
+    }
+
+    virtual bool canSave() override
+    {
+        return false;
+    }
+
+    virtual bool save();
+    virtual bool saveAs();
+
+    static bool saveAs(const QString& fn, IGisProject& project);
     
-    QString id;
-    QString partno;
-    QString description;
-    QString pathGpx = "Garmin/GPX";
-    QString pathPictures = "Garmin/JPEG";
-    QString pathSpoilers = "Garmin/GeocachePhotos";
-
-    int cntImages = 0;
+private:
+    void loadFit(const QString & filename);
 };
 
-#endif //CDEVICEGARMIN_H
+#endif //CFITPROJECT_H
 

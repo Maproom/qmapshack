@@ -258,16 +258,6 @@ QString CGisItemRte::getInfo(bool allowEdit) const
     QString val1, unit1, val2, unit2;
     QString str = "<div>";
 
-    if(allowEdit)
-    {
-        str += "<b>" + toLink(isReadOnly(), "name", getName(), "") + "</b>";
-    }
-    else
-    {
-        str += "<div style='font-weight: bold;'>" + getName() + "</div>";
-    }
-
-    str += "<br/>\n";
     if(totalDistance != NOFLOAT)
     {
         IUnit::self().meter2distance(totalDistance, val1, unit1);

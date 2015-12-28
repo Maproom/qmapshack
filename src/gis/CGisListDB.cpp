@@ -117,7 +117,9 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     menuDatabase        = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
+    actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/Reset.png"), tr("Update"), this, SLOT(slotUpdateDatabase()));
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
+
 
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
@@ -578,3 +580,25 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
     }
 }
 
+void CGisListDB::slotUpdateDatabase()
+{
+    CGisListDBEditLock lock(true, this, "slotUpdateDatabase");
+
+    QList<QTreeWidgetItem*> items = selectedItems();
+    foreach(QTreeWidgetItem* item, items)
+    {
+        IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+        if(folder == nullptr)
+        {
+            continue;
+        }
+
+        if(folder->type() == IDBFolder::eTypeDatabase)
+        {
+            folder->update();
+
+            CEvtD2WReload * evt = new CEvtD2WReload(folder->getDBName());
+            CGisWidget::self().postEventForWks(evt);
+        }
+    }
+}

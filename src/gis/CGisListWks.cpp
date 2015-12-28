@@ -1797,6 +1797,31 @@ bool CGisListWks::event(QEvent * e)
             emit sigChanged();
             return true;
         }
+
+        case eEvtD2WReload:
+        {
+            CEvtD2WReload * evt = (CEvtD2WReload*)e;
+            QList<CDBProject*> projects;
+
+            const int N = topLevelItemCount();
+            for(int i = 0; i < N; i++)
+            {
+                CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+
+                if(project && (project->getDBName() == evt->db))
+                {
+                    project->update();
+                    projects << project;
+                }
+            }
+
+            foreach(CDBProject * project, projects)
+            {
+                project->blockUpdateItems(false);
+            }
+
+            return true;
+        }
         }
     }
     return QTreeWidget::event(e);

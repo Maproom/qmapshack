@@ -163,7 +163,7 @@ quint64 IDBFolder::addFolderToDb(type_e type, const QString& name, quint64 idPar
 void IDBFolder::expanding()
 {
     qDeleteAll(takeChildren());
-    addChildren(QSet<QString>());
+    addChildren(QSet<QString>(), false);
 
     CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
     CGisWidget::self().postEventForWks(evt);
@@ -226,8 +226,46 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     if(isExpanded())
     {
         qDeleteAll(takeChildren());
-        addChildren(info->keysChildren);
+        addChildren(info->keysChildren, false);
     }
+}
+
+void IDBFolder::update()
+{
+    if(!isExpanded())
+    {
+        return;
+    }
+
+    QSet<QString> activeChildren;
+    QList<CDBItem*> dbItems;
+    const int N = childCount();
+    for(int i = 0; i < N; i++)
+    {
+        QTreeWidgetItem * item = child(i);
+
+        IDBFolder * dbFolder = dynamic_cast<IDBFolder*>(item);
+        if(dbFolder != nullptr)
+        {
+            dbFolder->update();
+            continue;
+        }
+
+        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        if(dbItem != nullptr)
+        {
+            if(dbItem->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
+            {
+                activeChildren << dbItem->getKey();
+            }
+            dbItems << dbItem;
+            continue;
+        }
+    }
+
+    qDeleteAll(dbItems);
+    addChildren(activeChildren, true);
+
 }
 
 void IDBFolder::toggle()
@@ -328,22 +366,25 @@ void IDBFolder::setupFromDB()
     }
 }
 
-void IDBFolder::addChildren(const QSet<QString>& activeChildren)
+void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolders)
 {
     QSqlQuery query(db);
 
-    // folders 1st
-    query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
-    while(query.next())
+    if(!skipFolders)
     {
-        quint64 idChild     = query.value(0).toULongLong();
-        quint32 typeChild   = query.value(1).toInt();
-        IDBFolder::createFolderByType(db, typeChild, idChild, this);
-    }
+        // folders 1st
+        query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
+        query.bindValue(":id", id);
+        QUERY_EXEC(return );
+        while(query.next())
+        {
+            quint64 idChild     = query.value(0).toULongLong();
+            quint32 typeChild   = query.value(1).toInt();
+            IDBFolder::createFolderByType(db, typeChild, idChild, this);
+        }
 
-    sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+        sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+    }
 
     // tracks 2nd
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
@@ -434,3 +475,4 @@ void IDBFolder::updateItemsOnWks()
     CEvtD2WUpdateItems * evt = new CEvtD2WUpdateItems(getId(), getDBName());
     CGisWidget::self().postEventForWks(evt);
 }
+

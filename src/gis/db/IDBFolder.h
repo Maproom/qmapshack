@@ -97,6 +97,13 @@ public:
     virtual void update(CEvtW2DAckInfo * info);
 
     /**
+     * @brief Update from database
+     *
+     * The database might have been changed by other users.
+     */
+    virtual void update();
+
+    /**
      * @brief Toggle check state of project and post event to workspace.
      */
     virtual void toggle();
@@ -152,7 +159,7 @@ protected:
 
        @param activeChildren     a set of item keys that are active on the workspace
      */
-    virtual void addChildren(const QSet<QString> &activeChildren);
+    virtual void addChildren(const QSet<QString> &activeChildren, bool skipFolders);
 
     /**
        @brief Remove a folder to folder realtion

@@ -2328,6 +2328,11 @@ bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const
 
 const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx)
 {
+    if(idx == NOIDX)
+    {
+        return 0;
+    }
+
     foreach (const trkseg_t &seg, trk.segs)
     {
         foreach(const trkpt_t &pt, seg.pts)

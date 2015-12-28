@@ -1806,7 +1806,9 @@ bool CGisListWks::event(QEvent * e)
 
 void CGisListWks::slotRteFromWpt()
 {
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     QList<IGisItem::key_t> keys;
+
     foreach(QTreeWidgetItem * item, selectedItems())
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
@@ -1824,6 +1826,8 @@ void CGisListWks::slotRteFromWpt()
 
 void CGisListWks::slotSyncDB()
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     foreach(QTreeWidgetItem * item, selectedItems())
     {
         CDBProject * project = dynamic_cast<CDBProject*>(item);

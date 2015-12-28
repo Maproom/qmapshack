@@ -153,7 +153,7 @@ void CDBProject::postStatus()
 }
 
 
-int CDBProject::checkForAction2(IGisItem * item, quint64 &idItem, QString& hash, QSqlQuery &query)
+int CDBProject::checkForAction2(IGisItem * item, quint64 &idItem, QString& hashItem, QSqlQuery &query)
 {
     int action = eActionNone;
 
@@ -163,9 +163,17 @@ int CDBProject::checkForAction2(IGisItem * item, quint64 &idItem, QString& hash,
 
     if(query.next())
     {
-        hash            = query.value(0).toString();
+        QString hash    = query.value(0).toString();
         QString user    = query.value(1).toString();
         QString date    = query.value(2).toString();
+
+        if(hash == hashItem)
+        {
+            // there seems to be no difference
+            return action;
+        }
+
+        hashItem = hash;
 
         QString msg = QObject::tr(
             "The item %1 has been changed by %2 (%3). \n\n"
@@ -247,6 +255,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
         // there are two reasons why an update does not affect a row
         // 1) the hash is different because another user changed the item
         // 2) the id was not found because another user removed the item
+        // 3) the items was completely identical, therefore no row was affected.
         int action = checkForAction2(item, idItem, hashInDb, query);
 
         switch(action)
@@ -534,7 +543,7 @@ bool CDBProject::save()
             }
 
             info->keysChildren << item->getKey().item;
-            item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+            item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged|IGisItem::eMarkNotPart|IGisItem::eMarkNotInDB);
         }
         catch(reasons_e reason)
         {
@@ -572,22 +581,7 @@ bool CDBProject::save()
     QUERY_EXEC(return false);
 
     // update change flag
-    bool saved = true;
-    for(int i = 0; i < N; i++)
-    {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
-        {
-            continue;
-        }
-        if(item->isChanged())
-        {
-            saved = false;
-            break;
-        }
-    }
-
-    setText(CGisListWks::eColumnDecoration, saved ? "" : "*");
+    updateDecoration();
 
     // report status to database view
     info->updateLostFound = true;
@@ -730,14 +724,36 @@ void CDBProject::update()
 
         if(query.next())
         {
+            // item is in the database
             quint64 idItem = query.value(0).toULongLong();
-            item->updateFromDB(idItem, db);
-            item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkNone);
+
+            QSqlQuery query2(db);
+            query2.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
+            query2.bindValue(":parent", id);
+            query2.bindValue(":child", idItem);
+            query2.exec();
+
+            if(query2.next())
+            {
+                // item is connected to this project
+                item->updateFromDB(idItem, db);
+                item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+            }
+            else
+            {
+                // item is not connected to this project
+                item->updateFromDB(idItem, db);
+                item->updateDecoration(IGisItem::eMarkNotPart|IGisItem::eMarkChanged, IGisItem::eMarkNone);
+            }
+
         }
         else
         {
-            item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+            // item is not in the database at all.
+            item->updateDecoration(IGisItem::eMarkNotInDB|IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
     }
+
+    updateDecoration();
 }
 

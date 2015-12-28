@@ -119,7 +119,7 @@ protected:
 
 
     int checkForAction1(IGisItem * item, quint64 &idItem, int &lastResult, QSqlQuery& query);
-    int checkForAction2(IGisItem * item, quint64 &idItem, QString &hash, QSqlQuery& query);
+    int checkForAction2(IGisItem * item, quint64 &idItem, QString &hashItem, QSqlQuery& query);
 
     /**
      * @brief Add item to database

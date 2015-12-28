@@ -271,7 +271,7 @@ QString IGisItem::getNameEx() const
 }
 
 
-void IGisItem::updateDecoration(mark_e enable, mark_e disable)
+void IGisItem::updateDecoration(quint32 enable, quint32 disable)
 {
     // update text and icon
     setToolTip(CGisListWks::eColumnName,getInfo());
@@ -280,7 +280,7 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
 
     // update project if necessary
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project && (enable & eMarkChanged))
+    if(project && (enable & (eMarkChanged|eMarkNotPart|eMarkNotInDB)))
     {
         project->setChanged();
     }
@@ -291,12 +291,28 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
     mask &= ~disable;
     setData(1, Qt::UserRole, mask);
 
+    QString tt;
     QString str;
+    if(mask & eMarkNotPart)
+    {
+        tt  += tt.isEmpty() ? "" : "\n";
+        tt  += QObject::tr("The item is not part of the project in the database.");
+        str += "?";
+    }
+    if(mask & eMarkNotInDB)
+    {
+        tt  += tt.isEmpty() ? "" : "\n";
+        tt  += QObject::tr("The item is not in the database.");
+        str += "X";
+    }
     if(mask & eMarkChanged)
     {
+        tt  += tt.isEmpty() ? "" : "\n";
+        tt  += QObject::tr("The item might need to be saved");
         str += "*";
     }
     setText(CGisListWks::eColumnDecoration, str);
+    setToolTip(CGisListWks::eColumnDecoration, tt);
 }
 
 
@@ -524,6 +540,17 @@ const QString& IGisItem::getHash()
         return noKey;
     }
     return history.events[history.histIdxCurrent].hash;
+}
+
+
+const QString& IGisItem::getLastDatabaseHash()
+{
+    if(lastDatabaseHash.isEmpty())
+    {
+        lastDatabaseHash = getHash();
+    }
+
+    return lastDatabaseHash;
 }
 
 void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
@@ -762,5 +789,5 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
 
 bool IGisItem::isChanged() const
 {
-    return text(CGisListWks::eColumnDecoration) == "*";
+    return text(CGisListWks::eColumnDecoration).contains('*');
 }

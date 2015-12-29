@@ -629,8 +629,7 @@ set(LIBINP
         ${HDRS}
         ${UI_HDRS}
         ${RC_SRCS}
-        ${${APPLICATION_NAME}_QM_FILES}
-        gis/fit/decoder/CFitFieldBuilder.cpp gis/fit/decoder/CFitFieldBuilder.h)
+        ${${APPLICATION_NAME}_QM_FILES})
 
 set(MAININP
     main.cpp

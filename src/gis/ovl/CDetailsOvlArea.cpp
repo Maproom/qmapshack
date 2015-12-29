@@ -68,8 +68,9 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
 
     connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpyacity);
     connect(toolLock,         &QToolButton::toggled,           this, &CDetailsOvlArea::slotChangeReadOnlyMode);
-    connect(textCmtDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)   >(&CDetailsOvlArea::slotLinkActivated));
-    connect(labelName,        &QLabel::linkActivated,          this, static_cast<void (CDetailsOvlArea::*)(const QString&)>(&CDetailsOvlArea::slotLinkActivated));
+    connect(textCmtDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)>(&CDetailsOvlArea::slotLinkActivated));
+    connect(lineName,         &CLineEdit::textEdited,          this, &CDetailsOvlArea::slotNameChanged);
+    connect(lineName,         &CLineEdit::editingFinished,     this, &CDetailsOvlArea::slotNameChangeFinished);
     connect(listHistory,      &CHistoryListWidget::sigChanged, this, &CDetailsOvlArea::setupGui);
 }
 
@@ -127,19 +128,24 @@ void CDetailsOvlArea::slotChangeReadOnlyMode(bool on)
     setupGui();
 }
 
-void CDetailsOvlArea::slotLinkActivated(const QString& link)
+void CDetailsOvlArea::slotNameChanged(const QString &name)
 {
-    if(link == "name")
-    {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new area name."), QLineEdit::Normal, area.getName());
-        if(name.isEmpty())
-        {
-            return;
-        }
-        area.setName(name);
-    }
+    const QString shownName = name.isEmpty() ? IGisItem::noName : QString(name).replace('&', "&&");
+    setWindowTitle(shownName);
+}
 
-    setupGui();
+void CDetailsOvlArea::slotNameChangeFinished()
+{
+    lineName->clearFocus();
+
+    const QString& name = lineName->text();
+    slotNameChanged(name);
+
+    if(name != area.getName())
+    {
+        area.setName(name);
+        setupGui();
+    }
 }
 
 void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
@@ -193,7 +199,8 @@ void CDetailsOvlArea::setupGui()
     setWindowTitle(area.getName());
 
     labelTainted->setVisible(area.isTainted());
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", area.getName(), ""));
+    lineName->setText(area.getName());
+    lineName->setReadOnly(isReadOnly);
 
     comboColor->setCurrentIndex      (area.getColorIdx());
     comboBorderWidth->setCurrentIndex(comboBorderWidth->findData(area.getWidth()));

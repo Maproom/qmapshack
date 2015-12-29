@@ -324,10 +324,6 @@ bool IGisProject::saveAs(QString fn, QString filter)
     {
         res = CQmsProject::saveAs(fn, *this);
     }
-    else if(filter == filedialogFilterFIT)
-    {
-        res = CFitProject::saveAs(fn, *this);
-    }
     else
     {
         return false;

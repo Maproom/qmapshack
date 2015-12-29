@@ -38,7 +38,6 @@ public:
     void setProfile(const CFitFieldProfile* profile) { fieldProfile = profile; }
     virtual QString fieldInfo() const;
 
-    bool isValidBaseType() const;
     const CFitBaseType& getBaseType() const;
     uint16_t getGlobalMesgNr() const;
     uint8_t getFieldDefNr() const;

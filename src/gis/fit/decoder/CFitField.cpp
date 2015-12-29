@@ -70,9 +70,6 @@ bool CFitField::isValidValue() const {
     return valid;
 }
 
-bool CFitField::isValidBaseType() const {
-    return baseType != 0 && baseType->nr() != TypeInvalid;
-}
 
 const CFitBaseType& CFitField::getBaseType() const
 {

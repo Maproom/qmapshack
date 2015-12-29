@@ -415,7 +415,7 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="120"/>
         <source>Sync. with Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Syngroniseren met database</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="121"/>
@@ -499,7 +499,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Sync. with Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Syngroniseren met database</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="111"/>
@@ -5921,12 +5921,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="674"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het project &apos;%1&apos; zal geupdated worden met de database.Er zijn nog veranderingen niet opgeslagen.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="675"/>
         <source>Save changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
@@ -6023,17 +6023,17 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/IGisItem.cpp" line="299"/>
         <source>The item is not part of the project in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het item is geen deel van het project in de database.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="305"/>
         <source>The item is not in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het item is niet in de database.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="311"/>
         <source>The item might need to be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Het item dient opgeslagen te worden</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="394"/>

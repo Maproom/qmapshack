@@ -107,7 +107,7 @@ DecodeState CFitHeaderState::process(uint8_t &dataByte) {
 
     if (offset == headerLength) {
         // end of header
-        return StateRecord;
+        return eDecoderStateRecord;
     }
-    return StateFileHeader;
+    return eDecoderStateFileHeader;
 }

@@ -52,11 +52,11 @@ DecodeState CFitFieldDefinitionState::process(uint8_t &dataByte) {
             if (def->getFields().size() >= def->getNrOfFields()) {
                 FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
                 endDefintion();
-                return StateRecord;
+                return eDecoderStateRecord;
             }
             else {
-                return StateFieldDef;
+                return eDecoderStateFieldDef;
             }
     }
-    return StateFieldDef;
+    return eDecoderStateFieldDef;
 };

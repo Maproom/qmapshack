@@ -28,12 +28,12 @@
 
 CFitDecoder::CFitDecoder() {
 
-    stateMap[StateFileHeader] = new CFitHeaderState(data);
-    stateMap[StateRecord] = new CFitRecordHeaderState(data);
-    stateMap[StateRecordContent] = new CFitRecordContentState(data);
-    stateMap[StateFieldDef] = new CFitFieldDefinitionState(data);
-    stateMap[StateFieldData] = new CFitFieldDataState(data);
-    stateMap[StateFileCrc] = new CFitCrcState(data);
+    stateMap[eDecoderStateFileHeader] = new CFitHeaderState(data);
+    stateMap[eDecoderStateRecord] = new CFitRecordHeaderState(data);
+    stateMap[eDecoderStateRecordContent] = new CFitRecordContentState(data);
+    stateMap[eDecoderStateFieldDef] = new CFitFieldDefinitionState(data);
+    stateMap[eDecoderStateFieldData] = new CFitFieldDataState(data);
+    stateMap[eDecoderStateFileCrc] = new CFitCrcState(data);
 }
 
 CFitDecoder::~CFitDecoder()
@@ -93,13 +93,13 @@ bool CFitDecoder::decode(QFile &file) {
     file.seek(0);
 
     uint8_t dataByte;
-    DecodeState state = StateFileHeader;
+    DecodeState state = eDecoderStateFileHeader;
     while (!file.atEnd()) {
         file.getChar((char *) &dataByte);
         try
         {
             state = stateMap[state]->processByte(dataByte);
-            if (state == StateEnd)
+            if (state == eDecoderStateEnd)
             {
                 printDebugInfo();
                 return true;

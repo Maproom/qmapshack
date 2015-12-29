@@ -67,15 +67,15 @@ DecodeState CFitRecordContentState::process(uint8_t &dataByte) {
             reset();
             if (nrOfFields == 0) {
                 // no fields, records may follow (either for a data message or defninition message)
-                return StateRecord;
+                return eDecoderStateRecord;
             }
             // the fields definitions follows
-            return StateFieldDef;
+            return eDecoderStateFieldDef;
             break;
         default:
             throw QString("invalid offset (%1) for state 'record content'").arg(offset);
 
     }
     // still more bytes for the record content
-    return StateRecordContent;
+    return eDecoderStateRecordContent;
 };

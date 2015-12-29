@@ -71,20 +71,20 @@ DecodeState CFitRecordHeaderState::process(uint8_t &dataByte) {
         const CFitFieldDefinition& fieldDef = def->getField(eRecordTimestamp);
         latestMessage()->addField(new CFitIntField<uint32_t>(fieldDef, &fieldDef.profile(), getTimestamp(), true));
 
-        return StateFieldData;
+        return eDecoderStateFieldData;
     }
     else {
         uint8_t localMessageType = dataByte & RecordHeaderMesgMask;
         if ((dataByte & RecordHeaderDefBit) != 0) {
             // this is a definition message
             addDefinition(CFitDefinitionMessage(localMessageType));
-            return StateRecordContent;
+            return eDecoderStateRecordContent;
         }
         else {
             // this is a data message
             addMessage(*defintion(localMessageType));
-            // go to StateFieldData
-            return StateFieldData;
+            // go to eDecoderStateFieldData
+            return eDecoderStateFieldData;
         }
     }
 }

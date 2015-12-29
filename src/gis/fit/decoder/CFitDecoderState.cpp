@@ -24,13 +24,13 @@ DecodeState CFitDecoderState::processByte(uint8_t &dataByte) {
     buildCrc(dataByte);
     DecodeState state = process(dataByte);
     if (bytesLeftToRead() == 2) {
-        if (state != StateRecord)
+        if (state != eDecoderStateRecord)
         {
             // we come from a wrong state...
             throw QString("Decoder not in correct state after last data byte in file.");
         }
         // end of file, 2 bytes left, this is the crc
-        return StateFileCrc;
+        return eDecoderStateFileCrc;
     }
     return state;
 }

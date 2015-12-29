@@ -60,9 +60,9 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
         reset();
         FITDEBUG(2, qDebug() << mesg.messageInfo())
         // after all fields read, go to next record header
-        return StateRecord;
+        return eDecoderStateRecord;
     }
 
     // there are more fields to read for the current message
-    return StateFieldData;
+    return eDecoderStateFieldData;
 };

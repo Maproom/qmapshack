@@ -23,7 +23,7 @@
 
 class CFitHeaderState : public CFitDecoderState {
 public:
-    CFitHeaderState(shared_state_data &data) : CFitDecoderState(data, StateFileHeader) { reset(); };
+    CFitHeaderState(shared_state_data &data) : CFitDecoderState(data, eDecoderStateFileHeader) { reset(); };
     virtual ~CFitHeaderState() {};
 
     virtual void reset();

@@ -30,10 +30,10 @@ DecodeState CFitCrcState::process(uint8_t &dataByte) {
         if (getCrc() != 0) {
             throw QString("Invalid CRC.");
         }
-        return StateEnd;
+        return eDecoderStateEnd;
     }
     // 2nd crc byte left
-    return StateFileCrc;
+    return eDecoderStateFileCrc;
 
 };
 

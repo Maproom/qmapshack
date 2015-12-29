@@ -35,14 +35,14 @@
 
 
 typedef enum {
-    StateFileHeader, // 0
-    StateRecord, // 1
-    StateRecordContent, // 2
-    StateFieldDef, // 3
-    StateFieldData, // 4
-    StateFileCrc, // 5
-    StateEnd // 6
-} DecodeState;
+    eDecoderStateFileHeader,
+    eDecoderStateRecord,
+    eDecoderStateRecordContent,
+    eDecoderStateFieldDef,
+    eDecoderStateFieldData,
+    eDecoderStateFileCrc,
+    eDecoderStateEnd
+} decode_state_e;
 
 class CFitDecoderState {
 public:

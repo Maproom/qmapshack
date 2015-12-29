@@ -40,19 +40,20 @@ public:
     {
         return *m_self;
     }
+
     /// convert meter of elevation into a value and unit string
-    virtual void meter2elevation(qreal meter, QString& val, QString& unit) = 0;
+    virtual void meter2elevation(qreal meter, QString& val, QString& unit) const = 0;
     /// convert meter of distance into a value and unit string
-    virtual void meter2distance(qreal meter, QString& val, QString& unit) = 0;
+    virtual void meter2distance(qreal meter, QString& val, QString& unit) const = 0;
     /// convert meter per second to a speed value string and unit label
-    virtual void meter2speed(qreal meter, QString& val, QString& unit);
+    virtual void meter2speed(qreal meter, QString& val, QString& unit) const;
     /// convert square meter to string and unit label
-    virtual void meter2area(qreal meter, QString& val, QString& unit) = 0;
+    virtual void meter2area(qreal meter, QString& val, QString& unit) const = 0;
     /// convert seconds to a timespan of days, hours, minutes and seconds
-    virtual void seconds2time(quint32 ttime, QString& val, QString& unit);
+    virtual void seconds2time(quint32 ttime, QString& val, QString& unit) const;
 
     /// convert an elevation string to a float
-    virtual qreal elevation2meter(const QString& val) = 0;
+    virtual qreal elevation2meter(const QString& val) const = 0;
 
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
@@ -76,12 +77,12 @@ public:
     /// find the timezone setup by position
     static QByteArray pos2timezone(const QPointF& pos);
 
-    const type_e type;
+    const type_e  type;
     const QString baseunit;
-    const qreal basefactor;
+    const qreal   basefactor;
     const QString speedunit;
-    const qreal speedfactor;
-    static const char *  tblTimezone[];
+    const qreal   speedfactor;
+    static const char *tblTimezone[];
 
     enum tz_mode_e
     {
@@ -93,14 +94,15 @@ public:
 
     static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone, bool& format)
     {
-        mode = timeZoneMode;
-        zone = timeZone;
+        mode   = timeZoneMode;
+        zone   = timeZone;
         format = useShortFormat;
     }
+
     static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone, bool format)
     {
-        timeZoneMode = mode;
-        timeZone = zone;
+        timeZoneMode   = mode;
+        timeZone       = zone;
         useShortFormat = format;
     }
 
@@ -148,4 +150,4 @@ protected:
 private:
     static IUnit * m_self;
 };
-#endif                           //IUNIT_H
+#endif //IUNIT_H

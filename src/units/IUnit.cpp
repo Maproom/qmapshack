@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 #include <proj_api.h>
-IUnit * IUnit::m_self = 0;
+IUnit * IUnit::m_self = nullptr;
 
 const QPointF NOPOINTF(NOFLOAT, NOFLOAT);
 const QPoint NOPOINT (NOINT, NOINT);
@@ -473,13 +473,13 @@ void IUnit::setUnitType(type_e t, QObject * parent)
     cfg.setValue("Units/type",t);
 }
 
-void IUnit::meter2speed(qreal meter, QString& val, QString& unit)
+/* virtual */ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
 {
     val.sprintf("%2.2f",meter * speedfactor);
     unit = speedunit;
 }
 
-void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit)
+/* virtual */ void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const
 {
     QTime time(0,0,0);
     quint32 days  = ttime / 86400;
@@ -503,13 +503,7 @@ bool IUnit::parseTimestamp(const QString &time, QDateTime &datetime)
     int tzoffset;
     datetime = parseTimestamp(time, tzoffset);
 
-    if (!datetime.isValid())
-    {
-        return false;
-    }
-
-
-    return true;
+    return datetime.isValid();
 }
 
 
@@ -570,7 +564,6 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     QDateTime datetime = QDateTime::fromString(timetext, format);
     datetime.setOffsetFromUtc(tzoffset);
 
-
     return datetime;
 }
 
@@ -617,7 +610,7 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
         return "UTC";
     }
 
-    int tz   = ((qRed(rgb) & 248) << 1) + ((qGreen(rgb) >> 4) & 15);
+    int tz = ((qRed(rgb) & 248) << 1) + ((qGreen(rgb) >> 4) & 15);
     if(tz >= N_TIMEZONES)
     {
         return 0;
@@ -638,9 +631,8 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
         bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
         bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
 
-        QString lat,lng;
-        lat = signLat ? "S" : "N";
-        lng = signLon ? "W" : "E";
+        const QString &lat = signLat ? "S" : "N";
+        const QString &lng = signLon ? "W" : "E";
         str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
         break;
     }
@@ -650,9 +642,8 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
         bool signLat = y < 0;
         bool signLon = x < 0;
 
-        QString lat,lng;
-        lat = signLat ? "S" : "N";
-        lng = signLon ? "W" : "E";
+        const QString &lat = signLat ? "S" : "N";
+        const QString &lng = signLon ? "W" : "E";
         str.sprintf("%s%02.6f° %s%03.6f°",lat.toUtf8().data(),qAbs(y),lng.toUtf8().data(),qAbs(x));
         break;
     }
@@ -668,9 +659,8 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
         qreal secN = (minN - qFloor(minN)) * 60;
         qreal secE = (minE - qFloor(minE)) * 60;
 
-        QString lat,lng;
-        lat = signLat ? "S" : "N";
-        lng = signLon ? "W" : "E";
+        const QString &lat = signLat ? "S" : "N";
+        const QString &lng = signLon ? "W" : "E";
         str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''",lat.toUtf8().data(),qAbs(degN),qFloor(minN),secN,lng.toUtf8().data(),qAbs(degE),qFloor(minE),secE);
         break;
     }

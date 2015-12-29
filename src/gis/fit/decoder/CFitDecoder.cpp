@@ -93,7 +93,7 @@ bool CFitDecoder::decode(QFile &file) {
     file.seek(0);
 
     uint8_t dataByte;
-    DecodeState state = eDecoderStateFileHeader;
+    decode_state_e state = eDecoderStateFileHeader;
     while (!file.atEnd()) {
         file.getChar((char *) &dataByte);
         try

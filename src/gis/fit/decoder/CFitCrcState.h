@@ -27,7 +27,7 @@ public:
     virtual ~CFitCrcState() {};
 
     virtual void reset();
-    virtual DecodeState process(uint8_t &dataByte);
+    virtual decode_state_e process(uint8_t &dataByte);
 };
 
 #endif //CFITCRCSTATE_H

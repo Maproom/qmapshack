@@ -19,10 +19,10 @@
 #include "gis/fit/decoder/CFitDecoderState.h"
 
 
-DecodeState CFitDecoderState::processByte(uint8_t &dataByte) {
+decode_state_e CFitDecoderState::processByte(uint8_t &dataByte) {
     incFileBytesRead();
     buildCrc(dataByte);
-    DecodeState state = process(dataByte);
+    decode_state_e state = process(dataByte);
     if (bytesLeftToRead() == 2) {
         if (state != eDecoderStateRecord)
         {

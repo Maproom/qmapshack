@@ -50,7 +50,7 @@ void CFitHeaderState::reset() {
     resetFileBytesRead();
 }
 
-DecodeState CFitHeaderState::process(uint8_t &dataByte) {
+decode_state_e CFitHeaderState::process(uint8_t &dataByte) {
     bool invalid = false;
     switch (offset++) {
         case 0:

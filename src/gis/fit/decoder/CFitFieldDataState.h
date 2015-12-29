@@ -28,7 +28,7 @@ public:
     CFitFieldDataState(shared_state_data &data) : CFitDecoderState(data, eDecoderStateFieldData) { reset(); };
     virtual ~CFitFieldDataState() {};
     virtual void reset();
-    virtual DecodeState process(uint8_t &dataByte);
+    virtual decode_state_e process(uint8_t &dataByte);
 
 private:
     uint8_t fieldIndex;

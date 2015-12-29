@@ -60,14 +60,14 @@ public:
         QList<CFitMessage> messages;
     };
 
-    CFitDecoderState(shared_state_data &data, DecodeState stateClass) : data(data) { };
+    CFitDecoderState(shared_state_data &data, decode_state_e stateClass) : data(data) { };
     virtual ~CFitDecoderState() {};
 
     virtual void reset() = 0;
-    DecodeState processByte(uint8_t &dataByte);
+    decode_state_e processByte(uint8_t &dataByte);
 
 protected:
-    virtual DecodeState process(uint8_t &dataByte) = 0;
+    virtual decode_state_e process(uint8_t &dataByte) = 0;
 
     CFitMessage* latestMessage();
     void addMessage(const CFitDefinitionMessage& definition);

@@ -40,7 +40,7 @@ private:
     void printDebugInfo();
 
     // map containing all states for the decoder. Needs to be pointer because decoder state is abstract class
-    QMap<DecodeState, CFitDecoderState*> stateMap;
+    QMap<decode_state_e, CFitDecoderState*> stateMap;
 
     // shared data passed along the decoder state instances.
     CFitDecoderState::shared_state_data data;

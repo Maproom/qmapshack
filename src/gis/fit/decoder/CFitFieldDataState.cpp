@@ -28,7 +28,7 @@ void CFitFieldDataState::reset()
 }
 
 
-DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
+decode_state_e CFitFieldDataState::process(uint8_t &dataByte) {
     CFitMessage& mesg = *latestMessage();
     const CFitFieldDefinition& fieldDef = defintion(mesg.getLocalMesgNr())->getFieldByIndex(fieldIndex);
 

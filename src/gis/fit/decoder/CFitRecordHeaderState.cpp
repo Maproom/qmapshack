@@ -51,7 +51,7 @@ static const uint8_t RecordHeaderTimeMesgMask =  ((uint8_t) 0x60); // bit 5-6: 0
 static const uint8_t RecordHeaderTimeMesgShift = 5;
 
 
-DecodeState CFitRecordHeaderState::process(uint8_t &dataByte) {
+decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte) {
     if ((dataByte & RecordHeaderTypeBit) != 0) {
         // this is a compressed timestamp header
         uint8_t localMessageType = (dataByte & RecordHeaderTimeMesgMask) >> RecordHeaderTimeMesgShift;

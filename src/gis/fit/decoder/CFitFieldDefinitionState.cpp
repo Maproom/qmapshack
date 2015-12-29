@@ -31,7 +31,7 @@ void CFitFieldDefinitionState::reset() {
     offset = 0;
 };
 
-DecodeState CFitFieldDefinitionState::process(uint8_t &dataByte) {
+decode_state_e CFitFieldDefinitionState::process(uint8_t &dataByte) {
     switch (offset++) {
         case 0:
             // field definition number

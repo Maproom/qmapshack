@@ -19,9 +19,9 @@
 #include "gis/fit/decoder/CFitByteDataTransformer.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 
-unsigned int CFitByteDataTransformer::getUIntValue(CFitBaseType* baseType, uint8_t* rawData)
+unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, uint8_t* rawData)
 {
-    switch(baseType->nr()) {
+    switch(baseType.nr()) {
         case TypeUint8:
         case TypeUint8z:
         case TypeEnum:
@@ -37,9 +37,9 @@ unsigned int CFitByteDataTransformer::getUIntValue(CFitBaseType* baseType, uint8
     }
 }
 
-int CFitByteDataTransformer::getSIntValue(CFitBaseType *baseType, uint8_t *rawData)
+int CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, uint8_t *rawData)
 {
-    switch(baseType->nr()) {
+    switch(baseType.nr()) {
         case TypeSint8:
             return getSint8(rawData);
         case TypeSint16:
@@ -51,9 +51,9 @@ int CFitByteDataTransformer::getSIntValue(CFitBaseType *baseType, uint8_t *rawDa
     }
 }
 
-double CFitByteDataTransformer::getFloatValue(CFitBaseType* baseType, uint8_t* rawData)
+double CFitByteDataTransformer::getFloatValue(const CFitBaseType& baseType, uint8_t* rawData)
 {
-    switch(baseType->nr()) {
+    switch(baseType.nr()) {
         case TypeFloat32:
             return getFloat32(rawData);
         case TypeFloat64:
@@ -119,12 +119,12 @@ QString CFitByteDataTransformer::getString(uint8_t* rawData, uint8_t length)
     while(rawData[i] != 0 )
     {
         i++;
-        if(length > 0 && i > length)
+        // no 0 termination found, but length exceded
+        if(i > length)
             break;
     }
-    length = i;
 
-    return QString::fromUtf8((const char*)rawData, length);
+    return QString::fromUtf8((const char*)rawData, i);
 }
 
 QByteArray CFitByteDataTransformer::getBytes(uint8_t* rawData, uint8_t length)
@@ -134,9 +134,9 @@ QByteArray CFitByteDataTransformer::getBytes(uint8_t* rawData, uint8_t length)
 
 void CFitByteDataTransformer::swapFieldData(const CFitFieldDefinition& fieldDef, uint8_t* fieldData)
 {
-    if (fieldDef.getEndianAbilityFlag() && (fieldDef.parent()->getArchitectureBit() != ArchEndianLittle)) {
+    if (fieldDef.getEndianAbilityFlag() && (fieldDef.parent().getArchitectureBit() != ArchEndianLittle)) {
         // Swap the bytes for each element.
-        int typeSize = fieldDef.getBaseType()->size();
+        int typeSize = fieldDef.getBaseType().size();
         int elements = fieldDef.getSize() / typeSize;
 
         for (int element = 0; element < elements; element++) {

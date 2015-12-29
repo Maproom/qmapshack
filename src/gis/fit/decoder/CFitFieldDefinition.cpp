@@ -40,10 +40,10 @@ CFitFieldDefinition::CFitFieldDefinition()
 QString CFitFieldDefinition::fieldInfo() const
 {
     QString fstr = QString("%1 %2 (%3): %4, type %5, size %6, endian %7")
-            .arg(profile()->hasSubfields() ? "dynamic" : profile()->hasComponents() ? "component" : "field")
-            .arg(profile()->getName())
+            .arg(profile().hasSubfields() ? "dynamic" : profile().hasComponents() ? "component" : "field")
+            .arg(profile().getName())
             .arg(getDefNr())
-            .arg(getBaseType()->str())
+            .arg(getBaseType().name())
             .arg(getType())
             .arg(getSize())
             .arg(getEndianAbilityFlag());
@@ -66,7 +66,7 @@ bool CFitFieldDefinition::getEndianAbilityFlag() const {
     return (type & EndianFlagMask) != 0;
 }
 
-CFitBaseType* CFitFieldDefinition::getBaseType() const
+const CFitBaseType& CFitFieldDefinition::getBaseType() const
 {
-    return baseType;
+    return *baseType;
 }

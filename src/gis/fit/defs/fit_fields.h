@@ -20,953 +20,952 @@
 #define FIT_FIELDS_H
 // ----------- start generated code -----------
 typedef enum {
- FileIdType = 0,
- FileIdManufacturer = 1,
- FileIdProduct = 2,
- FileIdSerialNumber = 3,
- FileIdTimeCreated = 4,
- FileIdNumber = 5,
- FileIdProductName = 8
-} FileId;
+    eFileIdType = 0,
+    eFileIdManufacturer = 1,
+    eFileIdProduct = 2,
+    eFileIdSerialNumber = 3,
+    eFileIdTimeCreated = 4,
+    eFileIdNumber = 5,
+    eFileIdProductName = 8
+} message_file_id_e;
 
 typedef enum {
- FileCreatorSoftwareVersion = 0,
- FileCreatorHardwareVersion = 1
-} FileCreator;
+    eFileCreatorSoftwareVersion = 0,
+    eFileCreatorHardwareVersion = 1
+} message_file_creator_e;
 
 typedef enum {
- TimestampCorrelationTimestamp = 253,
- TimestampCorrelationFractionalTimestamp = 0,
- TimestampCorrelationSystemTimestamp = 1,
- TimestampCorrelationFractionalSystemTimestamp = 2,
- TimestampCorrelationLocalTimestamp = 3,
- TimestampCorrelationTimestampMs = 4,
- TimestampCorrelationSystemTimestampMs = 5
-} TimestampCorrelation;
+    eTimestampCorrelationTimestamp = 253,
+    eTimestampCorrelationFractionalTimestamp = 0,
+    eTimestampCorrelationSystemTimestamp = 1,
+    eTimestampCorrelationFractionalSystemTimestamp = 2,
+    eTimestampCorrelationLocalTimestamp = 3,
+    eTimestampCorrelationTimestampMs = 4,
+    eTimestampCorrelationSystemTimestampMs = 5
+} message_timestamp_correlation_e;
 
 typedef enum {
- SoftwareMessageIndex = 254,
- SoftwareVersion = 3,
- SoftwarePartNumber = 5
-} Software;
+    eSoftwareMessageIndex = 254,
+    eSoftwareVersion = 3,
+    eSoftwarePartNumber = 5
+} message_software_e;
 
 typedef enum {
- SlaveDeviceManufacturer = 0,
- SlaveDeviceProduct = 1
-} SlaveDevice;
+    eSlaveDeviceManufacturer = 0,
+    eSlaveDeviceProduct = 1
+} message_slave_device_e;
 
 typedef enum {
- CapabilitiesLanguages = 0,
- CapabilitiesSports = 1,
- CapabilitiesWorkoutsSupported = 21,
- CapabilitiesConnectivitySupported = 23
-} Capabilities;
+    eCapabilitiesLanguages = 0,
+    eCapabilitiesSports = 1,
+    eCapabilitiesWorkoutsSupported = 21,
+    eCapabilitiesConnectivitySupported = 23
+} message_capabilities_e;
 
 typedef enum {
- FileCapabilitiesMessageIndex = 254,
- FileCapabilitiesType = 0,
- FileCapabilitiesFlags = 1,
- FileCapabilitiesDirectory = 2,
- FileCapabilitiesMaxCount = 3,
- FileCapabilitiesMaxSize = 4
-} FileCapabilities;
+    eFileCapabilitiesMessageIndex = 254,
+    eFileCapabilitiesType = 0,
+    eFileCapabilitiesFlags = 1,
+    eFileCapabilitiesDirectory = 2,
+    eFileCapabilitiesMaxCount = 3,
+    eFileCapabilitiesMaxSize = 4
+} message_file_capabilities_e;
 
 typedef enum {
- MesgCapabilitiesMessageIndex = 254,
- MesgCapabilitiesFile = 0,
- MesgCapabilitiesMesgNum = 1,
- MesgCapabilitiesCountType = 2,
- MesgCapabilitiesCount = 3
-} MesgCapabilities;
+    eMesgCapabilitiesMessageIndex = 254,
+    eMesgCapabilitiesFile = 0,
+    eMesgCapabilitiesMesgNum = 1,
+    eMesgCapabilitiesCountType = 2,
+    eMesgCapabilitiesCount = 3
+} message_mesg_capabilities_e;
 
 typedef enum {
- FieldCapabilitiesMessageIndex = 254,
- FieldCapabilitiesFile = 0,
- FieldCapabilitiesMesgNum = 1,
- FieldCapabilitiesFieldNum = 2,
- FieldCapabilitiesCount = 3
-} FieldCapabilities;
+    eFieldCapabilitiesMessageIndex = 254,
+    eFieldCapabilitiesFile = 0,
+    eFieldCapabilitiesMesgNum = 1,
+    eFieldCapabilitiesFieldNum = 2,
+    eFieldCapabilitiesCount = 3
+} message_field_capabilities_e;
 
 typedef enum {
- DeviceSettingsActiveTimeZone = 0,
- DeviceSettingsUtcOffset = 1,
- DeviceSettingsTimeZoneOffset = 5
-} DeviceSettings;
+    eDeviceSettingsActiveTimeZone = 0,
+    eDeviceSettingsUtcOffset = 1,
+    eDeviceSettingsTimeZoneOffset = 5
+} message_device_settings_e;
 
 typedef enum {
- UserProfileMessageIndex = 254,
- UserProfileFriendlyName = 0,
- UserProfileGender = 1,
- UserProfileAge = 2,
- UserProfileHeight = 3,
- UserProfileWeight = 4,
- UserProfileLanguage = 5,
- UserProfileElevSetting = 6,
- UserProfileWeightSetting = 7,
- UserProfileRestingHeartRate = 8,
- UserProfileDefaultMaxRunningHeartRate = 9,
- UserProfileDefaultMaxBikingHeartRate = 10,
- UserProfileDefaultMaxHeartRate = 11,
- UserProfileHrSetting = 12,
- UserProfileSpeedSetting = 13,
- UserProfileDistSetting = 14,
- UserProfilePowerSetting = 16,
- UserProfileActivityClass = 17,
- UserProfilePositionSetting = 18,
- UserProfileTemperatureSetting = 21,
- UserProfileLocalId = 22,
- UserProfileGlobalId = 23,
- UserProfileHeightSetting = 30
-} UserProfile;
+    eUserProfileMessageIndex = 254,
+    eUserProfileFriendlyName = 0,
+    eUserProfileGender = 1,
+    eUserProfileAge = 2,
+    eUserProfileHeight = 3,
+    eUserProfileWeight = 4,
+    eUserProfileLanguage = 5,
+    eUserProfileElevSetting = 6,
+    eUserProfileWeightSetting = 7,
+    eUserProfileRestingHeartRate = 8,
+    eUserProfileDefaultMaxRunningHeartRate = 9,
+    eUserProfileDefaultMaxBikingHeartRate = 10,
+    eUserProfileDefaultMaxHeartRate = 11,
+    eUserProfileHrSetting = 12,
+    eUserProfileSpeedSetting = 13,
+    eUserProfileDistSetting = 14,
+    eUserProfilePowerSetting = 16,
+    eUserProfileActivityClass = 17,
+    eUserProfilePositionSetting = 18,
+    eUserProfileTemperatureSetting = 21,
+    eUserProfileLocalId = 22,
+    eUserProfileGlobalId = 23,
+    eUserProfileHeightSetting = 30
+} message_user_profile_e;
 
 typedef enum {
- HrmProfileMessageIndex = 254,
- HrmProfileEnabled = 0,
- HrmProfileHrmAntId = 1,
- HrmProfileLogHrv = 2,
- HrmProfileHrmAntIdTransType = 3
-} HrmProfile;
+    eHrmProfileMessageIndex = 254,
+    eHrmProfileEnabled = 0,
+    eHrmProfileHrmAntId = 1,
+    eHrmProfileLogHrv = 2,
+    eHrmProfileHrmAntIdTransType = 3
+} message_hrm_profile_e;
 
 typedef enum {
- SdmProfileMessageIndex = 254,
- SdmProfileEnabled = 0,
- SdmProfileSdmAntId = 1,
- SdmProfileSdmCalFactor = 2,
- SdmProfileOdometer = 3,
- SdmProfileSpeedSource = 4,
- SdmProfileSdmAntIdTransType = 5,
- SdmProfileOdometerRollover = 7
-} SdmProfile;
+    eSdmProfileMessageIndex = 254,
+    eSdmProfileEnabled = 0,
+    eSdmProfileSdmAntId = 1,
+    eSdmProfileSdmCalFactor = 2,
+    eSdmProfileOdometer = 3,
+    eSdmProfileSpeedSource = 4,
+    eSdmProfileSdmAntIdTransType = 5,
+    eSdmProfileOdometerRollover = 7
+} message_sdm_profile_e;
 
 typedef enum {
- BikeProfileMessageIndex = 254,
- BikeProfileName = 0,
- BikeProfileSport = 1,
- BikeProfileSubSport = 2,
- BikeProfileOdometer = 3,
- BikeProfileBikeSpdAntId = 4,
- BikeProfileBikeCadAntId = 5,
- BikeProfileBikeSpdcadAntId = 6,
- BikeProfileBikePowerAntId = 7,
- BikeProfileCustomWheelsize = 8,
- BikeProfileAutoWheelsize = 9,
- BikeProfileBikeWeight = 10,
- BikeProfilePowerCalFactor = 11,
- BikeProfileAutoWheelCal = 12,
- BikeProfileAutoPowerZero = 13,
- BikeProfileId = 14,
- BikeProfileSpdEnabled = 15,
- BikeProfileCadEnabled = 16,
- BikeProfileSpdcadEnabled = 17,
- BikeProfilePowerEnabled = 18,
- BikeProfileCrankLength = 19,
- BikeProfileEnabled = 20,
- BikeProfileBikeSpdAntIdTransType = 21,
- BikeProfileBikeCadAntIdTransType = 22,
- BikeProfileBikeSpdcadAntIdTransType = 23,
- BikeProfileBikePowerAntIdTransType = 24,
- BikeProfileOdometerRollover = 37,
- BikeProfileFrontGearNum = 38,
- BikeProfileFrontGear = 39,
- BikeProfileRearGearNum = 40,
- BikeProfileRearGear = 41,
- BikeProfileShimanoDi2Enabled = 44
-} BikeProfile;
+    eBikeProfileMessageIndex = 254,
+    eBikeProfileName = 0,
+    eBikeProfileSport = 1,
+    eBikeProfileSubSport = 2,
+    eBikeProfileOdometer = 3,
+    eBikeProfileBikeSpdAntId = 4,
+    eBikeProfileBikeCadAntId = 5,
+    eBikeProfileBikeSpdcadAntId = 6,
+    eBikeProfileBikePowerAntId = 7,
+    eBikeProfileCustomWheelsize = 8,
+    eBikeProfileAutoWheelsize = 9,
+    eBikeProfileBikeWeight = 10,
+    eBikeProfilePowerCalFactor = 11,
+    eBikeProfileAutoWheelCal = 12,
+    eBikeProfileAutoPowerZero = 13,
+    eBikeProfileId = 14,
+    eBikeProfileSpdEnabled = 15,
+    eBikeProfileCadEnabled = 16,
+    eBikeProfileSpdcadEnabled = 17,
+    eBikeProfilePowerEnabled = 18,
+    eBikeProfileCrankLength = 19,
+    eBikeProfileEnabled = 20,
+    eBikeProfileBikeSpdAntIdTransType = 21,
+    eBikeProfileBikeCadAntIdTransType = 22,
+    eBikeProfileBikeSpdcadAntIdTransType = 23,
+    eBikeProfileBikePowerAntIdTransType = 24,
+    eBikeProfileOdometerRollover = 37,
+    eBikeProfileFrontGearNum = 38,
+    eBikeProfileFrontGear = 39,
+    eBikeProfileRearGearNum = 40,
+    eBikeProfileRearGear = 41,
+    eBikeProfileShimanoDi2Enabled = 44
+} message_bike_profile_e;
 
 typedef enum {
- ZonesTargetMaxHeartRate = 1,
- ZonesTargetThresholdHeartRate = 2,
- ZonesTargetFunctionalThresholdPower = 3,
- ZonesTargetHrCalcType = 5,
- ZonesTargetPwrCalcType = 7
-} ZonesTarget;
+    eZonesTargetMaxHeartRate = 1,
+    eZonesTargetThresholdHeartRate = 2,
+    eZonesTargetFunctionalThresholdPower = 3,
+    eZonesTargetHrCalcType = 5,
+    eZonesTargetPwrCalcType = 7
+} message_zones_target_e;
 
 typedef enum {
- SportSport = 0,
- SportSubSport = 1,
- SportName = 3
-} Sport;
+    eSportSport = 0,
+    eSportSubSport = 1,
+    eSportName = 3
+} message_sport_e;
 
 typedef enum {
- HrZoneMessageIndex = 254,
- HrZoneHighBpm = 1,
- HrZoneName = 2
-} HrZone;
+    eHrZoneMessageIndex = 254,
+    eHrZoneHighBpm = 1,
+    eHrZoneName = 2
+} message_hr_zone_e;
 
 typedef enum {
- SpeedZoneMessageIndex = 254,
- SpeedZoneHighValue = 0,
- SpeedZoneName = 1
-} SpeedZone;
+    eSpeedZoneMessageIndex = 254,
+    eSpeedZoneHighValue = 0,
+    eSpeedZoneName = 1
+} message_speed_zone_e;
 
 typedef enum {
- CadenceZoneMessageIndex = 254,
- CadenceZoneHighValue = 0,
- CadenceZoneName = 1
-} CadenceZone;
+    eCadenceZoneMessageIndex = 254,
+    eCadenceZoneHighValue = 0,
+    eCadenceZoneName = 1
+} message_cadence_zone_e;
 
 typedef enum {
- PowerZoneMessageIndex = 254,
- PowerZoneHighValue = 1,
- PowerZoneName = 2
-} PowerZone;
+    ePowerZoneMessageIndex = 254,
+    ePowerZoneHighValue = 1,
+    ePowerZoneName = 2
+} message_power_zone_e;
 
 typedef enum {
- MetZoneMessageIndex = 254,
- MetZoneHighBpm = 1,
- MetZoneCalories = 2,
- MetZoneFatCalories = 3
-} MetZone;
+    eMetZoneMessageIndex = 254,
+    eMetZoneHighBpm = 1,
+    eMetZoneCalories = 2,
+    eMetZoneFatCalories = 3
+} message_met_zone_e;
 
 typedef enum {
- GoalMessageIndex = 254,
- GoalSport = 0,
- GoalSubSport = 1,
- GoalStartDate = 2,
- GoalEndDate = 3,
- GoalType = 4,
- GoalValue = 5,
- GoalRepeat = 6,
- GoalTargetValue = 7,
- GoalRecurrence = 8,
- GoalRecurrenceValue = 9,
- GoalEnabled = 10
-} Goal;
+    eGoalMessageIndex = 254,
+    eGoalSport = 0,
+    eGoalSubSport = 1,
+    eGoalStartDate = 2,
+    eGoalEndDate = 3,
+    eGoalType = 4,
+    eGoalValue = 5,
+    eGoalRepeat = 6,
+    eGoalTargetValue = 7,
+    eGoalRecurrence = 8,
+    eGoalRecurrenceValue = 9,
+    eGoalEnabled = 10
+} message_goal_e;
 
 typedef enum {
- ActivityTimestamp = 253,
- ActivityTotalTimerTime = 0,
- ActivityNumSessions = 1,
- ActivityType = 2,
- ActivityEvent = 3,
- ActivityEventType = 4,
- ActivityLocalTimestamp = 5,
- ActivityEventGroup = 6
-} Activity;
+    eActivityTimestamp = 253,
+    eActivityTotalTimerTime = 0,
+    eActivityNumSessions = 1,
+    eActivityType = 2,
+    eActivityEvent = 3,
+    eActivityEventType = 4,
+    eActivityLocalTimestamp = 5,
+    eActivityEventGroup = 6
+} message_activity_e;
 
 typedef enum {
- SessionMessageIndex = 254,
- SessionTimestamp = 253,
- SessionEvent = 0,
- SessionEventType = 1,
- SessionStartTime = 2,
- SessionStartPositionLat = 3,
- SessionStartPositionLong = 4,
- SessionSport = 5,
- SessionSubSport = 6,
- SessionTotalElapsedTime = 7,
- SessionTotalTimerTime = 8,
- SessionTotalDistance = 9,
- SessionTotalCycles = 10,
- SessionTotalCalories = 11,
- SessionTotalFatCalories = 13,
- SessionAvgSpeed = 14,
- SessionMaxSpeed = 15,
- SessionAvgHeartRate = 16,
- SessionMaxHeartRate = 17,
- SessionAvgCadence = 18,
- SessionMaxCadence = 19,
- SessionAvgPower = 20,
- SessionMaxPower = 21,
- SessionTotalAscent = 22,
- SessionTotalDescent = 23,
- SessionTotalTrainingEffect = 24,
- SessionFirstLapIndex = 25,
- SessionNumLaps = 26,
- SessionEventGroup = 27,
- SessionTrigger = 28,
- SessionNecLat = 29,
- SessionNecLong = 30,
- SessionSwcLat = 31,
- SessionSwcLong = 32,
- SessionNormalizedPower = 34,
- SessionTrainingStressScore = 35,
- SessionIntensityFactor = 36,
- SessionLeftRightBalance = 37,
- SessionAvgStrokeCount = 41,
- SessionAvgStrokeDistance = 42,
- SessionSwimStroke = 43,
- SessionPoolLength = 44,
- SessionThresholdPower = 45,
- SessionPoolLengthUnit = 46,
- SessionNumActiveLengths = 47,
- SessionTotalWork = 48,
- SessionAvgAltitude = 49,
- SessionMaxAltitude = 50,
- SessionGpsAccuracy = 51,
- SessionAvgGrade = 52,
- SessionAvgPosGrade = 53,
- SessionAvgNegGrade = 54,
- SessionMaxPosGrade = 55,
- SessionMaxNegGrade = 56,
- SessionAvgTemperature = 57,
- SessionMaxTemperature = 58,
- SessionTotalMovingTime = 59,
- SessionAvgPosVerticalSpeed = 60,
- SessionAvgNegVerticalSpeed = 61,
- SessionMaxPosVerticalSpeed = 62,
- SessionMaxNegVerticalSpeed = 63,
- SessionMinHeartRate = 64,
- SessionTimeInHrZone = 65,
- SessionTimeInSpeedZone = 66,
- SessionTimeInCadenceZone = 67,
- SessionTimeInPowerZone = 68,
- SessionAvgLapTime = 69,
- SessionBestLapIndex = 70,
- SessionMinAltitude = 71,
- SessionPlayerScore = 82,
- SessionOpponentScore = 83,
- SessionOpponentName = 84,
- SessionStrokeCount = 85,
- SessionZoneCount = 86,
- SessionMaxBallSpeed = 87,
- SessionAvgBallSpeed = 88,
- SessionAvgVerticalOscillation = 89,
- SessionAvgStanceTimePercent = 90,
- SessionAvgStanceTime = 91,
- SessionAvgFractionalCadence = 92,
- SessionMaxFractionalCadence = 93,
- SessionTotalFractionalCycles = 94,
- SessionAvgTotalHemoglobinConc = 95,
- SessionMinTotalHemoglobinConc = 96,
- SessionMaxTotalHemoglobinConc = 97,
- SessionAvgSaturatedHemoglobinPercent = 98,
- SessionMinSaturatedHemoglobinPercent = 99,
- SessionMaxSaturatedHemoglobinPercent = 100,
- SessionAvgLeftTorqueEffectiveness = 101,
- SessionAvgRightTorqueEffectiveness = 102,
- SessionAvgLeftPedalSmoothness = 103,
- SessionAvgRightPedalSmoothness = 104,
- SessionAvgCombinedPedalSmoothness = 105,
- SessionSportIndex = 111,
- SessionTimeStanding = 112,
- SessionStandCount = 113,
- SessionAvgLeftPco = 114,
- SessionAvgRightPco = 115,
- SessionAvgLeftPowerPhase = 116,
- SessionAvgLeftPowerPhasePeak = 117,
- SessionAvgRightPowerPhase = 118,
- SessionAvgRightPowerPhasePeak = 119,
- SessionAvgPowerPosition = 120,
- SessionMaxPowerPosition = 121,
- SessionAvgCadencePosition = 122,
- SessionMaxCadencePosition = 123,
- SessionEnhancedAvgSpeed = 124,
- SessionEnhancedMaxSpeed = 125,
- SessionEnhancedAvgAltitude = 126,
- SessionEnhancedMinAltitude = 127,
- SessionEnhancedMaxAltitude = 128,
- SessionAvgLevMotorPower = 129,
- SessionMaxLevMotorPower = 130,
- SessionLevBatteryConsumption = 131
-} Session;
+    eSessionMessageIndex = 254,
+    eSessionTimestamp = 253,
+    eSessionEvent = 0,
+    eSessionEventType = 1,
+    eSessionStartTime = 2,
+    eSessionStartPositionLat = 3,
+    eSessionStartPositionLong = 4,
+    eSessionSport = 5,
+    eSessionSubSport = 6,
+    eSessionTotalElapsedTime = 7,
+    eSessionTotalTimerTime = 8,
+    eSessionTotalDistance = 9,
+    eSessionTotalCycles = 10,
+    eSessionTotalCalories = 11,
+    eSessionTotalFatCalories = 13,
+    eSessionAvgSpeed = 14,
+    eSessionMaxSpeed = 15,
+    eSessionAvgHeartRate = 16,
+    eSessionMaxHeartRate = 17,
+    eSessionAvgCadence = 18,
+    eSessionMaxCadence = 19,
+    eSessionAvgPower = 20,
+    eSessionMaxPower = 21,
+    eSessionTotalAscent = 22,
+    eSessionTotalDescent = 23,
+    eSessionTotalTrainingEffect = 24,
+    eSessionFirstLapIndex = 25,
+    eSessionNumLaps = 26,
+    eSessionEventGroup = 27,
+    eSessionTrigger = 28,
+    eSessionNecLat = 29,
+    eSessionNecLong = 30,
+    eSessionSwcLat = 31,
+    eSessionSwcLong = 32,
+    eSessionNormalizedPower = 34,
+    eSessionTrainingStressScore = 35,
+    eSessionIntensityFactor = 36,
+    eSessionLeftRightBalance = 37,
+    eSessionAvgStrokeCount = 41,
+    eSessionAvgStrokeDistance = 42,
+    eSessionSwimStroke = 43,
+    eSessionPoolLength = 44,
+    eSessionThresholdPower = 45,
+    eSessionPoolLengthUnit = 46,
+    eSessionNumActiveLengths = 47,
+    eSessionTotalWork = 48,
+    eSessionAvgAltitude = 49,
+    eSessionMaxAltitude = 50,
+    eSessionGpsAccuracy = 51,
+    eSessionAvgGrade = 52,
+    eSessionAvgPosGrade = 53,
+    eSessionAvgNegGrade = 54,
+    eSessionMaxPosGrade = 55,
+    eSessionMaxNegGrade = 56,
+    eSessionAvgTemperature = 57,
+    eSessionMaxTemperature = 58,
+    eSessionTotalMovingTime = 59,
+    eSessionAvgPosVerticalSpeed = 60,
+    eSessionAvgNegVerticalSpeed = 61,
+    eSessionMaxPosVerticalSpeed = 62,
+    eSessionMaxNegVerticalSpeed = 63,
+    eSessionMinHeartRate = 64,
+    eSessionTimeInHrZone = 65,
+    eSessionTimeInSpeedZone = 66,
+    eSessionTimeInCadenceZone = 67,
+    eSessionTimeInPowerZone = 68,
+    eSessionAvgLapTime = 69,
+    eSessionBestLapIndex = 70,
+    eSessionMinAltitude = 71,
+    eSessionPlayerScore = 82,
+    eSessionOpponentScore = 83,
+    eSessionOpponentName = 84,
+    eSessionStrokeCount = 85,
+    eSessionZoneCount = 86,
+    eSessionMaxBallSpeed = 87,
+    eSessionAvgBallSpeed = 88,
+    eSessionAvgVerticalOscillation = 89,
+    eSessionAvgStanceTimePercent = 90,
+    eSessionAvgStanceTime = 91,
+    eSessionAvgFractionalCadence = 92,
+    eSessionMaxFractionalCadence = 93,
+    eSessionTotalFractionalCycles = 94,
+    eSessionAvgTotalHemoglobinConc = 95,
+    eSessionMinTotalHemoglobinConc = 96,
+    eSessionMaxTotalHemoglobinConc = 97,
+    eSessionAvgSaturatedHemoglobinPercent = 98,
+    eSessionMinSaturatedHemoglobinPercent = 99,
+    eSessionMaxSaturatedHemoglobinPercent = 100,
+    eSessionAvgLeftTorqueEffectiveness = 101,
+    eSessionAvgRightTorqueEffectiveness = 102,
+    eSessionAvgLeftPedalSmoothness = 103,
+    eSessionAvgRightPedalSmoothness = 104,
+    eSessionAvgCombinedPedalSmoothness = 105,
+    eSessionSportIndex = 111,
+    eSessionTimeStanding = 112,
+    eSessionStandCount = 113,
+    eSessionAvgLeftPco = 114,
+    eSessionAvgRightPco = 115,
+    eSessionAvgLeftPowerPhase = 116,
+    eSessionAvgLeftPowerPhasePeak = 117,
+    eSessionAvgRightPowerPhase = 118,
+    eSessionAvgRightPowerPhasePeak = 119,
+    eSessionAvgPowerPosition = 120,
+    eSessionMaxPowerPosition = 121,
+    eSessionAvgCadencePosition = 122,
+    eSessionMaxCadencePosition = 123,
+    eSessionEnhancedAvgSpeed = 124,
+    eSessionEnhancedMaxSpeed = 125,
+    eSessionEnhancedAvgAltitude = 126,
+    eSessionEnhancedMinAltitude = 127,
+    eSessionEnhancedMaxAltitude = 128,
+    eSessionAvgLevMotorPower = 129,
+    eSessionMaxLevMotorPower = 130,
+    eSessionLevBatteryConsumption = 131
+} message_session_e;
 
 typedef enum {
- LapMessageIndex = 254,
- LapTimestamp = 253,
- LapEvent = 0,
- LapEventType = 1,
- LapStartTime = 2,
- LapStartPositionLat = 3,
- LapStartPositionLong = 4,
- LapEndPositionLat = 5,
- LapEndPositionLong = 6,
- LapTotalElapsedTime = 7,
- LapTotalTimerTime = 8,
- LapTotalDistance = 9,
- LapTotalCycles = 10,
- LapTotalCalories = 11,
- LapTotalFatCalories = 12,
- LapAvgSpeed = 13,
- LapMaxSpeed = 14,
- LapAvgHeartRate = 15,
- LapMaxHeartRate = 16,
- LapAvgCadence = 17,
- LapMaxCadence = 18,
- LapAvgPower = 19,
- LapMaxPower = 20,
- LapTotalAscent = 21,
- LapTotalDescent = 22,
- LapIntensity = 23,
- LapLapTrigger = 24,
- LapSport = 25,
- LapEventGroup = 26,
- LapNumLengths = 32,
- LapNormalizedPower = 33,
- LapLeftRightBalance = 34,
- LapFirstLengthIndex = 35,
- LapAvgStrokeDistance = 37,
- LapSwimStroke = 38,
- LapSubSport = 39,
- LapNumActiveLengths = 40,
- LapTotalWork = 41,
- LapAvgAltitude = 42,
- LapMaxAltitude = 43,
- LapGpsAccuracy = 44,
- LapAvgGrade = 45,
- LapAvgPosGrade = 46,
- LapAvgNegGrade = 47,
- LapMaxPosGrade = 48,
- LapMaxNegGrade = 49,
- LapAvgTemperature = 50,
- LapMaxTemperature = 51,
- LapTotalMovingTime = 52,
- LapAvgPosVerticalSpeed = 53,
- LapAvgNegVerticalSpeed = 54,
- LapMaxPosVerticalSpeed = 55,
- LapMaxNegVerticalSpeed = 56,
- LapTimeInHrZone = 57,
- LapTimeInSpeedZone = 58,
- LapTimeInCadenceZone = 59,
- LapTimeInPowerZone = 60,
- LapRepetitionNum = 61,
- LapMinAltitude = 62,
- LapMinHeartRate = 63,
- LapWktStepIndex = 71,
- LapOpponentScore = 74,
- LapStrokeCount = 75,
- LapZoneCount = 76,
- LapAvgVerticalOscillation = 77,
- LapAvgStanceTimePercent = 78,
- LapAvgStanceTime = 79,
- LapAvgFractionalCadence = 80,
- LapMaxFractionalCadence = 81,
- LapTotalFractionalCycles = 82,
- LapPlayerScore = 83,
- LapAvgTotalHemoglobinConc = 84,
- LapMinTotalHemoglobinConc = 85,
- LapMaxTotalHemoglobinConc = 86,
- LapAvgSaturatedHemoglobinPercent = 87,
- LapMinSaturatedHemoglobinPercent = 88,
- LapMaxSaturatedHemoglobinPercent = 89,
- LapAvgLeftTorqueEffectiveness = 91,
- LapAvgRightTorqueEffectiveness = 92,
- LapAvgLeftPedalSmoothness = 93,
- LapAvgRightPedalSmoothness = 94,
- LapAvgCombinedPedalSmoothness = 95,
- LapTimeStanding = 98,
- LapStandCount = 99,
- LapAvgLeftPco = 100,
- LapAvgRightPco = 101,
- LapAvgLeftPowerPhase = 102,
- LapAvgLeftPowerPhasePeak = 103,
- LapAvgRightPowerPhase = 104,
- LapAvgRightPowerPhasePeak = 105,
- LapAvgPowerPosition = 106,
- LapMaxPowerPosition = 107,
- LapAvgCadencePosition = 108,
- LapMaxCadencePosition = 109,
- LapEnhancedAvgSpeed = 110,
- LapEnhancedMaxSpeed = 111,
- LapEnhancedAvgAltitude = 112,
- LapEnhancedMinAltitude = 113,
- LapEnhancedMaxAltitude = 114,
- LapAvgLevMotorPower = 115,
- LapMaxLevMotorPower = 116,
- LapLevBatteryConsumption = 117
-} Lap;
+    eLapMessageIndex = 254,
+    eLapTimestamp = 253,
+    eLapEvent = 0,
+    eLapEventType = 1,
+    eLapStartTime = 2,
+    eLapStartPositionLat = 3,
+    eLapStartPositionLong = 4,
+    eLapEndPositionLat = 5,
+    eLapEndPositionLong = 6,
+    eLapTotalElapsedTime = 7,
+    eLapTotalTimerTime = 8,
+    eLapTotalDistance = 9,
+    eLapTotalCycles = 10,
+    eLapTotalCalories = 11,
+    eLapTotalFatCalories = 12,
+    eLapAvgSpeed = 13,
+    eLapMaxSpeed = 14,
+    eLapAvgHeartRate = 15,
+    eLapMaxHeartRate = 16,
+    eLapAvgCadence = 17,
+    eLapMaxCadence = 18,
+    eLapAvgPower = 19,
+    eLapMaxPower = 20,
+    eLapTotalAscent = 21,
+    eLapTotalDescent = 22,
+    eLapIntensity = 23,
+    eLapLapTrigger = 24,
+    eLapSport = 25,
+    eLapEventGroup = 26,
+    eLapNumLengths = 32,
+    eLapNormalizedPower = 33,
+    eLapLeftRightBalance = 34,
+    eLapFirstLengthIndex = 35,
+    eLapAvgStrokeDistance = 37,
+    eLapSwimStroke = 38,
+    eLapSubSport = 39,
+    eLapNumActiveLengths = 40,
+    eLapTotalWork = 41,
+    eLapAvgAltitude = 42,
+    eLapMaxAltitude = 43,
+    eLapGpsAccuracy = 44,
+    eLapAvgGrade = 45,
+    eLapAvgPosGrade = 46,
+    eLapAvgNegGrade = 47,
+    eLapMaxPosGrade = 48,
+    eLapMaxNegGrade = 49,
+    eLapAvgTemperature = 50,
+    eLapMaxTemperature = 51,
+    eLapTotalMovingTime = 52,
+    eLapAvgPosVerticalSpeed = 53,
+    eLapAvgNegVerticalSpeed = 54,
+    eLapMaxPosVerticalSpeed = 55,
+    eLapMaxNegVerticalSpeed = 56,
+    eLapTimeInHrZone = 57,
+    eLapTimeInSpeedZone = 58,
+    eLapTimeInCadenceZone = 59,
+    eLapTimeInPowerZone = 60,
+    eLapRepetitionNum = 61,
+    eLapMinAltitude = 62,
+    eLapMinHeartRate = 63,
+    eLapWktStepIndex = 71,
+    eLapOpponentScore = 74,
+    eLapStrokeCount = 75,
+    eLapZoneCount = 76,
+    eLapAvgVerticalOscillation = 77,
+    eLapAvgStanceTimePercent = 78,
+    eLapAvgStanceTime = 79,
+    eLapAvgFractionalCadence = 80,
+    eLapMaxFractionalCadence = 81,
+    eLapTotalFractionalCycles = 82,
+    eLapPlayerScore = 83,
+    eLapAvgTotalHemoglobinConc = 84,
+    eLapMinTotalHemoglobinConc = 85,
+    eLapMaxTotalHemoglobinConc = 86,
+    eLapAvgSaturatedHemoglobinPercent = 87,
+    eLapMinSaturatedHemoglobinPercent = 88,
+    eLapMaxSaturatedHemoglobinPercent = 89,
+    eLapAvgLeftTorqueEffectiveness = 91,
+    eLapAvgRightTorqueEffectiveness = 92,
+    eLapAvgLeftPedalSmoothness = 93,
+    eLapAvgRightPedalSmoothness = 94,
+    eLapAvgCombinedPedalSmoothness = 95,
+    eLapTimeStanding = 98,
+    eLapStandCount = 99,
+    eLapAvgLeftPco = 100,
+    eLapAvgRightPco = 101,
+    eLapAvgLeftPowerPhase = 102,
+    eLapAvgLeftPowerPhasePeak = 103,
+    eLapAvgRightPowerPhase = 104,
+    eLapAvgRightPowerPhasePeak = 105,
+    eLapAvgPowerPosition = 106,
+    eLapMaxPowerPosition = 107,
+    eLapAvgCadencePosition = 108,
+    eLapMaxCadencePosition = 109,
+    eLapEnhancedAvgSpeed = 110,
+    eLapEnhancedMaxSpeed = 111,
+    eLapEnhancedAvgAltitude = 112,
+    eLapEnhancedMinAltitude = 113,
+    eLapEnhancedMaxAltitude = 114,
+    eLapAvgLevMotorPower = 115,
+    eLapMaxLevMotorPower = 116,
+    eLapLevBatteryConsumption = 117
+} message_lap_e;
 
 typedef enum {
- LengthMessageIndex = 254,
- LengthTimestamp = 253,
- LengthEvent = 0,
- LengthEventType = 1,
- LengthStartTime = 2,
- LengthTotalElapsedTime = 3,
- LengthTotalTimerTime = 4,
- LengthTotalStrokes = 5,
- LengthAvgSpeed = 6,
- LengthSwimStroke = 7,
- LengthAvgSwimmingCadence = 9,
- LengthEventGroup = 10,
- LengthTotalCalories = 11,
- LengthLengthType = 12,
- LengthPlayerScore = 18,
- LengthOpponentScore = 19,
- LengthStrokeCount = 20,
- LengthZoneCount = 21
-} Length;
+    eLengthMessageIndex = 254,
+    eLengthTimestamp = 253,
+    eLengthEvent = 0,
+    eLengthEventType = 1,
+    eLengthStartTime = 2,
+    eLengthTotalElapsedTime = 3,
+    eLengthTotalTimerTime = 4,
+    eLengthTotalStrokes = 5,
+    eLengthAvgSpeed = 6,
+    eLengthSwimStroke = 7,
+    eLengthAvgSwimmingCadence = 9,
+    eLengthEventGroup = 10,
+    eLengthTotalCalories = 11,
+    eLengthLengthType = 12,
+    eLengthPlayerScore = 18,
+    eLengthOpponentScore = 19,
+    eLengthStrokeCount = 20,
+    eLengthZoneCount = 21
+} message_length_e;
 
 typedef enum {
- RecordTimestamp = 253,
- RecordPositionLat = 0,
- RecordPositionLong = 1,
- RecordAltitude = 2,
- RecordHeartRate = 3,
- RecordCadence = 4,
- RecordDistance = 5,
- RecordSpeed = 6,
- RecordPower = 7,
- RecordCompressedSpeedDistance = 8,
- RecordGrade = 9,
- RecordResistance = 10,
- RecordTimeFromCourse = 11,
- RecordCycleLength = 12,
- RecordTemperature = 13,
- RecordSpeed1s = 17,
- RecordCycles = 18,
- RecordTotalCycles = 19,
- RecordCompressedAccumulatedPower = 28,
- RecordAccumulatedPower = 29,
- RecordLeftRightBalance = 30,
- RecordGpsAccuracy = 31,
- RecordVerticalSpeed = 32,
- RecordCalories = 33,
- RecordVerticalOscillation = 39,
- RecordStanceTimePercent = 40,
- RecordStanceTime = 41,
- RecordActivityType = 42,
- RecordLeftTorqueEffectiveness = 43,
- RecordRightTorqueEffectiveness = 44,
- RecordLeftPedalSmoothness = 45,
- RecordRightPedalSmoothness = 46,
- RecordCombinedPedalSmoothness = 47,
- RecordTime128 = 48,
- RecordStrokeType = 49,
- RecordZone = 50,
- RecordBallSpeed = 51,
- RecordCadence256 = 52,
- RecordFractionalCadence = 53,
- RecordTotalHemoglobinConc = 54,
- RecordTotalHemoglobinConcMin = 55,
- RecordTotalHemoglobinConcMax = 56,
- RecordSaturatedHemoglobinPercent = 57,
- RecordSaturatedHemoglobinPercentMin = 58,
- RecordSaturatedHemoglobinPercentMax = 59,
- RecordDeviceIndex = 62,
- RecordLeftPco = 67,
- RecordRightPco = 68,
- RecordLeftPowerPhase = 69,
- RecordLeftPowerPhasePeak = 70,
- RecordRightPowerPhase = 71,
- RecordRightPowerPhasePeak = 72,
- RecordEnhancedSpeed = 73,
- RecordEnhancedAltitude = 78,
- RecordBatterySoc = 81,
- RecordMotorPower = 82
-} Record;
+    eRecordTimestamp = 253,
+    eRecordPositionLat = 0,
+    eRecordPositionLong = 1,
+    eRecordAltitude = 2,
+    eRecordHeartRate = 3,
+    eRecordCadence = 4,
+    eRecordDistance = 5,
+    eRecordSpeed = 6,
+    eRecordPower = 7,
+    eRecordCompressedSpeedDistance = 8,
+    eRecordGrade = 9,
+    eRecordResistance = 10,
+    eRecordTimeFromCourse = 11,
+    eRecordCycleLength = 12,
+    eRecordTemperature = 13,
+    eRecordSpeed1s = 17,
+    eRecordCycles = 18,
+    eRecordTotalCycles = 19,
+    eRecordCompressedAccumulatedPower = 28,
+    eRecordAccumulatedPower = 29,
+    eRecordLeftRightBalance = 30,
+    eRecordGpsAccuracy = 31,
+    eRecordVerticalSpeed = 32,
+    eRecordCalories = 33,
+    eRecordVerticalOscillation = 39,
+    eRecordStanceTimePercent = 40,
+    eRecordStanceTime = 41,
+    eRecordActivityType = 42,
+    eRecordLeftTorqueEffectiveness = 43,
+    eRecordRightTorqueEffectiveness = 44,
+    eRecordLeftPedalSmoothness = 45,
+    eRecordRightPedalSmoothness = 46,
+    eRecordCombinedPedalSmoothness = 47,
+    eRecordTime128 = 48,
+    eRecordStrokeType = 49,
+    eRecordZone = 50,
+    eRecordBallSpeed = 51,
+    eRecordCadence256 = 52,
+    eRecordFractionalCadence = 53,
+    eRecordTotalHemoglobinConc = 54,
+    eRecordTotalHemoglobinConcMin = 55,
+    eRecordTotalHemoglobinConcMax = 56,
+    eRecordSaturatedHemoglobinPercent = 57,
+    eRecordSaturatedHemoglobinPercentMin = 58,
+    eRecordSaturatedHemoglobinPercentMax = 59,
+    eRecordDeviceIndex = 62,
+    eRecordLeftPco = 67,
+    eRecordRightPco = 68,
+    eRecordLeftPowerPhase = 69,
+    eRecordLeftPowerPhasePeak = 70,
+    eRecordRightPowerPhase = 71,
+    eRecordRightPowerPhasePeak = 72,
+    eRecordEnhancedSpeed = 73,
+    eRecordEnhancedAltitude = 78,
+    eRecordBatterySoc = 81,
+    eRecordMotorPower = 82
+} message_record_e;
 
 typedef enum {
- EventTimestamp = 253,
- EventEvent = 0,
- EventEventType = 1,
- EventData16 = 2,
- EventData = 3,
- EventEventGroup = 4,
- EventScore = 7,
- EventOpponentScore = 8,
- EventFrontGearNum = 9,
- EventFrontGear = 10,
- EventRearGearNum = 11,
- EventRearGear = 12,
- EventDeviceIndex = 13
-} Event;
+    eEventTimestamp = 253,
+    eEventEvent = 0,
+    eEventEventType = 1,
+    eEventData16 = 2,
+    eEventData = 3,
+    eEventEventGroup = 4,
+    eEventScore = 7,
+    eEventOpponentScore = 8,
+    eEventFrontGearNum = 9,
+    eEventFrontGear = 10,
+    eEventRearGearNum = 11,
+    eEventRearGear = 12,
+    eEventDeviceIndex = 13
+} message_event_e;
 
 typedef enum {
- DeviceInfoTimestamp = 253,
- DeviceInfoDeviceIndex = 0,
- DeviceInfoDeviceType = 1,
- DeviceInfoManufacturer = 2,
- DeviceInfoSerialNumber = 3,
- DeviceInfoProduct = 4,
- DeviceInfoSoftwareVersion = 5,
- DeviceInfoHardwareVersion = 6,
- DeviceInfoCumOperatingTime = 7,
- DeviceInfoBatteryVoltage = 10,
- DeviceInfoBatteryStatus = 11,
- DeviceInfoSensorPosition = 18,
- DeviceInfoDescriptor = 19,
- DeviceInfoAntTransmissionType = 20,
- DeviceInfoAntDeviceNumber = 21,
- DeviceInfoAntNetwork = 22,
- DeviceInfoSourceType = 25,
- DeviceInfoProductName = 27
-} DeviceInfo;
+    eDeviceInfoTimestamp = 253,
+    eDeviceInfoDeviceIndex = 0,
+    eDeviceInfoDeviceType = 1,
+    eDeviceInfoManufacturer = 2,
+    eDeviceInfoSerialNumber = 3,
+    eDeviceInfoProduct = 4,
+    eDeviceInfoSoftwareVersion = 5,
+    eDeviceInfoHardwareVersion = 6,
+    eDeviceInfoCumOperatingTime = 7,
+    eDeviceInfoBatteryVoltage = 10,
+    eDeviceInfoBatteryStatus = 11,
+    eDeviceInfoSensorPosition = 18,
+    eDeviceInfoDescriptor = 19,
+    eDeviceInfoAntTransmissionType = 20,
+    eDeviceInfoAntDeviceNumber = 21,
+    eDeviceInfoAntNetwork = 22,
+    eDeviceInfoSourceType = 25,
+    eDeviceInfoProductName = 27
+} message_device_info_e;
 
 typedef enum {
- TrainingFileTimestamp = 253,
- TrainingFileType = 0,
- TrainingFileManufacturer = 1,
- TrainingFileProduct = 2,
- TrainingFileSerialNumber = 3,
- TrainingFileTimeCreated = 4
-} TrainingFile;
+    eTrainingFileTimestamp = 253,
+    eTrainingFileType = 0,
+    eTrainingFileManufacturer = 1,
+    eTrainingFileProduct = 2,
+    eTrainingFileSerialNumber = 3,
+    eTrainingFileTimeCreated = 4
+} message_training_file_e;
 
 typedef enum {
- HrvTime = 0
-} Hrv;
+    eHrvTime = 0
+} message_hrv_e;
 
 typedef enum {
- CameraEventTimestamp = 253,
- CameraEventTimestampMs = 0,
- CameraEventCameraEventType = 1,
- CameraEventCameraFileUuid = 2,
- CameraEventCameraOrientation = 3
-} CameraEvent;
+    eCameraEventTimestamp = 253,
+    eCameraEventTimestampMs = 0,
+    eCameraEventCameraEventType = 1,
+    eCameraEventCameraFileUuid = 2,
+    eCameraEventCameraOrientation = 3
+} message_camera_event_e;
 
 typedef enum {
- GyroscopeDataTimestamp = 253,
- GyroscopeDataTimestampMs = 0,
- GyroscopeDataSampleTimeOffset = 1,
- GyroscopeDataGyroX = 2,
- GyroscopeDataGyroY = 3,
- GyroscopeDataGyroZ = 4,
- GyroscopeDataCalibratedGyroX = 5,
- GyroscopeDataCalibratedGyroY = 6,
- GyroscopeDataCalibratedGyroZ = 7
-} GyroscopeData;
+    eGyroscopeDataTimestamp = 253,
+    eGyroscopeDataTimestampMs = 0,
+    eGyroscopeDataSampleTimeOffset = 1,
+    eGyroscopeDataGyroX = 2,
+    eGyroscopeDataGyroY = 3,
+    eGyroscopeDataGyroZ = 4,
+    eGyroscopeDataCalibratedGyroX = 5,
+    eGyroscopeDataCalibratedGyroY = 6,
+    eGyroscopeDataCalibratedGyroZ = 7
+} message_gyroscope_data_e;
 
 typedef enum {
- AccelerometerDataTimestamp = 253,
- AccelerometerDataTimestampMs = 0,
- AccelerometerDataSampleTimeOffset = 1,
- AccelerometerDataAccelX = 2,
- AccelerometerDataAccelY = 3,
- AccelerometerDataAccelZ = 4,
- AccelerometerDataCalibratedAccelX = 5,
- AccelerometerDataCalibratedAccelY = 6,
- AccelerometerDataCalibratedAccelZ = 7
-} AccelerometerData;
+    eAccelerometerDataTimestamp = 253,
+    eAccelerometerDataTimestampMs = 0,
+    eAccelerometerDataSampleTimeOffset = 1,
+    eAccelerometerDataAccelX = 2,
+    eAccelerometerDataAccelY = 3,
+    eAccelerometerDataAccelZ = 4,
+    eAccelerometerDataCalibratedAccelX = 5,
+    eAccelerometerDataCalibratedAccelY = 6,
+    eAccelerometerDataCalibratedAccelZ = 7
+} message_accelerometer_data_e;
 
 typedef enum {
- ThreeDSensorCalibrationTimestamp = 253,
- ThreeDSensorCalibrationSensorType = 0,
- ThreeDSensorCalibrationCalibrationFactor = 1,
- ThreeDSensorCalibrationCalibrationDivisor = 2,
- ThreeDSensorCalibrationLevelShift = 3,
- ThreeDSensorCalibrationOffsetCal = 4,
- ThreeDSensorCalibrationOrientationMatrix = 5
-} ThreeDSensorCalibration;
+    eThreeDSensorCalibrationTimestamp = 253,
+    eThreeDSensorCalibrationSensorType = 0,
+    eThreeDSensorCalibrationCalibrationFactor = 1,
+    eThreeDSensorCalibrationCalibrationDivisor = 2,
+    eThreeDSensorCalibrationLevelShift = 3,
+    eThreeDSensorCalibrationOffsetCal = 4,
+    eThreeDSensorCalibrationOrientationMatrix = 5
+} message_three_d_sensor_calibration_e;
 
 typedef enum {
- VideoFrameTimestamp = 253,
- VideoFrameTimestampMs = 0,
- VideoFrameFrameNumber = 1
-} VideoFrame;
+    eVideoFrameTimestamp = 253,
+    eVideoFrameTimestampMs = 0,
+    eVideoFrameFrameNumber = 1
+} message_video_frame_e;
 
 typedef enum {
- ObdiiDataTimestamp = 253,
- ObdiiDataTimestampMs = 0,
- ObdiiDataTimeOffset = 1,
- ObdiiDataPid = 2,
- ObdiiDataRawData = 3,
- ObdiiDataPidDataSize = 4,
- ObdiiDataSystemTime = 5,
- ObdiiDataStartTimestamp = 6,
- ObdiiDataStartTimestampMs = 7
-} ObdiiData;
+    eObdiiDataTimestamp = 253,
+    eObdiiDataTimestampMs = 0,
+    eObdiiDataTimeOffset = 1,
+    eObdiiDataPid = 2,
+    eObdiiDataRawData = 3,
+    eObdiiDataPidDataSize = 4,
+    eObdiiDataSystemTime = 5,
+    eObdiiDataStartTimestamp = 6,
+    eObdiiDataStartTimestampMs = 7
+} message_obdii_data_e;
 
 typedef enum {
- NmeaSentenceTimestamp = 253,
- NmeaSentenceTimestampMs = 0,
- NmeaSentenceSentence = 1
-} NmeaSentence;
+    eNmeaSentenceTimestamp = 253,
+    eNmeaSentenceTimestampMs = 0,
+    eNmeaSentenceSentence = 1
+} message_nmea_sentence_e;
 
 typedef enum {
- AviationAttitudeTimestamp = 253,
- AviationAttitudeTimestampMs = 0,
- AviationAttitudeSystemTime = 1,
- AviationAttitudePitch = 2,
- AviationAttitudeRoll = 3,
- AviationAttitudeAccelLateral = 4,
- AviationAttitudeAccelNormal = 5,
- AviationAttitudeTurnRate = 6,
- AviationAttitudeStage = 7,
- AviationAttitudeAttitudeStageComplete = 8,
- AviationAttitudeTrack = 9,
- AviationAttitudeValidity = 10
-} AviationAttitude;
+    eAviationAttitudeTimestamp = 253,
+    eAviationAttitudeTimestampMs = 0,
+    eAviationAttitudeSystemTime = 1,
+    eAviationAttitudePitch = 2,
+    eAviationAttitudeRoll = 3,
+    eAviationAttitudeAccelLateral = 4,
+    eAviationAttitudeAccelNormal = 5,
+    eAviationAttitudeTurnRate = 6,
+    eAviationAttitudeStage = 7,
+    eAviationAttitudeAttitudeStageComplete = 8,
+    eAviationAttitudeTrack = 9,
+    eAviationAttitudeValidity = 10
+} message_aviation_attitude_e;
 
 typedef enum {
- VideoUrl = 0,
- VideoHostingProvider = 1,
- VideoDuration = 2
-} Video;
+    eVideoUrl = 0,
+    eVideoHostingProvider = 1,
+    eVideoDuration = 2
+} message_video_e;
 
 typedef enum {
- VideoTitleMessageIndex = 254,
- VideoTitleMessageCount = 0,
- VideoTitleText = 1
-} VideoTitle;
+    eVideoTitleMessageIndex = 254,
+    eVideoTitleMessageCount = 0,
+    eVideoTitleText = 1
+} message_video_title_e;
 
 typedef enum {
- VideoDescriptionMessageIndex = 254,
- VideoDescriptionMessageCount = 0,
- VideoDescriptionText = 1
-} VideoDescription;
+    eVideoDescriptionMessageIndex = 254,
+    eVideoDescriptionMessageCount = 0,
+    eVideoDescriptionText = 1
+} message_video_description_e;
 
 typedef enum {
- VideoClipClipNumber = 0,
- VideoClipStartTimestamp = 1,
- VideoClipStartTimestampMs = 2,
- VideoClipEndTimestamp = 3,
- VideoClipEndTimestampMs = 4,
- VideoClipClipStart = 6,
- VideoClipClipEnd = 7
-} VideoClip;
+    eVideoClipClipNumber = 0,
+    eVideoClipStartTimestamp = 1,
+    eVideoClipStartTimestampMs = 2,
+    eVideoClipEndTimestamp = 3,
+    eVideoClipEndTimestampMs = 4,
+    eVideoClipClipStart = 6,
+    eVideoClipClipEnd = 7
+} message_video_clip_e;
 
 typedef enum {
- CourseSport = 4,
- CourseName = 5,
- CourseCapabilities = 6
-} Course;
+    eCourseSport = 4,
+    eCourseName = 5,
+    eCourseCapabilities = 6
+} message_course_e;
 
 typedef enum {
- CoursePointMessageIndex = 254,
- CoursePointTimestamp = 1,
- CoursePointPositionLat = 2,
- CoursePointPositionLong = 3,
- CoursePointDistance = 4,
- CoursePointType = 5,
- CoursePointName = 6,
- CoursePointFavorite = 8
-} CoursePoint;
+    eCoursePointMessageIndex = 254,
+    eCoursePointTimestamp = 1,
+    eCoursePointPositionLat = 2,
+    eCoursePointPositionLong = 3,
+    eCoursePointDistance = 4,
+    eCoursePointType = 5,
+    eCoursePointName = 6,
+    eCoursePointFavorite = 8
+} message_course_point_e;
 
 typedef enum {
- SegmentIdName = 0,
- SegmentIdUuid = 1,
- SegmentIdSport = 2,
- SegmentIdEnabled = 3,
- SegmentIdUserProfilePrimaryKey = 4,
- SegmentIdDeviceId = 5,
- SegmentIdDefaultRaceLeader = 6,
- SegmentIdDeleteStatus = 7,
- SegmentIdSelectionType = 8
-} SegmentId;
+    eSegmentIdName = 0,
+    eSegmentIdUuid = 1,
+    eSegmentIdSport = 2,
+    eSegmentIdEnabled = 3,
+    eSegmentIdUserProfilePrimaryKey = 4,
+    eSegmentIdDeviceId = 5,
+    eSegmentIdDefaultRaceLeader = 6,
+    eSegmentIdDeleteStatus = 7,
+    eSegmentIdSelectionType = 8
+} message_segment_id_e;
 
 typedef enum {
- SegmentLeaderboardEntryMessageIndex = 254,
- SegmentLeaderboardEntryName = 0,
- SegmentLeaderboardEntryType = 1,
- SegmentLeaderboardEntryGroupPrimaryKey = 2,
- SegmentLeaderboardEntryActivityId = 3,
- SegmentLeaderboardEntrySegmentTime = 4,
- SegmentLeaderboardEntryActivityIdString = 5
-} SegmentLeaderboardEntry;
+    eSegmentLeaderboardEntryMessageIndex = 254,
+    eSegmentLeaderboardEntryName = 0,
+    eSegmentLeaderboardEntryType = 1,
+    eSegmentLeaderboardEntryGroupPrimaryKey = 2,
+    eSegmentLeaderboardEntryActivityId = 3,
+    eSegmentLeaderboardEntrySegmentTime = 4,
+    eSegmentLeaderboardEntryActivityIdString = 5
+} message_segment_leaderboard_entry_e;
 
 typedef enum {
- SegmentPointMessageIndex = 254,
- SegmentPointPositionLat = 1,
- SegmentPointPositionLong = 2,
- SegmentPointDistance = 3,
- SegmentPointAltitude = 4,
- SegmentPointLeaderTime = 5
-} SegmentPoint;
+    eSegmentPointMessageIndex = 254,
+    eSegmentPointPositionLat = 1,
+    eSegmentPointPositionLong = 2,
+    eSegmentPointDistance = 3,
+    eSegmentPointAltitude = 4,
+    eSegmentPointLeaderTime = 5
+} message_segment_point_e;
 
 typedef enum {
- SegmentLapMessageIndex = 254,
- SegmentLapTimestamp = 253,
- SegmentLapEvent = 0,
- SegmentLapEventType = 1,
- SegmentLapStartTime = 2,
- SegmentLapStartPositionLat = 3,
- SegmentLapStartPositionLong = 4,
- SegmentLapEndPositionLat = 5,
- SegmentLapEndPositionLong = 6,
- SegmentLapTotalElapsedTime = 7,
- SegmentLapTotalTimerTime = 8,
- SegmentLapTotalDistance = 9,
- SegmentLapTotalCycles = 10,
- SegmentLapTotalCalories = 11,
- SegmentLapTotalFatCalories = 12,
- SegmentLapAvgSpeed = 13,
- SegmentLapMaxSpeed = 14,
- SegmentLapAvgHeartRate = 15,
- SegmentLapMaxHeartRate = 16,
- SegmentLapAvgCadence = 17,
- SegmentLapMaxCadence = 18,
- SegmentLapAvgPower = 19,
- SegmentLapMaxPower = 20,
- SegmentLapTotalAscent = 21,
- SegmentLapTotalDescent = 22,
- SegmentLapSport = 23,
- SegmentLapEventGroup = 24,
- SegmentLapNecLat = 25,
- SegmentLapNecLong = 26,
- SegmentLapSwcLat = 27,
- SegmentLapSwcLong = 28,
- SegmentLapName = 29,
- SegmentLapNormalizedPower = 30,
- SegmentLapLeftRightBalance = 31,
- SegmentLapSubSport = 32,
- SegmentLapTotalWork = 33,
- SegmentLapAvgAltitude = 34,
- SegmentLapMaxAltitude = 35,
- SegmentLapGpsAccuracy = 36,
- SegmentLapAvgGrade = 37,
- SegmentLapAvgPosGrade = 38,
- SegmentLapAvgNegGrade = 39,
- SegmentLapMaxPosGrade = 40,
- SegmentLapMaxNegGrade = 41,
- SegmentLapAvgTemperature = 42,
- SegmentLapMaxTemperature = 43,
- SegmentLapTotalMovingTime = 44,
- SegmentLapAvgPosVerticalSpeed = 45,
- SegmentLapAvgNegVerticalSpeed = 46,
- SegmentLapMaxPosVerticalSpeed = 47,
- SegmentLapMaxNegVerticalSpeed = 48,
- SegmentLapTimeInHrZone = 49,
- SegmentLapTimeInSpeedZone = 50,
- SegmentLapTimeInCadenceZone = 51,
- SegmentLapTimeInPowerZone = 52,
- SegmentLapRepetitionNum = 53,
- SegmentLapMinAltitude = 54,
- SegmentLapMinHeartRate = 55,
- SegmentLapActiveTime = 56,
- SegmentLapWktStepIndex = 57,
- SegmentLapSportEvent = 58,
- SegmentLapAvgLeftTorqueEffectiveness = 59,
- SegmentLapAvgRightTorqueEffectiveness = 60,
- SegmentLapAvgLeftPedalSmoothness = 61,
- SegmentLapAvgRightPedalSmoothness = 62,
- SegmentLapAvgCombinedPedalSmoothness = 63,
- SegmentLapStatus = 64,
- SegmentLapUuid = 65,
- SegmentLapAvgFractionalCadence = 66,
- SegmentLapMaxFractionalCadence = 67,
- SegmentLapTotalFractionalCycles = 68,
- SegmentLapFrontGearShiftCount = 69,
- SegmentLapRearGearShiftCount = 70,
- SegmentLapTimeStanding = 71,
- SegmentLapStandCount = 72,
- SegmentLapAvgLeftPco = 73,
- SegmentLapAvgRightPco = 74,
- SegmentLapAvgLeftPowerPhase = 75,
- SegmentLapAvgLeftPowerPhasePeak = 76,
- SegmentLapAvgRightPowerPhase = 77,
- SegmentLapAvgRightPowerPhasePeak = 78,
- SegmentLapAvgPowerPosition = 79,
- SegmentLapMaxPowerPosition = 80,
- SegmentLapAvgCadencePosition = 81,
- SegmentLapMaxCadencePosition = 82
-} SegmentLap;
+    eSegmentLapMessageIndex = 254,
+    eSegmentLapTimestamp = 253,
+    eSegmentLapEvent = 0,
+    eSegmentLapEventType = 1,
+    eSegmentLapStartTime = 2,
+    eSegmentLapStartPositionLat = 3,
+    eSegmentLapStartPositionLong = 4,
+    eSegmentLapEndPositionLat = 5,
+    eSegmentLapEndPositionLong = 6,
+    eSegmentLapTotalElapsedTime = 7,
+    eSegmentLapTotalTimerTime = 8,
+    eSegmentLapTotalDistance = 9,
+    eSegmentLapTotalCycles = 10,
+    eSegmentLapTotalCalories = 11,
+    eSegmentLapTotalFatCalories = 12,
+    eSegmentLapAvgSpeed = 13,
+    eSegmentLapMaxSpeed = 14,
+    eSegmentLapAvgHeartRate = 15,
+    eSegmentLapMaxHeartRate = 16,
+    eSegmentLapAvgCadence = 17,
+    eSegmentLapMaxCadence = 18,
+    eSegmentLapAvgPower = 19,
+    eSegmentLapMaxPower = 20,
+    eSegmentLapTotalAscent = 21,
+    eSegmentLapTotalDescent = 22,
+    eSegmentLapSport = 23,
+    eSegmentLapEventGroup = 24,
+    eSegmentLapNecLat = 25,
+    eSegmentLapNecLong = 26,
+    eSegmentLapSwcLat = 27,
+    eSegmentLapSwcLong = 28,
+    eSegmentLapName = 29,
+    eSegmentLapNormalizedPower = 30,
+    eSegmentLapLeftRightBalance = 31,
+    eSegmentLapSubSport = 32,
+    eSegmentLapTotalWork = 33,
+    eSegmentLapAvgAltitude = 34,
+    eSegmentLapMaxAltitude = 35,
+    eSegmentLapGpsAccuracy = 36,
+    eSegmentLapAvgGrade = 37,
+    eSegmentLapAvgPosGrade = 38,
+    eSegmentLapAvgNegGrade = 39,
+    eSegmentLapMaxPosGrade = 40,
+    eSegmentLapMaxNegGrade = 41,
+    eSegmentLapAvgTemperature = 42,
+    eSegmentLapMaxTemperature = 43,
+    eSegmentLapTotalMovingTime = 44,
+    eSegmentLapAvgPosVerticalSpeed = 45,
+    eSegmentLapAvgNegVerticalSpeed = 46,
+    eSegmentLapMaxPosVerticalSpeed = 47,
+    eSegmentLapMaxNegVerticalSpeed = 48,
+    eSegmentLapTimeInHrZone = 49,
+    eSegmentLapTimeInSpeedZone = 50,
+    eSegmentLapTimeInCadenceZone = 51,
+    eSegmentLapTimeInPowerZone = 52,
+    eSegmentLapRepetitionNum = 53,
+    eSegmentLapMinAltitude = 54,
+    eSegmentLapMinHeartRate = 55,
+    eSegmentLapActiveTime = 56,
+    eSegmentLapWktStepIndex = 57,
+    eSegmentLapSportEvent = 58,
+    eSegmentLapAvgLeftTorqueEffectiveness = 59,
+    eSegmentLapAvgRightTorqueEffectiveness = 60,
+    eSegmentLapAvgLeftPedalSmoothness = 61,
+    eSegmentLapAvgRightPedalSmoothness = 62,
+    eSegmentLapAvgCombinedPedalSmoothness = 63,
+    eSegmentLapStatus = 64,
+    eSegmentLapUuid = 65,
+    eSegmentLapAvgFractionalCadence = 66,
+    eSegmentLapMaxFractionalCadence = 67,
+    eSegmentLapTotalFractionalCycles = 68,
+    eSegmentLapFrontGearShiftCount = 69,
+    eSegmentLapRearGearShiftCount = 70,
+    eSegmentLapTimeStanding = 71,
+    eSegmentLapStandCount = 72,
+    eSegmentLapAvgLeftPco = 73,
+    eSegmentLapAvgRightPco = 74,
+    eSegmentLapAvgLeftPowerPhase = 75,
+    eSegmentLapAvgLeftPowerPhasePeak = 76,
+    eSegmentLapAvgRightPowerPhase = 77,
+    eSegmentLapAvgRightPowerPhasePeak = 78,
+    eSegmentLapAvgPowerPosition = 79,
+    eSegmentLapMaxPowerPosition = 80,
+    eSegmentLapAvgCadencePosition = 81,
+    eSegmentLapMaxCadencePosition = 82
+} message_segment_lap_e;
 
 typedef enum {
- SegmentFileMessageIndex = 254,
- SegmentFileFileUuid = 1,
- SegmentFileEnabled = 3,
- SegmentFileUserProfilePrimaryKey = 4,
- SegmentFileLeaderType = 7,
- SegmentFileLeaderGroupPrimaryKey = 8,
- SegmentFileLeaderActivityId = 9,
- SegmentFileLeaderActivityIdString = 10
-} SegmentFile;
+    eSegmentFileMessageIndex = 254,
+    eSegmentFileFileUuid = 1,
+    eSegmentFileEnabled = 3,
+    eSegmentFileUserProfilePrimaryKey = 4,
+    eSegmentFileLeaderType = 7,
+    eSegmentFileLeaderGroupPrimaryKey = 8,
+    eSegmentFileLeaderActivityId = 9,
+    eSegmentFileLeaderActivityIdString = 10
+} message_segment_file_e;
 
 typedef enum {
- WorkoutSport = 4,
- WorkoutCapabilities = 5,
- WorkoutNumValidSteps = 6,
- WorkoutWktName = 8
-} Workout;
+    eWorkoutSport = 4,
+    eWorkoutCapabilities = 5,
+    eWorkoutNumValidSteps = 6,
+    eWorkoutWktName = 8
+} message_workout_e;
 
 typedef enum {
- WorkoutStepMessageIndex = 254,
- WorkoutStepWktStepName = 0,
- WorkoutStepDurationType = 1,
- WorkoutStepDurationValue = 2,
- WorkoutStepTargetType = 3,
- WorkoutStepTargetValue = 4,
- WorkoutStepCustomTargetValueLow = 5,
- WorkoutStepCustomTargetValueHigh = 6,
- WorkoutStepIntensity = 7
-} WorkoutStep;
+    eWorkoutStepMessageIndex = 254,
+    eWorkoutStepWktStepName = 0,
+    eWorkoutStepDurationType = 1,
+    eWorkoutStepDurationValue = 2,
+    eWorkoutStepTargetType = 3,
+    eWorkoutStepTargetValue = 4,
+    eWorkoutStepCustomTargetValueLow = 5,
+    eWorkoutStepCustomTargetValueHigh = 6,
+    eWorkoutStepIntensity = 7
+} message_workout_step_e;
 
 typedef enum {
- ScheduleManufacturer = 0,
- ScheduleProduct = 1,
- ScheduleSerialNumber = 2,
- ScheduleTimeCreated = 3,
- ScheduleCompleted = 4,
- ScheduleType = 5,
- ScheduleScheduledTime = 6
-} Schedule;
+    eScheduleManufacturer = 0,
+    eScheduleProduct = 1,
+    eScheduleSerialNumber = 2,
+    eScheduleTimeCreated = 3,
+    eScheduleCompleted = 4,
+    eScheduleType = 5,
+    eScheduleScheduledTime = 6
+} message_schedule_e;
 
 typedef enum {
- TotalsMessageIndex = 254,
- TotalsTimestamp = 253,
- TotalsTimerTime = 0,
- TotalsDistance = 1,
- TotalsCalories = 2,
- TotalsSport = 3,
- TotalsElapsedTime = 4,
- TotalsSessions = 5,
- TotalsActiveTime = 6,
- TotalsSportIndex = 9
-} Totals;
+    eTotalsMessageIndex = 254,
+    eTotalsTimestamp = 253,
+    eTotalsTimerTime = 0,
+    eTotalsDistance = 1,
+    eTotalsCalories = 2,
+    eTotalsSport = 3,
+    eTotalsElapsedTime = 4,
+    eTotalsSessions = 5,
+    eTotalsActiveTime = 6,
+    eTotalsSportIndex = 9
+} message_totals_e;
 
 typedef enum {
- WeightScaleTimestamp = 253,
- WeightScaleWeight = 0,
- WeightScalePercentFat = 1,
- WeightScalePercentHydration = 2,
- WeightScaleVisceralFatMass = 3,
- WeightScaleBoneMass = 4,
- WeightScaleMuscleMass = 5,
- WeightScaleBasalMet = 7,
- WeightScalePhysiqueRating = 8,
- WeightScaleActiveMet = 9,
- WeightScaleMetabolicAge = 10,
- WeightScaleVisceralFatRating = 11,
- WeightScaleUserProfileIndex = 12
-} WeightScale;
+    eWeightScaleTimestamp = 253,
+    eWeightScaleWeight = 0,
+    eWeightScalePercentFat = 1,
+    eWeightScalePercentHydration = 2,
+    eWeightScaleVisceralFatMass = 3,
+    eWeightScaleBoneMass = 4,
+    eWeightScaleMuscleMass = 5,
+    eWeightScaleBasalMet = 7,
+    eWeightScalePhysiqueRating = 8,
+    eWeightScaleActiveMet = 9,
+    eWeightScaleMetabolicAge = 10,
+    eWeightScaleVisceralFatRating = 11,
+    eWeightScaleUserProfileIndex = 12
+} message_weight_scale_e;
 
 typedef enum {
- BloodPressureTimestamp = 253,
- BloodPressureSystolicPressure = 0,
- BloodPressureDiastolicPressure = 1,
- BloodPressureMeanArterialPressure = 2,
- BloodPressureMap3SampleMean = 3,
- BloodPressureMapMorningValues = 4,
- BloodPressureMapEveningValues = 5,
- BloodPressureHeartRate = 6,
- BloodPressureHeartRateType = 7,
- BloodPressureStatus = 8,
- BloodPressureUserProfileIndex = 9
-} BloodPressure;
+    eBloodPressureTimestamp = 253,
+    eBloodPressureSystolicPressure = 0,
+    eBloodPressureDiastolicPressure = 1,
+    eBloodPressureMeanArterialPressure = 2,
+    eBloodPressureMap3SampleMean = 3,
+    eBloodPressureMapMorningValues = 4,
+    eBloodPressureMapEveningValues = 5,
+    eBloodPressureHeartRate = 6,
+    eBloodPressureHeartRateType = 7,
+    eBloodPressureStatus = 8,
+    eBloodPressureUserProfileIndex = 9
+} message_blood_pressure_e;
 
 typedef enum {
- MonitoringInfoTimestamp = 253,
- MonitoringInfoLocalTimestamp = 0,
- MonitoringInfoActivityType = 1,
- MonitoringInfoCyclesToDistance = 3,
- MonitoringInfoCyclesToCalories = 4,
- MonitoringInfoRestingMetabolicRate = 5
-} MonitoringInfo;
+    eMonitoringInfoTimestamp = 253,
+    eMonitoringInfoLocalTimestamp = 0,
+    eMonitoringInfoActivityType = 1,
+    eMonitoringInfoCyclesToDistance = 3,
+    eMonitoringInfoCyclesToCalories = 4,
+    eMonitoringInfoRestingMetabolicRate = 5
+} message_monitoring_info_e;
 
 typedef enum {
- MonitoringTimestamp = 253,
- MonitoringDeviceIndex = 0,
- MonitoringCalories = 1,
- MonitoringDistance = 2,
- MonitoringCycles = 3,
- MonitoringActiveTime = 4,
- MonitoringActivityType = 5,
- MonitoringActivitySubtype = 6,
- MonitoringActivityLevel = 7,
- MonitoringDistance16 = 8,
- MonitoringCycles16 = 9,
- MonitoringActiveTime16 = 10,
- MonitoringLocalTimestamp = 11,
- MonitoringTemperature = 12,
- MonitoringTemperatureMin = 14,
- MonitoringTemperatureMax = 15,
- MonitoringActivityTime = 16,
- MonitoringActiveCalories = 19,
- MonitoringCurrentActivityTypeIntensity = 24,
- MonitoringTimestampMin8 = 25,
- MonitoringTimestamp16 = 26,
- MonitoringHeartRate = 27,
- MonitoringIntensity = 28,
- MonitoringDurationMin = 29,
- MonitoringDuration = 30
-} Monitoring;
+    eMonitoringTimestamp = 253,
+    eMonitoringDeviceIndex = 0,
+    eMonitoringCalories = 1,
+    eMonitoringDistance = 2,
+    eMonitoringCycles = 3,
+    eMonitoringActiveTime = 4,
+    eMonitoringActivityType = 5,
+    eMonitoringActivitySubtype = 6,
+    eMonitoringActivityLevel = 7,
+    eMonitoringDistance16 = 8,
+    eMonitoringCycles16 = 9,
+    eMonitoringActiveTime16 = 10,
+    eMonitoringLocalTimestamp = 11,
+    eMonitoringTemperature = 12,
+    eMonitoringTemperatureMin = 14,
+    eMonitoringTemperatureMax = 15,
+    eMonitoringActivityTime = 16,
+    eMonitoringActiveCalories = 19,
+    eMonitoringCurrentActivityTypeIntensity = 24,
+    eMonitoringTimestampMin8 = 25,
+    eMonitoringTimestamp16 = 26,
+    eMonitoringHeartRate = 27,
+    eMonitoringIntensity = 28,
+    eMonitoringDurationMin = 29,
+    eMonitoringDuration = 30
+} message_monitoring_e;
 
 typedef enum {
- MemoGlobPartIndex = 250,
- MemoGlobMemo = 0,
- MemoGlobMessageNumber = 1,
- MemoGlobMessageIndex = 2
-} MemoGlob;
-
+    eMemoGlobPartIndex = 250,
+    eMemoGlobMemo = 0,
+    eMemoGlobMessageNumber = 1,
+    eMemoGlobMessageIndex = 2
+} message_memo_glob_e;
 // ----------- end generated code -----------
 #endif // FIT_FIELDS_H

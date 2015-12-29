@@ -37,7 +37,7 @@ public:
     uint8_t getLocalMesgNr() const;
 
     bool hasField(const uint8_t fieldDefNum) const;
-    const CFitField* getField(const uint8_t fieldDefNum) const;
+    const CFitField& getField(const uint8_t fieldDefNum) const;
     bool isFieldValueValid(const uint8_t fieldDefNum) const;
     void addField(CFitField* field);
 
@@ -47,7 +47,7 @@ public:
     unsigned int getFieldUIntValue(const uint8_t fieldDefNum) const;
     double getFieldDoubleValue(const uint8_t fieldDefNum) const;
 
-    CFitProfile* profile() const { return messageProfile; }
+    const CFitProfile& profile() const { return *messageProfile; }
     QStringList messageInfo() const;
     const QList<CFitField*> getFields() const { return fields.values(); }
 
@@ -56,7 +56,7 @@ private:
     QMap<uint8_t, CFitField*> fields;
     uint16_t globalMesgNr;
     uint8_t localMesgNr;
-    CFitProfile* messageProfile;
+    const CFitProfile* messageProfile;
 };
 
 

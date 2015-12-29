@@ -27,18 +27,18 @@
 class CFitFieldBuilder
 {
 public:
-    static void evaluateSubfieldsAndExpandComponents(CFitMessage* mesg);
-    static CFitField* buildField(const CFitFieldDefinition& def, uint8_t* fieldData, const CFitMessage* message);
+    static void evaluateSubfieldsAndExpandComponents(CFitMessage& mesg);
+    static CFitField* buildField(const CFitFieldDefinition& def, uint8_t* fieldData, const CFitMessage& message);
 
 private:
-    static CFitField* buildSIntField(const CFitFieldDefinition& def, CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildUIntField(const CFitFieldDefinition& def, CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildFloatField(const CFitFieldDefinition& def, CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildStringField(const CFitFieldDefinition& def, CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildByteField(const CFitFieldDefinition& def, CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static CFitField* buildSIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static CFitField* buildUIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static CFitField* buildFloatField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static CFitField* buildStringField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static CFitField* buildByteField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
 
-    static void evaluateFieldProfile(CFitMessage* mesg, CFitField* field);
-    static void expandComponents(CFitMessage* mesg, const CFitField* field);
+    static void evaluateFieldProfile(CFitMessage& mesg, CFitField& field);
+    static void expandComponents(CFitMessage& mesg, const CFitField& field);
 };
 
 #endif //CFITFIELDBUILDER_H

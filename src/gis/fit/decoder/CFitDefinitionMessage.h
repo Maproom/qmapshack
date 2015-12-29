@@ -47,8 +47,8 @@ public:
     const QList<CFitFieldDefinition>& getFields() const;
     void addField(CFitFieldDefinition field);
     bool hasField(const uint8_t fieldNum) const;
-    CFitFieldDefinition& getField(const uint8_t fieldNum);
-    CFitFieldDefinition& getFieldByIndex(const uint16_t index);
+    const CFitFieldDefinition& getField(const uint8_t fieldNum) const;
+    const CFitFieldDefinition& getFieldByIndex(const uint16_t index) const;
 
     QStringList messageInfo() const;
 
@@ -59,7 +59,7 @@ private:
     uint8_t nrOfFields;
     uint8_t localMesgNr;
     QList<CFitFieldDefinition> fields;
-    CFitProfile* messageProfile;
+    const CFitProfile* messageProfile;
 };
 
 

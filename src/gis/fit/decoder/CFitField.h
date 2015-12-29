@@ -29,20 +29,20 @@
 class CFitField
 {
 public:
-    CFitField(const CFitFieldDefinition& fieldDefinition, CFitFieldProfile* profile, bool valid);
-    CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, CFitFieldProfile* profile, bool valid);
+    CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, bool valid);
+    CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldProfile* profile, bool valid);
     CFitField(const CFitField& copy);
     CFitField();
+    virtual ~CFitField() { /* nothing to do here, profile and base type are global and not to delete */ };
 
-    void setProfile(CFitFieldProfile* profile) { fieldProfile = profile; }
+    void setProfile(const CFitFieldProfile* profile) { fieldProfile = profile; }
     virtual QString fieldInfo() const;
 
     bool isValidBaseType() const;
-    CFitBaseType* getBaseType() const;
-    bool isBaseType(BaseTypeNr type) const;
+    const CFitBaseType& getBaseType() const;
     uint16_t getGlobalMesgNr() const;
     uint8_t getFieldDefNr() const;
-    CFitFieldProfile* profile() const { return fieldProfile; }
+    const CFitFieldProfile& profile() const { return *fieldProfile; }
 
     bool isValidValue() const;
 
@@ -53,10 +53,10 @@ public:
     virtual double getDoubleValue() const { return 0; };
 
 protected:
-    CFitFieldProfile* fieldProfile;
+    const CFitFieldProfile* fieldProfile;
     uint16_t globalMesgNr;
     uint8_t fieldDefNr;
-    CFitBaseType* baseType;
+    const CFitBaseType* baseType;
     bool valid;
 };
 
@@ -64,19 +64,19 @@ template <class T>
 class CFitIntField : public CFitField
 {
 public:
-    CFitIntField(const CFitFieldDefinition& fieldDefinition, CFitFieldProfile* profile, T value, bool valid)
+    CFitIntField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, T value, bool valid)
             : CFitField(fieldDefinition, profile, valid), value(value) {};
-    CFitIntField(const CFitField* field, CFitFieldProfile* profile, T value, bool valid)
-            : CFitField(field->getGlobalMesgNr(), field->getFieldDefNr(), profile, valid), value(value) {}
+    CFitIntField(const CFitField& field, const CFitFieldProfile* profile, T value, bool valid)
+            : CFitField(field.getGlobalMesgNr(), field.getFieldDefNr(), profile, valid), value(value) {}
     CFitIntField() : CFitField(), value(0) {};
 
-    virtual QString fieldInfo() const;
+    virtual QString fieldInfo() const override;
 
-    virtual QString getString() const;
-    virtual QByteArray getBytes() const;
-    virtual int getSIntValue() const {return value; }
-    virtual unsigned int getUIntValue() const {return value; }
-    virtual double getDoubleValue() const;
+    virtual QString getString() const override;
+    virtual QByteArray getBytes() const override;
+    virtual int getSIntValue() const override {return value; }
+    virtual unsigned int getUIntValue() const override {return value; }
+    virtual double getDoubleValue() const override;
 
 private:
     T value;
@@ -87,15 +87,15 @@ QString CFitIntField<T>::fieldInfo() const
 {
     QString str = QString(" (%1/%2-%3)")
             .arg(value)
-            .arg(profile() ? profile()->getScale() : 1)
-            .arg(profile() ? profile()->getOffset(): 0);
+            .arg(profile().getScale())
+            .arg( profile().getOffset());
     return CFitField::fieldInfo() +  str;
 }
 
 template <class T>
 QString CFitIntField<T>::getString() const
 {
-    if(profile()->hasScaleAndOffset())
+    if(profile().hasScaleAndOffset())
     {
         return QString("%1").arg(getDoubleValue(), 0, 'f', 3);
     }
@@ -111,10 +111,10 @@ QByteArray CFitIntField<T>::getBytes() const
 template <class T>
 double CFitIntField<T>::getDoubleValue() const
 {
-    if(fieldProfile->hasScaleAndOffset())
+    if(profile().hasScaleAndOffset())
     {
         // scale and offset is only for int / sint types
-        return  value / fieldProfile->getScale() - fieldProfile->getOffset();
+        return  value / profile().getScale() - profile().getOffset();
     }
     return value;
 }
@@ -123,16 +123,16 @@ double CFitIntField<T>::getDoubleValue() const
 class CFitFloatField : public CFitField
 {
 public:
-    CFitFloatField(const CFitFieldDefinition& fieldDefinition, CFitFieldProfile* profile, double value, bool valid)
+    CFitFloatField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, double value, bool valid)
             : CFitField(fieldDefinition, profile, valid), value(value) {}
 
     CFitFloatField() : CFitField(), value(0) {}
 
-    virtual QString getString() const;
-    virtual QByteArray getBytes() const;
-    virtual int getSIntValue() const;
-    virtual unsigned int getUIntValue() const;
-    virtual double getDoubleValue() const {return value; }
+    virtual QString getString() const override;
+    virtual QByteArray getBytes() const override;
+    virtual int getSIntValue() const override;
+    virtual unsigned int getUIntValue() const override;
+    virtual double getDoubleValue() const override {return value; }
 
 private:
     double value;
@@ -141,17 +141,17 @@ private:
 class CFitStringField : public CFitField
 {
 public:
-    CFitStringField(const CFitFieldDefinition& fieldDefinition, CFitFieldProfile* profile, QString value, bool valid)
+    CFitStringField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QString value, bool valid)
             : CFitField(fieldDefinition, profile, valid), value(value) {};
     CFitStringField() :  CFitField(), value("") {}
 
-    QString getString() const {
+    QString getString() const override {
         return value;
     }
-    virtual QByteArray getBytes() const;
-    virtual int getSIntValue() const;
-    virtual unsigned int getUIntValue() const;
-    virtual double getDoubleValue() const;
+    virtual QByteArray getBytes() const override;
+    virtual int getSIntValue() const override;
+    virtual unsigned int getUIntValue() const override;
+    virtual double getDoubleValue() const override;
 
 private:
     QString value;
@@ -160,15 +160,15 @@ private:
 class CFitByteField : public CFitField
 {
 public:
-    CFitByteField(const CFitFieldDefinition& fieldDefinition, CFitFieldProfile* profile, QByteArray value, bool valid)
+    CFitByteField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QByteArray value, bool valid)
             : CFitField(fieldDefinition, profile, valid), value(value)  {};
     CFitByteField() :  CFitField(), value()  {}
 
-    virtual QString getString() const;
-    virtual QByteArray getBytes() const;
-    virtual int getSIntValue() const;
-    virtual unsigned int getUIntValue() const;
-    virtual double getDoubleValue() const;
+    virtual QString getString() const override;
+    virtual QByteArray getBytes() const override;
+    virtual int getSIntValue() const override;
+    virtual unsigned int getUIntValue() const override;
+    virtual double getDoubleValue() const override;
 
 private:
     QByteArray value;

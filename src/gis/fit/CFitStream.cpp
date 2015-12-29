@@ -51,6 +51,13 @@ bool CFitStream::hasMoreMesg()
     return readPos < decode.getMessages().size();
 }
 
+static const CFitMessage* dummyMessage = nullptr;
+const CFitMessage& invalidMessage()
+{
+    if(!dummyMessage)
+        dummyMessage = new CFitMessage();
+    return *dummyMessage;
+}
 
 const CFitMessage& CFitStream::nextMesgOf(uint16_t mesgNum)
 {
@@ -62,7 +69,7 @@ const CFitMessage& CFitStream::nextMesgOf(uint16_t mesgNum)
             return mesg;
         }
     }
-    return CFitMessage();
+    return invalidMessage();
 }
 
 

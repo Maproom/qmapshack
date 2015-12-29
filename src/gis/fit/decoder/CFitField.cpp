@@ -20,45 +20,39 @@
 #include "gis/fit/defs/CFitProfileLockup.h"
 #include "gis/fit/decoder/CFitField.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
-#include "CFitByteDataTransformer.h"
 
 
-CFitField::CFitField(const CFitFieldDefinition& fieldDefinition, CFitFieldProfile* profile, bool valid)
-: valid(valid)
-{
-    globalMesgNr = fieldDefinition.parent()->getGlobalMesgNr();
-    fieldDefNr = fieldDefinition.getDefNr();
-    baseType = fieldDefinition.getBaseType();
-    fieldProfile = profile;
-}
+CFitField::CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, bool valid)
+:  fieldProfile(profile), globalMesgNr(fieldDefinition.parent().getGlobalMesgNr()), fieldDefNr(fieldDefinition.getDefNr()),
+   baseType(&fieldDefinition.getBaseType()), valid(valid)
+{ }
 
 
 CFitField::CFitField(const CFitField& copy)
-: globalMesgNr(copy.globalMesgNr), fieldProfile(copy.fieldProfile), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType),  valid(copy.valid)
+: fieldProfile(copy.fieldProfile), globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType), valid(copy.valid)
 { }
 
-CFitField::CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, CFitFieldProfile* profile, bool valid)
-: globalMesgNr(globalMesgNr), fieldProfile(profile), fieldDefNr(fieldDefNr),baseType(profile->getBaseType()), valid(valid) { }
+CFitField::CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldProfile* profile, bool valid)
+: fieldProfile(profile), globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr),baseType(&profile->getBaseType()), valid(valid) { }
 
-CFitField::CFitField()
+CFitField::CFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(GlobalMesgNrInvalid, FieldDefNrInvalid))
 {
     globalMesgNr = GlobalMesgNrInvalid;
     fieldDefNr = FieldDefNrInvalid;
     baseType = &InvalidType;
-    fieldProfile = CFitProfileLockup::getFieldForProfile(globalMesgNr, fieldDefNr);
     valid = false;
 }
 
 QString CFitField::fieldInfo() const
 {
-        QString name = profile()->getName();
+        QString name = profile().getName();
         QString str = QString("%1 %2 (%3): %4 %5 %6 %7")
-                .arg(profile()->getTyp())
+                .arg(profile().getTyp())
                 .arg(name)
                 .arg(getFieldDefNr())
                 .arg(getString())
-                .arg(profile()->getUnits())
-                .arg(getBaseType()->str())
+                .arg(profile().getUnits())
+                .arg(getBaseType().name())
                 .arg(valid ? "" : "<invalid>");
     return str;
 }
@@ -80,14 +74,9 @@ bool CFitField::isValidBaseType() const {
     return baseType != 0 && baseType->nr() != TypeInvalid;
 }
 
-CFitBaseType* CFitField::getBaseType() const
+const CFitBaseType& CFitField::getBaseType() const
 {
-    return baseType;
-}
-
-bool CFitField::isBaseType(BaseTypeNr type) const
-{
-    return isValidBaseType() && baseType->nr() == type;
+    return *baseType;
 }
 
 
@@ -148,48 +137,14 @@ QByteArray CFitByteField::getBytes() const
 int CFitByteField::getSIntValue() const
 {
     return value.toInt();
-    /*
-    switch(size)
-    {
-        case 0:
-            return 0;
-        case 1:
-            return CFitByteDataTransformer::getSint8(value.t);
-        case 2:
-            return CFitByteDataTransformer::getSint16(value);
-        default:
-            return CFitByteDataTransformer::getSint32(value);
-    }
-     */
 }
 
 unsigned int CFitByteField::getUIntValue() const
 {
      return value.toUInt();
-     /*
-    switch(size)
-    {
-        case 0:
-            return 0;
-        case 1:
-            return CFitByteDataTransformer::getUint8(value);
-        case 2:
-            return CFitByteDataTransformer::getUint16(value);
-        default:
-            return CFitByteDataTransformer::getUint32(value);
-    }
-     */
 }
 
 double CFitByteField::getDoubleValue() const
 {
     return value.toDouble();
-    /*
-    if(size == 4)
-        return CFitByteDataTransformer::getFloat32(value);
-    if(size== 8)
-        return CFitByteDataTransformer::getFloat64(value);
-
-    return 0;
-     */
 }

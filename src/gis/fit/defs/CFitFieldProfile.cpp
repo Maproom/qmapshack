@@ -42,6 +42,11 @@ void CFitFieldProfile::addComponent(CFitComponentfieldProfile* component)
     component->setParent(profile);
 }
 
+void CFitFieldProfile::addComponent(int subfieldIndex, CFitComponentfieldProfile* field)
+{
+    subfields[subfieldIndex]->addComponent(field);
+}
+
 bool CFitFieldProfile::hasSubfields() const
 {
     return subfields.size() > 0;
@@ -82,9 +87,9 @@ QString CFitFieldProfile::getUnits() const
 }
 
 
-CFitBaseType* CFitFieldProfile::getBaseType() const
+const CFitBaseType& CFitFieldProfile::getBaseType() const
 {
-    return baseType;
+    return *baseType;
 }
 
 const CFitProfile* CFitFieldProfile::getProfile() const
@@ -97,17 +102,14 @@ void CFitFieldProfile::setParent(CFitProfile* parent)
     this->profile = parent;
 }
 
-CFitSubfieldProfile* CFitFieldProfile::getSubfieldByIndex(int idx) const
-{
-    return subfields.at(idx);
-}
 
-QList<CFitSubfieldProfile*> CFitFieldProfile::getSubfields() const
+
+const QList<CFitSubfieldProfile*>& CFitFieldProfile::getSubfields() const
 {
     return subfields;
 }
 
-QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
+const QList<CFitComponentfieldProfile*>& CFitFieldProfile::getComponents() const
 {
     return components;
 }
@@ -118,15 +120,14 @@ offset, QString units, uint8_t subRefFieldDefNr, uint8_t subRefFieldValue)
         : CFitFieldProfile(name, baseType, fieldDefNr, scale, offset, units),
           refFieldDefNr(subRefFieldDefNr), refFieldValue(subRefFieldValue) { }
 
-uint8_t CFitSubfieldProfile::getReferencedFieldDefNr()
+uint8_t CFitSubfieldProfile::getReferencedFieldDefNr() const
 {
     return refFieldDefNr;
 }
-uint8_t CFitSubfieldProfile::getReferencedFieldValue()
+uint8_t CFitSubfieldProfile::getReferencedFieldValue() const
 {
     return refFieldValue;
 }
-
 
 
 CFitComponentfieldProfile::CFitComponentfieldProfile(QString name, CFitBaseType* baseType, uint8_t fieldDefNr,

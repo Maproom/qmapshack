@@ -47,10 +47,6 @@ public:
         return false;
     }
 
-    virtual bool save();
-    virtual bool saveAs();
-
-    static bool saveAs(const QString& fn, IGisProject& project);
     
 private:
     void loadFit(const QString & filename);

@@ -31,8 +31,7 @@
  */
 #define FITDEBUGLVL 1
 
-#define FITDEBUG(level, cmd) \
-    if(FITDEBUGLVL >= level) { cmd; } \
+#define FITDEBUG(level, cmd) if(FITDEBUGLVL >= level) { cmd; }
 
 
 typedef enum {

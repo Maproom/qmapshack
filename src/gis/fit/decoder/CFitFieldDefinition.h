@@ -37,11 +37,11 @@ public:
     uint8_t getDefNr() const;
     uint8_t getSize() const;
     uint8_t getType() const;
-    CFitBaseType* getBaseType() const;
+    const CFitBaseType& getBaseType() const;
     bool getEndianAbilityFlag() const;
 
-    CFitDefinitionMessage* parent() const { return parentDefintion; }
-    CFitFieldProfile* profile() const { return fieldProfile; }
+    const CFitDefinitionMessage& parent() const { return *parentDefintion; }
+    const CFitFieldProfile& profile() const { return *fieldProfile; }
 
     void setParent(CFitDefinitionMessage* parent) { parentDefintion = parent; }
 
@@ -49,9 +49,9 @@ private:
     uint8_t defNr;
     uint8_t size;
     uint8_t type;
-    CFitBaseType* baseType;
-    CFitDefinitionMessage* parentDefintion;
-    CFitFieldProfile* fieldProfile;
+    const CFitBaseType* baseType;
+    const CFitDefinitionMessage* parentDefintion;
+    const CFitFieldProfile* fieldProfile;
 };
 
 #endif // CFITFIELDDEFINITION_H

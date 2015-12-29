@@ -23,7 +23,7 @@ CFitBaseType::CFitBaseType() : CFitBaseType(TypeInvalid, 0, 0, "invalid")
 
 
 CFitBaseType::CFitBaseType(BaseTypeNr baseTypeNr, uint8_t* invalidBytes, uint8_t size, QString name)
-: typeSize(size), baseTypeNr(baseTypeNr), name(name)
+: typeSize(size), baseTypeNr(baseTypeNr), namestr(name)
 {
     this->invalidBytes = new uint8_t[size];
     memcpy(this->invalidBytes, invalidBytes, size);
@@ -88,9 +88,9 @@ bool CFitBaseType::isByte() const
     return baseTypeNr == TypeByte;
 }
 
-QString CFitBaseType::str() const
+QString CFitBaseType::name() const
 {
-     return name;
+     return namestr;
 }
 
 template <class T>

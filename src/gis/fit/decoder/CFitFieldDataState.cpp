@@ -29,8 +29,8 @@ void CFitFieldDataState::reset()
 
 
 DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
-    CFitMessage* mesg = latestMessage();
-    CFitFieldDefinition& fieldDef = defintion(mesg->getLocalMesgNr())->getFieldByIndex(fieldIndex);
+    CFitMessage& mesg = *latestMessage();
+    const CFitFieldDefinition& fieldDef = defintion(mesg.getLocalMesgNr())->getFieldByIndex(fieldIndex);
 
     // add the read byte to the data array
     fieldData[fieldDataIndex++] = dataByte;
@@ -40,11 +40,11 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
 
         // new field with data
         CFitField* f = CFitFieldBuilder::buildField(fieldDef, fieldData, mesg);
-        mesg->addField(f);
+        mesg.addField(f);
 
         // The special case time record.
         // timestamp has always the same value for all enums. it does not matter againts which we're comparing.
-        if (fieldDef.getDefNr() == RecordTimestamp) {
+        if (fieldDef.getDefNr() == eRecordTimestamp) {
             setTimestamp(f->getUIntValue());
         }
 
@@ -53,12 +53,12 @@ DecodeState CFitFieldDataState::process(uint8_t &dataByte) {
         fieldIndex++;
     }
 
-    if (fieldIndex >= defintion(mesg->getLocalMesgNr())->getNrOfFields()) {
+    if (fieldIndex >= defintion(mesg.getLocalMesgNr())->getNrOfFields()) {
         // Now that the entire message is decoded we may evaluate subfields and expand components
         CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(mesg);
 
         reset();
-        FITDEBUG(2, qDebug() << latestMessage()->messageInfo())
+        FITDEBUG(2, qDebug() << mesg.messageInfo())
         // after all fields read, go to next record header
         return StateRecord;
     }

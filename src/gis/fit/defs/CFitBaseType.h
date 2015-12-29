@@ -43,7 +43,7 @@ typedef enum
 class CFitBaseType
 {
 public:
-    CFitBaseType(BaseTypeNr baseTypeNr, uint8_t* invalidBytes, uint8_t size, QString str);
+    CFitBaseType(BaseTypeNr baseTypeNr, uint8_t* invalidBytes, uint8_t size, QString name);
     CFitBaseType();
     ~CFitBaseType();
 
@@ -57,13 +57,13 @@ public:
     bool isNumber() const;
     bool isString() const;
     bool isByte() const;
-    QString str() const;
+    QString name() const;
 
 private:
     uint8_t* invalidBytes;
     uint8_t typeSize;
     BaseTypeNr baseTypeNr;
-    QString name;
+    QString namestr;
 };
 
 

@@ -25,9 +25,8 @@
 class CFitProfileLockup
 {
 public:
-    static CFitProfile* getProfile(uint16_t globalMesgNr);
-    static CFitFieldProfile * getFieldForProfile(uint16_t globalMesgNr, uint8_t fieldDefNr);
-
+    static const CFitProfile* getProfile(uint16_t globalMesgNr);
+    static const CFitFieldProfile* getFieldForProfile(uint16_t globalMesgNr, uint8_t fieldDefNr);
 };
 
 #endif // CFITPROFILELOCKUP_H

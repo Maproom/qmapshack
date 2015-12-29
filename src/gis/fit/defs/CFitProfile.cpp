@@ -36,11 +36,27 @@ void CFitProfile::addField(CFitFieldProfile* field)
 // dummy field profile for unkown definitions
 static CFitFieldProfile dummyFieldProfile = CFitFieldProfile();
 
-CFitFieldProfile * CFitProfile::getField(uint8_t fieldDefNr) const
+const CFitFieldProfile* CFitProfile::getField(uint8_t fieldDefNr) const
 {
     if (fields.contains(fieldDefNr))
     {
         return fields[fieldDefNr];
     }
     return &dummyFieldProfile;
+}
+
+void CFitProfile::addSubfield(uint8_t fieldDefNr, CFitSubfieldProfile* field)
+{
+    fields[fieldDefNr]->addSubfield(field);
+
+}
+
+void CFitProfile::addComponent(uint8_t fieldDefNr, CFitComponentfieldProfile* field)
+{
+    fields[fieldDefNr]->addComponent(field);
+}
+
+void CFitProfile::addComponent(uint8_t fieldDefNr, int subfieldIndex, CFitComponentfieldProfile* field)
+{
+    fields[fieldDefNr]->addComponent(subfieldIndex, field);
 }

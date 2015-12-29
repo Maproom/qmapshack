@@ -23,13 +23,13 @@
 #include "gis/CGisListWks.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/gpx/CGpxProject.h"
+#include "gis/qms/CQmsProject.h"
+#include "gis/rte/CGisItemRte.h"
+#include "helpers/CSettings.h"
 #include "CMainWindow.h"
 
 #include <QtWidgets>
-#include <helpers/CSettings.h>
-#include <gis/gpx/CGpxProject.h>
-#include <gis/qms/CQmsProject.h>
-#include <gis/rte/CGisItemRte.h>
 
 
 CFitProject::CFitProject(const QString &filename, CGisListWks *parent)
@@ -76,8 +76,8 @@ void CFitProject::loadFit(const QString & filename)
     CFitStream in(file);
     if(in.decodeFile())
     {
-        const CFitMessage& mesg = in.firstMesgOf(MesgNumFileId);
-        if(mesg.getFieldUIntValue(FileIdType) == FileActivity || mesg.getFieldUIntValue(FileIdType) == FileCourse)
+        const CFitMessage& mesg = in.firstMesgOf(eMesgNumFileId);
+        if(mesg.getFieldUIntValue(eFileIdType) == eFileActivity || mesg.getFieldUIntValue(eFileIdType) == eFileCourse)
         {
             new CGisItemTrk(in, this);
         }
@@ -85,7 +85,7 @@ void CFitProject::loadFit(const QString & filename)
         // new CGisItemRte(in, this);
 
         in.reset();
-        while(in.nextMesgOf(MesgNumCoursePoint).isValid())
+        while(in.nextMesgOf(eMesgNumCoursePoint).isValid())
         {
             new CGisItemWpt(in, this);
         }
@@ -111,47 +111,3 @@ CFitProject::~CFitProject()
 
 }
 
-
-bool CFitProject::save()
-{
-    // saving fit file is not supported
-    return false;
-}
-
-bool CFitProject::saveAs()
-{
-    SETTINGS;
-    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
-
-    QString filter = filedialogFilterGPX;
-    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
-
-    if(fn.isEmpty())
-    {
-        return false;
-    }
-
-    bool res = false;
-    if(filter == filedialogFilterGPX)
-    {
-        res = CGpxProject::saveAs(fn, *this);
-    }
-    else if(filter == filedialogFilterQMS)
-    {
-        res = CQmsProject::saveAs(fn, *this);
-    }
-    else
-    {
-        return false;
-    }
-
-    path = QFileInfo(fn).absolutePath();
-    cfg.setValue("Paths/lastGisPath", path);
-    return res;
-}
-
-bool CFitProject::saveAs(const QString& fn, IGisProject& project)
-{
-    // not implemented
-    return false;
-}

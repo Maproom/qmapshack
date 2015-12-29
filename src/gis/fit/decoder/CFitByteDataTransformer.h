@@ -26,13 +26,13 @@
 
 class CFitByteDataTransformer {
 public:
-    static unsigned int getUIntValue(CFitBaseType* baseType, uint8_t* rawData);
-    static int getSIntValue(CFitBaseType *baseType, uint8_t *rawData);
-    static double getFloatValue(CFitBaseType* baseType, uint8_t* rawData);
+    static unsigned int getUIntValue(const CFitBaseType& baseType, uint8_t* rawData);
+    static int getSIntValue(const CFitBaseType &baseType, uint8_t *rawData);
+    static double getFloatValue(const CFitBaseType& baseType, uint8_t* rawData);
     /*
      * param rawData: the fit utf-8 string, 0 terminated.
      */
-    static QString getString(uint8_t* rawData, uint8_t length=0);
+    static QString getString(uint8_t* rawData, uint8_t length);
     static QByteArray getBytes(uint8_t* rawData, uint8_t length);
     static void swapFieldData(const CFitFieldDefinition& fieldDef, uint8_t* fieldData);
 

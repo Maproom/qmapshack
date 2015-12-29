@@ -100,25 +100,33 @@ bool CFitDefinitionMessage::hasField(const uint8_t fieldNum) const
     return false;
 }
 
-CFitFieldDefinition& CFitDefinitionMessage::getField(const uint8_t fieldNum)
+// dummy field for unknown field nr.
+static const CFitFieldDefinition* dummyDefinitionField = nullptr;
+const CFitFieldDefinition& invalidDefinitionField()
+{
+    if(!dummyDefinitionField)
+        dummyDefinitionField = new CFitFieldDefinition();
+    return *dummyDefinitionField;
+}
+
+const CFitFieldDefinition& CFitDefinitionMessage::getField(const uint8_t fieldNum) const
 {
     for (int i=0; i< fields.size(); i++)
     {
         if (fieldNum == fields[i].getDefNr())
             return (fields[i]);
     }
-    //return nullptr;
+    return invalidDefinitionField();
 }
 
 
-
-CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const uint16_t index)
+const CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const uint16_t index) const
 {
     if (index < fields.size())
     {
         return (fields[index]);
     }
-    //return nullptr;
+    return invalidDefinitionField();
 }
 
 

@@ -58,6 +58,7 @@ private slots:
     void slotAddDatabase();
     void slotDelDatabase();
     void slotDelItem();
+    void slotUpdateDatabase();
 
 private:
     friend class CGisListDBEditLock;
@@ -75,6 +76,7 @@ private:
 
     QMenu * menuDatabase;
     QAction * actionDelDatabase;
+    QAction * actionUpdate;
 
     QMenu * menuItem;
     QAction * actionDelItem;

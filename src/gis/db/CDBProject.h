@@ -99,6 +99,8 @@ public:
      */
     void hideItems(CEvtD2WHideItems * evt);
 
+    void update();
+
 protected:
     /**
        @brief Setup the items text with the name and suffix
@@ -117,7 +119,7 @@ protected:
 
 
     int checkForAction1(IGisItem * item, quint64 &idItem, int &lastResult, QSqlQuery& query);
-    int checkForAction2(IGisItem * item, quint64 &idItem, QString &hash, QSqlQuery& query);
+    int checkForAction2(IGisItem * item, quint64 &idItem, QString &hashItem, QSqlQuery& query);
 
     /**
      * @brief Add item to database

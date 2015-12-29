@@ -27,9 +27,9 @@ public:
     CDBFolderLostFound(QSqlDatabase &db, QTreeWidgetItem *parent);
     virtual ~CDBFolderLostFound();
 
-    void update(CEvtW2DAckInfo * info);
-    void update();
-    void expanding()
+    void update(CEvtW2DAckInfo * info) override;
+    void update() override;
+    void expanding() override
     {
     }
     void clear();

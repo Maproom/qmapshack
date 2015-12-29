@@ -114,7 +114,8 @@ void CHistoryListWidget::slotCutHistory()
     }
 
     item->cutHistory();
-    item->setText(CGisListWks::eColumnDecoration,"*");
+    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+
     IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
     if(project)
     {

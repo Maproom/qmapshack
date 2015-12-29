@@ -445,6 +445,7 @@ protected:
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
     void updateItems();
     void updateItemCounters();
+    void updateDecoration();
 
     // Those are the URIs of the GPX extensions we support
     static const QString gpxx_ns;

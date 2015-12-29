@@ -38,6 +38,7 @@ enum event_types_e
     ,eEvtD2WHideItems   = QEvent::User + 5
     ,eEvtD2WUpdateLnF   = QEvent::User + 6
     ,eEvtD2WUpdateItems = QEvent::User + 7
+    ,eEvtD2WReload      = QEvent::User + 8
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
     ,eEvtW2DCreate      = QEvent::User + 101
@@ -156,6 +157,16 @@ public:
     }
 
     quint64 id;
+    QString db;
+};
+
+class CEvtD2WReload : public QEvent
+{
+public:
+    CEvtD2WReload(const QString& db) : QEvent(QEvent::Type(eEvtD2WReload)), db(db)
+    {
+    }
+
     QString db;
 };
 

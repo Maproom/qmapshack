@@ -104,6 +104,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectWks->addSeparator();
     actionSyncWksDev = menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"     ), tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
+    actionSyncDB     = menuProjectWks->addAction(QIcon("://icons/32x32/DatabaseSync.png"      ), tr("Sync. with Database"), this, SLOT(slotSyncDB()));
 
     menuProjectWks->addSeparator();
     actionCloseProj = menuProjectWks->addAction(QIcon("://icons/32x32/Close.png"       ), tr("Close"          ), this, SLOT(slotCloseProject()));
@@ -958,6 +959,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             else
             {
                 actionSyncWksDev->setEnabled(IDevice::count());
+                actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                 menuProjectWks->exec(p);
             }
             return;
@@ -1013,6 +1015,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 else
                 {
                     actionSyncWksDev->setEnabled(IDevice::count());
+                    actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                     menuProjectWks->exec(p);
                 }
             }
@@ -1749,6 +1752,31 @@ bool CGisListWks::event(QEvent * e)
             emit sigChanged();
             return true;
         }
+
+        case eEvtD2WReload:
+        {
+            CEvtD2WReload * evt = (CEvtD2WReload*)e;
+            QList<CDBProject*> projects;
+
+            const int N = topLevelItemCount();
+            for(int i = 0; i < N; i++)
+            {
+                CDBProject * project = dynamic_cast<CDBProject*>(topLevelItem(i));
+
+                if(project && (project->getDBName() == evt->db))
+                {
+                    project->update();
+                    projects << project;
+                }
+            }
+
+            foreach(CDBProject * project, projects)
+            {
+                project->blockUpdateItems(false);
+            }
+
+            return true;
+        }
         }
     }
     return QTreeWidget::event(e);
@@ -1758,7 +1786,9 @@ bool CGisListWks::event(QEvent * e)
 
 void CGisListWks::slotRteFromWpt()
 {
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
     QList<IGisItem::key_t> keys;
+
     foreach(QTreeWidgetItem * item, selectedItems())
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
@@ -1770,4 +1800,20 @@ void CGisListWks::slotRteFromWpt()
 
     CCreateRouteFromWpt dlg(keys, this);
     dlg.exec();
+}
+
+void CGisListWks::slotSyncDB()
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    foreach(QTreeWidgetItem * item, selectedItems())
+    {
+        CDBProject * project = dynamic_cast<CDBProject*>(item);
+        if(project == nullptr)
+        {
+            continue;
+        }
+
+        project->update();
+    }
 }

@@ -101,6 +101,7 @@ private slots:
     void slotSyncWksDev();
     void slotSyncDevWks();
     void slotRteFromWpt();
+    void slotSyncDB();
 
 
 private:
@@ -121,6 +122,7 @@ private:
     QAction  * actionShowOnMap;
     QAction  * actionHideFrMap;
     QAction  * actionSyncWksDev;
+    QAction  * actionSyncDB;
 
 
     QMenu * menuProjectDev;

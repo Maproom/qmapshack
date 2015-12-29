@@ -832,3 +832,25 @@ void IGisProject::blockUpdateItems(bool yes)
         updateItems();
     }
 }
+
+void IGisProject::updateDecoration()
+{
+    int N       = childCount();
+    bool saved  = true;
+
+    for(int i = 0; i < N; i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(item == 0)
+        {
+            continue;
+        }
+        if(item->isChanged())
+        {
+            saved = false;
+            break;
+        }
+    }
+
+    setText(CGisListWks::eColumnDecoration, saved ? "" : "*");
+}

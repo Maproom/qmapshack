@@ -133,6 +133,8 @@ public:
     {
         eMarkNone      = 0
         ,eMarkChanged   = 0x00000001
+        ,eMarkNotPart   = 0x00000002
+        ,eMarkNotInDB   = 0x00000004
     };
 
     struct key_t
@@ -165,14 +167,14 @@ public:
     /**
        @brief If the item is part of a database project it will update itself with the database content
      */
-    void updateFromDB(quint64 id, QSqlDatabase& db);
+    virtual void updateFromDB(quint64 id, QSqlDatabase& db);
 
     /**
        @brief Update the visual representation of the QTreeWidgetItem
        @param enable
        @param disable
      */
-    virtual void updateDecoration(mark_e enable, mark_e disable);
+    virtual void updateDecoration(quint32 enable, quint32 disable);
 
     /**
        @brief Save the item's data into a GPX structure
@@ -203,10 +205,7 @@ public:
 
        @return The hash as a string
      */
-    const QString& getLastDatabaseHash()
-    {
-        return lastDatabaseHash;
-    }
+    const QString& getLastDatabaseHash();
 
     /**
        @brief Read the hash stored in the database

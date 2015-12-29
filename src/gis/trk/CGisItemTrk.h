@@ -625,6 +625,11 @@ private:
      */
     void deriveSecondaryData();
 
+    /**
+     * @brief Reset internal data like range selection and details dialog
+     */
+    void resetInternalData();
+
 
     /** @defgroup ExtremaExtensions Stuff related to calculation of extremas/extensions
 
@@ -830,6 +835,7 @@ public:
         return trk;
     }
 
+    void updateFromDB(quint64 id, QSqlDatabase& db) override;
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;

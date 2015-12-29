@@ -253,7 +253,7 @@ void CDetailsTrk::updateData()
 
     labelTainted->setVisible(trk.isTainted());
 
-    labelInfo->setText(trk.getInfo());
+    labelInfo->setText(trk.getInfo(false));
     comboColor->setCurrentIndex(trk.getColorIdx());
     toolLock->setChecked(isReadOnly);
 

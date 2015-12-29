@@ -187,10 +187,10 @@ public:
 
     /**
        @brief get a summary of the track
-       @param allowEdit if true the track name is a link to allow interactions like edit
+       @param showName  if true the track name is shown
        @return
      */
-    QString getInfo(bool allowEdit = false) const;
+    QString getInfo(bool showName = true) const override;
     /// get a summary of a selected range
     QString getInfoRange();
     /// get a summary of a selected range defined by two track points

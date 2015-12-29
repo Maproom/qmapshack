@@ -348,14 +348,24 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
-QString CGisItemTrk::getInfo(bool allowEdit) const
+QString CGisItemTrk::getInfo(bool showName) const
 {
     QString val1, unit1, val2, unit2;
     QString str = "<div>";
 
+    if(showName)
+    {
+        str += "<b>" + getName() + "</b>";
+    }
+
     if(cntVisiblePoints == 0)
     {
         return str + "</div>";
+    }
+
+    if(showName)
+    {
+        str += "<br />";
     }
 
     IUnit::self().meter2distance(totalDistance, val1, unit1);

@@ -40,7 +40,7 @@ CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget *parent)
     connect(lineName,    &CLineEdit::textEdited,          this, &CDetailsRte::slotNameChanged);
     connect(lineName,    &CLineEdit::editingFinished,     this, &CDetailsRte::slotNameChangeFinished);
     connect(toolLock,    &QToolButton::toggled,           this, &CDetailsRte::slotChangeReadOnlyMode);
-    connect(textCmtDesc, &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsRte::*)(const QUrl&)   >(&CDetailsRte::slotLinkActivated));
+    connect(textCmtDesc, &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsRte::*)(const QUrl&)>(&CDetailsRte::slotLinkActivated));
     connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsRte::setupGui);
 }
 
@@ -64,7 +64,7 @@ void CDetailsRte::setupGui()
     lineName->setText(rte.getName());
     lineName->setReadOnly(isReadOnly);
 
-    labelInfo->setText(rte.getInfo(true));
+    labelInfo->setText(rte.getInfo(false));
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, rte.getComment(), rte.getDescription(), rte.getLinks()));

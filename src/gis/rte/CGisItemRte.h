@@ -111,7 +111,7 @@ public:
         return rte.name.isEmpty() ? noName : rte.name;
     }
 
-    QString getInfo(bool allowEdit = false) const;
+    QString getInfo(bool showName = true) const;
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
     QPointF getPointCloseBy(const QPoint& screenPos);
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);

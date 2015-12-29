@@ -253,10 +253,15 @@ void CGisItemRte::setLinks(const QList<link_t>& links)
 
 
 
-QString CGisItemRte::getInfo(bool allowEdit) const
+QString CGisItemRte::getInfo(bool showName) const
 {
     QString val1, unit1, val2, unit2;
     QString str = "<div>";
+
+    if(showName)
+    {
+        str += "<b>" + getName() + "</b><br />";
+    }
 
     if(totalDistance != NOFLOAT)
     {

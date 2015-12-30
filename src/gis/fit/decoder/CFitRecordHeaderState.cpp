@@ -1,20 +1,20 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
 #include "gis/fit/decoder/CFitRecordHeaderState.h"
 #include "gis/fit/defs/fit_fields.h"
@@ -51,13 +51,16 @@ static const uint8_t RecordHeaderTimeMesgMask =  ((uint8_t) 0x60); // bit 5-6: 0
 static const uint8_t RecordHeaderTimeMesgShift = 5;
 
 
-decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte) {
-    if ((dataByte & RecordHeaderTypeBit) != 0) {
+decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte)
+{
+    if ((dataByte & RecordHeaderTypeBit) != 0)
+    {
         // this is a compressed timestamp header
         uint8_t localMessageType = (dataByte & RecordHeaderTimeMesgMask) >> RecordHeaderTimeMesgShift;
         CFitDefinitionMessage* def = defintion(localMessageType);
 
-        if (! def->hasField(eRecordTimestamp)) {
+        if (!def->hasField(eRecordTimestamp))
+        {
             // create dummy definition field for timestamp
             // later on passed timestamp is a uint32, therefore a 4 byte type is created.
             // remark on enum for timestamp (RecordTimestamp:
@@ -73,14 +76,17 @@ decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte) {
 
         return eDecoderStateFieldData;
     }
-    else {
+    else
+    {
         uint8_t localMessageType = dataByte & RecordHeaderMesgMask;
-        if ((dataByte & RecordHeaderDefBit) != 0) {
+        if ((dataByte & RecordHeaderDefBit) != 0)
+        {
             // this is a definition message
             addDefinition(CFitDefinitionMessage(localMessageType));
             return eDecoderStateRecordContent;
         }
-        else {
+        else
+        {
             // this is a data message
             addMessage(*defintion(localMessageType));
             // go to eDecoderStateFieldData

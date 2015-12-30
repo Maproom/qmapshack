@@ -1,26 +1,26 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
 #ifndef CFITSTATE_H
 #define CFITSTATE_H
 
-#include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
+#include "gis/fit/decoder/CFitMessage.h"
 
 #include <QtCore>
 
@@ -34,7 +34,8 @@
 #define FITDEBUG(level, cmd) if(FITDEBUGLVL >= level) { cmd; }
 
 
-typedef enum {
+typedef enum
+{
     eDecoderStateFileHeader,
     eDecoderStateRecord,
     eDecoderStateRecordContent,
@@ -44,7 +45,8 @@ typedef enum {
     eDecoderStateEnd
 } decode_state_e;
 
-class CFitDecoderState {
+class CFitDecoderState
+{
 public:
     struct shared_state_data
     {

@@ -1,20 +1,20 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 
@@ -25,11 +25,13 @@ static const uint8_t ArchitecureEndianMask = 0x01;
 
 
 CFitDefinitionMessage::CFitDefinitionMessage()
-        : CFitDefinitionMessage(LocalMesgNrInvalid) {}
+    : CFitDefinitionMessage(LocalMesgNrInvalid)
+{
+}
 
 CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
-: globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields), localMesgNr(copy.localMesgNr),
-  fields(copy.fields)
+    : globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields), localMesgNr(copy.localMesgNr),
+    fields(copy.fields)
 {
     messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
     for(CFitFieldDefinition& field : fields)
@@ -39,7 +41,7 @@ CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
 }
 
 CFitDefinitionMessage::CFitDefinitionMessage(uint8_t localMesgNr)
-        : architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields()
+    : architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields()
 {
     setGlobalMesgNr(GlobalMesgNrInvalid);
 }
@@ -95,7 +97,9 @@ bool CFitDefinitionMessage::hasField(const uint8_t fieldNum) const
     for (int i=0; i< fields.size(); i++)
     {
         if (fieldNum == fields[i].getDefNr())
+        {
             return true;
+        }
     }
     return false;
 }
@@ -105,7 +109,9 @@ static const CFitFieldDefinition* dummyDefinitionField = nullptr;
 const CFitFieldDefinition& invalidDefinitionField()
 {
     if(!dummyDefinitionField)
+    {
         dummyDefinitionField = new CFitFieldDefinition();
+    }
     return *dummyDefinitionField;
 }
 
@@ -114,7 +120,9 @@ const CFitFieldDefinition& CFitDefinitionMessage::getField(const uint8_t fieldNu
     for (int i=0; i< fields.size(); i++)
     {
         if (fieldNum == fields[i].getDefNr())
-            return (fields[i]);
+        {
+            return fields[i];
+        }
     }
     return invalidDefinitionField();
 }
@@ -124,7 +132,7 @@ const CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const uint16_t
 {
     if (index < fields.size())
     {
-        return (fields[index]);
+        return fields[index];
     }
     return invalidDefinitionField();
 }
@@ -134,11 +142,11 @@ QStringList CFitDefinitionMessage::messageInfo() const
 {
     QStringList list;
     list << QString("Definition %1 (%2) local nr %3, arch %4, # fields %5")
-            .arg(profile()->getName())
-            .arg(getGlobalMesgNr())
-            .arg(getLocalMesgNr())
-            .arg(getArchitectureBit())
-            .arg(getNrOfFields());
+        .arg(profile()->getName())
+        .arg(getGlobalMesgNr())
+        .arg(getLocalMesgNr())
+        .arg(getArchitectureBit())
+        .arg(getNrOfFields());
 
     for(const CFitFieldDefinition& field: fields)
     {

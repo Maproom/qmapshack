@@ -16,18 +16,18 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
+#include "gis/CGisListWks.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/fit/CFitStream.h"
 #include "gis/fit/defs/fit_enums.h"
 #include "gis/fit/defs/fit_fields.h"
-#include "gis/CGisListWks.h"
-#include "gis/wpt/CGisItemWpt.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -43,7 +43,7 @@ CFitProject::CFitProject(const QString &filename, CGisListWks *parent)
 
 
 CFitProject::CFitProject(const QString &filename, IDevice *parent)
-: IGisProject(eTypeFit, filename, parent)
+    : IGisProject(eTypeFit, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/FitProject.png"));
     blockUpdateItems(true);
@@ -56,7 +56,7 @@ void CFitProject::loadFit(const QString & filename)
     // create file instance
     QFile file(filename);
     qDebug() << "FIT file " << filename;
-    
+
     // if the file does not exist, the filename is assumed to be a name for a new project
     if(!file.exists())
     {
@@ -66,13 +66,13 @@ void CFitProject::loadFit(const QString & filename)
         valid = true;
         return;
     }
-    
+
     if(!file.open(QIODevice::ReadOnly))
     {
         QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
         return;
     }
-    
+
     CFitStream in(file);
     if(in.decodeFile())
     {
@@ -89,18 +89,18 @@ void CFitProject::loadFit(const QString & filename)
         {
             new CGisItemWpt(in, this);
         }
-         // ql:area is not directly available in FIT (could be calculated)
+        // ql:area is not directly available in FIT (could be calculated)
     }
     else
     {
         qWarning() << "FIT decoding error for "<< filename;
         QMessageBox::critical(&CMainWindow::self(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
     }
-    
+
     file.close();
-    
+
     markAsSaved();
-    
+
     setupName(QFileInfo(filename).baseName().replace("_", " "));
     setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
@@ -108,6 +108,5 @@ void CFitProject::loadFit(const QString & filename)
 
 CFitProject::~CFitProject()
 {
-
 }
 

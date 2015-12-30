@@ -1,39 +1,43 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
-#include "gis/fit/defs/fit_const.h"
-#include "gis/fit/defs/CFitProfileLockup.h"
-#include "gis/fit/decoder/CFitField.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
+#include "gis/fit/decoder/CFitField.h"
+#include "gis/fit/defs/CFitProfileLockup.h"
+#include "gis/fit/defs/fit_const.h"
 
 
 CFitField::CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, bool valid)
-:  fieldProfile(profile), globalMesgNr(fieldDefinition.parent().getGlobalMesgNr()), fieldDefNr(fieldDefinition.getDefNr()),
-   baseType(&fieldDefinition.getBaseType()), valid(valid)
-{ }
+    :  fieldProfile(profile), globalMesgNr(fieldDefinition.parent().getGlobalMesgNr()), fieldDefNr(fieldDefinition.getDefNr()),
+    baseType(&fieldDefinition.getBaseType()), valid(valid)
+{
+}
 
 
 CFitField::CFitField(const CFitField& copy)
-: fieldProfile(copy.fieldProfile), globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType), valid(copy.valid)
-{ }
+    : fieldProfile(copy.fieldProfile), globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType), valid(copy.valid)
+{
+}
 
 CFitField::CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldProfile* profile, bool valid)
-: fieldProfile(profile), globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr),baseType(&profile->getBaseType()), valid(valid) { }
+    : fieldProfile(profile), globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr),baseType(&profile->getBaseType()), valid(valid)
+{
+}
 
 CFitField::CFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(GlobalMesgNrInvalid, FieldDefNrInvalid))
 {
@@ -45,15 +49,15 @@ CFitField::CFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(Glob
 
 QString CFitField::fieldInfo() const
 {
-        QString name = profile().getName();
-        QString str = QString("%1 %2 (%3): %4 %5 %6 %7")
-                .arg(profile().getTyp())
-                .arg(name)
-                .arg(getFieldDefNr())
-                .arg(getString())
-                .arg(profile().getUnits())
-                .arg(getBaseType().name())
-                .arg(valid ? "" : "<invalid>");
+    QString name = profile().getName();
+    QString str = QString("%1 %2 (%3): %4 %5 %6 %7")
+                  .arg(profile().getTyp())
+                  .arg(name)
+                  .arg(getFieldDefNr())
+                  .arg(getString())
+                  .arg(profile().getUnits())
+                  .arg(getBaseType().name())
+                  .arg(valid ? "" : "<invalid>");
     return str;
 }
 
@@ -66,7 +70,8 @@ uint8_t CFitField::getFieldDefNr() const
 {
     return fieldDefNr;
 }
-bool CFitField::isValidValue() const {
+bool CFitField::isValidValue() const
+{
     return valid;
 }
 
@@ -138,7 +143,7 @@ int CFitByteField::getSIntValue() const
 
 unsigned int CFitByteField::getUIntValue() const
 {
-     return value.toUInt();
+    return value.toUInt();
 }
 
 double CFitByteField::getDoubleValue() const

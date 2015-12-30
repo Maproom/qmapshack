@@ -1,20 +1,20 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
 #include "gis/fit/defs/CFitProfileLockup.h"
 #include "gis/fit/defs/fit_enums.h"
@@ -1195,7 +1195,8 @@ void initMonitoring(QMap<uint16_t, CFitProfile*>& profiles)
     profiles[eMesgNumMonitoring]->addField(new CFitFieldProfile("duration", &Uint32Type, eMonitoringDuration, 0, 0, "s"));
 }
 
-void initMemoGlob(QMap<uint16_t, CFitProfile*>& profiles) {
+void initMemoGlob(QMap<uint16_t, CFitProfile*>& profiles)
+{
     profiles[eMesgNumMemoGlob] = new CFitProfile("memo_glob", eMesgNumMemoGlob);
     profiles[eMesgNumMemoGlob]->addField(new CFitFieldProfile("part_index", &Uint32Type, eMemoGlobPartIndex, 0, 0, ""));
     profiles[eMesgNumMemoGlob]->addField(new CFitFieldProfile("memo", &ByteType, eMemoGlobMemo, 0, 0, ""));
@@ -1205,8 +1206,8 @@ void initMemoGlob(QMap<uint16_t, CFitProfile*>& profiles) {
 // ----------- end generated code -----------
 
 
-QMap<uint16_t, CFitProfile*> initProfiles() {
-
+QMap<uint16_t, CFitProfile*> initProfiles()
+{
     QMap<uint16_t, CFitProfile*> allProfiles;
     initFileId(allProfiles);
     initFileCreator(allProfiles);
@@ -1287,8 +1288,9 @@ const CFitProfile* CFitProfileLockup::getProfile(uint16_t globalMesgNr)
 
 const CFitFieldProfile* CFitProfileLockup::getFieldForProfile(uint16_t globalMesgNr, uint8_t fieldDefNr)
 {
-    if (allProfiles.contains(globalMesgNr)) {
-        return  allProfiles[globalMesgNr]->getField(fieldDefNr);
+    if (allProfiles.contains(globalMesgNr))
+    {
+        return allProfiles[globalMesgNr]->getField(fieldDefNr);
     }
     return allProfiles[GlobalMesgNrInvalid]->getField(FieldDefNrInvalid);
 }

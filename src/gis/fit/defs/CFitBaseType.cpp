@@ -1,29 +1,30 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
 #include "gis/fit/defs/CFitBaseType.h"
 
 CFitBaseType::CFitBaseType() : CFitBaseType(TypeInvalid, 0, 0, "invalid")
-{}
+{
+}
 
 
 CFitBaseType::CFitBaseType(BaseTypeNr baseTypeNr, uint8_t* invalidBytes, uint8_t size, QString name)
-: typeSize(size), baseTypeNr(baseTypeNr), namestr(name)
+    : typeSize(size), baseTypeNr(baseTypeNr), namestr(name)
 {
     this->invalidBytes = new uint8_t[size];
     memcpy(this->invalidBytes, invalidBytes, size);
@@ -39,7 +40,7 @@ uint8_t CFitBaseType::size() const
     return typeSize;
 }
 
-BaseTypeNr  CFitBaseType::nr() const
+BaseTypeNr CFitBaseType::nr() const
 {
     return baseTypeNr;
 }
@@ -90,7 +91,7 @@ bool CFitBaseType::isByte() const
 
 QString CFitBaseType::name() const
 {
-     return namestr;
+    return namestr;
 }
 
 template <class T>
@@ -145,7 +146,9 @@ QMap<uint8_t, CFitBaseType> CFitBaseTypeMap::baseTypes = buildBaseTypeMap();
 CFitBaseType* CFitBaseTypeMap::get(uint8_t nr)
 {
     if (baseTypes.contains(nr & BaseTypeNumMask))
+    {
         return &baseTypes[nr & BaseTypeNumMask];
+    }
 
     return &InvalidType;
 }

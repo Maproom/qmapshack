@@ -47,7 +47,7 @@ public:
         return false;
     }
 
-    
+
 private:
     void loadFit(const QString & filename);
 };

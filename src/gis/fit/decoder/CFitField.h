@@ -1,29 +1,29 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
 #ifndef CFITFIELD_H
 #define CFITFIELD_H
 
-#include "gis/fit/defs/CFitProfile.h"
-#include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/decoder/CFitFieldDefinition.h"
+#include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/CFitProfile.h"
 
-#include<QtCore>
+#include <QtCore>
 
 
 class CFitField
@@ -64,9 +64,9 @@ class CFitIntField : public CFitField
 {
 public:
     CFitIntField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, T value, bool valid)
-            : CFitField(fieldDefinition, profile, valid), value(value) {};
+        : CFitField(fieldDefinition, profile, valid), value(value) {};
     CFitIntField(const CFitField& field, const CFitFieldProfile* profile, T value, bool valid)
-            : CFitField(field.getGlobalMesgNr(), field.getFieldDefNr(), profile, valid), value(value) {}
+        : CFitField(field.getGlobalMesgNr(), field.getFieldDefNr(), profile, valid), value(value) {}
     CFitIntField() : CFitField(), value(0) {};
 
     virtual QString fieldInfo() const override;
@@ -85,9 +85,9 @@ template <class T>
 QString CFitIntField<T>::fieldInfo() const
 {
     QString str = QString(" (%1/%2-%3)")
-            .arg(value)
-            .arg(profile().getScale())
-            .arg( profile().getOffset());
+                  .arg(value)
+                  .arg(profile().getScale())
+                  .arg( profile().getOffset());
     return CFitField::fieldInfo() +  str;
 }
 
@@ -113,7 +113,7 @@ double CFitIntField<T>::getDoubleValue() const
     if(profile().hasScaleAndOffset())
     {
         // scale and offset is only for int / sint types
-        return  value / profile().getScale() - profile().getOffset();
+        return value / profile().getScale() - profile().getOffset();
     }
     return value;
 }
@@ -123,7 +123,7 @@ class CFitFloatField : public CFitField
 {
 public:
     CFitFloatField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, double value, bool valid)
-            : CFitField(fieldDefinition, profile, valid), value(value) {}
+        : CFitField(fieldDefinition, profile, valid), value(value) {}
 
     CFitFloatField() : CFitField(), value(0) {}
 
@@ -141,10 +141,11 @@ class CFitStringField : public CFitField
 {
 public:
     CFitStringField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QString value, bool valid)
-            : CFitField(fieldDefinition, profile, valid), value(value) {};
+        : CFitField(fieldDefinition, profile, valid), value(value) {};
     CFitStringField() :  CFitField(), value("") {}
 
-    QString getString() const override {
+    QString getString() const override
+    {
         return value;
     }
     virtual QByteArray getBytes() const override;
@@ -160,7 +161,7 @@ class CFitByteField : public CFitField
 {
 public:
     CFitByteField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QByteArray value, bool valid)
-            : CFitField(fieldDefinition, profile, valid), value(value)  {};
+        : CFitField(fieldDefinition, profile, valid), value(value)  {};
     CFitByteField() :  CFitField(), value()  {}
 
     virtual QString getString() const override;

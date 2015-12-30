@@ -1,29 +1,31 @@
 /**********************************************************************************************
- Copyright (C) 2015 Ivo Kronenberg
+   Copyright (C) 2015 Ivo Kronenberg
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- **********************************************************************************************/
+**********************************************************************************************/
 
 #include "gis/fit/decoder/CFitDecoderState.h"
 
 
-decode_state_e CFitDecoderState::processByte(uint8_t &dataByte) {
+decode_state_e CFitDecoderState::processByte(uint8_t &dataByte)
+{
     incFileBytesRead();
     buildCrc(dataByte);
     decode_state_e state = process(dataByte);
-    if (bytesLeftToRead() == 2) {
+    if (bytesLeftToRead() == 2)
+    {
         if (state != eDecoderStateRecord)
         {
             // we come from a wrong state...
@@ -39,10 +41,10 @@ decode_state_e CFitDecoderState::processByte(uint8_t &dataByte) {
 void CFitDecoderState::buildCrc(uint8_t byte)
 {
     static const uint16_t crc_table[16] =
-            {
-                    0x0000, 0xCC01, 0xD801, 0x1400, 0xF001, 0x3C00, 0x2800, 0xE401,
-                    0xA001, 0x6C00, 0x7800, 0xB401, 0x5000, 0x9C01, 0x8801, 0x4400
-            };
+    {
+        0x0000, 0xCC01, 0xD801, 0x1400, 0xF001, 0x3C00, 0x2800, 0xE401,
+        0xA001, 0x6C00, 0x7800, 0xB401, 0x5000, 0x9C01, 0x8801, 0x4400
+    };
     uint16_t tmp;
     uint16_t crc = data.crc;
     // compute checksum of lower four bits of byte
@@ -62,7 +64,8 @@ uint16_t CFitDecoderState::getCrc()
     return data.crc;
 }
 
-CFitMessage* CFitDecoderState::latestMessage() {
+CFitMessage* CFitDecoderState::latestMessage()
+{
     return data.lastMessage;
 }
 
@@ -92,14 +95,16 @@ uint32_t CFitDecoderState::getTimestamp()
     return data.timestamp;
 }
 
-void CFitDecoderState::addMessage(const CFitDefinitionMessage& definition) {
+void CFitDecoderState::addMessage(const CFitDefinitionMessage& definition)
+{
     data.messages.append(CFitMessage(definition));
     data.lastMessage = &data.messages.last();
 }
 
-void CFitDecoderState::addDefinition(CFitDefinitionMessage definition) {
+void CFitDecoderState::addDefinition(CFitDefinitionMessage definition)
+{
     data.defintions[definition.getLocalMesgNr()] = definition;
-    data.lastDefintion = &data.defintions[definition.getLocalMesgNr()] ;
+    data.lastDefintion = &data.defintions[definition.getLocalMesgNr()];
 }
 
 void CFitDecoderState::endDefintion()
@@ -107,15 +112,18 @@ void CFitDecoderState::endDefintion()
     data.defintionHistory.append(*data.lastDefintion);
 }
 
-CFitDefinitionMessage* CFitDecoderState::defintion(uint32_t localMessageType) {
+CFitDefinitionMessage* CFitDecoderState::defintion(uint32_t localMessageType)
+{
     return &(data.defintions[localMessageType]);
 }
 
-void CFitDecoderState::setFileLength(uint32_t fileLength) {
+void CFitDecoderState::setFileLength(uint32_t fileLength)
+{
     data.fileLength = fileLength;
 }
 
-uint32_t CFitDecoderState::bytesLeftToRead() {
+uint32_t CFitDecoderState::bytesLeftToRead()
+{
     return data.fileLength - data.fileBytesRead;
 }
 

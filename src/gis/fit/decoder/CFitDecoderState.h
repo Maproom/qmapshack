@@ -48,7 +48,7 @@ typedef enum
 class CFitDecoderState
 {
 public:
-    struct shared_state_data
+    struct shared_state_data_t
     {
         uint16_t crc;
         uint32_t fileLength;
@@ -62,7 +62,7 @@ public:
         QList<CFitMessage> messages;
     };
 
-    CFitDecoderState(shared_state_data &data, decode_state_e stateClass) : data(data) { };
+    CFitDecoderState(shared_state_data_t &data, decode_state_e stateClass) : data(data) { };
     virtual ~CFitDecoderState() {};
 
     virtual void reset() = 0;
@@ -92,7 +92,7 @@ protected:
 private:
     void buildCrc(uint8_t byte);
 
-    shared_state_data &data;
+    shared_state_data_t &data;
 };
 
 #endif // CFITSTATE_H

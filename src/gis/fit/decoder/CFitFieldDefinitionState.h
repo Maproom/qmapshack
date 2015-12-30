@@ -24,7 +24,7 @@
 class CFitFieldDefinitionState : public CFitDecoderState
 {
 public:
-    CFitFieldDefinitionState(shared_state_data &data) : CFitDecoderState(data, eDecoderStateFieldDef) { reset(); };
+    CFitFieldDefinitionState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateFieldDef) { reset(); };
     virtual ~CFitFieldDefinitionState() {};
 
     virtual void reset();

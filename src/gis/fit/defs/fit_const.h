@@ -27,8 +27,8 @@ static const uint8_t FieldDefNrInvalid = 255;
 
 typedef enum
 {
-    ArchEndianLittle = 0,
-    ArchEndianBig = 1
-}Arch;
+    eFitArchEndianLittle = 0,
+    eFitArchEndianBig = 1
+}fit_arch_e;
 
 #endif // FIT_CONST_H

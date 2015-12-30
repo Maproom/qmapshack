@@ -26,7 +26,7 @@ static const int FitMaxFieldSize=255;
 class CFitFieldDataState : public CFitDecoderState
 {
 public:
-    CFitFieldDataState(shared_state_data &data) : CFitDecoderState(data, eDecoderStateFieldData) { reset(); };
+    CFitFieldDataState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateFieldData) { reset(); };
     virtual ~CFitFieldDataState() {};
     virtual void reset();
     virtual decode_state_e process(uint8_t &dataByte);

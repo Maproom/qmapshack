@@ -43,7 +43,7 @@ private:
     QMap<decode_state_e, CFitDecoderState*> stateMap;
 
     // shared data passed along the decoder state instances.
-    CFitDecoderState::shared_state_data data;
+    CFitDecoderState::shared_state_data_t data;
 };
 
 

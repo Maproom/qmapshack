@@ -24,7 +24,7 @@
 class CFitRecordContentState : public CFitDecoderState
 {
 public:
-    CFitRecordContentState(shared_state_data &data) : CFitDecoderState(data, eDecoderStateRecordContent) { reset(); };
+    CFitRecordContentState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateRecordContent) { reset(); };
     virtual ~CFitRecordContentState() {};
 
     virtual void reset();

@@ -147,7 +147,7 @@ QByteArray CFitByteDataTransformer::getBytes(uint8_t* rawData, uint8_t length)
 
 void CFitByteDataTransformer::swapFieldData(const CFitFieldDefinition& fieldDef, uint8_t* fieldData)
 {
-    if (fieldDef.getEndianAbilityFlag() && (fieldDef.parent().getArchitectureBit() != ArchEndianLittle))
+    if (fieldDef.getEndianAbilityFlag() && (fieldDef.parent().getArchitectureBit() != eFitArchEndianLittle))
     {
         // Swap the bytes for each element.
         int typeSize = fieldDef.getBaseType().size();

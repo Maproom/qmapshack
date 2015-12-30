@@ -57,11 +57,11 @@ decode_state_e CFitRecordContentState::process(uint8_t &dataByte)
         // global message number
         globalMesgNr = globalMesgNr | ((uint16_t) dataByte << 8);
 
-        if (architecture == ArchEndianBig)
+        if (architecture == eFitArchEndianBig)
         {
             globalMesgNr = (globalMesgNr >> 8) | ((globalMesgNr & 0xFF) << 8);
         }
-        else if (architecture != ArchEndianLittle)
+        else if (architecture != eFitArchEndianLittle)
         {
             throw QString("Architecture %1 not supported.").arg(architecture);
         }

@@ -24,7 +24,7 @@
 class CFitCrcState : public CFitDecoderState
 {
 public:
-    CFitCrcState(shared_state_data &data) : CFitDecoderState(data, eDecoderStateFileCrc) { reset(); };
+    CFitCrcState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateFileCrc) { reset(); };
     virtual ~CFitCrcState() {};
 
     virtual void reset();

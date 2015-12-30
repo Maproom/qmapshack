@@ -45,7 +45,7 @@ typedef enum
     eDecoderStateEnd
 } decode_state_e;
 
-class CFitDecoderState
+class IFitDecoderState
 {
 public:
     struct shared_state_data_t
@@ -62,8 +62,8 @@ public:
         QList<CFitMessage> messages;
     };
 
-    CFitDecoderState(shared_state_data_t &data, decode_state_e stateClass) : data(data) { };
-    virtual ~CFitDecoderState() {};
+    IFitDecoderState(shared_state_data_t &data, decode_state_e stateClass) : data(data) { };
+    virtual ~IFitDecoderState() {};
 
     virtual void reset() = 0;
     decode_state_e processByte(uint8_t &dataByte);

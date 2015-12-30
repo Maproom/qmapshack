@@ -36,7 +36,7 @@ CFitMessage::CFitMessage()
 
 CFitMessage::~CFitMessage()
 {
-    for(CFitField* field : fields)
+    for(IFitField * field : fields)
     {
         delete field;
     }
@@ -55,7 +55,7 @@ QStringList CFitMessage::messageInfo() const
         .arg(getGlobalMesgNr())
         .arg(getLocalMesgNr());
 
-    for(const CFitField* field: fields)
+    for(const IFitField * field: fields)
     {
         list << field->fieldInfo();
     }
@@ -77,17 +77,17 @@ bool CFitMessage::hasField(const uint8_t fieldDefNum) const
 }
 
 // dummy field for unknown field defintion nr.
-static const CFitField* dummyField = nullptr;
-const CFitField& invalidField()
+static const IFitField * dummyField = nullptr;
+const IFitField & invalidField()
 {
     if(!dummyField)
     {
-        dummyField = new CFitField();
+        dummyField = new IFitField();
     }
     return *dummyField;
 }
 
-const CFitField& CFitMessage::getField(const uint8_t fieldDefNum) const
+const IFitField & CFitMessage::getField(const uint8_t fieldDefNum) const
 {
     if(hasField(fieldDefNum))
     {
@@ -96,7 +96,7 @@ const CFitField& CFitMessage::getField(const uint8_t fieldDefNum) const
     return invalidField();
 }
 
-void CFitMessage::addField(CFitField* field)
+void CFitMessage::addField(IFitField * field)
 {
     fields.insert(field->getFieldDefNr(), field);
 }

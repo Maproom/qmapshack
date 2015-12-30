@@ -41,7 +41,7 @@ decode_state_e CFitFieldDataState::process(uint8_t &dataByte)
         // all bytes are read for current field
 
         // new field with data
-        CFitField* f = CFitFieldBuilder::buildField(fieldDef, fieldData, mesg);
+        IFitField * f = CFitFieldBuilder::buildField(fieldDef, fieldData, mesg);
         mesg.addField(f);
 
         // The special case time record.

@@ -17,29 +17,29 @@
 **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
-#include "gis/fit/decoder/CFitField.h"
+#include "gis/fit/decoder/IFitField.h"
 #include "gis/fit/defs/CFitProfileLockup.h"
 #include "gis/fit/defs/fit_const.h"
 
 
-CFitField::CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, bool valid)
+IFitField::IFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, bool valid)
     :  fieldProfile(profile), globalMesgNr(fieldDefinition.parent().getGlobalMesgNr()), fieldDefNr(fieldDefinition.getDefNr()),
     baseType(&fieldDefinition.getBaseType()), valid(valid)
 {
 }
 
 
-CFitField::CFitField(const CFitField& copy)
+IFitField::IFitField(const IFitField & copy)
     : fieldProfile(copy.fieldProfile), globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr), baseType(copy.baseType), valid(copy.valid)
 {
 }
 
-CFitField::CFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldProfile* profile, bool valid)
+IFitField::IFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldProfile* profile, bool valid)
     : fieldProfile(profile), globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr),baseType(&profile->getBaseType()), valid(valid)
 {
 }
 
-CFitField::CFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(GlobalMesgNrInvalid, FieldDefNrInvalid))
+IFitField::IFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(GlobalMesgNrInvalid, FieldDefNrInvalid))
 {
     globalMesgNr = GlobalMesgNrInvalid;
     fieldDefNr = FieldDefNrInvalid;
@@ -47,7 +47,7 @@ CFitField::CFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(Glob
     valid = false;
 }
 
-QString CFitField::fieldInfo() const
+QString IFitField::fieldInfo() const
 {
     QString name = profile().getName();
     QString str = QString("%1 %2 (%3): %4 %5 %6 %7")
@@ -61,22 +61,22 @@ QString CFitField::fieldInfo() const
     return str;
 }
 
-uint16_t CFitField::getGlobalMesgNr() const
+uint16_t IFitField::getGlobalMesgNr() const
 {
     return globalMesgNr;
 }
 
-uint8_t CFitField::getFieldDefNr() const
+uint8_t IFitField::getFieldDefNr() const
 {
     return fieldDefNr;
 }
-bool CFitField::isValidValue() const
+bool IFitField::isValidValue() const
 {
     return valid;
 }
 
 
-const CFitBaseType& CFitField::getBaseType() const
+const CFitBaseType&IFitField::getBaseType() const
 {
     return *baseType;
 }

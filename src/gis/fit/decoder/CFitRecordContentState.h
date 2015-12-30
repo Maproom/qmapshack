@@ -19,12 +19,12 @@
 #ifndef CFITRECORDCONTENTSTATE_H
 #define CFITRECORDCONTENTSTATE_H
 
-#include "gis/fit/decoder/CFitDecoderState.h"
+#include "gis/fit/decoder/IFitDecoderState.h"
 
-class CFitRecordContentState : public CFitDecoderState
+class CFitRecordContentState : public IFitDecoderState
 {
 public:
-    CFitRecordContentState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateRecordContent) { reset(); };
+    CFitRecordContentState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateRecordContent) { reset(); };
     virtual ~CFitRecordContentState() {};
 
     virtual void reset();

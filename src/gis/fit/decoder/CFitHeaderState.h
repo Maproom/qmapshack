@@ -19,12 +19,12 @@
 #ifndef CFITHEADERSTATE_H
 #define CFITHEADERSTATE_H
 
-#include "gis/fit/decoder/CFitDecoderState.h"
+#include "gis/fit/decoder/IFitDecoderState.h"
 
-class CFitHeaderState : public CFitDecoderState
+class CFitHeaderState : public IFitDecoderState
 {
 public:
-    CFitHeaderState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateFileHeader) { reset(); };
+    CFitHeaderState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFileHeader) { reset(); };
     virtual ~CFitHeaderState() {};
 
     virtual void reset();

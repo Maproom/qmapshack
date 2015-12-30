@@ -19,12 +19,12 @@
 #ifndef CFITFIELDDEFINITIONSTATE_H
 #define CFITFIELDDEFINITIONSTATE_H
 
-#include "gis/fit/decoder/CFitDecoderState.h"
+#include "gis/fit/decoder/IFitDecoderState.h"
 
-class CFitFieldDefinitionState : public CFitDecoderState
+class CFitFieldDefinitionState : public IFitDecoderState
 {
 public:
-    CFitFieldDefinitionState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateFieldDef) { reset(); };
+    CFitFieldDefinitionState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldDef) { reset(); };
     virtual ~CFitFieldDefinitionState() {};
 
     virtual void reset();

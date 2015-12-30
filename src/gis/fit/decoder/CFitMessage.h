@@ -20,7 +20,7 @@
 #define CFITMESSAGE_H
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
-#include "gis/fit/decoder/CFitField.h"
+#include "gis/fit/decoder/IFitField.h"
 
 #include <QtCore>
 
@@ -38,9 +38,9 @@ public:
     uint8_t getLocalMesgNr() const;
 
     bool hasField(const uint8_t fieldDefNum) const;
-    const CFitField& getField(const uint8_t fieldDefNum) const;
+    const IFitField & getField(const uint8_t fieldDefNum) const;
     bool isFieldValueValid(const uint8_t fieldDefNum) const;
-    void addField(CFitField* field);
+    void addField(IFitField * field);
 
     QString getFieldString(const uint8_t fieldDefNum) const;
     QByteArray getFieldBytes(const uint8_t fieldDefNum) const;
@@ -50,11 +50,11 @@ public:
 
     const CFitProfile& profile() const { return *messageProfile; }
     QStringList messageInfo() const;
-    const QList<CFitField*> getFields() const { return fields.values(); }
+    const QList<IFitField *> getFields() const { return fields.values(); }
 
 
 private:
-    QMap<uint8_t, CFitField*> fields;
+    QMap<uint8_t, IFitField *> fields;
     uint16_t globalMesgNr;
     uint8_t localMesgNr;
     const CFitProfile* messageProfile;

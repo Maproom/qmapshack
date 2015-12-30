@@ -20,7 +20,7 @@
 #define CFITDECODER_H
 
 #include "gis/fit/decoder/CFitDecoder.h"
-#include "gis/fit/decoder/CFitDecoderState.h"
+#include "gis/fit/decoder/IFitDecoderState.h"
 #include "gis/fit/decoder/CFitMessage.h"
 
 #include <QtCore>
@@ -40,10 +40,10 @@ private:
     void printDebugInfo();
 
     // map containing all states for the decoder. Needs to be pointer because decoder state is abstract class
-    QMap<decode_state_e, CFitDecoderState*> stateMap;
+    QMap<decode_state_e, IFitDecoderState *> stateMap;
 
     // shared data passed along the decoder state instances.
-    CFitDecoderState::shared_state_data_t data;
+    IFitDecoderState::shared_state_data_t data;
 };
 
 

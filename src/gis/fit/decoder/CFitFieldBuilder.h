@@ -21,24 +21,24 @@
 #define CFITFIELDBUILDER_H
 
 
-#include "gis/fit/decoder/CFitField.h"
+#include "gis/fit/decoder/IFitField.h"
 #include "gis/fit/decoder/CFitMessage.h"
 
 class CFitFieldBuilder
 {
 public:
     static void evaluateSubfieldsAndExpandComponents(CFitMessage& mesg);
-    static CFitField* buildField(const CFitFieldDefinition& def, uint8_t* fieldData, const CFitMessage& message);
+    static IFitField * buildField(const CFitFieldDefinition& def, uint8_t* fieldData, const CFitMessage& message);
 
 private:
-    static CFitField* buildSIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildUIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildFloatField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildStringField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
-    static CFitField* buildByteField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static IFitField * buildSIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static IFitField * buildUIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static IFitField * buildFloatField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static IFitField * buildStringField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
+    static IFitField * buildByteField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, uint8_t* fieldData);
 
-    static void evaluateFieldProfile(CFitMessage& mesg, CFitField& field);
-    static void expandComponents(CFitMessage& mesg, const CFitField& field);
+    static void evaluateFieldProfile(CFitMessage& mesg, IFitField & field);
+    static void expandComponents(CFitMessage& mesg, const IFitField & field);
 };
 
 #endif //CFITFIELDBUILDER_H

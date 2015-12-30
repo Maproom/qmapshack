@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "gis/fit/decoder/CFitDecoderState.h"
+#include "gis/fit/decoder/IFitDecoderState.h"
 
 
-decode_state_e CFitDecoderState::processByte(uint8_t &dataByte)
+decode_state_e IFitDecoderState::processByte(uint8_t &dataByte)
 {
     incFileBytesRead();
     buildCrc(dataByte);
@@ -38,7 +38,7 @@ decode_state_e CFitDecoderState::processByte(uint8_t &dataByte)
 }
 
 
-void CFitDecoderState::buildCrc(uint8_t byte)
+void IFitDecoderState::buildCrc(uint8_t byte)
 {
     static const uint16_t crc_table[16] =
     {
@@ -59,17 +59,17 @@ void CFitDecoderState::buildCrc(uint8_t byte)
 }
 
 
-uint16_t CFitDecoderState::getCrc()
+uint16_t IFitDecoderState::getCrc()
 {
     return data.crc;
 }
 
-CFitMessage* CFitDecoderState::latestMessage()
+CFitMessage*IFitDecoderState::latestMessage()
 {
     return data.lastMessage;
 }
 
-CFitDefinitionMessage* CFitDecoderState::latestDefinition()
+CFitDefinitionMessage*IFitDecoderState::latestDefinition()
 {
     return data.lastDefintion;
 }
@@ -77,63 +77,63 @@ CFitDefinitionMessage* CFitDecoderState::latestDefinition()
 
 static const uint8_t RecordHeaderTimeOffsetMask = 0x1F; // bit 0-4: 0001 1111
 
-void CFitDecoderState::setTimestamp(uint32_t fullTimestamp)
+void IFitDecoderState::setTimestamp(uint32_t fullTimestamp)
 {
     data.timestamp = fullTimestamp;
     data.lastTimeOffset = (uint8_t) (data.timestamp & RecordHeaderTimeOffsetMask);
 }
 
-void CFitDecoderState::setTimestampOffset(uint32_t offsetTimestamp)
+void IFitDecoderState::setTimestampOffset(uint32_t offsetTimestamp)
 {
     uint8_t timeOffset = offsetTimestamp & RecordHeaderTimeOffsetMask;
     data.timestamp += (timeOffset - data.lastTimeOffset) & RecordHeaderTimeOffsetMask;
     data.lastTimeOffset = timeOffset;
 }
 
-uint32_t CFitDecoderState::getTimestamp()
+uint32_t IFitDecoderState::getTimestamp()
 {
     return data.timestamp;
 }
 
-void CFitDecoderState::addMessage(const CFitDefinitionMessage& definition)
+void IFitDecoderState::addMessage(const CFitDefinitionMessage& definition)
 {
     data.messages.append(CFitMessage(definition));
     data.lastMessage = &data.messages.last();
 }
 
-void CFitDecoderState::addDefinition(CFitDefinitionMessage definition)
+void IFitDecoderState::addDefinition(CFitDefinitionMessage definition)
 {
     data.defintions[definition.getLocalMesgNr()] = definition;
     data.lastDefintion = &data.defintions[definition.getLocalMesgNr()];
 }
 
-void CFitDecoderState::endDefintion()
+void IFitDecoderState::endDefintion()
 {
     data.defintionHistory.append(*data.lastDefintion);
 }
 
-CFitDefinitionMessage* CFitDecoderState::defintion(uint32_t localMessageType)
+CFitDefinitionMessage*IFitDecoderState::defintion(uint32_t localMessageType)
 {
     return &(data.defintions[localMessageType]);
 }
 
-void CFitDecoderState::setFileLength(uint32_t fileLength)
+void IFitDecoderState::setFileLength(uint32_t fileLength)
 {
     data.fileLength = fileLength;
 }
 
-uint32_t CFitDecoderState::bytesLeftToRead()
+uint32_t IFitDecoderState::bytesLeftToRead()
 {
     return data.fileLength - data.fileBytesRead;
 }
 
 
-void CFitDecoderState::resetFileBytesRead()
+void IFitDecoderState::resetFileBytesRead()
 {
     data.fileBytesRead = 0;
 }
 
-void CFitDecoderState::incFileBytesRead()
+void IFitDecoderState::incFileBytesRead()
 {
     data.fileBytesRead++;
 }

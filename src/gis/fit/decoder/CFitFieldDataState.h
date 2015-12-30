@@ -19,14 +19,14 @@
 #ifndef CFITFIELDDATASTATE_H
 #define CFITFIELDDATASTATE_H
 
-#include "gis/fit/decoder/CFitDecoderState.h"
+#include "gis/fit/decoder/IFitDecoderState.h"
 
 static const int FitMaxFieldSize=255;
 
-class CFitFieldDataState : public CFitDecoderState
+class CFitFieldDataState : public IFitDecoderState
 {
 public:
-    CFitFieldDataState(shared_state_data_t &data) : CFitDecoderState(data, eDecoderStateFieldData) { reset(); };
+    CFitFieldDataState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldData) { reset(); };
     virtual ~CFitFieldDataState() {};
     virtual void reset();
     virtual decode_state_e process(uint8_t &dataByte);

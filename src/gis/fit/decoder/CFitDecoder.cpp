@@ -38,7 +38,7 @@ CFitDecoder::CFitDecoder()
 
 CFitDecoder::~CFitDecoder()
 {
-    for(CFitDecoderState* state: stateMap)
+    for(IFitDecoderState * state: stateMap)
     {
         delete state;
     }

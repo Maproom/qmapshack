@@ -21,6 +21,15 @@
 
 #include <QtCore>
 
+/*
+ * 0: does not print any decoded fit messages and defintions
+ * 1: prints fit messages and defintions after finishing decoding
+ * 2: 1 + prints fit messages and defintions during decoing (just after finshing one)
+ */
+#define FITDEBUGLVL 1
+
+#define FITDEBUG(level, cmd) if(FITDEBUGLVL >= level) { cmd; }
+
 static const uint8_t LocalMesgNrInvalid = 255;
 static const uint16_t GlobalMesgNrInvalid = 0xffff;
 static const uint8_t FieldDefNrInvalid = 255;

@@ -56,6 +56,7 @@
 #include <QApplication>
 #include <QtSql>
 #include <QtWidgets>
+#include <gis/fit/CFitProject.h>
 
 #undef  DB_VERSION
 #define DB_VERSION 3
@@ -921,6 +922,14 @@ void CGisListWks::slotLoadWorkspace()
             // the CSlfProject does not - as the other C*Project - register itself in the list
             // of currently opened projects. This is done manually here.
             addProject(project);
+            break;
+        }
+
+        case IGisProject::eTypeFit:
+        {
+            project = new CFitProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+            *project << stream;
             break;
         }
         }

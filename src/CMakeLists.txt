@@ -49,6 +49,7 @@ set( SRCS
         widgets/CDoubleSpinBox.cpp
         widgets/CFadingIcon.cpp
         widgets/CTextEditWidget.cpp
+        widgets/CLineEdit.cpp
         widgets/CHistoryListWidget.cpp
         widgets/CPhotoAlbum.cpp
         widgets/CColorLegend.cpp
@@ -292,6 +293,7 @@ set( HDRS
         widgets/CFadingIcon.h
         widgets/CHistoryListWidget.h
         widgets/CTextEditWidget.h
+        widgets/CLineEdit.h
         widgets/CPhotoAlbum.h
         widgets/CColorLegend.h
         helpers/Platform.h

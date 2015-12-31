@@ -620,8 +620,8 @@ private:
      */
     bool readTwoNav(const QString& filename);
     /**
-     @brief Read serialized track data from a FIT file stream
-     @param stream
+       @brief Read serialized track data from a FIT file stream
+       @param stream
      */
     void readTrkFromFit(CFitStream &stream);
 

@@ -20,8 +20,8 @@
 #define CFITDECODER_H
 
 #include "gis/fit/decoder/CFitDecoder.h"
-#include "gis/fit/decoder/IFitDecoderState.h"
 #include "gis/fit/decoder/CFitMessage.h"
+#include "gis/fit/decoder/IFitDecoderState.h"
 
 #include <QtCore>
 

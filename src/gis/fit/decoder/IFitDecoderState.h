@@ -53,8 +53,8 @@ public:
         QList<CFitMessage> messages;
     };
 
-    IFitDecoderState(shared_state_data_t &data, decode_state_e stateClass) : data(data) { };
-    virtual ~IFitDecoderState() {};
+    IFitDecoderState(shared_state_data_t &data, decode_state_e stateClass) : data(data) { }
+    virtual ~IFitDecoderState() {}
 
     virtual void reset() = 0;
     decode_state_e processByte(uint8_t &dataByte);

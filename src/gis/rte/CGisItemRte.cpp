@@ -125,7 +125,7 @@ CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *pr
 }
 
 CGisItemRte::CGisItemRte(CFitStream& stream, IGisProject * project)
-        : IGisItem(project, eTypeRte, project->childCount())
+    : IGisItem(project, eTypeRte, project->childCount())
 {
     // --- start read and process data ----
     readRteFromFit(stream);

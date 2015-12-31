@@ -32,7 +32,7 @@ public:
     CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseEditRte();
 
-    void mousePressEvent(QMouseEvent * e);
+    virtual void mousePressEvent(QMouseEvent * e) override;
 
 protected slots:
     void slotAbort();

@@ -140,13 +140,13 @@ public:
 
     virtual ~CGisItemWpt();
 
-    IGisItem * createClone() override;
+    virtual IGisItem * createClone() override;
 
     /**
        @brief Save waypoint to GPX tree
        @param gpx   The <gpx> node to append by the waypoint
      */
-    void save(QDomNode& gpx);
+    virtual void save(QDomNode& gpx) override;
     /**
        @brief Save waypoint to TwoNav waypoint file
        @param out   the text stream to write to
@@ -157,22 +157,22 @@ public:
        @param stream  the data stream to read from
        @return A reference to the stream
      */
-    QDataStream& operator<<(QDataStream& stream);
+    virtual QDataStream& operator<<(QDataStream& stream) override;
     /**
        @brief Serialize waypoint into a binary data stream
        @param stream  the data stream to write to.
        @return A reference to the stream
      */
-    QDataStream& operator>>(QDataStream& stream) const;
+    virtual QDataStream& operator>>(QDataStream& stream) const override;
 
     void setName(const QString& str);
     void setPosition(const QPointF& pos);
     void setElevation(qint32 val);
     void setProximity(qreal val);
     void setIcon(const QString& name);
-    void setComment(const QString& str);
-    void setDescription(const QString& str);
-    void setLinks(const QList<link_t>& links);
+    virtual void setComment    (const QString& str)         override;
+    virtual void setDescription(const QString& str)         override;
+    virtual void setLinks      (const QList<link_t>& links) override;
     void setImages(const QList<image_t>& imgs);
 
     /**
@@ -210,12 +210,12 @@ public:
     void addImage(const image_t& img);
 
 
-    const QString& getName() const
+    virtual const QString& getName() const override
     {
         return wpt.name.isEmpty() ? noName : wpt.name;
     }
 
-    QString getInfo(bool allowEdit = false) const;
+    virtual QString getInfo(bool allowEdit = false) const override;
     QPointF getPosition() const
     {
         return QPointF(wpt.lon, wpt.lat);
@@ -237,11 +237,11 @@ public:
     {
         return wpt.sym;
     }
-    const QString& getComment() const
+    virtual const QString& getComment() const override
     {
         return wpt.cmt;
     }
-    const QString& getDescription() const
+    virtual const QString& getDescription() const override
     {
         return wpt.desc;
     }
@@ -249,7 +249,7 @@ public:
     {
         return geocache;
     }
-    const QList<link_t>& getLinks() const
+    virtual const QList<link_t>& getLinks() const override
     {
         return wpt.links;
     }
@@ -258,27 +258,28 @@ public:
         return images;
     }
 
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-    QPointF getPointCloseBy(const QPoint& )
+    virtual IScrOpt* getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+
+    virtual QPointF getPointCloseBy(const QPoint& ) override
     {
         return posScreen;
     }
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawHighlight(QPainter& p);
-    bool isCloseTo(const QPointF& pos);
-    void mouseMove(const QPointF& pos);
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    virtual void drawHighlight(QPainter& p) override;
+    virtual bool isCloseTo(const QPointF& pos) override;
+    virtual void mouseMove(const QPointF& pos) override;
     void mousePress(const QPointF& pos);
     void mouseRelease(const QPointF& pos);
     bool isGeocache()
     {
         return geocache.hasData;
     }
-    void gainUserFocus(bool yes);
+    virtual void gainUserFocus(bool yes) override;
 
-    void edit();
+    virtual void edit() override;
 
     /**
        @brief Remove all links from the waypoint's link list with a given type
@@ -303,7 +304,7 @@ public:
 
 private:
     void setIcon();
-    void setSymbol();
+    virtual void setSymbol() override;
     void readGpx(const QDomNode& xml);
     void readTwoNav(const CTwoNavProject::wpt_t &tnvWpt);
     void readGcExt(const QDomNode& xmlCache);

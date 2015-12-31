@@ -39,7 +39,7 @@ private slots:
     void enabelStartButton();
 
 private:
-    void finished(int exitCode, QProcess::ExitStatus status);
+    virtual void finished(int exitCode, QProcess::ExitStatus status) override;
 
     bool first = false;
     bool tainted = false;

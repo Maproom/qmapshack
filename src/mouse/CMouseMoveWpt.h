@@ -34,11 +34,11 @@ public:
     CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseMoveWpt();
 
-    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect);
-    void mousePressEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void wheelEvent(QWheelEvent * e);
+    virtual void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    virtual void mousePressEvent(QMouseEvent * e) override;
+    virtual void mouseMoveEvent(QMouseEvent * e) override;
+    virtual void mouseReleaseEvent(QMouseEvent *e) override;
+    virtual void wheelEvent(QWheelEvent * e) override;
 
 protected slots:
     virtual void slotPanCanvas();

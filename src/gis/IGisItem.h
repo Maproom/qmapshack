@@ -275,9 +275,9 @@ public:
        @param mouse     a pointer to the mouse object initiating the action
        @return A null pointer is returned if no screen option are available
      */
-    virtual IScrOpt * getScreenOptions(const QPoint& origin, IMouse * mouse)
+    virtual IScrOpt* getScreenOptions(const QPoint& origin, IMouse * mouse)
     {
-        return 0;
+        return nullptr;
     }
 
     /**

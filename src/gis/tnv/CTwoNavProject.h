@@ -65,7 +65,7 @@ public:
     };
 
 
-    bool save();
+    virtual bool save()   override;
     bool saveAs();
 
 private:

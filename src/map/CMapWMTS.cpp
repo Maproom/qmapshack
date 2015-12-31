@@ -281,7 +281,7 @@ void CMapWMTS::getLayers(QListWidget& list)
     connect(&list, &QListWidget::itemChanged, this, &CMapWMTS::slotLayersChanged);
 }
 
-void CMapWMTS::saveConfig(QSettings& cfg)
+/* virtual */ void CMapWMTS::saveConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -303,7 +303,7 @@ void CMapWMTS::saveConfig(QSettings& cfg)
     cfg.setValue("enabledLayers", enabled);
 }
 
-void CMapWMTS::loadConfig(QSettings& cfg)
+/* virtual */ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -451,7 +451,7 @@ void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
     slotQueueChanged();
 }
 
-void CMapWMTS::draw(IDrawContext::buffer_t& buf)
+/* virtual */ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 {
     QMutexLocker lock(&mutex);
 

@@ -419,7 +419,7 @@ CMapRMAP::level_t& CMapRMAP::findBestLevel(const QPointF& s)
 }
 
 
-void CMapRMAP::draw(IDrawContext::buffer_t& buf)
+/* virtual */ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
 {
     if(map->needsRedraw())
     {

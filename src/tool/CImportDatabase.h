@@ -40,7 +40,6 @@ private slots:
     void slotSelectTarget();
     void slotStart();
 
-
 private:
     QPointer<CQlgtDb> dbQlgt;
 };

@@ -25,7 +25,6 @@
 
 #include "gis/prj/IGisProject.h"
 
-class CGisItemWpt;
 class CSlfProject;
 
 class CSlfReader
@@ -43,7 +42,6 @@ private:
     CSlfProject* getProject();
 
     CSlfProject   *proj = nullptr; /// the resulting project after construction
-    const QString &filename;
     QDateTime baseTime;            /// the time all entries refer to
     QList<long>    offsetsTime;    /// an additional offset, required to take breaks into account
     QList<long>    laps;           /// the distances a new lap starts at (a lap is a .slf segment)

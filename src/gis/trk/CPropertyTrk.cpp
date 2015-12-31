@@ -19,6 +19,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
+#include "plot/CPlot.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>

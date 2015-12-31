@@ -40,8 +40,8 @@ public:
     virtual ~CSelectProjectDialog();
 
 public slots:
-    void accept();
-    void reject();
+    virtual void accept() override;
+    virtual void reject() override;
 
 private slots:
     void slotItemClicked(QListWidgetItem * item);

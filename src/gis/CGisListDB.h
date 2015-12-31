@@ -22,8 +22,6 @@
 #include <QSqlDatabase>
 #include <QTreeWidget>
 
-#include <gis/db/IDBFolder.h>
-
 struct action_t;
 class QMenu;
 class IDBFolderSql;

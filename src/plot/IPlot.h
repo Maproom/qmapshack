@@ -42,8 +42,8 @@ public:
     IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
     virtual ~IPlot();
 
-    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2);
-    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt){}
+    virtual void setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2) override;
+    virtual void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}
 
     void save(QImage& image);
     void setSolid(bool yes)
@@ -76,14 +76,14 @@ protected:
     void setLimits();
     void resetZoom();
 
-    void paintEvent(QPaintEvent * e);
-    void resizeEvent(QResizeEvent * e);
-    void leaveEvent(QEvent * e);
-    void enterEvent(QEvent * e);
-    void keyPressEvent(QKeyEvent *e);
-    void mouseMoveEvent(QMouseEvent * e);
-    void mousePressEvent(QMouseEvent * e);
-    void wheelEvent( QWheelEvent * e);
+    virtual void paintEvent     (QPaintEvent  *e) override;
+    virtual void resizeEvent    (QResizeEvent *e) override;
+    virtual void leaveEvent     (QEvent       *e) override;
+    virtual void enterEvent     (QEvent       *e) override;
+    virtual void keyPressEvent  (QKeyEvent    *e) override;
+    virtual void mouseMoveEvent (QMouseEvent  *e) override;
+    virtual void mousePressEvent(QMouseEvent  *e) override;
+    virtual void wheelEvent     (QWheelEvent  *e) override;
 
 
     void setSizes();

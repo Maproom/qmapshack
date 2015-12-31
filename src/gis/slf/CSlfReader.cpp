@@ -49,7 +49,7 @@ static QDateTime parseSlfTimestamp(const QString &ts)
     return baseTime.addSecs( (deltaGMT / 100) * 60 * 60 );
 }
 
-CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj), filename(filename)
+CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj)
 {
     QFile file(filename);
 

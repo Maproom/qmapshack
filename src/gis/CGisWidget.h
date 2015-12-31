@@ -25,6 +25,7 @@
 #include <QWidget>
 
 #include "gis/IGisItem.h"
+#include "db/IDBFolder.h"
 
 class CGisDraw;
 class IGisProject;

@@ -38,13 +38,13 @@ public:
     CMouseNormal(CGisDraw * gis, CCanvas *canvas);
     virtual ~CMouseNormal();
 
-    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw,  const QRect &rect);
-    void mousePressEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void mouseDoubleClickEvent(QMouseEvent *e);
-    void wheelEvent(QWheelEvent * e);
-    void keyPressEvent(QKeyEvent * e);
+    virtual void draw(QPainter& p,  CCanvas::redraw_e needsRedraw,  const QRect &rect) override;
+    virtual void mousePressEvent(QMouseEvent * e) override;
+    virtual void mouseMoveEvent(QMouseEvent * e) override;
+    virtual void mouseReleaseEvent(QMouseEvent *e) override;
+    virtual void mouseDoubleClickEvent(QMouseEvent *e) override;
+    virtual void wheelEvent(QWheelEvent * e) override;
+    virtual void keyPressEvent(QKeyEvent * e) override;
 
 private slots:
     void slotAddWpt();
@@ -72,16 +72,11 @@ protected:
     enum item_selection_states_e
     {
         eStateIdle = 0
-                     /// there is only a single item close to the cursor
-        , eStateHooverSingle = 1
-                               /// there are multiple items close to the cursor
-        , eStateHooverMultiple = 2
-                                 /// not a real state, but at this value and above no map move is allowed to take place
-        , eStateNoMapMovePossible = 3
-                                    /// the user clicked on multiple cluttered items and gets now an uncluttered representation
-        , eStateUnclutterMultiple = 3
-                                    /// the user has selected a single item, show options how to proceed
-        , eStateShowItemOptions = 4
+        , eStateHooverSingle      = 1 //< there is only a single item close to the cursor
+        , eStateHooverMultiple    = 2 //< there are multiple items close to the cursor
+        , eStateNoMapMovePossible = 3 //< not a real state, but at this value and above no map move is allowed to take place
+        , eStateUnclutterMultiple = 3 //< the user clicked on multiple cluttered items and gets now an uncluttered representation
+        , eStateShowItemOptions   = 4 //< the user has selected a single item, show options how to proceed
     };
 
     item_selection_states_e stateItemSel = eStateIdle;

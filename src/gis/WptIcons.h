@@ -35,12 +35,12 @@ struct icon_t
 };
 
 
-extern void initWptIcons();
-extern const QMap<QString, icon_t> &getWptIcons();
-extern QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src = 0);
-extern void setWptIconByName(const QString& name, const QString& filename);
-extern void setWptIconByName(const QString& name, const QPixmap& icon);
-extern QPixmap loadIcon(const QString& path);
+void initWptIcons();
+const QMap<QString, icon_t> &getWptIcons();
+QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src = nullptr);
+void setWptIconByName(const QString& name, const QString& filename);
+void setWptIconByName(const QString& name, const QPixmap& icon);
+QPixmap loadIcon(const QString& path);
 
 #endif //WPTICONS_H
 

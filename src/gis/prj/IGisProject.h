@@ -26,7 +26,6 @@
 #include <QTreeWidgetItem>
 
 class CGisListWks;
-class IGisItem;
 class CGisDraw;
 class QDataStream;
 class CDetailsPrj;

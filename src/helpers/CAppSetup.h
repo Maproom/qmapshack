@@ -51,9 +51,9 @@ protected:
 class CAppSetupMac : public CAppSetup
 {
 public:
-    virtual void prepareGdal();
-    virtual QString routinoPath(QString xmlFile);
-    virtual void prepareTranslators(QApplication* app);
+    virtual void prepareGdal() override;
+    virtual QString routinoPath(QString xmlFile) override;
+    virtual void prepareTranslators(QApplication* app) override;
 
 protected:
     virtual QString logFilename();
@@ -79,10 +79,10 @@ protected:
 class CAppSetupWin : public CAppSetup
 {
 public:
-    virtual QString routinoPath(QString xmlFile);
-    virtual void prepareGdal();
-    virtual void prepareTranslators(QApplication* app);
-    virtual void prepareConfig();
+    virtual QString routinoPath(QString xmlFile)       override;
+    virtual void prepareGdal()                         override;
+    virtual void prepareTranslators(QApplication* app) override;
+    virtual void prepareConfig()                       override;
 
 protected:
     CAppSetupWin();

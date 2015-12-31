@@ -20,7 +20,7 @@
 #define CDBFOLDERSQLITE_H
 
 #include "gis/db/IDBFolderSql.h"
-#include <gis/db/IDBSqlite.h>
+#include "gis/db/IDBSqlite.h"
 
 
 class CDBFolderSqlite : public IDBFolderSql, public IDBSqlite

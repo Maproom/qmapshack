@@ -31,7 +31,7 @@ public:
     virtual ~CSetupWorkspace();
 
 public slots:
-    void accept();
+    virtual void accept() override;
 };
 
 #endif //CSETUPWORKSPACE_H

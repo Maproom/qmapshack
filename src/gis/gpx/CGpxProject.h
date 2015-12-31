@@ -21,10 +21,6 @@
 
 #include "gis/prj/IGisProject.h"
 
-#include <QDateTime>
-#include <QDomElement>
-#include <QUrl>
-
 class CGisListWks;
 class CGisDraw;
 

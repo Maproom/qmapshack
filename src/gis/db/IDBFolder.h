@@ -136,7 +136,7 @@ public:
      */
     static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
-    bool operator<(const QTreeWidgetItem &other) const;
+    virtual bool operator<(const QTreeWidgetItem &other) const override;
 
     void updateItemsOnWks();
 

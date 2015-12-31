@@ -80,13 +80,13 @@ CMapPropSetup::~CMapPropSetup()
 {
 }
 
-void CMapPropSetup::resizeEvent(QResizeEvent * e)
+/* virtual */ void CMapPropSetup::resizeEvent(QResizeEvent * e) /* override */
 {
     IMapProp::resizeEvent(e);
     updateScaleLabel();
 }
 
-void CMapPropSetup::slotPropertiesChanged()
+/* virtual */ void CMapPropSetup::slotPropertiesChanged() /* override */
 {
     // block all signals to avoid retrigger
     sliderOpacity->blockSignals(true);

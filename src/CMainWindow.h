@@ -78,8 +78,8 @@ public:
 protected:
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
 #endif // WIN32
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
+    virtual void dragEnterEvent(QDragEnterEvent *event) override;
+    virtual void dropEvent(QDropEvent *event) override;
 
 
 private slots:

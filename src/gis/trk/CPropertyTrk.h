@@ -20,12 +20,12 @@
 #define CPROPERTYTRK_H
 
 #include "gis/trk/CGisItemTrk.h"
-#include "plot/CPlot.h"
 #include "plot/CPlotData.h"
 
 #include <QObject>
 
 class QComboBox;
+class CPlot;
 
 class CPropertyTrk
 {

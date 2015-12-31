@@ -21,7 +21,6 @@
 
 #include "ui_IFilterInvalid.h"
 #include <QWidget>
-#include <functional>
 
 class CGisItemTrk;
 

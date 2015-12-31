@@ -67,11 +67,11 @@ public:
 
     enum visual_e
     {
-        eVisualNone = 0
+        eVisualNone          = 0
         , eVisualColorLegend = 0x1
-        , eVisualPlot = 0x2
-        , eVisualDetails = 0x4
-        , eVisualAll = -1
+        , eVisualPlot        = 0x2
+        , eVisualDetails     = 0x4
+        , eVisualAll         = -1
     };
 
     /**
@@ -147,7 +147,7 @@ public:
        @brief Save track to GPX tree
        @param gpx   The <gpx> node to append by the track
      */
-    void save(QDomNode& gpx);
+    virtual void save(QDomNode& gpx) override;
     /**
        @brief Save track to TwoNav track file
        @param dir   the path to store the file
@@ -158,16 +158,16 @@ public:
        @param stream  the data stream to read from
        @return A reference to the stream
      */
-    QDataStream& operator<<(QDataStream& stream);
+    virtual QDataStream& operator<<(QDataStream& stream) override;
     /**
        @brief Serialize track into a binary data stream
        @param stream  the data stream to write to.
        @return A reference to the stream
      */
-    QDataStream& operator>>(QDataStream& stream) const;
+    virtual QDataStream& operator>>(QDataStream& stream) const override;
 
     /// get name of track
-    const QString& getName() const
+    virtual const QString& getName() const override
     {
         return trk.name.isEmpty() ? noName : trk.name;
     }
@@ -225,22 +225,22 @@ public:
         return totalDistance;
     }
 
-    const QString& getComment() const
+    virtual const QString& getComment() const override
     {
         return trk.cmt;
     }
-    const QString& getDescription() const
+    virtual const QString& getDescription() const override
     {
         return trk.desc;
     }
-    const QList<link_t>& getLinks() const
+    virtual const QList<link_t>& getLinks() const override
     {
         return trk.links;
     }
     /// get the track as a simple coordinate polyline
     void getPolylineFromData(QPolygonF &l);
     /// get the track as polyline with elevation, pixel and GIS coordinates.
-    void getPolylineFromData(SGisLine& l);
+    virtual void getPolylineFromData(SGisLine& l) override;
 
     const QDateTime& getTimeStart() const
     {
@@ -326,10 +326,10 @@ public:
     void setName(const QString& str);
     void setColor(int idx);
     bool setMode(mode_e m, const QString &owner);
-    void setComment(const QString& str);
-    void setDescription(const QString& str);
-    void setLinks(const QList<link_t>& links);
-    void setDataFromPolyline(const SGisLine &l);
+    virtual void setComment         (const QString& str)         override;
+    virtual void setDescription     (const QString& str)         override;
+    virtual void setLinks           (const QList<link_t>& links) override;
+    virtual void setDataFromPolyline(const SGisLine &l)          override;
 
     /**
        @brief display the track screen options
@@ -338,24 +338,24 @@ public:
        @param mouse     the mouse object causing the request
        @return          a pointer to the screen option widget
      */
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
+    virtual IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
     /**
        @brief Get a screen pixel of the track close to the given position on the screen
        @param screenPos Screen position as pixel coordinate
        @return The screen coordinates as pixel of a track point close by
      */
-    QPointF getPointCloseBy(const QPoint& screenPos);
+    virtual QPointF getPointCloseBy(const QPoint& screenPos) override;
     /**
        @brief isCloseTo
        @param pos Screen position as pixel coordinate
        @return True if point is considered close enough
      */
-    bool isCloseTo(const QPointF& pos);
+    virtual bool isCloseTo(const QPointF& pos) override;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawHighlight(QPainter& p);
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    virtual void drawHighlight(QPainter& p) override;
     void drawRange(QPainter& p);
 
     /**
@@ -365,7 +365,7 @@ public:
 
        @param yes   set true to gain focus.
      */
-    void gainUserFocus(bool yes);
+    virtual void gainUserFocus(bool yes) override;
     /**
        @brief Make sure the track has lost focus.
 
@@ -377,7 +377,7 @@ public:
     /**
        @brief Make sure a CDetailsTrk widget is registered with the main tab widget
      */
-    void edit();
+    virtual void edit() override;
 
     /**
        @brief Cut track at mouseClickFocus
@@ -451,7 +451,7 @@ public:
 
        @return True if the track has user focus
      */
-    bool hasUserFocus() const
+    virtual bool hasUserFocus() const override
     {
         return key == keyUserFocus;
     }
@@ -603,7 +603,7 @@ public:
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
 private:
-    void setSymbol();
+    virtual void setSymbol() override;
     /**
        @brief Read track data from section in GPX file
        @param xml   The XML <trk> section
@@ -712,14 +712,14 @@ private:
        @param what  The reason string
        @param icon  An icon string
      */
-    void changed(const QString& what, const QString& icon);
+    virtual void changed(const QString& what, const QString& icon) override;
     /**
        @brief Overide IGisItem::updateHistory() method
 
         same as changed();
 
      */
-    void updateHistory();
+    virtual void updateHistory() override;
 
     /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);

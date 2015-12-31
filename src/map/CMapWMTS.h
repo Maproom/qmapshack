@@ -39,13 +39,13 @@ public:
     CMapWMTS(const QString& filename, CMapDraw *parent);
     virtual ~CMapWMTS();
 
-    void draw(IDrawContext::buffer_t& buf);
+    virtual void draw(IDrawContext::buffer_t& buf) override;
 
     void getLayers(QListWidget& list);
 
-    void saveConfig(QSettings& cfg);
+    virtual void saveConfig(QSettings& cfg) override;
 
-    void loadConfig(QSettings& cfg);
+    virtual void loadConfig(QSettings& cfg) override;
 
 
 signals:
@@ -116,7 +116,7 @@ private:
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
-    IDiskCache * diskCache = 0;
+    IDiskCache * diskCache = nullptr;
     /// access manager to request tiles
     QNetworkAccessManager * accessManager = nullptr;
 

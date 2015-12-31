@@ -20,7 +20,7 @@
 #define CDBFOLDERMYSQL_H
 
 #include "gis/db/IDBFolderSql.h"
-#include <gis/db/IDBMysql.h>
+#include "gis/db/IDBMysql.h"
 
 
 class CDBFolderMysql : public IDBFolderSql, public IDBMysql

@@ -35,19 +35,19 @@ public:
     CMapTMS(const QString& filename, CMapDraw *parent);
     virtual ~CMapTMS();
 
-    void draw(IDrawContext::buffer_t& buf);
+    virtual void draw(IDrawContext::buffer_t& buf) override;
 
-    void getLayers(QListWidget& list);
+    virtual void getLayers(QListWidget& list) override;
 
-    void saveConfig(QSettings& cfg);
+    virtual void saveConfig(QSettings& cfg) override;
 
-    void loadConfig(QSettings& cfg);
+    virtual void loadConfig(QSettings& cfg) override;
 
 signals:
     void sigQueueChanged();
 
 protected:
-    void configureCache();
+    virtual void configureCache() override;
 
 private slots:
     void slotQueueChanged();

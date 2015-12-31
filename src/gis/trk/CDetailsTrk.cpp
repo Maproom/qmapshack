@@ -32,6 +32,7 @@
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
+#include "plot/CPlot.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"

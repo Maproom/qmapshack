@@ -40,7 +40,7 @@ public:
        @brief Read opacity value
        @return Return the opacity in a range of 0..100(full opacity)
      */
-    int getOpacity()
+    int getOpacity() const
     {
         return opacity;
     }
@@ -49,7 +49,7 @@ public:
        @brief Read the minimum scale factor the object should be displayed
        @return A factor or NOFLOAT if no minimum has been set
      */
-    qreal getMinScale()
+    qreal getMinScale() const
     {
         return minScale;
     }
@@ -57,7 +57,7 @@ public:
        @brief Read the maximum scale factor the object should be displayed
        @return A factor or NOFLOAT if no maximum has been set
      */
-    qreal getMaxScale()
+    qreal getMaxScale() const
     {
         return maxScale;
     }
@@ -114,7 +114,7 @@ protected:
        @param scale A scale factor for x and y axis
        @return True if x scale is out of the min/max range
      */
-    bool isOutOfScale(const QPointF& scale);
+    bool isOutOfScale(const QPointF& scale) const;
 
     /**
        @brief Setup a map cache using cachePath, cacheSizeMB and cacheExpiration

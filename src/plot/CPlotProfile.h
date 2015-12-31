@@ -31,8 +31,8 @@ public:
     virtual ~CPlotProfile();
 
     void setTrack(CGisItemTrk * track);
-    void updateData();
-    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove);
+    virtual void updateData() override;
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
 };
 
 #endif //CPLOTPROFILE_H

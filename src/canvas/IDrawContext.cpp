@@ -172,19 +172,17 @@ void IDrawContext::setProjection(const QString& proj)
     pjsrc = pj_init_plus(proj.toLatin1());
 }
 
-CCanvas::scales_type_e IDrawContext::getScalesType()
+CCanvas::scales_type_e IDrawContext::getScalesType() const
 {
     return scalesType;
 }
 
 void IDrawContext::setScales(const CCanvas::scales_type_e type)
 {
-    int i;
-
     switch (type)
     {
     case CCanvas::eScalesDefault:
-        for (i=0; i < N_DEFAULT_ZOOM_LEVELS; i++)
+        for (int i=0; i < N_DEFAULT_ZOOM_LEVELS; i++)
         {
             scales[i] = scalesDefault[i];
         }
@@ -193,7 +191,7 @@ void IDrawContext::setScales(const CCanvas::scales_type_e type)
         break;
 
     case CCanvas::eScalesSquare:
-        for (i=0; i < N_SQUARE_ZOOM_LEVELS; i++)
+        for (int i=0; i < N_SQUARE_ZOOM_LEVELS; i++)
         {
             scales[i] = scalesSquare[i];
         }

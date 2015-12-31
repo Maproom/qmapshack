@@ -35,9 +35,9 @@ public:
 
     void setLimits(qreal min, qreal max);
 
-    void updateData();
+    virtual void updateData() override;
 
-    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove);
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
 
 private:
     void setLimitsOnData(qreal min, qreal max);

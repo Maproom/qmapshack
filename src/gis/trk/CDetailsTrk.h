@@ -20,10 +20,10 @@
 #define CDETAILSTRK_H
 
 #include "gis/trk/CGisItemTrk.h"
-#include "plot/CPlot.h"
 #include "ui_IDetailsTrk.h"
 #include <QWidget>
 
+class CPlot;
 class CPlotProfile;
 
 class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk

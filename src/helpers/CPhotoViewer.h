@@ -31,10 +31,10 @@ public:
     virtual ~CPhotoViewer();
 
 protected:
-    void paintEvent(QPaintEvent * e);
-    void resizeEvent(QResizeEvent * e);
-    void mousePressEvent(QMouseEvent * e);
-    void keyPressEvent(QKeyEvent *e);
+    virtual void paintEvent     (QPaintEvent  *e) override;
+    virtual void resizeEvent    (QResizeEvent *e) override;
+    virtual void mousePressEvent(QMouseEvent  *e) override;
+    virtual void keyPressEvent  (QKeyEvent    *e) override;
 
 private:
     void tryIdxStep(int delta);

@@ -32,13 +32,13 @@ public:
     CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpSelectRange();
 
-    void mousePressEventEx(QMouseEvent * e);
-    void mouseMoveEventEx(QMouseEvent * e);
-    void mouseReleaseEventEx(QMouseEvent *e)
+    virtual void mousePressEventEx  (QMouseEvent *e) override;
+    virtual void mouseMoveEventEx   (QMouseEvent *e) override;
+    virtual void mouseReleaseEventEx(QMouseEvent *e) override
     {
     }
-    void wheelEvent(QWheelEvent * e);
-    void keyPressEvent(QKeyEvent * e);
+    virtual void wheelEvent(QWheelEvent * e) override;
+    virtual void keyPressEvent(QKeyEvent * e) override;
 
     void drawFg(QPainter& p);
 

@@ -25,7 +25,7 @@ find_package(Qt5Test)
 endif(UNIX AND NOT APPLE)
 
 if(UNIX)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wsuggest-override")
 endif(UNIX)
 
 if (APPLE)

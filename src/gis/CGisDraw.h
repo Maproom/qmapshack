@@ -33,7 +33,7 @@ public:
     void draw(QPainter& p, const QRect& rect);
 
 protected:
-    void drawt(buffer_t& currentBuffer);
+    virtual void drawt(buffer_t& currentBuffer) override;
 };
 
 #endif //CGISDRAW_H

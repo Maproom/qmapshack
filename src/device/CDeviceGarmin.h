@@ -37,12 +37,16 @@ public:
 
 
 private:
+    void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
+    
     QString id;
     QString partno;
     QString description;
     QString pathGpx = "Garmin/GPX";
     QString pathPictures = "Garmin/JPEG";
     QString pathSpoilers = "Garmin/GeocachePhotos";
+    QString pathFitActivities = "Garmin/Activities";
+    QString pathFitCourses = "Garmin/Courses";
 
     int cntImages = 0;
 };

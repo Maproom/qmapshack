@@ -39,6 +39,7 @@ class QDir;
 class CProgressDialog;
 class CPropertyTrk;
 class CColorLegend;
+class CFitStream;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
@@ -138,6 +139,8 @@ public:
        @param project  The project this track belongs to
      */
     CGisItemTrk(trk_t& trkdata, IGisProject *project);
+
+    CGisItemTrk(CFitStream& stream, IGisProject * project);
 
     virtual ~CGisItemTrk();
 
@@ -616,6 +619,11 @@ private:
        @param filename
      */
     bool readTwoNav(const QString& filename);
+    /**
+     @brief Read serialized track data from a FIT file stream
+     @param stream
+     */
+    void readTrkFromFit(CFitStream &stream);
 
 private:
     /**

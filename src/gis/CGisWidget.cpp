@@ -24,6 +24,7 @@
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
+#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
@@ -112,6 +113,11 @@ void CGisWidget::loadGisProject(const QString& filename)
         // of currently opened projects. This is done manually here.
         treeWks->addProject(item);
     }
+    else if(suffix == "fit")
+    {
+        item = new CFitProject(filename, treeWks);
+    }
+
 
     if(item && !item->isValid())
     {

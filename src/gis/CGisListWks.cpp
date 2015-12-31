@@ -56,6 +56,7 @@
 #include <QApplication>
 #include <QtSql>
 #include <QtWidgets>
+#include <gis/fit/CFitProject.h>
 
 #undef  DB_VERSION
 #define DB_VERSION 3
@@ -196,8 +197,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 #endif
 #ifdef Q_OS_MAC
     deviceWatcher = new CDeviceWatcherMac(this);
-    connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this,          &CGisListWks::sigChanged);
-    connect(qApp,          &QApplication::aboutToQuit,     deviceWatcher, &CDeviceWatcherMac::slotEndListing);
+    connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this, &CGisListWks::sigChanged);
 #endif
 #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);
@@ -884,6 +884,14 @@ void CGisListWks::slotLoadWorkspace()
             // the CSlfProject does not - as the other C*Project - register itself in the list
             // of currently opened projects. This is done manually here.
             addProject(project);
+            break;
+        }
+
+        case IGisProject::eTypeFit:
+        {
+            project = new CFitProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+            *project << stream;
             break;
         }
         }

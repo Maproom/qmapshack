@@ -20,6 +20,8 @@
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/fit/CFitProject.h"
+
 
 #include <QtWidgets>
 #include <QtXml>
@@ -72,11 +74,22 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         {
             pathSpoilers = xmlPath.toElement().text();
         }
+        else if(name == "FIT_TYPE_4")
+        {
+            pathFitActivities = xmlPath.toElement().text();
+        }
+        else if(name == "FIT_TYPE_6")
+        {
+            // courses
+            pathFitCourses = xmlPath.toElement().text();
+        }
     }
 
     qDebug() << dir.absoluteFilePath(pathGpx);
     qDebug() << dir.absoluteFilePath(pathPictures);
     qDebug() << dir.absoluteFilePath(pathSpoilers);
+    qDebug() << dir.absoluteFilePath(pathFitActivities);
+    qDebug() << dir.absoluteFilePath(pathFitCourses);
 
     if(!dir.exists(pathGpx))
     {
@@ -91,33 +104,26 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         dir.mkpath(pathSpoilers);
     }
 
-    QDir dirGpx(dir.absoluteFilePath(pathGpx));
-    QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
-    foreach(const QString &entry, entries)
-    {
-        IGisProject * project =  new CGpxProject(dirGpx.absoluteFilePath(entry), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
-    }
+    this->createProjectsFromFiles(pathGpx, "gpx");
+    this->createProjectsFromFiles(pathGpx + "/Current", "gpx");
+    this->createProjectsFromFiles(pathGpx + "/Archive", "gpx");
+    
+    this->createProjectsFromFiles(pathFitActivities, "fit");
+    this->createProjectsFromFiles(pathFitCourses, "fit");
+}
 
-    QDir dirGpxCurrent(dir.absoluteFilePath(pathGpx + "/Current"));
-    entries = dirGpxCurrent.entryList(QStringList("*.gpx"));
+void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding)
+{
+    QDir dirLoop(dir.absoluteFilePath(subdirecoty));
+    qDebug() << "reading files from device: " << dirLoop.path();
+    QStringList entries = dirLoop.entryList(QStringList("*." + fileEnding));
     foreach(const QString &entry, entries)
     {
-        IGisProject * project =  new CGpxProject(dirGpxCurrent.absoluteFilePath(entry), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
-    }
-
-    QDir dirGpxArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
-    entries = dirGpxArchive.entryList(QStringList("*.gpx"));
-    foreach(const QString &entry, entries)
-    {
-        IGisProject * project =  new CGpxProject(dirGpxArchive.absoluteFilePath(entry), this);
+        const QString filename = dirLoop.absoluteFilePath(entry);
+        IGisProject * project = nullptr;
+        if (fileEnding == "fit") project = new CFitProject(filename, this);
+        if (fileEnding == "gpx") project = new CGpxProject(filename, this);
+        
         if(!project->isValid())
         {
             delete project;

@@ -555,7 +555,6 @@ const QString& IGisItem::getLastDatabaseHash()
 
 void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
 {
-
     lastDatabaseHash = getHash();
 }
 

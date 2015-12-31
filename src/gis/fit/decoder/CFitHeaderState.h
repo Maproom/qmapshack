@@ -24,8 +24,8 @@
 class CFitHeaderState : public IFitDecoderState
 {
 public:
-    CFitHeaderState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFileHeader) { reset(); };
-    virtual ~CFitHeaderState() {};
+    CFitHeaderState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFileHeader) { reset(); }
+    virtual ~CFitHeaderState() {}
 
     virtual void reset();
     virtual decode_state_e process(uint8_t &dataByte);

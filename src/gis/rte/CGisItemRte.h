@@ -23,9 +23,9 @@
 #include "gis/IGisLine.h"
 #include <routino.h>
 
+#include "gis/fit/CFitStream.h"
 #include <QPen>
 #include <QPointer>
-#include "gis/fit/CFitStream.h"
 
 class QDomNode;
 class IGisProject;

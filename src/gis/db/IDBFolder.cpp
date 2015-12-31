@@ -265,7 +265,6 @@ void IDBFolder::update()
 
     qDeleteAll(dbItems);
     addChildren(activeChildren, true);
-
 }
 
 void IDBFolder::toggle()

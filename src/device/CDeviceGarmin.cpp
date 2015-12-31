@@ -18,9 +18,9 @@
 
 #include "device/CDeviceGarmin.h"
 #include "gis/CGisListWks.h"
+#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/fit/CFitProject.h"
 
 
 #include <QtWidgets>
@@ -107,7 +107,7 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     this->createProjectsFromFiles(pathGpx, "gpx");
     this->createProjectsFromFiles(pathGpx + "/Current", "gpx");
     this->createProjectsFromFiles(pathGpx + "/Archive", "gpx");
-    
+
     this->createProjectsFromFiles(pathFitActivities, "fit");
     this->createProjectsFromFiles(pathFitCourses, "fit");
 }
@@ -121,9 +121,15 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
     {
         const QString filename = dirLoop.absoluteFilePath(entry);
         IGisProject * project = nullptr;
-        if (fileEnding == "fit") project = new CFitProject(filename, this);
-        if (fileEnding == "gpx") project = new CGpxProject(filename, this);
-        
+        if (fileEnding == "fit")
+        {
+            project = new CFitProject(filename, this);
+        }
+        if (fileEnding == "gpx")
+        {
+            project = new CGpxProject(filename, this);
+        }
+
         if(!project->isValid())
         {
             delete project;

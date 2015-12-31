@@ -745,7 +745,6 @@ void CDBProject::update()
                 item->updateFromDB(idItem, db);
                 item->updateDecoration(IGisItem::eMarkNotPart|IGisItem::eMarkChanged, IGisItem::eMarkNone);
             }
-
         }
         else
         {

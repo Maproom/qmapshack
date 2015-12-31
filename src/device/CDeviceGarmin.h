@@ -38,7 +38,7 @@ public:
 
 private:
     void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
-    
+
     QString id;
     QString partno;
     QString description;

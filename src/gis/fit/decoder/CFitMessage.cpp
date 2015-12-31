@@ -30,7 +30,7 @@ CFitMessage::CFitMessage(const CFitDefinitionMessage& def)
 
 CFitMessage::CFitMessage()
     : fields(), globalMesgNr(fitGlobalMesgNrInvalid), localMesgNr(fitLocalMesgNrInvalid),
-      messageProfile(CFitProfileLockup::getProfile(fitGlobalMesgNrInvalid))
+    messageProfile(CFitProfileLockup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
 

@@ -24,8 +24,8 @@
 class CFitFieldDefinitionState : public IFitDecoderState
 {
 public:
-    CFitFieldDefinitionState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldDef) { reset(); };
-    virtual ~CFitFieldDefinitionState() {};
+    CFitFieldDefinitionState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldDef) { reset(); }
+    virtual ~CFitFieldDefinitionState() {}
 
     virtual void reset();
     virtual decode_state_e process(uint8_t &dataByte);

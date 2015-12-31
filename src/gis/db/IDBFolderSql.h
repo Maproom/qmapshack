@@ -31,6 +31,11 @@ public:
 
     void expanding();
     void updateLostFound();
+    void update(CEvtW2DAckInfo * info) override
+    {
+        IDBFolder::update(info);
+    }
+    bool update() override;
 
 protected:
     CDBFolderLostFound * folderLostFound = 0;

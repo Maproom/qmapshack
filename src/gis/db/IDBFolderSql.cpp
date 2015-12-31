@@ -16,8 +16,12 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/IDBFolderSql.h"
+#include "gis/db/macros.h"
+
+#include <QtSql>
 
 IDBFolderSql::IDBFolderSql(QSqlDatabase &db, QTreeWidget *parent)
     : IDBFolder(false, db, eTypeDatabase, 1, parent)
@@ -38,4 +42,68 @@ void IDBFolderSql::updateLostFound()
     {
         folderLostFound->update();
     }
+}
+
+bool IDBFolderSql::update()
+{
+    QSqlQuery query(db);
+    QList<IDBFolder*> dbFoldersDel;
+
+    /* Database folders are a bit special as there are no items. But a lost & found folder.
+     *
+     * As there can be folders removed from the database and new folders this is a bit tricky.
+     *
+     * dbFoldersAdd is filled with all folders IDs attached with the database folder. Now we
+     * iterate over all existing items and remove their ID from dbFoldersAdd. Additionally
+     * the folder item is updated. If the update returns false, the folders was removed from
+     * the database or an error occured. In both cases the item is registered for removal in
+     * dbFoldersDel.
+     *
+     * When done with the iteration all folders registered for removal are deleted and the
+     * new ones are created. Finally lost & found is updated.
+    */
+
+    // get all folder IDs attached to this folder
+    QList<quint64> dbFoldersAdd;
+    query.prepare("SELECT child FROM folder2folder WHERE parent=:parent");
+    query.bindValue(":parent", id);
+    QUERY_EXEC(return false);
+    while(query.next())
+    {
+        dbFoldersAdd << query.value(0).toULongLong();
+    }
+
+    const int N = childCount();
+    for(int i = 1; i < N; i++)
+    {
+        IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+        if(folder)
+        {
+            dbFoldersAdd.removeAll(folder->getId());
+            if(!folder->update())
+            {
+                dbFoldersDel << folder;
+            }
+        }
+    }
+
+    qDeleteAll(dbFoldersDel);
+
+    // add folders
+    query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return false);
+    while(query.next())
+    {
+        quint64 idChild     = query.value(0).toULongLong();
+        quint32 typeChild   = query.value(1).toInt();
+        if(dbFoldersAdd.contains(idChild))
+        {
+            IDBFolder::createFolderByType(db, typeChild, idChild, this);
+        }
+    }
+    sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+
+    updateLostFound();
+    return true;
 }

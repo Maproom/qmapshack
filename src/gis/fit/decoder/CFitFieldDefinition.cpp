@@ -24,18 +24,18 @@
 
 
 
-static const uint8_t EndianFlagMask = 0x80;
+static const uint8_t fitEndianFlagMask = 0x80;
 
 
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t defNr, uint8_t size, uint8_t type)
     : defNr(defNr), size(size), type(type), parentDefintion(parent)
 {
     baseType = CFitBaseTypeMap::get(type);
-    fieldProfile = CFitProfileLockup::getFieldForProfile(parentDefintion ? parentDefintion->getGlobalMesgNr() : GlobalMesgNrInvalid, defNr);
+    fieldProfile = CFitProfileLockup::getFieldForProfile(parentDefintion ? parentDefintion->getGlobalMesgNr() : fitGlobalMesgNrInvalid, defNr);
 }
 
 CFitFieldDefinition::CFitFieldDefinition()
-    : CFitFieldDefinition(nullptr, LocalMesgNrInvalid, 0, TypeInvalid)
+    : CFitFieldDefinition(nullptr, fitLocalMesgNrInvalid, 0, TypeInvalid)
 {
 }
 
@@ -69,7 +69,7 @@ uint8_t CFitFieldDefinition::getType() const
 
 bool CFitFieldDefinition::getEndianAbilityFlag() const
 {
-    return (type & EndianFlagMask) != 0;
+    return (type & fitEndianFlagMask) != 0;
 }
 
 const CFitBaseType& CFitFieldDefinition::getBaseType() const

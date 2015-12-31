@@ -29,8 +29,8 @@ CFitMessage::CFitMessage(const CFitDefinitionMessage& def)
 }
 
 CFitMessage::CFitMessage()
-    : fields(), globalMesgNr(GlobalMesgNrInvalid), localMesgNr(LocalMesgNrInvalid),
-    messageProfile(CFitProfileLockup::getProfile(GlobalMesgNrInvalid))
+    : fields(), globalMesgNr(fitGlobalMesgNrInvalid), localMesgNr(fitLocalMesgNrInvalid),
+      messageProfile(CFitProfileLockup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
 
@@ -44,7 +44,7 @@ CFitMessage::~CFitMessage()
 
 bool CFitMessage::isValid() const
 {
-    return getGlobalMesgNr() != GlobalMesgNrInvalid;
+    return getGlobalMesgNr() != fitGlobalMesgNrInvalid;
 }
 
 QStringList CFitMessage::messageInfo() const

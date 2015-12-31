@@ -26,7 +26,7 @@ CFitFieldProfile::CFitFieldProfile(QString name, CFitBaseType* baseType, uint8_t
 {
 }
 
-CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile("unknown", &InvalidType, FieldDefNrInvalid, 0, 0, "")
+CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile("unknown", &InvalidType, fitFieldDefNrInvalid, 0, 0, "")
 {
 }
 

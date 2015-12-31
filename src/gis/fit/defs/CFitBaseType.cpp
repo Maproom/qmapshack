@@ -145,9 +145,9 @@ QMap<uint8_t, CFitBaseType> CFitBaseTypeMap::baseTypes = buildBaseTypeMap();
 
 CFitBaseType* CFitBaseTypeMap::get(uint8_t nr)
 {
-    if (baseTypes.contains(nr & BaseTypeNumMask))
+    if (baseTypes.contains(nr & fitBaseTypeNumMask))
     {
-        return &baseTypes[nr & BaseTypeNumMask];
+        return &baseTypes[nr & fitBaseTypeNumMask];
     }
 
     return &InvalidType;

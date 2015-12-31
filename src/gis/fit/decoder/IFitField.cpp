@@ -39,10 +39,11 @@ IFitField::IFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldP
 {
 }
 
-IFitField::IFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(GlobalMesgNrInvalid, FieldDefNrInvalid))
+IFitField::IFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(fitGlobalMesgNrInvalid,
+                                                                            fitFieldDefNrInvalid))
 {
-    globalMesgNr = GlobalMesgNrInvalid;
-    fieldDefNr = FieldDefNrInvalid;
+    globalMesgNr = fitGlobalMesgNrInvalid;
+    fieldDefNr = fitFieldDefNrInvalid;
     baseType = &InvalidType;
     valid = false;
 }

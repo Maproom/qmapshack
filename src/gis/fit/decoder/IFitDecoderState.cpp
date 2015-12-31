@@ -75,18 +75,18 @@ CFitDefinitionMessage*IFitDecoderState::latestDefinition()
 }
 
 
-static const uint8_t RecordHeaderTimeOffsetMask = 0x1F; // bit 0-4: 0001 1111
+static const uint8_t fitRecordHeaderTimeOffsetMask = 0x1F; // bit 0-4: 0001 1111
 
 void IFitDecoderState::setTimestamp(uint32_t fullTimestamp)
 {
     data.timestamp = fullTimestamp;
-    data.lastTimeOffset = (uint8_t) (data.timestamp & RecordHeaderTimeOffsetMask);
+    data.lastTimeOffset = (uint8_t) (data.timestamp & fitRecordHeaderTimeOffsetMask);
 }
 
 void IFitDecoderState::setTimestampOffset(uint32_t offsetTimestamp)
 {
-    uint8_t timeOffset = offsetTimestamp & RecordHeaderTimeOffsetMask;
-    data.timestamp += (timeOffset - data.lastTimeOffset) & RecordHeaderTimeOffsetMask;
+    uint8_t timeOffset = offsetTimestamp & fitRecordHeaderTimeOffsetMask;
+    data.timestamp += (timeOffset - data.lastTimeOffset) & fitRecordHeaderTimeOffsetMask;
     data.lastTimeOffset = timeOffset;
 }
 

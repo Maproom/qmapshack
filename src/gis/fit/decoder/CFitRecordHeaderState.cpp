@@ -31,8 +31,8 @@
  * 1:     local message type
  * 0:     local message type
  */
-static const uint8_t RecordHeaderDefBit =  ((uint8_t) 0x40); // bit 6: 0100 0000
-static const uint8_t RecordHeaderMesgMask = ((uint8_t) 0x0F); // bit 0-3: 0000 1111
+static const uint8_t fitRecordHeaderDefBit =  ((uint8_t) 0x40); // bit 6: 0100 0000
+static const uint8_t fitRecordHeaderMesgMask = ((uint8_t) 0x0F); // bit 0-3: 0000 1111
 
 /*
  * compressed timestamp header
@@ -46,17 +46,17 @@ static const uint8_t RecordHeaderMesgMask = ((uint8_t) 0x0F); // bit 0-3: 0000 1
  * 1:     time offset
  * 0:     time offset
  */
-static const uint8_t RecordHeaderTypeBit =  ((uint8_t) 0x80); // bit 7: 1000 0000
-static const uint8_t RecordHeaderTimeMesgMask =  ((uint8_t) 0x60); // bit 5-6: 0110 0000
-static const uint8_t RecordHeaderTimeMesgShift = 5;
+static const uint8_t fitRecordHeaderTypeBit =  ((uint8_t) 0x80); // bit 7: 1000 0000
+static const uint8_t fitRecordHeaderTimeMesgMask =  ((uint8_t) 0x60); // bit 5-6: 0110 0000
+static const uint8_t fitRecordHeaderTimeMesgShift = 5;
 
 
 decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte)
 {
-    if ((dataByte & RecordHeaderTypeBit) != 0)
+    if ((dataByte & fitRecordHeaderTypeBit) != 0)
     {
         // this is a compressed timestamp header
-        uint8_t localMessageType = (dataByte & RecordHeaderTimeMesgMask) >> RecordHeaderTimeMesgShift;
+        uint8_t localMessageType = (dataByte & fitRecordHeaderTimeMesgMask) >> fitRecordHeaderTimeMesgShift;
         CFitDefinitionMessage* def = defintion(localMessageType);
 
         if (!def->hasField(eRecordTimestamp))
@@ -78,8 +78,8 @@ decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte)
     }
     else
     {
-        uint8_t localMessageType = dataByte & RecordHeaderMesgMask;
-        if ((dataByte & RecordHeaderDefBit) != 0)
+        uint8_t localMessageType = dataByte & fitRecordHeaderMesgMask;
+        if ((dataByte & fitRecordHeaderDefBit) != 0)
         {
             // this is a definition message
             addDefinition(CFitDefinitionMessage(localMessageType));

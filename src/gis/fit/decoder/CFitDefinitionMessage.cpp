@@ -21,11 +21,11 @@
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitProfileLockup.h"
 
-static const uint8_t ArchitecureEndianMask = 0x01;
+static const uint8_t fitArchitecureEndianMask = 0x01;
 
 
 CFitDefinitionMessage::CFitDefinitionMessage()
-    : CFitDefinitionMessage(LocalMesgNrInvalid)
+    : CFitDefinitionMessage(fitLocalMesgNrInvalid)
 {
 }
 
@@ -43,7 +43,7 @@ CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
 CFitDefinitionMessage::CFitDefinitionMessage(uint8_t localMesgNr)
     : architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields()
 {
-    setGlobalMesgNr(GlobalMesgNrInvalid);
+    setGlobalMesgNr(fitGlobalMesgNrInvalid);
 }
 
 
@@ -75,7 +75,7 @@ uint8_t CFitDefinitionMessage::getLocalMesgNr() const
 
 uint8_t CFitDefinitionMessage::getArchitectureBit() const
 {
-    return architecture & ArchitecureEndianMask;
+    return architecture & fitArchitecureEndianMask;
 }
 uint8_t CFitDefinitionMessage::getNrOfFields() const
 {

@@ -120,7 +120,7 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
     foreach(const QString &entry, entries)
     {
         const QString filename = dirLoop.absoluteFilePath(entry);
-        IGisProject * project = 0;
+        IGisProject * project = nullptr;
         if (fileEnding == "fit") project = new CFitProject(filename, this);
         if (fileEnding == "gpx") project = new CGpxProject(filename, this);
         

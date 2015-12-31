@@ -23,7 +23,7 @@ CFitProfile::CFitProfile(QString name, uint16_t globalMesgNr) : name(name), glob
 {
 }
 
-CFitProfile::CFitProfile() : CFitProfile("unknown", GlobalMesgNrInvalid)
+CFitProfile::CFitProfile() : CFitProfile("unknown", fitGlobalMesgNrInvalid)
 {
 }
 

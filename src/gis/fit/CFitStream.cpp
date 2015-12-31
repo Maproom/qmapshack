@@ -90,7 +90,7 @@ int CFitStream::countMesgOf(uint16_t mesgNr)
 {
     reset();
     int c = 0;
-    while(nextMesgOf(mesgNr).getGlobalMesgNr() != GlobalMesgNrInvalid)
+    while(nextMesgOf(mesgNr).getGlobalMesgNr() != fitGlobalMesgNrInvalid)
     {
         c++;
     }

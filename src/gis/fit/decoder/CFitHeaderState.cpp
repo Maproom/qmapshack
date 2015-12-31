@@ -37,10 +37,10 @@
  * 13: CRC MSB
  */
 
-static const uint8_t FitProtocolVersionMajor=1;
+static const uint8_t fitProtocolVersionMajor =1;
 
-static const uint8_t FitProtocolMajerVersionShift = 4;
-static const uint8_t FitProtocolMajorVersionMask= 0x0F << FitProtocolMajerVersionShift;
+static const uint8_t fitProtocolMajerVersionShift = 4;
+static const uint8_t fitProtocolMajorVersionMask = 0x0F << fitProtocolMajerVersionShift;
 
 void CFitHeaderState::reset()
 {
@@ -64,8 +64,8 @@ decode_state_e CFitHeaderState::process(uint8_t &dataByte)
 
     case 1:
         // protocol version
-        if ((dataByte & FitProtocolMajorVersionMask) >
-            (FitProtocolVersionMajor << FitProtocolMajerVersionShift))
+        if ((dataByte & fitProtocolMajorVersionMask) >
+            (fitProtocolVersionMajor << fitProtocolMajerVersionShift))
         {
             throw QString("Protocol version not supported.");
         }

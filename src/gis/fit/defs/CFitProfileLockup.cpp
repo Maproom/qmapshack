@@ -1270,8 +1270,8 @@ QMap<uint16_t, CFitProfile*> initProfiles()
     initMemoGlob(allProfiles);
 
     // invalid profile
-    allProfiles[GlobalMesgNrInvalid] = new CFitProfile();
-    allProfiles[GlobalMesgNrInvalid]->addField(new CFitFieldProfile());
+    allProfiles[fitGlobalMesgNrInvalid] = new CFitProfile();
+    allProfiles[fitGlobalMesgNrInvalid]->addField(new CFitFieldProfile());
     return allProfiles;
 }
 
@@ -1283,7 +1283,7 @@ const CFitProfile* CFitProfileLockup::getProfile(uint16_t globalMesgNr)
     {
         return allProfiles[globalMesgNr];
     }
-    return allProfiles[GlobalMesgNrInvalid];
+    return allProfiles[fitGlobalMesgNrInvalid];
 }
 
 const CFitFieldProfile* CFitProfileLockup::getFieldForProfile(uint16_t globalMesgNr, uint8_t fieldDefNr)
@@ -1292,5 +1292,5 @@ const CFitFieldProfile* CFitProfileLockup::getFieldForProfile(uint16_t globalMes
     {
         return allProfiles[globalMesgNr]->getField(fieldDefNr);
     }
-    return allProfiles[GlobalMesgNrInvalid]->getField(FieldDefNrInvalid);
+    return allProfiles[fitGlobalMesgNrInvalid]->getField(fitFieldDefNrInvalid);
 }

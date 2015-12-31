@@ -131,7 +131,7 @@ quint64 IDBFolder::addFolder(type_e type, const QString& name)
     quint64 idChild = IDBFolder::addFolderToDb(type, name, id, db);
     if(idChild != 0)
     {
-        IDBFolder::createFolderByType(db, type, idChild, this);
+        createFolderByType(db, type, idChild, this);
         expanding();
     }
     return idChild;
@@ -313,7 +313,7 @@ bool IDBFolder::update()
         quint32 typeChild   = query.value(1).toInt();
         if(dbFoldersAdd.contains(idChild))
         {
-            IDBFolder::createFolderByType(db, typeChild, idChild, this);
+            createFolderByType(db, typeChild, idChild, this);
         }
     }
     sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
@@ -415,7 +415,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolder
         {
             quint64 idChild     = query.value(0).toULongLong();
             quint32 typeChild   = query.value(1).toInt();
-            IDBFolder::createFolderByType(db, typeChild, idChild, this);
+            createFolderByType(db, typeChild, idChild, this);
         }
 
         sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);

@@ -99,10 +99,13 @@ bool IDBFolderSql::update()
         quint32 typeChild   = query.value(1).toInt();
         if(dbFoldersAdd.contains(idChild))
         {
-            IDBFolder::createFolderByType(db, typeChild, idChild, this);
+            createFolderByType(db, typeChild, idChild, this);
         }
     }
+
+    takeChild(0);
     sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+    insertChild(0, folderLostFound);
 
     updateLostFound();
     return true;

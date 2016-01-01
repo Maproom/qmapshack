@@ -53,6 +53,8 @@ public:
 
     bool isZoomed() const;
 
+    using INotifyTrk::setMouseFocus;
+
 signals:
     void sigMouseClickState(int);
 

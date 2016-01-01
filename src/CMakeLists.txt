@@ -16,16 +16,24 @@ find_package(Qt5PrintSupport)
 if(UNIX)
 find_package(Qt5DBus)
 endif(UNIX)
-find_package(GDAL REQUIRED)
+find_package(GDAL REQUIRED QUIET)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
+
+function(cxx_add_flag_if_supported flag)
+    CHECK_CXX_COMPILER_FLAG(${flag} Flag:${flag})
+    if(Flag:${flag})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
+    endif(Flag:${flag})
+endfunction(cxx_add_flag_if_supported)
+
 
 if(UNIX AND NOT APPLE)
 find_package(Qt5Test)
 endif(UNIX AND NOT APPLE)
 
 if(UNIX)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wsuggest-override")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif(UNIX)
 
 if (APPLE)
@@ -609,6 +617,9 @@ set( RCS
 qt5_wrap_ui(UI_HDRS ${UIS})
 qt5_add_resources(RC_SRCS ${RCS})
 
+# try to figure out which compiler flags are supported (and add them)
+cxx_add_flag_if_supported(-Wsuggest-override)
+
 if(UNIX)
     add_definitions(-Wall -Wno-switch -Wno-strict-aliasing)
 endif(UNIX)
@@ -642,6 +653,10 @@ set(MAININP
 
 include_directories(
     ${CMAKE_BINARY_DIR}
+)
+
+include_directories(
+    SYSTEM # this prevents warnings from non-QMS headers
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}

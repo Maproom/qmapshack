@@ -120,7 +120,7 @@ void CMouseEditTrk::slotCopyToNew()
         return;
     }
 
-    CMainWindow::self().getEelevationAt(points);
+    CMainWindow::self().getElevationAt(points);
 
     new CGisItemTrk(points,name, project, NOIDX);
 

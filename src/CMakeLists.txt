@@ -16,7 +16,7 @@ find_package(Qt5PrintSupport)
 if(UNIX)
 find_package(Qt5DBus)
 endif(UNIX)
-find_package(GDAL REQUIRED QUIET)
+find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
 

@@ -40,7 +40,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
 
-    if(dataset == 0)
+    if(nullptr == dataset)
     {
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
         return;
@@ -50,13 +50,12 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     rasterBandCount = dataset->GetRasterCount();
     if(rasterBandCount == 1)
     {
-        GDALRasterBand * pBand;
-        pBand = dataset->GetRasterBand(1);
+        GDALRasterBand *pBand = dataset->GetRasterBand(1);
 
-        if(pBand == 0)
+        if(nullptr == pBand)
         {
             delete dataset;
-            dataset = 0;
+            dataset = nullptr;
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
             return;
         }
@@ -85,7 +84,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         else
         {
             delete dataset;
-            dataset = 0;
+            dataset = nullptr;
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("File must be 8 bit palette or gray indexed."));
             return;
         }
@@ -123,7 +122,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     if(pjsrc == 0)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("No georeference information found."));
         return;
     }

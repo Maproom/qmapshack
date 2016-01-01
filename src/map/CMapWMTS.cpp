@@ -190,7 +190,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
 
         char * ptr1 = (char*)malloc(str.toLatin1().size() + 1);
-        char * ptr2 = 0;
+        char * ptr2 = nullptr;
 
         strncpy(ptr1,str.toLatin1().data(), str.toLatin1().size() + 1);
         OGRSpatialReference oSRS;

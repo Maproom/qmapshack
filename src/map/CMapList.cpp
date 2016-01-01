@@ -134,7 +134,7 @@ void CMapList::updateHelpText()
 void CMapList::slotActivate()
 {
     CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -196,7 +196,7 @@ void CMapList::slotContextMenu(const QPoint& point)
 {
     CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
 
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }

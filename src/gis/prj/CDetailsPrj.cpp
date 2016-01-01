@@ -265,32 +265,32 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     const int N = prj.childCount();
     for(int i = 0; i < N; i++)
     {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
-        if(trk != 0)
+        CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
+        if(nullptr != trk)
         {
             trks << trk;
             nItems++;
             continue;
         }
 
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(prj.child(i));
-        if(rte != 0)
+        CGisItemRte *rte = dynamic_cast<CGisItemRte*>(prj.child(i));
+        if(nullptr != rte)
         {
             rtes << rte;
             nItems++;
             continue;
         }
 
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.child(i));
-        if(wpt != 0)
+        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(prj.child(i));
+        if(nullptr != wpt)
         {
             wpts << wpt;
             nItems++;
             continue;
         }
 
-        CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(prj.child(i));
-        if(area != 0)
+        CGisItemOvlArea *area = dynamic_cast<CGisItemOvlArea*>(prj.child(i));
+        if(nullptr != area)
         {
             areas << area;
             nItems++;
@@ -731,7 +731,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         }
         else
         {
-            CTextEditWidget dlg(0);
+            CTextEditWidget dlg(nullptr);
             dlg.setHtml(prj.getDescription());
             if(dlg.exec() == QDialog::Accepted)
             {

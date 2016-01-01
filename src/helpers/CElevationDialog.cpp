@@ -71,7 +71,7 @@ void CElevationDialog::slotReset()
 
 void CElevationDialog::slotGetEle()
 {
-    QVariant ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    QVariant ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     if(ele != NOFLOAT)
     {
         QString str, unit;

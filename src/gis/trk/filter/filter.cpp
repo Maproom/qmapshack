@@ -258,7 +258,7 @@ void CGisItemTrk::filterReplaceElevation()
     }
 
     QPolygonF ele(line.size());
-    CMainWindow::self().getEelevationAt(line, ele);
+    CMainWindow::self().getElevationAt(line, ele);
 
     int cnt = 0;
     for(int i = 0; i < trk.segs.size(); i++)

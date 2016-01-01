@@ -26,7 +26,7 @@
 #include <proj_api.h>
 
 CPlotProfile::CPlotProfile(QWidget * parent)
-    : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
+    : IPlot(nullptr, CPlotData::eAxisLinear, eModeNormal, parent)
 {
 }
 
@@ -107,7 +107,7 @@ void CPlotProfile::updateData()
         }
     }
 
-    CMainWindow::self().getEelevationAt(coords, lineDem);
+    CMainWindow::self().getElevationAt(coords, lineDem);
 
     newLine(lineEle, "GPS");
     if(!lineDem.isEmpty())
@@ -120,7 +120,7 @@ void CPlotProfile::updateData()
 
 void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
-    if(ptMouseMove == 0)
+    if(nullptr == ptMouseMove)
     {
         if(posMouse != NOPOINT)
         {
@@ -135,8 +135,8 @@ void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(ptMouseMove->distance);
-        posMouse.ry() = top  +  data->y().val2pt(ptMouseMove->ele);
+        posMouse.rx() = left + data->x().val2pt(ptMouseMove->distance);
+        posMouse.ry() = top  + data->y().val2pt(ptMouseMove->ele);
     }
     update();
 }

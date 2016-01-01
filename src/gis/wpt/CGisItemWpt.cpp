@@ -59,7 +59,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     : CGisItemWpt(pos, NOFLOAT, QDateTime::currentDateTimeUtc(), name, icon, project)
 {
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
-    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -81,7 +81,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     history.events.clear();
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
 
-    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);

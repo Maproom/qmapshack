@@ -381,7 +381,7 @@ void IMouseEditLine::slotCopyToOrig()
     IGisLine * l = getGisLine();
     if(l != 0)
     {
-        CMainWindow::self().getEelevationAt(points);
+        CMainWindow::self().getElevationAt(points);
         l->setDataFromPolyline(points);
     }
 

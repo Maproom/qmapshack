@@ -45,7 +45,7 @@ int main(int argc, char ** argv)
     env->prepareTranslators(&app);
     env->prepareGdal();
 
-    QSplashScreen *splash = 0;
+    QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)
     {
         QPixmap pic(":/pics/splash.png");
@@ -64,7 +64,7 @@ int main(int argc, char ** argv)
     CMainWindow w;
     w.show();
 
-    if (splash != 0)
+    if(nullptr != splash)
     {
         splash->finish(&w);
         delete splash;

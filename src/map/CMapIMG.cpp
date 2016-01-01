@@ -1818,8 +1818,6 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
                     map->convertRad2Px(poly);
 
-                    int i;
-
                     lengths.resize(0);
 
 
@@ -1837,7 +1835,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                     u1 = poly[0].x();
                     v1 = poly[0].y();
 
-                    for(i = 1; i < size; ++i)
+                    for(int i = 1; i < size; ++i)
                     {
                         u2 = poly[i].x();
                         v2 = poly[i].y();

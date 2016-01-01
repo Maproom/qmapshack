@@ -292,37 +292,37 @@ QWidget * CMainWindow::getBestWidgetForParent()
     return &self();
 }
 
-bool CMainWindow::isScaleVisible()
+bool CMainWindow::isScaleVisible() const
 {
     return actionShowScale->isChecked();
 }
 
-bool CMainWindow::isGridVisible()
+bool CMainWindow::isGridVisible() const
 {
     return actionShowGrid->isChecked();
 }
 
-bool CMainWindow::isNight()
+bool CMainWindow::isNight() const
 {
     return actionNightDay->isChecked();
 }
 
-bool CMainWindow::isPOIText()
+bool CMainWindow::isPOIText() const
 {
     return actionPOIText->isChecked();
 }
 
-bool CMainWindow::isMapToolTip()
+bool CMainWindow::isMapToolTip() const
 {
     return actionMapToolTip->isChecked();
 }
 
-bool CMainWindow::flipMouseWheel()
+bool CMainWindow::flipMouseWheel() const
 {
     return actionFlipMouseWheel->isChecked();
 }
 
-bool CMainWindow::profileIsWindow()
+bool CMainWindow::profileIsWindow() const
 {
     return actionProfileIsWindow->isChecked();
 }
@@ -346,7 +346,7 @@ void CMainWindow::addWidgetToTab(QWidget * w)
     tabWidget->setCurrentWidget(w);
 }
 
-CCanvas * CMainWindow::getVisibleCanvas()
+CCanvas* CMainWindow::getVisibleCanvas() const
 {
     return dynamic_cast<CCanvas*>(tabWidget->currentWidget());
 }
@@ -360,7 +360,7 @@ void CMainWindow::zoomCanvasTo(const QRectF rect)
     }
 }
 
-qreal CMainWindow::getEelevationAt(const QPointF& pos)
+qreal CMainWindow::getElevationAt(const QPointF& pos) const
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
@@ -371,7 +371,7 @@ qreal CMainWindow::getEelevationAt(const QPointF& pos)
 }
 
 
-void CMainWindow::getEelevationAt(SGisLine &line)
+void CMainWindow::getElevationAt(SGisLine &line) const
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
@@ -397,7 +397,7 @@ void CMainWindow::getEelevationAt(SGisLine &line)
     }
 }
 
-void CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)
+void CMainWindow::getElevationAt(const QPolygonF &pos, QPolygonF& ele) const
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
@@ -437,11 +437,10 @@ void CMainWindow::slotAddCanvas()
     for(i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(canvas == 0)
+        if(nullptr != canvas)
         {
-            continue;
+            cnt++;
         }
-        cnt++;
     }
 
     CCanvas * canvas = new CCanvas(tabWidget,"");
@@ -454,7 +453,7 @@ void CMainWindow::slotAddCanvas()
 void CMainWindow::slotCloneCanvas()
 {
     CCanvas * source = getVisibleCanvas();
-    if(source == 0)
+    if(nullptr == source)
     {
         return;
     }
@@ -471,7 +470,7 @@ void CMainWindow::slotCloneCanvas()
     slotAddCanvas();
 
     CCanvas * target = getVisibleCanvas();
-    if(target == 0)
+    if(nullptr == target)
     {
         return;
     }
@@ -493,9 +492,7 @@ void CMainWindow::slotTabCloseRequest(int i)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    QWidget * w = tabWidget->widget(i);
-
-    delete w;
+    delete tabWidget->widget(i);
 }
 
 void CMainWindow::slotCurrentTabCanvas(int i)
@@ -649,7 +646,7 @@ void CMainWindow::slotSetupMapFont()
 void CMainWindow::slotSetupGrid()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
@@ -669,7 +666,7 @@ void CMainWindow::slotSetupDemPath()
 void CMainWindow::slotSetupMapView()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
@@ -756,7 +753,7 @@ void CMainWindow::loadGISData(const QStringList& filenames)
 void CMainWindow::slotStoreView()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
@@ -799,7 +796,7 @@ void CMainWindow::slotLoadView()
     slotAddCanvas();
 
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
@@ -825,24 +822,20 @@ void CMainWindow::slotSetProfileMode(bool on)
     for(int i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(view == 0)
+        if(nullptr != view)
         {
-            continue;
+            view->showProfileAsWindow(on);
         }
-
-        view->showProfileAsWindow(on);
     }
 }
 
 void CMainWindow::slotPrintMap()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr != canvas)
     {
-        return;
+        canvas->setMousePrint();
     }
-
-    canvas->setMousePrint();
 }
 
 #ifdef WIN32
@@ -927,10 +920,9 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
 void CMainWindow::dropEvent(QDropEvent *event)
 {
     QList<QUrl> urls = event->mimeData()->urls();
-    QUrl url;
 
     QStringList filenames;
-    foreach(url, urls)
+    foreach(const QUrl &url, urls)
     {
         filenames << url.toLocalFile();
     }

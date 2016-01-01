@@ -74,8 +74,8 @@ public:
      */
     CCanvas* getVisibleCanvas() const;
 
-#ifdef WIN32
 protected:
+#ifdef WIN32
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
 #endif // WIN32
     virtual void dragEnterEvent(QDragEnterEvent *event) override;

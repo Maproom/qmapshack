@@ -27,13 +27,13 @@ public:
     CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpDeletePoint();
 
-    void mousePressEventEx(QMouseEvent * e)
+    virtual void mousePressEventEx(QMouseEvent *e) override
     {
     }
-    void mouseMoveEventEx(QMouseEvent * e);
-    void mouseReleaseEventEx(QMouseEvent *e);
+    virtual void mouseMoveEventEx   (QMouseEvent *e) override;
+    virtual void mouseReleaseEventEx(QMouseEvent *e) override;
 
-    void drawFg(QPainter& p);
+    virtual void drawFg(QPainter& p) override;
 
 private:
 };

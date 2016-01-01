@@ -33,7 +33,7 @@ public:
     virtual ~CGridSetup();
 
 public slots:
-    void accept();
+    virtual void accept() override;
 
 private slots:
     void slotProjWizard();

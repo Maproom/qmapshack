@@ -66,7 +66,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    QDataStream& operator<<(QDataStream& stream);
+    virtual QDataStream& operator<<(QDataStream& stream) override;
 
     /**
        @brief Serialize object into a QDataStream
@@ -76,7 +76,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    QDataStream& operator>>(QDataStream& stream);
+    virtual QDataStream& operator>>(QDataStream& stream) override;
 
     /**
        @brief Send a CEvtW2DAckInfo event to the database view
@@ -107,7 +107,7 @@ protected:
 
        @param defaultName
      */
-    void setupName(const QString &defaultName);
+    virtual void setupName(const QString &defaultName) override;
 
     /**
      * @brief Save item's data into an existing database entry

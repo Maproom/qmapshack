@@ -50,8 +50,8 @@ public:
     IGisItem::key_t getItemKey(int index = 0);
     const item_t *selectItem(const QPoint& point);
 
-    void draw(QPainter& p);
-    void mouseMoveEvent(QMouseEvent * e);
+    virtual void draw(QPainter& p) override;
+    virtual void mouseMoveEvent(QMouseEvent * e) override;
 
 private:
     static const QPoint positions[9][8];

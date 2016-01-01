@@ -56,7 +56,7 @@ public:
     virtual void prepareTranslators(QApplication* app) override;
 
 protected:
-    virtual QString logFilename();
+    virtual QString logFilename() override;
     QString getResourceDir(QString subdir);
     CAppSetupMac();
 
@@ -67,8 +67,8 @@ protected:
 class CAppSetupLinux : public CAppSetup
 {
 public:
-    virtual QString routinoPath(QString xmlFile);
-    virtual void prepareTranslators(QApplication* app);
+    virtual QString routinoPath(QString xmlFile) override;
+    virtual void prepareTranslators(QApplication* app) override;
 
 protected:
     CAppSetupLinux();

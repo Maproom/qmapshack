@@ -27,8 +27,8 @@ public:
     CFitRecordHeaderState(shared_state_data_t & data) : IFitDecoderState(data, eDecoderStateRecord) { reset(); }
     virtual ~CFitRecordHeaderState() {}
 
-    virtual decode_state_e process(uint8_t &dataByte);
-    virtual void reset() {}
+    virtual decode_state_e process(uint8_t &dataByte) override;
+    virtual void reset() override {}
 };
 
 #endif //CFITRECORDHEADERSTATE_H

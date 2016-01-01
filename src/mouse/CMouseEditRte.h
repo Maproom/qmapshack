@@ -35,13 +35,13 @@ public:
     virtual void mousePressEvent(QMouseEvent * e) override;
 
 protected slots:
-    void slotAbort();
-    void slotCopyToNew();
-    void slotCopyToOrig();
+    virtual void slotAbort()      override;
+    virtual void slotCopyToNew()  override;
+    virtual void slotCopyToOrig() override;
 
 
 protected:
-    IGisLine * getGisLine();
+    virtual IGisLine* getGisLine() override;
 };
 
 #endif //CMOUSEEDITRTE_H

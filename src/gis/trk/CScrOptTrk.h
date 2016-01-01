@@ -33,7 +33,7 @@ public:
     CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
     virtual ~CScrOptTrk();
 
-    void draw(QPainter& p);
+    virtual void draw(QPainter& p) override;
 
 private slots:
     void slotDelete();

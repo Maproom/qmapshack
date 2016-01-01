@@ -27,19 +27,19 @@ public:
     CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpAddPoint();
 
-    void mousePressEventEx(QMouseEvent * e);
-    void mouseMoveEventEx(QMouseEvent * e);
-    void mouseReleaseEventEx(QMouseEvent *e)
+    virtual void mousePressEventEx  (QMouseEvent *e) override;
+    virtual void mouseMoveEventEx   (QMouseEvent *e) override;
+    virtual void mouseReleaseEventEx(QMouseEvent *e) override
     {
     }
 
-    void drawFg(QPainter& p);
+    virtual void drawFg(QPainter& p) override;
 
-    void canvasPanned(QPointF pos);
+    virtual void canvasPanned(QPointF pos) override;
 
     void append();
 
-    bool abortStep();
+    virtual bool abortStep() override;
 
 private:
     bool addPoint = false;

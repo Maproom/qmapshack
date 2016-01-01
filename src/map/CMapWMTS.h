@@ -41,7 +41,7 @@ public:
 
     virtual void draw(IDrawContext::buffer_t& buf) override;
 
-    void getLayers(QListWidget& list);
+    virtual void getLayers(QListWidget& list) override;
 
     virtual void saveConfig(QSettings& cfg) override;
 
@@ -52,7 +52,7 @@ signals:
     void sigQueueChanged();
 
 protected:
-    void configureCache();
+    virtual void configureCache() override;
 
 private slots:
     void slotQueueChanged();

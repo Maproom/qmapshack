@@ -39,7 +39,7 @@ public:
     }
 
 public slots:
-    void accept();
+    virtual void accept() override;
 
 private slots:
     void slotSelectionChanged();

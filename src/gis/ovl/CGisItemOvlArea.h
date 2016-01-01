@@ -45,10 +45,10 @@ public:
 
     IGisItem * createClone() override;
 
-    QDataStream& operator<<(QDataStream& stream);
-    QDataStream& operator>>(QDataStream& stream) const;
+    virtual QDataStream& operator<<(QDataStream& stream) override;
+    virtual QDataStream& operator>>(QDataStream& stream) const override;
 
-    const QString& getName() const
+    virtual const QString& getName() const override
     {
         return area.name.isEmpty() ? noName : area.name;
     }
@@ -57,17 +57,17 @@ public:
     {
         return colorIdx;
     }
-    QString getInfo(bool allowEdit = false) const;
-    void getPolylineFromData(SGisLine& l);
-    const QString& getComment() const
+    virtual QString getInfo(bool allowEdit = false) const override;
+    virtual void getPolylineFromData(SGisLine& l) override;
+    virtual const QString& getComment() const override
     {
         return area.cmt;
     }
-    const QString& getDescription() const
+    virtual const QString& getDescription() const override
     {
         return area.desc;
     }
-    const QList<link_t>& getLinks() const
+    virtual const QList<link_t>& getLinks() const override
     {
         return area.links;
     }
@@ -86,26 +86,26 @@ public:
 
     void setName(const QString& str);
     void setColor(size_t idx);
-    void setDataFromPolyline(const SGisLine& l);
+    virtual void setDataFromPolyline(const SGisLine& l) override;
     void setWidth(qint32 w);
     void setStyle(qint32 s);
     void setOpacity(bool yes);
-    void setComment(const QString& str);
-    void setDescription(const QString& str);
-    void setLinks(const QList<link_t>& links);
+    virtual void setComment(const QString& str)       override;
+    virtual void setDescription(const QString& str)   override;
+    virtual void setLinks(const QList<link_t>& links) override;
 
-    void save(QDomNode& gpx);
-    void edit();
+    virtual void save(QDomNode& gpx) override;
+    virtual void edit() override;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawHighlight(QPainter& p);
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    virtual void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    virtual void drawHighlight(QPainter& p) override;
 
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-    QPointF getPointCloseBy(const QPoint& screenPos);
-    bool isCloseTo(const QPointF& pos);
+    virtual IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    virtual QPointF getPointCloseBy(const QPoint& screenPos) override;
+    virtual bool isCloseTo(const QPointF& pos) override;
 
-    void gainUserFocus(bool yes);
+    virtual void gainUserFocus(bool yes) override;
 
     struct width_t
     {
@@ -116,7 +116,7 @@ public:
     static const width_t lineWidths[OVL_N_WIDTHS];
     static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
 protected:
-    void setSymbol();
+    virtual void setSymbol() override;
 
 
 public:

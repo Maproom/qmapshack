@@ -35,7 +35,7 @@ public:
     CScrOptRte(CGisItemRte * rte, const QPoint &point, IMouse *parent);
     virtual ~CScrOptRte();
 
-    void draw(QPainter& p);
+    virtual void draw(QPainter& p) override;
 
 private slots:
     void slotEditDetails();

@@ -76,7 +76,7 @@ public:
     CFitSubfieldProfile(QString name, CFitBaseType* baseType, uint8_t fieldDefNr, float scale, uint16_t offset, QString units,
                         uint8_t subRefFieldDefNr, uint8_t subRefFieldValue);
 
-    virtual QString getTyp() const { return "dynamic"; }
+    virtual QString getTyp() const override { return "dynamic"; }
     uint8_t getReferencedFieldDefNr() const;
     uint8_t getReferencedFieldValue() const;
 

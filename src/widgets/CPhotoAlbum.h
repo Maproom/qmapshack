@@ -41,8 +41,8 @@ public slots:
     void slotDelImage();
 
 protected:
-    void resizeEvent(QResizeEvent * e);
-    void mouseReleaseEvent(QMouseEvent *e);
+    virtual void resizeEvent      (QResizeEvent *e) override;
+    virtual void mouseReleaseEvent(QMouseEvent  *e) override;
 
 private slots:
     void slotRight();

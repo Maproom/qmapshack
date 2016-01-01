@@ -46,11 +46,11 @@ public:
     }
 
     virtual void draw(QPainter& p) = 0;
-    void mouseMoveEvent(QMouseEvent *);
+    virtual void mouseMoveEvent(QMouseEvent *) override;
 
 protected:
-    void enterEvent(QEvent * e);
-    void leaveEvent(QEvent * e);
+    virtual void enterEvent(QEvent *e) override;
+    virtual void leaveEvent(QEvent *e) override;
 
     QPoint origin;
     QPoint mousePos;

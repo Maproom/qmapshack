@@ -59,7 +59,7 @@ signals:
     void valueChangedByStep(int val);
 
 public:
-    CTinySpinBox(QWidget * parent = 0);
+    CTinySpinBox(QWidget * parent = nullptr);
 
     void setReadOnly(bool r);
     virtual void stepBy(int steps) override;

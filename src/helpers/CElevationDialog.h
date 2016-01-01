@@ -30,7 +30,7 @@ public:
     virtual ~CElevationDialog();
 
 public slots:
-    void accept();
+    virtual void accept() override;
 
 private slots:
     void slotReset();

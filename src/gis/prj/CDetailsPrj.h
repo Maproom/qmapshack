@@ -41,7 +41,7 @@ public:
     virtual ~CDetailsPrj();
 
 protected:
-    void resizeEvent(QResizeEvent * e);
+    virtual void resizeEvent(QResizeEvent *e) override;
 
 private slots:
     void slotLinkActivated(const QString& link);

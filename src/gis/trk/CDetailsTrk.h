@@ -33,12 +33,12 @@ public:
     CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
     virtual ~CDetailsTrk();
 
-    void setMouseFocus(const CGisItemTrk::trkpt_t * pt);
-    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
-    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
+    virtual void setMouseFocus(const CGisItemTrk::trkpt_t *pt) override;
+    virtual void setMouseRangeFocus(const CGisItemTrk::trkpt_t *pt1, const CGisItemTrk::trkpt_t *pt2) override;
+    virtual void setMouseClickFocus(const CGisItemTrk::trkpt_t *pt) override;
 
 public slots:
-    void updateData();
+    virtual void updateData() override;
 
 private slots:
     void slotNameChanged(const QString &name);

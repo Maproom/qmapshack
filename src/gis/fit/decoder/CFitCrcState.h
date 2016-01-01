@@ -27,8 +27,8 @@ public:
     CFitCrcState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFileCrc) { reset(); }
     virtual ~CFitCrcState() {}
 
-    virtual void reset();
-    virtual decode_state_e process(uint8_t &dataByte);
+    virtual void reset() override;
+    virtual decode_state_e process(uint8_t &dataByte) override;
 };
 
 #endif //CFITCRCSTATE_H

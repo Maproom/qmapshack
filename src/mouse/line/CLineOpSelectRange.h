@@ -40,9 +40,9 @@ public:
     virtual void wheelEvent(QWheelEvent * e) override;
     virtual void keyPressEvent(QKeyEvent * e) override;
 
-    void drawFg(QPainter& p);
+    virtual void drawFg(QPainter& p) override;
 
-    bool abortStep();
+    virtual bool abortStep() override;
 
 private slots:
     void slotDelete();

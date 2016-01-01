@@ -35,13 +35,13 @@ public:
     virtual ~CMouseMoveWpt();
 
     virtual void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    virtual void mousePressEvent(QMouseEvent * e) override;
-    virtual void mouseMoveEvent(QMouseEvent * e) override;
+    virtual void mousePressEvent  (QMouseEvent *e) override;
+    virtual void mouseMoveEvent   (QMouseEvent *e) override;
     virtual void mouseReleaseEvent(QMouseEvent *e) override;
-    virtual void wheelEvent(QWheelEvent * e) override;
+    virtual void wheelEvent       (QWheelEvent *e) override;
 
 protected slots:
-    virtual void slotPanCanvas();
+    virtual void slotPanCanvas() override;
 
 private:
     IGisItem::key_t key;

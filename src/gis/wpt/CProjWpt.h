@@ -32,7 +32,7 @@ public:
     virtual ~CProjWpt();
 
 public slots:
-    void accept();
+    virtual void accept() override;
 
 private slots:
     void slotChangeIcon();

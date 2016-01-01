@@ -34,7 +34,7 @@ public:
     CScrOptOvlArea(CGisItemOvlArea * area, const QPoint &point, IMouse *parent);
     virtual ~CScrOptOvlArea();
 
-    void draw(QPainter& p);
+    virtual void draw(QPainter& p) override;
 
 private slots:
     void slotEditDetails();

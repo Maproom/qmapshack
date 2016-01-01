@@ -28,7 +28,6 @@ IDBMysql::IDBMysql()
 {
 }
 
-
 bool IDBMysql::setupDB(const QString& server,const QString& user, const QString& passwd, const QString& name, const QString& connectionName)
 {
     // this is important!

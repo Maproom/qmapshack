@@ -99,9 +99,10 @@ public:
     /**
      * @brief Update from database
      *
-     * The database might have been changed by other users.
+     * The database might have been changed by other users. Update list of folders
+     * and update each folder expanded. Rebuild list of items.
      */
-    virtual void update();
+    virtual bool update();
 
     /**
      * @brief Toggle check state of project and post event to workspace.
@@ -170,6 +171,8 @@ protected:
        @param idFolder      the 64bit database key of the child folder to be removed
      */
     virtual void remove(quint64 idParent, quint64 idFolder);
+
+    void setChildIndicator();
 
     QSqlDatabase& db;
 

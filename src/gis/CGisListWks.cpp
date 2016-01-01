@@ -213,11 +213,11 @@ void CGisListWks::configDB()
 {
     QSqlQuery query(db);
 
-    QUERY_RUN("PRAGMA locking_mode=EXCLUSIVE", return)
-    QUERY_RUN("PRAGMA synchronous=OFF",        return)
-    QUERY_RUN("PRAGMA temp_store=MEMORY",      return)
-    QUERY_RUN("PRAGMA default_cache_size=50",  return)
-    QUERY_RUN("PRAGMA page_size=8192",         return)
+    QUERY_RUN("PRAGMA locking_mode=EXCLUSIVE", return )
+    QUERY_RUN("PRAGMA synchronous=OFF",        return )
+    QUERY_RUN("PRAGMA temp_store=MEMORY",      return )
+    QUERY_RUN("PRAGMA default_cache_size=50",  return )
+    QUERY_RUN("PRAGMA page_size=8192",         return )
 
     // When migrating the database these tables are used.
     // Due to caching they can't be dropped right after the
@@ -305,8 +305,8 @@ void CGisListWks::migrateDB2to3()
 {
     QSqlQuery query(db);
 
-    QUERY_RUN("BEGIN TRANSACTION;",                             return)
-    QUERY_RUN("ALTER TABLE workspace RENAME TO tmp_workspace;", return)
+    QUERY_RUN("BEGIN TRANSACTION;",                             return )
+    QUERY_RUN("ALTER TABLE workspace RENAME TO tmp_workspace;", return )
     QUERY_RUN("CREATE TABLE workspace ("
               "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
               "type           INTEGER NOT NULL,"
@@ -315,10 +315,10 @@ void CGisListWks::migrateDB2to3()
               "changed        BOOLEAN DEFAULT FALSE,"
               "visible        BOOLEAN DEFAULT TRUE,"
               "data           BLOB NOT NULL"
-              ")", return);
-    QUERY_RUN("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;", return)
-    QUERY_RUN("COMMIT;",                                                                                      return)
-    QUERY_RUN("DROP TABLE tmp_workspace;",                                                                    return)
+              ")", return );
+    QUERY_RUN("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;", return )
+    QUERY_RUN("COMMIT;",                                                                                      return )
+    QUERY_RUN("DROP TABLE tmp_workspace;",                                                                    return )
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -767,7 +767,7 @@ void CGisListWks::slotSaveWorkspace()
     }
 
     QSqlQuery query(db);
-    QUERY_RUN("DELETE FROM workspace", return)
+    QUERY_RUN("DELETE FROM workspace", return )
 
     qDebug() << "slotSaveWorkspace()";
 
@@ -815,7 +815,7 @@ void CGisListWks::slotLoadWorkspace()
 
     QSqlQuery query(db);
 
-    QUERY_RUN("SELECT type, keyqms, name, changed, visible, data FROM workspace", return)
+    QUERY_RUN("SELECT type, keyqms, name, changed, visible, data FROM workspace", return )
 
     const int total = query.size();
     PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);

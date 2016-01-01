@@ -34,25 +34,25 @@ public:
     static const CKnownExtension get(const QString &name);
     static bool isKnown(const QString &name);
 
-    QString      name;         //< userfriendly name ("Speed" "Heart Rate")
-    qreal        defLimitLow;  //< the default lower limit
-    qreal        defLimitHigh; //< the default high limit
-    qreal        minimum;      //< hard (enforced) minimum, cannot go lower
-    qreal        maximum;      //< hard (enforced) maximum, cannot go higher
-    qreal        factor;       //< factor used to convert a value to match the users' units
-    QString      unit;         //< the unit (to be displayed)
-    QString      icon;         //< path to an icon
-    bool         known;
+    QString name;              //< userfriendly name ("Speed" "Heart Rate")
+    qreal defLimitLow;         //< the default lower limit
+    qreal defLimitHigh;        //< the default high limit
+    qreal minimum;             //< hard (enforced) minimum, cannot go lower
+    qreal maximum;             //< hard (enforced) maximum, cannot go higher
+    qreal factor;              //< factor used to convert a value to match the users' units
+    QString unit;              //< the unit (to be displayed)
+    QString icon;              //< path to an icon
+    bool known;
     fTrkPtGetVal valueFunc;    //< the function used to retrieve the value
 
 private:
     static QHash<QString, CKnownExtension> knownExtensions;
 
     CKnownExtension(QString name,
-                    qreal   defLimitLow, qreal   defLimitHigh,
-                    qreal   minimum,     qreal   maximum,
-                    qreal   factor,      QString unit,
-                    QString icon,        bool    known,
+                    qreal defLimitLow, qreal defLimitHigh,
+                    qreal minimum,     qreal maximum,
+                    qreal factor,      QString unit,
+                    QString icon,        bool known,
                     fTrkPtGetVal valueFunc
                     );
 

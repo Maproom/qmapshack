@@ -482,7 +482,7 @@ public:
     };
 
     static const color_t colorMap[];
-    static const size_t  colorMapSize;
+    static const size_t colorMapSize;
 
 protected:
     /// set icon of QTreeWidgetItem

@@ -52,7 +52,7 @@ void CLostFoundProject::updateFromDb()
     qDeleteAll(takeChildren());
 
     QSqlQuery query(db);
-    QUERY_RUN("SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name", return)
+    QUERY_RUN("SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name", return )
 
     while(query.next())
     {

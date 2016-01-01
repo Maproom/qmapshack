@@ -24,8 +24,8 @@
 #include <QSqlDatabase>
 #include <QWidget>
 
-#include "gis/IGisItem.h"
 #include "db/IDBFolder.h"
+#include "gis/IGisItem.h"
 
 class CGisDraw;
 class IGisProject;

@@ -28,8 +28,8 @@
 #define CLINEEDIT_H
 
 #include <QFont>
-#include <QPalette>
 #include <QLineEdit>
+#include <QPalette>
 
 class CLineEdit : public QLineEdit
 {

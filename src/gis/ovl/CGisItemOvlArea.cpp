@@ -33,7 +33,7 @@
 
 const CGisItemOvlArea::width_t CGisItemOvlArea::lineWidths[OVL_N_WIDTHS] =
 {
-     {3,  QObject::tr("thin")}
+    {3,  QObject::tr("thin")}
     ,{5,  QObject::tr("normal")}
     ,{9,  QObject::tr("wide")}
     ,{13, QObject::tr("strong")}

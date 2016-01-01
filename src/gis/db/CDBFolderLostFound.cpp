@@ -46,7 +46,7 @@ void CDBFolderLostFound::setupFromDB()
 
     qDeleteAll(takeChildren());
 
-    QUERY_RUN("SELECT id FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name", return);
+    QUERY_RUN("SELECT id FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name", return );
     while(query.next())
     {
         quint64 id = query.value(0).toULongLong();
@@ -87,7 +87,7 @@ void CDBFolderLostFound::clear()
 {
     QSqlQuery query(db);
 
-    QUERY_RUN("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)", return)
+    QUERY_RUN("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)", return )
 
     setupFromDB();
 }

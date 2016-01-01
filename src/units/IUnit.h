@@ -77,11 +77,11 @@ public:
     /// find the timezone setup by position
     static QByteArray pos2timezone(const QPointF& pos);
 
-    const type_e  type;
+    const type_e type;
     const QString baseunit;
-    const qreal   basefactor;
+    const qreal basefactor;
     const QString speedunit;
-    const qreal   speedfactor;
+    const qreal speedfactor;
     static const char *tblTimezone[];
 
     enum tz_mode_e

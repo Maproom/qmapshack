@@ -98,12 +98,16 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
+CGisItemRte::CGisItemRte(const history_t& hist, const QString &dbHash, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
     deriveSecondaryData();
+    if(!dbHash.isEmpty())
+    {
+        lastDatabaseHash = dbHash;
+    }
 }
 
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)

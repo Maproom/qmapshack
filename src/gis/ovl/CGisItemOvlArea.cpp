@@ -166,11 +166,15 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
+CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, const QString &dbHash, IGisProject * project)
     : IGisItem(project, eTypeOvl, project->childCount())
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
+    if(!dbHash.isEmpty())
+    {
+        lastDatabaseHash = dbHash;
+    }
 }
 
 CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project)

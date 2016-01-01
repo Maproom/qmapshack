@@ -182,11 +182,15 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemTrk::CGisItemTrk(const history_t& hist, IGisProject * project)
+CGisItemTrk::CGisItemTrk(const history_t& hist, const QString &dbHash, IGisProject * project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
+    if(!dbHash.isEmpty())
+    {
+        lastDatabaseHash = dbHash;
+    }
 }
 
 CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)

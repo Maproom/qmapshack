@@ -522,7 +522,6 @@ protected:
     /// that's where the real data is. An item is completely defined by it's history
     history_t history;
     /// the hash in the database when the item was loaded/saved
-    friend class IGisProject;
     QString lastDatabaseHash;
 
     enum flags_e

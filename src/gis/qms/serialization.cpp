@@ -799,6 +799,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
 
     while(!stream.atEnd())
     {
+        QString lastDatabaseHash;
         IGisItem::history_t history;
         quint8 changed = 0;
         quint8 version, type;
@@ -810,23 +811,29 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
             stream >> changed;
         }
 
+        if(version > 2)
+        {
+            stream >> lastDatabaseHash;
+        }
+
+
         IGisItem * item = 0;
         switch(type)
         {
         case IGisItem::eTypeWpt:
-            item = new CGisItemWpt(history, this);
+            item = new CGisItemWpt(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeTrk:
-            item = new CGisItemTrk(history, this);
+            item = new CGisItemTrk(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeRte:
-            item = new CGisItemRte(history, this);
+            item = new CGisItemRte(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeOvl:
-            item = new CGisItemOvlArea(history, this);
+            item = new CGisItemOvlArea(history, lastDatabaseHash, this);
             break;
 
         default:
@@ -838,10 +845,6 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
             item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
 
-        if(version > 2)
-        {
-            stream >> item->lastDatabaseHash;
-        }
     }
 
     blockUpdateItems(false);

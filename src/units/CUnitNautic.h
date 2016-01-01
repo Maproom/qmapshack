@@ -23,7 +23,7 @@
 
 class CUnitNautic : public IUnit
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     CUnitNautic(QObject * parent);
     virtual ~CUnitNautic();

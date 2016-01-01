@@ -23,7 +23,7 @@
 
 class CUnitMetric : public IUnit
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     CUnitMetric(QObject * parent);
     virtual ~CUnitMetric();

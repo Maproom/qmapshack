@@ -69,4 +69,4 @@ decode_state_e CFitFieldDataState::process(uint8_t &dataByte)
 
     // there are more fields to read for the current message
     return eDecoderStateFieldData;
-};
+}

@@ -621,7 +621,7 @@ qt5_add_resources(RC_SRCS ${RCS})
 cxx_add_flag_if_supported(-Wsuggest-override)
 
 if(UNIX)
-    add_definitions(-Wall -Wno-switch -Wno-strict-aliasing)
+    add_definitions(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing)
 endif(UNIX)
 
 if(WIN32)

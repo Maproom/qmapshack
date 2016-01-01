@@ -35,7 +35,5 @@ decode_state_e CFitCrcState::process(uint8_t &dataByte)
     }
     // 2nd crc byte left
     return eDecoderStateFileCrc;
-};
-
-
+}
 

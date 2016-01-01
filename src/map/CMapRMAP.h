@@ -25,7 +25,7 @@ class CMapDraw;
 
 class CMapRMAP : public IMap
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     CMapRMAP(const QString& filename, CMapDraw *parent);
 

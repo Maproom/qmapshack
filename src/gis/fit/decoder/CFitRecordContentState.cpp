@@ -31,7 +31,7 @@
 void CFitRecordContentState::reset()
 {
     offset = 0;
-};
+}
 
 decode_state_e CFitRecordContentState::process(uint8_t &dataByte)
 {
@@ -89,4 +89,4 @@ decode_state_e CFitRecordContentState::process(uint8_t &dataByte)
 
     // still more bytes for the record content
     return eDecoderStateRecordContent;
-};
+}

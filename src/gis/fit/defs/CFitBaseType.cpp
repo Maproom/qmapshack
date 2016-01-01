@@ -104,7 +104,7 @@ CFitBaseType build(BaseTypeNr baseTypeNr, QString name, T invalid)
 
 CFitBaseType EnumType = build<uint8_t>(TypeEnum, "Enum", 0xFF);
 CFitBaseType Sint8Type = build<int8_t>(TypeSint8, "Sint8", 0x7F);
-CFitBaseType Uint8Type = build<int8_t>(TypeUint8, "Uint8", 0xFF);
+CFitBaseType Uint8Type = build<uint8_t>(TypeUint8, "Uint8", 0xFF);
 CFitBaseType Sint16Type = build<int16_t>(TypeSint16, "Sint16", 0x7FFF);
 CFitBaseType Uint16Type = build<uint16_t>(TypeUint16, "Uint16", 0xFFFF);
 CFitBaseType Sint32Type = build<int32_t>(TypeSint32, "Sint32", 0x7FFFFFFF);
@@ -138,7 +138,7 @@ static QMap<uint8_t, CFitBaseType> buildBaseTypeMap()
     baseTypes.insert(Uint32zType.nr(), Uint32zType);
     baseTypes.insert(ByteType.nr(), ByteType);
     return baseTypes;
-};
+}
 
 QMap<uint8_t, CFitBaseType> CFitBaseTypeMap::baseTypes = buildBaseTypeMap();
 

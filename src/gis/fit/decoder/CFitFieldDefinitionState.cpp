@@ -30,7 +30,7 @@
 void CFitFieldDefinitionState::reset()
 {
     offset = 0;
-};
+}
 
 decode_state_e CFitFieldDefinitionState::process(uint8_t &dataByte)
 {
@@ -67,4 +67,4 @@ decode_state_e CFitFieldDefinitionState::process(uint8_t &dataByte)
     }
 
     return eDecoderStateFieldDef;
-};
+}

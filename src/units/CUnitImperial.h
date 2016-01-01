@@ -23,7 +23,7 @@
 
 class CUnitImperial : public IUnit
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     CUnitImperial(QObject * parent);
     virtual ~CUnitImperial();

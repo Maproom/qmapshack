@@ -44,7 +44,7 @@
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
 #define VER_HIST_EVT    quint8(2)
-#define VER_ITEM        quint8(2)
+#define VER_ITEM        quint8(3)
 
 #define MAGIC_SIZE      10
 #define MAGIC_TRK       "QMTrk     "
@@ -837,6 +837,11 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         {
             item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
+
+        if(version > 2)
+        {
+            stream >> item->lastDatabaseHash;
+        }
     }
 
     blockUpdateItems(false);
@@ -872,6 +877,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -884,6 +890,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -896,6 +903,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -908,6 +916,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
 
     return stream;

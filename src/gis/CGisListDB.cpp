@@ -321,22 +321,26 @@ void CGisListDB::slotAddDatabase()
 
     QString name = dlg.getName();
 
+    IDBFolder * folder = nullptr;
+
     if(dlg.isSqlite())
     {
         QString filename = dlg.getFilename();
-        new CDBFolderSqlite(filename, name, this);
+        folder = new CDBFolderSqlite(filename, name, this);
     }
     else if(dlg.isMysql())
     {
         QString server  = dlg.getServer();
         QString user    = dlg.getUser();
         QString passwd  = dlg.getPasswd();
-        new CDBFolderMysql(server, user, passwd, name, this);
+        folder = new CDBFolderMysql(server, user, passwd, name, this);
     }
     else
     {
         return;
     }
+
+    folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
 
     emit sigChanged();
 }
@@ -378,7 +382,17 @@ void CGisListDB::slotAddFolder()
         return;
     }
 
-    folder->addFolder(type, name);
+    if(folder->addFolder(type, name) == 0)
+    {
+        return;
+    }
+
+    if(!folder->isExpanded())
+    {
+        folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+        folder->setExpanded(true);
+    }
+
 }
 
 void CGisListDB::slotDelFolder()

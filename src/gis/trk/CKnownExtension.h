@@ -52,7 +52,7 @@ private:
                     qreal defLimitLow, qreal defLimitHigh,
                     qreal minimum,     qreal maximum,
                     qreal factor,      QString unit,
-                    QString icon,        bool known,
+                    QString icon,      bool known,
                     fTrkPtGetVal valueFunc
                     );
 

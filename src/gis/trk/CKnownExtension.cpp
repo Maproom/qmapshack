@@ -28,9 +28,9 @@ QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 
 CKnownExtension::CKnownExtension(QString name,
                                  qreal defLimitLow, qreal defLimitHigh,
-                                 qreal minimum, qreal maximum,
-                                 qreal factor, QString unit,
-                                 QString icon, bool known,
+                                 qreal minimum,     qreal maximum,
+                                 qreal factor,      QString unit,
+                                 QString icon,      bool known,
                                  fTrkPtGetVal valueFunc
                                  ) : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
     minimum(minimum), maximum(maximum), factor(factor), unit(unit),

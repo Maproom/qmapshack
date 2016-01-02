@@ -225,7 +225,7 @@ void CGisListWks::configDB()
     // And delete them as a second chance.
     if(query.exec("select * from tmp_workspace"))
     {
-        QUERY_RUN("DROP TABLE tmp_workspace;", return);
+        QUERY_RUN("DROP TABLE tmp_workspace;", return );
     }
 
 
@@ -1508,9 +1508,10 @@ void CGisListWks::slotAddEmptyProject()
     {
         quint64 idParent;
         QString db;
+        QString host;
         IDBFolder::type_e type;
 
-        CSelectDBFolder dlg1(idParent, db, this);
+        CSelectDBFolder dlg1(idParent, db, host, this);
         if(dlg1.exec() == QDialog::Rejected)
         {
             return;
@@ -1522,7 +1523,7 @@ void CGisListWks::slotAddEmptyProject()
             return;
         }
 
-        CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, idParent, db);
+        CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, idParent, db, host);
         CGisWidget::self().postEventForDb(evt);
     }
 }

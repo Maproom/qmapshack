@@ -844,7 +844,6 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         {
             item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
-
     }
 
     blockUpdateItems(false);

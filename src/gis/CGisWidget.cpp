@@ -205,9 +205,10 @@ IGisProject * CGisWidget::selectProject()
     {
         quint64 idParent;
         QString db;
+        QString host;
         IDBFolder::type_e type;
 
-        CSelectDBFolder dlg1(idParent, db, this);
+        CSelectDBFolder dlg1(idParent, db, host, this);
         if(dlg1.exec() == QDialog::Rejected)
         {
             return 0;
@@ -220,7 +221,7 @@ IGisProject * CGisWidget::selectProject()
         }
 
         QMutexLocker lock(&IGisItem::mutexItems);
-        CEvtW2DCreate evt(name, type, idParent, db);
+        CEvtW2DCreate evt(name, type, idParent, db, host);
         QApplication::sendEvent(treeDB, &evt);
 
         if(evt.idChild)

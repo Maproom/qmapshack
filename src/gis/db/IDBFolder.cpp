@@ -238,7 +238,7 @@ bool IDBFolder::update()
 
     // Nothing to do for folders not expanded
     if(!isExpanded())
-    {       
+    {
         return true;
     }
 
@@ -253,7 +253,7 @@ bool IDBFolder::update()
      *
      * Collect all items in dbItems. They will be removed and the item list ist rebuilt
      * from scratch.
-    */
+     */
     QSet<QString>       activeChildren;
     QList<CDBItem*>     dbItems;
     QList<IDBFolder*>   dbFoldersDel;

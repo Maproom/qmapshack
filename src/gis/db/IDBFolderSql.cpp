@@ -16,16 +16,19 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/IDBFolderSql.h"
 #include "gis/db/macros.h"
 
+#include <QtNetwork>
 #include <QtSql>
 
 IDBFolderSql::IDBFolderSql(QSqlDatabase &db, QTreeWidget *parent)
     : IDBFolder(false, db, eTypeDatabase, 1, parent)
 {
+    socket = new QUdpSocket(this);
 }
 
 void IDBFolderSql::expanding()
@@ -61,7 +64,7 @@ bool IDBFolderSql::update()
      *
      * When done with the iteration all folders registered for removal are deleted and the
      * new ones are created. Finally lost & found is updated.
-    */
+     */
 
     // get all folder IDs attached to this folder
     QList<quint64> dbFoldersAdd;
@@ -109,4 +112,25 @@ bool IDBFolderSql::update()
 
     updateLostFound();
     return true;
+}
+
+void IDBFolderSql::announceChange()
+{
+    QByteArray msg;
+    QDataStream stream(&msg, QIODevice::WriteOnly);
+    stream.setByteOrder(QDataStream::LittleEndian);
+    stream.setVersion(QDataStream::Qt_5_2);
+
+    uint msgId = qrand();
+
+    stream << msgId;
+    stream << CMainWindow::self().id;
+    stream << db.driverName();
+    stream << db.databaseName();
+    stream << db.hostName();
+
+    QHostAddress addr(QHostAddress::Broadcast);
+    socket->writeDatagram(msg, addr, UDP_PORT);
+    socket->writeDatagram(msg, addr, UDP_PORT);
+    socket->writeDatagram(msg, addr, UDP_PORT);
 }

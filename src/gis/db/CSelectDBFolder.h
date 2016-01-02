@@ -26,7 +26,7 @@ class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder
 {
     Q_OBJECT
 public:
-    CSelectDBFolder(quint64& id, QString& db, QWidget * parent);
+    CSelectDBFolder(quint64& id, QString& db, QString& host, QWidget * parent);
     virtual ~CSelectDBFolder();
 
 private slots:
@@ -36,6 +36,7 @@ private slots:
 private:
     quint64& id;
     QString& db;
+    QString& host;
 };
 
 #endif //CSELECTDBFOLDER_H

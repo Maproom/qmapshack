@@ -58,7 +58,9 @@
 CMainWindow * CMainWindow::pSelf = 0;
 
 CMainWindow::CMainWindow()
+    : id(qrand())
 {
+    qDebug() << "Application ID:" << id;
     SETTINGS;
 
     pSelf = this;

@@ -61,6 +61,9 @@ int main(int argc, char ** argv)
         splash->show();
     }
 
+    uint seed = QDateTime::currentDateTime().toTime_t();
+    qsrand(seed);
+
     CMainWindow w;
     w.show();
 

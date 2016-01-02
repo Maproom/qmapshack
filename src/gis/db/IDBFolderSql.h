@@ -22,8 +22,11 @@
 #include "gis/db/IDBFolder.h"
 
 class CDBFolderLostFound;
+class QUdpSocket;
 
-class IDBFolderSql : public IDBFolder
+#define UDP_PORT 34123
+
+class IDBFolderSql : public IDBFolder, public QObject
 {
 public:
     IDBFolderSql(QSqlDatabase& db, QTreeWidget * parent);
@@ -37,8 +40,13 @@ public:
     }
     bool update() override;
 
+    void announceChange();
+
+
 protected:
     CDBFolderLostFound * folderLostFound = 0;
+
+    QUdpSocket * socket;
 };
 
 #endif //IDBFOLDERSQL_H

@@ -86,7 +86,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
 
 CDBProject::~CDBProject()
 {
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(false, getId(), db.connectionName());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(false, getId(), db.connectionName(), db.hostName());
     CGisWidget::self().postEventForDb(info);
 }
 
@@ -128,7 +128,7 @@ void CDBProject::setupName(const QString &defaultName)
 void CDBProject::postStatus()
 {
     // collect the keys of all child items and post them to the database view
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName(), db.hostName());
 
     bool changedItems   = false;
     const int N         = childCount();
@@ -481,7 +481,7 @@ bool CDBProject::save()
     int lastResult  = CSelectSaveAction::eResultNone;
 
 
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName(), db.hostName());
 
     int N = childCount();
     PROGRESS_SETUP(QObject::tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());

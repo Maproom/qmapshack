@@ -17,17 +17,18 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBFolderMysql.h"
+#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QWidget *parent)
+CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidget *parent)
     : QDialog(parent)
     , id(id)
     , db(db)
+    , host(host)
 {
     setupUi(this);
 
@@ -83,8 +84,9 @@ void CSelectDBFolder::slotItemSelectionChanged()
     IDBFolder * folder = dynamic_cast<IDBFolder*>(treeWidget->currentItem());
     if(folder)
     {
-        id = folder->getId();
-        db = folder->getDBName();
+        id      = folder->getId();
+        db      = folder->getDBName();
+        host    = folder->getDb().hostName();
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
     else

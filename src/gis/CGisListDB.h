@@ -25,6 +25,7 @@
 struct action_t;
 class QMenu;
 class IDBFolderSql;
+class QUdpSocket;
 
 class CGisListDB : public QTreeWidget
 {
@@ -58,10 +59,12 @@ private slots:
     void slotDelItem();
     void slotUpdateDatabase();
 
+    void slotReadyRead();
+
 private:
     friend class CGisListDBEditLock;
 
-    IDBFolderSql *getDataBase(const QString& name);
+    IDBFolderSql *getDataBase(const QString& name, const QString& host);
 
     int isInternalEdit = 0;
 
@@ -84,6 +87,10 @@ private:
 
     QMenu * menuLostFoundItem;
     QAction * actionDelLostFoundItem;
+
+    QUdpSocket * socket;
+
+    uint lastMsgId;
 };
 
 #endif //CGISLISTDB_H

@@ -114,7 +114,13 @@ public:
 class CEvtW2DAckInfo : public QEvent
 {
 public:
-    CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DAckInfo)), isLoaded(loaded), updateLostFound(false), id(id), db(db)
+    CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db, const QString& host)
+        : QEvent(QEvent::Type(eEvtW2DAckInfo))
+        , isLoaded(loaded)
+        , updateLostFound(false)
+        , id(id)
+        , db(db)
+        , host(host)
     {
     }
 
@@ -122,6 +128,7 @@ public:
     bool updateLostFound;
     quint64 id;
     QString db;
+    QString host;
     QSet<QString> keysChildren;
 };
 
@@ -139,7 +146,14 @@ public:
 class CEvtW2DCreate : public QEvent
 {
 public:
-    CEvtW2DCreate(const QString& name, IDBFolder::type_e type, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DCreate)), name(name), type(type), idParent(id), idChild(0), db(db)
+    CEvtW2DCreate(const QString& name, IDBFolder::type_e type, quint64 id, const QString& db, const QString& host)
+        : QEvent(QEvent::Type(eEvtW2DCreate))
+        , name(name)
+        , type(type)
+        , idParent(id)
+        , idChild(0)
+        , db(db)
+        , host(host)
     {
     }
 
@@ -148,6 +162,7 @@ public:
     quint64 idParent;
     quint64 idChild;
     QString db;
+    QString host;
 };
 
 class CEvtD2WUpdateItems : public QEvent

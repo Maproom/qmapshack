@@ -74,6 +74,7 @@ public:
      */
     CCanvas* getVisibleCanvas() const;
 
+    const qint32 id;
 protected:
 #ifdef WIN32
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);

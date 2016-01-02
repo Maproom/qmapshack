@@ -126,7 +126,7 @@ void IDBFolderSql::announceChange()
     stream << msgId;
     stream << CMainWindow::self().id;
     stream << db.driverName();
-    stream << db.databaseName();
+    stream << db.connectionName();
     stream << db.hostName();
 
     QHostAddress addr(QHostAddress::Broadcast);

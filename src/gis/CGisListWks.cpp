@@ -225,8 +225,7 @@ void CGisListWks::configDB()
     // And delete them as a second chance.
     if(query.exec("select * from tmp_workspace"))
     {
-        query.prepare("DROP TABLE tmp_workspace;");
-        QUERY_EXEC();
+        QUERY_RUN("DROP TABLE tmp_workspace;", return);
     }
 
 

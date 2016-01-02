@@ -54,7 +54,7 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
 
     QSqlQuery query(db);
 
-    QUERY_RUN("PRAGMA locking_mode=EXCLUSIVE", return false)
+    QUERY_RUN("PRAGMA locking_mode=NORMAL",    return false)
     QUERY_RUN("PRAGMA temp_store=MEMORY",      return false)
     QUERY_RUN("PRAGMA default_cache_size=50",  return false)
     QUERY_RUN("PRAGMA page_size=8192",         return false)
@@ -130,7 +130,7 @@ bool IDBSqlite::initDB()
               "comment        TEXT,"
               "data           BLOB NOT NULL,"
               "hash           TEXT NOT NULL,"
-              "last_user      TEXT DEFAULT 'n/a',"
+              "last_user      TEXT DEFAULT 'QMapShack',"
               "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP"
               ")", return false)
 
@@ -245,7 +245,7 @@ bool IDBSqlite::migrateDB2to3()
     QSqlQuery query(db);
 
     QUERY_RUN("ALTER TABLE items ADD COLUMN hash TEXT NOT NULL DEFAULT '-'",            return false);
-    QUERY_RUN("ALTER TABLE items ADD COLUMN last_user TEXT NOT NULL DEFAULT 'n/a'",     return false);
+    QUERY_RUN("ALTER TABLE items ADD COLUMN last_user TEXT NOT NULL DEFAULT 'QMapShack'", return false);
     QUERY_RUN("ALTER TABLE items ADD COLUMN last_change DATETIME NOT NULL DEFAULT '-'", return false);
 
     QUERY_RUN("CREATE TRIGGER items_update_last_change "

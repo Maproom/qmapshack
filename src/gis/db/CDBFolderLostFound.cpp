@@ -78,9 +78,10 @@ void CDBFolderLostFound::update(CEvtW2DAckInfo * info)
     setCheckState(CGisListDB::eColumnCheckbox, info->isLoaded ? Qt::Checked : Qt::Unchecked);
 }
 
-void CDBFolderLostFound::update()
+bool CDBFolderLostFound::update()
 {
     setupFromDB();
+    return true;
 }
 
 void CDBFolderLostFound::clear()

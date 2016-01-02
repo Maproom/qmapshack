@@ -38,7 +38,7 @@ public:
     CGisItemOvlArea(const SGisLine& line, const QString &name, IGisProject * project, int idx);
     CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);
     CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
-    CGisItemOvlArea(const history_t& hist, IGisProject * project);
+    CGisItemOvlArea(const history_t& hist, const QString& dbHash, IGisProject * project);
     CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
     CGisItemOvlArea(const IQlgtOverlay& ovl);
     virtual ~CGisItemOvlArea();

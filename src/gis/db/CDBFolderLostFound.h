@@ -28,7 +28,7 @@ public:
     virtual ~CDBFolderLostFound();
 
     void update(CEvtW2DAckInfo * info) override;
-    void update() override;
+    bool update() override;
     void expanding() override
     {
     }

@@ -96,7 +96,7 @@ public:
 
     CGisItemRte(const QDomNode &xml, IGisProject *parent);
     CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
-    CGisItemRte(const history_t& hist, IGisProject * project);
+    CGisItemRte(const history_t& hist, const QString& dbHash, IGisProject * project);
     CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
     CGisItemRte(const CQlgtRoute& rte1);
     CGisItemRte(const SGisLine& l, const QString &name, IGisProject *project, int idx);

@@ -18,6 +18,7 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/db/CDBFolderSqlite.h"
+#include "gis/db/CDBFolderMysql.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "helpers/CSettings.h"
 
@@ -33,14 +34,29 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QWidget *parent)
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
     SETTINGS;
-    QStringList names = cfg.value("Database/names").toStringList();
-    QStringList files = cfg.value("Database/files").toStringList();
-
-    const int N = names.count();
-    for(int i = 0; i < N; i++)
+    cfg.beginGroup("Database");
+    QStringList names = cfg.value("names").toStringList();
+    cfg.beginGroup("Entries");
+    foreach(const QString &name, names)
     {
-        new CDBFolderSqlite(files[i], names[i], treeWidget);
+        cfg.beginGroup(name);
+        QString type = cfg.value("type", "SQLite").toString();
+        if(type == "SQLite")
+        {
+            QString filename = cfg.value("filename","").toString();
+            new CDBFolderSqlite(filename, name, treeWidget);
+        }
+
+        if(type == "MySQL")
+        {
+            QString server  = cfg.value("server","").toString();
+            QString user    = cfg.value("user","").toString();
+            QString passwd  = cfg.value("passwd","").toString();
+            new CDBFolderMysql(server, user, passwd, name, treeWidget);
+        }
+        cfg.endGroup(); // name
     }
+    cfg.endGroup(); // Database
 
     connect(treeWidget, &QTreeWidget::itemExpanded,         this, &CSelectDBFolder::slotItemExpanded);
     connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CSelectDBFolder::slotItemSelectionChanged);

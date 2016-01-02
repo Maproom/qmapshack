@@ -119,7 +119,7 @@ public:
        @param hist      the change history
        @param project   the project to append with item
      */
-    CGisItemWpt(const history_t& hist, IGisProject * project);
+    CGisItemWpt(const history_t& hist, const QString& dbHash, IGisProject * project);
 
     /**
        @brief Read item from database by it's database ID

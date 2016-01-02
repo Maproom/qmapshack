@@ -130,12 +130,16 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
+CGisItemWpt::CGisItemWpt(const history_t& hist, const QString &dbHash, IGisProject * project)
     : IGisItem(project, eTypeWpt, project->childCount())
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    if(!dbHash.isEmpty())
+    {
+        lastDatabaseHash = dbHash;
+    }
 }
 
 CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)

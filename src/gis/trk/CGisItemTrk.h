@@ -111,7 +111,7 @@ public:
        @param hist
        @param project
      */
-    CGisItemTrk(const history_t& hist, IGisProject * project);
+    CGisItemTrk(const history_t& hist, const QString& dbHash, IGisProject * project);
     /**
        @brief Used to restore track from database
        @param id

@@ -44,7 +44,7 @@
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
 #define VER_HIST_EVT    quint8(2)
-#define VER_ITEM        quint8(2)
+#define VER_ITEM        quint8(3)
 
 #define MAGIC_SIZE      10
 #define MAGIC_TRK       "QMTrk     "
@@ -799,6 +799,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
 
     while(!stream.atEnd())
     {
+        QString lastDatabaseHash;
         IGisItem::history_t history;
         quint8 changed = 0;
         quint8 version, type;
@@ -810,23 +811,29 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
             stream >> changed;
         }
 
+        if(version > 2)
+        {
+            stream >> lastDatabaseHash;
+        }
+
+
         IGisItem * item = 0;
         switch(type)
         {
         case IGisItem::eTypeWpt:
-            item = new CGisItemWpt(history, this);
+            item = new CGisItemWpt(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeTrk:
-            item = new CGisItemTrk(history, this);
+            item = new CGisItemTrk(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeRte:
-            item = new CGisItemRte(history, this);
+            item = new CGisItemRte(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeOvl:
-            item = new CGisItemOvlArea(history, this);
+            item = new CGisItemOvlArea(history, lastDatabaseHash, this);
             break;
 
         default:
@@ -837,6 +844,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         {
             item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
+
     }
 
     blockUpdateItems(false);
@@ -872,6 +880,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -884,6 +893,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -896,6 +906,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
@@ -908,6 +919,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
 
     return stream;

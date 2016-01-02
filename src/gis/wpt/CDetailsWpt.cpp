@@ -145,6 +145,7 @@ void CDetailsWpt::slotNameChangeFinished()
     if(name != wpt.getName())
     {
         wpt.setName(name);
+        setupGui();
     }
 }
 

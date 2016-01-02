@@ -122,6 +122,7 @@ void CDetailsRte::slotNameChangeFinished()
     if(name != rte.getName())
     {
         rte.setName(name);
+        setupGui();
     }
 }
 

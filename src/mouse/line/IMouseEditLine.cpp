@@ -420,6 +420,9 @@ void IMouseEditLine::storeToHistory(const SGisLine& line)
 
 void IMouseEditLine::slotUndo()
 {
+    doCanvasPanning = false;
+    timer->stop();
+
     if(lineOp != nullptr)
     {
         lineOp->abortStep();
@@ -439,6 +442,11 @@ void IMouseEditLine::slotUndo()
 
 void IMouseEditLine::slotRedo()
 {
+    // abort panning
+    doCanvasPanning = false;
+    timer->stop();
+
+    // abort operation
     if(lineOp != nullptr)
     {
         lineOp->abortStep();

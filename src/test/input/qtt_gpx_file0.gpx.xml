@@ -1,0 +1,23 @@
+<expected>
+    <name>QTTest gpx file 0</name>
+    <desc>QTTest gpx input file 0</desc>
+
+    <waypoints></waypoints>
+
+    <tracks>
+        <track name="Track" colorIdx="4" colorName="DarkBlue" segcount="1" pointcount="521">
+            <colorSources>
+                <colorSource name="::ql:slope"                              />
+                <colorSource name="::ql:speed"                              />
+                <colorSource name="::ql:ele"                                />
+                <colorSource name="::ql:progress"                           />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:hr"    />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
+            </colorSources>
+        </track>
+    </tracks>
+
+    <routes></routes>
+
+    <areas></areas>
+</expected>

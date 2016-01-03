@@ -1,0 +1,27 @@
+<expected>
+    <name>qttest slf file 0</name>
+    <desc>QTTest .slf input file 0</desc>
+
+    <waypoints>
+        <waypoint name="Break 0" />
+        <waypoint name="Break 1" />
+        <waypoint name="Lap 0"   />
+    </waypoints>
+
+    <tracks>
+        <track name="[no name]" colorIdx="4" colorName="DarkBlue" segcount="2" pointcount="2764">
+            <colorSources>
+                <colorSource name="::ql:slope"                              />
+                <colorSource name="::ql:speed"                              />
+                <colorSource name="::ql:ele"                                />
+                <colorSource name="::ql:progress"                           />
+                <colorSource name="speed"                                   />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
+            </colorSources>
+        </track>
+    </tracks>
+
+    <routes></routes>
+
+    <areas></areas>
+</expected>

@@ -61,8 +61,25 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
 
     if(data.isEmpty())
     {
+        // Make sure the key is reset
+        key.clear();
         metadata.name = name;
-        metadata.time = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
+
+        // The time format can differ by database type
+        if(date.contains('T'))
+        {
+            metadata.time = QDateTime::fromString(date,"yyyy-MM-ddThh:mm:ss");
+        }
+        else
+        {
+            metadata.time = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
+        }
+
+        // Still no valid date? Bad as we need it to produce an unique key.
+        if(!metadata.time.isValid())
+        {
+            metadata.time = QDateTime::currentDateTimeUtc();
+        }
 
         query.prepare("UPDATE folders SET keyqms=:keyqms WHERE id=:id");
         query.bindValue(":keyqms", getKey());

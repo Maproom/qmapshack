@@ -675,7 +675,7 @@ void CGisListDB::slotReadyRead()
 
         quint32 msgId;
         quint32 tan;
-        qint32  id;
+        qint32 id;
         QString driver;
         QString dbName;
         QString dbHost;

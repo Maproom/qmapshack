@@ -1117,6 +1117,7 @@ static void closeProjects(const QList<QTreeWidgetItem*> &items)
 void CGisListWks::slotCloseProject()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     closeProjects(selectedItems());
     emit sigChanged();
 }
@@ -1138,6 +1139,7 @@ void CGisListWks::slotCloseAllProjects()
 void CGisListWks::slotDeleteProject()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -1213,6 +1215,7 @@ void CGisListWks::slotEditPrj()
 void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
     if(gisItem != 0)
     {
@@ -1224,6 +1227,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
 void CGisListWks::slotItemChanged(QTreeWidgetItem * item, int column)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     if(column == CGisListDB::eColumnCheckbox)
     {
         emit sigChanged();
@@ -1233,6 +1237,7 @@ void CGisListWks::slotItemChanged(QTreeWidgetItem * item, int column)
 void CGisListWks::slotEditItem()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
     if(gisItem != 0)
     {
@@ -1308,6 +1313,26 @@ void CGisListWks::slotCopyItem()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
+    /*
+     * Item selection is reset when the target project is a new database
+     * project. Additionally the list of selected items pointers seems
+     * to get invalid, causing a segfault when used.
+     *
+     * As a fix the keys of the selected items are stored temporarily and
+     * later used to retrieve the item on the workspace via CGisWidget::getItemByKey()
+     * again. This is allways safe.
+     */
+    QList<QTreeWidgetItem*> items = selectedItems();
+    QList<IGisItem::key_t>  keys;
+    foreach(QTreeWidgetItem * item, items)
+    {
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        if(gisItem != nullptr)
+        {
+            keys << gisItem->getKey();
+        }
+    }
+
     IGisProject * project = CGisWidget::self().selectProject();
     if(nullptr == project)
     {
@@ -1317,14 +1342,12 @@ void CGisListWks::slotCopyItem()
     int lastResult = CSelectCopyAction::eResultNone;
 
     project->blockUpdateItems(true);
-
-    QList<QTreeWidgetItem*> items = selectedItems();
     int cnt = 1;
     PROGRESS_SETUP(tr("Copy items..."), 0, items.count(), this);
-    foreach(QTreeWidgetItem * item, items)
+    foreach(const IGisItem::key_t& key, keys)
     {
         PROGRESS(cnt++, break);
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        IGisItem * gisItem = CGisWidget::self().getItemByKey(key);
         if(nullptr != gisItem)
         {
             project->insertCopyOfItem(gisItem, NOIDX, lastResult);
@@ -1342,6 +1365,7 @@ void CGisListWks::slotCopyItem()
 void CGisListWks::slotProjWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
     {
@@ -1352,6 +1376,7 @@ void CGisListWks::slotProjWpt()
 void CGisListWks::slotBubbleWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
     {
@@ -1362,6 +1387,7 @@ void CGisListWks::slotBubbleWpt()
 void CGisListWks::slotMoveWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != 0)
     {
@@ -1372,6 +1398,7 @@ void CGisListWks::slotMoveWpt()
 void CGisListWks::slotFocusTrk(bool on)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
@@ -1382,6 +1409,7 @@ void CGisListWks::slotFocusTrk(bool on)
 void CGisListWks::slotEditTrk()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
@@ -1392,6 +1420,7 @@ void CGisListWks::slotEditTrk()
 void CGisListWks::slotReverseTrk()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
@@ -1403,8 +1432,7 @@ void CGisListWks::slotCombineTrk()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<IGisItem::key_t> keys;
-
+    QList<IGisItem::key_t>  keys;
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach(QTreeWidgetItem * item, items)
     {
@@ -1424,6 +1452,7 @@ void CGisListWks::slotCombineTrk()
 void CGisListWks::slotRangeTrk()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != 0)
     {
@@ -1434,6 +1463,7 @@ void CGisListWks::slotRangeTrk()
 void CGisListWks::slotFocusRte(bool on)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != 0)
     {
@@ -1444,6 +1474,7 @@ void CGisListWks::slotFocusRte(bool on)
 void CGisListWks::slotCalcRte()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != 0)
     {
@@ -1454,6 +1485,7 @@ void CGisListWks::slotCalcRte()
 void CGisListWks::slotResetRte()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != 0)
     {
@@ -1465,6 +1497,7 @@ void CGisListWks::slotResetRte()
 void CGisListWks::slotEditRte()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != 0)
     {
@@ -1475,6 +1508,7 @@ void CGisListWks::slotEditRte()
 void CGisListWks::slotEditArea()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
     CGisItemOvlArea * gisItem = dynamic_cast<CGisItemOvlArea*>(currentItem());
     if(gisItem != 0)
     {
@@ -1654,7 +1688,6 @@ bool CGisListWks::event(QEvent * e)
     {
         CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-
         switch(e->type())
         {
         case eEvtD2WReqInfo:
@@ -1795,8 +1828,8 @@ bool CGisListWks::event(QEvent * e)
 void CGisListWks::slotRteFromWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
-    QList<IGisItem::key_t> keys;
 
+    QList<IGisItem::key_t> keys;
     foreach(QTreeWidgetItem * item, selectedItems())
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);

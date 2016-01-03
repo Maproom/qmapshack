@@ -762,7 +762,7 @@ void CMainWindow::slotStoreView()
 
     SETTINGS;
     QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
-    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path,"QMapShack View (*.view)");
+    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path, tr("QMapShack View (*.view)"));
 
     if(filename.isEmpty())
     {
@@ -788,7 +788,7 @@ void CMainWindow::slotLoadView()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
-    QString filename = QFileDialog::getOpenFileName(this, tr("Select file to load"), path, "QMapShack View (*.view)");
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select file to load"), path, tr("QMapShack View (*.view)"));
 
     if(filename.isEmpty())
     {

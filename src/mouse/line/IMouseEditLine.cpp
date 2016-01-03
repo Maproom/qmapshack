@@ -420,6 +420,11 @@ void IMouseEditLine::storeToHistory(const SGisLine& line)
 
 void IMouseEditLine::slotUndo()
 {
+    if(lineOp != nullptr)
+    {
+        lineOp->abortStep();
+    }
+
     if(idxHistory > 0)
     {
         idxHistory--;
@@ -434,6 +439,11 @@ void IMouseEditLine::slotUndo()
 
 void IMouseEditLine::slotRedo()
 {
+    if(lineOp != nullptr)
+    {
+        lineOp->abortStep();
+    }
+
     if(idxHistory < (history.size() - 1))
     {
         idxHistory++;

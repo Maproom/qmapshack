@@ -152,7 +152,7 @@ private:
     QPolygonF pixelSubs;
 
     /// the current active line operation (move, add, delete...)
-    ILineOp  * lineOp = 0;
+    ILineOp  * lineOp = nullptr;
 
     bool enableStatus;
 

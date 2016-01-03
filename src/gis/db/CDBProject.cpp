@@ -480,6 +480,19 @@ bool CDBProject::save()
     bool success    = true;
     int lastResult  = CSelectSaveAction::eResultNone;
 
+    // check if project is still part of the databasse
+    query.prepare("SELECT keyqms FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return false);
+    if(!query.next())
+    {
+        QMessageBox::critical(CMainWindow::self().getBestWidgetForParent()
+                              , QObject::tr("Missing folder...")
+                              , QObject::tr("Failed to save project. The folder has been deleted in the database.")
+                              , QMessageBox::Abort
+                              );
+        return false;
+    }
 
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName(), db.hostName());
 

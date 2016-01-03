@@ -86,7 +86,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
 
 CDBProject::~CDBProject()
 {
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(false, getId(), db.connectionName(), db.hostName());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(false, getId(), getDBName(), getDBHost());
     CGisWidget::self().postEventForDb(info);
 }
 
@@ -128,7 +128,7 @@ void CDBProject::setupName(const QString &defaultName)
 void CDBProject::postStatus()
 {
     // collect the keys of all child items and post them to the database view
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName(), db.hostName());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), getDBName(), getDBHost());
 
     bool changedItems   = false;
     const int N         = childCount();
@@ -494,7 +494,7 @@ bool CDBProject::save()
         return false;
     }
 
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), db.connectionName(), db.hostName());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), getDBName(), getDBHost());
 
     int N = childCount();
     PROGRESS_SETUP(QObject::tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());
@@ -716,7 +716,7 @@ void CDBProject::update()
         in.setByteOrder(QDataStream::LittleEndian);
         in.setVersion(QDataStream::Qt_5_2);
         *this << in;
-        filename = db.connectionName();
+        filename = getDBName();
     }
 
     setupName(name);

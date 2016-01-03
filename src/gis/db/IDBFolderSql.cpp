@@ -114,20 +114,21 @@ bool IDBFolderSql::update()
     return true;
 }
 
-void IDBFolderSql::announceChange()
+void IDBFolderSql::announceChange() const
 {
     QByteArray msg;
     QDataStream stream(&msg, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);
     stream.setVersion(QDataStream::Qt_5_2);
 
-    uint msgId = qrand();
+    quint32 tan = qrand();
 
-    stream << msgId;
+    stream << quint32(0);
+    stream << tan;
     stream << CMainWindow::self().id;
     stream << db.driverName();
-    stream << db.connectionName();
-    stream << db.hostName();
+    stream << getDBName();
+    stream << getDBHost();
 
     QList<QNetworkInterface> netdevices = QNetworkInterface::allInterfaces();
     QNetworkInterface netdevice;

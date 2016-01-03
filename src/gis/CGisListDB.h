@@ -90,7 +90,7 @@ private:
 
     QUdpSocket * socket;
 
-    uint lastMsgId;
+    quint32 lastTan;
 };
 
 #endif //CGISLISTDB_H

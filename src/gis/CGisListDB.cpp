@@ -197,7 +197,7 @@ IDBFolderSql * CGisListDB::getDataBase(const QString& name, const QString &host)
         {
             if(!host.isEmpty())
             {
-                if(database->getDb().hostName() != host)
+                if(database->getDBHost() != host)
                 {
                     continue;
                 }
@@ -673,20 +673,21 @@ void CGisListDB::slotReadyRead()
         stream.setByteOrder(QDataStream::LittleEndian);
         stream.setVersion(QDataStream::Qt_5_2);
 
-        uint msgId;
-        qint32 id;
-        QString dbType;
+        quint32 msgId;
+        quint32 tan;
+        qint32  id;
+        QString driver;
         QString dbName;
         QString dbHost;
 
-        stream >> msgId >> id >> dbType >> dbName >> dbHost;
+        stream >> msgId >> tan >> id >> driver >> dbName >> dbHost;
 
-        if(lastMsgId == msgId)
+        if((lastTan == tan) || (msgId != 0))
         {
             continue;
         }
 
-        lastMsgId = msgId;
+        lastTan = tan;
 
         // check for our own message
         if(id == CMainWindow::self().id)
@@ -695,7 +696,7 @@ void CGisListDB::slotReadyRead()
         }
 
         qDebug() << "Receive database update from:" << sender << senderPort;
-        qDebug() << "with" << lastMsgId << id << dbType << dbName << dbHost;
+        qDebug() << "with" << "tan:" << lastTan << "app ID:" << id << "driver:" << driver << "DB name:" << dbName << "DB host:" << dbHost;
 
         IDBFolderSql * folder = getDataBase(dbName, dbHost);
         if(folder)

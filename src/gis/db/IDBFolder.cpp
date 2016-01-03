@@ -80,9 +80,14 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
     }
 }
 
-QString IDBFolder::getDBName()
+QString IDBFolder::getDBName() const
 {
     return db.connectionName();
+}
+
+QString IDBFolder::getDBHost() const
+{
+    return db.hostName();
 }
 
 IDBFolderSql *IDBFolder::getDBFolder()

@@ -50,11 +50,12 @@ public:
      * @brief Get the 64bit database key
      * @return
      */
-    quint64 getId()
+    quint64 getId() const
     {
         return id;
     }
-    QString getDBName();
+    QString getDBName() const;
+    QString getDBHost() const;
 
     QSqlDatabase& getDb(){return db; }
 

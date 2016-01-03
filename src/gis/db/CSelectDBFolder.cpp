@@ -86,7 +86,7 @@ void CSelectDBFolder::slotItemSelectionChanged()
     {
         id      = folder->getId();
         db      = folder->getDBName();
-        host    = folder->getDb().hostName();
+        host    = folder->getDBHost();
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
     else

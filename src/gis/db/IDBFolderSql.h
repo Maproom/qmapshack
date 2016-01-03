@@ -40,7 +40,7 @@ public:
     }
     bool update() override;
 
-    void announceChange();
+    void announceChange() const;
 
 
 protected:

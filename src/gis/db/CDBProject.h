@@ -49,13 +49,17 @@ public:
 
     virtual bool save() override;
 
-    quint64 getId()
+    quint64 getId() const
     {
         return id;
     }
-    QString getDBName()
+    QString getDBName() const
     {
         return db.connectionName();
+    }
+    QString getDBHost() const
+    {
+        return db.hostName();
     }
 
     /**

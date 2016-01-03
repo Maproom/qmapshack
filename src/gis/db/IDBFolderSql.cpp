@@ -129,8 +129,17 @@ void IDBFolderSql::announceChange()
     stream << db.connectionName();
     stream << db.hostName();
 
-    QHostAddress addr(QHostAddress::Broadcast);
-    socket->writeDatagram(msg, addr, UDP_PORT);
-    socket->writeDatagram(msg, addr, UDP_PORT);
-    socket->writeDatagram(msg, addr, UDP_PORT);
+    QList<QNetworkInterface> netdevices = QNetworkInterface::allInterfaces();
+    QNetworkInterface netdevice;
+    foreach(netdevice, netdevices)
+    {
+        QList<QNetworkAddressEntry> networks = netdevice.addressEntries();
+        QNetworkAddressEntry network;
+        foreach(network, networks)
+        {
+            socket->writeDatagram(msg, network.broadcast(), UDP_PORT);
+            socket->writeDatagram(msg, network.broadcast(), UDP_PORT);
+            socket->writeDatagram(msg, network.broadcast(), UDP_PORT);
+        }
+    }
 }

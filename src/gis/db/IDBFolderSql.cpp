@@ -21,6 +21,7 @@
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/IDBFolderSql.h"
 #include "gis/db/macros.h"
+#include "helpers/CSettings.h"
 
 #include <QtNetwork>
 #include <QtSql>
@@ -116,6 +117,15 @@ bool IDBFolderSql::update()
 
 void IDBFolderSql::announceChange() const
 {
+    SETTINGS;
+    bool enabled = cfg.value("Database/listenUpdate", true).toBool();
+    if(!enabled)
+    {
+        return;
+    }
+    quint16 port = cfg.value("Database/port", UDP_PORT).toUInt();
+
+
     QByteArray msg;
     QDataStream stream(&msg, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);
@@ -138,9 +148,9 @@ void IDBFolderSql::announceChange() const
         QNetworkAddressEntry network;
         foreach(network, networks)
         {
-            socket->writeDatagram(msg, network.broadcast(), UDP_PORT);
-            socket->writeDatagram(msg, network.broadcast(), UDP_PORT);
-            socket->writeDatagram(msg, network.broadcast(), UDP_PORT);
+            socket->writeDatagram(msg, network.broadcast(), port);
+            socket->writeDatagram(msg, network.broadcast(), port);
+            socket->writeDatagram(msg, network.broadcast(), port);
         }
     }
 }

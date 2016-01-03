@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>421</width>
-    <height>88</height>
+    <width>624</width>
+    <height>107</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,6 +43,24 @@
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>minutes</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QCheckBox" name="checkDbUpdate">
+       <property name="text">
+        <string>listen for database changes from other instances of QMapShack. On port</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="linePort">
+       <property name="inputMask">
+        <string>00000</string>
        </property>
       </widget>
      </item>

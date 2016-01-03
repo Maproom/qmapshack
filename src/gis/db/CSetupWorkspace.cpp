@@ -31,6 +31,8 @@ CSetupWorkspace::CSetupWorkspace(QWidget *parent)
     cfg.beginGroup("Database");
     checkSaveOnExit->setChecked(cfg.value("saveOnExit", true).toBool());
     spinSaveEvery->setValue(cfg.value("saveEvery",5).toInt());
+    checkDbUpdate->setChecked(cfg.value("listenUpdate", true).toBool());
+    linePort->setText(cfg.value("port", "34123").toString());
     cfg.endGroup();
 
     connect(checkSaveOnExit, &QCheckBox::toggled, spinSaveEvery, &QSpinBox::setEnabled);
@@ -46,6 +48,8 @@ void CSetupWorkspace::accept()
     cfg.beginGroup("Database");
     cfg.setValue("saveOnExit", checkSaveOnExit->isChecked());
     cfg.setValue("saveEvery", spinSaveEvery->value());
+    cfg.setValue("listenUpdate", checkDbUpdate->isChecked());
+    cfg.setValue("port", linePort->text());
     cfg.endGroup();
 
     QMessageBox::information(this, tr("Setup database..."), tr("Changes will become active after an application's restart."), QMessageBox::Ok);

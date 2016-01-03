@@ -62,6 +62,7 @@ private:
 
 CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
+    , socket(nullptr)
 {
     SETTINGS;
     cfg.beginGroup("Database");
@@ -133,12 +134,18 @@ CGisListDB::CGisListDB(QWidget *parent)
     connect(this, &CGisListDB::itemExpanded,               this, &CGisListDB::slotItemExpanded);
     connect(this, &CGisListDB::itemChanged,                this, &CGisListDB::slotItemChanged);
 
-    socket = new QUdpSocket(this);
-    if(!socket->bind(QHostAddress::Any, UDP_PORT, QUdpSocket::ShareAddress))
+    bool enabled = cfg.value("Database/listenUpdate", true).toBool();
+    if(enabled)
     {
-        qDebug() << socket->errorString();
+        quint16 port = cfg.value("Database/port", UDP_PORT).toUInt();
+
+        socket = new QUdpSocket(this);
+        if(!socket->bind(QHostAddress::Any, port, QUdpSocket::ShareAddress))
+        {
+            qDebug() << socket->errorString();
+        }
+        connect(socket, &QUdpSocket::readyRead, this, &CGisListDB::slotReadyRead);
     }
-    connect(socket, &QUdpSocket::readyRead, this, &CGisListDB::slotReadyRead);
 }
 
 CGisListDB::~CGisListDB()

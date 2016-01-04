@@ -36,8 +36,8 @@
 #include <QtWidgets>
 #include <gis/fit/CFitProject.h>
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.qms *.slf *.fit)";
-const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx)";
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.qms *.slf *.fit)";
+const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";

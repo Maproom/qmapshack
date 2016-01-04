@@ -145,7 +145,7 @@ CMainWindow::CMainWindow()
     }
     if(names.isEmpty())
     {
-        CCanvas * view = new CCanvas(tabWidget,"");
+        CCanvas * view = new CCanvas(tabWidget, QString());
         tabWidget->addTab(view, view->objectName());
         connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     }
@@ -215,7 +215,7 @@ CMainWindow::~CMainWindow()
     // save setup of all views
     cfg.beginGroup("Views");
     // remove all previous setups in this section first
-    cfg.remove("");
+    cfg.remove(QString());
 
     for(int i = 0; i < tabWidget->count(); i++)
     {
@@ -461,7 +461,7 @@ void CMainWindow::slotAddCanvas()
         }
     }
 
-    CCanvas * canvas = new CCanvas(tabWidget,"");
+    CCanvas * canvas = new CCanvas(tabWidget, QString());
     tabWidget->addTab(canvas, canvas->objectName());
     connect(canvas, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
 
@@ -778,7 +778,7 @@ void CMainWindow::slotStoreView()
 
     SETTINGS;
     QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
-    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path,"QMapShack View (*.view)");
+    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path, tr("QMapShack View (*.view)"));
 
     if(filename.isEmpty())
     {
@@ -804,7 +804,7 @@ void CMainWindow::slotLoadView()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
-    QString filename = QFileDialog::getOpenFileName(this, tr("Select file to load"), path, "QMapShack View (*.view)");
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select file to load"), path, tr("QMapShack View (*.view)"));
 
     if(filename.isEmpty())
     {

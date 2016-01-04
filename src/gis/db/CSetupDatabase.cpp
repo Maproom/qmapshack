@@ -38,6 +38,7 @@ CSetupDatabase::CSetupDatabase(CGisListDB &parent)
     connect(lineUser,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
     connect(radioSqlite, &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
     connect(radioMysql,  &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(checkMySQLNoPasswd, &QCheckBox::clicked, linePasswd, &QLineEdit::setDisabled);
 
     slotUpdateButtonBox();
 }

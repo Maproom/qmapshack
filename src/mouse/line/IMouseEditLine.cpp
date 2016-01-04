@@ -54,10 +54,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
 
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString &type, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
-    , idxHistory(NOIDX)
     , key(key)
-    , doCanvasPanning(false)
-    , lineOp(0)
     , enableStatus(enableStatus)
     , type(type)
 {
@@ -94,6 +91,23 @@ IMouseEditLine::~IMouseEditLine()
 
     delete scrOptEditLine;
 }
+
+void IMouseEditLine::setCanvasPanning(bool enable)
+{
+    doCanvasPanning = enable;
+
+    if(enable)
+    {
+        scrOptEditLine->toolUndo->hide();
+        scrOptEditLine->toolRedo->hide();
+    }
+    else
+    {
+        scrOptEditLine->toolUndo->show();
+        scrOptEditLine->toolRedo->show();
+    }
+}
+
 
 void IMouseEditLine::commonSetup()
 {
@@ -303,7 +317,7 @@ void IMouseEditLine::slotDeletePoint()
     delete lineOp;
     lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotSelectRange()
@@ -312,7 +326,7 @@ void IMouseEditLine::slotSelectRange()
     delete lineOp;
     lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotMovePoint()
@@ -321,7 +335,7 @@ void IMouseEditLine::slotMovePoint()
     delete lineOp;
     lineOp = new CLineOpMovePoint(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotAddPoint()
@@ -330,7 +344,7 @@ void IMouseEditLine::slotAddPoint()
     delete lineOp;
     lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotNoRouting()
@@ -420,9 +434,6 @@ void IMouseEditLine::storeToHistory(const SGisLine& line)
 
 void IMouseEditLine::slotUndo()
 {
-    doCanvasPanning = false;
-    timer->stop();
-
     if(lineOp != nullptr)
     {
         lineOp->abortStep();
@@ -442,10 +453,6 @@ void IMouseEditLine::slotUndo()
 
 void IMouseEditLine::slotRedo()
 {
-    // abort panning
-    doCanvasPanning = false;
-    timer->stop();
-
     // abort operation
     if(lineOp != nullptr)
     {

@@ -70,10 +70,7 @@ public:
     bool useAutoRouting();
     bool useVectorRouting();
 
-    void setCanvasPanning(bool enable)
-    {
-        doCanvasPanning = enable;
-    }
+    void setCanvasPanning(bool enable);
 
     void storeToHistory(const SGisLine& line);
     void restoreFromHistory(SGisLine& line);

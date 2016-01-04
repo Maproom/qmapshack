@@ -26,7 +26,7 @@
 class CDBFolderMysql : public IDBFolderSql, public IDBMysql
 {
 public:
-    CDBFolderMysql(const QString &server, const QString &user, const QString &passwd, const QString &name, QTreeWidget *parent);
+    CDBFolderMysql(const QString &server, const QString &user, const QString &passwd, bool noPasswd, const QString &name, QTreeWidget *parent);
     virtual ~CDBFolderMysql() = default;
 
     const QString& getServer(){return server; }
@@ -37,6 +37,7 @@ private:
     const QString server;
     const QString user;
     const QString passwd;
+    const bool noPasswd;
 };
 
 #endif //CDBFOLDERMYSQL_H

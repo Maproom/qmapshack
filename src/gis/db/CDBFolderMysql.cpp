@@ -20,17 +20,18 @@
 #include "gis/db/CDBFolderMysql.h"
 
 
-CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const QString & passwd, const QString &name, QTreeWidget *parent)
+CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const QString & passwd, bool noPasswd, const QString &name, QTreeWidget *parent)
     : IDBFolderSql(IDB::db, parent)
     , server(server)
     , user(user)
     , passwd(passwd)
+    , noPasswd(noPasswd)
 {
     setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
     setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQL.png"));
     setText(CGisListDB::eColumnName, name);
 
-    setupDB(server, user, passwd, name, name);
+    setupDB(server, user, passwd, noPasswd, name, name);
 
     setupFromDB();
 }

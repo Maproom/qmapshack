@@ -28,7 +28,7 @@ public:
     virtual ~IDBMysql() = default;
 
 protected:
-    bool setupDB(const QString &server, const QString &user, const QString &passwd, const QString &name, const QString &connectionName);
+    bool setupDB(const QString &server, const QString &user, const QString &passwd, bool noPasswd, const QString &name, const QString &connectionName);
     bool initDB();
     bool migrateDB(int version);
 };

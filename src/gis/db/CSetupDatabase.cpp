@@ -29,6 +29,8 @@ CSetupDatabase::CSetupDatabase(CGisListDB &parent)
 {
     setupUi(this);
 
+    lineUser->setText(CMainWindow::getUser());
+
     connect(toolNewDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotNewDB);
     connect(toolAddDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotOpenDB);
     connect(lineName,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
@@ -136,4 +138,10 @@ void CSetupDatabase::slotOpenDB()
     labelFilename->setText(filename);
 
     slotUpdateButtonBox();
+}
+
+
+bool CSetupDatabase::noPasswd() const
+{
+    return radioMysql->isChecked() && checkMySQLNoPasswd->isChecked();
 }

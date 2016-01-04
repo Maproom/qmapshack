@@ -31,14 +31,16 @@ public:
     CSetupDatabase(CGisListDB& parent);
     virtual ~CSetupDatabase();
 
-    bool isSqlite(){return radioSqlite->isChecked(); }
-    bool isMysql(){return radioMysql->isChecked(); }
+    bool isSqlite() const {return radioSqlite->isChecked(); }
+    bool isMysql() const {return radioMysql->isChecked(); }
+    bool noPasswd() const;
 
-    QString getName(){return lineName->text(); }
-    QString getFilename(){return labelFilename->text(); }
-    QString getServer(){return lineServer->text(); }
-    QString getUser(){return lineUser->text(); }
-    QString getPasswd(){return linePasswd->text(); }
+    QString getName() const {return lineName->text(); }
+    QString getFilename() const {return labelFilename->text(); }
+    QString getServer() const {return lineServer->text(); }
+    QString getUser() const {return lineUser->text(); }
+    QString getPasswd() const {return linePasswd->text(); }
+
 
 public slots:
     virtual void accept() override;

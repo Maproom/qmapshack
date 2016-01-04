@@ -53,7 +53,8 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidge
             QString server  = cfg.value("server","").toString();
             QString user    = cfg.value("user","").toString();
             QString passwd  = cfg.value("passwd","").toString();
-            new CDBFolderMysql(server, user, passwd, name, treeWidget);
+            bool noPasswd   = cfg.value("noPasswd",false).toBool();
+            new CDBFolderMysql(server, user, passwd, noPasswd, name, treeWidget);
         }
         cfg.endGroup(); // name
     }

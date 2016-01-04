@@ -28,7 +28,7 @@ IDBMysql::IDBMysql()
 {
 }
 
-bool IDBMysql::setupDB(const QString& server,const QString& user, const QString& passwd, const QString& name, const QString& connectionName)
+bool IDBMysql::setupDB(const QString& server,const QString& user, const QString& passwd, bool noPasswd, const QString& name, const QString& connectionName)
 {
     // this is important!
     IDB::setup(connectionName);
@@ -40,17 +40,18 @@ bool IDBMysql::setupDB(const QString& server,const QString& user, const QString&
         db.setHostName(server);
         db.setUserName(user);
 
-        if(passwd.isEmpty())
+        if(!noPasswd)
         {
-            QString p = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(), QObject::tr("Password..."), QObject::tr("Password for database '%1':").arg(name), QLineEdit::Password, "");
-            db.setPassword(p);
+            if(passwd.isEmpty())
+            {
+                QString p = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(), QObject::tr("Password..."), QObject::tr("Password for database '%1':").arg(name), QLineEdit::Password, "");
+                db.setPassword(p);
+            }
+            else
+            {
+                db.setPassword(passwd);
+            }
         }
-        else
-        {
-            db.setPassword(passwd);
-        }
-
-
 
         if(!db.open())
         {

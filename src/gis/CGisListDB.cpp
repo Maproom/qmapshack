@@ -93,13 +93,14 @@ CGisListDB::CGisListDB(QWidget *parent)
             QString server  = cfg.value("server","").toString();
             QString user    = cfg.value("user","").toString();
             QString passwd  = cfg.value("passwd","").toString();
+            bool noPasswd   = cfg.value("noPasswd",false).toBool();
 
             if(server.isEmpty() || user.isEmpty())
             {
                 cfg.endGroup(); // name
                 continue;
             }
-            new CDBFolderMysql(server, user, passwd, name, this);
+            new CDBFolderMysql(server, user, passwd, noPasswd, name, this);
         }
         cfg.endGroup(); // name
     }
@@ -359,7 +360,9 @@ void CGisListDB::slotAddDatabase()
         QString server  = dlg.getServer();
         QString user    = dlg.getUser();
         QString passwd  = dlg.getPasswd();
-        folder = new CDBFolderMysql(server, user, passwd, name, this);
+        bool noPasswd   = dlg.noPasswd();
+
+        folder = new CDBFolderMysql(server, user, passwd, noPasswd, name, this);
     }
     else
     {

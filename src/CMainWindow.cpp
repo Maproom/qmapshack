@@ -294,6 +294,22 @@ QWidget * CMainWindow::getBestWidgetForParent()
     return &self();
 }
 
+QString CMainWindow::getUser()
+{
+    QString user = getenv("USER");
+    if(user.isEmpty())
+    {
+        user = getenv("USERNAME"); //for windows
+
+        if(user.isEmpty())
+        {
+            user = "QMapShack";
+        }
+    }
+
+    return user;
+}
+
 bool CMainWindow::isScaleVisible() const
 {
     return actionShowScale->isChecked();

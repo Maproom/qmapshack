@@ -43,7 +43,7 @@
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
-#define VER_HIST_EVT    quint8(2)
+#define VER_HIST_EVT    quint8(3)
 #define VER_ITEM        quint8(3)
 
 #define MAGIC_SIZE      10
@@ -129,6 +129,8 @@ QDataStream& operator<<(QDataStream& stream, const IGisItem::history_event_t& e)
     stream << e.comment;
     stream << e.data;
     stream << e.hash;
+    stream << e.who;
+
     return stream;
 }
 
@@ -143,6 +145,10 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::history_event_t& e)
     if(version > 1)
     {
         stream >> e.hash;
+    }
+    if(version > 2)
+    {
+        stream >> e.who;
     }
 
     return stream;

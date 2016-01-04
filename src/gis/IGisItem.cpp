@@ -342,6 +342,7 @@ void IGisItem::changed(const QString &what, const QString &icon)
     event.time      = QDateTime::currentDateTimeUtc();
     event.comment   = what;
     event.icon      = icon;
+    event.who       = CMainWindow::getUser();
 
     QDataStream stream(&event.data, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);

@@ -56,6 +56,11 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
         QListWidgetItem * item = new QListWidgetItem(this);
 
         str  = event.time.toString();
+        if(!event.who.isEmpty())
+        {
+            str += tr(" by %1").arg(event.who);
+        }
+
         str += "\n";
         str += event.comment;
 

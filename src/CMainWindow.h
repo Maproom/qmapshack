@@ -41,6 +41,8 @@ public:
 
     static QWidget * getBestWidgetForParent();
 
+    static QString getUser();
+
     virtual ~CMainWindow();
 
     void addMapList(CMapList *list, const QString& name);

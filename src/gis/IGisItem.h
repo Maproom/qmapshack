@@ -47,6 +47,7 @@ public:
     {
         QDateTime time;
         QString hash;
+        QString who = "QMapShack";
         QString icon;
         QString comment;
         QByteArray data;

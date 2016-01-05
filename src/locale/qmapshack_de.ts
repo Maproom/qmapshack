@@ -528,12 +528,12 @@
         <translation>Leer</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="385"/>
+        <location filename="../gis/CGisListDB.cpp" line="391"/>
         <source>Remove database...</source>
         <translation>Datenbank entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="385"/>
+        <location filename="../gis/CGisListDB.cpp" line="391"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
@@ -542,28 +542,28 @@
         <translation type="vanished">Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="441"/>
+        <location filename="../gis/CGisListDB.cpp" line="449"/>
         <source>Delete database folder...</source>
         <translation>Datenbankordner löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="441"/>
+        <location filename="../gis/CGisListDB.cpp" line="449"/>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
         <translation>Sind Sie sicher, dass Sie &quot;%1&quot; aus der Datenbank löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="468"/>
-        <location filename="../gis/CGisListDB.cpp" line="489"/>
+        <location filename="../gis/CGisListDB.cpp" line="476"/>
+        <location filename="../gis/CGisListDB.cpp" line="497"/>
         <source>Remove items...</source>
         <translation>Element entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="468"/>
+        <location filename="../gis/CGisListDB.cpp" line="476"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="489"/>
+        <location filename="../gis/CGisListDB.cpp" line="497"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle ausgewählten Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
@@ -4046,7 +4046,12 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="133"/>
+        <location filename="../gis/IGisWidget.ui" line="104"/>
+        <source>Age</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="138"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Um eine Datenbank hinzuzufügen rechtsklicken Sie oben auf die Datenbankliste.</translation>
     </message>
@@ -6603,12 +6608,12 @@ Dateiname: %1</translation>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="576"/>
+        <location filename="../gis/CGisListDB.cpp" line="584"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Ordner &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="577"/>
+        <location filename="../gis/CGisListDB.cpp" line="585"/>
         <location filename="../gis/prj/IGisProject.cpp" line="512"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
@@ -7584,12 +7589,12 @@ Turn: %1 Bearing: %2</source>
         <translation>Runde %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBSqlite.cpp" line="168"/>
+        <location filename="../gis/db/IDBSqlite.cpp" line="182"/>
         <source>The internal database format has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
         <translation>Das interne Datenbankformat wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank  mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBSqlite.cpp" line="172"/>
+        <location filename="../gis/db/IDBSqlite.cpp" line="186"/>
         <source>Migrate database...</source>
         <translation>Datenbank wird migiriert...</translation>
     </message>
@@ -7602,6 +7607,21 @@ Turn: %1 Bearing: %2</source>
         <location filename="../gis/db/IDBMysql.cpp" line="47"/>
         <source>Password for database &apos;%1&apos;:</source>
         <translation>Passwort für Datenbank &apos;%1&apos;:</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CDBItem.cpp" line="87"/>
+        <source>%1 min.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CDBItem.cpp" line="91"/>
+        <source>%1 h</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CDBItem.cpp" line="95"/>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

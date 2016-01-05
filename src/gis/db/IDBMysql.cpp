@@ -102,31 +102,31 @@ bool IDBMysql::initDB()
     }
 
     QUERY_RUN( "CREATE TABLE folders ("
-                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                "type           INTEGER NOT NULL,"
-                "keyqms         TEXT,"
-                "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                "name           TEXT NOT NULL,"
-                "comment        TEXT,"
-                "locked         BOOLEAN DEFAULT FALSE,"
-                "data           LONGBLOB"
-                ")", return false);
+               "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+               "type           INTEGER NOT NULL,"
+               "keyqms         TEXT,"
+               "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+               "name           TEXT NOT NULL,"
+               "comment        TEXT,"
+               "locked         BOOLEAN DEFAULT FALSE,"
+               "data           LONGBLOB"
+               ")", return false);
 
     QUERY_RUN( "CREATE TABLE items ("
-                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                "type           INTEGER,"
-                "keyqms         VARCHAR(64) NOT NULL,"
-                "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                "icon           BLOB NOT NULL,"
-                "name           TEXT NOT NULL,"
-                "comment        TEXT,"
-                "data           LONGBLOB NOT NULL,"
-                "hash           TEXT NOT NULL,"
-                "last_user      TEXT DEFAULT NULL,"
-                "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW(),"
-                "trash          DATETIME DEFAULT NULL,"
-                "UNIQUE KEY (keyqms)"
-                ")", return false);
+               "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+               "type           INTEGER,"
+               "keyqms         VARCHAR(64) NOT NULL,"
+               "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+               "icon           BLOB NOT NULL,"
+               "name           TEXT NOT NULL,"
+               "comment        TEXT,"
+               "data           LONGBLOB NOT NULL,"
+               "hash           TEXT NOT NULL,"
+               "last_user      TEXT DEFAULT NULL,"
+               "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW(),"
+               "trash          DATETIME DEFAULT NULL,"
+               "UNIQUE KEY (keyqms)"
+               ")", return false);
 
     QUERY_RUN("CREATE TRIGGER items_insert_last_user "
               "BEFORE INSERT ON items "
@@ -143,20 +143,20 @@ bool IDBMysql::initDB()
     QUERY_EXEC(return false);
 
     QUERY_RUN( "CREATE TABLE folder2folder ("
-                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                "parent         INTEGER NOT NULL,"
-                "child          INTEGER NOT NULL,"
-                "FOREIGN KEY(parent) REFERENCES folders(id),"
-                "FOREIGN KEY(child) REFERENCES folders(id)"
-                ")", return false);
+               "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+               "parent         INTEGER NOT NULL,"
+               "child          INTEGER NOT NULL,"
+               "FOREIGN KEY(parent) REFERENCES folders(id),"
+               "FOREIGN KEY(child) REFERENCES folders(id)"
+               ")", return false);
 
     QUERY_RUN( "CREATE TABLE folder2item ("
-                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                "parent         INTEGER NOT NULL,"
-                "child          INTEGER NOT NULL,"
-                "FOREIGN KEY(parent) REFERENCES folders(id),"
-                "FOREIGN KEY(child) REFERENCES items(id)"
-                ")", return false);
+               "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+               "parent         INTEGER NOT NULL,"
+               "child          INTEGER NOT NULL,"
+               "FOREIGN KEY(parent) REFERENCES folders(id),"
+               "FOREIGN KEY(child) REFERENCES items(id)"
+               ")", return false);
 
     QUERY_RUN("CREATE TRIGGER folder2item_insert "
               "BEFORE INSERT ON folder2item "

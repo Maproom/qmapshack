@@ -34,6 +34,8 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const
     setupDB(server, user, passwd, noPasswd, name, name);
 
     setupFromDB();
+
+    setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
 }
 
 

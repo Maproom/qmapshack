@@ -131,7 +131,8 @@ bool IDBSqlite::initDB()
               "data           BLOB NOT NULL,"
               "hash           TEXT NOT NULL,"
               "last_user      TEXT DEFAULT 'QMapShack',"
-              "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP"
+              "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP,"
+              "trash          DATETIME DEFAULT NULL"
               ")", return false)
 
     QUERY_RUN("CREATE TRIGGER items_update_last_change "
@@ -159,6 +160,19 @@ bool IDBSqlite::initDB()
               "FOREIGN KEY(parent) REFERENCES folders(id),"
               "FOREIGN KEY(child) REFERENCES items(id)"
               ")", return false)
+
+    QUERY_RUN("CREATE TRIGGER folder2item_insert "
+              "BEFORE INSERT ON folder2item BEGIN "
+              "UPDATE items SET trash=NULL "
+              "WHERE id=NEW.child; "
+              "END;", return false);
+
+    QUERY_RUN("CREATE TRIGGER folder2item_delete "
+              "AFTER DELETE ON folder2item BEGIN "
+              "UPDATE items SET trash=CURRENT_TIMESTAMP "
+              "WHERE id=OLD.child AND OLD.child NOT IN(SELECT child FROM folder2item); "
+              "END;", return false);
+
 
     return true;
 }
@@ -190,6 +204,14 @@ bool IDBSqlite::migrateDB(int version)
     if(version < 3)
     {
         if(!migrateDB2to3())
+        {
+            return false;
+        }
+    }
+
+    if(version < 4)
+    {
+        if(!migrateDB3to4())
         {
             return false;
         }
@@ -312,6 +334,27 @@ bool IDBSqlite::migrateDB2to3()
 
         delete item;
     }
+
+    return true;
+}
+
+bool IDBSqlite::migrateDB3to4()
+{
+    QSqlQuery query(db);
+
+    QUERY_RUN("ALTER TABLE items ADD COLUMN trash DATETIME DEFAULT NULL", return false);
+
+    QUERY_RUN("CREATE TRIGGER folder2item_insert "
+              "BEFORE INSERT ON folder2item BEGIN "
+              "UPDATE items SET trash=NULL "
+              "WHERE id=NEW.child; "
+              "END;", return false);
+
+    QUERY_RUN("CREATE TRIGGER folder2item_delete "
+              "AFTER DELETE ON folder2item BEGIN "
+              "UPDATE items SET trash=CURRENT_TIMESTAMP "
+              "WHERE id=OLD.child AND OLD.child NOT IN(SELECT child FROM folder2item); "
+              "END;", return false);
 
     return true;
 }

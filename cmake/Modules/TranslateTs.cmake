@@ -25,7 +25,7 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #=============================================================================
 #
-# funtion lxqt_translate_ts(qmFiles
+# funtion translate_ts(qmFiles
 #                           [USE_QT5 [Yes | No]]
 #                           [UPDATE_TRANSLATIONS [Yes | No]]
 #                           SOURCES <sources>
@@ -63,7 +63,7 @@ cmake_minimum_required(VERSION 2.8.3 FATAL_ERROR)
 # We use our patched version to round a annoying bug.
 include(Qt5PatchedLinguistToolsMacros)
 
-function(lxqt_translate_ts qmFiles)
+function(translate_ts qmFiles)
     set(oneValueArgs USE_QT5 UPDATE_TRANSLATIONS TEMPLATE TRANSLATION_DIR INSTALL_DIR COMPONENT)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(TR "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})

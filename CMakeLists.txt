@@ -55,8 +55,7 @@ set(CMAKE_MODULE_PATH
 )
 
 # Bring translation support in
-# Altough the name, it doesn't depend on LXQt in any way
-include(LXQtTranslateTs)
+include(TranslateTs)
 
 # add definitions
 include(DefineCMakeDefaults)

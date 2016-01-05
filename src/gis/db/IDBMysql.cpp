@@ -101,85 +101,75 @@ bool IDBMysql::initDB()
         QUERY_EXEC(return false);
     }
 
-    if(!query.exec( "CREATE TABLE folders ("
-                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "keyqms         TEXT,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "locked         BOOLEAN DEFAULT FALSE,"
-                    "data           LONGBLOB"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN( "CREATE TABLE folders ("
+                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+                "type           INTEGER NOT NULL,"
+                "keyqms         TEXT,"
+                "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                "name           TEXT NOT NULL,"
+                "comment        TEXT,"
+                "locked         BOOLEAN DEFAULT FALSE,"
+                "data           LONGBLOB"
+                ")", return false);
 
-    if(!query.exec( "CREATE TABLE items ("
-                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                    "type           INTEGER,"
-                    "keyqms         VARCHAR(64) NOT NULL,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "icon           BLOB NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "data           LONGBLOB NOT NULL,"
-                    "hash           TEXT NOT NULL,"
-                    "last_user      TEXT DEFAULT NULL,"
-                    "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW(),"
-                    "UNIQUE KEY (keyqms)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN( "CREATE TABLE items ("
+                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+                "type           INTEGER,"
+                "keyqms         VARCHAR(64) NOT NULL,"
+                "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                "icon           BLOB NOT NULL,"
+                "name           TEXT NOT NULL,"
+                "comment        TEXT,"
+                "data           LONGBLOB NOT NULL,"
+                "hash           TEXT NOT NULL,"
+                "last_user      TEXT DEFAULT NULL,"
+                "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW(),"
+                "trash          DATETIME DEFAULT NULL,"
+                "UNIQUE KEY (keyqms)"
+                ")", return false);
 
-    if(!query.exec("CREATE TRIGGER items_insert_last_user BEFORE INSERT ON items FOR EACH ROW SET NEW.last_user = USER();"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN("CREATE TRIGGER items_insert_last_user "
+              "BEFORE INSERT ON items "
+              "FOR EACH ROW SET NEW.last_user = USER();"
+              , return false);
 
-    if(!query.exec("CREATE TRIGGER items_update_last_user BEFORE UPDATE ON items FOR EACH ROW SET NEW.last_user = USER();"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN("CREATE TRIGGER items_update_last_user "
+              "BEFORE UPDATE ON items "
+              "FOR EACH ROW SET NEW.last_user = USER();"
+              , return false);
 
     query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
     query.bindValue(":name", db.connectionName());
     QUERY_EXEC(return false);
 
-    if(!query.exec( "CREATE TABLE folder2folder ("
-                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES folders(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN( "CREATE TABLE folder2folder ("
+                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+                "parent         INTEGER NOT NULL,"
+                "child          INTEGER NOT NULL,"
+                "FOREIGN KEY(parent) REFERENCES folders(id),"
+                "FOREIGN KEY(child) REFERENCES folders(id)"
+                ")", return false);
 
-    if(!query.exec( "CREATE TABLE folder2item ("
-                    "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES items(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
+    QUERY_RUN( "CREATE TABLE folder2item ("
+                "id             INTEGER PRIMARY KEY AUTO_INCREMENT,"
+                "parent         INTEGER NOT NULL,"
+                "child          INTEGER NOT NULL,"
+                "FOREIGN KEY(parent) REFERENCES folders(id),"
+                "FOREIGN KEY(child) REFERENCES items(id)"
+                ")", return false);
+
+    QUERY_RUN("CREATE TRIGGER folder2item_insert "
+              "BEFORE INSERT ON folder2item "
+              "FOR EACH ROW UPDATE items SET trash=NULL "
+              "WHERE id=NEW.child;"
+              , return false);
+
+    QUERY_RUN("CREATE TRIGGER folder2item_delete "
+              "AFTER DELETE ON folder2item "
+              "FOR EACH ROW UPDATE items SET trash=CURRENT_TIMESTAMP "
+              "WHERE id=OLD.child AND OLD.child NOT IN(SELECT child FROM folder2item);"
+              , return false);
+
     return true;
 }
 

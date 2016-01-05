@@ -30,6 +30,8 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
     setupDB(filename, name);
 
     setupFromDB();
+
+    setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
 }
 
 CDBFolderSqlite::~CDBFolderSqlite()

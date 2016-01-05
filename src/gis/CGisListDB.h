@@ -65,6 +65,7 @@ private:
     friend class CGisListDBEditLock;
 
     IDBFolderSql *getDataBase(const QString& name, const QString& host);
+    void saveDatabaseConfiguration();
 
     int isInternalEdit = 0;
 

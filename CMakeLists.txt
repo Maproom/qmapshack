@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.0.0)
 
 project(QMapShack)
 
+option(UPDATE_TRANSLATIONS "Update source translation translations/*.ts files" OFF)
+
+# Needed to properly handle extract translations strings when using the Ninja
+# generator.
+if (COMMAND CMAKE_POLICY)
+    if (POLICY CMP0058)
+        cmake_policy(SET CMP0058 NEW)
+    endif()
+endif()
 
 if(WIN32)
 set(QT_DEV_PATH   "C:\\Qt\\5.4\\msvc2013_64" CACHE PATH "Path to directory containing Qt5 include and lib, e.g. C:\\Qt5\\5.3\\msvc2013_64")
@@ -44,6 +53,10 @@ endif(MSVC)
 set(CMAKE_MODULE_PATH
   ${CMAKE_SOURCE_DIR}/cmake/Modules
 )
+
+# Bring translation support in
+# Altough the name, it doesn't depend on LXQt in any way
+include(LXQtTranslateTs)
 
 # add definitions
 include(DefineCMakeDefaults)

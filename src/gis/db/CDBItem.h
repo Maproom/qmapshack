@@ -49,6 +49,8 @@ public:
      */
     void remove();
 
+    void updateAge();
+
 private:
     QSqlDatabase& db;
     quint64 id;

@@ -99,6 +99,11 @@
         <string>Name</string>
        </property>
       </column>
+      <column>
+       <property name="text">
+        <string>Age</string>
+       </property>
+      </column>
      </widget>
     </widget>
    </item>

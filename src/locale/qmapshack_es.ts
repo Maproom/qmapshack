@@ -6177,8 +6177,8 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="vanished">Fallo al leer...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
         <location filename="../gis/slf/CSlfReader.cpp" line="75"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -6292,8 +6292,8 @@ Filename: %1</source>
         <translation>¿Desea realmente eleiminar &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="585"/>
         <location filename="../gis/prj/IGisProject.cpp" line="512"/>
+        <location filename="../gis/CGisListDB.cpp" line="585"/>
         <source>Delete...</source>
         <translation>Borrar...</translation>
     </message>
@@ -6308,10 +6308,10 @@ Filename: %1</source>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="72"/>
         <location filename="../gis/fit/CFitProject.cpp" line="97"/>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="84"/>
-        <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
         <source>Failed to open %1</source>
         <translation>Fallo al abrir %1</translation>
     </message>
@@ -6330,8 +6330,8 @@ Filename: %1</source>
         <translation type="obsolete">Cancelar guardar</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="90"/>
         <location filename="../gis/slf/CSlfProject.cpp" line="42"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="90"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6848,15 +6848,15 @@ Filename: %1</source>
         <translation>Introduzca el nombre del nuevo área.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="30"/>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="26"/>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <source>All your data grouped by folders.</source>
         <translation>Todos tus datos agrupados en carpetas.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="64"/>
         <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="64"/>
         <source>Lost &amp; Found</source>
         <translation>Objetos Perdidos</translation>
     </message>
@@ -6965,8 +6965,6 @@ Filename: %1</source>
         <translation>¿Desea realmente eliminar %1?</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <location filename="../gis/tnv/serialization.cpp" line="376"/>
@@ -6978,15 +6976,17 @@ Filename: %1</source>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Failed to open %1.</source>
         <translation>Fallo al abrir %1.</translation>
     </message>

@@ -5862,8 +5862,8 @@ of
         <translation>Moet &apos;%1&apos; uit map &apos;%2&apos; verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="585"/>
         <location filename="../gis/prj/IGisProject.cpp" line="512"/>
+        <location filename="../gis/CGisListDB.cpp" line="585"/>
         <source>Delete...</source>
         <translation>Verwijderen...</translation>
     </message>
@@ -5878,9 +5878,9 @@ of
         <translation>Moet %1 werkelijk verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="30"/>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="26"/>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <source>All your data grouped by folders.</source>
         <translation>Alle gegevens gegroepeerd per map.</translation>
     </message>
@@ -5890,8 +5890,8 @@ of
         <translation>Lost &amp; Found (%1)</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="64"/>
         <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="64"/>
         <source>Lost &amp; Found</source>
         <translation>Lost &amp; Found</translation>
     </message>
@@ -5974,10 +5974,10 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="72"/>
         <location filename="../gis/fit/CFitProject.cpp" line="97"/>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="84"/>
-        <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
         <source>Failed to open %1</source>
         <translation>Openen mislukt-%1</translation>
     </message>
@@ -5986,8 +5986,8 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="vanished">Lezen mislukt...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
         <location filename="../gis/slf/CSlfReader.cpp" line="75"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -6000,8 +6000,8 @@ lijn %2, kolom %3:
         <translation type="vanished">Geen GPX bestand:</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="90"/>
         <location filename="../gis/slf/CSlfProject.cpp" line="42"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="90"/>
         <source>Failed to load file %1...</source>
         <translation>Kan bestand %1 niet laden...</translation>
     </message>
@@ -6343,8 +6343,6 @@ Bestandsnaam: %1</translation>
         <translation>Routepunten aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <location filename="../gis/tnv/serialization.cpp" line="376"/>
@@ -6356,15 +6354,17 @@ Bestandsnaam: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Failed to open %1.</source>
         <translation>Kan %1 niet openen.</translation>
     </message>

@@ -151,6 +151,11 @@ CGisListDB::CGisListDB(QWidget *parent)
 
 CGisListDB::~CGisListDB()
 {
+    saveDatabaseConfiguration();
+}
+
+void CGisListDB::saveDatabaseConfiguration()
+{
     QStringList names;
 
     SETTINGS;
@@ -192,7 +197,6 @@ CGisListDB::~CGisListDB()
     cfg.setValue("names", names);
     cfg.endGroup(); // Database
 }
-
 
 IDBFolderSql * CGisListDB::getDataBase(const QString& name, const QString &host)
 {
@@ -372,6 +376,8 @@ void CGisListDB::slotAddDatabase()
     folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
 
     emit sigChanged();
+
+    saveDatabaseConfiguration();
 }
 
 void CGisListDB::slotDelDatabase()
@@ -391,6 +397,8 @@ void CGisListDB::slotDelDatabase()
     delete folder;
 
     emit sigChanged();
+
+    saveDatabaseConfiguration();
 }
 
 void CGisListDB::slotAddFolder()

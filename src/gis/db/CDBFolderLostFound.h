@@ -29,9 +29,7 @@ public:
 
     void update(CEvtW2DAckInfo * info) override;
     bool update() override;
-    void expanding() override
-    {
-    }
+    void expanding() override;
     void clear();
     bool delItem(CDBItem * item);
 

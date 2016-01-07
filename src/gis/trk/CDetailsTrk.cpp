@@ -166,6 +166,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(spinLimitLow,     &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
     connect(spinLimitLow,     &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
+    void (QDoubleSpinBox:: *signal)(double) = &QDoubleSpinBox::valueChanged;
+    connect(spinLineWidth,    signal,                              this, &CDetailsTrk::slotLineWidth);
+    connect(checkWithArrows,  &QCheckBox::toggled,                 this, &CDetailsTrk::slotWithArrows);
+
     connect(btnMaxFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
     connect(btnMinFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
 
@@ -380,6 +384,14 @@ void CDetailsTrk::updateData()
             tabWidget->setTabText(idx, trk.getName());
         }
     }
+
+    spinLineWidth->blockSignals(true);
+    spinLineWidth->setValue(trk.getLineWidth());
+    spinLineWidth->blockSignals(false);
+
+    checkWithArrows->blockSignals(true);
+    checkWithArrows->setChecked(trk.getShowArrows());
+    checkWithArrows->blockSignals(false);
 
     comboColorSource->blockSignals(true);
     comboColorSource->clear();
@@ -678,4 +690,16 @@ void CDetailsTrk::slotSetupGraph(int idx)
     {
         trk.getPropertyHandler()->setupPlot(plot, idx);
     }
+}
+
+void CDetailsTrk::slotLineWidth(qreal f)
+{
+    trk.setLineWidth(f);
+    updateData();
+}
+
+void CDetailsTrk::slotWithArrows(bool yes)
+{
+    trk.setShowArrows(yes);
+    updateData();
 }

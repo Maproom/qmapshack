@@ -187,6 +187,15 @@ public:
         return color;
     }
 
+    qreal getLineWidth() const
+    {
+        return scaleArrow;
+    }
+
+    bool getShowArrows()
+    {
+        return showArrows;
+    }
 
     /**
        @brief get a summary of the track
@@ -328,6 +337,9 @@ public:
 
     void setName(const QString& str);
     void setColor(int idx);
+    /// set the width of the inner track line by factor
+    void setLineWidth(qreal f);
+    void setShowArrows(bool yes);
     bool setMode(mode_e m, const QString &owner);
     virtual void setComment         (const QString& str)         override;
     virtual void setDescription     (const QString& str)         override;
@@ -850,8 +862,6 @@ private:
 
     /// the key of the track having the user focus.
     static key_t keyUserFocus;
-    /// background (border) color of all tracks
-    static const QPen penBackground;
     /// drawing and mouse interaction is dependent on the mode
     mode_e mode = eModeNormal;
 
@@ -880,12 +890,28 @@ private:
     QColor color;
     /// the pen with the actual track color
     QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
+    /// background (border) color of all tracks
+    QPen penBackground {Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
     /// the trackpoint bullet icon
     QPixmap bullet;
     /// the current track line as screen pixel coordinates
     QPolygonF lineSimple;
     /// visible and invisible points
     QPolygonF lineFull;
+
+    /// inner trackline width
+    qint32 penWidthFg = 3;
+    /// outer trackline width
+    qint32 penWidthBg = 5;
+    /// highlighted trackline width
+    qint32 penWidthHi = 11;
+    /// scale factor for the arrows baseed on default penWidthFg
+    qreal scaleArrow = 1.0;
+    /// show/hide arrows
+    bool showArrows = true;
+
     /**@}*/
 
 

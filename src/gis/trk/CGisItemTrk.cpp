@@ -65,8 +65,6 @@ struct activity_t
     QString icon;
 };
 
-const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
@@ -1675,7 +1673,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         QList<QPolygonF> lines;
         splitLineToViewport(lineFull, extViewport, lines);
 
-        p.setPen(QPen(Qt::lightGray,5,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::lightGray, penWidthBg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
         foreach(const QPolygonF &l, lines)
         {
@@ -1699,7 +1697,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     if(key == keyUserFocus)
     {
-        p.setPen(QPen(Qt::red,11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::red, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         foreach(const QPolygonF &l, lines)
         {
             p.drawPolyline(l);
@@ -1711,7 +1709,10 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     foreach(const QPolygonF &l, lines)
     {
         p.drawPolyline(l);
-        CDraw::arrows(l, extViewport, p, 10, 80);
+        if(showArrows)
+        {
+            CDraw::arrows(l, extViewport, p, 10, 80, scaleArrow);
+        }
     }
 
     if(colorSource.isEmpty())
@@ -1786,7 +1787,7 @@ void CGisItemTrk::drawColorized(QPainter &p)
 
             QPen pen;
             pen.setBrush(QBrush(grad));
-            pen.setWidth(3);
+            pen.setWidth(penWidthFg);
 
             p.setPen(pen);
             p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
@@ -1994,7 +1995,7 @@ void CGisItemTrk::drawHighlight(QPainter& p)
     {
         return;
     }
-    p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(QColor(255,0,0,100), penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(lineSimple);
 }
 
@@ -2015,10 +2016,10 @@ void CGisItemTrk::drawRange(QPainter& p)
 
         QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
 
-        p.setPen(QPen(Qt::darkGreen, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::darkGreen, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(seg);
 
-        p.setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::green, penWidthFg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(seg);
     }
 }
@@ -2203,6 +2204,25 @@ void CGisItemTrk::setIcon(const QString& iconColor)
     icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
+}
+
+void CGisItemTrk::setLineWidth(qreal f)
+{
+    int w = qRound(3.0 * f);
+
+    penWidthFg = w;
+    penWidthBg = w + 2;
+    penWidthHi = w + 4;
+
+    penForeground.setWidth(penWidthFg);
+    penBackground.setWidth(penWidthBg);
+
+    scaleArrow = f;
+}
+
+void CGisItemTrk::setShowArrows(bool yes)
+{
+    showArrows = yes;
 }
 
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)

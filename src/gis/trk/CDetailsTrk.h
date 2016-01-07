@@ -60,6 +60,9 @@ private slots:
 
     void slotSetupGraph(int idx);
 
+    void slotLineWidth(qreal f);
+    void slotWithArrows(bool yes);
+
 private:
     enum columns_t
     {

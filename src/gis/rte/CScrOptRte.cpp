@@ -115,8 +115,8 @@ void CScrOptRte::slotInstruction(bool on)
 
 void CScrOptRte::draw(QPainter& p)
 {
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    IGisItem *item = CGisWidget::self().getItemByKey(key);
+    if(nullptr == item)
     {
         QWidget::deleteLater();
         return;

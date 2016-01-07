@@ -220,7 +220,7 @@ private:
     qreal totalDistance = NOFLOAT;
     quint32 totalTime = 0;
 
-    const subpt_t * mouseMoveFocus = 0;
+    const subpt_t * mouseMoveFocus = nullptr;
 
     QPointer<CScrOptRte>  scrOpt;
 };

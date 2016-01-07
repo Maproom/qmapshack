@@ -475,7 +475,7 @@ bool IGisItem::isTainted() const
 bool IGisItem::isOnDevice() const
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project == 0)
+    if(nullptr == project)
     {
         return false;
     }

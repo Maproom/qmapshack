@@ -222,6 +222,6 @@ void CDeviceWorker::init()
 {
     mSession = DASessionCreate(kCFAllocatorDefault);
 
-    DARegisterDiskAppearedCallback(mSession, NULL, onDiskAppear, this);
-    DARegisterDiskDisappearedCallback(mSession, NULL, onDiskDisappear, this);
+    DARegisterDiskAppearedCallback(mSession, nullptr, onDiskAppear, this);
+    DARegisterDiskDisappearedCallback(mSession, nullptr, onDiskDisappear, this);
 }

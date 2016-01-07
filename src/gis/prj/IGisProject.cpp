@@ -356,7 +356,7 @@ void IGisProject::markAsSaved()
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -438,8 +438,8 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
 {
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        IGisItem *item = dynamic_cast<IGisItem*>(child(i));
+        if(nullptr == item)
         {
             continue;
         }
@@ -462,7 +462,7 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -484,7 +484,7 @@ void IGisProject::mouseMove(const QPointF& pos)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -499,7 +499,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -539,7 +539,7 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -665,7 +665,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -684,7 +684,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -709,7 +709,7 @@ void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -793,7 +793,7 @@ void IGisProject::updateItemCounters()
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -843,7 +843,7 @@ void IGisProject::updateDecoration()
     for(int i = 0; i < N; i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }

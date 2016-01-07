@@ -100,7 +100,7 @@ void CPlotProfile::updateData()
             coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
             lineDem << QPointF(trkpt.distance, NOFLOAT);
 
-            if(project == 0 || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
+            if(nullptr == project || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
             {
                 continue;
             }

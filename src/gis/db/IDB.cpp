@@ -16,10 +16,12 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/db/IDB.h"
 #include "gis/db/macros.h"
 
 #include <QtSql>
+#include <QtWidgets>
 
 QMap<QString,int> IDB::references;
 
@@ -42,6 +44,74 @@ void IDB::setup(const QString &connectionName)
     references[connectionName]++;
 }
 
+bool IDB::setupDB()
+{
+    QSqlQuery query(db);
+
+    if(!query.exec("SELECT version FROM versioninfo"))
+    {
+        return initDB();
+    }
+    else if(query.next())
+    {
+        int version = query.value(0).toInt();
+        if(version < DB_VERSION)
+        {
+            QString msg = QObject::tr("The internal database format of '%1'' has changed. QMapShack will migrate your database, now. "
+                                      "After the migration the database won't be usable with older versions of QMapShack. "
+                                      "It is recommended to backup the database first.").arg(db.connectionName());
+            int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
+                                           QObject::tr("Migrate database..."),
+                                           msg,
+                                           QMessageBox::Ok|QMessageBox::Abort);
+            if(res != QMessageBox::Ok)
+            {
+                exit(0);
+            }
+
+            if(!migrateDB(version))
+            {
+                QString msg = QObject::tr("Failed to migrate '%1'.").arg(db.connectionName());
+                QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
+                                      QObject::tr("Error..."),
+                                      msg,
+                                      QMessageBox::Abort);
+
+                return false;
+            }
+
+        }
+        else if(version > DB_VERSION)
+        {
+            QString msg = QObject::tr("The database version of '%1'' is more advanced as the one understood by your "
+                                     "QMapShack installation. This won't work.").arg(db.connectionName());
+            QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
+                                  QObject::tr("Wrong database version..."),
+                                  msg,
+                                  QMessageBox::Abort);
+            return false;
+        }
+    }
+    else
+    {
+        if(!initDB())
+        {
+            QString msg = QObject::tr("Failed to initialize '%1'.").arg(db.connectionName());
+            QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
+                                  QObject::tr("Error..."),
+                                  msg,
+                                  QMessageBox::Abort);
+
+            return false;
+        }
+    }
+
+    query.prepare( "UPDATE folders SET name=:name WHERE id=1");
+    query.bindValue(":name", db.connectionName());
+    QUERY_EXEC(return false);
+
+    return true;
+}
 
 quint64 IDB::getLastInsertID(QSqlDatabase& db, const QString& table)
 {

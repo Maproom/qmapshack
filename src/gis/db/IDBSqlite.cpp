@@ -73,105 +73,98 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
         QUERY_RUN("DROP TABLE tmp_items;", NO_CMD)
     }
 
-
-    if(!query.exec("SELECT version FROM versioninfo"))
-    {
-        return initDB();
-    }
-    else if(query.next())
-    {
-        int version = query.value(0).toInt();
-        if(version != DB_VERSION)
-        {
-            return migrateDB(version);
-        }
-    }
-    else
-    {
-        return initDB();
-    }
-
-    query.prepare( "UPDATE folders SET name=:name WHERE id=1");
-    query.bindValue(":name", connectionName);
-    QUERY_EXEC()
-
-    return true;
+    return setupDB();
 }
 
 bool IDBSqlite::initDB()
 {
     QSqlQuery query(db);
 
-    if(query.exec( "CREATE TABLE versioninfo ( version TEXT, type TEXT )"))
+    QUERY_RUN("BEGIN TRANSACTION;", return false);
+    try
     {
-        query.prepare( "INSERT INTO versioninfo (version, type) VALUES(:version, 'QMapShack')");
-        query.bindValue(":version", DB_VERSION);
+
+        if(query.exec( "CREATE TABLE versioninfo ( version TEXT, type TEXT )"))
+        {
+            query.prepare( "INSERT INTO versioninfo (version, type) VALUES(:version, 'QMapShack')");
+            query.bindValue(":version", DB_VERSION);
+            QUERY_EXEC(throw -1);
+        }
+
+        QUERY_RUN("CREATE TABLE folders ("
+                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "type           INTEGER NOT NULL,"
+                  "keyqms         TEXT,"
+                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                  "name           TEXT NOT NULL,"
+                  "comment        TEXT,"
+                  "locked         BOOLEAN DEFAULT FALSE,"
+                  "data           BLOB"
+                  ")", throw -1)
+
+        QUERY_RUN("CREATE TABLE items ("
+                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "type           INTEGER,"
+                  "keyqms         TEXT NOT NULL UNIQUE,"
+                  "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                  "icon           BLOB NOT NULL,"
+                  "name           TEXT NOT NULL,"
+                  "comment        TEXT,"
+                  "data           BLOB NOT NULL,"
+                  "hash           TEXT NOT NULL,"
+                  "last_user      TEXT DEFAULT 'QMapShack',"
+                  "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                  "trash          DATETIME DEFAULT NULL"
+                  ")", throw -1)
+
+        QUERY_RUN("CREATE TRIGGER items_update_last_change "
+                  "AFTER UPDATE ON items BEGIN "
+                  "UPDATE items SET last_change=CURRENT_TIMESTAMP WHERE id=NEW.id; "
+                  "END;", throw -1)
+
+
+        query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
+        query.bindValue(":name", db.connectionName());
         QUERY_EXEC(return false);
+
+        QUERY_RUN("CREATE TABLE folder2folder ("
+                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "parent         INTEGER NOT NULL,"
+                  "child          INTEGER NOT NULL,"
+                  "FOREIGN KEY(parent) REFERENCES folders(id),"
+                  "FOREIGN KEY(child) REFERENCES folders(id)"
+                  ")", throw -1)
+
+        QUERY_RUN("CREATE TABLE folder2item ("
+                  "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "parent         INTEGER NOT NULL,"
+                  "child          INTEGER NOT NULL,"
+                  "FOREIGN KEY(parent) REFERENCES folders(id),"
+                  "FOREIGN KEY(child) REFERENCES items(id)"
+                  ")", return false)
+
+        QUERY_RUN("CREATE TRIGGER folder2item_insert "
+                  "BEFORE INSERT ON folder2item BEGIN "
+                  "UPDATE items SET trash=NULL "
+                  "WHERE id=NEW.child; "
+                  "END;", throw -1);
+
+        QUERY_RUN("CREATE TRIGGER folder2item_delete "
+                  "AFTER DELETE ON folder2item BEGIN "
+                  "UPDATE items SET trash=CURRENT_TIMESTAMP "
+                  "WHERE id=OLD.child AND OLD.child NOT IN(SELECT child FROM folder2item); "
+                  "END;", throw -1);
+
+        QUERY_RUN("END TRANSACTION;", throw -1);
     }
-
-    QUERY_RUN("CREATE TABLE folders ("
-              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-              "type           INTEGER NOT NULL,"
-              "keyqms         TEXT,"
-              "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-              "name           TEXT NOT NULL,"
-              "comment        TEXT,"
-              "locked         BOOLEAN DEFAULT FALSE,"
-              "data           BLOB"
-              ")", return false)
-
-    QUERY_RUN("CREATE TABLE items ("
-              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-              "type           INTEGER,"
-              "keyqms         TEXT NOT NULL UNIQUE,"
-              "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-              "icon           BLOB NOT NULL,"
-              "name           TEXT NOT NULL,"
-              "comment        TEXT,"
-              "data           BLOB NOT NULL,"
-              "hash           TEXT NOT NULL,"
-              "last_user      TEXT DEFAULT 'QMapShack',"
-              "last_change    DATETIME DEFAULT CURRENT_TIMESTAMP,"
-              "trash          DATETIME DEFAULT NULL"
-              ")", return false)
-
-    QUERY_RUN("CREATE TRIGGER items_update_last_change "
-              "AFTER UPDATE ON items BEGIN "
-              "UPDATE items SET last_change=CURRENT_TIMESTAMP WHERE id=NEW.id; "
-              "END;", return false)
-
-
-    query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
-    query.bindValue(":name", db.connectionName());
-    QUERY_EXEC(return false);
-
-    QUERY_RUN("CREATE TABLE folder2folder ("
-              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-              "parent         INTEGER NOT NULL,"
-              "child          INTEGER NOT NULL,"
-              "FOREIGN KEY(parent) REFERENCES folders(id),"
-              "FOREIGN KEY(child) REFERENCES folders(id)"
-              ")", return false)
-
-    QUERY_RUN("CREATE TABLE folder2item ("
-              "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-              "parent         INTEGER NOT NULL,"
-              "child          INTEGER NOT NULL,"
-              "FOREIGN KEY(parent) REFERENCES folders(id),"
-              "FOREIGN KEY(child) REFERENCES items(id)"
-              ")", return false)
-
-    QUERY_RUN("CREATE TRIGGER folder2item_insert "
-              "BEFORE INSERT ON folder2item BEGIN "
-              "UPDATE items SET trash=NULL "
-              "WHERE id=NEW.child; "
-              "END;", return false);
-
-    QUERY_RUN("CREATE TRIGGER folder2item_delete "
-              "AFTER DELETE ON folder2item BEGIN "
-              "UPDATE items SET trash=CURRENT_TIMESTAMP "
-              "WHERE id=OLD.child AND OLD.child NOT IN(SELECT child FROM folder2item); "
-              "END;", return false);
+    catch(int i)
+    {
+        if(i == -1)
+        {
+            QUERY_RUN("ROLLBACK;", return false);
+            return false;
+        }
+    }
 
 
     return true;
@@ -179,40 +172,43 @@ bool IDBSqlite::initDB()
 
 bool IDBSqlite::migrateDB(int version)
 {
-    QString msg = QObject::tr("The internal database format has changed. QMapShack will migrate your database, now. "
-                              "After the migration the database won't be usable with older versions of QMapShack. "
-                              "It is recommended to backup the database first.");
-    int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
-                                   QObject::tr("Migrate database..."),
-                                   msg,
-                                   QMessageBox::Ok|QMessageBox::Abort);
-    if(res != QMessageBox::Ok)
-    {
-        exit(0);
-    }
 
     QSqlQuery query(db);
 
-    if(version < 2)
+    QUERY_RUN("BEGIN TRANSACTION;", return false);
+    try
     {
-        if(!migrateDB1to2())
+        if(version < 2)
         {
-            return false;
+            if(!migrateDB1to2())
+            {
+                throw -1;
+            }
         }
-    }
 
-    if(version < 3)
-    {
-        if(!migrateDB2to3())
+        if(version < 3)
         {
-            return false;
+            if(!migrateDB2to3())
+            {
+                throw -1;
+            }
         }
-    }
 
-    if(version < 4)
-    {
-        if(!migrateDB3to4())
+        if(version < 4)
         {
+            if(!migrateDB3to4())
+            {
+                throw -1;
+            }
+        }
+
+        QUERY_RUN("END TRANSACTION;", throw -1);
+    }
+    catch(int i)
+    {
+        if(i == -1)
+        {
+            QUERY_RUN("ROLLBACK;", return false);
             return false;
         }
     }
@@ -227,7 +223,6 @@ bool IDBSqlite::migrateDB1to2()
 {
     QSqlQuery query(db);
 
-    QUERY_RUN("BEGIN TRANSACTION;", return false)
     QUERY_RUN("ALTER TABLE folders RENAME TO tmp_folders;", return false)
 
     QUERY_RUN("CREATE TABLE folders ("
@@ -242,9 +237,7 @@ bool IDBSqlite::migrateDB1to2()
               ");", return false);
 
     QUERY_RUN("INSERT INTO folders(id,type,keyqms,date,name,comment,locked,data) SELECT * FROM tmp_folders;", return false);
-    QUERY_RUN("COMMIT;", return false);
 
-    QUERY_RUN("BEGIN TRANSACTION;", return false);
     QUERY_RUN("ALTER TABLE items RENAME TO tmp_items;", return false);
     QUERY_RUN("CREATE TABLE items ("
               "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -257,7 +250,7 @@ bool IDBSqlite::migrateDB1to2()
               "data           BLOB NOT NULL"
               ");", return false);
     QUERY_RUN("INSERT INTO items(id,type,keyqms,date,icon,name,comment,data) SELECT * FROM tmp_items;", return false);
-    QUERY_RUN("COMMIT;", return false);
+
 
     return true;
 }

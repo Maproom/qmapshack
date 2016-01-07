@@ -266,8 +266,8 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
 
     for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(project.child(i));
-        if(item == 0)
+        CGisItemWpt *item = dynamic_cast<CGisItemWpt*>(project.child(i));
+        if(nullptr == item)
         {
             continue;
         }
@@ -286,8 +286,8 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     }
     for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemRte * item = dynamic_cast<CGisItemRte*>(project.child(i));
-        if(item == 0)
+        CGisItemRte *item = dynamic_cast<CGisItemRte*>(project.child(i));
+        if(nullptr == item)
         {
             continue;
         }
@@ -295,8 +295,8 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     }
     for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(project.child(i));
-        if(item == 0)
+        CGisItemTrk *item = dynamic_cast<CGisItemTrk*>(project.child(i));
+        if(nullptr == item)
         {
             continue;
         }
@@ -308,7 +308,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     for(int i = 0; i < project.childCount(); i++)
     {
         CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(project.child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }

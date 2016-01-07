@@ -388,8 +388,8 @@ void CGisListDB::slotAddDatabase()
 
 void CGisListDB::slotDelDatabase()
 {
-    IDBFolderSql * folder = dynamic_cast<IDBFolderSql*>(currentItem());
-    if(folder == 0)
+    IDBFolderSql *folder = dynamic_cast<IDBFolderSql*>(currentItem());
+    if(nullptr == folder)
     {
         return;
     }
@@ -411,8 +411,8 @@ void CGisListDB::slotAddFolder()
 {
     CGisListDBEditLock lock(false, this, "slotAddFolder");
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
-    if(folder == 0)
+    IDBFolder *folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(nullptr == folder)
     {
         return;
     }

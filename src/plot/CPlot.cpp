@@ -86,7 +86,7 @@ void CPlot::updateData()
 
 void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
-    if(ptMouseMove == 0 ||  getX == nullptr || getY == nullptr)
+    if(nullptr == ptMouseMove ||  getX == nullptr || getY == nullptr)
     {
         if(posMouse != NOPOINT)
         {

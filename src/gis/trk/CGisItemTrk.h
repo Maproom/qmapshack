@@ -1011,13 +1011,13 @@ private:
     QString mouseFocusOwner;
 
     /// the current track point selected by mouse movement
-    const trkpt_t * mouseMoveFocus = 0;
+    const trkpt_t * mouseMoveFocus = nullptr;
     /// the last track point the user clicked on
-    const trkpt_t * mouseClickFocus = 0;
+    const trkpt_t * mouseClickFocus = nullptr;
     /// the first point of a range selection
-    const trkpt_t * mouseRange1 = 0;
+    const trkpt_t * mouseRange1 = nullptr;
     /// the second point of a range selection
-    const trkpt_t * mouseRange2 = 0;
+    const trkpt_t * mouseRange2 = nullptr;
     /**@}*/
 
     /// the track's details dialog if any

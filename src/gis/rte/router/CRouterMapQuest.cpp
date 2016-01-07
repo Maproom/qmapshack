@@ -187,8 +187,8 @@ void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locat
 
 void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
 {
-    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-    if(rte == 0)
+    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+    if(nullptr == rte)
     {
         return;
     }

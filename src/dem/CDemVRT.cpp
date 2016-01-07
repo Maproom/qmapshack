@@ -39,7 +39,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qDebug() << "VRT: try to open" << filename;
 
     dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
-    if(dataset == 0)
+    if(nullptr == dataset)
     {
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
         return;
@@ -48,17 +48,16 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(dataset->GetRasterCount() != 1)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
 
-    GDALRasterBand * pBand;
-    pBand = dataset->GetRasterBand(1);
-    if(pBand == 0)
+    GDALRasterBand *pBand = dataset->GetRasterBand(1);
+    if(nullptr == pBand)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }

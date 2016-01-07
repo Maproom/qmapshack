@@ -126,7 +126,7 @@ void CDemList::updateHelpText()
 void CDemList::slotActivate()
 {
     CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -189,7 +189,7 @@ void CDemList::slotContextMenu(const QPoint& point)
 {
     CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
 
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }

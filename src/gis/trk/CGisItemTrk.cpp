@@ -1788,6 +1788,7 @@ void CGisItemTrk::drawColorized(QPainter &p)
             QPen pen;
             pen.setBrush(QBrush(grad));
             pen.setWidth(penWidthFg);
+            pen.setCapStyle(Qt::RoundCap);
 
             p.setPen(pen);
             p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);

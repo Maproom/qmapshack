@@ -28,9 +28,10 @@ public:
     virtual ~IDBMysql() = default;
 
 protected:
+    using IDB::setupDB;
     bool setupDB(const QString &server, const QString &user, const QString &passwd, bool noPasswd, const QString &name, const QString &connectionName);
-    bool initDB();
-    bool migrateDB(int version);
+    bool initDB() override;
+    bool migrateDB(int version) override;
 };
 
 #endif //IDBMYSQL_H

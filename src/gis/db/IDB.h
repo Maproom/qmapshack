@@ -38,6 +38,10 @@ protected:
     static QMap<QString,int> references;
     QSqlDatabase db;
     void setup(const QString& connectionName);
+    bool setupDB();
+    virtual bool initDB() = 0;
+    virtual bool migrateDB(int version) = 0;
+
 };
 
 #endif //IDB_H

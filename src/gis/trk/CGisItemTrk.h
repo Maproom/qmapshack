@@ -146,6 +146,9 @@ public:
 
     IGisItem * createClone() override;
 
+    static void loadDefaultLineStyle();
+    static void saveDefaultLineStyle(qreal scale, bool arrows);
+
     /**
        @brief Save track to GPX tree
        @param gpx   The <gpx> node to append by the track
@@ -187,9 +190,9 @@ public:
         return color;
     }
 
-    qreal getLineWidth() const
+    qreal getScaleLineWidth() const
     {
-        return scaleArrow;
+        return scaleLine;
     }
 
     bool getShowArrows()
@@ -273,6 +276,8 @@ public:
     {
         return propHandler;
     }
+
+
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
         @{
@@ -324,6 +329,7 @@ private:
     /**@}*/
 
 
+public:
     /**
        @brief Get the indices of visible points for a selected range
 
@@ -332,13 +338,12 @@ private:
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
-public:
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
     void setColor(int idx);
     /// set the width of the inner track line by factor
-    void setLineWidth(qreal f);
+    void setScaleLineWidth(qreal f);
     void setShowArrows(bool yes);
     bool setMode(mode_e m, const QString &owner);
     virtual void setComment         (const QString& str)         override;
@@ -637,7 +642,6 @@ private:
      */
     void readTrkFromFit(CFitStream &stream);
 
-private:
     /**
        @brief Derive secondary data from the track data
 
@@ -750,7 +754,6 @@ private:
     void setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt);
     void setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
     void setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt);
-
 
 public:
     struct trkpt_t : public wpt_t
@@ -888,11 +891,6 @@ private:
     unsigned colorIdx = 4;
     /// the track line color
     QColor color;
-    /// the pen with the actual track color
-    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
-
-    /// background (border) color of all tracks
-    QPen penBackground {Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
     /// the trackpoint bullet icon
     QPixmap bullet;
@@ -901,17 +899,32 @@ private:
     /// visible and invisible points
     QPolygonF lineFull;
 
-    /// inner trackline width
-    qint32 penWidthFg = 3;
-    /// outer trackline width
-    qint32 penWidthBg = 5;
-    /// highlighted trackline width
-    qint32 penWidthHi = 11;
-    /// scale factor for the arrows baseed on default penWidthFg
-    qreal scaleArrow = 1.0;
-    /// show/hide arrows
-    bool showArrows = true;
 
+    /// default inner trackline width
+    static qint32 penWidthFgDef;
+    /// default outer trackline width
+    static qint32 penWidthBgDef;
+    /// default highlighted trackline width
+    static qint32 penWidthHiDef;
+    /// default scale factor for the arrows baseed on default penWidthFg
+    static qreal scaleLineDef;
+    /// default show/hide arrows
+    static bool showArrowsDef;
+
+    /// inner trackline width
+    qint32 penWidthFg = penWidthFgDef;
+    /// outer trackline width
+    qint32 penWidthBg = penWidthBgDef;
+    /// highlighted trackline width
+    qint32 penWidthHi = penWidthHiDef;
+    /// scale factor for the arrows baseed on default penWidthFg
+    qreal scaleLine = scaleLineDef;
+    /// show/hide arrows
+    bool showArrows = showArrowsDef;
+    /// the pen with the actual track color
+    QPen penForeground {Qt::blue, qreal(penWidthFgDef), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    /// background (border) color of all tracks
+    QPen penBackground {Qt::white, qreal(penWidthBgDef), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
     /**@}*/
 
 

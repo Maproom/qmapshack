@@ -63,6 +63,8 @@ private slots:
     void slotLineWidth(qreal f);
     void slotWithArrows(bool yes);
 
+    void slotSaveLineDefault();
+
 private:
     enum columns_t
     {

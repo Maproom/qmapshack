@@ -169,6 +169,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     void (QDoubleSpinBox:: *signal)(double) = &QDoubleSpinBox::valueChanged;
     connect(spinLineWidth,    signal,                              this, &CDetailsTrk::slotLineWidth);
     connect(checkWithArrows,  &QCheckBox::toggled,                 this, &CDetailsTrk::slotWithArrows);
+    connect(pushLineWidthDefault, &QPushButton::clicked,           this, &CDetailsTrk::slotSaveLineDefault);
 
     connect(btnMaxFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
     connect(btnMinFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
@@ -386,7 +387,7 @@ void CDetailsTrk::updateData()
     }
 
     spinLineWidth->blockSignals(true);
-    spinLineWidth->setValue(trk.getLineWidth());
+    spinLineWidth->setValue(trk.getScaleLineWidth());
     spinLineWidth->blockSignals(false);
 
     checkWithArrows->blockSignals(true);
@@ -694,7 +695,7 @@ void CDetailsTrk::slotSetupGraph(int idx)
 
 void CDetailsTrk::slotLineWidth(qreal f)
 {
-    trk.setLineWidth(f);
+    trk.setScaleLineWidth(f);
     updateData();
 }
 
@@ -702,4 +703,10 @@ void CDetailsTrk::slotWithArrows(bool yes)
 {
     trk.setShowArrows(yes);
     updateData();
+}
+
+
+void CDetailsTrk::slotSaveLineDefault()
+{
+    CGisItemTrk::saveDefaultLineStyle(spinLineWidth->value(), checkWithArrows->isChecked());
 }

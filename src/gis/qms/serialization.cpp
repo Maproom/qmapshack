@@ -516,10 +516,8 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.type;
     in >> trk.color;
 
-    // versions >= 2 contain colorized tracks
-    if(version >= 2)
+    if(version > 1)
     {
-        QString source;
         in >> colorSource;
         in >> limitLow;
         in >> limitHigh;

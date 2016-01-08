@@ -90,7 +90,7 @@ function adjustLinking {
  
     for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
     do 
-        adjustLinkQt $F "Qt"
+        adjustLinkQt $F "libq"
     done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
@@ -109,8 +109,8 @@ function adjustLinking {
 }
 
 function adjustLinkQt {
-    F=$1
-    L=$2
+    F=$1 # file
+    L=$2 # search condition
     FREL=${F##*/}
     
     #printLinking $F
@@ -132,12 +132,11 @@ function adjustLinkQt {
             fi
             
             PREL="@executable_path/../Frameworks/$LIB"
-                
-            if [[ "$P" == *"PlugIns"* ]]; then
+            
+            if [[ "$P" == *"plugins"* ]]; then
                 # subdirectory for PlugIns
-                PREL=$(P##PlugIns/) # remove prepart
-                PREL=$(PREL%%/) # remove slash at end
-                LIB=$PREL/$LIB
+                PREL=${P##*plugins/} # remove prepart
+                LIB=$PREL
                 PREL="@executable_path/../PlugIns/$LIB"
             fi
             
@@ -165,7 +164,9 @@ function copyAdditionalLibraries {
     cp -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
+    # TODO remove QT Bus, is only for linux needed
     cp -R $QT_DIR/lib/QtDBus.framework $BUILD_BUNDLE_FRW_DIR
+
 }
 
 function copyExternalFiles {

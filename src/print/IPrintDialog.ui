@@ -23,6 +23,16 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>When printing online maps make sure that the map has been loaded into the cache for the extent to be printed.</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QFrame" name="frameImage">
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>

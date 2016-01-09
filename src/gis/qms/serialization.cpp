@@ -23,10 +23,11 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CValue.h"
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(2)
+#define VER_TRK         quint8(3)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(2)
 #define VER_AREA        quint8(1)
@@ -45,6 +46,7 @@
 #define VER_HIST        quint8(1)
 #define VER_HIST_EVT    quint8(3)
 #define VER_ITEM        quint8(3)
+#define VER_CVALUE      quint8(1)
 
 #define MAGIC_SIZE      10
 #define MAGIC_TRK       "QMTrk     "
@@ -448,6 +450,19 @@ QDataStream& operator>>(QDataStream& stream, IGisProject::person_t& p)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CValue& v)
+{
+    stream << VER_CVALUE << quint8(v.mode) << v.valUser;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CValue& v)
+{
+    quint8 version, mode;
+    stream >> version >> mode >> v.valUser;
+    v.setMode(CValue::mode_e(mode));
+    return stream;
+}
 
 // ---------------- main objects ---------------------------------
 
@@ -472,6 +487,9 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << colorSource;
     out << limitLow;
     out << limitHigh;
+
+    out << lineScale;
+    out << showArrows;
 
     out << trk.segs;
 
@@ -521,6 +539,12 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
         in >> colorSource;
         in >> limitLow;
         in >> limitHigh;
+    }
+
+    if(version > 2)
+    {
+        in >> lineScale;
+        in >> showArrows;
     }
 
     trk.segs.clear();

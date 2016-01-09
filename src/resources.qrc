@@ -191,6 +191,10 @@
         <file>icons/32x32/CSrcCourse.png</file>
         <file>icons/32x32/Progress.png</file>
         <file>icons/32x32/FitProject.png</file>
+        <file>icons/32x32/LineWidthUser.png</file>
+        <file>icons/32x32/LineWidthDef.png</file>
+        <file>icons/32x32/ArrowUser.png</file>
+        <file>icons/32x32/ArrowDef.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -356,6 +360,10 @@
         <file>icons/48x48/CSrcCourse.png</file>
         <file>icons/48x48/Progress.png</file>
         <file>icons/48x48/FitProject.png</file>
+        <file>icons/48x48/LineWidthUser.png</file>
+        <file>icons/48x48/LineWidthDef.png</file>
+        <file>icons/48x48/ArrowUser.png</file>
+        <file>icons/48x48/ArrowDef.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

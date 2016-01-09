@@ -54,8 +54,6 @@ endif(APPLE)
 
 
 set( SRCS
-
-#    main.cpp
         GeoMath.cpp
         CMainWindow.cpp
         CAbout.cpp
@@ -79,6 +77,7 @@ set( SRCS
         helpers/CCommandProcessor.cpp
         helpers/CAppSetup.cpp
         helpers/CDraw.cpp
+        helpers/CValue.cpp
         canvas/CCanvas.cpp
         canvas/CCanvasSetup.cpp
         canvas/IDrawContext.cpp
@@ -326,6 +325,7 @@ set( HDRS
         helpers/CCommandProcessor.h
         helpers/CAppSetup.h
         helpers/CDraw.h
+        helpers/CValue.h
         canvas/CCanvas.h
         canvas/CCanvasSetup.h
         canvas/IDrawContext.h

@@ -169,10 +169,12 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     void (QDoubleSpinBox:: *signal)(double) = &QDoubleSpinBox::valueChanged;
     connect(spinLineWidth,    signal,                              this, &CDetailsTrk::slotLineWidth);
     connect(checkWithArrows,  &QCheckBox::toggled,                 this, &CDetailsTrk::slotWithArrows);
-    connect(pushLineWidthDefault, &QPushButton::clicked,           this, &CDetailsTrk::slotSaveLineDefault);
 
     connect(btnMaxFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
     connect(btnMinFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
+
+    connect(toolUserLineWith, &QToolButton::toggled,               this, &CDetailsTrk::slotLineWidthMode);
+    connect(toolUserArrow,    &QToolButton::toggled,               this, &CDetailsTrk::slotWithArrowsMode);
 
     connect(listHistory,      &CHistoryListWidget::sigChanged,     this, &CDetailsTrk::updateData);
 
@@ -387,12 +389,18 @@ void CDetailsTrk::updateData()
     }
 
     spinLineWidth->blockSignals(true);
-    spinLineWidth->setValue(trk.getScaleLineWidth());
+    spinLineWidth->setValue(trk.lineScale.val().toDouble());
     spinLineWidth->blockSignals(false);
+    toolUserLineWith->blockSignals(true);
+    toolUserLineWith->setChecked(trk.lineScale.getMode() == CValue::eModeUser);
+    toolUserLineWith->blockSignals(false);
 
     checkWithArrows->blockSignals(true);
-    checkWithArrows->setChecked(trk.getShowArrows());
+    checkWithArrows->setChecked(trk.showArrows.val().toBool());
     checkWithArrows->blockSignals(false);
+    toolUserArrow->blockSignals(true);
+    toolUserArrow->setChecked(trk.showArrows.getMode() == CValue::eModeUser);
+    toolUserArrow->blockSignals(false);
 
     comboColorSource->blockSignals(true);
     comboColorSource->clear();
@@ -693,20 +701,34 @@ void CDetailsTrk::slotSetupGraph(int idx)
     }
 }
 
+void CDetailsTrk::slotLineWidthMode(bool isUser)
+{
+    trk.lineScale.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
+    trk.updateHistory();
+    spinLineWidth->setValue(trk.lineScale.val().toDouble());
+    updateData();    
+}
+
 void CDetailsTrk::slotLineWidth(qreal f)
 {
-    trk.setScaleLineWidth(f);
+    trk.lineScale = f;
+    trk.updateHistory();
+    updateData();
+
+}
+
+void CDetailsTrk::slotWithArrowsMode(bool isUser)
+{
+    trk.showArrows.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
+    trk.updateHistory();
+    checkWithArrows->setChecked(trk.showArrows.val().toBool());
     updateData();
 }
 
 void CDetailsTrk::slotWithArrows(bool yes)
 {
-    trk.setShowArrows(yes);
+    trk.showArrows = yes;
+    trk.updateHistory();
     updateData();
 }
 
-
-void CDetailsTrk::slotSaveLineDefault()
-{
-    CGisItemTrk::saveDefaultLineStyle(spinLineWidth->value(), checkWithArrows->isChecked());
-}

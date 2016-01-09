@@ -60,10 +60,10 @@ private slots:
 
     void slotSetupGraph(int idx);
 
+    void slotLineWidthMode(bool isUser);
     void slotLineWidth(qreal f);
+    void slotWithArrowsMode(bool isUser);
     void slotWithArrows(bool yes);
-
-    void slotSaveLineDefault();
 
 private:
     enum columns_t

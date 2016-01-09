@@ -704,30 +704,27 @@ void CDetailsTrk::slotSetupGraph(int idx)
 void CDetailsTrk::slotLineWidthMode(bool isUser)
 {
     trk.lineScale.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
-    trk.updateHistory();
+    trk.updateHistory(CGisItemTrk::eVisualNone);
     spinLineWidth->setValue(trk.lineScale.val().toDouble());
-    updateData();
 }
 
 void CDetailsTrk::slotLineWidth(qreal f)
 {
+    qDebug() << f;
     trk.lineScale = f;
-    trk.updateHistory();
-    updateData();
+    trk.updateHistory(CGisItemTrk::eVisualNone);
 }
 
 void CDetailsTrk::slotWithArrowsMode(bool isUser)
 {
     trk.showArrows.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
-    trk.updateHistory();
+    trk.updateHistory(CGisItemTrk::eVisualNone);
     checkWithArrows->setChecked(trk.showArrows.val().toBool());
-    updateData();
 }
 
 void CDetailsTrk::slotWithArrows(bool yes)
 {
     trk.showArrows = yes;
-    trk.updateHistory();
-    updateData();
+    trk.updateHistory(CGisItemTrk::eVisualNone);
 }
 

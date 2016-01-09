@@ -1855,20 +1855,20 @@ void CGisItemTrk::setColorizeSource(QString src)
                 limitHigh = limitLow + 0.1;
             }
         }
-        updateHistory();
+        updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
 void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
     limitLow = limit;
-    updateHistory();
+    updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
     limitHigh = limit;
-    updateHistory();
+    updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 const QString CGisItemTrk::getColorizeUnit() const
@@ -2082,7 +2082,7 @@ void CGisItemTrk::setColor(int idx)
     if(idx < TRK_N_COLORS)
     {
         setColor(IGisItem::colorMap[idx].color);
-        updateHistory();
+        updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
@@ -2512,10 +2512,10 @@ void CGisItemTrk::changed(const QString& what, const QString& icon)
     updateVisuals(eVisualAll, "changed()");
 }
 
-void CGisItemTrk::updateHistory()
+void CGisItemTrk::updateHistory(quint32 visuals)
 {
     IGisItem::updateHistory();
-    updateVisuals(eVisualAll, "updateHistory()");
+    updateVisuals(visuals, "updateHistory()");
 }
 
 

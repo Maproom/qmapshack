@@ -83,7 +83,7 @@ const QVariant CValue::operator=(const QVariant& v)
 
     if(onChange != nullptr)
     {
-        onChange(v);
+        onChange(val());
     }
 
     return v;

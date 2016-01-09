@@ -151,7 +151,7 @@ public:
         same as changed();
 
      */
-    void updateHistory() override;
+    void updateHistory(quint32 visuals);
 
     IGisItem * createClone() override;
 

@@ -41,7 +41,6 @@ protected:
     bool setupDB();
     virtual bool initDB() = 0;
     virtual bool migrateDB(int version) = 0;
-
 };
 
 #endif //IDB_H

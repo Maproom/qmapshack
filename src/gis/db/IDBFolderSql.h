@@ -43,7 +43,7 @@ public:
     void announceChange() const;
 
 
-protected:    
+protected:
     CDBFolderLostFound * folderLostFound = 0;
 
     QUdpSocket * socket;

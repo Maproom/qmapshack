@@ -337,7 +337,7 @@ public:
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
-    void setColor(int idx);    
+    void setColor(int idx);
     /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
     virtual void setComment         (const QString& str)         override;
@@ -900,17 +900,16 @@ private:
 
 
     fOnChange onChange = [this](const QVariant& val)
-    {
-        int w = qRound(3.0 * val.toDouble());
+                         {
+                             int w = qRound(3.0 * val.toDouble());
 
-        penWidthFg = w;
-        penWidthBg = w + 2;
-        penWidthHi = w + 8;
+                             penWidthFg = w;
+                             penWidthBg = w + 2;
+                             penWidthHi = w + 8;
 
-        penForeground.setWidth(penWidthFg);
-        penBackground.setWidth(penWidthBg);
-
-    };
+                             penForeground.setWidth(penWidthFg);
+                             penBackground.setWidth(penWidthBg);
+                         };
 
 public:
     CValue lineScale     {"TrackDetails/lineScale", 1.0, onChange};

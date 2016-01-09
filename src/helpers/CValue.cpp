@@ -76,24 +76,24 @@ const QVariant CValue::operator=(const QVariant& v)
         {
             if(value != this)
             {
-                value->updateDefault();
+                value->updateDefault(cfgTag, v);
             }
         }
     }
 
     if(onChange != nullptr)
     {
-        onChange(val());
+        onChange(v);
     }
 
     return v;
 }
 
 
-void CValue::updateDefault()
+void CValue::updateDefault(const QString& tag, const QVariant &val)
 {
-    if((mode == eModeDefault) && (onChange != nullptr))
+    if((mode == eModeDefault) && (tag == cfgTag) && (onChange != nullptr))
     {
-        onChange(val());
+        onChange(val);
     }
 }

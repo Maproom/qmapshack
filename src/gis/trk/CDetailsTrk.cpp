@@ -710,7 +710,6 @@ void CDetailsTrk::slotLineWidthMode(bool isUser)
 
 void CDetailsTrk::slotLineWidth(qreal f)
 {
-    qDebug() << f;
     trk.lineScale = f;
     trk.updateHistory(CGisItemTrk::eVisualNone);
 }

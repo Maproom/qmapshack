@@ -692,7 +692,7 @@
                  <item>
                   <widget class="QToolButton" name="toolDefArrow">
                    <property name="toolTip">
-                    <string>Use/edit sytem's visibility of arrows</string>
+                    <string>Use/edit system's visibility of arrows</string>
                    </property>
                    <property name="text">
                     <string>...</string>

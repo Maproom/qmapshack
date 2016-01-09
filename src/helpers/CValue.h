@@ -51,7 +51,7 @@ private:
     friend QDataStream& operator<<(QDataStream& stream, const CValue& v);
     friend QDataStream& operator>>(QDataStream& stream, CValue& v);
 
-    void updateDefault();
+    void updateDefault(const QString &tag, const QVariant& val);
 
     mode_e mode = eModeDefault;
     QString cfgTag;

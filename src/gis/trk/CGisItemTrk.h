@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/CValue.h"
 
 #include <QPen>
 #include <QPointer>
@@ -144,10 +145,15 @@ public:
 
     virtual ~CGisItemTrk();
 
-    IGisItem * createClone() override;
+    /**
+       @brief Overide IGisItem::updateHistory() method
 
-    static void loadDefaultLineStyle();
-    static void saveDefaultLineStyle(qreal scale, bool arrows);
+        same as changed();
+
+     */
+    void updateHistory() override;
+
+    IGisItem * createClone() override;
 
     /**
        @brief Save track to GPX tree
@@ -188,16 +194,6 @@ public:
     const QColor& getColor() const
     {
         return color;
-    }
-
-    qreal getScaleLineWidth() const
-    {
-        return scaleLine;
-    }
-
-    bool getShowArrows()
-    {
-        return showArrows;
     }
 
     /**
@@ -341,10 +337,8 @@ public:
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
-    void setColor(int idx);
+    void setColor(int idx);    
     /// set the width of the inner track line by factor
-    void setScaleLineWidth(qreal f);
-    void setShowArrows(bool yes);
     bool setMode(mode_e m, const QString &owner);
     virtual void setComment         (const QString& str)         override;
     virtual void setDescription     (const QString& str)         override;
@@ -737,13 +731,6 @@ private:
        @param icon  An icon string
      */
     virtual void changed(const QString& what, const QString& icon) override;
-    /**
-       @brief Overide IGisItem::updateHistory() method
-
-        same as changed();
-
-     */
-    virtual void updateHistory() override;
 
     /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);
@@ -900,31 +887,35 @@ private:
     QPolygonF lineFull;
 
 
-    /// default inner trackline width
-    static qint32 penWidthFgDef;
-    /// default outer trackline width
-    static qint32 penWidthBgDef;
-    /// default highlighted trackline width
-    static qint32 penWidthHiDef;
-    /// default scale factor for the arrows baseed on default penWidthFg
-    static qreal scaleLineDef;
-    /// default show/hide arrows
-    static bool showArrowsDef;
-
     /// inner trackline width
-    qint32 penWidthFg = penWidthFgDef;
+    qint32 penWidthFg = 3;
     /// outer trackline width
-    qint32 penWidthBg = penWidthBgDef;
+    qint32 penWidthBg = 5;
     /// highlighted trackline width
-    qint32 penWidthHi = penWidthHiDef;
-    /// scale factor for the arrows baseed on default penWidthFg
-    qreal scaleLine = scaleLineDef;
-    /// show/hide arrows
-    bool showArrows = showArrowsDef;
+    qint32 penWidthHi = 11;
     /// the pen with the actual track color
-    QPen penForeground {Qt::blue, qreal(penWidthFgDef), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penForeground {Qt::blue, qreal(penWidthFg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
     /// background (border) color of all tracks
-    QPen penBackground {Qt::white, qreal(penWidthBgDef), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penBackground {Qt::white, qreal(penWidthBg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
+
+    fOnChange onChange = [this](const QVariant& val)
+    {
+        int w = qRound(3.0 * val.toDouble());
+
+        penWidthFg = w;
+        penWidthBg = w + 2;
+        penWidthHi = w + 8;
+
+        penForeground.setWidth(penWidthFg);
+        penBackground.setWidth(penWidthBg);
+
+    };
+
+public:
+    CValue lineScale     {"TrackDetails/lineScale", 1.0, onChange};
+    CValue showArrows    {"TrackDetails/showArrows", true};
+private:
     /**@}*/
 
 

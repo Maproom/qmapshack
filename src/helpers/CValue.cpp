@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "helpers/CValue.h"
 #include "helpers/CSettings.h"
+#include "helpers/CValue.h"
 
 QSet<CValue*> CValue::allValues;
 
@@ -59,7 +59,6 @@ QVariant CValue::val() const
 
     SETTINGS;
     return cfg.value(cfgTag, initDefault);
-
 }
 
 const QVariant CValue::operator=(const QVariant& v)

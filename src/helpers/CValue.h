@@ -19,48 +19,48 @@
 #ifndef CVALUE_H
 #define CVALUE_H
 
-#include <QVariant>
 #include <QSet>
+#include <QVariant>
 #include <functional>
 
 using fOnChange = std::function<void(const QVariant&)>;
 
 class CValue
 {
-    public:
-        CValue(const QString& cfgTag, const QVariant& initDefault, fOnChange onChange = nullptr);
-        virtual ~CValue();
+public:
+    CValue(const QString& cfgTag, const QVariant& initDefault, fOnChange onChange = nullptr);
+    virtual ~CValue();
 
-        enum mode_e
-        {
-            eModeDefault
-            , eModeUser
-        };
+    enum mode_e
+    {
+        eModeDefault
+        , eModeUser
+    };
 
-        void setMode(mode_e m);
-        mode_e getMode() const
-        {
-            return mode;
-        }
+    void setMode(mode_e m);
+    mode_e getMode() const
+    {
+        return mode;
+    }
 
-        QVariant val() const;
+    QVariant val() const;
 
-        const QVariant operator=(const QVariant& v);
+    const QVariant operator=(const QVariant& v);
 
-    private:
-        friend QDataStream& operator<<(QDataStream& stream, const CValue& v);
-        friend QDataStream& operator>>(QDataStream& stream, CValue& v);
+private:
+    friend QDataStream& operator<<(QDataStream& stream, const CValue& v);
+    friend QDataStream& operator>>(QDataStream& stream, CValue& v);
 
-        void updateDefault();
+    void updateDefault();
 
-        mode_e mode = eModeDefault;
-        QString cfgTag;
-        QVariant initDefault;
-        QVariant valUser;
+    mode_e mode = eModeDefault;
+    QString cfgTag;
+    QVariant initDefault;
+    QVariant valUser;
 
-        fOnChange onChange;
+    fOnChange onChange;
 
-        static QSet<CValue*> allValues;
+    static QSet<CValue*> allValues;
 };
 
 #endif //CVALUE_H

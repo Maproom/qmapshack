@@ -706,7 +706,7 @@ void CDetailsTrk::slotLineWidthMode(bool isUser)
     trk.lineScale.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
     trk.updateHistory();
     spinLineWidth->setValue(trk.lineScale.val().toDouble());
-    updateData();    
+    updateData();
 }
 
 void CDetailsTrk::slotLineWidth(qreal f)
@@ -714,7 +714,6 @@ void CDetailsTrk::slotLineWidth(qreal f)
     trk.lineScale = f;
     trk.updateHistory();
     updateData();
-
 }
 
 void CDetailsTrk::slotWithArrowsMode(bool isUser)

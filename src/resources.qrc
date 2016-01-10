@@ -195,6 +195,8 @@
         <file>icons/32x32/LineWidthDef.png</file>
         <file>icons/32x32/ArrowUser.png</file>
         <file>icons/32x32/ArrowDef.png</file>
+        <file>icons/32x32/LimitMax.png</file>
+        <file>icons/32x32/LimitMin.png</file>
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -364,7 +366,8 @@
         <file>icons/48x48/LineWidthDef.png</file>
         <file>icons/48x48/ArrowUser.png</file>
         <file>icons/48x48/ArrowDef.png</file>
-
+        <file>icons/48x48/LimitMax.png</file>
+        <file>icons/48x48/LimitMin.png</file>
 
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>

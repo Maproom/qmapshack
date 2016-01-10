@@ -170,8 +170,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(spinLineWidth,    signal,                              this, &CDetailsTrk::slotLineWidth);
     connect(checkWithArrows,  &QCheckBox::toggled,                 this, &CDetailsTrk::slotWithArrows);
 
-    connect(btnMaxFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
-    connect(btnMinFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
+    connect(toolStyleLimitMax,&QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
+    connect(toolStyleLimitMin,&QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
 
     connect(toolUserLineWith, &QToolButton::toggled,               this, &CDetailsTrk::slotLineWidthMode);
     connect(toolUserArrow,    &QToolButton::toggled,               this, &CDetailsTrk::slotWithArrowsMode);
@@ -425,8 +425,8 @@ void CDetailsTrk::updateData()
     spinLimitLow->setEnabled    (enabled);
     spinLimitHigh->setEnabled   (enabled);
     widgetColorLabel->setEnabled(enabled);
-    btnMinFromData->setEnabled  (enabled);
-    btnMaxFromData->setEnabled  (enabled);
+    toolStyleLimitMin->setEnabled(enabled);
+    toolStyleLimitMax->setEnabled(enabled);
 
     if(enabled)
     {

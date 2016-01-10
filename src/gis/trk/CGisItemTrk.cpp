@@ -68,12 +68,6 @@ struct activity_t
 
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
-qint32 CGisItemTrk::penWidthFgDef   = 3;
-qint32 CGisItemTrk::penWidthBgDef   = 5;
-qint32 CGisItemTrk::penWidthHiDef   = 11;
-qreal  CGisItemTrk::scaleLineDef    = 1.0;
-bool   CGisItemTrk::showArrowsDef   = true;
-
 
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX)
@@ -1717,9 +1711,9 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     foreach(const QPolygonF &l, lines)
     {
         p.drawPolyline(l);
-        if(showArrows)
+        if(showArrows.val().toBool())
         {
-            CDraw::arrows(l, extViewport, p, 10, 80, scaleLine);
+            CDraw::arrows(l, extViewport, p, 10, 80, lineScale.val().toDouble());
         }
     }
 
@@ -1861,20 +1855,20 @@ void CGisItemTrk::setColorizeSource(QString src)
                 limitHigh = limitLow + 0.1;
             }
         }
-        updateHistory();
+        updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
 void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
     limitLow = limit;
-    updateHistory();
+    updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
     limitHigh = limit;
-    updateHistory();
+    updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 const QString CGisItemTrk::getColorizeUnit() const
@@ -2088,7 +2082,7 @@ void CGisItemTrk::setColor(int idx)
     if(idx < TRK_N_COLORS)
     {
         setColor(IGisItem::colorMap[idx].color);
-        updateHistory();
+        updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
@@ -2215,54 +2209,6 @@ void CGisItemTrk::setIcon(const QString& iconColor)
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
-void CGisItemTrk::setScaleLineWidth(qreal f)
-{
-    int w = qRound(3.0 * f);
-
-    penWidthFg = w;
-    penWidthBg = w + 2;
-    penWidthHi = w + 4;
-
-    penForeground.setWidth(penWidthFg);
-    penBackground.setWidth(penWidthBg);
-
-    scaleLine = f;
-}
-
-
-void CGisItemTrk::setShowArrows(bool yes)
-{
-    showArrows = yes;
-}
-
-void CGisItemTrk::loadDefaultLineStyle()
-{
-    SETTINGS;
-    scaleLineDef    = cfg.value("TrackDetails/scaleLineWidth", scaleLineDef).toDouble();
-    showArrowsDef   = cfg.value("TrackDetails/showArrows", showArrowsDef).toBool();
-
-    int w = qRound(3.0 * scaleLineDef);
-
-    penWidthFgDef = w;
-    penWidthBgDef = w + 2;
-    penWidthHiDef = w + 4;
-}
-
-void CGisItemTrk::saveDefaultLineStyle(qreal scale, bool arrows)
-{
-    SETTINGS;
-    cfg.setValue("TrackDetails/scaleLineWidth", scale);
-    cfg.setValue("TrackDetails/showArrows", arrows);
-
-    scaleLineDef    = scale;
-    showArrowsDef   = arrows;
-
-    int w = qRound(3.0 * scaleLineDef);
-
-    penWidthFgDef = w;
-    penWidthBgDef = w + 2;
-    penWidthHiDef = w + 4;
-}
 
 
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
@@ -2566,10 +2512,10 @@ void CGisItemTrk::changed(const QString& what, const QString& icon)
     updateVisuals(eVisualAll, "changed()");
 }
 
-void CGisItemTrk::updateHistory()
+void CGisItemTrk::updateHistory(quint32 visuals)
 {
     IGisItem::updateHistory();
-    updateVisuals(eVisualAll, "updateHistory()");
+    updateVisuals(visuals, "updateHistory()");
 }
 
 

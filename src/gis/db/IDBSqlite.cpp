@@ -83,7 +83,6 @@ bool IDBSqlite::initDB()
     QUERY_RUN("BEGIN TRANSACTION;", return false);
     try
     {
-
         if(query.exec( "CREATE TABLE versioninfo ( version TEXT, type TEXT )"))
         {
             query.prepare( "INSERT INTO versioninfo (version, type) VALUES(:version, 'QMapShack')");
@@ -172,7 +171,6 @@ bool IDBSqlite::initDB()
 
 bool IDBSqlite::migrateDB(int version)
 {
-
     QSqlQuery query(db);
 
     QUERY_RUN("BEGIN TRANSACTION;", return false);

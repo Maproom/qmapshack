@@ -71,7 +71,6 @@ CMainWindow::CMainWindow()
 
     IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
     CKnownExtension::init(IUnit::self());
-    CGisItemTrk::loadDefaultLineStyle();
 
     gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);

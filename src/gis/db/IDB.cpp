@@ -79,12 +79,11 @@ bool IDB::setupDB()
 
                 return false;
             }
-
         }
         else if(version > DB_VERSION)
         {
             QString msg = QObject::tr("The database version of '%1'' is more advanced as the one understood by your "
-                                     "QMapShack installation. This won't work.").arg(db.connectionName());
+                                      "QMapShack installation. This won't work.").arg(db.connectionName());
             QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
                                   QObject::tr("Wrong database version..."),
                                   msg,

@@ -511,13 +511,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="0" colspan="3">
-                <widget class="Line" name="line_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
-               </item>
                <item row="5" column="0">
                 <widget class="QLabel" name="label_3">
                  <property name="sizePolicy">
@@ -716,15 +709,23 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QPushButton" name="btnMaxFromData">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
+                  <widget class="QToolButton" name="toolStyleLimitMax">
+                   <property name="toolTip">
+                    <string>Take maximum from data
+</string>
                    </property>
                    <property name="text">
-                    <string>from Data</string>
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/LimitMax.png</normaloff>:/icons/32x32/LimitMax.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>22</width>
+                     <height>22</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -749,15 +750,22 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QPushButton" name="btnMinFromData">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
+                  <widget class="QToolButton" name="toolStyleLimitMin">
+                   <property name="toolTip">
+                    <string>Take minimum from data</string>
                    </property>
                    <property name="text">
-                    <string>from Data</string>
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/LimitMin.png</normaloff>:/icons/32x32/LimitMin.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>22</width>
+                     <height>22</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -775,6 +783,13 @@
                   </spacer>
                  </item>
                 </layout>
+               </item>
+               <item row="6" column="0" colspan="2">
+                <widget class="Line" name="line_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>

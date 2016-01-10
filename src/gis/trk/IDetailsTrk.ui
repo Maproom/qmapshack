@@ -428,7 +428,7 @@
                  <item>
                   <widget class="QToolButton" name="toolUserArrow">
                    <property name="toolTip">
-                    <string>Use/edit user defined visibility of arrows</string>
+                    <string>Use/edit user defined visibility of arrows for this track</string>
                    </property>
                    <property name="text">
                     <string>...</string>
@@ -457,7 +457,7 @@
                  <item>
                   <widget class="QToolButton" name="toolDefArrow">
                    <property name="toolTip">
-                    <string>Use/edit system's visibility of arrows</string>
+                    <string>Use/edit system's visibility of arrows for all tracks</string>
                    </property>
                    <property name="text">
                     <string>...</string>
@@ -546,7 +546,7 @@
                  <item>
                   <widget class="QToolButton" name="toolUserLineWith">
                    <property name="toolTip">
-                    <string>Use/edit user defined scale factor</string>
+                    <string>Use/edit user defined scale factor for this track</string>
                    </property>
                    <property name="text">
                     <string>...</string>
@@ -575,7 +575,7 @@
                  <item>
                   <widget class="QToolButton" name="toolDefLineWidth">
                    <property name="toolTip">
-                    <string>Use/edit system's default factor</string>
+                    <string>Use/edit system's default factor for all tracks</string>
                    </property>
                    <property name="text">
                     <string>...</string>

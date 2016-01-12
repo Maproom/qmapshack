@@ -1801,11 +1801,17 @@ void CGisItemTrk::drawColorized(QPainter &p)
     }
 }
 
-void CGisItemTrk::getExtrema(qreal &min, qreal &max, const QString &source) const
+
+qreal CGisItemTrk::getMin(const QString& source)const
 {
-    min = extrema.value(source).min * CKnownExtension::get(source).factor;
-    max = extrema.value(source).max * CKnownExtension::get(source).factor;
+    return extrema.value(source).min * CKnownExtension::get(source).factor;
 }
+
+qreal CGisItemTrk::getMax(const QString& source)const
+{
+    return extrema.value(source).max * CKnownExtension::get(source).factor;
+}
+
 
 QStringList CGisItemTrk::getExistingDataSources() const
 {
@@ -1844,12 +1850,14 @@ void CGisItemTrk::setColorizeSource(QString src)
         const CKnownExtension ext = CKnownExtension::get(src);
         if(ext.known)
         {
-            limitLow  = ext.defLimitLow;
-            limitHigh = ext.defLimitHigh;
+            limitLow    = ext.defLimitLow;
+            limitHigh   = ext.defLimitHigh;
         }
         else
         {
-            getExtrema(limitLow, limitHigh, src);
+            limitLow    = getMin(src);
+            limitHigh   = getMax(src);
+
             if(limitHigh - limitLow < 0.1)
             {
                 limitHigh = limitLow + 0.1;

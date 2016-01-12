@@ -237,8 +237,7 @@ CDetailsTrk::~CDetailsTrk()
 
 void CDetailsTrk::slotLimitLowFromData()
 {
-    qreal min, max;
-    trk.getExtrema(min, max, trk.getColorizeSource());
+    qreal min = trk.getMin(trk.getColorizeSource());
     spinLimitLow->setValue(min);
     slotColorLimitLowChanged();
     slotColorLimitHighChanged();
@@ -246,8 +245,7 @@ void CDetailsTrk::slotLimitLowFromData()
 
 void CDetailsTrk::slotLimitHighFromData()
 {
-    qreal min, max;
-    trk.getExtrema(min, max, trk.getColorizeSource());
+    qreal max = trk.getMax(trk.getColorizeSource());
     spinLimitHigh->setValue(max);
     slotColorLimitHighChanged();
     slotColorLimitLowChanged();

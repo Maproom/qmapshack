@@ -29,7 +29,7 @@ using fGetLimit = std::function<void(const QString&, QVariant&)>;
 class CLimit
 {
 public:
-    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax);
+    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto);
     virtual ~CLimit();
 
 
@@ -50,6 +50,8 @@ private:
 
     fGetLimit getMin;
     fGetLimit getMax;
+    fGetLimit getMinAuto;
+    fGetLimit getMaxAuto;
 
     static QSet<CLimit*> allLimits;
 };

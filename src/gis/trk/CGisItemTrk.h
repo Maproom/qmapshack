@@ -313,7 +313,8 @@ public:
 
     const QString getColorizeUnit() const;
 
-    void getExtrema(qreal &min, qreal &max, const QString &source) const;
+    qreal getMin(const QString& source)const;
+    qreal getMax(const QString& source)const;
 
 private:
     QString colorSource  = "";
@@ -849,23 +850,30 @@ public:
     void updateFromDB(quint64 id, QSqlDatabase& db) override;
 
 private:
-    fGetLimit getMin = [this](const QString& source, QVariant& val)
+    fGetLimit _getMin = [this](const QString& source, QVariant& val)
     {
-        qreal min = NOFLOAT, max = NOFLOAT;
-        getExtrema(min, max, source);
-        val = min;
+        val = getMin(source);
     };
 
-    fGetLimit getMax = [this](const QString& source, QVariant& val)
+    fGetLimit _getMax = [this](const QString& source, QVariant& val)
     {
-        qreal min = NOFLOAT, max = NOFLOAT;
-        getExtrema(min, max, source);
-        val = max;
+        val = getMax(source);
     };
+
+    fGetLimit _getMinAuto = [this](const QString& source, QVariant& val)
+    {
+
+    };
+
+    fGetLimit _getMaxAuto = [this](const QString& source, QVariant& val)
+    {
+
+    };
+
 public:
-    CLimit limitsGraph1 {"TrackDetails/Graph1", getMin, getMax};
-    CLimit limitsGraph2 {"TrackDetails/Graph2", getMin, getMax};
-    CLimit limitsGraph3 {"TrackDetails/Graph3", getMin, getMax};
+    CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinAuto, _getMaxAuto};
+    CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinAuto, _getMaxAuto};
+    CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinAuto, _getMaxAuto};
 
 
 private:

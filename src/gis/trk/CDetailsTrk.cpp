@@ -183,6 +183,14 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(comboGraph2,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
     connect(comboGraph3,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
 
+    connect(toolLimitGraph1,  &QToolButton::toggled,               spinMinGraph1, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph1,  &QToolButton::toggled,               spinMaxGraph1, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph2,  &QToolButton::toggled,               spinMinGraph2, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph2,  &QToolButton::toggled,               spinMaxGraph2, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph3,  &QToolButton::toggled,               spinMinGraph3, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph3,  &QToolButton::toggled,               spinMaxGraph3, &QDoubleSpinBox::setDisabled);
+
+
     // setting up the graph properties will trigger the signals
     // this is good because the signals are connected at this point
     // invoking the slots

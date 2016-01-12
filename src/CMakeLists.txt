@@ -78,6 +78,7 @@ set( SRCS
         helpers/CAppSetup.cpp
         helpers/CDraw.cpp
         helpers/CValue.cpp
+        helpers/CLimit.cpp
         canvas/CCanvas.cpp
         canvas/CCanvasSetup.cpp
         canvas/IDrawContext.cpp
@@ -326,6 +327,7 @@ set( HDRS
         helpers/CAppSetup.h
         helpers/CDraw.h
         helpers/CValue.h
+        helpers/CLimit.h
         canvas/CCanvas.h
         canvas/CCanvasSetup.h
         canvas/IDrawContext.h

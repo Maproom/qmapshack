@@ -21,7 +21,7 @@
 
 QSet<CValue*> CValue::allValues;
 
-CValue::CValue(const QString& cfgTag, const QVariant &initDefault, fOnChange onChange)
+CValue::CValue(const QString& cfgTag, const QVariant &initDefault, fValueOnChange onChange)
     : cfgTag(cfgTag)
     , initDefault(initDefault)
     , valUser(initDefault)
@@ -61,7 +61,7 @@ QVariant CValue::val() const
     return cfg.value(cfgTag, initDefault);
 }
 
-const QVariant CValue::operator=(const QVariant& v)
+const QVariant& CValue::operator=(const QVariant& v)
 {
     if(mode == eModeUser)
     {

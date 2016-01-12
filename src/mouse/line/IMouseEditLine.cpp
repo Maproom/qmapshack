@@ -213,7 +213,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
     // draw magenta arrows (with white background)
     p.setBrush(Qt::magenta);
-    CDraw::arrows(pixelLine, QRectF(), p, 10, 80);
+    CDraw::arrows(pixelLine, QRectF(), p, 10, 80, 1.0);
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);

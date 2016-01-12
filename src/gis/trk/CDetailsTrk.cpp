@@ -166,8 +166,15 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(spinLimitLow,     &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
     connect(spinLimitLow,     &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
-    connect(btnMaxFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
-    connect(btnMinFromData,   &QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
+    void (QDoubleSpinBox:: *signal)(double) = &QDoubleSpinBox::valueChanged;
+    connect(spinLineWidth,    signal,                              this, &CDetailsTrk::slotLineWidth);
+    connect(checkWithArrows,  &QCheckBox::toggled,                 this, &CDetailsTrk::slotWithArrows);
+
+    connect(toolStyleLimitMax,&QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
+    connect(toolStyleLimitMin,&QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
+
+    connect(toolUserLineWith, &QToolButton::toggled,               this, &CDetailsTrk::slotLineWidthMode);
+    connect(toolUserArrow,    &QToolButton::toggled,               this, &CDetailsTrk::slotWithArrowsMode);
 
     connect(listHistory,      &CHistoryListWidget::sigChanged,     this, &CDetailsTrk::updateData);
 
@@ -381,6 +388,20 @@ void CDetailsTrk::updateData()
         }
     }
 
+    spinLineWidth->blockSignals(true);
+    spinLineWidth->setValue(trk.lineScale.val().toDouble());
+    spinLineWidth->blockSignals(false);
+    toolUserLineWith->blockSignals(true);
+    toolUserLineWith->setChecked(trk.lineScale.getMode() == CValue::eModeUser);
+    toolUserLineWith->blockSignals(false);
+
+    checkWithArrows->blockSignals(true);
+    checkWithArrows->setChecked(trk.showArrows.val().toBool());
+    checkWithArrows->blockSignals(false);
+    toolUserArrow->blockSignals(true);
+    toolUserArrow->setChecked(trk.showArrows.getMode() == CValue::eModeUser);
+    toolUserArrow->blockSignals(false);
+
     comboColorSource->blockSignals(true);
     comboColorSource->clear();
     // the first entry `solid color`, it is always available
@@ -404,8 +425,8 @@ void CDetailsTrk::updateData()
     spinLimitLow->setEnabled    (enabled);
     spinLimitHigh->setEnabled   (enabled);
     widgetColorLabel->setEnabled(enabled);
-    btnMinFromData->setEnabled  (enabled);
-    btnMaxFromData->setEnabled  (enabled);
+    toolStyleLimitMin->setEnabled(enabled);
+    toolStyleLimitMax->setEnabled(enabled);
 
     if(enabled)
     {
@@ -679,3 +700,30 @@ void CDetailsTrk::slotSetupGraph(int idx)
         trk.getPropertyHandler()->setupPlot(plot, idx);
     }
 }
+
+void CDetailsTrk::slotLineWidthMode(bool isUser)
+{
+    trk.lineScale.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
+    trk.updateHistory(CGisItemTrk::eVisualNone);
+    spinLineWidth->setValue(trk.lineScale.val().toDouble());
+}
+
+void CDetailsTrk::slotLineWidth(qreal f)
+{
+    trk.lineScale = f;
+    trk.updateHistory(CGisItemTrk::eVisualNone);
+}
+
+void CDetailsTrk::slotWithArrowsMode(bool isUser)
+{
+    trk.showArrows.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
+    trk.updateHistory(CGisItemTrk::eVisualNone);
+    checkWithArrows->setChecked(trk.showArrows.val().toBool());
+}
+
+void CDetailsTrk::slotWithArrows(bool yes)
+{
+    trk.showArrows = yes;
+    trk.updateHistory(CGisItemTrk::eVisualNone);
+}
+

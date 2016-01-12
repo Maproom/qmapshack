@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/CValue.h"
 
 #include <QPen>
 #include <QPointer>
@@ -144,6 +145,14 @@ public:
 
     virtual ~CGisItemTrk();
 
+    /**
+       @brief Overide IGisItem::updateHistory() method
+
+        same as changed();
+
+     */
+    void updateHistory(quint32 visuals);
+
     IGisItem * createClone() override;
 
     /**
@@ -186,7 +195,6 @@ public:
     {
         return color;
     }
-
 
     /**
        @brief get a summary of the track
@@ -264,6 +272,8 @@ public:
     {
         return propHandler;
     }
+
+
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
         @{
@@ -315,6 +325,7 @@ private:
     /**@}*/
 
 
+public:
     /**
        @brief Get the indices of visible points for a selected range
 
@@ -323,11 +334,11 @@ private:
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
-public:
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
     void setColor(int idx);
+    /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
     virtual void setComment         (const QString& str)         override;
     virtual void setDescription     (const QString& str)         override;
@@ -625,7 +636,6 @@ private:
      */
     void readTrkFromFit(CFitStream &stream);
 
-private:
     /**
        @brief Derive secondary data from the track data
 
@@ -721,13 +731,6 @@ private:
        @param icon  An icon string
      */
     virtual void changed(const QString& what, const QString& icon) override;
-    /**
-       @brief Overide IGisItem::updateHistory() method
-
-        same as changed();
-
-     */
-    virtual void updateHistory() override;
 
     /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);
@@ -738,7 +741,6 @@ private:
     void setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt);
     void setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
     void setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt);
-
 
 public:
     struct trkpt_t : public wpt_t
@@ -850,8 +852,6 @@ private:
 
     /// the key of the track having the user focus.
     static key_t keyUserFocus;
-    /// background (border) color of all tracks
-    static const QPen penBackground;
     /// drawing and mouse interaction is dependent on the mode
     mode_e mode = eModeNormal;
 
@@ -878,14 +878,43 @@ private:
     unsigned colorIdx = 4;
     /// the track line color
     QColor color;
-    /// the pen with the actual track color
-    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
     /// the trackpoint bullet icon
     QPixmap bullet;
     /// the current track line as screen pixel coordinates
     QPolygonF lineSimple;
     /// visible and invisible points
     QPolygonF lineFull;
+
+
+    /// inner trackline width
+    qint32 penWidthFg = 3;
+    /// outer trackline width
+    qint32 penWidthBg = 5;
+    /// highlighted trackline width
+    qint32 penWidthHi = 11;
+    /// the pen with the actual track color
+    QPen penForeground {Qt::blue, qreal(penWidthFg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    /// background (border) color of all tracks
+    QPen penBackground {Qt::white, qreal(penWidthBg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
+
+    fOnChange onChange = [this](const QVariant& val)
+                         {
+                             int w = qRound(3.0 * val.toDouble());
+
+                             penWidthFg = w;
+                             penWidthBg = w + 2;
+                             penWidthHi = w + 8;
+
+                             penForeground.setWidth(penWidthFg);
+                             penBackground.setWidth(penWidthBg);
+                         };
+
+public:
+    CValue lineScale     {"TrackDetails/lineScale", 1.0, onChange};
+    CValue showArrows    {"TrackDetails/showArrows", true};
+private:
     /**@}*/
 
 

@@ -289,7 +289,7 @@
         <translation type="obsolete">afstand. [%1]</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="387"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="408"/>
         <source>Solid color</source>
         <translation>Vaste kleur</translation>
     </message>
@@ -314,12 +314,12 @@
         <translation>Knip track in delen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="297"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="305"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="308"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="313"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="327"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="329"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="304"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="312"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="315"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="320"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="334"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="336"/>
         <source>%1 %2</source>
         <translation>%1 %2</translation>
     </message>
@@ -332,17 +332,17 @@
         <translation type="vanished">Geef track nieuwe naam.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="642"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="663"/>
         <source>Reset activities...</source>
         <translation>Herstel activiteiten...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="642"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="663"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Dit zal alle activiteiten uit de track verwijderen. Doorgaan?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="648"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="669"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>
@@ -3156,12 +3156,12 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
         <translation type="vanished">Grafieken</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="609"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="811"/>
         <source>Profile</source>
         <translation>Profiel</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="778"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="980"/>
         <source>Speed</source>
         <translation>Snelheid</translation>
     </message>
@@ -3176,6 +3176,10 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="277"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="588"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="617"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="669"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="698"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -3200,113 +3204,148 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
         <translation>Stijl</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="416"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="510"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="429"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="533"/>
         <source>from Data</source>
         <translation>uit gegevens</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="429"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="520"/>
         <source>Source</source>
         <translation>Bron</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="452"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="416"/>
         <source>Maximum</source>
         <translation>Maximum</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="481"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="474"/>
         <source>Minimum</source>
         <translation>Minimum</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="523"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="497"/>
         <source>Solid color</source>
         <translation>Vaste kleur</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="571"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="540"/>
+        <source>x </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="559"/>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="566"/>
+        <source>with arrows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="585"/>
+        <source>Use/edit user defined scale factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="614"/>
+        <source>Use/edit system&apos;s default factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="666"/>
+        <source>Use/edit user defined visibility of arrows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="695"/>
+        <source>Use/edit system&apos;s visibility of arrows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="773"/>
         <source>Graphs</source>
         <translation>Grafieken</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="616"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="818"/>
         <source>Graph 3</source>
         <translation>Grafiek 3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="623"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="825"/>
         <source>Graph 2</source>
         <translation>Grafiek 2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="630"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="832"/>
         <source>Graph 1</source>
         <translation>Grafiek 1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="638"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="840"/>
         <source>Activity</source>
         <translation>Activiteit</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="683"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="885"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>Om de track statistieken te onderscheiden selecteer een activiteit uit de lijst voor de volledige track. Of selecteer een deel van de track om een activieteit toe te kennen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="710"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="912"/>
         <source>Points</source>
         <translation>Punten</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="758"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="960"/>
         <source>Time</source>
         <translation>Tijd</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="763"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="965"/>
         <source>Ele.</source>
         <translation>Hoogte</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="768"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="970"/>
         <source>Delta</source>
         <translation>Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="773"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="975"/>
         <source>Dist.</source>
         <translation>Afstand.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="783"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="985"/>
         <source>Slope</source>
         <translation>Helling</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="788"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="990"/>
         <source>Ascend</source>
         <translation>Stijging</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="793"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="995"/>
         <source>Descend</source>
         <translation>Daling</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="798"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1000"/>
         <source>Position</source>
         <translation>Positie</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="807"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1009"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="844"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1046"/>
         <source>Hist.</source>
         <translation>Hist.</translation>
     </message>
@@ -4512,19 +4551,24 @@ of
         <translation>Kaart afdrukken...</translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="50"/>
+        <location filename="../print/IPrintDialog.ui" line="28"/>
+        <source>When printing online maps make sure that the map has been loaded into the cache for the extent to be printed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../print/IPrintDialog.ui" line="60"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="69"/>
-        <location filename="../print/IPrintDialog.ui" line="82"/>
-        <location filename="../print/IPrintDialog.ui" line="131"/>
+        <location filename="../print/IPrintDialog.ui" line="79"/>
+        <location filename="../print/IPrintDialog.ui" line="92"/>
+        <location filename="../print/IPrintDialog.ui" line="141"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="98"/>
+        <location filename="../print/IPrintDialog.ui" line="108"/>
         <source>Print</source>
         <translation>Afdrukken</translation>
     </message>
@@ -5862,8 +5906,8 @@ of
         <translation>Moet &apos;%1&apos; uit map &apos;%2&apos; verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="512"/>
         <location filename="../gis/CGisListDB.cpp" line="585"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="512"/>
         <source>Delete...</source>
         <translation>Verwijderen...</translation>
     </message>
@@ -5878,9 +5922,9 @@ of
         <translation>Moet %1 werkelijk verwijderd worden?</translation>
     </message>
     <message>
+        <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="30"/>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="26"/>
-        <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <source>All your data grouped by folders.</source>
         <translation>Alle gegevens gegroepeerd per map.</translation>
     </message>
@@ -5890,8 +5934,8 @@ of
         <translation>Lost &amp; Found (%1)</translation>
     </message>
     <message>
-        <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="64"/>
+        <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
         <source>Lost &amp; Found</source>
         <translation>Lost &amp; Found</translation>
     </message>
@@ -5974,10 +6018,10 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="72"/>
         <location filename="../gis/fit/CFitProject.cpp" line="97"/>
-        <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="84"/>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
         <source>Failed to open %1</source>
         <translation>Openen mislukt-%1</translation>
     </message>
@@ -5986,8 +6030,8 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="vanished">Lezen mislukt...</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="75"/>
         <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="75"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -6000,8 +6044,8 @@ lijn %2, kolom %3:
         <translation type="vanished">Geen GPX bestand:</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfProject.cpp" line="42"/>
         <location filename="../gis/gpx/CGpxProject.cpp" line="90"/>
+        <location filename="../gis/slf/CSlfProject.cpp" line="42"/>
         <source>Failed to load file %1...</source>
         <translation>Kan bestand %1 niet laden...</translation>
     </message>
@@ -6195,7 +6239,7 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="486"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="267"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2072"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2076"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="406"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
@@ -6288,14 +6332,14 @@ Bestandsnaam: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="255"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2060"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2064"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="394"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="261"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2066"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2070"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
@@ -6343,6 +6387,20 @@ Bestandsnaam: %1</translation>
         <translation>Routepunten aangepast.</translation>
     </message>
     <message>
+        <location filename="../gis/db/IDB.cpp" line="60"/>
+        <source>The internal database format of &apos;%1&apos;&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDB.cpp" line="74"/>
+        <source>Failed to migrate &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDB.cpp" line="76"/>
+        <location filename="../gis/db/IDB.cpp" line="100"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <location filename="../gis/tnv/serialization.cpp" line="376"/>
@@ -6354,17 +6412,30 @@ Bestandsnaam: %1</translation>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
     <message>
+        <location filename="../gis/db/IDB.cpp" line="85"/>
+        <source>The database version of &apos;%1&apos;&apos; is more advanced as the one understood by your QMapShack installation. This won&apos;t work.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDB.cpp" line="88"/>
+        <source>Wrong database version...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDB.cpp" line="98"/>
+        <source>Failed to initialize &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Failed to open %1.</source>
         <translation>Kan %1 niet openen.</translation>
     </message>
@@ -6642,18 +6713,18 @@ Bestandsnaam: %1</translation>
         <translation>Toon punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2054"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2058"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="352"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2099"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2103"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2173"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2177"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
     </message>
@@ -6913,12 +6984,11 @@ of
         <translation>Richting</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBSqlite.cpp" line="182"/>
         <source>The internal database format has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation>Het interne database formaat is gewijzigd. QMapShack zal de database migreren maar na de migratie zal de database niet bruikbaar zijn in de vorige versies van QMapShack. Het is aanbevolen eerst een backup te maken van de database.</translation>
+        <translation type="vanished">Het interne database formaat is gewijzigd. QMapShack zal de database migreren maar na de migratie zal de database niet bruikbaar zijn in de vorige versies van QMapShack. Het is aanbevolen eerst een backup te maken van de database.</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBSqlite.cpp" line="186"/>
+        <location filename="../gis/db/IDB.cpp" line="64"/>
         <source>Migrate database...</source>
         <translation>Migreren database...</translation>
     </message>

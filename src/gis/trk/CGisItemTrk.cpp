@@ -32,6 +32,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
+#include "helpers/CSettings.h"
 #include "plot/IPlot.h"
 
 #include <QtWidgets>
@@ -65,9 +66,8 @@ struct activity_t
     QString icon;
 };
 
-const QPen CGisItemTrk::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-
 IGisItem::key_t CGisItemTrk::keyUserFocus;
+
 
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX)
@@ -1675,7 +1675,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         QList<QPolygonF> lines;
         splitLineToViewport(lineFull, extViewport, lines);
 
-        p.setPen(QPen(Qt::lightGray,5,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::lightGray, penWidthBg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
         foreach(const QPolygonF &l, lines)
         {
@@ -1699,7 +1699,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     if(key == keyUserFocus)
     {
-        p.setPen(QPen(Qt::red,11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::red, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         foreach(const QPolygonF &l, lines)
         {
             p.drawPolyline(l);
@@ -1711,7 +1711,10 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     foreach(const QPolygonF &l, lines)
     {
         p.drawPolyline(l);
-        CDraw::arrows(l, extViewport, p, 10, 80);
+        if(showArrows.val().toBool())
+        {
+            CDraw::arrows(l, extViewport, p, 10, 80, lineScale.val().toDouble());
+        }
     }
 
     if(colorSource.isEmpty())
@@ -1786,7 +1789,8 @@ void CGisItemTrk::drawColorized(QPainter &p)
 
             QPen pen;
             pen.setBrush(QBrush(grad));
-            pen.setWidth(3);
+            pen.setWidth(penWidthFg);
+            pen.setCapStyle(Qt::RoundCap);
 
             p.setPen(pen);
             p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
@@ -1851,20 +1855,20 @@ void CGisItemTrk::setColorizeSource(QString src)
                 limitHigh = limitLow + 0.1;
             }
         }
-        updateHistory();
+        updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
 void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
     limitLow = limit;
-    updateHistory();
+    updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
     limitHigh = limit;
-    updateHistory();
+    updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 const QString CGisItemTrk::getColorizeUnit() const
@@ -1994,7 +1998,7 @@ void CGisItemTrk::drawHighlight(QPainter& p)
     {
         return;
     }
-    p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(QColor(255,0,0,100), penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(lineSimple);
 }
 
@@ -2015,10 +2019,10 @@ void CGisItemTrk::drawRange(QPainter& p)
 
         QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
 
-        p.setPen(QPen(Qt::darkGreen, 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::darkGreen, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(seg);
 
-        p.setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.setPen(QPen(Qt::green, penWidthFg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p.drawPolyline(seg);
     }
 }
@@ -2078,7 +2082,7 @@ void CGisItemTrk::setColor(int idx)
     if(idx < TRK_N_COLORS)
     {
         setColor(IGisItem::colorMap[idx].color);
-        updateHistory();
+        updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
@@ -2204,6 +2208,8 @@ void CGisItemTrk::setIcon(const QString& iconColor)
 
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
+
+
 
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
 {
@@ -2506,10 +2512,10 @@ void CGisItemTrk::changed(const QString& what, const QString& icon)
     updateVisuals(eVisualAll, "changed()");
 }
 
-void CGisItemTrk::updateHistory()
+void CGisItemTrk::updateHistory(quint32 visuals)
 {
     IGisItem::updateHistory();
-    updateVisuals(eVisualAll, "updateHistory()");
+    updateVisuals(visuals, "updateHistory()");
 }
 
 

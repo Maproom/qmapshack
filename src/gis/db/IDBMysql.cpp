@@ -63,31 +63,7 @@ bool IDBMysql::setupDB(const QString& server,const QString& user, const QString&
         db = QSqlDatabase::database(connectionName);
     }
 
-    QSqlQuery query(db);
-
-
-    if(!query.exec("SELECT version FROM versioninfo"))
-    {
-        return initDB();
-    }
-    else if(query.next())
-    {
-        int version = query.value(0).toInt();
-        if(version != DB_VERSION)
-        {
-            return migrateDB(version);
-        }
-    }
-    else
-    {
-        return initDB();
-    }
-
-    query.prepare( "UPDATE folders SET name=:name WHERE id=1");
-    query.bindValue(":name", connectionName);
-    QUERY_EXEC()
-
-    return true;
+    return setupDB();
 }
 
 bool IDBMysql::initDB()

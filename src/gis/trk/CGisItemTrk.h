@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
 #include <QPen>
@@ -174,7 +175,7 @@ public:
     /**
        @brief Serialize track into a binary data stream
        @param stream  the data stream to write to.
-       @return A reference to the stream
+       @return A reference to thcfgPathe stream
      */
     virtual QDataStream& operator>>(QDataStream& stream) const override;
 
@@ -846,6 +847,27 @@ public:
     }
 
     void updateFromDB(quint64 id, QSqlDatabase& db) override;
+
+private:
+    fGetLimit getMin = [this](const QString& source, QVariant& val)
+    {
+        qreal min = NOFLOAT, max = NOFLOAT;
+        getExtrema(min, max, source);
+        val = min;
+    };
+
+    fGetLimit getMax = [this](const QString& source, QVariant& val)
+    {
+        qreal min = NOFLOAT, max = NOFLOAT;
+        getExtrema(min, max, source);
+        val = max;
+    };
+public:
+    CLimit limitsGraph1 {"TrackDetails/Graph1", getMin, getMax};
+    CLimit limitsGraph2 {"TrackDetails/Graph2", getMin, getMax};
+    CLimit limitsGraph3 {"TrackDetails/Graph3", getMin, getMax};
+
+
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;
@@ -899,7 +921,7 @@ private:
     QPen penBackground {Qt::white, qreal(penWidthBg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
 
-    fOnChange onChange = [this](const QVariant& val)
+    fValueOnChange onChange = [this](const QVariant& val)
                          {
                              int w = qRound(3.0 * val.toDouble());
 

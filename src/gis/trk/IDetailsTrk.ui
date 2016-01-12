@@ -902,10 +902,18 @@
             </widget>
            </item>
            <item row="0" column="5">
-            <widget class="QDoubleSpinBox" name="spinMaxGraph1"/>
+            <widget class="QDoubleSpinBox" name="spinMaxGraph1">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QDoubleSpinBox" name="spinMinGraph1"/>
+            <widget class="QDoubleSpinBox" name="spinMinGraph1">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="0" column="4">
             <widget class="QLabel" name="label_8">
@@ -1012,10 +1020,18 @@
             </layout>
            </item>
            <item row="1" column="3">
-            <widget class="QDoubleSpinBox" name="spinMinGraph2"/>
+            <widget class="QDoubleSpinBox" name="spinMinGraph2">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="5">
-            <widget class="QDoubleSpinBox" name="spinMaxGraph2"/>
+            <widget class="QDoubleSpinBox" name="spinMaxGraph2">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="6">
             <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -1212,10 +1228,18 @@
             </layout>
            </item>
            <item row="2" column="3">
-            <widget class="QDoubleSpinBox" name="spinMinGraph3"/>
+            <widget class="QDoubleSpinBox" name="spinMinGraph3">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="2" column="5">
-            <widget class="QDoubleSpinBox" name="spinMaxGraph3"/>
+            <widget class="QDoubleSpinBox" name="spinMaxGraph3">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="2">
             <widget class="QLabel" name="label_9">
@@ -1527,10 +1551,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupLineWidth"/>
-  <buttongroup name="buttonGroupGraph1"/>
-  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupGraph1"/>
  </buttongroups>
 </ui>

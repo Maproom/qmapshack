@@ -20,7 +20,7 @@
 
 QSet<CLimit*> CLimit::allLimits;
 
-CLimit::CLimit(const QString &cfgPath, fGetLimit getMin, fGetLimit getMax)
+CLimit::CLimit(const QString &cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto)
     : cfgPath(cfgPath)
     , getMin(getMin)
     , getMax(getMax)

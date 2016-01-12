@@ -16,52 +16,43 @@
 
 **********************************************************************************************/
 
-#ifndef CVALUE_H
-#define CVALUE_H
+#ifndef CLIMIT_H
+#define CLIMIT_H
 
 #include <QSet>
 #include <QVariant>
+#include <QString>
 #include <functional>
 
-using fValueOnChange = std::function<void(const QVariant&)>;
+using fGetLimit = std::function<void(const QString&, QVariant&)>;
 
-class CValue
+class CLimit
 {
 public:
-    CValue(const QString& cfgTag, const QVariant& initDefault, fValueOnChange onChange = nullptr);
-    virtual ~CValue();
+    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax);
+    virtual ~CLimit();
+
 
     enum mode_e
     {
         eModeDefault
         , eModeUser
+        , eModeAutomatic
     };
 
-    void setMode(mode_e m);
-    mode_e getMode() const
-    {
-        return mode;
-    }
-
-    QVariant val() const;
-
-    const QVariant& operator=(const QVariant& v);
+    void setup(const QString& source);
 
 private:
-    friend QDataStream& operator<<(QDataStream& stream, const CValue& v);
-    friend QDataStream& operator>>(QDataStream& stream, CValue& v);
+    mode_e mode = eModeAutomatic;
+    QString cfgPath;
+    QVariant minUser;
+    QVariant maxUser;
 
-    void updateDefault(const QString &tag, const QVariant& val);
+    fGetLimit getMin;
+    fGetLimit getMax;
 
-    mode_e mode = eModeDefault;
-    QString cfgTag;
-    QVariant initDefault;
-    QVariant valUser;
-
-    fValueOnChange onChange;
-
-    static QSet<CValue*> allValues;
+    static QSet<CLimit*> allLimits;
 };
 
-#endif //CVALUE_H
+#endif //CLIMIT_H
 

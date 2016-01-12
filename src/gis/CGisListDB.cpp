@@ -189,6 +189,7 @@ void CGisListDB::saveDatabaseConfiguration()
             cfg.setValue("server", mysql->getServer());
             cfg.setValue("user", mysql->getUser());
             cfg.setValue("passwd", mysql->getPasswd());
+            cfg.setValue("noPasswd",mysql->hasNoPasswd());
             cfg.endGroup(); // name
         }
     }

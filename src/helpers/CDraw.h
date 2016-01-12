@@ -59,7 +59,7 @@ public:
        @param minPointDist  The minimum distance of two points (in px)
        @param minArrowDist  The minimum distance of two consecutive arrows (in px)
      */
-    static void arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist);
+    static void arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale);
 
     static void text(const QString& str, QPainter &p, const QPoint &center, const QColor &color, const QFont &font = CMainWindow::self().getMapFont());
     static void text(const QString& str, QPainter &p, const QRect  &r,      const QColor &color);
@@ -85,7 +85,7 @@ private:
        @brief   Creates a new arrow using the brush specified
        @return  A QImage containing the arrow
      */
-    static QImage createBasicArrow(const QBrush &brush);
+    static QImage createBasicArrow(const QBrush &brush, qreal scale);
 };
 
 #endif // CPAINTER_H

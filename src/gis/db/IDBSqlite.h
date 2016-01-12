@@ -28,9 +28,10 @@ public:
     virtual ~IDBSqlite() = default;
 
 protected:
+    using IDB::setupDB;
     bool setupDB(const QString &filename, const QString &connectionName);
-    bool initDB();
-    bool migrateDB(int version);
+    bool initDB() override;
+    bool migrateDB(int version) override;
     bool migrateDB1to2();
     bool migrateDB2to3();
     bool migrateDB3to4();

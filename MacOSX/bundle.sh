@@ -8,7 +8,6 @@ BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
 BUILD_HASH_KEY=0
 
 
-
 function buildIcon {
     rm -rf $BUILD_BIN_DIR/$APP_NAME.iconset
     mkdir $BUILD_BIN_DIR/$APP_NAME.iconset
@@ -40,26 +39,27 @@ function buildAppStructure {
     #         <libs>
     #      PlugIns
     #         <libs>
-    if [ ! -f "$BUILD_RELEASE_DIR/$APP_NAME" ]; then
-        cp $BUILD_BUNDLE_APP_DIR/$APP_NAME  $BUILD_RELEASE_DIR
-    fi
     
     rm -rf $BUILD_BUNDLE_DIR
-
     mkdir $BUILD_BUNDLE_DIR
+    
+    # predefined data
     cp -R $SRC_RESOURCES_DIR/Contents $BUILD_BUNDLE_DIR
     
+    # new icon, if one has been created (otherwise the one from predefined data
     if [ -f "$BUILD_BIN_DIR/$APP_NAME.icns" ]; then
-        cp $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR
+        cp $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/
     fi
     
-    cp $BUILD_RELEASE_DIR/$APP_NAME  $BUILD_BUNDLE_APP_DIR
+    # binary
+    mkdir $BUILD_BUNDLE_APP_DIR
+    cp $BUILD_BIN_DIR/qmapshack  $BUILD_BUNDLE_APP_DIR/$APP_NAME
     
     mkdir $BUILD_BUNDLE_RES_QM_DIR
     mkdir $BUILD_BUNDLE_RES_GDAL_DIR
     mkdir $BUILD_BUNDLE_RES_PROJ_DIR
     mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp $BUILD_DIR/src/*.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp $BUILD_BIN_DIR/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
 function qtDeploy {
@@ -90,7 +90,7 @@ function adjustLinking {
  
     for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
     do 
-        adjustLinkQt $F "Qt"
+        adjustLinkQt $F "libq"
     done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
@@ -109,8 +109,8 @@ function adjustLinking {
 }
 
 function adjustLinkQt {
-    F=$1
-    L=$2
+    F=$1 # file
+    L=$2 # search condition
     FREL=${F##*/}
     
     #printLinking $F
@@ -132,12 +132,11 @@ function adjustLinkQt {
             fi
             
             PREL="@executable_path/../Frameworks/$LIB"
-                
-            if [[ "$P" == *"PlugIns"* ]]; then
+            
+            if [[ "$P" == *"plugins"* ]]; then
                 # subdirectory for PlugIns
-                PREL=$(P##PlugIns/) # remove prepart
-                PREL=$(PREL%%/) # remove slash at end
-                LIB=$PREL/$LIB
+                PREL=${P##*plugins/} # remove prepart
+                LIB=$PREL
                 PREL="@executable_path/../PlugIns/$LIB"
             fi
             
@@ -155,7 +154,7 @@ function adjustLinkQt {
 
 
 function copyAdditionalLibraries {
-    cp $LIB_ROUTINO_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
+    cp $ROUTINO_LIB_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtSensors.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtPositioning.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtMultimediaWidgets.framework $BUILD_BUNDLE_FRW_DIR
@@ -165,7 +164,9 @@ function copyAdditionalLibraries {
     cp -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
     cp -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
+    # TODO remove QT Bus, is only for linux needed
     cp -R $QT_DIR/lib/QtDBus.framework $BUILD_BUNDLE_FRW_DIR
+
 }
 
 function copyExternalFiles {
@@ -176,9 +177,9 @@ function copyExternalFiles {
     cp $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
     cp $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
     
-    cp $LIB_ROUTINO_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp $LIB_ROUTINO_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp $LIB_ROUTINO_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
 }
 
 
@@ -206,16 +207,16 @@ function extractVersion {
     # set(APPLICATION_VERSION_MINOR "3")
     # set(APPLICATION_VERSION_PATCH "0.libroutino")
     
-    MAJOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MAJOR.*\"\(.*\)\".*/\1/p' $SRC_QMAPSHACK_DIR/CMakeLists.txt)
-    MINOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MINOR.*\"\(.*\)\".*/\1/p' $SRC_QMAPSHACK_DIR/CMakeLists.txt)
-    PATCH_VERSION=$(sed -n 's/.*APPLICATION_VERSION_PATCH.*\"\(.*\)\".*/\1/p' $SRC_QMAPSHACK_DIR/CMakeLists.txt)
+    MAJOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MAJOR.*\"\(.*\)\".*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
+    MINOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MINOR.*\"\(.*\)\".*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
+    PATCH_VERSION=$(sed -n 's/.*APPLICATION_VERSION_PATCH.*\"\(.*\)\".*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
     echo "$MAJOR_VERSION $MINOR_VERSION $PATCH_VERSION"
     APP_VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
 }
 
 function readRevisionHash {
-    cd $SRC_DIR
-    BUILD_HASH_KEY=$($HG_BIN --debug id -i)
+    cd $QMS_SRC_DIR
+    BUILD_HASH_KEY=$(hg --debug id -i)
     
     if [[ "$BUILD_HASH_KEY" == *"+"* ]]; then
         read -p "BEWARE - There are uncommited chagnes..."
@@ -230,29 +231,9 @@ function updateInfoPlist {
     /usr/libexec/PlistBuddy -c "Set :BuildTime $BUILD_TIME"                   "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
 }
 
-function buildBinary {
-    rm -rf $BUILD_RELEASE_DIR/$APP_NAME
-    mkdir $BUILD_BIN_DIR
-    mkdir $BUILD_RELEASE_DIR
-    xcodebuild -list -project $BUILD_DIR/$APP_NAME.xcodeproj
-    xcodebuild -project $BUILD_DIR/$APP_NAME.xcodeproj  -configuration Release build
-}
-
-function replaceBinary {
-    if [ -d "$BUILD_BUNDLE_APP_DIR" ]; then
-        cp $BUILD_RELEASE_DIR/$APP_NAME  $BUILD_BUNDLE_APP_DIR
-        adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"
-        adjustLinkQt $BUILD_BUNDLE_APP_FILE "libroutino"
-    fi
-}
-
     
 if [[ "$1" == "icon" ]]; then
     buildIcon
-fi
-if [[ "$1" == "build" ]]; then
-    buildBinary
-    replaceBinary
 fi
 if [[ "$1" == "bundle" ]]; then
     echo "---extract version -----------------"

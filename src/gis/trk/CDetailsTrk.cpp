@@ -107,8 +107,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     propHandler->fillComboBox(comboGraph3);
 
     plot1 = new CPlotProfile(&trk, IPlot::eModeNormal, this);
-    plot2 = new CPlot(&trk, this);
-    plot3 = new CPlot(&trk, this);
+    plot2 = new CPlot(&trk, trk.limitsGraph2, this);
+    plot3 = new CPlot(&trk, trk.limitsGraph3, this);
 
     for(IPlot *plot : { static_cast<IPlot*>(plot1), static_cast<IPlot*>(plot2), static_cast<IPlot*>(plot3) })
     {
@@ -189,6 +189,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(toolLimitGraph2,  &QToolButton::toggled,               spinMaxGraph2, &QDoubleSpinBox::setDisabled);
     connect(toolLimitGraph3,  &QToolButton::toggled,               spinMinGraph3, &QDoubleSpinBox::setDisabled);
     connect(toolLimitGraph3,  &QToolButton::toggled,               spinMaxGraph3, &QDoubleSpinBox::setDisabled);
+
+    connect(toolLimitUsrGraph2,&QToolButton::toggled,              this, &CDetailsTrk::slotSetLimitModeUser);
+    connect(toolLimitGraph2,   &QToolButton::toggled,              this, &CDetailsTrk::slotSetLimitModeAuto);
+    connect(toolLimitSysGraph2,&QToolButton::toggled,              this, &CDetailsTrk::slotSetLimitModeSys);
 
 
     // setting up the graph properties will trigger the signals
@@ -689,23 +693,37 @@ void CDetailsTrk::slotActivitySelected(bool checked)
 
 void CDetailsTrk::slotSetupGraph(int idx)
 {
-    CPlot   *plot = nullptr;
-    QObject *s    = sender();
+    QObject *s = sender();
 
     if(s == comboGraph2)
     {
-        plot = plot2;
+        trk.getPropertyHandler()->setupPlot(plot2, idx);
     }
     else if(s == comboGraph3)
     {
-        plot = plot3;
-    }
-
-    if(plot)
-    {
-        trk.getPropertyHandler()->setupPlot(plot, idx);
+        trk.getPropertyHandler()->setupPlot(plot3, idx);
     }
 }
+
+void CDetailsTrk::slotSetLimitModeUser()
+{
+    trk.limitsGraph2.setMode(CLimit::eModeUser);
+    spinMinGraph2->setValue(trk.limitsGraph2.getMin().toReal());
+    spinMaxGraph2->setValue(trk.limitsGraph2.getMax().toReal());
+}
+
+void CDetailsTrk::slotSetLimitModeAuto()
+{
+    trk.limitsGraph2.setMode(CLimit::eModeAutomatic);
+}
+
+void CDetailsTrk::slotSetLimitModeSys()
+{
+    trk.limitsGraph2.setMode(CLimit::eModeDefault);
+    spinMinGraph2->setValue(trk.limitsGraph2.getMin().toReal());
+    spinMaxGraph2->setValue(trk.limitsGraph2.getMax().toReal());
+}
+
 
 void CDetailsTrk::slotLineWidthMode(bool isUser)
 {

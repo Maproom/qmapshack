@@ -1812,6 +1812,24 @@ qreal CGisItemTrk::getMax(const QString& source)const
     return extrema.value(source).max * CKnownExtension::get(source).factor;
 }
 
+qreal CGisItemTrk::getMinProp(const QString& source) const
+{
+    if(propHandler == nullptr)
+    {
+        return NOFLOAT;
+    }
+    return propHandler->getMin(source);
+}
+
+qreal CGisItemTrk::getMaxProp(const QString& source) const
+{
+    if(propHandler == nullptr)
+    {
+        return NOFLOAT;
+    }
+    return propHandler->getMax(source);
+}
+
 
 QStringList CGisItemTrk::getExistingDataSources() const
 {

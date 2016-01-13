@@ -114,7 +114,30 @@ void CPropertyTrk::setupPlot(CPlot * plot, int idx) const
         return;
     }
     const property_t& p = properties[idx];
+    plot->setup(p.key, p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
+    return;
+}
 
-    plot->setup(p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
-    plot->setLimits(p.min, p.max);
+qreal CPropertyTrk::getMin(const QString& source) const
+{
+    foreach(const property_t& prop, properties)
+    {
+        if(prop.key == source)
+        {
+            return prop.min;
+        }
+    }
+    return NOFLOAT;
+}
+
+qreal CPropertyTrk::getMax(const QString& source) const
+{
+    foreach(const property_t& prop, properties)
+    {
+        if(prop.key == source)
+        {
+            return prop.max;
+        }
+    }
+    return NOFLOAT;
 }

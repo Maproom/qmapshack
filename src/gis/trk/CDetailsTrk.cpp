@@ -166,33 +166,46 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(spinLimitLow,     &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
     connect(spinLimitLow,     &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
-    void (QDoubleSpinBox:: *signal)(double) = &QDoubleSpinBox::valueChanged;
-    connect(spinLineWidth,    signal,                              this, &CDetailsTrk::slotLineWidth);
-    connect(checkWithArrows,  &QCheckBox::toggled,                 this, &CDetailsTrk::slotWithArrows);
+    void (QDoubleSpinBox:: *SpinBoxValChng)(double) = &QDoubleSpinBox::valueChanged;
+    connect(spinLineWidth,    SpinBoxValChng,      this, &CDetailsTrk::slotLineWidth);
+    connect(checkWithArrows,  &QCheckBox::toggled, this, &CDetailsTrk::slotWithArrows);
 
-    connect(toolStyleLimitMax,&QPushButton::clicked,               this, &CDetailsTrk::slotLimitHighFromData);
-    connect(toolStyleLimitMin,&QPushButton::clicked,               this, &CDetailsTrk::slotLimitLowFromData);
+    connect(toolStyleLimitMax,&QPushButton::clicked, this, &CDetailsTrk::slotLimitHighFromData);
+    connect(toolStyleLimitMin,&QPushButton::clicked, this, &CDetailsTrk::slotLimitLowFromData);
 
-    connect(toolUserLineWith, &QToolButton::toggled,               this, &CDetailsTrk::slotLineWidthMode);
-    connect(toolUserArrow,    &QToolButton::toggled,               this, &CDetailsTrk::slotWithArrowsMode);
+    connect(toolUserLineWith, &QToolButton::toggled, this, &CDetailsTrk::slotLineWidthMode);
+    connect(toolUserArrow,    &QToolButton::toggled, this, &CDetailsTrk::slotWithArrowsMode);
 
-    connect(listHistory,      &CHistoryListWidget::sigChanged,     this, &CDetailsTrk::updateData);
+    connect(listHistory,      &CHistoryListWidget::sigChanged, this, &CDetailsTrk::updateData);
 
     connect(comboColor,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorChanged);
     connect(comboColorSource, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorSourceChanged);
     connect(comboGraph2,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
     connect(comboGraph3,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
 
-    connect(toolLimitGraph1,  &QToolButton::toggled,               spinMinGraph1, &QDoubleSpinBox::setDisabled);
-    connect(toolLimitGraph1,  &QToolButton::toggled,               spinMaxGraph1, &QDoubleSpinBox::setDisabled);
-    connect(toolLimitGraph2,  &QToolButton::toggled,               spinMinGraph2, &QDoubleSpinBox::setDisabled);
-    connect(toolLimitGraph2,  &QToolButton::toggled,               spinMaxGraph2, &QDoubleSpinBox::setDisabled);
-    connect(toolLimitGraph3,  &QToolButton::toggled,               spinMinGraph3, &QDoubleSpinBox::setDisabled);
-    connect(toolLimitGraph3,  &QToolButton::toggled,               spinMaxGraph3, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph1,  &QToolButton::toggled, spinMinGraph1, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph1,  &QToolButton::toggled, spinMaxGraph1, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph2,  &QToolButton::toggled, spinMinGraph2, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph2,  &QToolButton::toggled, spinMaxGraph2, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph3,  &QToolButton::toggled, spinMinGraph3, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitGraph3,  &QToolButton::toggled, spinMaxGraph3, &QDoubleSpinBox::setDisabled);
 
-    connect(toolLimitUsrGraph2,&QToolButton::toggled,              this, &CDetailsTrk::slotSetLimitModeUser);
-    connect(toolLimitGraph2,   &QToolButton::toggled,              this, &CDetailsTrk::slotSetLimitModeAuto);
-    connect(toolLimitSysGraph2,&QToolButton::toggled,              this, &CDetailsTrk::slotSetLimitModeSys);
+    connect(toolLimitUsrGraph1, &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeUser);
+    connect(toolLimitUsrGraph2, &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeUser);
+    connect(toolLimitUsrGraph3, &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeUser);
+    connect(toolLimitGraph1,    &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeAuto);
+    connect(toolLimitGraph2,    &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeAuto);
+    connect(toolLimitGraph3,    &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeAuto);
+    connect(toolLimitSysGraph1, &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeSys);
+    connect(toolLimitSysGraph2, &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeSys);
+    connect(toolLimitSysGraph3, &QToolButton::toggled, this, &CDetailsTrk::slotSetLimitModeSys);
+
+    connect(spinMinGraph1, SpinBoxValChng, &trk.limitsGraph1, &CLimit::setMin);
+    connect(spinMaxGraph1, SpinBoxValChng, &trk.limitsGraph1, &CLimit::setMax);
+    connect(spinMinGraph2, SpinBoxValChng, &trk.limitsGraph2, &CLimit::setMin);
+    connect(spinMaxGraph2, SpinBoxValChng, &trk.limitsGraph2, &CLimit::setMax);
+    connect(spinMinGraph3, SpinBoxValChng, &trk.limitsGraph3, &CLimit::setMin);
+    connect(spinMaxGraph3, SpinBoxValChng, &trk.limitsGraph3, &CLimit::setMax);
 
 
     // setting up the graph properties will trigger the signals
@@ -697,7 +710,7 @@ void CDetailsTrk::slotSetupGraph(int idx)
 
     if(s == comboGraph2)
     {
-        trk.getPropertyHandler()->setupPlot(plot2, idx);
+        trk.getPropertyHandler()->setupPlot(plot2, idx);        
     }
     else if(s == comboGraph3)
     {
@@ -707,21 +720,97 @@ void CDetailsTrk::slotSetupGraph(int idx)
 
 void CDetailsTrk::slotSetLimitModeUser()
 {
-    trk.limitsGraph2.setMode(CLimit::eModeUser);
-    spinMinGraph2->setValue(trk.limitsGraph2.getMin().toReal());
-    spinMaxGraph2->setValue(trk.limitsGraph2.getMax().toReal());
+    CLimit * limit;
+    QDoubleSpinBox * spinMin;
+    QDoubleSpinBox * spinMax;
+
+    QObject *s = sender();
+    if(s == toolLimitUsrGraph1)
+    {
+        limit = &trk.limitsGraph1;
+        spinMin = spinMinGraph1;
+        spinMax = spinMaxGraph1;
+    }
+    else if(s == toolLimitUsrGraph2)
+    {
+        limit = &trk.limitsGraph2;
+        spinMin = spinMinGraph2;
+        spinMax = spinMaxGraph2;
+    }
+    else if(s == toolLimitUsrGraph3)
+    {
+        limit = &trk.limitsGraph3;
+        spinMin = spinMinGraph3;
+        spinMax = spinMaxGraph3;
+    }
+    else
+    {
+        return;
+    }
+
+    limit->setMode(CLimit::eModeUser);
+    spinMin->setValue(limit->getMin());
+    spinMax->setValue(limit->getMax());
 }
 
 void CDetailsTrk::slotSetLimitModeAuto()
 {
-    trk.limitsGraph2.setMode(CLimit::eModeAutomatic);
+    CLimit * limit;
+
+    QObject *s = sender();
+    if(s == toolLimitGraph1)
+    {
+        limit = &trk.limitsGraph1;
+    }
+    else if(s == toolLimitGraph2)
+    {
+        limit = &trk.limitsGraph2;
+    }
+    else if(s == toolLimitGraph3)
+    {
+        limit = &trk.limitsGraph3;
+    }
+    else
+    {
+        return;
+    }
+
+    limit->setMode(CLimit::eModeAutomatic);
 }
 
 void CDetailsTrk::slotSetLimitModeSys()
 {
-    trk.limitsGraph2.setMode(CLimit::eModeDefault);
-    spinMinGraph2->setValue(trk.limitsGraph2.getMin().toReal());
-    spinMaxGraph2->setValue(trk.limitsGraph2.getMax().toReal());
+    CLimit * limit;
+    QDoubleSpinBox * spinMin;
+    QDoubleSpinBox * spinMax;
+
+    QObject *s = sender();
+    if(s == toolLimitSysGraph1)
+    {
+        limit = &trk.limitsGraph1;
+        spinMin = spinMinGraph1;
+        spinMax = spinMaxGraph1;
+    }
+    else if(s == toolLimitSysGraph2)
+    {
+        limit = &trk.limitsGraph2;
+        spinMin = spinMinGraph2;
+        spinMax = spinMaxGraph2;
+    }
+    else if(s == toolLimitSysGraph3)
+    {
+        limit = &trk.limitsGraph3;
+        spinMin = spinMinGraph2;
+        spinMax = spinMaxGraph2;
+    }
+    else
+    {
+        return;
+    }
+
+    limit->setMode(CLimit::eModeDefault);
+    spinMin->setValue(limit->getMin());
+    spinMax->setValue(limit->getMax());
 }
 
 

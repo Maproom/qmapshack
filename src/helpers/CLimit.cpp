@@ -41,20 +41,14 @@ CLimit::~CLimit()
 void CLimit::setup(const QString& source)
 {
     this->source = source;
-    if(!minUser.isValid())
-    {
-        minUser = fGetMin(source);
-    }
-    if(!maxUser.isValid())
-    {
-        maxUser = fGetMax(source);
-    }
+    minUser = fGetMin(source);
+    maxUser = fGetMax(source);
 }
 
-QVariant CLimit::getMin() const
+qreal CLimit::getMin() const
 {
     SETTINGS;
-    QVariant val;
+    qreal val;
 
     switch(mode)
     {
@@ -68,7 +62,7 @@ QVariant CLimit::getMin() const
 
     case eModeDefault:
         cfg.beginGroup(cfgPath);
-        val = cfg.value(source, fGetMin(source));
+        val = cfg.value(source + "/min", fGetMin(source)).toReal();
         cfg.endGroup();
         break;
     }
@@ -76,10 +70,10 @@ QVariant CLimit::getMin() const
     return val;
 }
 
-QVariant CLimit::getMax() const
+qreal CLimit::getMax() const
 {
     SETTINGS;
-    QVariant val;
+    qreal val;
 
     switch(mode)
     {
@@ -93,7 +87,7 @@ QVariant CLimit::getMax() const
 
     case eModeDefault:
         cfg.beginGroup(cfgPath);
-        val = cfg.value(source, fGetMax(source));
+        val = cfg.value(source + "/max", fGetMax(source)).toReal();
         cfg.endGroup();
         break;
     }
@@ -101,7 +95,7 @@ QVariant CLimit::getMax() const
     return val;
 }
 
-void CLimit::setMin(const QVariant& val)
+void CLimit::setMin(const qreal &val)
 {
     SETTINGS;
 
@@ -113,7 +107,7 @@ void CLimit::setMin(const QVariant& val)
 
     case eModeDefault:
         cfg.beginGroup(cfgPath);
-        cfg.setValue(source, val);
+        cfg.setValue(source + "/min", val);
         cfg.endGroup();
         break;
     }
@@ -121,19 +115,19 @@ void CLimit::setMin(const QVariant& val)
     emit sigChanged();
 }
 
-void CLimit::setMax(const QVariant& val)
+void CLimit::setMax(const qreal &val)
 {
     SETTINGS;
 
     switch(mode)
     {
     case eModeUser:
-        minUser = val;
+        maxUser = val;
         break;
 
     case eModeDefault:
         cfg.beginGroup(cfgPath);
-        cfg.setValue(source, val);
+        cfg.setValue(source + "/max", val);
         cfg.endGroup();
         break;
     }

@@ -111,10 +111,8 @@ void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 void CPlot::setLimits()
 {
     IPlot::setLimits();
-    data->ymin = limit.getMin().toReal() == NOFLOAT ? data->ymin : limit.getMin().toReal();
-    data->ymax = limit.getMax().toReal() == NOFLOAT ? data->ymax : limit.getMax().toReal();
-
-    qDebug() << data->ymin << data->ymax;
+    data->ymin = limit.getMin() == NOFLOAT ? data->ymin : limit.getMin();
+    data->ymax = limit.getMax() == NOFLOAT ? data->ymax : limit.getMax();
 
     data->y().setLimits(data->ymin, data->ymax);
     resetZoom();

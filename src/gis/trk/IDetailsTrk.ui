@@ -906,12 +906,24 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="0" column="3">
             <widget class="QDoubleSpinBox" name="spinMinGraph1">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
              </property>
             </widget>
            </item>
@@ -1024,12 +1036,24 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="1" column="5">
             <widget class="QDoubleSpinBox" name="spinMaxGraph2">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
              </property>
             </widget>
            </item>
@@ -1232,12 +1256,24 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="2" column="5">
             <widget class="QDoubleSpinBox" name="spinMaxGraph3">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
              </property>
             </widget>
            </item>
@@ -1551,9 +1587,9 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupGraph2"/>
  </buttongroups>

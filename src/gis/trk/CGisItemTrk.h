@@ -878,7 +878,6 @@ public:
     CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinProp, _getMaxProp};
     CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp};
 
-
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;

@@ -25,7 +25,7 @@
 #include <QString>
 #include <functional>
 
-using fGetLimit = std::function<QVariant(const QString&)>;
+using fGetLimit = std::function<qreal(const QString&)>;
 
 class CLimit : public QObject
 {
@@ -55,11 +55,12 @@ public:
 
     void setup(const QString& source);
 
-    QVariant getMin() const;
-    QVariant getMax() const;
+    qreal getMin() const;
+    qreal getMax() const;
 
-    void setMin(const QVariant& val);
-    void setMax(const QVariant& val);
+public slots:
+    void setMin(const qreal& val);
+    void setMax(const qreal& val);
 
 signals:
     void sigChanged();
@@ -67,8 +68,8 @@ signals:
 private:
     mode_e mode = eModeAutomatic;
     QString cfgPath;
-    QVariant minUser;
-    QVariant maxUser;
+    qreal minUser;
+    qreal maxUser;
 
     fGetLimit fGetMin;
     fGetLimit fGetMax;

@@ -850,30 +850,33 @@ public:
     void updateFromDB(quint64 id, QSqlDatabase& db) override;
 
 private:
-    fGetLimit _getMin = [this](const QString& source, QVariant& val)
+    fGetLimit _getMin = [this](const QString& source)
     {
-        val = getMin(source);
+        return getMin(source);
     };
 
-    fGetLimit _getMax = [this](const QString& source, QVariant& val)
+    fGetLimit _getMax = [this](const QString& source)
     {
-        val = getMax(source);
+        return getMax(source);
     };
 
-    fGetLimit _getMinAuto = [this](const QString& source, QVariant& val)
-    {
+    qreal getMinProp(const QString& source) const;
+    qreal getMaxProp(const QString& source) const;
 
+    fGetLimit _getMinProp = [this](const QString& source)
+    {
+        return getMinProp(source);
     };
 
-    fGetLimit _getMaxAuto = [this](const QString& source, QVariant& val)
+    fGetLimit _getMaxProp = [this](const QString& source)
     {
-
+        return getMaxProp(source);
     };
 
 public:
-    CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinAuto, _getMaxAuto};
-    CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinAuto, _getMaxAuto};
-    CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinAuto, _getMaxAuto};
+    CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinProp, _getMaxProp};
+    CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinProp, _getMaxProp};
+    CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp};
 
 
 private:

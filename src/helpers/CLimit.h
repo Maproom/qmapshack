@@ -19,15 +19,17 @@
 #ifndef CLIMIT_H
 #define CLIMIT_H
 
+#include <QObject>
 #include <QSet>
 #include <QVariant>
 #include <QString>
 #include <functional>
 
-using fGetLimit = std::function<void(const QString&, QVariant&)>;
+using fGetLimit = std::function<QVariant(const QString&)>;
 
-class CLimit
+class CLimit : public QObject
 {
+    Q_OBJECT
 public:
     CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto);
     virtual ~CLimit();
@@ -40,7 +42,27 @@ public:
         , eModeAutomatic
     };
 
+    void setMode(mode_e m)
+    {
+        mode = m;
+        emit sigChanged();
+    }
+
+    mode_e getMode() const
+    {
+        return mode;
+    }
+
     void setup(const QString& source);
+
+    QVariant getMin() const;
+    QVariant getMax() const;
+
+    void setMin(const QVariant& val);
+    void setMax(const QVariant& val);
+
+signals:
+    void sigChanged();
 
 private:
     mode_e mode = eModeAutomatic;
@@ -48,10 +70,12 @@ private:
     QVariant minUser;
     QVariant maxUser;
 
-    fGetLimit getMin;
-    fGetLimit getMax;
-    fGetLimit getMinAuto;
-    fGetLimit getMaxAuto;
+    fGetLimit fGetMin;
+    fGetLimit fGetMax;
+    fGetLimit fGetMinAuto;
+    fGetLimit fGetMaxAuto;
+
+    QString source;
 
     static QSet<CLimit*> allLimits;
 };

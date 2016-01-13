@@ -26,6 +26,7 @@
 
 class QComboBox;
 class CPlot;
+class CLimit;
 
 class CPropertyTrk
 {
@@ -65,6 +66,9 @@ public:
 
     void setupData();
     void setupPlot(CPlot * plot, int idx) const;
+
+    qreal getMin(const QString& source) const;
+    qreal getMax(const QString& source) const;
 
 private:
     friend class CGisItemTrk;

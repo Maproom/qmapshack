@@ -59,6 +59,9 @@ private slots:
     void slotLimitHighFromData();
 
     void slotSetupGraph(int idx);
+    void slotSetLimitModeUser();
+    void slotSetLimitModeAuto();
+    void slotSetLimitModeSys();
 
     void slotLineWidthMode(bool isUser);
     void slotLineWidth(qreal f);

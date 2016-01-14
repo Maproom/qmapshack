@@ -146,6 +146,61 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
+    spinMinGraph1->setValue(trk.limitsGraph1.getMin());
+    spinMaxGraph1->setValue(trk.limitsGraph1.getMax());
+    spinMinGraph2->setValue(trk.limitsGraph2.getMin());
+    spinMaxGraph2->setValue(trk.limitsGraph2.getMax());
+    spinMinGraph3->setValue(trk.limitsGraph3.getMin());
+    spinMaxGraph3->setValue(trk.limitsGraph3.getMax());
+
+    spinMinGraph1->setSuffix(trk.limitsGraph1.getUnit());
+    spinMaxGraph1->setSuffix(trk.limitsGraph1.getUnit());
+    spinMinGraph2->setSuffix(trk.limitsGraph2.getUnit());
+    spinMaxGraph2->setSuffix(trk.limitsGraph2.getUnit());
+    spinMinGraph3->setSuffix(trk.limitsGraph3.getUnit());
+    spinMaxGraph3->setSuffix(trk.limitsGraph3.getUnit());
+
+
+
+    switch(trk.limitsGraph1.getMode())
+    {
+    case CLimit::eModeUser:
+        toolLimitUsrGraph1->setChecked(true);
+        break;
+    case CLimit::eModeAutomatic:
+        toolLimitGraph1->setChecked(true);
+        break;
+    case CLimit::eModeDefault:
+        toolLimitSysGraph1->setChecked(true);
+        break;
+    }
+
+    switch(trk.limitsGraph2.getMode())
+    {
+    case CLimit::eModeUser:
+        toolLimitUsrGraph2->setChecked(true);
+        break;
+    case CLimit::eModeAutomatic:
+        toolLimitGraph2->setChecked(true);
+        break;
+    case CLimit::eModeDefault:
+        toolLimitSysGraph2->setChecked(true);
+        break;
+    }
+
+    switch(trk.limitsGraph3.getMode())
+    {
+    case CLimit::eModeUser:
+        toolLimitUsrGraph3->setChecked(true);
+        break;
+    case CLimit::eModeAutomatic:
+        toolLimitGraph3->setChecked(true);
+        break;
+    case CLimit::eModeDefault:
+        toolLimitSysGraph3->setChecked(true);
+        break;
+    }
+
     connect(checkGraph1,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
     connect(checkGraph2,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
     connect(checkGraph3,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
@@ -710,11 +765,15 @@ void CDetailsTrk::slotSetupGraph(int idx)
 
     if(s == comboGraph2)
     {
-        trk.getPropertyHandler()->setupPlot(plot2, idx);        
+        trk.getPropertyHandler()->setupPlot(plot2, idx);
+        spinMinGraph2->setSuffix(trk.limitsGraph2.getUnit());
+        spinMaxGraph2->setSuffix(trk.limitsGraph2.getUnit());
     }
     else if(s == comboGraph3)
     {
         trk.getPropertyHandler()->setupPlot(plot3, idx);
+        spinMinGraph3->setSuffix(trk.limitsGraph3.getUnit());
+        spinMaxGraph3->setSuffix(trk.limitsGraph3.getUnit());
     }
 }
 
@@ -812,8 +871,8 @@ void CDetailsTrk::slotSetLimitModeSys()
     else if(s == toolLimitSysGraph3)
     {
         limit = &trk.limitsGraph3;
-        spinMin = spinMinGraph2;
-        spinMax = spinMaxGraph2;
+        spinMin = spinMinGraph3;
+        spinMax = spinMaxGraph3;
     }
     else
     {

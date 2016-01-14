@@ -1049,7 +1049,9 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    limitsGraph1.setSource(CKnownExtension::internalEle);
+    QString val, unit;
+    IUnit::self().meter2elevation(1,val,unit);
+    limitsGraph1.setSource(CKnownExtension::internalEle, unit);
     updateVisuals(eVisualPlot|eVisualDetails, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";

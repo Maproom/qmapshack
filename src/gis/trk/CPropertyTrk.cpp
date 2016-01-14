@@ -38,6 +38,7 @@ void CPropertyTrk::setupData()
     {
         ""
         , ""
+        , ""
         , QIcon()
         , CPlotData::eAxisLinear
         , ""
@@ -52,6 +53,7 @@ void CPropertyTrk::setupData()
     {
         "progress"
         , QObject::tr("Progress")
+        , QObject::tr("m")
         , QIcon("://icons/32x32/Progress.png")
         , CPlotData::eAxisTime
         , QObject::tr("time")
@@ -78,6 +80,7 @@ void CPropertyTrk::setupData()
         {
             key
             , name
+            , ext.unit
             , QIcon(ext.icon)
             , CPlotData::eAxisLinear
             , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
@@ -114,7 +117,7 @@ void CPropertyTrk::setupPlot(CPlot * plot, int idx) const
         return;
     }
     const property_t& p = properties[idx];
-    plot->setup(p.key, p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
+    plot->setup(p.key, p.unit, p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
     return;
 }
 

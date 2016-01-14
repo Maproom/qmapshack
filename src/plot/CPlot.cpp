@@ -43,7 +43,7 @@ CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, QWidget *parent)
     connect(&limit, &CLimit::sigChanged, this, &CPlot::setLimits);
 }
 
-void CPlot::setup(const QString& source, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY)
+void CPlot::setup(const QString& source, const QString& unit, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY)
 {    
     data->setXAxisType(type);
     setXLabel(xLabel);
@@ -51,7 +51,7 @@ void CPlot::setup(const QString& source, CPlotData::axistype_e type, const QStri
     factor = f;
     getX = funcGetX;
     getY = funcGetY;
-    limit.setSource(source);
+    limit.setSource(source, unit);
     updateData();
 }
 

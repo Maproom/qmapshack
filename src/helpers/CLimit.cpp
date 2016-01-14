@@ -38,11 +38,12 @@ CLimit::~CLimit()
 }
 
 
-void CLimit::setSource(const QString& source)
+void CLimit::setSource(const QString& source, const QString &unit)
 {
-    this->source = source;
-    minUser = fGetMin(source);
-    maxUser = fGetMax(source);
+    this->source    = source;
+    this->unit      = unit;
+    minUser         = fGetMin(source);
+    maxUser         = fGetMax(source);
 }
 
 qreal CLimit::getMin() const

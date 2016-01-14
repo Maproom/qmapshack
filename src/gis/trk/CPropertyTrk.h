@@ -36,9 +36,10 @@ public:
     struct property_t
     {
         property_t() = default;
-        property_t(const QString& key, const QString& name, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
+        property_t(const QString& key, const QString& name, const QString& unit, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
             : key(key)
             , name(name)
+            , unit(unit)
             , icon(icon)
             , axisType(axisType)
             , xLabel(xLabel)
@@ -51,6 +52,7 @@ public:
 
         QString key;
         QString name;
+        QString unit;
         QIcon icon;
         CPlotData::axistype_e axisType = CPlotData::eAxisLinear;
         QString xLabel;

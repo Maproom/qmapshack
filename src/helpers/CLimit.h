@@ -53,10 +53,15 @@ public:
         return mode;
     }
 
-    void setSource(const QString& source);
+    void setSource(const QString& source, const QString& unit);
 
     qreal getMin() const;
     qreal getMax() const;
+
+    const QString& getUnit()
+    {
+        return unit;
+    }
 
 public slots:
     void setMin(const qreal& val);
@@ -77,6 +82,7 @@ private:
     fGetLimit fGetMaxAuto;
 
     QString source;
+    QString unit;
 
     static QSet<CLimit*> allLimits;
 };

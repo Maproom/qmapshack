@@ -23,6 +23,7 @@
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 
+
 #include <proj_api.h>
 
 CPlotProfile::CPlotProfile(QWidget * parent)
@@ -30,21 +31,30 @@ CPlotProfile::CPlotProfile(QWidget * parent)
 {
 }
 
-CPlotProfile::CPlotProfile(CGisItemTrk *trk, mode_e mode, QWidget *parent)
+CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *parent)
     : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
+    , limit(&lim)
 {
+    connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
     setWindowTitle(trk->getNameEx());
-    updateData();
+    updateData();   
 }
 
 CPlotProfile::~CPlotProfile()
 {
 }
 
-void CPlotProfile::setTrack(CGisItemTrk * track)
+void CPlotProfile::setTrack(CGisItemTrk * track, CLimit &lim)
 {
     trk = track;
     trk->registerVisual(this);
+
+    if(limit)
+    {
+        disconnect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
+    }
+    limit = &lim;
+    connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
 
     updateData();
 }
@@ -141,3 +151,13 @@ void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
     update();
 }
 
+void CPlotProfile::setLimits()
+{
+    IPlot::setLimits();
+    data->ymin = limit->getMin() == NOFLOAT ? data->ymin : limit->getMin();
+    data->ymax = limit->getMax() == NOFLOAT ? data->ymax : limit->getMax();
+
+    data->y().setLimits(data->ymin, data->ymax);
+    resetZoom();
+    update();
+}

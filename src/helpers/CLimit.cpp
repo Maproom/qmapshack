@@ -38,7 +38,7 @@ CLimit::~CLimit()
 }
 
 
-void CLimit::setup(const QString& source)
+void CLimit::setSource(const QString& source)
 {
     this->source = source;
     minUser = fGetMin(source);

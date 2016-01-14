@@ -834,13 +834,13 @@
            <string>Graphs</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="1" column="1">
+           <item row="2" column="1">
             <widget class="QComboBox" name="comboGraph2"/>
            </item>
-           <item row="2" column="1">
+           <item row="4" column="1">
             <widget class="QComboBox" name="comboGraph3"/>
            </item>
-           <item row="3" column="1">
+           <item row="6" column="1">
             <spacer name="verticalSpacer_3">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -853,7 +853,7 @@
              </property>
             </spacer>
            </item>
-           <item row="2" column="7">
+           <item row="4" column="7">
             <spacer name="horizontalSpacer_3">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -880,17 +880,10 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="4" column="0">
             <widget class="QCheckBox" name="checkGraph3">
              <property name="text">
               <string>Graph 3</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="checkGraph2">
-             <property name="text">
-              <string>Graph 2</string>
              </property>
             </widget>
            </item>
@@ -901,16 +894,10 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="5">
-            <widget class="QDoubleSpinBox" name="spinMaxGraph1">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="minimum">
-              <double>-1000000.000000000000000</double>
-             </property>
-             <property name="maximum">
-              <double>1000000.000000000000000</double>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="checkGraph2">
+             <property name="text">
+              <string>Graph 2</string>
              </property>
             </widget>
            </item>
@@ -927,10 +914,16 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="4">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>max.</string>
+           <item row="2" column="3">
+            <widget class="QDoubleSpinBox" name="spinMinGraph2">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
              </property>
             </widget>
            </item>
@@ -1031,8 +1024,8 @@
              </item>
             </layout>
            </item>
-           <item row="1" column="3">
-            <widget class="QDoubleSpinBox" name="spinMinGraph2">
+           <item row="4" column="3">
+            <widget class="QDoubleSpinBox" name="spinMinGraph3">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -1044,20 +1037,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="5">
-            <widget class="QDoubleSpinBox" name="spinMaxGraph2">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="minimum">
-              <double>-1000000.000000000000000</double>
-             </property>
-             <property name="maximum">
-              <double>1000000.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="6">
+           <item row="2" column="6">
             <layout class="QHBoxLayout" name="horizontalLayout_11">
              <property name="spacing">
               <number>0</number>
@@ -1154,7 +1134,7 @@
              </item>
             </layout>
            </item>
-           <item row="2" column="6">
+           <item row="4" column="6">
             <layout class="QHBoxLayout" name="horizontalLayout_12">
              <property name="spacing">
               <number>0</number>
@@ -1251,8 +1231,29 @@
              </item>
             </layout>
            </item>
-           <item row="2" column="3">
-            <widget class="QDoubleSpinBox" name="spinMinGraph3">
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>min.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>min.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>max.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QDoubleSpinBox" name="spinMaxGraph2">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -1264,7 +1265,34 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="5">
+           <item row="1" column="3">
+            <widget class="QDoubleSpinBox" name="spinMaxGraph1">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>max.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>max.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="3">
             <widget class="QDoubleSpinBox" name="spinMaxGraph3">
              <property name="enabled">
               <bool>false</bool>
@@ -1274,34 +1302,6 @@
              </property>
              <property name="maximum">
               <double>1000000.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>min.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="label_10">
-             <property name="text">
-              <string>min.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="4">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>max.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="4">
-            <widget class="QLabel" name="label_12">
-             <property name="text">
-              <string>max.</string>
              </property>
             </widget>
            </item>
@@ -1587,10 +1587,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupGraph3"/>
-  <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupLineWidth"/>
  </buttongroups>
 </ui>

@@ -51,7 +51,7 @@ void CPlot::setup(const QString& source, CPlotData::axistype_e type, const QStri
     factor = f;
     getX = funcGetX;
     getY = funcGetY;
-    limit.setup(source);
+    limit.setSource(source);
     updateData();
 }
 

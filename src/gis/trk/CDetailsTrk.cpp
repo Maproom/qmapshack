@@ -106,7 +106,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     propHandler->fillComboBox(comboGraph2);
     propHandler->fillComboBox(comboGraph3);
 
-    plot1 = new CPlotProfile(&trk, IPlot::eModeNormal, this);
+    plot1 = new CPlotProfile(&trk, trk.limitsGraph1, IPlot::eModeNormal, this);
     plot2 = new CPlot(&trk, trk.limitsGraph2, this);
     plot3 = new CPlot(&trk, trk.limitsGraph3, this);
 
@@ -756,19 +756,28 @@ void CDetailsTrk::slotSetLimitModeUser()
 void CDetailsTrk::slotSetLimitModeAuto()
 {
     CLimit * limit;
+    QDoubleSpinBox * spinMin;
+    QDoubleSpinBox * spinMax;
+
 
     QObject *s = sender();
     if(s == toolLimitGraph1)
     {
         limit = &trk.limitsGraph1;
+        spinMin = spinMinGraph1;
+        spinMax = spinMaxGraph1;
     }
     else if(s == toolLimitGraph2)
     {
         limit = &trk.limitsGraph2;
+        spinMin = spinMinGraph2;
+        spinMax = spinMaxGraph2;
     }
     else if(s == toolLimitGraph3)
     {
         limit = &trk.limitsGraph3;
+        spinMin = spinMinGraph3;
+        spinMax = spinMaxGraph3;
     }
     else
     {
@@ -776,6 +785,9 @@ void CDetailsTrk::slotSetLimitModeAuto()
     }
 
     limit->setMode(CLimit::eModeAutomatic);
+    spinMin->setValue(limit->getMin());
+    spinMax->setValue(limit->getMax());
+
 }
 
 void CDetailsTrk::slotSetLimitModeSys()

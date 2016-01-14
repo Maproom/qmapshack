@@ -18,19 +18,19 @@
 
 #include "gis/fit/decoder/CFitMessage.h"
 
-#include "gis/fit/defs/CFitProfileLockup.h"
+#include "gis/fit/defs/CFitProfileLookup.h"
 #include "gis/fit/defs/fit_const.h"
 
 
 CFitMessage::CFitMessage(const CFitDefinitionMessage& def)
     : fields(), globalMesgNr(def.getGlobalMesgNr()), localMesgNr(def.getLocalMesgNr()),
-    messageProfile(CFitProfileLockup::getProfile(globalMesgNr))
+    messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
 {
 }
 
 CFitMessage::CFitMessage()
     : fields(), globalMesgNr(fitGlobalMesgNrInvalid), localMesgNr(fitLocalMesgNrInvalid),
-    messageProfile(CFitProfileLockup::getProfile(fitGlobalMesgNrInvalid))
+    messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
 

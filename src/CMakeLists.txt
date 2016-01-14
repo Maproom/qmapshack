@@ -241,7 +241,7 @@ set( SRCS
         gis/fit/decoder/CFitCrcState.cpp
         gis/fit/defs/CFitBaseType.cpp
         gis/fit/decoder/CFitDecoder.cpp
-        gis/fit/defs/CFitProfileLockup.cpp
+        gis/fit/defs/CFitProfileLookup.cpp
         gis/fit/defs/CFitFieldProfile.cpp
         gis/fit/decoder/CFitByteDataTransformer.cpp
         gis/fit/decoder/CFitFieldBuilder.cpp
@@ -488,7 +488,7 @@ set( HDRS
         gis/fit/decoder/CFitRecordContentState.h
         gis/fit/decoder/CFitCrcState.h
         gis/fit/decoder/CFitDecoder.h
-        gis/fit/defs/CFitProfileLockup.h
+        gis/fit/defs/CFitProfileLookup.h
         gis/fit/defs/CFitFieldProfile.h
         gis/fit/decoder/CFitByteDataTransformer.h
         gis/fit/decoder/CFitFieldBuilder.h

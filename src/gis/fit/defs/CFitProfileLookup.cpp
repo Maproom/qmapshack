@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/fit/defs/CFitProfileLockup.h"
+#include "CFitProfileLookup.h"
 #include "gis/fit/defs/fit_enums.h"
 #include "gis/fit/defs/fit_fields.h"
 
@@ -1335,30 +1335,30 @@ void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
     allProfiles.insert(fitGlobalMesgNrInvalid, f);
 }
 
-CFitProfileLockup* fitLookupInstance = nullptr;
+CFitProfileLookup * fitLookupInstance = nullptr;
 
-CFitProfileLockup::CFitProfileLockup()
+CFitProfileLookup::CFitProfileLookup()
 {
     initProfiles(allProfiles);
-    connect(qApp, &QApplication::aboutToQuit, this, &CFitProfileLockup::slotCleanup);
+    connect(qApp, &QApplication::aboutToQuit, this, &CFitProfileLookup::slotCleanup);
 }
 
 
-CFitProfileLockup::~CFitProfileLockup()
+CFitProfileLookup::~CFitProfileLookup()
 {
     qDeleteAll(allProfiles);
 }
 
-void CFitProfileLockup::slotCleanup()
+void CFitProfileLookup::slotCleanup()
 {
     fitLookupInstance = nullptr;
     delete this;
 }
 
-const CFitProfile* CFitProfileLockup::getProfile(quint16 globalMesgNr)
+const CFitProfile*CFitProfileLookup::getProfile(quint16 globalMesgNr)
 {
     if(fitLookupInstance == nullptr)
-        fitLookupInstance = new CFitProfileLockup();
+        fitLookupInstance = new CFitProfileLookup();
 
     if (fitLookupInstance->allProfiles.contains(globalMesgNr))
     {
@@ -1367,10 +1367,10 @@ const CFitProfile* CFitProfileLockup::getProfile(quint16 globalMesgNr)
     return fitLookupInstance->allProfiles[fitGlobalMesgNrInvalid];
 }
 
-const CFitFieldProfile* CFitProfileLockup::getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr)
+const CFitFieldProfile*CFitProfileLookup::getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr)
 {
     if(fitLookupInstance == nullptr)
-        fitLookupInstance = new CFitProfileLockup();
+        fitLookupInstance = new CFitProfileLookup();
 
     if (fitLookupInstance->allProfiles.contains(globalMesgNr))
     {

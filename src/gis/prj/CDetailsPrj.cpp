@@ -66,7 +66,7 @@ void CDetailsPrj::resizeEvent(QResizeEvent * e)
 
 void CDetailsPrj::getTrackProfile(CGisItemTrk * trk, QImage& image)
 {
-    CPlotProfile plot(trk, IPlot::eModeIcon, this);
+    CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeIcon, this);
     plot.setSolid(true);
     plot.save(image);
 }

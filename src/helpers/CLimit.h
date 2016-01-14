@@ -53,7 +53,7 @@ public:
         return mode;
     }
 
-    void setup(const QString& source);
+    void setSource(const QString& source);
 
     qreal getMin() const;
     qreal getMax() const;

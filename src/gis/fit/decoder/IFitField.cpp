@@ -18,7 +18,7 @@
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/decoder/IFitField.h"
-#include "gis/fit/defs/CFitProfileLockup.h"
+#include "gis/fit/defs/CFitProfileLookup.h"
 #include "gis/fit/defs/fit_const.h"
 
 
@@ -40,7 +40,7 @@ IFitField::IFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldPro
 }
 
 IFitField::IFitField()
-        : fieldProfile(CFitProfileLockup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
+        : fieldProfile(CFitProfileLookup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
           globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&InvalidType), valid(false)
 {
 }

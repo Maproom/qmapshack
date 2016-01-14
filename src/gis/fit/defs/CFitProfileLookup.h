@@ -17,23 +17,23 @@
 **********************************************************************************************/
 
 
-#ifndef CFITPROFILELOCKUP_H
-#define CFITPROFILELOCKUP_H
+#ifndef CFITPROFILELOOKUP_H
+#define CFITPROFILELOOKUP_H
 
 #include "gis/fit/defs/CFitProfile.h"
 
-class CFitProfileLockup : public QObject
+class CFitProfileLookup : public QObject
 {
 Q_OBJECT
 public:
     static const CFitProfile* getProfile(quint16 globalMesgNr);
     static const CFitFieldProfile* getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr);
 private:
-    CFitProfileLockup();
-    ~CFitProfileLockup();
+    CFitProfileLookup();
+    ~CFitProfileLookup();
     QMap<quint16, CFitProfile*> allProfiles;
 private slots:
     void slotCleanup();
 };
 
-#endif // CFITPROFILELOCKUP_H
+#endif // CFITPROFILELOOKUP_H

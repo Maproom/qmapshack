@@ -98,10 +98,6 @@ public:
 
     virtual QString getName() const override;
     virtual quint8 getFieldDefNum() const override;
-    virtual qreal getScale() const override;
-    virtual quint16 getOffset() const override;
-    virtual bool hasScaleAndOffset() const override;
-    virtual QString getUnits() const override;
     virtual CFitBaseType& getBaseType() const override;
 
     virtual QString getTyp() const override { return "component"; }

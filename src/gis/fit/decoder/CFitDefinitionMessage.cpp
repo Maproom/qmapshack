@@ -19,7 +19,7 @@
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 
 #include "gis/fit/defs/CFitBaseType.h"
-#include "gis/fit/defs/CFitProfileLockup.h"
+#include "gis/fit/defs/CFitProfileLookup.h"
 
 static const quint8 fitArchitecureEndianMask = 0x01;
 
@@ -31,7 +31,7 @@ CFitDefinitionMessage::CFitDefinitionMessage()
 
 CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
     : globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields),
-      localMesgNr(copy.localMesgNr), fields(copy.fields), messageProfile(CFitProfileLockup::getProfile(globalMesgNr))
+      localMesgNr(copy.localMesgNr), fields(copy.fields), messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
 {
     for(CFitFieldDefinition& field : fields)
     {
@@ -41,7 +41,7 @@ CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
 
 CFitDefinitionMessage::CFitDefinitionMessage(quint8 localMesgNr)
     : globalMesgNr(fitGlobalMesgNrInvalid), architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields(),
-      messageProfile(CFitProfileLockup::getProfile(fitGlobalMesgNrInvalid))
+      messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
 
@@ -54,7 +54,7 @@ void CFitDefinitionMessage::setArchiteture(quint8 arch)
 void CFitDefinitionMessage::setGlobalMesgNr(quint16 globalMesgNr)
 {
     this->globalMesgNr = globalMesgNr;
-    messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
+    messageProfile = CFitProfileLookup::getProfile(globalMesgNr);
 }
 
 void CFitDefinitionMessage::setNrOfFields(quint8 nrOfFields)

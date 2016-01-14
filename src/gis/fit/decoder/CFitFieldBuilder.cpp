@@ -19,7 +19,7 @@
 
 #include "gis/fit/decoder/CFitByteDataTransformer.h"
 #include "gis/fit/decoder/CFitFieldBuilder.h"
-#include "gis/fit/defs/CFitProfileLockup.h"
+#include "gis/fit/defs/CFitProfileLookup.h"
 
 
 void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
@@ -38,7 +38,7 @@ IFitField *CFitFieldBuilder::buildField(const CFitFieldDefinition &def, quint8 *
 {
     CFitByteDataTransformer::swapFieldData(def, fieldData);
     const CFitBaseType& baseType = def.getBaseType();
-    const CFitFieldProfile* fieldProfile = CFitProfileLockup::getFieldForProfile(message.getGlobalMesgNr(), def.getDefNr());
+    const CFitFieldProfile* fieldProfile = CFitProfileLookup::getFieldForProfile(message.getGlobalMesgNr(), def.getDefNr());
     if (baseType.isSignedInt())
     {
         return buildSIntField(def, fieldProfile, fieldData);

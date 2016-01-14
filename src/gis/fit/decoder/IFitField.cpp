@@ -34,18 +34,15 @@ IFitField::IFitField(const IFitField & copy)
 {
 }
 
-IFitField::IFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldProfile* profile, bool valid)
+IFitField::IFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldProfile* profile, bool valid)
     : fieldProfile(profile), globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr),baseType(&profile->getBaseType()), valid(valid)
 {
 }
 
-IFitField::IFitField() : fieldProfile(CFitProfileLockup::getFieldForProfile(fitGlobalMesgNrInvalid,
-                                                                            fitFieldDefNrInvalid))
+IFitField::IFitField()
+        : fieldProfile(CFitProfileLockup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
+          globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&InvalidType), valid(false)
 {
-    globalMesgNr = fitGlobalMesgNrInvalid;
-    fieldDefNr = fitFieldDefNrInvalid;
-    baseType = &InvalidType;
-    valid = false;
 }
 
 QString IFitField::fieldInfo() const
@@ -62,25 +59,6 @@ QString IFitField::fieldInfo() const
     return str;
 }
 
-uint16_t IFitField::getGlobalMesgNr() const
-{
-    return globalMesgNr;
-}
-
-uint8_t IFitField::getFieldDefNr() const
-{
-    return fieldDefNr;
-}
-bool IFitField::isValidValue() const
-{
-    return valid;
-}
-
-
-const CFitBaseType&IFitField::getBaseType() const
-{
-    return *baseType;
-}
 
 
 QString CFitFloatField::getString() const
@@ -90,7 +68,7 @@ QString CFitFloatField::getString() const
 
 QByteArray CFitFloatField::getBytes() const
 {
-    return QByteArray((const char*)&value, sizeof(double));
+    return QByteArray((const char*)&value, sizeof(qreal));
 }
 
 int CFitFloatField::getSIntValue() const
@@ -120,7 +98,7 @@ unsigned int CFitStringField::getUIntValue() const
     return value.toUInt();
 }
 
-double CFitStringField::getDoubleValue() const
+qreal CFitStringField::getDoubleValue() const
 {
     return value.toDouble();
 }
@@ -147,7 +125,7 @@ unsigned int CFitByteField::getUIntValue() const
     return value.toUInt();
 }
 
-double CFitByteField::getDoubleValue() const
+qreal CFitByteField::getDoubleValue() const
 {
     return value.toDouble();
 }

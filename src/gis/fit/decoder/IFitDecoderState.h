@@ -41,14 +41,14 @@ class IFitDecoderState
 public:
     struct shared_state_data_t
     {
-        uint16_t crc;
-        uint32_t fileLength;
-        uint32_t fileBytesRead;
-        uint8_t lastTimeOffset;
-        uint32_t timestamp;
+        quint16 crc;
+        quint32 fileLength;
+        quint32 fileBytesRead;
+        quint8 lastTimeOffset;
+        quint32 timestamp;
         CFitDefinitionMessage* lastDefintion;
         CFitMessage* lastMessage;
-        QMap<uint8_t, CFitDefinitionMessage> defintions;
+        QMap<quint8, CFitDefinitionMessage> defintions;
         QList<CFitDefinitionMessage> defintionHistory;
         QList<CFitMessage> messages;
     };
@@ -57,31 +57,31 @@ public:
     virtual ~IFitDecoderState() {}
 
     virtual void reset() = 0;
-    decode_state_e processByte(uint8_t &dataByte);
+    decode_state_e processByte(quint8 &dataByte);
 
 protected:
-    virtual decode_state_e process(uint8_t &dataByte) = 0;
+    virtual decode_state_e process(quint8 &dataByte) = 0;
 
     CFitMessage* latestMessage();
     void addMessage(const CFitDefinitionMessage& definition);
 
-    void setFileLength(uint32_t fileLength);
+    void setFileLength(quint32 fileLength);
     void resetFileBytesRead();
     void incFileBytesRead();
-    uint32_t bytesLeftToRead();
+    quint32 bytesLeftToRead();
 
     CFitDefinitionMessage* latestDefinition();
-    CFitDefinitionMessage* defintion(uint32_t localMessageType);
+    CFitDefinitionMessage* defintion(quint32 localMessageType);
     void addDefinition(CFitDefinitionMessage definition);
     void endDefintion();
 
-    void setTimestamp(uint32_t fullTimestamp);
-    void setTimestampOffset(uint32_t offsetTimestamp);
-    uint32_t getTimestamp();
-    uint16_t getCrc();
+    void setTimestamp(quint32 fullTimestamp);
+    void setTimestampOffset(quint32 offsetTimestamp);
+    quint32 getTimestamp();
+    quint16 getCrc();
 
 private:
-    void buildCrc(uint8_t byte);
+    void buildCrc(quint8 byte);
 
     shared_state_data_t &data;
 };

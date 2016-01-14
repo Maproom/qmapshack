@@ -32,7 +32,7 @@
    Encapsulates the access to the FIT messages. Looping over the read FIT messages can be done using the
    methods nextMesg() and hasMoreMesg() (Iterator pattern).
  */
-class CFitStream
+class CFitStream final
 {
 public:
     CFitStream(QFile& dev) : file(dev) { }
@@ -67,15 +67,15 @@ public:
     /**
        return: the next message of the given message type (xx_MESG_NUM) beginning reading at the current position
      */
-    const CFitMessage& nextMesgOf(uint16_t mesgNum);
+    const CFitMessage& nextMesgOf(quint16 mesgNum);
 
     /**
        return: gets the first message of the given type (xx_MESG_NUM) beginning reading at start of stream.
        Sets the strema to the beginning again.
      */
-    const CFitMessage& firstMesgOf(uint16_t mesgNum);
+    const CFitMessage& firstMesgOf(quint16 mesgNum);
 
-    int countMesgOf(uint16_t mesgNr);
+    int countMesgOf(quint16 mesgNr);
 
 
     QString getFileName() { return file.fileName(); }

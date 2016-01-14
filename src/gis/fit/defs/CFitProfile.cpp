@@ -19,49 +19,54 @@
 #include "gis/fit/defs/CFitProfile.h"
 
 
-CFitProfile::CFitProfile(QString name, uint16_t globalMesgNr) : name(name), globalMesgNr(globalMesgNr), fields()
-{
-}
+CFitProfile::CFitProfile(QString name, quint16 globalMesgNr) : name(name), globalMesgNr(globalMesgNr), fields() {}
 
-CFitProfile::CFitProfile() : CFitProfile("unknown", fitGlobalMesgNrInvalid)
-{
-}
+CFitProfile::CFitProfile() : CFitProfile("unknown", fitGlobalMesgNrInvalid) {}
 
 CFitProfile::CFitProfile(const CFitProfile& copy)
-    : name(copy.name), globalMesgNr(copy.globalMesgNr), fields(copy.fields)
+    : name(copy.name), globalMesgNr(copy.globalMesgNr), fields(copy.fields) {}
+
+CFitProfile::~CFitProfile()
 {
+    qDeleteAll(fields);
 }
 
-void CFitProfile::addField(CFitFieldProfile* field)
-{
-    fields.insert(field->getFieldDefNum(), field);
-    field->setParent(this);
-}
 
 
 // dummy field profile for unkown definitions
 static CFitFieldProfile dummyFieldProfile = CFitFieldProfile();
 
-const CFitFieldProfile* CFitProfile::getField(uint8_t fieldDefNr) const
+const CFitFieldProfile* CFitProfile::getField(quint8 fieldDefNr) const
 {
     if (fields.contains(fieldDefNr))
     {
+        // return fields.constFind(fieldDefNr).operator->();
         return fields[fieldDefNr];
     }
     return &dummyFieldProfile;
 }
 
-void CFitProfile::addSubfield(uint8_t fieldDefNr, CFitSubfieldProfile* field)
+
+void CFitProfile::addField(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units)
 {
+    CFitFieldProfile* field= new CFitFieldProfile(this, name, baseType, fieldDefNr, scale, offset, units);
+    fields.insert(fieldDefNr, field);
+}
+void CFitProfile::addSubfield(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal
+scale, quint16 offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue)
+{
+    CFitSubfieldProfile* field = new CFitSubfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, subRefFieldDefNr, subRefFieldValue);
     fields[fieldDefNr]->addSubfield(field);
 }
-
-void CFitProfile::addComponent(uint8_t fieldDefNr, CFitComponentfieldProfile* field)
+void CFitProfile::addComponent(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
 {
+    CFitComponentfieldProfile* field = new CFitComponentfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, componentFieldDefNr, bits);
     fields[fieldDefNr]->addComponent(field);
-}
 
-void CFitProfile::addComponent(uint8_t fieldDefNr, int subfieldIndex, CFitComponentfieldProfile* field)
+}
+void CFitProfile::addComponent(int subfieldIndex, QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
 {
+    CFitComponentfieldProfile* field = new  CFitComponentfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, componentFieldDefNr, bits);
     fields[fieldDefNr]->addComponent(subfieldIndex, field);
 }
+

@@ -33,7 +33,7 @@ void CFitRecordContentState::reset()
     offset = 0;
 }
 
-decode_state_e CFitRecordContentState::process(uint8_t &dataByte)
+decode_state_e CFitRecordContentState::process(quint8 &dataByte)
 {
     CFitDefinitionMessage* def = latestDefinition();
     switch (offset++)
@@ -55,7 +55,7 @@ decode_state_e CFitRecordContentState::process(uint8_t &dataByte)
 
     case 3:
         // global message number
-        globalMesgNr = globalMesgNr | ((uint16_t) dataByte << 8);
+        globalMesgNr = globalMesgNr | ((quint16) dataByte << 8);
 
         if (architecture == eFitArchEndianBig)
         {

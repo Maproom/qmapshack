@@ -36,10 +36,8 @@ CFitMessage::CFitMessage()
 
 CFitMessage::~CFitMessage()
 {
-    for(IFitField * field : fields)
-    {
-        delete field;
-    }
+    qDeleteAll(fields);
+    fields.clear();
 }
 
 bool CFitMessage::isValid() const
@@ -61,17 +59,17 @@ QStringList CFitMessage::messageInfo() const
     }
     return list;
 }
-uint16_t CFitMessage::getGlobalMesgNr() const
+quint16 CFitMessage::getGlobalMesgNr() const
 {
     return globalMesgNr;
 }
 
-uint8_t CFitMessage::getLocalMesgNr() const
+quint8 CFitMessage::getLocalMesgNr() const
 {
     return localMesgNr;
 }
 
-bool CFitMessage::hasField(const uint8_t fieldDefNum) const
+bool CFitMessage::hasField(const quint8 fieldDefNum) const
 {
     return fields.contains(fieldDefNum);
 }
@@ -87,7 +85,7 @@ const IFitField & invalidField()
     return *dummyField;
 }
 
-const IFitField & CFitMessage::getField(const uint8_t fieldDefNum) const
+const IFitField & CFitMessage::getField(const quint8 fieldDefNum) const
 {
     if(hasField(fieldDefNum))
     {
@@ -98,32 +96,37 @@ const IFitField & CFitMessage::getField(const uint8_t fieldDefNum) const
 
 void CFitMessage::addField(IFitField * field)
 {
+    if(fields.contains(field->getFieldDefNr()))
+    {
+        qCritical("fit field %d already added to map.", (int) field->getFieldDefNr());
+        delete field;
+    }
     fields.insert(field->getFieldDefNr(), field);
 }
 
-bool CFitMessage::isFieldValueValid(const uint8_t fieldDefNum) const
+bool CFitMessage::isFieldValueValid(const quint8 fieldDefNum) const
 {
     return getField(fieldDefNum).isValidValue();
 }
 
-int CFitMessage::getFieldIntValue(const uint8_t fieldDefNum) const
+int CFitMessage::getFieldIntValue(const quint8 fieldDefNum) const
 {
     return getField(fieldDefNum).getSIntValue();
 }
-unsigned int CFitMessage::getFieldUIntValue(const uint8_t fieldDefNum) const
+unsigned int CFitMessage::getFieldUIntValue(const quint8 fieldDefNum) const
 {
     return getField(fieldDefNum).getUIntValue();
 }
-double CFitMessage::getFieldDoubleValue(const uint8_t fieldDefNum) const
+qreal CFitMessage::getFieldDoubleValue(const quint8 fieldDefNum) const
 {
     return getField(fieldDefNum).getDoubleValue();
 }
 
-QString CFitMessage::getFieldString(const uint8_t fieldDefNum) const
+QString CFitMessage::getFieldString(const quint8 fieldDefNum) const
 {
     return getField(fieldDefNum).getString();
 }
-QByteArray CFitMessage::getFieldBytes(const uint8_t fieldDefNum) const
+QByteArray CFitMessage::getFieldBytes(const quint8 fieldDefNum) const
 {
     return getField(fieldDefNum).getBytes();
 }

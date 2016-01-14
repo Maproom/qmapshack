@@ -30,9 +30,9 @@
 
 #define FITDEBUG(level, cmd) if(FITDEBUGLVL >= level) { cmd; }
 
-static const uint8_t fitLocalMesgNrInvalid = 255;
-static const uint16_t fitGlobalMesgNrInvalid = 0xffff;
-static const uint8_t fitFieldDefNrInvalid = 255;
+static const quint8 fitLocalMesgNrInvalid = 255;
+static const quint16 fitGlobalMesgNrInvalid = 0xffff;
+static const quint8 fitFieldDefNrInvalid = 255;
 
 typedef enum
 {

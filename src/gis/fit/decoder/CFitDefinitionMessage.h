@@ -26,39 +26,39 @@
 #include <QtCore>
 
 
-class CFitDefinitionMessage
+class CFitDefinitionMessage final
 {
 public:
-    CFitDefinitionMessage(uint8_t localMesgNr);
+    CFitDefinitionMessage(quint8 localMesgNr);
 
     CFitDefinitionMessage();
     CFitDefinitionMessage(const CFitDefinitionMessage& copy);
 
-    void setArchiteture(uint8_t arch);
-    void setGlobalMesgNr(uint16_t globalMesgNr);
-    void setNrOfFields(uint8_t nrOfFields);
+    void setArchiteture(quint8 arch);
+    void setGlobalMesgNr(quint16 globalMesgNr);
+    void setNrOfFields(quint8 nrOfFields);
 
-    uint16_t getGlobalMesgNr() const;
-    uint8_t getArchitectureBit() const;
-    uint8_t getNrOfFields() const;
-    uint8_t getLocalMesgNr() const;
+    quint16 getGlobalMesgNr() const;
+    quint8 getArchitectureBit() const;
+    quint8 getNrOfFields() const;
+    quint8 getLocalMesgNr() const;
 
-    const CFitProfile* profile() const { return messageProfile; }
+    const CFitProfile& profile() const { return *messageProfile; }
 
     const QList<CFitFieldDefinition>& getFields() const;
     void addField(CFitFieldDefinition field);
-    bool hasField(const uint8_t fieldNum) const;
-    const CFitFieldDefinition& getField(const uint8_t fieldNum) const;
-    const CFitFieldDefinition& getFieldByIndex(const uint16_t index) const;
+    bool hasField(const quint8 fieldNum) const;
+    const CFitFieldDefinition& getField(const quint8 fieldNum) const;
+    const CFitFieldDefinition& getFieldByIndex(const quint16 index) const;
 
     QStringList messageInfo() const;
 
 
 private:
-    uint16_t globalMesgNr;
-    uint8_t architecture;
-    uint8_t nrOfFields;
-    uint8_t localMesgNr;
+    quint16 globalMesgNr;
+    quint8 architecture;
+    quint8 nrOfFields;
+    quint8 localMesgNr;
     QList<CFitFieldDefinition> fields;
     const CFitProfile* messageProfile;
 };

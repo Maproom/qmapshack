@@ -38,15 +38,15 @@ CFitDecoder::CFitDecoder()
 
 CFitDecoder::~CFitDecoder()
 {
-    for(IFitDecoderState * state: stateMap)
-    {
-        delete state;
-    }
+    qDeleteAll(stateMap);
+    stateMap.clear();
+
+    data.messages.clear();
 }
 
 void CFitDecoder::resetSharedData()
 {
-    data.defintions = QMap<uint8_t, CFitDefinitionMessage>();
+    data.defintions = QMap<quint8, CFitDefinitionMessage>();
     data.defintionHistory = QList<CFitDefinitionMessage>();
     data.messages = QList<CFitMessage>();
     data.lastDefintion = nullptr;
@@ -91,7 +91,7 @@ bool CFitDecoder::decode(QFile &file)
 
     file.seek(0);
 
-    uint8_t dataByte;
+    quint8 dataByte;
     decode_state_e state = eDecoderStateFileHeader;
     while (!file.atEnd())
     {

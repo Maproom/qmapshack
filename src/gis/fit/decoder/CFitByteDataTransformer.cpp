@@ -19,7 +19,7 @@
 #include "gis/fit/decoder/CFitByteDataTransformer.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 
-unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, uint8_t* rawData)
+unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, quint8* rawData)
 {
     switch(baseType.nr())
     {
@@ -41,7 +41,7 @@ unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType,
     }
 }
 
-int CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, uint8_t *rawData)
+int CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint8 *rawData)
 {
     switch(baseType.nr())
     {
@@ -59,7 +59,7 @@ int CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, uint8_t 
     }
 }
 
-double CFitByteDataTransformer::getFloatValue(const CFitBaseType& baseType, uint8_t* rawData)
+qreal CFitByteDataTransformer::getFloatValue(const CFitBaseType& baseType, quint8* rawData)
 {
     switch(baseType.nr())
     {
@@ -74,59 +74,63 @@ double CFitByteDataTransformer::getFloatValue(const CFitBaseType& baseType, uint
     }
 }
 
-uint8_t CFitByteDataTransformer::getUint8(uint8_t* rawData)
+quint8 CFitByteDataTransformer::getUint8(quint8* rawData)
 {
-    return (uint8_t) rawData[0];
+    return (quint8) rawData[0];
 }
 
-uint16_t CFitByteDataTransformer::getUint16(uint8_t* rawData)
+quint16 CFitByteDataTransformer::getUint16(quint8* rawData)
 {
-    return ((uint16_t)rawData[1] << 8) | (uint16_t)rawData[0];
+    return ((quint16)rawData[1] << 8) | (quint16)rawData[0];
 }
 
-uint32_t CFitByteDataTransformer::getUint32(uint8_t* rawData)
+quint32 CFitByteDataTransformer::getUint32(quint8* rawData)
 {
-    return ((uint32_t)rawData[3] << 24) | ((uint32_t)rawData[2] << 16) | ((uint32_t)rawData[1] << 8) | (uint32_t)rawData[0];
+    return ((quint32)rawData[3] << 24) | ((quint32)rawData[2] << 16) | ((quint32)rawData[1] << 8) | (quint32)rawData[0];
 }
 
-int8_t CFitByteDataTransformer::getSint8(uint8_t* rawData)
+qint8 CFitByteDataTransformer::getSint8(quint8* rawData)
 {
     return (int8_t) rawData[0];
 }
 
-int16_t CFitByteDataTransformer::getSint16(uint8_t* rawData)
+qint16 CFitByteDataTransformer::getSint16(quint8* rawData)
 {
-    return ((int16_t)rawData[1] << 8) | (int16_t)rawData[0];
+    return ((qint16)rawData[1] << 8) | (qint16)rawData[0];
 }
 
-int32_t CFitByteDataTransformer::getSint32(uint8_t* rawData)
+qint32 CFitByteDataTransformer::getSint32(quint8* rawData)
 {
-    return ((int32_t)rawData[3] << 24) | ((int32_t)rawData[2] << 16) | ((int32_t)rawData[1] << 8) | (int32_t)rawData[0];
+    return ((qint32)rawData[3] << 24) | ((qint32)rawData[2] << 16) | ((qint32)rawData[1] << 8) | (qint32)rawData[0];
 }
 
-float CFitByteDataTransformer::getFloat32(uint8_t* rawData)
+qreal CFitByteDataTransformer::getFloat32(quint8* rawData)
 {
-    int32_t fValue = (int32_t) (((int32_t)rawData[3] << 24) | ((int32_t)rawData[2] << 16) | ((int32_t)rawData[1] << 8) | rawData[0]);
-    float value;
-    memcpy(&value, &fValue, sizeof(float));
+    qint32 fValue = (qint32) (((qint32)rawData[3] << 24) | ((qint32)rawData[2] << 16) | ((qint32)rawData[1] << 8) | rawData[0]);
+    // comment: qreal is a double type (on allmost all systems). Here we need to go through a 32 bit flaoting type.
+    float tmp;
+    memcpy(&tmp, &fValue, sizeof(tmp));
+    qreal value = tmp;
     return value;
 }
 
-double CFitByteDataTransformer::getFloat64(uint8_t* rawData)
+qreal CFitByteDataTransformer::getFloat64(quint8* rawData)
 {
     unsigned long long dValue = ((unsigned long long) rawData[7] << 56) | ((unsigned long long) rawData[6] << 48)
                                 | ((unsigned long long) rawData[5] << 40) | ((unsigned long long) rawData[4] << 32)
                                 | ((unsigned long long) rawData[3] << 24) | ((unsigned long long) rawData[2] << 16)
                                 | ((unsigned long long) rawData[1] << 8) | rawData[0];
-    double value;
-    memcpy(&value, &dValue, sizeof(double));
+    // comment: qreal is a double type (on allmost all systems). Here we need to go through a 64 bit flaoting type.
+    double tmp;
+    memcpy(&tmp, &dValue, sizeof(tmp));
+    qreal value = tmp;
     return value;
 }
 
-QString CFitByteDataTransformer::getString(uint8_t* rawData, uint8_t length)
+QString CFitByteDataTransformer::getString(quint8* rawData, quint8 length)
 {
     // find the 0 termination
-    uint8_t i = 0;
+    quint8 i = 0;
     while(rawData[i] != 0 )
     {
         i++;
@@ -140,12 +144,12 @@ QString CFitByteDataTransformer::getString(uint8_t* rawData, uint8_t length)
     return QString::fromUtf8((const char*)rawData, i);
 }
 
-QByteArray CFitByteDataTransformer::getBytes(uint8_t* rawData, uint8_t length)
+QByteArray CFitByteDataTransformer::getBytes(quint8* rawData, quint8 length)
 {
     return QByteArray((const char*)rawData, length);
 }
 
-void CFitByteDataTransformer::swapFieldData(const CFitFieldDefinition& fieldDef, uint8_t* fieldData)
+void CFitByteDataTransformer::swapFieldData(const CFitFieldDefinition& fieldDef, quint8* fieldData)
 {
     if (fieldDef.getEndianAbilityFlag() && (fieldDef.parent().getArchitectureBit() != eFitArchEndianLittle))
     {
@@ -157,7 +161,7 @@ void CFitByteDataTransformer::swapFieldData(const CFitFieldDefinition& fieldDef,
         {
             for (int i = 0; i < (typeSize / 2); i++)
             {
-                uint8_t tmp = (uint8_t)fieldData[element * typeSize + i];
+                quint8 tmp = (quint8)fieldData[element * typeSize + i];
                 fieldData[element * typeSize + i] = fieldData[element * typeSize + typeSize - i - 1];
                 fieldData[element * typeSize + typeSize - i - 1] = tmp;
             }

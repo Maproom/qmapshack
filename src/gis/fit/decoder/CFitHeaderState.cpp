@@ -37,10 +37,10 @@
  * 13: CRC MSB
  */
 
-static const uint8_t fitProtocolVersionMajor =1;
+static const quint8 fitProtocolVersionMajor =1;
 
-static const uint8_t fitProtocolMajerVersionShift = 4;
-static const uint8_t fitProtocolMajorVersionMask = 0x0F << fitProtocolMajerVersionShift;
+static const quint8 fitProtocolMajerVersionShift = 4;
+static const quint8 fitProtocolMajorVersionMask = 0x0F << fitProtocolMajerVersionShift;
 
 void CFitHeaderState::reset()
 {
@@ -51,7 +51,7 @@ void CFitHeaderState::reset()
     resetFileBytesRead();
 }
 
-decode_state_e CFitHeaderState::process(uint8_t &dataByte)
+decode_state_e CFitHeaderState::process(quint8 &dataByte)
 {
     bool invalid = false;
     switch (offset++)
@@ -73,22 +73,22 @@ decode_state_e CFitHeaderState::process(uint8_t &dataByte)
 
     case 4:
         // data size
-        dataSize = (uint32_t) (dataByte & 0xFF);
+        dataSize = (quint32) (dataByte & 0xFF);
         break;
 
     case 5:
         // data size
-        dataSize |= (uint32_t) (dataByte & 0xFF) << 8;
+        dataSize |= (quint32) (dataByte & 0xFF) << 8;
         break;
 
     case 6:
         // data size
-        dataSize |= (uint32_t) (dataByte & 0xFF) << 16;
+        dataSize |= (quint32) (dataByte & 0xFF) << 16;
         break;
 
     case 7:
         // data size
-        dataSize |= (uint32_t) (dataByte & 0xFF) << 24;
+        dataSize |= (quint32) (dataByte & 0xFF) << 24;
         setFileLength(dataSize + headerLength + 2);     // include crc
         break;
 

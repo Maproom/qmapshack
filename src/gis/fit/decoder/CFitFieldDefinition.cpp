@@ -24,13 +24,12 @@
 
 
 
-static const uint8_t fitEndianFlagMask = 0x80;
+static const quint8 fitEndianFlagMask = 0x80;
 
 
-CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t defNr, uint8_t size, uint8_t type)
-    : defNr(defNr), size(size), type(type), parentDefintion(parent)
+CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type)
+    : defNr(defNr), size(size), type(type), baseType(CFitBaseTypeMap::get(type)), parentDefintion(parent)
 {
-    baseType = CFitBaseTypeMap::get(type);
     fieldProfile = CFitProfileLockup::getFieldForProfile(parentDefintion ? parentDefintion->getGlobalMesgNr() : fitGlobalMesgNrInvalid, defNr);
 }
 
@@ -52,17 +51,17 @@ QString CFitFieldDefinition::fieldInfo() const
     return fstr;
 }
 
-uint8_t CFitFieldDefinition::getDefNr() const
+quint8 CFitFieldDefinition::getDefNr() const
 {
     return defNr;
 }
 
-uint8_t CFitFieldDefinition::getSize() const
+quint8 CFitFieldDefinition::getSize() const
 {
     return size;
 }
 
-uint8_t CFitFieldDefinition::getType() const
+quint8 CFitFieldDefinition::getType() const
 {
     return type;
 }

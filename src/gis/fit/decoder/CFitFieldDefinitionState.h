@@ -21,21 +21,21 @@
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-class CFitFieldDefinitionState : public IFitDecoderState
+class CFitFieldDefinitionState final: public IFitDecoderState
 {
 public:
     CFitFieldDefinitionState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldDef) { reset(); }
     virtual ~CFitFieldDefinitionState() {}
 
     virtual void reset() override;
-    virtual decode_state_e process(uint8_t &dataByte) override;
+    virtual decode_state_e process(quint8 &dataByte) override;
 
 private:
-    uint8_t offset;
+    quint8 offset;
 
-    uint8_t defNr;
-    uint8_t type;
-    uint8_t size;
+    quint8 defNr;
+    quint8 type;
+    quint8 size;
 };
 
 #endif //CFITFIELDDEFINITIONSTATE_H

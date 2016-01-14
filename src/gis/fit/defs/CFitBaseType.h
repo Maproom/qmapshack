@@ -40,16 +40,16 @@ typedef enum
     TypeInvalid = 0xff
 } BaseTypeNr;
 
-class CFitBaseType
+class CFitBaseType final
 {
 public:
-    CFitBaseType(BaseTypeNr baseTypeNr, uint8_t* invalidBytes, uint8_t size, QString name);
+    CFitBaseType(BaseTypeNr baseTypeNr, quint8* invalidBytes, quint8 size, QString name);
     CFitBaseType();
     ~CFitBaseType();
 
-    uint8_t size() const;
+    quint8 size() const;
     BaseTypeNr nr() const;
-    uint8_t* invalidValueBytes() const;
+    const quint8* invalidValueBytes() const;
     bool isInteger() const;
     bool isSignedInt() const;
     bool isUnsignedInt() const;
@@ -60,8 +60,9 @@ public:
     QString name() const;
 
 private:
-    uint8_t* invalidBytes;
-    uint8_t typeSize;
+    // fixed size to 8, which is enogh for float64
+    quint8 invalidBytes[8];
+    quint8 typeSize;
     BaseTypeNr baseTypeNr;
     QString namestr;
 };
@@ -88,14 +89,14 @@ extern CFitBaseType InvalidType;
 class CFitBaseTypeMap
 {
 public:
-    static const uint8_t fitBaseTypeNumMask =0x1F; // 0000 0000 0001 1111
+    static const quint8 fitBaseTypeNumMask =0x1F; // 0000 0000 0001 1111
 
     /**
      * param nr: either the "real" base type number (0 -13) or the masked base type byte.
      */
-    static CFitBaseType* get(uint8_t nr);
+    static CFitBaseType* get(quint8 nr);
 private:
-    static QMap<uint8_t, CFitBaseType> baseTypes;
+    static QMap<quint8, CFitBaseType> baseTypes;
 };
 
 

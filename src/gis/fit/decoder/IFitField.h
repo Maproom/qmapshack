@@ -30,7 +30,7 @@ class IFitField
 {
 public:
     IFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, bool valid);
-    IFitField(uint16_t globalMesgNr, uint8_t fieldDefNr, const CFitFieldProfile* profile, bool valid);
+    IFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldProfile* profile,  bool valid);
     IFitField(const IFitField & copy);
     IFitField();
     virtual ~IFitField() { /* nothing to do here, profile and base type are global and not to delete */ }
@@ -38,26 +38,27 @@ public:
     void setProfile(const CFitFieldProfile* profile) { fieldProfile = profile; }
     virtual QString fieldInfo() const;
 
-    const CFitBaseType& getBaseType() const;
-    uint16_t getGlobalMesgNr() const;
-    uint8_t getFieldDefNr() const;
+    const CFitBaseType& getBaseType() const { return *baseType; }
+    quint16 getGlobalMesgNr() const { return globalMesgNr; }
+    quint8 getFieldDefNr() const { return fieldDefNr; }
     const CFitFieldProfile& profile() const { return *fieldProfile; }
 
-    bool isValidValue() const;
+    bool isValidValue() const { return valid; }
 
     virtual QString getString() const { return ""; }
     virtual QByteArray getBytes() const { return QByteArray(); }
     virtual int getSIntValue() const { return 0; }
     virtual unsigned int getUIntValue() const { return 0; }
-    virtual double getDoubleValue() const { return 0; }
+    virtual qreal getDoubleValue() const { return 0; }
 
 protected:
     const CFitFieldProfile* fieldProfile;
-    uint16_t globalMesgNr;
-    uint8_t fieldDefNr;
+    quint16 globalMesgNr;
+    quint8 fieldDefNr;
     const CFitBaseType* baseType;
     bool valid;
 };
+
 
 template <class T>
 class CFitIntField : public IFitField
@@ -65,8 +66,8 @@ class CFitIntField : public IFitField
 public:
     CFitIntField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, T value, bool valid)
         : IFitField(fieldDefinition, profile, valid), value(value) {}
-    CFitIntField(const IFitField & field, const CFitFieldProfile* profile, T value, bool valid)
-        : IFitField(field.getGlobalMesgNr(), field.getFieldDefNr(), profile, valid), value(value) {}
+    CFitIntField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldProfile* profile, T value, bool valid)
+        : IFitField(globalMesgNr, fieldDefNr, profile, valid), value(value) {}
     CFitIntField() : IFitField(), value(0) {}
 
     virtual QString fieldInfo() const override;
@@ -75,7 +76,7 @@ public:
     virtual QByteArray getBytes() const override;
     virtual int getSIntValue() const override {return value; }
     virtual unsigned int getUIntValue() const override {return value; }
-    virtual double getDoubleValue() const override;
+    virtual qreal getDoubleValue() const override;
 
 private:
     T value;
@@ -108,7 +109,7 @@ QByteArray CFitIntField<T>::getBytes() const
 }
 
 template <class T>
-double CFitIntField<T>::getDoubleValue() const
+qreal CFitIntField<T>::getDoubleValue() const
 {
     if(profile().hasScaleAndOffset())
     {
@@ -122,7 +123,7 @@ double CFitIntField<T>::getDoubleValue() const
 class CFitFloatField : public IFitField
 {
 public:
-    CFitFloatField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, double value, bool valid)
+    CFitFloatField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, qreal value, bool valid)
         : IFitField(fieldDefinition, profile, valid), value(value) {}
 
     CFitFloatField() : IFitField(), value(0) {}
@@ -131,10 +132,10 @@ public:
     virtual QByteArray getBytes() const override;
     virtual int getSIntValue() const override;
     virtual unsigned int getUIntValue() const override;
-    virtual double getDoubleValue() const override {return value; }
+    virtual qreal getDoubleValue() const override {return value; }
 
 private:
-    double value;
+    qreal value;
 };
 
 class CFitStringField : public IFitField
@@ -151,7 +152,7 @@ public:
     virtual QByteArray getBytes() const override;
     virtual int getSIntValue() const override;
     virtual unsigned int getUIntValue() const override;
-    virtual double getDoubleValue() const override;
+    virtual qreal getDoubleValue() const override;
 
 private:
     QString value;
@@ -168,7 +169,7 @@ public:
     virtual QByteArray getBytes() const override;
     virtual int getSIntValue() const override;
     virtual unsigned int getUIntValue() const override;
-    virtual double getDoubleValue() const override;
+    virtual qreal getDoubleValue() const override;
 
 private:
     QByteArray value;

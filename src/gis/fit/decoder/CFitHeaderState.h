@@ -21,19 +21,19 @@
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-class CFitHeaderState : public IFitDecoderState
+class CFitHeaderState final: public IFitDecoderState
 {
 public:
     CFitHeaderState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFileHeader) { reset(); }
     virtual ~CFitHeaderState() {}
 
     virtual void reset() override;
-    virtual decode_state_e process(uint8_t &dataByte) override;
+    virtual decode_state_e process(quint8 &dataByte) override;
 
 private:
-    uint8_t offset;
-    uint8_t headerLength;
-    uint32_t dataSize;
+    quint8 offset;
+    quint8 headerLength;
+    quint32 dataSize;
 };
 
 #endif //CFITHEADERSTATE_H

@@ -27,25 +27,26 @@
 class CFitByteDataTransformer
 {
 public:
-    static unsigned int getUIntValue(const CFitBaseType& baseType, uint8_t* rawData);
-    static int getSIntValue(const CFitBaseType &baseType, uint8_t *rawData);
-    static double getFloatValue(const CFitBaseType& baseType, uint8_t* rawData);
+    CFitByteDataTransformer() = delete;
+    static unsigned int getUIntValue(const CFitBaseType& baseType, quint8* rawData);
+    static int getSIntValue(const CFitBaseType &baseType, quint8 *rawData);
+    static qreal getFloatValue(const CFitBaseType& baseType, quint8* rawData);
     /*
      * param rawData: the fit utf-8 string, 0 terminated.
      */
-    static QString getString(uint8_t* rawData, uint8_t length);
-    static QByteArray getBytes(uint8_t* rawData, uint8_t length);
-    static void swapFieldData(const CFitFieldDefinition& fieldDef, uint8_t* fieldData);
+    static QString getString(quint8* rawData, quint8 length);
+    static QByteArray getBytes(quint8* rawData, quint8 length);
+    static void swapFieldData(const CFitFieldDefinition& fieldDef, quint8* fieldData);
 
 private:
-    static uint8_t getUint8(uint8_t* rawData);
-    static uint16_t getUint16(uint8_t* rawData);
-    static uint32_t getUint32(uint8_t* rawData);
-    static int8_t getSint8(uint8_t* rawData);
-    static int16_t getSint16(uint8_t* rawData);
-    static int32_t getSint32(uint8_t* rawData);
-    static float getFloat32(uint8_t* rawData);
-    static double getFloat64(uint8_t* rawData);
+    static quint8 getUint8(quint8* rawData);
+    static quint16 getUint16(quint8* rawData);
+    static quint32 getUint32(quint8* rawData);
+    static int8_t getSint8(quint8* rawData);
+    static qint16 getSint16(quint8* rawData);
+    static qint32 getSint32(quint8* rawData);
+    static qreal getFloat32(quint8* rawData);
+    static qreal getFloat64(quint8* rawData);
 };
 
 #endif //CFITBYTEDATATRANSFORMER_H

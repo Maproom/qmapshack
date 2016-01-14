@@ -26,15 +26,15 @@ void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
 {
     for (IFitField *field : mesg.getFields())
     {
-        CFitFieldBuilder::evaluateFieldProfile(mesg, *field);
+        CFitFieldBuilder::evaluateFieldProfile(mesg, field);
     }
     for (IFitField *field : mesg.getFields())
     {
-        CFitFieldBuilder::expandComponents(mesg, *field);
+        CFitFieldBuilder::expandComponents(mesg, field);
     }
 }
 
-IFitField *CFitFieldBuilder::buildField(const CFitFieldDefinition &def, uint8_t *fieldData, const CFitMessage& message)
+IFitField *CFitFieldBuilder::buildField(const CFitFieldDefinition &def, quint8 *fieldData, const CFitMessage& message)
 {
     CFitByteDataTransformer::swapFieldData(def, fieldData);
     const CFitBaseType& baseType = def.getBaseType();
@@ -67,14 +67,14 @@ IFitField *CFitFieldBuilder::buildField(const CFitFieldDefinition &def, uint8_t 
 }
 
 
-IFitField *CFitFieldBuilder::buildSIntField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, uint8_t *fieldData)
+IFitField *CFitFieldBuilder::buildSIntField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, quint8 *fieldData)
 {
     const CFitBaseType &baseType = def.getBaseType();
-    uint8_t *invalidBytes = baseType.invalidValueBytes();
+    const quint8 *invalidBytes = baseType.invalidValueBytes();
     bool valid = false;
     if (def.getSize() == baseType.size())
     {
-        for (uint8_t i = 0; i < def.getSize(); i++)
+        for (quint8 i = 0; i < def.getSize(); i++)
         {
             if (fieldData[i] != invalidBytes[i])
             {
@@ -84,17 +84,17 @@ IFitField *CFitFieldBuilder::buildSIntField(const CFitFieldDefinition &def, cons
         }
     }
     int ival = CFitByteDataTransformer::getSIntValue(baseType, fieldData);
-    return new CFitIntField<int32_t>(def, fieldProfile, ival, valid);
+    return new CFitIntField<qint32>(def, fieldProfile, ival, valid);
 }
 
-IFitField *CFitFieldBuilder::buildUIntField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, uint8_t *fieldData)
+IFitField *CFitFieldBuilder::buildUIntField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, quint8 *fieldData)
 {
     const CFitBaseType& baseType = def.getBaseType();
-    uint8_t *invalidBytes = baseType.invalidValueBytes();
+    const quint8 *invalidBytes = baseType.invalidValueBytes();
     bool valid = false;
     if (def.getSize() == baseType.size())
     {
-        for (uint8_t i = 0; i < def.getSize(); i++)
+        for (quint8 i = 0; i < def.getSize(); i++)
         {
             if (fieldData[i] != invalidBytes[i])
             {
@@ -104,18 +104,18 @@ IFitField *CFitFieldBuilder::buildUIntField(const CFitFieldDefinition &def, cons
         }
     }
     unsigned int uval = CFitByteDataTransformer::getUIntValue(baseType, fieldData);
-    return new CFitIntField<uint32_t>(def, fieldProfile, uval, valid);
+    return new CFitIntField<quint32>(def, fieldProfile, uval, valid);
 }
 
 
-IFitField *CFitFieldBuilder::buildFloatField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, uint8_t *fieldData)
+IFitField *CFitFieldBuilder::buildFloatField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, quint8 *fieldData)
 {
     const CFitBaseType& baseType = def.getBaseType();
-    uint8_t *invalidBytes = baseType.invalidValueBytes();
+    const quint8 *invalidBytes = baseType.invalidValueBytes();
     bool valid = false;
     if (def.getSize() == baseType.size())
     {
-        for (uint8_t i = 0; i < def.getSize(); i++)
+        for (quint8 i = 0; i < def.getSize(); i++)
         {
             if (fieldData[i] != invalidBytes[i])
             {
@@ -124,18 +124,18 @@ IFitField *CFitFieldBuilder::buildFloatField(const CFitFieldDefinition &def, con
             }
         }
     }
-    double dval = CFitByteDataTransformer::getFloatValue(baseType, fieldData);
+    qreal dval = CFitByteDataTransformer::getFloatValue(baseType, fieldData);
     return new CFitFloatField(def, fieldProfile, dval, valid);
 }
 
 
-IFitField *CFitFieldBuilder::buildStringField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, uint8_t *fieldData)
+IFitField *CFitFieldBuilder::buildStringField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, quint8 *fieldData)
 {
-    uint8_t *invalidBytes = def.getBaseType().invalidValueBytes();
+    const quint8 *invalidBytes = def.getBaseType().invalidValueBytes();
     QString str = CFitByteDataTransformer::getString(fieldData, def.getSize());
     // all byts set to invalid value
-    uint8_t invalidCount = 0;
-    for (uint8_t i = 0; i < def.getSize(); i++)
+    quint8 invalidCount = 0;
+    for (quint8 i = 0; i < def.getSize(); i++)
     {
         if (fieldData[i] == invalidBytes[0])
         {
@@ -147,12 +147,12 @@ IFitField *CFitFieldBuilder::buildStringField(const CFitFieldDefinition &def, co
 }
 
 
-IFitField *CFitFieldBuilder::buildByteField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, uint8_t *fieldData)
+IFitField *CFitFieldBuilder::buildByteField(const CFitFieldDefinition &def, const CFitFieldProfile* fieldProfile, quint8 *fieldData)
 {
-    uint8_t *invalidBytes = def.getBaseType().invalidValueBytes();
+    const quint8 *invalidBytes = def.getBaseType().invalidValueBytes();
     // all byts set to invalid value
-    uint8_t invalidCount = 0;
-    for (uint8_t i = 0; i < def.getSize(); i++)
+    quint8 invalidCount = 0;
+    for (quint8 i = 0; i < def.getSize(); i++)
     {
         if (fieldData[i] == invalidBytes[0])
         {
@@ -164,9 +164,9 @@ IFitField *CFitFieldBuilder::buildByteField(const CFitFieldDefinition &def, cons
 }
 
 
-void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg, IFitField & field)
+void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg, IFitField* field)
 {
-    const CFitFieldProfile& fieldProfile = field.profile();
+    const CFitFieldProfile& fieldProfile = field->profile();
     // case subfield
     if (fieldProfile.hasSubfields())
     {
@@ -179,32 +179,32 @@ void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg, IFitField & field
                     referencedField->getUIntValue() == subfieldProfile->getReferencedFieldValue())
                 {
                     // the value of the referenced field matches with the field profile reference-value
-                    field.setProfile(subfieldProfile);
+                    field->setProfile(subfieldProfile);
                 }
             }
         }
     }
 }
 
-void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const IFitField & field)
+void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const IFitField* field)
 {
     // TODO accumulated fields are not implemented (no need so far)
-    const CFitFieldProfile& fieldProfile = field.profile();
+    const CFitFieldProfile& fieldProfile = field->profile();
     // case component
     if (fieldProfile.hasComponents())
     {
         int offset = 0;
         for (const CFitComponentfieldProfile* compProfile : fieldProfile.getComponents())
         {
-            if (field.getBaseType().isSignedInt())
+            if (field->getBaseType().isSignedInt())
             {
-                int32_t value = (field.getSIntValue() >> offset) & compProfile->getBitmask();
-                mesg.addField(new CFitIntField<int32_t>(field, compProfile, value, true));
+                qint32 value = (field->getSIntValue() >> offset) & compProfile->getBitmask();
+                mesg.addField(new CFitIntField<qint32>(field->getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, value, true));
             }
             else
             {
-                uint32_t value = (field.getUIntValue() >> offset) & compProfile->getBitmask();
-                mesg.addField(new CFitIntField<uint32_t>(field, compProfile, value, true));
+                quint32 value = (field->getUIntValue() >> offset) & compProfile->getBitmask();
+                mesg.addField(new CFitIntField<quint32>(field->getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, value, true));
             }
             offset += compProfile->getBits();
         }

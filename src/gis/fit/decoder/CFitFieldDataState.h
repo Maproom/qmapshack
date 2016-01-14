@@ -23,18 +23,18 @@
 
 static const int fitMaxFieldSize =255;
 
-class CFitFieldDataState : public IFitDecoderState
+class CFitFieldDataState final: public IFitDecoderState
 {
 public:
     CFitFieldDataState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldData) { reset(); }
     virtual ~CFitFieldDataState() {}
     virtual void reset() override;
-    virtual decode_state_e process(uint8_t &dataByte) override;
+    virtual decode_state_e process(quint8 &dataByte) override;
 
 private:
-    uint8_t fieldIndex;
-    uint8_t fieldDataIndex;
-    uint8_t fieldData[fitMaxFieldSize];
+    quint8 fieldIndex;
+    quint8 fieldDataIndex;
+    quint8 fieldData[fitMaxFieldSize];
 };
 
 

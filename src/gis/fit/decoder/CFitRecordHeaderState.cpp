@@ -31,8 +31,8 @@
  * 1:     local message type
  * 0:     local message type
  */
-static const uint8_t fitRecordHeaderDefBit =  ((uint8_t) 0x40); // bit 6: 0100 0000
-static const uint8_t fitRecordHeaderMesgMask = ((uint8_t) 0x0F); // bit 0-3: 0000 1111
+static const quint8 fitRecordHeaderDefBit =  ((quint8) 0x40); // bit 6: 0100 0000
+static const quint8 fitRecordHeaderMesgMask = ((quint8) 0x0F); // bit 0-3: 0000 1111
 
 /*
  * compressed timestamp header
@@ -46,17 +46,17 @@ static const uint8_t fitRecordHeaderMesgMask = ((uint8_t) 0x0F); // bit 0-3: 000
  * 1:     time offset
  * 0:     time offset
  */
-static const uint8_t fitRecordHeaderTypeBit =  ((uint8_t) 0x80); // bit 7: 1000 0000
-static const uint8_t fitRecordHeaderTimeMesgMask =  ((uint8_t) 0x60); // bit 5-6: 0110 0000
-static const uint8_t fitRecordHeaderTimeMesgShift = 5;
+static const quint8 fitRecordHeaderTypeBit =  ((quint8) 0x80); // bit 7: 1000 0000
+static const quint8 fitRecordHeaderTimeMesgMask =  ((quint8) 0x60); // bit 5-6: 0110 0000
+static const quint8 fitRecordHeaderTimeMesgShift = 5;
 
 
-decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte)
+decode_state_e CFitRecordHeaderState::process(quint8 &dataByte)
 {
     if ((dataByte & fitRecordHeaderTypeBit) != 0)
     {
         // this is a compressed timestamp header
-        uint8_t localMessageType = (dataByte & fitRecordHeaderTimeMesgMask) >> fitRecordHeaderTimeMesgShift;
+        quint8 localMessageType = (dataByte & fitRecordHeaderTimeMesgMask) >> fitRecordHeaderTimeMesgShift;
         CFitDefinitionMessage* def = defintion(localMessageType);
 
         if (!def->hasField(eRecordTimestamp))
@@ -66,19 +66,19 @@ decode_state_e CFitRecordHeaderState::process(uint8_t &dataByte)
             // remark on enum for timestamp (RecordTimestamp:
             // the timestamp field has for all message types the same number (253) therefore it does not matter which
             // enum is taken here.
-            def->addField(CFitFieldDefinition(def, eRecordTimestamp, sizeof(uint32_t), TypeUint8));
+            def->addField(CFitFieldDefinition(def, eRecordTimestamp, sizeof(quint32), TypeUint8));
         }
         setTimestampOffset(dataByte);
 
         addMessage(*def);
         const CFitFieldDefinition& fieldDef = def->getField(eRecordTimestamp);
-        latestMessage()->addField(new CFitIntField<uint32_t>(fieldDef, &fieldDef.profile(), getTimestamp(), true));
+        latestMessage()->addField(new CFitIntField<quint32>(fieldDef, &fieldDef.profile(), getTimestamp(), true));
 
         return eDecoderStateFieldData;
     }
     else
     {
-        uint8_t localMessageType = dataByte & fitRecordHeaderMesgMask;
+        quint8 localMessageType = dataByte & fitRecordHeaderMesgMask;
         if ((dataByte & fitRecordHeaderDefBit) != 0)
         {
             // this is a definition message

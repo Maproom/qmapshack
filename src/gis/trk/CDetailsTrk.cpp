@@ -761,20 +761,31 @@ void CDetailsTrk::slotActivitySelected(bool checked)
 
 void CDetailsTrk::slotSetupGraph(int idx)
 {
-    QObject *s = sender();
+    CLimit * limit;
+    QDoubleSpinBox * spinMin;
+    QDoubleSpinBox * spinMax;
 
+    QObject *s = sender();
     if(s == comboGraph2)
     {
-        trk.getPropertyHandler()->setupPlot(plot2, idx);
-        spinMinGraph2->setSuffix(trk.limitsGraph2.getUnit());
-        spinMaxGraph2->setSuffix(trk.limitsGraph2.getUnit());
+        trk.getPropertyHandler()->setupPlot(plot2, comboGraph2->itemData(idx).toString());
+        limit   = &trk.limitsGraph2;
+        spinMin = spinMinGraph2;
+        spinMax = spinMaxGraph2;
     }
     else if(s == comboGraph3)
     {
-        trk.getPropertyHandler()->setupPlot(plot3, idx);
-        spinMinGraph3->setSuffix(trk.limitsGraph3.getUnit());
-        spinMaxGraph3->setSuffix(trk.limitsGraph3.getUnit());
+        trk.getPropertyHandler()->setupPlot(plot3, comboGraph3->itemData(idx).toString());
+        limit   = &trk.limitsGraph3;
+        spinMin = spinMinGraph3;
+        spinMax = spinMaxGraph3;
     }
+
+    spinMin->setSuffix(limit->getUnit());
+    spinMax->setSuffix(limit->getUnit());
+    spinMin->setValue(limit->getMin());
+    spinMax->setValue(limit->getMax());
+
 }
 
 void CDetailsTrk::slotSetLimitModeUser()

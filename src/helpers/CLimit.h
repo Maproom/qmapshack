@@ -26,12 +26,13 @@
 #include <functional>
 
 using fGetLimit = std::function<qreal(const QString&)>;
+using fGetUnit  = std::function<QString(const QString&)>;
 
 class CLimit : public QObject
 {
     Q_OBJECT
 public:
-    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto);
+    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit);
     virtual ~CLimit();
 
 
@@ -48,20 +49,17 @@ public:
         emit sigChanged();
     }
 
+    void setSource(const QString& source);
+
     mode_e getMode() const
     {
         return mode;
     }
 
-    void setSource(const QString& source, const QString& unit);
-
     qreal getMin() const;
     qreal getMax() const;
+    QString getUnit() const;
 
-    const QString& getUnit()
-    {
-        return unit;
-    }
 
 public slots:
     void setMin(const qreal& val);
@@ -80,9 +78,9 @@ private:
     fGetLimit fGetMax;
     fGetLimit fGetMinAuto;
     fGetLimit fGetMaxAuto;
+    fGetUnit  fGetUnitProp;
 
     QString source;
-    QString unit;
 
     static QSet<CLimit*> allLimits;
 };

@@ -67,16 +67,14 @@ public:
     void fillComboBox(QComboBox * box) const;
 
     void setupData();
-    void setupPlot(CPlot * plot, int idx) const;
-
-    qreal getMin(const QString& source) const;
-    qreal getMax(const QString& source) const;
+    void setupPlot(CPlot * plot, const QString &source) const;
+    const property_t &propBySource(const QString& source) const;
 
 private:
     friend class CGisItemTrk;
-    CPropertyTrk(const CGisItemTrk &trk);
+    CPropertyTrk(CGisItemTrk &trk);
 
-    const CGisItemTrk& trk;
+    CGisItemTrk& trk;
 
     QList<property_t> properties;
 };

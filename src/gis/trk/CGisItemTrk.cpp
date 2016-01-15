@@ -756,6 +756,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
     limits_t extremaSpeed = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
     limits_t extremaSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
     limits_t extremaEle   = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaProgress= { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
 
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
@@ -790,6 +791,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
             updateExtrema(extremaSpeed, pt.speed);
             updateExtrema(extremaEle,   pt.ele);
             updateExtrema(extremaSlope, pt.slope1);
+            updateExtrema(extremaProgress, pt.distance);
         }
     }
 
@@ -810,6 +812,13 @@ void CGisItemTrk::updateExtremaAndExtensions()
         existingExtensions << CKnownExtension::internalSpeed;
         extrema[CKnownExtension::internalSpeed] = extremaSpeed;
     }
+
+    if(numeric_limits<qreal>::max() != extremaProgress.min)
+    {
+        existingExtensions << CKnownExtension::internalProgress;
+        extrema[CKnownExtension::internalProgress] = extremaProgress;
+    }
+
 
     existingExtensions.subtract(nonRealExtensions);
 }
@@ -1043,15 +1052,13 @@ void CGisItemTrk::deriveSecondaryData()
     if(propHandler == nullptr)
     {
         propHandler = new CPropertyTrk(*this);
+        limitsGraph1.setSource(CKnownExtension::internalEle);
     }
     else
     {
         propHandler->setupData();
     }
 
-    QString val, unit;
-    IUnit::self().meter2elevation(1,val,unit);
-    limitsGraph1.setSource(CKnownExtension::internalEle, unit);
     updateVisuals(eVisualPlot|eVisualDetails, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
@@ -1821,7 +1828,7 @@ qreal CGisItemTrk::getMinProp(const QString& source) const
     {
         return NOFLOAT;
     }
-    return propHandler->getMin(source);
+    return propHandler->propBySource(source).min;
 }
 
 qreal CGisItemTrk::getMaxProp(const QString& source) const
@@ -1830,7 +1837,16 @@ qreal CGisItemTrk::getMaxProp(const QString& source) const
     {
         return NOFLOAT;
     }
-    return propHandler->getMax(source);
+    return propHandler->propBySource(source).max;
+}
+
+QString CGisItemTrk::getUnitProp(const QString& source) const
+{
+    if(propHandler == nullptr)
+    {
+        return QString();
+    }
+    return propHandler->propBySource(source).unit;
 }
 
 

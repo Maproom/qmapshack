@@ -21,12 +21,13 @@
 
 QSet<CLimit*> CLimit::allLimits;
 
-CLimit::CLimit(const QString &cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto)
+CLimit::CLimit(const QString &cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit)
     : cfgPath(cfgPath)
     , fGetMin(getMin)
     , fGetMax(getMax)
     , fGetMinAuto(getMinAuto)
-    , fGetMaxAuto(getMaxAuto)
+    , fGetMaxAuto(getMaxAuto)    
+    , fGetUnitProp(getUnit)
 {
 
     allLimits << this;
@@ -38,10 +39,9 @@ CLimit::~CLimit()
 }
 
 
-void CLimit::setSource(const QString& source, const QString &unit)
+void CLimit::setSource(const QString& source)
 {
     this->source    = source;
-    this->unit      = unit;
     minUser         = fGetMin(source);
     maxUser         = fGetMax(source);
 }
@@ -134,4 +134,9 @@ void CLimit::setMax(const qreal &val)
     }
 
     emit sigChanged();
+}
+
+QString CLimit::getUnit() const
+{
+    return fGetUnitProp(source);
 }

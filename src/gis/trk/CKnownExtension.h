@@ -30,6 +30,7 @@ public:
     static const QString internalSlope;
     static const QString internalSpeed;
     static const QString internalEle;
+    static const QString internalProgress;
 
     static const CKnownExtension get(const QString &name);
     static bool isKnown(const QString &name);

@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CPropertyTrk::CPropertyTrk(const CGisItemTrk& trk)
+CPropertyTrk::CPropertyTrk(CGisItemTrk& trk)
     : trk(trk)
 {
     setupData();
@@ -36,43 +36,22 @@ void CPropertyTrk::setupData()
 
     property_t propNull
     {
-        ""
-        , ""
-        , ""
+        QString()
+        , QString()
+        , QString()
         , QIcon()
         , CPlotData::eAxisLinear
-        , ""
-        , ""
+        , QString()
+        , QString()
         , 1.0
         , nullptr
         , nullptr
     };
     properties << propNull;
 
-    property_t propProgress
-    {
-        "progress"
-        , QObject::tr("Progress")
-        , QObject::tr("m")
-        , QIcon("://icons/32x32/Progress.png")
-        , CPlotData::eAxisTime
-        , QObject::tr("time")
-        , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
-        , IUnit::self().basefactor
-        , [](const CGisItemTrk::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; }
-        , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
-    };
-    properties << propProgress;
-
     QStringList keys = trk.getExistingDataSources();
     foreach(const QString &key, keys)
     {
-        // skip elevation as it is covered by the profile plot
-        if(key == CKnownExtension::internalEle)
-        {
-            continue;
-        }
-
         const CKnownExtension &ext = CKnownExtension::get(key);
         QString name = (ext.known ? ext.name : key);
 
@@ -90,14 +69,35 @@ void CPropertyTrk::setupData()
             , ext.valueFunc
         };
 
-        // lame hack
+        // lame hack for properties off the usual scheme
+        if(key == CKnownExtension::internalProgress)
+        {
+            property.min        = 0;
+            property.axisType   = CPlotData::eAxisTime;
+            property.xLabel     = QObject::tr("time");
+            property.getX       = [](const CGisItemTrk::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
+        }
+
         if(key == CKnownExtension::internalSpeed)
         {
-            property.min = 0;
+            property.min        = 0;
         }
 
         properties << property;
     }
+}
+
+const CPropertyTrk::property_t& CPropertyTrk::propBySource(const QString& source) const
+{
+    foreach(const property_t& prop, properties)
+    {
+        if(prop.key == source)
+        {
+            return prop;
+        }
+    }
+
+    return properties[0];
 }
 
 void CPropertyTrk::fillComboBox(QComboBox * box) const
@@ -106,41 +106,24 @@ void CPropertyTrk::fillComboBox(QComboBox * box) const
 
     foreach(const property_t &p, properties)
     {
+        if(p.key == CKnownExtension::internalEle)
+        {
+            // skip it as there is a dedicated profile plot
+            continue;
+        }
         box->addItem(p.icon, p.name, p.key);
     }
 }
 
-void CPropertyTrk::setupPlot(CPlot * plot, int idx) const
+void CPropertyTrk::setupPlot(CPlot * plot, const QString& source) const
 {
-    if(idx >= properties.size())
+    const property_t& p = propBySource(source);
+    if(p.name.isEmpty())
     {
         return;
     }
-    const property_t& p = properties[idx];
-    plot->setup(p.key, p.unit, p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
+
+    plot->setup(p.key, p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
     return;
 }
 
-qreal CPropertyTrk::getMin(const QString& source) const
-{
-    foreach(const property_t& prop, properties)
-    {
-        if(prop.key == source)
-        {
-            return prop.min;
-        }
-    }
-    return NOFLOAT;
-}
-
-qreal CPropertyTrk::getMax(const QString& source) const
-{
-    foreach(const property_t& prop, properties)
-    {
-        if(prop.key == source)
-        {
-            return prop.max;
-        }
-    }
-    return NOFLOAT;
-}

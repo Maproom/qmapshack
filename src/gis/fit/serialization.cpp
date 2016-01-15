@@ -68,7 +68,7 @@ bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     {
         pt.lon = CFitDataConverter::toDegree(mesg.getFieldIntValue(eRecordPositionLong));
         pt.lat = CFitDataConverter::toDegree(mesg.getFieldIntValue(eRecordPositionLat));
-        pt.ele = (int) mesg.getFieldDoubleValue(eRecordAltitude);
+        pt.ele = (int) mesg.getFieldDoubleValue(eRecordEnhancedAltitude);
         pt.time = CFitDataConverter::toDateTime(mesg.getFieldUIntValue(eRecordTimestamp));
         //pt.speed = mesg.getFieldDoubleValue(RecordSpeed);
 

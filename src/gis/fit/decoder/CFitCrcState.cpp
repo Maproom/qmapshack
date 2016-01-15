@@ -22,7 +22,7 @@ void CFitCrcState::reset()
 {
 }
 
-decode_state_e CFitCrcState::process(uint8_t &dataByte)
+decode_state_e CFitCrcState::process(quint8 &dataByte)
 {
     if (bytesLeftToRead() == 0)
     {

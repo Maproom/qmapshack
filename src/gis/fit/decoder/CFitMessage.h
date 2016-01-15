@@ -26,7 +26,7 @@
 
 class MesgDefinition;   // Forward declaration.
 
-class CFitMessage
+class CFitMessage final
 {
 public:
     CFitMessage(const CFitDefinitionMessage& def);
@@ -34,19 +34,19 @@ public:
     virtual ~CFitMessage();
 
     bool isValid() const;
-    uint16_t getGlobalMesgNr() const;
-    uint8_t getLocalMesgNr() const;
+    quint16 getGlobalMesgNr() const;
+    quint8 getLocalMesgNr() const;
 
-    bool hasField(const uint8_t fieldDefNum) const;
-    const IFitField & getField(const uint8_t fieldDefNum) const;
-    bool isFieldValueValid(const uint8_t fieldDefNum) const;
+    bool hasField(const quint8 fieldDefNum) const;
+    const IFitField & getField(const quint8 fieldDefNum) const;
+    bool isFieldValueValid(const quint8 fieldDefNum) const;
     void addField(IFitField * field);
 
-    QString getFieldString(const uint8_t fieldDefNum) const;
-    QByteArray getFieldBytes(const uint8_t fieldDefNum) const;
-    int getFieldIntValue(const uint8_t fieldDefNum) const;
-    unsigned int getFieldUIntValue(const uint8_t fieldDefNum) const;
-    double getFieldDoubleValue(const uint8_t fieldDefNum) const;
+    QString getFieldString(const quint8 fieldDefNum) const;
+    QByteArray getFieldBytes(const quint8 fieldDefNum) const;
+    int getFieldIntValue(const quint8 fieldDefNum) const;
+    unsigned int getFieldUIntValue(const quint8 fieldDefNum) const;
+    qreal getFieldDoubleValue(const quint8 fieldDefNum) const;
 
     const CFitProfile& profile() const { return *messageProfile; }
     QStringList messageInfo() const;
@@ -54,9 +54,9 @@ public:
 
 
 private:
-    QMap<uint8_t, IFitField *> fields;
-    uint16_t globalMesgNr;
-    uint8_t localMesgNr;
+    QMap<quint8, IFitField *> fields;
+    quint16 globalMesgNr;
+    quint8 localMesgNr;
     const CFitProfile* messageProfile;
 };
 

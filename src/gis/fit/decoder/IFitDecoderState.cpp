@@ -19,7 +19,7 @@
 #include "gis/fit/decoder/IFitDecoderState.h"
 
 
-decode_state_e IFitDecoderState::processByte(uint8_t &dataByte)
+decode_state_e IFitDecoderState::processByte(quint8 &dataByte)
 {
     incFileBytesRead();
     buildCrc(dataByte);
@@ -38,15 +38,15 @@ decode_state_e IFitDecoderState::processByte(uint8_t &dataByte)
 }
 
 
-void IFitDecoderState::buildCrc(uint8_t byte)
+void IFitDecoderState::buildCrc(quint8 byte)
 {
-    static const uint16_t crc_table[16] =
+    static const quint16 crc_table[16] =
     {
         0x0000, 0xCC01, 0xD801, 0x1400, 0xF001, 0x3C00, 0x2800, 0xE401,
         0xA001, 0x6C00, 0x7800, 0xB401, 0x5000, 0x9C01, 0x8801, 0x4400
     };
-    uint16_t tmp;
-    uint16_t crc = data.crc;
+    quint16 tmp;
+    quint16 crc = data.crc;
     // compute checksum of lower four bits of byte
     tmp = crc_table[crc & 0xF];
     crc = (crc >> 4) & 0x0FFF;
@@ -59,7 +59,7 @@ void IFitDecoderState::buildCrc(uint8_t byte)
 }
 
 
-uint16_t IFitDecoderState::getCrc()
+quint16 IFitDecoderState::getCrc()
 {
     return data.crc;
 }
@@ -75,22 +75,22 @@ CFitDefinitionMessage*IFitDecoderState::latestDefinition()
 }
 
 
-static const uint8_t fitRecordHeaderTimeOffsetMask = 0x1F; // bit 0-4: 0001 1111
+static const quint8 fitRecordHeaderTimeOffsetMask = 0x1F; // bit 0-4: 0001 1111
 
-void IFitDecoderState::setTimestamp(uint32_t fullTimestamp)
+void IFitDecoderState::setTimestamp(quint32 fullTimestamp)
 {
     data.timestamp = fullTimestamp;
-    data.lastTimeOffset = (uint8_t) (data.timestamp & fitRecordHeaderTimeOffsetMask);
+    data.lastTimeOffset = (quint8) (data.timestamp & fitRecordHeaderTimeOffsetMask);
 }
 
-void IFitDecoderState::setTimestampOffset(uint32_t offsetTimestamp)
+void IFitDecoderState::setTimestampOffset(quint32 offsetTimestamp)
 {
-    uint8_t timeOffset = offsetTimestamp & fitRecordHeaderTimeOffsetMask;
+    quint8 timeOffset = offsetTimestamp & fitRecordHeaderTimeOffsetMask;
     data.timestamp += (timeOffset - data.lastTimeOffset) & fitRecordHeaderTimeOffsetMask;
     data.lastTimeOffset = timeOffset;
 }
 
-uint32_t IFitDecoderState::getTimestamp()
+quint32 IFitDecoderState::getTimestamp()
 {
     return data.timestamp;
 }
@@ -112,17 +112,17 @@ void IFitDecoderState::endDefintion()
     data.defintionHistory.append(*data.lastDefintion);
 }
 
-CFitDefinitionMessage*IFitDecoderState::defintion(uint32_t localMessageType)
+CFitDefinitionMessage*IFitDecoderState::defintion(quint32 localMessageType)
 {
     return &(data.defintions[localMessageType]);
 }
 
-void IFitDecoderState::setFileLength(uint32_t fileLength)
+void IFitDecoderState::setFileLength(quint32 fileLength)
 {
     data.fileLength = fileLength;
 }
 
-uint32_t IFitDecoderState::bytesLeftToRead()
+quint32 IFitDecoderState::bytesLeftToRead()
 {
     return data.fileLength - data.fileBytesRead;
 }

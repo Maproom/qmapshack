@@ -11,3 +11,5 @@ GenericName=GPS device mapping utility
 Keywords=map;GPS;geocaching;waypoints;tracks;
 MimeType=application/x-gpx;
 StartupNotify=true
+
+#TRANSLATIONS_DIR=src/locale

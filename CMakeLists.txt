@@ -56,6 +56,7 @@ set(CMAKE_MODULE_PATH
 
 # Bring translation support in
 include(TranslateTs)
+include(TranslateDesktop)
 
 # add definitions
 include(DefineCMakeDefaults)
@@ -72,13 +73,6 @@ add_subdirectory(src)
 
 
 if (UNIX AND NOT WIN32 AND NOT APPLE)
-  install(
-    FILES
-      qmapshack.desktop
-    DESTINATION
-      ${XDG_APPS_DIR}
-  )
-
   install(
     FILES
       src/icons/48x48/QMapShack.png

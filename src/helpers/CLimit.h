@@ -27,12 +27,13 @@
 
 using fGetLimit = std::function<qreal(const QString&)>;
 using fGetUnit  = std::function<QString(const QString&)>;
+using fMarkChanged = std::function<void(void)>;
 
 class CLimit : public QObject
 {
     Q_OBJECT
 public:
-    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit);
+    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit, fMarkChanged markChanged);
     virtual ~CLimit();
 
 
@@ -43,13 +44,8 @@ public:
         , eModeAutomatic
     };
 
-    void setMode(mode_e m)
-    {
-        mode = m;
-        emit sigChanged();
-    }
-
-    void setSource(const QString& source);
+    void setMode(mode_e m);
+    void setSource(const QString& src);
 
     mode_e getMode() const
     {
@@ -69,16 +65,19 @@ signals:
     void sigChanged();
 
 private:
+    friend QDataStream& operator<<(QDataStream& stream, const CLimit& l);
+    friend QDataStream& operator>>(QDataStream& stream, CLimit& l);
     mode_e mode = eModeAutomatic;
     QString cfgPath;
     qreal minUser;
     qreal maxUser;
 
-    fGetLimit fGetMin;
-    fGetLimit fGetMax;
-    fGetLimit fGetMinAuto;
-    fGetLimit fGetMaxAuto;
-    fGetUnit  fGetUnitProp;
+    fGetLimit       _getMin;
+    fGetLimit       _getMax;
+    fGetLimit       _getMinAuto;
+    fGetLimit       _getMaxAuto;
+    fGetUnit        _getUnit;
+    fMarkChanged    _markChanged;
 
     QString source;
 

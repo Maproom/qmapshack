@@ -24,10 +24,11 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CValue.h"
+#include "helpers/CLimit.h"
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(3)
+#define VER_TRK         quint8(4)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(2)
 #define VER_AREA        quint8(1)
@@ -47,6 +48,7 @@
 #define VER_HIST_EVT    quint8(3)
 #define VER_ITEM        quint8(3)
 #define VER_CVALUE      quint8(1)
+#define VER_CLIMIT      quint8(1)
 
 #define MAGIC_SIZE      10
 #define MAGIC_TRK       "QMTrk     "
@@ -464,6 +466,23 @@ QDataStream& operator>>(QDataStream& stream, CValue& v)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CLimit& l)
+{
+    stream << VER_CLIMIT << quint8(l.mode) << l.source << l.minUser << l.maxUser;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CLimit& l)
+{
+    quint8 version, mode;
+
+    stream >> version >> mode >> l.source >> l.minUser >> l.maxUser;
+    l.mode = CLimit::mode_e(mode);
+
+    return stream;
+}
+
+
 // ---------------- main objects ---------------------------------
 
 QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
@@ -490,6 +509,10 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
 
     out << lineScale;
     out << showArrows;
+
+    out << limitsGraph1;
+    out << limitsGraph2;
+    out << limitsGraph3;
 
     out << trk.segs;
 
@@ -545,6 +568,13 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     {
         in >> lineScale;
         in >> showArrows;
+    }
+
+    if(version > 3)
+    {
+        in >> limitsGraph1;
+        in >> limitsGraph2;
+        in >> limitsGraph3;
     }
 
     trk.segs.clear();

@@ -462,6 +462,9 @@ QDataStream& operator>>(QDataStream& stream, CValue& v)
 {
     quint8 version, mode;
     stream >> version >> mode >> v.valUser;
+    // lame trick to update object on mode correctly without
+    // triggering a changed mark
+    v.mode = CValue::mode_e(mode);
     v.setMode(CValue::mode_e(mode));
     return stream;
 }

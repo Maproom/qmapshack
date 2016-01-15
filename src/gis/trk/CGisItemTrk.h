@@ -955,8 +955,8 @@ private:
                          };
 
 public:
-    CValue lineScale     {"TrackDetails/lineScale", 1.0, onChange};
-    CValue showArrows    {"TrackDetails/showArrows", true};
+    CValue lineScale     {"TrackDetails/lineScale", 1.0, _markChanged, onChange};
+    CValue showArrows    {"TrackDetails/showArrows", true, _markChanged};
 private:
     /**@}*/
 

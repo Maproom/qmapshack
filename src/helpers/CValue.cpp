@@ -21,11 +21,12 @@
 
 QSet<CValue*> CValue::allValues;
 
-CValue::CValue(const QString& cfgTag, const QVariant &initDefault, fValueOnChange onChange)
+CValue::CValue(const QString& cfgTag, const QVariant &initDefault, fMarkChanged markChanged, fValueOnChange onChange)
     : cfgTag(cfgTag)
     , initDefault(initDefault)
     , valUser(initDefault)
-    , onChange(onChange)
+    , funcOnChange(onChange)
+    , funcMarkChanged(markChanged)
 {
     if(onChange != nullptr)
     {
@@ -42,11 +43,18 @@ CValue::~CValue()
 
 void CValue::setMode(mode_e m)
 {
+    bool markAsChanged = mode != m;
+
     mode = m;
 
-    if(onChange != nullptr)
+    if(funcOnChange != nullptr)
     {
-        onChange(val());
+        funcOnChange(val());
+    }
+
+    if(markAsChanged)
+    {
+        funcMarkChanged();
     }
 }
 
@@ -63,8 +71,11 @@ QVariant CValue::val() const
 
 const QVariant& CValue::operator=(const QVariant& v)
 {
+    bool markAsChanged = false;
+
     if(mode == eModeUser)
     {
+        markAsChanged = valUser != v;
         valUser = v;
     }
     else
@@ -81,19 +92,23 @@ const QVariant& CValue::operator=(const QVariant& v)
         }
     }
 
-    if(onChange != nullptr)
+    if(funcOnChange != nullptr)
     {
-        onChange(v);
+        funcOnChange(v);
     }
 
+    if(markAsChanged)
+    {
+        funcMarkChanged();
+    }
     return v;
 }
 
 
 void CValue::updateDefault(const QString& tag, const QVariant &val)
 {
-    if((mode == eModeDefault) && (tag == cfgTag) && (onChange != nullptr))
+    if((mode == eModeDefault) && (tag == cfgTag) && (funcOnChange != nullptr))
     {
-        onChange(val);
+        funcOnChange(val);
     }
 }

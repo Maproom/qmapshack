@@ -860,8 +860,9 @@ private:
         return getMax(source);
     };
 
-    qreal getMinProp(const QString& source) const;
-    qreal getMaxProp(const QString& source) const;
+    qreal   getMinProp(const QString& source) const;
+    qreal   getMaxProp(const QString& source) const;
+    QString getUnitProp(const QString& source) const;
 
     fGetLimit _getMinProp = [this](const QString& source)
     {
@@ -873,10 +874,15 @@ private:
         return getMaxProp(source);
     };
 
+    fGetUnit _getUnitProp = [this](const QString& source)
+    {
+        return getUnitProp(source)  ;
+    };
+
 public:
-    CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinProp, _getMaxProp};
-    CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinProp, _getMaxProp};
-    CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp};
+    CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp};
+    CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp};
+    CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp};
 
 private:
     /// this is the GPX structure oriented data of the track

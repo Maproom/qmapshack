@@ -23,6 +23,7 @@
 const QString CKnownExtension::internalSlope = "::ql:slope";
 const QString CKnownExtension::internalSpeed = "::ql:speed";
 const QString CKnownExtension::internalEle   = "::ql:ele";
+const QString CKnownExtension::internalProgress = "::ql:progress";
 
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 
@@ -114,7 +115,13 @@ void CKnownExtension::init(IUnit &units)
         {internalEle,
          { QObject::tr("Elevation"), 200., 800., 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
+        },
+
+        {internalProgress,
+         { QObject::tr("Progress"), 0., NOFLOAT, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true,
+           [](const CGisItemTrk::trkpt_t &p) { return p.distance; }}
         }
+
     };
 
     initGarminTPXv1(units, "gpxtpx");

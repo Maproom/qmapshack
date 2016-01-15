@@ -167,9 +167,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     case CLimit::eModeUser:
         toolLimitUsrGraph1->setChecked(true);
         break;
+
     case CLimit::eModeAutomatic:
         toolLimitGraph1->setChecked(true);
         break;
+
     case CLimit::eModeDefault:
         toolLimitSysGraph1->setChecked(true);
         break;
@@ -180,9 +182,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     case CLimit::eModeUser:
         toolLimitUsrGraph2->setChecked(true);
         break;
+
     case CLimit::eModeAutomatic:
         toolLimitGraph2->setChecked(true);
         break;
+
     case CLimit::eModeDefault:
         toolLimitSysGraph2->setChecked(true);
         break;
@@ -193,9 +197,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     case CLimit::eModeUser:
         toolLimitUsrGraph3->setChecked(true);
         break;
+
     case CLimit::eModeAutomatic:
         toolLimitGraph3->setChecked(true);
         break;
+
     case CLimit::eModeDefault:
         toolLimitSysGraph3->setChecked(true);
         break;

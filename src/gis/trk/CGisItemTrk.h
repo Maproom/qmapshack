@@ -313,8 +313,8 @@ public:
 
     const QString getColorizeUnit() const;
 
-    qreal getMin(const QString& source)const;
-    qreal getMax(const QString& source)const;
+    qreal getMin(const QString& source) const;
+    qreal getMax(const QString& source) const;
 
 private:
     QString colorSource  = "";
@@ -851,38 +851,38 @@ public:
 
 private:
     fGetLimit _getMin = [this](const QString& source)
-    {
-        return getMin(source);
-    };
+                        {
+                            return getMin(source);
+                        };
 
     fGetLimit _getMax = [this](const QString& source)
-    {
-        return getMax(source);
-    };
+                        {
+                            return getMax(source);
+                        };
 
     qreal   getMinProp(const QString& source) const;
     qreal   getMaxProp(const QString& source) const;
     QString getUnitProp(const QString& source) const;
 
     fGetLimit _getMinProp = [this](const QString& source)
-    {
-        return getMinProp(source);
-    };
+                            {
+                                return getMinProp(source);
+                            };
 
     fGetLimit _getMaxProp = [this](const QString& source)
-    {
-        return getMaxProp(source);
-    };
+                            {
+                                return getMaxProp(source);
+                            };
 
     fGetUnit _getUnitProp = [this](const QString& source)
-    {
-        return getUnitProp(source)  ;
-    };
+                            {
+                                return getUnitProp(source);
+                            };
 
     fMarkChanged _markChanged = [this]()
-    {
-        updateHistory(eVisualNone);
-    };
+                                {
+                                    updateHistory(eVisualNone);
+                                };
 
 public:
     CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
@@ -943,16 +943,16 @@ private:
 
 
     fValueOnChange onChange = [this](const QVariant& val)
-                         {
-                             int w = qRound(3.0 * val.toDouble());
+                              {
+                                  int w = qRound(3.0 * val.toDouble());
 
-                             penWidthFg = w;
-                             penWidthBg = w + 2;
-                             penWidthHi = w + 8;
+                                  penWidthFg = w;
+                                  penWidthBg = w + 2;
+                                  penWidthHi = w + 8;
 
-                             penForeground.setWidth(penWidthFg);
-                             penBackground.setWidth(penWidthBg);
-                         };
+                                  penForeground.setWidth(penWidthFg);
+                                  penBackground.setWidth(penWidthBg);
+                              };
 
 public:
     CValue lineScale     {"TrackDetails/lineScale", 1.0, _markChanged, onChange};

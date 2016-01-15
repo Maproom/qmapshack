@@ -60,7 +60,7 @@ private:
     QVariant valUser;
 
     fValueOnChange funcOnChange;
-    fMarkChanged   funcMarkChanged;
+    fMarkChanged funcMarkChanged;
 
     static QSet<CValue*> allValues;
 };

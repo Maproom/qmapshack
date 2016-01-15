@@ -1812,12 +1812,12 @@ void CGisItemTrk::drawColorized(QPainter &p)
 }
 
 
-qreal CGisItemTrk::getMin(const QString& source)const
+qreal CGisItemTrk::getMin(const QString& source) const
 {
     return extrema.value(source).min * CKnownExtension::get(source).factor;
 }
 
-qreal CGisItemTrk::getMax(const QString& source)const
+qreal CGisItemTrk::getMax(const QString& source) const
 {
     return extrema.value(source).max * CKnownExtension::get(source).factor;
 }

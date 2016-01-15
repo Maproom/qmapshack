@@ -23,8 +23,8 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CValue.h"
 #include "helpers/CLimit.h"
+#include "helpers/CValue.h"
 
 #include <QtWidgets>
 

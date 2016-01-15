@@ -89,7 +89,7 @@ void CPropertyTrk::setupData()
 
 const CPropertyTrk::property_t& CPropertyTrk::propBySource(const QString& source) const
 {
-    foreach(const property_t& prop, properties)
+    foreach(const property_t &prop, properties)
     {
         if(prop.key == source)
         {

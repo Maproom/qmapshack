@@ -40,8 +40,8 @@ IFitField::IFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldPro
 }
 
 IFitField::IFitField()
-        : fieldProfile(CFitProfileLookup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
-          globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&InvalidType), valid(false)
+    : fieldProfile(CFitProfileLookup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
+    globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&InvalidType), valid(false)
 {
 }
 

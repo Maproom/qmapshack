@@ -21,8 +21,8 @@
 
 #include <QObject>
 #include <QSet>
-#include <QVariant>
 #include <QString>
+#include <QVariant>
 #include <functional>
 
 using fGetLimit = std::function<qreal(const QString&)>;
@@ -72,12 +72,12 @@ private:
     qreal minUser;
     qreal maxUser;
 
-    fGetLimit       funcGetMin;
-    fGetLimit       funcGetMax;
-    fGetLimit       funcGetMinAuto;
-    fGetLimit       funcGetMaxAuto;
-    fGetUnit        funcGetUnit;
-    fMarkChanged    funcMarkChanged;
+    fGetLimit funcGetMin;
+    fGetLimit funcGetMax;
+    fGetLimit funcGetMinAuto;
+    fGetLimit funcGetMaxAuto;
+    fGetUnit funcGetUnit;
+    fMarkChanged funcMarkChanged;
 
     QString source;
 

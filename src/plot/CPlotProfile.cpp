@@ -37,7 +37,7 @@ CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *
 {
     connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
     setWindowTitle(trk->getNameEx());
-    updateData();   
+    updateData();
 }
 
 CPlotProfile::~CPlotProfile()

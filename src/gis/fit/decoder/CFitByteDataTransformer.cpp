@@ -91,7 +91,7 @@ quint32 CFitByteDataTransformer::getUint32(quint8* rawData)
 
 qint8 CFitByteDataTransformer::getSint8(quint8* rawData)
 {
-    return (int8_t) rawData[0];
+    return (qint8) rawData[0];
 }
 
 qint16 CFitByteDataTransformer::getSint16(quint8* rawData)

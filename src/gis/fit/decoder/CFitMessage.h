@@ -20,7 +20,7 @@
 #define CFITMESSAGE_H
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
-#include "gis/fit/decoder/IFitField.h"
+#include "gis/fit/decoder/CFitField.h"
 
 #include <QtCore>
 
@@ -31,16 +31,15 @@ class CFitMessage final
 public:
     CFitMessage(const CFitDefinitionMessage& def);
     CFitMessage();
-    virtual ~CFitMessage();
 
     bool isValid() const;
     quint16 getGlobalMesgNr() const;
     quint8 getLocalMesgNr() const;
 
     bool hasField(const quint8 fieldDefNum) const;
-    const IFitField & getField(const quint8 fieldDefNum) const;
+
     bool isFieldValueValid(const quint8 fieldDefNum) const;
-    void addField(IFitField * field);
+    void addField(CFitField & field);
 
     QString getFieldString(const quint8 fieldDefNum) const;
     QByteArray getFieldBytes(const quint8 fieldDefNum) const;
@@ -50,15 +49,14 @@ public:
 
     const CFitProfile& profile() const { return *messageProfile; }
     QStringList messageInfo() const;
-    const QList<IFitField *> getFields() const { return fields.values(); }
-
+    const QList<CFitField> getFields() const { return fields.values(); }
+    void updateFieldProfile(quint8 fieldDefNr, const CFitFieldProfile* fieldProfile);
 
 private:
-    QMap<quint8, IFitField *> fields;
+    QMap<quint8, CFitField> fields;
     quint16 globalMesgNr;
     quint8 localMesgNr;
     const CFitProfile* messageProfile;
 };
-
 
 #endif //CFITMESSAGE_H

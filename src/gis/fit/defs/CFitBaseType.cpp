@@ -37,6 +37,10 @@ quint8 CFitBaseType::size() const
 {
     return typeSize;
 }
+bool CFitBaseType::isSizeUndefined() const
+{
+    return typeSize == 0;
+}
 
 BaseTypeNr CFitBaseType::nr() const
 {
@@ -93,28 +97,28 @@ QString CFitBaseType::name() const
 }
 
 template <class T>
-CFitBaseType build(BaseTypeNr baseTypeNr, QString name, T invalid)
+CFitBaseType build(BaseTypeNr baseTypeNr, QString name, quint8 size, T invalid)
 {
-    return CFitBaseType (baseTypeNr, (quint8*)&invalid, (quint8)sizeof(T), name);
+    return CFitBaseType (baseTypeNr, (quint8*)&invalid, size, name);
 }
 
-CFitBaseType EnumType = build<quint8>(TypeEnum, "Enum", 0xFF);
-CFitBaseType Sint8Type = build<int8_t>(TypeSint8, "Sint8", 0x7F);
-CFitBaseType Uint8Type = build<quint8>(TypeUint8, "Uint8", 0xFF);
-CFitBaseType Sint16Type = build<qint16>(TypeSint16, "Sint16", 0x7FFF);
-CFitBaseType Uint16Type = build<quint16>(TypeUint16, "Uint16", 0xFFFF);
-CFitBaseType Sint32Type = build<qint32>(TypeSint32, "Sint32", 0x7FFFFFFF);
-CFitBaseType Uint32Type = build<quint32>(TypeUint32, "Uint32", 0xFFFFFFFF);
-CFitBaseType StringType = build<char>(TypeString, "String", 0x00);
-CFitBaseType Float32Type = build<float>(TypeFloat32, "Flaot32", (float)0xFFFFFFFF);
-CFitBaseType Float64Type = build<double>(TypeFloat64, "Float64", (double)0xFFFFFFFFFFFFFFFFull);
+CFitBaseType EnumType = build<quint8>(TypeEnum, "Enum", sizeof(quint8), 0xFF);
+CFitBaseType Sint8Type = build<qint8>(TypeSint8, "Sint8", sizeof(qint8), 0x7F);
+CFitBaseType Uint8Type = build<quint8>(TypeUint8, "Uint8", sizeof(quint8),  0xFF);
+CFitBaseType Sint16Type = build<qint16>(TypeSint16, "Sint16", sizeof(qint16), 0x7FFF);
+CFitBaseType Uint16Type = build<quint16>(TypeUint16, "Uint16",sizeof(quint16), 0xFFFF);
+CFitBaseType Sint32Type = build<qint32>(TypeSint32, "Sint32", sizeof(qint32),0x7FFFFFFF);
+CFitBaseType Uint32Type = build<quint32>(TypeUint32, "Uint32", sizeof(quint32),0xFFFFFFFF);
+CFitBaseType StringType = build<char>(TypeString, "String", 0,0x00);
+CFitBaseType Float32Type = build<float>(TypeFloat32, "Flaot32", sizeof(float), (float)0xFFFFFFFF);
+CFitBaseType Float64Type = build<double>(TypeFloat64, "Float64", sizeof(double), (double)0xFFFFFFFFFFFFFFFFull);
 
-CFitBaseType Uint8zType = build<quint8>(TypeUint8z, "Uint8z", 0x00);
-CFitBaseType Uint16zType = build<quint16>(TypeUint16z, "Uint16z", 0x0000);
-CFitBaseType Uint32zType = build<quint32>(TypeUint32z, "Uint32z", 0x00000000);
-CFitBaseType ByteType = build<quint8>(TypeByte, "Byte", 0xFF); // Field is invalid if all bytes are invalid.
+CFitBaseType Uint8zType = build<quint8>(TypeUint8z, "Uint8z", sizeof(quint8), 0x00);
+CFitBaseType Uint16zType = build<quint16>(TypeUint16z, "Uint16z", sizeof(quint16), 0x0000);
+CFitBaseType Uint32zType = build<quint32>(TypeUint32z, "Uint32z", sizeof(quint32), 0x00000000);
+CFitBaseType ByteType = build<quint8>(TypeByte, "Byte", 0, 0xFF); // Field is invalid if all bytes are invalid.
 
-CFitBaseType InvalidType = build<quint8>(TypeInvalid, "Invalid", 0);
+CFitBaseType InvalidType = build<quint8>(TypeInvalid, "Invalid",0, 0);
 
 static QMap<quint8, CFitBaseType> buildBaseTypeMap()
 {

@@ -22,24 +22,19 @@
 
 
 #include "gis/fit/decoder/CFitMessage.h"
-#include "gis/fit/decoder/IFitField.h"
+#include "gis/fit/decoder/CFitField.h"
 
 class CFitFieldBuilder
 {
 public:
     CFitFieldBuilder() = delete;
     static void evaluateSubfieldsAndExpandComponents(CFitMessage& mesg);
-    static IFitField * buildField(const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message);
+    static CFitField buildField(const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message);
 
 private:
-    static IFitField * buildSIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, quint8* fieldData);
-    static IFitField * buildUIntField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, quint8* fieldData);
-    static IFitField * buildFloatField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, quint8* fieldData);
-    static IFitField * buildStringField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, quint8* fieldData);
-    static IFitField * buildByteField(const CFitFieldDefinition& def, const CFitFieldProfile* fieldProfile, quint8* fieldData);
-
-    static void evaluateFieldProfile(CFitMessage& mesg, IFitField* field);
-    static void expandComponents(CFitMessage& mesg, const IFitField* field);
+    static bool isValueValid(const CFitFieldDefinition &def, quint8 *fieldData);
+    static void evaluateFieldProfile(CFitMessage& mesg, const CFitField & field);
+    static void expandComponents(CFitMessage& mesg, const CFitField & field);
 };
 
 #endif //CFITFIELDBUILDER_H

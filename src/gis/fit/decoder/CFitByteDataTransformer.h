@@ -42,7 +42,7 @@ private:
     static quint8 getUint8(quint8* rawData);
     static quint16 getUint16(quint8* rawData);
     static quint32 getUint32(quint8* rawData);
-    static int8_t getSint8(quint8* rawData);
+    static qint8 getSint8(quint8* rawData);
     static qint16 getSint16(quint8* rawData);
     static qint32 getSint32(quint8* rawData);
     static qreal getFloat32(quint8* rawData);

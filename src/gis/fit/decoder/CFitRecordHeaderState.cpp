@@ -72,7 +72,8 @@ decode_state_e CFitRecordHeaderState::process(quint8 &dataByte)
 
         addMessage(*def);
         const CFitFieldDefinition& fieldDef = def->getField(eRecordTimestamp);
-        latestMessage()->addField(new CFitIntField<quint32>(fieldDef, &fieldDef.profile(), getTimestamp(), true));
+        CFitField timeField = CFitField(fieldDef, &fieldDef.profile(), QVariant(getTimestamp()), true);
+        latestMessage()->addField(timeField);
 
         return eDecoderStateFieldData;
     }

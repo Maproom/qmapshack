@@ -50,6 +50,7 @@ public:
     quint8 size() const;
     BaseTypeNr nr() const;
     const quint8* invalidValueBytes() const;
+    bool isSizeUndefined() const;
     bool isInteger() const;
     bool isSignedInt() const;
     bool isUnsignedInt() const;

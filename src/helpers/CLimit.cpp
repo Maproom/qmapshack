@@ -23,12 +23,12 @@ QSet<CLimit*> CLimit::allLimits;
 
 CLimit::CLimit(const QString &cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit, fMarkChanged markChanged)
     : cfgPath(cfgPath)
-    , _getMin(getMin)
-    , _getMax(getMax)
-    , _getMinAuto(getMinAuto)
-    , _getMaxAuto(getMaxAuto)
-    , _getUnit(getUnit)
-    , _markChanged(markChanged)
+    , funcGetMin(getMin)
+    , funcGetMax(getMax)
+    , funcGetMinAuto(getMinAuto)
+    , funcGetMaxAuto(getMaxAuto)
+    , funcGetUnit(getUnit)
+    , funcMarkChanged(markChanged)
 {
 
     allLimits << this;
@@ -47,7 +47,7 @@ void CLimit::setMode(mode_e m)
 
     if(markAsChanged)
     {
-        _markChanged();
+        funcMarkChanged();
     }
 
     emit sigChanged();
@@ -58,12 +58,12 @@ void CLimit::setSource(const QString& src)
     bool markAsChanged = source != src;
 
     source  = src;
-    minUser = _getMin(source);
-    maxUser = _getMax(source);
+    minUser = funcGetMin(source);
+    maxUser = funcGetMax(source);
 
     if(markAsChanged)
     {
-        _markChanged();
+        funcMarkChanged();
     }
 }
 
@@ -79,12 +79,12 @@ qreal CLimit::getMin() const
         break;
 
     case eModeAutomatic:
-        val = _getMinAuto(source);
+        val = funcGetMinAuto(source);
         break;
 
     case eModeDefault:
         cfg.beginGroup(cfgPath);
-        val = cfg.value(source + "/min", _getMin(source)).toReal();
+        val = cfg.value(source + "/min", funcGetMin(source)).toReal();
         cfg.endGroup();
         break;
     }
@@ -104,12 +104,12 @@ qreal CLimit::getMax() const
         break;
 
     case eModeAutomatic:
-        val = _getMaxAuto(source);
+        val = funcGetMaxAuto(source);
         break;
 
     case eModeDefault:
         cfg.beginGroup(cfgPath);
-        val = cfg.value(source + "/max", _getMax(source)).toReal();
+        val = cfg.value(source + "/max", funcGetMax(source)).toReal();
         cfg.endGroup();
         break;
     }
@@ -129,7 +129,7 @@ void CLimit::setMin(const qreal &val)
         minUser = val;
         if(markAsChanged)
         {
-            _markChanged();
+            funcMarkChanged();
         }
         break;
     }
@@ -158,7 +158,7 @@ void CLimit::setMax(const qreal &val)
         maxUser = val;
         if(markAsChanged)
         {
-            _markChanged();
+            funcMarkChanged();
         }
         break;
     }
@@ -177,5 +177,5 @@ void CLimit::setMax(const qreal &val)
 
 QString CLimit::getUnit() const
 {
-    return _getUnit(source);
+    return funcGetUnit(source);
 }

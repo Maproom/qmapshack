@@ -294,6 +294,7 @@ function createProfiles()
 		fi
 		COUNT=$[$COUNT +1]
 	done < $IN_MESSAGES
+	echo "profiles.insert($enumName, f);" >> $CODE_FILE
 	echo "}" >> $CODE_FILE
 }
 

@@ -26,7 +26,7 @@
 #include <QtCore>
 
 
-class CFitDecoder
+class CFitDecoder final
 {
 public:
     CFitDecoder();

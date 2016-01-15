@@ -24,25 +24,30 @@
 #include <QtCore>
 
 
-class CFitProfile
+class CFitProfile final
 {
 public:
     CFitProfile();
     CFitProfile(const CFitProfile& copy);
-    CFitProfile(QString name, uint16_t globalMesgNr);
-    void addField(CFitFieldProfile* field);
-    void addSubfield(uint8_t fieldDefNr, CFitSubfieldProfile* field);
-    void addComponent(uint8_t fieldDefNr, CFitComponentfieldProfile* field);
-    void addComponent(uint8_t fieldDefNr, int subfieldIndex, CFitComponentfieldProfile* field);
-    const CFitFieldProfile* getField(uint8_t fieldDefNr) const;
+    CFitProfile(QString name, quint16 globalMesgNr);
+    virtual ~CFitProfile();
+
+    void addField(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units);
+    void addSubfield(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal
+        scale, quint16 offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue);
+    void addComponent(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits);
+    void addComponent(int subfieldIndex, QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits);
+
+
+    const CFitFieldProfile* getField(quint8 fieldDefNr) const;
 
     QString getName() const { return name; }
-    uint16_t getGlobalMesgNr() const { return globalMesgNr; }
+    quint16 getGlobalMesgNr() const { return globalMesgNr; }
 
 private:
     QString name;
-    uint16_t globalMesgNr;
-    QMap<uint8_t, CFitFieldProfile*> fields;
+    quint16 globalMesgNr;
+    QMap<quint8, CFitFieldProfile*> fields;
 };
 
 #endif // CFITPROFILE_H

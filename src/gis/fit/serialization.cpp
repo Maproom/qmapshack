@@ -42,7 +42,7 @@ public:
      *
        return: the given semicircle value converted to degree.
      */
-    static qreal toDegree(int32_t semicircles)
+    static qreal toDegree(qint32 semicircles)
     {
         qreal degree = 0;
         degree = semicircles * (degrees / twoPow31);
@@ -52,7 +52,7 @@ public:
     /**
        timestamp: seconds since UTC 00:00 Dec 31 1989
      */
-    static QDateTime toDateTime(uint32_t timestamp)
+    static QDateTime toDateTime(quint32 timestamp)
     {
         QDateTime dateTime;
         dateTime.setTime_t(sec1970to1990 + timestamp);

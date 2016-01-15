@@ -64,7 +64,7 @@ const CFitMessage& invalidMessage()
     return *dummyMessage;
 }
 
-const CFitMessage& CFitStream::nextMesgOf(uint16_t mesgNum)
+const CFitMessage& CFitStream::nextMesgOf(quint16 mesgNum)
 {
     while(hasMoreMesg())
     {
@@ -78,7 +78,7 @@ const CFitMessage& CFitStream::nextMesgOf(uint16_t mesgNum)
 }
 
 
-const CFitMessage& CFitStream::firstMesgOf(uint16_t mesgNum)
+const CFitMessage& CFitStream::firstMesgOf(quint16 mesgNum)
 {
     reset();
     const CFitMessage& mesg = nextMesgOf(mesgNum);
@@ -86,7 +86,7 @@ const CFitMessage& CFitStream::firstMesgOf(uint16_t mesgNum)
     return mesg;
 }
 
-int CFitStream::countMesgOf(uint16_t mesgNr)
+int CFitStream::countMesgOf(quint16 mesgNr)
 {
     reset();
     int c = 0;

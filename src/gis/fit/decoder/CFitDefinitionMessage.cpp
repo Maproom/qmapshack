@@ -19,9 +19,9 @@
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 
 #include "gis/fit/defs/CFitBaseType.h"
-#include "gis/fit/defs/CFitProfileLockup.h"
+#include "gis/fit/defs/CFitProfileLookup.h"
 
-static const uint8_t fitArchitecureEndianMask = 0x01;
+static const quint8 fitArchitecureEndianMask = 0x01;
 
 
 CFitDefinitionMessage::CFitDefinitionMessage()
@@ -30,54 +30,53 @@ CFitDefinitionMessage::CFitDefinitionMessage()
 }
 
 CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
-    : globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields), localMesgNr(copy.localMesgNr),
-    fields(copy.fields)
+    : globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields),
+      localMesgNr(copy.localMesgNr), fields(copy.fields), messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
 {
-    messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
     for(CFitFieldDefinition& field : fields)
     {
         field.setParent(this);
     }
 }
 
-CFitDefinitionMessage::CFitDefinitionMessage(uint8_t localMesgNr)
-    : architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields()
+CFitDefinitionMessage::CFitDefinitionMessage(quint8 localMesgNr)
+    : globalMesgNr(fitGlobalMesgNrInvalid), architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields(),
+      messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
 {
-    setGlobalMesgNr(fitGlobalMesgNrInvalid);
 }
 
 
-void CFitDefinitionMessage::setArchiteture(uint8_t arch)
+void CFitDefinitionMessage::setArchiteture(quint8 arch)
 {
     architecture = arch;
 }
 
-void CFitDefinitionMessage::setGlobalMesgNr(uint16_t globalMesgNr)
+void CFitDefinitionMessage::setGlobalMesgNr(quint16 globalMesgNr)
 {
     this->globalMesgNr = globalMesgNr;
-    messageProfile = CFitProfileLockup::getProfile(globalMesgNr);
+    messageProfile = CFitProfileLookup::getProfile(globalMesgNr);
 }
 
-void CFitDefinitionMessage::setNrOfFields(uint8_t nrOfFields)
+void CFitDefinitionMessage::setNrOfFields(quint8 nrOfFields)
 {
     this->nrOfFields = nrOfFields;
 }
 
-uint16_t CFitDefinitionMessage::getGlobalMesgNr() const
+quint16 CFitDefinitionMessage::getGlobalMesgNr() const
 {
     return globalMesgNr;
 }
 
-uint8_t CFitDefinitionMessage::getLocalMesgNr() const
+quint8 CFitDefinitionMessage::getLocalMesgNr() const
 {
     return localMesgNr;
 }
 
-uint8_t CFitDefinitionMessage::getArchitectureBit() const
+quint8 CFitDefinitionMessage::getArchitectureBit() const
 {
     return architecture & fitArchitecureEndianMask;
 }
-uint8_t CFitDefinitionMessage::getNrOfFields() const
+quint8 CFitDefinitionMessage::getNrOfFields() const
 {
     return nrOfFields;
 }
@@ -92,7 +91,7 @@ const QList<CFitFieldDefinition>&CFitDefinitionMessage::getFields() const
     return fields;
 }
 
-bool CFitDefinitionMessage::hasField(const uint8_t fieldNum) const
+bool CFitDefinitionMessage::hasField(const quint8 fieldNum) const
 {
     for (int i=0; i< fields.size(); i++)
     {
@@ -115,7 +114,7 @@ const CFitFieldDefinition& invalidDefinitionField()
     return *dummyDefinitionField;
 }
 
-const CFitFieldDefinition& CFitDefinitionMessage::getField(const uint8_t fieldNum) const
+const CFitFieldDefinition& CFitDefinitionMessage::getField(const quint8 fieldNum) const
 {
     for (int i=0; i< fields.size(); i++)
     {
@@ -128,7 +127,7 @@ const CFitFieldDefinition& CFitDefinitionMessage::getField(const uint8_t fieldNu
 }
 
 
-const CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const uint16_t index) const
+const CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const quint16 index) const
 {
     if (index < fields.size())
     {
@@ -142,7 +141,7 @@ QStringList CFitDefinitionMessage::messageInfo() const
 {
     QStringList list;
     list << QString("Definition %1 (%2) local nr %3, arch %4, # fields %5")
-        .arg(profile()->getName())
+        .arg(profile().getName())
         .arg(getGlobalMesgNr())
         .arg(getLocalMesgNr())
         .arg(getArchitectureBit())

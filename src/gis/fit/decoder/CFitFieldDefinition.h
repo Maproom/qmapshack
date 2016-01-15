@@ -27,17 +27,17 @@
 // forwar declaration to parent
 class CFitDefinitionMessage;
 
-class CFitFieldDefinition
+class CFitFieldDefinition final
 {
 public:
-    CFitFieldDefinition(CFitDefinitionMessage* parent, uint8_t defNr, uint8_t size, uint8_t type);
+    CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type);
     CFitFieldDefinition();
 
     QString fieldInfo() const;
 
-    uint8_t getDefNr() const;
-    uint8_t getSize() const;
-    uint8_t getType() const;
+    quint8 getDefNr() const;
+    quint8 getSize() const;
+    quint8 getType() const;
     const CFitBaseType& getBaseType() const;
     bool getEndianAbilityFlag() const;
 
@@ -47,10 +47,10 @@ public:
     void setParent(CFitDefinitionMessage* parent) { parentDefintion = parent; }
 
 private:
-    uint8_t defNr;
-    uint8_t size;
-    uint8_t type;
-    const CFitBaseType* baseType;
+    quint8 defNr;
+    quint8 size;
+    quint8 type;
+    CFitBaseType* baseType;
     const CFitDefinitionMessage* parentDefintion;
     const CFitFieldProfile* fieldProfile;
 };

@@ -30,7 +30,6 @@ CLimit::CLimit(const QString &cfgPath, fGetLimit getMin, fGetLimit getMax, fGetL
     , funcGetUnit(getUnit)
     , funcMarkChanged(markChanged)
 {
-
     allLimits << this;
 }
 

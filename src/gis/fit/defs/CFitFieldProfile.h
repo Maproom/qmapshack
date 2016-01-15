@@ -70,7 +70,7 @@ private:
 };
 
 
-class CFitSubfieldProfile final: public CFitFieldProfile
+class CFitSubfieldProfile final : public CFitFieldProfile
 {
 public:
     CFitSubfieldProfile(CFitProfile* parent, QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units,
@@ -88,7 +88,7 @@ private:
     quint8 refFieldValue;
 };
 
-class CFitComponentfieldProfile final: public CFitFieldProfile
+class CFitComponentfieldProfile final : public CFitFieldProfile
 {
 public:
     CFitComponentfieldProfile(CFitProfile* parent, QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits);

@@ -23,7 +23,7 @@
 
 static const int fitMaxFieldSize =255;
 
-class CFitFieldDataState final: public IFitDecoderState
+class CFitFieldDataState final : public IFitDecoderState
 {
 public:
     CFitFieldDataState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldData) { reset(); }

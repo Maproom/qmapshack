@@ -121,7 +121,6 @@ void CKnownExtension::init(IUnit &units)
          { QObject::tr("Progress"), 0., NOFLOAT, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true,
            [](const CGisItemTrk::trkpt_t &p) { return p.distance; }}
         }
-
     };
 
     initGarminTPXv1(units, "gpxtpx");

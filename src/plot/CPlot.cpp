@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "helpers/CLimit.h"
 #include "plot/CPlot.h"
 #include "plot/CPlotAxis.h"
-#include "helpers/CLimit.h"
 
 CPlot::CPlot(CGisItemTrk * trk,  CLimit& limit, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget * parent)
     : IPlot(trk, type, eModeNormal, parent)
@@ -27,7 +27,6 @@ CPlot::CPlot(CGisItemTrk * trk,  CLimit& limit, CPlotData::axistype_e type, cons
     , getX(getX)
     , getY(getY)
 {
-
     connect(&limit, &CLimit::sigChanged, this, &CPlot::setLimits);
 
     setXLabel(xLabel);
@@ -44,7 +43,7 @@ CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, QWidget *parent)
 }
 
 void CPlot::setup(const QString& source, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY)
-{    
+{
     data->setXAxisType(type);
     setXLabel(xLabel);
     setYLabel(yLabel);

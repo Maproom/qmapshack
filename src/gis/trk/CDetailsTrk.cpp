@@ -785,7 +785,6 @@ void CDetailsTrk::slotSetupGraph(int idx)
     spinMax->setSuffix(limit->getUnit());
     spinMin->setValue(limit->getMin());
     spinMax->setValue(limit->getMax());
-
 }
 
 void CDetailsTrk::slotSetLimitModeUser()
@@ -857,7 +856,6 @@ void CDetailsTrk::slotSetLimitModeAuto()
     limit->setMode(CLimit::eModeAutomatic);
     spinMin->setValue(limit->getMin());
     spinMax->setValue(limit->getMax());
-
 }
 
 void CDetailsTrk::slotSetLimitModeSys()

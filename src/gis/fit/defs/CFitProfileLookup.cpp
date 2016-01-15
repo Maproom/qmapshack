@@ -25,8 +25,8 @@
 
 // ----------- start generated code -----------
 void initFileId(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("file_id", eMesgNumFileId);
+{
+    CFitProfile* f = new CFitProfile("file_id", eMesgNumFileId);
     f->addField("type", EnumType, eFileIdType, 0, 0, "");
     f->addField("manufacturer", EnumType, eFileIdManufacturer, 0, 0, "");
     f->addField("product", Uint16Type, eFileIdProduct, 0, 0, "");
@@ -41,16 +41,16 @@ void initFileId(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initFileCreator(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("file_creator", eMesgNumFileCreator);
+{
+    CFitProfile* f = new CFitProfile("file_creator", eMesgNumFileCreator);
     f->addField("software_version", Uint16Type, eFileCreatorSoftwareVersion, 0, 0, "");
     f->addField("hardware_version", Uint8Type, eFileCreatorHardwareVersion, 0, 0, "");
     profiles.insert(eMesgNumFileCreator, f);
 }
 
 void initTimestampCorrelation(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("timestamp_correlation", eMesgNumTimestampCorrelation);
+{
+    CFitProfile* f = new CFitProfile("timestamp_correlation", eMesgNumTimestampCorrelation);
     f->addField("timestamp", EnumType, eTimestampCorrelationTimestamp, 0, 0, "s");
     f->addField("fractional_timestamp", Uint16Type, eTimestampCorrelationFractionalTimestamp, 32768, 0, "s");
     f->addField("system_timestamp", EnumType, eTimestampCorrelationSystemTimestamp, 0, 0, "s");
@@ -62,8 +62,8 @@ void initTimestampCorrelation(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSoftware(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("software", eMesgNumSoftware);
+{
+    CFitProfile* f = new CFitProfile("software", eMesgNumSoftware);
     f->addField("message_index", EnumType, eSoftwareMessageIndex, 0, 0, "");
     f->addField("version", Uint16Type, eSoftwareVersion, 100, 0, "");
     f->addField("part_number", StringType, eSoftwarePartNumber, 0, 0, "");
@@ -71,8 +71,8 @@ void initSoftware(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSlaveDevice(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("slave_device", eMesgNumSlaveDevice);
+{
+    CFitProfile* f = new CFitProfile("slave_device", eMesgNumSlaveDevice);
     f->addField("manufacturer", EnumType, eSlaveDeviceManufacturer, 0, 0, "");
     f->addField("product", Uint16Type, eSlaveDeviceProduct, 0, 0, "");
     f->addSubfield("garmin_product", EnumType, eSlaveDeviceProduct, 0, 0, "", eSlaveDeviceManufacturer, eManufacturerGarmin);
@@ -82,8 +82,8 @@ void initSlaveDevice(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initCapabilities(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("capabilities", eMesgNumCapabilities);
+{
+    CFitProfile* f = new CFitProfile("capabilities", eMesgNumCapabilities);
     f->addField("languages", Uint8zType, eCapabilitiesLanguages, 0, 0, "");
     f->addField("sports", EnumType, eCapabilitiesSports, 0, 0, "");
     f->addField("workouts_supported", EnumType, eCapabilitiesWorkoutsSupported, 0, 0, "");
@@ -92,8 +92,8 @@ void initCapabilities(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initFileCapabilities(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("file_capabilities", eMesgNumFileCapabilities);
+{
+    CFitProfile* f = new CFitProfile("file_capabilities", eMesgNumFileCapabilities);
     f->addField("message_index", EnumType, eFileCapabilitiesMessageIndex, 0, 0, "");
     f->addField("type", EnumType, eFileCapabilitiesType, 0, 0, "");
     f->addField("flags", EnumType, eFileCapabilitiesFlags, 0, 0, "");
@@ -104,8 +104,8 @@ void initFileCapabilities(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initMesgCapabilities(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("mesg_capabilities", eMesgNumMesgCapabilities);
+{
+    CFitProfile* f = new CFitProfile("mesg_capabilities", eMesgNumMesgCapabilities);
     f->addField("message_index", EnumType, eMesgCapabilitiesMessageIndex, 0, 0, "");
     f->addField("file", EnumType, eMesgCapabilitiesFile, 0, 0, "");
     f->addField("mesg_num", EnumType, eMesgCapabilitiesMesgNum, 0, 0, "");
@@ -118,8 +118,8 @@ void initMesgCapabilities(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initFieldCapabilities(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("field_capabilities", eMesgNumFieldCapabilities);
+{
+    CFitProfile* f = new CFitProfile("field_capabilities", eMesgNumFieldCapabilities);
     f->addField("message_index", EnumType, eFieldCapabilitiesMessageIndex, 0, 0, "");
     f->addField("file", EnumType, eFieldCapabilitiesFile, 0, 0, "");
     f->addField("mesg_num", EnumType, eFieldCapabilitiesMesgNum, 0, 0, "");
@@ -129,8 +129,8 @@ void initFieldCapabilities(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initDeviceSettings(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("device_settings", eMesgNumDeviceSettings);
+{
+    CFitProfile* f = new CFitProfile("device_settings", eMesgNumDeviceSettings);
     f->addField("active_time_zone", Uint8Type, eDeviceSettingsActiveTimeZone, 0, 0, "");
     f->addField("utc_offset", Uint32Type, eDeviceSettingsUtcOffset, 0, 0, "");
     f->addField("time_zone_offset", Sint8Type, eDeviceSettingsTimeZoneOffset, 4, 0, "hr");
@@ -138,8 +138,8 @@ void initDeviceSettings(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initUserProfile(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("user_profile", eMesgNumUserProfile);
+{
+    CFitProfile* f = new CFitProfile("user_profile", eMesgNumUserProfile);
     f->addField("message_index", EnumType, eUserProfileMessageIndex, 0, 0, "");
     f->addField("friendly_name", StringType, eUserProfileFriendlyName, 0, 0, "");
     f->addField("gender", EnumType, eUserProfileGender, 0, 0, "");
@@ -167,8 +167,8 @@ void initUserProfile(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initHrmProfile(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("hrm_profile", eMesgNumHrmProfile);
+{
+    CFitProfile* f = new CFitProfile("hrm_profile", eMesgNumHrmProfile);
     f->addField("message_index", EnumType, eHrmProfileMessageIndex, 0, 0, "");
     f->addField("enabled", EnumType, eHrmProfileEnabled, 0, 0, "");
     f->addField("hrm_ant_id", Uint16zType, eHrmProfileHrmAntId, 0, 0, "");
@@ -178,8 +178,8 @@ void initHrmProfile(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSdmProfile(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("sdm_profile", eMesgNumSdmProfile);
+{
+    CFitProfile* f = new CFitProfile("sdm_profile", eMesgNumSdmProfile);
     f->addField("message_index", EnumType, eSdmProfileMessageIndex, 0, 0, "");
     f->addField("enabled", EnumType, eSdmProfileEnabled, 0, 0, "");
     f->addField("sdm_ant_id", Uint16zType, eSdmProfileSdmAntId, 0, 0, "");
@@ -192,8 +192,8 @@ void initSdmProfile(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initBikeProfile(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("bike_profile", eMesgNumBikeProfile);
+{
+    CFitProfile* f = new CFitProfile("bike_profile", eMesgNumBikeProfile);
     f->addField("message_index", EnumType, eBikeProfileMessageIndex, 0, 0, "");
     f->addField("name", StringType, eBikeProfileName, 0, 0, "");
     f->addField("sport", EnumType, eBikeProfileSport, 0, 0, "");
@@ -230,8 +230,8 @@ void initBikeProfile(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initZonesTarget(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("zones_target", eMesgNumZonesTarget);
+{
+    CFitProfile* f = new CFitProfile("zones_target", eMesgNumZonesTarget);
     f->addField("max_heart_rate", Uint8Type, eZonesTargetMaxHeartRate, 0, 0, "");
     f->addField("threshold_heart_rate", Uint8Type, eZonesTargetThresholdHeartRate, 0, 0, "");
     f->addField("functional_threshold_power", Uint16Type, eZonesTargetFunctionalThresholdPower, 0, 0, "");
@@ -241,8 +241,8 @@ void initZonesTarget(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSport(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("sport", eMesgNumSport);
+{
+    CFitProfile* f = new CFitProfile("sport", eMesgNumSport);
     f->addField("sport", EnumType, eSportSport, 0, 0, "");
     f->addField("sub_sport", EnumType, eSportSubSport, 0, 0, "");
     f->addField("name", StringType, eSportName, 0, 0, "");
@@ -250,8 +250,8 @@ void initSport(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initHrZone(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("hr_zone", eMesgNumHrZone);
+{
+    CFitProfile* f = new CFitProfile("hr_zone", eMesgNumHrZone);
     f->addField("message_index", EnumType, eHrZoneMessageIndex, 0, 0, "");
     f->addField("high_bpm", Uint8Type, eHrZoneHighBpm, 0, 0, "bpm");
     f->addField("name", StringType, eHrZoneName, 0, 0, "");
@@ -259,8 +259,8 @@ void initHrZone(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSpeedZone(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("speed_zone", eMesgNumSpeedZone);
+{
+    CFitProfile* f = new CFitProfile("speed_zone", eMesgNumSpeedZone);
     f->addField("message_index", EnumType, eSpeedZoneMessageIndex, 0, 0, "");
     f->addField("high_value", Uint16Type, eSpeedZoneHighValue, 1000, 0, "m/s");
     f->addField("name", StringType, eSpeedZoneName, 0, 0, "");
@@ -268,8 +268,8 @@ void initSpeedZone(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initCadenceZone(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("cadence_zone", eMesgNumCadenceZone);
+{
+    CFitProfile* f = new CFitProfile("cadence_zone", eMesgNumCadenceZone);
     f->addField("message_index", EnumType, eCadenceZoneMessageIndex, 0, 0, "");
     f->addField("high_value", Uint8Type, eCadenceZoneHighValue, 0, 0, "rpm");
     f->addField("name", StringType, eCadenceZoneName, 0, 0, "");
@@ -277,8 +277,8 @@ void initCadenceZone(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initPowerZone(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("power_zone", eMesgNumPowerZone);
+{
+    CFitProfile* f = new CFitProfile("power_zone", eMesgNumPowerZone);
     f->addField("message_index", EnumType, ePowerZoneMessageIndex, 0, 0, "");
     f->addField("high_value", Uint16Type, ePowerZoneHighValue, 0, 0, "watts");
     f->addField("name", StringType, ePowerZoneName, 0, 0, "");
@@ -286,8 +286,8 @@ void initPowerZone(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initMetZone(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("met_zone", eMesgNumMetZone);
+{
+    CFitProfile* f = new CFitProfile("met_zone", eMesgNumMetZone);
     f->addField("message_index", EnumType, eMetZoneMessageIndex, 0, 0, "");
     f->addField("high_bpm", Uint8Type, eMetZoneHighBpm, 0, 0, "");
     f->addField("calories", Uint16Type, eMetZoneCalories, 10, 0, "kcal / min");
@@ -296,8 +296,8 @@ void initMetZone(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initGoal(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("goal", eMesgNumGoal);
+{
+    CFitProfile* f = new CFitProfile("goal", eMesgNumGoal);
     f->addField("message_index", EnumType, eGoalMessageIndex, 0, 0, "");
     f->addField("sport", EnumType, eGoalSport, 0, 0, "");
     f->addField("sub_sport", EnumType, eGoalSubSport, 0, 0, "");
@@ -314,8 +314,8 @@ void initGoal(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initActivity(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("activity", eMesgNumActivity);
+{
+    CFitProfile* f = new CFitProfile("activity", eMesgNumActivity);
     f->addField("timestamp", EnumType, eActivityTimestamp, 0, 0, "");
     f->addField("total_timer_time", Uint32Type, eActivityTotalTimerTime, 1000, 0, "s");
     f->addField("num_sessions", Uint16Type, eActivityNumSessions, 0, 0, "");
@@ -328,8 +328,8 @@ void initActivity(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSession(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("session", eMesgNumSession);
+{
+    CFitProfile* f = new CFitProfile("session", eMesgNumSession);
     f->addField("message_index", EnumType, eSessionMessageIndex, 0, 0, "");
     f->addField("timestamp", EnumType, eSessionTimestamp, 0, 0, "s");
     f->addField("event", EnumType, eSessionEvent, 0, 0, "");
@@ -457,8 +457,8 @@ void initSession(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initLap(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("lap", eMesgNumLap);
+{
+    CFitProfile* f = new CFitProfile("lap", eMesgNumLap);
     f->addField("message_index", EnumType, eLapMessageIndex, 0, 0, "");
     f->addField("timestamp", EnumType, eLapTimestamp, 0, 0, "s");
     f->addField("event", EnumType, eLapEvent, 0, 0, "");
@@ -574,8 +574,8 @@ void initLap(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initLength(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("length", eMesgNumLength);
+{
+    CFitProfile* f = new CFitProfile("length", eMesgNumLength);
     f->addField("message_index", EnumType, eLengthMessageIndex, 0, 0, "");
     f->addField("timestamp", EnumType, eLengthTimestamp, 0, 0, "");
     f->addField("event", EnumType, eLengthEvent, 0, 0, "");
@@ -598,8 +598,8 @@ void initLength(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initRecord(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("record", eMesgNumRecord);
+{
+    CFitProfile* f = new CFitProfile("record", eMesgNumRecord);
     f->addField("timestamp", EnumType, eRecordTimestamp, 0, 0, "s");
     f->addField("position_lat", Sint32Type, eRecordPositionLat, 0, 0, "semicircles");
     f->addField("position_long", Sint32Type, eRecordPositionLong, 0, 0, "semicircles");
@@ -666,8 +666,8 @@ void initRecord(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initEvent(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("event", eMesgNumEvent);
+{
+    CFitProfile* f = new CFitProfile("event", eMesgNumEvent);
     f->addField("timestamp", EnumType, eEventTimestamp, 0, 0, "s");
     f->addField("event", EnumType, eEventEvent, 0, 0, "");
     f->addField("event_type", EnumType, eEventEventType, 0, 0, "");
@@ -713,8 +713,8 @@ void initEvent(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initDeviceInfo(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("device_info", eMesgNumDeviceInfo);
+{
+    CFitProfile* f = new CFitProfile("device_info", eMesgNumDeviceInfo);
     f->addField("timestamp", EnumType, eDeviceInfoTimestamp, 0, 0, "s");
     f->addField("device_index", EnumType, eDeviceInfoDeviceIndex, 0, 0, "");
     f->addField("device_type", Uint8Type, eDeviceInfoDeviceType, 0, 0, "");
@@ -742,8 +742,8 @@ void initDeviceInfo(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initTrainingFile(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("training_file", eMesgNumTrainingFile);
+{
+    CFitProfile* f = new CFitProfile("training_file", eMesgNumTrainingFile);
     f->addField("timestamp", EnumType, eTrainingFileTimestamp, 0, 0, "");
     f->addField("type", EnumType, eTrainingFileType, 0, 0, "");
     f->addField("manufacturer", EnumType, eTrainingFileManufacturer, 0, 0, "");
@@ -757,15 +757,15 @@ void initTrainingFile(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initHrv(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("hrv", eMesgNumHrv);
+{
+    CFitProfile* f = new CFitProfile("hrv", eMesgNumHrv);
     f->addField("time", Uint16Type, eHrvTime, 1000, 0, "s");
     profiles.insert(eMesgNumHrv, f);
 }
 
 void initCameraEvent(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("camera_event", eMesgNumCameraEvent);
+{
+    CFitProfile* f = new CFitProfile("camera_event", eMesgNumCameraEvent);
     f->addField("timestamp", EnumType, eCameraEventTimestamp, 0, 0, "s");
     f->addField("timestamp_ms", Uint16Type, eCameraEventTimestampMs, 0, 0, "ms");
     f->addField("camera_event_type", EnumType, eCameraEventCameraEventType, 0, 0, "");
@@ -775,8 +775,8 @@ void initCameraEvent(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initGyroscopeData(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("gyroscope_data", eMesgNumGyroscopeData);
+{
+    CFitProfile* f = new CFitProfile("gyroscope_data", eMesgNumGyroscopeData);
     f->addField("timestamp", EnumType, eGyroscopeDataTimestamp, 0, 0, "s");
     f->addField("timestamp_ms", Uint16Type, eGyroscopeDataTimestampMs, 0, 0, "ms");
     f->addField("sample_time_offset", Uint16Type, eGyroscopeDataSampleTimeOffset, 0, 0, "ms");
@@ -790,8 +790,8 @@ void initGyroscopeData(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initAccelerometerData(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("accelerometer_data", eMesgNumAccelerometerData);
+{
+    CFitProfile* f = new CFitProfile("accelerometer_data", eMesgNumAccelerometerData);
     f->addField("timestamp", EnumType, eAccelerometerDataTimestamp, 0, 0, "s");
     f->addField("timestamp_ms", Uint16Type, eAccelerometerDataTimestampMs, 0, 0, "ms");
     f->addField("sample_time_offset", Uint16Type, eAccelerometerDataSampleTimeOffset, 0, 0, "ms");
@@ -805,8 +805,8 @@ void initAccelerometerData(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initThreeDSensorCalibration(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("three_d_sensor_calibration", eMesgNumThreeDSensorCalibration);
+{
+    CFitProfile* f = new CFitProfile("three_d_sensor_calibration", eMesgNumThreeDSensorCalibration);
     f->addField("timestamp", EnumType, eThreeDSensorCalibrationTimestamp, 0, 0, "s");
     f->addField("sensor_type", EnumType, eThreeDSensorCalibrationSensorType, 0, 0, "");
     f->addField("calibration_factor", Uint32Type, eThreeDSensorCalibrationCalibrationFactor, 0, 0, "");
@@ -820,8 +820,8 @@ void initThreeDSensorCalibration(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initVideoFrame(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("video_frame", eMesgNumVideoFrame);
+{
+    CFitProfile* f = new CFitProfile("video_frame", eMesgNumVideoFrame);
     f->addField("timestamp", EnumType, eVideoFrameTimestamp, 0, 0, "s");
     f->addField("timestamp_ms", Uint16Type, eVideoFrameTimestampMs, 0, 0, "ms");
     f->addField("frame_number", Uint32Type, eVideoFrameFrameNumber, 0, 0, "");
@@ -829,8 +829,8 @@ void initVideoFrame(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initObdiiData(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("obdii_data", eMesgNumObdiiData);
+{
+    CFitProfile* f = new CFitProfile("obdii_data", eMesgNumObdiiData);
     f->addField("timestamp", EnumType, eObdiiDataTimestamp, 0, 0, "s");
     f->addField("timestamp_ms", Uint16Type, eObdiiDataTimestampMs, 0, 0, "ms");
     f->addField("time_offset", Uint16Type, eObdiiDataTimeOffset, 0, 0, "ms");
@@ -844,8 +844,8 @@ void initObdiiData(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initNmeaSentence(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("nmea_sentence", eMesgNumNmeaSentence);
+{
+    CFitProfile* f = new CFitProfile("nmea_sentence", eMesgNumNmeaSentence);
     f->addField("timestamp", EnumType, eNmeaSentenceTimestamp, 0, 0, "s");
     f->addField("timestamp_ms", Uint16Type, eNmeaSentenceTimestampMs, 0, 0, "ms");
     f->addField("sentence", StringType, eNmeaSentenceSentence, 0, 0, "");
@@ -853,8 +853,8 @@ void initNmeaSentence(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initAviationAttitude(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("aviation_attitude", eMesgNumAviationAttitude);
+{
+    CFitProfile* f = new CFitProfile("aviation_attitude", eMesgNumAviationAttitude);
     f->addField("timestamp", EnumType, eAviationAttitudeTimestamp, 0, 0, "s");
     f->addField("timestamp_ms", Uint16Type, eAviationAttitudeTimestampMs, 0, 0, "ms");
     f->addField("system_time", Uint32Type, eAviationAttitudeSystemTime, 0, 0, "ms");
@@ -871,8 +871,8 @@ void initAviationAttitude(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initVideo(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("video", eMesgNumVideo);
+{
+    CFitProfile* f = new CFitProfile("video", eMesgNumVideo);
     f->addField("url", StringType, eVideoUrl, 0, 0, "");
     f->addField("hosting_provider", StringType, eVideoHostingProvider, 0, 0, "");
     f->addField("duration", Uint32Type, eVideoDuration, 0, 0, "ms");
@@ -880,8 +880,8 @@ void initVideo(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initVideoTitle(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("video_title", eMesgNumVideoTitle);
+{
+    CFitProfile* f = new CFitProfile("video_title", eMesgNumVideoTitle);
     f->addField("message_index", EnumType, eVideoTitleMessageIndex, 0, 0, "");
     f->addField("message_count", Uint16Type, eVideoTitleMessageCount, 0, 0, "");
     f->addField("text", StringType, eVideoTitleText, 0, 0, "");
@@ -889,8 +889,8 @@ void initVideoTitle(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initVideoDescription(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("video_description", eMesgNumVideoDescription);
+{
+    CFitProfile* f = new CFitProfile("video_description", eMesgNumVideoDescription);
     f->addField("message_index", EnumType, eVideoDescriptionMessageIndex, 0, 0, "");
     f->addField("message_count", Uint16Type, eVideoDescriptionMessageCount, 0, 0, "");
     f->addField("text", StringType, eVideoDescriptionText, 0, 0, "");
@@ -898,8 +898,8 @@ void initVideoDescription(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initVideoClip(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("video_clip", eMesgNumVideoClip);
+{
+    CFitProfile* f = new CFitProfile("video_clip", eMesgNumVideoClip);
     f->addField("clip_number", Uint16Type, eVideoClipClipNumber, 0, 0, "");
     f->addField("start_timestamp", EnumType, eVideoClipStartTimestamp, 0, 0, "");
     f->addField("start_timestamp_ms", Uint16Type, eVideoClipStartTimestampMs, 0, 0, "");
@@ -911,8 +911,8 @@ void initVideoClip(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initCourse(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("course", eMesgNumCourse);
+{
+    CFitProfile* f = new CFitProfile("course", eMesgNumCourse);
     f->addField("sport", EnumType, eCourseSport, 0, 0, "");
     f->addField("name", StringType, eCourseName, 0, 0, "");
     f->addField("capabilities", EnumType, eCourseCapabilities, 0, 0, "");
@@ -920,8 +920,8 @@ void initCourse(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initCoursePoint(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("course_point", eMesgNumCoursePoint);
+{
+    CFitProfile* f = new CFitProfile("course_point", eMesgNumCoursePoint);
     f->addField("message_index", EnumType, eCoursePointMessageIndex, 0, 0, "");
     f->addField("timestamp", EnumType, eCoursePointTimestamp, 0, 0, "");
     f->addField("position_lat", Sint32Type, eCoursePointPositionLat, 0, 0, "semicircles");
@@ -934,8 +934,8 @@ void initCoursePoint(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSegmentId(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("segment_id", eMesgNumSegmentId);
+{
+    CFitProfile* f = new CFitProfile("segment_id", eMesgNumSegmentId);
     f->addField("name", StringType, eSegmentIdName, 0, 0, "");
     f->addField("uuid", StringType, eSegmentIdUuid, 0, 0, "");
     f->addField("sport", EnumType, eSegmentIdSport, 0, 0, "");
@@ -949,8 +949,8 @@ void initSegmentId(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSegmentLeaderboardEntry(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("segment_leaderboard_entry", eMesgNumSegmentLeaderboardEntry);
+{
+    CFitProfile* f = new CFitProfile("segment_leaderboard_entry", eMesgNumSegmentLeaderboardEntry);
     f->addField("message_index", EnumType, eSegmentLeaderboardEntryMessageIndex, 0, 0, "");
     f->addField("name", StringType, eSegmentLeaderboardEntryName, 0, 0, "");
     f->addField("type", EnumType, eSegmentLeaderboardEntryType, 0, 0, "");
@@ -962,8 +962,8 @@ void initSegmentLeaderboardEntry(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSegmentPoint(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("segment_point", eMesgNumSegmentPoint);
+{
+    CFitProfile* f = new CFitProfile("segment_point", eMesgNumSegmentPoint);
     f->addField("message_index", EnumType, eSegmentPointMessageIndex, 0, 0, "");
     f->addField("position_lat", Sint32Type, eSegmentPointPositionLat, 0, 0, "semicircles");
     f->addField("position_long", Sint32Type, eSegmentPointPositionLong, 0, 0, "semicircles");
@@ -974,8 +974,8 @@ void initSegmentPoint(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSegmentLap(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("segment_lap", eMesgNumSegmentLap);
+{
+    CFitProfile* f = new CFitProfile("segment_lap", eMesgNumSegmentLap);
     f->addField("message_index", EnumType, eSegmentLapMessageIndex, 0, 0, "");
     f->addField("timestamp", EnumType, eSegmentLapTimestamp, 0, 0, "s");
     f->addField("event", EnumType, eSegmentLapEvent, 0, 0, "");
@@ -1066,8 +1066,8 @@ void initSegmentLap(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initSegmentFile(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("segment_file", eMesgNumSegmentFile);
+{
+    CFitProfile* f = new CFitProfile("segment_file", eMesgNumSegmentFile);
     f->addField("message_index", EnumType, eSegmentFileMessageIndex, 0, 0, "");
     f->addField("file_uuid", StringType, eSegmentFileFileUuid, 0, 0, "");
     f->addField("enabled", EnumType, eSegmentFileEnabled, 0, 0, "");
@@ -1080,8 +1080,8 @@ void initSegmentFile(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initWorkout(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("workout", eMesgNumWorkout);
+{
+    CFitProfile* f = new CFitProfile("workout", eMesgNumWorkout);
     f->addField("sport", EnumType, eWorkoutSport, 0, 0, "");
     f->addField("capabilities", EnumType, eWorkoutCapabilities, 0, 0, "");
     f->addField("num_valid_steps", Uint16Type, eWorkoutNumValidSteps, 0, 0, "");
@@ -1090,8 +1090,8 @@ void initWorkout(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initWorkoutStep(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("workout_step", eMesgNumWorkoutStep);
+{
+    CFitProfile* f = new CFitProfile("workout_step", eMesgNumWorkoutStep);
     f->addField("message_index", EnumType, eWorkoutStepMessageIndex, 0, 0, "");
     f->addField("wkt_step_name", StringType, eWorkoutStepWktStepName, 0, 0, "");
     f->addField("duration_type", EnumType, eWorkoutStepDurationType, 0, 0, "");
@@ -1140,7 +1140,7 @@ void initWorkoutStep(QMap<quint16, CFitProfile*>& profiles)
 
 void initSchedule(QMap<quint16, CFitProfile*>& profiles)
 {
-    CFitProfile * f = new CFitProfile("schedule", eMesgNumSchedule);
+    CFitProfile* f = new CFitProfile("schedule", eMesgNumSchedule);
     f->addField("manufacturer", EnumType, eScheduleManufacturer, 0, 0, "");
     f->addField("product", Uint16Type, eScheduleProduct, 0, 0, "");
     f->addSubfield("garmin_product", EnumType, eScheduleProduct, 0, 0, "", eScheduleManufacturer, eManufacturerGarmin);
@@ -1171,8 +1171,8 @@ void initTotals(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initWeightScale(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("weight_scale", eMesgNumWeightScale);
+{
+    CFitProfile* f = new CFitProfile("weight_scale", eMesgNumWeightScale);
     f->addField("timestamp", EnumType, eWeightScaleTimestamp, 0, 0, "s");
     f->addField("weight", EnumType, eWeightScaleWeight, 100, 0, "kg");
     f->addField("percent_fat", Uint16Type, eWeightScalePercentFat, 100, 0, "%");
@@ -1256,14 +1256,15 @@ void initMonitoring(QMap<quint16, CFitProfile*>& profiles)
 }
 
 void initMemoGlob(QMap<quint16, CFitProfile*>& profiles)
-{ CFitProfile 
-    * f = new CFitProfile("memo_glob", eMesgNumMemoGlob);
+{
+    CFitProfile* f = new CFitProfile("memo_glob", eMesgNumMemoGlob);
     f->addField("part_index", Uint32Type, eMemoGlobPartIndex, 0, 0, "");
     f->addField("memo", ByteType, eMemoGlobMemo, 0, 0, "");
     f->addField("message_number", Uint16Type, eMemoGlobMessageNumber, 0, 0, "");
     f->addField("message_index", EnumType, eMemoGlobMessageIndex, 0, 0, "");
     profiles.insert(eMesgNumMemoGlob, f);
 }
+
 // ----------- end generated code -----------
 
 
@@ -1330,9 +1331,7 @@ void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
     initMemoGlob(allProfiles);
 
     // invalid profile
-    CFitProfile* f = new CFitProfile();
-    f->addField("unknown", InvalidType, fitFieldDefNrInvalid, 0, 0, "");
-    allProfiles.insert(fitGlobalMesgNrInvalid, f);
+    allProfiles.insert(fitGlobalMesgNrInvalid, new CFitProfile());
 }
 
 CFitProfileLookup * fitLookupInstance = nullptr;
@@ -1358,7 +1357,9 @@ void CFitProfileLookup::slotCleanup()
 const CFitProfile*CFitProfileLookup::getProfile(quint16 globalMesgNr)
 {
     if(fitLookupInstance == nullptr)
+    {
         fitLookupInstance = new CFitProfileLookup();
+    }
 
     if (fitLookupInstance->allProfiles.contains(globalMesgNr))
     {
@@ -1370,7 +1371,9 @@ const CFitProfile*CFitProfileLookup::getProfile(quint16 globalMesgNr)
 const CFitFieldProfile*CFitProfileLookup::getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr)
 {
     if(fitLookupInstance == nullptr)
+    {
         fitLookupInstance = new CFitProfileLookup();
+    }
 
     if (fitLookupInstance->allProfiles.contains(globalMesgNr))
     {

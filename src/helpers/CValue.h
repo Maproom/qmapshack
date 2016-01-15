@@ -24,11 +24,12 @@
 #include <functional>
 
 using fValueOnChange = std::function<void(const QVariant&)>;
+using fMarkChanged   = std::function<void(void)>;
 
 class CValue
 {
 public:
-    CValue(const QString& cfgTag, const QVariant& initDefault, fValueOnChange onChange = nullptr);
+    CValue(const QString& cfgTag, const QVariant& initDefault, fMarkChanged markChanged, fValueOnChange onChange = nullptr);
     virtual ~CValue();
 
     enum mode_e
@@ -58,7 +59,8 @@ private:
     QVariant initDefault;
     QVariant valUser;
 
-    fValueOnChange onChange;
+    fValueOnChange funcOnChange;
+    fMarkChanged   funcMarkChanged;
 
     static QSet<CValue*> allValues;
 };

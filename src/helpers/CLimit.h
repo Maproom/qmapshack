@@ -39,9 +39,9 @@ public:
 
     enum mode_e
     {
-        eModeDefault
+        eModeSys
         , eModeUser
-        , eModeAutomatic
+        , eModeAuto
     };
 
     void setMode(mode_e m);
@@ -67,7 +67,10 @@ signals:
 private:
     friend QDataStream& operator<<(QDataStream& stream, const CLimit& l);
     friend QDataStream& operator>>(QDataStream& stream, CLimit& l);
-    mode_e mode = eModeAutomatic;
+    void updateSys();
+    void updateSys(const QString& src);
+
+    mode_e mode = eModeAuto;
     QString cfgPath;
     qreal minUser;
     qreal maxUser;

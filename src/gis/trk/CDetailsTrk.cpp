@@ -225,7 +225,7 @@ void CDetailsTrk::slotLimitHighFromData()
 
 void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGraph, QToolButton * toolLimitUsrGraph, QToolButton * toolLimitSysGraph, QDoubleSpinBox * spinMinGraph, QDoubleSpinBox * spinMaxGraph)
 {
-    bool isAutoMode = (limit.getMode() == CLimit::eModeAutomatic);
+    bool isAutoMode = (limit.getMode() == CLimit::eModeAuto);
 
     spinMinGraph->setDisabled(isAutoMode);
     spinMinGraph->setSuffix(limit.getUnit());
@@ -240,10 +240,10 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     case CLimit::eModeUser:
         toolLimitUsrGraph->setChecked(true);
         break;
-    case CLimit::eModeAutomatic:
+    case CLimit::eModeAuto:
         toolLimitAutoGraph->setChecked(true);
         break;
-    case CLimit::eModeDefault:
+    case CLimit::eModeSys:
         toolLimitSysGraph->setChecked(true);
         break;
     }
@@ -256,6 +256,8 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
 
     connect(spinMinGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMin);
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);
+
+    connect(&limit, &CLimit::sigChanged, this, &CDetailsTrk::slotLimitChanged);
 }
 
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)
@@ -768,15 +770,15 @@ void CDetailsTrk::slotSetLimitModeAuto(bool on)
     QObject *s = sender();
     if(s == toolLimitAutoGraph1)
     {
-        setupMode(CLimit::eModeAutomatic, trk.limitsGraph1, spinMinGraph1, spinMaxGraph1);
+        setupMode(CLimit::eModeAuto, trk.limitsGraph1, spinMinGraph1, spinMaxGraph1);
     }
     else if(s == toolLimitAutoGraph2)
     {
-        setupMode(CLimit::eModeAutomatic, trk.limitsGraph2, spinMinGraph2, spinMaxGraph2);
+        setupMode(CLimit::eModeAuto, trk.limitsGraph2, spinMinGraph2, spinMaxGraph2);
     }
     else if(s == toolLimitAutoGraph3)
     {
-        setupMode(CLimit::eModeAutomatic, trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
+        setupMode(CLimit::eModeAuto, trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
     }
 }
 
@@ -790,22 +792,45 @@ void CDetailsTrk::slotSetLimitModeSys(bool on)
     QObject *s = sender();
     if(s == toolLimitSysGraph1)
     {
-        setupMode(CLimit::eModeDefault, trk.limitsGraph1, spinMinGraph1, spinMaxGraph1);
+        setupMode(CLimit::eModeSys, trk.limitsGraph1, spinMinGraph1, spinMaxGraph1);
     }
     else if(s == toolLimitSysGraph2)
     {
-        setupMode(CLimit::eModeDefault, trk.limitsGraph2, spinMinGraph2, spinMaxGraph2);
+        setupMode(CLimit::eModeSys, trk.limitsGraph2, spinMinGraph2, spinMaxGraph2);
     }
     else if(s == toolLimitSysGraph3)
     {
-        setupMode(CLimit::eModeDefault, trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
+        setupMode(CLimit::eModeSys, trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
     }
 }
 
+void CDetailsTrk::setupLimits(CLimit& limit, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)
+{
+    spinMin->setValue(limit.getMin());
+    spinMax->setValue(limit.getMax());
+}
+
+void CDetailsTrk::slotLimitChanged()
+{
+    QObject *s = sender();
+    if(s == &trk.limitsGraph1)
+    {
+        setupLimits(trk.limitsGraph1, spinMinGraph1, spinMaxGraph1);
+    }
+    else if(s == &trk.limitsGraph2)
+    {
+        setupLimits(trk.limitsGraph2, spinMinGraph2, spinMaxGraph2);
+    }
+    else if(s == &trk.limitsGraph3)
+    {
+        setupLimits(trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
+    }
+
+}
 
 void CDetailsTrk::slotLineWidthMode(bool isUser)
 {
-    trk.lineScale.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
+    trk.lineScale.setMode(isUser ? CValue::eModeUser : CValue::eModeSys);
     spinLineWidth->setValue(trk.lineScale.val().toDouble());
 }
 
@@ -816,7 +841,7 @@ void CDetailsTrk::slotLineWidth(qreal f)
 
 void CDetailsTrk::slotWithArrowsMode(bool isUser)
 {
-    trk.showArrows.setMode(isUser ? CValue::eModeUser : CValue::eModeDefault);
+    trk.showArrows.setMode(isUser ? CValue::eModeUser : CValue::eModeSys);
     checkWithArrows->setChecked(trk.showArrows.val().toBool());
 }
 

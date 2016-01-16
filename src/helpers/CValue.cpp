@@ -87,7 +87,7 @@ const QVariant& CValue::operator=(const QVariant& v)
         {
             if(value != this)
             {
-                value->updateDefault(cfgTag, v);
+                value->updateSys(cfgTag, v);
             }
         }
     }
@@ -105,9 +105,9 @@ const QVariant& CValue::operator=(const QVariant& v)
 }
 
 
-void CValue::updateDefault(const QString& tag, const QVariant &val)
+void CValue::updateSys(const QString& tag, const QVariant &val)
 {
-    if((mode == eModeDefault) && (tag == cfgTag) && (funcOnChange != nullptr))
+    if((mode == eModeSys) && (tag == cfgTag) && (funcOnChange != nullptr))
     {
         funcOnChange(val);
     }

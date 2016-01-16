@@ -767,9 +767,9 @@ void CDetailsTrk::slotActivitySelected(bool checked)
 
 void CDetailsTrk::slotSetupGraph(int idx)
 {
-    CLimit * limit;
-    QDoubleSpinBox * spinMin;
-    QDoubleSpinBox * spinMax;
+    CLimit * limit = 0;
+    QDoubleSpinBox * spinMin = 0;
+    QDoubleSpinBox * spinMax = 0;
 
     QObject *s = sender();
     if(s == comboGraph2)
@@ -795,9 +795,9 @@ void CDetailsTrk::slotSetupGraph(int idx)
 
 void CDetailsTrk::slotSetLimitModeUser()
 {
-    CLimit * limit;
-    QDoubleSpinBox * spinMin;
-    QDoubleSpinBox * spinMax;
+    CLimit * limit = 0;
+    QDoubleSpinBox * spinMin = 0;
+    QDoubleSpinBox * spinMax = 0;
 
     QObject *s = sender();
     if(s == toolLimitUsrGraph1)
@@ -830,9 +830,9 @@ void CDetailsTrk::slotSetLimitModeUser()
 
 void CDetailsTrk::slotSetLimitModeAuto()
 {
-    CLimit * limit;
-    QDoubleSpinBox * spinMin;
-    QDoubleSpinBox * spinMax;
+    CLimit * limit = 0;
+    QDoubleSpinBox * spinMin = 0;
+    QDoubleSpinBox * spinMax = 0;
 
 
     QObject *s = sender();
@@ -866,9 +866,9 @@ void CDetailsTrk::slotSetLimitModeAuto()
 
 void CDetailsTrk::slotSetLimitModeSys()
 {
-    CLimit * limit;
-    QDoubleSpinBox * spinMin;
-    QDoubleSpinBox * spinMax;
+    CLimit * limit = 0;
+    QDoubleSpinBox * spinMin = 0;
+    QDoubleSpinBox * spinMax = 0;
 
     QObject *s = sender();
     if(s == toolLimitSysGraph1)

@@ -335,7 +335,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -1602,9 +1602,9 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupLineWidth"/>
-  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph1"/>
  </buttongroups>
 </ui>

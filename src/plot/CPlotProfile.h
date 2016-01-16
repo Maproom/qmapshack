@@ -21,7 +21,6 @@
 
 
 #include "plot/IPlot.h"
-#include <QPointer>
 
 class CLimit;
 

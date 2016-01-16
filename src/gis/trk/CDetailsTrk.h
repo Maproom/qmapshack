@@ -69,6 +69,9 @@ private slots:
     void slotWithArrows(bool yes);
 
 private:
+    void loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault);
+    void saveGraphSource(QComboBox * comboBox, qint32 n);
+
     enum columns_t
     {
         eColNum

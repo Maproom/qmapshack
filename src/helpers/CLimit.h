@@ -25,6 +25,8 @@
 #include <QVariant>
 #include <functional>
 
+#include "units/IUnit.h"
+
 using fGetLimit = std::function<qreal(const QString&)>;
 using fGetUnit  = std::function<QString(const QString&)>;
 using fMarkChanged = std::function<void(void)>;
@@ -72,8 +74,8 @@ private:
 
     mode_e mode = eModeAuto;
     QString cfgPath;
-    qreal minUser;
-    qreal maxUser;
+    qreal minUser = NOFLOAT;
+    qreal maxUser = NOFLOAT;
 
     fGetLimit funcGetMin;
     fGetLimit funcGetMax;

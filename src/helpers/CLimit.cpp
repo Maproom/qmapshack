@@ -58,11 +58,10 @@ void CLimit::setSource(const QString& src)
     bool markAsChanged = source != src;
 
     source  = src;
-    minUser = funcGetMin(source);
-    maxUser = funcGetMax(source);
-
     if(markAsChanged)
     {
+        minUser = funcGetMin(source);
+        maxUser = funcGetMax(source);
         funcMarkChanged();
     }
 }

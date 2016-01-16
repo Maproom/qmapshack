@@ -31,7 +31,7 @@ CSetupWorkspace::CSetupWorkspace(QWidget *parent)
     cfg.beginGroup("Database");
     checkSaveOnExit->setChecked(cfg.value("saveOnExit", true).toBool());
     spinSaveEvery->setValue(cfg.value("saveEvery",5).toInt());
-    checkDbUpdate->setChecked(cfg.value("listenUpdate", true).toBool());
+    checkDbUpdate->setChecked(cfg.value("listenUpdate", false).toBool());
     linePort->setText(cfg.value("port", "34123").toString());
     cfg.endGroup();
 

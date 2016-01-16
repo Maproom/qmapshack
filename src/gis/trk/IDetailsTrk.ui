@@ -1063,7 +1063,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="toolLimitGraph1">
+              <widget class="QToolButton" name="toolLimitAutoGraph1">
                <property name="toolTip">
                 <string>Automatic limits</string>
                </property>
@@ -1160,7 +1160,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="toolLimitGraph2">
+              <widget class="QToolButton" name="toolLimitAutoGraph2">
                <property name="toolTip">
                 <string>Automatic limits</string>
                </property>
@@ -1257,7 +1257,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="toolLimitGraph3">
+              <widget class="QToolButton" name="toolLimitAutoGraph3">
                <property name="toolTip">
                 <string>Automatic limits</string>
                </property>

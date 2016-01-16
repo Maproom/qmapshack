@@ -18,7 +18,7 @@
 
 #include "helpers/CLimit.h"
 #include "helpers/CSettings.h"
-#include "units/IUnit.h"
+
 
 QSet<CLimit*> CLimit::allLimits;
 
@@ -55,7 +55,7 @@ void CLimit::setMode(mode_e m)
 
 void CLimit::setSource(const QString& src)
 {
-    bool markAsChanged = source != src;
+    bool markAsChanged = !source.isEmpty() && (source != src);
 
     source  = src;
     if(markAsChanged)
@@ -124,7 +124,7 @@ void CLimit::setMin(const qreal &val)
     {
     case eModeUser:
     {
-        bool markAsChanged = minUser != val;
+        bool markAsChanged = (minUser != NOFLOAT) && (minUser != val);
         minUser = val;
         if(markAsChanged)
         {
@@ -155,7 +155,7 @@ void CLimit::setMax(const qreal &val)
     {
     case eModeUser:
     {
-        bool markAsChanged = maxUser != val;
+        bool markAsChanged = (maxUser == NOFLOAT) && (maxUser != val);
         maxUser = val;
         if(markAsChanged)
         {

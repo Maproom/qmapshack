@@ -102,10 +102,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     updateData();
 
-    const CPropertyTrk * propHandler = trk.getPropertyHandler();
-    propHandler->fillComboBox(comboGraph2);
-    propHandler->fillComboBox(comboGraph3);
-
     plot1 = new CPlotProfile(&trk, trk.limitsGraph1, IPlot::eModeNormal, this);
     plot2 = new CPlot(&trk, trk.limitsGraph2, this);
     plot3 = new CPlot(&trk, trk.limitsGraph3, this);
@@ -272,20 +268,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     // setting up the graph properties will trigger the signals
     // this is good because the signals are connected at this point
     // invoking the slots
-    cfg.beginGroup("TrackDetails");
-    int i = comboGraph2->findData(cfg.value("propGraph2", CKnownExtension::internalSpeed).toString());
-    if(i != NOIDX)
-    {
-        comboGraph2->setCurrentIndex(i);
-    }
-
-    i = comboGraph3->findData(cfg.value("propGraph3","progress").toString());
-    if(i != NOIDX)
-    {
-        comboGraph3->setCurrentIndex(i);
-    }
-    cfg.endGroup();
-
+    loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
+    loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
     slotShowPlots();
 }
@@ -297,20 +281,13 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("showGraph1", checkGraph1->isChecked());
     cfg.setValue("showGraph2", checkGraph2->isChecked());
     cfg.setValue("showGraph3", checkGraph3->isChecked());
-
-    if(comboGraph2->currentIndex() != 0)
-    {
-        cfg.setValue("propGraph2", comboGraph2->currentData().toString());
-    }
-    if(comboGraph3->currentIndex() != 0)
-    {
-        cfg.setValue("propGraph3", comboGraph3->currentData().toString());
-    }
-
     cfg.setValue("splitterSizes",       splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.setValue("visibleTab",          tabWidget->currentIndex());
     cfg.endGroup();
+
+    saveGraphSource(comboGraph2, 2);
+    saveGraphSource(comboGraph3, 3);
 }
 
 void CDetailsTrk::slotLimitLowFromData()
@@ -328,6 +305,38 @@ void CDetailsTrk::slotLimitHighFromData()
     slotColorLimitHighChanged();
     slotColorLimitLowChanged();
 }
+
+void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)
+{
+    const CPropertyTrk * p = trk.getPropertyHandler();
+
+    comboBox->blockSignals(true);
+    p->fillComboBox(comboBox);
+    comboBox->blockSignals(false);
+
+    // try to restore last graph setup
+    // signals are unblocked by now changing the combobox will trigger a graph update
+    SETTINGS;
+    cfg.beginGroup("TrackDetails");
+    int i = comboBox->findData(cfg.value(QString("propGraph%1").arg(n),cfgDefault).toString());
+    if(i != NOIDX)
+    {
+        comboBox->setCurrentIndex(i);
+    }
+    cfg.endGroup();
+}
+
+void CDetailsTrk::saveGraphSource(QComboBox * comboBox, qint32 n)
+{
+    SETTINGS;
+    cfg.beginGroup("TrackDetails");
+    if(comboBox->currentIndex() != 0)
+    {
+        cfg.setValue(QString("propGraph%1").arg(n), comboBox->currentData().toString());
+    }
+    cfg.endGroup();
+}
+
 
 void CDetailsTrk::updateData()
 {
@@ -537,33 +546,12 @@ void CDetailsTrk::updateData()
 
 
     // refill comboboxes to select track property to be displayed by graphs
-    const CPropertyTrk * p = trk.getPropertyHandler();
-
     comboGraph2->blockSignals(true);
-    p->fillComboBox(comboGraph2);
-    comboGraph2->blockSignals(false);
-
     comboGraph3->blockSignals(true);
-    p->fillComboBox(comboGraph3);
+    loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
+    loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
+    comboGraph2->blockSignals(false);
     comboGraph3->blockSignals(false);
-
-    // try to restore last graph setup
-    // signals are unblocked by now changing the combobox will trigger a graph update
-    SETTINGS;
-    cfg.beginGroup("TrackDetails");
-    int i = comboGraph2->findData(cfg.value("propGraph2","speed").toString());
-    if(i != NOIDX)
-    {
-        comboGraph2->setCurrentIndex(i);
-    }
-
-    i = comboGraph3->findData(cfg.value("propGraph3","progress").toString());
-    if(i != NOIDX)
-    {
-        comboGraph3->setCurrentIndex(i);
-    }
-    cfg.endGroup();
-
 
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
@@ -774,6 +762,7 @@ void CDetailsTrk::slotSetupGraph(int idx)
     QObject *s = sender();
     if(s == comboGraph2)
     {
+        saveGraphSource(comboGraph2, 2);
         trk.getPropertyHandler()->setupPlot(plot2, comboGraph2->itemData(idx).toString());
         limit   = &trk.limitsGraph2;
         spinMin = spinMinGraph2;
@@ -781,10 +770,15 @@ void CDetailsTrk::slotSetupGraph(int idx)
     }
     else if(s == comboGraph3)
     {
+        saveGraphSource(comboGraph3, 3);
         trk.getPropertyHandler()->setupPlot(plot3, comboGraph3->itemData(idx).toString());
         limit   = &trk.limitsGraph3;
         spinMin = spinMinGraph3;
         spinMax = spinMaxGraph3;
+    }
+    else
+    {
+        return;
     }
 
     spinMin->setSuffix(limit->getUnit());

@@ -233,7 +233,7 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
 
     spinMaxGraph->setDisabled(isAutoMode);
     spinMaxGraph->setSuffix(limit.getUnit());
-    spinMaxGraph->setValue(limit.getMin());
+    spinMaxGraph->setValue(limit.getMax());
 
     switch(limit.getMode())
     {

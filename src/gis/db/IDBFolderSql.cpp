@@ -118,7 +118,7 @@ bool IDBFolderSql::update()
 void IDBFolderSql::announceChange() const
 {
     SETTINGS;
-    bool enabled = cfg.value("Database/listenUpdate", true).toBool();
+    bool enabled = cfg.value("Database/listenUpdate", false).toBool();
     if(!enabled)
     {
         return;

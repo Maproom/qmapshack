@@ -34,7 +34,7 @@ public:
 
     enum mode_e
     {
-        eModeDefault
+        eModeSys
         , eModeUser
     };
 
@@ -52,9 +52,9 @@ private:
     friend QDataStream& operator<<(QDataStream& stream, const CValue& v);
     friend QDataStream& operator>>(QDataStream& stream, CValue& v);
 
-    void updateDefault(const QString &tag, const QVariant& val);
+    void updateSys(const QString &tag, const QVariant& val);
 
-    mode_e mode = eModeDefault;
+    mode_e mode = eModeSys;
     QString cfgTag;
     QVariant initDefault;
     QVariant valUser;

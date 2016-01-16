@@ -78,11 +78,11 @@ qreal CLimit::getMin() const
         val = minUser;
         break;
 
-    case eModeAutomatic:
+    case eModeAuto:
         val = funcGetMinAuto(source);
         break;
 
-    case eModeDefault:
+    case eModeSys:
         cfg.beginGroup(cfgPath);
         val = cfg.value(source + "/min", funcGetMin(source)).toReal();
         cfg.endGroup();
@@ -103,11 +103,11 @@ qreal CLimit::getMax() const
         val = maxUser;
         break;
 
-    case eModeAutomatic:
+    case eModeAuto:
         val = funcGetMaxAuto(source);
         break;
 
-    case eModeDefault:
+    case eModeSys:
         cfg.beginGroup(cfgPath);
         val = cfg.value(source + "/max", funcGetMax(source)).toReal();
         cfg.endGroup();
@@ -134,11 +134,13 @@ void CLimit::setMin(const qreal &val)
         break;
     }
 
-    case eModeDefault:
+    case eModeSys:
     {
         cfg.beginGroup(cfgPath);
         cfg.setValue(source + "/min", val);
         cfg.endGroup();
+
+        updateSys();
         break;
     }
     }
@@ -163,11 +165,13 @@ void CLimit::setMax(const qreal &val)
         break;
     }
 
-    case eModeDefault:
+    case eModeSys:
     {
         cfg.beginGroup(cfgPath);
         cfg.setValue(source + "/max", val);
         cfg.endGroup();
+
+        updateSys();
         break;
     }
     }
@@ -178,4 +182,23 @@ void CLimit::setMax(const qreal &val)
 QString CLimit::getUnit() const
 {
     return funcGetUnit(source);
+}
+
+void CLimit::updateSys()
+{
+    foreach(CLimit * limit, allLimits)
+    {
+        if(limit != this)
+        {
+            limit->updateSys(source);
+        }
+    }
+}
+
+void CLimit::updateSys(const QString& src)
+{
+    if((mode == eModeSys) && (source == src))
+    {
+        emit sigChanged();
+    }
 }

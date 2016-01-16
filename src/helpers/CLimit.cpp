@@ -18,6 +18,7 @@
 
 #include "helpers/CLimit.h"
 #include "helpers/CSettings.h"
+#include "units/IUnit.h"
 
 QSet<CLimit*> CLimit::allLimits;
 
@@ -69,7 +70,7 @@ void CLimit::setSource(const QString& src)
 qreal CLimit::getMin() const
 {
     SETTINGS;
-    qreal val;
+    qreal val = NOFLOAT;
 
     switch(mode)
     {
@@ -94,7 +95,7 @@ qreal CLimit::getMin() const
 qreal CLimit::getMax() const
 {
     SETTINGS;
-    qreal val;
+    qreal val = NOFLOAT;
 
     switch(mode)
     {

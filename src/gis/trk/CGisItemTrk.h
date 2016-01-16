@@ -175,7 +175,7 @@ public:
     /**
        @brief Serialize track into a binary data stream
        @param stream  the data stream to write to.
-       @return A reference to thcfgPathe stream
+       @return A reference to the stream
      */
     virtual QDataStream& operator>>(QDataStream& stream) const override;
 

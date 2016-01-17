@@ -47,24 +47,24 @@ const CFitFieldProfile* CFitProfile::getField(quint8 fieldDefNr) const
 }
 
 
-void CFitProfile::addField(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units)
+void CFitProfile::addField(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units)
 {
     CFitFieldProfile* field= new CFitFieldProfile(this, name, baseType, fieldDefNr, scale, offset, units);
     fields.insert(fieldDefNr, field);
 }
-void CFitProfile::addSubfield(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal
+void CFitProfile::addSubfield(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal
 scale, quint16 offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue)
 {
     CFitSubfieldProfile* field = new CFitSubfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, subRefFieldDefNr, subRefFieldValue);
     fields[fieldDefNr]->addSubfield(field);
 }
-void CFitProfile::addComponent(QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
+void CFitProfile::addComponent(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
 {
     CFitComponentfieldProfile* field = new CFitComponentfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, componentFieldDefNr, bits);
     fields[fieldDefNr]->addComponent(field);
 
 }
-void CFitProfile::addComponent(int subfieldIndex, QString name, CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
+void CFitProfile::addComponent(int subfieldIndex, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
 {
     CFitComponentfieldProfile* field = new  CFitComponentfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, componentFieldDefNr, bits);
     fields[fieldDefNr]->addComponent(subfieldIndex, field);

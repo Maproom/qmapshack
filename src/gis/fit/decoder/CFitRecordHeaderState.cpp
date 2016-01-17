@@ -66,7 +66,7 @@ decode_state_e CFitRecordHeaderState::process(quint8 &dataByte)
             // remark on enum for timestamp (RecordTimestamp:
             // the timestamp field has for all message types the same number (253) therefore it does not matter which
             // enum is taken here.
-            def->addField(CFitFieldDefinition(def, eRecordTimestamp, sizeof(quint32), TypeUint8));
+            def->addField(CFitFieldDefinition(def, eRecordTimestamp, sizeof(quint32), eBaseTypeNrUint8));
         }
         setTimestampOffset(dataByte);
 

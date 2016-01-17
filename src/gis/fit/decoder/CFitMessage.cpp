@@ -74,17 +74,6 @@ bool CFitMessage::hasField(const quint8 fieldDefNum) const
     return fields.contains(fieldDefNum);
 }
 
-// dummy field for unknown field defintion nr.
-static const CFitField * dummyField = nullptr;
-const CFitField & invalidField()
-{
-    if(!dummyField)
-    {
-        dummyField = new CFitField();
-    }
-    return *dummyField;
-}
-
 void CFitMessage::addField(CFitField &  field)
 {
     if(fields.contains(field.getFieldDefNr()))

@@ -21,7 +21,7 @@
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-class CFitRecordContentState final: public IFitDecoderState
+class CFitRecordContentState final : public IFitDecoderState
 {
 public:
     CFitRecordContentState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateRecordContent) { reset(); }

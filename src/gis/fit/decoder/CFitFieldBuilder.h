@@ -21,8 +21,8 @@
 #define CFITFIELDBUILDER_H
 
 
-#include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/decoder/CFitField.h"
+#include "gis/fit/decoder/CFitMessage.h"
 
 class CFitFieldBuilder
 {

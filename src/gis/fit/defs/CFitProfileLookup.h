@@ -24,7 +24,7 @@
 
 class CFitProfileLookup : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     static const CFitProfile* getProfile(quint16 globalMesgNr);
     static const CFitFieldProfile* getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr);

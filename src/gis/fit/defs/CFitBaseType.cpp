@@ -101,20 +101,20 @@ QString CFitBaseType::name() const
 
 void CFitBaseTypeMap::initialize(QMap<quint8, CFitBaseType>& baseTypesMap)
 {
-    baseTypesMap.insert(EnumType.nr(), EnumType);
-    baseTypesMap.insert(Sint8Type.nr(), Sint8Type);
-    baseTypesMap.insert(Uint8Type.nr(), Uint8Type);
-    baseTypesMap.insert(Sint16Type.nr(), Sint16Type);
-    baseTypesMap.insert(Uint16Type.nr(), Uint16Type);
-    baseTypesMap.insert(Sint32Type.nr(), Sint32Type);
-    baseTypesMap.insert(Uint32Type.nr(), Uint32Type);
-    baseTypesMap.insert(StringType.nr(), StringType);
-    baseTypesMap.insert(Float32Type.nr(), Float32Type);
-    baseTypesMap.insert(Float64Type.nr(), Float64Type);
-    baseTypesMap.insert(Uint8zType.nr(), Uint8zType);
-    baseTypesMap.insert(Uint16zType.nr(), Uint16zType);
-    baseTypesMap.insert(Uint32zType.nr(), Uint32zType);
-    baseTypesMap.insert(ByteType.nr(), ByteType);
+    baseTypesMap.insert(fitEnumType.nr(), fitEnumType);
+    baseTypesMap.insert(fitSint8Type.nr(), fitSint8Type);
+    baseTypesMap.insert(fitUint8Type.nr(), fitUint8Type);
+    baseTypesMap.insert(fitSint16Type.nr(), fitSint16Type);
+    baseTypesMap.insert(fitUint16Type.nr(), fitUint16Type);
+    baseTypesMap.insert(fitSint32Type.nr(), fitSint32Type);
+    baseTypesMap.insert(fitUint32Type.nr(), fitUint32Type);
+    baseTypesMap.insert(fitStringType.nr(), fitStringType);
+    baseTypesMap.insert(fitFloat32Type.nr(), fitFloat32Type);
+    baseTypesMap.insert(fitFloat64Type.nr(), fitFloat64Type);
+    baseTypesMap.insert(fitUint8zType.nr(), fitUint8zType);
+    baseTypesMap.insert(fitUint16zType.nr(), fitUint16zType);
+    baseTypesMap.insert(fitUint32zType.nr(), fitUint32zType);
+    baseTypesMap.insert(fitByteType.nr(), fitByteType);
 }
 
 CFitBaseType* CFitBaseTypeMap::get(quint8 nr)

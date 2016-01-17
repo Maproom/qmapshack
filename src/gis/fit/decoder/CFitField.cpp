@@ -23,28 +23,28 @@
 
 
 CFitField::CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QVariant value, bool valid)
-        :  fieldProfile(profile), globalMesgNr(fieldDefinition.parent().getGlobalMesgNr()),
-           fieldDefNr(fieldDefinition.getDefNr()), baseType(&fieldDefinition.getBaseType()), valid(valid), value(value), rawValue(value)
+    :  fieldProfile(profile), globalMesgNr(fieldDefinition.parent().getGlobalMesgNr()),
+    fieldDefNr(fieldDefinition.getDefNr()), baseType(&fieldDefinition.getBaseType()), valid(valid), value(value), rawValue(value)
 {
     applyScaleAndOffset();
 }
 
 CFitField::CFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldProfile* profile, QVariant value, bool valid)
-        : fieldProfile(profile), globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr),
-          baseType(&profile->getBaseType()), valid(valid), value(value), rawValue(value)
+    : fieldProfile(profile), globalMesgNr(globalMesgNr), fieldDefNr(fieldDefNr),
+    baseType(&profile->getBaseType()), valid(valid), value(value), rawValue(value)
 {
     applyScaleAndOffset();
 }
 
 CFitField::CFitField(const CFitField & copy)
-        : fieldProfile(copy.fieldProfile), globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr),
-          baseType(copy.baseType), valid(copy.valid), value(copy.value), rawValue(copy.rawValue)
+    : fieldProfile(copy.fieldProfile), globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr),
+    baseType(copy.baseType), valid(copy.valid), value(copy.value), rawValue(copy.rawValue)
 {
 }
 
 CFitField::CFitField()
-        : fieldProfile(CFitProfileLookup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
-          globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&InvalidType), valid(false), value(), rawValue()
+    : fieldProfile(CFitProfileLookup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
+    globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&fitInvalidType), valid(false), value(), rawValue()
 {
 }
 
@@ -55,20 +55,21 @@ void CFitField::applyScaleAndOffset()
         // scale and offset is only for int / sint types
         if(baseType->isUnsignedInt())
         {
-
             value = QVariant(rawValue.toUInt()/ profile().getScale() - profile().getOffset());
         }
         if(baseType->isSignedInt())
         {
             value = QVariant(rawValue.toInt()/ profile().getScale() - profile().getOffset());
         }
-    } else
+    }
+    else
     {
         value = rawValue;
     }
 }
 
-void CFitField::setProfile(const CFitFieldProfile* profile) {
+void CFitField::setProfile(const CFitFieldProfile* profile)
+{
     fieldProfile = profile;
     applyScaleAndOffset();
 }
@@ -87,9 +88,9 @@ QString CFitField::fieldInfo() const
     if(getBaseType().isNumber())
     {
         str += QString(" (%1/%2-%3)")
-                .arg(rawValue.toString())
-                .arg(profile().getScale())
-                .arg( profile().getOffset());
+               .arg(rawValue.toString())
+               .arg(profile().getScale())
+               .arg( profile().getOffset());
     }
     return str;
 }

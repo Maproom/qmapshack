@@ -24,7 +24,7 @@
 #include <QtCore>
 
 
-class CFitProject final: public IGisProject
+class CFitProject final : public IGisProject
 {
 public:
     CFitProject(const QString& filename, CGisListWks * parent);

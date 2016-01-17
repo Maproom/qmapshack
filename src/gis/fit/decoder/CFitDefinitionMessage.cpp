@@ -31,7 +31,7 @@ CFitDefinitionMessage::CFitDefinitionMessage()
 
 CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
     : globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields),
-      localMesgNr(copy.localMesgNr), fields(copy.fields), messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
+    localMesgNr(copy.localMesgNr), fields(copy.fields), messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
 {
     for(CFitFieldDefinition& field : fields)
     {
@@ -41,7 +41,7 @@ CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
 
 CFitDefinitionMessage::CFitDefinitionMessage(quint8 localMesgNr)
     : globalMesgNr(fitGlobalMesgNrInvalid), architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields(),
-      messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
+    messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
 
@@ -113,7 +113,7 @@ const CFitFieldDefinition& CFitDefinitionMessage::getField(const quint8 fieldNum
         }
     }
     // dummy field for unknown field nr.
-    static CFitFieldDefinition dummyDefinitionField{};
+    static CFitFieldDefinition dummyDefinitionField {};
 
     return dummyDefinitionField;
 }
@@ -126,7 +126,7 @@ const CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const quint16 
         return fields[index];
     }
     // dummy field for unknown field nr.
-    static CFitFieldDefinition dummyDefinitionField{};
+    static CFitFieldDefinition dummyDefinitionField {};
 
     return dummyDefinitionField;
 }

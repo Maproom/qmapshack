@@ -19,12 +19,18 @@
 #include "gis/fit/defs/CFitProfile.h"
 
 
-CFitProfile::CFitProfile(QString name, quint16 globalMesgNr) : name(name), globalMesgNr(globalMesgNr), fields() {}
+CFitProfile::CFitProfile(QString name, quint16 globalMesgNr) : name(name), globalMesgNr(globalMesgNr), fields()
+{
+}
 
-CFitProfile::CFitProfile() : CFitProfile("unknown", fitGlobalMesgNrInvalid) {}
+CFitProfile::CFitProfile() : CFitProfile("unknown", fitGlobalMesgNrInvalid)
+{
+}
 
 CFitProfile::CFitProfile(const CFitProfile& copy)
-    : name(copy.name), globalMesgNr(copy.globalMesgNr), fields(copy.fields) {}
+    : name(copy.name), globalMesgNr(copy.globalMesgNr), fields(copy.fields)
+{
+}
 
 CFitProfile::~CFitProfile()
 {
@@ -53,7 +59,7 @@ void CFitProfile::addField(QString name, const CFitBaseType& baseType, quint8 fi
     fields.insert(fieldDefNr, field);
 }
 void CFitProfile::addSubfield(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal
-scale, quint16 offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue)
+                              scale, quint16 offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue)
 {
     CFitSubfieldProfile* field = new CFitSubfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, subRefFieldDefNr, subRefFieldValue);
     fields[fieldDefNr]->addSubfield(field);
@@ -62,7 +68,6 @@ void CFitProfile::addComponent(QString name, const CFitBaseType& baseType, quint
 {
     CFitComponentfieldProfile* field = new CFitComponentfieldProfile(this, name, baseType, fieldDefNr, scale, offset, units, componentFieldDefNr, bits);
     fields[fieldDefNr]->addComponent(field);
-
 }
 void CFitProfile::addComponent(int subfieldIndex, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
 {

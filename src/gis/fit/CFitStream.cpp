@@ -65,7 +65,7 @@ const CFitMessage& CFitStream::nextMesgOf(quint16 mesgNum)
         }
     }
 
-    static CFitMessage dummyMessage{};
+    static CFitMessage dummyMessage {};
     return dummyMessage;
 }
 

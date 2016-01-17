@@ -34,7 +34,7 @@ public:
 
     void addField(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units);
     void addSubfield(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal
-        scale, quint16 offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue);
+                     scale, quint16 offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue);
     void addComponent(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits);
     void addComponent(int subfieldIndex, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits);
 

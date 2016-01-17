@@ -60,7 +60,6 @@ public:
     QString name() const;
 
 private:
-
     // fixed size to 8, which is enough for float64
     quint8 invalidBytes[8];
     quint8 typeSize;
@@ -68,23 +67,23 @@ private:
     QString namestr;
 };
 
-static const CFitBaseType EnumType= CFitBaseType(eBaseTypeNrEnum, "Enum", sizeof(quint8), {0xFF});
-static const CFitBaseType Sint8Type = CFitBaseType(eBaseTypeNrSint8, "Sint8", sizeof(qint8), {0x7F});
-static const CFitBaseType Uint8Type = CFitBaseType(eBaseTypeNrUint8, "Uint8", sizeof(quint8), {0xFF});
-static const CFitBaseType Sint16Type = CFitBaseType(eBaseTypeNrSint16, "Sint16", sizeof(qint16), {0x7F, 0xFF});
-static const CFitBaseType Uint16Type = CFitBaseType(eBaseTypeNrUint16, "Uint16", sizeof(quint16), {0xFF, 0xFF});
-static const CFitBaseType Sint32Type = CFitBaseType(eBaseTypeNrSint32, "Sint32", sizeof(qint32), {0x7F, 0xFF, 0xFF, 0xFF});
-static const CFitBaseType Uint32Type = CFitBaseType(eBaseTypeNrUint32, "Uint32", sizeof(quint32), {0xFF, 0xFF, 0xFF, 0xFF});
-static const CFitBaseType StringType = CFitBaseType(eBaseTypeNrString, "String", 0, {0x00}); // Field is invalid if all bytes are invalid.
-static const CFitBaseType Float32Type = CFitBaseType(eBaseTypeNrFloat32, "Flaot32", sizeof(float), {0xFF, 0xFF, 0xFF, 0xFF});
-static const CFitBaseType Float64Type = CFitBaseType(eBaseTypeNrFloat64, "Float64", sizeof(double), {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitEnumType = CFitBaseType(eBaseTypeNrEnum, "Enum", sizeof(quint8), {0xFF});
+static const CFitBaseType fitSint8Type = CFitBaseType(eBaseTypeNrSint8, "Sint8", sizeof(qint8), {0x7F});
+static const CFitBaseType fitUint8Type = CFitBaseType(eBaseTypeNrUint8, "Uint8", sizeof(quint8), {0xFF});
+static const CFitBaseType fitSint16Type = CFitBaseType(eBaseTypeNrSint16, "Sint16", sizeof(qint16), {0x7F, 0xFF});
+static const CFitBaseType fitUint16Type = CFitBaseType(eBaseTypeNrUint16, "Uint16", sizeof(quint16), {0xFF, 0xFF});
+static const CFitBaseType fitSint32Type = CFitBaseType(eBaseTypeNrSint32, "Sint32", sizeof(qint32), {0x7F, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitUint32Type = CFitBaseType(eBaseTypeNrUint32, "Uint32", sizeof(quint32), {0xFF, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitStringType = CFitBaseType(eBaseTypeNrString, "String", 0, {0x00}); // Field is invalid if all bytes are invalid.
+static const CFitBaseType fitFloat32Type = CFitBaseType(eBaseTypeNrFloat32, "Float32", sizeof(float), {0xFF, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitFloat64Type = CFitBaseType(eBaseTypeNrFloat64, "Float64", sizeof(double), {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF});
 
-static const CFitBaseType Uint8zType = CFitBaseType(eBaseTypeNrUint8z, "Uint8z", sizeof(quint8), {0x00});
-static const CFitBaseType Uint16zType = CFitBaseType(eBaseTypeNrUint16z, "Uint16z", sizeof(quint16), {0x00, 0x00});
-static const CFitBaseType Uint32zType = CFitBaseType(eBaseTypeNrUint32z, "Uint32z", sizeof(quint32), {0x00, 0x00, 0x00, 0x00});
-static const CFitBaseType ByteType = CFitBaseType(eBaseTypeNrByte, "Byte", 0, {0xFF}); // Field is invalid if all bytes are invalid.
+static const CFitBaseType fitUint8zType = CFitBaseType(eBaseTypeNrUint8z, "Uint8z", sizeof(quint8), {0x00});
+static const CFitBaseType fitUint16zType = CFitBaseType(eBaseTypeNrUint16z, "Uint16z", sizeof(quint16), {0x00, 0x00});
+static const CFitBaseType fitUint32zType = CFitBaseType(eBaseTypeNrUint32z, "Uint32z", sizeof(quint32), {0x00, 0x00, 0x00, 0x00});
+static const CFitBaseType fitByteType = CFitBaseType(eBaseTypeNrByte, "Byte", 0, {0xFF}); // Field is invalid if all bytes are invalid.
 
-static const CFitBaseType InvalidType = CFitBaseType(eBaseTypeNrInvalid, "Invalid", 0, {0});
+static const CFitBaseType fitInvalidType = CFitBaseType(eBaseTypeNrInvalid, "Invalid", 0, {0});
 
 
 class CFitBaseTypeMap

@@ -18,12 +18,15 @@
 
 #include "gis/fit/defs/CFitBaseType.h"
 
-CFitBaseType::CFitBaseType() : CFitBaseType(eBaseTypeNrInvalid, "invalid", 0, {0})
+CFitBaseType::CFitBaseType() : CFitBaseType(eBaseTypeNrInvalid, "invalid", 0,
+{
+    0
+})
 {
 }
 
 CFitBaseType::CFitBaseType(fit_base_type_nr_e baseTypeNr, QString name, quint8 size, std::initializer_list<quint8> invalid)
-        : typeSize(size), baseTypeNr(baseTypeNr), namestr(name)
+    : typeSize(size), baseTypeNr(baseTypeNr), namestr(name)
 {
     quint8 i = 0;
     for(quint8 bit : invalid)
@@ -95,26 +98,6 @@ QString CFitBaseType::name() const
     return namestr;
 }
 
-
-/*
-const EnumType = CFitBaseType(TypeEnum, "Enum", sizeof(quint8), {0xFF});
-Sint8Type = CFitBaseType(TypeSint8, "Sint8", sizeof(qint8), {0x7F});
-Uint8Type = CFitBaseType(TypeUint8, "Uint8", sizeof(quint8),  {0xFF});
-Sint16Type = CFitBaseType(TypeSint16, "Sint16", sizeof(qint16), {0x7F, 0xFF});
-Uint16Type = CFitBaseType(TypeUint16, "Uint16",sizeof(quint16), {0xFF,0xFF});
-Sint32Type = CFitBaseType(TypeSint32, "Sint32", sizeof(qint32),{0x7F,0xFF,0xFF,0xFF});
-Uint32Type = CFitBaseType(TypeUint32, "Uint32", sizeof(quint32),{0xFF,0xFF,0xFF,0xFF});
-StringType = CFitBaseType(TypeString, "String", 0,{0x00});
-Float32Type = CFitBaseType(TypeFloat32, "Flaot32", sizeof(float), {0xFF,0xFF,0xFF,0xFF});
-Float64Type = CFitBaseType(TypeFloat64, "Float64", sizeof(double), {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF});
-
-Uint8zType = CFitBaseType(TypeUint8z, "Uint8z", sizeof(quint8), {0x00});
-Uint16zType = CFitBaseType(TypeUint16z, "Uint16z", sizeof(quint16), {0x00,0x00});
-Uint32zType = CFitBaseType(TypeUint32z, "Uint32z", sizeof(quint32), {0x00,0x00,0x00,0x00});
-ByteType = CFitBaseType(TypeByte, "Byte", 0, {0xFF}); // Field is invalid if all bytes are invalid.
-
-InvalidType = CFitBaseType(TypeInvalid, "Invalid",0, {0});
-*/
 
 void CFitBaseTypeMap::initialize(QMap<quint8, CFitBaseType>& baseTypesMap)
 {

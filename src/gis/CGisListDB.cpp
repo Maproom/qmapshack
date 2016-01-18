@@ -271,7 +271,7 @@ bool CGisListDB::event(QEvent * e)
             IDBFolder * folder = db->getFolder(evt->idParent);
             if(folder)
             {
-                idChild = folder->addFolder(evt->type, evt->name);
+                idChild = folder->addFolder(evt->type, evt->name);                
             }
             else
             {
@@ -280,6 +280,11 @@ bool CGisListDB::event(QEvent * e)
 
             if(idChild)
             {
+                if(folder)
+                {
+                    folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+                }
+
                 evt->idChild = idChild;
                 CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(idChild, evt->db);
                 CGisWidget::self().postEventForWks(evt1);

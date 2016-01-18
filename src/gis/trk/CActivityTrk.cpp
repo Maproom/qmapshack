@@ -79,6 +79,13 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActAero.png"
     },
     {
+        "Ski/Winter"
+        , CGisItemTrk::trkpt_t::eActSki
+        , QObject::tr("Ski/Winter")
+        , "://icons/48x48/ActSki.png"
+        , "://icons/16x16/ActSki.png"
+    },
+    {
         ""
         , 0
         , ""
@@ -99,6 +106,7 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     actDescriptor[5].name = QObject::tr("Swim");
     actDescriptor[6].name = QObject::tr("Ship");
     actDescriptor[7].name = QObject::tr("Aeronautics");
+    actDescriptor[8].name = QObject::tr("Ski/Winter");
 }
 
 

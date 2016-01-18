@@ -34,7 +34,7 @@ CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 d
 }
 
 CFitFieldDefinition::CFitFieldDefinition()
-    : CFitFieldDefinition(nullptr, fitLocalMesgNrInvalid, 0, TypeInvalid)
+    : CFitFieldDefinition(nullptr, fitLocalMesgNrInvalid, 0, eBaseTypeNrInvalid)
 {
 }
 

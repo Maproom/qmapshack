@@ -225,8 +225,8 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtTableHidden.setBottomMargin(0);
 
     QVector<QTextLength> constraints2;
-    constraints2 << QTextLength(QTextLength::PercentageLength, 70);
-    constraints2 << QTextLength(QTextLength::PercentageLength, 30);
+    constraints2 << QTextLength(QTextLength::PercentageLength, 50);
+    constraints2 << QTextLength(QTextLength::PercentageLength, 50);
     fmtTableHidden.setColumnWidthConstraints(constraints2);
 
     fmtTableInfo.setBorder(0);

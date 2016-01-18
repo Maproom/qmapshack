@@ -23,17 +23,17 @@ unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType,
 {
     switch(baseType.nr())
     {
-    case TypeUint8:
-    case TypeUint8z:
-    case TypeEnum:
+    case eBaseTypeNrUint8:
+    case eBaseTypeNrUint8z:
+    case eBaseTypeNrEnum:
         return getUint8(rawData);
 
-    case TypeUint16:
-    case TypeUint16z:
+    case eBaseTypeNrUint16:
+    case eBaseTypeNrUint16z:
         return getUint16(rawData);
 
-    case TypeUint32:
-    case TypeUint32z:
+    case eBaseTypeNrUint32:
+    case eBaseTypeNrUint32z:
         return getUint32(rawData);
 
     default:
@@ -45,13 +45,13 @@ int CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint8 *
 {
     switch(baseType.nr())
     {
-    case TypeSint8:
+    case eBaseTypeNrSint8:
         return getSint8(rawData);
 
-    case TypeSint16:
+    case eBaseTypeNrSint16:
         return getSint16(rawData);
 
-    case TypeSint32:
+    case eBaseTypeNrSint32:
         return getSint32(rawData);
 
     default:
@@ -63,10 +63,10 @@ qreal CFitByteDataTransformer::getFloatValue(const CFitBaseType& baseType, quint
 {
     switch(baseType.nr())
     {
-    case TypeFloat32:
+    case eBaseTypeNrFloat32:
         return getFloat32(rawData);
 
-    case TypeFloat64:
+    case eBaseTypeNrFloat64:
         return getFloat64(rawData);
 
     default:
@@ -91,7 +91,7 @@ quint32 CFitByteDataTransformer::getUint32(quint8* rawData)
 
 qint8 CFitByteDataTransformer::getSint8(quint8* rawData)
 {
-    return (int8_t) rawData[0];
+    return (qint8) rawData[0];
 }
 
 qint16 CFitByteDataTransformer::getSint16(quint8* rawData)

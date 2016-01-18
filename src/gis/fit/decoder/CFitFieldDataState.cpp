@@ -41,14 +41,14 @@ decode_state_e CFitFieldDataState::process(quint8 &dataByte)
         // all bytes are read for current field
 
         // new field with data
-        IFitField * f = CFitFieldBuilder::buildField(fieldDef, fieldData, mesg);
+        CFitField f = CFitFieldBuilder::buildField(fieldDef, fieldData, mesg);
         mesg.addField(f);
 
         // The special case time record.
         // timestamp has always the same value for all enums. it does not matter againts which we're comparing.
         if (fieldDef.getDefNr() == eRecordTimestamp)
         {
-            setTimestamp(f->getUIntValue());
+            setTimestamp(f.getUIntValue());
         }
 
         // new field follows, reset

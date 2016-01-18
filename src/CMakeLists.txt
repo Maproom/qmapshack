@@ -228,7 +228,7 @@ set( SRCS
         gis/fit/CFitStream.cpp
         gis/fit/serialization.cpp
         gis/fit/decoder/CFitMessage.cpp
-        gis/fit/decoder/IFitField.cpp
+        gis/fit/decoder/CFitField.cpp
         gis/fit/decoder/CFitDefinitionMessage.cpp
         gis/fit/decoder/CFitFieldDefinition.cpp
         gis/fit/defs/CFitProfile.cpp
@@ -475,7 +475,7 @@ set( HDRS
         gis/fit/CFitStream.h
         gis/fit/defs/fit_const.h
         gis/fit/decoder/CFitMessage.h
-        gis/fit/decoder/IFitField.h
+        gis/fit/decoder/CFitField.h
         gis/fit/decoder/CFitDefinitionMessage.h
         gis/fit/decoder/CFitFieldDefinition.h
         gis/fit/defs/CFitProfile.h

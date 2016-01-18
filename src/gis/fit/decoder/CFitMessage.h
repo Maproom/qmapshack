@@ -39,13 +39,8 @@ public:
     bool hasField(const quint8 fieldDefNum) const;
 
     bool isFieldValueValid(const quint8 fieldDefNum) const;
+    const QVariant& getFieldValue(const quint8 fieldDefNum) const;
     void addField(CFitField & field);
-
-    QString getFieldString(const quint8 fieldDefNum) const;
-    QByteArray getFieldBytes(const quint8 fieldDefNum) const;
-    int getFieldIntValue(const quint8 fieldDefNum) const;
-    unsigned int getFieldUIntValue(const quint8 fieldDefNum) const;
-    qreal getFieldDoubleValue(const quint8 fieldDefNum) const;
 
     const CFitProfile& profile() const { return *messageProfile; }
     QStringList messageInfo() const;

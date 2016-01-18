@@ -80,7 +80,7 @@ QString CFitField::fieldInfo() const
                   .arg(profile().getTyp())
                   .arg(profile().getName())
                   .arg(getFieldDefNr())
-                  .arg(getString())
+                  .arg(value.toString())
                   .arg(profile().getUnits())
                   .arg(getBaseType().name())
                   .arg(valid ? "" : "<invalid>");

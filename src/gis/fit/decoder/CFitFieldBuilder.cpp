@@ -104,7 +104,7 @@ void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg,  const CFitField 
             for (const CFitField & referencedField : mesg.getFields())
             {
                 if (referencedField.getFieldDefNr() == subfieldProfile->getReferencedFieldDefNr() &&
-                    referencedField.getUIntValue() == subfieldProfile->getReferencedFieldValue())
+                    referencedField.getValue().toUInt() == subfieldProfile->getReferencedFieldValue())
                 {
                     // the value of the referenced field matches with the field profile reference-value
                     mesg.updateFieldProfile(field.getFieldDefNr(), subfieldProfile);
@@ -126,13 +126,13 @@ void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const CFitField & fie
         {
             if (field.getBaseType().isSignedInt())
             {
-                qint32 value = (field.getSIntValue() >> offset) & compProfile->getBitmask();
+                qint32 value = (field.getValue().toInt() >> offset) & compProfile->getBitmask();
                 CFitField compField = CFitField(field.getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, QVariant(value), true);
                 mesg.addField(compField);
             }
             else
             {
-                quint32 value = (field.getUIntValue() >> offset) & compProfile->getBitmask();
+                quint32 value = (field.getValue().toUInt() >> offset) & compProfile->getBitmask();
                 CFitField compField = CFitField(field.getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, QVariant(value), true);
                 mesg.addField(compField);
             }

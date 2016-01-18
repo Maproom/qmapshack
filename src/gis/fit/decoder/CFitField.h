@@ -44,12 +44,8 @@ public:
     const CFitFieldProfile& profile() const { return *fieldProfile; }
 
     bool isValidValue() const { return valid; }
+    const QVariant& getValue() const {  return value; }
 
-    QString getString() const { return value.toString(); }
-    QByteArray getBytes() const { return value.toByteArray(); }
-    int getSIntValue() const { return value.toInt(); }
-    unsigned int getUIntValue() const { return value.toUInt(); }
-    qreal getDoubleValue() const { return value.toDouble(); }
 
 private:
     void applyScaleAndOffset();

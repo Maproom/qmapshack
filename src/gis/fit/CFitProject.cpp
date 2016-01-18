@@ -77,7 +77,7 @@ void CFitProject::loadFit(const QString & filename)
     if(in.decodeFile())
     {
         const CFitMessage& mesg = in.firstMesgOf(eMesgNumFileId);
-        if(mesg.getFieldUIntValue(eFileIdType) == eFileActivity || mesg.getFieldUIntValue(eFileIdType) == eFileCourse)
+        if(mesg.getFieldValue(eFileIdType).toUInt() == eFileActivity || mesg.getFieldValue(eFileIdType).toUInt() == eFileCourse)
         {
             new CGisItemTrk(in, this);
         }

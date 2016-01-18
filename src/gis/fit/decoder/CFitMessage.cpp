@@ -88,27 +88,7 @@ bool CFitMessage::isFieldValueValid(const quint8 fieldDefNum) const
     return fields[fieldDefNum].isValidValue();
 }
 
-int CFitMessage::getFieldIntValue(const quint8 fieldDefNum) const
+const QVariant& CFitMessage::getFieldValue(const quint8 fieldDefNum) const
 {
-    return fields[fieldDefNum].getSIntValue();
-}
-
-unsigned int CFitMessage::getFieldUIntValue(const quint8 fieldDefNum) const
-{
-    return fields[fieldDefNum].getUIntValue();
-}
-
-qreal CFitMessage::getFieldDoubleValue(const quint8 fieldDefNum) const
-{
-    return fields[fieldDefNum].getDoubleValue();
-}
-
-QString CFitMessage::getFieldString(const quint8 fieldDefNum) const
-{
-    return fields[fieldDefNum].getString();
-}
-
-QByteArray CFitMessage::getFieldBytes(const quint8 fieldDefNum) const
-{
-    return fields[fieldDefNum].getBytes();
+    return fields[fieldDefNum].getValue();
 }

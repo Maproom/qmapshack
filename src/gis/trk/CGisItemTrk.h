@@ -780,8 +780,9 @@ public:
             ,eActSwim   = 0x04000000
             ,eActShip   = 0x02000000
             ,eActAero   = 0x01000000
-            ,eActMask   = 0xFF000000    ///< mask for activity flags
-            ,eActMaxNum = 8             ///< maximum number of activity flags. this is defined by the mask
+            ,eActSki    = 0x00800000
+            ,eActMask   = 0xFF800000    ///< mask for activity flags
+            ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
         };
 
         quint32 flags = 0;

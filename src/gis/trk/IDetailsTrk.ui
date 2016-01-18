@@ -335,7 +335,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -1342,11 +1342,7 @@
             <number>3</number>
            </property>
            <item>
-            <layout class="QVBoxLayout" name="layoutActivities">
-             <property name="spacing">
-              <number>3</number>
-             </property>
-            </layout>
+            <layout class="QGridLayout" name="layoutActivities"/>
            </item>
            <item>
             <widget class="Line" name="line_3">
@@ -1601,10 +1597,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph3"/>
-  <buttongroup name="buttonGroupArrow"/>
-  <buttongroup name="buttonGroupGraph2"/>
-  <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupGraph3"/>
  </buttongroups>
 </ui>

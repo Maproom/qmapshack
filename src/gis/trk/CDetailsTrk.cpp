@@ -96,9 +96,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
         connect(check, &QCheckBox::clicked, this, &CDetailsTrk::slotActivitySelected);
 
-        layoutActivities->addWidget(check);
+        layoutActivities->addWidget(check, i%8, i>>3);
     }
-    layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
+    layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding),8,0);
 
     updateData();
 

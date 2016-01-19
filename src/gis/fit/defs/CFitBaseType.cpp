@@ -18,27 +18,33 @@
 
 #include "gis/fit/defs/CFitBaseType.h"
 
-CFitBaseType::CFitBaseType() : CFitBaseType(TypeInvalid, 0, 0, "invalid")
+CFitBaseType::CFitBaseType() : CFitBaseType(eBaseTypeNrInvalid, "invalid", 0,
+{
+    0
+})
 {
 }
 
-
-CFitBaseType::CFitBaseType(BaseTypeNr baseTypeNr, quint8* invalidBytes, quint8 size, QString name)
+CFitBaseType::CFitBaseType(fit_base_type_nr_e baseTypeNr, QString name, quint8 size, std::initializer_list<quint8> invalid)
     : typeSize(size), baseTypeNr(baseTypeNr), namestr(name)
 {
-    memcpy(this->invalidBytes, invalidBytes, size);
-}
-
-CFitBaseType::~CFitBaseType()
-{
+    quint8 i = 0;
+    for(quint8 bit : invalid)
+    {
+        invalidBytes[i++] = bit;
+    }
 }
 
 quint8 CFitBaseType::size() const
 {
     return typeSize;
 }
+bool CFitBaseType::isSizeUndefined() const
+{
+    return typeSize == 0;
+}
 
-BaseTypeNr CFitBaseType::nr() const
+fit_base_type_nr_e CFitBaseType::nr() const
 {
     return baseTypeNr;
 }
@@ -55,20 +61,20 @@ bool CFitBaseType::isInteger() const
 
 bool CFitBaseType::isSignedInt() const
 {
-    return baseTypeNr == TypeSint8 || baseTypeNr == TypeSint16 || baseTypeNr == TypeSint32;
+    return baseTypeNr == eBaseTypeNrSint8 || baseTypeNr == eBaseTypeNrSint16 || baseTypeNr == eBaseTypeNrSint32;
 }
 
 bool CFitBaseType::isUnsignedInt() const
 {
-    return baseTypeNr == TypeUint8 || baseTypeNr == TypeUint8z
-           || baseTypeNr == TypeUint16 || baseTypeNr == TypeUint16z
-           || baseTypeNr == TypeUint32 || baseTypeNr == TypeUint32z
-           || baseTypeNr == TypeEnum;
+    return baseTypeNr == eBaseTypeNrUint8 || baseTypeNr == eBaseTypeNrUint8z
+           || baseTypeNr == eBaseTypeNrUint16 || baseTypeNr == eBaseTypeNrUint16z
+           || baseTypeNr == eBaseTypeNrUint32 || baseTypeNr == eBaseTypeNrUint32z
+           || baseTypeNr == eBaseTypeNrEnum;
 }
 
 bool CFitBaseType::isFloat() const
 {
-    return baseTypeNr == TypeFloat32 || baseTypeNr == TypeFloat64;
+    return baseTypeNr == eBaseTypeNrFloat32 || baseTypeNr == eBaseTypeNrFloat64;
 }
 
 bool CFitBaseType::isNumber() const
@@ -79,12 +85,12 @@ bool CFitBaseType::isNumber() const
 
 bool CFitBaseType::isString() const
 {
-    return baseTypeNr == TypeString;
+    return baseTypeNr == eBaseTypeNrString;
 }
 
 bool CFitBaseType::isByte() const
 {
-    return baseTypeNr == TypeByte;
+    return baseTypeNr == eBaseTypeNrByte;
 }
 
 QString CFitBaseType::name() const
@@ -92,59 +98,38 @@ QString CFitBaseType::name() const
     return namestr;
 }
 
-template <class T>
-CFitBaseType build(BaseTypeNr baseTypeNr, QString name, T invalid)
+
+void CFitBaseTypeMap::initialize(QMap<quint8, CFitBaseType>& baseTypesMap)
 {
-    return CFitBaseType (baseTypeNr, (quint8*)&invalid, (quint8)sizeof(T), name);
+    baseTypesMap.insert(fitEnumType.nr(), fitEnumType);
+    baseTypesMap.insert(fitSint8Type.nr(), fitSint8Type);
+    baseTypesMap.insert(fitUint8Type.nr(), fitUint8Type);
+    baseTypesMap.insert(fitSint16Type.nr(), fitSint16Type);
+    baseTypesMap.insert(fitUint16Type.nr(), fitUint16Type);
+    baseTypesMap.insert(fitSint32Type.nr(), fitSint32Type);
+    baseTypesMap.insert(fitUint32Type.nr(), fitUint32Type);
+    baseTypesMap.insert(fitStringType.nr(), fitStringType);
+    baseTypesMap.insert(fitFloat32Type.nr(), fitFloat32Type);
+    baseTypesMap.insert(fitFloat64Type.nr(), fitFloat64Type);
+    baseTypesMap.insert(fitUint8zType.nr(), fitUint8zType);
+    baseTypesMap.insert(fitUint16zType.nr(), fitUint16zType);
+    baseTypesMap.insert(fitUint32zType.nr(), fitUint32zType);
+    baseTypesMap.insert(fitByteType.nr(), fitByteType);
 }
-
-CFitBaseType EnumType = build<quint8>(TypeEnum, "Enum", 0xFF);
-CFitBaseType Sint8Type = build<int8_t>(TypeSint8, "Sint8", 0x7F);
-CFitBaseType Uint8Type = build<quint8>(TypeUint8, "Uint8", 0xFF);
-CFitBaseType Sint16Type = build<qint16>(TypeSint16, "Sint16", 0x7FFF);
-CFitBaseType Uint16Type = build<quint16>(TypeUint16, "Uint16", 0xFFFF);
-CFitBaseType Sint32Type = build<qint32>(TypeSint32, "Sint32", 0x7FFFFFFF);
-CFitBaseType Uint32Type = build<quint32>(TypeUint32, "Uint32", 0xFFFFFFFF);
-CFitBaseType StringType = build<char>(TypeString, "String", 0x00);
-CFitBaseType Float32Type = build<float>(TypeFloat32, "Flaot32", (float)0xFFFFFFFF);
-CFitBaseType Float64Type = build<double>(TypeFloat64, "Float64", (double)0xFFFFFFFFFFFFFFFFull);
-
-CFitBaseType Uint8zType = build<quint8>(TypeUint8z, "Uint8z", 0x00);
-CFitBaseType Uint16zType = build<quint16>(TypeUint16z, "Uint16z", 0x0000);
-CFitBaseType Uint32zType = build<quint32>(TypeUint32z, "Uint32z", 0x00000000);
-CFitBaseType ByteType = build<quint8>(TypeByte, "Byte", 0xFF); // Field is invalid if all bytes are invalid.
-
-CFitBaseType InvalidType = build<quint8>(TypeInvalid, "Invalid", 0);
-
-static QMap<quint8, CFitBaseType> buildBaseTypeMap()
-{
-    QMap<quint8, CFitBaseType> baseTypes;
-    baseTypes.insert(EnumType.nr(), EnumType);
-    baseTypes.insert(Sint8Type.nr(), Sint8Type);
-    baseTypes.insert(Uint8Type.nr(), Uint8Type);
-    baseTypes.insert(Sint16Type.nr(), Sint16Type);
-    baseTypes.insert(Uint16Type.nr(), Uint16Type);
-    baseTypes.insert(Sint32Type.nr(), Sint32Type);
-    baseTypes.insert(Uint32Type.nr(), Uint32Type);
-    baseTypes.insert(StringType.nr(), StringType);
-    baseTypes.insert(Float32Type.nr(), Float32Type);
-    baseTypes.insert(Float64Type.nr(), Float64Type);
-    baseTypes.insert(Uint8zType.nr(), Uint8zType);
-    baseTypes.insert(Uint16zType.nr(), Uint16zType);
-    baseTypes.insert(Uint32zType.nr(), Uint32zType);
-    baseTypes.insert(ByteType.nr(), ByteType);
-    return baseTypes;
-}
-
-QMap<quint8, CFitBaseType> CFitBaseTypeMap::baseTypes = buildBaseTypeMap();
-
 
 CFitBaseType* CFitBaseTypeMap::get(quint8 nr)
 {
+    static bool initialized = false;
+    static QMap<quint8, CFitBaseType> baseTypes;
+    if(!initialized)
+    {
+        initialize(baseTypes);
+        initialized = true;
+    }
+
     if (baseTypes.contains(nr & fitBaseTypeNumMask))
     {
         return &baseTypes[nr & fitBaseTypeNumMask];
     }
-
-    return &InvalidType;
+    return &baseTypes[eBaseTypeNrInvalid];
 }

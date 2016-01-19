@@ -87,35 +87,35 @@ function baseType()
     local ctype=$2
     
     if [[ "$ctype" == "uint8" ]]; then
-        conv="Uint8Type"
+        conv="fitUint8Type"
     elif [[ "$ctype" == "uint16" ]]; then
-        conv="Uint16Type"
+        conv="fitUint16Type"
     elif [[ "$ctype" == "uint32" ]]; then
-        conv="Uint32Type"
+        conv="fitUint32Type"
     elif [[ "$ctype" == "sint8" ]]; then
-        conv="Sint8Type"
+        conv="fitSint8Type"
     elif [[ "$ctype" == "sint16" ]]; then
-        conv="Sint16Type"
+        conv="fitSint16Type"
     elif [[ "$ctype" == "sint32" ]]; then
-        conv="Sint32Type"
+        conv="fitSint32Type"
     elif [[ "$ctype" == "string" ]]; then
-        conv="StringType"
+        conv="fitStringType"
     elif [[ "$ctype" == "uint8z" ]]; then
-        conv="Uint8zType"
+        conv="fitUint8zType"
     elif [[ "$ctype" == "uint16z" ]]; then
-        conv="Uint16zType"
+        conv="fitUint16zType"
     elif [[ "$ctype" == "uint32z" ]]; then    
-        conv="Uint32zType"
+        conv="fitUint32zType"
     elif [[ "$ctype" == "float32" ]]; then
-        conv="Float32Type"
+        conv="fitFloat32Type"
     elif [[ "$ctype" == "float64" ]]; then
-        conv="Float64Type"
+        conv="fitFloat64Type"
     elif [[ "$ctype" == "byte" ]]; then
-        conv="ByteType"
+        conv="fitByteType"
     elif [[ "$ctype" == "bool" ]]; then
-        conv="EnumType"
+        conv="fitEnumType"
     else
-        conv="EnumType"
+        conv="fitEnumType"
     fi
 
     eval $__resultvar="'$conv'"

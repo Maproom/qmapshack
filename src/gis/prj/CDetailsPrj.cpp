@@ -22,6 +22,7 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CActivityTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CProgressDialog.h"
@@ -403,6 +404,22 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
 void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item, bool printable)
 {
     table->cellAt(row,col).firstCursorPosition().insertImage(item->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+    if(trk)
+    {
+        QSet<QString> icons;
+        foreach(const CActivityTrk::activity_range_t& range, trk->getActivities().getActivityRanges())
+        {
+            icons << range.icon;
+        }
+
+        foreach(const QString& icon, icons)
+        {
+            table->cellAt(row,col).lastCursorPosition().insertImage(icon);
+        }
+    }
+
     if(!(printable||item->isReadOnly()))
     {
         table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<br/><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a>").arg(item->getKey().item));

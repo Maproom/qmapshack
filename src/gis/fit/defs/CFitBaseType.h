@@ -23,33 +23,33 @@
 
 typedef enum
 {
-    TypeEnum = 0,
-    TypeSint8 = 1,
-    TypeUint8 = 2,
-    TypeSint16 = 3,
-    TypeUint16 = 4,
-    TypeSint32 = 5,
-    TypeUint32 = 6,
-    TypeString = 7,
-    TypeFloat32 = 8,
-    TypeFloat64 = 9,
-    TypeUint8z = 10,
-    TypeUint16z = 11,
-    TypeUint32z = 12,
-    TypeByte = 13,
-    TypeInvalid = 0xff
-} BaseTypeNr;
+    eBaseTypeNrEnum = 0,
+    eBaseTypeNrSint8 = 1,
+    eBaseTypeNrUint8 = 2,
+    eBaseTypeNrSint16 = 3,
+    eBaseTypeNrUint16 = 4,
+    eBaseTypeNrSint32 = 5,
+    eBaseTypeNrUint32 = 6,
+    eBaseTypeNrString = 7,
+    eBaseTypeNrFloat32 = 8,
+    eBaseTypeNrFloat64 = 9,
+    eBaseTypeNrUint8z = 10,
+    eBaseTypeNrUint16z = 11,
+    eBaseTypeNrUint32z = 12,
+    eBaseTypeNrByte = 13,
+    eBaseTypeNrInvalid = 0xff
+} fit_base_type_nr_e;
 
 class CFitBaseType final
 {
 public:
-    CFitBaseType(BaseTypeNr baseTypeNr, quint8* invalidBytes, quint8 size, QString name);
     CFitBaseType();
-    ~CFitBaseType();
+    CFitBaseType(fit_base_type_nr_e baseTypeNr, QString name, quint8 size, std::initializer_list<quint8> invalid);
 
     quint8 size() const;
-    BaseTypeNr nr() const;
+    fit_base_type_nr_e nr() const;
     const quint8* invalidValueBytes() const;
+    bool isSizeUndefined() const;
     bool isInteger() const;
     bool isSignedInt() const;
     bool isUnsignedInt() const;
@@ -60,31 +60,31 @@ public:
     QString name() const;
 
 private:
-    // fixed size to 8, which is enogh for float64
+    // fixed size to 8, which is enough for float64
     quint8 invalidBytes[8];
     quint8 typeSize;
-    BaseTypeNr baseTypeNr;
+    fit_base_type_nr_e baseTypeNr;
     QString namestr;
 };
 
+static const CFitBaseType fitEnumType = CFitBaseType(eBaseTypeNrEnum, "Enum", sizeof(quint8), {0xFF});
+static const CFitBaseType fitSint8Type = CFitBaseType(eBaseTypeNrSint8, "Sint8", sizeof(qint8), {0x7F});
+static const CFitBaseType fitUint8Type = CFitBaseType(eBaseTypeNrUint8, "Uint8", sizeof(quint8), {0xFF});
+static const CFitBaseType fitSint16Type = CFitBaseType(eBaseTypeNrSint16, "Sint16", sizeof(qint16), {0x7F, 0xFF});
+static const CFitBaseType fitUint16Type = CFitBaseType(eBaseTypeNrUint16, "Uint16", sizeof(quint16), {0xFF, 0xFF});
+static const CFitBaseType fitSint32Type = CFitBaseType(eBaseTypeNrSint32, "Sint32", sizeof(qint32), {0x7F, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitUint32Type = CFitBaseType(eBaseTypeNrUint32, "Uint32", sizeof(quint32), {0xFF, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitStringType = CFitBaseType(eBaseTypeNrString, "String", 0, {0x00}); // Field is invalid if all bytes are invalid.
+static const CFitBaseType fitFloat32Type = CFitBaseType(eBaseTypeNrFloat32, "Float32", sizeof(float), {0xFF, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitFloat64Type = CFitBaseType(eBaseTypeNrFloat64, "Float64", sizeof(double), {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF});
 
-extern CFitBaseType EnumType;
-extern CFitBaseType Sint8Type;
-extern CFitBaseType Uint8Type;
-extern CFitBaseType Sint16Type;
-extern CFitBaseType Uint16Type;
-extern CFitBaseType Sint32Type;
-extern CFitBaseType Uint32Type;
-extern CFitBaseType StringType;
-extern CFitBaseType Float32Type;
-extern CFitBaseType Float64Type;
+static const CFitBaseType fitUint8zType = CFitBaseType(eBaseTypeNrUint8z, "Uint8z", sizeof(quint8), {0x00});
+static const CFitBaseType fitUint16zType = CFitBaseType(eBaseTypeNrUint16z, "Uint16z", sizeof(quint16), {0x00, 0x00});
+static const CFitBaseType fitUint32zType = CFitBaseType(eBaseTypeNrUint32z, "Uint32z", sizeof(quint32), {0x00, 0x00, 0x00, 0x00});
+static const CFitBaseType fitByteType = CFitBaseType(eBaseTypeNrByte, "Byte", 0, {0xFF}); // Field is invalid if all bytes are invalid.
 
-extern CFitBaseType Uint8zType;
-extern CFitBaseType Uint16zType;
-extern CFitBaseType Uint32zType;
-extern CFitBaseType ByteType; // Field is invalid if all bytes are invalid.
+static const CFitBaseType fitInvalidType = CFitBaseType(eBaseTypeNrInvalid, "Invalid", 0, {0});
 
-extern CFitBaseType InvalidType;
 
 class CFitBaseTypeMap
 {
@@ -96,7 +96,7 @@ public:
      */
     static CFitBaseType* get(quint8 nr);
 private:
-    static QMap<quint8, CFitBaseType> baseTypes;
+    static void initialize(QMap<quint8, CFitBaseType>& baseTypesMap);
 };
 
 

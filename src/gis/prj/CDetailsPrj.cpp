@@ -117,8 +117,6 @@ void CDetailsPrj::slotSetupGui()
         return;
     }
 
-    X______________BlockAllSignals______________X(this);
-
     comboSort->setCurrentIndex(prj.getSorting());
     if((prj.getSorting() > IGisProject::eSortTime) && !prj.doCorrelation())
     {
@@ -134,7 +132,6 @@ void CDetailsPrj::slotSetupGui()
         }
         timerUpdateTime->start();
 
-        X_____________UnBlockAllSignals_____________X(this);
         mutex.unlock();
         return;
     }
@@ -173,8 +170,6 @@ void CDetailsPrj::slotSetupGui()
             tabWidget->setTabText(idx, prj.getName().replace("&", "&&"));
         }
     }
-
-    X_____________UnBlockAllSignals_____________X(this);
     mutex.unlock();
 }
 

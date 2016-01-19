@@ -22,7 +22,7 @@
 #include "ui_IDetailsWpt.h"
 #include <QDialog>
 
-#include <gis/wpt/CGisItemWpt.h>
+#include "gis/wpt/CGisItemWpt.h"
 
 class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
 {

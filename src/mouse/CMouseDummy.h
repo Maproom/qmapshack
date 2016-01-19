@@ -19,7 +19,7 @@
 #ifndef CMOUSEDUMMY_H
 #define CMOUSEDUMMY_H
 
-#include <mouse/IMouse.h>
+#include "mouse/IMouse.h"
 
 
 class CMouseDummy : public IMouse

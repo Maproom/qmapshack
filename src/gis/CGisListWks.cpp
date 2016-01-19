@@ -37,6 +37,7 @@
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/macros.h"
+#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
@@ -56,7 +57,7 @@
 #include <QApplication>
 #include <QtSql>
 #include <QtWidgets>
-#include <gis/fit/CFitProject.h>
+
 
 #undef  DB_VERSION
 #define DB_VERSION 3

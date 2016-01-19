@@ -96,9 +96,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
         connect(check, &QCheckBox::clicked, this, &CDetailsTrk::slotActivitySelected);
 
-        layoutActivities->addWidget(check);
+        layoutActivities->addWidget(check, i%8, i>>3);
     }
-    layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding));
+    layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding),8,0);
 
     updateData();
 
@@ -240,9 +240,11 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     case CLimit::eModeUser:
         toolLimitUsrGraph->setChecked(true);
         break;
+
     case CLimit::eModeAuto:
         toolLimitAutoGraph->setChecked(true);
         break;
+
     case CLimit::eModeSys:
         toolLimitSysGraph->setChecked(true);
         break;
@@ -630,6 +632,9 @@ void CDetailsTrk::slotColorLimitLowChanged()
 void CDetailsTrk::slotChangeReadOnlyMode(bool on)
 {
     trk.setReadOnlyMode(on);
+    // as setReadOnlyMode() is a method of IGisItem it will bypass updateHistory() of the track
+    // Therefore we have to call updateVisuals() explicitely.
+    trk.updateVisuals(CGisItemTrk::eVisualProject, "CDetailsTrk::slotChangeReadOnlyMode()");
     updateData();
 }
 
@@ -825,7 +830,6 @@ void CDetailsTrk::slotLimitChanged()
     {
         setupLimits(trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
     }
-
 }
 
 void CDetailsTrk::slotLineWidthMode(bool isUser)

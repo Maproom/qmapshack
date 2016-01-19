@@ -22,7 +22,7 @@
 #include "ui_IPhotoAlbum.h"
 #include <QWidget>
 
-#include <gis/wpt/CGisItemWpt.h>
+#include "gis/wpt/CGisItemWpt.h"
 
 class CPhotoAlbum : public QWidget, private Ui::IPhotoAlbum
 {

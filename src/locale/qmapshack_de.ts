@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
         <source>API Version %1 (expected %2)</source>
-        <translation type="vanished">API Version %1 (erwartet wird %2)</translation>
+        <translation>API Version %1 (erwartet wird %2)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="38"/>
@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>File with qmapshark configuration.</source>
-        <translation type="vanished">Datei mit QMapShack Einstellungen.</translation>
+        <translation>Datei mit QMapShack Einstellungen.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="40"/>
@@ -97,7 +97,7 @@
     <name>CDemPropSetup</name>
     <message>
         <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Stufe %1&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Stufe %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -159,11 +159,11 @@
     <name>CDetailsOvlArea</name>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new area name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für das Gebiet ein.</translation>
+        <translation>Geben Sie einen neuen Namen für das Gebiet ein.</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
@@ -253,23 +253,23 @@
     </message>
     <message>
         <source>Total Distance:</source>
-        <translation type="vanished">Summe Entfernung:</translation>
+        <translation>Summe Entfernung:</translation>
     </message>
     <message>
         <source>Total Ascend:</source>
-        <translation type="vanished">Summe Anstieg:</translation>
+        <translation>Summe Anstieg:</translation>
     </message>
     <message>
         <source>Total Descend:</source>
-        <translation type="vanished">Summe Abstieg:</translation>
+        <translation>Summe Abstieg:</translation>
     </message>
     <message>
         <source>Total Time:</source>
-        <translation type="vanished">Summe Zeit:</translation>
+        <translation>Summe Zeit:</translation>
     </message>
     <message>
         <source>Total Time Moving:</source>
-        <translation type="vanished">Summe Zeit in Bewegung:</translation>
+        <translation>Summe Zeit in Bewegung:</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="552"/>
@@ -327,11 +327,11 @@
     <name>CDetailsRte</name>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für die Route ein.</translation>
+        <translation>Geben Sie einen neuen Namen für die Route ein.</translation>
     </message>
 </context>
 <context>
@@ -373,11 +373,11 @@
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für den Track ein.</translation>
+        <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="663"/>
@@ -439,11 +439,11 @@
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
+        <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
     <message>
         <source>Enter new elevation.</source>
@@ -489,7 +489,7 @@
     </message>
     <message>
         <source>Help...</source>
-        <translation type="vanished">Hilfe...</translation>
+        <translation>Hilfe...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="81"/>
@@ -539,7 +539,7 @@
     </message>
     <message>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
-        <translation type="vanished">Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
+        <translation>Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="450"/>
@@ -1661,7 +1661,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
-        <translation type="vanished">Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
     <message>
         <source>--- All ---</source>
@@ -1769,7 +1769,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="vanished">Unerwarteter Dienst. &apos;* WMTS 1.0.0&apos; wird erwartet. &apos;%1 %2&apos; wurde gelesen.</translation>
+        <translation>Unerwarteter Dienst. &apos;* WMTS 1.0.0&apos; wird erwartet. &apos;%1 %2&apos; wurde gelesen.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="151"/>
@@ -1778,7 +1778,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
-        <translation type="vanished">Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
     <message>
         <source>--- All ---</source>
@@ -1887,7 +1887,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="vanished">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
+        <translation>Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
 </context>
 <context>
@@ -1951,11 +1951,11 @@ Unbekannte Struktur.</translation>
     <name>CPlotDistance</name>
     <message>
         <source>distance [%1]</source>
-        <translation type="vanished">Entf. [%1]</translation>
+        <translation>Entf. [%1]</translation>
     </message>
     <message>
         <source>time</source>
-        <translation type="vanished">Uhrzeit</translation>
+        <translation>Uhrzeit</translation>
     </message>
     <message>
         <source>time [h]</source>
@@ -1963,7 +1963,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>distance. [%1]</source>
-        <translation type="vanished">Entf. [%1]</translation>
+        <translation>Entf. [%1]</translation>
     </message>
 </context>
 <context>
@@ -1975,7 +1975,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="vanished">Zeit [h]</translation>
+        <translation>Zeit [h]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="64"/>
@@ -1987,15 +1987,15 @@ Unbekannte Struktur.</translation>
     <name>CPlotSpeed</name>
     <message>
         <source>distance [%1]</source>
-        <translation type="vanished">Entfernung [%1]</translation>
+        <translation>Entfernung [%1]</translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="vanished">Zeit [h]</translation>
+        <translation>Zeit [h]</translation>
     </message>
     <message>
         <source>speed. [%1]</source>
-        <translation type="vanished">Geschw. [%1]</translation>
+        <translation>Geschw. [%1]</translation>
     </message>
 </context>
 <context>
@@ -2804,11 +2804,11 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>French</source>
-        <translation type="vanished">Französisch</translation>
+        <translation>Französisch</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="vanished">Tschechisch</translation>
+        <translation>Tschechisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="182"/>
@@ -2817,7 +2817,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>German</source>
-        <translation type="vanished">Deutsch</translation>
+        <translation>Deutsch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="281"/>
@@ -2826,7 +2826,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="vanished">Niederländisch</translation>
+        <translation>Niederländisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="228"/>
@@ -2865,7 +2865,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>Translation:</source>
-        <translation type="vanished">Übersetzung:</translation>
+        <translation>Übersetzung:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="205"/>
@@ -2874,7 +2874,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="vanished">Spanisch</translation>
+        <translation>Spanisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="258"/>
@@ -2898,7 +2898,7 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <source>Binaries:</source>
-        <translation type="vanished">Ausführbare Dateien:</translation>
+        <translation>Ausführbare Dateien:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="395"/>
@@ -3043,14 +3043,14 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Create a clone</source>
-        <translation type="vanished">Ein Abbild erstellen</translation>
+        <translation>Einen Klon erstellen</translation>
     </message>
 </context>
 <context>
     <name>IDemPathSetup</name>
     <message>
         <source>Setup DEM file pathss</source>
-        <translation type="vanished">Pfad für DEM Dateien setzen</translation>
+        <translation>Pfad für DEM Dateien setzen</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
@@ -3450,7 +3450,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Graph Control</source>
-        <translation type="vanished">Grafikeinstellungen</translation>
+        <translation>Grafikeinstellungen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="866"/>
@@ -3464,11 +3464,11 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Progress</source>
-        <translation type="vanished">Verlauf</translation>
+        <translation>Verlauf</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="vanished">Track</translation>
+        <translation>Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="274"/>
@@ -3498,7 +3498,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>from Data</source>
-        <translation type="vanished">aus Daten</translation>
+        <translation>aus Daten</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="702"/>
@@ -3533,7 +3533,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <source>use as 
 default</source>
-        <translation type="vanished">als Vorgabe nutzen</translation>
+        <translation>als Vorgabe nutzen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="828"/>
@@ -5492,7 +5492,7 @@ sein</translation>
     </message>
     <message>
         <source>Caclculate a route between the first and last selected point.</source>
-        <translation type="vanished">Eine Route zwischen dem ersten und dem letzten Punkt berechnen.</translation>
+        <translation>Eine Route zwischen dem ersten und dem letzten Punkt berechnen.</translation>
     </message>
 </context>
 <context>
@@ -5646,7 +5646,7 @@ sein</translation>
     </message>
     <message>
         <source>Cut track at selected point into two tracks.</source>
-        <translation type="vanished">Teilt den Track am selektierten Punkt in zwei Teile.</translation>
+        <translation>Teilt den Track am selektierten Punkt in zwei Teile.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
@@ -5861,7 +5861,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="115"/>
         <source>Create a clone</source>
-        <translation>Abbild erstellen</translation>
+        <translation>Einen Klon erstellen</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="122"/>
@@ -5876,7 +5876,7 @@ sein</translation>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="136"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
-        <translation>Der Name das Abbildes wird mit &apos;_Klon&apos; erweitert</translation>
+        <translation>Der Name des Klones wird mit &apos;_Klon&apos; erweitert</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="153"/>
@@ -5954,12 +5954,12 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="87"/>
         <source>Add a clone</source>
-        <translation>Abbild hinzufügen</translation>
+        <translation>Klon hinzufügen</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="100"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
-        <translation>Der Name das Abbildes wird mit &apos;_Klon&apos; erweitert</translation>
+        <translation>Der Name des Klones wird mit &apos;_Klon&apos; erweitert</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="171"/>
@@ -6018,7 +6018,7 @@ sein</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="vanished">Datei</translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="131"/>
@@ -6067,11 +6067,11 @@ sein</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Achtung!&lt;/span&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Achtung!&lt;/span&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Caution!&lt;/b&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.</source>
-        <translation type="vanished">&lt;b&gt;Achtung!&lt;/b&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.</translation>
+        <translation>&lt;b&gt;Achtung!&lt;/b&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="124"/>
@@ -6469,7 +6469,7 @@ sein</translation>
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
         <translation>Das Element %1 wurde durch %2 (%3) geändert. 
 
-Um den Konflikt zu lösen, erstellen und speichern Sie ein Abbild, erzwingen Ihre Version oder verwerfen diese und nehmen die Version in der Datenbank</translation>
+Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihre Version oder verwerfen diese und nehmen die Version in der Datenbank</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="201"/>
@@ -6479,7 +6479,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie ein Abbild, erzwingen Ihr
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="202"/>
         <source>Clone &amp;&amp; Save</source>
-        <translation>Abbilden &amp;&amp; Speichern</translation>
+        <translation>Klonen &amp;&amp; Speichern</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="203"/>
@@ -6544,7 +6544,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie ein Abbild, erzwingen Ihr
     </message>
     <message>
         <source>Failed to read...</source>
-        <translation type="vanished">Lesen fehlgeschlagen...</translation>
+        <translation>Lesen fehlgeschlagen...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
@@ -6558,7 +6558,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>Not a GPX file: </source>
-        <translation type="vanished">Keine GPX Datei:</translation>
+        <translation>Keine GPX Datei:</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="362"/>
@@ -6614,7 +6614,7 @@ Areas: %1</source>
     </message>
     <message>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
-        <translation type="vanished">&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="104"/>
@@ -6628,7 +6628,7 @@ Areas: %1</source>
     </message>
     <message>
         <source>Cancelled correlation...</source>
-        <translation type="vanished">Verknüpfung abgebrochen...</translation>
+        <translation>Verknüpfung abgebrochen...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="263"/>
@@ -6737,7 +6737,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>Saveing GIS data failed...</source>
-        <translation type="vanished">Speichern der GIS Daten fehlgeschlagen...</translation>
+        <translation>Speichern der GIS Daten fehlgeschlagen...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="357"/>
@@ -7225,7 +7225,7 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
-        <translation type="vanished">&lt;h3&gt;%1&lt;/h3&gt; Dieses Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt; Dieses Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="669"/>
@@ -7582,7 +7582,7 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>Slope (directed)</source>
-        <translation type="vanished">Neigung (mit Vorzeichen)</translation>
+        <translation>Neigung (mit Vorzeichen)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="88"/>
@@ -7606,11 +7606,11 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>Slope (directed, derived)</source>
-        <translation type="vanished">Neigung (m. Vorz., berechnet)</translation>
+        <translation>Neigung (m. Vorz., berechnet)</translation>
     </message>
     <message>
         <source>Speed (derived)</source>
-        <translation type="vanished">Geschw. (berechnet)</translation>
+        <translation>Geschw. (berechnet)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="56"/>
@@ -7682,7 +7682,7 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>The internal database format has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation type="vanished">Das interne Datenbankformat wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank  mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
+        <translation>Das interne Datenbankformat wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank  mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="64"/>

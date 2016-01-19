@@ -19,7 +19,7 @@
 #ifndef IMOUSE_H
 #define IMOUSE_H
 
-#include <canvas/CCanvas.h>
+#include "canvas/CCanvas.h"
 
 #include <QCursor>
 #include <QObject>

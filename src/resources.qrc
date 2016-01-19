@@ -27,6 +27,8 @@
         <file>icons/16x16/ActShip.png</file>
         <file>icons/16x16/ActSwim.png</file>
         <file>icons/16x16/ActAero.png</file>
+        <file>icons/16x16/ActSki.png</file>
+        <file>icons/16x16/EditDetails.png</file>
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
@@ -176,6 +178,7 @@
         <file>icons/32x32/ActShip.png</file>
         <file>icons/32x32/ActSwim.png</file>
         <file>icons/32x32/ActAero.png</file>
+        <file>icons/32x32/ActSki.png</file>
         <file>icons/32x32/Activity.png</file>
         <file>icons/32x32/CSrcSolid.png</file>
         <file>icons/32x32/CSrcHR.png</file>
@@ -351,6 +354,7 @@
         <file>icons/48x48/ActShip.png</file>
         <file>icons/48x48/ActSwim.png</file>
         <file>icons/48x48/ActAero.png</file>
+        <file>icons/48x48/ActSki.png</file>
         <file>icons/48x48/Activity.png</file>
         <file>icons/48x48/CSrcSolid.png</file>
         <file>icons/48x48/CSrcHR.png</file>

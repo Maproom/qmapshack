@@ -229,6 +229,9 @@
                 <bold>true</bold>
                </font>
               </property>
+              <property name="focusPolicy">
+               <enum>Qt::ClickFocus</enum>
+              </property>
               <property name="frame">
                <bool>false</bool>
               </property>
@@ -1342,11 +1345,7 @@
             <number>3</number>
            </property>
            <item>
-            <layout class="QVBoxLayout" name="layoutActivities">
-             <property name="spacing">
-              <number>3</number>
-             </property>
-            </layout>
+            <layout class="QGridLayout" name="layoutActivities"/>
            </item>
            <item>
             <widget class="Line" name="line_3">
@@ -1602,9 +1601,9 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph2"/>
-  <buttongroup name="buttonGroupLineWidth"/>
-  <buttongroup name="buttonGroupGraph1"/>
  </buttongroups>
 </ui>

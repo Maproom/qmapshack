@@ -21,6 +21,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/IGisItem.h"
+#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/CDetailsPrj.h"
@@ -34,7 +35,7 @@
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
-#include <gis/fit/CFitProject.h>
+
 
 const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.qms *.slf *.fit)";
 const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";

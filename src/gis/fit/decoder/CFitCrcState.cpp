@@ -29,7 +29,7 @@ decode_state_e CFitCrcState::process(quint8 &dataByte)
         // last CRC byte.
         if (getCrc() != 0)
         {
-            throw QString("Invalid CRC.");
+            throw QObject::tr("FIT decoding error : invalid CRC.");
         }
         return eDecoderStateEnd;
     }

@@ -63,7 +63,7 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         }
         else if (architecture != eFitArchEndianLittle)
         {
-            throw QString("Architecture %1 not supported.").arg(architecture);
+            throw QObject::tr("FIT decoding error: architecture %1 not supported.").arg(architecture);
         }
         def->setGlobalMesgNr(globalMesgNr);
         break;
@@ -84,7 +84,7 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         break;
 
     default:
-        throw QString("invalid offset (%1) for state 'record content'").arg(offset);
+        throw QObject::tr("FIT decoding error: invalid offset %1 for state 'record content'").arg(offset);
     }
 
     // still more bytes for the record content

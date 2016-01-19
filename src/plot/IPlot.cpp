@@ -322,6 +322,14 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 {
     if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
     {
+        // [Issue #106 ] Profil with no or bad data does not open trackdetails
+        //
+        // even if there is no data at least open the track edit dialog
+        if((e->button() == Qt::LeftButton) && (mode == eModeIcon))
+        {
+            trk->edit();
+        }
+
         return;
     }
 

@@ -74,6 +74,7 @@ public:
         , eVisualColorLegend = 0x1
         , eVisualPlot        = 0x2
         , eVisualDetails     = 0x4
+        , eVisualProject     = 0x8
         , eVisualAll         = -1
     };
 
@@ -153,7 +154,17 @@ public:
 
      */
     void updateHistory(quint32 visuals);
+    /**
+       @brief Update all registered visuals viw the INotifyTrk interface
+       @param a bit field of visuals to be updated
+       @param who a string for debug puposes
+     */
+    void updateVisuals(quint32 visuals, const QString &who);
 
+     /**
+       @brief Create a cloned copy of this track
+       @return The cloned item a pointer
+     */
     IGisItem * createClone() override;
 
     /**
@@ -739,7 +750,6 @@ private:
     /// setup track icon by color
     void setIcon(const QString& iconColor);
 
-    void updateVisuals(quint32 visuals, const QString &who);
     void setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt);
     void setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
     void setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt);
@@ -780,8 +790,9 @@ public:
             ,eActSwim   = 0x04000000
             ,eActShip   = 0x02000000
             ,eActAero   = 0x01000000
-            ,eActMask   = 0xFF000000    ///< mask for activity flags
-            ,eActMaxNum = 8             ///< maximum number of activity flags. this is defined by the mask
+            ,eActSki    = 0x00800000
+            ,eActMask   = 0xFF800000    ///< mask for activity flags
+            ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
         };
 
         quint32 flags = 0;

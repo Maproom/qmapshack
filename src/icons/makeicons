@@ -19,6 +19,9 @@ function convert {
     if [[ $1 =~ Act.*\.svg ]]; then
         call_inkscape 16 $1 $NAME
     fi
+    if [[ $1 =~ EditDetails\.svg ]]; then
+        call_inkscape 16 $1 $NAME
+    fi
 
     call_inkscape 32 $1 $NAME
     call_inkscape 48 $1 $NAME

@@ -841,13 +841,6 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         if(item)
         {
             item->edit();
-
-            // skip GUI update as track details is
-            // not a classic dialog
-            if(item->type() == IGisItem::eTypeTrk)
-            {
-                return;
-            }
         }
     }
     else

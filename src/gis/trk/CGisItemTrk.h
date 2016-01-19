@@ -154,7 +154,17 @@ public:
 
      */
     void updateHistory(quint32 visuals);
+    /**
+       @brief Update all registered visuals viw the INotifyTrk interface
+       @param a bit field of visuals to be updated
+       @param who a string for debug puposes
+     */
+    void updateVisuals(quint32 visuals, const QString &who);
 
+     /**
+       @brief Create a cloned copy of this track
+       @return The cloned item a pointer
+     */
     IGisItem * createClone() override;
 
     /**
@@ -740,7 +750,6 @@ private:
     /// setup track icon by color
     void setIcon(const QString& iconColor);
 
-    void updateVisuals(quint32 visuals, const QString &who);
     void setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt);
     void setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
     void setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt);

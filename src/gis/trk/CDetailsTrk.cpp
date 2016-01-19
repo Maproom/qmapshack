@@ -240,9 +240,11 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     case CLimit::eModeUser:
         toolLimitUsrGraph->setChecked(true);
         break;
+
     case CLimit::eModeAuto:
         toolLimitAutoGraph->setChecked(true);
         break;
+
     case CLimit::eModeSys:
         toolLimitSysGraph->setChecked(true);
         break;
@@ -825,7 +827,6 @@ void CDetailsTrk::slotLimitChanged()
     {
         setupLimits(trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
     }
-
 }
 
 void CDetailsTrk::slotLineWidthMode(bool isUser)

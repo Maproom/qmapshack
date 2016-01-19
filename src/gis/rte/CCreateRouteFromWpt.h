@@ -19,7 +19,7 @@
 #ifndef CCREATEROUTEFROMWPT_H
 #define CCREATEROUTEFROMWPT_H
 
-#include <gis/IGisItem.h>
+#include "gis/IGisItem.h"
 
 #include "ui_ICreateRouteFromWpt.h"
 #include <QDialog>

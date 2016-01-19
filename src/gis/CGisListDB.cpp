@@ -271,7 +271,7 @@ bool CGisListDB::event(QEvent * e)
             IDBFolder * folder = db->getFolder(evt->idParent);
             if(folder)
             {
-                idChild = folder->addFolder(evt->type, evt->name);                
+                idChild = folder->addFolder(evt->type, evt->name);
             }
             else
             {

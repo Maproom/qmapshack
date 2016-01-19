@@ -1059,7 +1059,7 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    updateVisuals(eVisualPlot|eVisualDetails, "deriveSecondaryData()");
+    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "totalDistance" << totalDistance;
@@ -1200,7 +1200,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         }
     }
 
-    updateVisuals(eVisualDetails|eVisualPlot, "findWaypointsCloseBy()");
+    updateVisuals(eVisualDetails|eVisualPlot|eVisualProject, "findWaypointsCloseBy()");
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)

@@ -32,6 +32,7 @@
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/Signals.h"
 #include "plot/CPlot.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
@@ -437,21 +438,14 @@ void CDetailsTrk::updateData()
         }
     }
 
-    spinLineWidth->blockSignals(true);
+    X______________BlockAllSignals______________X(this);
+
     spinLineWidth->setValue(trk.lineScale.val().toDouble());
-    spinLineWidth->blockSignals(false);
-    toolUserLineWith->blockSignals(true);
     toolUserLineWith->setChecked(trk.lineScale.getMode() == CValue::eModeUser);
-    toolUserLineWith->blockSignals(false);
 
-    checkWithArrows->blockSignals(true);
     checkWithArrows->setChecked(trk.showArrows.val().toBool());
-    checkWithArrows->blockSignals(false);
-    toolUserArrow->blockSignals(true);
     toolUserArrow->setChecked(trk.showArrows.getMode() == CValue::eModeUser);
-    toolUserArrow->blockSignals(false);
 
-    comboColorSource->blockSignals(true);
     comboColorSource->clear();
     // the first entry `solid color`, it is always available
     comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Solid color"));
@@ -467,7 +461,6 @@ void CDetailsTrk::updateData()
         currentIdx = 0;
     }
     comboColorSource->setCurrentIndex(currentIdx);
-    comboColorSource->blockSignals(false);
 
     bool enabled = (0 < currentIdx);
 
@@ -481,19 +474,15 @@ void CDetailsTrk::updateData()
     {
         const CKnownExtension &ext = CKnownExtension::get(comboColorSource->itemData(currentIdx).toString());
 
-        spinLimitLow->blockSignals(true);
         spinLimitLow->setMinimum(ext.minimum);
         spinLimitLow->setMaximum(ext.maximum);
         spinLimitLow->setSuffix (ext.unit);
         spinLimitLow->setValue  (trk.getColorizeLimitLow());
-        spinLimitLow->blockSignals(false);
 
-        spinLimitHigh->blockSignals(true);
         spinLimitHigh->setMinimum(ext.minimum);
         spinLimitHigh->setMaximum(ext.maximum);
         spinLimitHigh->setSuffix (ext.unit);
         spinLimitHigh->setValue  (trk.getColorizeLimitHigh());
-        spinLimitHigh->blockSignals(false);
 
         widgetColorLabel->setMinimum(spinLimitLow->value());
         widgetColorLabel->setMaximum(spinLimitHigh->value());
@@ -502,12 +491,10 @@ void CDetailsTrk::updateData()
 
 
     // refill comboboxes to select track property to be displayed by graphs
-    comboGraph2->blockSignals(true);
-    comboGraph3->blockSignals(true);
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
-    comboGraph2->blockSignals(false);
-    comboGraph3->blockSignals(false);
+
+    X_____________UnBlockAllSignals_____________X(this);
 
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");

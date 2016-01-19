@@ -20,6 +20,7 @@
 #include "dem/CDemPropSetup.h"
 #include "dem/IDem.h"
 #include "units/IUnit.h"
+#include "helpers/Signals.h"
 
 #include <QtWidgets>
 QPointF CDemPropSetup::scale;
@@ -50,7 +51,7 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
 
     connect(checkSlopeColor,   &QCheckBox::toggled,             demfile, &IDem::slotSetSlopeColor);
     connect(checkSlopeColor,   &QCheckBox::clicked,             dem,     &CDemDraw::emitSigCanvasUpdate);
-    connect(comboGrades,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDemPropSetup::slotGradeIndex);
+
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {
@@ -59,13 +60,14 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
         connect(slopeSpins[i], &CTinySpinBox::valueChangedByStep, this, &CDemPropSetup::slotSlopeValiddateAfterEdit);
     }
 
-    comboGrades->blockSignals(true);
+
     for(size_t i = 0; i < IDem::slopePresetCount; i++)
     {
         comboGrades->addItem(IDem::slopePresets[i].name);
     }
     comboGrades->addItem("custom");
-    comboGrades->blockSignals(false);
+    connect(comboGrades, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDemPropSetup::slotGradeIndex);
+
 
     const QVector<QRgb>& colortable = demfile->getSlopeColorTable();
     QPixmap pixmap(20, 10);
@@ -93,13 +95,7 @@ void CDemPropSetup::resizeEvent(QResizeEvent * e)
 
 void CDemPropSetup::slotPropertiesChanged()
 {
-    sliderOpacity->blockSignals(true);
-    toolSetMaxScale->blockSignals(true);
-    toolSetMinScale->blockSignals(true);
-    checkHillshading->blockSignals(true);
-    sliderHillshading->blockSignals(true);
-    checkSlopeColor->blockSignals(true);
-    comboGrades->blockSignals(true);
+    X______________BlockAllSignals______________X(this);
 
     sliderOpacity->setValue(demfile->getOpacity());
 
@@ -126,21 +122,13 @@ void CDemPropSetup::slotPropertiesChanged()
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {
-        slopeSpins[i]->blockSignals(true);
         slopeSpins[i]->setReadOnly(spinsReadonly);
         slopeSpins[i]->setValue(demfile->getCurrentSlopeStepTable()[i]);
-        slopeSpins[i]->blockSignals(false);
     }
 
     dem->emitSigCanvasUpdate();
 
-    comboGrades->blockSignals(false);
-    sliderOpacity->blockSignals(false);
-    toolSetMaxScale->blockSignals(false);
-    toolSetMinScale->blockSignals(false);
-    checkHillshading->blockSignals(false);
-    sliderHillshading->blockSignals(false);
-    checkSlopeColor->blockSignals(false);
+    X_____________UnBlockAllSignals_____________X(this);
 }
 
 void CDemPropSetup::slotScaleChanged(const QPointF& s)

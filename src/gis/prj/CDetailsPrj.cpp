@@ -34,9 +34,20 @@
 
 CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     : QWidget(parent)
+    , INotifyTrk(CGisItemTrk::eVisualProject)
     , prj(prj)
 {
     setupUi(this);
+
+    const int N = prj.childCount();
+    for(int i = 0; i < N; i++)
+    {
+        CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
+        if(nullptr != trk)
+        {
+            trk->registerVisual(this);
+        }
+    }
 
     connect(labelKeywords, &QLabel::linkActivated,          this, static_cast<void (CDetailsPrj::*)(const QString&)>(&CDetailsPrj::slotLinkActivated));
     connect(textDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsPrj::*)(const QUrl&)   >(&CDetailsPrj::slotLinkActivated));
@@ -56,6 +67,15 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
 
 CDetailsPrj::~CDetailsPrj()
 {
+    const int N = prj.childCount();
+    for(int i = 0; i < N; i++)
+    {
+        CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
+        if(nullptr != trk)
+        {
+            trk->unregisterVisual(this);
+        }
+    }
 }
 
 void CDetailsPrj::resizeEvent(QResizeEvent * e)
@@ -821,6 +841,13 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         if(item)
         {
             item->edit();
+
+            // skip GUI update as track details is
+            // not a classic dialog
+            if(item->type() == IGisItem::eTypeTrk)
+            {
+                return;
+            }
         }
     }
     else

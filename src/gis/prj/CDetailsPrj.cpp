@@ -416,7 +416,10 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item,
 
         foreach(const QString& icon, icons)
         {
-            table->cellAt(row,col).lastCursorPosition().insertImage(icon);
+            if(!icon.isEmpty())
+            {
+                table->cellAt(row,col).lastCursorPosition().insertImage(icon);
+            }
         }
     }
 

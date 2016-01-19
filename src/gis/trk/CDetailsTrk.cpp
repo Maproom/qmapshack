@@ -632,6 +632,9 @@ void CDetailsTrk::slotColorLimitLowChanged()
 void CDetailsTrk::slotChangeReadOnlyMode(bool on)
 {
     trk.setReadOnlyMode(on);
+    // as setReadOnlyMode() is a method of IGisItem it will bypass updateHistory() of the track
+    // Therefore we have to call updateVisuals() explicitely.
+    trk.updateVisuals(CGisItemTrk::eVisualProject, "CDetailsTrk::slotChangeReadOnlyMode()");
     updateData();
 }
 

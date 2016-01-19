@@ -229,6 +229,9 @@
                 <bold>true</bold>
                </font>
               </property>
+              <property name="focusPolicy">
+               <enum>Qt::ClickFocus</enum>
+              </property>
               <property name="frame">
                <bool>false</bool>
               </property>
@@ -335,7 +338,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -1597,10 +1600,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph1"/>
-  <buttongroup name="buttonGroupArrow"/>
-  <buttongroup name="buttonGroupLineWidth"/>
-  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupGraph2"/>
  </buttongroups>
 </ui>

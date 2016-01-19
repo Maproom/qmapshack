@@ -19,7 +19,7 @@
 #ifndef CSEARCHGOOGLE_H
 #define CSEARCHGOOGLE_H
 
-#include <gis/prj/IGisProject.h>
+#include "gis/prj/IGisProject.h"
 
 #include <QNetworkAccessManager>
 #include <QObject>

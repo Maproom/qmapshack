@@ -38,11 +38,10 @@ public:
     CFitStream(QFile& dev) : file(dev) { }
 
     /**
-       setup FIT file decoder.
-       return: true if the FIT file can be decoded.
-       throws: fit::RuntimeException
+       decodes fit file provided in constructor
+       throws: QString in case of a decoding failure
      */
-    bool decodeFile();
+    void decodeFile();
 
     /**
        sets the stream at the beginning (first position).

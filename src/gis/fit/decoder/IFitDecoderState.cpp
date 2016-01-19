@@ -29,7 +29,7 @@ decode_state_e IFitDecoderState::processByte(quint8 &dataByte)
         if (state != eDecoderStateRecord)
         {
             // we come from a wrong state...
-            throw QString("Decoder not in correct state after last data byte in file.");
+            throw QObject::tr("FIT decoding error: Decoder not in correct state %1 after last data byte in file.").arg(state);
         }
         // end of file, 2 bytes left, this is the crc
         return eDecoderStateFileCrc;

@@ -64,7 +64,7 @@ CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition &def, quint8 *f
     else
     {
         // should not be possible
-        throw QString("FIT unknown base type");
+        throw QObject::tr("FIT decoding error: unknown base type %1.").arg(baseType.nr());
     }
     bool valid = isValueValid(def, fieldData);
     return CFitField(def, fieldProfile, value, valid);

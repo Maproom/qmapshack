@@ -20,9 +20,9 @@
 
 #include <QtCore>
 
-bool CFitStream::decodeFile()
+void CFitStream::decodeFile()
 {
-    return decode.decode(file);
+    decode.decode(file);
 }
 
 

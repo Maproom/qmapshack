@@ -32,7 +32,7 @@ public:
     CFitDecoder();
     ~CFitDecoder();
 
-    bool decode(QFile& file);
+    void decode(QFile& file);
     const QList<CFitMessage>& getMessages() const;
 
 private:

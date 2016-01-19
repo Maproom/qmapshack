@@ -169,18 +169,25 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
                    mesg.getFieldValue(eEventEventType).toUInt() == eEventTypeStopAll ||
                    mesg.getFieldValue(eEventEventType).toUInt() == eEventTypeStopDisableAll)
                 {
-                    trk.segs.append(seg);
-                    seg = trkseg_t();
+                    if(!seg.pts.isEmpty())
+                    {
+                        trk.segs.append(seg);
+                        seg = trkseg_t();
+                    }
                 }
             }
         }
     }
     while (stream.hasMoreMesg());
 
-    if(trk.segs.size() == 0)
+    if(trk.segs.size() == 0 && !seg.pts.isEmpty())
     {
-        // navigation course files do not have to have start / stop event, so add it now.
+        // navigation course files do not have to have start / stop event, so add the segment now.
         trk.segs.append(seg);
+    }
+    if(trk.segs.isEmpty())
+    {
+        throw QObject::tr("FIT file %1 contains no GPS data.").arg(stream.getFileName());
     }
 }
 

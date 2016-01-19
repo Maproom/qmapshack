@@ -74,6 +74,7 @@ public:
         , eVisualColorLegend = 0x1
         , eVisualPlot        = 0x2
         , eVisualDetails     = 0x4
+        , eVisualProject     = 0x8
         , eVisualAll         = -1
     };
 

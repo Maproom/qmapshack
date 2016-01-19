@@ -328,6 +328,7 @@ set( HDRS
         helpers/CDraw.h
         helpers/CValue.h
         helpers/CLimit.h
+        helpers/Signals.h
         canvas/CCanvas.h
         canvas/CCanvasSetup.h
         canvas/IDrawContext.h

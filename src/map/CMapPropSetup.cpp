@@ -20,6 +20,7 @@
 #include "map/CMapPropSetup.h"
 #include "map/IMap.h"
 #include "units/IUnit.h"
+#include "helpers/Signals.h"
 
 #include <QtWidgets>
 QPointF CMapPropSetup::scale;
@@ -88,15 +89,8 @@ CMapPropSetup::~CMapPropSetup()
 
 /* virtual */ void CMapPropSetup::slotPropertiesChanged() /* override */
 {
+    X______________BlockAllSignals______________X(this);
     // block all signals to avoid retrigger
-    sliderOpacity->blockSignals(true);
-    toolSetMaxScale->blockSignals(true);
-    toolSetMinScale->blockSignals(true);
-    checkPolygons->blockSignals(true);
-    checkPolylines->blockSignals(true);
-    checkPoints->blockSignals(true);
-    spinCacheSize->blockSignals(true);
-    spinCacheExpiration->blockSignals(true);
 
     // opacity and visibility settings
     sliderOpacity->setValue(mapfile->getOpacity());
@@ -119,14 +113,7 @@ CMapPropSetup::~CMapPropSetup()
     spinCacheExpiration->setValue(mapfile->getCacheExpiration());
 
     // unblock all signals
-    sliderOpacity->blockSignals(false);
-    toolSetMaxScale->blockSignals(false);
-    toolSetMinScale->blockSignals(false);
-    checkPolygons->blockSignals(false);
-    checkPolylines->blockSignals(false);
-    checkPoints->blockSignals(false);
-    spinCacheSize->blockSignals(false);
-    spinCacheExpiration->blockSignals(false);
+    X_____________UnBlockAllSignals_____________X(this);
 }
 
 void CMapPropSetup::slotScaleChanged(const QPointF& s)

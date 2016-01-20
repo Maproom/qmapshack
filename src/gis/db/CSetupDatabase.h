@@ -38,6 +38,7 @@ public:
     QString getName() const {return lineName->text(); }
     QString getFilename() const {return labelFilename->text(); }
     QString getServer() const {return lineServer->text(); }
+    QString getPort() const {return linePort->text(); }
     QString getUser() const {return lineUser->text(); }
     QString getPasswd() const {return linePasswd->text(); }
 

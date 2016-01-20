@@ -328,6 +328,7 @@ set( HDRS
         helpers/CDraw.h
         helpers/CValue.h
         helpers/CLimit.h
+        helpers/Signals.h
         canvas/CCanvas.h
         canvas/CCanvasSetup.h
         canvas/IDrawContext.h
@@ -627,6 +628,7 @@ qt5_add_resources(RC_SRCS ${RCS})
 
 # try to figure out which compiler flags are supported (and add them)
 cxx_add_flag_if_supported(-Wsuggest-override)
+cxx_add_flag_if_supported(-Woverloaded-virtual)
 
 if(UNIX)
     add_definitions(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing)

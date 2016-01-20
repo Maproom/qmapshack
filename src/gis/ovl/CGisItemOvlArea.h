@@ -97,6 +97,7 @@ public:
     virtual void save(QDomNode& gpx) override;
     virtual void edit() override;
 
+    using IGisItem::drawItem;
     virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
     virtual void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
     virtual void drawHighlight(QPainter& p) override;

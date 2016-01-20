@@ -41,6 +41,7 @@
         <file>icons/32x32/FolderDEM.png</file>
         <file>icons/32x32/Font.png</file>
         <file>icons/32x32/FromMap.png</file>
+        <file>icons/32x32/FilterModifyExtension.png</file>
         <file>icons/32x32/Grid.png</file>
         <file>icons/32x32/GridSetup.png</file>
         <file>icons/32x32/GridWizzard.png</file>
@@ -216,6 +217,7 @@
         <file>icons/48x48/FolderDEM.png</file>
         <file>icons/48x48/Font.png</file>
         <file>icons/48x48/FromMap.png</file>
+        <file>icons/48x48/FilterModifyExtension.png</file>
         <file>icons/48x48/Grid.png</file>
         <file>icons/48x48/GridSetup.png</file>
         <file>icons/48x48/GridWizzard.png</file>

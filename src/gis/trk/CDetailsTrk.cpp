@@ -20,6 +20,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/filter/CFilterDelete.h"
+#include "gis/trk/filter/CFilterDeleteExtension.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/filter/CFilterInvalid.h"
 #include "gis/trk/filter/CFilterMedian.h"
@@ -63,6 +64,20 @@ static void addFilterGroup(QTreeWidget *widget, CGisItemTrk& trk, const QString 
     itemGroup->setText(/* column = */ 0, groupText);
 
     addFilters<filters ...>(itemGroup, trk);
+}
+
+static void deleteAllFilterGroups(QTreeWidget *widget)
+{
+    QTreeWidgetItem *topItem = nullptr;
+    while( nullptr != (topItem = widget->takeTopLevelItem(0)) )
+    {
+        QTreeWidgetItem *item = nullptr;
+        while( nullptr != (item = topItem->takeChild(0)) )
+        {
+            delete item;
+        }
+        delete topItem;
+    }
 }
 
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
@@ -118,19 +133,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     {
         toolLock->setDisabled(true);
     }
-
-    addFilterGroup<CFilterDouglasPeuker, CFilterInvalid, CFilterReset, CFilterDelete>
-        (treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png");
-
-    addFilterGroup<CFilterMedian, CFilterReplaceElevation, CFilterOffsetElevation>
-        (treeFilter, trk, tr("Change elevation of track points"), "://icons/48x48/SetEle.png");
-
-    addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
-        (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
-
-    addFilterGroup<CFilterSplitSegment>
-        (treeFilter, trk, tr("Cut track into pieces"), "://icons/48x48/TrkCut.png");
-
 
     SETTINGS;
     cfg.beginGroup("TrackDetails");
@@ -399,6 +401,23 @@ void CDetailsTrk::updateData()
     textCmtDesc->append(IGisItem::createText(isReadOnly, trk.getComment(), trk.getDescription(), trk.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
+
+    deleteAllFilterGroups(treeFilter);
+
+    addFilterGroup<CFilterDouglasPeuker, CFilterInvalid, CFilterReset, CFilterDelete>
+        (treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png");
+
+    addFilterGroup<CFilterMedian, CFilterReplaceElevation, CFilterOffsetElevation>
+        (treeFilter, trk, tr("Change elevation of track points"), "://icons/48x48/SetEle.png");
+
+    addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
+        (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
+
+    addFilterGroup<CFilterDeleteExtension>
+        (treeFilter, trk, tr("Modify track points' extensions"), "://icons/48x48/FilterModifyExtension.png");
+
+    addFilterGroup<CFilterSplitSegment>
+        (treeFilter, trk, tr("Cut track into pieces"), "://icons/48x48/TrkCut.png");
 
     quint32 flags = trk.getActivities().getAllFlags();
 

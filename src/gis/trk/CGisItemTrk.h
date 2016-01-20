@@ -606,6 +606,12 @@ public:
        @note All filter implementations are found in src/gis/trk/filter/filter.cpp
      */
     void filterSplitSegment();
+    /**
+       @brief filterDeleteExtension
+
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
+    void filterDeleteExtension(const QString &ext);
 
     /**
        @brief Correlate waypoints with the track points
@@ -1011,13 +1017,13 @@ private:
     QString mouseFocusOwner;
 
     /// the current track point selected by mouse movement
-    const trkpt_t * mouseMoveFocus = nullptr;
+    const trkpt_t * mouseMoveFocus = 0;
     /// the last track point the user clicked on
-    const trkpt_t * mouseClickFocus = nullptr;
+    const trkpt_t * mouseClickFocus = 0;
     /// the first point of a range selection
-    const trkpt_t * mouseRange1 = nullptr;
+    const trkpt_t * mouseRange1 = 0;
     /// the second point of a range selection
-    const trkpt_t * mouseRange2 = nullptr;
+    const trkpt_t * mouseRange2 = 0;
     /**@}*/
 
     /// the track's details dialog if any

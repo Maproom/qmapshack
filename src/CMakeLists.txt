@@ -205,6 +205,7 @@ set( SRCS
         gis/trk/filter/CFilterInvalid.cpp
         gis/trk/filter/CFilterReset.cpp
         gis/trk/filter/CFilterDelete.cpp
+        gis/trk/filter/CFilterDeleteExtension.cpp
         gis/trk/filter/CFilterMedian.cpp
         gis/trk/filter/CFilterReplaceElevation.cpp
         gis/trk/filter/CFilterOffsetElevation.cpp
@@ -448,6 +449,7 @@ set( HDRS
         gis/trk/filter/CFilterInvalid.h
         gis/trk/filter/CFilterReset.h
         gis/trk/filter/CFilterDelete.h
+        gis/trk/filter/CFilterDeleteExtension.h
         gis/trk/filter/CFilterMedian.h
         gis/trk/filter/CFilterReplaceElevation.h
         gis/trk/filter/CFilterOffsetElevation.h
@@ -591,6 +593,7 @@ set( UIS
     gis/trk/filter/IFilterInvalid.ui
     gis/trk/filter/IFilterReset.ui
     gis/trk/filter/IFilterDelete.ui
+    gis/trk/filter/IFilterDeleteExtension.ui
     gis/trk/filter/IFilterMedian.ui
     gis/trk/filter/IFilterReplaceElevation.ui
     gis/trk/filter/IFilterOffsetElevation.ui

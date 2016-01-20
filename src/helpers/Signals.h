@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2016 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2016 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,15 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef CLASSNAME_H
-#define CLASSNAME_H
+#ifndef SIGNALS_H
+#define SIGNALS_H
 
-class CLASSNAME
+#include <QObject>
+
+inline void X______________BlockAllSignals______________X(QObject * parent)
 {
-    public:
-        CLASSNAME();
-        virtual ~CLASSNAME() = default;
-};
+    foreach(QObject * obj, parent->findChildren<QObject*>(QRegExp(".*")))
+    {
+        obj->blockSignals(true);
+    }
+}
 
-#endif //CLASSNAME_H
+inline void X_____________UnBlockAllSignals_____________X(QObject * parent)
+{
+    foreach(QObject * obj, parent->findChildren<QObject*>(QRegExp(".*")))
+    {
+        obj->blockSignals(false);
+    }
+}
+
+#endif //SIGNALS_H
 

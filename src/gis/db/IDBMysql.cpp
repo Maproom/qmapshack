@@ -28,7 +28,7 @@ IDBMysql::IDBMysql()
 {
 }
 
-bool IDBMysql::setupDB(const QString& server,const QString& user, const QString& passwd, bool noPasswd, const QString& name, const QString& connectionName)
+bool IDBMysql::setupDB(const QString& server, const QString& port, const QString& user, const QString& passwd, bool noPasswd, const QString& name, const QString& connectionName)
 {
     // this is important!
     IDB::setup(connectionName);
@@ -38,6 +38,13 @@ bool IDBMysql::setupDB(const QString& server,const QString& user, const QString&
         db = QSqlDatabase::addDatabase("QMYSQL", connectionName);
         db.setDatabaseName(name);
         db.setHostName(server);
+
+        if(!port.isEmpty())
+        {
+            quint16 port16 = port.toUInt();
+            db.setPort(port16);
+        }
+
         db.setUserName(user);
 
         if(!noPasswd)
@@ -52,6 +59,8 @@ bool IDBMysql::setupDB(const QString& server,const QString& user, const QString&
                 db.setPassword(passwd);
             }
         }
+
+        qDebug() << "open MySQL database" << name << "@" << server << ":" << port << "as user" << user;
 
         if(!db.open())
         {

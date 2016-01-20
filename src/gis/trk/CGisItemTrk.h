@@ -153,7 +153,8 @@ public:
         same as changed();
 
      */
-    void updateHistory(quint32 visuals);
+    void updateHistory(quint32 visuals);    
+
     /**
        @brief Update all registered visuals viw the INotifyTrk interface
        @param a bit field of visuals to be updated
@@ -630,6 +631,12 @@ public:
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
 private:
+    /// no don't really use it, use CGisItemTrk(quint32 visuals) instead
+    void updateHistory() override
+    {
+        updateHistory(eVisualAll);
+    }
+
     virtual void setSymbol() override;
     /**
        @brief Read track data from section in GPX file

@@ -26,6 +26,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CProgressDialog.h"
+#include "helpers/Signals.h"
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
 #include "widgets/CTextEditWidget.h"
@@ -116,7 +117,6 @@ void CDetailsPrj::slotSetupGui()
         return;
     }
 
-    comboSort->blockSignals(true);
     comboSort->setCurrentIndex(prj.getSorting());
     if((prj.getSorting() > IGisProject::eSortTime) && !prj.doCorrelation())
     {
@@ -131,12 +131,11 @@ void CDetailsPrj::slotSetupGui()
             comboSort->setCurrentIndex(IGisProject::eSortNone);
         }
         timerUpdateTime->start();
+
         mutex.unlock();
         return;
     }
-    comboSort->blockSignals(false);
 
-    toolLock->blockSignals(true);
     const int N = prj.childCount();
     if(N == 0)
     {
@@ -157,7 +156,6 @@ void CDetailsPrj::slotSetupGui()
             }
         }
     }
-    toolLock->blockSignals(false);
 
     textDesc->document()->setTextWidth(textDesc->size().width() - 20);
     draw(*textDesc->document(), false);
@@ -172,7 +170,6 @@ void CDetailsPrj::slotSetupGui()
             tabWidget->setTabText(idx, prj.getName().replace("&", "&&"));
         }
     }
-
     mutex.unlock();
 }
 
@@ -418,14 +415,14 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item,
         {
             if(!icon.isEmpty())
             {
-                table->cellAt(row,col).lastCursorPosition().insertImage(icon);
+                table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><br/><img src='%1'/></p>").arg(icon));
             }
         }
     }
 
     if(!(printable||item->isReadOnly()))
     {
-        table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<br/><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a>").arg(item->getKey().item));
+        table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(item->getKey().item));
     }
 }
 

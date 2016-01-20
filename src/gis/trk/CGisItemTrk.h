@@ -632,7 +632,10 @@ public:
 
 private:
     /// no don't really use it, use CGisItemTrk(quint32 visuals) instead
-    using IGisItem::updateHistory;
+    void updateHistory() override
+    {
+        updateHistory(eVisualAll);
+    }
 
     virtual void setSymbol() override;
     /**

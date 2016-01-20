@@ -18,9 +18,10 @@
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/decoder/CFitField.h"
+#include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/CFitFieldProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
 #include "gis/fit/defs/fit_const.h"
-
 
 CFitField::CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QVariant value, bool valid)
     :  fieldProfile(profile), globalMesgNr(fieldDefinition.parent().getGlobalMesgNr()),

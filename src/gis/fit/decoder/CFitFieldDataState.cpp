@@ -18,8 +18,8 @@
 
 #include "gis/fit/decoder/CFitFieldBuilder.h"
 #include "gis/fit/decoder/CFitFieldDataState.h"
+#include "gis/fit/defs/fit_const.h"
 #include "gis/fit/defs/fit_fields.h"
-
 
 void CFitFieldDataState::reset()
 {

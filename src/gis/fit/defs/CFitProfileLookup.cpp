@@ -17,11 +17,14 @@
 **********************************************************************************************/
 
 #include "CFitProfileLookup.h"
+#include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/CFitFieldProfile.h"
+#include "gis/fit/defs/CFitProfile.h"
+#include "gis/fit/defs/fit_const.h"
 #include "gis/fit/defs/fit_enums.h"
 #include "gis/fit/defs/fit_fields.h"
 
 #include <QtWidgets>
-
 
 // ----------- start generated code -----------
 void initFileId(QMap<quint16, CFitProfile*>& profiles)

@@ -16,11 +16,14 @@
 
 **********************************************************************************************/
 
-
 #include "gis/fit/decoder/CFitByteDataTransformer.h"
+#include "gis/fit/decoder/CFitField.h"
 #include "gis/fit/decoder/CFitFieldBuilder.h"
+#include "gis/fit/decoder/CFitFieldDefinition.h"
+#include "gis/fit/decoder/CFitMessage.h"
+#include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/CFitFieldProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
-
 
 void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
 {

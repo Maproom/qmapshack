@@ -18,6 +18,8 @@
 
 #include "gis/fit/decoder/CFitByteDataTransformer.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
+#include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/fit_const.h"
 
 unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, quint8* rawData)
 {

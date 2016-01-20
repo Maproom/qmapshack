@@ -17,14 +17,12 @@
 **********************************************************************************************/
 
 #include "gis/fit/CFitStream.h"
-
-#include <QtCore>
+#include "gis/fit/defs/fit_const.h"
 
 void CFitStream::decodeFile()
 {
     decode.decode(file);
 }
-
 
 void CFitStream::reset()
 {

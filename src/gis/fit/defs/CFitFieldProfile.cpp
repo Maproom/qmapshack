@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-
+#include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
 #include "gis/fit/defs/CFitProfile.h"
-
+#include "gis/fit/defs/fit_const.h"
 
 CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units)
     : name(name), fieldDefNr(fieldDefNr), scale(scale), offset(offset), units(units),

@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
-
-#include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
+#include "gis/fit/defs/fit_const.h"
 
 static const quint8 fitArchitecureEndianMask = 0x01;
 

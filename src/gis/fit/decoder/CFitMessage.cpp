@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/decoder/CFitMessage.h"
-
+#include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
 #include "gis/fit/defs/fit_const.h"
-
 
 CFitMessage::CFitMessage(const CFitDefinitionMessage& def)
     : fields(), globalMesgNr(def.getGlobalMesgNr()), localMesgNr(def.getLocalMesgNr()),

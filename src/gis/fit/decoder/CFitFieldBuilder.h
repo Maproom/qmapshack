@@ -16,13 +16,14 @@
 
 **********************************************************************************************/
 
-
 #ifndef CFITFIELDBUILDER_H
 #define CFITFIELDBUILDER_H
 
+#include <QtCore>
 
-#include "gis/fit/decoder/CFitField.h"
-#include "gis/fit/decoder/CFitMessage.h"
+class CFitField;
+class CFitMessage;
+class CFitFieldDefinition;
 
 class CFitFieldBuilder
 {

@@ -19,14 +19,12 @@
 #ifndef CFITFIELDPROFILE_H
 #define CFITFIELDPROFILE_H
 
-#include "fit_const.h"
-#include "gis/fit/defs/CFitBaseType.h"
-
 #include <QtCore>
 
 class CFitProfile;
 class CFitSubfieldProfile;
 class CFitComponentfieldProfile;
+class CFitBaseType;
 
 class CFitFieldProfile
 {

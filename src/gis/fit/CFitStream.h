@@ -20,13 +20,10 @@
 #define CFITSTREAM_H
 
 #include "gis/fit/decoder/CFitDecoder.h"
-#include "gis/fit/decoder/CFitDefinitionMessage.h"
-#include "gis/fit/decoder/CFitMessage.h"
-#include "gis/fit/defs/fit_const.h"
-
 
 #include <QtCore>
 
+class CFitMessage;
 
 /*
    Encapsulates the access to the FIT messages. Looping over the read FIT messages can be done using the

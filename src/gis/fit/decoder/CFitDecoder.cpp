@@ -16,15 +16,14 @@
 
 **********************************************************************************************/
 
-#include "gis/fit/decoder/CFitDecoder.h"
-
 #include "gis/fit/decoder/CFitCrcState.h"
+#include "gis/fit/decoder/CFitDecoder.h"
 #include "gis/fit/decoder/CFitFieldDataState.h"
 #include "gis/fit/decoder/CFitFieldDefinitionState.h"
 #include "gis/fit/decoder/CFitHeaderState.h"
 #include "gis/fit/decoder/CFitRecordContentState.h"
 #include "gis/fit/decoder/CFitRecordHeaderState.h"
-
+#include "gis/fit/defs/fit_const.h"
 
 CFitDecoder::CFitDecoder()
 {

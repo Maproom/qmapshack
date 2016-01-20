@@ -19,12 +19,14 @@
 #ifndef CFITMESSAGE_H
 #define CFITMESSAGE_H
 
-#include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/decoder/CFitField.h"
 
 #include <QtCore>
 
-class MesgDefinition;   // Forward declaration.
+class MesgDefinition;
+class CFitDefinitionMessage;
+class CFitProfile;
+class CFitFieldProfile;
 
 class CFitMessage final
 {

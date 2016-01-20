@@ -16,15 +16,15 @@
 
 **********************************************************************************************/
 
-
 #ifndef CFITMESSAGEDEFINTION_H
 #define CFITMESSAGEDEFINTION_H
 
 #include "gis/fit/decoder/CFitFieldDefinition.h"
-#include "gis/fit/defs/CFitProfile.h"
 
 #include <QtCore>
 
+class CFitBaseType;
+class CFitProfile;
 
 class CFitDefinitionMessage final
 {

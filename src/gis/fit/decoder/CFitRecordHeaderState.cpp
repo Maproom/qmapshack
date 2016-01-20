@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitRecordHeaderState.h"
+#include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/fit_fields.h"
 
 /*

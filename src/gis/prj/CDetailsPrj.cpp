@@ -415,14 +415,14 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item,
         {
             if(!icon.isEmpty())
             {
-                table->cellAt(row,col).lastCursorPosition().insertImage(icon);
+                table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><br/><img src='%1'/></p>").arg(icon));
             }
         }
     }
 
     if(!(printable||item->isReadOnly()))
     {
-        table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<br/><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a>").arg(item->getKey().item));
+        table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(item->getKey().item));
     }
 }
 

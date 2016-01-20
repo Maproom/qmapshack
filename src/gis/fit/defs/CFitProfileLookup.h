@@ -20,7 +20,10 @@
 #ifndef CFITPROFILELOOKUP_H
 #define CFITPROFILELOOKUP_H
 
-#include "gis/fit/defs/CFitProfile.h"
+#include <QtCore>
+
+class CFitProfile;
+class CFitFieldProfile;
 
 class CFitProfileLookup : public QObject
 {

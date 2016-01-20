@@ -19,12 +19,11 @@
 #ifndef CFITDECODER_H
 #define CFITDECODER_H
 
-#include "gis/fit/decoder/CFitDecoder.h"
-#include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/decoder/IFitDecoderState.h"
 
 #include <QtCore>
 
+class CFitMessage;
 
 class CFitDecoder final
 {

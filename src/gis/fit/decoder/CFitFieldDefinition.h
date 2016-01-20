@@ -19,13 +19,11 @@
 #ifndef CFITFIELDDEFINITION_H
 #define CFITFIELDDEFINITION_H
 
-#include "gis/fit/defs/CFitBaseType.h"
-#include "gis/fit/defs/CFitProfile.h"
-
 #include <QtCore>
 
-// forwar declaration to parent
 class CFitDefinitionMessage;
+class CFitBaseType;
+class CFitFieldProfile;
 
 class CFitFieldDefinition final
 {

@@ -23,14 +23,11 @@
 #include "gis/fit/defs/fit_enums.h"
 #include "gis/fit/defs/fit_fields.h"
 #include "gis/gpx/CGpxProject.h"
-#include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
-
 
 CFitProject::CFitProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeFit, filename, parent)

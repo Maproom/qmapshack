@@ -20,9 +20,9 @@
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/CFitFieldProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
-
-
+#include "gis/fit/defs/fit_const.h"
 
 static const quint8 fitEndianFlagMask = 0x80;
 

@@ -17,14 +17,12 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/WptIcons.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/fit/defs/fit_enums.h"
 #include "gis/fit/defs/fit_fields.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-
 
 static const qreal degrees = 180.0;
 static const qreal twoPow31 = qPow(2, 31);

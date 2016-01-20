@@ -19,12 +19,11 @@
 #ifndef CFITFIELD_H
 #define CFITFIELD_H
 
-#include "gis/fit/decoder/CFitFieldDefinition.h"
-#include "gis/fit/defs/CFitBaseType.h"
-#include "gis/fit/defs/CFitProfile.h"
-
 #include <QtCore>
 
+class CFitFieldDefinition;
+class CFitFieldProfile;
+class CFitBaseType;
 
 class CFitField final
 {

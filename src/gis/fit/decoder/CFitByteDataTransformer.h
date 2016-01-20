@@ -19,10 +19,10 @@
 #ifndef CFITBYTEDATATRANSFORMER_H
 #define CFITBYTEDATATRANSFORMER_H
 
-#include "gis/fit/decoder/CFitFieldDefinition.h"
-#include "gis/fit/defs/CFitBaseType.h"
-
 #include <QtCore>
+
+class CFitBaseType;
+class CFitFieldDefinition;
 
 class CFitByteDataTransformer
 {

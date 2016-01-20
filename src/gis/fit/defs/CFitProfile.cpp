@@ -16,8 +16,9 @@
 
 **********************************************************************************************/
 
+#include "gis/fit/defs/CFitFieldProfile.h"
 #include "gis/fit/defs/CFitProfile.h"
-
+#include "gis/fit/defs/fit_const.h"
 
 CFitProfile::CFitProfile(QString name, quint16 globalMesgNr) : name(name), globalMesgNr(globalMesgNr), fields()
 {
@@ -38,17 +39,13 @@ CFitProfile::~CFitProfile()
 }
 
 
-
-// dummy field profile for unkown definitions
-static CFitFieldProfile dummyFieldProfile = CFitFieldProfile();
-
 const CFitFieldProfile* CFitProfile::getField(quint8 fieldDefNr) const
 {
     if (fields.contains(fieldDefNr))
     {
-        // return fields.constFind(fieldDefNr).operator->();
         return fields[fieldDefNr];
     }
+    static CFitFieldProfile dummyFieldProfile {};
     return &dummyFieldProfile;
 }
 

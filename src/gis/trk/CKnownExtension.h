@@ -44,6 +44,7 @@ public:
     QString unit;              //< the unit (to be displayed)
     QString icon;              //< path to an icon
     bool known;
+    bool derivedQMS;           //< if set to true the value is derived by QMS (p.x. slope*)
     fTrkPtGetVal valueFunc;    //< the function used to retrieve the value
 
 private:
@@ -54,8 +55,13 @@ private:
                     qreal minimum,     qreal maximum,
                     qreal factor,      QString unit,
                     QString icon,      bool known,
-                    fTrkPtGetVal valueFunc
-                    );
+                    bool derivedQMS,   fTrkPtGetVal valueFunc
+                    )
+        : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
+          minimum(minimum), maximum(maximum), factor(factor), unit(unit),
+          icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
+    {
+    }
 
     static void initGarminTPXv1(IUnit &units, const QString &ns);
     static void initMioTPX(IUnit &units);

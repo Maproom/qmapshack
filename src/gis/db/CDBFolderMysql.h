@@ -26,10 +26,11 @@
 class CDBFolderMysql : public IDBFolderSql, public IDBMysql
 {
 public:
-    CDBFolderMysql(const QString &server, const QString &user, const QString &passwd, bool noPasswd, const QString &name, QTreeWidget *parent);
+    CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString &passwd, bool noPasswd, const QString &name, QTreeWidget *parent);
     virtual ~CDBFolderMysql() = default;
 
     const QString& getServer() const {return server; }
+    const QString& getPort() const {return port; }
     const QString& getUser() const {return user; }
     const QString& getPasswd() const {return passwd; }
     bool hasNoPasswd() const
@@ -39,6 +40,7 @@ public:
 
 private:
     const QString server;
+    const QString port;
     const QString user;
     const QString passwd;
     const bool noPasswd;

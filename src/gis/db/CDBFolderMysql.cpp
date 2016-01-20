@@ -20,9 +20,10 @@
 #include "gis/db/CDBFolderMysql.h"
 
 
-CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const QString & passwd, bool noPasswd, const QString &name, QTreeWidget *parent)
+CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString & passwd, bool noPasswd, const QString &name, QTreeWidget *parent)
     : IDBFolderSql(IDB::db, parent)
     , server(server)
+    , port(port)
     , user(user)
     , passwd(passwd)
     , noPasswd(noPasswd)
@@ -31,7 +32,7 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &user, const
     setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQL.png"));
     setText(CGisListDB::eColumnName, name);
 
-    setupDB(server, user, passwd, noPasswd, name, name);
+    setupDB(server, port, user, passwd, noPasswd, name, name);
 
     setupFromDB();
 

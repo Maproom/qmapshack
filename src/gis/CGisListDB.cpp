@@ -91,6 +91,7 @@ CGisListDB::CGisListDB(QWidget *parent)
         if(type == "MySQL")
         {
             QString server  = cfg.value("server","").toString();
+            QString port    = cfg.value("port","").toString();
             QString user    = cfg.value("user","").toString();
             QString passwd  = cfg.value("passwd","").toString();
             bool noPasswd   = cfg.value("noPasswd",false).toBool();
@@ -100,7 +101,7 @@ CGisListDB::CGisListDB(QWidget *parent)
                 cfg.endGroup(); // name
                 continue;
             }
-            new CDBFolderMysql(server, user, passwd, noPasswd, name, this);
+            new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
         }
         cfg.endGroup(); // name
     }
@@ -187,6 +188,7 @@ void CGisListDB::saveDatabaseConfiguration()
             cfg.beginGroup(name);
             cfg.setValue("type", "MySQL");
             cfg.setValue("server", mysql->getServer());
+            cfg.setValue("port", mysql->getPort());
             cfg.setValue("user", mysql->getUser());
             cfg.setValue("passwd", mysql->getPasswd());
             cfg.setValue("noPasswd",mysql->hasNoPasswd());
@@ -368,11 +370,12 @@ void CGisListDB::slotAddDatabase()
     else if(dlg.isMysql())
     {
         QString server  = dlg.getServer();
+        QString port    = dlg.getPort();
         QString user    = dlg.getUser();
         QString passwd  = dlg.getPasswd();
         bool noPasswd   = dlg.noPasswd();
 
-        folder = new CDBFolderMysql(server, user, passwd, noPasswd, name, this);
+        folder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
     }
     else
     {

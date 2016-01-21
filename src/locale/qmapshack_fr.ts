@@ -6,12 +6,12 @@
     <message>
         <location filename="../CAbout.cpp" line="38"/>
         <source>%1 (API V%2, expected V%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (API V%2, attendu V%3)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="42"/>
         <source>%1 (API V%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (API V%2)</translation>
     </message>
 </context>
 <context>
@@ -208,17 +208,17 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="102"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous voulez trier des waypoints le long d&apos;une trace, mais vous avez désactivé la corrélation des traces et waypoints. Voulez-vous la réactiver ?</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="103"/>
         <source>Correlation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Corrélation en cours...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="376"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Résumé de toutes les traces du projet</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="552"/>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="646"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Routes&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
@@ -250,7 +250,7 @@
         <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="701"/>
         <source>Enter new project name.</source>
-        <translation type="unfinished">Entrez le nom du nouveau projet.</translation>
+        <translation>Entrez le nom du nouveau projet.</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="683"/>
@@ -292,7 +292,7 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="408"/>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur unie</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="127"/>
@@ -335,17 +335,17 @@
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="663"/>
         <source>Reset activities...</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser les activités...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="663"/>
         <source>This will remove all activities from the track. Proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les activités seront supprimées de la trace. Etes-vous sûr ?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="669"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune</translation>
     </message>
 </context>
 <context>
@@ -361,7 +361,7 @@
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="166"/>
         <source>Enter new proximity range.</source>
-        <translation type="unfinished">Entrez le rayon de l&apos;alarme de proximité.</translation>
+        <translation>Entrez le rayon de l&apos;alarme de proximité.</translation>
     </message>
 </context>
 <context>
@@ -377,12 +377,12 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="81"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
-        <translation type="unfinished"></translation>
+        <translation>A cause d&apos;évolutions de la gestion des bases de données, QMapShack doit de nouveau connaître l&apos;emplacement de votre base de données. &apos;%1&apos;.  Indiquez-le à l&apos;étape suivante.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="82"/>
         <source>Select database file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez un fichier de base de données</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="112"/>
@@ -408,7 +408,7 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="123"/>
         <source>Sync. with Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchroniser avec la base de données</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="124"/>
@@ -428,7 +428,7 @@
     <message>
         <location filename="../gis/CGisListDB.cpp" line="391"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimere &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
@@ -471,12 +471,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="99"/>
         <source>Show on Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher sur la carte</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="100"/>
         <source>Hide from Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="104"/>
@@ -500,7 +500,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Sync. with Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchroniser avec la base de données</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="111"/>
@@ -571,7 +571,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Route Instructions</source>
-        <translation type="unfinished"></translation>
+        <translation>Instructions de guidage</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="158"/>
@@ -596,12 +596,12 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Create Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une route</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="620"/>
         <source>Drop items...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="774"/>
@@ -626,7 +626,7 @@
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1346"/>
         <source>Copy items...</source>
-        <translation type="unfinished">Copier les éléments...</translation>
+        <translation>Copier les éléments...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="645"/>
@@ -641,12 +641,12 @@
     <message>
         <location filename="../gis/CGisWidget.cpp" line="131"/>
         <source>Load project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger le projet...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="131"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le projet &quot;%1&quot; est déjà présent dans l&apos;espace de travail.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="486"/>
@@ -700,7 +700,7 @@
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="61"/>
         <source> by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>par %1</translation>
     </message>
 </context>
 <context>
@@ -731,7 +731,7 @@
     <message>
         <location filename="../CMainWindow.cpp" line="622"/>
         <source>[Grid: %1]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Grille: %1]</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="747"/>
@@ -747,7 +747,7 @@
         <location filename="../CMainWindow.cpp" line="781"/>
         <location filename="../CMainWindow.cpp" line="807"/>
         <source>QMapShack View (*.view)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="807"/>
@@ -1521,7 +1521,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="130"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;affichage de cette carte nécessite l&apos;utilisation d&apos;OpenSSL. Par défaut OpenSSL n&apos;est pas inclus dans QMapShack à cause de restriction légales dans certains pays. Vous pouvez consulter &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;la page d&apos;accueil OpenSSL&lt;/a&gt; pour trouver des fichiers binaires. Vous devez copier libeay32.dll et ssleay32.dll dans le répertoire programme de QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="304"/>
@@ -1577,7 +1577,7 @@ ligne %2, colonne %3:
         <location filename="../tool/CMapVrtBuilder.cpp" line="114"/>
         <source>!!! done !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>!!! fait !!!</translation>
     </message>
     <message>
         <source>!!! failed !!!
@@ -1621,7 +1621,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
         <source>Unexpected service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Service inattendu. &apos;* WMTS 1.0.0&apos; est attendu mais &apos;%1 %2&apos; est lu.</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
@@ -1630,7 +1630,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="151"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;affichage de cette carte nécessite l&apos;utilisation d&apos;OpenSSL. Par défaut OpenSSL n&apos;est pas inclus dans QMapShack à cause de restriction légales dans certains pays. Vous pouvez consulter &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;la page d&apos;accueil OpenSSL&lt;/a&gt; pour trouver des fichiers binaires. Vous devez copier libeay32.dll et ssleay32.dll dans le répertoire programme de QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="217"/>
@@ -1653,7 +1653,7 @@ Structure inconnue.</translation>
         <location filename="../mouse/CMouseEditArea.cpp" line="28"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="35"/>
         <source>Area</source>
-        <translation type="unfinished">Surface</translation>
+        <translation>Surface</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
@@ -1667,7 +1667,7 @@ Structure inconnue.</translation>
         <location filename="../mouse/CMouseEditRte.cpp" line="30"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="37"/>
         <source>Route</source>
-        <translation type="unfinished">Calcul d&apos;itinéraire</translation>
+        <translation>Calcul d&apos;itinéraire</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
@@ -1685,7 +1685,7 @@ Structure inconnue.</translation>
         <location filename="../mouse/CMouseEditTrk.cpp" line="28"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="35"/>
         <source>Track</source>
-        <translation type="unfinished">Trace</translation>
+        <translation>Trace</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="38"/>
@@ -1700,7 +1700,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
         <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="unfinished"></translation>
+        <translation>La trace obtenue ne contiendra que des données de position. Toutes les autres données (altitude, temps, etc...) seront perdues.</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
@@ -1737,7 +1737,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="46"/>
         <source>Copy position (Grid)</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier la position (grille)</translation>
     </message>
 </context>
 <context>

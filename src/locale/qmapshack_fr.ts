@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.0" language="fr">
 <context>
     <name>CAbout</name>
     <message>
@@ -85,7 +85,7 @@
     <name>CDemPropSetup</name>
     <message>
         <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Niveau %1&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Niveau %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -144,7 +144,7 @@
     <name>CDetailsOvlArea</name>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Éditer le nom...</translation>
+        <translation type="obsolete">Éditer le nom...</translation>
     </message>
     <message>
         <source>Enter new area name.</source>
@@ -158,13 +158,13 @@
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="248"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="688"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="266"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="734"/>
         <source>none</source>
         <translation>aucun</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="321"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="339"/>
         <source>Build diary...</source>
         <translation>Créer le journal...</translation>
     </message>
@@ -173,97 +173,97 @@
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="396"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="442"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Waypoints&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="403"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="429"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="533"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="623"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="653"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="449"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="475"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="579"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="669"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="699"/>
         <source>Info</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="404"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="430"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="534"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="624"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="654"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="450"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="476"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="580"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="670"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="700"/>
         <source>Comment</source>
         <translation>Commentaire</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="422"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="468"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Traces&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="616"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="662"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Surfaces&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="102"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="123"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
         <translation>Vous voulez trier des waypoints le long d&apos;une trace, mais vous avez désactivé la corrélation des traces et waypoints. Voulez-vous la réactiver ?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="103"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="124"/>
         <source>Correlation...</source>
         <translation>Corrélation en cours...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="376"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="394"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>Résumé de toutes les traces du projet</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="552"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="598"/>
         <source>distance: %1%2</source>
         <translation>distance : %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="554"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="600"/>
         <source>ascent: %1%2</source>
         <translation>montée : %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="556"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="602"/>
         <source>descend: %1%2</source>
         <translation>descente : %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="646"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="692"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Routes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="701"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="720"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
         <source>Edit name...</source>
         <translation>Éditer le nom...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="701"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="720"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
         <source>Enter new project name.</source>
         <translation>Entrez le nom du nouveau projet.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="683"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="729"/>
         <source>Edit keywords...</source>
         <translation>Éditer les mots-clés...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="683"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="729"/>
         <source>Enter keywords.</source>
         <translation>Saisir les mots-clés.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="817"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="878"/>
         <source>Print Diary</source>
         <translation>Imprimer le journal</translation>
     </message>
@@ -290,60 +290,60 @@
         <translation type="obsolete">durée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="451"/>
         <source>Solid color</source>
         <translation>Couleur unie</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="127"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="124"/>
         <source>Reduce visible track points</source>
         <translation>Réduire les points visibles de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="130"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="127"/>
         <source>Change elevation of track points</source>
         <translation>Modifier l&apos;altitude des points de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="133"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="130"/>
         <source>Change timestamp of track points</source>
         <translation>Modifier l&apos;horodatage des points de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="136"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="133"/>
         <source>Cut track into pieces</source>
         <translation>Découper la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="304"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="312"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="315"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="320"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="334"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="336"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="354"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="362"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="365"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="370"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="384"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="386"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Éditer le nom...</translation>
+        <translation type="obsolete">Éditer le nom...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
         <translation type="obsolete">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="663"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="681"/>
         <source>Reset activities...</source>
         <translation>Réinitialiser les activités...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="663"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="681"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Toutes les activités seront supprimées de la trace. Etes-vous sûr ?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="669"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="687"/>
         <source>None</source>
         <translation>Aucune</translation>
     </message>
@@ -352,7 +352,7 @@
     <name>CDetailsWpt</name>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Éditer le nom...</translation>
+        <translation type="obsolete">Éditer le nom...</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
@@ -385,78 +385,78 @@
         <translation>Sélectionnez un fichier de base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="112"/>
+        <location filename="../gis/CGisListDB.cpp" line="113"/>
         <source>Add Database</source>
         <translation>Ajouter une base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="115"/>
+        <location filename="../gis/CGisListDB.cpp" line="116"/>
         <source>Add Folder</source>
         <translation>Ajouter un dossier</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="116"/>
+        <location filename="../gis/CGisListDB.cpp" line="117"/>
         <source>Delete Folder</source>
         <translation>Supprimer le dossier</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="119"/>
-        <location filename="../gis/CGisListDB.cpp" line="131"/>
+        <location filename="../gis/CGisListDB.cpp" line="120"/>
+        <location filename="../gis/CGisListDB.cpp" line="132"/>
         <source>Delete Item</source>
         <translation>Supprimer un élément</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="123"/>
+        <location filename="../gis/CGisListDB.cpp" line="124"/>
         <source>Sync. with Database</source>
         <translation>Synchroniser avec la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="124"/>
+        <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Remove Database</source>
         <translation>Enlever la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="128"/>
+        <location filename="../gis/CGisListDB.cpp" line="129"/>
         <source>Empty</source>
         <translation>Vider</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="391"/>
+        <location filename="../gis/CGisListDB.cpp" line="400"/>
         <source>Remove database...</source>
         <translation>Enlever la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="391"/>
+        <location filename="../gis/CGisListDB.cpp" line="400"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Voulez-vous vraiment supprimere &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
-        <translation type="vanished">Êtes-vous sûr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
+        <translation type="obsolete">Êtes-vous sûr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="449"/>
+        <location filename="../gis/CGisListDB.cpp" line="458"/>
         <source>Delete database folder...</source>
         <translation>Supprimer la base de données...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="449"/>
+        <location filename="../gis/CGisListDB.cpp" line="458"/>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
         <translation>Êtes-vous sûr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="476"/>
-        <location filename="../gis/CGisListDB.cpp" line="497"/>
+        <location filename="../gis/CGisListDB.cpp" line="485"/>
+        <location filename="../gis/CGisListDB.cpp" line="506"/>
         <source>Remove items...</source>
         <translation>Supprimer les éléments...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="476"/>
+        <location filename="../gis/CGisListDB.cpp" line="485"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Êtes-vous sûr de vouloir supprimer tous les éléments dans Perdu &amp; Trouvé ? Les éléments seront supprimés définitivement.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="497"/>
+        <location filename="../gis/CGisListDB.cpp" line="506"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Êtes-vous sûr de vouloir supprimer les éléments sélectionnés dans Perdu &amp; Trouvé ? Les éléments seront supprimés définitivement.</translation>
     </message>
@@ -464,27 +464,27 @@
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="98"/>
+        <location filename="../gis/CGisListWks.cpp" line="99"/>
         <source>Edit..</source>
         <translation>Éditer..</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="99"/>
+        <location filename="../gis/CGisListWks.cpp" line="100"/>
         <source>Show on Map</source>
         <translation>Afficher sur la carte</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="100"/>
+        <location filename="../gis/CGisListWks.cpp" line="101"/>
         <source>Hide from Map</source>
         <translation>Masquer</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="104"/>
+        <location filename="../gis/CGisListWks.cpp" line="105"/>
         <source>Save As...</source>
         <translation>Enregistrer sous...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="103"/>
+        <location filename="../gis/CGisListWks.cpp" line="104"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -493,145 +493,145 @@
         <translation type="obsolete">Mettre à jour le projet sur tous les appareils</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="107"/>
+        <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Send to Devices</source>
         <translation>Envoyer vers les appareils</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="108"/>
+        <location filename="../gis/CGisListWks.cpp" line="109"/>
         <source>Sync. with Database</source>
         <translation>Synchroniser avec la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="111"/>
+        <location filename="../gis/CGisListWks.cpp" line="112"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="117"/>
+        <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Update Project on Device</source>
         <translation>Mettre à jour le projet sur l&apos;appareil</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="118"/>
-        <location filename="../gis/CGisListWks.cpp" line="139"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="140"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="129"/>
+        <location filename="../gis/CGisListWks.cpp" line="130"/>
         <source>Edit...</source>
         <translation>Éditer...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="130"/>
+        <location filename="../gis/CGisListWks.cpp" line="131"/>
         <source>Copy to...</source>
         <translation>Copier vers...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="133"/>
         <source>Track Profile</source>
         <translation>Profile de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="134"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
         <source>Select Range</source>
         <translation>Sélectionner des points</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="135"/>
+        <location filename="../gis/CGisListWks.cpp" line="136"/>
         <source>Edit Track Points</source>
         <translation>Éditer les points de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="136"/>
+        <location filename="../gis/CGisListWks.cpp" line="137"/>
         <source>Reverse Track</source>
         <translation>Inverser la trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="137"/>
+        <location filename="../gis/CGisListWks.cpp" line="138"/>
         <source>Combine Tracks</source>
         <translation>Joindre des traces</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="145"/>
+        <location filename="../gis/CGisListWks.cpp" line="146"/>
         <source>Show Bubble</source>
         <translation>Afficher la bulle</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="147"/>
+        <location filename="../gis/CGisListWks.cpp" line="148"/>
         <source>Move Waypoint</source>
         <translation>Déplacer le waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="148"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Proj. Waypoint...</source>
         <translation>Projection du waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="157"/>
         <source>Route Instructions</source>
         <translation>Instructions de guidage</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="158"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Calculate Route</source>
         <translation>Calculer l&apos;itinéraire</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="159"/>
+        <location filename="../gis/CGisListWks.cpp" line="160"/>
         <source>Reset Route</source>
         <translation>Réinitialiser la route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="160"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Edit Route</source>
         <translation>Éditer la route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Edit Area Points</source>
         <translation>Éditer les points de la surface</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Create Route</source>
         <translation>Créer une route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="620"/>
+        <location filename="../gis/CGisListWks.cpp" line="621"/>
         <source>Drop items...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="774"/>
+        <location filename="../gis/CGisListWks.cpp" line="775"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Sauvegarde de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="820"/>
+        <location filename="../gis/CGisListWks.cpp" line="821"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Chargement de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1127"/>
+        <location filename="../gis/CGisListWks.cpp" line="1128"/>
         <source>Close all projects...</source>
         <translation>Fermer tous les projets...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1127"/>
+        <location filename="../gis/CGisListWks.cpp" line="1128"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1346"/>
+        <location filename="../gis/CGisListWks.cpp" line="1347"/>
         <source>Copy items...</source>
         <translation>Copier les éléments...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="645"/>
-        <location filename="../gis/CGisListWks.cpp" line="1631"/>
-        <location filename="../gis/CGisListWks.cpp" line="1669"/>
+        <location filename="../gis/CGisListWks.cpp" line="646"/>
+        <location filename="../gis/CGisListWks.cpp" line="1632"/>
+        <location filename="../gis/CGisListWks.cpp" line="1670"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
@@ -1625,7 +1625,7 @@ Structure inconnue.</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="vanished">Service inconnu. &apos;Attendu : * WMTS 1.0.0&apos;, lu :  &apos;%1 %2.</translation>
+        <translation type="obsolete">Service inconnu. &apos;Attendu : * WMTS 1.0.0&apos;, lu :  &apos;%1 %2.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="151"/>
@@ -1704,7 +1704,7 @@ Structure inconnue.</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="vanished">Ceci remplacera les données de l&apos;original par une ligne simple de coordonnées. Toutes les autres données seront définitivement perdues.</translation>
+        <translation type="obsolete">Ceci remplacera les données de l&apos;original par une ligne simple de coordonnées. Toutes les autres données seront définitivement perdues.</translation>
     </message>
 </context>
 <context>
@@ -1768,22 +1768,22 @@ Structure inconnue.</translation>
     <name>CPlotDistance</name>
     <message>
         <source>time</source>
-        <translation type="vanished">durée</translation>
+        <translation type="obsolete">durée</translation>
     </message>
 </context>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="63"/>
+        <location filename="../plot/CPlotProfile.cpp" line="73"/>
         <source>distance [%1]</source>
         <translation></translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="vanished">durée [h]</translation>
+        <translation type="obsolete">durée [h]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="64"/>
+        <location filename="../plot/CPlotProfile.cpp" line="74"/>
         <source>alt. [%1]</source>
         <translation>Alt. [%1]</translation>
     </message>
@@ -1792,11 +1792,11 @@ Structure inconnue.</translation>
     <name>CPlotSpeed</name>
     <message>
         <source>time [h]</source>
-        <translation type="vanished">durée [h]</translation>
+        <translation type="obsolete">durée [h]</translation>
     </message>
     <message>
         <source>speed. [%1]</source>
-        <translation type="vanished">vitesse [%1]</translation>
+        <translation type="obsolete">vitesse [%1]</translation>
     </message>
 </context>
 <context>
@@ -1849,7 +1849,7 @@ y: %4 m/px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="79"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="82"/>
         <source>Elapsed time: %1 seconds.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2445,7 +2445,7 @@ n&apos;est pas une définition de système de coordonnées:
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="141"/>
         <source>!!! done !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">!!! fait !!!</translation>
     </message>
     <message>
         <source>!!! failed !!!
@@ -2577,12 +2577,18 @@ n&apos;est pas une définition de système de coordonnées:
         <translation></translation>
     </message>
     <message>
+        <location filename="../IAbout.ui" line="381"/>
+        <source>Christian Eichler (qms@christian-eichler.de)
+Ivo Kronenberg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>French</source>
-        <translation type="vanished">Français</translation>
+        <translation type="obsolete">Français</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="vanished">Tchèque</translation>
+        <translation type="obsolete">Tchèque</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="182"/>
@@ -2591,7 +2597,7 @@ n&apos;est pas une définition de système de coordonnées:
     </message>
     <message>
         <source>German</source>
-        <translation type="vanished">Deutsch</translation>
+        <translation type="obsolete">Deutsch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="281"/>
@@ -2639,7 +2645,7 @@ n&apos;est pas une définition de système de coordonnées:
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="vanished">Espagnol</translation>
+        <translation type="obsolete">Espagnol</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="258"/>
@@ -2656,23 +2662,18 @@ n&apos;est pas une définition de système de coordonnées:
         <source>Helmut Schmidt</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../IAbout.ui" line="354"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="381"/>
-        <source>Christian Eichler (qms@christian-eichler.de)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../IAbout.ui" line="395"/>
+        <location filename="../IAbout.ui" line="399"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Ce logiciel est distribué sous les termes de la licence GPL3 ou toute version utérieure</translation>
     </message>
-    <message>
-        <location filename="../IAbout.ui" line="402"/>
+    <message utf8="true">
+        <location filename="../IAbout.ui" line="406"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
     </message>
@@ -2733,17 +2734,17 @@ n&apos;est pas une définition de système de coordonnées:
         <source>Coordinate Format...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation type="unfinished"></translation>
@@ -2808,7 +2809,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <name>IDemPathSetup</name>
     <message>
         <source>Setup DEM file pathss</source>
-        <translation type="vanished">Configurer les répertoires DEM</translation>
+        <translation type="obsolete">Configurer les répertoires DEM</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
@@ -2870,7 +2871,7 @@ If you want to keep just one half you can simply remove the points, or check thi
         <source>Slope </source>
         <translation>Pente </translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../dem/IDemPropSetup.ui" line="226"/>
         <location filename="../dem/IDemPropSetup.ui" line="326"/>
         <location filename="../dem/IDemPropSetup.ui" line="410"/>
@@ -3187,204 +3188,240 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="342"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="345"/>
         <source>Info</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="277"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="588"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="617"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="669"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="698"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="280"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="437"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="466"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="548"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="577"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="727"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="767"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1045"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1074"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1106"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1142"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1171"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1203"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1239"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1268"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1300"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <source>Graph Control</source>
-        <translation type="vanished">Contrôle du graphe</translation>
+        <translation type="obsolete">Contrôle du graphe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="811"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1024"/>
         <source>Profile</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="980"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1465"/>
         <source>Speed</source>
         <translation>Vitesse</translation>
     </message>
     <message>
         <source>Progress</source>
-        <translation type="vanished">Progrès</translation>
+        <translation type="obsolete">Progrès</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="vanished">Trace</translation>
+        <translation type="obsolete">Trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="274"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="277"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Inverser le mode lecture seule. Ouvrez le cadenas pour pouvoir éditer l&apos;objet.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="252"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="255"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Le waypoint a été importé dans QMapShack et a été modifié. Il ne représente plus les données originales. Veuillez consulter l&apos;historique pour voir les modifications. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="303"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="306"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="374"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="377"/>
         <source>Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="429"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="533"/>
-        <source>from Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="520"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="711"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="416"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="698"/>
         <source>Maximum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="474"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="434"/>
+        <source>Use/edit user defined visibility of arrows for this track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="463"/>
+        <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="526"/>
         <source>Minimum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="497"/>
-        <source>Solid color</source>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="545"/>
+        <source>Use/edit user defined scale factor for this track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="540"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="574"/>
+        <source>Use/edit system&apos;s default factor for all tracks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="650"/>
+        <source>Solid color</source>
+        <translation type="unfinished">Couleur unie</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="663"/>
         <source>x </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="559"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="533"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="566"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="621"/>
         <source>with arrows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="585"/>
-        <source>Use/edit user defined scale factor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="614"/>
-        <source>Use/edit system&apos;s default factor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="666"/>
-        <source>Use/edit user defined visibility of arrows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="695"/>
-        <source>Use/edit system&apos;s visibility of arrows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="773"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="837"/>
         <source>Graphs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="818"/>
-        <source>Graph 3</source>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="723"/>
+        <source>Take maximum from data
+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="825"/>
-        <source>Graph 2</source>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="764"/>
+        <source>Take minimum from data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="832"/>
-        <source>Graph 1</source>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="850"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="870"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="956"/>
+        <source>max.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="840"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="989"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="996"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1010"/>
+        <source>min.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1042"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1139"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1236"/>
+        <source>User defined limits for this track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1071"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1168"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1265"/>
+        <source>Automatic limits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1103"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1200"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1297"/>
+        <source>User defined limits for all tracks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1329"/>
         <source>Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="885"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1370"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="912"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1397"/>
         <source>Points</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="960"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1445"/>
         <source>Time</source>
         <translation>Durée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="965"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1450"/>
         <source>Ele.</source>
         <translation>Alt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="970"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1455"/>
         <source>Delta</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="975"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1460"/>
         <source>Dist.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="985"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1470"/>
         <source>Slope</source>
         <translation>Pente</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="990"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1475"/>
         <source>Ascend</source>
         <translation>Montée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="995"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1480"/>
         <source>Descend</source>
         <translation>Descente</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1000"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1485"/>
         <source>Position</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1009"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1494"/>
         <source>Filter</source>
         <translation>Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1046"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1531"/>
         <source>Hist.</source>
         <translation></translation>
     </message>
@@ -4569,12 +4606,12 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
         <translation>Enregistrer...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="603"/>
+        <location filename="../plot/IPlot.cpp" line="611"/>
         <source>No or bad data.</source>
         <translation>Aucune donnée ou données invalides.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1195"/>
+        <location filename="../plot/IPlot.cpp" line="1203"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
@@ -4608,7 +4645,7 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="28"/>
+        <location filename="../print/IPrintDialog.ui" line="79"/>
         <source>When printing online maps make sure that the map has been loaded into the cache for the extent to be printed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4618,14 +4655,19 @@ or
         <translation type="unfinished">Enregistrer</translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="79"/>
-        <location filename="../print/IPrintDialog.ui" line="92"/>
-        <location filename="../print/IPrintDialog.ui" line="141"/>
+        <location filename="../print/IPrintDialog.ui" line="37"/>
+        <source>When saving online maps make sure that the map has been loaded into the cache for the extent to be saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../print/IPrintDialog.ui" line="89"/>
+        <location filename="../print/IPrintDialog.ui" line="102"/>
+        <location filename="../print/IPrintDialog.ui" line="151"/>
         <source>TextLabel</source>
         <translation type="unfinished">Libellé</translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="108"/>
+        <location filename="../print/IPrintDialog.ui" line="118"/>
         <source>Print</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4729,7 +4771,7 @@ or
         <source>m</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -5156,7 +5198,7 @@ or
     </message>
     <message>
         <source>Caclculate a route between the first and last selected point.</source>
-        <translation type="vanished">Calcluler un itinéraire entre le premier et le dernier point sélectionné.</translation>
+        <translation type="obsolete">Calcluler un itinéraire entre le premier et le dernier point sélectionné.</translation>
     </message>
 </context>
 <context>
@@ -5346,7 +5388,7 @@ or
     </message>
     <message>
         <source>Cut track at selected point into two tracks.</source>
-        <translation type="vanished">Couper la trace en deux au point sélectionné</translation>
+        <translation type="obsolete">Couper la trace en deux au point sélectionné</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="196"/>
@@ -5607,10 +5649,10 @@ or
     </message>
     <message>
         <source>File</source>
-        <translation type="vanished">Fichier</translation>
+        <translation type="obsolete">Fichier</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="131"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="68"/>
         <source>-</source>
         <translation></translation>
     </message>
@@ -5620,58 +5662,73 @@ or
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="99"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="239"/>
         <source>Do not use a password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="216"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="153"/>
         <source>SQLite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="178"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="115"/>
         <source>MySQL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="55"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="181"/>
         <source>Server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="65"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="193"/>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupDatabase.ui" line="206"/>
+        <source>00000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupDatabase.ui" line="215"/>
         <source>User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="72"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="225"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="124"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="275"/>
+        <source>&lt;b&gt;Port:&lt;/b&gt; Leave the port field empty to use the default port.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupDatabase.ui" line="61"/>
         <source>File:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="138"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="75"/>
         <source>Add new database.</source>
         <translation>Ajouter une nouvelle base de données.</translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="141"/>
-        <location filename="../gis/db/ISetupDatabase.ui" line="155"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="78"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="92"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/db/ISetupDatabase.ui" line="152"/>
+        <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
         <source>Open existing database.</source>
         <translation>Ouvrir une base de données existante.</translation>
     </message>
@@ -6112,29 +6169,29 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Valeurs de la position hors de la plage autorisée.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="584"/>
+        <location filename="../gis/CGisListDB.cpp" line="593"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1 du dossier %2?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="585"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="512"/>
+        <location filename="../gis/CGisListDB.cpp" line="594"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="513"/>
         <source>Delete...</source>
         <translation>Supprimer...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1150"/>
+        <location filename="../gis/CGisListWks.cpp" line="1151"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1150"/>
+        <location filename="../gis/CGisListWks.cpp" line="1151"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="30"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="31"/>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="26"/>
         <source>All your data grouped by folders.</source>
         <translation>Vos données groupées par dossiers.</translation>
@@ -6165,16 +6222,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">Annuler l&apos;enregistrement</translation>
     </message>
     <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="72"/>
-        <location filename="../gis/fit/CFitProject.cpp" line="97"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="84"/>
         <source>Failed to open...</source>
         <translation>Impossible d&apos;ouvrir...</translation>
     </message>
     <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="72"/>
-        <location filename="../gis/fit/CFitProject.cpp" line="97"/>
         <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="84"/>
@@ -6184,7 +6237,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <source>Failed to read...</source>
-        <translation type="vanished">Impossible de lire...</translation>
+        <translation type="obsolete">Impossible de lire...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
@@ -6198,12 +6251,19 @@ ligne %2, colonne %3:
     </message>
     <message>
         <source>Not a GPX file: </source>
-        <translation type="vanished">N&apos;est pas un fichier GPX:</translation>
+        <translation type="obsolete">N&apos;est pas un fichier GPX:</translation>
     </message>
     <message>
+        <location filename="../gis/fit/CFitProject.cpp" line="44"/>
+        <location filename="../gis/fit/CFitProject.cpp" line="62"/>
         <location filename="../gis/gpx/CGpxProject.cpp" line="90"/>
         <location filename="../gis/slf/CSlfProject.cpp" line="42"/>
         <source>Failed to load file %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/CFitProject.cpp" line="86"/>
+        <source>Failed to open FIT file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6238,7 +6298,7 @@ ligne %2, colonne %3:
     </message>
     <message>
         <source>Saveing GIS data failed...</source>
-        <translation type="vanished">Impossible d&apos;enregistrer les données SIG...</translation>
+        <translation type="obsolete">Impossible d&apos;enregistrer les données SIG...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="582"/>
@@ -6400,7 +6460,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="486"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="267"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2076"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2121"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="406"/>
         <source>Changed links</source>
         <translation>Liens modifiés...</translation>
@@ -6411,7 +6471,7 @@ ligne %2, colonne %3:
         <translation>Couleur modifiée...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="104"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="105"/>
         <source>Save project?</source>
         <translation>Enregistrer le projet ?</translation>
     </message>
@@ -6420,7 +6480,7 @@ ligne %2, colonne %3:
         <translation type="obsolete">Le projet &quot;%1&quot; a été modifié. Enregistrer avant de le fermer ?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="252"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="253"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6429,67 +6489,67 @@ ligne %2, colonne %3:
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="104"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="105"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="262"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="263"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="263"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="264"/>
         <source>Canceled correlation...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="303"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="304"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="414"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="415"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Nom de fichier: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="419"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="420"/>
         <source>Waypoints: %1</source>
         <translation>Waypoints: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="423"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="424"/>
         <source>Tracks: %1</source>
         <translation>Traces: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="427"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="428"/>
         <source>Routes: %1</source>
         <translation>Routes: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="431"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="432"/>
         <source>Areas: %1</source>
         <translation>Surfaces: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="511"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="512"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1 du projet &apos;%2&apos;?</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="255"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2064"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2109"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="394"/>
         <source>Changed comment</source>
         <translation>Commentaire modifié</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="261"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2070"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2115"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
         <source>Changed description</source>
         <translation>Description modifiée</translation>
@@ -6749,28 +6809,28 @@ Nom de fichier: %1</translation>
         <translation> Temps : %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1323"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1347"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1333"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1357"/>
         <source>Permanently removed points %1..%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2103"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2148"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2177"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2222"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1261"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1280"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1356"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1415"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1594"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1271"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1290"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1366"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1425"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1604"/>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
@@ -6778,27 +6838,27 @@ Nom de fichier: %1</translation>
         <translation>Éditer le nom...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1261"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1280"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1356"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1415"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1594"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1271"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1290"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1366"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1425"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1604"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
         <source>Enter new track name.</source>
         <translation type="unfinished">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1529"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1539"/>
         <source>Hide points.</source>
         <translation>Cacher des points.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1569"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1579"/>
         <source>Show points.</source>
         <translation>Afficher les points.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2058"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2103"/>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="352"/>
         <source>Changed name</source>
         <translation>Nom modifié</translation>
@@ -6970,43 +7030,43 @@ Nom de fichier: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="28"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="94"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
         <source>Foot</source>
         <translation type="unfinished">à pied</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="35"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="95"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="102"/>
         <source>Bicycle</source>
         <translation type="unfinished">Vélo</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="42"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="96"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="103"/>
         <source>Motor Bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="49"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="97"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="104"/>
         <source>Car</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="98"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="105"/>
         <source>Cable Car</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="63"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="99"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="106"/>
         <source>Swim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="70"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="100"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="107"/>
         <source>Ship</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7016,122 +7076,127 @@ Nom de fichier: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="84"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="109"/>
+        <source>Ski/Winter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="108"/>
         <source>Aeronautics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="216"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="260"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="224"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="268"/>
         <source>Distance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="218"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="282"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="226"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="290"/>
         <source>Ascend:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="220"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="304"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="228"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="312"/>
         <source>Descend:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="222"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="326"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="230"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="334"/>
         <source>Speed Moving:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="224"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="232"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="356"/>
         <source>Speed Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="226"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="370"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="234"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="378"/>
         <source>Time Moving:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="228"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="392"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="236"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="400"/>
         <source>Time Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="54"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="121"/>
         <source>Progress</source>
         <translation type="unfinished">Progrès</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="57"/>
+        <location filename="../gis/trk/CPropertyTrk.cpp" line="77"/>
         <source>time</source>
         <translation type="unfinished">durée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="58"/>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="83"/>
+        <location filename="../gis/trk/CPropertyTrk.cpp" line="65"/>
         <source>distance [%1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="88"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="89"/>
         <source>Speed</source>
         <translation type="unfinished">Vitesse</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="105"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="106"/>
         <source>Slope*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="110"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="111"/>
         <source>Speed*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="116"/>
         <source>Elevation</source>
         <translation type="unfinished">Altitude</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="56"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="57"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="81"/>
         <source>Heart Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="60"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="61"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="85"/>
         <source>Cadence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="64"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="65"/>
         <source>Air Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="69"/>
         <source>Water Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="73"/>
         <source>Depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="93"/>
         <source>Acceleration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="97"/>
         <source>Course</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7166,12 +7231,12 @@ Nom de fichier: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="47"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="54"/>
         <source>Password...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="47"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="54"/>
         <source>Password for database &apos;%1&apos;:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7188,6 +7253,51 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../gis/db/CDBItem.cpp" line="95"/>
         <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="32"/>
+        <source>FIT decoding error : invalid CRC.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="116"/>
+        <source>FIT decoding error: unexpected end of file %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="70"/>
+        <source>FIT decoding error: unknown base type %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="70"/>
+        <source>FIT decoding error: protocol %1 version not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="121"/>
+        <source>FIT decoding error: file header signature mismatch. File is not FIT.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="66"/>
+        <source>FIT decoding error: architecture %1 not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="87"/>
+        <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="32"/>
+        <source>FIT decoding error: Decoder not in correct state %1 after last data byte in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/serialization.cpp" line="188"/>
+        <source>FIT file %1 contains no GPS data.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

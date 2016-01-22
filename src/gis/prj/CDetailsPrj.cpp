@@ -913,3 +913,11 @@ void CDetailsPrj::slotSortMode(int idx)
     prj.setSorting(IGisProject::sorting_e(idx));
     slotSetupGui();
 }
+
+void CDetailsPrj::updateData()
+{
+    if(!prj.blockUpdateItems())
+    {
+        slotSetupGui();
+    }
+}

@@ -41,7 +41,7 @@ public:
     CDetailsPrj(IGisProject& prj, QWidget * parent);
     virtual ~CDetailsPrj();
 
-    void updateData() override {slotSetupGui();}
+    void updateData() override;
     void setMouseFocus(const CGisItemTrk::trkpt_t * pt) override {}
     void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2) override {}
     void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}

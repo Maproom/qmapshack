@@ -878,7 +878,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         }
 
 
-        IGisItem * item = 0;
+        IGisItem *item = nullptr;
         switch(type)
         {
         case IGisItem::eTypeWpt:
@@ -932,7 +932,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -945,7 +945,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -958,7 +958,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -971,7 +971,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }

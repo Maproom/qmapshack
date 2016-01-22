@@ -53,7 +53,7 @@ CColorLegend::~CColorLegend()
 
 void CColorLegend::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
 {
-    if(pt == 0)
+    if(nullptr == pt)
     {
         val = NOFLOAT;
         return;

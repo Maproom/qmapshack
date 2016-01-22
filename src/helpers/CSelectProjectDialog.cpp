@@ -36,14 +36,14 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 {
     setupUi(this);
 
-    QListWidgetItem * lastSelectedItem = 0;
+    QListWidgetItem *lastSelectedItem = nullptr;
 
     if(parent)
     {
         for(int i = 0; i < parent->topLevelItemCount(); i++)
         {
             IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
-            if(project == 0)
+            if(nullptr == project)
             {
                 continue;
             }
@@ -67,7 +67,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 
     frameType->setEnabled(listWidget->count() == 0);
 
-    if(lastSelectedItem == 0)
+    if(nullptr == lastSelectedItem)
     {
         SETTINGS;
         QString filter = cfg.value("Paths/lastGisFilter", "GPS Exchange Format (*.qms)").toString();

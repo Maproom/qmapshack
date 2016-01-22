@@ -49,7 +49,7 @@ protected:
     projPJ pjtar = 0;
 
     bool needsRedraw =true;
-    CGisItemTrk * trk = 0;
+    CGisItemTrk * trk = nullptr;
     QPolygonF coords;
     QPolygonF line;
 

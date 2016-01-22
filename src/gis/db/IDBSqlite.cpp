@@ -283,7 +283,7 @@ bool IDBSqlite::migrateDB2to3()
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();
 
-        IGisItem * item = 0;
+        IGisItem *item = nullptr;
 
         // load item from database for a compare
         switch(typeItem)
@@ -308,7 +308,7 @@ bool IDBSqlite::migrateDB2to3()
             ;
         }
 
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }

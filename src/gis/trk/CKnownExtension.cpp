@@ -20,24 +20,12 @@
 #include "units/IUnit.h"
 #include <QStringBuilder>
 
-const QString CKnownExtension::internalSlope = "::ql:slope";
-const QString CKnownExtension::internalSpeed = "::ql:speed";
-const QString CKnownExtension::internalEle   = "::ql:ele";
+const QString CKnownExtension::internalSlope    = "::ql:slope";
+const QString CKnownExtension::internalSpeed    = "::ql:speed";
+const QString CKnownExtension::internalEle      = "::ql:ele";
 const QString CKnownExtension::internalProgress = "::ql:progress";
 
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
-
-CKnownExtension::CKnownExtension(QString name,
-                                 qreal defLimitLow, qreal defLimitHigh,
-                                 qreal minimum,     qreal maximum,
-                                 qreal factor,      QString unit,
-                                 QString icon,      bool known,
-                                 fTrkPtGetVal valueFunc
-                                 ) : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
-    minimum(minimum), maximum(maximum), factor(factor), unit(unit),
-    icon(icon), known(known), valueFunc(valueFunc)
-{
-}
 
 static fTrkPtGetVal getExtensionValueFunc(const QString ext)
 {
@@ -54,23 +42,23 @@ void CKnownExtension::initGarminTPXv1(IUnit &units, const QString &ns)
     // support for the Garmin TrackPointExtension v1
     //  https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":hr",
-                           { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+                           { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:hr")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":cad",
-                           { QObject::tr("Cadence"), 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true,
+                           { QObject::tr("Cadence"), 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:cad")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":atemp",
-                           { QObject::tr("Air Temperature"), 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true,
+                           { QObject::tr("Air Temperature"), 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:atemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":wtemp",
-                           { QObject::tr("Water Temperature"), 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true,
+                           { QObject::tr("Water Temperature"), 10., 30., -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:wtemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":depth",
-                           { QObject::tr("Depth"), 0., 200., 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true,
+                           { QObject::tr("Depth"), 0., 200., 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:depth")});
 }
 
@@ -78,23 +66,23 @@ void CKnownExtension::initMioTPX(IUnit &units)
 {
     // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
     knownExtensions.insert("heartrate",
-                           { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true,
+                           { QObject::tr("Heart Rate"), 100., 200., 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
                              getExtensionValueFunc("heartrate")});
 
     knownExtensions.insert("cadence",
-                           { QObject::tr("Cadence"), 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true,
+                           { QObject::tr("Cadence"), 50., 110., 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc("cadence")});
 
     knownExtensions.insert("speed",
-                           { QObject::tr("Speed"), 1., 14., 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true,
+                           { QObject::tr("Speed"), 1., 14., 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc("speed")});
 
     knownExtensions.insert("acceleration",
-                           { QObject::tr("Acceleration"), -9.82, 9.82, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true,
+                           { QObject::tr("Acceleration"), -9.82, 9.82, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
                              getExtensionValueFunc("acceleration")});
 
     knownExtensions.insert("course",
-                           { QObject::tr("Course"), -3.2, 3.2, -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true,
+                           { QObject::tr("Course"), -3.2, 3.2, -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true, false,
                              getExtensionValueFunc("course")});
 }
 
@@ -103,22 +91,22 @@ void CKnownExtension::init(IUnit &units)
     knownExtensions =
     {
         {internalSlope,
-         { QObject::tr("Slope*"), -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true,
+         { QObject::tr("Slope*"), -10., 10., -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }}
         },
 
         {internalSpeed,
-         { QObject::tr("Speed*"), 1., 14., 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true,
+         { QObject::tr("Speed*"), 1., 14., 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
         },
 
         {internalEle,
-         { QObject::tr("Elevation"), 200., 800., 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true,
+         { QObject::tr("Elevation"), 200., 800., 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         {internalProgress,
-         { QObject::tr("Progress"), 0., NOFLOAT, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true,
+         { QObject::tr("Progress"), 0., NOFLOAT, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return p.distance; }}
         }
     };
@@ -131,7 +119,7 @@ void CKnownExtension::init(IUnit &units)
 
 const CKnownExtension CKnownExtension::get(const QString &name)
 {
-    CKnownExtension def("", 0., 100., -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false,
+    CKnownExtension def("", 0., 100., -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false, true,
                         getExtensionValueFunc(name)
                         );
     return knownExtensions.value(name, def);

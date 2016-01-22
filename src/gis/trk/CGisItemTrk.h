@@ -618,6 +618,12 @@ public:
        @note All filter implementations are found in src/gis/trk/filter/filter.cpp
      */
     void filterSplitSegment();
+    /**
+       @brief filterDeleteExtension
+
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
+    void filterDeleteExtension(const QString &ext);
 
     /**
        @brief Correlate waypoints with the track points

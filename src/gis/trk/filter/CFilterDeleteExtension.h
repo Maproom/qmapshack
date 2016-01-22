@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,22 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTRANGETRK_H
-#define CSCROPTRANGETRK_H
+#ifndef CFILTERDELETEEXTENSION_H
+#define CFILTERDELETEEXTENSION_H
 
-#include "mouse/IScrOpt.h"
-#include "ui_IScrOptRangeTrk.h"
+#include "ui_IFilterDeleteExtension.h"
+#include <QWidget>
 
 class CGisItemTrk;
 
-class CScrOptRangeTrk : public IScrOpt, public Ui::IScrOptRangeTrk
+class CFilterDeleteExtension : public QWidget, private Ui::IFilterDeleteExtension
 {
+    Q_OBJECT
 public:
-    CScrOptRangeTrk(const QPointF& point, CGisItemTrk *trk, IMouse *mouse, QWidget *parent = nullptr);
-    virtual ~CScrOptRangeTrk();
+    CFilterDeleteExtension(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterDeleteExtension();
 
-    virtual void draw(QPainter& p) override;
+private slots:
+    void slotApply();
+
+private:
+    CGisItemTrk& trk;
 };
 
-#endif //CSCROPTRANGETRK_H
+#endif //CFILTERDELETEEXTENSION_H
 

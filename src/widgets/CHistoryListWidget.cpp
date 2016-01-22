@@ -82,7 +82,7 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
 void CHistoryListWidget::slotSelectionChanged()
 {
     IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -113,7 +113,7 @@ void CHistoryListWidget::slotCutHistory()
     }
 
     IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }

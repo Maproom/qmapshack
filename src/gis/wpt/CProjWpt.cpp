@@ -79,8 +79,8 @@ void CProjWpt::accept()
         return;
     }
 
-    IGisProject * project = dynamic_cast<IGisProject*>(wpt.parent());
-    if(project == 0)
+    IGisProject *project = dynamic_cast<IGisProject*>(wpt.parent());
+    if(nullptr == project)
     {
         return;
     }

@@ -36,8 +36,8 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
 
     foreach(const IGisItem::key_t& key, keys)
     {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
-        if(wpt == 0)
+        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+        if(nullptr == wpt)
         {
             continue;
         }
@@ -68,8 +68,8 @@ void CCreateRouteFromWpt::accept()
         return;
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(project == 0)
+    IGisProject *project = CGisWidget::self().selectProject();
+    if(nullptr == project)
     {
         return;
     }

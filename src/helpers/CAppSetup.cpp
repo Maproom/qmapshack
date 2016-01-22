@@ -35,7 +35,7 @@ CAppSetup* instance;
 
 CAppSetup* CAppSetup::getPlattformInstance()
 {
-    if(instance == 0)
+    if(nullptr == instance)
     {
 #ifdef Q_OS_MAC
         instance = new CAppSetupMac();

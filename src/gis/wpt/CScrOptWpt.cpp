@@ -108,7 +108,7 @@ void CScrOptWpt::slotBubble()
 void CScrOptWpt::draw(QPainter& p)
 {
     IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    if(nullptr == item)
     {
         deleteLater();
         return;

@@ -210,8 +210,12 @@ void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
 
 void IGisProject::setSorting(sorting_e s)
 {
+    bool changed = s != sorting;
     sorting = s;
-    setChanged();
+    if(changed)
+    {
+        setChanged();
+    }
 }
 
 void IGisProject::setChanged()

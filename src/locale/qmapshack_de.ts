@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
         <source>API Version %1 (expected %2)</source>
-        <translation type="obsolete">API Version %1 (erwartet wird %2)</translation>
+        <translation type="vanished">API Version %1 (erwartet wird %2)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="38"/>
@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>File with qmapshark configuration.</source>
-        <translation type="obsolete">Datei mit QMapShack Einstellungen.</translation>
+        <translation type="vanished">Datei mit QMapShack Einstellungen.</translation>
     </message>
     <message>
         <location filename="../helpers/CCommandProcessor.cpp" line="40"/>
@@ -97,7 +97,7 @@
     <name>CDemPropSetup</name>
     <message>
         <source>&lt;b&gt;Grade %1&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Stufe %1&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Stufe %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -159,11 +159,11 @@
     <name>CDetailsOvlArea</name>
     <message>
         <source>Edit name...</source>
-        <translation type="obsolete">Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new area name.</source>
-        <translation type="obsolete">Geben Sie einen neuen Namen für das Gebiet ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für das Gebiet ein.</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
@@ -253,23 +253,23 @@
     </message>
     <message>
         <source>Total Distance:</source>
-        <translation type="obsolete">Summe Entfernung:</translation>
+        <translation type="vanished">Summe Entfernung:</translation>
     </message>
     <message>
         <source>Total Ascend:</source>
-        <translation type="obsolete">Summe Anstieg:</translation>
+        <translation type="vanished">Summe Anstieg:</translation>
     </message>
     <message>
         <source>Total Descend:</source>
-        <translation type="obsolete">Summe Abstieg:</translation>
+        <translation type="vanished">Summe Abstieg:</translation>
     </message>
     <message>
         <source>Total Time:</source>
-        <translation type="obsolete">Summe Zeit:</translation>
+        <translation type="vanished">Summe Zeit:</translation>
     </message>
     <message>
         <source>Total Time Moving:</source>
-        <translation type="obsolete">Summe Zeit in Bewegung:</translation>
+        <translation type="vanished">Summe Zeit in Bewegung:</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="598"/>
@@ -327,11 +327,11 @@
     <name>CDetailsRte</name>
     <message>
         <source>Edit name...</source>
-        <translation type="obsolete">Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation type="obsolete">Geben Sie einen neuen Namen für die Route ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für die Route ein.</translation>
     </message>
 </context>
 <context>
@@ -373,11 +373,11 @@
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="obsolete">Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation type="obsolete">Geben Sie einen neuen Namen für den Track ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="681"/>
@@ -439,11 +439,11 @@
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="obsolete">Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new waypoint name.</source>
-        <translation type="obsolete">Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
     <message>
         <source>Enter new elevation.</source>
@@ -489,7 +489,7 @@
     </message>
     <message>
         <source>Help...</source>
-        <translation type="obsolete">Hilfe...</translation>
+        <translation type="vanished">Hilfe...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="81"/>
@@ -539,7 +539,7 @@
     </message>
     <message>
         <source>Do you realy want to remove &apos;%1&apos; from the list?</source>
-        <translation type="obsolete">Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
+        <translation type="vanished">Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="458"/>
@@ -1661,7 +1661,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
-        <translation type="obsolete">Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
+        <translation type="vanished">Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
     <message>
         <source>--- All ---</source>
@@ -1769,7 +1769,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Unexpexted service. &apos;* WMTS 1.0.0&apos; is expected. &apos;%1 %2&apos; is read.</source>
-        <translation type="obsolete">Unerwarteter Dienst. &apos;* WMTS 1.0.0&apos; wird erwartet. &apos;%1 %2&apos; wurde gelesen.</translation>
+        <translation type="vanished">Unerwarteter Dienst. &apos;* WMTS 1.0.0&apos; wird erwartet. &apos;%1 %2&apos; wurde gelesen.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="151"/>
@@ -1778,7 +1778,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries.</source>
-        <translation type="obsolete">Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
+        <translation type="vanished">Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen.</translation>
     </message>
     <message>
         <source>--- All ---</source>
@@ -1887,7 +1887,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
-        <translation type="obsolete">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
+        <translation type="vanished">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
 </context>
 <context>
@@ -1951,11 +1951,11 @@ Unbekannte Struktur.</translation>
     <name>CPlotDistance</name>
     <message>
         <source>distance [%1]</source>
-        <translation type="obsolete">Entf. [%1]</translation>
+        <translation type="vanished">Entf. [%1]</translation>
     </message>
     <message>
         <source>time</source>
-        <translation type="obsolete">Uhrzeit</translation>
+        <translation type="vanished">Uhrzeit</translation>
     </message>
     <message>
         <source>time [h]</source>
@@ -1963,7 +1963,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>distance. [%1]</source>
-        <translation type="obsolete">Entf. [%1]</translation>
+        <translation type="vanished">Entf. [%1]</translation>
     </message>
 </context>
 <context>
@@ -1975,7 +1975,7 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="obsolete">Zeit [h]</translation>
+        <translation type="vanished">Zeit [h]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="74"/>
@@ -1987,15 +1987,15 @@ Unbekannte Struktur.</translation>
     <name>CPlotSpeed</name>
     <message>
         <source>distance [%1]</source>
-        <translation type="obsolete">Entfernung [%1]</translation>
+        <translation type="vanished">Entfernung [%1]</translation>
     </message>
     <message>
         <source>time [h]</source>
-        <translation type="obsolete">Zeit [h]</translation>
+        <translation type="vanished">Zeit [h]</translation>
     </message>
     <message>
         <source>speed. [%1]</source>
-        <translation type="obsolete">Geschw. [%1]</translation>
+        <translation type="vanished">Geschw. [%1]</translation>
     </message>
 </context>
 <context>
@@ -2806,15 +2806,15 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../IAbout.ui" line="381"/>
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="obsolete">Französisch</translation>
+        <translation type="vanished">Französisch</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="obsolete">Tschechisch</translation>
+        <translation type="vanished">Tschechisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="182"/>
@@ -2823,7 +2823,7 @@ Ivo Kronenberg</source>
     </message>
     <message>
         <source>German</source>
-        <translation type="obsolete">Deutsch</translation>
+        <translation type="vanished">Deutsch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="281"/>
@@ -2832,7 +2832,7 @@ Ivo Kronenberg</source>
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="obsolete">Niederländisch</translation>
+        <translation type="vanished">Niederländisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="228"/>
@@ -2866,7 +2866,7 @@ Ivo Kronenberg</source>
     </message>
     <message>
         <source>Translation:</source>
-        <translation type="obsolete">Übersetzung:</translation>
+        <translation type="vanished">Übersetzung:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="205"/>
@@ -2875,7 +2875,7 @@ Ivo Kronenberg</source>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="obsolete">Spanisch</translation>
+        <translation type="vanished">Spanisch</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="258"/>
@@ -2892,21 +2892,21 @@ Ivo Kronenberg</source>
         <source>Helmut Schmidt</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="354"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation>... und Danke an alle Ersteller von ausführbaren Linux-Dateien für die gute Arbeit. Ganz besonderen Dank an Dan Horák und Bas Couwenberg für ihre Teilnahme an der Diskussion in der Mailingliste distributionsbezogene Punkte betreffend.</translation>
     </message>
     <message>
         <source>Binaries:</source>
-        <translation type="obsolete">Ausführbare Dateien:</translation>
+        <translation type="vanished">Ausführbare Dateien:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="399"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="406"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -2972,17 +2972,17 @@ Ivo Kronenberg</source>
         <source>Coordinate Format...</source>
         <translation>Koordinatenformat...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation></translation>
@@ -3044,14 +3044,14 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Create a clone</source>
-        <translation type="obsolete">Einen Klon erstellen</translation>
+        <translation type="vanished">Einen Klon erstellen</translation>
     </message>
 </context>
 <context>
     <name>IDemPathSetup</name>
     <message>
         <source>Setup DEM file pathss</source>
-        <translation type="obsolete">Pfad für DEM Dateien setzen</translation>
+        <translation type="vanished">Pfad für DEM Dateien setzen</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
@@ -3113,7 +3113,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <source>Slope </source>
         <translation>Hangneigung </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../dem/IDemPropSetup.ui" line="226"/>
         <location filename="../dem/IDemPropSetup.ui" line="326"/>
         <location filename="../dem/IDemPropSetup.ui" line="410"/>
@@ -3451,25 +3451,25 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Graph Control</source>
-        <translation type="obsolete">Grafikeinstellungen</translation>
+        <translation type="vanished">Grafikeinstellungen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1024"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="992"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1465"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1433"/>
         <source>Speed</source>
         <translation>Geschw.</translation>
     </message>
     <message>
         <source>Progress</source>
-        <translation type="obsolete">Verlauf</translation>
+        <translation type="vanished">Verlauf</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="obsolete">Track</translation>
+        <translation type="vanished">Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="277"/>
@@ -3478,21 +3478,21 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="280"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="437"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="466"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="548"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="577"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="727"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="767"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1045"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="431"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="460"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="535"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="564"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="695"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="735"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1013"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1042"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1074"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1106"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1142"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1110"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1139"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1171"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1203"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1239"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1207"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1236"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1268"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1300"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -3508,112 +3508,112 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>from Data</source>
-        <translation type="obsolete">aus Daten</translation>
+        <translation type="vanished">aus Daten</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="711"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="679"/>
         <source>Source</source>
         <translation>Quelle</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="698"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="666"/>
         <source>Maximum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="526"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="513"/>
         <source>Minimum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="650"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="631"/>
         <source>Solid color</source>
         <translation>Feste Farbe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="533"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="520"/>
         <source>Width</source>
         <translation>Breite</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="621"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="608"/>
         <source>with arrows</source>
         <translation>mit Richtungspfeilen</translation>
     </message>
     <message>
         <source>use as 
 default</source>
-        <translation type="obsolete">als Vorgabe nutzen</translation>
+        <translation type="vanished">als Vorgabe nutzen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="837"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="805"/>
         <source>Graphs</source>
         <translation>Diagramme</translation>
     </message>
     <message>
         <source>Graph 3</source>
-        <translation type="obsolete">Diagramm 3</translation>
+        <translation type="vanished">Diagramm 3</translation>
     </message>
     <message>
         <source>Graph 2</source>
-        <translation type="obsolete">Diagramm 2</translation>
+        <translation type="vanished">Diagramm 2</translation>
     </message>
     <message>
         <source>Graph 1</source>
-        <translation type="obsolete">Diagramm 1</translation>
+        <translation type="vanished">Diagramm 1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1329"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1297"/>
         <source>Activity</source>
         <translation>Aktivität</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1370"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1338"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder wählen Sie einen Teil des Track aus und weisen diesem eine Aktivität zu.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1397"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1365"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1445"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1413"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1450"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1418"/>
         <source>Ele.</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1455"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1423"/>
         <source>Delta</source>
         <translation>Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1460"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1428"/>
         <source>Dist.</source>
         <translation>Entf.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1470"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1438"/>
         <source>Slope</source>
         <translation>Neigung</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1475"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1443"/>
         <source>Ascend</source>
         <translation>Anstieg</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1480"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1448"/>
         <source>Descend</source>
         <translation>Abstieg</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1485"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1453"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
@@ -3628,83 +3628,83 @@ default</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="434"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="428"/>
         <source>Use/edit user defined visibility of arrows for this track</source>
         <translation>Benutzt die benutzerdefinierte Sichtbarkeit der Richtungspfeile für diesen Track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="463"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="457"/>
         <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
         <translation>Benutzet die vorgegebene Sichtbarkeit der Richtungspfeile für alle Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="545"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="532"/>
         <source>Use/edit user defined scale factor for this track</source>
         <translation>Benutzt den benutzerdefinierten Skalierungsfaktor für diesen Track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="574"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="561"/>
         <source>Use/edit system&apos;s default factor for all tracks</source>
         <translation>Benutzt den vorgegebenen Skalierungsfaktor für alle Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="663"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="638"/>
         <source>x </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="723"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="691"/>
         <source>Take maximum from data
 </source>
         <translation>Maximum aus den Daten übernehmen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="764"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="732"/>
         <source>Take minimum from data</source>
         <translation>Minimum aus den Daten übernehmen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="850"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="870"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="956"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="818"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="838"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="924"/>
         <source>max.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="989"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="996"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1010"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="957"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="964"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="978"/>
         <source>min.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1042"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1139"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1236"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1010"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1107"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1204"/>
         <source>User defined limits for this track</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefinierte Grenzwerte für diesen Track</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1039"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1136"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1233"/>
+        <source>Automatic limits</source>
+        <translation>Automatische Grenzwerte</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1071"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1168"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1265"/>
-        <source>Automatic limits</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1103"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1200"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1297"/>
         <source>User defined limits for all tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefinierte Grenzwerte für alle Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1494"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1462"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1531"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1499"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
@@ -5097,7 +5097,7 @@ sein</translation>
         <source>m</source>
         <translation> m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -5530,11 +5530,11 @@ sein</translation>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="34"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculate a route between the first and last selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Eine Route zwischen dem ersten und dem letzten Punkt berechnen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Eine Route zwischen dem ersten und dem letzten gewählten Punkt berechnen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Caclculate a route between the first and last selected point.</source>
-        <translation type="obsolete">Eine Route zwischen dem ersten und dem letzten Punkt berechnen.</translation>
+        <translation type="vanished">Eine Route zwischen dem ersten und dem letzten Punkt berechnen.</translation>
     </message>
 </context>
 <context>
@@ -5688,7 +5688,7 @@ sein</translation>
     </message>
     <message>
         <source>Cut track at selected point into two tracks.</source>
-        <translation type="obsolete">Teilt den Track am selektierten Punkt in zwei Teile.</translation>
+        <translation type="vanished">Teilt den Track am selektierten Punkt in zwei Teile.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
@@ -5996,7 +5996,7 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="87"/>
         <source>Add a clone</source>
-        <translation>Klon hinzufügen</translation>
+        <translation>Einen Klon hinzufügen</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="100"/>
@@ -6060,7 +6060,7 @@ sein</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="obsolete">Datei</translation>
+        <translation type="vanished">Datei</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="68"/>
@@ -6100,12 +6100,12 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="193"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="206"/>
         <source>00000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="215"/>
@@ -6120,15 +6120,15 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="275"/>
         <source>&lt;b&gt;Port:&lt;/b&gt; Leave the port field empty to use the default port.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Port:&lt;/b&gt; Um den vorgegebenen Port zu nutzen, lassen Sie das Port-Feld leer.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Achtung!&lt;/span&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Achtung!&lt;/span&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Caution!&lt;/b&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.</source>
-        <translation type="obsolete">&lt;b&gt;Achtung!&lt;/b&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.</translation>
+        <translation type="vanished">&lt;b&gt;Achtung!&lt;/b&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="61"/>
@@ -6601,7 +6601,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Failed to read...</source>
-        <translation type="obsolete">Lesen fehlgeschlagen...</translation>
+        <translation type="vanished">Lesen fehlgeschlagen...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
@@ -6615,7 +6615,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>Not a GPX file: </source>
-        <translation type="obsolete">Keine GPX Datei:</translation>
+        <translation type="vanished">Keine GPX Datei:</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="362"/>
@@ -6671,7 +6671,7 @@ Areas: %1</source>
     </message>
     <message>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save befor closing it?</source>
-        <translation type="obsolete">&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
+        <translation type="vanished">&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern bevor es geschlossen wird?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="105"/>
@@ -6685,7 +6685,7 @@ Areas: %1</source>
     </message>
     <message>
         <source>Cancelled correlation...</source>
-        <translation type="obsolete">Verknüpfung abgebrochen...</translation>
+        <translation type="vanished">Verknüpfung abgebrochen...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="264"/>
@@ -6790,7 +6790,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>Saveing GIS data failed...</source>
-        <translation type="obsolete">Speichern der GIS Daten fehlgeschlagen...</translation>
+        <translation type="vanished">Speichern der GIS Daten fehlgeschlagen...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="357"/>
@@ -7278,7 +7278,7 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press&apos;Ok&apos;.</source>
-        <translation type="obsolete">&lt;h3&gt;%1&lt;/h3&gt; Dieses Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
+        <translation type="vanished">&lt;h3&gt;%1&lt;/h3&gt; Dieses Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="669"/>
@@ -7574,7 +7574,7 @@ Turn: %1 Bearing: %2</source>
         <location filename="../gis/trk/CActivityTrk.cpp" line="84"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="109"/>
         <source>Ski/Winter</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="108"/>
@@ -7640,7 +7640,7 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>Slope (directed)</source>
-        <translation type="obsolete">Neigung (mit Vorzeichen)</translation>
+        <translation type="vanished">Neigung (mit Vorzeichen)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="89"/>
@@ -7664,11 +7664,11 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>Slope (directed, derived)</source>
-        <translation type="obsolete">Neigung (m. Vorz., berechnet)</translation>
+        <translation type="vanished">Neigung (m. Vorz., berechnet)</translation>
     </message>
     <message>
         <source>Speed (derived)</source>
-        <translation type="obsolete">Geschw. (berechnet)</translation>
+        <translation type="vanished">Geschw. (berechnet)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="57"/>
@@ -7718,7 +7718,7 @@ Turn: %1 Bearing: %2</source>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="86"/>
         <source>Failed to open FIT file %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen der FIT Datei %1 fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="59"/>
@@ -7747,7 +7747,7 @@ Turn: %1 Bearing: %2</source>
     </message>
     <message>
         <source>The internal database format has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation type="obsolete">Das interne Datenbankformat wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank  mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
+        <translation type="vanished">Das interne Datenbankformat wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank  mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="64"/>
@@ -7782,47 +7782,47 @@ Turn: %1 Bearing: %2</source>
     <message>
         <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="32"/>
         <source>FIT decoding error : invalid CRC.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: CRC ungültig</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="116"/>
         <source>FIT decoding error: unexpected end of file %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: unerwartetes Ende der Datei %1.</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="70"/>
         <source>FIT decoding error: unknown base type %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: unbekannter Datentyp %1.</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="70"/>
         <source>FIT decoding error: protocol %1 version not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: Version des Protokolls %1 wird nicht unterstützt.</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="121"/>
         <source>FIT decoding error: file header signature mismatch. File is not FIT.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: Nicht übereinstimmende Dateikopfsignatur. Keine FIT DAtei</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="66"/>
         <source>FIT decoding error: architecture %1 not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: Architektur %1 wird nicht unterstützt.</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="87"/>
         <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: Ungültiger Offset %1 für Status &apos;aufgezeichneter Inhalt&apos;</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="32"/>
         <source>FIT decoding error: Decoder not in correct state %1 after last data byte in file.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: Nicht zutreffender Dekoderstatus %1 nach dem letzten Datenbyte der Datei.</translation>
     </message>
     <message>
         <location filename="../gis/fit/serialization.cpp" line="188"/>
         <source>FIT file %1 contains no GPS data.</source>
-        <translation type="unfinished"></translation>
+        <translation>FIT Dekodierfehler: Datei enthält keine GPS Daten.</translation>
     </message>
 </context>
 </TS>

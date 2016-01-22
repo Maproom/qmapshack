@@ -19,16 +19,19 @@ if [[ "$QMS_SRC_DIR" == "" ]]; then
 	echo "QMS_SRC_DIR not set"
 fi
 
+if [[ "$BUILD_BIN_DIR" == "" ]]; then
+	echo "BUILD_BIN_DIR not set"
+fi
+if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
+	echo "BUILD_RELEASE_DIR not set"
+fi
+
 set -a
 APP_NAME=QMapShack
 APP_BUNDLE=$APP_NAME.app
 
 SRC_OSX_DIR=$QMS_SRC_DIR/MacOSX
 SRC_RESOURCES_DIR=$SRC_OSX_DIR/resources
-
-# depends on IDE 
-BUILD_BIN_DIR=$BUILD_DIR/Release/src
-BUILD_RELEASE_DIR=$BUILD_DIR/Release
 
 BUILD_BUNDLE_DIR=$BUILD_RELEASE_DIR/$APP_BUNDLE
 BUILD_BUNDLE_CONTENTS_DIR=$BUILD_BUNDLE_DIR/Contents

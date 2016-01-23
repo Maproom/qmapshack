@@ -121,6 +121,8 @@ void CDetailsPrj::slotSetupGui()
     comboSort->setCurrentIndex(prj.getSorting());
     if((prj.getSorting() > IGisProject::eSortTime) && !prj.doCorrelation())
     {
+        X_____________UnBlockAllSignals_____________X(this);
+
         QString msg = tr("You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?");
         int res = QMessageBox::question(this, tr("Correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
         if(res == QMessageBox::Yes)
@@ -133,7 +135,6 @@ void CDetailsPrj::slotSetupGui()
         }
         timerUpdateTime->start();
 
-        X_____________UnBlockAllSignals_____________X(this);
         mutex.unlock();
         return;
     }

@@ -20,6 +20,7 @@
 #define SIGNALS_H
 
 #include <QObject>
+#include <QRegExp>
 
 inline void X______________BlockAllSignals______________X(QObject * parent)
 {

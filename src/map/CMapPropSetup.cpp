@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "helpers/Signals.h"
 #include "map/CMapDraw.h"
 #include "map/CMapPropSetup.h"
 #include "map/IMap.h"
 #include "units/IUnit.h"
-#include "helpers/Signals.h"
 
 #include <QtWidgets>
 QPointF CMapPropSetup::scale;

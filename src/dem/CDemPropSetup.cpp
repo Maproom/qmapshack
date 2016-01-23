@@ -19,8 +19,8 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemPropSetup.h"
 #include "dem/IDem.h"
-#include "units/IUnit.h"
 #include "helpers/Signals.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 QPointF CDemPropSetup::scale;

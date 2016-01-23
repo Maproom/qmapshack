@@ -153,7 +153,7 @@ public:
         same as changed();
 
      */
-    void updateHistory(quint32 visuals);    
+    void updateHistory(quint32 visuals);
 
     /**
        @brief Update all registered visuals viw the INotifyTrk interface
@@ -162,7 +162,7 @@ public:
      */
     void updateVisuals(quint32 visuals, const QString &who);
 
-     /**
+    /**
        @brief Create a cloned copy of this track
        @return The cloned item a pointer
      */

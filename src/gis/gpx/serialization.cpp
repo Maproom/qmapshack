@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "device/CDeviceGarmin.h"
 #include "gis/WptIcons.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
@@ -995,4 +996,104 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt)
     writeXml(xml, "pdop",          wpt.pdop);
     writeXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
     writeXml(xml, "dgpsid",        wpt.dgpsid);
+}
+
+
+void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QString& gpxFilename)
+{
+    if(pathAdventures.isEmpty())
+    {
+        return;
+    }
+
+    QDomDocument doc;
+
+    QDomElement adventure = doc.createElement("Adventure");
+    doc.appendChild(adventure);
+    adventure.setAttribute("xmlns","http://www.garmin.com/xmlschemas/GarminAdventure/v1");
+
+    writeXml(adventure, "GlobalId", project->getKey());
+    writeXml(adventure, "Name", project->getName());
+
+    QDomElement item = doc.createElement("Item");
+    adventure.appendChild(item);
+    writeXml(item, "DataType", "GPSData");
+    writeXml(item, "Location", gpxFilename);
+
+    writeXml(adventure, "Description", IGisItem::removeHtml(project->getDescription()));
+
+    const int N = project->childCount();
+    for(int i = 0; i < N; i++)
+    {
+        CGisItemTrk * track = dynamic_cast<CGisItemTrk*>(project->child(i));
+        if(track != nullptr)
+        {
+            const CGisItemTrk::trk_t& trk = track->getTrackData();
+            if(trk.segs.isEmpty())
+            {
+                continue;
+            }
+
+            if(trk.segs.first().pts.isEmpty())
+            {
+                continue;
+            }
+
+            const CGisItemTrk::trkpt_t& origin = trk.segs.first().pts.first();
+
+            QDomElement startPosition = doc.createElement("StartPosition");
+            adventure.appendChild(startPosition);
+            writeXml(startPosition, "Lat", origin.lat);
+            writeXml(startPosition, "Lon", origin.lon);
+
+            writeXml(adventure, "Distance", track->getTotalDistance());
+            writeXml(adventure, "Duration", track->getTotalElapsedSecondsMoving());
+            writeXml(adventure, "Ascent", track->getTotalAscend());
+            writeXml(adventure, "Descent", track->getTotalDescend());
+            writeXml(adventure, "MainTrackId", track->getName());
+
+            QDomElement waypointOrder = doc.createElement("WaypointOrder");
+            adventure.appendChild(waypointOrder);
+
+            foreach(const CGisItemTrk::trkseg_t& seg, trk.segs)
+            {
+                foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+                {
+                    if(trkpt.keyWpt.item.isEmpty())
+                    {
+                        continue;
+                    }
+
+                    const CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+                    if(wpt == nullptr)
+                    {
+                        continue;
+                    }
+
+                    QDomElement waypoints = doc.createElement("Waypoints");
+                    waypointOrder.appendChild(waypoints);
+
+                    writeXml(waypoints, "ID", wpt->getName());
+                    writeXml(waypoints, "DistanceFromOrigin", trkpt.distance);
+                }
+            }
+
+
+            break;
+        }
+    }
+
+
+    const QDir dirAdventures(dir.absoluteFilePath(pathAdventures));
+    QString filename = dirAdventures.absoluteFilePath(project->getKey() + ".adv");
+    QFile file(filename);
+
+    mount();
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out.setCodec("UTF-8");
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
+    out << doc.toString();
+    file.close();
+    umount();
 }

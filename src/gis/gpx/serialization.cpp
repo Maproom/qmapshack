@@ -1046,10 +1046,13 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
             writeXml(startPosition, "Lat", origin.lat);
             writeXml(startPosition, "Lon", origin.lon);
 
+            writeXml(adventure, "Activity", QObject::tr("Unknown"));
             writeXml(adventure, "Distance", track->getTotalDistance());
             writeXml(adventure, "Duration", track->getTotalElapsedSecondsMoving());
             writeXml(adventure, "Ascent", track->getTotalAscend());
             writeXml(adventure, "Descent", track->getTotalDescend());
+            writeXml(adventure, "Difficulty", 1);
+            writeXml(adventure, "NumRatings", 0);
             writeXml(adventure, "MainTrackId", track->getName());
 
             QDomElement waypointOrder = doc.createElement("WaypointOrder");

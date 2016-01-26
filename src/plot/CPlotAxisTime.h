@@ -34,19 +34,19 @@ public:
     }
 
     ///calculate format for the given value
-    virtual const QString fmtsgl(qreal /*val*/) override
+    const QString fmtsgl(qreal /*val*/) override
     {
         return strFormat;
     }
     ///calculate format for the given value
-    virtual const QString fmtdbl(qreal /*val*/) override
+    const QString fmtdbl(qreal /*val*/) override
     {
         return strFormat;
     }
 
-    virtual const tic_t* ticmark( const tic_t * t ) override;
+    const tic_t* ticmark( const tic_t * t ) override;
 protected:
-    virtual void calc() override;
+    void calc() override;
 
     const QString strFormat = "hh:mm:ss";
 };

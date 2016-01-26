@@ -172,7 +172,7 @@ public:
        @brief Save track to GPX tree
        @param gpx   The <gpx> node to append by the track
      */
-    virtual void save(QDomNode& gpx) override;
+    void save(QDomNode& gpx) override;
     /**
        @brief Save track to TwoNav track file
        @param dir   the path to store the file
@@ -183,16 +183,16 @@ public:
        @param stream  the data stream to read from
        @return A reference to the stream
      */
-    virtual QDataStream& operator<<(QDataStream& stream) override;
+    QDataStream& operator<<(QDataStream& stream) override;
     /**
        @brief Serialize track into a binary data stream
        @param stream  the data stream to write to.
        @return A reference to the stream
      */
-    virtual QDataStream& operator>>(QDataStream& stream) const override;
+    QDataStream& operator>>(QDataStream& stream) const override;
 
     /// get name of track
-    virtual const QString& getName() const override
+    const QString& getName() const override
     {
         return trk.name.isEmpty() ? noName : trk.name;
     }
@@ -249,22 +249,22 @@ public:
         return totalDistance;
     }
 
-    virtual const QString& getComment() const override
+    const QString& getComment() const override
     {
         return trk.cmt;
     }
-    virtual const QString& getDescription() const override
+    const QString& getDescription() const override
     {
         return trk.desc;
     }
-    virtual const QList<link_t>& getLinks() const override
+    const QList<link_t>& getLinks() const override
     {
         return trk.links;
     }
     /// get the track as a simple coordinate polyline
     void getPolylineFromData(QPolygonF &l);
     /// get the track as polyline with elevation, pixel and GIS coordinates.
-    virtual void getPolylineFromData(SGisLine& l) override;
+    void getPolylineFromData(SGisLine& l) override;
 
     const QDateTime& getTimeStart() const
     {
@@ -354,10 +354,10 @@ public:
     void setColor(int idx);
     /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
-    virtual void setComment         (const QString& str)         override;
-    virtual void setDescription     (const QString& str)         override;
-    virtual void setLinks           (const QList<link_t>& links) override;
-    virtual void setDataFromPolyline(const SGisLine &l)          override;
+    void setComment         (const QString& str)         override;
+    void setDescription     (const QString& str)         override;
+    void setLinks           (const QList<link_t>& links) override;
+    void setDataFromPolyline(const SGisLine &l)          override;
 
     /**
        @brief display the track screen options
@@ -366,24 +366,24 @@ public:
        @param mouse     the mouse object causing the request
        @return          a pointer to the screen option widget
      */
-    virtual IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
     /**
        @brief Get a screen pixel of the track close to the given position on the screen
        @param screenPos Screen position as pixel coordinate
        @return The screen coordinates as pixel of a track point close by
      */
-    virtual QPointF getPointCloseBy(const QPoint& screenPos) override;
+    QPointF getPointCloseBy(const QPoint& screenPos) override;
     /**
        @brief isCloseTo
        @param pos Screen position as pixel coordinate
        @return True if point is considered close enough
      */
-    virtual bool isCloseTo(const QPointF& pos) override;
+    bool isCloseTo(const QPointF& pos) override;
 
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
-    virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
-    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
-    virtual void drawHighlight(QPainter& p) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawHighlight(QPainter& p) override;
     void drawRange(QPainter& p);
 
     /**
@@ -393,7 +393,7 @@ public:
 
        @param yes   set true to gain focus.
      */
-    virtual void gainUserFocus(bool yes) override;
+    void gainUserFocus(bool yes) override;
     /**
        @brief Make sure the track has lost focus.
 
@@ -405,7 +405,7 @@ public:
     /**
        @brief Make sure a CDetailsTrk widget is registered with the main tab widget
      */
-    virtual void edit() override;
+    void edit() override;
 
     /**
        @brief Cut track at mouseClickFocus
@@ -479,7 +479,7 @@ public:
 
        @return True if the track has user focus
      */
-    virtual bool hasUserFocus() const override
+    bool hasUserFocus() const override
     {
         return key == keyUserFocus;
     }
@@ -637,7 +637,7 @@ private:
         updateHistory(eVisualAll);
     }
 
-    virtual void setSymbol() override;
+    void setSymbol() override;
     /**
        @brief Read track data from section in GPX file
        @param xml   The XML <trk> section
@@ -750,7 +750,7 @@ private:
        @param what  The reason string
        @param icon  An icon string
      */
-    virtual void changed(const QString& what, const QString& icon) override;
+    void changed(const QString& what, const QString& icon) override;
 
     /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);

@@ -27,8 +27,8 @@ public:
     CFitHeaderState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFileHeader) { reset(); }
     virtual ~CFitHeaderState() {}
 
-    virtual void reset() override;
-    virtual decode_state_e process(quint8 &dataByte) override;
+    void reset() override;
+    decode_state_e process(quint8 &dataByte) override;
 
 private:
     quint8 offset;

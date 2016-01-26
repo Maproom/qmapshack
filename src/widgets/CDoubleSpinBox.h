@@ -37,9 +37,9 @@ signals:
 public:
     CDoubleSpinBox(QWidget * parent = 0);
 
-    virtual void stepBy(int steps) override;
+    void stepBy(int steps) override;
 
 protected:
-    virtual void focusInEvent(QFocusEvent *event) override;
+    void focusInEvent(QFocusEvent *event) override;
 };
 #endif // CDOUBLESPINBOX_H

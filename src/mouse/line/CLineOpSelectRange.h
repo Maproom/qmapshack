@@ -32,17 +32,17 @@ public:
     CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpSelectRange();
 
-    virtual void mousePressEventEx  (QMouseEvent *e) override;
-    virtual void mouseMoveEventEx   (QMouseEvent *e) override;
-    virtual void mouseReleaseEventEx(QMouseEvent *e) override
+    void mousePressEventEx  (QMouseEvent *e) override;
+    void mouseMoveEventEx   (QMouseEvent *e) override;
+    void mouseReleaseEventEx(QMouseEvent *e) override
     {
     }
-    virtual void wheelEvent(QWheelEvent * e) override;
-    virtual void keyPressEvent(QKeyEvent * e) override;
+    void wheelEvent(QWheelEvent * e) override;
+    void keyPressEvent(QKeyEvent * e) override;
 
-    virtual void drawFg(QPainter& p) override;
+    void drawFg(QPainter& p) override;
 
-    virtual bool abortStep() override;
+    bool abortStep() override;
 
 private slots:
     void slotDelete();

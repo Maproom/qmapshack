@@ -58,12 +58,12 @@ public:
     IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * parent);
     virtual ~IMouseEditLine();
 
-    virtual void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    virtual void mousePressEvent  (QMouseEvent *e) override;
-    virtual void mouseMoveEvent   (QMouseEvent *e) override;
-    virtual void mouseReleaseEvent(QMouseEvent *e) override;
-    virtual void wheelEvent       (QWheelEvent *e) override;
-    virtual void keyPressEvent    (QKeyEvent   *e) override;
+    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void mousePressEvent  (QMouseEvent *e) override;
+    void mouseMoveEvent   (QMouseEvent *e) override;
+    void mouseReleaseEvent(QMouseEvent *e) override;
+    void wheelEvent       (QWheelEvent *e) override;
+    void keyPressEvent    (QKeyEvent   *e) override;
 
     void abortStep();
 
@@ -108,7 +108,7 @@ protected slots:
     void slotUndo();
     void slotRedo();
 
-    virtual void slotPanCanvas() override;
+    void slotPanCanvas() override;
 
 protected:
     virtual void drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p);

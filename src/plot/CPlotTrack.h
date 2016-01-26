@@ -34,8 +34,8 @@ public:
     void setMouseFocus(qreal lon, qreal lat);
 
 protected:
-    virtual void resizeEvent(QResizeEvent *e) override;
-    virtual void paintEvent (QPaintEvent  *e) override;
+    void resizeEvent(QResizeEvent *e) override;
+    void paintEvent (QPaintEvent  *e) override;
 
 private:
 

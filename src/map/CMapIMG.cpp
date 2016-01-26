@@ -1212,7 +1212,7 @@ quint8 CMapIMG::scale2bits(const QPointF& scale)
     return 24;
 }
 
-/* virtual */ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
+void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
 {
     if(map->needsRedraw())
     {
@@ -2395,11 +2395,11 @@ void CMapIMG::drawText(QPainter& p)
 }
 
 
-/* virtual */ void CMapIMG::getInfo(const QPoint& px, QString& str) /* override */
+void CMapIMG::getInfo(const QPoint& px, QString& str) /* override */
 {
 }
 
-/* virtual */ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
+void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
 {
     bool first = true;
     QString str;
@@ -2826,7 +2826,7 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
 
 
 
-/* virtual */ bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline) /* override */
+bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline) /* override */
 {
     foreach(const CGarminPolygon &line, polylines)
     {

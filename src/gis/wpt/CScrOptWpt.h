@@ -35,7 +35,7 @@ public:
     CScrOptWpt(CGisItemWpt * wpt, const QPoint &point, IMouse *parent);
     virtual ~CScrOptWpt();
 
-    virtual void draw(QPainter& p) override;
+    void draw(QPainter& p) override;
 
 private slots:
     void slotDelete();

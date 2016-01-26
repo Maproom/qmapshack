@@ -146,10 +146,10 @@ public:
     CMapIMG(const QString &filename, CMapDraw *parent);
     virtual ~CMapIMG();
 
-    virtual void draw(IDrawContext::buffer_t& buf) override;
+    void draw(IDrawContext::buffer_t& buf) override;
 
-    virtual void getInfo(const QPoint& px, QString& str) override;
-    virtual void getToolTip(const QPoint& px, QString& infotext) override;
+    void getInfo(const QPoint& px, QString& str) override;
+    void getToolTip(const QPoint& px, QString& infotext) override;
 
     /**
        @brief Find a matching street polyline
@@ -163,7 +163,7 @@ public:
        @param polyline      the resulting polyline, if any, in [rad]
        @return              Return true if a line has been found.
      */
-    virtual bool findPolylineCloseBy(const QPointF &pt1, const QPointF &pt2, qint32 threshold, QPolygonF& polyline) override;
+    bool findPolylineCloseBy(const QPointF &pt1, const QPointF &pt2, qint32 threshold, QPolygonF& polyline) override;
 
 
 private:

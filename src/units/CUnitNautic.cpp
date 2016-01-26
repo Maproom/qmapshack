@@ -30,7 +30,7 @@ CUnitNautic::~CUnitNautic()
 }
 
 
-/* virtual */ void CUnitNautic::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
+void CUnitNautic::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
     {
@@ -45,7 +45,7 @@ CUnitNautic::~CUnitNautic()
 }
 
 
-/* virtual */ void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
+void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
     {
@@ -60,7 +60,7 @@ CUnitNautic::~CUnitNautic()
 }
 
 
-/* virtual */ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /* override */
+void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
     {
@@ -74,7 +74,7 @@ CUnitNautic::~CUnitNautic()
     }
 }
 
-/* virtual */ void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit) const /* override */
+void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
     {
@@ -89,7 +89,7 @@ CUnitNautic::~CUnitNautic()
 }
 
 
-/* virtual */ qreal CUnitNautic::elevation2meter(const QString& val) const /* override */
+qreal CUnitNautic::elevation2meter(const QString& val) const /* override */
 {
     return val.toDouble();
 }

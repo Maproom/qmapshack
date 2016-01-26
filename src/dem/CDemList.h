@@ -36,8 +36,8 @@ signals:
     void sigChanged();
 
 protected:
-    virtual void dragMoveEvent(QDragMoveEvent *event) override;
-    virtual void dropEvent    (QDropEvent     *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent    (QDropEvent     *event) override;
 };
 
 

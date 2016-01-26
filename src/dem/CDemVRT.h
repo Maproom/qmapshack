@@ -33,9 +33,9 @@ public:
     CDemVRT(const QString& filename, CDemDraw *parent);
     virtual ~CDemVRT();
 
-    virtual void draw(IDrawContext::buffer_t& buf) override;
+    void draw(IDrawContext::buffer_t& buf) override;
 
-    virtual qreal getElevationAt(const QPointF& pos) override;
+    qreal getElevationAt(const QPointF& pos) override;
 
 private:
     QMutex mutex;

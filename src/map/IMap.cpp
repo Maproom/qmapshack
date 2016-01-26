@@ -38,7 +38,7 @@ IMap::~IMap()
     delete setup;
 }
 
-/* virtual */ void IMap::saveConfig(QSettings& cfg) /* override */
+void IMap::saveConfig(QSettings& cfg) /* override */
 {
     IDrawObject::saveConfig(cfg);
 
@@ -56,7 +56,7 @@ IMap::~IMap()
     }
 }
 
-/* virtual */ void IMap::loadConfig(QSettings& cfg) /* override */
+void IMap::loadConfig(QSettings& cfg) /* override */
 {
     IDrawObject::loadConfig(cfg);
 

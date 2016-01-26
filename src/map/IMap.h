@@ -36,9 +36,9 @@ public:
     IMap(quint32 features, CMapDraw * parent);
     virtual ~IMap();
 
-    virtual void saveConfig(QSettings& cfg) override;
+    void saveConfig(QSettings& cfg) override;
 
-    virtual void loadConfig(QSettings& cfg) override;
+    void loadConfig(QSettings& cfg) override;
 
     enum features_e
     {

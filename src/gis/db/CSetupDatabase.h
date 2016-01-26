@@ -44,7 +44,7 @@ public:
 
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 
 private slots:
     void slotNewDB();

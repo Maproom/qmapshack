@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-/* virtual */ void CPlotAxisTime::calc() /* override */
+void CPlotAxisTime::calc() /* override */
 {
     int dSec  = usedMax - usedMin;
     ticStart  = usedMin;
@@ -112,7 +112,7 @@
 }
 
 
-/* virtual */ const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t * t ) /* override */
+const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t * t ) /* override */
 {
     const tic_t * _tic_ = CPlotAxis::ticmark(t);
     if(_tic_)

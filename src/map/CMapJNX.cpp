@@ -274,7 +274,7 @@ qint32 CMapJNX::scale2level(qreal s, const file_t& file)
 }
 
 
-/* virtual */ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
+void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
 {
     if(map->needsRedraw())
     {

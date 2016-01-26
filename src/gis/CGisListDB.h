@@ -42,7 +42,7 @@ public:
     };
 
     bool hasDatabase(const QString& name);
-    virtual bool event(QEvent * e) override;
+    bool event(QEvent * e) override;
 
 signals:
     void sigChanged();

@@ -34,13 +34,13 @@ public:
     CRouterMapQuest(QWidget * parent);
     virtual ~CRouterMapQuest();
 
-    virtual void calcRoute(const IGisItem::key_t& key) override;
-    virtual int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override
+    void calcRoute(const IGisItem::key_t& key) override;
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override
     {
         return -1;
     }
 
-    virtual QString getOptions() override;
+    QString getOptions() override;
 
 private slots:
     void slotRequestFinished(QNetworkReply* reply);

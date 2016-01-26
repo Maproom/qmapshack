@@ -28,7 +28,7 @@ class CMapJNX : public IMap
 public:
     CMapJNX(const QString& filename, CMapDraw *parent);
 
-    virtual void draw(IDrawContext::buffer_t& buf) override;
+    void draw(IDrawContext::buffer_t& buf) override;
 
 private:
     QString filename;

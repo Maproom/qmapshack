@@ -32,7 +32,7 @@ public:
     CMapMAP(const QString& filename, CMapDraw *parent);
     virtual ~CMapMAP();
 
-    virtual void draw(IDrawContext::buffer_t& buf) override;
+    void draw(IDrawContext::buffer_t& buf) override;
 
 private:
     enum exce_e {eErrOpen, eErrAccess, errFormat, errAbort};

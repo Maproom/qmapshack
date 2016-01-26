@@ -38,13 +38,13 @@ public:
     CMouseNormal(CGisDraw * gis, CCanvas *canvas);
     virtual ~CMouseNormal();
 
-    virtual void draw(QPainter& p,  CCanvas::redraw_e needsRedraw,  const QRect &rect) override;
-    virtual void mousePressEvent(QMouseEvent * e) override;
-    virtual void mouseMoveEvent(QMouseEvent * e) override;
-    virtual void mouseReleaseEvent(QMouseEvent *e) override;
-    virtual void mouseDoubleClickEvent(QMouseEvent *e) override;
-    virtual void wheelEvent(QWheelEvent * e) override;
-    virtual void keyPressEvent(QKeyEvent * e) override;
+    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw,  const QRect &rect) override;
+    void mousePressEvent(QMouseEvent * e) override;
+    void mouseMoveEvent(QMouseEvent * e) override;
+    void mouseReleaseEvent(QMouseEvent *e) override;
+    void mouseDoubleClickEvent(QMouseEvent *e) override;
+    void wheelEvent(QWheelEvent * e) override;
+    void keyPressEvent(QKeyEvent * e) override;
 
 private slots:
     void slotAddWpt();

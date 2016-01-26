@@ -34,9 +34,9 @@ public:
     CDiskCache(const QString& path, qint32 size, qint32 days, QObject *parent);
     virtual ~CDiskCache();
 
-    virtual void store(const QString& key, QImage& img) override;
-    virtual void restore(const QString& key, QImage& img) override;
-    virtual bool contains(const QString& key) override;
+    void store(const QString& key, QImage& img) override;
+    void restore(const QString& key, QImage& img) override;
+    bool contains(const QString& key) override;
 
 private slots:
     void slotCleanup();

@@ -28,8 +28,8 @@ class CFitFieldDataState final : public IFitDecoderState
 public:
     CFitFieldDataState(shared_state_data_t &data) : IFitDecoderState(data, eDecoderStateFieldData) { reset(); }
     virtual ~CFitFieldDataState() {}
-    virtual void reset() override;
-    virtual decode_state_e process(quint8 &dataByte) override;
+    void reset() override;
+    decode_state_e process(quint8 &dataByte) override;
 
 private:
     quint8 fieldIndex;

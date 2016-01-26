@@ -51,7 +51,7 @@ public:
     IGisProject * getProjectByKey(const QString& key);
     CDBProject * getProjectById(quint64 id, const QString& db);
 
-    virtual bool event(QEvent * e) override;
+    bool event(QEvent * e) override;
 
     void addProject(IGisProject *proj);
 
@@ -64,8 +64,8 @@ signals:
     void sigChanged();
 
 protected:
-    virtual void dragMoveEvent(QDragMoveEvent *e) override;
-    virtual void dropEvent    (QDropEvent     *e) override;
+    void dragMoveEvent(QDragMoveEvent *e) override;
+    void dropEvent    (QDropEvent     *e) override;
 
 private slots:
     void slotSaveWorkspace();

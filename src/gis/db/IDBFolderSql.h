@@ -32,7 +32,7 @@ public:
     IDBFolderSql(QSqlDatabase& db, QTreeWidget * parent);
     virtual ~IDBFolderSql() = default;
 
-    virtual void expanding() override;
+    void expanding() override;
     void updateLostFound();
     void update(CEvtW2DAckInfo * info) override
     {

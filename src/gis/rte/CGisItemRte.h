@@ -105,23 +105,23 @@ public:
 
     IGisItem * createClone() override;
 
-    virtual QDataStream& operator<<(QDataStream& stream) override;
-    virtual QDataStream& operator>>(QDataStream& stream) const override;
+    QDataStream& operator<<(QDataStream& stream) override;
+    QDataStream& operator>>(QDataStream& stream) const override;
 
-    virtual const QString& getName() const override
+    const QString& getName() const override
     {
         return rte.name.isEmpty() ? noName : rte.name;
     }
 
-    virtual QString getInfo(bool showName = true) const override;
-    virtual IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
-    virtual QPointF getPointCloseBy(const QPoint& screenPos) override;
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
-    virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
-    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
-    virtual void drawHighlight(QPainter& p) override;
-    virtual void save(QDomNode& gpx) override;
-    virtual bool isCloseTo(const QPointF& pos) override;
+    QString getInfo(bool showName = true) const override;
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    QPointF getPointCloseBy(const QPoint& screenPos) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawHighlight(QPainter& p) override;
+    void save(QDomNode& gpx) override;
+    bool isCloseTo(const QPointF& pos) override;
     /**
        @brief Switch user focus on and off.
 
@@ -129,7 +129,7 @@ public:
 
        @param yes   set true to gain focus.
      */
-    virtual void gainUserFocus(bool yes) override;
+    void gainUserFocus(bool yes) override;
     /**
        @brief Make sure the route has lost focus.
 
@@ -142,7 +142,7 @@ public:
 
        @return True if the route has user focus
      */
-    virtual bool hasUserFocus() const override
+    bool hasUserFocus() const override
     {
         return key == keyUserFocus;
     }
@@ -157,19 +157,19 @@ public:
         return keyUserFocus;
     }
 
-    virtual void setDataFromPolyline(const SGisLine& l) override;
+    void setDataFromPolyline(const SGisLine& l) override;
 
-    virtual void getPolylineFromData(SGisLine &l) override;
+    void getPolylineFromData(SGisLine &l) override;
 
-    virtual const QString& getComment() const override
+    const QString& getComment() const override
     {
         return rte.cmt;
     }
-    virtual const QString& getDescription() const override
+    const QString& getDescription() const override
     {
         return rte.desc;
     }
-    virtual const QList<link_t>& getLinks() const override
+    const QList<link_t>& getLinks() const override
     {
         return rte.links;
     }
@@ -180,15 +180,15 @@ public:
     }
 
     void setName(const QString& str);
-    virtual void setComment(const QString& str)       override;
-    virtual void setDescription(const QString& str)   override;
-    virtual void setLinks(const QList<link_t>& links) override;
+    void setComment(const QString& str)       override;
+    void setDescription(const QString& str)   override;
+    void setLinks(const QList<link_t>& links) override;
 
     void calc();
 
     void reset();
 
-    virtual void edit() override;
+    void edit() override;
 
     QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner);
 
@@ -199,7 +199,7 @@ public:
 
 private:
     void deriveSecondaryData();
-    virtual void setSymbol() override;
+    void setSymbol() override;
     void readRte(const QDomNode& xml, rte_t& rte);
     void readRteFromFit(CFitStream &stream);
     void readRouteDataFromGisLine(const SGisLine &l);

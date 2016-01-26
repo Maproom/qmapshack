@@ -29,7 +29,7 @@ public:
 
     virtual ~CLostFoundProject();
 
-    virtual bool save() override
+    bool save() override
     {
         return false;
     }

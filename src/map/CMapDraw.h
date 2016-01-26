@@ -72,7 +72,7 @@ public:
        @brief Set projection of this draw context
        @param proj      a proj4 string
      */
-    virtual void setProjection(const QString& proj) override;
+    void setProjection(const QString& proj) override;
 
     static const QStringList& getMapPaths()
     {
@@ -121,7 +121,7 @@ public:
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
 protected:
-    virtual void drawt(buffer_t& currentBuffer) override;
+    void drawt(buffer_t& currentBuffer) override;
 
 
 private:

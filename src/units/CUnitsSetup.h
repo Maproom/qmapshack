@@ -28,7 +28,7 @@ public:
     virtual ~CUnitsSetup();
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 };
 
 #endif //CUNITSSETUP_H

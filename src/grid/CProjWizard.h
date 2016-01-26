@@ -31,7 +31,7 @@ public:
     static bool validProjStr(const QString projStr);
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
     void slotChange();
 
 private:

@@ -32,17 +32,17 @@ public:
     CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseEditArea();
 
-    virtual void mousePressEvent(QMouseEvent * e) override;
+    void mousePressEvent(QMouseEvent * e) override;
 
 protected slots:
-    virtual void slotAbort()      override;
-    virtual void slotCopyToNew()  override;
-    virtual void slotCopyToOrig() override;
+    void slotAbort()      override;
+    void slotCopyToNew()  override;
+    void slotCopyToOrig() override;
 
 protected:
-    virtual void drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p) override;
+    void drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p) override;
 
-    virtual IGisLine * getGisLine() override;
+    IGisLine * getGisLine() override;
 };
 
 #endif //CMOUSEEDITAREA_H

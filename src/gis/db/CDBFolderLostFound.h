@@ -35,7 +35,7 @@ public:
 
 
 protected:
-    virtual void setupFromDB() override;
+    void setupFromDB() override;
 };
 
 #endif //CDBFOLDERLOSTFOUND_H

@@ -35,6 +35,7 @@ public:
 
 private:
     void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
+    void createAdventureFromProject(IGisProject * project, const QString &gpxFilename);
 
     QString id;
     QString partno;
@@ -42,8 +43,9 @@ private:
     QString pathGpx           = "Garmin/GPX";
     QString pathPictures      = "Garmin/JPEG";
     QString pathSpoilers      = "Garmin/GeocachePhotos";
-    QString pathFitActivities = "Garmin/Activities";
-    QString pathFitCourses    = "Garmin/Courses";
+    QString pathActivities    = "Garmin/Activities";
+    QString pathCourses       = "Garmin/Courses";
+    QString pathAdventures; // no default
 
     int cntImages = 0;
 };

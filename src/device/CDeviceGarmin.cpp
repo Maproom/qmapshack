@@ -76,20 +76,25 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         }
         else if(name == "FIT_TYPE_4")
         {
-            pathFitActivities = xmlPath.toElement().text();
+            pathActivities = xmlPath.toElement().text();
         }
         else if(name == "FIT_TYPE_6")
         {
             // courses
-            pathFitCourses = xmlPath.toElement().text();
+            pathCourses = xmlPath.toElement().text();
+        }
+        else if(name == "Adventures")
+        {
+            pathAdventures = xmlPath.toElement().text();
         }
     }
 
     qDebug() << dir.absoluteFilePath(pathGpx);
     qDebug() << dir.absoluteFilePath(pathPictures);
     qDebug() << dir.absoluteFilePath(pathSpoilers);
-    qDebug() << dir.absoluteFilePath(pathFitActivities);
-    qDebug() << dir.absoluteFilePath(pathFitCourses);
+    qDebug() << dir.absoluteFilePath(pathActivities);
+    qDebug() << dir.absoluteFilePath(pathCourses);
+    qDebug() << dir.absoluteFilePath(pathAdventures);
 
     if(!dir.exists(pathGpx))
     {
@@ -103,13 +108,18 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     {
         dir.mkpath(pathSpoilers);
     }
+    if(!pathAdventures.isEmpty() && !dir.exists(pathAdventures))
+    {
+        dir.mkpath(pathAdventures);
+    }
+
 
     this->createProjectsFromFiles(pathGpx, "gpx");
     this->createProjectsFromFiles(pathGpx + "/Current", "gpx");
     this->createProjectsFromFiles(pathGpx + "/Archive", "gpx");
 
-    this->createProjectsFromFiles(pathFitActivities, "fit");
-    this->createProjectsFromFiles(pathFitCourses, "fit");
+    this->createProjectsFromFiles(pathActivities, "fit");
+    this->createProjectsFromFiles(pathCourses, "fit");
 }
 
 void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding)
@@ -166,6 +176,8 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
         delete gpx;
         return;
     }
+
+    createAdventureFromProject(project, pathGpx + "/" + name + ".gpx");
 }
 
 void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
@@ -321,4 +333,12 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
             dirCache.removeRecursively();
         }
     }
+
+    if(!pathAdventures.isEmpty())
+    {
+        const QDir dirAdventures(dir.absoluteFilePath(pathAdventures));
+        QString filename = dirAdventures.absoluteFilePath(key + ".adv");
+        QFile::remove(filename);
+    }
 }
+

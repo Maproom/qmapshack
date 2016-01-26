@@ -27,17 +27,17 @@ public:
     CQmsProject(const QString& filename, CGisListWks * parent);
     virtual ~CQmsProject();
 
-    virtual const QString getFileDialogFilter() const override
+    const QString getFileDialogFilter() const override
     {
         return IGisProject::filedialogFilterQMS;
     }
 
-    virtual const QString getFileExtension() const override
+    const QString getFileExtension() const override
     {
         return "qms";
     }
 
-    virtual bool canSave() const override
+    bool canSave() const override
     {
         return true;
     }

@@ -40,7 +40,7 @@ public:
 
 
 protected:
-    virtual void resizeEvent(QResizeEvent *e) override;
+    void resizeEvent(QResizeEvent *e) override;
 
 private slots:
     void slotGetPrinter();

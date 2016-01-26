@@ -39,20 +39,20 @@ public:
     CMapWMTS(const QString& filename, CMapDraw *parent);
     virtual ~CMapWMTS();
 
-    virtual void draw(IDrawContext::buffer_t& buf) override;
+    void draw(IDrawContext::buffer_t& buf) override;
 
-    virtual void getLayers(QListWidget& list) override;
+    void getLayers(QListWidget& list) override;
 
-    virtual void saveConfig(QSettings& cfg) override;
+    void saveConfig(QSettings& cfg) override;
 
-    virtual void loadConfig(QSettings& cfg) override;
+    void loadConfig(QSettings& cfg) override;
 
 
 signals:
     void sigQueueChanged();
 
 protected:
-    virtual void configureCache() override;
+    void configureCache() override;
 
 private slots:
     void slotQueueChanged();

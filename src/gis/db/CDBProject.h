@@ -42,12 +42,12 @@ public:
      */
     void restoreDBLink();
 
-    virtual bool canSave() const override
+    bool canSave() const override
     {
         return true;
     }
 
-    virtual bool save() override;
+    bool save() override;
 
     quint64 getId() const
     {
@@ -70,7 +70,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    virtual QDataStream& operator<<(QDataStream& stream) override;
+    QDataStream& operator<<(QDataStream& stream) override;
 
     /**
        @brief Serialize object into a QDataStream
@@ -80,7 +80,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    virtual QDataStream& operator>>(QDataStream& stream) override;
+    QDataStream& operator>>(QDataStream& stream) override;
 
     /**
        @brief Send a CEvtW2DAckInfo event to the database view
@@ -111,7 +111,7 @@ protected:
 
        @param defaultName
      */
-    virtual void setupName(const QString &defaultName) override;
+    void setupName(const QString &defaultName) override;
 
     /**
      * @brief Save item's data into an existing database entry

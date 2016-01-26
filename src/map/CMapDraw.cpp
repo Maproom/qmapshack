@@ -53,7 +53,7 @@ CMapDraw::~CMapDraw()
     maps.removeOne(this);
 }
 
-/* virtual */ void CMapDraw::setProjection(const QString& proj) /* override */
+void CMapDraw::setProjection(const QString& proj) /* override */
 {
     // --- save the active maps
     QStringList keys;
@@ -204,7 +204,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
     return res;
 }
 
-/* virtual */ void CMapDraw::saveConfig(QSettings& cfg) /* override */
+void CMapDraw::saveConfig(QSettings& cfg) /* override */
 {
     // store group context for later use
     cfgGroup = cfg.group();
@@ -217,7 +217,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
     cfg.endGroup();
 }
 
-/* virtual */ void CMapDraw::loadConfig(QSettings& cfg) /* override */
+void CMapDraw::loadConfig(QSettings& cfg) /* override */
 {
     // store group context for later use
     cfgGroup = cfg.group();
@@ -367,7 +367,7 @@ void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg)
     canvas->reportStatus(key, msg);
 }
 
-/* virtual */ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
+void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
 {
     // iterate over all active maps and call the draw method
     CMapItem::mutexActiveMaps.lock();

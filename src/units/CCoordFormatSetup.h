@@ -30,7 +30,7 @@ public:
     virtual ~CCoordFormatSetup();
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 };
 
 #endif //CCOORDFORMATSETUP_H

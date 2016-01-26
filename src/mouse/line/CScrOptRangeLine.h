@@ -29,7 +29,7 @@ public:
     CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget *parent);
     virtual ~CScrOptRangeLine();
 
-    virtual void draw(QPainter& p) override;
+    void draw(QPainter& p) override;
 };
 
 #endif //CSCROPTRANGELINE_H

@@ -62,10 +62,10 @@ public:
     CTinySpinBox(QWidget * parent = nullptr);
 
     void setReadOnly(bool r);
-    virtual void stepBy(int steps) override;
+    void stepBy(int steps) override;
 
 protected:
-    virtual void focusInEvent (QFocusEvent *event) override;
-    virtual void focusOutEvent(QFocusEvent *event) override;
+    void focusInEvent (QFocusEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
 };
 #endif // CTINYSPINBOX_H

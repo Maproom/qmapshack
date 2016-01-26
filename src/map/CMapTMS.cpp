@@ -175,7 +175,7 @@ CMapTMS::~CMapTMS()
 //    map->reportStatusToCanvas(name, "");
 }
 
-/* virtual */ void CMapTMS::getLayers(QListWidget& list) /* override */
+void CMapTMS::getLayers(QListWidget& list) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -197,7 +197,7 @@ CMapTMS::~CMapTMS()
 }
 
 
-/* virtual */ void CMapTMS::saveConfig(QSettings& cfg) /* override */
+void CMapTMS::saveConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -249,7 +249,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
     }
 }
 
-/* virtual */ void CMapTMS::configureCache() /* override */
+void CMapTMS::configureCache() /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -414,7 +414,7 @@ QString CMapTMS::createUrl(const layer_t& layer, int x, int y, int z)
 }
 
 
-/* virtual */ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
+void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
 {
     QMutexLocker lock(&mutex);
 

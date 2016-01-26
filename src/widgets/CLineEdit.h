@@ -60,7 +60,7 @@ public:
     void setReadOnly(bool r);
 
 protected:
-    virtual void focusInEvent (QFocusEvent *event) override;
-    virtual void focusOutEvent(QFocusEvent *event) override;
+    void focusInEvent (QFocusEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
 };
 #endif // CLINEEDIT_H

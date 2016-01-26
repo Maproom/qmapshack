@@ -31,11 +31,11 @@ public:
     CMousePrint(CGisDraw * gis, CCanvas * parent);
     virtual ~CMousePrint();
 
-    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    virtual void mousePressEvent(QMouseEvent * e) override;
-    virtual void mouseMoveEvent(QMouseEvent * e) override;
-    virtual void mouseReleaseEvent(QMouseEvent *e) override;
-    virtual void wheelEvent(QWheelEvent * e) override;
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void mousePressEvent(QMouseEvent * e) override;
+    void mouseMoveEvent(QMouseEvent * e) override;
+    void mouseReleaseEvent(QMouseEvent *e) override;
+    void wheelEvent(QWheelEvent * e) override;
 
 private:
     QPoint lastPos;

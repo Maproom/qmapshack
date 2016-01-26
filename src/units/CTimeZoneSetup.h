@@ -29,7 +29,7 @@ public:
     virtual ~CTimeZoneSetup();
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 };
 
 #endif //CTIMEZONESETUP_H

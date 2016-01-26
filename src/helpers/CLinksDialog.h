@@ -31,7 +31,7 @@ public:
     virtual ~CLinksDialog();
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 
 private slots:
     void slotAddLink();

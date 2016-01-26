@@ -28,11 +28,11 @@ public:
     CUnitMetric(QObject * parent);
     virtual ~CUnitMetric();
 
-    virtual void meter2elevation(qreal meter, QString& val, QString& unit) const override;
-    virtual void meter2distance (qreal meter, QString& val, QString& unit) const override;
-    virtual void meter2speed    (qreal meter, QString& val, QString& unit) const override;
-    virtual void meter2area     (qreal meter, QString& val, QString& unit) const override;
+    void meter2elevation(qreal meter, QString& val, QString& unit) const override;
+    void meter2distance (qreal meter, QString& val, QString& unit) const override;
+    void meter2speed    (qreal meter, QString& val, QString& unit) const override;
+    void meter2area     (qreal meter, QString& val, QString& unit) const override;
 
-    virtual qreal elevation2meter(const QString& val) const override;
+    qreal elevation2meter(const QString& val) const override;
 };
 #endif                           //CUNITMETRIC_H

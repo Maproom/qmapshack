@@ -27,12 +27,12 @@ public:
     CSlfProject(const QString &filename, bool readFile = true);
     virtual ~CSlfProject();
 
-    virtual const QString getFileDialogFilter() const override
+    const QString getFileDialogFilter() const override
     {
         return IGisProject::filedialogFilterSLF;
     }
 
-    virtual const QString getFileExtension() const override
+    const QString getFileExtension() const override
     {
         return "slf";
     }

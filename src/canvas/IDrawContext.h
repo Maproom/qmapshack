@@ -153,7 +153,7 @@ public slots:
     void emitSigCanvasUpdate();
 
 protected:
-    virtual void run() override;
+    void run() override;
     /**
        @brief The draw method called from the thread.
 

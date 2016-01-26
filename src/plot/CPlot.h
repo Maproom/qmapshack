@@ -35,9 +35,9 @@ public:
 
     void setup(const QString &source, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY);
 
-    virtual void updateData() override;
+    void updateData() override;
 
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
+    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
 
 public slots:
     void setLimits();

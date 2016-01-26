@@ -51,12 +51,12 @@ protected:
 class CAppSetupMac : public CAppSetup
 {
 public:
-    virtual void prepareGdal() override;
-    virtual QString routinoPath(QString xmlFile) override;
-    virtual void prepareTranslators(QApplication* app) override;
+    void prepareGdal() override;
+    QString routinoPath(QString xmlFile) override;
+    void prepareTranslators(QApplication* app) override;
 
 protected:
-    virtual QString logFilename() override;
+    QString logFilename() override;
     QString getResourceDir(QString subdir);
     CAppSetupMac();
 
@@ -67,8 +67,8 @@ protected:
 class CAppSetupLinux : public CAppSetup
 {
 public:
-    virtual QString routinoPath(QString xmlFile) override;
-    virtual void prepareTranslators(QApplication* app) override;
+    QString routinoPath(QString xmlFile) override;
+    void prepareTranslators(QApplication* app) override;
 
 protected:
     CAppSetupLinux();
@@ -79,10 +79,10 @@ protected:
 class CAppSetupWin : public CAppSetup
 {
 public:
-    virtual QString routinoPath(QString xmlFile)       override;
-    virtual void prepareGdal()                         override;
-    virtual void prepareTranslators(QApplication* app) override;
-    virtual void prepareConfig()                       override;
+    QString routinoPath(QString xmlFile)       override;
+    void prepareGdal()                         override;
+    void prepareTranslators(QApplication* app) override;
+    void prepareConfig()                       override;
 
 protected:
     CAppSetupWin();

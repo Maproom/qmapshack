@@ -33,7 +33,7 @@ public:
     virtual ~CCreateRouteFromWpt();
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 
 private slots:
     void slotSelectionChanged();

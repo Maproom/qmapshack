@@ -30,7 +30,7 @@ public:
     CScrOptRangeTrk(const QPointF& point, CGisItemTrk *trk, IMouse *mouse, QWidget * parent = 0);
     virtual ~CScrOptRangeTrk();
 
-    virtual void draw(QPainter& p) override;
+    void draw(QPainter& p) override;
 };
 
 #endif //CSCROPTRANGETRK_H

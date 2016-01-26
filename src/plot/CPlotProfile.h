@@ -33,8 +33,8 @@ public:
     virtual ~CPlotProfile();
 
     void setTrack(CGisItemTrk * track, CLimit& lim);
-    virtual void updateData() override;
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
+    void updateData() override;
+    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
 
 public slots:
     void setLimits();

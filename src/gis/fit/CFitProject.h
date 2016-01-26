@@ -32,17 +32,17 @@ public:
     virtual ~CFitProject();
 
 
-    virtual const QString getFileDialogFilter() const override
+    const QString getFileDialogFilter() const override
     {
         return IGisProject::filedialogFilterFIT;
     }
 
-    virtual const QString getFileExtension() const override
+    const QString getFileExtension() const override
     {
         return "fit";
     }
 
-    virtual bool canSave() const override
+    bool canSave() const override
     {
         return false;
     }

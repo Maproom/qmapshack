@@ -147,6 +147,6 @@ void CMapMAP::readBasics()
     // ---------- end file header ----------------------
 }
 
-/* virtual */ void CMapMAP::draw(IDrawContext::buffer_t& buf) /* override */
+void CMapMAP::draw(IDrawContext::buffer_t& buf) /* override */
 {
 }

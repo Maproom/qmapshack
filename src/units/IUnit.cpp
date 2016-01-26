@@ -473,13 +473,13 @@ void IUnit::setUnitType(type_e t, QObject * parent)
     cfg.setValue("Units/type",t);
 }
 
-/* virtual */ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
+void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
 {
     val.sprintf("%2.2f",meter * speedfactor);
     unit = speedunit;
 }
 
-/* virtual */ void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const
+void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const
 {
     QTime time(0,0,0);
     quint32 days  = ttime / 86400;

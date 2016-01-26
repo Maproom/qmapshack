@@ -31,7 +31,7 @@ public:
     virtual ~CSetupFolder();
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 
 private slots:
     void slotNameChanged(const QString& text);

@@ -34,7 +34,7 @@ public:
     static bool getPosition(QPointF& pt, const QString &str);
 
 public slots:
-    virtual void accept() override;
+    void accept() override;
 
 private slots:
     void slotEdit(const QString& str);

@@ -32,16 +32,16 @@ public:
     CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseEditRte();
 
-    virtual void mousePressEvent(QMouseEvent * e) override;
+    void mousePressEvent(QMouseEvent * e) override;
 
 protected slots:
-    virtual void slotAbort()      override;
-    virtual void slotCopyToNew()  override;
-    virtual void slotCopyToOrig() override;
+    void slotAbort()      override;
+    void slotCopyToNew()  override;
+    void slotCopyToOrig() override;
 
 
 protected:
-    virtual IGisLine* getGisLine() override;
+    IGisLine* getGisLine() override;
 };
 
 #endif //CMOUSEEDITRTE_H

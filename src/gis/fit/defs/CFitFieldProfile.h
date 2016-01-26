@@ -75,9 +75,9 @@ public:
                         quint8 subRefFieldDefNr, quint8 subRefFieldValue);
     CFitSubfieldProfile(const CFitSubfieldProfile& copy);
     CFitSubfieldProfile() : CFitFieldProfile(), refFieldDefNr(0), refFieldValue(0) {}
-    virtual ~CFitSubfieldProfile() {};
+    virtual ~CFitSubfieldProfile() {}
 
-    virtual QString getTyp() const override { return "dynamic"; }
+    QString getTyp() const override { return "dynamic"; }
     quint8 getReferencedFieldDefNr() const;
     quint8 getReferencedFieldValue() const;
 
@@ -92,13 +92,13 @@ public:
     CFitComponentfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits);
     CFitComponentfieldProfile(const CFitComponentfieldProfile& copy);
     CFitComponentfieldProfile() : CFitFieldProfile(), nrOfBits(0), componentFieldDefNr(0) {}
-    virtual ~CFitComponentfieldProfile() {};
+    virtual ~CFitComponentfieldProfile() {}
 
-    virtual QString getName() const override;
-    virtual quint8 getFieldDefNum() const override;
-    virtual const CFitBaseType& getBaseType() const override;
+    QString getName() const override;
+    quint8 getFieldDefNum() const override;
+    const CFitBaseType& getBaseType() const override;
 
-    virtual QString getTyp() const override { return "component"; }
+    QString getTyp() const override { return "component"; }
     quint8 getBits() const;
     quint32 getBitmask() const;
 

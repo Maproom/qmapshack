@@ -32,7 +32,7 @@ public:
     CMapVRT(const QString& filename, CMapDraw *parent);
     virtual ~CMapVRT();
 
-    virtual void draw(IDrawContext::buffer_t& buf) override;
+    void draw(IDrawContext::buffer_t& buf) override;
 
 
 

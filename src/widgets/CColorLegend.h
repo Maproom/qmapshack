@@ -36,15 +36,15 @@ public:
 
     void setUnit(const QString &unit);
 
-    virtual void updateData() override;
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t *pt) override;
-    virtual void setMouseRangeFocus(const CGisItemTrk::trkpt_t *pt1, const CGisItemTrk::trkpt_t *pt2) override {}
-    virtual void setMouseClickFocus(const CGisItemTrk::trkpt_t *pt) override {}
+    void updateData() override;
+    void setMouseFocus(const CGisItemTrk::trkpt_t *pt) override;
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t *pt1, const CGisItemTrk::trkpt_t *pt2) override {}
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t *pt) override {}
 
 
 protected:
-    virtual void paintEvent (QPaintEvent  *event) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
+    void paintEvent (QPaintEvent  *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     int paintLabel(QPainter &p, qreal value);

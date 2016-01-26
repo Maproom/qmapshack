@@ -49,7 +49,7 @@ public:
     void enableCancel(bool yes);
 
 public slots:
-    virtual void reject() override;
+    void reject() override;
 
 private:
     QTime time;

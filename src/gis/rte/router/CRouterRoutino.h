@@ -34,12 +34,12 @@ public:
     CRouterRoutino(QWidget * parent);
     virtual ~CRouterRoutino();
 
-    virtual void calcRoute(const IGisItem::key_t& key) override;
-    virtual int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override;
+    void calcRoute(const IGisItem::key_t& key) override;
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override;
 
-    virtual bool hasFastRouting() override;
+    bool hasFastRouting() override;
 
-    virtual QString getOptions() override;
+    QString getOptions() override;
 
     static QPointer<CProgressDialog> progress;
 

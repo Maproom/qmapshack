@@ -172,9 +172,9 @@ public:
     void setElevation(qint32 val);
     void setProximity(qreal val);
     void setIcon(const QString& name);
-    void setComment    (const QString& str)         override;
+    void setComment(const QString& str)         override;
     void setDescription(const QString& str)         override;
-    void setLinks      (const QList<link_t>& links) override;
+    void setLinks(const QList<link_t>& links) override;
     void setImages(const QList<image_t>& imgs);
 
     /**

@@ -152,16 +152,16 @@ public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
 
 protected:
-    void resizeEvent          (QResizeEvent *e) override;
-    void paintEvent           (QPaintEvent  *e) override;
-    void mousePressEvent      (QMouseEvent  *e) override;
-    void mouseMoveEvent       (QMouseEvent  *e) override;
-    void mouseReleaseEvent    (QMouseEvent  *e) override;
+    void resizeEvent(QResizeEvent *e) override;
+    void paintEvent(QPaintEvent  *e) override;
+    void mousePressEvent(QMouseEvent  *e) override;
+    void mouseMoveEvent(QMouseEvent  *e) override;
+    void mouseReleaseEvent(QMouseEvent  *e) override;
     void mouseDoubleClickEvent(QMouseEvent  *e) override;
-    void wheelEvent           (QWheelEvent  *e) override;
-    void enterEvent           (QEvent       *e) override;
-    void leaveEvent           (QEvent       *e) override;
-    void keyPressEvent        (QKeyEvent    *e) override;
+    void wheelEvent(QWheelEvent  *e) override;
+    void enterEvent(QEvent       *e) override;
+    void leaveEvent(QEvent       *e) override;
+    void keyPressEvent(QKeyEvent    *e) override;
 
 
 private slots:

@@ -35,7 +35,7 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *e) override;
-    void paintEvent (QPaintEvent  *e) override;
+    void paintEvent(QPaintEvent  *e) override;
 
 private:
 

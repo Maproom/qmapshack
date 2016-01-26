@@ -30,7 +30,7 @@ public:
     void mousePressEventEx(QMouseEvent *e) override
     {
     }
-    void mouseMoveEventEx   (QMouseEvent *e) override;
+    void mouseMoveEventEx(QMouseEvent *e) override;
     void mouseReleaseEventEx(QMouseEvent *e) override;
 
     void drawFg(QPainter& p) override;

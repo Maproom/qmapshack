@@ -35,8 +35,8 @@ public:
 private:
     CSlfReader(const QString &filename, CSlfProject *proj);
 
-    void readMarkers (const QDomNode& xml);
-    void readEntries (const QDomNode& xml);
+    void readMarkers(const QDomNode& xml);
+    void readEntries(const QDomNode& xml);
     void readMetadata(const QDomNode& xml, IGisProject::metadata_t& metadata);
 
     CSlfProject* getProject();

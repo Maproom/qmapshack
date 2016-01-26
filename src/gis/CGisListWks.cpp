@@ -329,7 +329,7 @@ void CGisListWks::setExternalMenu(QMenu * project)
     connect(CMainWindow::self().findChild<QAction*>("actionSearchGoogle"),     &QAction::triggered, this, &CGisListWks::slotSearchGoogle);
 }
 
-void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
+void CGisListWks::dragMoveEvent(QDragMoveEvent  * e )
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
@@ -477,7 +477,7 @@ void CGisListWks::dragMoveEvent (QDragMoveEvent  * e )
     QTreeWidget::dragMoveEvent(e);
 }
 
-void CGisListWks::dropEvent ( QDropEvent  * e )
+void CGisListWks::dropEvent( QDropEvent  * e )
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 

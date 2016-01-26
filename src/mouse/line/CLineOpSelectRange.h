@@ -32,8 +32,8 @@ public:
     CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpSelectRange();
 
-    void mousePressEventEx  (QMouseEvent *e) override;
-    void mouseMoveEventEx   (QMouseEvent *e) override;
+    void mousePressEventEx(QMouseEvent *e) override;
+    void mouseMoveEventEx(QMouseEvent *e) override;
     void mouseReleaseEventEx(QMouseEvent *e) override
     {
     }

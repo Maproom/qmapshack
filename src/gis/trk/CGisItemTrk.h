@@ -354,9 +354,9 @@ public:
     void setColor(int idx);
     /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
-    void setComment         (const QString& str)         override;
-    void setDescription     (const QString& str)         override;
-    void setLinks           (const QList<link_t>& links) override;
+    void setComment(const QString& str)         override;
+    void setDescription(const QString& str)         override;
+    void setLinks(const QList<link_t>& links) override;
     void setDataFromPolyline(const SGisLine &l)          override;
 
     /**

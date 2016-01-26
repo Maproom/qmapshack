@@ -44,7 +44,7 @@ void CMapTreeWidget::dragMoveEvent(QDragMoveEvent  * e)
     }
 }
 
-void CMapTreeWidget::dropEvent (QDropEvent  * e)
+void CMapTreeWidget::dropEvent(QDropEvent  * e)
 {
     CMapItem * item = dynamic_cast<CMapItem*>(currentItem());
     if(item)

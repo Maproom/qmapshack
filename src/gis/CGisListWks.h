@@ -65,7 +65,7 @@ signals:
 
 protected:
     void dragMoveEvent(QDragMoveEvent *e) override;
-    void dropEvent    (QDropEvent     *e) override;
+    void dropEvent(QDropEvent     *e) override;
 
 private slots:
     void slotSaveWorkspace();

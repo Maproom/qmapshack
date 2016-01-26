@@ -38,8 +38,8 @@ signals:
 
 protected:
     void dragEnterEvent(QDragEnterEvent *e) override;
-    void dragMoveEvent (QDragMoveEvent  *e) override;
-    void dropEvent     (QDropEvent      *e) override;
+    void dragMoveEvent(QDragMoveEvent  *e) override;
+    void dropEvent(QDropEvent      *e) override;
 };
 
 #include "ui_IMapList.h"

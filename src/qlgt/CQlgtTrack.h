@@ -47,11 +47,11 @@ public:
         }
         flags = f;
     }
-    quint32 operator  & (quint32 f) const
+    quint32 operator  &(quint32 f) const
     {
         return flags&f;
     }
-    quint32 operator |= (quint32 f)
+    quint32 operator |=(quint32 f)
     {
         if ( flags != (flags|f) )
         {
@@ -60,7 +60,7 @@ public:
         flags|=f;
         return flags;
     }
-    quint32 operator &= (quint32 f)
+    quint32 operator &=(quint32 f)
     {
         if ( flags != (flags&f) )
         {
@@ -69,7 +69,7 @@ public:
         flags&=f;
         return flags;
     }
-    quint32 operator >> (quint32 & f)
+    quint32 operator >>(quint32 & f)
     {
         if ( flags != f )
         {

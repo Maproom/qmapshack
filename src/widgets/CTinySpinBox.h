@@ -65,7 +65,7 @@ public:
     void stepBy(int steps) override;
 
 protected:
-    void focusInEvent (QFocusEvent *event) override;
+    void focusInEvent(QFocusEvent *event) override;
     void focusOutEvent(QFocusEvent *event) override;
 };
 #endif // CTINYSPINBOX_H

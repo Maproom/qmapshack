@@ -45,9 +45,9 @@ public:
     };
 
     virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) = 0;
-    virtual void mousePressEvent      (QMouseEvent *e) = 0;
-    virtual void mouseMoveEvent       (QMouseEvent *e) = 0;
-    virtual void mouseReleaseEvent    (QMouseEvent *e) = 0;
+    virtual void mousePressEvent(QMouseEvent *e) = 0;
+    virtual void mouseMoveEvent(QMouseEvent *e) = 0;
+    virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
     virtual void mouseDoubleClickEvent(QMouseEvent *e)
     {
     }

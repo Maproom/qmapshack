@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-void CDemTreeWidget::dragMoveEvent ( QDragMoveEvent  * event )
+void CDemTreeWidget::dragMoveEvent( QDragMoveEvent  * event )
 {
     CDemItem * item = dynamic_cast<CDemItem*>(itemAt(event->pos()));
 
@@ -38,7 +38,7 @@ void CDemTreeWidget::dragMoveEvent ( QDragMoveEvent  * event )
     }
 }
 
-void CDemTreeWidget::dropEvent ( QDropEvent  * event )
+void CDemTreeWidget::dropEvent( QDropEvent  * event )
 {
     CDemItem * item = dynamic_cast<CDemItem*>(currentItem());
     if(item)

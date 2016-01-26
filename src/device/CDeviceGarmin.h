@@ -27,14 +27,15 @@ public:
     CDeviceGarmin(const QString &path, const QString &key, const QString& model, QTreeWidget * parent);
     virtual ~CDeviceGarmin();
 
-    virtual void insertCopyOfProject(IGisProject *project)  override;
-    virtual void startSavingProject(IGisProject *project)   override;
-    virtual void saveImages(CGisItemWpt& wpt)               override;
-    virtual void loadImages(CGisItemWpt& wpt)               override;
-    virtual void aboutToRemoveProject(IGisProject *project) override;
+    void insertCopyOfProject(IGisProject *project)  override;
+    void startSavingProject(IGisProject *project)   override;
+    void saveImages(CGisItemWpt& wpt)               override;
+    void loadImages(CGisItemWpt& wpt)               override;
+    void aboutToRemoveProject(IGisProject *project) override;
 
 private:
     void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
+    void createAdventureFromProject(IGisProject * project, const QString &gpxFilename);
 
     QString id;
     QString partno;
@@ -42,8 +43,9 @@ private:
     QString pathGpx           = "Garmin/GPX";
     QString pathPictures      = "Garmin/JPEG";
     QString pathSpoilers      = "Garmin/GeocachePhotos";
-    QString pathFitActivities = "Garmin/Activities";
-    QString pathFitCourses    = "Garmin/Courses";
+    QString pathActivities    = "Garmin/Activities";
+    QString pathCourses       = "Garmin/Courses";
+    QString pathAdventures; // no default
 
     int cntImages = 0;
 };

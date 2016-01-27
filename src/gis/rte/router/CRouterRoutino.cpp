@@ -158,7 +158,7 @@ QString CRouterRoutino::xlateRoutinoError(int err)
         return tr("The requested translation language does not exist in the loaded XML file.");
 
     case ROUTINO_ERROR_NO_NEARBY_HIGHWAY:
-        return tr("There is no highway near the coordinates to place a waypoint.");
+        return tr("In the routing database there is no highway near the coordinates to place a waypoint.");
 
     case ROUTINO_ERROR_PROFILE_DATABASE_ERR:
         return tr("The profile and database do not work together.");

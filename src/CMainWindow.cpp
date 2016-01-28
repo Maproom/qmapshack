@@ -513,20 +513,26 @@ void CMainWindow::slotTabCloseRequest(int i)
     delete tabWidget->widget(i);
 }
 
+static inline bool compareNames(QString s1, QString s2)
+{
+    return s1.replace("&", "") == s2.replace("&", "");
+}
+
 void CMainWindow::slotCurrentTabCanvas(int i)
 {
     QString name = tabWidget->tabText(i);
     for(int n = 0; n < tabMaps->count(); n++)
     {
-        if(tabMaps->tabText(n) == name)
+        if(compareNames(name, tabMaps->tabText(n)))
         {
             tabMaps->setCurrentIndex(n);
             break;
         }
     }
+
     for(int n = 0; n < tabDem->count(); n++)
     {
-        if(tabDem->tabText(n) == name)
+        if(compareNames(name, tabDem->tabText(n)))
         {
             tabDem->setCurrentIndex(n);
             break;
@@ -556,15 +562,16 @@ void CMainWindow::slotCurrentTabMaps(int i)
     QString name = tabMaps->tabText(i);
     for(int n = 0; n < tabWidget->count(); n++)
     {
-        if(tabWidget->tabText(n) == name)
+        if(compareNames(name, tabWidget->tabText(n)))
         {
             tabWidget->setCurrentIndex(n);
             break;
         }
     }
+
     for(int n = 0; n < tabDem->count(); n++)
     {
-        if(tabDem->tabText(n) == name)
+        if(compareNames(name, tabDem->tabText(n)))
         {
             tabDem->setCurrentIndex(n);
             break;
@@ -577,15 +584,16 @@ void CMainWindow::slotCurrentTabDem(int i)
     QString name = tabMaps->tabText(i);
     for(int n = 0; n < tabWidget->count(); n++)
     {
-        if(tabWidget->tabText(n) == name)
+        if(compareNames(name, tabWidget->tabText(n)))
         {
             tabWidget->setCurrentIndex(n);
             break;
         }
     }
+
     for(int n = 0; n < tabMaps->count(); n++)
     {
-        if(tabMaps->tabText(n) == name)
+        if(compareNames(name, tabMaps->tabText(n)))
         {
             tabMaps->setCurrentIndex(n);
             break;

@@ -109,11 +109,6 @@ void ILineOp::drawLeadLine(const QPolygonF& line, QPainter& p)
 
 void ILineOp::mousePressEvent(QMouseEvent * e)
 {
-    if(!mousePressMutex.tryLock())
-    {
-        return;
-    }
-
     if(idxFocus != NOIDX)
     {
         mousePressEventEx(e);
@@ -129,7 +124,6 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
             mapDidMove  = false;
         }
     }
-    mousePressMutex.unlock();
 }
 
 void ILineOp::mouseMoveEvent(QMouseEvent * e)

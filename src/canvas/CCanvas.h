@@ -216,6 +216,8 @@ private:
 
     QLabel * labelStatusMessages;
     QMap<QString, QString> statusMessages;
+
+    QMutex mousePressMutex;
 };
 
 #endif //CCANVAS_H

@@ -392,9 +392,16 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
 void CCanvas::mousePressEvent(QMouseEvent * e)
 {
+    if(!mousePressMutex.tryLock())
+    {
+        return;
+    }
+
     mouse->mousePressEvent(e);
     QWidget::mousePressEvent(e);
     e->accept();
+
+    mousePressMutex.unlock();
 }
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)

@@ -36,6 +36,8 @@ private slots:
 
 private:
     CGisItemTrk& trk;
+
+    void updateExtensions();
 };
 
 #endif //CFILTERDELETEEXTENSION_H

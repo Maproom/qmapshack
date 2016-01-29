@@ -129,8 +129,6 @@ protected:
 
 private:
     QTimer * timerRouting;
-
-    QMutex mousePressMutex;
 };
 
 #endif //ILINEOP_H

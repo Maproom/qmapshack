@@ -29,7 +29,17 @@ CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk &trk, QWidget *parent
 {
     setupUi(this);
 
-    updateExtensions();
+    foreach(const QString &key, trk.getExistingDataSources())
+    {
+        const CKnownExtension &ext = CKnownExtension::get(key);
+        if(!ext.derivedQMS)
+        {
+            QIcon icon(ext.icon);
+            comboExtensions->addItem(icon, ext.known ? ext.name : key, key);
+        }
+    }
+    checkEmptyComboExtensions();
+
     connect(toolApply, &QToolButton::clicked, this, &CFilterDeleteExtension::slotApply);
 }
 
@@ -40,28 +50,17 @@ CFilterDeleteExtension::~CFilterDeleteExtension()
 void CFilterDeleteExtension::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterDeleteExtension");
-    trk.filterDeleteExtension(comboExtensions->itemData(comboExtensions->currentIndex()).toString());
-    updateExtensions();
+    int idx = comboExtensions->currentIndex();
+
+    trk.filterDeleteExtension(comboExtensions->itemData(idx).toString());
+    comboExtensions->removeItem(idx);
+
+    checkEmptyComboExtensions();
     CCanvas::restoreOverrideCursor("CFilterDeleteExtension");
 }
 
-void CFilterDeleteExtension::updateExtensions()
+void CFilterDeleteExtension::checkEmptyComboExtensions()
 {
-    while(0 < comboExtensions->count())
-    {
-        comboExtensions->removeItem(0);
-    }
-
-    foreach(const QString &key, trk.getExistingDataSources())
-    {
-        const CKnownExtension &ext = CKnownExtension::get(key);
-        if(!ext.derivedQMS)
-        {
-            QIcon icon(ext.icon);
-            comboExtensions->addItem(icon, ext.known ? ext.name : key, key);
-        }
-    }
-
     bool enabled = (0 != comboExtensions->count());
     toolApply->setEnabled(enabled);
     comboExtensions->setEnabled(enabled);

@@ -444,7 +444,7 @@ QString CGisItemTrk::getInfoRange()
 {
     qreal tmp, d, slope1, slope2;
     QString str, val, unit;
-    if(mouseRange1 == 0 || mouseRange2 == 0)
+    if(mouseRange1 == nullptr || mouseRange2 == nullptr)
     {
         return str;
     }
@@ -481,8 +481,8 @@ QString CGisItemTrk::getInfoRange()
         pt2--;
     }
 
-    bool timeIsValid    = pt1->time.isValid() && pt2->time.isValid();
-    qreal deltaTime     = pt2->time.toTime_t() - pt1->time.toTime_t();
+    bool timeIsValid = pt1->time.isValid() && pt2->time.isValid();
+    qreal deltaTime  = pt2->time.toTime_t() - pt1->time.toTime_t();
 
     d = tmp = pt2->distance - pt1->distance;
 
@@ -753,10 +753,10 @@ static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
 void CGisItemTrk::updateExtremaAndExtensions()
 {
     extrema = QHash<QString, limits_t>();
-    limits_t extremaSpeed = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaEle   = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaProgress= { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaSpeed    = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaSlope    = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaEle      = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaProgress = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
 
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
@@ -819,7 +819,6 @@ void CGisItemTrk::updateExtremaAndExtensions()
         extrema[CKnownExtension::internalProgress] = extremaProgress;
     }
 
-
     existingExtensions.subtract(nonRealExtensions);
 }
 
@@ -842,27 +841,27 @@ void CGisItemTrk::deriveSecondaryData()
     qreal west  =  180;
 
     // reset all secondary data
-    cntTotalPoints          = 0;
-    cntVisiblePoints        = 0;
-    timeStart               = QDateTime();
-    timeEnd                 = QDateTime();
-    totalDistance           = NOFLOAT;
-    totalAscend             = NOFLOAT;
-    totalDescend            = NOFLOAT;
-    totalElapsedSeconds     = NOTIME;
+    cntTotalPoints            = 0;
+    cntVisiblePoints          = 0;
+    timeStart                 = QDateTime();
+    timeEnd                   = QDateTime();
+    totalDistance             = NOFLOAT;
+    totalAscend               = NOFLOAT;
+    totalDescend              = NOFLOAT;
+    totalElapsedSeconds       = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
 
 
     // remove empty segments
-    QVector<trkseg_t>::iterator i = trk.segs.begin();
-    while(i != trk.segs.end())
+    QVector<trkseg_t>::iterator it = trk.segs.begin();
+    while(it != trk.segs.end())
     {
-        if((*i).pts.isEmpty())
+        if(it->pts.isEmpty())
         {
-            i = trk.segs.erase(i);
-            continue;
+            it = trk.segs.erase(it);
+        } else {
+            ++it;
         }
-        i++;
     }
 
     // no segments -> no data -> nothing to do
@@ -1724,7 +1723,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
     }
 
-    if(colorSource.isEmpty())
+    if(getColorizeSource().isEmpty())
     {
         // use the track's ordinary color
         penForeground.setColor(color);
@@ -1743,7 +1742,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemTrk::drawColorized(QPainter &p)
 {
-    auto valueFunc = CKnownExtension::get(colorSource).valueFunc;
+    auto valueFunc = CKnownExtension::get(getColorizeSource()).valueFunc;
 
     QImage colors(1, 256, QImage::Format_RGB888);
     QPainter colorsPainter(&colors);
@@ -1755,7 +1754,7 @@ void CGisItemTrk::drawColorized(QPainter &p)
     colorsGradient.setColorAt(0.00, QColor(255,   0,   0)); // red
     colorsPainter.fillRect(colors.rect(), colorsGradient);
 
-    const qreal factor = CKnownExtension::get(colorSource).factor;
+    const qreal factor = CKnownExtension::get(getColorizeSource()).factor;
 
     foreach(const trkseg_t &segment, trk.segs)
     {
@@ -1774,7 +1773,7 @@ void CGisItemTrk::drawColorized(QPainter &p)
                 continue;
             }
 
-            float colorAt = ( factor * valueFunc(pt) - limitLow ) / (limitHigh - limitLow);
+            float colorAt = ( factor * valueFunc(pt) - getColorizeLimitLow() ) / (getColorizeLimitHigh() - getColorizeLimitLow());
             if(colorAt > 1.f)
             {
                 colorAt = 1.f;
@@ -1877,45 +1876,35 @@ QStringList CGisItemTrk::getExistingDataSources() const
 
 void CGisItemTrk::setColorizeSource(QString src)
 {
-    if(src != colorSource)
+    if(src != getColorizeSource())
     {
-        colorSource = src;
-
-        const CKnownExtension ext = CKnownExtension::get(src);
-        if(ext.known)
-        {
-            limitLow    = ext.defLimitLow;
-            limitHigh   = ext.defLimitHigh;
-        }
-        else
-        {
-            limitLow    = getMin(src);
-            limitHigh   = getMax(src);
-
-            if(limitHigh - limitLow < 0.1)
-            {
-                limitHigh = limitLow + 0.1;
-            }
-        }
+        colorSourceLimit.setSource(src);
         updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
 void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
-    limitLow = limit;
+    colorSourceLimit.setMin(limit);
     updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
-    limitHigh = limit;
+    colorSourceLimit.setMax(limit);
+    updateHistory(eVisualColorLegend|eVisualDetails);
+}
+
+void CGisItemTrk::setColorizeLimits(qreal low, qreal high)
+{
+    colorSourceLimit.setMin(low);
+    colorSourceLimit.setMax(high);
     updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
 const QString CGisItemTrk::getColorizeUnit() const
 {
-    return CKnownExtension::get(colorSource).unit;
+    return CKnownExtension::get(getColorizeSource()).unit;
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)

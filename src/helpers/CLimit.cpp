@@ -55,11 +55,9 @@ void CLimit::setMode(mode_e m)
 
 void CLimit::setSource(const QString& src)
 {
-    bool markAsChanged = !source.isEmpty() && (source != src);
-
-    source  = src;
-    if(markAsChanged)
+    if(source != src)
     {
+        source  = src;
         minUser = funcGetMin(source);
         maxUser = funcGetMax(source);
         funcMarkChanged();

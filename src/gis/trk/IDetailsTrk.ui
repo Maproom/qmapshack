@@ -338,7 +338,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -389,7 +389,7 @@
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>60</width>
+                 <width>100</width>
                  <height>100</height>
                 </size>
                </property>
@@ -686,17 +686,16 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QToolButton" name="toolStyleLimitMax">
+                  <widget class="QToolButton" name="toolLimitUsrStyle">
                    <property name="toolTip">
-                    <string>Take maximum from data
-</string>
+                    <string>User defined limits for this track</string>
                    </property>
                    <property name="text">
                     <string>...</string>
                    </property>
                    <property name="icon">
                     <iconset resource="../../resources.qrc">
-                     <normaloff>:/icons/32x32/LimitMax.png</normaloff>:/icons/32x32/LimitMax.png</iconset>
+                     <normaloff>:/icons/32x32/LimitUsr.png</normaloff>:/icons/32x32/LimitUsr.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -704,10 +703,71 @@
                      <height>16</height>
                     </size>
                    </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
                   </widget>
                  </item>
                  <item>
-                  <spacer name="horizontalSpacer_7">
+                  <widget class="QToolButton" name="toolLimitAutoStyle">
+                   <property name="toolTip">
+                    <string>Automatic limits</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/Limit.png</normaloff>:/icons/32x32/Limit.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolLimitSysStyle">
+                   <property name="toolTip">
+                    <string>User defined limits for all tracks</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/LimitSys.png</normaloff>:/icons/32x32/LimitSys.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_9">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -726,39 +786,6 @@
                  <property name="spacing">
                   <number>0</number>
                  </property>
-                 <item>
-                  <widget class="QToolButton" name="toolStyleLimitMin">
-                   <property name="toolTip">
-                    <string>Take minimum from data</string>
-                   </property>
-                   <property name="text">
-                    <string>...</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="../../resources.qrc">
-                     <normaloff>:/icons/32x32/LimitMin.png</normaloff>:/icons/32x32/LimitMin.png</iconset>
-                   </property>
-                   <property name="iconSize">
-                    <size>
-                     <width>16</width>
-                     <height>16</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_8">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
                 </layout>
                </item>
                <item row="6" column="0" colspan="2">
@@ -1568,10 +1595,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupArrow"/>
-  <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph3"/>
  </buttongroups>
 </ui>

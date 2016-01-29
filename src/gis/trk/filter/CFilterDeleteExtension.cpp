@@ -40,7 +40,6 @@ CFilterDeleteExtension::~CFilterDeleteExtension()
 
 void CFilterDeleteExtension::update()
 {
-    qDebug() << "Clearing";
     comboExtensions->clear();
 
     foreach(const QString &key, trk.getExistingDataSources())
@@ -49,29 +48,10 @@ void CFilterDeleteExtension::update()
         if(!ext.derivedQMS)
         {
             QIcon icon(ext.icon);
-            qDebug() << "Adding `" << (ext.known ? ext.name : key) << "`";
             comboExtensions->addItem(icon, ext.known ? ext.name : key, key);
-            qDebug() << " -> Count: " << comboExtensions->count();
         }
     }
-    checkEmptyComboExtensions();
-    qDebug() << "Done, Count: " << comboExtensions->count();
-}
 
-void CFilterDeleteExtension::slotApply()
-{
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterDeleteExtension");
-    int idx = comboExtensions->currentIndex();
-
-    trk.filterDeleteExtension(comboExtensions->itemData(idx).toString());
-    comboExtensions->removeItem(idx);
-
-    checkEmptyComboExtensions();
-    CCanvas::restoreOverrideCursor("CFilterDeleteExtension");
-}
-
-void CFilterDeleteExtension::checkEmptyComboExtensions()
-{
     bool enabled = (0 != comboExtensions->count());
     toolApply->setEnabled(enabled);
     comboExtensions->setEnabled(enabled);
@@ -81,3 +61,14 @@ void CFilterDeleteExtension::checkEmptyComboExtensions()
         comboExtensions->addItem(tr("No extension available"), "");
     }
 }
+
+void CFilterDeleteExtension::slotApply()
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterDeleteExtension");
+
+    int idx = comboExtensions->currentIndex();
+    trk.filterDeleteExtension(comboExtensions->itemData(idx).toString());
+
+    CCanvas::restoreOverrideCursor("CFilterDeleteExtension");
+}
+

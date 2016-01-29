@@ -547,13 +547,13 @@ void CDetailsTrk::updateData()
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
+    X_____________UnBlockAllSignals_____________X(this);
+
     CFilterDeleteExtension *filter = treeFilter->findChild<CFilterDeleteExtension*>();
     if(nullptr != filter)
     {
         filter->update();
     }
-
-    X_____________UnBlockAllSignals_____________X(this);
 
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");

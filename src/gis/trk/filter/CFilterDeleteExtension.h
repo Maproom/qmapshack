@@ -38,8 +38,6 @@ private slots:
 
 private:
     CGisItemTrk& trk;
-
-    void checkEmptyComboExtensions();
 };
 
 #endif //CFILTERDELETEEXTENSION_H

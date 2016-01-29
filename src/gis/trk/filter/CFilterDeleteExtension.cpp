@@ -37,6 +37,13 @@ CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk &trk, QWidget *parent
         }
     }
 
+    if(0 == comboExtensions->count())
+    {
+        toolApply->setEnabled(false);
+        comboExtensions->setEnabled(false);
+        comboExtensions->addItem(tr("No extension available"), "");
+    }
+
     connect(toolApply, &QToolButton::clicked, this, &CFilterDeleteExtension::slotApply);
 }
 

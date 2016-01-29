@@ -31,6 +31,8 @@ public:
     CFilterDeleteExtension(CGisItemTrk& trk, QWidget * parent);
     virtual ~CFilterDeleteExtension();
 
+    void update();
+
 private slots:
     void slotApply();
 

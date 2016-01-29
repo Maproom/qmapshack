@@ -547,6 +547,12 @@ void CDetailsTrk::updateData()
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
+    CFilterDeleteExtension *filter = treeFilter->findChild<CFilterDeleteExtension*>();
+    if(nullptr != filter)
+    {
+        filter->update();
+    }
+
     X_____________UnBlockAllSignals_____________X(this);
 
     originator = false;

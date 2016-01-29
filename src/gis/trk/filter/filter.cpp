@@ -437,5 +437,5 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
     propHandler->setupData();
 
     const CKnownExtension &ext = CKnownExtension::get(extStr);
-    changed(QObject::tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/PointHide.png");
+    changed(QObject::tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/FilterModifyExtension.png");
 }

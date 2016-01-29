@@ -20,6 +20,7 @@
 #include "GeoMath.h"
 #include "gis/CGisWidget.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
 
 #include <QtMath>
 #include <proj_api.h>
@@ -397,7 +398,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
 void CGisItemTrk::filterSplitSegment()
 {
     IGisProject * project = CGisWidget::self().selectProject();
-    if(0 == project)
+    if(nullptr == project)
     {
         return;
     }
@@ -416,3 +417,20 @@ void CGisItemTrk::filterSplitSegment()
     }
 }
 
+void CGisItemTrk::filterDeleteExtension(const QString &extStr)
+{
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            seg.pts[n].extensions.remove(extStr);
+        }
+    }
+
+    deriveSecondaryData();
+
+    const CKnownExtension &ext = CKnownExtension::get(extStr);
+    changed(QObject::tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/PointHide.png");
+}

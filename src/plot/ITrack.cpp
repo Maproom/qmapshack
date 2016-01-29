@@ -94,7 +94,7 @@ void ITrack::setTrack(const QPolygonF& track)
 
 void ITrack::updateData()
 {
-    if((pjsrc == 0) || (trk == 0 && coords.isEmpty()))
+    if((pjsrc == 0) || (nullptr == trk && coords.isEmpty()))
     {
         return;
     }

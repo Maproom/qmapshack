@@ -33,8 +33,8 @@ CSelDevices::CSelDevices(IGisProject * project, QTreeWidget *wks)
     const int N = wks->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IDevice * device = dynamic_cast<IDevice*>(wks->topLevelItem(n));
-        if(device == 0)
+        IDevice *device = dynamic_cast<IDevice*>(wks->topLevelItem(n));
+        if(nullptr == device)
         {
             continue;
         }
@@ -44,15 +44,8 @@ CSelDevices::CSelDevices(IGisProject * project, QTreeWidget *wks)
         item->setData(Qt::UserRole, device->getKey());
         item->setIcon(device->icon(CGisListWks::eColumnIcon));
 
-        IGisProject * proj = device->getProjectByKey(project->getKey());
-        if(proj)
-        {
-            item->setCheckState(Qt::Checked);
-        }
-        else
-        {
-            item->setCheckState(Qt::Unchecked);
-        }
+        IGisProject *proj = device->getProjectByKey(project->getKey());
+        item->setCheckState(nullptr == proj ? Qt::Unchecked : Qt::Checked);
     }
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelDevices");

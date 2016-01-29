@@ -29,22 +29,33 @@ CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk &trk, QWidget *parent
 {
     setupUi(this);
 
-    foreach(const QString &key, trk.getExistingDataSources())
-    {
-        const CKnownExtension &ext = CKnownExtension::get(key);
-        if(!ext.derivedQMS)
-        {
-            QIcon icon(ext.icon);
-            comboExtensions->addItem(icon, ext.known ? ext.name : key, key);
-        }
-    }
-    checkEmptyComboExtensions();
+    update();
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterDeleteExtension::slotApply);
 }
 
 CFilterDeleteExtension::~CFilterDeleteExtension()
 {
+}
+
+void CFilterDeleteExtension::update()
+{
+    qDebug() << "Clearing";
+    comboExtensions->clear();
+
+    foreach(const QString &key, trk.getExistingDataSources())
+    {
+        const CKnownExtension &ext = CKnownExtension::get(key);
+        if(!ext.derivedQMS)
+        {
+            QIcon icon(ext.icon);
+            qDebug() << "Adding `" << (ext.known ? ext.name : key) << "`";
+            comboExtensions->addItem(icon, ext.known ? ext.name : key, key);
+            qDebug() << " -> Count: " << comboExtensions->count();
+        }
+    }
+    checkEmptyComboExtensions();
+    qDebug() << "Done, Count: " << comboExtensions->count();
 }
 
 void CFilterDeleteExtension::slotApply()

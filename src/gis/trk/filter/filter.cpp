@@ -432,10 +432,9 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
 
     extrema.remove(extStr);
     existingExtensions.remove(extStr);
-
-    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject, "filterDeleteExtension()");
     propHandler->setupData();
 
     const CKnownExtension &ext = CKnownExtension::get(extStr);
     changed(QObject::tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/FilterModifyExtension.png");
+    updateVisuals(eVisualAll, "filterDeleteExtension()");
 }

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,49 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef ITRACK_H
-#define ITRACK_H
+#ifndef CFILTERDELETEEXTENSION_H
+#define CFILTERDELETEEXTENSION_H
 
-#include <QImage>
-#include <QPolygonF>
-#include <proj_api.h>
+#include "ui_IFilterDeleteExtension.h"
+#include <QWidget>
 
-class QRectF;
-class QPainter;
 class CGisItemTrk;
 
-class ITrack
+class CFilterDeleteExtension : public QWidget, private Ui::IFilterDeleteExtension
 {
+    Q_OBJECT
 public:
-    ITrack();
-    virtual ~ITrack();
+    CFilterDeleteExtension(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterDeleteExtension();
 
-    void setSize(int w, int h);
-    void setTrack(CGisItemTrk * track);
-    void setTrack(const QPolygonF &track);
+private slots:
+    void slotApply();
 
-    void save(QImage& image);
-
-protected:
-    void setupProjection(const QRectF &boundingBox);
-    void updateData();
-    void draw(QPainter& p);
-    void draw();
-
-    projPJ pjsrc = 0;
-    projPJ pjtar = 0;
-
-    bool needsRedraw =true;
-    CGisItemTrk * trk = nullptr;
-    QPolygonF coords;
-    QPolygonF line;
-
-    QImage buffer;
-
-    QPointF scale;
-    qint32 xoff = 0;
-    qint32 yoff = 0;
+private:
+    CGisItemTrk& trk;
 };
 
-#endif //ITRACK_H
+#endif //CFILTERDELETEEXTENSION_H
 

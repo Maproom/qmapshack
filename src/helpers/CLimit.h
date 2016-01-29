@@ -27,8 +27,8 @@
 
 #include "units/IUnit.h"
 
-using fGetLimit = std::function<qreal(const QString&)>;
-using fGetUnit  = std::function<QString(const QString&)>;
+using fGetLimit    = std::function<qreal(const QString&)>;
+using fGetUnit     = std::function<QString(const QString&)>;
 using fMarkChanged = std::function<void(void)>;
 
 class CLimit : public QObject
@@ -37,7 +37,6 @@ class CLimit : public QObject
 public:
     CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit, fMarkChanged markChanged);
     virtual ~CLimit();
-
 
     enum mode_e
     {
@@ -48,6 +47,11 @@ public:
 
     void setMode(mode_e m);
     void setSource(const QString& src);
+
+    const QString& getSource() const
+    {
+        return source;
+    }
 
     mode_e getMode() const
     {
@@ -77,11 +81,11 @@ private:
     qreal minUser = NOFLOAT;
     qreal maxUser = NOFLOAT;
 
-    fGetLimit funcGetMin;
-    fGetLimit funcGetMax;
-    fGetLimit funcGetMinAuto;
-    fGetLimit funcGetMaxAuto;
-    fGetUnit funcGetUnit;
+    fGetLimit    funcGetMin;
+    fGetLimit    funcGetMax;
+    fGetLimit    funcGetMinAuto;
+    fGetLimit    funcGetMaxAuto;
+    fGetUnit     funcGetUnit;
     fMarkChanged funcMarkChanged;
 
     QString source;

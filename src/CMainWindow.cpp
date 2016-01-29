@@ -151,12 +151,12 @@ CMainWindow::CMainWindow()
     }
     cfg.endGroup(); // Views
 
-    actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
-    actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
-    actionPOIText->setChecked(cfg.value("POIText", true).toBool());
-    actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
-    actionNightDay->setChecked(cfg.value("isNight", false).toBool());
-    actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
+    actionShowScale->setChecked      (cfg.value("isScaleVisible",   true).toBool());
+    actionShowGrid->setChecked       (cfg.value("isGridVisible",    true).toBool());
+    actionPOIText->setChecked        (cfg.value("POIText",          true).toBool());
+    actionMapToolTip->setChecked     (cfg.value("MapToolTip",       true).toBool());
+    actionNightDay->setChecked       (cfg.value("isNight",         false).toBool());
+    actionFlipMouseWheel->setChecked (cfg.value("flipMouseWheel",  false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
@@ -220,7 +220,7 @@ CMainWindow::~CMainWindow()
     for(int i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(view == 0)
+        if(nullptr == view)
         {
             allOtherTabs << tabWidget->widget(i);
             continue;

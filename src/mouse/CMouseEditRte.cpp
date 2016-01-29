@@ -95,7 +95,7 @@ void CMouseEditRte::slotCopyToNew()
     }
 
     IGisProject * project = CGisWidget::self().selectProject();
-    if(project == 0)
+    if(nullptr == project)
     {
         return;
     }

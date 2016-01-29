@@ -122,7 +122,7 @@ public:
             fix(""), sat(0), velocity(WPT_NOFLOAT), heading(WPT_NOFLOAT),
             vdop(WPT_NOFLOAT), hdop(WPT_NOFLOAT), pdop(WPT_NOFLOAT),
             _lon(WPT_NOFLOAT),_lat(WPT_NOFLOAT),_ele(WPT_NOFLOAT), _timestamp(0), _timestamp_msec(0),
-            flags(0), px_valid(false), dem(WPT_NOFLOAT), editItem(NULL)
+            flags(0), px_valid(false), dem(WPT_NOFLOAT), editItem(nullptr)
         {
         }
 

@@ -741,11 +741,6 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         const QDomNode& gpxx = ext.namedItem("gpxx:TrackExtension");
         readXml(gpxx, "gpxx:DisplayColor", trk.color);
         setColor(str2color(trk.color));
-
-        const QDomNode &extColoring = ext.namedItem("ql:coloring");
-        readXml(extColoring, "ql:source",    colorSource);
-        readXml(extColoring, "ql:limitLow",  limitLow);
-        readXml(extColoring, "ql:limitHigh", limitHigh);
     }
 
     deriveSecondaryData();
@@ -774,16 +769,6 @@ void CGisItemTrk::save(QDomNode& gpx)
     writeXml(xmlExt, "ql:key", key.item);
     writeXml(xmlExt, "ql:flags", flags);
     writeXml(xmlExt, history);
-
-    // write source for coloring tracks
-    if(!colorSource.isEmpty())
-    {
-        QDomElement xmlExtColoring = doc.createElement("ql:coloring");
-        xmlExt.appendChild(xmlExtColoring);
-        writeXml(xmlExtColoring, "ql:source",    colorSource);
-        writeXml(xmlExtColoring, "ql:limitLow",  limitLow);
-        writeXml(xmlExtColoring, "ql:limitHigh", limitHigh);
-    }
 
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");

@@ -21,6 +21,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/CPropertyTrk.h"
 
 #include <QtMath>
 #include <proj_api.h>
@@ -429,7 +430,11 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
         }
     }
 
-    deriveSecondaryData();
+    extrema.remove(extStr);
+    existingExtensions.remove(extStr);
+
+    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject, "filterDeleteExtension()");
+    propHandler->setupData();
 
     const CKnownExtension &ext = CKnownExtension::get(extStr);
     changed(QObject::tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/PointHide.png");

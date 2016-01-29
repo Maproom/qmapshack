@@ -28,7 +28,7 @@
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(4)
+#define VER_TRK         quint8(5)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(2)
 #define VER_AREA        quint8(1)
@@ -506,17 +506,13 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << trk.type;
     out << trk.color;
 
-    out << colorSource;
-    out << limitLow;
-    out << limitHigh;
-
+    out << colorSourceLimit;
     out << lineScale;
     out << showArrows;
 
     out << limitsGraph1;
     out << limitsGraph2;
     out << limitsGraph3;
-
     out << trk.segs;
 
     stream.writeRawData(MAGIC_TRK, MAGIC_SIZE);
@@ -560,11 +556,21 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.type;
     in >> trk.color;
 
-    if(version > 1)
+    if(version > 1 && version <= 4)
     {
+        QString colorSource;
         in >> colorSource;
+
+        qreal limitLow, limitHigh;
         in >> limitLow;
         in >> limitHigh;
+
+        colorSourceLimit.setSource(colorSource);
+        colorSourceLimit.setMin(limitLow);
+        colorSourceLimit.setMax(limitHigh);
+        colorSourceLimit.setMode(CLimit::eModeUser);
+    } else if(version > 4) {
+        in >> colorSourceLimit;
     }
 
     if(version > 2)

@@ -304,9 +304,9 @@ public:
 
         @return  The new source to use.
      */
-    QString getColorizeSource()
+    QString getColorizeSource() const
     {
-        return colorSource;
+        return colorSourceLimit.getSource();
     }
 
     QStringList getExistingDataSources() const;
@@ -314,14 +314,16 @@ public:
     void setColorizeLimitLow(qreal limit);
     qreal getColorizeLimitLow() const
     {
-        return limitLow;
+        return colorSourceLimit.getMin();
     }
 
     void setColorizeLimitHigh(qreal limit);
     qreal getColorizeLimitHigh() const
     {
-        return limitHigh;
+	return colorSourceLimit.getMax();
     }
+
+    void setColorizeLimits(qreal low, qreal high);
 
     const QString getColorizeUnit() const;
 
@@ -329,12 +331,6 @@ public:
     qreal getMax(const QString& source) const;
 
 private:
-    QString colorSource  = "";
-
-    // the low and high limit for (slope-)colored drawing of tracks
-    qreal limitLow  = -10;
-    qreal limitHigh =  10;
-
     void drawColorized(QPainter &p);
     /**@}*/
 
@@ -913,6 +909,8 @@ public:
     CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
     CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
 
+    CLimit colorSourceLimit {"TrackDetails/Style", _getMin, _getMax, _getMin, _getMax, _getUnitProp, _markChanged};
+
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;
@@ -1035,13 +1033,13 @@ private:
     QString mouseFocusOwner;
 
     /// the current track point selected by mouse movement
-    const trkpt_t * mouseMoveFocus = 0;
+    const trkpt_t * mouseMoveFocus  = nullptr;
     /// the last track point the user clicked on
-    const trkpt_t * mouseClickFocus = 0;
+    const trkpt_t * mouseClickFocus = nullptr;
     /// the first point of a range selection
-    const trkpt_t * mouseRange1 = 0;
+    const trkpt_t * mouseRange1     = nullptr;
     /// the second point of a range selection
-    const trkpt_t * mouseRange2 = 0;
+    const trkpt_t * mouseRange2     = nullptr;
     /**@}*/
 
     /// the track's details dialog if any

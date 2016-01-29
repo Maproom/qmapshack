@@ -42,6 +42,8 @@
 #include <QtWidgets>
 #include <proj_api.h>
 
+#include <functional>
+
 /* base case: add the filter specified in template parameter */
 template<typename filter>
 static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk)
@@ -160,16 +162,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(plot2,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
     connect(plot3,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
 
-    connect(spinLimitHigh,    &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
-    connect(spinLimitHigh,    &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitHighChanged);
-    connect(spinLimitLow,     &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
-    connect(spinLimitLow,     &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
-
     connect(spinLineWidth,    static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CDetailsTrk::slotLineWidth);
     connect(checkWithArrows,  &QCheckBox::toggled, this, &CDetailsTrk::slotWithArrows);
 
-    connect(toolStyleLimitMax,&QPushButton::clicked, this, &CDetailsTrk::slotLimitHighFromData);
-    connect(toolStyleLimitMin,&QPushButton::clicked, this, &CDetailsTrk::slotLimitLowFromData);
+    setupStyleLimits(trk.colorSourceLimit, toolLimitAutoStyle, toolLimitUsrStyle, toolLimitSysStyle, spinLimitLow, spinLimitHigh);
 
     connect(toolUserLineWith, &QToolButton::toggled, this, &CDetailsTrk::slotLineWidthMode);
     connect(toolUserArrow,    &QToolButton::toggled, this, &CDetailsTrk::slotWithArrowsMode);
@@ -198,9 +194,9 @@ CDetailsTrk::~CDetailsTrk()
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    cfg.setValue("showGraph1", checkGraph1->isChecked());
-    cfg.setValue("showGraph2", checkGraph2->isChecked());
-    cfg.setValue("showGraph3", checkGraph3->isChecked());
+    cfg.setValue("showGraph1",          checkGraph1->isChecked());
+    cfg.setValue("showGraph2",          checkGraph2->isChecked());
+    cfg.setValue("showGraph3",          checkGraph3->isChecked());
     cfg.setValue("splitterSizes",       splitter->saveState());
     cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.setValue("visibleTab",          tabWidget->currentIndex());
@@ -210,20 +206,20 @@ CDetailsTrk::~CDetailsTrk()
     saveGraphSource(comboGraph3, 3);
 }
 
-void CDetailsTrk::slotLimitLowFromData()
+void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)
 {
-    qreal min = trk.getMin(trk.getColorizeSource());
-    spinLimitLow->setValue(min);
-    slotColorLimitLowChanged();
-    slotColorLimitHighChanged();
-}
+    if(!on)
+    {
+        return;
+    }
 
-void CDetailsTrk::slotLimitHighFromData()
-{
-    qreal max = trk.getMax(trk.getColorizeSource());
-    spinLimitHigh->setValue(max);
-    slotColorLimitHighChanged();
-    slotColorLimitLowChanged();
+    CLimit &limit = trk.colorSourceLimit;
+    limit.setMode(mode);
+
+    widgetColorLabel->setMinimum(limit.getMin());
+    widgetColorLabel->setMaximum(limit.getMax());
+
+    trk.updateHistory(CGisItemTrk::eVisualColorLegend | CGisItemTrk::eVisualDetails);
 }
 
 void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGraph, QToolButton * toolLimitUsrGraph, QToolButton * toolLimitSysGraph, QDoubleSpinBox * spinMinGraph, QDoubleSpinBox * spinMaxGraph)
@@ -263,6 +259,48 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);
 
     connect(&limit, &CLimit::sigChanged, this, &CDetailsTrk::slotLimitChanged);
+}
+
+void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QToolButton *toolLimitUsr, QToolButton *toolLimitSys, CDoubleSpinBox *spinMin, CDoubleSpinBox *spinMax)
+{
+    bool isAutoMode = (limit.getMode() == CLimit::eModeAuto);
+
+    spinMin->setDisabled(isAutoMode);
+    spinMin->setSuffix(limit.getUnit());
+    spinMin->setValue(limit.getMin());
+
+    spinMax->setDisabled(isAutoMode);
+    spinMax->setSuffix(limit.getUnit());
+    spinMax->setValue(limit.getMax());
+
+    switch(limit.getMode())
+    {
+    case CLimit::eModeUser:
+        toolLimitUsr->setChecked(true);
+        break;
+
+    case CLimit::eModeAuto:
+        toolLimitAuto->setChecked(true);
+        break;
+
+    case CLimit::eModeSys:
+        toolLimitSys->setChecked(true);
+        break;
+    }
+
+    connect(toolLimitAuto, &QToolButton::toggled, spinMax, &QDoubleSpinBox::setDisabled);
+    connect(toolLimitAuto, &QToolButton::toggled, spinMin, &QDoubleSpinBox::setDisabled);
+
+    connect(toolLimitAuto, &QToolButton::toggled, std::bind(&CDetailsTrk::slotSetLimitModeStyle, this, CLimit::eModeAuto, std::placeholders::_1));
+    connect(toolLimitUsr,  &QToolButton::toggled, std::bind(&CDetailsTrk::slotSetLimitModeStyle, this, CLimit::eModeUser, std::placeholders::_1));
+    connect(toolLimitSys,  &QToolButton::toggled, std::bind(&CDetailsTrk::slotSetLimitModeStyle, this, CLimit::eModeSys,  std::placeholders::_1));
+
+    connect(spinMax,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
+    connect(spinMax,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitHighChanged);
+    connect(spinMin,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
+    connect(spinMin,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
+
+    connect(&limit,        &CLimit::sigChanged, this, &CDetailsTrk::slotLimitChanged);
 }
 
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)
@@ -483,11 +521,10 @@ void CDetailsTrk::updateData()
 
     bool enabled = (0 < currentIdx);
 
-    spinLimitLow->setEnabled    (enabled);
-    spinLimitHigh->setEnabled   (enabled);
-    widgetColorLabel->setEnabled(enabled);
-    toolStyleLimitMin->setEnabled(enabled);
-    toolStyleLimitMax->setEnabled(enabled);
+    widgetColorLabel->setEnabled  (enabled);
+    toolLimitAutoStyle->setEnabled(enabled);
+    toolLimitUsrStyle->setEnabled (enabled);
+    toolLimitSysStyle->setEnabled (enabled);
 
     if(enabled)
     {
@@ -616,11 +653,6 @@ void CDetailsTrk::slotColorLimitHighChanged()
     const double val = spinLimitHigh->value();
     trk.setColorizeLimitHigh(val);
     widgetColorLabel->setMaximum(val);
-
-    if(spinLimitLow->value() >= val)
-    {
-        spinLimitLow->setValue(val - .1f);
-    }
 }
 
 void CDetailsTrk::slotColorLimitLowChanged()
@@ -628,11 +660,6 @@ void CDetailsTrk::slotColorLimitLowChanged()
     const double val = spinLimitLow->value();
     trk.setColorizeLimitLow(val);
     widgetColorLabel->setMinimum(val);
-
-    if(spinLimitHigh->value() <= val)
-    {
-        spinLimitHigh->setValue(val + .1f);
-    }
 }
 
 void CDetailsTrk::slotChangeReadOnlyMode(bool on)
@@ -817,6 +844,7 @@ void CDetailsTrk::slotSetLimitModeSys(bool on)
 
 void CDetailsTrk::setupLimits(CLimit& limit, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)
 {
+    qDebug() << "new limits: " << limit.getMin() << limit.getMax();
     spinMin->setValue(limit.getMin());
     spinMax->setValue(limit.getMax());
 }
@@ -835,6 +863,10 @@ void CDetailsTrk::slotLimitChanged()
     else if(s == &trk.limitsGraph3)
     {
         setupLimits(trk.limitsGraph3, spinMinGraph3, spinMaxGraph3);
+    }
+    else if(s == &trk.colorSourceLimit)
+    {
+        setupLimits(trk.colorSourceLimit, spinLimitLow, spinLimitHigh);
     }
 }
 

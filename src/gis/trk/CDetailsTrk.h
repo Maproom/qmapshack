@@ -57,13 +57,9 @@ private slots:
     void slotColorLimitLowChanged();
 
     void slotSetupGraph(int idx);
-    void slotSetLimitModeUser(bool on);
-    void slotSetLimitModeAuto(bool on);
-    void slotSetLimitModeSys(bool on);
+    void slotSetLimitModeGraph(CLimit::mode_e mode, CLimit &limit, QDoubleSpinBox *spinMin, QDoubleSpinBox *spinMax, bool on);
 
     void slotSetLimitModeStyle(CLimit::mode_e mode, bool on);
-
-    void slotLimitChanged();
 
     void slotLineWidthMode(bool isUser);
     void slotLineWidth(qreal f);
@@ -76,7 +72,6 @@ private:
     void setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGraph, QToolButton * toolLimitUsrGraph, QToolButton * toolLimitSysGraph, QDoubleSpinBox * spinMinGraph, QDoubleSpinBox * spinMaxGraph);
     void setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QToolButton *toolLimitUsr, QToolButton *toolLimitSys, CDoubleSpinBox *spinMin, CDoubleSpinBox *spinMax);
     void setupGraph(CPlot * plot, const CLimit &limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
-    void setupMode(CLimit::mode_e mode, CLimit &limit, QDoubleSpinBox *spinMin, QDoubleSpinBox *spinMax);
     void setupLimits(CLimit& limit, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
 
     enum columns_t

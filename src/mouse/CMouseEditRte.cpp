@@ -103,7 +103,7 @@ void CMouseEditRte::slotCopyToNew()
     /// @todo make this independent from track
     QString name;
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-    if(rte != 0)
+    if(rte != nullptr)
     {
         name = rte->getName();
     }

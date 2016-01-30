@@ -811,4 +811,3 @@ void CDetailsTrk::slotWithArrows(bool yes)
 {
     trk.showArrows = yes;
 }
-

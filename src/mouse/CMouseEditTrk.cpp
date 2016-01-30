@@ -108,7 +108,7 @@ void CMouseEditTrk::slotCopyToNew()
     /// @todo make this independent from track
     QString name;
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != 0)
+    if(trk != nullptr)
     {
         name = trk->getName();
     }

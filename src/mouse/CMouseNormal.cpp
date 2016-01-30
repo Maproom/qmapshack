@@ -56,7 +56,7 @@ void CMouseNormal::stopTracking()
     if(!key.item.isEmpty())
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-        if(trk != 0)
+        if(trk != nullptr)
         {
             trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
         }
@@ -117,7 +117,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
             if(!keyTrk.item.isEmpty())
             {
                 CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(keyTrk));
-                if(trk != 0)
+                if(trk != nullptr)
                 {
                     trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
                 }
@@ -127,7 +127,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
             if(!keyRte.item.isEmpty())
             {
                 CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(keyRte));
-                if(rte != 0)
+                if(rte != nullptr)
                 {
                     rte->setMouseFocusByPoint(point, CGisItemRte::eFocusMouseMove, "CMouseNormal");
                 }
@@ -184,11 +184,11 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
             case eStateUnclutterMultiple:
             {
                 const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
-                if(scrOpt != 0)
+                if(scrOpt != nullptr)
                 {
                     IGisItem * item = CGisWidget::self().getItemByKey(scrOpt->key);
                     screenUnclutter->clear(); // CAUTION!! this will delete the object scrOpt is pointing to.
-                    scrOpt = 0;
+                    scrOpt = nullptr;
                     if(item)
                     {
                         item->treeWidget()->collapseAll();

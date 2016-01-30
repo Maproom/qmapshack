@@ -587,7 +587,7 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 {
     QMutexLocker lock(&mutexItems);
-    mouseMoveFocus = 0;
+    mouseMoveFocus = nullptr;
 
     readRouteDataFromGisLine(l);
 
@@ -616,7 +616,7 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
 void CGisItemRte::calc()
 {
     QMutexLocker lock(&mutexItems);
-    mouseMoveFocus = 0;
+    mouseMoveFocus = nullptr;
     for(int i = 0; i < rte.pts.size(); i++)
     {
         rte.pts[i].subpts.clear();
@@ -634,7 +634,7 @@ void CGisItemRte::reset()
         pt.fakeSubpt = subpt_t();
     }
 
-    mouseMoveFocus  = 0;
+    mouseMoveFocus  = nullptr;
     totalDistance   = NOFLOAT;
     totalTime       = 0;
     lastRoutedTime  = QDateTime();
@@ -654,7 +654,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 {
     QMutexLocker lock(&mutexItems);
 
-    const subpt_t * newPointOfFocus = 0;
+    const subpt_t * newPointOfFocus = nullptr;
     quint32 idx = 0;
 
     if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)
@@ -678,7 +678,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 
     if(newPointOfFocus && (newPointOfFocus->type == subpt_t::eTypeNone))
     {
-        newPointOfFocus = 0;
+        newPointOfFocus = nullptr;
     }
 
 
@@ -716,7 +716,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
     QMutexLocker lock(&mutexItems);
 
     qint32 idxRtept = -1;
-    rtept_t * rtept = 0;
+    rtept_t * rtept = nullptr;
 
     Routino_Output * next = route;
     while(next)
@@ -736,7 +736,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
             rtept->fakeSubpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
-        else if(rtept != 0)
+        else if(rtept != nullptr)
         {
             rtept->subpts << subpt_t();
             subpt_t& subpt  = rtept->subpts.last();

@@ -68,7 +68,7 @@ protected:
 
     // conversion of strings
     quint16 codepage;
-    QTextCodec * codec = 0;
+    QTextCodec * codec = nullptr;
     const quint8 mask;
     quint32 mask32;
     quint64 mask64;

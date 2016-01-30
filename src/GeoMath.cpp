@@ -78,14 +78,14 @@ void GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg
 // from http://www.movable-type.co.uk/scripts/LatLongVincenty.html
 qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2, qreal& a1, qreal& a2)
 {
-    qreal cosSigma = 0.0;
-    qreal sigma = 0.0;
-    qreal sinAlpha = 0.0;
+    qreal cosSigma   = 0.0;
+    qreal sigma      = 0.0;
+    qreal sinAlpha   = 0.0;
     qreal cosSqAlpha = 0.0;
     qreal cos2SigmaM = 0.0;
-    qreal sinSigma = 0.0;
-    qreal sinLambda = 0.0;
-    qreal cosLambda = 0.0;
+    qreal sinSigma   = 0.0;
+    qreal sinLambda  = 0.0;
+    qreal cosLambda  = 0.0;
 
     qreal a = 6378137.0, b = 6356752.3142,  f = 1.0/298.257223563;  // WGS-84 ellipsiod
     qreal L = u2 - u1;
@@ -140,14 +140,14 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
 
 qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2)
 {
-    qreal cosSigma = 0.0;
-    qreal sigma = 0.0;
-    qreal sinAlpha = 0.0;
+    qreal cosSigma   = 0.0;
+    qreal sigma      = 0.0;
+    qreal sinAlpha   = 0.0;
     qreal cosSqAlpha = 0.0;
     qreal cos2SigmaM = 0.0;
-    qreal sinSigma = 0.0;
-    qreal sinLambda = 0.0;
-    qreal cosLambda = 0.0;
+    qreal sinSigma   = 0.0;
+    qreal sinLambda  = 0.0;
+    qreal cosLambda  = 0.0;
 
     qreal a = 6378137.0, b = 6356752.3142,  f = 1.0/298.257223563;  // WGS-84 ellipsiod
     qreal L = u2 - u1;

@@ -41,7 +41,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CGisWidget * CGisWidget::pSelf = 0;
+CGisWidget * CGisWidget::pSelf = nullptr;
 
 CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     : QWidget(parent)
@@ -602,7 +602,7 @@ void CGisWidget::resetRteByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
-    if(rte != 0)
+    if(rte != nullptr)
     {
         rte->reset();
     }
@@ -614,7 +614,7 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(getItemByKey(key));
-    if(area != 0)
+    if(area != nullptr)
     {
         if(!area->setReadOnlyMode(false))
         {
@@ -622,7 +622,7 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
         }
 
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas != 0)
+        if(canvas != nullptr)
         {
             canvas->setMouseEditArea(*area);
         }

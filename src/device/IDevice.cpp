@@ -83,7 +83,7 @@ void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
 
 IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
 {
-    IGisItem * item = 0;
+    IGisItem * item = nullptr;
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
@@ -96,7 +96,7 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
             }
 
             item = project->getItemByKey(key);
-            if(item != 0)
+            if(item != nullptr)
             {
                 break;
             }

@@ -358,7 +358,7 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
     time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
 
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-    if(rte != 0)
+    if(rte != nullptr)
     {
         rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));
     }

@@ -88,7 +88,7 @@ void CCreateRouteFromWpt::accept()
 void CCreateRouteFromWpt::slotSelectionChanged()
 {
     QListWidgetItem * item = listWidget->currentItem();
-    if(item != 0)
+    if(item != nullptr)
     {
         int row = listWidget->row(item);
         toolUp->setEnabled(row != 0);

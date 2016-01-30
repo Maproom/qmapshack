@@ -22,7 +22,7 @@
 CScrOptRangeLine::CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget * parent)
     : IScrOpt(mouse)
 {
-    if(parent != 0)
+    if(parent != nullptr)
     {
         setParent(parent);
     }

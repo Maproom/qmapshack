@@ -92,7 +92,7 @@ void CMouseEditArea::slotCopyToNew()
 
     QString name;
     CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
-    if(area != 0)
+    if(area != nullptr)
     {
         name = area->getName();
     }

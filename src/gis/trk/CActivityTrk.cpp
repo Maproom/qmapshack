@@ -137,7 +137,7 @@ void CActivityTrk::update()
             lastTrkpt = &pt;
             if(pt.flags != lastFlag)
             {
-                if(startTrkpt != 0)
+                if(startTrkpt != nullptr)
                 {
                     activity_summary_t& summary = getSummary(activitySummary, lastFlag);
                     summary.distance += pt.distance - startTrkpt->distance;

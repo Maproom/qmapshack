@@ -44,7 +44,7 @@ public:
 
 
 protected:
-    CDBFolderLostFound * folderLostFound = 0;
+    CDBFolderLostFound * folderLostFound = nullptr;
 
     QUdpSocket * socket;
 };

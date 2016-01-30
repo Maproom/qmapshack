@@ -590,7 +590,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
             PROGRESS(n++, return );
 
             CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(info.key));
-            if(wpt != 0)
+            if(wpt != nullptr)
             {
                 addIcon(table, eSym2, cnt, wpt, printable);
                 table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(wpt->getInfo());

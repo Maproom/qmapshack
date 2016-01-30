@@ -108,14 +108,13 @@ void CCombineTrk::accept()
 
 void CCombineTrk::slotSelectionChanged()
 {
-    QListWidgetItem * item;
-    item = listAvailable->currentItem();
-    toolSelect->setEnabled(item != 0);
+    QListWidgetItem * item = listAvailable->currentItem();
+    toolSelect->setEnabled(item != nullptr);
 
     item = listSelected->currentItem();
-    toolRemove->setEnabled(item != 0);
-    toolUp->setEnabled(item != 0);
-    toolDown->setEnabled(item != 0);
+    toolRemove->setEnabled(item != nullptr);
+    toolUp->setEnabled(item != nullptr);
+    toolDown->setEnabled(item != nullptr);
 
     if(item)
     {

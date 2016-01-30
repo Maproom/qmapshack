@@ -55,7 +55,7 @@
 #include <windows.h>
 #endif // WIN32
 
-CMainWindow * CMainWindow::pSelf = 0;
+CMainWindow * CMainWindow::pSelf = nullptr;
 
 CMainWindow::CMainWindow()
     : id(qrand())

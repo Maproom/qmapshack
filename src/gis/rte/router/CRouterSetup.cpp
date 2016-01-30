@@ -25,7 +25,7 @@
 
 #include <QtWidgets>
 
-CRouterSetup * CRouterSetup::pSelf = 0;
+CRouterSetup * CRouterSetup::pSelf = nullptr;
 
 CRouterSetup::CRouterSetup(QWidget * parent)
     : QWidget(parent)

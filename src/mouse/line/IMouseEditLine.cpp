@@ -393,7 +393,7 @@ void IMouseEditLine::slotCopyToOrig()
     QMutexLocker lock(&IGisItem::mutexItems);
 
     IGisLine * l = getGisLine();
-    if(l != 0)
+    if(l != nullptr)
     {
         CMainWindow::self().getElevationAt(points);
         l->setDataFromPolyline(points);

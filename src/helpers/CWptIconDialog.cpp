@@ -78,7 +78,7 @@ CWptIconDialog::CWptIconDialog(QToolButton *parent)
 void CWptIconDialog::setupList(QObject * obj)
 {
     QString currentIcon = obj->objectName();
-    QListWidgetItem * currentItem = 0;
+    QListWidgetItem * currentItem = nullptr;
 
     const QMap<QString, icon_t>& wptIcons = getWptIcons();
     QStringList keys = wptIcons.keys();

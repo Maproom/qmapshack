@@ -109,7 +109,7 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
         QPointF pos = e->pos();
         gis->convertPx2Rad(pos);
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
-        if(wpt != 0)
+        if(wpt != nullptr)
         {
             wpt->setPosition(pos * RAD_TO_DEG);
         }

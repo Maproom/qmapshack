@@ -1207,7 +1207,7 @@ void CGisListWks::slotEditPrj()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
-    if(project != 0)
+    if(project != nullptr)
     {
         project->edit();
     }
@@ -1218,7 +1218,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
         CGisWidget::self().focusTrkByKey(true, gisItem->getKey());
@@ -1240,7 +1240,7 @@ void CGisListWks::slotEditItem()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().editItemByKey(gisItem->getKey());
     }
@@ -1368,7 +1368,7 @@ void CGisListWks::slotProjWpt()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().projWptByKey(gisItem->getKey());
     }
@@ -1379,7 +1379,7 @@ void CGisListWks::slotBubbleWpt()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().toggleWptBubble(gisItem->getKey());
     }
@@ -1390,7 +1390,7 @@ void CGisListWks::slotMoveWpt()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().moveWptByKey(gisItem->getKey());
     }
@@ -1401,7 +1401,7 @@ void CGisListWks::slotFocusTrk(bool on)
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().focusTrkByKey(on, gisItem->getKey());
     }
@@ -1412,7 +1412,7 @@ void CGisListWks::slotEditTrk()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().editTrkByKey(gisItem->getKey());
     }
@@ -1423,7 +1423,7 @@ void CGisListWks::slotReverseTrk()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().reverseTrkByKey(gisItem->getKey());
     }
@@ -1455,7 +1455,7 @@ void CGisListWks::slotRangeTrk()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().rangeTrkByKey(gisItem->getKey());
     }
@@ -1466,7 +1466,7 @@ void CGisListWks::slotFocusRte(bool on)
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().focusRteByKey(on, gisItem->getKey());
     }
@@ -1477,7 +1477,7 @@ void CGisListWks::slotCalcRte()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().calcRteByKey(gisItem->getKey());
     }
@@ -1488,7 +1488,7 @@ void CGisListWks::slotResetRte()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().resetRteByKey(gisItem->getKey());
     }
@@ -1500,7 +1500,7 @@ void CGisListWks::slotEditRte()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().editRteByKey(gisItem->getKey());
     }
@@ -1511,7 +1511,7 @@ void CGisListWks::slotEditArea()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemOvlArea * gisItem = dynamic_cast<CGisItemOvlArea*>(currentItem());
-    if(gisItem != 0)
+    if(gisItem != nullptr)
     {
         CGisWidget::self().editAreaByKey(gisItem->getKey());
     }

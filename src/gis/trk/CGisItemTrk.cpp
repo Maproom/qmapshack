@@ -911,7 +911,7 @@ void CGisItemTrk::deriveSecondaryData()
                 north   = trkpt.lat;
             }
 
-            if(lastTrkpt != 0)
+            if(lastTrkpt != nullptr)
             {
                 trkpt.deltaDistance  = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
                 trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
@@ -1116,7 +1116,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     for(int i=0; i < project->childCount(); i++)
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->child(i));
-        if(wpt == 0)
+        if(wpt == nullptr)
         {
             continue;
         }
@@ -2037,7 +2037,7 @@ void CGisItemTrk::drawRange(QPainter& p)
 {
     QMutexLocker lock(&mutexItems);
 
-    if((mouseRange1 != 0) && (mouseRange2 != 0))
+    if((mouseRange1 != nullptr) && (mouseRange2 != nullptr))
     {
         const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
         int idx1 = (mode == eModeRange) ? mouseRange1->idxTotal : mouseRange1->idxVisible;
@@ -2068,8 +2068,8 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
     mode            = m;
     // always reset the range statemachine
     rangeState      = eRangeStateIdle;
-    mouseRange1     = 0;
-    mouseRange2     = 0;
+    mouseRange1     = nullptr;
+    mouseRange2     = nullptr;
     mouseFocusOwner = mode == eModeRange ? owner : "";
 
 
@@ -2136,7 +2136,7 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
 
 void CGisItemTrk::setActivity()
 {
-    if((mouseRange1 == 0) && (mouseRange2 == 0))
+    if((mouseRange1 == nullptr) && (mouseRange2 == nullptr))
     {
         return;
     }
@@ -2201,8 +2201,8 @@ void CGisItemTrk::setActivity()
             }
         }
     }
-    mouseRange1 = 0;
-    mouseRange2 = 0;
+    mouseRange1 = nullptr;
+    mouseRange2 = nullptr;
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
     changed(QObject::tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
@@ -2478,7 +2478,7 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     {
     case eRangeStateIdle:
     {
-        if((fmode == eFocusMouseClick) && (pt != 0))
+        if((fmode == eFocusMouseClick) && (pt != nullptr))
         {
             mouseRange1 = pt;
             rangeState  = eRangeState1st;
@@ -2490,7 +2490,7 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     case eRangeState1st:
     {
         mouseRange2 = pt;
-        if((fmode == eFocusMouseClick) && (pt != 0))
+        if((fmode == eFocusMouseClick) && (pt != nullptr))
         {
             rangeState  = eRangeState2nd;
         }
@@ -2501,8 +2501,8 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     {
         if(fmode == eFocusMouseClick)
         {
-            mouseRange1 = 0;
-            mouseRange2 = 0;
+            mouseRange1 = nullptr;
+            mouseRange2 = nullptr;
             rangeState  = eRangeStateIdle;
         }
         break;

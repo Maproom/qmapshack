@@ -86,7 +86,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(pjsrc == 0)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(0, tr("Error..."), tr("No georeference information found."));
         return;
     }

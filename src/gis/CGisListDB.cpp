@@ -450,7 +450,7 @@ void CGisListDB::slotDelFolder()
 {
     CGisListDBEditLock lock(false, this, "slotDelFolder");
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
-    if(folder == 0)
+    if(folder == nullptr)
     {
         return;
     }
@@ -477,7 +477,7 @@ void CGisListDB::slotDelLostFound()
 {
     CGisListDBEditLock lock(false, this, "slotDelLostFound");
     CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(currentItem());
-    if(folder == 0)
+    if(folder == nullptr)
     {
         return;
     }
@@ -516,13 +516,13 @@ void CGisListDB::slotDelLostFoundItem()
     foreach(QTreeWidgetItem * item, items)
     {
         CDBItem * dbItem            = dynamic_cast<CDBItem*>(item);
-        if(dbItem == 0)
+        if(dbItem == nullptr)
         {
             continue;
         }
 
         CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(dbItem->parent());
-        if(folder == 0)
+        if(folder == nullptr)
         {
             continue;
         }
@@ -554,7 +554,7 @@ void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
     CGisListDBEditLock lock(true, this, "slotItemExpanded");
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-    if(folder == 0)
+    if(folder == nullptr)
     {
         return;
     }
@@ -577,13 +577,13 @@ void CGisListDB::slotDelItem()
     foreach(QTreeWidgetItem * item, items)
     {
         CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
-        if(dbItem == 0)
+        if(dbItem == nullptr)
         {
             continue;
         }
 
         IDBFolder * folder = dynamic_cast<IDBFolder*>(dbItem->parent());
-        if(folder == 0)
+        if(folder == nullptr)
         {
             continue;
         }
@@ -634,7 +634,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
     if(column == CGisListDB::eColumnCheckbox)
     {
         IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-        if(folder != 0)
+        if(folder != nullptr)
         {
             folder->toggle();
 
@@ -644,7 +644,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
         }
 
         CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
-        if(dbItem != 0)
+        if(dbItem != nullptr)
         {
             dbItem->toggle();
 

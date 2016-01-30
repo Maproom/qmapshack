@@ -35,7 +35,7 @@ signals:
     void valueChangedByStep(double val);
 
 public:
-    CDoubleSpinBox(QWidget * parent = 0);
+    CDoubleSpinBox(QWidget * parent = nullptr);
 
     void stepBy(int steps) override;
 

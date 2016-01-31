@@ -512,6 +512,7 @@ void CDetailsTrk::updateData()
     int currentIdx = comboColorSource->findData(trk.getColorizeSource());
     if(-1 == currentIdx)
     {
+        trk.setColorizeSource(QString());
         currentIdx = 0;
     }
     comboColorSource->setCurrentIndex(currentIdx);

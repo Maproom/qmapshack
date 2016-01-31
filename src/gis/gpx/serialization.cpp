@@ -37,6 +37,7 @@ const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
 
+
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
 {
     if(xml.namedItem(tag).isElement())
@@ -457,7 +458,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
     gpx.appendChild(xmlMetadata);
 
     writeXml(xmlMetadata,"name", metadata.name);
-    writeXml(xmlMetadata,"desc", metadata.desc);
+    writeXml(xmlMetadata,"desc", html2Dev(metadata.desc));
 
     if(!metadata.author.name.isEmpty())
     {
@@ -756,8 +757,8 @@ void CGisItemTrk::save(QDomNode& gpx)
     gpx.appendChild(xmlTrk);
 
     writeXml(xmlTrk, "name",   trk.name);
-    writeXml(xmlTrk, "cmt",    trk.cmt);
-    writeXml(xmlTrk, "desc",   trk.desc);
+    writeXml(xmlTrk, "cmt",    html2Dev(trk.cmt));
+    writeXml(xmlTrk, "desc",   html2Dev(trk.desc));
     writeXml(xmlTrk, "src",    trk.src);
     writeXml(xmlTrk, "link",   trk.links);
     writeXml(xmlTrk, "number", trk.number);
@@ -832,8 +833,8 @@ void CGisItemRte::save(QDomNode& gpx)
     gpx.appendChild(xmlRte);
 
     writeXml(xmlRte, "name",   rte.name);
-    writeXml(xmlRte, "cmt",    rte.cmt);
-    writeXml(xmlRte, "desc",   rte.desc);
+    writeXml(xmlRte, "cmt",    html2Dev(rte.cmt));
+    writeXml(xmlRte, "desc",   html2Dev(rte.desc));
     writeXml(xmlRte, "src",    rte.src);
     writeXml(xmlRte, "link",   rte.links);
     writeXml(xmlRte, "number", rte.number);
@@ -968,8 +969,8 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt)
     writeXml(xml, "magvar",        wpt.magvar);
     writeXml(xml, "geoidheight",   wpt.geoidheight);
     writeXml(xml, "name",          wpt.name);
-    writeXml(xml, "cmt",           IGisItem::removeHtml(wpt.cmt));
-    writeXml(xml, "desc",          IGisItem::removeHtml(wpt.desc));
+    writeXml(xml, "cmt",           html2Dev(wpt.cmt));
+    writeXml(xml, "desc",          html2Dev(wpt.desc));
     writeXml(xml, "src",           wpt.src);
     writeXml(xml, "link",          wpt.links);
     writeXml(xml, "sym",           wpt.sym);

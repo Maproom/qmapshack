@@ -472,7 +472,7 @@ bool IGisItem::isTainted() const
     return flags & eFlagTainted;
 }
 
-bool IGisItem::isOnDevice() const
+qint32 IGisItem::isOnDevice() const
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(nullptr == project)
@@ -638,6 +638,10 @@ QString IGisItem::removeHtml(const QString &str)
     return html.toPlainText();
 }
 
+QString IGisItem::html2Dev(const QString& str)
+{
+    return isOnDevice() == IDevice::eTypeGarmin ? removeHtml(str) : str;
+}
 
 QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString &key)
 {

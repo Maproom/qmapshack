@@ -27,8 +27,8 @@
 
 int IDevice::cnt = 0;
 
-IDevice::IDevice(const QString &path, const QString &key, QTreeWidget *parent)
-    : QTreeWidgetItem(parent)
+IDevice::IDevice(const QString &path, type_e type, const QString &key, QTreeWidget *parent)
+    : QTreeWidgetItem(parent, type)
     , dir(path)
     , key(key)
 {

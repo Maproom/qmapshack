@@ -336,7 +336,7 @@ public:
        @brief Check if item is on a GPS device
        @return True if the item is stored on a device
      */
-    bool isOnDevice() const;
+    qint32 isOnDevice() const;
 
     /**
        @brief Check if there are any pending unsaved changes
@@ -512,6 +512,16 @@ protected:
 
     bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
+
+    /**
+       @brief Converts a string with HTML tags to a string without HTML depending on the device
+
+       Some devices e.g. Garmin can not handle HTML.
+
+       @param str   a string
+       @return A string with HTML removed depending on the device
+     */
+    QString html2Dev(const QString& str);
 
     /// see flags_e for possible flags
     quint32 flags = 0;

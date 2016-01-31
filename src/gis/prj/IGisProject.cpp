@@ -94,6 +94,10 @@ IGisProject::~IGisProject()
     delete dlgDetails;
 }
 
+QString IGisProject::html2Dev(const QString& str)
+{
+    return isOnDevice() == IDevice::eTypeGarmin ? IGisItem::removeHtml(str) : str;
+}
 
 bool IGisProject::askBeforClose()
 {
@@ -161,10 +165,10 @@ QPixmap IGisProject::getIcon() const
     return icon(CGisListWks::eColumnIcon).pixmap(22,22);
 }
 
-bool IGisProject::isOnDevice() const
+qint32 IGisProject::isOnDevice() const
 {
     IDevice * device = dynamic_cast<IDevice*>(parent());
-    return device != nullptr;
+    return device != nullptr ? device->type() : IDevice::eTypeNone;
 }
 
 bool IGisProject::isChanged() const

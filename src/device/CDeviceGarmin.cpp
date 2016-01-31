@@ -27,7 +27,7 @@
 #include <QtXml>
 
 CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, QTreeWidget *parent)
-    : IDevice(path, key, parent)
+    : IDevice(path, eTypeGarmin, key, parent)
     , cntImages(0)
 {
     setText(CGisListWks::eColumnName, "Garmin");

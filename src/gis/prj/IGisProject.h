@@ -358,7 +358,7 @@ public:
        @brief Test if this project is handled by a device
        @return True if handled by a device
      */
-    bool isOnDevice() const;
+    qint32 isOnDevice() const;
 
     /**
        @brief Test if project has been changed
@@ -447,6 +447,16 @@ protected:
     void updateItems();
     void updateItemCounters();
     void updateDecoration();
+
+    /**
+       @brief Converts a string with HTML tags to a string without HTML depending on the device
+
+       Some devices e.g. Garmin can not handle HTML.
+
+       @param str   a string
+       @return A string with HTML removed depending on the device
+     */
+    QString html2Dev(const QString& str);
 
     // Those are the URIs of the GPX extensions we support
     static const QString gpxx_ns;

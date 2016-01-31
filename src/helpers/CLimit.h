@@ -71,6 +71,7 @@ signals:
     void sigChanged();
 
 private:
+    friend class CGisItemTrk;
     friend QDataStream& operator<<(QDataStream& stream, const CLimit& l);
     friend QDataStream& operator>>(QDataStream& stream, CLimit& l);
     void updateSys();

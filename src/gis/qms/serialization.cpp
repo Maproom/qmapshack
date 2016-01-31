@@ -558,6 +558,7 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 
     if(version > 1 && version <= 4)
     {
+
         QString colorSource;
         in >> colorSource;
 
@@ -565,10 +566,11 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
         in >> limitLow;
         in >> limitHigh;
 
-        colorSourceLimit.setSource(colorSource);
-        colorSourceLimit.setMin(limitLow);
-        colorSourceLimit.setMax(limitHigh);
-        colorSourceLimit.setMode(CLimit::eModeUser);
+        colorSourceLimit.source     = colorSource;
+        colorSourceLimit.mode       = CLimit::eModeAuto;
+        colorSourceLimit.minUser    = limitLow;
+        colorSourceLimit.maxUser    = limitHigh;
+
     } else if(version > 4) {
         in >> colorSourceLimit;
     }

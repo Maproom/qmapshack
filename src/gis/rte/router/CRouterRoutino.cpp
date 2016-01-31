@@ -231,15 +231,17 @@ void CRouterRoutino::buildDatabaseList()
                 continue;
             }
 
-#ifdef OS_WIN
+#ifdef Q_OS_WIN
             QFileInfo fi(dir.absoluteFilePath(filename));
             if(fi.size() > 0x0FFFFFFFFLL)
             {
                 QMessageBox::warning(this, tr("Warning..."), tr("%1: Due to limitations in the Windows POSIX API Routino can't handle files larger than 4GB.").arg(prefix), QMessageBox::Ok);
                 continue;
             }
-#endif
+            Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toLocal8Bit(), prefix.toLocal8Bit());
+#else
             Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toUtf8(), prefix.toUtf8());
+#endif
             if(data)
             {
                 comboDatabase->addItem(prefix.replace("_", " "), quint64(data));

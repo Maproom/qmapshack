@@ -334,7 +334,7 @@ public:
 
     /**
        @brief Check if item is on a GPS device
-       @return True if the item is stored on a device
+       @return The device type (IDevice::type_e). IDevice::eTypeNone of the item is not stored on a device.
      */
     qint32 isOnDevice() const;
 

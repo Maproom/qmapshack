@@ -356,7 +356,7 @@ public:
 
     /**
        @brief Test if this project is handled by a device
-       @return The device type (IDevice::type_e). IDevice::eTypeNone of the project is not stored on a device.
+       @return The device type (IDevice::type_e). IDevice::eTypeNone if the project is not stored on a device.
      */
     qint32 isOnDevice() const;
 

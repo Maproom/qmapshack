@@ -82,11 +82,11 @@ private:
     qreal minUser = NOFLOAT;
     qreal maxUser = NOFLOAT;
 
-    fGetLimit    funcGetMin;
-    fGetLimit    funcGetMax;
-    fGetLimit    funcGetMinAuto;
-    fGetLimit    funcGetMaxAuto;
-    fGetUnit     funcGetUnit;
+    fGetLimit funcGetMin;
+    fGetLimit funcGetMax;
+    fGetLimit funcGetMinAuto;
+    fGetLimit funcGetMaxAuto;
+    fGetUnit funcGetUnit;
     fMarkChanged funcMarkChanged;
 
     QString source;

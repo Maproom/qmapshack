@@ -18,8 +18,8 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterDeleteExtension.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/filter/CFilterDeleteExtension.h"
 
 
 

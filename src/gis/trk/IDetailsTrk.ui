@@ -488,18 +488,18 @@
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Maximum</enum>
+                   </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>40</width>
+                     <width>25</width>
                      <height>20</height>
                     </size>
                    </property>
                   </spacer>
                  </item>
                 </layout>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="comboColorSource"/>
                </item>
                <item row="5" column="0">
                 <widget class="QLabel" name="label_3">
@@ -592,9 +592,12 @@
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Maximum</enum>
+                   </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>40</width>
+                     <width>25</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -619,19 +622,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_4">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Solid color</string>
-                 </property>
-                </widget>
-               </item>
                <item row="7" column="1">
                 <widget class="QDoubleSpinBox" name="spinLineWidth">
                  <property name="prefix">
@@ -651,9 +641,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QComboBox" name="comboColor"/>
-               </item>
                <item row="4" column="0">
                 <widget class="QLabel" name="label_2">
                  <property name="sizePolicy">
@@ -664,19 +651,6 @@
                  </property>
                  <property name="text">
                   <string>Maximum</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Source</string>
                  </property>
                 </widget>
                </item>
@@ -766,19 +740,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item>
-                  <spacer name="horizontalSpacer_9">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
                 </layout>
                </item>
                <item row="5" column="2">
@@ -788,10 +749,42 @@
                  </property>
                 </layout>
                </item>
-               <item row="6" column="0" colspan="2">
+               <item row="6" column="0" colspan="3">
                 <widget class="Line" name="line_4">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboColorSource"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QComboBox" name="comboColor"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_4">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Source</string>
                  </property>
                 </widget>
                </item>
@@ -1598,7 +1591,7 @@
   <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupGraph2"/>
-  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupArrow"/>
  </buttongroups>
 </ui>

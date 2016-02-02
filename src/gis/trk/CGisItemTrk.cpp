@@ -859,7 +859,9 @@ void CGisItemTrk::deriveSecondaryData()
         if(it->pts.isEmpty())
         {
             it = trk.segs.erase(it);
-        } else {
+        }
+        else
+        {
             ++it;
         }
     }

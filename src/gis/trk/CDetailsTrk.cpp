@@ -78,7 +78,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 {
     setupUi(this);
 
-    QPixmap icon(16,8);
+    QPixmap icon(14,14);
 
     for(int i=0; i < TRK_N_COLORS; ++i)
     {
@@ -502,7 +502,7 @@ void CDetailsTrk::updateData()
 
     comboColorSource->clear();
     // the first entry `solid color`, it is always available
-    comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Solid color"));
+    comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Color"));
     foreach(const QString &key, trk.getExistingDataSources())
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
@@ -519,6 +519,7 @@ void CDetailsTrk::updateData()
 
     bool enabled = (0 < currentIdx);
 
+    comboColor->setDisabled(enabled);
     widgetColorLabel->setEnabled  (enabled);
     toolLimitAutoStyle->setEnabled(enabled);
     toolLimitUsrStyle->setEnabled (enabled);

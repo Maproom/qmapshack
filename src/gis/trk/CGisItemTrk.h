@@ -320,7 +320,7 @@ public:
     void setColorizeLimitHigh(qreal limit);
     qreal getColorizeLimitHigh() const
     {
-	return colorSourceLimit.getMax();
+        return colorSourceLimit.getMax();
     }
 
     void setColorizeLimits(qreal low, qreal high);

@@ -58,8 +58,8 @@ private:
                     bool derivedQMS,   fTrkPtGetVal valueFunc
                     )
         : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
-          minimum(minimum), maximum(maximum), factor(factor), unit(unit),
-          icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
+        minimum(minimum), maximum(maximum), factor(factor), unit(unit),
+        icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
     {
     }
 

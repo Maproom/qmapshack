@@ -174,7 +174,7 @@ public:
        @brief Get unique project key.
        @return A MD5 hash string
      */
-    const QString& getKey()
+    const QString& getKey() const
     {
         genKey();
         return key;
@@ -388,7 +388,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    virtual QDataStream& operator>>(QDataStream& stream);
+    virtual QDataStream& operator>>(QDataStream& stream) const;
 
     /**
        @brief writeMetadata
@@ -440,7 +440,7 @@ public:
     }
 
 protected:
-    void genKey();
+    void genKey() const;
     virtual void setupName(const QString& defaultName);
     void markAsSaved();
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
@@ -472,7 +472,7 @@ protected:
     QPointer<CDetailsPrj> dlgDetails;
 
     type_e type;
-    QString key;
+    mutable QString key;
     QString filename;
     bool valid         = false;
     bool noUpdate      = false;

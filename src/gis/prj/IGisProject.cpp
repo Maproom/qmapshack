@@ -132,7 +132,7 @@ bool IGisProject::isVisible() const
     return checkState(CGisListWks::eColumnDecoration) == Qt::Checked;
 }
 
-void IGisProject::genKey()
+void IGisProject::genKey() const
 {
     if(key.isEmpty())
     {

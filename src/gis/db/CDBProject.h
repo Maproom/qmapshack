@@ -80,7 +80,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    QDataStream& operator>>(QDataStream& stream) override;
+    QDataStream& operator>>(QDataStream& stream) const override;
 
     /**
        @brief Send a CEvtW2DAckInfo event to the database view

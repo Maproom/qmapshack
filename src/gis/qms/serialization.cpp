@@ -919,7 +919,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     return stream;
 }
 
-QDataStream& IGisProject::operator>>(QDataStream& stream)
+QDataStream& IGisProject::operator>>(QDataStream& stream) const
 {
     stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
     stream << VER_PROJECT;
@@ -1038,7 +1038,7 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     return stream;
 }
 
-QDataStream& CDBProject::operator>>(QDataStream& stream)
+QDataStream& CDBProject::operator>>(QDataStream& stream) const
 {
     stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
     stream << VER_PROJECT;

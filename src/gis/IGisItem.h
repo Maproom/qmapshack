@@ -187,7 +187,7 @@ public:
        @brief Get key string to identify object
        @return
      */
-    const key_t& getKey();
+    const key_t& getKey() const;
 
     /**
        @brief Get a hash over the items data.
@@ -493,7 +493,7 @@ protected:
     /// write waypoint data to an XML snippet
     void writeWpt(QDomElement &xml, const wpt_t &wpt);
     /// generate a unique key from item's data
-    virtual void genKey();
+    virtual void genKey() const;
     /// setup the history structure right after the creation of the item
     void setupHistory();
     /// update current history entry (e.g. to save the flags)
@@ -526,7 +526,7 @@ protected:
     /// see flags_e for possible flags
     quint32 flags = 0;
     /// the item's unique key
-    key_t key;
+    mutable key_t key;
     /// each item has an icon for the tree widget
     QPixmap icon;
     /// the dimensions of the item

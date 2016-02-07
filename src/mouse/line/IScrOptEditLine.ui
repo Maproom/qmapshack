@@ -37,7 +37,7 @@
      <item>
       <widget class="QPushButton" name="pushSaveOrig">
        <property name="text">
-        <string>Save to orignal</string>
+        <string>Save to original</string>
        </property>
       </widget>
      </item>

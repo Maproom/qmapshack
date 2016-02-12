@@ -36,6 +36,7 @@ public:
     static bool isKnown(const QString &name);
 
     QString name;              //< userfriendly name ("Speed" "Heart Rate")
+    int order;                 //< the order used for exporting ("relative position")
     qreal minimum;             //< hard (enforced) minimum, cannot go lower
     qreal maximum;             //< hard (enforced) maximum, cannot go higher
     qreal factor;              //< factor used to convert a value to match the users' units
@@ -48,14 +49,14 @@ public:
 private:
     static QHash<QString, CKnownExtension> knownExtensions;
 
-    CKnownExtension(QString name,
+    CKnownExtension(QString name,      int order,
                     qreal minimum,     qreal maximum,
                     qreal factor,      QString unit,
                     QString icon,      bool known,
                     bool derivedQMS,   fTrkPtGetVal valueFunc
                     )
-        : name(name), minimum(minimum), maximum(maximum), factor(factor), unit(unit),
-          icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
+        : name(name), order(order), minimum(minimum), maximum(maximum), factor(factor),
+          unit(unit), icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
     {
     }
 

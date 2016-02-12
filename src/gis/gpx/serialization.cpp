@@ -22,6 +22,7 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "version.h"
 
@@ -339,7 +340,10 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
     QDomDocument doc = ext.ownerDocument();
 
     QStringList keys = extensions.keys();
-    keys.sort();
+    qSort(keys.begin(), keys.end(), [] (const QString &k1, const QString &k2) {
+        return CKnownExtension::get(k1).order < CKnownExtension::get(k2).order;
+    });
+
     foreach(const QString &key, keys)
     {
         QStringList tags = key.split('|', QString::SkipEmptyParts);

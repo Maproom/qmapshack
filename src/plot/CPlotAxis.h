@@ -83,7 +83,7 @@ public:
         {
             return 0;
         }
-        return ( int ) ( ( val - usedMin ) * scale + 0.5 );
+        return qRound(( val - usedMin ) * scale);
     }
 
     inline qreal pt2val( int pt ) const
@@ -92,7 +92,7 @@ public:
         {
             return 0;
         }
-        return ( qreal ) ( ( (qreal)pt - 0.5 ) / scale + usedMin );
+        return ( qreal(pt) / scale + usedMin );
     }
 
     void setAutoscale(bool on)

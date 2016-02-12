@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
+    Copyright (C) 2015-2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,8 +36,6 @@ public:
     static bool isKnown(const QString &name);
 
     QString name;              //< userfriendly name ("Speed" "Heart Rate")
-    qreal defLimitLow;         //< the default lower limit
-    qreal defLimitHigh;        //< the default high limit
     qreal minimum;             //< hard (enforced) minimum, cannot go lower
     qreal maximum;             //< hard (enforced) maximum, cannot go higher
     qreal factor;              //< factor used to convert a value to match the users' units
@@ -51,14 +49,12 @@ private:
     static QHash<QString, CKnownExtension> knownExtensions;
 
     CKnownExtension(QString name,
-                    qreal defLimitLow, qreal defLimitHigh,
                     qreal minimum,     qreal maximum,
                     qreal factor,      QString unit,
                     QString icon,      bool known,
                     bool derivedQMS,   fTrkPtGetVal valueFunc
                     )
-        : name(name), defLimitLow(defLimitLow), defLimitHigh(defLimitHigh),
-          minimum(minimum), maximum(maximum), factor(factor), unit(unit),
+        : name(name), minimum(minimum), maximum(maximum), factor(factor), unit(unit),
           icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
     {
     }

@@ -1720,7 +1720,7 @@ Structure inconnue.</translation>
         <translation>La trace obtenue ne contiendra que des données de position. Toutes les autres données (altitude, temps, etc...) seront perdues.</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Ceci remplacera les données de l&apos;original par une ligne simple de coordonnées. Toutes les autres données seront définitivement perdues.</translation>
     </message>
 </context>
@@ -4551,7 +4551,7 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
         <translation type="obsolete">Avertissement !</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Ceci remplacera les données de l&apos;original par une ligne simple de coordonnées. Toutes les autres données seront définitivement perdues.</translation>
     </message>
     <message>
@@ -4996,7 +4996,7 @@ or
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
-        <source>Save to orignal</source>
+        <source>Save to original</source>
         <translation>Enregistrer</translation>
     </message>
     <message>

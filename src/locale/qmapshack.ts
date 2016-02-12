@@ -4643,7 +4643,7 @@ or
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
-        <source>Save to orignal</source>
+        <source>Save to original</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

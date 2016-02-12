@@ -1796,7 +1796,7 @@ Neznámá stavba.</translation>
         <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
 </context>
@@ -4735,7 +4735,7 @@ Nechce se mi číst dokumentaci!</translation>
         <translation type="obsolete">Varování!</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
     <message>
@@ -5185,7 +5185,7 @@ nebo
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
-        <source>Save to orignal</source>
+        <source>Save to original</source>
         <translation>Uložit do předlohy</translation>
     </message>
     <message>

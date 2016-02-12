@@ -1775,7 +1775,7 @@ Estructura desconocida.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Esto sustituirá todos los datos del original con una simple línea de coordenadas. Todos los demás datos se perderán definitivamente.</translation>
     </message>
 </context>
@@ -4644,7 +4644,7 @@ I don&apos;t want to read the documentation!</source>
         <translation type="obsolete">¡Cuidado!</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Esto sustituirá todos los datos del original con una simple línea de coordenadas. Todos los demás datos se perderán definitivamente.</translation>
     </message>
     <message>
@@ -5090,7 +5090,7 @@ o
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
-        <source>Save to orignal</source>
+        <source>Save to original</source>
         <translation>Guardar al original</translation>
     </message>
     <message>

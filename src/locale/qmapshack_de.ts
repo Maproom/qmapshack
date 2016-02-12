@@ -1857,7 +1857,7 @@ Unbekannte Struktur.</translation>
         <translation type="obsolete">Warnung!</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
 </context>
@@ -1907,7 +1907,7 @@ Unbekannte Struktur.</translation>
         <translation>Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
 </context>
@@ -4887,7 +4887,7 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation type="obsolete">Warnung!</translation>
     </message>
     <message>
-        <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>
+        <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation type="obsolete">Alle ursprünglichen Daten werden durch eine einfache Koordinatenlinie ersetzt. Alle anderen Daten sind dauerhaft verloren.</translation>
     </message>
     <message>
@@ -5342,7 +5342,7 @@ sein</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
-        <source>Save to orignal</source>
+        <source>Save to original</source>
         <translation>Ins Original speichern</translation>
     </message>
     <message>

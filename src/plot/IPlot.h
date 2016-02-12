@@ -113,6 +113,8 @@ protected:
     void drawTags(QPainter& p);
     void drawActivities(QPainter& p);
 
+    bool graphAreaContainsMousePos(QPoint& pos);
+
     static int cnt;
 
     // different draw modes

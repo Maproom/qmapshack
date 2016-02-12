@@ -274,6 +274,31 @@ void IPlot::keyPressEvent(QKeyEvent *e)
     }
 }
 
+bool IPlot::graphAreaContainsMousePos(QPoint& pos)
+{
+    if(rectGraphArea.contains(pos))
+    {
+        return true;
+    }
+
+    if((pos.y() < rectGraphArea.bottom()) && (pos.y() > rectGraphArea.top()))
+    {
+        if(pos.x() < rectGraphArea.left())
+        {
+            pos.rx() = rectGraphArea.left();
+        }
+
+        if(pos.x() > rectGraphArea.right())
+        {
+            pos.rx() = rectGraphArea.right();
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
 void IPlot::mouseMoveEvent(QMouseEvent * e)
 {
     if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
@@ -281,10 +306,11 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         return;
     }
 
-    posMouse = NOPOINT;
-    if(rectGraphArea.contains(e->pos()))
+    QPoint pos  = e->pos();
+    posMouse    = NOPOINT;
+    if(graphAreaContainsMousePos(pos))
     {
-        posMouse = e->pos();
+        posMouse = pos;
 
         // set point of focus at track object
         qreal x = data->x().pt2val(posMouse.x() - left);
@@ -335,10 +361,11 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
     bool wasProcessed = true;
 
-    posMouse = NOPOINT;
-    if((e->button() == Qt::LeftButton) && rectGraphArea.contains(e->pos()))
+    QPoint pos  = e->pos();
+    posMouse    = NOPOINT;
+    if((e->button() == Qt::LeftButton) && graphAreaContainsMousePos(pos))
     {
-        posMouse = e->pos();
+        posMouse = pos;
 
         if(mode == eModeIcon)
         {
@@ -380,7 +407,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                     Later, when destroyed the slots will be disconnected automatically.
                  */
                 delete scrOptRange;
-                scrOptRange = new CScrOptRangeTrk(e->pos(), trk, &dummyMouse, this);
+                scrOptRange = new CScrOptRangeTrk(pos, trk, &dummyMouse, this);
                 connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &IPlot::slotHidePoints);
                 connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
                 connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &IPlot::slotActivity);

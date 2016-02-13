@@ -27,6 +27,8 @@ public:
     IDBSqlite();
     virtual ~IDBSqlite() = default;
 
+    QString getDBInfo() const override;
+
 protected:
     using IDB::setupDB;
     bool setupDB(const QString &filename, const QString &connectionName);

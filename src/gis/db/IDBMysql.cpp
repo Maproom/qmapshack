@@ -64,7 +64,7 @@ bool IDBMysql::setupDB(const QString& server, const QString& port, const QString
 
         if(!db.open())
         {
-            qDebug() << "failed to open database" << db.lastError();
+            qDebug() << "failed to open database" << db.lastError(); //XXX
         }
     }
     else
@@ -168,4 +168,20 @@ bool IDBMysql::migrateDB(int version)
     query.bindValue(":version", DB_VERSION);
     QUERY_EXEC(return false);
     return true;
+}
+
+QString IDBMysql::getDBInfo() const
+{
+    QString str = "<div style='font-weight: bold;'>" + db.connectionName() + "</div><br />";
+    str += tr("MySQL Database") + "<br />";
+    if(-1 != db.port())
+    {
+        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(db.hostName()).arg(db.port());
+    }
+    else
+    {
+        str += tr("Server: ") + QString("<i>%1</i>").arg(db.hostName());
+    }
+
+    return str;
 }

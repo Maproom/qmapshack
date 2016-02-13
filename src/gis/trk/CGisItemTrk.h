@@ -334,6 +334,7 @@ public:
 private:
     void drawColorized(QPainter &p);
     void drawColorizedByActivity(QPainter& p);
+    void setPen(QPainter& p, QPen& pen, quint32 flag);
     /**@}*/
 
 

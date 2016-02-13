@@ -313,19 +313,17 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         return;
     }
 
+    actionUpdate->setEnabled(true);
+    actionAddFolder->setEnabled(true);
+
     IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(currentItem());
     if(database)
     {
-        if(!database->getDb().isOpen())
-        {
-            actionUpdate->setDisabled(true);
-            actionAddFolder->setDisabled(true);
-        }
+        bool enabled = database->getDb().isOpen();
+        actionUpdate->setEnabled(enabled);
+        actionAddFolder->setEnabled(enabled);
 
         menuDatabase->exec(p);
-
-        actionUpdate->setDisabled(false);
-        actionAddFolder->setDisabled(false);
 
         return;
     }

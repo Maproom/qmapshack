@@ -20,9 +20,11 @@
 #define CDBFOLDERLOSTFOUND_H
 
 #include "gis/db/IDBFolder.h"
+#include <QCoreApplication>
 
 class CDBFolderLostFound : public IDBFolder
 {
+    Q_DECLARE_TR_FUNCTIONS(CDBFolderLostFound)
 public:
     CDBFolderLostFound(QSqlDatabase &db, QTreeWidgetItem *parent);
     virtual ~CDBFolderLostFound();

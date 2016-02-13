@@ -33,6 +33,7 @@ class IDevice;
 
 class IGisProject : public QTreeWidgetItem
 {
+    Q_DECLARE_TR_FUNCTIONS(IGisProject)
 public:
     enum type_e
     {

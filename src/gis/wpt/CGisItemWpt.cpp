@@ -99,7 +99,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 
     if(clone)
     {
-        wpt.name += QObject::tr("_Clone");
+        wpt.name += tr("_Clone");
         key.clear();
         history.events.clear();
         setupHistory();
@@ -264,7 +264,7 @@ QString CGisItemWpt::getInfo(bool allowEdit) const
         }
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
-        str += QObject::tr("Elevation: %1 %2").arg(val).arg(unit);
+        str += tr("Elevation: %1 %2").arg(val).arg(unit);
     }
 
     if(proximity != NOFLOAT)
@@ -275,7 +275,7 @@ QString CGisItemWpt::getInfo(bool allowEdit) const
         }
         QString val, unit;
         IUnit::self().meter2distance(proximity, val, unit);
-        str += QObject::tr("Proximity: %1 %2").arg(val).arg(unit);
+        str += tr("Proximity: %1 %2").arg(val).arg(unit);
     }
 
     QString desc = removeHtml(wpt.desc).simplified();
@@ -349,7 +349,7 @@ void CGisItemWpt::setName(const QString& str)
     setText(CGisListWks::eColumnName, str);
 
     wpt.name = str;
-    changed(QObject::tr("Changed name"),"://icons/48x48/EditText.png");
+    changed(tr("Changed name"),"://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setPosition(const QPointF& pos)
@@ -359,19 +359,19 @@ void CGisItemWpt::setPosition(const QPointF& pos)
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 
-    changed(QObject::tr("Changed position"),"://icons/48x48/WptMove.png");
+    changed(tr("Changed position"),"://icons/48x48/WptMove.png");
 }
 
 void CGisItemWpt::setElevation(qint32 val)
 {
     wpt.ele = val;
-    changed(QObject::tr("Changed elevation"),"://icons/48x48/SetEle.png");
+    changed(tr("Changed elevation"),"://icons/48x48/SetEle.png");
 }
 
 void CGisItemWpt::setProximity(qreal val)
 {
     proximity = val;
-    changed(QObject::tr("Changed proximity"),"://icons/48x48/WptProx.png");
+    changed(tr("Changed proximity"),"://icons/48x48/WptProx.png");
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -385,37 +385,37 @@ void CGisItemWpt::setIcon(const QString& name)
     QString path;
     getWptIconByName(name, focus, &path);
 
-    changed(QObject::tr("Changed icon"), path);
+    changed(tr("Changed icon"), path);
 }
 
 void CGisItemWpt::setComment(const QString& str)
 {
     wpt.cmt = str;
-    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
+    changed(tr("Changed comment"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setDescription(const QString& str)
 {
     wpt.desc = str;
-    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
+    changed(tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setLinks(const QList<link_t>& links)
 {
     wpt.links = links;
-    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+    changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
 void CGisItemWpt::setImages(const QList<image_t>& imgs)
 {
     images = imgs;
-    changed(QObject::tr("Changed images"), "://icons/48x48/Image.png");
+    changed(tr("Changed images"), "://icons/48x48/Image.png");
 }
 
 void CGisItemWpt::addImage(const image_t& img)
 {
     images.append(img);
-    changed(QObject::tr("Add image"), "://icons/48x48/Image.png");
+    changed(tr("Add image"), "://icons/48x48/Image.png");
 }
 
 

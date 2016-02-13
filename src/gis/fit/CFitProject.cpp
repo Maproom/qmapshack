@@ -41,7 +41,7 @@ CFitProject::CFitProject(const QString &filename, CGisListWks *parent)
     catch(QString &errormsg)
     {
         QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                              QObject::tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
+                              tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
         valid = false;
     }
     blockUpdateItems(false);
@@ -59,7 +59,7 @@ CFitProject::CFitProject(const QString &filename, IDevice *parent)
     catch(QString &errormsg)
     {
         QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                              QObject::tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
+                              tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
         valid = false;
     }
     blockUpdateItems(false);
@@ -83,7 +83,7 @@ void CFitProject::loadFit(const QString & filename)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        throw QObject::tr("Failed to open FIT file %1.").arg(filename);
+        throw tr("Failed to open FIT file %1.").arg(filename);
     }
 
     CFitStream in(file);

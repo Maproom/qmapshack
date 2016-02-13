@@ -113,7 +113,7 @@ void CFitDecoder::decode(QFile &file)
     }
     // unexpected end of file
     printDebugInfo();
-    throw QObject::tr("FIT decoding error: unexpected end of file %1.").arg(file.fileName());
+    throw tr("FIT decoding error: unexpected end of file %1.").arg(file.fileName());
 }
 
 const QList<CFitMessage>& CFitDecoder::getMessages() const

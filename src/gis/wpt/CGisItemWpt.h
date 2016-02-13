@@ -23,6 +23,7 @@
 #include "gis/tnv/CTwoNavProject.h"
 
 #include <QPointer>
+#include <QCoreApplication>
 
 class IGisProject;
 class QDomNode;
@@ -34,6 +35,7 @@ class QDir;
 class CFitStream;
 class CGisItemWpt : public IGisItem
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemWpt)
 public:
     enum geocacheservice_e {eGC, eOC, eTC};
 

@@ -36,7 +36,7 @@ CLostFoundProject::CLostFoundProject(const QString &dbName, CGisListWks * parent
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/DeleteMultiple.png"));
 
     filename        = dbName;
-    metadata.name   = QObject::tr("Lost & Found");
+    metadata.name   = tr("Lost & Found");
 
     setupName(dbName);
 

@@ -22,10 +22,12 @@
 #include <QIcon>
 #include <QPointer>
 #include <QVector>
+#include <QCoreApplication>
 class CGisItemTrk;
 
 class CActivityTrk
 {
+    Q_DECLARE_TR_FUNCTIONS(CActivityTrk)
 public:
     virtual ~CActivityTrk() = default;
 

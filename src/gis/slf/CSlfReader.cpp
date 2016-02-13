@@ -56,12 +56,12 @@ CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj)
     // if the file does not exist, the filename is assumed to be a name for a new project
     if(!file.exists())
     {
-        throw QObject::tr("%1 does not exist").arg(filename);
+        throw tr("%1 does not exist").arg(filename);
     }
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        throw QObject::tr("Failed to open %1").arg(filename);
+        throw tr("Failed to open %1").arg(filename);
     }
 
     // load file content to xml document
@@ -72,21 +72,21 @@ CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj)
     if(!xml.setContent(&file, false, &msg, &line, &column))
     {
         file.close();
-        throw QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
+        throw tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
     }
     file.close();
 
     QDomElement xmlAct = xml.documentElement();
     if(xmlAct.tagName() != "Activity")
     {
-        throw QObject::tr("Not a SLF file: %1").arg(filename);
+        throw tr("Not a SLF file: %1").arg(filename);
     }
 
     // Ensure we only open files with the correct version (only revision 400 supported atm)
     const int revision = xmlAct.attributes().namedItem("revision").nodeValue().toInt();
     if(400 != revision)
     {
-        throw QObject::tr("Unsupported revision %1: %2").arg(revision).arg(filename);
+        throw tr("Unsupported revision %1: %2").arg(revision).arg(filename);
     }
 
     // Parse the file's dateCode
@@ -161,11 +161,11 @@ void CSlfReader::readMarkers(const QDomNode& xml)
             {
                 if("p" == type)
                 {
-                    name = QObject::tr("Break %1").arg(attr.namedItem("number").nodeValue());
+                    name = tr("Break %1").arg(attr.namedItem("number").nodeValue());
                 }
                 if("l" == type)
                 {
-                    name = QObject::tr("Lap %1").arg(attr.namedItem("number").nodeValue());
+                    name = tr("Lap %1").arg(attr.namedItem("number").nodeValue());
                 }
             }
 

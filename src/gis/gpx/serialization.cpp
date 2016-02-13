@@ -585,15 +585,15 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
     if(geocache.archived)
     {
-        geocache.status = QObject::tr("Archived");
+        geocache.status = tr("Archived");
     }
     else if(geocache.available)
     {
-        geocache.status = QObject::tr("Available");
+        geocache.status = tr("Available");
     }
     else
     {
-        geocache.status = QObject::tr("Not Available");
+        geocache.status = tr("Not Available");
     }
 
     readXml(xmlCache, "groundspeak:name",              geocache.name);
@@ -1036,7 +1036,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
             writeXml(startPosition, "Lat", origin.lat);
             writeXml(startPosition, "Lon", origin.lon);
 
-            writeXml(adventure, "Activity", QObject::tr("Unknown"));
+            writeXml(adventure, "Activity", tr("Unknown"));
             writeXml(adventure, "Distance", track->getTotalDistance());
             writeXml(adventure, "Duration", track->getTotalElapsedSecondsMoving());
             writeXml(adventure, "Ascent", track->getTotalAscend());

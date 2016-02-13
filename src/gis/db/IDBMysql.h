@@ -23,6 +23,7 @@
 
 class IDBMysql : public IDB
 {
+    Q_DECLARE_TR_FUNCTIONS(IDBMysql)
 public:
     IDBMysql();
     virtual ~IDBMysql() = default;

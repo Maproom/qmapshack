@@ -87,7 +87,7 @@ void CGpxProject::loadGpx(const QString& filename)
     catch(QString &errormsg)
     {
         QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                              QObject::tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
+                              tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
         valid = false;
     }
 }
@@ -109,7 +109,7 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        throw QObject::tr("Failed to open %1").arg(filename);
+        throw tr("Failed to open %1").arg(filename);
     }
 
 
@@ -121,7 +121,7 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
     if(!xml.setContent(&file, false, &msg, &line, &column))
     {
         file.close();
-        throw QObject::tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
+        throw tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
     }
     file.close();
 
@@ -129,7 +129,7 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
     QDomElement xmlGpx = xml.documentElement();
     if(xmlGpx.tagName() != "gpx")
     {
-        throw QObject::tr("Not a GPX file: %1").arg(filename);
+        throw tr("Not a GPX file: %1").arg(filename);
     }
 
     const QDomElement& xmlExtension = xmlGpx.namedItem("extensions").toElement();
@@ -235,8 +235,8 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
 
         if(!createdByQMS)
         {
-            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(),QObject::tr("File exists ...")
-                                           ,QObject::tr("The file exists and it has not been created by QMapShack. "
+            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(),tr("File exists ...")
+                                           ,tr("The file exists and it has not been created by QMapShack. "
                                                         "If you press 'yes' all data in this file will be lost. "
                                                         "Even if this file contains GPX data and has been loaded by QMapShack, "
                                                         "QMapShack might not be able to load and store all elements of this file.  "
@@ -344,7 +344,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     {
         if(!file.open(QIODevice::WriteOnly))
         {
-            throw QObject::tr("Failed to create file '%1'").arg(_fn_);
+            throw tr("Failed to create file '%1'").arg(_fn_);
         }
         QTextStream out(&file);
         out.setCodec("UTF-8");
@@ -354,12 +354,12 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         file.close();
         if(file.error() != QFile::NoError)
         {
-            throw QObject::tr("Failed to write file '%1'").arg(_fn_);
+            throw tr("Failed to write file '%1'").arg(_fn_);
         }
     }
     catch(const QString& msg)
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         res = false;
     }
     project.umount();

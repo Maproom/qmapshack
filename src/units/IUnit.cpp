@@ -732,13 +732,13 @@ bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat)
     }
     else
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),QObject::tr("Error"),QObject::tr("Bad position format. Must be: \"[N|S] ddd mm.sss [W|E] ddd mm.sss\" or \"[N|S] ddd.ddd [W|E] ddd.ddd\""),QMessageBox::Ok,QMessageBox::NoButton);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),tr("Error"),tr("Bad position format. Must be: \"[N|S] ddd mm.sss [W|E] ddd mm.sss\" or \"[N|S] ddd.ddd [W|E] ddd.ddd\""),QMessageBox::Ok,QMessageBox::NoButton);
         return false;
     }
 
     if(fabs(lon) > 180.0 || fabs(lat) > 90.0)
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),QObject::tr("Error"),QObject::tr("Position values out of bounds. "),QMessageBox::Ok,QMessageBox::NoButton);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),tr("Error"),tr("Position values out of bounds. "),QMessageBox::Ok,QMessageBox::NoButton);
         return false;
     }
 

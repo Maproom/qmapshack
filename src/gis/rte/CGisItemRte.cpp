@@ -60,7 +60,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 
     if(clone)
     {
-        rte.name += QObject::tr("_Clone");
+        rte.name += tr("_Clone");
         key.clear();
         history.events.clear();
     }
@@ -246,25 +246,25 @@ void CGisItemRte::setName(const QString& str)
 {
     setText(CGisListWks::eColumnName, str);
     rte.name = str;
-    changed(QObject::tr("Changed name."), "://icons/48x48/EditText.png");
+    changed(tr("Changed name."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemRte::setComment(const QString& str)
 {
     rte.cmt = str;
-    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
+    changed(tr("Changed comment"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemRte::setDescription(const QString& str)
 {
     rte.desc = str;
-    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
+    changed(tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemRte::setLinks(const QList<link_t>& links)
 {
     rte.links = links;
-    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+    changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
 
@@ -282,30 +282,30 @@ QString CGisItemRte::getInfo(bool showName) const
     if(totalDistance != NOFLOAT)
     {
         IUnit::self().meter2distance(totalDistance, val1, unit1);
-        str += QObject::tr("Length: %1 %2").arg(val1).arg(unit1);
+        str += tr("Length: %1 %2").arg(val1).arg(unit1);
     }
     else
     {
-        str += QObject::tr("Length: -");
+        str += tr("Length: -");
     }
 
     str += "<br/>\n";
     if(totalTime != 0)
     {
         IUnit::self().seconds2time(totalTime, val1, unit1);
-        str += QObject::tr("Time: %1 %2").arg(val1).arg(unit1);
+        str += tr("Time: %1 %2").arg(val1).arg(unit1);
     }
     else
     {
-        str += QObject::tr("Time: -");
+        str += tr("Time: -");
     }
 
     if(!lastRoutedWith.isEmpty())
     {
         str += "<br/>\n";
-        str += QObject::tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(lastRoutedTime, false, boundingRect.center()));
+        str += tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(lastRoutedTime, false, boundingRect.center()));
         str += "<br/>\n";
-        str += QObject::tr("with %1").arg(lastRoutedWith);
+        str += tr("with %1").arg(lastRoutedWith);
     }
     return str;
 }
@@ -476,9 +476,9 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         QString str, val, unit;
         IUnit::self().seconds2time(mouseMoveFocus->time, val, unit);
-        str += QObject::tr("Time: %1 %2").arg(val).arg(unit) + " ";
+        str += tr("Time: %1 %2").arg(val).arg(unit) + " ";
         IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
-        str += QObject::tr("Distance: %1 %2").arg(val).arg(unit);
+        str += tr("Distance: %1 %2").arg(val).arg(unit);
         str += "\n" + mouseMoveFocus->instruction;
 
         // calculate bounding box of text
@@ -592,7 +592,7 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
     readRouteDataFromGisLine(l);
 
     flags |= eFlagTainted;
-    changed(QObject::tr("Changed route points."), "://icons/48x48/LineMove.png");
+    changed(tr("Changed route points."), "://icons/48x48/LineMove.png");
 }
 
 void CGisItemRte::getPolylineFromData(SGisLine& l)

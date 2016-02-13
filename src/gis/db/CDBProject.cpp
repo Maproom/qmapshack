@@ -192,16 +192,16 @@ int CDBProject::checkForAction2(IGisItem * item, quint64 &idItem, QString& hashI
 
         hashItem = hash;
 
-        QString msg = QObject::tr(
+        QString msg = tr(
             "The item %1 has been changed by %2 (%3). \n\n"
             "To solve this conflict you can create and save a clone, force your version or drop "
             "your version and take the one from the database"
             ).arg(item->getNameEx()).arg(user).arg(date);
 
-        QMessageBox msgBox(QMessageBox::Question, QObject::tr("Conflict with database..."), msg, QMessageBox::NoButton, CMainWindow::self().getBestWidgetForParent());
-        QAbstractButton* pButClone  = msgBox.addButton(QObject::tr("Clone && Save"), QMessageBox::YesRole);
-        QAbstractButton* pButForce  = msgBox.addButton(QObject::tr("Force Save"),    QMessageBox::ApplyRole);
-        QAbstractButton* pButUpdate = msgBox.addButton(QObject::tr("Take remote"),   QMessageBox::DestructiveRole);
+        QMessageBox msgBox(QMessageBox::Question, tr("Conflict with database..."), msg, QMessageBox::NoButton, CMainWindow::self().getBestWidgetForParent());
+        QAbstractButton* pButClone  = msgBox.addButton(tr("Clone && Save"), QMessageBox::YesRole);
+        QAbstractButton* pButForce  = msgBox.addButton(tr("Force Save"),    QMessageBox::ApplyRole);
+        QAbstractButton* pButUpdate = msgBox.addButton(tr("Take remote"),   QMessageBox::DestructiveRole);
         msgBox.addButton(QMessageBox::Abort);
 
         msgBox.exec();
@@ -504,8 +504,8 @@ bool CDBProject::save()
     if(!query.next())
     {
         QMessageBox::critical(CMainWindow::self().getBestWidgetForParent()
-                              , QObject::tr("Missing folder...")
-                              , QObject::tr("Failed to save project. The folder has been deleted in the database.")
+                              , tr("Missing folder...")
+                              , tr("Failed to save project. The folder has been deleted in the database.")
                               , QMessageBox::Abort
                               );
         return false;
@@ -514,7 +514,7 @@ bool CDBProject::save()
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), getDBName(), getDBHost());
 
     int N = childCount();
-    PROGRESS_SETUP(QObject::tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());
+    PROGRESS_SETUP(tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());
 
     for(int i = 0; (i < N) && !stop; i++)
     {
@@ -580,7 +580,7 @@ bool CDBProject::save()
             switch(reason)
             {
             case eReasonQueryFail:
-                QMessageBox::critical(&progress, QObject::tr("Error"), QObject::tr("There was an unexpected database error:\n\n%1").arg(query.lastError().text()), QMessageBox::Abort);
+                QMessageBox::critical(&progress, tr("Error"), tr("There was an unexpected database error:\n\n%1").arg(query.lastError().text()), QMessageBox::Abort);
 
             case eReasonCancel:
             case eReasonUnexpected:
@@ -701,8 +701,8 @@ void CDBProject::update()
 {
     if(isChanged())
     {
-        QString msg = QObject::tr("The project '%1' is about to update itself from the database. However there are changes not saved.").arg(getName());
-        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), QObject::tr("Save changes?"), msg, QMessageBox::Save|QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Save);
+        QString msg = tr("The project '%1' is about to update itself from the database. However there are changes not saved.").arg(getName());
+        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Save changes?"), msg, QMessageBox::Save|QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Save);
 
         if(res == QMessageBox::Abort)
         {

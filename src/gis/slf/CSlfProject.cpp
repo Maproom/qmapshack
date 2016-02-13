@@ -39,7 +39,7 @@ CSlfProject::CSlfProject(const QString &filename, bool readFile)
         catch(QString &errormsg)
         {
             QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                                  QObject::tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
+                                  tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
             valid = false;
         }
     }

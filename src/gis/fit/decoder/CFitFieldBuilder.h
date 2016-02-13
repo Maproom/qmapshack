@@ -27,6 +27,7 @@ class CFitFieldDefinition;
 
 class CFitFieldBuilder
 {
+    Q_DECLARE_TR_FUNCTIONS(CFitFieldBuilder)
 public:
     CFitFieldBuilder() = delete;
     static void evaluateSubfieldsAndExpandComponents(CFitMessage& mesg);

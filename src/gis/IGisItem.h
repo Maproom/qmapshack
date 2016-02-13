@@ -30,6 +30,7 @@
 #include <QStringList>
 #include <QUrl>
 #include <QVariant>
+#include <QCoreApplication>
 
 #include "units/IUnit.h"
 
@@ -42,6 +43,7 @@ class IGisProject;
 
 class IGisItem : public QTreeWidgetItem
 {
+    Q_DECLARE_TR_FUNCTIONS(IGisItem)
 public:
     struct history_event_t
     {

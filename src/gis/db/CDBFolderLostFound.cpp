@@ -27,7 +27,7 @@
 CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent)
     : IDBFolder(true, db, eTypeLostFound, 0, parent)
 {
-    setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
+    setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
     setupFromDB();
 
     setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
@@ -56,12 +56,12 @@ void CDBFolderLostFound::setupFromDB()
 
     if(cnt)
     {
-        setText(CGisListDB::eColumnName, QObject::tr("Lost & Found (%1)").arg(cnt));
+        setText(CGisListDB::eColumnName, tr("Lost & Found (%1)").arg(cnt));
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
     }
     else
     {
-        setText(CGisListDB::eColumnName, QObject::tr("Lost & Found"));
+        setText(CGisListDB::eColumnName, tr("Lost & Found"));
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Empty.png"));
     }
 

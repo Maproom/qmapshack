@@ -67,7 +67,7 @@ decode_state_e CFitHeaderState::process(quint8 &dataByte)
         if ((dataByte & fitProtocolMajorVersionMask) >
             (fitProtocolVersionMajor << fitProtocolMajerVersionShift))
         {
-            throw QObject::tr("FIT decoding error: protocol %1 version not supported.").arg(dataByte & fitProtocolMajorVersionMask);
+            throw tr("FIT decoding error: protocol %1 version not supported.").arg(dataByte & fitProtocolMajorVersionMask);
         }
         break;
 
@@ -118,7 +118,7 @@ decode_state_e CFitHeaderState::process(quint8 &dataByte)
 
     if (invalid)
     {
-        throw QObject::tr("FIT decoding error: file header signature mismatch. File is not FIT.");
+        throw tr("FIT decoding error: file header signature mismatch. File is not FIT.");
     }
 
     if (offset == headerLength)

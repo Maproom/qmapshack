@@ -34,6 +34,7 @@ class CScrOptRte;
 
 class CGisItemRte : public IGisItem, public IGisLine
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemRte)
 public:
 
     enum focusmode_e

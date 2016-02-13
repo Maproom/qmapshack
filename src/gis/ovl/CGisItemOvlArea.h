@@ -34,6 +34,7 @@ class IQlgtOverlay;
 
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemOvlArea)
 public:
     CGisItemOvlArea(const SGisLine& line, const QString &name, IGisProject * project, int idx);
     CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);

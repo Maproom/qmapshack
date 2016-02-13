@@ -25,7 +25,7 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
     : IDBFolderSql(IDB::db, parent)
     , filename(filename)
 {
-    setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
+    setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
     setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
     setText(CGisListDB::eColumnName, name);
 
@@ -43,7 +43,7 @@ CDBFolderSqlite::~CDBFolderSqlite()
 QString CDBFolderSqlite::getDBInfo() const
 {
     QString str = "<div style='font-weight: bold;'>" + IDB::db.connectionName() + "</div><br />";
-    str += QObject::tr("SQLite Database") + "<br />";
+    str += tr("SQLite Database") + "<br />";
 
     QString path = IDB::db.databaseName();
     #ifndef Q_OS_WIN
@@ -53,6 +53,6 @@ QString CDBFolderSqlite::getDBInfo() const
     }
     #endif
 
-    str += QObject::tr("File: ") + QString("<i>%1</i>").arg(path);
+    str += tr("File: ") + QString("<i>%1</i>").arg(path);
     return str;
 }

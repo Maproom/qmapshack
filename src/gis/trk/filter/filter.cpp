@@ -105,7 +105,7 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2distance(dist, val, unit);
-    changed(QObject::tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
+    changed(tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterRemoveNullPoints()
@@ -140,7 +140,7 @@ void CGisItemTrk::filterRemoveNullPoints()
     }
 
     deriveSecondaryData();
-    changed(QObject::tr("Hide points with invalid coordinates at the beginning of the track"), "://icons/48x48/PointHide.png");
+    changed(tr("Hide points with invalid coordinates at the beginning of the track"), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterReset()
@@ -156,7 +156,7 @@ void CGisItemTrk::filterReset()
         }
     }
     deriveSecondaryData();
-    changed(QObject::tr("Reset all hidden track points to visible"), "://icons/48x48/PointHide.png");
+    changed(tr("Reset all hidden track points to visible"), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterDelete()
@@ -190,7 +190,7 @@ void CGisItemTrk::filterDelete()
     }
 
     deriveSecondaryData();
-    changed(QObject::tr("Permanently removed all hidden track points"), "://icons/48x48/PointHide.png");
+    changed(tr("Permanently removed all hidden track points"), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterSmoothProfile(int points)
@@ -240,7 +240,7 @@ void CGisItemTrk::filterSmoothProfile(int points)
         }
     }
     deriveSecondaryData();
-    changed(QObject::tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
+    changed(tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
 }
 
 void CGisItemTrk::filterReplaceElevation()
@@ -276,7 +276,7 @@ void CGisItemTrk::filterReplaceElevation()
     }
 
     deriveSecondaryData();
-    changed(QObject::tr("Replaced elevation data with data from DEM files."), "://icons/48x48/SetEle.png");
+    changed(tr("Replaced elevation data with data from DEM files."), "://icons/48x48/SetEle.png");
 }
 
 void CGisItemTrk::filterOffsetElevation(int offset)
@@ -299,7 +299,7 @@ void CGisItemTrk::filterOffsetElevation(int offset)
     QString val, unit;
     IUnit::self().meter2elevation(offset, val, unit);
     deriveSecondaryData();
-    changed(QObject::tr("Offset elevation data by %1%2.").arg(val).arg(unit), "://icons/48x48/SetEle.png");
+    changed(tr("Offset elevation data by %1%2.").arg(val).arg(unit), "://icons/48x48/SetEle.png");
 }
 
 void CGisItemTrk::filterNewDate(const QDateTime& date)
@@ -318,7 +318,7 @@ void CGisItemTrk::filterNewDate(const QDateTime& date)
     }
 
     deriveSecondaryData();
-    changed(QObject::tr("Changed start of track to %1.").arg(date.toString()), "://icons/48x48/Time.png");
+    changed(tr("Changed start of track to %1.").arg(date.toString()), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterObscureDate(int delta)
@@ -337,7 +337,7 @@ void CGisItemTrk::filterObscureDate(int delta)
         }
 
         deriveSecondaryData();
-        changed(QObject::tr("Remove timestamps."), "://icons/48x48/Time.png");
+        changed(tr("Remove timestamps."), "://icons/48x48/Time.png");
     }
     else
     {
@@ -360,7 +360,7 @@ void CGisItemTrk::filterObscureDate(int delta)
         }
 
         deriveSecondaryData();
-        changed(QObject::tr("Set artificial timestamps with delta of %1 sec.").arg(delta), "://icons/48x48/Time.png");
+        changed(tr("Set artificial timestamps with delta of %1 sec.").arg(delta), "://icons/48x48/Time.png");
     }
 }
 
@@ -393,7 +393,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2speed(speed, val, unit);
-    changed(QObject::tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSplitSegment()
@@ -412,7 +412,7 @@ void CGisItemTrk::filterSplitSegment()
             qint32 idx1 = seg.pts[                  0].idxTotal;
             qint32 idx2 = seg.pts[seg.pts.count() - 1].idxTotal;
 
-            new CGisItemTrk(QObject::tr("%1 (Segment %2)").arg(trk.name).arg(part), idx1, idx2, trk, project);
+            new CGisItemTrk(tr("%1 (Segment %2)").arg(trk.name).arg(part), idx1, idx2, trk, project);
             part++;
         }
     }
@@ -435,5 +435,5 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
     propHandler->setupData();
 
     const CKnownExtension &ext = CKnownExtension::get(extStr);
-    changed(QObject::tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/FilterModifyExtension.png");
+    changed(tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/FilterModifyExtension.png");
 }

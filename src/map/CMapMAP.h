@@ -28,6 +28,7 @@ class CMapDraw;
 
 class CMapMAP : public IMap
 {
+    Q_DECLARE_TR_FUNCTIONS(CMapMAP)
 public:
     CMapMAP(const QString& filename, CMapDraw *parent);
     virtual ~CMapMAP();

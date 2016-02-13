@@ -39,7 +39,7 @@ QMutex IGisItem::mutexItems(QMutex::Recursive);
 
 const QString IGisItem::noKey;
 
-const QString IGisItem::noName = QObject::tr("[no name]");
+const QString IGisItem::noName = IGisItem::tr("[no name]");
 
 const IGisItem::color_t IGisItem::colorMap[] =
 {
@@ -298,19 +298,19 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     if(mask & eMarkNotPart)
     {
         tt  += tt.isEmpty() ? "" : "\n";
-        tt  += QObject::tr("The item is not part of the project in the database.");
+        tt  += tr("The item is not part of the project in the database.");
         str += "?";
     }
     if(mask & eMarkNotInDB)
     {
         tt  += tt.isEmpty() ? "" : "\n";
-        tt  += QObject::tr("The item is not in the database.");
+        tt  += tr("The item is not in the database.");
         str += "X";
     }
     if(mask & eMarkChanged)
     {
         tt  += tt.isEmpty() ? "" : "\n";
-        tt  += QObject::tr("The item might need to be saved");
+        tt  += tr("The item might need to be saved");
         str += "*";
     }
     setText(CGisListWks::eColumnDecoration, str);
@@ -394,7 +394,7 @@ void IGisItem::setupHistory()
         history.events << history_event_t();
         history_event_t& event = history.events.last();
         event.time      = QDateTime::currentDateTimeUtc();
-        event.comment   = QObject::tr("Initial version.");
+        event.comment   = tr("Initial version.");
         event.icon      = "://icons/48x48/Start.png";
     }
 
@@ -502,8 +502,8 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
         if(isReadOnly() && !readOnly)
         {
             CCanvas::setOverrideCursor(Qt::ArrowCursor, "setReadOnlyMode");
-            QString str = QObject::tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
-            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+            QString str = tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
+            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
             CCanvas::restoreOverrideCursor("setReadOnlyMode");
             if(res != QMessageBox::Ok)
             {
@@ -667,10 +667,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     isEmpty = removeHtml(desc).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
+        str += toLink(isReadOnly, "description", tr("<h4>Description:</h4>"), key);
         if(removeHtml(desc).simplified().isEmpty())
         {
-            str += QObject::tr("<p>--- no description ---</p>");
+            str += tr("<p>--- no description ---</p>");
         }
         else
         {
@@ -681,10 +681,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     isEmpty = removeHtml(cmt).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
+        str += toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>"), key);
         if(isEmpty)
         {
-            str += QObject::tr("<p>--- no comment ---</p>");
+            str += tr("<p>--- no comment ---</p>");
         }
         else
         {
@@ -695,10 +695,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     isEmpty = links.isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
+        str += toLink(isReadOnly, "links", tr("<h4>Links:</h4>"), key);
         if(isEmpty)
         {
-            str += QObject::tr("<p>--- no links ---</p>");
+            str += tr("<p>--- no links ---</p>");
         }
         else
         {
@@ -726,10 +726,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
     isEmpty = removeHtml(desc).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
+        str += toLink(isReadOnly, "description", tr("<h4>Description:</h4>"), key);
         if(removeHtml(desc).simplified().isEmpty())
         {
-            str += QObject::tr("<p>--- no description ---</p>");
+            str += tr("<p>--- no description ---</p>");
         }
         else
         {
@@ -740,10 +740,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
     isEmpty = links.isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
+        str += toLink(isReadOnly, "links", tr("<h4>Links:</h4>"), key);
         if(isEmpty)
         {
-            str += QObject::tr("<p>--- no links ---</p>");
+            str += tr("<p>--- no links ---</p>");
         }
         else
         {

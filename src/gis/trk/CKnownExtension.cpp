@@ -42,23 +42,23 @@ void CKnownExtension::initGarminTPXv1(IUnit &units, const QString &ns)
     // support for the Garmin TrackPointExtension v1
     //  https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":atemp",
-                           { QObject::tr("Air Temperature"), 0, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
+                           { tr("Air Temperature"), 0, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:atemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":wtemp",
-                           { QObject::tr("Water Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true, false,
+                           { tr("Water Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:wtemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":depth",
-                           { QObject::tr("Depth"), 2, 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true, false,
+                           { tr("Depth"), 2, 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:depth")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":hr",
-                           { QObject::tr("Heart Rate"), 3, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
+                           { tr("Heart Rate"), 3, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:hr")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":cad",
-                           { QObject::tr("Cadence"), 4, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
+                           { tr("Cadence"), 4, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:cad")});
 }
 
@@ -66,23 +66,23 @@ void CKnownExtension::initMioTPX(IUnit &units)
 {
     // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
     knownExtensions.insert("heartrate",
-                           { QObject::tr("Heart Rate"), std::numeric_limits<int>::max(), 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
+                           { tr("Heart Rate"), std::numeric_limits<int>::max(), 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
                              getExtensionValueFunc("heartrate")});
 
     knownExtensions.insert("cadence",
-                           { QObject::tr("Cadence"), std::numeric_limits<int>::max(), 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
+                           { tr("Cadence"), std::numeric_limits<int>::max(), 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc("cadence")});
 
     knownExtensions.insert("speed",
-                           { QObject::tr("Speed"), std::numeric_limits<int>::max(), 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed"), std::numeric_limits<int>::max(), 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc("speed")});
 
     knownExtensions.insert("acceleration",
-                           { QObject::tr("Acceleration"), std::numeric_limits<int>::max(), std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
+                           { tr("Acceleration"), std::numeric_limits<int>::max(), std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
                              getExtensionValueFunc("acceleration")});
 
     knownExtensions.insert("course",
-                           { QObject::tr("Course"), std::numeric_limits<int>::max(), -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true, false,
+                           { tr("Course"), std::numeric_limits<int>::max(), -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true, false,
                              getExtensionValueFunc("course")});
 }
 
@@ -91,22 +91,22 @@ void CKnownExtension::init(IUnit &units)
     knownExtensions =
     {
         {internalSlope,
-         { QObject::tr("Slope*"), -1, -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
+         { tr("Slope*"), -1, -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }}
         },
 
         {internalSpeed,
-         { QObject::tr("Speed*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+         { tr("Speed*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
         },
 
         {internalEle,
-         { QObject::tr("Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
+         { tr("Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         {internalProgress,
-         { QObject::tr("Progress"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
+         { tr("Progress"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
            [](const CGisItemTrk::trkpt_t &p) { return p.distance; }}
         }
     };

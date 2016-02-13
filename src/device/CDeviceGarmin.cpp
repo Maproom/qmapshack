@@ -225,7 +225,7 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
 
             IGisItem::link_t link;
             link.uri  = pathPictures + "/" + filename;
-            link.text = QObject::tr("Picture%1").arg(cntImages);
+            link.text = tr("Picture%1").arg(cntImages);
             link.type = "Garmin";
 
             links << link;

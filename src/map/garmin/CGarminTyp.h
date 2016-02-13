@@ -23,6 +23,7 @@
 
 class CGarminTyp
 {
+    Q_DECLARE_TR_FUNCTIONS(CGarminTyp)
 public:
     CGarminTyp() = default;
     virtual ~CGarminTyp() = default;

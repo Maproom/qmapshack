@@ -23,6 +23,7 @@
 
 class CSlfProject : public IGisProject
 {
+    Q_DECLARE_TR_FUNCTIONS(CSlfProject)
 public:
     CSlfProject(const QString &filename, bool readFile = true);
     virtual ~CSlfProject();

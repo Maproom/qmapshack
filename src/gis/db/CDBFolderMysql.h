@@ -25,6 +25,7 @@
 
 class CDBFolderMysql : public IDBFolderSql, public IDBMysql
 {
+    Q_DECLARE_TR_FUNCTIONS(CDBFolderMysql)
 public:
     CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString &passwd, bool noPasswd, const QString &name, QTreeWidget *parent);
     virtual ~CDBFolderMysql() = default;

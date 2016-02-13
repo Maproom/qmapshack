@@ -23,6 +23,7 @@
 
 class CDeviceGarmin : public IDevice
 {
+    Q_DECLARE_TR_FUNCTIONS(CDeviceGarmin)
 public:
     CDeviceGarmin(const QString &path, const QString &key, const QString& model, QTreeWidget * parent);
     virtual ~CDeviceGarmin();

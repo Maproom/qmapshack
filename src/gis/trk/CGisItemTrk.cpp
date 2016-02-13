@@ -1060,7 +1060,7 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject, "deriveSecondaryData()");
+    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "totalDistance" << totalDistance;
@@ -1746,6 +1746,20 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 }
 
+void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag)
+{
+    flag &= trkpt_t::eActMask;
+    if(flag == 0)
+    {
+        pen.setColor(color);
+    }
+    else
+    {
+        pen.setColor(CActivityTrk::getDescriptor(flag).color);
+    }
+    p.setPen(pen);
+}
+
 void CGisItemTrk::drawColorizedByActivity(QPainter& p)
 {
     QPen pen;
@@ -1764,16 +1778,14 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p)
             }
             if(NULL == ptPrev)
             {
-                pen.setColor(CActivityTrk::getDescriptor(pt.flags & trkpt_t::eActMask).color);
-                p.setPen(pen);
+                setPen(p, pen, pt.flags);
                 ptPrev = &pt;
                 continue;
             }
 
             if((ptPrev->flags & trkpt_t::eActMask) != (pt.flags & trkpt_t::eActMask))
             {
-                pen.setColor(CActivityTrk::getDescriptor(pt.flags & trkpt_t::eActMask).color);
-                p.setPen(pen);
+                setPen(p, pen, pt.flags);
             }
 
             p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
@@ -2235,7 +2247,7 @@ void CGisItemTrk::setActivity()
             {
                 trkpt_t& trkpt = seg.pts[i];
 
-                if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+                if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
                 {
                     trkpt.flags &= ~trkpt_t::eActMask;
                     trkpt.flags |= flag;

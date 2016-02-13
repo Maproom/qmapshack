@@ -24,12 +24,14 @@
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidgetItem>
+#include <QCoreApplication>
 
 class CImportDatabase;
 class CQmsDb;
 
 class CQlgtDb : public QObject
 {
+    Q_DECLARE_TR_FUNCTIONS(CQlgtDb)
 public:
     enum EntryType_e
     {

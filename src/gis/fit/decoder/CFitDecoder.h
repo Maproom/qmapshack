@@ -27,6 +27,7 @@ class CFitMessage;
 
 class CFitDecoder final
 {
+    Q_DECLARE_TR_FUNCTIONS(CFitDecoder)
 public:
     CFitDecoder();
     ~CFitDecoder();

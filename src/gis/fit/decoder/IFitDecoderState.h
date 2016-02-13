@@ -38,6 +38,7 @@ typedef enum
 
 class IFitDecoderState
 {
+    Q_DECLARE_TR_FUNCTIONS(IFitDecoderState)
 public:
     struct shared_state_data_t
     {

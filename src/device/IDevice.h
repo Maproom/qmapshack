@@ -28,6 +28,7 @@ class CGisItemWpt;
 
 class IDevice : public QTreeWidgetItem
 {
+    Q_DECLARE_TR_FUNCTIONS(IDevice)
 public:
     enum type_e
     {

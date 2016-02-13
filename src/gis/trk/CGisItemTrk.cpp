@@ -121,7 +121,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
     // build new ones.
     if(clone)
     {
-        trk.name += QObject::tr("_Clone");
+        trk.name += tr("_Clone");
         key.clear();
         history.events.clear();
         setupHistory();
@@ -288,7 +288,7 @@ void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
     readTrackDataFromGisLine(l);
 
     flags |= eFlagTainted;
-    changed(QObject::tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
+    changed(tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
 }
 
 void CGisItemTrk::getPolylineFromData(QPolygonF &l)
@@ -391,14 +391,14 @@ QString CGisItemTrk::getInfo(bool showName) const
     }
 
     IUnit::self().meter2distance(totalDistance, val1, unit1);
-    str += QObject::tr("Length: %1 %2").arg(val1).arg(unit1);
+    str += tr("Length: %1 %2").arg(val1).arg(unit1);
 
     if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
     {
         IUnit::self().meter2elevation(totalAscend, val1, unit1);
         IUnit::self().meter2elevation(totalDescend, val2, unit2);
 
-        str += QObject::tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+        str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
     }
 
 
@@ -406,35 +406,35 @@ QString CGisItemTrk::getInfo(bool showName) const
     {
         IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
         str += "<br/>\n";
-        str += QObject::tr("Time: %1").arg(val1);
+        str += tr("Time: %1").arg(val1);
 
         IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val1, unit1);
-        str += QObject::tr(", Speed: %1 %2").arg(val1).arg(unit1);
+        str += tr(", Speed: %1 %2").arg(val1).arg(unit1);
     }
 
     if(totalElapsedSecondsMoving != NOTIME)
     {
         IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
         str += "<br/>\n";
-        str += QObject::tr("Moving: %1").arg(val1);
+        str += tr("Moving: %1").arg(val1);
 
         IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val1, unit1);
-        str += QObject::tr(", Speed: %1 %2").arg(val1).arg(unit1);
+        str += tr(", Speed: %1 %2").arg(val1).arg(unit1);
     }
 
     if(timeStart.isValid())
     {
         str += "<br/>\n";
-        str += QObject::tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
+        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
     }
     if(timeEnd.isValid())
     {
         str += "<br/>\n";
-        str += QObject::tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
+        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
     }
 
     str += "<br/>\n";
-    str += QObject::tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
+    str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
 
     str += "</div>";
     return str;
@@ -543,15 +543,15 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
     str += "\n";
 
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
-    str += QObject::tr("Ele.: %1 %2").arg(val1).arg(unit1);
+    str += tr("Ele.: %1 %2").arg(val1).arg(unit1);
     if(pt.slope1 != NOFLOAT)
     {
-        str += QObject::tr(" slope: %1%3 (%2%)").arg(pt.slope1, 2, 'f', 0).arg(pt.slope2, 2, 'f', 0).arg(QChar(0260));
+        str += tr(" slope: %1%3 (%2%)").arg(pt.slope1, 2, 'f', 0).arg(pt.slope2, 2, 'f', 0).arg(QChar(0260));
     }
     if(pt.speed != NOFLOAT)
     {
         IUnit::self().meter2speed(pt.speed, val1, unit1);
-        str += QObject::tr(" speed: %1%2").arg(val1).arg(unit1);
+        str += tr(" speed: %1%2").arg(val1).arg(unit1);
     }
 
     QStringList keys = pt.extensions.keys();
@@ -579,7 +579,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
 
     if(more > 0)
     {
-        str += "\n" + QObject::tr("... and %1 tags not displayed").arg(more);
+        str += "\n" + tr("... and %1 tags not displayed").arg(more);
     }
 
     return str;
@@ -591,42 +591,42 @@ QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
     if(pt.ascend != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.ascend, val, unit);
-        str += QObject::tr("Ascend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2,'f',0);
+        str += tr("Ascend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2,'f',0);
     }
     else
     {
-        str += QObject::tr("Ascend: - (-)");
+        str += tr("Ascend: - (-)");
     }
 
     if(pt.descend != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.descend, val, unit);
-        str += QObject::tr(" Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2,'f',0);
+        str += tr(" Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2,'f',0);
     }
     else
     {
-        str += QObject::tr(" Descend: - (-) ");
+        str += tr(" Descend: - (-) ");
     }
 
     str += "\n";
     if(pt.distance != NOFLOAT)
     {
         IUnit::self().meter2distance(pt.distance, val, unit);
-        str += QObject::tr("Dist.: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2,'f',0);
+        str += tr("Dist.: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2,'f',0);
     }
     else
     {
-        str += QObject::tr("Dist.: - (-)");
+        str += tr("Dist.: - (-)");
     }
 
     if(pt.elapsedSeconds != NOFLOAT)
     {
         IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
-        str += QObject::tr(" Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2,'f',0);
+        str += tr(" Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2,'f',0);
     }
     else
     {
-        str += QObject::tr(" Moving: - (-) ");
+        str += tr(" Moving: - (-) ");
     }
 
     return str;
@@ -645,45 +645,45 @@ QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2)
     if((pt1.ascend != NOFLOAT) && (pt2.ascend != NOFLOAT))
     {
         IUnit::self().meter2elevation(pt2.ascend - pt1.ascend, val, unit);
-        str += QObject::tr("Ascend: %1%2").arg(val).arg(unit);
+        str += tr("Ascend: %1%2").arg(val).arg(unit);
 
         if(dt != NOFLOAT)
         {
             IUnit::self().meter2speed((pt2.ascend - pt1.ascend)/dt, val, unit);
-            str += QObject::tr(", %1%2").arg(val).arg(unit);
+            str += tr(", %1%2").arg(val).arg(unit);
         }
     }
     else
     {
-        str += QObject::tr("Ascend: -");
+        str += tr("Ascend: -");
     }
 
 
     if((pt1.descend != NOFLOAT) && (pt2.descend != NOFLOAT))
     {
         IUnit::self().meter2elevation(pt2.descend - pt1.descend, val, unit);
-        str += QObject::tr(" Descend: %1%2").arg(val).arg(unit);
+        str += tr(" Descend: %1%2").arg(val).arg(unit);
 
         if(dt != NOFLOAT)
         {
             IUnit::self().meter2speed((pt2.descend - pt1.descend)/dt, val, unit);
-            str += QObject::tr(", %1%2").arg(val).arg(unit);
+            str += tr(", %1%2").arg(val).arg(unit);
         }
     }
     else
     {
-        str += QObject::tr("Descend: -");
+        str += tr("Descend: -");
     }
 
     str += "\n";
 
     IUnit::self().meter2distance(pt2.distance - pt1.distance, val, unit);
-    str += QObject::tr("Dist.: %1%2").arg(val).arg(unit);
+    str += tr("Dist.: %1%2").arg(val).arg(unit);
 
     if(dt != NOFLOAT)
     {
         IUnit::self().seconds2time(dt, val, unit);
-        str += QObject::tr(" Time: %1%2").arg(val).arg(unit);
+        str += tr(" Time: %1%2").arg(val).arg(unit);
     }
 
     return str;
@@ -1266,7 +1266,7 @@ bool CGisItemTrk::cut()
         if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepFirst)) != 0)
         {
             QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
-            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name1);
             if(name1.isEmpty())
             {
                 return false;
@@ -1285,7 +1285,7 @@ bool CGisItemTrk::cut()
         if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepSecond)) != 0)
         {
             QString name1 = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
-            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name1);
             if(name1.isEmpty())
             {
                 return false;
@@ -1328,7 +1328,7 @@ bool CGisItemTrk::cut()
                 seg.pts = pts;
             }
             deriveSecondaryData();
-            changed(QObject::tr("Permanently removed points %1..%2").arg(idxMouse+1).arg(cntTotalPoints-1), "://icons/48x48/TrkCut.png");
+            changed(tr("Permanently removed points %1..%2").arg(idxMouse+1).arg(cntTotalPoints-1), "://icons/48x48/TrkCut.png");
         }
         else if((mode & CCutTrk::eModeKeepSecond) != 0)
         {
@@ -1352,7 +1352,7 @@ bool CGisItemTrk::cut()
                 seg.pts = pts;
             }
             deriveSecondaryData();
-            changed(QObject::tr("Permanently removed points %1..%2").arg(0).arg(idxMouse-1), "://icons/48x48/TrkCut.png");
+            changed(tr("Permanently removed points %1..%2").arg(0).arg(idxMouse-1), "://icons/48x48/TrkCut.png");
         }
     }
 
@@ -1361,7 +1361,7 @@ bool CGisItemTrk::cut()
 
 void CGisItemTrk::reverse()
 {
-    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
+    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
     if(name1.isEmpty())
     {
         return;
@@ -1420,7 +1420,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
         return;
     }
 
-    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, getName() + " & other");
+    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, getName() + " & other");
     if(name1.isEmpty())
     {
         return;
@@ -1534,7 +1534,7 @@ void CGisItemTrk::hideSelectedPoints()
     mouseRange2 = 0;
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
-    changed(QObject::tr("Hide points."), "://icons/48x48/PointHide.png");
+    changed(tr("Hide points."), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::showSelectedPoints()
@@ -1574,7 +1574,7 @@ void CGisItemTrk::showSelectedPoints()
     mouseRange2 = 0;
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
-    changed(QObject::tr("Show points."), "://icons/48x48/PointShow.png");
+    changed(tr("Show points."), "://icons/48x48/PointShow.png");
 }
 
 void CGisItemTrk::copySelectedPoints()
@@ -1599,7 +1599,7 @@ void CGisItemTrk::copySelectedPoints()
     }
 
     QString name1 = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
-    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new track name."), QLineEdit::Normal, name1);
+    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name1);
     if(name1.isEmpty())
     {
         return;
@@ -2140,25 +2140,25 @@ void CGisItemTrk::setName(const QString& str)
 {
     setText(CGisListWks::eColumnName, str);
     trk.name = str;
-    changed(QObject::tr("Changed name"), "://icons/48x48/EditText.png");
+    changed(tr("Changed name"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemTrk::setComment(const QString& str)
 {
     trk.cmt = str;
-    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
+    changed(tr("Changed comment"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemTrk::setDescription(const QString& str)
 {
     trk.desc = str;
-    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
+    changed(tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemTrk::setLinks(const QList<link_t>& links)
 {
     trk.links = links;
-    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+    changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
 
@@ -2185,7 +2185,7 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
     }
 
     deriveSecondaryData();
-    changed(QObject::tr("Changed activity to '%1' for complete track.").arg(name), icon);
+    changed(tr("Changed activity to '%1' for complete track.").arg(name), icon);
 }
 
 void CGisItemTrk::setActivity()
@@ -2259,7 +2259,7 @@ void CGisItemTrk::setActivity()
     mouseRange2 = nullptr;
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
-    changed(QObject::tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
+    changed(tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
 }
 
 

@@ -33,10 +33,10 @@
 
 const CGisItemOvlArea::width_t CGisItemOvlArea::lineWidths[OVL_N_WIDTHS] =
 {
-    {3,  QObject::tr("thin")}
-    ,{5,  QObject::tr("normal")}
-    ,{9,  QObject::tr("wide")}
-    ,{13, QObject::tr("strong")}
+    {3,  tr("thin")}
+    ,{5,  tr("normal")}
+    ,{9,  tr("wide")}
+    ,{13, tr("strong")}
 };
 
 const Qt::BrushStyle CGisItemOvlArea::brushStyles[OVL_N_STYLES] =
@@ -75,7 +75,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
 
     if(clone)
     {
-        area.name += QObject::tr("_Clone");
+        area.name += tr("_Clone");
         key.clear();
         history.events.clear();
         setupHistory();
@@ -377,7 +377,7 @@ QString CGisItemOvlArea::getInfo(bool allowEdit) const
     QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 
     IUnit::self().meter2area(area.area, val, unit);
-    str += "<br/>\n" + QObject::tr("Area: %1%2").arg(val).arg(unit);
+    str += "<br/>\n" + tr("Area: %1%2").arg(val).arg(unit);
 
     QString desc = removeHtml(area.desc).simplified();
     if(desc.count())
@@ -439,7 +439,7 @@ void CGisItemOvlArea::setDataFromPolyline(const SGisLine& l)
 
     flags |= eFlagTainted;
 
-    changed(QObject::tr("Changed area shape."), "://icons/48x48/AreaMove.png");
+    changed(tr("Changed area shape."), "://icons/48x48/AreaMove.png");
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -447,43 +447,43 @@ void CGisItemOvlArea::setName(const QString& str)
 {
     setText(CGisListWks::eColumnName, str);
     area.name = str;
-    changed(QObject::tr("Changed name."), "://icons/48x48/EditText.png");
+    changed(tr("Changed name."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setWidth(qint32 w)
 {
     area.width = w;
-    changed(QObject::tr("Changed border width."), "://icons/48x48/TextBold.png");
+    changed(tr("Changed border width."), "://icons/48x48/TextBold.png");
 }
 
 void CGisItemOvlArea::setStyle(qint32 s)
 {
     area.style = s;
-    changed(QObject::tr("Changed fill pattern."), "://icons/48x48/Pattern.png");
+    changed(tr("Changed fill pattern."), "://icons/48x48/Pattern.png");
 }
 
 void CGisItemOvlArea::setOpacity(bool yes)
 {
     area.opacity = yes;
-    changed(QObject::tr("Changed opacity."), "://icons/48x48/Opacity.png");
+    changed(tr("Changed opacity."), "://icons/48x48/Opacity.png");
 }
 
 void CGisItemOvlArea::setComment(const QString& str)
 {
     area.cmt = str;
-    changed(QObject::tr("Changed comment."), "://icons/48x48/EditText.png");
+    changed(tr("Changed comment."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setDescription(const QString& str)
 {
     area.desc = str;
-    changed(QObject::tr("Changed description."), "://icons/48x48/EditText.png");
+    changed(tr("Changed description."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setLinks(const QList<link_t>& links)
 {
     area.links = links;
-    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+    changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
 
@@ -494,7 +494,7 @@ void CGisItemOvlArea::setColor(size_t idx)
         return;
     }
     setColor(colorMap[idx].color);
-    changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+    changed(tr("Changed color"), "://icons/48x48/SelectColor.png");
 }
 
 void CGisItemOvlArea::setColor(const QColor& c)

@@ -33,6 +33,7 @@ class IQlgtOverlay;
 
 class CQmsDb : public QObject, private IDBSqlite
 {
+    Q_DECLARE_TR_FUNCTIONS(CQmsDb)
 public:
     CQmsDb(const QString& filename, CImportDatabase * parent);
     virtual ~CQmsDb();

@@ -28,6 +28,7 @@ class QDir;
 
 class CTwoNavProject : public IGisProject
 {
+    Q_DECLARE_TR_FUNCTIONS(CTwoNavProject)
 public:
     CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent);
     CTwoNavProject(const QString &filename, IDevice * parent);

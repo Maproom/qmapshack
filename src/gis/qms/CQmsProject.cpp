@@ -45,7 +45,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to open..."), tr("Failed to open %1").arg(filename), QMessageBox::Abort);
         return;
     }
 
@@ -81,7 +81,7 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to open..."), tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
         return false;
     }
     QDataStream out(&file);

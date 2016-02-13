@@ -1148,7 +1148,7 @@ void CGisListWks::slotDeleteProject()
         if(nullptr != project)
         {
             CCanvas::setOverrideCursor(Qt::ArrowCursor, "slotDeleteProject");
-            int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Delete project..."), QObject::tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
+            int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."), tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
             CCanvas::restoreOverrideCursor("slotDeleteProject");
             if(res != QMessageBox::Ok)
             {

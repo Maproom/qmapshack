@@ -62,7 +62,7 @@ void CPropertyTrk::setupData()
             , ext.unit
             , QIcon(ext.icon)
             , CPlotData::eAxisLinear
-            , QObject::tr("distance [%1]").arg(IUnit::self().baseunit)
+            , tr("distance [%1]").arg(IUnit::self().baseunit)
             , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
             , ext.factor
             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
@@ -74,7 +74,7 @@ void CPropertyTrk::setupData()
         {
             property.min        = 0;
             property.axisType   = CPlotData::eAxisTime;
-            property.xLabel     = QObject::tr("time");
+            property.xLabel     = tr("time");
             property.getX       = [](const CGisItemTrk::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
         }
 

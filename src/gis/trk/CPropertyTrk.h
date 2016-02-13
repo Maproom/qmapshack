@@ -30,6 +30,7 @@ class CLimit;
 
 class CPropertyTrk
 {
+    Q_DECLARE_TR_FUNCTIONS(CPropertyTrk)
 public:
     virtual ~CPropertyTrk() = default;
 

@@ -106,7 +106,7 @@ bool IGisProject::askBeforClose()
     {
         CCanvas::setOverrideCursor(Qt::ArrowCursor, "askBeforClose");
 
-        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Save project?"), tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
         CCanvas::restoreOverrideCursor("askBeforClose");
 
         if(res == QMessageBox::Save)
@@ -258,7 +258,7 @@ void IGisProject::updateItems()
     quint32 total   = cntTrkPts * cntWpts;
     quint32 current = 0;
 
-    PROGRESS_SETUP(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, CMainWindow::getBestWidgetForParent());
+    PROGRESS_SETUP(tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, CMainWindow::getBestWidgetForParent());
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -268,8 +268,8 @@ void IGisProject::updateItems()
             trk->findWaypointsCloseBy(progress, current);
             if(progress.wasCanceled())
             {
-                QString msg = QObject::tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
-                int res = QMessageBox::question(&progress, QObject::tr("Canceled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                QString msg = tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
+                int res = QMessageBox::question(&progress, tr("Canceled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
                 noCorrelation = res == QMessageBox::Yes;
                 break;
             }
@@ -309,7 +309,7 @@ bool IGisProject::saveAs(QString fn, QString filter)
         path += "/" + getName() + "." + ext;
 
 
-        fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save \"%1\" to...").arg(getName()), path, filedialogSaveFilters, &filter);
+        fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), tr("Save \"%1\" to...").arg(getName()), path, filedialogSaveFilters, &filter);
 
         if(fn.isEmpty())
         {
@@ -420,24 +420,24 @@ QString IGisProject::getInfo() const
 
     if(!filename.isEmpty())
     {
-        str += QObject::tr("<br/>\nFilename: %1").arg(filename);
+        str += tr("<br/>\nFilename: %1").arg(filename);
     }
 
     if(cntItemsByType[IGisItem::eTypeWpt])
     {
-        str += "<br/>\n" + QObject::tr("Waypoints: %1").arg(cntItemsByType[IGisItem::eTypeWpt]);
+        str += "<br/>\n" + tr("Waypoints: %1").arg(cntItemsByType[IGisItem::eTypeWpt]);
     }
     if(cntItemsByType[IGisItem::eTypeTrk])
     {
-        str += "<br/>\n" + QObject::tr("Tracks: %1").arg(cntItemsByType[IGisItem::eTypeTrk]);
+        str += "<br/>\n" + tr("Tracks: %1").arg(cntItemsByType[IGisItem::eTypeTrk]);
     }
     if(cntItemsByType[IGisItem::eTypeRte])
     {
-        str += "<br/>\n" + QObject::tr("Routes: %1").arg(cntItemsByType[IGisItem::eTypeRte]);
+        str += "<br/>\n" + tr("Routes: %1").arg(cntItemsByType[IGisItem::eTypeRte]);
     }
     if(cntItemsByType[IGisItem::eTypeOvl])
     {
-        str += "<br/>\n" + QObject::tr("Areas: %1").arg(cntItemsByType[IGisItem::eTypeOvl]);
+        str += "<br/>\n" + tr("Areas: %1").arg(cntItemsByType[IGisItem::eTypeOvl]);
     }
 
     return str;
@@ -517,8 +517,8 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
         {
             if(last != QMessageBox::YesToAll)
             {
-                QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
-                last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+                QString msg = tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
+                last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
                     // as each item in the project has to be unique, we can stop searching.

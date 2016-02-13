@@ -99,6 +99,7 @@ QDataStream& operator <<(QDataStream& s, CFlags& flag);
 
 class CQlgtTrack : public QObject, public IItem
 {
+    Q_DECLARE_TR_FUNCTIONS(CQlgtTrack)
 public:
     CQlgtTrack(quint64 id, QObject * parent);
     virtual ~CQlgtTrack();

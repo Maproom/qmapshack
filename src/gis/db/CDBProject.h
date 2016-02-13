@@ -28,6 +28,7 @@ class CQlgtFolder;
 
 class CDBProject : public IGisProject
 {
+    Q_DECLARE_TR_FUNCTIONS(CDBProject)
 public:
     CDBProject(CGisListWks * parent);
     CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);

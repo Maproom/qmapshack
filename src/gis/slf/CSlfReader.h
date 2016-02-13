@@ -29,6 +29,7 @@ class CSlfProject;
 
 class CSlfReader
 {
+    Q_DECLARE_TR_FUNCTIONS(CSlfReader)
 public:
     static void readFile(const QString &file, CSlfProject *proj);
 

@@ -25,6 +25,7 @@
 
 class CDBFolderSqlite : public IDBFolderSql, public IDBSqlite
 {
+    Q_DECLARE_TR_FUNCTIONS(CDBFolderSqlite)
 public:
     CDBFolderSqlite(const QString &filename, const QString &name, QTreeWidget *parent);
     virtual ~CDBFolderSqlite();

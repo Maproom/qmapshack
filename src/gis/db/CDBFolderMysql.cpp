@@ -29,7 +29,7 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
     , passwd(passwd)
     , noPasswd(noPasswd)
 {
-    setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
+    setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
     setText(CGisListDB::eColumnName, name);
 
     if(setupDB(server, port, user, passwd, noPasswd, name, name))
@@ -50,19 +50,19 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
 QString CDBFolderMysql::getDBInfo() const
 {
     QString str = "<div style='font-weight: bold;'>" + IDB::db.connectionName() + "</div><br />";
-    str += QObject::tr("MySQL Database") + "<br />";
+    str += tr("MySQL Database") + "<br />";
     if(!port.isEmpty())
     {
-        str += QObject::tr("Server: ") + QString("<i>%1:%2</i>").arg(server).arg(port);
+        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(server).arg(port);
     }
     else
     {
-        str += QObject::tr("Server: ") + QString("<i>%1</i>").arg(server);
+        str += tr("Server: ") + QString("<i>%1</i>").arg(server);
     }
 
     if(noPasswd)
     {
-        str += QObject::tr(" (No PW)");
+        str += tr(" (No PW)");
     }
 
     if(!isUsable())
@@ -70,7 +70,7 @@ QString CDBFolderMysql::getDBInfo() const
         const QString &dbError = IDB::db.lastError().databaseText();
         const QString &drError = IDB::db.lastError().driverText();
 
-        str += "<br />" + QObject::tr("Error: ") + QString("<span style=\"color:#f00; font-weight:bold;\">%1</span>").arg(dbError.isEmpty() ? drError : dbError);
+        str += "<br />" + tr("Error: ") + QString("<span style=\"color:#f00; font-weight:bold;\">%1</span>").arg(dbError.isEmpty() ? drError : dbError);
     }
 
     return str;

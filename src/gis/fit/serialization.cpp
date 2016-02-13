@@ -185,7 +185,7 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
     }
     if(trk.segs.isEmpty())
     {
-        throw QObject::tr("FIT file %1 contains no GPS data.").arg(stream.getFileName());
+        throw tr("FIT file %1 contains no GPS data.").arg(stream.getFileName());
     }
 }
 

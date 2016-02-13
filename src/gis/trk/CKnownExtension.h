@@ -24,6 +24,7 @@
 
 class CKnownExtension
 {
+    Q_DECLARE_TR_FUNCTIONS(CKnownExtension)
 public:
     static void init(IUnit &units);
 

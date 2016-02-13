@@ -52,6 +52,7 @@ class INotifyTrk;
 
 class CGisItemTrk : public IGisItem, public IGisLine
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemTrk)
 public:
     struct trk_t;
     struct trkpt_t;

@@ -26,6 +26,7 @@ class CGisDraw;
 
 class CGpxProject : public IGisProject
 {
+    Q_DECLARE_TR_FUNCTIONS(CGpsProject)
 public:
     CGpxProject(const QString &filename, CGisListWks * parent);
     CGpxProject(const QString &filename, IDevice * parent);

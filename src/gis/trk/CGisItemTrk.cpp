@@ -1544,7 +1544,7 @@ void CGisItemTrk::showSelectedPoints()
         return;
     }
 
-    if((mouseRange1 == 0) || (mouseRange2 == 0))
+    if((mouseRange1 == nullptr) || (mouseRange2 == nullptr))
     {
         return;
     }
@@ -1579,7 +1579,7 @@ void CGisItemTrk::showSelectedPoints()
 
 void CGisItemTrk::copySelectedPoints()
 {
-    if((mouseRange1 == 0) || (mouseRange2 == 0))
+    if((mouseRange1 == nullptr) || (mouseRange2 == nullptr))
     {
         return;
     }
@@ -2386,7 +2386,7 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx)
 {
     if(idx == NOIDX)
     {
-        return 0;
+        return nullptr;
     }
 
     foreach (const trkseg_t &seg, trk.segs)
@@ -2399,7 +2399,7 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx)
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByTotalIndex(qint32 idx)
@@ -2414,7 +2414,7 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByTotalIndex(qint32 idx)
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal)

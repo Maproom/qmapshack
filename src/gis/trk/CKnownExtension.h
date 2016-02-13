@@ -57,7 +57,7 @@ private:
                     bool derivedQMS,   fTrkPtGetVal valueFunc
                     )
         : name(name), order(order), minimum(minimum), maximum(maximum), factor(factor),
-          unit(unit), icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
+        unit(unit), icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
     {
     }
 

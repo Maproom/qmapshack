@@ -58,8 +58,8 @@ bool IDB::setupDB()
         if(version < DB_VERSION)
         {
             QString msg = tr("The internal database format of '%1'' has changed. QMapShack will migrate your database, now. "
-                                      "After the migration the database won't be usable with older versions of QMapShack. "
-                                      "It is recommended to backup the database first.").arg(db.connectionName());
+                             "After the migration the database won't be usable with older versions of QMapShack. "
+                             "It is recommended to backup the database first.").arg(db.connectionName());
             int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
                                            tr("Migrate database..."),
                                            msg,
@@ -83,7 +83,7 @@ bool IDB::setupDB()
         else if(version > DB_VERSION)
         {
             QString msg = tr("The database version of '%1'' is more advanced as the one understood by your "
-                                      "QMapShack installation. This won't work.").arg(db.connectionName());
+                             "QMapShack installation. This won't work.").arg(db.connectionName());
             QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
                                   tr("Wrong database version..."),
                                   msg,

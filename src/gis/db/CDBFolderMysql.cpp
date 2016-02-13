@@ -39,7 +39,6 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
         setupFromDB();
 
         setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-
     }
     else
     {

@@ -27,8 +27,8 @@
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/prj/IGisProject.h"
-#include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CActivityTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
@@ -197,7 +197,7 @@ CMainWindow::CMainWindow()
 }
 
 CMainWindow::~CMainWindow()
-{  
+{
     CActivityTrk::release();
 
     int cnt = 0;

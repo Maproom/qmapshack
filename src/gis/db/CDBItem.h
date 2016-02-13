@@ -19,8 +19,8 @@
 #ifndef CDBITEM_H
 #define CDBITEM_H
 
-#include <QTreeWidgetItem>
 #include <QCoreApplication>
+#include <QTreeWidgetItem>
 
 class IDBFolder;
 class QSqlDatabase;

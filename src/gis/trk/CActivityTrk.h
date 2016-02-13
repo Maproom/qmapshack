@@ -19,10 +19,10 @@
 #ifndef CACTIVITYTRK_H
 #define CACTIVITYTRK_H
 
+#include <QCoreApplication>
 #include <QIcon>
 #include <QPointer>
 #include <QVector>
-#include <QCoreApplication>
 class CGisItemTrk;
 
 class CActivityTrk

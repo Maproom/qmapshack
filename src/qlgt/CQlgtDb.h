@@ -19,12 +19,12 @@
 #ifndef CQLGTDB_H
 #define CQLGTDB_H
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QObject>
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidgetItem>
-#include <QCoreApplication>
 
 class CImportDatabase;
 class CQmsDb;

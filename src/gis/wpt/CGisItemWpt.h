@@ -22,8 +22,8 @@
 #include "gis/IGisItem.h"
 #include "gis/tnv/CTwoNavProject.h"
 
-#include <QPointer>
 #include <QCoreApplication>
+#include <QPointer>
 
 class IGisProject;
 class QDomNode;

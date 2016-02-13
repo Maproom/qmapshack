@@ -18,8 +18,8 @@
 
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "units/IUnit.h"
 #include "helpers/CSettings.h"
+#include "units/IUnit.h"
 
 CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
 {

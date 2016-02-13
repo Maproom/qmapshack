@@ -70,7 +70,7 @@ void CColorLegend::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
 
 void CColorLegend::updateData()
 {
-    if(!trk->getColorizeSource().isEmpty())
+    if(!trk->getColorizeSource().isEmpty() && (trk->getColorizeSource() != "activity"))
     {
         unit    = trk->getColorizeUnit();
         minimum = trk->getColorizeLimitLow();

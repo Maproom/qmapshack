@@ -33,16 +33,19 @@ bool IDBMysql::setupDB(const QString& server, const QString& port, const QString
     // this is important!
     IDB::setup(connectionName);
 
+    this->server   = server;
+    this->port     = port.isEmpty() ? -1 : port.toInt();
+    this->noPasswd = noPasswd;
+
     if(!QSqlDatabase::contains(connectionName))
     {
         db = QSqlDatabase::addDatabase("QMYSQL", connectionName);
         db.setDatabaseName(name);
         db.setHostName(server);
 
-        if(!port.isEmpty())
+        if(-1 != this->port)
         {
-            quint16 port16 = port.toUInt();
-            db.setPort(port16);
+            db.setPort(this->port);
         }
 
         db.setUserName(user);
@@ -64,7 +67,8 @@ bool IDBMysql::setupDB(const QString& server, const QString& port, const QString
 
         if(!db.open())
         {
-            qDebug() << "failed to open database" << db.lastError(); //XXX
+            qDebug() << "failed to open database" << db.lastError();
+            return false;
         }
     }
     else
@@ -174,13 +178,26 @@ QString IDBMysql::getDBInfo() const
 {
     QString str = "<div style='font-weight: bold;'>" + db.connectionName() + "</div><br />";
     str += tr("MySQL Database") + "<br />";
-    if(-1 != db.port())
+    if(-1 != port)
     {
-        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(db.hostName()).arg(db.port());
+        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(server).arg(port);
     }
     else
     {
-        str += tr("Server: ") + QString("<i>%1</i>").arg(db.hostName());
+        str += tr("Server: ") + QString("<i>%1</i>").arg(server);
+    }
+
+    if(noPasswd)
+    {
+        str += tr(" (No PW)");
+    }
+
+    if(!isUsable())
+    {
+        const QString &dbError = db.lastError().databaseText();
+        const QString &drError = db.lastError().driverText();
+
+        str += "<br />" + tr("Error: ") + QString("<span style=\"color:#f00; font-weight:bold;\">%1</span>").arg(dbError.isEmpty() ? drError : dbError);
     }
 
     return str;

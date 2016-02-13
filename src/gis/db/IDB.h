@@ -37,6 +37,11 @@ public:
 
     virtual QString getDBInfo() const = 0;
 
+    bool isUsable() const
+    {
+        return db.isOpen();
+    }
+
 protected:
     static QMap<QString,int> references;
     QSqlDatabase db;

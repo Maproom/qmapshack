@@ -29,14 +29,20 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
     , noPasswd(noPasswd)
 {
     setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQL.png"));
     setText(CGisListDB::eColumnName, name);
 
-    setupDB(server, port, user, passwd, noPasswd, name, name);
+    if(setupDB(server, port, user, passwd, noPasswd, name, name))
+    {
+        setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQL.png"));
 
-    setupFromDB();
+        setupFromDB();
 
-    setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+        setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+
+    }
+    else
+    {
+        setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQLNoConn.png"));
+    }
 }
-
 

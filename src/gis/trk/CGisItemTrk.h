@@ -71,10 +71,11 @@ public:
     enum visual_e
     {
         eVisualNone          = 0
-        , eVisualColorLegend = 0x1
-        , eVisualPlot        = 0x2
-        , eVisualDetails     = 0x4
-        , eVisualProject     = 0x8
+        , eVisualColorLegend = 0x01
+        , eVisualPlot        = 0x02
+        , eVisualDetails     = 0x04
+        , eVisualProject     = 0x08
+        , eVisualColorAct    = 0x10
         , eVisualAll         = -1
     };
 
@@ -332,7 +333,9 @@ public:
 
 private:
     void drawColorized(QPainter &p);
+    void drawColorizedByActivity(QPainter& p);
     /**@}*/
+
 
 
 public:

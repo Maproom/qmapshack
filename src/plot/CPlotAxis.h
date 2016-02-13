@@ -92,7 +92,7 @@ public:
         {
             return 0;
         }
-        return ( qreal(pt) / scale + usedMin );
+        return qreal(pt) / scale + usedMin;
     }
 
     void setAutoscale(bool on)

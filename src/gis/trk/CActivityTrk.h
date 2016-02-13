@@ -29,6 +29,9 @@ class CActivityTrk
 public:
     virtual ~CActivityTrk() = default;
 
+    static void init();
+    static void release();
+
     struct activity_summary_t
     {
         activity_summary_t() : distance(0), ascend(0), descend(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
@@ -50,6 +53,29 @@ public:
         qreal ellapsedSeconds;
         qreal ellapsedSecondsMoving;
     };
+
+    struct activity_range_t
+    {
+        qreal d1;
+        qreal d2;
+
+        qreal t1;
+        qreal t2;
+
+        QString icon;
+        QString name;
+    };
+
+    struct desc_t
+    {
+        QString objName;
+        quint32 flag;
+        QString name;
+        QString iconLarge;
+        QString iconSmall;
+        QColor color;
+    };
+
 
     /**
        @brief Update internal summary array
@@ -84,50 +110,30 @@ public:
      */
     void sumUp(QVector<activity_summary_t> &summary) const;
 
-    struct activity_range_t
-    {
-        qreal d1;
-        qreal d2;
-
-        qreal t1;
-        qreal t2;
-
-        QString icon;
-        QString name;
-    };
 
     const QList<activity_range_t>& getActivityRanges() const
     {
         return activityRanges;
     }
 
-    struct desc_t
-    {
-        QString objName;
-        quint32 flag;
-        QString name;
-        QString iconLarge;
-        QString iconSmall;
-    };
-
     static const desc_t* getActivityDescriptors()
     {
         return actDescriptor;
     }
 
+    static const desc_t& getDescriptor(quint32 flag);
+
+    static void setColor(quint32 flag, const QString& color);
+
 private:
     friend class CGisItemTrk;
     CActivityTrk(CGisItemTrk * trk);
-
-    static desc_t actDescriptor[];
-
     static activity_summary_t& getSummary(QVector<activity_summary_t> &summary, quint32 flag);
     static const activity_summary_t& getSummary(const QVector<activity_summary_t> &summary, quint32 flag);
 
-    const desc_t& getDescriptor(quint32 flag);
+    static desc_t actDescriptor[];
 
     CGisItemTrk * trk;
-
     quint32 allFlags;
     QList<activity_range_t> activityRanges;
     QVector<activity_summary_t>  activitySummary;

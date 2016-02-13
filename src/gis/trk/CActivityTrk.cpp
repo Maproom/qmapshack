@@ -19,6 +19,7 @@
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "units/IUnit.h"
+#include "helpers/CSettings.h"
 
 CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
 {
@@ -28,6 +29,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Foot")
         , "://icons/48x48/ActFoot.png"
         , "://icons/16x16/ActFoot.png"
+        , IGisItem::colorMap[0].color
     },
     {
         "Cycle"
@@ -35,6 +37,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Bicycle")
         , "://icons/48x48/ActCycle.png"
         , "://icons/16x16/ActCycle.png"
+        , IGisItem::colorMap[1].color
     },
     {
         "Bike"
@@ -42,6 +45,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Motor Bike")
         , "://icons/48x48/ActBike.png"
         , "://icons/16x16/ActBike.png"
+        , IGisItem::colorMap[2].color
     },
     {
         "Car"
@@ -49,6 +53,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Car")
         , "://icons/48x48/ActCar.png"
         , "://icons/16x16/ActCar.png"
+        , IGisItem::colorMap[3].color
     },
     {
         "Cable"
@@ -56,6 +61,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Cable Car")
         , "://icons/48x48/ActCable.png"
         , "://icons/16x16/ActCable.png"
+        , IGisItem::colorMap[4].color
     },
     {
         "Swim"
@@ -63,6 +69,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Swim")
         , "://icons/48x48/ActSwim.png"
         , "://icons/16x16/ActSwim.png"
+        , IGisItem::colorMap[5].color
     },
     {
         "Ship"
@@ -70,6 +77,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Ship")
         , "://icons/48x48/ActShip.png"
         , "://icons/16x16/ActShip.png"
+        , IGisItem::colorMap[6].color
     },
     {
         "Aeronautik"
@@ -77,6 +85,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Aeronautik")
         , "://icons/48x48/ActAero.png"
         , "://icons/16x16/ActAero.png"
+        , IGisItem::colorMap[7].color
     },
     {
         "Ski/Winter"
@@ -84,12 +93,15 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , QObject::tr("Ski/Winter")
         , "://icons/48x48/ActSki.png"
         , "://icons/16x16/ActSki.png"
+        , IGisItem::colorMap[8].color
     },
     {
-        ""
+        QString()
         , 0
-        , ""
-        , ""
+        , QString()
+        , QString()
+        , QString()
+        , QColor()
     }
 };
 
@@ -97,6 +109,10 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     : trk(trk)
     , allFlags(0)
     , activitySummary(CGisItemTrk::trkpt_t::eActMaxNum + 1)
+{
+}
+
+void CActivityTrk::init()
 {
     actDescriptor[0].name = QObject::tr("Foot");
     actDescriptor[1].name = QObject::tr("Bicycle");
@@ -107,6 +123,27 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     actDescriptor[6].name = QObject::tr("Ship");
     actDescriptor[7].name = QObject::tr("Aeronautics");
     actDescriptor[8].name = QObject::tr("Ski/Winter");
+
+    SETTINGS;
+    cfg.beginGroup("Activities");
+    for(int i = 0; !actDescriptor[i].objName.isEmpty(); i++)
+    {
+        desc_t& desc = actDescriptor[i];
+        desc.color = QColor(cfg.value(QString("color%1").arg(i), desc.color.name()).toString());
+    }
+    cfg.endGroup(); // Activities
+}
+
+void CActivityTrk::release()
+{
+    SETTINGS;
+    cfg.beginGroup("Activities");
+    for(int i = 0; !actDescriptor[i].objName.isEmpty(); i++)
+    {
+        desc_t& desc = actDescriptor[i];
+        cfg.setValue(QString("color%1").arg(i), desc.color.name());
+    }
+    cfg.endGroup(); // Activities
 }
 
 
@@ -479,4 +516,19 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
     }
 
     return actDescriptor[i];
+}
+
+void CActivityTrk::setColor(quint32 flag, const QString& color)
+{
+    int i = 0;
+    while(!actDescriptor[i].objName.isEmpty())
+    {
+        if(actDescriptor[i].flag == flag)
+        {
+            actDescriptor[i].color = QColor(color);
+            break;
+        }
+
+        i++;
+    }
 }

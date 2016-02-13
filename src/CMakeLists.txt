@@ -65,6 +65,7 @@ set( SRCS
         widgets/CHistoryListWidget.cpp
         widgets/CPhotoAlbum.cpp
         widgets/CColorLegend.cpp
+        widgets/CColorChooser.cpp
         helpers/CInputDialog.cpp
         helpers/CPositionDialog.cpp
         helpers/CWptIconDialog.cpp
@@ -197,6 +198,7 @@ set( SRCS
         gis/trk/CCombineTrk.cpp
         gis/trk/CCutTrk.cpp
         gis/trk/CSelectActivity.cpp
+        gis/trk/CSelectActivityColor.cpp
         gis/trk/CActivityTrk.cpp
         gis/trk/CPropertyTrk.cpp
         gis/trk/CKnownExtension.cpp
@@ -311,6 +313,7 @@ set( HDRS
         widgets/CLineEdit.h
         widgets/CPhotoAlbum.h
         widgets/CColorLegend.h
+        widgets/CColorChooser.h
         helpers/Platform.h
         helpers/CFileExt.h
         helpers/CAppOpts.h
@@ -443,6 +446,7 @@ set( HDRS
         gis/trk/CCombineTrk.h
         gis/trk/CCutTrk.h
         gis/trk/CSelectActivity.h
+        gis/trk/CSelectActivityColor.h
         gis/trk/CActivityTrk.h
         gis/trk/CPropertyTrk.h
         gis/trk/CKnownExtension.h
@@ -552,6 +556,7 @@ set( UIS
     IAbout.ui
     widgets/ITextEditWidget.ui
     widgets/IPhotoAlbum.ui
+    widgets/IColorChooser.ui
     helpers/IInputDialog.ui
     helpers/IPositionDialog.ui
     helpers/IWptIconDialog.ui    
@@ -590,6 +595,7 @@ set( UIS
     gis/trk/ICombineTrk.ui
     gis/trk/ICutTrk.ui
     gis/trk/ISelectActivity.ui
+    gis/trk/ISelectActivityColor.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
     gis/trk/filter/IFilterInvalid.ui
     gis/trk/filter/IFilterReset.ui

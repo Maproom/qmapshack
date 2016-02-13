@@ -1735,11 +1735,51 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             p.drawPolyline(l);
         }
     }
+    else if(getColorizeSource() == "activity")
+    {
+        drawColorizedByActivity(p);
+    }
     else
     {
         drawColorized(p);
     }
     // -------------------------
+}
+
+void CGisItemTrk::drawColorizedByActivity(QPainter& p)
+{
+    QPen pen;
+    pen.setWidth(penWidthFg);
+    pen.setCapStyle(Qt::RoundCap);
+
+    foreach(const trkseg_t &segment, trk.segs)
+    {
+        const trkpt_t *ptPrev = NULL;
+
+        foreach(const trkpt_t &pt, segment.pts)
+        {
+            if(pt.flags & trkpt_t::eHidden)
+            {
+                continue;
+            }
+            if(NULL == ptPrev)
+            {
+                pen.setColor(CActivityTrk::getDescriptor(pt.flags & trkpt_t::eActMask).color);
+                p.setPen(pen);
+                ptPrev = &pt;
+                continue;
+            }
+
+            if((ptPrev->flags & trkpt_t::eActMask) != (pt.flags & trkpt_t::eActMask))
+            {
+                pen.setColor(CActivityTrk::getDescriptor(pt.flags & trkpt_t::eActMask).color);
+                p.setPen(pen);
+            }
+
+            p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
+            ptPrev  = &pt;
+        }
+    }
 }
 
 void CGisItemTrk::drawColorized(QPainter &p)

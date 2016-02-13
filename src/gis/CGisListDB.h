@@ -81,8 +81,6 @@ private:
     QAction * actionDelDatabase;
     QAction * actionUpdate;
 
-    QMenu * menuDatabaseNoConn;
-
     QMenu * menuItem;
     QAction * actionDelItem;
 

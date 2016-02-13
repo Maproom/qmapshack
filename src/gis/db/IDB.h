@@ -19,9 +19,9 @@
 #ifndef IDB_H
 #define IDB_H
 
+#include <QCoreApplication>
 #include <QMap>
 #include <QSqlDatabase>
-#include <QCoreApplication>
 
 class IDB
 {

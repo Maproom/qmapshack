@@ -22,6 +22,7 @@
 #include <QTreeWidgetItem>
 
 #include <QColor>
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDomNode>
 #include <QMap>
@@ -30,7 +31,6 @@
 #include <QStringList>
 #include <QUrl>
 #include <QVariant>
-#include <QCoreApplication>
 
 #include "units/IUnit.h"
 

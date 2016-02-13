@@ -237,11 +237,11 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         {
             int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(),tr("File exists ...")
                                            ,tr("The file exists and it has not been created by QMapShack. "
-                                                        "If you press 'yes' all data in this file will be lost. "
-                                                        "Even if this file contains GPX data and has been loaded by QMapShack, "
-                                                        "QMapShack might not be able to load and store all elements of this file.  "
-                                                        "Those elements will be lost. I recommend to use another file. "
-                                                        "<b>Do you really want to overwrite the file?</b>")
+                                               "If you press 'yes' all data in this file will be lost. "
+                                               "Even if this file contains GPX data and has been loaded by QMapShack, "
+                                               "QMapShack might not be able to load and store all elements of this file.  "
+                                               "Those elements will be lost. I recommend to use another file. "
+                                               "<b>Do you really want to overwrite the file?</b>")
                                            ,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
             if(res == QMessageBox::No)
             {

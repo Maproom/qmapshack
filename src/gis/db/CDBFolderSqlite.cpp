@@ -19,8 +19,7 @@
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderSqlite.h"
 
-#include <QDir>
-#include <QtGlobal>
+#include <QtCore>
 
 CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
     : IDBFolderSql(IDB::db, parent)

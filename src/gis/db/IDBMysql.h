@@ -27,17 +27,11 @@ public:
     IDBMysql();
     virtual ~IDBMysql() = default;
 
-    QString getDBInfo() const override;
-
 protected:
     using IDB::setupDB;
     bool setupDB(const QString &server, const QString &port, const QString &user, const QString &passwd, bool noPasswd, const QString &name, const QString &connectionName);
     bool initDB() override;
     bool migrateDB(int version) override;
-
-    QString server;
-    int     port;
-    bool    noPasswd;
 };
 
 #endif //IDBMYSQL_H

@@ -19,6 +19,7 @@
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderMysql.h"
 
+#include <QSqlError>
 
 CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString & passwd, bool noPasswd, const QString &name, QTreeWidget *parent)
     : IDBFolderSql(IDB::db, parent)
@@ -46,3 +47,31 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
     }
 }
 
+QString CDBFolderMysql::getDBInfo() const
+{
+    QString str = "<div style='font-weight: bold;'>" + IDB::db.connectionName() + "</div><br />";
+    str += QObject::tr("MySQL Database") + "<br />";
+    if(!port.isEmpty())
+    {
+        str += QObject::tr("Server: ") + QString("<i>%1:%2</i>").arg(server).arg(port);
+    }
+    else
+    {
+        str += QObject::tr("Server: ") + QString("<i>%1</i>").arg(server);
+    }
+
+    if(noPasswd)
+    {
+        str += QObject::tr(" (No PW)");
+    }
+
+    if(!isUsable())
+    {
+        const QString &dbError = IDB::db.lastError().databaseText();
+        const QString &drError = IDB::db.lastError().driverText();
+
+        str += "<br />" + QObject::tr("Error: ") + QString("<span style=\"color:#f00; font-weight:bold;\">%1</span>").arg(dbError.isEmpty() ? drError : dbError);
+    }
+
+    return str;
+}

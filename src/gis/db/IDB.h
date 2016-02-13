@@ -35,8 +35,6 @@ public:
 
     static quint64 getLastInsertID(QSqlDatabase& db, const QString& table);
 
-    virtual QString getDBInfo() const = 0;
-
     bool isUsable() const
     {
         return db.isOpen();

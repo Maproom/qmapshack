@@ -38,6 +38,8 @@ public:
         return noPasswd;
     }
 
+    QString getDBInfo() const;
+
 private:
     const QString server;
     const QString port;

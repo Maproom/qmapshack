@@ -34,6 +34,8 @@ public:
         return filename;
     }
 
+    QString getDBInfo() const;
+
 private:
     QString filename;
 };

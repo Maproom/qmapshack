@@ -19,6 +19,8 @@
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderSqlite.h"
 
+#include <QtCore>
+
 CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
     : IDBFolderSql(IDB::db, parent)
     , filename(filename)
@@ -38,3 +40,19 @@ CDBFolderSqlite::~CDBFolderSqlite()
 {
 }
 
+QString CDBFolderSqlite::getDBInfo() const
+{
+    QString str = "<div style='font-weight: bold;'>" + IDB::db.connectionName() + "</div><br />";
+    str += QObject::tr("SQLite Database") + "<br />";
+
+    QString path = IDB::db.databaseName();
+    #ifndef Q_OS_WIN
+    if(path.startsWith(QDir::homePath()))
+    {
+        path = "~" + path.remove(0, QDir::homePath().length());
+    }
+    #endif
+
+    str += QObject::tr("File: ") + QString("<i>%1</i>").arg(path);
+    return str;
+}

@@ -57,11 +57,11 @@ bool IDB::setupDB()
         int version = query.value(0).toInt();
         if(version < DB_VERSION)
         {
-            QString msg = QObject::tr("The internal database format of '%1'' has changed. QMapShack will migrate your database, now. "
+            QString msg = tr("The internal database format of '%1'' has changed. QMapShack will migrate your database, now. "
                                       "After the migration the database won't be usable with older versions of QMapShack. "
                                       "It is recommended to backup the database first.").arg(db.connectionName());
             int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
-                                           QObject::tr("Migrate database..."),
+                                           tr("Migrate database..."),
                                            msg,
                                            QMessageBox::Ok|QMessageBox::Abort);
             if(res != QMessageBox::Ok)
@@ -71,9 +71,9 @@ bool IDB::setupDB()
 
             if(!migrateDB(version))
             {
-                QString msg = QObject::tr("Failed to migrate '%1'.").arg(db.connectionName());
+                QString msg = tr("Failed to migrate '%1'.").arg(db.connectionName());
                 QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
-                                      QObject::tr("Error..."),
+                                      tr("Error..."),
                                       msg,
                                       QMessageBox::Abort);
 
@@ -82,10 +82,10 @@ bool IDB::setupDB()
         }
         else if(version > DB_VERSION)
         {
-            QString msg = QObject::tr("The database version of '%1'' is more advanced as the one understood by your "
+            QString msg = tr("The database version of '%1'' is more advanced as the one understood by your "
                                       "QMapShack installation. This won't work.").arg(db.connectionName());
             QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
-                                  QObject::tr("Wrong database version..."),
+                                  tr("Wrong database version..."),
                                   msg,
                                   QMessageBox::Abort);
             return false;
@@ -95,9 +95,9 @@ bool IDB::setupDB()
     {
         if(!initDB())
         {
-            QString msg = QObject::tr("Failed to initialize '%1'.").arg(db.connectionName());
+            QString msg = tr("Failed to initialize '%1'.").arg(db.connectionName());
             QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
-                                  QObject::tr("Error..."),
+                                  tr("Error..."),
                                   msg,
                                   QMessageBox::Abort);
 

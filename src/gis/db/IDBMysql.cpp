@@ -65,6 +65,7 @@ bool IDBMysql::setupDB(const QString& server, const QString& port, const QString
         if(!db.open())
         {
             qDebug() << "failed to open database" << db.lastError();
+            return false;
         }
     }
     else
@@ -169,3 +170,4 @@ bool IDBMysql::migrateDB(int version)
     QUERY_EXEC(return false);
     return true;
 }
+

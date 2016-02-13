@@ -121,7 +121,7 @@ IGisProject * IDevice::getProjectByKey(const QString& key)
             return project;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void IDevice::editItemByKey(const IGisItem::key_t& key)

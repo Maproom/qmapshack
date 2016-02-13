@@ -372,11 +372,14 @@ void CGisListDB::slotAddDatabase()
     QString name = dlg.getName();
 
     IDBFolder * folder = nullptr;
+    bool isUsable = true;
 
     if(dlg.isSqlite())
     {
         QString filename = dlg.getFilename();
-        folder = new CDBFolderSqlite(filename, name, this);
+        CDBFolderSqlite *sfolder = new CDBFolderSqlite(filename, name, this);
+        sfolder->setToolTip(eColumnName, sfolder->getDBInfo());
+        folder = sfolder;
     }
     else if(dlg.isMysql())
     {
@@ -386,14 +389,20 @@ void CGisListDB::slotAddDatabase()
         QString passwd  = dlg.getPasswd();
         bool noPasswd   = dlg.noPasswd();
 
-        folder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
+        CDBFolderMysql *mfolder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
+        mfolder->setToolTip(eColumnName, mfolder->getDBInfo());
+        isUsable = mfolder->isUsable();
+        folder = mfolder;
     }
     else
     {
         return;
     }
 
-    folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    if(isUsable)
+    {
+        folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    }
 
     emit sigChanged();
 

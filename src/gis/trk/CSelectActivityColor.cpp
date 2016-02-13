@@ -110,7 +110,7 @@ void CSelectActivityColor::updateData()
 void CSelectActivityColor::slotSetColor(QToolButton * button, quint32 activityFlag, bool)
 {
     CColorChooser dlg(button);
-    dlg.move(button->parentWidget()->mapToGlobal(button->pos()));
+    dlg.move(button->parentWidget()->mapToGlobal(button->geometry().topRight()));
     if(dlg.exec() == QDialog::Accepted)
     {
         CActivityTrk::setColor(activityFlag, button->property("color").toString());

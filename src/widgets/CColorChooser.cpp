@@ -47,6 +47,12 @@ CColorChooser::CColorChooser(QToolButton *parent)
         connect(button, &QToolButton::clicked, this, selectFunc);
     }
 
+    QToolButton * butEsc = new QToolButton(this);
+    butEsc->setText(tr("Esc."));
+    butEsc->setAutoRaise(true);
+    horizontalLayout->addWidget(butEsc);
+    connect(butEsc, &QToolButton::clicked, this, &CColorChooser::reject);
+
     adjustSize();
 }
 

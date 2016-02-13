@@ -349,3 +349,4 @@ bool IDBSqlite::migrateDB3to4()
 
     return true;
 }
+

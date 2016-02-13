@@ -458,7 +458,7 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
             return item;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)

@@ -86,22 +86,24 @@ CGisListDB::CGisListDB(QWidget *parent)
                     continue;
                 }
             }
-            new CDBFolderSqlite(filename, name, this);
+            CDBFolderSqlite *folder = new CDBFolderSqlite(filename, name, this);
+            folder->setToolTip(eColumnName, folder->getDBInfo());
         }
         if(type == "MySQL")
         {
-            QString server  = cfg.value("server","").toString();
-            QString port    = cfg.value("port","").toString();
-            QString user    = cfg.value("user","").toString();
-            QString passwd  = cfg.value("passwd","").toString();
-            bool noPasswd   = cfg.value("noPasswd",false).toBool();
+            QString server  = cfg.value("server",   "").toString();
+            QString port    = cfg.value("port",     "").toString();
+            QString user    = cfg.value("user",     "").toString();
+            QString passwd  = cfg.value("passwd",   "").toString();
+            bool noPasswd   = cfg.value("noPasswd", false).toBool();
 
             if(server.isEmpty() || user.isEmpty())
             {
                 cfg.endGroup(); // name
                 continue;
             }
-            new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
+            CDBFolderMysql *folder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
+            folder->setToolTip(eColumnName, folder->getDBInfo());
         }
         cfg.endGroup(); // name
     }
@@ -123,7 +125,6 @@ CGisListDB::CGisListDB(QWidget *parent)
     menuDatabase->addAction(actionAddFolder);
     actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()));
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
-
 
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
@@ -221,7 +222,7 @@ IDBFolderSql * CGisListDB::getDataBase(const QString& name, const QString &host)
             return database;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 bool CGisListDB::hasDatabase(const QString& name)
@@ -312,10 +313,18 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         return;
     }
 
+    actionUpdate->setEnabled(true);
+    actionAddFolder->setEnabled(true);
+
     IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(currentItem());
     if(database)
     {
+        bool enabled = database->getDb().isOpen();
+        actionUpdate->setEnabled(enabled);
+        actionAddFolder->setEnabled(enabled);
+
         menuDatabase->exec(p);
+
         return;
     }
 
@@ -361,11 +370,14 @@ void CGisListDB::slotAddDatabase()
     QString name = dlg.getName();
 
     IDBFolder * folder = nullptr;
+    bool isUsable = true;
 
     if(dlg.isSqlite())
     {
         QString filename = dlg.getFilename();
-        folder = new CDBFolderSqlite(filename, name, this);
+        CDBFolderSqlite *sfolder = new CDBFolderSqlite(filename, name, this);
+        sfolder->setToolTip(eColumnName, sfolder->getDBInfo());
+        folder = sfolder;
     }
     else if(dlg.isMysql())
     {
@@ -375,14 +387,20 @@ void CGisListDB::slotAddDatabase()
         QString passwd  = dlg.getPasswd();
         bool noPasswd   = dlg.noPasswd();
 
-        folder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
+        CDBFolderMysql *mfolder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
+        mfolder->setToolTip(eColumnName, mfolder->getDBInfo());
+        isUsable = mfolder->isUsable();
+        folder = mfolder;
     }
     else
     {
         return;
     }
 
-    folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    if(isUsable)
+    {
+        folder->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    }
 
     emit sigChanged();
 

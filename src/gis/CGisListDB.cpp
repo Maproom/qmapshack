@@ -222,7 +222,7 @@ IDBFolderSql * CGisListDB::getDataBase(const QString& name, const QString &host)
             return database;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 bool CGisListDB::hasDatabase(const QString& name)

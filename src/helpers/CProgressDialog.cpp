@@ -52,7 +52,7 @@ CProgressDialog * CProgressDialog::self()
 {
     if(stackSelf.isEmpty())
     {
-        return 0;
+        return nullptr;
     }
     return stackSelf.top();
 }

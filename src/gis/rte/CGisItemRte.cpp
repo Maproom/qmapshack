@@ -708,7 +708,7 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
         cnt++;
     }
 
-    return 0;
+    return nullptr;
 }
 
 void CGisItemRte::setResult(Routino_Output * route, const QString& options)

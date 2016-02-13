@@ -43,7 +43,7 @@ CColorChooser::CColorChooser(QToolButton *parent)
         button->setProperty("color", IGisItem::colorMap[i].color.name());
         horizontalLayout->addWidget(button);
 
-        auto selectFunc = bind(&CColorChooser::slotSelect, this, button, std::placeholders::_1);
+        auto selectFunc = bind(&CColorChooser::slotSelect, this, button);
         connect(button, &QToolButton::clicked, this, selectFunc);
     }
 
@@ -56,7 +56,7 @@ CColorChooser::CColorChooser(QToolButton *parent)
     adjustSize();
 }
 
-void CColorChooser::slotSelect(QToolButton * button, bool)
+void CColorChooser::slotSelect(QToolButton * button)
 {
     parentButton->setIcon(button->icon());
     parentButton->setProperty("color", button->property("color"));

@@ -95,7 +95,7 @@ void CSelectActivityColor::updateData()
             button->setProperty("color", desc.color.name());
             gridLayout->addWidget(button, cnt, 1);
 
-            auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, mask, std::placeholders::_1);
+            auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, mask);
             connect(button, &QToolButton::clicked, this, setColorFunc);
 
             allActColors << button;
@@ -107,7 +107,7 @@ void CSelectActivityColor::updateData()
     }
 }
 
-void CSelectActivityColor::slotSetColor(QToolButton * button, quint32 activityFlag, bool)
+void CSelectActivityColor::slotSetColor(QToolButton * button, quint32 activityFlag)
 {
     CColorChooser dlg(button);
     dlg.move(button->parentWidget()->mapToGlobal(button->geometry().topRight()));

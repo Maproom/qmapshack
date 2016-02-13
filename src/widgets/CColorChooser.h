@@ -32,7 +32,7 @@ public:
     virtual ~CColorChooser() = default;
 
 private slots:
-    void slotSelect(QToolButton * button, bool);
+    void slotSelect(QToolButton * button);
 
 private:
     QToolButton* parentButton;

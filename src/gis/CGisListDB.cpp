@@ -318,14 +318,14 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     {
         if(!database->getDb().isOpen())
         {
-            menuDatabase->actions().at(1)->setDisabled(true);
-            menuDatabase->actions().at(2)->setDisabled(true);
+            actionUpdate->setDisabled(true);
+            actionAddFolder->setDisabled(true);
         }
 
         menuDatabase->exec(p);
 
-        menuDatabase->actions().at(1)->setDisabled(false);
-        menuDatabase->actions().at(2)->setDisabled(false);
+        actionUpdate->setDisabled(false);
+        actionAddFolder->setDisabled(false);
 
         return;
     }

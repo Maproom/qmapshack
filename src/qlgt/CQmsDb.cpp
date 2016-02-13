@@ -44,12 +44,12 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
 {
     if(QFile::exists(filename))
     {
-        int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Existing file..."), tr("Remove existing %1?").arg(filename), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Existing file..."), QObject::tr("Remove existing %1?").arg(filename), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
         if(res != QMessageBox::Ok)
         {
             return;
         }
-        gui->stdErr(tr("Remove existing file %1").arg(filename));
+        gui->stdErr(QObject::tr("Remove existing file %1").arg(filename));
         QFile::remove(filename);
     }
     valid = setupDB(filename, "qlgt2qms");
@@ -160,7 +160,7 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
         }
         else
         {
-            gui->stdErr(tr("%1: drop item with QLGT DB ID %2").arg(folder.name).arg(id));
+            gui->stdErr(QObject::tr("%1: drop item with QLGT DB ID %2").arg(folder.name).arg(id));
         }
     }
 

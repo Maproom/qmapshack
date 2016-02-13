@@ -349,3 +349,11 @@ bool IDBSqlite::migrateDB3to4()
 
     return true;
 }
+
+QString IDBSqlite::getDBInfo() const
+{
+    QString str = "<div style='font-weight: bold;'>" + db.connectionName() + "</div><br />";
+    str += tr("SQLite Database") + "<br />";
+    str += tr("File: ") + "<i>" + db.databaseName() + "</i>";
+    return str;
+}

@@ -27,6 +27,8 @@ public:
     IDBMysql();
     virtual ~IDBMysql() = default;
 
+    QString getDBInfo() const override;
+
 protected:
     using IDB::setupDB;
     bool setupDB(const QString &server, const QString &port, const QString &user, const QString &passwd, bool noPasswd, const QString &name, const QString &connectionName);

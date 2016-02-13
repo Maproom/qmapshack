@@ -390,13 +390,27 @@
                <property name="minimumSize">
                 <size>
                  <width>100</width>
-                 <height>100</height>
+                 <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>300</height>
+                 <width>300</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="widgetColorActivityLayout">
+             <item>
+              <widget class="CSelectActivityColor" name="widgetColorActivity" native="true">
+               <property name="maximumSize">
+                <size>
+                 <width>300</width>
+                 <height>16777215</height>
                 </size>
                </property>
               </widget>
@@ -1582,16 +1596,22 @@
    <header>widgets/CColorLegend.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CSelectActivityColor</class>
+   <extends>QWidget</extends>
+   <header>gis/trk/CSelectActivityColor.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph3"/>
-  <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupLineWidth"/>
  </buttongroups>
 </ui>

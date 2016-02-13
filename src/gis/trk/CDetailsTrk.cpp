@@ -88,6 +88,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     widgetColorLayout->setAlignment(Qt::AlignTop);
 
+    widgetColorActivityLayout->setAlignment(Qt::AlignTop);
+    widgetColorActivity->setTrack(&trk);
+
     const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
     for(int i = 0; !actDesc[i].name.isEmpty(); ++i)
     {
@@ -503,6 +506,7 @@ void CDetailsTrk::updateData()
     comboColorSource->clear();
     // the first entry `solid color`, it is always available
     comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Color"));
+    comboColorSource->addItem(QIcon("://icons/32x32/Activity.png"), tr("Activity"), "activity");
     foreach(const QString &key, trk.getExistingDataSources())
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
@@ -517,15 +521,18 @@ void CDetailsTrk::updateData()
     }
     comboColorSource->setCurrentIndex(currentIdx);
 
-    bool enabled = (0 < currentIdx);
+    QString source = comboColorSource->currentData().toString();
+    bool enabledColorize = !source.isEmpty() && (source != "activity");
+    bool enabledActivity = source == "activity";
 
-    comboColor->setDisabled(enabled);
-    widgetColorLabel->setEnabled  (enabled);
-    toolLimitAutoStyle->setEnabled(enabled);
-    toolLimitUsrStyle->setEnabled (enabled);
-    toolLimitSysStyle->setEnabled (enabled);
+    comboColor->setDisabled(enabledColorize||enabledActivity);
+    widgetColorLabel->setVisible(enabledColorize);
+    widgetColorLabel->setEnabled(enabledColorize);
+    toolLimitAutoStyle->setEnabled(enabledColorize);
+    toolLimitUsrStyle->setEnabled(enabledColorize);
+    toolLimitSysStyle->setEnabled(enabledColorize);
 
-    if(enabled)
+    if(enabledColorize)
     {
         const CKnownExtension &ext = CKnownExtension::get(comboColorSource->itemData(currentIdx).toString());
 
@@ -543,6 +550,9 @@ void CDetailsTrk::updateData()
         widgetColorLabel->setMaximum(spinLimitHigh->value());
         widgetColorLabel->setUnit(ext.unit);
     }
+
+    widgetColorActivity->setVisible(enabledActivity);
+    widgetColorActivity->setEnabled(enabledActivity);
 
 
     // refill comboboxes to select track property to be displayed by graphs

@@ -28,6 +28,7 @@
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/CActivityTrk.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
@@ -71,6 +72,7 @@ CMainWindow::CMainWindow()
 
     IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
     CKnownExtension::init(IUnit::self());
+    CActivityTrk::init();
 
     gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);
@@ -195,9 +197,10 @@ CMainWindow::CMainWindow()
 }
 
 CMainWindow::~CMainWindow()
-{
-    int cnt = 0;
+{  
+    CActivityTrk::release();
 
+    int cnt = 0;
     SETTINGS;
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());

@@ -42,7 +42,7 @@ public:
     void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}
 
 private slots:
-    void slotSetColor(QToolButton * button, quint32 activityFlag, bool);
+    void slotSetColor(QToolButton * button, quint32 activityFlag);
 
 private:
     CGisItemTrk * trk = nullptr;

@@ -126,11 +126,6 @@ CGisListDB::CGisListDB(QWidget *parent)
     actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()));
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
 
-    menuDatabaseNoConn  = new QMenu(this);
-    menuDatabaseNoConn->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()))->setEnabled(false);
-    menuDatabaseNoConn->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()))->setEnabled(false);
-    menuDatabaseNoConn->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
-
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
 
@@ -321,14 +316,16 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(currentItem());
     if(database)
     {
-        if(database->getDb().isOpen())
+        if(!database->getDb().isOpen())
         {
-            menuDatabase->exec(p);
+            menuDatabase->actions().at(1)->setDisabled(true);
+            menuDatabase->actions().at(2)->setDisabled(true);
         }
-        else
-        {
-            menuDatabaseNoConn->exec(p);
-        }
+
+        menuDatabase->exec(p);
+
+        menuDatabase->actions().at(1)->setDisabled(false);
+        menuDatabase->actions().at(2)->setDisabled(false);
 
         return;
     }

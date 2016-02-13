@@ -88,7 +88,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     widgetColorLayout->setAlignment(Qt::AlignTop);
 
-    widgetColorActivityLayout->setAlignment(Qt::AlignTop);
     widgetColorActivity->setTrack(&trk);
 
     const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
@@ -525,7 +524,7 @@ void CDetailsTrk::updateData()
     bool enabledColorize = !source.isEmpty() && (source != "activity");
     bool enabledActivity = source == "activity";
 
-    comboColor->setDisabled(enabledColorize||enabledActivity);
+    comboColor->setVisible(!(enabledColorize||enabledActivity));
     widgetColorLabel->setVisible(enabledColorize);
     widgetColorLabel->setEnabled(enabledColorize);
     toolLimitAutoStyle->setEnabled(enabledColorize);

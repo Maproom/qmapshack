@@ -79,9 +79,11 @@ void CSelectActivityColor::updateData()
             const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(mask);
 
             QLabel * label = new QLabel(this);
-            label->setMinimumSize(20,16);
+            label->setMinimumSize(16,16);
+            label->setMaximumSize(16,16);
             label->setPixmap(desc.iconSmall);
-            gridLayout->addWidget(label, cnt, 0);
+            label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
+            horizontalLayout->addWidget(label);
 
             allActLabels << label;
 
@@ -93,7 +95,8 @@ void CSelectActivityColor::updateData()
             button->setAutoRaise(true);
             button->setIcon(QIcon(pixmap));
             button->setProperty("color", desc.color.name());
-            gridLayout->addWidget(button, cnt, 1);
+            button->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+            horizontalLayout->addWidget(button);
 
             auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, mask);
             connect(button, &QToolButton::clicked, this, setColorFunc);

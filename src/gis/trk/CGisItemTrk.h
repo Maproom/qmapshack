@@ -160,7 +160,7 @@ public:
     /**
        @brief Update all registered visuals viw the INotifyTrk interface
        @param a bit field of visuals to be updated
-       @param who a string for debug puposes
+       @param who a string for debug purposes
      */
     void updateVisuals(quint32 visuals, const QString &who);
 

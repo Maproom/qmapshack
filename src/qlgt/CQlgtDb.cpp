@@ -432,7 +432,7 @@ void CQlgtDb::migrateDB(int version)
                 {
                 case eWpt:
                 {
-                    CQlgtWpt wpt(id, 0);
+                    CQlgtWpt wpt(id, nullptr);
                     stream >> wpt;
                     comment = wpt.getInfo();
                 }
@@ -440,7 +440,7 @@ void CQlgtDb::migrateDB(int version)
 
                 case eTrk:
                 {
-                    CQlgtTrack trk(id, 0);
+                    CQlgtTrack trk(id, nullptr);
                     stream >> trk;
                     comment = trk.getInfo();
                 }
@@ -448,7 +448,7 @@ void CQlgtDb::migrateDB(int version)
 
                 case eRte:
                 {
-                    CQlgtRoute rte(id, 0);
+                    CQlgtRoute rte(id, nullptr);
                     stream >> rte;
                     comment = rte.getInfo();
                 }

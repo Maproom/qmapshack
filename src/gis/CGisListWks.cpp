@@ -113,9 +113,14 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectDev  = new QMenu(this);
     menuProjectDev->addAction(actionEditPrj);
+    menuProjectDev->addAction(actionShowOnMap);
+    menuProjectDev->addAction(actionHideFrMap);
+    menuProjectDev->addSeparator();
     menuProjectDev->addAction(actionSaveAs);
     menuProjectDev->addAction(actionSave);
+    menuProjectDev->addSeparator();
     actionSyncDevWks= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
+    menuProjectDev->addSeparator();
     actionDelProj   = menuProjectDev->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"),                this, SLOT(slotDeleteProject()));
 
     menuProjectTrash= new QMenu(this);

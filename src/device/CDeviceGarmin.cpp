@@ -184,6 +184,27 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
     }
 
     createAdventureFromProject(project, pathGpx + "/" + name + ".gpx");
+
+    // move new project to top of any sub-folder/sub-device item
+    int newIdx      = NOIDX;
+    const int myIdx = childCount() - 1;
+    for(int i = myIdx - 1; i >= 0; i--)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(child(i));
+        if(0 == device)
+        {
+            break;
+        }
+
+        newIdx = i;
+    }
+
+    if(newIdx != NOIDX)
+    {
+        takeChild(myIdx);
+        insertChild(newIdx, gpx);
+    }
+
 }
 
 void CDeviceGarmin::saveImages(CGisItemWpt& wpt)

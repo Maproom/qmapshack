@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "device/CDeviceGarmin.h"
+#include "device/CDeviceGarminArchive.h"
 #include "gis/CGisListWks.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
@@ -116,7 +117,12 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
 
     this->createProjectsFromFiles(pathGpx, "gpx");
     this->createProjectsFromFiles(pathGpx + "/Current", "gpx");
-    this->createProjectsFromFiles(pathGpx + "/Archive", "gpx");
+
+    QDir dirArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
+    if(dirArchive.exists() && (dirArchive.count() > 2))
+    {
+        archive = new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
+    }
 
     this->createProjectsFromFiles(pathActivities, "fit");
     this->createProjectsFromFiles(pathCourses, "fit");

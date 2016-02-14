@@ -21,6 +21,8 @@
 
 #include "device/IDevice.h"
 
+class CDeviceGarminArchive;
+
 class CDeviceGarmin : public IDevice
 {
     Q_DECLARE_TR_FUNCTIONS(CDeviceGarmin)
@@ -49,6 +51,8 @@ private:
     QString pathAdventures; // no default
 
     int cntImages = 0;
+
+    CDeviceGarminArchive * archive = nullptr;
 };
 
 #endif //CDEVICEGARMIN_H

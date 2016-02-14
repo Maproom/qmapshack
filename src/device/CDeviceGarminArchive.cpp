@@ -42,7 +42,7 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
 
     setText(CGisListWks::eColumnName, tr("Archive - loaded"));
 
-    QMutexLocker(&IGisItem::mutexItems);
+    QMutexLocker lock(&IGisItem::mutexItems);
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CDeviceGarminArchive::slotExpanded()");
     mount();
     qDebug() << "reading files from device: " << dir.path();

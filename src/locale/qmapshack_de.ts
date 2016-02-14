@@ -3891,7 +3891,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="48"/>
         <source>MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.&lt;br /&gt;Please make sure you have installed the corresponding package.&lt;br /&gt;If you don&apos;t know what to do now you should have &lt;a href=&quot;%1&quot;&gt;a look at the wiki&lt;/a&gt;.</source>
-        <translation type="unfinished">MySQL kann derzeit nicht genutzt werden, weil der entsprechende Treiber (QMYSQL) nicht verfügbar ist.&lt;br /&gt;Stellen Sie bitte sicher, dass das entsprechende Paket installiert ist.&lt;br /&gt;Wenn Sie nicht wissen, was zu tun ist, sollten Sie einen Blick auf das &lt;a href=&quot;%1&quot;&gt;Wiki&lt;/a&gt; werfen.</translation>
+        <translation>MySQL kann derzeit nicht genutzt werden, weil der entsprechende Treiber (QMYSQL) nicht verfügbar ist.&lt;br /&gt;Stellen Sie bitte sicher, dass das entsprechende Paket installiert ist.&lt;br /&gt;Wenn Sie nicht wissen, was zu tun ist, sollten Sie einen Blick auf das &lt;a href=&quot;%1&quot;&gt;Wiki&lt;/a&gt; werfen.</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="102"/>

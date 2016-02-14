@@ -60,7 +60,7 @@ static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
 
 
 CWptIconDialog::CWptIconDialog(QAction *parent)
-    : button(0)
+    : button(nullptr)
     , action(parent)
 {
     setupUi(this);
@@ -69,7 +69,7 @@ CWptIconDialog::CWptIconDialog(QAction *parent)
 
 CWptIconDialog::CWptIconDialog(QToolButton *parent)
     : button(parent)
-    , action(0)
+    , action(nullptr)
 {
     setupUi(this);
     setupList(button);

@@ -483,7 +483,7 @@ void CDetailsTrk::updateData()
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
 
-    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : 0);
+    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
     if(nullptr != tabWidget)
     {
         int idx = tabWidget->indexOf(this);

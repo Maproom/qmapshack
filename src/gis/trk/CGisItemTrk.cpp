@@ -1230,7 +1230,7 @@ void CGisItemTrk::edit()
 {
     if(dlgDetails.isNull())
     {
-        dlgDetails = new CDetailsTrk(*this, 0);
+        dlgDetails = new CDetailsTrk(*this, nullptr);
         dlgDetails->setObjectName(getName());
     }
 
@@ -1530,8 +1530,8 @@ void CGisItemTrk::hideSelectedPoints()
             }
         }
     }
-    mouseRange1 = 0;
-    mouseRange2 = 0;
+    mouseRange1 = nullptr;
+    mouseRange2 = nullptr;
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
     changed(tr("Hide points."), "://icons/48x48/PointHide.png");
@@ -1570,8 +1570,8 @@ void CGisItemTrk::showSelectedPoints()
             }
         }
     }
-    mouseRange1 = 0;
-    mouseRange2 = 0;
+    mouseRange1 = nullptr;
+    mouseRange2 = nullptr;
     rangeState  = eRangeStateIdle;
     deriveSecondaryData();
     changed(tr("Show points."), "://icons/48x48/PointShow.png");

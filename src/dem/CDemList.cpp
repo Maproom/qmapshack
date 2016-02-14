@@ -198,7 +198,7 @@ void CDemList::slotContextMenu(const QPoint& point)
     actionActivate->setText(activated ? tr("Deactivate") : tr("Activate"));
 
     CDemItem * item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));
-    actionMoveUp->setEnabled(activated && (treeWidget->itemAbove(item) != 0));
+    actionMoveUp->setEnabled(activated && (treeWidget->itemAbove(item) != nullptr));
     actionMoveDown->setEnabled(activated && item1 && item1->isActivated());
 
     QPoint p = treeWidget->mapToGlobal(point);

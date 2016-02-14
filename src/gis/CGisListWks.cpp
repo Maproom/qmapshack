@@ -676,7 +676,7 @@ void CGisListWks::addProject(IGisProject *proj)
     for(int i = myIdx - 1; i >= 0; i--)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(i));
-        if(0 == device)
+        if(nullptr == device)
         {
             break;
         }

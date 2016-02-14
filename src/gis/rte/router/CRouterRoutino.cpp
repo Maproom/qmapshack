@@ -330,7 +330,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         rte->getPolylineFromData(line);
 
         int idx = 0;
-        QVector<Routino_Waypoint*> waypoints(line.size(), 0);
+        QVector<Routino_Waypoint*> waypoints(line.size(), nullptr);
         foreach(const IGisLine::point_t &pt, line)
         {
             waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y()*RAD_TO_DEG, pt.coord.x()*RAD_TO_DEG);
@@ -417,13 +417,13 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
         Routino_Waypoint* waypoints[2] = {0};
         waypoints[0] = Routino_FindWaypoint(data, profile, p1.y()*RAD_TO_DEG, p1.x()*RAD_TO_DEG);
-        if(waypoints[0] == NULL)
+        if(waypoints[0] == nullptr)
         {
             throw xlateRoutinoError(Routino_errno);
         }
 
         waypoints[1] = Routino_FindWaypoint(data, profile, p2.y()*RAD_TO_DEG, p2.x()*RAD_TO_DEG);
-        if(waypoints[1] == NULL)
+        if(waypoints[1] == nullptr)
         {
             throw xlateRoutinoError(Routino_errno);
         }
@@ -434,7 +434,7 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
         delete progress;
 
-        if(route != NULL)
+        if(route != nullptr)
         {
             Routino_Output * next = route;
             while(next)

@@ -413,19 +413,19 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResul
                 switch(typeItem)
                 {
                 case IGisItem::eTypeWpt:
-                    item1 = new CGisItemWpt(idItem, db, 0);
+                    item1 = new CGisItemWpt(idItem, db, nullptr);
                     break;
 
                 case IGisItem::eTypeTrk:
-                    item1 = new CGisItemTrk(idItem, db, 0);
+                    item1 = new CGisItemTrk(idItem, db, nullptr);
                     break;
 
                 case IGisItem::eTypeRte:
-                    item1 = new CGisItemRte(idItem, db, 0);
+                    item1 = new CGisItemRte(idItem, db, nullptr);
                     break;
 
                 case IGisItem::eTypeOvl:
-                    item1 = new CGisItemOvlArea(idItem, db, 0);
+                    item1 = new CGisItemOvlArea(idItem, db, nullptr);
                     break;
 
                 default:

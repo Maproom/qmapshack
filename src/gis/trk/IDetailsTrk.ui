@@ -793,22 +793,6 @@
                  <item>
                   <widget class="CSelectActivityColor" name="widgetColorActivity" native="true"/>
                  </item>
-                 <item>
-                  <spacer name="horizontalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Maximum</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
                 </layout>
                </item>
               </layout>
@@ -1617,9 +1601,9 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupArrow"/>
-  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupGraph3"/>
  </buttongroups>

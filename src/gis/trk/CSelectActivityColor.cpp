@@ -95,7 +95,7 @@ void CSelectActivityColor::updateData()
             button->setAutoRaise(true);
             button->setIcon(QIcon(pixmap));
             button->setProperty("color", desc.color.name());
-            button->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+            button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
             horizontalLayout->addWidget(button);
 
             auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, mask);
@@ -108,6 +108,9 @@ void CSelectActivityColor::updateData()
 
         mask >>= 1;
     }
+
+    QSpacerItem * spacer = new QSpacerItem(0,0,QSizePolicy::Minimum, QSizePolicy::Minimum);
+    horizontalLayout->addItem(spacer);
 }
 
 void CSelectActivityColor::slotSetColor(QToolButton * button, quint32 activityFlag)
